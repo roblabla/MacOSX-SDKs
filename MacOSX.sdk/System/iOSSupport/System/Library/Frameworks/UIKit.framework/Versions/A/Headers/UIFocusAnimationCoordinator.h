@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /// UIFocusAnimationContext is used to provide UIKit-determined context about animations that are related to a focus update.
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) @protocol UIFocusAnimationContext <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
+@protocol UIFocusAnimationContext <NSObject>
 
 /// The duration of the main animations in seconds.
 @property (nonatomic, readonly) NSTimeInterval duration;
@@ -21,7 +22,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) @protocol UIFocusAnimationContext <NSObjec
 @end
 
 /// UIFocusAnimationCoordinator is used to coordinate disparate animations that are related to a focus update.
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIFocusAnimationCoordinator : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@interface UIFocusAnimationCoordinator : NSObject
 
 /**
  Specifies focus-related animations that should be coordinated with the animations of the focusing or un-focusing view.
@@ -31,7 +33,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIFocusAnimationCoordinator : NS
  
  It is perfectly legitimate to only specify a completion block.
  */
-- (void)addCoordinatedAnimations:(nullable void (^)(void))animations completion:(nullable void (^)(void))completion;
+- (void)addCoordinatedAnimations:(nullable void (^)(void))animations completion:(nullable void (^)(void))completion NS_SWIFT_DISABLE_ASYNC;
 
 /**
  Specifies focus-related animations that should be coordinated with the animations of the focusing item.
@@ -42,7 +44,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIFocusAnimationCoordinator : NS
 
  A context object is provided in the animation block with details of the UIKit-defined animations being run for the focusing item.
  */
-- (void)addCoordinatedFocusingAnimations:(void (^ _Nullable)(id<UIFocusAnimationContext> animationContext))animations completion:(void (^ _Nullable)(void))completion API_AVAILABLE(ios(11.0), tvos(11.0));
+- (void)addCoordinatedFocusingAnimations:(void (^ _Nullable)(id<UIFocusAnimationContext> animationContext))animations completion:(void (^ _Nullable)(void))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(11.0), tvos(11.0));
 
 /**
  Specifies focus-related animations that should be coordinated with the animations of the un-focusing item.
@@ -53,7 +55,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIFocusAnimationCoordinator : NS
 
  A context object is provided in the animation block with details of the UIKit-defined animations being run for the un-focusing item.
  */
-- (void)addCoordinatedUnfocusingAnimations:(void (^ _Nullable)(id<UIFocusAnimationContext> animationContext))animations completion:(void (^ _Nullable)(void))completion API_AVAILABLE(ios(11.0), tvos(11.0));
+- (void)addCoordinatedUnfocusingAnimations:(void (^ _Nullable)(id<UIFocusAnimationContext> animationContext))animations completion:(void (^ _Nullable)(void))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(11.0), tvos(11.0));
 
 @end
 

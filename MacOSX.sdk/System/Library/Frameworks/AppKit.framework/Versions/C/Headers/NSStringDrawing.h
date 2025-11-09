@@ -1,7 +1,7 @@
 #if !__has_include(<UIFoundation/NSStringDrawing.h>)
 /*
         NSStringDrawing.h
-        Copyright (c) 1994-2019, Apple Inc.  All rights reserved.
+        Copyright (c) 1994-2021, Apple Inc.  All rights reserved.
 */
 
 #import <Foundation/NSString.h>

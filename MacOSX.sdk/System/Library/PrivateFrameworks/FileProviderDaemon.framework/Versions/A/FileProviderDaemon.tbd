@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A7B6B1AF-1C2C-3AAB-89E2-A8EB397F1464
+    value:           59F5C58C-2C6D-34E0-BC90-B4B07527B51A
   - target:          x86_64-maccatalyst
-    value:           A7B6B1AF-1C2C-3AAB-89E2-A8EB397F1464
+    value:           59F5C58C-2C6D-34E0-BC90-B4B07527B51A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           63ACCD06-328C-3626-92D2-1785097936E5
+    value:           D2194FA6-6A11-3BD7-9CF6-136620751796
   - target:          arm64e-maccatalyst
-    value:           63ACCD06-328C-3626-92D2-1785097936E5
+    value:           D2194FA6-6A11-3BD7-9CF6-136620751796
 install-name:    '/System/Library/PrivateFrameworks/FileProviderDaemon.framework/Versions/A/FileProviderDaemon'
 current-version: 0
 compatibility-version: 0
@@ -23,9 +23,10 @@ exports:
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _FPDAppStoreServiceName, _FPDAppStoreServiceXPCInterface ]
     objc-classes:    [ FPDAccessControlStore, FPDActionOperation, FPDActionOperationQueue, 
-                       FPDAppMonitor, FPDDomain, FPDDomainExtensionBackend, FPDDomainIndexer, 
-                       FPDDownloadOperation, FPDDownloader, FPDExtension, FPDFetchAppLibraryIconOperation, 
+                       FPDAppMonitor, FPDDomain, FPDDomainCleanupResult, FPDDomainExtensionBackend, 
+                       FPDDomainIndexer, FPDDomainIndexerSchedulerAssertion, FPDDownloadOperation, 
+                       FPDDownloader, FPDExtension, FPDFetchAppLibraryIconOperation, 
                        FPDMoveAtom, FPDMoveOperation, FPDMoveReader, FPDMoveWriter, 
-                       FPDProcessMonitor, FPDProvider, FPDProviderDescriptor, FPDRequest, 
-                       FPDServer ]
+                       FPDProcessMonitor, FPDProvider, FPDProviderDescriptor, FPDRTCReportingSession, 
+                       FPDRTCReportingSessionManager, FPDRequest, FPDServer, FPDSharedScheduler ]
 ...

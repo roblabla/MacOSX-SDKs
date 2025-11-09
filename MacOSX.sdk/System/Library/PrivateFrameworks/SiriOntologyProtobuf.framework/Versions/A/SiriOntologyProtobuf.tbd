@@ -3,57 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C2006456-A302-3181-ABDB-8F90B5ADFB55
+    value:           9E08BB52-ABB9-3253-963A-47270C192C6E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           46BCFF9B-E71B-3C37-B9BF-D06FF12A9A76
+    value:           569B61C5-1F77-308F-A25B-AB21D4F1CE00
 install-name:    '/System/Library/PrivateFrameworks/SiriOntologyProtobuf.framework/Versions/A/SiriOntologyProtobuf'
 swift-abi-version: 7
-allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ AlarmFlowPlugin, AlarmFlowPluginTests, AppControlPlugin, AppControlPluginTests, 
-                       AudioFlowDelegatePlugin, AudioFlowDelegatePluginTests, CannedDialogFlowDelegatePlugin, 
-                       CarCommandsFlowDelegatePlugin, CarCommandsFlowDelegatePluginTests, 
-                       ContactsFlowDelegatePlugin, ContactsFlowDelegatePlugin-Tests, 
-                       ContactsIntentExtension, ContinuousDialogManagerService, ContinuousDialogManagerTests, 
-                       ControlsFlowDelegatePlugin, ControlsFlowDelegatePluginTests, 
-                       ConversationStore, CoreKnowledge, CoreKnowledgeTests, CoreKnowledgeTests_OBJC, 
-                       DailyBriefingFlowPlugin, DailyBriefingFlowPlugin-Tests, EdutainmentFlowPlugin, 
-                       EdutainmentFlowPluginTests, FindMyFlowPlugin, FindMyFlowPluginTests, 
-                       FlowFrameKitTests, GeoFlowDelegatePlugin, HealthFlowDelegatePlugin, 
-                       HealthFlowDelegatePlugin-Test, HomeAutomationFlowDelegatePlugin, 
-                       HomeAutomationFlowDelegatePluginTests, HomeAutomationInternal, 
-                       KnowledgeGraphFlowDelegatePlugin, KnowledgeGraphFlowDelegatePluginTests, 
-                       MediaDialogTests, MediaFlowDelegatePlugin, MessagesFlowDelegatePlugin, 
-                       MessagesFlowDelegatePlugin-Tests, NLv4InferenceOrchestrator, 
-                       NLv4InferenceOrchestratorOnDeviceTest, NLv4InferenceOrchestratorTest, 
-                       NotebookFlowDelegatePlugin, NotebookFlowDelegatePlugin-Tests, 
-                       NotebookFlowPlugin, NotebookFlowPlugin-Tests, PhoneCallFlowDelegatePlugin, 
-                       PhoneCallFlowDelegatePlugin-Tests, PlaybackControlDialogTests, 
-                       SettingsFlowDelegatePlugin, SiriAppResolutionTests, SiriAudioInternal, 
-                       SiriAudioInternalTests, SiriAudioSupport, SiriAudioSupportIntegrationTests, 
-                       SiriAudioSupportTests, SiriCannedDialogIntents, SiriCannedDialogIntentsTests, 
-                       SiriContactsIntents, SiriContactsIntentsTests, SiriDecision, 
-                       SiriDecisionTests, SiriDialogEngine, SiriDialogEngineTests, 
-                       SiriExecution, SiriExecutionTests, SiriFindMy, SiriFindMyTests, 
-                       SiriFlow, SiriFlowTests, SiriGeoTests, SiriGlobalRanker, SiriGlobalRankerTests, 
-                       SiriKitDomainsCommon, SiriKitDomainsCommon-Tests, SiriKitExecutor, 
-                       SiriKitExecutorBundle-Tests, SiriKitFlow, SiriKitFlowTests, 
-                       SiriKitRuntime, SiriKitRuntimeTests, SiriLinkExtensionSupport, 
-                       SiriLinkExtensionSupportTests, SiriLogging, SiriLoggingTests, 
-                       SiriMediaIntents, SiriMediaIntentsTests, SiriOntology, SiriOntologyProtobuf, 
-                       SiriOntologyTests, SiriPlaybackControlIntents, SiriPlaybackControlIntentsTests, 
-                       SiriReferenceResolution, SiriReferenceResolutionTests, SiriRequestDispatchProtocols, 
-                       SiriRequestDispatchProtocolsTests, SiriRequestDispatcher, 
-                       SiriRequestDispatcherTests, SiriSettingsIntents, SiriSettingsIntentsTests, 
-                       SiriTranslation, SiriVideoIntents, SiriVideoIntentsTests, 
-                       TimerFlowDelegatePlugin, TimerFlowDelegatePlugin-Tests, TranslationApp, 
-                       TranslationExtension, TranslationFlowDelegatePlugin, TranslationTests, 
-                       UaaP Demo, UaaPDemoTests, UaaPFeaturization, UaaPFeaturizationTests, 
-                       VideoDialogTests, VideoFlowDelegatePlugin, VoiceCommandsFlowDelegatePlugin, 
-                       VoiceCommandsFlowDelegatePlugin-Tests, WellnessFlowPlugin, 
-                       WellnessFlowPlugin-Test, assistant_cdmd ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s11WrappedType20SiriOntologyProtobuf0E7WrapperPTl', '_$s20SiriOntologyProtobuf01_C10MessageMapVACyxq_GycfC', 
@@ -3224,7 +3180,6 @@ exports:
                        '_$s20SiriOntologyProtobuf13BinaryDecoderV14decodeMapField9fieldType5valueyAA01_cG0Vyxq_Gm_SDy04BaseJ0QzAJQy_GztKAA0g3KeyJ0RzAA0g5ValueJ0R_r0_lF', 
                        '_$s20SiriOntologyProtobuf13BinaryDecoderV14forReadingFrom5count6parentACSPys5UInt8VG_SiACtcfC', 
                        '_$s20SiriOntologyProtobuf13BinaryDecoderV14forReadingFrom5count7options10extensionsACSPys5UInt8VG_SiAA0D15DecodingOptionsVAA12ExtensionMap_pSgtcfC', 
-                       '_$s20SiriOntologyProtobuf13BinaryDecoderV14forReadingFrom5count7options10extensionsACSPys5UInt8VG_SiAA0D15DecodingOptionsVAA12ExtensionMap_pSgtcfcfA2_', 
                        '_$s20SiriOntologyProtobuf13BinaryDecoderV15fieldWireFormatAA0gH0OvM', 
                        '_$s20SiriOntologyProtobuf13BinaryDecoderV15fieldWireFormatAA0gH0Ovg', 
                        '_$s20SiriOntologyProtobuf13BinaryDecoderV15fieldWireFormatAA0gH0OvpMV', 
@@ -3641,7 +3596,6 @@ exports:
                        '_$s20SiriOntologyProtobuf17TextFormatScannerV10extensionsAA12ExtensionMap_pSgvs', 
                        '_$s20SiriOntologyProtobuf17TextFormatScannerV10nextDoubleSdyKF', 
                        '_$s20SiriOntologyProtobuf17TextFormatScannerV11utf8Pointer5count10extensionsACSPys5UInt8VG_SiAA12ExtensionMap_pSgtcfC', 
-                       '_$s20SiriOntologyProtobuf17TextFormatScannerV11utf8Pointer5count10extensionsACSPys5UInt8VG_SiAA12ExtensionMap_pSgtcfcfA1_', 
                        '_$s20SiriOntologyProtobuf17TextFormatScannerV14nextBytesValue10Foundation4DataVyKF', 
                        '_$s20SiriOntologyProtobuf17TextFormatScannerV15nextFieldNumber5namesSiSgAA8_NameMapV_tKF', 
                        '_$s20SiriOntologyProtobuf17TextFormatScannerV15nextStringValueSSyKF', 

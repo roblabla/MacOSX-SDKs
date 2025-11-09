@@ -10,9 +10,17 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Cocoa/Cocoa.h>
 
+#import <AVKit/AVKitDefines.h>
+
+
 @protocol AVRoutePickerViewDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
+
+#if TARGET_IS_AVKITMACHELPER
+#define AVRoutePickerView AVMacHelperRoutePickerView
+#endif // TARGET_IS_AVKITMACHELPER
+
 
 /*!
  	@constant	AVRoutePickerViewButtonStateNormal
@@ -36,7 +44,7 @@ typedef NS_ENUM(NSInteger, AVRoutePickerViewButtonState) {
 	@abstract	AVRoutePickerView is a subclass of NSView that displays controls for picking playback routes.
  */
 
-API_AVAILABLE(macos(10.15))
+AVKIT_ONLY_API_AVAILABLE(macos(10.15))
 @interface AVRoutePickerView : NSView
 
 /*!

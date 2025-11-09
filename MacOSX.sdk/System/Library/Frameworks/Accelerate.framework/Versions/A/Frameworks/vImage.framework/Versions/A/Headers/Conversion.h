@@ -1491,6 +1491,31 @@ vImageBufferFill_CbCr16U(
                          vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
 API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
+/*!
+ @function vImageBufferFill_CbCr16S
+ 
+ @abstract Fill the dest buffer with the pixel value.
+ 
+ @param color
+ A pixel value to fill the destination buffer.
+ 
+ @param dest
+ A pointer to a valid and initialized vImage_Buffer struct, that points to a buffer containing destination pixels.
+ 
+ @param flags
+ \p kvImageNoFlags          Default operation
+ \p kvImageDoNotTile        Disable internal multithreading.
+ 
+ @return kvImageNoError                     Success
+ @return kvImageRoiLargerThanInputBuffer    The height and width of the destination must be less than or equal to the height and width of the src buffer, respectively.
+ */
+VIMAGE_PF vImage_Error
+vImageBufferFill_CbCr16S(
+                         const vImage_Buffer *dest,
+                         const Pixel_16S16S color,
+                         vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
 
 /*!
  @function vImageOverwriteChannelsWithScalar_ARGB8888

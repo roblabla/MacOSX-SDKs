@@ -1,0 +1,22 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           3CF518D1-F9FC-3307-AD60-8AAD92141FB5
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2B092BC9-4559-3FDE-8D0F-6EBD4EDEC03C
+install-name:    '/usr/lib/libnetquality.dylib'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _NetworkQualityDefaultURL, _NetworkQualityDefaultURLZeroRated, 
+                       _NetworkQualityErrorDomain, _NetworkQualityErrorExecutionsCanceledByUser, 
+                       _NetworkQualityErrorImplementationIssue, _NetworkQualityErrorIncorrectHTTPResponse, 
+                       _NetworkQualityErrorJSONParsing, _NetworkQualityErrorUplinkDownlinkSaturation, 
+                       _dump_testnames, _exec_dns_query_test, _exec_il_dns_query_random, 
+                       _executions, _get_average, _get_execution, _get_test, _get_test_pattern_iterator, 
+                       _get_testnames, _tests ]
+    objc-classes:    [ NetworkQualityConfiguration, NetworkQualityExecutions ]
+...

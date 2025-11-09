@@ -1,24 +1,16 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B86EA5CD-3669-3BE2-85A9-896C3D33E46C
-  - target:          x86_64-maccatalyst
-    value:           B86EA5CD-3669-3BE2-85A9-896C3D33E46C
+    value:           E9FA54BE-897B-3635-94F7-CCE19C61373F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           195ACB87-399F-34B1-BDB6-08DDABD9683E
-  - target:          arm64e-maccatalyst
-    value:           195ACB87-399F-34B1-BDB6-08DDABD9683E
+    value:           D8257E0F-CDAB-346F-AD6A-255ADDCA9161
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libComposeFilters.dylib'
-current-version: 31001.184.2
+current-version: 31001.255.2
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _composeImageFilterFunctionsFromModulesSPI, _composeImageFilterFunctionsSPI ]
 ...

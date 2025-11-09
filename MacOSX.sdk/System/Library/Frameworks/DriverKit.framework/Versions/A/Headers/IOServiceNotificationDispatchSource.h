@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from IOServiceNotificationDispatchSource.iig */
+/* iig(DriverKit-191) generated from IOServiceNotificationDispatchSource.iig */
 
 /* IOServiceNotificationDispatchSource.iig:1-45 */
 /*
@@ -321,13 +321,19 @@ class IOServiceNotificationDispatchSource : public IODispatchSource, public IOSe
     friend class IOServiceNotificationDispatchSourceMetaClass;
 
 public:
+#ifdef IOServiceNotificationDispatchSource_DECLARE_IVARS
+IOServiceNotificationDispatchSource_DECLARE_IVARS
+#else /* IOServiceNotificationDispatchSource_DECLARE_IVARS */
     union
     {
         IOServiceNotificationDispatchSource_IVars * ivars;
         IOServiceNotificationDispatchSource_LocalIVars * lvars;
     };
+#endif /* IOServiceNotificationDispatchSource_DECLARE_IVARS */
+    static OSMetaClass *
+    sGetMetaClass() { return gIOServiceNotificationDispatchSourceMetaClass; };
     virtual const OSMetaClass *
-    getMetaClass() const APPLE_KEXT_OVERRIDE { return OSTypeID(IOServiceNotificationDispatchSource); };
+    getMetaClass() const APPLE_KEXT_OVERRIDE { return gIOServiceNotificationDispatchSourceMetaClass; };
 
     using super = IODispatchSource;
 

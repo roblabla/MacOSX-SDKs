@@ -1086,7 +1086,7 @@ enum {
   kDefaultCMMSignature          = 'appl'
 };
 
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
 /* PicComment IDs */
 enum {
   cmBeginProfile                = 220,
@@ -1140,7 +1140,7 @@ enum {
   cmPS8bit                      = 2
 };
 
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
 /* Flags for profile embedding functions */
 enum {
   cmEmbedWholeProfile           = 0x00000000,
@@ -1181,7 +1181,7 @@ enum {
 
 /* Union of 1.0 2.0, and 4.0 profile header variants */
 union CMAppleProfileHeader {
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
   CMHeader            cm1;
 #endif // !__LP64__ && !TARGET_OS_WIN32
   CM2Header           cm2;
@@ -1316,7 +1316,7 @@ typedef union CMColor {
   CMNamedColor        namedColor;
 } CMColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
 /* GetIndexedProfile() search definition*/
 typedef struct CMProfileSearchRecord {
   CMHeader            header;
@@ -1355,7 +1355,7 @@ typedef struct CMMInfo {
 
 /* GetCWInfo() structures */
 
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
 
 typedef struct CMMInfoRecord {
   OSType              CMMType;
@@ -1521,8 +1521,11 @@ typedef struct CMBitmap {
 /* Profile Locations */
 
 enum {
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
   CS_MAX_PATH                   = 256
+#elif TARGET_OS_WIN32
+  CS_MAX_PATH                   = 1024,
+  WIN_CS_MAX_PATH               = CS_MAX_PATH / sizeof(TCHAR)
 #else
   CS_MAX_PATH                   = 1024
 #endif // !__LP64__ && !TARGET_OS_WIN32
@@ -1531,7 +1534,7 @@ enum {
 
 enum {
   cmNoProfileBase               = 0,
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
   cmFileBasedProfile            = 1,
   cmHandleBasedProfile          = 2,
   cmPtrBasedProfile             = 3,
@@ -1542,7 +1545,7 @@ enum {
 };
 
 
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
 /* This structure is deprecated in Mac OS X 10.5. Use CMPathLocation instead.*/
 typedef struct CMFileLocation {
   FSSpec              spec;
@@ -1553,7 +1556,7 @@ typedef struct CMHandleLocation {
   Handle              h;
 } CMHandleLocation DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
 /* This structure is deprecated in Mac OS X 10.5. Use CMBufferLocation instead.*/
 typedef struct CMPtrLocation {
   Ptr                 p;
@@ -1567,9 +1570,11 @@ typedef struct CMProcedureLocation {
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 typedef struct CMPathLocation {
-
+#if TARGET_OS_WIN32
+  TCHAR               path[WIN_CS_MAX_PATH];
+#else
   char                path[CS_MAX_PATH];
-
+#endif
 } CMPathLocation DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMBufferLocation {
@@ -1578,11 +1583,11 @@ typedef struct CMBufferLocation {
 } CMBufferLocation DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef union CMProfLoc {
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
   CMFileLocation      fileLoc;
 #endif // !__LP64__ && !TARGET_OS_WIN32
   CMHandleLocation    handleLoc;
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
   CMPtrLocation       ptrLoc;
   CMProcedureLocation procLoc;
 #endif // !__LP64__ && !TARGET_OS_WIN32
@@ -1787,7 +1792,7 @@ extern "C" {
 
 #pragma mark --- CMScriptingPlugin.h ----
 
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
 
 #ifdef __cplusplus
 extern "C" {
@@ -1829,7 +1834,7 @@ enum {
 extern "C" {
 #endif
 
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
 #pragma options align=mac68k
 #endif
 /*
@@ -2054,7 +2059,7 @@ typedef CALLBACK_API_C( OSErr , CMIterateDeviceProfileProcPtr )(const CMDeviceIn
     @param       deviceScope    (in) Scope where information should be stored
 */
 
-#if !__LP64__ && !0
+#if !__LP64__ && !TARGET_OS_WIN32
 #pragma options align=reset
 #endif
 

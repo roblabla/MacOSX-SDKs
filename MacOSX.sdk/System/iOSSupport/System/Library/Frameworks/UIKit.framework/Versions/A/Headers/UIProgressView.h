@@ -19,7 +19,8 @@ typedef NS_ENUM(NSInteger, UIProgressViewStyle) {
     UIProgressViewStyleBar API_UNAVAILABLE(tvos),     // for use in a toolbar
 };
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIProgressView : UIView <NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIProgressView : UIView <NSCoding>
 
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;

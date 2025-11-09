@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C9507249-2E8B-3D5B-8EB4-807D819F9F8A
+    value:           EA5A1D86-7B49-3A90-87E9-A5EBC6207EE0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           78DAB352-4C5A-34C6-837A-098051E0C100
+    value:           621F361F-4D4A-3B8A-8168-C839DFAB8C67
 install-name:    '/System/Library/PrivateFrameworks/CoreChineseEngine.framework/Versions/A/CoreChineseEngine'
-current-version: 479.3
+current-version: 495
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CCEGetLionUserDictionariesMigrated, _CCEGetPidForApplication, 
@@ -33,10 +33,11 @@ exports:
                        _CIMInputModeIdentifierTraditionalChineseStroke, _CIMInputModeIdentifierTraditionalChineseSucheng, 
                        _CIMInputModeIdentifierTraditionalChineseZhuyin, _CIMInputModeIdentifierTraditionalChineseZhuyinEten, 
                        _CIMInputModePrefixSCIM, _CIMInputModePrefixTCIM, _CIMInputModePrefixTYIM, 
-                       _CIMLogDomainDefault, _CIMLogDomainMecabraEngine, _CIMMaxLengthOfSelectedTextForSubstitutionCandidates, 
-                       _CIMMecabraCandidateSyllableSeparator, _CIMMecabraEngineFullwidthSemicolon, 
-                       _CIMMecabraEngineHalfwidthSemicolon, _CIMMecabraEnginePinyinSyllableDelimiter, 
-                       _CIMPreferencesDidChangeNotification, _CIMPreferencesEnabledExpertDictionaryChangeNotification, 
+                       _CIMLanguageForScriptType, _CIMLogDomainDefault, _CIMLogDomainMecabraEngine, 
+                       _CIMMaxLengthOfSelectedTextForSubstitutionCandidates, _CIMMecabraCandidateSyllableSeparator, 
+                       _CIMMecabraEngineFullwidthSemicolon, _CIMMecabraEngineHalfwidthSemicolon, 
+                       _CIMMecabraEnginePinyinSyllableDelimiter, _CIMPreferencesDidChangeNotification, 
+                       _CIMPreferencesEnabledExpertDictionaryChangeNotification, 
                        _CIMPunctuationMarker, _CIMPunctuationZhEmDashMarker, _CIMPunctuationZhHorizontalEllipsisMarker, 
                        _CIMPunctuationZhMidlineHorizontalEllipsisMarker, _CIMPunctuationZhOneEmDashMarker, 
                        _CIMPunctuationZhOneHorizontalEllipsisMarker, _CIMPunctuationZhOneMidlineHorizontalEllipsisMarker, 
@@ -48,14 +49,12 @@ exports:
                        _TIMecabraEnvironmentClass, __CCEApplicationBringToFront, 
                        __CCEApplicationRunning, __CCELaunchApplication, __CCEPreferencesGet, 
                        __CCEPreferencesSet, __CCERunningApplication, _filePathChanged, 
-                       _kCIMCangjiePunctuation, _kCIMDefaultClassification, _kCIMDefaultComponentName, 
-                       _kCIMDefaultComponentVersion, _kCIMDefaultReproducibility, 
-                       _kCIMStatisticsAdjustWordFrequencyPreferenceKey, _kCIMStatisticsAutocorrectionEnabledPreferenceKey, 
-                       _kCIMStatisticsCandidateCommitTypeInlineText, _kCIMStatisticsCandidateCommitTypeNumberKeyOrMouseClick, 
-                       _kCIMStatisticsCandidateCommitTypeSpaceOrReturn, _kCIMStatisticsCandidateCommitTypeTouchBar, 
-                       _kCIMStatisticsEqualsKey, _kCIMStatisticsFuzzyPinyinEnabledPreferenceKey, 
-                       _kCIMStatisticsLeftBracketKey, _kCIMStatisticsMinusKey, _kCIMStatisticsRightBracketKey, 
-                       _kCIMStatisticsSCIMCandidateWindowOrientationPreferenceKey, 
+                       _kCIMCangjiePunctuation, _kCIMStatisticsAdjustWordFrequencyPreferenceKey, 
+                       _kCIMStatisticsAutocorrectionEnabledPreferenceKey, _kCIMStatisticsCandidateCommitTypeInlineText, 
+                       _kCIMStatisticsCandidateCommitTypeNumberKeyOrMouseClick, _kCIMStatisticsCandidateCommitTypeSpaceOrReturn, 
+                       _kCIMStatisticsCandidateCommitTypeTouchBar, _kCIMStatisticsEqualsKey, 
+                       _kCIMStatisticsFuzzyPinyinEnabledPreferenceKey, _kCIMStatisticsLeftBracketKey, 
+                       _kCIMStatisticsMinusKey, _kCIMStatisticsRightBracketKey, _kCIMStatisticsSCIMCandidateWindowOrientationPreferenceKey, 
                        _kCIMStatisticsSCIMFontSizePreferenceKey, _kCIMStatisticsSCIMusesWBHPreferenceKey, 
                        _kCIMStatisticsShowAssociatedWordsPreferenceKey, _kCIMStatisticsShuangpinLayoutPreferenceKey, 
                        _kCIMStatisticsTCIMCandidateWindowOrientationPreferenceKey, 
@@ -67,21 +66,20 @@ exports:
                        _kKeyboardLayoutNameCangjie, _kKeyboardLayoutNamePinyinSimplified, 
                        _kKeyboardLayoutNameWubihuaSimplified, _kKeyboardLayoutNameWubihuaTraditional, 
                        _kKeyboardLayoutNameZhuyin, _kKeyboardLayoutNameZhuyinEten, 
-                       _kSCIMShowTCIMSettingsKey, _kTCIMShowSCIMSettingsKey, _kWubiHuaMaxNumberOfCharactersInInline, 
-                       _weekTime ]
+                       _kPinyinDialectPreferenceKey, _kSCIMShowTCIMSettingsKey, _kTCIMShowSCIMSettingsKey, 
+                       _kWubiHuaMaxNumberOfCharactersInInline, _weekTime ]
     objc-classes:    [ CCEUserControl, CIMAggregateStatistic, CIMAttributedPinyinCandidate, 
-                       CIMBaseEngine, CIMCandidate, CIMCandidateSorter, CIMCangjieEngine, 
-                       CIMCharacterAccessibilityData, CIMContactsReader, CIMDebugLogger, 
+                       CIMBaseEngine, CIMCandidate, CIMCandidateController, CIMCandidateSorter, 
+                       CIMCangjieEngine, CIMCharacterAccessibilityData, CIMContactsReader, 
                        CIMDefinitionToLayoutController, CIMDisplayCandidateFadeProperties, 
                        CIMExpertDictionariesPreferencesModule, CIMExpertDictionary, 
                        CIMExtensionDelegate, CIMFindInputCodeDataFormatter, CIMFuzzyPinyinTableView, 
-                       CIMGlobalState, CIMHelpController, CIMInputController, CIMIssueReporter, 
-                       CIMIssueReporterCandidateState, CIMIssueReporterRadarInfoController, 
-                       CIMLayoutUnit, CIMLog, CIMMecabraCandidate, CIMMecabraController, 
-                       CIMMecabraEngine, CIMMecabraShapeBasedEngine, CIMMecabraStrokeCandidate, 
-                       CIMMecabraZhuyinCandidate, CIMMecabraZhuyinEngine, CIMMenuController, 
-                       CIMMockPreferences, CIMMockUserDefaults, CIMPinyinEngine, 
-                       CIMPinyinPreferencesModule, CIMPrefDictionaryScrollView, CIMPrefGradationalSeparator, 
+                       CIMGlobalState, CIMHelpController, CIMInputController, CIMLayoutUnit, 
+                       CIMLog, CIMMecabraCandidate, CIMMecabraController, CIMMecabraEngine, 
+                       CIMMecabraShapeBasedEngine, CIMMecabraStrokeCandidate, CIMMecabraZhuyinCandidate, 
+                       CIMMecabraZhuyinEngine, CIMMenuController, CIMMockPreferences, 
+                       CIMMockUserDefaults, CIMPinyinEngine, CIMPinyinPreferencesModule, 
+                       CIMPrefDictionaryScrollView, CIMPrefGradationalSeparator, 
                        CIMPreferences, CIMPreferencesModule, CIMPunctuationManager, 
                        CIMResourcePathManager, CIMShapeBasedCandidate, CIMShapeBasedEngine, 
                        CIMSimulatorCandidateUnitView, CIMSimulatorEnvironmentCursorView, 

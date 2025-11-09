@@ -11,10 +11,7 @@
 #import <IOKit/bluetooth/Bluetooth.h>
 
 #import "IOKit/pwr_mgt/RootDomain.h"
-#define TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTDEVICE __has_include(<BluetoothHIDDriverKit/IOBluetoothHIDDriver.h>)
-#if TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTDEVICE
-#include <BluetoothHIDDriverKit/IOBluetoothHIDDriver.h>
-#endif
+
 //===========================================================================================================================
 // Macros
 //===========================================================================================================================
@@ -38,7 +35,7 @@ class IOWorkQueue;
 
 class IOBluetoothHIDDriver : public IOHIDDevice
 {
-    OSDeclareDefaultStructors(IOBluetoothHIDDriver)
+	OSDeclareDefaultStructors( IOBluetoothHIDDriver )
 
     IOWorkLoop*					_workLoop;
 	IOCommandGate*				_commandGate;
@@ -139,8 +136,14 @@ class IOBluetoothHIDDriver : public IOHIDDevice
 		
 		IOReturn				mExitHIDSuspendResult;
 		
-		bool					mPowerStateChangeInProgress;
-    };
+		bool					mPrintDebug;
+		
+		IOTimerEventSource*		mPrintDebugTimer;
+		
+		UInt32					mPrintDebugDuration;
+		
+		uint32_t				mCanSendData;
+};
     ExpansionData	*_expansionData;
 	
 public:
@@ -207,7 +210,7 @@ public:
 	
 	// Command Gate Actions
 	static	IOReturn	staticCloseDownServicesAction( OSObject* owner, void* arg1, void* arg2, void* arg3, void* arg4 );
-	static	IOReturn	staticSendToAction( OSObject* owner, void* theChannel, void* theData, void *theSize, void* );
+	static	IOReturn	staticSendToAction( OSObject* owner, void* theChannel, void* theData, void *theSize, void* arg4);
 	static	IOReturn	staticPrepControlChannelAction( OSObject* owner, void* arg1, void* arg2, void* arg3, void* arg4 );
 	static	IOReturn	staticInterruptChannelOpeningAction( OSObject* owner, void* newService, void* arg2, void* arg3, void* arg4 );
 	static	IOReturn	staticWillTerminateAction( OSObject* owner, void* arg1, void* arg2, void* arg3, void* arg4 );
@@ -233,10 +236,15 @@ public:
 	// ReadyToSleepTimeout Handler
 	static	void		ReadyToSleepTimerFired( OSObject* owner, IOTimerEventSource* sender );
 	
+	// mPrintDebugTimer Handler
+	static	void		debugPrintTimerFired( OSObject* owner, IOTimerEventSource* sender );
+
+	
 private:
 	// Lazy Interrupt Channel Methods
 	static	bool		interruptChannelOpeningCallback(	void* me, void* ignoreMe, IOService* newService, IONotifier *notifier );
     static	IOReturn 	powerStateHandler( void *target, void *refCon, UInt32 messageType, IOService *service, void *messageArgument, vm_size_t argSize );
+	static	UInt32		ConvertAddressToUInt32 (void	*	address);
 
 public:
     OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver,  0 );
@@ -275,11 +283,21 @@ public:
 											 char		*	calledByFunction,
 											 bool			panicMachine);
 	
-    OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 11 );
-    OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 12 );
-    OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 13 );
-    OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 14 );
-    OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 15 );
+    OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver, 11 );
+	virtual	void			SuppressConnectionLostNotification(void);
+	
+	OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver, 12 );
+	virtual void			handleDebugPrintTimerFired(void);
+
+	OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver, 13 );
+	virtual void			DeviceTerminated(void);
+
+ 	OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver, 14 );
+	virtual IOReturn		waitForOkToSend(void);
+
+	OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver, 15 );
+	virtual void			processOkToSendNotification(void);
+	
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 16 );
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 17 );
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver, 18 );

@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import <CloudKit/CKDefines.h>
 #import <CloudKit/CKRecord.h>
 
@@ -65,7 +66,9 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0))
 /*! A predicate that determines when the subscription fires. */
 @property (nonatomic, readonly, copy) NSPredicate *predicate;
 
-/*! Optional property.  If set, a query subscription is scoped to only record changes in the indicated zone. */
+/*! Optional property.  If set, a query subscription is scoped to only record changes in the indicated zone.
+ *  Query Subscriptions that do not specify a @c zoneID are scoped to record changes across all zones in the database.
+ */
 @property (nonatomic, copy, nullable) CKRecordZoneID *zoneID;
 
 /*! @abstract Options flags describing the firing behavior subscription.

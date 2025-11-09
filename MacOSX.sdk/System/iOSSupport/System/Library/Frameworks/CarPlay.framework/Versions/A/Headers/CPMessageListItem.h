@@ -187,6 +187,13 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @property (nonatomic, copy, nullable) NSString *trailingText;
 
 /**
+ A Boolean value indicating whether the list item is enabled.
+
+ @discussion Set the value of this property to @c YES to enable the list item or @c NO to disable it. The default value of this property is @c YES.
+ */
+@property (nonatomic, assign, getter=isEnabled) BOOL enabled API_AVAILABLE(ios(15.0));
+
+/**
  Any custom user info related to this item.
  */
 @property (nonatomic, strong, nullable) id userInfo;

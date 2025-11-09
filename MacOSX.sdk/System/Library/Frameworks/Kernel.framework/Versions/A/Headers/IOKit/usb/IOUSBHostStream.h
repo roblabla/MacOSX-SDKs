@@ -112,6 +112,7 @@ protected:
     virtual bool initWithOwnersAndStreamID(AppleUSBHostController* controller, IOUSBHostDevice* device, IOUSBHostPipe* pipe, uint32_t streamID);
 
     virtual IOReturn closeGated();
+    virtual IOReturn destroyGated();
 
     virtual IOReturn abortGated(IOOptionBits options, IOReturn withError, IOService* forClient);
 

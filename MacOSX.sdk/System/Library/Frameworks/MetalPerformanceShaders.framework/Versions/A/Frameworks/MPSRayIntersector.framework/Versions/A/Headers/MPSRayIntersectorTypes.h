@@ -248,6 +248,36 @@ typedef struct {
 } MPSIntersectionDistancePrimitiveIndex;
 
 /**
+ * @brief Intersection result which contains the distance from the ray origin to the
+ * intersection point, the index of the intersected primitive, and the polygon buffer
+ * index of the intersected primitive.
+ *
+ * @discussion This type is available from the Metal Shading Language by including the
+ * MetalPerformanceShaders/MetalPerformanceShaders.h header.
+ */
+typedef struct {
+    /**
+     * @brief Distance from the ray origin to the intersection point along the ray direction
+     * vector such that intersection = ray.origin + ray.direction * distance. Is negative if
+     * there is no intersection. If the intersection type is MPSIntersectionTypeAny, is
+     * a positive value for a hit or a negative value for a miss.
+     */
+    float distance;
+
+    /**
+     * @brief Index of the intersected primitive. Undefined if the ray does not intersect
+     * a primitive or if the intersection type is MPSIntersectionTypeAny.
+     */
+    unsigned int primitiveIndex;
+
+    /**
+     * @brief Buffer index of the intersected primitive. Undefined if the ray does not
+     * intersect a primitive or if the intersection type is MPSIntersectionTypeAny.
+     */
+    unsigned int bufferIndex;
+} MPSIntersectionDistancePrimitiveIndexBufferIndex;
+
+/**
  * @brief Intersection result which contains the distance from the ray origin to the intersection
  * point, the index of the intersected primitive, and the two dimensional parameterization of
  * the intersection point.
@@ -313,6 +343,76 @@ typedef struct {
 
 /**
  * @brief Intersection result which contains the distance from the ray origin to the intersection
+ * point, the index of the intersected primitive, the polygon buffer index of the intersected
+ * primitive, and the two dimensional parameterization of the intersection point.
+ *
+ * @discussion This type is available from the Metal Shading Language by including the
+ * MetalPerformanceShaders/MetalPerformanceShaders.h header.
+ */
+typedef struct {
+    /**
+     * @brief Distance from the ray origin to the intersection point along the ray direction
+     * vector such that intersection = ray.origin + ray.direction * distance. Is negative if
+     * there is no intersection. If the intersection type is MPSIntersectionTypeAny, is
+     * a positive value for a hit or a negative value for a miss.
+     */
+    float distance;
+
+    /**
+     * @brief Index of the intersected primitive. Undefined if the ray does not intersect
+     * a primitive or if the intersection type is MPSIntersectionTypeAny.
+     */
+    unsigned int primitiveIndex;
+
+    /**
+     * @brief Buffer index of the intersected primitive. Undefined if the ray does not
+     * intersect a primitive or if the intersection type is MPSIntersectionTypeAny.
+     */
+    unsigned int bufferIndex;
+
+    /**
+     * @brief A two dimensional coordinate representing the intersection point according to the
+     * primitive's parameterization.
+     *
+     * For triangle primitives, these are the first two barycentric coordinates U and V of the
+     * intersection point. The third coordinate W = 1 - U - V. If the triangle has vertices v0, v1,
+     * and v2, the position of the intersection point (and other per-vertex attributes) can be
+     * interpolated as follows:
+     *
+     *     @code
+     *     float3 v_interpolated = U * v0 + V * v1 + W * v2;
+     *     @endcode
+     *
+     * Quadrilateral primitives are treated as two triangles internally. If the quadrilateral has
+     * vertices v0, v1, v2, and v3, the two triangles will have vertices v0, v1, v2 and v0, v2, v3.
+     * The coordinates will still be the first two barycentric coordinates of the intersected
+     * triangle, but they will be subtracted from one for the second triangle. In that case, the
+     * third coordinate W = 1 - U - V will be less than zero. This can be used to interpolate per-
+     * vertex attributes as follows:
+     *
+     *     @code
+     *     float W = 1 - U - V;
+     *     float3 v_interpolated;
+     *
+     *     if (W < 0.0f) {
+     *         U = 1 - U;
+     *         V = 1 - V;
+     *         W = 1 - U - V;
+     *         v_interpolated = U * v0 + V * v2 + W * v3;
+     *     }
+     *     else {
+     *         v_interpolated = U * v0 + V * v1 + W * v2;
+     *     }
+     *     @endcode
+     *
+     * This value is undefined if the ray does not intersect a primitive or if the intersection
+     * type is MPSIntersectionTypeAny.
+     */
+    vector_float2 coordinates;
+} MPSIntersectionDistancePrimitiveIndexBufferIndexCoordinates;
+
+/**
+ * @brief Intersection result which contains the distance from the ray origin to the intersection
  * point, the index of the intersected primitive, and the index of the intersected instance.
  *
  * @discussion This type is available from the Metal Shading Language by including the
@@ -340,6 +440,43 @@ typedef struct {
      */
     unsigned int instanceIndex;
 } MPSIntersectionDistancePrimitiveIndexInstanceIndex;
+
+/**
+ * @brief Intersection result which contains the distance from the ray origin to the intersection
+ * point, the index of the intersected primitive, the polygon buffer index of the intersected
+ * primitive, and the index of the intersected instance.
+ *
+ * @discussion This type is available from the Metal Shading Language by including the
+ * MetalPerformanceShaders/MetalPerformanceShaders.h header.
+ */
+typedef struct {
+    /**
+     * @brief Distance from the ray origin to the intersection point along the ray direction
+     * vector such that intersection = ray.origin + ray.direction * distance. Is negative if
+     * there is no intersection. If the intersection type is MPSIntersectionTypeAny, is
+     * a positive value for a hit or a negative value for a miss.
+     */
+    float distance;
+
+    /**
+     * @brief Index of the intersected primitive. Undefined if the ray does not intersect
+     * a primitive or if the intersection type is MPSIntersectionTypeAny.
+     */
+    unsigned int primitiveIndex;
+
+    /**
+     * @brief Buffer index of the intersected primitive. Undefined if the ray does not
+     * intersect a primitive or if the intersection type is MPSIntersectionTypeAny.
+     */
+    unsigned int bufferIndex;
+
+    /**
+     * @brief Index of the intersected instance. Undefined if the ray does not intersect a
+     * primitive, if the acceleration structure is not an instance acceleration structure,
+     * or if the intersection type is MPSIntersectionTypeAny.
+     */
+    unsigned int instanceIndex;
+} MPSIntersectionDistancePrimitiveIndexBufferIndexInstanceIndex;
 
 /**
  * @brief Intersection result which contains the distance from the ray origin to the intersection
@@ -411,5 +548,83 @@ typedef struct {
      */
     vector_float2 coordinates;
 } MPSIntersectionDistancePrimitiveIndexInstanceIndexCoordinates;
+
+/**
+ * @brief Intersection result which contains the distance from the ray origin to the intersection
+ * point, the index of the intersected primitive, the polygon buffer index of the intersected
+ * primitive, the index of the intersected instance, and the two dimensional parameterization of
+ * the intersection point.
+ *
+ * @discussion This type is available from the Metal Shading Language by including the
+ * MetalPerformanceShaders/MetalPerformanceShaders.h header.
+ */
+typedef struct {
+    /**
+     * @brief Distance from the ray origin to the intersection point along the ray direction
+     * vector such that intersection = ray.origin + ray.direction * distance. Is negative if
+     * there is no intersection. If the intersection type is MPSIntersectionTypeAny, is
+     * a positive value for a hit or a negative value for a miss.
+     */
+    float distance;
+
+    /**
+     * @brief Index of the intersected primitive. Undefined if the ray does not intersect
+     * a primitive or if the intersection type is MPSIntersectionTypeAny.
+     */
+    unsigned int primitiveIndex;
+
+    /**
+     * @brief Buffer index of the intersected primitive. Undefined if the ray does not
+     * intersect a primitive or if the intersection type is MPSIntersectionTypeAny.
+     */
+    unsigned int bufferIndex;
+
+    /**
+     * @brief Index of the intersected instance. Undefined if the ray does not intersect a
+     * primitive, if the acceleration structure is not an instance acceleration structure,
+     * or if the intersection type is MPSIntersectionTypeAny.
+     */
+    unsigned int instanceIndex;
+
+    /**
+     * @brief A two dimensional coordinate representing the intersection point according to the
+     * primitive's parameterization.
+     *
+     * For triangle primitives, these are the first two barycentric coordinates U and V of the
+     * intersection point. The third coordinate W = 1 - U - V. If the triangle has vertices v0, v1,
+     * and v2, the position of the intersection point (and other per-vertex attributes) can be
+     * interpolated as follows:
+     *
+     *     @code
+     *     float3 v_interpolated = U * v0 + V * v1 + W * v2;
+     *     @endcode
+     *
+     * Quadrilateral primitives are treated as two triangles internally. If the quadrilateral has
+     * vertices v0, v1, v2, and v3, the two triangles will have vertices v0, v1, v2 and v0, v2, v3.
+     * The coordinates will still be the first two barycentric coordinates of the intersected
+     * triangle, but they will be subtracted from one for the second triangle. In that case, the
+     * third coordinate W = 1 - U - V will be less than zero. This can be used to interpolate per-
+     * vertex attributes as follows:
+     *
+     *     @code
+     *     float W = 1 - U - V;
+     *     float3 v_interpolated;
+     *
+     *     if (W < 0.0f) {
+     *         U = 1 - U;
+     *         V = 1 - V;
+     *         W = 1 - U - V;
+     *         v_interpolated = U * v0 + V * v2 + W * v3;
+     *     }
+     *     else {
+     *         v_interpolated = U * v0 + V * v1 + W * v2;
+     *     }
+     *     @endcode
+     *
+     * This value is undefined if the ray does not intersect a primitive or if the intersection
+     * type is MPSIntersectionTypeAny.
+     */
+    vector_float2 coordinates;
+} MPSIntersectionDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates;
 
 #endif

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           09D991D4-E1CC-3E84-8497-7FD8F2ED3114
+    value:           65AF95FA-FDA7-383B-ADE0-2AC7C33238AB
   - target:          x86_64-maccatalyst
-    value:           09D991D4-E1CC-3E84-8497-7FD8F2ED3114
+    value:           65AF95FA-FDA7-383B-ADE0-2AC7C33238AB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6D3EC3C4-107E-3999-94D1-D92A3A752C8C
+    value:           815DFBF4-F689-36E9-AF2B-5260B611431A
   - target:          arm64e-maccatalyst
-    value:           6D3EC3C4-107E-3999-94D1-D92A3A752C8C
+    value:           815DFBF4-F689-36E9-AF2B-5260B611431A
 install-name:    '/System/Library/PrivateFrameworks/VoiceTrigger.framework/Versions/A/VoiceTrigger'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -122,26 +122,29 @@ exports:
                        __ZN11AccelCosine7dctCoefEv, __ZN11AccelWindow11initHammingEv, 
                        __ZN11AccelWindow4initERKjRKbS3_, __ZN11AccelWindow5applyER6NArrayIfE, 
                        __ZN11AccelWindow7rescaleER6NArrayIfE, __ZN11BlobBuilder13buildDistBlobERK14NConfigSection, 
-                       __ZN11BlobBuilder13serializeHeapER7NString, __ZN11BlobBuilder15buildNormConfigERK14NConfigSection, 
-                       __ZN11BlobBuilder15getHmmArraySizeEv, __ZN11BlobBuilder16buildConfgHeaderEv, 
-                       __ZN11BlobBuilder16serializePaddingEjR7NString, __ZN11BlobBuilder17buildAcAnalConfigERK14NConfigSection, 
-                       __ZN11BlobBuilder17buildDetectConfigERK14NConfigSectionS2_S2_, 
-                       __ZN11BlobBuilder17getNormConfigSizeEv, __ZN11BlobBuilder17serializeDistBlobER7NString, 
-                       __ZN11BlobBuilder17serializeHmmArrayER7NString, __ZN11BlobBuilder18analysisTargetKindERK14NConfigSectionR15NDEAcAnalConfig, 
+                       __ZN11BlobBuilder13serializeHeapER20N16ByteAlignedString, 
+                       __ZN11BlobBuilder15buildNormConfigERK14NConfigSection, __ZN11BlobBuilder15getHmmArraySizeEv, 
+                       __ZN11BlobBuilder16buildConfgHeaderEv, __ZN11BlobBuilder16serializePaddingEjR20N16ByteAlignedString, 
+                       __ZN11BlobBuilder17buildAcAnalConfigERK14NConfigSection, __ZN11BlobBuilder17buildDetectConfigERK14NConfigSectionS2_S2_, 
+                       __ZN11BlobBuilder17getNormConfigSizeEv, __ZN11BlobBuilder17serializeDistBlobER20N16ByteAlignedString, 
+                       __ZN11BlobBuilder17serializeHmmArrayER20N16ByteAlignedString, 
+                       __ZN11BlobBuilder18analysisTargetKindERK14NConfigSectionR15NDEAcAnalConfig, 
                        __ZN11BlobBuilder18buildPhoneHmmArrayERK14NConfigSection, 
                        __ZN11BlobBuilder19getAcAnalConfigSizeEv, __ZN11BlobBuilder19getConfigHeaderSizeEv, 
-                       __ZN11BlobBuilder19getDistributionSizeEv, __ZN11BlobBuilder19serializeNormConfigER7NString, 
+                       __ZN11BlobBuilder19getDistributionSizeEv, __ZN11BlobBuilder19serializeNormConfigER20N16ByteAlignedString, 
                        __ZN11BlobBuilder21getActualHmmArraySizeEv, __ZN11BlobBuilder21getDetectorConfigSizeEv, 
-                       __ZN11BlobBuilder21serializeAcAnalConfigER7NString, __ZN11BlobBuilder21serializeConfigHeaderER7NString, 
-                       __ZN11BlobBuilder21serializeDetectConfigER7NString, __ZN11BlobBuilder23sanityCheckAcAnalOptionERK14NConfigSection, 
-                       __ZN11BlobBuilder25getActualDistributionSizeEv, __ZN11BlobBuilder5buildERK7NConfigR7NStringb, 
-                       __ZN11BlobBuilder9buildBlobERK7NConfigR7NStringb, __ZN11NAutoString8appendToEPKvRKj, 
-                       __ZN11NAutoString8assignToEPKvRKj, __ZN11NAutoStringC1ERK7NString, 
-                       __ZN11NAutoStringC1ERKS_, __ZN11NAutoStringC1ERKjS1_, __ZN11NAutoStringC1Ev, 
-                       __ZN11NAutoStringC2ERK7NString, __ZN11NAutoStringC2ERKS_, 
-                       __ZN11NAutoStringC2ERKjS1_, __ZN11NAutoStringC2Ev, __ZN11NAutoStringD0Ev, 
-                       __ZN11NAutoStringD1Ev, __ZN11NAutoStringD2Ev, __ZN11NAutoStringaSEPKc, 
-                       __ZN11NAutoStringaSERK7NString, __ZN11NAutoStringpLERK7NString, 
+                       __ZN11BlobBuilder21serializeAcAnalConfigER20N16ByteAlignedString, 
+                       __ZN11BlobBuilder21serializeConfigHeaderER20N16ByteAlignedString, 
+                       __ZN11BlobBuilder21serializeDetectConfigER20N16ByteAlignedString, 
+                       __ZN11BlobBuilder23sanityCheckAcAnalOptionERK14NConfigSection, 
+                       __ZN11BlobBuilder25getActualDistributionSizeEv, __ZN11BlobBuilder5buildERK7NConfigR20N16ByteAlignedStringb, 
+                       __ZN11BlobBuilder9buildBlobERK7NConfigR20N16ByteAlignedStringb, 
+                       __ZN11NAutoString8appendToEPKvRKj, __ZN11NAutoString8assignToEPKvRKj, 
+                       __ZN11NAutoStringC1ERK7NString, __ZN11NAutoStringC1ERKS_, 
+                       __ZN11NAutoStringC1ERKjS1_, __ZN11NAutoStringC1Ev, __ZN11NAutoStringC2ERK7NString, 
+                       __ZN11NAutoStringC2ERKS_, __ZN11NAutoStringC2ERKjS1_, __ZN11NAutoStringC2Ev, 
+                       __ZN11NAutoStringD0Ev, __ZN11NAutoStringD1Ev, __ZN11NAutoStringD2Ev, 
+                       __ZN11NAutoStringaSEPKc, __ZN11NAutoStringaSERK7NString, __ZN11NAutoStringpLERK7NString, 
                        __ZN11NLRHMMModel4initERK9NPhoneHMMRKiRKf, __ZN11NOffsetFile10readStringEv, 
                        __ZN11NOffsetFile11getPositionEv, __ZN11NOffsetFile11setPositionERKj, 
                        __ZN11NOffsetFile4openERK7NStringS2_RKjS4_, __ZN11NOffsetFile4readERKj, 
@@ -255,16 +258,23 @@ exports:
                        __ZN19TSSupervectorScorer5scoreEPKfj, __ZN19TSSupervectorScorerC1Ev, 
                        __ZN19TSSupervectorScorerC2Ev, __ZN19TSSupervectorScorerD0Ev, 
                        __ZN19TSSupervectorScorerD1Ev, __ZN19TSSupervectorScorerD2Ev, 
-                       __ZN20NDeepnetDistribution13mapFromMemoryEPKcRKjS1_, __ZN20NDeepnetDistribution4initEPKcRKj, 
-                       __ZN20NDeepnetDistribution4readERK7NString, __ZN20NDeepnetDistribution5resetEv, 
-                       __ZN20NDeepnetDistribution7mapFileERK7NString, __ZN20NDeepnetDistributionC1Ev, 
-                       __ZN20NDeepnetDistributionC2Ev, __ZN20NDeepnetDistributionD0Ev, 
-                       __ZN20NDeepnetDistributionD1Ev, __ZN20NDeepnetDistributionD2Ev, 
-                       __ZN22NGaussianMixtureModels14refreshOffsetsEv, __ZN22NGaussianMixtureModels2idEv, 
-                       __ZN22NGaussianMixtureModels4readERK7NString, __ZN22NGaussianMixtureModelsC1Ev, 
-                       __ZN22NGaussianMixtureModelsC2Ev, __ZN22NGaussianMixtureModelsD0Ev, 
-                       __ZN22NGaussianMixtureModelsD1Ev, __ZN22NGaussianMixtureModelsD2Ev, 
-                       __ZN25NGaussianFixedPointScales10initializeERKiS1_S1_RK6NArrayIiES5_, 
+                       __ZN20N16ByteAlignedStringC1EPKc, __ZN20N16ByteAlignedStringC1EPKcRKj, 
+                       __ZN20N16ByteAlignedStringC1ERK7NString, __ZN20N16ByteAlignedStringC1ERKS_, 
+                       __ZN20N16ByteAlignedStringC1ERKcRKj, __ZN20N16ByteAlignedStringC1Ev, 
+                       __ZN20N16ByteAlignedStringC2EPKc, __ZN20N16ByteAlignedStringC2EPKcRKj, 
+                       __ZN20N16ByteAlignedStringC2ERK7NString, __ZN20N16ByteAlignedStringC2ERKS_, 
+                       __ZN20N16ByteAlignedStringC2ERKcRKj, __ZN20N16ByteAlignedStringC2Ev, 
+                       __ZN20N16ByteAlignedStringD0Ev, __ZN20N16ByteAlignedStringD1Ev, 
+                       __ZN20N16ByteAlignedStringD2Ev, __ZN20NDeepnetDistribution13mapFromMemoryEPKcRKjS1_, 
+                       __ZN20NDeepnetDistribution4initEPKcRKj, __ZN20NDeepnetDistribution4readERK7NString, 
+                       __ZN20NDeepnetDistribution5resetEv, __ZN20NDeepnetDistribution7mapFileERK7NString, 
+                       __ZN20NDeepnetDistributionC1Ev, __ZN20NDeepnetDistributionC2Ev, 
+                       __ZN20NDeepnetDistributionD0Ev, __ZN20NDeepnetDistributionD1Ev, 
+                       __ZN20NDeepnetDistributionD2Ev, __ZN22NGaussianMixtureModels14refreshOffsetsEv, 
+                       __ZN22NGaussianMixtureModels2idEv, __ZN22NGaussianMixtureModels4readERK7NString, 
+                       __ZN22NGaussianMixtureModelsC1Ev, __ZN22NGaussianMixtureModelsC2Ev, 
+                       __ZN22NGaussianMixtureModelsD0Ev, __ZN22NGaussianMixtureModelsD1Ev, 
+                       __ZN22NGaussianMixtureModelsD2Ev, __ZN25NGaussianFixedPointScales10initializeERKiS1_S1_RK6NArrayIiES5_, 
                        __ZN25NGaussianFixedPointScales13setDimenShiftERK6NArrayIiE, 
                        __ZN25NGaussianFixedPointScales15makeLogAddTableERKj, __ZN25NGaussianFixedPointScales4readER8NFilePtrRKjRKb, 
                        __ZN25NGaussianFixedPointScales5setUpEv, __ZN25NGaussianFixedPointScalesC1Ev, 
@@ -484,6 +494,7 @@ exports:
                        _kVTMetaVersionFileName, _kVTMetaVersionKey, _kVTNearField, 
                        _kVTNotBackedupPreferencesDomain, _kVTOtherBiometricResultKey, 
                        _kVTPreferencesDomain, _kVTPreferencesPhraseSpotterEnabledDidChangeDarwinNotification, 
+                       _kVTPreferencesRemoraVoiceTriggerEnabledDidChangeDarwinNotification, 
                        _kVTPreferencesVoiceTriggerEnabledDidChangeDarwinNotification, 
                        _kVTRecordingTimeStampKey, _nd_close, _nd_create, _nd_error, 
                        _nd_getoption, _nd_getphraseresults, _nd_getresults, _nd_getresultsstr, 

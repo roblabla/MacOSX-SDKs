@@ -434,6 +434,15 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemant
                                     colorSpace:(CGColorSpaceRef)colorSpace
                                        options:(NSDictionary<CIImageRepresentationOption, id>*)options NS_AVAILABLE(10_13_4,11_0);
 
+/* Render a CIImage to HEIF data. Image must have a finite non-empty extent. */
+/* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome. */
+/* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
+/* and the depth, disparity, and matte options. */
+- (nullable NSData*) HEIF10RepresentationOfImage:(CIImage*)image
+                                      colorSpace:(CGColorSpaceRef)colorSpace
+                                         options:(NSDictionary<CIImageRepresentationOption, id>*)options
+                                           error:(NSError **)errorPtr NS_AVAILABLE(12_0,15_0);
+
 /* Render a CIImage to PNG data. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
 /* and must match the specified CIFormat. */
@@ -486,6 +495,16 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemant
                              colorSpace:(CGColorSpaceRef)colorSpace
                                 options:(NSDictionary<CIImageRepresentationOption, id>*)options
                                   error:(NSError **)errorPtr NS_AVAILABLE(10_13_4,11_0);
+
+/* Render a CIImage to 10-bit deep HEIF file. Image must have a finite non-empty extent. */
+/* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome. */
+/* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
+/* and the depth, disparity, and matte options. */
+- (BOOL) writeHEIF10RepresentationOfImage:(CIImage*)image
+                                    toURL:(NSURL*)url
+                               colorSpace:(CGColorSpaceRef)colorSpace
+                                  options:(NSDictionary<CIImageRepresentationOption, id>*)options
+                                    error:(NSError **)errorPtr NS_AVAILABLE(12_0,15_0);
 
 
 @end

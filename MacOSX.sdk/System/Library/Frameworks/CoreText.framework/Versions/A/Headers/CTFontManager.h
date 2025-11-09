@@ -2,7 +2,7 @@
  *  CTFontManager.h
  *  CoreText
  *
- *  Copyright (c) 2008-2020 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2021 Apple Inc. All rights reserved.
  *
  */
 
@@ -134,7 +134,8 @@ typedef CF_ENUM(uint32_t, CTFontManagerScope) {
     kCTFontManagerScopeSession     CT_ENUM_AVAILABLE(macos(10.6)) CT_ENUM_UNAVAILABLE(ios, watchos, tvos)
                                    = 3,
     
-    kCTFontManagerScopeUser        = kCTFontManagerScopePersistent
+    kCTFontManagerScopeUser        CT_ENUM_AVAILABLE(macos(10.6), ios(13.0), watchos(6.0), tvos(13.0))
+                                   = 2,
 };
 
 /*!
@@ -239,7 +240,7 @@ bool CTFontManagerUnregisterGraphicsFont(
 bool CTFontManagerRegisterFontsForURLs(
     CFArrayRef              fontURLs,
     CTFontManagerScope      scope,
-    CFArrayRef _Nullable * _Nullable errors ) API_DEPRECATED_WITH_REPLACEMENT("CTFontManagerRegisterFontURLs", macos(10.6, 10.15), ios(4.1, 13.0), watchos(2.0, 6.0), tvos(9.0, 13.0));
+    CFArrayRef _Nullable * _Nullable errors ) CT_DEPRECATED_WITH_REPLACEMENT("CTFontManagerRegisterFontURLs", macos(10.6, 10.15), ios(4.1, 13.0), watchos(2.0, 6.0), tvos(9.0, 13.0));
 
 /*!
     @function   CTFontManagerUnregisterFontsForURLs
@@ -260,7 +261,7 @@ bool CTFontManagerRegisterFontsForURLs(
 bool CTFontManagerUnregisterFontsForURLs(
     CFArrayRef              fontURLs,
     CTFontManagerScope      scope,
-    CFArrayRef _Nullable * _Nullable errors ) API_DEPRECATED_WITH_REPLACEMENT("CTFontManagerUnregisterFontURLs", macos(10.6, 10.15), ios(4.1, 13.0), watchos(2.0, 6.0), tvos(9.0, 13.0));
+    CFArrayRef _Nullable * _Nullable errors ) CT_DEPRECATED_WITH_REPLACEMENT("CTFontManagerUnregisterFontURLs", macos(10.6, 10.15), ios(4.1, 13.0), watchos(2.0, 6.0), tvos(9.0, 13.0));
 
 #if defined(__BLOCKS__)
 /*!

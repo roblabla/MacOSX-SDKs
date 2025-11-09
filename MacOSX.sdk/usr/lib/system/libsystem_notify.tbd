@@ -4,19 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1AA89769-E07F-37CD-BBCF-6DBD345862EB
+    value:           CECF6C3C-8E36-347E-A8A4-7D2BA8393F60
   - target:          x86_64-maccatalyst
-    value:           1AA89769-E07F-37CD-BBCF-6DBD345862EB
+    value:           CECF6C3C-8E36-347E-A8A4-7D2BA8393F60
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D6E6F5C7-AF4A-3AFB-8BFB-9D15FA73061D
+    value:           80A7ACB1-4826-3920-98DB-DFB29E0B1D94
   - target:          arm64e-maccatalyst
-    value:           D6E6F5C7-AF4A-3AFB-8BFB-9D15FA73061D
+    value:           80A7ACB1-4826-3920-98DB-DFB29E0B1D94
 install-name:    '/usr/lib/system/libsystem_notify.dylib'
-current-version: 279.40.4
+current-version: 301
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        System
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

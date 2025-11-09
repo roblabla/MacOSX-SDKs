@@ -4,39 +4,43 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4BDB0D3D-D4FB-3DA6-A894-D1668E2F2C92
+    value:           937C5DD2-0C26-36D2-AB3C-0DBF5353CCA6
   - target:          x86_64-maccatalyst
-    value:           4BDB0D3D-D4FB-3DA6-A894-D1668E2F2C92
+    value:           937C5DD2-0C26-36D2-AB3C-0DBF5353CCA6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F7B0AC55-723F-31BC-9AB9-3C416270BFDC
+    value:           72B136AD-1B19-34E3-A841-C6497626C8C8
   - target:          arm64e-maccatalyst
-    value:           F7B0AC55-723F-31BC-9AB9-3C416270BFDC
+    value:           72B136AD-1B19-34E3-A841-C6497626C8C8
 install-name:    '/System/Library/Frameworks/SoundAnalysis.framework/Versions/A/SoundAnalysis'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _SNErrorDomain, _SNSoundIdentifierApplause, _SNSoundIdentifierBabble, 
-                       _SNSoundIdentifierBeep, _SNSoundIdentifierBuzzer, _SNSoundIdentifierCatMeow, 
-                       _SNSoundIdentifierCheering, _SNSoundIdentifierDingBell, _SNSoundIdentifierDistressedBaby, 
-                       _SNSoundIdentifierDogBark, _SNSoundIdentifierDoorKnock, _SNSoundIdentifierDoorbell, 
-                       _SNSoundIdentifierFireAlarm, _SNSoundIdentifierLaughter, _SNSoundIdentifierMusic, 
-                       _SNSoundIdentifierShouting, _SNSoundIdentifierSmokeAlarm, 
-                       _SNSoundIdentifierSpeech, _SNVGGishFeatureEmbeddingCustomModelName, 
+    symbols:         [ _SNClassifierIdentifierVersion1, _SNErrorDomain, _SNSoundIdentifierApplause, 
+                       _SNSoundIdentifierBabble, _SNSoundIdentifierBeep, _SNSoundIdentifierBuzzer, 
+                       _SNSoundIdentifierCatMeow, _SNSoundIdentifierCheering, _SNSoundIdentifierDingBell, 
+                       _SNSoundIdentifierDistressedBaby, _SNSoundIdentifierDogBark, 
+                       _SNSoundIdentifierDoorKnock, _SNSoundIdentifierDoorbell, _SNSoundIdentifierFireAlarm, 
+                       _SNSoundIdentifierLaughter, _SNSoundIdentifierMusic, _SNSoundIdentifierShouting, 
+                       _SNSoundIdentifierSmokeAlarm, _SNSoundIdentifierSpeech, _SNSoundPrintAFeatureEmbeddingCustomModelName, 
+                       _SNSoundPrintKFeatureEmbeddingCustomModelName, _SNVGGishFeatureEmbeddingCustomModelName, 
                        _SNVGGishFrontEndProcessingCustomModelName ]
-    objc-classes:    [ SNAudioCorrelationResult, SNAudioFileAnalyzer, SNAudioStreamAnalyzer, 
-                       SNClassification, SNClassificationResult, SNClassifySoundRequest, 
-                       SNCopyFilesRequest, SNCorrelateAudioRequest, SNCreateFeaturePrintRequest, 
-                       SNDaemon, SNDeleteFilesRequest, SNDetectSignalThresholdRequest, 
-                       SNDetectSoundRequest, SNDetectSpeechUtteranceRequest, SNDetectionResult, 
-                       SNDiscoverFileServerRequest, SNEstimateSpeechEmotionRequest, 
-                       SNFeaturePrint, SNFileCopyingResult, SNFileDeletionResult, 
-                       SNFileListingResult, SNFileServerDiscoveryResult, SNFileServerInfo, 
-                       SNFileSystem, SNLKFSResult, SNListFilesRequest, SNMeasureLKFSRequest, 
-                       SNNullRequest, SNNullResult, SNResultsCollector, SNResultsPrinter, 
-                       SNSignalThresholdResult, SNSpeechEmotionResult, SNSpeechUtteranceResult, 
-                       SNSystemAudioAnalyzer ]
+    objc-classes:    [ SNAudioConfiguration, SNAudioCorrelationResult, SNAudioFileAnalyzer, 
+                       SNAudioStreamAnalyzer, SNClassification, SNClassificationResult, 
+                       SNClassifySoundRequest, SNCopyFilesRequest, SNCorrelateAudioRequest, 
+                       SNCreateFeaturePrintRequest, SNDaemon, SNDeleteFilesRequest, 
+                       SNDetectSignalThresholdRequest, SNDetectSoundRequest, SNDetectSpeechUtteranceRequest, 
+                       SNDetectVoiceTriggerRequest, SNDetectionResult, SNDiscoverFileServerRequest, 
+                       SNDistanceClassifier, SNEstimateSpeechEmotionRequest, SNFeaturePrint, 
+                       SNFileCopyingResult, SNFileDeletionResult, SNFileListingResult, 
+                       SNFileServerDiscoveryResult, SNFileServerInfo, SNFileSystem, 
+                       SNKShotFeaturizationResult, SNKShotFeaturizer, SNKShotSegment, 
+                       SNKShotSegmentationRequest, SNKShotSegmentationResult, SNLKFSResult, 
+                       SNListFilesRequest, SNMeasureLKFSRequest, SNNullRequest, SNNullResult, 
+                       SNResultsCollector, SNResultsPrinter, SNSignalThresholdResult, 
+                       SNSpeechEmotionResult, SNSpeechUtteranceResult, SNSystemAudioAnalyzer, 
+                       SNTimeDurationConstraint, SNVoiceTriggerCommand, SNVoiceTriggerResult ]
 ...

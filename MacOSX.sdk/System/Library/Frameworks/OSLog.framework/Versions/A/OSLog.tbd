@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A2EA6BD8-562E-3F13-8F77-70292DCBB6B6
+    value:           72D06DA2-5B50-3433-B423-4B6CA53EC20F
   - target:          x86_64-maccatalyst
-    value:           A2EA6BD8-562E-3F13-8F77-70292DCBB6B6
+    value:           72D06DA2-5B50-3433-B423-4B6CA53EC20F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C9C7A032-A344-3D88-A751-AD1204E48F56
+    value:           AD9C9AA0-875A-3C12-BA3D-988188F6B65D
   - target:          arm64e-maccatalyst
-    value:           C9C7A032-A344-3D88-A751-AD1204E48F56
+    value:           AD9C9AA0-875A-3C12-BA3D-988188F6B65D
 install-name:    '/System/Library/Frameworks/OSLog.framework/Versions/A/OSLog'
-current-version: 1277.100.21
+current-version: 1370
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -38,7 +38,7 @@ exports:
                        __timesync_db_dup, __timesync_db_open, __timesync_db_openat, 
                        __timesync_mach_timebase, __timesync_range_count, __timesync_range_create, 
                        __timesync_range_destroy, __timesync_repair, __timesync_validate, 
-                       __timesync_wall_time_to_continuous ]
+                       __timesync_wall_time_to_continuous, _convertEventProxyToEntry ]
     objc-classes:    [ OSLogEntry, OSLogEntryActivity, OSLogEntryBoundary, OSLogEntryLog, 
                        OSLogEntrySignpost, OSLogEnumerator, OSLogMessageComponent, 
                        OSLogPosition, OSLogStore ]

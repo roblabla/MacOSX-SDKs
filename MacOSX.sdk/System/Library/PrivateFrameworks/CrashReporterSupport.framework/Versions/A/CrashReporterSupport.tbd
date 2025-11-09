@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           357061C3-F26E-3F53-89AA-C9049309CC94
+    value:           7F405D9B-A5CB-3CB7-BBF6-5CEBA5E214BE
   - target:          x86_64-maccatalyst
-    value:           357061C3-F26E-3F53-89AA-C9049309CC94
+    value:           7F405D9B-A5CB-3CB7-BBF6-5CEBA5E214BE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D7F899CD-2BBA-3A61-B8E5-69792108A190
+    value:           CCABF3FE-3AB6-370C-A06F-A3E21A0B9358
   - target:          arm64e-maccatalyst
-    value:           D7F899CD-2BBA-3A61-B8E5-69792108A190
+    value:           CCABF3FE-3AB6-370C-A06F-A3E21A0B9358
 install-name:    '/System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport'
-current-version: 15053
+current-version: 15076.1
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -133,27 +133,29 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B58A2E5E-83C9-3DB4-98F6-0B0151DB18E4
+    value:           961CD57F-9D2B-3C52-8873-7C0A8A8DAE96
   - target:          x86_64-maccatalyst
-    value:           B58A2E5E-83C9-3DB4-98F6-0B0151DB18E4
+    value:           961CD57F-9D2B-3C52-8873-7C0A8A8DAE96
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E2B9D25D-3CEB-35FE-B8A5-677EBC88EC02
+    value:           CE795577-9237-3B50-AC6F-9743669F4EF1
   - target:          arm64e-maccatalyst
-    value:           E2B9D25D-3CEB-35FE-B8A5-677EBC88EC02
+    value:           CE795577-9237-3B50-AC6F-9743669F4EF1
 install-name:    '/System/Library/PrivateFrameworks/OSAnalytics.framework/Versions/A/OSAnalytics'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _OSADateFormat, _OSANSDateFormat, _OSASafeMoveItemAtURL, _OSASafeOpenReadOnly, 
-                       _OSASafeRemoveFileAtURL, _OSASanitizeOptionHomeDirectory, 
-                       _OSASanitizeOptionKeepFilename, _OSASanitizeOptionMountedVolume, 
-                       _OSASanitizeOptionNetworkVolume, _OSASanitizePath, _OSATransformOptionPersist, 
-                       _OSATransformOptionSymbolicate, _OSATransformOptionTracerGroup, 
-                       _OSATransformOptionTracerURL, _OSATransformResultError, _OSATransformResultFileURL, 
+    symbols:         [ _OSADateFormat, _OSANSDateFormat, _OSASafeMoveItemAtURL, _OSASafeOpen, 
+                       _OSASafeOpenReadOnly, _OSASafeOpenWriteOnly, _OSASafeRemoveFileAtURL, 
+                       _OSASanitizeOptionHomeDirectory, _OSASanitizeOptionKeepFilename, 
+                       _OSASanitizeOptionMountedVolume, _OSASanitizeOptionNetworkVolume, 
+                       _OSASanitizePath, _OSASyncCrashReporter, _OSATransformOptionFullReport, 
+                       _OSATransformOptionMetadata, _OSATransformOptionPersist, _OSATransformOptionSymbolicate, 
+                       _OSATransformOptionTracerGroup, _OSATransformOptionTracerURL, 
+                       _OSATransformResultError, _OSATransformResultFileURL, _OSATransformResultMetadata, 
                        _OSATransformResultRadars, _OSATransformResultReport, _OSATransformResultTracerURL, 
                        _OSAnalyticsVersionNumber, _OSAnalyticsVersionString, _SimulateCrash, 
                        _WriteJetsamMemoryReportWithIDAndPids, _WriteStackshotReport, 
@@ -163,23 +165,26 @@ exports:
                        _WriteStackshotReport_async, _WriteStackshotReport_stdc, _WriteSystemMemoryResetReport, 
                        _WriteSystemMemoryResetReportWithPids, _adsc_addScalarForKey, 
                        _adsc_pushDistrubtionForKey, _adsc_setScalarForKey, _casc_sendEvent, 
-                       _kOSALogMetadataAppBuild, _kOSALogMetadataAppName, _kOSALogMetadataAppVersion, 
-                       _kOSALogMetadataBugType, _kOSALogMetadataBundleID, _kOSALogMetadataIncidentID, 
-                       _kOSALogOptionAlternateMetadata, _kOSALogOptionAppDescription, 
-                       _kOSALogOptionCaptureTime, _kOSALogOptionCountKey, _kOSALogOptionCreateTmpFile, 
-                       _kOSALogOptionDialogDisplayed, _kOSALogOptionFileOwner, _kOSALogOptionMoveSourceFile, 
-                       _kOSALogOptionOverrideCountLimit, _kOSALogOptionOverrideFileExtension, 
-                       _kOSALogOptionOverrideFileName, _kOSALogOptionOverrideFilePrefix, 
-                       _kOSALogOptionOverridePath, _kOSALogOptionSignature, _kOSALogOptionSignatureHash, 
-                       _kOSALogOptionSubmissionPolicy, _kOSALogScanOptionExcludeRetired, 
-                       _kOSALogScanOptionIncludeOnlyRetired, _kOSALogScanOptionIncludeProxiesKey, 
+                       _kOSAIPSHeaderAppNameKey, _kOSALogMetadataAppBuild, _kOSALogMetadataAppName, 
+                       _kOSALogMetadataAppVersion, _kOSALogMetadataBugType, _kOSALogMetadataBundleID, 
+                       _kOSALogMetadataIncidentID, _kOSALogOptionAlternateMetadata, 
+                       _kOSALogOptionAppDescription, _kOSALogOptionCaptureTime, _kOSALogOptionCountKey, 
+                       _kOSALogOptionCreateTmpFile, _kOSALogOptionDialogDisplayed, 
+                       _kOSALogOptionFileOwner, _kOSALogOptionFileOwnerUID, _kOSALogOptionMoveSourceFile, 
+                       _kOSALogOptionObserverInfo, _kOSALogOptionOverrideCountLimit, 
+                       _kOSALogOptionOverrideFileExtension, _kOSALogOptionOverrideFileName, 
+                       _kOSALogOptionOverrideFilePrefix, _kOSALogOptionOverridePath, 
+                       _kOSALogOptionReopenPath, _kOSALogOptionRouting, _kOSALogOptionSignature, 
+                       _kOSALogOptionSignatureHash, _kOSALogOptionSubmissionPolicy, 
+                       _kOSALogOptionUrgent, _kOSALogScanOptionExcludeRetired, _kOSALogScanOptionIncludeOnlyRetired, 
+                       _kOSALogScanOptionIncludeOnlyUrgent, _kOSALogScanOptionIncludeProxiesKey, 
                        _kOSASubmissionDomain, _kOSASubmissionPolicyAlternate, _kPathOptionUntrusted, 
                        _logEventForAppleCare, _logForAppleCare, _logLineForAppleCare, 
                        _ns2xpc, _rollAppleCareLogs, _runCrashMoverService, _symbolicateSpeedTracer, 
                        _xpc2ns ]
-    objc-classes:    [ AWDClientHelpers, MTClientHelpers, OSABinaryImageCatalog, 
-                       OSABinaryImageSegment, OSAGPUEventReport, OSAJetsamReport, 
-                       OSALegacyXform, OSALog, OSAProxyConfiguration, OSAReport, 
+    objc-classes:    [ AWDClientHelpers, OSABinaryImageCatalog, OSABinaryImageSegment, 
+                       OSACrackShotReport, OSAGPUEventReport, OSAJetsamReport, OSALegacyXform, 
+                       OSALog, OSALogCounterObject, OSAProxyConfiguration, OSAReport, 
                        OSAStackShotReport, OSASymbolInfo, OSASystemConfiguration, 
                        OSATasking ]
     objc-ivars:      [ OSABinaryImageCatalog._absolute_segment, OSABinaryImageCatalog._kernel_cache_segment, 

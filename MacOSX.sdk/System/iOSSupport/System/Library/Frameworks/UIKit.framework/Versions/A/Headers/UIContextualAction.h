@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, UIContextualActionStyle) {
     UIContextualActionStyleDestructive
 } NS_SWIFT_NAME(UIContextualAction.Style) API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIContextualAction : NSObject
 
 + (instancetype)contextualActionWithStyle:(UIContextualActionStyle)style title:(nullable NSString *)title handler:(UIContextualActionHandler)handler;

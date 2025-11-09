@@ -1,7 +1,7 @@
 /*
     NSPersistentStoreCoordinator.h
     Core Data
-    Copyright (c) 2004-2020, Apple Inc.
+    Copyright (c) 2004-2021, Apple Inc.
     All rights reserved.
 */
 
@@ -212,7 +212,7 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
  */
 - (nullable __kindof NSPersistentStore *)addPersistentStoreWithType:(NSString *)storeType configuration:(nullable NSString *)configuration URL:(nullable NSURL *)storeURL options:(nullable NSDictionary *)options error:(NSError **)error;
 
-- (void)addPersistentStoreWithDescription:(NSPersistentStoreDescription *)storeDescription completionHandler:(void (^)(NSPersistentStoreDescription *, NSError * _Nullable))block API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
+- (void)addPersistentStoreWithDescription:(NSPersistentStoreDescription *)storeDescription completionHandler:(void (^)(NSPersistentStoreDescription *, NSError * _Nullable))block API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0)) NS_SWIFT_DISABLE_ASYNC;
 
 - (BOOL)removePersistentStore:(NSPersistentStore *)store error:(NSError **)error;
 
@@ -256,13 +256,13 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
         NSModelPathKey - path to the model file (this is resolved to the model.mom path contained in the support directory)
         NSObjectURIKey - URI of the object instance.
 */
-+ (NSDictionary *)elementsDerivedFromExternalRecordURL:(NSURL *)fileURL API_AVAILABLE(macosx(10.6)) API_UNAVAILABLE(ios);
+    + (NSDictionary *)elementsDerivedFromExternalRecordURL:(NSURL *)fileURL API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13)) API_UNAVAILABLE(ios);
 
 /* Creates and populates a store with the external records found at externalRecordsURL. The store is written to destinationURL using
     options and with type storeType. If storeIdentifier is nil, the records for a single store at externalRecordsURL at imported.
     externalRecordsURL must not exist as the store will be created from scratch (no appending to an existing store is allowed).
 */
-- (nullable NSPersistentStore *)importStoreWithIdentifier:(nullable NSString *)storeIdentifier fromExternalRecordsDirectory:(NSURL *)externalRecordsURL toURL:(NSURL *)destinationURL options:(nullable NSDictionary *)options withType:(NSString *)storeType error:(NSError **)error API_AVAILABLE(macosx(10.6)) API_UNAVAILABLE(ios);
+    - (nullable NSPersistentStore *)importStoreWithIdentifier:(nullable NSString *)storeIdentifier fromExternalRecordsDirectory:(NSURL *)externalRecordsURL toURL:(NSURL *)destinationURL options:(nullable NSDictionary *)options withType:(NSString *)storeType error:(NSError **)error API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13)) API_UNAVAILABLE(ios);
     
 /* Used for save as - performance may vary depending on the type of old and new store; the old store is usually removed from the coordinator by the migration operation, and therefore is no longer a useful reference after invoking this method 
 */

@@ -36,7 +36,9 @@ ACCOUNTS_EXTERN NSString * const ACTencentWeiboAppIdKey API_DEPRECATED("Use Tenc
 // or accessing the accountType property for a particular account object. They may also be used to find
 // all the accounts of a particular type using [ACAccountStore accountsWithAccountType:]
 
-API_AVAILABLE(ios(5.0), macos(10.8))
+
+API_DEPRECATED("Use appropriate non-Apple SDK corresponding to the type of account you want to reference instead", ios(6.0, 15.0), macos(10.8, 12.0))
+
 @interface ACAccountType : NSObject
 
 // A human readable description of the account type.

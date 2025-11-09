@@ -1,24 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0B460F39-F1F0-3D44-82A5-C184F80C1B05
+    value:           EC0B576B-34E2-39E9-A68E-C8AD4B839294
   - target:          x86_64-maccatalyst
-    value:           0B460F39-F1F0-3D44-82A5-C184F80C1B05
+    value:           EC0B576B-34E2-39E9-A68E-C8AD4B839294
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           71737317-C39B-3847-AF9D-88739F04EAB8
+    value:           3793FB84-48AF-377B-AB73-AE771764E2CC
   - target:          arm64e-maccatalyst
-    value:           71737317-C39B-3847-AF9D-88739F04EAB8
+    value:           3793FB84-48AF-377B-AB73-AE771764E2CC
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGFXShared.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]
     symbols:         [ _gfxAllocateTextureLevel, _gfxAnnotateAddDataSource, _gfxAnnotateBuffer, 
                        _gfxAnnotateRemoveDataSource, _gfxAnnotateTexture, _gfxClearSyncObjectsInHash, 
                        _gfxCompareSharedState, _gfxCreateGLSyncFromCLEvent, _gfxCreatePluginBuffer, 

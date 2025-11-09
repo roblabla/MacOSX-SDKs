@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9A2B8679-6205-3349-9EA0-541CF2182639
+    value:           6040F2D1-EEA0-3D38-8500-CAC4A6BF01D3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ECE3E722-2FDD-3039-87BF-5FFF4550C349
+    value:           1CD107BD-3888-3EA8-B203-219195CEFBEC
 install-name:    '/System/Library/Frameworks/NotificationCenter.framework/Versions/A/NotificationCenter'
-current-version: 1108.40.7
+current-version: 1165.1
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _NCMaterialComputedStyle, _NCMaterialControlColor, _NCMaterialGetCustomAppearance, 
@@ -25,10 +25,8 @@ exports:
                        _NCViewLayoutMaxHeight, _NCViewLayoutMaxWidth, _NCViewLayoutMinHeight, 
                        _NCViewLayoutMinWidth, _NCViewLayoutSubview, _NCViewLayoutSubviewWithInsets, 
                        _NCViewLayoutSubviewWithInsetsAndSize, _NCViewLayoutTrailingWithPriority, 
-                       _NCViewLayoutWidthWithPriority, __NCWeatherDebugStringForConditions, 
-                       __NCWeatherImageForConditions, __NCWeatherImageSunrise, __NCWeatherImageSunset, 
-                       _kNCRemotePlugInExtensionInvalidatedNotification, _kNCRemotePlugInManagerNotificationExtension, 
-                       _kNCRemotePlugInManagerWidgetExtension ]
+                       _NCViewLayoutWidthWithPriority, _kNCRemotePlugInExtensionInvalidatedNotification, 
+                       _kNCRemotePlugInManagerNotificationExtension, _kNCRemotePlugInManagerWidgetExtension ]
     objc-classes:    [ NCMaterialLayer, NCNotificationExtensionContext, NCNotificationExtensionProvider, 
                        NCRemoteNotificationPlugIn, NCRemotePlugIn, NCRemotePlugInManager, 
                        NCRemoteViewHostViewController, NCTexturedView, NCVerticalListController, 

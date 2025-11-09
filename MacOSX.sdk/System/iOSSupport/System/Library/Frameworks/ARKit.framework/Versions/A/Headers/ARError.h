@@ -2,7 +2,7 @@
 //  ARError.h
 //  ARKit
 //
-//  Copyright © 2016-2017 Apple Inc. All rights reserved.
+//  Copyright © 2016-2021 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -53,9 +53,6 @@ typedef NS_ERROR_ENUM(ARErrorDomain, ARErrorCode) {
     
     /** Invalid configuration. */
     ARErrorCodeInvalidConfiguration          API_AVAILABLE(ios(12.0)) = 303,
-    
-    /** Collaboration data is not available. */
-    ARErrorCodeCollaborationDataUnavailable  API_DEPRECATED_WITH_REPLACEMENT("ARErrorCodeInvalidCollaborationData", ios(13.0, 13.2)) = 304,
 
     /** Invalid collaboration data.*/
     ARErrorCodeInvalidCollaborationData      API_AVAILABLE(ios(13.2)) = 304,
@@ -71,6 +68,8 @@ typedef NS_ERROR_ENUM(ARErrorDomain, ARErrorCode) {
 
     /** Generic request failure. */
     ARErrorCodeRequestFailed                 API_AVAILABLE(ios(14.0)) = 501,
+
+    
 };
 
 NS_ASSUME_NONNULL_END

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           00784F09-BC27-30FE-8F9B-83C052EEA40C
+    value:           EF7409F7-5EF3-3CE0-BC07-46F78D97200C
   - target:          x86_64-maccatalyst
-    value:           00784F09-BC27-30FE-8F9B-83C052EEA40C
+    value:           EF7409F7-5EF3-3CE0-BC07-46F78D97200C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5943FA73-CF64-33A1-9561-F6530304CB98
+    value:           923140C0-3CA1-3D71-AD7E-C6A0285FB6CA
   - target:          arm64e-maccatalyst
-    value:           5943FA73-CF64-33A1-9561-F6530304CB98
+    value:           923140C0-3CA1-3D71-AD7E-C6A0285FB6CA
 install-name:    '/System/Library/PrivateFrameworks/AudioSession.framework/libSessionUtility.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -86,17 +86,19 @@ exports:
                        __ZN2as21AvailableStreamFormatC2EOS0_, __ZN2as21AvailableStreamFormatC2ERKS0_, 
                        __ZN2as21AvailableStreamFormatC2Ev, __ZN2as21AvailableStreamFormataSEOS0_, 
                        __ZN2as21AvailableStreamFormataSERKS0_, __ZN2as21public_error_category8instanceEv, 
-                       __ZN2as25smipc_Types_serialization17readAVAudioFormatERKNS_12StreamFormatE, 
+                       __ZN2as24mxsession_error_category8instanceEv, __ZN2as25smipc_Types_serialization17readAVAudioFormatERKNS_12StreamFormatE, 
                        __ZN2as25smipc_Types_serialization17readChannelLayoutERKNS_13ChannelLayoutERNSt3__110unique_ptrI18AudioChannelLayoutNS4_8functionIFvPS6_EEEEE, 
                        __ZN2as25smipc_Types_serialization18writeAVAudioFormatEP13AVAudioFormatdRNS_12StreamFormatE, 
                        __ZN2as25smipc_Types_serialization18writeChannelLayoutERK18AudioChannelLayoutRNS_13ChannelLayoutE, 
-                       __ZN2as25smipc_Types_serialization20writeRouteIdentifierEN4aura15IOTopologyClassENS1_16IOTopologySourceERKN5caulk7xstringERNS_15RouteIdentifierE, 
                        __ZN2as25smipc_Types_serialization22discreteRatesFromRangeERKNS_15SampleRateRangeE, 
-                       __ZN2as25smipc_Types_serialization24writeRouteIdentifierCoreEN4aura16IOTopologySourceERKN5caulk7xstringERNS_19RouteIdentifierCoreE, 
+                       __ZN2as25smipc_Types_serialization23writeRouteIdentifierOldEN4aura15IOTopologyClassENS1_16IOTopologySourceERKN5caulk7xstringERNS_15RouteIdentifierE, 
+                       __ZN2as25smipc_Types_serialization24writeRouteIdentifierCoreE21AuRA_IOTopologySourceRKN5caulk7xstringERNS_19RouteIdentifierCoreE, 
                        __ZN2as25smipc_Types_serialization27readAvailableAVAudioFormatsERKNSt3__16vectorINS1_10unique_ptrINS_21AvailableStreamFormatENS1_14default_deleteIS4_EEEENS1_9allocatorIS7_EEEE, 
+                       __ZN2as25smipc_Types_serialization27writeRouteIdentifierCoreOldEN4aura16IOTopologySourceERKN5caulk7xstringERNS_19RouteIdentifierCoreE, 
                        __ZN2as25smipc_Types_serialization8readASBDERKNS_12StreamFormatER27AudioStreamBasicDescriptionRNSt3__110unique_ptrI18AudioChannelLayoutNS6_8functionIFvPS8_EEEEE, 
-                       __ZN2as25smipc_Types_serialization9writeASBDERK27AudioStreamBasicDescriptiondRK18AudioChannelLayoutRNS_12StreamFormatE, 
+                       __ZN2as25smipc_Types_serialization9writeASBDERK27AudioStreamBasicDescriptiondPK18AudioChannelLayoutRNS_12StreamFormatE, 
                        __ZN2as26smipc_Server_types_utility18updateDefaultRouteERKNS_15RouteIdentifierERNS_6server19HardwareSystemStateE, 
+                       __ZN2as28GetServerXPCListenerEndpointEv, __ZN2as28SetServerXPCListenerEndpointEP21NSXPCListenerEndpoint, 
                        __ZN2as6client11StreamPrefs16default_instanceEv, __ZN2as6client11StreamPrefs17clearStreamFormatEv, 
                        __ZN2as6client11StreamPrefs19mutableStreamFormatEv, __ZN2as6client11StreamPrefs5clearEv, 
                        __ZN2as6client11StreamPrefs8readFromERN2PB6ReaderE, __ZN2as6client11StreamPrefs9copy_fromERKS1_, 
@@ -399,7 +401,8 @@ exports:
                        __ZNK2as19RouteIdentifierCoreeqERKS0_, __ZNK2as21AvailableStreamFormat10formatTextERN2PB13TextFormatterEPKc, 
                        __ZNK2as21AvailableStreamFormat13isInitializedEv, __ZNK2as21AvailableStreamFormat6formatEv, 
                        __ZNK2as21AvailableStreamFormat7writeToERN2PB6WriterE, __ZNK2as21AvailableStreamFormateqERKS0_, 
-                       __ZNK2as21public_error_category7messageEi, __ZNK2as6client11StreamPrefs10formatTextERN2PB13TextFormatterEPKc, 
+                       __ZNK2as21public_error_category7messageEi, __ZNK2as24mxsession_error_category7messageEi, 
+                       __ZNK2as6client11StreamPrefs10formatTextERN2PB13TextFormatterEPKc, 
                        __ZNK2as6client11StreamPrefs12streamFormatEv, __ZNK2as6client11StreamPrefs13isInitializedEv, 
                        __ZNK2as6client11StreamPrefs7writeToERN2PB6WriterE, __ZNK2as6client11StreamPrefseqERKS1_, 
                        __ZNK2as6client12SessionState10formatTextERN2PB13TextFormatterEPKc, 
@@ -498,22 +501,22 @@ exports:
                        __ZTVN2as15SampleRateRangeE, __ZTVN2as17ActivationContextE, 
                        __ZTVN2as18ChannelDescriptionE, __ZTVN2as19RouteIdentifierCoreE, 
                        __ZTVN2as21AvailableStreamFormatE, __ZTVN2as21public_error_categoryE, 
-                       __ZTVN2as6client11StreamPrefsE, __ZTVN2as6client12SessionStateE, 
-                       __ZTVN2as6client14TurnByTurnPrefE, __ZTVN2as6client16PolarPatternPrefE, 
-                       __ZTVN2as6client17IOControllerPrefsE, __ZTVN2as6client9PortPrefsE, 
-                       __ZTVN2as6server11VirtualPortE, __ZTVN2as6server12ControlValueE, 
-                       __ZTVN2as6server12Device_ClockE, __ZTVN2as6server12HardwareInfoE, 
-                       __ZTVN2as6server13ChangedObjectE, __ZTVN2as6server13IOStreamStateE, 
-                       __ZTVN2as6server14PortInvariantsE, __ZTVN2as6server15ControlAndValueE, 
-                       __ZTVN2as6server15PlatformSupportE, __ZTVN2as6server15VirtualPortListE, 
-                       __ZTVN2as6server16EligiblePortListE, __ZTVN2as6server16SessionFullStateE, 
-                       __ZTVN2as6server16SessionTokenListE, __ZTVN2as6server17IOControllerStateE, 
-                       __ZTVN2as6server17ObjectDescriptionE, __ZTVN2as6server18SessionServerStateE, 
-                       __ZTVN2as6server19ConfigChangeSummaryE, __ZTVN2as6server19HardwareSystemStateE, 
-                       __ZTVN2as6server19SelectorControlItemE, __ZTVN2as6server20SessionUpdateSummaryE, 
-                       __ZTVN2as6server21CustomPropertyAddressE, __ZTVN2as6server23MicrophoneConfigurationE, 
-                       __ZTVN2as6server3BoxE, __ZTVN2as6server4PortE, __ZTVN2as6server5ClockE, 
-                       __ZTVN2as6server6DeviceE, __ZTVN2as6server6DriverE, __ZTVN2as6server7ControlE, 
-                       __ZTVN2as6server8HWStreamE, _sessionManagerXPCCallbackInterface, 
-                       _sessionManagerXPCInterface ]
+                       __ZTVN2as24mxsession_error_categoryE, __ZTVN2as6client11StreamPrefsE, 
+                       __ZTVN2as6client12SessionStateE, __ZTVN2as6client14TurnByTurnPrefE, 
+                       __ZTVN2as6client16PolarPatternPrefE, __ZTVN2as6client17IOControllerPrefsE, 
+                       __ZTVN2as6client9PortPrefsE, __ZTVN2as6server11VirtualPortE, 
+                       __ZTVN2as6server12ControlValueE, __ZTVN2as6server12Device_ClockE, 
+                       __ZTVN2as6server12HardwareInfoE, __ZTVN2as6server13ChangedObjectE, 
+                       __ZTVN2as6server13IOStreamStateE, __ZTVN2as6server14PortInvariantsE, 
+                       __ZTVN2as6server15ControlAndValueE, __ZTVN2as6server15PlatformSupportE, 
+                       __ZTVN2as6server15VirtualPortListE, __ZTVN2as6server16EligiblePortListE, 
+                       __ZTVN2as6server16SessionFullStateE, __ZTVN2as6server16SessionTokenListE, 
+                       __ZTVN2as6server17IOControllerStateE, __ZTVN2as6server17ObjectDescriptionE, 
+                       __ZTVN2as6server18SessionServerStateE, __ZTVN2as6server19ConfigChangeSummaryE, 
+                       __ZTVN2as6server19HardwareSystemStateE, __ZTVN2as6server19SelectorControlItemE, 
+                       __ZTVN2as6server20SessionUpdateSummaryE, __ZTVN2as6server21CustomPropertyAddressE, 
+                       __ZTVN2as6server23MicrophoneConfigurationE, __ZTVN2as6server3BoxE, 
+                       __ZTVN2as6server4PortE, __ZTVN2as6server5ClockE, __ZTVN2as6server6DeviceE, 
+                       __ZTVN2as6server6DriverE, __ZTVN2as6server7ControlE, __ZTVN2as6server8HWStreamE, 
+                       _sessionManagerXPCCallbackInterface, _sessionManagerXPCInterface ]
 ...

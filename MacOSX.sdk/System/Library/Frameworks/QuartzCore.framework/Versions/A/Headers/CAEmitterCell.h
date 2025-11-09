@@ -1,6 +1,6 @@
 /* CoreAnimation - CAEmitterCell.h
 
-   Copyright (c) 2007-2018, Apple Inc.
+   Copyright (c) 2007-2021, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>

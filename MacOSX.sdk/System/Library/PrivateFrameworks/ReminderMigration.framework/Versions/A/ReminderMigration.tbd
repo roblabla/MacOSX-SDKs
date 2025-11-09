@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F1777404-3908-31CF-9D5E-D0DD7D16E957
+    value:           38D0B365-2AC4-39D6-8332-DEB76FDA082C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1DEBFCB5-4233-3948-B9FB-04FAA7C7025A
+    value:           AD4D5537-4F29-378C-A8DD-F6E1659882DC
 install-name:    '/System/Library/PrivateFrameworks/ReminderMigration.framework/Versions/A/ReminderMigration'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

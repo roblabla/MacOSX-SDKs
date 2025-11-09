@@ -29,7 +29,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos,tvos) @interface UIDocumentBrow
 
 @property (nonatomic, strong, nullable) UIImage *image;
 
-/// Allows clients to restrict the action to only a specific set of content types. Default: [kUTTypeItem]
+/// Allows clients to restrict the action to only a specific set of content types. Default: [UTTypeItem.identifier]
 @property (nonatomic, copy) NSArray<NSString*> *supportedContentTypes;
 
 /// If NO, the action is only available, if there is only one item selected. Default: YES.

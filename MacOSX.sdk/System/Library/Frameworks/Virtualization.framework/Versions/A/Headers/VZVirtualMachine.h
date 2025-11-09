@@ -2,13 +2,14 @@
 //  VZVirtualMachine.h
 //  Virtualization
 //
-//  Copyright © 2019-2020 Apple Inc. All rights reserved.
+//  Copyright © 2019-2021 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class VZDirectorySharingDevice;
 @class VZMemoryBalloonDevice;
 @class VZSocketDevice;
 @class VZVirtualMachineConfiguration;
@@ -38,6 +39,10 @@ typedef NS_ENUM(NSInteger, VZVirtualMachineState) {
 
     /*! The virtual machine is being resumed. This is the intermediate state between VZVirtualMachineStatePaused and VZVirtualMachineStateRunning. */
     VZVirtualMachineStateResuming,
+
+    /*! The virtual machine is being stopped. This is the intermediate state between VZVirtualMachineStateRunning and VZVirtualMachineStateStop. */
+    VZVirtualMachineStateStopping API_AVAILABLE(macos(12.0)),
+
 } NS_SWIFT_NAME(VZVirtualMachine.State) API_AVAILABLE(macos(11.0));
 
 /*!
@@ -50,8 +55,12 @@ typedef NS_ENUM(NSInteger, VZVirtualMachineState) {
     The definition of a virtual machine starts with its configuration. This is done by setting up a VZVirtualMachineConfiguration object.
     Once configured, the virtual machine can be started with [VZVirtualMachine startWithCompletionHandler:].
 
+    To install macOS on a virtual machine, configure a new virtual machine with a suitable VZMacPlatformConfiguration, then use a VZMacOSInstaller
+    to install the restore image on it.
+
     Creating a virtual machine using the Virtualization framework requires the app to have the "com.apple.security.virtualization" entitlement.
  @seealso VZVirtualMachineConfiguration
+ @seealso VZMacOSInstaller
 */
 VZ_EXPORT API_AVAILABLE(macos(11.0))
 @interface VZVirtualMachine : NSObject
@@ -96,21 +105,28 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 @property (nullable, weak) id <VZVirtualMachineDelegate> delegate;
 
 /*!
- @abstract Return true if the machine is in a state that can be started.
+ @abstract Return YES if the machine is in a state that can be started.
  @see -[VZVirtualMachine startWithCompletionHandler:].
  @see -[VZVirtualMachine state]
  */
 @property (readonly) BOOL canStart;
 
 /*!
- @abstract Return true if the machine is in a state that can be paused.
+ @abstract Return YES if the machine is in a state that can be stopped.
+ @see -[VZVirtualMachine stopWithCompletionHandler:]
+ @see -[VZVirtualMachine state]
+ */
+@property (readonly) BOOL canStop API_AVAILABLE(macos(12.0));
+
+/*!
+ @abstract Return YES if the machine is in a state that can be paused.
  @see -[VZVirtualMachine pauseWithCompletionHandler:]
  @see -[VZVirtualMachine state]
  */
 @property (readonly) BOOL canPause;
 
 /*!
- @abstract Return true if the machine is in a state that can be resumed.
+ @abstract Return YES if the machine is in a state that can be resumed.
  @see -[VZVirtualMachine resumeWithCompletionHandler:]
  @see -[VZVirtualMachine state]
  */
@@ -122,6 +138,13 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @see -[VZVirtualMachine state]
  */
 @property (readonly) BOOL canRequestStop;
+
+/*!
+ @abstract Return the list of directory sharing devices configured on this virtual machine. Return an empty array if no directory sharing device is configured.
+ @see VZVirtioFileSystemDeviceConfiguration
+ @see VZVirtualMachineConfiguration
+ */
+@property (readonly, copy) NSArray<VZDirectorySharingDevice *> *directorySharingDevices API_AVAILABLE(macos(12.0));
 
 /*!
  @abstract Return the list of memory balloon devices configured on this virtual machine. Return an empty array if no memory balloon device is configured.
@@ -142,34 +165,47 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @discussion
     Start a virtual machine that is in either Stopped or Error state.
  @param completionHandler Block called after the virtual machine has been successfully started or on error.
-    The error parameter passed to the block is null if the start was successful.
+    The error parameter passed to the block is nil if the start was successful.
  */
-- (void)startWithCompletionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_REFINED_FOR_SWIFT;
+- (void)startWithCompletionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(start());
+
+/*!
+ @abstract Stop a virtual machine.
+ @discussion
+    Stop a virtual machine that is in either Running or Paused state.
+ @param completionHandler Block called after the virtual machine has been successfully stopped or on error.
+    The error parameter passed to the block is nil if the stop was successful.
+ @discussion This is a destructive operation. It stops the virtual machine without giving the guest a chance to stop cleanly.
+ @seealso -[VZVirtualMachine requestStopWithError:]
+ */
+- (void)stopWithCompletionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler API_AVAILABLE(macos(12.0));
 
 /*!
  @abstract Pause a virtual machine.
  @discussion
     Pause a virtual machine that is in Running state.
  @param completionHandler Block called after the virtual machine has been successfully paused or on error.
-    The error parameter passed to the block is null if the start was successful.
+    The error parameter passed to the block is nil if the pause was successful.
  */
-- (void)pauseWithCompletionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_REFINED_FOR_SWIFT;
+- (void)pauseWithCompletionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(pause());
 
 /*!
  @abstract Resume a virtual machine.
  @discussion
     Resume a virtual machine that is in the Paused state.
  @param completionHandler Block called after the virtual machine has been successfully resumed or on error.
-    The error parameter passed to the block is null if the resumption was successful.
+    The error parameter passed to the block is nil if the resumption was successful.
  */
-- (void)resumeWithCompletionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_REFINED_FOR_SWIFT;
+- (void)resumeWithCompletionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(resume());
 
 /*!
  @abstract Request that the guest turns itself off.
  @param error If not nil, assigned with the error if the request failed.
  @return YES if the request was made successfully.
+ @discussion The -[VZVirtualMachineDelegate guestDidStopVirtualMachine:] delegate method is invoked when the guest has turned itself off.
+ @seealso -[VZVirtualMachineDelegate guestDidStopVirtualMachine:].
  */
-- (BOOL)requestStopWithError:(NSError * _Nullable *)error;
+- (BOOL)requestStopWithError:(NSError **)error;
 
 @end
 

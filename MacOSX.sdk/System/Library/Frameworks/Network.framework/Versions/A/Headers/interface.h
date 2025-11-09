@@ -75,6 +75,40 @@ nw_interface_type_t
 nw_interface_get_type(nw_interface_t interface);
 
 /*!
+ * @typedef nw_interface_radio_type_t
+ * @abstract
+ *		Interface radio types represent the radio technology for a network link.
+ */
+typedef enum {
+	nw_interface_radio_type_unknown = 0,
+	nw_interface_radio_type_wifi_b = 1,
+	nw_interface_radio_type_wifi_a = 2,
+	nw_interface_radio_type_wifi_g = 3,
+	nw_interface_radio_type_wifi_n = 4,
+	nw_interface_radio_type_wifi_ac = 5,
+	nw_interface_radio_type_wifi_ax = 6,
+
+	// 4G LTE
+	nw_interface_radio_type_cell_lte = 0x80,
+	// 5G Dual LTE & New Radio Sub6
+	nw_interface_radio_type_cell_endc_sub6 = 0x81,
+	// 5G Dual LTE & New Radio mmWave
+	nw_interface_radio_type_cell_endc_mmw = 0x82,
+	// 5G Stand Alone New Radio Sub6
+	nw_interface_radio_type_cell_nr_sa_sub6 = 0x83,
+	// 5G Stand Alone New Radio mmWave
+	nw_interface_radio_type_cell_nr_sa_mmw = 0x84,
+	// 3G WCDMA
+	nw_interface_radio_type_cell_wcdma = 0x85,
+	// 2G GSM
+	nw_interface_radio_type_cell_gsm = 0x86,
+	// 1x data
+	nw_interface_radio_type_cell_cdma = 0x87,
+	// HDR data
+	nw_interface_radio_type_cell_evdo = 0x88,
+} nw_interface_radio_type_t;
+
+/*!
  * @function nw_interface_get_name
  *
  * @abstract

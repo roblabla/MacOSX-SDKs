@@ -28,7 +28,7 @@
 	  #define CFN_EXPORT __declspec(dllimport) extern
  #endif
 #else
-	#define CFN_EXPORT extern
+	#define CFN_EXPORT extern __attribute__((__visibility__("default")))
 #endif
 
 #endif //__CFNETWORK_DEFS_H_

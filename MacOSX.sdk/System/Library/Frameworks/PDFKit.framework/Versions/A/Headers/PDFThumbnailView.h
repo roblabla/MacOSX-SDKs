@@ -23,17 +23,13 @@ typedef NS_ENUM(NSInteger, PDFThumbnailLayoutMode)
 
 #endif
 
-@class PDFView, PDFPage, PDFThumbnailViewPrivate;
+@class PDFView, PDFPage;
 
 // Notification when PDFDocument is modified.
 PDFKIT_EXTERN NSString* const PDFThumbnailViewDocumentEditedNotification PDFKIT_AVAILABLE(10_4, 11_0);
 
 PDFKIT_CLASS_AVAILABLE(10_5, 11_0)
 @interface PDFThumbnailView : PDFKitPlatformView <NSCoding>
-{
-@private
-    PDFThumbnailViewPrivate *_private;
-}
 
 // PDFView associated with the thumbnail view.
 @property (nonatomic, weak, nullable) PDFView *PDFView;

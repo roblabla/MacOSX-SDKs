@@ -1,7 +1,7 @@
 /*
     NSPathCell.h
     Application Kit
-    Copyright (c) 2005-2019, Apple Inc.
+    Copyright (c) 2005-2021, Apple Inc.
     All rights reserved.
 */
 

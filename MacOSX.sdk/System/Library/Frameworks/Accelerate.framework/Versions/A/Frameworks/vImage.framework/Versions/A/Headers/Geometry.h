@@ -445,6 +445,45 @@ vImageHorizontalShear_CbCr16U(
                               vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
 API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
+VIMAGE_PF vImage_Error
+vImageHorizontalShearD_CbCr16U(
+                              const vImage_Buffer *src,
+                              const vImage_Buffer *dest,
+                              vImagePixelCount srcOffsetToROI_X,
+                              vImagePixelCount srcOffsetToROI_Y,
+                              double xTranslate,
+                              double shearSlope,
+                              ResamplingFilter filter,
+                              const Pixel_16U16U backColor,
+                              vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+VIMAGE_PF vImage_Error
+vImageHorizontalShear_CbCr16S(
+                              const vImage_Buffer *src,
+                              const vImage_Buffer *dest,
+                              vImagePixelCount srcOffsetToROI_X,
+                              vImagePixelCount srcOffsetToROI_Y,
+                              float xTranslate,
+                              float shearSlope,
+                              ResamplingFilter filter,
+                              const Pixel_16S16S backColor,
+                              vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+VIMAGE_PF vImage_Error
+vImageHorizontalShearD_CbCr16S(
+                              const vImage_Buffer *src,
+                              const vImage_Buffer *dest,
+                              vImagePixelCount srcOffsetToROI_X,
+                              vImagePixelCount srcOffsetToROI_Y,
+                              double xTranslate,
+                              double shearSlope,
+                              ResamplingFilter filter,
+                              const Pixel_16S16S backColor,
+                              vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
 
 VIMAGE_PF vImage_Error
 vImageVerticalShear_CbCr8(
@@ -471,6 +510,45 @@ vImageVerticalShear_CbCr16U(
                             const Pixel_16U16U backColor,
                             vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
 API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+
+VIMAGE_PF vImage_Error
+vImageVerticalShearD_CbCr16U(
+                            const vImage_Buffer *src,
+                            const vImage_Buffer *dest,
+                            vImagePixelCount srcOffsetToROI_X,
+                            vImagePixelCount srcOffsetToROI_Y,
+                            double yTranslate,
+                            double shearSlope,
+                            ResamplingFilter filter,
+                            const Pixel_16U16U backColor,
+                            vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+VIMAGE_PF vImage_Error
+vImageVerticalShear_CbCr16S(
+                            const vImage_Buffer *src,
+                            const vImage_Buffer *dest,
+                            vImagePixelCount srcOffsetToROI_X,
+                            vImagePixelCount srcOffsetToROI_Y,
+                            float yTranslate,
+                            float shearSlope,
+                            ResamplingFilter filter,
+                            const Pixel_16S16S backColor,
+                            vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+VIMAGE_PF vImage_Error
+vImageVerticalShearD_CbCr16S(
+                            const vImage_Buffer *src,
+                            const vImage_Buffer *dest,
+                            vImagePixelCount srcOffsetToROI_X,
+                            vImagePixelCount srcOffsetToROI_Y,
+                            double yTranslate,
+                            double shearSlope,
+                            ResamplingFilter filter,
+                            const Pixel_16S16S backColor,
+                            vImage_Flags flags ) VIMAGE_NON_NULL(1,2)
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 
 VIMAGE_PF vImage_Error
 vImageHorizontalShear_XRGB2101010W(

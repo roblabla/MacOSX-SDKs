@@ -50,6 +50,12 @@ NS_SWIFT_NAME(SKOverlay.AppConfiguration)
 /// The provider token for the developer that created the app being presented.
 @property (nonatomic, retain, nullable) NSString *providerToken;
 
+/// An optional identifier for an app's custom product page.
+@property (nonatomic, retain, nullable) NSString *customProductPageIdentifier API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
+
+/// An optional extra parameter for specifying the version of your app that will be shown to the user.
+@property (nonatomic, retain, nullable) NSString *latestReleaseID API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
+
 /// The position an overlay will show at on screen.
 @property (nonatomic) SKOverlayPosition position;
 
@@ -81,6 +87,12 @@ NS_SWIFT_NAME(SKOverlay.AppClipConfiguration)
 
 /// The provider token for the developer that created the app being presented.
 @property (nonatomic, retain, nullable) NSString *providerToken;
+
+/// An optional identifier for a parent app's custom product page.
+@property (nonatomic, retain, nullable) NSString *customProductPageIdentifier API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
+
+/// An optional extra parameter for specifying the version of your app that will be shown to the user.
+@property (nonatomic, retain, nullable) NSString *latestReleaseID API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
 
 /// The position an overlay will show at on screen.
 @property (nonatomic) SKOverlayPosition position;

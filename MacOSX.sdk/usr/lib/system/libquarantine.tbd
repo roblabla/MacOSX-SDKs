@@ -4,45 +4,37 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FABCD375-2FD7-3FF5-9A28-452D8A323D3E
+    value:           F97DC960-CC0A-3214-9AE9-C860FBAC4C96
   - target:          x86_64-maccatalyst
-    value:           FABCD375-2FD7-3FF5-9A28-452D8A323D3E
+    value:           F97DC960-CC0A-3214-9AE9-C860FBAC4C96
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B6015A7E-5A34-36E1-A075-E372C6738E16
+    value:           228E3C78-358A-32A5-9933-B8B9DA4C334A
   - target:          arm64e-maccatalyst
-    value:           B6015A7E-5A34-36E1-A075-E372C6738E16
+    value:           228E3C78-358A-32A5-9933-B8B9DA4C334A
 install-name:    '/usr/lib/system/libquarantine.dylib'
-current-version: 119.40.2
+current-version: 129
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ ___esp_check, ___esp_check_ns, ___esp_enabled, ___esp_notify, 
-                       ___esp_notify_ns, ___libquarantineVersionNumber, ___libquarantineVersionString, 
-                       ___qtn_syscall_quarantine_getinfo_fd, ___qtn_syscall_quarantine_getinfo_mount_point, 
-                       ___qtn_syscall_quarantine_getinfo_path, ___qtn_syscall_quarantine_getprocinfo, 
-                       ___qtn_syscall_quarantine_setinfo_fd, ___qtn_syscall_quarantine_setinfo_mount_point, 
-                       ___qtn_syscall_quarantine_setinfo_path, ___qtn_syscall_quarantine_setprocinfo, 
-                       ___qtn_syscall_responsibility_get, ___qtn_syscall_responsibility_get2, 
-                       ___qtn_syscall_responsibility_get3, ___qtn_syscall_responsibility_set, 
-                       ___qtn_syscall_responsibility_set_audittoken_for_caller, ___qtn_syscall_responsibility_set_audittoken_for_self, 
-                       ___qtn_syscall_responsibility_set_caller_for_caller, ___qtn_syscall_responsibility_set_hosted_path, 
-                       __qtn_error, __qtn_file_alloc, __qtn_file_apply_to_fd, __qtn_file_apply_to_mount_point, 
-                       __qtn_file_apply_to_path, __qtn_file_clone, __qtn_file_free, 
-                       __qtn_file_get_flags, __qtn_file_get_identifier, __qtn_file_get_metadata, 
-                       __qtn_file_get_metadata_size, __qtn_file_get_timestamp, __qtn_file_init, 
-                       __qtn_file_init_with_data, __qtn_file_init_with_fd, __qtn_file_init_with_mount_point, 
-                       __qtn_file_init_with_path, __qtn_file_set_flags, __qtn_file_set_identifier, 
-                       __qtn_file_set_metadata, __qtn_file_set_timestamp, __qtn_file_to_data, 
-                       __qtn_label_name, __qtn_proc_alloc, __qtn_proc_apply_to_self, 
-                       __qtn_proc_clone, __qtn_proc_free, __qtn_proc_get_flags, __qtn_proc_get_identifier, 
+                       ___esp_notify_ns, __qtn_error, __qtn_file_alloc, __qtn_file_apply_to_fd, 
+                       __qtn_file_apply_to_mount_point, __qtn_file_apply_to_path, 
+                       __qtn_file_clone, __qtn_file_free, __qtn_file_get_flags, __qtn_file_get_identifier, 
+                       __qtn_file_get_metadata, __qtn_file_get_metadata_size, __qtn_file_get_timestamp, 
+                       __qtn_file_init, __qtn_file_init_with_data, __qtn_file_init_with_fd, 
+                       __qtn_file_init_with_mount_point, __qtn_file_init_with_path, 
+                       __qtn_file_set_flags, __qtn_file_set_identifier, __qtn_file_set_metadata, 
+                       __qtn_file_set_timestamp, __qtn_file_to_data, __qtn_label_name, 
+                       __qtn_proc_alloc, __qtn_proc_apply_to_self, __qtn_proc_clone, 
+                       __qtn_proc_free, __qtn_proc_get_flags, __qtn_proc_get_identifier, 
                        __qtn_proc_get_metadata, __qtn_proc_get_metadata_size, __qtn_proc_get_path_exclusion_pattern, 
                        __qtn_proc_init, __qtn_proc_init_with_data, __qtn_proc_init_with_self, 
                        __qtn_proc_set_flags, __qtn_proc_set_identifier, __qtn_proc_set_metadata, 

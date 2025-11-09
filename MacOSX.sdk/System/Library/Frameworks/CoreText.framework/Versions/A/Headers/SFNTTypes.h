@@ -2,14 +2,16 @@
  *  SFNTTypes.h
  *  CoreText
  *
- *  Copyright 1994-2013 Apple Inc. All rights reserved.
+ *  Copyright 1994-2021 Apple Inc. All rights reserved.
  *
  */
 
 #ifndef __SFNTTYPES__
 #define __SFNTTYPES__
 
-#if !0
+#include <TargetConditionals.h>
+
+#if !TARGET_OS_WIN32
 #include <MacTypes.h>
 #elif !defined(__MACTYPES__)
 typedef SInt32 Fixed;
@@ -18,9 +20,6 @@ typedef SInt32 Fixed;
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wfour-char-constants"
 
 #pragma pack(push, 2)
 
@@ -47,7 +46,7 @@ enum {
 
 /* Cmap - character id to glyph id mapping */
 enum {
-  cmapFontTableTag              = 'cmap'
+  cmapFontTableTag              = 0x636D6170  /* 'cmap' */
 };
 
 enum {
@@ -289,7 +288,7 @@ enum {
 
 /* Name table */
 enum {
-  nameFontTableTag              = 'name'
+  nameFontTableTag              = 0x6E616D65  /* 'name' */
 };
 
 enum {
@@ -348,7 +347,7 @@ enum {
 
 /* Fvar table - font variations */
 enum {
-  variationFontTableTag         = 'fvar'
+  variationFontTableTag         = 0x66766172  /* 'fvar' */
 };
 
 /* These define each font variation */
@@ -396,7 +395,7 @@ enum {
 
 /* Fdsc table - font descriptor */
 enum {
-  descriptorFontTableTag        = 'fdsc'
+  descriptorFontTableTag        = 0x66647363  /* 'fdsc' */
 };
 
 struct sfntFontDescriptor {
@@ -416,7 +415,7 @@ enum {
 
 /* Feat Table - layout feature table */
 enum {
-  featureFontTableTag           = 'feat'
+  featureFontTableTag           = 0x66656174  /* 'feat' */
 };
 
 struct sfntFeatureName {
@@ -449,7 +448,7 @@ struct sfntFeatureHeader {
 typedef struct sfntFeatureHeader        sfntFeatureHeader;
 /* OS/2 Table */
 enum {
-  os2FontTableTag               = 'OS/2'
+  os2FontTableTag               = 0x4F532F32  /* 'OS/2' */
 };
 
 /*  Special invalid glyph ID value, useful as a sentinel value, for example */
@@ -475,8 +474,6 @@ struct FontVariation {
 typedef struct FontVariation            FontVariation;
 
 #pragma pack(pop)
-
-#pragma clang diagnostic pop
 
 #ifdef __cplusplus
 }

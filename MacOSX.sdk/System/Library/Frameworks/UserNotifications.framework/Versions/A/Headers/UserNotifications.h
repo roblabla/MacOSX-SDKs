@@ -9,6 +9,7 @@
 #import <UserNotifications/UNError.h>
 #import <UserNotifications/UNNotification.h>
 #import <UserNotifications/UNNotificationAction.h>
+#import <UserNotifications/UNNotificationActionIcon.h>
 #import <UserNotifications/UNNotificationAttachment.h>
 #import <UserNotifications/UNNotificationCategory.h>
 #import <UserNotifications/UNNotificationContent.h>

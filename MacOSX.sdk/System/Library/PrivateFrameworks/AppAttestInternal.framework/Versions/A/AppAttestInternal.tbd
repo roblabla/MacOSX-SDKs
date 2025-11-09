@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C8D5226E-DFCC-32A5-A1BB-FF42DF6E965D
+    value:           1E777AE6-E079-3478-ADAF-A2277E759074
   - target:          x86_64-maccatalyst
-    value:           C8D5226E-DFCC-32A5-A1BB-FF42DF6E965D
+    value:           1E777AE6-E079-3478-ADAF-A2277E759074
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           377159BD-71B3-3412-A102-77174B5EA921
+    value:           CCA58ADA-EBB3-3AFE-9A44-F73874DFFECC
   - target:          arm64e-maccatalyst
-    value:           377159BD-71B3-3412-A102-77174B5EA921
+    value:           CCA58ADA-EBB3-3AFE-9A44-F73874DFFECC
 install-name:    '/System/Library/PrivateFrameworks/AppAttestInternal.framework/Versions/A/AppAttestInternal'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

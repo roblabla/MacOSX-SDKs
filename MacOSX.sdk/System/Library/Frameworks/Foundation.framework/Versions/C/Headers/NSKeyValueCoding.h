@@ -21,7 +21,7 @@ The actual value of this constant string is "NSUnknownKeyException," to match th
 */
 FOUNDATION_EXPORT NSExceptionName const NSUndefinedKeyException;
 
-typedef NSString * NSKeyValueOperator NS_STRING_ENUM;
+typedef NSString * NSKeyValueOperator NS_TYPED_ENUM;
 
 /* Strings for the names of array operators supported by key-value coding. Only these string declarations are new in Mac OS 10.4. The actual support for array operators appeared in Mac OS 10.3. The values of these do not include "@" prefixes.
 */

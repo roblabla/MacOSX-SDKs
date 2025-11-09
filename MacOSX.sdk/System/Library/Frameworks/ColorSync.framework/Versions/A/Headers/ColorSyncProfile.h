@@ -199,6 +199,16 @@ CSEXTERN bool ColorSyncProfileIsMatrixBased (ColorSyncProfileRef) CS_AVAILABLE_P
      * A utility function verifying if a profile is matrix-based
      */
 
+CSEXTERN bool ColorSyncProfileIsPQBased (ColorSyncProfileRef) CS_AVAILABLE_PUBLIC_STARTING(11.0, CS_UNAVAILABLE_PUBLIC_EMBEDDED);
+    /*
+     * A utility function verifying if a profile is using ITU BT.2100 PQ transfer functions
+     */
+
+CSEXTERN bool ColorSyncProfileIsHLGBased (ColorSyncProfileRef) CS_AVAILABLE_PUBLIC_STARTING(11.0, CS_UNAVAILABLE_PUBLIC_EMBEDDED);
+    /*
+     * A utility function verifying if a profile is using ITU BT.2100 HLG transfer functions
+     */
+
     
 CSEXTERN float ColorSyncProfileEstimateGammaWithDisplayID (const int32_t displayID, CFErrorRef* __nullable error) CS_AVAILABLE_STARTING(10.4) CS_UNAVAILABLE_EMBEDDED;
    /*
@@ -603,6 +613,16 @@ extern "C" {
     CSEXTERN bool ColorSyncProfileIsMatrixBased (ColorSyncProfileRef);
     /*
      * A utility function verifying if a profile is matrix-based
+     */
+
+    CSEXTERN bool ColorSyncProfileIsPQBased (ColorSyncProfileRef);
+    /*
+     * A utility function verifying if a profile is using ITU BT.2100 PQ transfer functions
+     */
+
+    CSEXTERN bool ColorSyncProfileIsHLGBased (ColorSyncProfileRef);
+    /*
+     * A utility function verifying if a profile is using ITU BT.2100 HLG transfer functions
      */
 
     CSEXTERN float ColorSyncProfileEstimateGammaWithDisplayID (const int32_t displayID, CFErrorRef* error);

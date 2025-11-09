@@ -3,21 +3,21 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           068B9CD7-796B-3BE0-B9B6-EA6344C558E2
+    value:           73A7FE43-CEF3-313F-A805-779E51B9B1BA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BAF67727-C081-3999-9DB9-2FA477A98EE1
+    value:           A8306795-EC85-3AFC-8CBB-8229FCEC4387
 install-name:    '/System/Library/PrivateFrameworks/WebInspector.framework/Versions/A/WebInspector'
-current-version: 611.1.21
+current-version: 612.1.24
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _RWIAutomationAvailabilityFromString, _RWIErrorDomain, _RWINSStringFromAutomationAvailability, 
-                       _RWIProtocolInspectorFrontendConnectedNotification, _RWIProtocolInspectorFrontendDisconnectedNotification, 
-                       __Z24RWIStringFromDeviceClass14RWIDeviceClass, __Z27RWIStringFromDebuggableType17RWIDebuggableType, 
-                       __Z28RWIStringFromPairingProgress18RWIPairingProgress, __ZN9Inspector17toJSONDoubleArrayEP7NSArray, 
-                       __ZN9Inspector17toJSONObjectArrayEP7NSArray, __ZN9Inspector17toJSONStringArrayEP7NSArray, 
-                       __ZN9Inspector17toObjCStringArrayEON3WTF6RefPtrINS0_8JSONImpl5ArrayENS0_12RawPtrTraitsIS3_EENS0_21DefaultRefDerefTraitsIS3_EEEE, 
+    symbols:         [ _NSStringFromRWIDebuggerAvailability, _RWIAutomationAvailabilityFromString, 
+                       _RWIErrorDomain, _RWINSStringFromAutomationAvailability, _RWIProtocolInspectorFrontendConnectedNotification, 
+                       _RWIProtocolInspectorFrontendDisconnectedNotification, __Z24RWIStringFromDeviceClass14RWIDeviceClass, 
+                       __Z27RWIStringFromDebuggableType17RWIDebuggableType, __Z28RWIStringFromPairingProgress18RWIPairingProgress, 
+                       __ZN9Inspector17toJSONDoubleArrayEP7NSArray, __ZN9Inspector17toJSONObjectArrayEP7NSArray, 
+                       __ZN9Inspector17toJSONStringArrayEP7NSArray, __ZN9Inspector17toObjCStringArrayEON3WTF6RefPtrINS0_8JSONImpl5ArrayENS0_12RawPtrTraitsIS3_EENS0_21DefaultRefDerefTraitsIS3_EEEE, 
                        __ZN9Inspector18toJSONIntegerArrayEP7NSArray, __ZN9Inspector18toObjCIntegerArrayEON3WTF6RefPtrINS0_8JSONImpl5ArrayENS0_12RawPtrTraitsIS3_EENS0_21DefaultRefDerefTraitsIS3_EEEE, 
                        __ZN9Inspector22toJSONStringArrayArrayEP7NSArray ]
     objc-classes:    [ RWIApplication, RWIChannel, RWIDebuggable, RWIDevice, RWIDrivable, 

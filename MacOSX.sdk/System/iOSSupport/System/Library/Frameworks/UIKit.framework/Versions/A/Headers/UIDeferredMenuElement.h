@@ -10,7 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0)) @interface UIDeferredMenuElement : UIMenuElement
+UIKIT_EXTERN API_AVAILABLE(ios(14.0)) NS_SWIFT_UI_ACTOR
+@interface UIDeferredMenuElement : UIMenuElement
 
 /*!
  * @abstract Returns a placeholder menu element that is replaced with the result of the block's
@@ -22,6 +23,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0)) @interface UIDeferredMenuElement : UIMenuE
  *                         Call this block's completion handler when the menu items are available.
  */
 + (instancetype)elementWithProvider:(void(^)(void(^completion)(NSArray<UIMenuElement *> *elements)))elementProvider;
+
+/*!
+ * @abstract Returns a placeholder menu element that is replaced with the result of the block's
+ *           completion handler. A loading UI takes the place of the element in the menu
+ *           until it is fulfilled. Elements created using this initializer are "uncached",
+ *           so their @c elementProvider block is called every time the element is displayed.
+ *
+ * @param elementProvider  Called by the system to request the deferred menu items when the containing menu is presented.
+ *                         Call this block's completion handler when the menu items are available.
+ */
++ (instancetype)elementWithUncachedProvider:(void(^)(void(^completion)(NSArray<UIMenuElement *> *elements)))elementProvider API_AVAILABLE(ios(15.0));
 
 @end
 

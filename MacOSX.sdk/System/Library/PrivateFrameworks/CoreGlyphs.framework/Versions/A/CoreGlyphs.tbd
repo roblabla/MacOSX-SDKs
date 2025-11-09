@@ -1,0 +1,19 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           7AD73A4A-D466-3BE2-8164-D0CFC799F83B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           40479F7A-9155-3574-BE5E-5135BD25BCE4
+install-name:    '/System/Library/PrivateFrameworks/CoreGlyphs.framework/Versions/A/CoreGlyphs'
+current-version: 63.1
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _CoreGlyphsVersionNumber, _CoreGlyphsVersionString, _kCoreGlyphsNameAliases, 
+                       _kCoreGlyphsNoFillToFill, _kCoreGlyphsPrivateNameAliases, 
+                       _kCoreGlyphsPrivateNoFillToFill, _kCoreGlyphsPrivateSymbolOrder, 
+                       _kCoreGlyphsSymbolOrder ]
+...

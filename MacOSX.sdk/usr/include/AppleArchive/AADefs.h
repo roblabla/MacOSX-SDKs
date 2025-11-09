@@ -12,6 +12,8 @@ extern "C" {
 
 #pragma mark - Constants
 
+#define APPLE_ARCHIVE_API_VERSION 1200
+
 // Hash function
 typedef uint32_t AAHashFunction APPLE_ARCHIVE_SWIFT_PRIVATE;
 APPLE_ARCHIVE_ENUM(AAHashFunctions,uint32_t) {
@@ -92,6 +94,7 @@ APPLE_ARCHIVE_ENUM(AAFieldTypes, uint32_t) {
 #define AA_FIELD_GIN AA_FIELD_C("GIN")    ///< STRING   group name (from tar archives)
 #define AA_FIELD_HLC AA_FIELD_C("HLC")    ///< UINT     hard link cluster id (regular files only)
 #define AA_FIELD_IDX AA_FIELD_C("IDX")    ///< UINT     offset of entry in reference archive
+#define AA_FIELD_IDZ AA_FIELD_C("IDZ")    ///< UINT     size of entry in reference archive
 #define AA_FIELD_INO AA_FIELD_C("INO")    ///< UINT     inode number (st.st_ino)
 #define AA_FIELD_LNK AA_FIELD_C("LNK")    ///< STRING   symbolic link path (symbolic links only)
 #define AA_FIELD_MOD AA_FIELD_C("MOD")    ///< UINT     access modes (low 12 bits of st.st_mode)
@@ -118,7 +121,6 @@ typedef struct AAFieldKeySet_impl    * AAFieldKeySet   APPLE_ARCHIVE_SWIFT_PRIVA
 typedef struct AAEntryACLBlob_impl   * AAEntryACLBlob  APPLE_ARCHIVE_SWIFT_PRIVATE;
 typedef struct AAEntryXATBlob_impl   * AAEntryXATBlob  APPLE_ARCHIVE_SWIFT_PRIVATE;
 typedef struct AAByteStream_impl     * AAByteStream    APPLE_ARCHIVE_SWIFT_PRIVATE;
-typedef struct AAArchiveStream_impl  * AAArchiveStream APPLE_ARCHIVE_SWIFT_PRIVATE;
 typedef struct AAArchiveStream_impl  * AAArchiveStream APPLE_ARCHIVE_SWIFT_PRIVATE;
 
 #ifdef __cplusplus

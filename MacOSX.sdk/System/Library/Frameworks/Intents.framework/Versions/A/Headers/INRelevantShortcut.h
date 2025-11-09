@@ -52,6 +52,12 @@ API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos)
 @property (copy, nullable, NS_NONATOMIC_IOSONLY) INDefaultCardTemplate *watchTemplate;
 
 /*!
+ @abstract Links the relevant shortcut to a specific WidgetKit widget kind.
+ @discussion When a relevant shortcut is linked to a WidgetKit widget, it hints to the system when to show the widget in a stack.
+ */
+@property (copy, nullable, NS_NONATOMIC_IOSONLY) NSString *widgetKind;
+
+/*!
  @abstract The role of the relevant shortcut.
  @discussion Provides a hint to Siri about the expected user experience. The default is @c INRelevantShortcutRoleAction.
  @seealso INRelevantShortcutRole
@@ -68,11 +74,6 @@ API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos)
  @abstract Creates a relevant shortcut for the given shortcut.
  */
 - (instancetype)initWithShortcut:(INShortcut *)shortcut NS_DESIGNATED_INITIALIZER;
-
-/*!
- @note Must be initilaized with a shortcut, using that initializer.
- */
-- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

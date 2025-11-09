@@ -1,7 +1,7 @@
 /*
         NSTintConfiguration.h
         Application Kit
-        Copyright (c) 2020, Apple Inc.
+        Copyright (c) 2020-2021, Apple Inc.
         All rights reserved.
 */
 

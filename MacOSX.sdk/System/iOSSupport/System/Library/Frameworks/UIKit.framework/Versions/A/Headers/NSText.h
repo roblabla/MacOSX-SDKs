@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#if TARGET_OS_IPHONE
 #if __has_include(<CoreText/CTParagraphStyle.h>)
 #import <CoreText/CTParagraphStyle.h>
 #endif
@@ -45,6 +46,9 @@ UIKIT_EXTERN NSTextAlignment NSTextAlignmentFromCTTextAlignment(CTTextAlignment 
 #endif
 
 NS_ASSUME_NONNULL_END
+#elif TARGET_OS_OSX
+#import <AppKit/NSText.h>
+#endif
 
 #else
 #import <UIKitCore/NSText.h>

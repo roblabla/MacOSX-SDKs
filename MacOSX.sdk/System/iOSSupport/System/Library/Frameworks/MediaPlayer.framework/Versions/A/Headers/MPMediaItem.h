@@ -206,7 +206,11 @@ MP_EXTERN NSString * const MPMediaItemPropertyIsPreorder
 
 //-----------------------------------------------------
 
-@class NSImage, UIImage;
+#if TARGET_OS_OSX
+@class NSImage;
+#else
+@class UIImage;
+#endif
 
 MP_API(ios(3.0), tvos(9.0), macos(10.12.2), watchos(5.0))
 @interface MPMediaItemArtwork : NSObject

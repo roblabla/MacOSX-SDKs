@@ -3,7 +3,7 @@
  
      Contains:   Algebraic and logical operations on large operands.
  
-     Version:    vecLib-760.100
+     Version:    vecLib-793.0
  
      Copyright:  Copyright (c) 1999-2021 by Apple Inc. All rights reserved.
  
@@ -17,18 +17,9 @@
 #define __VBIGNUM__
 
 #include <stdint.h>
-/*
-#ifndef __VECLIBTYPES__
-#include <vecLib/vecLibTypes.h>
-#endif
-
-*/
 #include "vecLibTypes.h"
 
 #include <os/availability.h>
-#if __has_include( <TargetConditionals.h> )
-#include <TargetConditionals.h>
-#endif
 
 #if PRAGMA_ONCE
 #pragma once
@@ -49,10 +40,8 @@ extern "C" {
     #define __nonnull
 #endif
 
-
 #pragma options align=power
 
-#if TARGET_OS_OSX
 /************************************************************************************
 *                                                                                   *
 *  This library provides a set of subroutines for basic algebraic and some logical  *
@@ -130,222 +119,7 @@ extern "C" {
 *  Following are a set of structures for vector data types and scalar data types    *
 *                                                                                   *
 ************************************************************************************/
-#if _AltiVecPIMLanguageExtensionsAreEnabled
-union vU128 {
-  vUInt32             v;
-  struct {
-    vUInt32             v1;
-  }                       vs;
-  struct {
-    uint32_t            MSW;
-    uint32_t            d2;
-    uint32_t            d3;
-    uint32_t            LSW;
-  }                       s;
-};
-typedef union vU128                     vU128;
-union vS128 {
-  vUInt32             v;
-  struct {
-    vUInt32             v1;
-  }                       vs;
-  struct {
-    int32_t             MSW;
-    uint32_t            d2;
-    uint32_t            d3;
-    uint32_t            LSW;
-  }                       s;
-};
-typedef union vS128                     vS128;
-union vU256 {
-  vUInt32             v[2];
-  struct {
-    vUInt32             v1;
-    vUInt32             v2;
-  }                       vs;
-  struct {
-    uint32_t            MSW;
-    uint32_t            d2;
-    uint32_t            d3;
-    uint32_t            d4;
-    uint32_t            d5;
-    uint32_t            d6;
-    uint32_t            d7;
-    uint32_t            LSW;
-  }                       s;
-};
-typedef union vU256                     vU256;
-union vS256 {
-  vUInt32             v[2];
-  struct {
-    vUInt32             v1;
-    vUInt32             v2;
-  }                       vs;
-  struct {
-    int32_t             MSW;
-    uint32_t            d2;
-    uint32_t            d3;
-    uint32_t            d4;
-    uint32_t            d5;
-    uint32_t            d6;
-    uint32_t            d7;
-    uint32_t            LSW;
-  }                       s;
-};
-typedef union vS256                     vS256;
-union vU512 {
-  vUInt32             v[4];
-  struct {
-    vUInt32             v1;
-    vUInt32             v2;
-    vUInt32             v3;
-    vUInt32             v4;
-  }                       vs;
-  struct {
-    uint32_t            MSW;
-    uint32_t            d2;
-    uint32_t            d3;
-    uint32_t            d4;
-    uint32_t            d5;
-    uint32_t            d6;
-    uint32_t            d7;
-    uint32_t            d8;
-    uint32_t            d9;
-    uint32_t            d10;
-    uint32_t            d11;
-    uint32_t            d12;
-    uint32_t            d13;
-    uint32_t            d14;
-    uint32_t            d15;
-    uint32_t            LSW;
-  }                       s;
-};
-typedef union vU512                     vU512;
-union vS512 {
-  vUInt32             v[4];
-  struct {
-    vUInt32             v1;
-    vUInt32             v2;
-    vUInt32             v3;
-    vUInt32             v4;
-  }                       vs;
-  struct {
-    int32_t             MSW;
-    uint32_t            d2;
-    uint32_t            d3;
-    uint32_t            d4;
-    uint32_t            d5;
-    uint32_t            d6;
-    uint32_t            d7;
-    uint32_t            d8;
-    uint32_t            d9;
-    uint32_t            d10;
-    uint32_t            d11;
-    uint32_t            d12;
-    uint32_t            d13;
-    uint32_t            d14;
-    uint32_t            d15;
-    uint32_t            LSW;
-  }                       s;
-};
-typedef union vS512                     vS512;
-union vU1024 {
-  vUInt32             v[8];
-  struct {
-    vUInt32             v1;
-    vUInt32             v2;
-    vUInt32             v3;
-    vUInt32             v4;
-    vUInt32             v5;
-    vUInt32             v6;
-    vUInt32             v7;
-    vUInt32             v8;
-  }                       vs;
-  struct {
-    uint32_t            MSW;
-    uint32_t            d2;
-    uint32_t            d3;
-    uint32_t            d4;
-    uint32_t            d5;
-    uint32_t            d6;
-    uint32_t            d7;
-    uint32_t            d8;
-    uint32_t            d9;
-    uint32_t            d10;
-    uint32_t            d11;
-    uint32_t            d12;
-    uint32_t            d13;
-    uint32_t            d14;
-    uint32_t            d15;
-    uint32_t            d16;
-    uint32_t            d17;
-    uint32_t            d18;
-    uint32_t            d19;
-    uint32_t            d20;
-    uint32_t            d21;
-    uint32_t            d22;
-    uint32_t            d23;
-    uint32_t            d24;
-    uint32_t            d25;
-    uint32_t            d26;
-    uint32_t            d27;
-    uint32_t            d28;
-    uint32_t            d29;
-    uint32_t            d30;
-    uint32_t            d31;
-    uint32_t            LSW;
-  }                       s;
-};
-typedef union vU1024                    vU1024;
-union vS1024 {
-  vUInt32             v[8];
-  struct {
-    vUInt32             v1;
-    vUInt32             v2;
-    vUInt32             v3;
-    vUInt32             v4;
-    vUInt32             v5;
-    vUInt32             v6;
-    vUInt32             v7;
-    vUInt32             v8;
-  }                       vs;
-  struct {
-    int32_t             MSW;
-    uint32_t            d2;
-    uint32_t            d3;
-    uint32_t            d4;
-    uint32_t            d5;
-    uint32_t            d6;
-    uint32_t            d7;
-    uint32_t            d8;
-    uint32_t            d9;
-    uint32_t            d10;
-    uint32_t            d11;
-    uint32_t            d12;
-    uint32_t            d13;
-    uint32_t            d14;
-    uint32_t            d15;
-    uint32_t            d16;
-    uint32_t            d17;
-    uint32_t            d18;
-    uint32_t            d19;
-    uint32_t            d20;
-    uint32_t            d21;
-    uint32_t            d22;
-    uint32_t            d23;
-    uint32_t            d24;
-    uint32_t            d25;
-    uint32_t            d26;
-    uint32_t            d27;
-    uint32_t            d28;
-    uint32_t            d29;
-    uint32_t            d30;
-    uint32_t            d31;
-    uint32_t            LSW;
-  }                       s;
-};
-typedef union vS1024                    vS1024;
-#elif TARGET_OS_OSX
+
 union vU128 {
   vUInt32             v;
   struct {
@@ -357,8 +131,8 @@ union vU128 {
     uint32_t            d2;                   /*d3;*/
     uint32_t            MSW;                  /*LSW;*/
   }                       s;
-};
-typedef union vU128                     vU128;
+} API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
+typedef union vU128                     vU128 API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 union vS128 {
   vUInt32             v;
   struct {
@@ -370,8 +144,8 @@ union vS128 {
     uint32_t            d2;                   /*d3;*/
     uint32_t            MSW;                  /*LSW;*/
   }                       s;
-};
-typedef union vS128                     vS128;
+} API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
+typedef union vS128                     vS128 API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 union vU256 {
   vUInt32             v[2];
   struct {
@@ -388,8 +162,8 @@ union vU256 {
     uint32_t            d2;                   /*d7;*/
     uint32_t            MSW;                  /*LSW;*/
   }                       s;
-};
-typedef union vU256                     vU256;
+} API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
+typedef union vU256                     vU256 API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 union vS256 {
   vUInt32             v[2];
   struct {
@@ -406,8 +180,8 @@ union vS256 {
     uint32_t            d2;                   /*d7;*/
     uint32_t            MSW;                  /*LSW;*/
   }                       s;
-};
-typedef union vS256                     vS256;
+} API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
+typedef union vS256                     vS256 API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 union vU512 {
   vUInt32             v[4];
   struct {
@@ -434,8 +208,8 @@ union vU512 {
     uint32_t            d2;                   /*d15;*/
     uint32_t            MSW;                  /*LSB;*/
   }                       s;
-};
-typedef union vU512                     vU512;
+} API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
+typedef union vU512                     vU512 API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 union vS512 {
   vUInt32             v[4];
   struct {
@@ -462,8 +236,8 @@ union vS512 {
     uint32_t            d2;                   /*d15;*/
     uint32_t            MSW;                  /*LSW;*/
   }                       s;
-};
-typedef union vS512                     vS512;
+} API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
+typedef union vS512                     vS512 API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 union vU1024 {
   vUInt32             v[8];
   struct {
@@ -475,7 +249,7 @@ union vU1024 {
     vUInt32             v3;
     vUInt32             v2;
     vUInt32             v1;
-  }                       vs;
+  }                       vs API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
   struct {
     uint32_t            LSW;                  /*MSW;*/
     uint32_t            d31;                  /*d2;*/
@@ -510,8 +284,8 @@ union vU1024 {
     uint32_t            d2;                   /*d31;*/
     uint32_t            MSW;                  /*LSW;*/
   }                       s;
-};
-typedef union vU1024                    vU1024;
+} API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
+typedef union vU1024                    vU1024 API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 union vS1024 {
   vUInt32             v[8];
   struct {
@@ -558,9 +332,8 @@ union vS1024 {
     uint32_t            d2;                   /*d31;*/
     uint32_t            MSW;                  /*LSW;*/
   }                       s;
-};
-typedef union vS1024                    vS1024;
-#endif /*  */
+} API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
+typedef union vS1024                    vS1024 API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
 /************************************************************************************
 *                                                                                   *
@@ -1655,8 +1428,6 @@ vR1024Rotate(
   const vU1024 *  a,
   uint32_t        rotateAmount,
   vU1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
-
-#endif // #if TARGET_OS_OSX
 
 #pragma options align=reset
 

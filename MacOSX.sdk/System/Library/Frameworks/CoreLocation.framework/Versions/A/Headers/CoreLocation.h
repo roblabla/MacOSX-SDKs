@@ -29,5 +29,7 @@
 #import <CoreLocation/CLPlacemark.h>
 #import <CoreLocation/CLGeocoder.h>
 #import <CoreLocation/CLVisit.h>
+#import <CoreLocation/CLLocationPushServiceExtension.h>
+#import <CoreLocation/CLLocationPushServiceError.h>
 
 #endif /* __CORELOCATION__ */

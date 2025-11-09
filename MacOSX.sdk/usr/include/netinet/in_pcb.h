@@ -71,6 +71,8 @@
 #define _NETINET_IN_PCB_H_
 #include <sys/appleapiopts.h>
 
+#include <netinet/in.h>
+#include <sys/socketvar.h>
 #include <sys/types.h>
 #include <sys/queue.h>
 #include <TargetConditionals.h>
@@ -260,6 +262,7 @@ struct  xinpgen {
  */
 #define INP_IPV4        0x1
 #define INP_IPV6        0x2
+#define INP_V4MAPPEDV6  0x4
 #define inp_faddr       inp_dependfaddr.inp46_foreign.ia46_addr4
 #define inp_laddr       inp_dependladdr.inp46_local.ia46_addr4
 #define in6p_faddr      inp_dependfaddr.inp6_foreign

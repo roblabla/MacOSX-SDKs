@@ -30,6 +30,7 @@
 #define _IOKIT_UOSMETACLASS_H
 
 #include <stddef.h>
+#include <DriverKit/IOReturn.h>
 #include <DriverKit/IORPC.h>
 
 struct OSMetaClassBasePrivate;
@@ -64,7 +65,7 @@ public:
     OSMetaClass            * meta;
 
 public:
-    inline void * operator new(size_t sz, void * placed) { return (placed); }
+    inline void * operator new(size_t /* size */, void * placed) { return (placed); }
 
     /*!
      * @brief       Internal helper for OSDynamicCast. Not to be called directly.
@@ -94,6 +95,8 @@ public:
      * @return      C-string class name, valid while the object is retained.
      */
     const char *
+    GetClassName() const;
+    const char *
     GetClassName();
 
     /*!
@@ -115,6 +118,13 @@ public:
      */
     virtual void
     release() const;
+
+    /*!
+     * @brief       Returns retain count
+     * @discussion  Just for debugging.
+     */
+	uint32_t
+	getRetainCount() const;
 
     /*!
      * @brief       Compares two objects
@@ -182,7 +192,16 @@ OSObjectAllocate(
 /*!
  * @brief       Helper functions for OSDynamicCast(). Not to be called directly.
  */
+
+#if DRIVERKIT_FIX_OSTYPEID
+// This is template safe and "should" be the real definition
+#define OSTypeID(type)     type::sGetMetaClass()
+#else
+// but we must keep this around for source-compatability with old iig-generated headers.
+// It should be fine to get rid of this after everything has built with the new iig.
 #define OSTypeID(type)     g ## type ## MetaClass
+#endif
+
 #define OSTypeIDInst(inst) (inst)->GetClass()
 #define OSMTypeID(type)    OSTypeID(type)
 
@@ -215,7 +234,7 @@ OSObjectAllocate(
  * and your code should take appropriate steps to handle this case.
  */
 #define OSDynamicCast(type, inst)   \
-    (inst ? ((type *) OSMetaClassBase::safeMetaCast((inst), OSTypeID(type))) : NULL)
+	((type *) OSMetaClassBase::safeMetaCast((inst), OSTypeID(type)))
 
 /*!
  * @define OSRequiredCast
@@ -236,7 +255,7 @@ OSObjectAllocate(
  * It is equivalent to using {@code OSDynamicCast} and crashing with an abort on cast failure.
  */
 #define OSRequiredCast(type, inst)   \
-    (inst ? ((type *) OSMetaClassBase::requiredMetaCast((inst), OSTypeID(type))) : NULL)
+	((type *) OSMetaClassBase::requiredMetaCast((inst), OSTypeID(type)))
 
 /*!
  * @define OSTypeAlloc

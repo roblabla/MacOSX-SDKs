@@ -132,6 +132,7 @@ typedef CF_ENUM(int32_t, IOSurfaceComponentType) {
     kIOSurfaceComponentTypeUnsignedInteger  = 1,
     kIOSurfaceComponentTypeSignedInteger    = 2,
     kIOSurfaceComponentTypeFloat            = 3,
+    kIOSurfaceComponentTypeSignedNormalized = 4,
 };
 
 /* kIOSurfacePlaneComponentTypes   - CFArray[CFNumber] for IOSurfaceComponentType of each component in this plane. */
@@ -290,6 +291,16 @@ size_t IOSurfaceGetBitOffsetOfComponentOfPlane(IOSurfaceRef buffer, size_t plane
 
 IOSurfaceSubsampling IOSurfaceGetSubsampling(IOSurfaceRef buffer)
     API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+/* Common IOSurface keys for well-known IOSurface Values */
+
+/* kIOSurfaceColorSpace defines the RGB (or other) color space for the data stored in the IOSurface. It
+ is expected that this is a serialized CGColorSpaceRef, provided by the CoreGraphics CGColorSpaceRef
+ serialization APIs (CGColorSpaceCopyPropertyList). */
+extern const CFStringRef kIOSurfaceColorSpace API_AVAILABLE(macos(10.6), ios(11.0), watchos(4.0), tvos(11.0));
+
+/* CFData representation of the ICC Profile, generally via CGColorSpaceCopyICCData */
+extern const CFStringRef kIOSurfaceICCProfile  API_AVAILABLE(macos(10.6), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* These  calls let you attach CF property list types to a IOSurface buffer.  These calls are
    expensive (they essentially must serialize the data into the kernel) and thus should be avoided whenever

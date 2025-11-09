@@ -186,7 +186,7 @@ typedef NS_ENUM(NSUInteger, MTLLanguageVersion) {
     MTLLanguageVersion2_1 API_AVAILABLE(macos(10.14), ios(12.0)) = (2 << 16) + 1,
     MTLLanguageVersion2_2 API_AVAILABLE(macos(10.15), ios(13.0)) = (2 << 16) + 2,
     MTLLanguageVersion2_3 API_AVAILABLE(macos(11.0), ios(14.0)) = (2 << 16) + 3,
-
+    MTLLanguageVersion2_4 API_AVAILABLE(macos(12.0), ios(15.0)) = (2 << 16) + 4,
 } API_AVAILABLE(macos(10.11), ios(9.0));
 
 typedef NS_ENUM(NSInteger, MTLLibraryType) {
@@ -251,7 +251,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract A set of MTLDynamicLibrary instances to link against.
  The installName of the provided MTLDynamicLibrary is embedded into the compilation result.
  When a function from the resulting MTLLibrary is used (either as an MTLFunction, or as an to create a pipeline state, the embedded install names are used to automatically load the MTLDynamicLibrary instances.
- This property can be null if no libraries should be automatically loaded, either because the MTLLibrary has no external dependencies, or because you will use insertLibraries to specify the libraries to use at pipeline creation time.
+ This property can be null if no libraries should be automatically loaded, either because the MTLLibrary has no external dependencies, or because you will use preloadedLibraries to specify the libraries to use at pipeline creation time.
 */
 @property (readwrite, nullable, copy, nonatomic) NSArray<id<MTLDynamicLibrary>> *libraries API_AVAILABLE(macos(11.0), ios(14.0));
 

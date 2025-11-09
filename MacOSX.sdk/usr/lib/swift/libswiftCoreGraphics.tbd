@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A28BFDF3-94C2-321E-81A9-ED452D2D6E5B
+    value:           FA570F54-ACDD-3AD9-BA1E-941BB95738E3
   - target:          x86_64-maccatalyst
-    value:           A28BFDF3-94C2-321E-81A9-ED452D2D6E5B
+    value:           FA570F54-ACDD-3AD9-BA1E-941BB95738E3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           347D0913-496C-3369-BE20-97F05A0F96DA
+    value:           53901C65-9D89-33C7-83F1-5E46019F05D9
   - target:          arm64e-maccatalyst
-    value:           347D0913-496C-3369-BE20-97F05A0F96DA
+    value:           53901C65-9D89-33C7-83F1-5E46019F05D9
 install-name:    '/usr/lib/swift/libswiftCoreGraphics.dylib'
 current-version: 2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ '_$s12CoreGraphics7CGFloatVyACs7Float80VcfC' ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCoreGraphics.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCoreGraphics.dylib', 
@@ -29,7 +29,7 @@ exports:
                        '$ld$install_name$os10.13$@rpath/libswiftCoreGraphics.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCoreGraphics.dylib', 
                        '$ld$install_name$os10.9$@rpath/libswiftCoreGraphics.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s12CoreGraphics024CGAffineTransformEqualToD0ySbSo0cD0V_ADtF', 
                        '_$s12CoreGraphics10fpclassifyySiAA7CGFloatVF', '_$s12CoreGraphics11CGFLOAT_MAXAA7CGFloatVvg', 
                        '_$s12CoreGraphics11CGFLOAT_MINAA7CGFloatVvg', '_$s12CoreGraphics12CGPathAddArcyySo16CGMutablePathRefaSg_SPySo17CGAffineTransformVGAA7CGFloatVA4JSbtF', 

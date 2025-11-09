@@ -2,7 +2,7 @@
 //  SCNCamera.h
 //  SceneKit
 //
-//  Copyright © 2012-2020 Apple Inc. All rights reserved.
+//  Copyright © 2012-2021 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -226,7 +226,7 @@ SCN_EXPORT
 @property(nonatomic) CGFloat exposureAdaptationBrighteningSpeedFactor API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 
 /*!
- @property exposureAdaptationBrighteningSpeedFactor
+ @property exposureAdaptationDarkeningSpeedFactor
  @abstract Determines the exposure adaptation speed when going from dark areas to bright areas. Defaults to 0.6.
  */
 @property(nonatomic) CGFloat exposureAdaptationDarkeningSpeedFactor API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));

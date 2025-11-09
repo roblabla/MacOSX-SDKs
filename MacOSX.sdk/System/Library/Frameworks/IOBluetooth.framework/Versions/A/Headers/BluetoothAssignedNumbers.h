@@ -819,7 +819,7 @@ enum BluetoothHCIExtendedInquiryResponseDataTypes
 	kBluetoothHCIExtendedInquiryResponseDataTypeDeviceID									=	0x10,
 	kBluetoothHCIExtendedInquiryResponseDataTypeSecurityManagerTKValue						=	0x10,
     kBluetoothHCIExtendedInquiryResponseDataTypeSecurityManagerOOBFlags                     =   0x11,
-    kBluetoothHCIExtendedInquiryResponseDataTypeSlaveConnectionIntervalRange                =   0x12,
+	kBluetoothHCIExtendedInquiryResponseDataTypePeripheralConnectionIntervalRange           =   0x12,
     kBluetoothHCIExtendedInquiryResponseDataTypeServiceSolicitation16BitUUIDs               =   0x14,
     kBluetoothHCIExtendedInquiryResponseDataTypeServiceSolicitation128BitUUIDs              =   0x15,
     kBluetoothHCIExtendedInquiryResponseDataTypeServiceData                                 =   0x16,
@@ -840,7 +840,8 @@ enum BluetoothHCIExtendedInquiryResponseDataTypes
     kBluetoothHCIExtendedInquiryResponseDataTypeIndoorPositioning							=	0x25,
     kBluetoothHCIExtendedInquiryResponseDataTypeTransportDiscoveryData						=	0x26,
     kBluetoothHCIExtendedInquiryResponseDataType3DInformationData							=	0x3D,
-	kBluetoothHCIExtendedInquiryResponseDataTypeManufacturerSpecificData					=	0xFF
+	kBluetoothHCIExtendedInquiryResponseDataTypeManufacturerSpecificData					=	0xFF,
+	kBluetoothHCIExtendedInquiryResponseDataTypeSlaveConnectionIntervalRange __attribute__ ((deprecated)) = kBluetoothHCIExtendedInquiryResponseDataTypePeripheralConnectionIntervalRange,
 };
 
 
@@ -859,8 +860,8 @@ typedef enum BluetoothHCIVersions
     kBluetoothHCIVersionCoreSpecification4_1												=	0x07,
 	kBluetoothHCIVersionCoreSpecification4_2												=	0x08,
 	kBluetoothHCIVersionCoreSpecification5_0												=	0x09,
-	kBluetoothHCIVersionCoreSpecification5_1												=	0x0A,
-	kBluetoothHCIVersionCoreSpecification5_2												=	0x0B,
+	kBluetoothHCIVersionCoreSpecification5_1												=   0x0a,
+	kBluetoothHCIVersionCoreSpecification5_2												=   0x0b
 } BluetoothHCIVersions;
 
 
@@ -879,8 +880,8 @@ typedef enum BluetoothLMPVersions
 	kBluetoothLMPVersionCoreSpecification4_1												=	0x07,
 	kBluetoothLMPVersionCoreSpecification4_2												=	0x08,
 	kBluetoothLMPVersionCoreSpecification5_0												=	0x09,
-	kBluetoothLMPVersionCoreSpecification5_1												=	0x0A,
-	kBluetoothLMPVersionCoreSpecification5_2												=	0x0B
+	kBluetoothLMPVersionCoreSpecification5_1												=   0x0a,
+	kBluetoothLMPVersionCoreSpecification5_2												=   0x0b
 } BluetoothLMPVersions;
 
 #ifdef	__cplusplus

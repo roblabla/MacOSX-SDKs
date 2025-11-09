@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class PKPaymentAuthorizationResult;
 @class PKPaymentAuthorizationController;
 @class PKPaymentRequestPaymentMethodUpdate;
+@class PKPaymentRequestCouponCodeUpdate;
 @class PKPaymentRequestShippingMethodUpdate;
 @class PKPaymentRequestShippingContactUpdate;
 @class PKPaymentRequestMerchantSessionUpdate;
@@ -65,7 +66,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)paymentAuthorizationControllerWillAuthorizePayment:(PKPaymentAuthorizationController *)controller;
 
 - (void)paymentAuthorizationController:(PKPaymentAuthorizationController *)controller
-       didRequestMerchantSessionUpdate:(void (^)(PKPaymentRequestMerchantSessionUpdate *update))handler API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0));
+       didRequestMerchantSessionUpdate:(void (^)(PKPaymentRequestMerchantSessionUpdate *update))handler API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0)) NS_SWIFT_ASYNC_NAME(paymentAuthorizationControllerDidRequestMerchantSessionUpdate(controller:));
+
+- (void)paymentAuthorizationController:(PKPaymentAuthorizationController *)controller
+                   didChangeCouponCode:(NSString *)couponCode
+                               handler:(void (^)(PKPaymentRequestCouponCodeUpdate *update))completion API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos);
 
 // Sent when the user has selected a new shipping method.  The delegate should determine
 // shipping costs based on the shipping method and either the shipping address contact in the original

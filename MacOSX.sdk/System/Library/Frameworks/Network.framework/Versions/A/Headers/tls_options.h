@@ -60,7 +60,7 @@ nw_tls_create_options(void);
  * @abstract
  *		Access the sec_protocol_options_t for a given network protocol
  *		options instance. See <Security/SecProtocolOptions.h> for functions
- *		to futher configure security options.
+ *		to further configure security options.
  *
  * @param options
  *		An nw_protocol_options_t that has been created for TLS.

@@ -25,7 +25,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 @interface VZVirtioSocketListener : NSObject
 
 /*!
- @abstract Pointer to a delagate object for the listener.
+ @abstract Pointer to a delegate object for the listener.
  */
 @property (readwrite, weak) id <VZVirtioSocketListenerDelegate> delegate;
 
@@ -34,7 +34,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 /*!
  @abstract Delegate object for VZVirtioSocketListener.
  @discussion
-    A class conforming to VZVirtioSocketListenerDelegate protocol can provide a method establish a new connection to the socket.
+    A class conforming to VZVirtioSocketListenerDelegate protocol can provide a method to establish a new connection to the socket.
  @see VZVirtioSocketDevice
  @see VZVirtioSocketListener
  @see VZVirtioSocketConnection
@@ -48,6 +48,9 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @param connection The new connection to be established.
  @param socketDevice The Virtio socket device with which the new connection is to be established.
  @return YES if the connection should be established, NO otherwise.
+ @discussion
+    The VZVirtioSocketConnection object owns a file descriptor for this connection. Data can be sent and received through that file descriptor.
+    If the connection is accepted, the implementation should keep a reference to the connection object to send and receive data.
  */
 - (BOOL)listener:(VZVirtioSocketListener *)listener shouldAcceptNewConnection:(VZVirtioSocketConnection *)connection fromSocketDevice:(VZVirtioSocketDevice *)socketDevice;
 

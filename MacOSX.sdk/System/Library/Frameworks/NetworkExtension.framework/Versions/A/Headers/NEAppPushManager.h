@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Apple Inc.
+ * Copyright (c) 2020-2021 Apple Inc.
  * All rights reserved.
  */
 
@@ -43,6 +43,33 @@ typedef NS_ERROR_ENUM(NEAppPushErrorDomain, NEAppPushManagerError) {
 } API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 /*!
+ * @interface NEPrivateLTENetwork
+ * @discussion The NEPrivateLTENetwork class declares an object that contains the parameters of a private LTE network.
+ */
+API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
+@interface NEPrivateLTENetwork : NSObject<NSCopying, NSSecureCoding>
+
+/*!
+ * @property mobileCountryCode
+ * @discussion Mobile Country Code of the private LTE network.
+ */
+@property (copy) NSString *mobileCountryCode API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+
+/*!
+ * @property mobileNetworkCode
+ * @discussion Mobile Network Code of the private LTE network.
+ */
+@property (copy) NSString *mobileNetworkCode API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+
+/*!
+ * @property trackingAreaCode
+ * @discussion Tracking Area Code of the private LTE network. This property is only applicable for band 48 private LTE networks.
+ */
+@property (copy, nullable) NSString *trackingAreaCode API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+
+@end
+
+/*!
  * @interface NEAppPushManager
  * @discussion The NEAppPushManager class declares a programmatic interface to configure NEAppPushProvider.
  *
@@ -57,9 +84,16 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
 /*!
  * @property matchSSIDs
  * @discussion An array of Wi-Fi SSID strings. If the SSID string of current Wi-Fi network matches with one of these strings then the NEAppPushProvider
- *	is started. It is manadatory to provide at least one SSID to start the provider. The upper limit of number of SSIDs is 10.
+ *	is started. The upper limit of number of SSIDs is 10.
  */
 @property (copy) NSArray<NSString *> *matchSSIDs API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+
+/*!
+ * @property matchPrivateLTENetworks
+ * @discussion An array of NEPrivateLTENetwork objects. If the properties of current private LTE network match with properties of one of these NEPrivateLTENetwork objects then the
+ * NEAppPushProvider is started. The upper limit of number of private LTE networks is 10. For private LTE networks that are not band 48, the device must be supervised in order to perform the match
+ */
+@property (copy) NSArray<NEPrivateLTENetwork *> *matchPrivateLTENetworks API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property providerConfiguration

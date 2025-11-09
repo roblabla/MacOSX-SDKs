@@ -17,8 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 @class UIBackgroundConfiguration;
 @protocol UIContentConfiguration;
 @class UIListContentConfiguration;
+@class UITableViewHeaderFooterView;
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0))
+typedef void (^UITableViewHeaderFooterViewConfigurationUpdateHandler)(__kindof UITableViewHeaderFooterView *headerFooterView, UIViewConfigurationState *state) API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 @interface UITableViewHeaderFooterView : UIView
 
 - (instancetype)initWithReuseIdentifier:(nullable NSString *)reuseIdentifier NS_DESIGNATED_INITIALIZER;
@@ -37,6 +40,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0))
 /// Subclasses should override this method and update the view's configuration using the state provided.
 /// This method should not be called directly, use `setNeedsUpdateConfiguration` to request an update.
 - (void)updateConfigurationUsingState:(UIViewConfigurationState *)state API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+/// Optional block-based alternative to overriding `-updateConfigurationUsingState:` in a subclass. This handler
+/// is called after `-updateConfigurationUsingState:`. Setting a new handler triggers `setNeedsUpdateConfiguration`.
+@property (nonatomic, copy, nullable) UITableViewHeaderFooterViewConfigurationUpdateHandler configurationUpdateHandler API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
 
 /// Returns a default list content configuration for the header/footer view's style.
 - (UIListContentConfiguration *)defaultContentConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));

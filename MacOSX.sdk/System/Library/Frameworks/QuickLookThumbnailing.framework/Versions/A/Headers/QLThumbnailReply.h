@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE(ios(11.0), macos(10.15)) API_UNAVAILABLE(watchos,tvos)  __attribute__((visibility("default")))
 @interface QLThumbnailReply : NSObject
 
+///The extensionBadge is a short string identifying the file type used as a badge when producing an icon.
+@property (nonatomic, copy) NSString* extensionBadge API_AVAILABLE(ios(15.0), macos(12.0));
+
 - (instancetype)init NS_UNAVAILABLE;
 
 /**

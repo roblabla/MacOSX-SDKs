@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           D1AB211D-7144-3067-BB52-7A76D781661C
+    value:           5684A005-7041-3249-BB6D-EFB0FC2C53A8
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           01DF926C-7691-339D-BF0E-DA2C4B38B9AE
+    value:           54D9BDB9-771E-3E3F-BD2C-F0CA2368A284
 install-name:    '/System/iOSSupport/usr/lib/libAXSpeechManager.dylib'
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _AXAVSpeechSynthesisVoiceFromTTSSpeechVoice, _AXAVVoiceQualityFromTTSFootprint, 
                        _AXAlexVoiceIdentifier, _AXNeuralSiriFemaleVoiceIdentifier, 
                        _AXNeuralSiriMaleVoiceIdentifier, _AXRemapLanguageCodeForSpeech, 

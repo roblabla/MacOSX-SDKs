@@ -189,7 +189,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *             specification for details.
  */
 - (void)sendCustomCommandWithConfiguration:(NFCISO15693CustomCommandConfiguration *)commandConfiguration
-                         completionHandler:(void(^)(NSData *customResponseParameters, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                         completionHandler:(void(^)(NSData *customResponseParameters, NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
 
 /*!
  * @method readMultipleBlocksWithConfiguration:completionHandler:
@@ -204,7 +204,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *              Multiple Read Multiple Blocks commands will be sent if necessary to complete the operation.
  */
 - (void)readMultipleBlocksWithConfiguration:(NFCISO15693ReadMultipleBlocksConfiguration *)readConfiguration
-                          completionHandler:(void(^)(NSData *data, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                          completionHandler:(void(^)(NSData *data, NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
 
 
 #pragma mark - Public APIs
@@ -409,7 +409,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion              Use the replacement -lockDSFIDWithRequestFlag:completionHandler:.
  */
 - (void)lockDFSIDWithRequestFlag:(NFCISO15693RequestFlag)flags
-               completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("lockDSFIDWithRequestFlag:completionHandler:", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+               completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("lockDSFIDWithRequestFlag:completionHandler:", ios(13.0, 14.0)) NS_SWIFT_DISABLE_ASYNC API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @method lockDSFIDWithRequestFlag:completionHandler:
@@ -441,7 +441,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion              Use the replacement -getSystemInfoAndUIDWithRequestFlag:completionHandler:.
  */
 - (void)getSystemInfoWithRequestFlag:(NFCISO15693RequestFlag)flags
-                   completionHandler:(void(^)(NSInteger dsfid, NSInteger afi, NSInteger blockSize, NSInteger blockCount, NSInteger icReference, NSError * _Nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("getSystemInfoAndUIDWithRequestFlag:completionHandler:", ios(13.0, 14.0))  API_UNAVAILABLE(watchos, macos, tvos);
+                   completionHandler:(void(^)(NSInteger dsfid, NSInteger afi, NSInteger blockSize, NSInteger blockCount, NSInteger icReference, NSError * _Nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("getSystemInfoAndUIDWithRequestFlag:completionHandler:", ios(13.0, 14.0)) NS_SWIFT_DISABLE_ASYNC API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
 * @method getSystemInfoAndUIDWithRequestFlag:completionHandler:
@@ -724,7 +724,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 - (void)sendRequestWithFlag:(NSInteger)flags
                 commandCode:(NSInteger)commandCode
                        data:(NSData * _Nullable)data
-          completionHandler:(void(^)(NFCISO15693ResponseFlag responseFlag, NSData * _Nullable data, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+          completionHandler:(void(^)(NFCISO15693ResponseFlag responseFlag, NSData * _Nullable_result data, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
 @end
 
 NS_ASSUME_NONNULL_END

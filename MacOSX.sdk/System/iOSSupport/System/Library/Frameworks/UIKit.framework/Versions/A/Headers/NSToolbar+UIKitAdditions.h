@@ -7,17 +7,16 @@
 //
 
 #import <TargetConditionals.h>
-
-#if TARGET_OS_MACCATALYST
-
+#if TARGET_OS_MACCATALYST || TARGET_OS_OSX
 #import <Foundation/Foundation.h>
 #import <UIKit/UIWindowScene.h>
 #import <UIKit/UIActivityItemsConfigurationReading.h>
 #import <AppKit/NSToolbarItem.h>
 #import <AppKit/NSMenuToolbarItem.h>
 #import <AppKit/NSSharingServicePickerToolbarItem.h>
+#import <AppKit/NSSearchToolbarItem.h>
 
-@class UITitlebar, NSToolbar, UIBarButtonItem;
+@class UITitlebar, NSToolbar, UIBarButtonItem, UISearchTextField;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -53,7 +52,7 @@ typedef NS_ENUM(NSInteger, UITitlebarToolbarStyle) {
 @property (nonatomic, readonly, nullable) UITitlebar *titlebar API_AVAILABLE(macCatalyst(13.0));
 @end
 
-API_AVAILABLE(macCatalyst(13.0))
+API_AVAILABLE(macCatalyst(13.0)) NS_SWIFT_UI_ACTOR
 @interface UITitlebar : NSObject
 
 /*
@@ -126,7 +125,7 @@ API_AVAILABLE(macCatalyst(13.0))
 
 NS_ASSUME_NONNULL_END
 
-#endif
+#endif // TARGET_OS_MACCATALYST || TARGET_OS_OSX
 
 #else
 #import <UIKitCore/NSToolbar+UIKitAdditions.h>

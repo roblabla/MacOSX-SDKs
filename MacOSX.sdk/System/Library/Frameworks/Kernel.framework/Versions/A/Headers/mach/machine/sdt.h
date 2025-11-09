@@ -181,6 +181,14 @@
 	    type3, arg3, type4, arg4)                                           \
 	DTRACE_PROBE4(__sched_, name, arg1, arg2, arg3, arg4);
 
+#define DTRACE_SCHED5(name, type1, arg1, type2, arg2,                   \
+	    type3, arg3, type4, arg4, type5, arg5)                              \
+	DTRACE_PROBE5(__sched_, name, arg1, arg2, arg3, arg4, arg5, arg6);
+
+#define DTRACE_SCHED6(name, type1, arg1, type2, arg2,                   \
+	    type3, arg3, type4, arg4, type5, arg5, type6, arg6)                 \
+	DTRACE_PROBE6(__sched_, name, arg1, arg2, arg3, arg4, arg5, arg6);
+
 #define DTRACE_PROC(name)                                               \
 	DTRACE_PROBE(__proc_, name);
 
@@ -443,6 +451,7 @@
 	    type3, arg3, type4, arg4, type5, arg5)                          \
 	DTRACE_PROBE5(__kasan_, name, arg1, arg2, arg3, arg4, arg5);
 #endif /* KASAN */
+
 
 
 

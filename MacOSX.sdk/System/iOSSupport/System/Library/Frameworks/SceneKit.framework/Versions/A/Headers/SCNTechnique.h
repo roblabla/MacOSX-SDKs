@@ -2,7 +2,7 @@
 //  SCNTechnique.h
 //  SceneKit
 //
-//  Copyright © 2014-2020 Apple Inc. All rights reserved.
+//  Copyright © 2014-2021 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SCNShadable.h>

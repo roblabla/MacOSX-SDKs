@@ -8,12 +8,10 @@
 
 #import <DeviceCheck/DeviceCheck.h>
 
-#if TARGET_OS_IOS || TARGET_OS_OSX
-
 NS_ASSUME_NONNULL_BEGIN
 
 DC_EXPORT
-API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 @interface DCAppAttestService : NSObject
 
 /**
@@ -64,6 +62,3 @@ API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos, watchos)
 @end
 
 NS_ASSUME_NONNULL_END
-
-
-#endif // TARGET_OS_IOS || TARGET_OS_OSX

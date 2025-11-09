@@ -4,34 +4,36 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           26A89BB8-632F-3BA9-A44A-27AFF5A18B83
+    value:           91E7604E-F740-3557-9F72-6102C15E2ACF
   - target:          x86_64-maccatalyst
-    value:           26A89BB8-632F-3BA9-A44A-27AFF5A18B83
+    value:           91E7604E-F740-3557-9F72-6102C15E2ACF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CBA39224-23AE-3CE1-9DFF-27F2480BDE35
+    value:           4DF36F4B-F30E-33C9-9BE6-AA34539810F1
   - target:          arm64e-maccatalyst
-    value:           CBA39224-23AE-3CE1-9DFF-27F2480BDE35
+    value:           4DF36F4B-F30E-33C9-9BE6-AA34539810F1
 install-name:    '/System/Library/PrivateFrameworks/AppSSO.framework/Versions/A/AppSSO'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _SOAuthorizationOperationConfigurationRemoved, _SOAuthorizationOptionInitiatingAction, 
-                       _SOAuthorizationOptionInitiatorOrigin, _SOAuthorizationOptionRemovedProfileExtensionBundleIdentifier, 
+    symbols:         [ _SOAuthorizationOperationConfigurationRemoved, _SOAuthorizationOperationFetchNetworkCredentials, 
+                       _SOAuthorizationOptionInitiatingAction, _SOAuthorizationOptionInitiatorOrigin, 
+                       _SOAuthorizationOptionRemovedProfileExtensionBundleIdentifier, 
                        _SOAuthorizationOptionUserActionInitiated, _SODebugConfigurationKeyAssociatedDomainsValidated, 
                        _SODebugConfigurationKeyConfig, _SODebugConfigurationKeyPlugins, 
                        _SODebugConfigurationKeyRealms, _SODebugConfigurationKeyRequestQueue, 
                        _SODebugConfigurationKeyServerConfigVersion, _SODebugConfigurationKeySignatureValidated, 
                        _SOErrorDomain, _SOErrorSubcodeKey, _SONotificationConfigurationChanged, 
                        _SONotificationExtensionsChanged, _appSSO_handleResponse, 
-                       _appSSO_handleResponseCredential, _appSSO_init, _appSSO_performResponse, 
-                       _appSSO_performResponseCredential, _appSSO_willHandle, _appSSO_willPerform ]
+                       _appSSO_handleResponseCredential, _appSSO_handleResponseImpersonationCredential, 
+                       _appSSO_init, _appSSO_performResponse, _appSSO_performResponseCredential, 
+                       _appSSO_willHandle, _appSSO_willPerform ]
     objc-classes:    [ SOAuthorization, SOAuthorizationCredential, SOAuthorizationHints, 
                        SOAuthorizationParameters, SOAuthorizationRequest, SOAuthorizationRequestParameters, 
-                       SOConfigurationHost, SOConfigurationManager, SODebugHints, 
-                       SOExtension, SOExtensionManager, SOPreferences, SORequestQueue, 
-                       SORequestQueueItem ]
+                       SOAuthorizationResult, SOConfigurationHost, SOConfigurationManager, 
+                       SODebugHints, SOExtension, SOExtensionManager, SOPreferences, 
+                       SORequestQueue, SORequestQueueItem ]
 ...

@@ -151,7 +151,7 @@ AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataDetec
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataVideoOrientation                API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataContentIdentifier               API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription        API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
-
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataIsMontage                       API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 /*!
  @constant AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto
  @abstract A value of type kCMMetadataBaseDataType_UInt8 indicating whether this Live Photo movie was captured in "Auto" mode.

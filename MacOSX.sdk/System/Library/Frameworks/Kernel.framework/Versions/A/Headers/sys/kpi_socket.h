@@ -318,6 +318,29 @@ __NKE_API_DEPRECATED;
 extern void sock_close(socket_t so)
 __NKE_API_DEPRECATED;
 
+/*
+ *       @function sock_retain
+ *       @discussion Prevents the socket from closing
+ *       @param so The socket to close.  Increment a retain count on the
+ *               socket, preventing it from being closed when sock_close is
+ *               called. This is used when a File Descriptor is passed (and
+ *               closed) from userland and the kext wants to keep ownership of
+ *               that socket. It is used in conjunction with
+ *               sock_release(socket_t so).
+ */
+extern void sock_retain(socket_t so)
+__NKE_API_DEPRECATED;
+
+/*
+ *       @function sock_release
+ *       @discussion Decrement the retain count and close the socket if the
+ *               retain count reaches zero.
+ *       @param so The socket to release. This is used to release ownership
+ *               on a socket acquired with sock_retain. When the last retain
+ *               count is reached, this will call sock_close to close the socket.
+ */
+extern void sock_release(socket_t so)
+__NKE_API_DEPRECATED;
 
 /*!
  *       @function sock_setpriv

@@ -2,7 +2,7 @@
 //  SCNAnimation.h
 //  SceneKit
 //
-//  Copyright © 2012-2020 Apple Inc. All rights reserved.
+//  Copyright © 2012-2021 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -63,11 +63,26 @@ SCN_EXPORT API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 - (void)removeAllAnimations;
 
 /*!
+ @method removeAllAnimationsWithBlendOutDuration
+ @abstract Smoothly remove all animations.
+ @param duration The blend out duration used to remove the animation.
+ */
+- (void)removeAllAnimationsWithBlendOutDuration:(CGFloat)duration API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
  @method removeAnimationForKey
  @abstract Remove the animation with the given identifier.
  @param key The identifier for the animation to remove.
  */
 - (void)removeAnimationForKey:(NSString *)key;
+
+/*!
+ @method removeAnimationForKey:blendOutDuration:
+ @abstract Smoothly remove the animation with the given identifier.
+ @param key The identifier for the animation to remove.
+ @param duration The blend out duration used to remove the animation.
+ */
+- (void)removeAnimationForKey:(NSString *)key blendOutDuration:(CGFloat)duration API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @property animationKeys
@@ -82,13 +97,6 @@ SCN_EXPORT API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  @discussion This will return nil if no such animation player exists.
  */
 - (nullable SCNAnimationPlayer *)animationPlayerForKey:(NSString *)key API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
-
-/*!
- @abstract Smoothly remove the animation with the given identifier.
- @param key The identifier for the animation to remove.
- @param duration The blend out duration used to remove the animation.
- */
-- (void)removeAnimationForKey:(NSString *)key blendOutDuration:(CGFloat)duration API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 
 // Deprecated

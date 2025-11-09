@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           326D8975-72ED-3114-8153-F290DD68EE94
+    value:           DEEED8FE-AB67-3316-BF90-14D4BDB77217
   - target:          x86_64-maccatalyst
-    value:           326D8975-72ED-3114-8153-F290DD68EE94
+    value:           DEEED8FE-AB67-3316-BF90-14D4BDB77217
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25998560-DD9C-3D1F-AF87-0EC18EB8F402
+    value:           4D6CE4C5-09AD-39C0-9C40-FE14A0D473F9
   - target:          arm64e-maccatalyst
-    value:           25998560-DD9C-3D1F-AF87-0EC18EB8F402
+    value:           4D6CE4C5-09AD-39C0-9C40-FE14A0D473F9
 install-name:    '/System/Library/PrivateFrameworks/DSExternalDisplay.framework/Versions/A/DSExternalDisplay'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

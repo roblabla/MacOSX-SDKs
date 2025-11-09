@@ -16,12 +16,12 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @property(readonly, copy, NS_NONATOMIC_IOSONLY) NSArray *inputItems;
 
 // Signals the host to complete the app extension request with the supplied result items. The completion handler optionally contains any work which the extension may need to perform after the request has been completed, as a background-priority task. The `expired` parameter will be YES if the system decides to prematurely terminate a previous non-expiration invocation of the completionHandler. Note: calling this method will eventually dismiss the associated view controller.
-- (void)completeRequestReturningItems:(nullable NSArray *)items completionHandler:(void(^ _Nullable)(BOOL expired))completionHandler;
+- (void)completeRequestReturningItems:(nullable NSArray *)items completionHandler:(void(^ _Nullable)(BOOL expired))completionHandler NS_SWIFT_DISABLE_ASYNC;
 
 // Signals the host to cancel the app extension request, with the supplied error, which should be non-nil. The userInfo of the NSError will contain a key NSExtensionItemsAndErrorsKey which will have as its value a dictionary of NSExtensionItems and associated NSError instances.
 - (void)cancelRequestWithError:(NSError *)error;
 
-// Asks the host to open an URL on the extension's behalf
+// Asks the host to open a URL on the extension's behalf
 - (void)openURL:(NSURL *)URL completionHandler:(void (^ _Nullable)(BOOL success))completionHandler;
 
 @end

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9EC24B65-677C-3A87-80BA-22DC59F06FC4
+    value:           0B1CDEC1-7B0E-350D-A419-80AEC5756282
   - target:          x86_64-maccatalyst
-    value:           9EC24B65-677C-3A87-80BA-22DC59F06FC4
+    value:           0B1CDEC1-7B0E-350D-A419-80AEC5756282
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A5CF8C66-C3A2-39FE-9F7C-5171E162AD88
+    value:           C19A06A9-43A8-37FC-A1D5-6E7206BCC7F3
   - target:          arm64e-maccatalyst
-    value:           A5CF8C66-C3A2-39FE-9F7C-5171E162AD88
+    value:           C19A06A9-43A8-37FC-A1D5-6E7206BCC7F3
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufBluetooth.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -580,6 +580,7 @@ exports:
                        __ZN3awd7metrics23BluetoothAccessoryEvent22kAwdVersionFieldNumberE, 
                        __ZN3awd7metrics23BluetoothAccessoryEvent22kBudMileageFieldNumberE, 
                        __ZN3awd7metrics23BluetoothAccessoryEvent22kStartStateFieldNumberE, 
+                       __ZN3awd7metrics23BluetoothAccessoryEvent22kTArrayExt2FieldNumberE, 
                        __ZN3awd7metrics23BluetoothAccessoryEvent23kEventActionFieldNumberE, 
                        __ZN3awd7metrics23BluetoothAccessoryEvent24kErrorCodeExtFieldNumberE, 
                        __ZN3awd7metrics23BluetoothAccessoryEvent24kFeatureFlagsFieldNumberE, 
@@ -822,6 +823,7 @@ exports:
                        __ZN3awd7metrics25BluetoothHFPAudioLinkInfo16kRoleFieldNumberE, 
                        __ZN3awd7metrics25BluetoothHFPAudioLinkInfo16kRssiFieldNumberE, 
                        __ZN3awd7metrics25BluetoothHFPAudioLinkInfo17default_instance_E, 
+                       __ZN3awd7metrics25BluetoothHFPAudioLinkInfo17kCodecFieldNumberE, 
                        __ZN3awd7metrics25BluetoothHFPAudioLinkInfo19kInstantFieldNumberE, 
                        __ZN3awd7metrics25BluetoothHFPAudioLinkInfo19kVersionFieldNumberE, 
                        __ZN3awd7metrics25BluetoothHFPAudioLinkInfo20kDurationFieldNumberE, 

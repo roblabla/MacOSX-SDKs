@@ -223,7 +223,7 @@ NSInteger MPSImageBatchIterate( MPSImageBatch * __nonnull batch,
  *              padding policies can inhibit optimizations in the MPSNNGraph, particularly node
  *              fusion, resulting in more work for the GPU. In cases where the custom padding method
  *              does not change filter properties but only adjusts the result image (e.g. adjust result
- *              feature channel format) then MPSNNPaddingMethodCustomWhitelistForNodeFusion may be
+ *              feature channel format) then MPSNNPaddingMethodCustomAllowForNodeFusion may be
  *              used to signal that node fusion is acceptable. 
  */
 

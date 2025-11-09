@@ -4,6 +4,9 @@
 //  Copyright (c) 2014 Apple, Inc. All rights reserved.
 //
 
+#ifndef __PKPAYMENT_H
+#define __PKPAYMENT_H
+
 #import <TargetConditionals.h>
 
 #if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
@@ -50,3 +53,4 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 
 @end
 
+#endif

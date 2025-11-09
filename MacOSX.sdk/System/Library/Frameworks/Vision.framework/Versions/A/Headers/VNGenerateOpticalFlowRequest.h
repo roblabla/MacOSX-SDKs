@@ -6,6 +6,7 @@
 //
 
 #import <Vision/VNTargetedImageRequest.h>
+#import <Vision/VNObservation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -65,7 +66,14 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  */
 @property (readwrite, nonatomic) OSType outputPixelFormat;
 
+
+/*!
+	@discussion VNPixelBufferObservation results.
+*/
+@property (readonly, copy, nullable) NSArray<VNPixelBufferObservation*>* results;
+
 @end
+
 
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 static const NSUInteger VNGenerateOpticalFlowRequestRevision1 = 1;

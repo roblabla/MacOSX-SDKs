@@ -10,11 +10,14 @@
 #define MPSGraph_h
 
 #import <MetalPerformanceShadersGraph/MPSGraphCore.h>
+#import <MetalPerformanceShadersGraph/MPSGraphDevice.h>
 #import <MetalPerformanceShadersGraph/MPSGraphTensor.h>
 #import <MetalPerformanceShadersGraph/MPSGraphTensorData.h>
 #import <MetalPerformanceShadersGraph/MPSGraphOperation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class MPSGraphExecutable;
 
 /*!
  *  @typedef    MPSGraphOptions
@@ -35,10 +38,12 @@ typedef NS_ENUM(uint64_t, MPSGraphOptions)
 
 /*! @abstract   A dictionary of tensors and correspondiing tensorData for them
  */
+MPS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 typedef NSDictionary<MPSGraphTensor*, MPSGraphTensorData *> MPSGraphTensorDataDictionary;
 
 /*! @abstract   A dictionary of tensors and correspondiing shapes for them
  */
+MPS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 typedef NSDictionary<MPSGraphTensor*, MPSGraphShapedType *> MPSGraphTensorShapedTypeDictionary;
 
 /*! @abstract   A notification when graph execution: has finished
@@ -80,6 +85,21 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 
 @end
 
+
+/*! @class      MPSGraphCompilationDescriptor
+ *  @abstract   A structure which consists of all the levers users can use to compile their graphs
+ *
+ */
+MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
+@interface MPSGraphCompilationDescriptor : NSObject
+
+/*!
+ *  @brief Turns off type inference and we rely on type inference during runtime
+ */
+-(void) disableTypeInference;
+
+@end
+
 /*! @class      MPSGraph
  *  @abstract   Optimized representation of a compute graph of MPSGraphOperations and MPSGraphTensors
  *  @discussion An MPSGraph is a symbolic representation of operations to be utilized to execute compute graphs on a device.
@@ -107,6 +127,23 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
  *  @discussion an array of all the placeholderTensors
  */
 @property (readonly, nonnull, nonatomic) NSArray<MPSGraphTensor *> *placeholderTensors;
+
+/*!
+ *  @abstract   Compiles the graph for given feeds to return targetTensor values, ensuring all target operations would be executed. This call blocks till execution has completed.
+ *
+ *  @param      device                                                     MPSGraph device to optimize for
+ *  @param      feeds                                                       Feeds dictionary for the placeholder tensors
+ *  @param      targetTensors                                     Tensors for which the caller wishes MPSGraphTensorData to be returned
+ *  @param      targetOperations                              Operations to be completed at the end of the run
+ *  @param      compilationDescriptor                   compilation descriptor
+ *
+ *  @return     A valid MPSGraphExecutable object
+ */
+-(MPSGraphExecutable *) compileWithDevice:(MPSGraphDevice * _Nullable) device
+                                    feeds:(MPSGraphTensorShapedTypeDictionary *) feeds
+                            targetTensors:(NSArray<MPSGraphTensor *> *) targetTensors
+                         targetOperations:(NSArray<MPSGraphOperation *> * _Nullable) targetOperations
+                    compilationDescriptor:(MPSGraphCompilationDescriptor * _Nullable) compilationDescriptor MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
 /*!
  *  @abstract   Runs the graph for given feeds to return targetTensor values, ensuring all target operations also executed. This call blocks till execution has completed.

@@ -67,7 +67,7 @@ EVENTKITUI_CLASS_AVAILABLE(4_0)
 
 @end
 
-
+NS_EXTENSION_UNAVAILABLE_IOS("EventKitUI is not supported in extensions")
 @protocol EKEventViewDelegate <NSObject>
 @required
 

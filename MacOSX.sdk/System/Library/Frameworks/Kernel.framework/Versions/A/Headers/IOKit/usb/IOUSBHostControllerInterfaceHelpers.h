@@ -2,7 +2,7 @@
 //  IOUSBHostControllerInterfaceHelpers.h
 //  IOUSBHostFamily
 //
-//  Created by Dan Wilson on 4/23/20.
+//  Copyright © 2020 Apple. All rights reserved.
 //
 
 #ifndef IOUSBHostControllerInterfaceHelpers_h
@@ -38,6 +38,8 @@ const char* IOUSBHostCIMessageStatusToString(IOUSBHostCIMessageStatus status);
 const char* IOUSBHostCILinkStateToString(IOUSBHostCILinkState linkState);
 
 const char* IOUSBHostCIDeviceSpeedToString(IOUSBHostCIDeviceSpeed speed);
+
+const char* IOUSBHostCIExceptionTypeToString(IOUSBHostCIExceptionType exceptionType);
 
 #ifdef  __cplusplus
 }   // extern "C"

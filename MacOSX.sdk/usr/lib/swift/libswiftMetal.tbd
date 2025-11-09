@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B4F8FF7C-9B54-3D98-9E2C-6A657B5E701A
+    value:           6CAE2915-8AE9-3787-AE7B-053884DCFA7C
   - target:          x86_64-maccatalyst
-    value:           B4F8FF7C-9B54-3D98-9E2C-6A657B5E701A
+    value:           6CAE2915-8AE9-3787-AE7B-053884DCFA7C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A5069D09-90E9-3337-A4D8-D80DAB38B485
+    value:           BF7C7F6D-A3BF-3016-9452-7F359C7A829D
   - target:          arm64e-maccatalyst
-    value:           A5069D09-90E9-3337-A4D8-D80DAB38B485
+    value:           BF7C7F6D-A3BF-3016-9452-7F359C7A829D
 install-name:    '/usr/lib/swift/libswiftMetal.dylib'
-current-version: 1.3.1
+current-version: 257.23
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftMetal.dylib', '$ld$install_name$os10.11$@rpath/libswiftMetal.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftMetal.dylib', '$ld$install_name$os10.13$@rpath/libswiftMetal.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftMetal.dylib', '$ld$install_name$os10.9$@rpath/libswiftMetal.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s5Metal15MTLLogContainerV12makeIteratorAC0E0VyF', '_$s5Metal15MTLLogContainerV8IteratorV4nextSo14MTLFunctionLog_pSgyF', 
                        '_$s5Metal15MTLLogContainerV8IteratorVMa', '_$s5Metal15MTLLogContainerV8IteratorVMn', 
                        '_$s5Metal15MTLLogContainerV8IteratorVN', '_$s5Metal15MTLLogContainerV8IteratorVStAAMc', 
@@ -38,7 +38,6 @@ exports:
                        '_$sSo18MTLArgumentEncoderP5MetalE10setBuffers_7offsets5rangeySaySo9MTLBuffer_pSgG_SaySiGSnySiGtF', 
                        '_$sSo18MTLArgumentEncoderP5MetalE11setTextures_5rangeySaySo10MTLTexture_pSgG_SnySiGtF', 
                        '_$sSo18MTLArgumentEncoderP5MetalE16setSamplerStates_5rangeySaySo15MTLSamplerState_pSgG_SnySiGtF', 
-                       '_$sSo18MTLArgumentEncoderP5MetalE23setRenderPipelineStates_5rangeySaySo09MTLRenderF5State_pSgG_SnySiGtF', 
                        '_$sSo18MTLArgumentEncoderP5MetalE24setVisibleFunctionTables_5rangeySaySo010MTLVisibleF5Table_pSgG_SnySiGtF', 
                        '_$sSo18MTLArgumentEncoderP5MetalE25setIndirectCommandBuffers_5rangeySaySo011MTLIndirectF6Buffer_pSgG_SnySiGtF', 
                        '_$sSo18MTLArgumentEncoderP5MetalE29setIntersectionFunctionTables_5rangeySaySo015MTLIntersectionF5Table_pSgG_SnySiGtF', 
@@ -48,20 +47,23 @@ exports:
                        '_$sSo21MTLBlitCommandEncoderP5MetalE21resetCommandsInBuffer_5rangeySo011MTLIndirectbH0_p_SnySiGtF', 
                        '_$sSo21MTLBlitCommandEncoderP5MetalE4fill6buffer5range5valueySo9MTLBuffer_p_SnySiGs5UInt8VtF', 
                        '_$sSo22MTLCounterSampleBufferP5MetalE19resolveCounterRangey10Foundation4DataVSgSnySiGKF', 
-                       '_$sSo23MTLRenderCommandEncoderP5MetalE12setViewportsyySaySo11MTLViewportaGF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE12useResources_5usageySaySo11MTLResource_pG_So0H5UsageVtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE13memoryBarrier9resources5after6beforeySaySo11MTLResource_pG_So0A6StagesVAKtF', 
-                       '_$sSo23MTLRenderCommandEncoderP5MetalE15setScissorRectsyySaySo14MTLScissorRectaGF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE16setVertexBuffers_7offsets5rangeySaySo9MTLBuffer_pSgG_SaySiGSnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE17setVertexTextures_5rangeySaySo10MTLTexture_pSgG_SnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE18setFragmentBuffers_7offsets5rangeySaySo9MTLBuffer_pSgG_SaySiGSnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE19setFragmentTextures_5rangeySaySo10MTLTexture_pSgG_SnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE22setVertexSamplerStates_12lodMinClamps0i3MaxK05rangeySaySo15MTLSamplerState_pSgG_SaySfGAKSnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE22setVertexSamplerStates_5rangeySaySo15MTLSamplerState_pSgG_SnySiGtF', 
-                       '_$sSo23MTLRenderCommandEncoderP5MetalE23executeCommandsInBuffer_08indirectH06offsetySo011MTLIndirectbH0_p_So9MTLBuffer_pSitF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE23executeCommandsInBuffer_5rangeySo011MTLIndirectbH0_p_SnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE24setFragmentSamplerStates_12lodMinClamps0i3MaxK05rangeySaySo15MTLSamplerState_pSgG_SaySfGAKSnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE24setFragmentSamplerStates_5rangeySaySo15MTLSamplerState_pSgG_SnySiGtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE28setTileVisibleFunctionTables_11bufferRangeySaySo010MTLVisibleH5Table_pSgG_SnySiGtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE30setVertexVisibleFunctionTables_11bufferRangeySaySo010MTLVisibleH5Table_pSgG_SnySiGtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE32setFragmentVisibleFunctionTables_11bufferRangeySaySo010MTLVisibleH5Table_pSgG_SnySiGtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE33setTileIntersectionFunctionTables_11bufferRangeySaySo015MTLIntersectionH5Table_pSgG_SnySiGtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE35setVertexIntersectionFunctionTables_11bufferRangeySaySo015MTLIntersectionH5Table_pSgG_SnySiGtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE37setFragmentIntersectionFunctionTables_11bufferRangeySaySo015MTLIntersectionH5Table_pSgG_SnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE8useHeapsyySaySo7MTLHeap_pGF', 
                        '_$sSo23MTLRenderPassDescriptorC5MetalE18getSamplePositionsSaySo17MTLSamplePositionaGyF', 
                        '_$sSo23MTLRenderPassDescriptorC5MetalE18setSamplePositionsyySaySo17MTLSamplePositionaGF', 

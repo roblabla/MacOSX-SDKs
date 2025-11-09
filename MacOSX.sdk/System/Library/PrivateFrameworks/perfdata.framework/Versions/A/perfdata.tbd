@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           37CC6E78-27F8-3D0F-8C98-6674500FAF54
+    value:           94006E4D-8EBC-3AE2-9426-B556A982E0DC
   - target:          x86_64-maccatalyst
-    value:           37CC6E78-27F8-3D0F-8C98-6674500FAF54
+    value:           94006E4D-8EBC-3AE2-9426-B556A982E0DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6368B07-F749-3DC2-A9AB-BEE1ACB1B6C1
+    value:           23B2539F-7D1B-303E-AD8B-DCE37BAEAE7E
   - target:          arm64e-maccatalyst
-    value:           F6368B07-F749-3DC2-A9AB-BEE1ACB1B6C1
+    value:           23B2539F-7D1B-303E-AD8B-DCE37BAEAE7E
 install-name:    '/System/Library/PrivateFrameworks/perfdata.framework/Versions/A/perfdata'
-current-version: 67.40.1
+current-version: 78
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -149,9 +149,10 @@ exports:
                        _pdunit_zettacycles, _pdunit_zettafloating_point_operations_per_second, 
                        _pdunit_zettahertz, _pdunit_zettainstructions, _pdunit_zettainstructions_per_second, 
                        _pdunit_zettajoules, _pdunit_zettawatt_hours, _pdunit_zettawatts, 
-                       _pdunit_zs, _pdunit_zsCPU, _pdwriter_close, _pdwriter_end_extension, 
-                       _pdwriter_name, _pdwriter_new_group, _pdwriter_new_stats, 
-                       _pdwriter_new_value, _pdwriter_open, _pdwriter_open_fd, _pdwriter_open_stream, 
+                       _pdunit_zs, _pdunit_zsCPU, _pdwriter_apply_variable_dbl, _pdwriter_apply_variable_str, 
+                       _pdwriter_close, _pdwriter_end_extension, _pdwriter_name, 
+                       _pdwriter_new_group, _pdwriter_new_stats, _pdwriter_new_value, 
+                       _pdwriter_open, _pdwriter_open_fd, _pdwriter_open_stream, 
                        _pdwriter_open_tmp, _pdwriter_record_bucket, _pdwriter_record_label_dbl, 
                        _pdwriter_record_label_str, _pdwriter_record_larger_better, 
                        _pdwriter_record_mean, _pdwriter_record_median, _pdwriter_record_percentile, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           415BD24A-3702-3A58-BBA5-18CF52833BC0
+    value:           42C53154-31B3-36A7-91EB-CC0C739F1F0C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7732A69E-77CD-3D6D-9B23-0158D42E99D5
+    value:           20C158A3-AA88-3DC9-85F2-D23AE004FF74
 install-name:    '/System/Library/PrivateFrameworks/DirectoryEditor.framework/Versions/A/DirectoryEditor'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

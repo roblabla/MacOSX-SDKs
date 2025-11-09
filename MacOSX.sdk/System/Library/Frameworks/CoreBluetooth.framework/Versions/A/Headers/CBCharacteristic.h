@@ -63,7 +63,7 @@ CB_EXTERN_CLASS @interface CBCharacteristic : CBAttribute
  *      A back-pointer to the service this characteristic belongs to.
  *
  */
-@property(assign, readonly, nonatomic) CBService *service;
+@property(weak, readonly, nonatomic) CBService *service;
 
 /*!
  * @property properties

@@ -73,7 +73,7 @@ OS_EXPORT
 @property (atomic, strong, readonly) NSArray<ObjectType> *changedObjects;
 
 // Enumerates the indexes of the moved items, relative to the 'before' state of the fetch result after applying the removedIndexes and insertedIndexes
-- (void)enumerateMovesWithBlock:(void(^)(NSUInteger fromIndex, NSUInteger toIndex))handler;
+- (void)enumerateMovesWithBlock:(void(^)(NSUInteger fromIndex, NSUInteger toIndex))handler NS_SWIFT_DISABLE_ASYNC;
 
 // YES if there are moved items
 // returns NO if hasIncrementalChanges is NO

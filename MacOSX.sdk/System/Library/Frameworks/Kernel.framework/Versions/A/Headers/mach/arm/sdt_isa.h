@@ -30,6 +30,8 @@
 #ifndef _MACH_ARM_SDT_ISA_H
 #define _MACH_ARM_SDT_ISA_H
 
+#if defined (__arm__) || defined (__arm64__)
+
 /*
  * Only define when testing.  This makes the calls into actual calls to
  * test functions.
@@ -42,7 +44,7 @@
 /*
  * For the kernel, set an explicit global label so the symbol can be located
  */
-#ifdef __arm__
+#if defined(__arm__)
 
 #define DTRACE_LABEL(p, n)                                                              \
 	".pushsection __DATA, __sdt_cstring, cstring_literals\n\t"                      \
@@ -57,7 +59,9 @@
 	".long 2b""\n\t"                                                                \
 	".popsection" "\n\t"                                                            \
 	"4:"
-#else /* __arm64__ */
+#elif defined(__arm64__)
+
+#if (__SIZEOF_POINTER__ == 8)
 
 #define DTRACE_LABEL(p, n)                                                              \
 	".pushsection __DATA, __sdt_cstring, cstring_literals\n\t"                      \
@@ -72,7 +76,16 @@
 	".quad 2b""\n\t"                                                                \
 	".popsection" "\n\t"                                                            \
 	"4:"
-#endif
+
+#else /* Not supported on arm64_32 */
+
+#define DTRACE_LABEL(p, n)
+
+#endif /* __SIZEOF_POINTER__ == 8 */
+
+#else
+#error "Unsupported architecture for SDT probes"
+#endif  /* __arm__ */
 
 #ifdef DTRACE_CALL_TEST
 
@@ -439,5 +452,7 @@
 	        );
 
 #endif /* __arm__ */
+
+#endif /* defined (__arm__) || defined (__arm64__) */
 
 #endif  /* _MACH_ARM_SDT_ISA_H */

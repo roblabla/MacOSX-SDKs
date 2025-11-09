@@ -37,8 +37,11 @@
 #include <uuid/uuid.h>
 #include <mach/boolean.h>
 #include <mach/kern_return.h>
+#include <mach/vm_types.h>
 
 #include <TargetConditionals.h>
+
+__BEGIN_DECLS
 
 #ifdef __APPLE_API_PRIVATE
 #ifdef __APPLE_API_UNSTABLE
@@ -226,6 +229,7 @@ enum micro_snapshot_flags {
 	kUserMode               = 0x4, /* interrupted usermode, or armed by usermode */
 	kIORecord               = 0x8,
 	kPMIRecord              = 0x10,
+	kMACFRecord             = 0x20, /* armed by MACF policy */
 };
 
 /*
@@ -302,6 +306,8 @@ __options_decl(microstackshot_flags_t, uint32_t, {
 #define KF_TRAPTRACE_OVRD (0x80)
 #define KF_IOTRACE_OVRD (0x100)
 #define KF_INTERRUPT_MASKED_DEBUG_STACKSHOT_OVRD (0x200)
+#define KF_INTERRUPT_MASKED_DEBUG_PMC_OVRD (0x400)
+#define KF_RW_LOCK_DEBUG_OVRD (0x800)
 
 boolean_t kern_feature_override(uint32_t fmask);
 
@@ -351,6 +357,7 @@ struct embedded_panic_header {
 #define EMBEDDED_PANIC_HEADER_FLAG_COREDUMP_FAILED               0x200
 #define EMBEDDED_PANIC_HEADER_FLAG_COMPRESS_FAILED               0x400
 #define EMBEDDED_PANIC_HEADER_FLAG_STACKSHOT_DATA_COMPRESSED     0x800
+#define EMBEDDED_PANIC_HEADER_FLAG_ENCRYPTED_COREDUMP_SKIPPED    0x1000
 
 #define EMBEDDED_PANIC_HEADER_CURRENT_VERSION 2
 #define EMBEDDED_PANIC_MAGIC 0x46554E4B /* FUNK */
@@ -385,6 +392,7 @@ struct macos_panic_header {
 #define MACOS_PANIC_HEADER_FLAG_COREDUMP_FAILED               0x200
 #define MACOS_PANIC_HEADER_FLAG_STACKSHOT_KERNEL_ONLY         0x400
 #define MACOS_PANIC_HEADER_FLAG_STACKSHOT_FAILED_COMPRESS     0x800
+#define MACOS_PANIC_HEADER_FLAG_ENCRYPTED_COREDUMP_SKIPPED    0x1000
 
 /*
  * Any change to the below structure should mirror the structure defined in MacEFIFirmware
@@ -419,14 +427,12 @@ struct efi_aurr_extended_panic_log {
 #endif /* __APPLE_API_PRIVATE */
 
 
-__BEGIN_DECLS
-
 __abortlike __printflike(1, 2)
 extern void panic(const char *string, ...);
 
+
+
+
 __END_DECLS
-
-
-
 
 #endif  /* _KERN_DEBUG_H_ */

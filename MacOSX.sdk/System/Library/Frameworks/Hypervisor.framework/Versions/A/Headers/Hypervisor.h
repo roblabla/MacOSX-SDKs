@@ -18,4 +18,5 @@
 #include <Hypervisor/hv_error.h>
 #include <Hypervisor/hv_types.h>
 #include <Hypervisor/hv_vmx.h>
+#include <Hypervisor/hv_intr.h>
 #endif

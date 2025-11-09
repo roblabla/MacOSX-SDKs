@@ -52,10 +52,10 @@ PDFKIT_EXTERN NSNotificationName const PDFDocumentDidBeginFindNotification PDFKI
 PDFKIT_EXTERN NSNotificationName const PDFDocumentDidEndFindNotification PDFKIT_AVAILABLE(10_4, 11_0);          // The notification object is self, no userInfo dictionary.
 PDFKIT_EXTERN NSNotificationName const PDFDocumentDidBeginPageFindNotification PDFKIT_AVAILABLE(10_4, 11_0);    // The notification object is self, the userInfo dictionary
                                                                                                                 //     contains the page index as an NSNumber for the key
-                                                                                                                //     @"PDFDocumentPageIndex".
+                                                                                                                //     PDFDocumentPageIndexKey.
 PDFKIT_EXTERN NSNotificationName const PDFDocumentDidEndPageFindNotification PDFKIT_AVAILABLE(10_4, 11_0);      // The notification object is self, the userInfo dictionary
                                                                                                                 //     contains the page index as an NSNumber for the key
-                                                                                                                //     @"PDFDocumentPageIndex".
+                                                                                                                //     PDFDocumentPageIndexKey.
 PDFKIT_EXTERN NSNotificationName const PDFDocumentDidFindMatchNotification PDFKIT_AVAILABLE(10_4, 11_0);        // The notification object is self, the userInfo dictionary
                                                                                                                 //     contains a PDFSelection (found instance) for the key
                                                                                                                 //     @"PDFDocumentFoundSelection".
@@ -63,10 +63,16 @@ PDFKIT_EXTERN NSNotificationName const PDFDocumentDidBeginWriteNotification PDFK
 PDFKIT_EXTERN NSNotificationName const PDFDocumentDidEndWriteNotification PDFKIT_AVAILABLE(10_4, 11_0);         // The notification object is self, no userInfo dictionary.
 PDFKIT_EXTERN NSNotificationName const PDFDocumentDidBeginPageWriteNotification PDFKIT_AVAILABLE(10_4, 11_0);   // The notification object is self, the userInfo dictionary
                                                                                                                 //     contains the page index as an NSNumber for the key
-                                                                                                                //     @"PDFDocumentPageIndex".
+                                                                                                                //     PDFDocumentPageIndexKey.
 PDFKIT_EXTERN NSNotificationName const PDFDocumentDidEndPageWriteNotification PDFKIT_AVAILABLE(10_4, 11_0);     // The notification object is self, the userInfo dictionary
                                                                                                                 //     contains the page index as an NSNumber for the key
-                                                                                                                //     @"PDFDocumentPageIndex".
+                                                                                                                //     PDFDocumentPageIndexKey.
+
+// Notification keys
+PDFKIT_EXTERN NSString* const PDFDocumentFoundSelectionKey PDFKIT_AVAILABLE(11_1, 15_0);                        // User info dictionary key to get PDFSelection from some
+                                                                                                                // notifications described above
+PDFKIT_EXTERN NSString* const PDFDocumentPageIndexKey PDFKIT_AVAILABLE(11_1, 15_0);                             // User info dictionary key to get page index from some
+                                                                                                                // notifications described above
 
 // Document attributes (see -[documentAttributes] below).
 typedef NSString *PDFDocumentAttribute NS_STRING_ENUM;
@@ -87,6 +93,26 @@ PDFKIT_EXTERN PDFDocumentWriteOption const PDFDocumentOwnerPasswordOption PDFKIT
                                                                                                                 // Owners have full privilege over the document.
 PDFKIT_EXTERN PDFDocumentWriteOption const PDFDocumentUserPasswordOption PDFKIT_AVAILABLE(10_4, 11_0);          // NSString for the user's password. Optional for encryption.
                                                                                                                 // Users can have limited access to modify, print, or write the file.
+PDFKIT_EXTERN PDFDocumentWriteOption const PDFDocumentAccessPermissionsOption PDFKIT_AVAILABLE(12_0, 15_0);     // NSNumber containing a PDFAccessPermissions
+
+// Some PDF access permissions are non-strict supersets of other permissions. Granting access to a superset
+// permission also grants access to permission(s) it is a superset of. These permissions are as follows:
+//
+// * Granting PDFAllowsHighQualityPrinting also grants PDFAllowsLowQualityPrinting
+// * Granting PDFAllowsDocumentChanges also grants PDFAllowsCommenting and PDFAllowsFormFieldEntry
+// * Granting PDFAllowsContentCopying also grants PDFAllowsContentAccessibility
+// * Granting PDFAllowsCommenting also grants PDFAllowsFormFieldEntry
+
+typedef NS_ENUM(NSUInteger, PDFAccessPermissions) {
+    PDFAllowsLowQualityPrinting    = (1 << 0),   // Print at up to 150 DPI
+    PDFAllowsHighQualityPrinting   = (1 << 1),   // Print at any DPI
+    PDFAllowsDocumentChanges       = (1 << 2),   // Modify the document contents except for page management
+    PDFAllowsDocumentAssembly      = (1 << 3),   // Page management: insert, delete, and rotate pages
+    PDFAllowsContentCopying        = (1 << 4),   // Extract content (text, images, etc.)
+    PDFAllowsContentAccessibility  = (1 << 5),   // Extract content, but only for the purpose of accessibility
+    PDFAllowsCommenting            = (1 << 6),   // Create or modify annotations, including form field entries
+    PDFAllowsFormFieldEntry        = (1 << 7)    // Modify form field entries
+};
 
 
 PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
@@ -143,6 +169,9 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 @property (nonatomic, readonly) BOOL allowsContentAccessibility PDFKIT_AVAILABLE(10_13, 11_0);    // Extract content, but only for the purpose of accessibility
 @property (nonatomic, readonly) BOOL allowsCommenting PDFKIT_AVAILABLE(10_13, 11_0);              // Create or modify annotations, including form field entries
 @property (nonatomic, readonly) BOOL allowsFormFieldEntry PDFKIT_AVAILABLE(10_13, 11_0);          // Modify form field entries, even if allowsCommenting is NO
+
+// Returns all 7 properties above as a PDFAccessPermissions value.
+@property (nonatomic, readonly) PDFAccessPermissions accessPermissions;
 
 // Returns the permissions status of the PDF document. You have kPDFDocumentPermissionsNone status for an encrypted 
 // document that you have not supplied either a valid user or owner password. For a document with no encryption, you 

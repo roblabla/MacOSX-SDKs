@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7032A4A0-0A15-31ED-9FEB-638FFAA74A5C
+    value:           60CE8A30-A7F3-3CBF-B44A-EE54F59C613D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A9D0026D-2038-3054-B296-6CBB0C71FD8D
+    value:           80FE3A44-BDBF-3FC2-BA55-28BF756DCFB4
 install-name:    '/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/SpeechObjects'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -116,7 +116,6 @@ exports:
                        VoiceSettingsWindowController._volumeLoudIcon, VoiceSettingsWindowController._volumeQuietIcon, 
                        VoiceSettingsWindowController._volumeSlider, VoiceTableCellView._activeCheckbox, 
                        VoiceTableCellView._downloadCheckbox, VoiceTableCellView._downloadMessageTextField, 
-                       VoiceTableCellView._downloadVariantPopUpButton, VoiceTableRow._groupRow, 
-                       VoiceTableRow._selected, VoiceTableRow._tableIndex, VoiceTableRow._title, 
-                       VoiceTableRow._voiceObject ]
+                       VoiceTableRow._groupRow, VoiceTableRow._selected, VoiceTableRow._tableIndex, 
+                       VoiceTableRow._title, VoiceTableRow._voiceObject ]
 ...

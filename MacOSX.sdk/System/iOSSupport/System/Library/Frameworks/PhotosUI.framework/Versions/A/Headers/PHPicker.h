@@ -24,6 +24,15 @@ NS_ASSUME_NONNULL_BEGIN
      PHPickerConfigurationAssetRepresentationModeCompatible = 2,
  };
 
+/// An enum that determines how the picker handles user selection.
+NS_REFINED_FOR_SWIFT
+typedef NS_ENUM(NSInteger, PHPickerConfigurationSelection) {
+    /// Uses the default selection behavior.
+    PHPickerConfigurationSelectionDefault = 0,
+    /// Uses the selection order made by the user. Selected assets are numbered.
+    PHPickerConfigurationSelectionOrdered = 1,
+} API_AVAILABLE(ios(15));
+
 /// A filter used to restrict the types \c PHPickerViewController can display.
 __attribute__((objc_subclassing_restricted))
 OS_EXPORT
@@ -57,6 +66,9 @@ NS_REFINED_FOR_SWIFT
 /// @discussion Setting \c preferredAssetRepresentationMode to \c PHPickerConfigurationAssetRepresentationModeAutomatic means the best representation determined by the system will be used.
 @property (NS_NONATOMIC_IOSONLY) PHPickerConfigurationAssetRepresentationMode preferredAssetRepresentationMode;
 
+/// Selection behavior of the picker. Default is \c PHPickerConfigurationSelectionDefault.
+@property (NS_NONATOMIC_IOSONLY) PHPickerConfigurationSelection selection API_AVAILABLE(ios(15));
+
 /// Maximum number of assets that can be selected. Default is 1.
 /// @discussion Setting \c selectionLimit to 0 means maximum supported by the system.
 @property (NS_NONATOMIC_IOSONLY) NSInteger selectionLimit;
@@ -65,10 +77,14 @@ NS_REFINED_FOR_SWIFT
 /// @discussion Setting \c filter to \c nil means all asset types can be displayed.
 @property (NS_NONATOMIC_IOSONLY, copy, nullable) PHPickerFilter *filter;
 
-/// Initializes new configuration with the \c photoLibrary the picker should use.
+/// Local identifiers of assets to be shown as selected when the picker is presented. Default is an empty array.
+/// @discussion \c preselectedAssetIdentifiers should be an empty array if \c selectionLimit is 1 or \c photoLibrary is not specified. Returned item providers for preselected assets are always empty.
+@property (NS_NONATOMIC_IOSONLY, copy) NSArray<NSString *> *preselectedAssetIdentifiers API_AVAILABLE(ios(15));
+
+/// Initializes a new configuration with the \c photoLibrary the picker should use.
 - (instancetype)initWithPhotoLibrary:(PHPhotoLibrary *)photoLibrary;
 
-/// Initializes new configuration with the system photo library. This configuration never returns asset identifiers.
+/// Initializes a new configuration with the system photo library. This configuration never returns asset identifiers.
 - (instancetype)init;
 
 @end
@@ -125,7 +141,7 @@ OS_EXPORT
 /// The delegate to be notified.
 @property (NS_NONATOMIC_IOSONLY, weak) id<PHPickerViewControllerDelegate> delegate NS_REFINED_FOR_SWIFT;
 
-/// Initializes new picker with the \c configuration the picker should use.
+/// Initializes a new picker with the \c configuration the picker should use.
 - (instancetype)initWithConfiguration:(PHPickerConfiguration *)configuration NS_DESIGNATED_INITIALIZER NS_REFINED_FOR_SWIFT;
 
 + (instancetype)new NS_UNAVAILABLE;

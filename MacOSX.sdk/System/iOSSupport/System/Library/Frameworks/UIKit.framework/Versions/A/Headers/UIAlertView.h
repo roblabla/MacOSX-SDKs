@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, UIAlertViewStyle) {
 @protocol UIAlertViewDelegate;
 @class UILabel, UIToolbar, UITabBar, UIWindow, UIBarButtonItem, UIPopoverController;
 
-UIKIT_EXTERN API_DEPRECATED("UIAlertView is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleAlert instead", ios(2.0, 9.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_DEPRECATED("UIAlertView is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleAlert instead", ios(2.0, 9.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIAlertView : UIView
 
 - (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message delegate:(nullable id /*<UIAlertViewDelegate>*/)delegate cancelButtonTitle:(nullable NSString *)cancelButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION NS_EXTENSION_UNAVAILABLE_IOS("Use UIAlertController instead.");
@@ -63,7 +63,7 @@ UIKIT_EXTERN API_DEPRECATED("UIAlertView is deprecated. Use UIAlertController wi
 
 @end
 
-API_UNAVAILABLE(tvos)
+API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @protocol UIAlertViewDelegate <NSObject>
 @optional
 

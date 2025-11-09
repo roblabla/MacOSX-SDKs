@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           66DBED22-5951-3EC2-90CD-0610104B4816
+    value:           5D8428F4-1CDD-3FDC-ADC8-558AE1808FF3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ECF8EA8B-38B5-3BD3-8D78-922324F48AE0
+    value:           55438EEF-79B3-3879-BA1E-7511F3B920A0
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SecurityHI.framework/Versions/A/SecurityHI'
 current-version: 55008
 parent-umbrella:

@@ -327,7 +327,7 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
 */
 - (NSString *)stringByReplacingCharactersInRange:(NSRange)range withString:(NSString *)replacement API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
-typedef NSString *NSStringTransform NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString *NSStringTransform NS_TYPED_EXTENSIBLE_ENUM;
 
 /* Perform string transliteration.  The transformation represented by transform is applied to the receiver. reverse indicates that the inverse transform should be used instead, if it exists. Attempting to use an invalid transform identifier or reverse an irreversible transform will return nil; otherwise the transformed string value is returned (even if no characters are actually transformed). You can pass one of the predefined transforms below (NSStringTransformLatinToKatakana, etc), or any valid ICU transform ID as defined in the ICU User Guide. Arbitrary ICU transform rules are not supported.
 */
@@ -405,7 +405,7 @@ FOUNDATION_EXPORT NSStringTransform const NSStringTransformStripDiacritics      
 
 @end
 
-typedef NSString * NSStringEncodingDetectionOptionsKey NS_STRING_ENUM;
+typedef NSString * NSStringEncodingDetectionOptionsKey NS_TYPED_ENUM;
 
 @interface NSString (NSStringEncodingDetection)
 

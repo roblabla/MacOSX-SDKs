@@ -14,7 +14,9 @@
 // Accounts are created not bound to any store. Once an account is saved it belongs
 // to the store it was saved into.
 
-API_AVAILABLE(ios(5.0), macos(10.8))
+
+API_DEPRECATED("Use appropriate non-Apple SDK corresponding to the type of account you want to reference instead", ios(6.0, 15.0), macos(10.8, 12.0))
+
 @interface ACAccount : NSObject
 
 // Creates a new account object with a specified account type.

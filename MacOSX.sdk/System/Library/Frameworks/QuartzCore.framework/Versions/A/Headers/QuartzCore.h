@@ -1,6 +1,6 @@
 /* QuartzCore.h
 
-   Copyright (c) 2004-2018, Apple Inc.
+   Copyright (c) 2004-2021, Apple Inc.
    All rights reserved. */
 
 #ifndef QUARTZCORE_H

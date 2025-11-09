@@ -28,7 +28,8 @@ typedef UIMenu * _Nullable (^UIContextMenuActionProvider)(NSArray<UIMenuElement 
 typedef UIViewController * _Nullable (^UIContextMenuContentPreviewProvider)(void);
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @interface UIContextMenuConfiguration : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIContextMenuConfiguration : NSObject
 
 @property (nonatomic, readonly) id<NSCopying> identifier;
 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FABB43FB-69D2-3A5B-A817-36A66DF9F42A
+    value:           D69D2BB4-F36C-384D-96D2-D08D92653ED2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           679FCE55-A3E6-3206-AB18-59F746784913
+    value:           3070BD78-D5F3-3FCF-AFFA-1CF35D68D132
 install-name:    '/System/Library/Frameworks/CalendarStore.framework/Versions/A/CalendarStore'
-current-version: 2033
+current-version: 2034
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CalAlarmActionDisplay, _CalAlarmActionEmail, _CalAlarmActionProcedure, 

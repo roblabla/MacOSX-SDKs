@@ -2064,7 +2064,7 @@ PMPrinterGetDriverCreator(
 extern OSStatus 
 PMPrinterGetDriverReleaseInfo(
   PMPrinter   printer,
-  VersRec *   release)											AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  VersRec *   release) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER CF_SWIFT_UNAVAILABLE("No replacement available.");
 
 
 /*
@@ -2239,7 +2239,7 @@ OSStatus PMPrinterSetOutputResolution(
 extern OSStatus 
 PMPrinterGetLanguageInfo(
   PMPrinter         printer,
-  PMLanguageInfo *  info)										AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  PMLanguageInfo *  info)										AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER CF_SWIFT_UNAVAILABLE("No replacement available.");
 
 
 /*

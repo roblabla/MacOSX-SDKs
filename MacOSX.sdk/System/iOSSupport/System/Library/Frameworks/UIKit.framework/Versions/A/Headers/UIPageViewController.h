@@ -47,7 +47,8 @@ UIKIT_EXTERN UIPageViewControllerOptionsKey const UIPageViewControllerOptionInte
 
 @protocol UIPageViewControllerDelegate, UIPageViewControllerDataSource;
 
-UIKIT_EXTERN API_AVAILABLE(ios(5.0)) @interface UIPageViewController : UIViewController {
+UIKIT_EXTERN API_AVAILABLE(ios(5.0)) NS_SWIFT_UI_ACTOR
+@interface UIPageViewController : UIViewController {
 }
 
 - (instancetype)initWithTransitionStyle:(UIPageViewControllerTransitionStyle)style navigationOrientation:(UIPageViewControllerNavigationOrientation)navigationOrientation options:(nullable NSDictionary<UIPageViewControllerOptionsKey, id> *)options NS_DESIGNATED_INITIALIZER;
@@ -71,10 +72,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(5.0)) @interface UIPageViewController : UIViewCon
 
 // Set visible view controllers, optionally with animation. Array should only include view controllers that will be visible after the animation has completed.
 // For transition style 'UIPageViewControllerTransitionStylePageCurl', if 'doubleSided' is 'YES' and the spine location is not 'UIPageViewControllerSpineLocationMid', two view controllers must be included, as the latter view controller is used as the back.
-- (void)setViewControllers:(nullable NSArray<UIViewController *> *)viewControllers direction:(UIPageViewControllerNavigationDirection)direction animated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion;
+- (void)setViewControllers:(nullable NSArray<UIViewController *> *)viewControllers direction:(UIPageViewControllerNavigationDirection)direction animated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC;
 
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UIPageViewControllerDelegate <NSObject>
 
 @optional
@@ -94,6 +96,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(5.0)) @interface UIPageViewController : UIViewCon
 
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UIPageViewControllerDataSource <NSObject>
 
 @required

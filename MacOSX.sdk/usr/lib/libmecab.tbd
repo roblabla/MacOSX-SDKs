@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4558AEA4-814E-3EFE-8976-BA7BECCAB27E
+    value:           26551233-B542-3615-9666-5E2E8D1C22B8
   - target:          x86_64-maccatalyst
-    value:           4558AEA4-814E-3EFE-8976-BA7BECCAB27E
+    value:           26551233-B542-3615-9666-5E2E8D1C22B8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E8FAB17C-0FD1-3FD0-9CB9-03D346EEB135
+    value:           E584F589-D744-3B84-A74D-6A1938421C4A
   - target:          arm64e-maccatalyst
-    value:           E8FAB17C-0FD1-3FD0-9CB9-03D346EEB135
+    value:           E584F589-D744-3B84-A74D-6A1938421C4A
 install-name:    '/usr/lib/libmecab.dylib'
-current-version: 929.9
+current-version: 968.1
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

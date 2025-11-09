@@ -3,9 +3,9 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B9DE1430-E896-3D4E-B2AB-BA5F202A937F
+    value:           C38027BD-6D47-3935-B2FD-4469AE912778
   - target:          x86_64-maccatalyst
-    value:           B9DE1430-E896-3D4E-B2AB-BA5F202A937F
+    value:           C38027BD-6D47-3935-B2FD-4469AE912778
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.mono.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

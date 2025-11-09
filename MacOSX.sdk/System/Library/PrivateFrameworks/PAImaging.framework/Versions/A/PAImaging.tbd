@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           88C77A96-9F22-398A-96CF-C93933C65594
+    value:           91053B01-C12D-3A80-9EBC-0B6C23E9BBF2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EE31A7E7-7EC4-3C04-B190-D27745F767FB
+    value:           6DAD9B11-60BD-3550-B2A6-79D8ABA06EF6
 install-name:    '/System/Library/PrivateFrameworks/PAImaging.framework/Versions/A/PAImaging'
-current-version: 340.0.220
+current-version: 400.27.210
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CATransform3DFromNSString, _CGAffineTransformFromNSString, 
@@ -48,32 +48,33 @@ exports:
                        PAAdjustmentDataCacheEntry, PAAdjustmentDataCacheKey, PAAdjustmentSerialization, 
                        PAAutoCalculatorContext, PAAutoCalculatorEntry, PAAutoEnhance, 
                        PABuffer, PABufferImageBacking, PABufferImageBackingTile, 
-                       PACPUDevice, PACanvasItemView, PACanvasOverlayView, PAContentTransform, 
-                       PACropController, PACropMode, PACropModeDrawingDelegate, PACropModelEditor, 
-                       PADataHistogram, PADescriptionEditController, PADescriptionSupport, 
-                       PADescriptionUtilities, PADevice, PADiscreteFileImageKey, 
-                       PADisplay, PAEditSupport, PAFileSourceDefinition, PAGLFramebuffer, 
-                       PAGLGeometryShader, PAGLIOSurfaceTexture, PAGLObject, PAGLProgramExecutable, 
-                       PAGLProgramInstance, PAGLProxyTextureRect, PAGLShader, PAGLTexture, 
-                       PAGLTexture3D, PAGLTextureRect, PAGLUtilities, PAGLValue, 
-                       PAHistogram, PAHistogramParameters, PAImageAsset, PAImageAssetClient, 
-                       PAImageAssetType, PAImageCache, PAImageCacheEntry, PAImageCacheEntrySharedValid, 
-                       PAImageContainerLayer, PAImageDrawStatItem, PAImageDrawStatistics, 
-                       PAImageDrawingDelegate, PAImageItem, PAImageItemController, 
-                       PAImageItemControllerSnapshot, PAImageItemView, PAImageItemViewController, 
-                       PAImageItemViewDefaultMode, PAImageItemViewMode, PAImageLayer, 
-                       PAImageRenderRequest, PAImageRenderRequestHandler, PAImageRenderResponse, 
-                       PAImageRenderService, PAImageRequestService, PAImageRequestSourceNode, 
-                       PAImageType, PAImaging, PAItem, PAItemController, PAItemControllerRegistry, 
-                       PAItemRegistry, PAItemView, PAItemViewConfiguration, PAItemViewController, 
+                       PACPUDevice, PACanvasItemView, PACanvasOverlayView, PACompositionEditController, 
+                       PAContentTransform, PACropController, PACropMode, PACropModeDrawingDelegate, 
+                       PACropModelEditor, PADataHistogram, PADescriptionEditController, 
+                       PADescriptionSupport, PADescriptionUtilities, PADevice, PADiscreteFileImageKey, 
+                       PADisplay, PAEditControllerFactory, PAEditSupport, PAFileSourceDefinition, 
+                       PAGLFramebuffer, PAGLGeometryShader, PAGLIOSurfaceTexture, 
+                       PAGLObject, PAGLProgramExecutable, PAGLProgramInstance, PAGLProxyTextureRect, 
+                       PAGLShader, PAGLTexture, PAGLTexture3D, PAGLTextureRect, PAGLUtilities, 
+                       PAGLValue, PAGlobalSettings, PAHistogram, PAHistogramParameters, 
+                       PAImageAsset, PAImageAssetClient, PAImageAssetType, PAImageCache, 
+                       PAImageCacheEntry, PAImageCacheEntrySharedValid, PAImageContainerLayer, 
+                       PAImageDrawStatItem, PAImageDrawStatistics, PAImageDrawingDelegate, 
+                       PAImageItem, PAImageItemController, PAImageItemControllerSnapshot, 
+                       PAImageItemView, PAImageItemViewController, PAImageItemViewDefaultMode, 
+                       PAImageItemViewMode, PAImageLayer, PAImageRenderRequest, PAImageRenderRequestHandler, 
+                       PAImageRenderResponse, PAImageRenderService, PAImageRequestService, 
+                       PAImageRequestSourceNode, PAImageType, PAImaging, PAItem, 
+                       PAItemController, PAItemControllerRegistry, PAItemRegistry, 
+                       PAItemView, PAItemViewConfiguration, PAItemViewController, 
                        PAKeyFrame, PALayerAnimationFactory, PAMultiLevelImage, PAMultiLevelImageDrawer, 
                        PAMultipleImageDrawingDelegate, PAMutableBuffer, PAMutableBufferImageBackingTile, 
                        PAMutableMultiLevelImage, PAMutableTiledImage, PANUImageTile, 
-                       PANUTiledImageBacking, PANeutrinoImage, PANeutrinoImageLayer, 
-                       PAOpenGLColorCube, PAOpenGLContext, PAOpenGLContextPool, PAOpenGLDevice, 
-                       PAOpenGLLayer, PAOpenGLProgram, PAOperationEditController, 
-                       PAOperationFactory, PAOperationFactoryParameters, PAPhotoEditSource, 
-                       PAPlatform, PAPreviewImageAsset, PAPreviewImageAssetClient, 
+                       PANUTiledImageBacking, PANeutrinoConversionUtility, PANeutrinoImage, 
+                       PANeutrinoImageLayer, PAOpenGLColorCube, PAOpenGLContext, 
+                       PAOpenGLContextPool, PAOpenGLDevice, PAOpenGLLayer, PAOpenGLProgram, 
+                       PAOperationEditController, PAOperationFactory, PAOperationFactoryParameters, 
+                       PAPhotoEditSource, PAPlatform, PAPreviewImageAsset, PAPreviewImageAssetClient, 
                        PAProxyOpenGLContext, PAPurgeableBufferImageBacking, PARAWImageRequestSourceNode, 
                        PARenderedImageAsset, PARenderedImageAssetClient, PASnapshotLayer, 
                        PATexture, PATextureImageBacking, PATextureImageTile, PATextureProxy, 

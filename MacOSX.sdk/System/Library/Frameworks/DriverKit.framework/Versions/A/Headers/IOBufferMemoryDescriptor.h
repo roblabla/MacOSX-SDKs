@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from IOBufferMemoryDescriptor.iig */
+/* iig(DriverKit-191) generated from IOBufferMemoryDescriptor.iig */
 
 /* IOBufferMemoryDescriptor.iig:1-40 */
 /*
@@ -220,11 +220,18 @@ class IOBufferMemoryDescriptor : public IOMemoryDescriptor, public IOBufferMemor
     friend class IOBufferMemoryDescriptorMetaClass;
 
 public:
+#ifdef IOBufferMemoryDescriptor_DECLARE_IVARS
+IOBufferMemoryDescriptor_DECLARE_IVARS
+#else /* IOBufferMemoryDescriptor_DECLARE_IVARS */
     union
     {
         IOBufferMemoryDescriptor_IVars * ivars;
         IOBufferMemoryDescriptor_LocalIVars * lvars;
     };
+#endif /* IOBufferMemoryDescriptor_DECLARE_IVARS */
+
+    static OSMetaClass *
+    sGetMetaClass() { return gIOBufferMemoryDescriptorMetaClass; };
 
     using super = IOMemoryDescriptor;
 

@@ -4,21 +4,35 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           24464027-BBD2-3F69-BE69-15A0FE21B29C
+    value:           C3C54DA0-0EED-3CC6-9C2E-5A1B3AEC5406
   - target:          x86_64-maccatalyst
-    value:           24464027-BBD2-3F69-BE69-15A0FE21B29C
+    value:           C3C54DA0-0EED-3CC6-9C2E-5A1B3AEC5406
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           80A0215B-80EC-3A4D-A56A-F619F94B1C01
+    value:           D16D98C3-C591-3C74-AB9E-AF357C3AB0F2
   - target:          arm64e-maccatalyst
-    value:           80A0215B-80EC-3A4D-A56A-F619F94B1C01
+    value:           D16D98C3-C591-3C74-AB9E-AF357C3AB0F2
 install-name:    '/System/Library/PrivateFrameworks/AuthenticationServicesCore.framework/Versions/A/AuthenticationServicesCore'
-current-version: 611.1.21
+current-version: 612.1.24
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _ASCAuthorizationErrorDomain, _descriptionForErrorCode ]
+    symbols:         [ _ASCAgentBundleIdentifier, _ASCAgentServiceName, _ASCAuthorizationErrorDomain, 
+                       _ASCAuthorizationPresentationContextDataKey, _ASCAuthorizationPresenterClientEntitlementName, 
+                       _ASViewServiceClientEntitlement, _ASViewServiceProcess, _ascCredentialRequestTypesAllPublicKey, 
+                       _authenticationServicesViewServiceBundleIdentifier, _descriptionForErrorCode ]
+    objc-classes:    [ ASAuthorizationRemoteViewController, ASCAgent, ASCAgentInterface, 
+                       ASCAgentListener, ASCAgentProxy, ASCAppleIDCredential, ASCAppleIDLoginChoice, 
+                       ASCAuthorizationPresentationContext, ASCAuthorizationPresenter, 
+                       ASCAuthorizationPresenterHostInterface, ASCAuthorizationRemotePresenter, 
+                       ASCAuthorizationTrafficController, ASCCredentialRequestContext, 
+                       ASCPasswordCredential, ASCPasswordLoginChoice, ASCPlatformPublicKeyCredentialAssertion, 
+                       ASCPlatformPublicKeyCredentialLoginChoice, ASCPlatformPublicKeyCredentialRegistration, 
+                       ASCPublicKeyCredentialAssertionOptions, ASCPublicKeyCredentialCreationOptions, 
+                       ASCPublicKeyCredentialDescriptor, ASCSecurityKeyPublicKeyCredentialAssertion, 
+                       ASCSecurityKeyPublicKeyCredentialLoginChoice, ASCSecurityKeyPublicKeyCredentialRegistration, 
+                       ASCViewServiceInterface, ASCWebKitSPISupport, ASFeatureManager ]
 ...

@@ -257,6 +257,43 @@ MPS_SWIFT_NAME( minimum(_:_:name:) );
                                         name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( maximum(_:_:name:) );
 
+/*!
+ *  @abstract   Create Minimum op and return the result tensor, it supports broadcasting as well. If any of the operands is NaN, NaN is returned
+ *
+ *  @code
+ *              resultTensor = isNaN(primaryTensor) || isNan(secondaryTensor) ? NaN : min(primaryTensor, secondaryTensor)
+ *  @endcode
+ *
+ *  @param      primaryTensor          LHS tensor of the binary Op
+ *  @param      secondaryTensor      RHS tensor of the binary Op
+ *  @param      name                              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) minimumWithNaNPropagationWithPrimaryTensor:(MPSGraphTensor *) primaryTensor
+                                               secondaryTensor:(MPSGraphTensor *) secondaryTensor
+                                                          name:(NSString * _Nullable) name
+                                                MPS_SWIFT_NAME( minimumWithNaNPropagation(_:_:name:) )
+                                                MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+/*!
+ *  @abstract   Create Maximum op and return the result tensor, it supports broadcasting as well. If any of the operands is NaN, NaN is returned
+ *
+ *  @code
+ *              resultTensor = isNaN(primaryTensor) || isNan(secondaryTensor) ? NaN : max(primaryTensor, secondaryTensor)
+ *  @endcode
+ *
+ *  @param      primaryTensor          LHS tensor of the binary Op
+ *  @param      secondaryTensor      RHS tensor of the binary Op
+ *  @param      name                              name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object.
+ */
+-(MPSGraphTensor *) maximumWithNaNPropagationWithPrimaryTensor:(MPSGraphTensor *) primaryTensor
+                                               secondaryTensor:(MPSGraphTensor *) secondaryTensor
+                                                          name:(NSString * _Nullable) name
+                                                MPS_SWIFT_NAME( maximumWithNaNPropagation(_:_:name:) )
+                                                MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
 
 -(MPSGraphTensor *) equalWithPrimaryTensor:(MPSGraphTensor *) primaryTensor

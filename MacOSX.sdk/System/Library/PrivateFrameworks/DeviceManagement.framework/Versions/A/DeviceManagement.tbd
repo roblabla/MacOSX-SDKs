@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D91840AC-BBEC-3078-B60E-2812556CA112
+    value:           368CA398-B455-3C34-B919-107871A2E2B9
   - target:          x86_64-maccatalyst
-    value:           D91840AC-BBEC-3078-B60E-2812556CA112
+    value:           368CA398-B455-3C34-B919-107871A2E2B9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           77842A68-3C63-33B0-941E-453077C93043
+    value:           9F059B65-1437-35A2-B22B-712995EC78DF
   - target:          arm64e-maccatalyst
-    value:           77842A68-3C63-33B0-941E-453077C93043
+    value:           9F059B65-1437-35A2-B22B-712995EC78DF
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 43
+current-version: 59
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -117,8 +117,9 @@ exports:
                        _DMFDeviceUserImageURLKey, _DMFDeviceUserLoginStateKey, _DMFDeviceVoiceRoamingEnabledKey, 
                        _DMFDeviceVolumeKey, _DMFDeviceWiFiMACKey, _DMFDeviceXsanConfigurationKey, 
                        _DMFDeviceiTunesStoreAccountHashKey, _DMFDeviceiTunesStoreAccountIsActiveKey, 
-                       _DMFEffectivePolicyTypeApplication, _DMFEffectivePolicyTypeCategory, 
-                       _DMFEffectivePolicyTypeWeb, _DMFEffectivePolicyTypeiCloudAccountLogout, 
+                       _DMFEffectivePolicyTypeApplication, _DMFEffectivePolicyTypeApplicationCategory, 
+                       _DMFEffectivePolicyTypeCategory, _DMFEffectivePolicyTypeWeb, 
+                       _DMFEffectivePolicyTypeWebCategory, _DMFEffectivePolicyTypeiCloudAccountLogout, 
                        _DMFEmergencyModeChangedNotification, _DMFEmergencyModeLog, 
                        _DMFEmergencyModeMachServiceName, _DMFEntitlementsApplicationIdentifierKey, 
                        _DMFErrorDomain, _DMFErrorFailedConfigurationDatabaseStoreKey, 
@@ -222,19 +223,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1F839039-C8F0-3505-94DF-2846BB70B0F3
+    value:           F8E47CAF-0D8E-3B75-B428-7A8AAC2DBFB9
   - target:          x86_64-maccatalyst
-    value:           1F839039-C8F0-3505-94DF-2846BB70B0F3
+    value:           F8E47CAF-0D8E-3B75-B428-7A8AAC2DBFB9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8A7462B5-EA66-3D6D-A292-5B9F494A719C
+    value:           0B9F243D-4B45-30F4-9002-EA78065068A2
   - target:          arm64e-maccatalyst
-    value:           8A7462B5-EA66-3D6D-A292-5B9F494A719C
+    value:           0B9F243D-4B45-30F4-9002-EA78065068A2
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
-current-version: 7.3
+current-version: 8.8
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
@@ -251,7 +252,9 @@ exports:
                        CATRemoteConnectionSocketOptions, CATRemoteConnectionTrustDecision, 
                        CATRemoteTaskOperation, CATRemoteTransport, CATSerialOperationQueue, 
                        CATSessionMessage, CATSessionMessageDidInvalidate, CATSessionMessageInvalidate, 
-                       CATSessionMessageResume, CATSessionMessageResumed, CATSocket, 
+                       CATSessionMessageResume, CATSessionMessageResumed, CATSharingBenignError, 
+                       CATSharingBroadcastTerminal, CATSharingDevice, CATSharingDeviceDiscovery, 
+                       CATSharingFatalError, CATSharingServiceTransport, CATSocket, 
                        CATState, CATStateMachine, CATStateMachineEvent, CATTaskBlockServer, 
                        CATTaskClient, CATTaskMessage, CATTaskMessageCancel, CATTaskMessageError, 
                        CATTaskMessageFetchProgress, CATTaskMessageIncrementalProgress, 

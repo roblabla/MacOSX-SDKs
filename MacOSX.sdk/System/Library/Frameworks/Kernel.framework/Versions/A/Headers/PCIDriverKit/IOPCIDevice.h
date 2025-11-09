@@ -1,6 +1,6 @@
-/* iig(DriverKit-107.100.6) generated from IOPCIDevice.iig */
+/* iig(DriverKit-191) generated from IOPCIDevice.iig */
 
-/* IOPCIDevice.iig:1-35 */
+/* IOPCIDevice.iig:1-71 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -36,7 +36,43 @@
 #include <DriverKit/IOService.h>  /* .iig include */
 #include <DriverKit/IOMemoryDescriptor.h>  /* .iig include */
 
-/* source class IOPCIDevice IOPCIDevice.iig:36-297 */
+/*!
+ * @brief Options for <code>SaveDeviceState</code>
+ *
+ * @constant kPCIConfigShadowPermanent - Re-use the saved device state in all future restores (until the next permanent copy is made)
+ */
+enum IOPCISaveDeviceStateOptions
+{
+    kPCIConfigShadowPermanent = 0x80000000,
+};
+
+/*!
+ * @brief BAR indexes for <code>GetBARInfo</code>
+ */
+enum IOPCIMemoryRange
+{
+    kPCIMemoryRangeBAR0         = 0,
+    kPCIMemoryRangeBAR1         = 1,
+    kPCIMemoryRangeBAR2         = 2,
+    kPCIMemoryRangeBAR3         = 3,
+    kPCIMemoryRangeBAR4         = 4,
+    kPCIMemoryRangeBAR5         = 5,
+    kPCIMemoryRangeExpansionROM = 6,
+};
+
+/*!
+ * @brief BAR types for <code>GetBARInfo</code>
+ */
+enum IOPCIBARType
+{
+    kPCIBARTypeM32   = 0x00, /* 32-bit (Non-prefetchable) Memory */
+    kPCIBARTypeIO    = 0x01, /* I/O Space */
+    kPCIBARTypeM64   = 0x04, /* 64-bit (Non-prefetchable) Memory */
+    kPCIBARTypeM32PF = 0x08, /* 32-bit Prefetchable Memory */
+    kPCIBARTypeM64PF = 0x0c, /* 64-bit Prefetchable Memory */
+};
+
+/* source class IOPCIDevice IOPCIDevice.iig:72-369 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -303,12 +339,48 @@ public:
     virtual kern_return_t
     EnablePCIPowerManagement(uint64_t state);
 
+#pragma mark State Management
+
+    /*!
+     * @brief       Save the PCIe state of the device.
+     * @discussion  This method will save the device's Configuration Space into memory, to be restored at a later point (for example, after a Function Level Reset) with RestoreDeviceState().
+     * @param       options See IOPCISaveDeviceStateOptions
+     * @result      kIOReturnSuccess if the save was succesful.
+     */
+    virtual kern_return_t
+    SaveDeviceState(IOOptionBits options = 0);
+
+    /*!
+     * @brief       Restore the PCIe state of the device.
+     * @discussion  This method will restore the device's Configuration Space from memory, using the last saved state from SaveDeviceState().
+     * @param       options Reserved for future use
+     * @result      kIOReturnSuccess if there were no errors.
+     */
+    virtual kern_return_t
+    RestoreDeviceState(IOOptionBits options = 0);
+
+#pragma mark Memory Accessor helpers
+
+    /*!
+     * @brief       Lookup information related to the device BAR.
+     * @discussion  This method returns the device memory index (used by the MemoryReadXX/MemoryWriteXX functions), type, and size of the user-specified BAR.
+     * @param       barIndex See enum IOPCIMemoryRange.
+     * @param       memoryIndex An out parameter to return the memory index, if the function is successful.
+     * @param       barSize An out parameter to return the BAR size (bytes), if the function is successful. Not applicable for Expansion ROM.
+     * @param       barType An out parameter to return the BAR type, if the function is successful. See enum IOPCIBARType. Not applicable for Expansion ROM.
+     * @result      kIOReturnSuccess if the requested index is found.
+     */
+    virtual kern_return_t
+    GetBARInfo(uint8_t   barIndex,
+               uint8_t*  memoryIndex,
+               uint64_t* barSize = 0,
+               uint8_t*  barType = 0);
 };
 
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOPCIDevice IOPCIDevice.iig:36-297 */
+/* generated class IOPCIDevice IOPCIDevice.iig:72-369 */
 
 #define IOPCIDevice__ManageSession_ID            0xd395e45429887c65ULL
 #define IOPCIDevice__CopyDeviceMemoryWithIndex_ID            0x8fbfd4a80b3ed3f1ULL
@@ -317,6 +389,9 @@ public:
 #define IOPCIDevice_GetBusDeviceFunction_ID            0xee989f3b87e12497ULL
 #define IOPCIDevice_HasPCIPowerManagement_ID            0xbad854791f46fcc0ULL
 #define IOPCIDevice_EnablePCIPowerManagement_ID            0xfb030cc994f3e061ULL
+#define IOPCIDevice_SaveDeviceState_ID            0xf6f91d3296a44c78ULL
+#define IOPCIDevice_RestoreDeviceState_ID            0xa3652c7a818b5b57ULL
+#define IOPCIDevice_GetBARInfo_ID            0x921a80175d4aa69dULL
 
 #define IOPCIDevice__ManageSession_Args \
         IOService * forClient, \
@@ -358,6 +433,18 @@ public:
 
 #define IOPCIDevice_EnablePCIPowerManagement_Args \
         uint64_t state
+
+#define IOPCIDevice_SaveDeviceState_Args \
+        IOOptionBits options
+
+#define IOPCIDevice_RestoreDeviceState_Args \
+        IOOptionBits options
+
+#define IOPCIDevice_GetBARInfo_Args \
+        uint8_t barIndex, \
+        uint8_t * memoryIndex, \
+        uint64_t * barSize, \
+        uint8_t * barType
 
 #define IOPCIDevice_Methods \
 \
@@ -505,6 +592,24 @@ public:\
         uint64_t state,\
         OSDispatchMethod supermethod = NULL);\
 \
+    kern_return_t\
+    SaveDeviceState(\
+        IOOptionBits options = 0,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    RestoreDeviceState(\
+        IOOptionBits options = 0,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    GetBARInfo(\
+        uint8_t barIndex,\
+        uint8_t * memoryIndex,\
+        uint64_t * barSize = 0,\
+        uint8_t * barType = 0,\
+        OSDispatchMethod supermethod = NULL);\
+\
 \
 protected:\
     /* _Impl methods */\
@@ -555,6 +660,24 @@ public:\
         OSMetaClassBase * target,\
         EnablePCIPowerManagement_Handler func);\
 \
+    typedef kern_return_t (*SaveDeviceState_Handler)(OSMetaClassBase * target, IOPCIDevice_SaveDeviceState_Args);\
+    static kern_return_t\
+    SaveDeviceState_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        SaveDeviceState_Handler func);\
+\
+    typedef kern_return_t (*RestoreDeviceState_Handler)(OSMetaClassBase * target, IOPCIDevice_RestoreDeviceState_Args);\
+    static kern_return_t\
+    RestoreDeviceState_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        RestoreDeviceState_Handler func);\
+\
+    typedef kern_return_t (*GetBARInfo_Handler)(OSMetaClassBase * target, IOPCIDevice_GetBARInfo_Args);\
+    static kern_return_t\
+    GetBARInfo_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        GetBARInfo_Handler func);\
+\
 
 
 #define IOPCIDevice_KernelMethods \
@@ -588,6 +711,15 @@ protected:\
 \
     kern_return_t\
     EnablePCIPowerManagement_Impl(IOPCIDevice_EnablePCIPowerManagement_Args);\
+\
+    kern_return_t\
+    SaveDeviceState_Impl(IOPCIDevice_SaveDeviceState_Args);\
+\
+    kern_return_t\
+    RestoreDeviceState_Impl(IOPCIDevice_RestoreDeviceState_Args);\
+\
+    kern_return_t\
+    GetBARInfo_Impl(IOPCIDevice_GetBARInfo_Args);\
 \
 
 
@@ -639,12 +771,21 @@ class IOPCIDevice : public IOService, public IOPCIDeviceInterface
 
 #if !KERNEL
 public:
+#ifdef IOPCIDevice_DECLARE_IVARS
+IOPCIDevice_DECLARE_IVARS
+#else /* IOPCIDevice_DECLARE_IVARS */
     union
     {
         IOPCIDevice_IVars * ivars;
         IOPCIDevice_LocalIVars * lvars;
     };
+#endif /* IOPCIDevice_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gIOPCIDeviceMetaClass; };
+#endif /* KERNEL */
 
     using super = IOService;
 
@@ -659,9 +800,9 @@ public:
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOPCIDevice.iig:299-300 */
+/* IOPCIDevice.iig:371-372 */
 
 #pragma mark Private Class Extension
-/* IOPCIDevice.iig:323- */
+/* IOPCIDevice.iig:395- */
 
 #endif /* ! _IOKIT_UIOPCIDEVICE_H */

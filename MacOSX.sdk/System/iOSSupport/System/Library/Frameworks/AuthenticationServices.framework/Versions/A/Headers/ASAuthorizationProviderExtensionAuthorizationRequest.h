@@ -33,6 +33,8 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macCatalyst(14.0), macos(10.15)) API_UNAVAILA
 
 @end
 
+@class ASAuthorizationProviderExtensionAuthorizationResult;
+
 AS_EXTERN API_AVAILABLE(ios(13.0), macCatalyst(14.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos)
 @interface ASAuthorizationProviderExtensionAuthorizationRequest : NSObject
 
@@ -56,13 +58,19 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macCatalyst(14.0), macos(10.15)) API_UNAVAILA
  */
 - (void)completeWithHTTPResponse:(NSHTTPURLResponse *)httpResponse httpBody:(nullable NSData *)httpBody NS_SWIFT_NAME(complete(httpResponse:httpBody:));
 
+/*! @abstract Call when authorization succeeded with @see ASAuthorizationProviderExtensionAuthorizationResult.
+ */
+- (void)completeWithAuthorizationResult:(ASAuthorizationProviderExtensionAuthorizationResult *)authorizationResult NS_SWIFT_NAME(complete(authorizationResult:)) API_AVAILABLE(ios(15.0), macCatalyst(15.0), macos(12)) API_UNAVAILABLE(watchos, tvos);
+
 /*! @abstract Call when authorization failed with an error.
  */
 - (void)completeWithError:(NSError *)error NS_SWIFT_NAME(complete(error:));
 
 /*! @abstract Asks authorization service to show extension view controller. If the controller cannot be shown an error is returned.
  */
-- (void)presentAuthorizationViewControllerWithCompletion:(void(^)(BOOL success, NSError * _Nullable error))completion;
+- (void)presentAuthorizationViewControllerWithCompletion:(void(^)(BOOL success, NSError * _Nullable error))completion
+    NS_SWIFT_ASYNC_THROWS_ON_FALSE(1)
+    ;
 
 /*! @abstract Request URL with all components.
  */

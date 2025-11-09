@@ -18,7 +18,7 @@
 */
 
 API_UNAVAILABLE(ios, watchos, tvos)
-@interface IOBluetoothSDPUUID : NSData <NSCoding, NSSecureCoding> {
+@interface IOBluetoothSDPUUID : NSData {
     NSData	*mUUIDData;
     
     void	*_mReserved;
@@ -63,6 +63,13 @@ API_UNAVAILABLE(ios, watchos, tvos)
 
 + (instancetype)uuid32:(BluetoothSDPUUID32)uuid32;
 
+/*!	@method	withSDPUUIDRef:
+	@abstract	Method call to convert an IOBluetoothSDPUUIDRef into an IOBluetoothSDPUUID *.
+        @param	sdpUUIDRef IOBluetoothSDPUUIDRef for which an IOBluetoothSDPUUID * is desired.
+	@result		Returns the IOBluetoothSDPUUID * for the given IOBluetoothSDPUUIDRef.
+*/
++ (instancetype)withSDPUUIDRef:(IOBluetoothSDPUUIDRef)sdpUUIDRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+
 /*!
     @method initWithUUID16:
     @abstract Initializes a new 16-bit IOBluetoothSDPUUID with the given UUID16
@@ -80,6 +87,12 @@ API_UNAVAILABLE(ios, watchos, tvos)
 */
 
 - (instancetype)initWithUUID32:(BluetoothSDPUUID32)uuid32;
+
+/*!	@method	getSDPUUIDRef
+	@abstract	Returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
+	@result		Returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
+*/
+- (IOBluetoothSDPUUIDRef)getSDPUUIDRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method getUUIDWithLength:

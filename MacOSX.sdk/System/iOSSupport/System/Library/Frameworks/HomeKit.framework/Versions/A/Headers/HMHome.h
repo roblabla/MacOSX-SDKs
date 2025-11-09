@@ -168,18 +168,18 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addAndSetupAccessoriesWithCompletionHandler:(void (^)(NSError * __nullable error))completion API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
+- (void)addAndSetupAccessoriesWithCompletionHandler:(void (^)(NSError * __nullable error))completion API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories());
 
 /*!
  * @brief Add accessory with the given setup payload to the home.
- * @note  This SPI requires entitlement: com.apple.homekit.developer.allow-setup-payload
+ * @note  This SPI requires entitlement: com.apple.developer.homekit.allow-setup-payload
  *
  * @param completion Block that is invoked once the request is processed.
  *                   Accessories provides the list of added accessories.
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addAndSetupAccessoriesWithPayload:(HMAccessorySetupPayload *)payload completionHandler:(void (^)(NSArray<HMAccessory *>* __nullable accessories, NSError * __nullable error))completion API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
+- (void)addAndSetupAccessoriesWithPayload:(HMAccessorySetupPayload *)payload completionHandler:(void (^)(NSArray<HMAccessory *>* __nullable accessories, NSError * __nullable error))completion API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories(payload:));
 
 /*!
  * @brief True if this home supports all of the requirements for adding a network router.
@@ -262,7 +262,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addRoomWithName:(NSString *)roomName completionHandler:(void (^)(HMRoom * __nullable room, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)addRoomWithName:(NSString *)roomName completionHandler:(void (^)(HMRoom * __nullable room, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addRoom(named:));
 
 /*!
  * @brief Removes a room from the home. 
@@ -307,7 +307,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addZoneWithName:(NSString *)zoneName completionHandler:(void (^)(HMZone * __nullable zone, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)addZoneWithName:(NSString *)zoneName completionHandler:(void (^)(HMZone * __nullable zone, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addZone(named:));
 
 /*!
  * @brief Removes a zone from the home.
@@ -340,7 +340,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addServiceGroupWithName:(NSString *)serviceGroupName completionHandler:(void (^)(HMServiceGroup * __nullable group, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)addServiceGroupWithName:(NSString *)serviceGroupName completionHandler:(void (^)(HMServiceGroup * __nullable group, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addServiceGroup(named:));
 
 /*!
  * @brief Removes a service group from the home.
@@ -373,7 +373,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addActionSetWithName:(NSString *)actionSetName completionHandler:(void (^)(HMActionSet * __nullable actionSet, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)addActionSetWithName:(NSString *)actionSetName completionHandler:(void (^)(HMActionSet * __nullable actionSet, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addActionSet(named:));
 
 /*!
  * @brief Removes an existing action set from the home.

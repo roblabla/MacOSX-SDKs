@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class UIBarButtonItem, UIColor, UIToolbarAppearance;
 @protocol UIToolbarDelegate;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) @interface UIToolbar : UIView <UIBarPositioning>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIToolbar : UIView <UIBarPositioning>
 
 @property(nonatomic) UIBarStyle barStyle UI_APPEARANCE_SELECTOR API_UNAVAILABLE(tvos); // default is UIBarStyleDefault
 @property(nullable, nonatomic, copy) NSArray<UIBarButtonItem *> *items; // get/set visible UIBarButtonItem. default is nil. changes not animated. shown in order
@@ -70,12 +71,16 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) @interface UIToolbar 
 @property (nonatomic, readwrite, copy) UIToolbarAppearance *standardAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0));
 /// Describes the appearance attributes for the toolbar to use when it is displayed with its compact height. If not set, the standardAppearance will be used instead.
 @property (nonatomic, readwrite, copy, nullable) UIToolbarAppearance *compactAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0));
+/// Describes the appearance attributes for the toolbar to use at standard height when an observable scroll view is scrolled to the bottom. If not set, standardAppearance will be used instead.
+@property (nonatomic, readwrite, copy, nullable) UIToolbarAppearance *scrollEdgeAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(15.0));
+/// Describes the appearance attributes for the toolbar to use at compact height when an observable scroll view is scrolled to the bottom. If not set, will fall back to scrollEdgeAppearance followed by compactAppearance and finally standardAppearance.
+@property (nonatomic, readwrite, copy, nullable) UIToolbarAppearance *compactScrollEdgeAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(15.0));
 
 @property(nullable, nonatomic, weak) id<UIToolbarDelegate> delegate API_AVAILABLE(ios(7.0)); // You may not set the delegate when the toolbar is managed by a UINavigationController.
 
 @end
 
-API_UNAVAILABLE(tvos)
+API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @protocol UIToolbarDelegate <UIBarPositioningDelegate>
 @end
 

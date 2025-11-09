@@ -17,6 +17,8 @@
  @discussion
     The same result can be accomplished with AVQueuePlayer directly, but AVPlayerLooper provides a simpler interface to loop a single AVPlayerItem with an option to specify a time range. AVPlayerLooper only supports looping for forward playback (positive player rate). Behavior is undefined for negative player rate.
 
+	Note that the transition at the loop point is not guaranteed to be gapless.
+
     Sample usage code:
     // Create player and configure
     AVQueuePlayer *player = [[AVQueuePlayer alloc] init];

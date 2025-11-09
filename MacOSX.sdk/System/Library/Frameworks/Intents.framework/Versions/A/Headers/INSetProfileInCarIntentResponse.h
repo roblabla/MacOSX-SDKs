@@ -14,13 +14,12 @@ typedef NS_ENUM(NSInteger, INSetProfileInCarIntentResponseCode) {
     INSetProfileInCarIntentResponseCodeSuccess,
     INSetProfileInCarIntentResponseCodeFailure,
     INSetProfileInCarIntentResponseCodeFailureRequiringAppLaunch,
-} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+} API_DEPRECATED("INSetProfileInCarIntentResponseCode is deprecated. There is no replacement.", ios(10.0, 15.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0))
-API_UNAVAILABLE(macos, tvos)
-API_UNAVAILABLE(watchos)
+API_DEPRECATED("INSetProfileInCarIntentResponse is deprecated. There is no replacement.", ios(10.0, 15.0))
+API_UNAVAILABLE(macos, watchos, tvos)
 @interface INSetProfileInCarIntentResponse : INIntentResponse
 
 - (id)init NS_UNAVAILABLE;

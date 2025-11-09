@@ -1,0 +1,30 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           80BA936E-8F4C-3AD2-9133-8107070FE313
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           8D5A5FDE-CF53-34D4-8439-BA69FAC61ECA
+install-name:    '/System/Library/Frameworks/CHIP.framework/Versions/A/CHIP'
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ _CHIPErrorDomain, _CHIPVersionNumber, _CHIPVersionString ]
+    objc-classes:    [ CHIPAccountLogin, CHIPApplicationBasic, CHIPApplicationLauncher, 
+                       CHIPAudioOutput, CHIPBarrierControl, CHIPBasic, CHIPBinaryInputBasic, 
+                       CHIPBinding, CHIPBridgedDeviceBasic, CHIPCluster, CHIPColorControl, 
+                       CHIPContentLaunch, CHIPDescriptor, CHIPDevice, CHIPDeviceController, 
+                       CHIPDoorLock, CHIPError, CHIPEthernetNetworkDiagnostics, CHIPFixedLabel, 
+                       CHIPGeneralCommissioning, CHIPGeneralDiagnostics, CHIPGroupKeyManagement, 
+                       CHIPGroups, CHIPIdentify, CHIPKeypadInput, CHIPLevelControl, 
+                       CHIPLowPower, CHIPManualSetupPayloadParser, CHIPMediaInput, 
+                       CHIPMediaPlayback, CHIPNetworkCommissioning, CHIPOnOff, CHIPOnboardingPayloadParser, 
+                       CHIPOperationalCredentials, CHIPOptionalQRCodeInfo, CHIPPumpConfigurationAndControl, 
+                       CHIPQRCodeSetupPayloadParser, CHIPRelativeHumidityMeasurement, 
+                       CHIPScenes, CHIPSetupPayload, CHIPSoftwareDiagnostics, CHIPSwitch, 
+                       CHIPTargetNavigator, CHIPTemperatureMeasurement, CHIPTestCluster, 
+                       CHIPThermostat, CHIPTrustedRootCertificates, CHIPTvChannel, 
+                       CHIPWakeOnLan, CHIPWindowCovering ]
+...

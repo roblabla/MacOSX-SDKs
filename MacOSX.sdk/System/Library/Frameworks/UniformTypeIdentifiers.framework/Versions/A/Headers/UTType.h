@@ -199,16 +199,14 @@ type.tags[UTTagClassMIMEType].firstObject
 	or claimed by an application. They are used when a file is encountered whose
 	metadata has no corresponding type known to the system.
 
-	A type cannot be both declared \em and dynamic. You cannot construct an
-	instance of \c UTType that is neither declared nor dynamic.
+	A type cannot be both declared \em and dynamic.
 */
 @property (readonly, getter=isDynamic) BOOL dynamic;
 
 /**
 	\brief Whether or not the receiver is a type known to the system.
 
-	A type cannot be both declared \em and dynamic. You cannot construct an
-	instance of \c UTType that is neither declared nor dynamic.
+	A type cannot be both declared \em and dynamic.
 */
 @property (readonly, getter=isDeclared) BOOL declared;
 

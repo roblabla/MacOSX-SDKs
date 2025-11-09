@@ -4,6 +4,7 @@
 //
 //  Copyright (c) 2013-2015 Apple Inc. All rights reserved.
 //
+/* clang-format off */
 
 #import <Foundation/Foundation.h>
 #import <HomeKit/HMDefines.h>
@@ -43,26 +44,6 @@ HM_EXTERN NSString * const HMCharacteristicPropertyHidden API_AVAILABLE(ios(9.3)
  * @brief Characteristic type for target relative humidity. The value of the characteristic is a float value in percent.
  */
 HM_EXTERN NSString * const HMCharacteristicTypeTargetRelativeHumidity API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
-
-/*!
- * @brief Characteristic type for manufacturer. The value of the characteristic is a string.
- */
-HM_EXTERN NSString * const HMCharacteristicTypeManufacturer API_DEPRECATED_WITH_REPLACEMENT("Use -[HMAccessory manufacturer] instead", ios(8.0, 11.0), watchos(2.0, 4.0), tvos(10.0, 11.0)) API_UNAVAILABLE(macos, macCatalyst);
-
-/*!
- * @brief Characteristic type for model. The value of the characteristic is a string.
- */
-HM_EXTERN NSString * const HMCharacteristicTypeModel API_DEPRECATED_WITH_REPLACEMENT("Use -[HMAccessory model] instead", ios(8.0, 11.0), watchos(2.0, 4.0), tvos(10.0, 11.0)) API_UNAVAILABLE(macos, macCatalyst);
-
-/*!
- * @brief Characteristic type for serial number. The value of the characteristic is a string.
- */
-HM_EXTERN NSString * const HMCharacteristicTypeSerialNumber API_DEPRECATED("No longer supported", ios(8.0, 11.0), watchos(2.0, 4.0), tvos(10.0, 11.0)) API_UNAVAILABLE(macos, macCatalyst);
-
-/*!
- * @brief Characteristic type for identify. The characteristic is write-only that takes a boolean.
- */
-HM_EXTERN NSString * const HMCharacteristicTypeIdentify API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
  * @brief Characteristic type for outlet in use. The value of the characteristic is a boolean, which is true
@@ -198,18 +179,6 @@ HM_EXTERN NSString * const HMCharacteristicTypeCurrentSecuritySystemState API_AV
 HM_EXTERN NSString * const HMCharacteristicTypeCurrentVerticalTilt API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
- * @brief Characteristic type for firmware version. The value of the characteristic is a string value
- *        describing the firmware version of the accessory.
- */
-HM_EXTERN NSString * const HMCharacteristicTypeFirmwareVersion API_DEPRECATED_WITH_REPLACEMENT("Use -[HMAccessory firmwareVersion] instead", ios(8.0, 11.0), watchos(2.0, 4.0), tvos(10.0, 11.0)) API_UNAVAILABLE(macos, macCatalyst);
-
-/*!
- * @brief Characteristic type for hardware version. The value of the characteristic is a string value
- *        describing the hardware version of the accessory.
- */
-HM_EXTERN NSString * const HMCharacteristicTypeHardwareVersion API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
-
-/*!
  * @brief Characteristic type for Hold Position. The value of the characteristic is a boolean
  *        indicating that the current position should be held/maintained.
  */
@@ -238,12 +207,6 @@ HM_EXTERN NSString * const HMCharacteristicTypeOutputState API_AVAILABLE(ios(9.0
  *        one of the values defined for HMCharacteristicValuePositionState.
  */
 HM_EXTERN NSString * const HMCharacteristicTypePositionState API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
-
-/*!
- * @brief Characteristic type for software version. The value of the characteristic is a string value
- *        describing the software version of the accessory.
- */
-HM_EXTERN NSString * const HMCharacteristicTypeSoftwareVersion API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
  * @brief Characteristic type to indicate status of a service is active. The value of the characteristic is a boolean.
@@ -511,6 +474,11 @@ HM_EXTERN NSString * const HMCharacteristicTypeHeatingThreshold API_AVAILABLE(io
 HM_EXTERN NSString * const HMCharacteristicTypeHue API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
+ * @brief Characteristic type for identify. The value of the characteristic is a boolean.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeIdentify API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
+
+/*!
  * @brief Characteristic type for current lock mechanism state. The value of the characteristic is one of the values defined for HMCharacteristicValueLockMechanismState.
  */
 HM_EXTERN NSString * const HMCharacteristicTypeCurrentLockMechanismState API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
@@ -519,6 +487,16 @@ HM_EXTERN NSString * const HMCharacteristicTypeCurrentLockMechanismState API_AVA
  * @brief Characteristic type for target lock mechanism state. The value of the characteristic is one of the values defined for HMCharacteristicValueTargetLockMechanismState.
  */
 HM_EXTERN NSString * const HMCharacteristicTypeTargetLockMechanismState API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for manufacturer. The value of the characteristic is a string.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeManufacturer API_DEPRECATED_WITH_REPLACEMENT("Use -[HMAccessory manufacturer] instead", ios(8.0, 11.0), watchos(2.0, 4.0), tvos(10.0, 11.0), macCatalyst(14.0, 14.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for model. The value of the characteristic is a string.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeModel API_DEPRECATED_WITH_REPLACEMENT("Use -[HMAccessory model] instead", ios(8.0, 11.0), watchos(2.0, 4.0), tvos(10.0, 11.0), macCatalyst(14.0, 14.0)) API_UNAVAILABLE(macos);
 
 /*!
  * @brief Characteristic type for name. The value of the characteristic is a string.
@@ -551,6 +529,11 @@ HM_EXTERN NSString * const HMCharacteristicTypeRotationSpeed API_AVAILABLE(ios(8
 HM_EXTERN NSString * const HMCharacteristicTypeSaturation API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
+ * @brief Characteristic type for serial number. The value of the characteristic is a string.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeSerialNumber API_DEPRECATED("No longer supported", ios(8.0, 11.0), watchos(2.0, 4.0), tvos(10.0, 11.0), macCatalyst(14.0, 14.0)) API_UNAVAILABLE(macos);
+
+/*!
  * @brief Characteristic type for target door state. The value of the characteristic is one of the values defined for HMCharacteristicValueTargetDoorState.
  */
 HM_EXTERN NSString * const HMCharacteristicTypeTargetDoorState API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
@@ -574,6 +557,21 @@ HM_EXTERN NSString * const HMCharacteristicTypeTemperatureUnits API_AVAILABLE(io
  * @brief Characteristic type for version. The value of the characteristic is a string.
  */
 HM_EXTERN NSString * const HMCharacteristicTypeVersion API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for firmware version. The value of the characteristic is a string.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeFirmwareVersion API_DEPRECATED_WITH_REPLACEMENT("Use -[HMAccessory firmwareVersion] instead", ios(8.0, 11.0), watchos(2.0, 4.0), tvos(10.0, 11.0), macCatalyst(14.0, 14.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for hardware version. The value of the characteristic is a string.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeHardwareVersion API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for software version. The value of the characteristic is a string.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeSoftwareVersion API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
  * @brief Characteristic type for battery level. The value of the characteristic is a uint8 value in percent.

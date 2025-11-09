@@ -23,7 +23,8 @@ typedef NS_ENUM(NSInteger, UIGraphicsImageRendererFormatRange) {
     UIGraphicsImageRendererFormatRangeStandard
 } API_AVAILABLE(ios(12.0));
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsImageRendererFormat : UIGraphicsRendererFormat
+UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+@interface UIGraphicsImageRendererFormat : UIGraphicsRendererFormat
 
 @property (nonatomic) CGFloat scale; // display scale of the context. The preferredFormat uses the scale most appropriate for the main screen's current configuration.
 @property (nonatomic) BOOL opaque; // indicates the bitmap context will draw fully opaque. The preferredFormat sets this to NO.
@@ -36,11 +37,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsImageRendererFormat :
 + (instancetype)formatForTraitCollection:(UITraitCollection *)traitCollection API_AVAILABLE(ios(11.0));
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsImageRendererContext : UIGraphicsRendererContext
+UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+@interface UIGraphicsImageRendererContext : UIGraphicsRendererContext
 @property (nonatomic, readonly) UIImage *currentImage; // Returns a UIImage representing the current state of the renderer's CGContext
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsImageRenderer : UIGraphicsRenderer
+UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+@interface UIGraphicsImageRenderer : UIGraphicsRenderer
 - (instancetype)initWithSize:(CGSize)size;
 - (instancetype)initWithSize:(CGSize)size format:(UIGraphicsImageRendererFormat *)format NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithBounds:(CGRect)bounds format:(UIGraphicsImageRendererFormat *)format NS_DESIGNATED_INITIALIZER;

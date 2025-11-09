@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CDAEED3C-1B2B-3743-9FE7-640F648B2CFE
+    value:           62E33746-2EF3-38B8-A51B-3CD0487CB604
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EECD8E55-9BE7-3897-9E16-2D847466FA12
+    value:           B2F2FFBE-439C-3262-8BC3-241BC868ABEC
 install-name:    '/System/Library/Frameworks/ParavirtualizedGraphics.framework/Versions/A/ParavirtualizedGraphics'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

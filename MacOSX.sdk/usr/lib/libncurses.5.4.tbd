@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           64DA10BA-71BD-33B0-B19B-28984C171A7D
+    value:           E6E7F105-A092-3745-ACFE-07194C7A2FA5
   - target:          x86_64-maccatalyst
-    value:           64DA10BA-71BD-33B0-B19B-28984C171A7D
+    value:           E6E7F105-A092-3745-ACFE-07194C7A2FA5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BB019339-1AD8-34A5-A813-A50C5958556F
+    value:           564AFAF9-F74E-30B4-959E-952F1D6A5C7A
   - target:          arm64e-maccatalyst
-    value:           BB019339-1AD8-34A5-A813-A50C5958556F
+    value:           564AFAF9-F74E-30B4-959E-952F1D6A5C7A
 install-name:    '/usr/lib/libncurses.5.4.dylib'
 current-version: 5.4
 compatibility-version: 5.4

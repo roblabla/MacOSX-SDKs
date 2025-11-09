@@ -145,7 +145,7 @@ extern void dtrace_probe(uint32_t, uint64_t, uint64_t,
  * Time threshold before dtrace lockstat spin
  * probes are triggered
  */
-extern uint64_t dtrace_spin_threshold;
+extern machine_timeout32_t dtrace_spin_threshold;
 
 #if CONFIG_DTRACE
 void lockprof_invoke(lck_grp_t*, lck_grp_stat_t*, uint64_t);

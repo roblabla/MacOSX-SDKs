@@ -52,6 +52,7 @@ typedef function_table_entry   *function_table_t;
 #define	ktrace_background_MSG_COUNT	1
 #endif	/* ktrace_background_MSG_COUNT */
 
+#include <Availability.h>
 #include <mach/std_types.h>
 #include <mach/mig.h>
 #include <mach/mig.h>

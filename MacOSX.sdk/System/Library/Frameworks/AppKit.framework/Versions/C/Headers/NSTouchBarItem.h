@@ -1,7 +1,7 @@
 /*
  NSTouchBarItem.h
  Application Kit
- Copyright (c) 2015-2019, Apple Inc.
+ Copyright (c) 2015-2021, Apple Inc.
  All rights reserved.
 */
 
@@ -23,7 +23,7 @@ static const NSTouchBarItemPriority NSTouchBarItemPriorityNormal API_AVAILABLE(m
 static const NSTouchBarItemPriority NSTouchBarItemPriorityLow API_AVAILABLE(macos(10.12.2), ios(13.0)) = -1000;
 
 
-API_AVAILABLE(macos(10.12.2), ios(13.0))
+API_AVAILABLE(macos(10.12.2), ios(13.0)) NS_SWIFT_UI_ACTOR
 @interface NSTouchBarItem : NSObject <NSCoding>
 /*
     The designated initializer. This instantiates a new NSTouchBarItem with the specified initializer.

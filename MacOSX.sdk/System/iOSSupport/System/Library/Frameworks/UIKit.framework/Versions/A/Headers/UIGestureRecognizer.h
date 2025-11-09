@@ -31,7 +31,8 @@ typedef NS_ENUM(NSInteger, UIGestureRecognizerState) {
     UIGestureRecognizerStateRecognized = UIGestureRecognizerStateEnded // the recognizer has received touches recognized as the gesture. the action method will be called at the next turn of the run loop and the recognizer will be reset to UIGestureRecognizerStatePossible
 };
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UIGestureRecognizer : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+@interface UIGestureRecognizer : NSObject
 
 // Valid action method signatures:
 //     -(void)handleGesture;
@@ -86,6 +87,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UIGestureRecognizer : NSObject
 @end
 
 
+NS_SWIFT_UI_ACTOR
 @protocol UIGestureRecognizerDelegate <NSObject>
 @optional
 // called when a gesture recognizer attempts to transition out of UIGestureRecognizerStatePossible. returning NO causes it to transition to UIGestureRecognizerStateFailed

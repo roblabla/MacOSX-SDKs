@@ -31,7 +31,7 @@
  view. The preferences object associated with a web view is specified by
  its web view configuration.
  */
-WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
+WK_CLASS_AVAILABLE(macos(10.10), ios(8.0))
 @interface WKPreferences : NSObject <NSSecureCoding>
 
 /*! @abstract The minimum font size in points.
@@ -49,7 +49,7 @@ WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
  shown for suspected fraudulent content such as phishing or malware.
  @discussion The default value is YES.
  */
-@property (nonatomic, getter=isFraudulentWebsiteWarningEnabled) BOOL fraudulentWebsiteWarningEnabled API_AVAILABLE(macos(10.15), ios(13.0));
+@property (nonatomic, getter=isFraudulentWebsiteWarningEnabled) BOOL fraudulentWebsiteWarningEnabled WK_API_AVAILABLE(macos(10.15), ios(13.0));
 
 #if !TARGET_OS_IPHONE
 /*!
@@ -57,22 +57,22 @@ WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
  @abstract If tabFocusesLinks is YES, the tab key will focus links and form controls.
  The Option key temporarily reverses this preference.
  */
-@property (nonatomic) BOOL tabFocusesLinks API_AVAILABLE(macos(10.12.3));
+@property (nonatomic) BOOL tabFocusesLinks WK_API_AVAILABLE(macos(10.12.3));
 #endif
 
 /*! @abstract A Boolean value indicating whether text interaction is disabled.
 */
-@property (nonatomic) BOOL textInteractionEnabled API_AVAILABLE(macos(11.3), ios(14.5));
+@property (nonatomic, getter=isTextInteractionEnabled) BOOL textInteractionEnabled WK_API_AVAILABLE(macos(12.0), ios(15.0));
 
 @end
 
 @interface WKPreferences (WKDeprecated)
 
 #if !TARGET_OS_IPHONE
-@property (nonatomic) BOOL javaEnabled API_DEPRECATED("Java is no longer supported", macos(10.10, 10.15));
-@property (nonatomic) BOOL plugInsEnabled API_DEPRECATED("Plug-ins are no longer supported", macos(10.10, 10.15));
+@property (nonatomic) BOOL javaEnabled WK_API_DEPRECATED("Java is no longer supported", macos(10.10, 10.15));
+@property (nonatomic) BOOL plugInsEnabled WK_API_DEPRECATED("Plug-ins are no longer supported", macos(10.10, 10.15));
 #endif
 
-@property (nonatomic) BOOL javaScriptEnabled API_DEPRECATED("Use WKWebPagePreferences.allowsContentJavaScript to disable content JavaScript on a per-navigation basis", macos(10.10, 11.0), ios(8.0, 14.0));
+@property (nonatomic) BOOL javaScriptEnabled WK_API_DEPRECATED("Use WKWebPagePreferences.allowsContentJavaScript to disable content JavaScript on a per-navigation basis", macos(10.10, 11.0), ios(8.0, 14.0));
 
 @end

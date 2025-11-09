@@ -24,6 +24,20 @@ AVF_EXPORT AVMediaType const AVMediaTypeMetadata              API_AVAILABLE(maco
 AVF_EXPORT AVMediaType const AVMediaTypeMuxed                 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
+ @enum          AVVideoRange
+ @constant      AVVideoRangeSDR
+				  Indicates that the video range as SDR
+ @constant      AVVideoRangeHLG
+				  Indicates that the video range as HLG
+ @constant      AVVideoRangePQ
+				  Indicates that the video range as PQ
+ */
+typedef NSString * AVVideoRange NS_TYPED_ENUM;
+	AVF_EXPORT AVVideoRange const AVVideoRangeSDR									API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+	AVF_EXPORT AVVideoRange const AVVideoRangeHLG									API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+	AVF_EXPORT AVVideoRange const AVVideoRangePQ									API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
  @constant AVMediaTypeMetadataObject
  @abstract mediaType of AVCaptureInputPorts that provide AVMetadataObjects.
  @discussion
@@ -499,6 +513,24 @@ AVF_EXPORT AVFileType const AVFileTypeHEIF API_AVAILABLE(macos(10.13), ios(11.0)
  Files are identified with the .tiff or .tif extension.
  */
 AVF_EXPORT AVFileType const AVFileTypeTIFF API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
+/*!
+ @constant AVFileTypeAppleiTT
+ @abstract A UTI for the Apple iTT caption file format
+ @discussion
+ The value of this UTI is @"com.apple.itunes-timed-text".
+ Files are identified with the .itt extension.
+ */
+AVF_EXPORT AVFileType const AVFileTypeAppleiTT API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+
+/*!
+ @constant AVFileTypeSCC
+ @abstract A UTI for the Scenarist closed caption file format
+ @discussion
+ The value of this UTI is @"com.scenarist.closed-caption".
+ Files are identified with the .scc extension.
+ */
+AVF_EXPORT AVFileType const AVFileTypeSCC API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
  @constant AVStreamingKeyDeliveryContentKeyType

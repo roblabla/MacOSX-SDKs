@@ -1,6 +1,6 @@
-/* iig(DriverKit-107.100.6) generated from OSObject.iig */
+/* iig(DriverKit-191) generated from OSObject.iig */
 
-/* OSObject.iig:1-145 */
+/* OSObject.iig:1-147 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -131,17 +131,19 @@ class IIG_SERIALIZABLE OSString;
 class IIG_SERIALIZABLE OSBoolean;
 class IIG_SERIALIZABLE OSDictionary;
 class IIG_SERIALIZABLE OSArray;
+class IIG_SERIALIZABLE OSSet;
+class IIG_SERIALIZABLE OSOrderedSet;
 
 class OSMetaClass;
 class IODispatchQueue;
 typedef char IODispatchQueueName[256];
 
 #if __IIG
-/* OSObject.iig:160-162 */
+/* OSObject.iig:162-164 */
 #endif /* __IIG */
 
 
-/* source class OSObject OSObject.iig:163-193 */
+/* source class OSObject OSObject.iig:165-195 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -179,7 +181,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class OSObject OSObject.iig:163-193 */
+/* generated class OSObject OSObject.iig:165-195 */
 
 #define OSObject_SetDispatchQueue_ID            0xe608ae8273dae1bcULL
 #define OSObject_CopyDispatchQueue_ID            0x95115b48fd29f7c9ULL
@@ -289,6 +291,12 @@ public:
     virtual void
     free() = 0;
 
+    bool
+    init_Call()  { return init(); };\
+
+    void
+    free_Call()  { return free(); };\
+
 };
 
 struct OSObject_IVars;
@@ -299,11 +307,18 @@ class OSObject : public OSMetaClassBase, public OSObjectInterface
     friend class OSObjectMetaClass;
 
 public:
+#ifdef OSObject_DECLARE_IVARS
+OSObject_DECLARE_IVARS
+#else /* OSObject_DECLARE_IVARS */
     union
     {
         OSObject_IVars * ivars;
         OSObject_LocalIVars * lvars;
     };
+#endif /* OSObject_DECLARE_IVARS */
+
+    static OSMetaClass *
+    sGetMetaClass() { return gOSObjectMetaClass; };
 
     using super = OSMetaClassBase;
 
@@ -315,7 +330,7 @@ public:
 
 #endif /* !__DOCUMENTATION__ */
 
-/* OSObject.iig:195- */
+/* OSObject.iig:197- */
 
 #define DEFN(classname, name)                                       \
 name ## _Impl(classname ## _ ## name ## _Args)

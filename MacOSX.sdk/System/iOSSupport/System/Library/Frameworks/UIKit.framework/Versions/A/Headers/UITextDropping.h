@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Defines a text droppable control.
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UITextDroppable <UITextInput, UITextPasteConfigurationSupporting>
 
 @property (nonatomic, weak, nullable) id<UITextDropDelegate> textDropDelegate;
@@ -57,7 +57,7 @@ typedef NS_ENUM(NSUInteger, UITextDropEditability) {
 @protocol UITextDropRequest;
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UITextDropDelegate <NSObject>
 
 @optional
@@ -126,7 +126,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
 @end
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UITextDropRequest <NSObject>
 
 /* The text position that the drag is over.

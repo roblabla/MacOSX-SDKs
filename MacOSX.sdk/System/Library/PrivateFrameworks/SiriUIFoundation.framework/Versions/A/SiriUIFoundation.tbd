@@ -1,0 +1,30 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           F1227F04-7E3C-3174-A9B7-5399B8B964C0
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           8CD90B8D-48B9-306D-A3AC-0425804EF830
+install-name:    '/System/Library/PrivateFrameworks/SiriUIFoundation.framework/Versions/A/SiriUIFoundation'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _SRUIFConversationErrorDomain, _SRUIFFileURLForConversationWithIdentifier, 
+                       _SRUIFGetLanguageCode, _SRUIFGetLocale, _SRUIFLanguageCodeDidChangeNotification, 
+                       _SRUIFPreviousConversationIdentifier, _SRUIFSetLanguageCode, 
+                       _SiriUIFoundationVersionNumber, _SiriUIFoundationVersionString, 
+                       _kLastStoredUUIDTurnIdentifier, _kPreferencesDefaultDomain ]
+    objc-classes:    [ SRUIFAceCommandRecord, SRUIFAceCommandRecords, SRUIFAlternativeInfo, 
+                       SRUIFAnalyticsSupplement, SRUIFCardLoader, SRUIFCardLoadingMonitor, 
+                       SRUIFChildConversationItemList, SRUIFCoercion, SRUIFConversation, 
+                       SRUIFConversationError, SRUIFConversationInsertion, SRUIFConversationItem, 
+                       SRUIFConversationStore, SRUIFConversationTransaction, SRUIFDataStore, 
+                       SRUIFDebugLog, SRUIFDelayedActionCommandCache, SRUIFDialogPhase, 
+                       SRUIFDictionarySchema, SRUIFImagePNGData, SRUIFInstrumentationManager, 
+                       SRUIFMutableConversationItem, SRUIFMutableStack, SRUIFSiriSessionInfo, 
+                       SRUIFSpeechRecognitionHypothesis, SRUIFStack, SRUIFStateMachine, 
+                       SRUIFTreeNode, SRUIFTreeNodePropertyListSerialization, _SRUIFAssertingDelayedActionCommand, 
+                       _SRUIFDataStoreEntry ]
+...

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           564AF34F-959B-33ED-82F6-9EA11B020EEE
+    value:           6E888C80-66D3-38F6-A307-2CE0926333AA
   - target:          x86_64-maccatalyst
-    value:           564AF34F-959B-33ED-82F6-9EA11B020EEE
+    value:           6E888C80-66D3-38F6-A307-2CE0926333AA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B8DA7301-99C1-32EF-8E91-FD68068ACC43
+    value:           66BD56DB-34E1-38BD-B673-9AC26BAC1C84
   - target:          arm64e-maccatalyst
-    value:           B8DA7301-99C1-32EF-8E91-FD68068ACC43
+    value:           66BD56DB-34E1-38BD-B673-9AC26BAC1C84
 install-name:    '/System/Library/PrivateFrameworks/InertiaCam.framework/Versions/A/InertiaCam'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -43,13 +43,14 @@ exports:
                        _IC_A_FRAMEINSTRUCTIONS, _IC_A_FRAMETRANSFORM_HOMOGRAPHY, 
                        _IC_A_FRAMETRANSFORM_RAWTIME, _IC_A_HOMOGRAPHIES_INVERTED, 
                        _IC_A_HOMOGRAPHIES_MAP_TO_REFERENCE, _IC_A_INPUT_IMAGE_BOUNDS, 
-                       _IC_A_LOOP_CLOSURE_PTS, _IC_A_OPTIMIZE_FOR_MEMORY, _IC_A_REQUESTED_CROP_RECT, 
-                       _IC_A_SOURCE_SIZE, _IC_A_STAT_FRAME_COUNT, _IC_A_STAT_MOVIE_DIMENSIONS, 
-                       _IC_A_TRIM_DURATION, _IC_A_TRIM_START_TIME, _IC_C_CROP_FRACTION, 
-                       _IC_C_DISABLE_CROP, _IC_C_DISABLE_GAUSSIAN, _IC_C_FIRST_INDEX, 
-                       _IC_C_FREE_ASPECT_RATIO, _IC_C_KERNEL_LENGTH, _IC_C_L1_CENTER_TARGETS, 
-                       _IC_C_L1_SALIENT_RECTS, _IC_C_L1_WINDOW_LENGTH, _IC_C_L1_WINDOW_STRIDE, 
-                       _IC_C_LAST_INDEX, _IC_C_MOTION_BLUR_VECTOR, _IC_C_REFRAME_TRANSFORMS, 
+                       _IC_A_LOOP_CLOSURE_PTS, _IC_A_OPTIMIZE_FOR_MEMORY, _IC_A_PREROLL_FRAME_COUNT, 
+                       _IC_A_REQUESTED_CROP_RECT, _IC_A_RESULT_DELEGATE, _IC_A_SOURCE_SIZE, 
+                       _IC_A_STAT_FRAME_COUNT, _IC_A_STAT_FRAME_MATCH_CONFIDENCE, 
+                       _IC_A_STAT_MOVIE_DIMENSIONS, _IC_A_TRIM_DURATION, _IC_A_TRIM_START_TIME, 
+                       _IC_C_CROP_FRACTION, _IC_C_DISABLE_CROP, _IC_C_DISABLE_GAUSSIAN, 
+                       _IC_C_FIRST_INDEX, _IC_C_FREE_ASPECT_RATIO, _IC_C_KERNEL_LENGTH, 
+                       _IC_C_L1_CENTER_TARGETS, _IC_C_L1_SALIENT_RECTS, _IC_C_L1_WINDOW_LENGTH, 
+                       _IC_C_L1_WINDOW_STRIDE, _IC_C_LAST_INDEX, _IC_C_MOTION_BLUR_VECTOR, 
                        _IC_C_REF_INDEX, _IC_D_CALC_TRIPOD_CONFIDENCE, _IC_D_HOMOGRAPHY_METRICS, 
                        _IC_D_L1_CONSTRAINT_VIOLATIONS, _IC_D_L1_CORRECTION_MAGNITUDE, 
                        _IC_D_L1_CROP_CONSTRAINT_VIOLATION, _IC_D_L1_FIRST_DERIV, 

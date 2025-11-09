@@ -1,7 +1,7 @@
 /*
 	NSScroller.h
 	Application Kit
-	Copyright (c) 1994-2019, Apple Inc.
+	Copyright (c) 1994-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -14,8 +14,8 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 typedef NS_ENUM(NSUInteger, NSUsableScrollerParts) {
     NSNoScrollerParts			= 0,
-    NSOnlyScrollerArrows API_DEPRECATED("", macos(10.0,10.14)) = 1,
-    NSAllScrollerParts			= 2
+    NSOnlyScrollerArrows API_DEPRECATED("Scroller arrows are not used anymore.", macos(10.0,10.14)) = 1,
+    NSAllScrollerParts			= 2,
 };
 
 typedef NS_ENUM(NSUInteger, NSScrollerPart) {
@@ -23,20 +23,20 @@ typedef NS_ENUM(NSUInteger, NSScrollerPart) {
     NSScrollerDecrementPage		= 1,
     NSScrollerKnob			= 2,
     NSScrollerIncrementPage		= 3,
-    NSScrollerDecrementLine API_DEPRECATED("", macos(10.0,10.14)) = 4,
-    NSScrollerIncrementLine API_DEPRECATED("", macos(10.0,10.14)) = 5,
-    NSScrollerKnobSlot			= 6
+    NSScrollerDecrementLine API_DEPRECATED("Scroller arrows are not used anymore.", macos(10.0,10.14)) = 4,
+    NSScrollerIncrementLine API_DEPRECATED("Scroller arrows are not used anymore.", macos(10.0,10.14)) = 5,
+    NSScrollerKnobSlot			= 6,
 };
 
 typedef NS_ENUM(NSInteger, NSScrollerStyle) {
     NSScrollerStyleLegacy       = 0,
-    NSScrollerStyleOverlay      = 1
+    NSScrollerStyleOverlay      = 1,
 } API_AVAILABLE(macos(10.7));
 
 typedef NS_ENUM(NSInteger, NSScrollerKnobStyle) {
-    NSScrollerKnobStyleDefault  = 0,    // dark with light border; good against any background
+    NSScrollerKnobStyleDefault  = 0,    // uses the default look for the appearance
     NSScrollerKnobStyleDark     = 1,    // dark; good against a light background
-    NSScrollerKnobStyleLight    = 2     // light; good against a dark background
+    NSScrollerKnobStyleLight    = 2,    // light; good against a dark background
 } API_AVAILABLE(macos(10.7));
 
 @interface NSScroller : NSControl
@@ -101,12 +101,12 @@ typedef NS_ENUM(NSUInteger, NSScrollArrowPosition) {
     NSScrollerArrowsMinEnd        = 1,    /* previously deprecated */
     NSScrollerArrowsDefaultSetting    = 0,
     NSScrollerArrowsNone               = 2
-} API_DEPRECATED("", macos(10.0,10.14));
+} API_DEPRECATED("Scroller arrows are not used anymore.", macos(10.0,10.14));
 
 typedef NS_ENUM(NSUInteger, NSScrollerArrow) {
     NSScrollerIncrementArrow        = 0,
     NSScrollerDecrementArrow        = 1
-} API_DEPRECATED("", macos(10.0,10.14));
+} API_DEPRECATED("Scroller arrows are not used anymore.", macos(10.0,10.14));
 
 @interface NSScroller(NSDeprecated)
 

@@ -3,17 +3,31 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           AB13781F-830C-3808-B8A3-CFD78D380057
+    value:           93132BC9-F2BF-3A7F-BE6A-C8F972C69FFA
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           4744CA72-F94A-395C-A60D-31855D667A5C
+    value:           24AB4446-300E-39F1-A48F-6CEA56E19101
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_SpriteKit_SwiftUI.framework/Versions/A/_SpriteKit_SwiftUI'
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
-    symbols:         [ '_$s18_SpriteKit_SwiftUI0A4ViewV0cD00E0AAMc', '_$s18_SpriteKit_SwiftUI0A4ViewV4bodyQrvg', 
-                       '_$s18_SpriteKit_SwiftUI0A4ViewV4bodyQrvpMV', '_$s18_SpriteKit_SwiftUI0A4ViewV4bodyQrvpQOMQ', 
+    symbols:         [ '_$s18_SpriteKit_SwiftUI0A4ViewV0cD00E0AAMc', '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV11showsFieldsAEvgZ', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV12showsPhysicsAEvgZ', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV14showsDrawCountAEvgZ', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV14showsNodeCountAEvgZ', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV14showsQuadCountAEvgZ', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV8rawValueAESi_tcfC', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV8rawValueSivg', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV8rawValueSivpMV', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsV8showsFPSAEvgZ', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsVMa', '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsVMn', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsVN', '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsVSQAAMc', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsVSYAAMc', '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsVs10SetAlgebraAAMc', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsVs25ExpressibleByArrayLiteralAAMc', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV12DebugOptionsVs9OptionSetAAMc', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV4bodyQrvg', '_$s18_SpriteKit_SwiftUI0A4ViewV4bodyQrvpMV', 
+                       '_$s18_SpriteKit_SwiftUI0A4ViewV4bodyQrvpQOMQ', '_$s18_SpriteKit_SwiftUI0A4ViewV5scene10transition8isPaused24preferredFramesPerSecond7options12debugOptions12shouldRenderACSo7SKSceneC_So12SKTransitionCSgSbSiAC0P0VAC05DebugP0VSbSdctcfC', 
                        '_$s18_SpriteKit_SwiftUI0A4ViewV5scene10transition8isPaused24preferredFramesPerSecond7options12shouldRenderACSo7SKSceneC_So12SKTransitionCSgSbSiAC7OptionsVSbSdctcfC', 
                        '_$s18_SpriteKit_SwiftUI0A4ViewV5scene10transition8isPaused24preferredFramesPerSecondACSo7SKSceneC_So12SKTransitionCSgSbSitcfC', 
                        '_$s18_SpriteKit_SwiftUI0A4ViewV7OptionsV18allowsTransparencyAEvgZ', 

@@ -30,7 +30,8 @@ typedef NS_ENUM(NSInteger, UIPrintInfoDuplex) {
     UIPrintInfoDuplexShortEdge,      // flip back page along short edge (flipped orientation for portrait, same in landscape)
 } API_UNAVAILABLE(tvos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) @interface UIPrintInfo : NSObject <NSCopying, NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIPrintInfo : NSObject <NSCopying, NSCoding>
 
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 

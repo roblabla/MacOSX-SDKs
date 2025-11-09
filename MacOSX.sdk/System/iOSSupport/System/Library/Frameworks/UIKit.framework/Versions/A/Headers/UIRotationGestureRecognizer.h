@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 // Changes: when a finger moves while two fingers are down
 // Ends:    when both fingers have lifted
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(tvos) @interface UIRotationGestureRecognizer : UIGestureRecognizer
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIRotationGestureRecognizer : UIGestureRecognizer
 
 @property (nonatomic)          CGFloat rotation;            // rotation in radians
 @property (nonatomic,readonly) CGFloat velocity;            // velocity of the pinch in radians/second

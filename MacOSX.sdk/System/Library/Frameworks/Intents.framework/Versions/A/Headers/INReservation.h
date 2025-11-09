@@ -26,7 +26,6 @@ API_UNAVAILABLE(tvos)
 @property (readonly, assign, NS_NONATOMIC_IOSONLY) INReservationStatus reservationStatus;
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *reservationHolderName;
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INReservationAction *> *actions;
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSURL *url API_DEPRECATED("Use URL instead", ios(14.0, 14.0), macos(10.16, 11.0), watchos(7.0, 7.0));
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSURL *URL API_AVAILABLE(ios(14.0), watchos(7.0));
 
 @end

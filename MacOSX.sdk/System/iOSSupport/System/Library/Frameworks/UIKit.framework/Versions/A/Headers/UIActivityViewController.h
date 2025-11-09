@@ -34,7 +34,7 @@ NS_CLASS_AVAILABLE_IOS(6_0) __TVOS_PROHIBITED @interface UIActivityViewControlle
 
 @interface UIActivityViewController (UIActivityItemsConfiguration)
 
-- (instancetype)initWithActivityItemsConfiguration:(id<UIActivityItemsConfigurationReading>)activityItemsConfiguration API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos);
+- (instancetype)initWithActivityItemsConfiguration:(id<UIActivityItemsConfigurationReading>)activityItemsConfiguration API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 @end
 

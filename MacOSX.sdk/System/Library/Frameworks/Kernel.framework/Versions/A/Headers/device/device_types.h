@@ -70,6 +70,7 @@
 #include <mach/mach_types.h>
 #include <mach/message.h>
 #include <mach/port.h>
+#include <stdint.h>
 
 
 
@@ -91,10 +92,10 @@ typedef char                    io_string_inband_t[4096];
 typedef char                    io_struct_inband_t[4096];
 
 typedef uint64_t                io_user_scalar_t;
-typedef uint64_t                io_user_reference_t;
+typedef uint64_t                io_user_reference_t __kernel_ptr_semantics;
 typedef int                     io_scalar_inband_t[16];
 // must be the same type as OSAsyncReference
-typedef natural_t               io_async_ref_t[8];
+typedef natural_t               io_async_ref_t[8] __kernel_ptr_semantics;
 typedef io_user_scalar_t        io_scalar_inband64_t[16];
 typedef io_user_reference_t     io_async_ref64_t[8];
 

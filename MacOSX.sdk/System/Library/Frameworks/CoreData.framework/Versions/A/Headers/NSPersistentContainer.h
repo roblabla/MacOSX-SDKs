@@ -1,7 +1,7 @@
 /*
     NSPersistentContainer.h
     Core Data
-    Copyright (c) 2016-2020, Apple Inc.
+    Copyright (c) 2016-2021, Apple Inc.
     All rights reserved.
 */
 
@@ -39,7 +39,7 @@ API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0))
 - (instancetype)initWithName:(NSString *)name managedObjectModel:(NSManagedObjectModel *)model NS_DESIGNATED_INITIALIZER;
 
 // Load stores from the storeDescriptions property that have not already been successfully added to the container. The completion handler is called once for each store that succeeds or fails.
-- (void)loadPersistentStoresWithCompletionHandler:(void (^)(NSPersistentStoreDescription *, NSError * _Nullable))block;
+- (void)loadPersistentStoresWithCompletionHandler:(void (^)(NSPersistentStoreDescription *, NSError * _Nullable))block NS_SWIFT_DISABLE_ASYNC;
 
 - (NSManagedObjectContext *)newBackgroundContext NS_RETURNS_RETAINED;
 - (void)performBackgroundTask:(void (^)(NSManagedObjectContext *))block;

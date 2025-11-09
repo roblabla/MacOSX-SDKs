@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C43BE82A-9E75-39C3-807F-2E87B97B7A78
+    value:           5B612C85-E091-33F9-AD74-C5535FEF0CCD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D052CD4F-456B-3F0F-B17E-C3893CB5B602
+    value:           F4E0DDB6-C9AC-3AFC-B7FB-C3671BBFCDCF
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore'
-current-version: 1307.2
+current-version: 1319
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        CoreServices
@@ -487,11 +487,11 @@ exports:
                        __CSBackupSystemVersionCompare, __CSBackupURLIsBackupItem, 
                        __CSBackupUnregisterMTMExclusions, __CSBackupWasItemEverBackedUp, 
                        __CSCheckFix, __CSCheckFixDisable, __CSCheckFixSetBundleInformation, 
-                       __CSCheckFixWithInfo, __CSCopyLazyValuesForKey, __CSCreateSeed, 
-                       __CSDestroySeed, __CSFlushNamedData, __CSGetNamedData, __CSGetProcessorArchitecture, 
-                       __CSIncrementSeed, __CSReadSeed, __CSReleaseNamedData, __CSSetNamedData, 
-                       __CSWriteSeed, __CharacterByteType, __ConvertLocalTimeToUTC, 
-                       __ConvertLocalToUTCDateTime, __ConvertUTCToLocalDateTime, 
+                       __CSCheckFixWithInfo, __CSCopyLazyValuesForKey, __CSCopyNamedData, 
+                       __CSCreateSeed, __CSDestroySeed, __CSFlushNamedData, __CSGetNamedData, 
+                       __CSGetProcessorArchitecture, __CSIncrementSeed, __CSReadSeed, 
+                       __CSReleaseNamedData, __CSSetNamedData, __CSWriteSeed, __CharacterByteType, 
+                       __ConvertLocalTimeToUTC, __ConvertLocalToUTCDateTime, __ConvertUTCToLocalDateTime, 
                        __ConvertUTCToLocalTime, __CopyCStringToPascal, __CopyComponentBundleIdentifier, 
                        __CopyPascalStringToC, __CoreServicesServerMain, __EqualString, 
                        __FNNotifyByURL, __FSAccessControlEntryCopyUUID, __FSAccessControlEntryCreateMutableWithUUID, 

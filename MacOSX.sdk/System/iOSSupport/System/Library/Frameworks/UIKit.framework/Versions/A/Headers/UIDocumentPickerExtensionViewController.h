@@ -13,7 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_DEPRECATED("Use enumeration based NSFileProviderExtension instead", ios(8.0, 14.0))  API_UNAVAILABLE(tvos) @interface UIDocumentPickerExtensionViewController : UIViewController
+UIKIT_EXTERN API_DEPRECATED("Use enumeration based NSFileProviderExtension instead", ios(8.0, 14.0))  API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIDocumentPickerExtensionViewController : UIViewController
 
 // The preconditions for the URL passed to dismissGrantingAccessToURL: vary depending on the document picker mode.
 // In Import mode, any URL that the extension has access to is valid.

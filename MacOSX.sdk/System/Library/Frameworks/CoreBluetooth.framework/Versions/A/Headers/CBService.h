@@ -33,7 +33,7 @@ CB_EXTERN_CLASS @interface CBService : CBAttribute
  *      A back-pointer to the peripheral this service belongs to.
  *
  */
-@property(assign, readonly, nonatomic) CBPeripheral *peripheral;
+@property(weak, readonly, nonatomic) CBPeripheral *peripheral;
 
 /*!
  * @property isPrimary

@@ -1,7 +1,7 @@
 /*
     NSSearchField.h
     Application Kit
-    Copyright (c) 2003-2019, Apple Inc.
+    Copyright (c) 2003-2021, Apple Inc.
     All rights reserved.
 */
 
@@ -54,13 +54,13 @@ typedef NSString * NSSearchFieldRecentsAutosaveName NS_SWIFT_BRIDGED_TYPEDEF;
 @end
 
 @interface NSSearchField (NSSearchField_Deprecated)
-- (NSRect)rectForSearchTextWhenCentered:(BOOL)isCentered API_DEPRECATED_WITH_REPLACEMENT("searchTextBounds", macos(10.11, API_TO_BE_DEPRECATED));
+- (NSRect)rectForSearchTextWhenCentered:(BOOL)isCentered API_DEPRECATED_WITH_REPLACEMENT("searchTextBounds", macos(10.11, 12.0));
 
-- (NSRect)rectForSearchButtonWhenCentered:(BOOL)isCentered API_DEPRECATED_WITH_REPLACEMENT("searchButtonBounds", macos(10.11, API_TO_BE_DEPRECATED));
+- (NSRect)rectForSearchButtonWhenCentered:(BOOL)isCentered API_DEPRECATED_WITH_REPLACEMENT("searchButtonBounds", macos(10.11, 12.0));
 
-- (NSRect)rectForCancelButtonWhenCentered:(BOOL)isCentered API_DEPRECATED_WITH_REPLACEMENT("cancelButtonBounds", macos(10.11, API_TO_BE_DEPRECATED));
+- (NSRect)rectForCancelButtonWhenCentered:(BOOL)isCentered API_DEPRECATED_WITH_REPLACEMENT("cancelButtonBounds", macos(10.11, 12.0));
 
-@property BOOL centersPlaceholder API_DEPRECATED("The placeholder centering UI design is no longer available. Setting this property is no-op.", macos(10.11, API_TO_BE_DEPRECATED));
+@property BOOL centersPlaceholder API_DEPRECATED("The placeholder centering UI design is no longer available. Setting this property is no-op.", macos(10.11, 12.0));
 @end
 
 API_UNAVAILABLE_END

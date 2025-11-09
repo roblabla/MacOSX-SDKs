@@ -712,7 +712,9 @@ typedef OSStatus
                     converter's output format. On exit, the number of packets of converted
                     data that were written to outOutputData.
     @param      outOutputData
-                    The converted output data is written to this buffer.
+                    The converted output data is written to this buffer. On entry, the buffers'
+                    mDataByteSize fields (which must all be the same) reflect buffer capacity.
+                    On exit, mDataByteSize is set to the number of bytes written.
     @param      outPacketDescription
                     If non-null, and the converter's output uses packet descriptions, then
                     packet descriptions are written to this array. It must point to a memory

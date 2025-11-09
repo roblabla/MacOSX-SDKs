@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, NSBackgroundActivityResult) {
     NSBackgroundActivityResultDeferred = 2,
 } API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
-typedef void (^NSBackgroundActivityCompletionHandler)(NSBackgroundActivityResult result);
+typedef void (^NSBackgroundActivityCompletionHandler)(NSBackgroundActivityResult result) API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  This class provides a Cocoa-level interface to the XPC Activity API (see xpc/activity.h).
@@ -53,12 +53,12 @@ API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos)
  */
 @property BOOL repeats;
 
-/* If this activity is repeating, then this property describes the average interval of time between invocations of this activity.
+/* If this activity is repeating, then this property describes the average interval of seconds between invocations of this activity.
    If the activity is not repeating, then this property is the suggested interval of time between scheduling the activity and the invocation of the activity.
 */
 @property NSTimeInterval interval;
 
-/* Specifies the amount of time before or after the nominal fire date when the activity should be invoked. The nominal fire date is calculated by using the interval combined with the previous fire date or the time when the activity is started. These two properties create a window in time during which the activity may be scheduled.
+/* Specifies the number of seconds before or after the nominal fire date when the activity should be invoked. The nominal fire date is calculated by using the interval combined with the previous fire date or the time when the activity is started. These two properties create a window in time during which the activity may be scheduled.
  
    The system will more aggresively schedule the activity as it nears the end of the grace period after the nominal fire date.
  
@@ -74,7 +74,7 @@ API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos)
  
    When invoking the completionHandler, the system will set the schedule the next invocation. If you want to adjust the properties of your scheduler (e.g., the interval or tolerance), do this before invoking the completion block.
  */
-- (void)scheduleWithBlock:(void (^)(NSBackgroundActivityCompletionHandler completionHandler))block;
+- (void)scheduleWithBlock:(void (^)(NSBackgroundActivityCompletionHandler completionHandler))block NS_SWIFT_DISABLE_ASYNC;
 
 /* Stop scheduling the activity. Any currently executing block will still complete.
  */

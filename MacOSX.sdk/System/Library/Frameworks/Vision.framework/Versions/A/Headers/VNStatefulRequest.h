@@ -42,7 +42,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  @discussion The request will not process buffers that fall within the requestFrameAnalysisSpacing after it has performed the analysis. The analysis is not done by wall time but by analysis of of the time stamps of the samplebuffers being processed.
  */
 @property (readonly) CMTime frameAnalysisSpacing;
-@property (readonly) CMTime requestFrameAnalysisSpacing API_DEPRECATED_WITH_REPLACEMENT("use frameAnalysisSpacing", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
+@property (readonly) CMTime requestFrameAnalysisSpacing API_DEPRECATED_WITH_REPLACEMENT("-frameAnalysisSpacing", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
 
 @end
 

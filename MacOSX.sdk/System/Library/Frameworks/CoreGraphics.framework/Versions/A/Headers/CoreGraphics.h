@@ -12,6 +12,7 @@
 #include <CoreGraphics/CGColor.h>
 #include <CoreGraphics/CGColorConversionInfo.h>
 #include <CoreGraphics/CGColorSpace.h>
+#include <CoreGraphics/CGConvertColorDataWithFormat.h>
 #include <CoreGraphics/CGContext.h>
 #include <CoreGraphics/CGDataConsumer.h>
 #include <CoreGraphics/CGDataProvider.h>

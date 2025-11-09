@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           700DED20-528C-3680-9216-BB980999A740
+    value:           2CF82222-D0EE-32B4-903F-2259FBF04038
   - target:          x86_64-maccatalyst
-    value:           700DED20-528C-3680-9216-BB980999A740
+    value:           2CF82222-D0EE-32B4-903F-2259FBF04038
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           09FE2F13-696C-3A28-86E9-A125C8EE1783
+    value:           DF8EFA0A-11E7-3FF5-933C-F472D295C473
   - target:          arm64e-maccatalyst
-    value:           09FE2F13-696C-3A28-86E9-A125C8EE1783
+    value:           DF8EFA0A-11E7-3FF5-933C-F472D295C473
 install-name:    '/System/Library/PrivateFrameworks/MTLCompiler.framework/Versions/31001/MTLCompiler'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

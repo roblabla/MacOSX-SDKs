@@ -15,7 +15,8 @@
     Subclasses must implement conformance for NSCopying and NSCoding. */
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIMotionEffect : NSObject <NSCopying, NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UIMotionEffect : NSObject <NSCopying, NSCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -59,7 +60,8 @@ typedef NS_ENUM(NSInteger, UIInterpolatingMotionEffectType) {
     Animation's implementation of interpolation for all the standard types.
  
     `keyPath` should be expressed relative to the effect's target view. */
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIInterpolatingMotionEffect : UIMotionEffect
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UIInterpolatingMotionEffect : UIMotionEffect
 
 - (instancetype)initWithKeyPath:(NSString *)keyPath type:(UIInterpolatingMotionEffectType)type NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -75,7 +77,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIInterpolatingMotionEffect : UI
 
 /*! Behaves like CAAnimationGroup. Merges key/value pairs of constituent
     using Core Animation's implementations of addition for all the standard types. */
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIMotionEffectGroup : UIMotionEffect
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UIMotionEffectGroup : UIMotionEffect
 @property (nullable, copy, nonatomic) NSArray<__kindof UIMotionEffect *> *motionEffects;
 @end
 

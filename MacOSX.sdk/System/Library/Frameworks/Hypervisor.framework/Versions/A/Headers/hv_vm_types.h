@@ -36,7 +36,7 @@ typedef struct hv_vm_config_s *hv_vm_config_t;
 typedef uint64_t hv_ipa_t;
 
 /*!
- * @enum       hv_memory_flags_t
+ * @typedef    hv_memory_flags_t
  * @abstract   Guest physical memory region permissions for hv_vm_map()
  *             and hv_vm_protect()
  */

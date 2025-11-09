@@ -225,28 +225,28 @@ MIDICI1_1_AVAILABILITY
  	@brief  A block called when a device notifies that a profile has been enabled or disabled.
 */
 typedef void (^MIDICIProfileChangedBlock)(
-				MIDICISession *session, MIDIChannelNumber channel, MIDICIProfile *profile, BOOL enabled);
+				MIDICISession *session, MIDIChannelNumber channel, MIDICIProfile *profile, BOOL enabled) MIDICI1_1_AVAILABILITY;
 
 /*!
      @fn     MIDICISessionDisconnectBlock
      @brief  A block called when a MIDICISession has been disconnected. If called, the MIDICISession should be destroyed.
 */
 typedef void (^MIDICISessionDisconnectBlock)(
-                MIDICISession *session, NSError *error);
+                MIDICISession *session, NSError *error) MIDICI1_1_AVAILABILITY;
 
 /*!
      @fn     MIDICIProfileSpecificDataBlock
      @brief  A block called when a MIDICISession or MIDICIResponder receives profile-specific data.
 */
 typedef void (^MIDICIProfileSpecificDataBlock)(
-                MIDICISession *session, MIDIChannelNumber channel, MIDICIProfile *profile, NSData *profileSpecificData);
+                MIDICISession *session, MIDIChannelNumber channel, MIDICIProfile *profile, NSData *profileSpecificData) MIDICI1_1_AVAILABILITY;
 
 /*!
      @fn     MIDICIDiscoveryResponseBlock
      @brief  A block called when a MIDI-CI node discovery is complete.
 */
 typedef void (^MIDICIDiscoveryResponseBlock)(
-                NSArray<MIDICIDiscoveredNode *> *discoveredNodes);
+                NSArray<MIDICIDiscoveredNode *> *discoveredNodes) MIDICI1_1_AVAILABILITY;
 
 // =================================================================================================
 

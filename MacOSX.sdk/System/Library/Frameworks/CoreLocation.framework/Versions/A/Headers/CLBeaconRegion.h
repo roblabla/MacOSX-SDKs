@@ -130,7 +130,7 @@ API_AVAILABLE(ios(7.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos)
  *    App will be launched and the delegate will be notified via locationManager:didDetermineState:forRegion:
  *    when the device's screen is turned on and the user is in the region. By default, this is NO.
  */
-@property (nonatomic, assign) BOOL notifyEntryStateOnDisplay;
+@property (atomic, assign) BOOL notifyEntryStateOnDisplay;
 
 @end
 

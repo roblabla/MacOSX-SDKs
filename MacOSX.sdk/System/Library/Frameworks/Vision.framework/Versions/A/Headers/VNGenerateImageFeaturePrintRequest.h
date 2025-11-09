@@ -5,10 +5,8 @@
 //  Copyright © 2019 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-#import <Vision/VNTypes.h>
 #import <Vision/VNRequest.h>
+#import <Vision/VNObservation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,6 +26,12 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
 	@discussion The default value for this property is VNImageCropAndScaleOptionScaleFill.
 */
 @property (nonatomic, readwrite, assign) VNImageCropAndScaleOption imageCropAndScaleOption;
+
+
+/*!
+	@discussion VNFeaturePrintObservation results.
+*/
+@property (readonly, copy, nullable) NSArray<VNFeaturePrintObservation*>* results;
 
 @end
 

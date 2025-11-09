@@ -30,7 +30,7 @@ CB_EXTERN_CLASS @interface CBDescriptor : CBAttribute
  *      A back-pointer to the characteristic this descriptor belongs to.
  *
  */
-@property(assign, readonly, nonatomic) CBCharacteristic *characteristic;
+@property(weak, readonly, nonatomic) CBCharacteristic *characteristic;
 
 /*!
  *  @property value

@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from IOUSBHostPipe.iig */
+/* iig(DriverKit-191) generated from IOUSBHostPipe.iig */
 
 /* IOUSBHostPipe.iig:1-95 */
 /*
@@ -780,12 +780,21 @@ class IOUSBHostPipe : public OSObject, public IOUSBHostPipeInterface
 
 #if !KERNEL
 public:
+#ifdef IOUSBHostPipe_DECLARE_IVARS
+IOUSBHostPipe_DECLARE_IVARS
+#else /* IOUSBHostPipe_DECLARE_IVARS */
     union
     {
         IOUSBHostPipe_IVars * ivars;
         IOUSBHostPipe_LocalIVars * lvars;
     };
+#endif /* IOUSBHostPipe_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gIOUSBHostPipeMetaClass; };
+#endif /* KERNEL */
 
     using super = OSObject;
 

@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2017 Apple Inc. All rights reserved.
+	Copyright 2010-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -89,6 +89,9 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 /* indicates a special video composition tool for use of Core Animation; may be nil */
 @property (nonatomic, readonly, retain, nullable) AVVideoCompositionCoreAnimationTool *animationTool;
+
+/* List of all track IDs for tracks from which sample data should be presented to the compositor at any point in the overall composition. The sample data will be delivered to the custom compositor via AVAsynchronousVideoCompositionRequest. */
+@property (nonatomic, readonly) NSArray<NSNumber *> *sourceSampleDataTrackIDs API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -274,6 +277,9 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 /* indicates a special video composition tool for use of Core Animation; may be nil */
 @property (nonatomic, retain, nullable) AVVideoCompositionCoreAnimationTool *animationTool;
 
+/* List of all track IDs for tracks from which sample data should be presented to the compositor at any point in the overall composition.  Currently only tracks of type kCMMediaType_Metadata are allowed to be specified. */
+@property (nonatomic, copy) NSArray<NSNumber *> *sourceSampleDataTrackIDs API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+
 @end
 
 /*
@@ -413,6 +419,9 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    frame will be used instead. The value of this property is computed from the layer instructions */
 @property (nonatomic, readonly) CMPersistentTrackID passthroughTrackID API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos); // kCMPersistentTrackID_Invalid if not a passthrough instruction
 
+/* List of track IDs for which sample data should be presented to the compositor for this instruction. */
+@property (nonatomic, readonly) NSArray<NSNumber *> *requiredSourceSampleDataTrackIDs API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+
 @end
 
 /*!
@@ -457,6 +466,9 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 /* If NO, indicates that post-processing should be skipped for the duration of this instruction.  YES by default.
    See +[AVVideoCompositionCoreAnimationTool videoCompositionToolWithPostProcessingAsVideoLayer:inLayer:].*/
 @property (nonatomic, assign) BOOL enablePostProcessing;
+
+/* List of sample data track IDs required to compose frames for this instruction.  Currently only tracks of type kCMMediaType_Metadata are allowed to be specified.  If this property is unspecified or is an empty array, no sample data is considered to be required for this instruction.  Note that you must also specify all tracks for which sample data is required for ANY instruction in the AVVideoComposition, in AVVideoComposition's property sourceSampleDataTrackIDs.  */
+@property (nonatomic, copy) NSArray<NSNumber *> *requiredSourceSampleDataTrackIDs API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -747,6 +759,14 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAsset (AVAssetVideoCompositionUtility)
 
 - (CMPersistentTrackID)unusedTrackID;
+
+/*!
+ @method	findUnusedTrackIDWithCompletionHandler:
+ @abstract	Loads a track ID that will not collide with any existing track
+ @param		completionHandler
+			A block that is invoked when loading is complete, vending the track ID or an error.
+ */
+- (void)findUnusedTrackIDWithCompletionHandler:(void (^)(CMPersistentTrackID, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 

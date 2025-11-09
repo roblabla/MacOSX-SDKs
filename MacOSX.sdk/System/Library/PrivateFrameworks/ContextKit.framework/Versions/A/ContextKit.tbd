@@ -3,17 +3,20 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           299AE1C7-E6A3-39DA-A0C5-87398907C7C0
+    value:           CB123EBF-BD94-3267-B514-82AC81592978
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C70CDCB9-07D8-3BAC-B35A-C795F0050AEE
+    value:           2CC50362-D346-3FB0-BCB8-D59E58D881AF
 install-name:    '/System/Library/PrivateFrameworks/ContextKit.framework/Versions/A/ContextKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _CKContextKitNotification_ConfigurationUpdate, _ContextKitErrorDomain, 
+    symbols:         [ _CKContextKitNotification_ConfigurationUpdate, _CKContextTagTypeAddress, 
+                       _CKContextTagTypeDateTime, _CKContextTagTypePersonReal, _CKContextTagTypePhoneNumber, 
+                       _CKContextTagTypeTitle, _CKContextTagTypeURL, _ContextKitErrorDomain, 
                        _ContextKitVersionNumber, _ContextKitVersionString ]
     objc-classes:    [ CKContextClient, CKContextCompleter, CKContextCountedItem, 
-                       CKContextGlobals, CKContextRequest, CKContextResponse, CKContextResult, 
-                       CKContextSemaphore, CKContextXPCClient ]
+                       CKContextFingerprint, CKContextFingerprintMinHash, CKContextGlobals, 
+                       CKContextRequest, CKContextResponse, CKContextResult, CKContextSemaphore, 
+                       CKContextXPCClient ]
 ...

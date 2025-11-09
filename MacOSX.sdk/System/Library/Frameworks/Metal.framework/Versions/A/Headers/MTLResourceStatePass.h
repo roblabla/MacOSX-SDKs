@@ -11,12 +11,10 @@
 
 #import <Metal/MTLTypes.h>
 
+#import <Metal/MTLCounters.h>
+
 NS_ASSUME_NONNULL_BEGIN
 @protocol MTLDevice;
-
-@protocol MTLCounterSampleBuffer;
-#define MTLCounterDontSample ((NSUInteger)-1)
-#define MTLMaxResourceStatePassSampleBuffers 4
 
 MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
 @interface MTLResourceStatePassSampleBufferAttachmentDescriptor : NSObject<NSCopying>

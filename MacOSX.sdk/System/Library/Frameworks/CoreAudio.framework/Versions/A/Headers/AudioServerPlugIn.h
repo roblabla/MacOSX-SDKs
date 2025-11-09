@@ -221,13 +221,13 @@ typedef struct AudioServerPlugInClientInfo  AudioServerPlugInClientInfo;
     @field          mOutputTime
                         The time stamp that indicates from where in the device's time line the output
                         data for the new IO cycle will start at.
-    @field          mMasterHostTicksPerFrame
+    @field          mMainHostTicksPerFrame
                         The number of host ticks per frame that the Host's clock is measuring for
-                        the master device.
+                        the main device.
     @field          mDeviceHostTicksPerFrame
                         The number of host ticks per frame that the Host's clock is measuring for
-                        this device. Note that this value will be equal to the master value for
-                        clockless devices or when the device is the master device in an aggregate.
+                        this device. Note that this value will be equal to the main value for
+                        clockless devices or when the device is the main device in an aggregate.
 */
 struct AudioServerPlugInIOCycleInfo
 {
@@ -236,7 +236,11 @@ struct AudioServerPlugInIOCycleInfo
     AudioTimeStamp  mCurrentTime;
     AudioTimeStamp  mInputTime;
     AudioTimeStamp  mOutputTime;
-    Float64         mMasterHostTicksPerFrame;
+    union
+    {
+		Float64		mMainHostTicksPerFrame;
+		Float64		mMasterHostTicksPerFrame API_DEPRECATED_WITH_REPLACEMENT("mMainHostTicksPerFrame", macos(10.0, 12.0), ios(2.0, 15.0), watchos(1.0, 8.0), tvos(9.0, 15.0));
+	};
     Float64         mDeviceHostTicksPerFrame;
 };
 typedef struct AudioServerPlugInIOCycleInfo AudioServerPlugInIOCycleInfo;
@@ -423,7 +427,7 @@ typedef CF_ENUM(UInt32, AudioDeviceClockAlgorithmSelector)
     @discussion     The AudioDevice class is a subclass of the AudioObjectClass. The class has four
                     scopes, kAudioObjectPropertyScopeGlobal, kAudioObjectPropertyScopeInput,
                     kAudioObjectPropertyScopeOutput, and kAudioObjectPropertyScopePlayThrough. The
-                    class has a master element and an element for each channel in each stream
+                    class has a main element and an element for each channel in each stream
                     numbered according to the starting channel number of each stream.
     @constant       kAudioDevicePropertyZeroTimeStampPeriod
                         A UInt32 whose value indicates the number of sample frames the host can

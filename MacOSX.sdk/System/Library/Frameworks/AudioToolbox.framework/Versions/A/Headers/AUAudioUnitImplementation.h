@@ -116,7 +116,8 @@ typedef NS_ENUM(uint8_t, AURenderEventType) {
 	AURenderEventParameter		= 1,
 	AURenderEventParameterRamp	= 2,
 	AURenderEventMIDI			= 8,
-	AURenderEventMIDISysEx		= 9
+	AURenderEventMIDISysEx		= 9,
+	AURenderEventMIDIEventList  = 10
 };
 
 #pragma pack(4)
@@ -156,6 +157,17 @@ typedef struct AUMIDIEvent {
 	uint8_t					data[3];			//!< The bytes of the MIDI event. Running status will not be used.
 } AUMIDIEvent;
 
+/// Describes a single scheduled MIDIEventList.
+typedef struct AUMIDIEventList {
+	union AURenderEvent *__nullable next;		//!< The next event in a linked list of events.
+	AUEventSampleTime		eventSampleTime;	//!< The sample time at which the event is scheduled to occur.
+	AURenderEventType		eventType;			//!< AURenderEventMIDI or AURenderEventMIDISysEx.
+	uint8_t					reserved;			//!< Must be 0.
+	uint8_t					cable;				//!< The virtual cable number.
+	MIDIEventList			eventList;			//!< A structure containing UMP packets.
+} AUMIDIEventList;
+
+
 /*!	@brief	A union of the various specific render event types.
 	@discussion
 		Determine which variant to use via head.eventType. AURenderEventParameter and
@@ -166,6 +178,7 @@ typedef union AURenderEvent {
 	AURenderEventHeader		head;
 	AUParameterEvent		parameter;
 	AUMIDIEvent				MIDI;
+	AUMIDIEventList			MIDIEventsList;
 } AURenderEvent;
 #pragma pack()
 
@@ -229,7 +242,9 @@ typedef AUAudioUnitStatus (^AUInternalRenderBlock)(
         If the plug-in produces more MIDI output data than the default size of the allocated buffer,
         then the plug-in can provide this property to increase the size of this buffer.
 
-        The value represents the number of 3-byte MIDI 1.0 messages that fit into the buffer.
+        The value represents the number of 3-byte Legacy MIDI messages that fit into the buffer or
+		a single MIDIEventList containing 1 MIDIEventPacket of 2 words when using MIDI 2.0 (MIDIEventList based API's).
+ 
         This property is set to the default value by the framework.
 
         In case of kAudioUnitErr_MIDIOutputBufferFull errors caused by producing too much MIDI

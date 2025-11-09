@@ -475,6 +475,7 @@ extern CFStringRef kCMIOBlockBufferAttachmentKey_CVPixelBufferReference API_AVAI
 <ul>					{191, 183, 208, 213, 202, 206, 209, 206, 204, 192, 202, 277,
 <br>					 282, 240, 209, 194, 193, 197, 196, 198, 168, 199, 171, 194}
 </ul>
+</ul>
 				Example of usage for compressed audio:
 <ul>				dataBuffer: contains 1 HDV audio packet
 <br>				dataFormatDescription: describes 48kHz MPEG-1 Layer II audio

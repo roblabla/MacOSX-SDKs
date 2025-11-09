@@ -80,7 +80,7 @@ API_UNAVAILABLE(macos)
  */
 
 - (void)resolveMediaItemsForSearchForMedia:(INSearchForMediaIntent *)intent
-                    withCompletion:(void (^)(NSArray<INSearchForMediaMediaItemResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveMediaItems(for:with:));
+                            withCompletion:(void (^)(NSArray<INSearchForMediaMediaItemResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveMediaItems(for:with:));
 
 @end
 

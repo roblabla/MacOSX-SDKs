@@ -52,6 +52,8 @@ typedef NS_OPTIONS(NSInteger, PDFAreaOfInterest)
     kPDFIconArea =          (1UL << 6),
     kPDFPopupArea =         (1UL << 7),
     kPDFImageArea =         (1UL << 8),
+    
+    kPDFAnyArea =           NSIntegerMax
 };
 
 // Interpolation quality.

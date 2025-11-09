@@ -125,6 +125,19 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
     NS_REFINED_FOR_SWIFT;
 
 /*! @abstract   Create a MLCTensor object
+    @discussion Create a tensor object initialized with a random initializer such as Glorot Uniform.
+                The tensor data type is MLCDataTypeFloat32
+    @param      shape                                       The tensor shape
+    @param      randomInitializerType   The random initializer type
+    @param      dataType                    The tensor data type
+    @return     A new MLCTensor object
+ */
++ (instancetype)tensorWithShape:(NSArray<NSNumber *> *)shape
+          randomInitializerType:(MLCRandomInitializerType)randomInitializerType
+                       dataType:(MLCDataType)dataType
+    NS_REFINED_FOR_SWIFT;
+
+/*! @abstract   Create a MLCTensor object
     @discussion Create a tensor object without any data
     @param      shape                           The tensor shape
     @param      dataType                    The tensor data type
@@ -382,6 +395,63 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 */
 - (BOOL)bindOptimizerData:(NSArray<MLCTensorData *> *)data
                deviceData:(NSArray<MLCTensorOptimizerDeviceData *> * _Nullable)deviceData;
+
+
+/*! @abstract   Converts a 32-bit floating-point tensor with given scale and a zero point
+                Returns a quantized tensor
+    @param      type  The quantized data type.  Must be MLCDataTypeInt8, MLCDataTypeUInt8 or MLCDataTypeInt32
+    @param      scale  The scale to apply in quantization
+    @param      bias The offset value that maps to float zero
+    @return     A quantized tensor
+*/
+- (MLCTensor * _Nullable)tensorByQuantizingToType:(MLCDataType)type
+                                            scale:(float)scale
+                                             bias:(NSInteger)bias
+    NS_SWIFT_NAME(quantized(to:scale:bias:))
+    MLCOMPUTE_AVAILABLE_STARTING(macos(12.0), ios(15), tvos(15));
+
+/*! @abstract   Converts a 32-bit floating-point tensor with given scale and a zero point
+                Returns a quantized tensor
+    @param      type  The quantized data type.  Must be MLCDataTypeInt8, MLCDataTypeUInt8 or MLCDataTypeInt32
+    @param      scale  The scale to apply in quantization
+    @param      bias The offset value that maps to float zero
+    @param      axis The dimension on which to apply per-channel quantization
+    @return     A quantized tensor
+*/
+- (MLCTensor * _Nullable)tensorByQuantizingToType:(MLCDataType)type
+                                            scale:(MLCTensor *)scale
+                                             bias:(MLCTensor *)bias
+                                             axis:(NSInteger)axis
+    NS_SWIFT_NAME(quantized(to:scale:bias:axis:))
+    MLCOMPUTE_AVAILABLE_STARTING(macos(12.0), ios(15), tvos(15));
+
+/*! @abstract   Converts a quantized tensor to a 32-bit floating-point tensor
+                Returns a de-quantized tensor
+    @param      type  The de-quantized data type.  Must be MLCFloat32
+    @param      scale  The scale thst was used for the quantized data
+    @param      bias The offset value that maps to float zero used for the quantized data
+    @return     A quantized tensor
+*/
+- (MLCTensor * _Nullable)tensorByDequantizingToType:(MLCDataType)type
+                                              scale:(MLCTensor *)scale
+                                               bias:(MLCTensor *)bias
+    NS_SWIFT_NAME(dequantized(to:scale:zeroPoint:))
+    MLCOMPUTE_AVAILABLE_STARTING(macos(12.0), ios(15), tvos(15));
+
+/*! @abstract   Converts a quantized tensor to a 32-bit floating-point tensor
+                Returns a de-quantized tensor
+    @param      type  The de-quantized data type.  Must be MLCFloat32
+    @param      scale  The scale thst was used for the quantized data
+    @param      bias The offset value that maps to float zero used for the quantized data
+    @param      axis The dimension on which to apply per-channel quantization
+    @return     A quantized tensor
+*/
+- (MLCTensor * _Nullable)tensorByDequantizingToType:(MLCDataType)type
+                                              scale:(MLCTensor *)scale
+                                               bias:(MLCTensor *)bias
+                                               axis:(NSInteger)axis
+    NS_SWIFT_NAME(dequantized(to:scale:bias:axis:))
+    MLCOMPUTE_AVAILABLE_STARTING(macos(12.0), ios(15), tvos(15));
 
 @end
 

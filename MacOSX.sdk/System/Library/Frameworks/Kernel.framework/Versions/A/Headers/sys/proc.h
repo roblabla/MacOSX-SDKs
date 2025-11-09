@@ -94,6 +94,7 @@ extern bool proc_is_alien(proc_t p);
 proc_t current_proc_EXTERNAL(void);
 
 extern int      msleep(void *chan, lck_mtx_t *mtx, int pri, const char *wmesg, struct timespec * ts );
+extern int      msleep0(void *chan, lck_mtx_t *mtx, int pri, const char *wmesg, int timo, int (*continuation)(int));
 extern void     wakeup(void *chan);
 extern void wakeup_one(caddr_t chan);
 
@@ -138,6 +139,8 @@ extern int proc_ppid(proc_t);
 extern int proc_original_ppid(proc_t);
 /* returns the start time of the given process */
 extern int proc_starttime(proc_t, struct timeval *);
+/* returns whether the given process is on simulated platform */
+extern boolean_t proc_is_simulated(const proc_t);
 /* returns the platform (macos, ios, watchos, tvos, ...) of the given process */
 extern uint32_t proc_platform(const proc_t);
 /* returns the minimum sdk version used by the current process */

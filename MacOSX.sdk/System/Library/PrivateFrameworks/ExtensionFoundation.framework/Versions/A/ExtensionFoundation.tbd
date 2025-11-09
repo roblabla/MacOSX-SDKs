@@ -1,17 +1,34 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B1C1B15E-8B25-332F-9A02-799E98E4E3B0
+    value:           D03A5BF8-29A4-3F46-B56C-02DA9294B674
+  - target:          x86_64-maccatalyst
+    value:           D03A5BF8-29A4-3F46-B56C-02DA9294B674
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           20FE35A2-1451-3E9D-8C2A-8F37DC9517E6
+    value:           117B4356-127A-3FB5-98E8-A2BEAFF5040C
+  - target:          arm64e-maccatalyst
+    value:           117B4356-127A-3FB5-98E8-A2BEAFF5040C
 install-name:    '/System/Library/PrivateFrameworks/ExtensionFoundation.framework/Versions/A/ExtensionFoundation'
-current-version: 19.4
+current-version: 34.5
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ __EXDefaultLog, __kEXCatalystSDKVariantKey, __kEXConcreteExtensionKey ]
-    objc-classes:    [ EXCacheBuilder, EXDefaults, EXEnumerator ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _EXExtensionIsPredicateSafeToExecuteWithObject, _EXExtensionIsSafeKeyPathForObject, 
+                       _EXExtensionKitErrorDomain, _EXExtensionMain, _EXGetExtensionClass, 
+                       _EXGetExtensionContextInternalClass, _EXGetExtensionContextVendorClass, 
+                       __EXAuditTokenForCurrentProcess, __EXAuditTokenGetEntitlementValue, 
+                       __EXAuditTokenGetPID, __EXDefaultLog, __EXDiscoveryLog, __EXLegacyLog, 
+                       __EXRegistrationLog, __EXStartService, __kEXCatalystSDKVariantKey, 
+                       __kEXConcreteExtensionKey, _kEXInternalSubserviceName, _kExtensionKitErrorDomain ]
+    objc-classes:    [ EXConcreteExtension, EXEnumerator, EXFrameworkScanner, EXSwiftUI_Subsystem, 
+                       EXUIKit_Subsystem, _EXDefaults, _EXExtension, _EXExtensionProcess, 
+                       _EXExtensionRep, _EXQuery, _EXQueryObserver, _EXRunningExtension, 
+                       _EXService, _EXServiceClient ]
 ...

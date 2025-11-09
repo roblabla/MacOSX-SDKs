@@ -35,7 +35,7 @@ NS_ENUM(NSTextCheckingTypes) {
     NSTextCheckingAllTypes          = (NSTextCheckingAllSystemTypes | NSTextCheckingAllCustomTypes)
 };
 
-typedef NSString *NSTextCheckingKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString *NSTextCheckingKey NS_TYPED_EXTENSIBLE_ENUM;
 
 API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0))
 @interface NSTextCheckingResult : NSObject <NSCopying, NSSecureCoding>

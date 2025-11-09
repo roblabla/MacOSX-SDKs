@@ -1,7 +1,7 @@
 /*
     NSFetchRequest.h
     Core Data
-    Copyright (c) 2004-2020, Apple Inc.
+    Copyright (c) 2004-2021, Apple Inc.
     All rights reserved.
 */
 
@@ -44,7 +44,7 @@ typedef NS_OPTIONS(NSUInteger, NSFetchRequestResultType) {
 @end
 
 API_AVAILABLE(macosx(10.4),ios(3.0))
-@interface NSFetchRequest<__covariant ResultType:id<NSFetchRequestResult>> : NSPersistentStoreRequest <NSCoding> {
+@interface NSFetchRequest<__covariant ResultType:id<NSFetchRequestResult>> : NSPersistentStoreRequest <NSCoding, NSCopying> {
 }
 
 + (instancetype)fetchRequestWithEntityName:(NSString*)entityName API_AVAILABLE(macosx(10.7),ios(4.0));

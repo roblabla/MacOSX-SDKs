@@ -1,18 +1,26 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4F88824F-1CB4-396F-A5CE-E4851BFE4526
+    value:           CA94F3DF-8DE1-3549-BEE4-5EED93032EA1
+  - target:          x86_64-maccatalyst
+    value:           CA94F3DF-8DE1-3549-BEE4-5EED93032EA1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8068DBF1-B7C2-30B0-A1DF-FE4C309B255C
+    value:           07BEA2AF-3AC1-3C43-A789-6744408EEEAD
+  - target:          arm64e-maccatalyst
+    value:           07BEA2AF-3AC1-3C43-A789-6744408EEEAD
 install-name:    '/System/Library/PrivateFrameworks/BookCoverUtility.framework/Versions/A/BookCoverUtility'
-current-version: 1489
+current-version: 1591
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _BCUCoverEffectsFilterInfoAlternativeAppearanceKey, _BCUCoverEffectsFilterInfoContentRTLKey, 
                        _BCUCoverEffectsFilterInfoCoverEffectStyleKey, _BCUCoverEffectsFilterOptionMinificationFilter, 
                        _BCUCoverEffectsIdentifierAudiobook, _BCUCoverEffectsIdentifierAudiobookNight, 

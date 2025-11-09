@@ -160,7 +160,7 @@ enum tIOUSBHostPortStatus
 #pragma mark Entitlements
 #define kIOUSBTransportDextEntitlement                          "com.apple.developer.driverkit.transport.usb"
 #define kIOUSBHostVMEntitlement                                 "com.apple.vm.device-access"
-#define kIOUSBHostControllerInterfaceEntitlement                "com.apple.usb.hostcontrollerinterface"
+#define kIOUSBHostControllerInterfaceEntitlement                "com.apple.developer.usb.hostcontrollerinterface"
 
 #pragma mark Registry property names
 
@@ -284,7 +284,7 @@ enum tIOUSBHostPortStatus
 #define kUSBHostControllerPropertyDisableWakeSources            "UsbHostControllerDisableWakeSources"   // OSBoolean true to disable connect/disconnect/overcurrent wake sources
 #define kUSBHostControllerPropertyPersistFullSpeedIsochronous   "UsbHostControllerPersistFullSpeedIsochronous"  // OSBoolean true to reduce commands related to full-speed isochronous endpoints
 #define kUSBHostControllerPropertyDeferRegisterService          "UsbHostControllerDeferRegisterService" // OSBoolean true to defer registerService call by base class during start
-#define kUSBHostControllerPropertyStreamPolicy                  "UsbHostControllerStreamPolicy"         // OSNumber containing AppleUSBHostController::tStreamPolicy
+#define kUSBHostControllerPropertyStreamPolicy                  "UsbHostControllerStreamPolicy"         // OSNumber containing tUSBStreamPolicy
 #define kUSBHostControllerPropertyTierLimit                     "UsbHostControllerTierLimit"            // OSNumber containing the number of tiers supported by this controller (See USB 2.0 § 4.1.1)
 
 #define kIOUSBHostDeviceClassName                               "IOUSBHostDevice"

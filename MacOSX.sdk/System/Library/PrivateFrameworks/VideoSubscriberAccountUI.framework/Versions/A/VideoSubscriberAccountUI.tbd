@@ -3,22 +3,25 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           23F5FC9D-EB01-39C4-8C48-4B039398F047
+    value:           E1E53AA0-C532-3B64-9D82-3773DCB80914
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A3996EBD-F9EB-3C0E-B111-B3156ACF544E
+    value:           AA61BFAC-1A5D-3F2E-A069-236465AD52A9
 install-name:    '/System/Library/PrivateFrameworks/VideoSubscriberAccountUI.framework/Versions/A/VideoSubscriberAccountUI'
-current-version: 364.40.15
+current-version: 402.0.4
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _VSAppSettingsFacadeAppsDidChangeNotification, _kVSDeveloperTwoCharCode ]
-    objc-classes:    [ VSAMSStorefrontFetchAllOperation, VSAppDescriptionFetchOperation, 
+    symbols:         [ _VSAppSettingsFacadeAppsDidChangeNotification, _VSWLKAppInstallationOperationNotificationUserInfoAppAdamIDKey, 
+                       _VSWLKAppInstallationOperationNotificationUserInfoInstallProgressKey, 
+                       _VSWLKAppInstallationOperationProgressDidChange, _kVSDeveloperTwoCharCode ]
+    objc-classes:    [ VSAMSStorefrontFetchAllOperation, VSAppDescription, VSAppDescriptionFetchOperation, 
                        VSAppSettingsFacade, VSAppSettingsViewModel, VSFetchAllSupportedAppsOperation, 
                        VSFontCenter, VSIdentityProviderFetchAllOperation, VSIdentityProviderFetchChannelAppsOperation, 
                        VSIdentityProviderFetchOperation, VSIdentityProviderFilter, 
                        VSIdentityProviderRequest, VSIdentityProviderRequestManager, 
                        VSIdentityProviderStorefrontCollection, VSIdentityProviderStorefrontParser, 
-                       VSImageLoadOperation, VSStorefront, VSStorefrontFilter, VSTopShelfPurgingAccountStore, 
-                       VSViewControllerFactory ]
+                       VSImageLoadOperation, VSNonChannelAppDecider, VSStorefront, 
+                       VSStorefrontFilter, VSTopShelfPurgingAccountStore, VSViewControllerFactory, 
+                       VSWLKAppInstallationOperation ]
 ...

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8A0411FE-CB28-3DCD-A6B3-1DC069A80323
+    value:           8A2FEA6C-807E-3B4B-A55D-3138B38CED4F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E527C27D-4BE0-322F-B39A-2C269A7FD511
+    value:           7735A688-5A7A-34B7-A5DD-5B6F5A0041B4
 install-name:    '/System/Library/PrivateFrameworks/MailWebProcessSupport.framework/Versions/A/MailWebProcessSupport'
-current-version: 3654.80
+current-version: 3689.0.4
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _kBodyFieldSource, _kBodyFieldSourceLength, _kConstantsSource, 
@@ -18,5 +18,5 @@ exports:
                        _kHTMLDocumentExtrasSourceLength, _kHTMLElementExtrasSource, 
                        _kHTMLElementExtrasSourceLength, _kNodeExtrasSource, _kNodeExtrasSourceLength, 
                        _kRangeExtrasSource, _kRangeExtrasSourceLength ]
-    objc-classes:    [ MSComposeBundlePageController ]
+    objc-classes:    [ MSAttachmentItem, MSComposeBundlePageController, MSPDFAttachmentController ]
 ...

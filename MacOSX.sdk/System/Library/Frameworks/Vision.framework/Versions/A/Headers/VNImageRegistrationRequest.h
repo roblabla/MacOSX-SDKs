@@ -29,6 +29,12 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNTranslationalImageRegistrationRequest : VNImageRegistrationRequest
+
+/*!
+	@discussion VNImageTranslationAlignmentObservation results.
+*/
+@property (readonly, copy, nullable) NSArray<VNImageTranslationAlignmentObservation*>* results;
+
 @end
 
 
@@ -45,6 +51,12 @@ static const NSUInteger VNTranslationalImageRegistrationRequestRevision1 = 1;
 */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNHomographicImageRegistrationRequest : VNImageRegistrationRequest
+
+/*!
+	@discussion VNImageHomographicAlignmentObservation results.
+*/
+@property (readonly, copy, nullable) NSArray<VNImageHomographicAlignmentObservation*>* results;
+
 @end
 
 

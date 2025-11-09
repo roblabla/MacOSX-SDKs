@@ -13,7 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UISnapBehavior : UIDynamicBehavior
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UISnapBehavior : UIDynamicBehavior
 
 // The point argument is expressed in the reference coordinate system
 - (instancetype)initWithItem:(id <UIDynamicItem>)item snapToPoint:(CGPoint)point NS_DESIGNATED_INITIALIZER;

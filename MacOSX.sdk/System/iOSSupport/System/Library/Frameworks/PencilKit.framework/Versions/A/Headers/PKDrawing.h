@@ -19,6 +19,7 @@ extern "C" {
 #endif
 /// The UTType for storing drawing data.
 extern const CFStringRef PKAppleDrawingTypeIdentifier API_AVAILABLE(ios(13.0), macos(10.15));
+
 #ifdef __cplusplus
 }
 #endif
@@ -26,7 +27,6 @@ extern const CFStringRef PKAppleDrawingTypeIdentifier API_AVAILABLE(ios(13.0), m
 @class PKStroke;
 
 /// The data model object for storing drawing data created from PKCanvasView.
-NS_REFINED_FOR_SWIFT
 API_AVAILABLE(ios(13.0), macos(10.15))
 @interface PKDrawing : NSObject <NSCopying, NSSecureCoding>
 

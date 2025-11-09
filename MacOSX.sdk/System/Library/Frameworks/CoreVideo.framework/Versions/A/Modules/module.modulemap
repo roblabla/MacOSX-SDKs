@@ -1,4 +1,4 @@
-framework module CoreVideo [extern_c] {
+framework module CoreVideo [system] {
 	umbrella header "CoreVideo.h"
 	export *
 	module * { 

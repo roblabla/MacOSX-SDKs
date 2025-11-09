@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           66BC649A-B7DA-341F-9387-F7CB8EBC1A70
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C2FD4BB0-A938-3DD1-85C9-5D8EFF3B65EE
+install-name:    '/System/Library/PrivateFrameworks/STSXPCHelperClient.framework/Versions/A/STSXPCHelperClient'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _STSXPCHelperClientVersionNumber, _STSXPCHelperClientVersionString, 
+                       _StsLogFunc, _StsLogFunc_C, _StsLogFunc_Obj, _StsLogInternal, 
+                       _StsSignpostLog ]
+    objc-classes:    [ STSApdu, STSXPCHelperClientEntitlementChecker ]
+...

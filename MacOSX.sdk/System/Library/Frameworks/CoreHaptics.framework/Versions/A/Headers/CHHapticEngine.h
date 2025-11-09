@@ -290,13 +290,27 @@ CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) 
 - (nullable id<CHHapticAdvancedPatternPlayer>)createAdvancedPlayerWithPattern:(CHHapticPattern *)pattern
 																		error:(NSError **)outError;
 
+typedef NSString *CHHapticAudioResourceKey;
+
+/*! @enum CHHapticAudioResourceKey
+	@abstract
+		Keys used to configure the playback behavior of a custom waveform.
+	@constant   CHHapticAudioResourceKeyUseVolumeEnvelope
+		Indicates whether the audio file playback should be ramped in and out with an envelope.  This can be useful for preventing clicks during playback,
+		or for cases where the application wants to modulate this envelope to use different attack and release times.
+		Value type: boolean.  Default is @true.
+ */
+
+CH_EXPORT
+CHHapticAudioResourceKey CHHapticAudioResourceKeyUseVolumeEnvelope API_AVAILABLE(ios(15.0), macos(12.0), tvos(15.0), macCatalyst(15.0)) API_UNAVAILABLE(watchos);
+
 /*! @method registerAudioResource:options:error
 	@abstract
 		Register an external audio file for use as a custom waveform.
 	@param resourceURL
  		A URL referencing the location of the audio file to be registered.
  	@param options
- 		A dictionary containing key/value pairs describing how this resource should be played.
+ 		A dictionary containing CHHapticAudioResourceKey/value pairs describing how this resource should be played.
  	@param outError
  		If register operation fails, this will be set to a valid NSError describing the error.
  */

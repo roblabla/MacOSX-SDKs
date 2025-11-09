@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FA20CF9F-CF0A-355A-A4EF-0AB4A4EAF95B
+    value:           AB838FED-95DB-34EC-A5AB-B1BFD58F76DC
   - target:          x86_64-maccatalyst
-    value:           FA20CF9F-CF0A-355A-A4EF-0AB4A4EAF95B
+    value:           AB838FED-95DB-34EC-A5AB-B1BFD58F76DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3D2395C1-5F7E-3784-9832-3A8673494906
+    value:           2FEDC451-B0F9-3B4E-BB5D-469748CAF20A
   - target:          arm64e-maccatalyst
-    value:           3D2395C1-5F7E-3784-9832-3A8673494906
+    value:           2FEDC451-B0F9-3B4E-BB5D-469748CAF20A
 install-name:    '/usr/lib/libnfshared.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -50,24 +50,24 @@ exports:
                        _AWDNFCTSMEndEventReadFrom, _AWDNFCTSMStartEventReadFrom, 
                        _AWDNFCTransactionEndOfOperationEventReadFrom, _AWDNFCTransactionLastAPDUSentEventReadFrom, 
                        _AWDNFCVASTransactionExceptionEventReadFrom, _AWDNFCVersionsReadFrom, 
-                       _GetElapsedTimeInMillisecondsFromMachTime, _NFCreateRootQueue, 
-                       _NFDataAppend, _NFDataAppendBytes, _NFDataAsHexString, _NFDataCreateWithBytes, 
+                       _GetElapsedTimeInMillisecondsFromMachTime, _NFDataAppend, 
+                       _NFDataAppendBytes, _NFDataAsHexString, _NFDataCreateWithBytes, 
                        _NFDataCreateWithBytesNoCopy, _NFDataCreateWithFile, _NFDataCreateWithHexString, 
                        _NFDataCreateWithLength, _NFDataPrintAsHexString, _NFDataRelease, 
                        _NFDataRetain, _NFDataScannerCreateWithData, _NFDataScannerEOF, 
                        _NFDataScannerRead, _NFDataScannerRead16, _NFDataScannerRead32, 
                        _NFDataScannerRead8, _NFDataScannerReadData, _NFDataScannerRelease, 
-                       _NFDataScannerRetain, _NFGetProductType, _NFGetRootQueue, 
-                       _NFGetThreadPriority, _NFIsChinaSku, _NFIsGreenTea, _NFIsInternalBuild, 
-                       _NFIsProductType, _NFIsRestoreOS, _NFIsSimulator, _NFIsUIBuild, 
-                       _NFPlatformRequiresReaderModeAdjustmentOnAdapter, _NFProductHasNFCRadio, 
-                       _NFProductHasThermistor, _NFProductIsBridge, _NFProductIsDevBoard, 
-                       _NFProductIsMac, _NFProductIsPad, _NFProductIsPhone, _NFProductIsWatch, 
-                       _NFProductSupportsAC, _NFProductSupportsNFCReader, _NFSetRootQueue, 
-                       _NFSetThreadPriority, _NFSharedDumpTransport, _NFSharedLogLock, 
-                       _NFSharedLogOpen2, _NFSharedLogSetSynchronousLogging, _NFSharedLogTransport, 
-                       _NFSharedLogUnlock, _NFSharedLogv, _NFSharedLogv_GreenTea, 
-                       _NFSharedSignpostLog, _NFSimulateCrash, _NF_isFeatureSupported, 
+                       _NFDataScannerRetain, _NFGetOrCreateRootQueue, _NFGetProductType, 
+                       _NFGetRootQueue, _NFGetThreadPriority, _NFIsChinaSku, _NFIsGreenTea, 
+                       _NFIsInternalBuild, _NFIsProductType, _NFIsRestoreOS, _NFIsSimulator, 
+                       _NFIsUIBuild, _NFProductHasNFCRadio, _NFProductHasThermistor, 
+                       _NFProductIsBridge, _NFProductIsDevBoard, _NFProductIsMac, 
+                       _NFProductIsPad, _NFProductIsPhone, _NFProductIsWatch, _NFProductSupportsAC, 
+                       _NFProductSupportsNFCReader, _NFSetThreadPriority, _NFSharedDumpTransport, 
+                       _NFSharedLogLock, _NFSharedLogOpen2, _NFSharedLogSetSynchronousLogging, 
+                       _NFSharedLogTransport, _NFSharedLogUnlock, _NFSharedLogv, 
+                       _NFSharedLogv_GreenTea, _NFSharedMiddlewareSignpostLog, _NFSharedSignpostLog, 
+                       _NFSimulateCrash, _NFThermalMonitorProvidedBySMC, _NF_isFeatureSupported, 
                        _TLVCreateWithData, _TLVCreateWithDataMixed, _TLVCreateWithFirstChild, 
                        _TLVCreateWithValue, _TLVRelease, _TLVRetain, __NFSharedLogClose, 
                        __NFSharedLogOpen, ___NFSharedLogv, _gRootQueueMutex, _postAWDHardwareExceptionEvent, 
@@ -119,12 +119,12 @@ exports:
                        NFAWDTSMConnectivityException, NFAWDTSMEnd, NFAWDTSMStart, 
                        NFAWDTransactionEndOfOperation, NFAWDTransactionLastRADPU, 
                        NFAWDVASGetData, NFAWDVASSelect, NFAWDVASTransactionException, 
-                       NFAWDVersionInfo, NFCommandAPDU, NFCurrency, NFJSONEncoder, 
-                       NFMSEIParser, NFMemoryObserver, NFNSCheckedDecoder, NFNdefMessageInternal, 
-                       NFNdefRecordInternal, NFPowerAssertion, NFPowerObserver, NFPreferenceObserver, 
-                       NFReaderSessionConfig, NFResponseAPDU, NFRunScriptParameters, 
-                       NFSecureXPCEventPublisher, NFTLV, NFTagInternal, NFTimer, 
-                       NFVASPassConfig, NFXPCEventPublisher ]
+                       NFAWDVersionInfo, NFBackgroundActivityScheduler, NFCALogger, 
+                       NFCommandAPDU, NFCurrency, NFJSONEncoder, NFMSEIParser, NFMemoryObserver, 
+                       NFNSCheckedDecoder, NFNdefMessageInternal, NFNdefRecordInternal, 
+                       NFPowerAssertion, NFPowerObserver, NFPreferenceObserver, NFReaderSessionConfig, 
+                       NFResponseAPDU, NFRunScriptParameters, NFSecureXPCEventPublisher, 
+                       NFTLV, NFTagInternal, NFTimer, NFVASPassConfig, NFXPCEventPublisher ]
     objc-ivars:      [ AWDExpressTransactionType._appletType, AWDExpressTransactionType._count, 
                        AWDExpressTransactionType._has, AWDExpressTransactionType._ridAndPix, 
                        AWDExpressTransactionType._spid, AWDNFCCRSAuthExceptionEvent._has, 
@@ -181,7 +181,8 @@ exports:
                        AWDNFCFieldOnEvent._timestamp, AWDNFCFieldOnEvent._uuidReference, 
                        AWDNFCGeneralStatistic._has, AWDNFCGeneralStatistic._hasAccessExpressTransactionEnable, 
                        AWDNFCGeneralStatistic._hasAttackLogs, AWDNFCGeneralStatistic._hasFelicaExpressTransactionEnable, 
-                       AWDNFCGeneralStatistic._hasGenericAExpressEnable, AWDNFCGeneralStatistic._seCounterMeasureLevel, 
+                       AWDNFCGeneralStatistic._hasGenericAExpressEnable, AWDNFCGeneralStatistic._radioChangeCount, 
+                       AWDNFCGeneralStatistic._radioIsEnabled, AWDNFCGeneralStatistic._seCounterMeasureLevel, 
                        AWDNFCGeneralStatistic._startTimestamp, AWDNFCGeneralStatistic._timestamp, 
                        AWDNFCGeneralStatistic._totalAPNReceived, AWDNFCGeneralStatistic._totalAccessTransaction, 
                        AWDNFCGeneralStatistic._totalAuthECommerce, AWDNFCGeneralStatistic._totalBurnoutTimerCounter, 
@@ -249,7 +250,8 @@ exports:
                        AWDNFCHCIEndOfTransactionV2Event._minRSSIValue, AWDNFCHCIEndOfTransactionV2Event._multiTagState, 
                        AWDNFCHCIEndOfTransactionV2Event._sfiRead, AWDNFCHCIEndOfTransactionV2Event._sfiUpdated, 
                        AWDNFCHCIEndOfTransactionV2Event._spid, AWDNFCHCIEndOfTransactionV2Event._stationID, 
-                       AWDNFCHCIEndOfTransactionV2Event._terminalIdentifier, AWDNFCHCIEndOfTransactionV2Event._timeDeltaFromReference, 
+                       AWDNFCHCIEndOfTransactionV2Event._terminalIdentifier, AWDNFCHCIEndOfTransactionV2Event._terminalType, 
+                       AWDNFCHCIEndOfTransactionV2Event._timeDeltaFromReference, 
                        AWDNFCHCIEndOfTransactionV2Event._timestamp, AWDNFCHCIEndOfTransactionV2Event._totalRSSISamples, 
                        AWDNFCHCIEndOfTransactionV2Event._transactionCategory, AWDNFCHCIEndOfTransactionV2Event._transactionExtension, 
                        AWDNFCHCIEndOfTransactionV2Event._transactionId, AWDNFCHCIEndOfTransactionV2Event._transactionInProgress, 

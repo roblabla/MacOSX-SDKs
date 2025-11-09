@@ -4,28 +4,29 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           230387B3-1D26-3539-AC6C-22B1DC0AA24B
+    value:           075CC5B0-69A4-306C-B367-D75DC80457C4
   - target:          x86_64-maccatalyst
-    value:           230387B3-1D26-3539-AC6C-22B1DC0AA24B
+    value:           075CC5B0-69A4-306C-B367-D75DC80457C4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           281FB1EE-919F-3353-8A13-5D723671CF3E
+    value:           6D40479E-495F-3688-92AA-D12D2CB03681
   - target:          arm64e-maccatalyst
-    value:           281FB1EE-919F-3353-8A13-5D723671CF3E
+    value:           6D40479E-495F-3688-92AA-D12D2CB03681
 install-name:    '/System/Library/PrivateFrameworks/AppSSOCore.framework/Versions/A/AppSSOCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SOAuthorizationOptionCoreNoUserInterface, _SOErrorDomain, 
                        _SOErrorSubcodeKey, _appSSO_handleResponse, _appSSO_handleResponseCredential, 
-                       _appSSO_init, _appSSO_performResponse, _appSSO_performResponseCredential, 
+                       _appSSO_handleResponseImpersonationCredential, _appSSO_init, 
+                       _appSSO_performResponse, _appSSO_performResponseCredential, 
                        _appSSO_willHandle, _appSSO_willPerform ]
     objc-classes:    [ SOAuthorizationCore, SOAuthorizationCredentialCore, SOAuthorizationHintsCore, 
                        SOAuthorizationParametersCore, SOAuthorizationRequestParametersCore, 
-                       SOConfiguration, SOConfigurationClient, SOConfigurationVersion, 
-                       SOErrorHelper, SOFullProfile, SOInternalProtocols, SOServiceConnection, 
-                       SOUtils ]
+                       SOAuthorizationResultCore, SOConfiguration, SOConfigurationClient, 
+                       SOConfigurationVersion, SOErrorHelper, SOFullProfile, SOInternalProtocols, 
+                       SOServiceConnection, SOUtils ]
 ...

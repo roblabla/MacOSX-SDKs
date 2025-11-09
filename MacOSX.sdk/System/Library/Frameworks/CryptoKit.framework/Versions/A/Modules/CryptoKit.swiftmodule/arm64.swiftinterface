@@ -1,24 +1,25 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target arm64e-apple-macos11.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name CryptoKit
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target arm64e-apple-macos12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name CryptoKit
 import Foundation
 import LocalAuthentication
 import Security.SecAccessControl
 import Security
 import Swift
+import _Concurrency
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension Curve25519.Signing.PublicKey {
+extension CryptoKit.Curve25519.Signing.PublicKey {
   public func isValidSignature<S, D>(_ signature: S, for data: D) -> Swift.Bool where S : Foundation.DataProtocol, D : Foundation.DataProtocol
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension Curve25519.Signing.PrivateKey {
+extension CryptoKit.Curve25519.Signing.PrivateKey {
   public func signature<D>(for data: D) throws -> Foundation.Data where D : Foundation.DataProtocol
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
 public enum Curve25519 {
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P256 {
+extension CryptoKit.P256 {
   public enum Signing {
     public struct PublicKey {
       public init<D>(rawRepresentation: D) throws where D : Foundation.ContiguousBytes
@@ -75,7 +76,7 @@ extension P256 {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P256 {
+extension CryptoKit.P256 {
   public enum KeyAgreement {
     public struct PublicKey {
       public init<D>(rawRepresentation: D) throws where D : Foundation.ContiguousBytes
@@ -132,7 +133,7 @@ extension P256 {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P384 {
+extension CryptoKit.P384 {
   public enum Signing {
     public struct PublicKey {
       public init<D>(rawRepresentation: D) throws where D : Foundation.ContiguousBytes
@@ -189,7 +190,7 @@ extension P384 {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P384 {
+extension CryptoKit.P384 {
   public enum KeyAgreement {
     public struct PublicKey {
       public init<D>(rawRepresentation: D) throws where D : Foundation.ContiguousBytes
@@ -246,7 +247,7 @@ extension P384 {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P521 {
+extension CryptoKit.P521 {
   public enum Signing {
     public struct PublicKey {
       public init<D>(rawRepresentation: D) throws where D : Foundation.ContiguousBytes
@@ -303,7 +304,7 @@ extension P521 {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P521 {
+extension CryptoKit.P521 {
   public enum KeyAgreement {
     public struct PublicKey {
       public init<D>(rawRepresentation: D) throws where D : Foundation.ContiguousBytes
@@ -360,15 +361,15 @@ extension P521 {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P256.KeyAgreement.PrivateKey {
+extension CryptoKit.P256.KeyAgreement.PrivateKey {
   public func sharedSecretFromKeyAgreement(with publicKeyShare: CryptoKit.P256.KeyAgreement.PublicKey) throws -> CryptoKit.SharedSecret
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P384.KeyAgreement.PrivateKey {
+extension CryptoKit.P384.KeyAgreement.PrivateKey {
   public func sharedSecretFromKeyAgreement(with publicKeyShare: CryptoKit.P384.KeyAgreement.PublicKey) throws -> CryptoKit.SharedSecret
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P521.KeyAgreement.PrivateKey {
+extension CryptoKit.P521.KeyAgreement.PrivateKey {
   public func sharedSecretFromKeyAgreement(with publicKeyShare: CryptoKit.P521.KeyAgreement.PublicKey) throws -> CryptoKit.SharedSecret
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
@@ -410,7 +411,7 @@ public enum P384 {
 public enum P521 {
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension HMAC {
+extension CryptoKit.HMAC {
   @usableFromInline
   internal static func isValidAuthenticationCode<D>(_ authenticationCode: Foundation.ContiguousBytes, authenticating authenticatedData: D, using key: CryptoKit.SymmetricKey) -> Swift.Bool where D : Foundation.DataProtocol
 }
@@ -419,11 +420,11 @@ public protocol Digest : Foundation.ContiguousBytes, Swift.CustomStringConvertib
   static var byteCount: Swift.Int { get }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension Digest {
+extension CryptoKit.Digest {
   public func makeIterator() -> Swift.Array<Swift.UInt8>.Iterator
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension Digest {
+extension CryptoKit.Digest {
   public static func == (lhs: Self, rhs: Self) -> Swift.Bool
   public static func == <D>(lhs: Self, rhs: D) -> Swift.Bool where D : Foundation.DataProtocol
   public var description: Swift.String {
@@ -479,7 +480,7 @@ public struct SHA512Digest {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension Insecure {
+extension CryptoKit.Insecure {
   @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
   public struct SHA1Digest {
     public static var byteCount: Swift.Int {
@@ -498,7 +499,7 @@ extension Insecure {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension Insecure {
+extension CryptoKit.Insecure {
   @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
   public struct MD5Digest {
     public static var byteCount: Swift.Int {
@@ -517,18 +518,18 @@ extension Insecure {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension SecureEnclave.P256.Signing.PrivateKey {
+extension CryptoKit.SecureEnclave.P256.Signing.PrivateKey {
   public func signature<D>(for digest: D) throws -> CryptoKit.P256.Signing.ECDSASignature where D : CryptoKit.Digest
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension SecureEnclave.P256.Signing.PrivateKey {
+extension CryptoKit.SecureEnclave.P256.Signing.PrivateKey {
   public func signature<D>(for data: D) throws -> CryptoKit.P256.Signing.ECDSASignature where D : Foundation.DataProtocol
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
 public enum SecureEnclave {
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension SecureEnclave {
+extension CryptoKit.SecureEnclave {
   public static var isAvailable: Swift.Bool {
     get
   }
@@ -556,7 +557,7 @@ extension SecureEnclave {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension SecureEnclave.P256.KeyAgreement.PrivateKey {
+extension CryptoKit.SecureEnclave.P256.KeyAgreement.PrivateKey {
   public func sharedSecretFromKeyAgreement(with publicKeyShare: CryptoKit.P256.KeyAgreement.PublicKey) throws -> CryptoKit.SharedSecret
 }
 @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, *)
@@ -655,6 +656,16 @@ public struct SHA512 {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
 public enum Insecure {
 }
+@available(iOS 15.0, macOS 12.0, watchOS 8.0, tvOS 15.0, *)
+extension CryptoKit.AES {
+  @available(iOS 15.0, macOS 12.0, watchOS 8.0, tvOS 15.0, *)
+  public enum KeyWrap {
+    @available(iOS 15.0, macOS 12.0, watchOS 8.0, tvOS 15.0, *)
+    public static func wrap(_ keyToWrap: CryptoKit.SymmetricKey, using kek: CryptoKit.SymmetricKey) throws -> Foundation.Data
+    @available(iOS 15.0, macOS 12.0, watchOS 8.0, tvOS 15.0, *)
+    public static func unwrap<WrappedKey>(_ wrappedKey: WrappedKey, using kek: CryptoKit.SymmetricKey) throws -> CryptoKit.SymmetricKey where WrappedKey : Foundation.DataProtocol
+  }
+}
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
 public enum ChaChaPoly {
   public static func seal<Plaintext, AuthenticatedData>(_ message: Plaintext, using key: CryptoKit.SymmetricKey, nonce: CryptoKit.ChaChaPoly.Nonce? = nil, authenticating authenticatedData: AuthenticatedData) throws -> CryptoKit.ChaChaPoly.SealedBox where Plaintext : Foundation.DataProtocol, AuthenticatedData : Foundation.DataProtocol
@@ -663,7 +674,7 @@ public enum ChaChaPoly {
   public static func open(_ sealedBox: CryptoKit.ChaChaPoly.SealedBox, using key: CryptoKit.SymmetricKey) throws -> Foundation.Data
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension ChaChaPoly {
+extension CryptoKit.ChaChaPoly {
   @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
   @frozen public struct SealedBox {
     public let combined: Foundation.Data
@@ -691,7 +702,7 @@ extension ChaChaPoly {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension AES.GCM {
+extension CryptoKit.AES.GCM {
   @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
   public struct Nonce : Foundation.ContiguousBytes, Swift.Sequence {
     public init()
@@ -703,7 +714,7 @@ extension AES.GCM {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension ChaChaPoly {
+extension CryptoKit.ChaChaPoly {
   @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
   public struct Nonce : Foundation.ContiguousBytes, Swift.Sequence {
     public init()
@@ -741,7 +752,7 @@ public struct SymmetricKey : Foundation.ContiguousBytes {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension SymmetricKey : Swift.Equatable {
+extension CryptoKit.SymmetricKey : Swift.Equatable {
   public static func == (lhs: CryptoKit.SymmetricKey, rhs: CryptoKit.SymmetricKey) -> Swift.Bool
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
@@ -754,7 +765,7 @@ public protocol HashFunction {
   func finalize() -> Self.Digest
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension HashFunction {
+extension CryptoKit.HashFunction {
   @inlinable internal static func hash(bufferPointer: Swift.UnsafeRawBufferPointer) -> Self.Digest {
         var hasher = Self()
         hasher.update(bufferPointer: bufferPointer)
@@ -774,7 +785,7 @@ extension HashFunction {
     }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension AES {
+extension CryptoKit.AES {
   public enum GCM {
     public static func seal<Plaintext, AuthenticatedData>(_ message: Plaintext, using key: CryptoKit.SymmetricKey, nonce: CryptoKit.AES.GCM.Nonce? = nil, authenticating authenticatedData: AuthenticatedData) throws -> CryptoKit.AES.GCM.SealedBox where Plaintext : Foundation.DataProtocol, AuthenticatedData : Foundation.DataProtocol
     public static func seal<Plaintext>(_ message: Plaintext, using key: CryptoKit.SymmetricKey, nonce: CryptoKit.AES.GCM.Nonce? = nil) throws -> CryptoKit.AES.GCM.SealedBox where Plaintext : Foundation.DataProtocol
@@ -783,7 +794,7 @@ extension AES {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension AES.GCM {
+extension CryptoKit.AES.GCM {
   @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
   public struct SealedBox {
     public var tag: Foundation.Data {
@@ -815,7 +826,7 @@ extension AES.GCM {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P256.Signing {
+extension CryptoKit.P256.Signing {
   public struct ECDSASignature : Foundation.ContiguousBytes {
     public var rawRepresentation: Foundation.Data
     public init<D>(rawRepresentation: D) throws where D : Foundation.DataProtocol
@@ -827,23 +838,23 @@ extension P256.Signing {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P256.Signing.PrivateKey {
+extension CryptoKit.P256.Signing.PrivateKey {
   public func signature<D>(for digest: D) throws -> CryptoKit.P256.Signing.ECDSASignature where D : CryptoKit.Digest
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P256.Signing.PrivateKey {
+extension CryptoKit.P256.Signing.PrivateKey {
   public func signature<D>(for data: D) throws -> CryptoKit.P256.Signing.ECDSASignature where D : Foundation.DataProtocol
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P256.Signing.PublicKey {
+extension CryptoKit.P256.Signing.PublicKey {
   public func isValidSignature<D>(_ signature: CryptoKit.P256.Signing.ECDSASignature, for digest: D) -> Swift.Bool where D : CryptoKit.Digest
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P256.Signing.PublicKey {
+extension CryptoKit.P256.Signing.PublicKey {
   public func isValidSignature<D>(_ signature: CryptoKit.P256.Signing.ECDSASignature, for data: D) -> Swift.Bool where D : Foundation.DataProtocol
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P384.Signing {
+extension CryptoKit.P384.Signing {
   public struct ECDSASignature : Foundation.ContiguousBytes {
     public var rawRepresentation: Foundation.Data
     public init<D>(rawRepresentation: D) throws where D : Foundation.DataProtocol
@@ -855,23 +866,23 @@ extension P384.Signing {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P384.Signing.PrivateKey {
+extension CryptoKit.P384.Signing.PrivateKey {
   public func signature<D>(for digest: D) throws -> CryptoKit.P384.Signing.ECDSASignature where D : CryptoKit.Digest
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P384.Signing.PrivateKey {
+extension CryptoKit.P384.Signing.PrivateKey {
   public func signature<D>(for data: D) throws -> CryptoKit.P384.Signing.ECDSASignature where D : Foundation.DataProtocol
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P384.Signing.PublicKey {
+extension CryptoKit.P384.Signing.PublicKey {
   public func isValidSignature<D>(_ signature: CryptoKit.P384.Signing.ECDSASignature, for digest: D) -> Swift.Bool where D : CryptoKit.Digest
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P384.Signing.PublicKey {
+extension CryptoKit.P384.Signing.PublicKey {
   public func isValidSignature<D>(_ signature: CryptoKit.P384.Signing.ECDSASignature, for data: D) -> Swift.Bool where D : Foundation.DataProtocol
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P521.Signing {
+extension CryptoKit.P521.Signing {
   public struct ECDSASignature : Foundation.ContiguousBytes {
     public var rawRepresentation: Foundation.Data
     public init<D>(rawRepresentation: D) throws where D : Foundation.DataProtocol
@@ -883,19 +894,19 @@ extension P521.Signing {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P521.Signing.PrivateKey {
+extension CryptoKit.P521.Signing.PrivateKey {
   public func signature<D>(for digest: D) throws -> CryptoKit.P521.Signing.ECDSASignature where D : CryptoKit.Digest
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P521.Signing.PrivateKey {
+extension CryptoKit.P521.Signing.PrivateKey {
   public func signature<D>(for data: D) throws -> CryptoKit.P521.Signing.ECDSASignature where D : Foundation.DataProtocol
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P521.Signing.PublicKey {
+extension CryptoKit.P521.Signing.PublicKey {
   public func isValidSignature<D>(_ signature: CryptoKit.P521.Signing.ECDSASignature, for digest: D) -> Swift.Bool where D : CryptoKit.Digest
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension P521.Signing.PublicKey {
+extension CryptoKit.P521.Signing.PublicKey {
   public func isValidSignature<D>(_ signature: CryptoKit.P521.Signing.ECDSASignature, for data: D) -> Swift.Bool where D : Foundation.DataProtocol
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
@@ -905,14 +916,14 @@ public struct SharedSecret : Foundation.ContiguousBytes {
   public func hkdfDerivedSymmetricKey<H, Salt, SI>(using hashFunction: H.Type, salt: Salt, sharedInfo: SI, outputByteCount: Swift.Int) -> CryptoKit.SymmetricKey where H : CryptoKit.HashFunction, Salt : Foundation.DataProtocol, SI : Foundation.DataProtocol
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension SharedSecret : Swift.Hashable {
+extension CryptoKit.SharedSecret : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension SharedSecret : Swift.CustomStringConvertible, Swift.Equatable {
+extension CryptoKit.SharedSecret : Swift.CustomStringConvertible, Swift.Equatable {
   public static func == (lhs: CryptoKit.SharedSecret, rhs: CryptoKit.SharedSecret) -> Swift.Bool
   public static func == <D>(lhs: CryptoKit.SharedSecret, rhs: D) -> Swift.Bool where D : Foundation.DataProtocol
   public var description: Swift.String {
@@ -920,7 +931,7 @@ extension SharedSecret : Swift.CustomStringConvertible, Swift.Equatable {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension Insecure {
+extension CryptoKit.Insecure {
   public struct SHA1 {
     @available(iOS 13.2, macOS 10.15, watchOS 6.1, tvOS 13.2, *)
     public static var blockByteCount: Swift.Int {
@@ -977,7 +988,7 @@ public protocol MessageAuthenticationCode : Foundation.ContiguousBytes, Swift.Cu
   var byteCount: Swift.Int { get }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension MessageAuthenticationCode {
+extension CryptoKit.MessageAuthenticationCode {
   public static func == (lhs: Self, rhs: Self) -> Swift.Bool
   public static func == <D>(lhs: Self, rhs: D) -> Swift.Bool where D : Foundation.DataProtocol
   public func makeIterator() -> Swift.Array<Swift.UInt8>.Iterator
@@ -991,6 +1002,8 @@ public enum CryptoKitError : Swift.Error {
   case incorrectParameterSize
   case authenticationFailure
   case underlyingCoreCryptoError(error: Swift.Int32)
+  case wrapFailure
+  case unwrapFailure
 }
 @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, *)
 public enum CryptoKitASN1Error : Swift.Error {
@@ -1009,7 +1022,7 @@ public enum CryptoKitASN1Error : Swift.Error {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension Curve25519 {
+extension CryptoKit.Curve25519 {
   public enum KeyAgreement {
     public struct PublicKey {
       public init<D>(rawRepresentation: D) throws where D : Foundation.ContiguousBytes
@@ -1031,7 +1044,7 @@ extension Curve25519 {
   }
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, *)
-extension Curve25519 {
+extension CryptoKit.Curve25519 {
   public enum Signing {
     public struct PrivateKey {
       public init()

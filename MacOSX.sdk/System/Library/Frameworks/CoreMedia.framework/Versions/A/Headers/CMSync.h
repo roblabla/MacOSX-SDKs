@@ -3,7 +3,7 @@
  
 	Framework:  CoreMedia
  
-	Copyright © 2006-2019 Apple Inc. All rights reserved.
+	Copyright © 2006-2021 Apple Inc. All rights reserved.
  
 */
 
@@ -17,7 +17,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    
+
 #pragma pack(push, 4)
 
 CF_IMPLICIT_BRIDGING_ENABLED
@@ -26,7 +26,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 	@typedef	CMClock
 	@abstract	A timing source object.
 	@discussion
-		A clock represents a source of time information: generally, a piece of hardware that measures the passage of time.  
+		A clock represents a source of time information: generally, a piece of hardware that measures the passage of time.
 		One example of a clock is the host time clock, accessible via CMClockGetHostTimeClock().  
 		It measures time using the CPU system clock, which on Mac OS X is mach_absolute_time().
 		Every audio device can also be considered a clock since the audio samples that it outputs or inputs each have a 
@@ -44,22 +44,30 @@ typedef struct CM_BRIDGED_TYPE(id) OpaqueCMClock* CMClockRef API_AVAILABLE(macos
 	@abstract	Models a timeline under application control.
 	@discussion
 		A timebase represents a timeline that clients can control by setting the rate and time.
-		Each timebase has either a master clock or a master timebase.  
-		The rate of the timebase is expressed relative to its master. 
-		When a timebase has rate 0.0, its time is fixed and does not change as its master's time changes.
-		When a timebase has rate 1.0, its time increases one second as its master's time increases by one second.
-		When a timebase has rate 2.0, its time increases two seconds as its master's time increases by one second.
-		When a timebase has rate -1.0, its time decreases one second as its master's time increases by one second.
+		Each timebase has either a source clock or a source timebase (previously referred to as a master clock or master timebase).
+		The rate of the timebase is expressed relative to its source.
+		When a timebase has rate 0.0, its time is fixed and does not change as its source's time changes.
+		When a timebase has rate 1.0, its time increases one second as its source's time increases by one second.
+		When a timebase has rate 2.0, its time increases two seconds as its source's time increases by one second.
+		When a timebase has rate -1.0, its time decreases one second as its source's time increases by one second.
 		
-		If a timebase has a master timebase, the master timebase's rate is a factor in determining the timebase's effective rate.
-		In fact, a timebase's effective rate is defined as the product of its rate, its master timebase's rate, 
-		its master timebase's master timebase's rate, and so on up to the ultimate master clock.  This is the rate at which
-		the timebase's time changes relative to the ultimate master clock.
+		If a timebase has a source timebase, the source timebase's rate is a factor in determining the timebase's effective rate.
+		In fact, a timebase's effective rate is defined as the product of its rate, its source timebase's rate,
+		its source timebase's source timebase's rate, and so on up to the ultimate source clock.  This is the rate at which
+		the timebase's time changes relative to the ultimate source clock.
 */
 
 typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTimebase* CMTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)); // a CF type; use CFRetain and CFRelease
 
 typedef CM_BRIDGED_TYPE(id) CFTypeRef CMClockOrTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)); // used in argument lists and function results to indicate that either may be passed
+
+#ifndef CMTIMEBASE_USE_SOURCE_TERMINOLOGY
+#if (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= __MAC_12_0) || (__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= __IPHONE_15_0) || (__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ >= __TVOS_15_0) || (__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ >= __WATCHOS_8_0) || 0
+#define CMTIMEBASE_USE_SOURCE_TERMINOLOGY 1 // When using the SDK that includes this header file, apps may adopt the newer terminology and continue to deploy to prior OS versions.
+#else
+#define CMTIMEBASE_USE_SOURCE_TERMINOLOGY 0 // Prior to 2021, the source clock or source timebase was referred to as a master clock or master timebase.
+#endif
+#endif
 
 
 // CMClock error codes
@@ -152,7 +160,7 @@ CMClockMakeHostTimeFromSystemUnits( uint64_t hostTime )
 	@abstract	Retrieves the current time from a clock.
 */
 CM_EXPORT CMTime
-CMClockGetTime( 
+CMClockGetTime(
 		CMClockRef CM_NONNULL clock )
 	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
@@ -162,7 +170,7 @@ CMClockGetTime(
 	@discussion	To make practical use of this, you may need to know what the clock's reference clock is.
 */
 CM_EXPORT OSStatus
-CMClockGetAnchorTime( 
+CMClockGetAnchorTime(
 		CMClockRef CM_NONNULL clock,
 		CMTime * CM_NONNULL clockTimeOut,
 		CMTime * CM_NONNULL referenceClockTimeOut )
@@ -203,164 +211,344 @@ CMTimebaseGetTypeID( void )
 CF_IMPLICIT_BRIDGING_DISABLED
 
 /*!
-	@function	CMTimebaseCreateWithMasterClock
-	@abstract	Creates a timebase driven by the given clock.  
+	@function	CMTimebaseCreateWithSourceClock
+	@abstract	Creates a timebase driven by the given clock.
 	@discussion
 		The timebase will initially have rate zero and time zero.
-		Pass CMClockGetHostTimeClock() for masterClock to have the host time clock drive this timebase.
+		Pass CMClockGetHostTimeClock() for sourceClock to have the host time clock drive this timebase.
 */
+#if CMTIMEBASE_USE_SOURCE_TERMINOLOGY
 CM_EXPORT OSStatus
-CMTimebaseCreateWithMasterClock( 
+CMTimebaseCreateWithSourceClock(
 		CFAllocatorRef CM_NULLABLE allocator,
-		CMClockRef CM_NONNULL masterClock,
+		CMClockRef CM_NONNULL sourceClock,
 		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
 			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
+static inline OSStatus
+CMTimebaseCreateWithMasterClock(
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMClockRef CM_NONNULL masterClock,
+		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCreateWithSourceClock", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0))
+{
+	return CMTimebaseCreateWithSourceClock(allocator, masterClock, timebaseOut);
+}
+#else
+CM_EXPORT OSStatus
+CMTimebaseCreateWithMasterClock(
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMClockRef CM_NONNULL masterClock,
+		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCreateWithSourceClock", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0));
+static inline OSStatus
+CMTimebaseCreateWithSourceClock(
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMClockRef CM_NONNULL sourceClock,
+		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0))
+{
+	return CMTimebaseCreateWithMasterClock(allocator, sourceClock, timebaseOut);
+}
+#endif
+
 /*!
-	@function	CMTimebaseCreateWithMasterTimebase
-	@abstract	Creates a timebase driven by the given master timebase.  
+	@function	CMTimebaseCreateWithSourceTimebase
+	@abstract	Creates a timebase driven by the given source timebase.
 	@discussion
 		The timebase will initially have rate zero and time zero.
 */
+#if CMTIMEBASE_USE_SOURCE_TERMINOLOGY
 CM_EXPORT OSStatus
-CMTimebaseCreateWithMasterTimebase( 
+CMTimebaseCreateWithSourceTimebase(
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMTimebaseRef CM_NONNULL sourceTimebase,
+		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+
+static inline OSStatus
+CMTimebaseCreateWithMasterTimebase(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMTimebaseRef CM_NONNULL masterTimebase,
 		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCreateWithSourceTimebase", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0))
+{
+	return CMTimebaseCreateWithSourceTimebase(allocator, masterTimebase, timebaseOut);
+}
+#else
+CM_EXPORT OSStatus
+CMTimebaseCreateWithMasterTimebase(
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMTimebaseRef CM_NONNULL masterTimebase,
+		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCreateWithSourceTimebase", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0));
+static inline OSStatus
+CMTimebaseCreateWithSourceTimebase(
+		CFAllocatorRef CM_NULLABLE allocator,
+		CMTimebaseRef CM_NONNULL sourceTimebase,
+		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0))
+{
+	return CMTimebaseCreateWithMasterTimebase(allocator, sourceTimebase, timebaseOut);
+}
+#endif
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
-	@function	CMTimebaseCopyMasterTimebase
-	@abstract	Returns the immediate master timebase of a timebase.
+	@function	CMTimebaseCopySourceTimebase
+	@abstract	Returns the immediate source timebase of a timebase.
 	@discussion
-		Returns NULL if the timebase actually has a master clock instead of a master timebase.
+		Returns NULL if the timebase actually has a source clock instead of a source timebase.
 */
+#if CMTIMEBASE_USE_SOURCE_TERMINOLOGY
+CM_EXPORT CMTimebaseRef CM_NULLABLE
+CMTimebaseCopySourceTimebase(
+		CMTimebaseRef CM_NONNULL timebase )
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+static inline CMTimebaseRef CM_NULLABLE
+CMTimebaseCopyMasterTimebase(
+		CMTimebaseRef CM_NONNULL timebase )
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceTimebase", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0))
+{
+	return CMTimebaseCopySourceTimebase(timebase);
+}
+#else
 CM_EXPORT CMTimebaseRef CM_NULLABLE
 CMTimebaseCopyMasterTimebase(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceTimebase", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0));
+static inline CMTimebaseRef CM_NULLABLE
+CMTimebaseCopySourceTimebase(
+		CMTimebaseRef CM_NONNULL timebase )
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0))
+{
+	return CMTimebaseCopyMasterTimebase(timebase);
+}
+#endif
 
 /*!
-	@function	CMTimebaseCopyMasterClock
-	@abstract	Returns the immediate master clock of a timebase.  
+	@function	CMTimebaseCopySourceClock
+	@abstract	Returns the immediate source clock of a timebase.
 	@discussion
-		Returns NULL if the timebase actually has a master timebase instead of a master clock.
+		Returns NULL if the timebase actually has a source timebase instead of a source clock.
 */
+#if CMTIMEBASE_USE_SOURCE_TERMINOLOGY
+CM_EXPORT CMClockRef CM_NULLABLE
+CMTimebaseCopySourceClock(
+		CMTimebaseRef CM_NONNULL timebase )
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+static inline CMClockRef CM_NULLABLE
+CMTimebaseCopyMasterClock(
+		CMTimebaseRef CM_NONNULL timebase )
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceClock", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0))
+{
+	return CMTimebaseCopySourceClock(timebase);
+}
+#else
 CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseCopyMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceClock", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0));
+static inline CMClockRef CM_NULLABLE
+CMTimebaseCopySourceClock(
+		CMTimebaseRef CM_NONNULL timebase )
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0))
+{
+	return CMTimebaseCopyMasterClock(timebase);
+}
+#endif
 
 /*!
-	@function	CMTimebaseCopyMaster
-	@abstract	Returns the immediate master (either timebase or clock) of a timebase.  
+	@function	CMTimebaseCopySource
+	@abstract	Returns the immediate source (either timebase or clock) of a timebase.
 	@discussion
 		Only returns NULL if there was an error (such as timebase == NULL).
 */
+#if CMTIMEBASE_USE_SOURCE_TERMINOLOGY
+CM_EXPORT CMClockOrTimebaseRef CM_NONNULL
+CMTimebaseCopySource(
+		CMTimebaseRef CM_NONNULL timebase )
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+static inline CMClockOrTimebaseRef CM_NONNULL
+CMTimebaseCopyMaster(
+		CMTimebaseRef CM_NONNULL timebase )
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySource", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0))
+{
+	return CMTimebaseCopySource(timebase);
+}
+#else
 CM_EXPORT CMClockOrTimebaseRef CM_NONNULL
 CMTimebaseCopyMaster(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySource", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0));
+static inline CMClockOrTimebaseRef CM_NONNULL
+CMTimebaseCopySource(
+		CMTimebaseRef CM_NONNULL timebase )
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0))
+{
+	return CMTimebaseCopyMaster(timebase);
+}
+#endif
 
 /*!
-	@function	CMTimebaseCopyUltimateMasterClock
-	@abstract	Returns the master clock that is the master of all of a timebase's master timebases.
+	@function	CMTimebaseCopyUltimateSourceClock
+	@abstract	Returns the source clock that is the source of all of a timebase's source timebases.
 */
+#if CMTIMEBASE_USE_SOURCE_TERMINOLOGY
+CM_EXPORT CMClockRef CM_NONNULL
+CMTimebaseCopyUltimateSourceClock(
+		CMTimebaseRef CM_NONNULL timebase )
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+static inline CMClockRef CM_NONNULL
+CMTimebaseCopyUltimateMasterClock(
+		CMTimebaseRef CM_NONNULL timebase )
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyUltimateSourceClock", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0))
+{
+	return CMTimebaseCopyUltimateSourceClock(timebase);
+}
+#else
 CM_EXPORT CMClockRef CM_NONNULL
 CMTimebaseCopyUltimateMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
-		
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyUltimateSourceClock", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0));
+static inline CMClockRef CM_NONNULL
+CMTimebaseCopyUltimateSourceClock(
+		CMTimebaseRef CM_NONNULL timebase )
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0))
+{
+	return CMTimebaseCopyUltimateMasterClock(timebase);
+}
+#endif
+
 /*!
 	@function	CMTimebaseGetMasterTimebase
-	@abstract	Returns the immediate master timebase of a timebase.
+	@abstract	Returns the immediate source timebase of a timebase.
 	@discussion
-		Returns NULL if the timebase actually has a master clock instead of a master timebase.
-		Please use CMTimebaseCopyMasterTimebase instead.
+		Returns NULL if the timebase actually has a source clock instead of a source timebase.
+		Please use CMTimebaseCopySourceTimebase instead.
 */
 CM_EXPORT CMTimebaseRef CM_NULLABLE
 CMTimebaseGetMasterTimebase(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyMasterTimebase", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceTimebase", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	CMTimebaseGetMasterClock
-	@abstract	Returns the immediate master clock of a timebase.  
+	@abstract	Returns the immediate source clock of a timebase.
 	@discussion
-		Returns NULL if the timebase actually has a master timebase instead of a master clock.
-		Please use CMTimebaseCopyMasterClock instead.
+		Returns NULL if the timebase actually has a source timebase instead of a source clock.
+		Please use CMTimebaseCopySourceClock instead.
 */
 CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseGetMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyMasterClock", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceClock", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	CMTimebaseGetMaster
-	@abstract	Returns the immediate master (either timebase or clock) of a timebase.  
+	@abstract	Returns the immediate source (either timebase or clock) of a timebase.
 	@discussion
 		Only returns NULL if there was an error (such as timebase == NULL).
 		Example of use: time = CMSyncGetTime(CMTimebaseGetMaster(timebase));
-		Please use CMTimebaseCopyMaster instead.
+		Please use CMTimebaseCopySource instead.
 */
 CM_EXPORT CMClockOrTimebaseRef CM_NULLABLE
 CMTimebaseGetMaster(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyMaster", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySource", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	CMTimebaseGetUltimateMasterClock
-	@abstract	Returns the master clock that is the master of all of a timebase's master timebases.
+	@abstract	Returns the source clock that is the source of all of a timebase's source timebases.
 	@discussion
-		Please use CMTimebaseCopyUltimateMasterClock instead.
+		Please use CMTimebaseCopyUltimateSourceClock instead.
 */
 CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseGetUltimateMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyUltimateMasterClock", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyUltimateSourceClock", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 /*!
-	@function	0
+	@function	CMTimebaseSetSourceClock
 	@abstract
-		Sets the master clock of a timebase.
+		Sets the source clock of a timebase.
 	@discussion
-		The timebase will stop being mastered by its current master clock or master
-		timebase, and will change to be mastered by the new master clock.  Prior to
-		the change a kCMTimebaseNotification_MasterWillChange will be posted.  When
-		the change has completed, a kCMTimebaseNotification_MasterDidChange notification
-		will be posted.  The current master clock or master timebase of the timebase
-		being modified will be released.
+		The timebase will stop receiving timing information from its current source clock or source
+		timebase, and will begin receiving timing information from the new source clock.  Prior to
+		the change a kCMTimebaseNotification_SourceWillChange will be posted.  When
+		the change has completed, a kCMTimebaseNotification_SourceDidChange notification
+		will be posted.
 */
+#if CMTIMEBASE_USE_SOURCE_TERMINOLOGY
+CM_EXPORT OSStatus CMTimebaseSetSourceClock(
+		CMTimebaseRef CM_NONNULL timebase,
+		CMClockRef CM_NONNULL newSourceClock)
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+static inline OSStatus CMTimebaseSetMasterClock(
+		CMTimebaseRef CM_NONNULL timebase,
+		CMClockRef CM_NONNULL newMasterClock)
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseSetSourceClock", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0))
+{
+	return CMTimebaseSetSourceClock(timebase, newMasterClock);
+}
+#else
 CM_EXPORT OSStatus CMTimebaseSetMasterClock(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMClockRef CM_NONNULL newMasterClock)
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseSetSourceClock", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0));
+static inline OSStatus CMTimebaseSetSourceClock(
+		CMTimebaseRef CM_NONNULL timebase,
+		CMClockRef CM_NONNULL newSourceClock)
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0))
+{
+	return CMTimebaseSetMasterClock(timebase, newSourceClock);
+}
+#endif
 
 /*!
-	@function	CMTimebaseSetMasterTimebase
+	@function	CMTimebaseSetSourceTimebase
 	@abstract
-		Sets the master timebase of a timebase.
+		Sets the source timebase of a timebase.
 	@discussion
-		The timebase will stop being mastered by its current master clock or master
-		timebase, and will change to be mastered by the new master timebase.  Prior to
-		the change a kCMTimebaseNotification_MasterWillChange will be posted.  When
-		the change has completed, a kCMTimebaseNotification_MasterDidChange notification
-		will be posted.  The current master clock or master timebase of the timebase
-		being modified will be released.
+		The timebase will stop receiving timing information from its current source clock or source
+		timebase, and will begin receiving timing information from the new source timebase.  Prior to
+		the change a kCMTimebaseNotification_SourceWillChange will be posted.  When
+		the change has completed, a kCMTimebaseNotification_SourceDidChange notification
+		will be posted.
 */
+#if CMTIMEBASE_USE_SOURCE_TERMINOLOGY
+CM_EXPORT OSStatus CMTimebaseSetSourceTimebase(
+		CMTimebaseRef CM_NONNULL timebase,
+		CMTimebaseRef CM_NONNULL newSourceTimebase)
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+static inline OSStatus CMTimebaseSetMasterTimebase(
+		CMTimebaseRef CM_NONNULL timebase,
+		CMTimebaseRef CM_NONNULL newMasterTimebase)
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseSetSourceTimebase", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0))
+{
+	return CMTimebaseSetSourceTimebase(timebase, newMasterTimebase);
+}
+#else
 CM_EXPORT OSStatus CMTimebaseSetMasterTimebase(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTimebaseRef CM_NONNULL newMasterTimebase)
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseSetSourceTimebase", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0));
+static inline OSStatus CMTimebaseSetSourceTimebase(
+		CMTimebaseRef CM_NONNULL timebase,
+		CMTimebaseRef CM_NONNULL newSourceTimebase)
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0))
+{
+	return CMTimebaseSetMasterTimebase(timebase, newSourceTimebase);
+}
+#endif
 
 /*!
 	@function	CMTimebaseGetTime
 	@abstract	Retrieves the current time from a timebase.
 */
 CM_EXPORT CMTime
-CMTimebaseGetTime( 
+CMTimebaseGetTime(
 		CMTimebaseRef CM_NONNULL timebase )
 			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
@@ -387,27 +575,27 @@ CMTimebaseSetTime(
 
 /*!
 	@function	CMTimebaseSetAnchorTime
-	@abstract	Sets the time of a timebase at a particular master time.
+	@abstract	Sets the time of a timebase at a particular source time.
 	@discussion
 		CMTimebaseGetTime's results will be interpolated from that anchor time.
 		CMTimebaseSetTime(timebase, time) is equivalent to calling
-			CMClockOrTimebaseRef master = CMTimebaseCopyMaster(timebase);
-			CMTimebaseSetAnchorTime(timebase, time, CMSyncGetTime(master));
-			CFRelease(master).
+			CMClockOrTimebaseRef source = CMTimebaseCopySource(timebase);
+			CMTimebaseSetAnchorTime(timebase, time, CMSyncGetTime(source));
+			CFRelease(source).
 */
 CM_EXPORT OSStatus
 CMTimebaseSetAnchorTime(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTime timebaseTime,
-		CMTime immediateMasterTime)
+		CMTime immediateSourceTime)
 			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseGetRate
 	@abstract	Retrieves the current rate of a timebase.  
 	@discussion
-		This is the rate relative to its immediate master clock or timebase.  
-		For example, if a timebase is running at twice the rate of its master, its rate is 2.0.
+		This is the rate relative to its immediate source clock or timebase.  
+		For example, if a timebase is running at twice the rate of its source, its rate is 2.0.
 */
 CM_EXPORT Float64 
 CMTimebaseGetRate( 
@@ -440,14 +628,14 @@ CMTimebaseSetRate(
 		
 /*!
 	@function	CMTimebaseSetRateAndAnchorTime
-	@abstract	Sets the time of a timebase at a particular master time, and changes the rate at exactly that time.
+	@abstract	Sets the time of a timebase at a particular source time, and changes the rate at exactly that time.
 	@discussion
 		CMTimebaseGetTime's results will be interpolated from that anchor time as though the timebase 
 		has been running at the requested rate since that time.
 		CMTimebaseSetRate(timebase, rate) is approximately equivalent to calling
-			CMClockOrTimebaseRef master = CMTimebaseCopyMaster(timebase);
-			CMTimebaseSetRateAndAnchorTime(timebase, rate, CMTimebaseGetTime(timebase), CMSyncGetTime(master)),
-			CFRelease(master);
+			CMClockOrTimebaseRef source = CMTimebaseCopySource(timebase);
+			CMTimebaseSetRateAndAnchorTime(timebase, rate, CMTimebaseGetTime(timebase), CMSyncGetTime(source)),
+			CFRelease(source);
 		except that CMTimebaseSetRate will not generate a TimeJumped notification, and
 		CMTimebaseSetRateAndAnchorTime will.
 */
@@ -456,15 +644,15 @@ CMTimebaseSetRateAndAnchorTime(
 		CMTimebaseRef CM_NONNULL timebase,
 		Float64 rate,
 		CMTime timebaseTime,
-		CMTime immediateMasterTime)
+		CMTime immediateSourceTime)
 			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseGetEffectiveRate
-	@abstract	Gets the effective rate of a timebase (which combines its rate with the rates of all its master timebases).
+	@abstract	Gets the effective rate of a timebase (which combines its rate with the rates of all its source timebases).
 	@discussion
 		Calling CMTimebaseGetEffectiveRate(timebase) is equivalent to calling
-			CMClockRef clock = CMTimebaseCopyUltimateMasterClock(timebase);
+			CMClockRef clock = CMTimebaseCopyUltimateSourceClock(timebase);
 			CMSyncGetRelativeRate(timebase, clock).
 			CFRelease(clock);
 */
@@ -646,13 +834,13 @@ CMTimebaseSetTimerDispatchSourceToFireImmediately(
 	@function	CMSyncGetRelativeRate
 	@abstract	Queries the relative rate of one timebase or clock relative to another timebase or clock.
 	@discussion
-		If both have a common master, this calculation is performed purely based on the rates in the common tree 
-		rooted in that master.  
-		If they have different master clocks (or are both clocks), this calculation takes into account the measured
+		If both have a common source, this calculation is performed purely based on the rates in the common tree 
+		rooted in that source.  
+		If they have different source clocks (or are both clocks), this calculation takes into account the measured
 		drift between the two clocks, using host time as a pivot.
 		The rate of a moving timebase relative to a stopped timebase is a NaN.
 		Calling CMTimebaseGetEffectiveRate(timebase) is equivalent to calling
-			CMClockRef clock = CMTimebaseCopyUltimateMasterClock(timebase);
+			CMClockRef clock = CMTimebaseCopyUltimateSourceClock(timebase);
 			CMSyncGetRelativeRate(timebase, clock).
 			CFRelease(clock);
 */
@@ -666,9 +854,9 @@ CMSyncGetRelativeRate(
 	@function	CMSyncGetRelativeRateAndAnchorTime
 	@abstract	Queries the relative rate of one timebase or clock relative to another timebase or clock and the times of each timebase or clock at which the relative rate went into effect.
 	@discussion
-		If both have a common master, this calculation is performed purely based on the rates in the common tree
-		rooted in that master.  
-		If they have different master clocks (or are both clocks), this calculation takes into account the measured
+		If both have a common source, this calculation is performed purely based on the rates in the common tree
+		rooted in that source.  
+		If they have different source clocks (or are both clocks), this calculation takes into account the measured
 		drift between the two clocks, using host time as a pivot.
 		The rate of a moving timebase relative to a stopped timebase is a NaN.
 */
@@ -685,9 +873,9 @@ CMSyncGetRelativeRateAndAnchorTime(
 	@function	CMSyncConvertTime
 	@abstract	Converts a time from one timebase or clock to another timebase or clock.
 	@discussion
-		If both have a common master, this calculation is performed purely based on the mathematical rates and offsets 
-		in the common tree rooted in that master.  
-		If they have different master clocks (or are both clocks), this calculation also compensates
+		If both have a common source, this calculation is performed purely based on the mathematical rates and offsets 
+		in the common tree rooted in that source.  
+		If they have different source clocks (or are both clocks), this calculation also compensates
 		for measured drift between the clocks.
 		To convert to or from host time, pass CMClockGetHostTimeClock() as the appropriate argument.
 */
@@ -702,7 +890,7 @@ CMSyncConvertTime(
 	@function	CMSyncMightDrift
 	@abstract	Reports whether it is possible for one timebase/clock to drift relative to the other.
 	@discussion
-		A timebase can drift relative to another if they are ultimately mastered by clocks that can drift relative
+		A timebase can drift relative to another if their ultimate source clocks that can drift relative
 		to each other.
 */
 CM_EXPORT Boolean
@@ -717,9 +905,9 @@ CMSyncMightDrift(
 	@discussion
 		CMSyncGetTime simply calls either CMClockGetTime or CMTimebaseGetTime, as appropriate.
 		It comes in handy for things like:
-			CMClockOrTimebaseRef master = CMTimebaseCopyMaster(timebase);
-			CMSyncGetTime(master);
-			CFRelease(master);
+			CMClockOrTimebaseRef source = CMTimebaseCopySource(timebase);
+			CMSyncGetTime(source);
+			CFRelease(source);
 */
 CM_EXPORT CMTime
 CMSyncGetTime(

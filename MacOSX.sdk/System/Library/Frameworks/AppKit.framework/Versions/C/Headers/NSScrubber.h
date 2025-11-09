@@ -1,7 +1,7 @@
 /*
  NSScrubber.h
  Application Kit
- Copyright (c) 2016-2019, Apple Inc.
+ Copyright (c) 2016-2021, Apple Inc.
  All rights reserved.
  */
 
@@ -67,7 +67,7 @@ typedef NS_ENUM(NSInteger, NSScrubberAlignment) {
  * @abstract @c NSScrubberSelectionStyle is an abstract class that provides decorative accessory views for selected and highlighted items within a NSScrubber control. Class properties provide convenient access to built-in styles. For a completely custom style, subclassers can override @c -makeSelectionView to create and configure arbitrary @c NSScrubberSelectionView subclasses.
  *
  */
-API_AVAILABLE(macos(10.12.2))
+API_AVAILABLE(macos(10.12.2)) NS_SWIFT_UI_ACTOR
 @interface NSScrubberSelectionStyle : NSObject <NSCoding>
 
 #pragma mark Built-in Styles

@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from OSData.iig */
+/* iig(DriverKit-191) generated from OSData.iig */
 
 /* OSData.iig:1-37 */
 /*
@@ -355,12 +355,21 @@ class OSData : public OSContainer, public OSDataInterface
 
 #if !KERNEL
 public:
+#ifdef OSData_DECLARE_IVARS
+OSData_DECLARE_IVARS
+#else /* OSData_DECLARE_IVARS */
     union
     {
         OSData_IVars * ivars;
         OSData_LocalIVars * lvars;
     };
+#endif /* OSData_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gOSDataMetaClass; };
+#endif /* KERNEL */
 
     using super = OSContainer;
 

@@ -61,6 +61,11 @@ CSEXTERN void ColorSyncTransformSetProperty(ColorSyncTransformRef transform, CFT
     *   property  - CFTypeRef to be set as the property
     */
 
+CSEXTERN CFArrayRef __nullable ColorSyncTransformGetProfileSequence(ColorSyncTransformRef transform) CS_AVAILABLE_PUBLIC_STARTING(11.0, CS_UNAVAILABLE_PUBLIC_EMBEDDED);
+    /*
+     *   transform - transform from which to get the profile sequnce used to create the transform
+     */
+
 enum ColorSyncDataDepth {
     kColorSync1BitGamut             = 1,
     kColorSync8BitInteger           = 2,
@@ -163,6 +168,9 @@ CSEXTERN CFStringRef kColorSyncConvertQuality CS_AVAILABLE_PUBLIC_STARTING(10.4,
         CSEXTERN CFStringRef kColorSyncNormalQuality CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);    /* coalesce all transforms */
         CSEXTERN CFStringRef kColorSyncDraftQuality CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);     /* coalesce all transforms, do not interpolate */
 
+/* Conversion options */
+CSEXTERN CFStringRef kColorSyncConvertUseExtendedRange CS_AVAILABLE_PUBLIC_STARTING(11.0, CS_UNAVAILABLE_PUBLIC_EMBEDDED); /* allow float data to exceed [0.0 .. 1.0] range */
+
 /* Public keys for copying transform properties */
 
 CSEXTERN CFStringRef kColorSyncTransformInfo CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);        /* dictionary with the following keys */
@@ -209,6 +217,7 @@ CSEXTERN CFStringRef kColorSyncTransformCodeFragmentMD5 CS_AVAILABLE_PUBLIC_STAR
 CSEXTERN CFStringRef kColorSyncTransformFullConversionData CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);         /* CFSTR("com.apple.cmm.FullConversion") */
 CSEXTERN CFStringRef kColorSyncTransformSimplifiedConversionData CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);   /* CFSTR("com.apple.cmm.SimplifiedConversion") */
 CSEXTERN CFStringRef kColorSyncTransformParametricConversionData CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);   /* CFSTR("com.apple.cmm.ParametricConversion") */
+CSEXTERN CFStringRef kColorSyncTransformProfileSequnce CS_AVAILABLE_PUBLIC_STARTING(11.0, CS_UNAVAILABLE_PUBLIC_EMBEDDED);             /* CFSTR("com.apple.cmm.ProfileSequnce") */
 
 /*
  * Matrix: represented as a CFArray of three CFArrays of four CFNumbers (Float32)
@@ -347,7 +356,12 @@ extern "C" {
      *   key       - CFTypeRef to be used as a key to identify the property
      *   property  - CFTypeRef to be set as the property
      */
-    
+
+    CSEXTERN CFArrayRef ColorSyncTransformGetProfileSequence(ColorSyncTransformRef transform);
+    /*
+     *   transform - transform from which to get the profile sequnce used to create the transform
+     */
+
     enum ColorSyncDataDepth {
         kColorSync1BitGamut             = 1,
         kColorSync8BitInteger           = 2,
@@ -443,7 +457,7 @@ extern "C" {
     CSEXTERN CFStringRef kColorSyncDraftQuality;     /* coalesce all transforms, do not interpolate */
     
     /* Conversion options */
-    CSEXTERN CFStringRef kColorSyncConvertUseExtendedRange; /* applies to large amounts of data; CFBooleanRef value; default true*/
+    CSEXTERN CFStringRef kColorSyncConvertUseExtendedRange; /* allow float data to exceed [0.0 .. 1.0] range */
     
     /* Public keys for copying transform properties */
     
@@ -491,7 +505,8 @@ extern "C" {
     CSEXTERN CFStringRef kColorSyncTransformFullConversionData;         /* CFSTR("com.apple.cmm.FullConversion") */
     CSEXTERN CFStringRef kColorSyncTransformSimplifiedConversionData;   /* CFSTR("com.apple.cmm.SimplifiedConversion") */
     CSEXTERN CFStringRef kColorSyncTransformParametricConversionData;   /* CFSTR("com.apple.cmm.ParametricConversion") */
-    
+    CSEXTERN CFStringRef kColorSyncTransformProfileSequnce;             /* CFSTR("com.apple.cmm.ProfileSequnce") */
+
     /*
      * Matrix: represented as a CFArray of three CFArrays of four CFNumbers (Float32)
      *         each, performin the following matrix operation

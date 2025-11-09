@@ -17,6 +17,6 @@ typedef NS_ENUM(NSInteger, INRelativeSetting) {
     INRelativeSettingLower,
     INRelativeSettingHigher,
     INRelativeSettingHighest,
-} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 #endif // INRelativeSetting_h

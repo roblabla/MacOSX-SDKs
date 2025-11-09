@@ -7,6 +7,92 @@
 #import <IOBluetooth/Bluetooth.h>
 
 //===========================================================================================================================
+//    Delegate methods
+//===========================================================================================================================
+
+API_UNAVAILABLE(ios, watchos, tvos)
+@protocol IOBluetoothDevicePairDelegate <NSObject>
+@optional
+
+/*!
+ @method        devicePairingStarted:
+ @abstract    Indicates that the pairing has started.
+ @param        sender        The IOBluetoothDevicePair object.
+ */
+
+- (void) devicePairingStarted:(id)sender;
+
+/*!
+ @method        devicePairingConnecting:
+ @abstract    Indicates to the delegate that the pairing object is making the device (baseband) connection.
+ @param        sender        The IOBluetoothDevicePair object.
+ */
+
+- (void) devicePairingConnecting:(id)sender;
+
+/*!
+ @method        devicePairingPINCodeRequest:
+ @abstract    Indicates to the delegate that the pairing object has made the device (baseband) connection and is
+ awaiting the PIN code (if specified) to be entered on the device. Thus, when you recieve this message,
+ you should display to the user that they should enter the PIN code on the device.
+ The method replyPINCode must be invoked in response and happen before the timeout period of the device.
+ @param        sender        The IOBluetoothDevicePair object.
+ */
+
+- (void) devicePairingPINCodeRequest:(id)sender;
+
+/*!
+ @method        devicePairingUserConfirmationRequest:numericValue
+ @abstract    Indicates to the delegate that the pairing object has made the device (baseband) connection and is
+ awaiting the a yes/no answer for the Simple Secure Pairing numeric comparison. Thus, when you recieve this message,
+ you should display to the user the numeric value and then accept the yes/no answer if it matches the value
+ on the other device.
+ The method replyUserConfirmation must be invoked in response and happen before the timeout period of the device.
+ @param        sender            The IOBluetoothDevicePair object.
+ @param        numericValue    Numeric value to be displayed.
+ */
+
+- (void) devicePairingUserConfirmationRequest:(id)sender numericValue:(BluetoothNumericValue)numericValue;
+
+/*!
+ @method        devicePairingUserPasskeyNotification:passkey
+ @abstract    Indicates to the delegate that the pairing object has made the device (baseband) connection and is
+ awaiting the passkey (if specified) to be entered on the device for the Secure Simple Pairing.
+ Thus, when you recieve this message, you should display to the user that they should enter
+ the passkey on the device.
+ @param        sender            The IOBluetoothDevicePair object.
+ @param        passkey            Passkey to be displayed.
+ */
+
+- (void) devicePairingUserPasskeyNotification:(id)sender passkey:(BluetoothPasskey)passkey;
+
+/*!
+ @method        devicePairingFinished:error:
+ @abstract    Indicates to the delegate that the pairing object has fully completed the process. Can tell the delegate
+ when and error occurred during the attempt to pair with the device.
+ @discussion    The error passed to your delegate could be kBluetoothHCIErrorAuthenticationFailure,
+ kBluetoothHCIErrorLMPResponseTimeout, etc. See Bluetooth.h for all the possibilities.
+ @param        sender        The IOBluetoothDevicePair object.
+ @param        error        An IOReturn or Bluetooth error code.
+ */
+
+- (void) devicePairingFinished:(id)sender error:(IOReturn)error;
+
+/*!
+ @method        deviceSimplePairingComplete:status:
+ @abstract    Indicates to the delegate that the pairing object has fully completed the simple pairing process. Can tell the delegate
+ when and error occurred during the attempt to pair with the device.
+ @discussion    The status passed to your delegate could be BluetoothHCIEventStatus, etc. See Bluetooth.h for all the possibilities.
+ @param        sender        The IOBluetoothDevicePair object.
+ @param        status        A simple pairing complete error code.
+ */
+
+- (void) deviceSimplePairingComplete:(id)sender status:(BluetoothHCIEventStatus)status;
+
+@end
+
+
+//===========================================================================================================================
 //	Forwards
 //===========================================================================================================================
 
@@ -38,7 +124,6 @@
 API_UNAVAILABLE(ios, watchos, tvos)
 @interface	IOBluetoothDevicePair : NSObject
 {
-	id							_delegate;
 	IOBluetoothDevice *			_device;
 	BOOL						_busy;
 	BOOL						_isHandlerSetup;
@@ -49,7 +134,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 	id                          _expansion;
 }
 
-@property(assign) id delegate;
+@property(weak) id delegate;
 
 /*!
     @method		pairWithDevice:
@@ -109,90 +194,5 @@ API_UNAVAILABLE(ios, watchos, tvos)
 */
 
 - (void)replyUserConfirmation:(BOOL)reply;
-
-@end
-
-//===========================================================================================================================
-//	Delegate methods
-//===========================================================================================================================
-
-API_UNAVAILABLE(ios, watchos, tvos)
-@protocol IOBluetoothDevicePairDelegate <NSObject>
-@optional
-
-/*!
-    @method		devicePairingStarted:
-	@abstract	Indicates that the pairing has started.
-	@param		sender		The IOBluetoothDevicePair object.
-*/
-
-- (void) devicePairingStarted:(id)sender;
-
-/*!
-    @method		devicePairingConnecting:
-	@abstract	Indicates to the delegate that the pairing object is making the device (baseband) connection.
-	@param		sender		The IOBluetoothDevicePair object.
-*/
-
-- (void) devicePairingConnecting:(id)sender;
-
-/*!
-    @method		devicePairingPINCodeRequest:
-	@abstract	Indicates to the delegate that the pairing object has made the device (baseband) connection and is
-				awaiting the PIN code (if specified) to be entered on the device. Thus, when you recieve this message,
-				you should display to the user that they should enter the PIN code on the device.
-				The method replyPINCode must be invoked in response and happen before the timeout period of the device.
-	@param		sender		The IOBluetoothDevicePair object.
-*/
-
-- (void) devicePairingPINCodeRequest:(id)sender;
-
-/*!
-    @method		devicePairingUserConfirmationRequest:numericValue
-	@abstract	Indicates to the delegate that the pairing object has made the device (baseband) connection and is
-				awaiting the a yes/no answer for the Simple Secure Pairing numeric comparison. Thus, when you recieve this message,
-				you should display to the user the numeric value and then accept the yes/no answer if it matches the value
-				on the other device.
-				The method replyUserConfirmation must be invoked in response and happen before the timeout period of the device.
-	@param		sender			The IOBluetoothDevicePair object.
-	@param		numericValue	Numeric value to be displayed.
-*/
-
-- (void) devicePairingUserConfirmationRequest:(id)sender numericValue:(BluetoothNumericValue)numericValue;
-
-/*!
-    @method		devicePairingUserPasskeyNotification:passkey
-	@abstract	Indicates to the delegate that the pairing object has made the device (baseband) connection and is
-				awaiting the passkey (if specified) to be entered on the device for the Secure Simple Pairing.
-				Thus, when you recieve this message, you should display to the user that they should enter
-				the passkey on the device.
-	@param		sender			The IOBluetoothDevicePair object.
-	@param		passkey			Passkey to be displayed.
-*/
-
-- (void) devicePairingUserPasskeyNotification:(id)sender passkey:(BluetoothPasskey)passkey;
-
-/*!
-    @method		devicePairingFinished:error:
-	@abstract	Indicates to the delegate that the pairing object has fully completed the process. Can tell the delegate
-				when and error occurred during the attempt to pair with the device.
-	@discussion	The error passed to your delegate could be kBluetoothHCIErrorAuthenticationFailure,
-				kBluetoothHCIErrorLMPResponseTimeout, etc. See Bluetooth.h for all the possibilities.
-	@param		sender		The IOBluetoothDevicePair object.
-	@param		error		An IOReturn or Bluetooth error code.
-*/
-
-- (void) devicePairingFinished:(id)sender error:(IOReturn)error;
-
-/*!
- @method		deviceSimplePairingComplete:status:
- @abstract	Indicates to the delegate that the pairing object has fully completed the simple pairing process. Can tell the delegate
- when and error occurred during the attempt to pair with the device.
- @discussion	The status passed to your delegate could be BluetoothHCIEventStatus, etc. See Bluetooth.h for all the possibilities.
- @param		sender		The IOBluetoothDevicePair object.
- @param		status		A simple pairing complete error code.
- */
-
-- (void) deviceSimplePairingComplete:(id)sender status:(BluetoothHCIEventStatus)status;
 
 @end

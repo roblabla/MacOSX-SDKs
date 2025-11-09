@@ -12,6 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+FILEPROVIDER_API_AVAILABILITY_V1_V2_V3
 typedef NSString *NSFileProviderItemIdentifier NS_EXTENSIBLE_STRING_ENUM;
 
 /**
@@ -107,6 +108,7 @@ FILEPROVIDER_API_AVAILABILITY_V3
  */
 FOUNDATION_EXPORT unsigned long long const NSFileProviderFavoriteRankUnranked FILEPROVIDER_API_AVAILABILITY_V2_V3;
 
+FILEPROVIDER_API_AVAILABILITY_V2_V3
 typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
     /**
      Indicates that the file can be opened for reading.  If set on a folder
@@ -170,7 +172,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
      */
     NSFileProviderItemCapabilitiesAllowsContentEnumerating = NSFileProviderItemCapabilitiesAllowsReading,
 
-    NSFileProviderItemCapabilitiesAllowsAll =
+    NSFileProviderItemCapabilitiesAllowsAll API_DEPRECATED("This capability is no longer supported, and does not contain all capabilities. Please migrate to directly specifying each of the individual capabilities that should be allowed for the item.", ios(11.0, 15.0), macos(11.0, 12.0)) =
           NSFileProviderItemCapabilitiesAllowsReading
         | NSFileProviderItemCapabilitiesAllowsWriting
         | NSFileProviderItemCapabilitiesAllowsReparenting
@@ -201,8 +203,27 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
     NSFileProviderFileSystemPathExtensionHidden = 1 << 4,
 };
 
+FILEPROVIDER_API_AVAILABILITY_V4_0
+typedef struct NSFileProviderTypeAndCreator {
+    /**
+     The first word of the FinderInfo structure. It matches the file type code
+     */
+    OSType type;
+    /**
+     The second word of the FinderInfo structure. It matches the creator code
+     */
+    OSType creator;
+} NSFileProviderTypeAndCreator;
+
+FILEPROVIDER_API_AVAILABILITY_V2_V3
 @protocol NSFileProviderItem <NSObject>
 
+/**
+ The identifier of the item.
+
+ The itemIdentifier should not contain sensitive information, as it may be recorded in system logs and
+ diagnostic files.
+ */
 @property (nonatomic, readonly, copy) NSFileProviderItemIdentifier itemIdentifier;
 
 /**
@@ -223,6 +244,10 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
 
 /**
  The file or directory name, complete with its file extension.
+
+ The filename property must not be an empty string, including when the item identifier is
+ NSFileProviderRootContainerItemIdentifier. The filename for NSFileProviderRootContainerItemIdentifier
+ may be displayed in the user interface. Therefore it should be a user-friendly string.
  */
 @property (nonatomic, readonly, copy) NSString *filename;
 
@@ -236,6 +261,17 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
  On iOS, items must implement either contentType or typeIdentifier. Note
  that contentType is not available on iOS 13 and earlier, so typeIdentifier
  is required in order to target iOS 13 and earlier.
+
+ When using NSFileProviderReplicatedExtension, providers must be prepared
+ to handle the following contentType in the appropriate manner
+ when they are passed in itemTemplates contentType to createItem/modifyItem calls:
+ * UTType.symbolicLink
+ * UTType.folder
+ * UTType.package
+ * UTType.aliasFile
+
+ Changing the contentType for a given item that would result in a transition to/from a folder
+ or to/from a symlink is not supported.
  */
 @property (nonatomic, readonly, copy) UTType *contentType API_AVAILABLE(ios(14.0), macos(11.0));
 
@@ -252,12 +288,27 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
  is required in order to target iOS 13 and earlier.
  */
 @property (nonatomic, readonly, copy) NSString *typeIdentifier
-    API_DEPRECATED_WITH_REPLACEMENT("contentType", ios(11.0, API_TO_BE_DEPRECATED))
+    API_DEPRECATED_WITH_REPLACEMENT("contentType", ios(11.0, 15.0))
     API_UNAVAILABLE(macos);
+
+/**
+ File type and creator code for the item.
+
+ This property contains two variables, one for the file type code and one for the creator code.
+ Both will be synchronized at the same time, so you have to define both when changing one.
+
+ On change on this structure, the NSFileProviderItemTypeAndCreator field will be set in the
+ NSFileProviderItemFields argument to createItem/modifyItem.
+
+ These will be written down in the FinderInfo structure if relevant.
+ */
+@property (nonatomic, readonly) NSFileProviderTypeAndCreator typeAndCreator FILEPROVIDER_API_AVAILABILITY_V4_0;
 
 /**
  The capabilities of the item.  This controls the list of actions that the UI
  will allow for the item.
+
+ Capabilities on an item only apply to the item itself. They are not inherited by the children of directories.
  */
 @property (nonatomic, readonly) NSFileProviderItemCapabilities capabilities;
 
@@ -333,12 +384,15 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
 @property (nonatomic, readonly, copy, nullable) NSDate *lastUsedDate;
 
 /**
- An abstract data blob reprenting the tags associated with the item.  The same
+ An abstract data blob representing the tags associated with the item.  The same
  tags that are available via -[NSURL getResourceValue:forKey:error:] with key
  NSURLTagNamesKey on macOS, except that this data blob may transport more
  information than just the tag names.
 
  This property must not be shared between users, even if the item is.
+
+ Starting in macOS 12 and iOS 15, the system suppports the value of the
+ `com.apple.metadata:_kMDItemUserTags` xattr as a valid `tagData` blob input.
  */
 @property (nonatomic, readonly, copy, nullable) NSData *tagData;
 
@@ -441,15 +495,46 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
 /**
  The target of a symlink.
 
- If a replicated extension expose an item with the typeIdentifier public.symlink (kUTTypeSymLink),
+ If a replicated extension expose an item with the contentType public.symlink (UTTypeSymbolicLink),
  this field should contain the target of the symlink.
  */
 @property (nonatomic, readonly, copy, nullable) NSString *symlinkTargetPath
     FILEPROVIDER_API_AVAILABILITY_V3;
 
 /**
- Use this dictionary to add state information to the item. It is accessible to
- FileProviderUI action predicates and user interaction predicates [1].
+ Use this dictionary to add state information to the item. Entries are accessible to
+ FileProviderUI and non-UI action predicates and user interaction predicates [1] via the
+ `userInfo` context key.
+
+ Additionally, any entry of this dictionary with a key ending in `.inherited`
+ will be accessible to predicates for descendants of this item via the context key `inheritedUserInfo`.
+
+ Items can redefine inherited values for their descendants by specifying the same key used in an ancestor's `userInfo`.
+ Thus, `inheritedUserInfo` for a given item is a dictionary of `*.inherited` keys from all if its ancestors, with each value
+ taken from the nearest ancestor that has the entry defined.
+
+ In this example directory structure:
+ root
+ |_ parent
+   |_ child
+     |_ grandchild
+
+ with the following userInfo values set:
+ parent.userInfo = { "a.inherited": YES, "b.inherited": YES }
+ child.userInfo = { "a.inherited": NO, "c.inherited": NO }
+ grandchild.userInfo = { }
+
+ the following inheritedUserInfo values will be provided:
+ parent.inheritedUserInfo = { }
+ child.inheritedUserInfo = { "a.inherited": YES, "b.inherited": YES }
+ grandchild.inheritedUserInfo = { "a.inherited": NO, "b.inherited": YES, "c.inherited": NO }
+
+ The context key `resolvedUserInfo` is also available. For each item, the resolvedUserInfo is it's
+ inheritedUserInfo, combined with the keys suffixed with .inherited from it's userInfo.
+ Continuing the previous example:
+ parent.resolvedUserInfo = { "a.inherited": YES, "b.inherited": YES }
+ child.resolvedUserInfo = { "a.inherited": NO, "b.inherited": YES, "c.inherited": NO }
+ grandchild.resolvedUserInfo = { "a.inherited": NO, "b.inherited": YES, "c.inherited": NO }
 
  All values for this dictionary must be of type String, Number, Bool or Date.
 
@@ -458,16 +543,30 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
   - `NSFileProviderUserInteractions` *array*
     - `ActivationRule ` *string*, the predicate.
         @parameters predicates
-            - `destinationItem`: the destination item for an action (only present for Move/Import)
+            - `destinationItem`: the destination item for an action. Present for Move/MoveIn/Copy/CopyIn/Create
             - `action` : the action that is being performed
-                 'Move'       : moving items within the same provider
-                 'MoveOut' : moving items out of the provider
-                 'MoveIn'    : importing item(s) into a folder/root of the provider
+                 'Move'       : moving item(s) within the same provider
+                 'MoveOut'    : moving item(s) out of the provider
+                 'MoveIn'     : importing item(s) into a folder/root of the provider
+                 'Copy'       : copying item(s) within the same provider
+                 'CopyOut'    : copying item(s) out of the provider
+                 'CopyIn'     : copying item(s) into a folder/root of the provider
                  'Trash'      : trashing item(s)
+                 'Create'      : creating an item (available in macOS 12.0 and later)
+                            The Create action will be evaluated when the user creates a new file
+                            or folder in a system Open/Save panel.
+                            The sourceItem is the file/folder being created. The only field that is
+                            populated for this item is the filename. The type of file/folder, size, etc,
+                            are unknown at Create evaluation time.
+                            The destinationItem is the directory which the file/folder is being created
+                            within.
                  'Delete'     : deleting item(s)
-                 'ExcludeFromSync' : deleting items(s) because the user chose to exclude those from sync
+                             If the provider wishes to take full responsibility for showing warnings on Delete,
+                             the provider can set NSExtensionFileProviderAllowsSystemDeleteAlerts=0 in the provider's Info.plist.
+                             This will ensure that the system does not display it's warnings when the user is deleting a file.
+                 'ExcludeFromSync' : deleting items(s) because the user chose to exclude those from sync (available in macOS 12.0 and later)
                  'Rename'  : renaming item(s) (available in macOS 11.3 and later)
-            - `sourceItem` : current item that the predicate is evaluating
+            - `sourceItem` : current item that the predicate is evaluating. Present for Move/MoveOut/Copy/CopyOut/Create/Trash/Delete/ExcludeFromSync/Rename
             - `sourceItemsCount` :
                 - In userInteraction, represents the count of sourceItems of an action operation
                 - In subUserInteraction: represents the count of items that matched the previous predicate
@@ -487,11 +586,26 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
         - `RecoveryOptions` (optional)
             - `Continue` *bool*, the boolean for whether to have a continue button - default value is YES if not specified
             - `Destructive` *bool*, the boolean for whether continuing is a destructive action - default value is NO if not specified
+    - `HelpURL` *string*: If present, a help button will be displayed on the Alert that is shown. If the user
+                   clicks the help button, this help URL will be opened. This URL is not restricted to Web URLs. For instance, the extension could configure
+                   the HelpURL to launch it's application with a custom URL scheme. (available in macOS 12.0 and later)
     - `SubInteractions `: *dictionary* (same as `NSFileProviderUserInteractions`)
+    - `SupressionIdentifier` *string*: If present, when this predicate matches, the alert will display an option to
+                           suppress future alerts from UserInteractions with the same
+                           SuppressionIdentifier (including the current UserInteraction). This also
+                           requires implementing the `NSFileProviderUserInteractionSuppressing`
+                           protocol on the principal class of the FileProvider extension (available in
+                           macOS 12.0 and later).
 
  For each interaction, either Alert or SubInteractions must be specified. SubInteractions will be evaluated if the main ActivationRule evaluates to
  YES for at least once. This allows you to match a general pattern via the top-level activation rule and then select a specialized error message from a list
  of subpatterns.
+
+ At most one UserInteraction alert will be shown for each FileProvider domain involved in the user's Action. For
+ instance, if provider A defines a UserInteraction for MoveOut actions, and provider B defines a UserInteraction
+ for MoveIn operations. When the user moves a file from A to B, and the predicate for both UserInteraction
+ matches, then both of the UserInteraction alerts will be shown to the user. However, as soon as the user
+ denies any of the alerts, the remainder will not be shown, and the action will be denied.
 
  Here is a sample extension Info.plist:
 
@@ -501,7 +615,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
  <key>NSFileProviderUserInteractions</key>
  <array>
     <key>ActivationRule</key>
-    <string>action == Move</string>
+    <string>action == "Move"</string>
     <key>SubInteractions</key>
     <array>
         <dict>
@@ -583,7 +697,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
 
 @end
 
-
+FILEPROVIDER_API_AVAILABILITY_V2_V3
 typedef id<NSFileProviderItem> NSFileProviderItem;
 
 NS_ASSUME_NONNULL_END

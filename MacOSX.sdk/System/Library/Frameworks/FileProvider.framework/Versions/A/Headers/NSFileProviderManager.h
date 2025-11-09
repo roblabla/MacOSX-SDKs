@@ -16,6 +16,20 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSFileProviderDomain;
 @class NSFileProviderRequest;
 
+
+typedef NS_ENUM(NSInteger, NSFileProviderDomainRemovalMode) {
+    /// Don't keep any files that are current in the domain
+    NSFileProviderDomainRemovalModeRemoveAll = 0,
+
+    /// Delete the domain from the system but keeps the at least all the
+    /// dirty corresponding user data around.
+    NSFileProviderDomainRemovalModePreserveDirtyUserData = 1,
+
+    /// Delete the domain from the system but keeps all the downloaded
+    /// corresponding user data around.
+    NSFileProviderDomainRemovalModePreserveDownloadedUserData = 2,
+} NS_SWIFT_NAME(NSFileProviderManager.DomainRemovalMode) FILEPROVIDER_API_AVAILABILITY_V4_0;
+
 /**
  The file provider manager allows you to communicate with the file provider
  framework from both the extension and related processes.
@@ -189,6 +203,13 @@ Return the manager responsible for the default domain.
 
 /**
  Register a domain in which items can be stored.
+
+ If a domain with the same identifier already exists, `addDomain` will update the display name
+ and hidden state of the domain and succeed.
+
+ When the domain is backed by a NSFileProviderReplicatedExtension, the system will create
+ a disk location where the domain will be replicated. If that location already exists on disk
+ this call will fail with the code NSFileWriteFileExistsError.
  */
 + (void)addDomain:(NSFileProviderDomain *)domain completionHandler:(void(^)(NSError *_Nullable error))completionHandler;
 
@@ -196,6 +217,11 @@ Return the manager responsible for the default domain.
  Remove a domain.
  */
 + (void)removeDomain:(NSFileProviderDomain *)domain completionHandler:(void(^)(NSError *_Nullable error))completionHandler;
+
+/**
+ Remove a domain with options
+ */
++ (void)removeDomain:(NSFileProviderDomain *)domain mode:(NSFileProviderDomainRemovalMode)mode completionHandler:(void(^)(NSURL *_Nullable_result preservedLocation, NSError *_Nullable error))completionHandler FILEPROVIDER_API_AVAILABILITY_V4_0;
 
 /**
  Get all registered domains.
@@ -208,12 +234,13 @@ Return the manager responsible for the default domain.
 + (void)removeAllDomainsWithCompletionHandler:(void(^)(NSError *_Nullable error))completionHandler;
 
 /**
- Cancel throttling applied by the system to any item because of that error.
- 
- This call supports 3 types of errors:
+ Calling this method will cause the system to cancel throttling on every item which has been throttled due to the given error.
+
+ This call supports 4 types of errors:
  - NSFileProviderErrorNotAuthenticated
  - NSFileProviderErrorInsufficientQuota
  - NSFileProviderErrorServerUnreachable
+ - NSFileProviderErrorCannotSynchronize
  */
 - (void)signalErrorResolved:(NSError *)error completionHandler:(void(^)(NSError *_Nullable error))completionHandler
     FILEPROVIDER_API_AVAILABILITY_V3;
@@ -291,6 +318,9 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 
 /**
  The version of the domain when the pending set was last refreshed by the system.
+
+ This property is updated when the enumeration methods are called on the pending set enumerator. The value
+ is initially nil.
  */
 @property (nonatomic, readonly, nullable) NSFileProviderDomainVersion *domainVersion;
 
@@ -368,11 +398,19 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
  When the import of the file hierarchy is finished, the system calls
  -[NSFileProviderExtension importDidFinishWithCompletionHandler:].
 
+ In some circumstances, in particular in case the requested item is the root item, calling
+ reimport will cause the system to stop the extension process. If the call is initiated
+ from the extension, the system does not guarantee that the completion handler will be called
+ before the extension is stopped. When called on the root item, reimport will cause the system
+ to rebuild its backing store for the domain. See `-[NSFileProviderDomain backingStoreIdentity]`.
+
  If this method succeeds, the system will reimport at least the requested sub-tree, but may
  import more.
 
  If the requested item has no on-disk representation, the completion handler will be called with
- a NSFileProviderErrorNoSuchItem error.
+ a NSFileProviderErrorNoSuchItem error. The same error will be reported if the reimport request
+ happens quickly after a previous import / reimport and the corresponding item hasn't been
+ reimported yet.
  */
 - (void)reimportItemsBelowItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
                            completionHandler:(void (^)(NSError * _Nullable error))completionHandler

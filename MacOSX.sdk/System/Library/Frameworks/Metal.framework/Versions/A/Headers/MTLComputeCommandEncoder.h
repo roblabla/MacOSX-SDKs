@@ -159,7 +159,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @method setImageblockWidth:height:
  @brief Set imageblock sizes.
  */
-- (void)setImageblockWidth:(NSUInteger)width height:(NSUInteger)height API_AVAILABLE(ios(11.0), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
+- (void)setImageblockWidth:(NSUInteger)width height:(NSUInteger)height API_AVAILABLE(ios(11.0), macos(11.0), macCatalyst(14.0), tvos(14.5));
 
 /*
  @method setStageInRegion:region:
@@ -194,7 +194,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract Enqueue a compute function dispatch using an arbitrarily-sized grid.
  @discussion threadsPerGrid does not have to be a multiple of the  threadGroup size
  */
-- (void)dispatchThreads:(MTLSize)threadsPerGrid threadsPerThreadgroup:(MTLSize)threadsPerThreadgroup API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(tvos);
+- (void)dispatchThreads:(MTLSize)threadsPerGrid threadsPerThreadgroup:(MTLSize)threadsPerThreadgroup API_AVAILABLE(macos(10.13), ios(11.0), tvos(14.5));
 
 /*!
  @method updateFence:
@@ -252,7 +252,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  * @abstract Execute commands in the buffer within the range specified.
  * @discussion The same indirect command buffer may be executed any number of times within the same encoder.
  */
-- (void)executeCommandsInBuffer:(id<MTLIndirectCommandBuffer>)indirectCommandBuffer withRange:(NSRange)executionRange API_AVAILABLE(ios(13.0),macos(11.0));
+- (void)executeCommandsInBuffer:(id<MTLIndirectCommandBuffer>)indirectCommandBuffer withRange:(NSRange)executionRange API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
 
 /*!
  * @method executeCommandsInBuffer:indirectBuffer:indirectBufferOffset:
@@ -261,7 +261,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  * @param indirectBufferOffset The byte offset within indirectBuffer where the execution range parameter is located. Must be a multiple of 4 bytes.
  * @discussion The same indirect command buffer may be executed any number of times within the same encoder.
  */
-- (void)executeCommandsInBuffer:(id<MTLIndirectCommandBuffer>)indirectCommandbuffer indirectBuffer:(id<MTLBuffer>)indirectRangeBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(ios(13.0),macos(11.0));
+- (void)executeCommandsInBuffer:(id<MTLIndirectCommandBuffer>)indirectCommandbuffer indirectBuffer:(id<MTLBuffer>)indirectRangeBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
 
 
 

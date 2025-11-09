@@ -53,9 +53,6 @@ Classes:
   - Selector: 'objectRegisteredForID:'
     SwiftName: registeredObject(for:)
     MethodKind: Instance
-  - Selector: 'executeFetchRequest:error:'
-    SwiftName: fetch(_:)
-    MethodKind: Instance
   - Selector: 'refreshObject:mergeChanges:'
     SwiftName: refresh(_:mergeChanges:)
     MethodKind: Instance

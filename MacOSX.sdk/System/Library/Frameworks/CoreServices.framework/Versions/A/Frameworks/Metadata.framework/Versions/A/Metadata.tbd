@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FCCD84AD-EDFA-310E-B607-FFC464419716
+    value:           DAFFB8E1-7D7C-350C-B265-EE576A3EE36F
   - target:          x86_64-maccatalyst
-    value:           FCCD84AD-EDFA-310E-B607-FFC464419716
+    value:           DAFFB8E1-7D7C-350C-B265-EE576A3EE36F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D6E78FFE-7627-3A3B-A87B-69F17EB99A1D
+    value:           CBE6CCD6-5D7C-32CF-9DE1-92A169CA0750
   - target:          arm64e-maccatalyst
-    value:           D6E78FFE-7627-3A3B-A87B-69F17EB99A1D
+    value:           CBE6CCD6-5D7C-32CF-9DE1-92A169CA0750
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata'
-current-version: 2150.16
+current-version: 2173
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -202,9 +202,10 @@ exports:
                        __MDQueryCreateQueryStringToMatchDisplayNameWithOptions, __MDQueryCreateQueryStringToMatchDisplayNamesWithOptions, 
                        __MDQueryCreateQueryStringWithOptions, __MDQueryCreateQueryStringWithOptionsDict, 
                        __MDQueryCreateStringByAddingBackslashEscapes, __MDQueryDontEnforceTopN, 
-                       __MDQueryEnablePerfGathering, __MDQueryExtractTextTerms, __MDQueryFastWillStop, 
-                       __MDQueryGetAttributeValueOfResultAtIndexForGroup, __MDQueryGetAttributeValuesOfResultAtIndex, 
-                       __MDQueryGetGeneration, __MDQueryGetGroupCount, __MDQueryGetResultAtIndexForGroup, 
+                       __MDQueryEnablePerfGathering, __MDQueryEnumerateNodesInQueryString, 
+                       __MDQueryExtractTextTerms, __MDQueryFastWillStop, __MDQueryGetAttributeValueOfResultAtIndexForGroup, 
+                       __MDQueryGetAttributeValuesOfResultAtIndex, __MDQueryGetGeneration, 
+                       __MDQueryGetGroupCount, __MDQueryGetResultAtIndexForGroup, 
                        __MDQueryGetResultCountForAllGroups, __MDQueryGetResultCountForGroup, 
                        __MDQueryGetSortFlagsForAttribute, __MDQueryIgnoreAllLastUsedUpdatesForItem, 
                        __MDQueryIgnoreNextLastUsedUpdateForItem, __MDQueryProcessUpdates, 
@@ -241,14 +242,17 @@ exports:
                        __kMDItemExportImporterAvaliable, __kMDItemFSContentType, 
                        __kMDItemFSContentTypeTree, __kMDItemFSDisplayName, __kMDItemFileName, 
                        __kMDItemFinderFlags, __kMDItemFinderLabel, __kMDItemHasCustomIcon, 
-                       __kMDItemHasExtensionHidden, __kMDItemImporterResult, __kMDItemIncomingCounts, 
+                       __kMDItemHasExtensionHidden, __kMDItemImporterResult, __kMDItemIncomingCalendarCounts, 
+                       __kMDItemIncomingCounts, __kMDItemIncomingFileProviderCounts, 
                        __kMDItemIncomingMailCounts, __kMDItemIncomingSMSCounts, __kMDItemInvisibleFileType, 
-                       __kMDItemIsEvictedFile, __kMDItemIsExtensionHidden, __kMDItemIsStationery, 
-                       __kMDItemLocked, __kMDItemMailAccountsAttributesMissing, __kMDItemNodeCount, 
-                       __kMDItemOutgoingCounts, __kMDItemOutgoingMailCounts, __kMDItemOutgoingSMSCounts, 
-                       __kMDItemOwnerGroupID, __kMDItemOwnerUserID, __kMDItemPrescanCandidate, 
-                       __kMDItemServerVersion, __kMDItemSortIdentityAttr, __kMDItemStaticInterestScore, 
-                       __kMDItemSupportFileType, __kMDItemTextContentIndexExists, 
+                       __kMDItemIsEvictedFile, __kMDItemIsExtensionHidden, __kMDItemIsShared, 
+                       __kMDItemIsStationery, __kMDItemLocked, __kMDItemMailAccountsAttributesMissing, 
+                       __kMDItemNodeCount, __kMDItemOutgoingCalendarCounts, __kMDItemOutgoingCounts, 
+                       __kMDItemOutgoingFileProviderCounts, __kMDItemOutgoingMailCounts, 
+                       __kMDItemOutgoingSMSCounts, __kMDItemOwnerGroupID, __kMDItemOwnerName, 
+                       __kMDItemOwnerUserID, __kMDItemPrescanCandidate, __kMDItemServerVersion, 
+                       __kMDItemSharedItemCurrentUserRole, __kMDItemSortIdentityAttr, 
+                       __kMDItemStaticInterestScore, __kMDItemSupportFileType, __kMDItemTextContentIndexExists, 
                        __kMDItemTypeCode, __kMDItemUserTags, __kMDParametersForImporter, 
                        __kMDQueryItemInScopeForRankingOnly, __kMDQueryScope, __kMDUserQueryAttributedInputDateKey, 
                        __kMDUserQueryAttributedInputRecipientKey, __kMDUserQueryAttributedInputSenderKey, 

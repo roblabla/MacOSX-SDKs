@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2F65239E-47D8-3BF0-A8ED-E4517B4383A4
+    value:           88EEA103-A370-383F-A44C-613B9F5A76E8
   - target:          x86_64-maccatalyst
-    value:           2F65239E-47D8-3BF0-A8ED-E4517B4383A4
+    value:           88EEA103-A370-383F-A44C-613B9F5A76E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3AED6FA9-D25A-3FE9-99F1-D20F63A56024
+    value:           51D932A3-419E-3E99-AFFD-372BEAB5461F
   - target:          arm64e-maccatalyst
-    value:           3AED6FA9-D25A-3FE9-99F1-D20F63A56024
+    value:           51D932A3-419E-3E99-AFFD-372BEAB5461F
 install-name:    '/System/Library/Frameworks/AutomaticAssessmentConfiguration.framework/Versions/A/Frameworks/AACClient.framework/Versions/A/AACClient'
 swift-abi-version: 7
 exports:
@@ -22,8 +22,13 @@ exports:
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '_$s9AACClient20AECAssessmentSessionC13configuration5queueAcA0B13ConfigurationC_So012OS_dispatch_E0CtcfC', 
                        '_$s9AACClient20AECAssessmentSessionC13configuration5queueAcA0B13ConfigurationC_So012OS_dispatch_E0Ctcfc', 
+                       '_$s9AACClient20AECAssessmentSessionC13configurationAA0B13ConfigurationCvgTj', 
+                       '_$s9AACClient20AECAssessmentSessionC13configurationAA0B13ConfigurationCvgTq', 
+                       '_$s9AACClient20AECAssessmentSessionC13configurationAA0B13ConfigurationCvpMV', 
                        '_$s9AACClient20AECAssessmentSessionC3endyyFTj', '_$s9AACClient20AECAssessmentSessionC3endyyFTq', 
                        '_$s9AACClient20AECAssessmentSessionC5beginyyFTj', '_$s9AACClient20AECAssessmentSessionC5beginyyFTq', 
+                       '_$s9AACClient20AECAssessmentSessionC6update13configurationyAA0B13ConfigurationC_tFTj', 
+                       '_$s9AACClient20AECAssessmentSessionC6update13configurationyAA0B13ConfigurationC_tFTq', 
                        '_$s9AACClient20AECAssessmentSessionC8delegateAA0bC8Delegate_pSgvMTj', 
                        '_$s9AACClient20AECAssessmentSessionC8delegateAA0bC8Delegate_pSgvMTq', 
                        '_$s9AACClient20AECAssessmentSessionC8delegateAA0bC8Delegate_pSgvgTj', 
@@ -35,7 +40,14 @@ exports:
                        '_$s9AACClient20AECAssessmentSessionC8isActiveSbvpMV', '_$s9AACClient20AECAssessmentSessionCMa', 
                        '_$s9AACClient20AECAssessmentSessionCMn', '_$s9AACClient20AECAssessmentSessionCMo', 
                        '_$s9AACClient20AECAssessmentSessionCMu', '_$s9AACClient20AECAssessmentSessionCN', 
-                       '_$s9AACClient20AECAssessmentSessionCfD', '_$s9AACClient26AECAssessmentConfigurationC15allowsDictationSbvMTj', 
+                       '_$s9AACClient20AECAssessmentSessionCfD', '_$s9AACClient26AECAssessmentConfigurationC014mainIndividualC0So012AEAssessmenteC0CvMTj', 
+                       '_$s9AACClient26AECAssessmentConfigurationC014mainIndividualC0So012AEAssessmenteC0CvMTq', 
+                       '_$s9AACClient26AECAssessmentConfigurationC014mainIndividualC0So012AEAssessmenteC0CvgTj', 
+                       '_$s9AACClient26AECAssessmentConfigurationC014mainIndividualC0So012AEAssessmenteC0CvgTq', 
+                       '_$s9AACClient26AECAssessmentConfigurationC014mainIndividualC0So012AEAssessmenteC0CvpMV', 
+                       '_$s9AACClient26AECAssessmentConfigurationC014mainIndividualC0So012AEAssessmenteC0CvsTj', 
+                       '_$s9AACClient26AECAssessmentConfigurationC014mainIndividualC0So012AEAssessmenteC0CvsTq', 
+                       '_$s9AACClient26AECAssessmentConfigurationC15allowsDictationSbvMTj', 
                        '_$s9AACClient26AECAssessmentConfigurationC15allowsDictationSbvMTq', 
                        '_$s9AACClient26AECAssessmentConfigurationC15allowsDictationSbvgTj', 
                        '_$s9AACClient26AECAssessmentConfigurationC15allowsDictationSbvgTq', 
@@ -105,6 +117,13 @@ exports:
                        '_$s9AACClient26AECAssessmentConfigurationC28allowsContinuousPathKeyboardSbvpMV', 
                        '_$s9AACClient26AECAssessmentConfigurationC28allowsContinuousPathKeyboardSbvsTj', 
                        '_$s9AACClient26AECAssessmentConfigurationC28allowsContinuousPathKeyboardSbvsTq', 
+                       '_$s9AACClient26AECAssessmentConfigurationC37configurationsByApplicationDescriptorSDySo012AEAssessmentfG0CSo0h10IndividualC0CGvMTj', 
+                       '_$s9AACClient26AECAssessmentConfigurationC37configurationsByApplicationDescriptorSDySo012AEAssessmentfG0CSo0h10IndividualC0CGvMTq', 
+                       '_$s9AACClient26AECAssessmentConfigurationC37configurationsByApplicationDescriptorSDySo012AEAssessmentfG0CSo0h10IndividualC0CGvgTj', 
+                       '_$s9AACClient26AECAssessmentConfigurationC37configurationsByApplicationDescriptorSDySo012AEAssessmentfG0CSo0h10IndividualC0CGvgTq', 
+                       '_$s9AACClient26AECAssessmentConfigurationC37configurationsByApplicationDescriptorSDySo012AEAssessmentfG0CSo0h10IndividualC0CGvpMV', 
+                       '_$s9AACClient26AECAssessmentConfigurationC37configurationsByApplicationDescriptorSDySo012AEAssessmentfG0CSo0h10IndividualC0CGvsTj', 
+                       '_$s9AACClient26AECAssessmentConfigurationC37configurationsByApplicationDescriptorSDySo012AEAssessmentfG0CSo0h10IndividualC0CGvsTq', 
                        '_$s9AACClient26AECAssessmentConfigurationCACycfC', '_$s9AACClient26AECAssessmentConfigurationCACycfc', 
                        '_$s9AACClient26AECAssessmentConfigurationCMa', '_$s9AACClient26AECAssessmentConfigurationCMn', 
                        '_$s9AACClient26AECAssessmentConfigurationCMo', '_$s9AACClient26AECAssessmentConfigurationCMu', 

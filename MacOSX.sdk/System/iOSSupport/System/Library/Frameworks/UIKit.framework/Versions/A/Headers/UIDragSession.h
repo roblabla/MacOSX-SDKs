@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIDragItem, UIView;
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @protocol UIDragDropSession <NSObject>
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@protocol UIDragDropSession <NSObject>
 
 /* A common protocol used for both drag and drop sessions. */
 
@@ -65,7 +66,8 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @protocol UIDragDropSess
 @end
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @protocol UIDragSession <UIDragDropSession>
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@protocol UIDragSession <UIDragDropSession>
 
 /* Use `localContext` to attach additional information to this drag session,
  * visible only inside the app that started the drag.
@@ -80,7 +82,8 @@ typedef NS_ENUM(NSUInteger, UIDropSessionProgressIndicatorStyle) {
     UIDropSessionProgressIndicatorStyleDefault,    // A default indicator is displayed
 } API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @protocol UIDropSession <UIDragDropSession, NSProgressReporting>
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@protocol UIDropSession <UIDragDropSession, NSProgressReporting>
 
 /* The `UIDragSession` that corresponds to this `UIDropSession`.
  * If the drag was started in a different app, this is nil.

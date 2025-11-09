@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol UIPopoverControllerDelegate;
 
 
-UIKIT_EXTERN API_DEPRECATED("UIPopoverController is deprecated. Popovers are now implemented as UIViewController presentations. Use a modal presentation style of UIModalPresentationPopover and UIPopoverPresentationController.", ios(3.2, 9.0))
+UIKIT_EXTERN API_DEPRECATED("UIPopoverController is deprecated. Popovers are now implemented as UIViewController presentations. Use a modal presentation style of UIModalPresentationPopover and UIPopoverPresentationController.", ios(3.2, 9.0)) NS_SWIFT_UI_ACTOR
 @interface UIPopoverController : NSObject <UIAppearanceContainer> {}
 
 /* The view controller provided becomes the content view controller for the UIPopoverController. This is the designated initializer for UIPopoverController.
@@ -79,6 +79,7 @@ UIKIT_EXTERN API_DEPRECATED("UIPopoverController is deprecated. Popovers are now
 
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UIPopoverControllerDelegate <NSObject>
 @optional
 

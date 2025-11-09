@@ -28,6 +28,9 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 /// The height of the keyboard in mm in the session
 @property (readonly) NSMeasurement<NSUnitLength*> *height;
 
+/// The input modes used during a keyboard session
+@property (readonly, copy) NSArray<NSString *> *inputModes API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+
 @end
 
 SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
@@ -243,6 +246,55 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 
 /// The duration between touchup of the delete key and touch down of a sequential delete key
 @property (readonly, strong) NSArray<SRKeyboardProbabilityMetric<NSUnitDuration *> *> *deleteToDeletes;
+
+@end
+
+SR_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+@interface SRKeyboardMetrics (SpeedMetrics)
+
+/// The total number of pauses during the session
+@property (readonly) NSInteger totalPauses;
+
+/// The total number of pauses made while entering the path for any words composed using continuous path during the session
+@property (readonly) NSInteger totalPathPauses;
+
+/// The words per minute typed during the session
+@property (readonly) double typingSpeed;
+
+/// The words per minute typed using continuous path during the session
+@property (readonly) double pathTypingSpeed;
+
+/// Total number of continuous typing episodes during the session
+@property (readonly) NSInteger totalTypingEpisodes;
+
+@end
+
+/** @abstract Categories of sentiment from words or emoji */
+typedef NS_ENUM(NSInteger, SRKeyboardMetricsSentimentCategory) {
+    SRKeyboardMetricsSentimentCategoryAbsolutist,
+    SRKeyboardMetricsSentimentCategoryDown,
+    SRKeyboardMetricsSentimentCategoryDeath,
+    SRKeyboardMetricsSentimentCategoryAnxiety,
+    SRKeyboardMetricsSentimentCategoryAnger,
+    SRKeyboardMetricsSentimentCategoryHealth,
+    SRKeyboardMetricsSentimentCategoryPositive,
+    SRKeyboardMetricsSentimentCategorySad,
+    SRKeyboardMetricsSentimentCategoryLowEnergy,
+    SRKeyboardMetricsSentimentCategoryConfused,
+} API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+
+/**
+ * These metrics describe the number of words and emoji of a particular category typed during
+ * a keyboard session. Words and emoji may be counted in multiple categories.
+ */
+SR_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+@interface SRKeyboardMetrics (SentimentCounts)
+
+/// The count of words typed per category in the session
+- (NSInteger)wordCountForSentimentCategory:(SRKeyboardMetricsSentimentCategory)category;
+
+/// The count of emoji typed per category in the session
+- (NSInteger)emojiCountForSentimentCategory:(SRKeyboardMetricsSentimentCategory)category;
 
 @end
 

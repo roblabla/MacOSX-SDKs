@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol UIPickerViewDataSource, UIPickerViewDelegate;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) @interface UIPickerView : UIView <NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIPickerView : UIView <NSCoding>
 
 @property(nullable,nonatomic,weak) id<UIPickerViewDataSource> dataSource;                // default is nil. weak reference
 @property(nullable,nonatomic,weak) id<UIPickerViewDelegate>   delegate;                  // default is nil. weak reference
@@ -43,7 +44,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) @interface UIPickerVi
 @end
 
 
-API_UNAVAILABLE(tvos)
+API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @protocol UIPickerViewDataSource<NSObject>
 @required
 
@@ -54,7 +55,7 @@ API_UNAVAILABLE(tvos)
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component;
 @end
 
-API_UNAVAILABLE(tvos)
+API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @protocol UIPickerViewDelegate<NSObject>
 @optional
 

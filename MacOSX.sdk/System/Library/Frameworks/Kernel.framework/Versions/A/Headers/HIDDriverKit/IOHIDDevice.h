@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from IOHIDDevice.iig */
+/* iig(DriverKit-191) generated from IOHIDDevice.iig */
 
 /* IOHIDDevice.iig:1-44 */
 /*
@@ -45,7 +45,7 @@
 
 class IOMemoryDescriptor;
 
-/* source class IOHIDDevice IOHIDDevice.iig:45-133 */
+/* source class IOHIDDevice IOHIDDevice.iig:45-131 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -83,8 +83,7 @@ public:
      * other 24 bits are options to specify the request.
      * @param completionTimeout Specifies an amount of time (in ms) after which
      * the command will be aborted if the entire command has not been completed.
-     * @param action OSAction to call CompleteReport when request completes. If omitted then
-     * getReport() executes synchronously, blocking until the request is complete.
+     * @param action OSAction to call CompleteReport when request completes.
      * @result kIOReturnSuccess on success, or an error return otherwise.
      */
     
@@ -105,8 +104,7 @@ public:
      * other 24 bits are options to specify the request.
      * @param completionTimeout Specifies an amount of time (in ms) after which
      * the command will be aborted if the entire command has not been completed.
-     * @param action OSAction to call CompleteReport when request completes. If omitted then
-     * setReport() executes synchronously, blocking until the request is complete.
+     * @param action OSAction to call CompleteReport when request completes.
      * @result kIOReturnSuccess on success, or an error return otherwise.
      */
     
@@ -144,7 +142,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOHIDDevice IOHIDDevice.iig:45-133 */
+/* generated class IOHIDDevice IOHIDDevice.iig:45-131 */
 
 #define IOHIDDevice__Start_ID            0xd844e4e02f7103bbULL
 #define IOHIDDevice__CompleteReport_ID            0xdc4ef5129e3a9d08ULL
@@ -217,8 +215,8 @@ public:\
         uint64_t timestamp,\
         IOMemoryDescriptor * report,\
         uint32_t reportLength,\
-        IOHIDReportType reportType,\
-        IOOptionBits options,\
+        IOHIDReportType reportType = kIOHIDReportTypeInput,\
+        IOOptionBits options = 0,\
         OSDispatchMethod supermethod = NULL);\
 \
     void\
@@ -310,8 +308,8 @@ public:\
         uint64_t timestamp,\
         IOMemoryDescriptor * report,\
         uint32_t reportLength,\
-        IOHIDReportType reportType,\
-        IOOptionBits options) APPLE_KEXT_OVERRIDE;\
+        IOHIDReportType reportType = kIOHIDReportTypeInput,\
+        IOOptionBits options = 0) APPLE_KEXT_OVERRIDE;\
 \
     virtual kern_return_t\
     getReport(\
@@ -382,6 +380,31 @@ public:
     setProperty(OSObject * key,
         OSObject * value) = 0;
 
+    kern_return_t
+    handleReport_Call(uint64_t timestamp,
+        IOMemoryDescriptor * report,
+        uint32_t reportLength,
+        IOHIDReportType reportType,
+        IOOptionBits options)  { return handleReport(timestamp, report, reportLength, reportType, options); };\
+
+    kern_return_t
+    getReport_Call(IOMemoryDescriptor * report,
+        IOHIDReportType reportType,
+        IOOptionBits options,
+        uint32_t completionTimeout,
+        OSAction * action)  { return getReport(report, reportType, options, completionTimeout, action); };\
+
+    kern_return_t
+    setReport_Call(IOMemoryDescriptor * report,
+        IOHIDReportType reportType,
+        IOOptionBits options,
+        uint32_t completionTimeout,
+        OSAction * action)  { return setReport(report, reportType, options, completionTimeout, action); };\
+
+    void
+    setProperty_Call(OSObject * key,
+        OSObject * value)  { return setProperty(key, value); };\
+
 };
 
 struct IOHIDDevice_IVars;
@@ -395,12 +418,21 @@ class IOHIDDevice : public IOService, public IOHIDDeviceInterface
 
 #if !KERNEL
 public:
+#ifdef IOHIDDevice_DECLARE_IVARS
+IOHIDDevice_DECLARE_IVARS
+#else /* IOHIDDevice_DECLARE_IVARS */
     union
     {
         IOHIDDevice_IVars * ivars;
         IOHIDDevice_LocalIVars * lvars;
     };
+#endif /* IOHIDDevice_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gIOHIDDeviceMetaClass; };
+#endif /* KERNEL */
 
     using super = IOService;
 
@@ -481,14 +513,20 @@ class __attribute__((availability(driverkit,introduced=20,message="Type-safe OSA
 #endif /* !KERNEL */
 
 public:
+#ifdef OSAction_IOHIDDevice__CompleteReport_DECLARE_IVARS
+OSAction_IOHIDDevice__CompleteReport_DECLARE_IVARS
+#else /* OSAction_IOHIDDevice__CompleteReport_DECLARE_IVARS */
     union
     {
         OSAction_IOHIDDevice__CompleteReport_IVars * ivars;
         OSAction_IOHIDDevice__CompleteReport_LocalIVars * lvars;
     };
+#endif /* OSAction_IOHIDDevice__CompleteReport_DECLARE_IVARS */
 #if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gOSAction_IOHIDDevice__CompleteReportMetaClass; };
     virtual const OSMetaClass *
-    getMetaClass() const APPLE_KEXT_OVERRIDE { return OSTypeID(OSAction_IOHIDDevice__CompleteReport); };
+    getMetaClass() const APPLE_KEXT_OVERRIDE { return gOSAction_IOHIDDevice__CompleteReportMetaClass; };
 #endif /* KERNEL */
 
     using super = OSAction;
@@ -503,7 +541,7 @@ public:
 #endif /* !__DOCUMENTATION__ */
 
 
-/* IOHIDDevice.iig:190- */
+/* IOHIDDevice.iig:188- */
 
 
 #endif /* ! _HIDDRIVERKIT_IOHIDDEVICE_H */

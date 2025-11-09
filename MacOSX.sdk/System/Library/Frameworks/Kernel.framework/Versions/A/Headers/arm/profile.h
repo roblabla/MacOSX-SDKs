@@ -9,6 +9,8 @@
 #ifndef _BSD_ARM_PROFILE_H_
 #define _BSD_ARM_PROFILE_H_
 
+#if defined (__arm__) || defined (__arm64__)
+
 #include <sys/appleapiopts.h>
 
 #ifdef __APPLE_API_UNSTABLE
@@ -26,5 +28,7 @@
 #define MCOUNT_EXIT     /* (void) splx(s); */ /* XXX TODO */
 
 #endif /* __APPLE_API_UNSTABLE */
+
+#endif /* defined (__arm__) || defined (__arm64__) */
 
 #endif /* _BSD_ARM_PROFILE_H_ */

@@ -3,14 +3,30 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D006CA33-1875-337A-9E9F-4BE9740FC183
+    value:           E23BFE63-71B7-37FE-ADD6-90B2A44BFA80
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E7C93B49-7AB1-329C-A174-ED67913E4471
+    value:           D4823CCC-0893-3134-8966-50CD0C487814
 install-name:    '/System/Library/Frameworks/Python.framework/Versions/2.7/Python'
 current-version: 2.7.16
 compatibility-version: 2.7
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ Accounts, CPAN, CoreAnalytics_executables, CoreGraphicsBindings, 
+                       CoreMLTools, CoreNLPFramework, CreateMLTest, CreateML_tests, 
+                       DataDetectorsCore_executables, Feldspar, GPUDriversIntel, 
+                       HIDSensingPipeline, HSComposer, LanguageModeling, Mica, MobileBluetooth_DevTools, 
+                       MobileQuickLook_iosmac, PencilKit_swiftoverlay_iosmac, Photos_Swift, 
+                       Picholine, Raft, RaftFramework, RaftFrameworkExternal, SpeechRecognitionCore_executables, 
+                       Stocks, TimeSync_exec, UIKit_swiftoverlay, accounts_tool, 
+                       appletrace_bindings-python2, ausiss, caffeconverter, cgdump, 
+                       coremlpython, disasm, duallinkanalyse, eoslib, fastsim, gxtools, 
+                       lldbPluginScriptInterpreterPython2, lldb_host, mrecfpu, pdsasm, 
+                       pmrec, pmrec.tmp, py_dasm, pydis, pyobjc, python.exe, python_modules, 
+                       pythonw, pytrace, quarantine_test, rogueasm, sim, sim_bindings-python2, 
+                       testbotctl, testbotd, testbotd-base, testbottask, timesyncanalyse, 
+                       timesynclogextract ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AEDesc_Convert, _AEDesc_New, _AEDesc_NewBorrowed, _BMObj_Convert, 
@@ -336,13 +352,13 @@ exports:
                        _Py_GetPrefix, _Py_GetProgramFullPath, _Py_GetProgramName, 
                        _Py_GetPythonHome, _Py_GetRecursionLimit, _Py_GetVersion, 
                        _Py_HashRandomizationFlag, _Py_IgnoreEnvironmentFlag, _Py_IncRef, 
-                       _Py_InitModule4_64, _Py_Initialize, _Py_InitializeEx, _Py_InspectFlag, 
-                       _Py_InteractiveFlag, _Py_IsInitialized, _Py_Main, _Py_MakePendingCalls, 
-                       _Py_NewInterpreter, _Py_NoSiteFlag, _Py_NoUserSiteDirectory, 
-                       _Py_OptimizeFlag, _Py_Py3kWarningFlag, _Py_ReprEnter, _Py_ReprLeave, 
-                       _Py_SetProgramName, _Py_SetPythonHome, _Py_SetRecursionLimit, 
-                       _Py_SubversionRevision, _Py_SubversionShortBranch, _Py_SymtableString, 
-                       _Py_TabcheckFlag, _Py_UnicodeFlag, _Py_UniversalNewlineFgets, 
+                       _Py_InitModule4_64, _Py_Initialize, _Py_InitializeEx, _Py_InitializeWithoutMetrics, 
+                       _Py_InspectFlag, _Py_InteractiveFlag, _Py_IsInitialized, _Py_Main, 
+                       _Py_MakePendingCalls, _Py_NewInterpreter, _Py_NoSiteFlag, 
+                       _Py_NoUserSiteDirectory, _Py_OptimizeFlag, _Py_Py3kWarningFlag, 
+                       _Py_ReprEnter, _Py_ReprLeave, _Py_SetProgramName, _Py_SetPythonHome, 
+                       _Py_SetRecursionLimit, _Py_SubversionRevision, _Py_SubversionShortBranch, 
+                       _Py_SymtableString, _Py_TabcheckFlag, _Py_UnicodeFlag, _Py_UniversalNewlineFgets, 
                        _Py_UniversalNewlineFread, _Py_UseClassExceptionsFlag, _Py_VaBuildValue, 
                        _Py_VerboseFlag, _Py_meta_grammar, _Py_pgen, _QdRGB_Convert, 
                        _QdRGB_New, _ResObj_Convert, _ResObj_New, _TEObj_Convert, 

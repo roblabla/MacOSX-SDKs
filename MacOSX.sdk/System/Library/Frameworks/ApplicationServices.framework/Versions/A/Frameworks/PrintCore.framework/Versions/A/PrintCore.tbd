@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9299D57A-FA79-30B6-ADA6-580A55EFE95C
+    value:           A4909ACA-C4EA-3B4B-93D9-EA6E8F5E833A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0BA704CB-1069-3855-A3EB-62FDB054E25D
+    value:           0C3892EC-4840-3AEB-A3EE-9EB22C85193B
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore'
-current-version: 531.1
+current-version: 541
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CPLAutoSelectCancel, _CPLAutoSelectCreateContext, _CPLAutoSelectGetInfo, 
                        _CPLAutoSelectHasNewPPD, _CPLAutoSelectInstallableOptions, 
                        _CPLAutoSelectPPD, _CPLAutoSelectReleaseContext, _CPLAutoSelectSetIsBinaryOK, 
@@ -145,14 +145,15 @@ exports:
                        _PMTicketSetItem, _PMTicketSetPMRect, _PMTicketSetSInt32, 
                        _PMTicketSetTicket, _PMTicketSetUInt32, _PMTicketToLightXML, 
                        _PMTicketToXML, _PMUpdateProxy, _PMWorkflowCopyItems, _PMWorkflowSubmitPDFWithOptions, 
-                       _PMWorkflowSubmitPDFWithSettings, _PMXMLToTicket, __ZN12PMBaseObject14SetAppReadOnlyEh, 
-                       __ZN12PMBaseObject15CopyObjectStateEPS_, __ZN12PMBaseObject16CreateEmptyArrayEv, 
-                       __ZN12PMBaseObject21SetUsingRemoteObjectsEh, __ZN14OpaquePMPresetC1EPK14__CFDictionary, 
-                       __ZN14OpaquePMPresetC2EPK14__CFDictionary, __ZN15OpaquePMPrinter14GetPrinterNameEv, 
-                       __ZN15OpaquePMPrinter14IsQueueStoppedEv, __ZN15OpaquePMPrinter16IsGenericPrinterEv, 
-                       __ZN15OpaquePMPrinter19GetPaperListForMenuEv, __ZN15OpaquePMPrinter19SetPaperListForMenuEPK9__CFArray, 
-                       __ZN15OpaquePMPrinter22IsPrinterDirectConnectEv, __ZN18OpaquePMPageFormat21PJCValidPageFormatKeyEPS_, 
-                       __ZN18PMTicketBaseObject12GetTicketRefEv, __ZN18PMTicketBaseObject12SetTicketRefEP17OpaquePMTicketRef, 
+                       _PMWorkflowSubmitPDFWithSettings, _PMXMLToTicket, __PMLog, 
+                       __PMLogPerf, __ZN12PMBaseObject14SetAppReadOnlyEh, __ZN12PMBaseObject15CopyObjectStateEPS_, 
+                       __ZN12PMBaseObject16CreateEmptyArrayEv, __ZN12PMBaseObject21SetUsingRemoteObjectsEh, 
+                       __ZN14OpaquePMPresetC1EPK14__CFDictionary, __ZN14OpaquePMPresetC2EPK14__CFDictionary, 
+                       __ZN15OpaquePMPrinter14GetPrinterNameEv, __ZN15OpaquePMPrinter14IsQueueStoppedEv, 
+                       __ZN15OpaquePMPrinter16IsGenericPrinterEv, __ZN15OpaquePMPrinter19GetPaperListForMenuEv, 
+                       __ZN15OpaquePMPrinter19SetPaperListForMenuEPK9__CFArray, __ZN15OpaquePMPrinter22IsPrinterDirectConnectEv, 
+                       __ZN18OpaquePMPageFormat21PJCValidPageFormatKeyEPS_, __ZN18PMTicketBaseObject12GetTicketRefEv, 
+                       __ZN18PMTicketBaseObject12SetTicketRefEP17OpaquePMTicketRef, 
                        __ZN18PMTicketBaseObject23ReleaseAndReplaceTicketEP17OpaquePMTicketRef, 
                        __ZN20OpaquePMPrintSession10ClearErrorEv, __ZN20OpaquePMPrintSession10SetPreviewEhj, 
                        __ZN20OpaquePMPrintSession12GetJobTicketEv, __ZN20OpaquePMPrintSession16GetXPCConnectionEv, 

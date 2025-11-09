@@ -3,13 +3,35 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           83C47549-A9D8-33BE-99C7-62C3ABD249D6
+    value:           3B32BB32-5317-311F-8FDE-E556B61D86AC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F692DB18-3B23-3456-909E-88A1D740237E
+    value:           9E584ABD-CD10-323C-AE71-E398766C0D1F
 install-name:    '/System/Library/PrivateFrameworks/ContextualActionsClient.framework/Versions/A/ContextualActionsClient'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _ContextualActionsClientVersionNumber, _ContextualActionsClientVersionString ]
+    symbols:         [ _CAXContextualActionsXPCInterface, _CAXPBContextualActionContentReadFrom, 
+                       _CAXPBContextualActionParameterReadFrom, _CAXPBContextualActionReadFrom, 
+                       _CAXPBContextualActionsFeedbackEventReadFrom, _CAXPBPredictionContextReadFrom, 
+                       _CAXPBSuggestionReadFrom, _ContextualActionsClientVersionNumber, 
+                       _ContextualActionsClientVersionString, _kCAXContextualActionsXPCInterfaceMachServiceName ]
+    objc-classes:    [ CAXBiomeContextualActionsFeedbackStream, CAXContextualAction, 
+                       CAXContextualActionContent, CAXContextualActionParameter, 
+                       CAXContextualActionsClient, CAXContextualActionsFeedbackEvent, 
+                       CAXContextualActionsPredictionElement, CAXContextualActionsPredictor, 
+                       CAXContextualActionsPredictorDriver, CAXContextualActionsSuggestionReceiver, 
+                       CAXPBContextualAction, CAXPBContextualActionContent, CAXPBContextualActionParameter, 
+                       CAXPBContextualActionsFeedbackEvent, CAXPBPredictionContext, 
+                       CAXPBSuggestion, CAXPredictionContext, CAXShortcutsSessionSummary, 
+                       CAXSuggestion, CAXSuggestionProvider ]
+    objc-ivars:      [ CAXPBContextualAction._actionIdentifier, CAXPBContextualAction._parameters, 
+                       CAXPBContextualActionContent._contentMetadata, CAXPBContextualActionContent._contentType, 
+                       CAXPBContextualActionParameter._parameterMetadata, CAXPBContextualActionParameter._parameterType, 
+                       CAXPBContextualActionsFeedbackEvent._deviceContext, CAXPBContextualActionsFeedbackEvent._selectedAction, 
+                       CAXPBContextualActionsFeedbackEvent._sessionIdentifier, CAXPBContextualActionsFeedbackEvent._suggestion, 
+                       CAXPBPredictionContext._contents, CAXPBPredictionContext._previousActions, 
+                       CAXPBPredictionContext._searchTerm, CAXPBPredictionContext._sourceAppName, 
+                       CAXPBPredictionContext._suggestionDate, CAXPBSuggestion._modelVersion, 
+                       CAXPBSuggestion._suggestedActions ]
 ...

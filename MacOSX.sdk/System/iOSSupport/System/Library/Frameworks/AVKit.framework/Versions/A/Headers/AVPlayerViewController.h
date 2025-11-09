@@ -73,6 +73,13 @@ API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @property (nonatomic) BOOL allowsPictureInPicturePlayback API_AVAILABLE(ios(9.0));
 
 /*!
+     @property    canStartPictureInPictureAutomaticallyFromInline
+     @abstract    Indicates whether Picture in Picture should be allowed to start automatically when transitioning to background when the receiver’s content is embedded inline. Default is NO.
+     @discussion  This property must only be set to YES for content intended to be the user's primary focus.
+ */
+@property (nonatomic) BOOL canStartPictureInPictureAutomaticallyFromInline API_AVAILABLE(ios(14.2));
+
+/*!
 	@property	updatesNowPlayingInfoCenter
 	@abstract	Whether or not the now playing info center should be updated. Default is YES.
  */
@@ -144,6 +151,16 @@ API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos)
 	@discussion	See the discussion of -[AVPlayerViewControllerDelegatePrivate playerViewController:willBeginFullScreenPresentationWithAnimationCoordinator:].
  */
 - (void)playerViewController:(AVPlayerViewController *)playerViewController willEndFullScreenPresentationWithAnimationCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator API_AVAILABLE(ios(12.0));
+
+/*!
+ @method		playerViewController:restoreUserInterfaceForFullScreenExitWithCompletionHandler:
+ @param			playerViewController
+ 				The player view controller.
+ @param			completionHandler
+ 				The completion handler the delegate must call after restoring the interface for an exit full screen transition.
+ @abstract		The delegate can implement this method to restore the user interface before exiting fullscreen.
+ */
+- (void)playerViewController:(AVPlayerViewController *)playerViewController restoreUserInterfaceForFullScreenExitWithCompletionHandler:(void (^)(BOOL restored))completionHandler API_AVAILABLE(ios(15.0));
 
 /*!
 	@method		playerViewControllerWillStartPictureInPicture:

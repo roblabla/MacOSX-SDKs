@@ -281,7 +281,7 @@
 #if __has_include(<os/availability.h>)
 # include <os/availability.h>
 #else
-# define API_AVAILABLE(_) /* nothing */
+# define API_AVAILABLE(...) /* nothing */
 #endif
 
 #if __has_feature(nullability)
@@ -4488,6 +4488,10 @@ API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) );
 # include <vecLib/Sparse/SolveImplementation.h>
 #else /* Standalone environments */
 # include "SolveImplementation.h"
+#endif
+
+#if !__has_include( <Availability.h> )
+  #undef __API_AVAILABLE
 #endif
 
 #endif /* __has_attribute(overloadable) */

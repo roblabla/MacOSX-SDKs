@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2018 Apple Inc. All rights reserved.
+	Copyright 2010-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -50,15 +50,18 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 /*!
  @property		enabled
  @abstract		Indicates whether the track is enabled for presentation during playback.
+ @discussion	This property must be accessed on the main thread/queue.
 */
-@property (nonatomic, assign, getter=isEnabled) BOOL enabled;
+@property (nonatomic, assign, getter=isEnabled) BOOL enabled NS_SWIFT_UI_ACTOR;
 
 /*!
  @property		currentVideoFrameRate
  @abstract		If the media type of the assetTrack is AVMediaTypeVideo, indicates the current frame rate of the track as it plays, in units of frames per second. If the item is not playing, or if the media type of the track is not video, the value of this property is 0.
  @discussion	This property is not observable.
+
+ This property must be accessed on the main thread/queue.
 */
-@property (nonatomic, readonly) float currentVideoFrameRate API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) float currentVideoFrameRate NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 
@@ -73,8 +76,10 @@ AVF_EXPORT NSString *const AVPlayerItemTrackVideoFieldModeDeinterlaceFields API_
  @abstract		If the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields.
  @discussion	A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields.
  				You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount.
+ 
+ This property must be accessed on the main thread/queue.
 */
-@property (nonatomic, copy, nullable) NSString *videoFieldMode API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+@property (nonatomic, copy, nullable) NSString *videoFieldMode NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
 
 #endif
 

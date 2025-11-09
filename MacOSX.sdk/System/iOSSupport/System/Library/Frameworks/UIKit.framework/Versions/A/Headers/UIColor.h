@@ -20,7 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class UIImage;
 @class UITraitCollection;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIColor : NSObject <NSSecureCoding, NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0))
+@interface UIColor : NSObject <NSSecureCoding, NSCopying>
 
 // Convenience methods for creating colors
 + (UIColor *)colorWithWhite:(CGFloat)white alpha:(CGFloat)alpha;
@@ -103,7 +104,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIColor : NSObject <NSSecureCodi
 
 @interface UIColor (UIColorNamedColors)
 + (nullable UIColor *)colorNamed:(NSString *)name API_AVAILABLE(ios(11.0));      // load from main bundle
-+ (nullable UIColor *)colorNamed:(NSString *)name inBundle:(nullable NSBundle *)bundle compatibleWithTraitCollection:(nullable UITraitCollection *)traitCollection API_AVAILABLE(ios(11.0));
++ (nullable UIColor *)colorNamed:(NSString *)name inBundle:(nullable NSBundle *)bundle compatibleWithTraitCollection:(nullable UITraitCollection *)traitCollection API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos);
 @end
 
 @interface UIColor (DynamicColors)

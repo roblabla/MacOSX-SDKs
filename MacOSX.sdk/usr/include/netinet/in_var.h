@@ -66,7 +66,9 @@
 
 #include <sys/queue.h>
 #include <sys/kern_event.h>
+#include <net/if_var.h>
 #include <net/net_kev.h>
+#include <netinet/in.h>
 
 
 struct in_aliasreq {

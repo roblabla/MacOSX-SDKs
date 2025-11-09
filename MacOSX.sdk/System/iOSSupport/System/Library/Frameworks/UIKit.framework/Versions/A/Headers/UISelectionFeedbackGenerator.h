@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // UISelectionFeedbackGenerator is used to give user feedback when a selection changes
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos, watchos) @interface UISelectionFeedbackGenerator : UIFeedbackGenerator
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
+@interface UISelectionFeedbackGenerator : UIFeedbackGenerator
 
 /// call when the selection changes (not on initial selection)
 - (void)selectionChanged;

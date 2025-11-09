@@ -69,7 +69,7 @@
 #include <CoreFoundation/CFUtilities.h>
 #include <CoreFoundation/CFBundle.h>
 
-#if TARGET_OS_OSX || TARGET_OS_IPHONE || 0
+#if TARGET_OS_OSX || TARGET_OS_IPHONE || TARGET_OS_WIN32
 #include <CoreFoundation/CFMessagePort.h>
 #include <CoreFoundation/CFPlugIn.h>
 #include <CoreFoundation/CFRunLoop.h>

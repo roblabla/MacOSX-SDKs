@@ -1379,7 +1379,7 @@
  *	feature tests from Configure are generally more reliable.
  */
 #define OSNAME "darwin"		/**/
-#define OSVERS "20.0"		/**/
+#define OSVERS "21.0"		/**/
 
 /* CAT2:
  *	This macro concatenates 2 tokens together.
@@ -5318,7 +5318,7 @@
  *	This is the path to the Updates directory (which comes before
  *	the system perl directory in @INC.
  */
-#define UPDATESLIB		"/Library/Perl/Updates/5.30.2"
+#define UPDATESLIB		"/Library/Perl/Updates/5.30.3"
 
 /* NO_NETWORK_LIBRARY_PERL_FILE:
  *	If this file path exists, the vendor libs (which are the

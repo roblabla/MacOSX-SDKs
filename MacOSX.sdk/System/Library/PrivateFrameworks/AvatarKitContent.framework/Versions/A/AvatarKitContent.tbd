@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           8EE41919-B96B-3987-8330-DBD5138113C0
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           003A55B0-C432-3E91-B58F-95C716C5157D
+install-name:    '/System/Library/PrivateFrameworks/AvatarKitContent.framework/Versions/A/AvatarKitContent'
+current-version: 312.1
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _AvatarKitContentVersionNumber, _AvatarKitContentVersionString ]
+...

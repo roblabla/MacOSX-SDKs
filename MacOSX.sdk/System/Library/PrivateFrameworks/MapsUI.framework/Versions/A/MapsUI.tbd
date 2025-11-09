@@ -1,0 +1,32 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           41D77265-BBA8-39D8-BD68-35BCD0E8FBD7
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           812F53C5-3C01-3AFD-B166-9FDB223BB177
+install-name:    '/System/Library/PrivateFrameworks/MapsUI.framework/Versions/A/MapsUI'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _MUConfigureMeasurementFormatter, _MUConvertedFormattedString, 
+                       _MUFactoidImpericalMeasurementFormatterForValue, _MUFactoidMeasurementFormatterForValue, 
+                       _MUPlaceSectionHeaderLeadingSpacingForInitialOffset, _MapsUIConfig_AmenityNumberOfInlineItemsBeforeSeeAll, 
+                       _MapsUIConfig_ForceSeparatorPlacecardStyle, _MapsUIConfig_MakeRatingScoreAndCallToActionRibbonItemsMutuallyExclusive, 
+                       _MapsUIConfig_PlaceRibbonMinimumThresholdOfItems, _MapsUIConfig_RelatedPlaceSectionNumberOfInlineItems, 
+                       _MapsUIConfig_RelatedPlaceSectionSeeAllThreshold, _MapsUIConfig_ServiceHoursNumberOfInlineItemsBeforeSeeAll, 
+                       _MapsUIConfig_StubPlacecard, _MapsUIConfig_SuppressDedicatedAttributionModule, 
+                       _kMUApplePaySymbolName, _kMUHorizontalPlatterDefaultWidth, 
+                       _kMUHorizontalTileDefaultWidth, _kMUNFCSymbolName, _kMUPlaceAnimationDurationShort, 
+                       _kMUPlaceHorizontalMarginSpacing, _kMUPlaceHorizontalPlatterVerticalEdgeSpacing, 
+                       _kMUPlaceHorizontalStackInsets, _kMUPlaceHorizontalStackSpacing, 
+                       _kMUPlacePlatterButtonLength, _kMUPlacePlatterContentInsets, 
+                       _kMUPlacePlatterCornerRadius, _kMUPlacePlatterPadding, _kMUPlaceSectionVerticalSpacing, 
+                       _kMUPlaceSystemSpacing ]
+    objc-classes:    [ MUCoordinateStringFormatter, MUCoordinateViewModel, MUFactoidViewModel, 
+                       MUInfoCardStyle, MUPlaceViewController, MUPlaceViewControllerConfiguration, 
+                       MUPlatterConfigurator, MUPlatterView, MUPresentationOptions, 
+                       MUScrollableStackView, MUStackView, MUTextFactoidViewModel ]
+...

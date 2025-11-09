@@ -78,10 +78,10 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolvePickupLocationForListRideOptions:(INListRideOptionsIntent *)intent
-                    withCompletion:(void (^)(INPlacemarkResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePickupLocation(for:with:));
+                                 withCompletion:(void (^)(INPlacemarkResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePickupLocation(for:with:));
 
 - (void)resolveDropOffLocationForListRideOptions:(INListRideOptionsIntent *)intent
-                    withCompletion:(void (^)(INPlacemarkResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDropOffLocation(for:with:));
+                                  withCompletion:(void (^)(INPlacemarkResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDropOffLocation(for:with:));
 
 @end
 

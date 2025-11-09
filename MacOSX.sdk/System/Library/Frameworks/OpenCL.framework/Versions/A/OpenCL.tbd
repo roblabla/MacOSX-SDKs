@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4EE9CF1A-E2F1-376B-B387-36DAEBE290E6
+    value:           4369735B-42B2-3A73-80BF-F8823C384CB4
   - target:          x86_64-maccatalyst
-    value:           4EE9CF1A-E2F1-376B-B387-36DAEBE290E6
+    value:           4369735B-42B2-3A73-80BF-F8823C384CB4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           10ADF946-E27D-328C-B4A4-26A61C25B26B
+    value:           6EA30134-BDB7-3221-B15E-8E53439E8144
   - target:          arm64e-maccatalyst
-    value:           10ADF946-E27D-328C-B4A4-26A61C25B26B
+    value:           6EA30134-BDB7-3221-B15E-8E53439E8144
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/OpenCL'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

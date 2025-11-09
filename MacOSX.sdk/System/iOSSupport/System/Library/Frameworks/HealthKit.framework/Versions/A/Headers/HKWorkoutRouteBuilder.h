@@ -54,7 +54,7 @@ HK_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0))
                      finishRouteWithMetadata: method.
  */
 - (void)insertRouteData:(NSArray<CLLocation *> *)routeData
-             completion:(void(^)(BOOL success, NSError * _Nullable error))completion;
+             completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method             addMetadata:completion:
@@ -70,7 +70,7 @@ HK_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0))
                      will contain the error encountered during the insertion operation. When an error occurs, the builder's
                      metadata will remain unchanged.
  */
-- (void)addMetadata:(NSDictionary<NSString *, id> *)metadata completion:(void(^)(BOOL success, NSError * _Nullable error))completion;
+- (void)addMetadata:(NSDictionary<NSString *, id> *)metadata completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method             finishRouteWithWorkout:Metadata:completion:
@@ -92,7 +92,7 @@ HK_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0))
  */
 - (void)finishRouteWithWorkout:(HKWorkout *)workout
                       metadata:(nullable NSDictionary<NSString *, id> *)metadata
-                    completion:(void(^)(HKWorkoutRoute * _Nullable workoutRoute, NSError * _Nullable error))completion;
+                    completion:(void (^)(HKWorkoutRoute * _Nullable workoutRoute, NSError * _Nullable error))completion;
 
 @end
 

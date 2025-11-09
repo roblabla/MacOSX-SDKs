@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2020 Apple Inc. All rights reserved.
+ * Copyright (c) 2013-2021 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -380,6 +380,30 @@ extern const char *
 vmnet_enable_isolation_key API_AVAILABLE(macos(11.0));
 
 /*!
+ * @constant vmnet_enable_checksum_offload_key
+ * Enable checksum offload for this interface. The checksums that are
+ * offloaded are: IPv4 header checksum, UDP checksum (IPv4 and IPv6), 
+ * and TCP checksum (IPv4 and IPv6).
+ *
+ * In order to perform the offload function, all packets flowing in and
+ * out of the vmnet_interface instance are verified to pass basic 
+ * IPv4, IPv6, UDP, and TCP sanity checks. A packet that fails any
+ * of these checks is simply dropped.
+ *
+ * On output, checksums are automatically computed as necessary
+ * on each packet sent using vmnet_write().
+ *
+ * On input, checksums are verified as necessary. If any checksum verification
+ * fails, the packet is dropped and not delivered to vmnet_read().
+ *
+ * Note that the checksum offload function for UDP and TCP checksums is unable
+ * to deal with fragmented IPv4/IPv6 packets. The VM client networking stack
+ * must handle UDP and TCP checksums on fragmented packets itself.
+ */
+extern const char *
+vmnet_enable_checksum_offload_key API_AVAILABLE(macos(12.0));
+
+/*!
  *  @typedef vmnet_start_interface_completion_handler_t
  *
  *  @abstract
@@ -620,7 +644,7 @@ vmnet_interface_add_port_forwarding_rule(interface_ref interface,
     struct in_addr internal_address,
     uint16_t internal_port,
     __nullable vmnet_interface_completion_handler_t handler)
-    API_AVAILABLE(macos(10.15));
+	API_DEPRECATED("replaced by vmnet_interface_add_ip_port_forwarding_rule", macos(10.15, 12.0));
 
 /*!
  * @function vmnet_interface_remove_port_forwarding_rule
@@ -655,7 +679,7 @@ vmnet_interface_remove_port_forwarding_rule(interface_ref interface,
     uint8_t protocol,
     uint16_t external_port,
     __nullable vmnet_interface_completion_handler_t handler)
-    API_AVAILABLE(macos(10.15));
+	API_DEPRECATED("replaced by vmnet_interface_remove_ip_port_forwarding_rule", macos(10.15, 12.0));
 
 /*!
  * @typedef vmnet_interface_get_port_forwarding_rules_handler_t
@@ -703,7 +727,7 @@ vmnet_port_forwarding_rule_get_details(xpc_object_t rule,
 				       uint16_t * external_port,
 				       struct in_addr * internal_address,
 				       uint16_t * internal_port)
-    API_AVAILABLE(macos(10.15));
+	API_DEPRECATED("replaced by vmnet_ip_port_forwarding_rule_get_details", macos(10.15, 12.0));
 
 /*!
  * @function vmnet_interface_get_port_forwarding_rules
@@ -728,7 +752,186 @@ vmnet_port_forwarding_rule_get_details(xpc_object_t rule,
 vmnet_return_t
 vmnet_interface_get_port_forwarding_rules(interface_ref interface,
     vmnet_interface_get_port_forwarding_rules_handler_t handler)
-    API_AVAILABLE(macos(10.15));
+	API_DEPRECATED("replaced by vmnet_interface_get_ip_port_forwarding_rules", macos(10.15, 12.0));
+
+/*!
+ * @function vmnet_interface_add_ip_port_forwarding_rule
+ *
+ * @abstract
+ * Add a port forwarding rule for the vmnet interface.
+ *
+ * @discussion
+ * Adds a rule to forward traffic destined to an external port to
+ * an internal IP address and port for either TCP or UDP.
+ *
+ * @param interface
+ * The vmnet interface instance to use.
+ *
+ * @param protocol
+ * The protocol to apply the port forwarding rule to.
+ * Must be either IPPROTO_TCP or IPPROTO_UDP (see <netinet/in.h>).
+ *
+ * @param external_port
+ * The TCP or UDP port on the outside network that should be redirected from.
+ * Must be in host byte order.
+ *
+ * @param address_family
+ * The address family (AF_INET or AF_INET6) of 'internal_address'. If
+ * AF_INET, 'internal address' must point to a 'struct in_addr'. If
+ * AF_INET6, 'internal_address' must point to a "struct in6_addr'.
+ *
+ * @param internal_address
+ * Pointer to IPv4 or IPv6 address of the machine on the internal network that
+ * should receive the forwarded traffic.
+ *
+ * @param internal_port
+ * The TCP or UDP port that the forwarded traffic should be redirected to.
+ * Must be in host byte order.
+ *
+ * @param handler
+ * The completion handler to invoke when the operation completes.
+ *
+ * @result
+ * Returns VMNET_SUCCESS if the completion handler handler was scheduled,
+ * an error code otherwise.
+ */
+vmnet_return_t
+vmnet_interface_add_ip_port_forwarding_rule(interface_ref interface,
+    uint8_t protocol,
+    uint16_t external_port,
+    uint8_t address_family,
+    const void * internal_address,
+    uint16_t internal_port,
+    __nullable vmnet_interface_completion_handler_t handler)
+    API_AVAILABLE(macos(11.0));
+
+/*!
+ * @function vmnet_interface_remove_ip_port_forwarding_rule
+ *
+ * @abstract
+ * Removes a port forwarding rule for the vmnet interface.
+ *
+ * @discussion
+ * Removes the rule to forward an external port to the specified
+ * internal IP address and port.
+ *
+ * @param interface
+ * The vmnet interface instance to use.
+ *
+ * @param protocol
+ * The protocol to apply the port forwarding rule to.
+ * Must be either IPPROTO_TCP or IPPROTO_UDP (see <netinet/in.h>).
+ *
+ * @param external_port
+ * The TCP or UDP port on the outside network that should be redirected from.
+ * Must be in host byte order.
+ *
+ * @param address_family
+ * The address family (AF_INET or AF_INET6).
+ *
+ * @param handler
+ * The completion handler to invoke when the operation completes.
+ *
+ * @result
+ * Returns VMNET_SUCCESS if the completion handler handler was scheduled,
+ * an error code otherwise.
+ */
+vmnet_return_t
+vmnet_interface_remove_ip_port_forwarding_rule(interface_ref interface,
+    uint8_t protocol,
+    uint16_t external_port,
+    uint8_t address_family,
+    __nullable vmnet_interface_completion_handler_t handler)
+    API_AVAILABLE(macos(11.0));
+
+/*!
+ * @typedef vmnet_interface_get_ip_port_forwarding_rules_handler_t
+ *
+ * @abstract
+ * The type of the block provided to
+ * vmnet_interface_get_ip_port_forwarding_rules().
+ *
+ * @param rules
+ * If non-NULL, the xpc_array of xpc_dictionary rules.
+ * If NULL, no port forwarding rules exist.
+ *
+ */
+typedef void (^vmnet_interface_get_ip_port_forwarding_rules_handler_t)
+    (__nullable xpc_object_t rules);
+
+/*!
+ * @function vmnet_ip_port_forwarding_rule_get_details
+ *
+ * @abstract
+ * Extracts port forwarding rule details from the rule xpc dictionary object.
+ *
+ * @discussion
+ * Allows the protocol, external port, internal address and internal port to
+ * be extracted from the xpc dictionary object.
+ *
+ * @param rule
+ * The xpc dictionary element from the xpc array provided to the
+ * vmnet_interface_get_port_forward_rules_handler_t callback.
+ *
+ * @param protocol
+ * Either IPPROTO_TCP or IPPROTO_UDP (see <netinet/in.h>).
+ *
+ * @param external_port
+ * The TCP or UDP port on the outside network that should be redirected from.
+ * Will be in host byte order.
+ *
+ * @param address_family
+ * The address family (AF_INET or AF_INET6) of 'internal_address'.
+ *
+ * @param internal_address
+ * Pointer to IPv4 or IPv6 address of the machine on the internal network that
+ * should receive the forwarded traffic.
+ *
+ * @param internal_port
+ * The TCP or UDP port that the forwarded traffic should be redirected to.
+ * Will be in host byte order.
+ *
+ * @result
+ * Returns VMNET_SUCCESS if rule is valid and all details were populated,
+ * an error code otherwise.
+ */
+vmnet_return_t
+vmnet_ip_port_forwarding_rule_get_details(xpc_object_t rule,
+    uint8_t * protocol,
+    uint16_t * external_port,
+    uint8_t address_family,
+    void * internal_address,
+    uint16_t * internal_port)
+    API_AVAILABLE(macos(11.0));
+
+/*!
+ * @function vmnet_interface_get_ip_port_forwarding_rules
+ *
+ * @abstract
+ * Get the list of port forwarding rules that have been configured.
+ *
+ * @discussion
+ * Gets the list of port forwarding rules that have been configured
+ * via previous calls to vmnet_interface_add_ip_port_forwarding_rule().
+ *
+ * @param interface
+ * The vmnet interface instance to use.
+ *
+ * &param address_family
+ * Address family (AF_INET or AF_INET6).
+ *
+ * @param handler
+ * The completion handler to invoke when the operation completes.
+ *
+ * @result
+ * Returns VMNET_SUCCESS if the completion handler handler was scheduled,
+ * an error code otherwise.
+ */
+vmnet_return_t
+vmnet_interface_get_ip_port_forwarding_rules(interface_ref interface,
+    u_int8_t address_family,
+    vmnet_interface_get_ip_port_forwarding_rules_handler_t handler)
+    API_AVAILABLE(macos(11.0));
 
 /*!
  * @function vmnet_copy_shared_interface_list

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F62F400F-D003-3660-A3F2-1820B2D1E921
+    value:           5E8B38B1-487A-3116-BF06-6ECAA5351EB3
   - target:          arm64-macos
-    value:           C28CC92C-3197-3CBA-AAB5-4BCC54F5FF76
+    value:           E850C1B9-6D86-389E-9973-6478014BD326
   - target:          arm64e-macos
-    value:           5655AB88-A1B5-320B-BCAE-279673F75DE8
+    value:           9C247C43-A4A6-3498-B053-3AB343F40E3F
 install-name:    '/usr/lib/libcryptex_core.dylib'
-current-version: 84.100.10
+current-version: 169
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ __cryptex_asset_type_c411, __cryptex_asset_type_cpxd, __cryptex_asset_type_im4m, 
@@ -19,12 +19,29 @@ exports:
                        _cryptex_asset_new, _cryptex_asset_new_borrowed, _cryptex_asset_types, 
                        _cryptex_async, _cryptex_core_attach_host, _cryptex_core_attach_signature, 
                        _cryptex_core_create, _cryptex_core_generate_identifier, _cryptex_core_generate_version, 
-                       _cryptex_core_get_asset, _cryptex_core_parse_hdiid, _cryptex_core_set_asset, 
-                       _cryptex_core_set_assets_from_directory, _cryptex_core_unparse_hdiid, 
+                       _cryptex_core_get_asset, _cryptex_core_get_image_asset, _cryptex_core_parse_hdiid, 
+                       _cryptex_core_set_asset, _cryptex_core_set_assets_from_directory, 
+                       _cryptex_core_set_assets_from_fds, _cryptex_core_unparse_hdiid, 
                        _cryptex_get_error, _cryptex_host_create, _cryptex_init, _cryptex_magister_authenticate, 
                        _cryptex_magister_create, _cryptex_scrivener_create, _cryptex_scrivener_read_signature, 
-                       _cryptex_scrivener_set_nonce, _cryptex_scrivener_sign, _cryptex_set_error, 
-                       _cryptex_set_target_object, _cryptex_set_target_queue, _cryptex_signature_create, 
-                       _cryptex_signature_write, _cryptex_target_async, _cryptex_version_compare, 
-                       _cryptex_version_destroy, _cryptex_version_new ]
+                       _cryptex_scrivener_set_nonce, _cryptex_scrivener_set_url, 
+                       _cryptex_scrivener_sign, _cryptex_session_core_append_to_array, 
+                       _cryptex_session_core_copy_homedir, _cryptex_session_core_copy_name, 
+                       _cryptex_session_core_copy_xpc_object, _cryptex_session_core_create_from_xpc, 
+                       _cryptex_session_core_get_overrides, _cryptex_session_core_get_state, 
+                       _cryptex_session_core_get_uid, _cryptex_session_core_merge, 
+                       _cryptex_session_core_set_endpoint, _cryptex_session_core_set_homedir, 
+                       _cryptex_session_core_set_uid, _cryptex_session_core_transition, 
+                       _cryptex_session_event_to_string, _cryptex_session_state_to_string, 
+                       _cryptex_set_error, _cryptex_set_target_object, _cryptex_set_target_queue, 
+                       _cryptex_signature_create, _cryptex_signature_lock, _cryptex_signature_seal, 
+                       _cryptex_signature_write, _cryptex_target_async, _cryptex_tss_create, 
+                       _cryptex_tss_set_bool, _cryptex_tss_set_data, _cryptex_tss_set_dgst, 
+                       _cryptex_tss_set_object_bool, _cryptex_tss_set_object_dgst, 
+                       _cryptex_tss_set_u32, _cryptex_tss_set_u64, _cryptex_tss_set_url, 
+                       _cryptex_tss_submit, _cryptex_version_compare, _cryptex_version_destroy, 
+                       _cryptex_version_new, _session_core_create ]
+    objc-classes:    [ OS_cryptex_base, OS_cryptex_core, OS_cryptex_host, OS_cryptex_magister, 
+                       OS_cryptex_scrivener, OS_cryptex_signature, OS_cryptex_tss, 
+                       OS_session_core ]
 ...

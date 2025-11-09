@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           065A9ADC-2A69-3205-8D58-2E578524883A
+    value:           5678ED37-8937-3AA5-A8F1-A2804B1F2F7F
   - target:          x86_64-maccatalyst
-    value:           065A9ADC-2A69-3205-8D58-2E578524883A
+    value:           5678ED37-8937-3AA5-A8F1-A2804B1F2F7F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BB17F172-DBAA-302F-80F9-F8821D295D0F
+    value:           B33AB8D5-25B5-3680-9035-1D71DCEC9D1F
   - target:          arm64e-maccatalyst
-    value:           BB17F172-DBAA-302F-80F9-F8821D295D0F
+    value:           B33AB8D5-25B5-3680-9035-1D71DCEC9D1F
 install-name:    '/usr/lib/libexpat.1.dylib'
 current-version: 8
 compatibility-version: 7
@@ -30,7 +30,9 @@ exports:
                        _XML_MemMalloc, _XML_MemRealloc, _XML_Parse, _XML_ParseBuffer, 
                        _XML_ParserCreate, _XML_ParserCreateNS, _XML_ParserCreate_MM, 
                        _XML_ParserFree, _XML_ParserReset, _XML_ResumeParser, _XML_SetAttlistDeclHandler, 
-                       _XML_SetBase, _XML_SetCdataSectionHandler, _XML_SetCharacterDataHandler, 
+                       _XML_SetBase, _XML_SetBillionLaughsAttackProtectionActivationThreshold, 
+                       _XML_SetBillionLaughsAttackProtectionMaximumAmplification, 
+                       _XML_SetCdataSectionHandler, _XML_SetCharacterDataHandler, 
                        _XML_SetCommentHandler, _XML_SetDefaultHandler, _XML_SetDefaultHandlerExpand, 
                        _XML_SetDoctypeDeclHandler, _XML_SetElementDeclHandler, _XML_SetElementHandler, 
                        _XML_SetEncoding, _XML_SetEndCdataSectionHandler, _XML_SetEndDoctypeDeclHandler, 

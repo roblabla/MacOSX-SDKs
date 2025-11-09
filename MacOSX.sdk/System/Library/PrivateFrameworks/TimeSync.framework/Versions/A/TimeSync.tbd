@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BB4AE9D1-74D6-3253-A1FA-734DCEEEBCBC
+    value:           0741EA29-2975-3FA1-8077-933314B3AF27
   - target:          x86_64-maccatalyst
-    value:           BB4AE9D1-74D6-3253-A1FA-734DCEEEBCBC
+    value:           0741EA29-2975-3FA1-8077-933314B3AF27
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9B5755C5-22CB-3D79-878A-F825814A0627
+    value:           D9E3E655-AE28-3A8B-A45B-C5B835528EBE
   - target:          arm64e-maccatalyst
-    value:           9B5755C5-22CB-3D79-878A-F825814A0627
+    value:           D9E3E655-AE28-3A8B-A45B-C5B835528EBE
 install-name:    '/System/Library/PrivateFrameworks/TimeSync.framework/Versions/A/TimeSync'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -70,15 +70,17 @@ exports:
                        _TSTransmittedPDelayRequestCounterKey, _TSTransmittedPDelayResponseCounterKey, 
                        _TSTransmittedPDelayResponseFollowUpCounterKey, _TSTransmittedPacketDiscardCounterKey, 
                        _TSTransmittedSignalCounterKey, _TSTransmittedSyncCounterKey, 
-                       _TSTryingForCapableKey, _TimeSyncAddgPTPServices, _TimeSyncAddgPTPServicesSync, 
+                       _TSTryingForCapableKey, _TimeSyncAddAirPlayPTPInstnce, _TimeSyncAddCopresencePTPInstnce, 
+                       _TimeSyncAddgPTPServices, _TimeSyncAddgPTPServicesSync, _TimeSyncAirPlayPTPInstnceClockIdentifier, 
                        _TimeSyncClockAddAWDLPort, _TimeSyncClockAddAWDLPortAndGetIdentity, 
                        _TimeSyncClockAddTimestamps, _TimeSyncClockAddUDPv4EndToEndPort, 
                        _TimeSyncClockAddUDPv4EndToEndPortAndGetIdentity, _TimeSyncClockAddUDPv6EndToEndPort, 
                        _TimeSyncClockAddUDPv6EndToEndPortAndGetIdentity, _TimeSyncClockCreateAudioClockDeviceUID, 
                        _TimeSyncClockCreateUserFilteredClock, _TimeSyncClockCreateWithClockIdentifer, 
-                       _TimeSyncClockDispose, _TimeSyncClockGetClockIdentifer, _TimeSyncClockGetClockRate, 
-                       _TimeSyncClockGetClockRateAnchorsAndGrandmasterIdentity, _TimeSyncClockGetClockRateAndAnchors, 
-                       _TimeSyncClockGetClockTimeAndGrandmasterIdentityForHostTime, 
+                       _TimeSyncClockCreateWithClockIdentifier, _TimeSyncClockDispose, 
+                       _TimeSyncClockGetClockIdentifer, _TimeSyncClockGetClockIdentifier, 
+                       _TimeSyncClockGetClockRate, _TimeSyncClockGetClockRateAnchorsAndGrandmasterIdentity, 
+                       _TimeSyncClockGetClockRateAndAnchors, _TimeSyncClockGetClockTimeAndGrandmasterIdentityForHostTime, 
                        _TimeSyncClockGetClockTimeAndGrandmasterIdentityLocalPortForHostTime, 
                        _TimeSyncClockGetClockTimeForHostTime, _TimeSyncClockGetCurrentPortInfo, 
                        _TimeSyncClockGetHostTimeAndGrandmasterIdentityForClockTime, 
@@ -89,12 +91,14 @@ exports:
                        _TimeSyncClockRemoveUDPv4EndToEndPort, _TimeSyncClockRemoveUDPv6EndToEndPort, 
                        _TimeSyncClockResetClock, _TimeSyncClockResetFilter, _TimeSyncClockRestorePortReceiveMatching, 
                        _TimeSyncClockSetAllPortRemoteSyncMessageIntervals, _TimeSyncClockSetLockStateChangeCallback, 
-                       _TimeSyncClockSetMasterChangeCallback, _TimeSyncClockSetgPTPGrandmasterAndPortChangeCallback, 
-                       _TimeSyncClockSetgPTPGrandmasterChangeCallback, _TimeSyncClockSetgPTPLocalPortChangeCallback, 
+                       _TimeSyncClockSetMasterChangeCallback, _TimeSyncClockSetTimeSyncTimeChangeCallback, 
+                       _TimeSyncClockSetgPTPGrandmasterAndPortChangeCallback, _TimeSyncClockSetgPTPGrandmasterChangeCallback, 
+                       _TimeSyncClockSetgPTPLocalPortChangeCallback, _TimeSyncCopresencePTPInstnceClockIdentifier, 
                        _TimeSyncPortCreateFromClock, _TimeSyncPortDisable, _TimeSyncPortDispose, 
                        _TimeSyncPortEnable, _TimeSyncPortGetCurrentPortInfo, _TimeSyncPortOverridePortReceiveMatching, 
                        _TimeSyncPortRestorePortReceiveMatching, _TimeSyncPortSetMACLookupTimeoutCallback, 
-                       _TimeSyncPortSetRemoteSyncMessageIntervals, _TimeSyncRemovegPTPServices, 
+                       _TimeSyncPortSetRemoteSyncMessageIntervals, _TimeSyncRemoveAirPlayPTPInstnce, 
+                       _TimeSyncRemoveCopresencePTPInstnce, _TimeSyncRemovegPTPServices, 
                        _TimeSyncSystemDomainClockIdentifier, _TimeSyncgPTPManagerNotifyWhenAvailable, 
                        __TSKernelClockConvertFromDomainToMachAbsoluteTime, __TSKernelClockConvertFromDomainToTimeSyncTime, 
                        __TSKernelClockConvertFromMachAbsoluteToDomainTime, __TSKernelClockConvertFromTimeSyncToDomainTime, 

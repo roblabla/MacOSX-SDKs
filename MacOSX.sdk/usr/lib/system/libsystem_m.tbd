@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FA773620-5114-36B6-87CD-55EC4134D0C3
+    value:           0E11E04D-32A5-33F2-890D-7248C417105E
   - target:          x86_64-maccatalyst
-    value:           FA773620-5114-36B6-87CD-55EC4134D0C3
+    value:           0E11E04D-32A5-33F2-890D-7248C417105E
   - target:          x86_64h-macos
-    value:           2F75F75F-DB36-3841-988F-48A7237ED6E9
+    value:           B146BF9F-C24F-3D6B-925C-9FDF489F49BD
   - target:          x86_64h-maccatalyst
-    value:           2F75F75F-DB36-3841-988F-48A7237ED6E9
+    value:           B146BF9F-C24F-3D6B-925C-9FDF489F49BD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           549C9342-4F61-3D9E-9727-9F9B72C9F49F
+    value:           02513AEE-7E5D-3D6D-AF7D-DFD80AC5B5C4
   - target:          arm64e-maccatalyst
-    value:           549C9342-4F61-3D9E-9727-9F9B72C9F49F
+    value:           02513AEE-7E5D-3D6D-AF7D-DFD80AC5B5C4
 install-name:    '/usr/lib/system/libsystem_m.dylib'
-current-version: 3186.100.3
+current-version: 3204
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
@@ -48,7 +48,8 @@ exports:
                        __simd_exp_d8, __simd_exp_f16, __simd_exp_f8, __simd_expm1_d4, 
                        __simd_expm1_d8, __simd_expm1_f16, __simd_expm1_f8, __simd_fmod_d4, 
                        __simd_fmod_d8, __simd_fmod_f16, __simd_fmod_f8, __simd_hypot_d4, 
-                       __simd_hypot_d8, __simd_hypot_f16, __simd_hypot_f8, __simd_log10_d4, 
+                       __simd_hypot_d8, __simd_hypot_f16, __simd_hypot_f8, __simd_lgamma_d4, 
+                       __simd_lgamma_d8, __simd_lgamma_f16, __simd_lgamma_f8, __simd_log10_d4, 
                        __simd_log10_d8, __simd_log10_f16, __simd_log10_f8, __simd_log1p_d4, 
                        __simd_log1p_d8, __simd_log1p_f16, __simd_log1p_f8, __simd_log2_d4, 
                        __simd_log2_d8, __simd_log2_f16, __simd_log2_f8, __simd_log_d4, 
@@ -175,13 +176,13 @@ exports:
                        __simd_exp_f4, __simd_expm1_d2, __simd_expm1_f4, __simd_fma_d2, 
                        __simd_fma_f4, __simd_fmod_d2, __simd_fmod_f4, __simd_hypot_d2, 
                        __simd_hypot_f4, __simd_incircle_pd2, __simd_incircle_pf2, 
-                       __simd_insphere_pd3, __simd_insphere_pf3, __simd_log10_d2, 
-                       __simd_log10_f4, __simd_log1p_d2, __simd_log1p_f4, __simd_log2_d2, 
-                       __simd_log2_f4, __simd_log_d2, __simd_log_f4, __simd_nextafter_d2, 
-                       __simd_nextafter_f4, __simd_orient_pd2, __simd_orient_pd3, 
-                       __simd_orient_pf2, __simd_orient_pf3, __simd_orient_vd2, __simd_orient_vd3, 
-                       __simd_orient_vf2, __simd_orient_vf3, __simd_pow_d2, __simd_pow_f4, 
-                       __simd_remainder_d2, __simd_remainder_f4, __simd_round_d2, 
+                       __simd_insphere_pd3, __simd_insphere_pf3, __simd_lgamma_d2, 
+                       __simd_lgamma_f4, __simd_log10_d2, __simd_log10_f4, __simd_log1p_d2, 
+                       __simd_log1p_f4, __simd_log2_d2, __simd_log2_f4, __simd_log_d2, 
+                       __simd_log_f4, __simd_nextafter_d2, __simd_nextafter_f4, __simd_orient_pd2, 
+                       __simd_orient_pd3, __simd_orient_pf2, __simd_orient_pf3, __simd_orient_vd2, 
+                       __simd_orient_vd3, __simd_orient_vf2, __simd_orient_vf3, __simd_pow_d2, 
+                       __simd_pow_f4, __simd_remainder_d2, __simd_remainder_f4, __simd_round_d2, 
                        __simd_round_f4, __simd_sin_d2, __simd_sin_f4, __simd_sinh_d2, 
                        __simd_sinh_f4, __simd_sinpi_d2, __simd_sinpi_f4, __simd_tan_d2, 
                        __simd_tan_f4, __simd_tanh_d2, __simd_tanh_f4, __simd_tanpi_d2, 

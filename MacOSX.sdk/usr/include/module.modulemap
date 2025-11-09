@@ -4,6 +4,13 @@ module AppleTextureEncoder [system] [extern_c] {
  export *
 }
 
+
+module Bootstrap [system] {
+ header "bootstrap.h"
+ export *
+}
+
+
 module Compression [system] [extern_c] {
  header "compression.h"
  export *
@@ -16,12 +23,7 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
  exclude header "_structs.h"
  exclude header "sys/_structs.h"
 
- module cdefs {
-  header "sys/cdefs.h"
-  header "sys/_symbol_aliasing.h"
-  header "sys/_posix_availability.h"
-  export *
- }
+ extern module cdefs "darwin_cdefs.modulemap"
 
  // C standard library
  module C {
@@ -238,9 +240,7 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
 
   module dirent {
    header "dirent.h"
-
    header "sys/dir.h"
-
    header "sys/dirent.h"
    export *
   }
@@ -321,36 +321,9 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    export *
   }
 
-  module net {
-   module dl {
-    header "net/if_dl.h"
-    export *
-   }
+  extern module net "net.modulemap"
 
-   module if {
-    header "net/if.h"
-    export *
-   }
-
-   module types {
-    header "net/if_types.h"
-    export *
-   }
-  }
-
-  module netinet {
-   module in {
-    header "netinet/in.h"
-    export *
-
-    exclude header "netinet6/in6.h"
-   }
-
-   module tcp {
-    header "netinet/tcp.h"
-    export *
-   }
-  }
+  extern module netinet "netinet.modulemap"
 
   module nl_types {
    header "nl_types.h"
@@ -518,22 +491,7 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
     export *
    }
 
-   module types {
-    header "sys/types.h"
-    header "sys/_types.h"
-
-    umbrella "sys/_types"
-
-    module * {
-     export *
-    }
-
-    export *
-
-
-
-
-   }
+   extern module types "darwin_posix_sys_types.modulemap"
 
    module uio {
     header "sys/uio.h"
@@ -696,8 +654,15 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   export *
  }
 
+ extern module bank "bank.modulemap"
+
  module ConditionalMacros {
   header "ConditionalMacros.h"
+  export *
+ }
+
+ module gethostuuid {
+  header "gethostuuid.h"
   export *
  }
 
@@ -721,461 +686,9 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   export *
  }
 
- module Mach {
-  header "mach/mach.h"
-  export *
+ extern module Mach "mach.modulemap"
 
-  module boolean {
-   header "mach/boolean.h"
-   export *
-  }
-
-  module bootstrap {
-   header "mach/bootstrap.h"
-   export *
-  }
-
-  module clock {
-   header "mach/clock.h"
-   export *
-  }
-
-  module clock_priv {
-   header "mach/clock_priv.h"
-   export *
-  }
-
-  module clock_reply {
-   header "mach/clock_reply.h"
-   export *
-  }
-
-  module clock_types {
-   header "mach/clock_types.h"
-   export *
-  }
-
-  module error {
-   header "mach/error.h"
-   export *
-  }
-
-  module exc {
-   header "mach/exc.h"
-   export *
-  }
-
-  module exception {
-   header "mach/exception.h"
-   export *
-  }
-
-  module exception_types {
-   header "mach/exception_types.h"
-   export *
-  }
-
-  module host_info {
-   header "mach/host_info.h"
-   export *
-  }
-
-  module host_notify {
-   header "mach/host_notify.h"
-   export *
-  }
-
-  module host_priv {
-   header "mach/host_priv.h"
-   export *
-  }
-
-  module host_reboot {
-   header "mach/host_reboot.h"
-   export *
-  }
-
-  module host_security {
-   header "mach/host_security.h"
-   export *
-  }
-
-  module host_special_ports {
-   header "mach/host_special_ports.h"
-   export *
-  }
-  module kern_return {
-   header "mach/kern_return.h"
-   export *
-  }
-
-  module kmod {
-   header "mach/kmod.h"
-   export *
-  }
-
-  module lock_set {
-   header "mach/lock_set.h"
-   export *
-  }
-
-  module mach_error {
-   header "mach/mach_error.h"
-   export *
-  }
-
-  module mach_host {
-   header "mach/mach_host.h"
-   export *
-  }
-
-  module mach_init {
-   header "mach/mach_init.h"
-   export *
-  }
-
-  module mach_interface {
-   header "mach/mach_interface.h"
-   export *
-  }
-
-  module mach_param {
-   header "mach/mach_param.h"
-   export *
-  }
-
-  module mach_port {
-   header "mach/mach_port.h"
-   export *
-  }
-
-  module mach_syscalls {
-   header "mach/mach_syscalls.h"
-   export *
-  }
-
-  module mach_time {
-   header "mach/mach_time.h"
-   export *
-  }
-
-  module mach_traps {
-   header "mach/mach_traps.h"
-   export *
-  }
-
-  module mach_types {
-   header "mach/mach_types.h"
-   export *
-  }
-
-
-  module mach_vm {
-   header "mach/mach_vm.h"
-   export *
-  }
-
-
-  module memory_object_types {
-   header "mach/memory_object_types.h"
-   export *
-  }
-
-  module message {
-   header "mach/message.h"
-   export *
-  }
-
-  module mig {
-   header "mach/mig.h"
-   export *
-  }
-
-  module mig_errors {
-   header "mach/mig_errors.h"
-   export *
-  }
-
-  module ndr {
-   header "mach/ndr.h"
-   export *
-  }
-
-  module notify {
-   header "mach/notify.h"
-   export *
-  }
-
-  module policy {
-   header "mach/policy.h"
-   export *
-  }
-
-  module port {
-   header "mach/port.h"
-   export *
-  }
-
-  module port_obj {
-   header "mach/port_obj.h"
-   export *
-  }
-
-  module processor {
-   header "mach/processor.h"
-   export *
-  }
-
-  module processor_info {
-   header "mach/processor_info.h"
-   export *
-  }
-
-  module processor_set {
-   header "mach/processor_set.h"
-   export *
-  }
-
-  module rpc {
-   header "mach/rpc.h"
-   export *
-  }
-
-
-  module sdt {
-   header "mach/sdt.h"
-   header "sys/sdt.h"
-   export *
-  }
-
-
-  module semaphore {
-   header "mach/semaphore.h"
-   export *
-  }
-
-
-  module shared_region {
-   header "mach/shared_region.h"
-   export *
-  }
-
-
-  module std_types {
-   header "mach/std_types.h"
-   export *
-  }
-
-  module sync {
-   header "mach/sync.h"
-   export *
-  }
-
-  module sync_policy {
-   header "mach/sync_policy.h"
-   export *
-  }
-
-  module task {
-   header "mach/task.h"
-   export *
-  }
-
-  module task_info {
-   header "mach/task_info.h"
-   export *
-  }
-
-  module task_policy {
-   header "mach/task_policy.h"
-   export *
-  }
-
-  module task_special_ports {
-   header "mach/task_special_ports.h"
-   export *
-  }
-
-  module thread_act {
-   header "mach/thread_act.h"
-   export *
-  }
-
-  module thread_info {
-   header "mach/thread_info.h"
-   export *
-  }
-
-  module thread_policy {
-   header "mach/thread_policy.h"
-   export *
-  }
-
-  module thread_special_ports {
-   header "mach/thread_special_ports.h"
-   export *
-  }
-
-  module thread_status {
-   header "mach/thread_status.h"
-   export *
-  }
-
-  module thread_switch {
-   header "mach/thread_switch.h"
-   export *
-  }
-
-  module time_value {
-   header "mach/time_value.h"
-   export *
-  }
-
-  module vm_attributes {
-   header "mach/vm_attributes.h"
-   export *
-  }
-
-  module vm_behavior {
-   header "mach/vm_behavior.h"
-   export *
-  }
-
-  module vm_inherit {
-   header "mach/vm_inherit.h"
-   export *
-  }
-
-  module vm_map {
-   header "mach/vm_map.h"
-   export *
-  }
-
-  module vm_param {
-   header "mach/vm_param.h"
-   export *
-  }
-
-  module vm_prot {
-   header "mach/vm_prot.h"
-   export *
-  }
-
-  module vm_purgable {
-   header "mach/vm_purgable.h"
-   export *
-  }
-
-  module vm_region {
-   header "mach/vm_region.h"
-   export *
-  }
-
-  module vm_statistics {
-   header "mach/vm_statistics.h"
-   export *
-  }
-
-  module vm_sync {
-   header "mach/vm_sync.h"
-   export *
-  }
-
-  module vm_task {
-   header "mach/vm_task.h"
-   export *
-  }
-
-  module vm_types {
-   header "mach/vm_types.h"
-   export *
-  }
-
-
-  exclude header "mach/shared_memory_server.h" // deprecated
-
-
-  module machine {
-   header "mach/machine.h"
-   export *
-
-   module _structs {
-    header "mach/machine/_structs.h"
-    export *
-   }
-
-   module boolean {
-    header "mach/machine/boolean.h"
-    export *
-   }
-
-   module exception {
-    header "mach/machine/exception.h"
-    export *
-   }
-
-   module kern_return {
-    header "mach/machine/kern_return.h"
-    export *
-   }
-
-   module processor_info {
-    header "mach/machine/processor_info.h"
-    export *
-   }
-
-   module rpc {
-    header "mach/machine/rpc.h"
-    export *
-   }
-
-
-   module sdt {
-    header "mach/machine/sdt.h"
-    export *
-   }
-
-   module sdt_isa {
-    header "mach/machine/sdt_isa.h"
-    export *
-   }
-
-
-   module thread_state {
-    header "mach/machine/thread_state.h"
-    export *
-   }
-
-   module thread_status {
-    header "mach/machine/thread_status.h"
-    export *
-   }
-
-   module vm_param {
-    header "mach/machine/vm_param.h"
-    export *
-   }
-
-   module vm_types {
-    header "mach/machine/vm_types.h"
-    export *
-   }
-  }
-
-  module debug {
-   umbrella "mach_debug"
-   module * { export * }
-   export *
-  }
- }
-
- module device {
-
-  header "device/device_port.h"
-  export *
-
-  exclude header "device/device_types.h"
- }
+ extern module device "device.modulemap"
 
  module libkern {
   export *
@@ -1191,6 +704,16 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   module OSByteOrder {
    header "libkern/OSByteOrder.h"
    header "libkern/_OSByteOrder.h"
+
+
+   exclude header "libkern/machine/OSByteOrder.h"
+
+
+   exclude header "libkern/i386/OSByteOrder.h"
+   exclude header "libkern/i386/_OSByteOrder.h"
+
+   exclude header "libkern/arm/OSByteOrder.h"
+
    export *
   }
  }
@@ -1198,6 +721,10 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
  module os {
   module base {
    header "os/base.h"
+   export *
+  }
+  module clock {
+   header "os/clock.h"
    export *
   }
   module lock {
@@ -1223,11 +750,7 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   }
  }
 
- module machine {
-  umbrella "machine"
-  export *
-  module * { export * }
- }
+ extern module machine "machine.modulemap"
 
  module secure {
   module _common {
@@ -1285,10 +808,67 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
  }
 
  module bsm {
+  module audit {
+   header "bsm/audit.h"
+   export *
+  }
 
-  umbrella header "bsm/libbsm.h"
-  export *
-  module * { export * }
+
+  module audit_domain {
+   header "bsm/audit_domain.h"
+   export *
+  }
+
+  module audit_errno {
+   header "bsm/audit_errno.h"
+   export *
+  }
+
+  module audit_fcntl {
+   header "bsm/audit_fcntl.h"
+   export *
+  }
+
+  module audit_filter {
+   header "bsm/audit_filter.h"
+   export *
+  }
+
+  explicit module audit_internal {
+   header "bsm/audit_internal.h"
+   export *
+  }
+
+  module audit_kevents {
+   header "bsm/audit_kevents.h"
+   export *
+  }
+
+  module audit_record {
+   header "bsm/audit_record.h"
+   export *
+  }
+
+  module audit_session {
+   header "bsm/audit_session.h"
+   export *
+  }
+
+  module audit_socket_type {
+   header "bsm/audit_socket_type.h"
+   export *
+  }
+
+  module audit_uevents {
+   header "bsm/audit_uevents.h"
+   export *
+  }
+
+  module libbsm {
+   header "bsm/libbsm.h"
+   export *
+  }
+
  }
 
 
@@ -1315,26 +895,11 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
  }
 
 
- module net {
+ extern module net "net.modulemap"
 
-  module if_media {
-   header "net/if_media.h"
-   export *
-  }
+ extern module netinet "netinet.modulemap"
 
-
-  module if_var {
-   header "net/if_var.h"
-   export *
-  }
-
-
-  module route {
-   header "net/route.h"
-   export *
-  }
-
- }
+ extern module netinet6 "netinet6.modulemap"
 
  module runetype {
   header "runetype.h"
@@ -1388,6 +953,11 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
 
   module clonefile {
    header "sys/clonefile.h"
+   export *
+  }
+
+  module commpage {
+   header "sys/commpage.h"
    export *
   }
 
@@ -1454,15 +1024,32 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    export *
   }
 
+
+  module ioctl_compat {
+   header "sys/ioctl_compat.h"
+   export *
+  }
+
+
   module kauth {
    header "sys/kauth.h"
    export *
   }
 
   module kdebug {
+
+   header "sys/kdebug.h"
+
    header "sys/kdebug_signpost.h"
    export *
   }
+
+
+  module kern_event {
+   header "sys/kern_event.h"
+   export *
+  }
+
 
   module lctx {
    header "sys/lctx.h"
@@ -1585,14 +1172,19 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    export *
   }
 
+
   module socketvar {
    header "sys/socketvar.h"
    export *
   }
 
-
   module sockio {
    header "sys/sockio.h"
+   export *
+  }
+
+  module stdio {
+   header "sys/stdio.h"
    export *
   }
 
@@ -1634,6 +1226,11 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    export *
   }
 
+  module ttychars {
+   header "sys/ttychars.h"
+   export *
+  }
+
 
   module ttycom {
    header "sys/ttycom.h"
@@ -1644,6 +1241,13 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    header "sys/ttydefaults.h"
    export *
   }
+
+
+  module ttydev {
+   header "sys/ttydev.h"
+   export *
+  }
+
 
   module ucontext {
    header "sys/ucontext.h"
@@ -1681,12 +1285,16 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    header "sys/vm.h"
    export *
   }
+
+
+  module vnode {
+   header "sys/vnode.h"
+   export *
+  }
+
  }
 
- module uuid {
-  header "uuid/uuid.h"
-  export *
- }
+ extern module uuid "uuid.modulemap"
 
  module architecture {
   header "architecture/byte_order.h"
@@ -1699,6 +1307,11 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   export *
  }
 
+
+ module paths {
+  header "paths.h"
+  export *
+ }
 
  module sysexits {
   header "sysexits.h"
@@ -1716,12 +1329,18 @@ module dnssd [system] [extern_c] {
  export *
 }
 
+
 module launch {
  header "launch.h"
  export *
 }
 
-module os [system] [extern_c] {
+
+module os [system] {
+ module atomic {
+  header "os/atomic.h"
+  export *
+ }
  module base {
   export Darwin.os.base
  }
@@ -1755,7 +1374,10 @@ module os [system] [extern_c] {
   header "os/signpost.h"
   export *
  }
- exclude header "os/trace.h"
+ explicit module trace {
+  header "os/trace.h"
+  export *
+ }
 }
 
 module os_object [system] [extern_c] {
@@ -1796,8 +1418,10 @@ module libkern [system] [extern_c] {
   export *
  }
 
- // note: header OSKextLib.h depends on CoreFoundation and is
- // therefore not part of this module.
+ module OSKextLib {
+  header "libkern/OSKextLib.h"
+  export *
+ }
 
 }
 
@@ -1864,12 +1488,15 @@ module krb5 [system] [extern_c] {
 }
 
 
-module kcdata [system] [extern_c] {
-    header "kern/kcdata.h"
-    export *
+extern module kcdata "kcdata.modulemap"
+
+module notify [system] [extern_c] {
+ header "notify.h"
+ export *
 }
 
 module zlib [system] [extern_c] {
+ header "zconf.h"
  header "zlib.h"
  export *
  link "z"
@@ -1885,8 +1512,5 @@ module SQLite3 [system] [extern_c] {
  export *
 }
 
-module xcselect [system] [extern_c] {
- header "xcselect.h"
- export *
- link "xcselect"
-}
+
+extern module xcselect "xcselect.modulemap"

@@ -9,8 +9,8 @@
 
 #import <CloudKit/CKDefines.h>
 
-#import <CloudKit/CKContainer.h>
 #import <CloudKit/CKAsset.h>
+#import <CloudKit/CKContainer.h>
 #import <CloudKit/CKDatabase.h>
 #import <CloudKit/CKError.h>
 #import <CloudKit/CKLocationSortDescriptor.h>
@@ -29,25 +29,26 @@
 #import <CloudKit/CKUserIdentity.h>
 #import <CloudKit/CKUserIdentityLookupInfo.h>
 
-#import <CloudKit/CKOperationGroup.h>
-#import <CloudKit/CKOperation.h>
-#import <CloudKit/CKDatabaseOperation.h>
-#import <CloudKit/CKModifyRecordsOperation.h>
-#import <CloudKit/CKFetchRecordsOperation.h>
-#import <CloudKit/CKFetchRecordChangesOperation.h>
-#import <CloudKit/CKFetchRecordZoneChangesOperation.h>
-#import <CloudKit/CKQueryOperation.h>
-#import <CloudKit/CKModifyBadgeOperation.h>
-#import <CloudKit/CKFetchNotificationChangesOperation.h>
-#import <CloudKit/CKMarkNotificationsReadOperation.h>
-#import <CloudKit/CKFetchSubscriptionsOperation.h>
-#import <CloudKit/CKModifySubscriptionsOperation.h>
-#import <CloudKit/CKModifyRecordZonesOperation.h>
-#import <CloudKit/CKFetchRecordZonesOperation.h>
-#import <CloudKit/CKFetchWebAuthTokenOperation.h>
-#import <CloudKit/CKDiscoverUserIdentitiesOperation.h>
-#import <CloudKit/CKDiscoverAllUserIdentitiesOperation.h>
-#import <CloudKit/CKFetchShareParticipantsOperation.h>
+#pragma mark - Operations
 #import <CloudKit/CKAcceptSharesOperation.h>
-#import <CloudKit/CKFetchShareMetadataOperation.h>
+#import <CloudKit/CKDatabaseOperation.h>
+#import <CloudKit/CKDiscoverAllUserIdentitiesOperation.h>
+#import <CloudKit/CKDiscoverUserIdentitiesOperation.h>
 #import <CloudKit/CKFetchDatabaseChangesOperation.h>
+#import <CloudKit/CKFetchNotificationChangesOperation.h>
+#import <CloudKit/CKFetchRecordChangesOperation.h>
+#import <CloudKit/CKFetchRecordsOperation.h>
+#import <CloudKit/CKFetchRecordZoneChangesOperation.h>
+#import <CloudKit/CKFetchRecordZonesOperation.h>
+#import <CloudKit/CKFetchShareMetadataOperation.h>
+#import <CloudKit/CKFetchShareParticipantsOperation.h>
+#import <CloudKit/CKFetchSubscriptionsOperation.h>
+#import <CloudKit/CKFetchWebAuthTokenOperation.h>
+#import <CloudKit/CKMarkNotificationsReadOperation.h>
+#import <CloudKit/CKModifyBadgeOperation.h>
+#import <CloudKit/CKModifyRecordsOperation.h>
+#import <CloudKit/CKModifyRecordZonesOperation.h>
+#import <CloudKit/CKModifySubscriptionsOperation.h>
+#import <CloudKit/CKOperation.h>
+#import <CloudKit/CKOperationGroup.h>
+#import <CloudKit/CKQueryOperation.h>

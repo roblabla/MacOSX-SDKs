@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           19D3ABA0-D327-37AB-92F7-BB87FC58AB2B
+    value:           9C5854F3-BC10-3594-8F6D-33913B3352CD
   - target:          x86_64-maccatalyst
-    value:           19D3ABA0-D327-37AB-92F7-BB87FC58AB2B
+    value:           9C5854F3-BC10-3594-8F6D-33913B3352CD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           450A07D7-4C32-35F7-B9F9-DDAE39B09EA6
+    value:           A0E2B467-BECE-36B7-8072-291E302297D5
   - target:          arm64e-maccatalyst
-    value:           450A07D7-4C32-35F7-B9F9-DDAE39B09EA6
+    value:           A0E2B467-BECE-36B7-8072-291E302297D5
 install-name:    '/usr/lib/libxar.1.dylib'
 current-version: 1.3
 exports:
@@ -54,15 +54,16 @@ exports:
                        _xar_hash_update, _xar_header_get, _xar_heap_to_archive, _xar_io_get_file_offset, 
                        _xar_io_get_heap_base_offset, _xar_io_get_length, _xar_io_get_rsize, 
                        _xar_io_get_toc_checksum_length, _xar_io_get_toc_checksum_length_for_type, 
-                       _xar_iter_free, _xar_iter_new, _xar_linuxattr_archive, _xar_linuxattr_extract, 
-                       _xar_lzma_fromheap_done, _xar_lzma_fromheap_in, _xar_lzma_toheap_done, 
-                       _xar_lzma_toheap_in, _xar_makedev, _xar_ntoh64, _xar_open, 
-                       _xar_open_digest_verify, _xar_opt_get, _xar_opt_set, _xar_opt_unset, 
-                       _xar_optimal_io_size_at_path, _xar_path_issane, _xar_path_nextcomponent, 
-                       _xar_pread_fd, _xar_prop_create, _xar_prop_find, _xar_prop_first, 
-                       _xar_prop_free, _xar_prop_get, _xar_prop_getkey, _xar_prop_getvalue, 
-                       _xar_prop_new, _xar_prop_next, _xar_prop_pfirst, _xar_prop_pget, 
-                       _xar_prop_pnext, _xar_prop_pset, _xar_prop_punset, _xar_prop_replicate_r, 
+                       _xar_is_safe_filename, _xar_iter_free, _xar_iter_new, _xar_linuxattr_archive, 
+                       _xar_linuxattr_extract, _xar_lzma_fromheap_done, _xar_lzma_fromheap_in, 
+                       _xar_lzma_toheap_done, _xar_lzma_toheap_in, _xar_makedev, 
+                       _xar_ntoh64, _xar_open, _xar_open_digest_verify, _xar_opt_get, 
+                       _xar_opt_set, _xar_opt_unset, _xar_optimal_io_size_at_path, 
+                       _xar_path_issane, _xar_path_nextcomponent, _xar_pread_fd, 
+                       _xar_prop_create, _xar_prop_find, _xar_prop_first, _xar_prop_free, 
+                       _xar_prop_get, _xar_prop_getkey, _xar_prop_getvalue, _xar_prop_new, 
+                       _xar_prop_next, _xar_prop_pfirst, _xar_prop_pget, _xar_prop_pnext, 
+                       _xar_prop_pset, _xar_prop_punset, _xar_prop_replicate_r, _xar_prop_serializable, 
                        _xar_prop_serialize, _xar_prop_set, _xar_prop_setkey, _xar_prop_setvalue, 
                        _xar_prop_unserialize, _xar_prop_unset, _xar_pwrite_fd, _xar_read_fd, 
                        _xar_register_errhandler, _xar_safe_dirname, _xar_script_done, 

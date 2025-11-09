@@ -6,8 +6,8 @@
 //
 
 #import <CloudKit/CKDatabaseOperation.h>
-#import <CloudKit/CKServerChangeToken.h>
 #import <CloudKit/CKRecord.h>
+#import <CloudKit/CKServerChangeToken.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

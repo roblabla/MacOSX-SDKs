@@ -1,29 +1,24 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0D6C4FE0-B978-3055-95EC-7DEEAD1DD29D
+    value:           664CAD36-22E6-3B77-AD85-2E66F449171D
   - target:          x86_64-maccatalyst
-    value:           0D6C4FE0-B978-3055-95EC-7DEEAD1DD29D
+    value:           664CAD36-22E6-3B77-AD85-2E66F449171D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C224081F-C53A-3DDB-B47D-B911AB478B33
+    value:           05477FB5-D31C-3731-8D15-7B1F07B7E4F2
   - target:          arm64e-maccatalyst
-    value:           C224081F-C53A-3DDB-B47D-B911AB478B33
+    value:           05477FB5-D31C-3731-8D15-7B1F07B7E4F2
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL'
 reexported-libraries:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib', 
                        '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]
     symbols:         [ _CGLAreContextsShared, _CGLBackDispatch, _CGLChoosePixelFormat, 
                        _CGLClearDrawable, _CGLCopyContext, _CGLCreateContext, _CGLCreatePBuffer, 
                        _CGLDescribePBuffer, _CGLDescribePixelFormat, _CGLDescribeRenderer, 
@@ -50,25 +45,21 @@ exports:
                        _glcPluginCount, _glcPluginDisconnect, _glcRecordError ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C5EBD591-EBDF-3CC5-A7C9-DD4D32B71FEA
+    value:           F83EE954-05B0-339E-8524-1EAA28C4B547
   - target:          x86_64-maccatalyst
-    value:           C5EBD591-EBDF-3CC5-A7C9-DD4D32B71FEA
+    value:           F83EE954-05B0-339E-8524-1EAA28C4B547
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AD0B2722-97B1-3FAC-93AE-EDB41082DA80
+    value:           98F54FB3-BCF9-35DA-A365-0FFA3416C342
   - target:          arm64e-maccatalyst
-    value:           AD0B2722-97B1-3FAC-93AE-EDB41082DA80
+    value:           98F54FB3-BCF9-35DA-A365-0FFA3416C342
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]
     symbols:         [ _CGLGetCurrentContext, _CGLSetCurrentContext, _glAccum, _glActiveShaderProgram, 
                        _glActiveStencilFaceEXT, _glActiveTexture, _glActiveTextureARB, 
                        _glAlphaFunc, _glAreTexturesResident, _glArrayElement, _glAttachObjectARB, 
@@ -456,25 +447,21 @@ exports:
                        _glWindowPos3sv, _glWindowPos3svARB, _gll_noop ]
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FB6A251D-47FE-3056-8288-8CB4487C17A5
+    value:           4FC6233F-DE95-334C-9A78-1D863B81B9BD
   - target:          x86_64-maccatalyst
-    value:           FB6A251D-47FE-3056-8288-8CB4487C17A5
+    value:           4FC6233F-DE95-334C-9A78-1D863B81B9BD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           45CDEF77-0045-3796-A9BE-009CAEC5C7E2
+    value:           30D4BA46-FBA0-39E2-8C0D-22D66FCD5888
   - target:          arm64e-maccatalyst
-    value:           45CDEF77-0045-3796-A9BE-009CAEC5C7E2
+    value:           30D4BA46-FBA0-39E2-8C0D-22D66FCD5888
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]
     symbols:         [ _gluBeginCurve, _gluBeginPolygon, _gluBeginSurface, _gluBeginTrim, 
                        _gluBuild1DMipmapLevels, _gluBuild1DMipmapLevelsCTX, _gluBuild1DMipmaps, 
                        _gluBuild1DMipmapsCTX, _gluBuild2DMipmapLevels, _gluBuild2DMipmapLevelsCTX, 

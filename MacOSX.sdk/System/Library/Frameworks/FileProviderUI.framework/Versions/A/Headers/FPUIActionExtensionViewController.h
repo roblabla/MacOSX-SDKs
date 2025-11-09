@@ -24,6 +24,7 @@ typedef NSString *NSFileProviderItemIdentifier NS_EXTENSIBLE_STRING_ENUM;
 NS_ASSUME_NONNULL_BEGIN
 
 FPUI_AVAILABLE(ios(11.0), macos(10.15))
+API_UNAVAILABLE(macCatalyst)
 #if TARGET_OS_OSX
 @interface FPUIActionExtensionViewController : NSViewController
 #else

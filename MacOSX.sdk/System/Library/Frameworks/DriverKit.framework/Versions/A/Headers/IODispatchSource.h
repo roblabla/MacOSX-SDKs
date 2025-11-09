@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from IODispatchSource.iig */
+/* iig(DriverKit-191) generated from IODispatchSource.iig */
 
 /* IODispatchSource.iig:1-36 */
 /*
@@ -215,13 +215,19 @@ class IODispatchSource : public OSObject, public IODispatchSourceInterface
     friend class IODispatchSourceMetaClass;
 
 public:
+#ifdef IODispatchSource_DECLARE_IVARS
+IODispatchSource_DECLARE_IVARS
+#else /* IODispatchSource_DECLARE_IVARS */
     union
     {
         IODispatchSource_IVars * ivars;
         IODispatchSource_LocalIVars * lvars;
     };
+#endif /* IODispatchSource_DECLARE_IVARS */
+    static OSMetaClass *
+    sGetMetaClass() { return gIODispatchSourceMetaClass; };
     virtual const OSMetaClass *
-    getMetaClass() const APPLE_KEXT_OVERRIDE { return OSTypeID(IODispatchSource); };
+    getMetaClass() const APPLE_KEXT_OVERRIDE { return gIODispatchSourceMetaClass; };
 
     using super = OSObject;
 

@@ -359,7 +359,7 @@ typedef CALLBACK_API_C( void , CFNetServiceBrowserClientCallBack )(CFNetServiceB
  *  
  */
 CFN_EXPORT CFTypeID 
-CFNetServiceGetTypeID(void) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceGetTypeID(void) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -373,7 +373,7 @@ CFNetServiceGetTypeID(void) CF_AVAILABLE(10_2, 2_0);
  *  
  */
 CFN_EXPORT CFTypeID 
-CFNetServiceMonitorGetTypeID(void) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceMonitorGetTypeID(void) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -387,7 +387,7 @@ CFNetServiceMonitorGetTypeID(void) CF_AVAILABLE(10_4, 2_0);
  *  
  */
 CFN_EXPORT CFTypeID 
-CFNetServiceBrowserGetTypeID(void) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceBrowserGetTypeID(void) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -437,7 +437,7 @@ CFNetServiceBrowserGetTypeID(void) CF_AVAILABLE(10_2, 2_0);
  *  
  */
 CFN_EXPORT CFNetServiceRef 
-CFNetServiceCreate(CFAllocatorRef __nullable alloc, CFStringRef domain, CFStringRef serviceType, CFStringRef name, SInt32 port) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceCreate(CFAllocatorRef __nullable alloc, CFStringRef domain, CFStringRef serviceType, CFStringRef name, SInt32 port) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -469,7 +469,7 @@ CFNetServiceCreate(CFAllocatorRef __nullable alloc, CFStringRef domain, CFString
  *  
  */
 CFN_EXPORT CFNetServiceRef 
-CFNetServiceCreateCopy(CFAllocatorRef __nullable alloc, CFNetServiceRef service) CF_AVAILABLE(10_3, 2_0);
+CFNetServiceCreateCopy(CFAllocatorRef __nullable alloc, CFNetServiceRef service) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -496,7 +496,7 @@ CFNetServiceCreateCopy(CFAllocatorRef __nullable alloc, CFNetServiceRef service)
  *  
  */
 CFN_EXPORT CFStringRef 
-CFNetServiceGetDomain(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceGetDomain(CFNetServiceRef theService) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -523,7 +523,7 @@ CFNetServiceGetDomain(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
  *  
  */
 CFN_EXPORT CFStringRef 
-CFNetServiceGetType(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceGetType(CFNetServiceRef theService) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -550,7 +550,7 @@ CFNetServiceGetType(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
  *  
  */
 CFN_EXPORT CFStringRef 
-CFNetServiceGetName(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceGetName(CFNetServiceRef theService) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -593,7 +593,7 @@ CFNetServiceGetName(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceRegisterWithOptions(CFNetServiceRef theService, CFOptionFlags options, CFStreamError * __nullable error) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceRegisterWithOptions(CFNetServiceRef theService, CFOptionFlags options, CFStreamError * __nullable error) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -635,7 +635,7 @@ CFNetServiceRegisterWithOptions(CFNetServiceRef theService, CFOptionFlags option
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceResolveWithTimeout(CFNetServiceRef theService, CFTimeInterval timeout, CFStreamError * __nullable error) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceResolveWithTimeout(CFNetServiceRef theService, CFTimeInterval timeout, CFStreamError * __nullable error) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -655,7 +655,7 @@ CFNetServiceResolveWithTimeout(CFNetServiceRef theService, CFTimeInterval timeou
  *  
  */
 CFN_EXPORT void 
-CFNetServiceCancel(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceCancel(CFNetServiceRef theService) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -684,7 +684,7 @@ CFNetServiceCancel(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
  *  
  */
 CFN_EXPORT __nullable CFStringRef
-CFNetServiceGetTargetHost(CFNetServiceRef theService) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceGetTargetHost(CFNetServiceRef theService) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -710,7 +710,7 @@ CFNetServiceGetTargetHost(CFNetServiceRef theService) CF_AVAILABLE(10_4, 2_0);
  *  
  */
 CFN_EXPORT SInt32 
-CFNetServiceGetPortNumber(CFNetServiceRef theService) CF_AVAILABLE(10_5, 2_0);
+CFNetServiceGetPortNumber(CFNetServiceRef theService) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.5, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -740,7 +740,7 @@ CFNetServiceGetPortNumber(CFNetServiceRef theService) CF_AVAILABLE(10_5, 2_0);
  *  
  */
 CFN_EXPORT __nullable CFArrayRef
-CFNetServiceGetAddressing(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceGetAddressing(CFNetServiceRef theService) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -770,7 +770,7 @@ CFNetServiceGetAddressing(CFNetServiceRef theService) CF_AVAILABLE(10_2, 2_0);
  *  
  */
 CFN_EXPORT __nullable CFDataRef
-CFNetServiceGetTXTData(CFNetServiceRef theService) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceGetTXTData(CFNetServiceRef theService) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -797,7 +797,7 @@ CFNetServiceGetTXTData(CFNetServiceRef theService) CF_AVAILABLE(10_4, 2_0);
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceSetTXTData(CFNetServiceRef theService, CFDataRef txtRecord) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceSetTXTData(CFNetServiceRef theService, CFDataRef txtRecord) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -830,7 +830,7 @@ CFNetServiceSetTXTData(CFNetServiceRef theService, CFDataRef txtRecord) CF_AVAIL
  *  
  */
 CFN_EXPORT __nullable CFDictionaryRef
-CFNetServiceCreateDictionaryWithTXTData(CFAllocatorRef __nullable alloc, CFDataRef txtRecord) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceCreateDictionaryWithTXTData(CFAllocatorRef __nullable alloc, CFDataRef txtRecord) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -871,7 +871,7 @@ CFNetServiceCreateDictionaryWithTXTData(CFAllocatorRef __nullable alloc, CFDataR
  *  
  */
 CFN_EXPORT __nullable CFDataRef
-CFNetServiceCreateTXTDataWithDictionary(CFAllocatorRef __nullable alloc, CFDictionaryRef keyValuePairs) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceCreateTXTDataWithDictionary(CFAllocatorRef __nullable alloc, CFDictionaryRef keyValuePairs) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -915,7 +915,7 @@ CFNetServiceCreateTXTDataWithDictionary(CFAllocatorRef __nullable alloc, CFDicti
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceSetClient(CFNetServiceRef theService, CFNetServiceClientCallBack __nullable clientCB, CFNetServiceClientContext * __nullable clientContext) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceSetClient(CFNetServiceRef theService, CFNetServiceClientCallBack __nullable clientCB, CFNetServiceClientContext * __nullable clientContext) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -943,7 +943,7 @@ CFNetServiceSetClient(CFNetServiceRef theService, CFNetServiceClientCallBack __n
  *  
  */
 CFN_EXPORT void 
-CFNetServiceScheduleWithRunLoop(CFNetServiceRef theService, CFRunLoopRef runLoop, CFStringRef runLoopMode) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceScheduleWithRunLoop(CFNetServiceRef theService, CFRunLoopRef runLoop, CFStringRef runLoopMode) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -972,7 +972,7 @@ CFNetServiceScheduleWithRunLoop(CFNetServiceRef theService, CFRunLoopRef runLoop
  *  
  */
 CFN_EXPORT void 
-CFNetServiceUnscheduleFromRunLoop(CFNetServiceRef theService, CFRunLoopRef runLoop, CFStringRef runLoopMode) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceUnscheduleFromRunLoop(CFNetServiceRef theService, CFRunLoopRef runLoop, CFStringRef runLoopMode) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -1014,7 +1014,7 @@ CFNetServiceMonitorCreate(
   CFAllocatorRef __nullable          alloc,
   CFNetServiceRef                    theService,
   CFNetServiceMonitorClientCallBack  clientCB,
-  CFNetServiceClientContext *        clientContext) CF_AVAILABLE(10_4, 2_0);
+  CFNetServiceClientContext *        clientContext) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -1036,7 +1036,7 @@ CFNetServiceMonitorCreate(
  *  
  */
 CFN_EXPORT void 
-CFNetServiceMonitorInvalidate(CFNetServiceMonitorRef monitor) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceMonitorInvalidate(CFNetServiceMonitorRef monitor) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -1075,7 +1075,7 @@ CFNetServiceMonitorInvalidate(CFNetServiceMonitorRef monitor) CF_AVAILABLE(10_4,
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceMonitorStart(CFNetServiceMonitorRef monitor, CFNetServiceMonitorType recordType, CFStreamError * __nullable error) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceMonitorStart(CFNetServiceMonitorRef monitor, CFNetServiceMonitorType recordType, CFStreamError * __nullable error) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -1103,7 +1103,7 @@ CFNetServiceMonitorStart(CFNetServiceMonitorRef monitor, CFNetServiceMonitorType
  *  
  */
 CFN_EXPORT void 
-CFNetServiceMonitorStop(CFNetServiceMonitorRef monitor, CFStreamError * __nullable error) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceMonitorStop(CFNetServiceMonitorRef monitor, CFStreamError * __nullable error) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -1134,7 +1134,7 @@ CFNetServiceMonitorStop(CFNetServiceMonitorRef monitor, CFStreamError * __nullab
  *  
  */
 CFN_EXPORT void 
-CFNetServiceMonitorScheduleWithRunLoop(CFNetServiceMonitorRef monitor, CFRunLoopRef runLoop, CFStringRef runLoopMode) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceMonitorScheduleWithRunLoop(CFNetServiceMonitorRef monitor, CFRunLoopRef runLoop, CFStringRef runLoopMode) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -1162,7 +1162,7 @@ CFNetServiceMonitorScheduleWithRunLoop(CFNetServiceMonitorRef monitor, CFRunLoop
  *  
  */
 CFN_EXPORT void 
-CFNetServiceMonitorUnscheduleFromRunLoop(CFNetServiceMonitorRef monitor, CFRunLoopRef runLoop, CFStringRef runLoopMode) CF_AVAILABLE(10_4, 2_0);
+CFNetServiceMonitorUnscheduleFromRunLoop(CFNetServiceMonitorRef monitor, CFRunLoopRef runLoop, CFStringRef runLoopMode) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.4, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -1196,7 +1196,7 @@ CFNetServiceMonitorUnscheduleFromRunLoop(CFNetServiceMonitorRef monitor, CFRunLo
  *  
  */
 CFN_EXPORT CFNetServiceBrowserRef 
-CFNetServiceBrowserCreate(CFAllocatorRef __nullable alloc, CFNetServiceBrowserClientCallBack clientCB, CFNetServiceClientContext *clientContext) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceBrowserCreate(CFAllocatorRef __nullable alloc, CFNetServiceBrowserClientCallBack clientCB, CFNetServiceClientContext *clientContext) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -1215,7 +1215,7 @@ CFNetServiceBrowserCreate(CFAllocatorRef __nullable alloc, CFNetServiceBrowserCl
  *  
  */
 CFN_EXPORT void 
-CFNetServiceBrowserInvalidate(CFNetServiceBrowserRef browser) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceBrowserInvalidate(CFNetServiceBrowserRef browser) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -1256,7 +1256,7 @@ CFNetServiceBrowserInvalidate(CFNetServiceBrowserRef browser) CF_AVAILABLE(10_2,
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceBrowserSearchForDomains(CFNetServiceBrowserRef browser, Boolean registrationDomains, CFStreamError * __nullable error) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceBrowserSearchForDomains(CFNetServiceBrowserRef browser, Boolean registrationDomains, CFStreamError * __nullable error) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -1299,7 +1299,7 @@ CFNetServiceBrowserSearchForDomains(CFNetServiceBrowserRef browser, Boolean regi
  *  
  */
 CFN_EXPORT Boolean 
-CFNetServiceBrowserSearchForServices(CFNetServiceBrowserRef browser, CFStringRef domain, CFStringRef serviceType, CFStreamError * __nullable error) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceBrowserSearchForServices(CFNetServiceBrowserRef browser, CFStringRef domain, CFStringRef serviceType, CFStreamError * __nullable error) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -1329,7 +1329,7 @@ CFNetServiceBrowserSearchForServices(CFNetServiceBrowserRef browser, CFStringRef
  *  
  */
 CFN_EXPORT void 
-CFNetServiceBrowserStopSearch(CFNetServiceBrowserRef browser, CFStreamError * __nullable error) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceBrowserStopSearch(CFNetServiceBrowserRef browser, CFStreamError * __nullable error) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -1360,7 +1360,7 @@ CFNetServiceBrowserStopSearch(CFNetServiceBrowserRef browser, CFStreamError * __
  *  
  */
 CFN_EXPORT void 
-CFNetServiceBrowserScheduleWithRunLoop(CFNetServiceBrowserRef browser, CFRunLoopRef runLoop, CFStringRef runLoopMode) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceBrowserScheduleWithRunLoop(CFNetServiceBrowserRef browser, CFRunLoopRef runLoop, CFStringRef runLoopMode) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 
@@ -1388,7 +1388,7 @@ CFNetServiceBrowserScheduleWithRunLoop(CFNetServiceBrowserRef browser, CFRunLoop
  *  
  */
 CFN_EXPORT void 
-CFNetServiceBrowserUnscheduleFromRunLoop(CFNetServiceBrowserRef browser, CFRunLoopRef runLoop, CFStringRef runLoopMode) CF_AVAILABLE(10_2, 2_0);
+CFNetServiceBrowserUnscheduleFromRunLoop(CFNetServiceBrowserRef browser, CFRunLoopRef runLoop, CFStringRef runLoopMode) API_DEPRECATED("Use nw_browser_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 #ifdef __MACH__

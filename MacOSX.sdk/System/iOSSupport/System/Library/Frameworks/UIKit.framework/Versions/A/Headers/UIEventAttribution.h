@@ -12,7 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos, tvos) @interface UIEventAttribution : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIEventAttribution : NSObject <NSCopying>
 
 /// An identifier that is associated with the source of the attribution. For example, you may choose to use this as a campaign identifier to measure the effectiveness of different advertisement campaigns.
 ///

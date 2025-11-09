@@ -1,7 +1,7 @@
 /*
     NSTableView.h
     Application Kit
-    Copyright (c) 1995-2019, Apple Inc.
+    Copyright (c) 1995-2021, Apple Inc.
     All rights reserved.
 */
 
@@ -32,7 +32,7 @@ typedef NS_ENUM(NSUInteger, NSTableViewColumnAutoresizingStyle) {
      */
     NSTableViewNoColumnAutoresizing = 0,
     
-    /* Autoresize all columns by distributing equal shares of space simultaeously
+    /* Autoresize all columns by distributing equal shares of space simultaneously
      */
     NSTableViewUniformColumnAutoresizingStyle,
     
@@ -75,11 +75,14 @@ typedef NS_ENUM(NSInteger, NSTableViewRowSizeStyle) {
 } API_AVAILABLE(macos(10.7));
 
 typedef NS_ENUM(NSInteger, NSTableViewStyle) {
-    // Automatically infers the effectiveStyle from the table view hierarchy.
+    /* Automatically infers the effectiveStyle from the table view hierarchy.
+     */
     NSTableViewStyleAutomatic,
-    // Edge-to-edge style with standard content padding at the ends of each row. This content padding is constant and independent of intercellSpacing.
+    /* Edge-to-edge style with standard content padding at the ends of each row. This content padding is constant and independent of intercellSpacing.
+     */
     NSTableViewStyleFullWidth,
-    // Inset style with rounded corners selection
+    /* Inset style with rounded corners selection
+     */
     NSTableViewStyleInset,
     /* The source list style of NSTableView. Setting this style will have the side effect of setting the background color to "source list".
      Additionally in NSOutlineView, the following properties may change to get the standard "source list" look: indentationPerLevel, rowHeight and intercellSpacing. After setting the style it is possible to change any of the other properties as required.
@@ -87,7 +90,8 @@ typedef NS_ENUM(NSInteger, NSTableViewStyle) {
      This replaces NSTableViewSelectionHighlightStyleSourceList which is to be deprecated.
      */
     NSTableViewStyleSourceList,
-    // A plain style. No insets, padding or any other kind of decoration applied to the row or its background. The cells are equally spaced in the row using intercellSpacing.width.
+    /* A plain style. No insets, padding or any other kind of decoration applied to the row or its background. The cells are equally spaced in the row using intercellSpacing.width.
+     */
     NSTableViewStylePlain
 } API_AVAILABLE(macos(11.0));
 
@@ -100,8 +104,9 @@ typedef NS_ENUM(NSInteger, NSTableViewSelectionHighlightStyle) {
      */
     NSTableViewSelectionHighlightStyleRegular = 0,
     
-    // To be deprecated. See NSTableViewStyleSourceList.
-    NSTableViewSelectionHighlightStyleSourceList API_DEPRECATED("Set the NSTableView.style property to NSTableViewStyleSourceList instead.", macos(10.5, API_TO_BE_DEPRECATED)) = 1,
+    /* Deprecated. See NSTableViewStyleSourceList.
+     */
+    NSTableViewSelectionHighlightStyleSourceList API_DEPRECATED("Set the NSTableView.style property to NSTableViewStyleSourceList instead.", macos(10.5, 12.0)) = 1,
 };
 
 
@@ -150,7 +155,7 @@ typedef NSString * NSTableViewAutosaveName NS_SWIFT_BRIDGED_TYPEDEF;
  */
 @property (nullable, strong) NSTableHeaderView *headerView;
 
-/* Get and set the cornerView. The cornerView is the view that appears directly to the right of the headerView above the vertical NSScroller. The scroller must be present for the cornerView to be shown. Calling -setCornerView: may have the side effect of tiling the enclosingScrollView to accomodate the size change. The default value is an internal class that properly fills in the corner.
+/* Get and set the cornerView. The cornerView is the view that appears directly to the right of the headerView above the vertical NSScroller. The scroller must be present for the cornerView to be shown. Calling -setCornerView: may have the side effect of tiling the enclosingScrollView to accommodate the size change. The default value is an internal class that properly fills in the corner.
  */
 @property (nullable, strong) NSView *cornerView;
 
@@ -212,7 +217,7 @@ typedef NSString * NSTableViewAutosaveName NS_SWIFT_BRIDGED_TYPEDEF;
  */
 @property (readonly) NSInteger numberOfColumns;
 
-/* Returns the numberOfRows. It may call to the dataSource to aquire the count. numberOfRows will return 0 if there are no visible columns.
+/* Returns the numberOfRows. It may call to the dataSource to acquire the count. numberOfRows will return 0 if there are no visible columns.
  */
 @property (readonly) NSInteger numberOfRows;
 
@@ -367,10 +372,12 @@ typedef NSString * NSTableViewAutosaveName NS_SWIFT_BRIDGED_TYPEDEF;
 
 @property BOOL allowsTypeSelect API_AVAILABLE(macos(10.5));
 
-// The table view style. Defaults to NSTableViewStyleAutomatic
+/* The table view style. Defaults to NSTableViewStyleAutomatic
+ */
 @property NSTableViewStyle style API_AVAILABLE(macos(11.0));
 
-// The effective style when style is NSTableViewStyleAutomatic. Otherwise, it returns the same value as style.
+/* The effective style when style is NSTableViewStyleAutomatic. Otherwise, it returns the same value as style.
+ */
 @property (readonly) NSTableViewStyle effectiveStyle API_AVAILABLE(macos(11.0));
 
 /* Gets and sets the current selection highlight style. The default value is NSTableViewSelectionHighlightStyleRegular.
@@ -563,7 +570,6 @@ typedef NS_OPTIONS(NSUInteger, NSTableViewAnimationOptions) {
  */
 @property BOOL usesAutomaticRowHeights API_AVAILABLE(macos(10.13));
 
-
 @end
 
 #pragma mark -
@@ -640,7 +646,7 @@ typedef NS_OPTIONS(NSUInteger, NSTableViewAnimationOptions) {
 */
 - (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row;
 
-/* Optional - Return a set of new indexes to select when the user changes the selection with the keyboard or mouse. If implemented, this method will be called instead of tableView:shouldSelectRow:. This method may be called multiple times with one new index added to the existing selection to find out if a particular index can be selected when the user is extending the selection with the keyboard or mouse. Note that 'proposedSelectionIndexes' will contain the entire newly suggested selection, and you can return the exsiting selection to avoid changing the selection.
+/* Optional - Return a set of new indexes to select when the user changes the selection with the keyboard or mouse. If implemented, this method will be called instead of tableView:shouldSelectRow:. This method may be called multiple times with one new index added to the existing selection to find out if a particular index can be selected when the user is extending the selection with the keyboard or mouse. Note that 'proposedSelectionIndexes' will contain the entire newly suggested selection, and you can return the existing selection to avoid changing the selection.
 */
 - (NSIndexSet *)tableView:(NSTableView *)tableView selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes API_AVAILABLE(macos(10.5));
 
@@ -651,7 +657,7 @@ typedef NS_OPTIONS(NSUInteger, NSTableViewAnimationOptions) {
 - (void)tableView:(NSTableView *)tableView didDragTableColumn:(NSTableColumn *)tableColumn;
 
 /* Optional - Variable Row Heights
-    Implement this method to support a table with varying row heights. The height returned by this method should not include intercell spacing. Returning a height of -1 will default to the rowHeight of the tableView for normal rows, and the system defined height for group rows. Performance Considerations: For large tables in particular, you should make sure that this method is efficient. NSTableView may cache the values this method returns, but this should NOT be depended on, as all values may not be cached. To signal a row height change, call -noteHeightOfRowsWithIndexesChanged:. For a given row, the same row height should always be returned until -noteHeightOfRowsWithIndexesChanged: is called, otherwise unpredicable results will happen. NSTableView automatically invalidates its entire row height cache in -reloadData, and -noteNumberOfRowsChanged.
+    Implement this method to support a table with varying row heights. The height returned by this method should not include intercell spacing. Returning a height of -1 will default to the rowHeight of the tableView for normal rows, and the system defined height for group rows. Performance Considerations: For large tables in particular, you should make sure that this method is efficient. NSTableView may cache the values this method returns, but this should NOT be depended on, as all values may not be cached. To signal a row height change, call -noteHeightOfRowsWithIndexesChanged:. For a given row, the same row height should always be returned until -noteHeightOfRowsWithIndexesChanged: is called, otherwise unpredictable results will happen. NSTableView automatically invalidates its entire row height cache in -reloadData, and -noteNumberOfRowsChanged.
 */
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row;
 
@@ -676,7 +682,7 @@ typedef NS_OPTIONS(NSUInteger, NSTableViewAnimationOptions) {
 - (BOOL)tableView:(NSTableView *)tableView isGroupRow:(NSInteger)row API_AVAILABLE(macos(10.5));
 
 /* Optional - Autosizing table columns
- Implement this method if you want to control how wide a column is made when the user double clicks on the resize divider. By default, NSTableView iterates every row in the table, accesses a cell via preparedCellAtRow:column:, and requests the "cellSize" to find the appropriate largest width to use. For large row counts, a monte carlo simulation is done instead of interating every row. For performance and accurate results, it is recommended that this method is implemented when using large tables.
+ Implement this method if you want to control how wide a column is made when the user double clicks on the resize divider. By default, NSTableView iterates every row in the table, accesses a cell via preparedCellAtRow:column:, and requests the "cellSize" to find the appropriate largest width to use. For large row counts, a monte carlo simulation is done instead of iterating every row. For performance and accurate results, it is recommended that this method is implemented when using large tables.
  */
 - (CGFloat)tableView:(NSTableView *)tableView sizeToFitWidthOfColumn:(NSInteger)column API_AVAILABLE(macos(10.6));
 

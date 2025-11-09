@@ -3,20 +3,21 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4BD6BAD1-6E72-3801-A5D2-EECE4480883C
+    value:           6EB4A9C6-9C5F-3365-AD46-23991BE012DD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           38CC252C-61F4-3898-9C9B-5782103AA7A2
+    value:           86978ACF-19BC-3D56-8D5C-8C86BF331A28
 install-name:    '/System/Library/PrivateFrameworks/CalendarNotification.framework/Versions/A/CalendarNotification'
 current-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CALNDefaultCalendarDirectory, _CALNStringFromNotificationPresentationOptions, 
                        _EKEngineLog, _EKEngineLogNobo, _EKEngineLogReminders, _EKEngineLogTimer ]
-    objc-classes:    [ CALNBundle, CALNCUIKIconProvider, CALNGEORouteHypothesizer, 
-                       CALNGEORouteHypothesizerProvider, CALNInMemoryNotificationStorage, 
-                       CALNInMemoryTimeToLeaveRefreshStorage, CALNInMemoryTriggeredEventNotificationDataStorage, 
+    objc-classes:    [ CALNBundle, CALNCUIKIconProvider, CALNDefaultIconIdentifierVersionProvider, 
+                       CALNGEORouteHypothesizer, CALNGEORouteHypothesizerProvider, 
+                       CALNInMemoryNotificationStorage, CALNInMemoryTimeToLeaveRefreshStorage, 
+                       CALNInMemoryTriggeredEventNotificationDataStorage, CALNLegacyNotificationIconUpdater, 
                        CALNLogSubsystem, CALNMutableNotificationContent, CALNMutableNotificationRecord, 
                        CALNMutableNotificationSound, CALNMutableTriggeredEventNotificationData, 
                        CALNNotificationContent, CALNNotificationFilter, CALNNotificationIconCache, 

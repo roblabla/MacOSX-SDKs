@@ -30,7 +30,8 @@ typedef NS_ENUM(NSInteger, UIDatePickerStyle) {
     UIDatePickerStyleInline API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos),
 } API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(tvos, watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) @interface UIDatePicker : UIControl <NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIDatePicker : UIControl <NSCoding>
 @property (nonatomic) UIDatePickerMode datePickerMode; // default is UIDatePickerModeDateAndTime
 
 @property (nullable, nonatomic, strong) NSLocale   *locale;   // default is [NSLocale currentLocale]. setting nil returns to default
@@ -51,6 +52,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) @interface UIDatePick
 
 /// The style that the date picker is using for its layout. This property always returns a concrete style (never automatic).
 @property (nonatomic, readonly, assign) UIDatePickerStyle datePickerStyle API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(tvos, watchos);
+
+/// When this property is YES, @c date will always round to the @c minuteInterval, and
+/// only emit dates that are aligned with the @c minuteInterval. Otherwise, any changes
+/// to @c date will ignore the @c minuteInterval property. Default is @c YES.
+@property (nonatomic) BOOL roundsToMinuteInterval API_AVAILABLE(ios(15.0));
 
 @end
 

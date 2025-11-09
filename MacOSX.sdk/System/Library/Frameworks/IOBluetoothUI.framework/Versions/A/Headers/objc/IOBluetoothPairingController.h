@@ -4,10 +4,10 @@
 */
  
 #import <Cocoa/Cocoa.h>
-#import <AvailabilityMacros.h>
 #import <IOBluetooth/objc/IOBluetoothDevice.h>
 #import <IOBluetooth/objc/IOBluetoothSDPServiceRecord.h>
 #import <IOBluetoothUI/IOBluetoothUIUserLib.h>
+#import <AvailabilityMacros.h>
 
 API_UNAVAILABLE_BEGIN(ios)
 //--------------------------------------------------------------------------------------------------------------------------
@@ -224,5 +224,4 @@ API_UNAVAILABLE_BEGIN(ios)
 - (NSString *)getPrompt;
 
 @end
-
 API_UNAVAILABLE_END

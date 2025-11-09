@@ -42,8 +42,7 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @property (readonly, nonatomic) BOOL usesBiases;
 
 /*! @property   batchFirst
-    @abstract   if YES, the input and output will be in shape [batch, feature, 1, time steps], else it will be in shape [time steps, batch, feature].
-                Note that [time steps, batch, feature] will be the more efficient implementation. Default is YES.
+    @abstract   LSTM only supports batchFirst=YES. This means the input and output will have shape [batch size, time steps, feature]. Default is YES.
  */
 @property (readonly, nonatomic) BOOL batchFirst;
 
@@ -120,8 +119,7 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
  @param      hiddenSize The number of features in the hidden state
  @param      layerCount Number of recurrent layers
  @param      usesBiases  If NO, the layer does not use bias weights.  Default: YES
- @param      batchFirst if YES, the input and output will be in shape [batch, feature, 1, time steps], else it will be in shape [time steps, batch, feature].
- Note that [time steps, batch, feature] will be the more efficient implementation. Default is YES.
+ @param      batchFirst LSTM only supports batchFirst=YES. This means the input and output will have shape [batch size, time steps, feature]. Default is YES.
  @param      isBidirectional  If YES, becomes a bi-directional LSTM.  Default: NO
  @param      returnsSequences if YES return output for all sequences else return output only for the last sequences. Default: YES
  @param      dropout  If non-zero, introduces a dropout layer on the outputs of each LSTM layer except the last layer

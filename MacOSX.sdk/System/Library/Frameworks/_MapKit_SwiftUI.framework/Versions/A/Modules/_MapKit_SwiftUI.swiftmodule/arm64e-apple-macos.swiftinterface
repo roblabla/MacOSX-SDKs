@@ -1,9 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target arm64e-apple-macos11.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name _MapKit_SwiftUI
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target arm64e-apple-macos12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name _MapKit_SwiftUI
 @_exported import MapKit
 import Swift
 import SwiftUI
+import _Concurrency
 @available(iOS 14.0, tvOS 14.0, macOS 11.0, watchOS 7.0, *)
 public protocol MapAnnotationProtocol {
   var _annotationData: _MapKit_SwiftUI._MapAnnotationData { get }
@@ -15,7 +16,10 @@ public struct MapAnnotation<Content> : _MapKit_SwiftUI.MapAnnotationProtocol whe
     get
   }
 }
-@available(iOS 14.0, tvOS 14.0, macOS 11.0, watchOS 7.0, *)
+@available(iOS, introduced: 14.0, deprecated: 100000, message: "Use MapMarker")
+@available(tvOS, introduced: 14.0, deprecated: 100000, message: "Use MapMarker")
+@available(macOS, introduced: 11.0, deprecated: 100000, message: "Use MapMarker")
+@available(watchOS, introduced: 7.0, deprecated: 100000, message: "Use MapMarker")
 public struct MapPin : _MapKit_SwiftUI.MapAnnotationProtocol {
   public init(coordinate: CoreLocation.CLLocationCoordinate2D, tint: SwiftUI.Color? = nil)
   public var _annotationData: _MapKit_SwiftUI._MapAnnotationData {
@@ -38,10 +42,10 @@ public struct Map<Content> : SwiftUI.View where Content : SwiftUI.View {
   public init<Items, Annotation>(coordinateRegion: SwiftUI.Binding<MapKit.MKCoordinateRegion>, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, showsUserLocation: Swift.Bool = false, userTrackingMode: SwiftUI.Binding<_MapKit_SwiftUI.MapUserTrackingMode>? = nil, annotationItems: Items, annotationContent: @escaping (Items.Element) -> Annotation) where Content == _MapKit_SwiftUI._DefaultAnnotatedMapContent<Items>, Items : Swift.RandomAccessCollection, Annotation : _MapKit_SwiftUI.MapAnnotationProtocol, Items.Element : Swift.Identifiable
   public init(mapRect: SwiftUI.Binding<MapKit.MKMapRect>, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, showsUserLocation: Swift.Bool = false, userTrackingMode: SwiftUI.Binding<_MapKit_SwiftUI.MapUserTrackingMode>? = nil) where Content == _MapKit_SwiftUI._DefaultMapContent
   public init(coordinateRegion: SwiftUI.Binding<MapKit.MKCoordinateRegion>, interactionModes: _MapKit_SwiftUI.MapInteractionModes = .all, showsUserLocation: Swift.Bool = false, userTrackingMode: SwiftUI.Binding<_MapKit_SwiftUI.MapUserTrackingMode>? = nil) where Content == _MapKit_SwiftUI._DefaultMapContent
-  public var body: some SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
     get
   }
-  public typealias Body = @_opaqueReturnTypeOf("$s15_MapKit_SwiftUI0A0V4bodyQrvp", 0) 🦸<Content>
+  public typealias Body = @_opaqueReturnTypeOf("$s15_MapKit_SwiftUI0A0V4bodyQrvp", 0) __<Content>
 }
 @available(iOS 14.0, tvOS 14.0, macOS 11.0, watchOS 7.0, *)
 public enum MapUserTrackingMode {
@@ -66,17 +70,17 @@ public struct MapInteractionModes : Swift.OptionSet {
 }
 @available(iOS 14.0, tvOS 14.0, macOS 11.0, watchOS 7.0, *)
 public struct _DefaultAnnotatedMapContent<Items> : SwiftUI.View where Items : Swift.RandomAccessCollection, Items.Element : Swift.Identifiable {
-  public var body: some SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
     get
   }
-  public typealias Body = @_opaqueReturnTypeOf("$s15_MapKit_SwiftUI017_DefaultAnnotatedA7ContentV4bodyQrvp", 0) 🦸<Items>
+  public typealias Body = @_opaqueReturnTypeOf("$s15_MapKit_SwiftUI017_DefaultAnnotatedA7ContentV4bodyQrvp", 0) __<Items>
 }
 @available(iOS 14.0, tvOS 14.0, macOS 11.0, watchOS 7.0, *)
 public struct _DefaultMapContent : SwiftUI.View {
-  public var body: some SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
     get
   }
-  public typealias Body = @_opaqueReturnTypeOf("$s15_MapKit_SwiftUI08_DefaultA7ContentV4bodyQrvp", 0) 🦸
+  public typealias Body = @_opaqueReturnTypeOf("$s15_MapKit_SwiftUI08_DefaultA7ContentV4bodyQrvp", 0) __
 }
 @available(iOS 14.0, tvOS 14.0, macOS 11.0, watchOS 7.0, *)
 extension _MapKit_SwiftUI.MapUserTrackingMode : Swift.Equatable {}

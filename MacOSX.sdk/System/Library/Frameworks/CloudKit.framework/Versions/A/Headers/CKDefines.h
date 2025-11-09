@@ -29,4 +29,14 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 #endif
 
+#ifndef CK_SWIFT_AVAILABILITY
+    #if defined(__swift__) && !defined(CK_BUILDING_CK)
+        #define CK_SWIFT_AVAILABILITY(...) API_AVAILABLE(__VA_ARGS__)
+        #define CK_SWIFT_DEPRECATED(...) API_DEPRECATED(__VA_ARGS__)
+    #else
+        #define CK_SWIFT_AVAILABILITY(...)
+        #define CK_SWIFT_DEPRECATED(...)
+    #endif
+#endif
+
 NS_ASSUME_NONNULL_END

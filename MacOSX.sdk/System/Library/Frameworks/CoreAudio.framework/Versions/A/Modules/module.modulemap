@@ -4,6 +4,8 @@ framework module CoreAudio [extern_c]
 
 	exclude header "AudioDriverPlugIn.h"
 	exclude header "CoreAudioTypes.h"
+	exclude header "AudioHardwareTapping.h"
+	exclude header "CATapDescription.h"
 
 	explicit module AudioServerPlugIn
 	{

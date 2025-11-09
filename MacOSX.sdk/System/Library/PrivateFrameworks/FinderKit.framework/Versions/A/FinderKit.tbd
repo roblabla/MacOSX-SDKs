@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3D1839C2-B01F-369B-801C-983A208E555D
+    value:           8E7ECB3A-3DC0-33FD-A32F-4007E7196F0C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           975702F3-92E5-3DC8-B3B5-1F0E48563A50
+    value:           DA3619BE-BDAB-3743-90CB-28EEFCDA00CA
 install-name:    '/System/Library/PrivateFrameworks/FinderKit.framework/Versions/A/FinderKit'
 current-version: 0
 exports:

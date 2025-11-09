@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           19B4EF0A-42BD-3D72-93B5-1E41E84AFAF3
+    value:           749D07FB-2FCE-3359-B1C2-729DE72FE861
   - target:          x86_64-maccatalyst
-    value:           19B4EF0A-42BD-3D72-93B5-1E41E84AFAF3
+    value:           749D07FB-2FCE-3359-B1C2-729DE72FE861
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E5763D29-8CA5-34AA-83F3-A1713F300EA5
+    value:           562B7A07-7489-3F3F-8E06-C0E0807E7873
   - target:          arm64e-maccatalyst
-    value:           E5763D29-8CA5-34AA-83F3-A1713F300EA5
+    value:           562B7A07-7489-3F3F-8E06-C0E0807E7873
 install-name:    '/System/Library/PrivateFrameworks/kperf.framework/Versions/A/kperf'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -58,6 +58,7 @@ exports:
                        _kperf_sample_set, _kperf_signpost_action_get, _kperf_signpost_action_set, 
                        _kperf_tick_frequency, _kperf_ticks_to_ns, _kperf_timer_action_get, 
                        _kperf_timer_action_set, _kperf_timer_count_get, _kperf_timer_count_set, 
+                       _kperf_timer_lightweight_pet_get, _kperf_timer_lightweight_pet_set, 
                        _kperf_timer_period_get, _kperf_timer_period_set, _kperf_timer_pet_get, 
                        _kperf_timer_pet_set, _kperf_typefilter_clear, _kperf_typefilter_disable_class, 
                        _kperf_typefilter_disable_subclass, _kperf_typefilter_enable_class, 

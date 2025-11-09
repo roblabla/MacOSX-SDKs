@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           44F630B4-833A-3784-8C9C-AD4690685222
+    value:           6698842C-FB84-3860-9A38-7E81984F8045
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D54C7CCF-B42C-3DA9-BA33-FF821D8B48CC
+    value:           25C014B7-BE8D-3A03-9EAE-0AD835DC63EF
 install-name:    '/System/Library/PrivateFrameworks/CoreCDPInternal.framework/Versions/A/CoreCDPInternal'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -32,19 +32,19 @@ exports:
                        _kSecureTermsIdentifier, _kSetupBiometricsFaceIDIdentifier, 
                        _kSetupBiometricsFlowSkipIdentifier, _kSetupBiometricsIdentifier, 
                        _kSetupBiometricsTouchIDIdentifier, _kSetupBiometricsURL ]
-    objc-classes:    [ CDPAuthenticationHelper, CDPCABackupRecoveryReporter, CDPCAEscrowReporter, 
-                       CDPCALocalSecretReporter, CDPCAReporter, CDPDAccount, CDPDAccountRecoveryValidator, 
-                       CDPDAuthObserver, CDPDAuthProxyImpl, CDPDBackupErrorProviderImpl, 
-                       CDPDBackupFMIPResultsParser, CDPDBackupIDMSErrorProvider, 
-                       CDPDBackupIDMSResultsParser, CDPDBackupInfoRecoveryFlowController, 
-                       CDPDCircleController, CDPDCircleJoinResult, CDPDCircleStateObserver, 
-                       CDPDClientHandler, CDPDDeviceSecretValidator, CDPDFollowUpController, 
-                       CDPDFollowUpFactory, CDPDKeychainSync, CDPDLocalDeviceSecretProxyImpl, 
-                       CDPDLocalSecretController, CDPDLocalSecretFollowUpProviderImpl, 
-                       CDPDLockAssertion, CDPDNetworkObserver, CDPDNetworkObserverClient, 
-                       CDPDOctagonTrustProxyImpl, CDPDPCSController, CDPDRecoveryFlowContext, 
-                       CDPDRecoveryFlowController, CDPDRecoveryKeyController, CDPDRecoveryKeyValidatorImpl, 
-                       CDPDRecoveryOption, CDPDRecoveryValidatedJoinFlowController, 
+    objc-classes:    [ CDPAuthenticationHelper, CDPBroadcaster, CDPCABackupRecoveryReporter, 
+                       CDPCAEscrowReporter, CDPCALocalSecretReporter, CDPCAReporter, 
+                       CDPDAccount, CDPDAccountRecoveryValidator, CDPDAuthObserver, 
+                       CDPDAuthProxyImpl, CDPDBackupErrorProviderImpl, CDPDBackupFMIPResultsParser, 
+                       CDPDBackupIDMSErrorProvider, CDPDBackupIDMSResultsParser, 
+                       CDPDBackupInfoRecoveryFlowController, CDPDCircleController, 
+                       CDPDCircleJoinResult, CDPDCircleStateObserver, CDPDClientHandler, 
+                       CDPDDeviceSecretValidator, CDPDFollowUpController, CDPDFollowUpFactory, 
+                       CDPDKeychainSync, CDPDLocalDeviceSecretProxyImpl, CDPDLocalSecretController, 
+                       CDPDLocalSecretFollowUpProviderImpl, CDPDLockAssertion, CDPDNetworkObserver, 
+                       CDPDNetworkObserverClient, CDPDOctagonTrustProxyImpl, CDPDPCSController, 
+                       CDPDRecoveryFlowContext, CDPDRecoveryFlowController, CDPDRecoveryKeyController, 
+                       CDPDRecoveryKeyValidatorImpl, CDPDRecoveryOption, CDPDRecoveryValidatedJoinFlowController, 
                        CDPDRemoteDeviceSecretValidator, CDPDRemoteSecretValidationResult, 
                        CDPDSecureBackupConfiguration, CDPDSecureBackupContext, CDPDSecureBackupController, 
                        CDPDSecureBackupProxyImpl, CDPDSecureChannelContext, CDPDSecureChannelController, 

@@ -3,25 +3,34 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           095A88EA-C73B-36AB-BF73-667EF03DACAE
+    value:           39FDE60C-65C9-32A7-900B-607024F7E384
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           420CD452-6B62-3817-9713-F00213AE027C
+    value:           86B92AA5-A9BB-3997-8751-10C5D4015F24
 install-name:    '/System/Library/PrivateFrameworks/ANEServices.framework/Versions/A/ANEServices'
 exports:
-  - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _H11ANEDeviceClose, _H11ANEDeviceOpen, _H11ANEDeviceUpdateParameters, 
                        _H11ANEProgramCancelAllRequests, _H11ANEProgramCompleteAllRequests, 
                        _H11ANEProgramCreate, _H11ANEProgramCreateNewInstance, _H11ANEProgramDestroy, 
                        _H11ANEProgramPrepare, _H11ANEProgramProcessRequest, _H11ANEProgramProcessRequest2, 
                        _H11ANEProgramProcessRequestDirect, _H11ANEProgramStop, _H11InitializePlatformServices, 
-                       __Z17ANECDumpAnalyticsPvm, __Z21ANECGenerateAnalyticsPK21ANEStatsRawDataStructPK25ANEStatsPerfCounterStructPvS5_m, 
+                       __Z17ANECDumpAnalyticsPKvm, __Z19ANECCreateAnalyticsiPK21ANEStatsRawDataStructPK25ANEStatsPerfCounterStructPKhjPhm, 
+                       __Z30ANECComputeAnalyticsBufferSizeiPKhjmm, __ZN12ANEDebugInfo14DebugInfoInMem12EncodeStringERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
+                       __ZN12ANEDebugInfo14DebugInfoInMem5ClearEv, __ZN12ANEDebugInfo14DebugInfoInMemC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_RKNS_22DebugInfoSerializeModeE, 
+                       __ZN12ANEDebugInfo14DebugInfoInMemC1Ev, __ZN12ANEDebugInfo14DebugInfoInMemC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_RKNS_22DebugInfoSerializeModeE, 
+                       __ZN12ANEDebugInfo14DebugInfoInMemC2Ev, __ZN12ANEDebugInfo15DebugInfoParser10DebugPrintEv, 
+                       __ZN12ANEDebugInfo15DebugInfoParser10ParseGroupEv, __ZN12ANEDebugInfo15DebugInfoParser10ParseLayerERNS_14DebugInfoInMem5GroupE, 
+                       __ZN12ANEDebugInfo15DebugInfoParser11MatchRecordEv, __ZN12ANEDebugInfo15DebugInfoParser14ParseHwConfigsEv, 
+                       __ZN12ANEDebugInfo15DebugInfoParser14ParseOperationERNS_14DebugInfoInMem5LayerE, 
+                       __ZN12ANEDebugInfo15DebugInfoParser14ParsePerfStatsERNS_14DebugInfoInMem2TDE, 
+                       __ZN12ANEDebugInfo15DebugInfoParser16ParseStringTableEv, __ZN12ANEDebugInfo15DebugInfoParser18GetCompilationUnitERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEES9_, 
+                       __ZN12ANEDebugInfo15DebugInfoParser18GetCompilationUnitEm, 
+                       __ZN12ANEDebugInfo15DebugInfoParser5ParseEv, __ZN12ANEDebugInfo15DebugInfoParser7ParseCUEv, 
+                       __ZN12ANEDebugInfo15DebugInfoParser7ParseTDERNS_14DebugInfoInMem5GroupE, 
+                       __ZN12ANEDebugInfo15DebugInfoParser8MatchTagENS_3TAGE, __ZN12ANEDebugInfo15DebugInfoParser9ParseProcEv, 
+                       __ZN12ANEDebugInfo15DebugInfoParserC1EPKhj, __ZN12ANEDebugInfo15DebugInfoParserC2EPKhj, 
                        __ZN13H11ANEMetrics10StartTimerEv, __ZN13H11ANEMetrics12ClearSamplesEv, 
                        __ZN13H11ANEMetrics17GetMetricsSummaryEP21_H11ANEMetricsSummary, 
                        __ZN13H11ANEMetrics19PrintMetricsSummaryEv, __ZN13H11ANEMetrics9AddSampleEyy, 
@@ -50,8 +59,10 @@ exports:
                        __ZN6H11ANE12H11ANEDevice21ANE_CancelAllRequestsEv, __ZN6H11ANE12H11ANEDevice21DisableDeviceMessagesEv, 
                        __ZN6H11ANE12H11ANEDevice22ANE_ProgramSendRequestEP30H11ANEProgramRequestArgsStructj, 
                        __ZN6H11ANE12H11ANEDevice22ANE_SetFirmwareBootArgEjj, __ZN6H11ANE12H11ANEDevice22ANE_SetPowerManagementEj, 
-                       __ZN6H11ANE12H11ANEDevice25ANE_GetDriverLoggingFlagsEPj, __ZN6H11ANE12H11ANEDevice25ANE_ProgramCreateInstanceEP29H11ANEProgramCreateArgsStruct, 
-                       __ZN6H11ANE12H11ANEDevice25ANE_SetDriverLoggingFlagsEj, __ZN6H11ANE12H11ANEDevice27ANE_SetThrottlingPercentageEj, 
+                       __ZN6H11ANE12H11ANEDevice23ANE_AddPersistentClientEv, __ZN6H11ANE12H11ANEDevice25ANE_GetDriverLoggingFlagsEPj, 
+                       __ZN6H11ANE12H11ANEDevice25ANE_ProgramCreateInstanceEP29H11ANEProgramCreateArgsStruct, 
+                       __ZN6H11ANE12H11ANEDevice25ANE_SetDriverLoggingFlagsEj, __ZN6H11ANE12H11ANEDevice26ANE_RemovePersistentClientEv, 
+                       __ZN6H11ANE12H11ANEDevice27ANE_SetThrottlingPercentageEj, 
                        __ZN6H11ANE12H11ANEDevice29ANE_FlushInactiveDARTMappingsEv, 
                        __ZN6H11ANE12H11ANEDevice30ANE_CreateClientLoggingSessionEj, 
                        __ZN6H11ANE12H11ANEDevice31ANE_ShowSharedMemoryAllocationsEv, 
@@ -70,7 +81,7 @@ exports:
                        __ZN6H11ANE19H11ANEFrameReceiver15stopNoDataTimerEv, __ZN6H11ANE19H11ANEFrameReceiver16startNoDataTimerEv, 
                        __ZN6H11ANE19H11ANEFrameReceiver17tickleNoDataTimerEv, __ZN6H11ANE19H11ANEFrameReceiver18processStatsBufferEPNS_26H11ANEFrameReceiverRequestEPS0_, 
                        __ZN6H11ANE19H11ANEFrameReceiver18setupFrameReceiverEv, __ZN6H11ANE19H11ANEFrameReceiver19completeAllRequestsEv, 
-                       __ZN6H11ANE19H11ANEFrameReceiver21ProgramProcessRequestERNS_26H11ANEFrameReceiverRequestE, 
+                       __ZN6H11ANE19H11ANEFrameReceiver21ProgramProcessRequestERNS_26H11ANEFrameReceiverRequestEP24H11ANESharedEventsStruct, 
                        __ZN6H11ANE19H11ANEFrameReceiver23registerMessageCallbackEPFvjjjPvS1_S1_ES1_, 
                        __ZN6H11ANE19H11ANEFrameReceiver24addIODispatcherToRunLoopEv, 
                        __ZN6H11ANE19H11ANEFrameReceiver28registerFrameReceiveCallbackEPFvPvPNS_26H11ANEFrameReceiverRequestEES1_, 
@@ -89,13 +100,13 @@ exports:
                        __ZN6H11ANE23H11ANEThreadReadySyncer15signalAndUnlockEv, __ZN6H11ANE23H11ANEThreadReadySyncer4lockEv, 
                        __ZN6H11ANE23H11ANEThreadReadySyncer4waitEv, __ZN6H11ANE23H11ANEThreadReadySyncerC1Ev, 
                        __ZN6H11ANE23H11ANEThreadReadySyncerC2Ev, __ZN6H11ANE23H11ANEThreadReadySyncerD1Ev, 
-                       __ZN6H11ANE23H11ANEThreadReadySyncerD2Ev, __ZN6H11ANE24H11ANECFLocalMessagePort16SetDispatchQueueEP16dispatch_queue_s, 
+                       __ZN6H11ANE23H11ANEThreadReadySyncerD2Ev, __ZN6H11ANE24H11ANECFLocalMessagePort16SetDispatchQueueEPU28objcproto17OS_dispatch_queue8NSObject, 
                        __ZN6H11ANE24H11ANECFLocalMessagePortC1EPK10__CFStringPFPK8__CFDataP15__CFMessagePortiS6_PvEPFvS8_S9_ES9_, 
                        __ZN6H11ANE24H11ANECFLocalMessagePortC2EPK10__CFStringPFPK8__CFDataP15__CFMessagePortiS6_PvEPFvS8_S9_ES9_, 
                        __ZN6H11ANE24H11ANECFLocalMessagePortD0Ev, __ZN6H11ANE24H11ANECFLocalMessagePortD1Ev, 
                        __ZN6H11ANE24H11ANECFLocalMessagePortD2Ev, __ZN6H11ANE24H11ANECreateCVBufferPoolEjjjj17H11ANEFrameFormatlbjjjbj, 
                        __ZN6H11ANE25CreateH11ANEFrameReceiverEPNS_39H11ANEFrameReceiverCreationParamsStructE, 
-                       __ZN6H11ANE25H11ANECFRemoteMessagePort16SetDispatchQueueEP16dispatch_queue_s, 
+                       __ZN6H11ANE25H11ANECFRemoteMessagePort16SetDispatchQueueEPU28objcproto17OS_dispatch_queue8NSObject, 
                        __ZN6H11ANE25H11ANECFRemoteMessagePortC1EPK10__CFStringPFvP15__CFMessagePortPvE, 
                        __ZN6H11ANE25H11ANECFRemoteMessagePortC2EPK10__CFStringPFvP15__CFMessagePortPvE, 
                        __ZN6H11ANE25H11ANECFRemoteMessagePortD0Ev, __ZN6H11ANE25H11ANECFRemoteMessagePortD1Ev, 
@@ -128,7 +139,10 @@ exports:
                        __ZN6H11ANE29H11ANEFrameReceiverBufferPoolD1Ev, __ZN6H11ANE29H11ANEFrameReceiverBufferPoolD2Ev, 
                        __ZN6H11ANE33CreateH11ANEFirmwareWorkProcessorEPNS_47H11ANEFirmwareWorkProcessorCreationParamsStructE, 
                        __ZN6H11ANE34DestroyH11ANEFirmwareWorkProcessorEPNS_27H11ANEFirmwareWorkProcessorE, 
-                       __ZNK6H11ANE24H11ANECFLocalMessagePort16GetRunLoopSourceEv, 
+                       __ZNK12ANEDebugInfo14DebugInfoInMem4DumpERNSt3__113basic_ostreamIcNS1_11char_traitsIcEEEE, 
+                       __ZNK12ANEDebugInfo14DebugInfoInMem7GetModeEv, __ZNK12ANEDebugInfo14DebugInfoInMem9GetStringEj, 
+                       __ZNK12ANEDebugInfo15DebugInfoParser10CheckTokenENS_4ATTRE, 
+                       __ZNK12ANEDebugInfo15DebugInfoParser5PrintEv, __ZNK6H11ANE24H11ANECFLocalMessagePort16GetRunLoopSourceEv, 
                        __ZNK6H11ANE25H11ANECFRemoteMessagePort16GetRunLoopSourceEv, 
                        __ZTIN6H11ANE24H11ANECFLocalMessagePortE, __ZTIN6H11ANE25H11ANECFRemoteMessagePortE, 
                        __ZTSN6H11ANE24H11ANECFLocalMessagePortE, __ZTSN6H11ANE25H11ANECFRemoteMessagePortE, 

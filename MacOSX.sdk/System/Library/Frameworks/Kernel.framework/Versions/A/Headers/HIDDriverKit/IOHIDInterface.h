@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from IOHIDInterface.iig */
+/* iig(DriverKit-191) generated from IOHIDInterface.iig */
 
 /* IOHIDInterface.iig:1-46 */
 /*
@@ -298,6 +298,7 @@ public:
 
 /* generated class IOHIDInterface IOHIDInterface.iig:47-285 */
 
+#define IOHIDInterface_SendDebugBuffer_ID            0x9cd93af0504ec45dULL
 #define IOHIDInterface_GetElementValues_ID            0xc4a89d6fd6fd065cULL
 #define IOHIDInterface_SetElementValues_ID            0xf964ed7a299eb3a5ULL
 #define IOHIDInterface_GetSupportedCookies_ID            0xec13cf336ecceaccULL
@@ -307,6 +308,9 @@ public:
 #define IOHIDInterface_Close_ID            0x9bcf029fa80af1b5ULL
 #define IOHIDInterface_SetReport_ID            0xca9744a1af98f7dfULL
 #define IOHIDInterface_GetReport_ID            0xa8ccbd83dbbed4cdULL
+
+#define IOHIDInterface_SendDebugBuffer_Args \
+        IOMemoryDescriptor * debug
 
 #define IOHIDInterface_GetElementValues_Args \
         uint32_t count, \
@@ -362,6 +366,11 @@ public:\
     _Dispatch(IOHIDInterface * self, const IORPC rpc);\
 \
     kern_return_t\
+    SendDebugBuffer(\
+        IOMemoryDescriptor * debug,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
     GetElementValues(\
         uint32_t count,\
         IOMemoryDescriptor * elementValues,\
@@ -375,7 +384,7 @@ public:\
 \
     kern_return_t\
     GetSupportedCookies(\
-        IOBufferMemoryDescriptor ** cookies,\
+        __attribute__((os_returns_retained)) IOBufferMemoryDescriptor ** cookies,\
         OSDispatchMethod supermethod = NULL);\
 \
     bool\
@@ -414,16 +423,16 @@ public:\
     SetReport(\
         IOMemoryDescriptor * report,\
         IOHIDReportType reportType,\
-        uint32_t reportID,\
-        IOOptionBits options,\
+        uint32_t reportID = 0,\
+        IOOptionBits options = 0,\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
     GetReport(\
         IOMemoryDescriptor * report,\
         IOHIDReportType reportType,\
-        uint32_t reportID,\
-        IOOptionBits options,\
+        uint32_t reportID = 0,\
+        IOOptionBits options = 0,\
         OSDispatchMethod supermethod = NULL);\
 \
 \
@@ -433,6 +442,12 @@ protected:\
 \
 public:\
     /* _Invoke methods */\
+\
+    typedef kern_return_t (*SendDebugBuffer_Handler)(OSMetaClassBase * target, IOHIDInterface_SendDebugBuffer_Args);\
+    static kern_return_t\
+    SendDebugBuffer_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        SendDebugBuffer_Handler func);\
 \
     typedef kern_return_t (*GetElementValues_Handler)(OSMetaClassBase * target, IOHIDInterface_GetElementValues_Args);\
     static kern_return_t\
@@ -500,6 +515,9 @@ public:\
 \
 protected:\
     /* _Impl methods */\
+\
+    kern_return_t\
+    SendDebugBuffer_Impl(IOHIDInterface_SendDebugBuffer_Args);\
 \
     kern_return_t\
     GetElementValues_Impl(IOHIDInterface_GetElementValues_Args);\
@@ -607,6 +625,26 @@ public:
     commitElements(OSArray * elements,
         IOHIDElementCommitDirection direction) = 0;
 
+    kern_return_t
+    getElementValues_Call(OSArray * elements)  { return getElementValues(elements); };\
+
+    kern_return_t
+    setElementValues_Call(OSArray * elements)  { return setElementValues(elements); };\
+
+    void
+    processReport_Call(uint64_t timestamp,
+        uint8_t * report,
+        uint32_t reportLength,
+        IOHIDReportType type,
+        uint32_t reportID)  { return processReport(timestamp, report, reportLength, type, reportID); };\
+
+    OSArray *
+    getElements_Call()  { return getElements(); };\
+
+    kern_return_t
+    commitElements_Call(OSArray * elements,
+        IOHIDElementCommitDirection direction)  { return commitElements(elements, direction); };\
+
 };
 
 struct IOHIDInterface_IVars;
@@ -620,12 +658,21 @@ class IOHIDInterface : public IOService, public IOHIDInterfaceInterface
 
 #if !KERNEL
 public:
+#ifdef IOHIDInterface_DECLARE_IVARS
+IOHIDInterface_DECLARE_IVARS
+#else /* IOHIDInterface_DECLARE_IVARS */
     union
     {
         IOHIDInterface_IVars * ivars;
         IOHIDInterface_LocalIVars * lvars;
     };
+#endif /* IOHIDInterface_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gIOHIDInterfaceMetaClass; };
+#endif /* KERNEL */
 
     using super = IOService;
 
@@ -641,6 +688,6 @@ public:
 #endif /* !__DOCUMENTATION__ */
 
 
-/* IOHIDInterface.iig:302- */
+/* IOHIDInterface.iig:304- */
 
 #endif /* ! _HIDDRIVERKIT_IOHIDINTERFACE_H */

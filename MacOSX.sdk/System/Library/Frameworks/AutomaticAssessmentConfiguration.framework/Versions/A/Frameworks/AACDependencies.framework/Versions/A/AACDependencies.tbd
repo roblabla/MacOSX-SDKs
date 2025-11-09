@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A2F1C473-B15B-3960-9C75-678488CBDA28
+    value:           F43183AA-7CF2-3597-80AE-90174C612137
   - target:          x86_64-maccatalyst
-    value:           A2F1C473-B15B-3960-9C75-678488CBDA28
+    value:           F43183AA-7CF2-3597-80AE-90174C612137
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4F476D21-D674-3C5D-A287-BE97681330BC
+    value:           4516C85D-23C5-3C86-B90A-3D6D06BECE52
   - target:          arm64e-maccatalyst
-    value:           4F476D21-D674-3C5D-A287-BE97681330BC
+    value:           4516C85D-23C5-3C86-B90A-3D6D06BECE52
 install-name:    '/System/Library/Frameworks/AutomaticAssessmentConfiguration.framework/Versions/A/Frameworks/AACDependencies.framework/Versions/A/AACDependencies'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    objc-classes:    [ AEDScreenPrimitivesProvider, AEDSingleAppModeConfiguration, 
-                       AEDWindowPrimitivesProvider, AEDWindowSpacePrimitivesProvider ]
+    objc-classes:    [ AEDDisplayPrimitivesProvider, AEDScreenPrimitivesProvider, 
+                       AEDSingleAppModeConfiguration, AEDWindowPrimitivesProvider ]
 ...

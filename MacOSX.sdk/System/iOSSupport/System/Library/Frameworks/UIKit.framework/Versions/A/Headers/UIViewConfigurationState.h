@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UITraitCollection;
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @interface UIViewConfigurationState : NSObject <UIConfigurationState>
 
 /// Returns a new instance with the specified trait collection.
@@ -28,6 +28,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
 @property (nonatomic, getter=isHighlighted) BOOL highlighted;
 @property (nonatomic, getter=isSelected) BOOL selected;
 @property (nonatomic, getter=isFocused) BOOL focused;
+
+@property (nonatomic, getter=isPinned) BOOL pinned API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 

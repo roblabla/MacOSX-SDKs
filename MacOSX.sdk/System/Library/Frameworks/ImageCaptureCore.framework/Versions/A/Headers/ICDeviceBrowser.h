@@ -209,23 +209,33 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
 /*!
  @method requestContentsAuthorizationWithCompletion:
  @abstract This method requests the user’s permission, if needed, for accessing the conents of an external media device.
- @discussion A constant indicating authorization status.
 */
 - (void)requestContentsAuthorizationWithCompletion:(void (^)(ICAuthorizationStatus status)) completion IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
 
 /*!
  @method controlAuthorizationStatus
  @abstract This method returns a constant indicating whether the app has permission to control the attached camera device.
- @discussion A constant indicating authorization status.
 */
 - (ICAuthorizationStatus)controlAuthorizationStatus IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
 
 /*!
  @method requestControlAuthorizationWithCompletion:
  @abstract This method requests the user’s permission, if needed, for controlling the attached camera device.
- @discussion A constant indicating authorization status.
 */
 - (void)requestControlAuthorizationWithCompletion:(void (^)(ICAuthorizationStatus status)) completion IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+
+/*!
+ @method resetContentsAuthorizationWithCompletion:
+ @abstract This method resets the authorization status for the application accessing the conents of an external media device.
+*/
+- (void)resetContentsAuthorizationWithCompletion:(void (^)(ICAuthorizationStatus status)) completion IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(15.0));
+
+/*!
+ @method resetControlAuthorizationWithCompletion:
+ @abstract This method resets the authorization status for the application controlling the attached camera device.
+ @discussion If the application already has been granted camera access, this will reset only the presentation dialog letting the user know the app has permission, not the camera access itself.
+*/
+- (void)resetControlAuthorizationWithCompletion:(void (^)(ICAuthorizationStatus status)) completion IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(15.0));
 
 @end
 

@@ -218,6 +218,44 @@ IK_CLASS_AVAILABLE(10.6)
  @abstract download all items.
  */
 - (IBAction)downloadAllItems: (id)sender;
+
+
+/*!
+ @method setCustomIconSizeSlider:
+ @abstract provide your own NSSlider to resize item thumbnails
+ */
+- (void)setCustomIconSizeSlider: (NSSlider*)slider;
+
+/*!
+ @method setCustomModeControl:
+ @abstract provide your own control to toggle between IKCameraDeviceViewDisplayMode table / icon
+ */
+- (void)setCustomModeControl: (NSSegmentedControl*)control;
+
+/*!
+ @method setCustomActionButton:
+ @abstract provide your own control to toggle between IKCameraDeviceViewDisplayMode table / icon
+ */
+- (void)setCustomActionControl: (NSSegmentedControl*)control;
+
+/*!
+ @method setCustomRotateButton:
+ @abstract provide your own control to rotate items (multiple of 90º)
+ */
+- (void)setCustomRotateControl: (NSSegmentedControl*)control;
+
+/*!
+ @method setCustomDeleteControl:
+ @abstract provide your own control to delete selected items
+*/
+- (void)setCustomDeleteControl: (NSSegmentedControl*)control;
+
+/*!
+ @method setShowStatusInfoAsWindowSubtitle:
+ @abstract display status info as window subtitle
+ */
+- (void)setShowStatusInfoAsWindowSubtitle: (BOOL)value;
+
 @end
 
 #endif

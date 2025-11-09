@@ -66,6 +66,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0))
 + (instancetype)configurationWithFont:(UIFont *)font; // Adjusts for Dynamic Type. Use UIFontMetrics to get automatic adjustment with a custom font.
 + (instancetype)configurationWithFont:(UIFont *)font scale:(UIImageSymbolScale)scale; // Adjusts for Dynamic Type. Use UIFontMetrics to get automatic adjustment with a custom font.
 
++ (instancetype)configurationWithHierarchicalColor:(UIColor *)hierarchicalColor;
++ (instancetype)configurationWithPaletteColors:(NSArray<UIColor *> *)paletteColors;
++ (instancetype)configurationPreferringMulticolor;
+
 // Removes attributes from the configuration if they are set
 - (instancetype)configurationWithoutTextStyle;
 - (instancetype)configurationWithoutScale;

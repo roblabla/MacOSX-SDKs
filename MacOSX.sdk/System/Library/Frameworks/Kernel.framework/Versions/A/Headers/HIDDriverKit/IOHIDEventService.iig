@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2019 Apple Inc. All rights reserved.
+ * Copyright (c) 2018-2020 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -45,10 +45,69 @@ class IOHIDEvent;
 typedef struct IOHIDDigitizerStylusData IOHIDDigitizerStylusData;
 typedef struct IOHIDDigitizerTouchData IOHIDDigitizerTouchData;
 
+
 class KERNEL IOHIDEventService : public IOService
 {
 
 public:
+    /*!
+     * @function init
+     *
+     * @abstract
+     * Initializes IOHIDEventService object.
+     *
+     * @return
+     * true on success.
+     */
+    virtual bool init() override;
+
+    /*!
+     * @function free
+     *
+     * @abstract
+     * frees the object.
+     */
+    virtual void free() override;
+
+    /*!
+     * @function Start
+     *
+     * @abstract
+     * Function called after initialization to start the IOService.
+     *
+     * @discussion
+     * Override this function to perform any needed driver initialization before
+     * main functionality begins. Calling the parent's Start in a child's Start is required.
+     * If the parent's Start returns an error or the child encounters an error in Start after
+     * the parent's Start has been called, Stop must immediately be called.
+     *
+     * @param provider
+     * The IOService that is provider for this object.
+     *
+     * @return
+     * returns kIOReturnSuccess on success.
+     */
+    virtual kern_return_t Start(IOService * provider) override;
+
+    /*!
+     * @function Stop
+     *
+     * @abstract
+     * Function called during termination to stop the IOService.
+     *
+     * @discussion
+     * Override this function to perform any needed driver teardown before
+     * the process exits. Calling the parent's Stop in a child's Stop is required.
+     * Do not call Stop if the parent's Start has not yet been called.
+     * Stop should only be called once.
+     *
+     * @param provider
+     * The IOService that is provider for this object.
+     *
+     * @return
+     * returns kIOReturnSuccess on success.
+     */
+    virtual kern_return_t Stop(IOService * provider) override;
 
     /*!
      * @function DispatchKeyboardEvent
@@ -247,6 +306,48 @@ protected:
      * The IOHIDEvent to dispatch.
      */
     virtual void dispatchEvent(IOHIDEvent *event) LOCALONLY;
+
+    /*!
+     * @function handleCopyMatchingEvent
+     *
+     * @abstract
+     * copy event that match parameters
+     *
+     * @param matching
+     * Dictionary with matching key/values. Supported keys (see IOHIDEventServiceKeys_Private.h):
+     *   kIOHIDEventTypeKey
+     *   kIOHIDUsagePageKey
+     *   kIOHIDUsageKey
+     *
+     * @param event
+     * Event copy. Caller must release event.
+     *
+     * @return
+     * Returns kIOReturnSuccess on success.
+     */
+    virtual kern_return_t handleCopyMatchingEvent(OSDictionary * matching, IOHIDEvent **event) LOCAL;
+
+    /*!
+     * @function SetProperties
+     *
+     * @abstract
+     * set properties on the event service
+     *
+     * @discussion
+     * This method should be overrided by the DriverKit class if it needs to respond to setProperties calls.
+     * Calling SetProperties(properties, SUPERDISPATCH) from the DriverKit class will get the properties added to a dictionary in IOReg
+     * that HID Event System Clients will be able to see.
+     *
+     * @param properties
+     * Dictionary with property key/values. Supported keys (see IOHIDEventServiceKeys.h and IOHIDEventServiceKeys_Private.h):
+     *   kIOHIDEventTypeKey
+     *   kIOHIDUsagePageKey
+     *   kIOHIDUsageKey
+     *
+     * @return
+     * Returns kIOReturnSuccess on success.
+     */
+    virtual kern_return_t SetProperties(OSDictionary *properties) override;
 };
 
 class EXTENDS (IOHIDEventService) IOHIDEventServicePrivate
@@ -282,7 +383,7 @@ class EXTENDS (IOHIDEventService) IOHIDEventServicePrivate
     virtual kern_return_t SetEventMemory(IOBufferMemoryDescriptor *memory);
     
     virtual kern_return_t EventAvailable(uint32_t length);
-    
+
     /*!
      * @function _Start
      *
@@ -297,6 +398,122 @@ class EXTENDS (IOHIDEventService) IOHIDEventServicePrivate
      * Returns kIOReturnSuccess on success.
      */
     virtual kern_return_t _Start(IOService * provider);
+    
+    /*!
+     * @function CopyEvent
+     *
+     * @abstract
+     * Kernel to userspace OSAction callback definition for copying events.
+     *
+     * @param matching
+     * OSDictionary containing the event matching criteria.
+     *
+     * @param context
+     * Kernel context for routing the results to the correct caller. Should be passed to _CompleteCopyEvent.
+     *
+     * @param action
+     * Completion action. Action should be passed to _CompleteCopyEvent.
+     */
+    virtual void CopyEvent(OSDictionary * matching,
+                           uint64_t       context,
+                           OSAction     * action TARGET) LOCAL = 0;
+
+    /*!
+     * @function _CopyEvent
+     *
+     * @abstract
+     * Copy event request called by kernel service. Private function, should not be used directly.
+     *
+     * @param matching
+     * OSDictionary containing the event matching criteria.
+     *
+     * @param context
+     * Kernel context for routing the results to the correct caller. Should be passed to _CompleteCopyEvent.
+     *
+     * @param action
+     * Completion action. Action should be passed to _CompleteCopyEvent.
+     */
+    virtual void _CopyEvent(OSDictionary * matching,
+                            uint64_t       context,
+                            OSAction     * action) LOCAL
+                            TYPE(CopyEvent);
+
+    /*!
+     * @function _CompleteCopyEvent
+     *
+     * @abstract
+     * Complete a _CopyEvent call. Private function, should not be used directly.
+     *
+     * @param action
+     * Action from _CopyEvent.
+     *
+     * @param eventBuffer
+     * Serialized IOHIDEvent to return, if one was matched.
+     *
+     * @param context
+     * Context from _CopyEvent.
+     */
+    virtual void  _CompleteCopyEvent(OSAction                 * action TYPE(CopyEvent),
+                                     IOBufferMemoryDescriptor * eventBuffer,
+                                     uint64_t                   context);
+    
+    /*!
+     * @function SetUserProperties.
+     *
+     * @abstract
+     * Kernel to userspace OSAction callback definition for passing properties.
+     *
+     * @param matching
+     * OSDictionary containing the set properties.
+     *
+     * @param context
+     * Kernel context for routing the results to the correct caller. Should be passed to _CompleteSetProperties.
+     *
+     * @param action
+     * Completion action. Action should be passed to _CompleteSetProperties.
+     */
+    virtual void SetUserProperties(OSDictionary * properties,
+                                   uint64_t       context,
+                                   OSAction     * action TARGET) LOCAL = 0;
+
+    /*!
+     * @function _SetUserProperties
+     *
+     * @abstract
+     * Set properties request called by kernel service. Private function, should not be used directly.
+     *
+     * @param matching
+     * OSDictionary containing the set properties.
+     *
+     * @param context
+     * Kernel context for routing the results to the correct caller. Should be passed to _CompleteSetProperties.
+     *
+     * @param action
+     * Completion action. Action should be passed to _CompleteSetProperties.
+     */
+    virtual void _SetUserProperties(OSDictionary * properties,
+                                    uint64_t       context,
+                                    OSAction     * action) LOCAL
+                                    TYPE(SetUserProperties);
+
+    /*!
+     * @function _CompleteSetProperties
+     *
+     * @abstract
+     * Complete a _SetUserProperties call. Private function, should not be used directly.
+     *
+     * @param action
+     * Action from _SetUserProperties.
+     *
+     * @param result
+     * Result of the set properties call to return to the kernel.
+     *
+     * @param context
+     * Context from _SetUserProperties.
+     */
+    virtual void _CompleteSetProperties(OSAction * action TYPE(SetUserProperties),
+                                        IOReturn   result,
+                                        uint64_t   context);
 };
 
 #endif /* ! _HIDDRIVERKIT_IOHIDEVENTSERVICE_H */

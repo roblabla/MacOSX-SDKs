@@ -404,7 +404,7 @@ public:
  * panic on cast failure.
  */
 #define OSRequiredCast(type, inst)  \
-    (type *) OSMetaClassBase::requiredMetaCast((inst), OSTypeID(type))
+    ((type *) OSMetaClassBase::requiredMetaCast((inst), OSTypeID(type)))
 
 /*!
  * @define OSCheckTypeInst
@@ -1945,10 +1945,12 @@ public:
 	{ gMetaClass.instanceConstructed(); }
 
 #define OSDefineOperatorMethods(className)                      \
-	void * className::operator new(size_t size)                 \
-	{ return OSObject::operator new(size); }                    \
-	void className::operator delete(void *mem, size_t size)     \
-	{ return OSObject::operator delete(mem, size); }
+	void * className::operator new(size_t size) {               \
+	  return OSObject::operator new(size);                      \
+	}                                                           \
+	void className::operator delete(void *mem, size_t size) {   \
+	  return OSObject::operator delete(mem, size);              \
+	}
 
 
 #define OSDefineDefaultStructors(className, superclassName)     \

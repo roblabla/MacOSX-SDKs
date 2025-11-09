@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
 	
-	Copyright © 2006-2018 Apple Inc. All rights reserved.
+	Copyright © 2006-2021 Apple Inc. All rights reserved.
 	
 	Video Toolbox client API for compressing video frames.
 	
@@ -283,7 +283,7 @@ typedef void (^VTCompressionOutputHandler)(
 	@discussion
 		The client should not modify the pixel data after making this call.
 		The session and/or encoder will retain the image buffer as long as necessary.
-		Cannot be called with a session created with a VTCompressionOutputCallback/
+		Cannot be called with a session created with a VTCompressionOutputCallback.
 	@param	session
 		The compression session.
 	@param	imageBuffer

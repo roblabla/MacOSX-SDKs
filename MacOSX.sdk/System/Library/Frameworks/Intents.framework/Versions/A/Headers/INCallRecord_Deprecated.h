@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
                             unseen:(nullable NSNumber *)unseen
                      numberOfCalls:(nullable NSNumber *)numberOfCalls NS_REFINED_FOR_SWIFT API_DEPRECATED("Replaced by -initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:participants:numberOfCalls:isCallerIdBlocked", ios(13.0, 14.5), watchos(6.0, 7.3), macosx(10.15, 11.3));
 
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INPerson *caller API_DEPRECATED("", ios(11.0, 14.5), watchos(4.0, 7.3)) API_UNAVAILABLE(macos);
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INPerson *caller API_DEPRECATED("", ios(11.0, 14.5), macos(12.0, 12.0), watchos(4.0, 7.3));
 
 @end
 

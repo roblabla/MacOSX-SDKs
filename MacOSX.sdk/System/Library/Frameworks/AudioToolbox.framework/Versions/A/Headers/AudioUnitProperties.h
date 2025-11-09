@@ -406,7 +406,6 @@ CF_ENUM(AudioUnitScope) {
 	
 	@constant		kAudioUnitProperty_ParameterIDName
 						Scope:				any
-						Element:			AudioUnitParameterID of the parameter being queried
 						Value Type:			AudioUnitParameterIDName
 						Access:				read
 
@@ -607,12 +606,12 @@ CF_ENUM(AudioUnitScope) {
 						MIDIEndpointRef in CoreMIDI.
 						
 						The host can retrieve an array of CFStringRefs published by the audio unit, where :
-							- the size of the array is the number of MIDI Outputs the audio unit supports
+							- the size of the array is the number of MIDI Outputs the Audio Unit supports
 							- each item in the array is the name for that output at that index
 						
-						The host should release the array when it is finished with it.
+						The host owns this array and its elements and should release them when it is finished.
 						
-						Once the host has determined that the audio unit supports this feature, it can then provide a 
+						Once the host has determined that the Audio Unit supports this feature, it can then provide a
 						callback, through which the audio unit can send the MIDI data.
 						See the documentation for the kAudioUnitProperty_MIDIOutputCallback property.
 	
@@ -776,13 +775,102 @@ CF_ENUM(AudioUnitScope) {
 						interact with the AudioUnit through this block; it is for the exclusive use
 						of the OS.
 
+	@constant		kAudioUnitProperty_LastRenderSampleTime
+						Scope:			Global
+						Value Type:		Float64
+						Access:			read-only
+						
+						The absolute sample frame time of the most recent render timestamp.
+
 	@constant		kAudioUnitProperty_LoadedOutOfProcess
 						Scope:			Global
 						Value Type:		UInt32
 						Access:			read-only
 						
-						Indicates whether an audio unit is loaded out-of-process, which might happen
+						Indicates whether an Audio Unit is loaded out-of-process, which might happen
 						at the request of the host or when loading in-process is not possible.
+
+	@constant		kAudioUnitProperty_MIDIOutputEventListCallbackInfo
+						Scope:                       Global
+						Value Type:               CFArrayRef
+						Access:                     read
+
+						Used to determine how many MIDIEventList output streams the audio unit can generate (and the name for
+						each of these outputs). Each MIDIEventList output is a complete MIDI data stream, such as embodied by a
+						MIDIEndpointRef in CoreMIDI.
+
+						The host can retrieve an array of CFStringRefs published by the Audio Unit, where :
+						 - the size of the array is the number of MIDIEventList Outputs the audio unit supports
+						 - each item in the array is the name for that output at that index
+
+						The host owns this array and its elements and should release them when it is finished.
+
+						Once the host has determined that the Audio Unit supports this feature, it can then provide a
+						callback, through which the audio unit can send the MIDIEventList data.
+						See the documentation for the kAudioUnitProperty_MIDIOutputEventListCallback property.
+
+						Note: The CFArrayRef's returned from this property must return a +1 reference.
+
+						Compare to property kAudioUnitProperty_MIDIOutputCallbackInfo.
+
+    @constant        kAudioUnitProperty_MIDIOutputEventListCallback
+						Scope:                Global
+						Value Type:         block: void (^)(AUEventSampleTime, const struct MIDIEventList *)
+						Access:               write
+
+						The host sets this property on the Audio Unit with the callback set appropriately.
+
+						Operational Parameters:
+						    In the render call, just as is the expected usage of the AUHostCallbacks, the audio unit can
+						    call the provided callback to provide MIDIEventList data to the host that it will associate with the
+						    current AudioUnitRender.
+
+						The Audio Unit in the callback provides:
+						    - the AUEventSampleTime that was provided to the audio unit for this particular call of
+						    AudioUnitRender
+						    - a MIDIEventList containing MIDI data. The time stamp values contained within the
+						    MIDIEventPacket in this list are **sample offsets*** from the AudioTimeStamp provided.
+						    This allows MIDI data to be time-stamped with a sample offset that is directly associated
+						    with the audio data it is generating in the current call to the AudioUnitRender function
+
+						Host should setup in the following order:
+						- Set host desired MIDIProtocolID
+						- Set kAudioUnitProperty_MIDIOutputEventListCallback
+						- Initialize the Audio Unit
+ 
+						Note: kAudioUnitProperty_HostMIDIProtocol can not be changed while the Audio Unit is initialized.
+ 
+						There is no implied or expected association between the number (or position) of an audio unit's
+						audio or MIDI outputs.
+ 
+						Compare to property kAudioUnitProperty_MIDIOutputEventCallback.
+ 
+    @constant        kAudioUnitProperty_AudioUnitMIDIProtocol
+						Scope:                Global
+						Value Type:         SInt32
+						Access:               read
+
+						A signed 32-bit integer representing the audio unit's MIDI protocol. This should be one of the
+						values in the MIDIProtocolID enum (see <CoreMIDI/MIDIServices.h>)..
+ 
+						The framework will convert all incoming MIDI data to the protocol set in this property, the host can query
+						this property to detect the audio unit's current MIDI protocol.
+
+						Note: This property should not be changed after the audio has been initialized.
+
+    @constant        kAudioUnitProperty_HostMIDIProtocol
+						Scope:                  Global
+						Value Type:          SInt32
+						Access:                 write
+
+						A signed 32-bit integer representing the hosts MIDI protocol. This should be set to one of the values
+						in the MIDIProtocolID enum (see <CoreMIDI/MIDIServices.h>).
+ 
+						Hosts should set this property to the protocol that MIDI data is desired to be delivered in. The framework will
+						convert all MIDI data sent to the host to the protocol value set in this property, an audio unit can query
+						this property to detect the hosts MIDI protocol.
+
+						Note: This property should not be changed after the audio unit has been initialized.
 */
 CF_ENUM(AudioUnitPropertyID)
 {
@@ -799,7 +887,7 @@ CF_ENUM(AudioUnitPropertyID)
 	kAudioUnitProperty_SupportedNumChannels			= 13,
 	kAudioUnitProperty_MaximumFramesPerSlice		= 14,
 	kAudioUnitProperty_ParameterValueStrings		= 16,
-	kAudioUnitProperty_AudioChannelLayout			= 19,  
+	kAudioUnitProperty_AudioChannelLayout			= 19,
 	kAudioUnitProperty_TailTime						= 20,
 	kAudioUnitProperty_BypassEffect					= 21,
 	kAudioUnitProperty_LastRenderError				= 22,
@@ -817,7 +905,7 @@ CF_ENUM(AudioUnitPropertyID)
 	kAudioUnitProperty_FrequencyResponse			= 52,
 	kAudioUnitProperty_ParameterHistoryInfo			= 53,
 	kAudioUnitProperty_NickName                     = 54,
-    kAudioUnitProperty_OfflineRender				= 37,
+	kAudioUnitProperty_OfflineRender				= 37,
 	kAudioUnitProperty_ParameterIDName				= 34,
 	kAudioUnitProperty_ParameterStringFromValue		= 33,
 	kAudioUnitProperty_ParameterClumpName			= 35,
@@ -831,6 +919,7 @@ CF_ENUM(AudioUnitPropertyID)
 	kAudioUnitProperty_RenderContextObserver
 		__SWIFT_UNAVAILABLE_MSG("Swift is not supported for use with audio realtime threads")
 													= 60,
+	kAudioUnitProperty_LastRenderSampleTime			= 61,
 	kAudioUnitProperty_LoadedOutOfProcess			= 62,
 #if !TARGET_OS_IPHONE
 	kAudioUnitProperty_FastDispatch					= 5,
@@ -843,6 +932,12 @@ CF_ENUM(AudioUnitPropertyID)
 
 	kAudioUnitProperty_MIDIOutputCallbackInfo       = 47,
 	kAudioUnitProperty_MIDIOutputCallback           = 48,
+
+	kAudioUnitProperty_MIDIOutputEventListCallbackInfo  = 63,
+    kAudioUnitProperty_MIDIOutputEventListCallback      = 64,
+
+    kAudioUnitProperty_AudioUnitMIDIProtocol            = 65,
+    kAudioUnitProperty_HostMIDIProtocol                 = 66
 };
 
 #if AU_SUPPORT_INTERAPP_AUDIO
@@ -1288,6 +1383,34 @@ typedef struct AudioUnitRenderContext AudioUnitRenderContext
 typedef void (^AURenderContextObserver)(const AudioUnitRenderContext *context)
 	__SWIFT_UNAVAILABLE_MSG("Swift is not supported for use with audio realtime threads");
 
+/*!
+	@struct         MIDIEventList
+	@abstract       Forward declaration of MIDIEventList found in <CoreMIDI/MIDIServices.h>
+*/
+typedef struct MIDIEventList MIDIEventList;
+
+/*!    @typedef    AUEventSampleTime
+	@brief        Expresses time as a sample count.
+	@discussion
+		Sample times are normally positive, but hosts can propagate HAL sample times through audio
+		units, and HAL sample times can be small negative numbers.
+*/
+typedef int64_t AUEventSampleTime;
+
+/*!
+	@typedef		AUMIDIEventListBlock
+	@abstract		A block used by an audio unit to send or receive MIDIEventList data.
+	@param eventSampleTime
+					The time in samples at which the MIDI events are to occur.
+	@param cable
+					The virtual cable number associated with this MIDI data.
+	@param eventList
+					One full MIDI, partial MIDI SysEx, or a full SysEx UMP message.
+*/
+typedef OSStatus (^ AUMIDIEventListBlock)(AUEventSampleTime					eventSampleTime,
+										  uint8_t 							cable,
+										const struct MIDIEventList *		eventList);
+
 //=====================================================================================================================
 #pragma mark - Parameter Definitions
 
@@ -1341,7 +1464,7 @@ typedef void (^AURenderContextObserver)(const AudioUnitRenderContext *context)
 						octaves in relative pitch where a value of 1 is equal to 1200 cents
 	@constant		kAudioUnitParameterUnit_BPM
 						beats per minute, ie tempo
-    @constant		kAudioUnitParameterUnit_Beats
+	@constant		kAudioUnitParameterUnit_Beats
 						time relative to tempo, i.e., 1.0 at 120 BPM would equal 1/2 a second
 	@constant		kAudioUnitParameterUnit_Milliseconds
 						parameter is expressed in milliseconds
@@ -1349,6 +1472,8 @@ typedef void (^AURenderContextObserver)(const AudioUnitRenderContext *context)
 						for compression, expansion ratio, etc.
 	@constant		kAudioUnitParameterUnit_CustomUnit
 						this is the parameter unit type for parameters that present a custom unit name
+	@constant		kAudioUnitParameterUnit_MIDI2Controller
+						a generic MIDI 2.0 controller value with 32-bit range
 */
 typedef CF_ENUM(UInt32, AudioUnitParameterUnit)
 {
@@ -1378,7 +1503,8 @@ typedef CF_ENUM(UInt32, AudioUnitParameterUnit)
     kAudioUnitParameterUnit_Beats               = 23,
 	kAudioUnitParameterUnit_Milliseconds		= 24,
 	kAudioUnitParameterUnit_Ratio				= 25,
-	kAudioUnitParameterUnit_CustomUnit			= 26
+	kAudioUnitParameterUnit_CustomUnit			= 26,
+	kAudioUnitParameterUnit_MIDI2Controller	 	= 27
 };
 
 /*!
@@ -2442,7 +2568,8 @@ typedef struct AudioOutputUnitStartAtTimeParams AudioOutputUnitStartAtTimeParams
 						Value Type: UInt32
 						Access: read/write
 							Bypass all processing done by the voice processing unit. When set to 0 
-							(default), the processing is activated otherwise it is disabled.
+							(default), the processing is activated otherwise it is disabled. Voice Isolation
+                            and Wide Spectrum take priority over Bypass.
 
 	@constant		kAUVoiceIOProperty_VoiceProcessingEnableAGC
 	@discussion			Scope: Global
@@ -2461,10 +2588,37 @@ typedef struct AudioOutputUnitStartAtTimeParams AudioOutputUnitStartAtTimeParams
 CF_ENUM(AudioUnitPropertyID) {
 	kAUVoiceIOProperty_BypassVoiceProcessing		= 2100,
 	kAUVoiceIOProperty_VoiceProcessingEnableAGC		= 2101,
-	kAUVoiceIOProperty_MuteOutput					= 2104 
-	
+	kAUVoiceIOProperty_MuteOutput					= 2104
 };
 
+/*!
+	@enum       Speech activity event described by AUVoiceIO
+*/
+typedef CF_ENUM(UInt32, AUVoiceIOSpeechActivityEvent)
+{
+	kAUVoiceIOSpeechActivityHasStarted = 0,
+	kAUVoiceIOSpeechActivityHasEnded = 1
+};
+
+/*!
+	@typedef    AUVoiceIOMutedSpeechActivityEventListener
+	@abstract   Block called to receive speech activity event while the client is muted.
+*/
+typedef void (^AUVoiceIOMutedSpeechActivityEventListener)(AUVoiceIOSpeechActivityEvent event);
+
+/*!
+ 
+	@constant        kAUVoiceIOProperty_MutedSpeechActivityEventListener
+	@discussion        	Scope: Global
+						Value Type: AUVoiceIOMutedSpeechActivityEventListener
+                        Access: write only
+                            Register a listener to be notified when speech activity event occurs while the client is muted.
+                            Continuous presence of or lack of speech activity during mute will not cause redundant notification.
+                            In order to use this API, it's expected to implement the mute via the kAUVoiceIOProperty_MuteOutput.
+ */
+CF_ENUM(AudioUnitPropertyID) {
+	kAUVoiceIOProperty_MutedSpeechActivityEventListener = 2106
+} API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 #pragma mark - AUVoiceProcessing unit deprecated properties
 

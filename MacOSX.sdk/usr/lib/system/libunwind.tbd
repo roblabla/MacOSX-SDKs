@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           32F74246-BEB8-3249-8C51-CAD863EF158E
+    value:           6403EC7A-E990-3062-BB0A-6626FAC25B06
   - target:          x86_64-maccatalyst
-    value:           32F74246-BEB8-3249-8C51-CAD863EF158E
+    value:           6403EC7A-E990-3062-BB0A-6626FAC25B06
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           46052246-A538-3A3D-B1CA-AA9918387228
+    value:           DD225AC0-9557-363F-BCA0-03E1B30AE50A
   - target:          arm64e-maccatalyst
-    value:           46052246-A538-3A3D-B1CA-AA9918387228
+    value:           DD225AC0-9557-363F-BCA0-03E1B30AE50A
 install-name:    '/usr/lib/system/libunwind.dylib'
 current-version: 201
 parent-umbrella:

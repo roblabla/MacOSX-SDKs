@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           124B6DBC-E4AC-346F-88B1-BD3BDD9494E9
+    value:           229C6DC1-B493-33EC-8F39-B410DEDC4A30
   - target:          x86_64-maccatalyst
-    value:           124B6DBC-E4AC-346F-88B1-BD3BDD9494E9
+    value:           229C6DC1-B493-33EC-8F39-B410DEDC4A30
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E43159AE-9322-3540-8898-677290493BA4
+    value:           96FB325E-703D-3291-B265-731276719F1C
   - target:          arm64e-maccatalyst
-    value:           E43159AE-9322-3540-8898-677290493BA4
+    value:           96FB325E-703D-3291-B265-731276719F1C
 install-name:    '/System/Library/PrivateFrameworks/SampleAnalysis.framework/Versions/A/SampleAnalysis'
-current-version: 278.3
+current-version: 301
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -33,7 +33,8 @@ exports:
     objc-classes:    [ SAAuxiliaryData, SABinary, SABinaryLoadInfo, SABinaryLocator, 
                        SACallTree, SACallTreeFrame, SACallTreeNode, SADispatchQueue, 
                        SADispatchQueueState, SAExecutableCallTree, SAFanSpeed, SAFrame, 
-                       SAHIDEvent, SAHIDStep, SAInstruction, SAKernelCache, SASamplePrintOptions, 
+                       SAHIDEvent, SAHIDStep, SAIOEvent, SAInstruction, SAKernelCache, 
+                       SAMemoryPressureEvent, SAPowerModeTransition, SASamplePrintOptions, 
                        SASamplePrinter, SASampleStore, SASegment, SASharedCache, 
                        SASourceInfo, SASymbol, SATask, SATaskCallTree, SATaskState, 
                        SATaskThreadCallTrees, SAThread, SAThreadCallTree, SAThreadState, 

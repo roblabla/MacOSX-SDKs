@@ -18,6 +18,7 @@
 #import <MLCompute/MLCGraph.h>
 #import <MLCompute/MLCTrainingGraph.h>
 #import <MLCompute/MLCInferenceGraph.h>
+#import <MLCompute/MLCPlatform.h>
 
 // Descriptors
 #import <MLCompute/MLCActivationDescriptor.h>
@@ -69,4 +70,5 @@
 #import <MLCompute/MLCOptimizer.h>
 #import <MLCompute/MLCSGDOptimizer.h>
 #import <MLCompute/MLCAdamOptimizer.h>
+#import <MLCompute/MLCAdamWOptimizer.h>
 #import <MLCompute/MLCRMSPropOptimizer.h>

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CF1C7BE8-3589-3E3A-92DC-F21A4FA58169
+    value:           4ED6DF76-EB47-3A4E-AA49-91E250575234
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6653D2EA-44B5-3879-AC58-C7EA1254C058
+    value:           84244E17-385F-3FE8-A869-C1CF4E54F330
 install-name:    '/System/Library/PrivateFrameworks/SiriKitInvocation.framework/Versions/A/SiriKitInvocation'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -21,7 +21,33 @@ exports:
                        _SKIMessagesDirectInvocationPayloadKeyContactName, _SKIMessagesDirectInvocationPayloadKeyContactPhoneNumber, 
                        _SKIMessagesDirectInvocationPayloadKeyConversationIdentifier, 
                        _SKIMessagesDirectInvocationPayloadKeyNotificationIdentifier, 
+                       _SKIMessagesDirectInvocationPayloadKeySynchronousBurstIndex, 
                        _SKIMessagesGatekeeperAppBundleIdKey, _SKIMessagesInvocationIdentifierGatekeeperFlow, 
+                       _SKINotebookDirectInvocationIdentifierAnnounceReminder, _SKINotebookDirectInvocationPayloadKeyAppBundleId, 
+                       _SKINotebookDirectInvocationPayloadKeyAppBundleIdOfLastAnnouncement, 
+                       _SKINotebookDirectInvocationPayloadKeyIsSameTypeAsLastAnnouncement, 
+                       _SKINotebookDirectInvocationPayloadKeyNotificationIdentifier, 
+                       _SKINotebookDirectInvocationPayloadKeySynchronousBurstIndex, 
+                       _SKINotebookDirectInvocationPayloadKeyTimeSinceLastAnnouncement, 
+                       _SKINotificationsDirectInvocationIdentifierAnnounceNotification, 
+                       _SKINotificationsDirectInvocationPayloadKeyAppBundleId, _SKINotificationsDirectInvocationPayloadKeyInterruptionLevel, 
+                       _SKINotificationsDirectInvocationPayloadKeyIsSameTypeAsLastAnnouncement, 
+                       _SKINotificationsDirectInvocationPayloadKeyNotificationBody, 
+                       _SKINotificationsDirectInvocationPayloadKeyNotificationDate, 
+                       _SKINotificationsDirectInvocationPayloadKeyNotificationId, 
+                       _SKINotificationsDirectInvocationPayloadKeyNotificationSubtitle, 
+                       _SKINotificationsDirectInvocationPayloadKeyNotificationThreadId, 
+                       _SKINotificationsDirectInvocationPayloadKeyNotificationTitle, 
+                       _SKINotificationsDirectInvocationPayloadKeySynchronousBurstIndex, 
+                       _SKIPhoneAnnounceGroupFaceTimeInviteDirectInvocationPayloadKeyActiveParticipantHandles, 
+                       _SKIPhoneAnnounceGroupFaceTimeInviteDirectInvocationPayloadKeyAppBundleIdOfLastAnnouncement, 
+                       _SKIPhoneAnnounceGroupFaceTimeInviteDirectInvocationPayloadKeyGroupFaceTimeURL, 
+                       _SKIPhoneAnnounceGroupFaceTimeInviteDirectInvocationPayloadKeyIdentifier, 
+                       _SKIPhoneAnnounceGroupFaceTimeInviteDirectInvocationPayloadKeyIsSameTypeAsLastAnnouncement, 
+                       _SKIPhoneAnnounceGroupFaceTimeInviteDirectInvocationPayloadKeyRemoteParticipantHandles, 
+                       _SKIPhoneAnnounceGroupFaceTimeInviteDirectInvocationPayloadKeySubtitle, 
+                       _SKIPhoneAnnounceGroupFaceTimeInviteDirectInvocationPayloadKeySynchronousBurstIndex, 
+                       _SKIPhoneAnnounceGroupFaceTimeInviteDirectInvocationPayloadKeyTimeSinceLastAnnouncement, 
                        _SKIPhoneAnnounceIncomingCallerDirectInvocationPayloadKeyCallProviderBundleId, 
                        _SKIPhoneAnnounceIncomingCallerDirectInvocationPayloadKeyCallProviderIdentifier, 
                        _SKIPhoneAnnounceIncomingCallerDirectInvocationPayloadKeyCallUUID, 
@@ -32,15 +58,28 @@ exports:
                        _SKIPhoneAnnounceIncomingCallerDirectInvocationPayloadKeyHandleValue, 
                        _SKIPhoneAnnounceIncomingCallerDirectInvocationPayloadKeyIsCallerIdBlocked, 
                        _SKIPhoneAnnounceIncomingCallerDirectInvocationPayloadKeyIsVideo, 
+                       _SKIPhoneAnnounceIncomingIntercomDirectInvocationPayloadKeyAnnouncementId, 
+                       _SKIPhoneAnnounceIncomingIntercomDirectInvocationPayloadKeyAppBundleId, 
+                       _SKIPhoneAnnounceIncomingIntercomDirectInvocationPayloadKeyNotificationType, 
+                       _SKIPhoneAnnounceIncomingIntercomDirectInvocationPayloadKeySynchronousBurstIndex, 
+                       _SKIPhoneAnnounceVoicemailDirectInvocationPayloadKeyAppBundleIdOfLastAnnouncement, 
+                       _SKIPhoneAnnounceVoicemailDirectInvocationPayloadKeyContactInfo, 
+                       _SKIPhoneAnnounceVoicemailDirectInvocationPayloadKeyIsSameTypeAsLastAnnouncement, 
+                       _SKIPhoneAnnounceVoicemailDirectInvocationPayloadKeySynchronousBurstIndex, 
+                       _SKIPhoneAnnounceVoicemailDirectInvocationPayloadKeyTimeSinceLastAnnouncement, 
+                       _SKIPhoneAnnounceVoicemailDirectInvocationPayloadKeyVoicemailIdentifier, 
+                       _SKIPhoneDirectInvocationIdentifierAnnounceGroupFaceTimeInvite, 
                        _SKIPhoneDirectInvocationIdentifierAnnounceIntercom, _SKIPhoneDirectInvocationIdentifierAnnounceIntercomNotification, 
-                       _SKIPhoneDirectInvocationIdentifierIdentifyIncomingCaller, 
+                       _SKIPhoneDirectInvocationIdentifierAnnounceVoicemail, _SKIPhoneDirectInvocationIdentifierIdentifyIncomingCaller, 
                        _SKIPhoneDirectInvocationIdentifierReadIntercom, _SKIPhoneDirectInvocationIdentifierStartPhoneCall, 
-                       _SKIPlaybackControlsStopMediaIdentifier, _SiriKitInvocationVersionNumber, 
-                       _SiriKitInvocationVersionString, _kMessageContentChangedViaSnippetDirectInvocationContentKey, 
+                       _SKIPlaybackControlsDirectInvocationIdentifierQuickStop, _SKIPlaybackControlsDirectInvocationIdentifierStopMedia, 
+                       _SiriKitInvocationVersionNumber, _SiriKitInvocationVersionString, 
+                       _kMessageContentChangedViaSnippetDirectInvocationContentKey, 
                        _kMessageContentChangedViaSnippetDirectInvocationIdentifier, 
                        _kMessageSendViaSnippetDirectInvocationContentKey, _kMessageSendViaSnippetDirectInvocationIdentifier ]
     objc-classes:    [ SKIDirectInvocation, SKIDirectInvocationContext, SKIDirectInvocationPayload, 
                        SKIHomeAutomationInvocation, SKIMapsInvocation, SKIMediaControlsInvocation, 
                        SKIMessagesGatekeeperPayload, SKIMessagesInvocation, SKIMusicInvocation, 
-                       SKIPhoneInvocation, SKIVoiceShortcutsInvocation ]
+                       SKINotebookInvocation, SKINotificationsInvocation, SKIPhoneInvocation, 
+                       SKIVoiceShortcutsInvocation ]
 ...

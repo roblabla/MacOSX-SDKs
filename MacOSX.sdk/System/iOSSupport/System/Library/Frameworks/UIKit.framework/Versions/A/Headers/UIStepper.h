@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIButton, UIImageView;
 
-UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos) @interface UIStepper : UIControl
+UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIStepper : UIControl
 
 @property(nonatomic,getter=isContinuous) BOOL continuous; // if YES, value change events are sent any time the value changes during interaction. default = YES
 @property(nonatomic) BOOL autorepeat;                     // if YES, press & hold repeatedly alters value. default = YES

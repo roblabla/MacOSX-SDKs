@@ -12,7 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIBarButtonItemGroup : NSObject<NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@interface UIBarButtonItemGroup : NSObject<NSCoding>
 
 /// Create a new bar button item group with the given items. When bar button item layout is done, either the group's barButtonItems or its representativeItem is displayed (if it exists).
 - (instancetype)initWithBarButtonItems:(NSArray<UIBarButtonItem *> *)barButtonItems representativeItem:(nullable UIBarButtonItem *)representativeItem NS_DESIGNATED_INITIALIZER;

@@ -48,6 +48,22 @@ VN_EXPORT CGPoint VNImagePointForNormalizedPoint(CGPoint normalizedPoint, size_t
 
 
 /*!
+    @discussion    Returns a point in (possibly non-integral) image coordinates that is projected from a point in a normalized coordinate space taking the region of interest (roi) into account.
+
+    @param    normalizedPoint            The point in the normalized coordinate space of [0..1].
+    
+    @param    imageWidth                        The pixel width of the image.
+
+    @param    imageHeight                      The pixel height of the image.
+
+    @param    roi                                       The region of interest on which the normalized point was based on.
+
+    @return the point in image coordinates from a normalized point that was reported in relation to a region of interest.
+*/
+VN_EXPORT CGPoint VNImagePointForNormalizedPointUsingRegionOfInterest(CGPoint normalizedPoint, size_t imageWidth, size_t imageHeight, CGRect roi) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+
+
+/*!
  @discussion    Returns a point in normalized coordinate space that is projected from a point in a image coordinates
  
  @param    imagePoint                  The point in image coordinate space.
@@ -62,17 +78,49 @@ VN_EXPORT CGPoint VNNormalizedPointForImagePoint(CGPoint imagePoint, size_t imag
 
 
 /*!
-	@discussion	Returns a rectangle in (possibly non-integral) image coordinates that is projected from a rectangle in a normalized coordinate space.
+ @discussion    Returns a point in normalized coordinate space within a spedified regioin of interest (roi) that is projected from a point in a image coordinates
+ 
+ @param    imagePoint                  The point in image coordinate space.
+ 
+ @param    imageWidth                  The pixel width of the image.
+ 
+ @param    imageHeight                The pixel height of the image.
+ 
+ @param    roi                                  The region of interest on which the normalized point will based on.
+ 
+ @return the point in normalized coordinates in relation to the region of interest.
+ */
+VN_EXPORT CGPoint VNNormalizedPointForImagePointUsingRegionOfInterest(CGPoint imagePoint, size_t imageWidth, size_t imageHeight, CGRect roi) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
-	@param	normalizedRect			The rectangle in the normalized coordinate space of [0..1].
-	
-	@param	imageWidth				The pixel width of the image.
 
-	@param	imageHeight				The pixel height of the image.
+/*!
+    @discussion    Returns a rectangle in (possibly non-integral) image coordinates that is projected from a rectangle in a normalized coordinate space.
 
-	@return the rectangle in pixel coordinates.
+    @param    normalizedRect            The rectangle in the normalized coordinate space of [0..1].
+    
+    @param    imageWidth                The pixel width of the image.
+
+    @param    imageHeight                The pixel height of the image.
+
+    @return the rectangle in pixel coordinates.
 */
 VN_EXPORT CGRect VNImageRectForNormalizedRect(CGRect normalizedRect, size_t imageWidth, size_t imageHeight) API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+
+
+/*!
+    @discussion    Returns a rectangle in (possibly non-integral) image coordinates that is projected from a rectangle in a normalized coordinate space taking the region of interest (roi) into account.
+
+    @param    normalizedRect               The rectangle in the normalized coordinate space of [0..1].
+    
+    @param    imageWidth                        The pixel width of the image.
+
+    @param    imageHeight                      The pixel height of the image.
+
+    @param    roi                                        The region of interest on which the normalized point was based on.
+
+    @return the rectangle in pixel coordinates from a normalized rectangle that was reported in relation to a region of interest.
+*/
+VN_EXPORT CGRect VNImageRectForNormalizedRectUsingRegionOfInterest(CGRect normalizedRect, size_t imageWidth, size_t imageHeight, CGRect roi) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 
 /*!
@@ -87,6 +135,22 @@ VN_EXPORT CGRect VNImageRectForNormalizedRect(CGRect normalizedRect, size_t imag
 	@return the normalized rectangle.
 */
 VN_EXPORT CGRect VNNormalizedRectForImageRect(CGRect imageRect, size_t imageWidth, size_t imageHeight) API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+
+
+/*!
+    @discussion    Returns an image rectangle in normalized coordinates  in relation to the region of interest.
+
+    @param    imageRect                The rectangle in image coordinate space.
+    
+    @param    imageWidth              The pixel width of the image.
+
+    @param    imageHeight            The pixel height of the image.
+ 
+    @param    roi                               The region of interest on which the normalized rect will be based on.
+
+    @return the normalized rectangle in relation to the region of interest.
+*/
+VN_EXPORT CGRect VNNormalizedRectForImageRectUsingRegionOfInterest(CGRect imageRect, size_t imageWidth, size_t imageHeight, CGRect roi) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
 
 /*!

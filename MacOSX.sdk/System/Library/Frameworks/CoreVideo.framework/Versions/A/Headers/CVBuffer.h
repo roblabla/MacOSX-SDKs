@@ -2,7 +2,7 @@
  *  CVBuffer.h
  *  CoreVideo
  *
- *  Copyright (c) 2004-2015 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2017,2021 Apple Inc. All rights reserved.
  *
  */
  
@@ -12,7 +12,7 @@
     @discussion CVBufferRef types are abstract and only define ways to attach meta data to buffers (such as timestamps,
 	        colorspace information, etc.).    CVBufferRefs do not imply any particular kind of data storage.  It could
 		be compressed data, image data, etc.
-		   
+		
 */
 
 #if !defined(__COREVIDEO_CVBUFFER_H__)
@@ -103,7 +103,7 @@ CV_EXPORT void	CVBufferSetAttachment( CVBufferRef CV_NONNULL buffer, CFStringRef
     @param      attachmentMode.  Returns the mode of the attachment, if desired.  May be NULL.
     @result     If found the attachment object
 */
-CV_EXPORT CFTypeRef CV_NULLABLE CVBufferGetAttachment( CVBufferRef CV_NONNULL buffer, CFStringRef CV_NONNULL key, CVAttachmentMode * CV_NULLABLE attachmentMode ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CFTypeRef CV_NULLABLE CVBufferGetAttachment( CVBufferRef CV_NONNULL buffer, CFStringRef CV_NONNULL key, CVAttachmentMode * CV_NULLABLE attachmentMode )  API_DEPRECATED_WITH_REPLACEMENT("CVBufferCopyAttachment", macos(10.4, 12.0), ios(4.0,15.0), tvos(9.0, 15.0), watchos(4.0, 8.0));
 
 /*!
     @function   CVBufferRemoveAttachment
@@ -130,7 +130,7 @@ CV_EXPORT void	CVBufferRemoveAllAttachments( CVBufferRef CV_NONNULL buffer ) __O
     @result     A CFDictionary with all buffer attachments identified by there keys. If no attachment is present, the dictionary is empty.  Returns NULL
 		for invalid attachment mode.
 */
-CV_EXPORT CFDictionaryRef CF_RETURNS_NOT_RETAINED CV_NULLABLE CVBufferGetAttachments( CVBufferRef CV_NONNULL buffer, CVAttachmentMode attachmentMode ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT CFDictionaryRef CF_RETURNS_NOT_RETAINED CV_NULLABLE CVBufferGetAttachments( CVBufferRef CV_NONNULL buffer, CVAttachmentMode attachmentMode ) API_DEPRECATED_WITH_REPLACEMENT("CVBufferCopyAttachments", macos(10.4, 12.0), ios(4.0,15.0), tvos(9.0, 15.0), watchos(4.0, 8.0));
 
 /*!
     @function   CVBufferSetAttachments
@@ -149,6 +149,35 @@ CV_EXPORT void CVBufferSetAttachments( CVBufferRef CV_NONNULL buffer, CFDictiona
     @param      destinationBuffer  CVBuffer to copy attachments to.
 */
 CV_EXPORT void  CVBufferPropagateAttachments( CVBufferRef CV_NONNULL sourceBuffer, CVBufferRef CV_NONNULL destinationBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+
+/*!
+    @function   CVBufferCopyAttachments
+    @abstract   Returns a copy of all attachments of a CVBuffer object. It is the caller’s responsibility to release the returned dictionary.
+    @discussion CVBufferCopyAttachments is a convenience call that returns a copy of all attachments with their corresponding keys in a CFDictionary.
+    @param      buffer  Target CVBuffer object.
+    @result     A CFDictionary with all buffer attachments identified by their keys. If no attachment is present or invalid attachment mode,   returns NULL
+*/
+CV_EXPORT CFDictionaryRef CF_RETURNS_RETAINED CV_NULLABLE CVBufferCopyAttachments( CVBufferRef CV_NONNULL buffer, CVAttachmentMode attachmentMode ) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
+    @function   CVBufferCopyAttachment
+    @abstract   Returns a retained specific attachment of a CVBuffer object. It is the caller’s responsibility to release the returned value.
+    @discussion You can attach any CF object to a CVBuffer object to store additional information. CVBufferCopyAttachment retrieves a retained attachment identified by a key.
+    @param      buffer  Target CVBuffer object.
+    @param      key    Key in form of a CFString identifying the desired attachment.
+    @param      attachmentMode.  Returns the mode of the attachment, if desired.  May be NULL.
+    @result     If found the attachment object, return the value; otherwize, return NULL.
+*/
+CV_EXPORT CFTypeRef CV_NULLABLE CF_RETURNS_RETAINED CVBufferCopyAttachment( CVBufferRef CV_NONNULL buffer, CFStringRef CV_NONNULL key, CVAttachmentMode * CV_NULLABLE attachmentMode ) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
+    @function   CVBufferHasAttachment
+    @abstract   Returns true if an attachment with the passed key is present on a CVBuffer object.
+    @param      buffer  Target CVBuffer object.
+    @param      key    Key in form of a CFString identifying the desired attachment.
+    @result     True if an attachment with this key is present, otherwise false.
+*/
+CV_EXPORT Boolean CVBufferHasAttachment( CVBufferRef CV_NONNULL buffer, CFStringRef CV_NONNULL key ) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 #if defined(__cplusplus)
 }

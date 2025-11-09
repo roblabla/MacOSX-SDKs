@@ -815,6 +815,10 @@ NS_ASSUME_NONNULL_BEGIN
   @property (nonatomic, retain, nullable) CIImage *backgroundImage;
   @property (nonatomic) float amount;
 @end
+@protocol CIPersonSegmentation <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) NSUInteger qualityLevel;
+@end
 @protocol CIPixellate <CIFilter>
   @property (nonatomic, retain, nullable) CIImage *inputImage;
   @property (nonatomic) CGPoint center;
@@ -1025,6 +1029,7 @@ NS_CLASS_AVAILABLE(10_15, 13_0)
 + (CIFilter<CICompositeOperation>*) lightenBlendModeFilter;
 + (CIFilter<CICompositeOperation>*) linearBurnBlendModeFilter;
 + (CIFilter<CICompositeOperation>*) linearDodgeBlendModeFilter;
++ (CIFilter<CICompositeOperation>*) linearLightBlendModeFilter NS_AVAILABLE(12_0, 15_0);
 + (CIFilter<CICompositeOperation>*) luminosityBlendModeFilter;
 + (CIFilter<CICompositeOperation>*) maximumCompositingFilter;
 + (CIFilter<CICompositeOperation>*) minimumCompositingFilter;
@@ -1040,6 +1045,7 @@ NS_CLASS_AVAILABLE(10_15, 13_0)
 + (CIFilter<CICompositeOperation>*) sourceOutCompositingFilter;
 + (CIFilter<CICompositeOperation>*) sourceOverCompositingFilter;
 + (CIFilter<CICompositeOperation>*) subtractBlendModeFilter;
++ (CIFilter<CICompositeOperation>*) vividLightBlendModeFilter NS_AVAILABLE(12_0, 15_0);
 
 // CICategoryColorAdjustment
 + (CIFilter<CIColorAbsoluteDifference>*) colorAbsoluteDifferenceFilter NS_AVAILABLE(11_0, 14_0);
@@ -1160,6 +1166,11 @@ NS_CLASS_AVAILABLE(10_15, 13_0)
 + (CIFilter<CIConvolution>*) convolution7X7Filter;
 + (CIFilter<CIConvolution>*) convolution9HorizontalFilter;
 + (CIFilter<CIConvolution>*) convolution9VerticalFilter;
++ (CIFilter<CIConvolution>*) convolutionRGB3X3Filter NS_AVAILABLE(12_0, 15_0);
++ (CIFilter<CIConvolution>*) convolutionRGB5X5Filter NS_AVAILABLE(12_0, 15_0);
++ (CIFilter<CIConvolution>*) convolutionRGB7X7Filter NS_AVAILABLE(12_0, 15_0);
++ (CIFilter<CIConvolution>*) convolutionRGB9HorizontalFilter NS_AVAILABLE(12_0, 15_0);
++ (CIFilter<CIConvolution>*) convolutionRGB9VerticalFilter NS_AVAILABLE(12_0, 15_0);
 + (CIFilter<CICoreMLModel>*) coreMLModelFilter;
 + (CIFilter<CICrystallize>*) crystallizeFilter;
 + (CIFilter<CIDepthOfField>*) depthOfFieldFilter;
@@ -1172,6 +1183,7 @@ NS_CLASS_AVAILABLE(10_15, 13_0)
 + (CIFilter<CIHighlightShadowAdjust>*) highlightShadowAdjustFilter;
 + (CIFilter<CILineOverlay>*) lineOverlayFilter;
 + (CIFilter<CIMix>*) mixFilter;
++ (CIFilter<CIPersonSegmentation>*) personSegmentationFilter NS_AVAILABLE(12_0, 15_0);
 + (CIFilter<CIPixellate>*) pixellateFilter;
 + (CIFilter<CIPointillize>*) pointillizeFilter;
 + (CIFilter<CISaliencyMap>*) saliencyMapFilter;

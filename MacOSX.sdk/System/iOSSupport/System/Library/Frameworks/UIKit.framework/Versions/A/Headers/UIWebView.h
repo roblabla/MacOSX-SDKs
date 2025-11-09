@@ -38,7 +38,8 @@ typedef NS_ENUM(NSInteger, UIWebPaginationBreakingMode) {
 @class UIWebViewInternal;
 @protocol UIWebViewDelegate;
 
-UIKIT_EXTERN API_DEPRECATED("No longer supported; please adopt WKWebView.", ios(2.0, 12.0)) API_UNAVAILABLE(tvos, macos, macCatalyst) @interface UIWebView : UIView <NSCoding, UIScrollViewDelegate>
+UIKIT_EXTERN API_DEPRECATED("No longer supported; please adopt WKWebView.", ios(2.0, 12.0)) API_UNAVAILABLE(tvos, macos, macCatalyst) NS_SWIFT_UI_ACTOR
+@interface UIWebView : UIView <NSCoding, UIScrollViewDelegate>
 
 @property (nullable, nonatomic, assign) id <UIWebViewDelegate> delegate;
 
@@ -87,7 +88,8 @@ UIKIT_EXTERN API_DEPRECATED("No longer supported; please adopt WKWebView.", ios(
 @property (nonatomic) BOOL allowsLinkPreview API_AVAILABLE(ios(9.0)); // default is NO
 @end
 
-API_UNAVAILABLE(tvos, macos, macCatalyst) @protocol UIWebViewDelegate <NSObject>
+API_UNAVAILABLE(tvos, macos, macCatalyst) NS_SWIFT_UI_ACTOR
+@protocol UIWebViewDelegate <NSObject>
 
 @optional
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType API_DEPRECATED("No longer supported.", ios(2.0, 12.0));

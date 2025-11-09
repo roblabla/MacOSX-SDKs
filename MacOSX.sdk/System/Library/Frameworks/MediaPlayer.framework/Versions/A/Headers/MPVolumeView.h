@@ -7,7 +7,7 @@
 
 #import <MediaPlayer/MediaPlayerDefines.h>
 
-#if MP_HAS_UIKIT
+#if MP_HAS_HEADER(UIKit, UIView.h)
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>

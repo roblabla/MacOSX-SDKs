@@ -65,7 +65,8 @@ UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerLivePho
 UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerPHAsset API_DEPRECATED("Will be removed in a future release, use PHPicker.", ios(11.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(tvos); // a PHAsset
 UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerImageURL API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);  // an NSURL
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) @interface UIImagePickerController : UINavigationController <NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIImagePickerController : UINavigationController <NSCoding>
 
 + (BOOL)isSourceTypeAvailable:(UIImagePickerControllerSourceType)sourceType;                 // returns YES if source is available (i.e. camera present)
 + (nullable NSArray<NSString *> *)availableMediaTypesForSourceType:(UIImagePickerControllerSourceType)sourceType; // returns array of available media types (i.e. kUTTypeImage)
@@ -108,7 +109,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) @interface UIImagePic
 
 @end
 
-API_UNAVAILABLE(tvos) @protocol UIImagePickerControllerDelegate<NSObject>
+API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@protocol UIImagePickerControllerDelegate<NSObject>
 @optional
 // The picker does not dismiss itself; the client dismisses it in these callbacks.
 // The delegate will receive one or the other, but not both, depending whether the user

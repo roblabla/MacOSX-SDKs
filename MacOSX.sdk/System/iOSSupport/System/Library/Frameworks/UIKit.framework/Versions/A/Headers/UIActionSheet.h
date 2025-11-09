@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, UIActionSheetStyle) {
     UIActionSheetStyleBlackOpaque      = UIBarStyleBlackOpaque ,
 } API_UNAVAILABLE(tvos) API_DEPRECATED("UIActionSheet is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleActionSheet instead.", ios(2.0, 13.0));
 
-UIKIT_EXTERN API_DEPRECATED("UIActionSheet is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleActionSheet instead", ios(2.0, 8.3)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_DEPRECATED("UIActionSheet is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleActionSheet instead", ios(2.0, 8.3)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIActionSheet : UIView
 
 - (instancetype)initWithTitle:(nullable NSString *)title delegate:(nullable id<UIActionSheetDelegate>)delegate cancelButtonTitle:(nullable NSString *)cancelButtonTitle destructiveButtonTitle:(nullable NSString *)destructiveButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION NS_EXTENSION_UNAVAILABLE_IOS("Use UIAlertController instead.");
@@ -59,7 +59,7 @@ UIKIT_EXTERN API_DEPRECATED("UIActionSheet is deprecated. Use UIAlertController 
 @end
 
 
-API_UNAVAILABLE(tvos)
+API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @protocol UIActionSheetDelegate <NSObject>
 @optional
 

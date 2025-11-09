@@ -46,7 +46,8 @@ typedef NS_ENUM(NSInteger, UIGuidedAccessRestrictionState) {
  
  The initial state of all Guided Access restrictions is UIGuidedAccessRestrictionStateAllow.
  */
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @protocol UIGuidedAccessRestrictionDelegate <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@protocol UIGuidedAccessRestrictionDelegate <NSObject>
 
 @required
 

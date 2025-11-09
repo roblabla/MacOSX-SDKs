@@ -5,11 +5,12 @@
 //  Copyright (c) 2014 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <CoreLocation/CLLocation.h>
+#import <Foundation/Foundation.h>
+
 #import <CloudKit/CKAsset.h>
-#import <CloudKit/CKReference.h>
 #import <CloudKit/CKDefines.h>
+#import <CloudKit/CKReference.h>
 
 @class CKRecordID, CKRecordZoneID;
 
@@ -186,6 +187,13 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0))
 
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0))
 @interface CKRecord(CKRecordKeyValueSettingConformance) <CKRecordKeyValueSetting>
+
+/*! Any values set here will be locally encrypted before being saved to the server and locally decrypted when fetched from the server. Encryption and decryption is handled by the CloudKit framework.
+ * Key material necessary for decryption are available to the owner of the record, as well as any users that can access this record via a CKShare.
+ * All CKRecordValue types can be set here except CKAsset and CKReference.
+ */
+@property (nonatomic, readonly, copy) id<CKRecordKeyValueSetting> encryptedValues API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+                                                                                                     
 @end
 
 NS_ASSUME_NONNULL_END

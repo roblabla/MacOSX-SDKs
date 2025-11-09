@@ -4,43 +4,44 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           75601AFD-9DAC-3045-8C73-4E439081AD7F
+    value:           D46DADAC-88C2-3B00-917F-A2D43D22425A
   - target:          x86_64-maccatalyst
-    value:           75601AFD-9DAC-3045-8C73-4E439081AD7F
+    value:           D46DADAC-88C2-3B00-917F-A2D43D22425A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3CF2EB16-6995-336C-B08B-DCD091FB3DE5
+    value:           84CD2D10-53F0-3389-869C-1FF689864499
   - target:          arm64e-maccatalyst
-    value:           3CF2EB16-6995-336C-B08B-DCD091FB3DE5
+    value:           84CD2D10-53F0-3389-869C-1FF689864499
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontWorkerAccess.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTI14TATSFontWorker, __ZTS14TATSFontWorker ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _BeginSandboxing, _CopyATSPathAppendingPath, _EnableSandbox, 
-                       _GetATSAlternatePath, _GetATSPath, _GetEnvironmentVariable, 
-                       _GetFontWorkerVT, _IsEnvironmentVariableEnabled, _LoadATSDylib, 
-                       _LoadATSDylibFunction, _XTConsumeSandboxExtension, _XTConsumeSandboxExtensions, 
-                       _XTDataStreamAppendBytes, _XTDataStreamAppendCString, _XTDataStreamAppendDouble, 
-                       _XTDataStreamAppendEmptySegments, _XTDataStreamAppendEmptyStrings, 
-                       _XTDataStreamAppendString, _XTDataStreamAppendUInt32, _XTDataStreamBytesLeftToRead, 
-                       _XTDataStreamBytesLeftToReadInCurrentSegment, _XTDataStreamClearStream, 
-                       _XTDataStreamClearToStartOfSegment, _XTDataStreamCloseReadSegment, 
-                       _XTDataStreamCloseWriteSegment, _XTDataStreamCreateStream, 
-                       _XTDataStreamCurrentReadSegment, _XTDataStreamCurrentWriteSegment, 
-                       _XTDataStreamFree, _XTDataStreamNextSegmentID, _XTDataStreamOpenReadSegment, 
-                       _XTDataStreamOpenWriteSegment, _XTDataStreamReadBytes, _XTDataStreamReadCString, 
-                       _XTDataStreamReadDouble, _XTDataStreamReadString, _XTDataStreamReadUInt32, 
-                       _XTDataStreamResetReadSegment, _XTDataStreamResetStream, _XTDataStreamShow, 
-                       _XTDataStreamSkipReadSegment, _XTDataStreamWithData, _XTIssueSandboxExtension, 
-                       _XTIssueSandboxExtensionsForURLs, _XTIssueSandboxExtensionsForURLsByPID, 
-                       __Z18CopyFindAndReplacePK10__CFStringS1_S1_, __Z19utf8CopyDescriptionPKv, 
-                       __Z29TFontWorkerProtocolSetClassesP14NSXPCInterface, __Z5MergePK9__CFArrayS1_R14TCFSortedArray, 
-                       __Z8utf8HashPKv, __Z9utf8EqualPKvS0_, __ZN10TCFTypeRef15GetBooleanValueEPKv, 
+    symbols:         [ _AllowInternalDevFeatures, _BeginSandboxing, _CopyATSPathAppendingPath, 
+                       _EnableSandbox, _GetATSAlternatePath, _GetATSPath, _GetAlternateFrameworkPath, 
+                       _GetEnvironmentVariable, _GetFontWorkerVT, _IsEnvironmentVariableEnabled, 
+                       _LoadATSDylib, _LoadATSDylibFunction, _XTConsumeSandboxExtension, 
+                       _XTConsumeSandboxExtensions, _XTDataStreamAppendBytes, _XTDataStreamAppendCString, 
+                       _XTDataStreamAppendDouble, _XTDataStreamAppendEmptySegments, 
+                       _XTDataStreamAppendEmptyStrings, _XTDataStreamAppendString, 
+                       _XTDataStreamAppendUInt32, _XTDataStreamBytesLeftToRead, _XTDataStreamBytesLeftToReadInCurrentSegment, 
+                       _XTDataStreamClearStream, _XTDataStreamClearToStartOfSegment, 
+                       _XTDataStreamCloseReadSegment, _XTDataStreamCloseWriteSegment, 
+                       _XTDataStreamCreateStream, _XTDataStreamCurrentReadSegment, 
+                       _XTDataStreamCurrentWriteSegment, _XTDataStreamFree, _XTDataStreamNextSegmentID, 
+                       _XTDataStreamOpenReadSegment, _XTDataStreamOpenWriteSegment, 
+                       _XTDataStreamReadBytes, _XTDataStreamReadCString, _XTDataStreamReadDouble, 
+                       _XTDataStreamReadString, _XTDataStreamReadUInt32, _XTDataStreamResetReadSegment, 
+                       _XTDataStreamResetStream, _XTDataStreamShow, _XTDataStreamSkipReadSegment, 
+                       _XTDataStreamWithData, _XTIssueSandboxExtension, _XTIssueSandboxExtensionsForURLs, 
+                       _XTIssueSandboxExtensionsForURLsByPID, __Z18CopyFindAndReplacePK10__CFStringS1_S1_, 
+                       __Z19utf8CopyDescriptionPKv, __Z29TFontWorkerProtocolSetClassesP14NSXPCInterface, 
+                       __Z5MergePK9__CFArrayS1_R14TCFSortedArray, __Z8utf8HashPKv, 
+                       __Z9utf8EqualPKvS0_, __ZN10TCFTypeRef15GetBooleanValueEPKv, 
                        __ZN11TCFBookmark16InitBookmarkDataEPK7__CFURLPK9__CFArraym, 
                        __ZN11TCFBookmark18sDefaultPropertiesE, __ZN11TCFBookmark20GetDefaultPropertiesEv, 
                        __ZN11TCFBookmark23CreateDefaultPropertiesEv, __ZN11TCFBookmark28CopyPropertyFromBookmarkDataEPK8__CFDataPK10__CFString, 
@@ -53,9 +54,9 @@ exports:
                        __ZN15TCoreFontWorkerD1Ev, __ZN15TCoreFontWorkerD2Ev, __ZN15TSessionManager11SetSafeModeEb, 
                        __ZN15TSessionManager15sSessionManagerE, __ZN15TSessionManager17GetSessionManagerEv, 
                        __ZN15TSessionManager18ResolveServiceNameEPcmPKc, __ZN15TSessionManager20CreateSessionManagerEv, 
-                       __ZN15TSessionManager20IsCJKLanguageEnabledEb, __ZN15TSessionManager22IsIndicLanguageEnabledEb, 
                        __ZN15TSessionManager22IsInstallerEnvironmentEv, __ZN15TSessionManager22sEnableSessionRegistryE, 
-                       __ZN15TSessionManager25GetFontAssetDirectoryPathEv, __ZN15TSessionManager29GetInstallationKindForFontURLEPK7__CFURL, 
+                       __ZN15TSessionManager25GetFontAssetDirectoryPathEv, __ZN15TSessionManager29EnabledLanguagesForFontAssetsEb, 
+                       __ZN15TSessionManager29GetInstallationKindForFontURLEPK7__CFURL, 
                        __ZN15TSessionManager31IsFontConflictProtectionEnabledEv, 
                        __ZN15TSessionManagerC1Ev, __ZN15TSessionManagerC2Ev, __ZN16TCFStringUniquer14sStringUniquerE, 
                        __ZN16TCFStringUniquer16GetStringUniquerEv, __ZN16TCFStringUniquer19CreateStringUniquerEPv, 
@@ -151,7 +152,9 @@ exports:
                        __ZTS17TCFFlattenContext, __ZTS19TCFResurrectContext, __ZTV15TCoreFontWorker, 
                        __ZTV17TCFFlattenContext, __ZTV19TCFResurrectContext, __fConnectionInterrupted, 
                        _indexOfSegment, _kAdopted, _kEscapeString, _kFWFailureMarker, 
-                       _kFWNonExistentMarker, _kIsDirectory, _kIsFile, _parentOfSegment, 
-                       _readStack, _segmentAtPosition, _writeSegmentAtPosition, _writeStack ]
+                       _kFWNonExistentMarker, _kFontAssetsPseudoLanguageCodeForCJK, 
+                       _kFontAssetsPseudoLanguageCodeForIndic, _kFontAssetsPseudoLanguageCodeForThai, 
+                       _kIsDirectory, _kIsFile, _parentOfSegment, _readStack, _segmentAtPosition, 
+                       _writeSegmentAtPosition, _writeStack ]
     objc-classes:    [ TFontWorkerClient ]
 ...

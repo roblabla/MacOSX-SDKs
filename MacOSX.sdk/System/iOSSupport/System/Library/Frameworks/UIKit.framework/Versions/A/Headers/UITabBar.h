@@ -24,7 +24,8 @@ typedef NS_ENUM(NSInteger, UITabBarItemPositioning) {
 @class UITabBarAppearance;
 @protocol UITabBarDelegate;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITabBar : UIView
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UITabBar : UIView
 
 @property(nullable, nonatomic, weak) id<UITabBarDelegate> delegate;     // weak reference. default is nil
 @property(nullable, nonatomic, copy) NSArray<UITabBarItem *> *items;        // get/set visible UITabBarItems. default is nil. changes not animated. shown in order
@@ -117,7 +118,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITabBar : UIView
 
 /// Describes the appearance attributes for the tab bar to use.
 @property (nonatomic, readwrite, copy) UITabBarAppearance *standardAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0), tvos(13.0));
-
+/// Describes the appearance attributes for the tabBar to use when an observable scroll view is scrolled to the bottom. If not set, standardAppearance will be used instead.
+@property (nonatomic, readwrite, copy, nullable) UITabBarAppearance *scrollEdgeAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(15.0));
 
 // A small view (200pt by 68pt) in the leading gutter next to tab bar to add accessories, such as logos, time, so on. If auto layout is used, it will be respected when placing subviews. If not, subviews will be places in respect to top left corner--meaning, frames of subviews will not be updated in any way.
 // This view and its subviews will have userInteractionEnabled set to NO at all time.
@@ -131,6 +133,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITabBar : UIView
 
 //___________________________________________________________________________________________________
 
+NS_SWIFT_UI_ACTOR
 @protocol UITabBarDelegate<NSObject>
 @optional
 

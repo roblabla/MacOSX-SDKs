@@ -4,7 +4,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2012-2019 Apple Inc. All rights reserved.
+    Copyright 2012-2021 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -494,6 +494,7 @@ API_AVAILABLE(macos(10.15), ios(7.0), macCatalyst(14.0), tvos(9.0)) API_UNAVAILA
 
 @class CIBarcodeDescriptor;
 
+API_AVAILABLE(macos(10.15), ios(7.0), macCatalyst(14.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVMetadataMachineReadableCodeObject (AVMetadataMachineReadableCodeDescriptor)
 
 /*!

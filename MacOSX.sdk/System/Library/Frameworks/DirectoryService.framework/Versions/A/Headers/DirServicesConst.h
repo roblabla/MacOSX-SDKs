@@ -2410,8 +2410,8 @@
 #define		kDSStdAuthMASKE_B						"dsAuthMethodStandard:dsAuthMASKE-B"
 
 /*!
- * @defined kDSStdAuthMPPEMasterKeys
- * @discussion Generated 40-bit or 128-bit master keys from MS-CHAPv2 credentials (RFC 3079).
+ * @defined kDSStdAuthMPPEPrimaryKeys
+ * @discussion Generated 40-bit or 128-bit primary keys from MS-CHAPv2 credentials (RFC 3079).
  *     The buffer is packed as follows:
  *
  *     4 byte length of user name,
@@ -2421,7 +2421,13 @@
  *     4 byte length of key size (always 1)
  *     key size, 8 or 16 (packed as a byte, not a string)
  */
-#define		kDSStdAuthMPPEMasterKeys				"dsAuthMethodStandard:dsAuthMPPEMasterKeys"
+#define		kDSStdAuthMPPEPrimaryKeys				"dsAuthMethodStandard:dsAuthMPPEPrimaryKeys"
+
+/*!
+ * @defined kDSStdAuthMPPEMasterKeys
+ * @discussion Deprecated in macOS 12.0.  Use kDSStdAuthMPPEPrimaryKeys.
+ */
+#define		kDSStdAuthMPPEMasterKeys (_Pragma("GCC warning \"Use kDSStdAuthMPPEPrimaryKeys instead\"")	"dsAuthMethodStandard:dsAuthMPPEMasterKeys")
 
 /*!
  * @defined kDSStdAuthMSCHAP1

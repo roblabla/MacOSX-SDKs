@@ -13,6 +13,7 @@
 #endif // __NW_INDIRECT__
 
 #include <Network/connection.h>
+#include <Network/connection_group.h>
 #include <Network/advertise_descriptor.h>
 #include <Network/error.h>
 
@@ -207,6 +208,41 @@ API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 void
 nw_listener_set_new_connection_handler(nw_listener_t listener,
 									   _Nullable nw_listener_new_connection_handler_t handler);
+
+/*!
+ * @typedef nw_listener_new_connection_group_handler_t
+ *
+ * @abstract
+ *		The block called to notify the client of a new connection group.
+ *
+ * @param connection_group
+ *		The new connection group object. This connection group is not yet started. Set the
+ *		event handler and other settings on the connection group before calling start.
+ */
+typedef void (^nw_listener_new_connection_group_handler_t)(nw_connection_group_t connection_group);
+
+/*!
+ * @function nw_listener_set_new_connection_group_handler
+ *
+ * @abstract
+ *		Sets a new connection group handler to be called upon receiving an incoming
+ *		connection that has a multiplexing protocol in its connected protocol stack.
+ *		Must be called before nw_listener_start. Note that this handler is mutually
+ *		exclusive with the new connection handler that is set via
+ *		nw_listener_set_new_connection_handler. Only one of these handlers may
+ *		be set at one time.
+ *
+ * @param listener
+ *		The listener object.
+ *
+ * @param handler
+ *		The event handler to call when the listener receives a new connection group.
+ *		Pass NULL to remove the new connection group handler.
+ */
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
+void
+nw_listener_set_new_connection_group_handler(nw_listener_t listener,
+											 _Nullable nw_listener_new_connection_group_handler_t handler);
 
 #endif // __BLOCKS__
 

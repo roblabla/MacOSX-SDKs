@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // When attributes=nil, the methods declared here uses the default behavior for each attribute described in <UIKit/NSAttributedString.h>. When stringDrawingContext=nil, it's equivalent of passing the default instance initialized with [[NSStringDrawingContext alloc] init].
 
-UIKIT_EXTERN API_AVAILABLE(macos(10.11), ios(6.0)) @interface NSStringDrawingContext : NSObject
+UIKIT_EXTERN API_AVAILABLE(macos(10.11), ios(6.0))
+@interface NSStringDrawingContext : NSObject
 
 // Minimum scale factor for drawWithRect:options:context: and boundingRectWithSize:options:context: methods. If this property is set, the extended string drawing methods will attempt to draw the attributed string in the given bounds by proportionally scaling the font(s) in the attributed string
 @property (NS_NONATOMIC_IOSONLY) CGFloat minimumScaleFactor;

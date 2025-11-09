@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const UNErrorDomain __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0));
+extern NSString * const UNErrorDomain API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0));
 
 typedef NS_ENUM(NSInteger, UNErrorCode) {
     UNErrorCodeNotificationsNotAllowed = 1,
@@ -21,4 +21,7 @@ typedef NS_ENUM(NSInteger, UNErrorCode) {
     
     UNErrorCodeNotificationInvalidNoDate = 1400,
     UNErrorCodeNotificationInvalidNoContent,
-} __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0));
+    
+    UNErrorCodeContentProvidingObjectNotAllowed = 1500,
+    UNErrorCodeContentProvidingInvalid,
+} API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0));

@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from IOMemoryMap.iig */
+/* iig(DriverKit-191) generated from IOMemoryMap.iig */
 
 /* IOMemoryMap.iig:1-46 */
 /*
@@ -197,11 +197,18 @@ class IOMemoryMap : public OSObject, public IOMemoryMapInterface
     friend class IOMemoryMapMetaClass;
 
 public:
+#ifdef IOMemoryMap_DECLARE_IVARS
+IOMemoryMap_DECLARE_IVARS
+#else /* IOMemoryMap_DECLARE_IVARS */
     union
     {
         IOMemoryMap_IVars * ivars;
         IOMemoryMap_LocalIVars * lvars;
     };
+#endif /* IOMemoryMap_DECLARE_IVARS */
+
+    static OSMetaClass *
+    sGetMetaClass() { return gIOMemoryMapMetaClass; };
 
     using super = OSObject;
 

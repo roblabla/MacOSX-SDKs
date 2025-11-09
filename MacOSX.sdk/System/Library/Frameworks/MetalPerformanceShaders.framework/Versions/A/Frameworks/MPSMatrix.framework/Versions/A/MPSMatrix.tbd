@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DCE514B8-AC5F-3BB0-AEF3-41C9ECC0D31F
+    value:           1C36ABB3-39E4-3886-9419-8D3FA24B5195
   - target:          x86_64-maccatalyst
-    value:           DCE514B8-AC5F-3BB0-AEF3-41C9ECC0D31F
+    value:           1C36ABB3-39E4-3886-9419-8D3FA24B5195
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           65D36A4C-08C4-311B-9AD2-5EBC36F2BF48
+    value:           64303590-4216-3B54-A675-426342960DED
   - target:          arm64e-maccatalyst
-    value:           65D36A4C-08C4-311B-9AD2-5EBC36F2BF48
+    value:           64303590-4216-3B54-A675-426342960DED
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSMatrix.framework/Versions/A/MPSMatrix'
-current-version: 124.4.12
+current-version: 125.0.30
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ MPSNDArray, MPSNeuralNetwork, MetalPerformanceShaders ]
+    clients:         [ MPSImage, MPSNDArray, MPSNeuralNetwork, MetalPerformanceShaders ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     objc-classes:    [ MPSMatrixBinaryKernel, MPSMatrixCopy, MPSMatrixCopyDescriptor, 
                        MPSMatrixDecompositionCholesky, MPSMatrixDecompositionLU, 
@@ -31,8 +31,4 @@ exports:
                        MPSMatrixRandomMTGP32, MPSMatrixRandomPhilox, MPSMatrixSoftMax, 
                        MPSMatrixSoftMaxGradient, MPSMatrixSolveCholesky, MPSMatrixSolveLU, 
                        MPSMatrixSolveTriangular, MPSMatrixUnaryKernel, MPSMatrixVectorMultiplication ]
-reexports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ __Z21MPSDecrementReadCountP18MPSTemporaryMatrix, __Z21MPSDecrementReadCountP18MPSTemporaryVector ]
 ...

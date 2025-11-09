@@ -19,6 +19,10 @@
 #import <QuickLook/QLThumbnailProvider.h>
 #import <QuickLook/QLThumbnailRequest.h>
 #import <QuickLook/QLThumbnailReply.h>
+#import <QuickLook/QLPreviewProvider.h>
+#import <QuickLook/QLPreviewReply.h>
+#import <QuickLook/QLFilePreviewRequest.h>
+#import <QuickLook/QLPreviewSceneActivationConfiguration.h>
 #endif
 
 #endif

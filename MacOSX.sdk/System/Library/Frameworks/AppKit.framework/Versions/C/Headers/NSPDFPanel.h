@@ -1,7 +1,7 @@
 /*
         NSPDFPanel.h
         Application Kit
-        Copyright (c) 2013-2019, Apple Inc.
+        Copyright (c) 2013-2021, Apple Inc.
         All rights reserved.
 */
 
@@ -20,7 +20,7 @@ typedef NS_OPTIONS(NSInteger, NSPDFPanelOptions) {
     NSPDFPanelRequestsParentDirectory = 1 << 24
 } API_AVAILABLE(macos(10.9));
 
-API_AVAILABLE(macos(10.9))
+API_AVAILABLE(macos(10.9)) NS_SWIFT_UI_ACTOR
 @interface NSPDFPanel : NSObject
 
 /* Create a new NSPDFPanel.

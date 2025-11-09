@@ -1,7 +1,7 @@
 /*
 	NSDocument.h
 	Application Kit
-	Copyright (c) 1997-2019, Apple Inc.
+	Copyright (c) 1997-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -85,6 +85,7 @@ typedef NS_ENUM(NSUInteger, NSSaveOperationType) {
     
 };
 
+NS_SWIFT_UI_ACTOR
 @interface NSDocument : NSObject<NSEditorRegistration, NSFilePresenter, NSMenuItemValidation, NSUserInterfaceValidations>
 
 #pragma mark *** Initialization ***

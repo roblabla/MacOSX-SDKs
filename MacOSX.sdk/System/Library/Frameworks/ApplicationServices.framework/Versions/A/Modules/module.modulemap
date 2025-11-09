@@ -9,14 +9,14 @@ framework module ApplicationServices [extern_c] {
         module * { export * }
     }
 
-    framework module HIServices [extern_c] {
-        umbrella header "HIServices.h"
+    framework module ATSUI [extern_c] {
+        umbrella header "ATSUnicode.h"
         export *
         module * { export * }
     }
 
-    framework module LangAnalysis [extern_c] {
-        umbrella header "LangAnalysis.h"
+    framework module HIServices [extern_c] {
+        umbrella header "HIServices.h"
         export *
         module * { export * }
     }

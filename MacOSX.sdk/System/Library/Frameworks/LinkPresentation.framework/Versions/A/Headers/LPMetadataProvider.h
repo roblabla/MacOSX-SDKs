@@ -37,6 +37,19 @@ LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos)
 - (void)startFetchingMetadataForURL:(NSURL *)URL completionHandler:(void(^)(LPLinkMetadata *_Nullable metadata, NSError *_Nullable error))completionHandler;
 
 /**
+ Fetch metadata for the given NSURLRequest.
+
+ The completion handler will be called on a non-main queue.
+
+ File URLs returned in the resultant LPLinkMetadata will be deleted
+ when the completion handler returns.
+
+ An exception will be thrown if this is called more than once
+ on a particular LPMetadataProvider instance.
+ */
+- (void)startFetchingMetadataForRequest:(NSURLRequest *)request completionHandler:(void(^)(LPLinkMetadata *_Nullable metadata, NSError *_Nullable error))completionHandler API_AVAILABLE(macos(12.0), ios(15.0));
+
+/**
  Cancel a metadata request.
 
  If the request had not already completed, the completion handler will be invoked

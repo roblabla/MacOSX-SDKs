@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract Lets you access shortcuts that have been added to Siri
  @seealso INVoiceShortcut
  */
-API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos)
+API_AVAILABLE(ios(12.0), macos(12.0), watchos(5.0)) API_UNAVAILABLE(tvos)
 @interface INVoiceShortcutCenter : NSObject
 
 @property (class, strong, readonly) INVoiceShortcutCenter *sharedCenter;

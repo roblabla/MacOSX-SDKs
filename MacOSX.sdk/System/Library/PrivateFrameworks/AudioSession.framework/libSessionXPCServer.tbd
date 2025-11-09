@@ -3,13 +3,19 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           68195099-AE60-35EA-BF6B-A14299FF7701
+    value:           8B08ECE8-2EBF-333C-B44E-A0BC8A7DA300
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3F22DA81-E806-3B82-AB47-11C5FF8F2DC4
+    value:           A704FD11-050C-3E13-871B-EBDDDA564E58
 install-name:    '/System/Library/PrivateFrameworks/AudioSession.framework/libSessionXPCServer.dylib'
 exports:
+  - targets:         [ x86_64-macos ]
+    weak-symbols:    [ __ZTINSt3__112bad_weak_ptrE, __ZTINSt3__117bad_function_callE, 
+                       __ZTISt11logic_error, __ZTISt12length_error, __ZTISt13runtime_error, 
+                       __ZTISt16invalid_argument, __ZTISt9exception, __ZTSNSt3__112bad_weak_ptrE, 
+                       __ZTSNSt3__117bad_function_callE, __ZTSSt11logic_error, __ZTSSt12length_error, 
+                       __ZTSSt13runtime_error, __ZTSSt16invalid_argument, __ZTSSt9exception ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AVAudioSession_startXPCServer, _AudioSessionXPCServerIsEnabled ]
 ...

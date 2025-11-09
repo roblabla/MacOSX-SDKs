@@ -74,5 +74,3 @@ extern void * hv_get_task_target(void);
  * @return The associated object, or NULL if no object is associated
  */
 extern void * hv_get_thread_target(void);
-
-extern void hv_port_notify(mach_msg_header_t *msg);

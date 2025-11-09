@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FE7A1C18-E3B0-3125-B627-DBBDD3170639
+    value:           566A61A2-8D84-3ED1-93B0-DF3953726B78
   - target:          x86_64-maccatalyst
-    value:           FE7A1C18-E3B0-3125-B627-DBBDD3170639
+    value:           566A61A2-8D84-3ED1-93B0-DF3953726B78
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           98334485-CC83-3BB3-823F-C1B882F3C6B7
+    value:           B5A5A728-D96A-356B-8AFB-3AA7E6954027
   - target:          arm64e-maccatalyst
-    value:           98334485-CC83-3BB3-823F-C1B882F3C6B7
+    value:           B5A5A728-D96A-356B-8AFB-3AA7E6954027
 install-name:    '/System/Library/PrivateFrameworks/ProactiveML.framework/Versions/A/ProactiveML'
-current-version: 1115.255
+current-version: 1150
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -49,8 +49,8 @@ exports:
                        PMLDataChunkDenseFloatVector, PMLDataChunkPlist, PMLDataChunkRaw, 
                        PMLDenseMatrix, PMLDenseVector, PMLDiffPrivacyNoiseStrategy, 
                        PMLEspressoDataProvider, PMLEspressoTrainingPlan, PMLEspressoTrainingVariables, 
-                       PMLFastTextVectorizer, PMLFidesTracker, PMLGaussianSampler, 
-                       PMLGradientSolver, PMLHashingVectorizer, PMLImmutableLogisticRegressionModel, 
+                       PMLFidesTracker, PMLGaussianSampler, PMLGradientResults, PMLGradientSolver, 
+                       PMLHashingVectorizer, PMLImmutableLogisticRegressionModel, 
                        PMLInMemoryCachedStore, PMLLabelLimitRowId, PMLLaplaceSampler, 
                        PMLLexicon, PMLLogRegEvaluationPlan, PMLLogRegTrainingPlan, 
                        PMLLogisticRegressionModel, PMLMetaTrainingVariables, PMLMockPlan, 

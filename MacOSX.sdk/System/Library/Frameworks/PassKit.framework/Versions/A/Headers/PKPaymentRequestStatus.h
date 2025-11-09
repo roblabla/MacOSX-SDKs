@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class PKShippingMethod;
 @class PKPaymentSummaryItem;
 @class PKPaymentMerchantSession;
+@class PKPaymentTokenConfiguration;
 
 API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0))
 @interface PKPaymentAuthorizationResult : NSObject
@@ -41,6 +42,10 @@ API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0))
 
 // The new payment summary items to update the payment request with
 @property (nonatomic, copy) NSArray<PKPaymentSummaryItem *> *paymentSummaryItems;
+
+// The new shipping methods to update the payment request with. An empty array, the default value,
+// indicates that the shipping methods don't need updating.
+@property (nonatomic, copy) NSArray<PKShippingMethod *> *shippingMethods API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0));
 
 @end
 
@@ -82,6 +87,19 @@ API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0))
 
 @property (nonatomic, assign) PKPaymentAuthorizationStatus status;
 @property (nullable, nonatomic, strong) PKPaymentMerchantSession *session;
+
+@end
+
+API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos)
+@interface PKPaymentRequestCouponCodeUpdate : PKPaymentRequestUpdate
+
+// You may optionally supply errors here.
+// See PKError for specific NSError keys to use.
+- (instancetype)initWithErrors:(nullable NSArray<NSError *> *)errors
+           paymentSummaryItems:(NSArray<PKPaymentSummaryItem *> *)paymentSummaryItems
+               shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods NS_DESIGNATED_INITIALIZER;
+
+@property (nonatomic, copy, null_resettable) NSArray<NSError *> *errors;
 
 @end
 

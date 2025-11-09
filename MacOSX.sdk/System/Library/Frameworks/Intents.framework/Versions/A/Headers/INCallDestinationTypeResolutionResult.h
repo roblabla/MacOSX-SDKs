@@ -11,8 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(11.0), watchos(4.0))
-API_UNAVAILABLE(macos, tvos)
+API_AVAILABLE(ios(11.0), macos(12.0), watchos(4.0))
+API_UNAVAILABLE(tvos)
 @interface INCallDestinationTypeResolutionResult : INIntentResolutionResult
 
 // This resolution result is for when the app extension wants to tell Siri to proceed, with a given INCallDestinationType. The resolvedValue can be different than the original INCallDestinationType. This allows app extensions to apply business logic constraints.

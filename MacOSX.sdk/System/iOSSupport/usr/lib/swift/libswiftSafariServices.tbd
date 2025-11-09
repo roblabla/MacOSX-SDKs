@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           1462B38B-BDD0-33F1-B67D-3D1BF9261E72
+    value:           92D5C6E1-2725-354D-858F-4C87B4BDF0AA
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           148EF82A-6528-383E-B553-547A9AA68762
+    value:           136475B8-E3C1-3F03-A406-19760476A49C
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftSafariServices.dylib'
 current-version: 2
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ '__swift_FORCE_LOAD_$_swiftSafariServices' ]
 ...

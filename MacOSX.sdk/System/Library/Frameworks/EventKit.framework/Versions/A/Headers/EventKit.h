@@ -23,6 +23,7 @@
 #import <EventKit/EKReminder.h>
 #import <EventKit/EKSource.h>
 #import <EventKit/EKStructuredLocation.h>
+#import <EventKit/EKVirtualConferenceProvider.h>
 
 #endif //#if __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
 

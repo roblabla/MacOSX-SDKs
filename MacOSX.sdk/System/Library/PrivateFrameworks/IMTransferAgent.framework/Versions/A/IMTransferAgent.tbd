@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A353F3A6-F1F0-3B00-99C1-ADF11E7E92DE
+    value:           81FCADEA-B7B2-3D7B-91DA-7338D9D844EF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8E83963B-3DE9-3D47-B727-F397E41CDBCF
+    value:           84DC4324-2285-3A32-8971-7E6D3F3E8275
 install-name:    '/System/Library/PrivateFrameworks/IMTransferAgent.framework/Versions/A/IMTransferAgent'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _CKNicknameRecordType, _IMOptOutOfOptimizedMadridAttachmentDownloadPath, 
+    symbols:         [ _CKNicknameRecordType, _FTAWDFZErrorFromFZErrorType, _IMOptOutOfOptimizedMadridAttachmentDownloadPath, 
                        _IMOptOutOfOptimizedMadridAttachmentUploadPath, _IMSetOptOutOfOptimizedMadridAttachmentDownloadPath, 
                        _IMSetOptOutOfOptimizedMadridAttachmentUploadPath ]
     objc-classes:    [ FTiMessageRequestMMCSDownloadToken, FTiMessageRequestMMCSUploadToken, 

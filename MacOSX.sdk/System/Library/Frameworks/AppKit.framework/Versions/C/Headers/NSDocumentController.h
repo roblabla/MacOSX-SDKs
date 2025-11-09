@@ -1,7 +1,7 @@
 /*
 	NSDocumentController.h
 	Application Kit
-	Copyright (c) 1997-2019, Apple Inc.
+	Copyright (c) 1997-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -17,6 +17,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSDocument, NSError, NSMenuItem, NSMutableDictionary, NSOpenPanel, NSURL, NSWindow;
 
+NS_SWIFT_UI_ACTOR
 @interface NSDocumentController : NSObject<NSCoding, NSMenuItemValidation, NSUserInterfaceValidations>
 
 #pragma mark *** The Shared Document Controller ***

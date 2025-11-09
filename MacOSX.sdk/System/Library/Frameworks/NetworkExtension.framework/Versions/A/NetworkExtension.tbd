@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6C5DFAD5-68F1-36FF-8303-4E2D55F803CA
+    value:           95678AF7-9365-38B8-A9FB-6FA7AA58F132
   - target:          x86_64-maccatalyst
-    value:           6C5DFAD5-68F1-36FF-8303-4E2D55F803CA
+    value:           95678AF7-9365-38B8-A9FB-6FA7AA58F132
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0D6D41F7-32D3-394E-9039-1FC1324F60DC
+    value:           C1AA74C2-74C3-3D72-88BC-5AC742A7DF99
   - target:          arm64e-maccatalyst
-    value:           0D6D41F7-32D3-394E-9039-1FC1324F60DC
+    value:           C1AA74C2-74C3-3D72-88BC-5AC742A7DF99
 install-name:    '/System/Library/Frameworks/NetworkExtension.framework/Versions/A/NetworkExtension'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/Network.framework/Versions/A/Network' ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CFARRAY_TYPE, _CFBOOLEAN_TYPE, _CFDATA_TYPE, _CFDICTIONARY_TYPE, 
                        _CFNUMBER_TYPE, _CFSTRING_TYPE, _NEAddAddressToDictionary, 
@@ -133,26 +133,27 @@ exports:
                        _NEVirtualInterfaceSetDNSPort, _NEVirtualInterfaceSetDNSSearchDomains, 
                        _NEVirtualInterfaceSetDNSServers, _NEVirtualInterfaceSetDNSServiceIdentifier, 
                        _NEVirtualInterfaceSetDNSSupplementalMatchDomains, _NEVirtualInterfaceSetDNSSupplementalMatchDomainsNoSearch, 
-                       _NEVirtualInterfaceSetDNSSupplementalMatchOrders, _NEVirtualInterfaceSetDelegateInterface, 
-                       _NEVirtualInterfaceSetIPv4Router, _NEVirtualInterfaceSetIPv6Router, 
-                       _NEVirtualInterfaceSetMTU, _NEVirtualInterfaceSetMTUOverhead, 
-                       _NEVirtualInterfaceSetMaxPendingPackets, _NEVirtualInterfaceSetOutputTrafficClass, 
-                       _NEVirtualInterfaceSetProxies, _NEVirtualInterfaceSetRankLast, 
-                       _NEVirtualInterfaceSetRankNever, _NEVirtualInterfaceSetRankPrimaryEligible, 
-                       _NEVirtualInterfaceSetReadAutomatically, _NEVirtualInterfaceSetReadIPPacketHandler, 
-                       _NEVirtualInterfaceSetReadIPPayloadHandler, _NEVirtualInterfaceSetReadMultipleIPPacketsHandler, 
-                       _NEVirtualInterfaceSetReadMultipleIPPayloadsHandler, _NEVirtualInterfaceSetServiceID, 
-                       _NEVirtualInterfaceSetServiceIndex, _NEVirtualInterfaceSetVPNServerAddress, 
-                       _NEVirtualInterfaceUpdateAdHocService, _NEVirtualInterfaceUpdateAdHocServiceReturnChanges, 
-                       _NEVirtualInterfaceWriteIPPacket, _NEVirtualInterfaceWriteIPPayload, 
-                       _NEVirtualInterfaceWriteMultipleIPPackets, _NEVirtualInterfaceWriteMultipleIPPayloads, 
-                       _NEVirtualInterfaceWriteMultipleIPPayloadsFromArray, _g_cfil_flow_uuid_template, 
-                       _g_provider_host_primary_neagent_instance_id, _inputNotification2String, 
-                       _isa_neclass, _isa_nsarray, _isa_nsdata, _isa_nsdictionary, 
-                       _isa_nsnull, _isa_nsnumber, _isa_nsset, _isa_nsstring, _isa_nsurl, 
-                       _isa_nsuuid, _kNEAccountIdentifierMatchKey, _kNEActionAllowValue, 
-                       _kNEActionDropValue, _kNEActionKey, _kNEActiveVPNKey, _kNEAllowAllCaptiveNetworkPluginsKey, 
-                       _kNEAllowCaptiveWebSheetKey, _kNEAllowCellularDataKey, _kNEAllowRoamingCellularDataKey, 
+                       _NEVirtualInterfaceSetDNSSupplementalMatchOrders, _NEVirtualInterfaceSetDSCPMapping, 
+                       _NEVirtualInterfaceSetDelegateInterface, _NEVirtualInterfaceSetIPv4Router, 
+                       _NEVirtualInterfaceSetIPv6Router, _NEVirtualInterfaceSetMTU, 
+                       _NEVirtualInterfaceSetMTUOverhead, _NEVirtualInterfaceSetMaxPendingPackets, 
+                       _NEVirtualInterfaceSetOutputTrafficClass, _NEVirtualInterfaceSetProxies, 
+                       _NEVirtualInterfaceSetRankLast, _NEVirtualInterfaceSetRankNever, 
+                       _NEVirtualInterfaceSetRankPrimaryEligible, _NEVirtualInterfaceSetReadAutomatically, 
+                       _NEVirtualInterfaceSetReadIPPacketHandler, _NEVirtualInterfaceSetReadIPPayloadHandler, 
+                       _NEVirtualInterfaceSetReadMultipleIPPacketsHandler, _NEVirtualInterfaceSetReadMultipleIPPayloadsHandler, 
+                       _NEVirtualInterfaceSetServiceID, _NEVirtualInterfaceSetServiceIndex, 
+                       _NEVirtualInterfaceSetVPNServerAddress, _NEVirtualInterfaceUpdateAdHocService, 
+                       _NEVirtualInterfaceUpdateAdHocServiceReturnChanges, _NEVirtualInterfaceWriteIPPacket, 
+                       _NEVirtualInterfaceWriteIPPayload, _NEVirtualInterfaceWriteMultipleIPPackets, 
+                       _NEVirtualInterfaceWriteMultipleIPPayloads, _NEVirtualInterfaceWriteMultipleIPPayloadsFromArray, 
+                       _g_cfil_flow_uuid_template, _g_provider_host_primary_neagent_instance_id, 
+                       _inputNotification2String, _isa_neclass, _isa_nsarray, _isa_nsdata, 
+                       _isa_nsdictionary, _isa_nsnull, _isa_nsnumber, _isa_nsset, 
+                       _isa_nsstring, _isa_nsurl, _isa_nsuuid, _kNEAccountIdentifierMatchKey, 
+                       _kNEActionAllowValue, _kNEActionDropValue, _kNEActionKey, 
+                       _kNEActiveVPNKey, _kNEAllowAllCaptiveNetworkPluginsKey, _kNEAllowCaptiveWebSheetKey, 
+                       _kNEAllowCellularDataKey, _kNEAllowRoamingCellularDataKey, 
                        _kNEAllowedCaptiveNetworkPluginsKey, _kNEAlwaysOnKey, _kNEAppIdentifierMatchesKey, 
                        _kNEAppRules, _kNEApplicationRulesKey, _kNEAuthEAPPluginsKey, 
                        _kNEAuthMethodCertificateValue, _kNEAuthMethodNoneValue, _kNEAuthMethodPasswordValue, 
@@ -164,21 +165,26 @@ exports:
                        _kNECCPMPPE128Enabled, _kNECCPMPPE40Enabled, _kNECFFilterBrowsersKey, 
                        _kNECFFilterPacketsKey, _kNECFFilterSocketsKey, _kNECFFilterTypeKey, 
                        _kNECFFilterTypeValuePlugin, _kNECFOrganizationKey, _kNECFPasswordDescriptionValue, 
-                       _kNECFPluginBundleIDKey, _kNECFServerAddressKey, _kNECertificateDataKey, 
-                       _kNECertificatePassphraseKey, _kNECommRemoteAddressKey, _kNEDNSDomainMatchKey, 
-                       _kNEDNSKey, _kNEDNSProxyAppBundleIdentifierKey, _kNEDNSProxyProviderBundleIdentifierKey, 
+                       _kNECFPluginBundleIDKey, _kNECFPreserveExistingConnectionsKey, 
+                       _kNECFServerAddressKey, _kNECertificateDataKey, _kNECertificatePassphraseKey, 
+                       _kNECommRemoteAddressKey, _kNEDNSDomainMatchKey, _kNEDNSKey, 
+                       _kNEDNSProxyAppBundleIdentifierKey, _kNEDNSProxyProviderBundleIdentifierKey, 
                        _kNEDNSProxyProviderConfigurationKey, _kNEDesignatedRequirementKey, 
                        _kNEDisconnectOnFastUserSwitch, _kNEDisconnectOnIdle, _kNEDisconnectOnIdleTimeOutKey, 
                        _kNEDisconnectOnIdleTimer, _kNEDisconnectOnLogout, _kNEDisconnectOnSleep, 
                        _kNEDisconnectOnWake, _kNEDisconnectOnWakeTimer, _kNEEnabledKey, 
                        _kNEEncryptedIPSecSharedSecretKey, _kNEExecutableMatchKey, 
-                       _kNEExportedSharedSecretKey, _kNEExtendedAuthEnabledKey, _kNEHotspotHelperOptionDisplayName, 
-                       _kNEIKEv1DiffieHellmanGroupKey, _kNEIKEv1EncryptionAlgorithm3DESValue, 
-                       _kNEIKEv1EncryptionAlgorithmAES256Value, _kNEIKEv1EncryptionAlgorithmAESValue, 
-                       _kNEIKEv1EncryptionAlgorithmDESValue, _kNEIKEv1EncryptionAlgorithmKey, 
-                       _kNEIKEv1ExchangeModeKey, _kNEIKEv1IntegrityAlgorithmKey, 
-                       _kNEIKEv1IntegrityAlgorithmMD5Value, _kNEIKEv1IntegrityAlgorithmSHA1Value, 
-                       _kNEIKEv1LifetimeKey, _kNEIKEv1ProposalsKey, _kNEIKEv2CertificateTypeECDSA256Value, 
+                       _kNEExportedSharedSecretKey, _kNEExtendedAuthEnabledKey, _kNEExtensibleSSOProvider, 
+                       _kNEFlowPropertyAppRuleIdentifier, _kNEFlowPropertyAppUnique, 
+                       _kNEFlowPropertyDestinationEndpoint, _kNEFlowPropertyDestinationName, 
+                       _kNEFlowPropertyNetworkServiceType, _kNEFlowPropertyType, 
+                       _kNEHotspotHelperOptionDisplayName, _kNEIKEv1DiffieHellmanGroupKey, 
+                       _kNEIKEv1EncryptionAlgorithm3DESValue, _kNEIKEv1EncryptionAlgorithmAES256Value, 
+                       _kNEIKEv1EncryptionAlgorithmAESValue, _kNEIKEv1EncryptionAlgorithmDESValue, 
+                       _kNEIKEv1EncryptionAlgorithmKey, _kNEIKEv1ExchangeModeKey, 
+                       _kNEIKEv1IntegrityAlgorithmKey, _kNEIKEv1IntegrityAlgorithmMD5Value, 
+                       _kNEIKEv1IntegrityAlgorithmSHA1Value, _kNEIKEv1LifetimeKey, 
+                       _kNEIKEv1ProposalsKey, _kNEIKEv2CertificateTypeECDSA256Value, 
                        _kNEIKEv2CertificateTypeECDSA384Value, _kNEIKEv2CertificateTypeECDSA521Value, 
                        _kNEIKEv2CertificateTypeEd25519Value, _kNEIKEv2CertificateTypeKey, 
                        _kNEIKEv2CertificateTypeRSAValue, _kNEIKEv2ChildSAParametersKey, 
@@ -300,18 +306,19 @@ exports:
                        NEPathController, NEPathControllerNetworkAgent, NEPathEvent, 
                        NEPathEventObserver, NEPathRule, NEPolicy, NEPolicyCondition, 
                        NEPolicyResult, NEPolicyRouteRule, NEPolicySession, NEPolicySessionFileHandle, 
-                       NEProcessIdentity, NEProcessInfo, NEProfileIngestion, NEProfileIngestionPayloadInfo, 
-                       NEProfilePayloadBase, NEProfilePayloadContentFilter, NEProvider, 
-                       NEProviderServer, NEProxyConfigurationNetworkAgent, NEProxyServer, 
-                       NEProxySettings, NETransparentProxyManager, NETransparentProxyNetworkSettings, 
-                       NETransparentProxyProvider, NETunnelNetworkSettings, NETunnelProvider, 
-                       NETunnelProviderManager, NETunnelProviderProtocol, NETunnelProviderSession, 
-                       NEUserNotification, NEUtilConfigurationClient, NEVPN, NEVPNApp, 
-                       NEVPNConnection, NEVPNIKEv1ProposalParameters, NEVPNIKEv2SecurityAssociationParameters, 
+                       NEPrivateLTENetwork, NEProcessIdentity, NEProcessInfo, NEProfileIngestion, 
+                       NEProfileIngestionPayloadInfo, NEProfilePayloadBase, NEProfilePayloadContentFilter, 
+                       NEProvider, NEProviderServer, NEProxyConfigurationNetworkAgent, 
+                       NEProxyServer, NEProxySettings, NETransparentProxyManager, 
+                       NETransparentProxyNetworkSettings, NETransparentProxyProvider, 
+                       NETunnelNetworkSettings, NETunnelProvider, NETunnelProviderManager, 
+                       NETunnelProviderProtocol, NETunnelProviderSession, NEUserNotification, 
+                       NEUtilConfigurationClient, NEVPN, NEVPNApp, NEVPNConnection, 
+                       NEVPNIKEv1ProposalParameters, NEVPNIKEv2SecurityAssociationParameters, 
                        NEVPNManager, NEVPNNetworkAgent, NEVPNProtocol, NEVPNProtocolIKEv2, 
                        NEVPNProtocolIPSec, NEVPNProtocolL2TP, NEVPNProtocolPPP, NEVPNProtocolPPTP, 
                        NEVPNProtocolPlugin, NWTLSParameters ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CertTypeFormat, _NEGetRefFromConfigProfileUUID, _NEImportKeychainPayload, 
                        _NEKeychainSystemRemoveWithPersistentID, _NEVerifyDesignatedRequirement, 
                        _kNEProfilePayloadVPNAppMappingDomain ]

@@ -59,6 +59,7 @@
 #import <Intents/INDeleteTasksTaskResolutionResult.h>
 #import <Intents/INFileResolutionResult.h>
 #import <Intents/INFlight.h>
+#import <Intents/INFocusStatus.h>
 #import <Intents/INLocationSearchType.h>
 #import <Intents/INLocationSearchTypeResolutionResult.h>
 #import <Intents/INMediaAffinityType.h>

@@ -196,7 +196,7 @@ API_AVAILABLE(macos(10.11))
 @property NSTimeInterval interactionTimeout;
 
 /// Runs the interaction.
-- (void)runWithReply: (void(^)(BOOL success, NSError *__nullable error))reply;
+- (void)runWithReply:(void(^)(BOOL success, NSError *__nullable error))reply NS_SWIFT_ASYNC_THROWS_ON_FALSE(0);
 
 /// Attempts to cancel a running interaction. Note that for some interactions, this functionality might not be available.
 /// @return Returns NO if the operation is not running, or cancelling is not supported.
@@ -300,7 +300,7 @@ API_AVAILABLE(macos(10.10))
 /// @discussion When session exists, other requests for sessions from other card objects to the same card are blocked. Session is reference-counted, the same amount of 'end' calls must be done to really terminate the session. Note that finishing session does not automatically mean that the card is disconnected; it only happens when another session from different card object is requested.
 /// @param success Signals whether session was successfully started.
 /// @param error More information about error preventing the transaction to start
-- (void)beginSessionWithReply:(void(^)(BOOL success, NSError *__nullable error))reply;
+- (void)beginSessionWithReply:(void(^)(BOOL success, NSError *__nullable error))reply NS_SWIFT_ASYNC_THROWS_ON_FALSE(0);
 
 /// Transmits raw command to the card.  This call is allowed only inside session.
 /// @param request Request part of APDU

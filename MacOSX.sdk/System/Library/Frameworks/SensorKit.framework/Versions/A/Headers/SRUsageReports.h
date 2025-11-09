@@ -49,6 +49,22 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 
 @end
 
+typedef NS_ENUM(NSInteger, SRTextInputSessionType) {
+    SRTextInputSessionTypeKeyboard = 1,
+    SRTextInputSessionTypeThirdPartyKeyboard,
+    SRTextInputSessionTypePencil,
+    SRTextInputSessionTypeDictation,
+} API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+
+SR_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+@interface SRTextInputSession : NSObject
+
+@property (readonly) NSTimeInterval duration;
+
+@property (readonly) SRTextInputSessionType sessionType;
+
+@end
+
 SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
 @interface SRApplicationUsage : NSObject
 
@@ -57,6 +73,30 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 
 /// The amount of time the app is used
 @property (readonly) NSTimeInterval usageTime;
+
+/*!
+ * @property reportApplicationIdentifier
+ *
+ * @brief An application identifier that is valid for the duration of the report.
+ *
+ * @discussion This is useful for identifying distinct application uses within the same
+ * report duration without revealing the actual application identifier.
+ */
+@property (readonly, copy) NSString *reportApplicationIdentifier API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+
+/*!
+ * @property textInputSessions
+ *
+ * @brief
+ * The text input session types that occurred during this application usage
+ *
+ * @discussion
+ * The list of text input sessions describes the order and type of text input that may
+ * have occured during an application usage. Multiple sessions of the same text input
+ * type will appear as separate array entries. If no text input occurred, this array
+ * will be empty.
+ */
+@property (readonly, copy) NSArray<SRTextInputSession *> *textInputSessions API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
 
 @end
 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9CBC3DB1-FE97-311D-A19F-1A09B4F2CEFA
+    value:           498FB377-4A1E-3324-B9BF-4CC95DC4D176
   - target:          x86_64-maccatalyst
-    value:           9CBC3DB1-FE97-311D-A19F-1A09B4F2CEFA
+    value:           498FB377-4A1E-3324-B9BF-4CC95DC4D176
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D57B98F2-728A-362A-8C33-D67D7031D5BD
+    value:           A6C2CA0F-D0D1-3299-8ACF-277F90A98C13
   - target:          arm64e-maccatalyst
-    value:           D57B98F2-728A-362A-8C33-D67D7031D5BD
+    value:           A6C2CA0F-D0D1-3299-8ACF-277F90A98C13
 install-name:    '/System/Library/PrivateFrameworks/CoreAutoLayout.framework/Versions/A/CoreAutoLayout'
-current-version: 21.10.1
+current-version: 28
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -38,7 +38,7 @@ exports:
                        __NSRuleNodeAppendDebugDescription ]
     objc-classes:    [ NSAlignmentLayoutRule, NSAutoresizingMaskLayoutConstraint, 
                        NSContentSizeLayoutConstraint, NSIBPrototypingLayoutConstraint, 
-                       NSISEngine, NSISLinearExpression, NSISObjectiveLinearExpression, 
+                       NSISEngine, NSISLinearExpression, NSISObjectiveLinearExpressionProxy, 
                        NSISVariable, NSLayoutAnchor, NSLayoutAnchorRule, NSLayoutConstraint, 
                        NSLayoutConstraintExplainer, NSLayoutDimension, NSLayoutPoint, 
                        NSLayoutPointRule, NSLayoutRect, NSLayoutRectRule, NSLayoutRectangle, 

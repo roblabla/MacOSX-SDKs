@@ -11,7 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos, tvos) @interface UIEventAttributionView : UIView
+UIKIT_EXTERN API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIEventAttributionView : UIView
 
 @end
 

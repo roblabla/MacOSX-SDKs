@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C50B24C1-4717-31A9-962A-B1CC319AAEAE
+    value:           A844A135-36C9-37AF-AD0F-1CB2D747648C
   - target:          x86_64-maccatalyst
-    value:           C50B24C1-4717-31A9-962A-B1CC319AAEAE
+    value:           A844A135-36C9-37AF-AD0F-1CB2D747648C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           052D881B-5021-3CAD-9FEA-80563FD864C9
+    value:           CFD3A665-5E1A-3CF4-9A63-10DF210CD9EB
   - target:          arm64e-maccatalyst
-    value:           052D881B-5021-3CAD-9FEA-80563FD864C9
+    value:           CFD3A665-5E1A-3CF4-9A63-10DF210CD9EB
 install-name:    '/usr/lib/swift/libswiftCoreAudio.dylib'
 current-version: 1.1
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCoreAudio.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCoreAudio.dylib', 
@@ -27,7 +27,7 @@ exports:
                        '$ld$install_name$os10.13$@rpath/libswiftCoreAudio.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCoreAudio.dylib', 
                        '$ld$install_name$os10.9$@rpath/libswiftCoreAudio.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s9CoreAudio013UnsafeMutableB17BufferListPointerV06unsafeG0SPySo0beF0VGvg', 
                        '_$s9CoreAudio013UnsafeMutableB17BufferListPointerV06unsafeG0SPySo0beF0VGvpMV', 
                        '_$s9CoreAudio013UnsafeMutableB17BufferListPointerV06unsafedG0SpySo0beF0VGvM', 

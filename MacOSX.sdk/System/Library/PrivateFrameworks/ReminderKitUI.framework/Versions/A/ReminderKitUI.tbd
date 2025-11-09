@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C2884B7A-CEA5-3493-A5C0-6D2AFED4EA81
+    value:           788F9BDC-9BEA-3C71-AC89-523EB3B19C7D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2748EE56-1E6E-349E-B915-769012190E70
+    value:           518FBD91-28D0-39C8-A0C3-6FD15C4044AD
 install-name:    '/System/Library/PrivateFrameworks/ReminderKitUI.framework/Versions/A/ReminderKitUI'
-current-version: 370
+current-version: 482
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ReminderKitUIVersionNumber, _ReminderKitUIVersionString ]

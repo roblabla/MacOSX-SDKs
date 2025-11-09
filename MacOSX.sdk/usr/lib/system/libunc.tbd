@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0752017F-14C6-309E-AD45-F84E82EF724C
+    value:           CE15BEB1-3174-3E0D-B605-9E75745C90D6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DEDFFC67-13DE-3C30-962B-D511760D1534
+    value:           B942D849-726B-30F0-8561-0B32F9E59E81
 install-name:    '/usr/lib/system/libunc.dylib'
-current-version: 30
+current-version: 31
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        System

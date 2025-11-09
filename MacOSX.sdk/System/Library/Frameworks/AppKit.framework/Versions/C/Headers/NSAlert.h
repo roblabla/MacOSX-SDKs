@@ -1,7 +1,7 @@
 /*
 	NSAlert.h
 	Application Kit
-	Copyright (c) 1994-2019, Apple Inc.
+	Copyright (c) 1994-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -41,6 +41,7 @@ static const NSModalResponse NSAlertFirstButtonReturn = 1000;
 static const NSModalResponse NSAlertSecondButtonReturn = 1001;
 static const NSModalResponse NSAlertThirdButtonReturn = 1002;
 
+NS_SWIFT_UI_ACTOR
 @interface NSAlert : NSObject
 
 /* Given an NSError, create an NSAlert that can be used to present the error to the user. The error's localized description, recovery suggestion, and recovery options will be used to set the alert's message text, informative text, and button titles, respectively.

@@ -12,7 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
     
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(tvos) @interface UIRefreshControl : UIControl
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIRefreshControl : UIControl
 
 /* The designated initializer
  * This initializes a UIRefreshControl with a default height and width.

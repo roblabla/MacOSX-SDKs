@@ -50,7 +50,7 @@ API_AVAILABLE(ios(11.0), tvos(11.0));
 /// Whether the user might expect to be prompted to authenticate in order to complete this request.
 @property (nonatomic, assign, getter=isInterruptionAllowed) BOOL interruptionAllowed;
 
-/// Controls whether the request will ignore any cached credentials.
+/// Requests that the TV Provider reauthenticate the user if they are already authenticated.
 @property (nonatomic, assign) BOOL forceAuthentication;
 
 /// Attributes to add to a SAML attributeQuery request and sent to the account provider.

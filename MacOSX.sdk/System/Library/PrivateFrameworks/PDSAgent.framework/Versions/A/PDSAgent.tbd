@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BE6B649D-7DC0-346E-B3BC-462C0C529FCF
+    value:           7210590E-D5E8-3FEF-86A9-F3067C3371CB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5F647B58-B18B-369A-9B03-F86DE5D60319
+    value:           E866D5CF-3E12-3C1B-B376-3608EDB4EAEF
 install-name:    '/System/Library/PrivateFrameworks/PDSAgent.framework/Versions/A/PDSAgent'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -18,10 +18,11 @@ exports:
                        _PDSProtoUserPushTokenRegResponseReadFrom, _PDSProtocolVersionNumber, 
                        _PDSStringForServerEnvironment ]
     objc-classes:    [ PDSBag, PDSCDCacheContainer, PDSConfiguration, PDSCoordinator, 
-                       PDSDaemon, PDSDaemonListener, PDSEntryStore, PDSInternalDaemonListener, 
-                       PDSProtoBatchRegisterReq, PDSProtoBatchRegisterResp, PDSProtoGSTokenAuth, 
-                       PDSProtoMapEntry, PDSProtoTopic, PDSProtoUserAuth, PDSProtoUserPushToken, 
-                       PDSProtoUserPushTokenRegRequest, PDSProtoUserPushTokenRegResponse, 
-                       PDSRegisterMessage, PDSRequest, PDSRequestInfo, PDSRequestQueue, 
-                       PDSResponse, PDSUserTracker, PDSXPCClient, PDSXPCServer ]
+                       PDSDaemon, PDSDaemonListener, PDSDaemonRemoteVendor, PDSEntryStore, 
+                       PDSHeartbeatTracker, PDSInternalDaemonListener, PDSProtoBatchRegisterReq, 
+                       PDSProtoBatchRegisterResp, PDSProtoGSTokenAuth, PDSProtoMapEntry, 
+                       PDSProtoTopic, PDSProtoUserAuth, PDSProtoUserPushToken, PDSProtoUserPushTokenRegRequest, 
+                       PDSProtoUserPushTokenRegResponse, PDSRegisterMessage, PDSRequest, 
+                       PDSRequestInfo, PDSRequestQueue, PDSResponse, PDSUserTracker, 
+                       PDSXPCClient, PDSXPCServer ]
 ...

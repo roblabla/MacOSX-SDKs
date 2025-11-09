@@ -40,13 +40,13 @@ typedef NS_ENUM(NSInteger, WKContentMode) {
     WKContentModeRecommended,
     WKContentModeMobile,
     WKContentModeDesktop
-} API_AVAILABLE(ios(13.0));
+} WK_API_AVAILABLE(ios(13.0));
 
 /*! A WKWebpagePreferences object is a collection of properties that
  determine the preferences to use when loading and rendering a page.
  @discussion Contains properties used to determine webpage preferences.
  */
-WK_EXTERN API_AVAILABLE(macos(10.15), ios(13.0))
+WK_CLASS_AVAILABLE(macos(10.15), ios(13.0))
 @interface WKWebpagePreferences : NSObject
 
 /*! @abstract A WKContentMode indicating the content mode to prefer
@@ -54,7 +54,7 @@ WK_EXTERN API_AVAILABLE(macos(10.15), ios(13.0))
  @discussion The default value is WKContentModeRecommended. The stated
  preference is ignored on subframe navigation
  */
-@property (nonatomic) WKContentMode preferredContentMode API_AVAILABLE(ios(13.0));
+@property (nonatomic) WKContentMode preferredContentMode WK_API_AVAILABLE(ios(13.0));
 
 /* @abstract A Boolean value indicating whether JavaScript from web content is enabled
  @discussion If this value is set to NO then JavaScript referenced by the web content will not execute.
@@ -69,6 +69,6 @@ WK_EXTERN API_AVAILABLE(macos(10.15), ios(13.0))
 
  The default value is YES.
 */
-@property (nonatomic) BOOL allowsContentJavaScript API_AVAILABLE(macos(11.0), ios(14.0));
+@property (nonatomic) BOOL allowsContentJavaScript WK_API_AVAILABLE(macos(11.0), ios(14.0));
 
 @end

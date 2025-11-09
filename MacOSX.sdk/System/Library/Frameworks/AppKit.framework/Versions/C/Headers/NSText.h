@@ -2,7 +2,7 @@
 /*
 	NSText.h
 	Application Kit
-	Copyright (c) 1994-2019, Apple Inc.
+	Copyright (c) 1994-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -17,7 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if !TARGET_OS_IPHONE
 
-/* Values for NSTextAlignment */
+#if !__NSTEXT_SHARED_SECTION__
+#define __NSTEXT_SHARED_SECTION__ 1
+#pragma mark NSTextAlignment
 typedef NS_ENUM(NSInteger, NSTextAlignment) {
     NSTextAlignmentLeft      = 0,    // Visually left aligned
 #if TARGET_ABI_USES_IOS_VALUES
@@ -31,12 +33,14 @@ typedef NS_ENUM(NSInteger, NSTextAlignment) {
     NSTextAlignmentNatural   = 4     // Indicates the default alignment for script
 } API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));
 
-/* Values for NSWritingDirection */
+#pragma mark NSWritingDirection
 typedef NS_ENUM(NSInteger, NSWritingDirection) {
     NSWritingDirectionNatural       = -1,   // Determines direction using the Unicode Bidi Algorithm rules P2 and P3
     NSWritingDirectionLeftToRight   = 0,    // Left to right writing direction
     NSWritingDirectionRightToLeft   = 1     // Right to left writing direction
 } API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));
+#endif // __NSTEXT_SHARED_SECTION__
+
 #endif // !TARGET_OS_IPHONE
 
 APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST

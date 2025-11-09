@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
   See UIAccessibility.h for more information about hints and labels.
 */
 
-API_UNAVAILABLE(tvos)
+API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @protocol UIPickerViewAccessibilityDelegate <UIPickerViewDelegate>
 
 @optional
@@ -40,6 +40,7 @@ API_UNAVAILABLE(tvos)
  this protocol to announce "Showing books 10 through 20".
  By default, VoiceOver will announce "Page X of Y" when scrolling. 
  */
+NS_SWIFT_UI_ACTOR
 @protocol UIScrollViewAccessibilityDelegate <UIScrollViewDelegate>
 
 @optional

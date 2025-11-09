@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           951F55FB-F13F-30E6-AB97-1CEEBE0E78DE
+    value:           541A5E27-0C22-3757-AA91-9FE9FBDE8D68
   - target:          x86_64-maccatalyst
-    value:           951F55FB-F13F-30E6-AB97-1CEEBE0E78DE
+    value:           541A5E27-0C22-3757-AA91-9FE9FBDE8D68
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B1A5ABC0-AF8F-3B2E-9125-346B9FBA49C3
+    value:           B795A8B0-F85F-3D7E-B0BE-A27F5FF9596E
   - target:          arm64e-maccatalyst
-    value:           B1A5ABC0-AF8F-3B2E-9125-346B9FBA49C3
+    value:           B795A8B0-F85F-3D7E-B0BE-A27F5FF9596E
 install-name:    '/System/Library/PrivateFrameworks/CommonUtilities.framework/Versions/A/CommonUtilities'
 current-version: 800
 exports:
@@ -37,7 +37,7 @@ exports:
                        _CUTXPCAlertv, _CUTXPCConfigureConnection, _CUTXPCConnectionSetEventHandlers, 
                        _CUTXPCCreateConnectionForService, _CUTXPCCreateConnectionForServiceWithQueue, 
                        _CUTXPCCreateServerConnection, _cut_arc_os_release, _cut_backtrace, 
-                       _cut_log_group_generation, _cut_non_arc_os_release ]
+                       _cut_dispatch_log_queue, _cut_log_group_generation, _cut_non_arc_os_release ]
     objc-classes:    [ CUTAsyncReducer, CUTAsyncReducerState, CUTCheckpoint, CUTCheckpointInstant, 
                        CUTCheckpointRange, CUTCheckpointSignpost, CUTCheckpointTrace, 
                        CUTDeferredTaskQueue, CUTFileCopier, CUTNetworkInterfaceListener, 

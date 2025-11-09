@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AF41CDA1-8FE0-3D66-BBDB-BB543A5321E1
+    value:           A324E6E4-4FDD-34F0-80E5-53B72AA7E819
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           616E8361-4D70-3A79-AB89-7F12ED1C8964
+    value:           9EF1080B-A763-37A2-AE34-A6A19F654E47
 install-name:    '/System/Library/PrivateFrameworks/ContactsAssistantServices.framework/Versions/A/ContactsAssistantServices'
 current-version: 0
 compatibility-version: 0

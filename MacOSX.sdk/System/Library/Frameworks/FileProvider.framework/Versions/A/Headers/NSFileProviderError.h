@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT NSErrorDomain const NSFileProviderErrorDomain FILEPROVIDER_API_AVAILABILITY_V2_V3;
 
-FOUNDATION_EXPORT NSErrorUserInfoKey const NSFileProviderErrorCollidingItemKey API_DEPRECATED("NSFileProviderErrorItemKey", ios(8.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos);
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSFileProviderErrorCollidingItemKey API_DEPRECATED("NSFileProviderErrorItemKey", ios(8.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos) API_UNAVAILABLE(macCatalyst);
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSFileProviderErrorItemKey API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(macCatalyst) API_UNAVAILABLE(watchos, tvos);
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSFileProviderErrorNonExistentItemIdentifierKey FILEPROVIDER_API_AVAILABILITY_V2_V3;
 
@@ -80,10 +80,17 @@ typedef NS_ERROR_ENUM(NSFileProviderErrorDomain, NSFileProviderErrorCode) {
     NSFileProviderErrorNewerExtensionVersionFound FILEPROVIDER_API_AVAILABILITY_V3 = -2004,
 
     /**
-     Returned by NSFileProviderManager if a barrier failed for a sync-related error.
+     Indicates that synchronization cannot happen.
+
+     This error can be returned by the provider or the system.
+
+     This is returned by NSFileProviderManager if a barrier failed for a sync-related error.
 
      If the failure is caused by a specific item, the NSFileProviderErrorItemKey will be set to the corresponding item identifier
      and the NSUnderlyingErrorKey will be set to the error encountered by that item.
+
+     When a provider returns that error, it means the syncing an item is definitively broken, and cannot be resolved without an update of
+     either the provider or the system.
      */
     NSFileProviderErrorCannotSynchronize FILEPROVIDER_API_AVAILABILITY_V3 = -2005,
 

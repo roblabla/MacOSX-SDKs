@@ -52,6 +52,14 @@ Enumerators:
   SwiftName: uchar3
 - Name: MTLDataTypeUChar4
   SwiftName: uchar4
+- Name: MTLDataTypeULong
+  SwiftName: ulong
+- Name: MTLDataTypeULong2
+  SwiftName: ulong2
+- Name: MTLDataTypeULong3
+  SwiftName: ulong3
+- Name: MTLDataTypeULong4
+  SwiftName: ulong4
 - Name: MTLDataTypeRGBA8Unorm_sRGB
   SwiftName: rgba8Unorm_srgb
 - Name: MTLDataTypeRGB10A2Unorm
@@ -651,6 +659,20 @@ Protocols:
   - Selector: 'newIntersectionFunctionTableWithDescriptor:'
     SwiftName: makeIntersectionFunctionTable(descriptor:)
     MethodKind: Instance
+- Name: MTLRenderPipelineState
+  Methods:
+  - Selector: 'functionHandleWithFunction:stage:'
+    SwiftName: functionHandle(function:stage:)
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateWithAdditionalBinaryFunctions:error:'
+    SwiftName: makeRenderPipelineState(additionalBinaryFunctions:)
+    MethodKind: Instance
+  - Selector: 'newVisibleFunctionTableWithDescriptor:stage:'
+    SwiftName: makeVisibleFunctionTable(descriptor:stage:)
+    MethodKind: Instance
+  - Selector: 'newIntersectionFunctionTableWithDescriptor:stage:'
+    SwiftName: makeIntersectionFunctionTable(descriptor:stage:)
+    MethodKind: Instance
 - Name: MTLDevice
   Methods:
   - Selector: 'getDefaultSamplePositions:count:'
@@ -676,6 +698,12 @@ Protocols:
     MethodKind: Instance
   - Selector: 'newLibraryWithSource:options:completionHandler:'
     SwiftName: makeLibrary(source:options:completionHandler:)
+    MethodKind: Instance
+  - Selector: 'newLibraryWithStitchedDescriptor:error:'
+    SwiftName: makeLibrary(stitchedDescriptor:)
+    MethodKind: Instance
+  - Selector: 'newLibraryWithStitchedDescriptor:completionHandler:'
+    SwiftName: makeLibrary(stitchedDescriptor:completionHandler:)
     MethodKind: Instance
   - Selector: 'newRenderPipelineStateWithDescriptor:completionHandler:'
     SwiftName: makeRenderPipelineState(descriptor:completionHandler:)
@@ -1144,6 +1172,51 @@ Protocols:
   - Selector: 'sampleCountersInBuffer:atSampleIndex:withBarrier:'
     MethodKind: Instance
     SwiftName: sampleCounters(sampleBuffer:sampleIndex:barrier:)
+  - Selector: 'setVertexVisibleFunctionTable:atBufferIndex:'
+    SwiftName: setVertexVisibleFunctionTable(_:bufferIndex:)
+    MethodKind: Instance
+  - Selector: 'setVertexVisibleFunctionTables:withBufferRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setFragmentVisibleFunctionTable:atBufferIndex:'
+    SwiftName: setFragmentVisibleFunctionTable(_:bufferIndex:)
+    MethodKind: Instance
+  - Selector: 'setFragmentVisibleFunctionTables:withBufferRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setTileVisibleFunctionTable:atBufferIndex:'
+    SwiftName: setTileVisibleFunctionTable(_:bufferIndex:)
+    MethodKind: Instance
+  - Selector: 'setTileVisibleFunctionTables:withBufferRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setVertexIntersectionFunctionTable:atBufferIndex:'
+    SwiftName: setVertexIntersectionFunctionTable(_:bufferIndex:)
+    MethodKind: Instance
+  - Selector: 'setVertexIntersectionFunctionTables:withBufferRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setFragmentIntersectionFunctionTable:atBufferIndex:'
+    SwiftName: setFragmentIntersectionFunctionTable(_:bufferIndex:)
+    MethodKind: Instance
+  - Selector: 'setFragmentIntersectionFunctionTables:withBufferRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setTileIntersectionFunctionTable:atBufferIndex:'
+    SwiftName: setTileIntersectionFunctionTable(_:bufferIndex:)
+    MethodKind: Instance
+  - Selector: 'setTileIntersectionFunctionTables:withBufferRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setVertexAccelerationStructure:atBufferIndex:'
+    SwiftName: setVertexAccelerationStructure(_:bufferIndex:)
+    MethodKind: Instance
+  - Selector: 'setFragmentAccelerationStructure:atBufferIndex:'
+    SwiftName: setFragmentAccelerationStructure(_:bufferIndex:)
+    MethodKind: Instance
+  - Selector: 'setTileAccelerationStructure:atBufferIndex:'
+    SwiftName: setTileAccelerationStructure(_:bufferIndex:)
+    MethodKind: Instance
 - Name: MTLSharedEvent
   Methods:
   - Selector: 'newSharedEventHandle'
@@ -1258,6 +1331,9 @@ Protocols:
   - Selector: 'writeCompactedAccelerationStructureSize:toBuffer:offset:'
     SwiftName: writeCompactedSize(accelerationStructure:buffer:offset:)
     MethodKind: Instance
+  - Selector: 'writeCompactedAccelerationStructureSize:toBuffer:offset:sizeDataType:'
+    SwiftName: writeCompactedSize(accelerationStructure:buffer:offset:sizeDataType:)
+    MethodKind: Instance
   - Selector: 'copyAndCompactAccelerationStructure:toAccelerationStructure:'
     SwiftName: copyAndCompact(sourceAccelerationStructure:destinationAccelerationStructure:)
     MethodKind: Instance
@@ -1292,6 +1368,9 @@ Protocols:
     MethodKind: Instance
   - Selector: 'addTileRenderPipelineFunctionsWithDescriptor:error:'
     SwiftName: addTileRenderPipelineFunctions(descriptor:)
+    MethodKind: Instance
+  - Selector: 'addFunctionWithDescriptor:library:error:'
+    SwiftName: addFunction(descriptor:library:)
     MethodKind: Instance
 
 SwiftVersions:
@@ -1677,7 +1756,7 @@ SwiftVersions:
       SwiftName: useHeaps(_:count:)
       MethodKind: Instance
     - Selector: 'memoryBarrierWithResources:count:afterStages:beforeStages:'
-      SwiftName: memoryBarrier(resources:count:after:before)
+      SwiftName: memoryBarrier(resources:count:after:before:)
       MethodKind: Instance
     - Selector: 'updateFence:afterStages:'
       SwiftName: update(_:after:)

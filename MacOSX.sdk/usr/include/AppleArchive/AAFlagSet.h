@@ -95,10 +95,12 @@ APPLE_ARCHIVE_ENUM(AAFlags, uint64_t) {
   AA_FLAG_EXTRACT_AUTO_DEDUP_AS_HARD_LINKS = (UINT64_C(1) << 7),
 
   /*!
-    @abstract Insert IDX field when decoding archive
+    @abstract Insert IDX,IDZ field when decoding archive
 
     @discussion
-    If this bit is set, the archive decoder will insert an IDX field in the header before returning from readHeader.
+    If this bit is set, the archive decoder will insert IDX,IDZ fields in the header before
+    returning from readHeader.  These are the offset and size of the entry in the uncompressed
+    archive.
   */
   AA_FLAG_DECODE_INSERT_IDX = (UINT64_C(1) << 8),
 
@@ -109,6 +111,11 @@ APPLE_ARCHIVE_ENUM(AAFlags, uint64_t) {
     If this bit is set, metadata entries will be excluded from processing.
   */
   AA_FLAG_EXCLUDE_METADATA_ENTRIES = (UINT64_C(1) << 9),
+
+  /*!
+    @abstract Use \p pwrite on the output stream in RandomAccessByteStreamProcess
+  */
+  AA_FLAG_PROCESS_RANDOM_ACCESS_OUTPUT = (UINT64_C(1) << 10),
 
   /*!
     @abstract Verbosity level

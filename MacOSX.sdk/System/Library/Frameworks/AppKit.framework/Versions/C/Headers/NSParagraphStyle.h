@@ -1,7 +1,7 @@
 #if !__has_include(<UIFoundation/NSParagraphStyle.h>)
 /*
         NSParagraphStyle.h
-        Copyright (c) 1994-2019, Apple Inc.  All rights reserved.
+        Copyright (c) 1994-2021, Apple Inc.  All rights reserved.
  
 	NSParagraphStyle and NSMutableParagraphStyle hold paragraph style information
 	NSTextTab holds information about a single tab stop
@@ -90,6 +90,9 @@ API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0)) @interface NSParag
 // Specifies the threshold for hyphenation.  Valid values lie between 0.0 and 1.0 inclusive.  Hyphenation will be attempted when the ratio of the text width as broken without hyphenation to the width of the line fragment is less than the hyphenation factor.  When this takes on its default value of 0.0, the layout manager's hyphenation factor is used instead.  When both are 0.0, hyphenation is disabled.
 @property (readonly) float hyphenationFactor;
 
+// A property controlling the hyphenation behavior for the paragraph associated with the paragraph style. The exact hyphenation logic is dynamically determined by the layout context such as language, platform, etc. When YES, it affects the return value from -hyphenationFactor when the property is set to 0.0.
+@property (readonly) BOOL usesDefaultHyphenation API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
 @property (readonly,copy) NSArray<NSTextTab *> *tabStops API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0)); // An array of NSTextTabs. Contents should be ordered by location. The default value is an array of 12 left-aligned tabs at 28pt interval
 @property (readonly) CGFloat defaultTabInterval API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0)); // The default tab interval used for locations beyond the last element in tabStops
 
@@ -124,6 +127,7 @@ API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0)) @interface NSMutab
 @property CGFloat lineHeightMultiple;
 @property CGFloat paragraphSpacingBefore;
 @property float hyphenationFactor;
+@property (readwrite) BOOL usesDefaultHyphenation API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 @property (null_resettable, copy) NSArray<NSTextTab *> *tabStops API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0));
 @property CGFloat defaultTabInterval API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0));
 @property BOOL allowsDefaultTighteningForTruncation API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));

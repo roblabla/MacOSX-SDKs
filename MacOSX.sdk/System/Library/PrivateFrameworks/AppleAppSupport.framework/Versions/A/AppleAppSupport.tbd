@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3A42CBE2-ACBD-386C-A41B-87DAD2981171
+    value:           6CB0863D-C2ED-35F6-A09C-D568919CA47D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B6224556-AEFC-3612-A339-AE38E9D6D1AD
+    value:           5B547842-363A-3A4F-8C21-0E6E204A0264
 install-name:    '/System/Library/PrivateFrameworks/AppleAppSupport.framework/Versions/A/AppleAppSupport'
 current-version: 1.4
 compatibility-version: 1.2

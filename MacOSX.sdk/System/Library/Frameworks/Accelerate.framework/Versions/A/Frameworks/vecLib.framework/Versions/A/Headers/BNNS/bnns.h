@@ -331,30 +331,51 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 
   @discussion
   Create an N layer fused filter that process input in the following way: input -> filter0 -> filter1 -> ... -> filter N-1 -> output
-  first N-1 filters must have activation function BNNSActivationFunctionIdentity
+  first N-1 filters must have activation function BNNSActivationFunctionIdentity in training.
   last filter may have a different activation function. gradient computation restrictions on last activation function are the same as in BNNSFilterApplyBackwardBatch.
-
   For K between 0 and N-2, the K filter output descriptor and the K+1 filter input descriptor  must have the same sizes, strides and data type.
 
   Initial implementation support fusing 2 filters in the following configurations:
- 
-  Configuration 1: Convolution -> Normalization+Activation
+  Configuration 1: Convolution -> Normalization
   filter0 is convolution and filter1 is normalization. for example, the filter_type and layer_params arrays when using batchnorm should be as follows:
   filter_type: [BNNSConvolution, BNNSBatchNorm]
   layer_params: [pointer to BNNSLayerParametersConvolution, pointer to BNNSLayerParametersNormalization]
-  convolution must have activation function BNNSActivationFunctionIdentity, normalization can have any activation function as long as it comply with fused activation restrictions described in BNNSFilterApplyBackwardBatch
 
-  Configuration 2: FullyConnected -> Normalization+Activation
+  Configuration 2: FullyConnected -> Normalization
   filter0 is fully connected and filter1 is normalization. for example, the filter_type and layer_params arrays when using batchnorm should be as follows:
   filter_type: [BNNSFullyConnected, BNNSBatchNorm]
   layer_params: [pointer to BNNSLayerParametersFullyConnected, pointer to BNNSLayerParametersNormalization]
-  fully connected must have activation function BNNSActivationFunctionIdentity, normalization can have any activation function as long as it comply with fused activation restrictions described in BNNSFilterApplyBackwardBatch
 
-  Configuration 3: Transposed Convolution -> Normalization+Activation
+  Configuration 3: Transposed Convolution -> Normalization
   filter0 is tranposed convolution and filter1 is normalization. for example, the filter_type and layer_params arrays when using batchnorm should be as follows:
   filter_type: [BNNSTransposedConvolution, BNNSBatchNorm]
   layer_params: [pointer to BNNSLayerParametersConvolution, pointer to BNNSLayerParametersNormalization]
-  transposed convolution must have activation function BNNSActivationFunctionIdentity, normalization can have any activation function as long as it comply with fused activation restrictions described in BNNSFilterApplyBackwardBatch
+
+  Configuration 4: Convolution -> Quantization
+  filter0 is convolution and filter1 is quantization. The filter_type and layer_params arrays should be as follows:
+  filter_type: [BNNSConvolution, BNNSQuantization]
+  layer_params: [pointer to BNNSLayerParametersConvolution, pointer to BNNSLayerParametersQuantization]
+  input and ouput descriptor data pointers in BNNSLayerParametersQuantization are ignored
+  Note that if the quantization layer uses batch as an axis with scale and/or bias, the batch size is encoded in the quantization layer parameters. In this case, if the batch size changes, the filter must be destroyed and recreated.
+ 
+  Configuration 5: FullyConnected -> Quantization
+  filter0 is fully connected and filter1 is quantization. The filter_type and layer_params arrays should be as follows:
+  filter_type: [BNNSFullyConnected, BNNSQuantization]
+  layer_params: [pointer to BNNSLayerParametersFullyConnected, pointer to BNNSLayerParametersQuantization]
+  input and ouput descriptor data pointers in BNNSLayerParametersQuantization are ignored
+  Note that if the quantization layer uses batch as an axis with scale and/or bias, the batch size is encoded in the quantization layer parameters. In this case, if the batch size changes, the filter must be destroyed and recreated.
+ 
+  Configuration 6: Transposed Convolution -> Quantization
+  filter0 is tranposed convolution and filter1 is quantization. The filter_type and layer_params arrays should be as follows:
+  filter_type: [BNNSTransposedConvolution, BNNSQuantization]
+  layer_params: [pointer to BNNSLayerParametersConvolution, pointer to BNNSLayerParametersQuantization]
+  input and ouput descriptor data pointers in BNNSLayerParametersQuantization are ignored
+  Note that if the quantization layer uses batch as an axis with scale and/or bias, the batch size is encoded in the quantization layer parameters. In this case, if the batch size changes, the filter must be destroyed and recreated.
+ 
+  Configuration 7: Arithmetic -> Normalization
+  filter0 is arithmetic and filter1 is normalization. for example, the filter_type and layer_params arrays when using batchnorm should be as follows:
+  filter_type: [BNNSArithmetic, BNNSBatchNorm]
+  layer_params: [pointer to BNNSLayerParametersArithmetic, pointer to BNNSLayerParametersNormalization]
 
   @param number_of_fused_filters number of filters to fuse
   @param filter_type pointer to an array of filter type, array size must be number_of_fused_filters
@@ -370,6 +391,21 @@ BNNSFilter BNNSFilterCreateFusedLayer(const size_t number_of_fused_filters,
                                       const void *_Nonnull *_Nonnull layer_params,
                                       const BNNSFilterParameters * _Nullable filter_params)
 __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+
+/*! @abstract Create an embedding layer
+ *
+ *  @discussion
+ *  See the description of BNNSLayerParametersEmbedding for a full explanation of this layer.
+ *
+ *  @seealso BNNSLayerParametersEmbedding
+ *
+ *  @param layer_params layer description
+ *  @param filter_params Filter runtime parameters, may be NULL for default parameters
+ *  @return A new non-NULL filter on success, and NULL on failure.
+ */
+BNNSFilter BNNSFilterCreateLayerEmbedding(const BNNSLayerParametersEmbedding * layer_params,
+                                          const BNNSFilterParameters * _Nullable filter_params)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 
 #pragma mark - Inference
 
@@ -542,7 +578,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  @param out_stride Increment (in values) between outputs
  @param training true if training, false if inference
  -ignored if none of the filters is batchnorm
- -see training flag information in BNNSBatchNormFilterApplyBatch
+ -see training flag information in BNNSNormalizationFilterApplyBatch
 
  @return 0 on success, and -1 on failure.
 
@@ -556,6 +592,41 @@ int BNNSFusedFilterApplyBatch(BNNSFilter filter,
                               size_t out_stride,
                               bool training)
 __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+
+/*!
+
+ @abstract Apply a fused filter to several pairs of (input set, output) data
+
+ @discussion
+ The filter is applied for each of the <tt>batch_size</tt> input set, and produces <tt>batch_size</tt> outputs.
+ <tt>in</tt> (resp. <tt>out</tt>) is expected to point to <tt>batch_size</tt> times the input (resp. output) object size defined when the filter was created.
+
+ Currently only fused arithmetic -> normalization configuration is supported.
+
+ @param filter Filter to apply
+ @param batch_size Number of (input sets, output) pairs to process
+ @param number_of_inputs number of inputs for the arithmetic operation
+ @param in pointer to an array of input pointers. in array size must be number_of_inputs.
+ @param in_stride pointer to an array of input strides, each stride is an Increment (in values) between inputs in the batch for a corresponding input in the in array.
+ @param out Pointer to the output data
+ @param out_stride Increment (in values) between outputs
+ @param training true if training, false if inference
+ -ignored if none of the filters is batchnorm
+ -see training flag information in BNNSNormalizationFilterApplyBatch
+
+ @return 0 on success, and -1 on failure.
+
+ */
+
+int BNNSFusedFilterApplyMultiInputBatch(BNNSFilter filter,
+                                        size_t batch_size,
+                                        size_t number_of_inputs,
+                                        const void * _Nonnull * _Nonnull in,
+                                        const size_t *_Nonnull in_stride,
+                                        void * _Nonnull out,
+                                        size_t out_stride,
+                                        bool training)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 
 /*!
 
@@ -631,8 +702,16 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  *  @param value_stride Batch stride for value
  *  @param output Pointer to data for output matrix, layout as described by layer_params->output.target_desc
  *  @param output_stride Batch stride for output
- *  @param add_to_attention Optional, a 2D tensor of shape target_length x source_length that is used as part of the mask function prior
- *         to softmax in the attention calculation (the matrix X in the layer description). No matrix is added if this pointer is NULL.
+ *  @param add_to_attention Optional, one of:
+ *         1) a 2D tensor of shape target_length x source_length; or
+ *         2) a 3D tensor of shape num_heads x target_length x source_length; or
+ *         3) a 4D tensor of shape batch_size x num_heads x target_length x source_length.
+ *         This is used as part of the mask function prior to softmax in the attention calculation (the matrix X in the layer description).
+ *         If the data type is BNNSDataTypeBoolean, true is treated as adding -inf, and false as adding zero (that is to say attention
+ *         is not permitted in locations indicated by the the mask).
+ *         No matrix is added if this pointer is NULL.
+ *         Note: The 3D, 4D and BNNSDataTypeBoolean variants of this parameter are only supported in macOS 12.0, iOS 15.0,
+ *         watchOS 8.0, tvOS 15.0 and later.
  *  @param backprop_cache_size Specifies the size of the array backprop_cache, in bytes.
  *         If backprop_cache_size is not-NULL but backprop_cache is NULL, the recommended size for backprop_cache_size
  *         will be set, but not other calculations will be performed (except to set workspace_size if requested).
@@ -654,6 +733,25 @@ int BNNSApplyMultiheadAttention(BNNSFilter F, size_t batch_size,
                                 size_t * _Nullable workspace_size, void * _Nullable workspace)
 __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 
+/*!
+ @abstract Direct Apply a Quantization filter
+
+ @discussion
+ The Quantization layer converts higher precision tensors to lower precision tensors (Quantize) or lower precision tensors to higher precision tensors (Dequantize)
+ 
+ @param layer_params Quantizer layer parameters
+ @param filter_params Filter runtime parameters, may be NULL for default parameters
+ @param batch_size Number of (input, output) pairs to process
+ @param input_stride Increment (in values) between inputs
+ @param output_stride Increment (in values) between outputs
+ @return Zero on success, non-zero on failure.
+ */
+int BNNSDirectApplyQuantizer(const BNNSLayerParametersQuantization * layer_params,
+                             const BNNSFilterParameters * _Nullable filter_params,
+                             size_t batch_size,
+                             size_t input_stride,
+                             size_t output_stride)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 #pragma mark - Filter destruction
 
 /*!
@@ -665,7 +763,6 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
   @param filter Filter to destroy
 
 */
-
 void BNNSFilterDestroy(BNNSFilter filter)
 __API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
@@ -693,6 +790,21 @@ __API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
   Set to a size 2*number_of_parameters array.
   The first number_of_parameters pointers are used for the first momentum descriptors, and the subsequent number_of_parameters pointers are used for the second  momentum descriptors.
 
+  BNNSOptimizerFunctionAdamAMSGrad
+  ===============================
+  Set to a size 3*number_of_parameters array.
+  The first number_of_parameters pointers are used for the first momentum descriptors, the second number_of_parameters pointers are used for the second  momentum descriptors, and the third number_of_parameters pointers are used for the second momentum maxima descriptors.
+
+  BNNSOptimizerFunctionAdamW
+  ========================
+  Set to a size 2*number_of_parameters array.
+  The first number_of_parameters pointers are used for the first momentum descriptors, and the subsequent number_of_parameters ointers are used for the second  momentum descriptors.
+
+  BNNSOptimizerFunctionAdamWAMSGrad
+  ===============================
+  Set to a size 3*number_of_parameters array.
+  The first number_of_parameters pointers are used for the first momentum descriptors, the second number_of_parameters pointers are used for the second  momentum descriptors, and the third number_of_parameters pointers are used for the second momentum maxima descriptors.
+
   BNNSOptimizerFunctionRMSProp
   ==========================
   Should be of size k*number_of_parameters, where
@@ -718,6 +830,114 @@ int BNNSOptimizerStep(BNNSOptimizerFunction function, const void *OptimizerAlgFi
                       BNNSNDArrayDescriptor * _Nullable * _Nullable accumulators,
                       const BNNSFilterParameters * _Nullable filter_params)
 __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+
+/*!
+
+ @abstract Clip tensor values to a specified min and max
+
+ @discussion
+ Given a tensor src, this operation writes to a tensor dest of the same type and shape as src with its values clipped to min_val and max_val.
+
+ @param dest descriptor for the destination tensor
+ @param src descriptor for the source tensor, must be of the same type and shape as the dest descriptor.
+ @param min_val The minimum value.
+ @param max_val The maximum value.
+
+ @returns 0 on success, non-zero on failure
+ */
+int BNNSClipByValue(BNNSNDArrayDescriptor * _Nonnull dest,
+                    const BNNSNDArrayDescriptor * _Nonnull src,
+                    float min_val, float max_val)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*!
+
+ @abstract Clip tensor values to a maximum L2-norm.
+
+ @discussion
+ Given a tensor src, this operation writes to a tensor dest of the same type and shape as src with its values clipped such that the L2-norm does not
+ exceed max_norm.
+
+ @param dest descriptor for the destination tensor
+ @param src descriptor for the source tensor, must be of the same type and shape as the dest descriptor.
+ @param max_norm The maximum L2-norm.
+ @param axis_flags The dimensions to use for computing the L2-norm. If 0, uses all dimensions.
+
+ @returns 0 on success, non-zero on failure
+ */
+int BNNSClipByNorm(BNNSNDArrayDescriptor * _Nonnull dest,
+                   const BNNSNDArrayDescriptor * _Nonnull src,
+                   float max_norm,
+                   uint32_t axis_flags)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*!
+
+ @abstract Clip values of a list of tensors by a maximum global L2-norm.
+
+ @discussion
+ Given a list of tensors src, and a maximum global L2-norm, max_norm, this operation computes a list of clipped tensors.
+ If you already know the global norm of src, you can specify the global norm to use with use_norm.
+
+ @param dest array of destination tensor descriptors
+ @param src array of source tensor descriptors. Each descriptor data in the array must be the same size as its matching dest descriptor in the dest array.
+ @param count number of descriptors in the dest and src arrays
+ @param max_norm maximum global L2-norm
+ @param use_norm The global norm to use. If zero, global norm is computed based on src.
+
+ @returns 0 on success, non-zero on failure
+ */
+int BNNSClipByGlobalNorm(BNNSNDArrayDescriptor * _Nonnull * _Nonnull dest,
+                         const BNNSNDArrayDescriptor * _Nonnull * _Nonnull src,
+                         size_t count,
+                         float max_norm,
+                         float use_norm)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*!
+
+ @abstract Compute the norm of the input tensor.
+
+ @discussion
+ Given a tensor src, this operation compute its specified norm along the specified axes.
+
+ @param dest descriptor for the destination tensor. The dimensions in axis_flags are removed from the destination shape.
+        If axis_flags specifies all dimensions, destination descriptor must be BNNSDataLayoutVector with size[0] = 1.
+ @param src descriptor for the source tensor.
+ @param norm_type Type of the norm. Currently only L2-norm is supported.
+ @param axis_flags The dimensions to use for computing the L2-norm. If 0, uses all dimensions.
+
+ @returns 0 on success, non-zero on failure
+ */
+int BNNSComputeNorm(BNNSNDArrayDescriptor * _Nonnull dest,
+                    const BNNSNDArrayDescriptor * _Nonnull src,
+                    BNNSNormType norm_type,
+                    uint32_t axis_flags)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*!
+
+ @abstract Backward path of norm computation to generate input delta.
+
+ @discussion
+ The backward computation uses the output delta (dy) and the forward pass input (x) and output (y) to generate the input delta (dx).
+
+ @param in Pointer to the forward pass input data
+ @param in_delta Pointer to the input delta descriptor
+ @param out Pointer to the forward pass output data
+ @param out_delta Pointer to the output delta descriptor
+ @param norm_type Type of the norm. Currently only L2-norm is supported.
+ @param axis_flags The dimensions to use for computing the L2-norm. If 0, uses all dimensions.
+
+ @returns 0 on success, non-zero on failure
+ */
+int BNNSComputeNormBackward(const void * _Nonnull in,
+                            BNNSNDArrayDescriptor * _Nonnull in_delta,
+                            const void * _Nonnull out,
+                            const BNNSNDArrayDescriptor * _Nonnull out_delta,
+                            BNNSNormType norm_type,
+                            uint32_t axis_flags)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 
 /*!
 
@@ -782,6 +1002,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  BNNSActivationFunctionAbs
  BNNSActivationFunctionGELUApproximation
  BNNSActivationFunctionGELUApproximation2
+ BNNSActivationFunctionSiLU
 
  Additional requirements:
  BNNSFlagsUseClientPtr flag must be enabled when creating the filter.
@@ -931,6 +1152,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  BNNSActivationFunctionAbs
  BNNSActivationFunctionGELUApproximation
  BNNSActivationFunctionGELUApproximation2
+ BNNSActivationFunctionSiLU
 
  Additional requirements:
  BNNSFlagsUseClientPtr flag must be enabled when creating the filter.
@@ -1047,8 +1269,8 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
   for example, if first filter is convolution and second filter is batchnorm, parameters could be extracted in the following way:
   BNNSNDArrayDescriptor* weights_delta = delta_parameters[0]; //weight delta is the first convolution parameter in BNNSFilterApplyBackwardBatch
   BNNSNDArrayDescriptor* bias_delta = delta_parameters[1];  //bias delta is the second convolution parameter in BNNSFilterApplyBackwardBatch
-  BNNSNDArrayDescriptor* beta_delta = delta_parameters[2]; //first batchnorm parameter in BNNSBatchNormFilterApplyBackwardBatch
-  BNNSNDArrayDescriptor* gamma_delta = delta_parameters[3]; //second batchnorm parameter in BNNSBatchNormFilterApplyBackwardBatch
+  BNNSNDArrayDescriptor* beta_delta = delta_parameters[2]; //first batchnorm parameter in BNNSNormalizationFilterApplyBackwardBatch
+  BNNSNDArrayDescriptor* gamma_delta = delta_parameters[3]; //second batchnorm parameter in BNNSNormalizationFilterApplyBackwardBatch
 
   @return 0 on success, and -1 on failure.
  */
@@ -1064,6 +1286,55 @@ int BNNSFusedFilterApplyBackwardBatch(BNNSFilter filter,
                                       size_t out_delta_stride,
                                       BNNSNDArrayDescriptor * _Nullable * _Nullable delta_parameters)
 __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+
+/*!
+
+ @abstract Apply a fused filter backward to generate gradients.
+
+ @discussion
+ similar to BNNSFilterApplyBackwardBatch, but computing gradients of a fused filter.
+ It is mandatory to compute all active parameter delta in a single function call. computation of input delta is not required in case the fused filter is the first layer in the network
+
+ Currently only fused arithmetic -> normalization configuration is supported.
+
+ @param filter Filter to apply backward
+ @param batch_size Number of (input sets, output) pairs to process
+ @param number_of_inputs number of inputs for the arithmetic operation
+ @param in pointer to an array of input pointers. in array size must be number_of_inputs.
+ @param in_stride pointer to an array of input strides, each stride is an Increment (in values) between inputs in the batch for a corresponding input in the in array.
+ @param in_delta pointer to an array of input delta pointers. in array size must be number_of_inputs.
+ @param in_delta_stride pointer to an array of input delta strides, each stride is an Increment (in values) between inputs deltas in the batch for a corresponding input in the in_delta array.
+ @param out Pointer to the forward pass output data (y)
+ - out is ignored if last filter activation is BNNSActivationFunctionIdentity
+ @param out_stride Increment (in values) between outputs
+ @param out_delta Pointer to the last filter output delta descriptor (dy)
+ - out delta may be modified to save memory when computing fused activation backward
+ @param out_delta_stride Increment (in values) between output deltas
+ @param delta_parameters
+ a pointer to an array of parameter delta pointers
+ order of parameter must be first filter parameters followed by second filter parameters until reaching the last filter parameters
+ for each filter parameters, the parameter order must follow the same order as in the stand-alone filter backward apply api
+ all filter parameters must be provided, excluding input delta and output delta which are provided separately
+ null pointer must be used for each non active parameter
+ for example, if first filter is arithmetic and second filter is batchnorm, parameters could be extracted in the following way:
+ BNNSNDArrayDescriptor* beta_delta = delta_parameters[0]; //first batchnorm parameter in BNNSNormalizationFilterApplyBackwardBatch
+ BNNSNDArrayDescriptor* gamma_delta = delta_parameters[1]; //second batchnorm parameter in BNNSNormalizationFilterApplyBackwardBatch
+
+ @return 0 on success, and -1 on failure.
+ */
+int BNNSFusedFilterApplyBackwardMultiInputBatch(BNNSFilter filter,
+                                                size_t batch_size,
+                                                size_t number_of_inputs,
+                                                const void * _Nullable * _Nullable in,
+                                                const size_t * _Nullable in_stride,
+                                                BNNSNDArrayDescriptor * _Nonnull * _Nonnull in_delta,
+                                                const size_t * _Nonnull in_delta_stride,
+                                                const void * _Nullable out,
+                                                const size_t out_stride,
+                                                BNNSNDArrayDescriptor * _Nonnull out_delta,
+                                                size_t out_delta_stride,
+                                                BNNSNDArrayDescriptor * _Nullable * _Nullable delta_parameters)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 
 /*!
 
@@ -1537,6 +1808,158 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSNDArrayDescriptor BNNSGetPointer(BNNSFilter filter, BNNSPointerSpecifier target)
 __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+
+#pragma mark - Random number generation
+
+/*!
+
+ @abstract Random number generator object
+
+ */
+typedef void * _Nullable BNNSRandomGenerator;
+
+/*!
+ @abstract Create a random number generator
+
+ @discussion
+ Creates a BNNSRandomGenerator object that can be used to generate a stream of random numbers.
+ The generator will be intialized using an interally generated seed that will vary from call to call.
+
+ @param method - method to be used for random number generation.
+
+ @param filter_params - options structure, if NULL, defaults are used.
+
+ @returns On success, an BNNSRandomGenerator object describing the RNG state.
+ On failure, returns NULL.
+
+ @seealso BNNSCreateRandomGeneratorWithSeed
+ */
+BNNSRandomGenerator BNNSCreateRandomGenerator(BNNSRandomGeneratorMethod method, const BNNSFilterParameters * _Nullable filter_params)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*!
+ @abstract Create a random number generator using the given seed
+
+ @discussion
+ Creates a BNNSRandomGenerator object that can be used to generate a stream of random numbers.
+
+ @param method - method to be used for random number generation.
+
+ @param seed - random seed to be used when initializing generator.
+
+ @param filter_params - options structure, if NULL, defaults are used.
+
+ @returns On success, an BNNSRandomGenerator object describing the RNG state.
+          On failure, returns NULL.
+
+ @seealso BNNSCreateRandomGenerator
+ */
+BNNSRandomGenerator BNNSCreateRandomGeneratorWithSeed(BNNSRandomGeneratorMethod method, uint64_t seed, const BNNSFilterParameters * _Nullable filter_params)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*! @abstract Destroys a random number generator object
+ *
+ *  @discussion
+ *  Frees memory allocated by BNNSCreateRandomGenerator
+ *
+ *  @param generator - generator to be destroyed
+ */
+void BNNSDestroyRandomGenerator(BNNSRandomGenerator generator)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*! @abstract Get the state size in bytes for a RandomGenerator
+ *
+ *  @discussion
+ *  This captures the state from a random generator object such that it can be copied or stored and used to restore the
+ *  generator at a later point.
+ *
+ *  @param generator - generator to be queried
+ *
+ *  @returns State size in bytes (0 on failure).
+ */
+size_t BNNSRandomGeneratorStateSize(BNNSRandomGenerator generator)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*! @abstract Get the state for a RandomGenerator
+ *
+ *  @discussion
+ *  This captures the state from a random generator object such that it can be copied or stored and used to restore the
+ *  generator at a later point.
+ *  Note that if generator is used on multiple threads, usage is serialized through an internal lock. In this scenario we recommend
+ *  users create a different BNNSRandomGenerator object with a different seed for each thread to ensure consistency of output
+ *  on any replay usingBNNSRandomGeneratorGetState/ BNNSRandomGeneratorSetState.
+ *
+ *  @param generator - generator to be queried
+ *
+ *  @param state_size - size of state buffer in bytes, must be at least as large as the value returned by BNNSRandomGeneratorStateSize.
+ *
+ *  @param state - pointer to space of size returned by call to BNNSRandomGeneratorStateSize(generator)
+ *
+ *  @returns 0 on success, non-zero on error.
+ */
+int BNNSRandomGeneratorGetState(BNNSRandomGenerator generator, size_t state_size, void* state)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*! @abstract Set the state for a RandomGenerator
+ *
+ *  @discussion
+ *  Restores the state for a RandomGenerator from one captured by a previous call to BNNSRandomGeneratorGetState().
+ *  Note that if generator is used on multiple threads, usage is serialized through an internal lock. In this scenario we recommend
+ *  users create a different BNNSRandomGenerator object with a different seed for each thread to ensure consistency of output
+ *  on any replay using BNNSRandomGeneratorGetState/BNNSRandomGeneratorSetState.
+ *
+ *  @param generator - generator to be updated
+ *
+ *  @param state_size - size of state buffer in bytes, only the first BNNSRandomGeneratorStateSize() bytes are copied.
+ *
+ *  @param state - pointer to space of size returned by call to BNNSRandomGeneratorStateSize(generator)
+ *
+ *  @returns 0 on success, non-zero on error.
+ */
+int BNNSRandomGeneratorSetState(BNNSRandomGenerator generator, size_t state_size, void* state)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*! @abstract Fill the supplied tensor with random float data using the supplied generator mapped to the Unif(a, b) distribution
+ *
+ *  @discussion
+ *  We generate pseudo-random values from Unif(a, b).
+ *  Note that if generator is used on multiple threads, usage is serialized through an internal lock. In this scenario we recommend
+ *  users create a different BNNSRandomGenerator object with a different seed for each thread to ensure consistency of output
+ *  on any replay using BNNSRandomGeneratorGetState/BNNSRandomGeneratorSetState and to eliminate contention.
+ *  Should a or b be outside the range of representable values for the output descriptor's data type, they will be capped at the
+ *  closest finite value that is representable.
+ *
+ *  @param generator - random generator to be used
+ *
+ *  @param desc - tensor descriptor to be filled with random values, data type must be floating point
+ *
+ *  @param a - lower bound of distribution (if desc.data_type is not BNNSDataTypeFloat32, a must be exact exactly representable in the requested precision)
+ *
+ *  @param b - upper bound of distribution (if desc.data_type is not BNNSDataTypeFloat32, b must be exact exactly representable in the requested precision)
+ */
+int BNNSRandomFillUniformFloat(BNNSRandomGenerator generator, BNNSNDArrayDescriptor *desc, float a, float b)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*! @abstract Fill the supplied tensor with random integer data using the supplied generator mapped to the Unif(a, b) distribution
+ *
+ *  @discussion
+ *  We generate pseudo-random values from Unif(mean-variance, mean+variance).
+ *  Note that if generator is used on multiple threads, usage is serialized through an internal lock. In this scenario we recommend
+ *  users create a different BNNSRandomGenerator object with a different seed for each thread to ensure consistency of output
+ *  on any replay using BNNSRandomGeneratorGetState/BNNSRandomGeneratorSetState and to eliminate contention.
+ *  Should a or b be outside the range of representable values for the output descriptor's data type, they will be capped at the
+ *  closest value that is representable.
+ *
+ *  @param generator - random generator to be used
+ *
+ *  @param desc - tensor descriptor to be filled with random values, data type must be integer
+ *
+ *  @param a - lower bound of distribution
+ *
+ *  @param b - upper bound of distribution
+ */
+int BNNSRandomFillUniformInt(BNNSRandomGenerator generator, BNNSNDArrayDescriptor *desc, int64_t a, int64_t b)
+__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 
 #pragma mark - Deprecated Filter Creation Functions
 

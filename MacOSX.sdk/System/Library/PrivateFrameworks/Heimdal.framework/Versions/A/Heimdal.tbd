@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C4F4A987-6AB0-393C-ADAB-AA74975ADEB7
+    value:           ADADC22B-DA1C-334C-B8D7-680F6DD44E2F
   - target:          x86_64-maccatalyst
-    value:           C4F4A987-6AB0-393C-ADAB-AA74975ADEB7
+    value:           ADADC22B-DA1C-334C-B8D7-680F6DD44E2F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD333301-6726-3327-9A63-99242E2DF582
+    value:           380B91EB-7EC6-3DAF-87AF-A686CDF9D6FC
   - target:          arm64e-maccatalyst
-    value:           FD333301-6726-3327-9A63-99242E2DF582
+    value:           380B91EB-7EC6-3DAF-87AF-A686CDF9D6FC
 install-name:    '/System/Library/PrivateFrameworks/Heimdal.framework/Versions/A/Heimdal'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -194,14 +194,15 @@ exports:
                        _kHEIMAttrNTLMSessionKey, _kHEIMAttrNTLMType1Data, _kHEIMAttrNTLMType2Data, 
                        _kHEIMAttrNTLMType3Data, _kHEIMAttrNTLMUsername, _kHEIMAttrParentCredential, 
                        _kHEIMAttrRenewTill, _kHEIMAttrRetainStatus, _kHEIMAttrServerName, 
-                       _kHEIMAttrStatus, _kHEIMAttrStoreTime, _kHEIMAttrTransient, 
-                       _kHEIMAttrType, _kHEIMAttrUUID, _kHEIMAttrUserID, _kHEIMCredentialCertificate, 
-                       _kHEIMCredentialPassword, _kHEIMNameMechIAKerb, _kHEIMNameMechKerberos, 
-                       _kHEIMNameMechNTLM, _kHEIMNameUserName, _kHEIMObjectAny, _kHEIMObjectConfiguration, 
-                       _kHEIMObjectGeneric, _kHEIMObjectKerberos, _kHEIMObjectKerberosAcquireCred, 
-                       _kHEIMObjectNTLM, _kHEIMObjectType, _kHEIMStatusCanRefresh, 
-                       _kHEIMStatusInvalid, _kHEIMStatusValid, _kHEIMTypeConfiguration, 
-                       _kHEIMTypeGeneric, _kHEIMTypeIAKerb, _kHEIMTypeKerberos, _kHEIMTypeKerberosAcquireCred, 
+                       _kHEIMAttrStatus, _kHEIMAttrStoreTime, _kHEIMAttrTemporaryCache, 
+                       _kHEIMAttrTransient, _kHEIMAttrType, _kHEIMAttrUUID, _kHEIMAttrUserID, 
+                       _kHEIMCredentialCertificate, _kHEIMCredentialPassword, _kHEIMNameMechIAKerb, 
+                       _kHEIMNameMechKerberos, _kHEIMNameMechNTLM, _kHEIMNameUserName, 
+                       _kHEIMObjectAny, _kHEIMObjectConfiguration, _kHEIMObjectGeneric, 
+                       _kHEIMObjectKerberos, _kHEIMObjectKerberosAcquireCred, _kHEIMObjectNTLM, 
+                       _kHEIMObjectType, _kHEIMStatusCanRefresh, _kHEIMStatusInvalid, 
+                       _kHEIMStatusValid, _kHEIMTypeConfiguration, _kHEIMTypeGeneric, 
+                       _kHEIMTypeIAKerb, _kHEIMTypeKerberos, _kHEIMTypeKerberosAcquireCred, 
                        _kHEIMTypeNTLM, _kHEIMTypeSchema, _krb5_abort, _krb5_abortx, 
                        _krb5_add_et_list, _krb5_add_extra_addresses, _krb5_add_ignore_addresses, 
                        _krb5_addlog_dest, _krb5_addlog_func, _krb5_addr2sockaddr, 
@@ -337,8 +338,8 @@ exports:
                        _krb5_pac_init, _krb5_pac_parse, _krb5_pac_process_credentials_buffer, 
                        _krb5_pac_verify, _krb5_padata_add, _krb5_parse_address, _krb5_parse_name, 
                        _krb5_parse_name_flags, _krb5_parse_nametype, _krb5_passwd_result_to_string, 
-                       _krb5_pk_enterprise_cert, _krb5_plugin_register, _krb5_plugin_run_f, 
-                       _krb5_prepend_config_files, _krb5_prepend_config_files_default, 
+                       _krb5_pk_enterprise_cert, _krb5_plugin_register, _krb5_plugin_register_module, 
+                       _krb5_plugin_run_f, _krb5_prepend_config_files, _krb5_prepend_config_files_default, 
                        _krb5_principal_compare, _krb5_principal_compare_any_realm, 
                        _krb5_principal_get_comp_string, _krb5_principal_get_num_comp, 
                        _krb5_principal_get_realm, _krb5_principal_get_type, _krb5_principal_is_gss_hostbased_service, 
@@ -412,7 +413,8 @@ exports:
                        _krb5_verify_user_opt, _krb5_verr, _krb5_verrx, _krb5_vlog, 
                        _krb5_vlog_msg, _krb5_vset_error_message, _krb5_vwarn, _krb5_vwarnx, 
                        _krb5_warn, _krb5_warnx, _krb5_write_message, _krb5_write_priv_message, 
-                       _krb5_write_safe_message, _krb5_xcc_ops, _krb5_xfree, _length_AlgorithmIdentifier, 
+                       _krb5_write_safe_message, _krb5_xcc_api_ops, _krb5_xcc_ops, 
+                       _krb5_xcc_temp_api_ops, _krb5_xfree, _length_AlgorithmIdentifier, 
                        _length_ContentInfo, _length_DHPublicKey, _length_EncryptionKey, 
                        _length_GeneralName, _length_IssuerAndSerialNumber, _length_KDC_PROXY_MESSAGE, 
                        _length_KRB5_SRP_PA, _length_KerberosTime, _length_Principal, 

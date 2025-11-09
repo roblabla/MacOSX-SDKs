@@ -33,6 +33,8 @@
 #ifndef _BSD_I386_PROFILE_H_
 #define _BSD_I386_PROFILE_H_
 
+#if defined (__i386__) || defined (__x86_64__)
+
 #include <sys/appleapiopts.h>
 
 #ifdef __APPLE_API_UNSTABLE
@@ -50,5 +52,7 @@
 #define MCOUNT_EXIT     /* (void) splx(s); */ /* XXX TODO */
 
 #endif /* __APPLE_API_UNSTABLE */
+
+#endif /* defined (__i386__) || defined (__x86_64__) */
 
 #endif /* _BSD_I386_PROFILE_H_ */

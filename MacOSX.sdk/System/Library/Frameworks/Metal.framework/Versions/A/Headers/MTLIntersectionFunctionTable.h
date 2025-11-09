@@ -38,7 +38,28 @@ typedef NS_OPTIONS(NSUInteger, MTLIntersectionFunctionSignature) {
 	 * @brief The intersection functions are entitled to query world_space_origin and
 	 * world_space_direction as described in the Metal Shading Language Guide.
 	 */
-	MTLIntersectionFunctionSignatureWorldSpaceData = (1 << 2)
+    MTLIntersectionFunctionSignatureWorldSpaceData = (1 << 2),
+    
+    
+    /**
+     * @brief The intersection functions may be called from intersectors using the
+     * instance_motion intersection tag as described in the Metal Shading Language Guide.
+     */
+    MTLIntersectionFunctionSignatureInstanceMotion API_AVAILABLE(macos(12.0), ios(15.0)) = (1 << 3),
+    
+    /**
+     * @brief The intersection functions are entitled to query time, motion_start_time,
+     * motion_end_time and key_frame_count as described in the Metal Shading Language Guide.
+     */
+    MTLIntersectionFunctionSignaturePrimitiveMotion API_AVAILABLE(macos(12.0), ios(15.0)) = (1 << 4),
+    
+    /**
+     * @brief The intersection functions may be called from intersectors using the
+     * extended_limits intersection tag as described in the Metal Shading Language Guide.
+     */
+    MTLIntersectionFunctionSignatureExtendedLimits API_AVAILABLE(macos(12.0), ios(15.0)) = (1 << 5),
+    
+    
 } MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0));
 
 MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))

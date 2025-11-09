@@ -15,6 +15,7 @@
 #define MPSUserConstantIndex                          (MPSDeviceCapsIndex-3)  // unavailable to user
 #define MPSNDArrayConstantIndex                       (MPSDeviceCapsIndex-4)  // unavailable to user
 #define MPSFunctionConstantIndexReserved              (MPSDeviceCapsIndex-5)  // unavailable to user
+#define MPSTextureLinkingConstantIndex                (MPSDeviceCapsIndex-6)  // unavailable to user
 #define MPSUserAvailableFunctionConstantStartIndex    (MPSDeviceCapsIndex-8)  // first index availble to user
 
 

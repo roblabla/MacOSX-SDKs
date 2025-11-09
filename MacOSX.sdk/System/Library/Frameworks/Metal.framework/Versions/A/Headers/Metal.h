@@ -48,3 +48,4 @@
 #import <Metal/MTLVisibleFunctionTable.h>
 #import <Metal/MTLBinaryArchive.h>
 #import <Metal/MTLIntersectionFunctionTable.h>
+#import <Metal/MTLFunctionStitching.h>

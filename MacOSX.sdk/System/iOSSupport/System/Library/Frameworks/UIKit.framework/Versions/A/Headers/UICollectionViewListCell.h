@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(14_0), tvos(14.0), watchos(7.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14_0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewListCell : UICollectionViewCell
 
 /// Returns a default list content configuration for the cell's style.

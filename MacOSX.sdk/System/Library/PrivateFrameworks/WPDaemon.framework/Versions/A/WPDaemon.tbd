@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4BECBD62-39B7-30BD-A882-025E2ABE7330
+    value:           FDDA0C68-0571-362B-B09E-ECDE75438CD8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6694147-D378-3484-A640-0D0096A3950C
+    value:           A05ECFB6-4A8D-3FC9-8AE3-239D4A484706
 install-name:    '/System/Library/PrivateFrameworks/WPDaemon.framework/Versions/A/WPDaemon'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -15,8 +15,8 @@ exports:
                        _advertisingHeader, _kAppleManufacturerTypeBottom, _kAppleManufacturerTypeTop, 
                        _kCBAdditionalAppleMfgAdvertisements, _kCBAdvAppleMfgTypeKey, 
                        _kCBAdvOptionUseFGInterval, _kGapManufacturerDataType, _kSPAdvertisementData, 
-                       _kSPDeviceAddress, _kSPOptional, _kSPScanDate, _kSPStatus, 
-                       _kSPrssi, _kWPDFrameworkMessageQueue ]
+                       _kSPChannel, _kSPDeviceAddress, _kSPOptional, _kSPSaturated, 
+                       _kSPScanDate, _kSPStatus, _kSPrssi, _kWPDFrameworkMessageQueue ]
     objc-classes:    [ Endpoint, PipeDataTransfer, PipeInfo, WPAdvertisingRequest, 
                        WPAdvertisingRequestsQueue, WPCharacteristic, WPDAdvertisingData, 
                        WPDAdvertisingManager, WPDClient, WPDConnection, WPDManager, 

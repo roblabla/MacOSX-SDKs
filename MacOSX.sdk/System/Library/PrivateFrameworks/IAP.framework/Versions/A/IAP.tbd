@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A1EB2BC5-C376-3146-A477-E05AB62EB155
+    value:           B3605519-D8C7-37A9-AC3E-49A0FD918EFB
   - target:          x86_64-maccatalyst
-    value:           A1EB2BC5-C376-3146-A477-E05AB62EB155
+    value:           B3605519-D8C7-37A9-AC3E-49A0FD918EFB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F16A891F-49AB-318F-9176-7D03407CB3BE
+    value:           EAE6CBD4-AA4E-34BC-AC27-812302C6E426
   - target:          arm64e-maccatalyst
-    value:           F16A891F-49AB-318F-9176-7D03407CB3BE
+    value:           EAE6CBD4-AA4E-34BC-AC27-812302C6E426
 install-name:    '/System/Library/PrivateFrameworks/IAP.framework/Versions/A/IAP'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -130,12 +130,16 @@ exports:
                        _IAPlocationSetAccessoryNMEAFilter, _IsAppVisibleInCurrentMode, 
                        _IsDataAggregationEnabled, _IsExistAppMusic, _IsExistAppPodcasts, 
                        _IsExistAppiBooks, _IsExistAppiTunesU, _IsIAP2DaemonConnection, 
-                       _IsIAPDaemonConnection, _SendDisplayPortStatusToAccessory, 
-                       _ShouldAccessoryBeHidden, __IAPSendXPCMessageReplyWithTimeout, 
-                       __IAPSendXPCMessageWithTimeout, __Z21GetIAPConnectionQueuev, 
-                       __Z22GetIAPDaemonConnectionv, __Z23GetIAP2DaemonConnectionv, 
-                       __Z24__IAPConnectionMutexLockv, __Z26__IAPConnectionMutexUnlockv, 
-                       __Z31GetIAPTransportDaemonConnectionv, ___instance_ref_IAPNavigation, 
+                       _IsIAPDaemonConnection, _RetainConnectionToIAP2Daemon, _RetainConnectionToIAPDaemon, 
+                       _RetainConnectionToIAPDaemonByCheckingConnectionID, _RetainConnectionToIAPDaemonOwningPhysicalConnector, 
+                       _RetainConnectionToIAPDaemonWithConnectionID, _RetainConnectionToIAPTransportDaemon, 
+                       _SendDisplayPortStatusToAccessory, _ShouldAccessoryBeHidden, 
+                       __IAPSendXPCMessageReplyWithTimeout, __IAPSendXPCMessageWithTimeout, 
+                       __Z21GetIAPConnectionQueuev, __Z22GetIAPDaemonConnectionv, 
+                       __Z23GetIAP2DaemonConnectionv, __Z24__IAPConnectionMutexLockv, 
+                       __Z25RetainIAPDaemonConnectionv, __Z26RetainIAP2DaemonConnectionv, 
+                       __Z26__IAPConnectionMutexUnlockv, __Z31GetIAPTransportDaemonConnectionv, 
+                       __Z34RetainIAPTransportDaemonConnectionv, ___instance_ref_IAPNavigation, 
                        _iaptransportdHasLaunched, _kBTHIDPriorityDefault, _kBTHIDPriorityHigh, 
                        _kEAPipePath, _kIAP2AvailableNotification, _kIAP2DXPCServiceName, 
                        _kIAP2ServerDiedNotification, _kIAP2ServerLaunchedNotification, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9AC696B8-35EE-3D3D-B022-EB3A5A28673C
+    value:           698D0A1E-89AA-31AD-AE1F-2797CCD56465
   - target:          x86_64-maccatalyst
-    value:           9AC696B8-35EE-3D3D-B022-EB3A5A28673C
+    value:           698D0A1E-89AA-31AD-AE1F-2797CCD56465
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8E4EF7A0-D834-3B32-901C-512F698D911B
+    value:           F6E5C644-A663-3CE1-B9C6-9C8B066039B5
   - target:          arm64e-maccatalyst
-    value:           8E4EF7A0-D834-3B32-901C-512F698D911B
+    value:           F6E5C644-A663-3CE1-B9C6-9C8B066039B5
 install-name:    '/System/Library/PrivateFrameworks/CoreBrightness.framework/Versions/A/CoreBrightness'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -28,7 +28,8 @@ exports:
                        _CBALCSetDictPreferenceForKey, _CBALCSetDictionary, _CBALCSetDisplayAutoBrightnessEnabled, 
                        _CBALCSetFloatPreferenceForKey, _CBALCSetIntPreferenceForKey, 
                        _CBALCSetKeyboardAutoBrightnessEnabled, _CBALCSetKeyboardDimTime, 
-                       _CBALCUnregisterALSPluginCallback, _kKBIDBuiltIn, _kKBIDDefault ]
+                       _CBALCUnregisterALSPluginCallback, _kKBIDBuiltIn, _kKBIDDefault, 
+                       _kKBIDPrimary, _kKBIDSecondary ]
     objc-classes:    [ BrightnessSystem, BrightnessSystemClient, BrightnessSystemClientInternal, 
                        CBAdaptationClient, CBBlueLightClient, CBClient, CBKeyboardPreferencesManager, 
                        CBTrueToneClient, DisplayServicesClient, KeyboardBrightnessClient ]

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1D9F0C10-535B-3C09-AA0F-B7F6D3BBE8C7
+    value:           3EC63E67-4975-3354-A0DF-9D04D30BAB3E
   - target:          x86_64-maccatalyst
-    value:           1D9F0C10-535B-3C09-AA0F-B7F6D3BBE8C7
+    value:           3EC63E67-4975-3354-A0DF-9D04D30BAB3E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5EE238C6-E0CA-319E-A344-A28D25913C88
+    value:           5A315275-1AD5-370D-8CF9-13D692DBE3DD
   - target:          arm64e-maccatalyst
-    value:           5EE238C6-E0CA-319E-A344-A28D25913C88
+    value:           5A315275-1AD5-370D-8CF9-13D692DBE3DD
 install-name:    '/System/Library/PrivateFrameworks/SafariFoundation.framework/Versions/A/SafariFoundation'
-current-version: 611.1.21
+current-version: 612.1.24
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -30,12 +30,12 @@ exports:
                        _SFPasswordGenerationNoLengthLimit, _SFSharablePasswordURLSchemeForAirDrop, 
                        _maximumNumberOfWebCredentialEntriesToReturnForAppID ]
     objc-classes:    [ SFAppAutoFillOneTimeCodeProvider, SFAutoFillFeatureManager, 
-                       SFAutoFillOneTimeCode, SFCredentialProviderExtensionHelperProxy, 
-                       SFCredentialProviderExtensionManager, SFCredentialProviderExtensionState, 
-                       SFDomainAssociationUtilities, SFExternalCredentialIdentityStore, 
-                       SFExternalCredentialIdentityStoreManager, SFPasswordCredentialIdentity, 
-                       SFSafariCredential, SFSafariCredentialStore, SFSharablePassword, 
-                       SFSharablePasswordReceiver, SFSharedWebCredentialsDatabaseEntry, 
+                       SFAutoFillOneTimeCode, SFAutoFillOneTimeCodeEmbeddedDomainPair, 
+                       SFCredentialProviderExtensionHelperProxy, SFCredentialProviderExtensionManager, 
+                       SFCredentialProviderExtensionState, SFDomainAssociationUtilities, 
+                       SFExternalCredentialIdentityStore, SFExternalCredentialIdentityStoreManager, 
+                       SFPasswordCredentialIdentity, SFSafariCredential, SFSafariCredentialStore, 
+                       SFSharablePassword, SFSharablePasswordReceiver, SFSharedWebCredentialsDatabaseEntry, 
                        SFStrongPasswordGenerator, SFSuggestedUser, SFSuggestedUserProvider, 
-                       _SFSharablePasswordEncryptionInformation ]
+                       TOTPGeneratorSnapshot, _SFSharablePasswordEncryptionInformation ]
 ...

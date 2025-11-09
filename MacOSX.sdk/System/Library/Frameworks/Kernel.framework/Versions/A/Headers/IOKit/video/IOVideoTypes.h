@@ -220,7 +220,7 @@ enum
                         A IOVideoFeatureControl that controls a panning mechanism. Positive values mean clockwise, negative values means counterclockwise. The units for the control's
                         absolute value are degrees (°).
     @constant       kIOVideoFeatureControlClassIDTilt
-                        A IOVideoFeatureControl that controls a tilt mechanism. Positive values mean updwards, negative values means downwards. The units for the control's absolute value are
+                        A IOVideoFeatureControl that controls a tilt mechanism. Positive values mean upwards, negative values means downwards. The units for the control's absolute value are
                         degrees (°).
     @constant       kIOVideoFeatureControlClassIDOpticalFilter
                         A IOVideoFeatureControl that controls changing the optical filter of camera lens function. The units for the control's absolute value are are undefined.

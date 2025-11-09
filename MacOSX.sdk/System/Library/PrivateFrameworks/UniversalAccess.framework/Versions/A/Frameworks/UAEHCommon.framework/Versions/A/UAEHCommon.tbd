@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F2424E15-A372-3366-B659-E2A584399D1E
+    value:           AA0C2D1D-5198-3C1C-B54A-61760F3482CB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0E9416C0-9069-35F0-96A2-888902EFC8EC
+    value:           F7E3A09F-6B35-3B2D-B4EE-3CD6C319674C
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/UAEHCommon.framework/Versions/A/UAEHCommon'
 current-version: 236
 exports:

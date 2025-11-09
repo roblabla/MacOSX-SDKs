@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DCAC61EB-34B5-3954-84D3-6A5C0C4E119C
+    value:           7F0F98C5-FFAE-3CA5-B6E6-B42862233549
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B984F74B-5581-3E96-BA1C-2FC265573D29
+    value:           73090A86-FCBD-3283-AB95-10183077D194
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/3902/Libraries/libLLVM.dylib'
-current-version: 3902.30.5
+current-version: 3902.30.6
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _EnableIPRA, _LLVMABIAlignmentOfType, _LLVMABISizeOfType, 

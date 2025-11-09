@@ -70,7 +70,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
  @property supportIndirectCommandBuffers
  @abstract This flag makes this pipeline usable with indirect command buffers.
  */
-@property (readwrite, nonatomic) BOOL supportIndirectCommandBuffers API_AVAILABLE(ios(13.0),macos(11.0));
+@property (readwrite, nonatomic) BOOL supportIndirectCommandBuffers API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
 
 /*!
  @property insertLibraries
@@ -80,7 +80,17 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
  It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
  @see MTLDynamicLibrary
  */
-@property (readwrite, nullable, nonatomic, copy) NSArray<id<MTLDynamicLibrary>>* insertLibraries API_AVAILABLE(macos(11.0), ios(14.0));
+@property (readwrite, nullable, nonatomic, copy) NSArray<id<MTLDynamicLibrary>>* insertLibraries API_DEPRECATED_WITH_REPLACEMENT("Use preloadedLibraries instead.", macos(11.0, 12.0), ios(14.0, 15.0));
+
+/*!
+ @property preloadedLibraries
+ @abstract The set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary.
+ @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use preloadedLibraries.
+ This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations.
+ It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
+ @see MTLDynamicLibrary
+ */
+@property (readwrite, nonnull, nonatomic, copy) NSArray<id<MTLDynamicLibrary>>* preloadedLibraries API_AVAILABLE(macos(12.0), ios(15.0));
 
 /*!
  @property binaryArchives
@@ -98,6 +108,11 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
 - (void)reset;
 
 
+/*!
+ @property linkedFunctions
+ @abstract The set of functions to be linked with the pipeline state and accessed from the compute function. 
+ @see MTLLinkedFunctions
+ */
 @property (nullable, copy, nonatomic) MTLLinkedFunctions *linkedFunctions
     API_AVAILABLE(macos(11.0), ios(14.0));
 
@@ -162,24 +177,39 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @method imageblockMemoryLengthForDimensions:
  @brief Returns imageblock memory length for given image block dimensions.
  */
-- (NSUInteger)imageblockMemoryLengthForDimensions:(MTLSize)imageblockDimensions API_AVAILABLE(ios(11.0), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
+- (NSUInteger)imageblockMemoryLengthForDimensions:(MTLSize)imageblockDimensions API_AVAILABLE(ios(11.0), macos(11.0), macCatalyst(14.0), tvos(14.5));
 
 
 /*!
  @property supportIndirectCommandBuffers
  @abstract Tells whether this pipeline state is usable through an Indirect Command Buffer.
  */
-@property (readonly) BOOL supportIndirectCommandBuffers API_AVAILABLE(ios(13.0),macos(11.0));
+@property (readonly) BOOL supportIndirectCommandBuffers API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
 
 
+/*!
+ @method functionHandleWithFunction:
+ @brief Get the function handle for the specified function from the pipeline state.
+ */
 - (nullable id<MTLFunctionHandle>)functionHandleWithFunction:(id<MTLFunction>)function API_AVAILABLE(macos(11.0), ios(14.0));
 
 
-
+/*!
+ @method newRenderPipelineStateWithAdditionalBinaryFunctions:stage:
+ @brief Allocate a new compute pipeline state by adding binary functions to this pipeline state.
+ */
 - (nullable id <MTLComputePipelineState>)newComputePipelineStateWithAdditionalBinaryFunctions:(nonnull NSArray<id<MTLFunction>> *)functions error:(__autoreleasing NSError **)error API_AVAILABLE(macos(11.0), ios(14.0));
 
+/*!
+ @method newVisibleFunctionTableWithDescriptor:
+ @brief Allocate a visible function table for the pipeline with the provided descriptor.
+ */
 - (nullable id<MTLVisibleFunctionTable>)newVisibleFunctionTableWithDescriptor:(MTLVisibleFunctionTableDescriptor * __nonnull)descriptor API_AVAILABLE(macos(11.0), ios(14.0));
 
+/*!
+ @method newIntersectionFunctionTableWithDescriptor:
+ @brief Allocate an intersection function table for the pipeline with the provided descriptor.
+ */
 - (nullable id <MTLIntersectionFunctionTable>)newIntersectionFunctionTableWithDescriptor:(MTLIntersectionFunctionTableDescriptor * _Nonnull)descriptor API_AVAILABLE(macos(11.0), ios(14.0));
 
 

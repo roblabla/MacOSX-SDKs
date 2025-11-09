@@ -8,17 +8,16 @@
 
 #import <UIKit/UIGeometry.h>
 #import <UIKit/UIConfigurationColorTransformer.h>
+#import <UIKit/UIView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol UIConfigurationState;
-@class UITraitCollection;
-@class UIColor;
 @class UIVisualEffect;
-@class UIView;
+@class UIImage;
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @interface UIBackgroundConfiguration : NSObject <NSCopying, NSSecureCoding>
 
 /// Returns a clear configuration, with no default styling.
@@ -72,6 +71,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
 
 /// The visual effect to apply to the background. Default is nil.
 @property (nonatomic, copy, nullable) UIVisualEffect *visualEffect;
+
+/// The image to use. Default is nil.
+@property (nonatomic, strong, nullable) UIImage *image API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+/// The content mode to use when rendering the image. Default is UIViewContentModeScaleToFill.
+@property (nonatomic) UIViewContentMode imageContentMode API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
 
 // Stroke
 

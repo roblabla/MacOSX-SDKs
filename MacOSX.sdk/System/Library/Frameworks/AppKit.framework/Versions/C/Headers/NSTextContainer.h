@@ -2,7 +2,7 @@
 /*
         NSTextContainer.h
         Application Kit
-        Copyright (c) 1994-2019, Apple Inc.
+        Copyright (c) 1994-2021, Apple Inc.
         All rights reserved.
 */
 
@@ -11,6 +11,7 @@
 #import <AppKit/NSLayoutManager.h>
 
 @class NSBezierPath;
+@class NSTextLayoutManager;
 
 NS_ASSUME_NONNULL_BEGIN
 #if !TARGET_OS_IPHONE
@@ -32,6 +33,8 @@ API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0)) @interface NSTextContainer : NSO
 // This method should be used instead of the primitive -setLayoutManager: if you need to replace a container's layoutManager with a new one leaving the rest of the web intact.  All the NSTextContainers on the old NSLayoutManager get transferred to the new one.  This method deals with all the work of making sure the containers don't get deallocated and removing the old layoutManager from the text storage and replacing it with the new one.
 - (void)replaceLayoutManager:(NSLayoutManager *)newLayoutManager API_AVAILABLE(macos(10.0), ios(9.0), tvos(9.0));
 
+// Returns NSTextLayoutManager owning the text container. When non-nil, -layoutManager should be nil.
+@property (weak, nullable, readonly) NSTextLayoutManager *textLayoutManager API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /************************* Container shape properties *************************/
 

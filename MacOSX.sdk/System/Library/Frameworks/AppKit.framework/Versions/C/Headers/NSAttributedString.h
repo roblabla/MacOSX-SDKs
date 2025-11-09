@@ -1,7 +1,7 @@
 #if !__has_include(<UIFoundation/NSAttributedString.h>)
 /*
         NSAttributedString.h
-        Copyright (c) 1994-2019, Apple Inc.
+        Copyright (c) 1994-2021, Apple Inc.
         All rights reserved.
  
         This file defines Application Kit extensions to NSAttributedString and NSMutableAttributedString.

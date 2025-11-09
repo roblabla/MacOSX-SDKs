@@ -12,6 +12,7 @@
 
 @class NSMutableArray;
 @class IOBluetoothDevice;
+@protocol IOBluetoothDeviceInquiryDelegate;
 
 //===========================================================================================================================
 //	IOBluetoothDeviceInquiry
@@ -44,8 +45,6 @@ API_UNAVAILABLE(ios, watchos, tvos)
     id                              _mUnused001;
     id                              _mUnused002;
 
-	id								_delegate;
-
 	BluetoothServiceClassMajor		_serviceClassMajor;
 	BluetoothDeviceClassMajor		_deviceClassMajor;
 	BluetoothDeviceClassMinor		_deviceClassMinor;
@@ -65,7 +64,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 	
 }
 
-@property(assign) id delegate;
+@property (assign, nullable) id delegate;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		inquiryWithDelegate
@@ -185,7 +184,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 */
 
 API_UNAVAILABLE(ios, watchos, tvos)
-@protocol IOBluetoothDeviceInquiryDelegate
+@protocol IOBluetoothDeviceInquiryDelegate <NSObject>
 @optional
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method			deviceInquiryStarted

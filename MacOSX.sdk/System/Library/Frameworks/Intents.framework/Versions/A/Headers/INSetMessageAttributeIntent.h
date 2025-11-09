@@ -79,7 +79,7 @@ API_UNAVAILABLE(macos, watchos, tvos)
  */
 
 - (void)resolveAttributeForSetMessageAttribute:(INSetMessageAttributeIntent *)intent
-                    withCompletion:(void (^)(INMessageAttributeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveAttribute(for:with:));
+                                withCompletion:(void (^)(INMessageAttributeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveAttribute(for:with:));
 
 @end
 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C815FD3F-C0F0-31F6-B60D-C544D807384F
+    value:           891E80A3-6DFC-304B-95DF-E215A19604A0
   - target:          x86_64-maccatalyst
-    value:           C815FD3F-C0F0-31F6-B60D-C544D807384F
+    value:           891E80A3-6DFC-304B-95DF-E215A19604A0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9512D44F-5489-3864-BDED-AA6869227461
+    value:           568113EF-753C-32C1-B0D0-05C18B39B701
   - target:          arm64e-maccatalyst
-    value:           9512D44F-5489-3864-BDED-AA6869227461
+    value:           568113EF-753C-32C1-B0D0-05C18B39B701
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 728.6
+current-version: 777
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -92,14 +92,15 @@ exports:
                        _NSTextAlignmentFromCTTextAlignment, _NSTextAlignmentToCTTextAlignment, 
                        _NSTextAlternativesAttributeName, _NSTextAlternativesDisplayStyleAttributeName, 
                        _NSTextAlternativesSelectedAlternativeKey, _NSTextAlternativesSelectedAlternativeStringNotification, 
-                       _NSTextCheckedAttributeName, _NSTextCorrectionAttributeName, 
-                       _NSTextDrawingTrace, _NSTextEditedAttributeName, _NSTextEffectAttributeName, 
-                       _NSTextEffectLetterpressStyle, _NSTextEncodingNameDocumentAttribute, 
-                       _NSTextEncodingNameDocumentOption, _NSTextKeyTrace, _NSTextLayoutSectionOrientation, 
-                       _NSTextLayoutSectionRange, _NSTextLayoutSectionsAttribute, 
-                       _NSTextListMarkerBox, _NSTextListMarkerCheck, _NSTextListMarkerCircle, 
-                       _NSTextListMarkerDecimal, _NSTextListMarkerDiamond, _NSTextListMarkerDisc, 
-                       _NSTextListMarkerHyphen, _NSTextListMarkerLowercaseAlpha, 
+                       _NSTextCheckedAttributeName, _NSTextContentManagerUnsupportedAttributeNotification, 
+                       _NSTextContentStorageUnsupportedAttributeAddedNotification, 
+                       _NSTextCorrectionAttributeName, _NSTextDrawingTrace, _NSTextEditedAttributeName, 
+                       _NSTextEffectAttributeName, _NSTextEffectLetterpressStyle, 
+                       _NSTextEncodingNameDocumentAttribute, _NSTextEncodingNameDocumentOption, 
+                       _NSTextKeyTrace, _NSTextLayoutSectionOrientation, _NSTextLayoutSectionRange, 
+                       _NSTextLayoutSectionsAttribute, _NSTextListMarkerBox, _NSTextListMarkerCheck, 
+                       _NSTextListMarkerCircle, _NSTextListMarkerDecimal, _NSTextListMarkerDiamond, 
+                       _NSTextListMarkerDisc, _NSTextListMarkerHyphen, _NSTextListMarkerLowercaseAlpha, 
                        _NSTextListMarkerLowercaseHexadecimal, _NSTextListMarkerLowercaseLatin, 
                        _NSTextListMarkerLowercaseRoman, _NSTextListMarkerOctal, _NSTextListMarkerSquare, 
                        _NSTextListMarkerUppercaseAlpha, _NSTextListMarkerUppercaseHexadecimal, 
@@ -143,10 +144,11 @@ exports:
                        _UIFontWeightTrait, _UIFontWeightUltraLight, _UIFontWidthCondensed, 
                        _UIFontWidthExpanded, _UIFontWidthStandard, _UIFontWidthTrait, 
                        _UIInlinedValueMarker, _UIMaximumCompatibleFormatVersion, 
-                       _UINewFont, _UINibArchiveIndexFromNumber, _UINibCoderValueTypeToString, 
+                       _UINibArchiveIndexFromNumber, _UINibCoderValueTypeToString, 
                        _UINumberWithNibArchiveIndex, _UIPointRoundToScale, _UIRectIntegralWithScale, 
-                       _UIRetainedIdentityKeyDictionaryCallbacks, _UIRetainedIdentitySetCallbacks, 
-                       _UIRetainedIdentityValueDictionaryCallbacks, _UISizeRoundToScale, 
+                       _UIRetainedIdentityArrayCallbacks, _UIRetainedIdentityKeyDictionaryCallbacks, 
+                       _UIRetainedIdentitySetCallbacks, _UIRetainedIdentityValueDictionaryCallbacks, 
+                       _UIRetainedValueUniquingSetCallbacks, _UISizeRoundToScale, 
                        _UISystemFontBoldForSize, _UISystemFontCreate, _UISystemFontForSize, 
                        _UIWriteArchiveToData, __NSAttachmentCharacterSet, __NSBidiControlCharacterSet, 
                        __NSBidiEmbeddingAndOverrideCharSet, __NSBlockNumberForIndex, 
@@ -184,7 +186,8 @@ exports:
                        __UISizeEqualToSizeWithPrecision, __UISizeValueForAxis, __UISystemFontName, 
                        __UITotalEdgeDimensionsForLayoutAxis, __UITrailingOffsetForInsetsAlongAxis, 
                        __UIUnitAnchorPointForEdges, ___CTFontGetExtraData, ___NSTextLayoutManagerLinearLayoutFragmentsDump, 
-                       ___NSTokenizerLanguageSet, ___objectEqual ]
+                       ___NSTokenizerLanguageSet, ___objectEqual, _setCurrentCGContextDuringBlock_iOS, 
+                       _setCurrentCGContextDuringBlock_macOS, _setCurrentNSGraphicsContextDuringBlock_macOS ]
     objc-classes:    [ NSATSGlyphStorage, NSATSLineFragment, NSATSTypesetter, NSAttributeDictionary, 
                        NSAttributeDictionaryEnumerator, NSCIDGlyphInfo, NSCTFont, 
                        NSCTFontDescriptor, NSCTGlyphInfo, NSCollectionLayoutAnchor, 
@@ -227,8 +230,9 @@ exports:
                        UIBoxcarFilterPointFIFO, UIFont, UIFontDescriptor, UINibCoderValue, 
                        UINibDecoder, UINibEncoder, UINibStringIDTable, UIPointFIFO, 
                        UIQuadCurvePointFIFO, _NSASCIIArtFramesRenderer, _NSATSTypesetterGuts, 
-                       _NSAttributeRun, _NSAttributes, _NSCachedAttributedString, 
-                       _NSCollectionCompositionalLayoutSolver, _NSCollectionCompositionalLayoutSolverBookmarkStateSnapshotter, 
+                       _NSAttributeRun, _NSAttributedStringIntentResolver, _NSAttributedStringWithResolvedIntents, 
+                       _NSAttributes, _NSCachedAttributedString, _NSCollectionCompositionalLayoutSolver, 
+                       _NSCollectionCompositionalLayoutSolverBookmarkStateSnapshotter, 
                        _NSCollectionCompositionalLayoutSolverOptions, _NSCollectionCompositionalLayoutSolverUpdate, 
                        _NSCollectionCompositionalSolverPreferredSizesRebaseInfo, 
                        _NSCollectionLayoutAnchor, _NSCollectionLayoutAuxiliaryItemSolver, 
@@ -432,15 +436,15 @@ exports:
                        UIBoxcarFilterPointFIFO._width, UINibEncoder.data, UINibEncoder.delegate, 
                        UINibEncoder.encodedObjects, UINibEncoder.nextObjectID, UINibEncoder.objectIDsToObjects, 
                        UINibEncoder.objectsReplacedWithNil, UINibEncoder.objectsToObjectIDs, 
-                       UINibEncoder.objectsUniquedByValue, UINibEncoder.recursiveState, 
-                       UINibEncoder.replacements, UINibEncoder.values, UINibStringIDTable.buckets, 
-                       UINibStringIDTable.count, UINibStringIDTable.hashMask, UINibStringIDTable.table, 
-                       UIPointFIFO._nextFIFO, UIQuadCurvePointFIFO._controlPoints, 
+                       UINibEncoder.recursiveState, UINibEncoder.replacements, UINibEncoder.values, 
+                       UINibStringIDTable.buckets, UINibStringIDTable.count, UINibStringIDTable.hashMask, 
+                       UINibStringIDTable.table, UIPointFIFO._nextFIFO, UIQuadCurvePointFIFO._controlPoints, 
                        UIQuadCurvePointFIFO._emissionHandler, UIQuadCurvePointFIFO._emitInterpolatedPoints, 
                        UIQuadCurvePointFIFO._lastPoint, UIQuadCurvePointFIFO._lineWidth, 
                        UIQuadCurvePointFIFO._path, UIQuadCurvePointFIFO._points, 
                        UIQuadCurvePointFIFO._prevPoints, UIQuadCurvePointFIFO._unitScale, 
-                       UIQuadCurvePointFIFO._view, _NSCachedAttributedString._allocedRunsSize, 
+                       UIQuadCurvePointFIFO._view, _NSAttributedStringWithResolvedIntents._resolver, 
+                       _NSAttributedStringWithResolvedIntents._string, _NSCachedAttributedString._allocedRunsSize, 
                        _NSCachedAttributedString._baseAttributes, _NSCachedAttributedString._contents, 
                        _NSCachedAttributedString._hashValue, _NSCachedAttributedString._length, 
                        _NSCachedAttributedString._numHits, _NSCachedAttributedString._numRuns, 
@@ -485,8 +489,8 @@ exports:
                        __NSFontExtraData._key, __NSFontExtraData._lineHeight, __NSFontExtraData._matrix, 
                        __NSFontExtraData._maximumPointSizeAfterScaling, __NSFontExtraData._pointSizeForScaling, 
                        __NSFontExtraData._textStyleForScaling, __NSFontExtraData._typeface, 
-                       __NSFontTypefaceInfo._familyName, __NSFontTypefaceInfo._glyphAdvancementCache, 
-                       __NSFontTypefaceInfo._hash, __NSFontTypefaceInfo._liveInstances, 
-                       __NSFontTypefaceInfo._normalizedFontDescriptor, __NSFontTypefaceInfo._postscriptName, 
-                       __NSFontTypefaceInfo._tiFlags, __NSFontTypefaceInfo._verticalOriginDeltaCache ]
+                       __NSFontTypefaceInfo._familyName, __NSFontTypefaceInfo._hash, 
+                       __NSFontTypefaceInfo._liveInstances, __NSFontTypefaceInfo._normalizedFontDescriptor, 
+                       __NSFontTypefaceInfo._postscriptName, __NSFontTypefaceInfo._tiFlags, 
+                       __NSFontTypefaceInfo._verticalOriginDeltaCache ]
 ...

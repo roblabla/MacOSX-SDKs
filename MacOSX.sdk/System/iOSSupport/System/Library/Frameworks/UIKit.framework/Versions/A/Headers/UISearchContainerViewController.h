@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class UISearchController;
 
 // Use this container view controller for UISearchController containment or presentation on tvOS
-UIKIT_CLASS_AVAILABLE_IOS_TVOS(9_1, 9_0) @interface UISearchContainerViewController : UIViewController
+UIKIT_CLASS_AVAILABLE_IOS_TVOS(9_1, 9_0) NS_SWIFT_UI_ACTOR
+@interface UISearchContainerViewController : UIViewController
 @property (nonatomic, strong, readonly) UISearchController *searchController;
 
 - (instancetype)initWithSearchController:(UISearchController *)searchController;

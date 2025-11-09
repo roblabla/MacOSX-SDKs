@@ -36,6 +36,8 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
     Data is sent by writing to the file descriptor.
     Data is received by reading from the file descriptor.
     A file descriptor of -1 indicates a closed connection.
+
+    The file descriptor is owned by the VZVirtioSocketConnection. It is automatically closed when the object is destroyed.
  */
 @property (readonly) int fileDescriptor;
 

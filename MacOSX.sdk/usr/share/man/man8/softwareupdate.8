@@ -49,6 +49,10 @@ All updates that are recommended for your system. These are prefixed with a
 character in the
 .Cm --list
 output.
+.It Ar --os-only
+Only macOS updates
+.It Ar --safari-only
+Only safari updates
 .It Ar -R | --restart
 Automatically restart (or shut down) if required to complete installation. If the user invoking this tool is logged in then macOS will attempt to quit all applications, logout, and restart. If the user is not logged in, macOS will trigger a forced reboot if necessary. If you wish to always perform a forced reboot, pass -f (--force).
 .It Ar -a | --all
@@ -67,7 +71,18 @@ or
 .Em -
 characters. See
 .Sx EXAMPLES .
+.It Ar --stdinpass
+Password to authenticate as an owner. Apple Silicon only.
+.It Ar --user
+Local username to authenticate as an owner. Apple Silicon only.
 .El                      \" Ends the list
+.It Fl -list-full-installers
+List the available macOS Installers.
+.It Fl -fetch-full-installer
+Install the latest recommended macOS Installer.
+Use --full-installer-version to specify the version of macOS to install. ie. --full-installer-version 10.15
+.It Fl -install-rosetta
+Install Rosetta. Only applies to Apple silicon Macs. Pass --agree-to-license to agree to the software license agreement without any user interaction.
 .It Fl d | -download
 Each update specified by
 .Ar args

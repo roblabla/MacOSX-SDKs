@@ -71,9 +71,15 @@ MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4))
 
 /*!
  @property sampleCount
- @return The number of quality samples that this descriptor contains, for the horizontal and vertical axis. The depth component of the returned MTLSize is always 0.
+ @return The number of quality samples that this descriptor uses to describe its current function, for the horizontal and vertical axis. The depth component of the returned MTLSize is always 0.
  */
-@property (readonly, nonatomic) MTLSize sampleCount;
+@property (readonly, nonatomic) MTLSize sampleCount API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4));
+
+/*!
+ @property maxSampleCount
+ @return The maximum number of quality samples that this descriptor can use to describe its function, for the horizontal and vertical axis, this is the sampleCount that the descriptor was initialized with. The depth component of the returned MTLSize is always 0.
+ */
+@property (readonly, nonatomic) MTLSize maxSampleCount API_AVAILABLE(macos(12.0), ios(15.0));
 
 /*!
  @property horizontalSampleStorage
@@ -104,6 +110,15 @@ MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4))
  @return Returns a syntactic sugar helper to get or set sample values on the vertical axis.
  */
 @property (readonly, nonatomic) MTLRasterizationRateSampleArray* vertical;
+@end
+
+@interface MTLRasterizationRateLayerDescriptor()
+/*!
+ @property sampleCount
+ @abstract This declaration adds a setter to the previously (prior to macOS 12.0 and iOS 15.0) read-only property.
+ @discussion Setting a value (must be <= maxSampleCount) to allow MTLRasterizationRateLayerDescriptor to be re-used with a different number of samples without having to be recreated.
+ */
+@property (readwrite, nonatomic) MTLSize sampleCount API_AVAILABLE(macos(12.0), ios(15.0));
 @end
 
 /*!

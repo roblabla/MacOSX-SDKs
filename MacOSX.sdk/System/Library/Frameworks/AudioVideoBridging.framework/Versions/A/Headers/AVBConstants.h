@@ -2,7 +2,7 @@
 //  AVBConstants.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2011-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2021 Apple Inc. All rights reserved.
 //
 
 #ifndef AudioVideoBridging_AVBConstants_h
@@ -114,12 +114,47 @@ typedef NS_ENUM(uint32_t, AVB17221ADPEntityCapabilities)
 		 @constant	AVB17221ADPEntityCapabilitiesGeneralControllerIgnore
 		 @abstract	The IEEE Std 1722.1™-2013 entity should be ignored by general controllers.
 	 */
-	AVB17221ADPEntityCapabilitiesGeneralControllerIgnore API_AVAILABLE(macos(10.9))		= 0x00010000,
+	AVB17221ADPEntityCapabilitiesGeneralControllerIgnore API_AVAILABLE(macos(10.9))			= 0x00010000,
 	/*!
 		 @constant	AVB17221ADPEntityCapabilitiesEntityNotReady
 		 @abstract	The IEEE Std 1722.1™-2013 entity is not ready to be enumerated or connected by a controller.
 	 */
 	AVB17221ADPEntityCapabilitiesEntityNotReady API_AVAILABLE(macos(10.9))					= 0x00020000,
+	/*!
+	 @constant	AVB17221ADPEntityCapabilitiesACMPAcquireWithAEM
+	 @abstract	The IEEE Std 1722.1™-202X entity ACMP respects the acquisition made with the ACQUIRE_ENTITY command.
+	 */
+	AVB17221ADPEntityCapabilitiesACMPAcquireWithAEM API_AVAILABLE(macos(12))			= 0x00040000,
+	/*!
+	 @constant	AVB17221ADPEntityCapabilitiesACMPAuthenticateWithAEM
+	 @abstract	The IEEE Std 1722.1™-202X entity ACMP requires the Controller to authenticate with the AEM AUTHENTICATE command.
+	 */
+	AVB17221ADPEntityCapabilitiesACMPAuthenticateWithAEM API_AVAILABLE(macos(12))		= 0x00080000,
+	/*!
+	 @constant	AVB17221ADPEntityCapabilitiesSupportsUDPv4ATDECC
+	 @abstract	The IEEE Std 1722.1™-202X entity supports ATDECC commands using UDP over IPv4.
+	 */
+	AVB17221ADPEntityCapabilitiesSupportsUDPv4ATDECC API_AVAILABLE(macos(12))			= 0x00100000,
+	/*!
+	 @constant	AVB17221ADPEntityCapabilitiesSupportsUDPv4Streaming
+	 @abstract	The IEEE Std 1722.1™-202X entity supports streaming via AVTP in UDP over IPv4.
+	 */
+	AVB17221ADPEntityCapabilitiesSupportsUDPv4Streaming API_AVAILABLE(macos(12))		= 0x00200000,
+	/*!
+	 @constant	AVB17221ADPEntityCapabilitiesSupportsUDPv6ATDECC
+	 @abstract	The IEEE Std 1722.1™-202X entity supports ATDECC commands using UDP over IPv6.
+	 */
+	AVB17221ADPEntityCapabilitiesSupportsUDPv6ATDECC API_AVAILABLE(macos(12))			= 0x00400000,
+	/*!
+	 @constant	AVB17221ADPEntityCapabilitiesSupportsUDPv6Streaming
+	 @abstract	The IEEE Std 1722.1™-202X entity upports streaming via AVTP in UDP over IPv6.
+	 */
+	AVB17221ADPEntityCapabilitiesSupportsUDPv6Streaming API_AVAILABLE(macos(12))		= 0x00800000,
+	/*!
+	 @constant	AVB17221ADPEntityCapabilitiesMultiplePTPInstances
+	 @abstract	The IEEE Std 1722.1™-202X entity has multiple PTP instances using this interface.
+	 */
+	AVB17221ADPEntityCapabilitiesMultiplePTPInstances API_AVAILABLE(macos(12))			= 0x01000000,
 } API_AVAILABLE(macos(10.8));
 
 //Talker Specific Capabilities
@@ -545,6 +580,16 @@ typedef NS_ENUM(uint8_t, AVB17221ACMPStatusCode)
 	 */
 	AVB17221ACMPStatusIncompatibleRequest								= 0x11,
 	/*!
+		 @constant	AVB17221ACMPStatusListenerInvalidConnection
+		 @abstract	The IEEE Std 1722.1™-202x ACMP LISTENER_INVALID_CONNECTION status code.
+	 */
+	AVB17221ACMPStatusListenerInvalidConnection API_AVAILABLE(macos(12))	= 0x12,
+	/*!
+		 @constant	AVB17221ACMPStatusListenerCanOnlyListenOnce
+		 @abstract	The IEEE Std 1722.1™-202x ACMP LISTENER_CAN_ONLY_LISTEN_ONCE status code.
+	 */
+	AVB17221ACMPStatusListenerCanOnlyListenOnce API_AVAILABLE(macos(12))	= 0x13,
+	/*!
 		@constant	AVB17221ACMPStatusNotSupported
 		@abstract	The IEEE Std 1722.1™-2013 ACMP NOT_SUPPORTED status code.
 	 */
@@ -593,7 +638,32 @@ typedef NS_OPTIONS(uint16_t, AVB17221ACMPFlags)
 	 @abstract	The IEEE Std 1722.1™-2013 ACMP TALKER_FAILED flag.
 	 */
 	AVB17221ACMPFlagsStreamingTalkerFailed								= 0x0040,
+	/*!
+	 @constant	AVB17221ACMPFlagsStreamingConnectedListenersValid
+	 @abstract	The IEEE Std 1722.1™-202x ACMP CL_ENTRIES_VALID flag.
+	 */
+	AVB17221ACMPFlagsStreamingConnectedListenersValid API_AVAILABLE(macos(12))	= 0x0080,
+	/*!
+	 @constant	AVB17221ACMPFlagsStreamingNoStreamReservationProtocol
+	 @abstract	The IEEE Std 1722.1™-202x ACMP NO_SRP flag.
+	 */
+	AVB17221ACMPFlagsStreamingNoStreamReservationProtocol API_AVAILABLE(macos(12))	= 0x0100,
+	/*!
+	 @constant	AVB17221ACMPFlagsStreamingUsingUDP
+	 @abstract	The IEEE Std 1722.1™-202x ACMP UDP flag.
+	 */
+	AVB17221ACMPFlagsStreamingUsingUDP API_AVAILABLE(macos(12))	= 0x0200,
 } API_AVAILABLE(macos(10.8));
+
+
+typedef NS_OPTIONS(uint16_t, AVB17221ACMPIPFlag)
+{
+	/*!
+	 @constant	AVB17221ACMPIPFlagNone
+	 @abstract	The IEEE Std 1722.1™-202x ACMP no ip_flags.
+	 */
+	AVB17221ACMPIPFlagNone												= 0x0000,
+} API_AVAILABLE(macos(12));
 
 typedef NS_ENUM(uint16_t, AVB17221AEMCommandType)
 {
@@ -972,6 +1042,143 @@ typedef NS_ENUM(uint16_t, AVB17221AEMCommandType)
 		@abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_STREAM_BACKUP command.
 	 */
 	AVB17221AEMCommandTypeGetStreamBackup								= 0x004a,
+	
+	
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetDynamicInfo
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_DYNAMIC_INFO command.
+	 */
+	AVB17221AEMCommandTypeGetDynamicInfo API_AVAILABLE(macos(12))	= 0x004b,
+	/*!
+	 @constant	AVB17221AEMCommandTypeSetMaxTransitTime
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM  command.
+	 */
+	AVB17221AEMCommandTypeSetMaxTransitTime API_AVAILABLE(macos(12))	= 0x004c,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetMaxTransitTime
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_MAX_TRANSIT_TIME command.
+	 */
+	AVB17221AEMCommandTypeGetMaxTransitTime API_AVAILABLE(macos(12))	= 0x004d,
+	/*!
+	 @constant	AVB17221AEMCommandTypeSetSamplingRateRange
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM SET_SAMPLING_RATE_RANGE command.
+	 */
+	AVB17221AEMCommandTypeSetSampingRateRange API_AVAILABLE(macos(12))	= 0x004e,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetSamplingRateRange
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_SAMPLING_RATE_RANGE command.
+	 */
+	AVB17221AEMCommandTypeGetSamplingRateRange API_AVAILABLE(macos(12))	= 0x004f,
+	/*!
+	 @constant	AVB17221AEMCommandTypeSetPTPInstanceInfo
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM SET_PTP_INSTANCE_INFO command.
+	 */
+	AVB17221AEMCommandTypeSetPTPInstanceInfo API_AVAILABLE(macos(12))	= 0x0050,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPInstanceInfo
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_INSTANCE_INFO command.
+	 */
+	AVB17221AEMCommandTypeGetPTPInstanceInfo API_AVAILABLE(macos(12))	= 0x0051,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPInstanceExtendedInfo
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_INSTANCE_EXTENDED_INFO command.
+	 */
+	AVB17221AEMCommandTypeGetPTPInstanceExtendedInfo API_AVAILABLE(macos(12))	= 0x0052,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPInstanceGrandmasterInfo
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_INSTANCE_GRANDMASTER_INFO command.
+	 */
+	AVB17221AEMCommandTypeGetPTPInstanceGrandmasterInfo API_AVAILABLE(macos(12))	= 0x0053,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPInstancePathCount
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_INSTANCE_PATH_COUNT command.
+	 */
+	AVB17221AEMCommandTypeGetPTPInstancePathCount API_AVAILABLE(macos(12))	= 0x0054,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPInstancePathTrace
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_INSTANCE_PATH_TRACE command.
+	 */
+	AVB17221AEMCommandTypeGetPTPInstancePathTrace API_AVAILABLE(macos(12))	= 0x0055,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPInstancePerformanceMonitoringCount
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_INSTANCE_PERF_MON_COUNT command.
+	 */
+	AVB17221AEMCommandTypeGetPTPInstancePerformanceMonitoringCount API_AVAILABLE(macos(12))	= 0x0056,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPInstancePerformanceMonitoringRecord
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_INSTANCE_PERF_MON_RECORD command.
+	 */
+	AVB17221AEMCommandTypeGetPTPInstancePerformanceMonitoringRecord API_AVAILABLE(macos(12))	= 0x0057,
+	/*!
+	 @constant	AVB17221AEMCommandTypeSetPTPPortInitialIntervals
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM SET_PTP_PORT_INITIAL_INTERVALS command.
+	 */
+	AVB17221AEMCommandTypeSetPTPPortInitialIntervals API_AVAILABLE(macos(12))	= 0x0058,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPPortInitialIntervals
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_PORT_INITIAL_INTERVALS command.
+	 */
+	AVB17221AEMCommandTypeGetPTPPortInitialIntervals API_AVAILABLE(macos(12))	= 0x0059,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPPortCurrentIntervals
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_PORT_CURRENT_INTERVALS command.
+	 */
+	AVB17221AEMCommandTypeGetPTPPortCurrentIntervals API_AVAILABLE(macos(12))	= 0x005b,
+	/*!
+	 @constant	AVB17221AEMCommandTypeSetPTPPortRemoteIntervals
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM SET_PTP_PORT_REMOTE_INTERVALS command.
+	 */
+	AVB17221AEMCommandTypeSetPTPPortRemoteIntervals API_AVAILABLE(macos(12))	= 0x005c,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPPortRemoteIntervals
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_PORT_REMOTE_INTERVALS command.
+	 */
+	AVB17221AEMCommandTypeGetPTPPortRemoteIntervals API_AVAILABLE(macos(12))	= 0x005d,
+	/*!
+	 @constant	AVB17221AEMCommandTypeSetPTPPortInfo
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM SET_PTP_PORT_INFO command.
+	 */
+	AVB17221AEMCommandTypeSetPTPPortInfo API_AVAILABLE(macos(12))		= 0x005e,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPPortInfo
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_PORT_INFO command.
+	 */
+	AVB17221AEMCommandTypeGetPTPPortInfo API_AVAILABLE(macos(12))		= 0x005f,
+	/*!
+	 @constant	AVB17221AEMCommandTypeSetPTPPortOverrides
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM SET_PTP_PORT_OVERRIDES command.
+	 */
+	AVB17221AEMCommandTypeSetPTPPortOverrides API_AVAILABLE(macos(12))	= 0x0060,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPPortOverrides
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_PORT_OVERRIDES command.
+	 */
+	AVB17221AEMCommandTypeGetPTPPortOverrides API_AVAILABLE(macos(12))	= 0x0061,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPPortPDelayMonitoringCount
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_PORT_PDELAY_MON_COUNT command.
+	 */
+	AVB17221AEMCommandTypeGetPTPPortPDelayMonitoringCount API_AVAILABLE(macos(12))	= 0x0062,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPPortPDelayMonitoringRecord
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_PORT_PDELAY_MON_RECORD command.
+	 */
+	AVB17221AEMCommandTypeGetPTPPortPDelayMonitoringRecord API_AVAILABLE(macos(12))	= 0x0063,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPPortPerformanceMonitoringCount
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_PORT_PERF_MON_COUNT command.
+	 */
+	AVB17221AEMCommandTypeGetPTPPortPerformanceMonitoringCount API_AVAILABLE(macos(12))	= 0x0064,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPTPPortPerformanceMonitoringRecord
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PTP_PORT_PERF_MON_RECORD command.
+	 */
+	AVB17221AEMCommandTypeGetPTPPortPerformanceMonitoringRecord API_AVAILABLE(macos(12))	= 0x0065,
+	/*!
+	 @constant	AVB17221AEMCommandTypeGetPathLatency
+	 @abstract	The command code for the IEEE Std 1722.1™-202x AEM GET_PATH_LATENCY command.
+	 */
+	AVB17221AEMCommandTypeGetPathLatency API_AVAILABLE(macos(12))		= 0x0066,
 } API_AVAILABLE(macos(10.8));
 
 

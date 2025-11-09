@@ -86,6 +86,14 @@ GAMECONTROLLER_EXTERN NSString *const GCKeyF9 API_AVAILABLE(macos(11.0), ios(14.
 GAMECONTROLLER_EXTERN NSString *const GCKeyF10 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));                         /* F10 */
 GAMECONTROLLER_EXTERN NSString *const GCKeyF11 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));                         /* F11 */
 GAMECONTROLLER_EXTERN NSString *const GCKeyF12 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));                         /* F12 */
+GAMECONTROLLER_EXTERN NSString *const GCKeyF13 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F13 */
+GAMECONTROLLER_EXTERN NSString *const GCKeyF14 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F14 */
+GAMECONTROLLER_EXTERN NSString *const GCKeyF15 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F15 */
+GAMECONTROLLER_EXTERN NSString *const GCKeyF16 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F16 */
+GAMECONTROLLER_EXTERN NSString *const GCKeyF17 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F17 */
+GAMECONTROLLER_EXTERN NSString *const GCKeyF18 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F18 */
+GAMECONTROLLER_EXTERN NSString *const GCKeyF19 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F19 */
+GAMECONTROLLER_EXTERN NSString *const GCKeyF20 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F20 */
 GAMECONTROLLER_EXTERN NSString *const GCKeyPrintScreen API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));                 /* Print Screen */
 GAMECONTROLLER_EXTERN NSString *const GCKeyScrollLock API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));                  /* Scroll Lock */
 GAMECONTROLLER_EXTERN NSString *const GCKeyPause API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));                       /* Pause */

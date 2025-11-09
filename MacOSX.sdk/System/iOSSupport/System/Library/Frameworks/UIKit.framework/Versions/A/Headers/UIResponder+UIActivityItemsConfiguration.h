@@ -7,15 +7,14 @@
 //
 
 #import <UIKit/UIResponder.h>
+#import <UIKit/UIActivityItemsConfigurationReading.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol UIActivityItemsConfigurationReading;
-
 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos)
-@interface UIResponder (UIActivityItemsConfiguration)
+@interface UIResponder (UIActivityItemsConfiguration) <UIActivityItemsConfigurationProviding>
 
-@property (nonatomic, strong, nullable) id<UIActivityItemsConfigurationReading> activityItemsConfiguration API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+@property (nonatomic, strong, nullable) id<UIActivityItemsConfigurationReading> activityItemsConfiguration API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 @end
 

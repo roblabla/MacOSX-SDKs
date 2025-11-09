@@ -174,6 +174,9 @@ typedef NS_ENUM(NSInteger, CWErr)
  *
  * @constant kCWPHYMode11ac
  * IEEE 802.11ac physical layer mode.
+ *
+ * @constant kCWPHYMode11ax
+ * IEEE 802.11ax physical layer mode.
  */
 typedef NS_ENUM(NSInteger, CWPHYMode)
 {
@@ -183,6 +186,7 @@ typedef NS_ENUM(NSInteger, CWPHYMode)
 	kCWPHYMode11g		= 3,
 	kCWPHYMode11n		= 4,
     kCWPHYMode11ac      = 5,
+    kCWPHYMode11ax      = 6,
 } NS_ENUM_AVAILABLE_MAC(10_7);
 
 /*!

@@ -588,4 +588,11 @@ HK_EXTERN NSString * const HKMetadataKeyVO2MaxValue API_AVAILABLE(ios(14.3), wat
 */
 HK_EXTERN NSString * const HKMetadataKeyLowCardioFitnessEventThreshold API_AVAILABLE(ios(14.3), watchos(7.2));
 
+/*!
+@constant      HKMetadataKeyDateOfEarliestDataUsedForEstimate
+@abstract      Represents how far back an estimation algorithm incorporated data from.
+@discussion    The expected value is an NSDate indicating the earliest date of data used to produce an estimated value for an HKSample.
+*/
+HK_EXTERN NSString * const HKMetadataKeyDateOfEarliestDataUsedForEstimate API_AVAILABLE(ios(15.0), watchos(8.0));
+
 NS_ASSUME_NONNULL_END

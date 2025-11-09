@@ -25,13 +25,21 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MLCDevice : NSObject<NSCopying>
 
 /*! @property   type
-    @abstract   The device type.
+    @abstract   The type specified when the device is created
     @discussion Recommend that developers use MLCDeviceTypeAny as the device type.
                 This will ensure that MLCompute will select the best device to execute the neural network.
                 If developers want to be able to control device selection, they can select CPU or GPU and
                 for the GPU, they can also select a specific Metal device.
  */
 @property (readonly, nonatomic) MLCDeviceType type;
+
+/*! @property   actualDeviceType
+    @abstract   The specific device selected.
+    @discussion This can be CPU, GPU or ANE.  If type is MLCDeviceTypeAny, this property
+                can be used to find out the specific device type that is selected.
+ */
+@property (readonly, nonatomic) MLCDeviceType actualDeviceType
+    MLCOMPUTE_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
 @property (readonly, nonatomic) NSArray<id<MTLDevice>> *gpuDevices;
 
@@ -44,6 +52,12 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
     @return     A new device, or `nil` if no GPU exists.
  */
 + (instancetype _Nullable)gpuDevice;
+
+/*! @abstract   Creates a device which uses the Apple Neural Engine, if any.
+    @return     A new device, or `nil` if no ANE exists.
+ */
++ (instancetype _Nullable)aneDevice
+    MLCOMPUTE_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
 /*! @abstract   Create a MLCDevice object
     @param      type    A device type

@@ -1,7 +1,7 @@
 /*
 	NSGridView.h
 	Application Kit
-	Copyright (c) 2015-2019, Apple Inc.
+	Copyright (c) 2015-2021, Apple Inc.
 	All rights reserved.
  */
 
@@ -97,7 +97,7 @@ API_AVAILABLE(macos(10.12))
 
 
 // NSGridRow represents a row of cells in the grid view, and allows content placement to be specified on a per-row basis.
-API_AVAILABLE(macos(10.12))
+API_AVAILABLE(macos(10.12)) NS_SWIFT_UI_ACTOR
 @interface NSGridRow : NSObject <NSCoding>
 
 @property (readonly,weak) NSGridView *gridView;
@@ -120,7 +120,7 @@ API_AVAILABLE(macos(10.12))
 
 
 // NSGridColumn represents a column of cells in the grid view, and allows content placement to be specified on a per-column basis.
-API_AVAILABLE(macos(10.12))
+API_AVAILABLE(macos(10.12)) NS_SWIFT_UI_ACTOR
 @interface NSGridColumn : NSObject <NSCoding>
 
 @property (readonly,weak) NSGridView *gridView;
@@ -140,7 +140,7 @@ API_AVAILABLE(macos(10.12))
 
 
 // NSGridCell represents a single cell in the grid.  The cell will maintain the necessary constraints for positioning out whichever contentView is set.
-API_AVAILABLE(macos(10.12))
+API_AVAILABLE(macos(10.12)) NS_SWIFT_UI_ACTOR
 @interface NSGridCell : NSObject <NSCoding>
 
 

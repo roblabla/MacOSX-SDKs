@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from OSCollection.iig */
+/* iig(DriverKit-191) generated from OSCollection.iig */
 
 /* OSCollection.iig:1-42 */
 /*
@@ -156,6 +156,24 @@ public:
     virtual OSCollectionPtr
     copyCollection(OSDictionary * cycleDict) const = 0;
 
+    uint32_t
+    getCount_Call() const  { return getCount(); };\
+
+    uint32_t
+    getCapacity_Call() const  { return getCapacity(); };\
+
+    uint32_t
+    ensureCapacity_Call(uint32_t newCapacity)  { return ensureCapacity(newCapacity); };\
+
+    void
+    flushCollection_Call()  { return flushCollection(); };\
+
+    bool
+    iterateObjects_Call(OSCollectionIterateObjectsBlock block) const  { return iterateObjects(block); };\
+
+    OSCollectionPtr
+    copyCollection_Call(OSDictionary * cycleDict) const  { return copyCollection(cycleDict); };\
+
 };
 
 struct OSCollection_IVars;
@@ -169,12 +187,21 @@ class OSCollection : public OSContainer, public OSCollectionInterface
 
 #if !KERNEL
 public:
+#ifdef OSCollection_DECLARE_IVARS
+OSCollection_DECLARE_IVARS
+#else /* OSCollection_DECLARE_IVARS */
     union
     {
         OSCollection_IVars * ivars;
         OSCollection_LocalIVars * lvars;
     };
+#endif /* OSCollection_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gOSCollectionMetaClass; };
+#endif /* KERNEL */
 
     using super = OSContainer;
 

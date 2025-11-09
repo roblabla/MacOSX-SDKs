@@ -2,7 +2,7 @@
 //  CSSearchableItem.h
 //  CoreSpotlight
 //
-//  Copyright © 2015 Apple. All rights reserved.
+//  Copyright © 2021 Apple. All rights reserved.
 //
 
 #import <CoreSpotlight/CSBase.h>
@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 // and the value is the uniqueIdentifier used when creating the item.
 CORESPOTLIGHT_EXPORT NSString * const CSSearchableItemActionType CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE;
 CORESPOTLIGHT_EXPORT NSString * const CSSearchableItemActivityIdentifier CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE;
+
+// For custom actions on iOS, the userInfo dictionary also has another key value pair where CSActionIdentifier is the key
+// and the value is the action tapped in the UI based on what was indexed by the app.
+CORESPOTLIGHT_EXPORT NSString * const CSActionIdentifier API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, tvos);
 
 // When continuing a query from Spotlight, the application's -application:willContinueUserActivityWithType:
 // method will get called with CSQueryContinuationActionType, followed by -application:continueUserActivity:restorationHandler:

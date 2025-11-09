@@ -184,7 +184,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
 - (void)removeWithCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler;
 
 // This method fetches the match data and exchanges for this match.  This data is the state of the game at this point in time.  This may update the status and/or participant properties if they have changed.
-- (void)loadMatchDataWithCompletionHandler:(void(^__nullable)(NSData * __nullable matchData, NSError * __nullable error))completionHandler;
+- (void)loadMatchDataWithCompletionHandler:(void(^__nullable)(NSData * _Nullable_result matchData, NSError * __nullable error))completionHandler;
 
 
 // Ends the current player's turn. You may update the matchOutcome for any GKTurnBasedPlayerInfos that you wish to before ending the turn.

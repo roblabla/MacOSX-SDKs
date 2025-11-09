@@ -188,7 +188,7 @@ typedef NS_ENUM(NSInteger, HKWheelchairUse) {
 
 /*!
  @enum          HKCategoryValueCervicalMucusQuality
- @abstract      Set of values that may be used for HKCategorySamples with the HKCategoryValueCervicalMucusQuality type.
+ @abstract      Set of values that may be used for HKCategorySamples with the HKCategoryTypeIdentifierCervicalMucusQuality type.
  @discussion    These cervical mucus quality values are ordered from least-fertile (Dry) to most-fertile (EggWhite).
  */
 typedef NS_ENUM(NSInteger, HKCategoryValueCervicalMucusQuality) {
@@ -201,7 +201,7 @@ typedef NS_ENUM(NSInteger, HKCategoryValueCervicalMucusQuality) {
 
 /*!
  @enum          HKCategoryValueOvulationTestResult
- @abstract      Set of values that may be used for HKCategorySamples with the HKCategoryValueOvulationTestResult type.
+ @abstract      Set of values that may be used for HKCategorySamples with the HKCategoryTypeIdentifierOvulationTestResult type.
  @discussion    This category value tracks the result of a home ovulation test that use surges in hormone levels to
                 indicate fertility.
  */
@@ -212,6 +212,30 @@ typedef NS_ENUM(NSInteger, HKCategoryValueOvulationTestResult) {
     HKCategoryValueOvulationTestResultIndeterminate = 3,
     HKCategoryValueOvulationTestResultEstrogenSurge API_AVAILABLE(ios(13.0), watchos(6.0)) = 4,
 } API_AVAILABLE(ios(9.0), watchos(2.0));
+
+/*!
+ @enum          HKCategoryValuePregnancyTestResult
+ @abstract      Set of values that may be used for HKCategorySamples with the HKCategoryTypeIdentifierPregnancyTestResult type.
+ @discussion    This category value tracks the result of a home pregnancy test that checks for presence of the human chorionic
+                gonadotrophin (hCG) hormone in urine to confirm pregnancy.
+ */
+typedef NS_ENUM(NSInteger, HKCategoryValuePregnancyTestResult) {
+    HKCategoryValuePregnancyTestResultNegative = 1,
+    HKCategoryValuePregnancyTestResultPositive,
+    HKCategoryValuePregnancyTestResultIndeterminate,
+} API_AVAILABLE(ios(15.0), watchos(8.0));
+
+/*!
+ @enum          HKCategoryValueProgesteroneTestResult
+ @abstract      Set of values that may be used for HKCategorySamples with the HKCategoryTypeIdentifierProgesteroneTestResult type.
+ @discussion    This category value tracks the result of a home ovulation confirmation test that use surges in hormone levels to
+                confirm if ovulation has occurred.
+ */
+typedef NS_ENUM(NSInteger, HKCategoryValueProgesteroneTestResult) {
+    HKCategoryValueProgesteroneTestResultNegative = 1,
+    HKCategoryValueProgesteroneTestResultPositive,
+    HKCategoryValueProgesteroneTestResultIndeterminate,
+} API_AVAILABLE(ios(15.0), watchos(8.0));
 
 /*!
  @enum          HKCategoryValueMenstrualFlow
@@ -327,5 +351,20 @@ typedef NS_ENUM(NSInteger, HKActivityMoveMode) {
     HKActivityMoveModeActiveEnergy = 1,
     HKActivityMoveModeAppleMoveTime = 2,
 } API_AVAILABLE(ios(14.0), watchos(7.0));
+
+/*!
+@enum          HKCategoryValueAppleWalkingSteadinessEvent
+@abstract      Specifies the kind of Apple Walking Steadiness event associated with the sample.
+@constant      HKCategoryValueAppleWalkingSteadinessEventInitialLow           This constant defines Apple Walking Steadiness events associated with the user's walking steadiness being low.
+@constant      HKCategoryValueAppleWalkingSteadinessEventInitialVeryLow       This constant defines Apple Walking Steadiness events associated with the user's walking steadiness being very low.
+@constant      HKCategoryValueAppleWalkingSteadinessEventRepeatLow            This constant defines Apple Walking Steadiness events associated with the user's walking steadiness remaining low over a significant time period.
+@constant      HKCategoryValueAppleWalkingSteadinessEventRepeatVeryLow        This constant defines Apple Walking Steadiness events associated with the user's walking steadiness remaining very low over a significant time period.
+*/
+typedef NS_ENUM(NSInteger, HKCategoryValueAppleWalkingSteadinessEvent) {
+    HKCategoryValueAppleWalkingSteadinessEventInitialLow = 1,
+    HKCategoryValueAppleWalkingSteadinessEventInitialVeryLow = 2,
+    HKCategoryValueAppleWalkingSteadinessEventRepeatLow = 3,
+    HKCategoryValueAppleWalkingSteadinessEventRepeatVeryLow = 4,
+} API_AVAILABLE(ios(15.0), watchos(8.0));
 
 NS_ASSUME_NONNULL_END

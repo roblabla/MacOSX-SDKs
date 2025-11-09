@@ -66,6 +66,7 @@
 #ifndef _VM_VM_KERN_H_
 #define _VM_VM_KERN_H_
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif

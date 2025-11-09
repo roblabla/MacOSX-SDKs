@@ -6,7 +6,7 @@
 //
 
 #import <Vision/VNRequest.h>
-#import <Vision/VNTypes.h>
+#import <Vision/VNObservation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -50,6 +50,11 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  */
 @property (readwrite, nonatomic, assign) NSUInteger maximumObservations;
 
+
+/*!
+	@discussion VNRectangleObservation results.
+*/
+@property (readonly, copy, nullable) NSArray<VNRectangleObservation*>* results;
 
 @end
 

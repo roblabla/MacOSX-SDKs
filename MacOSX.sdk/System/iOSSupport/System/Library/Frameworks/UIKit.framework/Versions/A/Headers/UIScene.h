@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class UISceneSession, UISceneConnectionOptions, UIOpenURLContext, UISceneOpenExternalURLOptions, UISceneActivationConditions;
 @protocol UISceneDelegate;
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIScene : UIResponder
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UIScene : UIResponder
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -47,12 +48,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIScene : UIResponder
 // If set to nil or an empty string, the system will not display a title.
 @property (null_resettable, nonatomic, copy) NSString *title;
 
+// A subtitle that may be displayed adjacent to or below the primary title on supported platforms.
+// If set to an empty string, the system will not display a subtitle.
+@property (nonatomic, copy) NSString *subtitle API_AVAILABLE(ios(15.0));
+
 // use the activation conditions to influence which scene is activated for banner taps, URLs, etc.
 @property (nonatomic, strong) UISceneActivationConditions *activationConditions;
 
 @end
 
-API_AVAILABLE(ios(13.0)) @protocol UISceneDelegate <NSObject>
+API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@protocol UISceneDelegate <NSObject>
 @optional
 #pragma mark Lifecycle State Transitioning
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions;
@@ -78,6 +84,13 @@ API_AVAILABLE(ios(13.0)) @protocol UISceneDelegate <NSObject>
 // method is called to update the activity. This is done synchronously and ensures the activity
 // has all info filled in before it is saved.
 - (nullable NSUserActivity *)stateRestorationActivityForScene:(UIScene *)scene;
+
+// This will be called after scene connection, but before activation, and will provide the
+// activity that was last supplied to the stateRestorationActivityForScene callback, or
+// set on the UISceneSession.stateRestorationActivity property.
+// Note that, if it's required earlier, this activity is also already available in the
+// UISceneSession.stateRestorationActivity at scene connection time.
+- (void)scene:(UIScene *)scene restoreInteractionStateWithUserActivity:(NSUserActivity *)stateRestorationActivity;
 
 #pragma mark - User Activity Integration
 - (void)scene:(UIScene *)scene willContinueUserActivityWithType:(NSString *)userActivityType;

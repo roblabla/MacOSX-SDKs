@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           334E02ED-9703-3728-8320-534A54517D5D
+    value:           C326BA86-E457-3D16-8A4A-62AC3669022E
   - target:          x86_64-maccatalyst
-    value:           334E02ED-9703-3728-8320-534A54517D5D
+    value:           C326BA86-E457-3D16-8A4A-62AC3669022E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B5FFFB85-4F58-35D0-9CB0-D47059BA431D
+    value:           E31AC8C4-4CF0-3884-9970-A540C35AE288
   - target:          arm64e-maccatalyst
-    value:           B5FFFB85-4F58-35D0-9CB0-D47059BA431D
+    value:           E31AC8C4-4CF0-3884-9970-A540C35AE288
 install-name:    '/usr/lib/libFosl_dynamic.dylib'
 current-version: 0
 compatibility-version: 0

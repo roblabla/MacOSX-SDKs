@@ -1,10 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
 // swift-module-flags: -target x86_64-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDarwin -swift-version 5 -O -enforce-exclusivity=unchecked -disable-objc-attr-requires-foundation-module -module-name Darwin
 @_exported import Darwin
 import Swift
 import SwiftOverlayShims
 import SwiftShims
+import _Concurrency
 public var noErr: Darwin.OSStatus {
   get
 }
@@ -24,17 +25,17 @@ public var noErr: Darwin.OSStatus {
   }
   public typealias BooleanLiteralType = Swift.Bool
 }
-extension DarwinBoolean : Swift.CustomReflectable {
+extension Darwin.DarwinBoolean : Swift.CustomReflectable {
   public var customMirror: Swift.Mirror {
     get
   }
 }
-extension DarwinBoolean : Swift.CustomStringConvertible {
+extension Darwin.DarwinBoolean : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
-extension DarwinBoolean : Swift.Equatable {
+extension Darwin.DarwinBoolean : Swift.Equatable {
   @_transparent public static func == (lhs: Darwin.DarwinBoolean, rhs: Darwin.DarwinBoolean) -> Swift.Bool {
     return lhs.boolValue == rhs.boolValue
   }
@@ -942,12 +943,16 @@ public let LDBL_EPSILON: Swift.Float80
 public let LDBL_MIN: Swift.Float80
 @available(swift, deprecated: 3.0, message: "Please use 'Float80.leastNonzeroMagnitude' or '.leastNonzeroMagnitude'.")
 public let LDBL_TRUE_MIN: Swift.Float80
-extension extern_proc {
+extension Darwin.extern_proc {
   @_transparent public var p_starttime: Darwin.timeval {
     @_transparent get { return self.p_un.__p_starttime }
     @_transparent set { self.p_un.__p_starttime = newValue }
   }
 }
+
+#if compiler(>=5.3) && $MarkerProtocol && $Sendable
+extension Darwin.DarwinBoolean : Swift.Sendable {}
+#endif
 extension Darwin.POSIXErrorCode : Swift.Equatable {}
 extension Darwin.POSIXErrorCode : Swift.Hashable {}
 extension Darwin.POSIXErrorCode : Swift.RawRepresentable {}

@@ -1,12 +1,14 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DDDFCF86-BF58-3BC1-96B5-FC41C7C36A66
+    value:           81F6F01A-1347-322E-8A57-2A9FE4783498
+  - target:          x86_64-maccatalyst
+    value:           81F6F01A-1347-322E-8A57-2A9FE4783498
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/sint8_rgba.dylib'
 exports:
-  - targets:         [ x86_64-macos ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     symbols:         [ ___FunctionTableTransposed_AVX10, ___FunctionTableTransposed_SSE3, 
                        ___FunctionTableTransposed_SSE41, ___FunctionTable_AVX10, 
                        ___FunctionTable_SSE3, ___FunctionTable_SSE41 ]

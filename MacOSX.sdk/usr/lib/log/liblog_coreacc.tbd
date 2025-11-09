@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C031071C-CB33-3A7C-88AA-6F79E66CC5BD
+    value:           D92BED54-2460-384E-B573-EA5D8DD2B8C1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A626D49F-A6CB-36BB-9CE8-431A22512B30
+    value:           64E1F126-29B3-37C8-8B95-6095F2C56B75
 install-name:    '/usr/lib/log/liblog_coreacc.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

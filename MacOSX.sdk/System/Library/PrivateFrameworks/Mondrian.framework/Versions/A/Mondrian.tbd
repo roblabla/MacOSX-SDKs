@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DBDC4922-7C2F-3092-BADF-40536506B591
+    value:           940DE1E5-1831-3B41-9AFE-F6D4F5B1D3D1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A631143B-3001-30E1-A42D-93F0AD0FB1AF
+    value:           6034A515-7F3B-32DA-91D0-AF1B57DF9F03
 install-name:    '/System/Library/PrivateFrameworks/Mondrian.framework/Versions/A/Mondrian'
-current-version: 340.0.220
+current-version: 400.27.210
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _GridRectEdgeOppositeEdge, _MOAVAssetCreateThumbnailWithURL, 
@@ -23,17 +23,16 @@ exports:
                        _MOCGImageJPEGRepresentation, _MOCGImagePNGRepresentation, 
                        _MOCGImageSaveJPEGToURL, _MOCGImageSavePNGToURL, _MOCGImageSizeWithURL, 
                        _MOCGRectMakeFitSizeInRect, _MOCGSizeFitAspectInSize, _MOCollectionViewCommonInit, 
-                       _MOErrorDomain, _MOGridLocationInvalid, _MOGridLocationZero, 
+                       _MOErrorDomain, _MOGetLog, _MOGridLocationInvalid, _MOGridLocationZero, 
                        _MOGridRectEdgeFromCGRectEdge, _MOGridRectGetEdge, _MOGridRectIntersection, 
                        _MOGridRectInvalid, _MOGridSizeForAspectRatio, _MOGridSizeInvalid, 
                        _MOGridSizeUnit, _MOGridSizeZero, _MOGridSlotConsumerColumnIsCompletelyConsumed, 
                        _MOGridSlotConsumerConsumeSlots, _MOGridSlotConsumerCreate, 
                        _MOGridSlotConsumerDispose, _MOGridSlotConsumerIsCompletelyConsumed, 
                        _MOGridSlotConsumerRectIsCompletelyConsumed, _MOGridSlotConsumerReset, 
-                       _MOGridSlotConsumerRowIsCompletelyConsumed, _MOLoggerSetLogLevel, 
-                       _MOMediaViewCellDefaultReuseIdentifier, _MOMediaViewCommonInit, 
-                       _MOMediaViewLayoutOptionsDescriptionControl, _MOMediaViewLayoutOptionsDescriptionControlTypeCheckbox, 
-                       _MOMediaViewLayoutOptionsDescriptionControlTypeEdgeInsets, 
+                       _MOGridSlotConsumerRowIsCompletelyConsumed, _MOMediaViewCellDefaultReuseIdentifier, 
+                       _MOMediaViewCommonInit, _MOMediaViewLayoutOptionsDescriptionControl, 
+                       _MOMediaViewLayoutOptionsDescriptionControlTypeCheckbox, _MOMediaViewLayoutOptionsDescriptionControlTypeEdgeInsets, 
                        _MOMediaViewLayoutOptionsDescriptionControlTypeSection, _MOMediaViewLayoutOptionsDescriptionControlTypeSize, 
                        _MOMediaViewLayoutOptionsDescriptionControlTypeSlider, _MOMediaViewLayoutOptionsDescriptionControlTypeStepper, 
                        _MOMediaViewLayoutOptionsDescriptionControlTypeTextfield, 
@@ -46,11 +45,10 @@ exports:
                        _MOPhotosMomentsViewElementKindMainHeader, _MOPhotosMomentsViewSupplementaryViewMainFooterReuseIdentifier, 
                        _MOPhotosMomentsViewSupplementaryViewMainHeaderReuseIdentifier, 
                        _MORectWithAspectRatioCenteredInsideRect, _MOUIProgressBarCommonInit, 
-                       _MOUTTypeExtensionForUTI, _MOUTTypePreferredIdentifier, _NSStringFromMOGridLocation, 
-                       _NSStringFromMOGridRect, _NSStringFromMOGridSize, _SFMainScreenSizeWithScaleFactor, 
-                       _defaultCGImageSourceOptions, _gASLLogLevel, _gMOTracingEnabled, 
-                       _gMOTracingFullEnabled, _gMonitoringLoggingCategory, _kMOLayoutInfiniteDimension, 
-                       _kMOLiveUpdateControllerDidExecuteUserActionsNotificationName, 
+                       _NSStringFromMOGridLocation, _NSStringFromMOGridRect, _NSStringFromMOGridSize, 
+                       _SFMainScreenSizeWithScaleFactor, _defaultCGImageSourceOptions, 
+                       _gMOTracingEnabled, _gMOTracingFullEnabled, _gMonitoringLoggingCategory, 
+                       _kMOLayoutInfiniteDimension, _kMOLiveUpdateControllerDidExecuteUserActionsNotificationName, 
                        _kMOLiveUpdateControllerDidExecuteUserActionsNotificationObjectIdentifier, 
                        _kMOMediaItemThumbnailResolutionAlignment, _kMOMediaItemThumbnailResolutionLow, 
                        _kMOMediaItemThumbnailResolutionNatural, _kMOMonitoringAutomationBeginKey, 
@@ -113,11 +111,11 @@ exports:
                        _kRecommendedVisibleContentPreparationWaitDelay ]
     objc-classes:    [ AXTextField, MOAssetsLayout, MOAssetsMediaView, MOAssetsView, 
                        MOCollectionView, MOCollectionView_NRS, MOFast2DIndex, MOImageDiskCache, 
-                       MOLRUCache, MOLiveUpdateController, MOLogger, MOLoggingStore, 
-                       MOMSMonitoringProcessInfo, MOMSMonitoringSystemInfo, MOMediaFileSystemItem, 
-                       MOMediaItem, MOMediaItemsCache, MOMediaSection, MOMediaSectionsCache, 
-                       MOMediaView, MOMediaViewCell, MOMediaViewCellThumbnailView, 
-                       MOMediaViewCondensedLayout, MOMediaViewDefaultCell, MOMediaViewDefaultSupplementaryHeader, 
+                       MOLRUCache, MOLiveUpdateController, MOLoggingStore, MOMSMonitoringProcessInfo, 
+                       MOMSMonitoringSystemInfo, MOMediaFileSystemItem, MOMediaItem, 
+                       MOMediaItemsCache, MOMediaSection, MOMediaSectionsCache, MOMediaView, 
+                       MOMediaViewCell, MOMediaViewCellThumbnailView, MOMediaViewCondensedLayout, 
+                       MOMediaViewDefaultCell, MOMediaViewDefaultSupplementaryHeader, 
                        MOMediaViewEventLayout, MOMediaViewLayout, MOMediaViewSupplementary, 
                        MOMonitoringController, MOMonitoringPanel, MOMonitoringPanelController, 
                        MONSOperation, MONSOperationQueue, MOPhotosAtlasLayout, MOPhotosAtlasLayoutAccessibility, 

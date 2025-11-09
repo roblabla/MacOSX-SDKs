@@ -44,7 +44,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 /*!
 @brief Returns the Euclidean distance between two VNPoint objects.
 */
-+ (double)distanceBetweenPoint:(VNPoint*)point1 point:(VNPoint*)point2 NS_SWIFT_NAME(distance(_:_:)) API_DEPRECATED_WITH_REPLACEMENT("use -distanceToPoint:", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
++ (double)distanceBetweenPoint:(VNPoint*)point1 point:(VNPoint*)point2 NS_SWIFT_NAME(distance(_:_:)) API_DEPRECATED_WITH_REPLACEMENT("-distanceToPoint:", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
 
 /*!
 @brief Returns the Euclidean distance to another point.

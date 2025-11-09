@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Apple Inc. All rights reserved.
+ * Copyright (c) 2019-2021 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -29,11 +29,18 @@
 #ifndef XNU_LIBKERN_LIBKERN_CXX_OS_ALLOCATION_H
 #define XNU_LIBKERN_LIBKERN_CXX_OS_ALLOCATION_H
 
+#if !TAPI
+
+#include <stddef.h>
+#if DRIVERKIT_FRAMEWORK_INCLUDE
+#include <DriverKit/OSBoundedPtr.h>
+#include <DriverKit/safe_allocation.h>
+#include <DriverKit/IOLib.h> // IOMalloc/IOFree
+#else
 #include <libkern/c++/OSBoundedPtr.h>
 #include <libkern/c++/safe_allocation.h>
-#include <stddef.h>
 #include <IOKit/IOLib.h> // IOMalloc/IOFree
-#include <kern/debug.h>
+#endif /* DRIVERKIT_FRAMEWORK_INCLUDE */
 
 namespace os_detail {
 struct IOKit_allocator {
@@ -43,18 +50,29 @@ struct IOKit_allocator {
 		return IOMalloc(bytes);
 	}
 
+	static void*
+	allocate_zero(size_t bytes)
+	{
+		return IOMallocZero(bytes);
+	}
+
 	static void
 	deallocate(void* p, size_t bytes)
 	{
 		IOFree(p, bytes);
 	}
 };
+
 } // end namespace os_detail
 
-template <typename T>
-using OSAllocation = libkern::safe_allocation<T, os_detail::IOKit_allocator, os_detail::panic_trapping_policy>;
+template <typename T, typename Allocator = os_detail::IOKit_allocator>
+using OSAllocation = libkern::safe_allocation<T, Allocator, os_detail::panic_trapping_policy>;
+
 
 inline constexpr auto OSAllocateMemory = libkern::allocate_memory;
+inline constexpr auto OSAllocateMemoryZero = libkern::allocate_memory_zero;
 inline constexpr auto OSAdoptMemory = libkern::adopt_memory;
+
+#endif /* !TAPI */
 
 #endif /* !XNU_LIBKERN_LIBKERN_CXX_OS_ALLOCATION_H */

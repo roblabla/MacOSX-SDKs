@@ -16,6 +16,11 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), macCatalyst(13.0)) API_UNAVAILA
  */
 @property(nonatomic, copy) NSArray<NSURLQueryItem *> *authorizationOptions;
 
+/*! @abstract Enables or disables the authorization user interface.
+ @discussion The default values is YES. If user interface is not enabled, then the authorization will fail with @see ASAuthorizationErrorNotInteractive if it attempts to display the authorization user interface.
+*/
+@property (nonatomic, getter=isUserInterfaceEnabled) BOOL userInterfaceEnabled API_AVAILABLE(ios(15.0), macos(12.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos);
+
 @end
 
 NS_ASSUME_NONNULL_END

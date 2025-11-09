@@ -114,130 +114,130 @@ _LIBCPP_BEGIN_NAMESPACE_STD
 
 #if !defined(_LIBCPP_DRIVERKIT_LIBC)
 
-using ::mbstate_t;
+_LIBCPP_USING_IF_EXISTS(::mbstate_t);
 using ::size_t;
-using ::tm;
-using ::wint_t;
-using ::FILE;
-using ::fwprintf;
-using ::fwscanf;
-using ::swprintf;
-using ::vfwprintf;
-using ::vswprintf;
-using ::swscanf;
-using ::vfwscanf;
-using ::vswscanf;
-using ::fgetwc;
-using ::fgetws;
-using ::fputwc;
-using ::fputws;
-using ::fwide;
-using ::getwc;
-using ::putwc;
-using ::ungetwc;
-using ::wcstod;
-using ::wcstof;
-using ::wcstold;
-using ::wcstol;
+_LIBCPP_USING_IF_EXISTS(::tm);
+_LIBCPP_USING_IF_EXISTS(::wint_t);
+_LIBCPP_USING_IF_EXISTS(::FILE);
+_LIBCPP_USING_IF_EXISTS(::fwprintf);
+_LIBCPP_USING_IF_EXISTS(::fwscanf);
+_LIBCPP_USING_IF_EXISTS(::swprintf);
+_LIBCPP_USING_IF_EXISTS(::vfwprintf);
+_LIBCPP_USING_IF_EXISTS(::vswprintf);
+_LIBCPP_USING_IF_EXISTS(::swscanf);
+_LIBCPP_USING_IF_EXISTS(::vfwscanf);
+_LIBCPP_USING_IF_EXISTS(::vswscanf);
+_LIBCPP_USING_IF_EXISTS(::fgetwc);
+_LIBCPP_USING_IF_EXISTS(::fgetws);
+_LIBCPP_USING_IF_EXISTS(::fputwc);
+_LIBCPP_USING_IF_EXISTS(::fputws);
+_LIBCPP_USING_IF_EXISTS(::fwide);
+_LIBCPP_USING_IF_EXISTS(::getwc);
+_LIBCPP_USING_IF_EXISTS(::putwc);
+_LIBCPP_USING_IF_EXISTS(::ungetwc);
+_LIBCPP_USING_IF_EXISTS(::wcstod);
+_LIBCPP_USING_IF_EXISTS(::wcstof);
+_LIBCPP_USING_IF_EXISTS(::wcstold);
+_LIBCPP_USING_IF_EXISTS(::wcstol);
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
-using ::wcstoll;
+_LIBCPP_USING_IF_EXISTS(::wcstoll);
 #endif // _LIBCPP_HAS_NO_LONG_LONG
-using ::wcstoul;
+_LIBCPP_USING_IF_EXISTS(::wcstoul);
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
-using ::wcstoull;
+_LIBCPP_USING_IF_EXISTS(::wcstoull);
 #endif // _LIBCPP_HAS_NO_LONG_LONG
-using ::wcscpy;
-using ::wcsncpy;
-using ::wcscat;
-using ::wcsncat;
-using ::wcscmp;
-using ::wcscoll;
-using ::wcsncmp;
-using ::wcsxfrm;
-using ::wcschr;
-using ::wcspbrk;
-using ::wcsrchr;
-using ::wcsstr;
-using ::wmemchr;
-using ::wcscspn;
-using ::wcslen;
-using ::wcsspn;
-using ::wcstok;
-using ::wmemcmp;
-using ::wmemcpy;
-using ::wmemmove;
-using ::wmemset;
-using ::wcsftime;
-using ::btowc;
-using ::wctob;
-using ::mbsinit;
-using ::mbrlen;
-using ::mbrtowc;
-using ::wcrtomb;
-using ::mbsrtowcs;
-using ::wcsrtombs;
+_LIBCPP_USING_IF_EXISTS(::wcscpy);
+_LIBCPP_USING_IF_EXISTS(::wcsncpy);
+_LIBCPP_USING_IF_EXISTS(::wcscat);
+_LIBCPP_USING_IF_EXISTS(::wcsncat);
+_LIBCPP_USING_IF_EXISTS(::wcscmp);
+_LIBCPP_USING_IF_EXISTS(::wcscoll);
+_LIBCPP_USING_IF_EXISTS(::wcsncmp);
+_LIBCPP_USING_IF_EXISTS(::wcsxfrm);
+_LIBCPP_USING_IF_EXISTS(::wcschr);
+_LIBCPP_USING_IF_EXISTS(::wcspbrk);
+_LIBCPP_USING_IF_EXISTS(::wcsrchr);
+_LIBCPP_USING_IF_EXISTS(::wcsstr);
+_LIBCPP_USING_IF_EXISTS(::wmemchr);
+_LIBCPP_USING_IF_EXISTS(::wcscspn);
+_LIBCPP_USING_IF_EXISTS(::wcslen);
+_LIBCPP_USING_IF_EXISTS(::wcsspn);
+_LIBCPP_USING_IF_EXISTS(::wcstok);
+_LIBCPP_USING_IF_EXISTS(::wmemcmp);
+_LIBCPP_USING_IF_EXISTS(::wmemcpy);
+_LIBCPP_USING_IF_EXISTS(::wmemmove);
+_LIBCPP_USING_IF_EXISTS(::wmemset);
+_LIBCPP_USING_IF_EXISTS(::wcsftime);
+_LIBCPP_USING_IF_EXISTS(::btowc);
+_LIBCPP_USING_IF_EXISTS(::wctob);
+_LIBCPP_USING_IF_EXISTS(::mbsinit);
+_LIBCPP_USING_IF_EXISTS(::mbrlen);
+_LIBCPP_USING_IF_EXISTS(::mbrtowc);
+_LIBCPP_USING_IF_EXISTS(::wcrtomb);
+_LIBCPP_USING_IF_EXISTS(::mbsrtowcs);
+_LIBCPP_USING_IF_EXISTS(::wcsrtombs);
 
 #ifndef _LIBCPP_HAS_NO_STDIN
-using ::getwchar;
-using ::vwscanf;
-using ::wscanf;
+_LIBCPP_USING_IF_EXISTS(::getwchar);
+_LIBCPP_USING_IF_EXISTS(::vwscanf);
+_LIBCPP_USING_IF_EXISTS(::wscanf);
 #endif
 
 #ifndef _LIBCPP_HAS_NO_STDOUT
-using ::putwchar;
-using ::vwprintf;
-using ::wprintf;
+_LIBCPP_USING_IF_EXISTS(::putwchar);
+_LIBCPP_USING_IF_EXISTS(::vwprintf);
+_LIBCPP_USING_IF_EXISTS(::wprintf);
 #endif
 
 #else // _LIBCPP_DRIVERKIT_LIBC
 
-using ::mbstate_t;
+_LIBCPP_USING_IF_EXISTS(::mbstate_t);
 using ::size_t;
-using ::wint_t;
-using ::swprintf;
-using ::vswprintf;
-using ::swscanf;
-using ::vswscanf;
-using ::wcstod;
-using ::wcstof;
-using ::wcstold;
-using ::wcstol;
+_LIBCPP_USING_IF_EXISTS(::wint_t);
+_LIBCPP_USING_IF_EXISTS(::swprintf);
+_LIBCPP_USING_IF_EXISTS(::vswprintf);
+_LIBCPP_USING_IF_EXISTS(::swscanf);
+_LIBCPP_USING_IF_EXISTS(::vswscanf);
+_LIBCPP_USING_IF_EXISTS(::wcstod);
+_LIBCPP_USING_IF_EXISTS(::wcstof);
+_LIBCPP_USING_IF_EXISTS(::wcstold);
+_LIBCPP_USING_IF_EXISTS(::wcstol);
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
-using ::wcstoll;
+_LIBCPP_USING_IF_EXISTS(::wcstoll);
 #endif // _LIBCPP_HAS_NO_LONG_LONG
-using ::wcstoul;
+_LIBCPP_USING_IF_EXISTS(::wcstoul);
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
-using ::wcstoull;
+_LIBCPP_USING_IF_EXISTS(::wcstoull);
 #endif // _LIBCPP_HAS_NO_LONG_LONG
-using ::wcscpy;
-using ::wcsncpy;
-using ::wcscat;
-using ::wcsncat;
-using ::wcscmp;
-using ::wcscoll;
-using ::wcsncmp;
-using ::wcsxfrm;
-using ::wcschr;
-using ::wcspbrk;
-using ::wcsrchr;
-using ::wcsstr;
-using ::wmemchr;
-using ::wcscspn;
-using ::wcslen;
-using ::wcsspn;
-using ::wcstok;
-using ::wmemcmp;
-using ::wmemcpy;
-using ::wmemmove;
-using ::wmemset;
-using ::btowc;
-using ::wctob;
-using ::mbsinit;
-using ::mbrlen;
-using ::mbrtowc;
-using ::wcrtomb;
-using ::mbsrtowcs;
-using ::wcsrtombs;
+_LIBCPP_USING_IF_EXISTS(::wcscpy);
+_LIBCPP_USING_IF_EXISTS(::wcsncpy);
+_LIBCPP_USING_IF_EXISTS(::wcscat);
+_LIBCPP_USING_IF_EXISTS(::wcsncat);
+_LIBCPP_USING_IF_EXISTS(::wcscmp);
+_LIBCPP_USING_IF_EXISTS(::wcscoll);
+_LIBCPP_USING_IF_EXISTS(::wcsncmp);
+_LIBCPP_USING_IF_EXISTS(::wcsxfrm);
+_LIBCPP_USING_IF_EXISTS(::wcschr);
+_LIBCPP_USING_IF_EXISTS(::wcspbrk);
+_LIBCPP_USING_IF_EXISTS(::wcsrchr);
+_LIBCPP_USING_IF_EXISTS(::wcsstr);
+_LIBCPP_USING_IF_EXISTS(::wmemchr);
+_LIBCPP_USING_IF_EXISTS(::wcscspn);
+_LIBCPP_USING_IF_EXISTS(::wcslen);
+_LIBCPP_USING_IF_EXISTS(::wcsspn);
+_LIBCPP_USING_IF_EXISTS(::wcstok);
+_LIBCPP_USING_IF_EXISTS(::wmemcmp);
+_LIBCPP_USING_IF_EXISTS(::wmemcpy);
+_LIBCPP_USING_IF_EXISTS(::wmemmove);
+_LIBCPP_USING_IF_EXISTS(::wmemset);
+_LIBCPP_USING_IF_EXISTS(::btowc);
+_LIBCPP_USING_IF_EXISTS(::wctob);
+_LIBCPP_USING_IF_EXISTS(::mbsinit);
+_LIBCPP_USING_IF_EXISTS(::mbrlen);
+_LIBCPP_USING_IF_EXISTS(::mbrtowc);
+_LIBCPP_USING_IF_EXISTS(::wcrtomb);
+_LIBCPP_USING_IF_EXISTS(::mbsrtowcs);
+_LIBCPP_USING_IF_EXISTS(::wcsrtombs);
 
 #endif // _LIBCPP_DRIVERKIT_LIBC
 

@@ -87,6 +87,14 @@ GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodeF9 API_AVAILABLE(macos(11.0), ios
 GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodeF10 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));                         /* F10 */
 GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodeF11 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));                         /* F11 */
 GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodeF12 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));                         /* F12 */
+GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodeF13 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F13 */
+GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodeF14 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F14 */
+GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodeF15 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F15 */
+GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodeF16 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F16 */
+GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodeF17 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F17 */
+GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodeF18 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F18 */
+GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodeF19 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F19 */
+GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodeF20 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));                         /* F20 */
 
 GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodePrintScreen API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));                 /* Print Screen */
 GAMECONTROLLER_EXTERN GCKeyCode const GCKeyCodeScrollLock API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));                  /* Scroll Lock */

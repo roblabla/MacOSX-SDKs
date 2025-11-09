@@ -3,25 +3,29 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4A80416D-F538-33CD-966E-2E67A674C7CF
+    value:           02299165-3AB2-3A25-8F9A-B541F1843F14
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           46F7F085-B9A5-3349-8E1F-D5B9F555191D
+    value:           B6156E8C-64B1-3B9A-9A44-3A34489F59DD
 install-name:    '/System/Library/PrivateFrameworks/FindMyDevice.framework/Versions/A/FindMyDevice'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _FMDFMIPManagerUnregisterErrorDomain, _FMDFMMManagerUnregisterErrorDomain, 
-                       _FMDSecureLocationsReceivedCommandNotification, _FMDSecureLocationsReceivedPayloadNotification, 
-                       _fmdFMMLastOperationResult, _kAccessoriesChangedNotification, 
-                       _kActivationLockAllowedMayHaveChangedNotification, _kActivationLockStateDidChangeNotification, 
-                       _kFMDAccessoryPlaySoundErrorDomain, _kFMDActivationLockStateChangedNotification, 
-                       _kFMDErrorDomain, _kFMDFMIPAccountNameKey, _kFMDFMIPAccountPersonIDKey, 
-                       _kFMDFMMNeedsLostModeExitAuth, _kFMDFMMUAServicesAccessEntitlement, 
-                       _kFMDFMMUserAgentAccessEntitlement, _kFMDLogPrefsChangedDarwinNotification, 
-                       _kFMDNotBackedUpPrefDomain, _kFMDPlaySoundStartedDarwinNotification, 
-                       _kFMDPlaySoundStoppedDarwinNotification, _kFMDPostWipePrefDomain, 
-                       _kFMDPrefDomain, _kFMDPublicNotBackedUpPrefDomain, _kFMDUserAgentPrefDomain, 
+                       _FMDLostModeExitAuthCompleteNotification, _FMDSecureLocationsReceivedCommandNotification, 
+                       _FMDSecureLocationsReceivedPayloadNotification, _fmdFMMLastOperationResult, 
+                       _kAccessoriesChangedNotification, _kActivationLockAllowedMayHaveChangedNotification, 
+                       _kActivationLockStateDidChangeNotification, _kFMDAccessoryPlaySoundErrorDomain, 
+                       _kFMDActivationLockInfoDescriptionKey, _kFMDActivationLockInfoTitleKey, 
+                       _kFMDActivationLockStateChangedNotification, _kFMDErrorDomain, 
+                       _kFMDFMIPAccountNameKey, _kFMDFMIPAccountPersonIDKey, _kFMDFMMNeedsLostModeExitAuth, 
+                       _kFMDFMMUAServicesAccessEntitlement, _kFMDFMMUserAgentAccessEntitlement, 
+                       _kFMDLocalActivationLockInfoChangedNotification, _kFMDLogPrefsChangedDarwinNotification, 
+                       _kFMDNotBackedUpPrefDomain, _kFMDOfflineFindingInfoChangedNotification, 
+                       _kFMDPlaySoundStartedDarwinNotification, _kFMDPlaySoundStoppedDarwinNotification, 
+                       _kFMDPostWipePrefDomain, _kFMDPrefDomain, _kFMDPublicNotBackedUpPrefDomain, 
+                       _kFMDSecureLocationModeLive, _kFMDSecureLocationModeProactive, 
+                       _kFMDSecureLocationModeProactiveShallow, _kFMDUserAgentPrefDomain, 
                        _kFMDWatchNotBackedUpPrefDomain, _kFMDWatchPrefDomain, _kFMIPAppBundleIdentifier, 
                        _kFMIPLowBatteryLocateStateDidChangeNotification, _kFMIPStateDidChangeNotification, 
                        _kFMMActivationLockEnabledPrefKey, _kFMMAuthRight, _kFMMEnabledPrefDomain, 

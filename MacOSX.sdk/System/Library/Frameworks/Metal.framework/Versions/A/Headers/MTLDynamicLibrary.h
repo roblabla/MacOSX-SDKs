@@ -34,12 +34,12 @@ typedef NS_ENUM(NSUInteger, MTLDynamicLibraryError)
  Otherwise, as a fallback, the MTLLibrary contents used to create the MTLDynamicLibrary are compiled for the current device similar to path #1 above.
  This path may also be taken if the driver for the current device has been updated or has otherwise become incompatible with the compiled code.
  Either way, if a MTLDynamicLibrary is successfully created, it contains compiled code for the current device.
- That code may be used via MTLComputePipelineDescriptor .insertLibraries to allow the code to be loaded into a MTLComputePipelineState
+ That code may be used via MTLComputePipelineDescriptor .preloadedLibraries to allow the code to be loaded into a MTLComputePipelineState
  It may also be used as an argument to MTLCompileOptions .libraries so that another MTLLibrary is linked against the code in this MTLDynamicLibrary.
  Such library dependencies are encoded into the resulting MTLLibrary by embedding the install name of the MTLDynamicLibrary.
  When creating a MTLComputePipelineState from a function in that MTLLibrary, the embedded install names are used to load MTLDynamicLibrary instances via path #2 (possibly falling back to #1 as well).
  If an embedded install name could not be used to load a MTLDynamicLibrary from the path indicated by the install name, the creation of the MTLComputePipelineState fails.
- The set of both the implictly loaded MTLDynamicLibrary and the MTLDynamicLibrary specified with .insertLibraries are used to resolve any unresolved symbols in the source MTLLibrary (or in other MTLDynamicLibrary).
+ The set of both the implictly loaded MTLDynamicLibrary and the MTLDynamicLibrary specified with .preloadedLibraries are used to resolve any unresolved symbols in the source MTLLibrary (or in other MTLDynamicLibrary).
  If any unresolved symbols remain after searching the set, the creation of the MTLComputePipelineState fails.
  Otherwise, the MTLComputePipelineState creation succeeds, and the set of MTLDynamicLibraries used are retained by the MTLComputePipelineState.
  */

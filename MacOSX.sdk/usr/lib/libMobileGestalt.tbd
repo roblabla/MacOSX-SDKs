@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1B957D3E-C0F7-36AF-98E4-8897F8633BEA
+    value:           E48F4B7C-1766-327E-862D-130AE5ACD65B
   - target:          x86_64-maccatalyst
-    value:           1B957D3E-C0F7-36AF-98E4-8897F8633BEA
+    value:           E48F4B7C-1766-327E-862D-130AE5ACD65B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B9F374A6-6048-325E-A442-13226E0D77A9
+    value:           B1DB8C17-892A-3BA9-B092-7970CD42F221
   - target:          arm64e-maccatalyst
-    value:           B9F374A6-6048-325E-A442-13226E0D77A9
+    value:           B1DB8C17-892A-3BA9-B092-7970CD42F221
 install-name:    '/usr/lib/libMobileGestalt.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MGCancelNotifications, _MGCopyAnswer, _MGCopyAnswerWithError, 
                        _MGCopyMultipleAnswers, _MGGetBoolAnswer, _MGGetFloat32Answer, 

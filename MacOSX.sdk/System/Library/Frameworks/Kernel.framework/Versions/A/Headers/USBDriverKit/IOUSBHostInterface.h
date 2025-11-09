@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from IOUSBHostInterface.iig */
+/* iig(DriverKit-191) generated from IOUSBHostInterface.iig */
 
 /* IOUSBHostInterface.iig:1-39 */
 /*
@@ -605,6 +605,48 @@ public:
     AbortDeviceRequests(IOOptionBits options,
         IOReturn withError) = 0;
 
+    const IOUSBConfigurationDescriptor *
+    CopyConfigurationDescriptor_Call()  { return CopyConfigurationDescriptor(); };\
+
+    const IOUSBInterfaceDescriptor *
+    GetInterfaceDescriptor_Call(const IOUSBConfigurationDescriptor * configurationDescriptor)  { return GetInterfaceDescriptor(configurationDescriptor); };\
+
+    const IOUSBStringDescriptor *
+    CopyStringDescriptor_Call(uint8_t index,
+        uint16_t languageID)  { return CopyStringDescriptor(index, languageID); };\
+
+    const IOUSBStringDescriptor *
+    CopyStringDescriptor_Call(uint8_t index)  { return CopyStringDescriptor(index); };\
+
+    kern_return_t
+    CreateIOBuffer_Call(IOOptionBits options,
+        uint64_t capacity,
+        IOBufferMemoryDescriptor ** buffer)  { return CreateIOBuffer(options, capacity, buffer); };\
+
+    kern_return_t
+    AsyncDeviceRequest_Call(uint8_t bmRequestType,
+        uint8_t bRequest,
+        uint16_t wValue,
+        uint16_t wIndex,
+        uint16_t wLength,
+        IOMemoryDescriptor * dataBuffer,
+        OSAction * completion,
+        uint32_t completionTimeoutMs)  { return AsyncDeviceRequest(bmRequestType, bRequest, wValue, wIndex, wLength, dataBuffer, completion, completionTimeoutMs); };\
+
+    kern_return_t
+    DeviceRequest_Call(uint8_t bmRequestType,
+        uint8_t bRequest,
+        uint16_t wValue,
+        uint16_t wIndex,
+        uint16_t wLength,
+        IOMemoryDescriptor * dataBuffer,
+        uint16_t * bytesTransferred,
+        uint32_t completionTimeoutMs)  { return DeviceRequest(bmRequestType, bRequest, wValue, wIndex, wLength, dataBuffer, bytesTransferred, completionTimeoutMs); };\
+
+    kern_return_t
+    AbortDeviceRequests_Call(IOOptionBits options,
+        IOReturn withError)  { return AbortDeviceRequests(options, withError); };\
+
 };
 
 struct IOUSBHostInterface_IVars;
@@ -618,12 +660,21 @@ class IOUSBHostInterface : public IOService, public IOUSBHostInterfaceInterface
 
 #if !KERNEL
 public:
+#ifdef IOUSBHostInterface_DECLARE_IVARS
+IOUSBHostInterface_DECLARE_IVARS
+#else /* IOUSBHostInterface_DECLARE_IVARS */
     union
     {
         IOUSBHostInterface_IVars * ivars;
         IOUSBHostInterface_LocalIVars * lvars;
     };
+#endif /* IOUSBHostInterface_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gIOUSBHostInterfaceMetaClass; };
+#endif /* KERNEL */
 
     using super = IOService;
 

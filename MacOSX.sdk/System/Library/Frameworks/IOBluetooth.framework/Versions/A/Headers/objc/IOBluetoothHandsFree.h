@@ -413,6 +413,14 @@ API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothDevice ( HandsFreeDeviceAdditions )
 
 /*!
+ @method		handsFreeAudioGatewayDriverID
+ @abstract		Return the hands free gateway driver ID
+ @discussion	Returns the hands free gateway driver ID which is unique based on BT Address.
+ @result		The hands free gateway driver ID
+ */
+- (NSString *)handsFreeAudioGatewayDriverID NS_DEPRECATED_MAC(10_7, 10_8);
+
+/*!
  @method		handsFreeAudioGatewayServiceRecord
  @abstract		Return the hands free gateway SDP record
  @discussion	Returns the hands free gateway SDP record.
@@ -427,6 +435,14 @@ API_UNAVAILABLE(ios, watchos, tvos)
  @result		YES if the device supports hands free gateway; otherwise, NO.
  */
 @property (readonly, getter = isHandsFreeAudioGateway) BOOL handsFreeAudioGateway NS_AVAILABLE_MAC(10_7);
+
+/*!
+ @method		handsFreeDeviceDriverID
+ @abstract		Return the hands free device driver ID
+ @discussion	Returns the hands free device driver ID which is unique based on BT Address.
+ @result		The hands free device driver ID
+ */
+- (NSString *)handsFreeDeviceDriverID NS_DEPRECATED_MAC(10_7, 10_8);
 
 /*!
  @method		handsFreeDeviceServiceRecord

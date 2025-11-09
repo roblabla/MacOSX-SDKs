@@ -9,7 +9,6 @@
 #define __PKOBJECT_H
 
 #import <Foundation/Foundation.h>
-#import <PassKit/PKError.h>
 
 @interface PKObject : NSObject
 

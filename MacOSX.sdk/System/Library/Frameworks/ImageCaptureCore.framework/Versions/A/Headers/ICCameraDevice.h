@@ -126,8 +126,9 @@ IMAGECAPTURE_EXTERN ICDeleteError const ICDeleteErrorCanceled IC_AVAILABLE(macos
 /*!
   @ICMediaPresentation
   @abstract
-  @constant ICMediaPresentationConvertedAssets presents the device media contents
-  @constant ICScannerTransferModeMemoryBased Transfer the scan as data.
+  @constant ICMediaPresentation controls the display of either transcoded or original assets, if the device supports transcoding.
+  @constant ICMediaPresentationConvertedAssets sets the device presentation view to display transcoded assets only.
+  @constant ICMediaPresentationConvertedAssets sets the device presentation view to display original assets only.
 */
 
 typedef NS_ENUM( NSUInteger, ICMediaPresentation ) {

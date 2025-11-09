@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, CBError) {
 	CBErrorUnknownDevice NS_ENUM_AVAILABLE(10_14, 12_0)			= 12,
 	CBErrorOperationNotSupported NS_ENUM_AVAILABLE(10_14, 12_0)	= 13,
 	CBErrorPeerRemovedPairingInformation NS_ENUM_AVAILABLE(10_15, 13_4)	= 14,
-	CBErrorEncryptionTimedOut NS_ENUM_AVAILABLE(10_15, 13_3)	= 15,
+	CBErrorEncryptionTimedOut NS_ENUM_AVAILABLE(10_15, 13_4)	= 15,
 	CBErrorTooManyLEPairedDevices NS_ENUM_AVAILABLE(11_0, 14_0) = 16,
 };
 

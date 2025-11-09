@@ -36,6 +36,7 @@ typedef NS_ENUM(int, GKPeerConnectionState)
     GKPeerStateConnectedRelay,   /// connected to the session via relay
 } NS_ENUM_DEPRECATED(10_8, 10_10, 3_0, 7_0);
 
+GK_EXTERN_WEAK    NSString *  const GKVoiceChatServiceErrorDomain;
 
 typedef NS_ENUM(int, GKVoiceChatServiceError)
 {

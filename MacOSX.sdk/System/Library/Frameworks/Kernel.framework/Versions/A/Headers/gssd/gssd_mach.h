@@ -55,6 +55,7 @@ typedef function_table_entry   *function_table_t;
 #define	gssd_mach_MSG_COUNT	9
 #endif	/* gssd_mach_MSG_COUNT */
 
+#include <Availability.h>
 #include <mach/std_types.h>
 #include <mach/mig.h>
 #include <mach/mig.h>

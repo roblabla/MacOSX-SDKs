@@ -9,8 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), watchos(3.2))
-API_UNAVAILABLE(macos, tvos)
+API_AVAILABLE(ios(10.0), macos(12.0), watchos(3.2))
+API_UNAVAILABLE(tvos)
 @interface INCurrencyAmount : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;

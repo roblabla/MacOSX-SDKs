@@ -33,6 +33,8 @@ extern "C"
 #endif
     
 #pragma pack(push, 4)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark CMIOSystemObject Types
@@ -67,10 +69,10 @@ enum
 /*!
     @enum           CMIOSystemObject Properties
     @abstract       CMIOObjectPropertySelector values that apply to the CMIOSystemObject.
-    @discussion     The CMIOSystemObject has one scope, kCMIOObjectPropertyScopeGlobal, and only a master element.
+    @discussion     The CMIOSystemObject has one scope, kCMIOObjectPropertyScopeGlobal, and only a main element.
 
-    @constant       kCMIOHardwarePropertyProcessIsMaster
-                        A UInt32 where 1 means that the current process contains the master instance of the DAL. The master instance of the DAL is the only instance in which plug-ins should
+    @constant       kCMIOHardwarePropertyProcessIsMain
+                        A UInt32 where 1 means that the current process contains the main instance of the DAL. The main instance of the DAL is the only instance in which plug-ins should
                         save/restore their devices' settings.
     @constant       kCMIOHardwarePropertyIsInitingOrExiting
                         A UInt32 whose value will be non-zero if the DAL is either in the midst of initializing or in the midst of exiting the process.
@@ -105,7 +107,8 @@ enum
 */
 enum
 {
-    kCMIOHardwarePropertyProcessIsMaster                = 'mast',
+	kCMIOHardwarePropertyProcessIsMain                	= 'main',
+	kCMIOHardwarePropertyProcessIsMaster API_DEPRECATED_WITH_REPLACEMENT("kCMIOHardwarePropertyProcessIsMain", macos(10.4, 12.0)) = 'mast',
     kCMIOHardwarePropertyIsInitingOrExiting             = 'inot',
     kCMIOHardwarePropertyDevices                        = 'dev#',
     kCMIOHardwarePropertyDefaultInputDevice             = 'dIn ',
@@ -121,7 +124,7 @@ enum
 };
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+#pragma clang diagnostic pop
 #pragma pack(pop)
     
 #if defined(__cplusplus)

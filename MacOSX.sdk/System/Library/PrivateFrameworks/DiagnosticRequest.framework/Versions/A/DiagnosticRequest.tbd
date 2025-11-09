@@ -4,28 +4,33 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DA0F21B7-003A-325A-A0ED-C26DCD66DB6A
+    value:           D61F87D3-AF54-3116-AA37-605F4C972FB5
   - target:          x86_64-maccatalyst
-    value:           DA0F21B7-003A-325A-A0ED-C26DCD66DB6A
+    value:           D61F87D3-AF54-3116-AA37-605F4C972FB5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0E4A460E-7273-35EF-B61E-947AC803F7EF
+    value:           030F4442-E09E-3DCE-8B19-3B4DB57EEB02
   - target:          arm64e-maccatalyst
-    value:           0E4A460E-7273-35EF-B61E-947AC803F7EF
+    value:           030F4442-E09E-3DCE-8B19-3B4DB57EEB02
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticRequest.framework/Versions/A/DiagnosticRequest'
 current-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _DRShouldEnableLogGathering, _DRShouldGatherLog, _DRSubmitLog, 
-                       _DRTailspinRequest, __DPCEnableLogGatheringQueryMessage, __DPCInjectEnableLogGatheringQueryResult, 
+    symbols:         [ _DRConfigStringForState, _DRShouldEnableLogGathering, _DRShouldGatherLog, 
+                       _DRSubmitLog, _DRTailspinRequest, __DPCEnableLogGatheringQueryMessage, 
+                       __DPCGetCloudChannelConfig, __DPCGetConfigStateForUUID, __DPCInjectEnableLogGatheringQueryResult, 
+                       __DPCMarkConfigUUIDCompletedOrRejected, __DPCRequestTeamIDBroadcast, 
+                       __DPCResetToDefaultCloudChannelConfig, __DPCSendClearTaskingStateMessage, 
+                       __DPCSendTaskingSystemJSONDataMessage, __DPCSetCloudChannelConfig, 
                        __DPCSubmitLogRequestMessage, __DPCTailspinRequestMessage, 
                        __DPCTriggerRequestClean, __DPClientXPCSendMessage, __DPClientXPCSendMessageWithReplySync, 
                        __DRCResetDampeningConfigurationToDefault, __DRCSetDampeningConfigurationDefaults, 
                        __DRCSetDampeningIsEnabled, __DRCTriggerCloudKitWork, __DRRequestPassesTailspinHysteresis, 
                        _kDRRequestClientError, _kDRRequestOversizedContextDictErrorString, 
                        _kMinimumTailspinLeewaySeconds ]
+    objc-classes:    [ DRConfig, DRConfigMonitor, DRSubscriptionManager ]
 ...

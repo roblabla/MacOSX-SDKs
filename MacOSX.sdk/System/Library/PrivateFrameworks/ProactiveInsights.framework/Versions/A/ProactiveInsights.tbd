@@ -1,0 +1,20 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           48FDE77B-2CAD-352D-96D8-0563A094B40F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E3B7AC2F-BCFF-39EE-9688-A9E3DF9B55FF
+install-name:    '/System/Library/PrivateFrameworks/ProactiveInsights.framework/Versions/A/ProactiveInsights'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _PIPBFeatureFeedbackEventReadFrom, _ProactiveInsightsVersionNumber, 
+                       _ProactiveInsightsVersionString ]
+    objc-classes:    [ PIFeatureFeedback, PIFeatureFeedbackEvent, PIFeatureFeedbackStream, 
+                       PIPBFeatureFeedbackEvent ]
+    objc-ivars:      [ PIPBFeatureFeedbackEvent._date, PIPBFeatureFeedbackEvent._feature, 
+                       PIPBFeatureFeedbackEvent._has, PIPBFeatureFeedbackEvent._type ]
+...

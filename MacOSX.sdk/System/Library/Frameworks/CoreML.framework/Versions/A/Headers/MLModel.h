@@ -52,7 +52,7 @@ ML_EXPORT
 */
 + (void)loadContentsOfURL:(NSURL *)url
             configuration:(MLModelConfiguration *)configuration
-        completionHandler:(void (^)(MLModel * _Nullable model, NSError * _Nullable error))handler API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_REFINED_FOR_SWIFT;
+        completionHandler:(void (^)(MLModel * _Nullable model, NSError * _Nullable error))handler API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_REFINED_FOR_SWIFT NS_SWIFT_DISABLE_ASYNC;
 
 /// All models can predict on a specific set of input features.
 - (nullable id<MLFeatureProvider>)predictionFromFeatures:(id<MLFeatureProvider>)input

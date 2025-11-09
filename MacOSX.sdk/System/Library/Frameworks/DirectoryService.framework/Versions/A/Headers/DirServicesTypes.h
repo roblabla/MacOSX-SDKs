@@ -28,6 +28,8 @@
 #ifndef __DirServicesTypesH__
 #define	__DirServicesTypesH__	1
 
+#include <os/availability.h>
+
 // the following are already part of MacTypes.h and causes warnings for other plugins
 // need this to support Darwin compiles which do not include MacTypes.h
 
@@ -96,8 +98,8 @@ typedef UInt32                          FourCharCode;
  *		automatically disabled.
  *	@constant eDSAuthAccountInactive The account was unused for a preset amount of time so
  *		it was automatically disabled.
- *	@constant eDSAuthMasterUnreachable Unable to authenticate to make changes
- *		because the master server is unreachable.
+ *	@constant eDSAuthPrimaryUnreachable Unable to authenticate to make changes
+ *		because the prmary server is unreachable.
  */
 typedef enum
 {
@@ -205,8 +207,9 @@ typedef enum
 	eDSAuthPasswordChangeTooSoon=	-14174,
 	eDSAuthInvalidLogonHours	= 	-14175,
 	eDSAuthInvalidComputer		= 	-14176,
-	eDSAuthMasterUnreachable	=	-14177,
-	
+	eDSAuthPrimaryUnreachable	=	-14177,
+	eDSAuthMasterUnreachable API_DEPRECATED_WITH_REPLACEMENT("eDSAuthPrimaryUnreachable", macos(10.0, 10.0)) = eDSAuthPrimaryUnreachable,
+
 	eDSNullParameter			=	-14200,
 	eDSNullDataBuff				=	-14201,
 	eDSNullNodeName				=	-14202,
@@ -322,7 +325,8 @@ typedef enum
 	eDSOperationFailed			=	-14483,
 	eDSNotAuthorized			=	-14484,
 	eDSNetInfoError				=	-14485,
-	eDSContactMaster			=	-14486,
+	eDSContactPrimary			=	-14486,
+	eDSContactMaster API_DEPRECATED_WITH_REPLACEMENT("eDSContactPrimary", macos(10.0, 10.0)) = eDSContactPrimary,
 	eDSServiceUnavailable		=	-14487,
 	eDSInvalidFilePath			=	-14488,
 	eDSOperationTimeout			=	-14489,

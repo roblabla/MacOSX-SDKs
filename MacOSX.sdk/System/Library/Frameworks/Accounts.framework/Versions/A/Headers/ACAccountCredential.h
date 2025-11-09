@@ -18,7 +18,9 @@
 //
 // The account will be validated and saved as a system account.
 
-API_AVAILABLE(ios(5.0), macos(10.8))
+
+API_DEPRECATED("Use appropriate non-Apple SDK corresponding to the type of account you want to reference instead", ios(6.0, 15.0), macos(10.8, 12.0))
+
 @interface ACAccountCredential : NSObject
 
 - (instancetype)initWithOAuthToken:(NSString *)token tokenSecret:(NSString *)secret;

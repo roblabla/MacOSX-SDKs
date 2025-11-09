@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           21A105A5-1D61-3543-89FF-3C59078273E9
+    value:           C3FE40D7-10E1-3D74-B076-CE3AE4490EBD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2857089A-CBC9-3466-A2BA-4F686370E703
+    value:           A1AC4F53-801F-3AEF-983B-22B0A86BFBAA
 install-name:    '/System/Library/PrivateFrameworks/OSAnalyticsPrivate.framework/Versions/A/OSAnalyticsPrivate'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

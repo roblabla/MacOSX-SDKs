@@ -5,7 +5,7 @@
  */
 
 
-#import "QuartzFilter.h"
+#import <QuartzFilters/QuartzFilter.h>
 
 API_UNAVAILABLE_BEGIN(ios)
 

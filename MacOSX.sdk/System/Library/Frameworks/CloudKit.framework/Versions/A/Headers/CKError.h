@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import <CloudKit/CKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,6 +24,9 @@ CK_EXTERN NSString * const CKRecordChangedErrorAncestorRecordKey API_AVAILABLE(m
 CK_EXTERN NSString * const CKRecordChangedErrorServerRecordKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 CK_EXTERN NSString * const CKRecordChangedErrorClientRecordKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 
+/* On error CKErrorZoneNotFound, the userInfo dictionary may contain a NSNumber instance that specifies a boolean value representing if the error is caused by the user having reset all encrypted data for their account */
+CK_EXTERN NSString * const CKErrorUserDidResetEncryptedDataKey API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
 /*! On some errors, the userInfo dictionary may contain a NSNumber instance that specifies the period of time in seconds after which the client may retry the request. For example, this key will be on @c CKErrorServiceUnavailable, @c CKErrorRequestRateLimited, and other errors for which the recommended resolution is to retry after a delay.
  */
 CK_EXTERN NSString * const CKErrorRetryAfterKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
@@ -31,7 +35,10 @@ typedef NS_ENUM(NSInteger, CKErrorCode) {
     /*! CloudKit.framework encountered an error.  This is a non-recoverable error. */
     CKErrorInternalError                  = 1,
     
-    /*! Some items failed, but the operation succeeded overall. Check CKPartialErrorsByItemIDKey in the userInfo dictionary for more details. */
+    /*! Some items failed, but the operation succeeded overall. Check CKPartialErrorsByItemIDKey in the userInfo dictionary for more details.
+     *  This error is only returned from CKOperation completion blocks, which are deprecated in swift.
+     *  It will not be returned from (swift-only) CKOperation result blocks, which are their replacements
+     */
     CKErrorPartialFailure                 = 2,
     
     /*! Network not available */
@@ -131,6 +138,9 @@ typedef NS_ENUM(NSInteger, CKErrorCode) {
     
     /*! The file for this asset could not be accessed. It is likely your application does not have permission to open the file, or the file may be temporarily unavailable due to its data protection class. This operation can be retried after it is able to be opened in your process. */
     CKErrorAssetNotAvailable              API_AVAILABLE(macos(10.13), ios(11.3), tvos(11.3), watchos(4.3)) = 35,
+
+    /*! The current account is in a state that may need user intervention to recover from. The user should be directed to check the Settings app. Listen for CKAccountChangedNotifications to know when to re-check account status and retry. */
+    CKErrorAccountTemporarilyUnavailable  API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0)) = 36
 } API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 
 NS_ASSUME_NONNULL_END

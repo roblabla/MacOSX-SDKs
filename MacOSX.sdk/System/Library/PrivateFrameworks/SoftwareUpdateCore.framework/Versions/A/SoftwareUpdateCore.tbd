@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           26B16F79-9840-3F33-919C-DEA96AE384B7
+    value:           B176E52D-BE72-3272-9F72-B743EB6792AF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           69B5C728-68EB-3A99-9249-96A15BC0A60E
+    value:           48F79141-3C6D-319E-9ADB-2130B5A8E349
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdateCore.framework/Versions/A/SoftwareUpdateCore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -20,8 +20,9 @@ exports:
                        _kSUAssetActualMinimumSystemPartitionKey, _kSUAssetAllowableOTAKey, 
                        _kSUAssetAllowableOverCellularKey, _kSUAssetAlternateAssetAudienceUUIDKey, 
                        _kSUAssetAutoInstallDelayKey, _kSUAssetAutoUpdateKey, _kSUAssetBaseURLKey, 
-                       _kSUAssetCriticalUpdateKey, _kSUAssetDisableRosettaUpdatesKey, 
-                       _kSUAssetEnableAlternateAssetAudienceKey, _kSUAssetHumanReadableUpdateNameKey, 
+                       _kSUAssetCriticalUpdateKey, _kSUAssetDisableRecoveryOSUpdatesKey, 
+                       _kSUAssetDisableRosettaUpdatesKey, _kSUAssetEnableAlternateAssetAudienceKey, 
+                       _kSUAssetHideInstallAlertKey, _kSUAssetHumanReadableUpdateNameKey, 
                        _kSUAssetLanguageKey, _kSUAssetLastEmergencyBuildKey, _kSUAssetLastEmergencyOSVersionKey, 
                        _kSUAssetLicenseAgreementFileNameKey, _kSUAssetLicenseAgreementKey, 
                        _kSUAssetMDMDelayIntervalKey, _kSUAssetMandatoryUpdateEligibleKey, 
@@ -44,27 +45,30 @@ exports:
                        _kSUAssetSetupCriticalKey, _kSUAssetSetupCriticalUpdateOutOfBoxOnlyKey, 
                        _kSUAssetSupportedDevicesKey, _kSUAssetSystemPartitionPaddingKey, 
                        _kSUAssetTargetBridgeUpdateVersionKey, _kSUAssetTargetSFRUpdateVersionKey, 
-                       _kSUAssetTargetUpdateBridgeVersionKey, _kSUAssetTypeMacSoftwareUpdate, 
-                       _kSUAssetTypeMacUpdateBrain, _kSUAssetTypeNeRDSoftwareUpdate, 
-                       _kSUAssetTypeNeRDUpdateBrain, _kSUAssetTypeNeRDUpdateDocumentation, 
-                       _kSUAssetTypeSFRSoftwareUpdate, _kSUAssetTypeSoftwareUpdate, 
-                       _kSUAssetTypeSoftwareUpdateConfiguration, _kSUAssetTypeUpdateBrain, 
-                       _kSUAssetTypeUpdateDocumentation, _kSUAssetTypeWatchUpdateDocumentation, 
-                       _kSUAssetUniqueBuildIDKey, _kSUAssetUpdateTypeKey, _kSUCoreModuleNameDocumentation, 
-                       _kSUCoreModuleNameMSU, _kSUCoreModuleNameMobileAsset, _kSUCoreModuleNamePurge, 
-                       _kSUCoreModuleNameScan, _kSUCoreModuleNameSpace, _kSUCoreModuleNameUpdate, 
-                       _kSUCoreRampingScanTypeBackground, _kSUCoreRampingScanTypeForeground, 
-                       _kSUCoreSpacePurgeFromBasePath, _kSUCriticalDownloadPolicyWiFiAndCellular, 
-                       _kSUCriticalDownloadPolicyWiFiOnly, _kSUDownloadBuildVersionKey, 
-                       _kSUDownloadCompatibilityVersionKey, _kSUDownloadDeviceNameKey, 
-                       _kSUDownloadDocumentationDeviceNameKey, _kSUDownloadDocumentationIDKey, 
-                       _kSUDownloadHWModelStrKey, _kSUDownloadProductTypeKey, _kSUDownloadReleaseTypeKey, 
-                       _kSUDownloadSessionIDKey, _kSUDownloadTargetBuildVersionArrayKey, 
-                       _kSUDownloadTargetBuildVersionKey, _kSUHumanReadableUpdateNameDefault, 
-                       _kSUMobileSoftwareUpdateSOCKSPortKey, _kSUMobileSoftwareUpdateSOCKSProxyKey, 
-                       _kSUProductSystemNameDefault, _kSUProductVersionKey, _kSUPublisherDefault, 
-                       _kSUQueryAllowSameBuildVersionKey, _kSUQueryBuildKey, _kSUQueryCompatibilityVersionKey, 
-                       _kSUQueryDeviceKey, _kSUQueryInstalledSFRVersionKey, _kSUQueryRestoreVersionKey, 
+                       _kSUAssetTargetUpdateBridgeVersionKey, _kSUAssetTypeMacRecoveryOSUpdate, 
+                       _kSUAssetTypeMacSoftwareUpdate, _kSUAssetTypeMacUpdateBrain, 
+                       _kSUAssetTypeNeRDSoftwareUpdate, _kSUAssetTypeNeRDUpdateBrain, 
+                       _kSUAssetTypeNeRDUpdateDocumentation, _kSUAssetTypeSFRSoftwareUpdate, 
+                       _kSUAssetTypeSoftwareUpdate, _kSUAssetTypeSoftwareUpdateConfiguration, 
+                       _kSUAssetTypeUpdateBrain, _kSUAssetTypeUpdateDocumentation, 
+                       _kSUAssetTypeWatchUpdateDocumentation, _kSUAssetUniqueBuildIDKey, 
+                       _kSUAssetUpdateTypeKey, _kSUCoreModuleNameDocumentation, _kSUCoreModuleNameMSU, 
+                       _kSUCoreModuleNameMobileAsset, _kSUCoreModuleNamePurge, _kSUCoreModuleNameScan, 
+                       _kSUCoreModuleNameSpace, _kSUCoreModuleNameUpdate, _kSUCoreRampingScanTypeBackground, 
+                       _kSUCoreRampingScanTypeForeground, _kSUCoreSpacePurgeFromBasePath, 
+                       _kSUCriticalDownloadPolicyWiFiAndCellular, _kSUCriticalDownloadPolicyWiFiOnly, 
+                       _kSUDownloadBuildVersionKey, _kSUDownloadCompatibilityVersionKey, 
+                       _kSUDownloadDeviceNameKey, _kSUDownloadDocumentationDeviceNameKey, 
+                       _kSUDownloadDocumentationIDKey, _kSUDownloadHWModelStrKey, 
+                       _kSUDownloadProductTypeKey, _kSUDownloadReleaseTypeKey, _kSUDownloadSessionIDKey, 
+                       _kSUDownloadTargetBuildVersionArrayKey, _kSUDownloadTargetBuildVersionKey, 
+                       _kSUHumanReadableUpdateNameDefault, _kSUMobileSoftwareUpdateSOCKSPortKey, 
+                       _kSUMobileSoftwareUpdateSOCKSProxyKey, _kSUProductSystemNameDefault, 
+                       _kSUProductVersionKey, _kSUPublisherDefault, _kSUQueryAllowSameBuildVersionKey, 
+                       _kSUQueryAllowSameRestoreVersionKey, _kSUQueryBuildKey, _kSUQueryCompatibilityVersionKey, 
+                       _kSUQueryDeviceKey, _kSUQueryInstalledRecoveryOSRestoreVersionKey, 
+                       _kSUQueryInstalledRecoveryOSVersionKey, _kSUQueryInstalledSFRRestoreVersionKey, 
+                       _kSUQueryInstalledSFRVersionKey, _kSUQueryRestoreVersionKey, 
                        _kSUQuerySUDocumentationIDKey, _kSUQuerySupportedDeviceModelsKey, 
                        _kSUQueryTargetRestoreVersionKey, _kSUTargetUpdateKey, _kSUTypeCritical, 
                        _kSUTypeCriticalCellular, _kSUTypeEmergency, _kSUTypeFull, 
@@ -132,16 +136,16 @@ exports:
                        _kSU_S_UpdateFound ]
     objc-classes:    [ SUCoreActivityOptions, SUCoreAnalyticsEvent, SUCoreAnalyticsEventSubmitter, 
                        SUCoreConfigParam, SUCoreConfigServer, SUCoreDescriptor, SUCoreDocumentation, 
-                       SUCoreMSU, SUCoreMobileAsset, SUCorePolicy, SUCorePolicyApply, 
-                       SUCorePolicyDocumentationDownload, SUCorePolicyDocumentationScan, 
+                       SUCoreEventAugmenter, SUCoreMSU, SUCoreMobileAsset, SUCorePolicy, 
+                       SUCorePolicyApply, SUCorePolicyDocumentationDownload, SUCorePolicyDocumentationScan, 
                        SUCorePolicyExtension, SUCorePolicyExtensionAbsoluteCompatibility, 
                        SUCorePolicyExtensionCompanionCompatibility, SUCorePolicyExtensionManagedUpdates, 
-                       SUCorePolicyFamily, SUCorePolicyLoadBrain, SUCorePolicyMacUpdateBrain, 
-                       SUCorePolicyPreflightDownloadSU, SUCorePolicyPreflightFDRRecovery, 
-                       SUCorePolicyPreflightPersonalize, SUCorePolicyPreflightPrerequisiteCheck, 
-                       SUCorePolicyPreflightWakeup, SUCorePolicyPrepare, SUCorePolicyResume, 
-                       SUCorePolicySoftwareUpdateDownload, SUCorePolicySoftwareUpdateScan, 
-                       SUCorePolicySuspend, SUCorePolicyUpdateBrain, SUCorePower, 
-                       SUCorePowerAssertion, SUCorePurge, SUCoreScan, SUCoreScanParam, 
-                       SUCoreSpace, SUCoreUpdate, SUCoreUpdateParam ]
+                       SUCorePolicyFamily, SUCorePolicyLoadBrain, SUCorePolicyMacRecoveryOSUpdate, 
+                       SUCorePolicyMacUpdateBrain, SUCorePolicyPreflightDownloadSU, 
+                       SUCorePolicyPreflightFDRRecovery, SUCorePolicyPreflightPersonalize, 
+                       SUCorePolicyPreflightPrerequisiteCheck, SUCorePolicyPreflightWakeup, 
+                       SUCorePolicyPrepare, SUCorePolicyResume, SUCorePolicySoftwareUpdateDownload, 
+                       SUCorePolicySoftwareUpdateScan, SUCorePolicySuspend, SUCorePolicyUpdateBrain, 
+                       SUCorePower, SUCorePowerAssertion, SUCorePurge, SUCoreScan, 
+                       SUCoreScanParam, SUCoreSpace, SUCoreUpdate, SUCoreUpdateParam ]
 ...

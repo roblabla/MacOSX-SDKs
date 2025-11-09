@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8AF29290-2814-3CF6-A862-AE0A79EBB444
+    value:           2A4C619F-B475-3F64-88CC-8A84174163B6
   - target:          x86_64-maccatalyst
-    value:           8AF29290-2814-3CF6-A862-AE0A79EBB444
+    value:           2A4C619F-B475-3F64-88CC-8A84174163B6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2BEB2F80-58F5-3AD2-8314-7B6F66912D80
+    value:           7D452BC4-25B5-3094-868C-90F431B1F686
   - target:          arm64e-maccatalyst
-    value:           2BEB2F80-58F5-3AD2-8314-7B6F66912D80
+    value:           7D452BC4-25B5-3094-868C-90F431B1F686
 install-name:    '/System/Library/PrivateFrameworks/SPFinder.framework/Versions/A/SPFinder'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SPFinderDisabledReasonBlockedDeviceRegion, _SPFinderDisabledReasonCannotPublishAnonymously, 
-                       _SPFinderDisabledReasonFindMyiPhoneOff, _SPFinderDisabledReasonLocationServices, 
-                       _SPFinderDisabledReasonLocationServicesFindMyFramework, _SPFinderDisabledReasonLowAccountSecurity, 
-                       _SPFinderDisabledReasonNone, _SPFinderDisabledReasonServiceDisabled, 
-                       _SPFinderDisabledReasonUserOptOut, _SPFinderDisabledReasoniCloudSignedOut, 
-                       _SPFinderStateChangedNotification ]
+                       _SPFinderDisabledReasonCompanionNearby, _SPFinderDisabledReasonFindMyiPhoneOff, 
+                       _SPFinderDisabledReasonLocationServices, _SPFinderDisabledReasonLocationServicesFindMyFramework, 
+                       _SPFinderDisabledReasonLowAccountSecurity, _SPFinderDisabledReasonNone, 
+                       _SPFinderDisabledReasonServiceDisabled, _SPFinderDisabledReasonUserOptOut, 
+                       _SPFinderDisabledReasoniCloudSignedOut, _SPFinderStateChangedNotification ]
     objc-classes:    [ SPAdvertisement, SPAdvertisementCache, SPAdvertisementCacheSearchCriteria, 
                        SPAdvertisementCacheSearchResult, SPBeaconAdvertisement, SPBeaconPayload, 
                        SPBeaconPayloadCacheSearchCriteria, SPBeaconPayloadCacheSearchResult, 

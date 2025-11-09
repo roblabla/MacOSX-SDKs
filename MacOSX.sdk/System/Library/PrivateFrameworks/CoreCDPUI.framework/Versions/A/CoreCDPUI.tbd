@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           84E99C86-747D-30AF-BE8D-C0347019C3FC
+    value:           F4854A6E-D081-39AA-AECA-3FA78E2192DA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5DFAE4B1-FC90-37A9-AA31-B09E8DCCD78C
+    value:           3B97522D-90D6-3686-9991-00B781096FA3
 install-name:    '/System/Library/PrivateFrameworks/CoreCDPUI.framework/Versions/A/CoreCDPUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -21,6 +21,6 @@ exports:
                        CDPUIDeviceToDeviceEncryptionFlowContext, CDPUIDeviceToDeviceEncryptionHelper, 
                        CDPUIDeviceToDeviceEncryptionIneligibilityAlertViewModel, 
                        CDPUIDeviceToDeviceEncryptionMessagingViewModel, CDPUIDeviceToDeviceEncryptionUIProviderImp, 
-                       CDPUIDeviceToDeviceEncryptionUpgradeMessageViewModel, CDPiCloudPrefRecoveryKeyController, 
-                       iCDPEnrollDevice ]
+                       CDPUIDeviceToDeviceEncryptionUpgradeMessageViewModel, CDPUIInheritanceUIProviderImpl, 
+                       CDPiCloudPrefRecoveryKeyController, iCDPEnrollDevice ]
 ...

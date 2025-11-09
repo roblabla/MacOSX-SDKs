@@ -16,14 +16,27 @@
 Enable debug logging.
 .It Fl g Ar milliseconds
 Gap betwen requests in milliseconds.
+.It Fl n Ar number
+Number of DNS records to use for each host argument. This does not have to be less than, equal to, or greater than the number of records that any host lookup returns. Numbers smaller than the number of records will fetch only that many records. Numbers larger than the number of records will fetch some records more than once, as required, to reach the number of fetches desired.
 .It Fl r
-bind(2) the NTP reserved port (123) for source communications.
+.Xr bind 2
+the NTP reserved port (123) for source communications.
 .It Fl S
-Use settimeofday(2) to set the system clock if the offset is greater than 50 milliseconds.
+Use
+.Xr clock_settime 2
+to set the system clock if the offset is greater than 50 milliseconds, or
+.Fl s
+is not specified.
 .It Fl s
-Use adjtime(2) to slew the system clock if the offset is less than 50 milliseconds.
+Use
+.Xr adjtime 2
+to slew the system clock if the offset is less than 50 milliseconds.
 .It Fl t Ar seconds
 Maximum number of seconds to wait for responses.
+.It Fl z Ar path
+Path to dump header state to. This is useful for
+.Xr sntpd 8
+to read from. Header data is stored on disk in big-endian (NBO) format.
 .El
 .Pp
 .Sh USAGE
@@ -31,9 +44,10 @@ Maximum number of seconds to wait for responses.
 .It Li "sntp pool.ntp.org"
 .El
 .Sh SEE ALSO 
-.Xr settimeofday 2 , 
+.Xr clock_settime 2 ,
 .Xr adjtime 2 ,
 .Xr timed 8 ,
+.Xr sntpd 8
 .Sh HISTORY
 This
 .Nm
@@ -44,4 +58,4 @@ features for compatibility.
 .Pp
 This
 .Nm
-first appeared in macOS 10.16.
+first appeared in macOS 11.0.

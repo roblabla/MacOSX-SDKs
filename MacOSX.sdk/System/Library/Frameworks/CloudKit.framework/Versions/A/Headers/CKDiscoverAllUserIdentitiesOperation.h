@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import <CloudKit/CKOperation.h>
 
 @class CKUserIdentity;
@@ -35,7 +36,8 @@ API_UNAVAILABLE(tvos)
  *  @discussion The @code -[NSOperation completionBlock] @endcode will also be called if both are set.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
  */
-@property (nonatomic, copy, nullable) void (^discoverAllUserIdentitiesCompletionBlock)(NSError * _Nullable operationError);
+@property (nonatomic, copy, nullable) void (^discoverAllUserIdentitiesCompletionBlock)(NSError * _Nullable operationError)
+CK_SWIFT_DEPRECATED("Use discoverAllUserIdentitiesResultBlock instead", macos(10.12, 12.0), ios(10.0, 15.0), watchos(3.0, 8.0));
 
 @end
 

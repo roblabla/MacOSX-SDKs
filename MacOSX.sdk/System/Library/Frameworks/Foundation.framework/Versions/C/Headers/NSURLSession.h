@@ -105,6 +105,7 @@
 
 @class NSURLSessionConfiguration;
 @protocol NSURLSessionDelegate;
+@protocol NSURLSessionTaskDelegate;
 
 @class NSURLSessionTaskMetrics;
 @class NSDateInterval;
@@ -168,9 +169,9 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 - (void)resetWithCompletionHandler:(void (^)(void))completionHandler;    /* empty all cookies, cache and credential stores, removes disk files, issues -flushWithCompletionHandler:. Invokes completionHandler() on the delegate queue if not nil. */
 - (void)flushWithCompletionHandler:(void (^)(void))completionHandler;    /* flush storage to disk and clear transient network caches.  Invokes completionHandler() on the delegate queue if not nil. */
 
-- (void)getTasksWithCompletionHandler:(void (^)(NSArray<NSURLSessionDataTask *> *dataTasks, NSArray<NSURLSessionUploadTask *> *uploadTasks, NSArray<NSURLSessionDownloadTask *> *downloadTasks))completionHandler; /* invokes completionHandler with outstanding data, upload and download tasks. */
+- (void)getTasksWithCompletionHandler:(void (^)(NSArray<NSURLSessionDataTask *> *dataTasks, NSArray<NSURLSessionUploadTask *> *uploadTasks, NSArray<NSURLSessionDownloadTask *> *downloadTasks))completionHandler NS_SWIFT_ASYNC_NAME(getter:tasks()); /* invokes completionHandler with outstanding data, upload and download tasks. */
 
-- (void)getAllTasksWithCompletionHandler:(void (^)(NSArray<__kindof NSURLSessionTask *> *tasks))completionHandler API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)); /* invokes completionHandler with all outstanding tasks. */
+- (void)getAllTasksWithCompletionHandler:(void (^)(NSArray<__kindof NSURLSessionTask *> *tasks))completionHandler NS_SWIFT_ASYNC_NAME(getter:allTasks()) API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)); /* invokes completionHandler with all outstanding tasks. */
 
 /* 
  * NSURLSessionTask objects are always created in a suspended state and
@@ -208,7 +209,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 /* Creates a bidirectional stream task with an NSNetService to identify the endpoint.
  * The NSNetService will be resolved before any IO completes.
  */
-- (NSURLSessionStreamTask *)streamTaskWithNetService:(NSNetService *)service API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (NSURLSessionStreamTask *)streamTaskWithNetService:(NSNetService *)service API_DEPRECATED("Use nw_connection_t in Network framework instead", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 /* Creates a WebSocket task given the url. The given url must have a ws or wss scheme.
  */
@@ -290,6 +291,16 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @property (nullable, readonly, copy) NSURLRequest  *currentRequest;   /* may differ from originalRequest due to http server redirection */
 @property (nullable, readonly, copy) NSURLResponse *response;         /* may be nil if no response has been received */
 
+/* Sets a task-specific delegate. Methods not implemented on this delegate will
+ * still be forwarded to the session delegate.
+ *
+ * Cannot be modified after task resumes. Not supported on background session.
+ *
+ * Delegate is strongly referenced until the task completes, after which it is
+ * reset to `nil`.
+ */
+@property (nullable, retain) id <NSURLSessionTaskDelegate> delegate API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
 /*
  * NSProgress object which represents the task progress.
  * It can be used for task progress tracking.
@@ -319,11 +330,11 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  * to know how many bytes will be transferred.
  */
 
-/* number of body bytes already received */
-@property (readonly) int64_t countOfBytesReceived;
-
 /* number of body bytes already sent */
 @property (readonly) int64_t countOfBytesSent;
+
+/* number of body bytes already received */
+@property (readonly) int64_t countOfBytesReceived;
 
 /* number of body bytes we expect to send, derived from the Content-Length of the HTTP request */
 @property (readonly) int64_t countOfBytesExpectedToSend;
@@ -486,7 +497,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
  * If an error occurs, any outstanding reads will also fail, and new
  * read requests will error out immediately.
  */
-- (void)readDataOfMinLength:(NSUInteger)minBytes maxLength:(NSUInteger)maxBytes timeout:(NSTimeInterval)timeout completionHandler:(void (^) (NSData * _Nullable data, BOOL atEOF, NSError * _Nullable error))completionHandler;
+- (void)readDataOfMinLength:(NSUInteger)minBytes maxLength:(NSUInteger)maxBytes timeout:(NSTimeInterval)timeout completionHandler:(void (^) (NSData * _Nullable_result data, BOOL atEOF, NSError * _Nullable error))completionHandler;
 
 /* Write the data completely to the underlying socket.  If all the
  * bytes have not been written by the timeout, a timeout error will
@@ -611,19 +622,19 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
  * If the maximumMessage size is hit while buffering the frames, the receiveMessage call will error out
  * and all outstanding work will also fail resulting in the end of the task.
  */
-- (void)receiveMessageWithCompletionHandler:(void (^)(NSURLSessionWebSocketMessage* _Nullable message, NSError * _Nullable error))completionHandler;
+- (void)receiveMessageWithCompletionHandler:(void (^)(NSURLSessionWebSocketMessage * _Nullable message, NSError * _Nullable error))completionHandler;
 
 /* Sends a ping frame from the client side. The pongReceiveHandler is invoked when the client
  * receives a pong from the server endpoint. If a connection is lost or an error occurs before receiving
  * the pong from the endpoint, the pongReceiveHandler block will be invoked with an error.
  * Note - the pongReceiveHandler will always be called in the order in which the pings were sent.
  */
-- (void)sendPingWithPongReceiveHandler:(void (^)(NSError* _Nullable error))pongReceiveHandler;
+- (void)sendPingWithPongReceiveHandler:(void (^)(NSError * _Nullable error))pongReceiveHandler;
 
 /* Sends a close frame with the given closeCode. An optional reason can be provided while sending the close frame.
  * Simply calling cancel on the task will result in a cancellation frame being sent without any reason.
  */
-- (void)cancelWithCloseCode:(NSURLSessionWebSocketCloseCode)closeCode reason:(NSData * _Nullable)reason;
+- (void)cancelWithCloseCode:(NSURLSessionWebSocketCloseCode)closeCode reason:(nullable NSData *)reason;
 
 @property NSInteger maximumMessageSize; /* The maximum number of bytes to be buffered before erroring out. This includes the sum of all bytes from continuation frames. Recieve calls will error out if this value is reached */
 @property (readonly) NSURLSessionWebSocketCloseCode closeCode; /* A task can be queried for it's close code at any point. When the task is not closed, it will be set to NSURLSessionWebSocketCloseCodeInvalid */
@@ -955,7 +966,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  * involves a body stream. 
  */
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
-                              needNewBodyStream:(void (^)(NSInputStream * _Nullable bodyStream))completionHandler;
+                              needNewBodyStream:(void (^)(NSInputStream * _Nullable bodyStream))completionHandler NS_SWIFT_ASYNC_NAME(urlSession(_:needNewBodyStreamForTask:));
 
 /* Sent periodically to notify the delegate of upload progress.  This
  * information is also available as properties of the task.
@@ -1122,13 +1133,13 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 /* Indicates that the WebSocket handshake was successful and the connection has been upgraded to webSockets.
  * It will also provide the protocol that is picked in the handshake. If the handshake fails, this delegate will not be invoked.
  */
-- (void)URLSession:(NSURLSession *)session webSocketTask:(NSURLSessionWebSocketTask *)webSocketTask didOpenWithProtocol:(NSString * _Nullable) protocol;
+- (void)URLSession:(NSURLSession *)session webSocketTask:(NSURLSessionWebSocketTask *)webSocketTask didOpenWithProtocol:(nullable NSString *) protocol;
 
 /* Indicates that the WebSocket has received a close frame from the server endpoint.
  * The close code and the close reason may be provided by the delegate if the server elects to send
  * this information in the close frame
  */
-- (void)URLSession:(NSURLSession *)session webSocketTask:(NSURLSessionWebSocketTask *)webSocketTask didCloseWithCode:(NSURLSessionWebSocketCloseCode)closeCode reason:(NSData * _Nullable)reason;
+- (void)URLSession:(NSURLSession *)session webSocketTask:(NSURLSessionWebSocketTask *)webSocketTask didCloseWithCode:(NSURLSessionWebSocketCloseCode)closeCode reason:(nullable NSData *)reason;
 
 @end
 

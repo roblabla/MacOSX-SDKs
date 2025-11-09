@@ -11,6 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+FILEPROVIDER_API_AVAILABILITY_V2_V3
 typedef NSString *NSFileProviderDomainIdentifier NS_EXTENSIBLE_STRING_ENUM;
 
 /**
@@ -161,6 +162,25 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  configure a domain with non-empty testing modes.
  */
 @property (readwrite, assign) NSFileProviderDomainTestingModes testingModes FILEPROVIDER_API_AVAILABILITY_V3_1;
+
+/**
+ Identity of the backing store of the domain on the system.
+
+ This property only applies for extension that implement NSFileProviderReplicatedExtension.
+
+ This provides an identifier that uniquely identifies the backing store used by the system for
+ the domain. When this identifier has changed, the system has dropped its backing store and is
+ building a new one.
+
+ The system may decide to rebuild its backing store if it got corrupted. The provider can also
+ cause the backing store to be rebuilt by calling
+ `-[NSFileProviderManager reimportItemsBelowItemWithIdentifier:completionHandler:]`.
+
+ When rebuilding the backing store, the system will invalidate any extension instance associated
+ to that domain. As a consequence, the identity of the backing store is guaranteed to be stable
+ for the lifetime of the NSFileProviderReplicatedExtension instance.
+ */
+@property (nonatomic, readonly, nullable) NSData *backingStoreIdentity FILEPROVIDER_API_AVAILABILITY_V4_0;
 
 @end
 

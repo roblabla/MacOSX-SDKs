@@ -1,6 +1,6 @@
 /* CoreAnimation - CALayer.h
 
-   Copyright (c) 2006-2018, Apple Inc.
+   Copyright (c) 2006-2021, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CAMediaTiming.h>
@@ -58,14 +58,6 @@ typedef NS_OPTIONS (NSUInteger, CACornerMask)
 
 API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CALayer : NSObject <NSSecureCoding, CAMediaTiming>
-{
-@private
-  struct _CALayerIvars {
-    int32_t refcount;
-    uint32_t magic;
-    void *layer;
-  } _attr;
-}
 
 /** Layer creation and initialization. **/
 

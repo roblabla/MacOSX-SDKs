@@ -11,11 +11,16 @@
 #import <UIKit/UIGeometry.h>
 #import <CoreGraphics/CGGeometry.h>
 
-@class UITargetedPreview, UIBezierPath, UIPointerEffect, UIPointerShape;
+@class UITargetedPreview, UIBezierPath, UIPointerEffect, UIPointerShape, UIPointerAccessory;
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) @interface UIPointerStyle : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIPointerStyle : NSObject <NSCopying>
+
+/// Accessories to display alongside this UIPointerStyle. Supports up to 4 accessories.
+/// The system will attempt to animate between neighboring or similar accessories.
+@property (nonatomic, copy) NSArray<UIPointerAccessory *> *accessories API_AVAILABLE(ios(15.0));
 
 /*!
  * @abstract Applies the provided content effect and pointer shape within the current region.
@@ -38,13 +43,19 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) @interface 
  */
 + (instancetype)hiddenPointerStyle;
 
+/*!
+ * @abstract Pointer style that displays an unconstrained system pointer. Use this to display accessories alongside the default pointer.
+ */
++ (instancetype)systemPointerStyle API_AVAILABLE(ios(15.0));
+
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT @interface UIPointerEffect : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT NS_SWIFT_UI_ACTOR
+@interface UIPointerEffect : NSObject <NSCopying>
 
 @property (nonatomic, copy, readonly) UITargetedPreview *preview;
 
@@ -64,11 +75,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_
 @end
 
 /// Pointer slides under the given view and morphs into the view's shape
-UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT @interface UIPointerHighlightEffect : UIPointerEffect
+UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT NS_SWIFT_UI_ACTOR
+@interface UIPointerHighlightEffect : UIPointerEffect
 @end
 
 /// Pointer slides under the given view and disappears as the view scales up and gains a shadow.
-UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT @interface UIPointerLiftEffect : UIPointerEffect
+UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT NS_SWIFT_UI_ACTOR
+@interface UIPointerLiftEffect : UIPointerEffect
 @end
 
 typedef NS_ENUM(NSInteger, UIPointerEffectTintMode) {
@@ -79,7 +92,8 @@ typedef NS_ENUM(NSInteger, UIPointerEffectTintMode) {
 
 
 /// Pointer retains the system shape while over the given view. Visual changes applied to the view are dictated by the effect's properties.
-UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT @interface UIPointerHoverEffect : UIPointerEffect
+UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT NS_SWIFT_UI_ACTOR
+@interface UIPointerHoverEffect : UIPointerEffect
 
 @property (nonatomic) UIPointerEffectTintMode preferredTintMode;        // Defaults to UIPointerEffectTintModeOverlay
 @property (nonatomic) BOOL prefersShadow;                               // Defaults to NO
@@ -88,7 +102,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT @interface UIPointerShape : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT NS_SWIFT_UI_ACTOR
+@interface UIPointerShape : NSObject <NSCopying>
 
 /*!
  * @abstract Morphs the pointer to the given path.

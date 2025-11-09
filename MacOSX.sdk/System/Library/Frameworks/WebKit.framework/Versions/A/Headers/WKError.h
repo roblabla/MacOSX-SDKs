@@ -30,7 +30,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /*! @constant WKErrorDomain Indicates a WebKit error. */
-WK_EXTERN NSString * const WKErrorDomain API_AVAILABLE(macos(10.10), ios(8.0));
+WK_EXTERN NSString * const WKErrorDomain WK_API_AVAILABLE(macos(10.10), ios(8.0));
 
 /*! @enum WKErrorCode
  @abstract Constants used by NSError to indicate errors in the WebKit domain.
@@ -53,16 +53,16 @@ typedef NS_ENUM(NSInteger, WKErrorCode) {
     WKErrorWebContentProcessTerminated,
     WKErrorWebViewInvalidated,
     WKErrorJavaScriptExceptionOccurred,
-    WKErrorJavaScriptResultTypeIsUnsupported API_AVAILABLE(macos(10.11), ios(9.0)),
-    WKErrorContentRuleListStoreCompileFailed API_AVAILABLE(macos(10.13), ios(11.0)),
-    WKErrorContentRuleListStoreLookUpFailed API_AVAILABLE(macos(10.13), ios(11.0)),
-    WKErrorContentRuleListStoreRemoveFailed API_AVAILABLE(macos(10.13), ios(11.0)),
-    WKErrorContentRuleListStoreVersionMismatch API_AVAILABLE(macos(10.13), ios(11.0)),
-    WKErrorAttributedStringContentFailedToLoad API_AVAILABLE(macos(10.15), ios(13.0)),
-    WKErrorAttributedStringContentLoadTimedOut API_AVAILABLE(macos(10.15), ios(13.0)),
-    WKErrorJavaScriptInvalidFrameTarget API_AVAILABLE(macos(11.0), ios(14.0)),
-    WKErrorNavigationAppBoundDomain API_AVAILABLE(macos(11.0), ios(14.0)),
-    WKErrorJavaScriptAppBoundDomain API_AVAILABLE(macos(11.0), ios(14.0)),
-} API_AVAILABLE(macos(10.10), ios(8.0));
+    WKErrorJavaScriptResultTypeIsUnsupported WK_API_AVAILABLE(macos(10.11), ios(9.0)),
+    WKErrorContentRuleListStoreCompileFailed WK_API_AVAILABLE(macos(10.13), ios(11.0)),
+    WKErrorContentRuleListStoreLookUpFailed WK_API_AVAILABLE(macos(10.13), ios(11.0)),
+    WKErrorContentRuleListStoreRemoveFailed WK_API_AVAILABLE(macos(10.13), ios(11.0)),
+    WKErrorContentRuleListStoreVersionMismatch WK_API_AVAILABLE(macos(10.13), ios(11.0)),
+    WKErrorAttributedStringContentFailedToLoad WK_API_AVAILABLE(macos(10.15), ios(13.0)),
+    WKErrorAttributedStringContentLoadTimedOut WK_API_AVAILABLE(macos(10.15), ios(13.0)),
+    WKErrorJavaScriptInvalidFrameTarget WK_API_AVAILABLE(macos(11.0), ios(14.0)),
+    WKErrorNavigationAppBoundDomain WK_API_AVAILABLE(macos(11.0), ios(14.0)),
+    WKErrorJavaScriptAppBoundDomain WK_API_AVAILABLE(macos(11.0), ios(14.0)),
+} WK_API_AVAILABLE(macos(10.10), ios(8.0));
 
 NS_ASSUME_NONNULL_END

@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           36E23041-6FDA-3719-8EEF-5C5E96E5549F
+    value:           3948E09F-1DD4-3A60-8E76-591EB7EE37E7
   - target:          x86_64-maccatalyst
-    value:           36E23041-6FDA-3719-8EEF-5C5E96E5549F
+    value:           3948E09F-1DD4-3A60-8E76-591EB7EE37E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE167A1C-9A53-3099-A93C-E714332416C6
+    value:           FE2DA8AA-92C5-38A3-B90C-14DE56472F75
   - target:          arm64e-maccatalyst
-    value:           CE167A1C-9A53-3099-A93C-E714332416C6
+    value:           FE2DA8AA-92C5-38A3-B90C-14DE56472F75
 install-name:    '/System/Library/PrivateFrameworks/Montreal.framework/Versions/A/Montreal'
-current-version: 142
+current-version: 164
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _MLPModelGenerateFormatCompact, _MLPModelGenerateFormatJSON, 
+    symbols:         [ _HTTuneParameters, _MLPModelGenerateFormatCompact, _MLPModelGenerateFormatJSON, 
                        _MLPModelGenerateFormatKey, _MLPModelSampleDataBatchOfSequencesKey, 
                        _MLPModelSampleDataFeatureValuesKey, _MLPModelSampleDataLabelsKey, 
                        _MLPModelSampleDataSequenceLabelsKey, _MLPModelSampleDataSequenceValuesKey, 
-                       _MLPModelTrainerBatchSizeKey, _MLPModelTrainerComputeInference, 
+                       _MLPModelTrainerBatchSizeKey, _MLPModelTrainerBpcKey, _MLPModelTrainerComputeInference, 
                        _MLPModelTrainerComputeLossOnEvaluationKey, _MLPModelTrainerConfusionMatrixKey, 
                        _MLPModelTrainerCreate, _MLPModelTrainerCreateWithModel, _MLPModelTrainerDataLayoutFeatureChannelsxHeightxWidth, 
                        _MLPModelTrainerDataLayoutHeightxWidthxFeatureChannels, _MLPModelTrainerDataLayoutKey, 
@@ -55,26 +55,40 @@ exports:
                        _MRLModelStatePieceData, _MRLModelStatePieceSize, _MRLModelStateRelease, 
                        _MRLModelStateReset, _MRLModelStateRestore, _MRLModelStateSave, 
                        _MRLModelStateSize, _MRLModelTrainBatch, _MRLModelUnlock, 
-                       _MRLNeuralNetworkAddNode, _MRLNeuralNetworkClear, _MRLNeuralNetworkConnectNodes, 
-                       _MRLNeuralNetworkCopyEvaluationResults, _MRLNeuralNetworkCopyInputNamesAndDimensions, 
+                       _MRLNeuralNetworkAddNode, _MRLNeuralNetworkAppendIncrementalState, 
+                       _MRLNeuralNetworkClear, _MRLNeuralNetworkConnectNodes, _MRLNeuralNetworkCopyEvaluationResults, 
+                       _MRLNeuralNetworkCopyIncrementalStates, _MRLNeuralNetworkCopyInputNamesAndDimensions, 
                        _MRLNeuralNetworkCopyModelData, _MRLNeuralNetworkCopyOutputNamesAndDimensions, 
                        _MRLNeuralNetworkCopyOutputTensor, _MRLNeuralNetworkCopyStates, 
                        _MRLNeuralNetworkCreate, _MRLNeuralNetworkCreateModelContainerWithJSON, 
-                       _MRLNeuralNetworkErrorDomain, _MRLNeuralNetworkEvaluateInputDataKey, 
-                       _MRLNeuralNetworkEvaluateOutputLabelKey, _MRLNeuralNetworkGetNodeParams, 
-                       _MRLNeuralNetworkGetOutput, _MRLNeuralNetworkGetOutputDimension, 
+                       _MRLNeuralNetworkDeclareOutput, _MRLNeuralNetworkErrorDomain, 
+                       _MRLNeuralNetworkEvaluateInputDataKey, _MRLNeuralNetworkEvaluateOutputLabelKey, 
+                       _MRLNeuralNetworkGetNodeParams, _MRLNeuralNetworkGetOutput, 
+                       _MRLNeuralNetworkGetOutputDimension, _MRLNeuralNetworkIncrementalStateCreate, 
                        _MRLNeuralNetworkModelLock, _MRLNeuralNetworkModelUnLock, 
-                       _MRLNeuralNetworkPredict, _MRLNeuralNetworkSave, _MRLNeuralNetworkSetInput, 
-                       _MRLNeuralNetworkSetInputTensor, _MRLNeuralNetworkSetPartialOutputIndices, 
-                       _MRLNeuralNetworkSetPartialOutputRange, _MRLNeuralNetworkStateCreate, 
-                       _MRLNeuralNetworkStateSetData, _MRLNeuralNetworkTensorAppendData, 
-                       _MRLNeuralNetworkTensorCopyShape, _MRLNeuralNetworkTensorCreate, 
-                       _MRLNeuralNetworkTensorGetData, _kMRLModelBeta1Key, _kMRLModelBeta2Key, 
-                       _kMRLModelDataKey, _kMRLModelEmbeddingLocationKey, _kMRLModelErrorCountKey, 
-                       _kMRLModelErrorRateKey, _kMRLModelEstimatorTypeKey, _kMRLModelFileLocationKey, 
-                       _kMRLModelHiddenNodesKey, _kMRLModelInputEncodingKey, _kMRLModelLearningRateKey, 
-                       _kMRLModelLogProbabilityKey, _kMRLModelModelConfigKey, _kMRLModelNumThreadsKey, 
-                       _kMRLModelParameterSizeKey, _kMRLModelParametersKey, _kMRLNeuralNetworkModelTypeEspressoModel, 
+                       _MRLNeuralNetworkPredict, _MRLNeuralNetworkResetIncrementalState, 
+                       _MRLNeuralNetworkSave, _MRLNeuralNetworkSetInput, _MRLNeuralNetworkSetInputTensor, 
+                       _MRLNeuralNetworkSetPartialOutputIndices, _MRLNeuralNetworkSetPartialOutputRange, 
+                       _MRLNeuralNetworkStateCreate, _MRLNeuralNetworkStateSetData, 
+                       _MRLNeuralNetworkTensorAppendData, _MRLNeuralNetworkTensorCopyShape, 
+                       _MRLNeuralNetworkTensorCreate, _MRLNeuralNetworkTensorGetData, 
+                       _kHTAcquisitionExpectedImprovement, _kHTAcquisitionKey, _kHTAcquisitionProbabilityOfImprovement, 
+                       _kHTAcquisitionUpperConfidenceBound, _kHTAlgorithmGaussianProcess, 
+                       _kHTAlgorithmKey, _kHTAlgorithmRandom, _kHTCallbackIntervalKey, 
+                       _kHTInitialParameterValuesKey, _kHTKernelARDSquaredExponential, 
+                       _kHTKernelKey, _kHTKernelMaternFiveHalves, _kHTKernelSquaredExponential, 
+                       _kHTOptimizationDirectionKey, _kHTOptimizationDirectionMaximize, 
+                       _kHTOptimizationDirectionMinimize, _kHTParameterDimensionKey, 
+                       _kHTParameterMaximumValueKey, _kHTParameterMinimumValueKey, 
+                       _kHTParameterNameKey, _kHTParameterTypeContinuous, _kHTParameterTypeIntegral, 
+                       _kHTParameterTypeKey, _kHTRandomSeedKey, _kHTStopConditionMaxIterationsKey, 
+                       _kHTStopConditionMinDeltaKey, _kHTStopConditionPatienceKey, 
+                       _kMRLModelBeta1Key, _kMRLModelBeta2Key, _kMRLModelDataKey, 
+                       _kMRLModelEmbeddingLocationKey, _kMRLModelErrorCountKey, _kMRLModelErrorRateKey, 
+                       _kMRLModelEstimatorTypeKey, _kMRLModelFileLocationKey, _kMRLModelHiddenNodesKey, 
+                       _kMRLModelInputEncodingKey, _kMRLModelLearningRateKey, _kMRLModelLogProbabilityKey, 
+                       _kMRLModelModelConfigKey, _kMRLModelNumThreadsKey, _kMRLModelParameterSizeKey, 
+                       _kMRLModelParametersKey, _kMRLNeuralNetworkModelTypeEspressoModel, 
                        _kMRLNeuralNetworkModelTypeFlatModel, _kMRLNeuralNetworkModelTypeNLModel, 
                        _kMRLNeuralNetworkOptionANEEndNodeName, _kMRLNeuralNetworkOptionANENetworkURLKey, 
                        _kMRLNeuralNetworkOptionANEStartNodeName, _kMRLNeuralNetworkOptionInputNamesKey, 

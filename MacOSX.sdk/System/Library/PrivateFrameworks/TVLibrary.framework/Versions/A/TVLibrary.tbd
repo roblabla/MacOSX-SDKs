@@ -1,0 +1,21 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           6D9CC9D6-82E5-3DF2-AB3B-989EDF7B2F06
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           700C9E36-4566-38C0-86FE-69CEC83FCDE6
+install-name:    '/System/Library/PrivateFrameworks/TVLibrary.framework/Versions/A/TVLibrary'
+current-version: 0
+compatibility-version: 0
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _TVLibraryVersionNumber, _TVLibraryVersionString, _TVPlaybackEngineDidFinishPlaybackNotification, 
+                       _TVPlaybackEngineDidReportPlaybackToUTSNotification, _TVPlaybackEngineDidStopPlaybackNotification, 
+                       _TVPlaybackEngineWillStartPlaybackNotification ]
+    objc-classes:    [ TVDownloadManagerProvider, TVLibraryActivityButtonController, 
+                       TVLibraryInterfaceGlue, TVLibraryViewController, TVPlaybackEngineProvider ]
+...

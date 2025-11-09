@@ -3,7 +3,7 @@
 
 	Framework:  CoreMedia
  
-	Copyright © 2005-2020 Apple Inc. All rights reserved.
+	Copyright © 2005-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -872,6 +872,12 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionAlphaChannelMode_PremultipliedAl
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ContainsAlphaChannel	// CFBoolean; used to signal the presence of alpha channel in the bitstream.
 							API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_BitsPerComponent 	// CFNumber (such as 8, 10, 12, 16, etc). Bit-depth per component -- if there are components with different bit depths this should be the deepest. Do not rely on this extension always being present, as it often isn't.
+							API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_HorizontalFieldOfView	// CFNumber; horizontal field of view in thousandths of a degree (i.e., 123456 is 123.456 degrees).
+							API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
 CM_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
@@ -1355,7 +1361,10 @@ CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_TextJustification 
 								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_DefaultFontName              // CFString
 								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
-	
+CM_EXPORT const CFStringRef CM_NONNULL kCMFormatDescriptionExtension_AmbientViewingEnvironment	// CFData(8 bytes); big-endian structure; same as kCVImageBufferAmbientViewingEnvironmentKey; matches payload of ISO/IEC 23008-2:2017, D.2.39 ambient viewing environment SEI message
+								API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+
 CM_ASSUME_NONNULL_END
 
 /*!

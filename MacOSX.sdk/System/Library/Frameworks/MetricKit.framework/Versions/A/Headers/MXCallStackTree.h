@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @abstract      A data class that encapsulates call stack trees vended by MetricKit.
 @discussion    You should use the JSONRepresentation API to generate human readable call stack trees for symbolication off device.
 */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(14.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
 @interface MXCallStackTree : NSObject <NSSecureCoding>
 
 /*!

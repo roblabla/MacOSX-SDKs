@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NSString * UITransitionContextViewControllerKey NS_TYPED_ENUM;
 typedef NSString * UITransitionContextViewKey NS_TYPED_ENUM;
 
+NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerTransitionCoordinatorContext <NSObject>
 
 // Most of the time isAnimated will be YES. For custom transitions that use the
@@ -76,6 +77,7 @@ typedef NSString * UITransitionContextViewKey NS_TYPED_ENUM;
 // ephemeral object that is released after the transition completes and the
 // last callback has been made.
 
+NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerTransitionCoordinator <UIViewControllerTransitionCoordinatorContext>
 
 

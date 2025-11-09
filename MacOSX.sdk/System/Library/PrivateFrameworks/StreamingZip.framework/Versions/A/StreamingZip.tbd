@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D3A1CA39-7669-35FB-AFDA-3B675EB6E4D2
+    value:           083067A2-0E4A-370E-934A-268302B54822
   - target:          x86_64-maccatalyst
-    value:           D3A1CA39-7669-35FB-AFDA-3B675EB6E4D2
+    value:           083067A2-0E4A-370E-934A-268302B54822
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4013B7A5-6D52-3836-8161-993BBC8CC697
+    value:           676B4C6B-3414-321C-B371-D428CC1AF8B8
   - target:          arm64e-maccatalyst
-    value:           4013B7A5-6D52-3836-8161-993BBC8CC697
+    value:           676B4C6B-3414-321C-B371-D428CC1AF8B8
 install-name:    '/System/Library/PrivateFrameworks/StreamingZip.framework/Versions/A/StreamingZip'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -40,8 +40,9 @@ exports:
                        _kSZArchiverHashTypeSHA224, _kSZArchiverHashTypeSHA256, _kSZArchiverHashTypeSHA384, 
                        _kSZArchiverHashTypeSHA512, _kSZArchiverOptionCommandLineString, 
                        _kSZArchiverOptionCompressionMethod, _kSZArchiverOptionCompressionOptions, 
-                       _kSZArchiverOptionExecutableUUID, _kSZArchiverOptionHashType, 
-                       _kSZArchiverOptionHashedChunkSize, _kSZArchiverOptionNoCache, 
+                       _kSZArchiverOptionCustomPathOrdering, _kSZArchiverOptionExecutableUUID, 
+                       _kSZArchiverOptionHashType, _kSZArchiverOptionHashedChunkSize, 
+                       _kSZArchiverOptionIncludeContainingDirectory, _kSZArchiverOptionNoCache, 
                        _kSZArchiverOptionNoCentralDirectory, _kSZArchiverOptionNoSeekOutput, 
                        _kSZArchiverOptionSkipPrescan, _kSZArchiverOptionUncompressBloatedFiles, 
                        _kSZArchiverOptionZlibCompressionLevel, _kSZArchiverPreflightTargetPathMode, 

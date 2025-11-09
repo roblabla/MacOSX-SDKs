@@ -7,6 +7,7 @@
 
 #import <Vision/VNRequest.h>
 #import <Vision/VNFaceObservationAccepting.h>
+#import <Vision/VNObservation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -38,6 +39,11 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  @abstract Constellation type defines how many landmark points are used to map a face. Revisions 1, 2, and 3 of the request support 65 points, where Revision 3 also supports 76 points.
  */
 @property (readwrite, assign) VNRequestFaceLandmarksConstellation constellation API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+
+/*!
+	@discussion VNFaceObservation with populated landmarks-related properties results.
+*/
+@property (readonly, copy, nullable) NSArray<VNFaceObservation*>* results;
 
 @end
 

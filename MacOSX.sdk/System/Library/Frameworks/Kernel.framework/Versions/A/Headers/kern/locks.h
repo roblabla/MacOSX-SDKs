@@ -30,51 +30,18 @@
 #define _KERN_LOCKS_H_
 
 #include <sys/cdefs.h>
-#include <sys/appleapiopts.h>
-#include <mach/boolean.h>
-#include <mach/mach_types.h>
-#include <kern/kern_types.h>
-#include <kern/lock_group.h>
-#include <machine/locks.h>
+
 
 __BEGIN_DECLS
 
-typedef unsigned int            lck_sleep_action_t;
-
-#define LCK_SLEEP_DEFAULT       0x00    /* Release the lock while waiting for the event, then reclaim */
-/* RW locks are returned in the same mode */
-#define LCK_SLEEP_UNLOCK        0x01    /* Release the lock and return unheld */
-#define LCK_SLEEP_SHARED        0x02    /* Reclaim the lock in shared mode (RW only) */
-#define LCK_SLEEP_EXCLUSIVE     0x04    /* Reclaim the lock in exclusive mode (RW only) */
-#define LCK_SLEEP_SPIN          0x08    /* Reclaim the lock in spin mode (mutex only) */
-#define LCK_SLEEP_PROMOTED_PRI  0x10    /* Sleep at a promoted priority */
-#define LCK_SLEEP_SPIN_ALWAYS   0x20    /* Reclaim the lock in spin-always mode (mutex only) */
-
-#define LCK_SLEEP_MASK          0x3f    /* Valid actions */
-
-typedef unsigned int            lck_wake_action_t;
-
-#define LCK_WAKE_DEFAULT                0x00 /* If waiters are present, transfer their push to the wokenup thread */
-#define LCK_WAKE_DO_NOT_TRANSFER_PUSH   0x01 /* Do not transfer waiters push when waking up */
-
-typedef struct __lck_attr__ lck_attr_t;
-
-#define LCK_ATTR_NULL (lck_attr_t *)NULL
-
-extern  lck_attr_t      *lck_attr_alloc_init(void);
-
-extern  void            lck_attr_setdefault(
-	lck_attr_t              *attr);
-
-extern  void            lck_attr_setdebug(
-	lck_attr_t              *attr);
-
-extern  void            lck_attr_cleardebug(
-	lck_attr_t              *attr);
-
-
-extern  void            lck_attr_free(
-	lck_attr_t              *attr);
+#include <sys/appleapiopts.h>
+#include <mach/boolean.h>
+#include <kern/kern_types.h>
+#include <kern/lock_group.h>
+#include <machine/locks.h>
+#include <kern/lock_types.h>
+#include <kern/lock_attr.h>
+#include <kern/lock_rw.h>
 
 #define decl_lck_spin_data(class, name)     class lck_spin_t name
 
@@ -187,21 +154,17 @@ extern void             lck_mtx_assert(
 #if MACH_ASSERT
 #define LCK_MTX_ASSERT(lck, type) lck_mtx_assert((lck),(type))
 #define LCK_SPIN_ASSERT(lck, type) lck_spin_assert((lck),(type))
-#define LCK_RW_ASSERT(lck, type) lck_rw_assert((lck),(type))
 #else /* MACH_ASSERT */
 #define LCK_MTX_ASSERT(lck, type)
 #define LCK_SPIN_ASSERT(lck, type)
-#define LCK_RW_ASSERT(lck, type)
 #endif /* MACH_ASSERT */
 
 #if DEBUG
 #define LCK_MTX_ASSERT_DEBUG(lck, type) lck_mtx_assert((lck),(type))
 #define LCK_SPIN_ASSERT_DEBUG(lck, type) lck_spin_assert((lck),(type))
-#define LCK_RW_ASSERT_DEBUG(lck, type) lck_rw_assert((lck),(type))
 #else /* DEBUG */
 #define LCK_MTX_ASSERT_DEBUG(lck, type)
 #define LCK_SPIN_ASSERT_DEBUG(lck, type)
-#define LCK_RW_ASSERT_DEBUG(lck, type)
 #endif /* DEBUG */
 
 #define LCK_ASSERT_OWNED                1
@@ -209,95 +172,6 @@ extern void             lck_mtx_assert(
 
 #define LCK_MTX_ASSERT_OWNED    LCK_ASSERT_OWNED
 #define LCK_MTX_ASSERT_NOTOWNED LCK_ASSERT_NOTOWNED
-
-
-#define decl_lck_rw_data(class, name)     class lck_rw_t name
-
-typedef unsigned int     lck_rw_type_t;
-
-#define LCK_RW_TYPE_SHARED                      0x01
-#define LCK_RW_TYPE_EXCLUSIVE           0x02
-
-
-extern lck_rw_t         *lck_rw_alloc_init(
-	lck_grp_t               *grp,
-	lck_attr_t              *attr);
-
-extern void             lck_rw_init(
-	lck_rw_t                *lck,
-	lck_grp_t               *grp,
-	lck_attr_t              *attr);
-
-extern void             lck_rw_lock(
-	lck_rw_t                *lck,
-	lck_rw_type_t           lck_rw_type);
-
-extern void             lck_rw_unlock(
-	lck_rw_t                *lck,
-	lck_rw_type_t           lck_rw_type);
-
-extern void             lck_rw_lock_shared(
-	lck_rw_t                *lck);
-
-extern void             lck_rw_unlock_shared(
-	lck_rw_t                *lck);
-
-extern boolean_t        lck_rw_lock_yield_shared(
-	lck_rw_t                *lck,
-	boolean_t               force_yield);
-
-extern void             lck_rw_lock_exclusive(
-	lck_rw_t                *lck);
-/*
- *	Grabs the lock exclusive.
- *	Returns true iff the thread spun or blocked while attempting to
- *	acquire the lock.
- *
- *	Note that the return value is ONLY A HEURISTIC w.r.t. the lock's
- *	contention.
- *
- *	This routine IS EXPERIMENTAL.
- *	It's only used for the vm object lock, and use for other subsystems
- *	is UNSUPPORTED.
- */
-extern bool                             lck_rw_lock_exclusive_check_contended(
-	lck_rw_t                *lck);
-
-extern void             lck_rw_unlock_exclusive(
-	lck_rw_t                *lck);
-
-
-
-extern void             lck_rw_destroy(
-	lck_rw_t                *lck,
-	lck_grp_t               *grp);
-
-extern void             lck_rw_free(
-	lck_rw_t                *lck,
-	lck_grp_t               *grp);
-
-extern wait_result_t    lck_rw_sleep(
-	lck_rw_t                *lck,
-	lck_sleep_action_t      lck_sleep_action,
-	event_t                 event,
-	wait_interrupt_t        interruptible);
-
-extern wait_result_t    lck_rw_sleep_deadline(
-	lck_rw_t                *lck,
-	lck_sleep_action_t      lck_sleep_action,
-	event_t                 event,
-	wait_interrupt_t        interruptible,
-	uint64_t                deadline);
-
-extern boolean_t        lck_rw_lock_shared_to_exclusive(
-	lck_rw_t                *lck);
-
-extern void             lck_rw_lock_exclusive_to_shared(
-	lck_rw_t                *lck);
-
-extern boolean_t        lck_rw_try_lock(
-	lck_rw_t                *lck,
-	lck_rw_type_t           lck_rw_type);
 
 
 __END_DECLS

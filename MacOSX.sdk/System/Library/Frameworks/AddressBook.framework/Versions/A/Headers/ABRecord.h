@@ -19,20 +19,6 @@
 // ABRecord represents a row in the AddressBook database
 
 @interface ABRecord : NSObject
-{
-@private
-	id		_databaseImpl;
-	id   _reserved1;
-	id   _reserved2;
-	id   _reserved3;
-// pre leopard:
-/*
-    NSString            *_UIDString;
-    NSMutableDictionary *_changedProperties;
-    NSMutableDictionary *_temporaryCache;
-    unsigned int         _hash;
-*/
-}
 
 - (id)init;
 	// on Mac OS X 10.5 and later equivalent to initWithAddressBook:[ABAddressBook addressBook]

@@ -27,7 +27,7 @@ typedef NS_ENUM(uint32_t, MPSGraphDeviceType)
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraphDevice : NSObject
 
-/*! @property   deviceType
+/*! @property   type
  */
 @property (readonly, nonatomic) MPSGraphDeviceType type;
 

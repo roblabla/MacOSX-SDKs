@@ -19,12 +19,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @class VNFaceLandmarkRegion
- @brief VNFaceLandmarkRegion the object acting as a collection of landmark points for defining a specific region of the face (including potentially all of the landmark points for a face). The VNFaceLandmarkRegion is an abstract base class.
+ @brief VNFaceLandmarkRegion is an immutable object acting as a collection of landmark points for defining a specific region of the face (including potentially all of the landmark points for a face). The VNFaceLandmarkRegion is an abstract base class.
  */
 
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNFaceLandmarkRegion : NSObject<NSCopying, NSSecureCoding, VNRequestRevisionProviding>
 
++ (instancetype) new NS_UNAVAILABLE;
 - (instancetype) init NS_UNAVAILABLE;
 
 /*!

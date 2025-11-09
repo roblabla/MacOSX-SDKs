@@ -61,7 +61,7 @@ typedef NS_ENUM(NSUInteger, UITextDropPerformer) {
 } API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @interface UITextDropProposal : UIDropProposal <NSCopying>
 
 /* Note: creating a UITextDropProposal sets the superclass's .precise property to true.

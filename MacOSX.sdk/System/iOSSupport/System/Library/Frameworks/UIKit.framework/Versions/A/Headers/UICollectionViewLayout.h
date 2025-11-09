@@ -19,6 +19,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+UIKIT_EXTERN const CGFloat UICollectionViewLayoutAutomaticDimension API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+
 UIKIT_EXTERN NSString *const UICollectionElementKindSectionHeader API_AVAILABLE(ios(6.0));
 UIKIT_EXTERN NSString *const UICollectionElementKindSectionFooter API_AVAILABLE(ios(6.0));
 
@@ -37,7 +39,8 @@ typedef NS_ENUM(NSUInteger, UICollectionElementCategory) {
 @class UICollectionView;
 @class UINib;
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionViewLayoutAttributes : NSObject <NSCopying, UIDynamicItem>
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+@interface UICollectionViewLayoutAttributes : NSObject <NSCopying, UIDynamicItem>
 
 @property (nonatomic) CGRect frame;
 @property (nonatomic) CGPoint center;
@@ -59,7 +62,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionViewLayoutAttributes
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UICollectionViewLayoutInvalidationContext : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UICollectionViewLayoutInvalidationContext : NSObject
 
 @property (nonatomic, readonly) BOOL invalidateEverything; // set to YES when invalidation occurs because the collection view is sent -reloadData
 @property (nonatomic, readonly) BOOL invalidateDataSourceCounts; // if YES, the layout should requery section and item counts from the collection view - set to YES when the collection view is sent -reloadData and when items are inserted or deleted
@@ -81,7 +85,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UICollectionViewLayoutInvalidati
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionViewLayout : NSObject <NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+@interface UICollectionViewLayout : NSObject <NSCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;

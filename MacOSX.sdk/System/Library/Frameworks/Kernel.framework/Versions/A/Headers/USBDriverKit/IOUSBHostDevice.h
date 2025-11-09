@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from IOUSBHostDevice.iig */
+/* iig(DriverKit-191) generated from IOUSBHostDevice.iig */
 
 /* IOUSBHostDevice.iig:1-38 */
 /*
@@ -884,6 +884,37 @@ public:
     virtual const IOUSBStringDescriptor *
     CopyStringDescriptor(uint8_t index) = 0;
 
+    kern_return_t
+    CopyDescriptor_Call(uint8_t type,
+        uint16_t * length,
+        uint8_t index,
+        uint16_t languageID,
+        uint8_t requestType,
+        uint8_t requestRecipient,
+        uint8_t * descriptor)  { return CopyDescriptor(type, length, index, languageID, requestType, requestRecipient, descriptor); };\
+
+    const IOUSBDeviceDescriptor *
+    CopyDeviceDescriptor_Call()  { return CopyDeviceDescriptor(); };\
+
+    const IOUSBConfigurationDescriptor *
+    CopyConfigurationDescriptor_Call(uint8_t index)  { return CopyConfigurationDescriptor(index); };\
+
+    const IOUSBConfigurationDescriptor *
+    CopyConfigurationDescriptorWithValue_Call(uint8_t bConfigurationValue)  { return CopyConfigurationDescriptorWithValue(bConfigurationValue); };\
+
+    const IOUSBConfigurationDescriptor *
+    CopyConfigurationDescriptor_Call(IOService * forClient)  { return CopyConfigurationDescriptor(forClient); };\
+
+    const IOUSBBOSDescriptor *
+    CopyCapabilityDescriptors_Call()  { return CopyCapabilityDescriptors(); };\
+
+    const IOUSBStringDescriptor *
+    CopyStringDescriptor_Call(uint8_t index,
+        uint16_t languageID)  { return CopyStringDescriptor(index, languageID); };\
+
+    const IOUSBStringDescriptor *
+    CopyStringDescriptor_Call(uint8_t index)  { return CopyStringDescriptor(index); };\
+
 };
 
 struct IOUSBHostDevice_IVars;
@@ -897,12 +928,21 @@ class IOUSBHostDevice : public IOService, public IOUSBHostDeviceInterface
 
 #if !KERNEL
 public:
+#ifdef IOUSBHostDevice_DECLARE_IVARS
+IOUSBHostDevice_DECLARE_IVARS
+#else /* IOUSBHostDevice_DECLARE_IVARS */
     union
     {
         IOUSBHostDevice_IVars * ivars;
         IOUSBHostDevice_LocalIVars * lvars;
     };
+#endif /* IOUSBHostDevice_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gIOUSBHostDeviceMetaClass; };
+#endif /* KERNEL */
 
     using super = IOService;
 

@@ -53,7 +53,7 @@ ML_EXPORT
   @param completionHandler The completion handler, invoked with YES on success or NSError on failure.
 */
 + (void)endAccessingModelCollectionWithIdentifier:(NSString *)identifier
-                                completionHandler:(void (^)(BOOL success, NSError *_Nullable error))completionHandler NS_REFINED_FOR_SWIFT;
+                                completionHandler:(void (^)(BOOL success, NSError *_Nullable error))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(endAccessing(identifier:));
 
 - (instancetype)init NS_UNAVAILABLE;
 

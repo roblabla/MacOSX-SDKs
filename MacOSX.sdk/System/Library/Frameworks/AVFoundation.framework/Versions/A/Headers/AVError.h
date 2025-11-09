@@ -4,7 +4,7 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2010-2020 Apple Inc. All rights reserved.
+	Copyright 2010-2021 Apple Inc. All rights reserved.
 
  */
 
@@ -112,6 +112,8 @@ typedef NS_ERROR_ENUM(AVFoundationErrorDomain, AVError) {
 	AVErrorIncorrectlyConfigured API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0)) = -11875,
 	AVErrorSegmentStartedWithNonSyncSample API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0)) = -11876,
 	AVErrorRosettaNotInstalled API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0)) = -11877,
+	AVErrorOperationCancelled API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0)) = -11878,
+	AVErrorContentKeyRequestCancelled API_AVAILABLE(macos(11.4), ios(14.6), tvos(14.6), watchos(7.5)) = -11879,
 
 };
 

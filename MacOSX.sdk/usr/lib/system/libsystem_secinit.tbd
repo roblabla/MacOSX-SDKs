@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           18494A83-796C-33D5-A6D0-BD4E0C2BBFC4
+    value:           8913DC40-2947-33EA-892D-DB965A15F016
   - target:          x86_64-maccatalyst
-    value:           18494A83-796C-33D5-A6D0-BD4E0C2BBFC4
+    value:           8913DC40-2947-33EA-892D-DB965A15F016
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DF976C39-729C-3AE4-AE08-B14C5A81BF11
+    value:           38BFF78F-837D-3382-84EE-442148CA290F
   - target:          arm64e-maccatalyst
-    value:           DF976C39-729C-3AE4-AE08-B14C5A81BF11
+    value:           38BFF78F-837D-3382-84EE-442148CA290F
 install-name:    '/usr/lib/system/libsystem_secinit.dylib'
-current-version: 87.60.1
+current-version: 106
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

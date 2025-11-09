@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
  UIGraphicsRendererFormat is an object that describes the particular properties of the
  context created by its associated renderer class.
  */
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsRendererFormat : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+@interface UIGraphicsRendererFormat : NSObject <NSCopying>
 
 // returns a default configured format object, best suited for the current device.
 + (instancetype)defaultFormat API_DEPRECATED_WITH_REPLACEMENT("preferredFormat", tvos(10.0, 11.0)) API_AVAILABLE(ios(10.0), watchos(3.0));
@@ -35,7 +36,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsRendererFormat : NSOb
  UIKit classes (UIImage, UIBezierPath, etc) in addition to providing access to the underlying
  CGContextRef.
  */
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsRendererContext : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+@interface UIGraphicsRendererContext : NSObject
 @property (nonatomic, readonly) CGContextRef CGContext;
 @property (nonatomic, readonly) __kindof UIGraphicsRendererFormat *format;
 
@@ -51,7 +53,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsRendererContext : NSO
 /*
  An abstract base class for creating graphics renderers. Do not use this class directly.
  */
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsRenderer : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+@interface UIGraphicsRenderer : NSObject
 // Creates a new UIGraphicsRenderer instance with the provides bounds and format, or a defaultFormat if none is provided.
 // The format instance is copied by the initializer, and the provided instance may be immediately reused
 // for creating other renderer instances with the same or different bounds.

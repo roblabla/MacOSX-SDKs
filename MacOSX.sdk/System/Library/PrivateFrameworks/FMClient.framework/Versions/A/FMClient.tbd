@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ABB26A9B-E44E-36B0-A62F-15A9BC090F10
+    value:           0CAD12AF-EBC9-354A-8365-7571D6FADB19
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4C7138AE-5882-35C9-905B-B1F147852991
+    value:           E582AFC4-717A-3104-8BDF-E656B073F42F
 install-name:    '/System/Library/PrivateFrameworks/FMClient.framework/Versions/A/FMClient'
 swift-abi-version: 7
 allowable-clients:
@@ -35,6 +35,7 @@ exports:
                        '_$s8FMClient10HttpClientC10StatusCodeVMa', '_$s8FMClient10HttpClientC10StatusCodeVMn', 
                        '_$s8FMClient10HttpClientC10StatusCodeVN', '_$s8FMClient10HttpClientC10invalidateyyF', 
                        '_$s8FMClient10HttpClientC10invalidateyyFTq', '_$s8FMClient10HttpClientC10urlSession_10didReceive17completionHandlerySo12NSURLSessionC_So28NSURLAuthenticationChallengeCySo0j4AuthL11DispositionV_So15NSURLCredentialCSgtctF', 
+                       '_$s8FMClient10HttpClientC12sessionQueue33_BA3E806510766D73A1FF7B9090ADFBB0LLSo17OS_dispatch_queueCvpfi', 
                        '_$s8FMClient10HttpClientC15registerHandler3for7handlerySi_ySi_SDys11AnyHashableVypGtctF', 
                        '_$s8FMClient10HttpClientC15registerHandler3for7handlerySi_ySi_SDys11AnyHashableVypGtctFTq', 
                        '_$s8FMClient10HttpClientC18httpSuccessCodeMaxSivpfi', '_$s8FMClient10HttpClientC18httpSuccessCodeMinSivpfi', 

@@ -44,6 +44,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  Client applications can retrieve the list of supported services by calling
  @c -[NSFileManager getFileProviderServicesForItemAtURL:] for a specific item URL.
  */
+FILEPROVIDER_API_AVAILABILITY_V2
 @interface NSFileProviderExtension (NSFileProviderService)
 
 - (nullable NSArray <id <NSFileProviderServiceSource>> *)supportedServiceSourcesForItemIdentifier:(NSFileProviderItemIdentifier)itemIdentifier error:(NSError **)error NS_SWIFT_NAME(supportedServiceSources(for:)) FILEPROVIDER_API_AVAILABILITY_V2;

@@ -3,22 +3,19 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C52DF08A-4A9E-3830-A60F-6F76F93C8DB5
+    value:           4B69F150-59DA-330C-A401-4C1E9DEE48C1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C1197BC8-526B-32D1-B5F9-CB77D56C176B
+    value:           334ECC1D-B26D-3686-8C0F-58EF75221C69
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeSettingsUI.framework/Versions/A/ScreenTimeSettingsUI'
-current-version: 497.4.6
-allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ ScreenTime ]
+current-version: 500.0.19
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     objc-classes:    [ STAlwaysAllowedController, STAlwaysAllowedItem, STContentAndPrivacyController, 
                        STControlProtection, STDowntimeCommunicationViewController, 
-                       STKeyValuePair, STProtectedButton, STProtectedDatePicker, 
-                       STProtectedPopUpButton, STProtectedSegmentedControl, STRequestItem, 
-                       STRequestsController, STScreenTimeCommunicationViewController, 
-                       STUsersController ]
+                       STKeyValuePair, STMacOSAlertPresenter, STProtectedButton, 
+                       STProtectedDatePicker, STProtectedPopUpButton, STProtectedSegmentedControl, 
+                       STRequestItem, STRequestsController, STScreenTimeCommunicationViewController, 
+                       STTimeAllowancesCompatibilityController, STUsersImageController ]
 ...

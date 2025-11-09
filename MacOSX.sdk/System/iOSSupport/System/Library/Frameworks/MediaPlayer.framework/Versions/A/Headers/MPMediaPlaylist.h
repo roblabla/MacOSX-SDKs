@@ -56,10 +56,10 @@ MP_EXTERN NSString * const MPMediaPlaylistPropertyAuthorDisplayName MP_API(ios(9
 
 - (void)addItemWithProductID:(NSString *)productID completionHandler:(nullable void (^)(NSError * __nullable error))completionHandler
     MP_API(ios(9.3))
-    MP_UNAVAILABLE(macos);
+    API_UNAVAILABLE(macos);
 - (void)addMediaItems:(NSArray<MPMediaItem *> *)mediaItems completionHandler:(nullable void (^)(NSError * __nullable error))completionHandler
     MP_API(ios(9.3))
-    MP_UNAVAILABLE(macos);
+    API_UNAVAILABLE(macos);
 
 @end
 

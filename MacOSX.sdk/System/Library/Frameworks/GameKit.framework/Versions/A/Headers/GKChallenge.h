@@ -48,6 +48,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0) __WATCHOS_PROHIBITED
 
 @end
 
+__WATCHOS_PROHIBITED
 @interface GKChallenge (Obsoleted)
 /*** This property is obsolete. ***/
 @property (nonatomic, readonly, nullable, copy) NSString *issuingPlayerID NS_DEPRECATED(10_8, 10_10, 6_0, 8_0, " This property is obsolete, Use issuingPlayer instead") ;

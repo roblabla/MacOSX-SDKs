@@ -27,5 +27,6 @@ extern "C" {
     #include <AddressBook/ABTypedefs.h>
     #include <AddressBook/ABGlobalsC.h>
     #include <AddressBook/ABAddressBookC.h>
+    #include <AddressBook/ABActionsC.h>
 #endif
 

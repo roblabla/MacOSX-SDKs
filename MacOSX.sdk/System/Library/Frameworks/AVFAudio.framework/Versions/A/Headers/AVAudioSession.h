@@ -405,6 +405,15 @@ API_AVAILABLE(ios(3.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 - (BOOL)setAggregatedIOPreference:(AVAudioSessionIOType)inIOType
 							error:(NSError **)outError API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos, watchos, macos);
 
+/// Set YES to inform the system if the app can supply multichannel audio content.
+/// Default value is NO. This property is intended to be used by 'Now Playing' applications.
+/// See https://developer.apple.com/documentation/mediaplayer/becoming_a_now_playable_app for more information
+/// about what it means to be a 'Now Playing' application. Typically 'Now Playing' applications will also use
+/// AVAudioSessionRouteSharingPolicyLongFormAudio or AVAudioSessionRouteSharingPolicyLongFormVideo.
+- (BOOL)setSupportsMultichannelContent:(BOOL)inValue error:(NSError **)outError API_AVAILABLE(ios(15.0), watchos(8.0), tvos(15.0)) API_UNAVAILABLE(macos);
+
+@property(readonly) BOOL supportsMultichannelContent API_AVAILABLE(ios(15.0), watchos(8.0), tvos(15.0)) API_UNAVAILABLE(macos);
+
 @end // interface for AVAudioSession (RoutingConfiguration)
 
 #pragma mark-- Names for NSNotifications --
@@ -456,8 +465,25 @@ OS_EXPORT NSNotificationName const  AVAudioSessionMediaServicesWereResetNotifica
 */
 OS_EXPORT NSNotificationName const  AVAudioSessionSilenceSecondaryAudioHintNotification API_AVAILABLE(ios(8.0), watchos(2.0), tvos(9.0));
 
+/*!
+    @brief  Notification sent to registered listeners when spatial playback capabilities are changed due to a
+    change in user preference.
+
+    Check the notification's userInfo dictionary for AVAudioSessionSpatialAudioEnabledKey to check if spatial
+    audio is enabled.
+    
+    Observers of this notification should also observe AVAudioSessionRouteChangeNotification since a route change
+    may also result in a change in the ability for the system to play spatial audio. Use
+    AVAudioSessionPortDescription's isSpatialAudioEnabled property to check if the current route supports
+    spatialized playback.
+*/
+OS_EXPORT NSNotificationName const  AVAudioSessionSpatialPlaybackCapabilitiesChangedNotification API_AVAILABLE(ios(15.0), watchos(8.0), tvos(15.0)) API_UNAVAILABLE(macos) NS_SWIFT_NAME(AVAudioSession.spatialPlaybackCapabilitiesChangedNotification);
 
 #pragma mark-- Keys for NSNotification userInfo dictionaries --
+
+/// keys for AVAudioSessionSpatialPlaybackCapabilitiesChangedNotification
+/// value is an NSNumber whose boolean value indicates if spatial audio enabled.
+OS_EXPORT NSString *const AVAudioSessionSpatialAudioEnabledKey API_AVAILABLE(ios(15.0), watchos(8.0), tvos(15.0)) API_UNAVAILABLE(macos);
 
 /// keys for AVAudioSessionInterruptionNotification
 /// Value is an NSNumber representing an AVAudioSessionInterruptionType

@@ -4,7 +4,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2010-2018 Apple Inc. All rights reserved.
+    Copyright 2010-2021 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -406,6 +406,7 @@ typedef NS_ENUM(NSInteger, AVCaptureDevicePosition) {
 } API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDevicePosition)
 
 /*!
@@ -431,7 +432,7 @@ typedef NSString *AVCaptureDeviceType NS_TYPED_ENUM API_AVAILABLE(macos(10.15), 
 
 /*!
  @constant AVCaptureDeviceTypeExternalUnknown
- 	An unknown device type.
+    An unknown device type.
  */
 AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeExternalUnknown API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
@@ -526,6 +527,7 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInTrueDepthCamera A
 AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDuoCamera API_DEPRECATED("Use AVCaptureDeviceTypeBuiltInDualCamera instead.", ios(10.0, 10.2)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceType)
 
 /*!
@@ -560,6 +562,7 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDuoCamera API_DEP
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceSystemPressure)
 
 /*!
@@ -575,6 +578,7 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDuoCamera API_DEP
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceVirtual)
 
 /*!
@@ -631,6 +635,7 @@ typedef NS_ENUM(NSInteger, AVCaptureFlashMode) {
 } API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceFlash)
 
 /*!
@@ -719,6 +724,7 @@ typedef NS_ENUM(NSInteger, AVCaptureTorchMode) {
 AVF_EXPORT const float AVCaptureMaxAvailableTorchLevel API_AVAILABLE(macos(10.15), ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceTorch)
 
 /*!
@@ -837,6 +843,7 @@ typedef NS_ENUM(NSInteger, AVCaptureAutoFocusRangeRestriction) {
 } API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceFocus)
 
 /*!
@@ -977,6 +984,16 @@ AVF_EXPORT const float AVCaptureLensPositionCurrent API_AVAILABLE(ios(8.0), macC
  */
 - (void)setFocusModeLockedWithLensPosition:(float)lensPosition completionHandler:(nullable void (^)(CMTime syncTime))handler API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
+/*!
+ @property minimumFocusDistance
+ @abstract
+    A property indicating the minimum focus distance.
+ 
+ @discussion
+    The minimum focus distance is given in millimeters, -1 if unknown. For virtual cameras (AVCaptureDeviceTypeBuiltInDualCamera, AVCaptureDeviceTypeBuiltInTripleCamera, etc.), the value reported is the smallest minimum focus distance of the auto-focus-capable cameras that it sources.
+ */
+@property(nonatomic, readonly) NSInteger minimumFocusDistance API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
 @end
 
 
@@ -1002,6 +1019,7 @@ typedef NS_ENUM(NSInteger, AVCaptureExposureMode) {
 } API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceExposure)
 
 /*!
@@ -1194,6 +1212,7 @@ AVF_EXPORT const float AVCaptureExposureTargetBiasCurrent API_AVAILABLE(ios(8.0)
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceToneMapping)
 
 /*!
@@ -1275,6 +1294,7 @@ typedef struct {
 } AVCaptureWhiteBalanceTemperatureAndTintValues API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceWhiteBalance)
 
 /*!
@@ -1436,6 +1456,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceSubjectAreaChangeMonitoring)
 
 /*!
@@ -1451,6 +1472,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceLowLightBoost)
 
 /*!
@@ -1486,6 +1508,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceVideoZoom)
 
 /*!
@@ -1575,6 +1598,7 @@ typedef NS_ENUM(NSInteger, AVAuthorizationStatus) {
 } API_AVAILABLE(macos(10.14), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceAuthorization)
 
 /*!
@@ -1642,6 +1666,7 @@ typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
 } API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceTransportControls)
 
 /*!
@@ -1697,6 +1722,7 @@ typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceHighDynamicRangeSupport)
 
 /*!
@@ -1705,7 +1731,7 @@ typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
     Indicates whether the receiver is allowed to turn high dynamic range streaming on or off.
  
  @discussion
-    The value of this property is a BOOL indicating whether the receiver is free to turn high dynamic range streaming on or off. This property defaults to YES. By default, AVCaptureDevice always turns off videoHDREnabled when a client uses the -setActiveFormat: API to set a new format. When the client uses AVCaptureSession's setSessionPreset: API instead, AVCaptureDevice turns videoHDR on automatically if it's a good fit for the preset. -setAutomaticallyAdjustsVideoHDREnabled: throws an NSGenericException if called without first obtaining exclusive access to the receiver using -lockForConfiguration:. Clients can key-value observe videoHDREnabled to know when the receiver has automatically changed the value.
+    The value of this property is a BOOL indicating whether the receiver is free to turn high dynamic range streaming on or off. This property defaults to YES. When automaticallyAdjustsVideoHDREnabled, the AVCaptureDevice turns videoHDR on automatically if it's a good fit for the activeFormat. -setAutomaticallyAdjustsVideoHDREnabled: throws an NSGenericException if called without first obtaining exclusive access to the receiver using -lockForConfiguration:. Clients can key-value observe videoHDREnabled to know when the receiver has automatically changed the value.
  */
 @property(nonatomic) BOOL automaticallyAdjustsVideoHDREnabled API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
@@ -1715,7 +1741,7 @@ typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
     Indicates whether the receiver's streaming high dynamic range feature is enabled. See AVCaptureDeviceFormat.isVideoHDRSupported.
  
  @discussion
-    The value of this property is a BOOL indicating whether the receiver is currently streaming high dynamic range video buffers. The property may only be set if you first set automaticallyAdjustsVideoHDREnabled to NO, otherwise an NSGenericException is thrown. videoHDREnabled may only be set to YES if the receiver's activeFormat.isVideoHDRSupported property returns YES, otherwise an NSGenericException is thrown. This property may be key-value observed.
+    The value of this property is a BOOL indicating whether the receiver is currently streaming high dynamic range video buffers, also known as Extended Dynamic Range (EDR). The value of this property is ignored when device.activeColorSpace is HLG BT2020 color space since HDR is effectively always on and can't be disabled. The property may only be set if you first set automaticallyAdjustsVideoHDREnabled to NO, otherwise an NSGenericException is thrown. videoHDREnabled may only be set to YES if the receiver's activeFormat.isVideoHDRSupported property returns YES, otherwise an NSGenericException is thrown. This property may be key-value observed.
  
     Note that setting this property may cause a lengthy reconfiguration of the receiver, similar to setting a new active format or AVCaptureSession sessionPreset. If you are setting either the active format or the AVCaptureSession's sessionPreset AND this property, you should bracket these operations with [session beginConfiguration] and [session commitConfiguration] to minimize reconfiguration time.
  */
@@ -1742,6 +1768,7 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
 } API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceColorSpaceSupport)
 
 /*!
@@ -1757,6 +1784,7 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceDepthSupport)
 
 /*!
@@ -1813,6 +1841,7 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceGeometricDistortionCorrection)
 
 /*!
@@ -1838,6 +1867,7 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceCalibration)
 
 /*!
@@ -1864,6 +1894,7 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice (AVCaptureDeviceCenterStage)
 
 /*!
@@ -1872,15 +1903,15 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
     Constants indicating the current Center Stage control mode.
  
  @constant AVCaptureCenterStageControlModeUser
-    Indicates that the application is unaware of the Center Stage feature. Its enablement is entirely under user control in Settings.
+    Indicates that the application is unaware of the Center Stage feature. Its enablement is entirely under user control in Control Center.
  @constant AVCaptureCenterStageControlModeApp
-    Indicates that the application controls the Center Stage feature, disallowing input from the user in Settings.
+    Indicates that the application controls the Center Stage feature, disallowing input from the user in Control Center.
  @constant AVCaptureCenterStageControlModeCooperative
     Indicates that both the user and application cooperatively share control of the Center Stage feature.
  */
 typedef NS_ENUM(NSInteger, AVCaptureCenterStageControlMode) {
     AVCaptureCenterStageControlModeUser          = 0,
-    AVCaptureCenterStageControlModeApp	         = 1,
+    AVCaptureCenterStageControlModeApp           = 1,
     AVCaptureCenterStageControlModeCooperative   = 2,
 } API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
@@ -1890,17 +1921,17 @@ typedef NS_ENUM(NSInteger, AVCaptureCenterStageControlMode) {
     A class property indicating the current mode of Center Stage control (user, app, or cooperative).
  
  @discussion
-    This class property determines how the Center Stage feature is controlled. When set to the default value of AVCaptureCenterStageControlModeUser, centerStageEnabled may not be set programmatically and throws an NSInvalidArgumentException. In User mode, the feature may only be set by the user in Settings. If you wish to take Center Stage control away from the user and exclusively enable / disable it programmatically, set this property to AVCaptureCenterStageControlModeApp. When under exclusive app control, Center Stage user control is disallowed (for instance, the toggle is grayed out in Settings). If you wish to take control of Center Stage, but also cooperate with the user by listening for and appropriately reacting to their changes to the centerStageEnabled property, set this property to AVCaptureCenterStageControlModeCooperative. Note that in this mode, the onus is on you, the app developer, to honor user intent and conform your AVCaptureSession configuration to make Center Stage active (see the AVCaptureDevice instance property centerStageActive). In cooperative mode, the centerStageEnabled property may change at any time (such as when the user enables / disables the feature in Settings).
+    This class property determines how the Center Stage feature is controlled. When set to the default value of AVCaptureCenterStageControlModeUser, centerStageEnabled may not be set programmatically and throws an NSInvalidArgumentException. In User mode, the feature may only be set by the user in Control Center. If you wish to take Center Stage control away from the user and exclusively enable / disable it programmatically, set this property to AVCaptureCenterStageControlModeApp. When under exclusive app control, Center Stage user control is disallowed (for instance, the toggle is grayed out in Control Center). If you wish to take control of Center Stage, but also cooperate with the user by listening for and appropriately reacting to their changes to the centerStageEnabled property, set this property to AVCaptureCenterStageControlModeCooperative. Note that in this mode, the onus is on you, the app developer, to honor user intent and conform your AVCaptureSession configuration to make Center Stage active (see the AVCaptureDevice instance property centerStageActive). In cooperative mode, the centerStageEnabled property may change at any time (such as when the user enables / disables the feature in Control Center).
  */
 @property(class) AVCaptureCenterStageControlMode centerStageControlMode API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property centerStageEnabled
  @abstract
-    A class property indicating whether the Center Stage feature is currently enabled or disabled (such as in Settings or programmatically via your app).
+    A class property indicating whether the Center Stage feature is currently enabled or disabled (such as in Control Center or programmatically via your app).
  
  @discussion
-    This property may only be set if centerStageControlMode is AVCaptureCenterStageControlModeApp or AVCaptureCenterStageControlModeCooperative, and otherwise throws an NSInvalidArgumentException. When centerStageControlMode is AVCaptureCenterStageControlModeUser or AVCaptureCenterStageControlModeCooperative, this property may change according to user desire (such as enabling / disabling the feature in Settings), so you should key-value observe it.
+    This property may only be set if centerStageControlMode is AVCaptureCenterStageControlModeApp or AVCaptureCenterStageControlModeCooperative, and otherwise throws an NSInvalidArgumentException. When centerStageControlMode is AVCaptureCenterStageControlModeUser or AVCaptureCenterStageControlModeCooperative, this property may change according to user desire (such as enabling / disabling the feature in Control Center), so you should key-value observe it.
  */
 @property(class, getter=isCenterStageEnabled) BOOL centerStageEnabled API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
@@ -1912,13 +1943,122 @@ typedef NS_ENUM(NSInteger, AVCaptureCenterStageControlMode) {
  @discussion
     This readonly property returns YES when Center Stage is currently active on the receiver. When active, the camera automatically adjusts to keep people optimally framed within the field of view. The field of view may pan, tighten or widen as needed. Certain restrictions come into play when Center Stage is active:
         - The device's minAvailableVideoZoomFactor and maxAvailableVideoZoomFactor become restricted (see AVCaptureDeviceFormat's videoMinZoomFactorForCenterStage and videoMaxZoomFactorForCenterStage).
-        - The device's activeVideoMinFrameDuration and activeVideoMaxFrameDuration are limited (see AVCaptureDeviceFormat's videoMinFrameDurationForCenterStage and videoMaxFrameDurationForCenterStage).
+        - The device's activeVideoMinFrameDuration and activeVideoMaxFrameDuration are limited (see AVCaptureDeviceFormat's videoFrameRateRangeForCenterStage).
     Center Stage may be enabled via user control or application control, depending on the current +AVCaptureDevice.centerStageControlMode. When +AVCaptureDevice.centerStageEnabled is YES, a particular AVCaptureDevice instance may return YES for this property, depending whether it supports the feature in its current configuration. Some device features are mutually exclusive to Center Stage:
         - If depth data delivery is enabled on any output, such as AVCaptureDepthDataOutput, or -AVCapturePhotoOutput.depthDataDeliveryEnabled, Center Stage is deactivated.
         - If geometricDistortionCorrectionSupported is YES, geometricDistortionCorrectionEnabled must also be YES, or Center Stage is deactivated.
     This property is key-value observable.
  */
 @property(nonatomic, readonly, getter=isCenterStageActive) BOOL centerStageActive API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+@end
+
+
+API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDevice (AVCaptureDevicePortraitEffect)
+
+/*!
+ @property portraitEffectEnabled
+ @abstract
+    A class property indicating whether the Portrait Effect feature is currently enabled in Control Center.
+ 
+ @discussion
+    This property changes to reflect the Portrait Effect state in Control Center. It is key-value observable. On iOS, Portrait Effect only applies to video conferencing apps by default (apps that use "voip" as one of their UIBackgroundModes). Non video conferencing apps may opt in for the Portrait Effect by adding the following key to their Info.plist:
+        <key>NSCameraPortraitEffectEnabled</key>
+        <true/>
+ */
+@property(class, readonly, getter=isPortraitEffectEnabled) BOOL portraitEffectEnabled API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property portraitEffectActive
+ @abstract
+    Indicates whether Portrait Effect is currently active for a particular AVCaptureDevice.
+ 
+ @discussion
+    This readonly property returns YES when Portrait Effect is currently active on the receiver. When active, the device blurs the background, simulating a shallow depth of field effect. Certain restrictions come into play when Portrait Effect is active:
+        - The device's activeVideoMinFrameDuration and activeVideoMaxFrameDuration are limited (see AVCaptureDeviceFormat's videoFrameRateRangeForPortraitEffect).
+    Note that when +AVCaptureDevice.portraitEffectEnabled is YES, a particular AVCaptureDevice instance may return YES for this property, depending whether it supports the feature in its current configuration.
+    This property is key-value observable.
+ */
+@property(nonatomic, readonly, getter=isPortraitEffectActive) BOOL portraitEffectActive API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+@end
+
+
+API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDevice (AVCaptureMicrophoneMode)
+
+/*!
+ @enum AVCaptureMicrophoneMode
+ @abstract
+    Constants describing microphone filtering modes.
+
+ @constant AVCaptureMicrophoneModeStandard
+    Indicates that microphone audio is being processed with standard voice DSP.
+ @constant AVCaptureMicrophoneModeWideSpectrum
+    Indicates that microphone audio processing is minimized to capture all sounds in the room.
+ @constant AVCaptureMicrophoneModeVoiceIsolation
+    Indicates that microphone audio is being processed to isolate the voice and attenuate other signals.
+ */
+typedef NS_ENUM(NSInteger, AVCaptureMicrophoneMode) {
+	AVCaptureMicrophoneModeStandard       = 0,
+	AVCaptureMicrophoneModeWideSpectrum   = 1,
+	AVCaptureMicrophoneModeVoiceIsolation = 2,
+} NS_SWIFT_NAME(AVCaptureDevice.MicrophoneMode) API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property preferredMicrophoneMode
+ @abstract
+    Indicates the microphone mode that has been selected by the user in Control Center.
+
+ @discussion
+    This readonly property returns the microphone mode selected by the user in Control Center. It is key-value observable.
+ */
+@property(class, readonly) AVCaptureMicrophoneMode preferredMicrophoneMode API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property activeMicrophoneMode
+ @abstract
+    Indicates the currently active microphone mode.
+
+ @discussion
+    This readonly property returns the currently active microphone mode, which may differ from the preferredMicrophoneMode if the application's active audio route does not support the preferred microphone mode. This property is key-value observable.
+ */
+@property(class, readonly) AVCaptureMicrophoneMode activeMicrophoneMode API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+@end
+
+
+API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDevice (AVCaptureSystemUserInterface)
+
+/*!
+ @enum AVCaptureSystemUserInterface
+ @abstract
+    Constants describing the system user interfaces available to +showSystemUserInterface:.
+ 
+ @constant AVCaptureSystemUserInterfaceVideoEffects
+    Indicates the system UI for enabling / disabling video effects.
+ @constant AVCaptureSystemUserInterfaceMicrophoneModes
+    Indicates the system UI for selecting microphone modes.
+ */
+typedef NS_ENUM(NSInteger, AVCaptureSystemUserInterface) {
+    AVCaptureSystemUserInterfaceVideoEffects    = 1,
+    AVCaptureSystemUserInterfaceMicrophoneModes = 2,
+} NS_SWIFT_NAME(AVCaptureDevice.SystemUserInterface) API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @method showSystemUserInterface:
+ @abstract
+    Displays the system's user interface for video effects or microphone modes.
+ 
+  @param systemUserInterface
+     The system UI to show.
+ 
+ @discussion
+    This method allows the calling application to prompt the user to make changes to Video Effects (such as Center Stage or the Portrait Effect) or Microphone Modes. It brings up the system user interface and deep links to the appropriate module. This method is non-blocking. After presenting the desired system user interface, control returns immediately to the application.
+ */
++ (void)showSystemUserInterface:(AVCaptureSystemUserInterface)systemUserInterface NS_SWIFT_NAME(showSystemUserInterface(_:)) API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -2259,7 +2399,7 @@ AV_INIT_UNAVAILABLE
     A property indicating whether the format supports high dynamic range streaming.
  
  @discussion
-    videoHDRSupported is a BOOL indicating whether the format supports high dynamic range streaming, also known as Extended Dynamic Range (EDR). When enabled, the device streams at twice the published frame rate, capturing an under-exposed frame and correctly exposed frame for each frame time at the published rate. Portions of the under-exposed frame are combined with the correctly exposed frame to recover detail in darker areas of the scene. EDR is a separate and distinct feature from 10-bit HDR video (first seen in 2020 iPhones). 10-bit formats have greater dynamic range by virtue of their expanded bit depth and HLG BT2020 color space, and when captured in movies, contain Dolby Vision metadata. They are, in effect, "always on" HDR formats and thus their videoHDRSupported property is always NO, since HDR cannot be enabled or disabled. To enable videoHDR (EDR), set the AVCaptureDevice.videoHDREnabled property.
+    videoHDRSupported is a BOOL indicating whether the format supports high dynamic range streaming, also known as Extended Dynamic Range (EDR). When enabled, the device streams at twice the published frame rate, capturing an under-exposed frame and correctly exposed frame for each frame time at the published rate. Portions of the under-exposed frame are combined with the correctly exposed frame to recover detail in darker areas of the scene. EDR is a separate and distinct feature from 10-bit HDR video (first seen in 2020 iPhones). 10-bit formats with HLG BT2020 color space have greater dynamic range by virtue of their expanded bit depth and HLG transfer function, and when captured in movies, contain Dolby Vision metadata. They are, in effect, "always on" HDR. And thus the videoHDRSupported property is always NO for 10-bit formats only supporting HLG BT2020 colorspace, since HDR cannot be enabled or disabled. To enable videoHDR (EDR), set the AVCaptureDevice.videoHDREnabled property.
  */
 @property(nonatomic, readonly, getter=isVideoHDRSupported) BOOL videoHDRSupported API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
@@ -2276,6 +2416,20 @@ AV_INIT_UNAVAILABLE
        - By opting in for depth data ( -[AVCapturePhotoSettings setDepthDataDeliveryEnabled:YES] ), you implicitly opt in for high resolution depth data if it's available. You may query the -[AVCaptureDevice activeDepthDataFormat]'s highResolutionStillImageDimensions to discover the depth data resolution that will be delivered with captured photos.
  */
 @property(nonatomic, readonly) CMVideoDimensions highResolutionStillImageDimensions API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
+
+/*!
+ @property highPhotoQualitySupported
+ @abstract
+    A boolean value specifying whether this format supports high photo quality when selecting an AVCapturePhotoQualityPrioritization of .balanced or .quality.
+ 
+ @discussion
+    If an AVCaptureDeviceFormat's highPhotoQualitySupported property is YES, the format produces higher image quality when selecting .balanced or .quality AVCapturePhotoQualityPrioritization compared to .speed. Such formats adhere to the following rules:
+        - Photo requests with a prioritization of .speed produce the fastest image result (suitable for burst captures).
+        - Photo requests with a prioritization of .balanced produce higher image quality without dropping frames if a video recording is underway.
+        - Photo requests with a prioritization of .quality produce high image quality and may cause frame drops if a video recording is underway. For maximum backward compatibility, photo requests on high photo quality formats set to .quality only cause video frame drops if your app is linked on or after iOS 15.
+    Formats that don't support high photo quality produce the same image quality whether you select .speed, .balanced, or .quality. Note that high photo quality is only attainable when using the AVCapturePhotoOutput with these supported formats.
+ */
+@property(nonatomic, readonly, getter=isHighPhotoQualitySupported) BOOL highPhotoQualitySupported API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property highestPhotoQualitySupported
@@ -2350,6 +2504,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDeviceFormat (AVCaptureDeviceFormatDepthDataAdditions)
 
 /*
@@ -2365,6 +2520,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDeviceFormat (AVCaptureDeviceFormatMultiCamAdditions)
 
 /*!
@@ -2380,6 +2536,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDeviceFormat (AVCaptureDeviceFormatGeometricDistortionCorrection)
 
 /*!
@@ -2395,6 +2552,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 
+API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDeviceFormat (AVCaptureDeviceFormatCenterStage)
 
 /*!
@@ -2436,6 +2594,32 @@ AV_INIT_UNAVAILABLE
     Devices may support a limited frame rate range when Center Stage is active. If this device format does not support Center Stage, this property returns nil.
  */
 @property(nonatomic, readonly, nullable) AVFrameRateRange *videoFrameRateRangeForCenterStage API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+@end
+
+
+API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDeviceFormat (AVCaptureDeviceFormatPortraitEffect)
+
+/*!
+ @property portraitEffectSupported
+ @abstract
+    Indicates whether the format supports the Portrait Effect feature.
+ 
+ @discussion
+    This property returns YES if the format supports Portrait Effect, the application of a shallow depth of field effect to objects in the background. See +AVCaptureDevice.portraitEffectEnabled for a detailed discussion.
+ */
+@property(nonatomic, readonly, getter=isPortraitEffectSupported) BOOL portraitEffectSupported API_UNAVAILABLE(macos, ios, macCatalyst, tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property videoFrameRateRangeForPortraitEffect
+ @abstract
+    Indicates the minimum / maximum frame rates available when portraitEffectActive is YES.
+ 
+ @discussion
+    Devices may support a limited frame rate range when Portrait Effect is active. If this device format does not support Portrait Effect, this property returns nil.
+ */
+@property(nonatomic, readonly, nullable) AVFrameRateRange *videoFrameRateRangeForPortraitEffect API_UNAVAILABLE(macos, ios, macCatalyst, tvos) API_UNAVAILABLE(watchos);
 
 @end
 

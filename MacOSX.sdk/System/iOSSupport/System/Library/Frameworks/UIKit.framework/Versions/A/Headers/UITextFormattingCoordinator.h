@@ -15,11 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIWindowScene;
 
-API_AVAILABLE(ios(13.0)) @protocol UITextFormattingCoordinatorDelegate <NSObject>
+API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@protocol UITextFormattingCoordinatorDelegate <NSObject>
 - (void)updateTextAttributesWithConversionHandler:(NS_NOESCAPE UITextAttributesConversionHandler _Nonnull)conversionHandler API_AVAILABLE(ios(13.0));
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 #if !TARGET_OS_WATCH && !TARGET_OS_TV
 @interface UITextFormattingCoordinator : NSObject <UIFontPickerViewControllerDelegate>
 #else

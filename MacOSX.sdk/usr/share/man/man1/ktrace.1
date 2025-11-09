@@ -23,17 +23,28 @@
 .Op Fl x Ar pid-or-process-name Oo Ar ... Oc | Fl p Ar pid-or-process-name Oo Ar ... Oc
 .Op Fl Fl json | Fl Fl csv | Fl Fl ndjson | Fl Fl json-64
 .Op Fl c Ar command Op ...
+.Op Fl Fl only-named-events
+.Op Fl Fl no-default-codes-files
+.Op Fl Fl continuous
+.Op Fl Fl disable-coprocessors
 ..
 .trace-opts
 .\"
 .It Nm Cm dump
+.De dump-opts
 .Op Fl E
 .Op Fl f Ar filter-desc
 .Op Fl l Ar compression-level
 .Op Fl T Ar timeout
+.Op Fl b Ar buffer-size-mb
 .Op Fl p Ar pid-or-process-name
 .Op Fl Fl stackshot-flags Ar extra-flags
+.Op Fl Fl include-log-content
+.Op Fl Fl disable-coprocessors
+.Op Fl Fl notify-tracing-started Ar key
 .Op Ar path
+..
+.dump-opts
 .\"
 .It Nm Cm init
 .Fl b Ar buffer-size-mb |
@@ -61,6 +72,10 @@
 .It Nm Cm symbolicate
 .Ar path
 .\"
+.It Nm Cm machine
+.\"
+.It Nm Cm config
+.\"
 .It Nm Cm compress
 .Op Fl l fast|balanced|small
 .Ar path
@@ -81,8 +96,9 @@
 .Ar kdebug-filter-desc
 .Oc
 .Op Fl Fl remote Ns Op Ns = Ns Ar remote-device
-.Op Fl Fl type Ns = Ns Ar full Ns | Ns Ar profile Ns | Ns Ar lite Ns | Ns Ar morelite
+.Op Fl Fl type Ns = Ns Ar full Ns | Ns Ar profile Ns | Ns Ar lite Ns | Ns Ar morelite Ns | Ns Ar none
 .Op Fl Fl stackshot-flags Ar extra-flags
+.Op Fl Fl notify-tracing-started Ar key
 .Op Fl c Ar command Op ...
 .\"
 .El
@@ -204,7 +220,10 @@ and stop tracing when it exits.
 All arguments after this option are passed to the command.
 .El
 .\" DUMP
-.It Cm dump Oo Fl E Oc Oo Fl f Ar filter-desc Oc Oo Fl l Ar compression-level Oc Oo Fl T Ar timeout Oc Oo Fl Fl stackshot-flags Ar extra-flags Oc Oo Ar path Oc Oo Fl p Ar pid-or-process-name Oc
+.It Xo
+.Cm dump
+.dump-opts
+.Xc
 .Pp
 Write trace to a file at
 .Ar path
@@ -258,6 +277,10 @@ are supported, but seconds are the default if just a number is supplied.
 Pass the provided
 .Ar extra-flags
 integer as additional flags when recording stackshots.
+.It Fl Fl notify-tracing-started Ar key
+Post a notification on
+.Ar key
+after tracing has started.
 .El
 .\" INIT
 .It Cm init Fl b Ar buffer-size-mb | Fl n Ar n-events
@@ -336,6 +359,12 @@ and arguments.
 .It Cm symbolicate Ar path
 Symbolicate the trace file located at
 .Ar path .
+.\" CONFIG
+.It Cm config
+Print the current system's trace configuration.
+.\" MACHINE
+.It Cm machine
+Print the current system's machine information.
 .\" COMPRESS
 .It Cm compress Oo Fl l No fast|balanced|small Oc Ar path
 Compress the trace file located at
@@ -344,7 +373,7 @@ using the small compression level, unless otherwise specified with the
 .Fl l
 option.
 .\" ARTRACE
-.It Cm artrace Oo Fl nr Oc Oo Fl t Ar timeout Oc Oo Fl i Ar interval Oc Oo Fl o Ar filename Oc Oo Fl b Ar buffer-size-mb Oc Oo Fl f Ar filter-desc Oc Oo Fl F Ar filter-desc Oc Oo Fl p Ar pid-or-process-name Oc Oo Fl Fl remote Ns Oo = Ns Ar device-name Oc Oc Oo Fl Fl type Ns = Ns Ar full Ns | Ns Ar profile Ns | Ns Ar lite Ns | Ns Ar morelite Oc Oo Fl Fl kperf Ns = Ns Ar sampler-name , Ns Ar sampler-name Ns @ Ns Ar timer-period Ns | Ns Ar timer-frequency Ns | Ns Ar kdebug-filter-desc Oc Oo Fl d Ar group Oc Oo Fl e Ar group Oc Oo Fl Fl stackshot-flags Ar extra-flags Oc Oo Fl c Ar command Oo ... Oc Oc
+.It Cm artrace Oo Fl nr Oc Oo Fl t Ar timeout Oc Oo Fl i Ar interval Oc Oo Fl o Ar filename Oc Oo Fl b Ar buffer-size-mb Oc Oo Fl f Ar filter-desc Oc Oo Fl F Ar filter-desc Oc Oo Fl p Ar pid-or-process-name Oc Oo Fl Fl remote Ns Oo = Ns Ar device-name Oc Oc Oo Fl Fl type Ns = Ns Ar full Ns | Ns Ar profile Ns | Ns Ar lite Ns | Ns Ar morelite Ns | Ns Ar none Oc Oo Fl Fl kperf Ns = Ns Ar sampler-name , Ns Ar sampler-name Ns @ Ns Ar timer-period Ns | Ns Ar timer-frequency Ns | Ns Ar kdebug-filter-desc Oc Oo Fl d Ar group Oc Oo Fl e Ar group Oc Oo Fl Fl stackshot-flags Ar extra-flags Oc Oo Fl Fl disable-coprocessors Oc Oo Fl c Ar command Oo ... Oc Oc
 Profile the system, writing trace events to an automatically named file.
 By default, this measures scheduler, VM, and system call usage, and samples
 threads on-core periodically.
@@ -406,7 +435,7 @@ for a list of groups.
 Also trace on the provided
 .Ar device-name
 or the local bridge if not specified.
-.It Fl Fl type Ns = Ns Ar full Ns | Ns Ar profile Ns | Ns Ar lite Ns | Ns Ar morelite
+.It Fl Fl type Ns = Ns Ar full Ns | Ns Ar profile Ns | Ns Ar lite Ns | Ns Ar morelite Ns | Ns Ar none
 Trace using the specified type.
 .Ar full
 is the default, while
@@ -430,6 +459,9 @@ The
 .Ar morelite
 mode has a more restrictive typefilter than
 .Ar lite .
+.Ar none
+mode acts like
+.Cm ktrace dump .
 .It Fl Fl stackshot-flags Ar extra-flags
 Pass the provided
 .Ar extra-flags
@@ -528,6 +560,6 @@ This prevents background diagnostic tools from making use of trace.
 .Sh SEE ALSO
 .Xr fs_usage 1 ,
 .Xr ktrace 5 ,
+.Xr notify 3 ,
 and
-.Xr trace 1
 .Xr trace 1

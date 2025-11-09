@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from OSString.iig */
+/* iig(DriverKit-191) generated from OSString.iig */
 
 /* OSString.iig:1-40 */
 /*
@@ -279,12 +279,21 @@ class OSString : public OSContainer, public OSStringInterface
 
 #if !KERNEL
 public:
+#ifdef OSString_DECLARE_IVARS
+OSString_DECLARE_IVARS
+#else /* OSString_DECLARE_IVARS */
     union
     {
         OSString_IVars * ivars;
         OSString_LocalIVars * lvars;
     };
+#endif /* OSString_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gOSStringMetaClass; };
+#endif /* KERNEL */
 
     using super = OSContainer;
 

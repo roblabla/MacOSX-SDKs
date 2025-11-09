@@ -2,7 +2,7 @@
 //  CSSearchQuery.h
 //  CoreSpotlight
 //
-//  Copyright © 2015 Apple. All rights reserved.
+//  Copyright © 2018 Apple. All rights reserved.
 //
 
 #import <CoreSpotlight/CSBase.h>

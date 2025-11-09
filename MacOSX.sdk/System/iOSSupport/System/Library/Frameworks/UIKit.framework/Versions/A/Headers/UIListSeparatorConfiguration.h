@@ -13,6 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class UIVisualEffect;
+
 typedef NS_ENUM(NSInteger, UIListSeparatorVisibility) {
     /// UICollectionView list sections will resolve this to an appropriate value.
     UIListSeparatorVisibilityAutomatic,
@@ -26,7 +28,7 @@ UIKIT_EXTERN const NSDirectionalEdgeInsets UIListSeparatorAutomaticInsets API_AV
 
 /// This configuration allows for fine grained control of separator appearance in a UICollectionView List section.
 /// @see UICollectionLayoutListConfiguration.separatorConfiguration
-UIKIT_EXTERN API_AVAILABLE(ios(14.5), watchos(7.4)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(14.5), watchos(7.4)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIListSeparatorConfiguration : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -53,6 +55,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.5), watchos(7.4)) API_UNAVAILABLE(tvos)
 
 /// The color to use for the separators for the item this configuration is applied to, when the item is in a multiple selection group.
 @property (nonatomic, strong) UIColor *multipleSelectionColor;
+
+/// The visual effect to use for the separators of the item this configuration is applied to.
+@property (nonatomic, copy, nullable) UIVisualEffect *visualEffect API_AVAILABLE(ios(15.0), watchos(8.0)) API_UNAVAILABLE(tvos);
 
 @end
 

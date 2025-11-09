@@ -68,13 +68,12 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+@class NSURLAuthenticationChallenge;
+
 /*!
 	@protocol		AVAssetResourceLoaderDelegate
 	@abstract		The AVAssetResourceLoaderDelegate protocol defines methods that allow your code to handle resource loading requests coming from an AVURLAsset.
 */
-
-@class NSURLAuthenticationChallenge;
-
 @protocol AVAssetResourceLoaderDelegate <NSObject>
 
 @optional
@@ -419,11 +418,11 @@ AV_INIT_UNAVAILABLE
  				An opaque identifier for the content. The value of this identifier depends on the particular system used to provide the decryption key.
  @param			options
  				Additional information necessary to obtain the key, or nil if none.
- @param			error
+ @param			outError
  				If obtaining the streaming content key request fails, will be set to an instance of NSError describing the failure.
  @result		The key request data that must be transmitted to the key vendor to obtain the content key.
 */
-- (nullable NSData *)streamingContentKeyRequestDataForApp:(NSData *)appIdentifier contentIdentifier:(NSData *)contentIdentifier options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError;
+- (nullable NSData *)streamingContentKeyRequestDataForApp:(NSData *)appIdentifier contentIdentifier:(NSData *)contentIdentifier options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError API_DEPRECATED_WITH_REPLACEMENT("-[AVContentKeyRequest makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:]", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED));
 
 /*! 
  @method 		persistentContentKeyFromKeyVendorResponse:options:error:
@@ -432,12 +431,12 @@ AV_INIT_UNAVAILABLE
  				The response returned from the key vendor as a result of a request generated from streamingContentKeyRequestDataForApp:contentIdentifier:options:error:.
  @param			options
  				Additional information necessary to obtain the persistable content key, or nil if none.
- @param			error
+ @param			outError
  				If obtaining the persistable content key fails, will be set to an instance of NSError describing the failure.
  @result		The persistable content key data that may be stored offline to answer future loading requests of the same content key.
  @discussion	The data returned from this method may be used to immediately satisfy an AVAssetResourceLoadingDataRequest, as well as any subsequent requests for the same key url. The value of AVAssetResourceLoadingContentInformationRequest.contentType must be set to AVStreamingKeyDeliveryPersistentContentKeyType when responding with data created with this method.
 */
-- (nullable NSData *)persistentContentKeyFromKeyVendorResponse:(NSData *)keyVendorResponse options:(nullable NSDictionary<NSString *, id> *)options error:(NSError **)outError API_AVAILABLE(macos(10.15), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (nullable NSData *)persistentContentKeyFromKeyVendorResponse:(NSData *)keyVendorResponse options:(nullable NSDictionary<NSString *, id> *)options error:(NSError **)outError API_DEPRECATED_WITH_REPLACEMENT("-[AVPersistableContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:]", macos(10.15, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -446,7 +445,7 @@ AV_INIT_UNAVAILABLE
  @constant		AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey
  @abstract		Specifies whether the content key request should require a persistable key to be returned from the key vendor. Value should be a NSNumber created with +[NSNumber numberWithBool:].
 */
-AVF_EXPORT NSString *const AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey API_AVAILABLE(macos(10.14), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString *const AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey API_DEPRECATED_WITH_REPLACEMENT("-[AVPersistableContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:]", macos(10.14, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 @interface AVAssetResourceLoadingRequest (AVAssetResourceLoadingRequestDeprecated)
 
@@ -465,7 +464,7 @@ AVF_EXPORT NSString *const AVAssetResourceLoadingRequestStreamingContentKeyReque
 					-[AVAssetResourceLoadingDataRequest respondWithData:] to provide data, and
 					-[AVAssetResourceLoadingRequest finishLoading] to indicate that loading is finished.
 */
-- (void)finishLoadingWithResponse:(nullable NSURLResponse *)response data:(nullable NSData *)data redirect:(nullable NSURLRequest *)redirect API_DEPRECATED("No longer supported", macos(10.15, 10.15), ios(6.0, 7.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+- (void)finishLoadingWithResponse:(nullable NSURLResponse *)response data:(nullable NSData *)data redirect:(nullable NSURLRequest *)redirect API_DEPRECATED("Use -[AVAssetResourceLoadingRequest setResponse:], -[AVAssetResourceLoadingRequest setRedirect:], -[AVAssetResourceLoadingDataRequest respondWithData:], -[AVAssetResourceLoadingRequest finishLoading]", macos(10.15, 10.15), ios(6.0, 7.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 @end
 

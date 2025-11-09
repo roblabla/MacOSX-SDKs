@@ -36,6 +36,9 @@ QLT_EXPORT @interface QLThumbnailRepresentation : NSObject
 /// Returns the NSImage representation of the thumbnail. You need to explicitly link against AppKit to use this property.
 @property (nonatomic, readonly, strong) NSImage *NSImage API_UNAVAILABLE(ios);
 
+/// Returns the the effective rect within the thumbnail image representing the content of the document. In icon mode, this is the part of the image without all the image decorations.
+@property (nonatomic, readonly) CGRect contentRect API_AVAILABLE(ios(15.0), macos(12.0));
+
 @end
 
 NS_ASSUME_NONNULL_END

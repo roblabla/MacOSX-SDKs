@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ARBody2D;
 @class ARSkeleton3D;
 
+
 /**
  An anchor representing a body in the world.
  */
@@ -33,6 +34,7 @@ API_AVAILABLE(ios(13.0))
  It is used to correct the transform's translation. Default value is 1.0.
  */
 @property (nonatomic, readonly) CGFloat estimatedScaleFactor;
+
 
 /** Unavailable */
 - (instancetype)initWithTransform:(simd_float4x4)transform NS_UNAVAILABLE;

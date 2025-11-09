@@ -4,45 +4,50 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E3DF5FDE-97EB-3459-840F-AF03509F1872
+    value:           C9C28EB2-052E-31C3-A202-242E3C2FA17B
   - target:          x86_64-maccatalyst
-    value:           E3DF5FDE-97EB-3459-840F-AF03509F1872
+    value:           C9C28EB2-052E-31C3-A202-242E3C2FA17B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3BA449B3-D9D9-39E1-B56D-B744C16C2B20
+    value:           0F619A59-6B5A-315E-B6CF-53DFCF6F7B68
   - target:          arm64e-maccatalyst
-    value:           3BA449B3-D9D9-39E1-B56D-B744C16C2B20
+    value:           0F619A59-6B5A-315E-B6CF-53DFCF6F7B68
 install-name:    '/System/Library/PrivateFrameworks/MobileBluetooth.framework/Versions/A/MobileBluetooth'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _BTAccessoryManagerAddCallbacks, _BTAccessoryManagerCancelRequestPeriodically, 
                        _BTAccessoryManagerDeregisterCustomMessageClient, _BTAccessoryManagerGenerateLinkKey, 
-                       _BTAccessoryManagerGetAACPCapabilityBits, _BTAccessoryManagerGetAccessoryInfo, 
+                       _BTAccessoryManagerGetAACPCapabilityBits, _BTAccessoryManagerGetAACPCapabilityInteger, 
+                       _BTAccessoryManagerGetAccessoryInfo, _BTAccessoryManagerGetAdaptiveLatencyJitterBufferLevel, 
                        _BTAccessoryManagerGetAnnounceCallsSupport, _BTAccessoryManagerGetAnnounceMessagesSupport, 
                        _BTAccessoryManagerGetControlCommand, _BTAccessoryManagerGetDefault, 
-                       _BTAccessoryManagerGetDeviceBatteryLevel, _BTAccessoryManagerGetDeviceColor, 
-                       _BTAccessoryManagerGetDeviceDiagnostics, _BTAccessoryManagerGetDeviceState, 
-                       _BTAccessoryManagerGetDevices, _BTAccessoryManagerGetDoubleTapAction, 
-                       _BTAccessoryManagerGetDoubleTapActionEx, _BTAccessoryManagerGetDoubleTapCapability, 
-                       _BTAccessoryManagerGetFeatureCapability, _BTAccessoryManagerGetInEarDetectionEnable, 
+                       _BTAccessoryManagerGetDeviceBatteryLevel, _BTAccessoryManagerGetDeviceBatteryStatus, 
+                       _BTAccessoryManagerGetDeviceColor, _BTAccessoryManagerGetDeviceDiagnostics, 
+                       _BTAccessoryManagerGetDeviceState, _BTAccessoryManagerGetDevices, 
+                       _BTAccessoryManagerGetDoubleTapAction, _BTAccessoryManagerGetDoubleTapActionEx, 
+                       _BTAccessoryManagerGetDoubleTapCapability, _BTAccessoryManagerGetFeatureCapability, 
+                       _BTAccessoryManagerGetGyroInformation, _BTAccessoryManagerGetInEarDetectionEnable, 
                        _BTAccessoryManagerGetInEarStatus, _BTAccessoryManagerGetMicMode, 
                        _BTAccessoryManagerGetNonAppleHAEPairedDevices, _BTAccessoryManagerGetSettingFeatureBitMask, 
-                       _BTAccessoryManagerGetSmartRouteMode, _BTAccessoryManagerGetSpatialAudioPlatformSupport, 
-                       _BTAccessoryManagerGetTimeSyncId, _BTAccessoryManagerIsAccessory, 
-                       _BTAccessoryManagerPlugInDevice, _BTAccessoryManagerReadDeviceVersionInfo, 
-                       _BTAccessoryManagerRegisterCustomMessageClient, _BTAccessoryManagerRegisterDevice, 
-                       _BTAccessoryManagerRemoteTimeSyncEnable, _BTAccessoryManagerRemoveCallbacks, 
-                       _BTAccessoryManagerSendControlCommand, _BTAccessoryManagerSendCustomMessage, 
-                       _BTAccessoryManagerSendRelayMsg, _BTAccessoryManagerSendRequestPeriodically, 
-                       _BTAccessoryManagerSensorStreamTimeSyncEnable, _BTAccessoryManagerSetDeviceStateOnPeerSrc, 
-                       _BTAccessoryManagerSetDoubleTapAction, _BTAccessoryManagerSetDoubleTapActionEx, 
-                       _BTAccessoryManagerSetInEarDetectionEnable, _BTAccessoryManagerSetLinkKeyEx, 
+                       _BTAccessoryManagerGetSmartRouteMode, _BTAccessoryManagerGetSpatialAudioActive, 
+                       _BTAccessoryManagerGetSpatialAudioAllowed, _BTAccessoryManagerGetSpatialAudioFeatureMode, 
+                       _BTAccessoryManagerGetSpatialAudioPlatformSupport, _BTAccessoryManagerGetTimeSyncId, 
+                       _BTAccessoryManagerIsAccessory, _BTAccessoryManagerPlugInDevice, 
+                       _BTAccessoryManagerReadDeviceVersionInfo, _BTAccessoryManagerRegisterCustomMessageClient, 
+                       _BTAccessoryManagerRegisterDevice, _BTAccessoryManagerRemoteTimeSyncEnable, 
+                       _BTAccessoryManagerRemoveCallbacks, _BTAccessoryManagerSendControlCommand, 
+                       _BTAccessoryManagerSendCustomMessage, _BTAccessoryManagerSendRelayMsg, 
+                       _BTAccessoryManagerSendRequestPeriodically, _BTAccessoryManagerSensorStreamTimeSyncEnable, 
+                       _BTAccessoryManagerSetDeviceStateOnPeerSrc, _BTAccessoryManagerSetDoubleTapAction, 
+                       _BTAccessoryManagerSetDoubleTapActionEx, _BTAccessoryManagerSetInEarDetectionEnable, 
+                       _BTAccessoryManagerSetIsHidden, _BTAccessoryManagerSetLinkKeyEx, 
                        _BTAccessoryManagerSetMicMode, _BTAccessoryManagerSetupCommand, 
-                       _BTAccessoryManagerSmartRouteMode, _BTAccessoryManagerUnplugDevice, 
+                       _BTAccessoryManagerSmartRouteMode, _BTAccessoryManagerSpatialAudioAllowed, 
+                       _BTAccessoryManagerSpatialAudioFeatureMode, _BTAccessoryManagerUnplugDevice, 
                        _BTAccessoryManagerUpdateConnPriorityList, _BTDeviceAddressFromString, 
                        _BTDeviceAddressToString, _BTDeviceConfigureLinkKey, _BTDeviceConnect, 
                        _BTDeviceConnectServices, _BTDeviceConnectServicesWithParameters, 

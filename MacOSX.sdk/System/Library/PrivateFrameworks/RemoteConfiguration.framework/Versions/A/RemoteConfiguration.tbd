@@ -4,18 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FCEA57BA-307B-37B7-BBA8-B7B591562727
+    value:           27189096-F5C2-3632-A391-9AD45DE4F93C
   - target:          x86_64-maccatalyst
-    value:           FCEA57BA-307B-37B7-BBA8-B7B591562727
+    value:           27189096-F5C2-3632-A391-9AD45DE4F93C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D91D6D1A-E33F-3141-8F5C-A1F2D58BC710
+    value:           D11162B7-1D71-3A9C-8003-EE27BF195834
   - target:          arm64e-maccatalyst
-    value:           D91D6D1A-E33F-3141-8F5C-A1F2D58BC710
+    value:           D11162B7-1D71-3A9C-8003-EE27BF195834
 install-name:    '/System/Library/PrivateFrameworks/RemoteConfiguration.framework/Versions/A/RemoteConfiguration'
+current-version: 127
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -63,19 +64,19 @@ exports:
                        _RCJSONArrayValue, _RCJSONBoolValue, _RCJSONDictionaryValue, 
                        _RCJSONDoubleValue, _RCJSONIntegerValue, _RCJSONStringValue, 
                        _RCLogSubsystemIdentifier, _RCMillisecondsToSeconds, _RCMix, 
-                       _RCNextHighestRelativePriority, _RCPerformBlockOnMainThread, 
-                       _RCPerformIfNonNil, _RCProtocolCast, _RCQoSClassFromQoS, _RCQoSFromQoSClass, 
-                       _RCQueuePriorityFromRelativePriority, _RCRandom, _RCRandomBetween, 
-                       _RCRepeat, _RCRequestAppConfigurationKey, _RCRequestBooksConfigurationKey, 
-                       _RCRequestFeedTypeKey, _RCRequestFeedTypePremiumKey, _RCRequestStocksConfigurationKey, 
-                       _RCRequestWeatherConfigurationKey, _RCRequestWidgetConfigurationKey, 
-                       _RCResponseAppConfigurationWrapperKey, _RCResponseErrorWrapperKey, 
-                       _RCResponseStocksConfigurationWrapperKey, _RCResponseUserInfoKey, 
-                       _RCResponseWidgetConfigurationWrapperKey, _RCReverseSquare, 
-                       _RCRound, _RCSecondsToMilliseconds, _RCSharedLog, _RCSineMap, 
-                       _RCSpecificCast, _RCStringFromQualityOfService, _RCStringFromQueuePriority, 
-                       _RCTestBlockForClass, _RCTestBlockForProtocol, _RCURLFetchDownloadTimeout, 
-                       _RCURLFetchRequestTimeout, _RCURLSessionTaskPriorityHigh, 
+                       _RCNetworkAttributionBundleIdentifier, _RCNextHighestRelativePriority, 
+                       _RCPerformBlockOnMainThread, _RCPerformIfNonNil, _RCProtocolCast, 
+                       _RCQoSClassFromQoS, _RCQoSFromQoSClass, _RCQueuePriorityFromRelativePriority, 
+                       _RCRandom, _RCRandomBetween, _RCRepeat, _RCRequestAppConfigurationKey, 
+                       _RCRequestBooksConfigurationKey, _RCRequestFeedTypeKey, _RCRequestFeedTypePremiumKey, 
+                       _RCRequestStocksConfigurationKey, _RCRequestWeatherConfigurationKey, 
+                       _RCRequestWidgetConfigurationKey, _RCResponseAppConfigurationWrapperKey, 
+                       _RCResponseErrorWrapperKey, _RCResponseStocksConfigurationWrapperKey, 
+                       _RCResponseUserInfoKey, _RCResponseWidgetConfigurationWrapperKey, 
+                       _RCReverseSquare, _RCRound, _RCSecondsToMilliseconds, _RCSharedLog, 
+                       _RCSineMap, _RCSpecificCast, _RCStringFromQualityOfService, 
+                       _RCStringFromQueuePriority, _RCTestBlockForClass, _RCTestBlockForProtocol, 
+                       _RCURLFetchDownloadTimeout, _RCURLFetchRequestTimeout, _RCURLSessionTaskPriorityHigh, 
                        _RCURLSessionTaskPriorityLow, _RCURLSessionTaskPriorityNormal, 
                        _RCURLSessionTaskPriorityVeryHigh, _RCUserInfoSegmentSetIDsKey, 
                        _RCUserInfoTreatmentIDsKey, _RCUserSegmentationBackgroundRefreshRateKey, 

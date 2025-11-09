@@ -4,6 +4,7 @@
 typedef metal::packed_float3 MTLPackedFloat3;
 #else
 #include <math.h>
+#import <Metal/MTLDefines.h>
 
 typedef struct _MTLPackedFloat3 {
     union {
@@ -35,6 +36,16 @@ typedef struct _MTLPackedFloat3 {
     }
 #endif
 } MTLPackedFloat3;
+
+MTL_INLINE MTLPackedFloat3 MTLPackedFloat3Make(float x, float y, float z)
+{
+    MTLPackedFloat3 packedFloat3;
+    packedFloat3.x = x;
+    packedFloat3.y = y;
+    packedFloat3.z = z;
+    return packedFloat3;
+}
+
 #endif
 
 typedef struct _MTLPackedFloat4x3 {
@@ -46,6 +57,13 @@ typedef struct _MTLPackedFloat4x3 {
         columns[1] = MTLPackedFloat3(0.0f, 0.0f, 0.0f);
         columns[2] = MTLPackedFloat3(0.0f, 0.0f, 0.0f);
         columns[3] = MTLPackedFloat3(0.0f, 0.0f, 0.0f);
+    }
+    
+    _MTLPackedFloat4x3(MTLPackedFloat3 column0, MTLPackedFloat3 column1, MTLPackedFloat3 column2, MTLPackedFloat3 column3) {
+        columns[0] = column0;
+        columns[1] = column1;
+        columns[2] = column2;
+        columns[3] = column3;
     }
     
 #ifndef __METAL_VERSION__

@@ -7,6 +7,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
+NS_SWIFT_NAME(TKTokenWatcher.TokenInfo)
+@interface TKTokenWatcherTokenInfo : NSObject
+
+/// TokenID
+@property (readonly, nonatomic) NSString *tokenID;
+/// The slot name (if available)
+@property (readonly, nonatomic, nullable) NSString *slotName;
+/// Localized driver name (if available)
+@property (readonly, nonatomic, nullable) NSString *driverName;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
 API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
 @interface TKTokenWatcher : NSObject
 
@@ -33,6 +49,12 @@ API_AVAILABLE(macos(10.13), ios(11.0));
 /// @param removalHandler called when a token is removed
 /// @param tokenID specified tokenID, if tokenID does not exist removal handler is called imediately
 - (void)addRemovalHandler:(void(^)(NSString* tokenID)) removalHandler forTokenID:(NSString*) tokenID;
+
+/// Return TokenInfo for specific tokenID
+/// @param tokenID specified tokenID
+/// @return A TokenInfo object, or nil if tokenID does not exist
+- (nullable TKTokenWatcherTokenInfo *)tokenInfoForTokenID:(NSString *) tokenID
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 

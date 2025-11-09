@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIDragPreviewParameters, UIView;
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @interface UIDragPreview : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIDragPreview : NSObject <NSCopying>
 
 /* UIDragPreview is a preview used after a drag has started,
  * when no lift, drop, or cancel animation is running.

@@ -33,6 +33,7 @@
 #import <AuthenticationServices/ASAuthorizationSingleSignOnProvider.h>
 #import <AuthenticationServices/ASAuthorizationSingleSignOnRequest.h>
 #import <AuthenticationServices/ASAuthorizationProviderExtensionAuthorizationRequest.h>
+#import <AuthenticationServices/ASAuthorizationProviderExtensionAuthorizationResult.h>
 
 #import <AuthenticationServices/ASExtensionErrors.h>
 
@@ -47,4 +48,26 @@
 
 #import <AuthenticationServices/ASAuthorizationAppleIDButton.h>
 #endif // !TARGET_OS_WATCH
+
+#import <AuthenticationServices/ASAuthorizationPlatformPublicKeyCredentialAssertion.h>
+#import <AuthenticationServices/ASAuthorizationPlatformPublicKeyCredentialAssertionRequest.h>
+#import <AuthenticationServices/ASAuthorizationPlatformPublicKeyCredentialDescriptor.h>
+#import <AuthenticationServices/ASAuthorizationPlatformPublicKeyCredentialProvider.h>
+#import <AuthenticationServices/ASAuthorizationPlatformPublicKeyCredentialRegistration.h>
+#import <AuthenticationServices/ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialAssertion.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialAssertionRequest.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialConstants.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialDescriptor.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialParameters.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialRegistration.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialRegistrationRequest.h>
+#import <AuthenticationServices/ASAuthorizationSecurityKeyPublicKeyCredentialAssertion.h>
+#import <AuthenticationServices/ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest.h>
+#import <AuthenticationServices/ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor.h>
+#import <AuthenticationServices/ASAuthorizationSecurityKeyPublicKeyCredentialProvider.h>
+#import <AuthenticationServices/ASAuthorizationSecurityKeyPublicKeyCredentialRegistration.h>
+#import <AuthenticationServices/ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest.h>
+#import <AuthenticationServices/ASCOSEConstants.h>
+#import <AuthenticationServices/ASPublicKeyCredential.h>
 

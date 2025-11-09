@@ -25,10 +25,14 @@ typedef NS_OPTIONS(NSUInteger, UIMenuElementAttributes) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIMenuElement : NSObject <NSCopying, NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UIMenuElement : NSObject <NSCopying, NSSecureCoding>
 
 /// The element's title.
 @property (nonatomic, readonly) NSString *title;
+
+/// The element's subtitle.
+@property (nonatomic, nullable, copy) NSString *subtitle API_AVAILABLE(ios(15.0));
 
 /// Image to be displayed alongside the element's title.
 @property (nonatomic, nullable, readonly) UIImage *image;

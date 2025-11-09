@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9C3BF3F8-2BD4-350B-9E1A-DE2EF355249A
+    value:           F186BDEA-4F06-327B-BAF1-18B317E7F434
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3ACFE6C6-CB30-344B-8CF2-9B135AE5E848
+    value:           1F9FED09-24B3-320D-9AF9-8568AB8B98CC
 install-name:    '/System/Library/Frameworks/CoreMIDIServer.framework/Versions/A/CoreMIDIServer'
 current-version: 69
 reexported-libraries:

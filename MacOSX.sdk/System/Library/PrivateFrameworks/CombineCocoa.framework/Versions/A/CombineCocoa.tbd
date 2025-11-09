@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           60BBC9CE-78DF-3B81-8DE2-3B956DC193CD
+    value:           FBF4D1C1-ABF3-367F-B920-2289192A4464
   - target:          x86_64-maccatalyst
-    value:           60BBC9CE-78DF-3B81-8DE2-3B956DC193CD
+    value:           FBF4D1C1-ABF3-367F-B920-2289192A4464
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5395FAD0-3FD2-3C05-8E54-D9BD03645C6F
+    value:           736EF64F-8D7B-309A-9286-CFC0913F0CAB
   - target:          arm64e-maccatalyst
-    value:           5395FAD0-3FD2-3C05-8E54-D9BD03645C6F
+    value:           736EF64F-8D7B-309A-9286-CFC0913F0CAB
 install-name:    '/System/Library/PrivateFrameworks/CombineCocoa.framework/Versions/A/CombineCocoa'
-current-version: 252.157
+current-version: 275
 ...

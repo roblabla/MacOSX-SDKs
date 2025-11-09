@@ -278,6 +278,8 @@ extern int      kauth_cred_issuser(kauth_cred_t _cred);
 /* GUID, NTSID helpers */
 extern guid_t   kauth_null_guid;
 extern int      kauth_guid_equal(guid_t *_guid1, guid_t *_guid2);
+
+
 __END_DECLS
 
 
@@ -481,6 +483,7 @@ extern int      kauth_authorize_action(kauth_scope_t _scope, kauth_cred_t _crede
 /* default scope handlers */
 extern int      kauth_authorize_allow(kauth_cred_t _credential, void *_idata, kauth_action_t _action,
     uintptr_t _arg0, uintptr_t _arg1, uintptr_t _arg2, uintptr_t _arg3);
+
 
 
 

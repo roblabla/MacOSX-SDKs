@@ -4,6 +4,7 @@
 //
 //  Copyright (c) 2013-2015 Apple Inc. All rights reserved.
 //
+/* clang-format off */
 
 #import <Foundation/Foundation.h>
 #import <HomeKit/HMDefines.h>
@@ -25,11 +26,6 @@ HM_EXTERN NSString * const HMServiceTypeSwitch API_AVAILABLE(ios(8.0), watchos(2
  * @brief Service type for thermostat.
  */
 HM_EXTERN NSString * const HMServiceTypeThermostat API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
-
-/*!
- * @brief Service type for accessory information.
- */
-HM_EXTERN NSString * const HMServiceTypeAccessoryInformation API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
  * @brief Service type for outlet.
@@ -181,6 +177,11 @@ HM_EXTERN NSString * const HMServiceTypeValve API_AVAILABLE(ios(11.2), watchos(4
  */
 HM_EXTERN NSString * const HMServiceTypeFaucet API_AVAILABLE(ios(11.2), watchos(4.2), tvos(11.2), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
+
+/*!
+ * @brief Service type for accessory information.
+ */
+HM_EXTERN NSString * const HMServiceTypeAccessoryInformation API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
  * @brief Service type for fan.

@@ -244,13 +244,13 @@ uintmax_t wcstoumax(const wchar_t* restrict nptr, wchar_t** restrict endptr, int
 
 _LIBCPP_BEGIN_NAMESPACE_STD
 
-using::imaxdiv_t;
-using::imaxabs;
-using::imaxdiv;
-using::strtoimax;
-using::strtoumax;
-using::wcstoimax;
-using::wcstoumax;
+_LIBCPP_USING_IF_EXISTS(::imaxdiv_t);
+_LIBCPP_USING_IF_EXISTS(::imaxabs);
+_LIBCPP_USING_IF_EXISTS(::imaxdiv);
+_LIBCPP_USING_IF_EXISTS(::strtoimax);
+_LIBCPP_USING_IF_EXISTS(::strtoumax);
+_LIBCPP_USING_IF_EXISTS(::wcstoimax);
+_LIBCPP_USING_IF_EXISTS(::wcstoumax);
 
 _LIBCPP_END_NAMESPACE_STD
 

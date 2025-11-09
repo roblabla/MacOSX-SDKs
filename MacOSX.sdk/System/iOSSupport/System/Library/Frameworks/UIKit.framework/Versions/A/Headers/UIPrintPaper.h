@@ -12,7 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(4.2))API_UNAVAILABLE(tvos) @interface UIPrintPaper : NSObject 
+UIKIT_EXTERN API_AVAILABLE(ios(4.2))API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIPrintPaper : NSObject 
 
 + (UIPrintPaper *)bestPaperForPageSize:(CGSize)contentSize withPapersFromArray:(NSArray<UIPrintPaper *> *)paperList; // for use by delegate. pass in list
 

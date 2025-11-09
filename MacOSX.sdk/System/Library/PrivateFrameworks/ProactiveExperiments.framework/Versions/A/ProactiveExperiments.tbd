@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B1129E91-00E8-36FD-A83A-4EBF1AFA2EC4
+    value:           DEE3E540-1F54-30BF-8D2D-EFB3DC2DCAE4
   - target:          x86_64-maccatalyst
-    value:           B1129E91-00E8-36FD-A83A-4EBF1AFA2EC4
+    value:           DEE3E540-1F54-30BF-8D2D-EFB3DC2DCAE4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AB24CD52-469A-377B-9A11-AEA1E07CE955
+    value:           C493E566-496B-3368-8D25-D1F03D2D2A06
   - target:          arm64e-maccatalyst
-    value:           AB24CD52-469A-377B-9A11-AEA1E07CE955
+    value:           C493E566-496B-3368-8D25-D1F03D2D2A06
 install-name:    '/System/Library/PrivateFrameworks/ProactiveExperiments.framework/Versions/A/ProactiveExperiments'
-current-version: 1115.255
+current-version: 1150
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -30,11 +30,12 @@ exports:
                        _kPREResponsesExperimentModelName, _kPREResponsesSuite, _pre_responses_handle, 
                        _pre_scales_handle, _pre_signpost_handle, _pre_xpc_handle ]
     objc-classes:    [ PREAMEngagedResponse, PREAMResponseItem, PREAMResponseListGenerated, 
-                       PREAMResponsesViewed, PREResponseItem, PREResponseTappedEvent, 
+                       PREAMResponsesViewed, PREExperimentResolver, PRELocaleDetection, 
+                       PREResponseItem, PREResponseSuggestionsExpConfig, PREResponseTappedEvent, 
                        PREResponsesClient, PREResponsesExperiment, PREResponsesGeneratedEvent, 
-                       PREResponsesMetricsPET, PREResponsesTrial, PREResponsesTrialSimulator, 
-                       PREUMEngagedResponseList, PREUMMessageMetadata, PREUMResponseItem, 
-                       PREUMResponseList, PREUMTrialExperiment, PREXPCClientHelpers ]
+                       PREResponsesMetricsPET, PRETrialCompletionResult, PREUMEngagedResponseList, 
+                       PREUMMessageMetadata, PREUMResponseItem, PREUMResponseList, 
+                       PREUMTrialExperiment, PREXPCClientHelpers ]
     objc-ivars:      [ PREAMEngagedResponse._ageGroup, PREAMEngagedResponse._experimentId, 
                        PREAMEngagedResponse._generationStatus, PREAMEngagedResponse._has, 
                        PREAMEngagedResponse._hasQuestionMark, PREAMEngagedResponse._hostProcess, 

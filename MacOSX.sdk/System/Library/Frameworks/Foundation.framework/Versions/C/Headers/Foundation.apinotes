@@ -1257,6 +1257,8 @@ Tags:
   SwiftName: URLCredential.Persistence
 - Name: NSURLErrorNetworkUnavailableReason
   Availability: nonswift
+- Name: NSURLRequestAttribution
+  SwiftName: NSURLRequest.Attribution
 - Name: NSURLRequestCachePolicy
   SwiftName: NSURLRequest.CachePolicy
 - Name: NSURLRequestNetworkServiceType

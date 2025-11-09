@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2019 Apple Inc. All rights reserved.
+	Copyright 2010-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -14,7 +14,9 @@
 	@abstract	An AVAssetTrack object provides provides the track-level inspection interface for all assets.
  
 	@discussion
-		AVAssetTrack adopts the AVAsynchronousKeyValueLoading protocol. Methods in the protocol should be used to access a track's properties without blocking the current thread. To cancel load requests for all keys of AVAssetTrack one must message the parent AVAsset object (for example, [track.asset cancelLoading])
+		AVAssetTrack adopts the AVAsynchronousKeyValueLoading protocol. Methods in the protocol should be used to access a track's properties without blocking the current thread. To cancel load requests for all keys of AVAssetTrack one must message the parent AVAsset object (for example, [track.asset cancelLoading]).
+ 
+		For clients who want to examine a subset of the metadata or other parts of the track, asynchronous methods like -loadMetadataForFormat:completionHandler: can be used to load this information without blocking. When using these asynchronous methods, it is not necessary to load the associated property beforehand. Swift clients can also use the load(:) method to load properties in a type safe manner.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -177,6 +179,17 @@ AV_INIT_UNAVAILABLE
 - (nullable AVAssetTrackSegment *)segmentForTrackTime:(CMTime)trackTime;
 
 /*!
+	@method			loadSegmentForTrackTime:completionHandler:
+	@abstract		Loads the AVAssetTrackSegment from the segments array with a target timeRange that either contains the specified track time or is the closest to it among the target timeRanges of the track's segments.
+	@param			trackTime
+					The trackTime for which an AVAssetTrackSegment is requested.
+	@param			completionHandler
+					A block that is invoked when loading is complete, vending an AVAssetTrackSegment or an error.
+	@discussion		If the trackTime does not map to a sample presentation time (e.g. it's outside the track's timeRange), the segment closest in time to the specified trackTime is returned.
+*/
+- (void)loadSegmentForTrackTime:(CMTime)trackTime completionHandler:(void (^)(AVAssetTrackSegment * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
 	@method			samplePresentationTimeForTrackTime:
 	@abstract		Maps the specified trackTime through the appropriate time mapping and returns the resulting sample presentation time.
 	@param			trackTime
@@ -184,6 +197,16 @@ AV_INIT_UNAVAILABLE
 	@result			A CMTime; will be invalid if the trackTime is out of range
 */
 - (CMTime)samplePresentationTimeForTrackTime:(CMTime)trackTime;
+
+/*!
+	@method			loadSamplePresentationTimeForTrackTime:completionHandler:
+	@abstract		Maps the specified trackTime through the appropriate time mapping and loads the resulting sample presentation time.
+	@param			trackTime
+					The trackTime for which a sample presentation time is requested.
+	@param			completionHandler
+					A block that is invoked when loading is complete, vending a CMTime (which will be invalid if the trackTime is out of range) or an error.
+*/
+- (void)loadSamplePresentationTimeForTrackTime:(CMTime)trackTime completionHandler:(void (^)(CMTime, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 
@@ -212,6 +235,16 @@ AV_INIT_UNAVAILABLE
 	@discussion		Becomes callable without blocking when the key @"availableMetadataFormats" has been loaded
 */
 - (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format;
+
+/*!
+	@method			loadMetadataForFormat:completionHandler:
+	@abstract		Loads an NSArray of AVMetadataItems, one for each metadata item in the container of the specified format.
+	@param			format
+					The metadata format for which items are requested.
+	@param			completionHandler
+					A block that is invoked when loading is complete, vending the array of metadata items (which may be empty if there is no metadata of the specified format) or an error.
+*/
+- (void)loadMetadataForFormat:(AVMetadataFormat)format completionHandler:(void (^)(NSArray<AVMetadataItem *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 
@@ -297,10 +330,18 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent A
 */
 - (NSArray<AVAssetTrack *> *)associatedTracksOfType:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
+/*!
+	@method			loadAssociatedTracksOfType:completionHandler:
+	@abstract		Provides an NSArray of AVAssetTracks, one for each track associated with the receiver with the specified type of track association.
+	@param			trackAssociationType
+					The type of track association for which associated tracks are requested.
+	@param			completionHandler
+					A block that is invoked when loading is comlete, vending an array of tracks (which may be empty if there is no associated tracks of the specified type) or an error.
+`*/
+- (void)loadAssociatedTracksOfType:(AVTrackAssociationType)trackAssociationType completionHandler:(void (^)(NSArray<AVAssetTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
 @end
 
-
-#if !TARGET_OS_IPHONE
 
 @class AVSampleCursor;
 
@@ -338,8 +379,6 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent A
 - (nullable AVSampleCursor *)makeSampleCursorAtLastSampleInDecodeOrder API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
 
 @end
-
-#endif // !TARGET_OS_IPHONE
 
 #pragma mark --- AVAssetTrack change notifications ---
 

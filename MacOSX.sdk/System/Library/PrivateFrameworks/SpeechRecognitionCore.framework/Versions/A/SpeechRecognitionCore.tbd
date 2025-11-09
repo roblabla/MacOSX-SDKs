@@ -3,25 +3,28 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E427C8FB-4A03-38F4-BEA9-42C60327FB5E
+    value:           794C3C4C-251C-3573-A7E6-5EE02EF80318
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           602651BD-BEB9-33BC-BD88-EBBC0E532544
+    value:           78E478FE-E193-319E-BD17-78129BB87BD5
 install-name:    '/System/Library/PrivateFrameworks/SpeechRecognitionCore.framework/Versions/A/SpeechRecognitionCore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _RXAdLibCreate, _RXEngineTypeForLocaleIdentifier, _RXGetAssetFallbackLocaleIdentifier, 
-                       _RXGetAssetFallbackLocales, _RXGlobalSetDownloadProgressCallback, 
-                       _RXLanguageModelCreate, _RXLanguageModelCreateWithURL, _RXLanguageModelWriteToURL, 
-                       _RXLanguageObjectAddObject, _RXLanguageObjectAddPhrase, _RXLanguageObjectApplyBlock, 
+                       _RXGetAssetFallbackLocales, _RXGetSupportedNashvilleLocaleIdentifiers, 
+                       _RXGetSupportedQuasarLocaleIdentifiers, _RXGlobalSetDownloadProgressCallback, 
+                       _RXIsLocaleWithNoSpaceInPostITN, _RXLanguageModelCreate, _RXLanguageModelCreateWithURL, 
+                       _RXLanguageModelWriteToURL, _RXLanguageObjectAddObject, _RXLanguageObjectAddPhrase, 
+                       _RXLanguageObjectAddPhraseUsingRecSystem, _RXLanguageObjectApplyBlock, 
                        _RXLanguageObjectGetCount, _RXLanguageObjectGetObjectAtIndex, 
                        _RXLanguageObjectGetType, _RXLanguageObjectGetTypeID, _RXLanguageObjectRemoveObjectAtIndex, 
                        _RXLanguageObjectSetObjectAtIndex, _RXObjectCopyProperty, 
-                       _RXObjectSetProperty, _RXPathCreate, _RXRecognitionSystemAddLeadingContext, 
-                       _RXRecognitionSystemAddOtherContext, _RXRecognitionSystemAddTraining, 
-                       _RXRecognitionSystemCreate, _RXRecognitionSystemGetTypeID, 
-                       _RXRecognitionSystemReset, _RXRecognitionSystemSetResetMode, 
+                       _RXObjectCopyPropertyWithLocale, _RXObjectSetProperty, _RXPathCreate, 
+                       _RXRecognitionSystemAddLeadingContext, _RXRecognitionSystemAddOtherContext, 
+                       _RXRecognitionSystemAddTraining, _RXRecognitionSystemCreate, 
+                       _RXRecognitionSystemGetTypeID, _RXRecognitionSystemReset, 
+                       _RXRecognitionSystemSaveUserProfileToFile, _RXRecognitionSystemSetResetMode, 
                        _RXRecognizerCreate, _RXRecognizerGetTypeID, _RXSignpostLog, 
                        _RXVocabularyCreateWithLocale, _RXVocabularyCreateWithURL, 
                        _RXVocabularyGetTypeID, _RXWordCreate, _kRXRecognitionSystemTrainingCategory_Contact, 

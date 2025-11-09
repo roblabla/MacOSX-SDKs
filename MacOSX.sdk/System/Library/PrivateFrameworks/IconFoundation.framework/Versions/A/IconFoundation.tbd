@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           61411CF3-1684-3C4E-B726-A317BCCC61A3
+    value:           7A00F1F6-DA9B-33DD-B627-D38DE7C34128
   - target:          x86_64-maccatalyst
-    value:           61411CF3-1684-3C4E-B726-A317BCCC61A3
+    value:           7A00F1F6-DA9B-33DD-B627-D38DE7C34128
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           226372DB-50FA-3C40-A84C-142AE8805EAD
+    value:           9591114B-1E0F-31EA-8275-9F7C613DD919
   - target:          arm64e-maccatalyst
-    value:           226372DB-50FA-3C40-A84C-142AE8805EAD
+    value:           9591114B-1E0F-31EA-8275-9F7C613DD919
 install-name:    '/System/Library/PrivateFrameworks/IconFoundation.framework/Versions/A/IconFoundation'
-current-version: 479.4
+current-version: 493
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

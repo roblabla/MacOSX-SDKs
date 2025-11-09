@@ -9,6 +9,7 @@
 #import <FileProvider/NSFileProviderDefines.h>
 #import <FileProvider/NSFileProviderItem.h>
 
+FILEPROVIDER_API_AVAILABILITY_V3
 typedef NSString *NSFileProviderItemDecorationIdentifier NS_TYPED_EXTENSIBLE_ENUM;
 
 /**
@@ -59,6 +60,7 @@ typedef NSString *NSFileProviderItemDecorationIdentifier NS_TYPED_EXTENSIBLE_ENU
 
 */
 
+FILEPROVIDER_API_AVAILABILITY_V3
 @protocol NSFileProviderItemDecorating <NSFileProviderItem>
 /**
  Returns an array of decorations for the item.
@@ -66,5 +68,5 @@ typedef NSString *NSFileProviderItemDecorationIdentifier NS_TYPED_EXTENSIBLE_ENU
  To adopt this protocol, implement the -decorations method on your NSFileProviderItem to return valid decoration identifiers
  from your Info.plist.
  */
- @property (nonatomic, nullable, readonly, strong) NSArray <NSFileProviderItemDecorationIdentifier> *decorations FILEPROVIDER_API_AVAILABILITY_V3;
+ @property (nonatomic, nullable, readonly, strong) NSArray <NSFileProviderItemDecorationIdentifier> *decorations;
 @end

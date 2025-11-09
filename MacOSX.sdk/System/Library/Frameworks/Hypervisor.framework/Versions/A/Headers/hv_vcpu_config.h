@@ -28,7 +28,7 @@ hv_vcpu_config_t
 hv_vcpu_config_create(void);
 
 /*!
- * @function   hv_feature_reg
+ * @enum       hv_feature_reg_t
  * @abstract   ARM feature register.
  */
 OS_ENUM(hv_feature_reg, uint32_t,
@@ -64,7 +64,7 @@ hv_return_t hv_vcpu_config_get_feature_reg(hv_vcpu_config_t config,
  * @abstract  For a vcpu configuration, return the given CCSIDR_EL1 values for a given cache type
  * @param     config Configuration.
  * @param     cache_type The cache type.
- * @param     value Pointer to the CCSIDR_EL1 register values.
+ * @param     values Pointer to the CCSIDR_EL1 register values.
  * @result    0 on success or error code.
  */
 API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)

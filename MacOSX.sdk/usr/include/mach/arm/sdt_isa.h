@@ -30,6 +30,8 @@
 #ifndef _MACH_ARM_SDT_ISA_H
 #define _MACH_ARM_SDT_ISA_H
 
+#if defined (__arm__) || defined (__arm64__)
+
 /*
  * Only define when testing.  This makes the calls into actual calls to
  * test functions.
@@ -407,5 +409,7 @@
 	        );
 
 #endif /* __arm__ */
+
+#endif /* defined (__arm__) || defined (__arm64__) */
 
 #endif  /* _MACH_ARM_SDT_ISA_H */

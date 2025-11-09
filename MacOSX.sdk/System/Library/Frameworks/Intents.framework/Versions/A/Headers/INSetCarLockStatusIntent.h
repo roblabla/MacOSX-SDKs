@@ -79,10 +79,10 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolveLockedForSetCarLockStatus:(INSetCarLockStatusIntent *)intent
-                    withCompletion:(void (^)(INBooleanResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveLocked(for:with:));
+                          withCompletion:(void (^)(INBooleanResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveLocked(for:with:));
 
 - (void)resolveCarNameForSetCarLockStatus:(INSetCarLockStatusIntent *)intent
-                    withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCarName(for:with:));
+                           withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCarName(for:with:));
 
 @end
 

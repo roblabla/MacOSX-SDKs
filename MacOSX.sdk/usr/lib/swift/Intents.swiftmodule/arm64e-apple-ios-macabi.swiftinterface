@@ -1,24 +1,25 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target arm64e-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftIntents -swift-version 5 -enforce-exclusivity=checked -O -module-name Intents
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftIntents -swift-version 5 -enforce-exclusivity=checked -O -module-name Intents
 import Foundation
 @_exported import Intents
 import Swift
+import _Concurrency
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 14.0, *)
 @available(macOS, unavailable)
-extension INMediaSearch {
+extension Intents.INMediaSearch {
   @nonobjc convenience public init(mediaType: Intents.INMediaItemType = .unknown, sortOrder: Intents.INMediaSortOrder = .unknown, mediaName: Swift.String? = nil, artistName: Swift.String? = nil, albumName: Swift.String? = nil, genreNames: [Swift.String]? = nil, moodNames: [Swift.String]? = nil, releaseDate: Intents.INDateComponentsRange? = nil, reference: Intents.INMediaReference = .unknown, mediaIdentifier: Swift.String? = nil)
 }
 @available(macOS 10.15, iOS 11.0, watchOS 5.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INParameter {
+extension Intents.INParameter {
   @nonobjc convenience public init?<Root, Value>(keyPath: Swift.KeyPath<Root, Value>)
 }
 @available(macOS 10.15, iOS 10.3, watchOS 3.2, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INSetCarLockStatusIntent {
+extension Intents.INSetCarLockStatusIntent {
   @nonobjc convenience public init(locked: Swift.Bool?, carName: Intents.INSpeakableString?)
   @nonobjc final public var locked: Swift.Bool? {
     get
@@ -27,7 +28,7 @@ extension INSetCarLockStatusIntent {
 @available(macOS 10.15, iOS 10.0, watchOS 3.2, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INRequestRideIntent {
+extension Intents.INRequestRideIntent {
   @nonobjc convenience public init(pickupLocation: CoreLocation.CLPlacemark? = nil, dropOffLocation: CoreLocation.CLPlacemark? = nil, rideOptionName: Intents.INSpeakableString? = nil, partySize: Swift.Int? = nil, paymentMethod: Intents.INPaymentMethod? = nil, scheduledPickupTime: Intents.INDateComponentsRange? = nil)
   @nonobjc final public var partySize: Swift.Int? {
     get
@@ -36,13 +37,13 @@ extension INRequestRideIntent {
 @available(macOS 10.15, iOS 11.0, watchOS 4.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INNotebookItemTypeResolutionResult {
+extension Intents.INNotebookItemTypeResolutionResult {
   @nonobjc public static func disambiguation(with notebookItemTypesToDisambiguate: [Intents.INNotebookItemType]) -> Self
 }
 @available(macOS 10.15, iOS 10.0, watchOS 3.2, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INRideOption {
+extension Intents.INRideOption {
   @available(iOS 10.0, watchOS 3.2, *)
   @available(swift, obsoleted: 4)
   @nonobjc public var usesMeteredFare: Foundation.NSNumber? {
@@ -57,12 +58,12 @@ extension INRideOption {
   }
 }
 @available(iOS 10.0, macOS 11.0, watchOS 3.2, tvOS 14.0, *)
-extension INIntegerResolutionResult {
+extension Intents.INIntegerResolutionResult {
   @nonobjc public static func confirmationRequired(with valueToConfirm: Swift.Int?) -> Self
 }
 @available(macOS 10.15, iOS 12.0, watchOS 5.0, tvOS 14.0, *)
 @available(macOS, unavailable)
-extension INPlayMediaIntent {
+extension Intents.INPlayMediaIntent {
   @available(iOS, introduced: 12.0, obsoleted: 13.0)
   @available(watchOS, introduced: 5.0, obsoleted: 6.0)
   @available(tvOS, unavailable)
@@ -83,7 +84,7 @@ extension INPlayMediaIntent {
 @available(macOS 10.15, iOS 10.0, watchOS 3.2, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INSearchCallHistoryIntent {
+extension Intents.INSearchCallHistoryIntent {
   @available(iOS 11.0, watchOS 4.0, *)
   @nonobjc convenience public init(dateCreated: Intents.INDateComponentsRange? = nil, recipient: Intents.INPerson? = nil, callCapabilities: Intents.INCallCapabilityOptions, callTypes: Intents.INCallRecordTypeOptions, unseen: Swift.Bool? = nil)
   @available(iOS 11.0, watchOS 4.0, *)
@@ -94,7 +95,7 @@ extension INSearchCallHistoryIntent {
 @available(macOS 10.15, iOS 10.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INSetDefrosterSettingsInCarIntent {
+extension Intents.INSetDefrosterSettingsInCarIntent {
   @available(iOS 12.0, *)
   @nonobjc convenience public init(enable: Swift.Bool? = nil, defroster: Intents.INCarDefroster = .unknown, carName: Intents.INSpeakableString? = nil)
   @available(iOS, obsoleted: 12.0)
@@ -106,7 +107,7 @@ extension INSetDefrosterSettingsInCarIntent {
 @available(macOS 10.15, iOS 10.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INSetClimateSettingsInCarIntent {
+extension Intents.INSetClimateSettingsInCarIntent {
   @available(iOS 12.0, *)
   @nonobjc convenience public init(enableFan: Swift.Bool? = nil, enableAirConditioner: Swift.Bool? = nil, enableClimateControl: Swift.Bool? = nil, enableAutoMode: Swift.Bool? = nil, airCirculationMode: Intents.INCarAirCirculationMode = .unknown, fanSpeedIndex: Swift.Int? = nil, fanSpeedPercentage: Swift.Double? = nil, relativeFanSpeedSetting: Intents.INRelativeSetting = .unknown, temperature: Foundation.Measurement<Foundation.UnitTemperature>? = nil, relativeTemperatureSetting: Intents.INRelativeSetting = .unknown, climateZone: Intents.INCarSeat = .unknown, carName: Intents.INSpeakableString? = nil)
   @available(iOS, obsoleted: 12.0)
@@ -133,7 +134,7 @@ extension INSetClimateSettingsInCarIntent {
 @available(macOS 10.15, iOS 10.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-@nonobjc extension INSetProfileInCarIntent {
+@nonobjc extension Intents.INSetProfileInCarIntent {
   @available(iOS 12.0, *)
   convenience public init(profileNumber: Swift.Int? = nil, profileName: Swift.String? = nil, isDefaultProfile: Swift.Bool? = nil, carName: Intents.INSpeakableString? = nil)
   @available(iOS, introduced: 11.0, obsoleted: 12.0)
@@ -174,7 +175,7 @@ extension INSetClimateSettingsInCarIntent {
 @available(macOS 10.15, iOS 10.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INSetSeatSettingsInCarIntent {
+extension Intents.INSetSeatSettingsInCarIntent {
   @available(iOS 12.0, *)
   @nonobjc convenience public init(enableHeating: Swift.Bool? = nil, enableCooling: Swift.Bool? = nil, enableMassage: Swift.Bool? = nil, seat: Intents.INCarSeat = .unknown, level: Swift.Int? = nil, relativeLevel: Intents.INRelativeSetting = .unknown, carName: Intents.INSpeakableString? = nil)
   @available(iOS, obsoleted: 12.0)
@@ -192,7 +193,7 @@ extension INSetSeatSettingsInCarIntent {
     get
   }
 }
-extension NSString {
+extension Foundation.NSString {
   @available(iOS 12.0, macOS 10.14, watchOS 5.0, tvOS 14.0, *)
   public class func deferredLocalizedIntentsString(with format: Swift.String, _ args: Swift.CVarArg...) -> Foundation.NSString
   @available(iOS 12.0, macOS 10.14, watchOS 5.0, *)
@@ -203,7 +204,7 @@ extension NSString {
 @available(macOS 10.15, iOS 11.0, watchOS 4.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INCallRecord {
+extension Intents.INCallRecord {
   @available(iOS 13.0, watchOS 6.0, *)
   @nonobjc convenience public init(identifier: Swift.String, dateCreated: Foundation.Date? = nil, caller: Intents.INPerson? = nil, callRecordType: Intents.INCallRecordType = .unknown, callCapability: Intents.INCallCapability = .unknown, callDuration: Swift.Double? = nil, unseen: Swift.Bool? = nil, numberOfCalls: Swift.Int? = nil)
   @available(iOS, obsoleted: 13.0)
@@ -221,12 +222,12 @@ extension INCallRecord {
   }
 }
 @available(iOS 10.0, macOS 11.0, watchOS 3.2, tvOS 14.0, *)
-extension INDoubleResolutionResult {
+extension Intents.INDoubleResolutionResult {
   @nonobjc public static func confirmationRequired(with valueToConfirm: Swift.Double?) -> Self
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 14.0, *)
 @available(macOS, unavailable)
-extension INMediaUserContext {
+extension Intents.INMediaUserContext {
   @available(iOS 13.0, watchOS 6.0, tvOS 14.0, *)
   @nonobjc final public var numberOfLibraryItems: Swift.Int? {
     get
@@ -235,24 +236,24 @@ extension INMediaUserContext {
 }
 public protocol _INIntentSetImageKeyPath {
 }
-extension _INIntentSetImageKeyPath {
+extension Intents._INIntentSetImageKeyPath {
   @available(iOS 12.0, watchOS 5.0, *)
   public func setImage<Value>(_ image: Intents.INImage?, forParameterNamed parameterName: Swift.KeyPath<Self, Value>)
   @available(iOS 12.0, watchOS 5.0, *)
   public func image<Value>(forParameterNamed parameterName: Swift.KeyPath<Self, Value>) -> Intents.INImage?
 }
 @available(iOS 10.0, macOS 11.0, watchOS 3.2, tvOS 14.0, *)
-extension INIntent : Intents._INIntentSetImageKeyPath {
+extension Intents.INIntent : Intents._INIntentSetImageKeyPath {
 }
 public protocol INIntentSetImageKeyPath : Intents._INIntentSetImageKeyPath {
 }
 @available(iOS 10.0, macOS 11.0, watchOS 3.2, tvOS 14.0, *)
-extension INIntent : Intents.INIntentSetImageKeyPath {
+extension Intents.INIntent : Intents.INIntentSetImageKeyPath {
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INDeleteTasksIntent {
+extension Intents.INDeleteTasksIntent {
   @nonobjc convenience public init(taskList: Intents.INTaskList? = nil, tasks: [Intents.INTask]? = nil, all: Swift.Bool? = nil)
   @nonobjc final public var all: Swift.Bool? {
     get
@@ -261,7 +262,7 @@ extension INDeleteTasksIntent {
 @available(macOS 10.15, iOS 10.3, watchOS 3.2, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INGetCarPowerLevelStatusIntentResponse {
+extension Intents.INGetCarPowerLevelStatusIntentResponse {
   @nonobjc final public var fuelPercentRemaining: Swift.Float? {
     get
     set(newPercent)
@@ -284,7 +285,7 @@ extension INGetCarPowerLevelStatusIntentResponse {
 @available(macOS 10.15, iOS 10.0, watchOS 3.2, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INSearchForPhotosIntentResponse {
+extension Intents.INSearchForPhotosIntentResponse {
   @nonobjc final public var searchResultsCount: Swift.Int? {
     get
     set
@@ -293,7 +294,7 @@ extension INSearchForPhotosIntentResponse {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INSnoozeTasksIntent {
+extension Intents.INSnoozeTasksIntent {
   @nonobjc convenience public init(tasks: [Intents.INTask]? = nil, nextTriggerTime: Intents.INDateComponentsRange? = nil, all: Swift.Bool? = nil)
   @nonobjc final public var all: Swift.Bool? {
     get
@@ -302,7 +303,7 @@ extension INSnoozeTasksIntent {
 @available(macOS 10.15, iOS 10.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INSaveProfileInCarIntent {
+extension Intents.INSaveProfileInCarIntent {
   @nonobjc convenience public init(profileNumber: Swift.Int? = nil, profileLabel: Swift.String? = nil)
   @nonobjc final public var profileNumber: Swift.Int? {
     get
@@ -317,28 +318,28 @@ public enum INMediaDestination : Foundation.ReferenceConvertible {
 }
 @available(macOS 10.15.4, iOS 13.0, watchOS 6.0, tvOS 14.0, *)
 @available(macOS, unavailable)
-extension INMediaDestination {
+extension Intents.INMediaDestination {
   public var playlistName: Swift.String? {
     get
   }
 }
 @available(macOS 10.15.4, iOS 13.0, watchOS 6.0, tvOS 14.0, *)
 @available(macOS, unavailable)
-extension INMediaDestination : Swift.CustomStringConvertible {
+extension Intents.INMediaDestination : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
 @available(macOS 10.15.4, iOS 13.0, watchOS 6.0, tvOS 14.0, *)
 @available(macOS, unavailable)
-extension INMediaDestination : Swift.CustomDebugStringConvertible {
+extension Intents.INMediaDestination : Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get
   }
 }
 @available(macOS 10.15.4, iOS 13.0, watchOS 6.0, tvOS 14.0, *)
 @available(macOS, unavailable)
-extension INMediaDestination : Swift.Hashable {
+extension Intents.INMediaDestination : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
@@ -346,12 +347,12 @@ extension INMediaDestination : Swift.Hashable {
 }
 @available(macOS 10.15.4, iOS 13.0, watchOS 6.0, tvOS 14.0, *)
 @available(macOS, unavailable)
-extension INMediaDestination : Swift.Equatable {
+extension Intents.INMediaDestination : Swift.Equatable {
   public static func == (a: Intents.INMediaDestination, b: Intents.INMediaDestination) -> Swift.Bool
 }
 @available(macOS 10.15.4, iOS 13.0, watchOS 6.0, tvOS 14.0, *)
 @available(macOS, unavailable)
-extension INMediaDestination : Swift._ObjectiveCBridgeable {
+extension Intents.INMediaDestination : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Intents.INMediaDestinationReference
   public static func _forceBridgeFromObjectiveC(_ source: Intents.INMediaDestinationReference, result: inout Intents.INMediaDestination?)
   public static func _conditionallyBridgeFromObjectiveC(_ source: Intents.INMediaDestinationReference, result: inout Intents.INMediaDestination?) -> Swift.Bool
@@ -361,7 +362,7 @@ extension INMediaDestination : Swift._ObjectiveCBridgeable {
 @available(macOS 10.15, iOS 10.0, watchOS 3.2, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INStartWorkoutIntent {
+extension Intents.INStartWorkoutIntent {
   @nonobjc convenience public init(workoutName: Intents.INSpeakableString? = nil, goalValue: Swift.Double? = nil, workoutGoalUnitType: Intents.INWorkoutGoalUnitType = .unknown, workoutLocationType: Intents.INWorkoutLocationType = .unknown, isOpenEnded: Swift.Bool? = nil)
   @nonobjc final public var goalValue: Swift.Double? {
     get
@@ -373,7 +374,7 @@ extension INStartWorkoutIntent {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INRestaurantReservation {
+extension Intents.INRestaurantReservation {
   @nonobjc convenience public init(itemReference: Intents.INSpeakableString, reservationNumber: Swift.String? = nil, bookingTime: Foundation.Date? = nil, reservationStatus: Intents.INReservationStatus = .unknown, reservationHolderName: Swift.String? = nil, actions: [Intents.INReservationAction]? = nil, reservationDuration: Intents.INDateComponentsRange, partySize: Swift.Int? = nil, restaurantLocation: CoreLocation.CLPlacemark)
   @available(macOS 11.0, iOS 14.0, watchOS 7.0, *)
   @nonobjc convenience public init(itemReference: Intents.INSpeakableString, reservationNumber: Swift.String? = nil, bookingTime: Foundation.Date? = nil, reservationStatus: Intents.INReservationStatus = .unknown, reservationHolderName: Swift.String? = nil, actions: [Intents.INReservationAction]? = nil, url: Foundation.URL? = nil, reservationDuration: Intents.INDateComponentsRange, partySize: Swift.Int? = nil, restaurantLocation: CoreLocation.CLPlacemark)
@@ -382,7 +383,7 @@ extension INRestaurantReservation {
   }
 }
 @available(iOS 10.0, macOS 11.0, watchOS 3.2, tvOS 14.0, *)
-extension INBooleanResolutionResult {
+extension Intents.INBooleanResolutionResult {
   @nonobjc public static func confirmationRequired(with valueToConfirm: Swift.Bool?) -> Self
 }
 @available(iOS 12.0, macOS 11.0, watchOS 5.0, *)
@@ -394,13 +395,13 @@ public enum INShortcut : Foundation.ReferenceConvertible {
 }
 @available(iOS 12.0, macOS 11.0, watchOS 5.0, *)
 @available(tvOS, unavailable)
-extension INShortcut {
+extension Intents.INShortcut {
   public init?(intent: Intents.INIntent)
   public init(userActivity: Foundation.NSUserActivity)
 }
 @available(iOS 12.0, macOS 11.0, watchOS 5.0, *)
 @available(tvOS, unavailable)
-extension INShortcut {
+extension Intents.INShortcut {
   public var intent: Intents.INIntent? {
     get
   }
@@ -410,21 +411,21 @@ extension INShortcut {
 }
 @available(iOS 12.0, macOS 11.0, watchOS 5.0, *)
 @available(tvOS, unavailable)
-extension INShortcut : Swift.CustomStringConvertible {
+extension Intents.INShortcut : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
 @available(iOS 12.0, macOS 11.0, watchOS 5.0, *)
 @available(tvOS, unavailable)
-extension INShortcut : Swift.CustomDebugStringConvertible {
+extension Intents.INShortcut : Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get
   }
 }
 @available(iOS 12.0, macOS 11.0, watchOS 5.0, *)
 @available(tvOS, unavailable)
-extension INShortcut : Swift.Hashable {
+extension Intents.INShortcut : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
@@ -432,12 +433,12 @@ extension INShortcut : Swift.Hashable {
 }
 @available(iOS 12.0, macOS 11.0, watchOS 5.0, *)
 @available(tvOS, unavailable)
-extension INShortcut : Swift.Equatable {
+extension Intents.INShortcut : Swift.Equatable {
   public static func == (a: Intents.INShortcut, b: Intents.INShortcut) -> Swift.Bool
 }
 @available(iOS 12.0, macOS 11.0, watchOS 5.0, *)
 @available(tvOS, unavailable)
-extension INShortcut : Swift._ObjectiveCBridgeable {
+extension Intents.INShortcut : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Intents.INShortcutReference
   public static func _forceBridgeFromObjectiveC(_ source: Intents.INShortcutReference, result: inout Intents.INShortcut?)
   public static func _conditionallyBridgeFromObjectiveC(_ source: Intents.INShortcutReference, result: inout Intents.INShortcut?) -> Swift.Bool
@@ -447,7 +448,7 @@ extension INShortcut : Swift._ObjectiveCBridgeable {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INLodgingReservation {
+extension Intents.INLodgingReservation {
   @nonobjc convenience public init(itemReference: Intents.INSpeakableString, reservationNumber: Swift.String? = nil, bookingTime: Foundation.Date? = nil, reservationStatus: Intents.INReservationStatus = .unknown, reservationHolderName: Swift.String? = nil, actions: [Intents.INReservationAction]? = nil, lodgingBusinessLocation: CoreLocation.CLPlacemark, reservationDuration: Intents.INDateComponentsRange, numberOfAdults: Swift.Int? = nil, numberOfChildren: Swift.Int? = nil)
   @available(macOS 11.0, iOS 14.0, watchOS 7.0, *)
   @nonobjc convenience public init(itemReference: Intents.INSpeakableString, reservationNumber: Swift.String? = nil, bookingTime: Foundation.Date? = nil, reservationStatus: Intents.INReservationStatus = .unknown, reservationHolderName: Swift.String? = nil, actions: [Intents.INReservationAction]? = nil, url: Foundation.URL? = nil, lodgingBusinessLocation: CoreLocation.CLPlacemark, reservationDuration: Intents.INDateComponentsRange, numberOfAdults: Swift.Int? = nil, numberOfChildren: Swift.Int? = nil)
@@ -461,16 +462,24 @@ extension INLodgingReservation {
 @available(macOS 10.15, iOS 10.3, watchOS 3.2, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INGetCarLockStatusIntentResponse {
+extension Intents.INGetCarLockStatusIntentResponse {
   @nonobjc final public var locked: Swift.Bool? {
     get
     set(newLocked)
   }
 }
+@available(iOS 15.0, macOS 12.0, watchOS 8.0, *)
+@available(tvOS, unavailable)
+extension Intents.INFocusStatus {
+  @nonobjc convenience public init(isFocused: Swift.Bool? = nil)
+  @nonobjc final public var isFocused: Swift.Bool? {
+    get
+  }
+}
 @available(macOS 10.15, iOS 10.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INSetRadioStationIntent {
+extension Intents.INSetRadioStationIntent {
   @nonobjc convenience public init(radioType: Intents.INRadioType = .unknown, frequency: Swift.Double? = nil, stationName: Swift.String? = nil, channel: Swift.String? = nil, presetNumber: Swift.Int? = nil)
   @nonobjc final public var frequency: Swift.Double? {
     get
@@ -482,7 +491,7 @@ extension INSetRadioStationIntent {
 @available(macOS 10.15, iOS 10.0, watchOS 3.2, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-extension INStartPhotoPlaybackIntentResponse {
+extension Intents.INStartPhotoPlaybackIntentResponse {
   @nonobjc final public var searchResultsCount: Swift.Int? {
     get
     set

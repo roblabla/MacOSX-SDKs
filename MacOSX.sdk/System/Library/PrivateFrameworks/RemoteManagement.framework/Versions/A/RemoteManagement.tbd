@@ -4,64 +4,60 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0C891313-BA95-37ED-8ECF-3DC262470556
+    value:           FB30F090-5F51-3438-A7B3-3E1FD84FB651
   - target:          x86_64-maccatalyst
-    value:           0C891313-BA95-37ED-8ECF-3DC262470556
+    value:           FB30F090-5F51-3438-A7B3-3E1FD84FB651
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           50854715-BE44-3EA1-A909-F7A0649BD77B
+    value:           3A8B8A85-38F4-32B0-A3F9-FEA75547EDF4
   - target:          arm64e-maccatalyst
-    value:           50854715-BE44-3EA1-A909-F7A0649BD77B
+    value:           3A8B8A85-38F4-32B0-A3F9-FEA75547EDF4
 install-name:    '/System/Library/PrivateFrameworks/RemoteManagement.framework/Versions/A/RemoteManagement'
 current-version: 2
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ AccountExtension, AppManagementExtension, CloudMDMAppListTestApp, 
+    clients:         [ AccountExtension, AppManagementExtension, DMCEnrollmentProvider, 
                        InteractiveLegacyProfilesExtension, LegacyProfilesExtension, 
-                       ManagementTestExtension, MiniLauncher, PasscodeSettingsExtension, 
-                       RemoteManagementAccountSettings, RemoteManagementAccountSettings-macOS, 
-                       RemoteManagementAccountsNotificationPlugin, RemoteManagementAgent, 
-                       RemoteManagementInternalSettings, RemoteManagementTests, SettingsSharedSupport, 
-                       Setup, Setup Assistant, SetupTests, remotemanagementd, rmdctl, 
-                       rmdinspect ]
+                       MDM, ManagementTestExtension, MiniLauncher, PasscodeSettingsExtension, 
+                       RMTestConfigAgent, RemoteManagementAgent, RemoteManagementInternalSettings, 
+                       RemoteManagementMCXService, RemoteManagementStoreTests, RemoteManagementTests, 
+                       SettingsSharedSupport, Setup, Setup Assistant, SetupTests, 
+                       remotemanagementd, rm_test_configd, rmdctl, rmdinspect, rmdtool ]
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _RMAccountAdditionalInfoKeyManagedByOlympus, _RMAccountPropertyKeyAccountScheme, 
-                       _RMAccountPropertyKeyAdditionalInfo, _RMAccountPropertyKeyAltDSID, 
+    symbols:         [ _InteractiveLegacyProfileIdentifierPrefix, _LegacyProfileIdentifierPrefix, 
+                       _MDMv1DaemonUnenrollNotification, _RMAccountAdditionalInfoKeyManagedByOlympus, 
+                       _RMAccountPropertyKeyAccountScheme, _RMAccountPropertyKeyAdditionalInfo, 
+                       _RMAccountPropertyKeyAltDSID, _RMAccountPropertyKeyBearerToken, 
                        _RMAccountPropertyKeyDSID, _RMAccountPropertyKeyEnrollmentToken, 
                        _RMAccountPropertyKeyEnrollmentURL, _RMAccountPropertyKeyManagementSourceIdentifier, 
-                       _RMAccountPropertyKeyWebAuthenticationToken, _RMAccountSchemeTest, 
-                       _RMAccountSchemeWebAuthentication, _RMAssetTypeImage, _RMAssetTypeUserIdentity, 
-                       _RMAssetTypeVPPOnDemand, _RMAuthenticationSchemeTest, _RMAuthenticationSchemeTestFieldToken, 
-                       _RMAuthenticationSchemeTestFieldUsername, _RMAuthenticationSchemeWebAuthentication, 
-                       _RMAuthenticationSchemeWebAuthenticationFieldAuthToken, _RMAuthenticationSchemeWebAuthenticationFieldUsername, 
-                       _RMCMSDecodeStatusCodeKey, _RMConfigurationTypeAccountCalDAV, 
-                       _RMConfigurationTypeAccountCardDAV, _RMConfigurationTypeAccountExchange, 
-                       _RMConfigurationTypeAccountGoogle, _RMConfigurationTypeAccountLDAP, 
-                       _RMConfigurationTypeAccountMail, _RMConfigurationTypeAccountSubscribedCalendar, 
-                       _RMConfigurationTypeApplicationManagement, _RMConfigurationTypeLegacyInteractiveProfiles, 
-                       _RMConfigurationTypeLegacyProfiles, _RMConfigurationTypeManagementStatusSubscription, 
-                       _RMConfigurationTypeManagementTest, _RMConfigurationTypePasscodeSettings, 
-                       _RMErrorDomain, _RMErrorUserInfoKeyDescriptionKey, _RMHTTPStatusCodeKey, 
-                       _RMMobileKeyBagErrorCodeKey, _RMPersonaRestorationFailedException, 
-                       _RMStatusFileKeyIdentifier, _RMStatusFileKeyReasons, _RMStatusFileKeyServerToken, 
-                       _RMStatusFileKeyValid, _RMXPCAgentMachServiceName, _RMXPCDaemonMachServiceName ]
-    objc-classes:    [ RMAppInstallerController, RMAsset, RMAssetResolver, RMAuthenticationCredential, 
-                       RMBundle, RMConfiguration, RMConfigurationEventStreamSubscriber, 
-                       RMConfigurationStatusUpdater, RMConfigurationSubscriberClient, 
-                       RMConfigurationSubscriberDescription, RMDeviceAuthenticationCredential, 
-                       RMEnrollmentController, RMErrorUtilities, RMEventDescription, 
-                       RMExtensionConfigurationSubscriber, RMExtensionContext, RMExtensionRequestHandler, 
-                       RMExtensionStatusPublisher, RMFeatureFlags, RMFeatureOverrides, 
-                       RMGenericAuthenticationCredential, RMHTTPLog, RMLegacyProfilesFilter, 
-                       RMLocations, RMLog, RMManagementChannel, RMPersonaHelper, 
-                       RMPolicy, RMPolicyStore, RMProfilesAdapter, RMProfilesController, 
-                       RMResolvedAsset, RMResolvedDataAsset, RMResolvedFileAsset, 
-                       RMStatusPublisherDescription, RMUnresolvedDataAsset, RMUnresolvedFileAsset, 
+                       _RMAccountSchemeBearer, _RMAccountSchemeMAID, _RMAccountSchemeTest, 
+                       _RMAssetTypeImage, _RMAssetTypeUserIdentity, _RMAssetTypeVPPOnDemand, 
+                       _RMAuthenticationSchemeBearer, _RMAuthenticationSchemeBearerFieldAccessToken, 
+                       _RMAuthenticationSchemeMAID, _RMAuthenticationSchemeMAIDFieldAltDSID, 
+                       _RMAuthenticationSchemeMAIDFieldDSID, _RMAuthenticationSchemeMAIDFieldLongLivedToken, 
+                       _RMAuthenticationSchemeMAIDFieldShortLivedToken, _RMAuthenticationSchemeMAIDFieldUsername, 
+                       _RMAuthenticationSchemeTest, _RMAuthenticationSchemeTestFieldToken, 
+                       _RMAuthenticationSchemeTestFieldUsername, _RMCMSDecodeStatusCodeKey, 
+                       _RMConfigurationTypeAccountCalDAV, _RMConfigurationTypeAccountCardDAV, 
+                       _RMConfigurationTypeAccountExchange, _RMConfigurationTypeAccountGoogle, 
+                       _RMConfigurationTypeAccountLDAP, _RMConfigurationTypeAccountMail, 
+                       _RMConfigurationTypeAccountSubscribedCalendar, _RMConfigurationTypeApplicationManagement, 
+                       _RMConfigurationTypeLegacyInteractiveProfiles, _RMConfigurationTypeLegacyProfiles, 
+                       _RMConfigurationTypeManagementStatusSubscription, _RMConfigurationTypeManagementTest, 
+                       _RMConfigurationTypePasscodeSettings, _RMErrorDomain, _RMErrorUserInfoKeyDescriptionKey, 
+                       _RMHTTPStatusCodeKey, _RMMobileKeyBagErrorCodeKey, _RMPersonaRestorationFailedException, 
+                       _RMXPCAgentMachServiceName, _RMXPCDaemonMachServiceName ]
+    objc-classes:    [ RMAccountHelper, RMAsset, RMAuthenticationCredential, RMBundle, 
+                       RMConfiguration, RMDebounceTimer, RMDeviceAuthenticationCredential, 
+                       RMEnrollmentController, RMErrorUtilities, RMFeatureFlags, 
+                       RMFeatureOverrides, RMGenericAuthenticationCredential, RMLegacyProfilesFilter, 
+                       RMLocations, RMLog, RMMDMHelper, RMManagementChannel, RMPersonaHelper, 
+                       RMProfilesAdapter, RMProfilesController, RMSynchronous, RMTimedDispatch, 
                        RMXPCProxy, RemoteManagement_Subsystem ]
 ...

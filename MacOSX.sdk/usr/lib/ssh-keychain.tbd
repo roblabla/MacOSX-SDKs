@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           42A8D07F-C57A-3B2A-BAC4-38A9012EFB72
+    value:           5A514207-04E5-354E-82C9-AB825BE9B6B2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E05E258C-5FD4-3D00-8F7F-9D3A634F2579
+    value:           A79D1A84-F704-3665-BF30-540DC81930C2
 install-name:    '/usr/lib/ssh-keychain.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

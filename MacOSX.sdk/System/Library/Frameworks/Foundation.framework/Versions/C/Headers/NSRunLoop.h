@@ -13,15 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 FOUNDATION_EXPORT NSRunLoopMode const NSDefaultRunLoopMode;
 FOUNDATION_EXPORT NSRunLoopMode const NSRunLoopCommonModes API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
-@interface NSRunLoop : NSObject {
-@private
-    id          _rl;
-    id          _dperf;
-    id          _perft;
-    id          _info;
-    id		_ports;
-    void	*_reserved[6];
-}
+@interface NSRunLoop : NSObject
 
 @property (class, readonly, strong) NSRunLoop *currentRunLoop;
 @property (class, readonly, strong) NSRunLoop *mainRunLoop API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));

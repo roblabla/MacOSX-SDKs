@@ -28,7 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Represents an alternate action to take for a command.
 ///
 /// Two alternates are equal iff their modifierFlags are equal.
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UICommandAlternate : NSObject <NSCopying, NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UICommandAlternate : NSObject <NSCopying, NSSecureCoding>
 
 /// Short display title.
 @property (nonatomic, readonly) NSString *title;
@@ -57,7 +58,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UICommandAlternate : NSObject <
 @end
 
 /// Represents an action to take.
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UICommand : UIMenuElement
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UICommand : UIMenuElement
 
 /// Short display title.
 @property (nonatomic, copy) NSString *title;

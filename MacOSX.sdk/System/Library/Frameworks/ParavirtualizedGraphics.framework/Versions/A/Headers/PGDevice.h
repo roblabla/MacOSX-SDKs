@@ -265,6 +265,33 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
  @note An initial interrupt may be generated during the duration of this call.
  */
 -(void)didResume API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
+
+/*!
+ @method pause
+ @abstract Pause the device, completing all pending operations and writes to guest memory.
+ @note This is a lighter weight operation than suspend.  Guest CPUs should be suspended while the device is paused.
+ */
+-(void)pause API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios);
+
+/*!
+ @method unpause
+ @abstract Resume the device from pause state, allowing operations to continue.
+ @note An initial interrupt may be generated during the duration of this call.
+ */
+-(void)unpause API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios);
+
+/*!
+ @method stop
+ @abstract Stop the device entirely, releasing all the guest memory.
+ @note Guest CPUs should be suspended or stopped when this method is called.
+ */
+-(void)stop API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios);
+
+/*!
+ @method reset
+ @abstract Reset the device to a clean state.  This will block until work is quiesced.
+ */
+-(void)reset API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios);
 @end
 
 /*!

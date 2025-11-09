@@ -6,12 +6,18 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import <CloudKit/CKRecord.h>
 #import <CloudKit/CKShareParticipant.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 CK_EXTERN CKRecordType const CKRecordTypeShare API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
+
+/*! A zone-wide CKShare always uses the record name @c CKRecordNameZoneWideShare.
+ *  You can use this to fetch the @c CKShare record for the zone with a @c CKFetchRecordsOperation.
+ */
+CK_EXTERN NSString * const CKRecordNameZoneWideShare API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*! Predefined keys in the @c CKRecordTypeShare schema.  They're used by the out of process UI flow to send a share, and as part of the share acceptance flow.  These are optional */
 
@@ -36,6 +42,18 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 /*! When saving a newly created CKShare, you must save the share and its rootRecord in the same CKModifyRecordsOperation batch. */
 - (instancetype)initWithRootRecord:(CKRecord *)rootRecord;
 - (instancetype)initWithRootRecord:(CKRecord *)rootRecord shareID:(CKRecordID *)shareID NS_DESIGNATED_INITIALIZER;
+
+/*! Creates a zone-wide @c CKShare.  A zone-wide @c CKShare can only exist in a zone with sharing capability @c CKRecordZoneCapabilityZoneWideSharing.
+ * Only one such share can exist in a zone at a time.
+ *
+ * All records in this zone will appear in a participant's @c CKFetchRecordZoneChangesOperation results in the shared database after the
+ * share has been accepted by the participant.
+ *
+ * Since these shares do not have an associated root record, @c shouldFetchRootRecord and @c rootRecordDesiredKeys are always ignored when
+ * running a @c CKFetchShareMetadataOperation on a zone-wide share URL. Additionally, @c rootRecordID on the resulting @c CKShareMetadata is
+ * always absent.
+ */
+- (instancetype)initWithRecordZoneID:(CKRecordZoneID *)recordZoneID NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 

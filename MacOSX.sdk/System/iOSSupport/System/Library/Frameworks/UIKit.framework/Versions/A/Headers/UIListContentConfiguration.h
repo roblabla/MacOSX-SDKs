@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @interface UIListContentConfiguration : NSObject <UIContentConfiguration, NSSecureCoding>
 
 /// Returns the default configuration for a list cell.
@@ -32,6 +32,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
 + (instancetype)groupedHeaderConfiguration;
 /// Returns the default configuration for a grouped list footer.
 + (instancetype)groupedFooterConfiguration;
+/// Returns the default configuration for a prominent inset grouped list header.
++ (instancetype)prominentInsetGroupedHeaderConfiguration API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
+/// Returns the default configuration for an extra prominent inset grouped list header.
++ (instancetype)extraProminentInsetGroupedHeaderConfiguration API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
 
 /// Returns the default configuration for a sidebar list cell.
 + (instancetype)sidebarCellConfiguration API_UNAVAILABLE(tvos, watchos);
@@ -55,14 +59,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
 
 /// The primary text.
 @property (nonatomic, copy, nullable) NSString *text;
-/// An attributed variant of the primary text, which supersedes the `text` and some properties of the `textConfiguration` if set.
+/// An attributed variant of the primary text, which supersedes the `text` and some properties of the `textProperties` if set.
 @property (nonatomic, copy, nullable) NSAttributedString *attributedText;
 /// Additional properties to configure the primary text.
 @property (nonatomic, readonly) UIListContentTextProperties *textProperties;
 
 /// The secondary text.
 @property (nonatomic, copy, nullable) NSString *secondaryText;
-/// An attributed variant of the secondary text, which supersedes the `secondaryText` and some properties of the `secondaryTextConfiguration` if set.
+/// An attributed variant of the secondary text, which supersedes the `secondaryText` and some properties of the `secondaryTextProperties` if set.
 @property (nonatomic, copy, nullable) NSAttributedString *secondaryAttributedText;
 /// Additional properties to configure the secondary text.
 @property (nonatomic, readonly) UIListContentTextProperties *secondaryTextProperties;
@@ -85,7 +89,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @interface UIListContentView : UIView <UIContentView>
 
 - (instancetype)initWithConfiguration:(UIListContentConfiguration *)configuration NS_DESIGNATED_INITIALIZER;

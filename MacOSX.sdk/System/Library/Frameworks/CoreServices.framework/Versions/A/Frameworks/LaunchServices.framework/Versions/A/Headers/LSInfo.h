@@ -104,33 +104,29 @@ typedef CF_OPTIONS(OptionBits, LSAcceptanceFlags) {
 
 
 
-/*
- *  LSCopyDefaultApplicationURLForURL()
- *  
- *  Summary:
+/*!
+ *  @abstract
  *    Return the application used to open an item.
  *  
- *  Discussion:
+ *  @discussion
  *    Consults the binding tables to return the application that would
  *    be used to open inURL if it were double-clicked in the
  *    Finder. This application will be the user-specified override if
  *    appropriate or the default otherwise.
- *  
- *  Parameters:
- *    
- *    inURL:
- *      The URL of the item for which the application is requested.
  *
- *    inRoleMask:
- *      Whether to return the editor or viewer for inURL. If you
- *      don't care which, use kLSRolesAll.
- *    
- *    outError:
- *      On failure, set to a CFError describing the problem. If you are
- *      not interested in this information, pass NULL. The caller is
- *      responsible for releasing this object.
+ *  @param inURL
+ *    The URL of the item for which the application is requested.
  *
- *  Result:
+ *  @param inRoleMask
+ *    Whether to return the editor or viewer for inURL. If you
+ *    don't care which, use kLSRolesAll.
+ *    
+ *  @param outError
+ *    On failure, set to a CFError describing the problem. If you are
+ *    not interested in this information, pass NULL. The caller is
+ *    responsible for releasing this object.
+ *
+ *  @result
  *    If an acceptable application is found, its URL is returned.
  *    If the URL is a file:// URL, the application bound to the specified
  *    file or directory's type is returned. If the URL's scheme is something
@@ -143,38 +139,34 @@ extern __nullable CFURLRef
 LSCopyDefaultApplicationURLForURL(
   CFURLRef                           inURL,
   LSRolesMask                        inRoleMask,
-  __nullable CFErrorRef *__nullable  outError)                       API_AVAILABLE( macos(10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
+  __nullable CFErrorRef *__nullable  outError)                       API_DEPRECATED("Use -[NSWorkspace URLForApplicationToOpenURL:] instead.", macos(10.10, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, tvos, watchos);
+
 	
 	
-	
-/*
- *  LSCopyDefaultApplicationURLForContentType()
- *  
- *  Summary:
+/*!
+ *  @abstract
  *    Return the application used to open a content type (UTI).
  *  
- *  Discussion:
+ *  @discussion
  *    Consults the binding tables to return the application that would
  *    be used to open a file of type inContentType if it were double-clicked
  *    in the Finder. This application will be the user-specified override if
  *    appropriate or the default otherwise.
  *  
- *  Parameters:
- *    
- *    inContentType:
+ *    @param inContentType
  *      The Uniform Type Identifier (UTI) of the item for which the
  *      application is requested.
  *
- *    inRoleMask:
+ *    @param inRoleMask
  *      Whether to return the editor or viewer for inContentType. If you
  *      don't care which, use kLSRolesAll.
  *    
- *    outError:
+ *    @param outError
  *      On failure, set to a CFError describing the problem. If you are
  *      not interested in this information, pass NULL. The caller is
  *      responsible for releasing this object.
  *
- *  Result:
+ *  @result
  *    If an acceptable application is found, its URL is returned.
  *    If no application could be found, NULL is returned and
  *    outError (if not NULL) is populated with kLSApplicationNotFoundErr.
@@ -184,73 +176,60 @@ extern __nullable CFURLRef
 LSCopyDefaultApplicationURLForContentType(
   CFStringRef                        inContentType,
   LSRolesMask                        inRoleMask,
-  __nullable CFErrorRef *__nullable  outError)                       API_AVAILABLE( macos(10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
+  __nullable CFErrorRef *__nullable  outError)                       API_DEPRECATED("Use -[NSWorkspace URLForApplicationToOpenContentType:] instead.", macos(10.10, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, tvos, watchos);
 	
 	
 	
-/*
- *  LSCopyApplicationURLsForBundleIdentifier()
- *  
- *  Summary:
- *    Given a bundle identifier (such as com.apple.finder), find
- *    all URLs to the corresponding application.
- *  
- *  Discussion:
+/*!
+ *  @abstract Given a bundle identifier (such as com.apple.finder), find all URLs to the corresponding application.
+ *
+ *  @discussion
  *    Returns zero or more URLs to applications that have the specified
  *    bundle identifier.
  *  
- *  Parameters:
+ *  @param inBundleIdentifier The bundle identifier of interest, such as "com.apple.finder". Must
+ *    not be NULL.
  *    
- *    inBundleIdentifier:
- *      The bundle identifier of interest, such as "com.apple.finder". Must
- *      not be NULL.
+ *  @param outError
+ *    On failure, set to a CFError describing the problem. If you are
+ *    not interested in this information, pass NULL. The caller is
+ *    responsible for releasing this object.
  *    
- *    outError:
- *      On failure, set to a CFError describing the problem. If you are
- *      not interested in this information, pass NULL. The caller is
- *      responsible for releasing this object.
- *    
- *  Result:
+ *  @result
  *    If any applications with the specified bundle identifier are found,
  *    their URLs are returned in a CFArray. If no application could be found,
  *    NULL is returned and outError (if not NULL) is populated with kLSApplicationNotFoundErr.
- *    The order of elements in the array is undefined.
- *    The caller is responsible for releasing this array.
+ *    In macOS 10.15 and later, the returned array is sorted with the first element containing the
+ *    best available application with the specified bundle identifier. Prior to macOS 10.15, the
+ *    order of elements in the array was undefined.
  *
  */
 extern __nullable CFArrayRef
 LSCopyApplicationURLsForBundleIdentifier(
   CFStringRef                        inBundleIdentifier,
-  __nullable CFErrorRef *__nullable  outError)                       API_AVAILABLE( macos(10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
+  __nullable CFErrorRef *__nullable  outError)                       API_DEPRECATED("Use -[NSWorkspace URLsForApplicationsWithBundleIdentifier:] instead.", macos(10.10, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, tvos, watchos);
 	
 	
 	
-/*
- *  LSCopyApplicationURLsForURL()
- *  
- *  Discussion:
+/*!
+ *  @abstract
  *    Returns an array of URLs to applications that offer the requested
  *    role(s) for the input item.
  *  
- *  Mac OS X threading:
- *    Thread safe since version 10.3
- *  
- *  Parameters:
- *    
- *    inURL:
+ *    @param inURL
  *      The CFURLRef of the item for which all suitable applications
  *      are desired. If the URL is a file URL, it is treated as a
  *      document, and applications are selected based on the document's
  *      type information. Otherwise, applications are selected based on
  *      the URL's scheme.
  *    
- *    inRoleMask:
+ *    @param inRoleMask
  *      The role(s) which must intersect with the role provided by an
  *      application for the specified item in order for the application
  *      to be included in the result. Pass kLSRolesAll if any role is
  *      acceptable.
  *  
- *  Result:
+ *  @result
  *    An array of CFURLRefs, one for each application which can open
  *    inURL with at least one of the roles in inRoleMask, or NULL if no
  *    applications can open the item. When an array is returned, you
@@ -259,55 +238,40 @@ LSCopyApplicationURLsForBundleIdentifier(
  *    The order of the resulting array is undefined. If you need the
  *    default application for the specified URL, use LSCopyDefaultApplicationURLForURL.
  *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in CoreServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
 extern __nullable CFArrayRef
 LSCopyApplicationURLsForURL(
   CFURLRef      inURL,
-  LSRolesMask   inRoleMask)                                          API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
+  LSRolesMask   inRoleMask)                                          API_DEPRECATED("Use -[NSWorkspace URLsForApplicationsToOpenURL:] instead.", macos(10.3, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, tvos, watchos);
 
 	
 	
-/*
- *  LSCanURLAcceptURL()
- *  
- *  Summary:
+/*!
+ *  @abstract
  *    Determine whether an item can accept another item.
  *  
- *  Discussion:
+ *  @discussion
  *    Returns in outAcceptsItem whether inTargetURL can accept
  *    inItemURL as in a drag and drop operation. If inRoleMask is other
  *    than kLSRolesAll then make sure inTargetRef claims to fulfill the
  *    requested role.
  *  
- *  Mac OS X threading:
- *    Thread safe since version 10.2
- *  
- *  Parameters:
- *    
- *    inItemURL:
+ *    @param inItemURL
  *      CFURLRef of the item about which acceptance is requested.
  *    
- *    inTargetURL:
+ *    @param inTargetURL
  *      CFURLRef of the potential target.
  *    
- *    inRoleMask:
+ *    @param inRoleMask
  *      The role(s) the target must claim in order to consider
  *      acceptance.
  *    
- *    inFlags:
+ *    @param inFlags
  *      Use kLSAcceptDefault.
  *    
- *    outAcceptsItem:
+ *    @param outAcceptsItem
  *      Filled in with result. Must not be NULL.
  *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 LSCanURLAcceptURL(
@@ -319,38 +283,27 @@ LSCanURLAcceptURL(
 
 
 
-/*
- *  LSRegisterURL()
- *  
- *  Discussion:
+/*!
+ *  @discussion
  *    If the specified URL refers to an application or other bundle
  *    claiming to handle documents or URLs, add the bundle's document
  *    and URL claims to the Launch Services database.
  *  
- *  Mac OS X threading:
- *    Thread safe since version 10.3
- *  
- *  Parameters:
- *    
- *    inURL:
+ *    @param inURL
  *      The CFURLRef of the item (a directory or file) to be registered.
  *    
- *    inUpdate:
+ *    @param inUpdate
  *      When false, LSRegisterURL does not register the item if it has
  *      already been registered and the current modification date of
  *      the item has not changed from when it was last registered. When
  *      true, the item's registered info is updated, even if the
  *      modification has not changed.
  *  
- *  Result:
+ *  @result
  *    An OSStatus value: noErr - Success kLSNoRegistrationInfoErr - The
  *    item does not contain info requiring registration kLSDataErr -
  *    The item's property list info is malformed.
  *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in CoreServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 LSRegisterURL(
@@ -363,157 +316,106 @@ LSRegisterURL(
 /*   API for accessing content and URL handler preferences                            */
 /* ================================================================================== */
 
-/*
- *  LSCopyDefaultRoleHandlerForContentType
- *  
- *  Returns the application bundle identifier of the default handler 
+/*!
+ *  @discussion Returns the application bundle identifier of the default handler
  *  for the specified content type (UTI), in the specified role(s).
  *  For any role, specify kLSRolesAll. Returns NULL if no handler
  *  is available.
- */
-/*
- *  LSCopyDefaultRoleHandlerForContentType()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.4
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *
+ *  @param inContentType a string UTI type identifier
+ *  @param inRole a LSRole
+ *
+ *  @result an application bundle identifier which is the default handler for the given type and role, or NULL if there is no default handler
  */
 extern __nullable CFStringRef
 LSCopyDefaultRoleHandlerForContentType(
   CFStringRef   inContentType,
-  LSRolesMask   inRole)                                              API_AVAILABLE( ios(4.0), macos(10.4), tvos(9.0), watchos(1.0) );
+  LSRolesMask   inRole)                                              API_DEPRECATED("Use -[NSWorkspace URLForApplicationToOpenContentType:] instead.", ios(4.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
-
-
-/*
- *  LSCopyAllRoleHandlersForContentType
- *  
- *  Returns an array of application bundle identifiers for
+/*!
+ *  @discussion Returns an array of application bundle identifiers for
  *  applications capable of handling the specified content type 
  *  (UTI) with the specified role(s). Application content handling 
  *  capabilities are determined according to the kCFBundleDocumentTypes 
  *  listed in an application's Info.plist). For any role, specify kLSRolesAll. 
  *  Returns NULL if no handlers are available.
- */
-/*
- *  LSCopyAllRoleHandlersForContentType()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.4
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *
+ *  @param inContentType a string UTI type identifier
+ *  @param inRole a LSRole
+ *
+ *  @return an array of of CFStringRef bundle identifiers, or NULL
  */
 extern __nullable CFArrayRef
 LSCopyAllRoleHandlersForContentType(
   CFStringRef   inContentType,
-  LSRolesMask   inRole)                                              API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( ios, tvos, watchos );
+  LSRolesMask   inRole)                                              API_DEPRECATED("Use -[NSWorkspace URLsForApplicationsToOpenContentType:] instead.", macos(10.4, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, tvos, watchos);
 
-
-
-/*
- *  LSSetDefaultRoleHandlerForContentType
- *  
- *  Sets the user's preferred handler for the specified content
+/*!
+ *  @discussion Sets the user's preferred handler for the specified content
  *  type (UTI) in the specified role(s). For all roles, specify
  *  kLSRolesAll. The handler is specified as an application
  *  bundle identifier.
- */
-/*
- *  LSSetDefaultRoleHandlerForContentType()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.4
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *
+ *  @param inContentType a string UTI type identifier
+ *  @param inRole the role type(s) to set
+ *  @param inHandlerBundleID the bundle identifier to set as the default handler for the given contet type and role(s)
+ *
+ *  @result noErr on success, or an error indicating why the call failed
+ *
  */
 extern OSStatus 
 LSSetDefaultRoleHandlerForContentType(
   CFStringRef   inContentType,
   LSRolesMask   inRole,
-  CFStringRef   inHandlerBundleID)                                   API_AVAILABLE( ios(4.0), macos(10.4), tvos(9.0), watchos(1.0) );
+  CFStringRef   inHandlerBundleID)                                   API_DEPRECATED("Use -[NSWorkspace setDefaultApplicationAtURL:toOpenContentType:completionHandler:] instead.", ios(4.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 
 
-/*
- *  LSCopyDefaultHandlerForURLScheme()   *** DEPRECATED ***
- *  
- *  Returns the bundle identifier of the default handler for
+/*!
+ *  @discussion Returns the bundle identifier of the default handler for
  *  the specified URL scheme. Returns NULL if no handler
  *  is available.
  *
- *  Mac OS X threading:
- *    Thread safe since version 10.4
- *  
- *  Deprecated:
- *    Use LSCopyDefaultApplicationURLForURL() instead.
+ *	@param	inURLScheme	the scheme to return the default handler bundle identifier for
  *
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *	@result	a CFStringRef bundle identifier of the default handler, or NULL if no handler is available
+ *
  */
 extern __nullable CFStringRef
-LSCopyDefaultHandlerForURLScheme(CFStringRef inURLScheme)            API_DEPRECATED("Use LSCopyDefaultApplicationURLForURL() instead.", macos(10.4, 10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+LSCopyDefaultHandlerForURLScheme(CFStringRef inURLScheme)            API_DEPRECATED("Use -[NSWorkspace URLForApplicationToOpenURL:] instead.", macos(10.4, 10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 
-/*
- *  LSCopyAllHandlersForURLScheme()   *** DEPRECATED ***
- *
- *  Returns an array of application bundle identifiers for
+/*!
+ *  @discussion Returns an array of application bundle identifiers for
  *  applications capable of handling the specified URL scheme.
  *  URL handling capability is determined according to the
  *  kCFBundleURLTypes listed in an application's Info.plist).
  *  Returns NULL if no handlers are available.
  *
- *  Mac OS X threading:
- *    Thread safe since version 10.4
- *  
- *  Deprecated:
- *    Use LSCopyApplicationURLsForURL() instead.
+ *  @param inURLScheme the scheme to return an array of bundle identifiers for applications capable of handling the scheme
  *
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *  @result
+ *  		An array of bundle identifier strings
+ *
  */
 extern __nullable CFArrayRef
-LSCopyAllHandlersForURLScheme(CFStringRef inURLScheme)               API_DEPRECATED("Use LSCopyApplicationURLsForURL() instead.", macos(10.4, 10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+LSCopyAllHandlersForURLScheme(CFStringRef inURLScheme)               API_DEPRECATED("Use -[NSWorkspace URLsForApplicationsToOpenURL:] instead.", macos(10.4, 10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 
-/*
- *  LSSetDefaultHandlerForURLScheme
- *  
- *  Sets the user's preferred handler for the specified URL
+/*!
+ *  @abstract Sets the user's preferred handler for the specified URL
  *  scheme. The handler is specified as an application
  *  bundle identifier.
- */
-/*
- *  LSSetDefaultHandlerForURLScheme()
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.4
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ *
+ *	@param	inURLScheme	the url scheme to set a default handler for
+ *	@param inHandlerBundeID	the bundle identifier to be set as the default handler for the given scheme
  */
 extern OSStatus 
 LSSetDefaultHandlerForURLScheme(
   CFStringRef   inURLScheme,
-  CFStringRef   inHandlerBundleID)                            API_AVAILABLE( ios(4.0), macos(10.4), tvos(9.0), watchos(1.0) );
+  CFStringRef   inHandlerBundleID)                            API_DEPRECATED("Use -[NSWorkspace setDefaultApplicationAtURL:toOpenURLsWithScheme:completionHandler:] instead.", ios(4.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 
 

@@ -39,7 +39,6 @@
 #define _STRING_H_      1
 
 #include <sys/types.h>
-
 #include <sys/cdefs.h>
 
 #ifdef __cplusplus
@@ -58,15 +57,15 @@ extern "C" {
 #endif
 #endif
 
-extern void     *memcpy(void *, const void *, size_t);
-extern int      memcmp(const void *, const void *, size_t);
-extern void     *memmove(void *, const void *, size_t);
-extern void     *memset(void *, int, size_t);
-extern int      memset_s(void *, size_t, int, size_t);
+extern void     *memcpy(void *dst , const void *src , size_t n);
+extern int      memcmp(const void *s1 , const void *s2 , size_t n) __stateful_pure;
+extern void     *memmove(void *dst , const void *src , size_t n);
+extern void     *memset(void *s , int, size_t n);
+extern int      memset_s(void *s , size_t smax, int c, size_t n);
 
 
-extern size_t   strlen(const char *);
-extern size_t   strnlen(const char *, size_t);
+extern size_t   strlen(const char *) __stateful_pure;
+extern size_t   strnlen(const char *, size_t) __stateful_pure;
 
 /* strcpy() and strncpy() are deprecated. Please use strlcpy() instead. */
 __kpi_deprecated_arm64_macos_unavailable
@@ -82,23 +81,23 @@ extern char     *strcat(char *, const char *) __deprecated;
 __kpi_deprecated_arm64_macos_unavailable
 extern char     *strncat(char *, const char *, size_t);
 
-extern int      strcmp(const char *, const char *);
-extern int      strncmp(const char *, const char *, size_t);
+extern int      strcmp(const char *, const char *) __stateful_pure;
+extern int      strncmp(const char *, const char *, size_t) __stateful_pure;
 
 extern size_t   strlcpy(char *, const char *, size_t);
 extern size_t   strlcat(char *, const char *, size_t);
 
-extern int      strcasecmp(const char *s1, const char *s2);
-extern int      strncasecmp(const char *s1, const char *s2, size_t n);
-extern char     *strnstr(const char *s, const char *find, size_t slen);
-extern char     *strchr(const char *s, int c);
+extern int      strcasecmp(const char *s1, const char *s2) __stateful_pure;
+extern int      strncasecmp(const char *s1, const char *s2, size_t n) __stateful_pure;
+extern char     *strnstr(const char *s, const char *find, size_t slen) __stateful_pure;
+extern char     *strchr(const char *s, int c) __stateful_pure;
 extern char     *STRDUP(const char *, int);
-extern int      strprefix(const char *s1, const char *s2);
+extern int      strprefix(const char *s1, const char *s2) __stateful_pure;
 
-extern int      bcmp(const void *, const void *, size_t);
-extern void     bcopy(const void *, void *, size_t);
-extern void     bzero(void *, size_t);
-extern int      timingsafe_bcmp(const void *b1, const void *b2, size_t n);
+extern int      bcmp(const void *s1 , const void *s2 , size_t n) __stateful_pure;
+extern void     bcopy(const void *src , void *dst , size_t n);
+extern void     bzero(void *s , size_t n);
+extern int      timingsafe_bcmp(const void *b1 , const void *b2 , size_t n);
 
 
 #if __has_builtin(__builtin_dynamic_object_size)
@@ -107,20 +106,19 @@ extern int      timingsafe_bcmp(const void *b1, const void *b2, size_t n);
 #define XNU_BOS __builtin_object_size
 #endif
 
-
 /* __nochk_ functions for opting out of type 1 bounds checking */
 __attribute__((always_inline)) static inline void *
-__nochk_memcpy(void *dest, const void *src, size_t len)
+__nochk_memcpy(void *dest , const void *src , size_t len)
 {
 	return __builtin___memcpy_chk(dest, src, len, XNU_BOS(dest, 0));
 }
 __attribute__((always_inline)) static inline void *
-__nochk_memmove(void *dest, const void *src, size_t len)
+__nochk_memmove(void *dest , const void *src , size_t len)
 {
 	return __builtin___memmove_chk(dest, src, len, XNU_BOS(dest, 0));
 }
 __attribute__((always_inline)) static inline void
-__nochk_bcopy(const void *src, void *dest, size_t len)
+__nochk_bcopy(const void *src , void *dest , size_t len)
 {
 	__builtin___memmove_chk(dest, src, len, XNU_BOS(dest, 0));
 }
@@ -175,6 +173,7 @@ __nochk_bcopy(const void *src, void *dest, size_t len)
 #if __has_builtin(__builtin___memmove_chk)
 #define bcopy(src, dest, len) __builtin___memmove_chk(dest, src, len, XNU_BOS(dest, BOS_COPY_TYPE))
 #endif
+
 
 #endif /* _chk macros */
 #ifdef __cplusplus

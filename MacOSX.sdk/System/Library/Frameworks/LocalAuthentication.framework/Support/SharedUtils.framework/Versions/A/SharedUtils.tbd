@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B9DCB3F3-E986-3470-A5F6-3D60F82BACC3
+    value:           DA6D3192-DCD5-3699-B794-B3E3627DC96F
   - target:          x86_64-maccatalyst
-    value:           B9DCB3F3-E986-3470-A5F6-3D60F82BACC3
+    value:           DA6D3192-DCD5-3699-B794-B3E3627DC96F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F8796F6A-F8B1-3BF1-B7EA-CA93A48B2DDA
+    value:           2CB735DD-8DB1-3A7A-89FE-B3738BA86252
   - target:          arm64e-maccatalyst
-    value:           F8796F6A-F8B1-3BF1-B7EA-CA93A48B2DDA
+    value:           2CB735DD-8DB1-3A7A-89FE-B3738BA86252
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Support/SharedUtils.framework/Versions/A/SharedUtils'
-current-version: 827.100.23
+current-version: 983
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -24,12 +24,12 @@ exports:
                        _ACMContextAppendData, _ACMContextContainsCredentialType, 
                        _ACMContextContainsCredentialTypeEx, _ACMContextContainsPassphraseCredentialWithPurpose, 
                        _ACMContextCreate, _ACMContextCreateWithExternalForm, _ACMContextCredentialGetProperty, 
-                       _ACMContextDelete, _ACMContextGetData, _ACMContextGetExternalForm, 
-                       _ACMContextGetInfo, _ACMContextGetTrackingNumber, _ACMContextRemoveCredentialsByType, 
-                       _ACMContextRemoveCredentialsByTypeAndScope, _ACMContextRemoveCredentialsByValue, 
-                       _ACMContextRemoveCredentialsByValueAndScope, _ACMContextRemovePassphraseCredentialsByPurposeAndScope, 
-                       _ACMContextReplacePassphraseCredentialsWithScope, _ACMContextSetData, 
-                       _ACMContextVerifyAclConstraint, _ACMContextVerifyAclConstraintForOperation, 
+                       _ACMContextDelete, _ACMContextGetData, _ACMContextGetDataProperty, 
+                       _ACMContextGetExternalForm, _ACMContextGetInfo, _ACMContextGetTrackingNumber, 
+                       _ACMContextRemoveCredentialsByType, _ACMContextRemoveCredentialsByTypeAndScope, 
+                       _ACMContextRemoveCredentialsByValue, _ACMContextRemoveCredentialsByValueAndScope, 
+                       _ACMContextRemovePassphraseCredentialsByPurposeAndScope, _ACMContextReplacePassphraseCredentialsWithScope, 
+                       _ACMContextSetData, _ACMContextVerifyAclConstraint, _ACMContextVerifyAclConstraintForOperation, 
                        _ACMContextVerifyPolicy, _ACMContextVerifyPolicyEx, _ACMContextVerifyPolicyWithPreflight, 
                        _ACMCredentialCreate, _ACMCredentialDelete, _ACMCredentialGetProperty, 
                        _ACMCredentialGetPropertyData, _ACMCredentialGetType, _ACMCredentialSetProperty, 
@@ -53,21 +53,29 @@ exports:
                        _GetSerializedVerifyPolicySize, _LAAssertionsProxyFactory, 
                        _LAErrorDomain, _LAErrorSubcodeKey, _LALogCategoryForOptions, 
                        _LALogCategoryForPolicy, _LALogForCategory, _LALogForPolicy, 
-                       _LALogSetProcessCategory, _LAStorageErrorDomain, _LibCall_ACMContexAddCredentialWithScope, 
-                       _LibCall_ACMContexRemoveCredentialsByTypeAndScope, _LibCall_ACMContextAppendData, 
-                       _LibCall_ACMContextCreate, _LibCall_ACMContextCreateWithExternalForm, 
-                       _LibCall_ACMContextCredentialGetProperty, _LibCall_ACMContextDelete, 
-                       _LibCall_ACMContextGetData, _LibCall_ACMContextGetInfo, _LibCall_ACMContextSetData, 
-                       _LibCall_ACMContextVerifyPolicyAndCopyRequirementEx, _LibCall_ACMCredentialCreate, 
-                       _LibCall_ACMCredentialDelete, _LibCall_ACMCredentialGetPropertyData, 
-                       _LibCall_ACMCredentialGetType, _LibCall_ACMCredentialSetProperty, 
-                       _LibCall_ACMGetAclAuthMethod_Block, _LibCall_ACMGetEnvironmentVariable, 
-                       _LibCall_ACMGetEnvironmentVariable_Block, _LibCall_ACMGlobalContextCredentialGetProperty, 
-                       _LibCall_ACMGlobalContextCredentialGetProperty_Block, _LibCall_ACMKernDoubleClickNotify, 
-                       _LibCall_ACMKernelControl, _LibCall_ACMKernelControl_Block, 
-                       _LibCall_ACMPing, _LibCall_ACMPublishTrustedAccessories, _LibCall_ACMRequirementDelete, 
-                       _LibCall_ACMRequirementGetPriority, _LibCall_ACMRequirementGetPropertyData, 
-                       _LibCall_ACMRequirementGetState, _LibCall_ACMRequirementGetType, 
+                       _LALogSetProcessCategory, _LASerialScheduler, _LAStorageErrorDomain, 
+                       _LibCall_ACMContexAddCredentialWithScope, _LibCall_ACMContexRemoveCredentialsByTypeAndScope, 
+                       _LibCall_ACMContextAppendData, _LibCall_ACMContextCreate, 
+                       _LibCall_ACMContextCreateWithExternalForm, _LibCall_ACMContextCredentialGetProperty, 
+                       _LibCall_ACMContextDelete, _LibCall_ACMContextGetData, _LibCall_ACMContextGetInfo, 
+                       _LibCall_ACMContextLoadFromImage, _LibCall_ACMContextRemoveCredentialsByValueAndScope, 
+                       _LibCall_ACMContextSetData, _LibCall_ACMContextUnloadToImage, 
+                       _LibCall_ACMContextUnloadToImage_Block, _LibCall_ACMContextVerifyAclConstraint, 
+                       _LibCall_ACMContextVerifyAclConstraintForOperation, _LibCall_ACMContextVerifyPolicyAndCopyRequirementEx, 
+                       _LibCall_ACMContextVerifyPolicyEx, _LibCall_ACMContextVerifyPolicyEx_Block, 
+                       _LibCall_ACMContextVerifyPolicyWithPreflight_Block, _LibCall_ACMContextVerifyPolicy_Block, 
+                       _LibCall_ACMCredentialCreate, _LibCall_ACMCredentialDelete, 
+                       _LibCall_ACMCredentialGetPropertyData, _LibCall_ACMCredentialGetType, 
+                       _LibCall_ACMCredentialSetProperty, _LibCall_ACMGetAclAuthMethod_Block, 
+                       _LibCall_ACMGetEnvironmentVariable, _LibCall_ACMGetEnvironmentVariable_Block, 
+                       _LibCall_ACMGlobalContextCredentialGetProperty, _LibCall_ACMGlobalContextCredentialGetProperty_Block, 
+                       _LibCall_ACMGlobalContextVerifyPolicyEx, _LibCall_ACMGlobalContextVerifyPolicy_Block, 
+                       _LibCall_ACMKernDoubleClickNotify, _LibCall_ACMKernelControl, 
+                       _LibCall_ACMKernelControl_Block, _LibCall_ACMPing, _LibCall_ACMPublishTrustedAccessories, 
+                       _LibCall_ACMRequirementDelete, _LibCall_ACMRequirementGetPriority, 
+                       _LibCall_ACMRequirementGetPropertyData, _LibCall_ACMRequirementGetState, 
+                       _LibCall_ACMRequirementGetType, _LibCall_ACMSecContextProcessAcl, 
+                       _LibCall_ACMSecContextProcessAclAndCopyAuthMethod, _LibCall_ACMSecContextVerifyAclConstraintAndCopyRequirement, 
                        _LibCall_ACMSetEnvironmentVariable, _LibCall_ACMTRMLoadState, 
                        _LibCall_ACMTRMLoadState_Block, _LibCall_ACMTRMSaveState, 
                        _LibCall_BuildCommand, _LibSer_ContextCredentialGetProperty_Deserialize, 
@@ -86,14 +94,18 @@ exports:
                        _SerializeCredential, _SerializeCredentialList, _SerializeGetContextProperty, 
                        _SerializeProcessAcl, _SerializeRemoveCredential, _SerializeReplacePassphraseCredential, 
                        _SerializeRequirement, _SerializeVerifyAclConstraint, _SerializeVerifyPolicy, 
-                       _Util_GetBitCount, _Util_hexDumpToStrHelper, _Util_isNonNullEqualMemory, 
-                       _Util_isNullOrZeroMemory, _gAllocatedBytes, _gLastAllocatedBytes, 
-                       _kLAServiceTypeSecureStorage ]
+                       _Util_GetBitCount, _Util_KeybagLockStateToEnvVar, _Util_ReadFromBuffer, 
+                       _Util_WriteToBuffer, _Util_hexDumpToStrHelper, _Util_isNonNullEqualMemory, 
+                       _Util_isNullOrZeroMemory, _acm_explicit_bzero, _acm_get_mem, 
+                       _acm_mem_alloc, _acm_mem_alloc_data, _acm_mem_alloc_info, 
+                       _acm_mem_alloc_type, _acm_mem_free, _acm_mem_free_data, _acm_mem_free_info, 
+                       _acm_mem_free_type, _gACMLoggingLevel, _gAllocatedBytes, _kLAServiceTypeSecureStorage, 
+                       _verifyAclConstraintInternal ]
     objc-classes:    [ LAACMHelper, LAADMUser, LAAssertionsProxy, LABaseService, 
                        LABaseServiceManager, LACachedExternalizedContext, LADFR, 
-                       LADefaultServiceSession, LAErrorHelper, LAInternalProtocols, 
-                       LAManagedACMParameter, LAParamChecker, LAPasscodeHelper, LASecureData, 
-                       LAUtils, LAWeakBox ]
+                       LADefaultServiceSession, LAErrorHelper, LAIdleWatchdog, LAInternalProtocols, 
+                       LAManagedACMParameter, LAMobileGestalt, LAParamChecker, LAPasscodeHelper, 
+                       LASecureData, LASerialSchedulerInternal, LAUtils, LAWeakBox ]
     objc-ivars:      [ LABaseService._clients, LABaseService._listener, LABaseService._terminating, 
                        LABaseServiceManager._sessions ]
 ...

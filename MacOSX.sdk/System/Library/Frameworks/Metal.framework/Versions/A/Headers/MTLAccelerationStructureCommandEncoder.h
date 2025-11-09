@@ -24,10 +24,8 @@ API_AVAILABLE(macos(11.0), ios(14.0))
 
 /*!
  * @brief Encode an acceleration structure build into the command buffer. All bottom-level acceleration
- * structure builds must have completed before a top-level acceleration structure build may begin. Note
- * that this requires the use of fences and multiple acceleration structure encoders if the acceleration
- * structures are allocated from heaps. The resulting acceleration structure will not retain any
- * references to the input vertex buffer, instance buffer, etc.
+ * structure builds must have completed before a top-level acceleration structure build may begin. The
+ * resulting acceleration structure will not retain any references to the input vertex buffer, instance buffer, etc.
  *
  * The acceleration structure build will not be completed until the command buffer has been committed
  * and finished executing. However, it is safe to encode ray tracing work against the acceleration
@@ -112,6 +110,27 @@ API_AVAILABLE(macos(11.0), ios(14.0))
 - (void)writeCompactedAccelerationStructureSize:(id <MTLAccelerationStructure>)accelerationStructure
                                        toBuffer:(id <MTLBuffer>)buffer
                                          offset:(NSUInteger)offset;
+
+/*!
+ * @brief Compute the compacted size for an acceleration structure and write it into a buffer.
+ *
+ * This size is potentially smaller than the source acceleration structure. To perform compaction,
+ * read this size from the buffer once the command buffer has completed and use it to allocate a
+ * smaller acceleration structure. Then create another encoder and call the 
+ * copyAndCompactAccelerationStructure method.
+ *
+ * @param accelerationStructure Source acceleration structure
+ * @param buffer                Destination size buffer. The compacted size will be written as either
+ *                              a 32 bit or 64 bit value depending on the sizeDataType argument
+ *                              unsigned integer representing the compacted size in bytes.
+ * @param offset                Offset into the size buffer
+ * @param sizeDataType          Data type of the size to write into the buffer. Must be either
+ *                              MTLDataTypeUInt (32 bit) or MTLDataTypeULong (64 bit)
+ */
+- (void)writeCompactedAccelerationStructureSize:(id <MTLAccelerationStructure>)accelerationStructure
+                                       toBuffer:(id <MTLBuffer>)buffer
+                                         offset:(NSUInteger)offset
+                                   sizeDataType:(MTLDataType)sizeDataType API_AVAILABLE(macos(12.0), ios(15.0));
 
 /*!
  * @brief Copy and compact an acceleration structure. The source and destination acceleration structures

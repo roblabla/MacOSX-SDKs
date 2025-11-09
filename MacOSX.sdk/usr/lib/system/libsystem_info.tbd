@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C189F0D7-A430-328D-BD7F-7EB0FA023736
+    value:           5647341B-A623-3B80-A708-AF91CEC80587
   - target:          x86_64-maccatalyst
-    value:           C189F0D7-A430-328D-BD7F-7EB0FA023736
+    value:           5647341B-A623-3B80-A708-AF91CEC80587
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           74EE0B71-3303-3A7C-B4BF-75F1EF9F3F8F
+    value:           94B35115-133F-33A9-A4A0-687DF921795A
   - target:          arm64e-maccatalyst
-    value:           74EE0B71-3303-3A7C-B4BF-75F1EF9F3F8F
+    value:           94B35115-133F-33A9-A4A0-687DF921795A
 install-name:    '/usr/lib/system/libsystem_info.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -76,9 +76,10 @@ exports:
                        _kvbuf_make_nonpurgeable, _kvbuf_make_purgeable, _kvbuf_new, 
                        _kvbuf_new_zone, _kvbuf_next_dict, _kvbuf_next_key, _kvbuf_next_val, 
                        _kvbuf_next_val_len, _kvbuf_query, _kvbuf_query_key_int, _kvbuf_query_key_uint, 
-                       _kvbuf_query_key_val, _kvbuf_reset, _mbr_check_membership, 
-                       _mbr_check_membership_by_id, _mbr_check_membership_ext, _mbr_check_membership_refresh, 
-                       _mbr_check_service_membership, _mbr_gid_to_uuid, _mbr_group_name_to_uuid, 
+                       _kvbuf_query_key_val, _kvbuf_reset, _lookup_close_connections, 
+                       _mbr_check_membership, _mbr_check_membership_by_id, _mbr_check_membership_ext, 
+                       _mbr_check_membership_refresh, _mbr_check_service_membership, 
+                       _mbr_close_connections, _mbr_gid_to_uuid, _mbr_group_name_to_uuid, 
                        _mbr_identifier_to_uuid, _mbr_identifier_translate, _mbr_reset_cache, 
                        _mbr_set_identifier_ttl, _mbr_sid_to_string, _mbr_sid_to_uuid, 
                        _mbr_string_to_sid, _mbr_string_to_uuid, _mbr_uid_to_uuid, 

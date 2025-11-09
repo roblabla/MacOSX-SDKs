@@ -30,7 +30,8 @@ extern "C"
 #endif
     
 #pragma pack(push, 4)
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark CMIOControl Types
@@ -147,7 +148,7 @@ enum
                         A CMIOFeatureControl that controls a panning mechanism. Positive values mean clockwise, negative values means counterclockwise. The units for the control's
                         absolute value are degrees (°).
     @constant       kCMIOTiltControlClassID
-                        A CMIOFeatureControl that controls a tilt mechanism. Positive values mean updwards, negative values means downwards. The units for the control's absolute value are
+                        A CMIOFeatureControl that controls a tilt mechanism. Positive values mean upwards, negative values means downwards. The units for the control's absolute value are
                         degrees (°).
     @constant       kCMIOOpticalFilterClassID
                         A CMIOFeatureControl that controls changing the optical filter of camera lens function. The units for the control's absolute value are undefined.
@@ -159,12 +160,14 @@ enum
 	@constant		kCMIONoiseReductionControlClassID
 						A CMIOFeatureControl that controls the noise reduction strength. The units for the control's absolute value are undefined.
  	@constant       kCMIOPanTiltAbsoluteControlClassID
- 						A CMIOFeatureControl that controls a pan/tilt mechanism. It is 8 byte control with first 4 bytes
+ 						A CMIOFeatureControl that controls a pan/tilt mechanism.
+  						The property kCMIOFeatureControlPropertyNativeData is 8 byte control with first 4 bytes
  						representing pan value and last 4 byte representing tilt value .Positive values for pan mean
  						clockwise, negative values for pan means counterclockwise.
- 						Positive values for tilt mean updwards, negative values for tilt  means downwards.
+ 						Positive values for tilt mean upwards, negative values for tilt  means downwards.
  	@constant       kCMIOPanTiltRelativeControlClassID
- 						A CMIOFeatureControl that controls a pan/tilt mechanism. It is 4 byte control with first 2 bytes
+ 						A CMIOFeatureControl that controls a pan/tilt mechanism.
+ 						The property kCMIOFeatureControlPropertyNativeData is 4 byte control with first 2 bytes
  						representing pan value and last 2 bytes representing tilt value. Pan value is composed of two
  						parts , Pan Relative(direction) and Pan Speed each having size of 1 byte. For Pan Relative value
  						of 0 indicates stop, 1 indicates movement in clockwise direction and 0xff indicates movement in
@@ -175,7 +178,8 @@ enum
  						For Tilt Speed low number indicates slow speed and high number indicates higher speed.
  	@constant       kCMIOZoomRelativeControlClassID
  						A CMIOFeatureControl that controls the zoom focal length relatively as powered zoom.
- 						It is 3 byte control. First byte specifies whether zoom lens group is stopped or direction
+ 						The property kCMIOFeatureControlPropertyNativeData is 3 byte control with :
+  						First byte specifies whether zoom lens group is stopped or direction
  						of zoom lens. Value of 0 indicates that zoom lens is stopped, 1 indicates that zoom lens
  						is moved towards the telephoto direction and 0xff indicates that zoom lens is moved towards
  						the wide-angle direction. Second 1 byte specifies whether digital zoom is enabled or disabled.
@@ -228,7 +232,7 @@ enum
 /*!
     @enum           CMIOControl Properties
     @abstract       CMIOObjectPropertySelector values that apply to all CMIOControls.
-    @discussion     CMIOControl is a subclass of CMIOObject and has only the single scope, kCMIOObjectPropertyScopeGlobal, and only a master element.
+    @discussion     CMIOControl is a subclass of CMIOObject and has only the single scope, kCMIOObjectPropertyScopeGlobal, and only a main element.
     @constant       kCMIOControlPropertyScope
                         The CMIOObjectPropertyScope in the owning CMIOObject that contains the CMIOControl.
     @constant       kCMIOControlPropertyElement
@@ -248,7 +252,7 @@ enum
 /*!
     @enum           CMIOBooleanControl Properties
     @abstract       CMIOObjectPropertySelector values that apply to all CMIOBooleanControls.
-    @discussion     CMIOBooleanControl is a subclass of CMIOControl and has only the single scope, kCMIOObjectPropertyScopeGlobal, and only a master element.
+    @discussion     CMIOBooleanControl is a subclass of CMIOControl and has only the single scope, kCMIOObjectPropertyScopeGlobal, and only a main element.
     @constant       kCMIOBooleanControlPropertyValue
                         A UInt32 where 0 means false and 1 means true.
 */
@@ -261,7 +265,7 @@ enum
 /*!
     @enum           CMIOSelectorControl Properties
     @abstract       CMIOObjectPropertySelector values that apply to all CMIOSelectorControls.
-    @discussion     CMIOSelectorControl is a subclass of CMIOControl and has only the single scope, kCMIOObjectPropertyScopeGlobal, and only a master element.
+    @discussion     CMIOSelectorControl is a subclass of CMIOControl and has only the single scope, kCMIOObjectPropertyScopeGlobal, and only a main element.
     @constant       kCMIOSelectorControlPropertyCurrentItem
                         A UInt32 that is the ID of the item currently selected.
     @constant       kCMIOSelectorControlPropertyAvailableItems
@@ -281,7 +285,7 @@ enum
 /*!
     @enum           CMIOFeatureControl Properties
     @abstract       CMIOObjectPropertySelector values that apply to all CMIOFeatureControls.
-    @discussion     CMIOFeatureControl is a subclass of CMIOControl and has only the single scope, kCMIOObjectPropertyScopeGlobal, and only a master element.
+    @discussion     CMIOFeatureControl is a subclass of CMIOControl and has only the single scope, kCMIOObjectPropertyScopeGlobal, and only a main element. It is expected that a feature control which support kCMIOFeatureControlPropertyNativeValue or kCMIOFeatureControlPropertyNativeData, only support one or the other.
     @constant       kCMIOFeatureControlPropertyOnOff
                         A UInt32 where 1 corresponds to a the feature being on, and 0 corresponds to the feature being off.
     @constant       kCMIOFeatureControlPropertyAutomaticManual
@@ -305,6 +309,11 @@ enum
                         A Float32 that on input contains a an abolute value for the feature control and on exit contains the equivalent native value.
     @constant       kCMIOFeatureControlPropertyAbsoluteUnitName
                         A CFString that contains a human readable name for the units associated with the absolute values. The caller is responsible for releasing the returned CFObject.
+	@constant       kCMIOFeatureControlPropertyNativeData
+						Multiple bytes that represents the value of the feature. Native datas are unitless and their the meaning can vary from device to device.
+	@constant       kCMIOFeatureControlPropertyNativeDataRange
+						Multiple bytes that contains the minimum and maximum native datas values the feature control can have.
+						The size is double the size of the kCMIOFeatureControlPropertyNativeData property.
 */
 enum
 {
@@ -318,14 +327,16 @@ enum
     kCMIOFeatureControlPropertyAbsoluteRange            = 'fcar',
     kCMIOFeatureControlPropertyConvertNativeToAbsolute  = 'fn2a',
     kCMIOFeatureControlPropertyConvertAbsoluteToNative  = 'fa2n',
-    kCMIOFeatureControlPropertyAbsoluteUnitName         = 'fcun'
+    kCMIOFeatureControlPropertyAbsoluteUnitName         = 'fcun',
+    kCMIOFeatureControlPropertyNativeData				= 'fcnd',
+    kCMIOFeatureControlPropertyNativeDataRange			= 'fcdr',
 };
 
 #pragma mark ExposureControl Properties
 /*!
     @enum           CMIOExposureControl Properties
     @abstract       CMIOObjectPropertySelector values that apply to all CMIOExposureControls.
-    @discussion     CMIOExposureControl is a subclass of CMIOFeatureControl and has only the single scope, kCMIOObjectPropertyScopeGlobal, and only a master element.
+    @discussion     CMIOExposureControl is a subclass of CMIOFeatureControl and has only the single scope, kCMIOObjectPropertyScopeGlobal, and only a main element.
     @constant       kCMIOExposureControlPropertyRegionOfInterest
                         A CGRect with origin and size coordinates in the 0. to 1. space indicating what portion of the image should be used when auto-exposing.
     @constant       kCMIOExposureControlPropertyLockThreshold
@@ -362,7 +373,8 @@ enum
     kCMIOExposureControlPropertyIntegrationTime		= 'eint',
     kCMIOExposureControlPropertyMaximumGain			= 'emax',
 };
-    
+
+#pragma clang diagnostic pop
 #pragma pack(pop)
     
 #if defined(__cplusplus)

@@ -1316,7 +1316,7 @@ namespace StandardUSB30
         kLinkStateRecoveryIdleTimeout           = kIOUSB30LinkStateRecoveryIdleTimeout,
         kLinkStateLoopbackExitTimeout           = kIOUSB30LinkStateLoopbackExitTimeout,
         kLinkStateHotResetActiveTimeout         = kIOUSB30LinkStateHotResetActiveTimeout,
-        kLinkStateHotResetExistTimeout          = kIOUSB30LinkStateHotResetExistTimeout,
+        kLinkStateHotResetExitTimeout           = kIOUSB30LinkStateHotResetExitTimeout,
 
         // USB 3.0 7.5.4
         kLinkStatePollingDeadline               = kIOUSB30LinkStatePollingDeadline,

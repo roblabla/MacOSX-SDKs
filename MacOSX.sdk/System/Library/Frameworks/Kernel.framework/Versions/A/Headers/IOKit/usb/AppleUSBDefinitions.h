@@ -1116,9 +1116,16 @@ enum tIOUSB30BusCurrent
 
 #pragma mark USB 2.0 constants
 // USB 2.0 4.1.1
-enum
+enum tIOUSBTopology
 {
-    kIOUSBTopologyTierLimit = 7
+    kIOUSBTopologyHost       = 1,
+    kIOUSBTopologyRootPort   = 2,
+    kIOUSBTopology1Hub       = 3,
+    kIOUSBTopology2Hub       = 4,
+    kIOUSBTopology3Hub       = 5,
+    kIOUSBTopology4Hub       = 6,
+    kIOUSBTopology5Hub       = 7,
+    kIOUSBTopologyTierLimit  = kIOUSBTopology5Hub
 };
 
 #pragma mark USB 3.0 constants
@@ -1154,13 +1161,19 @@ enum tIOUSB30LinkStateTimeout
     kIOUSB30LinkStateRecoveryIdleTimeout          = 2,
     kIOUSB30LinkStateLoopbackExitTimeout          = 2,
     kIOUSB30LinkStateHotResetActiveTimeout        = 12,
-    kIOUSB30LinkStateHotResetExistTimeout         = 2,
+    kIOUSB30LinkStateHotResetExitTimeout          = 2,
 
     // USB 3.0 7.5.4
     kIOUSB30LinkStatePollingDeadline = (kIOUSB30LinkStatePollingLFPSTimeout + 1 + kIOUSB30LinkStatePollingActiveTimeout + kIOUSB30LinkStatePollingConfigurationTimeout + kIOUSB30LinkStatePollingIdleTimeout),
 
     // USB 3.0 7.5.9 and 7.5.10
     kIOUSB30LinkStateSSResumeDeadline = (kIOUSB30LinkStateU3WakeupRetryDelay /* accomodation for retimer */ + kIOUSB30LinkStateU3NoLFPSResponseTimeout + kIOUSB30LinkStateRecoveryActiveTimeout + kIOUSB30LinkStateRecoveryConfigurationTimeout + kIOUSB30LinkStateRecoveryIdleTimeout),
+    
+    // USB 3.0 7.5.10
+    kIOUSB30LinkStateRecoveryDeadline = (kIOUSB30LinkStateRecoveryActiveTimeout + kIOUSB30LinkStateRecoveryConfigurationTimeout + kIOUSB30LinkStateRecoveryIdleTimeout + 1 /* margin */),
+    
+    // USB 3.0 7.5.12
+    kIOUSB30LinkStateHotResetDeadline = kIOUSB30LinkStateHotResetActiveTimeout + kIOUSB30LinkStateHotResetExitTimeout + 1 /* margin */,
 };
 
 // USB 3.1 Table 8-18

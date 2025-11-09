@@ -7,9 +7,7 @@
 //
 
 #import <TargetConditionals.h>
-
-#if TARGET_OS_MACCATALYST
-
+#if TARGET_OS_MACCATALYST || TARGET_OS_OSX
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIResponder.h>
@@ -56,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#endif
+#endif // TARGET_OS_MACCATALYST || TARGET_OS_OSX
 
 #else
 #import <UIKitCore/NSTouchBar+UIKitAdditions.h>

@@ -30,7 +30,8 @@ typedef NS_ENUM(NSInteger, UIPageControlBackgroundStyle) {
     UIPageControlBackgroundStyleMinimal    = 2,
 } API_AVAILABLE(ios(14.0));
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIPageControl : UIControl 
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIPageControl : UIControl 
 
 /// default is 0
 @property (nonatomic, assign) NSInteger numberOfPages;

@@ -28,6 +28,8 @@
 #import <Intents/INResumeWorkoutIntent.h>
 #import <Intents/INStartWorkoutIntent.h>
 
+#import <Intents/INShareFocusStatusIntent.h>
+
 #import <Intents/INAddMediaIntent.h>
 #import <Intents/INPlayMediaIntent.h>
 #import <Intents/INSearchForMediaIntent.h>

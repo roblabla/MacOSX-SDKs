@@ -64,8 +64,8 @@ typedef NS_ENUM(NSInteger, CBConnectionEvent) {
  *
  */
 typedef NS_OPTIONS(NSUInteger, CBCentralManagerFeature) {
-	CBCentralManagerFeatureExtendedScanAndConnect = 1UL << 0,
-} NS_ENUM_AVAILABLE_IOS(13_0) NS_SWIFT_NAME(CBCentralManager.Feature);
+	CBCentralManagerFeatureExtendedScanAndConnect CB_CM_API_AVAILABLE = 1UL << 0,
+} NS_SWIFT_NAME(CBCentralManager.Feature);
 
 @protocol CBCentralManagerDelegate;
 @class CBUUID, CBPeripheral;
@@ -103,7 +103,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : CBManager
  *  @discussion     Returns a boolean value representing the support for the provided features.
  *
  */
-+ (BOOL)supportsFeatures:(CBCentralManagerFeature)features NS_AVAILABLE_IOS(13_0) NS_SWIFT_NAME(supports(_:));
++ (BOOL)supportsFeatures:(CBCentralManagerFeature)features CB_CM_API_AVAILABLE NS_SWIFT_NAME(supports(_:));
 
 - (instancetype)init;
 
@@ -236,8 +236,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : CBManager
  *  @seealso        	CBConnectionEventMatchingOptionServiceUUIDs
  *  @seealso            CBConnectionEventMatchingOptionPeripheralUUIDs
  */
-- (void)registerForConnectionEventsWithOptions:(nullable NSDictionary<CBConnectionEventMatchingOption, id> *)options NS_AVAILABLE_IOS(13_0);
-
+- (void)registerForConnectionEventsWithOptions:(nullable NSDictionary<CBConnectionEventMatchingOption, id> *)options CB_CM_API_AVAILABLE;
 
 @end
 
@@ -355,7 +354,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : CBManager
  *  @discussion         This method is invoked upon the connection or disconnection of a peripheral that matches any of the options provided in {@link registerForConnectionEventsWithOptions:}.
  *
  */
-- (void)centralManager:(CBCentralManager *)central connectionEventDidOccur:(CBConnectionEvent)event forPeripheral:(CBPeripheral *)peripheral NS_AVAILABLE_IOS(13_0);
+- (void)centralManager:(CBCentralManager *)central connectionEventDidOccur:(CBConnectionEvent)event forPeripheral:(CBPeripheral *)peripheral CB_CM_API_AVAILABLE;
 
 /*!
  *  @method centralManager:didUpdateANCSAuthorizationForPeripheral:

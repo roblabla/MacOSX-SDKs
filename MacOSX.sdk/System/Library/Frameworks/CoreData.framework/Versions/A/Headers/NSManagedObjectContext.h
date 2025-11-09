@@ -1,7 +1,7 @@
 /*
     NSManagedObjectContext.h
     Core Data
-    Copyright (c) 2004-2020, Apple Inc.
+    Copyright (c) 2004-2021, Apple Inc.
     All rights reserved.
 */
 
@@ -118,7 +118,7 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 - (nullable __kindof NSManagedObject*)existingObjectWithID:(NSManagedObjectID*)objectID error:(NSError**)error API_AVAILABLE(macosx(10.6),ios(3.0));
 
 // method to fetch objects from the persistent stores into the context (fetch request defines the entity and predicate as well as a sort order for the objects); context will match the results from persistent stores with current changes in the context (so inserted objects are returned even if they are not persisted yet); to fetch a single object with an ID if it is not guaranteed to exist and thus -objectWithObjectID: cannot be used, one would create a predicate like [NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"objectID"] rightExpression:[NSExpression expressionForConstantValue:<object id>] modifier:NSDirectPredicateModifier type:NSEqualToPredicateOperatorType options:0]
-- (nullable NSArray *)executeFetchRequest:(NSFetchRequest *)request error:(NSError **)error;
+    - (nullable NSArray *)executeFetchRequest:(NSFetchRequest *)request error:(NSError **)error NS_REFINED_FOR_SWIFT;
 
 // returns the number of objects a fetch request would have returned if it had been passed to -executeFetchRequest:error:.   If an error occurred during the processing of the request, this method will return NSNotFound. 
 - (NSUInteger) countForFetchRequest: (NSFetchRequest *)request error: (NSError **)error API_AVAILABLE(macosx(10.5),ios(3.0)) __attribute__((swift_error(nonnull_error)));

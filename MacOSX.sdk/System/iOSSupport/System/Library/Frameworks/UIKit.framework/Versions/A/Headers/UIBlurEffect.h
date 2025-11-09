@@ -57,7 +57,8 @@ typedef NS_ENUM(NSInteger, UIBlurEffectStyle) {
 } API_AVAILABLE(ios(8.0));
 
 /* UIBlurEffect will provide a blur that appears to have been applied to the content layered behind the UIVisualEffectView. Views added to the contentView of a blur visual effect are not blurred themselves. */
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UIBlurEffect : UIVisualEffect
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
+@interface UIBlurEffect : UIVisualEffect
 
 + (UIBlurEffect *)effectWithStyle:(UIBlurEffectStyle)style;
 

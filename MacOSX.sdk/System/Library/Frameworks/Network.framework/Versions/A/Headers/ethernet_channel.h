@@ -2,7 +2,7 @@
 //  ethernet_channel.h
 //  Network
 //
-//  Copyright (c) 2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2019, 2021 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_ETHERNET_CHANNEL_H__
@@ -278,6 +278,7 @@ typedef void (^nw_ethernet_channel_send_completion_t)(_Nullable nw_error_t error
  *		This callback does indicate that the data has been sent.
  */
 API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
+NW_SWIFT_DISABLE_ASYNC
 void
 nw_ethernet_channel_send(nw_ethernet_channel_t ethernet_channel,
 						 dispatch_data_t content,

@@ -134,7 +134,7 @@ typedef struct {
   void * _Nullable table_data;
   BNNSDataType table_data_type;
 
-  float data_scale;
+  float data_scale; // 0.0f value will be set to 1.0f during computation
   float data_bias;
 
 } BNNSNDArrayDescriptor;
@@ -229,6 +229,30 @@ typedef struct {
   BNNSDescriptorType out_type;
 } BNNSArithmeticBinary;
 
+/*!
+ @abstract Arithmetic struct that holds 3 input descriptors and an output descriptor
+ @discussion
+ @field in1 input1 descriptor
+ @field in1_type  input1 descriptor type
+ @field in2 descriptor
+ @field in2_type input2 descriptor type
+ @field in3 descriptor
+ @field in3_type input3 descriptor type
+ @field out output descriptor
+ @field out_type output descriptor type
+
+ */
+typedef struct {
+  BNNSNDArrayDescriptor in1;
+  BNNSDescriptorType in1_type;
+  BNNSNDArrayDescriptor in2;
+  BNNSDescriptorType in2_type;
+  BNNSNDArrayDescriptor in3;
+  BNNSDescriptorType in3_type;
+  BNNSNDArrayDescriptor out;
+  BNNSDescriptorType out_type;
+} BNNSArithmeticTernary;
+
 /*! @abstract Multihead Attention Projection Parameters
  *
  *  @description
@@ -256,7 +280,7 @@ typedef struct {
 
  @discussion
  The convolution product Output = Weights &times; Input is defined as follows.  Pixel <tt>Output(o,x,y)</tt> of the output image stack receives:
- <br><tt>Output(o,x,y) = &sum;<sub>i,kx,ky</sub> Weight(o,i,kx,ky) * Input(i,x_stride * x + kx,y_stride * y + ky)</tt> with
+ <br><tt>Output(o,x,y) = &sum;<sub>i,kx,ky</sub> Weight(o,i,kx,ky) * Input(i,x_stride * x + kx*x_dilation_stride,y_stride * y + ky*y_dilation_stride)</tt> with
  <tt>kx=0..k_width-1</tt>, <tt>ky=0..k_height-1</tt>,
  <tt>i=0..in_channels-1</tt>, <tt>o=0..out_channels-1</tt>,
  <tt>x=0..out_width-1</tt>, <tt>y=0..out_height-1</tt>.
@@ -265,11 +289,11 @@ typedef struct {
  <br><tt>Output(o,x,y) = ActivationFunction( Bias(o) + Output(o,x,y) )</tt>.
 
  Dimensions must satisfy:
- <br><tt>in_width + 2 * x_padding = x_stride * ( out_width - 1 ) + k_width</tt>, and <tt>in_height + 2 * y_padding = y_stride * ( out_height - 1 ) + k_height</tt>.
- <br>A common use case is <tt>x_stride=y_stride=1</tt>, and <tt>x_padding=y_padding=0</tt>. In that case, <tt>in_width = out_width + k_width - 1</tt>, and <tt>in_height = out_height + k_height - 1</tt>.
+ <br><tt>in_width + 2 * x_padding >= x_stride * ( out_width - 1 ) + (k_width + (k_width-1)*(x_dilation_stride-1))</tt>, and <tt>in_height + 2 * y_padding >= y_stride * ( out_height - 1 ) + (k_height + (k_height-1)*(y_dilation_stride-1))</tt>.
+ <br>A common use case is <tt>x_stride=y_stride=1</tt>, and <tt>x_padding=y_padding=0</tt>. In that case, <tt>in_width >= out_width + k_width - 1</tt>, and <tt>in_height >= out_height + k_height - 1</tt>.
 
- Padding is a border of 0 values virtually added to the input image.
-
+ Padding is a border of 0 values virtually added to the input image. if asymmetric padding is used, replace x_padding with pad[0]+pad[1] and y_padding with pad[2]+pad[3] in the input shape requirement formula above.
+  
  Coefficient <tt>Weight(o,i,kx,ky)</tt> for output image <tt>o=0..out_channels-1</tt>, input image <tt>i=0..in_channels-1</tt>, and kernel point (kx,ky) is
  stored in <tt>weights[kx + k_width * (ky + k_height * (i + in_channels * o))]</tt>, where
  the convolution kernel dimensions are <tt>k_width,k_height</tt>.
@@ -304,8 +328,8 @@ typedef struct {
   BNNSNDArrayDescriptor bias;
   BNNSActivation activation;
 
-  size_t x_stride;
-  size_t y_stride;
+  size_t x_stride; // stride 0 will be set 1 during computation
+  size_t y_stride; // stride 0 will be set 1 during computation
   size_t x_dilation_stride;
   size_t y_dilation_stride;
   size_t x_padding;
@@ -391,8 +415,8 @@ typedef struct {
 
   size_t k_width;
   size_t k_height;
-  size_t x_stride;
-  size_t y_stride;
+  size_t x_stride; // stride 0 will be set 1 during computation
+  size_t y_stride; // stride 0 will be set 1 during computation
   size_t x_dilation_stride;
   size_t y_dilation_stride;
   size_t x_padding;
@@ -414,6 +438,9 @@ typedef struct {
  @field activation Layer activation function
  @field axis_flags Flags indicating axes on which to conduct certain activation functions applications (e.g. softmax).
         A value of 0 is interpreted to mean the axis corresponding to i_desc.size[0].
+        When used in batch processing, this flag can also specify the batch dimension at the bit one higher than the last dimension of BNNSDataLayout.
+        For example, axis_flags = 2 specifies the batch dimension for BNNSDataLayoutVector.
+        axis = 8 specifies the batch dimension for BNNSDataLayoutImageCHW.
 
  */
 typedef struct {
@@ -609,29 +636,81 @@ typedef struct {
 } BNNSOptimizerSGDMomentumFields;
 
 /*!
- @abstract Adam Fields
+ @abstract SGD with Momentum and gradient clipping Optimizer Fields
  @discussion
- BNNSOptimizerAdamFields structure should be pointed to by OptimizerAlgFields when using an Optimizer filter with optimization function BNNSOptimizerFunctionAdam.
+ BNNSOptimizerSGDMomentumFields structure should be pointed to by OptimizerAlgFields when using an Optimizer filter with optimization function BNNSOptimizerFunctionSGDMomentum.
+ The structure will not be cached internally and must be valid when calling the optimizer apply, therefore, values such as learning_rate can be modified between optimizer filter apply calls.
+
+ The error function E = L + R(W) where L is the loss function and R(W) is the regularization term.
+ The gradient g is dE/dW = dL/dW + dR(W)/dW
+ dL/dW could be clipped using clipping_func and scaled using gradient_scale
+ dR(W)/dW could be scaled using regularization_scale
+
+ The SGD with momentum optimizer will calculate the parameter W at time t+1 using accumulator V, gradient g, learning rate lr and momentum m according to sgd_momentum_variant.
+
+ @field learning_rate learning rate
+ @field momentum momentum. setting momentum to 0 will result in vanilla sgd, the accumulation term V will not be computed and associated scratch buffer can be NULL
+ @field gradient_scale gradient scaling factor
+ @field regularization_scale regularization scaling factor
+ @field nesterov nesterov momentum update
+ @field regularization_func regularization function
+ @field sgd_momentum_variant sgd momentum variant
+ @field clipping_func clipping function
+ @field clip_gradients_min minimum gradient values. Used by BNNSOptimizerClippingByValue.
+ @field clip_gradients_max maximum gradient values. Used by BNNSOptimizerClippingByValue.
+ @field clip_gradients_max_norm max L2-norm. Used by BNNSOptimizerClippingByNorm and BNNSOptimizerClippingByGlobalNorm.
+ @field clip_gradients_use_norm If you already know the global L2-norm, you can specify the global L2-norm to use by BNNSOptimizerClippingByGlobalNorm.
+ If zero, global L2-norm of gradient tensors is computed and then used.
+
+ */
+typedef struct {
+  float learning_rate;
+  float momentum;
+  float gradient_scale;
+  float regularization_scale;
+  bool nesterov;
+  BNNSOptimizerRegularizationFunction regularization_func;
+  BNNSOptimizerSGDMomentumVariant sgd_momentum_variant;
+  BNNSOptimizerClippingFunction clipping_func;
+  float clip_gradients_min;
+  float clip_gradients_max;
+  float clip_gradients_max_norm;
+  float clip_gradients_use_norm;
+} BNNSOptimizerSGDMomentumWithClippingFields;
+
+/*!
+ @abstract Adam and AdamW Fields
+ @discussion
+ BNNSOptimizerAdamFields structure should be pointed to by OptimizerAlgFields when using an Optimizer filter with one of the optimization functions BNNSOptimizerFunctionAdam, BNNSOptimizerFunctionAdamAMSGrad, BNNSOptimizerFunctionAdamW, or BNNSOptimizerFunctionAdamWAMSGrad.
  The structure will not be cached internally and must be valid when calling the optimizer apply, therefore, values such as learning_rate can be modified between optimizer filter apply calls.
 
  The error function E = L + R(W) where L is the loss function and R(W) is the regularization term.
  The gradient g is dE/dW = dL/dW + dR(W)/dW
  dL/dW could be clipped using clip_gradients and scaled using gradient_scale
- dR(W)/dW could be scaled using regularization_scale
+ For BNNSOptimizerFunctionAdam and BNNSOptimizerFunctionAdamAMSGrad dR(W)/dW could be scaled using regularization_scale (L_1/L_2 regularization).
+ For BNNSOptimizerFunctionAdamW and BNNSOptimizerFunctionAdamWAMSGrad, regularization_scale is instead used for the decoupled weight decay parameter
 
- Implementation according to ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION by Diederik P. Kingma, Jimmy Lei Ba (https://arxiv.org/pdf/1412.6980.pdf)
+ Adam Implementation according to ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION by Diederik P. Kingma, Jimmy Lei Ba (https://arxiv.org/pdf/1412.6980.pdf)
+
+ AdamW Implementation is based on DECOUPLED WEIGHT DECAY REGULARIZATION by I. Loshchilov and F. Hutter
+ (https://arxiv.org/pdf/1711.05101.pdf)
+
+ The AMSGrad variants use the alternative versions of the update step described in
+ ON THE CONVERGENCE OF ADAM AND BEYOND by S. Reddi, S. Kale and S. Kumar
+ (https://arxiv.org/pdf/1904.09237)
 
  @field learning_rate learning rate
  @field beta1 first moment constant. must be in [0,1)
  @field beta2 second moment constant. must be in [0,1)
  @field time_step time step. time step is maintained by user since optimizer is called for multiple layers with same time step. initial value must be 1, increase by 1 after optimizing all the layer paramers in the network.
- @field epsilon epsilon addition for the division in the parameter update stage, similar to epsilon hat in the end of section 2 of the paper.
+ @field epsilon epsilon addition for the division in the parameter update stage, note that this is actually epsilon hat from section 2 of the
+        Adam paper, which is related to the paper's epsilon through the relation epsilon_hat = epsilon * sqrt(1 - beta2 ** time_step)
  @field gradient_scale gradient scaling factor
- @field regularization_scale regularization scaling factor
+ @field regularization_scale regularization scaling factor / decoupled weight decay parameter
  @field clip_gradients clip gradient between min and max values
  @field clip_gradients_min minimum gradient values. ignored if clip_gradients is false
  @field clip_gradients_max maximum gradient values. ignored if clip_gradients is false
- @field regularization_func regularization function
+ @field regularization_func regularization function (only used by Adam, ignored by AdamW)
  */
 typedef struct {
   float learning_rate;
@@ -646,6 +725,58 @@ typedef struct {
   float clip_gradients_max;
   BNNSOptimizerRegularizationFunction regularization_func;
 } BNNSOptimizerAdamFields;
+
+/*!
+ @abstract Adam and AdamW with gradient clipping Fields
+ @discussion
+ BNNSOptimizerAdamFields structure should be pointed to by OptimizerAlgFields when using an Optimizer filter with one of the optimization functions BNNSOptimizerFunctionAdam, BNNSOptimizerFunctionAdamAMSGrad, BNNSOptimizerFunctionAdamW, or BNNSOptimizerFunctionAdamWAMSGrad.
+ The structure will not be cached internally and must be valid when calling the optimizer apply, therefore, values such as learning_rate can be modified between optimizer filter apply calls.
+
+ The error function E = L + R(W) where L is the loss function and R(W) is the regularization term.
+ The gradient g is dE/dW = dL/dW + dR(W)/dW
+ dL/dW could be clipped using clipping_func and scaled using gradient_scale
+ For BNNSOptimizerFunctionAdam and BNNSOptimizerFunctionAdamAMSGrad dR(W)/dW could be scaled using regularization_scale (L_1/L_2 regularization).
+ For BNNSOptimizerFunctionAdamW and BNNSOptimizerFunctionAdamWAMSGrad, regularization_scale is instead used for the decoupled weight decay parameter
+
+ Adam Implementation according to ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION by Diederik P. Kingma, Jimmy Lei Ba (https://arxiv.org/pdf/1412.6980.pdf)
+
+ AdamW Implementation is based on DECOUPLED WEIGHT DECAY REGULARIZATION by I. Loshchilov and F. Hutter
+ (https://arxiv.org/pdf/1711.05101.pdf)
+
+ The AMSGrad variants use the alternative versions of the update step described in
+ ON THE CONVERGENCE OF ADAM AND BEYOND by S. Reddi, S. Kale and S. Kumar
+ (https://arxiv.org/pdf/1904.09237)
+
+ @field learning_rate learning rate
+ @field beta1 first moment constant. must be in [0,1)
+ @field beta2 second moment constant. must be in [0,1)
+ @field time_step time step. time step is maintained by user since optimizer is called for multiple layers with same time step. initial value must be 1, increase by 1 after optimizing all the layer paramers in the network.
+ @field epsilon epsilon addition for the division in the parameter update stage, note that this is actually epsilon hat from section 2 of the
+ Adam paper, which is related to the paper's epsilon through the relation epsilon_hat = epsilon * sqrt(1 - beta2 ** time_step)
+ @field gradient_scale gradient scaling factor
+ @field regularization_scale regularization scaling factor / decoupled weight decay parameter
+ @field regularization_func regularization function (only used by Adam, ignored by AdamW)
+ @field clipping_func clipping function
+ @field clip_gradients_min minimum gradient values. Used by BNNSOptimizerClippingByValue.
+ @field clip_gradients_max maximum gradient values. Used by BNNSOptimizerClippingByValue.
+ @field clip_gradients_max_norm max L2-norm. Used by BNNSOptimizerClippingByNorm and BNNSOptimizerClippingByGlobalNorm.
+ @field clip_gradients_use_norm global norm to use by BNNSOptimizerClippingByGlobalNorm. If zero, global norm of gradient tensors is computed and used.
+ */
+typedef struct {
+  float learning_rate;
+  float beta1;
+  float beta2;
+  float time_step;
+  float epsilon;
+  float gradient_scale;
+  float regularization_scale;
+  BNNSOptimizerRegularizationFunction regularization_func;
+  BNNSOptimizerClippingFunction clipping_func;
+  float clip_gradients_min;
+  float clip_gradients_max;
+  float clip_gradients_max_norm;
+  float clip_gradients_use_norm;
+} BNNSOptimizerAdamWithClippingFields;
 
 /*!
  @abstract RMSProp Fields
@@ -672,6 +803,12 @@ typedef struct {
  @field epsilon term added to denominator (ε above)
  @field centered use the centered variant if true
  @field momentum momentum decay rate (γ above) (set to 0 to disable momentum)
+ @field gradient_scale gradient scaling factor
+ @field regularization_scale regularization scaling factor / decoupled weight decay parameter
+ @field clip_gradients clip gradient between min and max values
+ @field clip_gradients_min minimum gradient values. ignored if clip_gradients is false
+ @field clip_gradients_max maximum gradient values. ignored if clip_gradients is false
+ @field regularization_func regularization function (only used by Adam, ignored by AdamW)
  */
 typedef struct {
   float learning_rate;
@@ -688,13 +825,64 @@ typedef struct {
 } BNNSOptimizerRMSPropFields;
 
 /*!
+ @abstract RMSProp with gradient clipping Fields
+ @discussion
+ Implements the RMSProp method as described in [1] (centered version) and [2] (original, non-centred version).
+
+ Weight w_i is updated using one of the formulae
+ Uncentered:
+ n_i = ɑ n_i + (1 - ɑ) (dL/dw_i)**2
+ Δ_i = γ Δ_i - η dL/dw_i / ( sqrt( n_i ) + ε )
+ w_i = w_i + Δ_i
+ Centered:
+ n_i = ɑ n_i + (1 - ɑ) (dL/dw_i)**2
+ g_i = ɑ g_i + (1 - ɑ) (dL/dw_i)
+ Δ_i = γ Δ_i - η dL/dw_i / ( sqrt( n_i - g_i**2 ) + ε )
+ w_i = w_i + Δ_i
+ The gradients dL/dw_i may optionally be clipped to a given range.
+
+ [1] "Generating Sequences With Recurrent Neural Networks", A. Graves, https://arxiv.org/pdf/1308.0850v5.pdf
+ [2] "Neural Networks for Machine Learning", Leacture 6a, G. Hinton, http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf
+
+ @field learning_rate the scheduled learning rate, which will be adjusted by the algorithm (η above)
+ @field alpha smoothing constant (ɑ above)
+ @field epsilon term added to denominator (ε above)
+ @field centered use the centered variant if true
+ @field momentum momentum decay rate (γ above) (set to 0 to disable momentum)
+ @field gradient_scale gradient scaling factor
+ @field regularization_scale regularization scaling factor / decoupled weight decay parameter
+ @field regularization_func regularization function (only used by Adam, ignored by AdamW)
+ @field clipping_func clipping function
+ @field clip_gradients_min minimum gradient values. Used by BNNSOptimizerClippingByValue.
+ @field clip_gradients_max maximum gradient values. Used by BNNSOptimizerClippingByValue.
+ @field clip_gradients_max_norm max L2-norm. Used by BNNSOptimizerClippingByNorm and BNNSOptimizerClippingByGlobalNorm.
+ @field clip_gradients_use_norm global norm to use by BNNSOptimizerClippingByGlobalNorm. If zero, global norm of gradient tensors is computed and used.
+ */
+typedef struct {
+  float learning_rate;
+  float alpha;
+  float epsilon;
+  bool centered;
+  float momentum;
+  float gradient_scale;
+  float regularization_scale;
+  BNNSOptimizerRegularizationFunction regularization_func;
+  BNNSOptimizerClippingFunction clipping_func;
+  float clip_gradients_min;
+  float clip_gradients_max;
+  float clip_gradients_max_norm;
+  float clip_gradients_use_norm;
+} BNNSOptimizerRMSPropWithClippingFields;
+
+/*!
  @abstract Normalization layer parameters
  @discussion
  normalize inputs by using mean, variance, beta and gamma.
  beta and gamma are trainable parameters.
- input and output descriptor must have the same dimensions.
+ input and output descriptor must have the same dimensions. Only BNNSDataLayoutImageCHW and BNNSDataLayoutVector are supported.
+ Vector of length L is equivalent to ImageCHW of dimension Lx1x1 (CxHxW).
  Except for layer norm, beta, gamma, moving mean and moving variance width (descriptor size[0]) must be equal to number of input channels (descriptor size[2]).
- For layer norm, beta and gamma currently must have the same dimensions as the input (normalization_axis = 0).
+ For layer norm, beta and gamma currently must have the same dimensions as the input depending on normalization_axis.
  momentum is used to update the moving mean and moving variance during training and must be between 0 and 1
  epsilon is used in the computation of 1/sqrt(variance + epsilon)
 
@@ -886,11 +1074,11 @@ typedef struct {
 
  - num_directions == 1 for unidirectional and 2 for bidirectional
  @field input_descriptor - contain the descriptors of the input, hidden input and cell state input data
-        input_descriptor.data_desc - the hierarchy of the data should be [seq_len][batch_size][input_size] (C style multi array notation, seq_len X 2D array of batch_size X 1D array of  input_size elements)
+        input_descriptor.data_desc - the layout should be either BNNSDataLayoutSNE with shape (input_size, batch_size, seq_len) or BNNSDataLayoutNSE with shape (input_size, seq_len, batch_size). If no layout is specified, SNE is assumed.
         input_descriptor.hidden_desc - the hierarchy of the data should be [num_layers][num_directions][batch_size][hidden_size] (C style multi array notation)
         input_descriptor.cell_state_desc - the hierarchy of the data should be [num_layers][num_directions][batch_size][hidden_size] (C style multi array notation)
  @field output_descriptor - contain the descriptors of the output, hidden output and cell state output data
-        output_descriptor.data_desc - output of all the sequence hidden output. the hierarchy of the data should be [seq_len][batch_size][num_directions][hidden_size] (C style multi array notation)
+        output_descriptor.data_desc - the layout should be either BNNSDataLayoutSNE with shape (num_directions*hidden_size, batch_size, seq_len) or BNNSDataLayoutNSE with shape (num_directions*hidden_size, seq_len, batch_size). The first dimension can be unpacked as a 2D array with hidden_size as the major dimension (i.e. it can be interpreted as a C array of shape [num_directions][hidden_size]). If no layout is specified, SNE is assumed.
         output_descriptor.hidden_desc - the last sequence hidden output. the hierarchy of the data should be [num_layers][num_directions][batch_size][hidden_size] (C style multi array notation)
         output_descriptor.cell_state_desc - the last sequence cell state output. the hierarchy of the data should be [num_layers][num_directions][batch_size][hidden_size] (C style multi array notation)
  @field forget_gate - forget descriptor (default activation is sigmoid), memory pointers ordered as [num_layers][num_directions][hidden_size][input_size/hidden_size] (C style multi array notation)
@@ -1139,6 +1327,9 @@ typedef struct {
  *  d_model - dimension of model, inferred from query.target_desc->size[1]
  *  d_key - dimension of key space, inferred from key.weights->size[1]
  *  d_value - dimension of value space, inferred from output.target_desc->size[1]
+ *  k_dim - dimension of input key sequence, inferred from key.target_desc->size[1]
+ *  v_dim - dimension of input value sequence, inferred from value.target_desc->size[1]
+ *  Note: In releases prior to macOS 12.0, iOS 15.0, watchOS 8.0 and tvOS 15.0, k_dim and v_dim must be equal to d_model.
  *
  *  Typical usage would be to set d_key = d_value = d_model / num_heads such that the total work
  *  involved is similar to that of a single headed attention layer of d_model dimension.
@@ -1149,13 +1340,13 @@ typedef struct {
  *                    to a d_key size space (Wᴾ above)
  *         .bias - a 2D tensor of shape d_key x num_heads added as a bias during the projection from Q (pᴾ above)
  *  @field key describes the key-related input parameters and projection:
- *         .target_desc - a 2D tensor of shape source_length x d_model used as an input (K above)
- *         .weights - a 3D tensor of shape d_model x d_key x num_heads giving a projection for each head from K
+ *         .target_desc - a 2D tensor of shape source_length x k_dim used as an input (K above)
+ *         .weights - a 3D tensor of shape k_dim x d_key x num_heads giving a projection for each head from K
  *                    to a d_key size space (Wᴷ above)
  *         .bias - a 2D tensor of shape d_key x num_heads added as a bias during the projection from K (pᴷ above)
  *  @field value describes the value-related input parameters and projection:
- *         .target_desc - a 2D tensor of shape source_length x d_model used as an input (V above)
- *         .weights - a 3D tensor of shape d_model x d_value x num_heads giving a projection for each head from V
+ *         .target_desc - a 2D tensor of shape source_length x v_dim used as an input (V above)
+ *         .weights - a 3D tensor of shape v_dim x d_value x num_heads giving a projection for each head from V
  *                    to a d_value size space (Wⱽ above)
  *         .bias - a 2D tensor of shape d_value x num_heads added as a bias during the projection from V (pⱽ above)
  *  @field add_zero_attn If true, a row of zeroes is added to the projected K and to V inputs to the Attention calculation
@@ -1266,6 +1457,74 @@ typedef struct {
     BNNSPaddingMode         padding_mode;
     uint32_t                padding_value;
 } BNNSLayerParametersPadding;
+
+/*!
+ * @abstract Embedding Layer Fields
+ *
+ * @discussion
+ * Implements a lookup table into a dictionary array, the elements of which can be trained parameters.
+ * Given a scalar index i, output is the i-th element of the dictionary array. An input may consist of multiple indices (words) that result in
+ * multiple dictionary items (embeddings) being returned.
+ * For example, if dictionary has shape (3, 4, 5), then a single dictionary item would have shape (3, 4) and input values would be in the
+ * range [0, 4]. If the input shape was thus (6, 7), the output shape would be (3, 4, 6, 7), that is the concatenation of the dicitionary item
+ * shape and the input shape.
+ *
+ * @field flags - Bit field for flags specifying additional behavior, such as scaling gradient by frequency
+ * @field i_desc - Input descriptor for this layer. Must specify a (signed or unsigned) integer type.
+ * @field o_desc - Output descriptor, of shape (dictionary_item.shape, i_desc.shape), where dictionary_item corresponds to the shape
+ *        of dictionary without the final index.
+ * @field dictionary - Dictionary of shape dictionary_item with an extra dimension of size num_embeddings appended.
+ * @field padding_idx - If padding_idx is in the range [0, num_embeddings-1], then dictionary[:, padding_idx] is treated as always
+ *        containing a zero tensor (forward apply will ignore the contents if dictionary[:, padding_idx], which may however change if an
+ *        optimizer step is applied to them).
+ * @field max_norm - If non-zero, then any vector with norm > max_norm will be renormalized to have norm max_norm during forward
+ *        lookups. Type of norm is specified by norm_type.
+ * @field norm_type - If max_norm is non-zero, the type of norm to use (specifically the p-norm where p=norm_type). If norm_type=0,
+ *        the 2-norm is used.
+ */
+typedef struct {
+  BNNSEmbeddingFlags    flags;
+  BNNSNDArrayDescriptor i_desc;
+  BNNSNDArrayDescriptor o_desc;
+  BNNSNDArrayDescriptor dictionary;
+  size_t                padding_idx;
+  float                 max_norm;
+  float                 norm_type;
+} BNNSLayerParametersEmbedding;
+
+/*!
+ @abstract Quantization layer parameters
+ @discussion
+ The Quantization layer converts higher precision tensors to lower precision tensors (Quantize) or lower precision tensors to higher precision tensors (Dequantize)
+ The data_scale and data_bias fields in all provided descriptors are ignored.
+ 
+ @field axis_mask dimension mask
+ axis_mask describes the axis in which scale and bias are applied, if provided.
+ To apply scale/bias on axis i, set axis_mask bit i to 1.
+ axis_mask must have a single axis set to 1, or be equal to 0.
+ The batch dimension may be specified as part of the axis mask by setting axis_mask = (1<<naxis), where naxis is the number of axes specified by the tensor layout
+ If axis_mask is 0, the entire tensor will be quantized/dequantized using scalar scale and bias values, if provided.
+ For example, when using a BNNSDataLayoutImageCHW layout,  axis_mask = 0 apply scale/bias on entire tensor, axis_mask = 1 apply scale/bias on width (W), axis_mask = 2 apply scale/bias on height (H), axis_mask = 4 apply scale/bias on channel (C), axis_mask = 8 apply scale/bias on the batch dimension.
+ @field function quantizer function
+ @field i_desc input descriptor
+ @field o_desc output descriptor
+ @field scale optional scale descriptor
+ - ignored if scale.data is null
+ - scale layout must be BNNSDataLayoutVector
+ - scale vector size must be equal to the input tensor axis size, or equal to 1 if axis_mask is 0.
+ @field bias optional bias descriptor
+ - ignored if bias.data is null
+ - bias layout must be BNNSDataLayoutVector
+ - bias vector size must be equal to the input tensor axis size, or equal to 1 if axis_mask is 0.
+ */
+typedef struct {
+  size_t axis_mask;
+  BNNSQuantizerFunction function;
+  BNNSNDArrayDescriptor i_desc;
+  BNNSNDArrayDescriptor o_desc;
+  BNNSNDArrayDescriptor scale;
+  BNNSNDArrayDescriptor bias;
+} BNNSLayerParametersQuantization;
 
 #pragma mark - Deprecated
 

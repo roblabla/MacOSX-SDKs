@@ -81,6 +81,7 @@ enum {
 	kPEPanicEnd,
 	kPEPanicRestartCPUNoCallouts,
 	kPEPanicDiagnosticsDone,
+	kPEPanicDiagnosticsInProgress,
 };
 
 /* Bitmask of details related to panic callouts */

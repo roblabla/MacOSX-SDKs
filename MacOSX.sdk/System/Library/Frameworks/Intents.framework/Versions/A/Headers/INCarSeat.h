@@ -25,6 +25,6 @@ typedef NS_ENUM(NSInteger, INCarSeat) {
     INCarSeatThirdRowRight,
     INCarSeatThirdRow,
     INCarSeatAll,
-} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+} API_DEPRECATED("INCarSeat is deprecated. There is no replacement.", ios(10.0, 15.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 #endif // INCarSeat_h

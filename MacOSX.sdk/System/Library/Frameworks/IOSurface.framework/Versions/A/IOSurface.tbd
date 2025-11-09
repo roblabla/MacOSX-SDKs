@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1A0AD030-00A3-330D-A821-16C0BBA88A82
+    value:           ECA1A36D-B127-374A-ABAD-9E9620D2CE45
   - target:          x86_64-maccatalyst
-    value:           1A0AD030-00A3-330D-A821-16C0BBA88A82
+    value:           ECA1A36D-B127-374A-ABAD-9E9620D2CE45
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D0329678-B1D1-3B68-8B1E-CBFA0125CC5A
+    value:           B9869593-3A0D-32D9-A30A-B2BC37B8CC65
   - target:          arm64e-maccatalyst
-    value:           D0329678-B1D1-3B68-8B1E-CBFA0125CC5A
+    value:           B9869593-3A0D-32D9-A30A-B2BC37B8CC65
 install-name:    '/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -23,7 +23,8 @@ exports:
                        _IOSurfaceBindAccel, _IOSurfaceBindAccelOnPlane, _IOSurfaceCopyAllValues, 
                        _IOSurfaceCopyDataValueBytes, _IOSurfaceCopyValue, _IOSurfaceCreate, 
                        _IOSurfaceCreateMachPort, _IOSurfaceCreateMachPortWithOptions, 
-                       _IOSurfaceCreateXPCObject, _IOSurfaceDecrementUseCount, _IOSurfaceFlushProcessorCaches, 
+                       _IOSurfaceCreateWiringAssertion, _IOSurfaceCreateXPCObject, 
+                       _IOSurfaceDecrementUseCount, _IOSurfaceFlushProcessorCaches, 
                        _IOSurfaceGetAddressFormatOfPlane, _IOSurfaceGetAllocSize, 
                        _IOSurfaceGetBaseAddress, _IOSurfaceGetBaseAddressOfCompressedTileDataRegionOfPlane, 
                        _IOSurfaceGetBaseAddressOfCompressedTileHeaderRegionOfPlane, 
@@ -76,13 +77,14 @@ exports:
                        _IOSurfaceRemoteServerOptionDebugLogQueue, _IOSurfaceRemoveAllValues, 
                        _IOSurfaceRemoveValue, _IOSurfaceSetBulkAttachments, _IOSurfaceSetBulkAttachments2, 
                        _IOSurfaceSetCompressedTileDataRegionMemoryUsedOfPlane, _IOSurfaceSetDetachModeCode, 
-                       _IOSurfaceSetIndexedTimestamp, _IOSurfaceSetOwnership, _IOSurfaceSetPurgeable, 
-                       _IOSurfaceSetTiled, _IOSurfaceSetTimestamp, _IOSurfaceSetValue, 
-                       _IOSurfaceSetValues, _IOSurfaceSetYCbCrMatrix, _IOSurfaceSharedEventAddEventListener, 
-                       _IOSurfaceSharedEventAddListener, _IOSurfaceSharedEventNotifyEventListener, 
-                       _IOSurfaceSharedEventNotifyListener, _IOSurfaceSharedEventRemoveEventListener, 
-                       _IOSurfaceSharedEventRemoveListener, _IOSurfaceSignalEvent, 
-                       _IOSurfaceSupportsProtectionOptions, _IOSurfaceUnlock, _IOSurfaceUnlockPlane, 
+                       _IOSurfaceSetIndexedTimestamp, _IOSurfaceSetOwnership, _IOSurfaceSetOwnershipIdentity, 
+                       _IOSurfaceSetPurgeable, _IOSurfaceSetTiled, _IOSurfaceSetTimestamp, 
+                       _IOSurfaceSetValue, _IOSurfaceSetValues, _IOSurfaceSetYCbCrMatrix, 
+                       _IOSurfaceSharedEventAddEventListener, _IOSurfaceSharedEventAddListener, 
+                       _IOSurfaceSharedEventNotifyEventListener, _IOSurfaceSharedEventNotifyListener, 
+                       _IOSurfaceSharedEventRemoveEventListener, _IOSurfaceSharedEventRemoveListener, 
+                       _IOSurfaceSignalEvent, _IOSurfaceSupportsProtectionOptions, 
+                       _IOSurfaceUnlock, _IOSurfaceUnlockPlane, _IOSurfaceWiringAssertionGetTypeID, 
                        _IOSurfaceWrapClientImage, _IOSurfaceWrapClientMemory, _kIOFenceAllowTearing, 
                        _kIOSurfaceAddressFormat, _kIOSurfaceAllocSize, _kIOSurfaceAllocateFromSuperbuffer, 
                        _kIOSurfaceBufferTileFormat, _kIOSurfaceBufferTileMode, _kIOSurfaceBytesPerElement, 
@@ -150,9 +152,10 @@ exports:
                        _kIOSurfaceWidth, _kIOSurfaceYCbCrMatrix, _kIOSurfaceYCbCrMatrix_ITU_R_601_4_String, 
                        _kIOSurfaceYCbCrMatrix_ITU_R_709_2_String, _kIOSurfaceYCbCrMatrix_SMPTE_240M_1995_String ]
     objc-classes:    [ IOSurface, IOSurfaceDebugDescription, IOSurfaceRemoteServer, 
-                       IOSurfaceSharedEvent, IOSurfaceSharedEventListener ]
+                       IOSurfaceSharedEvent, IOSurfaceSharedEventListener, IOSurfaceWiringAssertion ]
     objc-ivars:      [ IOSurfaceSharedEvent._eventPort, IOSurfaceSharedEvent._globalTraceObjectID, 
                        IOSurfaceSharedEventListener._dispatchQueue, IOSurfaceSharedEventListener._notificationPort ]
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
-    symbols:         [ _IOSurfaceCopyGPUPolicies, _IOSurfaceSetImageOriginAndExtents ]
+    symbols:         [ _IOSurfaceCopyGPUPolicies, _IOSurfaceCreateChildSurface, _IOSurfaceGetParentID, 
+                       _IOSurfaceSetImageOriginAndExtents ]
 ...

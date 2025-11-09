@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B7E68973-4268-3CDE-AFB8-7A4655D68EE7
+    value:           EA02D714-BA9A-31EF-8318-1A778562CA03
   - target:          x86_64-maccatalyst
-    value:           B7E68973-4268-3CDE-AFB8-7A4655D68EE7
+    value:           EA02D714-BA9A-31EF-8318-1A778562CA03
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           51BF3269-5234-33EE-958F-F48B2BA86978
+    value:           3DD5937D-C569-3CCE-84F0-D603BF43246B
   - target:          arm64e-maccatalyst
-    value:           51BF3269-5234-33EE-958F-F48B2BA86978
+    value:           3DD5937D-C569-3CCE-84F0-D603BF43246B
 install-name:    '/System/Library/PrivateFrameworks/MapsSupport.framework/Versions/A/MapsSupport'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -34,24 +34,21 @@ exports:
                        _GEOConfigMSPShareETASupportedReceivingTransportTypes, _GEOConfigMSPShareETASupportedSendingTransportTypes, 
                        _GEOConfigMSPShareETAUserEnabled, _GEOConfigMSPShareETAUserEnabledLegacy, 
                        _GEOConfigMSPSharedETASenderIdentifier, _GEOConfigMSPSharedTripServerEnabled, 
-                       _GEOConfigMSPUpNextMaximumAllowableHorizontalAccuracyInMeters, 
-                       _GEOConfigMSPUpNextMinimumAllowableDistanceToEntryInMeters, 
-                       _GEOConfigMapsSyncCloudPushBatchSize, _GEOConfigMapsSyncEnableMapsSync, 
-                       _GEOConfigMapsSyncEnableMigrations, _GEOConfigMapsSyncForceRunCollectionsMigrator, 
-                       _GEOConfigMapsSyncHasMigratedInitial, _GEOConfigMapsSyncHasMigratedLocalDataInitial, 
-                       _GEOConfigMapsSyncMaxMergeDuration, _GEOConfigMapsSyncMigratorBatchTimeout, 
-                       _GEOConfigMapsSyncMigratorContainerTimeout, _GEOConfigMapsSyncMigratorContainerWaitInterval, 
-                       _GEOConfigMapsSyncMigratorMSPSyncReadinessTimeout, _GEOConfigMapsSyncMigratorMaxBatchSize, 
-                       _GEOConfigMapsSyncRequireDeviceToDeviceEncryption, _GEOConfigMapsSyncTimerDelayForLocalChange, 
-                       _GEOConfigMapsSyncTimerDelayForRefresh, _GEOConfigMapsSyncTimerDelayForRemoteChange, 
-                       _GEOConfigMapsSyncTimerDelayForRetryMax, _GEOConfigMapsSyncTimerDelayForRetryMin, 
-                       _MSPBookmarkStorageArrayFromPropertyList, _MSPBookmarkStorageReadFrom, 
-                       _MSPBookmarksKey, _MSPBookmarksVersionKey, _MSPBookmarksVersion_Fall2014toFall2016, 
-                       _MSPBundle, _MSPCollectionItemReplicaStorageReadFrom, _MSPCollectionItemStorageReadFrom, 
-                       _MSPCollectionStorageReadFrom, _MSPCollectionsKey, _MSPCollectionsVersionKey, 
-                       _MSPCompanionSyncedItemReadFrom, _MSPDirectionsSearchReadFrom, 
-                       _MSPDroppedPinReadFrom, _MSPErrorDomain, _MSPExcludePathFromBackup, 
-                       _MSPFavoriteGetAbridgedBookmarkStorageForSpotlightStorage, 
+                       _GEOConfigMapsSyncCloudPushBatchSize, _GEOConfigMapsSyncEnableMigrations, 
+                       _GEOConfigMapsSyncForceRunCollectionsMigrator, _GEOConfigMapsSyncHasMigratedInitial, 
+                       _GEOConfigMapsSyncHasMigratedLocalDataInitial, _GEOConfigMapsSyncMaxMergeDuration, 
+                       _GEOConfigMapsSyncMigratorBatchTimeout, _GEOConfigMapsSyncMigratorContainerTimeout, 
+                       _GEOConfigMapsSyncMigratorContainerWaitInterval, _GEOConfigMapsSyncMigratorMSPSyncReadinessTimeout, 
+                       _GEOConfigMapsSyncMigratorMaxBatchSize, _GEOConfigMapsSyncRequireDeviceToDeviceEncryption, 
+                       _GEOConfigMapsSyncTimerDelayForLocalChange, _GEOConfigMapsSyncTimerDelayForRefresh, 
+                       _GEOConfigMapsSyncTimerDelayForRemoteChange, _GEOConfigMapsSyncTimerDelayForRetryMax, 
+                       _GEOConfigMapsSyncTimerDelayForRetryMin, _MSPBookmarkStorageArrayFromPropertyList, 
+                       _MSPBookmarkStorageReadFrom, _MSPBookmarksKey, _MSPBookmarksVersionKey, 
+                       _MSPBookmarksVersion_Fall2014toFall2016, _MSPBundle, _MSPCollectionItemReplicaStorageReadFrom, 
+                       _MSPCollectionItemStorageReadFrom, _MSPCollectionStorageReadFrom, 
+                       _MSPCollectionsKey, _MSPCollectionsVersionKey, _MSPCompanionSyncedItemReadFrom, 
+                       _MSPDirectionsSearchReadFrom, _MSPDroppedPinReadFrom, _MSPErrorDomain, 
+                       _MSPExcludePathFromBackup, _MSPFavoriteGetAbridgedBookmarkStorageForSpotlightStorage, 
                        _MSPFavoriteGetBookmarkStorage, _MSPFavoriteMakeFromBookmarkStorage, 
                        _MSPFavoritesArrayMakeFromSerializedRepresentation, _MSPGroupSessionStorageReadFrom, 
                        _MSPHistoryEntriesArrayMakeFromSerializedRepresentation, _MSPHistoryEntryGetStorage, 

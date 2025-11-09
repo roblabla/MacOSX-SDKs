@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           634C04C3-E0F1-305E-A439-8E2B9368510F
+    value:           56E47BF2-49DF-398B-8EAD-9D0D47DA249E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           11B91EE1-7277-386E-A1F9-B65B3F7C7B43
+    value:           357BF83E-ACBA-3B8B-813F-BD55F15C4BA7
 install-name:    '/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/Frameworks/DictationServices.framework/Versions/A/DictationServices'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -52,13 +52,15 @@ exports:
                        SODictationCommandNounSpecifier, SODictationHotKey, SODictationHotKeyController, 
                        SODictationPreferences, SODictationPreferencesViewController, 
                        SODictationRecognizerModeOverlayView, SODictationRecognizerModeOverlayWindow, 
-                       SODictationRecognizerModeOverlayWindowController, SOElementClickFlashOverlayBackgroundView, 
-                       SOElementClickFlashOverlayController, SOElementClickFlashOverlayWindow, 
-                       SOEnableDictationPanelController, SOExternalClientDownloadAlertController, 
-                       SOGridElementView, SOGridView, SOGridWindowBackgroundView, 
-                       SOGridWindowController, SOHotKeyManager, SOHotKeyTextFieldCell, 
-                       SOLabeledBadgeView, SOLabeledBadgeWindow, SOLabeledBadgeWindowController, 
-                       SOLabeledElement, SOMicrophoneLevelMeterController, SOMicrophonePopUpButton, 
+                       SODictationRecognizerModeOverlayWindowController, SODisambiguationItem, 
+                       SODisambiguationItemCellView, SODisambiguationWindowController, 
+                       SOElementClickFlashOverlayBackgroundView, SOElementClickFlashOverlayController, 
+                       SOElementClickFlashOverlayWindow, SOEnableDictationPanelController, 
+                       SOExternalClientDownloadAlertController, SOGridElementView, 
+                       SOGridView, SOGridWindowBackgroundView, SOGridWindowController, 
+                       SOHotKeyManager, SOHotKeyTextFieldCell, SOLabeledBadgeView, 
+                       SOLabeledBadgeWindow, SOLabeledBadgeWindowController, SOLabeledElement, 
+                       SOMicrophoneLevelMeterController, SOMicrophonePopUpButton, 
                        SONamedLabeledBadgeView, SONamedLabeledElementsOverlayController, 
                        SONumberedLabeledBadgeWindow, SONumberedLabeledElementsOverlayController, 
                        SONumberedLabeledElementsWindowController, SORecognitionFeedbackManager, 
@@ -178,6 +180,7 @@ exports:
                        SODictationPreferencesViewController._microphoneLevelMeterController, 
                        SODictationPreferencesViewController._microphoneLevelMeterView, 
                        SODictationPreferencesViewController._microphonePopUpButton, 
+                       SODictationPreferencesViewController._onDeviceDictationStatusText, 
                        SODictationPreferencesViewController._parentalControlsNoteImage, 
                        SODictationPreferencesViewController._parentalControlsNoteText, 
                        SODictationPreferencesViewController._showPrivacyPanelButton, 

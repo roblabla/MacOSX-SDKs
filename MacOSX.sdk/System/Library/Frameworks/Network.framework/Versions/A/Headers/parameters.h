@@ -2,7 +2,7 @@
 //  parameters.h
 //  Network
 //
-//  Copyright (c) 2014-2020 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2021 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_PARAMETERS_H__
@@ -175,6 +175,27 @@ NW_RETURNS_RETAINED nw_parameters_t
 nw_parameters_create_custom_ip(uint8_t custom_ip_protocol_number,
 							   nw_parameters_configure_protocol_block_t configure_ip);
 
+/*!
+ * @function nw_parameters_create_quic
+ *
+ * @abstract
+ *		Creates a parameters object that is configured for QUIC. The caller must
+ *		pass in a block to configure options.
+ *
+ * @param configure_quic
+ *		A block to configure QUIC. The caller must pass a custom
+ *		block to configure the QUIC options.
+ *
+ * @result
+ *		Returns an allocated nw_parameters_t object on success.
+ *		Callers are responsible for deallocating using nw_release(obj) or [obj release].
+ *		These objects support ARC.
+ *		Returns NULL on failure. Fails due to invalid parameters.
+ */
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
+NW_RETURNS_RETAINED nw_parameters_t
+nw_parameters_create_quic(nw_parameters_configure_protocol_block_t configure_quic);
+
 #endif // __BLOCKS__
 
 /*!
@@ -236,6 +257,53 @@ API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
 void
 nw_parameters_set_privacy_context(nw_parameters_t parameters,
 								  nw_privacy_context_t privacy_context);
+
+/*!
+ * @typedef nw_parameters_attribution_t
+ * @abstract
+ *		Attribution values can be used to indicate who determined the network content being accessed.
+ */
+typedef NW_ENUM(uint8_t, nw_parameters_attribution_t) {
+	/*! @const nw_parameters_attribution_developer Developer chosen content. */
+	nw_parameters_attribution_developer = 1,
+	/*! @const nw_parameters_attribution_user User chosen content. */
+	nw_parameters_attribution_user = 2
+};
+
+/*!
+ * @function nw_parameters_set_attribution
+ *
+ * @abstract
+ *        In order to help differentiate communication with domains requested by the user from those requested by the
+ *        developer, attribution may be used. Attribution defaults to nw_parameters_attribution_developer. Setting
+ *        attribution to nw_parameters_attribution_user indicates that the networking performed using these parameters
+ *        is directed to content specified by the user, not the developer.
+ *
+ * @param parameters
+ *		The parameters to modify.
+ *
+ * @param attribution
+ *		The entity to attribute the network operations to.
+ */
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
+void
+nw_parameters_set_attribution(nw_parameters_t parameters, nw_parameters_attribution_t attribution);
+
+/*!
+ * @function nw_parameters_get_attribution
+ *
+ * @abstract
+ *		Returns the attribution set on the parameters.
+ *
+ * @param parameters
+ *		The parameters to check.
+ *
+ * @result
+ *		Returns the attribution property of the parameters.
+ */
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
+nw_parameters_attribution_t
+nw_parameters_get_attribution(nw_parameters_t parameters);
 
 #pragma mark - Path Selection
 

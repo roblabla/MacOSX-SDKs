@@ -49,4 +49,5 @@ typedef NS_ENUM(NSInteger, GKErrorCode) {
     GKErrorFriendListDescriptionMissing         = 100,
     GKErrorFriendListRestricted                 = 101,
     GKErrorFriendListDenied                     = 102,
+    GKErrorFriendRequestNotAvailable            = 103,
 };

@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from DriverKit.iig */
+/* iig(DriverKit-191) generated from DriverKit.iig */
 
 /* DriverKit.iig:1- */
 /*
@@ -29,12 +29,18 @@
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 
+#ifndef _DRIVERKIT_H
+#define _DRIVERKIT_H
+
+#define DRIVERKIT_FRAMEWORK_INCLUDE	1
+
 #include <sys/cdefs.h>
 #include <DriverKit/IOLib.h>
 
 #if __IIG
 #include <DriverKit/OSDictionary.h>  /* .iig include */
 #include <DriverKit/OSArray.h>  /* .iig include */
+#include <DriverKit/OSSet.h>  /* .iig include */
 #include <DriverKit/OSString.h>  /* .iig include */
 #include <DriverKit/OSData.h>  /* .iig include */
 #include <DriverKit/OSNumber.h>  /* .iig include */
@@ -42,7 +48,9 @@
 #include <DriverKit/OSSerialization.h>  /* .iig include */
 #else
 #include <DriverKit/OSCollections.h>
-#endif
+#endif /* __IIG */
+#include <DriverKit/OSBundle.h>  /* .iig include */
+#include <DriverKit/OSMappedFile.h>  /* .iig include */
 
 #include <DriverKit/OSObject.h>  /* .iig include */
 #include <DriverKit/OSAction.h>  /* .iig include */
@@ -52,10 +60,24 @@
 #include <DriverKit/IOInterruptDispatchSource.h>  /* .iig include */
 #include <DriverKit/IOTimerDispatchSource.h>  /* .iig include */
 #include <DriverKit/IOServiceNotificationDispatchSource.h>  /* .iig include */
+#include <DriverKit/IOServiceStateNotificationDispatchSource.h>  /* .iig include */
 #include <DriverKit/IOMemoryDescriptor.h>  /* .iig include */
 #include <DriverKit/IOMemoryMap.h>  /* .iig include */
 #include <DriverKit/IOBufferMemoryDescriptor.h>  /* .iig include */
 #include <DriverKit/IODMACommand.h>  /* .iig include */
 #include <DriverKit/IOService.h>  /* .iig include */
 #include <DriverKit/IOUserClient.h>  /* .iig include */
+#include <DriverKit/IOReporters.h>  /* .iig include */
+#include <DriverKit/IOCommand.h>  /* .iig include */
+#include <DriverKit/IOCommandPool.h>  /* .iig include */
 
+#if !__IIG
+#if __cplusplus >= 201703L
+#include <DriverKit/OSBoundedArray.h>
+#include <DriverKit/OSBoundedArrayRef.h>
+#include <DriverKit/OSBoundedPtr.h>
+#include <DriverKit/OSAllocation.h>
+#endif /* __cplusplus >= 201703L */
+#endif /* __IIG */
+
+#endif /* _DRIVERKIT_H */

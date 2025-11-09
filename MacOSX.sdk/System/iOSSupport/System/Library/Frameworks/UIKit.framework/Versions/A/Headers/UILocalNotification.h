@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class CLRegion;
 
 // In iOS 8.0 and later, your application must register for user notifications using -[UIApplication registerUserNotificationSettings:] before being able to schedule and present UILocalNotifications
-UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationRequest", ios(4.0, 10.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationRequest", ios(4.0, 10.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UILocalNotification : NSObject<NSCopying, NSCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

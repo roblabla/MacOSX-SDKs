@@ -14,17 +14,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *const FPUIErrorDomain API_AVAILABLE(ios(11.0)) __TVOS_UNAVAILABLE;
+extern NSString *const FPUIErrorDomain API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macCatalyst, tvos);
 
 typedef NSString * FPUIActionIdentifier NS_EXTENSIBLE_STRING_ENUM;
 
 typedef NS_ENUM(NSUInteger, FPUIExtensionErrorCode) {
     FPUIExtensionErrorCodeUserCancelled,
     FPUIExtensionErrorCodeFailed,
-} API_AVAILABLE(ios(11.0)) __TVOS_UNAVAILABLE;
+} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macCatalyst, tvos);
 
 
 FPUI_AVAILABLE(ios(11.0), macos(10.15))
+API_UNAVAILABLE(macCatalyst)
 @interface FPUIActionExtensionContext : NSExtensionContext
 
 @property (readonly, copy, nullable) NSFileProviderDomainIdentifier domainIdentifier;

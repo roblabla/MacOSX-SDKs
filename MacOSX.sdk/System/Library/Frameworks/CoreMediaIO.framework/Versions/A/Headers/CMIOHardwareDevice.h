@@ -34,6 +34,8 @@ extern "C"
 #endif
     
 #pragma pack(push, 4)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark CMIODevice Types
@@ -371,7 +373,7 @@ enum
     @enum           CMIODevice Properties
     @abstract       CMIOObjectPropertySelector values that apply to CMIODevice objects.
     @discussion     CMIODevices have four scopes: kCMIOObjectPropertyScopeGlobal, kCMIODevicePropertyScopeInput, kCMIODevicePropertyScopeOutput, and kCMIODevicePropertyScopePlayThrough.
-                    They have a master element and an element for each channel in each stream numbered according to the starting channel number of each stream.
+                    They have a main element and an element for each channel in each stream numbered according to the starting channel number of each stream.
     @constant       kCMIODevicePropertyPlugIn
                         The CMIOObjectID of the CMIOPlugIn that is hosting the device.
     @constant       kCMIODevicePropertyDeviceUID
@@ -411,9 +413,9 @@ enum
     @constant       kCMIODevicePropertyStreamConfiguration
                         This property returns the stream configuration of the device in a CMIODeviceStreamConfiguration which describes the list of streams and the number of channels in
                         each stream.
-    @constant       kCMIODevicePropertyDeviceMaster
+    @constant       kCMIODevicePropertyDeviceControl
                         A pid_t indicating the process that currently owns exclusive rights to change operating properties of the device. A value of -1 indicating that the device is not
-                        currently under the control of a master.
+                        currently under the control of client.
     @constant       kCMIODevicePropertyExcludeNonDALAccess
                         A UInt32 where a value of 0 means the CMIODevice can be accessed by means other than the DAL, and a value of 1 means that it can't.
                         For example, this could be set to 1 to prevent a QuickTime video digitizer component from accessing the device even when the DAL is not actively using it.
@@ -482,7 +484,8 @@ enum
     kCMIODevicePropertyLatency                              = 'ltnc',
     kCMIODevicePropertyStreams                              = 'stm#',
     kCMIODevicePropertyStreamConfiguration                  = 'slay',
-    kCMIODevicePropertyDeviceMaster                         = 'pmnh',
+    kCMIODevicePropertyDeviceControl                        = 'pmnh',
+	kCMIODevicePropertyDeviceMaster API_DEPRECATED_WITH_REPLACEMENT("kCMIODevicePropertyDeviceControl", macos(10.4, 12.0)) = kCMIODevicePropertyDeviceControl,
     kCMIODevicePropertyExcludeNonDALAccess                  = 'ixna',
     kCMIODevicePropertyClientSyncDiscontinuity              = 'pmcs',
     kCMIODevicePropertySMPTETimeCallback                    = 'pmsc',
@@ -586,6 +589,7 @@ extern OSStatus
 CMIODeviceProcessRS422Command(  CMIODeviceID            deviceID,
                                 CMIODeviceRS422Command* ioRS422Command) API_AVAILABLE(macos(10.7));
 
+#pragma clang diagnostic pop
 #pragma pack(pop)
     
 #if defined(__cplusplus)

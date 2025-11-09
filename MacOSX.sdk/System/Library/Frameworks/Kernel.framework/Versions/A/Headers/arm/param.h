@@ -48,6 +48,8 @@
 #ifndef _ARM_PARAM_H_
 #define _ARM_PARAM_H_
 
+#if defined (__arm__) || defined (__arm64__)
+
 #include <arm/_param.h>
 
 /*
@@ -139,5 +141,7 @@
 
 #define DELAY(n) delay(n)
 
+
+#endif /* defined (__arm__) || defined (__arm64__) */
 
 #endif /* _ARM_PARAM_H_ */

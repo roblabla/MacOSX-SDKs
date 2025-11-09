@@ -2,7 +2,7 @@
 /*
         NSLayoutManager.h
         Application Kit
-        Copyright (c) 1994-2019, Apple Inc.
+        Copyright (c) 1994-2021, Apple Inc.
         All rights reserved.
 */
 

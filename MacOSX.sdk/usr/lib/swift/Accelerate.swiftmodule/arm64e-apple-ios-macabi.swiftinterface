@@ -1,9 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target arm64e-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAccelerate -swift-version 5 -enforce-exclusivity=checked -O -module-name Accelerate
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAccelerate -swift-version 5 -enforce-exclusivity=checked -O -module-name Accelerate
 @_exported import Accelerate
 @_exported import Accelerate.vecLib.BNNS
 import Swift
+import _Concurrency
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public enum vImage {
 }
@@ -14,7 +15,7 @@ public enum vDSP {
 public enum vForce {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public struct VectorizableFloat {
     public typealias Scalar = Swift.Float
@@ -25,7 +26,7 @@ extension vDSP {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func convolve<T, U>(_ vector: T, withKernel kernel: U) -> [Swift.Float] where T : Accelerate.AccelerateBuffer, U : Accelerate.AccelerateBuffer, T.Element == Swift.Float, U.Element == Swift.Float {
             
             let n = vector.count - kernel.count
@@ -164,7 +165,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func convolve<T, U>(_ vector: T, rowCount: Swift.Int, columnCount: Swift.Int, with3x3Kernel kernel: U) -> [Swift.Float] where T : Accelerate.AccelerateBuffer, U : Accelerate.AccelerateBuffer, T.Element == Swift.Float, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: vector.count) {
@@ -416,12 +417,44 @@ extension vDSP {
             }
     }
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  @frozen public struct Norm : Swift.Equatable {
+    @_alwaysEmitIntoClient public var rawValue: Swift.Float
+    @_alwaysEmitIntoClient public init(rawValue: Swift.Float) { self.rawValue = rawValue }
+    @_alwaysEmitIntoClient public static var l1: Accelerate.BNNS.Norm {
+      get { Norm(rawValue: 1) }
+    }
+    @_alwaysEmitIntoClient public static var taxicab: Accelerate.BNNS.Norm {
+      get { Norm(rawValue: 1) }
+    }
+    @_alwaysEmitIntoClient public static var l2: Accelerate.BNNS.Norm {
+      get { Norm(rawValue: 2) }
+    }
+    @_alwaysEmitIntoClient public static var euclidean: Accelerate.BNNS.Norm {
+      get { Norm(rawValue: 2) }
+    }
+    @_alwaysEmitIntoClient public static var lInfinity: Accelerate.BNNS.Norm {
+      get { Norm(rawValue: .infinity) }
+    }
+    @_alwaysEmitIntoClient public static var maximum: Accelerate.BNNS.Norm {
+      get { Norm(rawValue: .infinity) }
+    }
+    public static func == (a: Accelerate.BNNS.Norm, b: Accelerate.BNNS.Norm) -> Swift.Bool
+  }
+  @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class EmbeddingLayer : Accelerate.BNNS.Layer {
+    convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, dictionary: Accelerate.BNNSNDArrayDescriptor, paddingIndex: Swift.Int, maximumNorm: Swift.Float, normType: Accelerate.BNNS.Norm, scalesGradientByFrequency: Swift.Bool, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    public func apply(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
+    public func applyBackward(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingWeightsGradient weightsGradient: Accelerate.BNNSNDArrayDescriptor) throws
+    @objc deinit
+  }
+}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public static func transpose(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, firstTransposeAxis: Swift.Int, secondTransposeAxis: Swift.Int, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func downsample<T, U>(_ source: U, decimationFactor: Swift.Int, filter: T) -> [Swift.Float] where T : Accelerate.AccelerateBuffer, U : Accelerate.AccelerateBuffer, T.Element == Swift.Float, U.Element == Swift.Float {
             
             let n = (source.count - filter.count) / decimationFactor + 1
@@ -499,7 +532,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vImage {
+extension Accelerate.vImage {
   public struct Options : Swift.OptionSet {
     public init(rawValue: Accelerate.vImage_Flags)
     public let rawValue: Accelerate.vImage_Flags
@@ -525,7 +558,7 @@ extension vImage {
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public enum ActivationFunction {
     case identity
     case rectifiedLinear
@@ -555,6 +588,10 @@ extension BNNS {
     case softShrink(alpha: Swift.Float)
     case tanhShrink
     case threshold(alpha: Swift.Float, beta: Swift.Float)
+    @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+    case hardSwish(alpha: Swift.Float, beta: Swift.Float)
+    @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+    case silu
     public var bnnsActivation: Accelerate.BNNSActivation {
       get
     }
@@ -565,11 +602,19 @@ extension BNNS {
   }
   public static func applyActivation(activation: Accelerate.BNNS.ActivationFunction, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, batchSize: Swift.Int, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS.ActivationLayer {
+  convenience public init?(function activationFunction: Accelerate.BNNS.ActivationFunction, axes: [Swift.Int], input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public static func applyActivation(activation: Accelerate.BNNS.ActivationFunction, axes: [Swift.Int], input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, batchSize: Swift.Int, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public enum BNNS {
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public enum DataLayout : Swift.CaseIterable {
     case vector
     case matrixRowMajor
@@ -590,22 +635,26 @@ extension BNNS {
     case tensor7DLastMajor
     case tensor8DFirstMajor
     case tensor8DLastMajor
+    @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+    case tensor3DSNE
+    @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+    case tensor3DNSE
+    public static var allCases: [Accelerate.BNNS.DataLayout] {
+      get
+    }
     public var rank: Swift.Int {
       get
     }
     public static func == (a: Accelerate.BNNS.DataLayout, b: Accelerate.BNNS.DataLayout) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public typealias AllCases = [Accelerate.BNNS.DataLayout]
-    public static var allCases: [Accelerate.BNNS.DataLayout] {
-      get
-    }
     public var hashValue: Swift.Int {
       get
     }
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public enum Error : Swift.Error {
     case layerApplyFail
     case unableToCreateLayer
@@ -618,8 +667,35 @@ extension BNNS {
     }
   }
 }
+extension Accelerate.BNNSFilterParameters {
+  public init(options: Accelerate.BNNSFlags, threadCount: Swift.Int, allocator: Accelerate.BNNSAlloc?, deallocator: Accelerate.BNNSFree?)
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public var options: Accelerate.BNNSFlags {
+    get
+    set
+  }
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public var threadCount: Swift.Int {
+    get
+    set
+  }
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public var allocator: Accelerate.BNNSAlloc? {
+    get
+    set
+  }
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public var deallocator: Accelerate.BNNSFree? {
+    get
+    set
+  }
+}
+extension Accelerate.BNNSFlags : Swift.OptionSet {
+  public typealias ArrayLiteralElement = Accelerate.BNNSFlags
+  public typealias Element = Accelerate.BNNSFlags
+}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public enum PoolingType {
     case max(indices: Swift.UnsafeMutableBufferPointer<Swift.Int>? = nil, xDilationStride: Swift.Int = 0, yDilationStride: Swift.Int = 0)
     case unMax(indices: Swift.UnsafeMutableBufferPointer<Swift.Int>? = nil, xDilationStride: Swift.Int = 0, yDilationStride: Swift.Int = 0)
@@ -631,7 +707,7 @@ extension BNNS {
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PoolingLayer : Accelerate.BNNS.Layer {
     convenience public init?(type poolingType: Accelerate.BNNS.PoolingType, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, bias: Accelerate.BNNSNDArrayDescriptor?, activation: Accelerate.BNNS.ActivationFunction, kernelSize: (width: Swift.Int, height: Swift.Int), stride: (x: Swift.Int, y: Swift.Int), padding: Accelerate.BNNS.ConvolutionPadding, filterParameters: Accelerate.BNNSFilterParameters? = nil)
     public func apply(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
@@ -640,7 +716,7 @@ extension BNNS {
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class ConvolutionLayer : Accelerate.BNNS.UnaryLayer {
     convenience public init?(type convolutionType: Accelerate.BNNS.ConvolutionType, input: Accelerate.BNNSNDArrayDescriptor, weights: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, bias: Accelerate.BNNSNDArrayDescriptor?, padding: Accelerate.BNNS.ConvolutionPadding, activation: Accelerate.BNNS.ActivationFunction, groupCount: Swift.Int, stride: (x: Swift.Int, y: Swift.Int), dilationStride: (x: Swift.Int, y: Swift.Int), filterParameters: Accelerate.BNNSFilterParameters? = nil)
     public func applyBackward(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor, generatingWeightsGradient weightsGradient: Accelerate.BNNSNDArrayDescriptor? = nil, generatingBiasGradient biasGradient: Accelerate.BNNSNDArrayDescriptor? = nil) throws
@@ -664,7 +740,7 @@ extension BNNS {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func convert(splitComplexVector: Accelerate.DSPSplitComplex, toInterleavedComplexVector interleavedComplexVector: inout [Accelerate.DSPComplex]) {
         
         withUnsafePointer(to: splitComplexVector) {
@@ -695,7 +771,7 @@ extension vDSP {
     }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @frozen public enum LearningPhase {
     case training
     case inference
@@ -712,7 +788,7 @@ extension BNNS {
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class FusedConvolutionNormalizationLayer : Accelerate.BNNS.FusedLayer {
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, convolutionWeights: Accelerate.BNNSNDArrayDescriptor, convolutionBias: Accelerate.BNNSNDArrayDescriptor?, convolutionStride: (x: Swift.Int, y: Swift.Int), convolutionDilationStride: (x: Swift.Int, y: Swift.Int), convolutionPadding: Accelerate.BNNS.ConvolutionPadding, normalization: Accelerate.BNNS.NormalizationType, normalizationBeta: Accelerate.BNNSNDArrayDescriptor, normalizationGamma: Accelerate.BNNSNDArrayDescriptor, normalizationMomentum: Swift.Float, normalizationEpsilon: Swift.Float, normalizationActivation: Accelerate.BNNS.ActivationFunction, filterParameters: Accelerate.BNNSFilterParameters? = nil)
     @objc deinit
@@ -722,8 +798,20 @@ extension BNNS {
     @objc deinit
   }
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public struct FusedNormalizationParameters : Accelerate.FusableLayerParameters {
+    public init(type: Accelerate.BNNS.NormalizationType, beta: Accelerate.BNNSNDArrayDescriptor? = nil, gamma: Accelerate.BNNSNDArrayDescriptor? = nil, momentum: Swift.Float = 0, epsilon: Swift.Float, activation: Accelerate.BNNS.ActivationFunction)
+    public var type: Accelerate.BNNS.NormalizationType
+    public var beta: Accelerate.BNNSNDArrayDescriptor?
+    public var gamma: Accelerate.BNNSNDArrayDescriptor?
+    public var momentum: Swift.Float
+    public var epsilon: Swift.Float
+    public var activation: Accelerate.BNNS.ActivationFunction
+  }
+}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func maximum<U>(_ vector: U) -> Swift.Float where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let n = vDSP_Length(vector.count)
@@ -912,7 +1000,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func indexOfMaximum<U>(_ vector: U) -> (Swift.UInt, Swift.Float) where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let n = vDSP_Length(vector.count)
@@ -1005,7 +1093,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func meanSquare<U>(_ vector: U) -> Swift.Float where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let n = vDSP_Length(vector.count)
@@ -1112,15 +1200,17 @@ extension vDSP {
     }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @_hasMissingDesignatedInitializers public class BroadcastMatrixMultiplyLayer : Accelerate.BNNS.Layer {
     convenience public init?(inputA: Accelerate.BNNSNDArrayDescriptor, transposed transposeA: Swift.Bool, isWeights aIsWeights: Swift.Bool, inputB: Accelerate.BNNSNDArrayDescriptor, transposed transposeB: Swift.Bool, isWeights bIsWeights: Swift.Bool, output: Accelerate.BNNSNDArrayDescriptor, alpha: Swift.Float, accumulatesToOutput: Swift.Bool, isQuadratic: Swift.Bool, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+    public func apply(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
     public func applyBackward(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputAGradient inputAGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputBGradient inputBGradient: Accelerate.BNNSNDArrayDescriptor) throws
     @objc deinit
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func convertElements<U, V>(of source: U, to destination: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.UInt8, V.Element == Swift.Float {
             
             precondition(source.count == destination.count)
@@ -1338,27 +1428,27 @@ extension vDSP {
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public protocol vDSP_IntegerConvertable {
 }
-extension UInt8 : Accelerate.vDSP_IntegerConvertable {
+extension Swift.UInt8 : Accelerate.vDSP_IntegerConvertable {
 }
-extension UInt16 : Accelerate.vDSP_IntegerConvertable {
+extension Swift.UInt16 : Accelerate.vDSP_IntegerConvertable {
 }
-extension UInt32 : Accelerate.vDSP_IntegerConvertable {
+extension Swift.UInt32 : Accelerate.vDSP_IntegerConvertable {
 }
-extension Int8 : Accelerate.vDSP_IntegerConvertable {
+extension Swift.Int8 : Accelerate.vDSP_IntegerConvertable {
 }
-extension Int16 : Accelerate.vDSP_IntegerConvertable {
+extension Swift.Int16 : Accelerate.vDSP_IntegerConvertable {
 }
-extension Int32 : Accelerate.vDSP_IntegerConvertable {
+extension Swift.Int32 : Accelerate.vDSP_IntegerConvertable {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public protocol vDSP_FloatingPointConvertable {
 }
-extension Float : Accelerate.vDSP_FloatingPointConvertable {
+extension Swift.Float : Accelerate.vDSP_FloatingPointConvertable {
 }
-extension Double : Accelerate.vDSP_FloatingPointConvertable {
+extension Swift.Double : Accelerate.vDSP_FloatingPointConvertable {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func integerToFloatingPoint<T, U>(_ vector: T, floatingPointType: U.Type) -> [U] where T : Accelerate.AccelerateBuffer, U : Accelerate.vDSP_FloatingPointConvertable, T.Element == Swift.UInt8 {
             
             switch floatingPointType {
@@ -1723,12 +1813,12 @@ extension vDSP {
     }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public static func applyTopK(k: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, bestValues: Accelerate.BNNSNDArrayDescriptor, bestIndices: Accelerate.BNNSNDArrayDescriptor, axis: Swift.Int, batchSize: Swift.Int, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
   public static func applyInTopK(k: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, testIndices: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axis: Swift.Int, batchSize: Swift.Int, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func taperedMerge<T, U, V>(_ vectorA: T, _ vectorB: U, result: inout V) where T : Accelerate.AccelerateBuffer, U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, T.Element == Swift.Float, U.Element == Swift.Float, V.Element == Swift.Float {
             
             precondition(vectorA.count == vectorB.count,
@@ -1835,7 +1925,7 @@ extension vDSP {
     }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func gather<T, U, V>(_ vector: T, indices: U, result: inout V) where T : Accelerate.AccelerateBuffer, U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, T.Element == Swift.Float, U.Element == Swift.UInt, V.Element == Swift.Float {
             precondition(indices.count == result.count,
                          "The number of elements in `indices` must equal the number of elements in `result`.")
@@ -2018,7 +2108,7 @@ extension vDSP {
     }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public enum Shape {
     public init(_ size: [Swift.Int], dataLayout: Accelerate.BNNS.DataLayout? = nil, stride: [Swift.Int]? = nil)
     case vector(_: Swift.Int, stride: Swift.Int = 0)
@@ -2029,6 +2119,10 @@ extension BNNS {
     case imageCHW(_: Swift.Int, _: Swift.Int, _: Swift.Int, stride: (Swift.Int, Swift.Int, Swift.Int) = (0, 0, 0))
     case tensor3DFirstMajor(_: Swift.Int, _: Swift.Int, _: Swift.Int, stride: (Swift.Int, Swift.Int, Swift.Int) = (0, 0, 0))
     case tensor3DLastMajor(_: Swift.Int, _: Swift.Int, _: Swift.Int, stride: (Swift.Int, Swift.Int, Swift.Int) = (0, 0, 0))
+    @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+    case tensor3DSNE(_: Swift.Int, _: Swift.Int, _: Swift.Int, stride: (Swift.Int, Swift.Int, Swift.Int) = (0, 0, 0))
+    @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+    case tensor3DNSE(_: Swift.Int, _: Swift.Int, _: Swift.Int, stride: (Swift.Int, Swift.Int, Swift.Int) = (0, 0, 0))
     case convolutionWeightsOIHW(_: Swift.Int, _: Swift.Int, _: Swift.Int, _: Swift.Int, stride: (Swift.Int, Swift.Int, Swift.Int, Swift.Int) = (0, 0, 0, 0))
     case tensor4DFirstMajor(_: Swift.Int, _: Swift.Int, _: Swift.Int, _: Swift.Int, stride: (Swift.Int, Swift.Int, Swift.Int, Swift.Int) = (0, 0, 0, 0))
     case tensor4DLastMajor(_: Swift.Int, _: Swift.Int, _: Swift.Int, _: Swift.Int, stride: (Swift.Int, Swift.Int, Swift.Int, Swift.Int) = (0, 0, 0, 0))
@@ -2058,19 +2152,19 @@ extension BNNS {
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS.Shape : Swift.ExpressibleByArrayLiteral {
+extension Accelerate.BNNS.Shape : Swift.ExpressibleByArrayLiteral {
   public typealias ArrayLiteralElement = Swift.Int
   public init(arrayLiteral: Accelerate.BNNS.Shape.ArrayLiteralElement...)
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PermuteLayer : Accelerate.BNNS.UnaryLayer {
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, permutation: [Swift.Int], filterParameters: Accelerate.BNNSFilterParameters? = nil)
     @objc deinit
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @_hasMissingDesignatedInitializers public class Layer {
     @objc deinit
     final public let bnnsFilter: Accelerate.BNNSFilter
@@ -2087,7 +2181,7 @@ extension BNNS {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func powerToDecibels<U>(_ power: U, zeroReference: Swift.Float) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: power.count) {
@@ -2213,11 +2307,39 @@ extension vDSP {
             }
     }
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public enum ArithmeticTernaryFunction {
+    case multiplyAdd
+    public var bnnsArithmeticFunction: Accelerate.BNNSArithmeticFunction {
+      get
+    }
+    public static func == (a: Accelerate.BNNS.ArithmeticTernaryFunction, b: Accelerate.BNNS.ArithmeticTernaryFunction) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class TernaryArithmeticLayer : Accelerate.BNNS.Layer {
+    convenience public init?(inputA: Accelerate.BNNSNDArrayDescriptor, inputADescriptorType: Accelerate.BNNS.DescriptorType, inputB: Accelerate.BNNSNDArrayDescriptor, inputBDescriptorType: Accelerate.BNNS.DescriptorType, inputC: Accelerate.BNNSNDArrayDescriptor, inputCDescriptorType: Accelerate.BNNS.DescriptorType, output: Accelerate.BNNSNDArrayDescriptor, outputDescriptorType: Accelerate.BNNS.DescriptorType, function: Accelerate.BNNS.ArithmeticTernaryFunction, activation: Accelerate.BNNS.ActivationFunction = .identity, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    public func apply(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
+    public func applyBackward(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputAGradient inputAGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputBGradient inputBGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputCGradient inputCGradient: Accelerate.BNNSNDArrayDescriptor) throws
+    @objc deinit
+  }
+}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class GramLayer : Accelerate.BNNS.UnaryLayer {
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, alpha: Swift.Float, filterParameters: Accelerate.BNNSFilterParameters? = nil)
     @objc deinit
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public struct FusedFullyConnectedParameters : Accelerate.FusableLayerParameters {
+    public init(weights: Accelerate.BNNSNDArrayDescriptor, bias: Accelerate.BNNSNDArrayDescriptor?)
+    public var weights: Accelerate.BNNSNDArrayDescriptor
+    public var bias: Accelerate.BNNSNDArrayDescriptor?
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
@@ -2227,11 +2349,11 @@ public protocol BNNSOptimizer {
   var accumulatorCountMultiplier: Swift.Int { get }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNSOptimizer {
+extension Accelerate.BNNSOptimizer {
   public func step(parameters: [Accelerate.BNNSNDArrayDescriptor], gradients: [Accelerate.BNNSNDArrayDescriptor], accumulators: [Accelerate.BNNSNDArrayDescriptor], filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public struct AdamOptimizer : Accelerate.BNNSOptimizer {
     public var accumulatorCountMultiplier: Swift.Int {
       get
@@ -2346,7 +2468,17 @@ extension BNNS {
       get
       set
     }
+    @available(macOS, introduced: 11.0, deprecated: 12.0, renamed: "getter:usesNesterovMomentum(self:)")
+    @available(iOS, introduced: 14.0, deprecated: 15.0, renamed: "getter:usesNesterovMomentum(self:)")
+    @available(tvOS, introduced: 14.0, deprecated: 15.0, renamed: "getter:usesNesterovMomentum(self:)")
+    @available(watchOS, introduced: 7.0, deprecated: 8.0, renamed: "getter:usesNesterovMomentum(self:)")
+    @available(*, deprecated, renamed: "getter:usesNesterovMomentum(self:)")
     public var usesNestrovMomentum: Swift.Bool {
+      get
+      set
+    }
+    @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+    public var usesNesterovMomentum: Swift.Bool {
       get
       set
     }
@@ -2358,14 +2490,38 @@ extension BNNS {
       get
       set
     }
+    @available(macOS, introduced: 11.0, deprecated: 12.0, renamed: "init(learningRate:momentum:gradientScale:regularizationScale:clipsGradientsTo:usesNesterovMomentum:regularizationFunction:sgdMomentumVariant:)")
+    @available(iOS, introduced: 14.0, deprecated: 15.0, renamed: "init(learningRate:momentum:gradientScale:regularizationScale:clipsGradientsTo:usesNesterovMomentum:regularizationFunction:sgdMomentumVariant:)")
+    @available(tvOS, introduced: 14.0, deprecated: 15.0, renamed: "init(learningRate:momentum:gradientScale:regularizationScale:clipsGradientsTo:usesNesterovMomentum:regularizationFunction:sgdMomentumVariant:)")
+    @available(watchOS, introduced: 7.0, deprecated: 8.0, renamed: "init(learningRate:momentum:gradientScale:regularizationScale:clipsGradientsTo:usesNesterovMomentum:regularizationFunction:sgdMomentumVariant:)")
+    @available(*, deprecated, renamed: "init(learningRate:momentum:gradientScale:regularizationScale:clipsGradientsTo:usesNesterovMomentum:regularizationFunction:sgdMomentumVariant:)")
     public init(learningRate: Swift.Float, momentum: Swift.Float, gradientScale: Swift.Float, regularizationScale: Swift.Float, clipsGradientsTo gradientBounds: Swift.ClosedRange<Swift.Float>? = nil, usesNestrovMomentum: Swift.Bool, regularizationFunction: Accelerate.BNNSOptimizerRegularizationFunction, sgdMomentumVariant: Accelerate.BNNSOptimizerSGDMomentumVariant)
+    @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+    public init(learningRate: Swift.Float, momentum: Swift.Float, gradientScale: Swift.Float, regularizationScale: Swift.Float, clipsGradientsTo gradientBounds: Swift.ClosedRange<Swift.Float>? = nil, usesNesterovMomentum: Swift.Bool, regularizationFunction: Accelerate.BNNSOptimizerRegularizationFunction, sgdMomentumVariant: Accelerate.BNNSOptimizerSGDMomentumVariant)
     public var bnnsOptimizerFunction: Accelerate.BNNSOptimizerFunction {
       get
     }
   }
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public struct FusedTernaryArithmeticParameters : Accelerate.FusableLayerParameters {
+    public var inputADescriptorType: Accelerate.BNNS.DescriptorType
+    public var inputBDescriptorType: Accelerate.BNNS.DescriptorType
+    public var inputCDescriptorType: Accelerate.BNNS.DescriptorType
+    public var outputDescriptorType: Accelerate.BNNS.DescriptorType
+    public var function: Accelerate.BNNS.ArithmeticTernaryFunction
+    public init(inputADescriptorType: Accelerate.BNNS.DescriptorType, inputBDescriptorType: Accelerate.BNNS.DescriptorType, inputCDescriptorType: Accelerate.BNNS.DescriptorType, outputDescriptorType: Accelerate.BNNS.DescriptorType, function: Accelerate.BNNS.ArithmeticTernaryFunction)
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS.FusedParametersLayer {
+  convenience public init?(inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, fusedLayerParameters: [Accelerate.FusableLayerParameters], filterParameters: Accelerate.BNNSFilterParameters? = nil)
+  public func apply(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, for learningPhase: Accelerate.BNNS.LearningPhase) throws
+  public func applyBackward(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputAGradient inputAGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputBGradient inputBGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputCGradient inputCGradient: Accelerate.BNNSNDArrayDescriptor, generatingParameterGradients parameterGradients: [Accelerate.BNNSNDArrayDescriptor]) throws
+}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class NormalizationLayer : Accelerate.BNNS.Layer {
     convenience public init?(type normalization: Accelerate.BNNS.NormalizationType, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, beta: Accelerate.BNNSNDArrayDescriptor, gamma: Accelerate.BNNSNDArrayDescriptor, momentum: Swift.Float = 0, epsilon: Swift.Float, activation: Accelerate.BNNS.ActivationFunction, filterParameters: Accelerate.BNNSFilterParameters? = nil)
     public func apply(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, for learningPhase: Accelerate.BNNS.LearningPhase) throws
@@ -2374,7 +2530,7 @@ extension BNNS {
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public enum NormalizationType {
     case batch(movingMean: Accelerate.BNNSNDArrayDescriptor?, movingVariance: Accelerate.BNNSNDArrayDescriptor?)
     case instance(movingMean: Accelerate.BNNSNDArrayDescriptor?, movingVariance: Accelerate.BNNSNDArrayDescriptor?)
@@ -2383,7 +2539,7 @@ extension BNNS {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func rectangularToPolar<U>(_ rectangularCoordinates: U) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: rectangularCoordinates.count) {
@@ -2490,7 +2646,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   public enum DFTTransformType {
     case complexComplex
     case complexReal
@@ -2512,11 +2668,11 @@ public protocol vDSP_FloatingPointDiscreteFourierTransformable : Swift.BinaryFlo
   associatedtype DFTFunctions : Accelerate.vDSP_DFTFunctions where Self == Self.DFTFunctions.Scalar
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension Float : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable {
+extension Swift.Float : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable {
   public typealias DFTFunctions = Accelerate.vDSP.VectorizableFloat
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension Double : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable {
+extension Swift.Double : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable {
   public typealias DFTFunctions = Accelerate.vDSP.VectorizableDouble
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -2527,19 +2683,19 @@ public protocol vDSP_DFTFunctions {
   static func destroySetup(_ setup: Swift.OpaquePointer)
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP.VectorizableFloat : Accelerate.vDSP_DFTFunctions {
+extension Accelerate.vDSP.VectorizableFloat : Accelerate.vDSP_DFTFunctions {
   public static func makeDFTSetup<T>(previous: Accelerate.vDSP.DFT<T>? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) -> Swift.OpaquePointer? where T : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable
   public static func transform<U, V>(dftSetup: Swift.OpaquePointer, inputReal: U, inputImaginary: U, outputReal: inout V, outputImaginary: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.Float, V.Element == Swift.Float
   public static func destroySetup(_ setup: Swift.OpaquePointer)
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP.VectorizableDouble : Accelerate.vDSP_DFTFunctions {
+extension Accelerate.vDSP.VectorizableDouble : Accelerate.vDSP_DFTFunctions {
   public static func makeDFTSetup<T>(previous: Accelerate.vDSP.DFT<T>? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) -> Swift.OpaquePointer? where T : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable
   public static func transform<U, V>(dftSetup: Swift.OpaquePointer, inputReal: U, inputImaginary: U, outputReal: inout V, outputImaginary: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.Double, V.Element == Swift.Double
   public static func destroySetup(_ setup: Swift.OpaquePointer)
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   public enum IntegrationRule {
     case runningSum
     case simpson
@@ -2581,8 +2737,89 @@ extension vDSP {
     }
   public static func integrate<U, V>(_ vector: U, using rule: Accelerate.vDSP.IntegrationRule, stepSize: Swift.Double = 1, result: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.Double, V.Element == Swift.Double
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public enum GradientClipping {
+    case none
+    case byValue(bounds: Swift.ClosedRange<Swift.Float>)
+    case byNorm(threshold: Swift.Float)
+    case byGlobalNorm(threshold: Swift.Float, globalNorm: Swift.Float = 0)
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public struct AdamWOptimizer : Accelerate.BNNSOptimizer {
+    public var accumulatorCountMultiplier: Swift.Int {
+      get
+    }
+    public var learningRate: Swift.Float {
+      get
+      set
+    }
+    public var beta1: Swift.Float {
+      get
+      set
+    }
+    public var beta2: Swift.Float {
+      get
+      set
+    }
+    public var timeStep: Swift.Float {
+      get
+      set
+    }
+    public var epsilon: Swift.Float {
+      get
+      set
+    }
+    public var gradientScale: Swift.Float {
+      get
+      set
+    }
+    public var weightDecay: Swift.Float {
+      get
+      set
+    }
+    public var gradientClipping: Accelerate.BNNS.GradientClipping {
+      get
+      set
+    }
+    public init(learningRate: Swift.Float = 0.001, beta1: Swift.Float = 0.9, beta2: Swift.Float = 0.999, timeStep: Swift.Float = 1, epsilon: Swift.Float = 1e-8, gradientScale: Swift.Float, weightDecay: Swift.Float = 1e-2, gradientClipping: Accelerate.BNNS.GradientClipping, usesAMSGrad: Swift.Bool = false)
+    public var bnnsOptimizerFunction: Accelerate.BNNSOptimizerFunction {
+      get
+    }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS.AdamOptimizer {
+  public init(learningRate: Swift.Float = 0.001, beta1: Swift.Float = 0.9, beta2: Swift.Float = 0.999, timeStep: Swift.Float, epsilon: Swift.Float = 1e-8, gradientScale: Swift.Float, regularizationScale: Swift.Float, gradientClipping: Accelerate.BNNS.GradientClipping, regularizationFunction: Accelerate.BNNSOptimizerRegularizationFunction, usesAMSGrad: Swift.Bool = false)
+  public var usesAMSGrad: Swift.Bool {
+    get
+    set
+  }
+  public var gradientClipping: Accelerate.BNNS.GradientClipping {
+    get
+    set
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS.SGDMomentumOptimizer {
+  public init(learningRate: Swift.Float, momentum: Swift.Float = 0, gradientScale: Swift.Float, regularizationScale: Swift.Float, gradientClipping: Accelerate.BNNS.GradientClipping, usesNesterovMomentum: Swift.Bool = false, regularizationFunction: Accelerate.BNNSOptimizerRegularizationFunction, sgdMomentumVariant: Accelerate.BNNSOptimizerSGDMomentumVariant)
+  public var gradientClipping: Accelerate.BNNS.GradientClipping {
+    get
+    set
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS.RMSPropOptimizer {
+  public init(learningRate: Swift.Float = 1e-2, alpha: Swift.Float = 0.99, epsilon: Swift.Float = 1e-8, centered: Swift.Bool, momentum: Swift.Float = 0, gradientScale: Swift.Float, regularizationScale: Swift.Float, gradientClipping: Accelerate.BNNS.GradientClipping, regularizationFunction: Accelerate.BNNSOptimizerRegularizationFunction)
+  public var gradientClipping: Accelerate.BNNS.GradientClipping {
+    get
+    set
+  }
+}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func clip<U>(_ vector: U, to bounds: Swift.ClosedRange<Swift.Float>) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: vector.count) {
@@ -2822,44 +3059,44 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
-  @inlinable public static func dot<U>(_ vectorA: U, _ vectorB: U) -> Swift.Float where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
-            
-            precondition(vectorA.count == vectorB.count)
-            
-            let n = vDSP_Length(vectorA.count)
-            var result = Float.nan
-            
-            vectorA.withUnsafeBufferPointer { a in
-                vectorB.withUnsafeBufferPointer { b in
-                    
-                    vDSP_dotpr(a.baseAddress!, 1,
-                               b.baseAddress!, 1,
-                               &result, n)
-                    
-                }
+extension Accelerate.vDSP {
+  @inlinable public static func dot<T, U>(_ vectorA: T, _ vectorB: U) -> Swift.Float where T : Accelerate.AccelerateBuffer, U : Accelerate.AccelerateBuffer, T.Element == Swift.Float, U.Element == Swift.Float {
+        
+        precondition(vectorA.count == vectorB.count)
+        
+        let n = vDSP_Length(vectorA.count)
+        var result = Float.nan
+        
+        vectorA.withUnsafeBufferPointer { a in
+            vectorB.withUnsafeBufferPointer { b in
+                
+                vDSP_dotpr(a.baseAddress!, 1,
+                           b.baseAddress!, 1,
+                           &result, n)
+                
             }
-            
-            return result
+        }
+        
+        return result
     }
-  @inlinable public static func dot<U>(_ vectorA: U, _ vectorB: U) -> Swift.Double where U : Accelerate.AccelerateBuffer, U.Element == Swift.Double {
-            
-            precondition(vectorA.count == vectorB.count)
-            
-            let n = vDSP_Length(vectorA.count)
-            var result = Double.nan
-            
-            vectorA.withUnsafeBufferPointer { a in
-                vectorB.withUnsafeBufferPointer { b in
-                    
-                    vDSP_dotprD(a.baseAddress!, 1,
-                                b.baseAddress!, 1,
-                                &result, n)
-                    
-                }
+  @inlinable public static func dot<T, U>(_ vectorA: T, _ vectorB: U) -> Swift.Double where T : Accelerate.AccelerateBuffer, U : Accelerate.AccelerateBuffer, T.Element == Swift.Double, U.Element == Swift.Double {
+        
+        precondition(vectorA.count == vectorB.count)
+        
+        let n = vDSP_Length(vectorA.count)
+        var result = Double.nan
+        
+        vectorA.withUnsafeBufferPointer { a in
+            vectorB.withUnsafeBufferPointer { b in
+                
+                vDSP_dotprD(a.baseAddress!, 1,
+                            b.baseAddress!, 1,
+                            &result, n)
+                
             }
-            
-            return result
+        }
+        
+        return result
     }
   @inlinable public static func hypot<U, V>(_ x: U, _ y: V) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateBuffer, U.Element == Swift.Float, V.Element == Swift.Float {
             
@@ -3045,7 +3282,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func add<U>(_ scalar: Swift.Float, _ vector: U) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: vector.count) {
@@ -4696,11 +4933,11 @@ extension vDSP {
     }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public static func applyReduction(_ reductionFunction: Accelerate.BNNS.ReductionFunction, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, weights: Accelerate.BNNSNDArrayDescriptor?, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class ReductionLayer : Accelerate.BNNS.UnaryLayer {
     convenience public init?(function reductionFunction: Accelerate.BNNS.ReductionFunction, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, weights: Accelerate.BNNSNDArrayDescriptor?, filterParameters: Accelerate.BNNSFilterParameters? = nil)
     public func applyBackward(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor, generatingWeightsGradient weightsGradient: Accelerate.BNNSNDArrayDescriptor? = nil) throws
@@ -4708,29 +4945,45 @@ extension BNNS {
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public enum ReductionFunction {
     case max
     case min
+    @available(macOS, deprecated, introduced: 11.0, message: "Use `argMax`.")
+    @available(iOS, deprecated, introduced: 14.0, message: "Use `argMax`.")
+    @available(watchOS, deprecated, introduced: 7.0, message: "Use `argMax`.")
+    @available(tvOS, deprecated, introduced: 14.0, message: "Use `argMax`.")
+    @available(*, deprecated, message: "Use `argMax`.")
     case maxIndex
+    case argMax
+    @available(macOS, deprecated, introduced: 11.0, message: "Use `argMin`.")
+    @available(iOS, deprecated, introduced: 14.0, message: "Use `argMin`.")
+    @available(watchOS, deprecated, introduced: 7.0, message: "Use `argMin`.")
+    @available(tvOS, deprecated, introduced: 14.0, message: "Use `argMin`.")
+    @available(*, deprecated, message: "Use `argMin`.")
     case minIndex
+    case argMin
     case mean
     case meanNonZero
     case sum
     case sumOfSquares
     case sumOfLogs(epsilon: Swift.Float)
     case sumOfAbsolutes
+    case logicalOr
+    case any
+    case logicalAnd
+    case all
     public var bnnsReduceFunction: Accelerate.BNNSReduceFunction {
       get
     }
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension vImage_Buffer {
+extension Accelerate.vImage_Buffer {
   public init(size: CoreGraphics.CGSize, bitsPerPixel: Swift.UInt32) throws
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vImage_Buffer {
+extension Accelerate.vImage_Buffer {
   public var size: CoreGraphics.CGSize {
     get
   }
@@ -4739,11 +4992,27 @@ extension vImage_Buffer {
   public func free()
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vImage_Buffer {
+extension Accelerate.vImage_Buffer {
   public init(cgImage: CoreGraphics.CGImage, flags options: Accelerate.vImage.Options = .noFlags) throws
   public init(cgImage: CoreGraphics.CGImage, format: Accelerate.vImage_CGImageFormat, flags options: Accelerate.vImage.Options = .noFlags) throws
   public func createCGImage(format: Accelerate.vImage_CGImageFormat, flags options: Accelerate.vImage.Options = .noFlags) throws -> CoreGraphics.CGImage
   public func copy(destinationBuffer: inout Accelerate.vImage_Buffer, pixelSize: Swift.Int, flags options: Accelerate.vImage.Options = .noFlags) throws
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public struct FusedBinaryArithmeticParameters : Accelerate.FusableLayerParameters {
+    public var inputADescriptorType: Accelerate.BNNS.DescriptorType
+    public var inputBDescriptorType: Accelerate.BNNS.DescriptorType
+    public var outputDescriptorType: Accelerate.BNNS.DescriptorType
+    public var function: Accelerate.BNNS.ArithmeticBinaryFunction
+    public init(inputADescriptorType: Accelerate.BNNS.DescriptorType, inputBDescriptorType: Accelerate.BNNS.DescriptorType, outputDescriptorType: Accelerate.BNNS.DescriptorType, function: Accelerate.BNNS.ArithmeticBinaryFunction)
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS.FusedParametersLayer {
+  convenience public init?(inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, fusedLayerParameters: [Accelerate.FusableLayerParameters], filterParameters: Accelerate.BNNSFilterParameters? = nil)
+  public func apply(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, for learningPhase: Accelerate.BNNS.LearningPhase) throws
+  public func applyBackward(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputAGradient inputAGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputBGradient inputBGradient: Accelerate.BNNSNDArrayDescriptor, generatingParameterGradients parameterGradients: [Accelerate.BNNSNDArrayDescriptor]) throws
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public struct Quadrature {
@@ -4756,7 +5025,7 @@ public struct Quadrature {
     get
     set
   }
-  public func integrate(over interval: Swift.ClosedRange<Swift.Double>, integrand: (Swift.UnsafeBufferPointer<Swift.Double>, Swift.UnsafeMutableBufferPointer<Swift.Double>) -> ()) -> Swift.Result<(integralResult: Swift.Double, estimatedAbsoluteError: Swift.Double), Accelerate.Quadrature.Error>
+  public func integrate(over interval: Swift.ClosedRange<Swift.Double>, integrand: (_ input: Swift.UnsafeBufferPointer<Swift.Double>, _ result: Swift.UnsafeMutableBufferPointer<Swift.Double>) -> ()) -> Swift.Result<(integralResult: Swift.Double, estimatedAbsoluteError: Swift.Double), Accelerate.Quadrature.Error>
   public func integrate(over interval: Swift.ClosedRange<Swift.Double>, integrand: (Swift.Double) -> Swift.Double) -> Swift.Result<(integralResult: Swift.Double, estimatedAbsoluteError: Swift.Double), Accelerate.Quadrature.Error>
   public enum Integrator {
     case qng
@@ -4793,7 +5062,7 @@ public struct Quadrature {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func evaluatePolynomial<U>(usingCoefficients coefficients: [Swift.Float], withVariables variables: U) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: variables.count) {
@@ -4857,8 +5126,21 @@ extension vDSP {
             }
     }
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public struct FusedConvolutionParameters : Accelerate.FusableLayerParameters {
+    public init(type: Accelerate.BNNS.ConvolutionType, weights: Accelerate.BNNSNDArrayDescriptor, bias: Accelerate.BNNSNDArrayDescriptor?, stride: (x: Swift.Int, y: Swift.Int), dilationStride: (x: Swift.Int, y: Swift.Int), groupSize: Swift.Int, padding: Accelerate.BNNS.ConvolutionPadding)
+    public var type: Accelerate.BNNS.ConvolutionType
+    public var weights: Accelerate.BNNSNDArrayDescriptor
+    public var bias: Accelerate.BNNSNDArrayDescriptor?
+    public var stride: (x: Swift.Int, y: Swift.Int)
+    public var dilationStride: (x: Swift.Int, y: Swift.Int)
+    public var groupSize: Swift.Int
+    public var padding: Accelerate.BNNS.ConvolutionPadding
+  }
+}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   public enum Radix {
     case radix2
     case radix3
@@ -4882,7 +5164,6 @@ extension vDSP {
   public class FFT2D<T> : Accelerate.vDSP.FFT<T> where T : Accelerate.vDSP_FourierTransformable {
     required public init?(width: Swift.Int, height: Swift.Int, ofType: T.Type)
     override public func transform<T>(input: T, output: inout T, direction: Accelerate.vDSP.FourierTransformDirection) where T : Accelerate.vDSP_FourierTransformable
-    override public init?(log2n: Accelerate.vDSP_Length, radix: Accelerate.vDSP.Radix, ofType: T.Type)
     @objc deinit
   }
 }
@@ -4915,11 +5196,11 @@ public protocol vDSP_FourierTransformable {
   associatedtype FFTFunctions : Accelerate.vDSP_FourierTransformFunctions where Self == Self.FFTFunctions.SplitComplex
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension DSPSplitComplex : Accelerate.vDSP_FourierTransformable {
+extension Accelerate.DSPSplitComplex : Accelerate.vDSP_FourierTransformable {
   public typealias FFTFunctions = Accelerate.vDSP_SplitComplexFloat
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension DSPDoubleSplitComplex : Accelerate.vDSP_FourierTransformable {
+extension Accelerate.DSPDoubleSplitComplex : Accelerate.vDSP_FourierTransformable {
   public typealias FFTFunctions = Accelerate.vDSP_SplitComplexDouble
 }
 @available(macOS, deprecated, introduced: 10.15, message: "Use the `withUnsafeMutableBufferPointer` method on the real and imaginary arrays to create `DSPSplitComplex` for a defined scope.")
@@ -4927,7 +5208,7 @@ extension DSPDoubleSplitComplex : Accelerate.vDSP_FourierTransformable {
 @available(watchOS, deprecated, introduced: 6.0, message: "Use the `withUnsafeMutableBufferPointer` method on the real and imaginary arrays to create `DSPSplitComplex` for a defined scope.")
 @available(tvOS, deprecated, introduced: 13.0, message: "Use the `withUnsafeMutableBufferPointer` method on the real and imaginary arrays to create `DSPSplitComplex` for a defined scope.")
 @available(*, deprecated, message: "Use the `withUnsafeMutableBufferPointer` method on the real and imaginary arrays to create `DSPSplitComplex` for a defined scope.")
-extension DSPSplitComplex {
+extension Accelerate.DSPSplitComplex {
   public init(fromInputArray inputArray: [Swift.Float], realParts: inout [Swift.Float], imaginaryParts: inout [Swift.Float])
 }
 @available(macOS, deprecated, introduced: 10.15, message: "Use the `withUnsafeMutableBufferPointer` method on the real and imaginary arrays to create `DSPSplitComplex` for a defined scope.")
@@ -4935,19 +5216,46 @@ extension DSPSplitComplex {
 @available(watchOS, deprecated, introduced: 6.0, message: "Use the `withUnsafeMutableBufferPointer` method on the real and imaginary arrays to create `DSPSplitComplex` for a defined scope.")
 @available(tvOS, deprecated, introduced: 13.0, message: "Use the `withUnsafeMutableBufferPointer` method on the real and imaginary arrays to create `DSPSplitComplex` for a defined scope.")
 @available(*, deprecated, message: "Use the `withUnsafeMutableBufferPointer` method on the real and imaginary arrays to create `DSPSplitComplex` for a defined scope.")
-extension DSPDoubleSplitComplex {
+extension Accelerate.DSPDoubleSplitComplex {
   public init(fromInputArray inputArray: [Swift.Double], realParts: inout [Swift.Double], imaginaryParts: inout [Swift.Double])
 }
-extension Array where Element == Swift.Float {
+extension Swift.Array where Element == Swift.Float {
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public init(fromSplitComplex splitComplex: Accelerate.DSPSplitComplex, scale: Swift.Float, count: Swift.Int)
 }
-extension Array where Element == Swift.Double {
+extension Swift.Array where Element == Swift.Double {
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public init(fromSplitComplex splitComplex: Accelerate.DSPDoubleSplitComplex, scale: Swift.Double, count: Swift.Int)
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public enum RandomGeneratorMethod {
+    case aesCtr
+    public static func == (a: Accelerate.BNNS.RandomGeneratorMethod, b: Accelerate.BNNS.RandomGeneratorMethod) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @_hasMissingDesignatedInitializers public class RandomGeneratorState {
+    @objc deinit
+  }
+  public class RandomGenerator {
+    public init?(method: Accelerate.BNNS.RandomGeneratorMethod, seed: Swift.UInt64? = nil, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    @objc deinit
+    public var state: Accelerate.BNNS.RandomGeneratorState {
+      get
+      set
+    }
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNSNDArrayDescriptor {
+  public static func allocate<Scalar>(randomUniformUsing: Accelerate.BNNS.RandomGenerator, range: Swift.ClosedRange<Scalar>, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor? where Scalar : Accelerate.BNNSScalar, Scalar : Swift.BinaryFloatingPoint
+  public static func allocate<Scalar>(randomUniformUsing: Accelerate.BNNS.RandomGenerator, range: Swift.ClosedRange<Scalar>, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor? where Scalar : Accelerate.BNNSScalar, Scalar : Swift.FixedWidthInteger
+}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vImage {
+extension Accelerate.vImage {
   public enum Error : Swift.Int, Swift.Error {
     case noError
     case roiLargerThanInputBuffer
@@ -4977,8 +5285,18 @@ extension vImage {
     }
   }
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public static func quantize(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axis: Swift.Int? = nil, scale: Accelerate.BNNSNDArrayDescriptor?, bias: Accelerate.BNNSNDArrayDescriptor?, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  public static func dequantize(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axis: Swift.Int? = nil, scale: Accelerate.BNNSNDArrayDescriptor?, bias: Accelerate.BNNSNDArrayDescriptor?, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public static func computeNorm(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axes: [Swift.Int]? = nil) throws
+  public static func computeNormBackward(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axes: [Swift.Int]? = nil, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor) throws
+}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vImageConverter {
+extension Accelerate.vImageConverter {
   public func sourceBuffers(colorSpace: CoreGraphics.CGColorSpace) -> [Accelerate.vImage.BufferType?]
   public func destinationBuffers(colorSpace: CoreGraphics.CGColorSpace) -> [Accelerate.vImage.BufferType?]
   public var sourceBufferCount: Swift.Int {
@@ -4994,7 +5312,7 @@ extension vImageConverter {
   public func convert(source: Accelerate.vImage_Buffer, destination: inout Accelerate.vImage_Buffer, flags options: Accelerate.vImage.Options = .noFlags) throws
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   public struct Biquad<T> where T : Accelerate.vDSP_FloatingPointBiquadFilterable {
     public init?(coefficients: [Swift.Double], channelCount: Accelerate.vDSP_Length, sectionCount: Accelerate.vDSP_Length, ofType: T.Type)
     public mutating func apply<U>(input: U) -> [T] where T == U.Element, U : Accelerate.AccelerateBuffer
@@ -5006,11 +5324,11 @@ public protocol vDSP_FloatingPointBiquadFilterable : Swift.BinaryFloatingPoint {
   associatedtype BiquadFunctions : Accelerate.vDSP_BiquadFunctions where Self == Self.BiquadFunctions.Scalar
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension Float : Accelerate.vDSP_FloatingPointBiquadFilterable {
+extension Swift.Float : Accelerate.vDSP_FloatingPointBiquadFilterable {
   public typealias BiquadFunctions = Accelerate.vDSP.VectorizableFloat
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension Double : Accelerate.vDSP_FloatingPointBiquadFilterable {
+extension Swift.Double : Accelerate.vDSP_FloatingPointBiquadFilterable {
   public typealias BiquadFunctions = Accelerate.vDSP.VectorizableDouble
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -5022,7 +5340,7 @@ public protocol vDSP_BiquadFunctions {
   static func destroySetup(channelCount: Swift.UInt, biquadSetup: Swift.OpaquePointer)
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP.VectorizableFloat : Accelerate.vDSP_BiquadFunctions {
+extension Accelerate.vDSP.VectorizableFloat : Accelerate.vDSP_BiquadFunctions {
   @inlinable public static func makeBiquadSetup(channelCount: Swift.UInt, coefficients: [Swift.Double], sectionCount: Swift.UInt) -> Swift.OpaquePointer? {
         if channelCount == 1 {
             return vDSP_biquad_CreateSetup(coefficients,
@@ -5060,7 +5378,7 @@ extension vDSP.VectorizableFloat : Accelerate.vDSP_BiquadFunctions {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP.VectorizableDouble : Accelerate.vDSP_BiquadFunctions {
+extension Accelerate.vDSP.VectorizableDouble : Accelerate.vDSP_BiquadFunctions {
   @inlinable public static func makeBiquadSetup(channelCount: Accelerate.vDSP_Length, coefficients: [Swift.Double], sectionCount: Accelerate.vDSP_Length) -> Swift.OpaquePointer? {
         if channelCount == 1 {
             return vDSP_biquad_CreateSetupD(coefficients,
@@ -5098,21 +5416,21 @@ extension vDSP.VectorizableDouble : Accelerate.vDSP_BiquadFunctions {
     }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class DropoutLayer : Accelerate.BNNS.UnaryLayer {
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, rate: Swift.Float, seed: Swift.UInt32, control: Swift.UInt8, filterParameters: Accelerate.BNNSFilterParameters? = nil)
     @objc deinit
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class FullyConnectedLayer : Accelerate.BNNS.ConvolutionLayer {
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, weights: Accelerate.BNNSNDArrayDescriptor, bias: Accelerate.BNNSNDArrayDescriptor?, activation: Accelerate.BNNS.ActivationFunction, filterParameters: Accelerate.BNNSFilterParameters? = nil)
     @objc deinit
   }
 }
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-extension BNNSDataType {
+extension Accelerate.BNNSDataType {
   public static var float16: Accelerate.BNNSDataType {
     get
   }
@@ -5133,7 +5451,7 @@ extension BNNSDataType {
   }
 }
 @available(macOS 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
-extension BNNSDataType {
+extension Accelerate.BNNSDataType {
   public static var uint8: Accelerate.BNNSDataType {
     get
   }
@@ -5163,10 +5481,15 @@ public var BNNSDataTypeInt32: Accelerate.BNNSDataType
 @available(*, deprecated, renamed: "BNNSDataType.indexed8")
 public var BNNSDataTypeIndexed8: Accelerate.BNNSDataType
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-extension BNNSPoolingFunction {
+extension Accelerate.BNNSPoolingFunction {
   public static var max: Accelerate.BNNSPoolingFunction {
     get
   }
+  @available(macOS, introduced: 10.15, deprecated: 12.0, message: "Use 'BNNSPoolingFunctionAverageCountIncludePadding' instead.")
+  @available(iOS, introduced: 13.0, deprecated: 15.0, message: "Use 'BNNSPoolingFunctionAverageCountIncludePadding' instead.")
+  @available(watchOS, introduced: 6.0, deprecated: 8.0, message: "Use 'BNNSPoolingFunctionAverageCountIncludePadding' instead.")
+  @available(tvOS, introduced: 13.0, deprecated: 15.0, message: "Use 'BNNSPoolingFunctionAverageCountIncludePadding' instead.")
+  @available(*, deprecated, message: "Use 'BNNSPoolingFunctionAverageCountIncludePadding' instead.")
   public static var average: Accelerate.BNNSPoolingFunction {
     get
   }
@@ -5178,7 +5501,7 @@ public var BNNSPoolingFunctionMax: Accelerate.BNNSPoolingFunction
 @available(*, deprecated, renamed: "BNNSPoolingFunction.average")
 public var BNNSPoolingFunctionAverage: Accelerate.BNNSPoolingFunction
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-extension BNNSActivationFunction {
+extension Accelerate.BNNSActivationFunction {
   public static var identity: Accelerate.BNNSActivationFunction {
     get
   }
@@ -5202,7 +5525,7 @@ extension BNNSActivationFunction {
   }
 }
 @available(macOS 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
-extension BNNSActivationFunction {
+extension Accelerate.BNNSActivationFunction {
   public static var linear: Accelerate.BNNSActivationFunction {
     get
   }
@@ -5241,7 +5564,7 @@ public var BNNSActivationFunctionScaledTanh: Accelerate.BNNSActivationFunction
 @available(*, deprecated, renamed: "BNNSActivationFunction.abs")
 public var BNNSActivationFunctionAbs: Accelerate.BNNSActivationFunction
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-extension BNNSFlags {
+extension Accelerate.BNNSFlags {
   public static var useClientPointer: Accelerate.BNNSFlags {
     get
   }
@@ -5249,16 +5572,28 @@ extension BNNSFlags {
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @available(*, deprecated, renamed: "BNNSFlags.useClientPointer")
 public var BNNSFlagsUseClientPtr: Accelerate.BNNSFlags
-@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-extension BNNSImageStackDescriptor {
+@available(macOS, introduced: 10.12, deprecated: 12.0, message: "BNNS switched to new Layer Parameters data structures.")
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "BNNS switched to new Layer Parameters data structures.")
+@available(watchOS, introduced: 3.0, deprecated: 8.0, message: "BNNS switched to new Layer Parameters data structures.")
+@available(tvOS, introduced: 10.0, deprecated: 15.0, message: "BNNS switched to new Layer Parameters data structures.")
+@available(*, deprecated, message: "BNNS switched to new Layer Parameters data structures.")
+extension Accelerate.BNNSImageStackDescriptor {
   public init(width: Swift.Int, height: Swift.Int, channels: Swift.Int, row_stride: Swift.Int, image_stride: Swift.Int, data_type: Accelerate.BNNSDataType)
 }
-@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-extension BNNSVectorDescriptor {
+@available(macOS, introduced: 10.12, deprecated: 12.0, message: "BNNS switched to new Layer Parameters data structures.")
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "BNNS switched to new Layer Parameters data structures.")
+@available(watchOS, introduced: 3.0, deprecated: 8.0, message: "BNNS switched to new Layer Parameters data structures.")
+@available(tvOS, introduced: 10.0, deprecated: 15.0, message: "BNNS switched to new Layer Parameters data structures.")
+@available(*, deprecated, message: "BNNS switched to new Layer Parameters data structures.")
+extension Accelerate.BNNSVectorDescriptor {
   public init(size: Swift.Int, data_type: Accelerate.BNNSDataType)
 }
-@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-extension BNNSLayerData {
+@available(macOS, introduced: 10.12, deprecated: 12.0, message: "BNNS switched to new Layer Parameters data structures.")
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "BNNS switched to new Layer Parameters data structures.")
+@available(watchOS, introduced: 3.0, deprecated: 8.0, message: "BNNS switched to new Layer Parameters data structures.")
+@available(tvOS, introduced: 10.0, deprecated: 15.0, message: "BNNS switched to new Layer Parameters data structures.")
+@available(*, deprecated, message: "BNNS switched to new Layer Parameters data structures.")
+extension Accelerate.BNNSLayerData {
   public init(data: Swift.UnsafeRawPointer?, data_type: Accelerate.BNNSDataType, data_scale: Swift.Float = 1, data_bias: Swift.Float = 0)
   public static var zero: Accelerate.BNNSLayerData {
     get
@@ -5266,27 +5601,39 @@ extension BNNSLayerData {
   public static func indexed8(data: Swift.UnsafePointer<Swift.Int8>?, data_table: Swift.UnsafePointer<Swift.Float>) -> Accelerate.BNNSLayerData
 }
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-extension BNNSActivation {
+extension Accelerate.BNNSActivation {
   public init(function: Accelerate.BNNSActivationFunction, alpha: Swift.Float = .nan, beta: Swift.Float = .nan)
   public static var identity: Accelerate.BNNSActivation {
     get
   }
 }
 @available(macOS 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
-extension BNNSActivation {
+extension Accelerate.BNNSActivation {
   public static func integerLinearSaturate(scale: Swift.Int32 = 1, offset: Swift.Int32 = 0, shift: Swift.Int32 = 0) -> Accelerate.BNNSActivation
   public static func integerLinearSaturatePerChannel(scale: Swift.UnsafePointer<Swift.Int32>, offset: Swift.UnsafePointer<Swift.Int32>, shift: Swift.UnsafePointer<Swift.Int32>) -> Accelerate.BNNSActivation
 }
-@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-extension BNNSConvolutionLayerParameters {
+@available(macOS, introduced: 10.12, deprecated: 12.0, message: "Use 'BNNSLayerParametersConvolution' instead.")
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "Use 'BNNSLayerParametersConvolution' instead")
+@available(watchOS, introduced: 3.0, deprecated: 8.0, message: "Use 'BNNSLayerParametersConvolution' instead")
+@available(tvOS, introduced: 10.0, deprecated: 15.0, message: "Use 'BNNSLayerParametersConvolution' instead")
+@available(*, deprecated, message: "Use 'BNNSLayerParametersConvolution' instead")
+extension Accelerate.BNNSConvolutionLayerParameters {
   public init(x_stride: Swift.Int, y_stride: Swift.Int, x_padding: Swift.Int, y_padding: Swift.Int, k_width: Swift.Int, k_height: Swift.Int, in_channels: Swift.Int, out_channels: Swift.Int, weights: Accelerate.BNNSLayerData)
 }
-@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-extension BNNSPoolingLayerParameters {
+@available(macOS, introduced: 10.12, deprecated: 12.0, message: "Use 'BNNSLayerParametersPooling' instead.")
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "Use 'BNNSLayerParametersPooling' instead")
+@available(watchOS, introduced: 3.0, deprecated: 8.0, message: "Use 'BNNSLayerParametersPooling' instead")
+@available(tvOS, introduced: 10.0, deprecated: 15.0, message: "Use 'BNNSLayerParametersPooling' instead")
+@available(*, deprecated, message: "Use 'BNNSLayerParametersPooling' instead")
+extension Accelerate.BNNSPoolingLayerParameters {
   public init(x_stride: Swift.Int, y_stride: Swift.Int, x_padding: Swift.Int, y_padding: Swift.Int, k_width: Swift.Int, k_height: Swift.Int, in_channels: Swift.Int, out_channels: Swift.Int, pooling_function: Accelerate.BNNSPoolingFunction)
 }
-@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-extension BNNSFullyConnectedLayerParameters {
+@available(macOS, introduced: 10.12, deprecated: 12.0, message: "Use 'BNNSLayerParametersFullyConnected' instead.")
+@available(iOS, introduced: 10.0, deprecated: 15.0, message: "Use 'BNNSLayerParametersFullyConnected' instead")
+@available(watchOS, introduced: 3.0, deprecated: 8.0, message: "Use 'BNNSLayerParametersFullyConnected' instead")
+@available(tvOS, introduced: 10.0, deprecated: 15.0, message: "Use 'BNNSLayerParametersFullyConnected' instead")
+@available(*, deprecated, message: "Use 'BNNSLayerParametersFullyConnected' instead")
+extension Accelerate.BNNSFullyConnectedLayerParameters {
   public init(in_size: Swift.Int, out_size: Swift.Int, weights: Accelerate.BNNSLayerData)
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -5300,44 +5647,44 @@ public protocol AccelerateMutableBuffer : Accelerate.AccelerateBuffer {
   mutating func withUnsafeMutableBufferPointer<R>(_ body: (inout Swift.UnsafeMutableBufferPointer<Self.Element>) throws -> R) rethrows -> R
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension AccelerateBuffer where Self : Swift.Collection {
+extension Accelerate.AccelerateBuffer where Self : Swift.Collection {
   @inlinable public func withUnsafeBufferPointer<R>(_ body: (Swift.UnsafeBufferPointer<Self.Element>) throws -> R) rethrows -> R {
         return try withContiguousStorageIfAvailable(body)!
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension AccelerateMutableBuffer where Self : Swift.MutableCollection {
+extension Accelerate.AccelerateMutableBuffer where Self : Swift.MutableCollection {
   @inlinable public mutating func withUnsafeMutableBufferPointer<R>(_ body: (inout Swift.UnsafeMutableBufferPointer<Self.Element>) throws -> R) rethrows -> R {
         return try withContiguousMutableStorageIfAvailable(body)!
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension Array : Accelerate.AccelerateMutableBuffer {
+extension Swift.Array : Accelerate.AccelerateMutableBuffer {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension ContiguousArray : Accelerate.AccelerateMutableBuffer {
+extension Swift.ContiguousArray : Accelerate.AccelerateMutableBuffer {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension ArraySlice : Accelerate.AccelerateMutableBuffer {
+extension Swift.ArraySlice : Accelerate.AccelerateMutableBuffer {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension UnsafeBufferPointer : Accelerate.AccelerateBuffer {
+extension Swift.UnsafeBufferPointer : Accelerate.AccelerateBuffer {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension UnsafeMutableBufferPointer : Accelerate.AccelerateMutableBuffer {
+extension Swift.UnsafeMutableBufferPointer : Accelerate.AccelerateMutableBuffer {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension Slice : Accelerate.AccelerateBuffer where Base : Accelerate.AccelerateBuffer {
+extension Swift.Slice : Accelerate.AccelerateBuffer where Base : Accelerate.AccelerateBuffer {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension Slice : Accelerate.AccelerateMutableBuffer where Base : Accelerate.AccelerateMutableBuffer, Base : Swift.MutableCollection {
+extension Swift.Slice : Accelerate.AccelerateMutableBuffer where Base : Accelerate.AccelerateMutableBuffer, Base : Swift.MutableCollection {
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public protocol BNNSScalar {
   static var bnnsDataType: Accelerate.BNNSDataType { get }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension Float : Accelerate.BNNSScalar {
+extension Swift.Float : Accelerate.BNNSScalar {
   public static var bnnsDataType: Accelerate.BNNSDataType {
     get
   }
@@ -5345,55 +5692,67 @@ extension Float : Accelerate.BNNSScalar {
 @available(iOS 14, tvOS 14, watchOS 7, *)
 @available(macOS, unavailable)
 @available(macCatalyst, unavailable)
-extension Float16 : Accelerate.BNNSScalar {
+extension Swift.Float16 : Accelerate.BNNSScalar {
   public static var bnnsDataType: Accelerate.BNNSDataType {
     get
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension Int8 : Accelerate.BNNSScalar {
+extension Swift.Int8 : Accelerate.BNNSScalar {
   public static var bnnsDataType: Accelerate.BNNSDataType {
     get
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension Int16 : Accelerate.BNNSScalar {
+extension Swift.Int16 : Accelerate.BNNSScalar {
   public static var bnnsDataType: Accelerate.BNNSDataType {
     get
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension Int32 : Accelerate.BNNSScalar {
+extension Swift.Int32 : Accelerate.BNNSScalar {
   public static var bnnsDataType: Accelerate.BNNSDataType {
     get
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension UInt8 : Accelerate.BNNSScalar {
+extension Swift.UInt8 : Accelerate.BNNSScalar {
   public static var bnnsDataType: Accelerate.BNNSDataType {
     get
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension UInt16 : Accelerate.BNNSScalar {
+extension Swift.UInt16 : Accelerate.BNNSScalar {
   public static var bnnsDataType: Accelerate.BNNSDataType {
     get
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension UInt32 : Accelerate.BNNSScalar {
+extension Swift.UInt32 : Accelerate.BNNSScalar {
   public static var bnnsDataType: Accelerate.BNNSDataType {
     get
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension Bool : Accelerate.BNNSScalar {
+extension Swift.Bool : Accelerate.BNNSScalar {
+  public static var bnnsDataType: Accelerate.BNNSDataType {
+    get
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Swift.Int64 : Accelerate.BNNSScalar {
+  public static var bnnsDataType: Accelerate.BNNSDataType {
+    get
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Swift.UInt64 : Accelerate.BNNSScalar {
   public static var bnnsDataType: Accelerate.BNNSDataType {
     get
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNSNDArrayDescriptor {
+extension Accelerate.BNNSNDArrayDescriptor {
   public init(dataType: Accelerate.BNNSDataType, shape: Accelerate.BNNS.Shape)
   public init?(data: Swift.UnsafeMutableRawBufferPointer, scalarType: Accelerate.BNNSScalar.Type, shape: Accelerate.BNNS.Shape)
   public init?<T>(data: Swift.UnsafeMutableBufferPointer<T>, shape: Accelerate.BNNS.Shape) where T : Accelerate.BNNSScalar
@@ -5410,8 +5769,13 @@ extension BNNSNDArrayDescriptor {
   }
   public func deallocate()
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNSNDArrayDescriptor {
+  public init?(data: Swift.UnsafeMutableRawBufferPointer, scalarType: Accelerate.BNNSScalar.Type, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int)
+  public init?<T>(data: Swift.UnsafeMutableBufferPointer<T>, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int) where T : Accelerate.BNNSScalar
+}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @frozen public struct RelationalOperator {
     @usableFromInline
     internal var value: Accelerate.BNNSRelationalOperator
@@ -5457,7 +5821,7 @@ extension BNNS {
   public static func compare(_ inputA: Accelerate.BNNSNDArrayDescriptor, _ inputB: Accelerate.BNNSNDArrayDescriptor, using relationalOperator: Accelerate.BNNS.RelationalOperator, output: Accelerate.BNNSNDArrayDescriptor) throws
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public enum DescriptorType {
     case constant
     case sample
@@ -5511,19 +5875,23 @@ extension BNNS {
     case divide
     case divideNoNaN
     case pow
-    public static func == (a: Accelerate.BNNS.ArithmeticBinaryFunction, b: Accelerate.BNNS.ArithmeticBinaryFunction) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public typealias AllCases = [Accelerate.BNNS.ArithmeticBinaryFunction]
+    @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+    case max
+    @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+    case min
     public static var allCases: [Accelerate.BNNS.ArithmeticBinaryFunction] {
       get
     }
+    public static func == (a: Accelerate.BNNS.ArithmeticBinaryFunction, b: Accelerate.BNNS.ArithmeticBinaryFunction) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public typealias AllCases = [Accelerate.BNNS.ArithmeticBinaryFunction]
     public var hashValue: Swift.Int {
       get
     }
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class UnaryArithmeticLayer : Accelerate.BNNS.Layer {
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, inputDescriptorType: Accelerate.BNNS.DescriptorType, output: Accelerate.BNNSNDArrayDescriptor, outputDescriptorType: Accelerate.BNNS.DescriptorType, function: Accelerate.BNNS.ArithmeticUnaryFunction, activation: Accelerate.BNNS.ActivationFunction = .identity, filterParameters: Accelerate.BNNSFilterParameters? = nil)
     public func apply(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
@@ -5538,7 +5906,7 @@ extension BNNS {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func linearInterpolate<T, U>(_ vectorA: T, _ vectorB: U, using interpolationConstant: Swift.Float) -> [Swift.Float] where T : Accelerate.AccelerateBuffer, U : Accelerate.AccelerateBuffer, T.Element == Swift.Float, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: vectorA.count) {
@@ -5673,7 +6041,7 @@ extension vDSP {
     }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public enum InterpolationMethod {
     case linear
     case nearestNeighbor
@@ -5689,7 +6057,7 @@ extension BNNS {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vForce {
+extension Accelerate.vForce {
   @inlinable public static func ceil<U>(_ vector: U) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: vector.count) {
@@ -6268,7 +6636,7 @@ extension vForce {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vForce {
+extension Accelerate.vForce {
   @inlinable public static func exp<U>(_ vector: U) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: vector.count) {
@@ -6595,7 +6963,7 @@ extension vForce {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vForce {
+extension Accelerate.vForce {
   @inlinable public static func pow<U, V>(bases: U, exponents: V) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.Float, V.Element == Swift.Float {
             
             precondition(bases.count == exponents.count)
@@ -6664,7 +7032,7 @@ extension vForce {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vForce {
+extension Accelerate.vForce {
   @inlinable public static func sin<U>(_ vector: U) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: vector.count) {
@@ -7187,7 +7555,7 @@ extension vForce {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vForce {
+extension Accelerate.vForce {
   @inlinable public static func sinh<U>(_ vector: U) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: vector.count) {
@@ -7513,12 +7881,46 @@ extension vForce {
             }
     }
 }
-@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
-  public static func copy(_ source: Accelerate.BNNSNDArrayDescriptor, to destination: Accelerate.BNNSNDArrayDescriptor, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public struct FusedUnaryArithmeticParameters : Accelerate.FusableLayerParameters {
+    public var inputDescriptorType: Accelerate.BNNS.DescriptorType
+    public var outputDescriptorType: Accelerate.BNNS.DescriptorType
+    public var function: Accelerate.BNNS.ArithmeticUnaryFunction
+    public init(inputDescriptorType: Accelerate.BNNS.DescriptorType, outputDescriptorType: Accelerate.BNNS.DescriptorType, function: Accelerate.BNNS.ArithmeticUnaryFunction)
+  }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
+  public static func copy(_ source: Accelerate.BNNSNDArrayDescriptor, to destination: Accelerate.BNNSNDArrayDescriptor, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public struct FusedQuantizationParameters : Accelerate.FusableLayerParameters {
+    public init(scale: Accelerate.BNNSNDArrayDescriptor?, bias: Accelerate.BNNSNDArrayDescriptor?)
+    public var axis: Swift.Int?
+    public var scale: Accelerate.BNNSNDArrayDescriptor?
+    public var bias: Accelerate.BNNSNDArrayDescriptor?
+  }
+  public struct FusedDequantizationParameters : Accelerate.FusableLayerParameters {
+    public init(scale: Accelerate.BNNSNDArrayDescriptor?, bias: Accelerate.BNNSNDArrayDescriptor?)
+    public var axis: Swift.Int?
+    public var scale: Accelerate.BNNSNDArrayDescriptor?
+    public var bias: Accelerate.BNNSNDArrayDescriptor?
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+public protocol FusableLayerParameters {
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class FusedParametersLayer : Accelerate.BNNS.FusedLayer {
+    convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, fusedLayerParameters: [Accelerate.FusableLayerParameters], filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    @objc deinit
+  }
+}
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+extension Accelerate.BNNS {
   public enum PaddingMode {
     case constantBitPattern(Swift.UInt32)
     case constantScalar(Swift.Float)
@@ -7537,7 +7939,7 @@ extension BNNS {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func slidingWindowSum<U>(_ vector: U, usingWindowLength windowLength: Swift.Int) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let n = vector.count - windowLength + 1
@@ -7602,7 +8004,7 @@ extension vDSP {
     }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension vForce {
+extension Accelerate.vForce {
   @inlinable public static func log<U>(_ vector: U) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
         
         let result = Array<Float>(unsafeUninitializedCapacity: vector.count) {
@@ -7779,7 +8181,7 @@ extension vForce {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   public enum FourierTransformDirection {
     case forward
     case inverse
@@ -7797,7 +8199,7 @@ extension vDSP {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func twoPoleTwoZeroFilter<U>(_ source: U, coefficients: (Swift.Float, Swift.Float, Swift.Float, Swift.Float, Swift.Float)) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: source.count) {
@@ -7868,7 +8270,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func minimum<U>(_ vectorA: U, _ vectorB: U) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             precondition(vectorA.count == vectorB.count)
             
@@ -7999,7 +8401,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func absolute<U>(_ vector: U) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: vector.count) {
@@ -8153,7 +8555,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func reverse<V>(_ vector: inout V) where V : Accelerate.AccelerateMutableBuffer, V.Element == Swift.Float {
             
             let n = vDSP_Length(vector.count)
@@ -8203,7 +8605,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func square<U>(_ vector: U) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float {
             
             let result = Array<Float>(unsafeUninitializedCapacity: vector.count) {
@@ -8400,7 +8802,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vImage_CGImageFormat {
+extension Accelerate.vImage_CGImageFormat {
   public init?(cgImage: CoreGraphics.CGImage)
   public init?(bitsPerComponent: Swift.Int, bitsPerPixel: Swift.Int, colorSpace: CoreGraphics.CGColorSpace, bitmapInfo: CoreGraphics.CGBitmapInfo, renderingIntent: CoreGraphics.CGColorRenderingIntent = .defaultIntent)
   public var componentCount: Swift.Int {
@@ -8408,7 +8810,7 @@ extension vImage_CGImageFormat {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func phase<V>(_ splitComplex: Accelerate.DSPSplitComplex, result: inout V) where V : Accelerate.AccelerateMutableBuffer, V.Element == Swift.Float {
             
             let n = vDSP_Length(result.count)
@@ -8657,7 +9059,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   public enum DCTTransformType : Swift.CaseIterable {
     case II
     case III
@@ -8685,12 +9087,12 @@ extension vDSP {
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public protocol vDSP_FloatingPointGeneratable : Swift.BinaryFloatingPoint {
 }
-extension Float : Accelerate.vDSP_FloatingPointGeneratable {
+extension Swift.Float : Accelerate.vDSP_FloatingPointGeneratable {
 }
-extension Double : Accelerate.vDSP_FloatingPointGeneratable {
+extension Swift.Double : Accelerate.vDSP_FloatingPointGeneratable {
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   @inlinable public static func linearInterpolate<T, U, V>(values: T, atIndices indices: U, result: inout V) where T : Accelerate.AccelerateBuffer, U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, T.Element == Swift.Float, U.Element == Swift.Float, V.Element == Swift.Float {
             
@@ -8845,7 +9247,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vDSP {
+extension Accelerate.vDSP {
   @inlinable public static func fill<V>(_ vector: inout V, with value: Swift.Float) where V : Accelerate.AccelerateMutableBuffer, V.Element == Swift.Float {
             
             let n = vDSP_Length(vector.count)
@@ -9225,7 +9627,7 @@ extension vDSP {
     }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vImageCVImageFormat {
+extension Accelerate.vImageCVImageFormat {
   public static func make(format: Accelerate.vImageCVImageFormat.Format, matrix: Accelerate.vImage_ARGBToYpCbCrMatrix, chromaSiting: Accelerate.vImageCVImageFormat.ChromaSiting, colorSpace: CoreGraphics.CGColorSpace, alphaIsOpaqueHint: Swift.Bool) -> Accelerate.vImageCVImageFormat?
   public static func make(buffer: CoreVideo.CVPixelBuffer) -> Accelerate.vImageCVImageFormat?
   public var alphaIsOpaqueHint: Swift.Bool {
@@ -9252,7 +9654,7 @@ extension vImageCVImageFormat {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vImage {
+extension Accelerate.vImage {
   public enum BufferType : Swift.Int {
     case alpha
     case coreGraphics
@@ -9289,7 +9691,7 @@ extension vImage {
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension vImageCVImageFormat {
+extension Accelerate.vImageCVImageFormat {
   public enum Format {
     case format1Monochrome
     case format2Indexed
@@ -9377,17 +9779,23 @@ extension vImageCVImageFormat {
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LossLayer : Accelerate.BNNS.Layer {
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, lossFunction: Accelerate.BNNS.LossFunction, lossReduction: Accelerate.BNNS.LossReduction, filterParameters: Accelerate.BNNSFilterParameters? = nil)
     public func apply(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, labels: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor) throws
     @objc deinit
   }
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS.LossLayer {
+  public func apply(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, labels: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, weights: Accelerate.BNNSNDArrayDescriptor?, broadcastsWeights: Swift.Bool, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor) throws
+}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension BNNS {
+extension Accelerate.BNNS {
   public enum LossFunction {
     public struct YoloParameters {
+      @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+      public init(huberDelta: Swift.Float, gridColumnCount: Swift.Int, gridRowsCount: Swift.Int, anchorBoxCount: Swift.Int, anchorBoxSize: Swift.Int, rescore: Swift.Bool, xyScale: Swift.Float, whScale: Swift.Float, objectScale: Swift.Float, noObjectScale: Swift.Float, classificationScale: Swift.Float, objectMinimumIoU: Swift.Float, noObjectMaximumIoU: Swift.Float, anchorsData: Swift.UnsafeMutablePointer<Swift.Float>)
       public let huberDelta: Swift.Float
       public let gridColumnCount: Swift.Int
       public let gridRowsCount: Swift.Int
@@ -9433,6 +9841,17 @@ extension BNNS {
     }
   }
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS {
+  public static func clipByGlobalNorm(threshold: Swift.Float, inputs: [Accelerate.BNNSNDArrayDescriptor], outputs: [Accelerate.BNNSNDArrayDescriptor], globalNorm: Swift.Float = 0) throws
+  public static func clip(to bounds: Swift.ClosedRange<Swift.Float>, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
+  public static func clipByNorm(threshold: Swift.Float, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axes: [Swift.Int]? = nil) throws
+}
+
+#if compiler(>=5.3) && $MarkerProtocol && $Sendable
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS.Norm : Swift.Sendable {}
+#endif
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNS.DataLayout : Swift.Equatable {}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
@@ -9449,10 +9868,19 @@ extension Accelerate.BNNS.ConvolutionType : Swift.Hashable {}
 extension Accelerate.BNNS.LearningPhase : Swift.Equatable {}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNS.LearningPhase : Swift.Hashable {}
+
+#if compiler(>=5.3) && $MarkerProtocol && $Sendable
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+extension Accelerate.BNNS.LearningPhase : Swift.Sendable {}
+#endif
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vDSP.RoundingMode : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vDSP.RoundingMode : Swift.Hashable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS.ArithmeticTernaryFunction : Swift.Equatable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS.ArithmeticTernaryFunction : Swift.Hashable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vDSP.DFTTransformType : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -9469,12 +9897,21 @@ extension Accelerate.Quadrature.Error : Swift.Hashable {}
 extension Accelerate.vDSP.Radix : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vDSP.Radix : Swift.Hashable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS.RandomGeneratorMethod : Swift.Equatable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Accelerate.BNNS.RandomGeneratorMethod : Swift.Hashable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vImage.Error : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vImage.Error : Swift.Hashable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vImage.Error : Swift.RawRepresentable {}
+
+#if compiler(>=5.3) && $MarkerProtocol && $Sendable
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+extension Accelerate.BNNS.RelationalOperator : Swift.Sendable {}
+#endif
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNS.DescriptorType : Swift.Equatable {}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)

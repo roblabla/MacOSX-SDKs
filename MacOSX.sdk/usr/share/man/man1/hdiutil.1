@@ -743,6 +743,8 @@ Options specific to
 .Bl -hang -width "partitionType" -compact
 .It Fl segmentSize Ar size_spec
 .br
+Note that segmented images are deprecated.
+.br
 Specify that the image should be written in segments no bigger than
 .Ar size_spec
 (which follows
@@ -820,7 +822,7 @@ ULFO - UDIF lzfse-compressed image (OS X 10.11+ only)
 .It
 ULMO - UDIF lzma-compressed image (macOS 10.15+ only)
 .It
-UDBZ - UDIF bzip2-compressed image (Mac OS X 10.4+ only)
+UDBZ - UDIF bzip2-compressed image (deprecated)
 .It
 UDTO - DVD/CD-R master for export
 .It
@@ -862,6 +864,8 @@ add partition map.
 When converting an unpartitioned UDIF, the default is true.
 .It Fl segmentSize
 .Op Ar size_spec
+.br
+Note that segmented images are deprecated.
 .br
 Specify segmentation into
 .Ar size_spec Ns -sized
@@ -1578,6 +1582,9 @@ does not modify the image.
 .\"             -- segment --
 .It Sy segment
 .br
+.Sy NOTE: hdiutil segment command is deprecated
+
+.br
 .Sy segment Fl o Ar firstSegname Fl segmentCount Ar #segs image Op opts
 .br
 .Sy segment Fl o Ar firstSegname Fl segmentSize Ar size image Op opts
@@ -1677,8 +1684,9 @@ UUIDs so these will be randomly generated for APM maps.
 .\"             -- udifrez --
 .It Sy udifrez Op options
 .Ar image
+(deprecated)
 .br
-embed resources (e.g. a software license agreement) in a disk image.
+embed resources in a disk image.
 .Pp
 You must specify one of the following options:
 .Bl -hang -width "xml" -compact
@@ -1695,6 +1703,7 @@ Delete all pre-existing resources in
 .\"             -- udifderez --
 .It Sy udifderez Op options
 .Ar image
+(deprecated)
 .br
 extract resources from
 .Ar image .
@@ -1721,12 +1730,6 @@ Verifying:
 .Dl hdiutil verify myimage.img
 .Bd -ragged -offset indent-two -compact
 verifies an image against its internal checksum.
-.Ed
-.Pp
-Segmenting:
-.Dl hdiutil segment -segmentSize 10m -o /tmp/aseg 30m.dmg
-.Bd -ragged -offset indent-two -compact
-creates aseg.dmg, aseg.002.dmgpart, and aseg.003.dmgpart
 .Ed
 .Pp
 Converting:
@@ -2246,6 +2249,17 @@ Default file system for new images has changed to APFS (instead of
 an empty disk image with no partition map). To create an empty disk image
 add "-layout NONE" to the creation flags. This change does not apply to
 images created with -srcfolder or -srcdevice arguments.
+.El
+.Pp
+macOS 12.0:
+.Bl -bullet -offset indent
+.It
+Deprecated UDBZ format (bzip2 compression)
+.It
+Deprecated segmented UDIF images (hdiutil segment, -segmentSize argument in
+hdiutil create & convert)
+.It
+Deprecated hdiutil udifrez/udifderez (embed and extract resources)
 .El
 .Sh HISTORY
 Disk images were first invented to electronically store and transmit

@@ -17,7 +17,7 @@
 //------------------------------------------------------------------------------------------------------------------------------
 
 #ifndef __ICAAPPLICATION__
-#include "ICAApplication.h"
+#include <ICADevices/ICAApplication.h>
 #endif
 
 #ifndef __AVAILABILITYMACROS__

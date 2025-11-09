@@ -127,15 +127,63 @@ MPS_SWIFT_NAME( reshape(_:shape:name:) );
                             squeezeMask:(uint32_t) squeezeMask
                                    name:(NSString * _Nullable) name;
 
+/*!
+ *  @abstract   Create concat  op and return the result tensor
+ *  @discussion Concatenate two input tensors along sepecified dimension. Tensors must be broadcast
+ *              compatible along all other dimensions, and have the same type.
+ *
+ *  @param      tensor                         First tensor to concatenate
+ *  @param      tensor2                       Second tensor to concatenate
+ *  @param      dimensionIndex        The dimension to concatenate across, must be in range - rank <= dimension < rank
+ *  @param      name                              The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
 
 -(MPSGraphTensor *) concatTensor:(MPSGraphTensor *) tensor
                       withTensor:(MPSGraphTensor *) tensor2
-                       dimension:(NSUInteger) dimensionIndex
+                       dimension:(NSInteger) dimensionIndex
                             name:(NSString * _Nullable) name;
 
+/*!
+ *  @abstract   Create concat op and return the result tensor
+ *  @discussion Concatenate all input tensors along specified dimension. All inputs must be broadcast
+ *              compatible along all other dimensions, and have the same type.
+ *
+ *  @param      tensors                      Tensors to concatenate
+ *  @param      dimensionIndex       The dimension to concatenate across, must be in range - rank <= dimension < rank
+ *  @param      name                             The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
 -(MPSGraphTensor *) concatTensors:(NSArray<MPSGraphTensor *> *) tensors
-                       dimension:(NSUInteger) dimensionIndex
-                            name:(NSString * _Nullable) name;
+                        dimension:(NSInteger) dimensionIndex
+                             name:(NSString * _Nullable) name;
+
+/*!
+ *  @abstract   Create concat op and return the result tensor
+ *  @discussion Concatenate all input tensors along specified dimension. All inputs must be broadcast
+ *              compatible along all other dimensions, and have the same type.
+ *              When interleave is specified, all tensors will be interleaved. To interleave, all inputs must
+ *              be broadcast compatible along the specified dimension as well.
+ *              Example,
+ *              @code
+ *              operand0 = [1, 2, 3]
+ *              operand1 = [4, 5, 6]
+ *              concat([operand0, operand1], axis = 0, interleave = YES) = [1, 4, 2, 5, 3, 6]
+ *              @endcode
+ *
+ *  @param      tensors                      Tensors to concatenate
+ *  @param      dimensionIndex       The dimension to concatenate across, must be in range - rank <= dimension < rank
+ *  @param      interleave                Interleave input tensors
+ *  @param      name                             The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+-(MPSGraphTensor *) concatTensors:(NSArray<MPSGraphTensor *> *) tensors
+                        dimension:(NSInteger) dimensionIndex
+                       interleave:(BOOL) interleave
+                             name:(NSString * _Nullable) name;
 
 -(MPSGraphTensor *) tileTensor:(MPSGraphTensor *) tensor
                 withMultiplier:(MPSShape *) multiplier
@@ -160,6 +208,129 @@ MPS_SWIFT_NAME( reshape(_:shape:name:) );
                                              leftPadding:(MPSShape *) leftPadding
                                             rightPadding:(MPSShape *) rightPadding
                                                     name:(NSString * _Nullable) name;
+
+-(MPSGraphTensor *)spaceToDepth2DTensor:(MPSGraphTensor *) tensor
+                        widthAxisTensor:(MPSGraphTensor *) widthAxisTensor
+                       heightAxisTensor:(MPSGraphTensor *) heightAxisTensor
+                        depthAxisTensor:(MPSGraphTensor *) depthAxisTensor
+                              blockSize:(NSUInteger)blockSize
+                   usePixelShuffleOrder:(BOOL)usePixelShuffleOrder
+                                   name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+-(MPSGraphTensor *)depthToSpace2DTensor:(MPSGraphTensor *) tensor
+                        widthAxisTensor:(MPSGraphTensor *) widthAxisTensor
+                       heightAxisTensor:(MPSGraphTensor *) heightAxisTensor
+                        depthAxisTensor:(MPSGraphTensor *) depthAxisTensor
+                              blockSize:(NSUInteger)blockSize
+                   usePixelShuffleOrder:(BOOL)usePixelShuffleOrder
+                                   name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+-(MPSGraphTensor *)spaceToDepth2DTensor:(MPSGraphTensor *) tensor
+                              widthAxis:(NSUInteger) widthAxis
+                             heightAxis:(NSUInteger) heightAxis
+                              depthAxis:(NSUInteger) depthAxis
+                              blockSize:(NSUInteger)blockSize
+                   usePixelShuffleOrder:(BOOL)usePixelShuffleOrder
+                                   name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+-(MPSGraphTensor *)depthToSpace2DTensor:(MPSGraphTensor *) tensor
+                              widthAxis:(NSUInteger) widthAxis
+                             heightAxis:(NSUInteger) heightAxis
+                              depthAxis:(NSUInteger) depthAxis
+                              blockSize:(NSUInteger)blockSize
+                   usePixelShuffleOrder:(BOOL)usePixelShuffleOrder
+                                   name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+/*!
+ *  @abstract   Create reverse op and return the result tensor
+ *  @discussion Reverses a tensor on given axes
+ *              https://www.tensorflow.org/api_docs/python/tf/reverse.
+ *
+ *  @param      tensor              Tensor to be reversed
+ *  @param      axesTensor     Tensor that specifies axes to be reversed (Axes must be unique and within normal axis range).
+ *  @param      name                  The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+
+-(MPSGraphTensor *) reverseTensor:(MPSGraphTensor *) tensor
+                       axesTensor:(MPSGraphTensor *) axesTensor
+                             name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+/*!
+ *  @abstract   Create reverse op and return the result tensor
+ *  @discussion Reverses a tensor on given axes
+ *              https://www.tensorflow.org/api_docs/python/tf/reverse.
+ *
+ *  @param      tensor              Tensor to be reversed
+ *  @param      axes                  Axes to be reversed (Axes must be unique and within normal axis range).
+ *  @param      name                  The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+
+-(MPSGraphTensor *) reverseTensor:(MPSGraphTensor *) tensor
+                             axes:(NSArray<NSNumber *> *) axes
+                             name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+/*!
+ *  @abstract   Create reverse op and return the result tensor
+ *  @discussion Reverses a tensor on all axes
+ *              https://www.tensorflow.org/api_docs/python/tf/reverse.
+ *
+ *  @param      tensor              Tensor to be reversed
+ *  @param      name                  The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+
+-(MPSGraphTensor *) reverseTensor:(MPSGraphTensor *) tensor
+                             name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+
+/*!
+ *  @abstract   Create flatten2d op and return the result tensor
+ *  @discussion Flattens dimensions before `axis` to `result[0]` and dimensions starting
+ *              from `axis` to `result[1]` and returns a rank-2 tensor as result.
+ *
+ *  @param      tensor          Tensor to be flattened
+ *  @param      axis            Axis around which to flatten
+ *  @param      name            The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+
+-(MPSGraphTensor *) flatten2DTensor:(MPSGraphTensor *) tensor
+                               axis:(NSInteger) axis
+                               name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( flatten2D(_:axis:name:) )
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+/*!
+ *  @abstract   Create flatten2d op and return the result tensor
+ *  @discussion Flattens dimensions before `axis` to `result[0]` and dimensions starting
+ *              from `axis` to `result[1]` and returns a rank-2 tensor as result.
+ *
+ *  @param      tensor              Tensor to be flattened
+ *  @param      axisTensor          Axis around which to flatten
+ *  @param      name                The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+
+-(MPSGraphTensor *) flatten2DTensor:(MPSGraphTensor *) tensor
+                         axisTensor:(MPSGraphTensor *) axisTensor
+                               name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( flatten2D(_:axisTensor:name:) )
+MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
 
 @end
 

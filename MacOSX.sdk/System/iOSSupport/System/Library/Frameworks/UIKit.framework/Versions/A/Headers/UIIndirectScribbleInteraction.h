@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
       - A view that looks like a search field or a text field that in reality is a button, but installs a real text field when tapped
       - A view that contains multiple virtual text fields which the user can normally tap and type into, but are not full blown text fields all the time
  */
-UIKIT_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT @interface UIIndirectScribbleInteraction : NSObject <UIInteraction>
+UIKIT_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT NS_SWIFT_UI_ACTOR
+@interface UIIndirectScribbleInteraction : NSObject <UIInteraction>
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -45,7 +46,8 @@ typedef id<NSCopying, NSObject> UIScribbleElementIdentifier NS_REFINED_FOR_SWIFT
 /*!
     @abstract The protocol to be implemented by the delegate of UIIndirectScribbleInteraction. It will be responsible for supplying a list of writable elements, focusing them, and ultimately providing a real UITextInput that will handle text editing operations.
  */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT @protocol UIIndirectScribbleInteractionDelegate <NSObject>
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT NS_SWIFT_UI_ACTOR
+@protocol UIIndirectScribbleInteractionDelegate <NSObject>
 
 /*!
     @abstract This method will be called to request the text input elements in a certain rect of the view, each of which represents an area where the user can start writing even if it's not a text input field itself.

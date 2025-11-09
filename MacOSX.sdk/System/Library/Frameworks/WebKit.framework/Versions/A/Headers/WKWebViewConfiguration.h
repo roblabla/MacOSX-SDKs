@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, WKSelectionGranularity) {
     WKSelectionGranularityDynamic,
     WKSelectionGranularityCharacter,
-} API_AVAILABLE(ios(8.0));
+} WK_API_AVAILABLE(ios(8.0));
 
 #else
 
@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, WKSelectionGranularity) {
 typedef NS_ENUM(NSInteger, WKUserInterfaceDirectionPolicy) {
     WKUserInterfaceDirectionPolicyContent,
     WKUserInterfaceDirectionPolicySystem,
-} API_AVAILABLE(macos(10.12));
+} WK_API_AVAILABLE(macos(10.12));
 
 #endif
 
@@ -84,13 +84,13 @@ typedef NS_OPTIONS(NSUInteger, WKAudiovisualMediaTypes) {
     WKAudiovisualMediaTypeAudio = 1 << 0,
     WKAudiovisualMediaTypeVideo = 1 << 1,
     WKAudiovisualMediaTypeAll = NSUIntegerMax
-} API_AVAILABLE(macos(10.12), ios(10.0));
+} WK_API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*! A WKWebViewConfiguration object is a collection of properties with
  which to initialize a web view.
  @helps Contains properties used to configure a @link WKWebView @/link.
  */
-WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
+WK_CLASS_AVAILABLE(macos(10.10), ios(8.0))
 @interface WKWebViewConfiguration : NSObject <NSSecureCoding, NSCopying>
 
 /*! @abstract The process pool from which to obtain the view's web content
@@ -111,7 +111,7 @@ WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
 
 /*! @abstract The website data store to be used by the web view.
  */
-@property (nonatomic, strong) WKWebsiteDataStore *websiteDataStore API_AVAILABLE(macos(10.11), ios(9.0));
+@property (nonatomic, strong) WKWebsiteDataStore *websiteDataStore WK_API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*! @abstract A Boolean value indicating whether the web view suppresses
  content rendering until it is fully loaded into memory.
@@ -121,22 +121,27 @@ WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
 
 /*! @abstract The name of the application as used in the user agent string.
 */
-@property (nullable, nonatomic, copy) NSString *applicationNameForUserAgent API_AVAILABLE(macos(10.11), ios(9.0));
+@property (nullable, nonatomic, copy) NSString *applicationNameForUserAgent WK_API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*! @abstract A Boolean value indicating whether AirPlay is allowed.
  @discussion The default value is YES.
  */
-@property (nonatomic) BOOL allowsAirPlayForMediaPlayback API_AVAILABLE(macos(10.11), ios(9.0));
+@property (nonatomic) BOOL allowsAirPlayForMediaPlayback WK_API_AVAILABLE(macos(10.11), ios(9.0));
 
-@property (nonatomic) WKAudiovisualMediaTypes mediaTypesRequiringUserActionForPlayback API_AVAILABLE(macos(10.12), ios(10.0));
+/*! @abstract A Boolean value indicating whether HTTP requests to servers known to support HTTPS should be automatically upgraded to HTTPS requests.
+ @discussion The default value is YES.
+ */
+@property (nonatomic) BOOL upgradeKnownHostsToHTTPS WK_API_AVAILABLE(macos(12.0), ios(15.0));
+
+@property (nonatomic) WKAudiovisualMediaTypes mediaTypesRequiringUserActionForPlayback WK_API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*! @abstract The set of default webpage preferences to use when loading and rendering content.
  @discussion These default webpage preferences are additionally passed to the navigation delegate
  in -webView:decidePolicyForNavigationAction:preferences:decisionHandler:.
  */
-@property (null_resettable, nonatomic, copy) WKWebpagePreferences *defaultWebpagePreferences API_AVAILABLE(macos(10.15), ios(13.0));
+@property (null_resettable, nonatomic, copy) WKWebpagePreferences *defaultWebpagePreferences WK_API_AVAILABLE(macos(10.15), ios(13.0));
 
-@property (nonatomic) BOOL limitsNavigationsToAppBoundDomains API_AVAILABLE(macos(11.0), ios(14.0));
+@property (nonatomic) BOOL limitsNavigationsToAppBoundDomains WK_API_AVAILABLE(macos(11.0), ios(14.0));
 
 #if TARGET_OS_IPHONE
 /*! @abstract A Boolean value indicating whether HTML5 videos play inline
@@ -156,7 +161,7 @@ WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
  picture-in-picture.
  @discussion The default value is YES.
  */
-@property (nonatomic) BOOL allowsPictureInPictureMediaPlayback API_AVAILABLE(ios(9_0));
+@property (nonatomic) BOOL allowsPictureInPictureMediaPlayback WK_API_AVAILABLE(ios(9_0));
 
 /*! @abstract An enum value indicating the type of data detection desired.
  @discussion The default value is WKDataDetectorTypeNone.
@@ -165,13 +170,13 @@ WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
  if the dataDetectorTypes property is set to WKDataDetectorTypePhoneNumber | WKDataDetectorTypeLink | WKDataDetectorTypeCalendarEvent.
 
  */
-@property (nonatomic) WKDataDetectorTypes dataDetectorTypes API_AVAILABLE(ios(10.0));
+@property (nonatomic) WKDataDetectorTypes dataDetectorTypes WK_API_AVAILABLE(ios(10.0));
 
 /*! @abstract A Boolean value indicating whether the WKWebView should always allow scaling of the web page, regardless of author intent.
  @discussion This will override the user-scalable property.
  The default value is NO.
  */
-@property (nonatomic) BOOL ignoresViewportScaleLimits API_AVAILABLE(ios(10.0));
+@property (nonatomic) BOOL ignoresViewportScaleLimits WK_API_AVAILABLE(ios(10.0));
 
 #else
 
@@ -179,7 +184,7 @@ WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
  @discussion Possible values are described in WKUserInterfaceDirectionPolicy.
  The default value is WKUserInterfaceDirectionPolicyContent.
  */
-@property (nonatomic) WKUserInterfaceDirectionPolicy userInterfaceDirectionPolicy API_AVAILABLE(macos(10.12));
+@property (nonatomic) WKUserInterfaceDirectionPolicy userInterfaceDirectionPolicy WK_API_AVAILABLE(macos(10.12));
 
 #endif
 
@@ -195,12 +200,12 @@ WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
  An exception will be thrown if you try to register a URL scheme handler for a URL scheme that WebKit handles internally.
  You can use +[WKWebView handlesURLScheme:] to check the availability of a given URL scheme.
  */
-- (void)setURLSchemeHandler:(nullable id <WKURLSchemeHandler>)urlSchemeHandler forURLScheme:(NSString *)urlScheme API_AVAILABLE(macos(10.13), ios(11.0));
+- (void)setURLSchemeHandler:(nullable id <WKURLSchemeHandler>)urlSchemeHandler forURLScheme:(NSString *)urlScheme WK_API_AVAILABLE(macos(10.13), ios(11.0));
 
 /* @abstract Returns the currently registered URL scheme handler object for the given URL scheme.
  @param scheme The URL scheme to lookup.
  */
-- (nullable id <WKURLSchemeHandler>)urlSchemeHandlerForURLScheme:(NSString *)urlScheme API_AVAILABLE(macos(10.13), ios(11.0));
+- (nullable id <WKURLSchemeHandler>)urlSchemeHandlerForURLScheme:(NSString *)urlScheme WK_API_AVAILABLE(macos(10.13), ios(11.0));
 
 @end
 
@@ -208,9 +213,9 @@ WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
 
 @interface WKWebViewConfiguration (WKDeprecated)
 
-@property (nonatomic) BOOL mediaPlaybackRequiresUserAction API_DEPRECATED_WITH_REPLACEMENT("mediaTypesRequiringUserActionForPlayback", ios(8.0, 9.0));
-@property (nonatomic) BOOL mediaPlaybackAllowsAirPlay API_DEPRECATED_WITH_REPLACEMENT("allowsAirPlayForMediaPlayback", ios(8.0, 9.0));
-@property (nonatomic) BOOL requiresUserActionForMediaPlayback API_DEPRECATED_WITH_REPLACEMENT("mediaTypesRequiringUserActionForPlayback", ios(9.0, 10.0));
+@property (nonatomic) BOOL mediaPlaybackRequiresUserAction WK_API_DEPRECATED_WITH_REPLACEMENT("mediaTypesRequiringUserActionForPlayback", ios(8.0, 9.0));
+@property (nonatomic) BOOL mediaPlaybackAllowsAirPlay WK_API_DEPRECATED_WITH_REPLACEMENT("allowsAirPlayForMediaPlayback", ios(8.0, 9.0));
+@property (nonatomic) BOOL requiresUserActionForMediaPlayback WK_API_DEPRECATED_WITH_REPLACEMENT("mediaTypesRequiringUserActionForPlayback", ios(9.0, 10.0));
 
 @end
 

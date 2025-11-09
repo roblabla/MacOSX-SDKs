@@ -105,7 +105,7 @@ CF_ENUM(AudioClassID)
     @enum           AudioLevelControl Properties
     @abstract       AudioObjectPropertySelector values that apply to all AudioLevelControls.
     @discussion     AudioLevelControl is a subclass of AudioControl and has only the single scope,
-                    kAudioObjectPropertyScopeGlobal, and only a master element.
+                    kAudioObjectPropertyScopeGlobal, and only a main element.
     @constant       kAudioLevelControlPropertyDecibelsToScalarTransferFunction
                         A UInt32 whose value indicates the transfer function the HAL uses to convert
                         between decibel values and scalar values.
@@ -189,7 +189,7 @@ typedef OSStatus
     @enum           AudioSystemObject Properties
     @abstract       AudioObjectPropertySelector values that apply to the AudioSystemObject.
     @discussion     The AudioSystemObject has one scope, kAudioObjectPropertyScopeGlobal, and only a
-                    master element.
+                    main element.
     @constant       kAudioHardwarePropertyRunLoop
                         The CFRunLoopRef the HAL is currently attaching all of its system
                         notification handlers to. In 10.6 and later, the HAL will use the process's
@@ -210,12 +210,15 @@ typedef OSStatus
                         CFString containing a bundle ID into the AudioObjectID of the AudioPlugIn
                         that corresponds to it. This property will return kAudioObjectUnkown if the
                         given bundle ID doesn't match any AudioPlugIns.
+    @constant       kAudioHardwarePropertyProcessIsMaster
+						The deprecated synonym for kAudioHardwarePropertyProcessIsMain
 */
 CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioHardwarePropertyRunLoop                           = 'rnlp',
     kAudioHardwarePropertyDeviceForUID                      = 'duid',
-    kAudioHardwarePropertyPlugInForBundleID                 = 'pibi'
+    kAudioHardwarePropertyPlugInForBundleID                 = 'pibi',
+    kAudioHardwarePropertyProcessIsMaster API_DEPRECATED_WITH_REPLACEMENT("kAudioHardwarePropertyProcessIsMain", macos(10.0, 12.0), ios(2.0, 15.0), watchos(1.0, 8.0), tvos(9.0, 15.0)) = 'mast'
 };
 
 /*!
@@ -425,7 +428,7 @@ typedef AudioObjectPropertySelector AudioDevicePropertyID;
     @param          inDevice
                         The AudioDevice whose property has changed.
     @param          inChannel
-                        The channel of the property that changed where 0 is the master channel.
+                        The channel of the property that changed where 0 is the main channel.
     @param          isInput
                         Which section of the AudioDevice changed.
     @param          inPropertyID
@@ -771,7 +774,7 @@ AudioDeviceRead(    AudioDeviceID           inDevice,
     @param          inDevice
                         The AudioDevice to query.
     @param          inChannel
-                        The channel of the property to query where 0 is the master channel.
+                        The channel of the property to query where 0 is the main channel.
     @param          isInput
                         Which section of the AudioDevice to query.
     @param          inPropertyID
@@ -802,7 +805,7 @@ AudioDeviceGetPropertyInfo( AudioDeviceID           inDevice,
     @param          inDevice
                         The AudioDevice to query.
     @param          inChannel
-                        The channel of the property to query where 0 is the master channel.
+                        The channel of the property to query where 0 is the main channel.
     @param          isInput
                         Which section of the AudioDevice to query.
     @param          inPropertyID
@@ -837,7 +840,7 @@ AudioDeviceGetProperty( AudioDeviceID           inDevice,
                         relative to the device's time base. NULL means execute the change
                         immediately.
     @param          inChannel
-                        The channel of the property to change where 0 is the master channel.
+                        The channel of the property to change where 0 is the main channel.
     @param          isInput
                         Which section of the AudioDevice to change.
     @param          inPropertyID
@@ -913,6 +916,31 @@ AudioDeviceRemovePropertyListener(  AudioDeviceID                   inDevice,
 
 //==================================================================================================
 #pragma mark -
+#pragma mark AudioAggregateDevice Constants
+/*!
+    @defined        kAudioAggregateDeviceMasterSubDeviceKey
+    @discussion     The deprecated synonym for kAudioAggregateDeviceMainSubDeviceKey
+*/
+#define kAudioAggregateDeviceMasterSubDeviceKey "master"
+
+//==================================================================================================
+#pragma mark AudioAggregateDevice Properties
+
+/*!
+    @enum           AudioAggregateDevice Properties
+    @abstract       AudioObjectPropertySelector values provided by the AudioAggregateDevice class.
+    @discussion     AudioAggregateDevice is a subclass of AudioDevice and has the same scope and
+                    element structure.
+    @constant       kAudioAggregateDevicePropertyMasterSubDevice
+                        The deprecated synonym for kAudioAggregateDevicePropertyMainSubDevice
+*/
+CF_ENUM(AudioObjectPropertySelector)
+{
+    kAudioAggregateDevicePropertyMasterSubDevice API_DEPRECATED_WITH_REPLACEMENT("kAudioAggregateDevicePropertyMainSubDevice", macos(10.0, 12.0), ios(2.0, 15.0), watchos(1.0, 8.0), tvos(9.0, 15.0))	= kAudioAggregateDevicePropertyMainSubDevice
+};
+
+//==================================================================================================
+#pragma mark -
 #pragma mark AudioStream Types
 
 /*!
@@ -931,7 +959,7 @@ typedef AudioObjectID   AudioStreamID;
     @param          inStream
                         The AudioStream whose property has changed.
     @param          inChannel
-                        The channel of the property that changed where 0 is the master channel.
+                        The channel of the property that changed where 0 is the main channel.
     @param          inPropertyID
                         The AudioDevicePropertyID of the property that changed.
     @param          inClientData
@@ -1022,7 +1050,7 @@ CF_ENUM(AudioObjectPropertySelector)
     @param          inStream
                         The AudioStream to query.
     @param          inChannel
-                        The channel of the property to query where 0 is the master channel.
+                        The channel of the property to query where 0 is the main channel.
     @param          inPropertyID
                         The AudioDevicePropertyID of the property to query.
     @param          outSize
@@ -1050,7 +1078,7 @@ AudioStreamGetPropertyInfo( AudioStreamID           inStream,
     @param          inStream
                         The AudioStream to query.
     @param          inChannel
-                        The channel of the property to query where 0 is the master channel.
+                        The channel of the property to query where 0 is the main channel.
     @param          inPropertyID
                         The AudioDevicePropertyID of the property to query.
     @param          ioPropertyDataSize
@@ -1082,7 +1110,7 @@ AudioStreamGetProperty( AudioStreamID           inStream,
                         relative to the device's time base. NULL means execute the change
                         immediately.
     @param          inChannel
-                        The channel of the property to change where 0 is the master channel.
+                        The channel of the property to change where 0 is the main channel.
     @param          inPropertyID
                         The AudioDevicePropertyID of the property to change.
     @param          inPropertyDataSize
@@ -1170,7 +1198,7 @@ CF_ENUM(AudioClassID)
     @enum           AudioControl Properties
     @abstract       AudioObjectPropertySelector values that apply to all AudioControls.
     @discussion     AudioControl is a subclass of AudioObject and has only the single scope,
-                    kAudioObjectPropertyScopeGlobal, and only a master element.
+                    kAudioObjectPropertyScopeGlobal, and only a main element.
     @constant       kAudioControlPropertyVariant
                         A UInt32 that identifies the specific variant of an AudioControl. This
                         allows the owning AudioObject to support controls that are of the same basic

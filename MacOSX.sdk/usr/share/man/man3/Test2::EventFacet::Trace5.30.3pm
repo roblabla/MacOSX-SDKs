@@ -68,72 +68,10 @@
 .    \}
 .\}
 .rr rF
-.\"
-.\" Accent mark definitions (@(#)ms.acc 1.5 88/02/08 SMI; from UCB 4.2).
-.\" Fear.  Run.  Save yourself.  No user-serviceable parts.
-.    \" fudge factors for nroff and troff
-.if n \{\
-.    ds #H 0
-.    ds #V .8m
-.    ds #F .3m
-.    ds #[ \f1
-.    ds #] \fP
-.\}
-.if t \{\
-.    ds #H ((1u-(\\\\n(.fu%2u))*.13m)
-.    ds #V .6m
-.    ds #F 0
-.    ds #[ \&
-.    ds #] \&
-.\}
-.    \" simple accents for nroff and troff
-.if n \{\
-.    ds ' \&
-.    ds ` \&
-.    ds ^ \&
-.    ds , \&
-.    ds ~ ~
-.    ds /
-.\}
-.if t \{\
-.    ds ' \\k:\h'-(\\n(.wu*8/10-\*(#H)'\'\h"|\\n:u"
-.    ds ` \\k:\h'-(\\n(.wu*8/10-\*(#H)'\`\h'|\\n:u'
-.    ds ^ \\k:\h'-(\\n(.wu*10/11-\*(#H)'^\h'|\\n:u'
-.    ds , \\k:\h'-(\\n(.wu*8/10)',\h'|\\n:u'
-.    ds ~ \\k:\h'-(\\n(.wu-\*(#H-.1m)'~\h'|\\n:u'
-.    ds / \\k:\h'-(\\n(.wu*8/10-\*(#H)'\z\(sl\h'|\\n:u'
-.\}
-.    \" troff and (daisy-wheel) nroff accents
-.ds : \\k:\h'-(\\n(.wu*8/10-\*(#H+.1m+\*(#F)'\v'-\*(#V'\z.\h'.2m+\*(#F'.\h'|\\n:u'\v'\*(#V'
-.ds 8 \h'\*(#H'\(*b\h'-\*(#H'
-.ds o \\k:\h'-(\\n(.wu+\w'\(de'u-\*(#H)/2u'\v'-.3n'\*(#[\z\(de\v'.3n'\h'|\\n:u'\*(#]
-.ds d- \h'\*(#H'\(pd\h'-\w'~'u'\v'-.25m'\f2\(hy\fP\v'.25m'\h'-\*(#H'
-.ds D- D\\k:\h'-\w'D'u'\v'-.11m'\z\(hy\v'.11m'\h'|\\n:u'
-.ds th \*(#[\v'.3m'\s+1I\s-1\v'-.3m'\h'-(\w'I'u*2/3)'\s-1o\s+1\*(#]
-.ds Th \*(#[\s+2I\s-2\h'-\w'I'u*3/5'\v'-.3m'o\v'.3m'\*(#]
-.ds ae a\h'-(\w'a'u*4/10)'e
-.ds Ae A\h'-(\w'A'u*4/10)'E
-.    \" corrections for vroff
-.if v .ds ~ \\k:\h'-(\\n(.wu*9/10-\*(#H)'\s-2\u~\d\s+2\h'|\\n:u'
-.if v .ds ^ \\k:\h'-(\\n(.wu*10/11-\*(#H)'\v'-.4m'^\v'.4m'\h'|\\n:u'
-.    \" for low resolution devices (crt and lpr)
-.if \n(.H>23 .if \n(.V>19 \
-\{\
-.    ds : e
-.    ds 8 ss
-.    ds o a
-.    ds d- d\h'-1'\(ga
-.    ds D- D\h'-1'\(hy
-.    ds th \o'bp'
-.    ds Th \o'LP'
-.    ds ae ae
-.    ds Ae AE
-.\}
-.rm #[ #] #H #V #F C
 .\" ========================================================================
 .\"
-.IX Title "Test2::EventFacet::Trace 3pm"
-.TH Test2::EventFacet::Trace 3pm "2019-10-24" "perl v5.30.2" "Perl Programmers Reference Guide"
+.IX Title "Test2::EventFacet::Trace 3"
+.TH Test2::EventFacet::Trace 3 "2020-10-22" "perl v5.30.2" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -175,6 +113,10 @@ Used as a custom trace message that will be used \s-1INSTEAD\s0 of
 .IX Item "$frame = $trace->frame()"
 .PD
 Get the call frame arrayref.
+.Sp
+.Vb 1
+\&    [$package, $file, $line, $subname]
+.Ve
 .ie n .IP "$int = $trace\->{pid}" 4
 .el .IP "\f(CW$int\fR = \f(CW$trace\fR\->{pid}" 4
 .IX Item "$int = $trace->{pid}"
@@ -212,6 +154,29 @@ The \s-1ID\s0 of the context that was used to create the event.
 .PD
 The \s-1UUID\s0 of the context that was used to create the event. (If uuid tagging was
 enabled)
+.ie n .IP "($pkg, $file, $line, $subname) = $trace\->call" 4
+.el .IP "($pkg, \f(CW$file\fR, \f(CW$line\fR, \f(CW$subname\fR) = \f(CW$trace\fR\->call" 4
+.IX Item "($pkg, $file, $line, $subname) = $trace->call"
+Get the basic call info as a list.
+.ie n .IP "@caller = $trace\->full_call" 4
+.el .IP "\f(CW@caller\fR = \f(CW$trace\fR\->full_call" 4
+.IX Item "@caller = $trace->full_call"
+Get the full caller(N) results.
+.ie n .IP "$warning_bits = $trace\->warning_bits" 4
+.el .IP "\f(CW$warning_bits\fR = \f(CW$trace\fR\->warning_bits" 4
+.IX Item "$warning_bits = $trace->warning_bits"
+Get index 9 from the full caller info. This is the warnings_bits field.
+.Sp
+The value of this is not portable across perl versions or even processes.
+However it can be used in the process that generated it to reproduce the
+warnings settings in a new scope.
+.Sp
+.Vb 4
+\&    eval <<EOT;
+\&    BEGIN { ${^WARNING_BITS} = $trace\->warning_bits };
+\&    ... context\*(Aqs warning settings apply here ...
+\&    EOT
+.Ve
 .SS "\s-1DISCOURAGED HUB RELATED FIELDS\s0"
 .IX Subsection "DISCOURAGED HUB RELATED FIELDS"
 These fields were not always set properly by tools. These are \fB\s-1MOSTLY\s0\fR
@@ -334,7 +299,7 @@ The source code repository for Test2 can be found at
 .PD
 .SH "COPYRIGHT"
 .IX Header "COPYRIGHT"
-Copyright 2019 Chad Granum <exodist@cpan.org>.
+Copyright 2020 Chad Granum <exodist@cpan.org>.
 .PP
 This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.

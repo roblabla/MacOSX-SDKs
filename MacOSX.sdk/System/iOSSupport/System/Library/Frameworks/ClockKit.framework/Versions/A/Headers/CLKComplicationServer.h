@@ -27,6 +27,8 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 - (void)reloadComplicationDescriptors API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios);
 
+#pragma mark - Deprecated
+
 @property (nonatomic, readonly) NSDate *earliestTimeTravelDate API_DEPRECATED("Time Travel is no longer supported.", watchos(2.0, 7.0));
 @property (nonatomic, readonly) NSDate *latestTimeTravelDate API_DEPRECATED("Time Travel is no longer supported.", watchos(2.0, 7.0));
 

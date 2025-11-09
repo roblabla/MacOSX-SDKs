@@ -231,6 +231,35 @@
 #define instancetype id
 #endif
 
+#if __has_attribute(swift_async)
+#  define NS_SWIFT_DISABLE_ASYNC __attribute__((swift_async(none)))
+#  define NS_SWIFT_ASYNC(COMPLETION_BLOCK_INDEX) __attribute__((swift_async(not_swift_private, COMPLETION_BLOCK_INDEX)))
+#  define NS_REFINED_FOR_SWIFT_ASYNC(COMPLETION_BLOCK_INDEX) __attribute__((swift_async(swift_private, COMPLETION_BLOCK_INDEX)))
+#else
+#  define NS_SWIFT_DISABLE_ASYNC
+#  define NS_SWIFT_ASYNC(COMPLETION_BLOCK_INDEX)
+#  define NS_REFINED_FOR_SWIFT_ASYNC(COMPLETION_BLOCK_INDEX)
+#endif
+#if __has_attribute(swift_async_name)
+#  define NS_SWIFT_ASYNC_NAME(NAME) __attribute__((swift_async_name(#NAME)))
+#else
+#  define NS_SWIFT_ASYNC_NAME(NAME)
+#endif
+#if __has_attribute(swift_attr)
+#  define NS_SWIFT_UI_ACTOR __attribute__((swift_attr("@UIActor")))
+#else
+#  define NS_SWIFT_UI_ACTOR
+#endif
+#if __has_attribute(swift_async_error)
+#  define NS_SWIFT_ASYNC_NOTHROW __attribute__((swift_async_error(none)))
+#  define NS_SWIFT_ASYNC_THROWS_ON_TRUE(TRUE_PARAMETER_INDEX) __attribute__((swift_async_error(nonzero_argument, TRUE_PARAMETER_INDEX)))
+#  define NS_SWIFT_ASYNC_THROWS_ON_FALSE(FALSE_PARAMETER_INDEX)  __attribute__((swift_async_error(zero_argument, FALSE_PARAMETER_INDEX)))
+#else
+#  define NS_SWIFT_ASYNC_NOTHROW
+#  define NS_SWIFT_ASYNC_THROWS_ON_TRUE(TRUE_PARAMETER_INDEX)
+#  define NS_SWIFT_ASYNC_THROWS_ON_FALSE(FALSE_PARAMETER_INDEX)
+#endif
+
 #if !defined(NS_UNAVAILABLE)
 #define NS_UNAVAILABLE UNAVAILABLE_ATTRIBUTE
 #endif
@@ -288,7 +317,9 @@ Usually, this is because the enum represents a mathematically complete set. For 
 #define _NS_TYPED_ENUM _CF_TYPED_ENUM
 #define _NS_TYPED_EXTENSIBLE_ENUM _CF_TYPED_EXTENSIBLE_ENUM
 
+// Note: NS_TYPED_ENUM is preferred to NS_STRING_ENUM
 #define NS_STRING_ENUM _NS_TYPED_ENUM
+// Note: NS_TYPED_EXTENSIBLE_ENUM is preferred to NS_EXTENSIBLE_STRING_ENUM
 #define NS_EXTENSIBLE_STRING_ENUM _NS_TYPED_EXTENSIBLE_ENUM
 
 #define NS_TYPED_ENUM _NS_TYPED_ENUM
@@ -491,8 +522,8 @@ FOUNDATION_EXPORT double NSFoundationVersionNumber;
 
 @class NSString, Protocol;
 
-typedef NSString * NSExceptionName NS_EXTENSIBLE_STRING_ENUM;
-typedef NSString * NSRunLoopMode NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSExceptionName NS_TYPED_EXTENSIBLE_ENUM;
+typedef NSString * NSRunLoopMode NS_TYPED_EXTENSIBLE_ENUM;
 
 FOUNDATION_EXPORT NSString *NSStringFromSelector(SEL aSelector);
 FOUNDATION_EXPORT SEL NSSelectorFromString(NSString *aSelectorName);
@@ -525,9 +556,7 @@ typedef NS_CLOSED_ENUM(NSInteger, NSComparisonResult) {
     NSOrderedDescending
 };
 
-#if NS_BLOCKS_AVAILABLE
 typedef NSComparisonResult (^NSComparator)(id obj1, id obj2);
-#endif
 
 typedef NS_OPTIONS(NSUInteger, NSEnumerationOptions) {
     NSEnumerationConcurrent = (1UL << 0),

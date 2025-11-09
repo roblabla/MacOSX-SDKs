@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1ABD9C6A-0D45-3A66-8C82-808C0C8D2148
+    value:           CCCE6CD0-606B-3E79-8367-63239E2AD024
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AEC9D8F5-17FE-30E1-AB5A-A33F88857E9F
+    value:           0BFBD432-FDA6-3E1A-819D-813AA5403BD8
 install-name:    '/usr/lib/system/libkxld.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

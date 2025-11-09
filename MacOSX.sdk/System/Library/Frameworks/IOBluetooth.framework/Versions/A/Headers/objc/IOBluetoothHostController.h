@@ -31,7 +31,6 @@ API_UNAVAILABLE(ios, watchos, tvos)
 	
 	BluetoothHCIEventMask		_eventCodeMask;
 	BluetoothClassOfDevice		_cachedClassOfDevice;
-	id							_delegate;
 	NSTimer *					_timerClassOfDeviceSetting;
 	void *						_eventListener;
 

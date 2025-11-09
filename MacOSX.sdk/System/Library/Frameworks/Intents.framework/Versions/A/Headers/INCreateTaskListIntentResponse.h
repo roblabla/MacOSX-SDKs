@@ -16,11 +16,11 @@ typedef NS_ENUM(NSInteger, INCreateTaskListIntentResponseCode) {
     INCreateTaskListIntentResponseCodeSuccess,
     INCreateTaskListIntentResponseCodeFailure,
     INCreateTaskListIntentResponseCodeFailureRequiringAppLaunch,
-} API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macos, tvos);
+} API_DEPRECATED("INCreateTaskListIntentResponseCode is deprecated. There is no replacement.", ios(11.0, 15.0), watchos(4.0, 8.0)) API_UNAVAILABLE(macos, tvos);
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(11.0), watchos(4.0))
+API_DEPRECATED("INCreateTaskListIntentResponse is deprecated. There is no replacement.", ios(11.0, 15.0), watchos(4.0, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INCreateTaskListIntentResponse : INIntentResponse
 

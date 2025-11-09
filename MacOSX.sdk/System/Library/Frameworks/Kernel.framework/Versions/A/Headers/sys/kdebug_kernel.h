@@ -101,6 +101,21 @@ __BEGIN_DECLS
 bool kdebug_using_continuous_time(void);
 
 /*
+ * Convert an absolute time to a kdebug timestamp.
+ */
+extern uint64_t kdebug_timestamp_from_absolute(uint64_t abstime);
+
+/*
+ * Convert a continuous time to a kdebug timestamp.
+ */
+extern uint64_t kdebug_timestamp_from_continuous(uint64_t conttime);
+
+/*
+ * Capture a kdebug timestamp for the current time.
+ */
+extern uint64_t kdebug_timestamp(void);
+
+/*
  * Returns true if kdebug will log an event with the provided debugid, and
  * false otherwise.
  */
@@ -114,31 +129,64 @@ bool kdebug_debugid_explicitly_enabled(uint32_t debugid);
 
 uint32_t kdebug_commpage_state(void);
 
-#pragma mark - IOP tracing
-
-/*
- * Definitions to support IOP tracing.
- */
+#pragma mark - Coprocessor/IOP tracing
 
 typedef enum {
-	/* Trace is now enabled; no arguments.  */
+	/* Trace is now enabled. */
 	KD_CALLBACK_KDEBUG_ENABLED,
-	/* Trace is now disabled; no arguments.  */
+	/*
+	 * Trace is being disabled, but events are still accepted for the duration
+	 * of the callback.
+	 */
 	KD_CALLBACK_KDEBUG_DISABLED,
 	/*
-	 * Request the latest entries from the IOP and block until complete; no
-	 * arguments.
+	 * Request the latest events from the IOP and block until complete.  Any
+	 * events that occur prior to this callback being called may be dropped by
+	 * the trace system.
 	 */
 	KD_CALLBACK_SYNC_FLUSH,
 	/*
-	 * The typefilter is enabled; a read-only pointer to the typefilter is
-	 * provided, valid only while in the callback.
+	 * The typefilter is being used.
+	 *
+	 * A read-only pointer to the typefilter is provided as the argument, valid
+	 * only in the callback.
 	 */
 	KD_CALLBACK_TYPEFILTER_CHANGED,
+	/*
+	 * The coprocessor should emit data that snapshots the current state of the
+	 * system.
+	 */
+	KD_CALLBACK_SNAPSHOT_STATE,
 } kd_callback_type;
 
-typedef void (*kd_callback_fn) (void *context, kd_callback_type reason,
+__options_decl(kdebug_coproc_flags_t, uint32_t, {
+	/*
+	 * Event timestamps from this coprocessor are in the continuous timebase.
+	 */
+	KDCP_CONTINUOUS_TIME = 0x001,
+});
+
+typedef void (*kd_callback_fn)(void *context, kd_callback_type reason,
     void *arg);
+
+/*
+ * Register a coprocessor for participation in tracing.
+ *
+ * The `callback` function will be called with the provided `context` when
+ * necessary, according to the `kd_callback_type`s.
+ *
+ * The positive core ID is returned on success, or -1 on failure.
+ */
+int kdebug_register_coproc(const char *name, kdebug_coproc_flags_t flags,
+    kd_callback_fn callback, void *context);
+
+void kernel_debug_enter(uint32_t coreid, uint32_t debugid, uint64_t timestamp,
+    uintptr_t arg1, uintptr_t arg2, uintptr_t arg3, uintptr_t arg4,
+    uintptr_t threadid);
+
+/*
+ * Legacy definitions for the prior IOP tracing.
+ */
 
 struct kd_callback {
 	kd_callback_fn func;
@@ -146,30 +194,10 @@ struct kd_callback {
 	/* name of IOP, NUL-terminated */
 	char iop_name[8];
 };
-
 typedef struct kd_callback kd_callback_t;
 
-/*
- * Registers an IOP for participation in tracing.
- *
- * The registered callback function will be called with the
- * supplied context as the first argument, followed by a
- * kd_callback_type and an associated void* argument.
- *
- * The return value is a nonzero coreid that shall be used in
- * kernel_debug_enter() to refer to your IOP. If the allocation
- * failed, then 0 will be returned.
- *
- * Caveats:
- * Note that not all callback calls will indicate a change in
- * state (e.g. disabling trace twice would send two disable
- * notifications).
- */
+__kpi_deprecated("use kdebug_register_coproc instead")
 int kernel_debug_register_callback(kd_callback_t callback);
-
-void kernel_debug_enter(uint32_t coreid, uint32_t debugid, uint64_t timestamp,
-    uintptr_t arg1, uintptr_t arg2, uintptr_t arg3, uintptr_t arg4,
-    uintptr_t threadid);
 
 #pragma mark - internals
 

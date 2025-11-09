@@ -19,28 +19,28 @@ typedef NS_OPTIONS(NSUInteger, UIUserNotificationType) {
     UIUserNotificationTypeBadge   = 1 << 0, // the application may badge its icon upon a notification being received
     UIUserNotificationTypeSound   = 1 << 1, // the application may play a sound upon a notification being received
     UIUserNotificationTypeAlert   = 1 << 2, // the application may display an alert upon a notification being received
-} NS_ENUM_DEPRECATED_IOS(8_0, 10_0, "Use UserNotifications Framework's UNAuthorizationOptions") API_UNAVAILABLE(tvos);
+} API_DEPRECATED("Use UserNotifications Framework's UNAuthorizationOptions", ios(8.0, 10.0)) API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSUInteger, UIUserNotificationActionBehavior) {
     UIUserNotificationActionBehaviorDefault,        // the default action behavior
     UIUserNotificationActionBehaviorTextInput       // system provided action behavior, allows text input from the user
-} NS_ENUM_DEPRECATED_IOS(9_0, 10_0, "Use UserNotifications Framework's UNNotificationAction or UNTextInputNotificationAction") API_UNAVAILABLE(tvos);
+} API_DEPRECATED("Use UserNotifications Framework's UNNotificationAction or UNTextInputNotificationAction", ios(9.0, 10.0)) API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSUInteger, UIUserNotificationActivationMode) {
     UIUserNotificationActivationModeForeground, // activates the application in the foreground
     UIUserNotificationActivationModeBackground  // activates the application in the background, unless it's already in the foreground
-} NS_ENUM_DEPRECATED_IOS(8_0, 10_0, "Use UserNotifications Framework's UNNotificationActionOptions") API_UNAVAILABLE(tvos);
+} API_DEPRECATED("Use UserNotifications Framework's UNNotificationActionOptions", ios(8.0, 10.0)) API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSUInteger, UIUserNotificationActionContext) {
     UIUserNotificationActionContextDefault,  // the default context of a notification action
     UIUserNotificationActionContextMinimal   // the context of a notification action when space is limited
-} NS_ENUM_DEPRECATED_IOS(8_0, 10_0, "Use UserNotifications Framework's -[UNNotificationCategory actions] or -[UNNotificationCategory minimalActions]") API_UNAVAILABLE(tvos);
+} API_DEPRECATED("Use UserNotifications Framework's -[UNNotificationCategory actions] or -[UNNotificationCategory minimalActions]", ios(8.0, 10.0)) API_UNAVAILABLE(tvos);
 
 UIKIT_EXTERN NSString *const UIUserNotificationTextInputActionButtonTitleKey API_DEPRECATED("Use UserNotifications Framework's -[UNTextInputNotificationAction textInputButtonTitle]", ios(9.0, 10.0)) API_UNAVAILABLE(tvos);
 
 UIKIT_EXTERN NSString *const UIUserNotificationActionResponseTypedTextKey API_DEPRECATED("Use UserNotifications Framework's -[UNTextInputNotificationResponse userText]", ios(9.0, 10.0)) API_UNAVAILABLE(tvos);
 
-UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationSettings", ios(8.0, 10.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationSettings", ios(8.0, 10.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIUserNotificationSettings : NSObject
 
 // categories may be nil or an empty set if custom user notification actions will not be used
@@ -54,7 +54,7 @@ UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationSet
 
 @end
 
-UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationCategory", ios(8.0, 10.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationCategory", ios(8.0, 10.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIUserNotificationCategory : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER API_UNAVAILABLE(tvos);
@@ -68,7 +68,7 @@ UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationCat
 
 @end
 
-UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationCategory", ios(8.0, 10.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationCategory", ios(8.0, 10.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIMutableUserNotificationCategory : UIUserNotificationCategory
 
 // The category identifier passed in a UILocalNotification or a remote notification payload
@@ -79,7 +79,7 @@ UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationCat
 
 @end
 
-UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationAction", ios(8.0, 10.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationAction", ios(8.0, 10.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIUserNotificationAction : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER API_UNAVAILABLE(tvos);
@@ -108,7 +108,7 @@ UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationAct
 
 @end
 
-UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationAction", ios(8.0, 10.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationAction", ios(8.0, 10.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIMutableUserNotificationAction : UIUserNotificationAction
 
 // The unique identifier for this action.

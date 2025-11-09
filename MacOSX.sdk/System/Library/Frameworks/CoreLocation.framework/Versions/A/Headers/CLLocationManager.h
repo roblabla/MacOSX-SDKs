@@ -659,6 +659,24 @@ API_AVAILABLE(macos(10.6), ios(2.0))
 - (void)stopMonitoringSignificantLocationChanges API_AVAILABLE(ios(4.0), macos(10.7)) API_UNAVAILABLE(watchos, tvos);
 
 /*
+ *  startMonitoringLocationPushes
+ *
+ *  Discussion:
+ *   	Request an Apple Push Notification service token to be used to send location pushes. Incoming location pushes launch the app's Location Push Service Extension. Requires the com.apple.developer.location.push entitlement.
+ *
+ */
+- (void)startMonitoringLocationPushesWithCompletion:(void(^ _Nullable)(NSData * _Nullable token, NSError * _Nullable))completion API_AVAILABLE(ios(15.0));
+
+/*
+ *  stopMonitoringLocationPushes
+ *
+ *  Discussion:
+ *		Stop monitoring for location pushes.
+ *
+ */
+- (void)stopMonitoringLocationPushes API_AVAILABLE(ios(15.0));
+
+/*
  *  startMonitoringForRegion:desiredAccuracy:
  *
  *  Discussion:

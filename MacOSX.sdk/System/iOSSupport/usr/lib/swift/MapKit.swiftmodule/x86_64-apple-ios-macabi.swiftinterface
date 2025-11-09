@@ -1,17 +1,18 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target x86_64-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMapKit -swift-version 5 -enforce-exclusivity=checked -O -module-name MapKit
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target x86_64-apple-ios15.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMapKit -swift-version 5 -enforce-exclusivity=checked -O -module-name MapKit
 import Foundation
 @_exported import MapKit
 import Swift
+import _Concurrency
 @available(iOS 14.0, tvOS 14.0, macOS 11.0, *)
-extension MKGradientPolylineRenderer {
+extension MapKit.MKGradientPolylineRenderer {
   public var locations: [CoreGraphics.CGFloat] {
     get
   }
   public func setColors(_ colors: [UIKit.UIColor], locations: [CoreGraphics.CGFloat])
 }
-extension MKCoordinateSpan : Swift._ObjectiveCBridgeable {
+extension MapKit.MKCoordinateSpan : Swift._ObjectiveCBridgeable {
   public func _bridgeToObjectiveC() -> Foundation.NSValue
   public static func _forceBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout MapKit.MKCoordinateSpan?)
   public static func _conditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout MapKit.MKCoordinateSpan?) -> Swift.Bool
@@ -19,10 +20,10 @@ extension MKCoordinateSpan : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = Foundation.NSValue
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, *)
-extension MKLocalSearch.Request {
+extension MapKit.MKLocalSearch.Request {
   public typealias ResultType = MapKit.MKLocalSearch.ResultType
 }
 @available(iOS 14.0, tvOS 14.0, macOS 11.0, *)
-extension MKMultiPoint {
+extension MapKit.MKMultiPoint {
   public func locations(at indexes: Foundation.IndexSet) -> [CoreGraphics.CGFloat]
 }

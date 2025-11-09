@@ -64,7 +64,7 @@ typedef unsigned long								IOBluetoothObjectID;
 				kIOBluetoothObjectIDNULL is returned.
 */
 
-extern IOBluetoothObjectID IOBluetoothGetObjectIDFromArguments( int argc, const char *argv[] )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+//extern IOBluetoothObjectID IOBluetoothGetObjectIDFromArguments( int argc, const char *argv[] )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 //===========================================================================================================================
 // Device searching.
@@ -95,7 +95,7 @@ enum IOBluetoothDeviceSearchOptionsBits
 	@abstract	Structure used to search for particular devices.
 	@discussion Make sure you specify all fields! If you do not set deviceClassMajor for example, and the value is
 				0, that is mapped to kBluetoothDeviceClassMajorMiscellaneous, which is probably not what you want. To
-				search for all device types, you must pass kBluetoothDeviceClassMajorAny and its relatives. 
+				search for all device types, you must pass kBluetoothDeviceClassMajorAny and its relatives.
 */
 
 struct 	IOBluetoothDeviceSearchDeviceAttributes
@@ -113,8 +113,8 @@ typedef	struct	IOBluetoothDeviceSearchDeviceAttributes	IOBluetoothDeviceSearchDe
 	@discussion You can search for general device classes and service classes, or you can search for a 
 				specific device address or name. If you pass NULL as the attribute structure,
 				you will get ALL devices in the vicinity found during a search. Note that passing a zeroed
-				out block of attributes is NOT equivalent to passing in NULL!	
-*/ 
+				out block of attributes is NOT equivalent to passing in NULL!
+*/
 
 struct 	IOBluetoothDeviceSearchAttributes
 {
@@ -222,9 +222,9 @@ void IOBluetoothUserNotificationUnregister( IOBluetoothUserNotificationRef notif
 				be valid.
 */
 
-API_UNAVAILABLE(ios, watchos, tvos)
-IOBluetoothUserNotificationRef IOBluetoothRegisterForDeviceConnectNotifications(	IOBluetoothUserNotificationCallback callback,
-                                                                                    void * inRefCon );
+//API_UNAVAILABLE(ios, watchos, tvos)
+//IOBluetoothUserNotificationRef IOBluetoothRegisterForDeviceConnectNotifications(	IOBluetoothUserNotificationCallback callback,
+//                                                                                    void * inRefCon );
 
 /*!
     @function	IOBluetoothDeviceRegisterForDisconnectNotification
@@ -240,10 +240,10 @@ IOBluetoothUserNotificationRef IOBluetoothRegisterForDeviceConnectNotifications(
 				be valid.
 */
 
-API_UNAVAILABLE(ios, watchos, tvos)
-IOBluetoothUserNotificationRef IOBluetoothDeviceRegisterForDisconnectNotification(	IOBluetoothDeviceRef inDevice,
-                                                                                    IOBluetoothUserNotificationCallback callback,
-                                                                                    void * inRefCon );
+//API_UNAVAILABLE(ios, watchos, tvos)
+//IOBluetoothUserNotificationRef IOBluetoothDeviceRegisterForDisconnectNotification(	IOBluetoothDeviceRef inDevice,
+//                                                                                    IOBluetoothUserNotificationCallback callback,
+//                                                                                    void * inRefCon );
 
 /*!
     @function	IOBluetoothRegisterForL2CAPChannelOpenNotifications
@@ -259,9 +259,9 @@ IOBluetoothUserNotificationRef IOBluetoothDeviceRegisterForDisconnectNotificatio
 				be valid.
 */
 
-API_UNAVAILABLE(ios, watchos, tvos)
-IOBluetoothUserNotificationRef IOBluetoothRegisterForL2CAPChannelOpenNotifications(	IOBluetoothUserNotificationCallback callback,
-                                                                                    void *inRefCon );
+//API_UNAVAILABLE(ios, watchos, tvos)
+//IOBluetoothUserNotificationRef IOBluetoothRegisterForL2CAPChannelOpenNotifications(	IOBluetoothUserNotificationCallback callback,
+//                                                                                    void *inRefCon );
 
 /*!
     @function	IOBluetoothRegisterForFilteredL2CAPChannelOpenNotifications
@@ -281,11 +281,11 @@ IOBluetoothUserNotificationRef IOBluetoothRegisterForL2CAPChannelOpenNotificatio
 				be valid.
 */
 
-API_UNAVAILABLE(ios, watchos, tvos)
-IOBluetoothUserNotificationRef IOBluetoothRegisterForFilteredL2CAPChannelOpenNotifications(	IOBluetoothUserNotificationCallback callback,
-                                                                                            void * inRefCon,
-                                                                                            BluetoothL2CAPPSM inPSM,
-                                                                                            IOBluetoothUserNotificationChannelDirection inDirection );
+//API_UNAVAILABLE(ios, watchos, tvos)
+//IOBluetoothUserNotificationRef IOBluetoothRegisterForFilteredL2CAPChannelOpenNotifications(	IOBluetoothUserNotificationCallback callback,
+//                                                                                            void * inRefCon,
+//                                                                                           BluetoothL2CAPPSM inPSM,
+//                                                                                            IOBluetoothUserNotificationChannelDirection inDirection );
 
 /*!
     @function	IOBluetoothL2CAPChannelRegisterForChannelCloseNotification
@@ -321,9 +321,9 @@ IOBluetoothUserNotificationRef IOBluetoothL2CAPChannelRegisterForChannelCloseNot
 				be valid.
 */
 
-API_UNAVAILABLE(ios, watchos, tvos)
-IOBluetoothUserNotificationRef IOBluetoothRegisterForRFCOMMChannelOpenNotifications(	IOBluetoothUserNotificationCallback callback,
-                                                                                        void * inRefCon );
+//API_UNAVAILABLE(ios, watchos, tvos)
+//IOBluetoothUserNotificationRef IOBluetoothRegisterForRFCOMMChannelOpenNotifications(	IOBluetoothUserNotificationCallback callback,
+//                                                                                        void * inRefCon );
 
 /*!
     @function	IOBluetoothRegisterForFilteredRFCOMMChannelOpenNotifications
@@ -343,11 +343,11 @@ IOBluetoothUserNotificationRef IOBluetoothRegisterForRFCOMMChannelOpenNotificati
 				be valid.
 */
 
-API_UNAVAILABLE(ios, watchos, tvos)
-IOBluetoothUserNotificationRef IOBluetoothRegisterForFilteredRFCOMMChannelOpenNotifications(	IOBluetoothUserNotificationCallback callback,
-                                                                                                void * inRefCon,
-                                                                                                BluetoothRFCOMMChannelID channelID,
-                                                                                                IOBluetoothUserNotificationChannelDirection inDirection );
+//API_UNAVAILABLE(ios, watchos, tvos)
+//IOBluetoothUserNotificationRef IOBluetoothRegisterForFilteredRFCOMMChannelOpenNotifications(	IOBluetoothUserNotificationCallback callback,
+//                                                                                                void * inRefCon,
+//                                                                                                BluetoothRFCOMMChannelID channelID,
+//                                                                                                IOBluetoothUserNotificationChannelDirection inDirection );
 
 /*!
     @function	IOBluetoothRFCOMMChannelRegisterForChannelCloseNotification
@@ -364,10 +364,30 @@ IOBluetoothUserNotificationRef IOBluetoothRegisterForFilteredRFCOMMChannelOpenNo
 				be valid.
 */
 
+//API_UNAVAILABLE(ios, watchos, tvos)
+//IOBluetoothUserNotificationRef IOBluetoothRFCOMMChannelRegisterForChannelCloseNotification(	IOBluetoothRFCOMMChannelRef inChannel,
+//                                                                                            IOBluetoothUserNotificationCallback callback,
+//                                                                                            void * inRefCon );
+        
+/*!
+ @function	IOBluetoothAddSCOAudioDevice
+ @abstract   Creates a persistent audio driver that will route audio data to/from the specified device.
+ @discussion In 10.9 this is not needed and does nothing.
+ @param		device	A paired Bluetooth audio device
+ @param		configDict	Configuration dictionary containing a description of the audio controls to be attached to the driver.  Passing NULL will result in default controls
+ @result		Returns kIOReturnSuccess if the audio driver was successfully created, error if hardware does not support SCO or device is not paired. On 10.9 it will always return kIOReturnSuccess.
+ */
 API_UNAVAILABLE(ios, watchos, tvos)
-IOBluetoothUserNotificationRef IOBluetoothRFCOMMChannelRegisterForChannelCloseNotification(	IOBluetoothRFCOMMChannelRef inChannel,
-                                                                                            IOBluetoothUserNotificationCallback callback,
-                                                                                            void * inRefCon );
+extern IOReturn IOBluetoothAddSCOAudioDevice( IOBluetoothDeviceRef device, CFDictionaryRef configDict ) DEPRECATED_IN_MAC_OS_X_VERSION_10_9_AND_LATER;
+
+/*!
+ @function	IOBluetoothRemoveSCOAudioDevice
+ @abstract   Removes a persistent audio driver for a device that had already been added using IOBluetoothAddAudioDevice(). In 10.9 this is not needed and does nothing.
+ @param		device	Bluetooth audio device to remove
+ @result		Returns kIOReturnSuccess if the audio driver was successfully removed. On 10.9 it will always return kIOReturnSuccess
+ */
+API_UNAVAILABLE(ios, watchos, tvos)
+extern IOReturn IOBluetoothRemoveSCOAudioDevice( IOBluetoothDeviceRef device ) DEPRECATED_IN_MAC_OS_X_VERSION_10_9_AND_LATER;
 
 
 #ifdef	__cplusplus

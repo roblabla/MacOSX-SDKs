@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           30C4EE4C-9231-316D-B3CF-E017D02BF99F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           7C09AF93-AFA2-3B4E-8CE3-D86AD77F05D7
+install-name:    '/System/Library/PrivateFrameworks/PassKitServices.framework/Versions/A/PassKitServices'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ PKServicePaymentTransactionImageGenerator ]
+...

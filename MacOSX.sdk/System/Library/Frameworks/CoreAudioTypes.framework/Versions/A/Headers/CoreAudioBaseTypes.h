@@ -1,7 +1,7 @@
 /*!
 	@file		CoreAudioBaseTypes.h
 	@framework	CoreAudioTypes.framework
-	@copyright	(c) 1985-2019 by Apple, Inc., all rights reserved.
+	@copyright	(c) 1985-2021 by Apple, Inc., all rights reserved.
     @abstract   Definition of types common to the Core Audio APIs.
 */
 
@@ -12,7 +12,7 @@
 #pragma mark -
 #pragma mark Includes
 
-#define COREAUDIOTYPES_VERSION 20150414
+#define COREAUDIOTYPES_VERSION 20210401
 
 #include <TargetConditionals.h>
 #include <CoreFoundation/CFBase.h>
@@ -1004,7 +1004,7 @@ CF_ENUM(AudioChannelLabel)
     // generic HOA ACN channel
     kAudioChannelLabel_HOA_ACN                  = 500,
 	
-    // numbered HOA ACN channels
+    // numbered HOA ACN channels, SN3D normalization
     kAudioChannelLabel_HOA_ACN_0                = (2U << 16) | 0,
     kAudioChannelLabel_HOA_ACN_1                = (2U << 16) | 1,
     kAudioChannelLabel_HOA_ACN_2                = (2U << 16) | 2,
@@ -1022,7 +1022,13 @@ CF_ENUM(AudioChannelLabel)
     kAudioChannelLabel_HOA_ACN_14               = (2U << 16) | 14,
     kAudioChannelLabel_HOA_ACN_15               = (2U << 16) | 15,
     kAudioChannelLabel_HOA_ACN_65024            = (2U << 16) | 65024,    // 254th order uses 65025 channels
-	
+
+	// Specific SN3D alias
+    kAudioChannelLabel_HOA_SN3D	                = kAudioChannelLabel_HOA_ACN_0, // Needs to be ORed with the channel index, not HOA order
+
+    // HOA N3D
+    kAudioChannelLabel_HOA_N3D                  = (3U << 16), // Needs to be ORed with the channel index, not HOA order
+
     kAudioChannelLabel_BeginReserved            = 0xF0000000,           // Channel label values in this range are reserved for internal use
     kAudioChannelLabel_EndReserved              = 0xFFFFFFFE
 };
@@ -1068,7 +1074,7 @@ typedef CF_OPTIONS(UInt32, AudioChannelBitmap)
     @abstract       These constants are used in the mChannelFlags field of an
                     AudioChannelDescription structure.
     @constant       kAudioChannelFlags_RectangularCoordinates
-                        The channel is specified by the cartesioan coordinates of the speaker
+                        The channel is specified by the cartesian coordinates of the speaker
                         position. This flag is mutally exclusive with
                         kAudioChannelFlags_SphericalCoordinates.
     @constant       kAudioChannelFlags_SphericalCoordinates
@@ -1087,17 +1093,17 @@ typedef CF_OPTIONS(UInt32, AudioChannelFlags)
     kAudioChannelFlags_Meters                   = (1U<<2)
 };
 
-// these are indices for acessing the mCoordinates array in struct AudioChannelDescription
+// these are indices for accessing the mCoordinates array in struct AudioChannelDescription
 /*!
     @enum           AudioChannelCoordinateIndex
     @abstract       Constants for indexing the mCoordinates array in an AudioChannelDescription
                     structure.
     @constant       kAudioChannelCoordinates_LeftRight
-                        For rectangulare coordinates, negative is left and positive is right.
+                        For rectangular coordinates, negative is left and positive is right.
     @constant       kAudioChannelCoordinates_BackFront
-                        For rectangulare coordinates, negative is back and positive is front.
+                        For rectangular coordinates, negative is back and positive is front.
     @constant       kAudioChannelCoordinates_DownUp
-                        For rectangulare coordinates, negative is below ground level, 0 is ground
+                        For rectangular coordinates, negative is below ground level, 0 is ground
                         level, and positive is above ground level.
     @constant       kAudioChannelCoordinates_Azimuth
                         For spherical coordinates, 0 is front center, positive is right, negative is
@@ -1324,7 +1330,41 @@ CF_ENUM(AudioChannelLayoutTag)
 	kAudioChannelLayoutTag_Atmos_7_1_2              = (196U<<16) | 10,                      ///< L R C LFE Ls Rs Rls Rrs Ltm Rtm
 	kAudioChannelLayoutTag_Atmos_7_1_4              = (192U<<16) | 12,                      ///< L R C LFE Ls Rs Rls Rrs Vhl Vhr Ltr Rtr
 	kAudioChannelLayoutTag_Atmos_9_1_6              = (193U<<16) | 16,                      ///< L R C LFE Ls Rs Rls Rrs Lw Rw Vhl Vhr Ltm Rtm Ltr Rtr
-	
+
+    kAudioChannelLayoutTag_Logic_Mono               = kAudioChannelLayoutTag_Mono,          ///< C
+    kAudioChannelLayoutTag_Logic_Stereo             = kAudioChannelLayoutTag_Stereo,        ///< L R
+    kAudioChannelLayoutTag_Logic_Quadraphonic       = kAudioChannelLayoutTag_Quadraphonic,  ///< L R Ls Rs
+    kAudioChannelLayoutTag_Logic_4_0_A              = kAudioChannelLayoutTag_MPEG_4_0_A,    ///< L R C Cs
+    kAudioChannelLayoutTag_Logic_4_0_B              = kAudioChannelLayoutTag_MPEG_4_0_B,    ///< C L R Cs
+    kAudioChannelLayoutTag_Logic_4_0_C              = (197U<<16) | 4,                       ///< L R Cs C
+    kAudioChannelLayoutTag_Logic_5_0_A              = kAudioChannelLayoutTag_MPEG_5_0_A,    ///< L R C Ls Rs
+    kAudioChannelLayoutTag_Logic_5_0_B              = kAudioChannelLayoutTag_MPEG_5_0_B,    ///< L R Ls Rs C
+    kAudioChannelLayoutTag_Logic_5_0_C              = kAudioChannelLayoutTag_MPEG_5_0_C,    ///< L C R Ls Rs
+    kAudioChannelLayoutTag_Logic_5_0_D              = kAudioChannelLayoutTag_MPEG_5_0_D,    ///< C L R Ls Rs
+    kAudioChannelLayoutTag_Logic_5_1_A              = kAudioChannelLayoutTag_MPEG_5_1_A,    ///< L R C LFE Ls Rs
+    kAudioChannelLayoutTag_Logic_5_1_B              = kAudioChannelLayoutTag_MPEG_5_1_B,    ///< L R Ls Rs C LFE
+    kAudioChannelLayoutTag_Logic_5_1_C              = kAudioChannelLayoutTag_MPEG_5_1_C,    ///< L C R Ls Rs LFE
+    kAudioChannelLayoutTag_Logic_5_1_D              = kAudioChannelLayoutTag_MPEG_5_1_D,    ///< C L R Ls Rs LFE
+    kAudioChannelLayoutTag_Logic_6_0_A              = kAudioChannelLayoutTag_AAC_6_0,       ///< C L R Ls Rs Cs
+    kAudioChannelLayoutTag_Logic_6_0_B              = (198U<<16) | 6,                       ///< L R Ls Rs Cs C
+    kAudioChannelLayoutTag_Logic_6_0_C              = kAudioChannelLayoutTag_AudioUnit_6_0, ///< L R Ls Rs C Cs
+    kAudioChannelLayoutTag_Logic_6_1_A              = kAudioChannelLayoutTag_AAC_6_1,       ///< C L R Ls Rs Cs LFE
+    kAudioChannelLayoutTag_Logic_6_1_B              = (199U<<16) | 7,                       ///< L R Ls Rs Cs C LFE
+    kAudioChannelLayoutTag_Logic_6_1_C              = kAudioChannelLayoutTag_MPEG_6_1_A,    ///< L R C LFE Ls Rs Cs
+    kAudioChannelLayoutTag_Logic_6_1_D              = (200U<<16) | 7,                       ///< L C R Ls Cs Rs LFE
+    kAudioChannelLayoutTag_Logic_7_1_A              = kAudioChannelLayoutTag_AudioUnit_7_1, ///< L R C LFE Ls Rs Rls Rrs
+    kAudioChannelLayoutTag_Logic_7_1_B              = (201U<<16) | 8,                       ///< L R Ls Rs Rls Rrs C LFE
+    kAudioChannelLayoutTag_Logic_7_1_C              = kAudioChannelLayoutTag_MPEG_7_1_C,    ///< L R C LFE Ls Rs Rls Rrs
+    kAudioChannelLayoutTag_Logic_7_1_SDDS_A         = kAudioChannelLayoutTag_MPEG_7_1_A,    ///< L R C LFE Ls Rs Lc Rc
+    kAudioChannelLayoutTag_Logic_7_1_SDDS_B         = kAudioChannelLayoutTag_MPEG_7_1_B,    ///< C Lc Rc L R Ls Rs LFE
+    kAudioChannelLayoutTag_Logic_7_1_SDDS_C         = kAudioChannelLayoutTag_Emagic_Default_7_1, ///< L R Ls Rs C LFE Lc Rc
+    kAudioChannelLayoutTag_Logic_Atmos_5_1_2        = kAudioChannelLayoutTag_Atmos_5_1_2,   ///< L R C LFE Ls Rs Ltm Rtm
+    kAudioChannelLayoutTag_Logic_Atmos_5_1_4        = kAudioChannelLayoutTag_Atmos_5_1_4,   ///< L R C LFE Ls Rs Vhl Vhr Ltr Rtr
+    kAudioChannelLayoutTag_Logic_Atmos_7_1_2        = kAudioChannelLayoutTag_Atmos_7_1_2,   ///< L R C LFE Ls Rs Rls Rrs Ltm Rtm
+    kAudioChannelLayoutTag_Logic_Atmos_7_1_4_A      = kAudioChannelLayoutTag_Atmos_7_1_4,   ///< L R C LFE Ls Rs Rls Rrs Vhl Vhr Ltr Rtr
+    kAudioChannelLayoutTag_Logic_Atmos_7_1_4_B      = (202U<<16) | 12,                      ///< L R Rls Rrs Ls Rs C LFE Vhl Vhr Ltr Rtr
+    kAudioChannelLayoutTag_Logic_Atmos_7_1_6        = (203U<<16) | 14,                      ///< L R Rls Rrs Ls Rs C LFE Vhl Vhr Ltm Rtm Ltr Rtr
+
     kAudioChannelLayoutTag_DiscreteInOrder          = (147U<<16) | 0,                       ///< needs to be ORed with the actual number of channels
 	
     kAudioChannelLayoutTag_BeginReserved            = 0xF0000000,                           ///< Channel layout tag values in this range are reserved for internal use
@@ -1391,14 +1431,14 @@ typedef struct AudioChannelLayout AudioChannelLayout;
     @discussion     The low 16 bits of an AudioChannelLayoutTag gives the number of channels except
                     for kAudioChannelLayoutTag_UseChannelDescriptions and
                     kAudioChannelLayoutTag_UseChannelBitmap.
-    @param          layoutTag
+    @param          inLayoutTag
                         The AudioChannelLayoutTag to examine.
     @result         The number of channels the tag indicates.
 */
 #ifdef CF_INLINE
     CF_INLINE UInt32    AudioChannelLayoutTag_GetNumberOfChannels(AudioChannelLayoutTag inLayoutTag)    { return (UInt32)(inLayoutTag & 0x0000FFFF); }
 #else
-    #define AudioChannelLayoutTag_GetNumberOfChannels(layoutTag) ((UInt32)((layoutTag) & 0x0000FFFF))
+    #define AudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag) ((UInt32)((inLayoutTag) & 0x0000FFFF))
 #endif
 
 /*!

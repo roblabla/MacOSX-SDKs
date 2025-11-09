@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           07ECDF56-3710-3DEC-8B1D-56C01BD0ED4B
+    value:           6B6C3436-C366-3697-8E43-8E31A81312BE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           73E9D1D9-CAEC-3E67-B298-F7D40E168F3B
+    value:           5105531D-BE7C-3B3C-830B-DB10B09572D6
 install-name:    '/System/Library/PrivateFrameworks/MallocStackLogging.framework/Versions/A/MallocStackLogging'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -22,12 +22,13 @@ exports:
                        _msl_payload_get_allocation_timestamp, _msl_payload_get_invalid, 
                        _msl_payload_get_size_info, _msl_payload_get_uniquing_table_index, 
                        _msl_payload_is_invalid, _msl_payload_version_from_task, _msl_set_flags_from_environment, 
-                       _msl_stack_logging_locked, _msl_stackid_for_vm_region, _msl_start_reading, 
-                       _msl_stop_reading, _msl_turn_off_stack_logging, _msl_turn_on_stack_logging, 
-                       _msl_uniquing_table_copy_from_serialized, _msl_uniquing_table_copy_from_task, 
-                       _msl_uniquing_table_enumerate, _msl_uniquing_table_get_frames_from_table, 
-                       _msl_uniquing_table_get_frames_from_task, _msl_uniquing_table_read_stack, 
-                       _msl_uniquing_table_release, _msl_uniquing_table_retain, _msl_uniquing_table_serialize, 
+                       _msl_set_mode_for_pid, _msl_stack_logging_locked, _msl_stackid_for_vm_region, 
+                       _msl_start_reading, _msl_stop_reading, _msl_turn_off_stack_logging, 
+                       _msl_turn_on_stack_logging, _msl_uniquing_table_copy_from_serialized, 
+                       _msl_uniquing_table_copy_from_task, _msl_uniquing_table_enumerate, 
+                       _msl_uniquing_table_get_frames_from_table, _msl_uniquing_table_get_frames_from_task, 
+                       _msl_uniquing_table_read_stack, _msl_uniquing_table_release, 
+                       _msl_uniquing_table_retain, _msl_uniquing_table_serialize, 
                        _msl_uniquing_table_sizeof, _radix_tree_count, _radix_tree_create, 
                        _radix_tree_delete, _radix_tree_destroy, _radix_tree_insert, 
                        _radix_tree_lookup, _radix_tree_size ]

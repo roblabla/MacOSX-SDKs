@@ -66,6 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class MTLVisibleFunctionTableDescriptor;
 @protocol MTLIntersectionFunctionTable;
 @class MTLIntersectionFunctionTableDescriptor;
+@class MTLStitchedLibraryDescriptor;
 
 /*!
  @brief Returns a reference to the preferred system default Metal device.
@@ -315,10 +316,10 @@ typedef __autoreleasing MTLComputePipelineReflection * __nullable MTLAutorelease
 typedef void (^MTLNewLibraryCompletionHandler)(id <MTLLibrary> __nullable library, NSError * __nullable error);
 
 typedef void (^MTLNewRenderPipelineStateCompletionHandler)(id <MTLRenderPipelineState> __nullable renderPipelineState, NSError * __nullable error);
-typedef void (^MTLNewRenderPipelineStateWithReflectionCompletionHandler)(id <MTLRenderPipelineState> __nullable renderPipelineState, MTLRenderPipelineReflection * __nullable reflection, NSError * __nullable error);
+typedef void (^MTLNewRenderPipelineStateWithReflectionCompletionHandler)(id <MTLRenderPipelineState> __nullable renderPipelineState, MTLRenderPipelineReflection * _Nullable_result reflection, NSError * __nullable error);
 
 typedef void (^MTLNewComputePipelineStateCompletionHandler)(id <MTLComputePipelineState> __nullable computePipelineState, NSError * __nullable error);
-typedef void (^MTLNewComputePipelineStateWithReflectionCompletionHandler)(id <MTLComputePipelineState> __nullable computePipelineState, MTLComputePipelineReflection * __nullable reflection, NSError * __nullable error);
+typedef void (^MTLNewComputePipelineStateWithReflectionCompletionHandler)(id <MTLComputePipelineState> __nullable computePipelineState, MTLComputePipelineReflection * _Nullable_result reflection, NSError * __nullable error);
 
 
 /*!
@@ -697,6 +698,18 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 - (void)newLibraryWithSource:(NSString *)source options:(nullable MTLCompileOptions *)options completionHandler:(MTLNewLibraryCompletionHandler)completionHandler;
 
 /*!
+ @method newLibraryWithStitchedDescriptor:error:
+ @abstract Returns a library generated using the graphs in the descriptor.
+ */
+- (nullable id <MTLLibrary>)newLibraryWithStitchedDescriptor:(MTLStitchedLibraryDescriptor *)descriptor error:(__autoreleasing NSError **)error API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method newLibraryWithStitchedDescriptor:completionHandler:
+ @abstract Generates a new library using the graphs in the descriptor.
+ */
+- (void)newLibraryWithStitchedDescriptor:(MTLStitchedLibraryDescriptor *)descriptor completionHandler:(MTLNewLibraryCompletionHandler)completionHandler API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
  @method newRenderPipelineStateWithDescriptor:error:
  @abstract Create and compile a new MTLRenderPipelineState object synchronously.
  */
@@ -798,14 +811,14 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @method newRenderPipelineStateWithTileDescriptor:options:reflection:error:
  @abstract Create and compile a new MTLRenderPipelineState object synchronously given a MTLTileRenderPipelineDescriptor.
  */
-- (nullable id <MTLRenderPipelineState>)newRenderPipelineStateWithTileDescriptor:(MTLTileRenderPipelineDescriptor*)descriptor options:(MTLPipelineOption)options reflection:(MTLAutoreleasedRenderPipelineReflection * __nullable)reflection error:(__autoreleasing NSError **)error API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+- (nullable id <MTLRenderPipelineState>)newRenderPipelineStateWithTileDescriptor:(MTLTileRenderPipelineDescriptor*)descriptor options:(MTLPipelineOption)options reflection:(MTLAutoreleasedRenderPipelineReflection * __nullable)reflection error:(__autoreleasing NSError **)error API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 
 /*!
  @method newRenderPipelineStateWithTileDescriptor:options:completionHandler:
  @abstract Create and compile a new MTLRenderPipelineState object asynchronously given a MTLTileRenderPipelineDescriptor.
  */
-- (void)newRenderPipelineStateWithTileDescriptor:(MTLTileRenderPipelineDescriptor *)descriptor options:(MTLPipelineOption)options completionHandler:(MTLNewRenderPipelineStateWithReflectionCompletionHandler)completionHandler API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+- (void)newRenderPipelineStateWithTileDescriptor:(MTLTileRenderPipelineDescriptor *)descriptor options:(MTLPipelineOption)options completionHandler:(MTLNewRenderPipelineStateWithReflectionCompletionHandler)completionHandler API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /*!
  @property maxThreadgroupMemoryLength
@@ -1005,10 +1018,17 @@ typedef uint64_t MTLTimestamp;
 
 /*!
  @property supportsDynamicLibraries
- @abstract Query device support for compiling dynamic libraries.
- @return BOOL value. If YES, the device supports compiling dynamic libraries. If NO, the devices does not.
+ @abstract Query device support for creating and using dynamic libraries in a compute pipeline.
+ @return BOOL value. If YES, the device supports creating and using dynamic libraries in a compute pipeline. If NO, the device does not.
  */
 @property(readonly) BOOL supportsDynamicLibraries API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ @property supportsRenderDynamicLibraries
+ @abstract Query device support for creating and using dynamic libraries in render pipeline stages.
+ @return BOOL value. If YES, the device supports creating and using dynamic libraries in render pipeline stages. If NO, the device does not.
+ */
+@property (readonly) BOOL supportsRenderDynamicLibraries API_AVAILABLE(macos(12.0), ios(15.0));
 
 /*!
  @method newDynamicLibrary:error:
@@ -1040,6 +1060,11 @@ typedef uint64_t MTLTimestamp;
 - (nullable id<MTLBinaryArchive>) newBinaryArchiveWithDescriptor:(MTLBinaryArchiveDescriptor*)descriptor
                                                            error:(NSError**)error API_AVAILABLE(macos(11.0), ios(14.0));
 
+/*!
+@property supportsRaytracing
+@abstract Query device support for using ray tracing from compute pipelines.
+@return BOOL value. If YES, the device supports ray tracing from compute pipelines. If NO, the device does not.
+*/
 @property (readonly) BOOL supportsRaytracing API_AVAILABLE(macos(11.0), ios(14.0));
 
 - (MTLAccelerationStructureSizes)accelerationStructureSizesWithDescriptor:(MTLAccelerationStructureDescriptor *)descriptor API_AVAILABLE(macos(11.0), ios(14.0));
@@ -1047,8 +1072,33 @@ typedef uint64_t MTLTimestamp;
 - (nullable id <MTLAccelerationStructure>)newAccelerationStructureWithSize:(NSUInteger)size API_AVAILABLE(macos(11.0), ios(14.0));
 - (nullable id <MTLAccelerationStructure>)newAccelerationStructureWithDescriptor:(MTLAccelerationStructureDescriptor *)descriptor API_AVAILABLE(macos(11.0), ios(14.0));
 
+/*!
+ @property supportsFunctionPointers
+ @abstract Query device support for using function pointers from compute pipelines.
+ @return BOOL value. If YES, the device supports function pointers from compute pipelines. If NO, the device does not.
+ */
 @property (readonly) BOOL supportsFunctionPointers API_AVAILABLE(macos(11.0), ios(14.0));
 
+/*!
+ @property supportsFunctionPointersFromRender
+ @abstract Query device support for using function pointers from render pipeline stages.
+ @return BOOL value. If YES, the device supports function pointers from render pipeline stages. If NO, the device does not.
+ */
+@property (readonly) BOOL supportsFunctionPointersFromRender API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @property supportsRaytracingFromRender
+ @abstract Query device support for using ray tracing from render pipeline stages.
+ @return BOOL value. If YES, the device supports ray tracing from render pipeline stages. If NO, the device does not.
+ */
+@property (readonly) BOOL supportsRaytracingFromRender API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @property supportsPrimitiveMotionBlur
+ @abstract Query device support for using ray tracing primitive motion blur.
+ @return BOOL value. If YES, the device supports the primitive motion blur api. If NO, the device does not.
+ */
+@property (readonly) BOOL supportsPrimitiveMotionBlur API_AVAILABLE(macos(11.0), ios(14.0));
 
 @end
 NS_ASSUME_NONNULL_END

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           259D16D6-07C8-3018-831A-0385DBA5DE2F
+    value:           5BB2B84B-CC75-383C-A320-0800A1507336
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FE8D131D-19F3-3BED-A236-1107F68DCA32
+    value:           F7E01C85-4FE8-3529-B2F0-59ACB6EF362E
 install-name:    '/System/Library/PrivateFrameworks/QuickLookNonBaseSystem.framework/Versions/A/QuickLookNonBaseSystem'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

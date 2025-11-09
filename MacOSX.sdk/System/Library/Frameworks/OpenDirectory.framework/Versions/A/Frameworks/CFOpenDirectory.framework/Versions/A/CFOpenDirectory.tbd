@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1084A655-1A23-309D-8C74-B8B0135ABAC7
+    value:           F8D05BEE-36C8-3561-BA90-3FF8D30190E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           54398A7B-9A0D-3BC5-9673-73388906309A
+    value:           270472DA-2A6C-3238-8FC4-31A7CAAD585D
 install-name:    '/System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -171,13 +171,13 @@ exports:
                        _kODAuthenticationTypeGetGlobalPolicy, _kODAuthenticationTypeGetKerberosPrincipal, 
                        _kODAuthenticationTypeGetPolicy, _kODAuthenticationTypeGetUserData, 
                        _kODAuthenticationTypeGetUserName, _kODAuthenticationTypeKerberosTickets, 
-                       _kODAuthenticationTypeMPPEMasterKeys, _kODAuthenticationTypeMSCHAP2, 
-                       _kODAuthenticationTypeNTLMv2, _kODAuthenticationTypeNTLMv2WithSessionKey, 
-                       _kODAuthenticationTypeNewUser, _kODAuthenticationTypeNewUserWithPolicy, 
-                       _kODAuthenticationTypeNodeNativeClearTextOK, _kODAuthenticationTypeNodeNativeNoClearText, 
-                       _kODAuthenticationTypeNodeNativeRetainCredential, _kODAuthenticationTypeNodePPS, 
-                       _kODAuthenticationTypeReadSecureHash, _kODAuthenticationTypeSMBNTv2UserSessionKey, 
-                       _kODAuthenticationTypeSMBWorkstationCredentialSessionKey, 
+                       _kODAuthenticationTypeMPPEMasterKeys, _kODAuthenticationTypeMPPEPrimaryKeys, 
+                       _kODAuthenticationTypeMSCHAP2, _kODAuthenticationTypeNTLMv2, 
+                       _kODAuthenticationTypeNTLMv2WithSessionKey, _kODAuthenticationTypeNewUser, 
+                       _kODAuthenticationTypeNewUserWithPolicy, _kODAuthenticationTypeNodeNativeClearTextOK, 
+                       _kODAuthenticationTypeNodeNativeNoClearText, _kODAuthenticationTypeNodeNativeRetainCredential, 
+                       _kODAuthenticationTypeNodePPS, _kODAuthenticationTypeReadSecureHash, 
+                       _kODAuthenticationTypeSMBNTv2UserSessionKey, _kODAuthenticationTypeSMBWorkstationCredentialSessionKey, 
                        _kODAuthenticationTypeSMB_LM_Key, _kODAuthenticationTypeSMB_NT_Key, 
                        _kODAuthenticationTypeSMB_NT_UserSessionKey, _kODAuthenticationTypeSMB_NT_WithUserSessionKey, 
                        _kODAuthenticationTypeSecureHash, _kODAuthenticationTypeSetGlobalPolicy, 

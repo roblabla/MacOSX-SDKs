@@ -28,6 +28,9 @@ API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 /* Get the individual bytes of the receiver */
 - (void)getUUIDBytes:(uuid_t _Nonnull)uuid;
 
+/* Compare the receiver to another NSUUID in constant time */
+- (NSComparisonResult)compare:(NSUUID *)otherUUID API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
 /* Return a string description of the UUID, such as "E621E1F8-C36C-495A-93FC-0C247A3E6E5F" */
 @property (readonly, copy) NSString *UUIDString;
 

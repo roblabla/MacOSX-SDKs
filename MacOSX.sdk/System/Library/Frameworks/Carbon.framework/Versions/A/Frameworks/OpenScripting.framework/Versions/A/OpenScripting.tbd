@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B4718F88-6569-3653-81F9-F0256EE89C48
+    value:           156DF1D9-9BB5-32DF-A0F3-76A7B1D3662A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2B7482FA-20D1-3886-8E0B-EA52289B235E
+    value:           9F44FFBE-5907-3324-AB6B-C986E6301915
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

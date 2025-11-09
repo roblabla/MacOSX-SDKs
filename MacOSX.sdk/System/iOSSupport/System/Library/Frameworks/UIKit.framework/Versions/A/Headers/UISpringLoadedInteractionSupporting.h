@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UISpringLoadedInteractionSupporting <NSObject>
 
 @property (nonatomic, assign, getter=isSpringLoaded) BOOL springLoaded UIKIT_AVAILABLE_IOS_ONLY(11_0);

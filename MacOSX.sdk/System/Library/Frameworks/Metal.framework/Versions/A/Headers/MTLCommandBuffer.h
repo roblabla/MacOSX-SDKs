@@ -78,7 +78,7 @@ MTL_EXTERN NSErrorDomain const MTLCommandBufferErrorDomain;
  @constant MTLCommandBufferErrorPageFault
  Execution of this command buffer generated an unserviceable GPU page fault. This can caused by buffer read write attribute mismatch or out of boundary access.
  
- @constant MTLCommandBufferErrorBlacklisted
+ @constant MTLCommandBufferErrorAccessRevoked
  Access to this device has been revoked because this client has been responsible for too many timeouts or hangs.
  
  @constant MTLCommandBufferErrorNotPermitted
@@ -95,6 +95,9 @@ MTL_EXTERN NSErrorDomain const MTLCommandBufferErrorDomain;
  
  @constant MTLCommandBufferErrorDeviceRemoved
  The device was physically removed before the command could finish execution
+
+ @constant MTLCommandBufferErrorStackOverflow
+ Execution of the command buffer was stopped due to Stack Overflow Exception. [MTLComputePipelineDescriptor maxCallStackDepth] setting needs to be checked.
  */
 
 typedef NS_ENUM(NSUInteger, MTLCommandBufferError)
@@ -103,12 +106,14 @@ typedef NS_ENUM(NSUInteger, MTLCommandBufferError)
     MTLCommandBufferErrorInternal = 1,
     MTLCommandBufferErrorTimeout = 2,
     MTLCommandBufferErrorPageFault = 3,
-    MTLCommandBufferErrorBlacklisted = 4,
+    MTLCommandBufferErrorBlacklisted = 4, // Deprecated. Please use MTLCommandBufferErrorAccessRevoked.
+    MTLCommandBufferErrorAccessRevoked = 4,
     MTLCommandBufferErrorNotPermitted = 7,
     MTLCommandBufferErrorOutOfMemory = 8,
     MTLCommandBufferErrorInvalidResource = 9,
     MTLCommandBufferErrorMemoryless API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(10.0)) = 10,
     MTLCommandBufferErrorDeviceRemoved API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios) = 11,
+    MTLCommandBufferErrorStackOverflow API_AVAILABLE(macos(12.0), ios(15.0)) = 12,
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
 /*!

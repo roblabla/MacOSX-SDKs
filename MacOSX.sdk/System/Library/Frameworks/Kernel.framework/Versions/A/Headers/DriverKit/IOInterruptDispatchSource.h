@@ -1,6 +1,6 @@
-/* iig(DriverKit-107.100.6) generated from IOInterruptDispatchSource.iig */
+/* iig(DriverKit-191) generated from IOInterruptDispatchSource.iig */
 
-/* IOInterruptDispatchSource.iig:1-44 */
+/* IOInterruptDispatchSource.iig:1-50 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -45,7 +45,13 @@ enum {
 	kIOInterruptDispatchSourceTypeLevel = 0x00000001
 };
 
-/* source class IOInterruptDispatchSource IOInterruptDispatchSource.iig:45-136 */
+enum {
+	kIOInterruptSourceIndexMask      = 0x0000FFFF,
+	kIOInterruptSourceAbsoluteTime   = 0x00000000,
+	kIOInterruptSourceContinuousTime = 0x00010000
+};
+
+/* source class IOInterruptDispatchSource IOInterruptDispatchSource.iig:51-143 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -69,7 +75,8 @@ public:
     /*!
      * @brief       Create an IOInterruptDispatchSource for an interrupt by index from an IOService provider.
      * @param       provider The IOService object representing the HW device producing the interrupt.
-     * @param       index Index for the interrupt.
+     * @param       index Index for the interrupt, optionally or'ed with one of the following constants:
+                    kIOInterruptSourceContinuousTime time values sent to the InterruptOccurred() method will be in mach_continuous_time() units.
      * @param       queue Target queue to run the handler block.
      * @param       source Created source with +1 retain count to be released by the caller.
      * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
@@ -147,7 +154,7 @@ private:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOInterruptDispatchSource IOInterruptDispatchSource.iig:45-136 */
+/* generated class IOInterruptDispatchSource IOInterruptDispatchSource.iig:51-143 */
 
 #define IOInterruptDispatchSource_Create_ID            0xb6a948b1585fc259ULL
 #define IOInterruptDispatchSource_GetInterruptType_ID            0x846d2df6b6bef33bULL
@@ -318,11 +325,15 @@ class IOInterruptDispatchSource : public IODispatchSource, public IOInterruptDis
 
 
 public:
+#ifdef IOInterruptDispatchSource_DECLARE_IVARS
+IOInterruptDispatchSource_DECLARE_IVARS
+#else /* IOInterruptDispatchSource_DECLARE_IVARS */
     union
     {
         IOInterruptDispatchSource_IVars * ivars;
         IOInterruptDispatchSource_LocalIVars * lvars;
     };
+#endif /* IOInterruptDispatchSource_DECLARE_IVARS */
 
     using super = IODispatchSource;
 
@@ -332,6 +343,6 @@ public:
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOInterruptDispatchSource.iig:138- */
+/* IOInterruptDispatchSource.iig:145- */
 
 #endif /* ! _IOKIT_UIOINTERRUPTDISPATCHSOURCE_H */

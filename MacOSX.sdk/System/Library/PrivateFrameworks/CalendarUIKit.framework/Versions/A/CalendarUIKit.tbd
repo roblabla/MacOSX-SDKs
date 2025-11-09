@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A11487F4-E8BE-32F5-9FC7-5A8942D01086
+    value:           C6A190FB-14C6-35B6-8AAF-520E94067C2C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BBE94484-B154-3509-8A91-5FEF582C7CCD
+    value:           051D4BC8-5F22-37B2-8AEC-CD505B39D64F
 install-name:    '/System/Library/PrivateFrameworks/CalendarUIKit.framework/Versions/A/CalendarUIKit'
 current-version: 0
 exports:
@@ -31,13 +31,13 @@ exports:
                        _stateForParticipationStatus ]
     objc-classes:    [ CUIKAttendeeDescriptionGenerator, CUIKAttendeeHeuristics, 
                        CUIKAvailabilityDescriptionGenerator, CUIKCalendarDescriptionGenerator, 
-                       CUIKContactDescriptionGenerator, CUIKCreateOperation, CUIKDateDescriptionGenerator, 
-                       CUIKDateStrings, CUIKDefaultIconGenerator, CUIKDeleteOperation, 
-                       CUIKDescriptionGenerator, CUIKDockTileView, CUIKEditingContext, 
-                       CUIKEditingContextGroup, CUIKEditingManager, CUIKEventDescriptionGenerator, 
-                       CUIKEventHeuristics, CUIKEventSuggestion, CUIKEventSuggestionGenerator, 
-                       CUIKEventTimeDetector, CUIKFlightEventSuggestion, CUIKIcon, 
-                       CUIKInviteeDescriptionGenerator, CUIKLocationDescriptionGenerator, 
+                       CUIKConferenceUtils, CUIKContactDescriptionGenerator, CUIKCreateOperation, 
+                       CUIKDateDescriptionGenerator, CUIKDateStrings, CUIKDefaultIconGenerator, 
+                       CUIKDeleteOperation, CUIKDescriptionGenerator, CUIKDockTileView, 
+                       CUIKEditingContext, CUIKEditingContextGroup, CUIKEditingManager, 
+                       CUIKEventDescriptionGenerator, CUIKEventHeuristics, CUIKEventSuggestion, 
+                       CUIKEventSuggestionGenerator, CUIKEventTimeDetector, CUIKFlightEventSuggestion, 
+                       CUIKIcon, CUIKInviteeDescriptionGenerator, CUIKLocationDescriptionGenerator, 
                        CUIKNotificationConflictCache, CUIKNotificationConflictCacheObject, 
                        CUIKNotificationDescriptionGenerator, CUIKObjectGroup, CUIKOverlayCalendar, 
                        CUIKPhoneNumberDescriptionGenerator, CUIKRecents, CUIKRecurrenceRuleDescriptionGenerator, 

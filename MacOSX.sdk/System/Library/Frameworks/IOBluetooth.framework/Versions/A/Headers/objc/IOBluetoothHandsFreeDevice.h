@@ -22,7 +22,6 @@ API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos)
 	BOOL									_rejectSCOConnection;
 	int										_ringAttempt;
 	BOOL									_outstandingCommand;
-	NSTimer *								_outstandingCommandTimer;
 	IOBluetoothHandsFreeDeviceExpansion *   _expansion;
 	NSMutableArray *						_commandQueue;
 }

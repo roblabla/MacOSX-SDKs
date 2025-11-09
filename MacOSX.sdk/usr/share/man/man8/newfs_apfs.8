@@ -91,7 +91,11 @@ The block size of the container.
 All volumes within this container will use this block size.
 The default is 4096 bytes.
 .It Fl o Ar options
-Additional (undocumented) formatting options.
+Additional volume formatting options.  Currently only:
+.Bl -tag -width "             " -offset "  " -compact
+.It Sy conformance
+The volume will be UNIX conformant.
+.El
 .It Fl i
 Creates a case-insensitive volume.
 This is the default on macOS.

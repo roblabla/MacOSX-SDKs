@@ -534,7 +534,8 @@ nw_data_transfer_report_collect(nw_data_transfer_report_t report,
  *		values across paths where applicable. For values that cannot
  *		sum, the value of the primary path is used.
  */
-NW_EXPORT extern const uint32_t _nw_data_transfer_report_all_paths;
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+extern const uint32_t _nw_data_transfer_report_all_paths;
 #define NW_ALL_PATHS (_nw_data_transfer_report_all_paths)
 
 /*!
@@ -594,8 +595,7 @@ nw_data_transfer_report_get_path_count(nw_data_transfer_report_t report);
  *
  * @param path_index
  *		The index for the path over which data is transferred.
- *		For non-multipath connections, pass 0 as the path index to access
- *		the single path. Passing NW_ALL_PATHS for this function returns
+ *		Passing NW_ALL_PATHS for this function returns
  *		the sum of all paths.
  *
  * @result
@@ -619,8 +619,7 @@ nw_data_transfer_report_get_received_ip_packet_count(nw_data_transfer_report_t r
  *
  * @param path_index
  *		The index for the path over which data is transferred.
- *		For non-multipath connections, pass 0 as the path index to access
- *		the single path. Passing NW_ALL_PATHS for this function returns
+ *		Passing NW_ALL_PATHS for this function returns
  *		the sum of all paths.
  *
  * @result
@@ -644,8 +643,7 @@ nw_data_transfer_report_get_sent_ip_packet_count(nw_data_transfer_report_t repor
  *
  * @param path_index
  *		The index for the path over which data is transferred.
- *		For non-multipath connections, pass 0 as the path index to access
- *		the single path. Passing NW_ALL_PATHS for this function returns
+ *		Passing NW_ALL_PATHS for this function returns
  *		the sum of all paths.
  *
  * @result
@@ -669,8 +667,7 @@ nw_data_transfer_report_get_received_transport_byte_count(nw_data_transfer_repor
  *
  * @param path_index
  *		The index for the path over which data is transferred.
- *		For non-multipath connections, pass 0 as the path index to access
- *		the single path. Passing NW_ALL_PATHS for this function returns
+ *		Passing NW_ALL_PATHS for this function returns
  *		the sum of all paths.
  *
  * @result
@@ -694,8 +691,7 @@ nw_data_transfer_report_get_received_transport_duplicate_byte_count(nw_data_tran
  *
  * @param path_index
  *		The index for the path over which data is transferred.
- *		For non-multipath connections, pass 0 as the path index to access
- *		the single path. Passing NW_ALL_PATHS for this function returns
+ *		Passing NW_ALL_PATHS for this function returns
  *		the sum of all paths.
  *
  * @result
@@ -719,8 +715,7 @@ nw_data_transfer_report_get_received_transport_out_of_order_byte_count(nw_data_t
  *
  * @param path_index
  *		The index for the path over which data is transferred.
- *		For non-multipath connections, pass 0 as the path index to access
- *		the single path. Passing NW_ALL_PATHS for this function returns
+ *		Passing NW_ALL_PATHS for this function returns
  *		the sum of all paths.
  *
  * @result
@@ -744,8 +739,7 @@ nw_data_transfer_report_get_sent_transport_byte_count(nw_data_transfer_report_t 
  *
  * @param path_index
  *		The index for the path over which data is transferred.
- *		For non-multipath connections, pass 0 as the path index to access
- *		the single path. Passing NW_ALL_PATHS for this function returns
+ *		Passing NW_ALL_PATHS for this function returns
  *		the sum of all paths.
  *
  * @result
@@ -844,8 +838,7 @@ nw_data_transfer_report_get_transport_rtt_variance(nw_data_transfer_report_t rep
  *
  * @param path_index
  *		The index for the path over which data is transferred.
- *		For non-multipath connections, pass 0 as the path index to access
- *		the single path. Passing NW_ALL_PATHS for this function returns
+ *		Passing NW_ALL_PATHS for this function returns
  *		the sum of all paths.
  *
  * @result
@@ -869,8 +862,7 @@ nw_data_transfer_report_get_received_application_byte_count(nw_data_transfer_rep
  *
  * @param path_index
  *		The index for the path over which data is transferred.
- *		For non-multipath connections, pass 0 as the path index to access
- *		the single path. Passing NW_ALL_PATHS for this function returns
+ *		Passing NW_ALL_PATHS for this function returns
  *		the sum of all paths.
  *
  * @result
@@ -894,8 +886,7 @@ nw_data_transfer_report_get_sent_application_byte_count(nw_data_transfer_report_
  *
  * @param path_index
  *		The index for the path over which data is transferred.
- *		For non-multipath connections, pass 0 as the path index to access
- *		the single path. Passing NW_ALL_PATHS for this function is
+ *		Passing NW_ALL_PATHS for this function is
  *		equivalent to passing 0.
  *
  * @result
@@ -907,6 +898,31 @@ nw_data_transfer_report_get_sent_application_byte_count(nw_data_transfer_report_
 API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 NW_RETURNS_RETAINED nw_interface_t
 nw_data_transfer_report_copy_path_interface(nw_data_transfer_report_t report,
+											uint32_t path_index);
+
+/*!
+ * @function nw_data_transfer_report_get_path_radio_type
+ *
+ * @abstract
+ *		Retrieve the radio type used for data transfer for a given
+ *		path used by a connection.
+ *
+ * @param report
+ *		A data transfer report in the "collected" state.
+ *
+ * @param path_index
+ *		The index for the path over which data is transferred.
+ *		Passing NW_ALL_PATHS for this function is
+ *		equivalent to passing 0.
+ *
+ * @result
+ *		Returns the radio type used for the specified path.
+ *		Returns nw_interface_radio_type_unknown on failure.
+ *		Fails if the report is not yet collected.
+ */
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
+nw_interface_radio_type_t
+nw_data_transfer_report_get_path_radio_type(nw_data_transfer_report_t report,
 											uint32_t path_index);
 
 __END_DECLS

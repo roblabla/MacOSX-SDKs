@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BD3F32E9-BF87-3373-B29E-92EF07B3B8BA
+    value:           1E5CA127-6537-3AB0-A0F8-90A5CADE0D99
   - target:          x86_64-maccatalyst
-    value:           BD3F32E9-BF87-3373-B29E-92EF07B3B8BA
+    value:           1E5CA127-6537-3AB0-A0F8-90A5CADE0D99
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ACFEEADA-257D-367F-B76A-F1EC9F58D7D0
+    value:           A916CE78-A96E-3B61-B83E-48E9BF8A0112
   - target:          arm64e-maccatalyst
-    value:           ACFEEADA-257D-367F-B76A-F1EC9F58D7D0
+    value:           A916CE78-A96E-3B61-B83E-48E9BF8A0112
 install-name:    '/System/Library/PrivateFrameworks/MailSupport.framework/Versions/A/MailSupport'
-current-version: 3654.80
+current-version: 3689.0.4
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -100,13 +100,25 @@ exports:
                        _MSNewNotificationSoundKeyAccountIDOfSoundToPlay, _MSNewNotificationSoundKeyAlertContexts, 
                        _MSNewNotificationSoundKeyLoudestState, _MSNewNotificationSoundKeySuppressionContexts, 
                        _MSPreferredAbbreviatedNameForAddressAndDisplayName, _MSPreferredCompositeNameForAddressAndDisplayName, 
-                       _MSPreferredCompositeNameForContact, _MSSharedContactStore, 
-                       _MSUserNotificationCenterTopicFavoriteMailboxes, _MSUserNotificationCenterTopicNotifiedThreads, 
-                       _MSUserNotificationCenterTopicVIP, _MSUserNotificationContentKeyAccountReference, 
-                       _MSUserNotificationContentKeyMessageReference, _MSUserNotificationContentKeyMissingSummary, 
-                       _MSUserNotificationContentKeyNanoFlags, _MSUserNotificationContentKeyNanoMessageId, 
-                       _MSUserNotificationContentKeySenderAddress, _MSUserNotificationContentKeySuppressionContext, 
-                       _MSUserNotificationsLog ]
+                       _MSPreferredCompositeNameForContact, _MSSearchScopeFrom, _MSSearchScopeMailbox, 
+                       _MSSearchScopeMessage, _MSSearchScopeSubject, _MSSearchScopeTo, 
+                       _MSSearchSuggestionCategoryAttachment, _MSSearchSuggestionCategoryDates, 
+                       _MSSearchSuggestionCategoryFlagged, _MSSearchSuggestionCategoryFreeText, 
+                       _MSSearchSuggestionCategoryMailboxes, _MSSearchSuggestionCategoryPeople, 
+                       _MSSearchSuggestionCategoryRaw, _MSSearchSuggestionCategorySubject, 
+                       _MSSearchSuggestionCategoryTopHit, _MSSearchSuggestionCategoryUnread, 
+                       _MSSearchSuggestionCategoryVIPs, _MSSharedContactStore, _MSUserNotificationCenterTopicFavoriteMailboxes, 
+                       _MSUserNotificationCenterTopicNotifiedThreads, _MSUserNotificationCenterTopicVIP, 
+                       _MSUserNotificationContentKeyAccountReference, _MSUserNotificationContentKeyMessageReference, 
+                       _MSUserNotificationContentKeyMissingSummary, _MSUserNotificationContentKeyNanoFlags, 
+                       _MSUserNotificationContentKeyNanoMessageId, _MSUserNotificationContentKeySenderAddress, 
+                       _MSUserNotificationContentKeySuppressionContext, _MSUserNotificationsLog, 
+                       _kMessageListResultBundleID, _kMessageListSectionBundleID, 
+                       _kStructuredQueryComponent, _kStructuredQueryMailboxFilter, 
+                       _kStructuredQueryMailboxFilterAll, _kStructuredQueryMailboxFilterCurrent, 
+                       _kStructuredQueryNumberCharacters, _kStructuredQueryNumberWords, 
+                       _kStructuredQueryScope, _kStructuredQueryToggle, _kSuggestionBundleID, 
+                       _kSuggestionUserTypedBundleID, _kSuggestionVIPBundleID, _kTopHitBundleID ]
     objc-classes:    [ AWDMailAutoFetchReport, AWDMailCannotGetMailErrorReport, AWDMailComposeAttachmentReport, 
                        AWDMailError, AWDMailFeatureEngagementReport, AWDMailMessage, 
                        AWDMailMessageBody, AWDMailMessageDisplayErrorReport, AWDMailMessageLoadingReport, 
@@ -115,14 +127,17 @@ exports:
                        MSAccountToEmailProvider, MSAttachmentInfo, MSComposeAttachmentAnalyticController, 
                        MSConversationFlagChangeTriageAction, MSCustomProtocolURLSchemeHandler, 
                        MSDeleteTriageAction, MSDiagnosticManager, MSFetchMetricsController, 
-                       MSFileCompression, MSFlagChangeTriageAction, MSFlagTriageAction, 
-                       MSGetMailIntent, MSGetMailIntentResponse, MSIntentMail, MSIntentMailResolutionResult, 
+                       MSFlagChangeTriageAction, MSFlagTriageAction, MSGetMailIntent, 
+                       MSGetMailIntentResponse, MSIntentMail, MSIntentMailResolutionResult, 
                        MSIntentReadStatusResolutionResult, MSJunkTriageAction, MSMessageListItemSelection, 
                        MSMessageLoadingAnalyticController, MSMoveTriageAction, MSMuteTriageAction, 
-                       MSNotifyTriageAction, MSRadarInteraction, MSRadarURLBuilder, 
-                       MSReadTriageAction, MSSearchSessionController, MSSendMailIntent, 
-                       MSSendMailIntentFormatter, MSSendMailIntentResponse, MSSiriIntelligenceSettings, 
-                       MSTriageAction, _MSCountableMatchesContext ]
+                       MSNotifyTriageAction, MSParsecSearchSession, MSParsecSearchSessionMessageListResult, 
+                       MSParsecSearchSessionMessageResult, MSParsecSearchSessionQueryComponent, 
+                       MSParsecSearchSessionSuggestion, MSParsecSearchSessionTopHit, 
+                       MSRadarInteraction, MSRadarURLBuilder, MSReadTriageAction, 
+                       MSSearchSessionController, MSSendMailIntent, MSSendMailIntentFormatter, 
+                       MSSendMailIntentResponse, MSSiriIntelligenceSettings, MSTriageAction, 
+                       _MSCountableMatchesContext ]
     objc-ivars:      [ AWDMailAutoFetchReport._bucketedLocalNonDeletedCount, AWDMailAutoFetchReport._didTimeout, 
                        AWDMailAutoFetchReport._duration, AWDMailAutoFetchReport._emailProvider, 
                        AWDMailAutoFetchReport._fetchSize, AWDMailAutoFetchReport._foreground, 

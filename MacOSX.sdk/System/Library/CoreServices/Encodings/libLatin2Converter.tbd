@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           68E1F7DD-860D-39D4-9431-4E694F16C81D
+    value:           BDFED853-5067-3A49-AE03-CAE23AE80B41
   - target:          x86_64-maccatalyst
-    value:           68E1F7DD-860D-39D4-9431-4E694F16C81D
+    value:           BDFED853-5067-3A49-AE03-CAE23AE80B41
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           80DF4CBC-AA8D-323B-8D9F-5E3FF2BAC0A8
+    value:           FE4708A8-9F77-30E8-9C6F-60449F81F6F6
   - target:          arm64e-maccatalyst
-    value:           80DF4CBC-AA8D-323B-8D9F-5E3FF2BAC0A8
+    value:           FE4708A8-9F77-30E8-9C6F-60449F81F6F6
 install-name:    '/System/Library/CoreServices/Encodings/libLatin2Converter.dylib'
-current-version: 90
+current-version: 100
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

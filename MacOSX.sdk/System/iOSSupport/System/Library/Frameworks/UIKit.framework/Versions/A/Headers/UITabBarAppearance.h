@@ -11,7 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) @interface UITabBarItemStateAppearance : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
+@interface UITabBarItemStateAppearance : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -45,7 +46,8 @@ typedef NS_ENUM(NSInteger, UITabBarItemAppearanceStyle) {
     UITabBarItemAppearanceStyleCompactInline,
 };
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) @interface UITabBarItemAppearance : NSObject<NSCopying, NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
+@interface UITabBarItemAppearance : NSObject<NSCopying, NSSecureCoding>
 
 /// Construct an appearance with default values for the stacked layout.
 - (instancetype)init;
@@ -74,7 +76,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) @interface UITabBarItemAppeara
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) @interface UITabBarAppearance : UIBarAppearance
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
+@interface UITabBarAppearance : UIBarAppearance
 
 /// The appearance for the stacked tab bar item layout
 @property (nonatomic, readwrite, copy) UITabBarItemAppearance *stackedLayoutAppearance;

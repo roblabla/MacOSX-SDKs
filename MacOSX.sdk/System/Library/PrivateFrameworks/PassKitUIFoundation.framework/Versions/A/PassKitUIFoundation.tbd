@@ -3,22 +3,23 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           925EB7F7-46DF-322C-8EDB-8FB96C8ABB8E
+    value:           88018DC3-4689-3F71-9209-49F9DF96FB21
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C2819EDA-E7F9-379C-9ACF-38C010DED773
+    value:           C5CAEB73-9649-3BFA-BDBE-57C67DDA2DD8
 install-name:    '/System/Library/PrivateFrameworks/PassKitUIFoundation.framework/Versions/A/PassKitUIFoundation'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _PKGlyphViewSize, _PKMatrixForRotationAroundXAxis, _PKMatrixForRotationAroundYAxis, 
-                       _PKMatrixForScale, _PKMatrixIdentity ]
-    objc-classes:    [ PK3DCardView, PKAuthenticator, PKAuthenticatorEvaluationContext, 
-                       PKAuthenticatorEvaluationRequest, PKAuthenticatorEvaluationResponse, 
-                       PKAuthenticatorSharedRootContext, PKCategoryVisualizationCardView, 
-                       PKFingerprintGlyphView, PKGlyphView, PKMetalRenderLoop, PKPassFaceViewCategoryVisualizationRendererState, 
+    symbols:         [ _PKGlyphViewSize ]
+    objc-classes:    [ PKAppleCashCardView, PKAppleHomeKeyCardView, PKAuthenticator, 
+                       PKAuthenticatorEvaluationContext, PKAuthenticatorEvaluationRequest, 
+                       PKAuthenticatorEvaluationResponse, PKAuthenticatorSharedRootContext, 
+                       PKCategoryVisualizationCardView, PKFingerprintGlyphView, PKGlyphView, 
+                       PKMetalRenderLoop, PKPassFaceViewCategoryVisualizationRendererState, 
                        PKPassFaceViewRendererState, PKPaymentRemoteInstrumentThumbnailView, 
                        PKPeerPayment3DCharacter, PKPeerPayment3DScene, PKPeerPayment3DStore, 
                        PKPeerPayment3DTextView, PKPhoneGlyphLayer, PKRenderLoop, 
-                       PKUISpringAnimationFactory ]
+                       PKTexturedCardRenderer, PKTexturedCardView, PKUISpringAnimationFactory ]
+    objc-ivars:      [ PKRenderLoop._delegate, PKRenderLoop._drawing, PKRenderLoop._invalidated ]
 ...

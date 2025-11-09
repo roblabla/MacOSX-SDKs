@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIFont, UIColor, UITextView, NSTextContainer, NSLayoutManager, NSTextStorage, NSTextAttachment;
 
+NS_SWIFT_UI_ACTOR
 @protocol UITextViewDelegate <NSObject, UIScrollViewDelegate>
 
 @optional
@@ -46,7 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITextView : UIScrollView <UITextInput, UIContentSizeCategoryAdjusting>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UITextView : UIScrollView <UITextInput, UIContentSizeCategoryAdjusting>
 
 @property(nullable,nonatomic,weak) id<UITextViewDelegate> delegate;
 
@@ -100,6 +102,19 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITextView : UIScrollView <UITex
 @end
 
 #endif
+
+@interface UITextView (UIInteractionStateRestorable)
+
+// Note that the interaction state of a UITextView does _not_ encode the
+// textual content of the field. It should be saved separately, and restored
+// _before_ the interaction state.
+// Currently, this encodes selection (and/or cursor position), scroll position,
+// and first responder status.
+// The object returned here will be a plist type, so can e.g. be stored in
+// an NSUserActivity's userInfo dictionary.
+@property (nonatomic, copy) id interactionState API_AVAILABLE(ios(15.0));
+
+@end
 
 UIKIT_EXTERN NSNotificationName const UITextViewTextDidBeginEditingNotification;
 UIKIT_EXTERN NSNotificationName const UITextViewTextDidChangeNotification;

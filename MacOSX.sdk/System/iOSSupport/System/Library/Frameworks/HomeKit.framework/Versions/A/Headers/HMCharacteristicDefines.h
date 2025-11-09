@@ -4,6 +4,7 @@
 //
 //  Copyright (c) 2013-2015 Apple Inc. All rights reserved.
 //
+/* clang-format off */
 
 #import <HomeKit/HMDefines.h>
 

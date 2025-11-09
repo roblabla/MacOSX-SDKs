@@ -12,6 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+FILEPROVIDER_API_AVAILABILITY_V2
 @interface NSFileProviderExtension (NSFileProviderThumbnailing)
 
 /**

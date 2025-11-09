@@ -35,7 +35,8 @@ typedef NS_ERROR_ENUM(PKPaymentErrorDomain, PKPaymentErrorCode) {
     PKPaymentShippingContactInvalidError = 1,          // the user's contact information has an error. Use the PKPaymentErrorKeys in the userInfo to detail the problem.
     PKPaymentBillingContactInvalidError,               // the user's billing contact information has an error. Use the PKPaymentErrorKeys in the userInfo to detail the problem.
     PKPaymentShippingAddressUnserviceableError,         // the user's shipping address is otherwise valid but not serviceable. For example, the address is in Canada and you only ship to the United States, or you don't deliver to PO Boxes.
-    
+    PKPaymentCouponCodeInvalidError API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos), // The coupon code entered by the user is invalid.
+    PKPaymentCouponCodeExpiredError API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos), // The coupon code entered by the user has expired.
 } API_AVAILABLE(ios(11.0), watchos(4.0));
 
 typedef NSString * PKPaymentErrorKey NS_STRING_ENUM;

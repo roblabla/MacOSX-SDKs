@@ -16,7 +16,8 @@ typedef NS_ENUM(NSInteger, UIInputViewStyle) {
     UIInputViewStyleKeyboard,       // mimics the keyboard background
 } API_AVAILABLE(ios(7.0));
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIInputView : UIView
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UIInputView : UIView
 
 @property (nonatomic, readonly) UIInputViewStyle inputViewStyle;
 

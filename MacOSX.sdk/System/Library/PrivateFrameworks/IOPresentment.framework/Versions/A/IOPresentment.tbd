@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9450168E-31AB-3451-8D4A-04C1CCE03AB8
+    value:           5A81B630-2D20-3C7F-984B-DAD247CA226D
   - target:          x86_64-maccatalyst
-    value:           9450168E-31AB-3451-8D4A-04C1CCE03AB8
+    value:           5A81B630-2D20-3C7F-984B-DAD247CA226D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           758022B6-EE65-3CE4-B996-882C7ADC3B50
+    value:           8E6505E7-C743-366A-B517-2CD05C1A0C00
   - target:          arm64e-maccatalyst
-    value:           758022B6-EE65-3CE4-B996-882C7ADC3B50
+    value:           8E6505E7-C743-366A-B517-2CD05C1A0C00
 install-name:    '/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment'
-current-version: 58
+current-version: 62
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_S1_mP13__va_list_tag, 
@@ -54,12 +54,12 @@ exports:
                        _IOPresentmentSetPipeRotation, _IOPresentmentSetPipeScaler, 
                        _IOPresentmentSetPlaneBlendType, _IOPresentmentSetPlaneGammaTable, 
                        _IOPresentmentSetPlaneLinearizationTable, _IOPresentmentSetPlaneScaler, 
-                       _IOPresentmentSetPlaneState, _IOPresentmentSetSDP, _IOPresentmentTerminate, 
-                       _IOPresentmentTransactionBindResource, _IOPresentmentTransactionGet, 
-                       _IOPresentmentTransactionRelease, _IOPresentmentTransactionSet, 
-                       _IOPresentmentUpdateSubmitTimestamp, _IOPresentmentVersionNumber, 
-                       _IOPresentmentVersionString, _IOPresentmentWaitActive, _IOPresentmentWaitComplete, 
-                       __Z18iopNodeDescriptionR21iopNodeDescriptionCtxRK24sioPresentmentObjectNodeb, 
+                       _IOPresentmentSetPlaneState, _IOPresentmentSetSDP, _IOPresentmentSetVerticalBlankingExtensions, 
+                       _IOPresentmentTerminate, _IOPresentmentTransactionBindResource, 
+                       _IOPresentmentTransactionGet, _IOPresentmentTransactionRelease, 
+                       _IOPresentmentTransactionSet, _IOPresentmentUpdateSubmitTimestamp, 
+                       _IOPresentmentVersionNumber, _IOPresentmentVersionString, 
+                       _IOPresentmentWaitActive, _IOPresentmentWaitComplete, __Z18iopNodeDescriptionR21iopNodeDescriptionCtxRK24sioPresentmentObjectNodeb, 
                        __Z20iopDeviceDescriptionyRK29sioPresentmentDeviceObjectSet, 
                        __Z20iopNodeIDDescriptionR21iopNodeDescriptionCtxyy, __Z21iopDeviceDescriptionsPK23sioPresentmentDeviceMap, 
                        __Z22IOPresentmentGetTypeIDv, __Z23iopDeviceMapDescriptionPK23sioPresentmentDeviceMapRKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
@@ -137,6 +137,7 @@ exports:
                        __ZN13IOPresentment41IOPresentmentBindIOAccelSurfaceToResourceEP23__IOPresentmentResourcej18sIOPresentmentRect, 
                        __ZN13IOPresentment41IOPresentmentBindIOSurfaceToResourcePlaneEP23__IOPresentmentResourceP11__IOSurfacejP18sIOPresentmentRect, 
                        __ZN13IOPresentment42IOPresentmentCreateGPUWranglerEventHandlerEPFvPvPK10__CFString25sIOPresentmentDeviceStateES0_, 
+                       __ZN13IOPresentment42IOPresentmentSetVerticalBlankingExtensionsEP26__IOPresentmentTransactionyy, 
                        __ZN13IOPresentment43IOPresentmentCursorAnimationRemoveAllFramesEP30__IOPresentmentCursorAnimation, 
                        __ZN13IOPresentment46IOPresentmentGetIOAccelDisplayPipeTriageStringEv, 
                        __ZN13IOPresentment48IOPresentmentCapabilitiesStructureFromDictionaryEPKvP19sPipelineDictionary, 
@@ -185,6 +186,7 @@ exports:
                        __ZN24IOPresentmentDisplayPipe40IOPresentmentDisplayPipeCopyCapabilitiesEP20__IOAccelDisplayPipe, 
                        __ZN24IOPresentmentDisplayPipe41IOPresentmentBindIOAccelSurfaceToResourceEP23__IOPresentmentResourcej18sIOPresentmentRect, 
                        __ZN24IOPresentmentDisplayPipe41IOPresentmentBindIOSurfaceToResourcePlaneEP23__IOPresentmentResourceP11__IOSurfacejP18sIOPresentmentRect, 
+                       __ZN24IOPresentmentDisplayPipe42IOPresentmentSetVerticalBlankingExtensionsEP26__IOPresentmentTransactionyy, 
                        __ZN24IOPresentmentDisplayPipe46IOPresentmentGetIOAccelDisplayPipeTriageStringEv, 
                        __ZN24IOPresentmentDisplayPipe54IOPresentmentBindIOSurfaceToResourcePlaneWithDirtyRectEP23__IOPresentmentResourceP11__IOSurfacejP18sIOPresentmentRectS5_, 
                        __ZN24IOPresentmentTransaction11EnablePlaneEj, __ZN24IOPresentmentTransaction12DisablePlaneEj, 
@@ -264,6 +266,7 @@ exports:
                        __ZN35IOPresentmentTransactionDisplayPipe19__SetPlaneSurfaceIDEjjP11__IOSurface, 
                        __ZN35IOPresentmentTransactionDisplayPipe20SetPlaneFlushOptionsEjj, 
                        __ZN35IOPresentmentTransactionDisplayPipe20__FreePipeGammaTableEv, 
+                       __ZN35IOPresentmentTransactionDisplayPipe21SetAccelVBlankExtArgsEyy, 
                        __ZN35IOPresentmentTransactionDisplayPipe23DisplayPipeSetDirtyRectEj18IOAccelDisplayRect, 
                        __ZN35IOPresentmentTransactionDisplayPipe23SetAccelColorMatrixArgsEP25sIOPresentmentColorMatrix, 
                        __ZN35IOPresentmentTransactionDisplayPipe24SetPresentationTimestampEy, 
@@ -288,6 +291,7 @@ exports:
                        __ZN35IOPresentmentTransactionDisplayPipe44DisplayPipeTransactionSetPlaneIOAccelSurfaceEjj18IOAccelDisplayRectS0_j, 
                        __ZN35IOPresentmentTransactionDisplayPipe48DisplayPipeTransactionSetPipePreCSCLinearizationEj, 
                        __ZN35IOPresentmentTransactionDisplayPipe48DisplayPipeTransactionSetPlaneLinearizationTableEj, 
+                       __ZN35IOPresentmentTransactionDisplayPipe51DisplayPipeTransactionSetVerticalBlankingExtensionsEv, 
                        __ZN35IOPresentmentTransactionDisplayPipeC1EP23__IOPresentmentResourcehP20__IOAccelDisplayPipe, 
                        __ZN35IOPresentmentTransactionDisplayPipeC2EP23__IOPresentmentResourcehP20__IOAccelDisplayPipe, 
                        __ZN35IOPresentmentTransactionDisplayPipeD1Ev, __ZN35IOPresentmentTransactionDisplayPipeD2Ev, 

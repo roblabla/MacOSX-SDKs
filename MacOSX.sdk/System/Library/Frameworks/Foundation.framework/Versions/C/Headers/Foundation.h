@@ -43,6 +43,7 @@
 #import <Foundation/NSHTTPCookieStorage.h>
 #import <Foundation/NSIndexPath.h>
 #import <Foundation/NSIndexSet.h>
+#import <Foundation/NSInflectionRule.h>
 #import <Foundation/NSInvocation.h>
 #import <Foundation/NSJSONSerialization.h>
 #import <Foundation/NSKeyValueCoding.h>
@@ -52,6 +53,7 @@
 #import <Foundation/NSLock.h>
 #import <Foundation/NSMapTable.h>
 #import <Foundation/NSMethodSignature.h>
+#import <Foundation/NSMorphology.h>
 #import <Foundation/NSNotification.h>
 #import <Foundation/NSNotificationQueue.h>
 #import <Foundation/NSNull.h>
@@ -137,10 +139,6 @@
 #import <Foundation/NSAppleScript.h>
 #import <Foundation/NSGeometry.h>
 
-#endif /* TARGET_OS_OSX || TARGET_OS_MACCATALYST */
-
-#if TARGET_OS_OSX
-
 #import <Foundation/NSArchiver.h>
 #import <Foundation/NSBackgroundActivityScheduler.h>
 #import <Foundation/NSCalendarDate.h>
@@ -160,10 +158,6 @@
 #import <Foundation/NSXMLNodeOptions.h>
 #import <Foundation/NSURLDownload.h>
 #import <Foundation/NSURLHandle.h>
-
-#endif /* TARGET_OS_OSX */
-
-#if TARGET_OS_OSX
 
 #import <Foundation/NSAppleEventDescriptor.h>
 #import <Foundation/NSAppleEventManager.h>
@@ -187,6 +181,6 @@
 #import <Foundation/NSUserNotification.h>
 #import <Foundation/NSUserScriptTask.h>
 
-#endif /* TARGET_OS_OSX */
+#endif /* TARGET_OS_OSX || TARGET_OS_MACCATALYST */
 
 #import <Foundation/FoundationLegacySwiftCompatibility.h>

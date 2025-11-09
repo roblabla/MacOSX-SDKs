@@ -274,12 +274,17 @@ MDL_EXPORT
  */
 - (MDLObject *)objectAtIndex:(NSUInteger)index;
 
+
+@property (nonatomic, retain) id<MDLObjectContainerComponent> masters
+API_DEPRECATED_WITH_REPLACEMENT("originals", ios(10.0,15.0), tvos(10.0,15.0), macos(10.12,12.0));
+
 /*!
- @property masters
- @abstract Master objects that can be instanced into the asset's object hierarchy
+ @property originals
+ @abstract Original objects that can be instanced into the asset's object hierarchy
  @see MDLObjectContainerComponent
  */
-@property (nonatomic, retain) id<MDLObjectContainerComponent> masters;
+@property (nonatomic, retain) id<MDLObjectContainerComponent> originals
+API_AVAILABLE(macos(12.0), tvos(15.0), ios(15.0));
 
 /*!
  @property animations

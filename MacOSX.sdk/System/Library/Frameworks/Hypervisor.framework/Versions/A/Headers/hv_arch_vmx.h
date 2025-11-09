@@ -2,7 +2,7 @@
  *  hv_arch_vmx.h
  *  Hypervisor Framework
  *
- *  Copyright (c) 2013 Apple Inc. All rights reserved.
+ *  Copyright (c) 2021 Apple Inc. All rights reserved.
  */
 
 #ifndef __HYPERVISOR_HV_ARCH_VMX__
@@ -64,6 +64,7 @@ enum {
 	VMCS_CTRL_ENCLS_EXITING_BITMAP		= 0x0000202e,
 	VMCS_CTRL_SPP_TABLE			        = 0x00002030,
 	VMCS_CTRL_TSC_MULTIPLIER			= 0x00002032,
+	VMCS_CTRL_ENCLV_EXITING_BITMAP		= 0x00002036,
 	VMCS_GUEST_PHYSICAL_ADDRESS			= 0x00002400,
 	VMCS_GUEST_LINK_POINTER				= 0x00002800,
 	VMCS_GUEST_IA32_DEBUGCTL			= 0x00002802,
@@ -76,9 +77,11 @@ enum {
 	VMCS_GUEST_PDPTE3					= 0x00002810,
 	VMCS_GUEST_IA32_BNDCFGS				= 0x00002812,
 	VMCS_GUEST_IA32_RTIT_CTL			= 0x00002814,
+	VMCS_GUEST_IA32_PKRS				= 0x00002818,
 	VMCS_HOST_IA32_PAT					= 0x00002c00,
 	VMCS_HOST_IA32_EFER					= 0x00002c02,
 	VMCS_HOST_IA32_PERF_GLOBAL_CTRL		= 0x00002c04,
+	VMCS_HOST_IA32_PKRS					= 0x00002c06,
 	VMCS_CTRL_PIN_BASED					= 0x00004000,
 	VMCS_CTRL_CPU_BASED					= 0x00004002,
 	VMCS_CTRL_EXC_BITMAP				= 0x00004004,
@@ -164,6 +167,9 @@ enum {
 	VMCS_GUEST_DEBUG_EXC				= 0x00006822,
 	VMCS_GUEST_SYSENTER_ESP				= 0x00006824,
 	VMCS_GUEST_SYSENTER_EIP				= 0x00006826,
+	VMCS_GUEST_IA32_S_CET				= 0x00006828,
+	VMCS_GUEST_SSP						= 0x0000682a,
+	VMCS_GUEST_IA32_INTR_SSP_TABLE_ADDR	= 0x0000682c,
 	VMCS_HOST_CR0						= 0x00006c00,
 	VMCS_HOST_CR3						= 0x00006c02,
 	VMCS_HOST_CR4						= 0x00006c04,
@@ -176,8 +182,11 @@ enum {
 	VMCS_HOST_IA32_SYSENTER_EIP			= 0x00006c12,
 	VMCS_HOST_RSP						= __VMCS_HOST_RSP,
 	VMCS_HOST_RIP						= 0x00006c16,
+	VMCS_HOST_IA32_S_CET				= 0x00006c18,
+	VMCS_HOST_SSP						= 0x00006c1a,
+	VMCS_HOST_IA32_INTR_SSP_TABLE_ADDR	= 0x00006c1c,
 	VMCS_MAX							= 0x00006d00,
-    VMCS_INVALID                        = VMCS_MAX
+	VMCS_INVALID						= VMCS_MAX
 };
 
 enum {
@@ -185,12 +194,14 @@ enum {
 };
 
 enum {
+	// Pin-Based VM-Execution Controls
 	PIN_BASED_INTR						= (1u << 0),
 	PIN_BASED_NMI						= (1u << 3),
 	PIN_BASED_VIRTUAL_NMI				= (1u << 5),
 	PIN_BASED_PREEMPTION_TIMER			= (1u << 6),
 	PIN_BASED_POSTED_INTR				= (1u << 7),
 
+	// Primary Processor-Based VM-Execution Controls
 	CPU_BASED_IRQ_WND					= (1u << 2),
 	CPU_BASED_TSC_OFFSET				= (1u << 3),
 	CPU_BASED_HLT						= (1u << 7),
@@ -213,6 +224,7 @@ enum {
 	CPU_BASED_PAUSE						= (1u << 30),
 	CPU_BASED_SECONDARY_CTLS			= (1u << 31),
 
+	// Secondary Processor-Based VM-Execution Controls
 	CPU_BASED2_VIRTUAL_APIC				= (1u << 0),
 	CPU_BASED2_EPT						= (1u << 1),
 	CPU_BASED2_DESC_TABLE				= (1u << 2),
@@ -242,8 +254,10 @@ enum {
 	CPU_BASED2_ENCLV_EXIT_MAP			= (1u << 28),
 
 	VMX_EPT_VPID_SUPPORT_AD				= (1u << 21),
+	VMX_EPT_VPID_ADV_VMEXIT_INFO		= (1u << 22),
 	VMX_EPT_VPID_SUPPORT_EXONLY			= (1u << 0),
 
+	// VM-Exit Controls
 	VMEXIT_SAVE_DBG_CONTROLS			= (1u << 2),
 	VMEXIT_HOST_IA32E					= (1u << 9),
 	VMEXIT_LOAD_IA32_PERF_GLOBAL_CTRL	= (1u << 12),
@@ -257,7 +271,9 @@ enum {
 	VMEXIT_PT_CONCEAL_VMX				= (1u << 24),
 	VMEXIT_CLEAR_IA32_RTIT_CTL			= (1u << 25),
 	VMEXIT_LOAD_CET_STATE				= (1u << 28),
+	VMEXIT_LOAD_PKRS					= (1u << 29),
 
+	// VM-Entry Controls
 	VMENTRY_LOAD_DBG_CONTROLS			= (1u << 2),
 	VMENTRY_GUEST_IA32E					= (1u << 9),
 	VMENTRY_SMM							= (1u << 10),
@@ -269,7 +285,10 @@ enum {
 	VMENTRY_PT_CONCEAL_VMX				= (1u << 17),
 	VMENTRY_LOAD_IA32_RTIT_CTL			= (1u << 18),
 	VMENTRY_LOAD_CET_STATE				= (1u << 20),
+	VMENTRY_LOAD_PKRS					= (1u << 22),
 };
+
+// VMX Basic Exit Reasons
 
 enum {
 	VMX_REASON_EXC_NMI					= 0,
@@ -410,6 +429,7 @@ enum {
 
 enum {
 	IRQ_INFO_EXT_IRQ					= (0u << 8),
+	IRQ_INFO_VECTOR_MASK				= ((1u << 8) - 1),
 	IRQ_INFO_NMI						= (2u << 8),
 	IRQ_INFO_HARD_EXC					= (3u << 8),
 	IRQ_INFO_SOFT_IRQ					= (4u << 8),

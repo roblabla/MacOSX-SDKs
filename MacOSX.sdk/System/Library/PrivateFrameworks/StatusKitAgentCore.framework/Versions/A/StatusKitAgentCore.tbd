@@ -1,0 +1,26 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           16AE11C5-A25F-3732-8367-000E560D617A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D4C18EA3-D117-37C7-86C1-73E8FFFCEE3E
+install-name:    '/System/Library/PrivateFrameworks/StatusKitAgentCore.framework/Versions/A/StatusKitAgentCore'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _SKAChannelManagerErrorDomain, _SKAChannelManagerErrorRetryIntervalKey, 
+                       _SKPushManagerErrorDomain ]
+    objc-classes:    [ SKAChannelManager, SKADatabaseChannel, SKADatabaseInvitedUser, 
+                       SKADatabaseManager, SKADatabasePendingPublishRequest, SKADatabaseProvider, 
+                       SKADatabaseReceivedInvitation, SKADatabaseRemovedUser, SKADatabaseStatus, 
+                       SKADatabaseSubscriptionAssertion, SKADatabaseTransientSubscriptionHistory, 
+                       SKAGeneratedEncryptionKey, SKAInvitationManager, SKAMessagingProvider, 
+                       SKAPushManager, SKAStatusEncryptionManager, SKAStatusPublishingManager, 
+                       SKAStatusPublishingServiceClient, SKAStatusPublishingServiceClientConnection, 
+                       SKAStatusReceivingManager, SKAStatusServer, SKAStatusSubscriptionManager, 
+                       SKAStatusSubscriptionServiceClient, SKAStatusSubscriptionServiceClientConnection, 
+                       SKAStatusUnencryptedEnvelope, SKASystemMonitor ]
+...

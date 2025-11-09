@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           8E30DA89-8DBB-3CDE-9431-2B2523A04B21
+    value:           3DC85069-B034-306E-8436-4B3B836A1AAD
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           A9905DEB-E1D2-301D-AFD0-A1DE80A0616E
+    value:           D6C6D182-EB09-3D74-BC05-9EF84BBDA0B3
 install-name:    '/System/iOSSupport/System/Library/Frameworks/Messages.framework/Versions/A/Messages'
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

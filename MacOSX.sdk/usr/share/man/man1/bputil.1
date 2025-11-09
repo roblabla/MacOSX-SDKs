@@ -6,7 +6,7 @@
 .Nd Utility to precisely modify the security settings on Apple Silicon Macs.
 .Sh SYNOPSIS
 .Nm
-.Op Fl ldfgnmkcas                      \" [-ldfgnmkcas]
+.Op Fl ldefgnmkcas                     \" [-ldefgnmkcas]
 .Op Fl u Ar username                   \" [-u username]
 .Op Fl p Ar password                   \" [-p password]
 .Op Fl v Ar APFS Volume Group UUID     \" [-v APFS Volume Group UUID]
@@ -42,7 +42,7 @@ If this is not specified, an interactive prompt will request the password.
 .Pp
 .It Fl v, Fl -vuid Ar AABBCCDD-EEFF-0011-2233-445566778899\n"
 .Pp
-Specify the APFS Volume Group UUID of the OS intended to have its policy changed. If no option is specified, the default value will be set to the APFS Volume Group UUID of the running OS. The Volume Group UUID for a given OS can be found with 'diskutil apfs listVolumeGroups'.
+Specify the APFS Volume Group UUID of the OS intended to have its policy changed. If no option is specified, and there are multiple OS installations detected, an interactive prompt will request the UUID. The Volume Group UUID for a given OS can be found with 'diskutil apfs listVolumeGroups'.
 .Pp
 .Pp
 .It Fl l, -debug-logging
@@ -53,6 +53,11 @@ Enables verbose logging to assist in debugging any issues associated with changi
 .It Fl d, -display-policy
 .Pp
 Display the detailed contents of the LocalPolicy. This will show specific 4-character "tags" in the Apple Image4 data structure which is used to capture the customer-specified security policy. More details about the displayed entries are available in the "Apple Platform Security" website documentation. If the system has multiple bootable volumes, an interactive prompt will ask to select a volume to display the policy for.
+.Pp
+.Pp
+.It Fl e, -display-all-policies
+.Pp
+Display the detailed contents of the LocalPolicy for every OS installation.
 .Pp
 .Pp
 .It Fl f, -full-security
@@ -82,13 +87,13 @@ Boot environment requirements: 1TR.
 .Pp
 Because this option automatically downgrades to Reduced Security mode if not already true, selecting this option will make your system easier to compromise!
 .Pp
-The AuxilaryKernelCache is a SEP-signed boot object which can be verified and loaded into kernel memory before that memory is restricted to being non-writable by a "Configurable Text Read-only Region" (CTRR) hardware register. Introducing 3rd party kernel extensions can introduce architectural or implementation flaws into the kernel, which can lead to system compromise. In order to achieve iOS-like security properties, 3rd party kexts must be denied by default, and only loadable if the customer consciously opts in to lowering their security from 1TR.
+The AuxiliaryKernelCache is a SEP-signed boot object which can be verified and loaded into kernel memory before that memory is restricted to being non-writable by a "Configurable Text Read-only Region" (CTRR) hardware register. Introducing 3rd party kernel extensions can introduce architectural or implementation flaws into the kernel, which can lead to system compromise. In order to achieve iOS-like security properties, 3rd party kexts must be denied by default, and only loadable if the customer consciously opts in to lowering their security from 1TR.
 .Pp
 Boot environment requirements: 1TR.
 .Pp
 .It Fl c, -disable-kernel-ctrr
 .Pp
-Because this option automatically downgrades to Reduced Security mode if not already true, selecting this option will make your system easier to compromise!
+Because this option automatically downgrades to Permissive Security mode if not already true, selecting this option will make your system easier to compromise!
 .Pp
 This disables the enforcement of the "Configurable Text Read-only Region" (CTRR) hardware register that marks kernel memory as non-writable. This is sometimes required for performing actions such as using dynamic DTrace code hooks to profile kernel behavior or perform 3rd party kernel extension debugging. However, the lack of CTRR enforcement makes it much easier for an attacker to modify the kernel with exploits.
 .Pp
@@ -96,7 +101,7 @@ Boot environment requirements: 1TR.
 .Pp
 .It Fl a, -disable-boot-args-restriction
 .Pp
-Because this option automatically downgrades to Reduced Security mode if not already true, selecting this option will make your system easier to compromise!
+Because this option automatically downgrades to Permissive Security mode if not already true, selecting this option will make your system easier to compromise!
 .Pp
 The macOS kernel accepts a variety of configuration options via an nvram variable named "boot-args". However, some of these options direct the kernel to reduce some security enforcement. In order to achieve iOS-like security properties, this security-downgrading behavior needs to be denied by default, and only available if the customer consciously opts in to lowering their security from 1TR.
 .Pp

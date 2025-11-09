@@ -2,7 +2,7 @@
  *  AudioVideoBridging.h
  *  AudioVideoBridging
  *
- *  Copyright (c) 2010-2014 Apple Inc. All rights reserved.
+ *  Copyright (c) 2010-2021 Apple Inc. All rights reserved.
  *
  */
 
@@ -17,6 +17,7 @@
 #import <AudioVideoBridging/AVBEthernetInterface.h>
 
 #import <AudioVideoBridging/AVBMACAddress.h>
+#import <AudioVideoBridging/AVBIPAddress.h>
 
 //Generic Control Protocols
 #import <AudioVideoBridging/AVB1722ControlInterface.h>

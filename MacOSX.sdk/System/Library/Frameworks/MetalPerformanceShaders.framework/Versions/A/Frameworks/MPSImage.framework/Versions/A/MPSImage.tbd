@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           860DA94F-2106-380A-A90A-CA4979A06777
+    value:           D8EC5A4D-8C9B-3CA4-8BF0-66922AC80328
   - target:          x86_64-maccatalyst
-    value:           860DA94F-2106-380A-A90A-CA4979A06777
+    value:           D8EC5A4D-8C9B-3CA4-8BF0-66922AC80328
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B489F13-738D-30BD-80B8-E550CD37DB81
+    value:           1751FB39-315E-3DD5-B2B1-1105F091E0C8
   - target:          arm64e-maccatalyst
-    value:           6B489F13-738D-30BD-80B8-E550CD37DB81
+    value:           1751FB39-315E-3DD5-B2B1-1105F091E0C8
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSImage.framework/Versions/A/MPSImage'
-current-version: 124.4.12
+current-version: 125.0.30
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ MPSNeuralNetwork, MetalPerformanceShaders ]
+    clients:         [ MPSImage, MPSNeuralNetwork, MetalPerformanceShaders ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MPSSubTileEncode ]
     objc-classes:    [ MPSBinaryImageKernel, MPSImageAdd, MPSImageAreaMax, MPSImageAreaMin, 
@@ -35,16 +35,20 @@ exports:
                        MPSImageIntegral, MPSImageIntegralOfSquares, MPSImageLanczosScale, 
                        MPSImageLaplacian, MPSImageLaplacianPyramid, MPSImageLaplacianPyramidAdd, 
                        MPSImageLaplacianPyramidSubtract, MPSImageMedian, MPSImageMultiply, 
-                       MPSImageNormalizedHistogram, MPSImageReduceColumnMax, MPSImageReduceColumnMean, 
-                       MPSImageReduceColumnMin, MPSImageReduceColumnSum, MPSImageReduceRowMax, 
-                       MPSImageReduceRowMean, MPSImageReduceRowMin, MPSImageReduceRowSum, 
+                       MPSImageNormalizedHistogram, MPSImagePyramid, MPSImageReduceColumnMax, 
+                       MPSImageReduceColumnMean, MPSImageReduceColumnMin, MPSImageReduceColumnSum, 
+                       MPSImageReduceRowMax, MPSImageReduceRowMean, MPSImageReduceRowMin, 
+                       MPSImageReduceRowSum, MPSImageReduceUnary, MPSImageScale, 
                        MPSImageScreenTelemetry, MPSImageSobel, MPSImageSpatioTemporalGuidedFilter, 
                        MPSImageSpatioTemporalGuidedFilterDescriptor, MPSImageStatisticsMean, 
                        MPSImageStatisticsMeanAndVariance, MPSImageStatisticsMinAndMax, 
                        MPSImageSubtract, MPSImageTent, MPSImageThresholdBinary, MPSImageThresholdBinaryInverse, 
                        MPSImageThresholdToZero, MPSImageThresholdToZeroInverse, MPSImageThresholdTruncate, 
                        MPSImageTranspose, MPSMatrixCopyToImage, MPSUnaryImageKernel ]
-    objc-ivars:      [ MPSBinaryImageKernel._encode, MPSBinaryImageKernel._encodeData, 
+    objc-ivars:      [ MPSBinaryImageKernel._checkFlags, MPSBinaryImageKernel._encode, 
+                       MPSBinaryImageKernel._encodeData, MPSBinaryImageKernel._preferredTileSize, 
+                       MPSBinaryImageKernel._primaryEdgeMode, MPSBinaryImageKernel._secondaryEdgeMode, 
+                       MPSUnaryImageKernel._checkFlags, MPSUnaryImageKernel._edgeMode, 
                        MPSUnaryImageKernel._encode, MPSUnaryImageKernel._encodeData, 
-                       MPSUnaryImageKernel._getPreferredTileSize ]
+                       MPSUnaryImageKernel._encodeKernelDAG, MPSUnaryImageKernel._getPreferredTileSize ]
 ...

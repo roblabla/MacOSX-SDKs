@@ -3,7 +3,7 @@
  
      Contains:   Basic Algebraic Operations for AltiVec
  
-     Version:    vecLib-760.100
+     Version:    vecLib-793.0
  
      Copyright:  Copyright (c) 1999-2021 by Apple Inc. All rights reserved.
  
@@ -21,9 +21,6 @@
 #include "vecLibTypes.h"
 
 #include <os/availability.h>
-#if __has_include( <TargetConditionals.h> )
-#include <TargetConditionals.h>
-#endif
 
 #if PRAGMA_ONCE
 #pragma once
@@ -56,8 +53,6 @@ extern "C" {
 	#define __nonnull
 #endif
 
-
-#if TARGET_OS_OSX
 
 /*                                                                                  
   This section is a collection of algebraic functions that uses the SIMD
@@ -344,8 +339,6 @@ extern vUInt32
 vA128Shift(
   vUInt32   vA,
   vUInt8    vShiftFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
-
-#endif  /* TARGET_OS_OSX */
 
 
 #if __has_feature(assume_nonnull)

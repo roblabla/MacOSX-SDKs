@@ -68,12 +68,14 @@ typedef UIAccessibilityCustomRotorItemResult *_Nullable(^UIAccessibilityCustomRo
 
 // UIAccessibilityCustomRotorSearchPredicate is a container for search parameters.
 // It should be examined to determine the next matching UIAccessibilityCustomRotorItemResult.
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIAccessibilityCustomRotorSearchPredicate : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+@interface UIAccessibilityCustomRotorSearchPredicate : NSObject
 @property (nonatomic, retain) UIAccessibilityCustomRotorItemResult *currentItem;
 @property (nonatomic) UIAccessibilityCustomRotorDirection searchDirection;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIAccessibilityCustomRotor : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+@interface UIAccessibilityCustomRotor : NSObject
 
 - (instancetype)initWithName:(NSString *)name itemSearchBlock:(UIAccessibilityCustomRotorSearch)itemSearchBlock;
 - (instancetype)initWithAttributedName:(NSAttributedString *)attributedName itemSearchBlock:(UIAccessibilityCustomRotorSearch)itemSearchBlock API_AVAILABLE(ios(11.0), tvos(11.0));
@@ -97,7 +99,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIAccessibilityCustomRotor : NS
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIAccessibilityCustomRotorItemResult : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+@interface UIAccessibilityCustomRotorItemResult : NSObject
 
 - (instancetype)initWithTargetElement:(id<NSObject>)targetElement targetRange:(nullable UITextRange *)targetRange;
 

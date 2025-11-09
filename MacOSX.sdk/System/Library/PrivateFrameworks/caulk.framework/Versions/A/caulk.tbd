@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8F72B5EE-6E11-3019-8ADC-96D4BFC6BB1F
+    value:           C93A53A1-5B5A-3A2C-9025-15374504C27D
   - target:          x86_64-maccatalyst
-    value:           8F72B5EE-6E11-3019-8ADC-96D4BFC6BB1F
+    value:           C93A53A1-5B5A-3A2C-9025-15374504C27D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2A9F1591-10AC-3FEE-851F-2BB6E3686744
+    value:           8538C6AF-EF01-30CD-AE0C-9F9F3B557743
   - target:          arm64e-maccatalyst
-    value:           2A9F1591-10AC-3FEE-851F-2BB6E3686744
+    value:           8538C6AF-EF01-30CD-AE0C-9F9F3B557743
 install-name:    '/System/Library/PrivateFrameworks/caulk.framework/Versions/A/caulk'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -82,11 +82,13 @@ exports:
                        __ZN5caulk4mach12os_eventlink26timed_wait_signal_or_errorEd, 
                        __ZN5caulk4mach12os_eventlink4makeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN5caulk4mach12os_eventlink4makeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEj, 
-                       __ZN5caulk4mach12os_eventlink9associateEv, __ZN5caulk4mach12os_workgroup4joinEP32os_workgroup_join_token_opaque_s, 
+                       __ZN5caulk4mach12os_eventlink9associateEv, __ZN5caulk4mach12os_workgroup21make_with_workload_idERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_j, 
+                       __ZN5caulk4mach12os_workgroup4joinEP32os_workgroup_join_token_opaque_s, 
                        __ZN5caulk4mach12os_workgroup4makeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN5caulk4mach12os_workgroup4makeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEj, 
                        __ZN5caulk4mach12os_workgroupD0Ev, __ZN5caulk4mach12os_workgroupD1Ev, 
-                       __ZN5caulk4mach12os_workgroupD2Ev, __ZN5caulk4mach21os_workgroup_interval4makeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE28os_workgroup_interval_type_t, 
+                       __ZN5caulk4mach12os_workgroupD2Ev, __ZN5caulk4mach21os_workgroup_interval21make_with_workload_idERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_28os_workgroup_interval_type_t, 
+                       __ZN5caulk4mach21os_workgroup_interval4makeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE28os_workgroup_interval_type_t, 
                        __ZN5caulk4mach21os_workgroup_intervalD0Ev, __ZN5caulk4mach21os_workgroup_intervalD1Ev, 
                        __ZN5caulk4mach21os_workgroup_intervalD2Ev, __ZN5caulk4mach28find_unused_vm_address_rangeEmm, 
                        __ZN5caulk4mach6thread13get_qos_classEP17_opaque_pthread_t, 
@@ -111,7 +113,8 @@ exports:
                        __ZN5caulk4mach9semaphoreC1Ev, __ZN5caulk4mach9semaphoreC2EOS1_, 
                        __ZN5caulk4mach9semaphoreC2Ej, __ZN5caulk4mach9semaphoreC2Ev, 
                        __ZN5caulk4mach9semaphoreD1Ev, __ZN5caulk4mach9semaphoreD2Ev, 
-                       __ZN5caulk4mach9semaphoreaSEOS1_, __ZN5caulk5alloc14page_allocator10deallocateENS0_5blockEm, 
+                       __ZN5caulk4mach9semaphoreaSEOS1_, __ZN5caulk5alloc14base_allocator3logEv, 
+                       __ZN5caulk5alloc14page_allocator10deallocateENS0_5blockEm, 
                        __ZN5caulk5alloc14page_allocator8allocateEmm, __ZN5caulk5alloc15memory_resourceD0Ev, 
                        __ZN5caulk5alloc15memory_resourceD1Ev, __ZN5caulk5alloc15memory_resourceD2Ev, 
                        __ZN5caulk5alloc16malloc_allocator10deallocateENS0_5blockEm, 
@@ -156,8 +159,8 @@ exports:
                        __ZNK5caulk5alloc21malloc_zone_allocator8describeERNS0_14base_allocator9formatterE, 
                        __ZNK5caulk5alloc22guarded_page_allocator8describeERNS0_14base_allocator9formatterE, 
                        __ZNK5caulk5alloc7details27caching_page_allocator_base8describeERNS0_14base_allocator9formatterE, 
-                       __ZNK5caulk7xstring19materialize_storageEv, __ZNK5caulk7xstring20materialize_cfstringEv, 
-                       __ZNK5caulk7xstring4sizeEv, __ZNK5caulk7xstring5c_strEv, __ZNK5caulk7xstring5emptyEv, 
+                       __ZNK5caulk7xstring20materialize_cfstringEv, __ZNK5caulk7xstring4sizeEv, 
+                       __ZNK5caulk7xstring5c_strEv, __ZNK5caulk7xstring5emptyEv, 
                        __ZNK5caulk7xstring7compareERKS0_, __ZTIN5caulk10concurrent7messageE, 
                        __ZTIN5caulk4mach12os_workgroupE, __ZTIN5caulk4mach21os_workgroup_intervalE, 
                        __ZTIN5caulk5alloc15memory_resourceE, __ZTSN5caulk10concurrent7messageE, 

@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @interface UIPasteConfiguration : NSObject <NSSecureCoding, NSCopying>
 
 @property (nonatomic, copy) NSArray<NSString *> *acceptableTypeIdentifiers;

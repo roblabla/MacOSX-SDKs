@@ -21,7 +21,8 @@ typedef NS_ENUM(NSInteger, UIImpactFeedbackStyle) {
 };
 
 // UIImpactFeedbackGenerator is used to give user feedback when an impact between UI elements occurs
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos, watchos) @interface UIImpactFeedbackGenerator : UIFeedbackGenerator
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
+@interface UIImpactFeedbackGenerator : UIFeedbackGenerator
 
 - (instancetype)initWithStyle:(UIImpactFeedbackStyle)style;
 

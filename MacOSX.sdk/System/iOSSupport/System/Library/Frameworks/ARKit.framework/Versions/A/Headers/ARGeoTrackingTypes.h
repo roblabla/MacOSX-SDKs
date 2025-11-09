@@ -11,6 +11,24 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ Keeps track of where an altitude value came from and informs the user about the expected accuracy.
+ */
+API_AVAILABLE(ios(14.0))
+typedef NS_ENUM(NSInteger, ARAltitudeSource) {
+    /** Altitude could not be determined (yet). */
+    ARAltitudeSourceUnknown,
+
+    /** ARKit determined altitude based on a coarse digital elevation model. The provided value is too imprecise to be used at close range, but is sufficient to anchor far away content. */
+    ARAltitudeSourceCoarse,
+
+    /** ARKit determined altitude based on a high resolution digital elevation model. */
+    ARAltitudeSourcePrecise,
+
+    /** Altitude was provided by the user. */
+    ARAltitudeSourceUserDefined
+} NS_SWIFT_NAME(ARGeoAnchor.AltitudeSource);
+
+/**
  A value describing geo tracking state.
  */
 API_AVAILABLE(ios(14.0))

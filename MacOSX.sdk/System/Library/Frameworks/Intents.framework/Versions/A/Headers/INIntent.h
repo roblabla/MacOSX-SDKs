@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class INImage;
 @class INParameter;
 @class INParameterImage;
+@class INIntentDonationMetadata;
 
 API_AVAILABLE(ios(10.0), macos(11.0), watchos(3.2), tvos(14.0))
 @interface INIntent : NSObject <NSCopying, NSSecureCoding>
@@ -29,6 +30,9 @@ API_AVAILABLE(ios(10.0), macos(11.0), watchos(3.2), tvos(14.0))
 
 // Defines additional contexts in which this intent is relevant to be suggested to the user. Applies to intents donated using INInteraction or set as suggested using INVoiceShortcutCenter.
 @property (readwrite, assign, NS_NONATOMIC_IOSONLY) INShortcutAvailabilityOptions shortcutAvailability API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos);
+
+// A metadata object to attach additional metadata to this intent when donated
+@property (copy, nullable, nonatomic) INIntentDonationMetadata *donationMetadata API_AVAILABLE(ios(15.0), macos(12.0), watchos(8.0), tvos(15.0));
 
 // Set an image associated with a parameter on the receiver. This image will be used in display of the receiver throughout the system.
 - (void)setImage:(INImage * _Nullable)image forParameterNamed:(NSString *)parameterName API_AVAILABLE(ios(12.0), watchos(5.0)) NS_REFINED_FOR_SWIFT;

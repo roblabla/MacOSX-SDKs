@@ -8,14 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
-#import <CoreGraphics/CGGeometry.h>
+#import <UIKit/UIGeometry.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) @interface UIPointerRegion : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIPointerRegion : NSObject <NSCopying>
 
 @property (nonatomic, readonly) CGRect rect;
 @property (nonatomic, readonly, nullable) id<NSObject> identifier NS_REFINED_FOR_SWIFT;
+
+/// Axes along which this region latches when the primary mouse button is pressed.
+/// When set, the UIPointerStyle associated with this region will "lock in" and allow free-form movement along the specified axes.
+@property (nonatomic) UIAxis latchingAxes;
 
 /*!
  * @abstract Creates a UIPointerRegion with the supplied rect and optional identifier.

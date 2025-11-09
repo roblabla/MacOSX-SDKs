@@ -275,6 +275,41 @@ NS_ASSUME_NONNULL_BEGIN
                                                 error:(NSError* _Nullable*)error  NS_SWIFT_UNAVAILABLE("Please use the refined for Swift API");
 
 /*!
+ * @brief       Return the device descriptor
+ * @discussion  This method uses descriptorWithType to retrieve the device descriptor.
+ * @return      Pointer to the device descriptor, or nil if the service is terminating.
+ */
+@property(readonly, nullable) const IOUSBDeviceDescriptor* deviceDescriptor;
+
+/*!
+ * @brief       Return the capability descriptors of the device
+ * @discussion  This method uses descriptorWithType to return the device's BOS descriptors
+ * @return      Pointer to the BOS descriptor if found, otherwise nil.
+ */
+@property(readonly, nullable) const IOUSBBOSDescriptor* capabilityDescriptors;
+
+/*!
+ * @brief       Return the configuration descriptor at a specified index
+ * @discussion  This method uses descriptorWithType to retrieve the configuration descriptor.
+ * @param       index Descriptor index value
+ * @return      Pointer of the configuration descriptor if found, otherwise nil. An IOReturn error
+ *              code will be reported on failure.
+ */
+-(nullable const IOUSBConfigurationDescriptor*)configurationDescriptorWithIndex:(NSUInteger)index
+                                                                          error:(NSError* _Nullable*)error;
+
+/*!
+ * @brief       Return the configuration descriptor with a specified value
+ * @discussion  This method uses descriptorWithType to search for a configuration descriptor with a
+ *              specific <code>bConfigurationValue</code> field.
+ * @param       configurationValue Value to match
+ * @return      Pointer of the configuration descriptor if found, otherwise nil. An IOReturn error
+ *              code will be reported on failure.
+ */
+-(nullable const IOUSBConfigurationDescriptor*)configurationDescriptorWithConfigurationValue:(NSUInteger)configurationValue
+                                                                                       error:(NSError* _Nullable*)error;
+
+/*!
  * @brief       Returns the string from a string descriptor
  * @discussion  This method uses descriptorWithType to retrieve the string descriptor.
  * @param       index Descriptor index value.  Low byte of <code>wValue</code> of the

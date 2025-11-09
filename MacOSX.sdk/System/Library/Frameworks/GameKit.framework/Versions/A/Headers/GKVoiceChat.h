@@ -40,10 +40,12 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 
 @end
 
+__WATCHOS_PROHIBITED
 @interface GKVoiceChat (Deprecated)
 @property(copy, NS_NONATOMIC_IOSONLY) void(^playerStateUpdateHandler)(NSString *playerID, GKVoiceChatPlayerState state) NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "use setPlayerVoiceChatStateDidChangeHandler:") ;
 @end
 
+__WATCHOS_PROHIBITED
 @interface GKVoiceChat (Obsoleted)
 /*** This property is obsolete. ***/
 @property(readonly, nullable, NS_NONATOMIC_IOSONLY) NSArray<NSString *> *playerIDs NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "use players") ;

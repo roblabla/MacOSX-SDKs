@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1E343258-DB82-3AF2-8D59-587901638678
+    value:           D20DB9A1-EC21-3328-84CF-80B7FBC63CF1
   - target:          x86_64-maccatalyst
-    value:           1E343258-DB82-3AF2-8D59-587901638678
+    value:           D20DB9A1-EC21-3328-84CF-80B7FBC63CF1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4BB3AC8B-9420-3067-B89F-21FC7399C1F1
+    value:           C7982865-B015-39DD-9733-47A9BDDA7A24
   - target:          arm64e-maccatalyst
-    value:           4BB3AC8B-9420-3067-B89F-21FC7399C1F1
+    value:           C7982865-B015-39DD-9733-47A9BDDA7A24
 install-name:    '/System/Library/PrivateFrameworks/Rapport.framework/Versions/A/Rapport'
 current-version: 0
 compatibility-version: 0
@@ -38,11 +38,13 @@ exports:
                        _RPLegacyServiceTypeWACAirPlay, _RPLegacyServiceTypeWACGeneric, 
                        _RPMessageKeySpeakText, _RPNestedErrorF, _RPOptionAllowUnauthenticated, 
                        _RPOptionBTHighPriority, _RPOptionDataLinkType, _RPOptionEventID, 
-                       _RPOptionFailIfAsleep, _RPOptionInterest, _RPOptionLength, 
-                       _RPOptionMoreComing, _RPOptionPeerAddressString, _RPOptionPeerVerifiedIdentity, 
-                       _RPOptionRequestID, _RPOptionSelfAddressString, _RPOptionSenderID, 
-                       _RPOptionSenderIDSDeviceID, _RPOptionStatusFlags, _RPOptionTimeoutSeconds, 
-                       _RPOptionXID, _RPProfileIDDuetSync, _RPRequestIDAny, _RPRequestIDIdentify, 
+                       _RPOptionFailIfAsleep, _RPOptionIDSSenderCorrelationID, _RPOptionInterest, 
+                       _RPOptionLength, _RPOptionMessageIsChatty, _RPOptionMoreComing, 
+                       _RPOptionPeerAddressString, _RPOptionPeerProxyIdentifier, 
+                       _RPOptionPeerVerifiedIdentity, _RPOptionRequestID, _RPOptionSelfAddressString, 
+                       _RPOptionSenderID, _RPOptionSenderIDSDeviceID, _RPOptionSenderModelID, 
+                       _RPOptionStatusFlags, _RPOptionTimeoutSeconds, _RPOptionXID, 
+                       _RPProfileIDDuetSync, _RPRequestIDAny, _RPRequestIDIdentify, 
                        _RPRequestIDSpeak, _RPTopicNone, _RPTopicNowPlayingArtwork, 
                        _RPTopicNowPlayingProgress, _RPTopicNowPlayingText, _RPVersionToSourceVersionString, 
                        _gRPPrivateDaemon ]

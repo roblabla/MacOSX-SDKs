@@ -33,29 +33,29 @@ NS_ASSUME_NONNULL_BEGIN
 /*
  Returns the number of accessibility elements in the container.
  */
-- (NSInteger)accessibilityElementCount;
+- (NSInteger)accessibilityElementCount NS_SWIFT_UI_ACTOR;
 
 /*
  Returns the accessibility element in order, based on index.
  default == nil
  */
-- (nullable id)accessibilityElementAtIndex:(NSInteger)index;
+- (nullable id)accessibilityElementAtIndex:(NSInteger)index NS_SWIFT_UI_ACTOR;
 
 /*
  Returns the ordered index for an accessibility element
  default == NSNotFound
  */
-- (NSInteger)indexOfAccessibilityElement:(id)element;
+- (NSInteger)indexOfAccessibilityElement:(id)element NS_SWIFT_UI_ACTOR;
 
 // A list of container elements managed by the receiver.
 // This can be used as an alternative to implementing the dynamic methods.
 // default == nil
-@property (nullable, nonatomic, strong) NSArray *accessibilityElements API_AVAILABLE(ios(8.0));
+@property (nullable, nonatomic, strong) NSArray *accessibilityElements API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR;
 
 // Some containers provide more context for accessibility elements, such as tables or lists.
 // Set this property so that assistive technologies can output more information.
 // default == UIAccessibilityContainerTypeNone
-@property (nonatomic) UIAccessibilityContainerType accessibilityContainerType API_AVAILABLE(ios(11.0));
+@property (nonatomic) UIAccessibilityContainerType accessibilityContainerType API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR;
 
 @end
 
@@ -64,7 +64,8 @@ NS_ASSUME_NONNULL_BEGIN
  convey more information specific to tables that contain structured data.
  */
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) @protocol UIAccessibilityContainerDataTableCell <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
+@protocol UIAccessibilityContainerDataTableCell <NSObject>
 @required
 
 // The row/column index + the row/column span.
@@ -74,7 +75,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) @protocol UIAccessibilityContainerDataTabl
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) @protocol UIAccessibilityContainerDataTable <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
+@protocol UIAccessibilityContainerDataTable <NSObject>
 @required
 
 // Return the cell element for a specific row/column, including elements that span rows/columns.

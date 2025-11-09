@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9D9FC91B-2544-3D53-A7AC-DD2E2961DE16
+    value:           EA9AD7B9-6C4D-37E1-86D9-F0E5B9EE65F3
   - target:          x86_64-maccatalyst
-    value:           9D9FC91B-2544-3D53-A7AC-DD2E2961DE16
+    value:           EA9AD7B9-6C4D-37E1-86D9-F0E5B9EE65F3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           73EFB41C-E94E-309B-8F65-FF2882CC0ED4
+    value:           A81A87AC-F278-3759-A0D6-B28D0BC4E384
   - target:          arm64e-maccatalyst
-    value:           73EFB41C-E94E-309B-8F65-FF2882CC0ED4
+    value:           A81A87AC-F278-3759-A0D6-B28D0BC4E384
 install-name:    '/System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -55,7 +55,8 @@ exports:
                        _IOAccelDisplayPipeCreate, _IOAccelDisplayPipeCreateSetVBLNotifyPort, 
                        _IOAccelDisplayPipeGetDisplayModePipeScalerSetup, _IOAccelDisplayPipeGetTypeID, 
                        _IOAccelDisplayPipeRelease, _IOAccelDisplayPipeRequestVBLNotifyCallback, 
-                       _IOAccelDisplayPipeSetTransactionNotifyPort, _IOAccelDisplayPipeTransactionBegin, 
+                       _IOAccelDisplayPipeSetTransactionNotifyPort, _IOAccelDisplayPipeSetVRRTimeStampHandler, 
+                       _IOAccelDisplayPipeSetVerticalBlankingExtensions, _IOAccelDisplayPipeTransactionBegin, 
                        _IOAccelDisplayPipeTransactionEnd, _IOAccelDisplayPipeTransactionSetCompletionHandler, 
                        _IOAccelDisplayPipeTransactionSetCompletionHandlerExt, _IOAccelDisplayPipeTransactionSetOptions, 
                        _IOAccelDisplayPipeTransactionSetPipeColorMatrix, _IOAccelDisplayPipeTransactionSetPipeColorMatrixExtended, 
@@ -88,22 +89,23 @@ exports:
                        _IOAccelResourceCheckSysMem, _IOAccelResourceClientSharedRetain, 
                        _IOAccelResourceCreate, _IOAccelResourceCreateAllocationIdentifierSet, 
                        _IOAccelResourceCreateDataBuffer, _IOAccelResourceDirtyBufferRange, 
-                       _IOAccelResourceDirtyFaceLevels, _IOAccelResourceFinishEvent, 
-                       _IOAccelResourceFinishSysMem, _IOAccelResourceGetClientShared, 
-                       _IOAccelResourceGetClientSharedPrivate, _IOAccelResourceGetDataBytes, 
-                       _IOAccelResourceGetDataSize, _IOAccelResourceGetGPUVirtualAddress, 
-                       _IOAccelResourceGetGPUVirtualAddressLength, _IOAccelResourceGetGlobalTraceObjectID, 
-                       _IOAccelResourceGetInfo, _IOAccelResourceGetPhysicalOffset, 
-                       _IOAccelResourceGetPrivate, _IOAccelResourceGetProtectionOptions, 
-                       _IOAccelResourceGetResidentDataSize, _IOAccelResourceGetTypeID, 
-                       _IOAccelResourceListAddResource, _IOAccelResourceListAddResourceNoThreshold, 
-                       _IOAccelResourceListDestroy, _IOAccelResourceListInit, _IOAccelResourceListMerge, 
-                       _IOAccelResourceListMergeLists, _IOAccelResourceListReset, 
-                       _IOAccelResourceListShowResources, _IOAccelResourcePageoff, 
-                       _IOAccelResourceRelease, _IOAccelResourceSetPurgeable, _IOAccelResourceTestEvent, 
-                       _IOAccelSharedAllocateFenceMemory, _IOAccelSharedConnectPeer, 
-                       _IOAccelSharedCreate, _IOAccelSharedCreateDeviceShmem, _IOAccelSharedDestroyDeviceShmem, 
-                       _IOAccelSharedDirtyResourceBufferRange, _IOAccelSharedDirtyResourceFaceLevels, 
+                       _IOAccelResourceDirtyFaceLevels, _IOAccelResourceDirtyVendorCommand, 
+                       _IOAccelResourceFinishEvent, _IOAccelResourceFinishSysMem, 
+                       _IOAccelResourceGetClientShared, _IOAccelResourceGetClientSharedPrivate, 
+                       _IOAccelResourceGetDataBytes, _IOAccelResourceGetDataSize, 
+                       _IOAccelResourceGetGPUVirtualAddress, _IOAccelResourceGetGPUVirtualAddressLength, 
+                       _IOAccelResourceGetGlobalTraceObjectID, _IOAccelResourceGetInfo, 
+                       _IOAccelResourceGetPhysicalOffset, _IOAccelResourceGetPrivate, 
+                       _IOAccelResourceGetProtectionOptions, _IOAccelResourceGetResidentDataSize, 
+                       _IOAccelResourceGetTypeID, _IOAccelResourceListAddResource, 
+                       _IOAccelResourceListAddResourceNoThreshold, _IOAccelResourceListDestroy, 
+                       _IOAccelResourceListInit, _IOAccelResourceListMerge, _IOAccelResourceListMergeLists, 
+                       _IOAccelResourceListReset, _IOAccelResourceListShowResources, 
+                       _IOAccelResourcePageoff, _IOAccelResourceRelease, _IOAccelResourceSetOwnerIdentity, 
+                       _IOAccelResourceSetPurgeable, _IOAccelResourceTestEvent, _IOAccelSharedAllocateFenceMemory, 
+                       _IOAccelSharedConnectPeer, _IOAccelSharedCreate, _IOAccelSharedCreateDeviceShmem, 
+                       _IOAccelSharedDestroyDeviceShmem, _IOAccelSharedDirtyResourceBufferRange, 
+                       _IOAccelSharedDirtyResourceFaceLevels, _IOAccelSharedDirtyResourceVendorCommand, 
                        _IOAccelSharedDisconnectPeer, _IOAccelSharedFlushDirtyRing, 
                        _IOAccelSharedGetAllocatedSize, _IOAccelSharedGetConnect, 
                        _IOAccelSharedGetGlobalTraceObjectID, _IOAccelSharedGetMemoryData, 

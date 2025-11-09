@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UISwipeActionsConfiguration : NSObject
 
 + (instancetype)configurationWithActions:(NSArray<UIContextualAction *> *)actions;

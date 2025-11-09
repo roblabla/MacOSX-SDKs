@@ -4,30 +4,29 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E26C7825-8331-3BCC-B734-CA346016BEA2
+    value:           F149EA79-7838-3BA5-BB5F-058787BA8D09
   - target:          x86_64-maccatalyst
-    value:           E26C7825-8331-3BCC-B734-CA346016BEA2
+    value:           F149EA79-7838-3BA5-BB5F-058787BA8D09
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C4EF365D-6BE8-33DB-AD34-783F2C4C7A91
+    value:           49E61354-5922-3DF0-89F4-515F388FB1E0
   - target:          arm64e-maccatalyst
-    value:           C4EF365D-6BE8-33DB-AD34-783F2C4C7A91
+    value:           49E61354-5922-3DF0-89F4-515F388FB1E0
 install-name:    '/System/Library/PrivateFrameworks/EmailCore.framework/Versions/A/EmailCore'
-current-version: 3654.80
+current-version: 3689.0.4
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ECAccountCacheKeyEnabled, _ECAccountCacheKeyParentAccount, 
-                       _ECAccountSchemeDataAccess, _ECAccountSchemeEWS, _ECAccountSchemeIMAP, 
-                       _ECAccountSchemeLocal, _ECAccountSchemePOP, _ECAllowNetworkActivityButLog, 
-                       _ECAssertNetworkActivityAllowed, _ECAuthSchemeAPOP, _ECAuthSchemeAppleToken, 
-                       _ECAuthSchemeClearText, _ECAuthSchemeCramMD5, _ECAuthSchemeDigestMD5, 
-                       _ECAuthSchemeExternal, _ECAuthSchemeGSSAPI, _ECAuthSchemeKPop, 
-                       _ECAuthSchemeKerberos4, _ECAuthSchemeNTLM, _ECAuthSchemeNoAuthentication, 
-                       _ECAuthSchemeOAuth2, _ECAuthenticationErrorDomain, _ECAuthenticationSchemeAPOP, 
+                       _ECAllowNetworkActivityButLog, _ECAssertNetworkActivityAllowed, 
+                       _ECAuthSchemeAPOP, _ECAuthSchemeAppleToken, _ECAuthSchemeClearText, 
+                       _ECAuthSchemeCramMD5, _ECAuthSchemeDigestMD5, _ECAuthSchemeExternal, 
+                       _ECAuthSchemeGSSAPI, _ECAuthSchemeKPop, _ECAuthSchemeKerberos4, 
+                       _ECAuthSchemeNTLM, _ECAuthSchemeNoAuthentication, _ECAuthSchemeOAuth2, 
+                       _ECAuthenticationErrorDomain, _ECAuthenticationSchemeAPOP, 
                        _ECAuthenticationSchemeCramMD5, _ECAuthenticationSchemeDigestMD5, 
                        _ECAuthenticationSchemeGSSAPI, _ECAuthenticationSchemeKerberos4, 
                        _ECAuthenticationSchemeNTLM, _ECBeginDisallowingNetworkActivity, 
@@ -95,6 +94,7 @@ exports:
                        ECEmailAddressFormatter, ECEmailAddressLists, ECEmailAddressParser, 
                        ECEmailCoreFramework, ECEncodedWordDecoder, ECEncodedWordEncoder, 
                        ECExchangeAccount, ECExternalAuthScheme, ECFlagChangeMessageAction, 
+                       ECFlagChangeMessageActionResults, ECFlagChangeMessageActionResultsBuilder, 
                        ECFlagChangeUndownloadedMessageAction, ECGSSAPIAuthScheme, 
                        ECGmailLabelChangeReplayer, ECHTMLStringAndMIMECharset, ECIDNADecoder, 
                        ECIDNAEncoder, ECIMAPAccount, ECIMAPAppendInfo, ECIMAPCopyInfo, 
@@ -103,6 +103,7 @@ exports:
                        ECLocalMessageActionResults, ECMessageFlagChange, ECMessageFlags, 
                        ECNTLMAuthScheme, ECNWActivity, ECNWConnectionWrapper, ECOAuth2AuthScheme, 
                        ECPOPAccount, ECPlainAuthScheme, ECRawMessageHeader, ECRawMessageHeaders, 
+                       ECRemoteContentParser, ECRemoteContentParserState, ECRemoteContentWebViewObserver, 
                        ECSASLAuthenticator, ECSASLClient, ECSMTPAccount, ECSecureMIMETrustEvaluation, 
                        ECServerMessage, ECSubject, ECSubjectFormatter, ECSubjectParser, 
                        ECTransferActionIMAPReplayer, ECTransferActionReplayer, ECTransferMessageAction, 

@@ -39,11 +39,19 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
 
 - (instancetype)init NS_UNAVAILABLE;
 
+#if __swift__
++ (nullable HKQuantityType *)quantityTypeForIdentifier:(HKQuantityTypeIdentifier)identifier API_DEPRECATED_WITH_REPLACEMENT("HKQuantityType(_:)", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED));
++ (nullable HKCategoryType *)categoryTypeForIdentifier:(HKCategoryTypeIdentifier)identifier API_DEPRECATED_WITH_REPLACEMENT("HKCategoryType(_:)", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED));
++ (nullable HKCharacteristicType *)characteristicTypeForIdentifier:(HKCharacteristicTypeIdentifier)identifier API_DEPRECATED_WITH_REPLACEMENT("HKCharacteristicType(_:)", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED));
++ (nullable HKCorrelationType *)correlationTypeForIdentifier:(HKCorrelationTypeIdentifier)identifier API_DEPRECATED_WITH_REPLACEMENT("HKCorrelationType(_:)", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED));
++ (nullable HKDocumentType *)documentTypeForIdentifier:(HKDocumentTypeIdentifier)identifier API_DEPRECATED_WITH_REPLACEMENT("HKDocumentType(_:)", ios(10.0, API_TO_BE_DEPRECATED), watchos(3.0, API_TO_BE_DEPRECATED));
+#else
 + (nullable HKQuantityType *)quantityTypeForIdentifier:(HKQuantityTypeIdentifier)identifier;
 + (nullable HKCategoryType *)categoryTypeForIdentifier:(HKCategoryTypeIdentifier)identifier;
 + (nullable HKCharacteristicType *)characteristicTypeForIdentifier:(HKCharacteristicTypeIdentifier)identifier;
 + (nullable HKCorrelationType *)correlationTypeForIdentifier:(HKCorrelationTypeIdentifier)identifier;
 + (nullable HKDocumentType *)documentTypeForIdentifier:(HKDocumentTypeIdentifier)identifier API_AVAILABLE(ios(10.0), watchos(3.0));
+#endif
 + (nullable HKSeriesType *)seriesTypeForIdentifier:(NSString *)identifier API_AVAILABLE(ios(11.0), watchos(4.0));
 + (HKWorkoutType *)workoutType;
 + (HKActivitySummaryType *)activitySummaryType API_AVAILABLE(ios(9.3), watchos(2.2));
@@ -94,6 +102,13 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
  @discussion    Throws an exception if there is no minimum restriction on duration for samples of this type.
  */
 @property (nonatomic, readonly) NSTimeInterval minimumAllowedDuration API_AVAILABLE(ios(13.0), watchos(6.0));
+
+/*!
+ @property      allowsRecalibrationForEstimates
+ @abstract      Returns YES if first-party samples of this type are produced using a prediction algorithm, and that algorithm supports recalibration. To recalibrate the
+                estimates for a sample type, see -[HKHealthStore recalibrateEstimatesForSampleType:atDate:completion:]
+ */
+@property (nonatomic, readonly) BOOL allowsRecalibrationForEstimates API_AVAILABLE(ios(15.0), watchos(8.0));
 
 @end
 

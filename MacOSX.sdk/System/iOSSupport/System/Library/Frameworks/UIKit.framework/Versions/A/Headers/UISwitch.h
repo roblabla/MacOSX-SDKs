@@ -19,7 +19,8 @@ typedef NS_ENUM(NSInteger, UISwitchStyle) {
     UISwitchStyleSliding         // The on/off sliding style switch — classic iOS appearance.
 } API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) @interface UISwitch : UIControl <NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UISwitch : UIControl <NSCoding>
 
 @property(nullable, nonatomic, strong) UIColor *onTintColor API_AVAILABLE(ios(5.0)) UI_APPEARANCE_SELECTOR;
 @property(nullable, nonatomic, strong) UIColor *thumbTintColor API_AVAILABLE(ios(6.0)) UI_APPEARANCE_SELECTOR;

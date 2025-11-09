@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6EC6A5C5-0FAC-39EB-8429-71D9BA1E637F
+    value:           7F36CB7B-DB8B-3348-BDBA-5068BA100EE5
   - target:          x86_64-maccatalyst
-    value:           6EC6A5C5-0FAC-39EB-8429-71D9BA1E637F
+    value:           7F36CB7B-DB8B-3348-BDBA-5068BA100EE5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FFCA385E-24F9-3907-967B-4A7F6EE2473A
+    value:           A12F7812-BBD5-312F-B2F4-D71BF76FBB7E
   - target:          arm64e-maccatalyst
-    value:           FFCA385E-24F9-3907-967B-4A7F6EE2473A
+    value:           A12F7812-BBD5-312F-B2F4-D71BF76FBB7E
 install-name:    '/System/Library/PrivateFrameworks/AudioSession.framework/Versions/A/AudioSession'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -78,7 +78,10 @@ exports:
                        _AVAudioSessionReflectorPortBehaviorInjectByReplacing, _AVAudioSessionReflectorPortBehaviorRelay, 
                        _AVAudioSessionRouteChangeNotification, _AVAudioSessionRouteChangePreviousRouteKey, 
                        _AVAudioSessionRouteChangeReasonKey, _AVAudioSessionRoutingContextChangeNotification, 
-                       _AVAudioSessionSilenceSecondaryAudioHintNotification, _AVAudioSessionSilenceSecondaryAudioHintTypeKey ]
+                       _AVAudioSessionSilenceSecondaryAudioHintNotification, _AVAudioSessionSilenceSecondaryAudioHintTypeKey, 
+                       _AVAudioSessionSourceContentBestAvailableContentTypeKey, _AVAudioSessionSourceContentCurrentlyPlayingChannelCountKey, 
+                       _AVAudioSessionSourceContentCurrentlyPlayingFormatKey, _AVAudioSessionSourceContentCurrentlyPlayingIsEligibleForSpatializationKey, 
+                       _AVAudioSessionSpatialAudioEnabledKey, _AVAudioSessionSpatialPlaybackCapabilitiesChangedNotification ]
     objc-classes:    [ AVAudioAggregateStreamMapping, AVAudioAggregateStreamTopology, 
                        AVAudioDeviceBasedRouteTopology, AVAudioDoubleRange, AVAudioFloatRange, 
                        AVAudioHardwareAddress, AVAudioHardwareBooleanControl, AVAudioHardwareBox, 
@@ -89,11 +92,11 @@ exports:
                        AVAudioHardwareSelectorControl, AVAudioHardwareSelectorItem, 
                        AVAudioHardwareSliderControl, AVAudioHardwareStereoPanControl, 
                        AVAudioHardwareStream, AVAudioHardwareStreamIdentifier, AVAudioHardwareSystem, 
-                       AVAudioIOClient, AVAudioIOController, AVAudioIOPeriod, AVAudioIOStateChangeEvent, 
-                       AVAudioIOStream, AVAudioIOTimeInterval, AVAudioPlatform, AVAudioRouteTopology, 
-                       AVAudioRoutingArbiter, AVAudioSession, AVAudioSessionChannelDescription, 
-                       AVAudioSessionDataSourceDescription, AVAudioSessionDriftCompensationDescription, 
-                       AVAudioSessionGroup, AVAudioSessionIOBinding, AVAudioSessionManager, 
-                       AVAudioSessionPortDescription, AVAudioSessionReflectorPortDescription, 
-                       AVAudioSessionRouteDescription, AVAudioUIntegerRange ]
+                       AVAudioIOClient, AVAudioIOController, AVAudioIOStateChangeEvent, 
+                       AVAudioIOStream, AVAudioPlatform, AVAudioRouteTopology, AVAudioRoutingArbiter, 
+                       AVAudioSession, AVAudioSessionChannelDescription, AVAudioSessionDataSourceDescription, 
+                       AVAudioSessionDriftCompensationDescription, AVAudioSessionGroup, 
+                       AVAudioSessionIOBinding, AVAudioSessionManager, AVAudioSessionPortDescription, 
+                       AVAudioSessionReflectorPortDescription, AVAudioSessionRouteDescription, 
+                       AVAudioUIntegerRange ]
 ...

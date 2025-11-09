@@ -270,11 +270,11 @@ struct	BluetoothPINCode
 
 typedef uint32_t		BluetoothClassOfDevice;
 
-#define		BluetoothGetDeviceClassMajor( inCOD )		( (inCOD & 0x00001F00) >> 8 )
-#define		BluetoothGetDeviceClassMinor( inCOD )		( (inCOD & 0x000000FC) >> 2 )
-#define		BluetoothGetServiceClassMajor( inCOD )		( (inCOD & 0x00FFE000) >> 13 )
+#define		BluetoothGetDeviceClassMajor( inCOD )		( ((inCOD) & 0x00001F00) >> 8 )
+#define		BluetoothGetDeviceClassMinor( inCOD )		( ((inCOD) & 0x000000FC) >> 2 )
+#define		BluetoothGetServiceClassMajor( inCOD )		( ((inCOD) & 0x00FFE000) >> 13 )
 #define		BluetoothMakeClassOfDevice( inServiceClassMajor, inDeviceClassMajor, inDeviceClassMinor )		\
-										(((inServiceClassMajor << 13) & 0x00FFE000) | ((inDeviceClassMajor << 8) & 0x00001F00) | ((inDeviceClassMinor << 2) & 0x000000FC))
+										((((inServiceClassMajor) << 13) & 0x00FFE000) | (((inDeviceClassMajor) << 8) & 0x00001F00) | (((inDeviceClassMinor) << 2) & 0x000000FC))
 
 ///
 /// Major Service Classes (11-bit value - bits 13-23 of Device/Service field)
@@ -316,8 +316,10 @@ enum
 
 enum
 {
-	kBluetoothRoleBecomeMaster 	= 0x00, 
-	kBluetoothRoleRemainSlave 	= 0x01
+	kBluetoothRoleBecomeCentral		= 0x00,
+	kBluetoothRoleRemainPeripheral 	= 0x01,
+	kBluetoothRoleBecomeMaster __attribute__ ((deprecated)) = kBluetoothRoleBecomeCentral,
+	kBluetoothRoleRemainSlave __attribute__ ((deprecated)) = kBluetoothRoleRemainPeripheral
 };
 
 typedef struct BluetoothSetEventMask	BluetoothSetEventMask;
@@ -888,11 +890,13 @@ enum
 		kBluetoothHCICommandEnhancedAcceptSynchronousConnectionRequest	= 0x003E,
 		kBluetoothHCICommandTruncatedPage								= 0x003F,
 		kBluetoothHCICommandTruncatedPageCancel							= 0x0040,
-		kBluetoothHCICommandSetConnectionlessSlaveBroadcast				= 0x0041,
-		kBluetoothHCICommandSetConnectionlessSlaveBroadcastReceive		= 0x0042,
+		kBluetoothHCICommandSetConnectionlessPeripheralBroadcast		= 0x0041,
+		kBluetoothHCICommandSetConnectionlessPeripheralBroadcastReceive	= 0x0042,
 		kBluetoothHCICommandStartSynchronizationTrain					= 0x0043,
 		kBluetoothHCICommandReceiveSynchronizationTrain					= 0x0044,
 		kBluetoothHCICommandRemoteOOBExtendedDataRequestReply			= 0x0045,
+		kBluetoothHCICommandSetConnectionlessSlaveBroadcast __attribute__ ((deprecated)) = kBluetoothHCICommandSetConnectionlessPeripheralBroadcast,
+		kBluetoothHCICommandSetConnectionlessSlaveBroadcastReceive __attribute__ ((deprecated))	= kBluetoothHCICommandSetConnectionlessPeripheralBroadcastReceive,
 
 	// Command Group: Link Policy
 	
@@ -1010,7 +1014,7 @@ enum
 		kBluetoothHCICommandSetMWSPATTERNConfiguration					= 0x0073,
 		kBluetoothHCICommandSetReservedLTADDR							= 0x0074,
 		kBluetoothHCICommandDeleteReservedLTADDR						= 0x0075,
-		kBluetoothHCICommandSetConnectionlessSlaveBroadcastData			= 0x0076,
+		kBluetoothHCICommandSetConnectionlessPeripheralBroadcastData	= 0x0076,
 		kBluetoothHCICommandReadSynchronizationTrainParameters			= 0x0077,
 		kBluetoothHCICommandWriteSynchronizationTrainParameters			= 0x0078,
 		kBluetoothHCICommandReadSecureConnectionsHostSupport			= 0x0079,
@@ -1022,6 +1026,7 @@ enum
 		kBluetoothHCICommandWriteExtendedPageTimeout					= 0x007F,
 		kBluetoothHCICommandReadExtendedInquiryLength					= 0x0080,
 		kBluetoothHCICommandWriteExtendedInquiryLength					= 0x0081,
+		kBluetoothHCICommandSetConnectionlessSlaveBroadcastData __attribute__ ((deprecated)) = kBluetoothHCICommandSetConnectionlessPeripheralBroadcastData,
 
 	// Command Group: Informational
 	
@@ -1215,11 +1220,12 @@ enum BluetoothLEFeatureBits
     kBluetoothLEFeatureLEEncryption                         = (1 << 0L),
     kBluetoothLEFeatureConnectionParamsRequestProcedure     = (1 << 1L),
     kBluetoothLEFeatureExtendedRejectIndication             = (1 << 2L),
-    kBluetoothLEFeatureSlaveInitiatedFeaturesExchange       = (1 << 3L),
+    kBluetoothLEFeaturePeripheralInitiatedFeaturesExchange  = (1 << 3L),
     kBluetoothLEFeatureLEPing                               = (1 << 4L),
     kBluetoothLEFeatureLEDataPacketLengthExtension          = (1 << 5L),
     kBluetoothLEFeatureLLPrivacy                            = (1 << 6L),
     kBluetoothLEFeatureExtendedScannerFilterPolicies        = (1 << 7L),
+	kBluetoothLEFeatureSlaveInitiatedFeaturesExchange __attribute__ ((deprecated)) = kBluetoothLEFeaturePeripheralInitiatedFeaturesExchange,
     
     // Three other bytes are RFU
 };
@@ -1273,14 +1279,16 @@ enum BluetoothFeatureBits
 
 	// Byte 4 of the support features data structure.	
 
-	kBluetoothFeatureEV4Packets							= (1 << 0L),
-	kBluetoothFeatureEV5Packets							= (1 << 1L),	
-	kBluetoothFeatureAbsenceMasks						= (1 << 2L),
-	kBluetoothFeatureAFHCapableSlave					= (1 << 3L),
-	kBluetoothFeatureAFHClassificationSlave				= (1 << 4L),	
-	kBluetoothFeatureAliasAuhentication					= (1 << 5L),
-	kBluetoothFeatureLESupportedController				= (1 << 6L),
-	kBluetoothFeature3SlotEnhancedDataRateACLPackets	= (1 << 7L),
+	kBluetoothFeatureEV4Packets												= (1 << 0L),
+	kBluetoothFeatureEV5Packets												= (1 << 1L),
+	kBluetoothFeatureAbsenceMasks											= (1 << 2L),
+	kBluetoothFeatureAFHCapablePeripheral									= (1 << 3L),
+	kBluetoothFeatureAFHClassificationPeripheral							= (1 << 4L),
+	kBluetoothFeatureAliasAuhentication										= (1 << 5L),
+	kBluetoothFeatureLESupportedController									= (1 << 6L),
+	kBluetoothFeature3SlotEnhancedDataRateACLPackets						= (1 << 7L),
+	kBluetoothFeatureAFHCapableSlave __attribute__ ((deprecated)) 			= kBluetoothFeatureAFHCapablePeripheral,
+	kBluetoothFeatureAFHClassificationSlave __attribute__ ((deprecated)) 	= kBluetoothFeatureAFHClassificationPeripheral,
 	
 	// Byte 5 of the support features data structure.
 
@@ -1372,19 +1380,22 @@ struct BluetoothHCIRoleInfo
 
 enum BluetoothHCIRoles
 {
-	kBluetoothHCIMasterRole				= 0x00,
-	kBluetoothHCISlaveRole				= 0x01
+	kBluetoothHCICentralRole			= 0x00,
+	kBluetoothHCIPeripheralRole			= 0x01,
+	kBluetoothHCIMasterRole __attribute__ ((deprecated)) = kBluetoothHCICentralRole,
+	kBluetoothHCISlaveRole __attribute__ ((deprecated)) = kBluetoothHCIPeripheralRole
 };
 
 typedef uint16_t										BluetoothHCILinkPolicySettings;
 enum BluetoothHCILinkPolicySettingsValues
 {
 	kDisableAllLMModes					= 0x0000,
-	kEnableMasterSlaveSwitch			= 0x0001,
+	kEnableCentralPeripheralSwitch		= 0x0001,
 	kEnableHoldMode						= 0x0002,
 	kEnableSniffMode					= 0x0004,
 	kEnableParkMode						= 0x0008,
-	kReservedForFutureUse				= 0x0010
+	kReservedForFutureUse				= 0x0010,
+	kEnableMasterSlaveSwitch __attribute__ ((deprecated))	= kEnableCentralPeripheralSwitch
 };
 
 typedef struct	BluetoothHCILinkPolicySettingsInfo		BluetoothHCILinkPolicySettingsInfo;
@@ -2263,7 +2274,7 @@ enum
         kBluetoothHCISubEventLEScanTimeout                              = 0x11,
         kBluetoothHCISubEventLEAdvertisingSetTerminated                 = 0x12,
         kBluetoothHCISubEventLEScanRequestReceived                      = 0x13,
-        kBluetoothHCISubEventLEChannelSelectionAlgorithm                = 0x14,    
+        kBluetoothHCISubEventLEChannelSelectionAlgorithm                = 0x14,
     
     
 	// [v3.0]
@@ -2655,7 +2666,7 @@ struct BluetoothHCIEventLELongTermKeyRequestResults
 	uint8_t						randomNumber[8];
 	uint16_t					ediv;	
 };
-		
+
 #define kNoNotifyProc	NULL
 #define kNoUserRefCon	NULL
 
@@ -2945,7 +2956,8 @@ typedef enum {
         
 typedef enum {
     BluetoothLEScanFilterNone		= 0x00,
-    BluetoothLEScanFilterWhitelist	= 0x01
+    BluetoothLEScanFilterSafelist	= 0x01,
+	BluetoothLEScanFilterWhitelist __attribute__ ((deprecated)) = BluetoothLEScanFilterSafelist
 } BluetoothLEScanFilter;
         
 typedef enum {

@@ -1,4 +1,3 @@
-// LOCKED FILE: 524f8c5f7cc11df4772a2cd9c1295e0a
 //
 //  HKClinicalType.h
 //  HealthKit
@@ -25,7 +24,11 @@ HK_EXTERN HKClinicalTypeIdentifier const HKClinicalTypeIdentifierVitalSignRecord
 HK_EXTERN HKClinicalTypeIdentifier const HKClinicalTypeIdentifierCoverageRecord API_AVAILABLE(ios(14.0), watchos(7.0));
 
 @interface HKObjectType (ClinicalType)
+#if __swift__
++ (nullable HKClinicalType *)clinicalTypeForIdentifier:(HKClinicalTypeIdentifier)identifier API_DEPRECATED_WITH_REPLACEMENT("HKClinicalType(_:)", ios(12.0, API_TO_BE_DEPRECATED), watchos(5.0, API_TO_BE_DEPRECATED));
+#else
 + (nullable HKClinicalType *)clinicalTypeForIdentifier:(HKClinicalTypeIdentifier)identifier API_AVAILABLE(ios(12.0), watchos(5.0));
+#endif
 @end
 
 HK_EXTERN

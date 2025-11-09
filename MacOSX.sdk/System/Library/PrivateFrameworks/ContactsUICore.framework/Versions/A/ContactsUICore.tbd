@@ -4,27 +4,29 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F85B50D1-18EF-3E0D-8B4C-738C6A25651A
+    value:           6E5042AA-82DE-3872-82E8-D7C409B61635
   - target:          x86_64-maccatalyst
-    value:           F85B50D1-18EF-3E0D-8B4C-738C6A25651A
+    value:           6E5042AA-82DE-3872-82E8-D7C409B61635
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           44736190-938A-30EF-8C5D-1287F9756EF8
+    value:           5E6D650D-5FC4-3434-82D7-C85A6A390818
   - target:          arm64e-maccatalyst
-    value:           44736190-938A-30EF-8C5D-1287F9756EF8
+    value:           5E6D650D-5FC4-3434-82D7-C85A6A390818
 install-name:    '/System/Library/PrivateFrameworks/ContactsUICore.framework/Versions/A/ContactsUICore'
-current-version: 3419.1
+current-version: 3440
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CNContactsUIErrorDialRequestKey, _CNContactsUIErrorDomain, 
                        _CNContactsUIErrorURLKey, _CNContactsUIErrorUserActivityKey, 
-                       _CNLaunchServicesAppicationDatabaseLookupEntitlement, _CNTUCallProviderIdentifierTinCan, 
-                       _CNUIActivityTypeEditingContact, _CNUIActivityTypeViewingContact, 
-                       _CNUIActivityTypeViewingList, _CNUIAddCircleToContextInRect, 
+                       _CNLaunchServicesAppicationDatabaseLookupEntitlement, _CNTUCallProviderIdentifierSUIUNTool, 
+                       _CNTUCallProviderIdentifierTinCan, _CNUIActivityTypeEditingContact, 
+                       _CNUIActivityTypeViewingContact, _CNUIActivityTypeViewingList, 
+                       _CNUIActivityUserInformationDisplayedContactKey, _CNUIActivityUserInformationListTopContactKey, 
+                       _CNUIActivityUserInformationSearchStringKey, _CNUIAddCircleToContextInRect, 
                        _CNUIAddRoundedRectToContextInRect, _CNUIApplyOutlineToContext, 
                        _CNUIBitmapContextCreate, _CNUICalculateSubRectsForOverlappingLikenesses, 
                        _CNUICircularImageCreate, _CNUIClipContextWithCircleInRect, 
@@ -35,12 +37,12 @@ exports:
                        _CNUIRectIntegralWithScale, _CNUIRoundedRectImageCreate, _CNUIUserActionRecentsAddressKindForContactProperty, 
                        _CNUIUserActionRecentsBundleIdentifierKey, _CNUIUserActionRecentsChangedNotification, 
                        _CNUIUserActionRecentsDateKey, _CNUIUserActionRecentsDomain, 
-                       _DrawSilhouetteInContext, ___CNUISmartCeiling, __centeredSquareRect, 
-                       __croppedImageDataFromFullSizeImageData, _imageFromImageRef, 
+                       _DrawSilhouetteInContext, ___CNUISmartCeiling, _imageFromImageRef, 
                        _imageRefFromImage, _kCNUICoreContactToIdentifier ]
     objc-classes:    [ CNAvatarCacheChangeAnalysis, CNAvatarCacheChangeHistoryAnalysisTask, 
                        CNAvatarCacheChangeListener, CNAvatarCacheFingerprintCollector, 
-                       CNAvatarChangeHistoryReportingTask, CNCallProvidersChangedCancelationToken, 
+                       CNAvatarChangeHistoryReportingTask, CNAvatarPickerServiceExtensionContext, 
+                       CNAvatarPickerServiceHostContext, CNCallProvidersChangedCancelationToken, 
                        CNCapabilities, CNContactsUIError, CNDiscoveredUserActionReplaySubject, 
                        CNFirstRawActionsModelReplaySubject, CNHandle, CNLSApplicationWorkspace, 
                        CNMCProfileConnection, CNTUCallProvider, CNTUCallProviderManager, 
@@ -66,15 +68,17 @@ exports:
                        CNUICoreProposedContactsFetchingDecorator, CNUICoreRecentsManager, 
                        CNUICoreScreentimePasscodeInspector, CNUICoreWhitelistedContactsControllerOptions, 
                        CNUICreateContactIntent, CNUICreateContactIntentResponse, 
-                       CNUIDHandleAvailabilityFuture, CNUIDSFaceTimeHandleAvailabilityCache, 
-                       CNUIDSHandleAvailabilityCache, CNUIDSHandleAvailabilityPromise, 
-                       CNUIDSIMessageHandleAvailabilityCache, CNUIDefaultUserActionFetcher, 
-                       CNUIDefaultUserActionRecorder, CNUIDowntimeLogger, CNUIIDSAvailabilityProvider, 
-                       CNUIIDSContactPropertyResolver, CNUIIDSIDQueryControllerWrapper, 
-                       CNUIIDSRequest, CNUIImageProvider, CNUIInteractionDonor, CNUILibraryFolderDiscovery, 
-                       CNUILikenessFingerprint, CNUILikenessRenderer, CNUILikenessRenderingScope, 
-                       CNUIMeContactComparisonStrategyIdentifier, CNUIMeContactComparisonStrategyUnified, 
-                       CNUIMeContactMonitor, CNUIPRLikenessLoadingGroupPlaceholderProvider, 
+                       CNUIDHandleAvailabilityFuture, CNUIDSExpanseHandleAvailabilityCache, 
+                       CNUIDSFaceTimeHandleAvailabilityCache, CNUIDSHandleAvailabilityCache, 
+                       CNUIDSHandleAvailabilityPromise, CNUIDSIMessageHandleAvailabilityCache, 
+                       CNUIDefaultUserActionFetcher, CNUIDefaultUserActionRecorder, 
+                       CNUIDowntimeLogger, CNUIIDSAvailabilityProvider, CNUIIDSContactPropertyResolver, 
+                       CNUIIDSIDQueryControllerWrapper, CNUIIDSRequest, CNUIImageProvider, 
+                       CNUIInteractionDonor, CNUILibraryFolderDiscovery, CNUILikenessFingerprint, 
+                       CNUILikenessMediaContextBadge, CNUILikenessRenderer, CNUILikenessRenderingScope, 
+                       CNUILikenessSystemImageBadge, CNUIMeContactComparisonStrategyIdentifier, 
+                       CNUIMeContactComparisonStrategyUnified, CNUIMeContactMonitor, 
+                       CNUIPRLikenessBadgeImageProvider, CNUIPRLikenessLoadingGroupPlaceholderProvider, 
                        CNUIPRLikenessLoadingPlaceholderProvider, CNUIPRLikenessLookup, 
                        CNUIPRLikenessPhotoProvider, CNUIPRLikenessPlaceholderProvider, 
                        CNUIPRLikenessProvider, CNUIPRLikenessResolver, CNUIPRLikenessResolverOptions, 
@@ -97,13 +101,13 @@ exports:
                        _CNUILikenessRenderer, _CNUILocalPhotoFuture, _CNUIRTTUtilities, 
                        _CNUIUserActionCallProviderVideoTarget, _CNUIUserActionCallProviderVoiceTarget, 
                        _CNUIUserActionCurator, _CNUIUserActionDialRequestItem, _CNUIUserActionDialRequestOpener, 
-                       _CNUIUserActionDirectionsTarget, _CNUIUserActionFaceTimeVideoTarget, 
-                       _CNUIUserActionFaceTimeVoiceTarget, _CNUIUserActionImageProvider, 
-                       _CNUIUserActionMailEmailTarget, _CNUIUserActionMessagesTextTarget, 
-                       _CNUIUserActionSendMessageIntentTarget, _CNUIUserActionSkypeTextTarget, 
-                       _CNUIUserActionSkypeVideoTarget, _CNUIUserActionSkypeVoiceTarget, 
-                       _CNUIUserActionStartAudioCallIntentTarget, _CNUIUserActionStartVideoCallIntentTarget, 
-                       _CNUIUserActionTelephonyVoiceTarget, _CNUIUserActionURLItem, 
-                       _CNUIUserActionUserActivityItem, _CNUIUserActionUserActivityOpener, 
+                       _CNUIUserActionDirectionsTarget, _CNUIUserActionExpanseTarget, 
+                       _CNUIUserActionFaceTimeVideoTarget, _CNUIUserActionFaceTimeVoiceTarget, 
+                       _CNUIUserActionImageProvider, _CNUIUserActionMailEmailTarget, 
+                       _CNUIUserActionMessagesTextTarget, _CNUIUserActionSendMessageIntentTarget, 
+                       _CNUIUserActionSkypeTextTarget, _CNUIUserActionSkypeVideoTarget, 
+                       _CNUIUserActionSkypeVoiceTarget, _CNUIUserActionStartAudioCallIntentTarget, 
+                       _CNUIUserActionStartVideoCallIntentTarget, _CNUIUserActionTelephonyVoiceTarget, 
+                       _CNUIUserActionURLItem, _CNUIUserActionUserActivityItem, _CNUIUserActionUserActivityOpener, 
                        _CNUIUserActionWalletPayTarget ]
 ...

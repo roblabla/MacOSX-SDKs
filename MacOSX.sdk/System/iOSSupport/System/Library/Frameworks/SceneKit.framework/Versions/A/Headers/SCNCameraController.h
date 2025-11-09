@@ -2,7 +2,7 @@
 //  SCNCameraController.h
 //  SceneKit
 //
-//  Copyright © 2017-2020 Apple Inc. All rights reserved.
+//  Copyright © 2017-2021 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>

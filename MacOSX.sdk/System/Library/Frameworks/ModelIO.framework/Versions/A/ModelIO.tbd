@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B2C9A388-31F9-351F-9DD8-E8D47988B25A
+    value:           3D8572F8-F48F-3713-8D9B-3FD729E7FAF4
   - target:          x86_64-maccatalyst
-    value:           B2C9A388-31F9-351F-9DD8-E8D47988B25A
+    value:           3D8572F8-F48F-3713-8D9B-3FD729E7FAF4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1EA0A93C-F754-3A84-BEB2-0B038401E98E
+    value:           D4297914-95E6-3CB6-88EC-758D780C2301
   - target:          arm64e-maccatalyst
-    value:           1EA0A93C-F754-3A84-BEB2-0B038401E98E
+    value:           D4297914-95E6-3CB6-88EC-758D780C2301
 install-name:    '/System/Library/Frameworks/ModelIO.framework/Versions/A/ModelIO'
-current-version: 246.3
+current-version: 253
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
@@ -40,23 +40,25 @@ exports:
                        __ZNK7MDLAABB9intersectERKN7ModelIO12RTRaySegmentERfS4_Rh, 
                        _directionForPixel, _equirectangularCoordinateForDirection, 
                        _kUTType3dObject, _kUTTypeAlembic, _kUTTypePolygon, _kUTTypeStereolithography, 
-                       _kUTTypeUniversalSceneDescription ]
+                       _kUTTypeUniversalSceneDescription, _kUTTypeUniversalSceneDescriptionMobile ]
     objc-classes:    [ MDLAnimatedMatrix4x4, MDLAnimatedQuaternion, MDLAnimatedQuaternionArray, 
                        MDLAnimatedScalar, MDLAnimatedScalarArray, MDLAnimatedValue, 
                        MDLAnimatedVector2, MDLAnimatedVector3, MDLAnimatedVector3Array, 
                        MDLAnimatedVector4, MDLAnimationBindComponent, MDLAreaLight, 
-                       MDLAsset, MDLAssetLoader, MDLBundleAssetResolver, MDLCamera, 
-                       MDLCheckerboardTexture, MDLColorSwatchTexture, MDLInteractiveCameraController, 
-                       MDLLight, MDLLightProbe, MDLMaterial, MDLMaterialProperty, 
-                       MDLMaterialPropertyConnection, MDLMaterialPropertyGraph, MDLMaterialPropertyNode, 
-                       MDLMatrix4x4Array, MDLMesh, MDLMeshBufferAllocatorDefault, 
-                       MDLMeshBufferData, MDLMeshBufferDataAllocator, MDLMeshBufferMap, 
-                       MDLMeshBufferZoneDefault, MDLMorphDeformer, MDLNoiseTexture, 
-                       MDLNormalMapTexture, MDLObject, MDLObjectContainer, MDLPackedJointAnimation, 
-                       MDLPathAssetResolver, MDLPhotometricLight, MDLPhysicallyPlausibleLight, 
-                       MDLPhysicallyPlausibleScatteringFunction, MDLRelativeAssetResolver, 
-                       MDLScatteringFunction, MDLSkeleton, MDLSkinDeformer, MDLSkyCubeTexture, 
-                       MDLStereoscopicCamera, MDLSubmesh, MDLSubmeshTopology, MDLTexture, 
+                       MDLAsset, MDLAssetLoader, MDLBufferView, MDLBufferViewAllocator, 
+                       MDLBundleAssetResolver, MDLCamera, MDLCheckerboardTexture, 
+                       MDLColorSwatchTexture, MDLInteractiveCameraController, MDLLight, 
+                       MDLLightProbe, MDLMaterial, MDLMaterialProperty, MDLMaterialPropertyConnection, 
+                       MDLMaterialPropertyGraph, MDLMaterialPropertyNode, MDLMatrix4x4Array, 
+                       MDLMesh, MDLMeshBufferAllocatorDefault, MDLMeshBufferData, 
+                       MDLMeshBufferDataAllocator, MDLMeshBufferMap, MDLMeshBufferView, 
+                       MDLMeshBufferViewAllocator, MDLMeshBufferZoneDefault, MDLMeshProxy, 
+                       MDLMorphDeformer, MDLNoiseTexture, MDLNormalMapTexture, MDLObject, 
+                       MDLObjectContainer, MDLPackedJointAnimation, MDLPathAssetResolver, 
+                       MDLPhotometricLight, MDLPhysicallyPlausibleLight, MDLPhysicallyPlausibleScatteringFunction, 
+                       MDLRelativeAssetResolver, MDLScatteringFunction, MDLSkeleton, 
+                       MDLSkinDeformer, MDLSkyCubeTexture, MDLStereoscopicCamera, 
+                       MDLSubmesh, MDLSubmeshProxy, MDLSubmeshTopology, MDLTexture, 
                        MDLTextureFilter, MDLTextureSampler, MDLTransform, MDLTransformMatrixOp, 
                        MDLTransformOrientOp, MDLTransformRotateOp, MDLTransformRotateXOp, 
                        MDLTransformRotateYOp, MDLTransformRotateZOp, MDLTransformScaleOp, 

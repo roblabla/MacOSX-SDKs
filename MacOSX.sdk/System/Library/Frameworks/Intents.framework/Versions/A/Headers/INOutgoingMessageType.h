@@ -15,6 +15,6 @@ typedef NS_ENUM(NSInteger, INOutgoingMessageType) {
     INOutgoingMessageTypeUnknown = 0,
     INOutgoingMessageTypeOutgoingMessageText,
     INOutgoingMessageTypeOutgoingMessageAudio,
-} API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos);
+} API_AVAILABLE(ios(14.0), macos(12.0), watchos(7.0)) API_UNAVAILABLE(tvos);
 
 #endif // INOutgoingMessageType_h

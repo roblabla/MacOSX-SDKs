@@ -489,6 +489,17 @@ SwiftVersions:
     - Selector: 'handleIdentifyIncomingCaller:completion:'
       MethodKind: Instance
       SwiftName: 'handle(identifyIncomingCaller:completion:)'
+  - Name: INJoinCallIntentHandling
+    Methods:
+    - Selector: 'confirmJoinCall:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(joinCall:completion:)'
+    - Selector: 'handleJoinCall:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(joinCall:completion:)'
+    - Selector: 'resolveGroupConversationForJoinCall:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveGroupConversation(forJoinCall:with:)'
   - Name: INListCarsIntentHandling
     Methods:
     - Selector: 'confirmListCars:completion:'
@@ -1566,6 +1577,14 @@ SwiftVersions:
     - Selector: 'resolveShareModeForShareFile:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveShareMode(forShareFile:with:)'
+  - Name: INShareFocusStatusIntentHandling
+    Methods:
+    - Selector: 'confirmShareFocusStatus:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(shareFocusStatus:completion:)'
+    - Selector: 'handleShareFocusStatus:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(shareFocusStatus:completion:)'
   - Name: INShowHomeIntentHandling
     Methods:
     - Selector: 'confirmShowHome:completion:'

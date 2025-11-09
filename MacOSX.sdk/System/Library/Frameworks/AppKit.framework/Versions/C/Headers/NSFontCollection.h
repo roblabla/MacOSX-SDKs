@@ -1,7 +1,7 @@
 /*
 	NSFontCollection.h
 	Application Kit
-	Copyright (c) 2010-2019, Apple Inc.
+	Copyright (c) 2010-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -85,7 +85,7 @@ API_AVAILABLE(macos(10.7))
 + (BOOL)hideFontCollectionWithName:(NSFontCollectionName)name visibility:(NSFontCollectionVisibility)visibility error:(NSError **)error;
 
 // Rename named collection
-+ (BOOL)renameFontCollectionWithName:(NSFontCollectionName)name visibility:(NSFontCollectionVisibility)visibility toName:(NSFontCollectionName)name error:(NSError **)error;
++ (BOOL)renameFontCollectionWithName:(NSFontCollectionName)oldName visibility:(NSFontCollectionVisibility)visibility toName:(NSFontCollectionName)newName error:(NSError **)outError;
 
 // Named collections visible to this process (array of NSString)
 @property (class, readonly, copy) NSArray<NSFontCollectionName> *allFontCollectionNames;

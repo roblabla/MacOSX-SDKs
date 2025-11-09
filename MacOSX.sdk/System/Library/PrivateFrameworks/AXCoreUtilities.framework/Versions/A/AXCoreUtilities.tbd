@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           77F04592-E589-3167-BFA5-041D829FA56E
+    value:           CA7AAFAD-2A33-3F3C-ABE2-8249978C861D
   - target:          x86_64-maccatalyst
-    value:           77F04592-E589-3167-BFA5-041D829FA56E
+    value:           CA7AAFAD-2A33-3F3C-ABE2-8249978C861D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0B646F64-871D-30E9-BFD3-F3522230D04A
+    value:           337402F9-1706-3E11-ADC8-814E940C6BAB
   - target:          arm64e-maccatalyst
-    value:           0B646F64-871D-30E9-BFD3-F3522230D04A
+    value:           337402F9-1706-3E11-ADC8-814E940C6BAB
 install-name:    '/System/Library/PrivateFrameworks/AXCoreUtilities.framework/Versions/A/AXCoreUtilities'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -23,13 +23,22 @@ exports:
                        _AXAccessibilityPrivateFrameworksDirectory, _AXBackgroundLog, 
                        _AXBrailleTablesDirectory, _AXCLanguageCanonicalFormToGeneralLanguage, 
                        _AXCLanguageConvertToCanonicalForm, _AXCLanguageToLocales, 
-                       _AXDiagnosticReportsDirectory, _AXInternalAccessibilityBundlesDirectory, 
-                       _AXLogAccessories, _AXLogAggregate, _AXLogAppAccessibility, 
-                       _AXLogAppCompareGeometry, _AXLogAssertions, _AXLogAssetDaemon, 
-                       _AXLogAssetLoader, _AXLogAudioRouting, _AXLogBackboardServer, 
-                       _AXLogBrailleHW, _AXLogBrokenHomeButton, _AXLogCharacterVoices, 
-                       _AXLogCommon, _AXLogContextKit, _AXLogDataMigrator, _AXLogDisplay, 
-                       _AXLogDisplayFilters, _AXLogDragging, _AXLogElementTraversal, 
+                       _AXCLocString, _AXDescriptionForHeadingInDegrees, _AXDeviceGetType, 
+                       _AXDeviceIsAudioAccessory, _AXDeviceIsBigPadIdiom, _AXDeviceIsBigWatchIdiom, 
+                       _AXDeviceIsD22, _AXDeviceIsD32, _AXDeviceIsD33, _AXDeviceIsD42, 
+                       _AXDeviceIsD43, _AXDeviceIsJ3XX, _AXDeviceIsJ42, _AXDeviceIsPad, 
+                       _AXDeviceIsPadMiniIdiom, _AXDeviceIsPhone, _AXDeviceIsPhoneIdiom, 
+                       _AXDeviceIsPod, _AXDeviceIsSmallWatchIdiom, _AXDeviceIsTV, 
+                       _AXDeviceIsTallPhoneIdiom, _AXDeviceIsWatch, _AXDiagnosticReportsDirectory, 
+                       _AXFormatByteSize, _AXFormatFloat, _AXFormatFloatWithPercentage, 
+                       _AXFormatInteger, _AXFormatLocalizedPlaybackSpeedFactor, _AXFormatMagnificationFactor, 
+                       _AXFormatNumber, _AXFormatNumberWithOptions, _AXIntegerValueFromString, 
+                       _AXInternalAccessibilityBundlesDirectory, _AXLogAccessories, 
+                       _AXLogAggregate, _AXLogAppAccessibility, _AXLogAppCompareGeometry, 
+                       _AXLogAssertions, _AXLogAssetDaemon, _AXLogAssetLoader, _AXLogAudioRouting, 
+                       _AXLogBackboardServer, _AXLogBrailleHW, _AXLogBrokenHomeButton, 
+                       _AXLogCharacterVoices, _AXLogCommon, _AXLogContextKit, _AXLogDataMigrator, 
+                       _AXLogDisplay, _AXLogDisplayFilters, _AXLogDragging, _AXLogElementTraversal, 
                        _AXLogEscape, _AXLogEventTap, _AXLogFirstElement, _AXLogFocusEngine, 
                        _AXLogHitTest, _AXLogIDS, _AXLogIPC, _AXLogInvertColors, _AXLogInvertColorsTraversal, 
                        _AXLogLoading, _AXLogLocCaptionPanel, _AXLogLookingGlass, 
@@ -47,8 +56,8 @@ exports:
                        _AXMRMinimumMediaAnalysisElementWidth, _AXMacCatalystPathPrefix, 
                        _AXMediaLogCaptionDescriptions, _AXMediaLogCommon, _AXMediaLogDiagnostics, 
                        _AXMediaLogElementVision, _AXMediaLogEngineCache, _AXMediaLogEnginePriority, 
-                       _AXMediaLogHaptics, _AXMediaLogMLElement, _AXMediaLogOCR, 
-                       _AXMediaLogOutput, _AXMediaLogResults, _AXMediaLogScreenGrab, 
+                       _AXMediaLogHaptics, _AXMediaLogLanguageTranslation, _AXMediaLogMLElement, 
+                       _AXMediaLogOCR, _AXMediaLogOutput, _AXMediaLogResults, _AXMediaLogScreenGrab, 
                        _AXMediaLogService, _AXMediaLogSettings, _AXMediaLogSounds, 
                        _AXMediaLogSpeech, _AXMediaLogTextLayout, _AXMediaLogTextProcessing, 
                        _AXMediaLogTracking, _AXPerformBlockAsynchronouslyOnMainThread, 
@@ -58,17 +67,18 @@ exports:
                        _AXRuntimeLogNotifications, _AXRuntimeLogPID, _AXRuntimeLogSerialization, 
                        _AXSetThreadPriority, _AXSharedInertMetric, _AXSupportLogCommon, 
                        _AXSystemRootDirectory, _AXTTSLogCommon, _AXTTSLogRange, _AXVoiceServicesTTSResourcesDirectory, 
-                       _BRLLogTranslation, _FKALogCommon, _GAXLogAppLaunching, _GAXLogCommon, 
-                       _GAXLogIntegrity, _GAXLogTimeRestrictions, _MAGLogBrightness, 
-                       _MAGLogCommon, _SWCHLogCommon, _SWCHLogElementNav, _SWCHLogHW, 
-                       _SWCHLogPauseResume, _VOTLogActivities, _VOTLogAudio, _VOTLogBraille, 
-                       _VOTLogBrailleGestures, _VOTLogCommon, _VOTLogCompanion, _VOTLogElement, 
+                       _BRLLogTranslation, _FKALogCommon, _GAXLogAppLaunching, _GAXLogBlockedTouches, 
+                       _GAXLogCommon, _GAXLogIntegrity, _GAXLogTimeRestrictions, 
+                       _MAGLogBrightness, _MAGLogCommon, _SWCHLogCommon, _SWCHLogElementNav, 
+                       _SWCHLogHW, _SWCHLogPauseResume, _VOTLogActivities, _VOTLogAudio, 
+                       _VOTLogBraille, _VOTLogBrailleGestures, _VOTLogCommon, _VOTLogElement, 
                        _VOTLogEvent, _VOTLogHandwriting, _VOTLogIAP, _VOTLogICloud, 
                        _VOTLogKeyboard, _VOTLogLayoutChange, _VOTLogLifeCycle, _VOTLogMagicTap, 
-                       _VOTLogNotifications, _VOTLogRotor, _VOTLogSimpleTap, _VOTLogSpeech, 
-                       _VOTLogTVExplorer, _VOTLogTVFocus, _VOTLogWebPageMovement, 
-                       _ZOOMLogCommon, __AXAssertIsMainThread, __AXAssertIsThread, 
-                       __AXAssertIsThreadNamed ]
-    objc-classes:    [ AXAccessQueue, AXAccessQueueTimer, AXBlockMetric, AXBookendMetric, 
-                       AXDispatchTimer, AXMetric, AXMetricSession, AXXPCUtilities ]
+                       _VOTLogNotifications, _VOTLogQuickSettings, _VOTLogRotor, 
+                       _VOTLogSimpleTap, _VOTLogSpeech, _VOTLogTVExplorer, _VOTLogTVFocus, 
+                       _VOTLogWebPageMovement, _ZOOMLogCommon, _ZOOMLogEvents, __AXAssertIsMainThread, 
+                       __AXAssertIsThread, __AXAssertIsThreadNamed ]
+    objc-classes:    [ AXAccessQueue, AXAccessQueueTimer, AXBaseSettings, AXBlockMetric, 
+                       AXBookendMetric, AXDispatchTimer, AXMetric, AXMetricSession, 
+                       AXXPCUtilities ]
 ...

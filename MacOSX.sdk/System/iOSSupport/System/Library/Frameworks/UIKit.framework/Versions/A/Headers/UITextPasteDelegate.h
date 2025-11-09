@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
  * this delegate to properly handle any custom items you have there.
  */
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UITextPasteDelegate <NSObject>
 
 @optional
@@ -102,7 +102,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
 
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UITextPasteItem <NSObject>
 
 // This is the NSItemProvider for the item being pasted or dropped.

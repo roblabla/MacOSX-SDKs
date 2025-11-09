@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from OSContainer.iig */
+/* iig(DriverKit-191) generated from OSContainer.iig */
 
 /* OSContainer.iig:1-37 */
 /*
@@ -119,12 +119,21 @@ class OSContainer : public OSObject, public OSContainerInterface
 
 #if !KERNEL
 public:
+#ifdef OSContainer_DECLARE_IVARS
+OSContainer_DECLARE_IVARS
+#else /* OSContainer_DECLARE_IVARS */
     union
     {
         OSContainer_IVars * ivars;
         OSContainer_LocalIVars * lvars;
     };
+#endif /* OSContainer_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gOSContainerMetaClass; };
+#endif /* KERNEL */
 
     using super = OSObject;
 

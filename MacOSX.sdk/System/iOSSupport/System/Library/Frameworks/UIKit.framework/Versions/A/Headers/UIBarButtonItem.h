@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, UIBarButtonItemStyle) {
     UIBarButtonItemStylePlain,
-    UIBarButtonItemStyleBordered NS_ENUM_DEPRECATED_IOS(2_0, 8_0, "Use UIBarButtonItemStylePlain when minimum deployment target is iOS7 or later"),
+    UIBarButtonItemStyleBordered API_DEPRECATED_WITH_REPLACEMENT("UIBarButtonItemStylePlain", ios(2.0, 8.0)),
     UIBarButtonItemStyleDone,
 };
 
@@ -47,13 +47,14 @@ typedef NS_ENUM(NSInteger, UIBarButtonSystemItem) {
     UIBarButtonSystemItemFastForward,
     UIBarButtonSystemItemUndo API_AVAILABLE(ios(3.0)),
     UIBarButtonSystemItemRedo API_AVAILABLE(ios(3.0)),
-    UIBarButtonSystemItemPageCurl NS_ENUM_DEPRECATED_IOS(4_0, 11_0),
+    UIBarButtonSystemItemPageCurl API_DEPRECATED("", ios(4.0, 11.0)),
     UIBarButtonSystemItemClose API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos)
 };
 
 @class UIImage, UIView;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIBarButtonItem : UIBarItem <NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIBarButtonItem : UIBarItem <NSCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -96,6 +97,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIBarButtonItem : UIBarItem <NSC
 
 /// When non-nil the menu is presented, the gesture used to trigger the menu is based on if the bar button item would normally trigger an action when tapped.
 @property (nonatomic, readwrite, copy, nullable) UIMenu *menu API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+
+/// Indicates if the button changes selection as its primary action.
+/// This shows the menu as options for selection if a menu is populated and no action when tapped is enabled.
+/// If no menu is provided and no action is enabled when tapped, the item is toggled on and off for the primary action.
+@property (nonatomic, readwrite, assign) BOOL changesSelectionAsPrimaryAction API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
+
+@property (nonatomic, readwrite, assign, getter=isSelected) BOOL selected API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 
 //
 // Appearance modifiers

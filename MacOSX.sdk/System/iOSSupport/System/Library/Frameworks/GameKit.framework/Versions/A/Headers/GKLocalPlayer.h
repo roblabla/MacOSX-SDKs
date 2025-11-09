@@ -263,6 +263,40 @@ NS_ASSUME_NONNULL_BEGIN
 @property(atomic, nullable, copy) void(^authenticateHandler)(NSViewController * __nullable viewController, NSError * __nullable error) NS_AVAILABLE_MAC(10_9);
 #endif
 
+#if !TARGET_OS_WATCH && !TARGET_OS_TV
+/// observable property that becomes true when the friend request view controller is displayed.  It becomes false when it is dismissed
+@property (nonatomic, readonly) BOOL isPresentingFriendRequestViewController API_AVAILABLE(ios(15.0), macos(12.0)) API_UNAVAILABLE(watchos, tvos);
+
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
+/**
+ *  presentFriendRequestCreatorFromViewController:
+ *
+ *  Discussion:
+ *      iOS only. When invoked, a Messages sheet will be presented on the viewController passed in, using the existing flow of presentation on behalf of an application.
+ *      If an error is returned, control are returned directly to the application, without presentation.
+ *
+ *      Possible reasons for error:
+ *          - The local player user account is not allowed to add friends
+ *            - The device is not allowing outgoing traffic at the time of the operation
+*/
+- (BOOL)presentFriendRequestCreatorFromViewController:(UIViewController *)viewController error:(NSError **)error API_AVAILABLE(ios(15.0))  API_UNAVAILABLE(macos, watchos, tvos);
+
+#elif TARGET_OS_OSX
+/**
+ *  presentFriendRequestCreatorFromWindow:
+ *
+ *  Discussion:
+ *      MacOS only. When invoked, if no error is encountered, the caller application is backgrounded and the 'Messages' application is launched/foregrounded, with a formatted friend request message.
+ *      If an error occurs, controls are returned to the caller application, with an error describing the error.
+ *
+ *      Possible reasons for error:
+ *          - The local player user account is not allowed to add friends
+ *            - The device is not allowing outgoing traffic at the time of the operation
+*/
+- (BOOL)presentFriendRequestCreatorFromWindow:(nullable NSWindow *)window error:(NSError **)error API_AVAILABLE(macos(12.0))  API_UNAVAILABLE(ios, watchos, tvos);
+#endif
+
+#endif
 @end
 
 NS_ASSUME_NONNULL_END

@@ -3,14 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1F71199F-62AE-3970-BF7E-1F52B446B54A
+    value:           7C6B5AC6-4A8E-32D5-8898-3924C0CB3054
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DBF87E29-A7B5-3707-AF14-F851D937317B
+    value:           C97C35D7-0B64-39ED-B125-651EFC9225F2
 install-name:    '/System/Library/Frameworks/iTunesLibrary.framework/Versions/A/iTunesLibrary'
+current-version: 0
+compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.10$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 
                        '$ld$install_name$os10.11$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 
                        '$ld$install_name$os10.12$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 
@@ -73,15 +75,15 @@ exports:
                        _ITLibPlaylistPropertyKind, _ITLibPlaylistPropertyMPVendorIdentifier, 
                        _ITLibPlaylistPropertyMPVendorTag, _ITLibPlaylistPropertyMaster, 
                        _ITLibPlaylistPropertyName, _ITLibPlaylistPropertyOwner, _ITLibPlaylistPropertyParentPersistentID, 
-                       _ITLibPlaylistPropertyVisible, _ITLibraryModifyLibraryAddItemCommmand, 
-                       _ITLibraryModifyLibraryAddPlaylistCommmand, _ITLibraryModifyLibraryAddedItemsCommandID, 
-                       _ITLibraryModifyLibraryAddedItemsNotification, _ITLibraryModifyLibraryAddedItemsPersistentIDList, 
-                       _ITLibraryModifyLibraryCommmand, _ITLibraryModifyLibraryOpaqueProductID, 
-                       _ITLibraryModifyLibraryPlaylistPersistentID, _ITLibraryModifyLibraryTrackPersistentIDList, 
-                       _kITLibraryDidChangeNotification, _kITLibraryRestrictionAppsLimit, 
-                       _kITLibraryRestrictionDisableAppleMusic, _kITLibraryRestrictionDisableArtistConnect, 
-                       _kITLibraryRestrictionDisableITunesStore, _kITLibraryRestrictionDisablePodcasts, 
-                       _kITLibraryRestrictionDisableShareLibraryInfoWithStore, _kITLibraryRestrictionExplicitBooks, 
+                       _ITLibPlaylistPropertyPrimary, _ITLibPlaylistPropertyVisible, 
+                       _ITLibraryModifyLibraryAddItemCommmand, _ITLibraryModifyLibraryAddPlaylistCommmand, 
+                       _ITLibraryModifyLibraryAddedItemsCommandID, _ITLibraryModifyLibraryAddedItemsNotification, 
+                       _ITLibraryModifyLibraryAddedItemsPersistentIDList, _ITLibraryModifyLibraryCommmand, 
+                       _ITLibraryModifyLibraryOpaqueProductID, _ITLibraryModifyLibraryPlaylistPersistentID, 
+                       _ITLibraryModifyLibraryTrackPersistentIDList, _kITLibraryDidChangeNotification, 
+                       _kITLibraryRestrictionAppsLimit, _kITLibraryRestrictionDisableAppleMusic, 
+                       _kITLibraryRestrictionDisableArtistConnect, _kITLibraryRestrictionDisableITunesStore, 
+                       _kITLibraryRestrictionDisablePodcasts, _kITLibraryRestrictionExplicitBooks, 
                        _kITLibraryRestrictionExplicitMusic, _kITLibraryRestrictionMoviesLimit, 
                        _kITLibraryRestrictionRatingSystem, _kITLibraryRestrictionRestrictApps, 
                        _kITLibraryRestrictionRestrictMovies, _kITLibraryRestrictionRestrictMusicVideos, 

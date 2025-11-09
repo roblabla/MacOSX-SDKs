@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIBezierPath, UIColor;
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @interface UIPreviewParameters : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIPreviewParameters : NSObject <NSCopying>
 
 /* The default parameters. Use these for most previews.
  */

@@ -45,7 +45,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 /// The player group identifier. Matchmaking will only take place between players in the same group.
 @property(assign) NSUInteger playerGroup;
 
-/// optional mask that specifies the role that the local player would like to play in the game.  If this value is 0 (the default), this property is ignored. If the value is nonzero, then automatching uses the value as a mask that restricts the role the player can play in the group. Automatching with player attributes matches new players into the game so that the bitwise OR of the masks of all the players in the resulting match equals 0xFFFFFFFF.
+/// optional mask that specifies the role that the local player would like to play in the game.  If this value is 0, it will be set to 0xFFFFFFFF (the default), and this property will be ignored. If the value is nonzero, then automatching uses the value as a mask that restricts the role the player can play in the group. Automatching with player attributes matches new players into the game so that the bitwise OR of the masks of all the players in the resulting match equals 0xFFFFFFFF.
 @property(assign) uint32_t playerAttributes;
 
 /// Array of GKPlayers to invite, or nil if none. This array can also include local guest players.
@@ -174,11 +174,13 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 
 @end
 
+__WATCHOS_PROHIBITED
 @interface GKMatchmaker (GKDeprecated)
 
 @property(nonatomic, nullable, copy) void(^inviteHandler)(GKInvite *acceptedInvite, NSArray * __nullable playerIDsToInvite) NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use registerListener on GKLocalPlayer to register an object that implements the GKInviteEventListenerProtocol instead") ;
 @end
 
+__WATCHOS_PROHIBITED
 @interface GKMatchmaker (Obsoleted)
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
 - (void)startBrowsingForNearbyPlayersWithReachableHandler:(void(^__nullable)(NSString *playerID, BOOL reachable))reachableHandler NS_DEPRECATED(10_9, 10_10, 6_0, 8_0, "This is never invoked and its implementation does nothing, Use startBrowsingForNearbyPlayersWithHandler: instead") ;

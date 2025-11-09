@@ -272,4 +272,3 @@ extern long IOBluetoothFindNumberOfRegistryEntriesOfClassName( const char *devic
 #ifdef	__cplusplus
 	}
 #endif
-

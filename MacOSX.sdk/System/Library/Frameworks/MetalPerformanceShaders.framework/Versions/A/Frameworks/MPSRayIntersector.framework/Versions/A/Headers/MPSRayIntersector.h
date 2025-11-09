@@ -168,6 +168,26 @@ typedef NS_ENUM(NSUInteger, MPSIntersectionDataType) {
      * @brief Use the DistancePrimitiveIndexInstanceIndexCoordinates struct type
      */
     MPSIntersectionDataTypeDistancePrimitiveIndexInstanceIndexCoordinates = 4,
+
+    /**
+     * @brief Use the MPSIntersectionDistancePrimitiveIndexBufferIndex struct type
+     */
+    MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndex MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(15.0)) = 5,
+
+    /**
+     * @brief Use the MPSIntersectionDistancePrimitiveIndexBufferIndexCoordinates struct type
+     */
+    MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndexCoordinates MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(15.0)) = 6,
+
+    /**
+     * @brief Use the DistancePrimitiveIndexBufferIndexInstanceIndex struct type
+     */
+    MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndex MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(15.0)) = 7,
+
+    /**
+     * @brief Use the DistancePrimitiveIndexBufferIndexInstanceIndexCoordinates struct type
+     */
+    MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(15.0)) = 8,
 } MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /**

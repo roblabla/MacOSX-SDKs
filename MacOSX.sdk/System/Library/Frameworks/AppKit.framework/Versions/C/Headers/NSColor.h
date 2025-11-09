@@ -1,7 +1,7 @@
 /*
 	NSColor.h
 	Application Kit
-	Copyright (c) 1994-2019, Apple Inc.
+	Copyright (c) 1994-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -244,6 +244,8 @@ typedef NS_ENUM(NSInteger, NSColorSystemEffect) {
 @property (class, strong, readonly) NSColor *systemGrayColor API_AVAILABLE(macos(10.10));
 @property (class, strong, readonly) NSColor *systemTealColor API_AVAILABLE(macos(10.12));
 @property (class, strong, readonly) NSColor *systemIndigoColor API_AVAILABLE(macos(10.15));
+@property (class, strong, readonly) NSColor *systemMintColor API_AVAILABLE(macos(10.12));
+@property (class, strong, readonly) NSColor *systemCyanColor API_AVAILABLE(macos(12.0));
 
 
 /*! A dynamic color that reflects the user's current preferred accent color. This color automatically updates when the accent color preference changes. Do not make assumptions about the color space of this color, which may change across releases. */

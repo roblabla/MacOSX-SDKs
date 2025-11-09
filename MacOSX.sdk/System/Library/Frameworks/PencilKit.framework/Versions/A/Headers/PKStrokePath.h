@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class PKStrokePoint;
 
 /// A uniform cubic B-spline representing the point data of a `PKStroke`.
-NS_REFINED_FOR_SWIFT
 API_AVAILABLE(ios(14.0), macos(11.0))
 @interface PKStrokePath : NSObject <NSCopying>
 

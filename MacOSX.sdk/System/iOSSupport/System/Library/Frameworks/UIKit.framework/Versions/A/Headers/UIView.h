@@ -127,6 +127,7 @@ typedef NS_ENUM(NSInteger, UISemanticContentAttribute) {
     UISemanticContentAttributeForceRightToLeft
 } API_AVAILABLE(ios(9.0));
 
+NS_SWIFT_UI_ACTOR
 @protocol UICoordinateSpace <NSObject>
 
 - (CGPoint)convertPoint:(CGPoint)point toCoordinateSpace:(id <UICoordinateSpace>)coordinateSpace API_AVAILABLE(ios(8.0));
@@ -138,9 +139,10 @@ typedef NS_ENUM(NSInteger, UISemanticContentAttribute) {
 
 @end
 
-@class UIBezierPath, UIEvent, UIWindow, UIViewController, UIColor, UIGestureRecognizer, UIMotionEffect, CALayer, UILayoutGuide;
+@class UIBezierPath, UIEvent, UIWindow, UIViewController, UIColor, UIGestureRecognizer, UIMotionEffect, CALayer, UILayoutGuide, UIKeyboardLayoutGuide;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIView : UIResponder <NSCoding, UIAppearance, UIAppearanceContainer, UIDynamicItem, UITraitEnvironment, UICoordinateSpace, UIFocusItem, UIFocusItemContainer, CALayerDelegate>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIView : UIResponder <NSCoding, UIAppearance, UIAppearanceContainer, UIDynamicItem, UITraitEnvironment, UICoordinateSpace, UIFocusItem, UIFocusItemContainer, CALayerDelegate>
 
 @property(class, nonatomic, readonly) Class layerClass;                        // default is [CALayer class]. Used when creating the underlying layer for the view.
 
@@ -156,6 +158,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIView : UIResponder <NSCoding, 
 
 /// The identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview's focus group.
 @property (nonatomic, readwrite, nullable, copy) NSString *focusGroupIdentifier API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos);
+
+/// The priority this item has in its focus group. The higher the priority, the more likely it is to get picked when focus moves into this group.
+/// Note: this method can only be used to increase an item's priority, not decrease it. For example if an item is currently selected, the actual priority of this item will be determined by MAX(focusGroupPriority, UIFocusGroupPrioritySelected).
+@property (nonatomic, readwrite) UIFocusGroupPriority focusGroupPriority API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
+
+/// Describes a visual effect to apply when this item is focused. If this property is nil no effect will be applied when this view becomes focused.
+@property (nonatomic, readwrite, nullable, copy) UIFocusEffect *focusEffect API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
 
 @property (nonatomic) UISemanticContentAttribute semanticContentAttribute API_AVAILABLE(ios(9.0));
 
@@ -271,6 +280,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIView : UIResponder <NSCoding, 
  the status bar or navigation bar, if present). Similarly for the other edges.
  */
 @property(nonatomic,readonly,strong) UILayoutGuide *safeAreaLayoutGuide API_AVAILABLE(ios(11.0),tvos(11.0));
+
+/// Follows the keyboard when on screen and docked. When the keyboard is offscreen or undocked, keyboardLayoutGuide.topAnchor matches the view's safeAreaLayoutGuide.bottomAnchor.
+@property(nonatomic,readonly,strong) UIKeyboardLayoutGuide *keyboardLayoutGuide API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 @end
 
 @interface UIView(UIViewRendering)
@@ -326,25 +338,25 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIView : UIResponder <NSCoding, 
 
 @interface UIView(UIViewAnimationWithBlocks)
 
-+ (void)animateWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^ __nullable)(BOOL finished))completion API_AVAILABLE(ios(4.0));
++ (void)animateWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(4.0));
 
-+ (void)animateWithDuration:(NSTimeInterval)duration animations:(void (^)(void))animations completion:(void (^ __nullable)(BOOL finished))completion API_AVAILABLE(ios(4.0)); // delay = 0.0, options = 0
++ (void)animateWithDuration:(NSTimeInterval)duration animations:(void (^)(void))animations completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(4.0)); // delay = 0.0, options = 0
 
 + (void)animateWithDuration:(NSTimeInterval)duration animations:(void (^)(void))animations API_AVAILABLE(ios(4.0)); // delay = 0.0, options = 0, completion = NULL
 
 /* Performs `animations` using a timing curve described by the motion of a spring. When `dampingRatio` is 1, the animation will smoothly decelerate to its final model values without oscillating. Damping ratios less than 1 will oscillate more and more before coming to a complete stop. You can use the initial spring velocity to specify how fast the object at the end of the simulated spring was moving before it was attached. It's a unit coordinate system, where 1 is defined as traveling the total animation distance in a second. So if you're changing an object's position by 200pt in this animation, and you want the animation to behave as if the object was moving at 100pt/s before the animation started, you'd pass 0.5. You'll typically want to pass 0 for the velocity. */
-+ (void)animateWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay usingSpringWithDamping:(CGFloat)dampingRatio initialSpringVelocity:(CGFloat)velocity options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^ __nullable)(BOOL finished))completion API_AVAILABLE(ios(7.0));
++ (void)animateWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay usingSpringWithDamping:(CGFloat)dampingRatio initialSpringVelocity:(CGFloat)velocity options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(7.0));
 
-+ (void)transitionWithView:(UIView *)view duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))animations completion:(void (^ __nullable)(BOOL finished))completion API_AVAILABLE(ios(4.0));
++ (void)transitionWithView:(UIView *)view duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))animations completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(4.0));
 
-+ (void)transitionFromView:(UIView *)fromView toView:(UIView *)toView duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options completion:(void (^ __nullable)(BOOL finished))completion API_AVAILABLE(ios(4.0)); // toView added to fromView.superview, fromView removed from its superview
++ (void)transitionFromView:(UIView *)fromView toView:(UIView *)toView duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(4.0)); // toView added to fromView.superview, fromView removed from its superview
 
 /* Performs the requested system-provided animation on one or more views. Specify additional animations in the parallelAnimations block. These additional animations will run alongside the system animation with the same timing and duration that the system animation defines/inherits. Additional animations should not modify properties of the view on which the system animation is being performed. Not all system animations honor all available options.
  */
-+ (void)performSystemAnimation:(UISystemAnimation)animation onViews:(NSArray<__kindof UIView *> *)views options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))parallelAnimations completion:(void (^ __nullable)(BOOL finished))completion API_AVAILABLE(ios(7.0));
++ (void)performSystemAnimation:(UISystemAnimation)animation onViews:(NSArray<__kindof UIView *> *)views options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))parallelAnimations completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(7.0));
 
 /* Call this method from within an animation block to repeat animations, otherwise has no effect. The total duration of a repeating animation can be computed via (outerAnimationDuration * repeatCount * autoreverses ? 2 : 1). */
-+ (void)modifyAnimationsWithRepeatCount:(CGFloat)count autoreverses:(BOOL)autoreverses animations:(void(NS_NOESCAPE ^)(void))animations API_AVAILABLE(ios(12.0),tvos(12.0));
++ (void)modifyAnimationsWithRepeatCount:(CGFloat)count autoreverses:(BOOL)autoreverses animations:(void(NS_NOESCAPE ^)(void))animations API_AVAILABLE(ios(13.0),tvos(13.0));
 
 @end
 
@@ -670,6 +682,34 @@ UIKIT_EXTERN const CGSize UILayoutFittingExpandedSize API_AVAILABLE(ios(6.0));
  * - It also affects presentations that happen inside the window.
  */
 @property (nonatomic) UIUserInterfaceStyle overrideUserInterfaceStyle API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+
+@end
+
+
+@interface UIView (UIContentSizeCategoryLimit)
+
+/// Specify content size category limits. Setting one or both of these properties will limit the
+/// content size category for this view (and its subviews) to a minimum or a maximum value.
+/// You can use this to limit the support content size categories on part of your view hierarchy.
+/// Setting this to nil removes the limit on the minimum or maximum.
+/// Limits will be applied immediately and when future content size category updates occur.
+///
+/// Specifying a minimum limit that is greater than the maximum limit (or vice versa) will effectively
+/// only use the maximum limit.
+///
+/// Example:
+///
+///     // limit the support content size categories between .medium and .accessibilityExtraLarge (included).
+///     view.minimumContentSizeCategory = UIContentSizeCategoryMedium;
+///     view.maximumContentSizeCategory = UIContentSizeCategoryAccessibilityExtraLarge;
+
+@property (nonatomic, copy, nullable) UIContentSizeCategory minimumContentSizeCategory;
+@property (nonatomic, copy, nullable) UIContentSizeCategory maximumContentSizeCategory;
+
+/// Will return a string with a log of all the superviews of this view, alongside with what
+/// content size category each view has and if that view has limits applied.
+/// This is for debugging purposes only.
+@property (nonatomic, copy, readonly) NSString *appliedContentSizeCategoryLimitsDescription;
 
 @end
 

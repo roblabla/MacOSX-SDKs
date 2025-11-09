@@ -1,10 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target x86_64-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotosUI -swift-version 5 -enforce-exclusivity=checked -O -module-name PhotosUI
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target x86_64-apple-ios15.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotosUI -swift-version 5 -enforce-exclusivity=checked -O -module-name PhotosUI
 import Photos
 @_exported import PhotosUI
 import Swift
+import _Concurrency
 @available(iOS 14, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct PHPickerFilter : Swift.Equatable, Swift.Hashable {
   public static let images: PhotosUI.PHPickerFilter
   public static let videos: PhotosUI.PHPickerFilter
@@ -17,6 +21,9 @@ public struct PHPickerFilter : Swift.Equatable, Swift.Hashable {
   }
 }
 @available(iOS 14, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct PHPickerConfiguration : Swift.Equatable, Swift.Hashable {
   public enum AssetRepresentationMode {
     case automatic
@@ -28,9 +35,29 @@ public struct PHPickerConfiguration : Swift.Equatable, Swift.Hashable {
       get
     }
   }
+  @available(iOS 15, *)
+  public enum Selection {
+    case `default`
+    case ordered
+    public static func == (a: PhotosUI.PHPickerConfiguration.Selection, b: PhotosUI.PHPickerConfiguration.Selection) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
   public var preferredAssetRepresentationMode: PhotosUI.PHPickerConfiguration.AssetRepresentationMode
+  @available(iOS 15, *)
+  public var selection: PhotosUI.PHPickerConfiguration.Selection {
+    get
+    set
+  }
   public var selectionLimit: Swift.Int
   public var filter: PhotosUI.PHPickerFilter?
+  @available(iOS 15, *)
+  public var preselectedAssetIdentifiers: [Swift.String] {
+    get
+    set
+  }
   public init(photoLibrary: Photos.PHPhotoLibrary)
   public init()
   public static func == (a: PhotosUI.PHPickerConfiguration, b: PhotosUI.PHPickerConfiguration) -> Swift.Bool
@@ -40,6 +67,9 @@ public struct PHPickerConfiguration : Swift.Equatable, Swift.Hashable {
   }
 }
 @available(iOS 14, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct PHPickerResult : Swift.Equatable, Swift.Hashable {
   public let itemProvider: Foundation.NSItemProvider
   public let assetIdentifier: Swift.String?
@@ -50,21 +80,43 @@ public struct PHPickerResult : Swift.Equatable, Swift.Hashable {
   }
 }
 @available(iOS 14, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public protocol PHPickerViewControllerDelegate : AnyObject {
   func picker(_ picker: PhotosUI.PHPickerViewController, didFinishPicking results: [PhotosUI.PHPickerResult])
 }
 @available(iOS 14, *)
-extension PHPickerViewController {
-  public var configuration: PhotosUI.PHPickerConfiguration {
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension PhotosUI.PHPickerViewController {
+  @_Concurrency.MainActor(unsafe) public var configuration: PhotosUI.PHPickerConfiguration {
     get
   }
-  weak public var delegate: PhotosUI.PHPickerViewControllerDelegate? {
+  @_Concurrency.MainActor(unsafe) weak public var delegate: PhotosUI.PHPickerViewControllerDelegate? {
     get
     set
   }
   convenience public init(configuration: PhotosUI.PHPickerConfiguration)
 }
 @available(iOS 14, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension PhotosUI.PHPickerConfiguration.AssetRepresentationMode : Swift.Equatable {}
 @available(iOS 14, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension PhotosUI.PHPickerConfiguration.AssetRepresentationMode : Swift.Hashable {}
+@available(iOS 15, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension PhotosUI.PHPickerConfiguration.Selection : Swift.Equatable {}
+@available(iOS 15, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension PhotosUI.PHPickerConfiguration.Selection : Swift.Hashable {}

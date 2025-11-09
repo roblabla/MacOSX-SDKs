@@ -1,0 +1,20 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           42251CD7-7E99-3013-9F67-E04BCE4406F4
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CABBC293-586A-33DF-92FE-1A388D322012
+install-name:    '/System/Library/PrivateFrameworks/iCloudQuotaUI.framework/Versions/A/iCloudQuotaUI'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _ICQLogDebugDataTaskComplete, _ICQLogDictKeys, _ICQLogOfferDetailsForServerDictionary, 
+                       __ICQGetLogSystem, __ICQSignpostCreate, __ICQSignpostCreateWithObject, 
+                       __ICQSignpostGetNanoseconds, __ICQSignpostLogSystem, _iCloudQuotaUIVersionNumber, 
+                       _iCloudQuotaUIVersionString ]
+    objc-classes:    [ ICQInternetPrivacyBannerModel, ICQInternetPrivacyPrefPaneViewController, 
+                       ICQInternetPrivacyViewModel ]
+...

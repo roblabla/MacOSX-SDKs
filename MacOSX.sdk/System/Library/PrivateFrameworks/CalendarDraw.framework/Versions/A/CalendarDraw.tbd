@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2CB4B45D-41EC-3262-87B3-7D97F24E8207
+    value:           85DA8EB7-1E81-36D8-BC97-866C7B7AC9D5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           433D94D1-55A7-3D08-84FD-FB8EF499D86A
+    value:           119BF697-0CDD-3EEE-98F8-73CA05E9BD49
 install-name:    '/System/Library/PrivateFrameworks/CalendarDraw.framework/Versions/A/CalendarDraw'
-current-version: 2389.4.2
+current-version: 2395
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CalCGColorConvertToRGBCopy, _CalCGColorCreateBlendedWithFraction, 
@@ -19,7 +19,8 @@ exports:
                        _CalUIImageScaleForUserRect, _CalUIUseiPadStyle, _CalendarTileGetTentativeBackgroundColor, 
                        _CalendarTileGetTentativeDotColor, _CalendarUIBundle, _CreateBackgroundImage, 
                        _CreateCalendarDotImageInContext, _CreateCalendarForegroundColorForCGColor, 
-                       _CreateCalendarTileImageInContext, _GetRGBAComponents, __CalCGColorLoadConstantColor, 
+                       _CreateCalendarTileImageInContext, _GetRGBAComponents, _NeedsReplyEventBackgroundColor, 
+                       _NeedsReplyEventStripeColor, __CalCGColorLoadConstantColor, 
                        _colorNeedsTransform, _kCalCGColorBlue, _kCalCGColorBrown, 
                        _kCalCGColorGreen, _kCalCGColorOrange, _kCalCGColorPurple, 
                        _kCalCGColorRed, _kCalCGColorYellow ]

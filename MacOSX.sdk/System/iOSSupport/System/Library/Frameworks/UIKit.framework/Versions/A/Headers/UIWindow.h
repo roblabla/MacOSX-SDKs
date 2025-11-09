@@ -18,7 +18,8 @@ typedef CGFloat UIWindowLevel NS_TYPED_EXTENSIBLE_ENUM;
 
 @class UIEvent, UIScreen, NSUndoManager, UIViewController, UIWindowScene;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIWindow : UIView
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIWindow : UIView
 
 // instantiate a UIWindow already associated with a given UIWindowScene instance, with matching frame & interface orientations.
 - (instancetype)initWithWindowScene:(UIWindowScene *)windowScene API_AVAILABLE(ios(13.0));
@@ -34,12 +35,33 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIWindow : UIView
 - (void)setScreen:(UIScreen *)screen API_DEPRECATED_WITH_REPLACEMENT("setWindowScene:", ios(3.2, 13.0));
 
 @property(nonatomic) UIWindowLevel windowLevel;                   // default = 0.0
-@property(nonatomic,readonly,getter=isKeyWindow) BOOL keyWindow;
-- (void)becomeKeyWindow;                               // override point for subclass. Do not call directly
-- (void)resignKeyWindow;                               // override point for subclass. Do not call directly
 
+// In apps built against the iOS 15 or tvOS 15 SDK (or later), this property returns YES if
+// the window is its scene's key window. For apps built against earlier SDKs, this property
+// returns YES if the window is the application's key window.
+@property(nonatomic,readonly,getter=isKeyWindow) BOOL keyWindow;
+
+// Default is YES. Return NO to indicate the window cannot become the key window.
+@property (nonatomic, readonly) BOOL canBecomeKeyWindow API_AVAILABLE(ios(15.0));
+
+// Override point for subclasses. Do not call directly. Informs the window it has become the
+// key window. In apps built against the iOS 15 or tvOS 15 SDK (or later), this method will
+// be called when the window becomes its scene's key window. For apps built against earlier
+// SDKs, this method will be called when the window becomes the application's key window.
+- (void)becomeKeyWindow;
+
+// Override point for subclasses. Do not call directly. Informs the window it has resigned key
+// window status. In apps built against the iOS 15 or tvOS 15 SDK (or later), this method will
+// be called when the window resigns key in its scene. For apps built against earlier SDKs,
+// this method will be called when the window resigns key in the application.
+- (void)resignKeyWindow;
+
+// Make the window key without changing visibility.
 - (void)makeKeyWindow;
-- (void)makeKeyAndVisible;                             // convenience. most apps call this to show the main window and also make it key. otherwise use view hidden property
+
+// Convenience. Most apps call this to show a window and also make it key.
+// To make the window visible without becoming key, just use UIView's hidden property.
+- (void)makeKeyAndVisible;
 
 @property(nullable, nonatomic,strong) UIViewController *rootViewController API_AVAILABLE(ios(4.0));  // default is nil
 
@@ -56,10 +78,23 @@ UIKIT_EXTERN const UIWindowLevel UIWindowLevelNormal;
 UIKIT_EXTERN const UIWindowLevel UIWindowLevelAlert;
 UIKIT_EXTERN const UIWindowLevel UIWindowLevelStatusBar API_UNAVAILABLE(tvos);
 
-UIKIT_EXTERN NSNotificationName const UIWindowDidBecomeVisibleNotification; // nil
-UIKIT_EXTERN NSNotificationName const UIWindowDidBecomeHiddenNotification;  // nil
-UIKIT_EXTERN NSNotificationName const UIWindowDidBecomeKeyNotification;     // nil
-UIKIT_EXTERN NSNotificationName const UIWindowDidResignKeyNotification;     // nil
+// Posted when the window becomes visible with a nil userInfo dictionary.
+UIKIT_EXTERN NSNotificationName const UIWindowDidBecomeVisibleNotification;
+
+// Posted when the window becomes hidden with a nil userInfo dictionary.
+UIKIT_EXTERN NSNotificationName const UIWindowDidBecomeHiddenNotification;
+
+// Posted when the window becomes the key window with a nil userInfo dictionary. In apps built
+// against the iOS 15 or tvOS 15 SDK (or later), this notification will be posted when the window
+// becomes its scene's key window. For apps built against earlier SDKs, it will be posted when
+// the window becomes the application's key window.
+UIKIT_EXTERN NSNotificationName const UIWindowDidBecomeKeyNotification;
+
+// Posted when the window resigns key window status with a nil userInfo dictionary. In apps built
+// against the iOS 15 or tvOS 15 SDK (or later), this notification will be posted when the window
+// resigns key in its scene. For apps built against earlier SDKs, it will be posted when the window
+// resigns key in the application.
+UIKIT_EXTERN NSNotificationName const UIWindowDidResignKeyNotification;
 
 // Each notification includes a nil object and a userInfo dictionary containing the
 // beginning and ending keyboard frame in screen coordinates. Use the various UIView and

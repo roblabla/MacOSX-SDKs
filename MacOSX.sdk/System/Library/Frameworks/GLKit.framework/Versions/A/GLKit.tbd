@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D6295993-9918-324B-BCB1-E8161311C6F5
+    value:           A1703216-FE91-3473-BED8-020117C2C945
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8635220D-84EF-346E-B0B0-484EE7072152
+    value:           A5CDEFDB-D4E9-30E4-AE50-C0C381073CFA
 install-name:    '/System/Library/Frameworks/GLKit.framework/Versions/A/GLKit'
-current-version: 124
+current-version: 125
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _GLKMathProject, _GLKMathUnproject, _GLKMatrix3Identity, _GLKMatrix3Invert, 

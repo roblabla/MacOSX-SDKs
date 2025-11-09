@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AB512F24-384B-31F7-AC43-FAD530E826E3
+    value:           B59D2622-E0B9-3FFA-B266-CE67EC8BE00E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2211AC59-8481-3814-A5D3-E9238E08EE18
+    value:           1D0500BB-CE0E-37AF-BD1B-83E146784059
 install-name:    '/System/Library/PrivateFrameworks/ConfigurationProfiles.framework/Versions/A/ConfigurationProfiles'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _BZip2Compress, _BZip2Decompress, _CPCloudConfigInfoDidFail, 
-                       _CPCloudConfigInfoDidSucceed, _CPCloudConfigIsMDMv2Notification, 
+    symbols:         [ _BZip2Compress, _BZip2Decompress, _CPClearActivationInfo, 
+                       _CPCloudConfigInfoDidFail, _CPCloudConfigInfoDidSucceed, _CPCloudConfigIsMDMv2Notification, 
                        _CPCloudDeviceEnabledBitsDidChange, _CPCreateProvisioningDictionaries, 
                        _CPFetchActivationRecord, _CPGDI_AddDetailsRow, _CPGDI_AddDetailsRowWithStyle, 
                        _CPGDI_GetLocStr, _CPGDI_GetOptLocStr, _CPGDI_RequestPayloadHidden, 
@@ -20,13 +20,14 @@ exports:
                        _CPGDI_SetSummaryNote, _CPGetActivationProfile, _CPGetActivationRecord, 
                        _CPGetActivationRecordTrigger, _CPGetCachedActivationRecord, 
                        _CPGetInstalledConfigurationInfo, _CPHasActivationRecord, 
-                       _CPInstallActivationProfileFromSetupAssistant, _CPInstallActivationProfilePriv, 
                        _CPInstalledProfilesDidChangeNotification, _CPInstalledProfilesNeedsLogout, 
                        _CPInstalledProvisioningProfilesApplicationIdentifierKey, 
+                       _CPInstalledProvisioningProfilesBundlePathKey, _CPInstalledProvisioningProfilesCDHashKey, 
+                       _CPInstalledProvisioningProfilesCertChainKey, _CPInstalledProvisioningProfilesCodeInfoIdentifierKey, 
                        _CPInstalledProvisioningProfilesDataKey, _CPInstalledProvisioningProfilesDictionaryApplicationIdentifierKey, 
                        _CPInstalledProvisioningProfilesDictionaryApplicationIdentifierPrefixKey, 
-                       _CPInstalledProvisioningProfilesDictionaryCertDataKey, _CPInstalledProvisioningProfilesDictionaryCertsInfoKey, 
-                       _CPInstalledProvisioningProfilesDictionaryCreationDateKey, 
+                       _CPInstalledProvisioningProfilesDictionaryCDHashesKey, _CPInstalledProvisioningProfilesDictionaryCertDataKey, 
+                       _CPInstalledProvisioningProfilesDictionaryCertsInfoKey, _CPInstalledProvisioningProfilesDictionaryCreationDateKey, 
                        _CPInstalledProvisioningProfilesDictionaryDeveloperCertificatesKey, 
                        _CPInstalledProvisioningProfilesDictionaryEntitlementsKey, 
                        _CPInstalledProvisioningProfilesDictionaryExpirationDateKey, 
@@ -36,17 +37,18 @@ exports:
                        _CPInstalledProvisioningProfilesDictionaryProvisionedDevicesKey, 
                        _CPInstalledProvisioningProfilesDictionarySuccessKey, _CPInstalledProvisioningProfilesDictionaryTimeToLiveKey, 
                        _CPInstalledProvisioningProfilesDictionaryUUIDKey, _CPInstalledProvisioningProfilesDictionaryVersionKey, 
-                       _CPInstalledProvisioningProfilesDidChangeNotification, _CPInstalledProvisioningProfilesUUIDKey, 
-                       _CPInstalledProvisioningProfilesUserDataKey, _CPMF_AddArrayIndexToKeyPath, 
-                       _CPMF_AddDictKeyToKeyPath, _CPMF_GetLocStrFmt, _CPMF_IsKeyMissing, 
-                       _CPMF_SplitKeyPaths, _CPManagedClientLoginAgentCheckinNotification, 
+                       _CPInstalledProvisioningProfilesDidChangeNotification, _CPInstalledProvisioningProfilesEntitlementsKey, 
+                       _CPInstalledProvisioningProfilesUUIDKey, _CPInstalledProvisioningProfilesUserDataKey, 
+                       _CPMF_AddArrayIndexToKeyPath, _CPMF_AddDictKeyToKeyPath, _CPMF_GetLocStrFmt, 
+                       _CPMF_IsKeyMissing, _CPMF_SplitKeyPaths, _CPManagedClientLoginAgentCheckinNotification, 
                        _CPPayloadCountStringsDictKey_CountFirst, _CPPayloadCountStringsDictKey_CountLast, 
                        _CPPayloadCountStringsDictKey_SingularOnly, _CPPayloadCountStringsKeySuffix, 
-                       _CPProfilePreferencesChangedNotification, _CPProfileScreenLockChangedNotification, 
-                       _CPRenewDEPEnrollment, _CPSetActivationProfileState, _CPSetPrimaryAccountGUID, 
-                       _CPSetSetupAssistantUserInfo, _CPValidateProvisioningDictionaries, 
-                       _CP_ADCertificatePayloadUsesRPC, _CP_ArchiveNSError, _CP_AreMajorOSUpdatesManaged, 
-                       _CP_BootstrapTokenToData, _CP_CacheCloudConfigRecord, _CP_CaspianProfilesAreInstalled, 
+                       _CPProcessDEPUserConfiguration, _CPProfilePreferencesChangedNotification, 
+                       _CPProfileScreenLockChangedNotification, _CPRenewDEPEnrollment, 
+                       _CPSetActivationProfileState, _CPSetPrimaryAccountGUID, _CPSetSetupAssistantUserInfo, 
+                       _CPValidateProvisioningDictionaries, _CP_ADCertificatePayloadUsesRPC, 
+                       _CP_ArchiveNSError, _CP_AreMajorOSUpdatesManaged, _CP_BootstrapTokenToData, 
+                       _CP_CacheCloudConfigRecord, _CP_CaspianProfilesAreInstalled, 
                        _CP_CloudConfigDeviceSetupBitsFileLocation, _CP_CloudConfigHasActivationRecordHintFlagFileLocation, 
                        _CP_CloudConfigNoActivationRecordHintFlagFileLocation, _CP_CloudConfigRecordFoundCacheFileLocation, 
                        _CP_CloudConfigRecordInstalledHintFlagFileLocation, _CP_CloudConfigRecordNotFoundHintFlagFileLocation, 

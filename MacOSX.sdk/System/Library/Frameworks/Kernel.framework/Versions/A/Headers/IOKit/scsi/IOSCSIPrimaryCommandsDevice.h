@@ -63,10 +63,11 @@ enum
 // Timeout values
 enum
 {
-	kOneSecondTimeoutInMS 		= 1000,
-	kTenSecondTimeoutInMS 		= 10 * kOneSecondTimeoutInMS,
-	kThirtySecondTimeoutInMS	= 30 * kOneSecondTimeoutInMS,
-    kFortyFiveSecondTimeoutInMS	= 45 * kOneSecondTimeoutInMS
+	kOneSecondTimeoutInMS 		    = 1000,
+	kTenSecondTimeoutInMS 		    = 10 * kOneSecondTimeoutInMS,
+    kTwentyFiveSecondTimeoutInMS    = 25 * kOneSecondTimeoutInMS,
+	kThirtySecondTimeoutInMS	    = 30 * kOneSecondTimeoutInMS,
+    kFortyFiveSecondTimeoutInMS	    = 45 * kOneSecondTimeoutInMS
 };
 
 // Mode page values for page control field

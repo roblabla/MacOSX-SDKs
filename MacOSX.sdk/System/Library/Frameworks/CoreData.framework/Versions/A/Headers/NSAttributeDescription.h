@@ -1,7 +1,7 @@
 /*
     NSAttributeDescription.h
     Core Data
-    Copyright (c) 2004-2020, Apple Inc.
+    Copyright (c) 2004-2021, Apple Inc.
     All rights reserved.
 */
 
@@ -55,6 +55,17 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 
 /* Indicates if the value of the attribute should be captured on delete when Persistent History is enabled */
 @property () BOOL preservesValueInHistoryOnDeletion API_AVAILABLE(macosx(10.15),ios(13.0),tvos(13.0),watchos(6.0));
+
+/*
+ * This property can be set to enable encryption-at-rest on data stored in CloudKit servers.
+ *
+ * There are several restrictions on how clients can use this property:
+ *  1. Attributes to be encrypted must be new additions to the CloudKit schema. Attributes that already exist in the production schema cannot be changed to support encryption.
+ *  2. Attributes cannot (ever) change their encryption state in the CloudKit schema. Once something is encrypted (or not) it will forever be so.
+ *
+ * Note: This property does not affect the data in the persistent store. Local file encryption should continue to be managed by using NSFileProtection and other standard platform security mechanisms.
+ */
+@property () BOOL allowsCloudEncryption API_AVAILABLE(macosx(12.0),ios(15.0),tvos(15.0),watchos(8.0));
 
 @end
 

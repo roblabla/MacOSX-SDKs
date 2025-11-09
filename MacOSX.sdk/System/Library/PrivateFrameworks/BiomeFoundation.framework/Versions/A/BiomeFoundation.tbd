@@ -1,20 +1,32 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           33DD9A1A-D002-3720-95F6-BECFDA4FCFDD
+    value:           DAB5040F-94B5-3663-BDA7-04D548D772C4
+  - target:          x86_64-maccatalyst
+    value:           DAB5040F-94B5-3663-BDA7-04D548D772C4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D1EB379E-CBEC-31EC-B2A8-0E8BCB43DF0C
+    value:           D1309565-DE57-3EC4-8055-0B0F783E1513
+  - target:          arm64e-maccatalyst
+    value:           D1309565-DE57-3EC4-8055-0B0F783E1513
 install-name:    '/System/Library/PrivateFrameworks/BiomeFoundation.framework/Versions/A/BiomeFoundation'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _BMAbsoluteTimeFromCFAbsoluteTime, _BMAbsoluteTimeFromContinuousTime, 
                        _BMAbsoluteTimeGetCurrent, _BMAbsoluteTimeGetOffsets, _BMAbsoluteTimeInitWithSyntheticStart, 
                        _BMAbsoluteTimeSetSyntheticStartFromRemoteTime, _BMAbsoluteTimeToCFAbsoluteTime, 
-                       _BMArbitraryTimestampToCFAbsoluteTime, _BiomeFoundationVersionNumber, 
+                       _BMAppleInternalReadEntitlement, _BMAppleInternalWriteEntitlement, 
+                       _BMArbitraryTimestampToCFAbsoluteTime, _BMCopyValueForEntitlement, 
+                       _BMDevicePlatformFromModelString, _BMDevicePlatformGetDescription, 
+                       _BMReadEntitlement, _BMWriteEntitlement, _BiomeFoundationVersionNumber, 
                        _BiomeFoundationVersionString, ___biome_log_create, ___biome_log_create_for_category ]
-    objc-classes:    [ BMCoreAnalyticsEvents ]
+    objc-classes:    [ BMCoreAnalyticsEvents, BMDeviceMetadataUtils, BMPaths, BMPublicStreamUtilities, 
+                       BMStoreDirectory ]
 ...

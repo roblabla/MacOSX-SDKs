@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1CA0245C-928D-3085-9339-A51A0B6FB867
+    value:           BEED0F5B-D7C5-3728-ACC5-540B92BCFB3F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           354D6A86-EC39-3747-A90F-48803B10AE25
+    value:           793712D0-746F-3E2D-87EF-821D9F9EF4DC
 install-name:    '/System/Library/PrivateFrameworks/NewDeviceOutreach.framework/Versions/A/NewDeviceOutreach'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

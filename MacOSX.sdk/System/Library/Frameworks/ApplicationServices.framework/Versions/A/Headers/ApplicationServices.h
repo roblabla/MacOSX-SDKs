@@ -47,8 +47,15 @@
 #include <ImageIO/ImageIO.h>
 #endif
 
-#ifndef __LANGANALYSIS__
-#include <LangAnalysis/LangAnalysis.h>
+#if __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_12_0 || __LANGANALYSIS_FORCE_INCLUSION_FROM_APPLICATIONSERVICES__
+	//	LangAnalysis.framework was fully removed in macOS 12.0, after being deprecated in macOS 10.5
+	#ifndef __LANGANALYSIS__
+		#if defined(__has_include) && __has_include(<LangAnalysis/LangAnalysis.h>)
+			#include <LangAnalysis/LangAnalysis.h>
+		#elif __LANGANALYSIS_FORCE_INCLUSION_FROM_APPLICATIONSERVICES__
+			#include <LangAnalysis/LangAnalysis.h>
+		#endif
+	#endif
 #endif
 
 #ifndef __PRINTCORE__

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B80ADD34-7DC3-384F-AE27-136BFF227B21
+    value:           884B928C-2CFC-37DF-A504-3C1343575970
   - target:          x86_64-maccatalyst
-    value:           B80ADD34-7DC3-384F-AE27-136BFF227B21
+    value:           884B928C-2CFC-37DF-A504-3C1343575970
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           53FF34B0-993B-3A8E-8BF3-B0C3B8EF0096
+    value:           04A676BC-6CA9-3FAD-B0A6-C30D3B37DDB9
   - target:          arm64e-maccatalyst
-    value:           53FF34B0-993B-3A8E-8BF3-B0C3B8EF0096
+    value:           04A676BC-6CA9-3FAD-B0A6-C30D3B37DDB9
 install-name:    '/usr/lib/system/introspection/libdispatch.dylib'
-current-version: 1271.100.5
+current-version: 1324.0.10
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -58,12 +58,15 @@ exports:
                        __os_object_retain, __os_object_retain_internal, __os_object_retain_internal_n, 
                        __os_object_retain_with_resurrect, _dispatch_activate, _dispatch_after, 
                        _dispatch_after_f, _dispatch_allocator_layout, _dispatch_apply, 
-                       _dispatch_apply_f, _dispatch_assert_queue, '_dispatch_assert_queue$V2', 
-                       _dispatch_assert_queue_barrier, _dispatch_assert_queue_not, 
-                       '_dispatch_assert_queue_not$V2', _dispatch_async, _dispatch_async_and_wait, 
-                       _dispatch_async_and_wait_f, _dispatch_async_enforce_qos_class_f, 
-                       _dispatch_async_f, _dispatch_atfork_child, _dispatch_atfork_parent, 
-                       _dispatch_atfork_prepare, _dispatch_barrier_async, _dispatch_barrier_async_and_wait, 
+                       _dispatch_apply_attr_destroy, _dispatch_apply_attr_init, _dispatch_apply_attr_query, 
+                       _dispatch_apply_attr_set_amx_parallelism, _dispatch_apply_f, 
+                       _dispatch_apply_with_attr, _dispatch_apply_with_attr_f, _dispatch_assert_queue, 
+                       '_dispatch_assert_queue$V2', _dispatch_assert_queue_barrier, 
+                       _dispatch_assert_queue_not, '_dispatch_assert_queue_not$V2', 
+                       _dispatch_async, _dispatch_async_and_wait, _dispatch_async_and_wait_f, 
+                       _dispatch_async_enforce_qos_class_f, _dispatch_async_f, _dispatch_async_swift_job, 
+                       _dispatch_atfork_child, _dispatch_atfork_parent, _dispatch_atfork_prepare, 
+                       _dispatch_barrier_async, _dispatch_barrier_async_and_wait, 
                        _dispatch_barrier_async_and_wait_f, _dispatch_barrier_async_f, 
                        _dispatch_barrier_sync, _dispatch_barrier_sync_f, _dispatch_benchmark, 
                        _dispatch_benchmark_f, _dispatch_block_cancel, _dispatch_block_create, 
@@ -129,14 +132,14 @@ exports:
                        _dispatch_source_set_mandatory_cancel_handler, _dispatch_source_set_mandatory_cancel_handler_f, 
                        _dispatch_source_set_registration_handler, _dispatch_source_set_registration_handler_f, 
                        _dispatch_source_set_timer, _dispatch_source_testcancel, _dispatch_suspend, 
-                       _dispatch_sync, _dispatch_sync_f, _dispatch_time, _dispatch_time_to_nsecs, 
-                       _dispatch_tsd_indexes, _dispatch_walltime, _dispatch_workloop_copy_current, 
-                       _dispatch_workloop_create, _dispatch_workloop_create_inactive, 
-                       _dispatch_workloop_is_current, _dispatch_workloop_set_autorelease_frequency, 
-                       _dispatch_workloop_set_cpupercent, _dispatch_workloop_set_os_workgroup, 
-                       _dispatch_workloop_set_qos_class, _dispatch_workloop_set_qos_class_floor, 
-                       _dispatch_workloop_set_scheduler_priority, _dispatch_write, 
-                       _dispatch_write_f, _libdispatch_init, _mach_voucher_persona_for_originator, 
+                       _dispatch_swift_job_should_yield, _dispatch_sync, _dispatch_sync_f, 
+                       _dispatch_time, _dispatch_time_to_nsecs, _dispatch_tsd_indexes, 
+                       _dispatch_walltime, _dispatch_workloop_copy_current, _dispatch_workloop_create, 
+                       _dispatch_workloop_create_inactive, _dispatch_workloop_is_current, 
+                       _dispatch_workloop_set_autorelease_frequency, _dispatch_workloop_set_cpupercent, 
+                       _dispatch_workloop_set_os_workgroup, _dispatch_workloop_set_qos_class, 
+                       _dispatch_workloop_set_qos_class_floor, _dispatch_workloop_set_scheduler_priority, 
+                       _dispatch_write, _dispatch_write_f, _libdispatch_init, _mach_voucher_persona_for_originator, 
                        _mach_voucher_persona_self, _os_eventlink_activate, _os_eventlink_associate, 
                        _os_eventlink_cancel, _os_eventlink_create, _os_eventlink_create_remote_with_eventlink, 
                        _os_eventlink_create_with_port, _os_eventlink_disassociate, 
@@ -145,8 +148,10 @@ exports:
                        _os_release, _os_retain, _os_workgroup_attr_set_flags, _os_workgroup_attr_set_interval_type, 
                        _os_workgroup_cancel, _os_workgroup_copy_port, _os_workgroup_create, 
                        _os_workgroup_create_with_port, _os_workgroup_create_with_workgroup, 
-                       _os_workgroup_get_working_arena, _os_workgroup_interval_copy_current_4AudioToolbox, 
-                       _os_workgroup_interval_create, _os_workgroup_interval_finish, 
+                       _os_workgroup_create_with_workload_id, _os_workgroup_create_with_workload_id_and_port, 
+                       _os_workgroup_create_with_workload_id_and_workgroup, _os_workgroup_get_working_arena, 
+                       _os_workgroup_interval_copy_current_4AudioToolbox, _os_workgroup_interval_create, 
+                       _os_workgroup_interval_create_with_workload_id, _os_workgroup_interval_finish, 
                        _os_workgroup_interval_start, _os_workgroup_interval_update, 
                        _os_workgroup_join, _os_workgroup_join_self, _os_workgroup_leave, 
                        _os_workgroup_leave_self, _os_workgroup_max_parallel_threads, 
@@ -162,7 +167,7 @@ exports:
                        _voucher_get_activity_id, _voucher_get_activity_id_and_creator, 
                        _voucher_get_current_persona, _voucher_get_current_persona_originator_info, 
                        _voucher_get_current_persona_proximate_info, _voucher_kvoucher_debug, 
-                       _voucher_replace_default_voucher ]
+                       _voucher_process_can_use_arbitrary_personas, _voucher_replace_default_voucher ]
     objc-classes:    [ OS_dispatch_channel, OS_dispatch_data, OS_dispatch_disk, OS_dispatch_group, 
                        OS_dispatch_io, OS_dispatch_mach, OS_dispatch_mach_msg, OS_dispatch_object, 
                        OS_dispatch_operation, OS_dispatch_queue, OS_dispatch_queue_attr, 

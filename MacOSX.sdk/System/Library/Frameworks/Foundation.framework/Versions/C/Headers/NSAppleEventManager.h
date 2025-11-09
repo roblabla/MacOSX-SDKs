@@ -4,9 +4,7 @@
 */
 
 #import <Foundation/NSObject.h>
-#if !TARGET_OS_MACCATALYST
-#import <ApplicationServices/ApplicationServices.h>
-#endif
+#import <CoreServices/CoreServices.h>
 #import <Foundation/NSNotification.h>
 
 @class NSAppleEventDescriptor;

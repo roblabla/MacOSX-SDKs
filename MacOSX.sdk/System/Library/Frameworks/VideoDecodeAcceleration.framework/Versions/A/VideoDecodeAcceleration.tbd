@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           95A001AB-E8B2-3EA0-9956-D0D087B49A9B
+    value:           A1228CF7-DB34-3CF6-9D94-970D1CD7FAA6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5AD1BAD5-F897-3271-81C6-7166AFAF7561
+    value:           A5E89FF8-776F-3D05-81B1-D1B05EB2BCDD
 install-name:    '/System/Library/Frameworks/VideoDecodeAcceleration.framework/Versions/A/VideoDecodeAcceleration'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AC8D9218-D478-33D9-8F85-FA18FDC9A35B
+    value:           78C1FA01-83C1-38B3-ACC2-A2E853DA5B44
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           54FE791E-364B-37C3-B37F-4608BC8B045B
+    value:           5E0A50F2-F571-3773-930E-3A2ABB1E5F09
 install-name:    '/System/Library/PrivateFrameworks/NetworkStatistics.framework/Versions/A/NetworkStatistics'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -32,13 +32,14 @@ exports:
                        _kNStatSrcKeyChannelArchitecture, _kNStatSrcKeyConnProbeFailed, 
                        _kNStatSrcKeyConnectAttempt, _kNStatSrcKeyConnectSuccess, 
                        _kNStatSrcKeyDurationAbsoluteTime, _kNStatSrcKeyEPID, _kNStatSrcKeyEUPID, 
-                       _kNStatSrcKeyEUUID, _kNStatSrcKeyEventFlags, _kNStatSrcKeyInterface, 
-                       _kNStatSrcKeyInterfaceCellConfigBackoffTime, _kNStatSrcKeyInterfaceCellConfigInactivityTime, 
-                       _kNStatSrcKeyInterfaceCellUlAvgQueueSize, _kNStatSrcKeyInterfaceCellUlMaxQueueSize, 
-                       _kNStatSrcKeyInterfaceCellUlMinQueueSize, _kNStatSrcKeyInterfaceDescription, 
-                       _kNStatSrcKeyInterfaceDlCurrentBandwidth, _kNStatSrcKeyInterfaceDlMaxBandwidth, 
-                       _kNStatSrcKeyInterfaceIsAWD, _kNStatSrcKeyInterfaceIsAWDL, 
-                       _kNStatSrcKeyInterfaceIsCellFallback, _kNStatSrcKeyInterfaceIsExpensive, 
+                       _kNStatSrcKeyEUUID, _kNStatSrcKeyEventFlags, _kNStatSrcKeyFUUID, 
+                       _kNStatSrcKeyInterface, _kNStatSrcKeyInterfaceCellConfigBackoffTime, 
+                       _kNStatSrcKeyInterfaceCellConfigInactivityTime, _kNStatSrcKeyInterfaceCellUlAvgQueueSize, 
+                       _kNStatSrcKeyInterfaceCellUlMaxQueueSize, _kNStatSrcKeyInterfaceCellUlMinQueueSize, 
+                       _kNStatSrcKeyInterfaceDescription, _kNStatSrcKeyInterfaceDlCurrentBandwidth, 
+                       _kNStatSrcKeyInterfaceDlMaxBandwidth, _kNStatSrcKeyInterfaceIsAWD, 
+                       _kNStatSrcKeyInterfaceIsAWDL, _kNStatSrcKeyInterfaceIsCellFallback, 
+                       _kNStatSrcKeyInterfaceIsCellPreferred, _kNStatSrcKeyInterfaceIsExpensive, 
                        _kNStatSrcKeyInterfaceLinkQualityMetric, _kNStatSrcKeyInterfaceName, 
                        _kNStatSrcKeyInterfaceThreshold, _kNStatSrcKeyInterfaceType, 
                        _kNStatSrcKeyInterfaceTypeCellular, _kNStatSrcKeyInterfaceTypeCompanionLink, 

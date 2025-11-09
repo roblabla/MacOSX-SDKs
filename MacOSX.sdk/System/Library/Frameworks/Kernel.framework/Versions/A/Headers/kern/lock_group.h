@@ -29,7 +29,7 @@
 #define _KERN_LOCK_GROUP_H
 
 #include <kern/queue.h>
-#include <mach/mach_types.h>
+#include <kern/lock_types.h>
 
 __BEGIN_DECLS
 

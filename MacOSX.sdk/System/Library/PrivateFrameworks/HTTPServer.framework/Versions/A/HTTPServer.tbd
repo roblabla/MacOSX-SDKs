@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1C5BC22B-A709-3254-9DDA-69ED6903D67A
+    value:           B9DC3672-BB76-3476-B18C-3DA72EA09D67
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           16D7F42A-B106-39D9-A541-9674F69D19B6
+    value:           C0A5C984-4612-3BBC-B30A-7FCF4CC526C2
 install-name:    '/System/Library/PrivateFrameworks/HTTPServer.framework/Versions/A/HTTPServer'
 current-version: 39
 exports:

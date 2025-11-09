@@ -1,0 +1,89 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           0FE14B9E-4EE1-323B-AD92-DBA446F78284
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A542106D-A628-3D56-B1E2-EB70C484D74B
+install-name:    '/System/Library/PrivateFrameworks/PreviewsOSSupport.framework/Versions/A/PreviewsOSSupport'
+current-version: 19073
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ '_$s17PreviewsOSSupport15AgentEntryPointMp', '_$s17PreviewsOSSupport15AgentEntryPointTL', 
+                       '_$s17PreviewsOSSupport18PreviewPreferencesV0A10Foundation25PropertyListRepresentableAAMc', 
+                       '_$s17PreviewsOSSupport18PreviewPreferencesV0A10Foundation25PropertyListRepresentableAAWP', 
+                       '_$s17PreviewsOSSupport18PreviewPreferencesV13preferredSize0E11OrientationACSo6CGSizeVSg_0A9Messaging0c9InterfaceG0OSgtcfC', 
+                       '_$s17PreviewsOSSupport18PreviewPreferencesV13preferredSizeSo6CGSizeVSgvg', 
+                       '_$s17PreviewsOSSupport18PreviewPreferencesV13preferredSizeSo6CGSizeVSgvpMV', 
+                       '_$s17PreviewsOSSupport18PreviewPreferencesV17propertyListValue0A10Foundation08PropertyF0Vvg', 
+                       '_$s17PreviewsOSSupport18PreviewPreferencesV17propertyListValue0A10Foundation08PropertyF0VvpMV', 
+                       '_$s17PreviewsOSSupport18PreviewPreferencesV17propertyListValueAC0A10Foundation08PropertyF0V_tKcfC', 
+                       '_$s17PreviewsOSSupport18PreviewPreferencesV20preferredOrientation0A9Messaging0c9InterfaceF0OSgvg', 
+                       '_$s17PreviewsOSSupport18PreviewPreferencesV20preferredOrientation0A9Messaging0c9InterfaceF0OSgvpMV', 
+                       '_$s17PreviewsOSSupport18PreviewPreferencesVMa', '_$s17PreviewsOSSupport18PreviewPreferencesVMn', 
+                       '_$s17PreviewsOSSupport18PreviewPreferencesVN', '_$s17PreviewsOSSupport18decodeReplyHandleryys6ResultOy0A10Foundation12PropertyListVs5Error_pGcySo010UVPropertyI0CSg_sAH_pSgtcF', 
+                       '_$s17PreviewsOSSupport18decodeReplyHandleryys6ResultOy10Foundation4DataVs5Error_pGcyAGSg_sAH_pSgtcF', 
+                       '_$s17PreviewsOSSupport18decodeReplyHandleryys6ResultOySSs5Error_pGcySSSg_sAE_pSgtcF', 
+                       '_$s17PreviewsOSSupport18decodeReplyHandleryys6ResultOyyts5Error_pGcySo8NSNumberCSg_sAE_pSgtcF', 
+                       '_$s17PreviewsOSSupport18encodeReplyHandleryy10Foundation4DataVSg_s5Error_pSgtcys6ResultOyAEsAG_pGcF', 
+                       '_$s17PreviewsOSSupport18encodeReplyHandleryySSSg_s5Error_pSgtcys6ResultOySSsAD_pGcF', 
+                       '_$s17PreviewsOSSupport18encodeReplyHandleryySo14UVPropertyListCSg_s5Error_pSgtcys6ResultOy0A10Foundation08PropertyG0VsAF_pGcF', 
+                       '_$s17PreviewsOSSupport18encodeReplyHandleryySo8NSNumberCSg_s5Error_pSgtcys6ResultOyytsAF_pGcF', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO0A8Services05SceneF0AAMc', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO0F4TypeO8rawValueAESgSS_tcfC', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO0F4TypeO8rawValueSSvg', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO0F4TypeO8rawValueSSvpMV', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO0F4TypeOMa', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO0F4TypeOMn', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO0F4TypeON', '_$s17PreviewsOSSupport19AgentToShellMessageO0F4TypeOSHAAMc', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO0F4TypeOSQAAMc', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO0F4TypeOSYAAMc', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO11fenceHandleSo07UVFenceH0CSgvg', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO11fenceHandleSo07UVFenceH0CSgvpMV', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO11messageType11fenceHandle7payloadA2C0fH0O_So07UVFenceJ0CSgSDySSypGtKcfC', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO11messageTypeAC0fH0Ovg', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO11messageTypeAC0fH0OvpMV', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO7payloadSDySSypGSgvg', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageO7payloadSDySSypGSgvpMV', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageOMa', '_$s17PreviewsOSSupport19AgentToShellMessageOMn', 
+                       '_$s17PreviewsOSSupport19AgentToShellMessageON', '_$s17PreviewsOSSupport19ShellToAgentMessageO0A8Services05SceneF0AAMc', 
+                       '_$s17PreviewsOSSupport19ShellToAgentMessageO11fenceHandleSo07UVFenceH0CSgvg', 
+                       '_$s17PreviewsOSSupport19ShellToAgentMessageO11fenceHandleSo07UVFenceH0CSgvpMV', 
+                       '_$s17PreviewsOSSupport19ShellToAgentMessageO11messageType11fenceHandle7payloadA2C_So07UVFenceJ0CSgSDySSypGtKcfC', 
+                       '_$s17PreviewsOSSupport19ShellToAgentMessageO11messageTypeACvg', 
+                       '_$s17PreviewsOSSupport19ShellToAgentMessageO11messageTypeACvpMV', 
+                       '_$s17PreviewsOSSupport19ShellToAgentMessageO7payloadSDySSypGSgvg', 
+                       '_$s17PreviewsOSSupport19ShellToAgentMessageO7payloadSDySSypGSgvpMV', 
+                       '_$s17PreviewsOSSupport19ShellToAgentMessageO8rawValueACSgSS_tcfC', 
+                       '_$s17PreviewsOSSupport19ShellToAgentMessageO8rawValueSSvg', 
+                       '_$s17PreviewsOSSupport19ShellToAgentMessageO8rawValueSSvpMV', 
+                       '_$s17PreviewsOSSupport19ShellToAgentMessageOMa', '_$s17PreviewsOSSupport19ShellToAgentMessageOMn', 
+                       '_$s17PreviewsOSSupport19ShellToAgentMessageON', '_$s17PreviewsOSSupport19ShellToAgentMessageOSHAAMc', 
+                       '_$s17PreviewsOSSupport19ShellToAgentMessageOSQAAMc', '_$s17PreviewsOSSupport19ShellToAgentMessageOSYAAMc', 
+                       '_$s17PreviewsOSSupport23PreviewAssertionManagerC04takeD03for0A10Foundation17CancellationTokenCs5Int32V_tF', 
+                       '_$s17PreviewsOSSupport23PreviewAssertionManagerC6sharedACvau', 
+                       '_$s17PreviewsOSSupport23PreviewAssertionManagerC6sharedACvgZ', 
+                       '_$s17PreviewsOSSupport23PreviewAssertionManagerC6sharedACvpZ', 
+                       '_$s17PreviewsOSSupport23PreviewAssertionManagerC7storage33_5CA3FDFC8E253B83EE48BAF559EE2BF2LL0A10Foundation10ThreadSafeCyAC7StorageAELLVGvpfi', 
+                       '_$s17PreviewsOSSupport23PreviewAssertionManagerCMa', '_$s17PreviewsOSSupport23PreviewAssertionManagerCMm', 
+                       '_$s17PreviewsOSSupport23PreviewAssertionManagerCMn', '_$s17PreviewsOSSupport23PreviewAssertionManagerCN', 
+                       '_$s17PreviewsOSSupport23PreviewAssertionManagerCfD', '_$s17PreviewsOSSupport23PreviewAssertionManagerCfd', 
+                       '_$s18PreviewsFoundation12PropertyListV0A9OSSupportE7encodedSo010UVPropertyD0Cvg', 
+                       '_$s18PreviewsFoundation12PropertyListV0A9OSSupportE7encodedSo010UVPropertyD0CvpMV', 
+                       '_$sSo13CATransactionC17PreviewsOSSupportE11afterCommit0B10Foundation6FutureCyytGyFZ', 
+                       '_$sSo13CATransactionC17PreviewsOSSupportE16afterSynchronize0B10Foundation6FutureCyytGyFZ', 
+                       '_$sSo14UVPropertyListC17PreviewsOSSupportE7decoded0C10Foundation08PropertyB0Vvg', 
+                       '_$sSo14UVPropertyListC17PreviewsOSSupportE7decoded0C10Foundation08PropertyB0VvpMV', 
+                       _PreviewsOSSupportVersionNumber, _PreviewsOSSupportVersionString, 
+                       _UVBSPipeService, _UVBSPipeServiceInterface, _UVCATransactionPostCommit, 
+                       _UVCATransactionPostSynchronize, _UVDaemonService, _UVDaemonServiceInterface, 
+                       _UVPreviewShellAgentPipeDomain, _UVPreviewShellAgentPipeMachName, 
+                       _UVPreviewShellPreviewPipeDomain, _UVPreviewShellPreviewPipeMachName, 
+                       _UVPreviewShellServicesDomain, _UVPreviewShellServicesMachName, 
+                       _UVXcodeService, _UVXcodeServiceInterface, __initializePreviewAgent ]
+    objc-classes:    [ UVBSEndpoint, UVFauxPreviewAgent ]
+...

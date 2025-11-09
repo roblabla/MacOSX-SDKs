@@ -2,7 +2,7 @@
 //  AVB17221AECPInterface.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2011-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2021 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
  @typedef	AVB17221AECPInterfaceCompletion:
  @abstract	The prototype for the completion handler block for AECP command messages.
  */
-typedef void (^AVB17221AECPInterfaceCompletion)(NSError * __nullable e, AVB17221AECPMessage *m);
+typedef void (^AVB17221AECPInterfaceCompletion)(NSError * __nullable e, AVB17221AECPMessage * __nullable m);
 
 @class AVBInterface;
 @class AVBMACAddress;

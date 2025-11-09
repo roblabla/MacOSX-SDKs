@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C7051CE4-82BA-3756-9F22-7D2D0ED51B66
+    value:           EB130A62-C6D2-39E5-8BB8-D98C9105A524
   - target:          x86_64-maccatalyst
-    value:           C7051CE4-82BA-3756-9F22-7D2D0ED51B66
+    value:           EB130A62-C6D2-39E5-8BB8-D98C9105A524
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4595D615-155F-3301-BAC0-800A567D63BA
+    value:           3DF83CB2-135F-3DD8-BD76-6D3019C387BB
   - target:          arm64e-maccatalyst
-    value:           4595D615-155F-3301-BAC0-800A567D63BA
+    value:           3DF83CB2-135F-3DD8-BD76-6D3019C387BB
 install-name:    '/System/Library/PrivateFrameworks/AppleSRP.framework/Versions/A/AppleSRP'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

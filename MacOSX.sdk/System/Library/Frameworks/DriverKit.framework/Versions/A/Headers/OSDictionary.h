@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from OSDictionary.iig */
+/* iig(DriverKit-191) generated from OSDictionary.iig */
 
 /* OSDictionary.iig:1-42 */
 /*
@@ -118,7 +118,7 @@ public:
 
     /*!
      * @brief       Iterates the dictionary calling a callback block for each member.
-     * @discussion  Calls the block with each member of the dictionary. The block must not dictionary the array during iteration. If the block returns true the iteration continues for all members, returning false halts the iteration early. OSDictionary also has a dictionary specific iterateObjects() which supplies the key and value to the callback.
+     * @discussion  Calls the block with each member of the dictionary. The block must not modify the dictionary during iteration. If the block returns false the iteration continues for all members, returning true halts the iteration early. OSDictionary also has a dictionary specific iterateObjects() which supplies the key and value to the callback.
      * @param       block The block to invoke.
      * @return      false if the callback block returned false, otherwise true (including if the array is empty).
      */
@@ -424,12 +424,21 @@ class OSDictionary : public OSCollection, public OSDictionaryInterface
 
 #if !KERNEL
 public:
+#ifdef OSDictionary_DECLARE_IVARS
+OSDictionary_DECLARE_IVARS
+#else /* OSDictionary_DECLARE_IVARS */
     union
     {
         OSDictionary_IVars * ivars;
         OSDictionary_LocalIVars * lvars;
     };
+#endif /* OSDictionary_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gOSDictionaryMetaClass; };
+#endif /* KERNEL */
 
     using super = OSCollection;
 

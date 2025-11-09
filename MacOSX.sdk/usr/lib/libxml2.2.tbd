@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B3F9E655-AB90-3375-8262-EC76550929D2
+    value:           2A8BFE06-DB5F-30F3-A131-7FA47F936C13
   - target:          x86_64-maccatalyst
-    value:           B3F9E655-AB90-3375-8262-EC76550929D2
+    value:           2A8BFE06-DB5F-30F3-A131-7FA47F936C13
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           99E8394A-E178-369D-9B94-D558AA317656
+    value:           928203D5-BE79-30CA-8EE4-2A655B620817
   - target:          arm64e-maccatalyst
-    value:           99E8394A-E178-369D-9B94-D558AA317656
+    value:           928203D5-BE79-30CA-8EE4-2A655B620817
 install-name:    '/usr/lib/libxml2.2.dylib'
 current-version: 10.9
 compatibility-version: 10

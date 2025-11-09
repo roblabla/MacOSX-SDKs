@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           A21095CF-ADFD-3385-B908-BFF5BFEEAEF2
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           22C31CE3-7C7F-30FB-939F-4DEC12C96120
+install-name:    '/System/Library/PrivateFrameworks/TestFlightCore.framework/Versions/A/TestFlightCore'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ TFBetaAppLaunchScreenProvider, TFBetaApplicationProxy, TFBetaLaunchHandle, 
+                       TFBetaLaunchHandleConfiguration, TFFeedbackSession, TFLocale ]
+...

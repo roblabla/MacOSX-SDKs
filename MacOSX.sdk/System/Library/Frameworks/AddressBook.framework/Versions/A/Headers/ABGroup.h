@@ -21,11 +21,6 @@
 // No recursions allowed
 
 @interface ABGroup : ABRecord
-{
-@private
-    id _groupReserved1 __unused;
-    id _groupReserved2 __unused;
-}
 
 - (NSArray *)members;
     // Returns an array of ABPerson.

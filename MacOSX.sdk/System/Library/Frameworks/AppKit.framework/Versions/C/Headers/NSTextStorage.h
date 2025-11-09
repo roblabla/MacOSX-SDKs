@@ -1,7 +1,7 @@
 #if !__has_include(<UIFoundation/NSTextStorage.h>)
 /*
         NSTextStorage.h
-        Copyright (c) 1994-2019, Apple Inc.
+        Copyright (c) 1994-2021, Apple Inc.
         All rights reserved.
 */
 
@@ -12,6 +12,7 @@
 @class NSArray, NSLayoutManager, NSNotification;
 
 @protocol NSTextStorageDelegate;
+@protocol NSTextStorageObserving;
 
 NS_ASSUME_NONNULL_BEGIN
 #if !TARGET_OS_IPHONE
@@ -84,6 +85,10 @@ API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0)) @interface NSTextStorage : NSMut
 
 // Ensures all attributes in range are validated and ready to be used.  An NSTextStorage that is lazy is required to call the following method before accessing any attributes.  This gives the attribute fixing a chance to occur if necessary.  NSTextStorage subclasses that wish to support laziness must call it from all attribute accessors that they implement.  The default concrete subclass does call this from its accessors.
 - (void)ensureAttributesAreFixedInRange:(NSRange)range;
+
+/**************************** NSTextStorageObserving ****************************/
+// An object conforming to NSTextStorageObserving observing and retaining NSTextStorage
+@property (nullable, weak) id <NSTextStorageObserving> textStorageObserver API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 @end
 
 
@@ -104,6 +109,20 @@ API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0)) @interface NSTextStorage : NSMut
 
 APPKIT_EXTERN NSNotificationName  NSTextStorageWillProcessEditingNotification API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0));
 APPKIT_EXTERN NSNotificationName  NSTextStorageDidProcessEditingNotification API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0));
+
+#pragma mark NSTextStorageObserving
+// NSTextStorageObserving defines the protocol for NSTextStorage controller objects observing changes in the text backing-store.
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+@protocol NSTextStorageObserving <NSObject>
+// The document object
+@property (nullable, strong) NSTextStorage *textStorage;
+
+// The newCharRange is the range in the final string which was explicitly edited.  The invalidatedRange includes portions that changed as a result of attribute fixing. invalidatedRange is either equal to newCharRange or larger.  Controllers should not change the contents of the text storage during the execution of this message.
+- (void)processEditingForTextStorage:(NSTextStorage *)textStorage edited:(NSTextStorageEditActions)editMask range:(NSRange)newCharRange changeInLength:(NSInteger)delta invalidatedRange:(NSRange)invalidatedCharRange;
+
+// Transactional editing support
+- (void)performEditingTransactionForTextStorage:(NSTextStorage *)textStorage usingBlock:(void (NS_NOESCAPE ^) (void))transaction;
+@end
 
 /**** Deprecations ****/
 // NSTextStorageEditedOptions is deprecated along with -[NSLayoutManager textStorage:edited:range:changeInLength:invalidatedRange:. Use NSTextStorageEditActions.

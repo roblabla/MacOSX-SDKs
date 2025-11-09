@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3DD6504A-7FC7-3182-A819-4C54020FA5B4
+    value:           616C908C-C372-364F-82B1-A87BAB554132
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           270CD71D-8DFF-36F3-877E-845BA2739651
+    value:           988DC675-F3DC-33E9-B7FA-3E1E35DEAFD5
 install-name:    '/System/Library/Frameworks/_SceneKit_SwiftUI.framework/Versions/A/_SceneKit_SwiftUI'
 swift-abi-version: 7
 exports:

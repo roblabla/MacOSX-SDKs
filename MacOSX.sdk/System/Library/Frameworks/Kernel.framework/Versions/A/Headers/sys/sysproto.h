@@ -286,9 +286,12 @@ struct msync_args {
 	char len_l_[PADL_(user_size_t)]; user_size_t len; char len_r_[PADR_(user_size_t)];
 	char flags_l_[PADL_(int)]; int flags; char flags_r_[PADR_(int)];
 };
+#if CONFIG_VFORK
 struct vfork_args {
 	int32_t dummy;
 };
+#else
+#endif
 struct munmap_args {
 	char addr_l_[PADL_(user_addr_t)]; user_addr_t addr; char addr_r_[PADR_(user_addr_t)];
 	char len_l_[PADL_(user_size_t)]; user_size_t len; char len_r_[PADR_(user_size_t)];
@@ -2419,6 +2422,17 @@ struct proc_info_extended_id_args {
 	char buffer_l_[PADL_(user_addr_t)]; user_addr_t buffer; char buffer_r_[PADR_(user_addr_t)];
 	char buffersize_l_[PADL_(int32_t)]; int32_t buffersize; char buffersize_r_[PADR_(int32_t)];
 };
+#if SOCKETS
+struct tracker_action_args {
+	char action_l_[PADL_(int)]; int action; char action_r_[PADR_(int)];
+	char buffer_l_[PADL_(user_addr_t)]; user_addr_t buffer; char buffer_r_[PADR_(user_addr_t)];
+	char buffer_size_l_[PADL_(user_size_t)]; user_size_t buffer_size; char buffer_size_r_[PADR_(user_size_t)];
+};
+#else
+#endif /* SOCKETS */
+struct debug_syscall_reject_args {
+	char packed_selectors_l_[PADL_(uint64_t)]; uint64_t packed_selectors; char packed_selectors_r_[PADR_(uint64_t)];
+};
 int nosys(struct proc *, struct nosys_args *, int *);
 void exit(struct proc *, struct exit_args *, int32_t *);
 int fork(struct proc *, struct fork_args *, int *);
@@ -2475,7 +2489,10 @@ int execve(struct proc *, struct execve_args *, int *);
 int umask(struct proc *, struct umask_args *, int *);
 int chroot(struct proc *, struct chroot_args *, int *);
 int msync(struct proc *, struct msync_args *, int *);
+#if CONFIG_VFORK
 int vfork(struct proc *, struct vfork_args *, int *);
+#else
+#endif
 int munmap(struct proc *, struct munmap_args *, int *);
 int mprotect(struct proc *, struct mprotect_args *, int *);
 int madvise(struct proc *, struct madvise_args *, int *);
@@ -2996,6 +3013,11 @@ int sys_preadv_nocancel(struct proc *, struct preadv_nocancel_args *, user_ssize
 int sys_pwritev_nocancel(struct proc *, struct pwritev_nocancel_args *, user_ssize_t *);
 int ulock_wait2(struct proc *, struct ulock_wait2_args *, int *);
 int proc_info_extended_id(struct proc *, struct proc_info_extended_id_args *, int *);
+#if SOCKETS
+int tracker_action(struct proc *, struct tracker_action_args *, int *);
+#else
+#endif /* SOCKETS */
+int debug_syscall_reject(struct proc *, struct debug_syscall_reject_args *, int *);
 
 __END_DECLS
 #undef PAD_

@@ -1,7 +1,7 @@
 /*
     NSSliderAccessory.h
     Application Kit
-    Copyright (c) 2016-2019, Apple Inc.
+    Copyright (c) 2016-2021, Apple Inc.
     All rights reserved.
  */
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSSlider, NSSliderAccessoryBehavior, NSImage;
 
-API_AVAILABLE(macos(10.12), ios(13.0))
+API_AVAILABLE(macos(10.12), ios(13.0)) NS_SWIFT_UI_ACTOR
 @interface NSSliderAccessory : NSObject <NSCoding>
 
 /// Creates an image-based accessory
@@ -39,7 +39,7 @@ API_AVAILABLE(macos(10.12), ios(13.0))
 @end
 #endif
 
-API_AVAILABLE(macos(10.12), ios(13.0))
+API_AVAILABLE(macos(10.12), ios(13.0)) NS_SWIFT_UI_ACTOR
 @interface NSSliderAccessoryBehavior : NSObject <NSCoding, NSCopying>
 
 /// The behavior is automatically picked to be the system standard for the slider's current context, e.g. NSTouchBarItems have `.valueStep` behavior.

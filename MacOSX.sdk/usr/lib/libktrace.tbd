@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F6C0BC1F-C800-36CB-82E1-6DED73295867
+    value:           38F9E17B-2E8D-32CA-B57D-6127292525A7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0155306F-F2CD-3508-8035-BE6F41306843
+    value:           D2E78FD1-E5D7-3758-B51F-C983F6806AC3
 install-name:    '/usr/lib/libktrace.dylib'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -18,19 +18,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B132D030-EAB4-3661-BAC5-1EF51FE1A6BA
+    value:           FCCA44CF-F8B2-374E-A2A4-4A723FB534B2
   - target:          x86_64-maccatalyst
-    value:           B132D030-EAB4-3661-BAC5-1EF51FE1A6BA
+    value:           FCCA44CF-F8B2-374E-A2A4-4A723FB534B2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B13B52F2-8D0C-38EF-8CDE-CDD430A61D8E
+    value:           632380A8-EE6A-3E9F-A23B-DA88BD7C76AF
   - target:          arm64e-maccatalyst
-    value:           B13B52F2-8D0C-38EF-8CDE-CDD430A61D8E
+    value:           632380A8-EE6A-3E9F-A23B-DA88BD7C76AF
 install-name:    '/System/Library/PrivateFrameworks/ktrace.framework/Versions/A/ktrace'
-current-version: 406.100.20
+current-version: 451
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIN11flatbuffers15ToStringVisitorE, __ZTIN11flatbuffers16DefaultAllocatorE, 
@@ -57,7 +57,7 @@ exports:
                        __Z45ktrace_address_space_symbol_owner_for_addressP20ktrace_address_spacey, 
                        __Z45ktrace_uuid_map_learn_sharedcache_with_bufferP15ktrace_uuid_map11CFUUIDBytesPvm, 
                        _aasprintf, _cfaasprintf, _clear_events, _config_init_v1_0, 
-                       _config_init_v1_1, _config_init_v1_2, _context_kind_name, 
+                       _config_init_v1_1, _config_init_v1_2, _config_init_v1_3, _context_kind_name, 
                        _create_dict, _current_system_is_64_bit, _decompress_32, _decompress_64, 
                        _deserializeSignpostSpecs, _dict_bool, _dict_data, _dict_int, 
                        _dict_int_arr, _dict_set_bool, _dict_set_cfstring, _dict_set_data, 
@@ -70,7 +70,7 @@ exports:
                        _kdebug_alloc_filter_description, _kdebug_alloc_thread_map, 
                        _kdebug_get_bufinfo, _kdebug_get_flags, _kdebug_read_events, 
                        _kdebug_wait, _kdebug_wait_and_read_events, _kdebug_write_events, 
-                       _kdebug_write_header, _ktariadne_append_live_signpost_specs, 
+                       _ktariadne_append_live_device_tree, _ktariadne_append_live_signpost_specs, 
                        _ktariadne_read_times, _kteventnames_add_chunks, _kteventnames_add_path, 
                        _kteventnames_append, _kteventnames_destroy, _kteventnames_freeze, 
                        _kteventnames_from_system, _kteventnames_id_from_name, _kteventnames_init, 
@@ -96,11 +96,12 @@ exports:
                        _ktrace_config_get_command, _ktrace_config_get_context_kind, 
                        _ktrace_config_get_owner_kind, _ktrace_config_get_owner_name, 
                        _ktrace_config_get_owner_pid, _ktrace_config_get_reason, _ktrace_config_get_trigger_kind, 
-                       _ktrace_config_kdebug_get_buffer_size, _ktrace_config_kdebug_get_debugid_enabled, 
-                       _ktrace_config_kdebug_get_filtering_events, _ktrace_config_kdebug_get_procfilt, 
-                       _ktrace_config_kdebug_get_procfilt_mode, _ktrace_config_kdebug_get_state, 
-                       _ktrace_config_kdebug_get_typefilter, _ktrace_config_kdebug_get_wrapping, 
-                       _ktrace_config_kdebug_pid_included, _ktrace_config_kpc_get_action_id, 
+                       _ktrace_config_kdebug_get_buffer_size, _ktrace_config_kdebug_get_coprocessor_tracing, 
+                       _ktrace_config_kdebug_get_debugid_enabled, _ktrace_config_kdebug_get_filtering_events, 
+                       _ktrace_config_kdebug_get_procfilt, _ktrace_config_kdebug_get_procfilt_mode, 
+                       _ktrace_config_kdebug_get_state, _ktrace_config_kdebug_get_typefilter, 
+                       _ktrace_config_kdebug_get_wrapping, _ktrace_config_kdebug_pid_included, 
+                       _ktrace_config_kdebug_using_mach_continuous_time, _ktrace_config_kpc_get_action_id, 
                        _ktrace_config_kpc_get_classes, _ktrace_config_kpc_get_config, 
                        _ktrace_config_kpc_get_period, _ktrace_config_kpc_get_state, 
                        _ktrace_config_kpc_get_thread_classes, _ktrace_config_kperf_get_action_count, 
@@ -115,7 +116,9 @@ exports:
                        _ktrace_config_set_reason, _ktrace_config_set_trigger_kind, 
                        _ktrace_configure, _ktrace_convert_timestamp_to_nanoseconds, 
                        _ktrace_convert_timestamp_to_walltime, _ktrace_copy_cs_signature_data, 
-                       _ktrace_copy_symbolicator_from_chunk, _ktrace_cpu_map_estimate_cpus, 
+                       _ktrace_copy_symbolicator_from_chunk, _ktrace_cpus_create, 
+                       _ktrace_cpus_create_current, _ktrace_cpus_destroy, _ktrace_cpus_get_count, 
+                       _ktrace_cpus_get_cpu_is_coproc, _ktrace_cpus_get_cpu_name, 
                        _ktrace_create_cssymbolicator_for_pid, _ktrace_create_cssymbolicator_for_task, 
                        _ktrace_create_cssymbolicator_for_thread, _ktrace_create_dsym_search_configuration, 
                        _ktrace_current_timebase, _ktrace_describe_uuid_offset, _ktrace_disable_configured, 
@@ -138,15 +141,16 @@ exports:
                        _ktrace_events_single_paired, _ktrace_exclude_pid, _ktrace_exclude_process, 
                        _ktrace_file_align_next, _ktrace_file_append, _ktrace_file_append_chunk, 
                        _ktrace_file_append_data, _ktrace_file_append_file, _ktrace_file_append_filtered_kdebug_events, 
-                       _ktrace_file_append_finish, _ktrace_file_append_ioreg, _ktrace_file_append_live_ariadne_signpost_specs, 
-                       _ktrace_file_append_live_filtered_ktrace, _ktrace_file_append_live_ktrace, 
-                       _ktrace_file_append_live_stackshot, _ktrace_file_append_live_stackshot_internal, 
-                       _ktrace_file_append_live_thread_map, _ktrace_file_append_local_log_content, 
-                       _ktrace_file_append_stackshot, _ktrace_file_append_start, 
-                       _ktrace_file_append_start_subchunk, _ktrace_file_append_subchunk, 
-                       _ktrace_file_append_subfile, _ktrace_file_close, _ktrace_file_compress, 
-                       _ktrace_file_contains_log_content, _ktrace_file_create, _ktrace_file_create_chunk_sink, 
-                       _ktrace_file_create_fd, _ktrace_file_create_iterator, _ktrace_file_create_memory, 
+                       _ktrace_file_append_finish, _ktrace_file_append_ioreg, _ktrace_file_append_live_ariadne_device_tree, 
+                       _ktrace_file_append_live_ariadne_signpost_specs, _ktrace_file_append_live_filtered_ktrace, 
+                       _ktrace_file_append_live_ktrace, _ktrace_file_append_live_stackshot, 
+                       _ktrace_file_append_live_stackshot_internal, _ktrace_file_append_live_thread_map, 
+                       _ktrace_file_append_local_log_content, _ktrace_file_append_stackshot, 
+                       _ktrace_file_append_start, _ktrace_file_append_start_subchunk, 
+                       _ktrace_file_append_subchunk, _ktrace_file_append_subfile, 
+                       _ktrace_file_close, _ktrace_file_compress, _ktrace_file_contains_log_content, 
+                       _ktrace_file_create, _ktrace_file_create_chunk_sink, _ktrace_file_create_fd, 
+                       _ktrace_file_create_iterator, _ktrace_file_create_memory, 
                        _ktrace_file_create_subfile, _ktrace_file_earliest_continuous_time, 
                        _ktrace_file_earliest_timestamp, _ktrace_file_earliest_walltime, 
                        _ktrace_file_get_memory, _ktrace_file_header_append_chunk, 
@@ -156,35 +160,37 @@ exports:
                        _ktrace_file_latest_timestamp, _ktrace_file_latest_walltime, 
                        _ktrace_file_log, _ktrace_file_machtime_to_walltime, _ktrace_file_open, 
                        _ktrace_file_open_fd, _ktrace_file_open_memory, _ktrace_file_read, 
-                       _ktrace_file_relationship_type, _ktrace_file_tap_to_radar, 
-                       _ktrace_file_timebase, _ktrace_file_uuid, _ktrace_file_walltime_offset, 
-                       _ktrace_file_write, _ktrace_file_write_header_system_default, 
+                       _ktrace_file_relationship_type, _ktrace_file_supports_continuous_time, 
+                       _ktrace_file_tap_to_radar, _ktrace_file_timebase, _ktrace_file_uuid, 
+                       _ktrace_file_walltime_offset, _ktrace_file_write, _ktrace_file_write_header_system_default, 
                        _ktrace_filter_pid, _ktrace_filter_process, _ktrace_free_dsym_search_configuration, 
                        _ktrace_get_absolute_from_continuous, _ktrace_get_absolute_from_timestamp, 
                        _ktrace_get_buffer_size, _ktrace_get_collection_interval, 
                        _ktrace_get_collection_qos, _ktrace_get_continuous_from_absolute, 
-                       _ktrace_get_continuous_from_timestamp, _ktrace_get_cputime_for_thread, 
+                       _ktrace_get_continuous_from_timestamp, _ktrace_get_coprocessor_tracing_enabled, 
+                       _ktrace_get_cpu_is_coproc, _ktrace_get_cpus, _ktrace_get_cputime_for_thread, 
                        _ktrace_get_cputime_total, _ktrace_get_current_timestamp, 
                        _ktrace_get_default_event_names_enabled, _ktrace_get_earliest_timestamp, 
                        _ktrace_get_execname_for_pid, _ktrace_get_execname_for_thread, 
                        _ktrace_get_execnames_enabled, _ktrace_get_jetsam_coalition_for_pid, 
                        _ktrace_get_jetsam_coalition_for_thread, _ktrace_get_jetsam_coalitions_enabled, 
                        _ktrace_get_live_kernel_map, _ktrace_get_machine, _ktrace_get_mode, 
-                       _ktrace_get_name_for_thread, _ktrace_get_ns_from_timestamp, 
+                       _ktrace_get_name_for_cpu, _ktrace_get_name_for_thread, _ktrace_get_ns_from_timestamp, 
                        _ktrace_get_path_for_vp, _ktrace_get_pid_for_thread, _ktrace_get_remotetime_conversion_enabled, 
                        _ktrace_get_remotetime_for_localtime, _ktrace_get_task_uniqueid_for_thread, 
                        _ktrace_get_thread_cputime_enabled, _ktrace_get_thread_group_flags, 
                        _ktrace_get_thread_group_for_thread, _ktrace_get_thread_group_name, 
                        _ktrace_get_thread_groups_enabled, _ktrace_get_uuid_map_enabled, 
-                       _ktrace_get_uuid_offset_for_pid_address, _ktrace_get_uuid_offset_for_task_address, 
-                       _ktrace_get_uuid_offset_for_thread_address, _ktrace_get_vnode_paths_enabled, 
-                       _ktrace_get_walltimes_enabled, _ktrace_ignore_process_filter_for_event, 
-                       _ktrace_is_kernel_64_bit, _ktrace_iter_copy, _ktrace_iter_destroy, 
-                       _ktrace_iter_equal, _ktrace_iter_get_event, _ktrace_iter_next, 
-                       _ktrace_iter_next_until, _ktrace_iter_prev, _ktrace_iterate_threads, 
-                       _ktrace_kpdecode, _ktrace_kperf, _ktrace_log, _ktrace_log_init, 
-                       _ktrace_machine_active_cpus, _ktrace_machine_apple_internal, 
-                       _ktrace_machine_boot_args, _ktrace_machine_boot_uuid, _ktrace_machine_cluster_flags, 
+                       _ktrace_get_uuid_offset_for, _ktrace_get_uuid_offset_for_pid_address, 
+                       _ktrace_get_uuid_offset_for_task_address, _ktrace_get_uuid_offset_for_thread_address, 
+                       _ktrace_get_vnode_paths_enabled, _ktrace_get_walltimes_enabled, 
+                       _ktrace_ignore_process_filter_for_event, _ktrace_is_kernel_64_bit, 
+                       _ktrace_iter_copy, _ktrace_iter_destroy, _ktrace_iter_equal, 
+                       _ktrace_iter_get_event, _ktrace_iter_next, _ktrace_iter_next_until, 
+                       _ktrace_iter_prev, _ktrace_iterate_threads, _ktrace_kpdecode, 
+                       _ktrace_kperf, _ktrace_log, _ktrace_log_init, _ktrace_machine_active_cpus, 
+                       _ktrace_machine_apple_internal, _ktrace_machine_boot_args, 
+                       _ktrace_machine_boot_uuid, _ktrace_machine_cluster_flags, 
                        _ktrace_machine_copy_description, _ktrace_machine_cpu_cluster, 
                        _ktrace_machine_cpu_family, _ktrace_machine_cpu_subtype, _ktrace_machine_cpu_type, 
                        _ktrace_machine_create, _ktrace_machine_create_current, _ktrace_machine_destroy, 
@@ -208,6 +214,7 @@ exports:
                        _ktrace_session_set_default_event_names_enabled, _ktrace_session_set_event_names_enabled, 
                        _ktrace_set_buffer_size, _ktrace_set_cleanup_handler, _ktrace_set_collection_interval, 
                        _ktrace_set_collection_qos, _ktrace_set_command_argv, _ktrace_set_completion_handler, 
+                       _ktrace_set_continuous_timestamps, _ktrace_set_coprocessor_tracing_enabled, 
                        _ktrace_set_default_event_names_enabled, _ktrace_set_dropped_events_handler, 
                        _ktrace_set_dsc_unslid_base_addresses, _ktrace_set_execnames_enabled, 
                        _ktrace_set_file, _ktrace_set_interactive, _ktrace_set_jetsam_coalitions_enabled, 
@@ -254,9 +261,9 @@ exports:
                        _ktrace_uuid_map_update, _ktrace_uuid_map_update_with_stackshot, 
                        _ktrace_uuid_offset_get_description, _ktrace_visit_inode, 
                        _ktrace_visit_uuid, _kttimesync_abs_from_cont, _kttimesync_abs_from_timestamp, 
-                       _kttimesync_append, _kttimesync_cont_from_abs, _kttimesync_cont_from_timestamp, 
-                       _kttimesync_frequency, _kttimesync_init, _kttimesync_ns_from_mach, 
-                       _kttimesync_ns_from_timestamp, _kttimesync_update_kdebug, 
+                       _kttimesync_append, _kttimesync_can_convert_continuous, _kttimesync_cont_from_abs, 
+                       _kttimesync_cont_from_timestamp, _kttimesync_frequency, _kttimesync_init, 
+                       _kttimesync_ns_from_mach, _kttimesync_ns_from_timestamp, _kttimesync_update_kdebug, 
                        _kttimesync_update_kdebug_prepass, _kttimesync_wall_from_timestamp, 
                        _long_key_callbacks, _long_set_callbacks, _long_value_callbacks, 
                        _machtime_to_timespec, _machtime_to_timeval, _match_end_event, 
@@ -284,7 +291,7 @@ exports:
                        _trace_remove_internal, _trace_reset, _trace_set_buffer_size, 
                        _trace_set_command_map_enabled, _trace_set_completion_handler, 
                        _trace_set_default_code_map_enabled, _trace_set_dropped_events_handler, 
-                       _trace_set_enable, _trace_set_filter, _trace_set_mode, _trace_set_nowrap, 
+                       _trace_set_enable, _trace_set_filter, _trace_set_flags, _trace_set_mode, 
                        _trace_set_pid_filter, _trace_set_raw_file, _trace_set_signal_handler, 
                        _trace_set_thread_exit_handler, _trace_set_use_existing, _trace_set_walltime_enabled, 
                        _trace_setup, _trace_single, _trace_single_paired, _trace_start, 

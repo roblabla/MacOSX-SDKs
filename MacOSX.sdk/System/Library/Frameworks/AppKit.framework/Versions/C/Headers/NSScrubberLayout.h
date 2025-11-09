@@ -1,7 +1,7 @@
 /*
  NSScrubberLayout.h
  Application Kit
- Copyright (c) 2016-2019, Apple Inc.
+ Copyright (c) 2016-2021, Apple Inc.
  All rights reserved.
  */
 
@@ -38,7 +38,7 @@ API_AVAILABLE(macos(10.12.2))
  @class NSScrubberLayout
  @abstract @c NSScrubberLayout is an abstract class that describes the layout of items within a @c NSScrubber control.
  */
-API_AVAILABLE(macos(10.12.2))
+API_AVAILABLE(macos(10.12.2)) NS_SWIFT_UI_ACTOR
 @interface NSScrubberLayout : NSObject <NSCoding>
 
 #pragma mark Base Implementation

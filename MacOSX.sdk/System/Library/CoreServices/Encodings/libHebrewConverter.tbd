@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3CF3093E-2EC2-3F0A-A6F5-59421B0C9F6E
+    value:           75EBF623-378C-3C31-9AEB-8EAD7670835F
   - target:          x86_64-maccatalyst
-    value:           3CF3093E-2EC2-3F0A-A6F5-59421B0C9F6E
+    value:           75EBF623-378C-3C31-9AEB-8EAD7670835F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           411640ED-2145-3C15-8C3C-8C431D248F3B
+    value:           03185A5E-2281-3722-81C8-4B4534C63297
   - target:          arm64e-maccatalyst
-    value:           411640ED-2145-3C15-8C3C-8C431D248F3B
+    value:           03185A5E-2281-3722-81C8-4B4534C63297
 install-name:    '/System/Library/CoreServices/Encodings/libHebrewConverter.dylib'
-current-version: 90
+current-version: 100
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

@@ -25,7 +25,7 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 @property (nonatomic, copy) NSArray<NSString *> *contextualStrings;
 
 // String which can be used to identify the receiver by the developer
-@property (nonatomic, copy, nullable) NSString *interactionIdentifier;
+@property (nonatomic, copy, nullable) NSString *interactionIdentifier NS_DEPRECATED(10_15, 12_0, 10_0, 15_0, "Not used anymore");
 
 // If true, speech recognition will not send any audio over the Internet
 // This will reduce accuracy but enables certain applications where it is

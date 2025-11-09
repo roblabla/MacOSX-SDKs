@@ -22,7 +22,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), watchos(3.2))
+API_DEPRECATED("INSearchCallHistoryIntent is deprecated. There is no replacement.", ios(10.0, 15.0), watchos(3.2, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INSearchCallHistoryIntent : INIntent
 
@@ -52,7 +52,7 @@ API_UNAVAILABLE(macos, tvos)
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(10.0), watchos(3.2))
+API_DEPRECATED("INSearchCallHistoryIntentHandling is deprecated. There is no replacement.", ios(10.0, 15.0), watchos(3.2, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @protocol INSearchCallHistoryIntentHandling <NSObject>
 
@@ -97,19 +97,19 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolveCallTypeForSearchCallHistory:(INSearchCallHistoryIntent *)intent
-                    withCompletion:(void (^)(INCallRecordTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCallType(for:with:)) API_DEPRECATED("resolveCallTypeForSearchCallHistory:withCompletion: is deprecated. Use resolveCallTypesForSearchCallHistory:withCompletion: instead", ios(10.0, 11.0), watchos(3.2, 4.0)) API_UNAVAILABLE(macos);
+                             withCompletion:(void (^)(INCallRecordTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCallType(for:with:));
 
 - (void)resolveDateCreatedForSearchCallHistory:(INSearchCallHistoryIntent *)intent
-                    withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDateCreated(for:with:));
+                                withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDateCreated(for:with:));
 
 - (void)resolveRecipientForSearchCallHistory:(INSearchCallHistoryIntent *)intent
-                    withCompletion:(void (^)(INPersonResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveRecipient(for:with:));
+                              withCompletion:(void (^)(INPersonResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveRecipient(for:with:));
 
 - (void)resolveCallTypesForSearchCallHistory:(INSearchCallHistoryIntent *)intent
-                    withCompletion:(void (^)(INCallRecordTypeOptionsResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCallTypes(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macos);
+                              withCompletion:(void (^)(INCallRecordTypeOptionsResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCallTypes(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macos);
 
 - (void)resolveUnseenForSearchCallHistory:(INSearchCallHistoryIntent *)intent
-                    withCompletion:(void (^)(INBooleanResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveUnseen(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macos);
+                           withCompletion:(void (^)(INBooleanResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveUnseen(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macos);
 
 @end
 

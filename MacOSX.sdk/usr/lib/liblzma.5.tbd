@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3FC910D3-F9C8-323F-8373-4CF8D3702396
+    value:           E8D45091-615F-385E-8C54-5B62DC5E8DC0
   - target:          x86_64-maccatalyst
-    value:           3FC910D3-F9C8-323F-8373-4CF8D3702396
+    value:           E8D45091-615F-385E-8C54-5B62DC5E8DC0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DAC39A5A-9E20-3FD1-B8FA-2AE1B76DB297
+    value:           44BD3E9F-5FB9-32A2-843B-1AF5CBFFCDA9
   - target:          arm64e-maccatalyst
-    value:           DAC39A5A-9E20-3FD1-B8FA-2AE1B76DB297
+    value:           44BD3E9F-5FB9-32A2-843B-1AF5CBFFCDA9
 install-name:    '/usr/lib/liblzma.5.dylib'
 current-version: 6.3
 compatibility-version: 6

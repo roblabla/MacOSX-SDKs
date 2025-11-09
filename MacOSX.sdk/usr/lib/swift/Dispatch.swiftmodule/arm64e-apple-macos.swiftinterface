@@ -1,9 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target arm64e-apple-macos11.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -module-name Dispatch
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target arm64e-apple-macos12.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -module-name Dispatch
 import Combine
 @_exported import Dispatch
 import Swift
+import _Concurrency
 public struct DispatchData : Swift.RandomAccessCollection, Swift._ObjectiveCBridgeable {
   public typealias Iterator = Dispatch.DispatchDataIterator
   public typealias Index = Swift.Int
@@ -25,9 +26,9 @@ public struct DispatchData : Swift.RandomAccessCollection, Swift._ObjectiveCBrid
   }
   public func withUnsafeBytes<Result, ContentType>(body: (Swift.UnsafePointer<ContentType>) throws -> Result) rethrows -> Result
   @available(swift 4.2)
-  public func enumerateBytes(_ block: (Swift.UnsafeBufferPointer<Swift.UInt8>, Swift.Int, inout Swift.Bool) -> Swift.Void)
+  public func enumerateBytes(_ block: (_ buffer: Swift.UnsafeBufferPointer<Swift.UInt8>, _ byteIndex: Swift.Int, _ stop: inout Swift.Bool) -> Swift.Void)
   @available(swift, obsoleted: 4.2, renamed: "enumerateBytes(_:)")
-  public func enumerateBytes(block: (Swift.UnsafeBufferPointer<Swift.UInt8>, Swift.Int, inout Swift.Bool) -> Swift.Void)
+  public func enumerateBytes(block: (_ buffer: Swift.UnsafeBufferPointer<Swift.UInt8>, _ byteIndex: Swift.Int, _ stop: inout Swift.Bool) -> Swift.Void)
   @available(swift, deprecated: 4, message: "Use append(_: UnsafeRawBufferPointer) instead")
   public mutating func append(_ bytes: Swift.UnsafePointer<Swift.UInt8>, count: Swift.Int)
   public mutating func append(_ bytes: Swift.UnsafeRawBufferPointer)
@@ -67,7 +68,7 @@ public struct DispatchDataIterator : Swift.IteratorProtocol, Swift.Sequence {
   public mutating func next() -> Dispatch.DispatchData.Element?
   public typealias Iterator = Dispatch.DispatchDataIterator
 }
-extension DispatchData {
+extension Dispatch.DispatchData {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> Dispatch.__DispatchData
   public static func _forceBridgeFromObjectiveC(_ input: Dispatch.__DispatchData, result: inout Dispatch.DispatchData?)
   public static func _conditionallyBridgeFromObjectiveC(_ input: Dispatch.__DispatchData, result: inout Dispatch.DispatchData?) -> Swift.Bool
@@ -77,7 +78,7 @@ final public class DispatchSpecificKey<T> {
   public init()
   @objc deinit
 }
-extension DispatchQueue {
+extension Dispatch.DispatchQueue {
   public struct Attributes : Swift.OptionSet {
     public let rawValue: Swift.UInt64
     public init(rawValue: Swift.UInt64)
@@ -167,7 +168,7 @@ extension DispatchQueue {
   public func getSpecific<T>(key: Dispatch.DispatchSpecificKey<T>) -> T?
   public func setSpecific<T>(key: Dispatch.DispatchSpecificKey<T>, value: T?)
 }
-extension DispatchSourceProtocol {
+extension Dispatch.DispatchSourceProtocol {
   public typealias DispatchSourceHandler = @convention(block) () -> Swift.Void
   public func setEventHandler(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], handler: Self.DispatchSourceHandler?)
   @available(macOS 10.10, iOS 8.0, *)
@@ -196,7 +197,7 @@ extension DispatchSourceProtocol {
     get
   }
 }
-extension DispatchSource {
+extension Dispatch.DispatchSource {
   public struct MachSendEvent : Swift.OptionSet, Swift.RawRepresentable {
     public let rawValue: Swift.UInt
     public init(rawValue: Swift.UInt)
@@ -265,7 +266,7 @@ extension DispatchSource {
   public class func makeFileSystemObjectSource(fileDescriptor: Swift.Int32, eventMask: Dispatch.DispatchSource.FileSystemEvent, queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceFileSystemObject
   public class func makeWriteSource(fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceWrite
 }
-extension DispatchSourceMachSend {
+extension Dispatch.DispatchSourceMachSend {
   public var handle: Darwin.mach_port_t {
     get
   }
@@ -276,12 +277,12 @@ extension DispatchSourceMachSend {
     get
   }
 }
-extension DispatchSourceMachReceive {
+extension Dispatch.DispatchSourceMachReceive {
   public var handle: Darwin.mach_port_t {
     get
   }
 }
-extension DispatchSourceMemoryPressure {
+extension Dispatch.DispatchSourceMemoryPressure {
   public var data: Dispatch.DispatchSource.MemoryPressureEvent {
     get
   }
@@ -289,7 +290,7 @@ extension DispatchSourceMemoryPressure {
     get
   }
 }
-extension DispatchSourceProcess {
+extension Dispatch.DispatchSourceProcess {
   public var handle: Darwin.pid_t {
     get
   }
@@ -300,7 +301,7 @@ extension DispatchSourceProcess {
     get
   }
 }
-extension DispatchSourceTimer {
+extension Dispatch.DispatchSourceTimer {
   @available(swift, deprecated: 4, renamed: "schedule(deadline:repeating:leeway:)")
   public func scheduleOneshot(deadline: Dispatch.DispatchTime, leeway: Dispatch.DispatchTimeInterval = .nanoseconds(0))
   @available(swift, deprecated: 4, renamed: "schedule(wallDeadline:repeating:leeway:)")
@@ -322,7 +323,7 @@ extension DispatchSourceTimer {
   @available(swift 4)
   public func schedule(wallDeadline: Dispatch.DispatchWallTime, repeating interval: Swift.Double, leeway: Dispatch.DispatchTimeInterval = .nanoseconds(0))
 }
-extension DispatchSourceFileSystemObject {
+extension Dispatch.DispatchSourceFileSystemObject {
   public var handle: Swift.Int32 {
     get
   }
@@ -333,13 +334,13 @@ extension DispatchSourceFileSystemObject {
     get
   }
 }
-extension DispatchSourceUserDataAdd {
+extension Dispatch.DispatchSourceUserDataAdd {
   public func add(data: Swift.UInt)
 }
-extension DispatchSourceUserDataOr {
+extension Dispatch.DispatchSourceUserDataOr {
   public func or(data: Swift.UInt)
 }
-extension DispatchSourceUserDataReplace {
+extension Dispatch.DispatchSourceUserDataReplace {
   public func replace(data: Swift.UInt)
 }
 public struct DispatchTime : Swift.Comparable {
@@ -351,7 +352,7 @@ public struct DispatchTime : Swift.Comparable {
     get
   }
 }
-extension DispatchTime {
+extension Dispatch.DispatchTime {
   public static func < (a: Dispatch.DispatchTime, b: Dispatch.DispatchTime) -> Swift.Bool
   public static func == (a: Dispatch.DispatchTime, b: Dispatch.DispatchTime) -> Swift.Bool
 }
@@ -361,7 +362,7 @@ public struct DispatchWallTime : Swift.Comparable {
   public static let distantFuture: Dispatch.DispatchWallTime
   public init(timespec: Darwin.timespec)
 }
-extension DispatchWallTime {
+extension Dispatch.DispatchWallTime {
   public static func < (a: Dispatch.DispatchWallTime, b: Dispatch.DispatchWallTime) -> Swift.Bool
   public static func == (a: Dispatch.DispatchWallTime, b: Dispatch.DispatchWallTime) -> Swift.Bool
 }
@@ -382,12 +383,12 @@ public func - (time: Dispatch.DispatchWallTime, interval: Dispatch.DispatchTimeI
 public func + (time: Dispatch.DispatchWallTime, seconds: Swift.Double) -> Dispatch.DispatchWallTime
 public func - (time: Dispatch.DispatchWallTime, seconds: Swift.Double) -> Dispatch.DispatchWallTime
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension DispatchTime {
+extension Dispatch.DispatchTime {
   public func distance(to other: Dispatch.DispatchTime) -> Dispatch.DispatchTimeInterval
   public func advanced(by n: Dispatch.DispatchTimeInterval) -> Dispatch.DispatchTime
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension DispatchQueue : Combine.Scheduler {
+extension Dispatch.DispatchQueue : Combine.Scheduler {
   public struct SchedulerTimeType : Swift.Strideable, Swift.Codable, Swift.Hashable {
     public var dispatchTime: Dispatch.DispatchTime
     public init(_ time: Dispatch.DispatchTime)
@@ -486,7 +487,7 @@ public struct DispatchWorkItemFlags : Swift.OptionSet, Swift.RawRepresentable {
   }
   @objc deinit
 }
-extension DispatchIO {
+extension Dispatch.DispatchIO {
   public enum StreamType : Swift.UInt {
     case stream
     case random
@@ -513,16 +514,16 @@ extension DispatchIO {
     public typealias Element = Dispatch.DispatchIO.IntervalFlags
     public typealias RawValue = Swift.UInt
   }
-  public class func read(fromFileDescriptor: Swift.Int32, maxLength: Swift.Int, runningHandlerOn queue: Dispatch.DispatchQueue, handler: @escaping (Dispatch.DispatchData, Swift.Int32) -> Swift.Void)
-  public class func write(toFileDescriptor: Swift.Int32, data: Dispatch.DispatchData, runningHandlerOn queue: Dispatch.DispatchQueue, handler: @escaping (Dispatch.DispatchData?, Swift.Int32) -> Swift.Void)
-  convenience public init(type: Dispatch.DispatchIO.StreamType, fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (Swift.Int32) -> Swift.Void)
+  public class func read(fromFileDescriptor: Swift.Int32, maxLength: Swift.Int, runningHandlerOn queue: Dispatch.DispatchQueue, handler: @escaping (_ data: Dispatch.DispatchData, _ error: Swift.Int32) -> Swift.Void)
+  public class func write(toFileDescriptor: Swift.Int32, data: Dispatch.DispatchData, runningHandlerOn queue: Dispatch.DispatchQueue, handler: @escaping (_ data: Dispatch.DispatchData?, _ error: Swift.Int32) -> Swift.Void)
+  convenience public init(type: Dispatch.DispatchIO.StreamType, fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
   @available(swift, obsoleted: 4)
-  convenience public init(type: Dispatch.DispatchIO.StreamType, path: Swift.UnsafePointer<Swift.Int8>, oflag: Swift.Int32, mode: Darwin.mode_t, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (Swift.Int32) -> Swift.Void)
+  convenience public init(type: Dispatch.DispatchIO.StreamType, path: Swift.UnsafePointer<Swift.Int8>, oflag: Swift.Int32, mode: Darwin.mode_t, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
   @available(swift 4)
-  convenience public init?(type: Dispatch.DispatchIO.StreamType, path: Swift.UnsafePointer<Swift.Int8>, oflag: Swift.Int32, mode: Darwin.mode_t, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (Swift.Int32) -> Swift.Void)
-  convenience public init(type: Dispatch.DispatchIO.StreamType, io: Dispatch.DispatchIO, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (Swift.Int32) -> Swift.Void)
-  public func read(offset: Darwin.off_t, length: Swift.Int, queue: Dispatch.DispatchQueue, ioHandler: @escaping (Swift.Bool, Dispatch.DispatchData?, Swift.Int32) -> Swift.Void)
-  public func write(offset: Darwin.off_t, data: Dispatch.DispatchData, queue: Dispatch.DispatchQueue, ioHandler: @escaping (Swift.Bool, Dispatch.DispatchData?, Swift.Int32) -> Swift.Void)
+  convenience public init?(type: Dispatch.DispatchIO.StreamType, path: Swift.UnsafePointer<Swift.Int8>, oflag: Swift.Int32, mode: Darwin.mode_t, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
+  convenience public init(type: Dispatch.DispatchIO.StreamType, io: Dispatch.DispatchIO, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
+  public func read(offset: Darwin.off_t, length: Swift.Int, queue: Dispatch.DispatchQueue, ioHandler: @escaping (_ done: Swift.Bool, _ data: Dispatch.DispatchData?, _ error: Swift.Int32) -> Swift.Void)
+  public func write(offset: Darwin.off_t, data: Dispatch.DispatchData, queue: Dispatch.DispatchQueue, ioHandler: @escaping (_ done: Swift.Bool, _ data: Dispatch.DispatchData?, _ error: Swift.Int32) -> Swift.Void)
   public func setInterval(interval: Dispatch.DispatchTimeInterval, flags: Dispatch.DispatchIO.IntervalFlags = [])
   public func close(flags: Dispatch.DispatchIO.CloseFlags = [])
 }
@@ -590,7 +591,7 @@ public struct DispatchQoS : Swift.Equatable {
     get
   }
 }
-extension DispatchGroup {
+extension Dispatch.DispatchGroup {
   public func notify(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], queue: Dispatch.DispatchQueue, execute work: @escaping @convention(block) () -> Swift.Void)
   @available(macOS 10.10, iOS 8.0, *)
   public func notify(queue: Dispatch.DispatchQueue, work: Dispatch.DispatchWorkItem)
@@ -598,7 +599,7 @@ extension DispatchGroup {
   public func wait(timeout: Dispatch.DispatchTime) -> Dispatch.DispatchTimeoutResult
   public func wait(wallTimeout timeout: Dispatch.DispatchWallTime) -> Dispatch.DispatchTimeoutResult
 }
-extension DispatchSemaphore {
+extension Dispatch.DispatchSemaphore {
   @discardableResult
   public func signal() -> Swift.Int
   public func wait()
@@ -826,3 +827,7 @@ extension Dispatch.DispatchQoS.QoSClass : Swift.Equatable {}
 extension Dispatch.DispatchQoS.QoSClass : Swift.Hashable {}
 extension Dispatch.DispatchTimeoutResult : Swift.Equatable {}
 extension Dispatch.DispatchTimeoutResult : Swift.Hashable {}
+
+#if compiler(>=5.3) && $MarkerProtocol && $Sendable
+extension Dispatch.DispatchTimeoutResult : Swift.Sendable {}
+#endif

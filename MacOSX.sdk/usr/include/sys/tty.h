@@ -74,7 +74,6 @@
 #include <sys/termios.h>
 #include <sys/select.h>         /* For struct selinfo. */
 
-
 struct tty;
 struct clist;
 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F8BADAFF-DA7D-3497-9659-7D335F0D8FDB
+    value:           EC40A893-3641-3AC6-BB20-246717D1384C
   - target:          x86_64-maccatalyst
-    value:           F8BADAFF-DA7D-3497-9659-7D335F0D8FDB
+    value:           EC40A893-3641-3AC6-BB20-246717D1384C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AD3F8CD0-5ECA-3C9E-88AC-AD02E2970903
+    value:           85212C44-03C3-3F4E-AB7C-004606692CA7
   - target:          arm64e-maccatalyst
-    value:           AD3F8CD0-5ECA-3C9E-88AC-AD02E2970903
+    value:           85212C44-03C3-3F4E-AB7C-004606692CA7
 install-name:    '/System/Library/PrivateFrameworks/CoreOptimization.framework/Versions/A/CoreOptimization'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

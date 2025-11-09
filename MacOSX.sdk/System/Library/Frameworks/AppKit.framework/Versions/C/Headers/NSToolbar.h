@@ -1,7 +1,7 @@
 /*
 	NSToolbar.h
 	Application Kit
-	Copyright (c) 2000-2019, Apple Inc.
+	Copyright (c) 2000-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, NSToolbarSizeMode) {
     NSToolbarSizeModeSmall
 };
 
-API_AVAILABLE(ios(13.0))
+API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @interface NSToolbar : NSObject
 
 /* The identifier is used to form the toolbar's autosave name.  Also, toolbars with the same identifier are implicitly synchronized so that they maintain the same state. */
@@ -135,7 +135,7 @@ API_AVAILABLE(ios(13.0))
 
     /* Notifications */
 
-/* Before an new item is added to the toolbar, this notification is posted.  This is the best place to notice a new item is going into the toolbar.  For instance, if you need to cache a reference to the toolbar item or need to set up some initial state, this is the best place to do it.   The notification object is the toolbar to which the item is being added.  The item being added is found by referencing the @"item" key in the userInfo.  */
+/* Before a new item is added to the toolbar, this notification is posted.  This is the best place to notice a new item is going into the toolbar.  For instance, if you need to cache a reference to the toolbar item or need to set up some initial state, this is the best place to do it.   The notification object is the toolbar to which the item is being added.  The item being added is found by referencing the @"item" key in the userInfo.  */
 - (void)toolbarWillAddItem:(NSNotification *)notification;
 
 /* After an item is removed from a toolbar the notification is sent.  This allows the chance to tear down information related to the item that may have been cached.  The notification object is the toolbar from which the item is being removed.  The item being removed is found by referencing the @"item" key in the userInfo.  */

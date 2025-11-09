@@ -1,7 +1,7 @@
 /*
 	NSWindowRestoration.h
 	Application Kit
-	Copyright (c) 1994-2019, Apple Inc.
+	Copyright (c) 1994-2021, Apple Inc.
 	All rights reserved.
  */
 
@@ -93,6 +93,10 @@ APPKIT_EXTERN NSNotificationName const NSApplicationDidFinishRestoringWindowsNot
 */
 @property (class, readonly, copy) NSArray<NSString *> *restorableStateKeyPaths API_AVAILABLE(macos(10.7));
 
+/** When secure state restoration is used, values at restorableStateKeyPaths must support NSSecureCoding and this method will be consulted when restoring state. Any values not of an allowed class will not be set.
+*/
++ (NSArray<Class> *)allowedClassesForRestorableStateKeyPath:(NSString *)keyPath API_AVAILABLE(macos(12.0));
+
 @end
 
 
@@ -127,6 +131,7 @@ If your document has variable or optional windows, you may override this to crea
 - (void)restoreStateWithCoder:(NSCoder *)coder API_AVAILABLE(macos(10.7));
 - (void)invalidateRestorableState API_AVAILABLE(macos(10.7));
 @property (class, readonly, copy) NSArray<NSString *> *restorableStateKeyPaths API_AVAILABLE(macos(10.7));
++ (NSArray<Class> *)allowedClassesForRestorableStateKeyPath:(NSString *)keyPath API_AVAILABLE(macos(12.0));
 
 @end
 

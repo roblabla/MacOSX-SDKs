@@ -107,7 +107,7 @@ nw_content_context_set_is_final(nw_content_context_t context,
 /*!
  * @function nw_content_context_get_expiration_milliseconds
  * @discussion Retrieve the number of milliseconds after which the content will expire.
- *		See nw_content_context_set_expiration_milliseconds for futher discussion.
+ *		See nw_content_context_set_expiration_milliseconds for further discussion.
  * @param context The context object
  * @result Returns content expiration, or 0 if not set.
  */
@@ -132,7 +132,7 @@ nw_content_context_set_expiration_milliseconds(nw_content_context_t context,
 /*!
  * @function nw_content_context_get_relative_priority
  * @discussion Get the relative priority for the content. See
- *		nw_content_context_set_relative_priority for futher discussion.
+ *		nw_content_context_set_relative_priority for further discussion.
  * @param context The context object
  * @result Returns the relative priority, between 0.0 (lowest priority)
  *		to 1.0 (highest priority). The default value is 0.5.

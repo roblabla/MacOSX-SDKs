@@ -17,7 +17,8 @@
 /*! A trait collection encapsulates the system traits of an interface's environment. */
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UITraitCollection : NSObject <NSCopying, NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(8.0))
+@interface UITraitCollection : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -75,6 +76,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UITraitCollection : NSObject <NS
 @end
 
 /*! Trait environments expose a trait collection that describes their environment. */
+NS_SWIFT_UI_ACTOR
 @protocol UITraitEnvironment <NSObject>
 @property (nonatomic, readonly) UITraitCollection *traitCollection API_AVAILABLE(ios(8.0));
 

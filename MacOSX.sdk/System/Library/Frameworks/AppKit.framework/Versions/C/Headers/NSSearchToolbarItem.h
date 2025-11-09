@@ -1,7 +1,7 @@
 /*
 	NSSearchToolbarItem.h
 	Application Kit
-	Copyright (c) 2000-2020, Apple Inc.
+	Copyright (c) 2000-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,6 +13,7 @@
 @class NSView;
 
 NS_ASSUME_NONNULL_BEGIN
+
 APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 // NSSearchToolbarItem provides the standard UI behavior for integrating a search field into the toolbar.
@@ -20,7 +21,7 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(macCatalyst)
 @interface NSSearchToolbarItem : NSToolbarItem
 
 // An NSSearchField displayed in the toolbar item. While inside the toolbar item, the field properties and layout constraints are managed by the item. The field should be configured before assigned. The width constraint for the field could be updated after assigned. When set to nil, will reset to a search field with the default configuration.
-@property (strong) NSSearchField *searchField;
+@property (strong) NSSearchField *searchField API_UNAVAILABLE(macCatalyst);
 
 // The base view property is owned by the toolbar item and not available for customization.
 @property (nullable, strong) NSView *view NS_UNAVAILABLE;

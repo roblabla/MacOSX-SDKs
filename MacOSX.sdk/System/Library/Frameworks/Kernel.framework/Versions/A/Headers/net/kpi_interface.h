@@ -168,13 +168,13 @@ typedef u_int32_t protocol_family_t;
  *       @constant IFNET_TSO_IPV4 Hardware supports IPv4 TCP Segment Offloading.
  *               If the Interface driver sets this flag, TCP will send larger frames (up to 64KB) as one
  *               frame to the adapter which will perform the final packetization. The maximum TSO segment
- *               supported by the interface can be set with "ifnet_set_tso_mtu". To retreive the real MTU
+ *               supported by the interface can be set with "ifnet_set_tso_mtu". To retrieve the real MTU
  *               for the TCP connection the function "mbuf_get_tso_requested" is used by the driver. Note
  *               that if TSO is active, all the packets will be flagged for TSO, not just large packets.
  *       @constant IFNET_TSO_IPV6 Hardware supports IPv6 TCP Segment Offloading.
  *               If the Interface driver sets this flag, TCP IPv6 will send larger frames (up to 64KB) as one
  *               frame to the adapter which will perform the final packetization. The maximum TSO segment
- *               supported by the interface can be set with "ifnet_set_tso_mtu". To retreive the real MTU
+ *               supported by the interface can be set with "ifnet_set_tso_mtu". To retrieve the real MTU
  *               for the TCP IPv6 connection the function "mbuf_get_tso_requested" is used by the driver.
  *               Note that if TSO is active, all the packets will be flagged for TSO, not just large packets.
  *       @constant IFNET_TX_STATUS Driver supports returning a per packet
@@ -1501,7 +1501,7 @@ __NKE_API_DEPRECATED;
  *               promiscuous mode only once for every time you enable it.
  *       @param interface The interface to toggle promiscuous mode on.
  *       @param on If set, the number of promicuous on requests will be
- *               incremented. If this is the first requrest, promiscuous mode
+ *               incremented. If this is the first request, promiscuous mode
  *               will be enabled. If this is not set, the number of promiscous
  *               clients will be decremented. If this causes the number to reach
  *               zero, promiscuous mode will be disabled.

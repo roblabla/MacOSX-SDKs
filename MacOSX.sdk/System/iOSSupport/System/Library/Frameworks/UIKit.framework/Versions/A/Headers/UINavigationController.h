@@ -42,7 +42,8 @@ UIKIT_EXTERN const CGFloat UINavigationControllerHideShowBarDuration;
 @protocol UINavigationControllerDelegate;
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UINavigationController : UIViewController
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UINavigationController : UIViewController
 
 
 /* Use this initializer to make the navigation controller use your custom bar class. 
@@ -101,6 +102,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UINavigationController : UIViewC
 @protocol UIViewControllerInteractiveTransitioning;
 @protocol UIViewControllerAnimatedTransitioning;
 
+NS_SWIFT_UI_ACTOR
 @protocol UINavigationControllerDelegate <NSObject>
 
 @optional

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           45B3DDDD-FCA5-3387-98B8-38D9BFF68588
+    value:           24C5DFE7-BF1B-33E4-8E0B-B2440AD9EC6D
   - target:          x86_64-maccatalyst
-    value:           45B3DDDD-FCA5-3387-98B8-38D9BFF68588
+    value:           24C5DFE7-BF1B-33E4-8E0B-B2440AD9EC6D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           031516CB-4CBD-33BF-80FE-671F1539A93B
+    value:           239D19C6-6F99-36C3-8192-03D1DA23FAB0
   - target:          arm64e-maccatalyst
-    value:           031516CB-4CBD-33BF-80FE-671F1539A93B
+    value:           239D19C6-6F99-36C3-8192-03D1DA23FAB0
 install-name:    '/usr/lib/libz.1.dylib'
 current-version: 1.2.11
 exports:

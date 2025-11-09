@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D2D7E94B-F888-398C-A0AE-B5251E1B20B3
+    value:           093382B9-F28C-39B7-ADEF-D1E7DD1F315D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           74D1EE77-1B80-34F9-9835-449F0183B5A2
+    value:           146F450D-7C15-3E96-9DC7-1A198C0B5D1E
 install-name:    '/System/Library/PrivateFrameworks/MobileAccessoryUpdater.framework/Versions/A/MobileAccessoryUpdater'
 current-version: 0
 compatibility-version: 0

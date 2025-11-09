@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           86F0C2E1-6A2D-34E8-AA84-D4224BB49B33
+    value:           846B6692-9CBB-39B8-8608-34A9C34CEF15
   - target:          x86_64-maccatalyst
-    value:           86F0C2E1-6A2D-34E8-AA84-D4224BB49B33
+    value:           846B6692-9CBB-39B8-8608-34A9C34CEF15
   - target:          x86_64h-macos
-    value:           8151F97D-CE36-3B38-AEF0-AAC55E9F537B
+    value:           505CFB48-5B95-381B-8284-7A3C53042ACB
   - target:          x86_64h-maccatalyst
-    value:           8151F97D-CE36-3B38-AEF0-AAC55E9F537B
+    value:           505CFB48-5B95-381B-8284-7A3C53042ACB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           46295B04-B6A4-36A1-A4F7-C9B606CF75A5
+    value:           B3FB73B0-AD75-3215-8994-028BDB73107D
   - target:          arm64e-maccatalyst
-    value:           46295B04-B6A4-36A1-A4F7-C9B606CF75A5
+    value:           B3FB73B0-AD75-3215-8994-028BDB73107D
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
@@ -88,38 +88,38 @@ exports:
                        _cblas_dzasum, _cblas_dznrm2, _cblas_errprn, _cblas_icamax, 
                        _cblas_idamax, _cblas_isamax, _cblas_izamax, _cblas_sasum, 
                        _cblas_saxpy, _cblas_scasum, _cblas_scnrm2, _cblas_scopy, 
-                       _cblas_sdot, _cblas_sdsdot, _cblas_sgbmv, _cblas_sgemm, _cblas_sgemv, 
-                       _cblas_sger, _cblas_snrm2, _cblas_srot, _cblas_srotg, _cblas_srotm, 
-                       _cblas_srotmg, _cblas_ssbmv, _cblas_sscal, _cblas_sspmv, _cblas_sspr, 
-                       _cblas_sspr2, _cblas_sswap, _cblas_ssymm, _cblas_ssymv, _cblas_ssyr, 
-                       _cblas_ssyr2, _cblas_ssyr2k, _cblas_ssyrk, _cblas_stbmv, _cblas_stbsv, 
-                       _cblas_stpmv, _cblas_stpsv, _cblas_strmm, _cblas_strmv, _cblas_strsm, 
-                       _cblas_strsv, _cblas_xerbla, _cblas_zaxpy, _cblas_zcopy, _cblas_zdotc_sub, 
-                       _cblas_zdotu_sub, _cblas_zdrot, _cblas_zdscal, _cblas_zgbmv, 
-                       _cblas_zgemm, _cblas_zgemv, _cblas_zgerc, _cblas_zgeru, _cblas_zhbmv, 
-                       _cblas_zhemm, _cblas_zhemv, _cblas_zher, _cblas_zher2, _cblas_zher2k, 
-                       _cblas_zherk, _cblas_zhpmv, _cblas_zhpr, _cblas_zhpr2, _cblas_zrotg, 
-                       _cblas_zscal, _cblas_zswap, _cblas_zsymm, _cblas_zsyr2k, _cblas_zsyrk, 
-                       _cblas_ztbmv, _cblas_ztbsv, _cblas_ztpmv, _cblas_ztpsv, _cblas_ztrmm, 
-                       _cblas_ztrmv, _cblas_ztrsm, _cblas_ztrsv, _ccopy, _ccopy_, 
-                       _cdotc, _cdotc_, _cdotu, _cdotu_, _cgbmv, _cgbmv_, _cgemm, 
-                       _cgemm_, _cgemv, _cgemv_, _cgerc, _cgerc_, _cgeru, _cgeru_, 
-                       _chbmv, _chbmv_, _chemm, _chemm_, _chemv, _chemv_, _cher, 
-                       _cher2, _cher2_, _cher2k, _cher2k_, _cher_, _cherk, _cherk_, 
-                       _chpmv, _chpmv_, _chpr, _chpr2, _chpr2_, _chpr_, _crotg, _crotg_, 
-                       _cscal, _cscal_, _csrot, _csrot_, _csscal, _csscal_, _cswap, 
-                       _cswap_, _csymm, _csymm_, _csyr2k, _csyr2k_, _csyrk, _csyrk_, 
-                       _ctbmv, _ctbmv_, _ctbsv, _ctbsv_, _ctpmv, _ctpmv_, _ctpsv, 
-                       _ctpsv_, _ctrmm, _ctrmm_, _ctrmv, _ctrmv_, _ctrsm, _ctrsm_, 
-                       _ctrsv, _ctrsv_, _dasum, _dasum_, _daxpy, _daxpy_, _dcabs1, 
-                       _dcabs1_, _dcopy, _dcopy_, _ddot, _ddot_, _dgbmv, _dgbmv_, 
-                       _dgeCopy, _dgePack_A_NoTran, _dgePack_A_Tran, _dgePack_B_NoTran, 
-                       _dgePack_B_Tran, _dgeSetZero, _dgemm, _dgemm_, _dgemv, _dgemv_, 
-                       _dger, _dger_, _dnrm2, _dnrm2_, _double_general_add, _double_general_add_scalar, 
-                       _double_general_elementwise_product, _double_general_permute_cols, 
-                       _double_general_permute_rows, _double_general_product_scalar, 
-                       _double_general_splat, _double_general_sub_scalar, _double_general_transpose, 
-                       _double_inner_product_scalar, _double_outer_product_scalar, 
+                       _cblas_sdot, _cblas_sdsdot, _cblas_sgbmv, _cblas_sgemm, _cblas_sgemm_singlecore, 
+                       _cblas_sgemv, _cblas_sgemv_singlecore, _cblas_sger, _cblas_snrm2, 
+                       _cblas_srot, _cblas_srotg, _cblas_srotm, _cblas_srotmg, _cblas_ssbmv, 
+                       _cblas_sscal, _cblas_sspmv, _cblas_sspr, _cblas_sspr2, _cblas_sswap, 
+                       _cblas_ssymm, _cblas_ssymv, _cblas_ssyr, _cblas_ssyr2, _cblas_ssyr2k, 
+                       _cblas_ssyrk, _cblas_stbmv, _cblas_stbsv, _cblas_stpmv, _cblas_stpsv, 
+                       _cblas_strmm, _cblas_strmv, _cblas_strsm, _cblas_strsv, _cblas_xerbla, 
+                       _cblas_zaxpy, _cblas_zcopy, _cblas_zdotc_sub, _cblas_zdotu_sub, 
+                       _cblas_zdrot, _cblas_zdscal, _cblas_zgbmv, _cblas_zgemm, _cblas_zgemv, 
+                       _cblas_zgerc, _cblas_zgeru, _cblas_zhbmv, _cblas_zhemm, _cblas_zhemv, 
+                       _cblas_zher, _cblas_zher2, _cblas_zher2k, _cblas_zherk, _cblas_zhpmv, 
+                       _cblas_zhpr, _cblas_zhpr2, _cblas_zrotg, _cblas_zscal, _cblas_zswap, 
+                       _cblas_zsymm, _cblas_zsyr2k, _cblas_zsyrk, _cblas_ztbmv, _cblas_ztbsv, 
+                       _cblas_ztpmv, _cblas_ztpsv, _cblas_ztrmm, _cblas_ztrmv, _cblas_ztrsm, 
+                       _cblas_ztrsv, _ccopy, _ccopy_, _cdotc, _cdotc_, _cdotu, _cdotu_, 
+                       _cgbmv, _cgbmv_, _cgemm, _cgemm_, _cgemv, _cgemv_, _cgerc, 
+                       _cgerc_, _cgeru, _cgeru_, _chbmv, _chbmv_, _chemm, _chemm_, 
+                       _chemv, _chemv_, _cher, _cher2, _cher2_, _cher2k, _cher2k_, 
+                       _cher_, _cherk, _cherk_, _chpmv, _chpmv_, _chpr, _chpr2, _chpr2_, 
+                       _chpr_, _crotg, _crotg_, _cscal, _cscal_, _csrot, _csrot_, 
+                       _csscal, _csscal_, _cswap, _cswap_, _csymm, _csymm_, _csyr2k, 
+                       _csyr2k_, _csyrk, _csyrk_, _ctbmv, _ctbmv_, _ctbsv, _ctbsv_, 
+                       _ctpmv, _ctpmv_, _ctpsv, _ctpsv_, _ctrmm, _ctrmm_, _ctrmv, 
+                       _ctrmv_, _ctrsm, _ctrsm_, _ctrsv, _ctrsv_, _dasum, _dasum_, 
+                       _daxpy, _daxpy_, _dcabs1, _dcabs1_, _dcopy, _dcopy_, _ddot, 
+                       _ddot_, _dgbmv, _dgbmv_, _dgeCopy, _dgePack_A_NoTran, _dgePack_A_Tran, 
+                       _dgePack_B_NoTran, _dgePack_B_Tran, _dgeSetZero, _dgemm, _dgemm_, 
+                       _dgemv, _dgemv_, _dger, _dger_, _dnrm2, _dnrm2_, _double_general_add, 
+                       _double_general_add_scalar, _double_general_elementwise_product, 
+                       _double_general_permute_cols, _double_general_permute_rows, 
+                       _double_general_product_scalar, _double_general_splat, _double_general_sub_scalar, 
+                       _double_general_transpose, _double_inner_product_scalar, _double_outer_product_scalar, 
                        _drot, _drot_, _drotg, _drotg_, _drotm, _drotm_, _drotmg, 
                        _drotmg_, _dsbmv, _dsbmv_, _dscal, _dscal_, _dsdot, _dsdot_, 
                        _dspmv, _dspmv_, _dspr, _dspr2, _dspr2_, _dspr_, _dswap, _dswap_, 

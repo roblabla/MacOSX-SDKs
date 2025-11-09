@@ -1,5 +1,6 @@
 //
 //  ARKitCore.h
+//  ARKitCore
 //
 //  Copyright © 2020 Apple Inc. All rights reserved.
 //
@@ -9,6 +10,7 @@
 #import <ARKit/ARCamera.h>
 #import <ARKit/ARCollaborationData.h>
 #import <ARKit/ARConfiguration.h>
+#import <ARKit/ARTrackingStatusTypes.h>
 #import <ARKit/ARDepthData.h>
 #import <ARKit/ARFrame.h>
 #import <ARKit/ARHitTestResult.h>
@@ -22,6 +24,7 @@
 #import <ARKit/ARTrackedRaycast.h>
 #import <ARKit/ARVideoFormat.h>
 #import <ARKit/ARWorldMap.h>
+
 
 #import <ARKit/ARAnchor.h>
 #import <ARKit/AREnvironmentProbeAnchor.h>
@@ -41,10 +44,10 @@
 
 
 
+
+
 #import <ARKit/ARBody2D.h>
 #import <ARKit/ARBodyAnchor.h>
 #import <ARKit/ARMatteGenerator.h>
 #import <ARKit/ARSkeleton.h>
 #import <ARKit/ARSkeletonDefinition.h>
-
-#import <ARKit/ARQuickLookPreviewItem.h>

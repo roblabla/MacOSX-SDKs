@@ -6,8 +6,8 @@
 //
 
 #import <CloudKit/CKDatabaseOperation.h>
-#import <CloudKit/CKServerChangeToken.h>
 #import <CloudKit/CKRecord.h>
+#import <CloudKit/CKServerChangeToken.h>
 
 @class CKFetchRecordZoneChangesConfiguration, CKFetchRecordZoneChangesOptions;
 
@@ -23,10 +23,10 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 @interface CKFetchRecordZoneChangesOperation : CKDatabaseOperation
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithRecordZoneIDs:(NSArray<CKRecordZoneID *> *)recordZoneIDs configurationsByRecordZoneID:(nullable NSDictionary<CKRecordZoneID *, CKFetchRecordZoneChangesConfiguration *> *)configurationsByRecordZoneID;
+- (instancetype)initWithRecordZoneIDs:(NSArray<CKRecordZoneID *> *)recordZoneIDs configurationsByRecordZoneID:(nullable NSDictionary<CKRecordZoneID *, CKFetchRecordZoneChangesConfiguration *> *)configurationsByRecordZoneID API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
 
 @property (nonatomic, copy, nullable) NSArray<CKRecordZoneID *> *recordZoneIDs;
-@property (nonatomic, copy, nullable) NSDictionary<CKRecordZoneID *, CKFetchRecordZoneChangesConfiguration *> *configurationsByRecordZoneID;
+@property (nonatomic, copy, nullable) NSDictionary<CKRecordZoneID *, CKFetchRecordZoneChangesConfiguration *> *configurationsByRecordZoneID API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
 
 /*! @abstract Determines if the opertaion should fetch all changes from the server before completing.
  *
@@ -38,8 +38,19 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
  */
 @property (nonatomic, assign) BOOL fetchAllChanges;
 
-//! @discussion Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
-@property (nonatomic, copy, nullable) void (^recordChangedBlock)(CKRecord *record);
+/*! @discussion If the replacement callback @c recordWasChangedBlock is set, this callback block is ignored.
+ *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ */
+@property (nonatomic, copy, nullable) void (^recordChangedBlock)(CKRecord *record)
+
+    API_DEPRECATED("Use recordWasChangedBlock instead, which surfaces per-record errors", macos(10.12, 12.0), ios(10.0, 15.0), tvos(10.0, 15.0), watchos(3.0, 8.0));
+
+
+
+/*! @discussion If a record fails in post-processing (say, a network failure materializing a @c CKAsset record field), the per-record error will be passed here.
+ *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ */
+@property (nonatomic, copy, nullable) void (^recordWasChangedBlock)(CKRecordID *recordID, CKRecord * _Nullable record, NSError * _Nullable error) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0)) NS_REFINED_FOR_SWIFT;
 
 //! @discussion Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
 @property (nonatomic, copy, nullable) void (^recordWithIDWasDeletedBlock)(CKRecordID *recordID, CKRecordType recordType);
@@ -53,14 +64,15 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
  */
 @property (nonatomic, copy, nullable) void (^recordZoneChangeTokensUpdatedBlock)(CKRecordZoneID *recordZoneID, CKServerChangeToken * _Nullable serverChangeToken, NSData * _Nullable clientChangeTokenData);
-@property (nonatomic, copy, nullable) void (^recordZoneFetchCompletionBlock)(CKRecordZoneID *recordZoneID, CKServerChangeToken * _Nullable serverChangeToken, NSData * _Nullable clientChangeTokenData, BOOL moreComing, NSError * _Nullable recordZoneError);
+@property (nonatomic, copy, nullable) void (^recordZoneFetchCompletionBlock)(CKRecordZoneID *recordZoneID, CKServerChangeToken * _Nullable serverChangeToken, NSData * _Nullable clientChangeTokenData, BOOL moreComing, NSError * _Nullable recordZoneError) CK_SWIFT_DEPRECATED("Use recordZoneFetchResultBlock instead", macos(10.12, 12.0), ios(10.0, 15.0), tvos(10.0, 15.0), watchos(3.0, 8.0));
 
 /*! @abstract This block is called when the operation completes.
  *
  *  @discussion @c serverChangeToken-s previously returned via a @c recordZoneChangeTokensUpdatedBlock or @c recordZoneFetchCompletionBlock invocation, along with the record changes that preceded it, are valid even if there is a subsequent @c operationError
+ *  If the error is @c CKErrorPartialFailure, the error's userInfo dictionary contains a dictionary of recordIDs and zoneIDs to errors keyed off of @c CKPartialErrorsByItemIDKey.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
  */
-@property (nonatomic, copy, nullable) void (^fetchRecordZoneChangesCompletionBlock)(NSError * _Nullable operationError);
+@property (nonatomic, copy, nullable) void (^fetchRecordZoneChangesCompletionBlock)(NSError * _Nullable operationError) CK_SWIFT_DEPRECATED("Use fetchRecordZoneChangesResultBlock instead", macos(10.12, 12.0), ios(10.0, 15.0), tvos(10.0, 15.0), watchos(3.0, 8.0));
 
 @end
 

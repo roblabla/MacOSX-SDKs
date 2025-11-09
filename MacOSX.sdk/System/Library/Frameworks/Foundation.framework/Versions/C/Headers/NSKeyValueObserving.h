@@ -52,7 +52,7 @@ typedef NS_ENUM(NSUInteger, NSKeyValueSetMutationKind) {
     NSKeyValueSetSetMutation = 4
 };
 
-typedef NSString * NSKeyValueChangeKey NS_STRING_ENUM;
+typedef NSString * NSKeyValueChangeKey NS_TYPED_ENUM;
 /* Keys for entries in change dictionaries. See the comments for -observeValueForKeyPath:ofObject:change:context: for more information.
 */
 FOUNDATION_EXPORT NSKeyValueChangeKey const NSKeyValueChangeKindKey;

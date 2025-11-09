@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, MDLMeshBufferType) {
     MDLMeshBufferTypeVertex = 1,
     MDLMeshBufferTypeIndex = 2,
+    MDLMeshBufferTypeCustom = 3,
 };
 
 @protocol MDLMeshBuffer;

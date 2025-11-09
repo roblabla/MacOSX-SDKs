@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A4218E4B-BD18-3ECB-BA26-030090A9CD90
+    value:           C6BFFF07-2753-3190-9002-30E8FDDA20AD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C9E6DAC6-D569-3DE3-992D-5BBDCC62D500
+    value:           65F34F35-BA2C-33CB-A4A0-282E0FBD8673
 install-name:    '/System/Library/PrivateFrameworks/PSNormalizer.framework/Versions/A/Libraries/libnserverlite.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

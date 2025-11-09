@@ -43,6 +43,7 @@ typedef NS_ENUM(NSInteger, UICollectionViewReorderingCadence) {
 @class UIDragItem, UIDragPreviewParameters, UIDragPreviewTarget;
 @class UICollectionViewDropProposal, UICollectionViewPlaceholder, UICollectionViewDropPlaceholder;
 @class UICollectionViewCellRegistration, UICollectionViewSupplementaryRegistration;
+@class UIWindowSceneActivationConfiguration;
 @protocol UIDataSourceTranslating, UISpringLoadedInteractionContext;
 @protocol UIDragSession, UIDropSession;
 @protocol UICollectionViewDragDelegate, UICollectionViewDropDelegate, UICollectionViewDropCoordinator, UICollectionViewDropItem, UICollectionViewDropPlaceholderContext;
@@ -50,13 +51,15 @@ typedef NS_ENUM(NSInteger, UICollectionViewReorderingCadence) {
 // layout transition block signature
 typedef void (^UICollectionViewLayoutInteractiveTransitionCompletion)(BOOL completed, BOOL finished);
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UICollectionViewFocusUpdateContext : UIFocusUpdateContext
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@interface UICollectionViewFocusUpdateContext : UIFocusUpdateContext
 
 @property (nonatomic, strong, readonly, nullable) NSIndexPath *previouslyFocusedIndexPath;
 @property (nonatomic, strong, readonly, nullable) NSIndexPath *nextFocusedIndexPath;
 
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UICollectionViewDataSource <NSObject>
 @required
 
@@ -84,6 +87,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UICollectionViewFocusUpdateConte
 
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UICollectionViewDataSourcePrefetching <NSObject>
 @required
 // indexPaths are ordered ascending by geometric distance from the collection view
@@ -96,6 +100,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UICollectionViewFocusUpdateConte
 @end
 
 
+NS_SWIFT_UI_ACTOR
 @protocol UICollectionViewDelegate <UIScrollViewDelegate>
 @optional
 
@@ -138,7 +143,12 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UICollectionViewFocusUpdateConte
 - (void)collectionView:(UICollectionView *)collectionView didUpdateFocusInContext:(UICollectionViewFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator API_AVAILABLE(ios(9.0));
 - (nullable NSIndexPath *)indexPathForPreferredFocusedViewInCollectionView:(UICollectionView *)collectionView API_AVAILABLE(ios(9.0));
 
-- (NSIndexPath *)collectionView:(UICollectionView *)collectionView targetIndexPathForMoveFromItemAtIndexPath:(NSIndexPath *)originalIndexPath toProposedIndexPath:(NSIndexPath *)proposedIndexPath API_AVAILABLE(ios(9.0));
+/// Determines if the item at the specified index path should also become selected when focus moves to it.
+/// If the collection view's global selectionFollowsFocus is enabled, this method will allow you to override that behavior on a per-index path basis. This method is not called if selectionFollowsFocus is disabled.
+- (BOOL)collectionView:(UICollectionView *)collectionView selectionFollowsFocusForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
+
+- (NSIndexPath *)collectionView:(UICollectionView *)collectionView targetIndexPathForMoveOfItemFromOriginalIndexPath:(NSIndexPath *)originalIndexPath atCurrentIndexPath:(NSIndexPath *)currentIndexPath toProposedIndexPath:(NSIndexPath *)proposedIndexPath API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+- (NSIndexPath *)collectionView:(UICollectionView *)collectionView targetIndexPathForMoveFromItemAtIndexPath:(NSIndexPath *)currentIndexPath toProposedIndexPath:(NSIndexPath *)proposedIndexPath API_DEPRECATED_WITH_REPLACEMENT("collectionView:targetIndexPathForMoveOfItemFromOriginalIndexPath:atCurrentIndexPath:toProposedIndexPath:", ios(9.0, 15.0));
 
 - (CGPoint)collectionView:(UICollectionView *)collectionView targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset API_AVAILABLE(ios(9.0)); // customize the content offset to be applied during transition or update animations
 
@@ -252,9 +262,19 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UICollectionViewFocusUpdateConte
  */
 - (void)collectionView:(UICollectionView *)collectionView willEndContextMenuInteractionWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(13.2)) API_UNAVAILABLE(watchos, tvos);
 
+/*!
+ * @abstract Return a valid @c UIWindowSceneActivationConfiguration to allow for the cell to be expanded into a new scene. Return nil to prevent the interaction from starting.
+ *
+ * @param collectionView The collection view
+ * @param indexPath The index path of the cell being interacted with
+ * @param point The centroid of the interaction in the collection view's coordinate space.
+ */
+- (nullable UIWindowSceneActivationConfiguration *)collectionView:(UICollectionView *)collectionView sceneActivationConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
+
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionView : UIScrollView <UIDataSourceTranslating>
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+@interface UICollectionView : UIScrollView <UIDataSourceTranslating>
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -270,9 +290,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionView : UIScrollView 
 @property (nonatomic, weak, nullable) id <UICollectionViewDropDelegate> dropDelegate API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
 
-/* To enable intra-app drags on iPhone, set this to YES.
- * You can also force drags to be disabled for this collection view by setting this to NO.
- * By default, For iPad this will return YES and iPhone will return NO.
+/*
+ * You can force drags to be disabled for this collection view by setting this to NO.
+ * As of iOS 15, this is true for both iPhone and iPad by default. Prior to iOS 15, it defaulted to false on iPhone.
  */
 @property (nonatomic) BOOL dragInteractionEnabled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
@@ -315,7 +335,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionView : UIScrollView 
 - (void)reloadData; // discard the dataSource and delegate data and requery as necessary
 
 - (void)setCollectionViewLayout:(UICollectionViewLayout *)layout animated:(BOOL)animated; // transition from one layout to another
-- (void)setCollectionViewLayout:(UICollectionViewLayout *)layout animated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion API_AVAILABLE(ios(7.0));
+- (void)setCollectionViewLayout:(UICollectionViewLayout *)layout animated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(7.0));
 
 - (UICollectionViewTransitionLayout *)startInteractiveTransitionToCollectionViewLayout:(UICollectionViewLayout *)layout completion:(nullable UICollectionViewLayoutInteractiveTransitionCompletion)completion API_AVAILABLE(ios(7.0));
 - (void)finishInteractiveTransition API_AVAILABLE(ios(7.0));
@@ -332,7 +352,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionView : UIScrollView 
 - (nullable NSIndexPath *)indexPathForItemAtPoint:(CGPoint)point;
 - (nullable NSIndexPath *)indexPathForCell:(UICollectionViewCell *)cell;
 
+// Returns any existing visible or prepared cell for the index path. Returns nil when no cell exists, or if index path is out of range.
 - (nullable UICollectionViewCell *)cellForItemAtIndexPath:(NSIndexPath *)indexPath;
+
 @property (nonatomic, readonly) NSArray<__kindof UICollectionViewCell *> *visibleCells;
 @property (nonatomic, readonly) NSArray<NSIndexPath *> *indexPathsForVisibleItems;
 
@@ -347,15 +369,18 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionView : UIScrollView 
 // These methods allow dynamic modification of the current set of items in the collection view
 - (void)insertSections:(NSIndexSet *)sections;
 - (void)deleteSections:(NSIndexSet *)sections;
-- (void)reloadSections:(NSIndexSet *)sections;
 - (void)moveSection:(NSInteger)section toSection:(NSInteger)newSection;
+- (void)reloadSections:(NSIndexSet *)sections;
 
 - (void)insertItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
 - (void)deleteItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
-- (void)reloadItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
 - (void)moveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath;
+- (void)reloadItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
+// Reconfigures any existing cells for the items. Reconfiguring is more efficient than reloading an item, as it does not replace the
+// existing cell with a new cell. Prefer reconfiguring over reloading unless you actually need an entirely new cell for the item.
+- (void)reconfigureItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
 
-- (void)performBatchUpdates:(void (NS_NOESCAPE ^ _Nullable)(void))updates completion:(void (^ _Nullable)(BOOL finished))completion; // allows multiple insert/delete/reload/move calls to be animated simultaneously. Nestable.
+- (void)performBatchUpdates:(void (NS_NOESCAPE ^ _Nullable)(void))updates completion:(void (^ _Nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC; // allows multiple insert/delete/reload/move calls to be animated simultaneously. Nestable.
 
 // Support for reordering
 - (BOOL)beginInteractiveMovementForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(9.0)); // returns NO if reordering was prevented from beginning - otherwise YES
@@ -366,8 +391,19 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionView : UIScrollView 
 // Support for Focus
 @property (nonatomic) BOOL remembersLastFocusedIndexPath API_AVAILABLE(ios(9.0)); // defaults to NO. If YES, when focusing on a collection view the last focused index path is focused automatically. If the collection view has never been focused, then the preferred focused index path is used.
 
-// When enabled, the collection view ensures that selection is automatically triggered when focus moves to a cell.
+/// When enabled, the collection view ensures that selection is automatically triggered when focus moves to a cell.
+/// Defaults to a system derived value based on platform and other properties of the collection view.
 @property (nonatomic) BOOL selectionFollowsFocus API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+
+/// Determines if the collection view allows its cells to become focused.
+/// When collectionView:canFocusItemAtIndexPath: is implemented, its return value takes precedence over this method.
+/// Defaults to a system derived value based on platform and other properties of the collection view.
+@property (nonatomic) BOOL allowsFocus API_AVAILABLE(ios(15.0), tvos(15.0));
+
+/// Determines if the collection view allows its cells to become focused while editing.
+/// When collectionView:canFocusItemAtIndexPath: is implemented, its return value takes precedence over this method.
+/// Defaults to a system derived value based on platform and other properties of the collection view.
+@property (nonatomic) BOOL allowsFocusDuringEditing API_AVAILABLE(ios(15.0), tvos(15.0));
 
 // Drag & Drop
 
@@ -407,7 +443,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionView : UIScrollView 
 @end
 #endif
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UICollectionViewDragDelegate <NSObject>
 
 @required
@@ -454,7 +490,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 
 @end
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UICollectionViewDropDelegate <NSObject>
 
 @required
@@ -524,7 +560,7 @@ typedef NS_ENUM(NSInteger, UICollectionViewDropIntent) {
 } API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewDropProposal : UIDropProposal
 
 - (instancetype)initWithDropOperation:(UIDropOperation)operation intent:(UICollectionViewDropIntent)intent;
@@ -536,7 +572,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 @end
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UICollectionViewDropCoordinator <NSObject>
 
 /* Ordered list of items available for this drop.
@@ -588,7 +624,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos,watchos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos,watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewPlaceholder : NSObject
 
 - (instancetype)initWithInsertionIndexPath:(NSIndexPath*)insertionIndexPath reuseIdentifier:(NSString *)reuseIdentifier NS_DESIGNATED_INITIALIZER;
@@ -601,7 +637,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos,watchos)
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos,watchos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos,watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewDropPlaceholder : UICollectionViewPlaceholder
 
 /* If specified, will be used to modify the appearance (e.g. visiblePath to supply a "cut out" region of the placeholder cell) of the animating dropped item.
@@ -611,7 +647,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos,watchos)
 @end
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UICollectionViewDropItem <NSObject>
 
 @property (nonatomic, readonly) UIDragItem *dragItem;
@@ -631,7 +667,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 @end
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UICollectionViewDropPlaceholderContext <UIDragAnimating>
 
 /* Retrieve drop data from the dragItem's itemProvider.

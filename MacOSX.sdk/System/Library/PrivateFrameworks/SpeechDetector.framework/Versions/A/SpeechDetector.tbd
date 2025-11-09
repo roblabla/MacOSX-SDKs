@@ -1,0 +1,25 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           F7FAE9CF-7936-3B6E-9AE2-A9E3E98E2E1B
+  - target:          x86_64-maccatalyst
+    value:           F7FAE9CF-7936-3B6E-9AE2-A9E3E98E2E1B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           93F3A7B3-A524-3856-89B4-F51912FF515C
+  - target:          arm64e-maccatalyst
+    value:           93F3A7B3-A524-3856-89B4-F51912FF515C
+install-name:    '/System/Library/PrivateFrameworks/SpeechDetector.framework/Versions/A/SpeechDetector'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _SDLogContextFacilityLocalSRBridge, _SDLogInitIfNeeded, _SDLoggingSubsystem, 
+                       _kSDLoggingContextFramework ]
+    objc-classes:    [ OSDAnalyzer, OSDFeatures ]
+...

@@ -15,11 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^UIGraphicsPDFDrawingActions)(UIGraphicsPDFRendererContext *rendererContext) API_AVAILABLE(ios(10.0));
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsPDFRendererFormat : UIGraphicsRendererFormat
+UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+@interface UIGraphicsPDFRendererFormat : UIGraphicsRendererFormat
 @property (nonatomic, copy) NSDictionary<NSString *, id> *documentInfo;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsPDFRendererContext : UIGraphicsRendererContext
+UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+@interface UIGraphicsPDFRendererContext : UIGraphicsRendererContext
 @property (nonatomic, readonly) CGRect pdfContextBounds;
 
 - (void)beginPage;
@@ -30,7 +32,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsPDFRendererContext : 
 - (void)setDestinationWithName:(NSString *)name forRect:(CGRect)rect;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsPDFRenderer : UIGraphicsRenderer
+UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+@interface UIGraphicsPDFRenderer : UIGraphicsRenderer
 - (instancetype)initWithBounds:(CGRect)bounds format:(UIGraphicsPDFRendererFormat *)format NS_DESIGNATED_INITIALIZER;
 
 - (BOOL)writePDFToURL:(NSURL *)url withActions:(NS_NOESCAPE UIGraphicsPDFDrawingActions)actions error:(NSError **)error;

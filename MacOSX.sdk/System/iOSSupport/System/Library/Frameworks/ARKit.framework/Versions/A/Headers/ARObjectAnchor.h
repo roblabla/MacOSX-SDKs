@@ -2,7 +2,7 @@
 //  ARObjectAnchor.h
 //  ARKit
 //
-//  Copyright © 2017-2018 Apple Inc. All rights reserved.
+//  Copyright © 2016-2021 Apple Inc. All rights reserved.
 //
 
 #import <ARKit/ARAnchor.h>

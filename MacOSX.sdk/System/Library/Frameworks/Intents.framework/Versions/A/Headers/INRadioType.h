@@ -18,6 +18,6 @@ typedef NS_ENUM(NSInteger, INRadioType) {
     INRadioTypeHD,
     INRadioTypeSatellite,
     INRadioTypeDAB,
-} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+} API_DEPRECATED("INRadioType is deprecated. There is no replacement.", ios(10.0, 15.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 #endif // INRadioType_h

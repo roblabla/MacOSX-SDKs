@@ -11,7 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UICollectionViewTransitionLayout : UICollectionViewLayout
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UICollectionViewTransitionLayout : UICollectionViewLayout
 
 @property (assign, nonatomic) CGFloat transitionProgress;
 @property (readonly, nonatomic) UICollectionViewLayout *currentLayout;

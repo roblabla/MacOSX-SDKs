@@ -45,6 +45,8 @@
 #import <Vision/VNGeometry.h>
 #import <Vision/VNGeometryUtils.h>
 #import <Vision/VNDetectTrajectoriesRequest.h>
+#import <Vision/VNGeneratePersonSegmentationRequest.h>
+#import <Vision/VNDetectDocumentSegmentationRequest.h>
 
 /* The version of the Vision framework */
 VN_EXPORT double VNVisionVersionNumber API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));

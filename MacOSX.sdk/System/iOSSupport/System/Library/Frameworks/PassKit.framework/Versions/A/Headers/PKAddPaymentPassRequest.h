@@ -5,6 +5,9 @@
 //  Copyright © 2018 Apple, Inc. All rights reserved.
 //
 
+#ifndef __PKADDPAYMENTPASSREQUEST_H
+#define __PKADDPAYMENTPASSREQUEST_H
+
 #import <Foundation/Foundation.h>
 #import <PassKit/PKConstants.h>
 
@@ -75,3 +78,5 @@ API_AVAILABLE(ios(9.0), watchos(2.0))
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

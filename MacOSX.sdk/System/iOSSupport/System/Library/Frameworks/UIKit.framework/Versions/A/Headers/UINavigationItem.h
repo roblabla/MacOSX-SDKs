@@ -33,7 +33,8 @@ typedef NS_ENUM(NSInteger, UINavigationItemBackButtonDisplayMode) {
     UINavigationItemBackButtonDisplayModeMinimal = 2,
 } NS_SWIFT_NAME(UINavigationItem.BackButtonDisplayMode);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UINavigationItem : NSObject <NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UINavigationItem : NSObject <NSCoding>
 
 - (instancetype)initWithTitle:(NSString *)title NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -99,7 +100,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UINavigationItem : NSObject <NSC
 @property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *compactAppearance API_AVAILABLE(ios(13.0));
 ///  When set and this item is topmost, overrides the hosting navigation bar's scrollEdgeAppearance. See UINavigationBar.scrollEdgeAppearance for further details.
 @property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *scrollEdgeAppearance API_AVAILABLE(ios(13.0));
-
+///  When set and this item is topmost, overrides the hosting navigation bar's compactScrollEdgeAppearance. See UINavigationBar.h for further details.
+@property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *compactScrollEdgeAppearance API_AVAILABLE(ios(15.0));
 @end
 
 NS_ASSUME_NONNULL_END

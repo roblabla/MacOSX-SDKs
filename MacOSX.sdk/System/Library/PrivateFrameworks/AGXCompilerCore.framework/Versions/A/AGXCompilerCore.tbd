@@ -4,21 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A7A1529A-1C01-350D-B28F-61EB6232CF9C
+    value:           3796F99E-6D8A-3CF8-8CA1-F70C44BB80C6
   - target:          x86_64-maccatalyst
-    value:           A7A1529A-1C01-350D-B28F-61EB6232CF9C
+    value:           3796F99E-6D8A-3CF8-8CA1-F70C44BB80C6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CB14C536-CCAD-3E1A-BF8F-076FF8BD8164
+    value:           FE55A222-44E9-32D8-B2B9-90A6B4CD9B82
   - target:          arm64e-maccatalyst
-    value:           CB14C536-CCAD-3E1A-BF8F-076FF8BD8164
+    value:           FE55A222-44E9-32D8-B2B9-90A6B4CD9B82
 install-name:    '/System/Library/PrivateFrameworks/AGXCompilerCore.framework/Versions/A/AGXCompilerCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MTLCompilerBuildRequest, _MTLCompilerBuildRequestWithOptions, 
-                       _MTLCompilerCreate, _MTLCompilerDelete, _MTLCompilerReleaseReply ]
+                       _MTLCompilerBuildRequestWithSerializedBitcode, _MTLCompilerCreate, 
+                       _MTLCompilerDelete, _MTLCompilerReleaseReply ]
 ...

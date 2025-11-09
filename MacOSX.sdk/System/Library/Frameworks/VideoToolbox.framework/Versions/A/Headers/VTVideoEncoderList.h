@@ -32,6 +32,8 @@ VT_EXPORT OSStatus VTCopyVideoEncoderList(
 	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFArrayRef * CM_NONNULL listOfVideoEncodersOut ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 	
 CM_ASSUME_NONNULL_BEGIN
+// keys for options dictionary:
+VT_EXPORT const CFStringRef kVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // optional. CFBoolean.  By default, DV encoders will not be included in the list.  If present and set to kCFBooleanTrue, DV encoders will be included.
 
 // returns CFArray of CFDictionaries with following keys:
 VT_EXPORT const CFStringRef kVTVideoEncoderList_CodecType API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // CFNumber for four-char-code (eg, 'avc1')
@@ -46,6 +48,7 @@ VT_EXPORT const CFStringRef kVTVideoEncoderList_QualityRating API_AVAILABLE(maco
 VT_EXPORT const CFStringRef kVTVideoEncoderList_InstanceLimit API_AVAILABLE(macosx(10.14), ios(13.0), tvos(13.0)); // optional. CFBoolean.  If present and set to kCFBooleanTrue, there is a global instance limit cap on this encoder.  Indicates that an encoder is a scarce resource which may potentially be unavailable.
 VT_EXPORT const CFStringRef kVTVideoEncoderList_IsHardwareAccelerated API_AVAILABLE(macosx(10.14), ios(13.0), tvos(13.0)); // optional. CFBoolean.  If present and set to kCFBooleanTrue, indicates that the encoder is hardware accelerated.
 VT_EXPORT const CFStringRef kVTVideoEncoderList_SupportsFrameReordering API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0)); // optional. CFBoolean.  By default, this is assumed to be true if not present.  If present and set to kCFBooleanFalse, indicates that the encoder will not use B frames.
+VT_EXPORT const CFStringRef kVTVideoEncoderList_SupportsMultiPass API_UNAVAILABLE(macosx, ios, tvos); // optional. CFBoolean.  By default, this is assumed to be false if not present. If present and set to kCFBooleanTrue, indicates that the encoder supports multipass.
 CM_ASSUME_NONNULL_END
 
 /*!

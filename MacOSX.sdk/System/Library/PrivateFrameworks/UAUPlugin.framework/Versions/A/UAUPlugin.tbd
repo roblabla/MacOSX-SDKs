@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D3170330-7D54-3CED-BBA3-E6F61DC4F932
+    value:           8C15C830-4154-320D-AEE3-500D1985A600
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           80644F7A-3DC2-3C08-9B9D-9A4C1226F0AE
+    value:           A112BF4B-BBE6-34F8-974C-67E4FCCFDFDE
 install-name:    '/System/Library/PrivateFrameworks/UAUPlugin.framework/Versions/A/UAUPlugin'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

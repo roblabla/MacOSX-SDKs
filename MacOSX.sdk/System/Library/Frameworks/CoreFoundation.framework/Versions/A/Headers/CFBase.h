@@ -64,7 +64,7 @@
 #define __has_extension(x) 0
 #endif
 
-#if defined(__GNUC__) || 0
+#if defined(__GNUC__) || TARGET_OS_WIN32
 #include <stdint.h>
 #include <stdbool.h>
 #endif
@@ -133,9 +133,25 @@
 #endif
 #endif
 
+#if TARGET_OS_WIN32
+    #if defined(__cplusplus)
+        #define _CF_EXTERN extern "C"
+    #else
+        #define _CF_EXTERN extern
+    #endif
 
+    #if defined(_WINDLL)
+        #if defined(CoreFoundation_EXPORTS) || defined(CF_BUILDING_CF)
+            #define CF_EXPORT _CF_EXTERN __declspec(dllexport)
+        #else
+            #define CF_EXPORT _CF_EXTERN __declspec(dllimport)
+        #endif
+    #else
+        #define CF_EXPORT _CF_EXTERN
+    #endif
+#else
 #define CF_EXPORT extern
-
+#endif
 
 CF_EXTERN_C_BEGIN
 
@@ -166,6 +182,8 @@ CF_EXTERN_C_BEGIN
 	#define CF_INLINE static inline
     #elif defined(_MSC_VER)
         #define CF_INLINE static __inline
+    #elif TARGET_OS_WIN32
+	#define CF_INLINE static __inline__
     #endif
 #endif
 

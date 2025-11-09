@@ -76,6 +76,7 @@
 #include <sys/cdefs.h>
 #include <sys/types.h> /* u_quad_t */
 #include <TargetConditionals.h>
+#include <uuid/uuid.h>
 
 typedef u_quad_t so_gen_t;
 
@@ -152,5 +153,37 @@ struct  xsocket64 {
 
 
 #pragma pack()
+
+
+// Tracker actions
+enum so_tracker_action {
+	SO_TRACKER_ACTION_INVALID = 0,
+	SO_TRACKER_ACTION_ADD = 1,
+	SO_TRACKER_ACTION_DUMP_BY_APP = 2,
+	SO_TRACKER_ACTION_DUMP_ALL = 3,
+	SO_TRACKER_ACTION_DUMP_MAX,
+};
+
+// Tracker TLV attributes
+enum so_tracker_attribute {
+	SO_TRACKER_ATTRIBUTE_INVALID = 0,
+	SO_TRACKER_ATTRIBUTE_ADDRESS_FAMILY = 1,
+	SO_TRACKER_ATTRIBUTE_ADDRESS  = 2,
+	SO_TRACKER_ATTRIBUTE_APP_UUID = 3,
+	SO_TRACKER_ATTRIBUTE_DOMAIN = 4,
+	SO_TRACKER_ATTRIBUTE_DOMAIN_OWNER = 5,
+	SO_TRACKER_ATTRIBUTE_FLAGS = 6,
+	SO_TRACKER_ATTRIBUTE_DUMP_ENTRY = 7,
+	SO_TRACKER_ATTRIBUTE_MEMORY_USED = 8,
+	SO_TRACKER_ATTRIBUTE_MAX,
+};
+
+// Tracker flags
+#define SO_TRACKER_ATTRIBUTE_FLAGS_APP_APPROVED     0x00000001
+#define SO_TRACKER_ATTRIBUTE_FLAGS_TRACKER          0x00000002
+#define SO_TRACKER_ATTRIBUTE_FLAGS_DOMAIN_SHORT     0x00000004
+
+#define SO_TRACKER_TRANSPARENCY_VERSION         3
+extern int tracker_action(int action, char *buffer, size_t buffer_size);
 
 #endif /* !_SYS_SOCKETVAR_H_ */

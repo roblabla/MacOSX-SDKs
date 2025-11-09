@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           51C6CAA9-5160-3463-8106-83EC55AB0BB6
+    value:           76411087-019B-3BCA-BA02-4AD9B82A86DA
   - target:          x86_64-maccatalyst
-    value:           51C6CAA9-5160-3463-8106-83EC55AB0BB6
+    value:           76411087-019B-3BCA-BA02-4AD9B82A86DA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C1D69AD6-24E1-3F31-BDB3-1E37EC51B0E4
+    value:           5FC2CF6C-3B13-318C-8C2B-44A84AB80DF7
   - target:          arm64e-maccatalyst
-    value:           C1D69AD6-24E1-3F31-BDB3-1E37EC51B0E4
+    value:           5FC2CF6C-3B13-318C-8C2B-44A84AB80DF7
 install-name:    '/System/Library/PrivateFrameworks/IntentsFoundation.framework/Versions/A/IntentsFoundation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

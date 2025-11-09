@@ -4,49 +4,61 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C2D0956C-542A-365D-9D25-26A35681158E
+    value:           AD0595AC-0217-3CBE-8FCB-CF9414D08AD0
   - target:          x86_64-maccatalyst
-    value:           C2D0956C-542A-365D-9D25-26A35681158E
+    value:           AD0595AC-0217-3CBE-8FCB-CF9414D08AD0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           393DF903-DA1C-3405-997E-B98F071AE472
+    value:           ABF34D98-EBAC-33A7-8151-3AB5D785B818
   - target:          arm64e-maccatalyst
-    value:           393DF903-DA1C-3405-997E-B98F071AE472
+    value:           ABF34D98-EBAC-33A7-8151-3AB5D785B818
 install-name:    '/System/Library/PrivateFrameworks/UIKitServices.framework/Versions/A/UIKitServices'
-current-version: 4218.1.255
+current-version: 5061.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _UIKitServicesVersionNumber, _UIKitServicesVersionString, 
-                       _UISApplicationInitializationContextAlwaysVendEntitlement, 
+                       _UISAllDeviceRotationCount, _UISAllDeviceRotations, _UISAllDeviceScaleCount, 
+                       _UISAllDeviceScales, _UISApplicationInitializationContextAlwaysVendEntitlement, 
                        _UISApplicationPushKeepAliveInterval, _UISApplicationStateServiceErrorDomain, 
                        _UISApplicationStateServiceIdentifier, _UISApplicationStateServiceMessageKeyBundleIdentifier, 
-                       _UISApplicationSupportServiceIdentifier, _UISDeviceContextDeviceClassKey, 
-                       _UISDeviceContextDeviceCornerRadiusKey, _UISDeviceContextHomeButtonTypeKey, 
+                       _UISApplicationSupportServiceIdentifier, _UISCalloutBarFontSize, 
+                       _UISCreateImageFromDrawing, _UISDeviceContextDeviceClassKey, 
+                       _UISDeviceContextDeviceCornerRadiusKey, _UISDeviceContextDeviceIdiomKey, 
+                       _UISDeviceContextHomeButtonTypeKey, _UISDidCreateWindowForSceneNotification, 
+                       _UISGetFontContentSizeCategory, _UISMainHostWindowDidBecomeKeyNotification, 
+                       _UISMainHostWindowDidChangeNotification, _UISMainHostWindowDidResignKeyNotification, 
                        _UISOpenApplicationOptionAppBasedViewService, _UISOpenApplicationOptionClickAttribution, 
                        _UISOpenApplicationOptionKeySceneSessionPersistentIdentifier, 
-                       _UISOpenApplicationOptionKeyTargetContentIdentifier, _UISRenderImage, 
-                       __UIKitServicesStateFacilityLogger, __UISVisibilityEnvironmentForSceneIdentityTokenString, 
-                       __UISVisibilityEnvironmentForUIHostedWindowContextID, __UISVisibilityNamespace ]
+                       _UISOpenApplicationOptionKeyTargetContentIdentifier, __UIKitServicesStateFacilityLogger, 
+                       __UISVisibilityEnvironmentForSceneIdentityTokenString, __UISVisibilityEnvironmentForUIHostedWindowContextID, 
+                       __UISVisibilityNamespace ]
     objc-classes:    [ UISActivityContinuationAction, UISApplicationInitializationContext, 
                        UISApplicationInitializationContextParameters, UISApplicationState, 
                        UISApplicationStateClient, UISApplicationStateService, UISApplicationSupportClient, 
                        UISApplicationSupportDisplayEdgeInfo, UISApplicationSupportDisplayEdgeInsetsWrapper, 
-                       UISApplicationSupportService, UISClickAttribution, UISDeviceContext, 
-                       UISDisplayContext, UISFetchContentInBackgroundAction, UISFetchContentInBackgroundActionResponse, 
+                       UISApplicationSupportService, UISClickAttribution, UISCompatibilityContext, 
+                       UISDeviceContext, UISDisplayContext, UISDisplayShape, UISDisplaySingleRectShape, 
+                       UISFetchContentInBackgroundAction, UISFetchContentInBackgroundActionResponse, 
                        UISHandleApplicationShortcutAction, UISHandleBackgroundURLSessionAction, 
                        UISHandleCloudKitShareAction, UISHandleRemoteNotificationAction, 
                        UISIntentForwardingAction, UISIntentForwardingActionResponse, 
-                       UISMutableApplicationInitializationContext, UISMutableDeviceContext, 
-                       UISMutableDisplayContext, UISNotificationResponseAction, UISOpenURLAction, 
-                       UISSceneRequestOptions, UISSlotMachine, UISSlotRemoteContent, 
-                       UISSlotStyle ]
-    objc-ivars:      [ UISApplicationInitializationContext._defaultSceneToken, UISApplicationInitializationContext._deviceContext, 
+                       UISMutableApplicationInitializationContext, UISMutableCompatibilityContext, 
+                       UISMutableDeviceContext, UISMutableDisplayContext, UISMutableSlotStyle, 
+                       UISNotificationResponseAction, UISOpenURLAction, UISPasteVariant, 
+                       UISSceneRequestOptions, UISSlotEmptyContent, UISSlotLocalContent, 
+                       UISSlotMachine, UISSlotRemoteContent, UISSlotStyle, UISTextLineDrawing, 
+                       UISTextParagraphDrawing, UISTransform3DGrader, UISVectorGlyphDrawing ]
+    objc-ivars:      [ UISApplicationInitializationContext._compatibilityContext, 
+                       UISApplicationInitializationContext._defaultSceneToken, UISApplicationInitializationContext._deviceContext, 
                        UISApplicationInitializationContext._displayContext, UISApplicationInitializationContext._persistedSceneIdentifiers, 
-                       UISDeviceContext._deviceInfoKeysToValues, UISDisplayContext._artworkSubtype, 
-                       UISDisplayContext._displayConfiguration, UISDisplayContext._displayEdgeInfo, 
-                       UISDisplayContext._userInterfaceStyle ]
+                       UISApplicationInitializationContext._supportAppSceneRequests, 
+                       UISCompatibilityContext._supportedDisplaySizes, UISDeviceContext._deviceInfoKeysToValues, 
+                       UISDisplayContext._artworkSubtype, UISDisplayContext._displayConfiguration, 
+                       UISDisplayContext._displayEdgeInfo, UISDisplayContext._exclusionArea, 
+                       UISDisplayContext._userInterfaceStyle, UISSlotStyle._fields, 
+                       UISSlotStyle._localization, UISSlotStyle._tintColor ]
 ...

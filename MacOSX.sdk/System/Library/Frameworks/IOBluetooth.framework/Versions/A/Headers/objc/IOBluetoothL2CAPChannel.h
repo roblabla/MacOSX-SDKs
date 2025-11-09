@@ -12,7 +12,6 @@
 #import <IOBluetooth/objc/IOBluetoothDevice.h>
 #import <IOBluetooth/objc/IOBluetoothObject.h>
 
-
 #if 0
 #pragma mark -
 #pragma mark === L2CAP ===
@@ -79,6 +78,8 @@ API_UNAVAILABLE(ios, watchos, tvos)
     
 	BOOL										mIncomingChannel;
 	
+	id											mL2CAPChannelConnectionHandler;
+
     IOBluetoothL2CAPChannelIncomingDataListener	mIncomingDataListener;
     void										*mIncomingDataListenerRefCon;
 
@@ -92,6 +93,8 @@ API_UNAVAILABLE(ios, watchos, tvos)
     
 	BOOL										mIsClosed;
     IOBluetoothObjectID							mObjectID;
+    
+    id                                          _mReserved;
 }
 
 /*!
@@ -163,6 +166,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 */
 
 @property(readonly) BluetoothL2CAPMTU outgoingMTU;
+- (BluetoothL2CAPMTU)getOutgoingMTU DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getIncomingMTU
@@ -172,6 +176,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 */
 
 @property(readonly) BluetoothL2CAPMTU incomingMTU;
+- (BluetoothL2CAPMTU)getIncomingMTU DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		requestRemoteMTU:
@@ -288,6 +293,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 */
 
 @property(readonly, retain) IOBluetoothDevice *device;
+- (IOBluetoothDevice *)getDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getObjectID
@@ -298,6 +304,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 */
 
 @property(readonly, assign) IOBluetoothObjectID objectID;
+- (IOBluetoothObjectID)getObjectID DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getPSM
@@ -306,6 +313,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 */
 
 @property(readonly, assign) BluetoothL2CAPPSM PSM;
+- (BluetoothL2CAPPSM)getPSM DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getLocalChannelID
@@ -314,6 +322,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 */
 
 @property(readonly, assign) BluetoothL2CAPChannelID localChannelID;
+- (BluetoothL2CAPChannelID)getLocalChannelID DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getRemoteChannelID
@@ -322,6 +331,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 */
 
 @property(readonly, assign) BluetoothL2CAPChannelID remoteChannelID;
+- (BluetoothL2CAPChannelID)getRemoteChannelID DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		isIncoming
@@ -365,3 +375,15 @@ API_UNAVAILABLE(ios, watchos, tvos)
 
 extern NSString * const IOBluetoothL2CAPChannelPublishedNotification;
 extern NSString * const IOBluetoothL2CAPChannelTerminatedNotification;
+
+/* Deprecated API */
+
+API_UNAVAILABLE(ios, watchos, tvos)
+@interface NSObject( IOBluetoothL2CAPChannelDeprecated )
+
+- (IOReturn)registerIncomingDataListener:(IOBluetoothL2CAPChannelIncomingDataListener)listener refCon:(void *)refCon DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (IOReturn)write:(void *)data length:(UInt16)length DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
++ (IOBluetoothL2CAPChannel *)withL2CAPChannelRef:(IOBluetoothL2CAPChannelRef)l2capChannelRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+- (IOBluetoothL2CAPChannelRef)getL2CAPChannelRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+@end

@@ -53,7 +53,8 @@ static inline __attribute__((always_inline)) BOOL UIDeviceOrientationIsValidInte
     return ((orientation) == UIDeviceOrientationPortrait || (orientation) == UIDeviceOrientationPortraitUpsideDown || (orientation) == UIDeviceOrientationLandscapeLeft || (orientation) == UIDeviceOrientationLandscapeRight);
 }
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIDevice : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIDevice : NSObject
 
 @property(class, nonatomic, readonly) UIDevice *currentDevice;
 
@@ -85,6 +86,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIDevice : NSObject
 
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UIInputViewAudioFeedback <NSObject>
 @optional
 

@@ -1,7 +1,7 @@
 /*
     NSDerivedAttributeDescription.h
     Core Data
-    Copyright (c) 2018-2020, Apple Inc.
+    Copyright (c) 2018-2021, Apple Inc.
     All rights reserved.
 */
 

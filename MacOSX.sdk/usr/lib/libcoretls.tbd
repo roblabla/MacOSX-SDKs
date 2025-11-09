@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F477FCDE-2E64-3162-9C4B-670CFBF5A2DF
+    value:           669126FA-D098-3131-A990-C33D0D90CE21
   - target:          x86_64-maccatalyst
-    value:           F477FCDE-2E64-3162-9C4B-670CFBF5A2DF
+    value:           669126FA-D098-3131-A990-C33D0D90CE21
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AD1A5975-5E68-3D64-ADAA-55F05A854503
+    value:           ED952909-869E-3405-8E25-B86C4D8B7008
   - target:          arm64e-maccatalyst
-    value:           AD1A5975-5E68-3D64-ADAA-55F05A854503
+    value:           ED952909-869E-3405-8E25-B86C4D8B7008
 install-name:    '/usr/lib/libcoretls.dylib'
-current-version: 169.100.1
+current-version: 173
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

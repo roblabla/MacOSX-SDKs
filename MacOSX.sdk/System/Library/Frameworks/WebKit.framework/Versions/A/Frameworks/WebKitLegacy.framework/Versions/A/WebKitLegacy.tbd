@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0189FD22-9265-3281-9AE9-B6D11D308F59
+    value:           F07C8B13-F66E-3053-9766-56AD3A234922
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5EC24AEC-3F84-3FD0-B634-28CBD0A4D73E
+    value:           37F44CA7-1B4F-311B-AF9B-815C0F187F6A
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebKitLegacy.framework/Versions/A/WebKitLegacy'
-current-version: 611.1.21
+current-version: 612.1.24
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DOMEventException, _DOMException, _DOMRangeException, _DOMXPathException, 

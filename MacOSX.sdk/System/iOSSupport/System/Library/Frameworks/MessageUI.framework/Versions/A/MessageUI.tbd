@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           10C06EE3-1D9C-3A8C-AB67-EB4C3983FBA2
+    value:           ED42FD14-F374-3C66-BAF5-553BD260CB76
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           FB41FA8A-5CBB-3114-A4D4-D1019347BF77
+    value:           DE50C2B0-59A2-3DFC-8844-409164D47031
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MessageUI.framework/Versions/A/MessageUI'
-current-version: 3654.80
+current-version: 3689.0.4
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _MFAutomaticHorizontalDirectionalEdgeInsets, _MFAutomaticHorizontalEdgeInsets, 
                        _MFCenteredRectInRectWithViewScale, _MFComposeRecipientDragType, 
                        _MFComposeRecipientStringMatchAddress, _MFComposeRecipientStringMatchFirstName, 
@@ -22,16 +22,16 @@ exports:
                        _MFFontMetricCacheInvalidationNotification, _MFImageGlyphAlignCenter, 
                        _MFImageGlyphAlignLeft, _MFImageGlyphAlignRight, _MFImageGlyphAll, 
                        _MFImageGlyphArchive, _MFImageGlyphArchiveFill, _MFImageGlyphAttachments, 
-                       _MFImageGlyphBlockSender, _MFImageGlyphBold, _MFImageGlyphBridgeFlagged, 
-                       _MFImageGlyphBridgeNotify, _MFImageGlyphBridgeVIP, _MFImageGlyphCamera, 
+                       _MFImageGlyphBlockSender, _MFImageGlyphBold, _MFImageGlyphCamera, 
                        _MFImageGlyphCameraEllipsis, _MFImageGlyphCheckmark, _MFImageGlyphCheckmarkCircle, 
                        _MFImageGlyphChevronForward, _MFImageGlyphCompose, _MFImageGlyphComposeEncrypted, 
                        _MFImageGlyphComposeMoreFormats, _MFImageGlyphComposeMute, 
                        _MFImageGlyphComposeNotify, _MFImageGlyphComposeNotifyEnabled, 
                        _MFImageGlyphComposeUnencrypted, _MFImageGlyphDecreaseIndent, 
-                       _MFImageGlyphDecreaseQuoteLevel, _MFImageGlyphFiles, _MFImageGlyphFilesEllipsis, 
-                       _MFImageGlyphFilterDisabled, _MFImageGlyphFilterEnabled, _MFImageGlyphFlag, 
-                       _MFImageGlyphFlagColor, _MFImageGlyphFlagged, _MFImageGlyphFontSize, 
+                       _MFImageGlyphDecreaseQuoteLevel, _MFImageGlyphDownArrow, _MFImageGlyphEnvelope, 
+                       _MFImageGlyphFiles, _MFImageGlyphFilesEllipsis, _MFImageGlyphFilterDisabled, 
+                       _MFImageGlyphFilterEnabled, _MFImageGlyphFlag, _MFImageGlyphFlagColor, 
+                       _MFImageGlyphFlagged, _MFImageGlyphFontSizeLarger, _MFImageGlyphFontSizeSmaller, 
                        _MFImageGlyphFormat, _MFImageGlyphForward, _MFImageGlyphForwardFill, 
                        _MFImageGlyphImportant, _MFImageGlyphIncreaseIndent, _MFImageGlyphIncreaseQuoteLevel, 
                        _MFImageGlyphInfo, _MFImageGlyphInsertDrawing, _MFImageGlyphInviteToCalendar, 
@@ -43,8 +43,9 @@ exports:
                        _MFImageGlyphMessageListFilter, _MFImageGlyphMessageListFilterEnabled, 
                        _MFImageGlyphMessageListMore, _MFImageGlyphMore, _MFImageGlyphMoreActions, 
                        _MFImageGlyphMoreActionsFill, _MFImageGlyphMove, _MFImageGlyphMute, 
-                       _MFImageGlyphNotify, _MFImageGlyphPhotos, _MFImageGlyphPrimary, 
-                       _MFImageGlyphPrint, _MFImageGlyphPromotion, _MFImageGlyphQuicklook, 
+                       _MFImageGlyphNotify, _MFImageGlyphOpenEnvelope, _MFImageGlyphOpenInNewWindow, 
+                       _MFImageGlyphPhotos, _MFImageGlyphPrimary, _MFImageGlyphPrint, 
+                       _MFImageGlyphPromotion, _MFImageGlyphProtectedEnvelope, _MFImageGlyphQuicklook, 
                        _MFImageGlyphRead, _MFImageGlyphReadLater, _MFImageGlyphReply, 
                        _MFImageGlyphReplyAll, _MFImageGlyphReplyAllFill, _MFImageGlyphReplyFill, 
                        _MFImageGlyphRevealAction, _MFImageGlyphSave, _MFImageGlyphSaveAll, 
@@ -53,8 +54,8 @@ exports:
                        _MFImageGlyphSearchFlaggedNoColors, _MFImageGlyphSearchMagnifyingGlass, 
                        _MFImageGlyphSearchMailbox, _MFImageGlyphSearchPeople, _MFImageGlyphSearchSubject, 
                        _MFImageGlyphSearchUnread, _MFImageGlyphSearchVIP, _MFImageGlyphSend, 
-                       _MFImageGlyphSendAgain, _MFImageGlyphShare, _MFImageGlyphSigned, 
-                       _MFImageGlyphSocial, _MFImageGlyphStatusIndicatorAttachment, 
+                       _MFImageGlyphSendAgain, _MFImageGlyphShare, _MFImageGlyphShelf, 
+                       _MFImageGlyphSigned, _MFImageGlyphSocial, _MFImageGlyphStatusIndicatorAttachment, 
                        _MFImageGlyphStatusIndicatorBlockSender, _MFImageGlyphStatusIndicatorFlagged, 
                        _MFImageGlyphStatusIndicatorForwarded, _MFImageGlyphStatusIndicatorMute, 
                        _MFImageGlyphStatusIndicatorNotify, _MFImageGlyphStatusIndicatorReplied, 
@@ -62,9 +63,9 @@ exports:
                        _MFImageGlyphStopNotify, _MFImageGlyphStriketrhough, _MFImageGlyphTapToRadar, 
                        _MFImageGlyphToday, _MFImageGlyphTrash, _MFImageGlyphTrashFill, 
                        _MFImageGlyphUnMute, _MFImageGlyphUncategorized, _MFImageGlyphUnderline, 
-                       _MFImageGlyphUnflag, _MFImageGlyphUnread, _MFImageGlyphUserOverride, 
-                       _MFImageGlyphVIPs, _MFImageGlyphVideoFill, _MFImageGlyphXMark, 
-                       _MFIntegralRectToViewScale, _MFLastIndexInRangePassingTest, 
+                       _MFImageGlyphUnflag, _MFImageGlyphUnread, _MFImageGlyphUpArrow, 
+                       _MFImageGlyphUserOverride, _MFImageGlyphVIPs, _MFImageGlyphVideoFill, 
+                       _MFImageGlyphXMark, _MFIntegralRectToViewScale, _MFLastIndexInRangePassingTest, 
                        _MFLastIndexPassingTest, _MFLocalizedAddressSeparator, _MFMailComposeErrorDomain, 
                        _MFMessageComposeViewControllerAttachmentAlternateFilename, 
                        _MFMessageComposeViewControllerAttachmentURL, _MFMessageComposeViewControllerTextMessageAvailabilityDidChangeNotification, 
@@ -79,9 +80,9 @@ exports:
                        MFComposeRecipient, MFComposeRecipientGroup, MFComposeRecipientOriginContext, 
                        MFComposeRecipientTextView, MFComposeTextStyle, MFContactsSearchManager, 
                        MFFontMetricCache, MFHeaderLabelView, MFMailComposeViewController, 
-                       MFMessageComposeViewController, MFModernAtomView, MFModernComposeRecipientAtom, 
-                       MFRecentComposeRecipient, MFRecentComposeRecipientGroup, MFRecipientTableViewCell, 
-                       _MFAtomFieldEditor ]
+                       MFMailMenuCommand, MFMessageComposeViewController, MFModernAtomView, 
+                       MFModernComposeRecipientAtom, MFRecentComposeRecipient, MFRecentComposeRecipientGroup, 
+                       MFRecipientTableViewCell, _MFAtomFieldEditor ]
     objc-ivars:      [ MFCalendarComposeRecipient._calAttendeeName, MFCalendarComposeRecipient._participant, 
                        MFComposeHeaderView._delegate, MFComposeHeaderView._highlightBackgroundView, 
                        MFComposeHeaderView._labelView, MFComposeHeaderView._separator, 

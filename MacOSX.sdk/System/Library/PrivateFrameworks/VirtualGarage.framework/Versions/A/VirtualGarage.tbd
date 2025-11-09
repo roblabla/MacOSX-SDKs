@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           753F97F5-48D1-3875-B5A9-2DD797066025
+    value:           BD3292CA-F3DA-3A2D-8CE5-C20EA86EEFDF
   - target:          x86_64-maccatalyst
-    value:           753F97F5-48D1-3875-B5A9-2DD797066025
+    value:           BD3292CA-F3DA-3A2D-8CE5-C20EA86EEFDF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B75D0C21-74E8-3B08-853C-8276AFD9A38A
+    value:           B86C3C5B-4790-367A-A70A-37489A9FABA8
   - target:          arm64e-maccatalyst
-    value:           B75D0C21-74E8-3B08-853C-8276AFD9A38A
+    value:           B86C3C5B-4790-367A-A70A-37489A9FABA8
 install-name:    '/System/Library/PrivateFrameworks/VirtualGarage.framework/Versions/A/VirtualGarage'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -24,18 +24,19 @@ exports:
                        _VGChargingConnectorTypeOptionsPacked, _VGChargingConnectorTypeOptionsUnpacked, 
                        _VGGetAssertLog, _VGGetDataCoordinatorLog, _VGGetExternalAccessoryLog, 
                        _VGGetOEMApplicationLog, _VGGetPersistingLog, _VGGetUIHelperLog, 
-                       _VGGetVirtualGarageLog, _VGHexRepresentationFromCGColor, _VGVehicleStateStorageReadFrom, 
-                       _VGVehiclesHaveMatchingVehicleStateProviders, _VirtualGarageConfig_AutomaticallyDeselectMissingVehicles, 
+                       _VGGetVirtualGarageLog, _VGHexRepresentationFromCGColor, _VGProcessNameForPID, 
+                       _VGVehicleStateStorageReadFrom, _VGVehiclesHaveMatchingVehicleStateProviders, 
+                       _VirtualGarageConfig_AutomaticallyDeselectMissingVehicles, 
                        _VirtualGarageConfig_CapacityThresholdForVehicleStateComparison, 
-                       _VirtualGarageConfig_DisabledApplications, _VirtualGarageConfig_EnableAutomaticVehicleDeselection, 
-                       _VirtualGarageConfig_EnableIAP2Onboarding, _VirtualGarageConfig_EnableWhiteListing, 
-                       _VirtualGarageConfig_ForceShowLastSyncDate, _VirtualGarageConfig_IntentsRequestTimeout, 
-                       _VirtualGarageConfig_KeyNameForModelID, _VirtualGarageConfig_KeyNameInManifestForWhitelistedModelIDs, 
-                       _VirtualGarageConfig_NameForBundleIDKey, _VirtualGarageConfig_NameForWhitelistKey, 
-                       _VirtualGarageConfig_OEMAppPullInterval, _VirtualGarageConfig_ResourceNameForWhitelistedModels, 
-                       _VirtualGarageConfig_StreamUpdatesDuringNav, _VirtualGarageConfig_SynchronousVehicleStateUpdate, 
-                       _VirtualGarageConfig_TimeThresholdForVehicleStateComparison, 
-                       _VirtualGarageConfig_UseCarDisplaySimIdentifier, _VirtualGarageConfig_UseMapsSyncLiveUpdates, 
+                       _VirtualGarageConfig_EVRoutingDisabledApplications, _VirtualGarageConfig_EVRoutingEnableAutomaticVehicleDeselection, 
+                       _VirtualGarageConfig_EVRoutingEnableIAP2Onboarding, _VirtualGarageConfig_EVRoutingEnableWhiteListing, 
+                       _VirtualGarageConfig_EVRoutingForceShowLastSyncDate, _VirtualGarageConfig_EVRoutingIntentsRequestTimeout, 
+                       _VirtualGarageConfig_EVRoutingKeyNameForModelID, _VirtualGarageConfig_EVRoutingKeyNameInManifestForWhitelistedModelIDs, 
+                       _VirtualGarageConfig_EVRoutingNameForBundleIDKey, _VirtualGarageConfig_EVRoutingNameForWhitelistKey, 
+                       _VirtualGarageConfig_EVRoutingOEMAppPullInterval, _VirtualGarageConfig_EVRoutingResourceNameForWhitelistedModels, 
+                       _VirtualGarageConfig_EVRoutingStreamUpdatesDuringNav, _VirtualGarageConfig_EVRoutingSynchronousVehicleStateUpdate, 
+                       _VirtualGarageConfig_EVRoutingUseCarDisplaySimIdentifier, 
+                       _VirtualGarageConfig_EVRoutingUseMapsSyncLiveUpdates, _VirtualGarageConfig_TimeThresholdForVehicleStateComparison, 
                        _startHostingVirtualGarageServiceWithPersister, _stopHostingVirtualGarageService ]
     objc-classes:    [ VGDataCoordinator, VGOEMApplication, VGOEMApplicationFinder, 
                        VGVehicle, VGVehicleDeduper, VGVehicleState, VGVehicleStateStorage, 

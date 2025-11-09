@@ -368,6 +368,20 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
  @param         symptomsStatus    The symptoms status for the electrocardiogram.
  */
 + (NSPredicate *)predicateForElectrocardiogramsWithSymptomsStatus:(HKElectrocardiogramSymptomsStatus)symptomsStatus API_AVAILABLE(ios(14.0), watchos(7.0)) NS_SWIFT_NAME(predicateForElectrocardiograms(symptomsStatus:));
+
+@end
+
+@interface HKQuery (HKVerifiableClinicalRecordPredicates)
+
+/**
+ @method        predicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval:
+ @abstract      Creates a predicate for use with HKQuery subclasses.
+ @discussion    Creates a predicate that matches HKVerifiableClinicalRecords with a relevant date within a date interval.
+ 
+ @param         dateInterval      The date interval that the record's relevant date is in.
+ */
++ (NSPredicate *)predicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval:(NSDateInterval *)dateInterval API_AVAILABLE(ios(15.0)) NS_SWIFT_NAME(predicateForVerifiableClinicalRecords(withRelevantDateWithin:));
+
 @end
 
 NS_ASSUME_NONNULL_END

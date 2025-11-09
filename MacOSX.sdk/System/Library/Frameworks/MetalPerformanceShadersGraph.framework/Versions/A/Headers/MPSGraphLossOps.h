@@ -19,11 +19,13 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @constant   MPSGraphLossReductionTypeAxis                                   No Reductions
  *  @constant   MPSGraphLossReductionTypeSum                                    ReduceSum down to a scalar
+ *  @constant   MPSGraphLossReductionTypeMean                                   ReduceMean down to a scalar
  */
 typedef NS_ENUM(uint64_t, MPSGraphLossReductionType)
 {
     MPSGraphLossReductionTypeAxis                                            MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0)) MPS_SWIFT_NAME(none) =   0,
     MPSGraphLossReductionTypeSum                                             MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))                      =   1L,
+    MPSGraphLossReductionTypeMean                                            MPS_ENUM_AVAILABLE_STARTING(macos(12.0),  ios(15.0), tvos(15.0))                      =   2L,
 };
 
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))

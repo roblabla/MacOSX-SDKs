@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           56368BAC-CF6D-3789-A0E6-1D654386A858
+    value:           8C2A1CB9-4B15-315C-8D2C-6B059CF76BFA
   - target:          x86_64-maccatalyst
-    value:           56368BAC-CF6D-3789-A0E6-1D654386A858
+    value:           8C2A1CB9-4B15-315C-8D2C-6B059CF76BFA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           258690B6-E83F-3F92-B20A-5DB306995166
+    value:           19339A8D-7A63-3087-B41D-DD9D902399D5
   - target:          arm64e-maccatalyst
-    value:           258690B6-E83F-3F92-B20A-5DB306995166
+    value:           19339A8D-7A63-3087-B41D-DD9D902399D5
 install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Frameworks/ScreenReaderBrailleDriver.framework/Versions/A/ScreenReaderBrailleDriver'
 current-version: 390
 exports:
@@ -109,7 +109,5 @@ exports:
                        _kSCRDUSBDeviceDisconnectNotification, _kSCRODBaumVario340DeviceIdentifier ]
     objc-classes:    [ SCRDFileReader, SCRDUSBDevice ]
     objc-ivars:      [ SCRDFileReader._delegate, SCRDFileReader._fileHandle, SCRDFileReader._readerThread, 
-                       SCRDFileReader._threadStartCount, SCRDUSBDevice._device, SCRDUSBDevice._interface, 
-                       SCRDUSBDevice._isConfigured, SCRDUSBDevice._isOpen, SCRDUSBDevice._notification, 
-                       SCRDUSBDevice._notificationPort, SCRDUSBDevice._privateRunLoopMode ]
+                       SCRDFileReader._threadStartCount ]
 ...

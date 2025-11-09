@@ -57,6 +57,12 @@ size_t strlen(const char* s);
 #pragma GCC system_header
 #endif
 
+// TODO: Temporary workaround for RTKit's libc not checking for the correct
+//       cplusplus macro.
+#if defined(__cplusplus)
+# define __cpluplus __cplusplus
+#endif
+
 #include_next <string.h>
 
 // MSVCRT, GNU libc and its derivates may already have the correct prototype in

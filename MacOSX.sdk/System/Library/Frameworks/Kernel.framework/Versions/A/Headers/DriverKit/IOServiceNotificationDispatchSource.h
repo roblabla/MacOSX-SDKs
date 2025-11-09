@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from IOServiceNotificationDispatchSource.iig */
+/* iig(DriverKit-191) generated from IOServiceNotificationDispatchSource.iig */
 
 /* IOServiceNotificationDispatchSource.iig:1-45 */
 /*
@@ -308,11 +308,15 @@ class IOServiceNotificationDispatchSource : public IODispatchSource, public IOSe
 
 
 public:
+#ifdef IOServiceNotificationDispatchSource_DECLARE_IVARS
+IOServiceNotificationDispatchSource_DECLARE_IVARS
+#else /* IOServiceNotificationDispatchSource_DECLARE_IVARS */
     union
     {
         IOServiceNotificationDispatchSource_IVars * ivars;
         IOServiceNotificationDispatchSource_LocalIVars * lvars;
     };
+#endif /* IOServiceNotificationDispatchSource_DECLARE_IVARS */
 
     using super = IODispatchSource;
 

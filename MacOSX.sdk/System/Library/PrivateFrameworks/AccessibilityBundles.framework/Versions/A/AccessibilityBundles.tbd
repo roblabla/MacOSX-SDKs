@@ -3,17 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           473A7B60-A56B-344C-9088-5969DFEA71EE
+    value:           77AA2B3B-50C4-3D0A-BA67-3C1B94F9660E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD3702BE-B858-3646-8218-C38789A9C1CA
+    value:           4F7BB4DB-B8E7-322F-BD8F-0D07BE7519F0
 install-name:    '/System/Library/PrivateFrameworks/AccessibilityBundles.framework/Versions/A/AccessibilityBundles'
 current-version: 12
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _AXBBundleManagerLoadAXBundles, _AXBBundleManagerLoadAXBundlesWithClientToken, 
-                       _AXBBundleManagerLoadRequiredAXBundlesWithClientToken, _AXBComponentsJoinedByComma, 
+    symbols:         [ _AXBApplyBestTitleUIElementToAllSubviews, _AXBBundleManagerLoadAXBundles, 
+                       _AXBBundleManagerLoadAXBundlesWithClientToken, _AXBBundleManagerLoadRequiredAXBundlesWithClientToken, 
+                       _AXBComponentsJoinedByComma, _AXBEnumerateSubviewsUsingBlock, 
                        _AXBFormatFloat, _AXBFormatFloatWithPercentage, _AXBFormatInteger, 
                        _AXBFormatNumber, _AXBFormatNumberWithOptions, _AXBPerformSafeBlock, 
                        _AXBSafeCategoryInstall, _AXBSafeClassFromString, _AXBStarRatingStringForRating, 

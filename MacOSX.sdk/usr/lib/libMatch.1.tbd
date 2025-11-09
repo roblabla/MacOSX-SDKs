@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F0B2CCB0-353D-3BD6-A5DD-53F7087ED9FE
+    value:           0238045D-7DFB-36B9-85F4-897BC5BC56B0
   - target:          x86_64-maccatalyst
-    value:           F0B2CCB0-353D-3BD6-A5DD-53F7087ED9FE
+    value:           0238045D-7DFB-36B9-85F4-897BC5BC56B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           78848B53-F850-3E3F-84E9-B68A3E191C13
+    value:           AE5D23E7-20A0-3C03-B5DE-6084FA58F0C2
   - target:          arm64e-maccatalyst
-    value:           78848B53-F850-3E3F-84E9-B68A3E191C13
+    value:           AE5D23E7-20A0-3C03-B5DE-6084FA58F0C2
 install-name:    '/usr/lib/libMatch.1.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

@@ -17,12 +17,12 @@ typedef NS_ENUM(NSInteger, INSendMessageIntentResponseCode) {
     INSendMessageIntentResponseCodeFailure,
     INSendMessageIntentResponseCodeFailureRequiringAppLaunch,
     INSendMessageIntentResponseCodeFailureMessageServiceNotAvailable,
-} API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macos, tvos);
+} API_AVAILABLE(ios(10.0), macos(12.0), watchos(3.2)) API_UNAVAILABLE(tvos);
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), watchos(3.2))
-API_UNAVAILABLE(macos, tvos)
+API_AVAILABLE(ios(10.0), macos(12.0), watchos(3.2))
+API_UNAVAILABLE(tvos)
 @interface INSendMessageIntentResponse : INIntentResponse
 
 - (id)init NS_UNAVAILABLE;
@@ -34,7 +34,7 @@ API_UNAVAILABLE(macos, tvos)
 
 @property (readonly, NS_NONATOMIC_IOSONLY) INSendMessageIntentResponseCode code;
 
-@property (readwrite, copy, nullable, NS_NONATOMIC_IOSONLY) INMessage *sentMessage API_AVAILABLE(ios(10.3)) API_UNAVAILABLE(macos);
+@property (readwrite, copy, nullable, NS_NONATOMIC_IOSONLY) INMessage *sentMessage API_AVAILABLE(ios(10.3));
 
 @end
 

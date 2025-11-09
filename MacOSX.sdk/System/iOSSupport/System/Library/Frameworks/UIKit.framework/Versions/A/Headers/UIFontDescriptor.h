@@ -61,7 +61,8 @@ UIKIT_EXTERN UIFontDescriptorSystemDesign const UIFontDescriptorSystemDesignMono
 
 @class NSMutableDictionary, NSDictionary, NSArray, NSSet, UITraitCollection;
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIFontDescriptor : NSObject <NSCopying, NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(7.0))
+@interface UIFontDescriptor : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -148,11 +149,19 @@ UIKIT_EXTERN const UIFontWeight UIFontWeightHeavy API_AVAILABLE(ios(8.2));
 UIKIT_EXTERN const UIFontWeight UIFontWeightBlack API_AVAILABLE(ios(8.2));
 
 // Font feature keys
+#if __swift__
+// Allows for better FeatureKey names for Swift clients
+UIKIT_EXTERN UIFontDescriptorFeatureKey const UIFontFeatureTypeIdentifierKey NS_SWIFT_NAME(UIFontDescriptorFeatureKey.typeIdentifier) API_DEPRECATED_WITH_REPLACEMENT("UIFontDescriptor.FeatureKey.type", ios(7.0, 15.0));
+UIKIT_EXTERN UIFontDescriptorFeatureKey const UIFontFeatureSelectorIdentifierKey NS_SWIFT_NAME(UIFontDescriptorFeatureKey.featureIdentifier) API_DEPRECATED_WITH_REPLACEMENT("UIFontDescriptor.FeatureKey.selector", ios(7.0, 15.0));
+UIKIT_EXTERN UIFontDescriptorFeatureKey const UIFontFeatureTypeIdentifierKey_ForNewSwiftAPI NS_SWIFT_NAME(UIFontDescriptorFeatureKey.type) API_AVAILABLE(ios(15.0));
+UIKIT_EXTERN UIFontDescriptorFeatureKey const UIFontFeatureSelectorIdentifierKey_ForNewSwiftAPI NS_SWIFT_NAME(UIFontDescriptorFeatureKey.selector) API_AVAILABLE(ios(15.0));
+#else
 // A number object specifying font feature type such as ligature, character shape, etc.
 UIKIT_EXTERN UIFontDescriptorFeatureKey const UIFontFeatureTypeIdentifierKey API_AVAILABLE(ios(7.0));
 
 // A number object specifying font feature selector such as common ligature off, traditional character shape, etc.
 UIKIT_EXTERN UIFontDescriptorFeatureKey const UIFontFeatureSelectorIdentifierKey API_AVAILABLE(ios(7.0));
+#endif
 
 // Font text styles, semantic descriptions of the intended use for a font returned by +[UIFont preferredFontForTextStyle:]
 UIKIT_EXTERN UIFontTextStyle const UIFontTextStyleLargeTitle API_AVAILABLE(ios(11.0), watchos(5.0)) API_UNAVAILABLE(tvos);

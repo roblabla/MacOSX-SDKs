@@ -139,16 +139,13 @@ typedef struct CM_BRIDGED_TYPE(id) opaqueCMSampleBuffer *CMSampleBufferRef API_A
 */
 typedef struct
 {
-	CMTime duration;				/*! @field duration
-										The duration of the sample. If a single struct applies to
+	CMTime duration;				/*!< The duration of the sample. If a single struct applies to
 										each of the samples, they all will have this duration. */
-	CMTime presentationTimeStamp;	/*! @field presentationTimeStamp
-										The time at which the sample will be presented. If a single
+	CMTime presentationTimeStamp;	/*!< The time at which the sample will be presented. If a single
 										struct applies to each of the samples, this is the presentationTime of the
 										first sample. The presentationTime of subsequent samples will be derived by
 										repeatedly adding the sample duration. */
-	CMTime decodeTimeStamp;			/*! @field decodeTimeStamp
-										The time at which the sample will be decoded. If the samples
+	CMTime decodeTimeStamp;			/*!< The time at which the sample will be decoded. If the samples
 										are in presentation order (eg. audio samples, or video samples from a codec
 										that doesn't support out-of-order samples), this can be set to kCMTimeInvalid. */
 } CMSampleTimingInfo API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
@@ -1872,6 +1869,15 @@ CM_EXPORT const CFStringRef kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix  
  */
 CM_EXPORT const CFStringRef kCMSampleBufferAttachmentKey_ForceKeyFrame
 							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0)); // CFBoolean
+
+/*!
+	@constant   kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData
+	@abstract   Describes the ranges of protected and unprotected data within a protected CMSampleBuffer
+	@discussion
+		The attachment is CFData containing one or more "BytesOfClearData"/"BytesOfProtectedData" pairs as appears in the 'senc' box (see ISO/IEC 23001-7 section 7.2.2). The "BytesOfClearData” field is a 16-bit integer, and the "BytesOfProtectedData” field is a 32-bit integer. Both are native endian in the CFData. This attachment is not present if the CMSampleBuffer contains unprotected content.
+ */
+CM_EXPORT const CFStringRef kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData // CFData
+						API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 CM_ASSUME_NONNULL_END
 

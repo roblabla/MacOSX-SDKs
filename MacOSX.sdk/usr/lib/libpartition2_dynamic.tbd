@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           46BC70EA-0700-36ED-B69C-560DBFDE377C
+    value:           1CF9E499-015A-3F04-AFC8-EBE9908D8EF6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C56E6DFE-E3F4-306A-AF45-03BD0C1C35E1
+    value:           5C2C5B5C-FE7D-3B70-955B-ADA607794768
 install-name:    '/usr/lib/libpartition2_dynamic.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _LPAPFSContainerMediaTypeUUID, _LPAPFSPhysicalStoreDiagsMediaUUID, 
                        _LPAPFSPhysicalStoreMediaUUID, _LPAPFSPhysicalStoreRecoveryMediaUUID, 
                        _LPAPFSSnapshotPropertyKeyMarkedForRevert, _LPAPFSSnapshotPropertyKeyMarkedForRoot, 

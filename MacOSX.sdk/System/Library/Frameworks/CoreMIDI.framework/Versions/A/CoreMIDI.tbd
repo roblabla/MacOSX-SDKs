@@ -4,23 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5B8F80E2-9011-3CC7-81DD-389D766E16B0
+    value:           097C9851-87A4-3A16-8FD3-A47DCC69320C
   - target:          x86_64-maccatalyst
-    value:           5B8F80E2-9011-3CC7-81DD-389D766E16B0
+    value:           097C9851-87A4-3A16-8FD3-A47DCC69320C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DEEEEB55-F395-30BF-BF4D-8595B290AC5A
+    value:           4F95126B-4D93-39D6-83C5-4FC8ABFD6E71
   - target:          arm64e-maccatalyst
-    value:           DEEEEB55-F395-30BF-BF4D-8595B290AC5A
+    value:           4F95126B-4D93-39D6-83C5-4FC8ABFD6E71
 install-name:    '/System/Library/Frameworks/CoreMIDI.framework/Versions/A/CoreMIDI'
 current-version: 69
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _MIDIClientCreate, _MIDIClientCreateWithBlock, _MIDIClientDispose, 
+    symbols:         [ _MIDICapabilityGetDiscoveryMUID, _MIDICapabilityMUIDCollides, 
+                       _MIDIClientCreate, _MIDIClientCreateWithBlock, _MIDIClientDispose, 
                        _MIDIConfigCheckVirginState, _MIDIConfigDelete, _MIDIConfigDuplicate, 
                        _MIDIConfigExists, _MIDIConfigGetCurrent, _MIDIConfigGetList, 
                        _MIDIConfigInstall, _MIDIConfigNew, _MIDIConfigRename, _MIDIDestinationCreate, 
@@ -34,15 +35,16 @@ exports:
                        _MIDIEndpointSetRefCons, _MIDIEntityAddOrRemoveEndpoints, 
                        _MIDIEntityGetDestination, _MIDIEntityGetDevice, _MIDIEntityGetNumberOfDestinations, 
                        _MIDIEntityGetNumberOfSources, _MIDIEntityGetSource, _MIDIEventListAdd, 
-                       _MIDIEventListInit, _MIDIExternalDeviceCreate, _MIDIFlushOutput, 
-                       _MIDIGet32BitOnlyDrivers, _MIDIGetDestination, _MIDIGetDevice, 
-                       _MIDIGetDriverDeviceList, _MIDIGetDriverIORunLoop, _MIDIGetExternalDevice, 
-                       _MIDIGetNumberOfDestinations, _MIDIGetNumberOfDevices, _MIDIGetNumberOfExternalDevices, 
-                       _MIDIGetNumberOfSources, _MIDIGetSerialPortDrivers, _MIDIGetSerialPortOwner, 
-                       _MIDIGetSource, _MIDIInputPortCreate, _MIDIInputPortCreateWithBlock, 
-                       _MIDIInputPortCreateWithProtocol, _MIDINetworkBonjourServiceType, 
-                       _MIDINetworkNotificationContactsDidChange, _MIDINetworkNotificationSessionDidChange, 
-                       _MIDIObjectFindByUniqueID, _MIDIObjectGetDataProperty, _MIDIObjectGetDictionaryProperty, 
+                       _MIDIEventListForEachEvent, _MIDIEventListInit, _MIDIExternalDeviceCreate, 
+                       _MIDIFlushOutput, _MIDIGet32BitOnlyDrivers, _MIDIGetDestination, 
+                       _MIDIGetDevice, _MIDIGetDriverDeviceList, _MIDIGetDriverIORunLoop, 
+                       _MIDIGetExternalDevice, _MIDIGetNumberOfDestinations, _MIDIGetNumberOfDevices, 
+                       _MIDIGetNumberOfExternalDevices, _MIDIGetNumberOfSources, 
+                       _MIDIGetSerialPortDrivers, _MIDIGetSerialPortOwner, _MIDIGetSource, 
+                       _MIDIInputPortCreate, _MIDIInputPortCreateWithBlock, _MIDIInputPortCreateWithProtocol, 
+                       _MIDINetworkBonjourServiceType, _MIDINetworkNotificationContactsDidChange, 
+                       _MIDINetworkNotificationSessionDidChange, _MIDIObjectFindByUniqueID, 
+                       _MIDIObjectGetDataProperty, _MIDIObjectGetDictionaryProperty, 
                        _MIDIObjectGetIntegerProperty, _MIDIObjectGetProperties, _MIDIObjectGetStringProperty, 
                        _MIDIObjectRemoveProperty, _MIDIObjectSetDataProperty, _MIDIObjectSetDictionaryProperty, 
                        _MIDIObjectSetIntegerProperty, _MIDIObjectSetStringProperty, 
@@ -58,13 +60,13 @@ exports:
                        _MIDIThruConnectionDispose, _MIDIThruConnectionFind, _MIDIThruConnectionGetParams, 
                        _MIDIThruConnectionParamsInitialize, _MIDIThruConnectionSetParams, 
                        _MIDITimerTaskCreate, _MIDITimerTaskDispose, _MIDITimerTaskSetNextWakeTime, 
-                       __ZN4MIDI11StreamState22update_with_v1_packetsEN3gsl4spanIKjLln1EEE, 
+                       __ZN4MIDI11StreamState22update_with_v1_packetsENSt3__14spanIKjLm18446744073709551615EEE, 
                        __ZN4MIDI11StreamState5chaseERNS_10PacketizerE, __ZN4MIDI11StreamState5clearEv, 
                        __ZN4MIDI11StreamState5resetERNS_10PacketizerE, __ZN4MIDI11StreamStateC1Ej, 
                        __ZN4MIDI11StreamStateC2Ej, __ZN4MIDI16LegacyPacketList4dumpERKS0_, 
-                       __ZN4MIDI16LegacyPacketList6createE14MIDIProtocolIDyN3gsl4spanIKhLln1EEE, 
+                       __ZN4MIDI16LegacyPacketList6createE14MIDIProtocolIDyNSt3__14spanIKhLm18446744073709551615EEE, 
                        __ZN4MIDI16LegacyPacketList7destroyEPS0_, __ZN4MIDI9EventList4dumpERKS0_, 
-                       __ZN4MIDI9EventList6createE14MIDIProtocolIDyN3gsl4spanIKjLln1EEE, 
+                       __ZN4MIDI9EventList6createE14MIDIProtocolIDyNSt3__14spanIKjLm18446744073709551615EEE, 
                        __ZN4MIDI9EventList6createERKS0_, __ZNK4MIDI9EventList4sizeEv, 
                        _kMIDIDriverPropertyUsesSerial, _kMIDIPropertyAdvanceScheduleTimeMuSec, 
                        _kMIDIPropertyCanRoute, _kMIDIPropertyConnectionUniqueID, 

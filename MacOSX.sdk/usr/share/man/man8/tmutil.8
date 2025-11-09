@@ -391,19 +391,35 @@ Deletes the backups with the specified timestamp from the backup volume mounted 
 .br
 Delete all in-progress backups for a machine directory. Requires root and Full Disk Access privileges.  On APFS backup destinations, this reverts the destination volume to the last backup.
 .\" - - - - - - - - - - - - - - LATESTBACKUP  - - - - - - - - - - - - - - - - - 
-.It Sy latestbackup
+.It Sy latestbackup Op Fl d Ar backup_mount_point Op Fl m Op Fl t
 .br
-Print information about the most recent backup for this computer.
-.\" - - - - - - - - - - - - - - LISTBACKUPS - - - - - - - - - - - - - - - - - - 
-.It Sy listbackups Op Fl d Ar backup_mount_point Op Fl m
-.br
-Print information about all of this computer's completed backups. The
+List this computer's latest completed backup. The
 .Fl Sy d
-option specifies a backup volume to list backups from. When
+option specifies a destination volume to list backups from. When
+.Fl Sy m
+is provided,
+. Sy latestbackup
+will attempt to mount the backups and list their mounted paths.
+The
+.Fl Sy t
+option will show only the backup timestamp rather than the full name or path.
+.br
+Requires root and Full Disk Access privileges.
+.\" - - - - - - - - - - - - - - LISTBACKUPS - - - - - - - - - - - - - - - - - -
+.It Sy listbackups Op Fl d Ar backup_mount_point Op Fl m Op Fl t
+.br
+List all of this computer's completed backups. The
+.Fl Sy d
+option specifies a destination volume to list backups from. When
 .Fl Sy m
 is provided,
 . Sy listbackups
-will attempt to mount backups and list their mounted paths. This option requires root and Full Disk Access privileges.
+will attempt to mount backups and list their mounted paths.
+The
+.Fl Sy t
+option will show only the backup timestamp rather than the full name or path.
+.br
+Requires root and Full Disk Access privileges.
 .\" - - - - - - - - - - - - - MACHINEDIRECTORY  - - - - - - - - - - - - - - - - 
 .It Sy machinedirectory
 .br

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2C818909-C514-3148-8753-ECE21F094F9E
+    value:           F431C339-07D0-37E3-9D54-4E38D1B12584
   - target:          x86_64-maccatalyst
-    value:           2C818909-C514-3148-8753-ECE21F094F9E
+    value:           F431C339-07D0-37E3-9D54-4E38D1B12584
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           20F5D484-6A75-358C-9F64-03DE52520BDE
+    value:           D781A968-A4A4-3FEF-80A2-8ED09D1519E9
   - target:          arm64e-maccatalyst
-    value:           20F5D484-6A75-358C-9F64-03DE52520BDE
+    value:           D781A968-A4A4-3FEF-80A2-8ED09D1519E9
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomAnalytics.framework/Versions/A/SymptomAnalytics'
-current-version: 1431.100.22
+current-version: 1601
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -36,15 +36,34 @@ exports:
                        _kSymptomAnalyticsNetworkAdvisoryNotSupported, _kSymptomAnalyticsNetworkAdvisoryWeakImprovement, 
                        _kSymptomAnalyticsNetworkAdvisoryWeakNotUse, _kSymptomAnalyticsNetworkAdvisoryWeakUse, 
                        _kSymptomAnalyticsRootDefaultDirectory, _kSymptomAnalyticsServiceCalendarUsageToggle, 
-                       _kSymptomAnalyticsServiceCopyRelationship, _kSymptomAnalyticsServiceEndpoint, 
-                       _kSymptomAnalyticsServiceFlowCurrent, _kSymptomAnalyticsServiceFlowHistorical, 
-                       _kSymptomAnalyticsServiceFlowInstant, _kSymptomAnalyticsServiceFlowTag, 
-                       _kSymptomAnalyticsServiceFlowTagAll, _kSymptomAnalyticsServiceFlowTagIKE, 
-                       _kSymptomAnalyticsServiceNOIArg1, _kSymptomAnalyticsServiceNOICanUseOnAlternate, 
-                       _kSymptomAnalyticsServiceNOICanUseOnAlternateCodes, _kSymptomAnalyticsServiceNOICanUseOnAlternateReasons, 
-                       _kSymptomAnalyticsServiceNOICanUseOnAlternateStates, _kSymptomAnalyticsServiceNOIEstTransferTimeConfidence, 
-                       _kSymptomAnalyticsServiceNOIEstTransferTimeDLSecs, _kSymptomAnalyticsServiceNOIEstTransferTimeULSecs, 
-                       _kSymptomAnalyticsServiceNOIFetchAuditableLinkQuality, _kSymptomAnalyticsServiceNOIFetchAuditableLinkQualityLoadedLQM, 
+                       _kSymptomAnalyticsServiceCopyRelationship, _kSymptomAnalyticsServiceDomainTrackingClearHistoryBundleIDs, 
+                       _kSymptomAnalyticsServiceDomainTrackingClearHistoryEndDate, 
+                       _kSymptomAnalyticsServiceDomainTrackingClearHistoryKey, _kSymptomAnalyticsServiceDomainTrackingClearHistoryStartDate, 
+                       _kSymptomAnalyticsServiceDomainTrackingContext, _kSymptomAnalyticsServiceDomainTrackingDomain, 
+                       _kSymptomAnalyticsServiceDomainTrackingDomainOwner, _kSymptomAnalyticsServiceDomainTrackingDomainType, 
+                       _kSymptomAnalyticsServiceDomainTrackingFirstTimeStamp, _kSymptomAnalyticsServiceDomainTrackingHits, 
+                       _kSymptomAnalyticsServiceDomainTrackingInitiatedType, _kSymptomAnalyticsServiceDomainTrackingIsAmbiguous, 
+                       _kSymptomAnalyticsServiceDomainTrackingKind, _kSymptomAnalyticsServiceDomainTrackingMaintenance, 
+                       _kSymptomAnalyticsServiceDomainTrackingResolvedEndpoints, 
+                       _kSymptomAnalyticsServiceDomainTrackingShowDetails, _kSymptomAnalyticsServiceDomainTrackingStatusKey, 
+                       _kSymptomAnalyticsServiceDomainTrackingSwitchKey, _kSymptomAnalyticsServiceDomainTrackingSwitchStateKey, 
+                       _kSymptomAnalyticsServiceDomainTrackingSwitchStateSinceKey, 
+                       _kSymptomAnalyticsServiceDomainTrackingSwitchStateValueKey, 
+                       _kSymptomAnalyticsServiceDomainTrackingTimeStamp, _kSymptomAnalyticsServiceDomainTrackingUnresolvedEndpoints, 
+                       _kSymptomAnalyticsServiceDomainTrackingUserDidFollowUpKey, 
+                       _kSymptomAnalyticsServiceDomainTrackingXRefSwitchStateKey, 
+                       _kSymptomAnalyticsServiceDomainTrackingXRefSwitchStateSinceKey, 
+                       _kSymptomAnalyticsServiceDomainTrackingXRefSwitchStateValueKey, 
+                       _kSymptomAnalyticsServiceEndpoint, _kSymptomAnalyticsServiceFetchLimit, 
+                       _kSymptomAnalyticsServiceFetchOffset, _kSymptomAnalyticsServiceFlowCurrent, 
+                       _kSymptomAnalyticsServiceFlowHistorical, _kSymptomAnalyticsServiceFlowInstant, 
+                       _kSymptomAnalyticsServiceFlowTag, _kSymptomAnalyticsServiceFlowTagAll, 
+                       _kSymptomAnalyticsServiceFlowTagIKE, _kSymptomAnalyticsServiceNOIArg1, 
+                       _kSymptomAnalyticsServiceNOICanUseOnAlternate, _kSymptomAnalyticsServiceNOICanUseOnAlternateCodes, 
+                       _kSymptomAnalyticsServiceNOICanUseOnAlternateReasons, _kSymptomAnalyticsServiceNOICanUseOnAlternateStates, 
+                       _kSymptomAnalyticsServiceNOIEstTransferTimeConfidence, _kSymptomAnalyticsServiceNOIEstTransferTimeDLSecs, 
+                       _kSymptomAnalyticsServiceNOIEstTransferTimeULSecs, _kSymptomAnalyticsServiceNOIFetchAuditableLinkQuality, 
+                       _kSymptomAnalyticsServiceNOIFetchAuditableLinkQualityLoadedLQM, 
                        _kSymptomAnalyticsServiceNOIFetchAuditableLinkQualityValue, 
                        _kSymptomAnalyticsServiceNOIFetchDayOfWeekGrouping, _kSymptomAnalyticsServiceNOIFetchEstTransferTime, 
                        _kSymptomAnalyticsServiceNOIFetchForegroundActivity, _kSymptomAnalyticsServiceNOIFetchInstantQuality, 
@@ -59,21 +78,22 @@ exports:
                        _kSymptomAnalyticsServiceNWInterfaceTypeWiFi, _kSymptomAnalyticsServiceNWInterfaceTypeWiredEthernet, 
                        _kSymptomAnalyticsServiceNameChain, _kSymptomAnalyticsServiceNetworkAttachmentCurrent, 
                        _kSymptomAnalyticsServiceNetworkAttachmentHistorical, _kSymptomAnalyticsServiceNetworkAttachmentInstant, 
-                       _kSymptomAnalyticsServiceNetworkAttachmentPerformance, _kSymptomAnalyticsServicePostProcess, 
-                       _kSymptomAnalyticsServicePostProcessComposeAdvisory, _kSymptomAnalyticsServiceProcessWithGeneration, 
-                       _kSymptomAnalyticsServiceRNFForcedAdviceLevel, _kSymptomAnalyticsServiceRNFTestResult, 
-                       _kSymptomAnalyticsServiceReason, _kSymptomAnalyticsServiceRefreshUsage, 
-                       _kSymptomAnalyticsServiceSubscriberTag, _kSymptomAnalyticsServiceSuccess, 
-                       _kSymptomAnalyticsServiceSweepUsage, _kSymptomAnalyticsServiceTypicalUsageToggle, 
-                       _kSymptomAnalyticsServiceUsage, _kSymptomAnalyticsServiceWatchpointKey, 
-                       _kSymptomAnalyticsServiceWatchpointTarget, _kSymptomAnalyticsServiceWatchpointValue, 
-                       _kSymptomAnalyticsTypeBundleIdentifier, _kSymptomAnalyticsTypeProcessName, 
-                       _kSymptomAnalyticsWorkspacePersistenceOptionPersistentKey ]
+                       _kSymptomAnalyticsServiceNetworkAttachmentPerformance, _kSymptomAnalyticsServiceNetworkDomainTracking, 
+                       _kSymptomAnalyticsServicePostProcess, _kSymptomAnalyticsServicePostProcessComposeAdvisory, 
+                       _kSymptomAnalyticsServiceProcessWithGeneration, _kSymptomAnalyticsServiceRNFForcedAdviceLevel, 
+                       _kSymptomAnalyticsServiceRNFTestResult, _kSymptomAnalyticsServiceReason, 
+                       _kSymptomAnalyticsServiceRefreshUsage, _kSymptomAnalyticsServiceSubscriberTag, 
+                       _kSymptomAnalyticsServiceSuccess, _kSymptomAnalyticsServiceSweepUsage, 
+                       _kSymptomAnalyticsServiceTypicalUsageToggle, _kSymptomAnalyticsServiceUsage, 
+                       _kSymptomAnalyticsServiceWatchpointKey, _kSymptomAnalyticsServiceWatchpointTarget, 
+                       _kSymptomAnalyticsServiceWatchpointValue, _kSymptomAnalyticsTypeBundleIdentifier, 
+                       _kSymptomAnalyticsTypeProcessName, _kSymptomAnalyticsWorkspacePersistenceOptionPersistentKey ]
     objc-classes:    [ AnalyticsWorkspace, AnalyticsWorkspaceRetrievalCallback, AppAnalytics, 
                        DiagnosticCaseUsage, DiagnosticCaseUsageAnalytics, LiveUsage, 
                        NWActivityFragment, NWActivityMetricData, NetworkAttachmentAnalytics, 
                        ObjectAnalytics, Process, ProcessAnalytics, SFApp, SFAppCalendarUsage, 
-                       SFAppDomainUsage, SFAppExperience, SFAppRun, SFAppTypicalUsage, 
-                       SFFlow, SFLiveFlowPerf, SFLiveRoutePerf, SFNetworkAttachment, 
-                       SFProvisioningData, SFTrackerDomain, UsageAnalytics ]
+                       SFAppDomainUsage, SFAppEndpoint, SFAppExperience, SFAppRun, 
+                       SFAppTypicalUsage, SFFlow, SFLiveFlowPerf, SFLiveRoutePerf, 
+                       SFNetworkAttachment, SFProvisioningData, SFTrackerDomain, 
+                       UsageAnalytics ]
 ...

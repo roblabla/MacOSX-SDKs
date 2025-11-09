@@ -64,6 +64,7 @@ UIKIT_EXTERN UITransitionContextViewKey const UITransitionContextToViewKey NS_SW
 // that are created by an animator.
 
 
+NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerContextTransitioning <NSObject>
 
 // The view in which the animated transition should take place.
@@ -131,6 +132,7 @@ UIKIT_EXTERN UITransitionContextViewKey const UITransitionContextToViewKey NS_SW
 - (CGRect)finalFrameForViewController:(UIViewController *)vc;
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerAnimatedTransitioning <NSObject>
 
 // This is used for percent driven interactive transitions, as well as for
@@ -154,6 +156,7 @@ UIKIT_EXTERN UITransitionContextViewKey const UITransitionContextToViewKey NS_SW
 @end
 
 
+NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerInteractiveTransitioning <NSObject>
 - (void)startInteractiveTransition:(id <UIViewControllerContextTransitioning>)transitionContext;
 
@@ -172,6 +175,7 @@ UIKIT_EXTERN UITransitionContextViewKey const UITransitionContextToViewKey NS_SW
 
 @class UIPresentationController;
 
+NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerTransitioningDelegate <NSObject>
 
 @optional
@@ -187,7 +191,8 @@ UIKIT_EXTERN UITransitionContextViewKey const UITransitionContextToViewKey NS_SW
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIPercentDrivenInteractiveTransition : NSObject <UIViewControllerInteractiveTransitioning>
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UIPercentDrivenInteractiveTransition : NSObject <UIViewControllerInteractiveTransitioning>
 
 /// This is the non-interactive duration that was returned when the
 /// animators transitionDuration: method was called when the transition started.

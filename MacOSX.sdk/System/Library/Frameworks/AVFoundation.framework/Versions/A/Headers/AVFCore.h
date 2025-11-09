@@ -10,6 +10,7 @@
 #import <AVFoundation/AVBase.h>
 #import <AVFoundation/AVAnimation.h>
 #import <AVFoundation/AVAsset.h>
+#import <AVFoundation/AVAssetVariant.h>
 #import <AVFoundation/AVAssetCache.h>
 #import <AVFoundation/AVAssetExportSession.h>
 #import <AVFoundation/AVAssetImageGenerator.h>
@@ -26,13 +27,15 @@
 #import <AVFoundation/AVAudioMix.h>
 #import <AVFoundation/AVAudioProcessingSettings.h>
 
-#if TARGET_OS_IPHONE
-#if __has_include(<AVFoundation/AVAssetDownloadTask.h>)
 #import <AVFoundation/AVAssetDownloadTask.h>
-#endif
-#if __has_include(<AVFoundation/AVAssetDownloadStorageManager.h>)
 #import <AVFoundation/AVAssetDownloadStorageManager.h>
-#endif
+#if TARGET_OS_OSX
+#import <AVFoundation/AVCaption.h>
+#import <AVFoundation/AVCaptionGroup.h>
+#import <AVFoundation/AVCaptionGrouper.h>
+#import <AVFoundation/AVCaptionConversionValidator.h>
+#import <AVFoundation/AVCaptionFormatConformer.h>
+#import <AVFoundation/AVCaptionRenderer.h>
 #endif
 
 #import <AVFoundation/AVComposition.h>
@@ -50,6 +53,7 @@
 #import <AVFoundation/AVMovieTrack.h>
 #endif
 #import <AVFoundation/AVOutputSettingsAssistant.h>
+#import <AVFoundation/AVPlaybackCoordinator.h>
 #import <AVFoundation/AVPlayer.h>
 #import <AVFoundation/AVPlayerItem.h>
 #import <AVFoundation/AVPlayerItemMediaDataCollector.h>
@@ -67,10 +71,8 @@
 #import <AVFoundation/AVSampleBufferAudioRenderer.h>
 #import <AVFoundation/AVSampleBufferDisplayLayer.h>
 #import <AVFoundation/AVSampleBufferRenderSynchronizer.h>
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 #import <AVFoundation/AVSampleBufferGenerator.h>
 #import <AVFoundation/AVSampleCursor.h>
-#endif
 #import <AVFoundation/AVSynchronizedLayer.h>
 #import <AVFoundation/AVTextStyleRule.h>
 #import <AVFoundation/AVTime.h>

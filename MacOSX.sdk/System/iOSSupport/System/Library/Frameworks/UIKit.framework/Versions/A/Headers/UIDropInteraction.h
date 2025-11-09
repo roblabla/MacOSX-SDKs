@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class UIDragItem, UITargetedDragPreview;
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @interface UIDropInteraction : NSObject <UIInteraction>
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIDropInteraction : NSObject <UIInteraction>
 
 - (instancetype)initWithDelegate:(id<UIDropInteractionDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 - (instancetype)init NS_UNAVAILABLE;
@@ -82,7 +83,8 @@ typedef NS_ENUM(NSUInteger, UIDropOperation) {
 } API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @interface UIDropProposal : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIDropProposal : NSObject <NSCopying>
 
 - (instancetype)initWithDropOperation:(UIDropOperation)operation NS_DESIGNATED_INITIALIZER;
 - (instancetype)init NS_UNAVAILABLE;
@@ -109,7 +111,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @interface 
 @end
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @protocol UIDropInteractionDelegate <NSObject>
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@protocol UIDropInteractionDelegate <NSObject>
 
 @optional
 

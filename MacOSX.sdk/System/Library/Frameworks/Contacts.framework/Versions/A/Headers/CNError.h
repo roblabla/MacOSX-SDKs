@@ -43,7 +43,8 @@ typedef NS_ENUM(NSInteger, CNErrorCode)
     CNErrorCodeClientIdentifierCollision = 602,
     CNErrorCodeChangeHistoryExpired = 603,
     CNErrorCodeChangeHistoryInvalidAnchor = 604,
-    
+    CNErrorCodeChangeHistoryInvalidFetchRequest = 605,
+
     CNErrorCodeVCardMalformed NS_ENUM_AVAILABLE(10_13, 11_0) = 700,
     CNErrorCodeVCardSummarizationError NS_ENUM_AVAILABLE(10_14, 12_0) = 701,
     

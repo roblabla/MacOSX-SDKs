@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F2B4C5AE-C1CA-3407-B911-51045CB6AB33
+    value:           B4B8BED9-FC89-3D83-8030-5B165D78D619
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           90339011-83B0-3E9E-98C6-54FC13C3C395
+    value:           3B8393FD-7599-39D7-B471-A3C29B1E5455
 install-name:    '/System/Library/PrivateFrameworks/PSNormalizer.framework/Versions/A/Libraries/libICC.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

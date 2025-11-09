@@ -38,7 +38,8 @@ typedef NS_ENUM(NSUInteger, UISearchBarStyle) {
  UISearchBar officially conformed to UITextInputTraits in iOS 8.0 and privately conformed in iOS 7.0. Prior to 7.0, UISearchBar only implemented these four traits: autocapitalizationType, autocorrectionType, spellCheckingType and keyboardType. If your deployment target is <7.0 and you are using any trait other than one of the four mentioned, you must check its availability with respondsToSelector:
  */
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UISearchBar : UIView <UIBarPositioning, UITextInputTraits>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UISearchBar : UIView <UIBarPositioning, UITextInputTraits>
 
 - (instancetype)init API_UNAVAILABLE(tvos);
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER API_UNAVAILABLE(tvos);
@@ -159,6 +160,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UISearchBar : UIView <UIBarPosit
 - (UIOffset)positionAdjustmentForSearchBarIcon:(UISearchBarIcon)icon API_AVAILABLE(ios(5.0)) UI_APPEARANCE_SELECTOR;
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UISearchBarDelegate <UIBarPositioningDelegate>
 
 @optional

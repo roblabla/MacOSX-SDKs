@@ -1,10 +1,13 @@
 /* CoreAnimation - CAEDRMetadata.h
 
- Copyright (c) 2018, Apple Inc.
+ Copyright (c) 2018-2021, Apple Inc.
  All rights reserved. */
 
 #ifndef CAEDRMetadata_h
 #define CAEDRMetadata_h
+
+
+#include <Foundation/NSObject.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

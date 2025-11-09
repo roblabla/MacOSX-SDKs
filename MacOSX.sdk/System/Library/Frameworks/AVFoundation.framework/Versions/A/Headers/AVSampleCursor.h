@@ -4,11 +4,9 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2014-2017 Apple Inc. All rights reserved.
+	Copyright 2014-2021 Apple Inc. All rights reserved.
 
 */
-
-#if !TARGET_OS_IPHONE
 
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
@@ -198,6 +196,12 @@ typedef struct {
 @property (nonatomic, readonly) AVSampleCursorDependencyInfo currentSampleDependencyInfo;
 
 /*!
+       @property               currentSampleDependencyAttachments
+       @abstract               Provides a dictionary containing dependency related sample buffer attachments, if known.  See kCMSampleAttachmentKey_... in CoreMedia/CMSampleBuffer.h.
+*/
+@property (nonatomic, readonly, nullable) NSDictionary *currentSampleDependencyAttachments API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+
+/*!
 	@struct		AVSampleCursorAudioDependencyInfo
 	@abstract   A struct for describing the independent decodability of audio samples
 	@field      audioSampleIsIndependentlyDecodable
@@ -314,8 +318,6 @@ typedef struct {
 #pragma pack(pop)
 
 NS_ASSUME_NONNULL_END
-
-#endif // !TARGET_OS_IPHONE
 
 
 #else

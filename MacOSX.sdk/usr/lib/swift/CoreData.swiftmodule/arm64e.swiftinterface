@@ -1,18 +1,96 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target arm64e-apple-macos11.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreData -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreData
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target arm64e-apple-macos12.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreData -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-concurrency -module-name CoreData
 import Combine
 @_exported import CoreData
 import Foundation
 import Swift
+import _Concurrency
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSAttributeDescription {
+  public struct AttributeType : Swift.Hashable, Swift.Equatable, Swift.RawRepresentable {
+    public var rawValue: CoreData.NSAttributeType
+    public init(rawValue: CoreData.NSAttributeType)
+    public typealias RawValue = CoreData.NSAttributeType
+  }
+  public var type: CoreData.NSAttributeDescription.AttributeType {
+    get
+    set
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSAttributeDescription.AttributeType {
+  public static let undefined: CoreData.NSAttributeDescription.AttributeType
+  public static let integer16: CoreData.NSAttributeDescription.AttributeType
+  public static let integer32: CoreData.NSAttributeDescription.AttributeType
+  public static let integer64: CoreData.NSAttributeDescription.AttributeType
+  public static let decimal: CoreData.NSAttributeDescription.AttributeType
+  public static let double: CoreData.NSAttributeDescription.AttributeType
+  public static let float: CoreData.NSAttributeDescription.AttributeType
+  public static let string: CoreData.NSAttributeDescription.AttributeType
+  public static let boolean: CoreData.NSAttributeDescription.AttributeType
+  public static let date: CoreData.NSAttributeDescription.AttributeType
+  public static let binaryData: CoreData.NSAttributeDescription.AttributeType
+  public static let uuid: CoreData.NSAttributeDescription.AttributeType
+  public static let uri: CoreData.NSAttributeDescription.AttributeType
+  public static let transformable: CoreData.NSAttributeDescription.AttributeType
+  public static let objectID: CoreData.NSAttributeDescription.AttributeType
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSPersistentStoreCoordinator {
+  public func addPersistentStore(type: CoreData.NSPersistentStore.StoreType, configuration: Swift.String? = nil, at storeURL: Foundation.URL, options: [Swift.AnyHashable : Any]? = nil) throws -> CoreData.NSPersistentStore
+  public class func registerStoreClass(_ storeClass: Swift.AnyClass?, type: CoreData.NSPersistentStore.StoreType)
+  public class func metadataForPersistentStore(type storeType: CoreData.NSPersistentStore.StoreType, at storeURL: Foundation.URL, options: [Swift.AnyHashable : Any]? = nil) throws -> [Swift.String : Any]
+  public class func setMetadata(_ metadata: [Swift.String : Any]?, type storeType: CoreData.NSPersistentStore.StoreType, at storeURL: Foundation.URL, options: [Swift.AnyHashable : Any]? = nil) throws
+  public func migratePersistentStore(_ store: CoreData.NSPersistentStore, to storeURL: Foundation.URL, options: [Swift.AnyHashable : Any]? = nil, type storeType: CoreData.NSPersistentStore.StoreType) throws -> CoreData.NSPersistentStore
+  public func destroyPersistentStore(at url: Foundation.URL, type storeType: CoreData.NSPersistentStore.StoreType, options: [Swift.AnyHashable : Any]? = nil) throws
+  public func replacePersistentStore(at destinationURL: Foundation.URL, destinationOptions: [Swift.AnyHashable : Any]? = nil, withPersistentStoreFrom sourceURL: Foundation.URL, sourceOptions: [Swift.AnyHashable : Any]? = nil, type sourceType: CoreData.NSPersistentStore.StoreType) throws
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSPersistentStoreCoordinator {
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public func performAndWait<T>(_ block: () throws -> T) rethrows -> T
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public func perform<T>(_ block: @escaping () throws -> T) async rethrows -> T
+  #endif
+
+}
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension CoreData.NSCoreDataCoreSpotlightDelegate {
+  public static let indexDidUpdateNotification: Foundation.Notification.Name
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSPersistentStore {
+  public struct StoreType : Swift.Hashable, Swift.Equatable, Swift.RawRepresentable {
+    public var rawValue: Swift.String
+    public init(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSPersistentStore.StoreType {
+  public static let sqlite: CoreData.NSPersistentStore.StoreType
+  public static let binary: CoreData.NSPersistentStore.StoreType
+  public static let inMemory: CoreData.NSPersistentStore.StoreType
+  @available(macCatalyst, unavailable)
+  public static let xml: CoreData.NSPersistentStore.StoreType
+}
+@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+extension CoreData.NSManagedObject {
+  @_disfavoredOverload @objc dynamic public class func fetchRequest() -> CoreData.NSFetchRequest<CoreData.NSFetchRequestResult>
+}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension NSManagedObject : Combine.ObservableObject {
+extension CoreData.NSManagedObject : Combine.ObservableObject {
   public var objectWillChange: Combine.ObservableObjectPublisher {
     get
   }
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
 }
-extension CocoaError.Code {
+extension Foundation.CocoaError.Code {
   public static var managedObjectValidation: Foundation.CocoaError.Code {
     get
   }
@@ -140,7 +218,7 @@ extension CocoaError.Code {
     get
   }
 }
-extension CocoaError.Code {
+extension Foundation.CocoaError.Code {
   @available(*, deprecated, renamed: "managedObjectValidation")
   public static var managedObjectValidationError: Foundation.CocoaError.Code {
     get
@@ -310,7 +388,7 @@ extension CocoaError.Code {
     get
   }
 }
-extension CocoaError {
+extension Foundation.CocoaError {
   public static var managedObjectValidation: Foundation.CocoaError.Code {
     get
   }
@@ -438,7 +516,7 @@ extension CocoaError {
     get
   }
 }
-extension CocoaError {
+extension Foundation.CocoaError {
   @available(*, deprecated, renamed: "managedObjectValidation")
   public static var managedObjectValidationError: Foundation.CocoaError.Code {
     get
@@ -608,7 +686,7 @@ extension CocoaError {
     get
   }
 }
-extension CocoaError {
+extension Foundation.CocoaError {
   public var validationObject: Any? {
     get
   }
@@ -631,7 +709,7 @@ extension CocoaError {
     get
   }
 }
-extension CocoaError {
+extension Foundation.CocoaError {
   @available(*, unavailable, renamed: "managedObjectValidation")
   public static var ManagedObjectValidationError: Foundation.CocoaError.Code {
     get
@@ -801,12 +879,39 @@ extension CocoaError {
     get
   }
 }
-extension NSManagedObjectContext {
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSPersistentContainer {
+  public class var defaultDirectoryURL: Foundation.URL {
+    get
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSPersistentContainer {
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public func performBackgroundTask<T>(_ block: @escaping (CoreData.NSManagedObjectContext) throws -> T) async rethrows -> T
+  #endif
+
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSMigrationManager {
+  public func migrateStore(from sourceURL: Foundation.URL, type sourceType: CoreData.NSPersistentStore.StoreType, options sourceOptions: [Swift.AnyHashable : Any]? = nil, mapping: CoreData.NSMappingModel, to destinationURL: Foundation.URL, type destinationType: CoreData.NSPersistentStore.StoreType, options destinationOptions: [Swift.AnyHashable : Any]? = nil) throws
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSExpressionDescription {
+  public var resultType: CoreData.NSAttributeDescription.AttributeType {
+    get
+    set
+  }
+}
+extension CoreData.NSManagedObjectContext {
   public func fetch<T>(_ request: CoreData.NSFetchRequest<T>) throws -> [T] where T : CoreData.NSFetchRequestResult
+  @_disfavoredOverload public func fetch(_ request: CoreData.NSFetchRequest<CoreData.NSFetchRequestResult>) throws -> [Any]
   public func count<T>(for request: CoreData.NSFetchRequest<T>) throws -> Swift.Int where T : CoreData.NSFetchRequestResult
 }
 @available(iOS 14.0, *)
-extension NSManagedObjectContext {
+extension CoreData.NSManagedObjectContext {
   public static let willSaveObjectsNotification: Foundation.Notification.Name
   public static let didSaveObjectsNotification: Foundation.Notification.Name
   public static let didChangeObjectsNotification: Foundation.Notification.Name
@@ -832,9 +937,45 @@ extension NSManagedObjectContext {
     }
   }
 }
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSManagedObjectContext.ConcurrencyType {
+  public static let privateQueue: CoreData.NSManagedObjectContext.ConcurrencyType
+  public static let mainQueue: CoreData.NSManagedObjectContext.ConcurrencyType
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSManagedObjectContext {
+  public struct ConcurrencyType : Swift.Hashable, Swift.Equatable, Swift.RawRepresentable {
+    public var rawValue: CoreData.NSManagedObjectContextConcurrencyType
+    public init(rawValue: CoreData.NSManagedObjectContextConcurrencyType)
+    public typealias RawValue = CoreData.NSManagedObjectContextConcurrencyType
+  }
+  public enum ScheduledTaskType {
+    case immediate
+    case enqueued
+    public static func == (a: CoreData.NSManagedObjectContext.ScheduledTaskType, b: CoreData.NSManagedObjectContext.ScheduledTaskType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  convenience public init(_ type: CoreData.NSManagedObjectContext.ConcurrencyType)
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSManagedObjectContext {
+  public func performAndWait<T>(_ block: () throws -> T) rethrows -> T
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func perform<T>(schedule: CoreData.NSManagedObjectContext.ScheduledTaskType = .immediate, _ block: @escaping () throws -> T) async rethrows -> T
+  #endif
+
+}
 @available(iOS 14.0, *)
 extension CoreData.NSManagedObjectContext.NotificationKey : Swift.Equatable {}
 @available(iOS 14.0, *)
 extension CoreData.NSManagedObjectContext.NotificationKey : Swift.Hashable {}
 @available(iOS 14.0, *)
 extension CoreData.NSManagedObjectContext.NotificationKey : Swift.RawRepresentable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSManagedObjectContext.ScheduledTaskType : Swift.Equatable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension CoreData.NSManagedObjectContext.ScheduledTaskType : Swift.Hashable {}

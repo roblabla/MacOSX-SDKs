@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UITextPasteConfigurationSupporting <UIPasteConfigurationSupporting>
 
 @property (nonatomic, weak, nullable) id<UITextPasteDelegate> pasteDelegate;

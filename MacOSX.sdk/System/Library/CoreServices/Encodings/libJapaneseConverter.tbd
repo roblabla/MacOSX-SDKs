@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           877B98C7-C86D-325D-95BA-93F70010D47A
+    value:           7E61052A-65C3-3581-9950-3BC4385A74E9
   - target:          x86_64-maccatalyst
-    value:           877B98C7-C86D-325D-95BA-93F70010D47A
+    value:           7E61052A-65C3-3581-9950-3BC4385A74E9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D6F712D9-C12A-3076-A79C-A7B55F71D1B3
+    value:           1C1D5CCA-38BB-30D1-A2C1-DD9F519153B7
   - target:          arm64e-maccatalyst
-    value:           D6F712D9-C12A-3076-A79C-A7B55F71D1B3
+    value:           1C1D5CCA-38BB-30D1-A2C1-DD9F519153B7
 install-name:    '/System/Library/CoreServices/Encodings/libJapaneseConverter.dylib'
-current-version: 90
+current-version: 100
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

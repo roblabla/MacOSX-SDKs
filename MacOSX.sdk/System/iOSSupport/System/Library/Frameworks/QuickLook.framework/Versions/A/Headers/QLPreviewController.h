@@ -23,7 +23,7 @@ NS_CLASS_AVAILABLE_IOS(4_0) QL_EXPORT
 + (BOOL)canPreviewItem:(id <QLPreviewItem>)item;
 
 /*
- * Acessing the previewed items
+ * Accessing the previewed items
  */
 
 /*!

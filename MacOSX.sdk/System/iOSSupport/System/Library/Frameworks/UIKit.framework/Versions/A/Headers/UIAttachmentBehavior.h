@@ -34,7 +34,8 @@ UIKIT_STATIC_INLINE BOOL UIFloatRangeIsEqualToRange(UIFloatRange range, UIFloatR
     return range.minimum == otherRange.minimum && range.maximum == otherRange.maximum;
 }
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIAttachmentBehavior : UIDynamicBehavior
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UIAttachmentBehavior : UIDynamicBehavior
 
 - (instancetype)initWithItem:(id <UIDynamicItem>)item attachedToAnchor:(CGPoint)point;
 - (instancetype)initWithItem:(id <UIDynamicItem>)item offsetFromCenter:(UIOffset)offset attachedToAnchor:(CGPoint)point NS_DESIGNATED_INITIALIZER;

@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from OSAction.iig */
+/* iig(DriverKit-191) generated from OSAction.iig */
 
 /* OSAction.iig:1-38 */
 /*
@@ -163,7 +163,7 @@ public:
 					or aborted, or the deadline passed.
      * @param       token Opaque value to be passed from an earlier call to WillWait().
      * @param       options Pass one of the kIOTimerClock* options to specify the timebase for the
-     *              deadline.
+     *              deadline, or zero for no timeout.
      * @param       deadline Pass the time the wait should timeout, or zero for no timeout.
      * @return      kIOReturnSuccess on success. kIOReturnAborted if aborted or canceled.
 					kIOReturnTimeout if the deadline was passed. See IOReturn.h for error codes.
@@ -348,13 +348,19 @@ class OSAction : public OSObject, public OSActionInterface
     friend class OSActionMetaClass;
 
 public:
+#ifdef OSAction_DECLARE_IVARS
+OSAction_DECLARE_IVARS
+#else /* OSAction_DECLARE_IVARS */
     union
     {
         OSAction_IVars * ivars;
         OSAction_LocalIVars * lvars;
     };
+#endif /* OSAction_DECLARE_IVARS */
+    static OSMetaClass *
+    sGetMetaClass() { return gOSActionMetaClass; };
     virtual const OSMetaClass *
-    getMetaClass() const APPLE_KEXT_OVERRIDE { return OSTypeID(OSAction); };
+    getMetaClass() const APPLE_KEXT_OVERRIDE { return gOSActionMetaClass; };
 
     using super = OSObject;
 

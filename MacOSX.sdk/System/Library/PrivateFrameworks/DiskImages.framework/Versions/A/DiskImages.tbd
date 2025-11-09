@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           82F08E92-B4F0-398D-9ED8-CCF61B287939
+    value:           7B9EB4A2-C475-3088-BE8C-60E49A65F6B5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           36A5F736-5D2A-38C7-A119-2EE22D884D24
+    value:           F27DC59C-47D6-3BC4-AE22-9FC86CB59FDA
 install-name:    '/System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/DiskImages'
-current-version: 595.101.1
+current-version: 619
 compatibility-version: 1.0.8
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -81,11 +81,11 @@ exports:
                        _DIHLDiskImageAttach, _DIHLDiskImageChangePassword, _DIHLDiskImageCompact, 
                        _DIHLDiskImageCopyProperties, _DIHLDiskImageCreate, _DIHLDiskImageProbeURL, 
                        _DIHLDiskImageSetProperty, _DIHLEraseImageKeys, _DIHLGetDefaultsDictionary, 
-                       _DIHLResizeImage, _DIIOKitObjectCopyDeviceInfo, _DIIOKitObjectToDevEntry, 
-                       _DIInitialize, _DIIsInitialized, _DIIsPotentiallyValidDiskImage, 
-                       _DILoadDriver, _DIMKHybridLayoutIsWritable, _DIMakeSimpleBLKX, 
-                       _DIMakeStubBLKX, _DIMediaKitCreateMKMediaRef, _DIPartitionSchemeScan, 
-                       _DIRawDevEntryToBlockDevice, _DIResolveBackingStoreToDiskImage, 
+                       _DIHLResizeImage, _DIHLUpgradeKeychainItem, _DIIOKitObjectCopyDeviceInfo, 
+                       _DIIOKitObjectToDevEntry, _DIInitialize, _DIIsInitialized, 
+                       _DIIsPotentiallyValidDiskImage, _DILoadDriver, _DIMKHybridLayoutIsWritable, 
+                       _DIMakeSimpleBLKX, _DIMakeStubBLKX, _DIMediaKitCreateMKMediaRef, 
+                       _DIPartitionSchemeScan, _DIRawDevEntryToBlockDevice, _DIResolveBackingStoreToDiskImage, 
                        _DIResolvePathsToDiskImage, _DIResolvePathsToDiskImageWithOptions, 
                        _DIResolveURLToBackingStore, _DIResolveURLToDiskImage, _DIResourceFileAddResource, 
                        _DIResourceFileChangedResource, _DIResourceFileCopyResourcesFrom, 

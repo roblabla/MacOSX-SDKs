@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           69B479F4-CBBE-316E-9899-DFEBE6E78337
+    value:           4F037431-E643-3BA4-99CB-D2558C649D6C
   - target:          x86_64-maccatalyst
-    value:           69B479F4-CBBE-316E-9899-DFEBE6E78337
+    value:           4F037431-E643-3BA4-99CB-D2558C649D6C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C0140490-42FA-39A3-BD2B-D8EFF9F9E109
+    value:           84224F83-C398-3878-BFF9-280CE14C54C7
   - target:          arm64e-maccatalyst
-    value:           C0140490-42FA-39A3-BD2B-D8EFF9F9E109
+    value:           84224F83-C398-3878-BFF9-280CE14C54C7
 install-name:    '/usr/lib/swift/libswiftDispatch.dylib'
-current-version: 4.100.1
+current-version: 8
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftDispatch.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftDispatch.dylib', 
@@ -27,7 +27,7 @@ exports:
                        '$ld$install_name$os10.13$@rpath/libswiftDispatch.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftDispatch.dylib', 
                        '$ld$install_name$os10.9$@rpath/libswiftDispatch.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s8Dispatch024dispatch_io_create_with_C0ySo03OS_b1_C0CSu_ADSo0f1_B6_queueCys5Int32VXEtF', 
                        '_$s8Dispatch0A11SpecificKeyCACyxGycfC', '_$s8Dispatch0A11SpecificKeyCACyxGycfCTj', 
                        '_$s8Dispatch0A11SpecificKeyCACyxGycfCTq', '_$s8Dispatch0A11SpecificKeyCACyxGycfc', 

@@ -2,7 +2,7 @@
 //  SCNShadable.h
 //  SceneKit
 //
-//  Copyright © 2013-2020 Apple Inc. All rights reserved.
+//  Copyright © 2013-2021 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -222,6 +222,13 @@ typedef void (^SCNBindingBlock)(unsigned int programID, unsigned int location, S
  */
 @property(nonatomic, copy, nullable) NSDictionary<SCNShaderModifierEntryPoint, NSString *> *shaderModifiers API_AVAILABLE(macos(10.9));
 
+/*!
+ @property minimumLanguageVersion
+ @abstract The minimum language version required to interpret the shadable source code (wrapped MTLLanguageVersion). Defaults to nil.
+ @discussion By default SceneKit does not use the most recent language version in order to reduce compilation times. If set to nil the shadable source code is assumed to compiled with any language version greater than or equal to Metal 2.0.
+ */
+@property(nonatomic, retain, nullable) NSNumber *minimumLanguageVersion API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
 @end
 
 
@@ -331,7 +338,7 @@ SCN_EXPORT
 
 /*!
  @property library
- @abstract Specifies the metal library to use to locate the function names specified above. 
+ @abstract Specifies the Metal library to use to locate the function names specified above.
  @discussion If set to nil the default library is used. Defaults to nil.
  */
 @property(nonatomic, retain, nullable) id <MTLLibrary> library API_AVAILABLE(macos(10.11), ios(9.0));

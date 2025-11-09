@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7D61D348-9B15-3219-BEBA-230500032792
+    value:           C776EA95-2787-3464-B348-F251E44ECF6E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           16D20A10-D375-3F84-B82E-9EAC8AA929BA
+    value:           6B009502-ECFC-38D7-B6E5-ECD1F421EE55
 install-name:    '/usr/lib/libSecRecord.dylib'
 current-version: 0
 compatibility-version: 0

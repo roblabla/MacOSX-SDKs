@@ -4,20 +4,18 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           33A64057-5CC8-3158-A3CF-D5762EE3E401
+    value:           46D311BC-A122-3ADF-AE50-EF0B164A72FF
   - target:          x86_64-maccatalyst
-    value:           33A64057-5CC8-3158-A3CF-D5762EE3E401
+    value:           46D311BC-A122-3ADF-AE50-EF0B164A72FF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           10A2DB2E-63E3-32ED-8929-D527B4EC0727
+    value:           B3E8FA09-3B82-3A7F-9C94-A833CB6CC8BE
   - target:          arm64e-maccatalyst
-    value:           10A2DB2E-63E3-32ED-8929-D527B4EC0727
+    value:           B3E8FA09-3B82-3A7F-9C94-A833CB6CC8BE
 install-name:    '/usr/lib/libboringssl.dylib'
-current-version: 0
-compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -49,14 +47,14 @@ exports:
                        _CRYPTO_MUTEX_cleanup, _CRYPTO_MUTEX_init, _CRYPTO_free_ex_data, 
                        _CRYPTO_get_ex_data, _CRYPTO_get_ex_new_index, _CRYPTO_library_init, 
                        _CRYPTO_memcmp, _CRYPTO_new_ex_data, _CRYPTO_once, _CRYPTO_refcount_dec_and_test_zero, 
-                       _CRYPTO_refcount_inc, _CRYPTO_set_ex_data, _DTLSv1_get_timeout, 
-                       _DTLSv1_handle_timeout, _ECDH_compute_key, _ECDSA_do_verify, 
-                       _ECDSA_sign, _ECDSA_size, _ECDSA_verify, _EC_GROUP_free, _EC_GROUP_get_curve_name, 
-                       _EC_GROUP_new_by_curve_name, _EC_KEY_check_key, _EC_KEY_free, 
-                       _EC_KEY_generate_key, _EC_KEY_get0_group, _EC_KEY_get0_public_key, 
-                       _EC_KEY_new, _EC_KEY_new_by_curve_name, _EC_KEY_set_group, 
-                       _EC_KEY_set_public_key, _EC_POINT_free, _EC_POINT_new, _EC_POINT_oct2point, 
-                       _EC_POINT_point2oct, _EC_POINT_set_affine_coordinates_GFp, 
+                       _CRYPTO_refcount_inc, _CRYPTO_set_ex_data, _DTLS_with_buffers_method, 
+                       _DTLSv1_get_timeout, _DTLSv1_handle_timeout, _ECDH_compute_key, 
+                       _ECDSA_do_verify, _ECDSA_sign, _ECDSA_size, _ECDSA_verify, 
+                       _EC_GROUP_free, _EC_GROUP_get_curve_name, _EC_GROUP_new_by_curve_name, 
+                       _EC_KEY_check_key, _EC_KEY_free, _EC_KEY_generate_key, _EC_KEY_get0_group, 
+                       _EC_KEY_get0_public_key, _EC_KEY_new, _EC_KEY_new_by_curve_name, 
+                       _EC_KEY_set_group, _EC_KEY_set_public_key, _EC_POINT_free, 
+                       _EC_POINT_new, _EC_POINT_oct2point, _EC_POINT_point2oct, _EC_POINT_set_affine_coordinates_GFp, 
                        _ED25519_keypair_from_seed, _ED25519_sign, _ED25519_verify, 
                        _ENGINE_get_ECDSA_method, _ENGINE_get_RSA_method, _ERR_clear_error, 
                        _ERR_error_string_n, _ERR_get_error, _ERR_peek_error, _ERR_print_errors_cb, 
@@ -170,18 +168,19 @@ exports:
                        _boringssl_session_destroy, _boringssl_session_disconnect, 
                        _boringssl_session_early_data_accepted, _boringssl_session_export_secret, 
                        _boringssl_session_finish_handshake, _boringssl_session_get_peer_public_key, 
-                       _boringssl_session_handshake_continue, _boringssl_session_has_session_ticket, 
-                       _boringssl_session_read, _boringssl_session_set_bio, _boringssl_session_set_early_data_enabled, 
-                       _boringssl_session_set_peer_hostname, _boringssl_session_set_trust_reference, 
-                       _boringssl_session_was_resumed, _boringssl_session_write, 
-                       _d2i_ECPrivateKey, _d2i_PrivateKey, _datapath_logging_enabled, 
-                       _i2d_ECPrivateKey, _i2o_ECPublicKey, _lh_delete, _lh_doall_arg, 
-                       _lh_free, _lh_insert, _lh_new, _lh_num_items, _lh_retrieve, 
-                       _nw_protocol_boringssl_copy_definition, _nw_protocol_boringssl_disconnect, 
-                       _nw_protocol_boringssl_identifier, _rsa_default_decrypt, _rsa_default_sign_raw, 
-                       _rsa_default_size, _sk_deep_copy, _sk_free, _sk_new_null, 
-                       _sk_num, _sk_pop, _sk_pop_free, _sk_pop_free_ex, _sk_push, 
-                       _sk_set, _sk_shift, _sk_value ]
+                       _boringssl_session_get_quic_early_data_context, _boringssl_session_handshake_continue, 
+                       _boringssl_session_has_session_ticket, _boringssl_session_read, 
+                       _boringssl_session_set_bio, _boringssl_session_set_early_data_enabled, 
+                       _boringssl_session_set_peer_hostname, _boringssl_session_set_quic_early_data_context, 
+                       _boringssl_session_set_trust_reference, _boringssl_session_was_resumed, 
+                       _boringssl_session_write, _d2i_ECPrivateKey, _d2i_PrivateKey, 
+                       _datapath_logging_enabled, _i2d_ECPrivateKey, _i2o_ECPublicKey, 
+                       _lh_delete, _lh_doall_arg, _lh_free, _lh_insert, _lh_new, 
+                       _lh_num_items, _lh_retrieve, _nw_protocol_boringssl_copy_definition, 
+                       _nw_protocol_boringssl_disconnect, _nw_protocol_boringssl_identifier, 
+                       _rsa_default_decrypt, _rsa_default_sign_raw, _rsa_default_size, 
+                       _sk_deep_copy, _sk_free, _sk_new_null, _sk_num, _sk_pop, _sk_pop_free, 
+                       _sk_pop_free_ex, _sk_push, _sk_set, _sk_shift, _sk_value ]
     objc-classes:    [ boringssl_concrete_nw_protocol_boringssl ]
     objc-ivars:      [ boringssl_concrete_boringssl_ctx.boringssl_handle, boringssl_concrete_boringssl_ctx.handshake_timer_fires, 
                        boringssl_concrete_boringssl_ctx.max_allowed_dtls_version, 

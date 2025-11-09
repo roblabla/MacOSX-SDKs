@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1D796859-A3DD-345A-A942-1E0F202A1EA1
+    value:           AC4D1925-7323-3F9E-AFC1-4CA2F1F7B496
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           569B0690-6307-3912-AAA0-501A859C9FA8
+    value:           0F186122-C9B2-33DC-8AAA-D33D7F5973A9
 install-name:    '/System/Library/PrivateFrameworks/Geode.framework/Versions/A/Geode'
-current-version: 340.0.220
+current-version: 400.27.210
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 

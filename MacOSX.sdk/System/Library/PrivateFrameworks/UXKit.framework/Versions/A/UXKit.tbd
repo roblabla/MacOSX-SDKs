@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           66A90642-3A82-3BCF-870D-E5C71CEB0528
+    value:           E80FA480-874B-35A0-98DB-F29FF8D3FCB4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           739DF5CD-4BA1-3E5C-B9C0-304080EB4B73
+    value:           39CCCB9C-CEAA-3F06-AA76-D3D55E31159F
 install-name:    '/System/Library/PrivateFrameworks/UXKit.framework/Versions/A/UXKit'
-current-version: 340.0.220
+current-version: 400.27.210
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ AssetsLibraryServices, DCIMServices, Mondrian, PhotoPrintProduct, 
-                       Photos, PhotosUI, PhotosUIApps, PhotosUICore, PlacesKit ]
+    clients:         [ Mondrian, PhotoPrintProduct, Photos, PhotosUI, PhotosUIApps, 
+                       PhotosUICore, PhotosUICoreProtoApp, PlacesKit ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _NSStringFromUXCollectionViewLayoutDropPosition, _UXCollectionElementKindCell, 

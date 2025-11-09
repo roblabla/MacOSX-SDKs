@@ -80,6 +80,7 @@ EVENTKITUI_CLASS_AVAILABLE(4_0)
     @abstract   Delegate protocol for event edit view controller.
 */
 
+NS_EXTENSION_UNAVAILABLE_IOS("EventKitUI is not supported in extensions")
 @protocol EKEventEditViewDelegate <NSObject>
 @required
 

@@ -3,19 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DA0C52DF-BA58-33CC-8D95-E84247810B27
+    value:           8B7E5C97-EFE8-3626-A64C-3FDD0CCD9F18
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           14ED7C79-A00B-354B-8381-DD0EA36B617D
+    value:           A134E6EB-0B08-356B-83B4-BBC92A6BE611
 install-name:    '/System/Library/PrivateFrameworks/AdID.framework/Versions/A/AdID'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ADSimulatedCrashKillCode_InternalInconsistency, _AdIDVersionNumber, 
                        _AdIDVersionString ]
-    objc-classes:    [ ADAMSBagManager, ADAdTrackingSchedulingManager, ADClientDPIDManager, 
-                       ADIDManagerService, ADJingleOptOutRequest, ADJingleRequest, 
-                       ADJingleRequestManager, ADJingleSegmentRequest, ADLoggingProfileMonitor, 
-                       ADPersonalizedAdsService, ADPersonalizedAdsStatusManager, 
-                       ADSegmentDataManager ]
+    objc-classes:    [ ADAMSBagManager, ADAdTrackingSchedulingManager, ADAppTrackingService, 
+                       ADClientDPIDManager, ADIDManagerService, ADJingleOptOutRequest, 
+                       ADJingleRequest, ADJingleRequestManager, ADJingleSegmentRequest, 
+                       ADLoggingProfileMonitor, ADPersonalizedAdsStatusManager, ADSegmentDataManager ]
 ...

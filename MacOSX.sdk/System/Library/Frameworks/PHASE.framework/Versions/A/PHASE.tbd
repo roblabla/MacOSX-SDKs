@@ -1,0 +1,64 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           F92B3BA7-D559-38F0-9EB8-361D9B3EE2FC
+  - target:          x86_64-maccatalyst
+    value:           F92B3BA7-D559-38F0-9EB8-361D9B3EE2FC
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           93DF1386-20B8-3BF1-AA51-644B81E85469
+  - target:          arm64e-maccatalyst
+    value:           93DF1386-20B8-3BF1-AA51-644B81E85469
+install-name:    '/System/Library/Frameworks/PHASE.framework/Versions/A/PHASE'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _PHASEActionTreePrepareStatePrepareInProgress, _PHASEActionTreePrepareStatePrepareNotStarted, 
+                       _PHASEActionTreePrepareStatePrepared, _PHASEAssetErrorDomain, 
+                       _PHASECullOptionKill, _PHASEDirectPathTransmissionKey, _PHASEEarlyReflectionsKey, 
+                       _PHASEErrorDomain, _PHASEExternalStreamErrorDomain, _PHASELateReverbKey, 
+                       _PHASEMaterialSemanticObject, _PHASEMaterialSemanticObjectARMeshClassificationID, 
+                       _PHASEMaterialSemanticSurfaceMaterial, _PHASEMaterialSemanticSurfaceMaterialARMeshMaterialID, 
+                       _PHASEParseErrorDomain, _PHASESoundEventErrorDomain, _PHASESpatialCategoryDirectPathTransmission, 
+                       _PHASESpatialCategoryEarlyReflections, _PHASESpatialCategoryLateReverb ]
+    objc-classes:    [ PHASEAbsorptionData, PHASEAmbientMixer, PHASEAmbientMixerDefinition, 
+                       PHASEAsset, PHASEAssetRegistry, PHASEBlendNodeDefinition, 
+                       PHASECardioidDirectivityModelParameters, PHASECardioidDirectivityModelSubbandParameters, 
+                       PHASEChannelMixer, PHASEChannelMixerDefinition, PHASEConeDirectivityModelParameters, 
+                       PHASEConeDirectivityModelSubbandParameters, PHASEContainerNodeDefinition, 
+                       PHASEDataBundleAsset, PHASEDefinition, PHASEDirectivityModelParameters, 
+                       PHASEDistanceModelFadeOutParameters, PHASEDistanceModelParameters, 
+                       PHASEDucker, PHASEEngine, PHASEEnvelope, PHASEEnvelopeDistanceModelParameters, 
+                       PHASEEnvelopeSegment, PHASEEnvironment, PHASEExternalInputStream, 
+                       PHASEExternalInputStreamDefinition, PHASEExternalOutputStream, 
+                       PHASEExternalOutputStreamController, PHASEExternalOutputStreamDefinition, 
+                       PHASEExternalStream, PHASEGeneratorNodeDefinition, PHASEGeneratorParameters, 
+                       PHASEGeometricSpreadingDistanceModelParameters, PHASEGeometryView, 
+                       PHASEGlobalMetaParameterAsset, PHASEGroup, PHASEGroupPreset, 
+                       PHASEGroupPresetSetting, PHASEListener, PHASEMappedMetaParameterDefinition, 
+                       PHASEMaterial, PHASEMedium, PHASEMeshView, PHASEMetaParameter, 
+                       PHASEMetaParameterDefinition, PHASEMixer, PHASEMixerDefinition, 
+                       PHASEMixerInformation, PHASEMixerParameters, PHASENumberMetaParameter, 
+                       PHASENumberMetaParameterDefinition, PHASENumericPair, PHASEObject, 
+                       PHASEOccluder, PHASEPreSpatialTapSource, PHASEPresetMedium, 
+                       PHASEProcedureNodeDefinition, PHASEPushStreamNode, PHASEPushStreamNodeDefinition, 
+                       PHASERandomNodeDefinition, PHASERoomSimulationDataSet, PHASERoomSimulationView, 
+                       PHASERouteChangeInfo, PHASESamplerNodeDefinition, PHASEScatteringData, 
+                       PHASEShape, PHASEShapeElement, PHASESoundAsset, PHASESoundEvent, 
+                       PHASESoundEventNodeAsset, PHASESoundEventNodeDefinition, PHASESoundPrototype, 
+                       PHASESoundReductionIndex, PHASESource, PHASESpatialMixer, 
+                       PHASESpatialMixerDefinition, PHASESpatialModelerSendDefinition, 
+                       PHASESpatialPipeline, PHASESpatialPipelineEntry, PHASESphericalCapDirectivityModelParameters, 
+                       PHASEStringMetaParameter, PHASEStringMetaParameterDefinition, 
+                       PHASESubband, PHASESubtreeView, PHASESwitchNodeDefinition, 
+                       PHASETapRegistry, PHASETransmissionModelerSourcePointSet, 
+                       PHASETransmissionModelerView, PHASETriangleSet, PHASEVoxelLevelView, 
+                       PHASEVoxelSet3D, PHASEVoxelTreeView, PHASEWaterProcedureNodeDefinition, 
+                       PHASEXPCService ]
+...

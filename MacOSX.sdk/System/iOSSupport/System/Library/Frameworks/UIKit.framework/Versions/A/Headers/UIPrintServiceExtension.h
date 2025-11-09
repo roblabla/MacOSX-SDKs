@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIPrintInfo;
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIPrinterDestination : NSObject <NSSecureCoding>
 
 -(instancetype)initWithURL:(NSURL *)url;
@@ -24,7 +24,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(tvos)
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIPrintServiceExtension : NSObject
 
 -(NSArray<UIPrinterDestination *> *)printerDestinationsForPrintInfo:(UIPrintInfo *)printInfo;

@@ -3,20 +3,24 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8A4881CD-E86E-3B95-9F13-788D3CFDA4ED
+    value:           7E29F619-B3EB-34C1-9EFD-7FA5DC666DDC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           71595CBB-D58B-3AE2-8ED0-F66AE6C8AC44
+    value:           8C314E6C-A58C-3CD2-964E-414ADFBE2158
 install-name:    '/System/Library/PrivateFrameworks/MobileObliteration.framework/Versions/A/MobileObliteration'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _Mobile_Obliterate, _Mobile_Obliterate_IsSupported, _kDisplayProgressBarKey, 
                        _kMobileObliterationError, _kMobileObliterationInternalError, 
-                       _kMobileObliterationSuccess, _kObliterateDataPartition, _kObliterateEACS, 
+                       _kMobileObliterationSuccess, _kObliterateDataPartition, _kObliterationBrickIncludesFirmwareKey, 
+                       _kObliterationCompletedOK, _kObliterationCompletedWithWarning, 
                        _kObliterationDelayAfterReplyKey, _kObliterationExclusionPathsKey, 
+                       _kObliterationFailedOSBroken, _kObliterationFailedOSValid, 
                        _kObliterationIgnoreMissingPathKey, _kObliterationManagedDeviceWipeKey, 
-                       _kObliterationMessageKey, _kObliterationTypeKey, _kObliterationTypeMarkStart, 
-                       _kObliterationTypeWipeAndBrick, _kObliterationVolumePathKey, 
-                       _kSkipDataObliteration ]
+                       _kObliterationMessageKey, _kObliterationPreservedVolumeGroupUUID, 
+                       _kObliterationResultStateKey, _kObliterationResultStringKey, 
+                       _kObliterationReturnDictKey, _kObliterationTypeBrickOnly, 
+                       _kObliterationTypeKey, _kObliterationTypeMarkStart, _kObliterationTypeWipeAndBrick, 
+                       _kSkipDataObliteration, _kTemplateMigrationCookiePathKey ]
 ...

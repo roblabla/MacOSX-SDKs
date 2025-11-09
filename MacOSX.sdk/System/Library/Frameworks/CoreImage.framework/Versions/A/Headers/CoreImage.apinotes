@@ -235,6 +235,10 @@ Globals:
   SwiftName: priorityRequestHigh
 - Name: kCIContextAllowHalfPrecision
   SwiftName: allowHalfPrecision
+- Name: kCIContextHLGOpticalScale
+  SwiftName: HLGOpticalScale
+- Name: kCIContextLossyCompressedIntermediates
+  SwiftName: lossyCompressedIntermediates
 
 # CIImageAutoAdjustmentOption
 - Name: kCIImageAutoAdjustEnhance
@@ -305,6 +309,8 @@ Globals:
   SwiftName: outputNativeSize
 - Name: kCIActiveKeys
   SwiftName: activeKeys
+- Name: kCIPropertiesKey
+  SwiftName: propertiesKey
 
 Classes:
 

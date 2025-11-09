@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           928FC136-F5E1-3865-8384-AB5B7A626C7C
+    value:           9A77CDE5-881F-33FA-89AE-1D3E884D6160
   - target:          x86_64-maccatalyst
-    value:           928FC136-F5E1-3865-8384-AB5B7A626C7C
+    value:           9A77CDE5-881F-33FA-89AE-1D3E884D6160
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F5398BAC-647B-3EAE-8517-78D14CC3EE61
+    value:           6A0B944C-4C5C-39C4-9EF3-89A60FDB6A86
   - target:          arm64e-maccatalyst
-    value:           F5398BAC-647B-3EAE-8517-78D14CC3EE61
+    value:           6A0B944C-4C5C-39C4-9EF3-89A60FDB6A86
 install-name:    '/System/Library/Frameworks/Accounts.framework/Versions/A/Accounts'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -62,26 +62,26 @@ exports:
                        _ACAccountTypeIdentifier163, _ACAccountTypeIdentifierAIM, 
                        _ACAccountTypeIdentifierAIMDeprecated, _ACAccountTypeIdentifierAol, 
                        _ACAccountTypeIdentifierAppleAccount, _ACAccountTypeIdentifierAppleID, 
-                       _ACAccountTypeIdentifierAppleIDAuthentication, _ACAccountTypeIdentifierBookmarkDAV, 
-                       _ACAccountTypeIdentifierCalDAV, _ACAccountTypeIdentifierCalDAVLegacy, 
-                       _ACAccountTypeIdentifierCardDAV, _ACAccountTypeIdentifierCardDAVLegacy, 
-                       _ACAccountTypeIdentifierCloudKit, _ACAccountTypeIdentifierDeviceLocator, 
-                       _ACAccountTypeIdentifierExchange, _ACAccountTypeIdentifierFaceTime, 
-                       _ACAccountTypeIdentifierFacebook, _ACAccountTypeIdentifierFacebookDeprecated, 
-                       _ACAccountTypeIdentifierFacebookLegacy, _ACAccountTypeIdentifierFindMyFriends, 
-                       _ACAccountTypeIdentifierFlickr, _ACAccountTypeIdentifierForASSAccountType, 
-                       _ACAccountTypeIdentifierGameCenter, _ACAccountTypeIdentifierGmail, 
-                       _ACAccountTypeIdentifierHolidayCalendar, _ACAccountTypeIdentifierHotmail, 
-                       _ACAccountTypeIdentifierIDMS, _ACAccountTypeIdentifierIMAP, 
-                       _ACAccountTypeIdentifierIMAPMail, _ACAccountTypeIdentifierIMAPNotes, 
-                       _ACAccountTypeIdentifierIdentityServices, _ACAccountTypeIdentifierJabber, 
-                       _ACAccountTypeIdentifierKerberosSSO, _ACAccountTypeIdentifierKey, 
-                       _ACAccountTypeIdentifierLDAP, _ACAccountTypeIdentifierLinkedIn, 
-                       _ACAccountTypeIdentifierLinkedInDeprecated, _ACAccountTypeIdentifierLinkedInLegacy, 
-                       _ACAccountTypeIdentifierMSO, _ACAccountTypeIdentifierMadrid, 
-                       _ACAccountTypeIdentifierOSXServer, _ACAccountTypeIdentifierOSXServerDeprecated, 
-                       _ACAccountTypeIdentifierOnMyDevice, _ACAccountTypeIdentifierPOP, 
-                       _ACAccountTypeIdentifierQQ, _ACAccountTypeIdentifierRemoteManagement, 
+                       _ACAccountTypeIdentifierAppleIDAuthentication, _ACAccountTypeIdentifierAppleIDDeprecated, 
+                       _ACAccountTypeIdentifierBookmarkDAV, _ACAccountTypeIdentifierCalDAV, 
+                       _ACAccountTypeIdentifierCalDAVLegacy, _ACAccountTypeIdentifierCardDAV, 
+                       _ACAccountTypeIdentifierCardDAVLegacy, _ACAccountTypeIdentifierCloudKit, 
+                       _ACAccountTypeIdentifierDeviceLocator, _ACAccountTypeIdentifierExchange, 
+                       _ACAccountTypeIdentifierFaceTime, _ACAccountTypeIdentifierFacebook, 
+                       _ACAccountTypeIdentifierFacebookDeprecated, _ACAccountTypeIdentifierFacebookLegacy, 
+                       _ACAccountTypeIdentifierFindMyFriends, _ACAccountTypeIdentifierFlickr, 
+                       _ACAccountTypeIdentifierForASSAccountType, _ACAccountTypeIdentifierGameCenter, 
+                       _ACAccountTypeIdentifierGmail, _ACAccountTypeIdentifierHolidayCalendar, 
+                       _ACAccountTypeIdentifierHotmail, _ACAccountTypeIdentifierIDMS, 
+                       _ACAccountTypeIdentifierIMAP, _ACAccountTypeIdentifierIMAPMail, 
+                       _ACAccountTypeIdentifierIMAPNotes, _ACAccountTypeIdentifierIdentityServices, 
+                       _ACAccountTypeIdentifierJabber, _ACAccountTypeIdentifierKerberosSSO, 
+                       _ACAccountTypeIdentifierKey, _ACAccountTypeIdentifierLDAP, 
+                       _ACAccountTypeIdentifierLinkedIn, _ACAccountTypeIdentifierLinkedInDeprecated, 
+                       _ACAccountTypeIdentifierLinkedInLegacy, _ACAccountTypeIdentifierMSO, 
+                       _ACAccountTypeIdentifierMadrid, _ACAccountTypeIdentifierOSXServer, 
+                       _ACAccountTypeIdentifierOSXServerDeprecated, _ACAccountTypeIdentifierOnMyDevice, 
+                       _ACAccountTypeIdentifierPOP, _ACAccountTypeIdentifierQQ, _ACAccountTypeIdentifierRemoteManagement, 
                        _ACAccountTypeIdentifierSMTP, _ACAccountTypeIdentifierSinaWeibo, 
                        _ACAccountTypeIdentifierSinaWeiboDeprecated, _ACAccountTypeIdentifierSingleSignOn, 
                        _ACAccountTypeIdentifierSubscribedCalendar, _ACAccountTypeIdentifierTencentWeibo, 
@@ -97,7 +97,7 @@ exports:
                        _ACCredentialTypeHybrid, _ACCredentialTypeKerberos, _ACCredentialTypeOAuth, 
                        _ACCredentialTypeOAuth2, _ACCredentialTypePassword, _ACCredentialTypeToken, 
                        _ACCredentialTypeYahooXYMPKI, _ACDAccountStoreDidChangeNotification, 
-                       _ACDGetAdamOrDisplayIDForPID, _ACDGetStoreOrBundleIDForPID, 
+                       _ACDGetAdamOrDisplayIDForPID, _ACDGetProcNameForPID, _ACDGetStoreOrBundleIDForPID, 
                        _ACDGetTeamIDForBundleURL, _ACDataclassForASSDataclass, _ACEmailAliasKeyColor, 
                        _ACEmailAliasKeyDisplayName, _ACEmailAliasKeyEmailAddress, 
                        _ACEmailAliasKeyEmailAddresses, _ACEmailAliasKeyIsDefault, 
@@ -109,21 +109,24 @@ exports:
                        _ACFindMyFriendsAppTokenKey, _ACFindMyFriendsTokenKey, _ACFindMyiPhoneAppTokenKey, 
                        _ACFindMyiPhoneSiriTokenKey, _ACFindMyiPhoneTokenKey, _ACGrandslamApplicationIdentifierKey, 
                        _ACGrandslamTokenIdentifierKey, _ACHSATokenKey, _ACHeartbeatTokenKey, 
-                       _ACKeepPasswordsAround, _ACKeyTransparencyTokenKey, _ACLinkedInAppIdKey, 
-                       _ACLinkedInAppIdKeyDeprecated, _ACLinkedInPermissionsKey, 
+                       _ACIsInternal, _ACKeepPasswordsAround, _ACKeyTransparencyTokenKey, 
+                       _ACLinkedInAppIdKey, _ACLinkedInAppIdKeyDeprecated, _ACLinkedInPermissionsKey, 
                        _ACLinkedInPermissionsKeyDeprecated, _ACLiverpoolContainerIdKey, 
-                       _ACMDMServerAuthTokenKey, _ACMapsTokenKey, _ACMigrationDidFinishDarwinNotification, 
-                       _ACOAuthTokenKey, _ACOAuthTokenNoSyncKey, _ACOAuthTokenNoSyncSeparator, 
-                       _ACOAuthTokenSecretKey, _ACOldPasswordKey, _ACPasswordKey, 
-                       _ACPasswordResetTokenBackupKey, _ACPasswordResetTokenKey, 
-                       _ACPropertyKeyAccountProperties, _ACPropertyKeyAccountType, 
-                       _ACPropertyKeyAuthenticated, _ACPropertyKeyCredential, _ACPropertyKeyDataclassProperties, 
-                       _ACPropertyKeyEnabledDataclasses, _ACPropertyKeyParent, _ACPropertyKeyProvisionedDataclasses, 
-                       _ACPurposeKey, _ACRawPasswordKey, _ACRemoteDeviceCommandAddAccount, 
-                       _ACRemoteDeviceCommandDeleteAccount, _ACRemoteDeviceCommandDeleteAllAccounts, 
-                       _ACRemoteDeviceCommandFetchAccounts, _ACRemoteDeviceCommandInvalidateFetchedAccountsCache, 
-                       _ACRemoteDeviceCommandShowCredentialPrompt, _ACRemoteDeviceCommandUpdateAccount, 
-                       _ACRemoteDeviceCommandUpdateAccountCredential, _ACRemoteDeviceOptionAskForReply, 
+                       _ACMDMServerAuthTokenKey, _ACMapsTokenKey, _ACOAuthTokenKey, 
+                       _ACOAuthTokenNoSyncKey, _ACOAuthTokenNoSyncSeparator, _ACOAuthTokenSecretKey, 
+                       _ACOldPasswordKey, _ACPasswordKey, _ACPasswordResetTokenBackupKey, 
+                       _ACPasswordResetTokenKey, _ACPropertyKeyAccountProperties, 
+                       _ACPropertyKeyAccountType, _ACPropertyKeyActive, _ACPropertyKeyAuthenticated, 
+                       _ACPropertyKeyCredential, _ACPropertyKeyDataclassProperties, 
+                       _ACPropertyKeyDate, _ACPropertyKeyEnabledDataclasses, _ACPropertyKeyParent, 
+                       _ACPropertyKeyProvisionedDataclasses, _ACPropertyKeyVisible, 
+                       _ACPropertyKeyWarmingUp, _ACPurposeKey, _ACRawPasswordKey, 
+                       _ACRemoteDeviceCommandAddAccount, _ACRemoteDeviceCommandDeleteAccount, 
+                       _ACRemoteDeviceCommandDeleteAllAccounts, _ACRemoteDeviceCommandFetchAccounts, 
+                       _ACRemoteDeviceCommandInvalidateFetchedAccountsCache, _ACRemoteDeviceCommandShowCredentialPrompt, 
+                       _ACRemoteDeviceCommandUpdateAccount, _ACRemoteDeviceCommandUpdateAccountCredential, 
+                       _ACRemoteDeviceOptionAccountQueryIgnoreCache, _ACRemoteDeviceOptionAskForReply, 
+                       _ACRemoteDeviceOptionPreloadedPropertiesArray, _ACRemoteDeviceOptionTargetDeviceBTUUID, 
                        _ACSearchPartyTokenKey, _ACShouldSuppressPromptsKey, _ACTencentWeiboAppIdKey, 
                        _ACTencentWeiboAppIdKeyDeprecated, _ACTencentWeiboClientConsumerKey, 
                        _ACTokenExpiryDateKey, _ACTokenKey, _ACYahooXYMPKICookieCrumbKey, 
@@ -205,7 +208,7 @@ exports:
                        _kAccountDataclassStocks, _kAccountDataclassUbiquity, _kAccountMigrationLockFilename, 
                        _serializeSecCertificates, _serializeSecTrust, _unserializeSecCertificates, 
                        _unserializeSecTrust ]
-    objc-classes:    [ ACAccount, ACAccountCredential, ACAccountMigrationLock, ACAccountStore, 
+    objc-classes:    [ ACAccount, ACAccountCredential, ACAccountMigrationState, ACAccountStore, 
                        ACAccountStoreClientSideListener, ACAccountType, ACCredentialItem, 
                        ACDManagedAccessOptionsKey, ACDManagedAccount, ACDManagedAccountProperty, 
                        ACDManagedAccountType, ACDManagedAuthorization, ACDManagedCredentialItem, 
@@ -213,5 +216,5 @@ exports:
                        ACMonitoredAccountStore, ACMutableTrackedSet, ACOAuthSigner, 
                        ACPersonaManager, ACPluginLoader, ACRateLimiter, ACRemoteAccountStoreInterface, 
                        ACRemoteAccountStoreSession, ACSystemConfigManager, ACTimedExpirer, 
-                       ACTrackedSet, ACZeroingString ]
+                       ACTrackedSet, ACTrackedXPCConnection, ACZeroingString ]
 ...

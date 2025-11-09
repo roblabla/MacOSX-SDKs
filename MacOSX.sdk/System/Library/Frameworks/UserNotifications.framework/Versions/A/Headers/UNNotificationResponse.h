@@ -11,10 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *const UNNotificationDefaultActionIdentifier __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0)) __API_UNAVAILABLE(tvos);
-extern NSString *const UNNotificationDismissActionIdentifier __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0)) __API_UNAVAILABLE(tvos);
+extern NSString *const UNNotificationDefaultActionIdentifier API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0)) API_UNAVAILABLE(tvos);
+extern NSString *const UNNotificationDismissActionIdentifier API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0)) API_UNAVAILABLE(tvos);
 
-__API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0)) __API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0)) API_UNAVAILABLE(tvos)
 @interface UNNotificationResponse : NSObject <NSCopying, NSSecureCoding>
 
 // The notification to which the user responded.
@@ -30,7 +30,7 @@ __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0)) __API_UNAVAILABLE(tvos)
 
 @end
 
-__API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0)) __API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0)) API_UNAVAILABLE(tvos)
 @interface UNTextInputNotificationResponse : UNNotificationResponse
 
 // The text entered or chosen by the user.

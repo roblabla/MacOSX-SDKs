@@ -14,7 +14,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// UIFocusDebugger provides a collection of runtime utilities for debugging issues related to focus interaction.
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) @interface UIFocusDebugger : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
+@interface UIFocusDebugger : NSObject
 
 /// Outputs an overview of all supported debugging utilities and other relevant information.
 ///   - To use in Swift, enter `po UIFocusDebugger.help()` when paused in lldb.
@@ -36,9 +37,16 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) @interface UIFocusDebugger : NSObject
 ///   - To use in Objective-C, enter `po [UIFocusDebugger simulateFocusUpdateRequestFromEnvironment:<environment reference>]` when paused in lldb.
 + (id<UIFocusDebuggerOutput>)simulateFocusUpdateRequestFromEnvironment:(id<UIFocusEnvironment>)environment;
 
+/// Outputs a diagnosis of the focus groups of the specified environment and its children.
+/// Pass a focus system as the environment to get the full focus group tree for this focus system.
+///  - To use in Swift, enter `po UIFocusDebugger.checkFocusGroupTree(for: <environment reference>)` when paused in lldb.
+///  - To use in Objective-C, enter `po [UIFocusDebugger checkFocusGroupTreeForEnvironment:<environment reference>]` when paused in lldb.
++ (NSString *)checkFocusGroupTreeForEnvironment:(id<UIFocusEnvironment>)environment;
+
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) @protocol UIFocusDebuggerOutput <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
+@protocol UIFocusDebuggerOutput <NSObject>
 @end
 
 NS_ASSUME_NONNULL_END

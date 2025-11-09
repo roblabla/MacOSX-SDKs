@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8EA9E8F5-32E3-32DF-ACB7-A5EED51B9713
+    value:           720BC6A9-A24F-312F-AAEC-888FEE3BC7A1
   - target:          x86_64-maccatalyst
-    value:           8EA9E8F5-32E3-32DF-ACB7-A5EED51B9713
+    value:           720BC6A9-A24F-312F-AAEC-888FEE3BC7A1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9150208E-7A01-3DFC-B650-2564A6E353B6
+    value:           27DE4BA8-6F53-350C-BE93-5861E6B818CF
   - target:          arm64e-maccatalyst
-    value:           9150208E-7A01-3DFC-B650-2564A6E353B6
+    value:           27DE4BA8-6F53-350C-BE93-5861E6B818CF
 install-name:    '/System/Library/Frameworks/SensorKit.framework/Versions/A/SensorKit'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -48,17 +48,14 @@ exports:
                        _SRKeyboardMetaInformationOrientationKey, _SRKeyboardMetaInformationVersionKey, 
                        _SRKeyboardMetaInformationWidthKey, _SRKeyboardMetricPositionalDeleteToDeleteKey, 
                        _SRKeyboardMetricPositionalLongWordDownErrorDistanceKey, _SRKeyboardMetricPositionalLongWordTouchDownDownKey, 
-                       _SRKeyboardMetricPositionalLongWordTouchDownUpKey, _SRKeyboardMetricPositionalLongWordTouchUpDownKey, 
-                       _SRKeyboardMetricPositionalLongWordUpErrorDistanceKey, _SRKeyboardMetricPositionalWordDownErrorDistanceKey, 
-                       _SRKeyboardMetricPositionalWordTouchDownDownKey, _SRKeyboardMetricPositionalWordTouchDownUpKey, 
-                       _SRKeyboardMetricPositionalWordTouchUpDownKey, _SRKeyboardMetricPositionalWordUpErrorDistanceKey, 
+                       _SRKeyboardMetricPositionalLongWordTouchDownUpKey, _SRKeyboardMetricPositionalLongWordUpErrorDistanceKey, 
+                       _SRKeyboardMetricPositionalWordDownErrorDistanceKey, _SRKeyboardMetricPositionalWordTouchDownDownKey, 
+                       _SRKeyboardMetricPositionalWordTouchDownUpKey, _SRKeyboardMetricPositionalWordUpErrorDistanceKey, 
                        _SRKeyboardMetricProbability123KeyToAnyTapKey, _SRKeyboardMetricProbability123KeyToCharKeyKey, 
                        _SRKeyboardMetricProbabilityAnyTapTo123KeyKey, _SRKeyboardMetricProbabilityAnyTapToCharKeyKey, 
-                       _SRKeyboardMetricProbabilityCharKeyDownErrorDistanceKey, _SRKeyboardMetricProbabilityCharKeyTo123KeyKey, 
-                       _SRKeyboardMetricProbabilityCharKeyToAnyTapKey, _SRKeyboardMetricProbabilityCharKeyToCharKeyKey, 
+                       _SRKeyboardMetricProbabilityCharKeyTo123KeyKey, _SRKeyboardMetricProbabilityCharKeyToAnyTapKey, 
                        _SRKeyboardMetricProbabilityCharKeyToDeleteKey, _SRKeyboardMetricProbabilityCharKeyToPredictionKey, 
-                       _SRKeyboardMetricProbabilityCharKeyToSpaceKey, _SRKeyboardMetricProbabilityCharKeyTouchDownUpKey, 
-                       _SRKeyboardMetricProbabilityCharKeyUpErrorDistanceKey, _SRKeyboardMetricProbabilityDeleteDownErrorDistanceKey, 
+                       _SRKeyboardMetricProbabilityCharKeyToSpaceKey, _SRKeyboardMetricProbabilityDeleteDownErrorDistanceKey, 
                        _SRKeyboardMetricProbabilityDeleteTo123KeyKey, _SRKeyboardMetricProbabilityDeleteToCharKeyKey, 
                        _SRKeyboardMetricProbabilityDeleteToDeleteKey, _SRKeyboardMetricProbabilityDeleteToPathKey, 
                        _SRKeyboardMetricProbabilityDeleteToShiftKey, _SRKeyboardMetricProbabilityDeleteToSpaceKey, 
@@ -104,30 +101,23 @@ exports:
                        _SRSensorAmbientLightSensor, _SRSensorBeddit, _SRSensorDeletionRecordsSuffix, 
                        _SRSensorDeviceUsageReport, _SRSensorECG, _SRSensorElevation, 
                        _SRSensorElevationPressure, _SRSensorFacialMetrics, _SRSensorFallStatistics, 
-                       _SRSensorGyroscope, _SRSensorHeartRate, _SRSensorIdentifierAccelerometer, 
-                       _SRSensorIdentifierAmbientLightSensor, _SRSensorIdentifierDeviceUsageReport, 
-                       _SRSensorIdentifierECG, _SRSensorIdentifierElevation, _SRSensorIdentifierFallStatistics, 
-                       _SRSensorIdentifierGyroscope, _SRSensorIdentifierHeartRate, 
-                       _SRSensorIdentifierKeyboardMetrics, _SRSensorIdentifierMessagesUsageReport, 
-                       _SRSensorIdentifierOdometer, _SRSensorIdentifierOnWristDetailedState, 
-                       _SRSensorIdentifierOnWristState, _SRSensorIdentifierPPG, _SRSensorIdentifierPedometerData, 
-                       _SRSensorIdentifierPhoneUsageReport, _SRSensorIdentifierSiriAudio, 
-                       _SRSensorIdentifierSpeechMetrics, _SRSensorIdentifierStrideCalibration, 
-                       _SRSensorIdentifierTelephonyAudio, _SRSensorIdentifierVisits, 
-                       _SRSensorKeyboardMetrics, _SRSensorMessagesUsageReport, _SRSensorOdometer, 
-                       _SRSensorOdometerSuitability, _SRSensorOnWristDetailedState, 
-                       _SRSensorOnWristState, _SRSensorPPG, _SRSensorPedometerData, 
-                       _SRSensorPhoneUsageReport, _SRSensorRotationRate, _SRSensorSiriAudio, 
-                       _SRSensorSiriSoundDetection, _SRSensorSiriSpeechEmotion, _SRSensorSiriSpeechMetrics, 
-                       _SRSensorSpeechMetrics, _SRSensorStrideCalibration, _SRSensorTelephonyAudio, 
-                       _SRSensorTelephonySoundDetection, _SRSensorTelephonySpeechEmotion, 
-                       _SRSensorTelephonySpeechMetrics, _SRSensorVisits, _SRSetDataCollectionEnabled, 
-                       _SRSetRequiredOnboardingCompleted, _SRShowAppsAndStudiesUsingSensorKit, 
-                       _SRShowResearchData, _SRShowStudyAuthorization, _SRStudyBundleIdPrefix ]
+                       _SRSensorGyroscope, _SRSensorHeartRate, _SRSensorKeyboardMetrics, 
+                       _SRSensorMessagesUsageReport, _SRSensorOdometer, _SRSensorOdometerSuitability, 
+                       _SRSensorOnWristDetailedState, _SRSensorOnWristState, _SRSensorPPG, 
+                       _SRSensorPedometerData, _SRSensorPhoneUsageReport, _SRSensorRotationRate, 
+                       _SRSensorSiriAudio, _SRSensorSiriSoundDetection, _SRSensorSiriSpeechEmotion, 
+                       _SRSensorSiriSpeechMetrics, _SRSensorSpeechMetrics, _SRSensorStrideCalibration, 
+                       _SRSensorTelephonyAudio, _SRSensorTelephonySoundDetection, 
+                       _SRSensorTelephonySpeechEmotion, _SRSensorTelephonySpeechMetrics, 
+                       _SRSensorVisits, _SRSetDataCollectionEnabled, _SRSetRequiredOnboardingCompleted, 
+                       _SRShowAppsAndStudiesUsingSensorKit, _SRShowResearchData, 
+                       _SRShowStudyAuthorization, _SRStudyBundleIdPrefix, _kTCCOverrideDummyBundleId ]
     objc-classes:    [ SRAmbientLightSample, SRApplicationUsage, SRAuthExtensionContext, 
-                       SRAuthHostExtensionContext, SRDebugInfoClient, SRDeletionRecord, 
-                       SRDevice, SRDeviceUsageReport, SRError, SRFetchRequest, SRFetchResult, 
-                       SRKeyboardMetrics, SRKeyboardProbabilityMetric, SRMessagesUsageReport, 
-                       SRNotificationUsage, SRPhoneUsageReport, SRSensorPruner, SRSensorReader, 
-                       SRSensorWriter, SRVisit, SRWebUsage, SRWristDetection ]
+                       SRAuthHostExtensionContext, SRAuthorizationClient, SRAuthorizationStore, 
+                       SRDebugInfoClient, SRDeletionRecord, SRDevice, SRDeviceUsageReport, 
+                       SRError, SRFetchRequest, SRFetchResult, SRKeyboardMetrics, 
+                       SRKeyboardProbabilityMetric, SRMessagesUsageReport, SRNotificationUsage, 
+                       SRPhoneUsageReport, SRSensorDescription, SRSensorPruner, SRSensorReader, 
+                       SRSensorWriter, SRTextInputSession, SRVisit, SRWebUsage, SRWristDetection, 
+                       _SRDeviceUsageActivityLevel, _SRDeviceUsageMotionActivity ]
 ...

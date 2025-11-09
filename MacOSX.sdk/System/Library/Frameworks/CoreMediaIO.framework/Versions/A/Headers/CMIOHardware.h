@@ -58,7 +58,8 @@ extern "C"
 #endif
     
 #pragma pack(push, 4)
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark Error Constants
@@ -138,7 +139,7 @@ enum
     @enum           CMIOPlugIn Properties
     @abstract       CMIOObjectPropertySelector values that apply to CMIOPlugIns.
     @discussion     CMIOPlugIn is a subclass of CMIOObject that represents a plug-in loaded by the DAL that conforms to the API in <CMIOHardware/CMIOHardwarePlugIn.h>. CMIOPlugIns have
-                    one scope, kCMIOObjectPropertyScopeGlobal, and only a master element.
+                    one scope, kCMIOObjectPropertyScopeGlobal, and only a main element.
     @constant       kCMIOPlugInPropertyBundleID
                         A CFString that contains the bundle identifier for the CMIOPlugIn. The caller is responsible for releasing the returned CFObject.
 */
@@ -148,7 +149,7 @@ enum
 };
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    
+#pragma clang diagnostic pop
 #pragma pack(pop)
     
 #if defined(__cplusplus)

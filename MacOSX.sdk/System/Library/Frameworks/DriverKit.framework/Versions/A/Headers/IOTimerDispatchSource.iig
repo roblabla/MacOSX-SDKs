@@ -67,6 +67,11 @@ enum {
 	kIOTimerClockMachContinuousTime = 0xC4ull,
 };
 
+#define IOTimerDispatchSource_DECLARE_IVARS	\
+private: \
+	 IOTimerDispatchSource_IVars * ivars; \
+public:
+
 /*!
  * @class IOTimerDispatchSource
  *

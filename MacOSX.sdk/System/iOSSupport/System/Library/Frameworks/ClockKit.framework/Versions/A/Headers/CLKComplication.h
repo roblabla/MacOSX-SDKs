@@ -24,6 +24,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 
 /// An optional user activity, defined in this complication's CLKComplicationDescriptor.
 @property (nonatomic, readonly, nullable) NSUserActivity *userActivity API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios);
+
 @end
 
 NS_ASSUME_NONNULL_END

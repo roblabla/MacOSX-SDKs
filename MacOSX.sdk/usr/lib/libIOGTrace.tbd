@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DDAEEE02-8939-3071-8A39-5CD8376F5295
+    value:           130084A1-E44D-3ABF-B5DB-163D2DFF7F8E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0A57FCFB-D8AB-3909-B0A2-BBB2BEE4E78C
+    value:           2F59B432-8750-30D6-A6F9-A8B58DA1A3B2
 install-name:    '/usr/lib/libIOGTrace.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

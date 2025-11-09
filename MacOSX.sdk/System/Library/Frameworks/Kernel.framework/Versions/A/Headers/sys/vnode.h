@@ -64,6 +64,7 @@
 #ifndef _VNODE_H_
 #define _VNODE_H_
 
+#include <stdint.h>
 #include <sys/appleapiopts.h>
 #include <sys/cdefs.h>
 #include <sys/kernel_types.h>
@@ -520,6 +521,7 @@ struct vnode_attr {
 #define VA_64BITOBJIDS          0x100000        /* fileid/linkid/parentid are 64 bit */
 #define VA_REALFSID             0x200000        /* Return real fsid */
 #define VA_USEFSID              0x400000        /* Use fsid from filesystem  */
+#define VA_FILESEC_ACL          0x800000        /* ACL is interior to filesec */
 
 /*
  *  Modes.  Some values same as Ixxx entries from inode.h for now.
@@ -881,6 +883,15 @@ void    vnode_clearmountedon(vnode_t vp);
 int     vnode_isrecycled(vnode_t vp);
 
 /*!
+ *  @function vnode_willberecycled
+ *  @abstract Check if a vnode is marked for recycling when the last reference to it is released.
+ *  @discussion This is only a snapshot: a vnode may start to be recycled, or go from dead to in use, at any time.
+ *  @param vp The vnode to test.
+ *  @return Nonzero if vnode is marked for recycling, 0 otherwise.
+ */
+int     vnode_willberecycled(vnode_t vp);
+
+/*!
  *  @function vnode_isnocache
  *  @abstract Check if a vnode is set to not have its data cached in memory  (i.e. we write-through to disk and always read from disk).
  *  @param vp The vnode to test.
@@ -1125,6 +1136,7 @@ kauth_cred_t    vfs_context_ucred(vfs_context_t ctx);
  *  @return Process id.
  */
 int     vfs_context_pid(vfs_context_t ctx);
+
 
 /*!
  *  @function vfs_context_issignal
@@ -1554,7 +1566,7 @@ int     vn_revoke(vnode_t vp, int flags, vfs_context_t ctx);
  *  @param vpp Destination for vnode pointer.
  *  @param cnp Various data about lookup, e.g. filename and intended operation.
  *  @return ENOENT: the filesystem has previously added a negative entry with cache_enter() to indicate that there is no
- *  file of the given name in "dp."  -1: successfully found a cached vnode (vpp is set).  0: No data in the cache, or operation is CRETE/RENAME.
+ *  file of the given name in "dp."  -1: successfully found a cached vnode (vpp is set).  0: No data in the cache, or operation is CREATE/RENAME.
  */
 int     cache_lookup(vnode_t dvp, vnode_t *vpp, struct componentname *cnp);
 

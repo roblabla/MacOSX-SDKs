@@ -3,17 +3,51 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FEFAFD4C-5DA0-3535-8C86-8836298ADB8D
+    value:           016CDFBC-67FF-3030-953D-64F3D7B5A56D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F7EA7A6A-25F6-3609-8827-60742642633F
+    value:           829CD867-3D5A-311C-8DF8-FB43C7E0881C
 install-name:    '/System/Library/PrivateFrameworks/ExtensionKit.framework/Versions/A/ExtensionKit'
-current-version: 19.4
+current-version: 34.5
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    libraries:       [ '/System/Library/PrivateFrameworks/ExtensionFoundation.framework/Versions/A/ExtensionFoundation' ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ _EXExtensionViewController, _EXHostViewController, _EXHostViewControllerConfiguration, 
+                       _EXRunningUIExtension ]
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           D03A5BF8-29A4-3F46-B56C-02DA9294B674
+  - target:          x86_64-maccatalyst
+    value:           D03A5BF8-29A4-3F46-B56C-02DA9294B674
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           117B4356-127A-3FB5-98E8-A2BEAFF5040C
+  - target:          arm64e-maccatalyst
+    value:           117B4356-127A-3FB5-98E8-A2BEAFF5040C
+install-name:    '/System/Library/PrivateFrameworks/ExtensionFoundation.framework/Versions/A/ExtensionFoundation'
+current-version: 34.5
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _EXExtensionIsPredicateSafeToExecuteWithObject, _EXExtensionIsSafeKeyPathForObject, 
-                       _EXExtensionMain, _EXGetExtensionClass, _EXGetExtensionContextInternalClass, 
-                       _EXGetExtensionContextVendorClass ]
-    objc-classes:    [ EXSwiftUI_Subsystem ]
+                       _EXExtensionKitErrorDomain, _EXExtensionMain, _EXGetExtensionClass, 
+                       _EXGetExtensionContextInternalClass, _EXGetExtensionContextVendorClass, 
+                       __EXAuditTokenForCurrentProcess, __EXAuditTokenGetEntitlementValue, 
+                       __EXAuditTokenGetPID, __EXDefaultLog, __EXDiscoveryLog, __EXLegacyLog, 
+                       __EXRegistrationLog, __EXStartService, __kEXCatalystSDKVariantKey, 
+                       __kEXConcreteExtensionKey, _kEXInternalSubserviceName, _kExtensionKitErrorDomain ]
+    objc-classes:    [ EXConcreteExtension, EXEnumerator, EXFrameworkScanner, EXSwiftUI_Subsystem, 
+                       EXUIKit_Subsystem, _EXDefaults, _EXExtension, _EXExtensionProcess, 
+                       _EXExtensionRep, _EXQuery, _EXQueryObserver, _EXRunningExtension, 
+                       _EXService, _EXServiceClient ]
 ...

@@ -6,12 +6,14 @@
 
 #import <Foundation/Foundation.h>
 #import <PassKit/PKConstants.h>
+#import <PassKit/PKDeferredPaymentSummaryItem.h>
+#import <PassKit/PKRecurringPaymentSummaryItem.h>
+#import <PassKit/PKPaymentSummaryItem.h>
+#import <PassKit/PKShippingMethod.h>
 
 #if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
 #import <AddressBook/ABRecord.h>
 #endif // TARGET_OS_IOS
-
-#import <PassKit/PKConstants.h>
 
 #ifndef __PKPAYMENTREQUEST_H__
 #define __PKPAYMENTREQUEST_H__
@@ -43,44 +45,10 @@ typedef NS_ENUM(NSUInteger, PKShippingType) {
     PKShippingTypeServicePickup
 }  API_AVAILABLE(macos(11.0), ios(8.3), watchos(3.0));
 
-typedef NS_ENUM(NSUInteger, PKPaymentSummaryItemType) {
-    PKPaymentSummaryItemTypeFinal,      // The payment summary item's amount is known to be correct
-    PKPaymentSummaryItemTypePending     // The payment summary item's amount is estimated or unknown - e.g, a taxi fare
-}  API_AVAILABLE(macos(11.0), ios(9.0), watchos(3.0));
-
-// PKPaymentSummaryItem Defines a line-item for a payment such as tax, shipping, or discount.
-API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
-@interface PKPaymentSummaryItem : NSObject
-
-+ (instancetype)summaryItemWithLabel:(NSString *)label amount:(NSDecimalNumber *)amount;
-+ (instancetype)summaryItemWithLabel:(NSString *)label amount:(NSDecimalNumber *)amount type:(PKPaymentSummaryItemType)type API_AVAILABLE(macos(11.0), ios(9.0), watchos(3.0));
-
-// A short localized description of the item, e.g. "Tax" or "Gift Card".
-@property (nonatomic, copy) NSString *label;
-
-// Same currency as the enclosing PKPaymentRequest.  Negative values are permitted, for example when
-// redeeming a coupon. An amount is always required unless the summary item's type is set to pending
-@property (nonatomic, copy) NSDecimalNumber *amount;
-
-// Defaults to PKPaymentSummaryItemTypeFinal
-// Set to PKPaymentSummaryItemTypePending if the amount of the item is not known at this time
-@property (nonatomic, assign) PKPaymentSummaryItemType type API_AVAILABLE(macos(11.0), ios(9.0), watchos(3.0));
-
-@end
-
-// Defines a shipping method for delivering physical goods.
-API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
-@interface PKShippingMethod : PKPaymentSummaryItem
-
-// Application-defined unique identifier for this shipping method.  The application will receive this
-// in paymentAuthorizationViewController:didAuthorizePayment:completion:.
-@property (nonatomic, copy, nullable) NSString *identifier;
-
-// Additional localized information about the shipping method, e.g. "Ships in 24 hours" or
-// "Arrives Friday April 4."
-@property (nonatomic, copy, nullable) NSString *detail;
-
-@end
+typedef NS_ENUM(NSUInteger, PKShippingContactEditingMode) {
+    PKShippingContactEditingModeEnabled = 1,
+    PKShippingContactEditingModeStorePickup
+}  API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0));
 
 // PKPaymentRequest defines an application's request to produce a payment instrument for the
 // purchase of goods and services. It encapsulates information about the selling party's payment
@@ -108,6 +76,12 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 // Convenience method to create a payment shipping address service error with the supplied description
 + (NSError *)paymentShippingAddressUnserviceableErrorWithLocalizedDescription:(nullable NSString *)localizedDescription API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0));
 
+// Convenience method to create a payment coupon code invalid error with the supplied description.
++ (NSError *)paymentCouponCodeInvalidErrorWithLocalizedDescription:(nullable NSString *)localizedDescription API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
+
+// Convenience method to create a payment coupon code expired error with the supplied description.
++ (NSError *)paymentCouponCodeExpiredErrorWithLocalizedDescription:(nullable NSString *)localizedDescription API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
+
 // Identifies the merchant, as previously agreed with Apple.  Must match one of the merchant
 // identifiers in the application's entitlement.
 @property (nonatomic, copy) NSString *merchantIdentifier;
@@ -121,6 +95,12 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 
 // The payment processing capabilities of the merchant.
 @property (nonatomic, assign) PKMerchantCapability merchantCapabilities;
+
+// Indicates whether the merchant supports coupon code entry and validation. Defaults to NO.
+@property (nonatomic, assign) BOOL supportsCouponCode API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos);
+
+// An optional coupon code that is valid and has been applied to the payment request already.
+@property (nonatomic, copy, nullable) NSString *couponCode API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos);
 
 // Array of PKPaymentSummaryItem objects which should be presented to the user.
 // The last item should be the total you wish to charge, and should not be pending
@@ -157,6 +137,9 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 // Indicates the display mode for the shipping (e.g, "Pick Up", "Ship To", "Deliver To"). Localized.
 // The default is PKShippingTypeShipping
 @property (nonatomic, assign) PKShippingType shippingType API_AVAILABLE(macos(11.0), ios(8.3), watchos(3.0));
+
+// Indicates the editing mode for the shipping contact. The default is PKShippingContactEditingModeEnabled.
+@property (nonatomic, assign) PKShippingContactEditingMode shippingContactEditingMode API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0));
 
 // Optional merchant-supplied information about the payment request.  Examples of this are an order
 // or cart identifier.  It will be signed and included in the resulting PKPaymentToken.

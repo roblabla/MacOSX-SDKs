@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIColor, UIFont;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UILabel : UIView <NSCoding, UIContentSizeCategoryAdjusting>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UILabel : UIView <NSCoding, UIContentSizeCategoryAdjusting>
 
 @property(nullable, nonatomic,copy)   NSString           *text; // default is nil
 @property(null_resettable, nonatomic,strong) UIFont      *font UI_APPEARANCE_SELECTOR; // default is nil (system font 17 plain)
@@ -76,6 +77,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UILabel : UIView <NSCoding, UICo
 // If YES, the UILabel will scroll its text while any of its immediate or distant superviews become focused. Also, lineBreakMode, adjustsFontSizeToFitWidth, and allowsDefaultTighteningForTruncation are ignored.
 @property (nonatomic) BOOL enablesMarqueeWhenAncestorFocused API_AVAILABLE(tvos(12.0)) API_UNAVAILABLE(ios, watchos);
 
+/// Indicates whether expansion text will be shown when the view is too small to show all the contents. Defaults to NO.
+@property (nonatomic) BOOL showsExpansionTextWhenTruncated API_AVAILABLE(macCatalyst(15.0));
 
 // deprecated:
 

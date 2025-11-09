@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           620B308E-E8EF-3066-93C2-351C95F4B1EC
+    value:           D97543FA-5403-3CD7-A071-6EFE21B77841
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C13AD246-33FE-333F-BCA7-1A2DC719617C
+    value:           1DB71CC1-B1C6-331D-9A63-9DCBC788854D
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/A/Libraries/libLLVMContainer.dylib'
 exports:
   - targets:         [ x86_64-macos ]

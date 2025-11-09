@@ -26,12 +26,18 @@
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 
+#ifndef _DRIVERKIT_H
+#define _DRIVERKIT_H
+
+#define DRIVERKIT_FRAMEWORK_INCLUDE	1
+
 #include <sys/cdefs.h>
 #include <DriverKit/IOLib.h>
 
 #if __IIG
 #include <DriverKit/OSDictionary.iig>
 #include <DriverKit/OSArray.iig>
+#include <DriverKit/OSSet.iig>
 #include <DriverKit/OSString.iig>
 #include <DriverKit/OSData.iig>
 #include <DriverKit/OSNumber.iig>
@@ -39,7 +45,9 @@
 #include <DriverKit/OSSerialization.iig>
 #else
 #include <DriverKit/OSCollections.h>
-#endif
+#endif /* __IIG */
+#include <DriverKit/OSBundle.iig>
+#include <DriverKit/OSMappedFile.iig>
 
 #include <DriverKit/OSObject.iig>
 #include <DriverKit/OSAction.iig>
@@ -49,10 +57,24 @@
 #include <DriverKit/IOInterruptDispatchSource.iig>
 #include <DriverKit/IOTimerDispatchSource.iig>
 #include <DriverKit/IOServiceNotificationDispatchSource.iig>
+#include <DriverKit/IOServiceStateNotificationDispatchSource.iig>
 #include <DriverKit/IOMemoryDescriptor.iig>
 #include <DriverKit/IOMemoryMap.iig>
 #include <DriverKit/IOBufferMemoryDescriptor.iig>
 #include <DriverKit/IODMACommand.iig>
 #include <DriverKit/IOService.iig>
 #include <DriverKit/IOUserClient.iig>
+#include <DriverKit/IOReporters.iig>
+#include <DriverKit/IOCommand.iig>
+#include <DriverKit/IOCommandPool.iig>
 
+#if !__IIG
+#if __cplusplus >= 201703L
+#include <DriverKit/OSBoundedArray.h>
+#include <DriverKit/OSBoundedArrayRef.h>
+#include <DriverKit/OSBoundedPtr.h>
+#include <DriverKit/OSAllocation.h>
+#endif /* __cplusplus >= 201703L */
+#endif /* __IIG */
+
+#endif /* _DRIVERKIT_H */

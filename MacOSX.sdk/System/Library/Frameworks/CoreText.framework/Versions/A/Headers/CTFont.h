@@ -169,6 +169,20 @@ CTFontRef CTFontCreateWithName(
     CGFloat                     size,
     const CGAffineTransform * _Nullable matrix ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
+#ifdef __swift__
+
+static inline CF_SWIFT_NAME(CTFont.init(_:size:)) CTFontRef _CTFontCreateWithName(CFStringRef name, CGFloat size)
+{
+    return CTFontCreateWithName(name, size, NULL);
+}
+
+static inline CF_SWIFT_NAME(CTFont.init(_:transform:)) CTFontRef _CTFontCreateWithNameAndMatrix(CFStringRef name, CGAffineTransform matrix)
+{
+    return CTFontCreateWithName(name, 1.0, &matrix);
+}
+
+#endif // __swift__
+
 /*!
     @function   CTFontCreateWithFontDescriptor
     @abstract   Returns a new font reference that best matches the font descriptor.
@@ -188,6 +202,20 @@ CTFontRef CTFontCreateWithFontDescriptor(
     CTFontDescriptorRef     descriptor,
     CGFloat                 size,
     const CGAffineTransform * _Nullable matrix ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+
+#ifdef __swift__
+
+static inline CF_SWIFT_NAME(CTFont.init(_:size:)) CTFontRef _CTFontCreateWithFontDescriptor(CTFontDescriptorRef descriptor, CGFloat size)
+{
+    return CTFontCreateWithFontDescriptor(descriptor, size, NULL);
+}
+
+static inline CF_SWIFT_NAME(CTFont.init(_:transform:)) CTFontRef _CTFontCreateWithFontDescriptorAndMatrix(CTFontDescriptorRef descriptor, CGAffineTransform matrix)
+{
+    return CTFontCreateWithFontDescriptor(descriptor, 1.0, &matrix);
+}
+
+#endif // __swift__
 
 /*!
     @enum       CTFontOptions
@@ -367,6 +395,20 @@ CTFontRef _Nullable CTFontCreateUIFontForLanguage(
     CGFloat             size,
     CFStringRef _Nullable language ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
+#ifdef __swift__
+
+static inline CF_SWIFT_NAME(CTFont.init(_:size:)) CTFontRef _CTFontCreateUIFont(CTFontUIFontType uiType, CGFloat size)
+{
+    return CTFontCreateUIFontForLanguage(uiType, size, NULL);
+}
+
+static inline CF_SWIFT_NAME(CTFont.init(_:size:language:)) CTFontRef _CTFontCreateUIFontForLanguage(CTFontUIFontType uiType, CGFloat size, CFStringRef _Nullable language)
+{
+    return CTFontCreateUIFontForLanguage(uiType, size, language);
+}
+
+#endif // __swift__
+
 /*!
     @function   CTFontCreateCopyWithAttributes
     @abstract   Returns a new font with additional attributes based on the original font.
@@ -504,6 +546,20 @@ CTFontRef CTFontCreateForStringWithLanguage(
     CFStringRef             string,
     CFRange                 range,
     CFStringRef _Nullable   language ) CT_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+
+#ifdef __swift__
+
+static inline CF_SWIFT_NAME(CTFont.init(font:string:range:)) CTFontRef _CTFontCreateForString(CTFontRef currentFont, CFStringRef string, CFRange range)
+{
+    return CTFontCreateForString(currentFont, string, range);
+}
+
+static inline CF_SWIFT_NAME(CTFont.init(font:string:range:language:)) CTFontRef _CTFontCreateForStringWithLanguage(CTFontRef currentFont, CFStringRef string, CFRange range, CFStringRef _Nullable language)
+{
+    return CTFontCreateForStringWithLanguage(currentFont, string, range, language);
+}
+
+#endif // __swift__
 
 /*! --------------------------------------------------------------------------
     @group Font Accessors
@@ -1546,7 +1602,7 @@ CT_EXPORT const CFStringRef kCTBaselineClassIdeographicHigh CT_AVAILABLE(macos(1
 CT_EXPORT const CFStringRef kCTBaselineClassHanging CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
-    @defined    kCTBaselineClassMathKey
+    @defined    kCTBaselineClassMath
 
     @abstract   Key to reference the Math baseline class.
 

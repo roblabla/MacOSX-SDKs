@@ -26,7 +26,7 @@
 .\" SUCH DAMAGE.
 .\"
 .\"
-.Dd June 3, 2019
+.Dd June 24, 2021
 .Dt SmartCardServices 7
 .Os "Apple Computer, Inc."
 .Sh NAME
@@ -146,19 +146,23 @@ contains a string value. This defines the target attributes for the desired Open
 .Em NotEnforcedGroup
 contains a string value. This defines the name of an Open Directory group that will not be included in mandatory smartcard enforcement, when enabled.  This is sometimes referred to as User Based Enforcement, and provides per-user granularity to
 .Em SmartcardServices.
-In order to leverage this feature, mandatory smartcard enforcement must be established via MDM or by using the following command:
-.Bd -literal -offset indent
-sudo defaults write /Library/Preferences/com.apple.security.smartcard enforceSmartCard -bool true
-.Ed
-.br
-Remember to update the FVUnlock settings using the "diskutil apfs updatePreboot" command.
+
+Please see section
+.Em SMARTCARD ENFORCEMENT
+for more details.
+
+
 .sp
 In addition, the system must be configured to allow users who are not paired with SmartCard to login with password:
 .Bd -literal -offset indent
 sudo defaults write /Library/Preferences/com.apple.security.smartcard allowUnmappedUsers -int 1
 .Ed
 .br
-Remember to update the FVUnlock settings using the "diskutil apfs updatePreboot" command.
+
+
+Remember to update the FileVault Login settings using the
+.Em "diskutil apfs updatePreboot"
+command.
 .sp
 .El                      \" Ends the list
 .br
@@ -259,6 +263,67 @@ Certificate Checking:
 should not be set to 3 (hard revocation check) if certificate revocation or OCSP servers are not always available to the client machines.
 .br
 User accounts should be created setting the "Create Mobile User on Login" flag in the Directory Utility application, when binding client machines via the command line, or with a Configuration Profile. When used in conjunction with Kerberos Caching, a mobile user account will allow users to authenticate either online and offline.
+.Sh SMARTCARD ENFORCEMENT
+There may be a requirement to use a SmartCard for user authentication in your environment. Enforcing the use of the SmartCard for the entire system can be done using MDM or a command:
+.Bd -literal -offset indent
+sudo defaults write /Library/Preferences/com.apple.security.smartcard enforceSmartCard -bool true
+.Ed
+
+In addition, the system might be configured to allow users who are not paired with SmartCard to login with password using MDM or the command:
+
+.Bd -literal -offset indent
+sudo defaults write /Library/Preferences/com.apple.security.smartcard allowUnmappedUsers -int 1
+.Ed
+
+Remember to update the FileVault Login settings using the
+.Em "diskutil apfs updatePreboot"
+command.
+
+It is also possible to specify an entire group whose members will be exempted from using the card. See the
+.Em NotEnforcedGroup
+section above for usage. Please note that this option is not compatible with FileVault Unlock.
+
+In addition, it is possible to use the attribute
+.Em kDSNativeAttrTypePrefix:SmartCardEnforcement
+in the OpenDirectory user record. It always refers to that specific user and can take the following values:
+.Bl -tag -width 2n
+.It 0
+the system default is respected
+.It 1
+card use is always enforced
+.It 2
+card enforcement is always disabled, the user can use a password
+.El
+
+If ActiveDirectory is used in your environment, the value of the
+.Em userAccountControl
+attribute is respected.
+.Ss Temporarily disabling card enforcement
+In case the system is configured for SmartCard enforced login and this cannot be used, the following command can be used to enable password login once:
+
+.Bd -literal -offset indent
+security filevault skip-sc-enforcement
+.Ed
+
+For more details please see the man page of the
+.Em security
+command.
+
+.Ss Evaluation order
+The exceptions for enforcement are processed in the following order:
+.Bl -tag -width 2n
+.It -
+OD kDSNativeAttrTypePrefix:SmartCardEnforcement
+.It -
+AD userAccountControl
+.It -
+NotEnforced group (not available in FileVault Unlock)
+.It -
+AllowUnmappedUsers setting
+.It -
+System-wide setting using defaults or MDM
+.El
+
 .Sh EXTENSIONS
 Extensions can be created using the Xcode SmartCard Token Extension template. Refer to the developer documentation for further details.
 .br
@@ -295,6 +360,13 @@ log show --predicate '(subsystem == "com.apple.CryptoTokenKit") && (category == 
 .Ed
 .Pp
 To avoid security and privacy risks that could occur if logging is turned on indefinitely, the logging setting is one-shot - it must be turned on by the command above to start logging again with a new reader. This includes unplugging and replugging the same reader.  If a USB token is used, it is treated as both a card and a reader.  Use ssh from a remote system to log back in and re-enable logging as needed
+.Sh DISABLING SMART CARD DRIVERS
+It is possible to turn off token drivers by setting the global preference:
+.Bd -literal -offset indent
+sudo defaults write /Library/Preferences/com.apple.security.smartcard DisabledTokens -array com.apple.CryptoTokenKit.pivtoken
+.Ed
+.Pp
+This statement disables built-in PIV SmartCard driver, but it can be used to disable any token driver or set of token drivers just by replacing token driver extension identifier.
 .Sh ENTITLEMENT
 Sandboxed PCSC clients require 'com.apple.security.smartcard=YES' entitlement. Non-sandboxed PCSC clients do not require such entitlement (in order to keep backward compatibility with macOS < 10.10). Users of TKSmartCard* API from CryptoTokenKit.framework always require that entitlement no matter whether they are sandboxed or not.
 .Sh SEE ALSO

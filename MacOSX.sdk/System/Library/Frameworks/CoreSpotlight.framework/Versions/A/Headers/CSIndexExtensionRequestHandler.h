@@ -2,7 +2,7 @@
 //  CSIndexExtensionRequestHandler.h
 //  CoreSpotlight
 //
-//  Copyright © 2015 Apple. All rights reserved.
+//  Copyright © 2017 Apple. All rights reserved.
 //
 
 #import <CoreSpotlight/CSSearchableIndex.h>

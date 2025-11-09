@@ -23,7 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 // It is intended only for use with items that must remain small due to unavoidable design constraints.
 // For example, buttons in a tab bar remain small to leave more room for the main content.
 
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @protocol UILargeContentViewerItem <NSObject>
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@protocol UILargeContentViewerItem <NSObject>
 
 /// Returns whether the item shows the large content viewer.
 /// In general, only views that cannot scale for the full range of Dynamic Type sizes should return YES.
@@ -67,7 +68,8 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @protocol UILargeContent
 
 /// UILargeContentViewerInteraction enables a gesture to present and dismiss the large content viewer on a device with relevant settings.
 /// Use methods in <UIKit/UIInteraction.h> to add the interaction to an appropriate view, such as a custom tab bar.
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @interface UILargeContentViewerInteraction : NSObject <UIInteraction>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UILargeContentViewerInteraction : NSObject <UIInteraction>
 
 - (instancetype)initWithDelegate:(nullable id<UILargeContentViewerInteractionDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
@@ -85,14 +87,15 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @interface 
 
 @end
 
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @protocol UILargeContentViewerInteractionDelegate <NSObject>
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@protocol UILargeContentViewerInteractionDelegate <NSObject>
 
 @optional
 
 /// Performs an action when the large content viewer gesture ends at the location of the given item.
 /// (The point in the interaction's view's coordinate system is also provided.)
 /// For example, you may wish to perform the action that would have occurred if the user had tapped on that item.
-/// If this is not implemented and the gesture ends at the location of a UIControl object, it will send a UIControlEventTouchUpInside event.
+/// If you don’t implement this method and are using standard UIKit controls, the system performs a default action, such as sending a touchUpInside event to the control.
 /// This method is called only if the gesture ends successfully (not if it fails or gets canceled).
 - (void)largeContentViewerInteraction:(UILargeContentViewerInteraction *)interaction didEndOnItem:(nullable id<UILargeContentViewerItem>)item atPoint:(CGPoint)point;
 

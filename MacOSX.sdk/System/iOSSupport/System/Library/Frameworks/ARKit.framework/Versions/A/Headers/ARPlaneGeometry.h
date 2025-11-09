@@ -2,13 +2,15 @@
 //  ARPlaneGeometry.h
 //  ARKit
 //
-//  Copyright © 2016-2017 Apple Inc. All rights reserved.
+//  Copyright © 2016-2021 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SCNGeometry.h>
 #import <simd/simd.h>
+#if __has_include(<ARKit/ARSCNPlaneGeometry.h>)
 #import <ARKit/ARSCNPlaneGeometry.h>
+#endif
 
 @protocol MTLDevice;
 

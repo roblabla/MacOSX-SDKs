@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  Create a UILayoutGuide with -init, and add to a view with -[UIView addLayoutGuide:]
  before using it in a constraint.
  */
-UIKIT_EXTERN API_AVAILABLE(ios(9.0))
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 @interface UILayoutGuide : NSObject <NSCoding>
 
 /* The frame of the UILayoutGuide in its owningView's coordinate system.

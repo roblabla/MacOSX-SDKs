@@ -12,7 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos) @interface UIFontPickerViewControllerConfiguration : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
+@interface UIFontPickerViewControllerConfiguration : NSObject <NSCopying>
 
 // Indicates if individual faces can be selected instead of just families.
 @property (nonatomic) BOOL includeFaces;

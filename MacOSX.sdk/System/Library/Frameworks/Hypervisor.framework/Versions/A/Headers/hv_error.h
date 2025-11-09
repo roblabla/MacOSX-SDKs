@@ -2,7 +2,7 @@
  *  hv_error.h
  *  Hypervisor Framework
  *
- *  Copyright (c) 2013 Apple Inc. All rights reserved.
+ *  Copyright (c) 2021 Apple Inc. All rights reserved.
  */
 
 #ifndef __HYPERVISOR_HV_RETURN__
@@ -32,6 +32,7 @@ enum {
 	HV_NO_RESOURCES	= err_common_hypervisor | 0x05, /* (0xfae94005) */
 	HV_NO_DEVICE	= err_common_hypervisor | 0x06, /* (0xfae94006) */
 	HV_DENIED		= err_common_hypervisor | 0x07, /* (0xfae94007) */
+	HV_FAULT        = err_common_hypervisor | 0x08, /* (0xfae94008) */
 	HV_UNSUPPORTED	= err_common_hypervisor | 0x0f  /* (0xfae9400f) */
 };
 

@@ -171,6 +171,12 @@ typedef UInt32                          NoteInstanceID;
 */
 typedef AudioComponentInstance          MusicDeviceComponent;
 
+/*!
+	@struct			MIDIEventList
+	@abstract Forward declaration of MIDIEventList found in <CoreMIDI/MIDIServices.h>
+*/
+typedef struct MIDIEventList MIDIEventList;
+
 //=====================================================================================================================
 #pragma mark -
 #pragma mark Functions
@@ -181,7 +187,8 @@ typedef AudioComponentInstance          MusicDeviceComponent;
 	
 	@discussion	This is the API used to send MIDI channel messages to an audio unit. The status and data parameters 
 				are used exactly as described by the MIDI specification, including the combination of channel and 
-				command in the status byte.
+				command in the status byte. All events sent via MusicDeviceMIDIEventList will be delivered to the
+				audio unit in the MIDI protocol returned by kAudioUnitProperty_AudioUnitMIDIProtocol.
 	
 	@param			inUnit
 				The audio unit
@@ -229,6 +236,38 @@ MusicDeviceSysEx(		MusicDeviceComponent	inUnit,
 						const UInt8 *			inData,
 						UInt32					inLength)							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
+/*!
+	@function	MusicDeviceMIDIEventList
+	@abstract	Used to send MIDI messages to an audio unit
+    
+    @discussion This API is suitable for sending Universal MIDI Packet (UMP) MIDI messages to an audio unit. The message must be
+					a full non-SysEx event, a partial SysEx event, or a complete SysEx event. Running status is not allowed. MIDI 1.0 in
+					universal packets (MIDI-1UP) and MIDI 2.0 messages are allowed. All events sent via MusicDeviceMIDIEventList will
+					be delivered to the audio unit in the MIDI protocol returned by kAudioUnitProperty_AudioUnitMIDIProtocol.
+
+					This is bridged to the v2 API property kAudioUnitProperty_MIDIOutputCallback.
+    
+	@param				inUnit
+					The audio unit
+	@param				inOffsetSampleFrame
+					If you are scheduling the MIDIEventList from the audio unit's render thread, then you can supply a
+					sample offset that the audio unit may apply within its next audio unit render.
+					This allows you to schedule to the sample, the time when a MIDI command is applied and is particularly
+					important when starting new notes. If you are not scheduling in the audio unit's render thread,
+					then you should set this value to 0
+ 
+					inOffsetSampleFrame should serve as the base offset for each packet's timestamp i.e.
+					sampleOffset = inOffsetSampleFrame + evtList.packet[0].timeStamp
+ 
+	@param        evtList
+					The MIDIEventList to be sent
+
+    @result            noErr, or an audio unit error code
+*/
+extern OSStatus
+MusicDeviceMIDIEventList(   MusicDeviceComponent			inUnit,
+							UInt32							inOffsetSampleFrame,
+							const struct MIDIEventList *	evtList)				API_AVAILABLE(macos(12), ios(15.0), tvos(15.0));
 
 /*!
 	@function	MusicDeviceStartNote
@@ -313,6 +352,7 @@ MusicDeviceStopNote(	MusicDeviceComponent	inUnit,
 	@constant	kMusicDeviceReleaseInstrumentSelect
 	@constant	kMusicDeviceStartNoteSelect
 	@constant	kMusicDeviceStopNoteSelect
+    @constant	kMusicDeviceMIDIEventListSelect
 */
 enum {
 		kMusicDeviceRange						= 0x0100,
@@ -321,7 +361,8 @@ enum {
 		kMusicDevicePrepareInstrumentSelect		= 0x0103,
 		kMusicDeviceReleaseInstrumentSelect		= 0x0104,
 		kMusicDeviceStartNoteSelect				= 0x0105,
-		kMusicDeviceStopNoteSelect				= 0x0106
+		kMusicDeviceStopNoteSelect				= 0x0106,
+		kMusicDeviceMIDIEventListSelect			= 0x0107
 };
 
 //=====================================================================================================================

@@ -1,26 +1,18 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           173960F4-35A4-315A-91BF-2BD70C92B7EA
-  - target:          x86_64-maccatalyst
-    value:           173960F4-35A4-315A-91BF-2BD70C92B7EA
+    value:           CED787C5-9A9C-3751-B510-1B5094F3AF03
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D764D0A9-8A0B-3ED7-B1B2-2B5666BB9299
-  - target:          arm64e-maccatalyst
-    value:           D764D0A9-8A0B-3ED7-B1B2-2B5666BB9299
+    value:           A50FE8D8-E87C-3C50-81C9-EEFB8DF9EF29
 install-name:    '/System/Library/PrivateFrameworks/CoreAVCHD.framework/Versions/A/CoreAVCHD'
-current-version: 6100
+current-version: 6000
 compatibility-version: 5600
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CAVCHCreateMediaContainer, _CAVCHDCopyClipInfoDictionary, 
                        _CAVCHDCopyClipLocationTable, _CAVCHDGetClipNumberFromFingerprint, 
                        _CAVCHDGetNumClips, _CAVCHDIsValidMediaContainerURL, _kCAVCHDClipInfoProperty_AVCHDDaylightSavingTimeFlag, 

@@ -1,0 +1,30 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           DFAAA7BF-8304-3D3D-9FD7-47D411A60312
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C4CE9A77-5654-3C18-B211-645D2DC6F2D5
+install-name:    '/System/Library/PrivateFrameworks/Recap.framework/Versions/A/Recap'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _DKDCenterRectOverRect, _DKDRectWithSize, _RCPCGImageBackedImageFromImage, 
+                       _RCPHIDEventMatchingPredicate, _RCPHIDEventTransformLocation, 
+                       _RCPLogPlayback, _RCPLoggingSubsystem, _RCPMachTimestampFromTimeInterval, 
+                       _RCPSetNonDecayingThreadPriority, _RCPTimeIntervalFromMachTimestamp, 
+                       __CLTLogLevel, __RCPEventHIDDigitizerEventCountOfTouchingContacts, 
+                       __RCPEventHIDEnumerateChildren, _kRPCEventStreamErrorDomainFile ]
+    objc-classes:    [ BackBoardScrollEventStream, BaseScrollEventStream, CLIArguments, 
+                       CLTOption, CLTOptionParser, CLTTool, RCPDiscreteGestureSpec, 
+                       RCPEvent, RCPEventAction, RCPEventDeliveryServicePool, RCPEventEnvironment, 
+                       RCPEventScreen, RCPEventSenderProperties, RCPEventStream, 
+                       RCPEventStreamRecorder, RCPHIDSystemDeliveryService, RCPInlinePlayer, 
+                       RCPMovie, RCPPlayer, RCPPlayerDisplayLinkWaiter, RCPPlayerPlaybackOptions, 
+                       RCPRecorder, RCPRecorderConfig, RCPSyntheticEventStream, RCPSyntheticFluidSwipeEventStream, 
+                       RCPTimelineView, RCPTraceLayer, RCPVirtualHIDService, RCPVizualizerView, 
+                       SSSRecapEventTrack, SSSRecapPath, WindowServerScrollEventStream, 
+                       _RCPEventActionSetPointerLocation, _RCPEventDigitizerStreamState ]
+...

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F7224B0D-4A5D-3EFB-8676-1196D55F42CB
+    value:           50B42733-D2DB-319E-AAF7-AD18061CBF2E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           91EC0BF2-84C0-3442-9810-0246C78077E2
+    value:           9249C130-90C7-3CDD-9B70-B587B0F9FAF1
 install-name:    '/System/Library/PrivateFrameworks/FamilyNotification.framework/Versions/A/FamilyNotification'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

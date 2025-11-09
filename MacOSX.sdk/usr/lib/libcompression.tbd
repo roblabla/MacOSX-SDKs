@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B979CEDF-0FC5-3364-976F-A736B09D3774
+    value:           ACA7A963-B905-3C46-8A23-BF58090ED7BA
   - target:          x86_64-maccatalyst
-    value:           B979CEDF-0FC5-3364-976F-A736B09D3774
+    value:           ACA7A963-B905-3C46-8A23-BF58090ED7BA
   - target:          x86_64h-macos
-    value:           C737D8BA-BD97-3BBF-A2B6-7C63D5144C4B
+    value:           487E970A-2645-3CAA-9050-C97E1D6D4A26
   - target:          x86_64h-maccatalyst
-    value:           C737D8BA-BD97-3BBF-A2B6-7C63D5144C4B
+    value:           487E970A-2645-3CAA-9050-C97E1D6D4A26
   - target:          arm64-macos
-    value:           3C42BF63-FF2D-3B80-882F-B96368D683D5
+    value:           E093BDE0-1338-35B2-B98F-C7C835397F46
   - target:          arm64-maccatalyst
-    value:           3C42BF63-FF2D-3B80-882F-B96368D683D5
+    value:           E093BDE0-1338-35B2-B98F-C7C835397F46
   - target:          arm64e-macos
-    value:           31D22285-5DBE-3097-8B55-9CFCB9704734
+    value:           C4A5EE95-0CAF-3A91-9C20-7B4AAC59BC7D
   - target:          arm64e-maccatalyst
-    value:           31D22285-5DBE-3097-8B55-9CFCB9704734
+    value:           C4A5EE95-0CAF-3A91-9C20-7B4AAC59BC7D
 install-name:    '/usr/lib/libcompression.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos, x86_64h-macos, x86_64-maccatalyst, 
@@ -29,5 +29,10 @@ exports:
                        _compression_stream_get_encode_state_size, _compression_stream_get_state_size, 
                        _compression_stream_identify_algorithm, _compression_stream_init, 
                        _compression_stream_init_with_state_buffer, _compression_stream_is_state_valid, 
-                       _compression_stream_process, _compression_stream_reinit ]
+                       _compression_stream_process, _compression_stream_reinit, _yzip_codec_create, 
+                       _yzip_codec_destroy, _yzip_image_create, _yzip_image_create_with_payload, 
+                       _yzip_image_decode, _yzip_image_destroy, _yzip_image_encode, 
+                       _yzip_image_get_descriptor, _yzip_image_get_max_payload_size, 
+                       _yzip_image_get_plane_descriptor, _yzip_image_set_data, _yzip_image_set_identifier, 
+                       _yzip_image_set_plane_data ]
 ...

@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, OSLogEntrySignpostType) {
     OSLogEntrySignpostTypeIntervalEnd,
     OSLogEntrySignpostTypeEvent,
 }
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 NS_SWIFT_NAME(OSLogEntrySignpost.SignpostType);
 
 /*!
@@ -32,7 +32,7 @@ NS_SWIFT_NAME(OSLogEntrySignpost.SignpostType);
  * @abstract
  * Entries made by the os_signpost API.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 OS_EXPORT
 @interface OSLogEntrySignpost : OSLogEntry <OSLogEntryFromProcess, OSLogEntryWithPayload>
 
@@ -42,7 +42,8 @@ OS_EXPORT
  * @abstract
  * The signpost ID associated with this entry.
  */
-@property (nonatomic, readonly) os_signpost_id_t signpostIdentifier;
+@property (nonatomic, readonly) os_signpost_id_t signpostIdentifier
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property signpostName
@@ -50,7 +51,8 @@ OS_EXPORT
  * @abstract
  * The signpost name associated with this entry.
  */
-@property (nonatomic, readonly) NSString *signpostName;
+@property (nonatomic, readonly) NSString *signpostName
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property signpostType
@@ -58,7 +60,8 @@ OS_EXPORT
  * @abstract
  * The signpost type associated with this entry.
  */
-@property (nonatomic, readonly) OSLogEntrySignpostType signpostType;
+@property (nonatomic, readonly) OSLogEntrySignpostType signpostType
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 

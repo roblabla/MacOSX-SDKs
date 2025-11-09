@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B5D863DD-1229-3269-92ED-03C0FDFF3A33
+    value:           8423598F-745F-36E0-9EC8-71322F142E94
   - target:          x86_64-maccatalyst
-    value:           B5D863DD-1229-3269-92ED-03C0FDFF3A33
+    value:           8423598F-745F-36E0-9EC8-71322F142E94
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C9213E5C-3298-3ADC-A4D6-EE4A213FEA5B
+    value:           7C40CC22-9253-3050-82F5-A11F50B6FEC6
   - target:          arm64e-maccatalyst
-    value:           C9213E5C-3298-3ADC-A4D6-EE4A213FEA5B
+    value:           7C40CC22-9253-3050-82F5-A11F50B6FEC6
 install-name:    '/System/Library/Frameworks/AVFAudio.framework/Versions/A/AVFAudio'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$previous$/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation$$1$1.0$11.3$$', 
                        '$ld$previous$/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation$$6$1.0$14.5$$', 
@@ -71,7 +71,11 @@ exports:
                        _AVAudioSessionPortUSBAudio, _AVAudioSessionPortVirtual, _AVAudioSessionRouteChangeNotification, 
                        _AVAudioSessionRouteChangePreviousRouteKey, _AVAudioSessionRouteChangeReasonKey, 
                        _AVAudioSessionRoutingContextChangeNotification, _AVAudioSessionSilenceSecondaryAudioHintNotification, 
-                       _AVAudioSessionSilenceSecondaryAudioHintTypeKey, _AVAudioUnitComponentManagerRegistrationsChangedNotification, 
+                       _AVAudioSessionSilenceSecondaryAudioHintTypeKey, _AVAudioSessionSourceContentBestAvailableContentTypeKey, 
+                       _AVAudioSessionSourceContentCurrentlyPlayingChannelCountKey, 
+                       _AVAudioSessionSourceContentCurrentlyPlayingFormatKey, _AVAudioSessionSourceContentCurrentlyPlayingIsEligibleForSpatializationKey, 
+                       _AVAudioSessionSpatialAudioEnabledKey, _AVAudioSessionSpatialPlaybackCapabilitiesChangedNotification, 
+                       _AVAudioUnitComponentManagerRegistrationsChangedNotification, 
                        _AVAudioUnitComponentTagsDidChangeNotification, _AVAudioUnitManufacturerNameApple, 
                        _AVAudioUnitTypeEffect, _AVAudioUnitTypeFormatConverter, _AVAudioUnitTypeGenerator, 
                        _AVAudioUnitTypeMIDIProcessor, _AVAudioUnitTypeMixer, _AVAudioUnitTypeMusicDevice, 
@@ -87,6 +91,8 @@ exports:
                        _AVSampleRateKey, _AVSpeechSynthesisIPANotationAttribute, 
                        _AVSpeechSynthesisVoiceIdentifierAlex, _AVSpeechUtteranceDefaultSpeechRate, 
                        _AVSpeechUtteranceMaximumSpeechRate, _AVSpeechUtteranceMinimumSpeechRate, 
+                       _AVVCGetInputChannelInfo_DSPCountKey, _AVVCGetInputChannelInfo_MicCountKey, 
+                       _AVVCGetInputChannelInfo_SpeakerReferenceCountKey, _AVVCGetInputChannelInfo_UndifferentiatedCountKey, 
                        _AVVCStreamHandle_BuiltInStream, _AVVCStreamHandle_ExternalInputHALStream, 
                        _AVVCStreamHandle_Invalid, _AVVoiceActivationDeviceIDKey, 
                        _AVVoiceActivationModeKey, _AVVoiceControllerATVRemoteInputRoute, 
@@ -94,8 +100,7 @@ exports:
                        _AVVoiceControllerMetricAudioSessionSetActiveTime, _AVVoiceControllerMetricAudioSessionSetInactiveTime, 
                        _AVVoiceControllerMetricDataBeginHostTime, _AVVoiceControllerMetricDataDurationMilliSeconds, 
                        _AVVoiceControllerMetricDataEndHostTime, _AVVoiceControllerNoRecordRoute, 
-                       _AVVoiceControllerRemoteInputDarwinRoute, _AVVoiceControllerRemoteInputJarvisRoute, 
-                       _AVVoiceControllerStartTimeKey ]
+                       _AVVoiceControllerRemoteInputJarvisRoute, _AVVoiceControllerStartTimeKey ]
     objc-classes:    [ AVAudioBuffer, AVAudioChannelLayout, AVAudioCompressedBuffer, 
                        AVAudioConnectionPoint, AVAudioConverter, AVAudioEngine, AVAudioEnvironmentDistanceAttenuationParameters, 
                        AVAudioEnvironmentNode, AVAudioEnvironmentReverbParameters, 
@@ -114,7 +119,8 @@ exports:
                        AVSpeechSynthesisProviderAudioUnit, AVSpeechSynthesisProviderRequest, 
                        AVSpeechSynthesisProviderVoice, AVSpeechSynthesisVoice, AVSpeechSynthesizer, 
                        AVSpeechUtterance, AVVCAlertInformation, AVVCAudioBuffer, 
-                       AVVCConfigureAlertBehaviorSettings, AVVCContextSettings, AVVCPrepareRecordSettings, 
+                       AVVCConfigureAlertBehaviorSettings, AVVCContextSettings, AVVCDuckFadeDuration, 
+                       AVVCDuckOverride, AVVCDuckSettings, AVVCPrepareRecordSettings, 
                        AVVCRecordDeviceInfo, AVVCSessionFactory, AVVCStartRecordSettings, 
                        AVVoiceController, AVVoiceTriggerClient ]
     objc-ivars:      [ AVAudioBuffer._impl, AVAudioNode._impl, AVAudioSequencer._impl, 

@@ -23,7 +23,8 @@ typedef NS_ENUM(NSUInteger, PKPaymentMethodType) {
     PKPaymentMethodTypeDebit    = 1,
     PKPaymentMethodTypeCredit   = 2,
     PKPaymentMethodTypePrepaid  = 3,
-    PKPaymentMethodTypeStore    = 4
+    PKPaymentMethodTypeStore    = 4,
+    PKPaymentMethodTypeEMoney   = 5,
 } API_AVAILABLE(macos(11.0), ios(9.0), watchos(3.0));
 
 // A string describing the instrument that's suitable for display

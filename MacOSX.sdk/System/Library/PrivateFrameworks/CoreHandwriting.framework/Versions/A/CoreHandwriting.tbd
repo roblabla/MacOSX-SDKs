@@ -4,35 +4,36 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5515F8B6-2C94-3609-91D1-190D1105692C
+    value:           FACCA084-F0A0-3007-9B08-9236F5D1DF06
   - target:          x86_64-maccatalyst
-    value:           5515F8B6-2C94-3609-91D1-190D1105692C
+    value:           FACCA084-F0A0-3007-9B08-9236F5D1DF06
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EE804585-6F09-3336-BD78-55E1B5DAAA1E
+    value:           398F85FA-D902-3B13-9481-DAF276F2F1A1
   - target:          arm64e-maccatalyst
-    value:           EE804585-6F09-3336-BD78-55E1B5DAAA1E
+    value:           398F85FA-D902-3B13-9481-DAF276F2F1A1
 install-name:    '/System/Library/PrivateFrameworks/CoreHandwriting.framework/Versions/A/CoreHandwriting'
 current-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _CHDescriptionForCorrectionResultType, _CHRecognitionOptionDrawingAnchorPoint, 
-                       _CHRecognitionOptionFrameContext, _CHRecognitionOptionInferenceCache, 
-                       _CHRecognitionOptionPrecedingSpaceBehavior, _CHRecognitionOptionShouldPreserveCaseVariantCandidates, 
-                       _CHRecognitionOptionShouldRefineCandidates, _CHRecognitionOptionTextAfter, 
-                       _CHRecognitionOptionTextBefore ]
+    symbols:         [ _CHDescriptionForCorrectionResultType, _CHRecognitionOptionAllowSecondaryLocale, 
+                       _CHRecognitionOptionDrawingAnchorPoint, _CHRecognitionOptionFrameContext, 
+                       _CHRecognitionOptionInferenceCache, _CHRecognitionOptionPrecedingSpaceBehavior, 
+                       _CHRecognitionOptionShouldPreserveCaseVariantCandidates, _CHRecognitionOptionShouldRefineCandidates, 
+                       _CHRecognitionOptionTextAfter, _CHRecognitionOptionTextBefore ]
     objc-classes:    [ CHBottomUpStrokeGroupingStrategy, CHBoxcarFilterPointFIFO, 
                        CHContextualTextResult, CHContextualTextResults, CHDataDetectorQuery, 
                        CHDataDetectorQueryItem, CHDrawing, CHEncodedStrokeIdentifier, 
                        CHFastStrokeGroupingStrategy, CHIndexableContentQuery, CHLanguageUtilities, 
                        CHMutableTextInputTargetContentInfo, CHMutableTokenizedTextResultColumn, 
                        CHNonTextCandidateStroke, CHPointFIFO, CHPointStrokeFIFO, 
-                       CHQuadCurvePointFIFO, CHQuery, CHRecognitionInsight, CHRecognitionInsightRequest, 
-                       CHRecognitionResult, CHRecognitionSession, CHRecognitionSessionIndexableContent, 
+                       CHPrefixQuery, CHPrefixQueryItem, CHQuadCurvePointFIFO, CHQuery, 
+                       CHRecognitionInsight, CHRecognitionInsightRequest, CHRecognitionResult, 
+                       CHRecognitionSession, CHRecognitionSessionIndexableContent, 
                        CHRecognitionSessionResult, CHRecognizer, CHRecognizerConfiguration, 
                        CHRecognizerInferenceCache, CHRecognizerOptions, CHRemoteRecognizer, 
                        CHSearchQuery, CHSearchQueryItem, CHStrokeClassificationModel, 
@@ -59,8 +60,8 @@ exports:
                        CHTokenizedTextResult._recognizerGenerationIdentifier, CHTokenizedTextResult._tokenColumns, 
                        CHTokenizedTextResult._transcriptionPathScores, CHTokenizedTextResult._transcriptionPaths, 
                        CHTokenizedTextResultColumn._tokenRows, CHTokenizedTextResultToken._alignmentScore, 
-                       CHTokenizedTextResultToken._combinedScore, CHTokenizedTextResultToken._properties, 
-                       CHTokenizedTextResultToken._recognitionScore, CHTokenizedTextResultToken._string, 
-                       CHTokenizedTextResultToken._strokeIndexes, CHTokenizedTextResultToken._substrokeCount, 
-                       CHTokenizedTextResultToken._wordID ]
+                       CHTokenizedTextResultToken._bounds, CHTokenizedTextResultToken._combinedScore, 
+                       CHTokenizedTextResultToken._properties, CHTokenizedTextResultToken._recognitionScore, 
+                       CHTokenizedTextResultToken._string, CHTokenizedTextResultToken._strokeIndexes, 
+                       CHTokenizedTextResultToken._substrokeCount, CHTokenizedTextResultToken._wordID ]
 ...

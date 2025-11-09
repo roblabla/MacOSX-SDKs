@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EFDA7D51-7FEE-345E-AAB0-AE0E376187A5
+    value:           8090C40B-3401-377D-9BA5-6CBBB0154837
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FFE22AA8-645E-3313-9208-5633F36925A4
+    value:           FD74D5FC-7890-3B99-AC52-DEFCFD43A0DB
 install-name:    '/System/Library/Frameworks/ICADevices.framework/Versions/A/ICADevices'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DisconnectFWDevice, _DisconnectFWDeviceWithIORegPath, _DisconnectMassStorageDevice, 
                        _DisconnectUSBDevice, _DisconnectUSBDeviceWithIORegPath, _FWDeviceSendScanEventNotification, 
                        _ICACloseSession, _ICAConvertJPEGDataToICADataInPlace, _ICAConvertTIFFDataToICADataInPlace, 
@@ -37,10 +37,10 @@ exports:
                        _ICASetPropertyRefCon, _ICASetSInt16ValueInDict, _ICASetSInt32ValueInDict, 
                        _ICASetSInt64ValueInDict, _ICASetUTF8StringInDict, _ICAShowDeviceBrowser, 
                        _ICAUnloadDeviceModule, _ICAUpdateDeviceDictionary, _ICAUploadFile, 
-                       _ICCachedUTTypeFromExtension, _ICDAddBandInfoToNotificationDictionary, 
-                       _ICDAddImageInfoToNotificationDictionary, _ICDAddScannedImageMetaDataToFinderComment, 
-                       _ICDBulkNewObject, _ICDBulkNewProperty, _ICDConnectBluetoothDevice, 
-                       _ICDConnectFWDevice, _ICDConnectFWDeviceWithIORegPath, _ICDConnectMassStorageDevice, 
+                       _ICDAddBandInfoToNotificationDictionary, _ICDAddImageInfoToNotificationDictionary, 
+                       _ICDAddScannedImageMetaDataToFinderComment, _ICDBulkNewObject, 
+                       _ICDBulkNewProperty, _ICDConnectBluetoothDevice, _ICDConnectFWDevice, 
+                       _ICDConnectFWDeviceWithIORegPath, _ICDConnectMassStorageDevice, 
                        _ICDConnectTCPIPDevice, _ICDConnectUSBDevice, _ICDConnectUSBDeviceWithIORegPath, 
                        _ICDConvertJPEGDataToPNGDataInPlace, _ICDConvertJPEGDataToTIFFDataInPlace, 
                        _ICDConvertRGB8DataToJPEGDataInPlace, _ICDConvertTIFFDataToJPEGDataInPlace, 
@@ -75,9 +75,8 @@ exports:
                        _ICDScannerDisconnectUSBDeviceWithIORegPath, _ICDScannerGetStandardPropertyData, 
                        _ICDScannerInitiateNotificationCallback, _ICDScannerNewObjectInfoCreated, 
                        _ICDSendNotification, _ICDSendNotificationAndWaitForReply, 
-                       _ICD_ScannerMain, _ICD_main, _ICGetUTTypeForExtension, _ICLoggingDomain, 
-                       _ICLoggingLevel, _ICPreferencesDomain, _ICPutUTTypeForExtension, 
-                       _ICStandardDateFromString, _ICStandardStringFromDate, _ICUTTypeDictionary, 
+                       _ICD_ScannerMain, _ICD_main, _ICLoggingDomain, _ICLoggingLevel, 
+                       _ICPreferencesDomain, _ICStandardDateFromString, _ICStandardStringFromDate, 
                        _NewFWDevice, _NewFWDeviceWithIORegPath, _NewMassStorageDevice, 
                        _NewUSBDevice, _NewUSBDeviceWithIORegPath, _SendDeviceArrivalNotification, 
                        _SendDeviceLoadFailedNotification, _SendDeviceLoadFailedNotificationWithError, 

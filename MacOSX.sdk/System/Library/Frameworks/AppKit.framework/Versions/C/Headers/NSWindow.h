@@ -1,7 +1,7 @@
 /*
     NSWindow.h
     Application Kit
-    Copyright (c) 1994-2019, Apple Inc.
+    Copyright (c) 1994-2021, Apple Inc.
     All rights reserved.
 */
 
@@ -48,7 +48,7 @@ typedef NS_OPTIONS(NSUInteger, NSWindowStyleMask) {
      */
     NSWindowStyleMaskUnifiedTitleAndToolbar = 1 << 12,
     
-    /* When set, the window will appear full screen. This mask is automatically toggled when toggleFullScreen: is called.
+    /* When present, the window will appear full screen. This mask is automatically toggled when toggleFullScreen: is called.
      */
     NSWindowStyleMaskFullScreen API_AVAILABLE(macos(10.7)) = 1 << 14,
     
@@ -308,7 +308,6 @@ If the url represents a filename or other resource with a known icon, that icon 
 @property (readonly, weak) NSResponder *firstResponder;
 
 @property (readonly) NSEventModifierFlags resizeFlags;
-- (void)keyDown:(NSEvent *)event;
 - (void)close;
 @property (getter=isReleasedWhenClosed) BOOL releasedWhenClosed;
 - (void)miniaturize:(nullable id)sender;

@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 // A configuration that allows a responder to export data through a variety of interactions.
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos)
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIActivityItemsConfiguration : NSObject <UIActivityItemsConfigurationReading>
 
 @property (nonatomic, strong, nullable) id localObject; // A local object retained for the convenience of the app developer

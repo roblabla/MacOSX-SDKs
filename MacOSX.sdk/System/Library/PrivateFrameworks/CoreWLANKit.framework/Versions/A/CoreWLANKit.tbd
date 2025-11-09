@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           21FC4C9F-44A3-30D4-94DE-2E2AFAFED83D
+    value:           0AD1C574-70FC-37AC-B4B3-9FCD706A9882
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           538BF163-9029-3131-99AE-5B54697E3314
+    value:           F9C01452-80F4-36EF-9965-E06EA34D173D
 install-name:    '/System/Library/PrivateFrameworks/CoreWLANKit.framework/Versions/A/CoreWLANKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -33,11 +33,11 @@ exports:
     objc-ivars:      [ AirPortNetworkPrefs._advancedTabViewItem, AirPortOptionsTabView._addRemoveEditButton, 
                        AirPortOptionsTabView._airportID, AirPortOptionsTabView._airportIDLabel, 
                        AirPortOptionsTabView._allowLegacyNetworksCheckbox, AirPortOptionsTabView._alwaysRemember, 
-                       AirPortOptionsTabView._currentDialog, AirPortOptionsTabView._networksScrollView, 
-                       AirPortOptionsTabView._networksTable, AirPortOptionsTabView._networksTableLabel, 
-                       AirPortOptionsTabView._owner, AirPortOptionsTabView._preferredNetworks, 
-                       AirPortOptionsTabView._removeNetworks, AirPortOptionsTabView._removeNetworksLocalOnly, 
-                       AirPortOptionsTabView._requireAdminNetworkChangeCheckbox, 
+                       AirPortOptionsTabView._currentDialog, AirPortOptionsTabView._networkTableControlLabel, 
+                       AirPortOptionsTabView._networksScrollView, AirPortOptionsTabView._networksTable, 
+                       AirPortOptionsTabView._networksTableLabel, AirPortOptionsTabView._owner, 
+                       AirPortOptionsTabView._preferredNetworks, AirPortOptionsTabView._removeNetworks, 
+                       AirPortOptionsTabView._removeNetworksLocalOnly, AirPortOptionsTabView._requireAdminNetworkChangeCheckbox, 
                        AirPortOptionsTabView._requireAdminPowerToggleCheckbox, AirPortOptionsTabView._supportsWPA3Personal, 
                        AirPortOptionsTabViewItem._AirPortOptionsTabView, AirPortOptionsTabViewItem._interfaceName, 
                        AirPortOptionsTabViewItem._isWiFiNetworkSyncEnabled, AirPortOptionsTabViewItem._modifierFlags, 

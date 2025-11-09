@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Nearby interaction session.
  */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0), watchos(7.3)) API_UNAVAILABLE(macos, tvos)
 NI_EXPORT
 @interface NISession : NSObject
 
@@ -39,7 +39,7 @@ NI_EXPORT
 @property (nonatomic, strong, nullable) dispatch_queue_t delegateQueue;
 
 /**
- A unique nearby interaction identifer for this session.
+ A unique nearby interaction identifier for this session.
 
  @discussion Copy this discoveryToken and share it with a peer device.
  The discoveryToken is unique to this device and this session.
@@ -76,7 +76,7 @@ NI_EXPORT
 /**
  Reasons to remove a nearby object.
  */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0), watchos(7.3)) API_UNAVAILABLE(macos, tvos)
 typedef NS_ENUM(NSInteger, NINearbyObjectRemovalReason) {
 
     /** The system has not received new activity from this object for over the allowed period. */
@@ -90,7 +90,7 @@ typedef NS_ENUM(NSInteger, NINearbyObjectRemovalReason) {
 /**
  Delegate for nearby interaction session updates.
  */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0), watchos(7.3)) API_UNAVAILABLE(macos, tvos)
 @protocol NISessionDelegate <NSObject>
 
 @optional
@@ -131,6 +131,19 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  @param error The error indicating the reason for invalidation of the session (see NIError.h).
 */
 - (void)session:(NISession *)session didInvalidateWithError:(NSError *)error NS_SWIFT_NAME(session(_:didInvalidateWith:));
+
+/**
+Provides configuration data that needs to be shared with the accessory.
+@note Shareable configuration data is only provided when running an NINearbyAccessoryConfiguration.
+@discussion After invoking this callback, the session will go into a special preparedness state for a limited amount of time.
+The interaction on the accessory must start within this time window. If activity is not detected from the accessory, the session will call
+the -[session:didRemoveNearbyObjects:reason:] delegate callback. To restart the session, coordinate with the accessory and call -[runWithConfiguration] again.
+ 
+@param session The session which produced the configuration data.
+@param shareableConfigurationData The configuration data that needs to be shared with the accessory.
+@param object A representation of the accessory as a NINearbyObject. The discoveryToken property will be equal to the one in the configuration used to run the session.
+*/
+- (void)session:(NISession *)session didGenerateShareableConfigurationData:(NSData *)shareableConfigurationData forObject:(NINearbyObject *)object API_AVAILABLE(ios(15.0), watchos(8.0)) API_UNAVAILABLE(tvos, macos);
 
 @end
 

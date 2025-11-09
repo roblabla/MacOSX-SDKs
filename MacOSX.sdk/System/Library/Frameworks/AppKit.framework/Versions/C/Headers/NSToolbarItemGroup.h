@@ -1,7 +1,7 @@
 /*
 	NSToolbarItemGroup.h
 	Application Kit
-	Copyright (c) 2000-2019, Apple Inc.
+	Copyright (c) 2000-2021, Apple Inc.
 	All rights reserved.
 */
 

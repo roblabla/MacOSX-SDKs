@@ -51,7 +51,7 @@ API_UNAVAILABLE(macos, tvos)
 // A data structure containing the bluetooth identifier and the iAP 2 identifier of the head unit of the vehicle.
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INCarHeadUnit *headUnit;
 
-// An array containing the supported charging connectors of a vehicle
+// An array containing the supported charging connectors of a vehicle.
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSArray<INCarChargingConnectorType> *supportedChargingConnectors;
 
 // Use this method to set the maximum supported power for each charging connector type a vehicle supports. This function can be called multiple times for different connector types.

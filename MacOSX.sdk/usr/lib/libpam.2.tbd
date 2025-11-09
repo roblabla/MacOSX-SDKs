@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0386A3AB-7134-34FB-A456-3B84D52DFAB1
+    value:           8A253A3C-4EC6-30DD-B724-C20BD765DEA3
   - target:          x86_64-maccatalyst
-    value:           0386A3AB-7134-34FB-A456-3B84D52DFAB1
+    value:           8A253A3C-4EC6-30DD-B724-C20BD765DEA3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BC62B451-4D5A-3BEE-8648-13B94AD188E5
+    value:           232AF14E-FE13-380E-BDF9-DE618F514F97
   - target:          arm64e-maccatalyst
-    value:           BC62B451-4D5A-3BEE-8648-13B94AD188E5
+    value:           232AF14E-FE13-380E-BDF9-DE618F514F97
 install-name:    '/usr/lib/libpam.2.dylib'
 current-version: 3
 compatibility-version: 3

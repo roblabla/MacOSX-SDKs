@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E500A40E-A1A1-32AB-9048-5B34F0096E28
+    value:           7BDE587B-C4A9-3E4B-8FD9-74DFA1305F1A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9D5CF470-FCDB-3208-9504-6699FE3359CC
+    value:           45F7367E-EAED-3F41-AA7C-E4F0500A7FDB
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IKAnimationDelayKey, _IKAnimationDurationKey, _IKAnimationFrameRateKey, 
                        _IKAnimationVelocityCurveKey, _IKBestRepresentationFromNSImageForPhysicalSize, 
                        _IKCGBitmapContextRefFromCGImageRef, _IKCGBitmapContextRefFromData, 
@@ -76,9 +76,10 @@ exports:
                        _IKProfilePictureEditorShowAddressBookPictureKey, _IKProfilePictureEditorShowChatIconsKey, 
                        _IKProfilePictureEditorShowEmptyPictureKey, _IKProfilePictureEditorUpdateRecentPictureKey, 
                        _IKProfilePictureEditorViewSizeKey, _IKQuickLookContentRect, 
-                       _IKQuickLookProperties, _IKSizeHint, _IKSizeOfIcon, _IKSlideshowAudioFile, 
-                       _IKSlideshowModeImages, _IKSlideshowModeOther, _IKSlideshowModePDF, 
-                       _IKSlideshowPDFDisplayBox, _IKSlideshowPDFDisplayMode, _IKSlideshowPDFDisplaysAsBook, 
+                       _IKQuickLookProperties, _IKSaveOptionsDefaultCompressionQuality, 
+                       _IKSizeHint, _IKSizeOfIcon, _IKSlideshowAudioFile, _IKSlideshowModeImages, 
+                       _IKSlideshowModeOther, _IKSlideshowModePDF, _IKSlideshowPDFDisplayBox, 
+                       _IKSlideshowPDFDisplayMode, _IKSlideshowPDFDisplaysAsBook, 
                        _IKSlideshowScreen, _IKSlideshowStartIndex, _IKSlideshowStartPaused, 
                        _IKSlideshowWrapAround, _IKTaskManagerTaskDoneNotification, 
                        _IKThumbnailImage, _IKThumbnailImageFromCGImage, _IKThumbnailImageFromSourceRef, 
@@ -92,7 +93,8 @@ exports:
                        _kIKGeometryChanged, _kIKInitialBackingScale, _kIKInitialCenter, 
                        _kIKInitialZoomFactor, _kIKKeepZoomToFitSticky, _kIKOutputImageChangedNotification, 
                        _kIKPictureTakenNotification, _kIKTakePictureAbortedNotification, 
-                       _kIKThumbnailLowResFactor, _kIKZoomToFitOnStart, _kIKZoomToFitOnStartIgnoreWindowSize ]
+                       _kIKThumbnailLowResFactor, _kIKWebImageURL, _kIKWebPageURL, 
+                       _kIKZoomToFitOnStart, _kIKZoomToFitOnStartIgnoreWindowSize ]
     objc-classes:    [ IKBookletCell, IKCameraDeviceView, IKCameraServices, IKCustomPathPopupButton, 
                        IKDeviceBrowserView, IKEmbeddedImageView, IKFilterBrowserPanel, 
                        IKFilterBrowserView, IKFilterUIView, IKFinderCell, IKHierarchicalDatasourceAdaptor, 

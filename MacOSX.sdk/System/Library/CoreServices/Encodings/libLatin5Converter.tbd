@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CFF0DE4A-4BE5-31FB-9A22-27000CB06773
+    value:           C084C726-E8E2-372B-9DBF-9A6DCAE8BDDC
   - target:          x86_64-maccatalyst
-    value:           CFF0DE4A-4BE5-31FB-9A22-27000CB06773
+    value:           C084C726-E8E2-372B-9DBF-9A6DCAE8BDDC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A66813ED-72A3-3A61-B2DB-452A9A3F0198
+    value:           B9CD7C19-4930-30D0-A11C-8064F57C0865
   - target:          arm64e-maccatalyst
-    value:           A66813ED-72A3-3A61-B2DB-452A9A3F0198
+    value:           B9CD7C19-4930-30D0-A11C-8064F57C0865
 install-name:    '/System/Library/CoreServices/Encodings/libLatin5Converter.dylib'
-current-version: 90
+current-version: 100
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ABC301B1-1782-3BDD-ADEA-5FAA3D792968
+    value:           D641C672-2648-3731-BC27-715A26ED7057
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           06CB4272-7068-32E0-AF24-2C20BB3A8E8D
+    value:           E6FEFCFF-DA7A-3420-AE76-0E3F4FB0F12A
 install-name:    '/System/Library/PrivateFrameworks/SiriFoundation.framework/Versions/A/SiriFoundation'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -49,6 +49,7 @@ exports:
     objc-classes:    [ SRFAnalyticsOverride, SRFBugReporter, SRFClamshellStateNotifier, 
                        SRFEnablementFlowConfigurationProvider, SRFInvocationSuppressor, 
                        SRFLauncher, SRFLockStateNotifier, SRFLoggingDefaults, SRFPreferences, 
-                       SRFProcessInfo, SRFSignpostLog, SRFStateNotifier, SRFUserDefaultsController, 
-                       SRFUtilities, SRFVoiceTriggerDevices ]
+                       SRFProcessInfo, SRFSetupAssistantPreferences, SRFSignpostLog, 
+                       SRFStateNotifier, SRFUserDefaultsController, SRFUtilities, 
+                       SRFVoiceTriggerDevices ]
 ...

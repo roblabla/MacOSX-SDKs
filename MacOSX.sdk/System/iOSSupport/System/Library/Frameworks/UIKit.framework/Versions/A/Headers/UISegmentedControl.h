@@ -39,7 +39,8 @@ typedef NS_ENUM(NSInteger, UISegmentedControlSegment) {
 
 @class UIImage, UIColor;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UISegmentedControl : UIControl <NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UISegmentedControl : UIControl <NSCoding>
 
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;

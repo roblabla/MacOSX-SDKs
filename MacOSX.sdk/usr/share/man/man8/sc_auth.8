@@ -46,6 +46,11 @@
 .Nm
 .Ar enable_for_login
 .Fl c Ar class-id
+.Nm
+.Ar filevault
+.Fl o Ar operation
+.Op Fl u Ar user
+.Op Fl h Ar hash
 .Sh SYNOPSIS - legacy             \" Section Header - required - don't modify
 .Nm
 .Ar accept
@@ -94,6 +99,8 @@ Change or unblock SmartCard PIN.  This command works only for Personal Identity 
 Verify SmartCard PIN. This command works only for Personal Identity Verification (PIV) SmartCards. Optional -t argument allows specifying tokenID. Optional -p argument allows specifying PIN.
 .It Ar enable_for_login
 Enable the app extension for login and make the token available to the system for authentication.
+.It Ar filevault
+Manage SmartCard support for FileVault unlock.
 .El                      \" Ends the list
 .Pp
 .Sh DESCRIPTION - legacy          \" Section Header - required - don't modify
@@ -129,6 +136,12 @@ Specifies a token by tokenID
 Specifies a token by  'com.apple.ctk.class-id' from Info.plist
 .It Fl p Ar PIN
 Specifies a PIN
+.It Fl o Ar operation
+Use
+.Ar status
+to query the status of SmartCard support for FileVault unlock for the specified user (current user by default)
+.Ar enable/disable
+to activate/deactivate SmartCard support for FileVault unlock
 .El                      \" Ends the list
 .Sh NOTES
 .Nm

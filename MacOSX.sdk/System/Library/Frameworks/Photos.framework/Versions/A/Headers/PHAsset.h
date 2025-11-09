@@ -55,6 +55,9 @@ OS_EXPORT
 
 @property (nonatomic, assign, readonly) PHAssetSourceType sourceType API_AVAILABLE(ios(9));
 
+// only applies to adjusted assets
+@property (nonatomic, assign, readonly, nullable) NSString *adjustmentFormatIdentifier API_AVAILABLE(macos(12), ios(15), tvos(15));
+
 #pragma mark - Capabilities
 
 - (BOOL)canPerformEditOperation:(PHAssetEditOperation)editOperation API_AVAILABLE(macos(10.15));

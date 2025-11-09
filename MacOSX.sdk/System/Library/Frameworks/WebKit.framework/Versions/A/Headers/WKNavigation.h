@@ -33,12 +33,12 @@
  also passed to the navigation delegate methods, to uniquely identify a webpage
  load from start to finish.
  */
-WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
+WK_CLASS_AVAILABLE(macos(10.10), ios(8.0))
 @interface WKNavigation : NSObject
 
 /*! The content mode used when loading this webpage.
  @discussion The value is either WKContentModeMobile or WKContentModeDesktop.
  */
-@property (nonatomic, readonly) WKContentMode effectiveContentMode API_AVAILABLE(ios(13.0));
+@property (nonatomic, readonly) WKContentMode effectiveContentMode WK_API_AVAILABLE(ios(13.0));
 
 @end

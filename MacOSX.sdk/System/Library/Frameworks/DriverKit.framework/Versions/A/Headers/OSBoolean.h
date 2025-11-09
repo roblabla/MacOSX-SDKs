@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from OSBoolean.iig */
+/* iig(DriverKit-191) generated from OSBoolean.iig */
 
 /* OSBoolean.iig:1-64 */
 /*
@@ -174,12 +174,21 @@ class OSBoolean : public OSContainer, public OSBooleanInterface
 
 #if !KERNEL
 public:
+#ifdef OSBoolean_DECLARE_IVARS
+OSBoolean_DECLARE_IVARS
+#else /* OSBoolean_DECLARE_IVARS */
     union
     {
         OSBoolean_IVars * ivars;
         OSBoolean_LocalIVars * lvars;
     };
+#endif /* OSBoolean_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gOSBooleanMetaClass; };
+#endif /* KERNEL */
 
     using super = OSContainer;
 

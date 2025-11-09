@@ -138,7 +138,7 @@ abs(long double __lcpp_x) _NOEXCEPT {
 #endif
 
 // MSVCRT already has the correct prototype in <stdlib.h> if __cplusplus is defined
-#if !defined(_LIBCPP_MSVCRT) && !defined(__sun__) && !defined(_AIX)
+#if !defined(_LIBCPP_MSVCRT) && !defined(__sun__) && !defined(_AIX) && !defined(_LIBCPP_ON_RTKIT)
 inline _LIBCPP_INLINE_VISIBILITY ldiv_t div(long __x, long __y) _NOEXCEPT {
   return ::ldiv(__x, __y);
 }

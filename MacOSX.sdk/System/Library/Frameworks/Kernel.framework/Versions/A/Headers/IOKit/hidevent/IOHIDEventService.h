@@ -141,6 +141,7 @@ private:
         OSDictionary *          clientDict;
         IOBufferMemoryDescriptor  *eventMemory;
         IOLock                    *eventMemLock;
+        OSSet                     *outstandingActions;
 
         struct {
             UInt32                  deviceID;
@@ -167,10 +168,9 @@ private:
                 IOTimerEventSource *    stackshotTimer;
             } debug;
             bool                    swapISO;
-#else
+#endif
             Key                     pressedKeys[10];
             UInt32                  pressedKeysMask;
-#endif
             bool                    appleVendorSupported;
         } keyboard;
 
@@ -204,10 +204,9 @@ private:
         bool                  powerButtonNmi;
         bool                  disableAcceleration;
     };
-#if TARGET_OS_OSX
+
     static KeyValueMask   keyMonitorTable[];
     static DebugKeyAction debugKeyActionTable[];
-#endif
     
     ExpansionData *         _reserved;
 
@@ -240,9 +239,8 @@ private:
 
     void                    stackshotTimerCallback(IOTimerEventSource *sender);
 
-#elif TARGET_OS_OSX
-    bool                    isPowerButtonNmiEnabled() const;
 #endif
+    bool                    isPowerButtonNmiEnabled() const;
     
     void                    multiAxisTimerCallback(IOTimerEventSource *sender);
 
@@ -619,7 +617,7 @@ protected:
     /*!
      @function dispatchUnicodeEvent
      @abstract Dispatch unicode events
-     @discussion The HID specificiation provides a means to dispatch unicode characters from HID
+     @discussion The HID specification provides a means to dispatch unicode characters from HID
      compliant devices.  The original method was to leverage the unicode page to deliver UTF-16 LE
      characters by way of a usage page selector.
      @param timeStamp   AbsoluteTime representing origination of event
@@ -692,11 +690,10 @@ protected:
     
     OSMetaClassDeclareReservedUsed(IOHIDEventService, 10);
     virtual UInt32          getPrimaryUsage();
-#if TARGET_OS_OSX
+
     static void debugActionSysdiagnose(IOHIDEventService* self, void *parameter);
     static void debugActionNMI(IOHIDEventService* self, void *parameter);
     static void powerButtonNMI(IOHIDEventService* self, void *parameter);
-#endif
   
 public:
     OSMetaClassDeclareReservedUsed(IOHIDEventService,  11);
@@ -921,8 +918,28 @@ protected:
                                                   UInt8                       clickSpeed,
                                                   IOOptionBits                options = 0 );
 
-    OSMetaClassDeclareReservedUnused(IOHIDEventService, 24);
-    OSMetaClassDeclareReservedUnused(IOHIDEventService, 25);
+    /*!
+     @function completeCopyEvent
+     @abstract Completion of call to DriverKit to copy matching event
+     @discussion Called by DriverKit to complete copy matching event requets
+     @param action Action
+     @param event  Copied event or NULL
+     @param context Context associated with request
+     */
+    OSMetaClassDeclareReservedUsed(IOHIDEventService, 24);
+    virtual void            completeCopyEvent (OSAction * action, IOHIDEvent * event, uint64_t context);
+
+    /*!
+     @function completeSetProperties
+     @abstract Completion of call to DriverKit to set properties call
+     @discussion Called by DriverKit to complete set properties requests
+     @param action Action
+     @param event  Copied event or NULL
+     @param context Context associated with request
+     */
+    OSMetaClassDeclareReservedUsed(IOHIDEventService, 25);
+    virtual void completeSetProperties(OSAction * action, IOReturn status, uint64_t context);
+
     OSMetaClassDeclareReservedUnused(IOHIDEventService, 26);
     OSMetaClassDeclareReservedUnused(IOHIDEventService, 27);
     OSMetaClassDeclareReservedUnused(IOHIDEventService, 28);
@@ -944,6 +961,8 @@ public:
      */
     
     virtual IOReturn message(UInt32 type, IOService * provider, void * argument) APPLE_KEXT_OVERRIDE;
+
+protected:
 };
 
 #endif /* !_IOKIT_HID_IOHIDEVENTSERVICE_H */

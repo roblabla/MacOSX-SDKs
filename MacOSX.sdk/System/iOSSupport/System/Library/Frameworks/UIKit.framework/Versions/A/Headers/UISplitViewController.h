@@ -73,7 +73,8 @@ typedef NS_ENUM(NSInteger, UISplitViewControllerDisplayModeButtonVisibility) {
 // This constant can be used with any sizing-related `UISplitViewController` properties to get the default system behavior.
 UIKIT_EXTERN CGFloat const UISplitViewControllerAutomaticDimension API_AVAILABLE(ios(8.0));
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UISplitViewController : UIViewController
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+@interface UISplitViewController : UIViewController
 
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
@@ -180,6 +181,7 @@ If an animation is started due to -show/hideColumn:, the transitionCoordinator f
 
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UISplitViewControllerDelegate
 
 @optional

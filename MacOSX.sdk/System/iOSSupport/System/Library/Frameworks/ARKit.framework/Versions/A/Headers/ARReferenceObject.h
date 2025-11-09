@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@class UIImage;
 #import <simd/simd.h>
 
 NS_ASSUME_NONNULL_BEGIN

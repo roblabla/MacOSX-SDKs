@@ -71,7 +71,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
               completionHandler:(void(^)(NSArray<GKLeaderboard *> * _Nullable leaderboards, NSError * _Nullable error))completionHandler NS_SWIFT_NAME(loadLeaderboards(IDs:completionHandler:)) API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), watchos(7.0));
 
 /// Loads the occurrence preceding this occurrence for a recurring leaderboard in which the local player submitted a score. If no previous occurrence is found that the player submitted a score to, then the most recent previous occurrence is returned.
-- (void)loadPreviousOccurrenceWithCompletionHandler:(void(^)(GKLeaderboard * _Nullable leaderboard, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), watchos(7.0));
+- (void)loadPreviousOccurrenceWithCompletionHandler:(void(^)(GKLeaderboard * _Nullable_result leaderboard, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), watchos(7.0));
 
 /// Class method to submit a single score to multiple leaderboards
 ///   score - earned by the player
@@ -105,7 +105,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 - (void)loadEntriesForPlayerScope:(GKLeaderboardPlayerScope)playerScope
                         timeScope:(GKLeaderboardTimeScope)timeScope
                             range:(NSRange)range
-                completionHandler:(void(^)(GKLeaderboardEntry * _Nullable localPlayerEntry, NSArray<GKLeaderboardEntry *> * _Nullable entries, NSInteger totalPlayerCount, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), watchos(7.0));
+                completionHandler:(void(^)(GKLeaderboardEntry * _Nullable_result localPlayerEntry, NSArray<GKLeaderboardEntry *> * _Nullable entries, NSInteger totalPlayerCount, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), watchos(7.0));
 
 /// Loads leaderboard entries for specific players based on the supplied parameters.
 ///   players - Array of players to load entries for
@@ -115,7 +115,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 ///   entries - requested entries matching supplied parameters
 - (void)loadEntriesForPlayers:(NSArray<GKPlayer *> *)players
                     timeScope:(GKLeaderboardTimeScope)timeScope
-            completionHandler:(void(^)(GKLeaderboardEntry * _Nullable localPlayerEntry, NSArray<GKLeaderboardEntry *> * _Nullable entries, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), watchos(7.0));
+            completionHandler:(void(^)(GKLeaderboardEntry * _Nullable_result localPlayerEntry, NSArray<GKLeaderboardEntry *> * _Nullable entries, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), watchos(7.0));
 
 @end
 
@@ -164,7 +164,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 /// Possible reasons for error:
 /// 1. Communications problem
 /// 2. Unauthenticated player
-- (void)loadScoresWithCompletionHandler:(void(^__nullable)(NSArray<GKScore *> * __nullable scores, NSError * __nullable error))completionHandler API_DEPRECATED("Use loadEntriesForPlayerScope:timeScope:range:completionHandler:.", ios(4.0, 14.0), tvos(9.0, 14.0), macosx(10.8, 11.0), watchos(3.0, 7.0));
+- (void)loadScoresWithCompletionHandler:(void(^__nullable)(NSArray<GKScore *> * __nullable scores, NSError * __nullable error))completionHandler API_DEPRECATED("Use loadEntriesForPlayerScope:timeScope:range:completionHandler:.", ios(4.0, 14.0), tvos(9.0, 14.0), macosx(10.8, 11.0), watchos(3.0, 7.0)) NS_SWIFT_DISABLE_ASYNC;
 
 /// Loads the array of GKLeaderboard for your app
 /// Possible reasons for error:

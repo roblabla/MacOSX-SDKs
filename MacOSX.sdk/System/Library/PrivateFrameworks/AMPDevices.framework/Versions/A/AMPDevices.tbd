@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0E941F75-5189-3EDB-94C0-56816F3ACE4A
+    value:           F717483E-8395-35B7-A1F4-CDBDC15BF740
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6F19712E-2960-3A3C-AE63-DD04B6B384B9
+    value:           5204AE89-97F2-3E60-9694-CBE36CBC5F65
 install-name:    '/System/Library/PrivateFrameworks/AMPDevices.framework/Versions/A/AMPDevices'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -16,7 +16,8 @@ exports:
                        _AMPDeviceAskUserCheckboxValueKey, _AMPDeviceAskUserExplanationKey, 
                        _AMPDeviceAskUserMessageKey, _AMPDeviceAskUserOKButtonTitleKey, 
                        _AMPDeviceAskUserOtherButtonShouldDismissKey, _AMPDeviceAskUserOtherButtonTitleKey, 
-                       _AMPDeviceAskUserOtherButtonURLKey, _AMPDeviceAskUserTimeoutExplanationKey, 
+                       _AMPDeviceAskUserOtherButtonURLKey, _AMPDeviceAskUserTimeoutDismissButtonKey, 
+                       _AMPDeviceAskUserTimeoutExplanationPluralKey, _AMPDeviceAskUserTimeoutExplanationSingularKey, 
                        _AMPDeviceAskUserTimeoutSecondsKey, _AMPDeviceAskUserUUIDKey, 
                        _AMPDeviceAudioCategoryKey, _AMPDeviceBackupBuildVersionKey, 
                        _AMPDeviceBackupContainsAppDataKey, _AMPDeviceBackupDeviceNameKey, 

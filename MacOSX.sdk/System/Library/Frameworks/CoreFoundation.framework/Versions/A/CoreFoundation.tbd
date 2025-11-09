@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           00F47B8F-A02B-37BF-B57F-129CF787F38B
+    value:           7826BEDD-1413-3A53-8B54-B64307D3359E
   - target:          x86_64-maccatalyst
-    value:           00F47B8F-A02B-37BF-B57F-129CF787F38B
+    value:           7826BEDD-1413-3A53-8B54-B64307D3359E
   - target:          x86_64h-macos
-    value:           895AFD1C-0307-32B3-81CB-BA33DA368DE1
+    value:           45249D64-25D3-3E6E-B2F3-425F7CFC11DC
   - target:          x86_64h-maccatalyst
-    value:           895AFD1C-0307-32B3-81CB-BA33DA368DE1
+    value:           45249D64-25D3-3E6E-B2F3-425F7CFC11DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BF802A59-20F4-3AAD-80A2-8F17D95EC542
+    value:           13831554-B53F-3D1F-A50F-72411C14AF8A
   - target:          arm64e-maccatalyst
-    value:           BF802A59-20F4-3AAD-80A2-8F17D95EC542
+    value:           13831554-B53F-3D1F-A50F-72411C14AF8A
 install-name:    '/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation'
-current-version: 1775.118.101
+current-version: 1844
 compatibility-version: 150
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
@@ -33,7 +33,7 @@ exports:
                        '$ld$add$os10.6$_OBJC_IVAR_$_NSObject.isa', '$ld$add$os10.6$_OBJC_METACLASS_$_NSObject', 
                        '$ld$add$os10.7$_OBJC_CLASS_$_NSObject', '$ld$add$os10.7$_OBJC_IVAR_$_NSObject.isa', 
                        '$ld$add$os10.7$_OBJC_METACLASS_$_NSObject' ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CFAbsoluteTimeAddGregorianUnits, _CFAbsoluteTimeGetCurrent, 
                        _CFAbsoluteTimeGetDayOfWeek, _CFAbsoluteTimeGetDayOfYear, 
@@ -565,50 +565,51 @@ exports:
                        __CFAttributedStringGetLength, __CFAttributedStringGetNumberOfRuns, 
                        __CFAttributedStringGetRuns, __CFAttributedStringIsMutable, 
                        __CFAutoreleasePoolAddObject, __CFAutoreleasePoolPop, __CFAutoreleasePoolPrintPools, 
-                       __CFAutoreleasePoolPush, __CFBagFastEnumeration, __CFBagIsMutable, 
-                       __CFBagSetCapacity, __CFBigNumAdd, __CFBigNumCompare, __CFBigNumCopyDescription, 
-                       __CFBigNumFromCString, __CFBigNumGetInt128, __CFBigNumGetInt16, 
-                       __CFBigNumGetInt32, __CFBigNumGetInt64, __CFBigNumGetInt8, 
-                       __CFBigNumGetUInt128, __CFBigNumGetUInt16, __CFBigNumGetUInt32, 
-                       __CFBigNumGetUInt64, __CFBigNumGetUInt8, __CFBigNumInitWithBytes, 
-                       __CFBigNumInitWithCFNumber, __CFBigNumInitWithInt128, __CFBigNumInitWithInt16, 
-                       __CFBigNumInitWithInt32, __CFBigNumInitWithInt64, __CFBigNumInitWithInt8, 
-                       __CFBigNumInitWithUInt128, __CFBigNumInitWithUInt16, __CFBigNumInitWithUInt32, 
-                       __CFBigNumInitWithUInt64, __CFBigNumInitWithUInt8, __CFBigNumNeg, 
-                       __CFBigNumSub, __CFBigNumToCString, __CFBuildVersionForCFSystemVersion, 
+                       __CFAutoreleasePoolPush, __CFBagFastEnumeration, __CFBagGetUniqueCount, 
+                       __CFBagIsMutable, __CFBagSetCapacity, __CFBigNumAdd, __CFBigNumCompare, 
+                       __CFBigNumCopyDescription, __CFBigNumFromCString, __CFBigNumGetInt128, 
+                       __CFBigNumGetInt16, __CFBigNumGetInt32, __CFBigNumGetInt64, 
+                       __CFBigNumGetInt8, __CFBigNumGetUInt128, __CFBigNumGetUInt16, 
+                       __CFBigNumGetUInt32, __CFBigNumGetUInt64, __CFBigNumGetUInt8, 
+                       __CFBigNumInitWithBytes, __CFBigNumInitWithCFNumber, __CFBigNumInitWithInt128, 
+                       __CFBigNumInitWithInt16, __CFBigNumInitWithInt32, __CFBigNumInitWithInt64, 
+                       __CFBigNumInitWithInt8, __CFBigNumInitWithUInt128, __CFBigNumInitWithUInt16, 
+                       __CFBigNumInitWithUInt32, __CFBigNumInitWithUInt64, __CFBigNumInitWithUInt8, 
+                       __CFBigNumNeg, __CFBigNumSub, __CFBigNumToCString, __CFBuildVersionForCFSystemVersion, 
                        __CFBundleAddResourceURL, __CFBundleCloseBundleResourceFork, 
                        __CFBundleCopyAllBundles, __CFBundleCopyAppStoreReceiptURL, 
                        __CFBundleCopyBundleURLForExecutableURL, __CFBundleCopyExecutableURLInDirectory, 
                        __CFBundleCopyFileTypeForFileData, __CFBundleCopyFileTypeForFileURL, 
                        __CFBundleCopyFindResources, __CFBundleCopyFrameworkURLForExecutablePath, 
                        __CFBundleCopyInfoDictionaryForExecutableFileData, __CFBundleCopyInfoDictionaryInResourceFork, 
-                       __CFBundleCopyInfoPlistURL, __CFBundleCopyMainBundleExecutableURL, 
-                       __CFBundleCopyOtherExecutableURLInDirectory, __CFBundleCopyPrivateFrameworksURL, 
-                       __CFBundleCopyResourceForkURL, __CFBundleCopyResourceURLForLanguage, 
-                       __CFBundleCopyResourceURLsOfTypeForLanguage, __CFBundleCopySharedFrameworksURL, 
-                       __CFBundleCopySharedSupportURL, __CFBundleCopyWrappedBundleURL, 
-                       __CFBundleCopyWrapperContainerURL, __CFBundleCreateError, 
-                       __CFBundleCreateFilteredInfoPlist, __CFBundleCreateFilteredLocalizedInfoPlist, 
-                       __CFBundleCreateIfLooksLikeBundle, __CFBundleCreateIfMightBeBundle, 
-                       __CFBundleCreateUnique, __CFBundleCreateWithExecutableURLIfLooksLikeBundle, 
+                       __CFBundleCopyInfoPlistURL, __CFBundleCopyLocalizedStringForLocalizationAndTableURL, 
+                       __CFBundleCopyLocalizedStringForLocalizationTableURLAndMarkdownOption, 
+                       __CFBundleCopyMainBundleExecutableURL, __CFBundleCopyOtherExecutableURLInDirectory, 
+                       __CFBundleCopyPrivateFrameworksURL, __CFBundleCopyResourceForkURL, 
+                       __CFBundleCopyResourceURLForLanguage, __CFBundleCopyResourceURLsOfTypeForLanguage, 
+                       __CFBundleCopySharedFrameworksURL, __CFBundleCopySharedSupportURL, 
+                       __CFBundleCopyWrappedBundleURL, __CFBundleCopyWrapperContainerURL, 
+                       __CFBundleCreateError, __CFBundleCreateFilteredInfoPlist, 
+                       __CFBundleCreateFilteredLocalizedInfoPlist, __CFBundleCreateIfLooksLikeBundle, 
+                       __CFBundleCreateIfMightBeBundle, __CFBundleCreateUnique, __CFBundleCreateWithExecutableURLIfLooksLikeBundle, 
                        __CFBundleCreateWithExecutableURLIfMightBeBundle, __CFBundleDlfcnPreflight, 
                        __CFBundleFlushBundleCaches, __CFBundleFlushCaches, __CFBundleFlushCachesForURL, 
                        __CFBundleFlushLanguageCachesAfterEUIDChange, __CFBundleGetBundleWithIdentifierAndLibraryName, 
-                       __CFBundleGetCFMFunctionPointerForName, __CFBundleGetCFMFunctionPointersForNames, 
-                       __CFBundleGetCurrentPlatform, __CFBundleGetExistingBundleWithBundleURL, 
-                       __CFBundleGetHasChanged, __CFBundleGetLanguageAndRegionCodes, 
-                       __CFBundleGetLocalInfoDictionary, __CFBundleGetMainBundleIfLooksLikeBundle, 
-                       __CFBundleGetPackageInfoInDirectory, __CFBundleGetPreferredExecutableArchitecture, 
-                       __CFBundleGetPreferredExecutableArchitectureForURL, __CFBundleGetStringsFilesShared, 
-                       __CFBundleGetSupportedPlatforms, __CFBundleGetValueForInfoKey, 
-                       __CFBundleLoadExecutableAndReturnError, __CFBundleMainBundleInfoDictionaryComesFromResourceFork, 
-                       __CFBundleOpenBundleResourceFork, __CFBundleRemoveResourceURL, 
-                       __CFBundleSearchForLocalizedString, __CFBundleSetCFMConnectionID, 
-                       __CFBundleSetDefaultLocalization, __CFBundleSetStringsFilesShared, 
-                       __CFBundleSetupXPCBootstrap, __CFBundleSetupXPCBootstrapWithLanguages, 
-                       __CFBundleURLLooksLikeBundle, __CFCalendarGetMidnightNoteCount, 
-                       __CFCalendarGetUnitsFromDateFormat, __CFCalendarResetCurrent, 
-                       __CFCharacterSetCompact, __CFCharacterSetCreateKeyedCodingString, 
+                       __CFBundleGetBundleWithIdentifierWithHint, __CFBundleGetCFMFunctionPointerForName, 
+                       __CFBundleGetCFMFunctionPointersForNames, __CFBundleGetCurrentPlatform, 
+                       __CFBundleGetExistingBundleWithBundleURL, __CFBundleGetHasChanged, 
+                       __CFBundleGetLanguageAndRegionCodes, __CFBundleGetLocalInfoDictionary, 
+                       __CFBundleGetMainBundleIfLooksLikeBundle, __CFBundleGetPackageInfoInDirectory, 
+                       __CFBundleGetPreferredExecutableArchitecture, __CFBundleGetPreferredExecutableArchitectureForURL, 
+                       __CFBundleGetStringsFilesShared, __CFBundleGetSupportedPlatforms, 
+                       __CFBundleGetValueForInfoKey, __CFBundleLoadExecutableAndReturnError, 
+                       __CFBundleMainBundleInfoDictionaryComesFromResourceFork, __CFBundleOpenBundleResourceFork, 
+                       __CFBundleRemoveResourceURL, __CFBundleSearchForLocalizedString, 
+                       __CFBundleSetCFMConnectionID, __CFBundleSetDefaultLocalization, 
+                       __CFBundleSetStringsFilesShared, __CFBundleSetupXPCBootstrap, 
+                       __CFBundleSetupXPCBootstrapWithLanguages, __CFBundleURLLooksLikeBundle, 
+                       __CFCalendarGetMidnightNoteCount, __CFCalendarGetUnitsFromDateFormat, 
+                       __CFCalendarResetCurrent, __CFCharacterSetCompact, __CFCharacterSetCreateKeyedCodingString, 
                        __CFCharacterSetFast, __CFCharacterSetGetKeyedCodingBuiltinType, 
                        __CFCharacterSetGetKeyedCodingRange, __CFCharacterSetGetKeyedCodingType, 
                        __CFCharacterSetIsInverted, __CFCharacterSetIsMutable, __CFCharacterSetSetIsInverted, 
@@ -654,7 +655,8 @@ exports:
                        __CFLogvEx, __CFLogvEx2, __CFLogvEx3, __CFMZEnabled, __CFMachPortCreateWithPort2, 
                        __CFMachPortInstallNotifyPort, __CFMainPThread, __CFMessagePortCreateLocalEx, 
                        __CFNonObjCEqual, __CFNonObjCHash, __CFNonObjCRelease, __CFNonObjCRetain, 
-                       __CFNonObjCStringGetCStringPtr, __CFNumberCreateWithBigNum, 
+                       __CFNonObjCStringGetCStringPtr, __CFNotificationCenterInitializeDependentNotificationIfNecessary, 
+                       __CFNotificationCenterRegisterDependentNotificationList, __CFNumberCreateWithBigNum, 
                        __CFNumberFormatterGetFormatter, __CFNumberGetType2, __CFOperatingSystemVersionGetCurrent, 
                        __CFOperatingSystemVersionIsAtLeastVersion, __CFPlatformExecutableLinkedOnOrAfter, 
                        __CFPrefSetInvalidPropertyListDeletionEnabled, __CFPreferencesAddSuitePreferencesToAppWithContainer, 
@@ -702,7 +704,7 @@ exports:
                        __CFPropertyListCreateXMLDataWithExtras, __CFPropertyListMissingSemicolon, 
                        __CFPropertyListMissingSemicolonOrValue, __CFPropertyListShare, 
                        __CFPropertyListValidateData, __CFRLORightToLeftStringCreate, 
-                       __CFReadStreamClearEvent, __CFReadStreamCreateFromFileDescriptor, 
+                       __CFRSCompatible, __CFReadStreamClearEvent, __CFReadStreamCreateFromFileDescriptor, 
                        __CFReadStreamDeallocate, __CFReadStreamGetClient, __CFReadStreamInitialize, 
                        __CFReadStreamSignalEventDelayed, __CFRegisterThreadSanitizerTag, 
                        __CFRelativeDateTimeFormatterCreate, __CFRelativeDateTimeFormatterCreateStringWithCalendarUnit, 
@@ -723,11 +725,12 @@ exports:
                        __CFStringCheckAndGetCharacterAtIndex, __CFStringCheckAndGetCharacters, 
                        __CFStringCompareForHFS, __CFStringCopyVocativeCaseOfGivenName, 
                        __CFStringCreateByAddingPercentEncodingWithAllowedCharacters, 
-                       __CFStringCreateByRemovingPercentEncoding, __CFStringCreateTaggedPointerString, 
-                       __CFStringCreateWithBytesNoCopy, __CFStringCreateWithFormatAndArgumentsAux, 
-                       __CFStringCreateWithFormatAndArgumentsAux2, __CFStringCreateWithFormatAndArgumentsReturningMetadata, 
-                       __CFStringEncodingSetForceASCIICompatibility, __CFStringGetFileSystemRepresentation, 
-                       __CFStringGetFileSystemRepresentationWithErrorStatus, __CFStringGetInstallationEncodingAndRegion, 
+                       __CFStringCreateByParsingMarkdownAndInflectingIfNeeded, __CFStringCreateByRemovingPercentEncoding, 
+                       __CFStringCreateTaggedPointerString, __CFStringCreateWithBytesNoCopy, 
+                       __CFStringCreateWithFormatAndArgumentsAux, __CFStringCreateWithFormatAndArgumentsAux2, 
+                       __CFStringCreateWithFormatAndArgumentsReturningMetadata, __CFStringEncodingSetForceASCIICompatibility, 
+                       __CFStringGetFileSystemRepresentation, __CFStringGetFileSystemRepresentationWithErrorStatus, 
+                       __CFStringGetFormatSpecifierConfiguration, __CFStringGetInstallationEncodingAndRegion, 
                        __CFStringGetLength2, __CFStringGetUserDefaultEncoding, __CFStringHyphenationCompileHyphenatorData, 
                        __CFStringSaveUserDefaultEncoding, __CFStringTokenizerCopyPossibleStringLanguages, 
                        __CFStringTokenizerCreateNamePartsArrayWithString, __CFStringTokenizerCreateNamePartsArrayWithStringAsCompositeName, 
@@ -786,13 +789,13 @@ exports:
                        __CFURLGetObjectInformationNoIO, __CFURLGetResourcePropertyFlags, 
                        __CFURLGetVolumePropertyFlags, __CFURLIsFileReferenceURL, 
                        __CFURLIsFileURL, __CFURLIsItemPromiseAtURL, __CFURLIsPromiseName, 
-                       __CFURLIsProtectedDirectory, __CFURLPromiseCopyPhysicalURL, 
-                       __CFURLPromiseCopyResourcePropertyForKey, __CFURLPromiseCreateProperties, 
-                       __CFURLPromiseSetPhysicalURL, __CFURLPromiseSetResourcePropertyForKey, 
-                       __CFURLRegisterFilePropertyProvider, __CFURLRegisterFilePropertyWithOptions, 
-                       __CFURLReplaceObject, __CFURLRevocableBookmarksCopyClientBundleIdentifiers, 
-                       __CFURLRevocableBookmarksCopyClients, __CFURLRevocableBookmarksRevokeForBundleIdentifier, 
-                       __CFURLRevocableBookmarksSetActiveStatusForBundleIdentifier, 
+                       __CFURLIsProtectedDirectory, __CFURLNoteSecurityScopedResourceMoved, 
+                       __CFURLPromiseCopyPhysicalURL, __CFURLPromiseCopyResourcePropertyForKey, 
+                       __CFURLPromiseCreateProperties, __CFURLPromiseSetPhysicalURL, 
+                       __CFURLPromiseSetResourcePropertyForKey, __CFURLRegisterFilePropertyProvider, 
+                       __CFURLRegisterFilePropertyWithOptions, __CFURLReplaceObject, 
+                       __CFURLRevocableBookmarksCopyClientBundleIdentifiers, __CFURLRevocableBookmarksCopyClients, 
+                       __CFURLRevocableBookmarksRevokeForBundleIdentifier, __CFURLRevocableBookmarksSetActiveStatusForBundleIdentifier, 
                        __CFURLSetPermanentResourcePropertyForKey, __CFUserNotificationSetWarningThread, 
                        __CFWebServicesCopyProviderInfo, __CFWebServicesSetProviderInfo, 
                        __CFWriteStreamCreateFromFileDescriptor, __CFWriteStreamDeallocate, 
@@ -885,11 +888,11 @@ exports:
                        __kCFURLAccessControlListKey, __kCFURLApplicationArchitecturesKey, 
                        __kCFURLApplicationCategoriesKey, __kCFURLApplicationDeviceManagementPolicyKey, 
                        __kCFURLApplicationHasSupportedFormatKey, __kCFURLApplicationHighResolutionModeIsMagnifiedKey, 
-                       __kCFURLApplicationIsAppletKey, __kCFURLApplicationIsPlaceholderKey, 
-                       __kCFURLApplicationNapIsDisabledKey, __kCFURLApplicationPrefersExternalGPUKey, 
-                       __kCFURLApplicationSupportedRegionsKey, __kCFURLArchitecturesValidOnCurrentSystemKey, 
-                       __kCFURLBookmarkURLStringKey, __kCFURLBundleIdentifierKey, 
-                       __kCFURLCanSetApplicationHighResolutionModeIsMagnifiedKey, 
+                       __kCFURLApplicationIsAppletKey, __kCFURLApplicationIsBetaKey, 
+                       __kCFURLApplicationIsPlaceholderKey, __kCFURLApplicationNapIsDisabledKey, 
+                       __kCFURLApplicationPrefersExternalGPUKey, __kCFURLApplicationSupportedRegionsKey, 
+                       __kCFURLArchitecturesValidOnCurrentSystemKey, __kCFURLBookmarkURLStringKey, 
+                       __kCFURLBundleIdentifierKey, __kCFURLCanSetApplicationHighResolutionModeIsMagnifiedKey, 
                        __kCFURLCanSetApplicationNapIsDisabledKey, __kCFURLCanSetApplicationPrefersExternalGPUKey, 
                        __kCFURLCanSetHiddenExtensionKey, __kCFURLCanSetStrongBindingKey, 
                        __kCFURLCloudDocsPlaceholderDictionaryKey, __kCFURLCloudDocsPlaceholderLogicalNameKey, 
@@ -901,10 +904,11 @@ exports:
                        __kCFURLFileFlagsKey, __kCFURLFileIDKey, __kCFURLFilePathKey, 
                        __kCFURLFileSecurityKey, __kCFURLFileSizeOfResourceForkKey, 
                        __kCFURLFinderInfoKey, __kCFURLGenerationCountKey, __kCFURLGroupIDKey, 
-                       __kCFURLInodeNumberKey, __kCFURLIsApplicationKey, __kCFURLIsCompressedKey, 
-                       __kCFURLIsExcludedFromCloudBackupKey, __kCFURLIsExcludedFromUnencryptedBackupKey, 
-                       __kCFURLIsExecutableKey, __kCFURLIsReadableKey, __kCFURLIsRestrictedKey, 
-                       __kCFURLIsSystemAppendKey, __kCFURLIsSystemArchivedKey, __kCFURLIsSystemDatalessFaultKey, 
+                       __kCFURLHFSTypeCodeKey, __kCFURLInodeNumberKey, __kCFURLIsApplicationKey, 
+                       __kCFURLIsCompressedKey, __kCFURLIsExcludedFromCloudBackupKey, 
+                       __kCFURLIsExcludedFromUnencryptedBackupKey, __kCFURLIsExecutableKey, 
+                       __kCFURLIsReadableKey, __kCFURLIsRestrictedKey, __kCFURLIsSystemAppendKey, 
+                       __kCFURLIsSystemArchivedKey, __kCFURLIsSystemDatalessFaultKey, 
                        __kCFURLIsSystemFirmlinkKey, __kCFURLIsSystemNoUnlinkKey, 
                        __kCFURLIsUserAppendKey, __kCFURLIsUserDataVaultKey, __kCFURLIsUserNoDumpKey, 
                        __kCFURLIsUserOpaqueKey, __kCFURLIsUserTrackedKey, __kCFURLIsWriteableKey, 
@@ -1092,9 +1096,10 @@ exports:
                        _kCFStreamSocketSecurityLevelNone, _kCFStreamSocketSecurityLevelSSLv2, 
                        _kCFStreamSocketSecurityLevelSSLv3, _kCFStreamSocketSecurityLevelTLSv1, 
                        _kCFStringAffixRuleType, _kCFStringBinaryHeapCallBacks, _kCFStringDeviceSpecificRuleType, 
-                       _kCFStringEntityFormattingRuleType, _kCFStringFormatClassInfoKey, 
-                       _kCFStringFormatClassTypeKey, _kCFStringFormatContainsAttributedMarkupKey, 
-                       _kCFStringFormatDefaultValueKey, _kCFStringFormatFamilyInfoKey, 
+                       _kCFStringDirectRuleType, _kCFStringEntityFormattingRuleType, 
+                       _kCFStringFormatClassInfoKey, _kCFStringFormatClassTypeKey, 
+                       _kCFStringFormatContainsAttributedMarkupKey, _kCFStringFormatDefaultValueKey, 
+                       _kCFStringFormatFamilyInfoKey, _kCFStringFormatIsMarkdownKey, 
                        _kCFStringFormatLocaleInfoKey, _kCFStringFormatLocaleKey, 
                        _kCFStringFormatLocalizationKey, _kCFStringFormatRuleInfoKey, 
                        _kCFStringFormatSpecTypeKey, _kCFStringFormatValueTypeKey, 
@@ -1213,15 +1218,13 @@ exports:
     objc-ivars:      [ NSConstantArray._count, NSConstantArray._objects, NSConstantData._bytes, 
                        NSConstantData._length, NSConstantDate._ti, NSConstantDictionary._count, 
                        NSConstantDictionary._keys, NSConstantDictionary._objects, 
-                       NSConstantDictionary._options, NSRunLoop._dperf, NSRunLoop._info, 
-                       NSRunLoop._perft, NSRunLoop._ports, NSRunLoop._reserved, NSRunLoop._rl, 
-                       NSURL._baseURL, NSURL._clients, NSURL._reserved, NSURL._urlString, 
-                       NSUserDefaults._container_, NSUserDefaults._identifier_, NSUserDefaults._kvo_, 
-                       NSUserDefaults._reserved, _NSAutoCalendar._lock, _NSAutoCalendar.cal, 
-                       _NSAutoCalendar.changedFirstWeekday, _NSAutoCalendar.changedGregorianStartDate, 
-                       _NSAutoCalendar.changedLocale, _NSAutoCalendar.changedMinimumDaysinFirstWeek, 
-                       _NSAutoCalendar.changedTimeZone, _NSAutoCalendar.combinedNoteCount ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, arm64-macos ]
+                       NSConstantDictionary._options, NSURL._baseURL, NSURL._clients, 
+                       NSURL._reserved, NSURL._urlString, _NSAutoCalendar._lock, 
+                       _NSAutoCalendar.cal, _NSAutoCalendar.changedFirstWeekday, 
+                       _NSAutoCalendar.changedGregorianStartDate, _NSAutoCalendar.changedLocale, 
+                       _NSAutoCalendar.changedMinimumDaysinFirstWeek, _NSAutoCalendar.changedTimeZone, 
+                       _NSAutoCalendar.combinedNoteCount ]
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, arm64-macos ]
     symbols:         [ _CFMachPortBoostGetTypeID, _CFXMLCreateStringByEscapingEntities, 
                        _CFXMLCreateStringByUnescapingEntities, _CFXMLNodeCreate, 
                        _CFXMLNodeCreateCopy, _CFXMLNodeGetInfoPtr, _CFXMLNodeGetString, 
@@ -1255,6 +1258,6 @@ exports:
                        _kCFServiceControllerUserDataKey, _kCFXMLTreeErrorDescription, 
                        _kCFXMLTreeErrorLineNumber, _kCFXMLTreeErrorLocation, _kCFXMLTreeErrorStatusCode ]
     objc-ivars:      [ NSMessageBuilder._addr, NSMessageBuilder._target ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ ___CFObjCIsCollectable ]
 ...

@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class UIBackgroundConfiguration;
 @protocol UIContentConfiguration;
 @class UIListContentConfiguration;
+@class UITableViewCell;
 
 typedef NS_ENUM(NSInteger, UITableViewCellStyle) {
     UITableViewCellStyleDefault,	// Simple cell with text label and optional image view (behavior of UITableViewCell in iPhoneOS 2.x)
@@ -31,7 +32,7 @@ typedef NS_ENUM(NSInteger, UITableViewCellStyle) {
 typedef NS_ENUM(NSInteger, UITableViewCellSeparatorStyle) {
     UITableViewCellSeparatorStyleNone,
     UITableViewCellSeparatorStyleSingleLine,
-    UITableViewCellSeparatorStyleSingleLineEtched NS_ENUM_DEPRECATED_IOS(2_0, 11_0, "Use UITableViewCellSeparatorStyleSingleLine for a single line separator.")
+    UITableViewCellSeparatorStyleSingleLineEtched API_DEPRECATED("Use UITableViewCellSeparatorStyleSingleLine for a single line separator.", ios(2.0, 11.0))
 } API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {
@@ -74,7 +75,10 @@ typedef NS_ENUM(NSInteger, UITableViewCellDragState) {
 
 #define UITableViewCellStateEditingMask UITableViewCellStateShowingEditControlMask
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableViewCell : UIView <NSCoding, UIGestureRecognizerDelegate>
+typedef void (^UITableViewCellConfigurationUpdateHandler)(__kindof UITableViewCell *cell, UICellConfigurationState *state) API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UITableViewCell : UIView <NSCoding, UIGestureRecognizerDelegate>
 
 // Designated initializer.  If the cell can be reused, you must pass in a reuse identifier.  You should use the same reuse identifier for all cells of the same form.  
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier API_AVAILABLE(ios(3.0)) NS_DESIGNATED_INITIALIZER;
@@ -93,6 +97,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableViewCell : UIView <NSCodi
 /// Subclasses should override this method and update the cell's configuration using the state provided.
 /// This method should not be called directly, use `setNeedsUpdateConfiguration` to request an update.
 - (void)updateConfigurationUsingState:(UICellConfigurationState *)state API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+/// Optional block-based alternative to overriding `-updateConfigurationUsingState:` in a subclass. This handler
+/// is called after `-updateConfigurationUsingState:`. Setting a new handler triggers `setNeedsUpdateConfiguration`.
+@property (nonatomic, copy, nullable) UITableViewCellConfigurationUpdateHandler configurationUpdateHandler API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
 
 /// Returns a default list content configuration for the cell's style.
 - (UIListContentConfiguration *)defaultContentConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));

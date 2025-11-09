@@ -886,7 +886,7 @@
  *	feature tests from Configure are generally more reliable.
  */
 #define OSNAME "darwin"		/**/
-#define OSVERS "20.0"		/**/
+#define OSVERS "21.0"		/**/
 
 /* USE_CROSS_COMPILE:
  *	This symbol, if defined, indicates that Perl is being cross-compiled.

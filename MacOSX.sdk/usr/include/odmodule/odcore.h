@@ -98,11 +98,11 @@ OS_EXPORT OS_NOTHROW
 void
 od_retain(od_object_t object);
 
-#if OS_OBJECT_USE_OBJC_RETAIN_RELEASE
+#if OD_OBJECT_USE_OS_OBJECT && OS_OBJECT_USE_OBJC_RETAIN_RELEASE
 #undef od_retain
 #define od_retain(object) ({ od_object_t _o = (object); \
 _od_object_validate(_o); (void)[_o retain]; })
-#endif // OS_OBJECT_USE_OBJC_RETAIN_RELEASE
+#endif
 
 /*!
     @function   od_release
@@ -111,11 +111,11 @@ _od_object_validate(_o); (void)[_o retain]; })
 OS_EXPORT OS_NOTHROW
 void
 od_release(od_object_t object);
-#if OS_OBJECT_USE_OBJC_RETAIN_RELEASE
+#if OD_OBJECT_USE_OS_OBJECT && OS_OBJECT_USE_OBJC_RETAIN_RELEASE
 #undef od_release
 #define od_release(object) ({ od_object_t _o = (object); \
 _od_object_validate(_o); [_o release]; })
-#endif // OS_OBJECT_USE_OBJC_RETAIN_RELEASE
+#endif
 
 #pragma mark -
 #pragma mark od_context_t

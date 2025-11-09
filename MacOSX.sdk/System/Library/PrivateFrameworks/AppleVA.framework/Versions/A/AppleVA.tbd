@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8A2F6F2F-DAF5-3458-BBFB-C359A68870B9
+    value:           B52AD05F-4257-3D51-9F71-545D1A43CF38
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6E129B2D-9A08-36A8-98B2-9CC7738FF16D
+    value:           6C6C3B99-EE1D-3A86-9FD2-89C9FE8682E6
 install-name:    '/System/Library/PrivateFrameworks/AppleVA.framework/Versions/A/AppleVA'
 current-version: 5.1.1
 exports:

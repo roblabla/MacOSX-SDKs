@@ -37,7 +37,7 @@ typedef struct hv_vcpu_config_s *hv_vcpu_config_t;
 typedef uint64_t hv_vcpu_t;
 
 /*!
- * @enum hv_exit_reason_t
+ * @enum     hv_exit_reason_t
  * @abstract Events that can trigger a guest exit to the VMM
  */
 OS_ENUM(hv_exit_reason, uint32_t,
@@ -101,6 +101,7 @@ typedef struct {
 typedef __attribute__((ext_vector_type(16))) uint8_t hv_simd_fp_uchar16_t;
 
 /*!
+ @enum       hv_reg_t
  @abstract   Type of an ARM register.
  @discussion
              Represents the X0-X30 GPRs, the Program Counter (PC), the Floating-point Control
@@ -147,6 +148,7 @@ OS_ENUM(hv_reg, uint32_t,
 );
 
 /*!
+ @enum        hv_simd_fp_reg_t
  @abstract    Type of an ARM SIMD&FP register.
  */
 OS_ENUM(hv_simd_fp_reg, uint32_t,
@@ -185,6 +187,7 @@ OS_ENUM(hv_simd_fp_reg, uint32_t,
 );
 
 /*!
+ @enum        hv_sys_reg_t
  @abstract    Type of an ARM system register.
 */
 OS_ENUM(hv_sys_reg, uint16_t,
@@ -303,6 +306,7 @@ OS_ENUM(hv_sys_reg, uint16_t,
 );
 
 /*!
+ @enum        hv_interrupt_type_t
  @abstract    Injected interrupt type.
  @discussion  Passed to hv_vcpu_get_interrupt_level and hv_vcpu_set_interrupt_level to get
               and set virtual interrupt levels.
@@ -316,6 +320,7 @@ OS_ENUM(hv_interrupt_type, uint32_t,
 );
 
 /*!
+ @enum        hv_cache_type_t
  @abstract    Cache type.
 */
 OS_ENUM(hv_cache_type, uint32_t,

@@ -35,6 +35,6 @@ typedef NS_ENUM(NSInteger, INBillType) {
     INBillTypeTuition,
     INBillTypeUtilities,
     INBillTypeWater,
-} API_AVAILABLE(ios(10.3), watchos(3.2)) API_UNAVAILABLE(macos, tvos);
+} API_DEPRECATED("INBillType is deprecated. There is no replacement.", ios(10.3, 15.0), watchos(3.2, 8.0)) API_UNAVAILABLE(macos, tvos);
 
 #endif // INBillType_h

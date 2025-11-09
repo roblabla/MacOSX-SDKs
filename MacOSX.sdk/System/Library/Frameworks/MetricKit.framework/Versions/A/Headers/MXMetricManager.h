@@ -22,20 +22,20 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion    Metrics are not guaranteed to be delivered, but can be expected atleast once per day when conditions permit.
  @discussion    Subscribers to the metric manager can remove themselves using removeSubscriber:subscriber if they no longer wish to receive metrics.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(13.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
 @interface MXMetricManager : NSObject
 
 /*!
  @property      pastPayloads
  @abstract      A list of past metric payloads received.
  */
-@property (readonly, nonnull, strong) NSArray<MXMetricPayload *> *pastPayloads;
+@property (readonly, nonnull, strong) NSArray<MXMetricPayload *> *pastPayloads API_UNAVAILABLE(macos);
 
 /*!
  @property      pastDiagnosticPayloads
  @abstract      A list of past diagnostic payloads received.
  */
-@property (readonly, nonnull, strong) NSArray<MXDiagnosticPayload *> *pastDiagnosticPayloads API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos);
+@property (readonly, nonnull, strong) NSArray<MXDiagnosticPayload *> *pastDiagnosticPayloads API_AVAILABLE(ios(14.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @property      sharedManager
@@ -76,10 +76,10 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  @discussion    In order to receive metric payloads, atleast one object must conform to this protocol and be subscribed   to the metric manager.
  @discussion    Objects which conform to this protocol can be passed to addSubscriber:subscriber and removeSubscriber:subscriber to manage their subscription state.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(13.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
 @protocol MXMetricManagerSubscriber <NSObject>
 
-@required
+@optional
 
 /*!
  @method        didReceiveMetricPayloads:payloads
@@ -91,9 +91,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  @discussion    Atleast one subscriber must be available to receive metrics.
  @discussion    This method is invoked on a background queue.
  */
-- (void)didReceiveMetricPayloads:(NSArray<MXMetricPayload *> * _Nonnull)payloads;
-
-@optional
+- (void)didReceiveMetricPayloads:(NSArray<MXMetricPayload *> * _Nonnull)payloads API_UNAVAILABLE(macos);
 
 /*!
  @method        didReceiveDiagnosticPayloads:payloads
@@ -105,7 +103,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  @discussion    Atleast one subscriber must be available to receive diagnostics.
  @discussion    This method is invoked on a background queue.
  */
-- (void)didReceiveDiagnosticPayloads:(NSArray<MXDiagnosticPayload *> * _Nonnull)payloads API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos);
+- (void)didReceiveDiagnosticPayloads:(NSArray<MXDiagnosticPayload *> * _Nonnull)payloads API_AVAILABLE(ios(14.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 

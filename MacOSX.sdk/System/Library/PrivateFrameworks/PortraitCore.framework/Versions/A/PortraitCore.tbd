@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           4DEFF6B9-2108-3C10-8364-5EEAE8CFC40D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           939B1E04-237E-31FD-A4D6-F673A8B294FE
+install-name:    '/System/Library/PrivateFrameworks/PortraitCore.framework/Versions/A/PortraitCore'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _PortraitCoreVersionNumber, _PortraitCoreVersionString ]
+...

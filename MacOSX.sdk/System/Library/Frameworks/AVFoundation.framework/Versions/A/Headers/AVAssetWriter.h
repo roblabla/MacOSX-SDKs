@@ -362,7 +362,7 @@ AV_INIT_UNAVAILABLE
 	
 	This method should not be called concurrently with -[AVAssetWriterInput appendSampleBuffer:] or -[AVAssetWriterInputPixelBufferAdaptor appendPixelBuffer:withPresentationTime:].
 */
-- (BOOL)finishWriting API_DEPRECATED("No longer supported", macos(10.7, 10.9), ios(4.1, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+- (BOOL)finishWriting API_DEPRECATED_WITH_REPLACEMENT("finishWritingWithCompletionHandler:", macos(10.7, 10.9), ios(4.1, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method finishWritingWithCompletionHandler:

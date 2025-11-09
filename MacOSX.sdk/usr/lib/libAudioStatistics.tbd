@@ -3,16 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A1439C1D-8014-3911-825B-40685FDCDEE9
+    value:           93D62B0A-F5BC-3734-92E1-F0D8F3109F0E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B281B955-06EC-3BF5-8BBE-8570EFCB41B1
+    value:           EFAD008D-7CC8-3F5B-B699-F944035BA353
 install-name:    '/usr/lib/libAudioStatistics.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CAReporterProxyKeyReporterID, _CAReporterProxyKeyServiceType, 
-                       _CAReportingApplicationName, _CAReportingAriadnePlistFilePath, 
+                       _CAReportingApplicationName, _CAReportingAriadneOutputFileDirectory, 
+                       _CAReportingAriadneOutputFileName, _CAReportingAriadnePlistFilePath, 
                        _CAReportingClientCopyConfiguration, _CAReportingClientCreateReporterID, 
                        _CAReportingClientCreateReporterIDFromSessionID, _CAReportingClientCreateTestReporterID, 
                        _CAReportingClientDestroyReporterID, _CAReportingClientGetAudioServiceType, 
@@ -22,7 +23,7 @@ exports:
                        _CAReportingClientStopReporter, _CAReportingDelayPerfEndSnapShot, 
                        _CAReportingInternalEventEpochTime, _CAReportingInternalEventProcessUptimeMS, 
                        _CAReportingInternalEventSystemUptimeSec, _CAReportingLogsDirectory, 
-                       _CAReportingPerfProcesses, _CAReportingPerfProjectName, _CAReportingRTCReportingTimeOut, 
+                       _CAReportingPerfProcesses, _CAReportingPerfProjectName, _CAReportingQueueName, 
                        _CAReportingServiceNameAlarms, _CAReportingServiceNameAlerts, 
                        _CAReportingServiceNameAudioDeviceUsage, _CAReportingServiceNameGeneric, 
                        _CAReportingServiceNameHaptics, _CAReportingServiceNameLongFormAudio, 
@@ -32,8 +33,9 @@ exports:
                        _CAReportingServiceNameUnknown, _CAReportingSessionBlacklistFieldsKey, 
                        _CAReportingSessionThrottleSecondsKey, _CAReportingTestName, 
                        _CAReportingTraceType, _CAReportingTraceTypeArtrace, _CAReportingTraceTypeKtrace, 
-                       _CAReportingUtilityAllowSessionTransactions, _CAReportingUtilityExtractSessionIDFromReporterID, 
-                       _CAReportingUtilityGenerateServiceNameFromServiceType, _CAReportingUtilityGenerateServiceTypeFromServiceName, 
+                       _CAReportingTracingLogsDirectory, _CAReportingUtilityAddDates, 
+                       _CAReportingUtilityExtractSessionIDFromReporterID, _CAReportingUtilityGenerateServiceNameFromServiceType, 
+                       _CAReportingUtilityGenerateServiceTypeFromServiceName, _CAReportingUtilityGetReportingServerQueue, 
                        _CAReportingUtilityIsInternalBuild, _CAReportingUtilityShouldSendMessage, 
                        _CAReportingVersionNumber, _CreateSharedCAReportingClient ]
     objc-classes:    [ CAReporter, CATestReporter ]

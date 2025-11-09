@@ -150,6 +150,25 @@ API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 */
 @property (readonly) BOOL hasHardwareVoiceCallProcessing API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0)) API_UNAVAILABLE(macos);
 
+/*!
+    @brief This property's value will be true if the port supports spatial audio playback and the feature is
+    enabled.
+     
+    'Now Playing' apps should also inform the system if they support multichannel audio content using
+    -setSupportsMultichannelContent:error: method. Apps may also register to receive the
+    AVAudioSessionSpatialPlaybackCapabilitiesChanged notification to detect changes in user preferences that
+    affect spatial audio playback.
+   
+    This property is only relevant in the context of ports that have a small number of hardware channels
+    (typically 2), but have enhanced capabilities for rendering multi-channel content. Note that some port
+    types such as USB and HDMI may support multi-channel playback because they have hardware formats supporting
+    more than 2 channels. For example, many HDMI receivers are connected to multiple speakers and are capable of
+    rendering 5.1, 7.1, or other popular surround sound formats. Applications interested in utilizing multi-channel
+    formats should also query AVAudioSession's maximumOutputNumberOfChannels property and make use of
+    -setPreferredOutputNumberOfChannels:error: to set the preferred number of hardware channels.
+*/
+@property (readonly, getter=isSpatialAudioEnabled) BOOL spatialAudioEnabled API_AVAILABLE(ios(15.0), watchos(8.0), tvos(15.0)) API_UNAVAILABLE(macos);
+
 @property (readonly, nonatomic, nullable) NSArray<AVAudioSessionChannelDescription *> *channels API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 /// Will be nil if there are no selectable data sources.

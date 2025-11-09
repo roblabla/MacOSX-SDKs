@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2019 Apple Inc. All rights reserved.
+	Copyright 2010-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -14,6 +14,7 @@
 #import <AVFoundation/AVContentKeySession.h>
 #import <AVFoundation/AVMediaFormat.h>
 #import <AVFoundation/AVMetadataFormat.h>
+#import <AVFoundation/AVAssetVariant.h>
 
 #import <CoreGraphics/CGAffineTransform.h>
 
@@ -37,7 +38,7 @@
 					
 	Because of the nature of timed audiovisual media, upon successful initialization of an AVAsset some or all of the values for its keys may not be immediately available. The value of any key can be requested at any time, and AVAsset will always return its value synchronously, although it may have to block the calling thread in order to do so.
 
-	In order to avoid blocking, clients can register their interest in particular keys and to become notified when their values become available. For further details, see AVAsynchronousKeyValueLoading.h.
+	In order to avoid blocking, clients can register their interest in particular keys and to become notified when their values become available. For further details, see AVAsynchronousKeyValueLoading.h. For clients who want to examine a subset of the tracks, metadata, and other parts of the asset, asynchronous methods like -loadTracksWithMediaType:completionHandler: can be used to load this information without blocking. When using these asynchronous methods, it is not necessary to load the associated property beforehand. Swift clients can also use the load(:) method to load properties in a type safe manner.
 
 	On iOS, it is particularly important to avoid blocking.  To preserve responsiveness, a synchronous request that blocks for too long (eg, a property request on an asset on a slow HTTP server) may lead to media services being reset.
 
@@ -92,7 +93,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 
 /*	The following property is deprecated. Instead, use the naturalSize and preferredTransform, as appropriate, of the receiver's video tracks. See -tracksWithMediaType: below.
 */
-@property (nonatomic, readonly) CGSize naturalSize API_DEPRECATED("No longer supported", macos(10.7, 10.8), ios(4.0, 5.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) CGSize naturalSize API_DEPRECATED("Use the naturalSize and preferredTransform, as appropriate, of the receiver's video tracks. See -tracksWithMediaType:", macos(10.7, 10.8), ios(4.0, 5.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property	preferredDisplayCriteria
@@ -188,6 +189,16 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 - (nullable AVAssetTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
 
 /*!
+  @method		loadTrackWithTrackID:completionHandler:
+  @abstract		Loads an instance of AVAssetTrack that represents the track of the specified trackID.
+  @param		trackID
+				The trackID of the requested AVAssetTrack.
+  @param		completionHandler
+				A block that is called when the loading is finished, with either the loaded track (which may be nil if no track of the specified trackID is available) or an error.
+*/
+- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^)(AVAssetTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
   @method		tracksWithMediaType:
   @abstract		Provides an array of AVAssetTracks of the asset that present media of the specified media type.
   @param		mediaType
@@ -198,6 +209,16 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 - (NSArray<AVAssetTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
 
 /*!
+  @method		loadTracksWithMediaType:completionHandler:
+  @abstract		Loads an array of AVAssetTracks of the asset that present media of the specified media type.
+  @param		mediaType
+				The media type according to which AVAsset filters its AVAssetTracks. (Media types are defined in AVMediaFormat.h.)
+  @param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks of the specified media type are available) or an error.
+*/
+- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^)(NSArray<AVAssetTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
   @method		tracksWithMediaCharacteristic:
   @abstract		Provides an array of AVAssetTracks of the asset that present media with the specified characteristic.
   @param		mediaCharacteristic
@@ -206,6 +227,16 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
 - (NSArray<AVAssetTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
+
+/*!
+  @method		loadTracksWithMediaCharacteristic:completionHandler:
+  @abstract		Loads an array of AVAssetTracks of the asset that present media with the specified characteristic.
+  @param		mediaCharacteristic
+				The media characteristic according to which AVAsset filters its AVAssetTracks. (Media characteristics are defined in AVMediaFormat.h.)
+  @param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks with the specified characteristic are available) or an error.
+*/
+- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^)(NSArray<AVAssetTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  @property trackGroups
@@ -254,6 +285,16 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 */
 - (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format;
 
+/*!
+  @method		loadMetadataForFormat:completionHandler:
+  @abstract		Loads an NSArray of AVMetadataItems, one for each metadata item in the container of the specified format; can subsequently be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:], according to locale via +[AVMetadataItem metadataItemsFromArray:withLocale:], or according to key via +[AVMetadataItem metadataItemsFromArray:withKey:keySpace:].
+  @param		format
+				The metadata format for which items are requested.
+  @param		completionHandler
+				A block that is invoked when loading is complete, vending the array of metadata items (which may be empty if there is no metadata of the specified format) or an error.
+*/
+- (void)loadMetadataForFormat:(AVMetadataFormat)format completionHandler:(void (^)(NSArray<AVMetadataItem *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
 @end
 
 
@@ -266,7 +307,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 @property (readonly) NSArray<NSLocale *> *availableChapterLocales API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
 
 /*!
-  @method		chapterMetadataGroupsWithTitleLocale:containingMetadataItemsWithCommonKeys:
+  @method		chapterMetadataGroupsWithTitleLocale:containingItemsWithCommonKeys:
   @abstract		Provides an array of chapters.
   @param		locale
 				Locale of the metadata items carrying chapter titles to be returned (supports the IETF BCP 47 specification).
@@ -282,6 +323,25 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 	Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:].
 */
 - (NSArray<AVTimedMetadataGroup *> *)chapterMetadataGroupsWithTitleLocale:(NSLocale *)locale containingItemsWithCommonKeys:(nullable NSArray<AVMetadataKey> *)commonKeys API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
+
+/*!
+  @method		loadChapterMetadataGroupsWithTitleLocale:containingItemsWithCommonKeys:completionHandler:
+  @abstract		Loads an array of chapters.
+  @param		locale
+				Locale of the metadata items carrying chapter titles to be returned (supports the IETF BCP 47 specification).
+  @param		commonKeys
+				Array of common keys of AVMetadataItem to be included; if no common keys are required, send an empty list.
+				AVMetadataCommonKeyArtwork is the only supported key for now.
+  @param		completionHandler
+				A block that is invoked when loading is complete, vending the array of timed metadata groups or an error.
+  @discussion
+	This method vends an array of AVTimedMetadataGroup objects. Each object in the array always contains an AVMetadataItem representing the chapter title; the timeRange property of the AVTimedMetadataGroup object is equal to the time range of the chapter title item.
+
+	An AVMetadataItem with the specified common key will be added to an existing AVTimedMetadataGroup object if the time range (timestamp and duration) of the metadata item and the metadata group overlaps. The locale of items not carrying chapter titles need not match the specified locale parameter.
+ 
+	Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:].
+*/
+- (void)loadChapterMetadataGroupsWithTitleLocale:(NSLocale *)locale containingItemsWithCommonKeys:(NSArray<AVMetadataKey> *)commonKeys completionHandler:(void (^)(NSArray<AVTimedMetadataGroup *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  @method		chapterMetadataGroupsBestMatchingPreferredLanguages:
@@ -301,6 +361,21 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 */
 - (NSArray<AVTimedMetadataGroup *> *)chapterMetadataGroupsBestMatchingPreferredLanguages:(NSArray<NSString *> *)preferredLanguages API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
+/*!
+ @method		loadChapterMetadataGroupsBestMatchingPreferredLanguages:completionHandler:
+ @abstract		Tests, in order of preference, for a match between language identifiers in the specified array of preferred languages and the available chapter locales, and loads the array of chapters corresponding to the first match that's found.
+ @param			preferredLanguages
+ An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. Use +[NSLocale preferredLanguages] to obtain the user's list of preferred languages.
+ @param			completionHandler
+ A block that is invoked when loading is complete, vending the array of timed metadata groups or an error.
+ @discussion
+ Returns an array of AVTimedMetadataGroup objects. Each object in the array always contains an AVMetadataItem representing the chapter title; the timeRange property of the AVTimedMetadataGroup object is equal to the time range of the chapter title item.
+ 
+ All of the available chapter metadata is included in the metadata groups, including items with the common key AVMetadataCommonKeyArtwork, if such items are present. Items not carrying chapter titles will be added to an existing AVTimedMetadataGroup object if the time range (timestamp and duration) of the metadata item and that of the metadata group overlaps. The locale of such items need not match the locale of the chapter titles.
+ 
+ Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:].
+*/
+- (void)loadChapterMetadataGroupsBestMatchingPreferredLanguages:(NSArray<NSString *> *)preferredLanguages completionHandler:(void (^)(NSArray<AVTimedMetadataGroup *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 
@@ -332,6 +407,23 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 */
 - (nullable AVMediaSelectionGroup *)mediaSelectionGroupForMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
+/*!
+  @method		loadMediaSelectionGroupForMediaCharacteristic:completionHandler:
+  @abstract		Loads an instance of AVMediaSelectionGroup that contains one or more options with the specified media characteristic.
+  @param		mediaCharacteristic
+	A media characteristic for which you wish to obtain the available media selection options. AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, and AVMediaCharacteristicVisual are currently supported.
+
+	Pass AVMediaCharacteristicAudible to obtain the group of available options for audio media in various languages and for various purposes, such as descriptive audio.
+	Pass AVMediaCharacteristicLegible to obtain the group of available options for subtitles in various languages and for various purposes.
+	Pass AVMediaCharacteristicVisual to obtain the group of available options for video media.
+  @param		completionHandler
+	A block that is invoked when loading is complete, vending an instance of AVMediaSelectionGroup (which may be nil) or an error.
+  @discussion
+	If the asset has no AVMediaSelectionGroup containing options with the specified media characteristic, the return value will be nil.
+	
+	Filtering of the options in the returned AVMediaSelectionGroup according to playability, locale, and additional media characteristics can be accomplished using the category AVMediaSelectionOptionFiltering defined on AVMediaSelectionGroup.
+*/
+- (void)loadMediaSelectionGroupForMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^)(AVMediaSelectionGroup * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 /*!
   @property		preferredMediaSelection
   @abstract		Provides an instance of AVMediaSelection with default selections for each of the receiver's media selection groups.
@@ -466,7 +558,7 @@ AVF_EXPORT NSString *const AVURLAssetReferenceRestrictionsKey API_AVAILABLE(maco
  */
 AVF_EXPORT NSString *const AVURLAssetHTTPCookiesKey API_AVAILABLE(macos(10.15), ios(8.0), tvos(9.0), watchos(1.0));
 
-/*
+/*!
  @constant		AVURLAssetAllowsCellularAccessKey
  @abstract		Indicates whether network requests on behalf of this asset are allowed to use the cellular interface.
  @discussion
@@ -474,7 +566,7 @@ AVF_EXPORT NSString *const AVURLAssetHTTPCookiesKey API_AVAILABLE(macos(10.15), 
 */
 AVF_EXPORT NSString *const AVURLAssetAllowsCellularAccessKey API_AVAILABLE(macos(10.15), ios(10.0), tvos(10.0), watchos(3.0));
 
-/*
+/*!
  @constant		AVURLAssetAllowsExpensiveNetworkAccessKey
  @abstract		Indicates whether network requests on behalf of this asset are allowed to use the expensive interface (e.g. cellular, tethered, constrained).
  @discussion
@@ -482,13 +574,37 @@ AVF_EXPORT NSString *const AVURLAssetAllowsCellularAccessKey API_AVAILABLE(macos
  */
 AVF_EXPORT NSString *const AVURLAssetAllowsExpensiveNetworkAccessKey API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
-/*
+/*!
  @constant		AVURLAssetAllowsConstrainedNetworkAccessKey
  @abstract		Indicates whether network requests on behalf of this asset are allowed to use the constrained interface (e.g. interfaces marked as being in data saver mode).
  @discussion
  	Default is YES.
  */
 AVF_EXPORT NSString *const AVURLAssetAllowsConstrainedNetworkAccessKey API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @constant		AVURLAssetShouldSupportAliasDataReferencesKey
+ @abstract		Indicates whether alias data references in the asset should be parsed and resolved.
+ @discussion
+ 	Default is NO. Although the majority of QuickTime movie files contain all of the media data they require, some contain references to media stored in other files. While AVFoundation and CoreMedia typically employ a URL reference for this purpose, older implementations such as QuickTime 7 have commonly employed a Macintosh alias instead, as documented in the QuickTime File Format specification. If your application must work with legacy QuickTime movie files containing alias-based references to media data stored in other files, the use of this AVURLAsset initialization option is appropriate.
+ 
+	If you provide a value for AVURLAssetReferenceRestrictionsKey, restrictions will be observed for resolved alias references just as they are for URL references.
+ 
+	For more details about alias resolution, consult documentation of the bookmark-related interfaces of NSURL.
+ */
+AVF_EXPORT NSString *const AVURLAssetShouldSupportAliasDataReferencesKey API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+
+/*!
+  @constant		AVURLAssetURLRequestAttributionKey
+  @abstract
+	Specifies the attribution of the URLs requested by this asset.
+  @discussion
+	Value is an NSNumber whose value is an NSURLRequestAttribution (see NSURLRequest.h).
+	Default value is NSURLRequestAttributionDeveloper.
+	All NSURLRequests issed on behalf of this AVURLAsset will be attributed with this value and follow the App Privacy Policy accordingly.
+*/
+AVF_EXPORT NSString *const AVURLAssetURLRequestAttributionKey API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
 
 /*!
   @class		AVURLAsset
@@ -605,8 +721,32 @@ AV_INIT_UNAVAILABLE
 */
 - (nullable AVAssetTrack *)compatibleTrackForCompositionTrack:(AVCompositionTrack *)compositionTrack;
 
+/*!
+  @method		findCompatibleTrackForCompositionTrack:completionHandler:
+  @abstract		Loads a reference to an AVAssetTrack of the target from which any timeRange
+				can be inserted into a mutable composition track (via -[AVMutableCompositionTrack insertTimeRange:ofTrack:atTime:error:]).
+  @param		compositionTrack
+				The composition track for which a compatible AVAssetTrack is requested.
+  @param		completionHandler
+				A block that is invoked when loading is complete, vending an instance of AVAssetTrack or an error.
+  @discussion
+	Finds a track of the target with content that can be accommodated by the specified composition track.
+	The logical complement of -[AVMutableComposition mutableTrackCompatibleWithTrack:].
+*/
+- (void)findCompatibleTrackForCompositionTrack:(AVCompositionTrack *)compositionTrack completionHandler:(void (^)(AVAssetTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
 @end
 
+@interface AVURLAsset (AVAssetVariantInspection)
+
+/*!
+ @property		variants
+ @abstract		Provides an array of AVAssetVariants contained in the asset
+ @discussion	Some variants may not be playable according to the current device configuration.
+*/
+@property (nonatomic, readonly) NSArray<AVAssetVariant *> *variants API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+@end
 
 /*!
  @category		AVURLAssetNSItemProvider
@@ -719,6 +859,16 @@ API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0))
 - (nullable AVFragmentedAssetTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
 
 /*!
+  @method		loadTrackWithTrackID:completionHandler:
+  @abstract		Loads an instance of AVFragmentedAssetTrack that represents the track of the specified trackID.
+  @param		trackID
+				The trackID of the requested AVFragmentedAssetTrack.
+  @param		completionHandler
+				A block that is called when the loading is finished, with either the loaded track (which may be nil if no track of the specified trackID is available) or an error.
+*/
+- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^)(AVFragmentedAssetTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
   @method		tracksWithMediaType:
   @abstract		Provides an array of AVFragmentedAssetTracks of the asset that present media of the specified media type.
   @param		mediaType
@@ -729,6 +879,16 @@ API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0))
 - (NSArray<AVFragmentedAssetTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
 
 /*!
+  @method		loadTracksWithMediaType:completionHandler:
+  @abstract		Loads an array of AVFragmentedAssetTracks of the asset that present media of the specified media type.
+  @param		mediaType
+				The media type according to which AVAsset filters its AVFragmentedAssetTracks. (Media types are defined in AVMediaFormat.h.)
+  @param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks of the specified media type are available) or an error.
+*/
+- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^)(NSArray<AVFragmentedAssetTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
   @method		tracksWithMediaCharacteristic:
   @abstract		Provides an array of AVFragmentedAssetTracks of the asset that present media with the specified characteristic.
   @param		mediaCharacteristic
@@ -737,6 +897,16 @@ API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0))
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
 - (NSArray<AVFragmentedAssetTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
+
+/*!
+  @method		loadTracksWithMediaCharacteristic:completionHandler:
+  @abstract		Loads an array of AVFragmentedAssetTracks of the asset that present media with the specified characteristic.
+  @param		mediaCharacteristic
+				The media characteristic according to which AVAsset filters its AVFragmentedAssetTracks. (Media characteristics are defined in AVMediaFormat.h.)
+  @param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks with the specified characteristic are available) or an error.
+*/
+- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^)(NSArray<AVFragmentedAssetTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 

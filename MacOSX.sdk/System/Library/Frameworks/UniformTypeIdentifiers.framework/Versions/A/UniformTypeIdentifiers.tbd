@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5F110054-A401-34EA-B789-F62B6B152DC4
+    value:           B07DF553-66B5-3866-9990-400D657127AB
   - target:          x86_64-maccatalyst
-    value:           5F110054-A401-34EA-B789-F62B6B152DC4
+    value:           B07DF553-66B5-3866-9990-400D657127AB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F97F79FE-AB31-3B62-90A9-C3B8D16F2D6C
+    value:           00EB1061-7BD2-3DB1-9BBA-3968E7AD68A2
   - target:          arm64e-maccatalyst
-    value:           F97F79FE-AB31-3B62-90A9-C3B8D16F2D6C
+    value:           00EB1061-7BD2-3DB1-9BBA-3968E7AD68A2
 install-name:    '/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers'
-current-version: 636.9
+current-version: 709
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _UTTagClassFilenameExtension, _UTTagClassMIMEType, _UTType3DContent, 
                        _UTTypeAIFF, _UTTypeARReferenceObject, _UTTypeAVI, _UTTypeAliasFile, 
@@ -38,9 +38,9 @@ exports:
                        _UTTypeInternetShortcut, _UTTypeItem, _UTTypeJPEG, _UTTypeJSON, 
                        _UTTypeJavaScript, _UTTypeLivePhoto, _UTTypeLog, _UTTypeM3UPlaylist, 
                        _UTTypeMIDI, _UTTypeMP3, _UTTypeMPEG, _UTTypeMPEG2TransportStream, 
-                       _UTTypeMPEG2Video, _UTTypeMPEG4Audio, _UTTypeMPEG4Movie, _UTTypeMessage, 
-                       _UTTypeMountPoint, _UTTypeMovie, _UTTypeOSAScript, _UTTypeOSAScriptBundle, 
-                       _UTTypeObjectiveCPlusPlusSource, _UTTypeObjectiveCSource, 
+                       _UTTypeMPEG2Video, _UTTypeMPEG4Audio, _UTTypeMPEG4Movie, _UTTypeMakefile, 
+                       _UTTypeMessage, _UTTypeMountPoint, _UTTypeMovie, _UTTypeOSAScript, 
+                       _UTTypeOSAScriptBundle, _UTTypeObjectiveCPlusPlusSource, _UTTypeObjectiveCSource, 
                        _UTTypePDF, _UTTypePHPScript, _UTTypePKCS12, _UTTypePNG, _UTTypePackage, 
                        _UTTypePerlScript, _UTTypePlainText, _UTTypePlaylist, _UTTypePluginBundle, 
                        _UTTypePresentation, _UTTypePropertyList, _UTTypePythonScript, 
@@ -57,10 +57,10 @@ exports:
                        _UTTypeWebP, _UTTypeX509Certificate, _UTTypeXML, _UTTypeXMLPropertyList, 
                        _UTTypeXPCService, _UTTypeYAML, _UTTypeZIP, __UTAlwaysUseSlowPathForPreferredExtension, 
                        __UTEnableAllRuntimeIssues, __UTGetAllCoreTypesConstants, 
-                       __UTHardwareColorGetCurrentEnclosureColor, __UTHardwareColorMakeWithIndex, 
-                       __UTHardwareColorMakeWithRGBComponents, __UTHardwareColorsAreEqual, 
-                       __UTIdentifierGetCanonicalRepresentation, __UTIdentifierGetHashCode, 
-                       __UTIdentifiersAreEqual, __UTPrintModelCodesForCurrentDevice, 
+                       __UTHardwareColorGetCurrentEnclosureColor, __UTHardwareColorGetDebugDescription, 
+                       __UTHardwareColorMakeWithIndex, __UTHardwareColorMakeWithRGBComponents, 
+                       __UTHardwareColorsAreEqual, __UTIdentifierGetCanonicalRepresentation, 
+                       __UTIdentifierGetHashCode, __UTIdentifiersAreEqual, __UTPrintModelCodesForCurrentDevice, 
                        __UTSetRuntimeIssueCatcher, __UTTagClassDeviceModelCode, __UTTagClassHFSTypeCode, 
                        __UTTagClassPasteboardType, __UTTaggedTypeCreate, __UTTypeAppCategory, 
                        __UTTypeAppCategoryActionGames, __UTTypeAppCategoryAdventureGames, 
@@ -92,9 +92,10 @@ exports:
                        __UTTypeLibraryFolder, __UTTypeMac, __UTTypeMacBook, __UTTypeMacBookAir, 
                        __UTTypeMacBookPro, __UTTypeMacLaptop, __UTTypeMacMini, __UTTypeMacPro, 
                        __UTTypeNamedPipeOrFIFO, __UTTypeNetworkNeighborhood, __UTTypePassBundle, 
-                       __UTTypePassData, __UTTypeServersFolder, __UTTypeSocket, __UTTypeSpeaker, 
-                       __UTTypeiMac, __UTTypeiOSDevice, __UTTypeiOSSimulator, __UTTypeiPad, 
-                       __UTTypeiPhone, __UTTypeiPodTouch, ___UNIFORM_TYPE_IDENTIFIER_WAS_NOT_DECLARED_IN_INFO_PLIST_OF_BUNDLE__, 
+                       __UTTypePassData, __UTTypePassesData, __UTTypeServersFolder, 
+                       __UTTypeSocket, __UTTypeSpeaker, __UTTypeiMac, __UTTypeiOSDevice, 
+                       __UTTypeiOSSimulator, __UTTypeiPad, __UTTypeiPhone, __UTTypeiPodTouch, 
+                       ___UNIFORM_TYPE_IDENTIFIER_WAS_NOT_DECLARED_IN_INFO_PLIST_OF_BUNDLE__, 
                        ___UTFindCoreTypesConstantWithIdentifier ]
     objc-classes:    [ UTType ]
 ...

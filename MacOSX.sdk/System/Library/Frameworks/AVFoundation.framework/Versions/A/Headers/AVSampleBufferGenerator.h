@@ -18,8 +18,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#if ! TARGET_OS_IPHONE
-
 #pragma pack(push)
 #pragma pack()
 
@@ -123,8 +121,6 @@ AV_INIT_UNAVAILABLE
 @end
 
 #pragma pack(pop)
-
-#endif // ! TARGET_OS_IPHONE
 
 NS_ASSUME_NONNULL_END
 

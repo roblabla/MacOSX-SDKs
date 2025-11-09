@@ -255,19 +255,19 @@ extern const CFStringRef kUTTypeVersionKey                           API_AVAILAB
 /*
  *  kUTTagClassFilenameExtension   *** DEPRECATED ***
  */
-extern const CFStringRef kUTTagClassFilenameExtension                API_DEPRECATED_WITH_REPLACEMENT("UTTagClassFilenameExtension", ios(3.0, API_TO_BE_DEPRECATED), macos(10.3, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTagClassFilenameExtension                API_DEPRECATED("Use UTTagClassFilenameExtension instead.", ios(3.0, 15.0), macos(10.3, 12.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 /*
  *  kUTTagClassMIMEType   *** DEPRECATED ***
  */
-extern const CFStringRef kUTTagClassMIMEType                         API_DEPRECATED_WITH_REPLACEMENT("UTTagClassMIMEType", ios(3.0, API_TO_BE_DEPRECATED), macos(10.3, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTagClassMIMEType                         API_DEPRECATED("Use UTTagClassMIMEType instead.", ios(3.0, 15.0), macos(10.3, 12.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 /*
  *  kUTTagClassNSPboardType   *** DEPRECATED ***
  */
-extern const CFStringRef kUTTagClassNSPboardType                     API_DEPRECATED("NSPasteboard types are obsolete.", macos(10.3, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, tvos, watchos);
+extern const CFStringRef kUTTagClassNSPboardType                     API_DEPRECATED("NSPasteboard types are obsolete.", macos(10.3, 12.0)) API_UNAVAILABLE(ios, tvos, watchos);
 /*
  *  kUTTagClassOSType   *** DEPRECATED ***
  */
-extern const CFStringRef kUTTagClassOSType                           API_DEPRECATED("HFS file types are obsolete.", macos(10.3, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, tvos, watchos);
+extern const CFStringRef kUTTagClassOSType                           API_DEPRECATED("HFS file types are obsolete.", macos(10.3, 12.0)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*
  *  UTTypeCreatePreferredIdentifierForTag()   *** DEPRECATED ***
@@ -317,7 +317,7 @@ extern __nullable CFStringRef
 UTTypeCreatePreferredIdentifierForTag(
   CFStringRef              inTagClass,
   CFStringRef              inTag,
-  __nullable CFStringRef   inConformingToUTI)                        API_DEPRECATED("Use the UTType class instead.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.3, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+  __nullable CFStringRef   inConformingToUTI)                        API_DEPRECATED("Use the UTType class instead.", ios(3.0, 15.0), macos(10.3, 12.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 
 
 
@@ -363,7 +363,7 @@ extern __nullable CFArrayRef
 UTTypeCreateAllIdentifiersForTag(
   CFStringRef              inTagClass,
   CFStringRef              inTag,
-  __nullable CFStringRef   inConformingToUTI)                        API_DEPRECATED("Use the UTType class instead.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.3, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+  __nullable CFStringRef   inConformingToUTI)                        API_DEPRECATED("Use the UTType class instead.", ios(3.0, 15.0), macos(10.3, 12.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 
 
 
@@ -394,7 +394,7 @@ UTTypeCreateAllIdentifiersForTag(
 extern __nullable CFStringRef
 UTTypeCopyPreferredTagWithClass(
   CFStringRef   inUTI,
-  CFStringRef   inTagClass)                                          API_DEPRECATED("Use the UTType class instead.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.3, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+  CFStringRef   inTagClass)                                          API_DEPRECATED("Use the UTType class instead.", ios(3.0, 15.0), macos(10.3, 12.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 
 
 
@@ -419,7 +419,7 @@ UTTypeCopyPreferredTagWithClass(
 extern __nullable CFArrayRef
 UTTypeCopyAllTagsWithClass(
   CFStringRef   inUTI,
-  CFStringRef   inTagClass)                                          API_DEPRECATED("Use the UTType class instead.", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+  CFStringRef   inTagClass)                                          API_DEPRECATED("Use the UTType class instead.", ios(8.0, 15.0), macos(10.10, 12.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 
 
 
@@ -445,7 +445,7 @@ UTTypeCopyAllTagsWithClass(
 extern Boolean 
 UTTypeEqual(
   CFStringRef   inUTI1,
-  CFStringRef   inUTI2)                                              API_DEPRECATED("Use -[UTType isEqual:] instead.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.3, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+  CFStringRef   inUTI2)                                              API_DEPRECATED("Use -[UTType isEqual:] instead.", ios(3.0, 15.0), macos(10.3, 12.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 
 
 
@@ -471,7 +471,7 @@ UTTypeEqual(
 extern Boolean 
 UTTypeConformsTo(
   CFStringRef   inUTI,
-  CFStringRef   inConformsToUTI)                                     API_DEPRECATED("Use -[UTType conformsToType:] instead.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.3, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+  CFStringRef   inConformsToUTI)                                     API_DEPRECATED("Use -[UTType conformsToType:] instead.", ios(3.0, 15.0), macos(10.3, 12.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 
 
 
@@ -493,7 +493,7 @@ UTTypeConformsTo(
  *    a localized string, or NULL of no type description is available
  */
 extern __nullable CFStringRef
-UTTypeCopyDescription(CFStringRef inUTI)                             API_DEPRECATED("Use UTType.localizedDescription instead.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.3, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+UTTypeCopyDescription(CFStringRef inUTI)                             API_DEPRECATED("Use UTType.localizedDescription instead.", ios(3.0, 15.0), macos(10.3, 12.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 
 
 
@@ -514,7 +514,7 @@ UTTypeCopyDescription(CFStringRef inUTI)                             API_DEPRECA
  *    Whether or not the UTI is registered.
  */
 extern Boolean
-UTTypeIsDeclared(CFStringRef inUTI)                                  API_DEPRECATED("Use UTType.declared instead.", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+UTTypeIsDeclared(CFStringRef inUTI)                                  API_DEPRECATED("Use UTType.declared instead.", ios(8.0, 15.0), macos(10.10, 12.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 
 
 
@@ -533,7 +533,7 @@ UTTypeIsDeclared(CFStringRef inUTI)                                  API_DEPRECA
  *    Whether or not the UTI is dynamic.
  */
 extern Boolean
-UTTypeIsDynamic(CFStringRef inUTI)                                   API_DEPRECATED("Use UTType.dynamic instead.", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+UTTypeIsDynamic(CFStringRef inUTI)                                   API_DEPRECATED("Use UTType.dynamic instead.", ios(8.0, 15.0), macos(10.10, 12.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 
 
 
@@ -558,7 +558,7 @@ UTTypeIsDynamic(CFStringRef inUTI)                                   API_DEPRECA
  *    a tag declaration dictionary, or NULL if the type is not declared
  */
 extern __nullable CFDictionaryRef
-UTTypeCopyDeclaration(CFStringRef inUTI)                             API_DEPRECATED("Use the UTType class instead.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.3, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+UTTypeCopyDeclaration(CFStringRef inUTI)                             API_DEPRECATED("Use the UTType class instead.", ios(3.0, 15.0), macos(10.3, 12.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 
 
 
@@ -604,7 +604,7 @@ UTTypeCopyDeclaringBundleURL(CFStringRef inUTI)                      API_DEPRECA
  *    a new CFString representing the OSType
  */
 extern CFStringRef
-UTCreateStringForOSType(OSType inOSType)                             API_DEPRECATED("HFS type codes are obsolete.", macos(10.3, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, tvos, watchos);
+UTCreateStringForOSType(OSType inOSType)                             API_DEPRECATED("HFS type codes are obsolete.", macos(10.3, 12.0)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -628,7 +628,7 @@ UTCreateStringForOSType(OSType inOSType)                             API_DEPRECA
  *    a valid encoding of an OSType
  */
 extern OSType 
-UTGetOSTypeFromString(CFStringRef inString)                          API_DEPRECATED("HFS type codes are obsolete.", macos(10.3, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, tvos, watchos);
+UTGetOSTypeFromString(CFStringRef inString)                          API_DEPRECATED("HFS type codes are obsolete.", macos(10.3, 12.0)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 

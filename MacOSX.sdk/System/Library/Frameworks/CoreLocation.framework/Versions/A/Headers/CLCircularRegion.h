@@ -41,7 +41,7 @@ API_AVAILABLE(macos(10.10), ios(7.0))
  *  Discussion:
  *    Returns the coordinate of the center of the region.
  */
-@property (readonly, nonatomic) CLLocationCoordinate2D center;
+@property (readonly, atomic) CLLocationCoordinate2D center;
 
 /*
  *  radius
@@ -49,7 +49,7 @@ API_AVAILABLE(macos(10.10), ios(7.0))
  *  Discussion:
  *    Returns the radius of the region.
  */
-@property (readonly, nonatomic) CLLocationDistance radius;
+@property (readonly, atomic) CLLocationDistance radius;
 
 /*
  *  containsCoordinate:

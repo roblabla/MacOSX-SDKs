@@ -4,49 +4,55 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8F2D6B7A-0F19-3305-B345-B9A2F92ECA12
+    value:           67731894-20E4-3CB2-B452-73D604BBC372
   - target:          x86_64-maccatalyst
-    value:           8F2D6B7A-0F19-3305-B345-B9A2F92ECA12
+    value:           67731894-20E4-3CB2-B452-73D604BBC372
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           23A77BD6-14F9-34B7-91EB-8F77540CC55A
+    value:           9EB7CFAF-71F0-37EE-A73C-58ABE4C36084
   - target:          arm64e-maccatalyst
-    value:           23A77BD6-14F9-34B7-91EB-8F77540CC55A
+    value:           9EB7CFAF-71F0-37EE-A73C-58ABE4C36084
 install-name:    '/System/Library/PrivateFrameworks/AppSSOKerberos.framework/Versions/A/AppSSOKerberos'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _kSOKerberosAttributeValueNoSiteCode, _kSOKerberosNotificationADPasswordChanged, 
-                       _kSOKerberosNotificationConfigRemoved, _kSOKerberosNotificationConnectionCompleted, 
-                       _kSOKerberosNotificationFoundExistingCredential, _kSOKerberosNotificationGotNewCredential, 
-                       _kSOKerberosNotificationInternalNetworkAvailable, _kSOKerberosNotificationInternalNetworkNotAvailable, 
-                       _kSOKerberosNotificationLocalPasswordSynced, _kSOKerberosNotificationPasswordChangedWithPasswordSync, 
-                       _kSOKerberosNotificationUserSignedOut, _kSOKerberosOperationAttributeDelayUserSetupCleared, 
-                       _kSOKerberosOperationAttributeForce, _kSOKerberosOperationAttributeGSSCredUUID, 
-                       _kSOKerberosOperationAttributeHomeDirectory, _kSOKerberosOperationAttributeHostName, 
-                       _kSOKerberosOperationAttributeHostSuffixLength, _kSOKerberosOperationAttributeIsDefaultRealm, 
-                       _kSOKerberosOperationAttributeLastLoginDate, _kSOKerberosOperationAttributeLocalPasswordChangedDate, 
-                       _kSOKerberosOperationAttributeNetworkAvailable, _kSOKerberosOperationAttributePasswordChangedDate, 
-                       _kSOKerberosOperationAttributePasswordExpiresDate, _kSOKerberosOperationAttributeRealm, 
+    symbols:         [ _free_kerbvalidationinfo, _get_kerbvalidationinfo, _kSOAppSSOKerberosBundleIDs, 
+                       _kSOHeimdalBundleIDs, _kSOKerberosAttributeValueNoSiteCode, 
+                       _kSOKerberosNotificationADPasswordChanged, _kSOKerberosNotificationActionChange, 
+                       _kSOKerberosNotificationActionIgnore, _kSOKerberosNotificationCategoryChange, 
+                       _kSOKerberosNotificationCategoryChangeNow, _kSOKerberosNotificationConfigRemoved, 
+                       _kSOKerberosNotificationConnectionCompleted, _kSOKerberosNotificationFoundExistingCredential, 
+                       _kSOKerberosNotificationGotNewCredential, _kSOKerberosNotificationInternalNetworkAvailable, 
+                       _kSOKerberosNotificationInternalNetworkNotAvailable, _kSOKerberosNotificationLocalPasswordSynced, 
+                       _kSOKerberosNotificationPasswordChangedWithPasswordSync, _kSOKerberosNotificationUserSignedOut, 
+                       _kSOKerberosOperationAttributeDelayUserSetupCleared, _kSOKerberosOperationAttributeForce, 
+                       _kSOKerberosOperationAttributeGSSCredUUID, _kSOKerberosOperationAttributeHomeDirectory, 
+                       _kSOKerberosOperationAttributeHostName, _kSOKerberosOperationAttributeHostSuffixLength, 
+                       _kSOKerberosOperationAttributeIsDefaultRealm, _kSOKerberosOperationAttributeLastLoginDate, 
+                       _kSOKerberosOperationAttributeLocalPasswordChangedDate, _kSOKerberosOperationAttributeNetworkAvailable, 
+                       _kSOKerberosOperationAttributePasswordChangedDate, _kSOKerberosOperationAttributePasswordExpiresDate, 
+                       _kSOKerberosOperationAttributeRealm, _kSOKerberosOperationAttributeRefresh, 
                        _kSOKerberosOperationAttributeSiteCode, _kSOKerberosOperationAttributeSiteCodeCache, 
                        _kSOKerberosOperationAttributeUPN, _kSOKerberosOperationAttributeUserCancelledLogin, 
                        _kSOKerberosOperationAttributeUserName, _kSOKerberosOperationAttributeVerbose, 
                        _kSOKerberosOperationChangePassword, _kSOKerberosOperationGetCredentialUUID, 
-                       _kSOKerberosOperationGetDefaultRealm, _kSOKerberosOperationGetRealmForHost, 
                        _kSOKerberosOperationGetRealmInfo, _kSOKerberosOperationGetSiteCode, 
-                       _kSOKerberosOperationLogin, _kSOKerberosOperationLogout, _kSOKerberosOperationProceedUserSetup, 
-                       _kSOKerberosOperationResetKeychainChoice, _kSOKerberosOperationResetRealm, 
-                       _kSOKerberosOperationSaveAttributes, _kSOKerberosOperationSetNetworkAvailable, 
-                       _kSOKerberosOperationSetNetworkNotAvailable, _kSOKerberosOperationSyncPassword, 
-                       _kSiteCodeCacheLazyRefreshAge, _kSiteCodeCacheMaxAge ]
-    objc-classes:    [ SOADSiteDiscovery, SOAsynchronousLDAPOperation, SOAsynchronousOperation, 
-                       SOAuthorizationWrapper, SODNSSRVQuery, SODNSSRVResponse, SOKerberosAuthentication, 
-                       SOKerberosContext, SOKerberosCredential, SOKerberosExtensionData, 
-                       SOKerberosExtensionUserData, SOKerberosFileManager, SOKerberosHeimdalPluginSettings, 
-                       SOKerberosHelper, SOKerberosRealmSettings, SOKerberosSettingsManager, 
-                       SOKeychainHelper, SOLDAPHelper, SONetLogonParser, SONetworkIdentity, 
-                       SORealmSettingManager, SOSiteCode, SOSmartcard ]
+                       _kSOKerberosOperationLogin, _kSOKerberosOperationLogout, _kSOKerberosOperationResetKeychainChoice, 
+                       _kSOKerberosOperationResetRealm, _kSOKerberosOperationSyncPassword, 
+                       _kSOKerberosSuiteName, _kSiteCodeCacheLazyRefreshAge, _kSiteCodeCacheMaxAge, 
+                       _ndrdata_get_buffer, _ndrdata_get_uint16, _ndrdata_get_uint32, 
+                       _ndrdata_get_uint64, _ndrdata_get_uint8, _ndrdata_init ]
+    objc-classes:    [ SOADSiteDiscovery, SOAsynchronousBlockOperation, SOAsynchronousLDAPOperation, 
+                       SOAsynchronousOperation, SOAuthorizationWrapper, SODNSSRVQuery, 
+                       SODNSSRVResponse, SOKerberosAgent, SOKerberosAgentContext, 
+                       SOKerberosAuthentication, SOKerberosContext, SOKerberosCredential, 
+                       SOKerberosExtensionData, SOKerberosExtensionProcess, SOKerberosExtensionUserData, 
+                       SOKerberosFileManager, SOKerberosHeimdalPluginSettings, SOKerberosHelper, 
+                       SOKerberosOpenDirectory, SOKerberosPacData, SOKerberosRealmSettings, 
+                       SOKerberosServer, SOKerberosSettingsManager, SOKeychainHelper, 
+                       SOLDAPHelper, SONetLogonParser, SONetworkIdentity, SOSiteCode, 
+                       SOSmartcard, SOSmartcardEntry ]
 ...

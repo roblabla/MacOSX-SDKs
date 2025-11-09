@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8DED7C4A-D38F-3C1C-8EDA-279A8B7598DD
+    value:           B6DE24D5-1940-30DC-8480-B05B698C6778
   - target:          x86_64-maccatalyst
-    value:           8DED7C4A-D38F-3C1C-8EDA-279A8B7598DD
+    value:           B6DE24D5-1940-30DC-8480-B05B698C6778
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4F7629CE-1855-3F16-BFB0-2B923577C7A4
+    value:           A1CF9DC6-AE7F-3DCF-827C-E77A16F1FCB6
   - target:          arm64e-maccatalyst
-    value:           4F7629CE-1855-3F16-BFB0-2B923577C7A4
+    value:           A1CF9DC6-AE7F-3DCF-827C-E77A16F1FCB6
 install-name:    '/System/Library/PrivateFrameworks/ExchangeWebServices.framework/Versions/A/ExchangeWebServices'
 current-version: 281
 exports:
@@ -39,19 +39,19 @@ exports:
                        _EWSPhoneNumberKeyOtherTelephone, _EWSPhoneNumberKeyPager, 
                        _EWSPhoneNumberKeyPrimaryPhone, _EWSPhoneNumberKeyRadioPhone, 
                        _EWSPhoneNumberKeyTelex, _EWSPhoneNumberKeyTtyTddPhone, _EWSPhysicalAddressKeyBusiness, 
-                       _EWSPhysicalAddressKeyHome, _EWSPhysicalAddressKeyOther, _EWSPropertyNameCalendarTimeZone, 
-                       _EWSPropertyNameContactMessagingAddress1Service, _EWSPropertyNameContactMessagingAddress2Service, 
-                       _EWSPropertyNameContactMessagingAddress3Service, _EWSPropertyNameContactPostalAddressBusinessCountryCode, 
-                       _EWSPropertyNameContactPostalAddressHomeCountryCode, _EWSPropertyNameContactPostalAddressOtherCountryCode, 
-                       _EWSPropertyNameFolderColor, _EWSPropertyNameFolderOrder, 
-                       _EWSPropertyNameItemReminderAction, _EWSPropertyNameItemReminderEmailAddress, 
-                       _EWSPropertyNameItemReminderSound, _EWSPropertyNameItemReminderURL, 
-                       _EWSPropertyNameMessageJunkFlag, _EWSPropertyNameMessageJunkRecordedFlag, 
-                       _EWSPropertyNameMessageNotJunkFlag, _EWSPropertyNameMessageRedirectedFlag, 
-                       _EWSPropertyNameOnlineMeetingExternalLink, _EWSPropertyNameStartLocation, 
-                       _EWSPropertyNameStructuredLocation, _EWSPropertyNameTaskOrder, 
-                       _EWSPropertyNameTravelTime, _EWSPropertySetIdApple, _EWSPropertySetIdNote, 
-                       _EWSPropertyTAG_PR_ATTR_HIDDEN, _EWSPropertyTag_PR_ADDITIONAL_REN_ENTRYIDS, 
+                       _EWSPhysicalAddressKeyHome, _EWSPhysicalAddressKeyOther, _EWSPropertyNameCalendarEndTimeZone, 
+                       _EWSPropertyNameCalendarTimeZone, _EWSPropertyNameContactMessagingAddress1Service, 
+                       _EWSPropertyNameContactMessagingAddress2Service, _EWSPropertyNameContactMessagingAddress3Service, 
+                       _EWSPropertyNameContactPostalAddressBusinessCountryCode, _EWSPropertyNameContactPostalAddressHomeCountryCode, 
+                       _EWSPropertyNameContactPostalAddressOtherCountryCode, _EWSPropertyNameFolderColor, 
+                       _EWSPropertyNameFolderOrder, _EWSPropertyNameItemReminderAction, 
+                       _EWSPropertyNameItemReminderEmailAddress, _EWSPropertyNameItemReminderSound, 
+                       _EWSPropertyNameItemReminderURL, _EWSPropertyNameMessageJunkFlag, 
+                       _EWSPropertyNameMessageJunkRecordedFlag, _EWSPropertyNameMessageNotJunkFlag, 
+                       _EWSPropertyNameMessageRedirectedFlag, _EWSPropertyNameOnlineMeetingExternalLink, 
+                       _EWSPropertyNameStartLocation, _EWSPropertyNameStructuredLocation, 
+                       _EWSPropertyNameTaskOrder, _EWSPropertyNameTravelTime, _EWSPropertySetIdApple, 
+                       _EWSPropertySetIdNote, _EWSPropertyTAG_PR_ATTR_HIDDEN, _EWSPropertyTag_PR_ADDITIONAL_REN_ENTRYIDS, 
                        _EWSPropertyTag_PR_ATTACHMENT_CONTACTPHOTO, _EWSPropertyTag_PR_ATTACHMENT_HIDDEN, 
                        _EWSPropertyTag_PR_BODY, _EWSPropertyTag_PR_COMMENT, _EWSPropertyTag_PR_DISPLAY_NAME_PREFIX, 
                        _EWSPropertyTag_PR_ENTRYID, _EWSPropertyTag_PR_FLAG_STATUS, 
@@ -237,9 +237,10 @@ exports:
                        EWSTaskRecurrencePatternBaseType, EWSTaskRecurrencePatternTypesDefinition, 
                        EWSTaskRecurrenceType, EWSTaskStatusTypeDefinition, EWSTaskType, 
                        EWSTasksFolderType, EWSTentativelyAcceptItemType, EWSTimeChangePatternTypes, 
-                       EWSTimeChangeType, EWSTimeZoneType, EWSTwoOperandExpressionType, 
-                       EWSUnindexedFieldURITypeDefinition, EWSUnsubscribeResponseMessageType, 
-                       EWSUnsubscribeResponseType, EWSUnsubscribeType, EWSUpdateDelegateResponseMessageType, 
+                       EWSTimeChangeType, EWSTimeZoneDefinitionType, EWSTimeZoneType, 
+                       EWSTwoOperandExpressionType, EWSUnindexedFieldURITypeDefinition, 
+                       EWSUnsubscribeResponseMessageType, EWSUnsubscribeResponseType, 
+                       EWSUnsubscribeType, EWSUpdateDelegateResponseMessageType, 
                        EWSUpdateDelegateType, EWSUpdateFolderResponseType, EWSUpdateFolderType, 
                        EWSUpdateInboxRulesResponseType, EWSUpdateInboxRulesType, 
                        EWSUpdateItemResponseMessageType, EWSUpdateItemResponseType, 

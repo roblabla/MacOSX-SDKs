@@ -18,7 +18,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(11.0), watchos(4.0))
+API_DEPRECATED("INTransferMoneyIntent is deprecated. There is no replacement.", ios(11.0, 15.0), watchos(4.0, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INTransferMoneyIntent : INIntent
 
@@ -47,7 +47,7 @@ API_UNAVAILABLE(macos, tvos)
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(11.0), watchos(4.0))
+API_DEPRECATED("INTransferMoneyIntentHandling is deprecated. There is no replacement.", ios(11.0, 15.0), watchos(4.0, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @protocol INTransferMoneyIntentHandling <NSObject>
 
@@ -92,19 +92,19 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolveFromAccountForTransferMoney:(INTransferMoneyIntent *)intent
-                    withCompletion:(void (^)(INPaymentAccountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveFromAccount(for:with:));
+                            withCompletion:(void (^)(INPaymentAccountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveFromAccount(for:with:));
 
 - (void)resolveToAccountForTransferMoney:(INTransferMoneyIntent *)intent
-                    withCompletion:(void (^)(INPaymentAccountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveToAccount(for:with:));
+                          withCompletion:(void (^)(INPaymentAccountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveToAccount(for:with:));
 
 - (void)resolveTransactionAmountForTransferMoney:(INTransferMoneyIntent *)intent
-                    withCompletion:(void (^)(INPaymentAmountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTransactionAmount(for:with:));
+                                  withCompletion:(void (^)(INPaymentAmountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTransactionAmount(for:with:));
 
 - (void)resolveTransactionScheduledDateForTransferMoney:(INTransferMoneyIntent *)intent
-                    withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTransactionScheduledDate(for:with:));
+                                         withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTransactionScheduledDate(for:with:));
 
 - (void)resolveTransactionNoteForTransferMoney:(INTransferMoneyIntent *)intent
-                    withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTransactionNote(for:with:));
+                                withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTransactionNote(for:with:));
 
 @end
 

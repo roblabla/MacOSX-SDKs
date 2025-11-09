@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9EF459AB-7ED2-395A-A5FF-CB92B5B99A71
+    value:           55594074-C690-3328-8D5C-3DDCE028E9D7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E9A46EC0-F996-339A-8FF3-F2DEBA12790E
+    value:           306F8B1E-5573-3F44-B664-6F51F343D747
 install-name:    '/System/Library/PrivateFrameworks/iWorkXPC.framework/Versions/A/XPCServices/iWorkFileFormat.xpc/Contents/Frameworks/TSUtility.framework/Versions/A/TSUtility'
 swift-abi-version: 7
 exports:

@@ -2,7 +2,7 @@
 //  tcp_options.h
 //  Network
 //
-//  Copyright (c) 2017-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2017-2020 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_TCP_OPTIONS_H__
@@ -335,6 +335,38 @@ API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 void
 nw_tcp_options_set_disable_ecn(nw_protocol_options_t options,
 							   bool disable_ecn);
+
+/*!
+ * @typedef nw_multipath_version_t
+ * @abstract
+ *		Multipath versions represent the MPTCP standard versions
+ */
+typedef enum {
+	/*! @const nw_multipath_version_unspecified MPTCP unspecified version  */
+	nw_multipath_version_unspecified = -1,
+	/*! @const nw_multipath_version_0 MPTCP version 0 */
+	nw_multipath_version_0 = 0,
+	/*! @const nw_multipath_version_1 MPTCP version 1 */
+	nw_multipath_version_1 = 1,
+} nw_multipath_version_t;
+
+/*!
+ * @function nw_tcp_options_set_multipath_force_version
+ *
+ * @abstract
+ *		Configure MPTCP to use a specified MPTCP standard version.
+ *		This ignores the cached value from MPTCP version discovery.
+ *
+ * @param options
+ *		A TCP protocol options object.
+ *
+ * @param multipath_force_version
+ *		The MPTCP version.
+ */
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
+void
+nw_tcp_options_set_multipath_force_version(nw_protocol_options_t options,
+										   nw_multipath_version_t multipath_force_version);
 
 #pragma mark - Metadata
 

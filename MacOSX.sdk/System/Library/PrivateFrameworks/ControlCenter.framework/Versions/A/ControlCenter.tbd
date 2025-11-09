@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           17E718DF-CD89-3406-B567-24BF338FC0A4
+    value:           7597956E-12D5-37E5-80AA-7FE5546CCC89
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           346FFF57-C810-3093-8854-3EA5CE2C04FF
+    value:           03CD06A5-F9BC-3796-8EB6-1995E9C499B7
 install-name:    '/System/Library/PrivateFrameworks/ControlCenter.framework/Versions/A/ControlCenter'
-current-version: 146.40.6
+current-version: 216
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -287,7 +287,39 @@ exports:
                        '_$s13ControlCenter21PreferencesControllerC_2asxSgSS_xmtcRlzCluis', 
                        '_$s13ControlCenter21PreferencesControllerC_2asxSgSS_xmtcRlzCluisTq', 
                        '_$s13ControlCenter21PreferencesControllerCfD', '_$s13ControlCenter21PreferencesControllerCfd', 
-                       '_$s13ControlCenter27UserSwitcherHostPreferencesC22multipleSessionEnabledSbvM', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC11AdvertisingO8rawValueAESgSi_tcfC', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC11AdvertisingO8rawValueSivg', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC11AdvertisingO8rawValueSivpMV', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC11AdvertisingOMa', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC11AdvertisingOMn', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC11AdvertisingON', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC11AdvertisingOSHAAMc', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC11AdvertisingOSQAAMc', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC11AdvertisingOSYAAMc', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC11advertisingAC11AdvertisingOvM', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC11advertisingAC11AdvertisingOvg', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC11advertisingAC11AdvertisingOvpMV', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC11advertisingAC11AdvertisingOvs', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC15receiverEnabledSbvM', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC15receiverEnabledSbvg', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC15receiverEnabledSbvpMV', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC15receiverEnabledSbvs', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC3app4keysACSS_xtcSTRzSS7ElementRtzlufC', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC3app4keysACSS_xtcSTRzSS7ElementRtzlufc', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC3app4keysACSS_xtcSTRzSY7ElementRpzSSAF_8RawValueRTzlufC', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC3app4keysACSS_xtcSTRzSY7ElementRpzSSAF_8RawValueRTzlufc', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC6domain4keysAcA0F0V6DomainV_xtcSTRzSS7ElementRtzlufC', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC6domain4keysAcA0F0V6DomainV_xtcSTRzSS7ElementRtzlufc', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC6domain4keysAcA0F0V6DomainV_xtcSTRzSY7ElementRpzSSAJ_8RawValueRTzlufC', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC6domain4keysAcA0F0V6DomainV_xtcSTRzSY7ElementRpzSSAJ_8RawValueRTzlufc', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC6sharedACvau', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC6sharedACvgZ', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesC6sharedACvpZ', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesCACycfC', '_$s13ControlCenter26AirPlayReceiverPreferencesCACycfCTq', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesCACycfc', '_$s13ControlCenter26AirPlayReceiverPreferencesCMa', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesCMm', '_$s13ControlCenter26AirPlayReceiverPreferencesCMn', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesCN', '_$s13ControlCenter26AirPlayReceiverPreferencesCfD', 
+                       '_$s13ControlCenter26AirPlayReceiverPreferencesCfd', '_$s13ControlCenter27UserSwitcherHostPreferencesC22multipleSessionEnabledSbvM', 
                        '_$s13ControlCenter27UserSwitcherHostPreferencesC22multipleSessionEnabledSbvg', 
                        '_$s13ControlCenter27UserSwitcherHostPreferencesC22multipleSessionEnabledSbvpMV', 
                        '_$s13ControlCenter27UserSwitcherHostPreferencesC22multipleSessionEnabledSbvs', 

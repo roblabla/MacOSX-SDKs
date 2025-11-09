@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           79F8B75E-0A76-3CFE-B98E-8109458CBA08
+    value:           F9B51269-609A-3C10-B88D-656E1B1186A4
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           9F1FC8A5-1BF2-3CAA-9F6B-E78ECF999074
+    value:           0228F84A-5D8F-3CAB-8A3F-E013E8370A25
 install-name:    '/System/iOSSupport/System/Library/Frameworks/CarPlay.framework/Versions/A/CarPlay'
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
@@ -16,35 +16,45 @@ exports:
                        _CPCurrentProcessHasChargingEntitlement, _CPCurrentProcessHasCommunicationEntitlement, 
                        _CPCurrentProcessHasMapsEntitlement, _CPCurrentProcessHasParkingEntitlement, 
                        _CPCurrentProcessHasPublicSafetyEntitlement, _CPCurrentProcessHasQuickOrderingEntitlement, 
-                       _CPCurrentProcessHasTemplateEntitlement, _CPGuidanceStyleForColor, 
-                       _CPLuminanceForColor, _CPMaximumMessageItemImageSize, _CPMaximumNumberOfGridImages, 
-                       _CPNowPlayingButtonMaximumImageSize, _CPSStringFromBOOL, _CPSanitizedBackgroundColor, 
-                       _CPTemplateApplicationDashboardSceneSessionRoleApplication, 
+                       _CPCurrentProcessHasTemplateEntitlement, _CPDistanceUnitsFromNSUnitLength, 
+                       _CPGridTemplateMaximumItems, _CPGuidanceStyleForColor, _CPLuminanceForColor, 
+                       _CPMaximumListSectionImageSize, _CPMaximumMessageItemImageSize, 
+                       _CPMaximumNumberOfGridImages, _CPNowPlayingButtonMaximumImageSize, 
+                       _CPSStringFromBOOL, _CPSanitizedBackgroundColor, _CPTemplateApplicationDashboardSceneSessionRoleApplication, 
+                       _CPTemplateApplicationInstrumentClusterSceneSessionRoleApplication, 
                        _CPTemplateApplicationSceneSessionRoleApplication, _CarPlayErrorDomain, 
-                       _kCPControlEnabledKey, _kCPControlIdentifierKey, _kCPControlImageSetKey, 
-                       _kCPControlTitleKey, _kCPGridTemplateMaximumItems, _kCPSAudioEntitlementKey, 
+                       _NSStringFromAccNavLaneGuidanceInfoUpdateInfoType, _NSStringFromAccNavLaneGuidanceInfoUpdateLaneInfoInfoType, 
+                       _NSStringFromAccNavManeuverInfoUpdateInfoType, _NSStringFromAccNavRouteGuidanceUpdateInfoType, 
+                       _NSStringFromCPAccNavType, _NSStringFromCPDistanceUnits, _NSStringFromCPGuidanceState, 
+                       _NSStringFromCPJunctionType, _NSStringFromCPLaneStatus, _NSStringFromCPManeuverState, 
+                       _NSStringFromCPManeuverType, _NSStringFromCPNavEnum, _NSStringFromCPTrafficSide, 
+                       _NSUnitLengthFromCPDistanceUnits, _kCPControlEnabledKey, _kCPControlIdentifierKey, 
+                       _kCPControlImageSetKey, _kCPControlTitleKey, _kCPSAudioEntitlementKey, 
                        _kCPSChargingEntitlementKey, _kCPSCommunicationEntitlementKey, 
                        _kCPSMapsEntitlementKey, _kCPSParkingEntitlementKey, _kCPSPublicSafetyEntitlementKey, 
                        _kCPSQuickOrderingEntitlementKey ]
-    objc-classes:    [ CPActionSheetTemplate, CPAlertAction, CPAlertTemplate, CPBarButton, 
+    objc-classes:    [ CPAccNavInfoType, CPAccNavParam, CPAccNavParamKey, CPAccNavUpdate, 
+                       CPActionSheetTemplate, CPAlertAction, CPAlertTemplate, CPBarButton, 
                        CPButton, CPContact, CPContactCallButton, CPContactDirectionsButton, 
                        CPContactEntity, CPContactMessageButton, CPContactTemplate, 
                        CPDashboardButton, CPDashboardController, CPEndpointListenerWrapper, 
                        CPEntity, CPGridButton, CPGridTemplate, CPImageSet, CPInformationItem, 
-                       CPInformationRatingItem, CPInformationTemplate, CPInterfaceController, 
-                       CPListImageRowItem, CPListItem, CPListSection, CPListTemplate, 
-                       CPManeuver, CPMapButton, CPMapTemplate, CPMessageComposeBarButton, 
-                       CPMessageListItem, CPMessageListItemLeadingConfiguration, 
-                       CPMessageListItemTrailingConfiguration, CPNavigationAlert, 
-                       CPNavigationSession, CPNowPlayingAddToLibraryButton, CPNowPlayingButton, 
-                       CPNowPlayingImageButton, CPNowPlayingMoreButton, CPNowPlayingPlaybackRateButton, 
-                       CPNowPlayingRepeatButton, CPNowPlayingShuffleButton, CPNowPlayingTemplate, 
-                       CPPointOfInterest, CPPointOfInterestTemplate, CPPointsOfInterestEntity, 
-                       CPRequestEndpointAction, CPRouteChoice, CPSearchTemplate, 
-                       CPSessionConfiguration, CPTabBarTemplate, CPTemplate, CPTemplateApplicationDashboardScene, 
-                       CPTemplateApplicationScene, CPTextButton, CPTravelEstimates, 
-                       CPTrip, CPTripPreviewTextConfiguration, CPUIMutableTemplateApplicationSceneSettings, 
-                       CPUITemplateApplicationSceneSettings, CPUITemplateApplicationSceneSpecification, 
-                       CPUITemplateDashboardSceneSpecification, CPVoiceControlState, 
+                       CPInformationRatingItem, CPInformationTemplate, CPInstrumentClusterController, 
+                       CPInterfaceController, CPLane, CPLaneGuidance, CPListImageRowItem, 
+                       CPListItem, CPListSection, CPListTemplate, CPManeuver, CPMapButton, 
+                       CPMapTemplate, CPMessageComposeBarButton, CPMessageListItem, 
+                       CPMessageListItemLeadingConfiguration, CPMessageListItemTrailingConfiguration, 
+                       CPNavigationAlert, CPNavigationEnum, CPNavigationSession, 
+                       CPNowPlayingAddToLibraryButton, CPNowPlayingButton, CPNowPlayingImageButton, 
+                       CPNowPlayingMoreButton, CPNowPlayingPlaybackRateButton, CPNowPlayingRepeatButton, 
+                       CPNowPlayingShuffleButton, CPNowPlayingTemplate, CPPointOfInterest, 
+                       CPPointOfInterestTemplate, CPPointsOfInterestEntity, CPRequestEndpointAction, 
+                       CPRouteChoice, CPRouteGuidance, CPSearchTemplate, CPSessionConfiguration, 
+                       CPTabBarTemplate, CPTemplate, CPTemplateApplicationDashboardScene, 
+                       CPTemplateApplicationInstrumentClusterScene, CPTemplateApplicationScene, 
+                       CPTextButton, CPTravelEstimates, CPTrip, CPTripPreviewTextConfiguration, 
+                       CPUIMutableTemplateApplicationSceneSettings, CPUITemplateApplicationSceneSettings, 
+                       CPUITemplateApplicationSceneSpecification, CPUITemplateDashboardSceneSpecification, 
+                       CPUITemplateInstrumentClusterSceneSpecification, CPVoiceControlState, 
                        CPVoiceControlTemplate, CPWindow ]
 ...

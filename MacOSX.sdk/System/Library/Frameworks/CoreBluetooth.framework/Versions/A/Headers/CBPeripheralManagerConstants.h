@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define CB_PM_API_AVAILABLE        API_AVAILABLE( ios( 13.0 ), tvos( 13.0 ), watchos( 6.0 ) ) API_UNAVAILABLE(macos)
+
 /*!
  *  @const  CBPeripheralManagerOptionShowPowerAlertKey
  *

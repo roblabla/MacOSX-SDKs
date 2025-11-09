@@ -1,7 +1,7 @@
 /*
     NSGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2019, Apple Inc.
+    Copyright (c) 2013-2021, Apple Inc.
     All rights reserved.
 */
 
@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, NSGestureRecognizerState) {
     NSGestureRecognizerStateRecognized = NSGestureRecognizerStateEnded // the recognizer has received events recognized as the gesture. the action method will be called at the next turn of the run loop and the recognizer will be reset to NSGestureRecognizerStatePossible
 };
 
-API_AVAILABLE(macos(10.10))
+API_AVAILABLE(macos(10.10)) NS_SWIFT_UI_ACTOR
 @interface NSGestureRecognizer : NSObject <NSCoding>
 
 /* valid action method signatures:

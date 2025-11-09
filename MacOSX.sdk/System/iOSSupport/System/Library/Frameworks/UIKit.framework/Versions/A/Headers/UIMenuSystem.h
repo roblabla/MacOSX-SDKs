@@ -12,7 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// The command system to build or rebuild.
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIMenuSystem : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UIMenuSystem : NSObject
 
 /// The main command system.
 @property (class, nonatomic, readonly) UIMenuSystem *mainSystem;

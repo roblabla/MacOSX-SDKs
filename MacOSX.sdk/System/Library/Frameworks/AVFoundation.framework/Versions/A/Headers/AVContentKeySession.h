@@ -539,7 +539,7 @@ AVF_EXPORT NSString *const AVContentKeyRequestRequiresValidationDataInSecureToke
  @abstract      Informs the receiver to process a persistable content key request.
  @discussion    When you receive an AVContentKeyRequest via -contentKeySession:didProvideContentKeyRequest: and you want the resulting key response to produce a key that can persist across multiple playback sessions, you must invoke -respondByRequestingPersistableContentKeyRequest on that AVContentKeyRequest in order to signal that you want to process an AVPersistableContentKeyRequest instead. If the underlying protocol supports persistable content keys, in response your delegate will receive an AVPersistableContentKeyRequest via -contentKeySession:didProvidePersistableContentKeyRequest:. NSInternalInconsistencyException will be raised, if you are attempting to create and use a persistable key but your AVContentKeySession delegate does not respond to contentKeySession:didProvidePersistableContentKeyRequest:.
  */
-- (void)respondByRequestingPersistableContentKeyRequest API_DEPRECATED("Use respondByRequestingPersistableContentKeyRequestAndReturnError: instead.", ios(10.3, 11.2)) API_UNAVAILABLE(macos, tvos, watchos);
+- (void)respondByRequestingPersistableContentKeyRequest API_DEPRECATED_WITH_REPLACEMENT("respondByRequestingPersistableContentKeyRequestAndReturnError:", ios(10.3, 11.2)) API_UNAVAILABLE(macos, tvos, watchos);
 /*
  @method		respondByRequestingPersistableContentKeyRequestAndReturnError:
  @abstract		Informs the receiver to process a persistable content key request.
@@ -562,7 +562,7 @@ API_AVAILABLE(macos(10.15), ios(10.3), tvos(10.3), watchos(7.0))
                 The response returned from the key vendor as a result of a request generated from makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:.
  @param         options
                 Additional information necessary to obtain the persistable content key, or nil if none.
- @param         error
+ @param         outError
                 If obtaining the persistable content key fails, will be set to an instance of NSError describing the failure.
  @result        The persistable content key data that may be stored offline to answer future loading requests of the same content key.
  @discussion    The data returned from this method may be used to immediately satisfy an AVPersistableContentKeyRequest, as well as any subsequent requests for the same key url using processContentKeyResponse: method. When you receive an AVContentKeyRequest via -contentKeySession:didProvideContentKeyRequest: and you want to use existing persistent content key from storage, you must invoke -respondByRequestingPersistableContentKeyRequest on that AVContentKeyRequest in order to signal that you want to process an AVPersistableContentKeyRequest instead. If the underlying protocol supports persistable content keys, in response your delegate will receive an AVPersistableContentKeyRequest via -contentKeySession:didProvidePersistableContentKeyRequest:. You can set the persistent key from storage on the AVPersistableContentKeyRequest using processContentKeyResponse:.
@@ -739,7 +739,7 @@ API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4))
                 The sample buffer to which the content key is to be attached.
  @param         contentKey
                 The content key to be attached.
- @param         errorOut
+ @param         outError
                 If the result is NO and errorOut is non-NULL, the location referenced by errorOut receives an instance of NSError that describes the reason for failure to attach the content key.
  @discussion    The client is expected to attach AVContentKeys to CMSampleBuffers that have been created by the client for enqueueing with AVSampleBufferDisplayLayer or AVSampleBufferAudioRenderer, for which the AVContentKeySpecifier matches indications of suitability that are available to the client according to the content key system that's in use.
 */

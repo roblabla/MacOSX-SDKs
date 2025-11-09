@@ -2,17 +2,23 @@
 //  VZVirtualMachineConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2019-2020 Apple Inc. All rights reserved.
+//  Copyright © 2019-2021 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class VZAudioDeviceConfiguration;
 @class VZBootLoader;
 @class VZEntropyDeviceConfiguration;
+@class VZDirectorySharingDeviceConfiguration;
+@class VZGraphicsDeviceConfiguration;
+@class VZKeyboardConfiguration;
 @class VZMemoryBalloonDeviceConfiguration;
 @class VZNetworkDeviceConfiguration;
+@class VZPlatformConfiguration;
+@class VZPointingDeviceConfiguration;
 @class VZSerialPortConfiguration;
 @class VZSocketDeviceConfiguration;
 @class VZStorageDeviceConfiguration;
@@ -21,9 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract Virtual machine configuration.
  @discussion
     VZVirtualMachineConfiguration defines the configuration of a VZVirtualMachine.
-
-    The following properties must be configured before creating a virtual machine:
-    - bootLoader
 
     The configuration of devices is often done in two parts:
     - Device configuration
@@ -40,6 +43,23 @@ NS_ASSUME_NONNULL_BEGIN
     Creating a virtual machine using the Virtualization framework requires the app to have the "com.apple.security.virtualization" entitlement.
     A VZVirtualMachineConfiguration is considered invalid if the application does not have the entitlement.
 
+    ## Configuring a virtual machine to run macOS
+
+    To configure a virtual machine running macOS:
+    - Set up a platform configuration of type VZMacPlatformConfiguration and set it on the “platform” property.
+    - Set up a VZMacOSBootLoader on the “bootLoader” property.
+    - Set the CPUCount and memorySize based on the guest's VZMacOSConfigurationRequirements.
+    - Set up the main storage device as first device on “storageDevices”. Additional storage devices can be set up after the main storage.
+    - Set up the “keyboards”, “pointingDevices” and “graphicsDevices” devices.
+    - Set up any additional device as needed.
+
+    ## Configuring a virtual machine to run Linux
+
+    To configure a virtual machine running Linux:
+    - Set up a VZLinuxBootLoader on the “bootLoader” property.
+    - Set the CPUCount and memorySize.
+    - Set up any additional device as needed.
+
  @see VZVirtualMachine
  */
 VZ_EXPORT API_AVAILABLE(macos(11.0))
@@ -48,6 +68,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 /*!
  @abstract Boot loader used when the virtual machine starts.
  @see VZLinuxBootLoader
+ @see VZMacOSBootLoader
  */
 @property (nullable, strong) VZBootLoader *bootLoader;
 
@@ -62,7 +83,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @see VZVirtualMachineConfiguration.minimumAllowedMemorySize
  @see VZVirtualMachineConfiguration.maximumAllowedMemorySize
  */
-@property (readwrite) unsigned long long memorySize;
+@property (readwrite) uint64_t memorySize;
 
 /*!
  @abstract Number of CPUs.
@@ -74,6 +95,25 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @see VZVirtualMachineConfiguration.maximumAllowedCPUCount
  */
 @property (readwrite) NSUInteger CPUCount;
+
+/*!
+ @abstract The hardware platform to use.
+ @discussion
+    Can be an instance of a VZGenericPlatformConfiguration or VZMacPlatformConfiguration. Defaults to VZGenericPlatformConfiguration.
+ */
+@property (strong) VZPlatformConfiguration *platform API_AVAILABLE(macos(12.0));
+
+/*!
+ @abstract List of audio devices. Empty by default.
+ @see VZVirtioSoundDeviceConfiguration
+ */
+@property (readwrite, copy) NSArray<VZAudioDeviceConfiguration *> *audioDevices API_AVAILABLE(macos(12.0));
+
+/*!
+ @abstract List of directory sharing devices. Empty by default.
+ @see VZVirtioFileSystemDeviceConfiguration
+ */
+@property (readwrite, copy) NSArray<VZDirectorySharingDeviceConfiguration *> *directorySharingDevices API_AVAILABLE(macos(12.0));
 
 /*!
  @abstract List of entropy devices. Empty by default.
@@ -111,6 +151,24 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  */
 @property (readwrite, copy) NSArray<VZStorageDeviceConfiguration *> *storageDevices;
 
+/*!
+ @abstract List of keyboards. Empty by default.
+ @see VZUSBKeyboardConfiguration
+ */
+@property (copy) NSArray<VZKeyboardConfiguration *> *keyboards API_AVAILABLE(macos(12.0));
+
+/*!
+ @abstract List of pointing devices. Empty by default.
+ @see VZUSBScreenCoordinatePointingDeviceConfiguration
+ */
+@property (copy) NSArray<VZPointingDeviceConfiguration *> *pointingDevices API_AVAILABLE(macos(12.0));
+
+/*!
+ @abstract List of graphics devices. Empty by default.
+ @see VZMacGraphicsDeviceConfiguration
+ */
+@property (copy) NSArray<VZGraphicsDeviceConfiguration *> *graphicsDevices API_AVAILABLE(macos(12.0));
+
 @end
 
 /*!
@@ -123,19 +181,19 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @param error If not nil, assigned with the validation error if the validation failed.
  @return YES if the configuration is valid.
  */
-- (BOOL)validateWithError:(NSError * _Nullable *)error;
+- (BOOL)validateWithError:(NSError **)error;
 
 /*!
  @abstract: Minimum amount of memory required by virtual machines.
  @see VZVirtualMachineConfiguration.memorySize
  */
-@property (class, readonly) unsigned long long minimumAllowedMemorySize;
+@property (class, readonly) uint64_t minimumAllowedMemorySize;
 
 /*!
  @abstract: Maximum amount of memory allowed for a virtual machine.
  @see VZVirtualMachineConfiguration.memorySize
  */
-@property (class, readonly) unsigned long long maximumAllowedMemorySize;
+@property (class, readonly) uint64_t maximumAllowedMemorySize;
 
 /*!
  @abstract: Minimum number of CPUs for a virtual machine.

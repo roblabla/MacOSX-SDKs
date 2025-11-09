@@ -20,6 +20,12 @@
 @class AVVideoComposition;
 @class AVAssetReaderOutputInternal;
 
+@class AVCaption;
+@class AVCaptionGroup;
+@class AVAssetReaderOutputCaptionAdaptorInternal;
+
+@protocol AVAssetReaderCaptionValidationHandling;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
@@ -546,6 +552,124 @@ AV_INIT_UNAVAILABLE
 	Before calling this method, you must ensure that the output which underlies the receiver is attached to an AVAssetReader via a prior call to -addOutput: and that -startReading has been called on the asset reader.
  */
 - (nullable AVTimedMetadataGroup *)nextTimedMetadataGroup;
+
+@end
+
+/*!
+ @class AVAssetReaderOutputCaptionAdaptor
+ @abstract
+	An adaptor class for reading instances of AVCaptionGroup from a track containing timed text (i.e. subtitles or closed captions).
+	
+ */
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+@interface AVAssetReaderOutputCaptionAdaptor : NSObject
+{
+@private
+	AVAssetReaderOutputCaptionAdaptorInternal *_internal;
+}
+AV_INIT_UNAVAILABLE
+
+/*!
+ @method assetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput:
+ @abstract
+	Creates a new caption adaptor for reading from the given track output.
+ @param trackOutput
+	The track output from which to read captions.
+ @result
+	A new instance of AVAssetReaderOutputCaptionAdaptor, configured to read captions from the given AVAssetReaderTrackOutput.
+ @discussion
+	It is an error to pass nil to this method.
+ */
++ (instancetype)assetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput:(AVAssetReaderTrackOutput *)trackOutput;
+
+/*!
+ @method initWithAssetReaderTrackOutput:
+ @abstract
+	Creates a new caption adaptor for reading from the given track output.
+ @param trackOutput
+	The track output from which to read captions.
+ @result
+	A new instance of AVAssetReaderOutputCaptionAdaptor, configured to read captions from the given AVAssetReaderTrackOutput.
+ @discussion
+	It is an error to pass nil to this method.
+ */
+- (instancetype)initWithAssetReaderTrackOutput:(AVAssetReaderTrackOutput *)trackOutput;
+
+/*!
+ @property assetReaderTrackOutput
+ @abstract
+	The track output used to create the receiver.
+ */
+@property (nonatomic, readonly) AVAssetReaderTrackOutput *assetReaderTrackOutput;
+
+/*!
+ @method nextCaptionGroup
+ @abstract
+	Returns the next caption.
+ @result
+	An instance of AVCaption representing the next caption.
+ @discussion
+	The method returns the next caption group.
+ */
+- (nullable AVCaptionGroup *)nextCaptionGroup;
+
+/*!
+ @method captionsNotPresentInPreviousGroupsInCaptionGroup:
+ @abstract
+	Returns the set of captions that are present in the given group but were not present in any group previously vended by calls to -nextCaptionGroup: on the receiver.
+ @param captionGroup
+	The group containing the captions of interest.
+ @result
+	An array of AVCaption objects.
+ @discussion
+	The returned array contains the set of captions in the given group whose time ranges have the same start time as the group.  This method is provided as a convenience for clients who want to process captions one-by-one and do not need a complete view of the set of captions active at a given time.
+ */
+- (NSArray<AVCaption *> *)captionsNotPresentInPreviousGroupsInCaptionGroup:(AVCaptionGroup *)captionGroup;
+								
+@end
+
+/*!
+ @category AVAssetReaderOutputCaptionAdaptor (AVAssetReaderCaptionValidation)
+ @abstract
+	Category of AVAssetReaderOutputCaptionAdaptor for caption validation handling
+ */
+@interface AVAssetReaderOutputCaptionAdaptor (AVAssetReaderCaptionValidation)
+
+/*!
+ @property validationDelegate:
+ @abstract
+	Register caption validation handling callback protocol to the caption adaptor.
+
+ */
+@property (weak) id<AVAssetReaderCaptionValidationHandling> validationDelegate;
+
+@end
+
+/*!
+ @protocol AVAssetReaderCaptionValidationHandling
+ @abstract
+	A protocol to receive caption validation notifications
+ @discussion
+	A client can implement the protocol on its own class which processes the caption validation calls.
+ */
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+@protocol AVAssetReaderCaptionValidationHandling <NSObject>
+
+@optional
+
+/*!
+ @method captionAdaptor:didVendCaption:skippingUnsupportedSourceSyntaxElements:
+ @abstract
+	Called when one or more syntax elements were ignored in the process of creating the caption object.
+
+ @param adaptor  The caption adaptor object
+ @param caption  The caption object. The parser skipped unsupported syntax elements when creating this object.
+ @param syntaxElements Array of NSString to represent the skipped syntax.
+
+ @discussion
+	While the reported string content is human readable, it is highly technical and probably meaningful only to clients who are familiar with the source caption format. It is primarily designed for logging purpose and would not be suitable for UI purpose.
+ */
+- (void)captionAdaptor:(AVAssetReaderOutputCaptionAdaptor *)adaptor didVendCaption:(AVCaption *)caption skippingUnsupportedSourceSyntaxElements:(NSArray<NSString *> *)syntaxElements;
 
 @end
 

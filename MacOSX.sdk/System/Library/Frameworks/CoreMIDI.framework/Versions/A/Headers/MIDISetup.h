@@ -78,7 +78,7 @@ typedef MIDIObjectRef MIDISetupRef;
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupCreate(	MIDISetupRef *outSetup )					API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos);
+MIDISetupCreate(	MIDISetupRef *outSetup )					API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 //  -----------------------------------------------------------------------------
@@ -96,7 +96,7 @@ MIDISetupCreate(	MIDISetupRef *outSetup )					API_DEPRECATED("No longer supporte
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupDispose(	MIDISetupRef setup )						API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos);
+MIDISetupDispose(	MIDISetupRef setup )						API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -120,7 +120,7 @@ MIDISetupDispose(	MIDISetupRef setup )						API_DEPRECATED("No longer supported"
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupInstall(	MIDISetupRef setup )						API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos);
+MIDISetupInstall(	MIDISetupRef setup )						API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 //  -----------------------------------------------------------------------------
@@ -141,7 +141,7 @@ MIDISetupInstall(	MIDISetupRef setup )						API_DEPRECATED("No longer supported"
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupGetCurrent(	MIDISetupRef *outSetup )				API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos);
+MIDISetupGetCurrent(	MIDISetupRef *outSetup )				API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 //  -----------------------------------------------------------------------------
@@ -165,7 +165,7 @@ MIDISetupGetCurrent(	MIDISetupRef *outSetup )				API_DEPRECATED("No longer suppo
 */
 extern OSStatus
 MIDISetupToData(	MIDISetupRef	setup,
-					CFDataRef __nullable * __nonnull outData )	API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos);
+					CFDataRef __nullable * __nonnull outData )	API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -188,7 +188,7 @@ MIDISetupToData(	MIDISetupRef	setup,
 */
 extern OSStatus
 MIDISetupFromData(	CFDataRef 		data, 
-					MIDISetupRef *	outSetup)					API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos);
+					MIDISetupRef *	outSetup)					API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -223,7 +223,7 @@ extern OSStatus
 MIDIDeviceNewEntity(MIDIDeviceRef device, CFStringRef name, MIDIProtocolID protocol,
 					Boolean embedded, ItemCount numSourceEndpoints,
 					ItemCount numDestinationEndpoints, MIDIEntityRef *newEntity)
-															API_AVAILABLE(macos(11.0), ios(14.0));
+															API_AVAILABLE(macos(11.0), ios(14.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -255,7 +255,7 @@ extern OSStatus
 MIDIDeviceAddEntity(MIDIDeviceRef device, CFStringRef name, 
 					Boolean embedded, ItemCount numSourceEndpoints,
 					ItemCount numDestinationEndpoints, MIDIEntityRef *newEntity)
-				API_DEPRECATED_WITH_REPLACEMENT("MIDIDeviceNewEntity", macos(10.0, API_TO_BE_DEPRECATED), ios(4.2, API_TO_BE_DEPRECATED));
+				API_DEPRECATED_WITH_REPLACEMENT("MIDIDeviceNewEntity", macos(10.0, API_TO_BE_DEPRECATED), ios(4.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -274,7 +274,7 @@ MIDIDeviceAddEntity(MIDIDeviceRef device, CFStringRef name,
 */
 extern OSStatus
 MIDIDeviceRemoveEntity(MIDIDeviceRef device, MIDIEntityRef entity)
-																API_AVAILABLE(macos(10.1), ios(4.2));
+																API_AVAILABLE(macos(10.1), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -298,7 +298,7 @@ MIDIDeviceRemoveEntity(MIDIDeviceRef device, MIDIEntityRef entity)
 */
 extern OSStatus
 MIDIEntityAddOrRemoveEndpoints(MIDIEntityRef entity, ItemCount numSourceEndpoints,
-					ItemCount numDestinationEndpoints)			API_AVAILABLE(macos(10.2), ios(4.2));
+					ItemCount numDestinationEndpoints)			API_AVAILABLE(macos(10.2), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -315,7 +315,7 @@ MIDIEntityAddOrRemoveEndpoints(MIDIEntityRef entity, ItemCount numSourceEndpoint
 						The device to be added.
 */
 extern OSStatus
-MIDISetupAddDevice(		MIDIDeviceRef device )					API_AVAILABLE(macos(10.1), ios(4.2));
+MIDISetupAddDevice(		MIDIDeviceRef device )					API_AVAILABLE(macos(10.1), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -337,7 +337,7 @@ MIDISetupAddDevice(		MIDIDeviceRef device )					API_AVAILABLE(macos(10.1), ios(4
 						The device to be added.
 */
 extern OSStatus
-MIDISetupRemoveDevice(	MIDIDeviceRef device )				API_AVAILABLE(macos(10.1), ios(4.2));
+MIDISetupRemoveDevice(	MIDIDeviceRef device )				API_AVAILABLE(macos(10.1), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -351,7 +351,7 @@ MIDISetupRemoveDevice(	MIDIDeviceRef device )				API_AVAILABLE(macos(10.1), ios(
 						The device to be added.
 */
 extern OSStatus
-MIDISetupAddExternalDevice(	MIDIDeviceRef device )			API_AVAILABLE(macos(10.1), ios(4.2));
+MIDISetupAddExternalDevice(	MIDIDeviceRef device )			API_AVAILABLE(macos(10.1), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -365,7 +365,7 @@ MIDISetupAddExternalDevice(	MIDIDeviceRef device )			API_AVAILABLE(macos(10.1), 
 						The device to be removed.
 */
 extern OSStatus
-MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		API_AVAILABLE(macos(10.1), ios(4.2));
+MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		API_AVAILABLE(macos(10.1), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -395,7 +395,7 @@ MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		API_AVAILABLE(macos(10.1)
 */
 extern OSStatus
 MIDIGetSerialPortOwner(	CFStringRef			portName, 
-						CFStringRef __nullable * __nonnull outDriverName )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) API_UNAVAILABLE(ios, tvos);
+						CFStringRef __nullable * __nonnull outDriverName )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -418,7 +418,7 @@ MIDIGetSerialPortOwner(	CFStringRef			portName,
 */
 extern OSStatus
 MIDISetSerialPortOwner(	CFStringRef			portName, 
-						CFStringRef			driverName )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) API_UNAVAILABLE(ios, tvos);
+						CFStringRef			driverName )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -440,7 +440,7 @@ MIDISetSerialPortOwner(	CFStringRef			portName,
 	@result			An OSStatus result code.	
 */
 extern OSStatus
-MIDIGetSerialPortDrivers(	CFArrayRef __nullable * __nonnull outDriverNames )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) API_UNAVAILABLE(ios, tvos);
+MIDIGetSerialPortDrivers(	CFArrayRef __nullable * __nonnull outDriverNames )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -467,7 +467,7 @@ MIDIGetSerialPortDrivers(	CFArrayRef __nullable * __nonnull outDriverNames )	API
 extern OSStatus		
 MIDIExternalDeviceCreate(CFStringRef name, CFStringRef manufacturer, 
 							CFStringRef model, MIDIDeviceRef *outDevice)
-															API_AVAILABLE(macos(10.1), ios(4.2));
+															API_AVAILABLE(macos(10.1), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 #ifdef __cplusplus
 }

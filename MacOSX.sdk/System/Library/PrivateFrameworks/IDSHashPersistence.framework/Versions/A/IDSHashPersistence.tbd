@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2768BFFA-4C2A-3FB7-880F-214BECA5EDB4
+    value:           C9F5E177-7C78-3752-BBC6-E063D108BB5D
   - target:          x86_64-maccatalyst
-    value:           2768BFFA-4C2A-3FB7-880F-214BECA5EDB4
+    value:           C9F5E177-7C78-3752-BBC6-E063D108BB5D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           216618ED-A4F3-328C-9DE2-30195F879AEC
+    value:           252C5589-3D23-359F-ABB9-AAF3805FA13D
   - target:          arm64e-maccatalyst
-    value:           216618ED-A4F3-328C-9DE2-30195F879AEC
+    value:           252C5589-3D23-359F-ABB9-AAF3805FA13D
 install-name:    '/System/Library/PrivateFrameworks/IDSHashPersistence.framework/Versions/A/IDSHashPersistence'
 current-version: 800
 exports:

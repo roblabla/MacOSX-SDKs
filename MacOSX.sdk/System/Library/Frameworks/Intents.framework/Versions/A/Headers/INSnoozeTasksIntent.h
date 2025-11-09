@@ -87,7 +87,7 @@ API_UNAVAILABLE(macos, tvos)
                     withCompletion:(void (^)(NSArray<INSnoozeTasksTaskResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveTasks(for:with:));
 
 - (void)resolveNextTriggerTimeForSnoozeTasks:(INSnoozeTasksIntent *)intent
-                    withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveNextTriggerTime(for:with:));
+                              withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveNextTriggerTime(for:with:));
 
 @end
 

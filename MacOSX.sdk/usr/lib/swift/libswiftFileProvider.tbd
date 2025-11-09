@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4F61378D-51BC-30A3-9B9D-CE0AA82183F4
+    value:           280DDB0C-F819-3A50-B820-21C3624CD5E9
   - target:          x86_64-maccatalyst
-    value:           4F61378D-51BC-30A3-9B9D-CE0AA82183F4
+    value:           280DDB0C-F819-3A50-B820-21C3624CD5E9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1377BB34-AE34-36E8-98F1-78AFB8547DC1
+    value:           9B4D55B9-0725-39E6-8E0C-75706C4BA2CB
   - target:          arm64e-maccatalyst
-    value:           1377BB34-AE34-36E8-98F1-78AFB8547DC1
+    value:           9B4D55B9-0725-39E6-8E0C-75706C4BA2CB
 install-name:    '/usr/lib/swift/libswiftFileProvider.dylib'
-current-version: 347.7
+current-version: 372.1
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$sSo27NSFileProviderDomainVersionC04FileB0E1loiySbAB_ABtFZ', 
                        '_$sSo27NSFileProviderDomainVersionCSL04FileB0Mc', '__swift_FORCE_LOAD_$_swiftFileProvider' ]
 ...

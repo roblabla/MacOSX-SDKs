@@ -14,7 +14,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) @interface UIBarButtonItemStateAppearance : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
+@interface UIBarButtonItemStateAppearance : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -33,7 +34,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) @interface UIBarButtonItemStat
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) @interface UIBarButtonItemAppearance : NSObject<NSCopying, NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
+@interface UIBarButtonItemAppearance : NSObject<NSCopying, NSSecureCoding>
 
 /// Construct an appearance for the UIBarButtonItemStylePlain style.
 - (instancetype)init;

@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2E2672F5-C9F1-36E4-B3BA-D3561D7D8BEC
+    value:           A970B259-ED78-32A3-B17D-3DD2D9C73704
   - target:          x86_64-maccatalyst
-    value:           2E2672F5-C9F1-36E4-B3BA-D3561D7D8BEC
+    value:           A970B259-ED78-32A3-B17D-3DD2D9C73704
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DCCE868C-501B-39E1-8578-10EC36DC2BB6
+    value:           112D8C03-75CA-3D77-8947-FCC334661FBD
   - target:          arm64e-maccatalyst
-    value:           DCCE868C-501B-39E1-8578-10EC36DC2BB6
+    value:           112D8C03-75CA-3D77-8947-FCC334661FBD
 install-name:    '/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices'
-current-version: 505.100.7
+current-version: 617.0.30
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NSStringFromRBSAcquisitionCompletionPolicy, _NSStringFromRBSCPUMaximumUsageViolationPolicy, 
                        _NSStringFromRBSDebugState, _NSStringFromRBSDurationEndPolicy, 
-                       _NSStringFromRBSDurationStartPolicy, _NSStringFromRBSJetsamPriority, 
+                       _NSStringFromRBSDurationStartPolicy, _NSStringFromRBSGPURole, 
                        _NSStringFromRBSLegacyFlags, _NSStringFromRBSLegacyReason, 
                        _NSStringFromRBSPreventLaunchState, _NSStringFromRBSRole, 
                        _NSStringFromRBSTaskState, _NSStringFromRBSTerminationResistance, 
@@ -46,23 +46,24 @@ exports:
                        _RBSDeserializeSetOfBSXPCEncodableObjectsFromXPCDictionaryWithKey, 
                        _RBSDeserializeStringFromXPCDictionaryWithKey, _RBSDictionaryForKey, 
                        _RBSDispatchAsyncWithQoS, _RBSDispatchQueueAssert, _RBSEndowmentDecode, 
-                       _RBSEndowmentEncode, _RBSExecutablePathForPID, _RBSIsBinaryCatalystOriOS, 
-                       _RBSLaunchRequestErrorExitContextKey, _RBSMachAbsoluteTime, 
-                       _RBSMachPortIsType, _RBSMachPortType, _RBSNumberForKey, _RBSPIDExists, 
-                       _RBSPIDIsBeingDebugged, _RBSPathForCurrentUserDirectory, _RBSPathForSystemDirectory, 
-                       _RBSPreventLaunchStateIsPrevented, _RBSProcessStateAssertionDomainNames, 
-                       _RBSProcessStateAssertionExplanation, _RBSProcessStateAssertionReason, 
-                       _RBSProcessStateAssertionRunningReason, _RBSProcessTimeLimitationNone, 
-                       _RBSRequestErrorDomain, _RBSResourceViolationServiceName, 
-                       _RBSRoleFromDarwinRole, _RBSSandboxCanAccessMachService, _RBSSerializeArrayOfBSXPCEncodableObjectsToXPCDictionaryWithKey, 
+                       _RBSEndowmentEncode, _RBSExecutablePathForBundlePath, _RBSExecutablePathForPID, 
+                       _RBSInvalidRealAuditToken, _RBSIsBinaryCatalystOriOS, _RBSLaunchRequestErrorExitContextKey, 
+                       _RBSMachAbsoluteTime, _RBSMachPortIsType, _RBSMachPortType, 
+                       _RBSNumberForKey, _RBSPIDExists, _RBSPIDIsBeingDebugged, _RBSPathForCurrentUserDirectory, 
+                       _RBSPathForSystemDirectory, _RBSPreventLaunchStateIsPrevented, 
+                       _RBSProcessStateAssertionDomainNames, _RBSProcessStateAssertionExplanation, 
+                       _RBSProcessStateAssertionReason, _RBSProcessStateAssertionRunningReason, 
+                       _RBSProcessTimeLimitationNone, _RBSRealAuditTokenValid, _RBSRequestErrorDomain, 
+                       _RBSResourceViolationServiceName, _RBSRoleFromDarwinRole, 
+                       _RBSSandboxCanAccessMachService, _RBSSerializeArrayOfBSXPCEncodableObjectsToXPCDictionaryWithKey, 
                        _RBSSerializeArrayToXPCDictionaryWithKey, _RBSSerializeBSXPCEncodableObjectToXPCDictionary, 
                        _RBSSerializeBSXPCEncodableObjectToXPCDictionaryWithKey, _RBSSerializeCFValueToXPCDictionaryWithKey, 
                        _RBSSerializeDataToXPCDictionaryWithKey, _RBSSerializeDoubleToXPCDictionaryWithKey, 
                        _RBSSerializeNSSecureEncodableObjectToXPCDictionaryWithKey, 
                        _RBSSerializeSetOfBSXPCEncodableObjectsToXPCDictionaryWithKey, 
                        _RBSSerializeSetToXPCDictionaryWithKey, _RBSSerializeStringToXPCDictionaryWithKey, 
-                       _RBSServiceErrorDomain, _RBSServiceErrorEntitlementKey, _RBSServiceErrorLaunchRequestExitStatusRepresentationKey, 
-                       _RBSServiceErrorPermanentKey, _RBSServiceInitialize, _RBSServiceMessageAssertionIdentifierKey, 
+                       _RBSServiceErrorDomain, _RBSServiceErrorEntitlementKey, _RBSServiceErrorPermanentKey, 
+                       _RBSServiceInitialize, _RBSServiceMessageAssertionIdentifierKey, 
                        _RBSServiceMessageErrorKey, _RBSServiceMessageProcessIdentifierKey, 
                        _RBSServiceMessageProcessStatesKey, _RBSServiceMessageReturnValueKey, 
                        _RBSStringForKey, _RBSSystemRootDirectory, _RBSTaskStateIsRunning, 
@@ -86,30 +87,32 @@ exports:
                        RBSAppNapPreventLowPriorityCPUGrant, RBSAppNapPreventSuppressedCPUGrant, 
                        RBSAppNapPreventTimerThrottleGrant, RBSAssertion, RBSAssertionDescriptor, 
                        RBSAssertionIdentifier, RBSAttribute, RBSAuditToken, RBSCPUAccessGrant, 
-                       RBSCPUMaximumUsageLimitation, RBSCPUMinimumUsageGrant, RBSCompoundPredicate, 
-                       RBSConnection, RBSDebugGrant, RBSDefineRelativeStartTimeGrant, 
-                       RBSDomainAttribute, RBSDurationAttribute, RBSEndowmentGrant, 
-                       RBSForceRoleManageAttribute, RBSGPUAccessGrant, RBSGrant, 
-                       RBSHandshakeRequest, RBSHandshakeResponse, RBSHereditaryGrant, 
-                       RBSInheritance, RBSInheritanceChangeSet, RBSJetsamPriorityGrant, 
-                       RBSLaunchContext, RBSLaunchRequest, RBSLegacyAttribute, RBSLimitation, 
-                       RBSMachPortTaskNameRight, RBSMimicTaskSuspensionAttribute, 
-                       RBSPersistentAttribute, RBSPreventIdleSleepGrant, RBSPreventLaunchLimitation, 
-                       RBSProcessApplicationPredicate, RBSProcessAssertionInfo, RBSProcessBKSLegacyPredicate, 
-                       RBSProcessBundle, RBSProcessEverythingPredicate, RBSProcessExitContext, 
-                       RBSProcessExitEvent, RBSProcessExitStatus, RBSProcessHandle, 
-                       RBSProcessIdentifier, RBSProcessIdentity, RBSProcessInfoPlistResult, 
-                       RBSProcessInstance, RBSProcessIntPredicate, RBSProcessLimitations, 
-                       RBSProcessMonitor, RBSProcessMonitorConfiguration, RBSProcessPredicate, 
-                       RBSProcessPredicateImpl, RBSProcessState, RBSProcessStateDescriptor, 
-                       RBSProcessStateUpdate, RBSProcessStringPredicate, RBSRequest, 
-                       RBSResistTerminationGrant, RBSResourceViolationHandler, RBSRunningReasonAttribute, 
-                       RBSService, RBSSubordinateProcessAttribute, RBSSuspendableCPUGrant, 
-                       RBSTagAttribute, RBSTarget, RBSTerminateContext, RBSTerminateRequest, 
-                       RBSTerminationAssertion, RBSWorkloop, RBSXPCCoder, RBSXPCCodingArray, 
-                       RBSXPCMessage, RBSXPCMessageContext, RBSXPCMessageReply, RBSXPCServiceDefinition, 
+                       RBSCPUMaximumUsageLimitation, RBSCPUMinimumUsageGrant, RBSCompoundAllPredicate, 
+                       RBSCompoundAnyPredicate, RBSConnection, RBSConstraintsAttribute, 
+                       RBSDebugGrant, RBSDefineRelativeStartTimeGrant, RBSDomainAttribute, 
+                       RBSDurationAttribute, RBSEndowmentGrant, RBSForceRoleManageAttribute, 
+                       RBSGPUAccessGrant, RBSGrant, RBSHandshakeRequest, RBSHandshakeResponse, 
+                       RBSHereditaryGrant, RBSInheritance, RBSInheritanceChangeSet, 
+                       RBSJetsamPriorityGrant, RBSLaunchContext, RBSLaunchGrant, 
+                       RBSLaunchRequest, RBSLegacyAttribute, RBSLimitation, RBSMachPortTaskNameRight, 
+                       RBSMimicTaskSuspensionAttribute, RBSPersistentAttribute, RBSPreventIdleSleepGrant, 
+                       RBSPreventLaunchLimitation, RBSProcessApplicationPredicate, 
+                       RBSProcessAssertionInfo, RBSProcessBKSLegacyPredicate, RBSProcessBundle, 
+                       RBSProcessEverythingPredicate, RBSProcessExitContext, RBSProcessExitEvent, 
+                       RBSProcessExitStatus, RBSProcessHandle, RBSProcessIdentifier, 
+                       RBSProcessIdentity, RBSProcessInfoPlistResult, RBSProcessInstance, 
+                       RBSProcessIntPredicate, RBSProcessLimitations, RBSProcessMonitor, 
+                       RBSProcessMonitorConfiguration, RBSProcessPredicate, RBSProcessPredicateImpl, 
+                       RBSProcessState, RBSProcessStateDescriptor, RBSProcessStateUpdate, 
+                       RBSProcessStringPredicate, RBSRequest, RBSResistTerminationGrant, 
+                       RBSResourceViolationHandler, RBSRunningReasonAttribute, RBSSavedEndowment, 
+                       RBSSavedEndowmentGrant, RBSService, RBSSubordinateProcessAttribute, 
+                       RBSSuspendableCPUGrant, RBSTagAttribute, RBSTarget, RBSTerminateContext, 
+                       RBSTerminateRequest, RBSTerminationAssertion, RBSWorkloop, 
+                       RBSWrappedLSInfo, RBSXPCCoder, RBSXPCCodingArray, RBSXPCMessage, 
+                       RBSXPCMessageContext, RBSXPCMessageReply, RBSXPCServiceDefinition, 
                        RBSXPCServiceIdentity ]
-    objc-ivars:      [ RBSProcessIdentity._description, RBSProcessIdentity._euid, 
+    objc-ivars:      [ RBSProcessIdentity._auid, RBSProcessIdentity._description, 
                        RBSProcessIdentity._hash, RBSProcessIdentity._pid, RBSProcessIdentity._platform, 
                        RBSSuspendableCPUGrant._role, RBSXPCCoder._message, RBSXPCCoder._xpcConnection ]
 ...

@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, UITimingCurveType) {
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_SWIFT_UI_ACTOR
 @protocol UITimingCurveProvider <NSCoding, NSCopying>
 
 @property(nonatomic, readonly) UITimingCurveType timingCurveType;

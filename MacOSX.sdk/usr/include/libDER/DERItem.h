@@ -24,19 +24,19 @@
 #ifndef _DER_ITEM_H_
 #define _DER_ITEM_H_
 
-#if __has_include(<security_libDER/libDER/libDER_config.h>)
-    #include <security_libDER/libDER/libDER_config.h>
-#else
-    #include <libDER/libDER_config.h>
-#endif
+#include <libDER/libDER_config.h>
 
 __BEGIN_DECLS
+
+#ifndef DER_counted_by
+#define DER_counted_by(x)
+#endif
 
 /*
  * Primary representation of a block of memory.
  */
 typedef struct {
-    DERByte        *data;
+    DERByte        *DER_counted_by(length) data;
     DERSize        length;
 } DERItem;
 

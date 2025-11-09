@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2EFAA709-2225-3AB7-AE0E-A59892EE4C45
+    value:           5A81BABA-A697-3F36-AC93-59E46FACD378
   - target:          x86_64-maccatalyst
-    value:           2EFAA709-2225-3AB7-AE0E-A59892EE4C45
+    value:           5A81BABA-A697-3F36-AC93-59E46FACD378
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           70439D89-93C8-31B9-B3B6-05136D1CAA72
+    value:           2694CC66-70EF-318E-969A-06D3A5D393AC
   - target:          arm64e-maccatalyst
-    value:           70439D89-93C8-31B9-B3B6-05136D1CAA72
+    value:           2694CC66-70EF-318E-969A-06D3A5D393AC
 install-name:    '/System/Library/PrivateFrameworks/MMCS.framework/Versions/A/MMCS'
-current-version: 573
+current-version: 593
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -80,21 +80,21 @@ exports:
                        _kMMCSRegisteredChunks, _kMMCSRequestContainerSizeHintValue, 
                        _kMMCSRequestDisableVendorTLS, _kMMCSRequestFetchAuthorizationOnly, 
                        _kMMCSRequestForceGetCompleteRequest, _kMMCSRequestOptionAllowsCellularAccess, 
-                       _kMMCSRequestOptionAllowsPowerNapScheduling, _kMMCSRequestOptionAllowsRetryForBackgroundDataTasks, 
-                       _kMMCSRequestOptionAuthTokenTimeout, _kMMCSRequestOptionBackgroundConnectionPoolName, 
-                       _kMMCSRequestOptionBackgroundConnectionPoolSize, _kMMCSRequestOptionBoundInterfaceIdentifier, 
-                       _kMMCSRequestOptionCacheDeleteAvailableSpaceClass, _kMMCSRequestOptionCallerRequestUUID, 
-                       _kMMCSRequestOptionChunkingLibraryCorruptionMode, _kMMCSRequestOptionClientLocation, 
-                       _kMMCSRequestOptionContainerIdentifier, _kMMCSRequestOptionDiscretionaryNetworkBehavior, 
-                       _kMMCSRequestOptionDuetPreClearedMode, _kMMCSRequestOptionErrorOnPreallocationFailure, 
-                       _kMMCSRequestOptionForceGetChunks, _kMMCSRequestOptionHTTPClass, 
-                       _kMMCSRequestOptionInlineCompleteLogicInvertedMode, _kMMCSRequestOptionInsertHeaders, 
-                       _kMMCSRequestOptionInsufficientDiskSpaceMode, _kMMCSRequestOptionItemOptions, 
-                       _kMMCSRequestOptionMetaserverAllowedHostnamesOverride, _kMMCSRequestOptionMetaserverAllowedSchemesOverride, 
-                       _kMMCSRequestOptionMetaserverCheckDisabled, _kMMCSRequestOptionMetricOptions, 
-                       _kMMCSRequestOptionNetworkServiceType, _kMMCSRequestOptionNetworkingDelegate, 
-                       _kMMCSRequestOptionPreauthorization, _kMMCSRequestOptionPriority, 
-                       _kMMCSRequestOptionQoS, _kMMCSRequestOptionReaderWriterCallbackForDownloads, 
+                       _kMMCSRequestOptionAllowsExpensiveAccess, _kMMCSRequestOptionAllowsPowerNapScheduling, 
+                       _kMMCSRequestOptionAllowsRetryForBackgroundDataTasks, _kMMCSRequestOptionAuthTokenTimeout, 
+                       _kMMCSRequestOptionBackgroundConnectionPoolName, _kMMCSRequestOptionBackgroundConnectionPoolSize, 
+                       _kMMCSRequestOptionBoundInterfaceIdentifier, _kMMCSRequestOptionCacheDeleteAvailableSpaceClass, 
+                       _kMMCSRequestOptionCallerRequestUUID, _kMMCSRequestOptionChunkingLibraryCorruptionMode, 
+                       _kMMCSRequestOptionClientLocation, _kMMCSRequestOptionContainerIdentifier, 
+                       _kMMCSRequestOptionDiscretionaryNetworkBehavior, _kMMCSRequestOptionDuetPreClearedMode, 
+                       _kMMCSRequestOptionErrorOnPreallocationFailure, _kMMCSRequestOptionForceGetChunks, 
+                       _kMMCSRequestOptionHTTPClass, _kMMCSRequestOptionInlineCompleteLogicInvertedMode, 
+                       _kMMCSRequestOptionInsertHeaders, _kMMCSRequestOptionInsufficientDiskSpaceMode, 
+                       _kMMCSRequestOptionItemOptions, _kMMCSRequestOptionMetaserverAllowedHostnamesOverride, 
+                       _kMMCSRequestOptionMetaserverAllowedSchemesOverride, _kMMCSRequestOptionMetaserverCheckDisabled, 
+                       _kMMCSRequestOptionMetricOptions, _kMMCSRequestOptionNetworkServiceType, 
+                       _kMMCSRequestOptionNetworkingDelegate, _kMMCSRequestOptionPreauthorization, 
+                       _kMMCSRequestOptionPriority, _kMMCSRequestOptionQoS, _kMMCSRequestOptionReaderWriterCallbackForDownloads, 
                        _kMMCSRequestOptionRequireInlineComplete, _kMMCSRequestOptionRequiresPowerPluggedIn, 
                        _kMMCSRequestOptionResumableContainerLimpMode, _kMMCSRequestOptionRetrievePastRegistration, 
                        _kMMCSRequestOptionReturnOpaqueCloneContext, _kMMCSRequestOptionReturnPreauthorizationRequestObject, 
@@ -102,12 +102,12 @@ exports:
                        _kMMCSRequestOptionSourceApplicationBundleIdentifier, _kMMCSRequestOptionSourceApplicationSecondaryBundleIdentifier, 
                        _kMMCSRequestOptionStreamOptions, _kMMCSRequestOptionSupportsInlinePutComplete, 
                        _kMMCSRequestOptionUseEdge, _kMMCSRequestOptionUseFORD, _kMMCSRequestOptionUseProxy, 
-                       _kMMCSRequestOptionUseRegistryForDownloads, _kMMCSRequestOptionUseVendorIP, 
-                       _kMMCSRequestTimeoutPeriod, _kMMCSRequestUrlExpiryDuration, 
-                       _kMMCSRequestValidateFileContents, _kMMCSRequestVendorHintValue, 
-                       _kMMCSResultError, _kMMCSResults, _kMMCSSignature, _kMMCSUnwrappingState, 
-                       _kMMCSWarmContainerState, _kMMCSWrappingState, _kMME_CLIENT_INFO_HEADER_KEY, 
-                       _kMME_REPORTING_SEND_MMCS_ERROR_ON_FAILURE_KEY, _kMME_REPORTING_SEND_VENDOR_RESPONSE_BODY_BYTES_ON_FAILURE_INTERNAL_KEY, 
+                       _kMMCSRequestOptionUseRegistryForDownloads, _kMMCSRequestTimeoutPeriod, 
+                       _kMMCSRequestUrlExpiryDuration, _kMMCSRequestValidateFileContents, 
+                       _kMMCSRequestVendorHintValue, _kMMCSResultError, _kMMCSResults, 
+                       _kMMCSSignature, _kMMCSUnwrappingState, _kMMCSWarmContainerState, 
+                       _kMMCSWrappingState, _kMME_CLIENT_INFO_HEADER_KEY, _kMME_REPORTING_SEND_MMCS_ERROR_ON_FAILURE_KEY, 
+                       _kMME_REPORTING_SEND_VENDOR_RESPONSE_BODY_BYTES_ON_FAILURE_INTERNAL_KEY, 
                        _kMME_REPORTING_SEND_VENDOR_RESPONSE_HTTP_STATUS_CODE_KEY, 
                        _kMME_REPORTING_SEND_VENDOR_RESPONSE_HTTP_STATUS_ON_FAILURE_KEY, 
                        _metricsinfo__set_bytes_read, _metricsinfo__set_http_status, 
@@ -150,11 +150,11 @@ exports:
                        _mmcs_is_apple_internal_install, _mmcs_item_generic_item_callbacks, 
                        _mmcs_item_needs_auth_get_chunks, _mmcs_item_needs_put, _mmcs_item_padded_chunk_length, 
                        _mmcs_key_description_create_with_bytes, _mmcs_key_description_create_with_cfdata, 
-                       _mmcs_library_init, _mmcs_logging_log_header_level, _mmcs_logging_logger_awd, 
-                       _mmcs_logging_logger_chunk, _mmcs_logging_logger_default, 
-                       _mmcs_logging_logger_network_performance, _mmcs_logging_logger_summary, 
-                       _mmcs_metrics_harvest_http_info, _mmcs_padded_chunk_length_with_policy_and_chunk_length, 
-                       _mmcs_perform_with_run_loop, _mmcs_proxy_locator_exists, _mmcs_read_stream_pool_close, 
+                       _mmcs_library_init, _mmcs_logging_log_header_level, _mmcs_logging_logger_chunk, 
+                       _mmcs_logging_logger_default, _mmcs_logging_logger_network_performance, 
+                       _mmcs_logging_logger_summary, _mmcs_metrics_harvest_http_info, 
+                       _mmcs_padded_chunk_length_with_policy_and_chunk_length, _mmcs_perform_with_run_loop, 
+                       _mmcs_proxy_locator_exists, _mmcs_read_stream_pool_close, 
                        _mmcs_read_stream_pool_create, _mmcs_read_stream_pool_parameters_make_pool, 
                        _mmcs_read_stream_pool_parameters_make_pool_timeout_max, _mmcs_read_stream_pool_schedule, 
                        _mmcs_register_item_generic_item_callbacks, _mmcs_register_item_padded_chunk_length, 
@@ -163,7 +163,8 @@ exports:
                        _mmcs_request_copy_persistent_identifier, _mmcs_request_queue_cancel_request, 
                        _mmcs_request_queue_create, _mmcs_request_queue_enqueue_request, 
                        _mmcs_request_queue_request_did_complete, _mmcs_request_queue_request_did_transmit, 
-                       _mmcs_request_type_for_behavior_and_activity, _mmcs_server_version_make_from_CFString, 
+                       _mmcs_request_queue_set_revert_radar_78285647, _mmcs_request_type_for_behavior_and_activity, 
+                       _mmcs_request_type_get_activity_type, _mmcs_server_version_make_from_CFString, 
                        _mmcs_time_convert_cfabsolutetime_to_server_time, _mmcs_time_convert_date_header_to_cfabsolutetime, 
                        _mmcs_time_convert_server_time_to_cfabsolutetime, _mmcs_url_copy_query_value_for_tag, 
                        _registerItemSignatureEqualitySetCallbacks, _ub_log_facility, 

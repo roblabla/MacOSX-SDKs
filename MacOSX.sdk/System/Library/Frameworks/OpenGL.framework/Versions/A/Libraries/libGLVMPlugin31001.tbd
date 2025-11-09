@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           51CD28C8-7414-35F0-B0E9-92D5B8DEADAE
+    value:           305BA7AB-89CE-38EB-A49A-9478C9E50637
   - target:          x86_64-maccatalyst
-    value:           51CD28C8-7414-35F0-B0E9-92D5B8DEADAE
+    value:           305BA7AB-89CE-38EB-A49A-9478C9E50637
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           96D76FC8-05D8-386E-9759-568DF422DE86
+    value:           2BC84ACD-7B29-37E9-878E-4CE93DA28E3A
   - target:          arm64e-maccatalyst
-    value:           96D76FC8-05D8-386E-9759-568DF422DE86
+    value:           2BC84ACD-7B29-37E9-878E-4CE93DA28E3A
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLVMPlugin31001.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

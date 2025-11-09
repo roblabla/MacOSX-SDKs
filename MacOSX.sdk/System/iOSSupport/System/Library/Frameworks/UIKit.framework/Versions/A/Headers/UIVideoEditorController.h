@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol UIVideoEditorControllerDelegate;
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.1)) API_UNAVAILABLE(tvos) @interface UIVideoEditorController : UINavigationController
+UIKIT_EXTERN API_AVAILABLE(ios(3.1)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIVideoEditorController : UINavigationController
 
 + (BOOL)canEditVideoAtPath:(NSString *)videoPath API_AVAILABLE(ios(3.1));
 
@@ -27,7 +28,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.1)) API_UNAVAILABLE(tvos) @interface UIVideoEdi
 
 @end
 
-API_UNAVAILABLE(tvos) @protocol UIVideoEditorControllerDelegate<NSObject>
+API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@protocol UIVideoEditorControllerDelegate<NSObject>
 @optional
 // The editor does not dismiss itself; the client dismisses it in these callbacks.
 // The delegate will receive exactly one of the following callbacks, depending whether the user

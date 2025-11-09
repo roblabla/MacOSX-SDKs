@@ -5,9 +5,7 @@
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
-#if !TARGET_OS_MACCATALYST
-#import <ApplicationServices/ApplicationServices.h>
-#endif
+#import <CoreServices/CoreServices.h>
 
 @class NSData;
 

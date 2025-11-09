@@ -3,13 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           02D3B619-EFC9-36FA-8EF8-B9DA0E01CDD2
+    value:           B8DE7186-6F17-3890-A103-E28507359309
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AD912B59-FB5C-372F-A9B5-DEEE1D53F348
+    value:           1E57FBF5-57A3-3545-BA02-49086352C49C
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityFoundation.framework/Versions/A/AccessibilityFoundation'
 current-version: 2
+compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AXEGetLog, _AXFAnnouncementRequestedNotification, _AXFApplicationActivatedNotification, 
@@ -22,9 +23,11 @@ exports:
                        _AXFApplicationShownNotification, _AXFBundleIdentifierFromPID, 
                        _AXFBundlePathFromPID, _AXFContainerTypeFromiOSAXContainerType, 
                        _AXFCopyStringToUChar32Array, _AXFCopyStringToUniCharArray, 
-                       _AXFCreateLog, _AXFCreatedNotification, _AXFDebugPrintHierarchy, 
-                       _AXFDrawerCreatedNotification, _AXFElementBusyChangedNotification, 
-                       _AXFElementTransportKey, _AXFFilter, _AXFFlatMap, _AXFFocusedUIElementChangedNotification, 
+                       _AXFCreateLog, _AXFCreatedNotification, _AXFCursorIsUsingCustomCursors, 
+                       _AXFCursorRegisterAll, _AXFCursorSetAndReturnSeed, _AXFCursorUnregisterAll, 
+                       _AXFDebugPrintHierarchy, _AXFDrawerCreatedNotification, _AXFElementBusyChangedNotification, 
+                       _AXFElementTransportKey, _AXFFeatureIsAccessibilityFullKeyboardAccessEnabled, 
+                       _AXFFilter, _AXFFlatMap, _AXFFocusedUIElementChangedNotification, 
                        _AXFFocusedWindowChangedNotification, _AXFGZIPData, _AXFGeometryAngleFromXAxisToSegmentConnectingPoints, 
                        _AXFGeometryCenterOfRect, _AXFGeometryCentroidOfPoints, _AXFGeometryClosestRectToPointInRects, 
                        _AXFGeometryClosestRectToRectInRects, _AXFGeometryDenormalizePointRelativeToRect, 
@@ -35,10 +38,10 @@ exports:
                        _AXFGeometryIsValidRect, _AXFGeometryMidpointBetweenPoints, 
                        _AXFGeometryNormalizePointRelativeToRect, _AXFGeometryOffsetPointByDelta, 
                        _AXFGeometryOffsetPointByDeltaComponents, _AXFGeometryPackRects, 
-                       _AXFGeometryRectWithCenterAndSize, _AXFGeometryRemapPoint, 
-                       _AXFGeometryScaleRectAboutCenterByFactor, _AXFGeometryScaleRectAboutPointByFactor, 
-                       _AXFGeometryShiftPointFullyWithinContainerRect, _AXFGeometryShiftPointFullyWithinRegionDefinedByRects, 
-                       _AXFGeometryShiftPointFullyWithinRegionDefinedByRectsConsideringPriorPoint, 
+                       _AXFGeometryRectIntersectsRectWithThreshold, _AXFGeometryRectWithCenterAndSize, 
+                       _AXFGeometryRemapPoint, _AXFGeometryScaleRectAboutCenterByFactor, 
+                       _AXFGeometryScaleRectAboutPointByFactor, _AXFGeometryShiftPointFullyWithinContainerRect, 
+                       _AXFGeometryShiftPointFullyWithinRegionDefinedByRects, _AXFGeometryShiftPointFullyWithinRegionDefinedByRectsConsideringPriorPoint, 
                        _AXFGeometryShiftRectFullyWithinContainerRect, _AXFGeometryShiftRectFullyWithinRegionDefinedByRects, 
                        _AXFGeometryShiftRectFullyWithinRegionDefinedByRectsConsideringPriorRect, 
                        _AXFGeometryShiftRectToContainPoint, _AXFGeometrySnapPointToClosestIntegralPoint, 
@@ -46,7 +49,7 @@ exports:
                        _AXFGeometrySortRects, _AXFGeometryStandardDeviationOfPoints, 
                        _AXFGeometryStandardDeviationOfPointsWithPrecalculatedCentroid, 
                        _AXFGeometryVectorFromPointToPoint, _AXFGetLog, _AXFHasLoadedUnitTestsReturningRunningCurrently, 
-                       _AXFHelpTagCreatedNotification, _AXFIsRunningAsRootOrInRootSession, 
+                       _AXFHeadingAttribute, _AXFHelpTagCreatedNotification, _AXFIsRunningAsRootOrInRootSession, 
                        _AXFIsRunningOutsideLoggedInSession, _AXFKeyPathFromSelectors, 
                        _AXFLayoutChangedNotification, _AXFLocalizedString, _AXFLocalizedStringForComposedCharacter, 
                        _AXFLocalizedStringWithTable, _AXFLocalizedStringWithTableAndBundle, 
@@ -86,35 +89,29 @@ exports:
                        _AXFSheetCreatedNotification, _AXFSynthesizedEventSourceID, 
                        _AXFTitleChangedNotification, _AXFUIElementDestroyedNotification, 
                        _AXFUTF16Encoding, _AXFUTF32Encoding, _AXFUnGZIPData, _AXFUnitsChangedNotification, 
-                       _AXFValueChangedNotification, _AXFWindowCreatedNotification, 
+                       _AXFValueChangedNotification, _AXFWebAreaRole, _AXFWindowCreatedNotification, 
                        _AXFWindowDeminiaturizedNotification, _AXFWindowMiniaturizedNotification, 
                        _AXFWindowMovedNotification, _AXFWindowResizedNotification, 
-                       _AXKGetLog, _AXLanguageCanonicalFormToGeneralLanguage, _AXSpeechLanguageCanonicalFormToGeneralLanguage, 
-                       _AXVGetLog, _AccessibilityFoundationVersionNumber, _AccessibilityFoundationVersionString, 
-                       _AccessibilityLoggingSubsystem, _KAGetLog, _SCGetLog, _VOGetLog, 
-                       _ZMGetLog, __AXFApplicationBackgroundOnlyKey, __AXFApplicationComAppleWebKitPrefix, 
-                       __AXFApplicationViewBridgeServiceKey, __AXFGeometryCreateCGRegionFromRects, 
-                       __AXFGeometryPackSortedRects, __AXFGeometrySubregionRectsFromRegion, 
-                       __AXFSelectorCopyDescription, __AXFStringPropertyValueFromPID, 
-                       __runningApplications ]
+                       _AXKGetLog, _AXVGetLog, _AccessibilityLoggingSubsystem, _KAGetLog, 
+                       _SCGetLog, _SCRAXElementsEqual, _SCRUIElementSetThreadCacheKey, 
+                       _VOGetLog, _ZMGetLog, __AXFGeometryCreateCGRegionFromRects, 
+                       __AXFGeometrySubregionRectsFromRegion, _kSCRDoNotFetchAXChildrenKey, 
+                       _kSCRRotorLabelUnspecified, _kSCRRotorsKey, _kSCRUIInvalidPoint ]
     objc-classes:    [ AXFApplicationManager, AXFComposedCharacter, AXFConcurrentDictionary, 
                        AXFCountedQueue, AXFDialectMap, AXFDispatchGroup, AXFDispatchQueue, 
-                       AXFDispatchSemaphore, AXFDispatchWorkItem, AXFLanguageLoader, 
-                       AXFLanguageManager, AXFLanguageMap, AXFLanguageTag, AXFLanguageTagger, 
-                       AXFMarshal, AXFMouse, AXFMouseCursorImage, AXFMouseTest, AXFObserver, 
-                       AXFObserverManager, AXFObserverManagerIPC, AXFRemoteSearchManager, 
+                       AXFDispatchSemaphore, AXFDispatchWorkItem, AXFLanguageManager, 
+                       AXFLanguageMap, AXFLanguageTag, AXFLanguageTagger, AXFMarshal, 
+                       AXFMouse, AXFMouseCursorImage, AXFMouseTest, AXFObserver, 
+                       AXFObserverManager, AXFProcessInfo, AXFProcessManager, AXFRemoteSearchManager, 
                        AXFRotorItemResult, AXFRotorManager, AXFRunLoopThread, AXFScreen, 
                        AXFScreenCaptureManager, AXFScreenManager, AXFScreenSourceTest, 
-                       AXFTargetSelector, AXFTextPosition, AXFTextRange, AXFThrottler, 
-                       AXFUIElement, AXFUserSessionObserver, _AXFAction, _AXFAttributedStringProxy, 
-                       _AXFComposedCharacterEnumerator, _AXFEventProvider, _AXFEventProviderSystem, 
-                       _AXFFaultingArray, _AXFFaultingElementArray, _AXFInvalidTextPosition, 
-                       _AXFLaunchServicesProvider, _AXFLaunchServicesProviderSystem, 
-                       _AXFMouseHardware, _AXFObserverGroupIPC, _AXFObserverGroupIPCFiringCopy, 
-                       _AXFObserverIPC, _AXFScreenSourceHardware, _AXFSelectorMap, 
-                       _AXFTextPositionIndexBased, _AXFTextPositionMarkerBased, _AXFUIElementArchiver, 
-                       _AXFUIElementDataProvider, _AXFUIElementDataProviderApplication, 
-                       _AXFUIElementDataProviderIPC, _AXFUIElementDataProviderInvalid, 
-                       _AXFUIElementDataProviderSystemWide, _AXFUIElementDataProviderTest ]
+                       AXFStackQueue, AXFTargetSelector, AXFTextPosition, AXFTextRange, 
+                       AXFThrottler, AXFUIElement, AXFUserSessionObserver, SCRFaultingArray, 
+                       SCRFaultingElementArray, SCRImageImitationUIElement, SCRImitationUIElement, 
+                       SCRMutableTextMarker, SCRTextMarker, SCRTextMarkerRange, SCRUIElement, 
+                       _AXFAttributedStringProxy, _AXFEventProvider, _AXFFaultingArray, 
+                       _AXFLaunchServicesProvider, _AXFMouseCursorGenerator, _AXFMouseCursorGeneratorStyleInfo, 
+                       _AXFSelectorMap, _AXFUIElementDataProvider, _AXFUIElementDataProviderIPC, 
+                       _AXFUIElementDataProviderTest ]
     objc-ivars:      [ _AXFFaultingArray._elements ]
 ...

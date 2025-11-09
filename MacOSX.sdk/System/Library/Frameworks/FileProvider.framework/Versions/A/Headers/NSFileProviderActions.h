@@ -11,11 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+FILEPROVIDER_API_AVAILABILITY_V2_V3
 typedef NSString *NSFileProviderExtensionActionIdentifier NS_EXTENSIBLE_STRING_ENUM;
 
 /**
  This category encapsulates common user-driven actions on FileProvider's items.
  */
+FILEPROVIDER_API_AVAILABILITY_V2
 @interface NSFileProviderExtension (NSFileProviderActions)
 
 /**
@@ -32,7 +34,7 @@ typedef NSString *NSFileProviderExtensionActionIdentifier NS_EXTENSIBLE_STRING_E
    - filename (to fileURL's resource value for key NSURLNameKey)
    - creationDate (to NSURLCreationDateKey)
    - contentModificationDate (to NSURLContentModificationDateKey)
-   - typeIdentifier (to NSURLTypeIdentifierKey)
+   - contentType (to NSURLContentTypeKey)
    - documentSize (to NSURLTotalFileSizeKey on a flat file, or to the sum of the
      files sizes for a package)
    - capabilities
@@ -93,7 +95,7 @@ typedef NSString *NSFileProviderExtensionActionIdentifier NS_EXTENSIBLE_STRING_E
  - parentItemIdentifier (to the value passed in to this method)
  - filename (to directoryName)
  - creationDate (to the current date and time)
- - typeIdentifier (to "public.folder")
+ - contentType (to "public.folder" - UTTypeFolder)
  - childItemCount (to 0)
  - capabilities
 

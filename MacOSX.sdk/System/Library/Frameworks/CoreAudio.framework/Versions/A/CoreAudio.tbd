@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           68667A4E-B4BC-3DF4-9D34-1E3ECECF7E0F
+    value:           44B712D4-FEBA-3C89-B02C-32851987A288
   - target:          x86_64-maccatalyst
-    value:           68667A4E-B4BC-3DF4-9D34-1E3ECECF7E0F
+    value:           44B712D4-FEBA-3C89-B02C-32851987A288
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F4C3AC19-ACBA-3305-83F0-32F04A9D1913
+    value:           172992D5-0FE7-39D8-9F36-883B463680E8
   - target:          arm64e-maccatalyst
-    value:           F4C3AC19-ACBA-3305-83F0-32F04A9D1913
+    value:           172992D5-0FE7-39D8-9F36-883B463680E8
 install-name:    '/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -25,8 +25,8 @@ exports:
                        _AudioDeviceCreateIOProcIDWithClockedProc, _AudioDeviceDestroyIOProcID, 
                        _AudioDeviceDuck, _AudioDeviceEnterMode, _AudioDeviceExitMode, 
                        _AudioDeviceGetCurrentTime, _AudioDeviceGetNearestStartTime, 
-                       _AudioDeviceGetProperty, _AudioDeviceGetPropertyInfo, _AudioDeviceJoinWorkInterval, 
-                       _AudioDeviceRead, _AudioDeviceRemoveIOProc, _AudioDeviceRemovePropertyListener, 
+                       _AudioDeviceGetProperty, _AudioDeviceGetPropertyInfo, _AudioDeviceRead, 
+                       _AudioDeviceRemoveIOProc, _AudioDeviceRemovePropertyListener, 
                        _AudioDeviceRun, _AudioDeviceSetProperty, _AudioDeviceStart, 
                        _AudioDeviceStartAtTime, _AudioDeviceStop, _AudioDeviceTranslateTime, 
                        _AudioDeviceWrite, _AudioDriverPlugInClose, _AudioDriverPlugInDeviceGetProperty, 
@@ -36,7 +36,8 @@ exports:
                        _AudioGetCurrentHostTime, _AudioGetHostClockFrequency, _AudioGetHostClockMinimumTimeDelta, 
                        _AudioHardwareAddPropertyListener, _AudioHardwareAddRunLoopSource, 
                        _AudioHardwareBeMaster, _AudioHardwareCreateAggregateDevice, 
-                       _AudioHardwareDestroyAggregateDevice, _AudioHardwareGetProperty, 
+                       _AudioHardwareCreateProcessTap, _AudioHardwareDestroyAggregateDevice, 
+                       _AudioHardwareDestroyProcessTap, _AudioHardwareGetProperty, 
                        _AudioHardwareGetPropertyInfo, _AudioHardwareReloadServerSettings, 
                        _AudioHardwareRemovePropertyListener, _AudioHardwareRemoveRunLoopSource, 
                        _AudioHardwareSetProperty, _AudioHardwareStartServer, _AudioHardwareUnload, 
@@ -51,8 +52,9 @@ exports:
                        _AudioStreamSetProperty, __ZN4AMCP11Null_DriverC1ERNS_14System_ContextE, 
                        __ZN4AMCP11Null_DriverC2ERNS_14System_ContextE, __ZN4AMCP11Null_DriverD0Ev, 
                        __ZN4AMCP11Null_DriverD1Ev, __ZN4AMCP11Null_DriverD2Ev, __ZN4AMCP13Feature_Flags11run_new_halEv, 
-                       __ZN4AMCP13Feature_Flags12host_asp_oopEv, __ZN4AMCP13Feature_Flags15set_run_new_halEb, 
-                       __ZN4AMCP13Feature_Flags16set_host_asp_oopEb, __ZN4AMCP13Feature_Flags17event_link_oop_ioEv, 
+                       __ZN4AMCP13Feature_Flags12host_asp_oopEv, __ZN4AMCP13Feature_Flags14run_hybrid_halEv, 
+                       __ZN4AMCP13Feature_Flags15set_run_new_halEb, __ZN4AMCP13Feature_Flags16set_host_asp_oopEb, 
+                       __ZN4AMCP13Feature_Flags17event_link_oop_ioEv, __ZN4AMCP13Feature_Flags18set_run_hybrid_halEb, 
                        __ZN4AMCP13Feature_Flags19collect_io_perfdataEv, __ZN4AMCP13Feature_Flags20internal_drivers_oopEv, 
                        __ZN4AMCP13Feature_Flags21set_event_link_oop_ioEb, __ZN4AMCP13Feature_Flags22allow_mcp_and_hal_coexEv, 
                        __ZN4AMCP13Feature_Flags23set_collect_io_perfdataEb, __ZN4AMCP13Feature_Flags24set_internal_drivers_oopEb, 
@@ -229,8 +231,9 @@ exports:
                        __ZN4AMCP9IOContext16start_prewarmingEb, __ZN4AMCP9IOContext16start_prewarmingEv, 
                        __ZN4AMCP9IOContext18set_io_cycle_usageEf, __ZN4AMCP9IOContext21get_client_io_handlerEv, 
                        __ZN4AMCP9IOContext21set_buffer_frame_sizeEj, __ZN4AMCP9IOContext21set_client_io_handlerERKNSt3__18functionIFvjRKNS_15Proc_Cycle_InfoEmPNS_11Proc_StreamEmS7_EEE, 
-                       __ZN4AMCP9IOContext23get_io_overload_handlerEv, __ZN4AMCP9IOContext23set_io_overload_handlerERKNSt3__18functionIFvjEEE, 
-                       __ZN4AMCP9IOContext24get_work_interval_handleEv, __ZN4AMCP9IOContext24set_work_interval_handleERKP13work_interval, 
+                       __ZN4AMCP9IOContext23get_io_overload_handlerEv, __ZN4AMCP9IOContext23get_os_workgroup_handleEv, 
+                       __ZN4AMCP9IOContext23set_io_overload_handlerERKNSt3__18functionIFvjEEE, 
+                       __ZN4AMCP9IOContext23set_os_workgroup_handleERKN5caulk4mach21os_workgroup_intervalE, 
                        __ZN4AMCP9IOContext25can_play_during_dark_wakeEv, __ZN4AMCP9IOContext26get_end_processing_handlerEv, 
                        __ZN4AMCP9IOContext26set_end_processing_handlerERKNSt3__18functionIFvjEEE, 
                        __ZN4AMCP9IOContext27get_io_thread_error_handlerEv, __ZN4AMCP9IOContext27set_io_thread_error_handlerERKNSt3__18functionIFvvEEE, 
@@ -346,4 +349,5 @@ exports:
                        __ZTVN4AMCP5ClockE, __ZTVN4AMCP6DeviceE, __ZTVN4AMCP6DriverE, 
                        __ZTVN4AMCP6ObjectE, __ZTVN4AMCP6StreamE, __ZTVN4AMCP6SystemE, 
                        __ZTVN4AMCP7ControlE, __ZTVN4AMCP8DSP_NodeE, __ZTVN4AMCP9IOContextE ]
+    objc-classes:    [ CAActiveDeviceStreamsForProcess, CAProcessDevicePair, CATapDescription ]
 ...

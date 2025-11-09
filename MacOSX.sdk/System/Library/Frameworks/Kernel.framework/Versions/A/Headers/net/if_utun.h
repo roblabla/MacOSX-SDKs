@@ -30,6 +30,8 @@
 #ifndef _NET_IF_UTUN_H_
 #define _NET_IF_UTUN_H_
 
+#include <sys/types.h>
+
 
 /*
  * Name registered by the utun kernel control

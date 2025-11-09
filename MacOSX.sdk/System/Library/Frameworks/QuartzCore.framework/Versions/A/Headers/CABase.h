@@ -1,6 +1,6 @@
 /* CoreAnimation - CABase.h
 
-   Copyright (c) 2006-2018, Apple Inc.
+   Copyright (c) 2006-2021, Apple Inc.
    All rights reserved. */
 
 #ifndef CABASE_H
@@ -23,25 +23,25 @@
 #include <TargetConditionals.h>
 
 #if TARGET_OS_OSX
-# define CA_OSX_VERSION(v) ((v) > 0 && __MAC_OS_X_VERSION_MAX_ALLOWED >= (v))
+# define CA_OSX_VERSION(v) ((__MAC_##v) > 0 && __MAC_OS_X_VERSION_MAX_ALLOWED >= (__MAC_##v))
 #else
 # define CA_OSX_VERSION(v) (0)
 #endif
 
-#if TARGET_OS_IPHONE
-# define CA_IOS_VERSION(v) ((v) > 0 && __IPHONE_OS_VERSION_MIN_REQUIRED >= (v))
+#if TARGET_OS_IOS
+# define CA_IOS_VERSION(v) ((__IPHONE_##v) > 0 && __IPHONE_OS_VERSION_MIN_REQUIRED >= (__IPHONE_##v))
 #else
 # define CA_IOS_VERSION(v) (0)
 #endif
 
 #if TARGET_OS_TV
-# define CA_TV_VERSION(v) ((v) > 0 && __TV_OS_VERSION_MIN_REQUIRED >= (v))
+# define CA_TV_VERSION(v) ((__TVOS_##v) > 0 && __TV_OS_VERSION_MIN_REQUIRED >= (__TVOS_##v))
 #else
 # define CA_TV_VERSION(v) (0)
 #endif
 
 #if TARGET_OS_WATCH
-# define CA_WATCH_VERSION(v) ((v) > 0 && __WATCH_OS_VERSION_MIN_REQUIRED >= (v))
+# define CA_WATCH_VERSION(v) ((__WATCHOS_##v) > 0 && __WATCH_OS_VERSION_MIN_REQUIRED >= (__WATCHOS_##v))
 #else
 # define CA_WATCH_VERSION(v) (0)
 #endif

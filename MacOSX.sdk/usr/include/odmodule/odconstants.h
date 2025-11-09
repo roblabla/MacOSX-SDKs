@@ -26,6 +26,10 @@
 #if !defined(__ODCONSTANTS_H)
 #define __ODCONSTANTS_H
 
+#if __OBJC__ && !defined(__OD_USE_OBJC__)
+#define __OD_USE_OBJC__ 1
+#endif
+
 /*!
     @const      kODSessionProxyAddress
     @abstract   the address to connect to via proxy, used when making the options dictionary
@@ -179,7 +183,7 @@ typedef uint32_t ODMatchType;
 				Note:  CFStringRef can be use interchangeably with ODRecordType for ease
 				of use.
 */
-#ifdef __OBJC__
+#if __OD_USE_OBJC__
 #include <Foundation/Foundation.h>
 typedef NSString *ODRecordType;
 #else
@@ -200,7 +204,7 @@ typedef CFStringRef ODRecordType;
 				Note:  CFStringRef can be use interchangeably with ODAttributeType for ease
 				of use.
 */
-#ifdef __OBJC__
+#if __OD_USE_OBJC__
 typedef NSString *ODAttributeType;
 #else
 typedef CFStringRef ODAttributeType;
@@ -220,7 +224,7 @@ typedef CFStringRef ODAttributeType;
 				Note:  CFStringRef can be use interchangeably with ODAuthenticationType for ease
 				of use.
 */
-#ifdef __OBJC__
+#if __OD_USE_OBJC__
 typedef NSString *ODAuthenticationType;
 #else
 typedef CFStringRef ODAuthenticationType;
@@ -231,7 +235,7 @@ typedef CFStringRef ODAuthenticationType;
 	@abstract   is used to modify policies on nodes or records
 	@discussion is used to modify policies on nodes or records
 */
-#ifdef __OBJC__
+#if __OD_USE_OBJC__
 typedef NSString *ODPolicyType;
 #else
 typedef CFStringRef ODPolicyType;
@@ -241,7 +245,7 @@ typedef CFStringRef ODPolicyType;
     @typedef    ODErrorUserInfoKeyType
     @abstract   Type for any additional keys in userInfo dictionary in NS/CFError
  */
-#ifdef __OBJC__
+#if __OD_USE_OBJC__
 typedef NSString *ODErrorUserInfoKeyType;
 #else
 typedef CFStringRef ODErrorUserInfoKeyType;
@@ -251,7 +255,7 @@ typedef CFStringRef ODErrorUserInfoKeyType;
    @typedef    ODOptionKeyType
    @abstract   Type for any  keys passed in an options dictionary
 */
-#ifdef __OBJC__
+#if __OD_USE_OBJC__
 typedef NSString *ODOptionKeyType;
 #else
 typedef CFStringRef ODOptionKeyType;
@@ -2884,9 +2888,9 @@ CF_EXPORT
 const ODAuthenticationType kODAuthenticationTypeKerberosTickets;
 
 /*!
-    @const		kODAuthenticationTypeMPPEMasterKeys
-	@abstract   Generated 40-bit or 128-bit master keys from MS-CHAPv2 credentials (RFC 3079).
-	@discussion Generated 40-bit or 128-bit master keys from MS-CHAPv2 credentials (RFC 3079).
+    @const		kODAuthenticationTypeMPPEPrimaryKeys
+	@abstract   Generated 40-bit or 128-bit primary keys from MS-CHAPv2 credentials (RFC 3079).
+	@discussion Keys from which the session keys will be derived.
 
 				Authentication array has following items in order:
 					user name in UTF8 encoding,
@@ -2894,7 +2898,14 @@ const ODAuthenticationType kODAuthenticationTypeKerberosTickets;
 					key size, 8 or 16 (packed as a byte, not a string)
 */
 CF_EXPORT
-const ODAuthenticationType kODAuthenticationTypeMPPEMasterKeys;
+const ODAuthenticationType kODAuthenticationTypeMPPEPrimaryKeys;
+
+/*!
+    @const      kODAuthenticationTypeMPPEMasterKeys
+    @discussion Deprecated.  Use kODAuthenticationTypeMPPEPrimaryKeys.
+ */
+CF_EXPORT
+const ODAuthenticationType kODAuthenticationTypeMPPEMasterKeys API_DEPRECATED_WITH_REPLACEMENT("kODAuthenticationTypeMPPEPrimaryKeys", macos(10.7, 12.0));
 
 /*!
     @const		kODAuthenticationTypeMSCHAP2
@@ -3457,7 +3468,7 @@ enum {
                 information see the the specific key.  Some keys are used in
                 individual policies, others in a policy set.
 */
-#ifdef __OBJC__
+#if __OD_USE_OBJC__
 typedef NSString *ODPolicyKeyType;
 #else
 typedef CFStringRef ODPolicyKeyType;
@@ -3549,7 +3560,7 @@ const ODPolicyKeyType kODPolicyKeyPolicySatisfied __OSX_AVAILABLE_STARTING(__MAC
                 in a policy set dictionary, where the value of each category is
                 an array of policy dictionaries.
 */
-#ifdef __OBJC__
+#if __OD_USE_OBJC__
 typedef NSString *ODPolicyCategoryType;
 #else
 typedef CFStringRef ODPolicyCategoryType;
@@ -3600,7 +3611,7 @@ ODPolicyCategoryType kODPolicyCategoryPasswordChange __OSX_AVAILABLE_STARTING(__
                 policy set dictionary with a value containing an array of policy
                 dictionaries. 
 */
-#ifdef __OBJC__
+#if __OD_USE_OBJC__
 typedef NSString *ODPolicyAttributeType;
 #else
 typedef CFStringRef ODPolicyAttributeType;
@@ -4148,7 +4159,7 @@ ODPolicyAttributeType kODPolicyAttributeDaysUntilExpiration __OSX_AVAILABLE_STAR
  @constant kODErrorCredentialsServerNotFound is when the authentication server could not be found for the operation requested
  @constant kODErrorCredentialsServerError is when the authentication server encountered an error
  @constant kODErrorCredentialsServerTimeout is when the authentication server timed out
- @constant kODErrorCredentialsContactMaster is when the authentication server is not the master and the operation requires the master
+ @constant kODErrorCredentialsContactPrimary is when the authentication server is not the primary and the operation requires the primary
  @constant kODErrorCredentialsServerCommunicationError is when the authentication server had a communications error
  @constant kODErrorCredentialsAccountNotFound is when the authentication server could not find the account provided
  @constant kODErrorCredentialsAccountDisabled is when the account is disabled
@@ -4234,7 +4245,8 @@ enum ODFrameworkErrors
 	kODErrorCredentialsServerNotFound			=	5201,
 	kODErrorCredentialsServerError				=	5202,
 	kODErrorCredentialsServerTimeout			=	5203,
-	kODErrorCredentialsContactMaster			=	5204,
+	kODErrorCredentialsContactPrimary			=	5204,
+	kODErrorCredentialsContactMaster API_DEPRECATED_WITH_REPLACEMENT("kODErrorCredentialsContactPrimary", macos(10.7, 10.7)) = kODErrorCredentialsContactPrimary,
 	kODErrorCredentialsServerCommunicationError	=	5205,
 	
 	kODErrorCredentialsAccountNotFound			=	5300,

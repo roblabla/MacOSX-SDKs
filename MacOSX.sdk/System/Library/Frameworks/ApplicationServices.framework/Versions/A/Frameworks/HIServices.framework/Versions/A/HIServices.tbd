@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7F4A58B2-2A3A-321D-BD82-536D0E37A759
+    value:           D77D814A-352E-3666-8AEC-8FA7540BFF4B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C0D1CA98-34BC-385C-8D6D-3B738B80A6AE
+    value:           0D2CEC8F-7C9B-37CD-8D4D-9F1A2F9F6A2F
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices'
-current-version: 715
+current-version: 736
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
@@ -75,15 +75,15 @@ exports:
                        _CoreDockSetWindowLabel, _CoreDockSetWorkspacesAppBindings, 
                        _CoreDockSetWorkspacesCount, _CoreDockSetWorkspacesEnabled, 
                        _CoreDockSetWorkspacesKeyBindings, _CoreDockUpdateWindow, 
-                       _CoreDragCancelDrag, _CoreDragChangeBehaviors, _CoreDragCleanDragState, 
-                       _CoreDragClearAllImageOverrides, _CoreDragCopyTrashLabel, 
-                       _CoreDragCreate, _CoreDragCreateWithPasteboard, _CoreDragCreateWithPasteboardRef, 
-                       _CoreDragDispose, _CoreDragEnableSpringLoading, _CoreDragGetAllowableActions, 
-                       _CoreDragGetAttributes, _CoreDragGetCurrentDrag, _CoreDragGetDragWindow, 
-                       _CoreDragGetDropActions, _CoreDragGetDropLocation, _CoreDragGetForce, 
-                       _CoreDragGetForceStage, _CoreDragGetItemBounds, _CoreDragGetModifiers, 
-                       _CoreDragGetMouseLocation, _CoreDragGetOrigin, _CoreDragGetPasteboard, 
-                       _CoreDragGetPasteboardRef, _CoreDragGetSpringLoadingAttributes, 
+                       _CoreDragAcceptDrag, _CoreDragCancelDrag, _CoreDragChangeBehaviors, 
+                       _CoreDragCleanDragState, _CoreDragClearAllImageOverrides, 
+                       _CoreDragCopyTrashLabel, _CoreDragCreate, _CoreDragCreateWithPasteboard, 
+                       _CoreDragCreateWithPasteboardRef, _CoreDragDispose, _CoreDragEnableSpringLoading, 
+                       _CoreDragGetAllowableActions, _CoreDragGetAttributes, _CoreDragGetCurrentDrag, 
+                       _CoreDragGetDragWindow, _CoreDragGetDropActions, _CoreDragGetDropLocation, 
+                       _CoreDragGetForce, _CoreDragGetForceStage, _CoreDragGetItemBounds, 
+                       _CoreDragGetModifiers, _CoreDragGetMouseLocation, _CoreDragGetOrigin, 
+                       _CoreDragGetPasteboard, _CoreDragGetPasteboardRef, _CoreDragGetSpringLoadingAttributes, 
                        _CoreDragGetStandardDropLocation, _CoreDragGetValueForKey, 
                        _CoreDragHasImageOverrides, _CoreDragInstallContextReceiveMessageHandlerOnConnection, 
                        _CoreDragInstallContextTrackingHandlerOnConnection, _CoreDragInstallReceiveHandler, 
@@ -102,10 +102,10 @@ exports:
                        _CoreDragSetCGEventProcs, _CoreDragSetCGImage, _CoreDragSetCGImageWithScale, 
                        _CoreDragSetDestClippingRect, _CoreDragSetDragRegion, _CoreDragSetDragRegionWithScale, 
                        _CoreDragSetDragWindow, _CoreDragSetDropActions, _CoreDragSetDropLocation, 
-                       _CoreDragSetEventProc, _CoreDragSetExtendedEventProc, _CoreDragSetImage, 
-                       _CoreDragSetImageOptions, _CoreDragSetInputProc, _CoreDragSetItemBounds, 
-                       _CoreDragSetMouseLocation, _CoreDragSetOrigin, _CoreDragSetRootCALayer, 
-                       _CoreDragSetSourceClippingRect, _CoreDragSetStandardDropLocation, 
+                       _CoreDragSetDropProc, _CoreDragSetEventProc, _CoreDragSetExtendedEventProc, 
+                       _CoreDragSetImage, _CoreDragSetImageOptions, _CoreDragSetInputProc, 
+                       _CoreDragSetItemBounds, _CoreDragSetMouseLocation, _CoreDragSetOrigin, 
+                       _CoreDragSetRootCALayer, _CoreDragSetSourceClippingRect, _CoreDragSetStandardDropLocation, 
                        _CoreDragSetTrashDrawProc, _CoreDragSetTrashLabel, _CoreDragSetValueForKey, 
                        _CoreDragStartDragging, _CoreDragUpdatesBegin, _CoreDragUpdatesCommit, 
                        _CoreGetDragInfo, _CoreImagingCreateImage, _CoreMenuCreateKeyEquivalentString, 
@@ -172,21 +172,28 @@ exports:
                        __AXCopyChildrenHash, __AXCopyRoleDescription, __AXCopyRoleDescriptionWithSubrole, 
                        __AXCopyTitle, __AXCreateElementOrdering, __AXCurrentRequestCanReturnInspectionContent, 
                        __AXCurrentRequestCanReturnProtectedContent, __AXGetClientForCurrentRequestUntrusted, 
+                       __AXInterfaceCopyCursorColorFill, __AXInterfaceCopyCursorColorOutline, 
+                       __AXInterfaceCursorIsOverridden, __AXInterfaceCursorSetAndReturnSeed, 
                        __AXInterfaceGetBristolEnabled, __AXInterfaceGetClassicInvertColorEnabled, 
                        __AXInterfaceGetDifferentiateWithoutColorEnabled, __AXInterfaceGetIncreaseContrastEnabled, 
                        __AXInterfaceGetReduceMotionEnabled, __AXInterfaceGetReduceTransparencyEnabled, 
-                       __AXInterfaceGetRichmondEnabled, __AXInterfaceSetClassicInvertColorEnabled, 
-                       __AXInterfaceSetDifferentiateWithoutColorEnabled, __AXInterfaceSetDifferentiateWithoutColorEnabledOverride, 
+                       __AXInterfaceGetRichmondEnabled, __AXInterfaceGetShowToolbarButtonShapesEnabled, 
+                       __AXInterfaceGetShowWindowTitlebarIconsEnabled, __AXInterfaceSetClassicInvertColorEnabled, 
+                       __AXInterfaceSetCursorColorFill, __AXInterfaceSetCursorColorOutline, 
+                       __AXInterfaceSetCursorIsOverridden, __AXInterfaceSetDifferentiateWithoutColorEnabled, 
+                       __AXInterfaceSetDifferentiateWithoutColorEnabledOverride, 
                        __AXInterfaceSetIncreaseContrastEnabled, __AXInterfaceSetIncreaseContrastEnabledOverride, 
                        __AXInterfaceSetReduceMotionEnabled, __AXInterfaceSetReduceMotionEnabledOverride, 
                        __AXInterfaceSetReduceTransparencyEnabled, __AXInterfaceSetReduceTransparencyEnabledOverride, 
+                       __AXInterfaceSetShowToolbarButtonShapesEnabled, __AXInterfaceSetShowToolbarButtonShapesEnabledOverride, 
+                       __AXInterfaceSetShowWindowTitlebarIconsEnabled, __AXInterfaceSetShowWindowTitlebarIconsEnabledOverride, 
                        __AXIsAppleClientForCurrentRequestUntrusted, __AXRegisterControlComputerAccess, 
-                       __AXSetClientIdentificationOverride, __AXShouldElementBeIgnoredForNavigation, 
-                       __AXUIElementCopyElementAtPositionIncludeIgnored, __AXUIElementCreateApplicationWithPresenterPid, 
-                       __AXUIElementCreateWithData, __AXUIElementCreateWithDataAndPid, 
-                       __AXUIElementCreateWithDataAndPresenterPid, __AXUIElementCreateWithPtr, 
-                       __AXUIElementCreateWithRemoteToken, __AXUIElementGetActualPid, 
-                       __AXUIElementGetData, __AXUIElementGetIsProcessSuspended, 
+                       __AXSetAuditTokenIsAuthenticatedCallback, __AXSetClientIdentificationOverride, 
+                       __AXShouldElementBeIgnoredForNavigation, __AXUIElementCopyElementAtPositionIncludeIgnored, 
+                       __AXUIElementCreateApplicationWithPresenterPid, __AXUIElementCreateWithData, 
+                       __AXUIElementCreateWithDataAndPid, __AXUIElementCreateWithDataAndPresenterPid, 
+                       __AXUIElementCreateWithPtr, __AXUIElementCreateWithRemoteToken, 
+                       __AXUIElementGetActualPid, __AXUIElementGetData, __AXUIElementGetIsProcessSuspended, 
                        __AXUIElementGetWindow, __AXUIElementNotifyProcessSuspendStatus, 
                        __AXUIElementPostNotification, __AXUIElementPostNotificationForObservedElement, 
                        __AXUIElementPostNotificationWithInfo, __AXUIElementRegisterServerWithRunLoop, 
@@ -213,10 +220,13 @@ exports:
                        _kAXForegoundColorTextAttribute, _kAXForegroundColorTextAttribute, 
                        _kAXInterfaceBristolKey, _kAXInterfaceClassicInvertColorKey, 
                        _kAXInterfaceClassicInvertColorStatusDidChangeNotification, 
-                       _kAXInterfaceDifferentiateWithoutColorKey, _kAXInterfaceDifferentiateWithoutColorStatusDidChangeNotification, 
+                       _kAXInterfaceCursorStatusDidChangeNotification, _kAXInterfaceDifferentiateWithoutColorKey, 
+                       _kAXInterfaceDifferentiateWithoutColorStatusDidChangeNotification, 
                        _kAXInterfaceIncreaseContrastKey, _kAXInterfaceIncreaseContrastStatusDidChangeNotification, 
                        _kAXInterfaceReduceMotionKey, _kAXInterfaceReduceMotionStatusDidChangeNotification, 
                        _kAXInterfaceReduceTransparencyKey, _kAXInterfaceReduceTransparencyStatusDidChangeNotification, 
+                       _kAXInterfaceShowToolbarButtonShapesKey, _kAXInterfaceShowToolbarButtonShapesStatusDidChangeNotification, 
+                       _kAXInterfaceShowWindowTitlebarIconsKey, _kAXInterfaceShowWindowTitlebarIconsStatusDidChangeNotification, 
                        _kAXLinkTextAttribute, _kAXListItemIndexTextAttribute, _kAXListItemLevelTextAttribute, 
                        _kAXListItemPrefixTextAttribute, _kAXMarkedMisspelledTextAttribute, 
                        _kAXMisspelledTextAttribute, _kAXNaturalLanguageTextAttribute, 

@@ -17,6 +17,7 @@
 .Op Fl g
 .Op Fl j
 .Op Fl h
+.Op Fl u Ar URL
 .Op Fl s Ar sdk
 .Op Fl b Ar bundle_identifier
 .Op Fl a Ar application
@@ -79,6 +80,8 @@ Launches the app hidden.
 Searches header locations for a header whose name matches the given string and then opens it.  Pass a full header name (such as NSView.h) for increased performance.
 .It Fl s
 For -h, partial or full SDK name to use; if supplied, only SDKs whose names contain the argument value are searched. Otherwise the highest versioned SDK in each platform is used.
+.It Fl u
+Opens URL with whatever application claims the url scheme, even if URL also matches a file path
 .It Fl Fl args
 All remaining arguments are passed to the opened application in the argv parameter to main().  These arguments are not opened or interpreted by the
 .Nm

@@ -3,27 +3,30 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           56B077FE-EA05-320F-B81C-2B0D07FBD8B4
+    value:           6B7721CE-001F-3B7A-8A4F-5E78074585E8
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           6430F74F-1B02-3134-A1FA-6C4E68BBCC3A
+    value:           5D24D26B-EEF9-3F9A-A5C5-932ED1FD00ED
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftPhotosUI.dylib'
-current-version: 340.0.220
+current-version: 400.27.210
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftPhotosUI.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftPhotosUI.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftPhotosUI.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftPhotosUI.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftPhotosUI.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftPhotosUI.dylib' ]
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
-    symbols:         [ '_$s8PhotosUI14PHPickerFilterV04liveA0ACvgZ', '_$s8PhotosUI14PHPickerFilterV2eeoiySbAC_ACtFZ', 
-                       '_$s8PhotosUI14PHPickerFilterV3any2ofACSayACG_tFZ', '_$s8PhotosUI14PHPickerFilterV4hash4intoys6HasherVz_tF', 
-                       '_$s8PhotosUI14PHPickerFilterV6imagesACvgZ', '_$s8PhotosUI14PHPickerFilterV6videosACvgZ', 
-                       '_$s8PhotosUI14PHPickerFilterV9hashValueSivg', '_$s8PhotosUI14PHPickerFilterV9hashValueSivpMV', 
+                       '$ld$install_name$os10.9$@rpath/libswiftPhotosUI.dylib', '_$s8PhotosUI14PHPickerFilterV012_depthEffectA0ACvgZ', 
+                       '_$s8PhotosUI14PHPickerFilterV04liveA0ACvgZ', '_$s8PhotosUI14PHPickerFilterV11screenshotsACvgZ', 
+                       '_$s8PhotosUI14PHPickerFilterV11slomoVideosACvgZ', '_$s8PhotosUI14PHPickerFilterV13playbackStyleyACSo015PHAssetPlaybackF0VFZ', 
+                       '_$s8PhotosUI14PHPickerFilterV15timelapseVideosACvgZ', '_$s8PhotosUI14PHPickerFilterV16screenRecordingsACvgZ', 
+                       '_$s8PhotosUI14PHPickerFilterV2eeoiySbAC_ACtFZ', '_$s8PhotosUI14PHPickerFilterV3all2ofACSayACG_tFZ', 
+                       '_$s8PhotosUI14PHPickerFilterV3any2ofACSayACG_tFZ', '_$s8PhotosUI14PHPickerFilterV3notyA2CFZ', 
+                       '_$s8PhotosUI14PHPickerFilterV4hash4intoys6HasherVz_tF', '_$s8PhotosUI14PHPickerFilterV6imagesACvgZ', 
+                       '_$s8PhotosUI14PHPickerFilterV6videosACvgZ', '_$s8PhotosUI14PHPickerFilterV9hashValueSivg', 
+                       '_$s8PhotosUI14PHPickerFilterV9hashValueSivpMV', '_$s8PhotosUI14PHPickerFilterV9panoramasACvgZ', 
                        '_$s8PhotosUI14PHPickerFilterVMa', '_$s8PhotosUI14PHPickerFilterVMn', 
                        '_$s8PhotosUI14PHPickerFilterVN', '_$s8PhotosUI14PHPickerFilterVSHAAMc', 
                        '_$s8PhotosUI14PHPickerFilterVSQAAMc', '_$s8PhotosUI14PHPickerResultV12itemProviderSo06NSItemF0Cvg', 
@@ -34,6 +37,8 @@ exports:
                        '_$s8PhotosUI14PHPickerResultVMa', '_$s8PhotosUI14PHPickerResultVMn', 
                        '_$s8PhotosUI14PHPickerResultVN', '_$s8PhotosUI14PHPickerResultVSHAAMc', 
                        '_$s8PhotosUI14PHPickerResultVSQAAMc', '_$s8PhotosUI21PHPickerConfigurationV12photoLibraryACSo07PHPhotoF0C_tcfC', 
+                       '_$s8PhotosUI21PHPickerConfigurationV12photoLibrarySo07PHPhotoF0CSgvg', 
+                       '_$s8PhotosUI21PHPickerConfigurationV12photoLibrarySo07PHPhotoF0CSgvpMV', 
                        '_$s8PhotosUI21PHPickerConfigurationV14selectionLimitSivM', 
                        '_$s8PhotosUI21PHPickerConfigurationV14selectionLimitSivg', 
                        '_$s8PhotosUI21PHPickerConfigurationV14selectionLimitSivpMV', 
@@ -50,16 +55,33 @@ exports:
                        '_$s8PhotosUI21PHPickerConfigurationV23AssetRepresentationModeON', 
                        '_$s8PhotosUI21PHPickerConfigurationV23AssetRepresentationModeOSHAAMc', 
                        '_$s8PhotosUI21PHPickerConfigurationV23AssetRepresentationModeOSQAAMc', 
+                       '_$s8PhotosUI21PHPickerConfigurationV27preselectedAssetIdentifiersSaySSGvM', 
+                       '_$s8PhotosUI21PHPickerConfigurationV27preselectedAssetIdentifiersSaySSGvg', 
+                       '_$s8PhotosUI21PHPickerConfigurationV27preselectedAssetIdentifiersSaySSGvpMV', 
+                       '_$s8PhotosUI21PHPickerConfigurationV27preselectedAssetIdentifiersSaySSGvs', 
                        '_$s8PhotosUI21PHPickerConfigurationV2eeoiySbAC_ACtFZ', '_$s8PhotosUI21PHPickerConfigurationV32preferredAssetRepresentationModeAC0fgH0OvM', 
                        '_$s8PhotosUI21PHPickerConfigurationV32preferredAssetRepresentationModeAC0fgH0Ovg', 
                        '_$s8PhotosUI21PHPickerConfigurationV32preferredAssetRepresentationModeAC0fgH0OvpMV', 
                        '_$s8PhotosUI21PHPickerConfigurationV32preferredAssetRepresentationModeAC0fgH0Ovs', 
+                       '_$s8PhotosUI21PHPickerConfigurationV37photoLibraryAndOnlyReturnsIdentifiersACSo07PHPhotoF0C_tcfC', 
                        '_$s8PhotosUI21PHPickerConfigurationV4hash4intoys6HasherVz_tF', 
                        '_$s8PhotosUI21PHPickerConfigurationV6filterAA0C6FilterVSgvM', 
                        '_$s8PhotosUI21PHPickerConfigurationV6filterAA0C6FilterVSgvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV6filterAA0C6FilterVSgvpMV', 
                        '_$s8PhotosUI21PHPickerConfigurationV6filterAA0C6FilterVSgvs', 
-                       '_$s8PhotosUI21PHPickerConfigurationV9hashValueSivg', '_$s8PhotosUI21PHPickerConfigurationV9hashValueSivpMV', 
+                       '_$s8PhotosUI21PHPickerConfigurationV9SelectionO2eeoiySbAE_AEtFZ', 
+                       '_$s8PhotosUI21PHPickerConfigurationV9SelectionO4hash4intoys6HasherVz_tF', 
+                       '_$s8PhotosUI21PHPickerConfigurationV9SelectionO7defaultyA2EmFWC', 
+                       '_$s8PhotosUI21PHPickerConfigurationV9SelectionO7orderedyA2EmFWC', 
+                       '_$s8PhotosUI21PHPickerConfigurationV9SelectionO9hashValueSivg', 
+                       '_$s8PhotosUI21PHPickerConfigurationV9SelectionO9hashValueSivpMV', 
+                       '_$s8PhotosUI21PHPickerConfigurationV9SelectionOMa', '_$s8PhotosUI21PHPickerConfigurationV9SelectionOMn', 
+                       '_$s8PhotosUI21PHPickerConfigurationV9SelectionON', '_$s8PhotosUI21PHPickerConfigurationV9SelectionOSHAAMc', 
+                       '_$s8PhotosUI21PHPickerConfigurationV9SelectionOSQAAMc', '_$s8PhotosUI21PHPickerConfigurationV9hashValueSivg', 
+                       '_$s8PhotosUI21PHPickerConfigurationV9hashValueSivpMV', '_$s8PhotosUI21PHPickerConfigurationV9selectionAC9SelectionOvM', 
+                       '_$s8PhotosUI21PHPickerConfigurationV9selectionAC9SelectionOvg', 
+                       '_$s8PhotosUI21PHPickerConfigurationV9selectionAC9SelectionOvpMV', 
+                       '_$s8PhotosUI21PHPickerConfigurationV9selectionAC9SelectionOvs', 
                        '_$s8PhotosUI21PHPickerConfigurationVACycfC', '_$s8PhotosUI21PHPickerConfigurationVMa', 
                        '_$s8PhotosUI21PHPickerConfigurationVMn', '_$s8PhotosUI21PHPickerConfigurationVN', 
                        '_$s8PhotosUI21PHPickerConfigurationVSHAAMc', '_$s8PhotosUI21PHPickerConfigurationVSQAAMc', 

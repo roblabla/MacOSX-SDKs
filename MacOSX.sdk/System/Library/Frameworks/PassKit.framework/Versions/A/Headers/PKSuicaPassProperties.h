@@ -30,7 +30,7 @@ API_AVAILABLE(ios(10.1), watchos(3.1))
 
 @property (nonatomic, assign, readonly, getter=isGreenCarTicketUsed) BOOL greenCarTicketUsed;
 
-@property (nonatomic, assign, readonly, getter=isBlacklisted) BOOL blacklisted API_DEPRECATED_WITH_REPLACEMENT("isBlocked", ios(10.1, 14.5), watchos(3.1, 7.0));
+@property (nonatomic, assign, readonly, getter=isBlacklisted) BOOL blacklisted API_DEPRECATED_WITH_REPLACEMENT("isBlocked", ios(10.1, 15.0), watchos(3.1, 8.0));
 
 @end
 

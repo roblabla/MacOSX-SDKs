@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, UIViewAnimatingPosition) {
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_SWIFT_UI_ACTOR
 @protocol UIViewAnimating <NSObject>
 
 @property(nonatomic, readonly) UIViewAnimatingState state;
@@ -72,6 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol UITimingCurveProvider;
 
+NS_SWIFT_UI_ACTOR
 @protocol UIViewImplicitlyAnimating <UIViewAnimating>
 
 @optional

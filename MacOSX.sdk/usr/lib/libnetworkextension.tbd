@@ -4,22 +4,30 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AF9492CB-1517-3462-A301-3900963CFED6
+    value:           DE6998FC-0189-33B3-AD45-9BCD07133DBC
   - target:          x86_64-maccatalyst
-    value:           AF9492CB-1517-3462-A301-3900963CFED6
+    value:           DE6998FC-0189-33B3-AD45-9BCD07133DBC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D87D42C9-9E08-3AE1-87DF-34AD26B6DC00
+    value:           E1C15D5C-C994-3B42-9301-D4356EB3E6D2
   - target:          arm64e-maccatalyst
-    value:           D87D42C9-9E08-3AE1-87DF-34AD26B6DC00
+    value:           E1C15D5C-C994-3B42-9301-D4356EB3E6D2
 install-name:    '/usr/lib/libnetworkextension.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _ne_filter_allocate_globals, _ne_filter_copy_connection, _ne_filter_crypto_generate_client_key, 
+    symbols:         [ _NEHelperTrackerAddIP, _NEHelperTrackerAddIPForAllFlows, _NEHelperTrackerAddIPWithDisposition, 
+                       _NEHelperTrackerAppInfoIsBrowser, _NEHelperTrackerAppInfoSetAuditToken, 
+                       _NEHelperTrackerAppInfoSetIsBrowser, _NEHelperTrackerAppInfoSetPID, 
+                       _NEHelperTrackerAppInfoSetSigningIdentifier, _NEHelperTrackerAppInfoSetUUID, 
+                       _NEHelperTrackerClearCache, _NEHelperTrackerContextGetDomain, 
+                       _NEHelperTrackerContextGetDomainOwner, _NEHelperTrackerDumpIPEntries, 
+                       _NEHelperTrackerFreeAppInfo, _NEHelperTrackerGetAppInfo, _NEHelperTrackerGetAppUUID, 
+                       _NEHelperTrackerGetDisposition, _ne_filter_allocate_globals, 
+                       _ne_filter_copy_connection, _ne_filter_crypto_generate_client_key, 
                        _ne_filter_crypto_init_client, _ne_filter_crypto_init_master, 
                        _ne_filter_crypto_sign_data, _ne_filter_crypto_validate_data, 
                        _ne_filter_deallocate_globals, _ne_filter_get_definition, 

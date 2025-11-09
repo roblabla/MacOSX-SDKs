@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EA059A52-888C-378F-B0E6-647A162BCFA1
+    value:           C586A3B8-C5B1-30A1-B6D3-C9D9C02DF320
   - target:          x86_64-maccatalyst
-    value:           EA059A52-888C-378F-B0E6-647A162BCFA1
+    value:           C586A3B8-C5B1-30A1-B6D3-C9D9C02DF320
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           01BD1494-10EF-30B8-B6F0-7C76AAB81A1E
+    value:           9728EB5E-7501-3743-AA64-B3B2F9AFAA0D
   - target:          arm64e-maccatalyst
-    value:           01BD1494-10EF-30B8-B6F0-7C76AAB81A1E
+    value:           9728EB5E-7501-3743-AA64-B3B2F9AFAA0D
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/ATSHI.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

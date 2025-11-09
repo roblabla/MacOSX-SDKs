@@ -130,6 +130,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 */
 
 @property(readonly, retain) IOBluetoothDevice *device;
+- (IOBluetoothDevice *)getDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
     @method		attributes
@@ -141,6 +142,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 */
 
 @property(readonly, copy) NSDictionary *attributes;
+- (NSDictionary *)getAttributes DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
     @method		getAttributeDataElement:

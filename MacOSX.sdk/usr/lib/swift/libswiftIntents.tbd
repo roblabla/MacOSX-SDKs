@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           139E17C3-21B7-3180-8868-E3D3FCABA2F4
+    value:           2C5910A1-9D50-362D-A28F-7A0E783899DC
   - target:          x86_64-maccatalyst
-    value:           139E17C3-21B7-3180-8868-E3D3FCABA2F4
+    value:           2C5910A1-9D50-362D-A28F-7A0E783899DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           81FC2E2B-9C34-32ED-815F-BFA99968BD50
+    value:           682CBA86-2AC0-36AE-9913-1A91FAAFF403
   - target:          arm64e-maccatalyst
-    value:           81FC2E2B-9C34-32ED-815F-BFA99968BD50
+    value:           682CBA86-2AC0-36AE-9913-1A91FAAFF403
 install-name:    '/usr/lib/swift/libswiftIntents.dylib'
-current-version: 8
+current-version: 10
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.11$@rpath/libswiftIntents.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.13$@rpath/libswiftIntents.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.9$@rpath/libswiftIntents.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s7Intents10INShortcutO10Foundation20ReferenceConvertibleAAMc', 
                        '_$s7Intents10INShortcutO11descriptionSSvg', '_$s7Intents10INShortcutO11descriptionSSvpMV', 
                        '_$s7Intents10INShortcutO12userActivityACSo06NSUserD0C_tcfC', 
@@ -79,6 +79,8 @@ exports:
                        '_$sSo12INRideOptionC7IntentsE15usesMeteredFareSo8NSNumberCSgvg', 
                        '_$sSo12INRideOptionC7IntentsE15usesMeteredFareSo8NSNumberCSgvpMV', 
                        '_$sSo12INRideOptionC7IntentsE15usesMeteredFareSo8NSNumberCSgvs', 
+                       '_$sSo13INFocusStatusC7IntentsE9isFocusedABSbSg_tcfC', '_$sSo13INFocusStatusC7IntentsE9isFocusedABSbSg_tcfc', 
+                       '_$sSo13INFocusStatusC7IntentsE9isFocusedSbSgvg', '_$sSo13INFocusStatusC7IntentsE9isFocusedSbSgvpMV', 
                        '_$sSo13INMediaSearchC7IntentsE9mediaType9sortOrder0D4Name06artistH005albumH010genreNames04moodL011releaseDate9reference0D10IdentifierABSo0a4ItemE0V_So0a4SortG0VSSSgA2RSaySSGSgATSo21INDateComponentsRangeCSgSo0A9ReferenceVARtcfC', 
                        '_$sSo13INMediaSearchC7IntentsE9mediaType9sortOrder0D4Name06artistH005albumH010genreNames04moodL011releaseDate9reference0D10IdentifierABSo0a4ItemE0V_So0a4SortG0VSSSgA2RSaySSGSgATSo21INDateComponentsRangeCSgSo0A9ReferenceVARtcfc', 
                        '_$sSo17INPlayMediaIntentC7IntentsE10mediaItems0E9Container12playShuffled18playbackRepeatMode14resumePlayback0J13QueueLocation0J5Speed0E6SearchABSaySo11INMediaItemCGSg_AMSgSbSgSo010INPlaybackkL0VAQSo0uoP0VSdSgSo0sR0CSgtcfC', 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FF5AD120-119F-3734-A5D4-A60512F6A9A2
+    value:           467ED7B5-BCCB-31FC-AFD7-CBECA3D4EA04
   - target:          x86_64-maccatalyst
-    value:           FF5AD120-119F-3734-A5D4-A60512F6A9A2
+    value:           467ED7B5-BCCB-31FC-AFD7-CBECA3D4EA04
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D284976F-6097-3B8C-9AFF-620D5F1383B8
+    value:           9EC4F9F2-4F7E-3C7E-AE86-60DA918EFE7F
   - target:          arm64e-maccatalyst
-    value:           D284976F-6097-3B8C-9AFF-620D5F1383B8
+    value:           9EC4F9F2-4F7E-3C7E-AE86-60DA918EFE7F
 install-name:    '/System/Library/PrivateFrameworks/KerberosHelper.framework/Versions/A/KerberosHelper'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

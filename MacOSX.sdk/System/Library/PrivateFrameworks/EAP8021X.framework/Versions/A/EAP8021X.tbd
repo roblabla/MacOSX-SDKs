@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           74CBFD3D-AF1E-37A8-9E87-F54B119501DA
+    value:           5A1005D8-09C2-303C-9DD9-DEE3BF151DDF
   - target:          x86_64-maccatalyst
-    value:           74CBFD3D-AF1E-37A8-9E87-F54B119501DA
+    value:           5A1005D8-09C2-303C-9DD9-DEE3BF151DDF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           55456B36-5C7D-3A3C-BE59-686940A5C7E5
+    value:           22E35AF1-E327-320C-BE5B-072713DBE204
   - target:          arm64e-maccatalyst
-    value:           55456B36-5C7D-3A3C-BE59-686940A5C7E5
+    value:           22E35AF1-E327-320C-BE5B-072713DBE204
 install-name:    '/System/Library/PrivateFrameworks/EAP8021X.framework/Versions/A/EAP8021X'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

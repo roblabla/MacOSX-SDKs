@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           61310B46-6CD7-385B-AC6C-7078B24D342C
+    value:           BFB1C930-C1D6-3813-BB6F-86A69CADD2C7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EEC3A67F-68A7-3E7F-BF5A-380569983029
+    value:           909D0275-DEFD-37B4-8FBB-DB2CBF633747
 install-name:    '/usr/lib/log/liblog_location.dylib'
-current-version: 2420.16.22
+current-version: 2652
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _OSLogCopyFormattedString, _OSStateCreateStringWithData, _liblog_locationVersionNumber, 

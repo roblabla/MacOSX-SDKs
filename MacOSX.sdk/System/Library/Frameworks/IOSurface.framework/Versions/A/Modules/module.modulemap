@@ -1,7 +1,5 @@
-framework module IOSurface [extern_c] {
+framework module IOSurface [system] {
     umbrella "Headers"
-    exclude header "IOSurfaceObjC.h"
-    export *
     module * { export * }
     
     module ObjC {

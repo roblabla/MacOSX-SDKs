@@ -13,7 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIPressesEvent : UIEvent
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@interface UIPressesEvent : UIEvent
 
 @property(nonatomic, readonly) NSSet <UIPress *> *allPresses;
 - (NSSet <UIPress *> *)pressesForGestureRecognizer:(UIGestureRecognizer *)gesture;

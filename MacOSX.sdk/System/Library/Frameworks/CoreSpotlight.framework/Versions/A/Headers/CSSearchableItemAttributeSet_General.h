@@ -2,7 +2,7 @@
 //  CSSearchableItemAttributeSet_General.h
 //  CoreSpotlight
 //
-//  Copyright © 2015 Apple. All rights reserved.
+//  Copyright © 2021 Apple. All rights reserved.
 //
 
 #import <CoreSpotlight/CSSearchableItemAttributeSet.h>
@@ -29,6 +29,9 @@
 
 //Optional image data for thumbnail for this item
 @property(nullable, copy) NSData *thumbnailData;
+
+// Optional file URL pointing to a thumbnail image for this item that will be preferred in dark appearances
+@property(nullable, strong) NSURL * darkThumbnailURL;
 
 //For activities, this is the unique identifier for the item this activity is related to. If the item doesn't exist in the index, the activity will not get stored. When the item is deleted, the activity will also be deleted.
 @property(nullable, copy) NSString *relatedUniqueIdentifier;
@@ -90,6 +93,13 @@
 
 // If supportsNavigation is set to 1, and the item has the latitude and longitude properties set, then the latitude and longitude may be used for navigation. For example, supportsNavigation would be set on a restaurant review, but not on a photo.
 @property(nullable, strong) NSNumber *supportsNavigation;
+
+// An array of strings that are the custom action identifiers.
+@property(copy) NSArray<NSString*> * _Nonnull actionIdentifiers API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, tvos);
+
+// The file type used for the share action.
+@property(nullable, copy) UTType *sharedItemContentType API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, tvos);
+
 @end
 
 @interface CSSearchableItemAttributeSet(CSContainment)

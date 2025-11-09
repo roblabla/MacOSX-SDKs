@@ -1,7 +1,7 @@
 /*
 	AppKit.h
 	Application Kit
-	Copyright (c) 1994-2019, Apple Inc.
+	Copyright (c) 1994-2021, Apple Inc.
 	All rights reserved.
 
 	This file is included by all AppKit application source files for easy building.  Using this file is preferred over importing individual files because it will use a precompiled version.
@@ -260,3 +260,14 @@
 #import <AppKit/NSStepperTouchBarItem.h>
 #import <AppKit/NSTintConfiguration.h>
 #import <AppKit/NSSearchToolbarItem.h>
+
+#import <AppKit/NSTextRange.h>
+#import <AppKit/NSTextSelection.h>
+#import <AppKit/NSTextSelectionNavigation.h>
+#import <AppKit/NSTextContentManager.h>
+#import <AppKit/NSTextElement.h>
+#import <AppKit/NSTextLayoutFragment.h>
+#import <AppKit/NSTextLayoutManager.h>
+#import <AppKit/NSTextLineFragment.h>
+#import <AppKit/NSTextViewportLayoutController.h>
+#import <AppKit/NSTextAttachmentCell.h>

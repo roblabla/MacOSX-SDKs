@@ -5,9 +5,11 @@ aa \- Manipulate Apple Archives
 .B aa \fBcommand\fR [\fBoptions\fR]
 .SH DESCRIPTION
 .B aa creates and manipulates Apple Archives
-.SH VERBS
+.SH COMMANDS
 .P
 \fBarchive\fR\ \ \ \ \ \ \ \ \ \ \ Archive the contents of the target directory
+.P
+\fBappend\fR\ \ \ \ \ \ \ \ \ \ \ \ Archive the contents of the target directory, append to an existing archive file
 .P
 \fBextract\fR\ \ \ \ \ \ \ \ \ \ \ Extract the contents of an archive to the target directory
 .P
@@ -73,9 +75,25 @@ Alias for the following options:
 .br
 \fB\-exclude\-field\fR \fIdat\fR
 .br
-\fB\-include\-field\fR \fIsh1,cks,siz\fR
+\fB\-include\-field\fR \fIsh2,siz,idx,idz\fR
 .br
 \fB\-a\fR \fIlzfse\fR \fB\-b\fR \fI1m\fR
+.TP
+.BR \-imanifest\ \fIinput_manifest_file\fR
+Manifest matching the input archive.  Can be used in conjonction with the entry selection options to accelerate processing
+.TP
+.BR \-omanifest\ \fIoutput_manifest_file\fR
+Receives a manifest of the output archive
+.TP
+.BR \-list\-format\ \fIformat\fR
+Output format for the \fBlist\fR command, one of \fItext\fR, \fIjson\fR. Default is \fItext\fR
+
+.SH ENTRY SELECTION OPTIONS
+.PP
+\fB-include-path\fR and \fB-include-path-list\fR options are applied first to select an initial set of entries,
+then \fB-exclude-path\fR, \fB-exclude-path-list\fR, \fB-exclude-name\fR, \fB-exclude-regex\fR are applied to remove entries from this set.
+If no \fB-include-path\fR or \fB-include-path-list\fR option is given, all entries are included in the initial set.
+If a directory is included/excluded, the entire sub-tree is included/excluded.
 .TP
 .BR \-include-path\ \fIpath\fR
 Include entry paths having \fIpath\fR as a prefix. This option can be given multiple times.
@@ -109,6 +127,49 @@ Add the given fields to the set of field keys. This option can be given multiple
 .TP
 .BR \-exclude\-field\ \fI<field_spec>\fR
 Remove the given fields from the set of field keys. This option can be given multiple times. \fI<field_spec>\fR is a comma separated list of entry field keys listed below.
+
+.SH ENCRYPTION OPTIONS
+.br
+When archiving, encryption is selected by one of the \fI\-password...\fR, \fI\-key...\fR, or \fI\-recipient\-pub\fR options.
+The archive will be signed if a private key is specified with \fI\-sign\-priv\fR.
+With the currently available profiles, public/private keys are on the Elliptic Curve P-256, and symmetric keys are 256-bit long.
+.TP
+.BR \-keychain
+Use Keychain to load/store symmetric keys and passwords
+.TP
+.BR \-password\ \fIfile\fR
+File containing encryption password. When encrypting, and if \fI\-password\-gen\fR is passed,
+receives the generated password.  Can be \fI\-\fR to print the password to standard output.
+.TP
+.BR \-password\-value\ \fIpassword\fR
+Password.
+.TP
+.BR \-password\-gen
+When encrypting, generate a new random password.  It is recommended to always use this option,
+in conjonction with \fI-keychain\fR to store the password in the Keychain, or \fI-password\fR to store the password in a file or print it.
+.TP
+.BR \-key\ \fIfile\fR
+File containing encryption symmetric key. When encrypting, and if \fI\-key\-gen\fR is passed,
+receives the generated key.
+.TP
+.BR \-key\-value\ \fIkey\fR
+Symmetric key, either "hex:<64 hex digits>" or "base64:<32 bytes encoded using base64>".
+.TP
+.BR \-key\-gen
+When encrypting, generate a new random symmetric key.
+.TP
+.BR \-recipient\-pub\ \fIfile\fR
+Recipient public key for encryption.  The corresponding private key is required to decrypt the archive.
+.TP
+.BR \-recipient\-priv\ \fIfile\fR
+Recipient private key for decryption.  The archive must have been encrypted against the corresponding public key.
+.TP
+.BR \-sign\-pub\ \fIfile\fR
+Signing public key for decryption.  The archive must have been signed with the corresponding private key.
+.TP
+.BR \-sign\-priv\ \fIfile\fR
+Signing private key for encryption.  The corresponding public key is required to decrypt and authenticate the archive.
+
 .SH ENTRY TYPES
 .br
 \fBb\fR block special
@@ -126,6 +187,7 @@ Remove the given fields from the set of field keys. This option can be given mul
 \fBp\fR fifo
 .br
 \fBs\fR socket
+
 .SH ENTRY FIELDS
 .br
 \fBtyp\fR entry type
@@ -158,7 +220,7 @@ Remove the given fields from the set of field keys. This option can be given mul
 .br
 \fBsh1\fR SHA1 digest
 .br
-\fBsh2\fR SHA2 digest
+\fBsh2\fR SHA2-256 digest
 .br
 \fBdat\fR file contents
 .br
@@ -175,12 +237,7 @@ Remove the given fields from the set of field keys. This option can be given mul
 \fBall\fR alias for all fields (exclude only)
 .br
 \fBattr\fR alias for \fIuid,gid,mod,flg,mtm,btm,ctm\fR
-.SH ENTRY SELECTION
-.PP
-\fB-include-path\fR and \fB-include-path-list\fR options are applied first to select an initial set of entries,
-then \fB-exclude-path\fR, \fB-exclude-path-list\fR, \fB-exclude-name\fR, \fB-exclude-regex\fR are applied to remove entries from this set.
-If no \fB-include-path\fR or \fB-include-path-list\fR option is given, all entries are included in the initial set.
-If a directory is included/excluded, the entire sub-tree is included/excluded.
+
 .SH EXAMPLES
 .PP
 Archive the contents of directory \fIfoo\fR into archive \fIfoo.aar\fR, using LZMA compression with 8 MB blocks
@@ -230,4 +287,16 @@ Extract a subset of entries matching prefix \fIApplications/Mail.app\fR from arc
 .RS
 .B aa extract -i foo.aar -include-path Applications/Mail.app -d dst
 .RE
-
+.PP
+Archive and encrypt directory \fIfoo\fR to archive \fIfoo.aea\fR, generating a random password and storing it in the Keychain
+.PP
+.RS
+.B aa archive -d foo -o foo.aea -keychain -password-gen
+.RE
+.PP
+Decrypt and extract archive \fIfoo.aea\fR to directory \fIdst\fR, obtaining the password from the Keychain (requires local authentication)
+.PP
+.RS
+.B aa extract -o foo.aea -d dst -keychain
+.RE
+.PP

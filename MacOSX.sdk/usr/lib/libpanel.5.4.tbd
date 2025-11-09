@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           18FF258F-DE0C-3BD9-91FB-C8C0565D682B
+    value:           5138B04B-48D4-3919-A226-22B0AD52EF8C
   - target:          x86_64-maccatalyst
-    value:           18FF258F-DE0C-3BD9-91FB-C8C0565D682B
+    value:           5138B04B-48D4-3919-A226-22B0AD52EF8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DEFB29C8-4957-324D-BC29-C58592AD8FEB
+    value:           C870B165-56AE-36B3-A913-9DBBAB153E5D
   - target:          arm64e-maccatalyst
-    value:           DEFB29C8-4957-324D-BC29-C58592AD8FEB
+    value:           C870B165-56AE-36B3-A913-9DBBAB153E5D
 install-name:    '/usr/lib/libpanel.5.4.dylib'
 current-version: 5.4
 compatibility-version: 5.4

@@ -8,7 +8,7 @@
 
 @class NSCalendar;
 
-typedef NSString * NSLocaleKey NS_STRING_ENUM;
+typedef NSString * NSLocaleKey NS_TYPED_ENUM;
 
 @class NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSString;
 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           ACD6D879-16A4-3E6A-97E5-F2F37597AF62
+    value:           DB13C758-8BB3-323B-8008-D5691952C67F
   - target:          x86_64-maccatalyst
-    value:           ACD6D879-16A4-3E6A-97E5-F2F37597AF62
+    value:           DB13C758-8BB3-323B-8008-D5691952C67F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           908CE044-D8F9-3C1A-9D48-E678015681B9
+    value:           F08AB8F0-B480-3C25-A3DE-8A35944926B1
   - target:          arm64e-maccatalyst
-    value:           908CE044-D8F9-3C1A-9D48-E678015681B9
+    value:           F08AB8F0-B480-3C25-A3DE-8A35944926B1
 install-name:    '/System/Library/PrivateFrameworks/PhotoVision.framework/Versions/A/PhotoVision'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -71,7 +71,7 @@ exports:
                        _PVMinimumSceneAlgorithmUmbrellaVersionValue, _PVNotificationClustererNeedsToBeSyncedWithPhotoLibrary, 
                        _PVNotificationClustererReady, _PVNotificationClusteringFinished, 
                        _PVNotificationClusteringStarted, _PVPersonPromoterQuiescentStateRequirementsMinimumNumberOfFacesOnSourceForUpgrading, 
-                       _PVSuggestionUpdateCancelled, _PVSuggestionUpdateFinished, 
+                       _PVPersonPromoterVersion, _PVSuggestionUpdateCancelled, _PVSuggestionUpdateFinished, 
                        _PVSuggestionUpdateProgress, _PVSuggestionUpdateStarted, _PVVisionClustersMinusLibraryClusters, 
                        _PVVisionFaceLandmarkConfidenceThreshold, _PVVisionFaceSmilingThreshold, 
                        _PV_FACECROP_CROPBOX_KEY, _PV_FACECROP_CURRENT_VERSION, _PV_FACECROP_EXIF_ORIENTATION_STRING, 
@@ -79,10 +79,8 @@ exports:
                        _PV_FACECROP_METADATA_PREFIX, _PV_FACECROP_METADATA_ROOT_PATH, 
                        _PV_FACECROP_VERSION_KEY, _PhotoVisionVersionNumber, _PhotoVisionVersionString, 
                        _createOrientedCroppedAndScaledImageFromCGImageSource, _getImagePropertiesFromCGImageSource, 
-                       _kGraphNodeF2Threshold, _kGraphNodeHighDetectors, _kGraphNodeHighPrecisionThreshold, 
-                       _kGraphNodeHighRecallThreshold, _makeOrientationTransform, 
-                       _makeRectClippedAgainstImageBounds, _makeRectWithAllIntegers, 
-                       _makeScaledRect ]
+                       _makeOrientationTransform, _makeRectClippedAgainstImageBounds, 
+                       _makeRectWithAllIntegers, _makeScaledRect ]
     objc-classes:    [ PVCanceler, PVClusterer, PVContext, PVEvent, PVEventManager, 
                        PVFace, PVFaceCrop, PVFaceCropAnalyzer, PVFaceCropGenerator, 
                        PVFaceCropSourceDescriptor, PVFaceCropUtils, PVFaceIDModel, 

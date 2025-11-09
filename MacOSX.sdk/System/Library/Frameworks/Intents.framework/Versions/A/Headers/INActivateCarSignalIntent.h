@@ -81,10 +81,10 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolveCarNameForActivateCarSignal:(INActivateCarSignalIntent *)intent
-                    withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCarName(for:with:));
+                            withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCarName(for:with:));
 
 - (void)resolveSignalsForActivateCarSignal:(INActivateCarSignalIntent *)intent
-                    withCompletion:(void (^)(INCarSignalOptionsResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveSignals(for:with:));
+                            withCompletion:(void (^)(INCarSignalOptionsResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveSignals(for:with:));
 
 @end
 

@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           B0A33A3B-B258-3498-8C40-B5F574047950
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CCA75A2F-9D13-36D5-9329-D812DF54737B
+install-name:    '/System/Library/PrivateFrameworks/HomeKitMetrics.framework/Versions/A/HomeKitMetrics'
+current-version: 799
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ HMMLogEvent ]
+...

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           08A26E27-3EBA-3377-8ECE-F619434F4DFF
+    value:           9EB83868-9207-33F3-9DD1-0CA63AE8CA7D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B54B28B1-C921-31BA-93C5-C3B3A3273B35
+    value:           D8178170-2E9A-3BE0-9581-25683EAB4E3C
 install-name:    '/System/Library/PrivateFrameworks/VoiceShortcuts.framework/Versions/A/VoiceShortcuts'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -29,10 +29,13 @@ exports:
                        _VCXPCEventPairedDeviceDidChangeVersion, _VCXPCEventStreamDarwinNotifications, 
                        _VCXPCEventStreamDistributedNotifications, _VCXPCEventTimeChange, 
                        _VCXPCEventTimezoneChange, _VoiceShortcutsVersionNumber, _VoiceShortcutsVersionString, 
-                       _WFDialogNotificationUserInfoRunningContextKey, _WFDialogXPCHostInterface, 
-                       _WFDialogXPCInterface, _WFEventInfoKeyNewValue, _WFEventInfoKeyOldValue, 
-                       _WFLogCategoryDefaultShortcuts, _WFLogCategoryUserNotificationManager, 
-                       _WFWorkflowRunCoordinatorErrorDomain ]
+                       _WFDatabaseChangesContainObjectType, _WFDialogNotificationUserInfoRunningContextKey, 
+                       _WFDialogXPCHostInterface, _WFDialogXPCInterface, _WFEnterSandbox, 
+                       _WFEventInfoKeyNewValue, _WFEventInfoKeyOldValue, _WFLogCategoryDefaultShortcuts, 
+                       _WFLogCategoryRunQueue, _WFLogCategoryUserNotificationManager, 
+                       _WFServiceEntryForWorkflow, _WFWorkflowRunCoordinatorErrorDomain, 
+                       _getWFDefaultShortcutsLogObject, _getWFRunQueueLogObject, 
+                       _getWFUserNotificationManagerLogObject ]
     objc-classes:    [ VCCKApplicationStateObserver, VCCKShortcutSyncCoordinator, 
                        VCCKShortcutSyncService, VCCKSyncEngine, VCCoreDuetListener, 
                        VCDaemon, VCDaemonDatabaseProvider, VCDaemonSyncDataEndpoint, 
@@ -48,9 +51,12 @@ exports:
                        VCUserDefaults, VCUserNotificationManager, VCVoiceShortcutManager, 
                        VCVoiceShortcutManagerAccessWrapper, VCWeeklyMetricSubmitter, 
                        VCWorkflowChange, VCWorkflowSyncDataHandler, VCXPCServer, 
-                       WFDialogNotificationManager, WFDialogPresentationManager, 
-                       WFPresentedDialog, WFQueuedRunRequest, WFShareSheetWorkflowProvider, 
-                       WFUserNotificationManager, WFWorkflowRunCoordinator, WFXPCActivityScheduler ]
+                       WFBiomeListener, WFDialogNotificationManager, WFDialogPresentationManager, 
+                       WFOnScreenContentManager, WFPresentedDialog, WFQueuedRunRequest, 
+                       WFShareSheetWorkflowProvider, WFSiriWorkflowVocabularyUpdater, 
+                       WFSystemSurfaceWorkflowStatusUpdater, WFTriggerRegistrar, 
+                       WFUserNotificationManager, WFWorkflowRunCoordinator, WFWorkflowRunQueue, 
+                       WFWorkflowRunQueueDescriptor, WFXPCActivityScheduler ]
     objc-ivars:      [ VCPBChange._changeType, VCPBChange._message, VCPBChange._messageType, 
                        VCPBChange._uniqueID, VCPBIntentDefinition._associatedBundleID, 
                        VCPBIntentDefinition._files, VCPBIntentDefinitionChange._associatedBundleID, 

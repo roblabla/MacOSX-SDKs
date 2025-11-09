@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           80C081E1-918A-3B72-B1B5-B8803020CD07
+    value:           25F265BA-5000-34D6-87F4-E1354D1691A3
   - target:          x86_64-maccatalyst
-    value:           80C081E1-918A-3B72-B1B5-B8803020CD07
+    value:           25F265BA-5000-34D6-87F4-E1354D1691A3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AFC53195-2F16-3223-8559-CA5AE4D162D3
+    value:           6FCFD383-ACF3-3AEA-805B-6FE5D4A761AD
   - target:          arm64e-maccatalyst
-    value:           AFC53195-2F16-3223-8559-CA5AE4D162D3
+    value:           6FCFD383-ACF3-3AEA-805B-6FE5D4A761AD
 install-name:    '/System/Library/PrivateFrameworks/SpotlightIndex.framework/Versions/A/SpotlightIndex'
-current-version: 2150.16
+current-version: 2173
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -30,10 +30,10 @@ exports:
                        _RLEOIDArraySerialize, _RLEOIDArrayUnflatten, _RLEOIDArrayValidate, 
                        _SIAddCorrection, _SIBulkDeleteAttributes, _SIBulkGetAttributeNames, 
                        _SIBulkGetAttributes, _SIBulkGetPath, _SIBulkSetAttributes, 
-                       _SICalculateSize, _SICancel, _SICloseIndex, _SICopyCorrections, 
-                       _SICopyProperties, _SICopyProperty, _SICorrectionCommit, _SICorrectionCreate, 
-                       _SICorrectionDestory, _SICrashStringInit, _SICreateIndex, 
-                       _SICreateNewIndex, _SIDeleteAttributes, _SIDeleteCSAttributes, 
+                       _SICalculateSize, _SICancel, _SIClearICUCache, _SICloseIndex, 
+                       _SICopyCorrections, _SICopyProperties, _SICopyProperty, _SICorrectionCommit, 
+                       _SICorrectionCreate, _SICorrectionDestory, _SICrashStringInit, 
+                       _SICreateIndex, _SICreateNewIndex, _SIDeleteAttributes, _SIDeleteCSAttributes, 
                        _SIDeleteCSClientStateCache, _SIDeleteCSItems, _SIDeserialize, 
                        _SIExecuteQuery, _SIExecuteQueryWithResultsCallback, _SIExecuteQueryWithResultsCallbackForTags, 
                        _SIFetchCSClientState, _SIFixupPaths, _SIFlushAndSuspendIndex, 
@@ -77,21 +77,22 @@ exports:
                        _SISerialize, _SISerializeCacheData, _SISetAccumulatedWorkBoundaryCrossCallback, 
                        _SISetAttributes, _SISetCSAttributes, _SISetCodedAttributes, 
                        _SISetCompletionRankingWeights, _SISetDefaultSchemaData, _SISetFileProvidersCallbacks, 
-                       _SISetLogging, _SISetPowerState, _SISetProperty, _SISetQueryCSFieldNameCallback, 
-                       _SISetScanCount, _SISetStoreCookie, _SISetTransactionCount, 
-                       _SIShutdownIndex, _SISupportsFastScoping, _SISyncIndex, _SISyncIndexForLikelyShutdown, 
-                       _SISyncIndexVaccuumIfNeeded, _SISynchedOp, _SISynchedOpPropagatingPriority, 
-                       _SITransferAttributes, _SIUserCtxAllowPermissionCheck, _SIUserCtxCreate, 
-                       _SIUserCtxCreateWithLanguages, _SIUserCtxGetArgumentDictionary, 
-                       _SIUserCtxGetAuditToken, _SIUserCtxGetCredential, _SIUserCtxGetLanguageArray, 
-                       _SIUserCtxGetSchema, _SIUserCtxHasCredential, _SIUserCtxIsSandboxed, 
-                       _SIUserCtxRemoveCredential, _SIUserCtxSetArgumentDictionary, 
-                       _SIValidIndex, _SIWaitResults, _SI_PersistentIDStoreGetTypeID, 
-                       __SIActivityDump, __SIAddContactInfoToDictionary, __SIChangeProtectionClassForFilesInDirectory, 
-                       __SICheckIndexForDuplicateOids, __SICleanupStrings, __SIConsistencyCheck, 
-                       __SICooldownIndexFilesForMerge, __SICopyPropertyIDMap, __SICreateContactMailCounts, 
-                       __SICreateContactSMSCounts, __SIDirectoryStoreIterate, __SIFlushAndSyncIndex, 
-                       __SIGetAllOids, __SIGetErrorString, __SIGetFileOptions, __SIGetIndexCount, 
+                       _SISetICUCacheFd, _SISetLogging, _SISetPowerState, _SISetProperty, 
+                       _SISetQueryCSFieldNameCallback, _SISetScanCount, _SISetStoreCookie, 
+                       _SISetTransactionCount, _SIShutdownIndex, _SISupportsFastScoping, 
+                       _SISyncIndex, _SISyncIndexForLikelyShutdown, _SISyncIndexVaccuumIfNeeded, 
+                       _SISynchedOp, _SISynchedOpPropagatingPriority, _SITransferAttributes, 
+                       _SIUserCtxAllowPermissionCheck, _SIUserCtxCreate, _SIUserCtxCreateWithLanguages, 
+                       _SIUserCtxGetArgumentDictionary, _SIUserCtxGetAuditToken, 
+                       _SIUserCtxGetCredential, _SIUserCtxGetLanguageArray, _SIUserCtxGetSchema, 
+                       _SIUserCtxHasCredential, _SIUserCtxIsSandboxed, _SIUserCtxRemoveCredential, 
+                       _SIUserCtxSetArgumentDictionary, _SIValidIndex, _SIWaitResults, 
+                       _SI_PersistentIDStoreGetTypeID, __SIActivityDump, __SIAddContactInfoToDictionary, 
+                       __SIChangeProtectionClassForFilesInDirectory, __SICheckIndexForDuplicateOids, 
+                       __SICleanupStrings, __SIConsistencyCheck, __SICooldownIndexFilesForMerge, 
+                       __SICopyPropertyIDMap, __SICreateContactMailCounts, __SICreateContactSMSCounts, 
+                       __SIDirectoryStoreIterate, __SIFlushAndSyncIndex, __SIGetAllOids, 
+                       __SIGetErrorString, __SIGetFileOptions, __SIGetIndexCount, 
                        __SIGetLastUsedDate, __SIGetMissingParentOID, __SIGetRecoverTimeStamp, 
                        __SIIssueBadIndex, __SIIssueCacheCleanup, __SIIssueDefrag, 
                        __SIIssueFlush, __SIIssueFullMerge, __SIIssueFullMergeWithGroup, 

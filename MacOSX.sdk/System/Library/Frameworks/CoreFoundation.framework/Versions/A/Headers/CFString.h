@@ -148,7 +148,9 @@ O-umlaut is \303\226 in UTF-8). UTF-8 is the recommended encoding here,
 since it is the default choice with Mac OS X developer tools.
 */
 #ifndef CF_OPEN_SOURCE
-
+#if TARGET_OS_WIN32
+#undef __CONSTANT_CFSTRINGS__
+#endif
 #endif
 
 #if DEPLOYMENT_RUNTIME_SWIFT

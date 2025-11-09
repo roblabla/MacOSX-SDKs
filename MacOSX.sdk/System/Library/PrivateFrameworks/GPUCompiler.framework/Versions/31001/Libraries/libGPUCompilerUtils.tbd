@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           11D15E0F-9C97-36DD-9D6A-F3E41738894F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           1E216D96-54D9-3BF9-B2F4-E01A6242B8E3
+install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libGPUCompilerUtils.dylib'
+current-version: 31001.255.2
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _MTLGPUCompilerHashComputePipelineScript, _MTLGPUCompilerHashFragmentPipelineScript, 
+                       _MTLGPUCompilerHashFunctionScript, _MTLGPUCompilerHashVertexPipelineScript, 
+                       _MTLGPUCompilerTimeStamp ]
+...

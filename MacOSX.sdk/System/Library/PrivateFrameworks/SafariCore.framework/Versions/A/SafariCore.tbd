@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9A6457A9-F0C4-3840-AA4C-12A14F85CE93
+    value:           B4C0AE58-412E-3E24-B870-56C8BEE66959
   - target:          x86_64-maccatalyst
-    value:           9A6457A9-F0C4-3840-AA4C-12A14F85CE93
+    value:           B4C0AE58-412E-3E24-B870-56C8BEE66959
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           43773659-5085-34E6-99B9-37E41EFAB155
+    value:           5DD247F6-835C-3AF1-A221-893950413CEF
   - target:          arm64e-maccatalyst
-    value:           43773659-5085-34E6-99B9-37E41EFAB155
+    value:           5DD247F6-835C-3AF1-A221-893950413CEF
 install-name:    '/System/Library/PrivateFrameworks/SafariCore.framework/Versions/A/SafariCore'
-current-version: 611.1.21
+current-version: 612.1.24
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -57,18 +57,22 @@ exports:
                        _WBSCloudBookmarkListRecordNameTopBookmark, _WBSCloudBookmarksErrorDomain, 
                        _WBSCloudBookmarksMigrationCoordinatorDataDirectory, _WBSCloudBookmarksMigrationCoordinatorLogsDirectory, 
                        _WBSCloudBookmarksMigrationCoordinatorLogsDirectoryURL, _WBSCloudTabsErrorDomain, 
-                       _WBSDispatchAsyncToMainQueueWithAutoreleasePool, _WBSDispatchSyncToMainQueueWithAutoreleasePool, 
-                       _WBSEnableCloudKitBookmarkDebugUtilitiesPreferenceKey, _WBSEnableSandboxStyleFileQuarantine, 
-                       _WBSInitializeSandboxWithBundleNameAndEmbeddedProfile, _WBSInitializeSandboxWithEmbeddedProfile, 
-                       _WBSIsEqual, _WBSKeychainCredentialNotificationMonitorDoNotCoalesceInterval, 
-                       _WBSLogWithDifferentialPrivacy, _WBSMakeOperatingSystemVersion, 
-                       _WBSNSExtensionFromNSExtension, _WBSNullOperatingSystemVersion, 
-                       _WBSOperatingSystemVersionsEqual, _WBSParseOperatingSystemVersion, 
-                       _WBSParsecEnabledDidChangeNotification, _WBSPasswordCharacterClassIdentifierASCIIPrintable, 
-                       _WBSPasswordCharacterClassIdentifierDigit, _WBSPasswordCharacterClassIdentifierLower, 
-                       _WBSPasswordCharacterClassIdentifierSpecial, _WBSPasswordCharacterClassIdentifierUnicode, 
-                       _WBSPasswordCharacterClassIdentifierUpper, _WBSPasswordManagerURLAllowKey, 
-                       _WBSPasswordManagerURLAllowShowingPasswordDetailIfLocalAuthenticationNotConfiguredKey, 
+                       _WBSDPrintf, _WBSDispatchAsyncToMainQueueWithAutoreleasePool, 
+                       _WBSDispatchSyncToMainQueueWithAutoreleasePool, _WBSEnableCloudKitBookmarkDebugUtilitiesPreferenceKey, 
+                       _WBSEnableCloudSettingsSyncPreferenceKey, _WBSEnableSandboxStyleFileQuarantine, 
+                       _WBSExtensionTypeAppExtension, _WBSExtensionTypeContentBlocker, 
+                       _WBSExtensionTypeWebExtension, _WBSExtensionsTelemetryNumberOfDisabledExtensions, 
+                       _WBSExtensionsTelemetryNumberOfDisabledWebExtensions, _WBSExtensionsTelemetryNumberOfEnabledExtensions, 
+                       _WBSExtensionsTelemetryNumberOfEnabledWebExtensions, _WBSInitializeSandboxWithBundleNameAndEmbeddedProfile, 
+                       _WBSInitializeSandboxWithEmbeddedProfile, _WBSIsEqual, _WBSKeychainCredentialNotificationMonitorDoNotCoalesceInterval, 
+                       _WBSLogWithDifferentialPrivacy, _WBSMakeAccessibilityIdentifier, 
+                       _WBSMakeOperatingSystemVersion, _WBSNSExtensionFromNSExtension, 
+                       _WBSNullOperatingSystemVersion, _WBSOperatingSystemVersionsEqual, 
+                       _WBSParseOperatingSystemVersion, _WBSParsecEnabledDidChangeNotification, 
+                       _WBSPasswordCharacterClassIdentifierASCIIPrintable, _WBSPasswordCharacterClassIdentifierDigit, 
+                       _WBSPasswordCharacterClassIdentifierLower, _WBSPasswordCharacterClassIdentifierSpecial, 
+                       _WBSPasswordCharacterClassIdentifierUnicode, _WBSPasswordCharacterClassIdentifierUpper, 
+                       _WBSPasswordManagerURLAllowKey, _WBSPasswordManagerURLAllowShowingPasswordDetailIfLocalAuthenticationNotConfiguredKey, 
                        _WBSPasswordManagerURLChangePasswordDomainKey, _WBSPasswordManagerURLChangePasswordUserKey, 
                        _WBSPasswordManagerURLDidAuthenticateKey, _WBSPasswordManagerURLDoNotAllowKey, 
                        _WBSPasswordManagerURLEncryptedPasswordDataKey, _WBSPasswordManagerURLEncryptionKeyReferenceKey, 
@@ -76,8 +80,9 @@ exports:
                        _WBSPasswordManagerURLSearchQueryKey, _WBSPasswordManagerURLSenderKey, 
                        _WBSPasswordManagerURLSenderSiri, _WBSPasswordManagerURLShowChangePasswordController, 
                        _WBSPasswordManagerURLTrue, _WBSPasswordRuleParserErrorCodeNoError, 
-                       _WBSPasswordRuleParserErrorDomain, _WBSPrivacyPreservingDescription, 
-                       _WBSReleaseOnMainQueueImpl, _WBSRemoteAutoFillQuirksLastUpdateTimePreferenceKey, 
+                       _WBSPasswordRuleParserErrorDomain, _WBSPerformBlockOnMainRunLoopWithCommonModes, 
+                       _WBSPrintf, _WBSPrivacyPreservingDescription, _WBSReleaseOnMainQueueImpl, 
+                       _WBSRemoteAutoFillQuirksLastUpdateTimePreferenceKey, _WBSRunLoopRunUntilTerminationSignal, 
                        _WBSSQLiteErrorDomain, _WBSSafariBookmarksSyncAgentBugIDsKey, 
                        _WBSSafariBookmarksSyncAgentCloudTabsWereUpdatedOnServerNotificationName, 
                        _WBSSafariBookmarksSyncAgentDidDetectBugNotificationName, 
@@ -87,8 +92,7 @@ exports:
                        _WBSSafariBookmarksSyncAgentServiceName, _WBSSafariBookmarksSyncAgentSyncResultKey, 
                        _WBSSavedPasswordStoreDidChangeNotification, _WBSStatusCodeGroupFromStatusCode, 
                        _WBSSuppressCloudKitBookmarkMigrationForCyclerTestPreferenceKey, 
-                       _WBSTeamIdentifierFromAuditToken, _WBSUniversalSearchEnabledPreferenceKey, 
-                       __WBSLocalizedString, __WBSLocalizedStringWithCurrentUserLocale, 
+                       _WBSTeamIdentifierFromAuditToken, __WBSLocalizedString, __WBSLocalizedStringWithCurrentUserLocale, 
                        __WBSRunOnceImpl, _canonicalizedCharacterClasses, _parseCustomCharacterClass, 
                        _parseIdentifier, _parseNamedCharacterClass, _parsePasswordRequiredOrAllowedPropertyValue, 
                        _parsePasswordRule, _parsePasswordRules, _parsePositiveIntegerPropertyValue, 
@@ -122,7 +126,8 @@ exports:
                        WBSChangePasswordURLManager, WBSCloudBookmarksRemoteMigrationInfo, 
                        WBSCloudKitContainerManateeObserver, WBSCloudKitThrottler, 
                        WBSConfigurationDataTransformer, WBSConfigurationDownloader, 
-                       WBSCoreClass, WBSDontSaveMarker, WBSFeatureAvailability, WBSFetchedCloudTabDeviceOrCloseRequest, 
+                       WBSCoreAnalyticsExtensionsStatistics, WBSCoreClass, WBSDontSaveMarker, 
+                       WBSExtensionTelemetryData, WBSFeatureAvailability, WBSFetchedCloudTabDeviceOrCloseRequest, 
                        WBSFileLogger, WBSKeyBagLockStatusChangedHandlerToken, WBSKeyBagLockStatusManager, 
                        WBSKeychainCredentialNotificationMonitor, WBSLazyURLCredentialCache, 
                        WBSMaxConsecutivePasswordRule, WBSMaxLengthPasswordRule, WBSMemoryFootprint, 
@@ -134,7 +139,8 @@ exports:
                        WBSSQLiteRow, WBSSQLiteRowEnumerator, WBSSQLiteStatement, 
                        WBSSQLiteStatementCache, WBSSQLiteStore, WBSSafariBookmarksSyncAgentProxy, 
                        WBSSandboxExtensionDataPair, WBSSavedPassword, WBSSavedPasswordAuditor, 
-                       WBSSavedPasswordStore, WBSScopeExitHandler, WBSSoftLinkingUtilities, 
+                       WBSSavedPasswordChangeRequest, WBSSavedPasswordSidecar, WBSSavedPasswordStore, 
+                       WBSScopeExitHandler, WBSSoftLinkingUtilities, WBSTOTPGenerator, 
                        WBSURLCredentialCache, WBSUserDefaultObservation, _WBSSavedPasswordPartialCredential ]
     objc-ivars:      [ WBSAnalyticsLogger._analyticsSynchronizationQueue, WBSAnalyticsSafariActivatedHomeScreenQuickActionEvent._has, 
                        WBSAnalyticsSafariActivatedHomeScreenQuickActionEvent._quickAction, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           28AB0CBC-61F6-3A01-BCE2-A53DA1AECB0F
+    value:           54E50EFB-0D8D-39FF-B935-D2A984819E40
   - target:          x86_64-maccatalyst
-    value:           28AB0CBC-61F6-3A01-BCE2-A53DA1AECB0F
+    value:           54E50EFB-0D8D-39FF-B935-D2A984819E40
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           24EF8097-F2FE-3A7B-8967-B1ABB66D3E9D
+    value:           AD79E62F-CE8D-3E22-BBBE-5C4D93342CEC
   - target:          arm64e-maccatalyst
-    value:           24EF8097-F2FE-3A7B-8967-B1ABB66D3E9D
+    value:           AD79E62F-CE8D-3E22-BBBE-5C4D93342CEC
 install-name:    '/usr/lib/system/libsystem_darwin.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -27,13 +27,17 @@ exports:
                        _close_drop_np, _close_drop_optional_np, _crfprintf_np, _dirstat_np, 
                        _dirstatat_np, _dup_np, _err_np, _errc_np, _fcheck_np, _memdup2_np, 
                        _memdup_np, _os_assert_mach, _os_assert_mach_port_status, 
-                       _os_boot_mode_query, _os_crash_get_reporter_port_array, _os_crash_port_array_deallocate, 
-                       _os_crash_set_reporter_port, _os_crash_spawnattr_set_reporter_port, 
-                       _os_flagset_copy_string, _os_localtime_file, _os_mach_msg_copy_description, 
-                       _os_mach_msg_get_audit_trailer, _os_mach_msg_get_context_trailer, 
-                       _os_mach_msg_get_trailer, _os_mach_msg_trailer_copy_description, 
-                       _os_mach_port_copy_description, _os_parse_boot_arg_int, _os_parse_boot_arg_string, 
-                       _os_simple_hash, _os_simple_hash_string, _os_simple_hash_string_with_seed, 
+                       _os_boot_arg_string_to_int, _os_boot_mode_query, _os_crash_get_reporter_port_array, 
+                       _os_crash_port_array_deallocate, _os_crash_set_reporter_port, 
+                       _os_crash_spawnattr_set_reporter_port, _os_enumerate_boot_args, 
+                       _os_enumerate_boot_args_b, _os_enumerate_boot_args_from_buffer, 
+                       _os_enumerate_boot_args_from_buffer_b, _os_flagset_copy_string, 
+                       _os_localtime_file, _os_mach_msg_copy_description, _os_mach_msg_get_audit_trailer, 
+                       _os_mach_msg_get_context_trailer, _os_mach_msg_get_trailer, 
+                       _os_mach_msg_trailer_copy_description, _os_mach_port_copy_description, 
+                       _os_parse_boot_arg_from_buffer_int, _os_parse_boot_arg_from_buffer_string, 
+                       _os_parse_boot_arg_int, _os_parse_boot_arg_string, _os_simple_hash, 
+                       _os_simple_hash_string, _os_simple_hash_string_with_seed, 
                        _os_simple_hash_with_seed, _os_subcommand_fprintf, _os_subcommand_main, 
                        _os_subcommand_vfprintf, _os_variant_allows_internal_security_policies, 
                        _os_variant_check, _os_variant_copy_description, _os_variant_has_factory_content, 

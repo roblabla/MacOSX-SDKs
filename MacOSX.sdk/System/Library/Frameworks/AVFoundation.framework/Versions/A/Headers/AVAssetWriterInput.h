@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2018 Apple Inc. All rights reserved.
+	Copyright 2010-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -19,6 +19,9 @@
 
 @class AVMetadataItem;
 @class AVAssetWriterInputInternal;
+@class AVCaption;
+@class AVCaptionGroup;
+@class AVAssetWriterInputCaptionAdaptorInternal;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -272,7 +275,7 @@ AV_INIT_UNAVAILABLE
 	
 	If the sample buffer contains a CVPixelBuffer then the choice of pixel format will affect the performance and quality of the encode. For optimal performance the format of the pixel buffer should match one of the native formats supported by the selected video encoder. Below are some recommendations:
  
-	The H.264 encoder natively supports kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange and kCVPixelFormatType_420YpCbCr8BiPlanarFullRange, which should be used with video and full range input respectively. The JPEG encoder on iOS natively supports kCVPixelFormatType_422YpCbCr8FullRange. For other video codecs on OSX, kCVPixelFormatType_422YpCbCr8 is the preferred pixel format for video and is generally the most performant when encoding. If you need to work in the RGB domain then kCVPixelFormatType_32BGRA is recommended on iOS and kCVPixelFormatType_32ARGB is recommended on OSX.
+	The H.264 and HEVC encoders natively support kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange and kCVPixelFormatType_420YpCbCr8BiPlanarFullRange, which should be used with 8-bit 4:2:0 video and full range input respectively; other related pixel formats in CoreVideo/CVPixelBuffer.h are ideal for 4:2:2 and 4:4:4 (and for HEVC, 10-bit). The JPEG encoder on iOS and Apple Silicon macOS natively supports kCVPixelFormatType_422YpCbCr8FullRange. If you need to work in the RGB domain then kCVPixelFormatType_32BGRA is recommended on iOS and macOS.
 
 	Pixel buffers not in a natively supported format will be converted internally prior to encoding when possible. Pixel format conversions within the same range (video or full) are generally faster than conversions between different ranges.
  
@@ -767,7 +770,7 @@ AV_INIT_UNAVAILABLE
 	
 	For optimal performance the format of the pixel buffer should match one of the native formats supported by the selected video encoder. Below are some recommendations:
  
-	The H.264 encoder natively supports kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange and kCVPixelFormatType_420YpCbCr8BiPlanarFullRange, which should be used with video and full range input respectively. The JPEG encoder on iOS natively supports kCVPixelFormatType_422YpCbCr8FullRange. For other video codecs on OSX, kCVPixelFormatType_422YpCbCr8 is the preferred pixel format for video and is generally the most performant when encoding. If you need to work in the RGB domain then kCVPixelFormatType_32BGRA is recommended on iOS and kCVPixelFormatType_32ARGB is recommended on OSX.
+	The H.264 and HEVC encoders natively support kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange and kCVPixelFormatType_420YpCbCr8BiPlanarFullRange, which should be used with 8-bit 4:2:0 video and full range input respectively; other related pixel formats in CoreVideo/CVPixelBuffer.h are ideal for 4:2:2 and 4:4:4 (and for HEVC, 10-bit). The JPEG encoder on iOS and Apple Silicon macOS natively supports kCVPixelFormatType_422YpCbCr8FullRange. If you need to work in the RGB domain then kCVPixelFormatType_32BGRA is recommended on iOS and macOS.
 
 	Pixel buffers not in a natively supported format will be converted internally prior to encoding when possible. Pixel format conversions within the same range (video or full) are generally faster than conversions between different ranges.
 
@@ -856,6 +859,74 @@ AV_INIT_UNAVAILABLE
 	Before calling this method, you must ensure that the input that underlies the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.  It is an error to invoke this method before starting a session (via -[AVAssetWriter startSessionAtSourceTime:]) or after ending a session (via -[AVAssetWriter endSessionAtSourceTime:]).
  */
 - (BOOL)appendTimedMetadataGroup:(AVTimedMetadataGroup *)timedMetadataGroup;
+
+@end
+
+/*!
+	@class AVAssetWriterInputCaptionAdaptor
+	@abstract
+		An adaptor class for appending instances of AVCaption to an asset writer input. -[AVAssetWriterInput -appendSampleBuffer:] will throw an exception if used when this adaptor is attached.
+ */
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+@interface AVAssetWriterInputCaptionAdaptor : NSObject
+{
+@private
+	AVAssetWriterInputCaptionAdaptorInternal *_internal;
+}
+AV_INIT_UNAVAILABLE
+
+/*!
+	@method assetWriterInputCaptionAdaptorWithAssetWriterInput:
+	@abstract
+		Creates a new caption adaptor for writing to the specified asset writer input.
+ */
++ (instancetype)assetWriterInputCaptionAdaptorWithAssetWriterInput:(AVAssetWriterInput *)input;
+
+/*!
+	@method initWithAssetWriterInput:
+	@abstract
+		Creates a new caption adaptor for writing to the specified asset writer input.
+ */
+- (instancetype)initWithAssetWriterInput:(AVAssetWriterInput *)input;
+
+/*!
+	@property assetWriterInput
+	@abstract
+		The asset writer input that was used to initialize the receiver.
+ */
+@property (nonatomic, readonly) AVAssetWriterInput *assetWriterInput;
+
+/*!
+	@method appendCaption:
+	@abstract
+		Append a single caption to be written.
+	@param caption
+		The caption to append.
+	@result
+		Returns YES if the operation succeeded, NO if it failed.
+	@discussion
+		If this method returns NO, check the value of AVAssetWriter.status on the attached asset writer to determine why appending failed.
+ 
+		The start time of each caption's timeRange property must be numeric (see CMTIME_IS_NUMERIC) and must be at least as large as the start time of any previous caption (including any captions present in a group appended via -appendCaptionGroup:).  In other words, the sequence of captions appended using this method must have monotonically increasing start times.
+ 
+		 The duration of each caption's timeRange property must either be numeric.
+ */
+- (BOOL)appendCaption:(AVCaption *)caption;
+
+/*!
+	@method appendCaptionGroup:
+	@abstract
+		Append a group of captions to be written.
+	@param captionGroup
+	@result
+		Returns YES if the operation succeeded, NO if it failed.
+	@discussion
+		If this method returns NO, check the value of AVAssetWriter.status on the attached asset writer to determine why appending failed.
+		When appending a sequence of captions groups, the start time of each group must be equal to or greater than the end time of any previous group.  The easiest way to achieve this is to create the group using a caption whose duration is kCMTimeInvalid, in which case the duration will be determined by subtracting the start time of the group from the start time of the next appended group.
+		When mixing calls to -appendCaptionGroup: and -appendCaption:, the start time of each group must be equal to or greater than the end time of any previous captions.
+		To mark a time range containing no captions, append a group containing an empty caption array.
+ */
+- (BOOL)appendCaptionGroup:(AVCaptionGroup *)captionGroup;
 
 @end
 

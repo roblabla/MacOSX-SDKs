@@ -1,0 +1,20 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           4700E8AE-DAE2-35A9-8EF2-59BD06A22868
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B3358DF5-79BE-37C5-84E2-B75C3F84E556
+install-name:    '/System/Library/PrivateFrameworks/MorphunAssets.framework/Versions/A/MorphunAssets'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _MorphunAssetOSLog, _MorphunAssetsError, _MorphunAssetsVersionNumber, 
+                       _MorphunAssetsVersionString, _MorphunLogInitIfNeeded, __EmbeddedLanguages, 
+                       __EmbeddedPath, __MorphunDomain, __SupportedLanguages, _embeddedFilepath, 
+                       _embeddedLanguagesKey, _kMorphunLogContextAsset, _libmorphunVersionKey, 
+                       _morphunNamespace ]
+    objc-classes:    [ MorphunAssets, MorphunAssetsUtilities ]
+...

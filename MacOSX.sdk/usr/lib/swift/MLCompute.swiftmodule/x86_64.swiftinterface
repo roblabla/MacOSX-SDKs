@@ -1,10 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target x86_64-apple-macos11.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMLCompute -swift-version 5 -enforce-exclusivity=checked -O -module-name MLCompute
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target x86_64-apple-macos12.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMLCompute -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-concurrency -module-name MLCompute
 @_exported import MLCompute
 import Swift
+import _Concurrency
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, *)
-extension MLCEmbeddingDescriptor {
+extension MLCompute.MLCEmbeddingDescriptor {
   @inlinable public var embeddingCount: Swift.Int {
     get {
         Int(exactly: __embeddingCount)!
@@ -46,7 +47,7 @@ extension MLCEmbeddingDescriptor {
     }
 }
 @available(macOS 11.0, iOS 14, tvOS 14, *)
-extension MLCPaddingLayer {
+extension MLCompute.MLCPaddingLayer {
   @inlinable convenience public init(reflectionPadding: [Swift.Int]) {
         self.init(__reflectionPadding: reflectionPadding as [NSNumber])
     }
@@ -61,7 +62,7 @@ extension MLCPaddingLayer {
     }
 }
 @available(macOS 11.0, iOS 14, tvOS 14, *)
-extension MLCLayerNormalizationLayer {
+extension MLCompute.MLCLayerNormalizationLayer {
   @inlinable public var normalizedShape: [Swift.Int] {
     get {
         __normalizedShape.map { Int(exactly: $0)! }
@@ -83,8 +84,38 @@ extension MLCLayerNormalizationLayer {
             varianceEpsilon: varianceEpsilon)
     }
 }
+@available(macOS 12, iOS 15, tvOS 15, *)
+extension MLCompute.MLCInferenceGraph {
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  public func execute(inputsData: [Swift.String : MLCompute.MLCTensorData], lossLabelsData: [Swift.String : MLCompute.MLCTensorData]? = nil, lossLabelWeightsData: [Swift.String : MLCompute.MLCTensorData]? = nil, outputsData: [Swift.String : MLCompute.MLCTensorData]? = nil, batchSize: Swift.Int, options: MLCompute.MLCExecutionOptions = []) async throws -> (result: MLCompute.MLCTensor?, executionTime: Foundation.TimeInterval)
+  #endif
+
+}
+@available(macOS 12, iOS 15, tvOS 15, *)
+extension MLCompute.MLCTrainingGraph {
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  public func executeForward(batchSize: Swift.Int, options: MLCompute.MLCExecutionOptions = [], outputsData: [Swift.String : MLCompute.MLCTensorData]? = nil) async throws -> (result: MLCompute.MLCTensor?, executionTime: Foundation.TimeInterval)
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  public func executeGradient(batchSize: Swift.Int, options: MLCompute.MLCExecutionOptions = [], outputsData: [Swift.String : MLCompute.MLCTensorData]? = nil) async throws -> Foundation.TimeInterval
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  public func executeOptimizerUpdate(options: MLCompute.MLCExecutionOptions = []) async throws -> Foundation.TimeInterval
+  #endif
+
+}
 @available(macOS 11.0, iOS 14, tvOS 14, *)
-extension MLCSplitLayer {
+extension MLCompute.MLCSplitLayer {
   @inlinable public var splitSectionLengths: [Swift.Int]? {
     get {
         __splitSectionLengths?.map { Int(exactly: $0)! }
@@ -97,7 +128,7 @@ extension MLCSplitLayer {
     }
 }
 @available(macOS 11.0, iOS 14, tvOS 14, *)
-extension MLCUpsampleLayer {
+extension MLCompute.MLCUpsampleLayer {
   @inlinable public var shape: [Swift.Int] {
     get {
         __shape.map { Int(exactly: $0)! }
@@ -114,7 +145,7 @@ extension MLCUpsampleLayer {
     }
 }
 @available(macOS 11.0, iOS 14, tvOS 14, *)
-extension MLCSliceLayer {
+extension MLCompute.MLCSliceLayer {
   @inlinable public var start: [Swift.Int] {
     get {
         __start.map { Int(exactly: $0)! }
@@ -138,7 +169,7 @@ extension MLCSliceLayer {
     }
 }
 @available(macOS 11.0, iOS 14, tvOS 14, *)
-extension MLCConvolutionDescriptor {
+extension MLCompute.MLCConvolutionDescriptor {
   @inlinable public var kernelSizes: (height: Swift.Int, width: Swift.Int) {
     get {
         (__kernelHeight, __kernelWidth)
@@ -179,7 +210,7 @@ extension MLCConvolutionDescriptor {
     }
 }
 @available(macOS 11.3, iOS 14.5, tvOS 14.5, *)
-extension MLCReductionLayer {
+extension MLCompute.MLCReductionLayer {
   @inlinable public var dimensions: [Swift.Int] {
     get {
         __dimensions.map { Int(exactly: $0)! }
@@ -190,7 +221,7 @@ extension MLCReductionLayer {
     }
 }
 @available(macOS 11.0, iOS 14, tvOS 14, *)
-extension MLCTransposeLayer {
+extension MLCompute.MLCTransposeLayer {
   @inlinable public var dimensions: [Swift.Int] {
     get {
         __dimensions.map { Int(exactly: $0)! }
@@ -237,7 +268,7 @@ public enum MLCPaddingPolicy {
   }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, *)
-extension MLCTensor {
+extension MLCompute.MLCTensor {
   @inlinable convenience public init(shape: [Swift.Int]) {
         self.init(__shape: shape as [NSNumber])
     }
@@ -273,7 +304,7 @@ extension MLCTensor {
     }
 }
 @available(macOS 11.0, iOS 14, tvOS 14, *)
-extension MLCGraph {
+extension MLCompute.MLCGraph {
   @inlinable public func split(source: MLCompute.MLCTensor, splitSectionLengths: [Swift.Int], dimension: Swift.Int) -> [MLCompute.MLCTensor]? {
         __split(
             withSource: source,
@@ -288,13 +319,13 @@ extension MLCGraph {
     }
 }
 @available(macOS 11, iOS 14, tvOS 14, *)
-extension MLCReshapeLayer {
+extension MLCompute.MLCReshapeLayer {
   @inlinable convenience public init?(shape: [Swift.Int]) {
         self.init(__shape: shape as [NSNumber])
     }
 }
 @available(macOS 11.3, iOS 14.5, tvOS 14.5, *)
-extension MLCReshapeLayer {
+extension MLCompute.MLCReshapeLayer {
   @inlinable public var shape: [Swift.Int] {
     get {
         __shape.map { Int(exactly: $0)! }
@@ -302,7 +333,7 @@ extension MLCReshapeLayer {
   }
 }
 @available(macOS 11.0, iOS 14, tvOS 14, *)
-extension MLCTensorDescriptor {
+extension MLCompute.MLCTensorDescriptor {
   @inlinable public var shape: [Swift.Int] {
     get {
         __shape.map { Int(exactly: $0)! }
@@ -367,7 +398,7 @@ public enum MLCPoolingType {
   }
 }
 @available(macOS 11.0, iOS 14, tvOS 14, *)
-extension MLCPoolingDescriptor {
+extension MLCompute.MLCPoolingDescriptor {
   @inlinable public var poolingType: MLCompute.MLCPoolingType {
     get {
         switch __poolingType {

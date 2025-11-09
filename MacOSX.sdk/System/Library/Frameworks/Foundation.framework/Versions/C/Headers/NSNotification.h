@@ -4,7 +4,7 @@
 
 #import <Foundation/NSObject.h>
 
-typedef NSString *NSNotificationName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString *NSNotificationName NS_TYPED_EXTENSIBLE_ENUM;
 
 @class NSString, NSDictionary, NSOperationQueue;
 

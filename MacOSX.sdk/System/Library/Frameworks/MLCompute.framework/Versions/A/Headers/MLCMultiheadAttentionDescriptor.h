@@ -24,10 +24,10 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /*! @brief model or embedding dimension */
 @property (readonly, nonatomic) NSUInteger modelDimension;
 
-/*! @brief total dimension of key space, must be divisible by number of heads. Default = modelDimension */
+/*! @brief total dimension of key space, Default = modelDimension */
 @property (readonly, nonatomic) NSUInteger keyDimension;
 
-/*! @brief total dimension of value space, must be divisible by number of heads. Default = modelDimension */
+/*! @brief total dimension of value space, Default = modelDimension */
 @property (readonly, nonatomic) NSUInteger valueDimension;
 
 /*! @brief number of parallel attention heads */

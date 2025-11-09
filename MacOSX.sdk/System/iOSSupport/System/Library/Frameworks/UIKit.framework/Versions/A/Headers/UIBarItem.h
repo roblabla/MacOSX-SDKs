@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIImage;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIBarItem : NSObject <NSCoding, UIAppearance>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIBarItem : NSObject <NSCoding, UIAppearance>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;

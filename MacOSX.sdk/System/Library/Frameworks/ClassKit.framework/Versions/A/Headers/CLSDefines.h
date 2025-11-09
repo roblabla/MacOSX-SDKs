@@ -2,7 +2,7 @@
 //  CLSDefines.h
 //  ClassKit
 //
-//  Copyright © 2018 - 2019 Apple Inc. All rights reserved.
+//  Copyright © 2018-2021 Apple Inc. All rights reserved.
 //
 
 #ifndef CLSDEFINES_H
@@ -63,6 +63,11 @@ CLS_EXTERN CLSErrorUserInfoKey const CLSErrorObjectKey API_AVAILABLE(ios(11.3), 
  @abstract   If multiple objects cause errors we return an error with code `CLSErrorCodePartialFailure` which will contain an array of errors in - [NSError userInfo]; under this key.
  */
 CLS_EXTERN CLSErrorUserInfoKey const CLSErrorUnderlyingErrorsKey API_AVAILABLE(ios(11.3), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ @abstract   Errors with the code `CLSErrorCodePartialFailure` may contain an array of successful entities in - [NSError userInfo]; under this key.
+ */
+CLS_EXTERN CLSErrorUserInfoKey const CLSErrorSuccessfulObjectsKey API_AVAILABLE(ios(15.0), macos(12.0), macCatalyst(15.0)) API_UNAVAILABLE(watchos, tvos);
 
 typedef NSString * CLSPredicateKeyPath NS_EXTENSIBLE_STRING_ENUM API_AVAILABLE(ios(11.3), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos, tvos);
 

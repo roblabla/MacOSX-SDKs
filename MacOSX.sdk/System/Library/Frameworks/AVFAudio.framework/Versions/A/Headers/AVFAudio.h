@@ -19,7 +19,9 @@
 #import <AVFAudio/AVAudioPlayerNode.h>
 #if !0
 #import <AVFAudio/AVAudioRecorder.h>
+#import <AVFAudio/AVAudioRoutingArbiter.h>
 #endif
+
 #import <AVFAudio/AVAudioSequencer.h>
 #import <AVFAudio/AVAudioSettings.h>
 #import <AVFAudio/AVAudioSinkNode.h>
@@ -52,7 +54,5 @@
 #import <AVFAudio/AVAudioSessionDeprecated.h>
 #endif
 
-#if TARGET_OS_OSX
-#import <AVFAudio/AVAudioRoutingArbiter.h>
-#endif
+
 

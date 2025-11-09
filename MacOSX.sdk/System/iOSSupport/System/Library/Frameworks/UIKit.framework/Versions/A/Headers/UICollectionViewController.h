@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class UICollectionViewLayout;
 @class UICollectionViewController;
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+@interface UICollectionViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;

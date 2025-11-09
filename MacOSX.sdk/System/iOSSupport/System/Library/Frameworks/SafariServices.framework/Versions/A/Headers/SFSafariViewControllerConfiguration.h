@@ -8,6 +8,8 @@
 #import <SafariServices/SFFoundation.h>
 #import <UIKit/UIKit.h>
 
+@class SFSafariViewControllerActivityButton;
+
 NS_ASSUME_NONNULL_BEGIN
 
 SF_EXTERN API_AVAILABLE(ios(11.0))
@@ -24,6 +26,11 @@ NS_SWIFT_NAME(SFSafariViewController.Configuration)
     @discussion The default value is YES.
  */
 @property (nonatomic) BOOL barCollapsingEnabled;
+
+/*! @abstract An additional button to be shown in SFSafariViewController's toolbar. See @link SFSafariViewControllerActivityButton @/link for more details.
+ @discussion This allows the user to access powerful functionality from your extension without needing to first show the UIActivityViewController.
+ */
+@property (nonatomic, nullable, copy) SFSafariViewControllerActivityButton *activityButton API_AVAILABLE(ios(15.0));
 
 @end
 

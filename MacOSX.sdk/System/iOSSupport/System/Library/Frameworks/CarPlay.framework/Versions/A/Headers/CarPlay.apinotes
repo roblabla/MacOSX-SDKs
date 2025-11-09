@@ -58,6 +58,10 @@ Tags:
   SwiftName: CPMessageListItem.maximumImageSize
 - Name: CPButtonMaximumImageSize
   SwiftName: CPButton.maximumImageSize
+- Name: CPAssistantCellVisibility
+  SwiftName: CPListItem.AssistantCellVisibility
+- Name: CPAssistantCellPosition
+  SwiftName: CPListItem.AssistantCellPosition
 
 Globals:
 - Name: CPTemplateApplicationSceneSessionRoleApplication

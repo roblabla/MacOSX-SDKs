@@ -28,6 +28,8 @@ typedef NS_ENUM(NSInteger, ARCoachingGoal) {
     ARCoachingGoalVerticalPlane,
     /** Session requires one plane of any type */
     ARCoachingGoalAnyPlane,
+    /** Session requires geo tracking */
+    ARCoachingGoalGeoTracking,
 } NS_SWIFT_NAME(ARCoachingOverlayView.Goal);
 
 /**
@@ -121,7 +123,7 @@ API_AVAILABLE(ios(13.0))
 - (void)coachingOverlayViewWillActivate:(ARCoachingOverlayView *)coachingOverlayView;
 
 /**
- This is called when the view deactivates, either manually or automatically
+ This is called when the view has been deactivated, either manually or automatically
  
  @param coachingOverlayView The view that was deactivated
  */

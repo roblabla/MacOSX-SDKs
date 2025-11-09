@@ -65,7 +65,7 @@ typedef NS_ENUM(NSInteger, UITableViewRowActionStyle) {
     UITableViewRowActionStyleNormal
 } API_DEPRECATED("Use UIContextualAction and related APIs instead.", ios(8.0, 13.0)) API_UNAVAILABLE(tvos);
 
-UIKIT_EXTERN API_DEPRECATED("Use UIContextualAction and related APIs instead.", ios(8.0, 13.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_DEPRECATED("Use UIContextualAction and related APIs instead.", ios(8.0, 13.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UITableViewRowAction : NSObject <NSCopying>
 
 + (instancetype)rowActionWithStyle:(UITableViewRowActionStyle)style title:(nullable NSString *)title handler:(void (^)(UITableViewRowAction *action, NSIndexPath *indexPath))handler;
@@ -77,7 +77,8 @@ UIKIT_EXTERN API_DEPRECATED("Use UIContextualAction and related APIs instead.", 
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UITableViewFocusUpdateContext : UIFocusUpdateContext
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@interface UITableViewFocusUpdateContext : UIFocusUpdateContext
 
 @property (nonatomic, strong, readonly, nullable) NSIndexPath *previouslyFocusedIndexPath;
 @property (nonatomic, strong, readonly, nullable) NSIndexPath *nextFocusedIndexPath;
@@ -87,6 +88,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UITableViewFocusUpdateContext : 
 //_______________________________________________________________________________________________________________
 // this represents the display and behavior of the cells.
 
+NS_SWIFT_UI_ACTOR
 @protocol UITableViewDelegate<NSObject, UIScrollViewDelegate>
 
 @optional
@@ -180,6 +182,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UITableViewFocusUpdateContext : 
 - (BOOL)tableView:(UITableView *)tableView shouldUpdateFocusInContext:(UITableViewFocusUpdateContext *)context API_AVAILABLE(ios(9.0));
 - (void)tableView:(UITableView *)tableView didUpdateFocusInContext:(UITableViewFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator API_AVAILABLE(ios(9.0));
 - (nullable NSIndexPath *)indexPathForPreferredFocusedViewInTableView:(UITableView *)tableView API_AVAILABLE(ios(9.0));
+
+/// Determines if the row at the specified index path should also become selected when focus moves to it.
+/// If the table view's global selectionFollowsFocus is enabled, this method will allow you to override that behavior on a per-index path basis. This method is not called if selectionFollowsFocus is disabled. 
+- (BOOL)tableView:(UITableView *)tableView selectionFollowsFocusForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 
 // Spring Loading
 
@@ -289,7 +295,8 @@ typedef NS_ENUM(NSInteger, UITableViewSeparatorInsetReference) {
 
 //_______________________________________________________________________________________________________________
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableView : UIScrollView <NSCoding, UIDataSourceTranslating>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UITableView : UIScrollView <NSCoding, UIDataSourceTranslating>
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style NS_DESIGNATED_INITIALIZER; // must specify style at creation. -initWithFrame: calls this with UITableViewStylePlain
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -298,7 +305,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableView : UIScrollView <NSCo
 
 @property (nonatomic, weak, nullable) id <UITableViewDataSource> dataSource;
 @property (nonatomic, weak, nullable) id <UITableViewDelegate> delegate;
+
 @property (nonatomic, weak, nullable) id <UITableViewDataSourcePrefetching> prefetchDataSource API_AVAILABLE(ios(10.0));
+@property (nonatomic, getter=isPrefetchingEnabled) BOOL prefetchingEnabled API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+
 @property (nonatomic, weak, nullable) id <UITableViewDragDelegate> dragDelegate API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 @property (nonatomic, weak, nullable) id <UITableViewDropDelegate> dropDelegate API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
@@ -308,6 +318,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableView : UIScrollView <NSCo
 @property (nonatomic) CGFloat estimatedRowHeight API_AVAILABLE(ios(7.0)); // default is UITableViewAutomaticDimension, set to 0 to disable
 @property (nonatomic) CGFloat estimatedSectionHeaderHeight API_AVAILABLE(ios(7.0)); // default is UITableViewAutomaticDimension, set to 0 to disable
 @property (nonatomic) CGFloat estimatedSectionFooterHeight API_AVAILABLE(ios(7.0)); // default is UITableViewAutomaticDimension, set to 0 to disable
+
+/// The height for filler rows added below the last row when there aren't enough rows to fill a plain style table view.
+/// Set 0 to disable filler rows entirely, use `UITableViewAutomaticDimension` for the default height.
+@property (nonatomic) CGFloat fillerRowHeight API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+
+/// Padding above each section header. The default value is `UITableViewAutomaticDimension`.
+@property (nonatomic) CGFloat sectionHeaderTopPadding API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
 
 @property (nonatomic) UIEdgeInsets separatorInset API_AVAILABLE(ios(7.0)) UI_APPEARANCE_SELECTOR; // allows customization of the frame of cell separators; see also the separatorInsetReference property. Use UITableViewAutomaticDimension for the automatic inset for that edge.
 @property (nonatomic) UITableViewSeparatorInsetReference separatorInsetReference API_AVAILABLE(ios(11.0), tvos(11.0)); // Changes how custom separatorInset values are interpreted. The default value is UITableViewSeparatorInsetFromCellEdges
@@ -330,7 +347,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableView : UIScrollView <NSCo
 - (nullable NSIndexPath *)indexPathForCell:(UITableViewCell *)cell;                      // returns nil if cell is not visible
 - (nullable NSArray<NSIndexPath *> *)indexPathsForRowsInRect:(CGRect)rect;                              // returns nil if rect not valid
 
-- (nullable __kindof UITableViewCell *)cellForRowAtIndexPath:(NSIndexPath *)indexPath;   // returns nil if cell is not visible or index path is out of range
+// Returns any existing visible or prepared cell for the index path. Returns nil when no cell exists, or if index path is out of range.
+- (nullable __kindof UITableViewCell *)cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 @property (nonatomic, readonly) NSArray<__kindof UITableViewCell *> *visibleCells;
 @property (nonatomic, readonly, nullable) NSArray<NSIndexPath *> *indexPathsForVisibleRows;
 
@@ -343,7 +362,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableView : UIScrollView <NSCo
 // Reloading and Updating
 
 // Allows multiple insert/delete/reload/move calls to be animated simultaneously. Nestable.
-- (void)performBatchUpdates:(void (NS_NOESCAPE ^ _Nullable)(void))updates completion:(void (^ _Nullable)(BOOL finished))completion API_AVAILABLE(ios(11.0), tvos(11.0));
+- (void)performBatchUpdates:(void (NS_NOESCAPE ^ _Nullable)(void))updates completion:(void (^ _Nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(11.0), tvos(11.0));
 
 // Use -performBatchUpdates:completion: instead of these methods, which will be deprecated in a future release.
 - (void)beginUpdates;
@@ -351,13 +370,16 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableView : UIScrollView <NSCo
 
 - (void)insertSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation;
 - (void)deleteSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation;
-- (void)reloadSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation API_AVAILABLE(ios(3.0));
 - (void)moveSection:(NSInteger)section toSection:(NSInteger)newSection API_AVAILABLE(ios(5.0));
+- (void)reloadSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation API_AVAILABLE(ios(3.0));
 
 - (void)insertRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation;
 - (void)deleteRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation;
-- (void)reloadRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation API_AVAILABLE(ios(3.0));
 - (void)moveRowAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath API_AVAILABLE(ios(5.0));
+- (void)reloadRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation API_AVAILABLE(ios(3.0));
+// Reconfigures any existing cells for the rows. Reconfiguring is more efficient than reloading a row, as it does not replace the
+// existing cell with a new cell. Prefer reconfiguring over reloading unless you actually need an entirely new cell for the row.
+- (void)reconfigureRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
 
 // Returns YES if the table view is in the middle of reordering, is displaying a drop target gap, or has drop placeholders. If possible, avoid calling -reloadData while there are uncommitted updates to avoid interfering with user-initiated interactions that have not yet completed.
 @property (nonatomic, readonly) BOOL hasUncommittedUpdates API_AVAILABLE(ios(11.0), tvos(11.0));
@@ -421,14 +443,24 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableView : UIScrollView <NSCo
 
 @property (nonatomic) BOOL remembersLastFocusedIndexPath API_AVAILABLE(ios(9.0)); // defaults to NO. If YES, when focusing on a table view the last focused index path is focused automatically. If the table view has never been focused, then the preferred focused index path is used.
 
-// When enabled, the table view ensures that selection is automatically triggered when focus moves to a cell.
+/// When enabled, the table view ensures that selection is automatically triggered when focus moves to a cell.
+/// Defaults to a system derived value based on platform and other properties of the table view.
 @property (nonatomic) BOOL selectionFollowsFocus API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+
+/// Determines if the table view allows its cells to become focused.
+/// When tableView:canFocusRowAtIndexPath: is implemented, its return value takes precedence over this method.
+/// Defaults to a system derived value based on platform and other properties of the table view.
+@property (nonatomic) BOOL allowsFocus API_AVAILABLE(ios(15.0), tvos(15.0));
+
+/// Determines if the table view allows its cells to become focused while editing.
+/// When tableView:canFocusRowAtIndexPath: is implemented, its return value takes precedence over this method.
+/// Defaults to a system derived value based on platform and other properties of the table view.
+@property (nonatomic) BOOL allowsFocusDuringEditing API_AVAILABLE(ios(15.0), tvos(15.0));
 
 // Drag & Drop
 
-// To enable intra-app drags on iPhone, set this to YES.
-// You can also force drags to be disabled for this table view by setting this to NO.
-// By default, this will return YES on iPad and NO on iPhone.
+// You can force drags to be disabled for this table view by setting this to NO.
+// As of iOS 15, this is true for both iPhone and iPad by default. Prior to iOS 15, it defaulted to false on iPhone.
 @property (nonatomic) BOOL dragInteractionEnabled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
 // YES if a drag session is currently active. A drag session begins after rows are "lifted" from the table view.
@@ -447,6 +479,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableView : UIScrollView <NSCo
 //_______________________________________________________________________________________________________________
 // this protocol represents the data model object. as such, it supplies no information about appearance (including the cells)
 
+NS_SWIFT_UI_ACTOR
 @protocol UITableViewDataSource<NSObject>
 
 @required
@@ -496,6 +529,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableView : UIScrollView <NSCo
 // _______________________________________________________________________________________________________________
 // this protocol can provide information about cells before they are displayed on screen.
 
+NS_SWIFT_UI_ACTOR
 @protocol UITableViewDataSourcePrefetching <NSObject>
 
 @required
@@ -514,7 +548,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableView : UIScrollView <NSCo
 // _______________________________________________________________________________________________________________
 // Drag & Drop
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UITableViewDragDelegate <NSObject>
 
 @required
@@ -554,7 +588,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 @end
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UITableViewDropDelegate <NSObject>
 
 @required
@@ -617,7 +651,7 @@ typedef NS_ENUM(NSInteger, UITableViewDropIntent) {
 } API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UITableViewDropProposal : UIDropProposal
 
 - (instancetype)initWithDropOperation:(UIDropOperation)operation intent:(UITableViewDropIntent)intent;
@@ -628,7 +662,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 @end
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UITableViewDropCoordinator <NSObject>
 
 // Ordered list of items available for this drop.
@@ -669,7 +703,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UITableViewPlaceholder : NSObject
 
 // A placeholder cell will be dequeued for the reuse identifier and inserted at the specified index path without requiring a data source update.
@@ -683,7 +717,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UITableViewDropPlaceholder : UITableViewPlaceholder
 
 // Allows customization of the preview used when dropping to a placeholder.
@@ -693,7 +727,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 @end
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UITableViewDropItem <NSObject>
 
 // Retrieve drop data from the dragItem's itemProvider.
@@ -713,7 +747,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 @end
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UITableViewDropPlaceholderContext <UIDragAnimating>
 
 // The drag item this placeholder was created for.

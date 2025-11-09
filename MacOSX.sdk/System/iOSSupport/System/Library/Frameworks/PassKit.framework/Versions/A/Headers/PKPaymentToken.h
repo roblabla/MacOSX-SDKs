@@ -4,6 +4,9 @@
 //  Copyright (c) 2014, Apple Inc. All rights reserved.
 //
 
+#ifndef __PKPAYMENTTOKEN_H
+#define __PKPAYMENTTOKEN_H
+
 #import <Foundation/Foundation.h>
 
 @class PKPaymentMethod;
@@ -36,3 +39,5 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

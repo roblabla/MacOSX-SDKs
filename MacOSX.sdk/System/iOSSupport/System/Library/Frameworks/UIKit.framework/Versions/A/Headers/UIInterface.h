@@ -19,8 +19,8 @@ typedef NS_ENUM(NSInteger, UIBarStyle) {
     UIBarStyleDefault          = 0,
     UIBarStyleBlack            = 1,
     
-    UIBarStyleBlackOpaque API_DEPRECATED("Use UIBarStyleBlack instead.", ios(2.0, 13.0)) = 1,
-    UIBarStyleBlackTranslucent API_DEPRECATED("Use UIBarStyleBlack and set the translucent property to YES instead.", ios(2.0, 13.0)) = 2,
+    UIBarStyleBlackOpaque API_UNAVAILABLE(tvos) API_DEPRECATED("Use UIBarStyleBlack instead.", ios(2.0, 13.0)) = 1,
+    UIBarStyleBlackTranslucent API_UNAVAILABLE(tvos) API_DEPRECATED("Use UIBarStyleBlack and set the translucent property to YES instead.", ios(2.0, 13.0)) = 2,
 } API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSInteger, UIUserInterfaceSizeClass) {
@@ -100,6 +100,9 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceActiveAppearance) {
 @property (class, nonatomic, readonly) UIColor *systemPurpleColor       API_AVAILABLE(ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 @property (class, nonatomic, readonly) UIColor *systemTealColor         API_AVAILABLE(ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 @property (class, nonatomic, readonly) UIColor *systemIndigoColor       API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+@property (class, nonatomic, readonly) UIColor *systemBrownColor        API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+@property (class, nonatomic, readonly) UIColor *systemMintColor         API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+@property (class, nonatomic, readonly) UIColor *systemCyanColor         API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /* Shades of gray. systemGray is the base gray color.
  */
@@ -118,6 +121,21 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceActiveAppearance) {
 @property (class, nonatomic, readonly) UIColor *systemGray4Color        API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
 @property (class, nonatomic, readonly) UIColor *systemGray5Color        API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
 @property (class, nonatomic, readonly) UIColor *systemGray6Color        API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+
+#pragma mark Tint color
+
+/* This color represents the tint color of a view.
+ *
+ * Like other dynamic colors, UIColor.tintColor relies on UITraitCollection.currentTraitCollection
+ * being set to a view's trait collection when it is used, so that it can resolve to that view's
+ * tint color. If you use UIColor.tintColor outside a view's context, and do not resolve it
+ * manually with a view's trait collection, it will return the system default tint color.
+ *
+ * Setting UIColor.tintColor directly to a view's tintColor property behaves the same as setting nil.
+ * However, you cannot set a custom dynamic color (e.g. using +[UIColor colorWithDynamicProvider:])
+ * that can resolve to UIColor.tintColor to a view's tintColor property.
+ */
+@property (class, nonatomic, readonly) UIColor *tintColor               API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos) NS_SWIFT_NAME(tintColor);
 
 #pragma mark Foreground colors
 

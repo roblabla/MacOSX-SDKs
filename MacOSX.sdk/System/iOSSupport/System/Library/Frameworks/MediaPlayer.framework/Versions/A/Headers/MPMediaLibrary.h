@@ -44,7 +44,7 @@ API_UNAVAILABLE(tvos, watchos, macos)
 - (void)endGeneratingLibraryChangeNotifications;
 
 + (MPMediaLibraryAuthorizationStatus)authorizationStatus MP_API(ios(9.3));
-+ (void)requestAuthorization:(void (^)(MPMediaLibraryAuthorizationStatus status))handler MP_API(ios(9.3));
++ (void)requestAuthorization:(void (^)(MPMediaLibraryAuthorizationStatus status))completionHandler MP_API(ios(9.3));
 
 - (void)addItemWithProductID:(NSString *)productID completionHandler:(nullable void (^)(NSArray <__kindof MPMediaEntity *> *entities, NSError * __nullable error))completionHandler MP_API(ios(9.3));
 

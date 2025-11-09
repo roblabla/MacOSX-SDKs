@@ -12,8 +12,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class CLRegionInternal;
-
 /*
  * CLRegionState
  *
@@ -50,10 +48,6 @@ typedef NS_ENUM(NSInteger, CLProximity) {
 CL_EXTERN
 API_AVAILABLE(macos(10.7), ios(4.0))
 @interface CLRegion : NSObject <NSCopying, NSSecureCoding>
-{
-@package
-	CLRegionInternal *_internal;
-}
 /*
  *  initCircularRegionWithCenter:radius:identifier:
  *  
@@ -76,7 +70,7 @@ API_AVAILABLE(macos(10.7), ios(4.0))
  *
  *    This method has been deprecated, please see CLCircularRegion.
  */
-@property (readonly, nonatomic) CLLocationCoordinate2D center API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) API_UNAVAILABLE(tvos);
+@property (readonly, atomic) CLLocationCoordinate2D center API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) API_UNAVAILABLE(tvos);
 
 /*
  *  radius
@@ -86,7 +80,7 @@ API_AVAILABLE(macos(10.7), ios(4.0))
  *
  *    This method has been deprecated, please see CLCircularRegion.
  */
-@property (readonly, nonatomic) CLLocationDistance radius API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) API_UNAVAILABLE(tvos);
+@property (readonly, atomic) CLLocationDistance radius API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) API_UNAVAILABLE(tvos);
 
 /*
  *  identifier
@@ -103,7 +97,7 @@ API_AVAILABLE(macos(10.7), ios(4.0))
  *    App will be launched and the delegate will be notified via locationManager:didEnterRegion:
  *    when the user enters the region. By default, this is YES.
  */
-@property (nonatomic, assign) BOOL notifyOnEntry API_AVAILABLE(ios(7.0), macos(10.10));
+@property (atomic, assign) BOOL notifyOnEntry API_AVAILABLE(ios(7.0), macos(10.10));
 
 /*
  *  notifyOnExit
@@ -112,7 +106,7 @@ API_AVAILABLE(macos(10.7), ios(4.0))
  *    App will be launched and the delegate will be notified via locationManager:didExitRegion:
  *    when the user exits the region. By default, this is YES.
  */
-@property (nonatomic, assign) BOOL notifyOnExit API_AVAILABLE(ios(7.0), macos(10.10));
+@property (atomic, assign) BOOL notifyOnExit API_AVAILABLE(ios(7.0), macos(10.10));
 
 /*
  *  containsCoordinate:

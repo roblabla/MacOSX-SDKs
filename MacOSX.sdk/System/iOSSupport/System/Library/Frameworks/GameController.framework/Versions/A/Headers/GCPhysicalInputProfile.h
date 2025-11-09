@@ -11,11 +11,13 @@
 @class GCControllerButtonInput;
 @class GCControllerAxisInput;
 @class GCControllerDirectionPad;
+@class GCControllerTouchpad;
 
 @compatibility_alias GCDeviceElement GCControllerElement;
 @compatibility_alias GCDeviceButtonInput GCControllerButtonInput;
 @compatibility_alias GCDeviceAxisInput GCControllerAxisInput;
 @compatibility_alias GCDeviceDirectionPad GCControllerDirectionPad;
+@compatibility_alias GCDeviceTouchpad GCControllerTouchpad;
 
 #import <Foundation/Foundation.h>
 
@@ -53,6 +55,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @property (nonatomic, readonly, strong) NSDictionary<NSString *, GCDeviceButtonInput *> *buttons API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 @property (nonatomic, readonly, strong) NSDictionary<NSString *, GCDeviceAxisInput *> *axes API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 @property (nonatomic, readonly, strong) NSDictionary<NSString *, GCDeviceDirectionPad *> *dpads API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+@property (nonatomic, readonly, strong) NSDictionary<NSString *, GCDeviceTouchpad *> *touchpads API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
  The following properties allow for dynamic querying of the input elements available on a profile.
@@ -61,6 +64,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @property (nonatomic, readonly, strong) NSSet<GCDeviceButtonInput *> *allButtons API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 @property (nonatomic, readonly, strong) NSSet<GCDeviceAxisInput *> *allAxes API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 @property (nonatomic, readonly, strong) NSSet<GCDeviceDirectionPad *> *allDpads API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+@property (nonatomic, readonly, strong) NSSet<GCDeviceTouchpad *> *allTouchpads API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
  Profile elements can be accessed using keyed subscript notation, with a valid alias of its inputs.

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           40887C81-C6AF-32EA-8A31-311D7796DBFA
+    value:           8D189BCD-2217-3EEB-BCB5-0359CEE1A311
   - target:          x86_64-maccatalyst
-    value:           40887C81-C6AF-32EA-8A31-311D7796DBFA
+    value:           8D189BCD-2217-3EEB-BCB5-0359CEE1A311
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           524B06D5-0BF5-328F-9CF8-BBE5F43484BD
+    value:           C2D4A950-59FB-3ED6-BFF9-13357E702BD0
   - target:          arm64e-maccatalyst
-    value:           524B06D5-0BF5-328F-9CF8-BBE5F43484BD
+    value:           C2D4A950-59FB-3ED6-BFF9-13357E702BD0
 install-name:    '/usr/lib/libIOReport.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -42,5 +42,6 @@ exports:
                        _IOReportStateGetCount, _IOReportStateGetCurrent, _IOReportStateGetDutyCycle, 
                        _IOReportStateGetIDForIndex, _IOReportStateGetInTransitions, 
                        _IOReportStateGetIndexForID, _IOReportStateGetNameForIndex, 
-                       _IOReportStateGetResidency, _IOReportWriteStringUTF8 ]
+                       _IOReportStateGetResidency, _IOReportUpdateSamples, _IOReportUpdateSamplesRaw, 
+                       _IOReportWriteStringUTF8 ]
 ...

@@ -1,4 +1,4 @@
-framework module ClassKit
+framework module ClassKit [system]
 {
     umbrella header "ClassKit.h"
     module * { export * }

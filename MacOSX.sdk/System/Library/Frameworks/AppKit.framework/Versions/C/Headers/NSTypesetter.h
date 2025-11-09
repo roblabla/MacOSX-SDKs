@@ -1,7 +1,7 @@
 #if !__has_include(<UIFoundation/NSTypesetter.h>)
 /*
 	NSTypesetter.h
-	Copyright (c) 1994-2019, Apple Inc.  All rights reserved. 
+	Copyright (c) 1994-2021, Apple Inc.  All rights reserved. 
 
 	An abstract class to lay glyphs out in horizontal or vertical boxes	
 */

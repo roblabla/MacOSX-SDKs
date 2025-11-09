@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIRegion;
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIFieldBehavior : UIDynamicBehavior
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@interface UIFieldBehavior : UIDynamicBehavior
 
 - (instancetype)init NS_UNAVAILABLE; // Use one of the convenience initializers
 

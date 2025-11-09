@@ -1,7 +1,7 @@
 /*
         NSAppearance.h
         Application Kit
-        Copyright (c) 2011-2019, Apple Inc.
+        Copyright (c) 2011-2021, Apple Inc.
         All rights reserved.
 */
 
@@ -25,7 +25,7 @@ API_AVAILABLE(macos(10.9))
 // Automatically set by NSView before that view's drawRect:, updateLayer, and layout methods are invoked.
 // At other times its return value is unreliable (depending on if the previous caller restored it to a previous value after setting it).
 // This is not the correct way to determine the 'system' appearance. Use a view's, window's, or the app's effectiveAppearance.
-@property (class, null_resettable, strong) NSAppearance *currentAppearance API_DEPRECATED("Use -performAsCurrentDrawingAppearance: to temporarily set the drawing appearance, or +currentDrawingAppearance to access the currently drawing appearance.", macos(10.9, API_TO_BE_DEPRECATED));
+@property (class, null_resettable, strong) NSAppearance *currentAppearance API_DEPRECATED("Use -performAsCurrentDrawingAppearance: to temporarily set the drawing appearance, or +currentDrawingAppearance to access the currently drawing appearance.", macos(10.9, 12.0));
 
 // The appearance which has been made active for drawing (usually by locking focus on a view)
 // and is used for color and asset resolution.

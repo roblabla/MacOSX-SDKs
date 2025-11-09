@@ -4,7 +4,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2016-2020 Apple Inc. All rights reserved.
+    Copyright 2016-2021 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVCaptureOutputBase.h>
@@ -141,7 +141,7 @@ API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) 
  
     Prepared settings persist across session starts/stops and committed configuration changes. This property participates in -[AVCaptureSession beginConfiguration] / -[AVCaptureSession commitConfiguration] deferred work behavior. That is, if you call -[AVCaptureSession beginConfiguration], change your session's input/output topology, and call this method, preparation is deferred until you call -[AVCaptureSession commitConfiguration], enabling you to atomically commit a new configuration as well as prepare to take photos in that new configuration.
  */
-- (void)setPreparedPhotoSettingsArray:(NSArray<AVCapturePhotoSettings *> *)preparedPhotoSettingsArray completionHandler:(nullable void (^)(BOOL prepared, NSError * _Nullable error))completionHandler API_UNAVAILABLE(macos);
+- (void)setPreparedPhotoSettingsArray:(NSArray<AVCapturePhotoSettings *> *)preparedPhotoSettingsArray completionHandler:(nullable void (^)(BOOL prepared, NSError * _Nullable error))completionHandler API_UNAVAILABLE(macos) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @property availablePhotoPixelFormatTypes
@@ -309,6 +309,8 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
     Default value is AVCapturePhotoQualityPrioritizationBalanced when attached to an AVCaptureSession, and AVCapturePhotoQualityPrioritizationSpeed when attached to an AVCaptureMultiCamSession. The AVCapturePhotoOutput is capable of applying a variety of techniques to improve photo quality (reduce noise, preserve detail in low light, freeze motion, etc). Some techniques improve image quality at the expense of speed (shot-to-shot time). Before starting your session, you may set this property to indicate the highest quality prioritization you intend to request when calling -capturePhotoWithSettings:delegate:. When configuring an AVCapturePhotoSettings object, you may not exceed this quality prioritization level, but you may select a lower (speedier) prioritization level.
  
     Changing the maxPhotoQualityPrioritization while the session is running can result in a lengthy rebuild of the session in which video preview is disrupted.
+ 
+    Setting the maxPhotoQualityPrioritization to .quality will turn on optical image stabilization if the -isHighPhotoQualitySupported of the source device's -activeFormat is true.
  */
 @property(nonatomic) AVCapturePhotoQualityPrioritization maxPhotoQualityPrioritization API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
@@ -489,7 +491,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
 /*!
  @property livePhotoCaptureEnabled
  @abstract
-    Indicates whether the receiver is configured for Live Photo capture
+    Indicates whether the receiver is configured for Live Photo capture.
 
  @discussion
     Default value is NO. This property may only be set to YES if livePhotoCaptureSupported is YES. Live Photo capture requires a lengthy reconfiguration of the capture render pipeline, so if you intend to do any Live Photo captures at all, you should set livePhotoCaptureEnabled to YES before calling -[AVCaptureSession startRunning].
@@ -584,6 +586,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
 
 @class AVCapturePhoto;
 
+API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCapturePhotoOutput (AVCapturePhotoOutputDepthDataDeliverySupport)
 
 /*!
@@ -1713,6 +1716,7 @@ AV_INIT_UNAVAILABLE
 
 @protocol AVCapturePhotoFileDataRepresentationCustomizer;
 
+API_AVAILABLE(macos(10.15), ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCapturePhoto (AVCapturePhotoConversions)
 
 /*!
@@ -1766,7 +1770,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Each time you access this method, AVCapturePhoto generates a new CGImageRef. When backed by a compressed container (such as HEIC), the CGImageRepresentation is decoded lazily as needed. When backed by an uncompressed format such as BGRA, it is copied into a separate backing buffer whose lifetime is not tied to that of the AVCapturePhoto. For a 12 megapixel image, a BGRA CGImage represents ~48 megabytes per call. If you only intend to use the CGImage for on-screen rendering, use the previewCGImageRepresentation instead. Note that the physical rotation of the CGImageRef matches that of the main image. Exif orientation has not been applied. If you wish to apply rotation when working with UIImage, you can do so by querying the photo's metadata[kCGImagePropertyOrientation] value, and passing it as the orientation parameter to +[UIImage imageWithCGImage:scale:orientation:]. RAW images always return a CGImageRepresentation of nil. If you wish to make a CGImageRef from a RAW image, use CIRAWFilter in the CoreImage framework.
  */
-- (nullable CGImageRef)CGImageRepresentation API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
+- (nullable CGImageRef)CGImageRepresentation API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) CF_RETURNS_NOT_RETAINED;
 
 /*!
  @method CGImageRepresentation
@@ -1779,7 +1783,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Each time you access this method, AVCapturePhoto generates a new CGImageRef. This CGImageRepresentation is a RGB rendering of the previewPixelBuffer property. If you did not request a preview photo by setting the -[AVCapturePhotoSettings previewPhotoFormat] property, this method returns nil. Note that the physical rotation of the CGImageRef matches that of the main image. Exif orientation has not been applied. If you wish to apply rotation when working with UIImage, you can do so by querying the photo's metadata[kCGImagePropertyOrientation] value, and passing it as the orientation parameter to +[UIImage imageWithCGImage:scale:orientation:].
  */
-- (nullable CGImageRef)previewCGImageRepresentation API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
+- (nullable CGImageRef)previewCGImageRepresentation API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) CF_RETURNS_NOT_RETAINED;
 
 @end
 
@@ -1808,6 +1812,7 @@ typedef NS_ENUM(NSInteger, AVCaptureLensStabilizationStatus) {
     AVCaptureLensStabilizationStatusUnavailable = 4,
 } API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
+API_AVAILABLE(macos(10.15), ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCapturePhoto (AVCapturePhotoBracketedCapture)
 
 /*!

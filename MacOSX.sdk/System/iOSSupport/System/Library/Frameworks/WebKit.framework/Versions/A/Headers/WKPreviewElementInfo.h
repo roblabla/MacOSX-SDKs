@@ -31,7 +31,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-WK_EXTERN API_DEPRECATED_WITH_REPLACEMENT("WKContextMenuElementInfo", ios(10.0, 13.0))
+WK_CLASS_DEPRECATED_WITH_REPLACEMENT("WKContextMenuElementInfo", ios(10.0, 13.0))
 @interface WKPreviewElementInfo : NSObject <NSCopying>
 
 @property (nonatomic, readonly, nullable) NSURL *linkURL;

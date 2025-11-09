@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
  To set a shadow on an NSAttributedString use it as a value for NSShadowAttributeName.
  */
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface NSShadow : NSObject <NSCopying, NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(6.0))
+@interface NSShadow : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;

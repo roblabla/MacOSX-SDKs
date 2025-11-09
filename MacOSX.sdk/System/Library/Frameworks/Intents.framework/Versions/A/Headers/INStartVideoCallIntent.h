@@ -78,7 +78,7 @@ API_UNAVAILABLE(watchos)
  */
 
 - (void)resolveContactsForStartVideoCall:(INStartVideoCallIntent *)intent
-                    withCompletion:(void (^)(NSArray<INPersonResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveContacts(for:with:));
+                          withCompletion:(void (^)(NSArray<INPersonResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveContacts(for:with:));
 
 @end
 

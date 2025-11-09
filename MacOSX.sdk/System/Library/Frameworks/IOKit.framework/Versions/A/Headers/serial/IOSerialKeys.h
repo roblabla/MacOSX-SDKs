@@ -51,8 +51,8 @@ Note only the IOProviderClass is mandatory.  The other keys allow the searcher t
 
 /* Currently possible kIOSerialBSDTypeKey values. */
 #define kIOSerialBSDAllTypes		"IOSerialStream"
-#define kIOSerialBSDModemType		"IOModemSerialStream"
-#define kIOSerialBSDRS232Type		"IORS232SerialStream"
+#define kIOSerialBSDModemType		"IOSerialStream"
+#define kIOSerialBSDRS232Type		"IOSerialStream"
 
 // Properties that resolve to a /dev device node to open for
 // a particular service

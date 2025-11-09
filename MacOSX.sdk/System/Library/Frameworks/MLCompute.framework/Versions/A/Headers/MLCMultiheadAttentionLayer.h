@@ -22,10 +22,11 @@ NS_ASSUME_NONNULL_BEGIN
 /*! @class      MLCMultiheadAttentionLayer
     @abstract   A multi-head attention layer
     @discussion A multi-head "Scaled Dot-Product Attention" layer which attends to one or more entries in the input key-value pairs
-                N=Batch, S=source length, L=target length, E = model(embedding) dimension
-                The sources to this layer are of shapes: Query:(N,L,E), Key:(N,S,E), Value:(N,S,E), KeyMask:(N,S), AttentionMask(1,L,S)
-                where KeyMask and AttentionMask are optional and none, either or both of them can be passed.
-                Output is of shape:(N,L,E). Only the case of modelDim = keyDim = valueDim is currently supported,
+                N=Batch, S=source length, L=target length, E = model(embedding) dimension, K = Key dimension, V = value
+                dimension H = headCount. The sources to this layer are of shapes: Query:(N,L,E), Key:(N,S,K), Value:(N,S,V),
+                KeyMask:(N,S), AttentionMask:(1,L,S) or (NxH,L,S). KeyMask and AttentionMask are optional and either, both
+                or none of them can be passed. KeyMask is of Boolean type and AttentionMask can be of Float or Boolean type.
+                Output is of shape:(N,L,E).
                 For details refer to: https://pytorch.org/docs/stable/nn.html#multiheadattention
  */
 MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))

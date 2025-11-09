@@ -3,16 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5B8BEF85-B8DF-3DDB-9F4C-A7896AE97869
+    value:           940AAEB9-59A1-3F57-A91F-E0F972BCBB2C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B37E0E3A-9E0C-39F2-8696-218D3E1FB673
+    value:           89ED7175-B238-3CA4-9F04-03775A140EE2
 install-name:    '/System/Library/PrivateFrameworks/UARPiCloud.framework/Versions/A/UARPiCloud'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _UARPiCloudVersionNumber, _UARPiCloudVersionString, _getEntryForKey, 
+    symbols:         [ _GetInternalStorageDirectoryPath, _UARPiCloudVersionNumber, 
+                       _UARPiCloudVersionString, _getEntryForKey, _kUARPStringInternalStorageDirectoryPath, 
                        _saveEntryForKey ]
-    objc-classes:    [ UARPiCloudAccessory, UARPiCloudAccessoryRecord, UARPiCloudContainer, 
-                       UARPiCloudManager, UARPiCloudZone ]
+    objc-classes:    [ CHIPAccessoriesRecord, UARPiCloudAccessory, UARPiCloudAccessoryRecord, 
+                       UARPiCloudContainer, UARPiCloudManager, UARPiCloudZone ]
 ...

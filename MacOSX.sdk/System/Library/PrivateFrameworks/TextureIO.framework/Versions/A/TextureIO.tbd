@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CC060BC3-7164-3B07-92BC-885FECB8E004
+    value:           78439809-40A5-3F24-9514-FADAFF2B2A9B
   - target:          x86_64-maccatalyst
-    value:           CC060BC3-7164-3B07-92BC-885FECB8E004
+    value:           78439809-40A5-3F24-9514-FADAFF2B2A9B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4181DF52-4085-37F3-9B8F-6397D614C72E
+    value:           A8E1D520-BDFD-30B2-9D67-41306730813F
   - target:          arm64e-maccatalyst
-    value:           4181DF52-4085-37F3-9B8F-6397D614C72E
+    value:           A8E1D520-BDFD-30B2-9D67-41306730813F
 install-name:    '/System/Library/PrivateFrameworks/TextureIO.framework/Versions/A/TextureIO'
 current-version: 3.10.9
 exports:

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6BE38D2E-96F7-326F-8A85-BD72D13ACFFB
+    value:           42AF0B3E-760F-3FDF-9B12-B5B627EA04F0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ABF5F5FA-861A-3C1F-A6CD-79157EAC0C21
+    value:           B466AA70-587C-3C27-AF72-2B99192A679F
 install-name:    '/System/Library/PrivateFrameworks/MultiverseSupport.framework/Versions/A/MultiverseSupport'
-current-version: 109.100.2
+current-version: 113
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _MultibootErrorDomain, _multiboot_add_whitelist_version, _multiverse_device_connect, 

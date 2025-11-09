@@ -4,23 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EA97A98F-C829-3A70-9698-68AFBE6773D9
+    value:           89BE7FCD-B0B8-3AFB-BC25-98947DC5ABDE
   - target:          x86_64-maccatalyst
-    value:           EA97A98F-C829-3A70-9698-68AFBE6773D9
+    value:           89BE7FCD-B0B8-3AFB-BC25-98947DC5ABDE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B474339-4569-3BCF-AC67-AF5A1EEE5360
+    value:           CED761BA-B26C-3B45-ADFC-17E7A6AA427F
   - target:          arm64e-maccatalyst
-    value:           6B474339-4569-3BCF-AC67-AF5A1EEE5360
+    value:           CED761BA-B26C-3B45-ADFC-17E7A6AA427F
 install-name:    '/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI'
-current-version: 691.3
+current-version: 733
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _CSIEqualMetrics, _CSIIllegalMetrics, _CUIBlendModeDescriptionFromCGBlendMode, 
+    symbols:         [ _CSIEqualMetrics, _CSIIllegalMetrics, _CUIAccumulateSVGShapesIntoJoinedPath, 
+                       _CUIAccumulateSVGShapesIntoPath, _CUIBlendModeDescriptionFromCGBlendMode, 
                        _CUIBlendModeLSRDescriptionFromCGBlendMode, _CUICFArrayCreateWithCGRects, 
                        _CUICFDictionaryGetCGRect, _CUICFDictionarySetCFArrayOfCGRects, 
                        _CUICFDictionarySetCGRect, _CUICFDictionarySetSegmentSeparatorTypes, 
@@ -33,8 +34,9 @@ exports:
                        _CUIConvertCGImageFormat, _CUIConvertCompressionTypeToString, 
                        _CUIConvertDeepImageTo8, _CUIConvertImageToPixelFormat, _CUIConvertPixelFormatToString, 
                        _CUICopyCustomColor, _CUICopyCustomColorWithOptions, _CUICopyCustomFontDescriptor, 
-                       _CUICopyMeasurements, _CUICreateLayerContents, _CUICreateMenuPath, 
-                       _CUICreateOrUpdateLayer, _CUICreateRenderer, _CUICurrentPlatform, 
+                       _CUICopyMeasurements, _CUICreateDisplayShape, _CUICreateJoinedPathFromSVGNode, 
+                       _CUICreateLayerContents, _CUICreateMenuPath, _CUICreateOrUpdateLayer, 
+                       _CUICreatePathFromSVGNode, _CUICreateRenderer, _CUICurrentPlatform, 
                        _CUIDeallocateRGBAImageBuffer, _CUIDefaultThemeRenditionKeyFormat, 
                        _CUIDraw, _CUIDrawExtrudedImageInContext, _CUIDrawStyledGlyphsAtPositions, 
                        _CUIDrawStyledGlyphsWithAdvances, _CUIEdgeInsetsEqualToEdgeInsets, 
@@ -46,15 +48,17 @@ exports:
                        _CUIFillRenditionKeyForCARKeyArray, _CUIGetChannelDataForImage, 
                        _CUIGetCustomFontSize, _CUIGetDebugValue, _CUIGetDeviceArtworkDisplayGamut, 
                        _CUIGetFormatForFeatureSetAndPixelFormat, _CUIGetRGBAImageBuffer, 
-                       _CUIHitTest, _CUIImageCompressedWithColorQuantization, _CUIImageIsMonochrome, 
-                       _CUIImageIsWideGamut, _CUIKeyFormatToArrayString, _CUILogLogToStderr, 
-                       _CUIMaxDimensionForVectorGlyph, _CUIMaxScaleForTargetPlatform, 
+                       _CUIGetSVGAttributeUnitScale, _CUIHitTest, _CUIImageCompressedWithColorQuantization, 
+                       _CUIImageIsMonochrome, _CUIImageIsWideGamut, _CUIKeyFormatToArrayString, 
+                       _CUILogLogToStderr, _CUIMaxDimensionForVectorGlyph, _CUIMaxScaleForTargetPlatform, 
                        _CUIMinDimensionForVectorGlyph, _CUIMinScaleForTargetPlatform, 
                        _CUIParseDeploymentTarget, _CUIPlaceHolderRendition, _CUIPlatformNameForPlatform, 
-                       _CUIPointSizeForDimensionForVectorGlyph, _CUIRendererCopyProperties, 
-                       _CUIRendererSetProperties, _CUIRenditionKeyCopy, _CUIRenditionKeyFormatRemoveAttribute, 
-                       _CUIRenditionKeyHasIdentifier, _CUIRenditionKeySetValueForAttribute, 
-                       _CUIRenditionKeyStandardize, _CUIRenditionKeyTokenCount, _CUIRenditionKeyValueForAttribute, 
+                       _CUIPointSizeForDimensionForVectorGlyph, _CUIPreferredVectorGlyphConfigurationsForPlatform, 
+                       _CUIRendererCopyProperties, _CUIRendererSetProperties, _CUIRenditionKeyCopy, 
+                       _CUIRenditionKeyFormatRemoveAttribute, _CUIRenditionKeyHasIdentifier, 
+                       _CUIRenditionKeySetValueForAttribute, _CUIRenditionKeyStandardize, 
+                       _CUIRenditionKeyTokenCount, _CUIRenditionKeyValueForAttribute, 
+                       _CUISVGNodeCanBeRepresentedAsPath, _CUISVGNodeGetTransform, 
                        _CUISetCustomColorInContext, _CUISetDebugValue, _CUISetUpContext, 
                        _CUISystemTheme, _CUISystemThemeRenditionKeyFormat, _CUIThemeInfoVersion, 
                        _CUIUncompressQuantizedImageData, _CoreUIVersionNumber, __CUILog, 
@@ -79,8 +83,9 @@ exports:
                        _kCUIBackgroundNotification, _kCUIBackgroundSecondaryGroupBox, 
                        _kCUIBackgroundSecondaryGroupBoxOpaque, _kCUIBackgroundSheet, 
                        _kCUIBackgroundSheetOpaque, _kCUIBackgroundTabPane, _kCUIBackgroundTabPaneOpaque, 
-                       _kCUIBackgroundToolbar, _kCUIBackgroundTypeAqua, _kCUIBackgroundTypeBorderless, 
-                       _kCUIBackgroundTypeDark, _kCUIBackgroundTypeDarkRaised, _kCUIBackgroundTypeDiscreteSelection, 
+                       _kCUIBackgroundToolbar, _kCUIBackgroundTypeAbsoluteLightBezel, 
+                       _kCUIBackgroundTypeAqua, _kCUIBackgroundTypeBorderless, _kCUIBackgroundTypeDark, 
+                       _kCUIBackgroundTypeDarkRaised, _kCUIBackgroundTypeDiscreteSelection, 
                        _kCUIBackgroundTypeKey, _kCUIBackgroundTypeLetterpressRaised, 
                        _kCUIBackgroundTypeLight, _kCUIBackgroundTypeLightContent, 
                        _kCUIBackgroundTypeList, _kCUIBackgroundTypeListAlternate, 
@@ -450,11 +455,12 @@ exports:
                        _kCUIVariantSpotlightBackgroundMaterial, _kCUIVariantStyledRectsLabel, 
                        _kCUIVariantStyledRectsLabelWithShadow, _kCUIVariantSystemBezelMaterial, 
                        _kCUIVariantTabPaneOpaque, _kCUIVariantTextContent, _kCUIVariantTextFieldRoundToolbar, 
-                       _kCUIVariantTextFieldToolbar, _kCUIVariantTitlebarMaterial, 
-                       _kCUIVariantToolTipMaterial, _kCUIVariantToolbarConfiguration, 
-                       _kCUIVariantTranslucent, _kCUIVariantUltraDark, _kCUIVariantUltralightMaterial, 
-                       _kCUIVariantUnderPageBackgroundMaterial, _kCUIVariantUnderWindowBackgroundMaterial, 
-                       _kCUIVariantWhite, _kCUIVariantWindowBackgroundMaterial, _kCUIVariantWindowNonKey, 
+                       _kCUIVariantTextFieldToolbar, _kCUIVariantTintable, _kCUIVariantTintableDefault, 
+                       _kCUIVariantTitlebarMaterial, _kCUIVariantToolTipMaterial, 
+                       _kCUIVariantToolbarConfiguration, _kCUIVariantTranslucent, 
+                       _kCUIVariantUltraDark, _kCUIVariantUltralightMaterial, _kCUIVariantUnderPageBackgroundMaterial, 
+                       _kCUIVariantUnderWindowBackgroundMaterial, _kCUIVariantWhite, 
+                       _kCUIVariantWindowBackgroundMaterial, _kCUIVariantWindowNonKey, 
                        _kCUIVariantWithMenuGlyph, _kCUIVerticalAlignmentKey, _kCUIViewSizeKey, 
                        _kCUIWidgetBackground, _kCUIWidgetBanner, _kCUIWidgetButtonBevel, 
                        _kCUIWidgetButtonBevelInset, _kCUIWidgetButtonBevelPopupArrow, 
@@ -523,17 +529,19 @@ exports:
                        _kCUIWidgetToolbarSpace, _kCUIWidgetToolbarSpaceInset, _kCUIWidgetUnderDesktopView, 
                        _kCUIWidgetUnspecified, _kCUIWidgetVisualEffectView, _kCUIWidgetWindowBottomBar, 
                        _kCUIWidgetWindowFrame, _kCUIWidgetWindowSeparatorShadow, 
-                       _kCUIWidgetWindowShapeMask, _kCUIWidgetWindowTitleBar, _kCUIWidgetWindowTitleBarSeparator, 
-                       _kCUIWindowFrameBottomBarHeightKey, _kCUIWindowFrameDrawBottomBarSeparatorKey, 
-                       _kCUIWindowFrameDrawClippedKey, _kCUIWindowFrameDrawTitleSeparatorKey, 
-                       _kCUIWindowFrameIncludeBorder, _kCUIWindowFrameRoundedBottomCornersKey, 
-                       _kCUIWindowFrameRoundedTopCornersKey, _kCUIWindowFrameTexturedBottomBarMatchesTitleBarKey, 
-                       _kCUIWindowFrameTopBarOnlyKey, _kCUIWindowFrameUnifiedTitleBarHeightKey, 
-                       _kCUIWindowTypeDocument, _kCUIWindowTypeDrawer, _kCUIWindowTypeFullScreen, 
-                       _kCUIWindowTypeHUD, _kCUIWindowTypeKey, _kCUIWindowTypeOnlyBackground, 
-                       _kCUIWindowTypeOnlyCornerMaskImage, _kCUIWindowTypeOnlyTexturedBackground, 
-                       _kCUIWindowTypeSheet, _kCUIWindowTypeTextured, _kCUIWindowTypeTexturedUtility, 
-                       _kCUIWindowTypeTitlelessUtility, _kCUIWindowTypeUtility ]
+                       _kCUIWidgetWindowShapeMask, _kCUIWidgetWindowSharingSessionHostButton, 
+                       _kCUIWidgetWindowSharingSessionRecipientIndicator, _kCUIWidgetWindowTitleBar, 
+                       _kCUIWidgetWindowTitleBarSeparator, _kCUIWindowFrameBottomBarHeightKey, 
+                       _kCUIWindowFrameDrawBottomBarSeparatorKey, _kCUIWindowFrameDrawClippedKey, 
+                       _kCUIWindowFrameDrawTitleSeparatorKey, _kCUIWindowFrameIncludeBorder, 
+                       _kCUIWindowFrameRoundedBottomCornersKey, _kCUIWindowFrameRoundedTopCornersKey, 
+                       _kCUIWindowFrameTexturedBottomBarMatchesTitleBarKey, _kCUIWindowFrameTopBarOnlyKey, 
+                       _kCUIWindowFrameUnifiedTitleBarHeightKey, _kCUIWindowTypeDocument, 
+                       _kCUIWindowTypeDrawer, _kCUIWindowTypeFullScreen, _kCUIWindowTypeHUD, 
+                       _kCUIWindowTypeKey, _kCUIWindowTypeOnlyBackground, _kCUIWindowTypeOnlyCornerMaskImage, 
+                       _kCUIWindowTypeOnlyTexturedBackground, _kCUIWindowTypeSheet, 
+                       _kCUIWindowTypeTextured, _kCUIWindowTypeTexturedUtility, _kCUIWindowTypeTitlelessUtility, 
+                       _kCUIWindowTypeUtility ]
     objc-classes:    [ CSIBitmapWrapper, CSIGenerator, CUIBackgroundStyleEffectConfiguration, 
                        CUICatalog, CUIColor, CUICommonAssetStorage, CUIImage, CUILayoutInformation, 
                        CUIMutableCatalog, CUIMutableCommonAssetStorage, CUIMutablePSDImageRef, 
@@ -561,5 +569,5 @@ exports:
                        CUIThemeRendition, CUIThemeSchema, CUIThemeSchemaEffectRendition, 
                        CUIThemeSchemaLayer, CUIThemeSchemaPSDLayer, CUIThemeSchemaPSDLayerGroup, 
                        CUIThemeSchemaPSDRenditionLayer, CUIThemeSchemaRendition, 
-                       CUIThemeSchemaRenditionGroup, CoreUI ]
+                       CUIThemeSchemaRenditionGroup, CUIVectorGlyphMutator, CoreUI ]
 ...

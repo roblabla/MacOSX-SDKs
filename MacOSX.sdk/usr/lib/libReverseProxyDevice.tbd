@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A1A314DF-A697-3695-9C39-ECEC196F929A
+    value:           15EDFBB0-2E41-3125-AE1E-C447A6E2BACC
 install-name:    '/usr/lib/libReverseProxyDevice.dylib'
 exports:
   - targets:         [ arm64e-macos, arm64-macos ]

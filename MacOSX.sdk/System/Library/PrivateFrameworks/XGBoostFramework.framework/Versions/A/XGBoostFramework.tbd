@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3402BA5D-8A63-357F-A50A-BF1C689AE06A
+    value:           728447E1-A021-32CD-8B19-9ACA8151147C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           52D49D3B-0795-3099-8239-EBE6C1433AC4
+    value:           A0558FBC-7452-3025-B509-79EC3B80A7AB
 install-name:    '/System/Library/PrivateFrameworks/XGBoostFramework.framework/Versions/A/XGBoostFramework'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

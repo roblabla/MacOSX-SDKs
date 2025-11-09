@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           54A3FCFF-9379-38A6-89DA-C26962960A52
+    value:           9A15C92A-632A-3561-9FCB-67F5469858BD
   - target:          x86_64-maccatalyst
-    value:           54A3FCFF-9379-38A6-89DA-C26962960A52
+    value:           9A15C92A-632A-3561-9FCB-67F5469858BD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2EED2FE1-EA8A-3FF4-B48C-3D1A2381610A
+    value:           FF407E46-84B3-39E0-B41C-B4D14B0895ED
   - target:          arm64e-maccatalyst
-    value:           2EED2FE1-EA8A-3FF4-B48C-3D1A2381610A
+    value:           FF407E46-84B3-39E0-B41C-B4D14B0895ED
 install-name:    '/System/Library/Frameworks/LatentSemanticMapping.framework/Versions/A/LatentSemanticMapping'
-current-version: 6
+current-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]

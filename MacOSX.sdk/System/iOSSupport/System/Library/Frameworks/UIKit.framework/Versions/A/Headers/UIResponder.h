@@ -27,11 +27,15 @@ typedef NS_ENUM(NSInteger, UIEditingInteractionConfiguration) {
     UIEditingInteractionConfigurationDefault           = 1,      // Default
 } API_AVAILABLE(ios(13.0));
 
+NS_SWIFT_UI_ACTOR
 @protocol UIResponderStandardEditActions <NSObject>
 @optional
 - (void)cut:(nullable id)sender API_AVAILABLE(ios(3.0));
 - (void)copy:(nullable id)sender API_AVAILABLE(ios(3.0));
 - (void)paste:(nullable id)sender API_AVAILABLE(ios(3.0));
+- (void)pasteAndMatchStyle:(nullable id)sender API_AVAILABLE(ios(15.0));
+- (void)pasteAndGo:(nullable id)sender API_AVAILABLE(ios(15.0));
+- (void)pasteAndSearch:(nullable id)sender API_AVAILABLE(ios(15.0));
 - (void)select:(nullable id)sender API_AVAILABLE(ios(3.0));
 - (void)selectAll:(nullable id)sender API_AVAILABLE(ios(3.0));
 - (void)delete:(nullable id)sender API_AVAILABLE(ios(3.2));
@@ -45,10 +49,12 @@ typedef NS_ENUM(NSInteger, UIEditingInteractionConfiguration) {
 - (void)decreaseSize:(nullable id)sender API_AVAILABLE(ios(7.0));
 
 - (void)updateTextAttributesWithConversionHandler:(NS_NOESCAPE UITextAttributesConversionHandler _Nonnull)conversionHandler API_AVAILABLE(ios(13.0));
+- (void)print:(nullable id)sender NS_SWIFT_NAME(printContent(_:)) API_AVAILABLE(ios(15.0));
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIResponder : NSObject <UIResponderStandardEditActions>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIResponder : NSObject <UIResponderStandardEditActions>
 
 @property(nonatomic, readonly, nullable) UIResponder *nextResponder;
 
@@ -168,6 +174,7 @@ UIKIT_EXTERN NSString *const UIKeyInputF9              API_AVAILABLE(ios(13.4), 
 UIKIT_EXTERN NSString *const UIKeyInputF10             API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos);
 UIKIT_EXTERN NSString *const UIKeyInputF11             API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos);
 UIKIT_EXTERN NSString *const UIKeyInputF12             API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN NSString *const UIKeyInputDelete          API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 @interface UIResponder (ActivityContinuation) <UIUserActivityRestoring>
 @property (nullable, nonatomic, strong) NSUserActivity *userActivity API_AVAILABLE(ios(8.0));
@@ -179,6 +186,10 @@ UIKIT_EXTERN NSString *const UIKeyInputF12             API_AVAILABLE(ios(13.4), 
 @interface UIResponder (UIPasteConfigurationSupporting) <UIPasteConfigurationSupporting>
 @end
 #endif
+
+@interface UIResponder (UICaptureTextFromCameraSupporting)
+- (void)captureTextFromCamera:(nullable id)sender API_AVAILABLE(ios(15.0));
+@end
 
 NS_ASSUME_NONNULL_END
 

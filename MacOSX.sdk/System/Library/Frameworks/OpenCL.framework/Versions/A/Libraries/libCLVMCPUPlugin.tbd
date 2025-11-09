@@ -3,9 +3,9 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           ADAD3D09-8B94-3824-B8AD-B1CC75DC5E63
+    value:           C8F40FDF-26D8-3034-81B1-4F3D67E796F3
   - target:          x86_64-maccatalyst
-    value:           ADAD3D09-8B94-3824-B8AD-B1CC75DC5E63
+    value:           C8F40FDF-26D8-3034-81B1-4F3D67E796F3
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/libCLVMCPUPlugin.dylib'
 current-version: 2.19
 exports:

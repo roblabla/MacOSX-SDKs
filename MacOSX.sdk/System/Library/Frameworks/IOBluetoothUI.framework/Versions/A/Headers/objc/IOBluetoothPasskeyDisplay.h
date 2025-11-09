@@ -31,9 +31,6 @@ API_UNAVAILABLE_BEGIN(ios)
     
 	NSMutableArray *			mPasskeyCharacters;
 	NSUInteger					mPasskeyIndex;
-    
-    NSLayoutConstraint *		backgroundImageConstraint;
-    NSView *centeredView;
 }
 
 // Private
@@ -75,5 +72,4 @@ API_UNAVAILABLE_BEGIN(ios)
 
 @interface IOBluetoothAccessibilityIgnoredImageCell: NSImageCell {}
 @end
-
 API_UNAVAILABLE_END

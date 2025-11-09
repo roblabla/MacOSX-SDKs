@@ -53,6 +53,7 @@ typedef function_table_entry   *function_table_t;
 #endif	/* mach_eventlink_MSG_COUNT */
 
 #include <mach/mach_eventlink_types.h>
+#include <Availability.h>
 #include <mach/std_types.h>
 #include <mach/mig.h>
 #include <mach/mig.h>

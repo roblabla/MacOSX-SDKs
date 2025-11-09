@@ -11,7 +11,7 @@
 #import <UIKit/UIFocusAnimationCoordinator.h>
 #import <UIKit/UIKitDefines.h>
 
-@class UIView, UIFocusUpdateContext, UIFocusMovementHint;
+@class UIView, UIFocusUpdateContext, UIFocusMovementHint, UIFocusEffect;
 @protocol UICoordinateSpace, UIFocusItemContainer;
 
 typedef NS_OPTIONS(NSUInteger, UIFocusHeading) {
@@ -22,14 +22,25 @@ typedef NS_OPTIONS(NSUInteger, UIFocusHeading) {
     UIFocusHeadingRight         = 1 << 3,
     UIFocusHeadingNext          = 1 << 4,
     UIFocusHeadingPrevious      = 1 << 5,
+    UIFocusHeadingFirst API_AVAILABLE(ios(13.0), tvos(13.0)) = 1 << 8,
+    UIFocusHeadingLast API_AVAILABLE(ios(13.0), tvos(13.0)) = 1 << 9,
 } API_AVAILABLE(ios(9.0));
 
 typedef NSString * UIFocusSoundIdentifier NS_TYPED_EXTENSIBLE_ENUM;
 
+/// These are focus group priorities that the system uses and that clients can use to make an item
+/// more or less important than these system states. Any priority below 0 will be ignored.
+typedef NSInteger UIFocusGroupPriority NS_TYPED_EXTENSIBLE_ENUM;
+static const UIFocusGroupPriority UIFocusGroupPriorityIgnored API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos) = 0;
+static const UIFocusGroupPriority UIFocusGroupPriorityPreviouslyFocused API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos) = 1000;
+static const UIFocusGroupPriority UIFocusGroupPriorityPrioritized API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos) = 2000;
+static const UIFocusGroupPriority UIFocusGroupPriorityCurrentlyFocused API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos) = NSIntegerMax;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /// Objects conforming to UIFocusEnvironment influence and respond to focus behavior within a specific area of the screen that they control.
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @protocol UIFocusEnvironment <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@protocol UIFocusEnvironment <NSObject>
 
 /// The preferred focus environments define where to search for the default focused item in an environment, such as when focus updates programmatically.
 /// Starting from the target environment, each preferred focus environment is recursively searched in the order of the array until an eligible, focusable item is found.
@@ -74,7 +85,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @protocol UIFocusEnvironment <NSObject>
 
 
 /// Objects conforming to UIFocusItem are considered capable of participating in focus. Only UIFocusItems can ever be focused.
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @protocol UIFocusItem <UIFocusEnvironment>
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) NS_SWIFT_UI_ACTOR
+@protocol UIFocusItem <UIFocusEnvironment>
 
 /// Indicates whether or not this item is currently allowed to become focused.
 /// Returning NO restricts the item from being focusable, even if it is visible in the user interface. For example, UIControls return NO if they are disabled.
@@ -85,6 +97,18 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @protocol UIFocusItem <UIFocusEnvironment>
 
 @optional
 
+/// Describes a visual effect to apply when this item is focused. When not implemented, the system may create a default effect for this item.
+/// Returning nil indicates that the system should not apply any visual effects, and that the app will handle applying the appropriate visuals.
+@property (nonatomic, nullable, readonly, copy) UIFocusEffect *focusEffect API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
+
+/// The priority this item has in its focus group. The higher the priority, the more likely it is to get picked when focus moves into this group.
+/// Note: this method can only be used to increase an item's priority, not decrease it. For example if an item is currently selected, the actual priority of this item will be determined by MAX(focusGroupPriority, UIFocusGroupPrioritySelected).
+@property (nonatomic, readonly) UIFocusGroupPriority focusGroupPriority API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
+
+/// If this returns YES, the focus item is considered transparent in terms of occlusion. Items that are behind it are focusable.
+/// This value is ignored when the item is focusable, in which case the item is never considered transparent.
+@property (nonatomic, readonly) BOOL isTransparentFocusItem API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
+
 /// Called whenever this focus item is hinting to the user a focus movement might occur.
 /// The provided object is mutated by the focus engine whenever the user's finger moves.
 - (void)didHintFocusMovement:(UIFocusMovementHint *)hint API_AVAILABLE(ios(12.0));
@@ -94,7 +118,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @protocol UIFocusItem <UIFocusEnvironment>
 
 /// Objects conforming to UIFocusItemContainer are responsible for providing which focus items they
 /// contain and where they are.
-UIKIT_EXTERN API_AVAILABLE(ios(12.0)) @protocol UIFocusItemContainer <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(12.0)) NS_SWIFT_UI_ACTOR
+@protocol UIFocusItemContainer <NSObject>
 
 /// The coordinate space of the focus items contained in this container. The focus items returned by focusItemsInRect: should report their frames in this coordinate space.
 /// If you are implementing this protocol, you may find it convenient to return the UIScreen as your coordinate space, and ensure that your contained items report their frames in screen space.
@@ -110,7 +135,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(12.0)) @protocol UIFocusItemContainer <NSObject>
 
 /// Objects conforming to UIFocusItemScrollableContainer are updated accordingly to ensure the
 /// focused item remains visible on the screen.
-UIKIT_EXTERN API_AVAILABLE(ios(12.0)) @protocol UIFocusItemScrollableContainer <UIFocusItemContainer>
+UIKIT_EXTERN API_AVAILABLE(ios(12.0)) NS_SWIFT_UI_ACTOR
+@protocol UIFocusItemScrollableContainer <UIFocusItemContainer>
 
 /// The current content offset of this scrollable container. If the scrollable container has a `bounds` property, `bounds.origin` must be equal to `contentOffset`.
 @property (nonatomic, readwrite) CGPoint contentOffset;
@@ -126,7 +152,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(12.0)) @protocol UIFocusItemScrollableContainer <
 
 
 /// UIFocusUpdateContexts provide information relevant to a specific focus update from one view to another. They are ephemeral objects that are usually discarded after the update is finished.
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIFocusUpdateContext : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@interface UIFocusUpdateContext : NSObject
 
 /// The item that was focused before the update, i.e. where focus is updating from. May be nil if no item was focused, such as when focus is initially set.
 @property (nonatomic, weak, readonly, nullable) id<UIFocusItem> previouslyFocusedItem API_AVAILABLE(ios(10.0));

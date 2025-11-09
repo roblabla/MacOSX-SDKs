@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4AB83C5B-29D4-3D3F-AE67-41731AD5FBD6
+    value:           6D5FAD60-4657-3E8E-A4D1-3667E7324C15
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           52E6E487-F023-3023-A954-1C5F1D390983
+    value:           B1F6A881-F19C-3463-8432-11A3CD5ADF17
 install-name:    '/System/Library/PrivateFrameworks/PassKitUI.framework/Versions/A/PassKitUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -33,37 +33,36 @@ exports:
                        PKCaptureExclusionView, PKCardInfoViewController, PKCardsTableViewController, 
                        PKChildWindow, PKChildWindowContentView, PKContactAndShippingViewController, 
                        PKContactButton, PKContactEditorViewController, PKContactFieldPickerPopUpButton, 
-                       PKContactFieldPickerPopUpItem, PKContactLabelMenuController, 
-                       PKContactPopUpButton, PKContactPopUpButtonCell, PKContactTextField, 
-                       PKContactTextFieldCell, PKCountryInformation, PKDatePicker, 
-                       PKFlippedClipView, PKFooterBackgroundView, PKImageView, PKLiftOffController, 
-                       PKNonSmoothedTextField, PKPassBackView, PKPassDocumentView, 
-                       PKPassFieldView, PKPassFrontView, PKPassInfoTextField, PKPassPageDotView, 
-                       PKPassPocketView, PKPassPopover, PKPassScrollView, PKPassScroller, 
-                       PKPassService, PKPassSheet, PKPassTextField, PKPassTextFieldCell, 
-                       PKPassView, PKPassViewController, PKPassViewerView, PKPassViewerViewController, 
-                       PKPassWindow, PKPassWindowController, PKPassphraseTextFieldFormatter, 
-                       PKPaymentAuthorizationChildViewController, PKPaymentAuthorizationCoreViewController, 
+                       PKContactFieldPickerPopUpItem, PKContactPopUpButton, PKContactPopUpButtonCell, 
+                       PKContactTextField, PKContactTextFieldCell, PKCountryInformation, 
+                       PKDatePicker, PKFlippedClipView, PKFooterBackgroundView, PKImageView, 
+                       PKLiftOffController, PKNonSmoothedTextField, PKPassBackView, 
+                       PKPassDocumentView, PKPassFieldView, PKPassFrontView, PKPassInfoTextField, 
+                       PKPassPageDotView, PKPassPocketView, PKPassPopover, PKPassScrollView, 
+                       PKPassScroller, PKPassService, PKPassSheet, PKPassTextField, 
+                       PKPassTextFieldCell, PKPassView, PKPassViewController, PKPassViewerView, 
+                       PKPassViewerViewController, PKPassWindow, PKPassWindowController, 
+                       PKPassphraseTextFieldFormatter, PKPaymentAuthorizationChildViewController, 
+                       PKPaymentAuthorizationCoreViewController, PKPaymentAuthorizationCouponCodeItemView, 
                        PKPaymentAuthorizationDataController, PKPaymentAuthorizationErrorViewController, 
                        PKPaymentAuthorizationFooterViewController, PKPaymentAuthorizationItemValue, 
                        PKPaymentAuthorizationItemValueView, PKPaymentAuthorizationItemView, 
                        PKPaymentAuthorizationItemsView, PKPaymentAuthorizationLayout, 
                        PKPaymentAuthorizationMainViewController, PKPaymentAuthorizationPassphraseEntryViewController, 
                        PKPaymentAuthorizationPasswordEntryViewController, PKPaymentAuthorizationPreferenceView, 
-                       PKPaymentAuthorizationSolidBackgroundView, PKPaymentCameraCaptureViewController, 
-                       PKPaymentCardIneligibleViewController, PKPaymentCardVerificationViewController, 
-                       PKPaymentPassPreferenceController, PKPaymentPreferenceController, 
-                       PKPaymentRemoteDevicePreferenceController, PKPaymentSetupDateFieldView, 
-                       PKPaymentSetupDisambiguationViewController, PKPaymentSetupFieldFormatter, 
-                       PKPaymentSetupFieldView, PKPaymentSetupLabelFieldView, PKPaymentSetupTextFieldView, 
-                       PKPaymentSetupViewController, PKPaymentShippingAddressPreferenceController, 
-                       PKPaymentShippingContactPreferenceController, PKPaymentShippingMethodPreferenceController, 
-                       PKPaymentTermsConditionsViewController, PKPopUpButton, PKPopUpButtonCell, 
-                       PKPostalAddressEditorViewController, PKScaleWindowEffect, 
-                       PKSecureTextField, PKSecureTextFieldCell, PKSelectCredentialsViewController, 
-                       PKSimpleAlertViewController, PKTCCWebView, PKTransactionsTableCellView, 
-                       PKUICardRowView, PKUICredentialRowView, PKUITabViewItem, PKUIUtilities, 
-                       PKVibrantTextField ]
+                       PKPaymentCameraCaptureViewController, PKPaymentCardIneligibleViewController, 
+                       PKPaymentCardVerificationViewController, PKPaymentPassPreferenceController, 
+                       PKPaymentPreferenceController, PKPaymentRemoteDevicePreferenceController, 
+                       PKPaymentSetupDateFieldView, PKPaymentSetupDisambiguationViewController, 
+                       PKPaymentSetupFieldFormatter, PKPaymentSetupFieldView, PKPaymentSetupLabelFieldView, 
+                       PKPaymentSetupTextFieldView, PKPaymentSetupViewController, 
+                       PKPaymentShippingAddressPreferenceController, PKPaymentShippingContactPreferenceController, 
+                       PKPaymentShippingMethodPreferenceController, PKPaymentTermsConditionsViewController, 
+                       PKPopUpButton, PKPopUpButtonCell, PKPostalAddressEditorViewController, 
+                       PKScaleWindowEffect, PKSecureTextField, PKSecureTextFieldCell, 
+                       PKSelectCredentialsViewController, PKSimpleAlertViewController, 
+                       PKTCCWebView, PKTransactionsTableCellView, PKUICardRowView, 
+                       PKUICredentialRowView, PKUITabViewItem, PKUIUtilities, PKVibrantTextField ]
     objc-ivars:      [ PKChildWindow._windowAnimationController, PKLiftOffController._flyingPassView, 
                        PKLiftOffController._flyingWindow, PKLiftOffController._pass, 
                        PKLiftOffController._shadowWindow, PKLiftOffController._viewController, 

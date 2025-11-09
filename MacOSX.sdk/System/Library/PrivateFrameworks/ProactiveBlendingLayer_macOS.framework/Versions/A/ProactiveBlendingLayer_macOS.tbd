@@ -1,0 +1,22 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           7250F753-1817-3A82-9871-9D95D3984174
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F1B700A9-9F8C-3F6A-B2DB-FED5126BA41C
+install-name:    '/System/Library/PrivateFrameworks/ProactiveBlendingLayer_macOS.framework/Versions/A/ProactiveBlendingLayer_macOS'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _ATXPBFaceTimeZKWEventReadFrom, _ProactiveBlendingLayer_macOSVersionNumber, 
+                       _ProactiveBlendingLayer_macOSVersionString ]
+    objc-classes:    [ ATXBiomeFaceTimeZKWStream, ATXFaceTimeZKWEvent, ATXMacOSBlendingLayerHyperParameters, 
+                       ATXMacOSBlendingLayerServer, ATXMacOSSuggestionDeduplicator, 
+                       ATXMacOSSuggestionPreprocessor, ATXPBFaceTimeZKWEvent, ATXProactiveSuggestionMacOSUIFeedbackQuery ]
+    objc-ivars:      [ ATXPBFaceTimeZKWEvent._blendingCacheId, ATXPBFaceTimeZKWEvent._date, 
+                       ATXPBFaceTimeZKWEvent._eventType, ATXPBFaceTimeZKWEvent._has, 
+                       ATXPBFaceTimeZKWEvent._suggestionIds ]
+...

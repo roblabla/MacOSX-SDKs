@@ -1,6 +1,6 @@
-/* iig(DriverKit-107.100.6) generated from IODispatchQueue.iig */
+/* iig(DriverKit-191) generated from IODispatchQueue.iig */
 
-/* IODispatchQueue.iig:1-41 */
+/* IODispatchQueue.iig:1-54 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -39,10 +39,23 @@
 typedef int (*IODispatchLogFunction)(const char *format, ...);
 typedef void (^IODispatchBlock)(void);
 typedef void (*IODispatchFunction)(void * context);
+typedef kern_return_t (^IODispatchAction)(void);
+
 typedef void (^IODispatchQueueCancelHandler)(void);
 
 
-/* source class IODispatchQueue IODispatchQueue.iig:42-134 */
+// options for Create()
+enum {
+	kIODispatchQueueReentrant              = 0x00000001,
+	kIODispatchQueueMethodsNotSynchronized = 0x00000002,
+};
+
+// options for WakeupWithOptions()
+enum {
+	kIODispatchQueueWakeupAll              = 0x00000001,
+};
+
+/* source class IODispatchQueue IODispatchQueue.iig:55-212 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -65,7 +78,9 @@ public:
      * @brief       Creates a new dispatch queue object.
      * @discussion  Creates a new dispatch queue object. All queues are currently serial, executing one block at time
      *              FIFO order. The new object has retain count 1 and should be released by the caller.
-     * @param       options No options are currently defined, pass zero.
+     * @param       options
+                    kIODispatchQueueReentrant Creates a queue that allows release with the Sleep
+                    method, so that other threads and callers may acquire the queue.
      * @param       priority No priorities are currently defined, pass zero.
      * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
      */
@@ -125,6 +140,28 @@ public:
 	void
 	DispatchAsync_f(void * context, IODispatchFunction function) LOCALONLY;
 
+    /*!
+     * @brief       Schedule a block to be executed concurrently & asynchronously.
+     * @discussion  Schedules work to be done on the queue without waiting for it to complete, and
+     *              concurrently with other blocks executed with DispatchConcurrent. The queue will be
+     *              retained until the block completes. May only be used with a queue created with
+     *              the kIODispatchQueueReentrant option.
+     * @param       block Block that will executed on the queue, not in the context of the caller.
+     */
+	void
+	DispatchConcurrent(IODispatchBlock block) LOCALONLY;
+
+    /*!
+     * @brief       C-function callback version of DispatchConcurrent.
+	 */
+	void
+	DispatchConcurrent_f(void * context, IODispatchFunction function) LOCALONLY;
+
+    /*!
+     * @brief       Execute a block on the queue synchronously.
+     * @discussion  Execute a block on the queue synchronously.
+     * @param       block Block that will executed on the queue.
+     */
 	void
 	DispatchSync(IODispatchBlock block) LOCALONLY;
 
@@ -140,12 +177,53 @@ public:
 	 */
 	static void
 	Log(const char * message, IODispatchLogFunction output) LOCALONLY;
+
+    /*!
+     * @brief       Version of DispatchSync that returns a kern_return_t status.
+	 */
+	kern_return_t
+	RunAction(IODispatchAction action) LOCALONLY;
+
+    /*!
+     * @brief       Put a thread that is currently ruuning the queue to sleep, releasing the queue.
+     * @discussion  Put a thread to sleep waiting for an event but release the queue first.
+     *              In all cases (signal, timeout or error), the caller resumes running on the queue.
+	 *              The caller must be currently running on the queue to call Sleep().
+     * @param       event A unique token matching one later passed to Wakeup().
+     * @param       deadline Clock deadline to timeout the sleep.
+     * @return 		kIOReturnSuccess  or kIOReturnTimeout
+     */
+	kern_return_t
+	Sleep(void * event, uint64_t deadline) LOCALONLY;
+
+    /*!
+     * @brief       Wakes a thread that is blocked in Sleep().
+     * @discussion  Signals a thread that gave up the queue with Sleep() to continue running.
+	 *              The caller must be currently running on the queue.
+     * @param       event A unique token matching one passed to Sleep().
+     * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+     */
+	kern_return_t
+	Wakeup(void * event) LOCALONLY;
+
+    /*!
+     * @brief       Wakes a thread that is blocked in Sleep().
+     * @discussion  Signals a thread that gave up the queue with Sleep() to continue running.
+	 *              The caller must be currently running on the queue.
+     * @param       event A unique token matching one passed to Sleep().
+     * @param       options
+					kIODispatchQueueWakeupAll wake all threads waiting in Sleep().
+					The default is to wake only one of any waiting threads.
+     * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+     */
+	kern_return_t
+	WakeupWithOptions(void * event, uint64_t options) LOCALONLY;
 };
 
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IODispatchQueue IODispatchQueue.iig:42-134 */
+/* generated class IODispatchQueue IODispatchQueue.iig:55-212 */
 
 #define IODispatchQueue_SetPort_ID            0xc437e970b5609767ULL
 #define IODispatchQueue_Create_ID            0xac000428df2a91d0ULL
@@ -203,6 +281,15 @@ public:\
         IODispatchFunction function);\
 \
     void\
+    DispatchConcurrent(\
+        IODispatchBlock block);\
+\
+    void\
+    DispatchConcurrent_f(\
+        void * context,\
+        IODispatchFunction function);\
+\
+    void\
     DispatchSync(\
         IODispatchBlock block);\
 \
@@ -215,6 +302,24 @@ public:\
     Log(\
         const char * message,\
         IODispatchLogFunction output);\
+\
+    kern_return_t\
+    RunAction(\
+        IODispatchAction action);\
+\
+    kern_return_t\
+    Sleep(\
+        void * event,\
+        uint64_t deadline);\
+\
+    kern_return_t\
+    Wakeup(\
+        void * event);\
+\
+    kern_return_t\
+    WakeupWithOptions(\
+        void * event,\
+        uint64_t options);\
 \
 \
 protected:\
@@ -295,13 +400,19 @@ class IODispatchQueue : public OSObject, public IODispatchQueueInterface
     friend class IODispatchQueueMetaClass;
 
 public:
+#ifdef IODispatchQueue_DECLARE_IVARS
+IODispatchQueue_DECLARE_IVARS
+#else /* IODispatchQueue_DECLARE_IVARS */
     union
     {
         IODispatchQueue_IVars * ivars;
         IODispatchQueue_LocalIVars * lvars;
     };
+#endif /* IODispatchQueue_DECLARE_IVARS */
+    static OSMetaClass *
+    sGetMetaClass() { return gIODispatchQueueMetaClass; };
     virtual const OSMetaClass *
-    getMetaClass() const APPLE_KEXT_OVERRIDE { return OSTypeID(IODispatchQueue); };
+    getMetaClass() const APPLE_KEXT_OVERRIDE { return gIODispatchQueueMetaClass; };
 
     using super = OSObject;
 
@@ -312,10 +423,10 @@ public:
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IODispatchQueue.iig:136-137 */
+/* IODispatchQueue.iig:214-215 */
 
 #if DRIVERKIT_PRIVATE
-/* IODispatchQueue.iig:144- */
+/* IODispatchQueue.iig:222- */
 #endif
 
 #endif /* ! _IOKIT_UIODISPATCH_H */

@@ -39,7 +39,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 - (void)setSocketListener:(VZVirtioSocketListener *)listener forPort:(uint32_t)port;
 
 /*!
- @abstract Removes the listener at a specfied port.
+ @abstract Removes the listener at a specified port.
  @discussion Does nothing if the port had no listener.
  @param port The port number at which the listener is to be removed.
  */
@@ -52,7 +52,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @param completionHandler Block called after the connection has been successfully established or on error.
     The error parameter passed to the block is nil if the connection was successful.
  */
-- (void)connectToPort:(uint32_t)port completionHandler:(void (^)(VZVirtioSocketConnection * _Nullable connection, NSError * _Nullable error))completionHandler NS_REFINED_FOR_SWIFT;
+- (void)connectToPort:(uint32_t)port completionHandler:(void (^)(VZVirtioSocketConnection * _Nullable connection, NSError * _Nullable error))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(connect(toPort:));
 
 @end
 

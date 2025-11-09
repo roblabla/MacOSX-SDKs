@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class UIImageSymbolConfiguration;
 @class UIColor;
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @interface UIListContentImageProperties : NSObject <NSCopying, NSSecureCoding>
 
 /// The symbol configuration to use.

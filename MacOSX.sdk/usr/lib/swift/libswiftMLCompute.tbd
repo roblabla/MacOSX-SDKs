@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EF6449FC-DB00-3EEB-ACC9-781A774851BC
+    value:           29BA8342-B3DB-3B29-BEC3-DB526E57F8BC
   - target:          x86_64-maccatalyst
-    value:           EF6449FC-DB00-3EEB-ACC9-781A774851BC
+    value:           29BA8342-B3DB-3B29-BEC3-DB526E57F8BC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9F4C6172-90DD-39CB-96F1-5635DDA22BD3
+    value:           B27FED0A-466E-3F35-A2D5-5026E5C4E7DE
   - target:          arm64e-maccatalyst
-    value:           9F4C6172-90DD-39CB-96F1-5635DDA22BD3
+    value:           B27FED0A-466E-3F35-A2D5-5026E5C4E7DE
 install-name:    '/usr/lib/swift/libswiftMLCompute.dylib'
-current-version: 16.100.11
+current-version: 66
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s9MLCompute14MLCPoolingTypeO011objcPoolingC0SoABVvg', '_$s9MLCompute14MLCPoolingTypeO011objcPoolingC0SoABVvpMV', 
                        '_$s9MLCompute14MLCPoolingTypeO16debugDescriptionSSvg', '_$s9MLCompute14MLCPoolingTypeO16debugDescriptionSSvpMV', 
                        '_$s9MLCompute14MLCPoolingTypeO3maxyA2CmFWC', '_$s9MLCompute14MLCPoolingTypeO6l2NormyA2CmFWC', 
@@ -52,11 +52,19 @@ exports:
                        '_$sSo15MLCReshapeLayerC9MLComputeE5shapeABSgSaySiG_tcfC', 
                        '_$sSo15MLCReshapeLayerC9MLComputeE5shapeABSgSaySiG_tcfc', 
                        '_$sSo15MLCReshapeLayerC9MLComputeE5shapeSaySiGvg', '_$sSo15MLCReshapeLayerC9MLComputeE5shapeSaySiGvpMV', 
+                       '_$sSo16MLCTrainingGraphC9MLComputeE14executeForward9batchSize7options11outputsDataSo9MLCTensorCSg6result_Sd13executionTimetSi_So19MLCExecutionOptionsVSDySSSo0kJ0CGSgtYaKF', 
+                       '_$sSo16MLCTrainingGraphC9MLComputeE14executeForward9batchSize7options11outputsDataSo9MLCTensorCSg6result_Sd13executionTimetSi_So19MLCExecutionOptionsVSDySSSo0kJ0CGSgtYaKFTu', 
+                       '_$sSo16MLCTrainingGraphC9MLComputeE15executeGradient9batchSize7options11outputsDataSdSi_So19MLCExecutionOptionsVSDySSSo09MLCTensorJ0CGSgtYaKF', 
+                       '_$sSo16MLCTrainingGraphC9MLComputeE15executeGradient9batchSize7options11outputsDataSdSi_So19MLCExecutionOptionsVSDySSSo09MLCTensorJ0CGSgtYaKFTu', 
+                       '_$sSo16MLCTrainingGraphC9MLComputeE22executeOptimizerUpdate7optionsSdSo19MLCExecutionOptionsV_tYaKF', 
+                       '_$sSo16MLCTrainingGraphC9MLComputeE22executeOptimizerUpdate7optionsSdSo19MLCExecutionOptionsV_tYaKFTu', 
                        '_$sSo16MLCUpsampleLayerC9MLComputeE5shape10sampleMode13alignsCornersABSgSaySiG_So09MLCSampleF0VSbtcfC', 
                        '_$sSo16MLCUpsampleLayerC9MLComputeE5shape10sampleMode13alignsCornersABSgSaySiG_So09MLCSampleF0VSbtcfc', 
                        '_$sSo16MLCUpsampleLayerC9MLComputeE5shapeABSgSaySiG_tcfC', 
                        '_$sSo16MLCUpsampleLayerC9MLComputeE5shapeABSgSaySiG_tcfc', 
                        '_$sSo16MLCUpsampleLayerC9MLComputeE5shapeSaySiGvg', '_$sSo16MLCUpsampleLayerC9MLComputeE5shapeSaySiGvpMV', 
+                       '_$sSo17MLCInferenceGraphC9MLComputeE7execute10inputsData010lossLabelsF00g12LabelWeightsF007outputsF09batchSize7optionsSo9MLCTensorCSg6result_Sd13executionTimetSDySSSo0oF0CG_ARSgA2SSiSo19MLCExecutionOptionsVtYaKF', 
+                       '_$sSo17MLCInferenceGraphC9MLComputeE7execute10inputsData010lossLabelsF00g12LabelWeightsF007outputsF09batchSize7optionsSo9MLCTensorCSg6result_Sd13executionTimetSDySSSo0oF0CG_ARSgA2SSiSo19MLCExecutionOptionsVtYaKFTu', 
                        '_$sSo17MLCReductionLayerC9MLComputeE10dimensionsSaySiGvg', 
                        '_$sSo17MLCReductionLayerC9MLComputeE10dimensionsSaySiGvpMV', 
                        '_$sSo17MLCReductionLayerC9MLComputeE13reductionType10dimensionsABSgSo0aE0V_SaySiGtcfC', 

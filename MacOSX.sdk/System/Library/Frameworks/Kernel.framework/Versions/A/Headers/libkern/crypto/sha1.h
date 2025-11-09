@@ -29,6 +29,8 @@
 #ifndef _CRYPTO_SHA1_H_
 #define _CRYPTO_SHA1_H_
 
+#include <sys/types.h>
+
 #ifdef  __cplusplus
 extern "C" {
 #endif

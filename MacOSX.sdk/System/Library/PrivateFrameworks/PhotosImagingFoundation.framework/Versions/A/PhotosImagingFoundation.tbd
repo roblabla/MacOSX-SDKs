@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           418D406D-14B0-3A18-A770-575FA2DAFCBF
+    value:           88ACCDB3-DF11-3A32-9B58-BB24002A541F
   - target:          x86_64-maccatalyst
-    value:           418D406D-14B0-3A18-A770-575FA2DAFCBF
+    value:           88ACCDB3-DF11-3A32-9B58-BB24002A541F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C490BC91-DE1D-3CE3-8CB0-13B34C0A6139
+    value:           33F26A5B-40DC-3C49-A065-0292F8196ABB
   - target:          arm64e-maccatalyst
-    value:           C490BC91-DE1D-3CE3-8CB0-13B34C0A6139
+    value:           33F26A5B-40DC-3C49-A065-0292F8196ABB
 install-name:    '/System/Library/PrivateFrameworks/PhotosImagingFoundation.framework/Versions/A/PhotosImagingFoundation'
-current-version: 340.0.220
+current-version: 400.27.210
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -65,17 +65,18 @@ exports:
                        _IPAPhotoAdjustmentFormatVersion_1_4, _IPAPhotoAdjustmentFormatVersion_1_5, 
                        _IPAPhotoAdjustmentFormatVersion_1_5_1, _IPAPhotoAdjustmentFormatVersion_1_6, 
                        _IPAPhotoAdjustmentFormatVersion_1_7, _IPAPhotoAdjustmentFormatVersion_1_8, 
-                       _IPAPhotoAdjustmentIdentifier_RawDecode, _IPAPhotoAdjustmentMaskUUIDKey, 
-                       _IPAPhotoAdjustment_Crop_Identifier, _IPAPhotoAdjustment_Crop_Key_ConstraintHeight, 
-                       _IPAPhotoAdjustment_Crop_Key_ConstraintWidth, _IPAPhotoAdjustment_Crop_Key_Height, 
-                       _IPAPhotoAdjustment_Crop_Key_StraightenAngleRadiansCW, _IPAPhotoAdjustment_Crop_Key_Width, 
-                       _IPAPhotoAdjustment_Crop_Key_XOrigin, _IPAPhotoAdjustment_Crop_Key_YOrigin, 
-                       _IPAPhotoAdjustment_Crop_Version_Current, _IPAPhotoAdjustment_DepthEffect_Aperture, 
-                       _IPAPhotoAdjustment_DepthEffect_DepthInfo, _IPAPhotoAdjustment_DepthEffect_GlassesMatteAllowed, 
-                       _IPAPhotoAdjustment_DepthEffect_Identifier, _IPAPhotoAdjustment_Effect_Identifier, 
-                       _IPAPhotoAdjustment_Effect_Key_EffectName, _IPAPhotoAdjustment_Effect_Key_EffectVersion, 
-                       _IPAPhotoAdjustment_Effect_Version_Current, _IPAPhotoAdjustment_Key_Statistics, 
-                       _IPAPhotoAdjustment_PortraitEffect_Identifier, _IPAPhotoAdjustment_PortraitEffect_PortraitEffectFilterName, 
+                       _IPAPhotoAdjustmentFormatVersion_1_9, _IPAPhotoAdjustmentIdentifier_RawDecode, 
+                       _IPAPhotoAdjustmentMaskUUIDKey, _IPAPhotoAdjustment_Crop_Identifier, 
+                       _IPAPhotoAdjustment_Crop_Key_ConstraintHeight, _IPAPhotoAdjustment_Crop_Key_ConstraintWidth, 
+                       _IPAPhotoAdjustment_Crop_Key_Height, _IPAPhotoAdjustment_Crop_Key_StraightenAngleRadiansCW, 
+                       _IPAPhotoAdjustment_Crop_Key_Width, _IPAPhotoAdjustment_Crop_Key_XOrigin, 
+                       _IPAPhotoAdjustment_Crop_Key_YOrigin, _IPAPhotoAdjustment_Crop_Version_Current, 
+                       _IPAPhotoAdjustment_DepthEffect_Aperture, _IPAPhotoAdjustment_DepthEffect_DepthInfo, 
+                       _IPAPhotoAdjustment_DepthEffect_GlassesMatteAllowed, _IPAPhotoAdjustment_DepthEffect_Identifier, 
+                       _IPAPhotoAdjustment_Effect_Identifier, _IPAPhotoAdjustment_Effect_Key_EffectName, 
+                       _IPAPhotoAdjustment_Effect_Key_EffectVersion, _IPAPhotoAdjustment_Effect_Version_Current, 
+                       _IPAPhotoAdjustment_Key_Statistics, _IPAPhotoAdjustment_PortraitEffect_Identifier, 
+                       _IPAPhotoAdjustment_PortraitEffect_PortraitEffectFilterName, 
                        _IPAPhotoAdjustment_PortraitEffect_PortraitInfo, _IPAPhotoAdjustment_PortraitEffect_SpillMatteAllowed, 
                        _IPAPhotoAdjustment_PortraitEffect_Strength, _IPAPhotoAdjustment_PosterFrame_Identifier, 
                        _IPAPhotoAdjustment_PosterFrame_Key_Time, _IPAPhotoAdjustment_RedEyeBB_Identifier, 
@@ -154,9 +155,8 @@ exports:
                        _PARectRoundUp, _PARectVectexOpposite, _PARectVertex, _PARelativePointInRect, 
                        _PAStraightenAffineTransformWithDegrees, _PAStraightenAffineTransformWithRadians, 
                        _PhotosImagingFoundationVersionNumber, _PhotosImagingFoundationVersionString, 
-                       _RKThumbnailSize, _TIFFOrientationFromIPAOrientation, _kCGImageHorizontalAccuracyNotSet, 
-                       _kIPAGeometryInvalidPoint, _kIPAImageGeometryInputSpace, _kIPAImageGeometryOutputSpace, 
-                       _kRKFileUTTypeKey ]
+                       _RKThumbnailSize, _TIFFOrientationFromIPAOrientation, _kIPAGeometryInvalidPoint, 
+                       _kIPAImageGeometryInputSpace, _kIPAImageGeometryOutputSpace ]
     objc-classes:    [ IPAAdjustment, IPAAdjustmentEnvelope, IPAAdjustmentSerialization, 
                        IPAAdjustmentStack, IPAAdjustmentStackSerializer, IPAAdjustmentVersion, 
                        IPAAdjustmentVersionInfo, IPAAffineImageTransform, IPAAggregateLargestImageSizePolicy, 
@@ -169,7 +169,6 @@ exports:
                        IPAGeometryOperatorSequence, IPAIdentityOperator, IPAImageGeometry, 
                        IPAImageIdentityTransform, IPAImageSizePolicy, IPAImageTransform, 
                        IPAImageTransformSequence, IPALocalPreviewSizeRegistry, IPAManualAutoSettings, 
-                       IPAMetadata, IPAMetadataStateBreadcrumb, IPAMetadataStateHandler, 
                        IPAMutableRectArray, IPAMutableRegion, IPAOrientationOperator, 
                        IPAOriginalSizePolicy, IPAPendingAutoSettings, IPAPerspectiveOperator, 
                        IPAPhotoAdjustment, IPAPhotoAdjustmentPipeline, IPAPhotoAdjustmentStack, 

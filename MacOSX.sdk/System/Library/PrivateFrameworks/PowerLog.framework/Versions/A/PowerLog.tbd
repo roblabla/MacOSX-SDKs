@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           67B009BD-CAA4-3735-A9CF-BEC37A38F0DE
+    value:           BCA68B04-790B-3A49-BCDD-F98740C10CEA
   - target:          x86_64-maccatalyst
-    value:           67B009BD-CAA4-3735-A9CF-BEC37A38F0DE
+    value:           BCA68B04-790B-3A49-BCDD-F98740C10CEA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EF272515-C2D9-3EC2-9883-32DFCCA76FF1
+    value:           90B4AF8A-52E5-3978-88A3-AE2D2DF8E50C
   - target:          arm64e-maccatalyst
-    value:           EF272515-C2D9-3EC2-9883-32DFCCA76FF1
+    value:           90B4AF8A-52E5-3978-88A3-AE2D2DF8E50C
 install-name:    '/System/Library/PrivateFrameworks/PowerLog.framework/Versions/A/PowerLog'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -34,14 +34,18 @@ exports:
                        _PLBatteryLifeMonitorReportEnergyDuet, _PLBatteryLifeMonitorStopAllDuetEvents, 
                        _PLBatteryUsageUIQuery, _PLBuildEnergyBucket, _PLBuildEnergyBucketTillNow, 
                        _PLBuildUsageSnapshot, _PLCalculateEndOfDay, _PLCalculateEndOfHour, 
-                       _PLCopyBatteryUIPlists, _PLCopyPowerlog, _PLCrashMoverCopyPowerlog, 
-                       _PLForceBatching, _PLGenerateBatteryUIPlist, _PLLogEvent, 
-                       _PLLogRegisteredAggregateEvent, _PLLogRegisteredEvent, _PLLogRegisteredEventFilterByInterval, 
+                       _PLCopyBatteryUIPlists, _PLCopyExtendedPersistenceLog, _PLCopyMetadataReports, 
+                       _PLCopyPowerlog, _PLCrashMoverCopyPowerlog, _PLForceBatching, 
+                       _PLGenerateBatteryUIPlist, _PLLogEvent, _PLLogRegisteredAggregateEvent, 
+                       _PLLogRegisteredEvent, _PLLogRegisteredEventFilterByInterval, 
                        _PLLogTimeSensitiveRegisteredEvent, _PLMovePowerlogsToCR, 
                        _PLPrefixForQueryType, _PLQuery, _PLQueryRegistered, _PLShouldLogEvent, 
                        _PLShouldLogRegisteredEvent, _PLSysdiagnoseCopyBatteryUILogs, 
-                       _PLSysdiagnoseCopyPowerlog, _PLTalkToPowerlogHelper ]
-    objc-classes:    [ PLCoreDuetEvent, PLCoreDuetEventInterval, PLDuetActivitySchedulerUsageSnapshot, 
+                       _PLSysdiagnoseCopyPowerlog, _PLTalkToPowerlogHelper, _PerfPowerTelemetryCreateIdentifier, 
+                       _PerfPowerTelemetrySendEvent, _perfpowertelemetry_create_identifier, 
+                       _perfpowertelemetry_send_event ]
+    objc-classes:    [ PLCoreDuetEvent, PLCoreDuetEventInterval, PLDiscretionaryEnergyMonitor, 
+                       PLDiscretionaryIntervalManager, PLDuetActivitySchedulerUsageSnapshot, 
                        PLEnergyBucket, PLModelingUtilities, PLNetworkEnergyModel, 
                        PLUsageSnapshot ]
 ...

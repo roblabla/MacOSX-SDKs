@@ -88,7 +88,6 @@ serverprefix	is_;
 type reply_port_t = MACH_MSG_TYPE_MAKE_SEND_ONCE | polymorphic
 	ctype: mach_port_t;
 
-#if	IOKIT
 
 type io_name_t            = c_string[*:128];
 type io_string_t          = c_string[*:512];
@@ -128,6 +127,15 @@ type io_connect_t = mach_port_t
 		intran: io_connect_t iokit_lookup_connect_port(mach_port_t)
 		outtran: mach_port_t iokit_make_connect_port(io_connect_t)
 		destructor: iokit_remove_connect_reference(io_connect_t)
+#endif	/* KERNEL_SERVER */
+		;
+
+type io_ident_t = mach_port_t
+		ctype: mach_port_t
+#if	KERNEL_SERVER
+		intran: io_ident_t iokit_lookup_ident_port(mach_port_t)
+		outtran: mach_port_t iokit_make_ident_port(io_ident_t)
+		destructor: iokit_remove_reference(io_ident_t)
 #endif	/* KERNEL_SERVER */
 		;
 
@@ -823,6 +831,5 @@ routine io_registry_entry_get_property_bin_buf(
 	out properties		: io_buf_ptr_t, physicalcopy
 	);
 
-#endif /* IOKIT */
 
 /* vim: set ft=c : */

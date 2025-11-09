@@ -1,0 +1,38 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           872AFD52-5D59-3222-ABB6-674B8C847A29
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FC32D7B6-B38D-394B-A6CD-031CAF52CA77
+install-name:    '/System/Library/PrivateFrameworks/Portrait.framework/Versions/A/Portrait'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _PTDefaultsFlush, _PTDefaultsGetDictionary, _PTDefaultsPublicGetDictionary, 
+                       _PTImageBufferTransferFunction_Linear_1_6, _PTSerializationErrorDomain, 
+                       _PTSerializationVersionKey, _PTVersionFromString, _PTVersionGetMajor, 
+                       _PTVersionGetMinor, _PTVersionGetRevision, _PTVersionMake, 
+                       _PTVersionStringWithComponents, _PTVersionToString, _PTVersionToStringWithComponents, 
+                       _PortraitVersionNumber, _PortraitVersionString, __PTLogSystem, 
+                       _assignAndWatchKernel, _assignAndWatchKernelWithConstants, 
+                       _computeKernel, _createMipmapArray, _createTexture, _createTextureMipmap, 
+                       _dumpBMTL, _kPortraitRuntimeAPIVersion, _numThreadgroups, 
+                       _numThreadsPerGroupForKernel2D, _textureDescriptor ]
+    objc-classes:    [ LKTFlowGPU, PTAtomStream, PTAtomWriter, PTColor, PTDataByteStream, 
+                       PTDataByteWriter, PTDisparityFilterDEMA_LKT, PTDisparityFilterExponentialMovingAverageLKT, 
+                       PTDisparityFilterExponentialMovingAverageLKTMotion, PTDisparityFilterPassThrough, 
+                       PTDisparityPostProcessing, PTDisparityPostProcessingDescriptor, 
+                       PTDisparityUpscale, PTEffect, PTEffectRendererSDOF, PTEffectUtil, 
+                       PTEspressoGenericExecutor, PTGlobalReduction, PTMSRResize, 
+                       PTMTLComputePipelineProxy, PTMTLKernelReloader, PTOpticalFlow, 
+                       PTPipelineWithConstants, PTPixelBufferUtil, PTPyramidRGB, 
+                       PTPyramidYUV, PTQualitySettings, PTRaytracingRenderState, 
+                       PTRaytracingSDOF, PTRaytracingUtils, PTRaytracingV14, PTRaytracingV14RenderState, 
+                       PTRenderDebugLayer, PTRenderEffectNetwork, PTRenderPipeline, 
+                       PTRenderPipelineDescriptor, PTRenderRequest, PTSDOFPyramid, 
+                       PTSerialization, PTTexture, PTTextureRGBA, PTTextureYUV420, 
+                       PTUtil ]
+...

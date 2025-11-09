@@ -1,10 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target x86_64-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name _SceneKit_SwiftUI
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target x86_64-apple-ios15.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name _SceneKit_SwiftUI
 @_exported import SceneKit
 import Swift
 import SwiftUI
-@_exported import _SceneKit_SwiftUI
+import _Concurrency
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct SceneView : SwiftUI.View {
   public struct Options : Swift.OptionSet {
@@ -20,8 +20,8 @@ public struct SceneView : SwiftUI.View {
     public typealias RawValue = Swift.Int
   }
   public init(scene: SceneKit.SCNScene? = nil, pointOfView: SceneKit.SCNNode? = nil, options: _SceneKit_SwiftUI.SceneView.Options = [], preferredFramesPerSecond: Swift.Int = 60, antialiasingMode: SceneKit.SCNAntialiasingMode = .multisampling4X, delegate: SceneKit.SCNSceneRendererDelegate? = nil, technique: SceneKit.SCNTechnique? = nil)
-  public var body: some SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
     get
   }
-  public typealias Body = @_opaqueReturnTypeOf("$s17_SceneKit_SwiftUI0A4ViewV4bodyQrvp", 0) 🦸
+  public typealias Body = @_opaqueReturnTypeOf("$s17_SceneKit_SwiftUI0A4ViewV4bodyQrvp", 0) __
 }

@@ -17,9 +17,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0))
-API_UNAVAILABLE(macos, tvos)
-API_UNAVAILABLE(watchos)
+API_DEPRECATED("INSetRadioStationIntent is deprecated. There is no replacement.", ios(10.0, 15.0))
+API_UNAVAILABLE(macos, watchos, tvos)
 @interface INSetRadioStationIntent : INIntent
 
 - (instancetype)initWithRadioType:(INRadioType)radioType
@@ -47,9 +46,8 @@ API_UNAVAILABLE(watchos)
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(10.0))
-API_UNAVAILABLE(macos, tvos)
-API_UNAVAILABLE(watchos)
+API_DEPRECATED("INSetRadioStationIntentHandling is deprecated. There is no replacement.", ios(10.0, 15.0))
+API_UNAVAILABLE(macos, watchos, tvos)
 @protocol INSetRadioStationIntentHandling <NSObject>
 
 @required
@@ -93,19 +91,19 @@ API_UNAVAILABLE(watchos)
  */
 
 - (void)resolveRadioTypeForSetRadioStation:(INSetRadioStationIntent *)intent
-                    withCompletion:(void (^)(INRadioTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveRadioType(for:with:));
+                            withCompletion:(void (^)(INRadioTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveRadioType(for:with:));
 
 - (void)resolveFrequencyForSetRadioStation:(INSetRadioStationIntent *)intent
-                    withCompletion:(void (^)(INDoubleResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveFrequency(for:with:));
+                            withCompletion:(void (^)(INDoubleResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveFrequency(for:with:));
 
 - (void)resolveStationNameForSetRadioStation:(INSetRadioStationIntent *)intent
-                    withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveStationName(for:with:));
+                              withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveStationName(for:with:));
 
 - (void)resolveChannelForSetRadioStation:(INSetRadioStationIntent *)intent
-                    withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveChannel(for:with:));
+                          withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveChannel(for:with:));
 
 - (void)resolvePresetNumberForSetRadioStation:(INSetRadioStationIntent *)intent
-                    withCompletion:(void (^)(INIntegerResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePresetNumber(for:with:));
+                               withCompletion:(void (^)(INIntegerResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePresetNumber(for:with:));
 
 @end
 

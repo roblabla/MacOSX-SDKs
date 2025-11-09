@@ -28,7 +28,7 @@ SK_EXTERN_CLASS API_AVAILABLE(ios(9.3), tvos(9.3), watchos(7.0), macos(11.0), ma
 @interface SKCloudServiceController : NSObject
 
 + (SKCloudServiceAuthorizationStatus)authorizationStatus API_AVAILABLE(ios(9.3), tvos(9.3), watchos(7.0), macos(11.0), macCatalyst(13.0));
-+ (void)requestAuthorization:(void (^) (SKCloudServiceAuthorizationStatus authorizationStatus))handler API_AVAILABLE(ios(9.3), tvos(9.3), watchos(7.0), macos(11.0), macCatalyst(13.0));
++ (void)requestAuthorization:(void (^) (SKCloudServiceAuthorizationStatus authorizationStatus))completionHandler API_AVAILABLE(ios(9.3), tvos(9.3), watchos(7.0), macos(11.0), macCatalyst(13.0));
 
 - (void)requestCapabilitiesWithCompletionHandler:(void (^) (SKCloudServiceCapability capabilities, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(9.3), tvos(9.3), watchos(7.0), macos(11.0), macCatalyst(13.0));
 

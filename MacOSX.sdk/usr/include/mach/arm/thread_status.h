@@ -33,10 +33,12 @@
 #ifndef _ARM_THREAD_STATUS_H_
 #define _ARM_THREAD_STATUS_H_
 
+#if defined (__arm__) || defined (__arm64__)
+
 #include <mach/machine/_structs.h>
+#include <mach/machine/thread_state.h>
 #include <mach/message.h>
 #include <mach/vm_types.h>
-#include <mach/arm/thread_state.h>
 
 /*
  *    Support for determining the state of a thread
@@ -245,5 +247,7 @@ typedef struct arm_amx_state arm_amx_state_t;
  */
 #define THREAD_MACHINE_STATE_MAX THREAD_STATE_MAX
 
+
+#endif /* defined (__arm__) || defined (__arm64__) */
 
 #endif /* _ARM_THREAD_STATUS_H_ */

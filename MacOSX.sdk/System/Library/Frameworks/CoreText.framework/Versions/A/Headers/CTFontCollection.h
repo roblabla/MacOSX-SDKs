@@ -296,7 +296,7 @@ typedef CF_OPTIONS(uint32_t, CTFontCollectionCopyOptions) {
     kCTFontCollectionCopyDefaultOptions = 0,
     kCTFontCollectionCopyUnique = (1 << 0),
     kCTFontCollectionCopyStandardSort = (1 << 1)
-} CT_AVAILABLE(macos(10.7));
+} CT_AVAILABLE(macos(10.7), ios(12.0), watchos(5.0), tvos(12.0));
 
 /*!
     @function   CTFontCollectionCopyFontAttribute
@@ -316,7 +316,7 @@ typedef CF_OPTIONS(uint32_t, CTFontCollectionCopyOptions) {
 CFArrayRef CTFontCollectionCopyFontAttribute(
     CTFontCollectionRef         collection,
     CFStringRef                 attributeName,
-    CTFontCollectionCopyOptions options ) CT_AVAILABLE(macos(10.7)) CT_UNAVAILABLE(ios, watchos, tvos);
+    CTFontCollectionCopyOptions options ) CT_AVAILABLE(macos(10.7), ios(15.0), watchos(8.0), tvos(15.0));
 
 /*!
     @function   CTFontCollectionCopyFontAttributes
@@ -336,7 +336,7 @@ CFArrayRef CTFontCollectionCopyFontAttribute(
 CFArrayRef CTFontCollectionCopyFontAttributes(
     CTFontCollectionRef         collection,
     CFSetRef                    attributeNames,
-    CTFontCollectionCopyOptions options ) CT_AVAILABLE(macos(10.7)) CT_UNAVAILABLE(ios, watchos, tvos);
+    CTFontCollectionCopyOptions options ) CT_AVAILABLE(macos(10.7), ios(15.0), watchos(8.0), tvos(15.0));
 
 CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END

@@ -1,6 +1,6 @@
 /* CoreAnimation - CAValueFunction.h
 
-   Copyright (c) 2008-2018, Apple Inc.
+   Copyright (c) 2008-2021, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>

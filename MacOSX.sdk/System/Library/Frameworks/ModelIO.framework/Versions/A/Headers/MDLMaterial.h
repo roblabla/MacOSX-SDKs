@@ -167,7 +167,8 @@ typedef NS_ENUM(NSUInteger, MDLMaterialPropertyType) {
     MDLMaterialPropertyTypeFloat2,
     MDLMaterialPropertyTypeFloat3,
     MDLMaterialPropertyTypeFloat4,
-    MDLMaterialPropertyTypeMatrix44
+    MDLMaterialPropertyTypeMatrix44,
+    MDLMaterialPropertyTypeBuffer
 };
 
 /**

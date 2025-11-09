@@ -10,6 +10,7 @@
 #import <CoreMotion/CMAltitude.h>
 #import <CoreMotion/CMAvailability.h>
 #import <CoreMotion/CMAuthorization.h>
+#import <CoreMotion/CMAbsoluteAltitude.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +21,15 @@ NS_ASSUME_NONNULL_BEGIN
  *    Typedef of block to be invoked when the device's altitude is updated.
  */
 typedef void (^CMAltitudeHandler)(CMAltitudeData * __nullable altitudeData, NSError * __nullable error) API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+
+/*
+ *  CMAbsoluteAltitudeHandler
+ *
+ *  Discussion:
+ *    Typedef of block to be invoked when the device's absolute altitude is updated.
+ */
+typedef void (^CMAbsoluteAltitudeHandler)(CMAbsoluteAltitudeData *__nullable altitudeData, NSError *__nullable error) API_AVAILABLE(ios(15.0), watchos(8.0)) API_UNAVAILABLE(macos, tvos);
+
 
 /*
  *  CMAltimeter
@@ -66,6 +76,33 @@ COREMOTION_EXPORT API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos)
  *      Stops relative altitude updates.
  */
 - (void)stopRelativeAltitudeUpdates;
+
+/*
+ *  isAbsoluteAltitudeAvailable
+ *
+ *  Discussion:
+ *      Determines whether the device supports reporting the absolute altitude.
+ */
++ (BOOL)isAbsoluteAltitudeAvailable API_AVAILABLE(ios(15.0), watchos(8.0)) API_UNAVAILABLE(macos, tvos);
+
+/*
+ *  startAbsoluteAltitudeUpdatesToQueue:withHandler:
+ *
+ *  Discussion:
+ *      Starts real-time absolute altitude updates, providing data to the given handler on the given queue, whenever a change in elevation is detected.
+ *
+ *      Calls to start must be balanced with calls to stopAbsoluteAltitudeUpdates even if an error
+ *      is returned to the handler.
+ */
+
+- (void)startAbsoluteAltitudeUpdatesToQueue:(NSOperationQueue *)queue withHandler:(CMAbsoluteAltitudeHandler)handler API_AVAILABLE(ios(15.0), watchos(8.0)) API_UNAVAILABLE(macos, tvos);
+/*
+ *  stopAbsoluteAltitudeUpdates
+ *
+ *  Discussion:
+ *      Stops absolute altitude updates.
+ */
+- (void)stopAbsoluteAltitudeUpdates API_AVAILABLE(ios(15.0), watchos(8.0)) API_UNAVAILABLE(macos, tvos);
 
 @end
 

@@ -6,6 +6,7 @@
 //
 
 #import <Vision/VNRequest.h>
+#import <Vision/VNObservation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,6 +24,11 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@brief Specify whether or not the bounding boxes of individual characters should also be returned in the resultant VNTextObservations. Default is NO.
 */
 @property (readwrite, nonatomic, assign) BOOL reportCharacterBoxes;
+
+/*!
+	@discussion VNTextObservation results.
+*/
+@property (readonly, copy, nullable) NSArray<VNTextObservation*>* results;
 
 @end
 

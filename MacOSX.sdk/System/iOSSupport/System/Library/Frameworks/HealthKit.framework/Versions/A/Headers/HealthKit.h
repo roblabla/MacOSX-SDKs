@@ -7,8 +7,9 @@
 
 #import <HealthKit/HKActivitySummary.h>
 #import <HealthKit/HKActivitySummaryQuery.h>
-#import <HealthKit/HKAudiogramSample.h>
 #import <HealthKit/HKAnchoredObjectQuery.h>
+#import <HealthKit/HKAppleWalkingSteadinessClassification.h>
+#import <HealthKit/HKAudiogramSample.h>
 #import <HealthKit/HKCDADocumentSample.h>
 #import <HealthKit/HKCategorySample.h>
 #import <HealthKit/HKCharacteristicObjects.h>
@@ -45,6 +46,7 @@
 #import <HealthKit/HKQuantitySeriesSampleQuery.h>
 #import <HealthKit/HKQuery.h>
 #import <HealthKit/HKQueryAnchor.h>
+#import <HealthKit/HKQueryDescriptor.h>
 #import <HealthKit/HKSample.h>
 #import <HealthKit/HKSampleQuery.h>
 #import <HealthKit/HKSeriesBuilder.h>
@@ -57,6 +59,9 @@
 #import <HealthKit/HKStatisticsQuery.h>
 #import <HealthKit/HKTypeIdentifiers.h>
 #import <HealthKit/HKUnit.h>
+#import <HealthKit/HKVerifiableClinicalRecord.h>
+#import <HealthKit/HKVerifiableClinicalRecordQuery.h>
+#import <HealthKit/HKVerifiableClinicalRecordSubject.h>
 #import <HealthKit/HKWorkout.h>
 #import <HealthKit/HKWorkoutBuilder.h>
 #import <HealthKit/HKWorkoutConfiguration.h>

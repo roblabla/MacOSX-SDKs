@@ -7,6 +7,72 @@
 ---
 Name: UIKit
 Classes:
+- Name: NSTextAttachmentViewProvider
+  Methods:
+  - Selector: "attachmentBoundsForAttributes:location:textContainer:proposedLineFragment:position:"
+    MethodKind: Instance
+    SwiftName: attachmentBounds(for:location:textContainer:proposedLineFragment:position:)
+- Name: NSTextContentStorage
+  Methods:
+  - Selector: "locationFromLocation:withOffset:"
+    MethodKind: Instance
+    SwiftName: location(_:offsetBy:)
+- Name: NSTextLayoutManager
+  Methods:
+  - Selector: "ensureLayoutForBounds:"
+    MethodKind: Instance
+    SwiftName: ensureLayout(for:)
+  - Selector: "replaceTextContentManager:"
+    MethodKind: Instance
+    SwiftName: replace(_:)
+  - Selector: "textLayoutFragmentForPosition:"
+    MethodKind: Instance
+    SwiftName: textLayoutFragment(for:)
+- Name: NSTextRange
+  Methods:
+  - Selector: "containsLocation:"
+    MethodKind: Instance
+    SwiftName: contains(_:)
+  - Selector: "containsRange:"
+    MethodKind: Instance
+    SwiftName: contains(_:)
+  - Selector: "initWithLocation:"
+    MethodKind: Instance
+    SwiftName: init(location:)
+  - Selector: "intersectsWithTextRange:"
+    MethodKind: Instance
+    SwiftName: intersects(_:)
+  - Selector: "textRangeByFormingUnionWithTextRange:"
+    MethodKind: Instance
+    SwiftName: union(_:)
+  - Selector: "textRangeByIntersectingWithTextRange:"
+    MethodKind: Instance
+    SwiftName: intersection(_:)
+- Name: NSTextSelection
+  Methods:
+  - Selector: "initWithLocation:affinity:"
+    MethodKind: Instance
+    SwiftName: init(_:affinity:)
+  - Selector: "initWithRange:affinity:granularity:"
+    MethodKind: Instance
+    SwiftName: init(range:affinity:granularity:)
+  - Selector: "initWithRanges:affinity:granularity:"
+    MethodKind: Instance
+    SwiftName: init(_:affinity:granularity:)
+  - Selector: "textSelectionWithTextRanges:"
+    MethodKind: Instance
+    SwiftName: textSelection(_:)
+- Name: NSTextSelectionNavigation
+  Methods:
+  - Selector: "textSelectionForSelectionGranularity:enclosingPoint:inContainerAtLocation:"
+    MethodKind: Instance
+    SwiftName: textSelection(for:enclosing:inContainerAt:)
+  - Selector: "textSelectionForSelectionGranularity:enclosingTextSelection:"
+    MethodKind: Instance
+    SwiftName: textSelection(for:enclosing:)
+  - Selector: "textSelectionsInteractingAtPoint:inContainerAtLocation:anchors:modifiers:selecting:bounds:"
+    MethodKind: Instance
+    SwiftName: textSelections(interactingAt:inContainerAt:anchors:modifiers:selecting:bounds:)
 - Name: UICollectionViewCompositionalLayout
   Methods:
   - Selector: "layoutWithListConfiguration:"
@@ -178,6 +244,9 @@ Classes:
   - Name: 'configurationState'
     PropertyKind: Instance
     SwiftPrivate: true
+  - Name: 'configurationUpdateHandler'
+    PropertyKind: Instance
+    SwiftPrivate: true
   - Name: 'backgroundConfiguration'
     PropertyKind: Instance
     SwiftPrivate: true
@@ -196,6 +265,9 @@ Classes:
   - Name: 'configurationState'
     PropertyKind: Instance
     SwiftPrivate: true
+  - Name: 'configurationUpdateHandler'
+    PropertyKind: Instance
+    SwiftPrivate: true
   - Name: 'backgroundConfiguration'
     PropertyKind: Instance
     SwiftPrivate: true
@@ -209,6 +281,9 @@ Classes:
     SwiftPrivate: true
   Properties:
   - Name: 'configurationState'
+    PropertyKind: Instance
+    SwiftPrivate: true
+  - Name: 'configurationUpdateHandler'
     PropertyKind: Instance
     SwiftPrivate: true
   - Name: 'backgroundConfiguration'
@@ -429,6 +504,15 @@ Classes:
   - Selector: 'buttonWithType:primaryAction:'
     MethodKind: Class
     SwiftPrivate: true
+  - Selector: 'buttonWithConfiguration:primaryAction:'
+    MethodKind: Class
+    SwiftPrivate: true
+  Properties:
+  - Name: 'configuration'
+    PropertyKind: Instance
+    SwiftPrivate: true
+- Name: UIButtonConfiguration
+  SwiftPrivate: true
 - Name: UIBarButtonItem
   Methods:
   - Selector: 'initWithBarButtonSystemItem:primaryAction:'
@@ -670,6 +754,8 @@ Classes:
   Properties:
   - Name: isKeyWindow
     SwiftName: isKey
+  - Name: canBecomeKeyWindow
+    SwiftName: canBecomeKey
   Methods:
   - Selector: becomeKeyWindow
     SwiftName: becomeKey()
@@ -711,6 +797,10 @@ Classes:
   - Selector: 'initWithTypeIdentifiersForAcceptingClass:'
     MethodKind: Instance
     SwiftName: 'init(forAccepting:)'
+- Name: UIToolTipConfiguration
+  Properties:
+  - Name: sourceRect
+    SwiftPrivate: true
 - Name: UIFocusSystem
   Methods:
   - Selector: 'environment:containsEnvironment:'
@@ -750,6 +840,27 @@ Classes:
   - Selector: 'systemImageNamed:compatibleWithTraitCollection:'
     MethodKind: Class
     SwiftName: 'init(systemName:compatibleWith:)'
+  - Selector: 'systemImageNamed:variant:'
+    MethodKind: Class
+    SwiftName: 'init(__systemName:variant:)'
+  - Selector: 'systemImageNamed:variant:withConfiguration:'
+    MethodKind: Class
+    SwiftName: 'init(__systemName:variant:configuration:)'
+  - Selector: 'imageNamed:variant:'
+    MethodKind: Class
+    SwiftName: 'init(__named:variant:)'
+  - Selector: 'imageNamed:variant:withConfiguration:'
+    MethodKind: Class
+    SwiftName: 'init(__named:variant:configuration:)'
+  - Selector: 'imageByApplyingVariant:'
+    MethodKind: Instance
+    SwiftName: '__applyingVariant(_:)'
+  - Selector: 'imageByApplyingVariantFromImage:'
+    MethodKind: Instance
+    SwiftName: 'applyingVariant(from:)'
+  - Selector: 'imageByRemovingVariant'
+    MethodKind: Instance
+    SwiftName: 'removingVariant()'
 - Name: UIImageConfiguration
   SwiftName: UIImage.Configuration
 - Name: UIImageSymbolConfiguration
@@ -759,7 +870,70 @@ Classes:
   - Selector: 'elementWithProvider:'
     SwiftName: 'init(_:)'
     MethodKind: Class
+  - Selector: 'elementWithUncachedProvider:'
+    SwiftName: 'uncached(_:)'
+    MethodKind: Class
+- Name: UIBandSelectionInteraction
+  Methods:
+  - Selector: 'initWithSelectionHandler:'
+    SwiftName: 'init(_:)'
+    MethodKind: Instance
+  Properties:
+  - Name: 'selectionRect'
+    PropertyKind: Instance
+    SwiftPrivate: true
+- Name: UIPointerAccessory
+  Properties:
+  - Name: shape
+    PropertyKind: Instance
+    SwiftPrivate: true
+  Methods:
+  - Selector: 'accessoryWithShape:position:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'arrowAccessoryWithPosition:'
+    MethodKind: Class
+    SwiftPrivate: true
+- Name: UIWindowSceneActivationConfiguration
+  SwiftName: UIWindowScene.ActivationConfiguration
+- Name: UIWindowSceneActivationRequestOptions
+  SwiftName: UIWindowScene.ActivationRequestOptions
+- Name: UIWindowSceneActivationAction
+  SwiftName: UIWindowScene.ActivationAction
+- Name: UIWindowSceneActivationInteraction
+  SwiftName: UIWindowScene.ActivationInteraction
+- Name: UISheetPresentationControllerDetent
+  SwiftName: UISheetPresentationController.Detent
+- Name: UISheetPresentationController
+  Properties:
+  - Name: preferredCornerRadius
+    PropertyKind: Instance
+    SwiftPrivate: true
 Protocols:
+- Name: NSTextAttachmentLayout
+  Methods:
+  - Selector: "attachmentBoundsForAttributes:location:textContainer:proposedLineFragment:position:"
+    MethodKind: Instance
+    SwiftName: attachmentBounds(for:location:textContainer:proposedLineFragment:position:)
+  - Selector: "imageForBounds:attributes:location:textContainer:"
+    MethodKind: Instance
+    SwiftName: image(for:attributes:location:textContainer:)
+  - Selector: "viewProviderForParentView:location:textContainer:"
+    MethodKind: Instance
+    SwiftName: viewProvider(for:location:textContainer:)
+- Name: NSTextElementProvider
+  Methods:
+  - Selector: "locationFromLocation:withOffset:"
+    MethodKind: Instance
+    SwiftName: location(_:offsetBy:)
+- Name: NSTextSelectionDataSource
+  Methods:
+  - Selector: "locationFromLocation:withOffset:"
+    MethodKind: Instance
+    SwiftName: location(_:offsetBy:)
+  - Selector: "textRangeForSelectionGranularity:enclosingLocation:"
+    MethodKind: Instance
+    SwiftName: textRange(for:enclosing:)
 - Name: UIConfigurationState
   SwiftPrivate: true
 - Name: UIContentConfiguration
@@ -853,6 +1027,9 @@ Protocols:
     MethodKind: Instance
 - Name: UIAdaptivePresentationControllerDelegate
   Methods:
+  - Selector: 'presentationController:prepareAdaptivePresentationController:'
+    SwiftName: presentationController(_:prepare:)
+    MethodKind: Instance
   - Selector: 'presentationControllerDidAttemptToDismiss:'
     SwiftName: presentationControllerDidAttemptToDismiss(_:)
     MethodKind: Instance
@@ -993,6 +1170,30 @@ Protocols:
     SwiftName: 'contextMenuInteraction(_:previewForDismissingMenuWithConfiguration:)'
     MethodKind: Instance
 Tags:
+- Name: NSTextContentManagerEnumerationOptions
+  SwiftName: NSTextContentManager.EnumerationOptions
+- Name: NSTextLayoutFragmentEnumerationOptions
+  SwiftName: NSTextLayoutFragment.EnumerationOptions
+- Name: NSTextLayoutFragmentState
+  SwiftName: NSTextLayoutFragment.State
+- Name: NSTextLayoutManagerSegmentOptions
+  SwiftName: NSTextLayoutManager.SegmentOptions
+- Name: NSTextLayoutManagerSegmentType
+  SwiftName: NSTextLayoutManager.SegmentType
+- Name: NSTextSelectionAffinity
+  SwiftName: NSTextSelection.Affinity
+- Name: NSTextSelectionGranularity
+  SwiftName: NSTextSelection.Granularity
+- Name: NSTextSelectionNavigationDestination
+  SwiftName: NSTextSelectionNavigation.Destination
+- Name: NSTextSelectionNavigationDirection
+  SwiftName: NSTextSelectionNavigation.Direction
+- Name: NSTextSelectionNavigationLayoutOrientation
+  SwiftName: NSTextSelectionNavigation.LayoutOrientation
+- Name: NSTextSelectionNavigationModifier
+  SwiftName: NSTextSelectionNavigation.Modifier
+- Name: NSTextSelectionNavigationWritingDirection
+  SwiftName: NSTextSelectionNavigation.WritingDirection
 - Name: UICollectionLayoutListAppearance
   SwiftPrivate: true
 - Name: UICollectionLayoutListHeaderMode
@@ -1029,6 +1230,12 @@ Tags:
   SwiftName: UIGraphicsImageRendererFormat.Range
 - Name: UIContextMenuInteractionAppearance
   SwiftName: UIContextMenuInteraction.appearance
+- Name: UIBandSelectionInteractionState
+  SwiftName: UIBandSelectionInteraction.State
+- Name: UIPointerAccessoryPosition
+  SwiftPrivate: true
+- Name: UIFocusHaloEffectPosition
+  SwiftName: UIFocusHaloEffect.Position
 # Swift 4.2 Renames
 - Name: UIApplicationState
   SwiftName: UIApplication.State
@@ -1140,6 +1347,14 @@ Tags:
   SwiftName: UIButton.ButtonType
 - Name: UIButtonRole
   SwiftName: UIButton.Role
+- Name: UIButtonConfigurationSize
+  SwiftPrivate: true
+- Name: UIButtonConfigurationTitleAlignment
+  SwiftPrivate: true
+- Name: UIButtonConfigurationCornerStyle
+  SwiftPrivate: true
+- Name: UIButtonConfigurationMacIdiomStyle
+  SwiftPrivate: true
 - Name: UIDatePickerMode
   SwiftName: UIDatePicker.Mode
 - Name: UISwitchStyle
@@ -1282,6 +1497,10 @@ Tags:
   SwiftName: UIImage.SymbolScale
 - Name: UIImageSymbolWeight
   SwiftName: UIImage.SymbolWeight
+- Name: UIImageVariantShape
+  SwiftName: UIImage.VariantShape
+- Name: UIImageVariantFill
+  SwiftName: UIImage.VariantFill
 - Name: UIPrinterCutterBehavior
   SwiftName: UIPrinter.CutterBehavior
 - Name: UIPrinterJobTypes
@@ -1309,7 +1528,17 @@ Tags:
 - Name: UIWindowSceneDismissalAnimation
   SwiftName: UIWindowScene.DismissalAnimation
 Typedefs:
+- Name: UIButtonConfigurationUpdateHandler
+  SwiftName: UIButton.ConfigurationUpdateHandler
 - Name: UIConfigurationColorTransformer
+  SwiftPrivate: true
+- Name: UITableViewCellConfigurationUpdateHandler
+  SwiftPrivate: true
+- Name: UITableViewHeaderFooterViewConfigurationUpdateHandler
+  SwiftPrivate: true
+- Name: UICollectionViewCellConfigurationUpdateHandler
+  SwiftPrivate: true
+- Name: UIConfigurationTextAttributesTransformer
   SwiftPrivate: true
 - Name: UICellAccessoryPosition
   SwiftPrivate: true
@@ -1353,6 +1582,8 @@ Typedefs:
   SwiftPrivate: true
 - Name: UISceneSessionRole
   SwiftName: UISceneSession.Role
+- Name: UISheetPresentationControllerDetentIdentifier
+  SwiftName: UISheetPresentationControllerDetent.Identifier
 # Swift 4.2 Renames
 - Name: UIActivityType
   SwiftName: UIActivity.ActivityType
@@ -1649,6 +1880,10 @@ Globals:
   SwiftName: featureIdentifier
 - Name: UIFontFeatureSelectorIdentifierKey
   SwiftName: typeIdentifier
+- Name: UIFontFeatureTypeKey
+  SwiftName: type
+- Name: UIFontFeatureSelectorKey
+  SwiftName: selector
 - Name: UIFontWeightUltraLight
   SwiftName: ultraLight
 - Name: UIFontWeightThin
@@ -1693,6 +1928,8 @@ Globals:
   SwiftName: windowApplication
 - Name: UIWindowSceneSessionRoleExternalDisplay
   SwiftName: windowExternalDisplay
+- Name: UISheetPresentationControllerAutomaticDimension
+  SwiftPrivate: true
 # Swift 4.2 Renames
 - Name: UIApplicationBackgroundRefreshStatusDidChangeNotification
   SwiftName: UIApplication.backgroundRefreshStatusDidChangeNotification
@@ -1900,6 +2137,8 @@ Globals:
   SwiftName: UIView.layoutFittingExpandedSize
 - Name: UICollectionViewFlowLayoutAutomaticSize
   SwiftName: UICollectionViewFlowLayout.automaticSize
+- Name: UICollectionViewLayoutAutomaticDimension
+  SwiftPrivate: true
 - Name: UITableViewAutomaticDimension
   SwiftName: UITableView.automaticDimension
 - Name: UISplitViewControllerAutomaticDimension
@@ -1978,6 +2217,8 @@ Globals:
   SwiftName: UIKeyCommand.f11
 - Name: UIKeyInputF12
   SwiftName: UIKeyCommand.f12
+- Name: UIKeyInputDelete
+  SwiftName: UIKeyCommand.inputDelete
 - Name: NSUserActivityDocumentURLKey
   SwiftName: UIDocument.userActivityURLKey
 - Name: UIViewControllerHierarchyInconsistencyException
@@ -2066,6 +2307,8 @@ Globals:
   SwiftName: tracking
 - Name: UIGuidedAccessErrorDomain
   SwiftName: UIAccessibility.guidedAccessErrorDomain
+- Name: NSTextContentStorageUnsupportedAttributeAddedNotification
+  SwiftName: unsupportedAttributeAddedNotification
 Functions:
 - Name: UICellAccessoryPositionBeforeAccessoryOfClass
   SwiftPrivate: true
@@ -2207,6 +2450,8 @@ Functions:
   SwiftName: "UIAccessibility.guidedAccessRestrictionState(forIdentifier:)"
 - Name: UIGuidedAccessConfigureAccessibilityFeatures
   SwiftName: "UIAccessibility.configureForGuidedAccess(features:enabled:completionHandler:)"
+- Name: UIPointerAccessoryPositionMake
+  SwiftPrivate: true
 SwiftVersions:
 #
 # Swift 4 and below specific conversions

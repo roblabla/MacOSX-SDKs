@@ -1,0 +1,71 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target arm64e-apple-macos12.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDataDetection -swift-version 5 -enforce-exclusivity=checked -O -module-name DataDetection
+import Foundation
+import Swift
+import _Concurrency
+@available(iOS 15.0, *)
+@available(macOS, unavailable)
+public enum DDDetectedValue {
+  @available(iOS 15.0, *)
+  public struct Link {
+    public let URL: Foundation.URL
+    public let matchedString: Swift.String
+    public let matchedRange: Swift.Range<Swift.String.Index>
+  }
+  @available(iOS 15.0, *)
+  public struct PhoneNumber {
+    public let phoneNumber: Swift.String
+    public let label: Swift.String?
+    public let matchedString: Swift.String
+    public let matchedRange: Swift.Range<Swift.String.Index>
+  }
+  @available(iOS 15.0, *)
+  public struct EmailAddress {
+    public let emailAddress: Swift.String
+    public let label: Swift.String?
+    public let matchedString: Swift.String
+    public let matchedRange: Swift.Range<Swift.String.Index>
+  }
+  @available(iOS 15.0, *)
+  public struct PostalAddress {
+    public let street: Swift.String?
+    public let city: Swift.String?
+    public let state: Swift.String?
+    public let postalCode: Swift.String?
+    public let country: Swift.String?
+    public let matchedString: Swift.String
+    public let matchedRange: Swift.Range<Swift.String.Index>
+  }
+  @available(iOS 15.0, *)
+  public struct CalendarEvent {
+    public let isAllDay: Swift.Bool
+    public let startDate: Foundation.Date?
+    public let startTimeZone: Foundation.TimeZone?
+    public let endDate: Foundation.Date?
+    public let endTimeZone: Foundation.TimeZone?
+    public let matchedString: Swift.String
+    public let matchedRange: Swift.Range<Swift.String.Index>
+  }
+  @available(iOS 15.0, *)
+  public struct ShipmentTrackingNumber {
+    public let carrier: Swift.String
+    public let trackingNumber: Swift.String
+    public let matchedString: Swift.String
+    public let matchedRange: Swift.Range<Swift.String.Index>
+  }
+  @available(iOS 15.0, *)
+  public struct FlightNumber {
+    public let airline: Swift.String
+    public let flightNumber: Swift.String
+    public let matchedString: Swift.String
+    public let matchedRange: Swift.Range<Swift.String.Index>
+  }
+  @available(iOS 15.0, *)
+  public struct MoneyAmount {
+    public let currency: Swift.String
+    public let amount: Swift.Double
+    public let matchedString: Swift.String
+    public let matchedRange: Swift.Range<Swift.String.Index>
+  }
+}

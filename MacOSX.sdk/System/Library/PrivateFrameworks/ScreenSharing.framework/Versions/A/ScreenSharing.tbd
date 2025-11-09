@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FC0DA0EF-66D0-32D7-9F5C-6B656DFC5657
+    value:           FE107BAC-8A6F-3423-86D0-1E4BBA0F20B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           29A2DFF3-D29C-31D4-B6FE-F4FEE6FBE9F2
+    value:           67CD2F9E-37C3-3B4A-8F17-EB6C3A6A423E
 install-name:    '/System/Library/PrivateFrameworks/ScreenSharing.framework/Versions/A/ScreenSharing'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -78,10 +78,12 @@ exports:
                        _mt_log_screensharing_addressResolutionEnded, _sockaddrEquivalent, 
                        _sockaddrPort, _sockaddrStorageEqual, _sockaddrStorageEquivalent ]
     objc-classes:    [ DNSResolver, NWConnectionManager, ODHelper, PerformSelectorOnThreadManager, 
-                       RDMutex, RDSemaphore, SSAddress, SSAddressResolver, SSApplication, 
-                       SSConnectionAddressViewController, SSConnectionAuthenticationGuestlessViewController, 
-                       SSConnectionAuthenticationVNCViewController, SSConnectionAuthenticationViewController, 
-                       SSConnectionOptions, SSConnectionProgressViewController, SSConnectionWindowController, 
+                       RDMutex, RDSemaphore, SSAddress, SSAddressResolver, SSAnnotationRenderer, 
+                       SSAnnotationUser, SSApplication, SSCallTrackingView, SSCallTrackingWindow, 
+                       SSCallWindowController, SSConnectionAddressViewController, 
+                       SSConnectionAuthenticationGuestlessViewController, SSConnectionAuthenticationVNCViewController, 
+                       SSConnectionAuthenticationViewController, SSConnectionOptions, 
+                       SSConnectionProgressViewController, SSConnectionWindowController, 
                        SSContact, SSContactsTokenField, SSCredentials, SSCredentialsManager, 
                        SSCurtainMessageViewController, SSDevicesAndContacts, SSDisplaySegmentedControl, 
                        SSDragEvent, SSEncryptionKeyCredentials, SSEventHelperManager, 

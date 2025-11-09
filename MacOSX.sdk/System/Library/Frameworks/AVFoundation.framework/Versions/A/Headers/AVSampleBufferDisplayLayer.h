@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2020 Apple Inc. All rights reserved.
+	Copyright 2011-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -35,10 +35,6 @@ AVF_EXPORT NSNotificationName const AVSampleBufferDisplayLayerOutputObscuredDueT
 
 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 @interface AVSampleBufferDisplayLayer : CALayer
-{
-@private
-	AVSampleBufferDisplayLayerInternal		*_sampleBufferDisplayLayerInternal;
-}
 
 /*!
 	@property		controlTimebase
@@ -52,7 +48,7 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 					If a non-NULL control timebase is set, it will be used to interpret time stamps.
 					You can control the timing of frame display by setting the rate and time of the
 					control timebase.  
-					If you are synchronizing video to audio, you can use a timebase whose master clock
+					If you are synchronizing video to audio, you can use a timebase whose source clock
 					is a CMAudioDeviceClock for the appropriate audio device to prevent drift.
 					
 					Note that prior to OSX 10.10 and iOS 8.0, the control timebase could not be changed after enqueueSampleBuffer: was called.  As of OSX 10.10 and iOS 8.0, the control timebase may be changed at any time.
@@ -215,7 +211,7 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
  @property   preventsDisplaySleepDuringVideoPlayback
  @abstract   Indicates whether video playback prevents display and device sleep.
  @discussion
- Default is YES on iOS.  Default is NO on macOS.
+ Default is YES on iOS, tvOS and in Mac Catalyst apps.  Default is NO on macOS.
  Setting this property to NO does not force the display to sleep, it simply stops preventing display sleep.  Other apps or frameworks within your app may still be preventing display sleep for various reasons.
  Note: If sample buffers are being enqueued for playback at the user's request, you should ensure that the value of this property is set to YES. If video is not being displayed as part of the user's primary focus, you should ensure that the value of this property is set to NO.
  */
@@ -243,7 +239,7 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 	 be externally specified. If the content does not require external protection, the value of this
 	 property will be NO.
  */
-@property (nonatomic, readonly) BOOL outputObscuredDueToInsufficientExternalProtection API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4));
+@property (nonatomic, readonly) BOOL outputObscuredDueToInsufficientExternalProtection API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5)) API_UNAVAILABLE(watchos);
 @end
 
 NS_ASSUME_NONNULL_END

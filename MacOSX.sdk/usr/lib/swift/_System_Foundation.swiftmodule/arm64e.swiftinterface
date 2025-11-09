@@ -1,15 +1,16 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target arm64e-apple-macos11.3 -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem_Foundation -swift-version 5 -enforce-exclusivity=checked -O -module-name _System_Foundation
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target arm64e-apple-macos12.0 -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem_Foundation -swift-version 5 -enforce-exclusivity=checked -O -module-name _System_Foundation
 import Foundation
 import Swift
 @_exported import System
+import _Concurrency
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension URL {
+extension Foundation.URL {
   public init?(_ path: System.FilePath)
   public init?(_ path: System.FilePath, isDirectory: Swift.Bool)
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension FilePath {
+extension System.FilePath {
   public init?(_ url: Foundation.URL)
 }

@@ -12,6 +12,7 @@
 
 #import <AVKit/AVKitDefines.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 #if TARGET_OS_IPHONE
@@ -21,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSImage;
 #endif // TARGET_OS_IPHONE
 
+@class AVPictureInPictureControllerContentSource;
 @protocol AVPictureInPictureControllerDelegate;
 
 /*!
@@ -81,12 +83,26 @@ API_AVAILABLE(ios(9.0), macos(10.15), tvos(14.0)) API_UNAVAILABLE(watchos)
 #endif // TARGET_OS_IPHONE
 
 /*!
- @method		initWithPlayerLayer:
- @param			playerLayer
- 				The player layer from which to source the media content for the Picture in Picture controller.
- @abstract		Designated initializer.
+	@method     initWithContentSource:
+	@param      contentSource
+				The content source to be shown in Picture in Picture.
+	@abstract   Use this initializer for content that may be a sample buffer display layer or a player layer.
  */
-- (nullable instancetype)initWithPlayerLayer:(AVPlayerLayer *)playerLayer NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithContentSource:(AVPictureInPictureControllerContentSource *)contentSource API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0)) API_UNAVAILABLE(watchos) NS_DESIGNATED_INITIALIZER;
+
+/*!
+	@method		initWithPlayerLayer:
+	@param		playerLayer
+				The player layer from which to source the media content for the Picture in Picture controller.
+	@abstract	Initialize the picture in picture controller with a player layer.
+ */
+- (nullable instancetype)initWithPlayerLayer:(AVPlayerLayer *)playerLayer;
+
+/*!
+	@property   contentSource
+	@abstract   The receiver's content source. Can be changed while Picture in Picture is active, but the new content source must be ready for display (in the case of AVPlayerLayer, that means AVPlayerLayer.isReadyForDisplay must return YES), otherwise Picture in Picture will stop.
+ */
+@property (nonatomic, strong, nullable) AVPictureInPictureControllerContentSource *contentSource API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@property	playerLayer
@@ -145,6 +161,42 @@ API_AVAILABLE(ios(9.0), macos(10.15), tvos(14.0)) API_UNAVAILABLE(watchos)
 	@discussion	This can be used to temporarily enforce playback of mandatory content (such as legalese or advertisements).
  */
 @property (nonatomic) BOOL requiresLinearPlayback API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+
+/*!
+	@property    canStartPictureInPictureAutomaticallyFromInline
+	@abstract    Indicates whether Picture in Picture should be allowed to start automatically when transitioning to background when the receiver’s content is embedded inline. Default is NO.
+	@discussion  This property must only be set to YES for content intended to be the user's primary focus.
+ */
+@property (nonatomic) BOOL canStartPictureInPictureAutomaticallyFromInline API_AVAILABLE(ios(14.2)) API_UNAVAILABLE(watchos, tvos, macos);
+
+@end
+
+
+/*!
+	@class      AVPictureInPictureControllerContentSource
+	@abstract   A content source for AVPictureInPictureController.
+	@discussion Create a content source with an appropriate layer, and use it to initialize the AVPictureInPictureController.
+ */
+API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0)) API_UNAVAILABLE(watchos)
+NS_SWIFT_NAME(AVPictureInPictureController.ContentSource)
+@interface AVPictureInPictureControllerContentSource : NSObject
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+/*!
+	@method     initWithPlayerLayer:
+	@param      playerLayer
+				The player layer to be shown in Picture in Picture.
+	@abstract   Use this initializer for a content source with a player layer.
+*/
+- (instancetype)initWithPlayerLayer:(AVPlayerLayer *)playerLayer;
+
+/*!
+	@property   playerLayer
+	@abstract   The receiver's player layer.
+*/
+@property (nonatomic, nullable, readonly) AVPlayerLayer *playerLayer;
 
 @end
 

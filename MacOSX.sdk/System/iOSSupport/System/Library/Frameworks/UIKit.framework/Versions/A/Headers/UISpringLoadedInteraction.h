@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, UISpringLoadedInteractionEffectState) {
 
 @protocol UISpringLoadedInteractionBehavior, UISpringLoadedInteractionEffect, UISpringLoadedInteractionContext;
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UISpringLoadedInteraction : NSObject <UIInteraction>
 
 + (instancetype)new NS_UNAVAILABLE;
@@ -64,7 +64,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 /**
  The interaction behavior of a `UISpringLoadedInteraction` object must adopt the `UISpringLoadedInteractionBehavior` protocol.
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UISpringLoadedInteractionBehavior <NSObject>
 
 @required
@@ -92,7 +92,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
  The interaction effect of a `UISpringLoadedInteraction` object must adopt the `UISpringLoadedInteractionEffect` protocol.
  It is responsible for styling the interaction view according to the current springloading state.
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UISpringLoadedInteractionEffect <NSObject>
 
 @required
@@ -111,7 +111,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
 /**
  UISpringLoadedContext supplies information about the springloading state and current drag.
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UISpringLoadedInteractionContext <NSObject>
 
 /**

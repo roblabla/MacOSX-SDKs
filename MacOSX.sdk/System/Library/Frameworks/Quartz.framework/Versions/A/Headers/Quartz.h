@@ -8,4 +8,4 @@
 #import <QuartzFilters/QuartzFilters.h>
 #import <Quartz/PDFKit.h>
 #import <ImageKit/ImageKit.h>
-#import <QuickLookUI/QuickLookUI.h>
+#import <Quartz/QuickLookUI.h>

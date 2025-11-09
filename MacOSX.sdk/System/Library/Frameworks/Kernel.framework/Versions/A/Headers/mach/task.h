@@ -49,9 +49,10 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	task_MSG_COUNT
-#define	task_MSG_COUNT	61
+#define	task_MSG_COUNT	63
 #endif	/* task_MSG_COUNT */
 
+#include <Availability.h>
 #include <mach/std_types.h>
 #include <mach/mig.h>
 #include <mach/mig.h>
@@ -880,6 +881,30 @@ kern_return_t task_get_exception_ports_info
 	exception_flavor_array_t old_flavors
 );
 
+/* Routine task_test_sync_upcall */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t task_test_sync_upcall
+(
+	task_t task,
+	mach_port_t port
+);
+
+/* Routine task_set_corpse_forking_behavior */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t task_set_corpse_forking_behavior
+(
+	task_t task,
+	task_corpse_forking_behavior_t behavior
+);
+
 __END_DECLS
 
 /********************** Caution **************************/
@@ -1688,6 +1713,32 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t port;
+		/* end of the kernel processed data */
+	} __Request__task_test_sync_upcall_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		task_corpse_forking_behavior_t behavior;
+	} __Request__task_set_corpse_forking_behavior_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Request__task_subsystem__defined */
 
 /* union of all requests */
@@ -1756,6 +1807,8 @@ union __RequestUnion__task_subsystem {
 	__Request__task_identity_token_get_task_port_t Request_task_identity_token_get_task_port;
 	__Request__task_dyld_process_info_notify_deregister_t Request_task_dyld_process_info_notify_deregister;
 	__Request__task_get_exception_ports_info_t Request_task_get_exception_ports_info;
+	__Request__task_test_sync_upcall_t Request_task_test_sync_upcall;
+	__Request__task_set_corpse_forking_behavior_t Request_task_set_corpse_forking_behavior;
 };
 #endif /* !__RequestUnion__task_subsystem__defined */
 /* typedefs for all replies */
@@ -2582,6 +2635,30 @@ union __RequestUnion__task_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__task_test_sync_upcall_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__task_set_corpse_forking_behavior_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Reply__task_subsystem__defined */
 
 /* union of all replies */
@@ -2650,6 +2727,8 @@ union __ReplyUnion__task_subsystem {
 	__Reply__task_identity_token_get_task_port_t Reply_task_identity_token_get_task_port;
 	__Reply__task_dyld_process_info_notify_deregister_t Reply_task_dyld_process_info_notify_deregister;
 	__Reply__task_get_exception_ports_info_t Reply_task_get_exception_ports_info;
+	__Reply__task_test_sync_upcall_t Reply_task_test_sync_upcall;
+	__Reply__task_set_corpse_forking_behavior_t Reply_task_set_corpse_forking_behavior;
 };
 #endif /* !__RequestUnion__task_subsystem__defined */
 
@@ -2715,7 +2794,9 @@ union __ReplyUnion__task_subsystem {
     { "task_create_identity_token", 3457 },\
     { "task_identity_token_get_task_port", 3458 },\
     { "task_dyld_process_info_notify_deregister", 3459 },\
-    { "task_get_exception_ports_info", 3460 }
+    { "task_get_exception_ports_info", 3460 },\
+    { "task_test_sync_upcall", 3461 },\
+    { "task_set_corpse_forking_behavior", 3462 }
 #endif
 
 #ifdef __AfterMigUserHeader

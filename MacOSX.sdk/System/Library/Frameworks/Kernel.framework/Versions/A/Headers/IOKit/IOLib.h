@@ -63,6 +63,24 @@ __BEGIN_DECLS
 #define max(a, b) ((a) > (b) ? (a) : (b))
 
 /*
+ * Safe functions to compute array sizes (saturate to a size that can't be
+ * allocated ever and will cause the allocation to return NULL always).
+ */
+
+static inline vm_size_t
+IOMallocArraySize(vm_size_t hdr_size, vm_size_t elem_size, vm_size_t elem_count)
+{
+	/* IOMalloc() will reject this size before even asking the VM  */
+	const vm_size_t limit = 1ull << (8 * sizeof(vm_size_t) - 1);
+	vm_size_t s = hdr_size;
+
+	if (os_mul_and_add_overflow(elem_size, elem_count, s, &s) || (s & limit)) {
+		return limit;
+	}
+	return s;
+}
+
+/*
  * These are opaque to the user.
  */
 typedef thread_t IOThread;
@@ -91,6 +109,7 @@ void * IOMallocZero(vm_size_t size)  __attribute__((alloc_size(1)));
  *   @param size Size of the memory allocated. Must be identical to size of
  *   @the corresponding IOMalloc */
 
+
 void   IOFree(void * address, vm_size_t size);
 
 /*! @function IOMallocAligned
@@ -109,6 +128,7 @@ void * IOMallocAligned(vm_size_t size, vm_offset_t alignment) __attribute__((all
  *   @discussion This function frees memory allocated with IOMallocAligned, it may block and so should not be called from interrupt level or while a simple lock is held.
  *   @param address Pointer to the allocated memory.
  *   @param size Size of the memory allocated. */
+
 
 void   IOFreeAligned(void * address, vm_size_t size);
 
@@ -158,41 +178,63 @@ void * IOMallocPageableZero(vm_size_t size, vm_size_t alignment) __attribute__((
 
 void IOFreePageable(void * address, vm_size_t size);
 
+
 /*
- * Typed memory allocation macros. All may block.
+ * IONew/IONewZero/IODelete/IOSafeDeleteNULL
+ *
+ * Those functions come in 2 variants:
+ *
+ * 1. IONew(element_type, count)
+ *    IONewZero(element_type, count)
+ *    IODelete(ptr, element_type, count)
+ *    IOSafeDeleteNULL(ptr, element_type, count)
+ *
+ *    Those allocate/free arrays of `count` elements of type `element_type`.
+ *
+ * 2. IONew(hdr_type, element_type, count)
+ *    IONewZero(hdr_type, element_type, count)
+ *    IODelete(ptr, hdr_type, element_type, count)
+ *    IOSafeDeleteNULL(ptr, hdr_type, element_type, count)
+ *
+ *    Those allocate/free arrays with `count` elements of type `element_type`,
+ *    prefixed with a header of type `hdr_type`, like this:
+ *
+ * Those perform safe math with the sizes, checking for overflow.
+ * An overflow in the sizes will cause the allocation to return NULL.
  */
+#define IONew(...)             __IOKIT_DISPATCH(IONew, ##__VA_ARGS__)
+#define IONewZero(...)         __IOKIT_DISPATCH(IONewZero, ##__VA_ARGS__)
+#define IODelete(...)          __IOKIT_DISPATCH(IODelete, ##__VA_ARGS__)
+#define IOSafeDeleteNULL(...)  __IOKIT_DISPATCH(IOSafeDeleteNULL, ##__VA_ARGS__)
 
-#define IONew(type, count)                              \
-({                                                      \
-    size_t __size;                                      \
-    (os_mul_overflow(sizeof(type), (count), &__size)    \
-    ? ((type *) NULL)                                   \
-    : ((type *) IOMalloc(__size)));                     \
+
+#define IONew_2(e_ty, count) \
+	((e_ty *)IOMalloc(IOMallocArraySize(0, sizeof(e_ty), count)))
+
+#define IONew_3(h_ty, e_ty, count) \
+	((h_ty *)IOMalloc(IOMallocArraySize(sizeof(h_ty), sizeof(e_ty), count)))
+
+#define IONewZero_2(e_ty, count) \
+	((e_ty *)IOMallocZero(IOMallocArraySize(0, sizeof(e_ty), count)))
+
+#define IONewZero_3(h_ty, e_ty, count) \
+	((h_ty *)IOMallocZero(IOMallocArraySize(sizeof(h_ty), sizeof(e_ty), count)))
+
+#define IODelete_3(ptr, e_ty, count) \
+	IOFree(ptr, IOMallocArraySize(0, sizeof(e_ty), count))
+
+#define IODelete_4(ptr, h_ty, e_ty, count) \
+	IOFree(ptr, IOMallocArraySize(sizeof(h_ty), sizeof(e_ty), count))
+
+#define IOSafeDeleteNULL_3(ptr, e_ty, count)  ({                               \
+	vm_size_t __s = IOMallocArraySize(0, sizeof(e_ty), count);             \
+	IOFree(__iokit_ptr_load_and_erase(ptr), __s);                          \
 })
 
-#define IONewZero(type, count)                          \
-({                                                      \
-    size_t __size;                                      \
-    (os_mul_overflow(sizeof(type), (count), &__size)    \
-    ? ((type *) NULL)                                   \
-    : ((type *) IOMallocZero(__size)));                 \
+#define IOSafeDeleteNULL_4(ptr, h_ty, e_ty, count)  ({                         \
+	vm_size_t __s = IOMallocArraySize(sizeof(h_ty), sizeof(e_ty), count)); \
+	IOFree(__iokit_ptr_load_and_erase(ptr), __s);                          \
 })
-
-#define IODelete(ptr, type, count)                          \
-({                                                          \
-    size_t __size;                                          \
-    if (!os_mul_overflow(sizeof(type), (count), &__size)) { \
-	IOFree(ptr, __size);                                \
-    }                                                       \
-})
-
-#define IOSafeDeleteNULL(ptr, type, count)              \
-    do {                                                \
-	if (NULL != (ptr)) {                            \
-	    IODelete((ptr), type, count);               \
-	    (ptr) = NULL;                               \
-	}                                               \
-    } while (0)                                         \
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -456,6 +498,26 @@ extern mach_timespec_t IOZeroTvalspec;
 #endif /* !defined(__LP64__) */
 
 #endif /* __APPLE_API_OBSOLETE */
+
+
+/*
+ * Implementation details
+ */
+#define __IOKIT_COUNT_ARGS1(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, N, ...) N
+#define __IOKIT_COUNT_ARGS(...) \
+	__IOKIT_COUNT_ARGS1(, ##__VA_ARGS__, _9, _8, _7, _6, _5, _4, _3, _2, _1, _0)
+#define __IOKIT_DISPATCH1(base, N, ...) __CONCAT(base, N)(__VA_ARGS__)
+#define __IOKIT_DISPATCH(base, ...) \
+	__IOKIT_DISPATCH1(base, __IOKIT_COUNT_ARGS(__VA_ARGS__), ##__VA_ARGS__)
+
+#define __iokit_ptr_load_and_erase(elem) ({             \
+	_Static_assert(sizeof(elem) == sizeof(void *),  \
+	    "elem isn't pointer sized");                \
+	__auto_type __eptr = &(elem);                   \
+	__auto_type __elem = *__eptr;                   \
+	*__eptr = (__typeof__(__elem))NULL;             \
+	__elem;                                         \
+})
 
 
 __END_DECLS

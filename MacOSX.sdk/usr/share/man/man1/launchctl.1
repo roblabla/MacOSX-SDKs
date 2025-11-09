@@ -425,11 +425,6 @@ on-disk. Apps like Finder, Dock and SystemUIServer will be unaffected. Apps are
 terminated in the same manner as the
 .Ar logout
 argument, and all the same caveats apply.
-.Bl -tag -width -indent
-.It Fl s
-When rebooting the machine (either a full reboot or userspace reboot), brings
-the subsequent boot session up in single-user mode.
-.El
 .It Xo Ar error Ar [posix|mach|bootstrap] Ar code
 .Xc
 Prints a human-readable string of the given error
@@ -456,16 +451,17 @@ Prints the
 version string.
 .El
 .Sh LEGACY SUBCOMMANDS
-Subcommands from the previous implementation of 
-.Nm launchd
-are generally available, though some may be unimplemented. Unimplemented
-subcommands are documented as such.
+Legacy subcommands select the target domain based on whether they are executed
+as root or not. When executed as root, they target the system domain.
 .Bl -tag -width -indent
 .It Xo Ar load | unload Op Fl wF
 .Op Fl S Ar sessiontype
 .Op Fl D Ar searchpath
 .Ar paths ...
 .Xc
+Recommended alternative subcommands:
+.Ar bootstrap | bootout | enable | disable
+.Pp
 Load the specified configuration files or directories of configuration files.
 Jobs that are not on-demand will be started as soon as possible. All specified 
 jobs will be loaded before any of them are allowed to start. Note that per-user 
@@ -565,6 +561,9 @@ restart the job if launchd finds any criteria that is satisfied.
 .Op Ar -x 
 .Op Ar label
 .Xc
+Recommended alternative subcommand:
+.Ar print
+.Pp
 With no arguments, list all of the jobs loaded into
 .Nm launchd
 in three columns. The first column displays the PID of the job if it is running.

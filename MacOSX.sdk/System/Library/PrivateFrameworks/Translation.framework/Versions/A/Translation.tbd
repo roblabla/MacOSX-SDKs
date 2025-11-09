@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           907226BA-ADA4-3222-82C4-CACC2905DD0B
+    value:           A3F4791F-2779-3E59-9412-60A39BFB98EF
   - target:          x86_64-maccatalyst
-    value:           907226BA-ADA4-3222-82C4-CACC2905DD0B
+    value:           A3F4791F-2779-3E59-9412-60A39BFB98EF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5E70C7B0-912A-3721-BC56-2A41EB5454E3
+    value:           AE3845D6-2139-3C48-9F92-7F8C31021185
   - target:          arm64e-maccatalyst
-    value:           5E70C7B0-912A-3721-BC56-2A41EB5454E3
+    value:           AE3845D6-2139-3C48-9F92-7F8C31021185
 install-name:    '/System/Library/PrivateFrameworks/Translation.framework/Versions/A/Translation'
-current-version: 128.9
+current-version: 173.3
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -35,8 +35,9 @@ exports:
                        _LTSpeechTranscription, _LTSpeechTranslationRequest, _LTTextLanguageDetectionResult, 
                        _LTTextLanguageDetector, _LTTextToSpeechTranslationRequest, 
                        _LTTextTranslationRequest, _LTTranslationCandidate, _LTTranslationContext, 
-                       _LTTranslationFeedback, _LTTranslationRange, _LTTranslationRequest, 
-                       _LTTranslationResult, _LTTranslationSense, _LTTranslationSensesLoggingRequest, 
-                       _LTTranslationSession, _LTTranslationSpan, _LTTranslationStatistics, 
-                       _LTTranslationToken, _LTTranslator ]
+                       _LTTranslationFeedback, _LTTranslationParagraph, _LTTranslationRange, 
+                       _LTTranslationRequest, _LTTranslationResult, _LTTranslationSense, 
+                       _LTTranslationSensesLoggingRequest, _LTTranslationSession, 
+                       _LTTranslationSpan, _LTTranslationStatistics, _LTTranslationToken, 
+                       _LTTranslator ]
 ...

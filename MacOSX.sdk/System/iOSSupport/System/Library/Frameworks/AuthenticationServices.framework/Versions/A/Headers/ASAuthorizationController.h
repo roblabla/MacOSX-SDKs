@@ -6,6 +6,7 @@
 //
 
 #import <AuthenticationServices/ASFoundation.h>
+#import <AuthenticationServices/ASAuthorizationCustomMethod.h>
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,6 +22,7 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0))
 - (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization NS_SWIFT_NAME(authorizationController(controller:didCompleteWithAuthorization:));
 - (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error  NS_SWIFT_NAME(authorizationController(controller:didCompleteWithError:));
 
+- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithCustomMethod:(ASAuthorizationCustomMethod)method  NS_SWIFT_NAME(authorizationController(_:didCompleteWithCustomMethod:)) API_AVAILABLE(tvos(15.0)) API_UNAVAILABLE(ios, macos, watchos);
 @end
 
 AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos)
@@ -51,6 +53,14 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0))
 /*! @abstract This delegate will be invoked upon needing a presentation context to display authorization UI.
  */
 @property (nonatomic, weak, nullable) id <ASAuthorizationControllerPresentationContextProviding> presentationContextProvider API_UNAVAILABLE(watchos);
+
+/*! @abstract A list of custom authorization methods that may be displayed in the authorization UI.
+
+ If the user selects one of these methods, instead of attempting to secure an authorization for the requests, the
+ controller will call authorizationController:didCompleteWithCustomMethod: with the selected method, allowing
+ the client to perform the requested authorization.
+ */
+@property (nonatomic, copy) NSArray<ASAuthorizationCustomMethod> *customAuthorizationMethods API_AVAILABLE(tvos(15.0)) API_UNAVAILABLE(ios, macos, watchos);
 
 /*! @abstract Initialize the controller with authorization requests.
  

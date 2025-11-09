@@ -1,4 +1,3 @@
-// LOCKED FILE: af3697b50d26542e15dcc1a739c08cf9
 //
 //  HKClinicalRecord.h
 //  HealthKit
@@ -43,6 +42,9 @@ __WATCHOS_PROHIBITED
  @abstract     The FHIR resource (where applicable) backing this sample.
  */
 @property (copy, readonly, nullable) HKFHIRResource *FHIRResource;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @end
 

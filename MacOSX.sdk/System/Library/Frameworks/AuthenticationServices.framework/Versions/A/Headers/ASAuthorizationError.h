@@ -18,6 +18,7 @@ typedef NS_ERROR_ENUM(ASAuthorizationErrorDomain, ASAuthorizationError) {
     ASAuthorizationErrorInvalidResponse = 1002,
     ASAuthorizationErrorNotHandled = 1003,
     ASAuthorizationErrorFailed = 1004,
+    ASAuthorizationErrorNotInteractive API_AVAILABLE(ios(15.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos) = 1005,
 } API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0));
 
 NS_ASSUME_NONNULL_END

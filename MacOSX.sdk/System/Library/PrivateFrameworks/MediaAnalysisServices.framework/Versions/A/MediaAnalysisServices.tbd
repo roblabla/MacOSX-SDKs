@@ -1,0 +1,24 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           C7D298FA-C9FF-324E-8AEF-DC0622AEDA82
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           0B11E0CE-E861-312B-AAF2-EF5A311EBE72
+install-name:    '/System/Library/PrivateFrameworks/MediaAnalysisServices.framework/Versions/A/MediaAnalysisServices'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _MADSignpostLog, _MediaAnalysisServicesVersionNumber, _MediaAnalysisServicesVersionString ]
+    objc-classes:    [ MADEmbeddingGenerationRequest, MADEmbeddingGenerationResult, 
+                       MADImageSafetyClassificationRequest, MADImageSafetyClassificationResult, 
+                       MADRequest, MADResult, MADService, MADServicePrivate, MADServiceProxy, 
+                       MADServicePublic, MADVIDocumentRecognitionRequest, MADVIDocumentRecognitionResult, 
+                       MADVIMachineReadableCodeDetectionRequest, MADVIMachineReadableCodeDetectionResult, 
+                       MADVIMachineReadableCodeDetectionResultItem, MADVIVisualSearchGatingDomainInfo, 
+                       MADVIVisualSearchGatingRequest, MADVIVisualSearchGatingResult, 
+                       MADVIVisualSearchGatingResultItem, MADVIVisualSearchRegionAttributes, 
+                       MADVIVisualSearchRequest, MADVIVisualSearchResult, MADVIVisualSearchResultItem ]
+...

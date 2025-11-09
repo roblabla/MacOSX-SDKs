@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D685E5E7-0E04-3F3B-85AC-9C18E0013A05
+    value:           6C04CA8E-18BD-3D02-904D-59DF64843CE6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           74EDC0BD-3208-31B3-B0C8-BC6EEE415EBC
+    value:           3897C938-CBAE-3595-B962-8CA77DE49C2A
 install-name:    '/System/Library/PrivateFrameworks/SystemPolicy.framework/Versions/A/SystemPolicy'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -16,17 +16,18 @@ exports:
                        _calculateTotalPathSize, _checkBOOLSetting, _checkPathQuarantineState, 
                        _checkURLQuarantineState, _copyAdhocSignatureHash, _copyBootUUID, 
                        _copyBundleID, _copyBundleIDFromURL, _copyBundleVersion, _copyBundleVersionShort, 
-                       _copyCdhash, _copyCdhashFromKextURL, _copyCodeSigningInfo, 
-                       _copyDeveloperName, _copyEntitlements, _copyLegacyCdhash, 
-                       _copyLegacyDeveloperName, _copySecureTimestamp, _copyShippedThirdPartyKernelExtensions, 
-                       _copySigningID, _copyTeamIdentifier, _copyTeamIdentifierFromCertificates, 
-                       _copyTeamIdentifierFromSigningInformation, _copyUnstagedURL, 
-                       _createCodeReference, _createHexStringFromData, _createSecStaticCodeForURL, 
-                       _createSystemPolicyDefaults, _createURLWithoutPrefix, _doBooleanXPCFunction, 
-                       _doBooleanXPCFunctionSilent, _doObjectXPCFunction, _fileExists, 
-                       _fileIsSymlink, _findContainingBundle, _findFirstSubdirectoryURL, 
-                       _findOuterMostBundleWithFilter, _findScanTargetByPath, _findTopAppBundle, 
-                       _findTopBundle, _getDictionaryValue, _hasCodeRequirementString, 
+                       _copyBundleVersionShortFromURL, _copyCdhash, _copyCdhashFromKextURL, 
+                       _copyCodeSigningInfo, _copyDeveloperName, _copyEntitlements, 
+                       _copyLegacyCdhash, _copyLegacyDeveloperName, _copySecureTimestamp, 
+                       _copyShippedThirdPartyKernelExtensions, _copySigningID, _copyTeamIdentifier, 
+                       _copyTeamIdentifierFromCertificates, _copyTeamIdentifierFromSigningInformation, 
+                       _copyUnstagedURL, _createCodeReference, _createCodeReferenceQuiet, 
+                       _createHexStringFromData, _createSecStaticCodeForURL, _createSystemPolicyDefaults, 
+                       _createURLWithoutPrefix, _doBooleanXPCFunction, _doBooleanXPCFunctionSilent, 
+                       _doObjectXPCFunction, _fileExists, _fileIsSymlink, _findContainingBundle, 
+                       _findFirstSubdirectoryURL, _findOuterMostBundle, _findOuterMostBundleWithFilter, 
+                       _findScanTargetByPath, _findTopAppBundle, _findTopBundle, 
+                       _getDictionaryValue, _getVolumePrefix, _hasCodeRequirementString, 
                        _historyEntriesContainPolicyMatch, _historyEntryMatchesPolicyEntry, 
                        _isAdhocSignature, _isAppleInternalMachine, _isAppleSignedCode, 
                        _isCodelessKext, _isConnectionEntitled, _isDeveloperIDKextSignedCode, 
@@ -38,7 +39,7 @@ exports:
                        _opaqueSignCode, _scanForBundledKernelExtensions, _scanForBundles, 
                        _scanForKernelExtensions, _shouldFilterOutScanTarget, _systemUptime, 
                        _urlLooksLikeBundle ]
-    objc-classes:    [ AKELData, AppWrapper, AppWrapperPolicy, AppWrapperPolicyResult, 
+    objc-classes:    [ AKELData, AMFI, AppWrapper, AppWrapperPolicy, AppWrapperPolicyResult, 
                        BundleData, GKScanResult, MIS, PolicyCacheMeta, PolicyScanTarget, 
                        SPDeveloperPolicy, SPExecutionHistoryItem, SPExecutionPolicy, 
                        SPExecutionPolicyItem, SPFilePolicy, SPInstallationPolicy, 

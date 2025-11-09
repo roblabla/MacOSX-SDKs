@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-__API_AVAILABLE(macos(10.14), ios(10.0), watchos(6.0)) __API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.14), ios(10.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface UNNotificationServiceExtension : NSObject
 
 // Call contentHandler with the modified notification content to deliver. If the handler is not called before the service's time expires then the unmodified notification will be delivered.

@@ -70,6 +70,12 @@
 
 #include <sys/appleapiopts.h>
 #include <sys/cdefs.h>
+#include <sys/socket.h>
+#include <sys/mount.h>
+
+
+#include <nfs/rpcv2.h>
+#include <nfs/nfsproto.h>
 
 #ifdef __APPLE_API_PRIVATE
 /*
@@ -116,6 +122,10 @@ extern int nfs_ticks;
 /* default values for unresponsive mount timeouts */
 #define NFS_TPRINTF_INITIAL_DELAY       5
 #define NFS_TPRINTF_DELAY               30
+
+/* NFS client mount timeouts */
+#define NFS_MOUNT_TIMEOUT               30
+#define NFS_MOUNT_QUICK_TIMEOUT         8
 
 /*
  * Oddballs
@@ -500,7 +510,7 @@ struct nfs_user_stat_path_rec {
 /*
  * Stats structure
  */
-struct nfsstats {
+struct nfsclntstats {
 	uint64_t        attrcache_hits;
 	uint64_t        attrcache_misses;
 	uint64_t        lookupcache_hits;
@@ -517,31 +527,41 @@ struct nfsstats {
 	uint64_t        readlink_bios;
 	uint64_t        biocache_readdirs;
 	uint64_t        readdir_bios;
-	uint64_t        rpccnt[NFS_NPROCS];
+	uint64_t        rpccntv3[NFS_NPROCS];
+	uint64_t        opcntv4[NFS_OP_COUNT];
 	uint64_t        rpcretries;
-	uint64_t        srvrpccnt[NFS_NPROCS];
-	uint64_t        srvrpc_errs;
-	uint64_t        srv_errs;
 	uint64_t        rpcrequests;
 	uint64_t        rpctimeouts;
 	uint64_t        rpcunexpected;
 	uint64_t        rpcinvalid;
+	uint64_t        pageins;
+	uint64_t        pageouts;
+};
+
+struct nfsrvstats {
+	uint64_t        srvrpccntv3[NFS_NPROCS];
+	uint64_t        srvrpc_errs;
+	uint64_t        srv_errs;
 	uint64_t        srvcache_inproghits;
 	uint64_t        srvcache_idemdonehits;
 	uint64_t        srvcache_nonidemdonehits;
 	uint64_t        srvcache_misses;
 	uint64_t        srvvop_writes;
-	uint64_t        pageins;
-	uint64_t        pageouts;
 };
+
 #endif
 
 /*
  * Flags for nfssvc() system call.
  */
-#define NFSSVC_NFSD     0x004
-#define NFSSVC_ADDSOCK  0x008
-#define NFSSVC_EXPORT   0x200
+#define NFSSVC_NFSD             0x004
+#define NFSSVC_ADDSOCK          0x008
+#define NFSSVC_EXPORTSTATS      0x010    /* gets exported directory stats */
+#define NFSSVC_USERSTATS        0x020    /* gets exported directory active user stats */
+#define NFSSVC_USERCOUNT        0x040    /* gets current count of active nfs users */
+#define NFSSVC_ZEROSTATS        0x080    /* zero nfs server statistics */
+#define NFSSVC_SRVSTATS         0x100    /* struct: struct nfsrvstats */
+#define NFSSVC_EXPORT           0x200
 
 /*
  * Flags for nfsclnt() system call.
@@ -549,6 +569,9 @@ struct nfsstats {
 #define NFSCLNT_LOCKDANS        0x200
 #define NFSCLNT_LOCKDNOTIFY     0x400
 #define NFSCLNT_TESTIDMAP       0x001
+
+/* nfsclnt() system call character device */
+#define NFSCLNT_DEVICE         "nfsclnt"
 
 #include <sys/_types/_guid_t.h> /* for guid_t below */
 #define MAXIDNAMELEN            1024
@@ -569,12 +592,9 @@ struct nfs_testmapid {
 /*
  * fs.nfs sysctl(3) identifiers
  */
-#define NFS_NFSSTATS        1       /* struct: struct nfsstats */
-#define NFS_EXPORTSTATS     3       /* gets exported directory stats */
-#define NFS_USERSTATS       4       /* gets exported directory active user stats */
-#define NFS_USERCOUNT       5       /* gets current count of active nfs users */
+#define NFS_NFSSTATS        1       /* struct: struct nfsclntstats */
 #define NFS_MOUNTINFO       6       /* gets information about an NFS mount */
-#define NFS_NFSZEROSTATS    7       /* zero nfs statistics */
+#define NFS_NFSZEROSTATS    7       /* zero nfs client statistics */
 
 #ifndef NFS_WDELAYHASHSIZ
 #define NFS_WDELAYHASHSIZ 16    /* and with this */

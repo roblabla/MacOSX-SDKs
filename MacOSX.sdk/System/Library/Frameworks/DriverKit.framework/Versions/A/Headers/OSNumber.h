@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from OSNumber.iig */
+/* iig(DriverKit-191) generated from OSNumber.iig */
 
 /* OSNumber.iig:1-36 */
 /*
@@ -252,12 +252,21 @@ class OSNumber : public OSContainer, public OSNumberInterface
 
 #if !KERNEL
 public:
+#ifdef OSNumber_DECLARE_IVARS
+OSNumber_DECLARE_IVARS
+#else /* OSNumber_DECLARE_IVARS */
     union
     {
         OSNumber_IVars * ivars;
         OSNumber_LocalIVars * lvars;
     };
+#endif /* OSNumber_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gOSNumberMetaClass; };
+#endif /* KERNEL */
 
     using super = OSContainer;
 

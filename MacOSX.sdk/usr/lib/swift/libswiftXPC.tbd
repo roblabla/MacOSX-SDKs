@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1E0443B5-E820-317B-90C6-509B87165A40
+    value:           1E50D6EA-C353-3B6D-89C5-3C76813B6795
   - target:          x86_64-maccatalyst
-    value:           1E0443B5-E820-317B-90C6-509B87165A40
+    value:           1E50D6EA-C353-3B6D-89C5-3C76813B6795
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           64B8F67F-FA4B-33BC-8139-0DD537D86579
+    value:           81FFC29D-C0EE-35D4-A861-09363582A2D7
   - target:          arm64e-maccatalyst
-    value:           64B8F67F-FA4B-33BC-8139-0DD537D86579
+    value:           81FFC29D-C0EE-35D4-A861-09363582A2D7
 install-name:    '/usr/lib/swift/libswiftXPC.dylib'
 current-version: 1.1
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftXPC.dylib', '$ld$install_name$os10.11$@rpath/libswiftXPC.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftXPC.dylib', '$ld$install_name$os10.13$@rpath/libswiftXPC.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftXPC.dylib', '$ld$install_name$os10.9$@rpath/libswiftXPC.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s3XPC0A10_BOOL_TRUESo13OS_xpc_object_pvg', '_$s3XPC0A10_TYPE_BOOLs13OpaquePointerVvg', 
                        '_$s3XPC0A10_TYPE_DATAs13OpaquePointerVvg', '_$s3XPC0A10_TYPE_DATEs13OpaquePointerVvg', 
                        '_$s3XPC0A10_TYPE_NULLs13OpaquePointerVvg', '_$s3XPC0A10_TYPE_UUIDs13OpaquePointerVvg', 

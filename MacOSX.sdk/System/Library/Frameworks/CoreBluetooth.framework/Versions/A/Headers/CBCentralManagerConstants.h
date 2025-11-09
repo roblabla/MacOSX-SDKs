@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define CB_CM_API_AVAILABLE		API_AVAILABLE( ios( 13.0 ), tvos( 13.0 ), watchos( 6.0 ) ) API_UNAVAILABLE(macos)
+
 /*!
  *  @const  CBCentralManagerOptionShowPowerAlertKey
  *
@@ -180,7 +182,7 @@ typedef NSString * CBConnectionEventMatchingOption NS_TYPED_ENUM;
  *	@seealso	registerForConnectionEventsWithOptions:
  *
  */
-CB_EXTERN CBConnectionEventMatchingOption const CBConnectionEventMatchingOptionServiceUUIDs NS_AVAILABLE_IOS(13_0);
+CB_EXTERN CBConnectionEventMatchingOption const CBConnectionEventMatchingOptionServiceUUIDs CB_CM_API_AVAILABLE;
 
 /*!
  *  @const  CBConnectionEventMatchingOptionPeripheralUUIDs
@@ -192,6 +194,6 @@ CB_EXTERN CBConnectionEventMatchingOption const CBConnectionEventMatchingOptionS
  *	@seealso	registerForConnectionEventsWithOptions:
  *
  */
-CB_EXTERN CBConnectionEventMatchingOption const CBConnectionEventMatchingOptionPeripheralUUIDs NS_AVAILABLE_IOS(13_0);
+CB_EXTERN CBConnectionEventMatchingOption const CBConnectionEventMatchingOptionPeripheralUUIDs CB_CM_API_AVAILABLE;
 
 NS_ASSUME_NONNULL_END

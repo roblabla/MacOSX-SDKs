@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           79494B7C-E45E-3F99-9AFC-439430BB09BF
+    value:           C3D98B98-1A83-3B95-AB52-14328AF069E5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3948E78A-C370-38F3-A3EC-257F810474C1
+    value:           0668503E-33FC-3178-9976-2081D30574A7
 install-name:    '/System/Library/PrivateFrameworks/NewDeviceOutreachMacUI.framework/Versions/A/NewDeviceOutreachMacUI'
 swift-abi-version: 7
 exports:
@@ -36,14 +36,17 @@ exports:
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC12acOfferLabelSo11NSTextFieldCSgvpfi', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC13acOfferButtonSo8NSButtonCSgvpfi', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC13coverageLabelSo11NSTextFieldCSgvpfi', 
+                       '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC13detailsButtonSo8NSButtonCSgvpfi', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC14containerWidth33_69C77F97ECB15B2977EFC85794504EA0LL12CoreGraphics7CGFloatVvpfi', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC14footerFontSize33_69C77F97ECB15B2977EFC85794504EA0LL12CoreGraphics7CGFloatVvpfi', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC14primarySpinnerSo19NSProgressIndicatorCSgvpfi', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC15containerHeight33_69C77F97ECB15B2977EFC85794504EA0LL12CoreGraphics7CGFloatVvpfi', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC15fetchedWarranty33_69C77F97ECB15B2977EFC85794504EA0LLSo11NDOWarrantyCSgvpfi', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC16acOfferDescLabelSo11NSTextFieldCSgvpfi', 
+                       '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC16getSupportButtonSo8NSButtonCSgvpfi', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC17activityIndicatorSo010NSProgressJ0CSgvpfi', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC17appleCareVCWindow33_69C77F97ECB15B2977EFC85794504EA0LLSo8NSWindowCSgvpfi', 
+                       '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC18footerHeightAdjust33_69C77F97ECB15B2977EFC85794504EA0LL12CoreGraphics7CGFloatVvpfi', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC18purchaseRetryCount33_69C77F97ECB15B2977EFC85794504EA0LLSivpfi', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC19defaultFooterHeight33_69C77F97ECB15B2977EFC85794504EA0LL12CoreGraphics7CGFloatVvpfi', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerC20warrantyFooter1LabelSo06NSTextG0CSgvpfi', 

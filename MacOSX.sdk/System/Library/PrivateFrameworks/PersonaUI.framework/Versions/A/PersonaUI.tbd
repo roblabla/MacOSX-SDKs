@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0CD62FAD-71C0-3C2E-8C92-7526D7D02859
+    value:           3F3900CE-07CC-3CED-925A-7A47E1FC352A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8E10A5C8-1DCE-3E30-954D-9729EAF7722E
+    value:           386D837C-D43E-3B5C-B748-6591CB6566F7
 install-name:    '/System/Library/PrivateFrameworks/PersonaUI.framework/Versions/A/PersonaUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

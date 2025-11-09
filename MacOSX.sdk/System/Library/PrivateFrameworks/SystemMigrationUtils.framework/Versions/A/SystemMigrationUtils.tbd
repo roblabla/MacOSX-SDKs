@@ -3,15 +3,26 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4DDC15F0-582A-3747-8D39-FCCAB4DD9A37
+    value:           F8571E3B-660E-3519-A350-4D0ACE2B0081
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8D97D7E4-D788-337A-BE31-49C6ED645361
+    value:           96B7D743-CA25-3803-827C-097D347747CA
 install-name:    '/System/Library/PrivateFrameworks/SystemMigrationUtils.framework/Versions/A/SystemMigrationUtils'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _SMUDTFirmlinkDestinationKey, _SMUDTFirmlinkSourceKey, _SMUDTTemplateReceiptIdentifier, 
+    symbols:         [ _SMAnalyticsCAEventPayloadKeyApplicationsCopyDuration, _SMAnalyticsCAEventPayloadKeyApplicationsTotalSize, 
+                       _SMAnalyticsCAEventPayloadKeyAverageTransferRate, _SMAnalyticsCAEventPayloadKeyEnginePhase, 
+                       _SMAnalyticsCAEventPayloadKeyError, _SMAnalyticsCAEventPayloadKeyFinalResult, 
+                       _SMAnalyticsCAEventPayloadKeyHomeDirectoriesCopyDuration, 
+                       _SMAnalyticsCAEventPayloadKeyHomeDirectoriesTotalSize, _SMAnalyticsCAEventPayloadKeyODSTIssuingSuccess, 
+                       _SMAnalyticsCAEventPayloadKeyODSTRetries, _SMAnalyticsCAEventPayloadKeyOriginatingApplication, 
+                       _SMAnalyticsCAEventPayloadKeyPath, _SMAnalyticsCAEventPayloadKeyPathingDuration, 
+                       _SMAnalyticsCAEventPayloadKeyRequestState, _SMAnalyticsCAEventPayloadKeySourceConnectionMedium, 
+                       _SMAnalyticsCAEventPayloadKeySourceModelID, _SMAnalyticsCAEventPayloadKeySourceOSType, 
+                       _SMAnalyticsCAEventPayloadKeySourceType, _SMAnalyticsCAEventPayloadKeySourceVersion, 
+                       _SMAnalyticsCAEventPayloadKeyTotalDataSize, _SMAnalyticsCAEventPayloadKeyTotalDuration, 
+                       _SMUDTFirmlinkDestinationKey, _SMUDTFirmlinkSourceKey, _SMUDTTemplateReceiptIdentifier, 
                        _SMUDataTemplateErrorDomain, _SystemMigrationUtilsVersionNumber, 
                        _SystemMigrationUtilsVersionString, _getPairedVolumeWithRole, 
                        _logBatteryState ]

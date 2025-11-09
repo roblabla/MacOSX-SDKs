@@ -1,4 +1,6 @@
 framework module DeveloperToolsSupport {
   header "DeveloperToolsSupport-Swift.h"
-  requires objc
+
+  export *
+  module DeveloperToolsSupport { export * }
 }

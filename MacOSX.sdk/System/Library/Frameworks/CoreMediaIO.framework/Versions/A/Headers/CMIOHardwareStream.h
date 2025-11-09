@@ -37,7 +37,8 @@ extern "C"
 #endif
     
 #pragma pack(push, 4)
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark CMIOStream Types
@@ -239,7 +240,7 @@ enum
 /*!
     @enum           CMIOStream Properties
     @abstract       CMIOObjectPropertySelector values that apply to all CMIOStreams.
-    @discussion     CMIOStream is a subclass of CMIOObject and has only the single scope, kCMIOObjectPropertyScopeGlobal. They have a master element and an element for each channel
+    @discussion     CMIOStream is a subclass of CMIOObject and has only the single scope, kCMIOObjectPropertyScopeGlobal. They have a main element and an element for each channel
                     in the stream numbered upward from 1. Note that CMIOStream objects share CMIOControl objects with their owning CMIODevice. Consequently, all the standard
                     CMIOControl related property selectors implemented by CMIODevices are also implemented by CMIOStreams. The same constants are to be used for such properties.
     @constant       kCMIOStreamPropertyDirection
@@ -350,13 +351,13 @@ enum
                         CMFormatDescriptionRef can be provided. In the event of the latter, the FigFormatDescriptionEquals() routine will be used to see if the stream can support the provided
                         Setting this property is not a guarantee that the CMIOStream will provide data in this format;  when possible, the CMIOStream will examine all of the values specified by
                         the various clients sharing it, and select the most appropriate configuration. Typically, the value set for this property will only have an effect when the stream is
-                        active (unlike kCMIOStreamPropertyFormatDescription, which takes place immediately). Note that if the client is the device master (set using kCMIODevicePropertyDeviceMaster),
+                        active (unlike kCMIOStreamPropertyFormatDescription, which takes place immediately). Note that if the client is the device master (set using kCMIODevicePropertyDeviceControl),
                         setting the value of this property *will* directly affect the device, as if kCMIOStreamPropertyFormatDescription were used.
     @constant       kCMIOStreamPropertyPreferredFrameRate
                         A Float64 that indicates the current preferred video frame rate of the CMIOStream. Setting this property is not a guarantee that the CMIOStream will operate at that
                         framerate;  when possible, the CMIOStream will examine all of the values specified by the various clients sharing it, and select the most appropriate configuration.
                         Typically, the value set for this property will only have an effect when the stream is active (unlike kCMIOStreamPropertyFormatDescription, which takes place immediately).
-                        Note that if the client is the device master (set using kCMIODevicePropertyDeviceMaster), setting the value of this property will directly affect the device, as if
+                        Note that if the client is the device master (set using kCMIODevicePropertyDeviceControl), setting the value of this property will directly affect the device, as if
                         kCMIOStreamPropertyFormatDescription were used.
 */
 enum
@@ -588,6 +589,7 @@ struct CMIOStreamScheduledOutputNotificationProcAndRefCon {
 } API_AVAILABLE(macos(10.8));
 typedef struct CMIOStreamScheduledOutputNotificationProcAndRefCon CMIOStreamScheduledOutputNotificationProcAndRefCon;
 
+#pragma clang diagnostic pop
 #pragma pack(pop)
     
 #if defined(__cplusplus)

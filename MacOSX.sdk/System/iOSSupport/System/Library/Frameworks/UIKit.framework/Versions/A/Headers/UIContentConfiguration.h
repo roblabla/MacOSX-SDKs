@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class UITraitCollection;
 @protocol UIContentView;
 
-API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
+API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @protocol UIContentConfiguration <NSObject, NSCopying>
 
 /// Initializes and returns a new instance of the content view using this configuration.
@@ -28,7 +28,7 @@ API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
 @end
 
 
-API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
+API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @protocol UIContentView <NSObject>
 
 /// Returns the current configuration of the view. Setting this property applies the new configuration to the view.

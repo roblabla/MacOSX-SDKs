@@ -1,7 +1,6 @@
-.Dd 23 October 2012 
-.Os "Mac OS X"
+.Dd December 10, 2020
 .Dt ASR 8
-.Pp
+.Os "Mac OS X"
 .Sh NAME
 .Nm asr
 .Nd Apple Software Restore; copy volumes (e.g. from disk images)
@@ -51,7 +50,7 @@ In its first form,
 copies
 .Ar source
 (usually a disk image, potentially on an HTTP server) to
-.Ns Ar target .
+.Ar target .
 .Ar source
 can be specified using a path in the filesystem, or an http or https URL.
 It can also be an asr:// URL to indicate a multicast source.
@@ -80,8 +79,8 @@ If restoring a multicast disk image to a file,
 .Ar file
 can be a path to a local file or directory. If the specified path is a file,
 the disk image is given the specified name. If a directory, the name of the
-disk image being multicast is used. When specifying 
-.Sy server, 
+disk image being multicast is used. When specifying
+.Sy server,
 .Ar source
 has to be a UDIF disk image. Restoring from a multicast stream is accomplished by passing a asr:// url as
 .Ar source .
@@ -99,7 +98,7 @@ section below.
 .Pp
 .Nm
 needs to be run as root (see
-.Ns Xr sudo 8 )
+.Xr sudo 8 )
 in order to accomplish its tasks.
 .\" --------------------VERBS SECTION--------------------
 .Sh VERBS
@@ -108,12 +107,12 @@ Each verb is listed with its description and individual arguments.
 .It Sy restore
 restores a disk image or volume to another volume (including a mounted disk image)
 .Bl -tag -width "puppetstrings"
-.It Fl -source 
+.It Fl -source
 can be a disk image, /dev entry, or volume mountpoint. In the latter two cases, the volume
 must be unmountable or mounted read-only in order for a erase blockcopy to occur (thus, one
-cannot erase blockcopy the root filesystem as the source, unless it happened to be mounted 
+cannot erase blockcopy the root filesystem as the source, unless it happened to be mounted
 read-only).
-.It Fl -target 
+.It Fl -target
 can be a /dev entry, or volume mountpoint. Must be unmountable in order for an erase block-copy
 to occur.  If
 .Ar source
@@ -123,9 +122,9 @@ can specify a mounted APFS volume.  See the
 .Sy RESTORING WITH APFS FILESYSTEMS
 section below for details.
 .It Fl -file
-when performing a multicast restore, 
+when performing a multicast restore,
 .Fl -file
-can be specified instead of 
+can be specified instead of
 .Fl -target.
 If the specified path is a file, the disk image is given the specified name. If a directory,
 the name of the disk image being multicast is used.
@@ -136,9 +135,9 @@ and is required.
 .Fl -erase
 must always be used, as file copies are no longer supported by
 .Nm .
-If 
+If
 .Ar source
-is a asr:// url for restoring from a multicast stream, 
+is a asr:// url for restoring from a multicast stream,
 .Fl -erase
 must be passed (multicasting only supports erase block-copy restores).
 Passing
@@ -146,11 +145,11 @@ Passing
 with
 .Fl -file
 indicates any existing file should be overwritten when doing a multicast file copy.
-.It Fl -format  Ar HFS+ | HFSX 
+.It Fl -format  Ar HFS+ | HFSX
 specifies the destination filesystem format, when
 .Fl -erase
 is also given. If not specified, the destination will be formatted
-with the same filesystem format as the source. If multicasting, the 
+with the same filesystem format as the source. If multicasting, the
 .Fl -format
 specified must be block copy compatible with the
 .Ar source .
@@ -171,7 +170,7 @@ You have been warned.
 .It Fl -timeout Ar num
 specifies
 .Ar num
-seconds that a multicast client should wait when no payload data has been received over 
+seconds that a multicast client should wait when no payload data has been received over
 a multicast stream before exiting, allowing the client to stop in case of server failure/stoppage.
 It defaults to 0 (i.e. never time out).
 .It Fl -puppetstrings
@@ -316,8 +315,8 @@ The following keys/options configure the various parameters for multicast operat
 this is the desired data rate in bytes per second.
 On average, the stream will go slightly slower than this speed, but will never exceed it.
 It's a number in the plist (-int when set with
-.Ns Xr defaults 1 ) .
-.It \ 
+.Xr defaults 1 ) .
+.It \
 Note: The performance/reliability of the networking infrastructure being multicast on is an
 important factor in determining what data rate can be supported. Excessive/bursty packet
 loss for a given data rate could be due to an inability of the server/client to be able to
@@ -336,35 +335,35 @@ misses data on the first pass (x's during progress) and slowing the Data Rate do
 resolve it, setting the Client Data Rate will dynamically regulate the speed of the
 multicast stream to allow clients more time to write the data. It's a number in the plist
 (-int when set with
-.Ns Xr defaults 1 ) .
+.Xr defaults 1 ) .
 .It DNS Service Discovery
 whether the server should be advertised via DNS Service Discovery, a.k.a. Bonjour (tm).
 It defaults to true.
 It's a boolean in the plist (-bool when set with
-.Ns Xr defaults 1 ) .
+.Xr defaults 1 ) .
 .It Loop Suspend
-a limit of the number of times to multicast the image file when no clients have started a restore operation. Once 
+a limit of the number of times to multicast the image file when no clients have started a restore operation. Once
 exceeded, the server will stop the stream and wait for new clients before multicasting the image file. It defaults
 to 0 (e.g. never stop multicasting once a client starts the stream), and should not be set to <2.
-It's a number in the plist (-int when set with 
-.Ns Xr defaults 1 ) .
+It's a number in the plist (-int when set with
+.Xr defaults 1 ) .
 .It Multicast TTL
-the time to live on the multicast packets (for multicasting through routers). It defaults to 3. 
+the time to live on the multicast packets (for multicasting through routers). It defaults to 3.
 It cannot be set to 0, and should not be set to 1 (otherwise, it could adversely affect some network routers).
-It's a number in the plist (-int when set with 
-.Ns Xr defaults 1 ) .
+It's a number in the plist (-int when set with
+.Xr defaults 1 ) .
 .It Port
 the port of initial client-server handshake, version checks, multicast restore metadata, and stream data.
 It defaults to 7800.
 This should only be included/modified if the default port cannot be used.
 It's a number in the plist (-int when set with
-.Ns Xr defaults 1 ) .
+.Xr defaults 1 ) .
 .El
 .It Sy imagescan
 calculate checksums of the data in the provided image and store them in
 the image.  These checksums are used to ensure proper restores.  SHA-1 and SHA-256 hashes are used.
 Also determines if the disk image is in order for multicasting, and rewrites the file in order if not.
-If the image has to be reordered, it will require free disk space equal to the size of the disk image 
+If the image has to be reordered, it will require free disk space equal to the size of the disk image
 being scanned.
 .Bl -tag -width "nostream"
 .It Fl -nostream
@@ -403,7 +402,7 @@ In order for an APFS volume to be bootable, it must contain a properly installed
 part of an APFS container which also has two special volumes in it: a Preboot volume and a Recovery volume.  A
 container may have arbitrarily many system volumes in it, but it must have only one Preboot volume and one
 Recovery volume, each with the corresponding APFS volume role set (see
-.Ns Xr diskutil 1
+.Xr diskutil 1
 for information on roles).  The Preboot and Recovery volumes contain information which is tied to each system
 volume in the container.  So for a system volume to be bootable, that information needs to be set up in the Preboot
 and Recovery volumes.  A system which is part of a container that has these two special volumes, and for which the
@@ -493,7 +492,6 @@ uses for this is as follows, from lowest to highest priority:
 or
 .Fl -useInverter
 option on the command line.
-.Pp
 .Sh RESTORING WITH APFS SNAPSHOTS
 APFS volumes may contain snapshots, which are point-in-time captures of all volume state
 (including directory hierarchy, file existence and file content).  To distinguish between
@@ -536,7 +534,7 @@ section above).
 macOS Catalina supports a Read-Only System Volume (ROSV) configuration, in which the standard macOS system
 install is split across two volumes.  The two are referred to as the System and Data volumes, that is
 how their corresponding APFS roles are set (see
-.Ns Xr diskutil 1
+.Xr diskutil 1
 for more on APFS roles), they are combined into a volume group, and the System volume gets mounted read-only.
 .Pp
 .Nm
@@ -620,15 +618,15 @@ Custom buffering for multicast operation is not recommended.
 and
 .Fl -csumbuffersize
 allow a different buffer configuration for
-checksumming operations.  One checksum buffer offers the 
+checksumming operations.  One checksum buffer offers the
 best performance.  The default is 1 1MB buffer. Custom
 checksum buffering is not recommended.
 .Pp
 Like
-.Ns Xr mkfile 8 ,
+.Xr mkfile 8 ,
 .Ar size
 defaults to bytes but can be followed by a multiplier character (e.g. 'm').
-.Bl -tag
+.Bl -tag -width 10n
 .It Fl -buffers Ar num
 specifies that
 .Ar num
@@ -645,9 +643,8 @@ Custom checksum buffering is not recommended.
 specifies the size of each buffer used for checksumming.
 Custom checksum buffering is not recommended.
 .El
-.Pp
 .Sh OTHER OPTIONS
-.Bl -tag -compact
+.Bl -tag -width 10n -compact
 .It Fl -verbose
 enables verbose progress and error messages.
 .It Fl -debug
@@ -768,7 +765,6 @@ Scan the image with "Images -> Scan Image for Restore..."
 Select a volume and click on the "Restore" button.  Then click on the "Image..."
 button to select the image you have scanned.  Click Restore.
 .El
-.Pp
 .Sh BLOCK COPY RESTORE REQUIREMENTS
 .Nm
 can block copy restore HFS+/HFSX filesystems and resize the source
@@ -784,7 +780,6 @@ from an HFSX filesystem to HFS+.
 Certain non-HFS+/HFSX filesystems will block copy restore, but the
 target partition will be resized to match the size of the source
 image/partition size, with no filesystem resizing occurring.
-.Pp
 .Sh COMPATIBILITY
 .Nm
 maintains compatibility with previous syntax, e.g.
@@ -826,9 +821,9 @@ maintains compatibility with previous syntax, e.g.
 where
 .Fl source,
 .Fl target,
-and 
+and
 .Fl file
-are equivalent to 
+are equivalent to
 .Fl -source,
 .Fl -target,
 and
@@ -842,7 +837,7 @@ are equivalent to their -- descriptions.
 .Ar configuration
 is superseded by
 .Nm
-.Sy server 
+.Sy server
 .Fl -config
 .Ar configuration .
 The following deprecated options also remain:
@@ -912,7 +907,7 @@ from a multicast network stream.
 .Pp
 Per its history, most functionality in
 .Nm
-is limited to HFS+ volumes.
+was originally focused on HFS+ volumes, but it has expanded to also include APFS.
 .Sh SEE ALSO
 .Xr hdiutil 1 ,
 .Xr df 1 ,

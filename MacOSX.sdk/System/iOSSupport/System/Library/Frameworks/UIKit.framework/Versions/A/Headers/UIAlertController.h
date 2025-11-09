@@ -23,7 +23,8 @@ typedef NS_ENUM(NSInteger, UIAlertControllerStyle) {
     UIAlertControllerStyleAlert
 } API_AVAILABLE(ios(8.0));
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UIAlertAction : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
+@interface UIAlertAction : NSObject <NSCopying>
 
 + (instancetype)actionWithTitle:(nullable NSString *)title style:(UIAlertActionStyle)style handler:(void (^ __nullable)(UIAlertAction *action))handler;
 
@@ -33,7 +34,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UIAlertAction : NSObject <NSCopy
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UIAlertController : UIViewController
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
+@interface UIAlertController : UIViewController
 
 + (instancetype)alertControllerWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(UIAlertControllerStyle)preferredStyle;
 

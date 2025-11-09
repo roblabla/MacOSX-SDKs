@@ -22,19 +22,7 @@ typedef enum {
 
 API_AVAILABLE(macos(10.3))
 API_UNAVAILABLE(macCatalyst)
-@interface ABPeoplePickerView : NSView {
-@private
-    id _reserved1 __unused;
-    id _reserved2 __unused;
-    id _reserved3 __unused;
-    id _reserved4 __unused;
-    id _reserved5 __unused;
-    SEL    _reserved6 __unused;
-    SEL    _reserved7 __unused;
-    id _reserved8 __unused;
-    id _reserved9 __unused;
-    id _reserved10 __unused;
-}
+@interface ABPeoplePickerView : NSView
 
 /*
  * Look and Feel

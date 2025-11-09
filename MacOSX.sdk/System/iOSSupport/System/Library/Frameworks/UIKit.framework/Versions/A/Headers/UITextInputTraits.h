@@ -149,7 +149,8 @@ typedef NS_ENUM(NSInteger, UIReturnKeyType) {
 
 typedef NSString * UITextContentType NS_TYPED_ENUM;
 
-UIKIT_EXTERN API_AVAILABLE(ios(12.0)) @interface UITextInputPasswordRules : NSObject <NSSecureCoding, NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(12.0)) NS_SWIFT_UI_ACTOR
+@interface UITextInputPasswordRules : NSObject <NSSecureCoding, NSCopying>
 
 @property (nonatomic,readonly) NSString *passwordRulesDescriptor;
 
@@ -165,6 +166,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(12.0)) @interface UITextInputPasswordRules : NSOb
 // Controls features of text widgets (or other custom objects that might wish 
 // to respond to keyboard input).
 //
+NS_SWIFT_UI_ACTOR
 @protocol UITextInputTraits <NSObject>
 
 @optional
@@ -222,6 +224,14 @@ UIKIT_EXTERN UITextContentType const UITextContentTypePassword                  
 UIKIT_EXTERN UITextContentType const UITextContentTypeNewPassword               API_AVAILABLE(ios(12.0));
 UIKIT_EXTERN UITextContentType const UITextContentTypeOneTimeCode               API_AVAILABLE(ios(12.0));
 
+/// Parcel tracking numbers such as "FedEx 8602 9191 3550", "1Z50T0536891664106", and "729445720428778".
+UIKIT_EXTERN UITextContentType const UITextContentTypeShipmentTrackingNumber    API_AVAILABLE(ios(15.0));
+
+/// Airline flight numbers such as "CZ # 1234", "AA212", and "SW Flight 573".
+UIKIT_EXTERN UITextContentType const UITextContentTypeFlightNumber              API_AVAILABLE(ios(15.0));
+
+/// Dates, times, or durations such as "7-3-2021" or "This Saturday", "12:30", and "10-11am", respectively.
+UIKIT_EXTERN UITextContentType const UITextContentTypeDateTime                  API_AVAILABLE(ios(15.0));
 
 NS_ASSUME_NONNULL_END
 

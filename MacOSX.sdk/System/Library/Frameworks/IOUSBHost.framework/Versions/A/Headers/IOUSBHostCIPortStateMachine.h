@@ -2,7 +2,7 @@
 //  IOUSBHostCIPortStateMachine.h
 //  IOUSBHostFramework
 //
-//  Created by Dan Wilson on 4/27/20.
+//  Copyright © 2020 Apple. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

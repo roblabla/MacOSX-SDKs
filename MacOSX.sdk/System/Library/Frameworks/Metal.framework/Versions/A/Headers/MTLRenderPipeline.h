@@ -15,6 +15,9 @@
 #import <Metal/MTLPipeline.h>
 
 
+#import <Metal/MTLLinkedFunctions.h>
+#import <Metal/MTLFunctionHandle.h>
+
 NS_ASSUME_NONNULL_BEGIN
 @class MTLVertexDescriptor;
 
@@ -130,7 +133,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 
 @property (nullable, readonly) NSArray <MTLArgument *> *vertexArguments;
 @property (nullable, readonly) NSArray <MTLArgument *> *fragmentArguments;
-@property (nullable, readonly) NSArray <MTLArgument *> *tileArguments API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+@property (nullable, readonly) NSArray <MTLArgument *> *tileArguments API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 @end
 
 MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
@@ -158,7 +161,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @property (nonatomic) MTLPixelFormat depthAttachmentPixelFormat;
 @property (nonatomic) MTLPixelFormat stencilAttachmentPixelFormat;
 
-@property (readwrite, nonatomic) MTLPrimitiveTopologyClass inputPrimitiveTopology API_AVAILABLE(macos(10.11), ios(12.0)) API_UNAVAILABLE(tvos);
+@property (readwrite, nonatomic) MTLPrimitiveTopologyClass inputPrimitiveTopology API_AVAILABLE(macos(10.11), ios(12.0), tvos(14.5));
 
 @property (readwrite, nonatomic) MTLTessellationPartitionMode tessellationPartitionMode API_AVAILABLE(macos(10.12), ios(10.0));
 @property (readwrite, nonatomic) NSUInteger maxTessellationFactor API_AVAILABLE(macos(10.12), ios(10.0));
@@ -181,12 +184,100 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  */
 @property (readwrite, nullable, nonatomic, copy) NSArray<id<MTLBinaryArchive>> *binaryArchives API_AVAILABLE(macos(11.0), ios(14.0));
 
+
+/*!
+ @property vertexPreloadedLibraries
+ @abstract The set of MTLDynamicLibrary to use to resolve external symbols for the vertexFunction before considering symbols from dependent MTLDynamicLibrary.
+ @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use vertexPreloadedLibraries.
+ This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations.
+ It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
+ @see MTLDynamicLibrary
+ */
+@property (readwrite, nonnull, nonatomic, copy) NSArray<id<MTLDynamicLibrary>>* vertexPreloadedLibraries API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @property fragmentPreloadedLibraries
+ @abstract The set of MTLDynamicLibrary to use to resolve external symbols for the fragmentFunction before considering symbols from dependent MTLDynamicLibrary.
+ @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use fragmentPreloadedLibraries.
+ This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations.
+ It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
+ @see MTLDynamicLibrary
+ */
+@property (readwrite, nonnull, nonatomic, copy) NSArray<id<MTLDynamicLibrary>>* fragmentPreloadedLibraries API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @property vertexLinkedFunctions
+ @abstract The set of functions to be linked with the pipeline state and accessed from the vertex function.
+ @see MTLLinkedFunctions
+ */
+@property (null_resettable, copy, nonatomic) MTLLinkedFunctions *vertexLinkedFunctions
+    API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @property fragmentLinkedFunctions
+ @abstract The set of functions to be linked with the pipeline state and accessed from the fragment function.
+ @see MTLLinkedFunctions
+ */
+@property (null_resettable, copy, nonatomic) MTLLinkedFunctions *fragmentLinkedFunctions
+    API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @property supportAddingVertexBinaryFunctions
+ @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+ */
+@property (readwrite, nonatomic) BOOL supportAddingVertexBinaryFunctions
+API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @property supportFragmentAddingBinaryFunctions
+ @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+ */
+@property (readwrite, nonatomic) BOOL supportAddingFragmentBinaryFunctions
+API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @property maxVertexCallStackDepth
+ @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+ */
+@property (readwrite, nonatomic) NSUInteger maxVertexCallStackDepth
+API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @property maxFragmentCallStackDepth
+ @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+ */
+@property (readwrite, nonatomic) NSUInteger maxFragmentCallStackDepth
+API_AVAILABLE(macos(12.0), ios(15.0));
+
+
 /*!
  @method reset
  @abstract Restore all pipeline descriptor properties to their default values.
  */
 - (void)reset;
 
+@end
+
+MTL_EXPORT API_AVAILABLE(macos(12.0), ios(15.0))
+@interface MTLRenderPipelineFunctionsDescriptor : NSObject <NSCopying>
+
+/*!
+ @property vertexAdditionalBinaryFunctions
+ @abstract The set of additional binary functions to be accessed from the vertex function in an incrementally created pipeline state.
+ */
+@property (nullable, nonatomic, copy) NSArray<id<MTLFunction>> *vertexAdditionalBinaryFunctions;
+
+/*!
+ @property fragmentAdditionalBinaryFunctions
+ @abstract The set of additional binary functions to be accessed from the fragment function in an incrementally created pipeline state.
+ */
+@property (nullable, nonatomic, copy) NSArray<id<MTLFunction>> *fragmentAdditionalBinaryFunctions;
+
+/*!
+ @property tileAdditionalBinaryFunctions
+ @abstract The set of additional binary functions to be accessed from the tile function in an incrementally created pipeline state.
+ */
+@property (nullable, nonatomic, copy) NSArray<id<MTLFunction>> *tileAdditionalBinaryFunctions;
 @end
 
 /*!
@@ -203,15 +294,15 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 
 /*!
  @property maxTotalThreadsPerThreadgroup
- @abstract The maximum total number of threads that can be in a single threadgroup.
+ @abstract The maximum total number of threads that can be in a single tile shader threadgroup.
  */
-@property (readonly) NSUInteger maxTotalThreadsPerThreadgroup API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+@property (readonly) NSUInteger maxTotalThreadsPerThreadgroup API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /*!
  @property threadgroupSizeMatchesTileSize
- @abstract Returns true when the pipeline state requires a threadgroup size equal to the tile size
+ @abstract Returns true when the pipeline state requires a tile shader threadgroup size equal to the tile size
  */
-@property (readonly) BOOL threadgroupSizeMatchesTileSize API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+@property (readonly) BOOL threadgroupSizeMatchesTileSize API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 
 
@@ -219,16 +310,41 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @property imageblockSampleLength
  @brief Returns imageblock memory length used by a single sample when rendered using this pipeline.
  */
-@property (readonly) NSUInteger imageblockSampleLength API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+@property (readonly) NSUInteger imageblockSampleLength API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /*!
  @method imageblockMemoryLengthForDimensions:sampleCount:
  @brief Returns imageblock memory length for given image block dimensions. Dimensions must be valid tile dimensions.
  */
-- (NSUInteger)imageblockMemoryLengthForDimensions:(MTLSize)imageblockDimensions API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+- (NSUInteger)imageblockMemoryLengthForDimensions:(MTLSize)imageblockDimensions API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 
 @property (readonly) BOOL supportIndirectCommandBuffers API_AVAILABLE(macos(10.14), ios(12.0));
+
+
+/*!
+ @method functionHandleWithFunction:stage:
+ @brief Gets the function handle for the specified function on the specified stage of the pipeline.
+ */
+- (nullable id<MTLFunctionHandle>)functionHandleWithFunction:(id<MTLFunction>)function stage:(MTLRenderStages)stage API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method newVisibleFunctionTableWithDescriptor:stage:
+ @brief Allocate a visible function table for the specified stage of the pipeline with the provided descriptor.
+ */
+- (nullable id<MTLVisibleFunctionTable>)newVisibleFunctionTableWithDescriptor:(MTLVisibleFunctionTableDescriptor * __nonnull)descriptor stage:(MTLRenderStages)stage API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method newIntersectionFunctionTableWithDescriptor:stage:
+ @brief Allocate an intersection function table for the specified stage of the pipeline with the provided descriptor.
+ */
+- (nullable id <MTLIntersectionFunctionTable>)newIntersectionFunctionTableWithDescriptor:(MTLIntersectionFunctionTableDescriptor * _Nonnull)descriptor stage:(MTLRenderStages)stage API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method newRenderPipelineStateWithAdditionalBinaryFunctions:error:
+ @brief Allocate a new render pipeline state by adding binary functions for each stage of this pipeline state.
+ */
+- (nullable id <MTLRenderPipelineState>)newRenderPipelineStateWithAdditionalBinaryFunctions:(nonnull MTLRenderPipelineFunctionsDescriptor *)additionalBinaryFunctions error:(__autoreleasing NSError **)error API_AVAILABLE(macos(12.0), ios(15.0));
 
 @end
 
@@ -244,7 +360,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @end
 
 
-MTL_EXPORT API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos)
+MTL_EXPORT API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5))
 @interface MTLTileRenderPipelineColorAttachmentDescriptor : NSObject <NSCopying>
 
 /*! Pixel format.  Defaults to MTLPixelFormatInvalid */
@@ -252,7 +368,7 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILA
 
 @end
 
-MTL_EXPORT API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos)
+MTL_EXPORT API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5))
 @interface MTLTileRenderPipelineColorAttachmentDescriptorArray : NSObject
 
 /* Individual tile attachment state access */
@@ -263,7 +379,7 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILA
 
 @end
 
-MTL_EXPORT API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos)
+MTL_EXPORT API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5))
 @interface MTLTileRenderPipelineDescriptor : NSObject <NSCopying>
 
 /*!
@@ -308,10 +424,42 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILA
  */
 @property (readwrite, nullable, nonatomic, copy) NSArray<id<MTLBinaryArchive>> *binaryArchives API_AVAILABLE(macos(11.0), ios(14.0));
 
+
+/*!
+ @property preloadedLibraries
+ @abstract The set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary.
+ @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use preloadedLibraries.
+ This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations.
+ It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
+ @see MTLDynamicLibrary
+ */
+@property (readwrite, nonnull, nonatomic, copy) NSArray<id<MTLDynamicLibrary>>* preloadedLibraries API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @property linkedFunctions
+ @abstract The set of functions to be linked with the pipeline state and accessed from the tile function.
+ @see MTLLinkedFunctions
+ */
+@property (null_resettable, copy, nonatomic) MTLLinkedFunctions *linkedFunctions
+    API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @property supportAddingBinaryFunctions
+ @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+ */
+@property (readwrite, nonatomic) BOOL supportAddingBinaryFunctions
+API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @property maxCallStackDepth
+ @abstract The maximum depth of the call stack in stack frames from the tile function. Defaults to 1 additional stack frame.
+ */
+@property (readwrite, nonatomic) NSUInteger maxCallStackDepth
+API_AVAILABLE(macos(12.0), ios(15.0));
+
 - (void)reset;
 
 @end
-
 
 
 NS_ASSUME_NONNULL_END

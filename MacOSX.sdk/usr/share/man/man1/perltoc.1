@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "PERLTOC 1"
-.TH PERLTOC 1 "2021-02-28" "perl v5.30.2" "Perl Programmers Reference Guide"
+.TH PERLTOC 1 "2021-07-16" "perl v5.30.3" "Perl Programmers Reference Guide"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -7637,11 +7637,25 @@ Oriented Perl\fR, \fIData Munging with Perl\fR, \fIMastering Perl/Tk\fR,
 .IP "\s-1THE KEEPERS OF THE RECORDS\s0" 4
 .IX Item "THE KEEPERS OF THE RECORDS"
 .PD
-.SS "perldelta \- what is new for perl v5.30.2"
-.IX Subsection "perldelta - what is new for perl v5.30.2"
+.SS "perldelta \- what is new for perl v5.30.3"
+.IX Subsection "perldelta - what is new for perl v5.30.3"
 .IP "\s-1DESCRIPTION\s0" 4
 .IX Item "DESCRIPTION"
 .PD 0
+.IP "Security" 4
+.IX Item "Security"
+.RS 4
+.IP "[\s-1CVE\-2020\-10543\s0] Buffer overflow caused by a crafted regular expression" 4
+.IX Item "[CVE-2020-10543] Buffer overflow caused by a crafted regular expression"
+.IP "[\s-1CVE\-2020\-10878\s0] Integer overflow via malformed bytecode produced by a crafted regular expression" 4
+.IX Item "[CVE-2020-10878] Integer overflow via malformed bytecode produced by a crafted regular expression"
+.IP "[\s-1CVE\-2020\-12723\s0] Buffer overflow caused by a crafted regular expression" 4
+.IX Item "[CVE-2020-12723] Buffer overflow caused by a crafted regular expression"
+.IP "Additional Note" 4
+.IX Item "Additional Note"
+.RE
+.RS 4
+.RE
 .IP "Incompatible Changes" 4
 .IX Item "Incompatible Changes"
 .IP "Modules and Pragmata" 4
@@ -7652,31 +7666,8 @@ Oriented Perl\fR, \fIData Munging with Perl\fR, \fIMastering Perl/Tk\fR,
 .RE
 .RS 4
 .RE
-.IP "Documentation" 4
-.IX Item "Documentation"
-.RS 4
-.IP "Changes to Existing Documentation" 4
-.IX Item "Changes to Existing Documentation"
-.RE
-.RS 4
-.RE
-.IP "Configuration and Compilation" 4
-.IX Item "Configuration and Compilation"
 .IP "Testing" 4
 .IX Item "Testing"
-.IP "Platform Support" 4
-.IX Item "Platform Support"
-.RS 4
-.IP "Platform-Specific Notes" 4
-.IX Item "Platform-Specific Notes"
-.PD
-Windows
-.RE
-.RS 4
-.RE
-.IP "Selected Bug Fixes" 4
-.IX Item "Selected Bug Fixes"
-.PD 0
 .IP "Acknowledgements" 4
 .IX Item "Acknowledgements"
 .IP "Reporting Bugs" 4
@@ -7686,8 +7677,48 @@ Windows
 .IP "\s-1SEE ALSO\s0" 4
 .IX Item "SEE ALSO"
 .PD
-.SS "perl5302delta, perldelta \- what is new for perl v5.30.2"
-.IX Subsection "perl5302delta, perldelta - what is new for perl v5.30.2"
+.SS "perl5303delta, perldelta \- what is new for perl v5.30.3"
+.IX Subsection "perl5303delta, perldelta - what is new for perl v5.30.3"
+.IP "\s-1DESCRIPTION\s0" 4
+.IX Item "DESCRIPTION"
+.PD 0
+.IP "Security" 4
+.IX Item "Security"
+.RS 4
+.IP "[\s-1CVE\-2020\-10543\s0] Buffer overflow caused by a crafted regular expression" 4
+.IX Item "[CVE-2020-10543] Buffer overflow caused by a crafted regular expression"
+.IP "[\s-1CVE\-2020\-10878\s0] Integer overflow via malformed bytecode produced by a crafted regular expression" 4
+.IX Item "[CVE-2020-10878] Integer overflow via malformed bytecode produced by a crafted regular expression"
+.IP "[\s-1CVE\-2020\-12723\s0] Buffer overflow caused by a crafted regular expression" 4
+.IX Item "[CVE-2020-12723] Buffer overflow caused by a crafted regular expression"
+.IP "Additional Note" 4
+.IX Item "Additional Note"
+.RE
+.RS 4
+.RE
+.IP "Incompatible Changes" 4
+.IX Item "Incompatible Changes"
+.IP "Modules and Pragmata" 4
+.IX Item "Modules and Pragmata"
+.RS 4
+.IP "Updated Modules and Pragmata" 4
+.IX Item "Updated Modules and Pragmata"
+.RE
+.RS 4
+.RE
+.IP "Testing" 4
+.IX Item "Testing"
+.IP "Acknowledgements" 4
+.IX Item "Acknowledgements"
+.IP "Reporting Bugs" 4
+.IX Item "Reporting Bugs"
+.IP "Give Thanks" 4
+.IX Item "Give Thanks"
+.IP "\s-1SEE ALSO\s0" 4
+.IX Item "SEE ALSO"
+.PD
+.SS "perl5302delta \- what is new for perl v5.30.2"
+.IX Subsection "perl5302delta - what is new for perl v5.30.2"
 .IP "\s-1DESCRIPTION\s0" 4
 .IX Item "DESCRIPTION"
 .PD 0

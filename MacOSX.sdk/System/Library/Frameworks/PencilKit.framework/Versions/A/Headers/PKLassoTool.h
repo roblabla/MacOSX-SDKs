@@ -11,7 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// A lasso tool for selection parts of a drawing.
-NS_REFINED_FOR_SWIFT
 API_AVAILABLE(ios(13.0), macos(10.15))
 @interface PKLassoTool : PKTool
 

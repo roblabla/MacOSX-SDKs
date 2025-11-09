@@ -27,7 +27,8 @@ typedef NS_OPTIONS(NSUInteger, UISwipeGestureRecognizerDirection) {
     UISwipeGestureRecognizerDirectionDown  = 1 << 3
 };
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UISwipeGestureRecognizer : UIGestureRecognizer 
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+@interface UISwipeGestureRecognizer : UIGestureRecognizer 
 
 @property(nonatomic) NSUInteger                        numberOfTouchesRequired API_UNAVAILABLE(tvos); // default is 1. the number of fingers that must swipe
 @property(nonatomic) UISwipeGestureRecognizerDirection direction;               // default is UISwipeGestureRecognizerDirectionRight. the desired direction of the swipe. multiple directions may be specified if they will result in the same behavior (for example, UITableView swipe delete)

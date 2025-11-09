@@ -3,17 +3,31 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E5E4D46F-4D14-31A4-91F9-49CAEA22FCE6
+    value:           FB766B92-26D2-34A3-83C2-A4C30BB24750
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           61A3B9AF-DEE6-3D53-BE73-E45F02ACAF40
+    value:           51C57E13-FFDC-3851-B14F-5470C9643D6F
 install-name:    '/System/Library/PrivateFrameworks/WiFiPeerToPeer.framework/Versions/A/WiFiPeerToPeer'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    objc-classes:    [ WiFiAwareDataSession, WiFiAwareDataSessionIssueReport, WiFiAwareDatapathConfiguration, 
-                       WiFiAwareDiscoveryResult, WiFiAwarePublishConfiguration, WiFiAwarePublishDatapathConfiguration, 
-                       WiFiAwarePublishDatapathSecurityConfiguration, WiFiAwarePublishDatapathServiceSpecificInfo, 
-                       WiFiAwarePublishServiceSpecificInfo, WiFiAwarePublisher, WiFiAwarePublisherDataSessionHandle, 
-                       WiFiAwareSubscribeConfiguration, WiFiAwareSubscriber, WiFiMACAddress ]
+    symbols:         [ _AWDLTrafficRegistrationServiceAVConference, _AWDLTrafficRegistrationServiceAirPlaySinkMode, 
+                       _AWDLTrafficRegistrationServiceAirdrop, _AWDLTrafficRegistrationServiceAirplay, 
+                       _AWDLTrafficRegistrationServiceAirplayConnectivity, _AWDLTrafficRegistrationServiceAssistedDiscovery, 
+                       _AWDLTrafficRegistrationServiceCarPlay, _AWDLTrafficRegistrationServiceCentralizedAirTimeSchedulerPolicy, 
+                       _AWDLTrafficRegistrationServiceDeviceToDeviceMigration, _AWDLTrafficRegistrationServiceEnsemble, 
+                       _AWDLTrafficRegistrationServiceRangingInitiator, _AWDLTrafficRegistrationServiceRangingResponder, 
+                       _AWDLTrafficRegistrationServiceSidecar, _AWDLTrafficRegistrationServiceTimesync, 
+                       _beginTransaction, _endTransaction ]
+    objc-classes:    [ AWDLServiceDiscoveryConfiguration, AWDLServiceDiscoveryManager, 
+                       AWDLTrafficRegistrationConfiguration, WiFiAwareDataSession, 
+                       WiFiAwareDataSessionIssueReport, WiFiAwareDataSessionStatisticsHistogramBin, 
+                       WiFiAwareDataSessionStatisticsReport, WiFiAwareDatapathConfiguration, 
+                       WiFiAwareDeviceCapabilities, WiFiAwareDiscoveryResult, WiFiAwareFastDiscoveryConfiguration, 
+                       WiFiAwareInternetSharingConfiguration, WiFiAwarePublishConfiguration, 
+                       WiFiAwarePublishDatapathConfiguration, WiFiAwarePublishDatapathSecurityConfiguration, 
+                       WiFiAwarePublishDatapathServiceSpecificInfo, WiFiAwarePublishServiceSpecificInfo, 
+                       WiFiAwarePublisher, WiFiAwarePublisherDataSessionHandle, WiFiAwareSubscribeConfiguration, 
+                       WiFiAwareSubscriber, WiFiChannel, WiFiMACAddress, WiFiP2PAWDLState, 
+                       WiFiP2PAWDLStateMonitor, WiFiP2PSPITransactionRequestor, WiFiP2PXPCConnection ]
 ...

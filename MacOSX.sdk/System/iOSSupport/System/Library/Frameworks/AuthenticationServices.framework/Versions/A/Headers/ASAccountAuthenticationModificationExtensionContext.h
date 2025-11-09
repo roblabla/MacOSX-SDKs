@@ -24,7 +24,10 @@ AS_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  to appear. If extension UI is showing when this method is called, the extension UI will be
  dismissed before the sheet is presented.
 */
-- (void)getSignInWithAppleUpgradeAuthorizationWithState:(nullable NSString *)state nonce:(nullable NSString *)nonce completionHandler:(void(^)(ASAuthorizationAppleIDCredential * _Nullable authorization, NSError * _Nullable error))completionHandler NS_SWIFT_NAME(getSignInWithAppleUpgradeAuthorization(state:nonce:completionHandler:));
+- (void)getSignInWithAppleUpgradeAuthorizationWithState:(nullable NSString *)state nonce:(nullable NSString *)nonce completionHandler:(void(^)(ASAuthorizationAppleIDCredential * _Nullable authorization, NSError * _Nullable error))completionHandler
+    NS_SWIFT_NAME(getSignInWithAppleUpgradeAuthorization(state:nonce:completionHandler:))
+    NS_SWIFT_ASYNC_NAME(requestSignInWithAppleUpgradeAuthorization(state:nonce:))
+    ;
 
 /*! @abstract Confirms successful completion of a Sign in with Apple upgrade.
  @param userInfo For upgrades invoked within the extension's containing app, any

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C8B0FC60-F267-30BA-9DD8-0211C92104E6
+    value:           0617E367-8122-3CEA-A971-38482BF72A16
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8B949849-35D1-3A16-AB9C-6E3DCC19CEDE
+    value:           94BAA258-BC1C-3FFC-9D57-7D270819E6AD
 install-name:    '/System/Library/Frameworks/PCSC.framework/Versions/A/PCSC'
-current-version: 487.100.15
+current-version: 554
 compatibility-version: 0
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

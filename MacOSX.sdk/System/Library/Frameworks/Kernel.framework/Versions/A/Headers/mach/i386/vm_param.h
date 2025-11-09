@@ -90,6 +90,8 @@
 #ifndef _MACH_I386_VM_PARAM_H_
 #define _MACH_I386_VM_PARAM_H_
 
+#if defined (__i386__) || defined (__x86_64__)
+
 
 #define BYTE_SIZE               8               /* byte size in bits */
 
@@ -167,5 +169,7 @@
 #define VM_MAX_ADDRESS          ((vm_offset_t) 0xFFE00000)
 
 
+
+#endif /* defined (__i386__) || defined (__x86_64__) */
 
 #endif  /* _MACH_I386_VM_PARAM_H_ */

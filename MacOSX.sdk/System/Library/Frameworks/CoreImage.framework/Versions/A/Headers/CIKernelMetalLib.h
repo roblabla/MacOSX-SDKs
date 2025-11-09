@@ -4,13 +4,27 @@
 //  Copyright (c) 2017 Apple, Inc. All rights reserved.
 //
 
-#if __METAL_MACOS__ || __METAL_IOS__
+#if __METAL_VERSION__
 
 #ifndef CIKERNELMETALLIB_H
 #define CIKERNELMETALLIB_H
 
 #ifndef __CIKERNEL_METAL_VERSION__ // if not explicitly defined already
-    #if (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101400 || __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 120000 || __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ >= 120000)
+    #if !defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && \
+        !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && \
+        !defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)
+        #define __CIKERNEL_METAL_VERSION__ 200 // the includer of this didn't specify a MIN_REQUIRED compatibility
+    #elif (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 120000 || \
+        __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 150000 || \
+        __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ >= 150000)
+        #if __METAL_CIKERNEL__
+            #define __CIKERNEL_METAL_VERSION__ 200
+        #else
+            #define __CIKERNEL_METAL_VERSION__ 300
+        #endif
+    #elif (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101400 || \
+         __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 120000 || \
+         __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ >= 120000)
         #define __CIKERNEL_METAL_VERSION__ 200 // compatible w/ macOS 10.14/iOS 12.0/tvOS 12.0 or later
     #else
         #define __CIKERNEL_METAL_VERSION__ 100 // compatible w/ macOS 10.13/iOS 11.0/tvOS 11.0 or later
@@ -31,8 +45,17 @@ namespace coreimage
     
     //MARK: - Sampler
     
+#if __CIKERNEL_METAL_VERSION__ >= 300
+    typedef struct Sampler
+    {
+        friend Sampler make_sampler(texture2d<float, access::sample> t, metal::sampler s, constant float4x4& m, float2 dc );
+    private:
+        Sampler(texture2d<float, access::sample> t_, metal::sampler s_, constant float4x4& m_, float2 dc_):t(t_), s(s_),m(m_), dc(dc_){}
+    public:
+#else
     typedef struct
     {
+#endif
         // Returns the pixel value produced from sampler at the position p, where p is specified in sampler space.
         float4 sample(float2 p) const;
         
@@ -67,15 +90,24 @@ namespace coreimage
         
     private:
         texture2d<float, access::sample> t;
-        sampler s;
+        metal::sampler s;
         constant float4x4& m;
         float2 dc;
         
     } sampler;
     
 #if __CIKERNEL_METAL_VERSION__ >= 200
+#if __CIKERNEL_METAL_VERSION__ >= 300
+    typedef struct Sampler_h
+    {
+        friend Sampler_h make_sampler_h(texture2d<half, access::sample> t, metal::sampler s, constant float4x4& m, float2 dc );
+    private:
+        Sampler_h(texture2d<half, access::sample> t_, metal::sampler s_, constant float4x4& m_, float2 dc_):t(t_), s(s_),m(m_), dc(dc_){}
+    public:
+#else
     typedef struct
     {
+#endif //__CIKERNEL_METAL_VERSION__ >= 300
         // Returns the pixel value produced from sampler at the position p, where p is specified in sampler space.
         half4 sample(float2 p) const;
         
@@ -230,4 +262,4 @@ namespace ci = coreimage;
 
 #endif /* CIKERNELMETALLIB_H */
 
-#endif /* __METAL_MACOS__ || __METAL_IOS__ */
+#endif /* __METAL_VERSION__ */

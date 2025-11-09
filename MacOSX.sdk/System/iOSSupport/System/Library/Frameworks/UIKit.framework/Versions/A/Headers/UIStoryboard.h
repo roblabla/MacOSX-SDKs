@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef __kindof UIViewController *_Nullable (^UIStoryboardViewControllerCreator)(NSCoder *coder);
 
-UIKIT_EXTERN API_AVAILABLE(ios(5.0)) @interface UIStoryboard : NSObject {
+UIKIT_EXTERN API_AVAILABLE(ios(5.0)) NS_SWIFT_UI_ACTOR
+@interface UIStoryboard : NSObject {
 }
 
 + (UIStoryboard *)storyboardWithName:(NSString *)name bundle:(nullable NSBundle *)storyboardBundleOrNil;

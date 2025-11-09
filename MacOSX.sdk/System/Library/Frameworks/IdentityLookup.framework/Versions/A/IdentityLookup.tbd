@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3E675DF3-8B68-3230-A1A6-2D2BC624861C
+    value:           15B2A3EE-91DE-3F1A-BFB3-339E1BB8BE15
   - target:          x86_64-maccatalyst
-    value:           3E675DF3-8B68-3230-A1A6-2D2BC624861C
+    value:           15B2A3EE-91DE-3F1A-BFB3-339E1BB8BE15
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3876D8FC-F72D-3C91-9198-F75ED5DF3E66
+    value:           A747FA73-FE63-3FF6-826C-CB483402D934
   - target:          arm64e-maccatalyst
-    value:           3876D8FC-F72D-3C91-9198-F75ED5DF3E66
+    value:           A747FA73-FE63-3FF6-826C-CB483402D934
 install-name:    '/System/Library/Frameworks/IdentityLookup.framework/Versions/A/IdentityLookup'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ILClassificationUIExtensionPointIdentifier, _ILDefaultLog, 
                        _ILMessageFilterErrorDomain, _ILMessageFilterExtensionPointIdentifier, 

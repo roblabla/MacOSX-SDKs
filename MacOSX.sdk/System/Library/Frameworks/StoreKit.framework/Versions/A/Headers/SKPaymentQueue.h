@@ -73,7 +73,7 @@ SK_EXTERN_CLASS API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2)) @interface SK
 
 @protocol SKPaymentQueueDelegate <NSObject>
 @optional
-// Sent when a user has initiated a purchase of a Promoted IAP from the App Store
+// Sent when the storefront changes while a payment is processing.
 - (BOOL)paymentQueue:(SKPaymentQueue *)paymentQueue shouldContinueTransaction:(SKPaymentTransaction *)transaction inStorefront:(SKStorefront *)newStorefront API_AVAILABLE(ios(13.0), macos(10.15), watchos(6.2));
 
 // Sent if there is a pending price consent confirmation from the App Store for the current user. Return YES to immediately show the price consent UI. Return NO if you intend to show it at a later time. Defaults to YES.

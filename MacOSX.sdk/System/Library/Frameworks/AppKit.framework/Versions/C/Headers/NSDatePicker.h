@@ -1,7 +1,7 @@
 /*
 	NSDatePicker.h
 	Application Kit
-	Copyright (c) 2004-2019, Apple Inc.
+	Copyright (c) 2004-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -58,7 +58,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @property (nullable, copy) NSDate *maxDate;
 
-#pragma mark *** Calender Overlay Support ***
+#pragma mark *** Calendar Overlay Support ***
 
 @property BOOL presentsCalendarOverlay API_AVAILABLE(macos(10.15.4));
 

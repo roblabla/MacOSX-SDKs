@@ -20,6 +20,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_SWIFT_UI_ACTOR
 @protocol UIKeyInput <UITextInputTraits>
 
 @property(nonatomic, readonly) BOOL hasText;
@@ -64,7 +65,8 @@ typedef NS_ENUM(NSInteger, UITextGranularity) {
     UITextGranularityDocument
 };
 
-UIKIT_EXTERN API_AVAILABLE(ios(5.1)) @interface UIDictationPhrase : NSObject {
+UIKIT_EXTERN API_AVAILABLE(ios(5.1)) NS_SWIFT_UI_ACTOR
+@interface UIDictationPhrase : NSObject {
     @private
         NSString *_text;
         NSArray * __nullable _alternativeInterpretations;
@@ -78,7 +80,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(5.1)) @interface UIDictationPhrase : NSObject {
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) @interface UITextInputAssistantItem : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
+@interface UITextInputAssistantItem : NSObject
 
 /// Default is YES, controls if the user is allowed to hide the shortcuts bar. Does not influence the built in auto-hiding logic.
 @property (nonatomic, readwrite, assign) BOOL allowsHidingShortcuts;
@@ -89,7 +92,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watch
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UITextPlaceholder : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UITextPlaceholder : NSObject
 // Return the rects of the placeholder
 @property (nonatomic, readonly) NSArray<UITextSelectionRect *> *rects;
 @end
@@ -99,6 +103,7 @@ typedef NS_ENUM(NSInteger, UITextAlternativeStyle) {
     UITextAlternativeStyleLowConfidence
 };
 
+NS_SWIFT_UI_ACTOR
 @protocol UITextInput <UIKeyInput>
 @required
 
@@ -237,11 +242,13 @@ UIKIT_EXTERN NSString *const UITextInputTextFontKey            API_DEPRECATED_WI
  * evaluating characters at indices is an expensive proposition, a position within a text input
  * document is represented as an object, not an integer.  UITextRange and UITextPosition are abstract
  * classes provided to be subclassed when adopting UITextInput */
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UITextPosition : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+@interface UITextPosition : NSObject
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UITextRange : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+@interface UITextRange : NSObject
 
 @property (nonatomic, readonly, getter=isEmpty) BOOL empty;     //  Whether the range is zero-length.
 @property (nonatomic, readonly) UITextPosition *start;
@@ -252,7 +259,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UITextRange : NSObject
 /* UITextSelectionRect defines an annotated selection rect used by the system to
  * offer rich text interaction experience.  It also serves as an abstract class
  * provided to be subclassed when adopting UITextInput */
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UITextSelectionRect : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+@interface UITextSelectionRect : NSObject
 
 @property (nonatomic, readonly) CGRect rect;
 @property (nonatomic, readonly) NSWritingDirection writingDirection;
@@ -263,6 +271,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UITextSelectionRect : NSObject
 @end
 
 /* The input delegate must be notified of changes to the selection and text. */
+NS_SWIFT_UI_ACTOR
 @protocol UITextInputDelegate <NSObject>
 
 - (void)selectionWillChange:(nullable id <UITextInput>)textInput;
@@ -274,6 +283,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UITextSelectionRect : NSObject
 
 
 /* A tokenizer allows the text input system to evaluate text units of varying granularity. */
+NS_SWIFT_UI_ACTOR
 @protocol UITextInputTokenizer <NSObject>
 
 @required
@@ -288,7 +298,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UITextSelectionRect : NSObject
 
 /* A recommended base implementation of the tokenizer protocol. Subclasses are responsible
  * for handling directions and granularities affected by layout.*/
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UITextInputStringTokenizer : NSObject <UITextInputTokenizer> 
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+@interface UITextInputStringTokenizer : NSObject <UITextInputTokenizer> 
 
 - (instancetype)initWithTextInput:(UIResponder <UITextInput> *)textInput;
 
@@ -296,7 +307,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UITextInputStringTokenizer : NSO
 
 /* The UITextInputMode class should not be subclassed. It is to allow other in-app functionality to adapt 
  * based on the keyboard language. Different UITextInputMode objects may have the same primaryLanguage. */
-UIKIT_EXTERN API_AVAILABLE(ios(4.2)) @interface UITextInputMode : NSObject <NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(4.2)) NS_SWIFT_UI_ACTOR
+@interface UITextInputMode : NSObject <NSSecureCoding>
 
 @property (nullable, nonatomic, readonly, strong) NSString *primaryLanguage; // The primary language, if any, of the input mode.  A BCP 47 language identifier such as en-US
 

@@ -4,7 +4,7 @@
 
 	Framework:		AVFoundation
  
-	Copyright 2009-2019 Apple Inc. All rights reserved.
+	Copyright 2009-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -70,7 +70,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param			URL
 					An NSURL object that specifies a file containing a movie header.
 	@param			options
-					An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object. Currently no keys are defined.
+					An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object.
 	@result			An AVMovie object
 	@discussion     By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil.
                     If you want to create an AVMutableMovie from a file and then append sample buffers to any of its tracks, you must first set one of these properties 
@@ -84,7 +84,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param			URL
 					An NSURL object that specifies a file containing a movie header.
 	@param			options
-					An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object. Currently no keys are defined.
+					An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object.
 	@result			An AVMovie object
 	@discussion     By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil.
                     If you want to create an AVMutableMovie from a file and then append sample buffers to any of its tracks, you must first set one of these properties 
@@ -98,7 +98,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param			data
 					An NSData object containing a movie header.
 	@param			options
-					An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object. Currently no keys are defined.
+					An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object.
 	@result			An AVMovie object
 	@discussion     You can use this method to operate on movie headers that are not stored in files; this might include movie headers on the pasteboard (which do not contain media data). In general you should avoid loading an entire movie file with its media data into an instance of NSData! By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil.
                     If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
@@ -111,13 +111,26 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param			data
 					An NSData object containing a movie header.
 	@param			options
-					An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object. Currently no keys are defined.
+					An NSDictionary object that contains keys for specifying options for the initialization of the AVMovie object.
 	@result			An AVMovie object
 	@discussion     You can use this method to operate on movie headers that are not stored in files. In general you should avoid loading an entire movie file with its media data into an instance of NSData!
  
                     By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 */
 - (instancetype)initWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+
+#pragma mark --- Keys for initialization options dictionary ---
+/*!
+	@constant		AVMovieShouldSupportAliasDataReferencesKey
+	@abstract		Indicates whether alias data references in the movie should be parsed and resolved.
+	@discussion
+		Default is NO. Although the majority of QuickTime movie files contain all of the media data they require, some contain references to media stored in other files. While AVFoundation and CoreMedia typically employ a URL reference for this purpose, older implementations such as QuickTime 7 have commonly employed a Macintosh alias instead, as documented in the QuickTime File Format specification. If your application must work with legacy QuickTime movie files containing alias-based references to media data stored in other files, the use of this AVMovie initialization option is appropriate. AVMovie and AVMutableMovie do not create movies using alias data references to external media files.
+ 
+	If you provide a value for AVMovieReferenceRestrictionsKey, restrictions will be observed for resolved alias references just as they are for URL references.
+ 
+	For more details about alias resolution, consult documentation of the bookmark-related interfaces of NSURL.
+*/
+AVF_EXPORT NSString *const AVMovieShouldSupportAliasDataReferencesKey API_AVAILABLE(macos(10.12), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@property       URL
@@ -228,6 +241,16 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 - (nullable AVMovieTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
 
 /*!
+	@method		loadTrackWithTrackID:completionHandler:
+	@abstract	Loads an instance of AVMovieTrack that represents the track of the specified trackID.
+	@param		trackID
+				The trackID of the requested AVMovieTrack.
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded track (which may be nil if no track of the specified trackID is available) or an error.
+*/
+- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^)(AVMovieTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
   @method		tracksWithMediaType:
   @abstract		Provides an array of AVMovieTracks of the asset that present media of the specified media type.
   @param		mediaType
@@ -238,6 +261,16 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 - (NSArray<AVMovieTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
 
 /*!
+	@method		loadTracksWithMediaType:completionHandler:
+	@abstract	Loads an array of AVMovieTracks of the asset that present media of the specified media type.
+	@param		mediaType
+				The media type according to which AVAsset filters its AVMovieTracks. (Media types are defined in AVMediaFormat.h.)
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks of the specified media type are available) or an error.
+*/
+- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^)(NSArray<AVMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
   @method		tracksWithMediaCharacteristic:
   @abstract		Provides an array of AVMovieTracks of the asset that present media with the specified characteristic.
   @param		mediaCharacteristic
@@ -246,6 +279,16 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
 - (NSArray<AVMovieTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
+
+/*!
+	@method		loadTracksWithMediaCharacteristic:completionHandler:
+	@abstract	Loads an array of AVMovieTracks of the asset that present media with the specified characteristic.
+	@param		mediaCharacteristic
+				The media characteristic according to which AVAsset filters its AVMovieTracks. (Media characteristics are defined in AVMediaFormat.h.)
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks with the specified characteristic are available) or an error.
+*/
+- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^)(NSArray<AVMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 
@@ -277,7 +320,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param			URL
 					An NSURL object that specifies a file containing a movie header.
 	@param			options
-					An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. Currently no keys are defined.
+					An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object.
 	@param			outError
 					If an error occurs creating a movie, describes the nature of the failure.
 	@result			An AVMutableMovie object
@@ -293,7 +336,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param			URL
 					An NSURL object that specifies a file containing a movie header.
 	@param			options
-					An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. Currently no keys are defined.
+					An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object.
 	@param			outError
 					If an error occurs creating a movie, describes the nature of the failure.
 	@result			An AVMutableMovie object
@@ -309,7 +352,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param			data
 					An NSData object containing a movie header.
 	@param			options
-					An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. Currently no keys are defined.
+					An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object.
 	@param			outError
 					If an error occurs creating a movie, describes the nature of the failure.
 	@result			An AVMutableMovie object
@@ -325,7 +368,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param			data
 					An NSData object containing a movie header.
 	@param			options
-					An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. Currently no keys are defined.
+					An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object.
 	@param			outError
 					If an error occurs creating a movie, describes the nature of the failure.
 	@result			An AVMutableMovie object
@@ -341,7 +384,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param			movie
 					If you wish to transfer settings from an existing movie (including movie userdata and metadata, preferred rate, preferred volume, etc.), pass a reference to an AVMovie object representing that movie. Otherwise pass nil. The userdata and metadata from the source movie may need to be converted if the format of that movie differs from fileType; you may wish to inspect the userdata or metadata of the receiver to ensure that important data was copied.
 	@param			options
-					An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. Currently no keys are defined; pass nil for default initialization behavior.
+					An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. Pass nil for default initialization behavior.
 	@param			outError
 					If an error occurs creating a movie, describes the nature of the failure.
 	@result			An AVMutableMovie object
@@ -357,7 +400,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param			movie
 					If you wish to transfer settings from an existing movie (including movie userdata and metadata, preferred rate, preferred volume, etc.), pass a reference to an AVMovie object representing that movie. Otherwise pass nil. The userdata and metadata from the source movie may need to be converted if the format of that movie differs from fileType; you may wish to inspect the userdata or metadata of the receiver to ensure that important data was copied.
 	@param			options
-					An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. Currently no keys are defined; pass nil for default initialization behavior.
+					An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. Pass nil for default initialization behavior.
 	@param			outError
 					If an error occurs creating a movie, describes the nature of the failure.
 	@result			An AVMutableMovie object
@@ -508,7 +551,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param			track
 					If you wish to transfer settings from an existing track, including track userdata and metadata, width, height, preferred volume, etc., pass a reference to an AVAssetTrack representing that track. Otherwise pass nil.
 	@param			options
-					An NSDictionary object that contains keys for specifying options for the initialization of the new AVMutableMovieTrack object. Currently no keys are defined; pass nil for default initialization behavior.
+					An NSDictionary object that contains keys for specifying options for the initialization of the new AVMutableMovieTrack object. Pass nil for default initialization behavior.
 	@result			An AVMutableMovieTrack object
     @discussion		The trackID of the newly added track is a property of the returned instance of AVMutableMovieTrack.
 */
@@ -520,7 +563,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param			existingTracks
 					An array of AVAssetTrack objects.
 	@param			options
-					An NSDictionary object that contains keys for specifying options for the initialization of the new AVMutableMovieTrack objects. Currently no keys are defined; pass nil for default initialization behavior.
+					An NSDictionary object that contains keys for specifying options for the initialization of the new AVMutableMovieTrack objects. Pass nil for default initialization behavior.
 	@result			An array of AVMutableMovieTrack objects; the index of a track in this array is the same as the index of its source track in the existingTracks array.
     @discussion		This method creates one or more empty tracks in the target movie and configures those tracks with settings (such as track userdata and metadata, width, height, and preferred volume) copied from the source tracks in the existingTracks array. Also, properties involving pairs of tracks (such as track references) are copied from the source tracks to the target tracks.
 */
@@ -561,6 +604,16 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 - (nullable AVMutableMovieTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
 
 /*!
+	@method		loadTrackWithTrackID:completionHandler:
+	@abstract	Loads an instance of AVMutableMovieTrack that represents the track of the specified trackID.
+	@param		trackID
+				The trackID of the requested AVMutableMovieTrack.
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded track (which may be nil if no track of the specified trackID is available) or an error.
+*/
+- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^)(AVMutableMovieTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
   @method		tracksWithMediaType:
   @abstract		Provides an array of AVMutableMovieTracks of the asset that present media of the specified media type.
   @param		mediaType
@@ -571,6 +624,16 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 - (NSArray<AVMutableMovieTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
 
 /*!
+	@method		loadTracksWithMediaType:completionHandler:
+	@abstract	Loads an array of AVMutableMovieTracks of the asset that present media of the specified media type.
+	@param		mediaType
+				The media type according to which AVAsset filters its AVMutableMovieTracks. (Media types are defined in AVMediaFormat.h.)
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks of the specified media type are available) or an error.
+*/
+- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^)(NSArray<AVMutableMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
   @method		tracksWithMediaCharacteristic:
   @abstract		Provides an array of AVMutableMovieTracks of the asset that present media with the specified characteristic.
   @param		mediaCharacteristic
@@ -579,6 +642,16 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
 - (NSArray<AVMutableMovieTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
+
+/*!
+	@method		loadTracksWithMediaCharacteristic:completionHandler:
+	@abstract	Loads an array of AVMutableMovieTracks of the asset that present media with the specified characteristic.
+	@param		mediaCharacteristic
+				The media characteristic according to which AVAsset filters its AVMutableMovieTracks. (Media characteristics are defined in AVMediaFormat.h.)
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks with the specified characteristic are available) or an error.
+*/
+- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^)(NSArray<AVMutableMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 
@@ -667,6 +740,16 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 - (nullable AVFragmentedMovieTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
 
 /*!
+	@method		loadTrackWithTrackID:completionHandler:
+	@abstract	Loads an instance of AVFragmentedMovieTrack that represents the track of the specified trackID.
+	@param		trackID
+				The trackID of the requested AVFragmentedMovieTrack.
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded track (which may be nil if no track of the specified trackID is available) or an error.
+*/
+- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^)(AVFragmentedMovieTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
   @method		tracksWithMediaType:
   @abstract		Provides an array of AVFragmentedMovieTracks of the asset that present media of the specified media type.
   @param		mediaType
@@ -677,6 +760,16 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 - (NSArray<AVFragmentedMovieTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
 
 /*!
+	@method		loadTracksWithMediaType:completionHandler:
+	@abstract	Loads an array of AVFragmentedMovieTracks of the asset that present media of the specified media type.
+	@param		mediaType
+				The media type according to which AVAsset filters its AVFragmentedMovieTracks. (Media types are defined in AVMediaFormat.h.)
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks of the specified media type are available) or an error.
+*/
+- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^)(NSArray<AVFragmentedMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
   @method		tracksWithMediaCharacteristic:
   @abstract		Provides an array of AVFragmentedMovieTracks of the asset that present media with the specified characteristic.
   @param		mediaCharacteristic
@@ -685,6 +778,16 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
 - (NSArray<AVFragmentedMovieTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
+
+/*!
+	@method		loadTracksWithMediaCharacteristic:completionHandler:
+	@abstract	Loads an array of AVFragmentedMovieTracks of the asset that present media with the specified characteristic.
+	@param		mediaCharacteristic
+				The media characteristic according to which AVAsset filters its AVFragmentedMovieTracks. (Media characteristics are defined in AVMediaFormat.h.)
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks with the specified characteristic are available) or an error.
+*/
+- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^)(NSArray<AVFragmentedMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 

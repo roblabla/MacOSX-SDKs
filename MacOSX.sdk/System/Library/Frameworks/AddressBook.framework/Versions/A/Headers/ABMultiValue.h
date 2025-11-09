@@ -24,13 +24,6 @@
 //
 
 @interface ABMultiValue : NSObject <NSCopying, NSMutableCopying, NSFastEnumeration>
-{
-@protected
-    NSMutableArray      *_identifiers;
-    NSMutableArray      *_labels;
-    NSMutableArray      *_values;
-    NSString            *_primaryIdentifier;
-}
 
 - (NSUInteger)count;
     // Returns the number of value/label pairs

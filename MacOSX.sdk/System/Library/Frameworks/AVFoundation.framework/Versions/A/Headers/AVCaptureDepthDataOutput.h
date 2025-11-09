@@ -4,7 +4,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2016-2018 Apple Inc. All rights reserved.
+    Copyright 2016-2021 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVCaptureOutputBase.h>

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           620A5ADF-1B00-3E2A-8822-E4689F01DA6A
+    value:           D35CA0F5-B3C3-3CF6-9D2F-4D405FD076FB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           88C67A37-4AE7-32E8-A947-8A461A5A1A42
+    value:           E73E5E95-B65A-3547-9E72-6CCBDDB2B04A
 install-name:    '/System/Library/PrivateFrameworks/SpeechRecognitionCommandServices.framework/Versions/A/SpeechRecognitionCommandServices'
 exports:
   - targets:         [ x86_64-macos ]
@@ -34,19 +34,20 @@ exports:
                        _kSRCSCommandParameterElementName, _kSRCSCommandParameterKeyboardKeyName, 
                        _kSRCSCommandParameterMenuBarItem, _kSRCSCommandParameterMenuItem, 
                        _kSRCSCommandParameterModifierKeys, _kSRCSCommandParameterNumberTwoThroughNinetyNine, 
-                       _kSRCSCommandParameterNumberTwoThroughNinetyNine2, _kSRCSCommandParameterOverlayLabel, 
-                       _kSRCSCommandParameterOverlayLabel2, _kSRCSCommandParameterPhoneticKeyName, 
-                       _kSRCSCommandParameterRunningApplication, _kSRCSCommandParameterScreenDistanceCardinalNumber, 
-                       _kSRCSCommandParameterSwitchableApplication, _kSRCSCommandParameterText, 
-                       _kSRCSCommandParameterTextSegmentCardinalNumber, _kSRCSCommandParameterTextVariants, 
-                       _kSRCSCommandParameterWindowItem, _kSRCSCommandParameterWindowItem2, 
-                       _kSRCSCommandParseAttributeOptional, _kSRCSCommandParseAttributePath, 
-                       _kSRCSCommandParseDictionaryKeyAttributes, _kSRCSCommandParseDictionaryKeyChildren, 
-                       _kSRCSCommandParseDictionaryKeyIdentifier, _kSRCSCommandParseDictionaryKeyIsBuiltInIdentifier, 
-                       _kSRCSCommandParseDictionaryKeyText, _kSRCSCommandTargetTypeNone, 
-                       _kSRCSCommandTargetTypeOSX, _kSRCSCommandTargetTypeiOS, _kSRCSCommandTargetTypeiPad, 
-                       _kSRCSCommandTargetTypeiPhone, _kSRCSCommandTargetTypewatchOS, 
-                       _yychar, _yyerror, _yylex, _yylval, _yynerrs, _yyparse ]
+                       _kSRCSCommandParameterNumberTwoThroughNinetyNine2, _kSRCSCommandParameterNumberZeroThroughOneHundred, 
+                       _kSRCSCommandParameterOverlayLabel, _kSRCSCommandParameterOverlayLabel2, 
+                       _kSRCSCommandParameterPhoneticKeyName, _kSRCSCommandParameterRunningApplication, 
+                       _kSRCSCommandParameterScreenDistanceCardinalNumber, _kSRCSCommandParameterSwitchableApplication, 
+                       _kSRCSCommandParameterText, _kSRCSCommandParameterTextSegmentCardinalNumber, 
+                       _kSRCSCommandParameterTextVariants, _kSRCSCommandParameterWindowItem, 
+                       _kSRCSCommandParameterWindowItem2, _kSRCSCommandParseAttributeOptional, 
+                       _kSRCSCommandParseAttributePath, _kSRCSCommandParseDictionaryKeyAttributes, 
+                       _kSRCSCommandParseDictionaryKeyChildren, _kSRCSCommandParseDictionaryKeyIdentifier, 
+                       _kSRCSCommandParseDictionaryKeyIsBuiltInIdentifier, _kSRCSCommandParseDictionaryKeyText, 
+                       _kSRCSCommandTargetTypeNone, _kSRCSCommandTargetTypeOSX, _kSRCSCommandTargetTypeiOS, 
+                       _kSRCSCommandTargetTypeiPad, _kSRCSCommandTargetTypeiPhone, 
+                       _kSRCSCommandTargetTypewatchOS, _yychar, _yyerror, _yylex, 
+                       _yylval, _yynerrs, _yyparse ]
     objc-classes:    [ CMDPGrammar, CMDPGrammarData, CMDPResult, SRCSCommandRecognitionSystem, 
                        SRCSCommandRecognizer, SRCSCommandSegmentInfo, SRCSCommandStringsTable, 
                        SRCSLexiconManager, SRCSPhraseMatchResult, SRCSSpokenCommand, 

@@ -97,4 +97,3 @@ HK_EXTERN API_AVAILABLE(ios(9.3), watchos(2.2))
 HK_EXTERN NSString * const HKPredicateKeyPathDateComponents API_AVAILABLE(ios(9.3), watchos(2.2));
 
 NS_ASSUME_NONNULL_END
-

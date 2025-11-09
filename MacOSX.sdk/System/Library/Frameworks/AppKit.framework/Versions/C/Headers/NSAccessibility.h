@@ -1,7 +1,7 @@
 /*
 	NSAccessibility.h
 	Application Kit
-	Copyright (c) 2001-2019, Apple Inc.
+	Copyright (c) 2001-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -119,7 +119,6 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 /* Notification posted to the NSWorkspace notification center when accessibility display options have changed. */
 APPKIT_EXTERN NSNotificationName const NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification API_AVAILABLE(macos(10.10));
-
 
 /*** Accessibility Related Methods ***/
 

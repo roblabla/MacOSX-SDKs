@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           44E300C0-2286-3B4D-8C97-BF4037BCFAE2
+    value:           F9043D80-A768-31E2-87CA-6E59A0C2C70C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           10542960-9B7D-3BC9-A203-F5CFBEFD0082
+    value:           DC481DCA-D9BB-336A-94F0-37413CAFEA73
 install-name:    '/System/Library/PrivateFrameworks/SiriDailyBriefingInternal.framework/Versions/A/SiriDailyBriefingInternal'
 swift-abi-version: 7
 allowable-clients:

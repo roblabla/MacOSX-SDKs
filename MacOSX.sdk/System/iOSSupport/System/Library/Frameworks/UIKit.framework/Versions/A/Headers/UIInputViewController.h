@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UILexicon;
 
+NS_SWIFT_UI_ACTOR
 @protocol UITextDocumentProxy <UIKeyInput>
 
 @property (nullable, nonatomic, readonly) NSString *documentContextBeforeInput;
@@ -38,7 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UIInputViewController : UIViewController <UITextInputDelegate>
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
+@interface UIInputViewController : UIViewController <UITextInputDelegate>
 
 @property (nullable, nonatomic, strong) UIInputView *inputView;
 

@@ -3,14 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E4AB3D4E-DF67-3F00-A57C-7BF30A6CA51E
+    value:           669BAEF4-D435-371D-BEDF-36EE9EE47C73
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7EBD6C47-ED43-3668-9294-385E1D3ABAF9
+    value:           EBC6A92F-27DA-348D-854F-CD74F65A9DAF
 install-name:    '/System/Library/PrivateFrameworks/StoreKitUIMac.framework/Versions/A/StoreKitUIMac'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _SKUIErrorDomain ]
-    objc-classes:    [ SKUIStoreProductViewController ]
+    objc-classes:    [ SKUIRemoteEngagementRemoteViewController, SKUIRemoteEngagementViewController, 
+                       SKUIStoreProductViewController ]
 ...

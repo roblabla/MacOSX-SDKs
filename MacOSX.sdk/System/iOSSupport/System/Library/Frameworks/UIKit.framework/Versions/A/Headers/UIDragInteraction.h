@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class UIDragItem, UITargetedDragPreview;
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @protocol UIDragAnimating <NSObject>
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@protocol UIDragAnimating <NSObject>
 
 /* Instances of UIDragAnimating provide you a way to animate your own changes
  * alongside the drag and drop system's animations.
@@ -26,12 +27,13 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @protocol UIDragAnimatin
  * animated to their new values. 
  */
 - (void)addAnimations:(void (^)(void))animations;
-- (void)addCompletion:(void (^)(UIViewAnimatingPosition finalPosition))completion;
+- (void)addCompletion:(void (^)(UIViewAnimatingPosition finalPosition))completion NS_SWIFT_DISABLE_ASYNC;
 
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @interface UIDragInteraction : NSObject <UIInteraction>
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIDragInteraction : NSObject <UIInteraction>
 
 - (instancetype)initWithDelegate:(id<UIDragInteractionDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 - (instancetype)init NS_UNAVAILABLE;
@@ -60,7 +62,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @interface 
 @end
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @protocol UIDragInteractionDelegate <NSObject>
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@protocol UIDragInteractionDelegate <NSObject>
 
 @required
 

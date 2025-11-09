@@ -18,7 +18,8 @@ typedef NS_ENUM(NSInteger, UIPushBehaviorMode) {
     UIPushBehaviorModeInstantaneous
 } API_AVAILABLE(ios(7.0));
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIPushBehavior : UIDynamicBehavior
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UIPushBehavior : UIDynamicBehavior
 
 - (instancetype)initWithItems:(NSArray<id <UIDynamicItem>> *)items mode:(UIPushBehaviorMode)mode NS_DESIGNATED_INITIALIZER;
 

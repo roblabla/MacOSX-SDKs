@@ -52,6 +52,7 @@ typedef function_table_entry   *function_table_t;
 #define	netname_MSG_COUNT	4
 #endif	/* netname_MSG_COUNT */
 
+#include <Availability.h>
 #include <mach/std_types.h>
 #include <mach/mig.h>
 #include <servers/netname_defs.h>

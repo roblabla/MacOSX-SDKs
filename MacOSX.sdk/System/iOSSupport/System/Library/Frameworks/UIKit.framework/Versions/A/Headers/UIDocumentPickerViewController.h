@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIDocumentPickerViewController, UIDocumentMenuViewController, UTType;
 
-API_UNAVAILABLE(tvos) @protocol UIDocumentPickerDelegate <NSObject>
+API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@protocol UIDocumentPickerDelegate <NSObject>
 
 @optional
 
@@ -33,7 +34,8 @@ typedef NS_ENUM(NSUInteger, UIDocumentPickerMode) {
     UIDocumentPickerModeMoveToService
 } API_DEPRECATED("Use appropriate initializers instead",ios(8.0,14.0)) API_UNAVAILABLE(tvos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) @interface UIDocumentPickerViewController : UIViewController
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIDocumentPickerViewController : UIViewController
 
 // Initializes the picker instance for selecting a document in a remote location. The valid modes are Import and Open.
 - (instancetype)initWithDocumentTypes:(NSArray <NSString *>*)allowedUTIs inMode:(UIDocumentPickerMode)mode NS_DESIGNATED_INITIALIZER API_DEPRECATED_WITH_REPLACEMENT("use initForOpeningContentTypes:asCopy: or initForOpeningContentTypes: instead", ios(8.0, 14.0)) API_UNAVAILABLE(tvos);

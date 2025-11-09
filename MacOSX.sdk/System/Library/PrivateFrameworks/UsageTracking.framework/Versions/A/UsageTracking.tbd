@@ -4,27 +4,28 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           51258597-7430-3940-8146-544229BD97E0
+    value:           FCDEFF01-CB42-34D5-AB15-5EC71F8DBD42
   - target:          x86_64-maccatalyst
-    value:           51258597-7430-3940-8146-544229BD97E0
+    value:           FCDEFF01-CB42-34D5-AB15-5EC71F8DBD42
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F82D810F-743D-317F-8A55-B6EA16D2BAD2
+    value:           2088024E-8A4D-3DC6-96C2-0222BF714F1D
   - target:          arm64e-maccatalyst
-    value:           F82D810F-743D-317F-8A55-B6EA16D2BAD2
+    value:           2088024E-8A4D-3DC6-96C2-0222BF714F1D
 install-name:    '/System/Library/PrivateFrameworks/UsageTracking.framework/Versions/A/UsageTracking'
-current-version: 145
+current-version: 215
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ ContextStoreAgent, DeviceManagementTests, PowerlogHelperdOperators, 
-                       PowerlogLiteOperators, RemoteManagementTests, SafariShared, 
-                       ScreenTime, ScreenTimeAgent, ScreenTimeSettingsUI, ScreenTimeTests, 
-                       ScreenTimeUI, ScreenTimeWebExtension, UsageTrackingAgent, 
-                       dmd, remotemanagementd, usagetool ]
+    clients:         [ ContextStoreAgent, DeviceActivity, DeviceActivityFunctionalTests, 
+                       DeviceActivityTests, DeviceManagementTests, FamilyControlsAgent, 
+                       FamilyControlsTests, PowerlogHelperdOperators, PowerlogLiteOperators, 
+                       RemoteManagementTests, SafariShared, ScreenTime, ScreenTimeAgent, 
+                       ScreenTimeSettingsUI, ScreenTimeTests, ScreenTimeUI, ScreenTimeWebExtension, 
+                       UsageTrackingAgent, dmd, remotemanagementd, usagetool ]
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -51,8 +52,10 @@ exports:
                        _USVideoMetadataKeyRequiresPlaybackAndIsNotPlaying, _USVideoMetadataKeyUserHasPlayedAudioBefore, 
                        _usageContextContainsPlayingQuickLookVideo ]
     objc-classes:    [ USApplicationUsageReport, USBudget, USCategoryUsageReport, 
-                       USDomainNormalization, USTrackingAgentConnection, USTrackingAgentPrivateConnection, 
-                       USTrustIdentifier, USUsageMonitor, USUsageQuerying, USUsageReport, 
-                       USUsageReporter, USUsageTrackingBundle, USUsageTrust, USVideoUsage, 
-                       USWebHistory, USWebUsageReport, USWebpageUsage, USXPCRemoteObjectProxy ]
+                       USDeviceActivityEvent, USDeviceActivityMonitorExtensionProxy, 
+                       USDeviceActivitySchedule, USDomainNormalization, USTrackingAgentConnection, 
+                       USTrackingAgentPrivateConnection, USTrustIdentifier, USUsageMonitor, 
+                       USUsageQuerying, USUsageReport, USUsageReporter, USUsageTrackingBundle, 
+                       USUsageTrust, USVideoUsage, USWebHistory, USWebUsageReport, 
+                       USWebpageUsage, USXPCRemoteObjectProxy ]
 ...

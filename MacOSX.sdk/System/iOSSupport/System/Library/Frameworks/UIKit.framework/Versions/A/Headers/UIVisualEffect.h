@@ -11,7 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UIVisualEffect : NSObject <NSCopying, NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
+@interface UIVisualEffect : NSObject <NSCopying, NSSecureCoding>
 
 @end
 

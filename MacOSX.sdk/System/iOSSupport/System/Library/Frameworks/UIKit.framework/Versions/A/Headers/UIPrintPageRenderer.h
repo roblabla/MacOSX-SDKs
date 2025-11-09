@@ -24,7 +24,8 @@ API_AVAILABLE(ios(14.5)) typedef NS_ENUM(NSInteger, UIPrintRenderingQuality) {
     UIPrintRenderingQualityResponsive
 };
 
-UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) @interface UIPrintPageRenderer : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIPrintPageRenderer : NSObject
 
 @property(nonatomic) CGFloat   headerHeight;   // top of contentRect from printableRect
 @property(nonatomic) CGFloat   footerHeight;   // bottom of contentRect from printableRect

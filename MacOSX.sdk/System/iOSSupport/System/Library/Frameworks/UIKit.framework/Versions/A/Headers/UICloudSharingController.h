@@ -26,7 +26,7 @@ typedef NS_OPTIONS(NSUInteger, UICloudSharingPermissionOptions) {
     UICloudSharingPermissionAllowReadWrite = 1 << 3, // The user is allowed to grant participants read/write permissions
 } API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
-API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UICloudSharingControllerDelegate <NSObject>
 
 - (void)cloudSharingController:(UICloudSharingController *)csc failedToSaveShareWithError:(NSError *)error;
@@ -45,7 +45,8 @@ API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) @interface UICloudSharingController : UIViewController
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
+@interface UICloudSharingController : UIViewController
 
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_UNAVAILABLE;

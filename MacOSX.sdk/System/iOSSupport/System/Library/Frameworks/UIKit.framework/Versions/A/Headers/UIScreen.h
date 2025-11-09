@@ -32,10 +32,11 @@ typedef NS_ENUM(NSInteger, UIScreenOverscanCompensation) {
     UIScreenOverscanCompensationInsetBounds,                     // the screen's bounds will be inset in the framebuffer to avoid clipping. no scaling will occur
     UIScreenOverscanCompensationNone API_AVAILABLE(ios(9.0)), // no scaling will occur. use overscanCompensationInsets to determine the necessary insets to avoid clipping
     
-    UIScreenOverscanCompensationInsetApplicationFrame NS_ENUM_DEPRECATED_IOS(5_0, 9_0, "Use UIScreenOverscanCompensationNone") = 2,
+    UIScreenOverscanCompensationInsetApplicationFrame API_DEPRECATED_WITH_REPLACEMENT("UIScreenOverscanCompensationNone", ios(5.0, 9.0)) = 2,
 };
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIScreen : NSObject <UITraitEnvironment>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIScreen : NSObject <UITraitEnvironment>
 
 @property(class, nonatomic, readonly) NSArray<UIScreen *> *screens API_AVAILABLE(ios(3.2));          // all screens currently attached to the device
 @property(class, nonatomic, readonly) UIScreen *mainScreen;      // the device's internal screen
@@ -76,9 +77,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIScreen : NSObject <UITraitEnvi
 // Will be `0` if display latency has not been calibrated by the user.
 @property(nonatomic, readonly) CFTimeInterval calibratedLatency API_AVAILABLE(ios(13.0));
 
-@property (nullable, nonatomic, weak, readonly) id<UIFocusItem> focusedItem API_AVAILABLE(ios(10.0)); // Returns the focused item for this screen's focus system. Use UIFocusSystem's focusedItem property instead – this property will be deprecated in a future release.
-@property (nullable, nonatomic, weak, readonly) UIView *focusedView API_AVAILABLE(ios(9.0)); // If focusedItem is not a view, this returns that item's containing view. Otherwise they are equal. Use UIFocusSystem's focusedItem property instead – this property will be deprecated in a future release.
-@property (readonly, nonatomic) BOOL supportsFocus API_AVAILABLE(ios(9.0));
+@property (nullable, nonatomic, weak, readonly) id<UIFocusItem> focusedItem API_DEPRECATED("Use -[UIWindowScene focusSystem].focusedItem instead", ios(10.0, 15.0));
+@property (nullable, nonatomic, weak, readonly) UIView *focusedView API_DEPRECATED("Use -[UIWindowScene focusSystem].focusedItem instead", ios(9.0, 15.0));
+@property (readonly, nonatomic) BOOL supportsFocus API_DEPRECATED("Use -[UIWindowScene focusSystem] != nil instead", ios(9.0, 15.0));
 
 @property(nonatomic,readonly) CGRect applicationFrame API_DEPRECATED_WITH_REPLACEMENT("bounds", ios(2.0, 9.0)) API_UNAVAILABLE(tvos);
 

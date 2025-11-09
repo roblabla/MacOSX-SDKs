@@ -14,7 +14,7 @@
 @class NSString;
 @class NSURL;
 
-typedef NSString * NSHTTPCookiePropertyKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSHTTPCookiePropertyKey NS_TYPED_EXTENSIBLE_ENUM;
 typedef NSString * NSHTTPCookieStringPolicy NS_TYPED_ENUM;
 
 NS_ASSUME_NONNULL_BEGIN

@@ -15,7 +15,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(11.0), watchos(4.0))
+API_DEPRECATED("INAppendToNoteIntent is deprecated. There is no replacement.", ios(11.0, 15.0), watchos(4.0, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INAppendToNoteIntent : INIntent
 
@@ -35,7 +35,7 @@ API_UNAVAILABLE(macos, tvos)
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(11.0), watchos(4.0))
+API_DEPRECATED("INAppendToNoteIntentHandling is deprecated. There is no replacement.", ios(11.0, 15.0), watchos(4.0, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @protocol INAppendToNoteIntentHandling <NSObject>
 
@@ -80,10 +80,10 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolveTargetNoteForAppendToNote:(INAppendToNoteIntent *)intent
-                    withCompletion:(void (^)(INNoteResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTargetNote(for:with:));
+                          withCompletion:(void (^)(INNoteResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTargetNote(for:with:));
 
 - (void)resolveContentForAppendToNote:(INAppendToNoteIntent *)intent
-                    withCompletion:(void (^)(INNoteContentResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveContent(for:with:));
+                       withCompletion:(void (^)(INNoteContentResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveContent(for:with:));
 
 @end
 

@@ -12,7 +12,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/NSText.h>
 
-
+#if TARGET_OS_IPHONE
 NS_ASSUME_NONNULL_BEGIN
 
 #if !__NSPARAGRAPH_STYLE_SHARED_SECTION__
@@ -45,7 +45,8 @@ typedef NS_OPTIONS(NSUInteger, NSLineBreakStrategy) {
 typedef NSString * NSTextTabOptionKey NS_TYPED_ENUM;
 UIKIT_EXTERN NSTextTabOptionKey const NSTabColumnTerminatorsAttributeName API_AVAILABLE(macos(10.0), ios(7.0)); // An attribute for NSTextTab options.  The value is NSCharacterSet.  The character set is used to determine the tab column terminating character.  The tab and newline characters are implied even if not included in the character set.
 
-UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0)) @interface NSTextTab : NSObject <NSCopying, NSCoding, NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
+@interface NSTextTab : NSObject <NSCopying, NSCoding, NSSecureCoding>
 
 + (NSCharacterSet *)columnTerminatorsForLocale:(nullable NSLocale *)aLocale API_AVAILABLE(macos(10.11), ios(7.0)); // Returns the column terminators for locale. Passing nil returns an instance corresponding to +[NSLocale systemLocale]. For matching user's formatting preferences, pass +[NSLocale currentLocale]. Can be used as the value for NSTabColumnTerminatorsAttributeName to make a decimal tab stop.
 
@@ -59,7 +60,8 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0)) @interface NSTextTab : NSObjec
 
 
 // NSParagraphStyle
-UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(6.0)) @interface NSParagraphStyle : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(6.0))
+@interface NSParagraphStyle : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
 @property (class, readonly, copy, NS_NONATOMIC_IOSONLY) NSParagraphStyle *defaultParagraphStyle; // This class property returns a shared and cached NSParagraphStyle instance with the default style settings, with same value as the result of [[NSParagraphStyle alloc] init].
 
@@ -88,6 +90,9 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(6.0)) @interface NSParagraphStyle : 
 // Specifies the threshold for hyphenation.  Valid values lie between 0.0 and 1.0 inclusive.  Hyphenation will be attempted when the ratio of the text width as broken without hyphenation to the width of the line fragment is less than the hyphenation factor.  When this takes on its default value of 0.0, the layout manager's hyphenation factor is used instead.  When both are 0.0, hyphenation is disabled.
 @property (readonly, NS_NONATOMIC_IOSONLY) float hyphenationFactor;
 
+// A property controlling the hyphenation behavior for the paragraph associated with the paragraph style. The exact hyphenation logic is dynamically determined by the layout context such as language, platform, etc. When YES, it affects the return value from -hyphenationFactor when the property is set to 0.0.
+@property (readonly, NS_NONATOMIC_IOSONLY) BOOL usesDefaultHyphenation API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
 @property (readonly,copy, NS_NONATOMIC_IOSONLY) NSArray<NSTextTab *> *tabStops API_AVAILABLE(macos(10.0), ios(7.0)); // An array of NSTextTabs. Contents should be ordered by location. The default value is an array of 12 left-aligned tabs at 28pt interval
 @property (readonly, NS_NONATOMIC_IOSONLY) CGFloat defaultTabInterval API_AVAILABLE(macos(10.0), ios(7.0)); // The default tab interval used for locations beyond the last element in tabStops
 
@@ -98,7 +103,8 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(6.0)) @interface NSParagraphStyle : 
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(6.0)) @interface NSMutableParagraphStyle : NSParagraphStyle
+UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(6.0))
+@interface NSMutableParagraphStyle : NSParagraphStyle
 
 @property (NS_NONATOMIC_IOSONLY) CGFloat lineSpacing;
 @property (NS_NONATOMIC_IOSONLY) CGFloat paragraphSpacing;
@@ -113,6 +119,7 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(6.0)) @interface NSMutableParagraphS
 @property (NS_NONATOMIC_IOSONLY) CGFloat lineHeightMultiple;
 @property (NS_NONATOMIC_IOSONLY) CGFloat paragraphSpacingBefore;
 @property (NS_NONATOMIC_IOSONLY) float hyphenationFactor;
+@property (readwrite, NS_NONATOMIC_IOSONLY) BOOL usesDefaultHyphenation API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 @property (null_resettable, copy, NS_NONATOMIC_IOSONLY) NSArray<NSTextTab *> *tabStops API_AVAILABLE(macos(10.0), ios(7.0));
 @property (NS_NONATOMIC_IOSONLY) CGFloat defaultTabInterval API_AVAILABLE(macos(10.0), ios(7.0));
 @property (NS_NONATOMIC_IOSONLY) BOOL allowsDefaultTighteningForTruncation API_AVAILABLE(macos(10.11), ios(9.0));
@@ -125,8 +132,10 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(6.0)) @interface NSMutableParagraphS
 
 @end
 
-
 NS_ASSUME_NONNULL_END
+#elif TARGET_OS_OSX
+#import <AppKit/NSParagraphStyle.h>
+#endif
 
 #else
 #import <UIKitCore/NSParagraphStyle.h>

@@ -1,7 +1,7 @@
 /*
 	NSAccessibilityConstants.h
 	Application Kit
-	Copyright (c) 2001-2019, Apple Inc.
+	Copyright (c) 2001-2021, Apple Inc.
 	All rights reserved.
 */
 #import <AppKit/AppKitDefines.h>

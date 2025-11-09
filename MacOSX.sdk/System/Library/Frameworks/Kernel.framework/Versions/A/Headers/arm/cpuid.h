@@ -39,6 +39,7 @@
 #include <stdint.h>
 #include <mach/boolean.h>
 #include <machine/machine_cpuid.h>
+#include <machine/machine_routines.h>
 
 typedef struct {
 	uint32_t arm_rev : 4,  /* 00:03 revision number */
@@ -178,6 +179,7 @@ typedef union {
 
 
 
+
 /* Cache type identification */
 
 /* Supported Cache Types */
@@ -258,6 +260,7 @@ extern arm_debug_info_t *arm_debug_info(void);
 
 extern void do_cacheid(void);
 extern cache_info_t *cache_info(void);
+extern cache_info_t *cache_info_type(cluster_type_t cluster_type);
 
 extern void do_mvfpid(void);
 extern arm_mvfp_info_t *arm_mvfp_info(void);

@@ -5,8 +5,8 @@
 //  Copyright © 2018 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <Vision/VNRequest.h>
+#import <Vision/VNObservation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -17,9 +17,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
 @interface VNGenerateObjectnessBasedSaliencyImageRequest : VNImageBasedRequest
+
+/*!
+	@discussion VNSaliencyImageObservation results.
+*/
+@property (readonly, copy, nullable) NSArray<VNSaliencyImageObservation*>* results;
+
 @end
+
 
 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
 static const NSUInteger VNGenerateObjectnessBasedSaliencyImageRequestRevision1 = 1;
+
 
 NS_ASSUME_NONNULL_END

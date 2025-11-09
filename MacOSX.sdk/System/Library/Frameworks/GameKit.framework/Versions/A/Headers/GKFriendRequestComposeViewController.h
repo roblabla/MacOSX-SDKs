@@ -32,6 +32,7 @@ NS_CLASS_DEPRECATED(10_8, 10_12, 4_2, 10_0)
 @end
 #endif
 
+NS_CLASS_DEPRECATED(10_8, 10_12, 4_2, 10_0) 
 @interface GKFriendRequestComposeViewController ()
 /// Get the maximum number of recipients permitted
 + (NSUInteger)maxNumberOfRecipients;

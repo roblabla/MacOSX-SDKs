@@ -82,6 +82,34 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 */
 - (nullable instancetype)initWithPCMFormat:(AVAudioFormat *)format frameCapacity:(AVAudioFrameCount)frameCapacity NS_DESIGNATED_INITIALIZER;
 
+/*!	@method initWithPCMFormat:bufferListNoCopy:deallocator:
+	@abstract Initialize a buffer that is to contain PCM audio samples with a given AudioBufferList
+			  without copying samples and a custom deallocator block.
+	@param format
+		The format of the PCM audio to be contained in the buffer.
+	@param bufferList
+		The buffer list with allocated memory to contain the PCM audio data.
+	@param deallocator
+		A block to invoke when the resulting AVAudioPCMBuffer object is deallocated.
+	@discussion
+		An exception is raised if the format is not PCM.
+
+		Returns nil in the following cases:
+		- if the format has zero bytes per frame (format.streamDescription->mBytesPerFrame == 0)
+		- if supplied buffer has zero number of buffers
+		- if each buffer's data byte size are not equal or if any of the buffers' data byte size is zero
+		- if there is a mismatch between the format's number of buffers and the AudioBufferList's size
+			(1 if interleaved, mChannelsPerFrame if deinterleaved)
+		- if the AudioBufferList's pointer to the buffer of audio data is null.
+
+		Use the deallocator block to define your own deallocation behavior for the provided AudioBufferList's
+		underlying memory.
+
+		The AudioBufferList passed to the deallocator is identical to the one which was passed to the initializer,
+		in terms of the buffer count, and each buffer's mData and mDataByteSize members.
+*/
+- (nullable instancetype)initWithPCMFormat:(AVAudioFormat *)format bufferListNoCopy:(const AudioBufferList*)bufferList deallocator:(nullable void (^)(const AudioBufferList*))deallocator NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
 /*! @property frameCapacity
 	@abstract
 		The buffer's capacity, in audio sample frames.

@@ -1,0 +1,12 @@
+.Dd October 21, 2020
+.Dt SOCIALLAYERD 8
+.Os Darwin
+.Sh NAME
+.Nm sociallayerd
+.Nd Vends privacy-sensitive social UI for display throughout the system.
+.Sh SYNOPSIS
+takes no arguments, and users should not launch it manually.
+.Sh DESCRIPTION
+When sensitive social UI elements (such as the avatar for a contact in your Messages history) are displayed in an application via SocialLayer.framework, that application should not have access to the contents of those elements. In order to protect users' private information, the actual layer trees for those elements are generated and owned by sociallayerd, and vended to the hosting layer tree. CoreAnimation can then render the sensitive layers together with the application layers.
+.Sh HISTORY
+sociallayerd first appeared in macOS <TODO: release> and iOS <TODO: release>

@@ -1,7 +1,7 @@
 /*
  NSTouchBar.h
  Application Kit
- Copyright (c) 2015-2019, Apple Inc.
+ Copyright (c) 2015-2021, Apple Inc.
  All rights reserved.
 */
 
@@ -17,7 +17,7 @@ typedef NSString * NSTouchBarCustomizationIdentifier NS_SWIFT_BRIDGED_TYPEDEF AP
 
 @protocol NSTouchBarDelegate, NSTouchBarProvider;
 
-API_AVAILABLE(macos(10.12.2), ios(13.0))
+API_AVAILABLE(macos(10.12.2), ios(13.0)) NS_SWIFT_UI_ACTOR
 @interface NSTouchBar : NSObject <NSCoding>
 
 /* 

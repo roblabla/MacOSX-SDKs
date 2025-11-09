@@ -35,6 +35,10 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(tvos, watchos)
  */
 @property (nonatomic, copy, readonly, nullable) NSHTTPURLResponse *authenticatedResponse;
 
+/*! @abstract Private SecKeys returned from the AuthenticationServices extension.
+ */
+@property (nonatomic, readonly) NSArray *privateKeys API_AVAILABLE(ios(15.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos) NS_REFINED_FOR_SWIFT;
+
 + (instancetype)new NS_UNAVAILABLE;
 
 - (instancetype)init NS_UNAVAILABLE;

@@ -60,6 +60,8 @@ enum
 	kVTSessionMalfunctionErr				= -17691,
 	kVTVideoDecoderNeedsRosettaErr			= -17692,
 	kVTVideoEncoderNeedsRosettaErr			= -17693,
+	kVTVideoDecoderReferenceMissingErr		= -17694,
+	kVTVideoDecoderCallbackMessagingErr		= -17695,
 };
 
 /*!

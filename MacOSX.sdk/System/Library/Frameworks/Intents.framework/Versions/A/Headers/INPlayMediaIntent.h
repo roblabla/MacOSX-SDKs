@@ -107,22 +107,22 @@ API_UNAVAILABLE(macos)
  */
 
 - (void)resolveMediaItemsForPlayMedia:(INPlayMediaIntent *)intent
-                    withCompletion:(void (^)(NSArray<INPlayMediaMediaItemResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveMediaItems(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
+                       withCompletion:(void (^)(NSArray<INPlayMediaMediaItemResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveMediaItems(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
 
 - (void)resolvePlayShuffledForPlayMedia:(INPlayMediaIntent *)intent
-                    withCompletion:(void (^)(INBooleanResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePlayShuffled(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
+                         withCompletion:(void (^)(INBooleanResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePlayShuffled(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
 
 - (void)resolvePlaybackRepeatModeForPlayMedia:(INPlayMediaIntent *)intent
-                    withCompletion:(void (^)(INPlaybackRepeatModeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePlaybackRepeatMode(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
+                               withCompletion:(void (^)(INPlaybackRepeatModeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePlaybackRepeatMode(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
 
 - (void)resolveResumePlaybackForPlayMedia:(INPlayMediaIntent *)intent
-                    withCompletion:(void (^)(INBooleanResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveResumePlayback(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
+                           withCompletion:(void (^)(INBooleanResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveResumePlayback(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
 
 - (void)resolvePlaybackQueueLocationForPlayMedia:(INPlayMediaIntent *)intent
-                    withCompletion:(void (^)(INPlaybackQueueLocationResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePlaybackQueueLocation(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
+                                  withCompletion:(void (^)(INPlaybackQueueLocationResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePlaybackQueueLocation(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
 
 - (void)resolvePlaybackSpeedForPlayMedia:(INPlayMediaIntent *)intent
-                    withCompletion:(void (^)(INPlayMediaPlaybackSpeedResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePlaybackSpeed(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
+                          withCompletion:(void (^)(INPlayMediaPlaybackSpeedResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePlaybackSpeed(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
 
 @end
 

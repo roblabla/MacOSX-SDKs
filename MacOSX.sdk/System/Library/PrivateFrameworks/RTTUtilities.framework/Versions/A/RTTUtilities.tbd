@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4BE27759-925B-3032-B376-8CAC969ACB2E
+    value:           5FD8174A-20CF-3A92-875F-8A8AA9B6CED6
   - target:          x86_64-maccatalyst
-    value:           4BE27759-925B-3032-B376-8CAC969ACB2E
+    value:           5FD8174A-20CF-3A92-875F-8A8AA9B6CED6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0F278113-3774-34B8-86AD-2B8A94E6BB5B
+    value:           6B45A596-D23B-346E-ACF6-F6B8E0273D31
   - target:          arm64e-maccatalyst
-    value:           0F278113-3774-34B8-86AD-2B8A94E6BB5B
+    value:           6B45A596-D23B-346E-ACF6-F6B8E0273D31
 install-name:    '/System/Library/PrivateFrameworks/RTTUtilities.framework/Versions/A/RTTUtilities'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -30,9 +30,9 @@ exports:
                        _AXTTYMessageKeyWriteAction, _AXTTYPreferredTransportMethodChangedNotification, 
                        _AXTTYTextStreamToken, _RTTServiceUpdateOptionsKeyContactName, 
                        _RTTServiceUpdateTypeDowngrade, _RTTServiceUpdateTypeEnded, 
-                       _RTTServiceUpdateTypeMuted, _RTTServiceUpdateTypeOnHold, _RTTServiceUpdateTypeRemoteInterrupt, 
-                       _RTTServiceUpdateTypeUnmuted, _RTTUtilitiesVersionNumber, 
-                       _RTTUtilitiesVersionString, _accessibilityRTTUtilitiesBundle, 
+                       _RTTServiceUpdateTypeIncomingHold, _RTTServiceUpdateTypeMuted, 
+                       _RTTServiceUpdateTypeRemoteInterrupt, _RTTServiceUpdateTypeUnmuted, 
+                       _RTTUtilitiesVersionNumber, _RTTUtilitiesVersionString, _accessibilityRTTUtilitiesBundle, 
                        _kAXSRTTSettingsVersionPreference, _kAXSTTYHardwareEnabledPreference, 
                        _kAXSTTYIncomingCallsTTYPreference, _kAXSTTYPreferredRelayNumberPreference, 
                        _kAXSTTYShouldBeRealtimePreference, _kAXSTTYSoftwareEnabledPreference, 

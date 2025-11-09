@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E679ACAE-EA21-3BC8-B77F-08E28BBFC16E
+    value:           5F5EF647-730A-3375-A9D7-26E7B49313C6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B7F23B3F-D6A9-34D7-8A01-40A3C6D10D7C
+    value:           9CE7AC5D-E77E-310D-854D-7A7C14DB03BA
 install-name:    '/System/Library/PrivateFrameworks/AppleCVA.framework/Versions/A/AppleCVA'
-current-version: 201.16
-compatibility-version: 201.16
+current-version: 202.0.8
+compatibility-version: 202
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CVAFaceKitCopySemantics, _CVAFaceKitCreate, _CVAFaceKitGetAPIVersion, 

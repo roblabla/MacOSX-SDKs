@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6ED489AF-BBD1-326F-91BE-4BD8585255A4
+    value:           17759706-4E26-3B2D-8B0A-54DECEB3831C
   - target:          x86_64-maccatalyst
-    value:           6ED489AF-BBD1-326F-91BE-4BD8585255A4
+    value:           17759706-4E26-3B2D-8B0A-54DECEB3831C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           73F30628-7417-3EDA-9F5B-587696EF3098
+    value:           AFFD5151-685C-3CDD-B062-687DB27A0EC9
   - target:          arm64e-maccatalyst
-    value:           73F30628-7417-3EDA-9F5B-587696EF3098
+    value:           AFFD5151-685C-3CDD-B062-687DB27A0EC9
 install-name:    '/System/Library/PrivateFrameworks/ProtectedCloudStorage.framework/Versions/A/ProtectedCloudStorage'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -25,8 +25,7 @@ exports:
                        _PCSBackupCopyRecoveredKeysetWithIdentity, _PCSBackupCreateEscrowedDataWithKeybag, 
                        _PCSBackupCreateEscrowedKeyWithIdentity, _PCSBackupCreateEscrowedKeyWithKeybag, 
                        _PCSBackupCreateEscrowedKeysetWithIdentity, _PCSBackupLocalDBMobileBackupRecords, 
-                       _PCSBackupRecoveryUsingDeviceSecret, _PCSBackupRegistryDeleteDevice, 
-                       _PCSBackupRegistryEscrowRecords, _PCSBackupRegistryMobileBackupRecords, 
+                       _PCSBackupRecoveryUsingDeviceSecret, _PCSBackupRegistryMobileBackupRecords, 
                        _PCSBackupRestoreMobileBackup, _PCSBackupSetupEscrowRecordID, 
                        _PCSBackupSetupNewDeviceSecret, _PCSCKKSItemContextTimeout, 
                        _PCSCKKSOperationErrorDomain, _PCSCloudKitShareTokenCopyDecryptedData, 
@@ -49,18 +48,18 @@ exports:
                        _PCSFPCopyObject, _PCSFPCopyPrivateKey, _PCSFPCopyPublicIdentities, 
                        _PCSFPCopyPublicObjectSigningKey, _PCSFPCopyRecoverPCS, _PCSFPCopyTruncatedKeyIDFromEncryptedData, 
                        _PCSFPCopyUnwrappedKey, _PCSFPCopyWrappedKey, _PCSFPCreate, 
-                       _PCSFPCreateLight, _PCSFPCreatePEMData, _PCSFPCreatePrivateKey, 
-                       _PCSFPCreateShare, _PCSFPCreateUniqueID, _PCSFPCreateWithExported, 
-                       _PCSFPGetAuthorIdentity, _PCSFPGetAuthorshipIdentity, _PCSFPGetAvailableMasterKeyID, 
-                       _PCSFPGetChainingKeyset, _PCSFPGetCurrentMasterKey, _PCSFPGetCurrentMasterKeyID, 
-                       _PCSFPGetMasterKeyForKeyID, _PCSFPGetUnwrapPublicIdentity, 
-                       _PCSFPIsLight, _PCSFPIsOutOfNetwork, _PCSFPIsReadWrite, _PCSFPRemoveMasterKey, 
-                       _PCSFPRemovePrivateKey, _PCSFPRemovePublicIdentity, _PCSFPRemoveSharePCS, 
-                       _PCSFPRollMasterKey, _PCSFPSetAuthorshipIdentity, _PCSFPSetCurrentPrivateKey, 
-                       _PCSFPSetOwnerIdentity, _PCSFPShouldRoll, _PCSFPShouldUpdate, 
-                       _PCSFPStatus, _PCSFPSupportFeature, _PCSFPUpdateIdentityAndRollZoneKey, 
-                       _PCSFPUpdateZoneKey, _PCSFPValidateShare, _PCSGetBoundaryKey, 
-                       _PCSGetPublicIdentitites, _PCSGetViewNameFromViewHint, _PCSIdentityCheckInitialSync, 
+                       _PCSFPCreateDerivedDataFromMasterKey, _PCSFPCreateLight, _PCSFPCreatePEMData, 
+                       _PCSFPCreatePrivateKey, _PCSFPCreateShare, _PCSFPCreateUniqueID, 
+                       _PCSFPCreateWithExported, _PCSFPGetAuthorIdentity, _PCSFPGetAuthorshipIdentity, 
+                       _PCSFPGetAvailableMasterKeyID, _PCSFPGetChainingKeyset, _PCSFPGetCurrentMasterKey, 
+                       _PCSFPGetCurrentMasterKeyID, _PCSFPGetMasterKeyForKeyID, _PCSFPGetOwnerIdentity, 
+                       _PCSFPGetUnwrapPublicIdentity, _PCSFPIsLight, _PCSFPIsOutOfNetwork, 
+                       _PCSFPIsReadWrite, _PCSFPRemoveMasterKey, _PCSFPRemovePrivateKey, 
+                       _PCSFPRemovePublicIdentity, _PCSFPRemoveSharePCS, _PCSFPRollMasterKey, 
+                       _PCSFPSetAuthorshipIdentity, _PCSFPSetCurrentPrivateKey, _PCSFPSetOwnerIdentity, 
+                       _PCSFPShouldRoll, _PCSFPShouldUpdate, _PCSFPStatus, _PCSFPSupportFeature, 
+                       _PCSFPUpdateIdentityAndRollZoneKey, _PCSFPUpdateZoneKey, _PCSFPValidateShare, 
+                       _PCSGetBoundaryKey, _PCSGetPublicIdentitites, _PCSIdentityCheckInitialSync, 
                        _PCSIdentityCheckValidPublicKey, _PCSIdentityCheckWrappable, 
                        _PCSIdentityCollectionCopyCurrent, _PCSIdentityCollectionDestroy, 
                        _PCSIdentityCollectionSetup, _PCSIdentityCopyCircleFingerPrint, 
@@ -69,6 +68,7 @@ exports:
                        _PCSIdentityCopyExternalForm, _PCSIdentityCopyPublicIdentity, 
                        _PCSIdentityCopyPublicKeyInfo, _PCSIdentityCopyServiceNumber, 
                        _PCSIdentityCopySignatureKeyID, _PCSIdentityCopyWrappedKey, 
+                       _PCSIdentityCreateDiversifiedIdentityFromPublicIdentityOptions, 
                        _PCSIdentityCreateDiversifiedIdentityOptions, _PCSIdentityCreateExportedRawCompact, 
                        _PCSIdentityCreateFromData, _PCSIdentityCreateFromPersistentReference, 
                        _PCSIdentityCreateFromPersistentReferenceAndGetSHA1, _PCSIdentityCreateFromRaw, 
@@ -126,14 +126,14 @@ exports:
                        _PCSServiceIdentityCopyPublicKeyInfo, _PCSServiceIdentityCopyUnwrappedKey, 
                        _PCSServiceItemAllowKeyExportByIndex, _PCSServiceItemAllowSyntheticManateeSharing, 
                        _PCSServiceItemCanRoll, _PCSServiceItemEscrowManateeIdentityByName, 
-                       _PCSServiceItemGetAccessClassByName, _PCSServiceItemGetFlagsByName, 
-                       _PCSServiceItemGetIndexByName, _PCSServiceItemGetNameByIndex, 
-                       _PCSServiceItemGetNumberByIndex, _PCSServiceItemGetNumberByName, 
-                       _PCSServiceItemGetRollIntervalByName, _PCSServiceItemGetTypeID, 
-                       _PCSServiceItemGetViewHintByIndex, _PCSServiceItemGetViewHintByName, 
-                       _PCSServiceItemRequireAuthorship, _PCSServiceItemTypeIsManatee, 
-                       _PCSServiceItemTypeIsShareableManatee, _PCSServiceItemsCount, 
-                       _PCSServiceItemsCountByFlags, _PCSServiceItemsGetCFArrayOfNames, 
+                       _PCSServiceItemGetAccessClassByName, _PCSServiceItemGetCKKSViewByName, 
+                       _PCSServiceItemGetFlagsByName, _PCSServiceItemGetIndexByName, 
+                       _PCSServiceItemGetNameByIndex, _PCSServiceItemGetNumberByIndex, 
+                       _PCSServiceItemGetNumberByName, _PCSServiceItemGetRollIntervalByName, 
+                       _PCSServiceItemGetTypeID, _PCSServiceItemGetViewHintByIndex, 
+                       _PCSServiceItemGetViewHintByName, _PCSServiceItemRequireAuthorship, 
+                       _PCSServiceItemTypeIsManatee, _PCSServiceItemTypeIsShareableManatee, 
+                       _PCSServiceItemsCount, _PCSServiceItemsCountByFlags, _PCSServiceItemsGetCFArrayOfNames, 
                        _PCSServiceItemsGetCFArraySortedByIndex, _PCSServiceItemsGetEachName, 
                        _PCSServiceItemsGetInfoSortedByIndex, _PCSServiceItemsInfoIteration, 
                        _PCSSetKeyRollingFlags, _PCSShareProtectionAddKeyWithAttributes, 
@@ -141,12 +141,12 @@ exports:
                        _PCSShareProtectionCopyPublicKeys, _PCSShareProtectionCreate, 
                        _PCSShareProtectionDeletePCSKey, _PCSShareProtectionGetAvailableKeyID, 
                        _PCSShareProtectionGetTypeID, _PCSSignatureCopyKeyID, _PCSSupportGetClientInfo, 
-                       _PCSSyncKeyRegistryWithServiceName, _PCSTapToRadar, _PCSTestCDPStatus, 
-                       _PCSTriggerWatchSyncing, _PCSUseSyncKeychain, _PCSValidateSignature, 
-                       _PCSValidateSignatureGetSigner, __PCSCreateHexString, __PCSError, 
-                       __PCSErrorASN1, __PCSErrorContext, __PCSErrorOOM, __PCSErrorUserInfo, 
-                       __PCSErrorVA, __PCSFPCopyExportedWithOptions, __PCSFillOctetString, 
-                       __PCSIdentityAddFromExternalForm, __PCSIdentityCheckPCSAttributes, 
+                       _PCSSyncKeyRegistryWithOptions, _PCSSyncKeyRegistryWithServiceName, 
+                       _PCSTapToRadar, _PCSTestCDPStatus, _PCSTriggerWatchSyncing, 
+                       _PCSUseSyncKeychain, _PCSValidateSignature, _PCSValidateSignatureGetSigner, 
+                       __PCSCreateHexString, __PCSError, __PCSErrorASN1, __PCSErrorContext, 
+                       __PCSErrorOOM, __PCSErrorUserInfo, __PCSErrorVA, __PCSFPCopyExportedWithOptions, 
+                       __PCSFillOctetString, __PCSIdentityAddFromExternalForm, __PCSIdentityCheckPCSAttributes, 
                        __PCSIdentityComparePublicKey, __PCSIdentityCopyBAT, __PCSIdentityCopyKeychainAttributes, 
                        __PCSIdentityCreateEmpty, __PCSIdentityGetKey, __PCSIdentityGetPersistentReference, 
                        __PCSIdentityGetSigningIdentity, __PCSIdentityHavePCSCKKSAttributes, 

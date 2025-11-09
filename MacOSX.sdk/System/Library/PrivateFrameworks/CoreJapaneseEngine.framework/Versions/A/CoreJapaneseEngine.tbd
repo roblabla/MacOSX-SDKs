@@ -3,28 +3,34 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FADF24D9-8C5F-3AB6-8282-DFEF1A313739
+    value:           10F9B71C-75B4-37F4-9154-FE9AA5EA2F47
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4BA9F878-171A-394E-99CF-87599E0986DB
+    value:           0EB92379-E6CD-3071-99D5-2066D7343070
 install-name:    '/System/Library/PrivateFrameworks/CoreJapaneseEngine.framework/Versions/A/CoreJapaneseEngine'
-current-version: 234.1
+current-version: 250
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _AppendToLogFile, _ComposeKanaString, _CoreJapaneseEngineVersionNumber, 
-                       _CoreJapaneseEngineVersionString, _DebugNSLog, _FirstVisibleCharacterOfString, 
-                       _GetLemmaCandidates, _HiraganaCharacterSet, _IsAlphabetic, 
-                       _IsChouOn, _IsContactsFrameworkAvailable, _IsDash, _IsHexidecimalStartCharacter, 
-                       _IsHiraganaCharacter, _IsJISX0208Character, _IsJapaneseCharacter, 
-                       _IsKanaCharacter, _IsKanjiCharacter, _IsKatakanaCharacter, 
-                       _IsKatakanaOrNarrowKatakanaCharacter, _IsLowercaseAlphabetic, 
-                       _IsNarrowKatakanaCharacter, _IsNarrowRomajiAlphabetic, _IsNarrowRomajiLowercaseAlphabetic, 
-                       _IsNarrowRomajiUppercaseAlphabetic, _IsNumeric, _IsNumericRomaji, 
-                       _IsPlosiveMark, _IsRomajiAlphabetic, _IsRomajiVowelAlphabetic, 
-                       _IsUppercaseAlphabetic, _IsVoicedMark, _IsVoicedOrPlosiveMark, 
-                       _IsWideAlphabetic, _IsWideCharacter, _IsWideLowercaseAlphabetic, 
-                       _IsWideRomajiAlphabetic, _IsWideRomajiLowercaseAlphabetic, 
+    symbols:         [ _AppendToLogFile, _CFURLCreateResolvedCopy, _CFURLEqualResource, 
+                       _ComposeKanaString, _CopyBundleContentsDirectoryURL, _CopyBundleResourcesDirectoryURL, 
+                       _CoreJapaneseEngineVersionNumber, _CoreJapaneseEngineVersionString, 
+                       _CreateFileWithURL, _CreateFolderWithURL, _CreateHomeURL, 
+                       _CreateLSMSession, _DebugNSLog, _DeleteFileOrFolderWithURL, 
+                       _DisposeLSMSession, _ExchangeFileContentsWithURL, _FileExistsAtURL, 
+                       _FirstVisibleCharacterOfString, _GenerateUniqueFileName, _GetBundlePropertyCFString, 
+                       _GetBundlePropertyData, _GetBundlePropertyString, _GetLemmaCandidates, 
+                       _GetMappedBundleResource, _GetPStringFromCFDictionary, _GetUnicodeFileNameWithURL, 
+                       _HiraganaCharacterSet, _IsAlphabetic, _IsChouOn, _IsContactsFrameworkAvailable, 
+                       _IsDash, _IsHexidecimalStartCharacter, _IsHiraganaCharacter, 
+                       _IsJISX0208Character, _IsJapaneseCharacter, _IsKanaCharacter, 
+                       _IsKanjiCharacter, _IsKatakanaCharacter, _IsKatakanaOrNarrowKatakanaCharacter, 
+                       _IsLowercaseAlphabetic, _IsNarrowKatakanaCharacter, _IsNarrowRomajiAlphabetic, 
+                       _IsNarrowRomajiLowercaseAlphabetic, _IsNarrowRomajiUppercaseAlphabetic, 
+                       _IsNumeric, _IsNumericRomaji, _IsPlosiveMark, _IsRomajiAlphabetic, 
+                       _IsRomajiVowelAlphabetic, _IsUppercaseAlphabetic, _IsVoicedMark, 
+                       _IsVoicedOrPlosiveMark, _IsWideAlphabetic, _IsWideCharacter, 
+                       _IsWideLowercaseAlphabetic, _IsWideRomajiAlphabetic, _IsWideRomajiLowercaseAlphabetic, 
                        _IsWideRomajiNumeric, _IsWideRomajiUppercaseAlphabetic, _IsWideUppercaseAlphabetic, 
                        _JIMBundleIdentifier, _JIMDefaultKeyboardLayoutIdentifier, 
                        _JIMFullWidthRomanModeTISIdentifier, _JIMHalfWidthKatakanaModeTISIdentifier, 
@@ -44,16 +50,19 @@ exports:
                        _JIMSessionSignature, _JIMSignpostLogForCategoryClientCall, 
                        _JIMSignpostLogForCategoryMecabraCall, _KanaCharacterSet, 
                        _KatakanaCharacterSet, _KatakanaCharacterSetNoChouOn, _LocalizedString, 
-                       _LongCharAtIndexOfString, _MecabraCompatibleRomajiString, 
-                       _NarrowKatakanaCharacterSet, _RKCreateRomajiKanaRuleFromPath, 
+                       _LongCharAtIndexOfString, _MapFile, _MecabraCompatibleRomajiString, 
+                       _NarrowKatakanaCharacterSet, _OpenFileWithURL, _RKCreateRomajiKanaRuleFromPath, 
                        _RKCreateRomajiKanaRuleFromResourceName, _RKCreateRomajiKanaRuleWithTrieFromPath, 
                        _RKReleaseRomajiKanaRule, _RKSingleTransliterateWithTrie, 
-                       _RKTransliterateString, _RKTransliterateStringWithTrie, _RelatedCharactersFromCharacter, 
-                       _RomajiCharacterSet, _SetTextToSharedJapaneseTokenizer, _SetTransliterationRomajiRuleToWindows, 
+                       _RKTransliterateString, _RKTransliterateStringWithTrie, _ReadCFDictionaryFromFile, 
+                       _RelatedCharactersFromCharacter, _RenameFileWithURL, _RomajiCharacterSet, 
+                       _SafeCFRelease, _SearchLSMSimilarKanji, _SetBundleFlagWithURL, 
+                       _SetTextToSharedJapaneseTokenizer, _SetTransliterationRomajiRuleToWindows, 
                        _SimilarCharactersFromString, _StringByTruncatingString, _TIAssetManagerClass, 
                        _TIInputModeClass, _TIMecabraEnvironmentClass, _TransliterateAinuRomajiToKana, 
                        _TransliterateKanaToRomaji, _TransliterateRomajiStringWithCommand, 
                        _TransliterateRomajiToKana, _TransliterateStringWithOption, 
+                       _UnicodeNameFromCFString, _UnmapFile, _WriteCFDictionaryAtomically, 
                        __ZNK21TTransliterationTable13TrieEntryDataEs, __ZNK21TTransliterationTable19AppendTrieEntryDataEsP15NSMutableString, 
                        __ZNK21TTransliterationTable19SimpleTransliterateEP8NSStringP15NSMutableStringPmS4_h, 
                        __ZNK21TTransliterationTable19SingleTransliterateEP8NSStringP15NSMutableStringPmPsS4_h, 

@@ -26,6 +26,8 @@
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 
+#define DRIVERKIT_FRAMEWORK_INCLUDE	1
+
 #include <DriverKit/IOReturn.h>
 #include <DriverKit/IOTypes.h>
 #include <sys/cdefs.h>
@@ -40,6 +42,13 @@
 
 #ifndef DRIVERKIT_IOLIB_H
 #define DRIVERKIT_IOLIB_H
+
+#if __clang_analyzer__
+#include <assert.h>
+#define IO_FOR_ANALYZER(x) x
+#else
+#define IO_FOR_ANALYZER(x)
+#endif
 
 __BEGIN_DECLS
 
@@ -75,7 +84,7 @@ __attribute__((format(printf, 1, 0)));
  */
 void *
 IOMalloc(size_t length)
-__attribute__((alloc_size(1)));
+__attribute__((alloc_size(1))) IO_FOR_ANALYZER(__attribute__((returns_nonnull)));
 
 /*! @function IOMallocZero
  *   @abstract Allocates general purpose memory, initialized to zero.
@@ -85,7 +94,7 @@ __attribute__((alloc_size(1)));
  */
 void * 
 IOMallocZero(size_t length)
-__attribute__((alloc_size(1)));
+__attribute__((alloc_size(1))) IO_FOR_ANALYZER(__attribute__((returns_nonnull)));
 
 /*! @function IOFree
  *   @abstract Frees memory allocated with IOMalloc or IOMallocZero.
@@ -192,7 +201,7 @@ enum {
 
 /*!
  * @function OSSynchronizeIO
- * Performs an mfence instruction on an Intel-based Mac computer.
+ * Performs an mfence instruction on an Intel-based Mac computer, or dmb st on Apple Silicon.
  */
 void
 OSSynchronizeIO(void);
@@ -267,7 +276,9 @@ OSReportWithBacktrace(const char *str, ...);
 #define IONew(type, count)                              \
 ({                                                      \
     size_t __size;                                      \
-    (os_mul_overflow(sizeof(type), (count), &__size)    \
+    bool overflow = os_mul_overflow(sizeof(type), (count), &__size); \
+	IO_FOR_ANALYZER(assert(!overflow));					\
+    (overflow										    \
     ? ((type *) NULL)                                   \
     : ((type *) IOMalloc(__size)));                     \
 })
@@ -281,7 +292,9 @@ OSReportWithBacktrace(const char *str, ...);
 #define IONewZero(type, count)                          \
 ({                                                      \
     size_t __size;                                      \
-    (os_mul_overflow(sizeof(type), (count), &__size)    \
+    bool overflow = os_mul_overflow(sizeof(type), (count), &__size); \
+	IO_FOR_ANALYZER(assert(!overflow));					\
+    (overflow											\
     ? ((type *) NULL)                                   \
     : ((type *) IOMallocZero(__size)));                 \
 })
@@ -319,6 +332,13 @@ OSReportWithBacktrace(const char *str, ...);
  */
 extern uint64_t IOVMPageSize;
 
+#if !defined(__probable) && !defined(__improbable)
+#define __probable(x)   __builtin_expect(!!(x), 1)
+#define __improbable(x) __builtin_expect(!!(x), 0)
+#endif /* !defined(__probable) && !defined(__improbable) */
+
+__abortlike __printflike(1, 2)
+extern void panic(const char *string, ...);
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -504,6 +524,41 @@ typedef enum {
 void    IORWLockAssert(struct IORWLock * lock, IORWLockAssertState type);
 #endif
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+enum
+{
+	THREAD_UNINT = 0,
+	THREAD_INTERRUPTIBLE = 0,
+	THREAD_ABORTSAFE = 0,
+};
+
+struct IORecursiveConditionLock;
+
+struct IORecursiveConditionLock *
+IORecursiveConditionLockAlloc(void);
+
+void
+IORecursiveConditionLockFree(struct IORecursiveConditionLock * lock);
+
+void
+IORecursiveConditionLockLock(struct IORecursiveConditionLock * lock);
+
+void
+IORecursiveConditionLockUnlock(struct IORecursiveConditionLock * lock);
+
+bool
+IORecursiveConditionLockHaveLock(struct IORecursiveConditionLock * lock);
+
+bool
+IORecursiveConditionLockTryLock(struct IORecursiveConditionLock * lock);
+
+/*
+ * Read random bytes.
+ */
+void read_random(void* buffer, size_t numBytes);
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #if TARGET_OS_DRIVERKIT && !DRIVERKIT_PRIVATE
@@ -570,7 +625,7 @@ __assert_rtn(
 
 #if !TARGET_OS_DRIVERKIT
 extern kern_return_t
-IOUserServerMain(const char * serverName, const char * serverTagStr, uint32_t bundleCount, const char * bundles[]);
+IOUserServerMain(const char * serverName, const char * serverTagStr, const char * bundleID, uint32_t bundleCount, const char * bundles[]);
 extern int
 DriverExecutableMain(int argc, char * argv[]);
 #endif // TARGET_OS_DRIVERKIT

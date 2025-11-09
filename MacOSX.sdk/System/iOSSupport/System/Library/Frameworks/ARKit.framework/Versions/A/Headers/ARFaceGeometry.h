@@ -2,13 +2,15 @@
 //  ARFaceGeometry.h
 //  ARKit
 //
-//  Copyright © 2016-2017 Apple Inc. All rights reserved.
+//  Copyright © 2016-2021 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SCNGeometry.h>
 #import <ARKit/ARFaceAnchor.h>
+#if __has_include(<ARKit/ARSCNFaceGeometry.h>)
 #import <ARKit/ARSCNFaceGeometry.h>
+#endif
 
 @protocol MTLBuffer;
 @protocol MTLDevice;

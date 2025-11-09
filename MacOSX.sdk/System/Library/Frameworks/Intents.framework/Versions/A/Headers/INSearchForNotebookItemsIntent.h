@@ -123,34 +123,34 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolveTitleForSearchForNotebookItems:(INSearchForNotebookItemsIntent *)intent
-                    withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTitle(for:with:));
+                               withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTitle(for:with:));
 
 - (void)resolveContentForSearchForNotebookItems:(INSearchForNotebookItemsIntent *)intent
-                    withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveContent(for:with:));
+                                 withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveContent(for:with:));
 
 - (void)resolveItemTypeForSearchForNotebookItems:(INSearchForNotebookItemsIntent *)intent
-                    withCompletion:(void (^)(INNotebookItemTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveItemType(for:with:));
+                                  withCompletion:(void (^)(INNotebookItemTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveItemType(for:with:));
 
 - (void)resolveStatusForSearchForNotebookItems:(INSearchForNotebookItemsIntent *)intent
-                    withCompletion:(void (^)(INTaskStatusResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveStatus(for:with:));
+                                withCompletion:(void (^)(INTaskStatusResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveStatus(for:with:));
 
 - (void)resolveLocationForSearchForNotebookItems:(INSearchForNotebookItemsIntent *)intent
-                    withCompletion:(void (^)(INPlacemarkResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveLocation(for:with:));
+                                  withCompletion:(void (^)(INPlacemarkResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveLocation(for:with:));
 
 - (void)resolveLocationSearchTypeForSearchForNotebookItems:(INSearchForNotebookItemsIntent *)intent
-                    withCompletion:(void (^)(INLocationSearchTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveLocationSearchType(for:with:));
+                                            withCompletion:(void (^)(INLocationSearchTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveLocationSearchType(for:with:));
 
 - (void)resolveDateTimeForSearchForNotebookItems:(INSearchForNotebookItemsIntent *)intent
-                    withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDateTime(for:with:));
+                                  withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDateTime(for:with:));
 
 - (void)resolveDateSearchTypeForSearchForNotebookItems:(INSearchForNotebookItemsIntent *)intent
-                    withCompletion:(void (^)(INDateSearchTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDateSearchType(for:with:));
+                                        withCompletion:(void (^)(INDateSearchTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDateSearchType(for:with:));
 
 - (void)resolveTemporalEventTriggerTypesForSearchForNotebookItems:(INSearchForNotebookItemsIntent *)intent
-                    withCompletion:(void (^)(INTemporalEventTriggerTypeOptionsResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTemporalEventTriggerTypes(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
+                                                   withCompletion:(void (^)(INTemporalEventTriggerTypeOptionsResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTemporalEventTriggerTypes(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
 
 - (void)resolveTaskPriorityForSearchForNotebookItems:(INSearchForNotebookItemsIntent *)intent
-                    withCompletion:(void (^)(INTaskPriorityResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTaskPriority(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
+                                      withCompletion:(void (^)(INTaskPriorityResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTaskPriority(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
 
 @end
 

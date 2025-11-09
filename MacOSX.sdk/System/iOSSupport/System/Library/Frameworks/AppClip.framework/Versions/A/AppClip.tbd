@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           B04260EE-C873-3F0A-949C-41ABA015A85C
+    value:           40CF48EC-3218-3E50-92EE-EDD468AC3801
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           D7B8EC78-BD58-3110-BAC5-EEDCC798470C
+    value:           AC6BF472-83C7-37CC-A92E-DB11751907E4
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AppClip.framework/Versions/A/AppClip'
 current-version: 20.20
 exports:

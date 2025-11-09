@@ -11,6 +11,8 @@ framework module Foundation [extern_c] [system] {
         header "NSDebug.h"
         export *
     }
-
+    
+    // Use NSItemProvider.h
+    exclude header "NSItemProviderReadingWriting.h"
 }
 

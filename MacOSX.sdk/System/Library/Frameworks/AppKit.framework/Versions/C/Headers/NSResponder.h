@@ -1,7 +1,7 @@
 /*
         NSResponder.h
         Application Kit
-        Copyright (c) 1994-2019, Apple Inc.
+        Copyright (c) 1994-2021, Apple Inc.
         All rights reserved.
 */
 
@@ -17,6 +17,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSError, NSEvent, NSMenu, NSUndoManager, NSWindow;
 
+NS_SWIFT_UI_ACTOR
 @interface NSResponder : NSObject <NSCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

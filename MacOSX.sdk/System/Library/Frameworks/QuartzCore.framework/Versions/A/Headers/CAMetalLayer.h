@@ -1,6 +1,6 @@
 /* CoreAnimation - CAMetalLayer.h
 
-   Copyright (c) 2013-2018, Apple Inc.
+   Copyright (c) 2013-2021, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>

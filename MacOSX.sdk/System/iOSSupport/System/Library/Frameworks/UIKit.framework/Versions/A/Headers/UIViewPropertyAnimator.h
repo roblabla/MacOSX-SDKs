@@ -13,7 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIViewPropertyAnimator : NSObject <UIViewImplicitlyAnimating, NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) NS_SWIFT_UI_ACTOR
+@interface UIViewPropertyAnimator : NSObject <UIViewImplicitlyAnimating, NSCopying>
 
 @property(nullable, nonatomic, copy, readonly) id <UITimingCurveProvider> timingParameters;
 

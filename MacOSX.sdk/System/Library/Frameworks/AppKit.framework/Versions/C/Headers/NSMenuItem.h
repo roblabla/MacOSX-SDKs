@@ -1,7 +1,7 @@
 /*
         NSMenuItem.h
         Application Kit
-        Copyright (c) 1996-2019, Apple Inc.
+        Copyright (c) 1996-2021, Apple Inc.
         All rights reserved.
 */
 
@@ -52,6 +52,12 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 /* By default, when a menu item is hidden, its key equivalent is ignored. By setting this property to YES, you allow a hidden item's key equivalent to be considered when searching for a menu item that matches a key event. This is useful to provide a keyboard shortcut when it's not necessary to have a visible menu item in the menubar. Note that Apple HI guidelines generally recommend that keyboard shortcuts should be clearly indicated in a menu, so this property should be used only rarely. */
 @property BOOL allowsKeyEquivalentWhenHidden API_AVAILABLE(macos(10.13));
+
+/* Suppose the system detects a given key equivalent that is not reachable in the current keyboard layout; it will localize the key equivalent to something reachable. By setting this property to NO, you will opt-out this menu item from the system-provided localization. YES by default for apps linked against 12.0 and later SDK. */
+@property BOOL allowsAutomaticKeyEquivalentLocalization API_AVAILABLE(macos(12.0));
+
+/* Suppose the system detects a given key equivalent with the following input string [ ] { } ( ) < > ← → in a right-to-left user interface environment (NSUserInterfaceLayoutDirectionRightToLeft); in that case, the system will automatically mirror the key equivalent. For example, a pair of menu items with key equivalents { and } will be localized to } and { in a right-to-left user interface. By setting this property to NO, you will opt-out this menu item of automatically mirroring in RTL. It would be best only to do this if your shortcut action will result in some sort of directional change in the UI, e.g. text alignment or a D-pad in a game. YES by default for apps linked against 12.0 and later SDK. */
+@property BOOL allowsAutomaticKeyEquivalentMirroring API_AVAILABLE(macos(12.0));
 
 @property (nullable, strong) NSImage *image;
 

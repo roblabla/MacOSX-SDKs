@@ -29,7 +29,7 @@ typedef void (^CMHeadphoneDeviceMotionHandler)(CMDeviceMotion * __nullable motio
  *  Discussion:
  *    The CMHeadphoneMotionManager object is your entry point to the headphone motion service.
  */
-COREMOTION_EXPORT API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos)
+COREMOTION_EXPORT API_AVAILABLE(ios(14.0))
 @interface CMHeadphoneMotionManager : NSObject
 
 /*

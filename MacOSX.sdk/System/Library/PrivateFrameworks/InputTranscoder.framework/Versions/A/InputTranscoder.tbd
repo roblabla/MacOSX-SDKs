@@ -4,32 +4,44 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B8F3A47F-B8D4-35D4-8F29-07DF498DF1EE
+    value:           27846EC0-BE54-3A1E-890B-119807FC0116
   - target:          x86_64-maccatalyst
-    value:           B8F3A47F-B8D4-35D4-8F29-07DF498DF1EE
+    value:           27846EC0-BE54-3A1E-890B-119807FC0116
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CCEF5245-A48F-314A-AEE7-F6CD9738244D
+    value:           F4AC568D-EE78-362A-9060-AEB2A920436B
   - target:          arm64e-maccatalyst
-    value:           CCEF5245-A48F-314A-AEE7-F6CD9738244D
+    value:           F4AC568D-EE78-362A-9060-AEB2A920436B
 install-name:    '/System/Library/PrivateFrameworks/InputTranscoder.framework/Versions/A/InputTranscoder'
-current-version: 55
+current-version: 83
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _ITCandidateEnumerateTokenIDs, _ITCandidateGetScore, _ITCandidateGetSources, 
-                       _ITCandidateGetString, _ITCandidateGetStrokedPath, _ITCandidateIsCompletion, 
-                       _ITDecoderClearNeuralNetworkBuffer, _ITDecoderCreate, _ITDecoderEnumerateCandidates, 
-                       _ITDecoderSetLinguisticContext, _ITKeyInfoNull, _ITTouchTranscoderAddLexicon, 
+    symbols:         [ _ITCandidateEnumerateTokenIDs, _ITCandidateFoundOnlyInDynamicLexicon, 
+                       _ITCandidateGetScore, _ITCandidateGetSources, _ITCandidateGetString, 
+                       _ITCandidateGetStrokedPath, _ITCandidateGetUnshiftMask, _ITCandidateIsCompletion, 
+                       _ITCandidateIsMultiWord, _ITCandidateIsValidWord, _ITDecoderClearNeuralNetworkBuffer, 
+                       _ITDecoderCreate, _ITDecoderEnumerateCandidates, _ITDecoderEnumerateCandidatesWithOptions, 
+                       _ITDecoderSetLinguisticContext, _ITKeyCandidateCreateString, 
+                       _ITKeyCandidateGetScore, _ITKeyInfoNull, _ITTouchTranscoderAddLanguageModelWithOptions, 
+                       _ITTouchTranscoderAddLexicon, _ITTouchTranscoderAddLexiconWithOptions, 
                        _ITTouchTranscoderClearNeuralNetworkBuffer, _ITTouchTranscoderCreateSession, 
                        _ITTouchTranscoderCreateWithKeyboardLayout, _ITTouchTranscoderSessionAddEvent, 
-                       _ITTouchTranscoderSessionEnumerateCandidates, _ITTouchTranscoderSessionSetLinguisticContext, 
-                       _ITTouchTranscoderSessionSetPrefix, _ITTouchTranscoderSupportsLocale, 
-                       _ITTouchTranscoderSupportsLocaleAndLayout, _ITTouchTranscoderUpdateKeyboardLayout, 
-                       _kITCandidateSourceDynamicLexicon, _kITCandidateSourceStaticLexicon, 
-                       _kITDecoderLocaleKey, _kITDecoderResourceDirectoryKey, _kITTouchTranscoderBundleURLKey, 
-                       _kITTouchTranscoderKeyboardLayoutNameKey, _kITTouchTranscoderLocaleKey ]
+                       _ITTouchTranscoderSessionAddEventWithTouchKeyInfo, _ITTouchTranscoderSessionEnumerateCandidates, 
+                       _ITTouchTranscoderSessionEnumerateCandidatesWithOptions, _ITTouchTranscoderSessionEnumerateKeyCandidatesForLastTouch, 
+                       _ITTouchTranscoderSessionSetLinguisticContext, _ITTouchTranscoderSessionSetPrefix, 
+                       _ITTouchTranscoderSessionSetTextAcceptedFromUI, _ITTouchTranscoderSupportsConfiguration, 
+                       _ITTouchTranscoderSupportsLocale, _ITTouchTranscoderSupportsLocaleAndLayout, 
+                       _ITTouchTranscoderSupportsLocaleAndLayoutWithTypingMode, _ITTouchTranscoderUpdateKeyboardLayout, 
+                       _ITTouchTranscoderUpdateKeyboardLayoutWithOptions, _kITCandidateSourceDynamicLexicon, 
+                       _kITCandidateSourceStaticLexicon, _kITDecoderLocaleKey, _kITDecoderNeuralTypeKey, 
+                       _kITDecoderNeuralTypeValuePath, _kITDecoderNeuralTypeValueTap, 
+                       _kITDecoderResourceDirectoryKey, _kITTouchTranscoderBundleURLKey, 
+                       _kITTouchTranscoderInstanceTypeKey, _kITTouchTranscoderInstanceTypeValueContinuousPath, 
+                       _kITTouchTranscoderInstanceTypeValueTapTyping, _kITTouchTranscoderKeyboardLayoutNameKey, 
+                       _kITTouchTranscoderLocaleKey, _kITTouchTranscoderSessionAppendTopEnumeratedPrefixesKey, 
+                       _kITTouchTranscoderSessionExactTypedStringKey, _kITTouchTranscoderSessionNormalizeAutoCorrectionsSeparatelyKey ]
 ...

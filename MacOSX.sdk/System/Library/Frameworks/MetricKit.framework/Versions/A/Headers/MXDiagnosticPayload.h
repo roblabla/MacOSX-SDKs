@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion    An MXDiagnosticPayload contains diagnostics that cover a 24 hour period of application usage. The properties timeStampBegin and timeStampEnd should be used to determine which time range the payload covers.
  @discussion    It is possible for an MXDiagnosticPayload to cover regions of time where an application was updated, and thus each MXDiagnostic subclass will contain its own application version string. This is in contrast to MXMetricPayload, where only the latest application version string is included as metadata of the payload. Each MXDiagnostic subclass application version string should be inspected prior to processing.
  */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(14.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
 @interface MXDiagnosticPayload : NSObject <NSSecureCoding>
 
 /*!

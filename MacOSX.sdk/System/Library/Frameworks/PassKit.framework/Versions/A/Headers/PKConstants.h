@@ -83,7 +83,8 @@ typedef NS_ENUM(NSInteger, PKPaymentButtonType) {
     PKPaymentButtonTypeRent  API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0)),
     PKPaymentButtonTypeSupport  API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0)),
     PKPaymentButtonTypeContribute  API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0)),
-    PKPaymentButtonTypeTip  API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0))
+    PKPaymentButtonTypeTip  API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0)),
+    PKPaymentButtonTypeContinue  API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0))
 } API_AVAILABLE(macos(11.0), ios(8.3), watchos(3.0));
 
 typedef NS_OPTIONS(NSUInteger, PKRadioTechnology) {

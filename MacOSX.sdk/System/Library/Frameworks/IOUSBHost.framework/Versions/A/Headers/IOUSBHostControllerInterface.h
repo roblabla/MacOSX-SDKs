@@ -15,12 +15,95 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @class   IOUSBHostControllerInterface
  * @brief   The object representing a user-mode USB host controller
- * @details This class provides functionality to interact with the kernel USB host controller interfaces
+ * @details This class provides functionality to interact with the kernel USB host controller interfaces.  The entitlement com.apple.developer.usb.hostcontrollerinterface is required to use this class.
+ *          The com.apple.iokit.usb.framework.IOUSBHost subsystem is used for logging.
  */
+
+/* Example instantiation
+const IOUSBHostCIMessage _capabilities = {
+    .control =   (IOUSBHostCIMessageTypeControllerCapabilities << IOUSBHostCIMessageControlTypePhase)
+               | IOUSBHostCIMessageControlNoResponse
+               | IOUSBHostCIMessageControlValid
+               | (1 << IOUSBHostCICapabilitiesMessageControlPortCountPhase),                // Port count
+    .data0   =   (1 << IOUSBHostCICapabilitiesMessageData0CommandTimeoutThresholdPhase)     // 2 seconds
+               | (2 << IOUSBHostCICapabilitiesMessageData0ConnectionLatencyPhase),          // 4ms
+    .data1   = 0
+};
+
+const IOUSBHostCIMessage _portCapabilities = {
+    .control =   (IOUSBHostCIMessageTypePortCapabilities << IOUSBHostCIMessageControlTypePhase)
+               | IOUSBHostCIMessageControlNoResponse
+               | IOUSBHostCIMessageControlValid
+               | (1 << IOUSBHostCIPortCapabilitiesMessageControlPortNumberPhase)
+               | (0 << IOUSBHostCIPortCapabilitiesMessageControlConnectorTypePhase),        // ACPI TypeA
+    .data0   = ((907 / 8) << IOUSBHostCIPortCapabilitiesMessageData0MaxPowerPhase),         // Max power for the power (8mA units)
+    .data1   = 0
+};
+
+IOUSBHostControllerInterfaceCommandHandler commandHandler = ^(IOUSBHostControllerInterface * _Nonnull controller, IOUSBHostCIMessage command)
+{
+};
+
+IOUSBHostControllerInterfaceDoorbellHandler doorbellHandler = ^(IOUSBHostControllerInterface* controller, IOUSBHostCIDoorbell* doorbellArray, uint32_t doorbellCount)
+{
+};
+
+void interestHandler(void* refCon, io_service_t service, uint32_t messageType, void* messageArgument)
+{
+}
+
+int main(int argc, const char * argv[])
+{
+    @autoreleasepool
+    {
+        NSMutableData* capabilitiesData = [[NSMutableData alloc] initWithBytes:&_capabilities length:sizeof(IOUSBHostCIMessage)];
+        [capabilitiesData appendBytes:&_portCapabilities length:sizeof(IOUSBHostCIMessage)];
+        
+        NSError* error = [[NSError alloc] initWithDomain:IOUSBHostErrorDomain code:KERN_SUCCESS userInfo:nil];
+        
+        IOUSBHostControllerInterface* controller = [[IOUSBHostControllerInterface alloc] initWithCapabilities:capabilitiesData
+                                                                                                        queue:nil
+                                                                                              interruptRateHz:1000
+                                                                                                        error:&error
+                                                                                               commandHandler:commandHandler
+                                                                                              doorbellHandler:doorbellHandler
+                                                                                              interestHandler:interestHandler];
+
+        if(error.code == KERN_SUCCESS)
+        {
+            dispatch_main();
+        }
+    }
+    return 0;
+}
+ */
+
 @interface IOUSBHostControllerInterface : NSObject
 
+/*!
+ * @typedef     IOUSBHostControllerInterfaceCommandHandler
+ * @brief       Client-supplied block to handle IOUSBHostCIMessage structures representing controller, port, device, or endpoint commands
+ * @discussion  The kernel driver controls the state of the client's USB services via commands that target the controller, port, device, or endpoint.  The command response
+ *              must be received by the kernel driver before a new command will be sent.
+ *
+ *              Commands with a type targeting the controller (IOUSBHostCIMessageTypeController*) should be processed by the IOUSBHostCIControllerStateMachine
+ *              available via the IOUSBHostControllerInterface's controllerStateMachine property.
+ *
+ *              Commands with a type targeting the root ports (IOUSBHostCIMessageTypePort*) should be processed by the IOUSBHostCIPortStateMachines
+ *              available via the getPortStateMachineForCommand interface.
+ *
+ *              Commands with a type targeting a device (IOUSBHostCIMessageTypeDevice*) should be processed by a client-created IOUSBHostCIDeviceStateMachine.
+ *
+ *              Commands with a type targeting an endpoint (IOUSBHostCIMessageTypeEndpoint*) should be processed by a client-created IOUSBHostCIEndpointStateMachine.
+ */
 typedef void (^ IOUSBHostControllerInterfaceCommandHandler)(IOUSBHostControllerInterface* controller, IOUSBHostCIMessage command);
 
+/*!
+ * @typedef     IOUSBHostControllerInterfaceDoorbellHandler
+ * @brief       Client-supplied block to handle IOUSBHostCIDoorbell messages
+ * @discussion  The kernel driver sends IOUSBHostCIDoorbell messages to notify the client that transfer structures for specific endpoints have been updated.  Doorbell messages
+ *              should be processed by a client-created IOUSBHostCIEndpointStateMachine.
+ */
 typedef void (^ IOUSBHostControllerInterfaceDoorbellHandler)(IOUSBHostControllerInterface* controller, IOUSBHostCIDoorbell* doorbellArray, uint32_t doorbellCount);
 
 #pragma mark session management and creation
@@ -31,7 +114,8 @@ typedef void (^ IOUSBHostControllerInterfaceDoorbellHandler)(IOUSBHostController
  * @brief       Initializes IOUSBHostControllerInterface object along with a user client
  * @discussion  If the user client cannot be created, nil will be returned.
  *              When done using the object, destroy must be called on the object.
- * @param       capabilities NSData containing IOUSBHostCIMessage structures describing capabilities of this IOUSBHostControllerInterface instance
+ * @param       capabilities NSData containing an array of IOUSBHostCIMessage structures.  The first must have an IOUSBHostCIMessageControlType of IOUSBHostCIMessageTypeControllerCapabilities,
+ *              followed by at least one message with an IOUSBHostCIMessageControlType of IOUSBHostCIMessageTypePortCapabilities.
  * @param       queue A serial queue to service asynchronous operations. If nil, a serial queue will be created on behalf of the client.
  * @param       interruptRateHz NSUInteger representing the rate in Hz at which interrupts will be delivered to the kernel driver.
  *              A value ot 0 will send all interrupts to the kernel immediately.

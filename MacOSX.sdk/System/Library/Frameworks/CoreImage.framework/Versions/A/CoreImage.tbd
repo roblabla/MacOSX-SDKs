@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A4D35B12-738E-365E-94F8-5D4751557883
+    value:           8C2AD56F-9DF7-3219-8757-F69FBBC33271
   - target:          x86_64-maccatalyst
-    value:           A4D35B12-738E-365E-94F8-5D4751557883
+    value:           8C2AD56F-9DF7-3219-8757-F69FBBC33271
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           40F13C33-2671-32AC-8918-B42C671F6683
+    value:           C47AAD33-C3F7-30A8-9974-B6ACEF081C8A
   - target:          arm64e-maccatalyst
-    value:           40F13C33-2671-32AC-8918-B42C671F6683
+    value:           C47AAD33-C3F7-30A8-9974-B6ACEF081C8A
 install-name:    '/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage'
 current-version: 5
 compatibility-version: 1.0.1
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CIDetectorAccuracy, _CIDetectorAccuracyHigh, _CIDetectorAccuracyLow, 
                        _CIDetectorAspectRatio, _CIDetectorBetterEyeLocs, _CIDetectorDetectDiacritics, 
@@ -37,14 +37,17 @@ exports:
                        _CIDualRedEyeRepairMetadataKey_PortType, _CIDualRedEyeRepairMetadataKey_TuningParametersByPortType, 
                        _CIDualRedEyeRepairMetadataKey_WouldAutoFlashTurnOn, _CIFeatureTypeFace, 
                        _CIFeatureTypeQRCode, _CIFeatureTypeRectangle, _CIFeatureTypeText, 
-                       _CITextDetectorMinimizeFalseDetections, _CI_GenericRGBLinear_to_TempTint, 
-                       _CI_TempTint_to_xy, _CI_xy_to_TempTint, _kCIActiveKeys, _kCIApplyOptionColorSpace, 
-                       _kCIApplyOptionDefinition, _kCIApplyOptionExtent, _kCIApplyOptionUserInfo, 
-                       _kCIAttributeClass, _kCIAttributeDefault, _kCIAttributeDescription, 
-                       _kCIAttributeDisplayName, _kCIAttributeFilterAvailable_Mac, 
-                       _kCIAttributeFilterAvailable_iOS, _kCIAttributeFilterCategories, 
-                       _kCIAttributeFilterDisplayName, _kCIAttributeFilterName, _kCIAttributeIdentity, 
-                       _kCIAttributeMax, _kCIAttributeMin, _kCIAttributeName, _kCIAttributeReferenceDocumentation, 
+                       _CIRAWDecoderVersion6, _CIRAWDecoderVersion6DNG, _CIRAWDecoderVersion7, 
+                       _CIRAWDecoderVersion7DNG, _CIRAWDecoderVersion8, _CIRAWDecoderVersion8DNG, 
+                       _CIRAWDecoderVersionNone, _CITextDetectorMinimizeFalseDetections, 
+                       _CI_GenericRGBLinear_to_TempTint, _CI_TempTint_to_xy, _CI_xy_to_TempTint, 
+                       _kCIActiveKeys, _kCIApplyOptionColorSpace, _kCIApplyOptionDefinition, 
+                       _kCIApplyOptionExtent, _kCIApplyOptionUserInfo, _kCIAttributeClass, 
+                       _kCIAttributeDefault, _kCIAttributeDescription, _kCIAttributeDisplayName, 
+                       _kCIAttributeFilterAvailable_Mac, _kCIAttributeFilterAvailable_iOS, 
+                       _kCIAttributeFilterCategories, _kCIAttributeFilterDisplayName, 
+                       _kCIAttributeFilterName, _kCIAttributeIdentity, _kCIAttributeMax, 
+                       _kCIAttributeMin, _kCIAttributeName, _kCIAttributeReferenceDocumentation, 
                        _kCIAttributeSliderMax, _kCIAttributeSliderMin, _kCIAttributeType, 
                        _kCIAttributeTypeAngle, _kCIAttributeTypeBoolean, _kCIAttributeTypeColor, 
                        _kCIAttributeTypeCount, _kCIAttributeTypeDistance, _kCIAttributeTypeGradient, 
@@ -71,7 +74,8 @@ exports:
                        _kCIContextDisableSoftwareFallback, _kCIContextEnableBlending, 
                        _kCIContextHLGOpticalScale, _kCIContextHighQualityDownsample, 
                        _kCIContextInlineAffineTransforms, _kCIContextIntermediateMemoryTarget, 
-                       _kCIContextName, _kCIContextOpenGLShareContext, _kCIContextOutputColorSpace, 
+                       _kCIContextLossyCompressedIntermediates, _kCIContextName, 
+                       _kCIContextOpenGLShareContext, _kCIContextOutputColorSpace, 
                        _kCIContextOutputPremultiplied, _kCIContextParametricColorMatching, 
                        _kCIContextPriorityRequestHigh, _kCIContextPriorityRequestLow, 
                        _kCIContextQuality, _kCIContextUseMetalRenderer, _kCIContextUseSoftwareRenderer, 
@@ -115,12 +119,12 @@ exports:
                        _kCIImageFlipped, _kCIImageIgnorePixelFormatFor601Fixup, _kCIImageNearestSampling, 
                        _kCIImageOpaque, _kCIImagePremultiplied, _kCIImageProcessorAllowPartialOutputRegion, 
                        _kCIImageProcessorSynchronizeInputs, _kCIImageProperties, 
-                       _kCIImageProviderContentDigest, _kCIImageProviderName, _kCIImageProviderTileSize, 
-                       _kCIImageProviderUserInfo, _kCIImageRepresentationAVDepthData, 
-                       _kCIImageRepresentationAVPortraitEffectsMatte, _kCIImageRepresentationAVSemanticSegmentationMattes, 
-                       _kCIImageRepresentationDepthImage, _kCIImageRepresentationDisparityImage, 
-                       _kCIImageRepresentationHDRGainMapImage, _kCIImageRepresentationPortraitEffectsMatteImage, 
-                       _kCIImageRepresentationSemanticSegmentationGlassesMatteImage, 
+                       _kCIImageProviderContentDigest, _kCIImageProviderMaximumTileSize, 
+                       _kCIImageProviderName, _kCIImageProviderTileSize, _kCIImageProviderUserInfo, 
+                       _kCIImageRepresentationAVDepthData, _kCIImageRepresentationAVPortraitEffectsMatte, 
+                       _kCIImageRepresentationAVSemanticSegmentationMattes, _kCIImageRepresentationDepthImage, 
+                       _kCIImageRepresentationDisparityImage, _kCIImageRepresentationHDRGainMapImage, 
+                       _kCIImageRepresentationPortraitEffectsMatteImage, _kCIImageRepresentationSemanticSegmentationGlassesMatteImage, 
                        _kCIImageRepresentationSemanticSegmentationHairMatteImage, 
                        _kCIImageRepresentationSemanticSegmentationSkinMatteImage, 
                        _kCIImageRepresentationSemanticSegmentationSkyMatteImage, 
@@ -155,6 +159,8 @@ exports:
                        _kCIKernelMessageTypeRemark, _kCIKernelMessageTypeSyntaxError, 
                        _kCIKernelMessageTypeWarning, _kCIKernelOutputFormat, _kCIKernelThreadgroupsPerGrid, 
                        _kCIKernelThreadsPerThreadgroup, _kCIOutputImageKey, _kCIOutputNativeSizeKey, 
+                       _kCIPhotoFilterBinaryArchive, _kCIPortraitFilterV2FullSizeBinaryArchive, 
+                       _kCIPortraitFilterV2ProxySizeBinaryArchive, _kCIPropertiesKey, 
                        _kCISamplerAffineMatrix, _kCISamplerBlur, _kCISamplerBlurFormat, 
                        _kCISamplerColorSpace, _kCISamplerFilterLinear, _kCISamplerFilterMode, 
                        _kCISamplerFilterNearest, _kCISamplerFilterPoint, _kCISamplerWrapBlack, 
@@ -169,7 +175,7 @@ exports:
                        CIFilterGenerator, CIFilterGeneratorConnection, CIFilterShape, 
                        CIImage, CIImageAccumulator, CIImageProcessorKernel, CIKernel, 
                        CIOpenGLContext, CIPDF417CodeDescriptor, CIQRCodeDescriptor, 
-                       CIQRCodeFeature, CIRectangleFeature, CIRenderDestination, 
+                       CIQRCodeFeature, CIRAWFilter, CIRectangleFeature, CIRenderDestination, 
                        CIRenderInfo, CIRenderTask, CISampler, CITextFeature, CIVector, 
                        CIWarpKernel ]
     objc-ivars:      [ CIAztecCodeDescriptor.dataCodewordCount, CIAztecCodeDescriptor.errorCorrectedPayload, 
@@ -198,7 +204,7 @@ exports:
                        CIRectangleFeature.topLeft, CIRectangleFeature.topRight, CIRenderDestination._priv, 
                        CIRenderInfo._priv, CIRenderTask._priv, CISampler._priv, CIVector._count, 
                        CIVector._u ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 
                        '$ld$install_name$os10.11$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 
                        '$ld$install_name$os10.4$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 

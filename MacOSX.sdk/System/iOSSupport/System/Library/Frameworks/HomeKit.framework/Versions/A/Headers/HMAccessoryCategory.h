@@ -20,12 +20,12 @@ HM_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
 /*!
  * @brief A type identifier that represents the category.
  */
-@property(readonly, copy, nonatomic) NSString *categoryType;
+@property(readonly, copy) NSString *categoryType;
 
 /*!
  * @brief The localized description of the category.
  */
-@property(readonly, copy, nonatomic) NSString *localizedDescription;
+@property(readonly, copy) NSString *localizedDescription;
 
 @end
 

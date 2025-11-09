@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D98D7478-DA46-315A-B4AC-777BEFD954F0
+    value:           DF37992B-4B5B-3B50-A3B2-C66A71DC151D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B8FE1CF4-DE05-3EF6-968E-182356A9BDCA
+    value:           74DCE839-1DE8-3694-A343-6B6E97720BB1
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebCore.framework/Versions/A/Frameworks/libANGLE-shared.dylib'
-current-version: 611.1.21
+current-version: 612.1.24
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ WebCore, WebCoreTestSupport ]

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6026E91E-B2A8-3620-89B7-99A38924D32A
+    value:           6C7ECEBB-5D31-37BC-9EB7-DA33E39960F3
   - target:          x86_64-maccatalyst
-    value:           6026E91E-B2A8-3620-89B7-99A38924D32A
+    value:           6C7ECEBB-5D31-37BC-9EB7-DA33E39960F3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7288A3EE-F404-36BF-8CCF-8E9329AE412C
+    value:           9F96A2DC-6526-3F5B-AF68-1783A2C536A4
   - target:          arm64e-maccatalyst
-    value:           7288A3EE-F404-36BF-8CCF-8E9329AE412C
+    value:           9F96A2DC-6526-3F5B-AF68-1783A2C536A4
 install-name:    '/System/Library/PrivateFrameworks/FlightUtilitiesCore.framework/Versions/A/FlightUtilitiesCore'
-current-version: 141
+current-version: 144
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

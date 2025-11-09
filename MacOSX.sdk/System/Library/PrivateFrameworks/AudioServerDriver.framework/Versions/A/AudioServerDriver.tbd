@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6A9179C1-77EC-34B5-97FF-AC02252CF65B
+    value:           9A0AB073-9FBC-3999-A241-48ABFA4E1E44
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E18827CF-7AE4-3C31-AE80-1190159CE173
+    value:           A9CC8C16-57F8-31F8-85B6-3698628B617A
 install-name:    '/System/Library/PrivateFrameworks/AudioServerDriver.framework/Versions/A/AudioServerDriver'
 exports:
   - targets:         [ x86_64-macos ]
@@ -155,11 +155,11 @@ exports:
                        __ZN8DSPGraph12GraphFactory26createLinearGraphWithBoxesENSt3__16vectorIPNS_3BoxENS1_9allocatorIS4_EEEERK24CAStreamBasicDescription, 
                        __ZN8DSPGraph12GraphFactory33createFormatMatchedGraphWithGraphENSt3__110shared_ptrINS_5GraphEEERKNS1_6vectorI24CAStreamBasicDescriptionNS1_9allocatorIS6_EEEESB_b, 
                        __ZN8DSPGraph8GraphBox10initializeEv, __ZN8DSPGraph8GraphBox12getParameterEjjj, 
-                       __ZN8DSPGraph8GraphBox12setMaxFramesEi, __ZN8DSPGraph8GraphBox12setParameterEjjjfj, 
-                       __ZN8DSPGraph8GraphBox12uninitializeEv, __ZN8DSPGraph8GraphBox16getParameterInfoEjjR22AudioUnitParameterInfo, 
-                       __ZN8DSPGraph8GraphBox16getParameterListEjPjRi, __ZN8DSPGraph8GraphBox18prepareGraphIODataEi, 
+                       __ZN8DSPGraph8GraphBox12setMaxFramesEj, __ZN8DSPGraph8GraphBox12setParameterEjjjfj, 
+                       __ZN8DSPGraph8GraphBox12uninitializeEv, __ZN8DSPGraph8GraphBox16getParameterInfoEjj, 
+                       __ZN8DSPGraph8GraphBox16getParameterListEj, __ZN8DSPGraph8GraphBox18prepareGraphIODataEj, 
                        __ZN8DSPGraph8GraphBox18selfLatencyInTicksEv, __ZN8DSPGraph8GraphBox21setUsesFixedBlockSizeEb, 
-                       __ZN8DSPGraph8GraphBox7processEi, __ZN8DSPGraph8GraphBoxC1ENSt3__110shared_ptrINS_5GraphEEEb, 
+                       __ZN8DSPGraph8GraphBox7processEj, __ZN8DSPGraph8GraphBoxC1ENSt3__110shared_ptrINS_5GraphEEEb, 
                        __ZN8DSPGraph8GraphBoxC2ENSt3__110shared_ptrINS_5GraphEEEb, 
                        __ZN8DSPGraph8GraphBoxD0Ev, __ZN8DSPGraph8GraphBoxD1Ev, __ZN8DSPGraph8GraphBoxD2Ev, 
                        __ZNK10RamstadSRC14latencySamplesEv, __ZNK10RamstadSRC14latencySecondsEv, 
@@ -172,8 +172,8 @@ exports:
                        __ZNK24CAStreamBasicDescription8AsStringEPcmb, __ZNK5CALog5Scope15ScopeLogEnabledEiy, 
                        __ZNK8ASD_U128dvERKS_, __ZNK8ASD_U128mlERKS_, __ZTV15AudioRingBuffer, 
                        __ZTV17ASDIntervalFilter, __ZTV20ASDIntervalFilterFIR, __ZTV20ASDIntervalFilterIIR, 
-                       __ZTVN8DSPGraph8GraphBoxE, __ZeqRK14AudioTimeStampS1_, __ZltRK14AudioTimeStampS1_, 
-                       __ZmlRK8ASD_U128y, __ZmlyRK8ASD_U128, _formatLikeOSLog, _gAudioServerPlugInDriverInterface ]
+                       __ZTVN8DSPGraph8GraphBoxE, __ZmlRK8ASD_U128y, __ZmlyRK8ASD_U128, 
+                       _formatLikeOSLog, _gAudioServerPlugInDriverInterface ]
     objc-classes:    [ ASDAUStripInfo, ASDAudioDevice, ASDAudioDeviceDSPConfiguration, 
                        ASDAudioDeviceDSPDatabase, ASDBooleanControl, ASDBox, ASDClockDevice, 
                        ASDControl, ASDCustomProperty, ASDDSPAudioDevice, ASDDSPConfiguration, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B000B012-6ACB-3EB5-9BB0-B4E7978AD6BE
+    value:           C19D0308-CA13-3C90-9662-B6E50C491509
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2D79E2C6-1C6B-311C-A91C-79B674BCF593
+    value:           1FC4E06D-BB5B-3C49-9241-316BA92CFC21
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticExtensionsDaemon.framework/Versions/A/DiagnosticExtensionsDaemon'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -32,9 +32,9 @@ exports:
                        _DEDDeviceKeyTransport, _DEDDevicePlatform, _DEDDevicePlatformHomePod, 
                        _DEDDevicePlatformMac, _DEDDevicePlatformTV, _DEDDevicePlatformUnspecified, 
                        _DEDDevicePlatformWatch, _DEDDevicePlatformiOS, _DEDErrorDomain, 
-                       _DEDIDSCommandShouldUseFireAndForget, _DEDIDSConnectionLog, 
-                       _DEDKeyAllowsCellularUpload, _DEDKeyCapabilities, _DEDKeyCloudKitContainer, 
-                       _DEDKeyCloudKitData, _DEDKeyCloudKitUseDevelopmentEnvironment, 
+                       _DEDFBKFeedbackUploadsKey, _DEDIDSCommandShouldUseFireAndForget, 
+                       _DEDIDSConnectionLog, _DEDKeyAllowsCellularUpload, _DEDKeyCapabilities, 
+                       _DEDKeyCloudKitContainer, _DEDKeyCloudKitData, _DEDKeyCloudKitUseDevelopmentEnvironment, 
                        _DEDKeyFinishingMove, _DEDKeyHostAppIdentifier, _DEDKeyLocalizedNotificationBody, 
                        _DEDKeyLocalizedNotificationTitle, _DEDKeyNotifierConfiguration, 
                        _DEDKeyNotifyingMove, _DEDKeyRadarAuthToken, _DEDKeyRadarProblemID, 
@@ -54,11 +54,14 @@ exports:
                        AWDDEDExtensionStarted, AWDDEDFinisherEnded, AWDDEDFinisherStarted, 
                        DEDActivity, DEDAnalytics, DEDAttachmentGroup, DEDAttachmentHandler, 
                        DEDAttachmentItem, DEDBugSession, DEDBugSessionConfiguration, 
-                       DEDBugSessionOperation, DEDCapability, DEDCloudKitAttachment, 
-                       DEDCloudKitFinisher, DEDCollectionNotification, DEDConfiguration, 
-                       DEDConstants, DEDController, DEDDaemon, DEDDeferredExtensionInfo, 
-                       DEDDevice, DEDDiagnosticCollector, DEDEncryptorFactory, DEDExtension, 
-                       DEDExtensionIdentifier, DEDExtensionIdentifierManager, DEDFollowUpNotifier, 
+                       DEDBugSessionOperation, DEDCapability, DEDClientConnection, 
+                       DEDCloudKitAttachmentGroupModel, DEDCloudKitAttachmentGroupStatusModel, 
+                       DEDCloudKitAttachmentModel, DEDCloudKitBaseModel, DEDCloudKitClient, 
+                       DEDCloudKitExtensionsUtil, DEDCloudKitFinisher, DEDCollectionNotification, 
+                       DEDConfiguration, DEDConstants, DEDController, DEDDaemon, 
+                       DEDDeferredExtensionInfo, DEDDevice, DEDDiagnosticCollector, 
+                       DEDEncryptorFactory, DEDExtension, DEDExtensionIdentifier, 
+                       DEDExtensionIdentifierManager, DEDFBKFeedbackUpload, DEDFollowUpNotifier, 
                        DEDHealthLogsEncryptor, DEDIDSConnection, DEDIDSInbound, DEDIDSOutbound, 
                        DEDImageResourceManager, DEDLocalTransport, DEDManager, DEDNotifierConfiguration, 
                        DEDPersistence, DEDRadarFinisher, DEDRadarUploadItem, DEDRequestAdvertiser, 

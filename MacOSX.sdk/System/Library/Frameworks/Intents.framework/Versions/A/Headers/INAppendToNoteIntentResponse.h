@@ -17,11 +17,11 @@ typedef NS_ENUM(NSInteger, INAppendToNoteIntentResponseCode) {
     INAppendToNoteIntentResponseCodeFailure,
     INAppendToNoteIntentResponseCodeFailureRequiringAppLaunch,
     INAppendToNoteIntentResponseCodeFailureCannotUpdatePasswordProtectedNote,
-} API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macos, tvos);
+} API_DEPRECATED("INAppendToNoteIntentResponseCode is deprecated. There is no replacement.", ios(11.0, 15.0), watchos(4.0, 8.0)) API_UNAVAILABLE(macos, tvos);
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(11.0), watchos(4.0))
+API_DEPRECATED("INAppendToNoteIntentResponse is deprecated. There is no replacement.", ios(11.0, 15.0), watchos(4.0, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INAppendToNoteIntentResponse : INIntentResponse
 

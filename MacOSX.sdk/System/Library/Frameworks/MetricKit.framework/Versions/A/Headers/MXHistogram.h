@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion    Histogram buckets are sorted in ascending order.
  @discussion    Histogram bucket start and end values are exclusive.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(13.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
 @interface MXHistogramBucket<UnitType: NSUnit *> : NSObject <NSSecureCoding>
 
 /*!
@@ -43,7 +43,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  @class         MXHistogram
  @abstract      A class representing bucketized histogram data.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(13.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
 @interface MXHistogram<UnitType: NSUnit *>  : NSObject <NSSecureCoding>
 
 /*!

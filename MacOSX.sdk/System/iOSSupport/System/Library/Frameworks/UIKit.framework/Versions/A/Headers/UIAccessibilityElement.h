@@ -22,7 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
  backed by a UIView (for example: painted text or icon).
  */
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.0)) @interface UIAccessibilityElement : UIResponder<UIAccessibilityIdentification>
+UIKIT_EXTERN API_AVAILABLE(ios(3.0)) NS_SWIFT_UI_ACTOR
+@interface UIAccessibilityElement : UIResponder<UIAccessibilityIdentification>
 
 // initialize with the accessibility container that contains this element
 - (instancetype)initWithAccessibilityContainer:(id)container;

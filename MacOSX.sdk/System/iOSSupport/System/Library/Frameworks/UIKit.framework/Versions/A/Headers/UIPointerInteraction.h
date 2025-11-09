@@ -16,7 +16,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) @interface UIPointerInteraction : NSObject <UIInteraction>
+UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIPointerInteraction : NSObject <UIInteraction>
 
 @property (nonatomic, weak, readonly, nullable) id<UIPointerInteractionDelegate> delegate;
 @property (nonatomic, getter=isEnabled) BOOL enabled;
@@ -31,7 +32,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) @interface 
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) @protocol UIPointerInteractionDelegate <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@protocol UIPointerInteractionDelegate <NSObject>
 
 @optional
 
@@ -77,7 +79,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) @protocol U
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) @interface UIPointerRegionRequest : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIPointerRegionRequest : NSObject
 
 /// The location of the pointer in the interaction's view's coordinate space.
 @property (nonatomic, readonly) CGPoint location;
@@ -88,10 +91,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) @interface 
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) @protocol UIPointerInteractionAnimating <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@protocol UIPointerInteractionAnimating <NSObject>
 
 - (void)addAnimations:(void (^)(void))animations;
-- (void)addCompletion:(void (^)(BOOL finished))completion;
+- (void)addCompletion:(void (^)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC;
 
 @end
 

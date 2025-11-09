@@ -2,7 +2,7 @@
 /*
         NSGlyphGenerator.h
         Application Kit
-        Copyright (c) 1993-2019, Apple Inc.
+        Copyright (c) 1993-2021, Apple Inc.
         All rights reserved.
 */
 

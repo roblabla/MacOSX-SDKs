@@ -1,6 +1,6 @@
-/* iig(DriverKit-107.100.6) generated from IOTimerDispatchSource.iig */
+/* iig(DriverKit-191) generated from IOTimerDispatchSource.iig */
 
-/* IOTimerDispatchSource.iig:1-69 */
+/* IOTimerDispatchSource.iig:1-74 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -70,7 +70,12 @@ enum {
 	kIOTimerClockMachContinuousTime = 0xC4ull,
 };
 
-/* source class IOTimerDispatchSource IOTimerDispatchSource.iig:70-158 */
+#define IOTimerDispatchSource_DECLARE_IVARS	\
+private: \
+	 IOTimerDispatchSource_IVars * ivars; \
+public:
+
+/* source class IOTimerDispatchSource IOTimerDispatchSource.iig:75-163 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -169,7 +174,7 @@ private:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOTimerDispatchSource IOTimerDispatchSource.iig:70-158 */
+/* generated class IOTimerDispatchSource IOTimerDispatchSource.iig:75-163 */
 
 #define IOTimerDispatchSource_Create_ID            0x5703101ba090eaf0ULL
 #define IOTimerDispatchSource_SetHandler_ID            0x487f4f13f1a0a074ULL
@@ -352,12 +357,21 @@ class IOTimerDispatchSource : public IODispatchSource, public IOTimerDispatchSou
 
 #if !KERNEL
 public:
+#ifdef IOTimerDispatchSource_DECLARE_IVARS
+IOTimerDispatchSource_DECLARE_IVARS
+#else /* IOTimerDispatchSource_DECLARE_IVARS */
     union
     {
         IOTimerDispatchSource_IVars * ivars;
         IOTimerDispatchSource_LocalIVars * lvars;
     };
+#endif /* IOTimerDispatchSource_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gIOTimerDispatchSourceMetaClass; };
+#endif /* KERNEL */
 
     using super = IODispatchSource;
 
@@ -372,7 +386,7 @@ public:
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOTimerDispatchSource.iig:160- */
+/* IOTimerDispatchSource.iig:165- */
 
 
 #endif /* ! _IOKIT_UIOTIMERDISPATCHSOURCE_H */

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UISearchController;
 
+NS_SWIFT_UI_ACTOR
 @protocol UISearchControllerDelegate <NSObject>
 @optional
 // These methods are called when automatic presentation or dismissal occurs. They will not be called if you present or dismiss the search controller yourself.
@@ -29,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol UISearchSuggestion;
 
+NS_SWIFT_UI_ACTOR
 @protocol UISearchResultsUpdating <NSObject>
 @required
 // Called when the search bar's text or scope has changed or when the search bar becomes first responder.
@@ -38,7 +40,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateSearchResultsForSearchController:(nonnull UISearchController *)searchController selectingSearchSuggestion:(nonnull id<UISearchSuggestion>)searchSuggestion API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios, watchos);
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UISearchController : UIViewController <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
+/*!
+ @note On tvOS, restoresFocusAfterTransition is set to NO if UISearchController, or UISearchContainerViewController containing it, is embedded in UITabBarController.
+ */
+
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
+@interface UISearchController : UIViewController <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
 // Pass nil if you wish to display search results in the same view that you are searching. This is not supported on tvOS; please provide a results controller on tvOS.
 - (instancetype)initWithSearchResultsController:(nullable UIViewController *)searchResultsController NS_DESIGNATED_INITIALIZER;
@@ -56,7 +63,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UISearchController : UIViewContr
 
 @property (nullable, nonatomic, weak) id <UISearchControllerDelegate> delegate;
 @property (nonatomic, assign) BOOL dimsBackgroundDuringPresentation API_UNAVAILABLE(tvos) API_DEPRECATED_WITH_REPLACEMENT("obscuresBackgroundDuringPresentation", ios(8.0,12.0)); // default is YES, and has the same behavior as obscuresBackgroundDuringPresentation.
-@property (nonatomic, assign) BOOL obscuresBackgroundDuringPresentation API_AVAILABLE(ios(9.1)); // default is YES. On tvOS, defaults to NO when contained in UISearchContainerViewController.
+
+/* On iOS, default is NO for apps linked on iOS 15.0 and later, YES otherwise.
+ On tvOS, default is NO when contained in UISearchContainerViewController, YES otherwise.
+ */
+@property (nonatomic, assign) BOOL obscuresBackgroundDuringPresentation API_AVAILABLE(ios(9.1));
 @property (nonatomic, assign) BOOL hidesNavigationBarDuringPresentation;     // default is YES
 
 @property (nullable, nonatomic, strong, readonly) UIViewController *searchResultsController;
@@ -93,8 +104,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UISearchController : UIViewContr
 // List of search hint objects to be displayed under keyboard on tvOS. Assigning with new array immediately updates the list on screen. This becomes nil once user selects one of the hints.
 @property (nonatomic, copy, nullable) NSArray<id<UISearchSuggestion>> *searchSuggestions API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios, watchos);
 
-// A scroll view this search controller tracks to scroll its view elements with. Set this property to the full screen scroll view in your results view on the results view controller, if one exists. If search controller is embedded inside a tab controller, this will forward the scroll view to the tab controller as `tabBarObservedScrollView`.
-@property(nullable, nonatomic, strong) UIScrollView *searchControllerObservedScrollView API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios, watchos);
+/* Deprecated on tvOS 15.0 in favor of  using -[UIViewController setContentScrollView:forEdge:]
+ on the searchResultsController, passing the full-screen scroll view contained in the results view
+ and NSDirectionalRectEdgeTop.
+     
+   If the search controller is embedded inside a tab bar controller, the tab bar controller
+ will also observe this scroll view.
+ */
+@property(nullable, nonatomic, strong) UIScrollView *searchControllerObservedScrollView API_DEPRECATED("Use -[UIViewController setContentScrollView:forEdge:] on the searchResultsController instead.", tvos(13.0,API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos); // Set this property to the full screen scroll view in your results view on the results view controller, if one exists. If search controller is embedded inside a tab controller, this will forward the scroll view to the tab controller as tabBarObservedScrollView.
 
 @end
 

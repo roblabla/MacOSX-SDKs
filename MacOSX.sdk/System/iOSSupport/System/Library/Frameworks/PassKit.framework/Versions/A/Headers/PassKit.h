@@ -16,6 +16,12 @@
 #import <PassKit/PKLabeledValue.h>
 #endif
 #import <PassKit/PKContact.h>
+#if __has_include(<PassKit/PKStoredValuePassProperties.h>)
+#import <PassKit/PKStoredValuePassProperties.h>
+#endif
+#if __has_include(<PassKit/PKStoredValuePassBalance.h>)
+#import <PassKit/PKStoredValuePassBalance.h>
+#endif
 #if __has_include(<PassKit/PKTransitPassProperties.h>)
 #import <PassKit/PKTransitPassProperties.h>
 #endif
@@ -28,14 +34,14 @@
 #if __has_include(<PassKit/PKPaymentRequestStatus.h>)
 #import <PassKit/PKPaymentRequestStatus.h>
 #endif
+#if __has_include(<PassKit/PKPaymentToken.h>)
+#import <PassKit/PKPaymentToken.h>
+#endif
 #if __has_include(<PassKit/PKPayment.h>)
 #import <PassKit/PKPayment.h>
 #endif
 #if __has_include(<PassKit/PKPaymentMethod.h>)
 #import <PassKit/PKPaymentMethod.h>
-#endif
-#if __has_include(<PassKit/PKPaymentToken.h>)
-#import <PassKit/PKPaymentToken.h>
 #endif
 #if TARGET_OS_IPHONE || TARGET_OS_OSX
 #if __has_include(<PassKit/PKPaymentAuthorizationViewController.h>)
@@ -68,11 +74,11 @@
 #if __has_include(<PassKit/PKDisbursementAuthorizationController.h>)
 #import <PassKit/PKDisbursementAuthorizationController.h>
 #endif
-#if __has_include(<PassKit/PKPaymentInformationEventExtension.h>)
-#import <PassKit/PKPaymentInformationEventExtension.h>
-#endif
 #if __has_include(<PassKit/PKBarcodeEventMetadataRequest.h>)
 #import <PassKit/PKBarcodeEventMetadataRequest.h>
+#endif
+#if __has_include(<PassKit/PKPaymentInformationEventExtension.h>)
+#import <PassKit/PKPaymentInformationEventExtension.h>
 #endif
 #if __has_include(<PassKit/PKAddSecureElementPassViewController.h>)
 #import <PassKit/PKAddSecureElementPassViewController.h>
@@ -103,5 +109,8 @@
 #endif
 #if __has_include(<PassKit/PKIssuerProvisioningExtensionPaymentPassEntry.h>)
 #import <PassKit/PKIssuerProvisioningExtensionPaymentPassEntry.h>
+#endif
+#if __has_include(<PassKit/PKDateComponentsRange.h>)
+#import <PassKit/PKDateComponentsRange.h>
 #endif
 #endif // TARGET_OS_IPHONE || TARGET_OS_OSX

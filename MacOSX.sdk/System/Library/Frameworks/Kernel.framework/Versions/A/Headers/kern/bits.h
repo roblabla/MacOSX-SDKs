@@ -75,22 +75,24 @@ bit_rol64(uint64_t bitmap, uint n)
 }
 
 /* Non-atomically clear the bit and returns whether the bit value was changed */
-inline static bool
-bit_clear_if_set(uint64_t bitmap, int bit)
-{
-	bool bit_is_set = bit_test(bitmap, bit);
-	bit_clear(bitmap, bit);
-	return bit_is_set;
-}
+#define bit_clear_if_set(bitmap, bit) \
+({ \
+	int _n = (bit); \
+	__auto_type _map = &(bitmap); \
+	bool _bit_is_set = bit_test(*_map, _n); \
+	bit_clear(*_map, _n); \
+	_bit_is_set; \
+})
 
 /* Non-atomically set the bit and returns whether the bit value was changed */
-inline static bool
-bit_set_if_clear(uint64_t bitmap, int bit)
-{
-	bool bit_is_set = bit_test(bitmap, bit);
-	bit_set(bitmap, bit);
-	return !bit_is_set;
-}
+#define bit_set_if_clear(bitmap, bit) \
+({ \
+	int _n = (bit); \
+	__auto_type _map = &(bitmap); \
+	bool _bit_is_set = bit_test(*_map, _n); \
+	bit_set(*_map, _n); \
+	!_bit_is_set; \
+})
 
 /* Returns the most significant '1' bit, or -1 if all zeros */
 inline static int
@@ -200,7 +202,8 @@ atomic_bit_clear(_Atomic bitmap_t *map, int n, int mem_order)
 inline static bitmap_t *
 bitmap_zero(bitmap_t *map, uint nbits)
 {
-	return (bitmap_t *)memset((void *)map, 0, BITMAP_SIZE(nbits));
+	memset((void *)map, 0, BITMAP_SIZE(nbits));
+	return map;
 }
 
 inline static bitmap_t *
@@ -244,11 +247,9 @@ bitmap_is_full(bitmap_t *map, uint nbits)
 inline static bitmap_t *
 bitmap_alloc(uint nbits)
 {
+	bitmap_t *map;
 	assert(nbits > 0);
-	bitmap_t *map = (bitmap_t *)kalloc(BITMAP_SIZE(nbits));
-	if (map) {
-		bitmap_zero(map, nbits);
-	}
+	map = (bitmap_t *)kalloc_data(BITMAP_SIZE(nbits), Z_WAITOK_ZERO);
 	return map;
 }
 
@@ -256,7 +257,7 @@ inline static void
 bitmap_free(bitmap_t *map, uint nbits)
 {
 	assert(nbits > 0);
-	kfree(map, BITMAP_SIZE(nbits));
+	kfree_data(map, BITMAP_SIZE(nbits));
 }
 
 inline static void
@@ -319,7 +320,11 @@ bitmap_not(bitmap_t *out, const bitmap_t *in, uint nbits)
 }
 
 inline static void
-bitmap_and(bitmap_t *out, const bitmap_t *in1, const bitmap_t *in2, uint nbits)
+bitmap_and(
+	bitmap_t       *out,
+	const bitmap_t *in1,
+	const bitmap_t *in2,
+	uint                        nbits)
 {
 	for (uint i = 0; i <= bitmap_index(nbits - 1); i++) {
 		out[i] = in1[i] & in2[i];
@@ -327,18 +332,28 @@ bitmap_and(bitmap_t *out, const bitmap_t *in1, const bitmap_t *in2, uint nbits)
 }
 
 inline static void
-bitmap_and_not(bitmap_t *out, const bitmap_t *in1, const bitmap_t *in2, uint nbits)
+bitmap_and_not(
+	bitmap_t       *out,
+	const bitmap_t *in1,
+	const bitmap_t *in2,
+	uint                        nbits)
 {
 	uint i;
 
-	for (i = 0; i < bitmap_index(nbits - 1); i++) {
+	for (i = 0; i <= bitmap_index(nbits - 1); i++) {
 		out[i] = in1[i] & ~in2[i];
 	}
+}
 
-	uint nbits_complete = i * 64;
-
-	if (nbits > nbits_complete) {
-		out[i] = (in1[i] & ~in2[i]) & mask(nbits - nbits_complete);
+inline static void
+bitmap_or(
+	bitmap_t       *out,
+	const bitmap_t *in1,
+	const bitmap_t *in2,
+	uint                        nbits)
+{
+	for (uint i = 0; i <= bitmap_index(nbits - 1); i++) {
+		out[i] = in1[i] | in2[i];
 	}
 }
 
@@ -355,7 +370,7 @@ bitmap_equal(const bitmap_t *in1, const bitmap_t *in2, uint nbits)
 }
 
 inline static int
-bitmap_and_not_mask_first(bitmap_t *map, bitmap_t *mask, uint nbits)
+bitmap_and_not_mask_first(bitmap_t *map, const bitmap_t *mask, uint nbits)
 {
 	for (int i = (int)bitmap_index(nbits - 1); i >= 0; i--) {
 		if ((map[i] & ~mask[i]) == 0) {

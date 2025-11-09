@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1CDBF14A-5C16-3509-8CC4-30AF28538C6C
+    value:           F4D37FB4-EAC9-37D7-8099-36B45D726F6A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C13BDC18-689C-3807-AA71-7FD58A6F71CA
+    value:           1671F2D2-F4A6-30FD-B8FB-FAB31A7F3720
 install-name:    '/System/Library/PrivateFrameworks/SiriExperiments.framework/Versions/A/SiriExperiments'
 current-version: 0
 compatibility-version: 0
@@ -37,11 +37,15 @@ exports:
                        '_$s15SiriExperiments11FactorValueO2eeoiySbAC_ACtFZ', '_$s15SiriExperiments11FactorValueO3url10Foundation3URLVSgyF', 
                        '_$s15SiriExperiments11FactorValueO4fileyAC10Foundation3URLVcACmFWC', 
                        '_$s15SiriExperiments11FactorValueO4fromACs7Decoder_p_tKcfC', 
+                       '_$s15SiriExperiments11FactorValueO5int64yACs5Int64VcACmFWC', 
+                       '_$s15SiriExperiments11FactorValueO5valuexSgylF', '_$s15SiriExperiments11FactorValueO6doubleyACSdcACmFWC', 
                        '_$s15SiriExperiments11FactorValueO6encode2toys7Encoder_p_tKF', 
+                       '_$s15SiriExperiments11FactorValueO6stringyACSScACmFWC', '_$s15SiriExperiments11FactorValueO7booleanyACSbcACmFWC', 
                        '_$s15SiriExperiments11FactorValueOMa', '_$s15SiriExperiments11FactorValueOMn', 
                        '_$s15SiriExperiments11FactorValueON', '_$s15SiriExperiments11FactorValueOSEAAMc', 
                        '_$s15SiriExperiments11FactorValueOSQAAMc', '_$s15SiriExperiments11FactorValueOSeAAMc', 
                        '_$s15SiriExperiments11UpdateErrorO15levelNotPresentyACSS_SStcACmFWC', 
+                       '_$s15SiriExperiments11UpdateErrorO15valueNotPresentyACSS_tcACmFWC', 
                        '_$s15SiriExperiments11UpdateErrorO18filePathNotPresentyACSS_tcACmFWC', 
                        '_$s15SiriExperiments11UpdateErrorO21treatmentIdNotPresentyACSS_tcACmFWC', 
                        '_$s15SiriExperiments11UpdateErrorO22experimentIdNotPresentyACSS_tcACmFWC', 

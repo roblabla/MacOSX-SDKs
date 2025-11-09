@@ -88,7 +88,7 @@ HK_EXTERN API_AVAILABLE(ios(12.0), watchos(5.0))
  @param         startDate   The start date of the workout.
  @param         completion  Called once data collection has started or has failed to start.
  */
-- (void)beginCollectionWithStartDate:(NSDate *)startDate completion:(void(^)(BOOL success, NSError * _Nullable error))completion;
+- (void)beginCollectionWithStartDate:(NSDate *)startDate completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(beginCollection(at:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        addSamples:completion:
@@ -104,7 +104,7 @@ HK_EXTERN API_AVAILABLE(ios(12.0), watchos(5.0))
                             to the builder successfully. If success is NO, error will be non-nil and contain the error
                             encountered while adding the new samples.
  */
-- (void)addSamples:(NSArray<HKSample *> *)samples completion:(void(^)(BOOL success, NSError * _Nullable error))completion;
+- (void)addSamples:(NSArray<HKSample *> *)samples completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addSamples(_:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        addWorkoutEvents:completion:
@@ -118,7 +118,7 @@ HK_EXTERN API_AVAILABLE(ios(12.0), watchos(5.0))
                                 YES, the events were added to the builder successfully. If success is NO, error will be
                                 non-null and will contain the error encountered during the insertion operation.
  */
-- (void)addWorkoutEvents:(NSArray<HKWorkoutEvent *> *)workoutEvents completion:(void(^)(BOOL success, NSError * _Nullable error))completion;
+- (void)addWorkoutEvents:(NSArray<HKWorkoutEvent *> *)workoutEvents completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addWorkoutEvents(_:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        addMetadata:completion:
@@ -133,7 +133,7 @@ HK_EXTERN API_AVAILABLE(ios(12.0), watchos(5.0))
                             be non-null and will contain the error encountered during the insertion operation. When an
                             error occurs, the builder's metadata property will remain unchanged.
  */
-- (void)addMetadata:(NSDictionary<NSString *, id> *)metadata completion:(void(^)(BOOL success, NSError * _Nullable error))completion;
+- (void)addMetadata:(NSDictionary<NSString *, id> *)metadata completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addMetadata(_:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        endCollectionWithEndDate:error:
@@ -143,20 +143,22 @@ HK_EXTERN API_AVAILABLE(ios(12.0), watchos(5.0))
  @param         endDate     The end date of the workout.
  @param         completion  Called once data collection has stopped or has failed to stop.
  */
-- (void)endCollectionWithEndDate:(NSDate *)endDate completion:(void(^)(BOOL success, NSError * _Nullable error))completion;
+- (void)endCollectionWithEndDate:(NSDate *)endDate completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(endCollection(at:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        finishWorkoutWithCompletion:
  @discussion    Creates and saves an HKWorkout using samples and events that have been added to workout previously.
  
- @param         completion  Block to be called after the HKWorkout object has been created and saved. If success is NO,
-                            then error will be the error encountered during the operation.
+ @param         completion  Block to be called after the HKWorkout object has been created and saved. If the returned
+                            workout is nil, an error may have occurred in which case error will be non-nil. If both
+                            workout and error are nil then finishing the workout succeeded but the workout sample
+                            is not available because the device is locked.
  */
-- (void)finishWorkoutWithCompletion:(void(^)(HKWorkout * _Nullable workout, NSError * _Nullable error))completion;
+- (void)finishWorkoutWithCompletion:(void (^)(HKWorkout * _Nullable_result workout, NSError * _Nullable error))completion;
 
 /*!
  @method        discardWorkout
- @discussion    Finishes building the workout and discards ther result instead of saving it. Samples that were added to
+ @discussion    Finishes building the workout and discards the result instead of saving it. Samples that were added to
                 the workout will not be deleted. Adding samples, events, and metadata to the receiver after
                 discardWorkout has been called is an error.
  */

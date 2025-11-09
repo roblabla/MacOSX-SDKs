@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1EFDB264-5F6A-32F9-9526-1077A9AFE9E2
+    value:           8F0B52F3-A72A-3722-9FC4-FC22A768597A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E9E39470-DFA8-349C-8DCE-5D58331FAD7B
+    value:           7AB62359-FFBF-3C5F-86EA-A68D88ED0E77
 install-name:    '/System/Library/PrivateFrameworks/OfficeImport.framework/Versions/A/OfficeImport'
-current-version: 285
+current-version: 292
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 

@@ -3,23 +3,34 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           01097036-7756-323C-976A-CFAFA19D61C3
+    value:           94410FF5-1F56-37DC-B75C-3E42B8DC9E2A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           11C1E30B-D0A8-3A64-BFE2-78C592BA4BA9
+    value:           FD5DF18E-4B6C-3A63-90A1-824BCCDD1DE5
 install-name:    '/System/Library/PrivateFrameworks/SiriAnalytics.framework/Versions/A/SiriAnalytics'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _SiriAnalyticsCurrentClockIdentifier, _SiriAnalyticsLogContextAssistant, 
-                       _SiriAnalyticsLogContextStorage, _SiriAnalyticsLogContextStreaming, 
+    symbols:         [ _SiriAnalyticsAbsoluteToContinuousTimestamp, _SiriAnalyticsCurrentClockIdentifier, 
+                       _SiriAnalyticsIsInternalInstall, _SiriAnalyticsLogContextAssistant, 
+                       _SiriAnalyticsLogContextMessageTailing, _SiriAnalyticsLogContextPerformance, 
+                       _SiriAnalyticsLogContextResolution, _SiriAnalyticsLogContextStorage, 
+                       _SiriAnalyticsLogContextStreaming, _SiriAnalyticsLogContextTime, 
                        _SiriAnalyticsLogContextUtility, _SiriAnalyticsLogContextXPC, 
                        _SiriAnalyticsLoggingInit, _SiriAnalyticsLoggingSubsystem, 
-                       _SiriAnalyticsVersionNumber, _SiriAnalyticsVersionString, 
-                       _SiriAnalyticsXPCServiceInterface, _kAssistantSiriAnalyticsServiceName ]
-    objc-classes:    [ AssistantSiriAnalytics, AssistantSiriAnalyticsService, SiriAnalyticsFBFMessageStorageProvider, 
-                       SiriAnalyticsMessageObserverHandle, SiriAnalyticsMessageObserverStream, 
-                       SiriAnalyticsTimePeriodBuffer, SiriAnalyticsTimeStamp, SiriAnalyticsXPCConnection, 
-                       SiriAnalyticsXPCMessageEnvelope, SiriAnalyticsXPCMessageStream, 
+                       _SiriAnalyticsMachAbsoluteTimeGetNanoseconds, _SiriAnalyticsVersionNumber, 
+                       _SiriAnalyticsVersionString, _SiriAnalyticsXPCServiceInterface, 
+                       _kAssistantSiriAnalyticsServiceName, _kSiriAnalyticsErrorDomain ]
+    objc-classes:    [ AssistantSiriAnalytics, AssistantSiriAnalyticsClockWatcher, 
+                       AssistantSiriAnalyticsMessageTailing, AssistantSiriAnalyticsService, 
+                       SiriAnalyticsClient, SiriAnalyticsClientMessageStream, SiriAnalyticsError, 
+                       SiriAnalyticsFBFMessageStorageProvider, SiriAnalyticsInternalTelemetry, 
+                       SiriAnalyticsLargeMessageStorage, SiriAnalyticsLogicalClock, 
+                       SiriAnalyticsLogicalClockStatistics, SiriAnalyticsLogicalTimeStamp, 
+                       SiriAnalyticsMessage, SiriAnalyticsMessageObserverHandle, 
+                       SiriAnalyticsMessageObserverStream, SiriAnalyticsMessageResolutionPipeline, 
+                       SiriAnalyticsPreferences, SiriAnalyticsRemoteService, SiriAnalyticsTimeAnnotatedMessage, 
+                       SiriAnalyticsTimePeriodBuffer, SiriAnalyticsWhiteRose, SiriAnalyticsXPCConnection, 
+                       SiriAnalyticsXPCLargeMessageEnvelope, SiriAnalyticsXPCMessageEnvelope, 
                        SiriAnalyticsXPCServiceListener ]
 ...

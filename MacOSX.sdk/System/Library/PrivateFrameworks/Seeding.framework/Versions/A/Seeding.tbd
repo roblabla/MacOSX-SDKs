@@ -3,15 +3,23 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6B43BC98-4F7C-32E3-94F0-F897378CDA50
+    value:           D9C93F09-0B7A-3E29-BE90-15E967475A44
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BD0AF560-EB71-3DEF-9BFE-E1E1AB4CDE5A
+    value:           560A7C8D-B06E-38CC-8A15-F2C1875C3E81
 install-name:    '/System/Library/PrivateFrameworks/Seeding.framework/Versions/A/Seeding'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _SeedingVersionNumber, _SeedingVersionString, _kSeedEnrollmentCookiePath ]
-    objc-classes:    [ SDBetaManager, SDBetaProgram, SDBuildInfo, SDCatalogUtilities, 
-                       SDLegalDoc, SDSeedProgramManager, SDSeedProgramMigrator, SDSeedingLogging ]
+    symbols:         [ _SDBrainAssetType, _SDIsInternalInstall, _SDPreferenceAppID, 
+                       _SDPreferenceMemberEnrolled, _SDPreferenceOriginalBrain, _SDPreferenceOriginalUpdate, 
+                       _SDPreferenceSeedProgram, _SDPreferenceServerURL, _SDSeedProfileIdentifier, 
+                       _SDSeedProgramIsValidSeedProgram, _SDSeedProgramMetadataKeyAssetAudience, 
+                       _SDSeedProgramMetadataKeyProgram, _SDSeedProgramStringCustomerSeed, 
+                       _SDSeedProgramStringDeveloperSeed, _SDSeedProgramStringPublicSeed, 
+                       _SDUpdateAssetType, _SeedingVersionNumber, _SeedingVersionString, 
+                       _kSeedEnrollmentCookiePath ]
+    objc-classes:    [ SDAnalytics, SDBetaManager, SDBetaProgram, SDBuildInfo, SDCatalogUtilities, 
+                       SDConstants, SDHTTPClient, SDLegalDoc, SDProfileUtilities, 
+                       SDSeedProgramManager, SDSeedProgramMigrator, SDSeedingLogging ]
 ...

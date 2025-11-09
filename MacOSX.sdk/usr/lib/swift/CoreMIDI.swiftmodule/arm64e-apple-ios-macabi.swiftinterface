@@ -1,9 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target arm64e-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMIDI -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreMIDI
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreMIDI -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreMIDI
 @_exported import CoreMIDI
 import Foundation
 import Swift
+import _Concurrency
 @available(macOS 11.0, iOS 14.0, *)
 public struct UnsafeMutableMIDIEventPacketPointer {
   public init(_ p: Swift.UnsafeMutablePointer<CoreMIDI.MIDIEventPacket>)
@@ -18,7 +19,7 @@ public struct UnsafeMutableMIDIEventPacketPointer {
   }
 }
 @available(macOS 11.0, iOS 14.0, *)
-extension UnsafeMutableMIDIEventPacketPointer : Swift.MutableCollection, Swift.RandomAccessCollection {
+extension CoreMIDI.UnsafeMutableMIDIEventPacketPointer : Swift.MutableCollection, Swift.RandomAccessCollection {
   @available(macOS 11.0, iOS 14.0, *)
   public typealias Element = Swift.UInt32
   @available(macOS 11.0, iOS 14.0, *)
@@ -41,7 +42,7 @@ extension UnsafeMutableMIDIEventPacketPointer : Swift.MutableCollection, Swift.R
   public typealias Iterator = CoreMIDI.MIDIEventPacket.WordSequence.Iterator
   public typealias SubSequence = Swift.Slice<CoreMIDI.UnsafeMutableMIDIEventPacketPointer>
 }
-extension MIDIEventPacket {
+extension CoreMIDI.MIDIEventPacket {
   @available(macOS 11.0, iOS 14.0, *)
   public struct WordSequence : Swift.Sequence {
     public func makeIterator() -> CoreMIDI.MIDIEventPacket.WordSequence.Iterator
@@ -79,17 +80,17 @@ extension MIDIEventPacket {
   }
 }
 @available(macOS 11.0, iOS 14.0, *)
-extension UnsafeMutableMIDIEventPacketPointer : Swift.Sequence {
+extension CoreMIDI.UnsafeMutableMIDIEventPacketPointer : Swift.Sequence {
   @available(macOS 11.0, iOS 14.0, *)
   public func makeIterator() -> CoreMIDI.MIDIEventPacket.WordSequence.Iterator
 }
-extension UnsafePointer where Pointee == CoreMIDI.MIDIEventPacket {
+extension Swift.UnsafePointer where Pointee == CoreMIDI.MIDIEventPacket {
   @available(macOS 11.0, iOS 14.0, *)
   public func sequence() -> CoreMIDI.MIDIEventPacket.WordSequence
   @available(macOS 11.0, iOS 14.0, *)
   public func words() -> CoreMIDI.MIDIEventPacket.WordCollection
 }
-extension MIDIEventPacket {
+extension CoreMIDI.MIDIEventPacket {
   @available(macOS 11.0, iOS 14.0, *)
   public class Builder {
     public var capacity: Swift.Int {
@@ -109,11 +110,11 @@ extension MIDIEventPacket {
     public func withUnsafeMutableMIDIEventPacketPointer<Result>(_ body: (inout CoreMIDI.UnsafeMutableMIDIEventPacketPointer) -> Result) -> Result
   }
 }
-extension UnsafePointer where Pointee == CoreMIDI.MIDIEventList {
+extension Swift.UnsafePointer where Pointee == CoreMIDI.MIDIEventList {
   @available(macOS 11.0, iOS 14.0, *)
   public func unsafeSequence() -> CoreMIDI.MIDIEventList.UnsafeSequence
 }
-extension MIDIEventList {
+extension CoreMIDI.MIDIEventList {
   @available(macOS 11.0, iOS 14.0, *)
   public static func sizeInBytes(pktList: Swift.UnsafePointer<CoreMIDI.MIDIEventList>) -> Swift.Int
   @available(macOS 11.0, iOS 14.0, *)
@@ -153,7 +154,7 @@ public struct UnsafeMutableMIDIEventListPointer : Swift.Sequence {
   public typealias Element = Swift.UnsafePointer<CoreMIDI.MIDIEventPacket>
   public typealias Iterator = CoreMIDI.MIDIEventList.UnsafeSequence.Iterator
 }
-extension MIDIEventList {
+extension CoreMIDI.MIDIEventList {
   @available(macOS 11.0, iOS 14.0, *)
   public class Builder {
     public init(inProtocol: CoreMIDI.MIDIProtocolID, wordSize: Swift.Int)
@@ -182,7 +183,7 @@ public struct UnsafeMutableMIDIPacketPointer {
   }
 }
 @available(macOS 10.15, iOS 13.0, *)
-extension UnsafeMutableMIDIPacketPointer : Swift.MutableCollection, Swift.RandomAccessCollection {
+extension CoreMIDI.UnsafeMutableMIDIPacketPointer : Swift.MutableCollection, Swift.RandomAccessCollection {
   @available(macOS 10.15, iOS 13.0, *)
   public typealias Element = Swift.UInt8
   @available(macOS 10.15, iOS 13.0, *)
@@ -205,7 +206,7 @@ extension UnsafeMutableMIDIPacketPointer : Swift.MutableCollection, Swift.Random
   public typealias Iterator = CoreMIDI.MIDIPacket.ByteSequence.Iterator
   public typealias SubSequence = Swift.Slice<CoreMIDI.UnsafeMutableMIDIPacketPointer>
 }
-extension MIDIPacket {
+extension CoreMIDI.MIDIPacket {
   @available(macOS 10.15, iOS 13.0, *)
   public struct ByteSequence : Swift.Sequence {
     public func makeIterator() -> CoreMIDI.MIDIPacket.ByteSequence.Iterator
@@ -243,17 +244,17 @@ extension MIDIPacket {
   }
 }
 @available(macOS 10.15, iOS 13.0, *)
-extension UnsafeMutableMIDIPacketPointer : Swift.Sequence {
+extension CoreMIDI.UnsafeMutableMIDIPacketPointer : Swift.Sequence {
   @available(macOS 10.15, iOS 13.0, *)
   public func makeIterator() -> CoreMIDI.MIDIPacket.ByteSequence.Iterator
 }
-extension UnsafePointer where Pointee == CoreMIDI.MIDIPacket {
+extension Swift.UnsafePointer where Pointee == CoreMIDI.MIDIPacket {
   @available(macOS 10.15, iOS 13.0, *)
   public func sequence() -> CoreMIDI.MIDIPacket.ByteSequence
   @available(macOS 10.15, iOS 13.0, *)
   public func bytes() -> CoreMIDI.MIDIPacket.ByteCollection
 }
-extension MIDIPacket {
+extension CoreMIDI.MIDIPacket {
   @available(macOS 10.15, iOS 13.0, *)
   public class Builder {
     public var capacity: Swift.Int {
@@ -273,11 +274,11 @@ extension MIDIPacket {
     public func withUnsafeMutableMIDIPacketPointer<Result>(_ body: (inout CoreMIDI.UnsafeMutableMIDIPacketPointer) -> Result) -> Result
   }
 }
-extension UnsafePointer where Pointee == CoreMIDI.MIDIPacketList {
+extension Swift.UnsafePointer where Pointee == CoreMIDI.MIDIPacketList {
   @available(macOS 10.15, iOS 13.0, *)
   public func unsafeSequence() -> CoreMIDI.MIDIPacketList.UnsafeSequence
 }
-extension MIDIPacketList {
+extension CoreMIDI.MIDIPacketList {
   @available(macOS 10.15, iOS 13.0, *)
   public static func sizeInBytes(pktList: Swift.UnsafePointer<CoreMIDI.MIDIPacketList>) -> Swift.Int
   @available(macOS 10.15, iOS 13.0, *)
@@ -314,7 +315,7 @@ public struct UnsafeMutableMIDIPacketListPointer : Swift.Sequence {
   public typealias Element = Swift.UnsafePointer<CoreMIDI.MIDIPacket>
   public typealias Iterator = CoreMIDI.MIDIPacketList.UnsafeSequence.Iterator
 }
-extension MIDIPacketList {
+extension CoreMIDI.MIDIPacketList {
   @available(macOS 10.15, iOS 13.0, *)
   public class Builder {
     public init(byteSize: Swift.Int)

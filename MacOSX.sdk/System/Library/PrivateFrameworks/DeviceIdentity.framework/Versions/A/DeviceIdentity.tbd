@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F7EFAA33-CEA2-36DA-B2A3-85F8DDA88E61
+    value:           EEDAE068-EE29-3456-AD2B-396A6F7DB7DD
   - target:          x86_64-maccatalyst
-    value:           F7EFAA33-CEA2-36DA-B2A3-85F8DDA88E61
+    value:           EEDAE068-EE29-3456-AD2B-396A6F7DB7DD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D7876986-BD98-3F27-A4BE-977CA93191D5
+    value:           77FC620B-AD3F-3C86-9DF5-8862F8E549D1
   - target:          arm64e-maccatalyst
-    value:           D7876986-BD98-3F27-A4BE-977CA93191D5
+    value:           77FC620B-AD3F-3C86-9DF5-8862F8E549D1
 install-name:    '/System/Library/PrivateFrameworks/DeviceIdentity.framework/Versions/A/DeviceIdentity'
 current-version: 0
 compatibility-version: 0
@@ -22,13 +22,14 @@ exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DeviceIdentityCopyAttestationDictionary, _DeviceIdentityCreateClientCertificateRequest, 
-                       _DeviceIdentityIssueClientCertificateWithCompletion, _MobileActivationErrorDomain, 
-                       _MobileActivationFunctionNameErrorKey, _MobileActivationSourceFileLineErrorKey, 
-                       _createMobileActivationError, _kMAOptionsAllowInvalidNetworkCertificates, 
+                       _DeviceIdentityIsSupported, _DeviceIdentityIssueClientCertificateWithCompletion, 
+                       _MobileActivationErrorDomain, _MobileActivationFunctionNameErrorKey, 
+                       _MobileActivationSourceFileLineErrorKey, _kMAOptionsAllowInvalidNetworkCertificates, 
                        _kMAOptionsBAAAccessControls, _kMAOptionsBAAAppIDKey, _kMAOptionsBAACACert, 
                        _kMAOptionsBAACertType, _kMAOptionsBAACertTypeBAA, _kMAOptionsBAACertTypeMFi, 
                        _kMAOptionsBAAClientAttestationData, _kMAOptionsBAAClientAttestationPublicKey, 
-                       _kMAOptionsBAADeleteDuplicateKeychainItems, _kMAOptionsBAAIgnoreExistingKeychainItems, 
+                       _kMAOptionsBAADeleteDuplicateKeychainItems, _kMAOptionsBAADeleteExistingKeysAndCerts, 
+                       _kMAOptionsBAAIgnoreExistingKeychainItems, _kMAOptionsBAAKeySizeInBits, 
                        _kMAOptionsBAAKeychainAccessGroup, _kMAOptionsBAAKeychainLabel, 
                        _kMAOptionsBAALocalAuthenticationContext, _kMAOptionsBAAMFiData, 
                        _kMAOptionsBAAMFiPPUID, _kMAOptionsBAAMFiProperties, _kMAOptionsBAAMFiPropertiesAttestationKeyByte, 
@@ -41,8 +42,9 @@ exports:
                        _kMAOptionsBAAOIDKeyUsageProperties, _kMAOptionsBAAOIDMFiAccessoryData, 
                        _kMAOptionsBAAOIDMFiAccessoryProperties, _kMAOptionsBAAOIDMFiProductPlanUID, 
                        _kMAOptionsBAAOIDNonce, _kMAOptionsBAAOIDSToInclude, _kMAOptionsBAAOIDUCRTDeviceIdentifiers, 
-                       _kMAOptionsBAAReturnReferenceDate, _kMAOptionsBAASCRTAttestation, 
+                       _kMAOptionsBAAPerformOperationsOverIPC, _kMAOptionsBAAReturnReferenceDate, 
+                       _kMAOptionsBAASCRTAttestation, _kMAOptionsBAASkipNetworkRequest, 
                        _kMAOptionsBAAUseAuthenticationUI, _kMAOptionsBAAValidity, 
-                       _kMAOptionsBasebandWaitCount, _kMAOptionsResuseExistingKey, 
-                       _kMAOptionsUseSoftwareGeneratedKey, _mobileactivationErrorHasDomainAndErrorCode ]
+                       _kMAOptionsResuseExistingKey, _kMAOptionsUseSoftwareGeneratedKey, 
+                       _mobileactivationErrorHasDomainAndErrorCode ]
 ...

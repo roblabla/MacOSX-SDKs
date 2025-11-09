@@ -131,6 +131,8 @@
 #include <USBDriverKit/IOUSBHostPipe.h>
 #endif
 
+#include <AvailabilityMacros.h>
+
 class IOUSBHostInterface;
 class AppleUSBHostController;
 
@@ -460,15 +462,9 @@ public:
     /*!
      * @brief       Enqueue or perform a request on an isochronous endpoint
      * @discussion  
-     * This method is used to issue isochronous requests.  The caller allocates and initializes an array of IOUSBHostIsochronousFrame structures, which is used to describe the frames that will be transferred.  See @link IOUSBHostIsochronousFrame @/link for information regarding structure initialization requirements and usage.
-     * @param       dataBuffer Pointer to a valid memory descriptor to be used as the backing store for the I/O.
-     * @param       frameList Pointer first element in an IOUSBHostIsochronousFrame array.  The array must contain at least frameListCount elements.
-     * @param       frameListCount Number of elements in <code>frameList</code>.
-     * @param       firstFrameNumber Frame number which this request should begin on.  The current frame number can be queried via <code>IOUSHostDevice::getFrameNumber()</code> or <code>IOUSBHostInterface::getFrameNumber()</code>.  If 0, the transfer will start on the next available frame (XHCI only).
-     * @param       completion To create a synchronous I/O request, this parameter must be NULL.  For an asynchronous request this paramater must be properly filled out prior to calling this method.  If not NULL, this parameter will be copied and can therefore be stack-allocated.
-     * @return      IOReturn result code
+     * This method is deprecated. Use <code>io(..., IOUSBHostIsochronousTransaction* frameList, ..., IOUSBHostIsochronousTransactionCompletion* completion);</code> instead.
      */
-    virtual IOReturn io(IOMemoryDescriptor* dataBuffer, IOUSBHostIsochronousFrame* frameList, uint32_t frameListCount, uint64_t firstFrameNumber = 0, IOUSBHostIsochronousCompletion* completion = NULL);
+    virtual IOReturn io(IOMemoryDescriptor* dataBuffer, IOUSBHostIsochronousFrame* frameList, uint32_t frameListCount, uint64_t firstFrameNumber = 0, IOUSBHostIsochronousCompletion* completion = NULL) DEPRECATED_ATTRIBUTE;
     
     /*!
      * @brief       Enqueue a request on a bulk or interrupt endpoint
@@ -476,9 +472,23 @@ public:
      * @param       completionTimeoutMs Must be 0 for interrupt endpoints.
      */
     virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, IOUSBHostBundledCompletion* completion, uint32_t completionTimeoutMs = 0);
-    
+
+    /*!
+     * @brief       Enqueue or perform a request on an isochronous endpoint
+     * @discussion
+     * This method is used to issue isochronous requests.  The caller allocates and initializes an array of IOUSBHostIsochronousTransaction structures, which is used to describe the frames or microframes that will be transferred.  See @link IOUSBHostIsochronousTransaction @/link for information regarding structure initialization requirements and usage.  If the method determines that a bounce buffer is necessary then the entire dataBuffer will be bounced, not just the subset referred to by transactionList. To ensure a bounce buffer is not required, allocate the descriptor with <code>IOUSBHostInterface::createIOBuffer()</code>.
+     * @param       dataBuffer Pointer to a valid memory descriptor to be used as the backing store for the I/O.
+     * @param       transactionList Pointer first element in an IOUSBHostIsochronousTransaction array.  The array must contain at least transactionListCount elements.
+     * @param       transactionListCount Number of elements in <code>transactionList</code>.
+     * @param       firstFrameNumber Frame number which this request should begin on.  The current frame number can be queried via <code>IOUSHostDevice::getFrameNumber()</code> or <code>IOUSBHostInterface::getFrameNumber()</code>.  If 0, the transfer will start on the next available frame (XHCI only).
+     * @param       options Flags that specify additional behavior for every transaction in this transfer.  See @link tIsochronousTransferOptions @/link for more details.
+     * @param       completion To create a synchronous I/O request, this parameter must be NULL.  For an asynchronous request this parameter must be properly filled out prior to calling this method.  If not NULL, this parameter will be copied and can therefore be stack-allocated.
+     * @return      IOReturn result code
+     */
+    OSMetaClassDeclareReservedUsed(IOUSBHostPipe, 50);
+    virtual IOReturn io(IOMemoryDescriptor* dataBuffer, IOUSBHostIsochronousTransaction* transactionList, uint32_t transactionListCount, uint64_t firstFrameNumber = 0, IOOptionBits options = kIsochronousTransferOptionsNone, IOUSBHostIsochronousTransactionCompletion* completion = NULL);
+
     // Public pad slots for IO
-    OSMetaClassDeclareReservedUnused(IOUSBHostPipe, 50);
     OSMetaClassDeclareReservedUnused(IOUSBHostPipe, 51);
     OSMetaClassDeclareReservedUnused(IOUSBHostPipe, 52);
     OSMetaClassDeclareReservedUnused(IOUSBHostPipe, 53);
@@ -496,7 +506,9 @@ protected:
     static void asyncIOCompletionCallback(void* owner, void* parameter, IOReturn status, uint32_t bytesTransferred);
     static void asyncIOCompletionCallbackBundled(void *owner, uint32_t ioCompletionCount, IOMemoryDescriptor** dataBufferArray, void** parameterArray, IOReturn* statusArray, uint32_t* actualByteCountArray);
     static void asyncIsochIOCompletionCallback(void* owner, void* parameter, IOReturn status, IOUSBHostIsochronousFrame* frameList);
+    static void asyncIsochIOTransactionCompletionCallback(void* owner, void* parameter, IOReturn status, IOUSBHostIsochronousTransaction* transactionList);
 #endif
+    static void isochIOTransactionCompatCallback(void* owner, void* parameter, IOReturn status, IOUSBHostIsochronousTransaction* transactionList);
     
     // Protected pad slots for IO
     OSMetaClassDeclareReservedUnused(IOUSBHostPipe, 60);
@@ -624,6 +636,7 @@ protected:
 
 private:
     void destroyMemoryDescriptorRing();
+    IOReturn io(IOMemoryDescriptor* dataBuffer, IOUSBHostIsochronousTransaction* transactionList, uint32_t transactionListCount, uint64_t firstFrameNumber, IOOptionBits options, IOUSBHostIsochronousTransactionCompletion* completion, IOUSBHostIsochronousFrame* frameList);
 
 #pragma mark Deprecated
 public:

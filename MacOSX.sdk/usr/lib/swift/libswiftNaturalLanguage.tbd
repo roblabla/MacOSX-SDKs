@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CDDB9679-EB2A-3E38-B615-2D57A4C4B93F
+    value:           0AA5FA75-0805-31CC-887A-60592CC0132F
   - target:          x86_64-maccatalyst
-    value:           CDDB9679-EB2A-3E38-B615-2D57A4C4B93F
+    value:           0AA5FA75-0805-31CC-887A-60592CC0132F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B641925E-140D-3C6F-8684-6D3F493C540A
+    value:           45A160B8-BE20-30DE-81BF-2F8BB9F8C016
   - target:          arm64e-maccatalyst
-    value:           B641925E-140D-3C6F-8684-6D3F493C540A
+    value:           45A160B8-BE20-30DE-81BF-2F8BB9F8C016
 install-name:    '/usr/lib/swift/libswiftNaturalLanguage.dylib'
-current-version: 2
+current-version: 3
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftNaturalLanguage.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftNaturalLanguage.dylib', 
@@ -27,7 +27,7 @@ exports:
                        '$ld$install_name$os10.13$@rpath/libswiftNaturalLanguage.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftNaturalLanguage.dylib', 
                        '$ld$install_name$os10.9$@rpath/libswiftNaturalLanguage.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$sSo11NLEmbeddingC15NaturalLanguageE18enumerateNeighbors3for12maximumCount12distanceType5usingySS_SiSo010NLDistanceJ0VSbSS_SdtXEtF', 
                        '_$sSo11NLEmbeddingC15NaturalLanguageE18enumerateNeighbors3for12maximumCount12distanceType5usingySaySdG_SiSo010NLDistanceJ0VSbSS_SdtXEtF', 
                        '_$sSo11NLEmbeddingC15NaturalLanguageE5write_8language8revision2toySDySSSaySdGG_So10NLLanguageaSgSi10Foundation3URLVtKFZ', 

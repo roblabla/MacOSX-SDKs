@@ -300,12 +300,16 @@ CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateIndexed(CGColorSpaceRef c
 CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreatePattern(CGColorSpaceRef __nullable baseSpace)
   CG_AVAILABLE_STARTING(10.0, 2.0);
 
-/* Create a color space using `ref', a platform-specific color space
-   reference. For MacOS X, `ref' should be a ColorSyncProfileRef. */
+typedef const struct CF_BRIDGED_TYPE(id) ColorSyncProfile* ColorSyncProfileRef;
 
-CG_EXTERN CGColorSpaceRef __nullable
-  CGColorSpaceCreateWithPlatformColorSpace(const void * cg_nullable ref)
-  CG_AVAILABLE_STARTING(10.0, 9.0);
+CG_EXTERN const CFStringRef kCGColorSpaceExtendedRange;
+
+/* Create a color space using ColorSyncProfileRef.
+   To create an extended color space include kCGColorSpaceExtendedRange/kCFBooleanTrue
+   key/value pair in `options' dictionary. */
+
+CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateWithColorSyncProfile(ColorSyncProfileRef __nullable, CFDictionaryRef __nullable options)
+CG_AVAILABLE_STARTING(12.0, 15.0);
 
 /* Create a color space using `name' as the identifier for the color
    space. */
@@ -407,6 +411,13 @@ CG_AVAILABLE_BUT_DEPRECATED(10.15, 10.15.4, 13.0, 13.4);
 CG_EXTERN bool CGColorSpaceUsesITUR_2100TF(CGColorSpaceRef)
 CG_AVAILABLE_STARTING(11.0, 14.0);
 
+CG_EXTERN bool CGColorSpaceIsPQBased(CGColorSpaceRef s)
+CG_AVAILABLE_STARTING(12.0, 15.0);
+
+CG_EXTERN bool CGColorSpaceIsHLGBased(CGColorSpaceRef s)
+CG_AVAILABLE_STARTING(12.0, 15.0);
+
+
 /* Return true if `space' can be used as a destination color space; false
  otherwise. */
 
@@ -452,6 +463,11 @@ CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateWithICCProfile(CFDataRef 
 /* Please use `CGColorSpaceCopyICCData' */
 CG_EXTERN CFDataRef __nullable CGColorSpaceCopyICCProfile(CGColorSpaceRef cg_nullable space)
   CG_AVAILABLE_BUT_DEPRECATED(10.5, 10.13, 2.0, 11.0);
+
+/* Please use `CGColorSpaceCreateWithColorSyncProfile' */
+CG_EXTERN CGColorSpaceRef __nullable
+  CGColorSpaceCreateWithPlatformColorSpace(const void * cg_nullable ref)
+  CG_AVAILABLE_BUT_DEPRECATED(10.0, 12.0, 9.0, 15.0);
 
 
 CF_ASSUME_NONNULL_END

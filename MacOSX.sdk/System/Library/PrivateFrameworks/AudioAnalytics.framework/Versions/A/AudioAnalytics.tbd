@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5F0E2788-FE6D-3502-B8AF-C57F820801F1
+    value:           F41BE04C-AFBB-36C0-9872-A3965EAD8750
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3FB9D676-5160-3C21-A533-6684DA419E37
+    value:           160541D1-2E15-3D11-9F0F-4E43E7BEEB61
 install-name:    '/System/Library/PrivateFrameworks/AudioAnalytics.framework/Versions/A/AudioAnalytics'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

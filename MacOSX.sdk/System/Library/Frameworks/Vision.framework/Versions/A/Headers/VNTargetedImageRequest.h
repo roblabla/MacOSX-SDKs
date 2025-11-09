@@ -37,7 +37,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@param	pixelBuffer			The pixel buffer containing the targeted image.
 	@param	options				A dictionary with options specifying auxiliary information for the image.
 */
-- (instancetype) initWithTargetedCVPixelBuffer:(CVPixelBufferRef)pixelBuffer options:(NSDictionary<VNImageOption, id> *)options;
+- (instancetype) initWithTargetedCVPixelBuffer:(CVPixelBufferRef)pixelBuffer options:(NSDictionary<VNImageOption, id> *)options NS_SWIFT_UNAVAILABLE("");
 
 
 /*!
@@ -57,7 +57,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
 	@param	options				A dictionary with options specifying auxiliary information for the image.
 */
-- (instancetype) initWithTargetedCVPixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options;
+- (instancetype) initWithTargetedCVPixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options NS_SWIFT_UNAVAILABLE("");
 
 
 /*!
@@ -82,7 +82,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@param	cgImage				The CGImageRef of the targeted image.
 	@param	options				A dictionary with options specifying auxiliary information for the image.
 */
-- (instancetype) initWithTargetedCGImage:(CGImageRef)cgImage options:(NSDictionary<VNImageOption, id> *)options;
+- (instancetype) initWithTargetedCGImage:(CGImageRef)cgImage options:(NSDictionary<VNImageOption, id> *)options NS_SWIFT_UNAVAILABLE("");
 
 
 /*!
@@ -102,7 +102,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
 	@param	options				A dictionary with options specifying auxiliary information for the image.
 */
-- (instancetype) initWithTargetedCGImage:(CGImageRef)cgImage orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options;
+- (instancetype) initWithTargetedCGImage:(CGImageRef)cgImage orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options NS_SWIFT_UNAVAILABLE("");
 
 
 /*!
@@ -127,7 +127,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@param	ciImage				The CIImage of the targeted image.
 	@param	options				A dictionary with options specifying auxiliary information for the image.
 */
-- (instancetype) initWithTargetedCIImage:(CIImage *)ciImage options:(NSDictionary<VNImageOption, id> *)options;
+- (instancetype) initWithTargetedCIImage:(CIImage *)ciImage options:(NSDictionary<VNImageOption, id> *)options NS_SWIFT_UNAVAILABLE("");
 
 
 /*!
@@ -147,7 +147,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
 	@param	options				A dictionary with options specifying auxiliary information for the image.
 */
-- (instancetype) initWithTargetedCIImage:(CIImage *)ciImage orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options;
+- (instancetype) initWithTargetedCIImage:(CIImage *)ciImage orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options NS_SWIFT_UNAVAILABLE("");
 
 
 /*!
@@ -172,7 +172,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@param	imageURL			The URL of the targeted image.
 	@param	options				A dictionary with options specifying auxiliary information for the image.
 */
-- (instancetype) initWithTargetedImageURL:(NSURL *)imageURL options:(NSDictionary<VNImageOption, id> *)options;
+- (instancetype) initWithTargetedImageURL:(NSURL *)imageURL options:(NSDictionary<VNImageOption, id> *)options NS_SWIFT_UNAVAILABLE("");
 
 
 /*!
@@ -192,7 +192,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
 	@param	options				A dictionary with options specifying auxiliary information for the image.
 */
-- (instancetype) initWithTargetedImageURL:(NSURL *)imageURL orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options;
+- (instancetype) initWithTargetedImageURL:(NSURL *)imageURL orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options NS_SWIFT_UNAVAILABLE("");
 
 
 /*!
@@ -217,7 +217,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@param imageData			The data of the targeted image.
 	@param	options				A dictionary with options specifying auxiliary information for the image.
 */
-- (instancetype) initWithTargetedImageData:(NSData *)imageData options:(NSDictionary<VNImageOption, id> *)options;
+- (instancetype) initWithTargetedImageData:(NSData *)imageData options:(NSDictionary<VNImageOption, id> *)options NS_SWIFT_UNAVAILABLE("");
 
 
 /*!
@@ -237,7 +237,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
 	@param	options				A dictionary with options specifying auxiliary information for the image.
 */
-- (instancetype) initWithTargetedImageData:(NSData *)imageData orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options;
+- (instancetype) initWithTargetedImageData:(NSData *)imageData orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options NS_SWIFT_UNAVAILABLE("");
 
 
 /*!
@@ -261,7 +261,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
     @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request.
     @param options A dictionary with options specifying auxiliary information for the image.
 */
-- (instancetype) initWithTargetedCMSampleBuffer:(CMSampleBufferRef)sampleBuffer options:(NSDictionary<VNImageOption, id> *)options API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+- (instancetype) initWithTargetedCMSampleBuffer:(CMSampleBufferRef)sampleBuffer options:(NSDictionary<VNImageOption, id> *)options NS_SWIFT_UNAVAILABLE("") API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 
 /*!
@@ -281,7 +281,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
     @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
     @param options A dictionary with options specifying auxiliary information for the image.
 */
-- (instancetype) initWithTargetedCMSampleBuffer:(CMSampleBufferRef)sampleBuffer orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+- (instancetype) initWithTargetedCMSampleBuffer:(CMSampleBufferRef)sampleBuffer orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options NS_SWIFT_UNAVAILABLE("") API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 
 /*!

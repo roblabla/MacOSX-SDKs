@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           43716B80-9EF9-336A-B736-19E9425A7BFA
+    value:           A708074C-8735-38C3-951F-611D37BB8F35
   - target:          x86_64-maccatalyst
-    value:           43716B80-9EF9-336A-B736-19E9425A7BFA
+    value:           A708074C-8735-38C3-951F-611D37BB8F35
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F135DEDA-8E3D-32EB-92BC-E685F29F3236
+    value:           FA2F6F0C-0D28-3136-939E-88F85CC70436
   - target:          arm64e-maccatalyst
-    value:           F135DEDA-8E3D-32EB-92BC-E685F29F3236
+    value:           FA2F6F0C-0D28-3136-939E-88F85CC70436
 install-name:    '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -38,8 +38,10 @@ exports:
                        _UIPhoneFormatFileFirstPrefixSectionHeader, _UIPhoneFormatFileGetCountryHeader, 
                        _UIPhoneFormatFileGetCountryLength, _UIPhoneFormatFileNextPrefixSectionHeader, 
                        _UIPhoneFormatGetFirstFormatString, _UIPhoneFormatGetInternationalAccessCode, 
-                       _UIPhoneFormatGetNationalAccessCode, __PNCopyAreaCodeForCountry, 
-                       __PNCopyBestGuessNumberForCountry, __PNCopyCountryCodeForInternationalCode, 
+                       _UIPhoneFormatGetNationalAccessCode, __CFPhoneNumberCopyCountryCode, 
+                       __CFPhoneNumberCopyFormattedInternationalRepresentation, __CFPhoneNumberCopyFormattedRepresentation, 
+                       __PNCopyAreaCodeForCountry, __PNCopyBestGuessNumberForCountry, 
+                       __PNCopyCompressedFormattedStringWithCountry, __PNCopyCountryCodeForInternationalCode, 
                        __PNCopyFormattedNumberForDigitsWithCountry, __PNCopyFormattedNumberForDigitsWithCountryByRemovingAtIndex, 
                        __PNCopyFormattedNumberSuggestionForDigitsWithCountry, __PNCopyFullyQualifiedNumberForCountry, 
                        __PNCopyFullyQualifiedNumberForCountryInternal, __PNCopyIndexStringsForAddressBookSearch, 
@@ -53,6 +55,9 @@ exports:
                        _cpn_default_log, _decomposedPhoneNumbersEqual, _itu_strcmp, 
                        _itu_streql, _itu_strncmp, _itu_strneql, _kCFPhoneNumberBundleIdentifier, 
                        _kCFPhoneNumberBundleRulesetResourceName, _kCFPhoneNumberBundleRulesetResourceType, 
-                       _kCFPhoneNumberStringTransformNormalize, _pn_uset_basicPresentationSetContains, 
-                       _pn_uset_expandedPresentationSetContains, _shouldEnableStrictEquality ]
+                       _kCFPhoneNumberStringTransformNormalize, _pn_uset_alphabetSetContains, 
+                       _pn_uset_basicPresentationSetContains, _pn_uset_expandedPresentationSetContains, 
+                       _pn_uset_internationalPrefixSetContains, _pn_uset_numeralSetContains, 
+                       _pn_uset_pauseSetContains, _pn_uset_separatorSetContains, 
+                       _pn_uset_verticalServiceSetContains, _shouldEnableStrictEquality ]
 ...

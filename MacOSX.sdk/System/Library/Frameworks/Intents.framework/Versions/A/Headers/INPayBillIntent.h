@@ -23,7 +23,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.3), watchos(3.2))
+API_DEPRECATED("INPayBillIntent is deprecated. There is no replacement.", ios(10.3, 15.0), watchos(3.2, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INPayBillIntent : INIntent
 
@@ -58,7 +58,7 @@ API_UNAVAILABLE(macos, tvos)
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(10.3), watchos(3.2))
+API_DEPRECATED("INPayBillIntentHandling is deprecated. There is no replacement.", ios(10.3, 15.0), watchos(3.2, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @protocol INPayBillIntentHandling <NSObject>
 
@@ -106,22 +106,22 @@ API_UNAVAILABLE(macos, tvos)
                     withCompletion:(void (^)(INBillPayeeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveBillPayee(for:with:));
 
 - (void)resolveFromAccountForPayBill:(INPayBillIntent *)intent
-                    withCompletion:(void (^)(INPaymentAccountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveFromAccount(for:with:));
+                      withCompletion:(void (^)(INPaymentAccountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveFromAccount(for:with:));
 
 - (void)resolveTransactionAmountForPayBill:(INPayBillIntent *)intent
-                    withCompletion:(void (^)(INPaymentAmountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTransactionAmount(for:with:));
+                            withCompletion:(void (^)(INPaymentAmountResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTransactionAmount(for:with:));
 
 - (void)resolveTransactionScheduledDateForPayBill:(INPayBillIntent *)intent
-                    withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTransactionScheduledDate(for:with:));
+                                   withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTransactionScheduledDate(for:with:));
 
 - (void)resolveTransactionNoteForPayBill:(INPayBillIntent *)intent
-                    withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTransactionNote(for:with:));
+                          withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTransactionNote(for:with:));
 
 - (void)resolveBillTypeForPayBill:(INPayBillIntent *)intent
-                    withCompletion:(void (^)(INBillTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveBillType(for:with:));
+                   withCompletion:(void (^)(INBillTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveBillType(for:with:));
 
 - (void)resolveDueDateForPayBill:(INPayBillIntent *)intent
-                    withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDueDate(for:with:));
+                  withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDueDate(for:with:));
 
 @end
 

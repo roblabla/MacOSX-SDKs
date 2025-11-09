@@ -1,7 +1,7 @@
 #if !__has_include(<UIFoundation/NSGlyphInfo.h>)
 /*
 	NSGlyphInfo.h
-	Copyright (c) 2002-2019, Apple Inc.
+	Copyright (c) 2002-2021, Apple Inc.
 	All rights reserved.
 */
 

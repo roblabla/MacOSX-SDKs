@@ -330,9 +330,10 @@ VT_EXPORT const CFStringRef kVTDecompressionProperty_TemporalLevelLimit API_AVAI
 		Suggests how quality-of-service may be lowered in order to maintain realtime playback.
 	@discussion
 		This is an optional property for video decoders to implement.
-		This property value is an array containing dictionaries of property key/value pairs.  
-		The first dictionary in the array should contain the set of properties that restore the 
-		default (full) quality of service; later dictionaries should contain property sets with 
+		This property value is an array containing either CFDictionaries of property key/value pairs, or
+		the array can contain special key values like kVTDecompressionProperty_TemporalLevelLimit.
+		The first entry in the array should contain the set of properties that restore the
+		default (full) quality of service; later entries should contain property sets with
 		decreasing qualities of service.  Clients may work their way down these tiers until they are 
 		able to keep up with the frame rate.
 */

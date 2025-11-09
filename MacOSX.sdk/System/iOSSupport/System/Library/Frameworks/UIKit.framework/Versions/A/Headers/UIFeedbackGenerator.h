@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // UIFeedbackGenerator is an abstract class that should not be used directly
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos, watchos) @interface UIFeedbackGenerator : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
+@interface UIFeedbackGenerator : NSObject
 
 /// informs self that it will likely receive events soon, so that it can ensure minimal latency for any feedback generated
 /// safe to call more than once before the generator receives an event, if events are still imminently possible

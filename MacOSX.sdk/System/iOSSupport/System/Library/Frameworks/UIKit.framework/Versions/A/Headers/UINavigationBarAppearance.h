@@ -11,7 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) @interface UINavigationBarAppearance : UIBarAppearance
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
+@interface UINavigationBarAppearance : UIBarAppearance
 
 /// Inline Title text attributes. If the font or color are unspecified, appropriate defaults are supplied.
 @property (nonatomic, readwrite, copy) NSDictionary<NSAttributedStringKey, id> *titleTextAttributes;

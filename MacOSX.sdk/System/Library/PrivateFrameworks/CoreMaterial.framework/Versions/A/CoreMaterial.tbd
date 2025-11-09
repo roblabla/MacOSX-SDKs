@@ -4,31 +4,30 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           84B38446-E830-3C45-933F-A56F78BBA895
+    value:           45FB8276-ED9A-3D51-8715-A5ECBB7DBAA0
   - target:          x86_64-maccatalyst
-    value:           84B38446-E830-3C45-933F-A56F78BBA895
+    value:           45FB8276-ED9A-3D51-8715-A5ECBB7DBAA0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2DC3B588-713B-385A-A462-4185C0FA1349
+    value:           C392D897-6307-3446-9A85-F767E4E8AD2E
   - target:          arm64e-maccatalyst
-    value:           2DC3B588-713B-385A-A462-4185C0FA1349
+    value:           C392D897-6307-3446-9A85-F767E4E8AD2E
 install-name:    '/System/Library/PrivateFrameworks/CoreMaterial.framework/Versions/A/CoreMaterial'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ CoreMaterialTester, MaterialKit, Materials, MaterialsPlugIn, 
                        PointerUIServices, SpringBoard, SpringBoard-Tests, SpringBoardCore, 
-                       SpringBoardHome, UIKitCore, UIKitester ]
+                       SpringBoardHome, SwiftUI, UIKitCore, UIKitester, VisionKitCore ]
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _CoreMaterialVersionNumber, _CoreMaterialVersionString, _MTAllMaterialConfigurations, 
-                       _MTAllMaterialOverlayConfigurations, _MTAllMaterialValueConfigurations, 
-                       _MTAllOrdinalVisualStyles, _MTAllPlatformColorVisualStyles, 
-                       _MTAllVisualStyleCategories, _MTBuiltInScreenScale, _MTCAColorMatrixCreateDictionaryRepresentation, 
+    symbols:         [ _CoreMaterialVersionNumber, _CoreMaterialVersionString, _MTAllOrdinalVisualStyles, 
+                       _MTAllPlatformColorVisualStyles, _MTAllVisualStyleCategories, 
+                       _MTBuiltInScreenScale, _MTCAColorMatrixCreateDictionaryRepresentation, 
                        _MTCAColorMatrixEqualToMatrix, _MTCAColorMatrixInterpolate, 
                        _MTCAColorMatrixIsDictionaryRepresentation, _MTCAColorMatrixIsIdentity, 
                        _MTCAColorMatrixMakeWithDictionaryRepresentation, _MTCAColorMatrixMakeWithVibrantShadowAttributes, 
@@ -45,6 +44,7 @@ exports:
                        _MTCoreMaterialRecipeKnowledgeBackground, _MTCoreMaterialRecipeKnowledgePlatters, 
                        _MTCoreMaterialRecipeKnowledgePlattersDark, _MTCoreMaterialRecipeKnowledgePlattersSheer, 
                        _MTCoreMaterialRecipeKnowledgePlattersSheerDark, _MTCoreMaterialRecipeModules, 
+                       _MTCoreMaterialRecipeModulesBackground, _MTCoreMaterialRecipeModulesBackgroundSheer, 
                        _MTCoreMaterialRecipeModulesSheer, _MTCoreMaterialRecipeNone, 
                        _MTCoreMaterialRecipePlatformChromeDark, _MTCoreMaterialRecipePlatformChromeDarkReduceTransparency, 
                        _MTCoreMaterialRecipePlatformChromeDarkReduceTransparencyLayer1, 
@@ -65,17 +65,19 @@ exports:
                        _MTCoreMaterialVisualStyleSeparator, _MTCoreMaterialVisualStyleTertiary, 
                        _MTDefaultLuminanceColorMap, _MTDiscoveredMaterialRecipes, 
                        _MTDynamicBlurRadiusGraphicsQuality, _MTEdgeOutsetsForCoreMaterialShadowProperties, 
-                       _MTFloatEqualToFloat, _MTFloatIsOne, _MTFloatIsZero, _MTIOSurfaceCreate, 
-                       _MTIdentityValueForFilter, _MTIsValidBlurInputQuality, _MTLogConfiguration, 
-                       _MTLogMaterials, _MTLogSubsystem, _MTMaterialCreateDictionaryRepresentationWithOptions, 
-                       _MTMaterialSettingsForRecipe, _MTMaterialSettingsForRecipeFromBundle, 
-                       _MTPreferredDisplayModeScale, _MTProtocolGetProperties, _MTRegisterCoreMaterialLogging, 
+                       _MTFilterKeyPathForFilter, _MTFloatEqualToFloat, _MTFloatIsOne, 
+                       _MTFloatIsZero, _MTIOSurfaceCreate, _MTIdentityValueForFilter, 
+                       _MTIsValidBlurInputQuality, _MTLogConfiguration, _MTLogMaterials, 
+                       _MTLogSubsystem, _MTMaterialCreateDictionaryRepresentation, 
+                       _MTMaterialCreateDictionaryRepresentationWithOptions, _MTMaterialSettingsForRecipe, 
+                       _MTMaterialSettingsForRecipeFromBundle, _MTPreferredDisplayModeScale, 
+                       _MTProtocolGetProperties, _MTRegisterCoreMaterialLogging, 
                        _MTShadowImageCreateWithCoreMaterialShadowProperties, _MTSharedVisualStyleSetForRecipeAndCategory, 
                        _MTSharedVisualStyleSetForStyleNameFromBundle, _MTSharedVisualStyleSetGeneratedFromRecipe, 
                        _MTStylingProvidingSolidColorLayerStyleDictionaryForPlusDAmount, 
                        _MTStylingProvidingSolidColorLayerStyleDictionaryForPlusLAndWhiteTint, 
                        _MTSupportsDeepColor, _MTTintingFilteringSettingsCreateDictionaryRepresentation, 
-                       _MTVisualStylingCreateDictionaryRepresentationWithOptions, 
+                       _MTVisualStylingCreateDictionaryRepresentation, _MTVisualStylingCreateDictionaryRepresentationWithOptions, 
                        _MTVisualStylingSettingsCreateDictionaryRepresentation, __IdentityPropertyForFilterType, 
                        __MTCAColorMatrixFloydRound, __MTCreateDefaultLuminanceColorMap, 
                        __MTCurrentProduct, __MTDefaultBackdropScaleAdjustmentForWeighting, 

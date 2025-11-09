@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(11.0), watchos(4.0))
+API_DEPRECATED("INGetVisualCodeIntent is deprecated. There is no replacement.", ios(11.0, 15.0), watchos(4.0, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INGetVisualCodeIntent : INIntent
 
@@ -31,7 +31,7 @@ API_UNAVAILABLE(macos, tvos)
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(11.0), watchos(4.0))
+API_DEPRECATED("INGetVisualCodeIntentHandling is deprecated. There is no replacement.", ios(11.0, 15.0), watchos(4.0, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @protocol INGetVisualCodeIntentHandling <NSObject>
 
@@ -76,7 +76,7 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolveVisualCodeTypeForGetVisualCode:(INGetVisualCodeIntent *)intent
-                    withCompletion:(void (^)(INVisualCodeTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveVisualCodeType(for:with:));
+                               withCompletion:(void (^)(INVisualCodeTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveVisualCodeType(for:with:));
 
 @end
 

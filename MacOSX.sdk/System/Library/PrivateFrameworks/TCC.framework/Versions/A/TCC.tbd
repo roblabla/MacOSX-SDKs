@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           10E022E6-5939-32DF-80E7-11BEA294F987
+    value:           EF040955-0B95-3610-B3C5-55307BC25A33
   - target:          x86_64-maccatalyst
-    value:           10E022E6-5939-32DF-80E7-11BEA294F987
+    value:           EF040955-0B95-3610-B3C5-55307BC25A33
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0D3C3BBB-BE2C-3651-BDA5-B5E62A06DF41
+    value:           6FD5C929-3CD5-3C40-8A34-09613FA949CD
   - target:          arm64e-maccatalyst
-    value:           0D3C3BBB-BE2C-3651-BDA5-B5E62A06DF41
+    value:           6FD5C929-3CD5-3C40-8A34-09613FA949CD
 install-name:    '/System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -22,9 +22,9 @@ exports:
     symbols:         [ _TCCAccessCheckAuditToken, _TCCAccessCopyBundleIdentifiersDisabledForService, 
                        _TCCAccessCopyBundleIdentifiersForService, _TCCAccessCopyInformation, 
                        _TCCAccessCopyInformationForBundle, _TCCAccessCopyInformationForBundleId, 
-                       _TCCAccessDeclarePolicy, _TCCAccessGetOverride, _TCCAccessOverride, 
-                       _TCCAccessPreflight, _TCCAccessPreflightWithAuditToken, _TCCAccessRequest, 
-                       _TCCAccessRequestIndirect, _TCCAccessRequestIndirectWithOptions, 
+                       _TCCAccessDeclarePolicy, _TCCAccessGetOverride, _TCCAccessGetOverrides, 
+                       _TCCAccessOverride, _TCCAccessPreflight, _TCCAccessPreflightWithAuditToken, 
+                       _TCCAccessRequest, _TCCAccessRequestIndirect, _TCCAccessRequestIndirectWithOptions, 
                        _TCCAccessReset, _TCCAccessResetForBundle, _TCCAccessResetForBundleId, 
                        _TCCAccessResetForBundleIdWithAuditToken, _TCCAccessResetForPath, 
                        _TCCAccessResetPoliciesExcept, _TCCAccessRestricted, _TCCAccessSelectPolicyForExtensionWithIdentifier, 
@@ -60,23 +60,23 @@ exports:
                        _kTCCServiceBluetoothAlways, _kTCCServiceCalendar, _kTCCServiceCamera, 
                        _kTCCServiceContactsFull, _kTCCServiceContactsLimited, _kTCCServiceDeveloperTool, 
                        _kTCCServiceFacebook, _kTCCServiceFileProviderDomain, _kTCCServiceFileProviderPresence, 
-                       _kTCCServiceGameCenterFriends, _kTCCServiceLinkedIn, _kTCCServiceListenEvent, 
-                       _kTCCServiceLiverpool, _kTCCServiceLocation, _kTCCServiceMediaLibrary, 
-                       _kTCCServiceMicrophone, _kTCCServiceMotion, _kTCCServicePhotos, 
-                       _kTCCServicePhotosAdd, _kTCCServicePostEvent, _kTCCServicePrototype3Rights, 
-                       _kTCCServicePrototype4Rights, _kTCCServiceReminders, _kTCCServiceScreenCapture, 
-                       _kTCCServiceShareKit, _kTCCServiceSinaWeibo, _kTCCServiceSiri, 
-                       _kTCCServiceSpeechRecognition, _kTCCServiceSystemPolicyAllFiles, 
-                       _kTCCServiceSystemPolicyDesktopFolder, _kTCCServiceSystemPolicyDeveloperFiles, 
-                       _kTCCServiceSystemPolicyDocumentsFolder, _kTCCServiceSystemPolicyDownloadsFolder, 
-                       _kTCCServiceSystemPolicyNetworkVolumes, _kTCCServiceSystemPolicyRemovableVolumes, 
-                       _kTCCServiceSystemPolicySysAdminFiles, _kTCCServiceTencentWeibo, 
-                       _kTCCServiceTwitter, _kTCCServiceUbiquity, _kTCCServiceUserTracking, 
-                       _kTCCServiceWebKitIntelligentTrackingPrevention, _kTCCServiceWillow, 
-                       _kTCCSetNoKill, _tcc_attributed_entity_create, _tcc_attributed_entity_get_path, 
-                       _tcc_attributed_entity_get_type, _tcc_authorization_check_audit_token, 
-                       _tcc_authorization_preflight, _tcc_authorization_record_create, 
-                       _tcc_authorization_record_get_allow_standard_user_to_set_system_service, 
+                       _kTCCServiceFocusStatus, _kTCCServiceGameCenterFriends, _kTCCServiceLinkedIn, 
+                       _kTCCServiceListenEvent, _kTCCServiceLiverpool, _kTCCServiceLocation, 
+                       _kTCCServiceMediaLibrary, _kTCCServiceMicrophone, _kTCCServiceMotion, 
+                       _kTCCServicePhotos, _kTCCServicePhotosAdd, _kTCCServicePostEvent, 
+                       _kTCCServicePrototype3Rights, _kTCCServicePrototype4Rights, 
+                       _kTCCServiceReminders, _kTCCServiceScreenCapture, _kTCCServiceShareKit, 
+                       _kTCCServiceSinaWeibo, _kTCCServiceSiri, _kTCCServiceSpeechRecognition, 
+                       _kTCCServiceSystemPolicyAllFiles, _kTCCServiceSystemPolicyDesktopFolder, 
+                       _kTCCServiceSystemPolicyDeveloperFiles, _kTCCServiceSystemPolicyDocumentsFolder, 
+                       _kTCCServiceSystemPolicyDownloadsFolder, _kTCCServiceSystemPolicyNetworkVolumes, 
+                       _kTCCServiceSystemPolicyRemovableVolumes, _kTCCServiceSystemPolicySysAdminFiles, 
+                       _kTCCServiceTencentWeibo, _kTCCServiceTwitter, _kTCCServiceUbiquity, 
+                       _kTCCServiceUserAvailability, _kTCCServiceUserTracking, _kTCCServiceWebKitIntelligentTrackingPrevention, 
+                       _kTCCServiceWillow, _kTCCSetNoKill, _tcc_attributed_entity_create, 
+                       _tcc_attributed_entity_get_path, _tcc_attributed_entity_get_type, 
+                       _tcc_authorization_check_audit_token, _tcc_authorization_preflight, 
+                       _tcc_authorization_record_create, _tcc_authorization_record_get_allow_standard_user_to_set_system_service, 
                        _tcc_authorization_record_get_authorization_reason, _tcc_authorization_record_get_authorization_right, 
                        _tcc_authorization_record_get_authorization_value, _tcc_authorization_record_get_expired_at_date, 
                        _tcc_authorization_record_get_indirect_object_attributed_entity, 
@@ -106,8 +106,9 @@ exports:
                        _tcc_retain, _tcc_retain_internal, _tcc_server_create, _tcc_server_get_reply_handler_queue, 
                        _tcc_server_message_get_authorization_records_by_identity, 
                        _tcc_server_message_get_authorization_records_by_service, 
-                       _tcc_server_message_request_authorization, _tcc_server_message_set_authorization_value, 
-                       _tcc_server_singleton_default, _tcc_service_get_CF_name, _tcc_service_get_authorization_prompt_rights_mask, 
+                       _tcc_server_message_get_identity_for_credential, _tcc_server_message_request_authorization, 
+                       _tcc_server_message_set_authorization_value, _tcc_server_singleton_default, 
+                       _tcc_service_get_CF_name, _tcc_service_get_authorization_prompt_rights_mask, 
                        _tcc_service_get_authorization_rights_mask, _tcc_service_get_authorization_value_type, 
                        _tcc_service_get_is_system_service, _tcc_service_get_name, 
                        _tcc_service_singleton_for_CF_name, _tcc_service_singleton_for_name ]

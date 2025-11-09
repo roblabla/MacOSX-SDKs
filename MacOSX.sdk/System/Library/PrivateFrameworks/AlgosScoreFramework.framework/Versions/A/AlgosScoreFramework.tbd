@@ -3,13 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           497F4857-9373-3136-ABB3-84A76F65744E
+    value:           400AF73D-CE9C-3690-A61C-6F0DF70B3D5B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4871BB9D-196A-388E-BC93-CCF34BEDB167
+    value:           A0F2D4AE-672C-3837-8FF0-0E548B55EACD
 install-name:    '/System/Library/PrivateFrameworks/AlgosScoreFramework.framework/Versions/A/AlgosScoreFramework'
 exports:
+  - targets:         [ x86_64-macos ]
+    weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     objc-classes:    [ AlgosConnectionScore, AlgosScoreCSVReader, AlgosScoreCombiner, 
                        AlgosScoreDataCSV, AlgosScoreFaceTimeDataCSV, AlgosScoreStreamDataCSV, 

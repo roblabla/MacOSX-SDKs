@@ -260,9 +260,8 @@ APPLE_ARCHIVE_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
   @abstract Open a new temporary file descriptor and create a file stream
 
   @discussion
-  The file is created with mkstemp(3) in \p /tmp.
   All calls are directly mapped to the read, write, etc. system calls.
-  We will close and unlink the file when the stream is destroyed.
+  AAByteStreamClose will remove the file.
 
   @return a new stream instance on success, and NULL on failure
 */
@@ -301,12 +300,37 @@ APPLE_ARCHIVE_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
   @param istream input byte stream
   @param ostream output byte stream
 
-  @return number of bytes transferred on success, and a negative error code on failure
+  @return number of bytes processed on success, and a negative error code on failure
  */
 APPLE_ARCHIVE_API off_t AAByteStreamProcess(
   AAByteStream istream,
   AAByteStream ostream)
 APPLE_ARCHIVE_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+
+/**
+  @abstract Process a random access stream
+
+  @discussion Perform random access reads from \p istream with buffers of \p block_size bytes.
+  If \p AA_FLAG_PROCESS_RANDOM_ACCESS_OUTPUT is set, write the data using \p pwrite to the output stream.
+  Otherwise, write the blocks in order using \p write to the output stream.
+
+  @param istream input byte stream, must implement \p pread
+  @param ostream output byte stream
+  @param max_offset max number of bytes to process, or -1 to process to EOF
+  @param block_size is the buffer size for each \p pread call
+  @param flags operation flags
+  @param n_threads number of reader threads
+
+  @return number of bytes processed on success, and a negative error code on failure
+ */
+APPLE_ARCHIVE_API off_t AARandomAccessByteStreamProcess(
+  AAByteStream istream,
+  AAByteStream ostream,
+  off_t max_offset,
+  size_t block_size,
+  AAFlagSet flags,
+  int n_threads)
+APPLE_ARCHIVE_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 
 #ifdef __cplusplus
 }

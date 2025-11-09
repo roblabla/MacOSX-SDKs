@@ -1,7 +1,7 @@
 /*
 	NSToolbarItem.h
 	Application Kit
-	Copyright (c) 2000-2019, Apple Inc.
+	Copyright (c) 2000-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -30,7 +30,7 @@ static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityLow 
 static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityHigh API_AVAILABLE(ios(13.0)) = 1000;
 static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser API_AVAILABLE(ios(13.0)) = 2000;
 
-API_AVAILABLE(ios(13.0))
+API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @interface NSToolbarItem : NSObject <NSCopying>
 
 /* Initialize the toolbar item with an identifier which is a development language string used by the toolbar and its delegate for identification purposes.  */
@@ -87,7 +87,7 @@ Whether or not the item behaves as a navigation item (i.e. back/forward) in the 
  */
 @property (getter=isNavigational) BOOL navigational API_AVAILABLE(macos(11.0), ios(14.0));
 
-/* Use setView: if you want your toolbar item to use something other than the standard.  Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.  Also, your view must be archivable (in order for the toolbar to make copies of your item to hand off to the config palette). */
+/* Use setView: if you want your toolbar item to use something other than the standard.  Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it. */
 @property (nullable, strong) NSView *view API_UNAVAILABLE(ios);
 
 /*
@@ -96,8 +96,8 @@ Whether or not the item behaves as a navigation item (i.e. back/forward) in the 
  If you do not set a min/max size, the view's size properties will be calculated using constraints. Apps linked before 10.14 will use the view's current size.
  In general, apps should rely on the automatic measurements and constraints to define min/max sizes rather than setting these properties since this will account for localizations.
  */
-@property NSSize minSize API_DEPRECATED("This property is no longer recommended. Instead, let the system automatically measure the size of the view using constraints.", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
-@property NSSize maxSize API_DEPRECATED("This property is no longer recommended. Instead, let the system automatically measure the size of the view using constraints.", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
+@property NSSize minSize API_DEPRECATED("This property is no longer recommended. Instead, let the system automatically measure the size of the view using constraints.", macos(10.0, 12.0)) API_UNAVAILABLE(ios);
+@property NSSize maxSize API_DEPRECATED("This property is no longer recommended. Instead, let the system automatically measure the size of the view using constraints.", macos(10.0, 12.0)) API_UNAVAILABLE(ios);
 
 /* When a toolbar does not have enough space to fit all its items, it must push some into the overflow menu.  Items with the highest visibility priority level are choosen last for the overflow menu.  The default visibilityPriority value is NSToolbarItemVisibilityPriorityStandard.  To suggest that an item always remain visible, give it a value greater than NSToolbarItemVisibilityPriorityStandard, but less than NSToolbarItemVisibilityPriorityUser.   In 10.7, users can no longer modify the toolbar item visibility priority. */
 @property NSToolbarItemVisibilityPriority visibilityPriority;

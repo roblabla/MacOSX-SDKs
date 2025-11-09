@@ -149,22 +149,6 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @interface VNDetectHumanBodyPoseRequest : VNImageBasedRequest
 
-+ (nullable NSArray<VNRecognizedPointKey>*) supportedRecognizedPointKeysForRevision:(NSUInteger)revision error:(NSError **)error
-	API_DEPRECATED_WITH_REPLACEMENT("Use +supportedJointNamesForRevision:error:] instead", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-+ (nullable NSArray<VNRecognizedPointGroupKey>*) supportedRecognizedPointGroupKeysForRevision:(NSUInteger)revision error:(NSError **)error
-	API_DEPRECATED_WITH_REPLACEMENT("Use +supportedJointsGroupNamesForRevision:error:] instead", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-
-+ (nullable NSArray<VNRecognizedPointKey>*) supportedIdentifiedPointKeysForRevision:(NSUInteger)revision error:(NSError **)error
-	API_DEPRECATED_WITH_REPLACEMENT("Use +supportedJointNamesForRevision:error:] instead", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-+ (nullable NSArray<VNRecognizedPointGroupKey>*) supportedIdentifiedPointGroupKeysForRevision:(NSUInteger)revision error:(NSError **)error
-	API_DEPRECATED_WITH_REPLACEMENT("Use +supportedJointsGroupNamesForRevision:error:] instead", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-
-
-
 /*!
  @brief Obtain the collection of human body joint names that are supported by a given request revision.
  @param revision The revision of VNDetectHumanBodyPoseRequest being queried.

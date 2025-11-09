@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           14A8FA22-B2E9-3DB1-AAB2-7648F9558F78
+    value:           45671B18-1E65-3151-A545-F41D84F1C29C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           49A9F483-2867-3BEE-9879-AAF093DA1163
+    value:           A7930127-BC0C-3272-AE4E-0E5FD8EA5FE2
 install-name:    '/System/Library/PrivateFrameworks/ExpansionSlotSupport.framework/Versions/A/ExpansionSlotSupport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

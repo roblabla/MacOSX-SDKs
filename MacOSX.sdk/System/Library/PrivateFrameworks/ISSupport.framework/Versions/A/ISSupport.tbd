@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4E6184EB-125D-34CE-B32B-0950D14B2393
+    value:           5EA18B83-1E5D-3E0A-AE38-A7529997BAB4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EBFACF4C-B30D-3FE3-8E79-F2C7B9454154
+    value:           EFC9CFEE-7041-3C9D-B2C1-A258BF6090FB
 install-name:    '/System/Library/PrivateFrameworks/ISSupport.framework/Versions/A/ISSupport'
 current-version: 58
 exports:

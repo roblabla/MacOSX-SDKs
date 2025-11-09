@@ -48,8 +48,11 @@
  @constant BNNSDataTypeInt16
  16-bit signed integer
 
- @constant BNNSDataTypeIn32
+ @constant BNNSDataTypeInt32
  32-bit signed integer
+
+ @constant BNNSDataTypeInt64
+ 64-bit signed integer
 
  @constant BNNSDataTypeUIntBit
  Common bit to unsigned integer types, this constant is not a valid type
@@ -60,8 +63,11 @@
  @constant BNNSDataTypeUInt16
  16-bit unsigned integer
 
- @constant BNNSDataTypeUIn32
+ @constant BNNSDataTypeUInt32
  32-bit unsigned integer
+
+ @constant BNNSDataTypeUInt64
+ 64-bit unsigned integer
 
  @constant BNNSDataTypeIndexedBit
  Common bit to indexed floating point types, this constant is not a valid type
@@ -95,6 +101,7 @@ BNNS_ENUM(BNNSDataType, uint32_t,
   BNNSDataTypeInt8             __API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = BNNSDataTypeIntBit | 8,
   BNNSDataTypeInt16            __API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = BNNSDataTypeIntBit | 16,
   BNNSDataTypeInt32            __API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = BNNSDataTypeIntBit | 32,
+  BNNSDataTypeInt64            __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = BNNSDataTypeIntBit | 64,
 
   BNNSDataTypeUIntBit          __API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0)) = 0x40000,
   BNNSDataTypeUInt1            __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = BNNSDataTypeUIntBit | 1,
@@ -103,6 +110,7 @@ BNNS_ENUM(BNNSDataType, uint32_t,
   BNNSDataTypeUInt8            __API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0)) = BNNSDataTypeUIntBit | 8,
   BNNSDataTypeUInt16           __API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0)) = BNNSDataTypeUIntBit | 16,
   BNNSDataTypeUInt32           __API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0)) = BNNSDataTypeUIntBit | 32,
+  BNNSDataTypeUInt64           __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = BNNSDataTypeUIntBit | 64,
 
   BNNSDataTypeIndexedBit       __API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = 0x80000,
   BNNSDataTypeIndexed1         __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = BNNSDataTypeIndexedBit | 1,
@@ -259,6 +267,13 @@ BNNS_ENUM(BNNSPoolingFunction, uint32_t,
  @constant BNNSActivationFunctionGELUApproximation2
  GELUApproximation2(x) = x*(ReLU6(x + 3.0) * 1.0/6.0)
 
+ @constant BNNSActivationFunctionHardSwish
+ Same as BNNSActivationFunctionGELUApproximation2.
+ HardSwish(x) = GELUApproximation2(x) = x*(ReLU6(x + 3.0) * 1.0/6.0)
+
+ @constant BNNSActivationFunctionSiLU
+ SiLU(x) = x*sigmoid(x)
+
 */
 BNNS_ENUM(BNNSActivationFunction, uint32_t,
 
@@ -293,6 +308,8 @@ BNNS_ENUM(BNNSActivationFunction, uint32_t,
   BNNSActivationFunctionThreshold                        __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 28,
   BNNSActivationFunctionPReLUPerChannel                  __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 29,
   BNNSActivationFunctionGELUApproximation2               __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 30,
+  BNNSActivationFunctionHardSwish                        __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = BNNSActivationFunctionGELUApproximation2,
+  BNNSActivationFunctionSiLU                             __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 31,
 
 );
 
@@ -671,6 +688,30 @@ BNNS_ENUM(BNNSLossReductionFunction, uint32_t,
  in-place computation is supported for inference only
  arithmetic_function_fields must point to BNNSArithmeticBinary structure
 
+ @constant BNNSArithmeticMultiplyAdd
+ Arithmetic function multiply-add
+ element-wise computation of out = in1*in2 + in3
+ in-place computation is supported for inference only
+ arithmetic_function_fields must point to BNNSArithmeticTernary structure
+
+ @constant BNNSArithmeticMinimum
+ Arithmetic function minimum
+ element-wise computation of out = min(in1, in2)
+ in-place computation is supported for inference only
+ arithmetic_function_fields must point to BNNSArithmeticBinary structure
+
+ @constant BNNSArithmeticMaximum
+ Arithmetic function maximum
+ element-wise computation of out = max(in1, in2)
+ in-place computation is supported for inference only
+ arithmetic_function_fields must point to BNNSArithmeticBinary structure
+
+ @constant BNNSArithmeticSelect
+ Arithmetic function select
+ element-wise computation of out = in1 ? in2 : in3
+ in-place computation is supported for inference only
+ arithmetic_function_fields must point to BNNSArithmeticTernary structure
+
  */
 BNNS_ENUM(BNNSArithmeticFunction, uint32_t,
 
@@ -702,6 +743,10 @@ BNNS_ENUM(BNNSArithmeticFunction, uint32_t,
           BNNSArithmeticLog2                  __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 25,
           BNNSArithmeticMultiplyNoNaN         __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 26,
           BNNSArithmeticDivideNoNaN           __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 27,
+          BNNSArithmeticMultiplyAdd           __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 28,
+          BNNSArithmeticMinimum               __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 29,
+          BNNSArithmeticMaximum               __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 30,
+          BNNSArithmeticSelect                __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 31,
           );
 
 /*!
@@ -742,12 +787,49 @@ BNNS_ENUM(BNNSDescriptorType, uint32_t,
  @constant BNNSOptimizerFunctionRMSProp
  Update parameters according to RMSProp algorithm.
 
+ @constant BNNSOptimizerFunctionAdamW
+ Update parameters according to AdamW algorithm.
+
+ @constant BNNSOptimizerFunctionAdamAMSGrad
+ Update parameters according to AMSGrad variant of the Adam algorithm.
+
+ @constant BNNSOptimizerFunctionAdamWAMSGrad
+ Update parameters according to AMSGrad variant of the AdamW algorithm.
+
+ @constant BNNSOptimizerFunctionSGDMomentumWithClipping
+ Update parameters according to Stochastic Gradient Descent (SGD) with momentum algorithm using clipped gradient.
+
+ @constant BNNSOptimizerFunctionAdamWithClipping
+ Update parameters according to Adam algorithm using clipped gradient.
+
+ @constant BNNSOptimizerFunctionRMSPropWithClipping
+ Update parameters according to RMSProp algorithm using clipped gradient.
+
+ @constant BNNSOptimizerFunctionAdamWWithClipping
+ Update parameters according to AdamW algorithm using clipped gradient.
+
+ @constant BNNSOptimizerFunctionAdamAMSGradWithClipping
+ Update parameters according to AMSGrad variant of the Adam algorithm using clipped gradient.
+
+ @constant BNNSOptimizerFunctionAdamWAMSGradWithClipping
+ Update parameters according to AMSGrad variant of the AdamW algorithm using clipped gradient.
+
  */
 BNNS_ENUM(BNNSOptimizerFunction, uint32_t,
 
           BNNSOptimizerFunctionSGDMomentum  __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 1,
           BNNSOptimizerFunctionAdam         __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 2,
           BNNSOptimizerFunctionRMSProp      __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 3,
+          BNNSOptimizerFunctionAdamW        __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 4,
+          BNNSOptimizerFunctionAdamAMSGrad  __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 5,
+          BNNSOptimizerFunctionAdamWAMSGrad __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 6,
+
+          BNNSOptimizerFunctionSGDMomentumWithClipping  __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 7,
+          BNNSOptimizerFunctionAdamWithClipping         __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 8,
+          BNNSOptimizerFunctionRMSPropWithClipping      __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 9,
+          BNNSOptimizerFunctionAdamWWithClipping        __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 10,
+          BNNSOptimizerFunctionAdamAMSGradWithClipping  __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 11,
+          BNNSOptimizerFunctionAdamWAMSGradWithClipping __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 12,
           );
 
 /*!
@@ -804,6 +886,43 @@ BNNS_ENUM(BNNSOptimizerSGDMomentumVariant, uint32_t,
 
 /*!
 
+ @abstract Optimizer clipping function
+
+ @constant BNNSOptimizerClippingNone
+ No clipping
+
+ @constant BNNSOptimizerClippingByValue
+ Clipping gradient values to specified min and max
+
+ @constant BNNSOptimizerClippingByNorm
+ Clipping gradient values to a maximum L2-norm
+
+ @constant BNNSOptimizerClippingByGlobalNorm
+ Clipping gradient values by the ratio of the specified L2-norm and the global L2-norm
+
+ */
+BNNS_ENUM(BNNSOptimizerClippingFunction, uint32_t,
+
+          BNNSOptimizerClippingNone         __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 0,
+          BNNSOptimizerClippingByValue      __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 1,
+          BNNSOptimizerClippingByNorm       __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 2,
+          BNNSOptimizerClippingByGlobalNorm __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 3,
+          );
+
+/*!
+
+ @abstract Type of norm
+
+ @constant BNNSL2Norm L-2 norm
+
+ */
+BNNS_ENUM(BNNSNormType, uint32_t,
+
+          BNNSL2Norm        __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 1,
+);
+
+/*!
+
  @abstract filter type
 
  @constant BNNSConvolution
@@ -826,6 +945,13 @@ BNNS_ENUM(BNNSOptimizerSGDMomentumVariant, uint32_t,
  
  @constant BNNSTransposedConvolution
  Transposed Convolution filter
+ 
+ @constant BNNSQuantization
+ Quantization filter
+ 
+ @constant BNNSArithmetic
+ Arithmetic filter
+
  */
 BNNS_ENUM(BNNSFilterType, uint32_t,
 
@@ -836,6 +962,8 @@ BNNS_ENUM(BNNSFilterType, uint32_t,
           BNNSLayerNorm              __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 4,
           BNNSGroupNorm              __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 5,
           BNNSTransposedConvolution  __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 6,
+          BNNSQuantization           __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 7,
+          BNNSArithmetic             __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 8,
           );
 
 /*!
@@ -954,6 +1082,18 @@ BNNS_ENUM(BNNSLayerFlags, uint32_t,
  size[0] is the image width (pixels).
  size[1] is the image height (pixels).
  size[2] is the number of channels.
+
+ @constant BNNSDataLayoutSNE
+ Three dimensional tensor. Value (e, n, s) is at index e * stride[0] + n * stride[1] + s * stride[2].
+ size[0] is E, the embedding dimension
+ size[1] is N, the batch size
+ size[2] is S, the sequence length
+
+ @constant BNNSDataLayoutNSE
+ Three dimensional tensor. Value (e, s, n) is at index e * stride[0] + s * stride[1] + n * stride[2].
+ size[0] is E, the embedding dimension
+ size[1] is S, the sequence length
+ size[2] is N, the batch size
 
  @constant BNNSDataLayoutConvolutionWeightsOIHW
  Four-dimensional array of convolution weights.
@@ -1143,8 +1283,10 @@ BNNS_ENUM(BNNSDataLayout, uint32_t,
 
   // 3-dimensional layouts
   BNNSDataLayoutImageCHW                       __API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) = 0x30000,
-  BNNSDataLayout3DLastMajor                    __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x38000,
-  BNNSDataLayout3DFirstMajor                   __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x38001,
+  BNNSDataLayoutSNE                            __API_AVAILABLE(macos(12.0),  ios(15.0), watchos(8.0), tvos(15.0)) = 0x30001,
+  BNNSDataLayoutNSE                            __API_AVAILABLE(macos(12.0),  ios(15.0), watchos(8.0), tvos(15.0)) = 0x30002,
+  BNNSDataLayout3DLastMajor                    __API_AVAILABLE(macos(11.0),  ios(14.0), watchos(7.0), tvos(14.0)) = 0x38000,
+  BNNSDataLayout3DFirstMajor                   __API_AVAILABLE(macos(11.0),  ios(14.0), watchos(7.0), tvos(14.0)) = 0x38001,
 
   // 4-dimensional layouts
   BNNSDataLayoutConvolutionWeightsOIHW         __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x40000,
@@ -1279,6 +1421,45 @@ BNNS_ENUM(BNNSNDArrayFlags, uint32_t,
           BNNSNDArrayFlagBackpropSet          __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0,
           BNNSNDArrayFlagBackpropAccumulate   __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 1,
           );
+
+/*! @abstract Flags to control behavior of Embedding layers
+ *
+ *  @constant BNNSEmbeddingFlagScaleGradientByFrequency - If true, gradients calculated during the backward pass are scaled
+ *            based on the number of occurrence of the corresponding index in the input.
+ */
+BNNS_ENUM(BNNSEmbeddingFlags, uint32_t,
+
+          BNNSEmbeddingFlagScaleGradientByFrequency     __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 1,
+          );
+
+/*!
+
+ @abstract Quantizer function
+
+ @constant BNNSQuantizerFunctionQuantize
+ y = scale*x + bias
+
+ @constant BNNSQuantizerFunctionDequantize
+ y = (x-bias)/scale
+
+ */
+BNNS_ENUM(BNNSQuantizerFunction, uint32_t,
+          BNNSQuantizerFunctionQuantize               __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 0,
+          BNNSQuantizerFunctionDequantize             __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 1
+          );
+
+
+/*! @abstract Random number generation methods
+ *
+ *  @discussion
+ *  This method should not be used for cryptographic applications.
+ *
+ *  @constant BNNSRandomGeneratorMethodAES_CTR
+ *  Implementation based on the AES hash of a counter.
+ */
+BNNS_ENUM(BNNSRandomGeneratorMethod, uint32_t,
+          BNNSRandomGeneratorMethodAES_CTR      __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0)) = 0,
+);
 
 #if !__has_include( <Availability.h> )
 #undef __API_AVAILABLE

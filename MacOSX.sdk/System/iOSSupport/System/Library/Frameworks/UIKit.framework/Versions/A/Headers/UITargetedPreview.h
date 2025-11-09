@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIPreviewParameters, UIView;
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @interface UIPreviewTarget : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIPreviewTarget : NSObject <NSCopying>
 
 /* UIPreviewTarget specifies where a preview should come from, or go to.
  *
@@ -40,7 +41,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @interface 
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @interface UITargetedPreview : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UITargetedPreview : NSObject <NSCopying>
 
 /* UITargetedPreview is a preview used during an interaction's animations.
  *

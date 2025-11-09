@@ -16,7 +16,6 @@ API_AVAILABLE(ios(13.0), macos(10.15)) typedef NS_ENUM(NSInteger, PKEraserType) 
 } NS_REFINED_FOR_SWIFT;
 
 /// An eraser tool for erasing parts of a drawing.
-NS_REFINED_FOR_SWIFT
 API_AVAILABLE(ios(13.0), macos(10.15))
 @interface PKEraserTool : PKTool
 

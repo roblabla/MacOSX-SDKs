@@ -56,7 +56,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
 /*!
  *  @abstract   Array of HMHome objects that represents the homes associated with the home manager.
  *
- *  @discussion When a new home manager is created, this array is inialized as an empty array. It is
+ *  @discussion When a new home manager is created, this array is initialized as an empty array. It is
  *              not guaranteed to be filled with the list of homes, represented as HMHome objects,
  *              until the homeManagerDidUpdateHomes: delegate method has been invoked.
  */
@@ -83,7 +83,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                          will be nil on success.
  *
  */
-- (void)addHomeWithName:(NSString *)homeName completionHandler:(void (^)(HMHome * __nullable home, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos);
+- (void)addHomeWithName:(NSString *)homeName completionHandler:(void (^)(HMHome * __nullable home, NSError * __nullable error))completion API_UNAVAILABLE(watchos, tvos) NS_SWIFT_ASYNC_NAME(addHome(named:));
 
 /*!
  *  @abstract   Removes an existing home from the collection.

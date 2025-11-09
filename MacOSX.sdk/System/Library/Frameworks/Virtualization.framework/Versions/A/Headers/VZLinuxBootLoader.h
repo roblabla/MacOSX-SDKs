@@ -2,7 +2,7 @@
 //  VZLinuxBootLoader.h
 //  Virtualization
 //
-//  Copyright © 2019-2020 Apple Inc. All rights reserved.
+//  Copyright © 2019-2021 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZBootLoader.h>
@@ -11,6 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @abstract Boot loader configuration for a Linux kernel.
+ @discussion
+    You must use a VZGenericPlatformConfiguration in conjunction with the Linux boot loader.
+    It is invalid to use it with any other platform configuration.
+ @see VZGenericPlatformConfiguration
+ @see VZVirtualMachineConfiguration.platform.
 */
 VZ_EXPORT API_AVAILABLE(macos(11.0))
 @interface VZLinuxBootLoader : VZBootLoader

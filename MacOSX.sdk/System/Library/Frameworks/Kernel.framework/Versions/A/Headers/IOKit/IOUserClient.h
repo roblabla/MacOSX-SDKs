@@ -282,7 +282,6 @@ public:
 
 	static OSPtr<OSDictionary>  copyClientEntitlements(task_t task);
 	static OSPtr<OSDictionary>  copyClientEntitlementsVnode(struct vnode *vnode, off_t offset);
-	static OSPtr<OSDictionary>  copyEntitlementsFromBlob(void *blob, size_t len);
 
 /*!
  *   @function releaseAsyncReference64

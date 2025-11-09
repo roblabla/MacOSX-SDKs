@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BF1EE96D-16B3-310A-B40B-9B14238BE581
+    value:           F172FA0A-8368-3B64-BD03-86E05FF5C83B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7DB063A5-E4CA-36AA-A861-5DC0A62B6A61
+    value:           D04B7E8F-5786-3CBC-88A2-AF31928A2CAC
 install-name:    '/System/Library/PrivateFrameworks/MorphunSwift.framework/Versions/A/MorphunSwift'
 swift-abi-version: 7
 exports:
@@ -31,7 +31,18 @@ exports:
                        '_$s12MorphunSwift10TokenChainCStAAMc', '_$s12MorphunSwift10TokenChainCfD', 
                        '_$s12MorphunSwift10TokenChainCfd', '_$s12MorphunSwift10TokenChainCs23CustomStringConvertibleAAMc', 
                        '_$s12MorphunSwift10TokenChainCs28CustomDebugStringConvertibleAAMc', 
-                       '_$s12MorphunSwift16TokenizationTypeO10UnmodifiedyA2CmFWC', 
+                       '_$s12MorphunSwift12LoggerConfigC010unregisterC014loggerDelegateSbAA0cG0_p_tKFZ', 
+                       '_$s12MorphunSwift12LoggerConfigC08registerC014loggerDelegateSbAA0cG0_p_tKFZ', 
+                       '_$s12MorphunSwift12LoggerConfigC11getLogLevelAA0fG0OSgyFZ', 
+                       '_$s12MorphunSwift12LoggerConfigC11setLogLevel03logG0yAA0fG0O_tFZ', 
+                       '_$s12MorphunSwift12LoggerConfigC12logToConsole5valueySb_tKFZ', 
+                       '_$s12MorphunSwift12LoggerConfigCMa', '_$s12MorphunSwift12LoggerConfigCMm', 
+                       '_$s12MorphunSwift12LoggerConfigCMn', '_$s12MorphunSwift12LoggerConfigCMo', 
+                       '_$s12MorphunSwift12LoggerConfigCMu', '_$s12MorphunSwift12LoggerConfigCN', 
+                       '_$s12MorphunSwift12LoggerConfigCfD', '_$s12MorphunSwift12LoggerConfigCfd', 
+                       '_$s12MorphunSwift14LoggerDelegateMp', '_$s12MorphunSwift14LoggerDelegateP3log0E5Level8category7messageyAA03LogF0O_SSSgSStFTj', 
+                       '_$s12MorphunSwift14LoggerDelegateP3log0E5Level8category7messageyAA03LogF0O_SSSgSStFTq', 
+                       '_$s12MorphunSwift14LoggerDelegateTL', '_$s12MorphunSwift16TokenizationTypeO10UnmodifiedyA2CmFWC', 
                        '_$s12MorphunSwift16TokenizationTypeO7DefaultyA2CmFWC', '_$s12MorphunSwift16TokenizationTypeO7MinimalyA2CmFWC', 
                        '_$s12MorphunSwift16TokenizationTypeO8rawValueACSgSi_tcfC', 
                        '_$s12MorphunSwift16TokenizationTypeO8rawValueSivg', '_$s12MorphunSwift16TokenizationTypeO8rawValueSivpMV', 
@@ -86,15 +97,23 @@ exports:
                        '_$s12MorphunSwift5TokenVMa', '_$s12MorphunSwift5TokenVMn', 
                        '_$s12MorphunSwift5TokenVN', '_$s12MorphunSwift5TokenVs23CustomStringConvertibleAAMc', 
                        '_$s12MorphunSwift5TokenVs28CustomDebugStringConvertibleAAMc', 
-                       '_$s12MorphunSwift9TokenTypeO13MorphologicalyA2CmFWC', '_$s12MorphunSwift9TokenTypeO4HeadyA2CmFWC', 
-                       '_$s12MorphunSwift9TokenTypeO4TailyA2CmFWC', '_$s12MorphunSwift9TokenTypeO4WordyA2CmFWC', 
-                       '_$s12MorphunSwift9TokenTypeO8ExplicityA2CmFWC', '_$s12MorphunSwift9TokenTypeO8rawValueACSgSi_tcfC', 
-                       '_$s12MorphunSwift9TokenTypeO8rawValueSivg', '_$s12MorphunSwift9TokenTypeO8rawValueSivpMV', 
-                       '_$s12MorphunSwift9TokenTypeO9DelimiteryA2CmFWC', '_$s12MorphunSwift9TokenTypeO9OversizedyA2CmFWC', 
-                       '_$s12MorphunSwift9TokenTypeOMa', '_$s12MorphunSwift9TokenTypeOMn', 
-                       '_$s12MorphunSwift9TokenTypeON', '_$s12MorphunSwift9TokenTypeOSHAAMc', 
-                       '_$s12MorphunSwift9TokenTypeOSQAAMc', '_$s12MorphunSwift9TokenTypeOSYAAMc', 
-                       '_$s12MorphunSwift9TokenizerC12maxInputSizes5Int32VvMTj', 
+                       '_$s12MorphunSwift8LogLevelO4INFOyA2CmFWC', '_$s12MorphunSwift8LogLevelO5DEBUGyA2CmFWC', 
+                       '_$s12MorphunSwift8LogLevelO5ERRORyA2CmFWC', '_$s12MorphunSwift8LogLevelO5TRACEyA2CmFWC', 
+                       '_$s12MorphunSwift8LogLevelO7DISABLEyA2CmFWC', '_$s12MorphunSwift8LogLevelO7WARNINGyA2CmFWC', 
+                       '_$s12MorphunSwift8LogLevelO8allCasesSayACGvgZ', '_$s12MorphunSwift8LogLevelO8rawValueACSgSi_tcfC', 
+                       '_$s12MorphunSwift8LogLevelO8rawValueSivg', '_$s12MorphunSwift8LogLevelO8rawValueSivpMV', 
+                       '_$s12MorphunSwift8LogLevelOMa', '_$s12MorphunSwift8LogLevelOMn', 
+                       '_$s12MorphunSwift8LogLevelON', '_$s12MorphunSwift8LogLevelOSHAAMc', 
+                       '_$s12MorphunSwift8LogLevelOSQAAMc', '_$s12MorphunSwift8LogLevelOSYAAMc', 
+                       '_$s12MorphunSwift8LogLevelOs12CaseIterableAAMc', '_$s12MorphunSwift9TokenTypeO13MorphologicalyA2CmFWC', 
+                       '_$s12MorphunSwift9TokenTypeO4HeadyA2CmFWC', '_$s12MorphunSwift9TokenTypeO4TailyA2CmFWC', 
+                       '_$s12MorphunSwift9TokenTypeO4WordyA2CmFWC', '_$s12MorphunSwift9TokenTypeO8ExplicityA2CmFWC', 
+                       '_$s12MorphunSwift9TokenTypeO8rawValueACSgSi_tcfC', '_$s12MorphunSwift9TokenTypeO8rawValueSivg', 
+                       '_$s12MorphunSwift9TokenTypeO8rawValueSivpMV', '_$s12MorphunSwift9TokenTypeO9DelimiteryA2CmFWC', 
+                       '_$s12MorphunSwift9TokenTypeO9OversizedyA2CmFWC', '_$s12MorphunSwift9TokenTypeOMa', 
+                       '_$s12MorphunSwift9TokenTypeOMn', '_$s12MorphunSwift9TokenTypeON', 
+                       '_$s12MorphunSwift9TokenTypeOSHAAMc', '_$s12MorphunSwift9TokenTypeOSQAAMc', 
+                       '_$s12MorphunSwift9TokenTypeOSYAAMc', '_$s12MorphunSwift9TokenizerC12maxInputSizes5Int32VvMTj', 
                        '_$s12MorphunSwift9TokenizerC12maxInputSizes5Int32VvMTq', 
                        '_$s12MorphunSwift9TokenizerC12maxInputSizes5Int32VvgTj', 
                        '_$s12MorphunSwift9TokenizerC12maxInputSizes5Int32VvgTq', 

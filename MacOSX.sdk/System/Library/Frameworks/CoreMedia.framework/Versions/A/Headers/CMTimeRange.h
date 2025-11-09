@@ -50,8 +50,8 @@ CF_IMPLICIT_BRIDGING_ENABLED
 */
 typedef struct
 {
-	CMTime			start;		/*! @field start The start time of the time range. */
-	CMTime			duration;	/*! @field duration The duration of the time range. */
+	CMTime			start;		/*!< The start time of the time range. */
+	CMTime			duration;	/*!< The duration of the time range. */
 } CMTimeRange API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!

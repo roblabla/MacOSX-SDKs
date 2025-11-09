@@ -308,7 +308,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 
 @class AVMetadataItemFilterInternal;
 
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0))
 @interface AVMetadataItemFilter : NSObject {
 @private
 	AVMetadataItemFilterInternal	*_itemFilterInternal __attribute__((unused));

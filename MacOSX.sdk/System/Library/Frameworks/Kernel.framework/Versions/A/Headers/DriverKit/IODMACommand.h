@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from IODMACommand.iig */
+/* iig(DriverKit-191) generated from IODMACommand.iig */
 
 /* IODMACommand.iig:1-73 */
 /*
@@ -72,7 +72,7 @@ struct IODMACommandSpecification {
 	uint64_t _resv[16];
 };
 
-/* source class IODMACommand IODMACommand.iig:74-188 */
+/* source class IODMACommand IODMACommand.iig:74-189 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -132,7 +132,8 @@ public:
 	 * @param       flags Returned bit mask of flags 
 					kIOMemoryDirectionOut the memory is readable
 					kIOMemoryDirectionIn the memory is writable
-	 * @param       segmentsCount Returned count of segements returned in segments
+	 * @param       segmentsCount In/out parameter - size of segments array on input,
+					and number of valid segments returned
 	 * @param       segments Returned DMA physical address and length segments covering the DMA
      * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
      */
@@ -197,7 +198,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IODMACommand IODMACommand.iig:74-188 */
+/* generated class IODMACommand IODMACommand.iig:74-189 */
 
 #define IODMACommand_Create_ID            0xf296a92bb435af2eULL
 #define IODMACommand_PrepareForDMA_ID            0xf88a8c08b75b1110ULL
@@ -272,7 +273,7 @@ public:\
     GetPreparation(\
         uint64_t * offset,\
         uint64_t * length,\
-        IOMemoryDescriptor ** memory,\
+        __attribute__((os_returns_retained)) IOMemoryDescriptor ** memory,\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
@@ -364,6 +365,6 @@ public:\
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IODMACommand.iig:190- */
+/* IODMACommand.iig:191- */
 
 #endif /* ! _IOKIT_UIODMACOMMMAND_H */

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3DE047FA-77B0-30FB-82BE-259189CEFB23
+    value:           44929C92-E234-35DC-83F8-120ECF441E05
   - target:          x86_64-maccatalyst
-    value:           3DE047FA-77B0-30FB-82BE-259189CEFB23
+    value:           44929C92-E234-35DC-83F8-120ECF441E05
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5CB6849C-AC16-33AC-8A81-D5B1ACA45326
+    value:           01CB1029-EF96-3A75-B465-EB7841C5CE6D
   - target:          arm64e-maccatalyst
-    value:           5CB6849C-AC16-33AC-8A81-D5B1ACA45326
+    value:           01CB1029-EF96-3A75-B465-EB7841C5CE6D
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/ICE.framework/Versions/A/ICE'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -30,16 +30,18 @@ exports:
                        _Apple80211GetVirtualIfListCopy, _Apple80211MaxLinkSpeed, 
                        _Apple80211MonitorEventsWithBlock, _Apple80211Open, _Apple80211Parse80211dIE, 
                        _Apple80211ParseAppleDeviceIE, _Apple80211ParseAppleIE, _Apple80211ParseAppleP2PIE, 
-                       _Apple80211ParseAppleSWAPIE, _Apple80211ParseAppleiOSIE, _Apple80211ParseDSIE, 
-                       _Apple80211ParseExtCapsIE, _Apple80211ParseHE_IEs, _Apple80211ParseHS20IE, 
-                       _Apple80211ParseHT_Caps, _Apple80211ParseHT_IE, _Apple80211ParseInterworkingIE, 
-                       _Apple80211ParseMobilityDomainIE, _Apple80211ParseP2PIE, _Apple80211ParseQBSSLoadIE, 
-                       _Apple80211ParseRSNIE, _Apple80211ParseSES_IE, _Apple80211ParseSSIDIE, 
-                       _Apple80211ParseVHT_Caps, _Apple80211ParseVhtCapsIE, _Apple80211ParseVhtOpIE, 
-                       _Apple80211ParseWPAIE, _Apple80211ParseWPAPassword, _Apple80211ParseWPS_IE, 
-                       _Apple80211RangeAsync, _Apple80211RangingStopAsync, _Apple80211Scan, 
-                       _Apple80211ScanAsync, _Apple80211ScanDynamic, _Apple80211Set, 
-                       _Apple80211SetPower, _Apple80211StartMonitoringEvent, _Apple80211StopMonitoringEvent, 
+                       _Apple80211ParseAppleSWAPIE, _Apple80211ParseAppleiOSIE, _Apple80211ParseCyclopsIE, 
+                       _Apple80211ParseDSIE, _Apple80211ParseExtCapsIE, _Apple80211ParseHE_IEs, 
+                       _Apple80211ParseHS20IE, _Apple80211ParseHT_Caps, _Apple80211ParseHT_IE, 
+                       _Apple80211ParseInterworkingIE, _Apple80211ParseMobilityDomainIE, 
+                       _Apple80211ParseP2PIE, _Apple80211ParseQBSSLoadIE, _Apple80211ParseRSNIE, 
+                       _Apple80211ParseSES_IE, _Apple80211ParseSSIDIE, _Apple80211ParseVHT_Caps, 
+                       _Apple80211ParseVhtCapsIE, _Apple80211ParseVhtOpIE, _Apple80211ParseWPAIE, 
+                       _Apple80211ParseWPAPassword, _Apple80211ParseWPS_IE, _Apple80211RangeAsync, 
+                       _Apple80211RangingStopAsync, _Apple80211RawGet, _Apple80211RawSet, 
+                       _Apple80211Scan, _Apple80211ScanAsync, _Apple80211ScanDynamic, 
+                       _Apple80211Set, _Apple80211SetPower, _Apple80211SetProperty, 
+                       _Apple80211StartMonitoringEvent, _Apple80211StopMonitoringEvent, 
                        _AppleAllocInitialReqFrm, _AppleParseGASInitialRequestFrame, 
                        _CelltechToStr, _CompareWithFlippedIP, _DiscardOneRelayBindingWithChannelNumber, 
                        _EncodeChannelDataMessage, _FillSockAddrStorage, _FlipIP, 
@@ -109,9 +111,10 @@ exports:
                        _ProcessAllocateResponse, _ProcessChannelBindErrorResponse, 
                        _SAToIPPORT, _SAToIPPORTWithInterfaceIndexToNameCallback, 
                        _STUNEncodeMessage, ___CreateAirplayStatisticsDictionary, 
-                       __allocGroupInfoDict, __allocP2PInterfaceDict, __asl, __dispatchBGScanCachedNetworks, 
-                       __dispatchBssSteeringRequest, __dispatchGasResults, __dispatchLeakyStatsEvent, 
-                       __dispatchP2PNearbyLogTrigger, __dispatchRangingResults, __eventRead, 
+                       __allocGroupInfoDict, __allocP2PInterfaceDict, __asl, __dispatchAwdlServiceRegSoftError, 
+                       __dispatchBGScanCachedNetworks, __dispatchBssSteeringRequest, 
+                       __dispatchGasResults, __dispatchLeakyStatsEvent, __dispatchP2PNearbyLogTrigger, 
+                       __dispatchP2pThreadCoexEvent, __dispatchRangingResults, __eventRead, 
                        __getPeerTrafficStatsDictionary, __getRangingPeerRequest, 
                        __getRangingPhyErrorString, __handleNANGetRequest, __handleNANSetRequest, 
                        __log_msg, __parseHs20OperatorName, __pid, __tag, _apIsApple, 

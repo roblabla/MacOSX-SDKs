@@ -48,6 +48,8 @@ extern "C"
 #endif
     
 #pragma pack(push, 4)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark    Types
@@ -604,7 +606,7 @@ CMIOObjectPropertiesChanged(    CMIOHardwarePlugInRef           owningPlugIn,
 */
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+#pragma clang diagnostic pop
 #pragma pack(pop)
     
 #if defined(__cplusplus)

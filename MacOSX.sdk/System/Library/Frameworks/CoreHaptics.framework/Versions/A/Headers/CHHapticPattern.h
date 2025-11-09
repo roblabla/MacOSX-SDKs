@@ -32,14 +32,14 @@ NS_ASSUME_NONNULL_BEGIN
  
 	@discussion
 		A definition for a haptic pattern consists of a heirarchical set of key/value pairs, starting at the topmost level with
-		a "Version" and a "Pattern" key.  This marks the beginning of an array of event (CHHapticPatternKeyEvent) and parameter
- 		(CHHapticPatternKeyParameter) definitions.  Each of these has an associated time which indicates when the event or parameter
+		a "Version" and a "Pattern" key.  The "Pattern" marks the beginning of an array of event (CHHapticPatternKeyEvent)
+		and parameter (CHHapticPatternKeyParameter) definitions.  Each of these has an associated time which indicates when the event or parameter
  		will be delivered to the haptic engine.
  
 	@constant   CHHapticPatternKeyVersion
-		Indicates the version of the system for which the pattern was authored.
+		The version of the system for which the pattern was authored.
  		Value type: Real.
-
+ 
 	@constant   CHHapticPatternKeyPattern
 		Indicates the beginning of a haptic pattern definition.
  		Value type: Array.
@@ -80,7 +80,14 @@ NS_ASSUME_NONNULL_BEGIN
 	@constant   CHHapticPatternKeyEventWaveformPath
 		For events of type CHHapticEventTypeAudioCustom, the path to the local file containing the audio waveform.
 		Value type: NSString.
- */
+	
+	@constant   CHHapticPatternKeyEventWaveformUseVolumeEnvelope
+		For events of type CHHapticEventTypeAudioCustom, indicates whether the audio file playback should be ramped in and out with an envelope.
+		This can be useful for preventing clicks during playback, or for cases where the application wants to modulate this envelope to use different
+		attack and release times.
+		Value type: boolean.  Default is true.
+
+*/
 
 typedef NSString *CHHapticPatternKey NS_TYPED_ENUM;
 
@@ -100,6 +107,8 @@ CH_EXPORT
 CHHapticPatternKey CHHapticPatternKeyEventWaveformPath API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
 CHHapticPatternKey CHHapticPatternKeyEventParameters API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT
+CHHapticPatternKey CHHapticPatternKeyEventWaveformUseVolumeEnvelope API_AVAILABLE(ios(15.0), macos(12.0), tvos(15.0), macCatalyst(15.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
 CHHapticPatternKey CHHapticPatternKeyParameter API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT

@@ -614,7 +614,7 @@ LSGetApplicationForInfo(
   CFStringRef   inExtension,       /* can be NULL */
   LSRolesMask   inRoleMask,
   FSRef *       outAppRef,         /* can be NULL */
-  CFURLRef *    outAppURL)         /* can be NULL */          API_DEPRECATED("Use LSCopyDefaultApplicationURLForContentType instead.", macos(10.0,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
+  CFURLRef *    outAppURL)         /* can be NULL */          API_DEPRECATED("Use -[NSWorkspace URLForApplicationToOpenContentType:] instead.", macos(10.0,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -660,7 +660,7 @@ extern OSStatus
 LSCopyApplicationForMIMEType(
   CFStringRef   inMIMEType,
   LSRolesMask   inRoleMask,
-  CFURLRef *    outAppURL)                                    API_DEPRECATED("Use LSCopyDefaultApplicationURLForContentType instead.", macos(10.2,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
+  CFURLRef *    outAppURL)                                    API_DEPRECATED("Use -[NSWorkspace URLForApplicationToOpenContentType:] instead.", macos(10.2,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -941,38 +941,38 @@ LSRegisterFSRef(
  *  kLSItemContentType   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey instead.
+ *    Use the URL resource property NSURLContentTypeKey instead.
  *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemContentType                          API_DEPRECATED("Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
+extern const CFStringRef kLSItemContentType                          API_DEPRECATED("Use the URL resource property NSURLContentTypeKey instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
 /*
  *  kLSItemFileType   *** DEPRECATED ***
  *
  *  Deprecated:
- *    Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.
+ *    Use the URL resource property NSURLContentTypeKey to get the file's UTI instead.
  *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemFileType                             API_DEPRECATED("Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
+extern const CFStringRef kLSItemFileType                             API_DEPRECATED("Use the URL resource property NSURLContentTypeKey to get the file's UTI instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
 /*
  *  kLSItemFileCreator   *** DEPRECATED ***
  *  
  *  Deprecated:
- *    Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.
+ *    Use the URL resource property NSURLContentTypeKey to get the file's UTI instead.
  *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemFileCreator                          API_DEPRECATED("Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
+extern const CFStringRef kLSItemFileCreator                          API_DEPRECATED("Use the URL resource property NSURLContentTypeKey to get the file's UTI instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
 /*
  *  kLSItemExtension   *** DEPRECATED ***
  *  

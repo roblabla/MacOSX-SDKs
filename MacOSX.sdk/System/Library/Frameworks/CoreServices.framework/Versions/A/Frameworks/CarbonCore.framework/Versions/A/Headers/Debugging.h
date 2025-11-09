@@ -23,6 +23,7 @@
 
 
 #include <Availability.h>
+#include <TargetConditionals.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -191,6 +192,7 @@ extern "C" {
    #endif
 #endif
 
+#if TARGET_OS_OSX
 /*
  *  Define the three inputs to AssertMacros.h
  */
@@ -205,6 +207,10 @@ extern "C" {
    #define DEBUG_ASSERT_MESSAGE(componentNameString, assertionString, exceptionLabelString, errorString, fileName, lineNumber, value) \
        DEBUGASSERTMSG(COMPONENT_SIGNATURE, DEBUG_NO_OPTIONS, componentNameString ": " assertionString, exceptionLabelString, errorString, fileName, lineNumber, value)
 #endif
+#endif
+/*
+ *  Non-macOS targets use the default inputs in AssertMacros.h
+ */
 
 /*
  *  Include AssertMacros.h where all of the check, verify, and require macros are defined

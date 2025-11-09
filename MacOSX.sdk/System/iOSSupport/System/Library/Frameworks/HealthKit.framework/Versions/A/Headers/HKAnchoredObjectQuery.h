@@ -7,6 +7,7 @@
 
 #import <HealthKit/HKQuery.h>
 #import <HealthKit/HKQueryAnchor.h>
+#import <HealthKit/HKQueryDescriptor.h>
 
 @class HKDeletedObject;
 
@@ -57,6 +58,21 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
                       anchor:(NSUInteger)anchor
                        limit:(NSUInteger)limit
            completionHandler:(void(^)(HKAnchoredObjectQuery *query, NSArray<__kindof HKSample *> * __nullable results, NSUInteger newAnchor, NSError * __nullable error))handler API_DEPRECATED_WITH_REPLACEMENT("initWithType:predicate:anchor:limit:resultsHandler:", ios(8.0, 9.0));
+
+/*!
+ @method        initWithQueryDescriptors:anchor:limit:resultsHandler
+ @abstract      Returns a query that will retrieve HKSamples and HKDeletedObjects matching the given query descriptors that are newer than the given anchor.
+ @discussion    If no updateHandler is set on the query, the query will automatically stop after calling resultsHandler. Otherwise, the query continues to run and call updateHandler as samples matching the query descriptors are created or deleted.
+ 
+ @param         queryDescriptors   An array of query descriptors that describes the sample types and predicates that you're interested in getting notified for.
+ @param         anchor             The anchor which was returned by a previous HKAnchoredObjectQuery result or update handler.  Pass nil when querying for the first time.
+ @param         limit              The maximum number of samples and deleted objects to return. Pass HKObjectQueryNoLimit for no limit.
+ @param         handler            The block to invoke with results when the query has finished finding.
+*/
+- (instancetype)initWithQueryDescriptors:(NSArray<HKQueryDescriptor *> *)queryDescriptors
+                                  anchor:(nullable HKQueryAnchor *)anchor
+                                   limit:(NSInteger)limit
+                          resultsHandler:(void(^)(HKAnchoredObjectQuery *query, NSArray<__kindof HKSample *> * _Nullable sampleObjects, NSArray<HKDeletedObject *> * _Nullable deletedObjects, HKQueryAnchor * _Nullable newAnchor, NSError * _Nullable error))handler API_AVAILABLE(ios(15.0), watchos(8.0));
 
 @end
 

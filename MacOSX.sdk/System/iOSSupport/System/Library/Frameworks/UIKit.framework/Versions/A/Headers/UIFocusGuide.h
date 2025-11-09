@@ -14,7 +14,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// UIFocusGuides are UILayoutGuide subclasses that participate in the focus system from within their owning view. A UIFocusGuide may be used to expose non-view areas as focusable.
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIFocusGuide : UILayoutGuide
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@interface UIFocusGuide : UILayoutGuide
 
 /// If disabled, UIFocusGuides are ignored by the focus engine, but still participate in layout. Modifying this flag allows you to conditionally enable or disable certain focus behaviors. YES by default.
 @property (nonatomic, getter=isEnabled) BOOL enabled;

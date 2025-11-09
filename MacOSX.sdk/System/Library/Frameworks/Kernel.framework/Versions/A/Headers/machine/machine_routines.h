@@ -82,6 +82,31 @@ void cpu_event_register_callback(cpu_callback_t fn, void *param);
 void cpu_event_unregister_callback(cpu_callback_t fn);
 
 
+/*!
+ * @function      ml_io_read()
+ * @brief         Perform an MMIO read access
+ *
+ * @return        The value resulting from the read.
+ *
+ */
+unsigned long long ml_io_read(uintptr_t iovaddr, int iovsz);
+unsigned int ml_io_read8(uintptr_t iovaddr);
+unsigned int ml_io_read16(uintptr_t iovaddr);
+unsigned int ml_io_read32(uintptr_t iovaddr);
+unsigned long long ml_io_read64(uintptr_t iovaddr);
+
+/*!
+ * @function      ml_io_write()
+ * @brief         Perform an MMIO write access
+ *
+ */
+void ml_io_write(uintptr_t vaddr, uint64_t val, int size);
+void ml_io_write8(uintptr_t vaddr, uint8_t val);
+void ml_io_write16(uintptr_t vaddr, uint16_t val);
+void ml_io_write32(uintptr_t vaddr, uint32_t val);
+void ml_io_write64(uintptr_t vaddr, uint64_t val);
+
+
 __END_DECLS
 
 #endif /* _MACHINE_MACHINE_ROUTINES_H */

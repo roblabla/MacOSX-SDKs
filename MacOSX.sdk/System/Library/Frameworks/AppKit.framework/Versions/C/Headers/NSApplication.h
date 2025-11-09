@@ -1,7 +1,7 @@
 /*
     NSApplication.h
     Application Kit
-    Copyright (c) 1994-2019, Apple Inc.
+    Copyright (c) 1994-2021, Apple Inc.
     All rights reserved.
 */
 
@@ -28,6 +28,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 @class NSDockTile;
 @class NSUserActivity;
 @class CKShareMetadata;
+@class INIntent;
 @protocol NSApplicationDelegate;
 
 typedef double NSAppKitVersion NS_TYPED_EXTENSIBLE_ENUM;
@@ -117,7 +118,7 @@ typedef NS_OPTIONS(NSUInteger, NSApplicationPresentationOptions) {
     NSApplicationPresentationDisableMenuBarTransparency = (1 <<  9),    // Menu Bar's transparent appearance is disabled
 
     NSApplicationPresentationFullScreen API_AVAILABLE(macos(10.7)) = (1 << 10),         // Application is in fullscreen mode
-    NSApplicationPresentationAutoHideToolbar API_AVAILABLE(macos(10.7)) = (1 << 11),    // Fullscreen window toolbar is detached from window and hides/shows with autoHidden menuBar.  May be used only when both NSApplicationPresentationFullScreen and NSApplicationPresentationAutoHideMenuBar are also set
+    NSApplicationPresentationAutoHideToolbar API_AVAILABLE(macos(10.7)) = (1 << 11),    // Fullscreen window toolbar is detached from window and hides/shows on rollover.  May be used only when both NSApplicationPresentationFullScreen is also set
     
     NSApplicationPresentationDisableCursorLocationAssistance API_AVAILABLE(macos(10.11.2)) = (1 << 12)    // "Shake mouse pointer to locate" is disabled for this application
 } API_AVAILABLE(macos(10.6));
@@ -234,6 +235,9 @@ typedef NS_ENUM(NSUInteger, NSApplicationDelegateReply) {
 
 @property (readonly) NSApplicationOcclusionState occlusionState API_AVAILABLE(macos(10.9));
 
+@property (readonly, getter=isProtectedDataAvailable) BOOL protectedDataAvailable API_AVAILABLE(macos(12.0));
+
+
 @end
 
 @interface NSApplication (NSAppearanceCustomization) <NSAppearanceCustomization>
@@ -323,6 +327,21 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
 - (void)application:(NSApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error API_AVAILABLE(macos(10.7));
 - (void)application:(NSApplication *)application didReceiveRemoteNotification:(NSDictionary<NSString *, id> *)userInfo API_AVAILABLE(macos(10.7));
 
+/** Method to opt-in to secure restorable state.
+ 
+    When this returns YES:
+    * NSCoders that are passed into the various NSWindowRestoration methods will requiresSecureCoding and have a decodingFailurePolicy of NSDecodingFailurePolicySetErrorAndReturn.
+    * Any restorationClass set on a window must explicitly conform to NSWindowRestoration.
+ 
+    This method will be called prior to any state encoding or restoration.
+*/
+- (BOOL)applicationSupportsSecureRestorableState:(NSApplication *)app API_AVAILABLE(macos(12.0));
+
+/**
+ Returns the object capable of handling the specified intent.
+ */
+- (nullable id)application:(NSApplication *)application handlerForIntent:(INIntent *)intent API_AVAILABLE(macos(12.0));
+
 /* Method called by -[NSApplication encodeRestorableStateWithCoder:] to give the delegate a chance to encode any additional state into the NSCoder. If the restorable state managed by the delegate changes, you must call -[NSApplication invalidateRestorableState] so that it will be re-encoded. See the header NSWindowRestoration.h for more information.
 */
 - (void)application:(NSApplication *)app willEncodeRestorableState:(NSCoder *)coder API_AVAILABLE(macos(10.7));
@@ -371,6 +390,15 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
 */
 - (BOOL)application:(NSApplication *)sender delegateHandlesKey:(NSString *)key;
 
+/* NSMenu system-wide keyboard shortcut localization support
+ */
+
+/* This method will be called once during application launch at [NSApplication finishLaunching].
+ 
+   Return NO if the receiving delegate object wishes to opt-out of system-wide keyboard shortcut localization for all application-supplied menus. Return YES by default for apps linked against 12.0 and later SDK.
+*/
+- (BOOL)applicationShouldAutomaticallyLocalizeKeyEquivalents:(NSApplication *)application API_AVAILABLE(macos(12.0));
+
 /* Notifications:
  */
 - (void)applicationWillFinishLaunching:(NSNotification *)notification;
@@ -388,6 +416,8 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
 - (void)applicationWillTerminate:(NSNotification *)notification;
 - (void)applicationDidChangeScreenParameters:(NSNotification *)notification;
 - (void)applicationDidChangeOcclusionState:(NSNotification *)notification API_AVAILABLE(macos(10.9));
+- (void)applicationProtectedDataWillBecomeUnavailable:(NSNotification *)notification API_AVAILABLE(macos(12.0));
+- (void)applicationProtectedDataDidBecomeAvailable:(NSNotification *)notification API_AVAILABLE(macos(12.0));
 
 @end
 
@@ -508,6 +538,8 @@ APPKIT_EXTERN NSNotificationName NSApplicationWillUnhideNotification;
 APPKIT_EXTERN NSNotificationName NSApplicationWillUpdateNotification;
 APPKIT_EXTERN NSNotificationName NSApplicationWillTerminateNotification;
 APPKIT_EXTERN NSNotificationName NSApplicationDidChangeScreenParametersNotification;
+APPKIT_EXTERN NSNotificationName NSApplicationProtectedDataWillBecomeUnavailableNotification API_AVAILABLE(macos(12.0));
+APPKIT_EXTERN NSNotificationName NSApplicationProtectedDataDidBecomeAvailableNotification API_AVAILABLE(macos(12.0));
 
 /* User info keys for NSApplicationDidFinishLaunchingNotification */
 

@@ -100,6 +100,8 @@ public:
 		mach_vm_address_t alignment,
 		mach_vm_address_t physicalMask);
 
+
+
 #ifdef __LP64__
 	OSMetaClassDeclareReservedUnused(IOBufferMemoryDescriptor, 0);
 	OSMetaClassDeclareReservedUnused(IOBufferMemoryDescriptor, 1);

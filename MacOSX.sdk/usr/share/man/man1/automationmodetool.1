@@ -1,0 +1,25 @@
+.Dd 18 March, 2021
+.Dt automationmodetool 1
+.Os Darwin
+.Sh NAME
+.Nm automationmodetool
+.Nd Tool for managing UI automation security preferences.
+.Sh DESCRIPTION
+.Nm
+can be used to install and remove a file indicating to the system
+that UI automation mode can be enabled without user authentication.
+This is useful for configuring machines in continuous integration (CI)
+environments as well as those in labs where the active users do
+not have administrator privileges. Running the tool for this purpose
+requires the current user to authenticate in the shell and to be an
+administrator.
+If no argument is passed, the tool prints the current status of UI
+automation (enabled or disabled) and exits.
+.Sh ARGUMENTS
+.Fl enable-automationmode-without-authentication
+creates the file indicating to the system that UI automation mode
+can be enabled without user authentication.
+.Fl disable-automationmode-without-authentication
+removes the file indicating to the system that UI automation mode
+can be enabled without user authentication.
+

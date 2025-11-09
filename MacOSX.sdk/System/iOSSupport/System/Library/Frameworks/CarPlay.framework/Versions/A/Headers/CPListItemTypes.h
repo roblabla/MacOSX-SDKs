@@ -26,6 +26,13 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 @property (nullable, nonatomic, strong) id userInfo;
 
+/**
+ A Boolean value indicating whether the button is enabled.
+
+ @discussion Set the value of this property to @c YES to enable the button or @c NO to disable it. The default value of this property is @c YES.
+ */
+@property (nonatomic, assign, getter=isEnabled) BOOL enabled API_AVAILABLE(ios(15.0));
+
 @end
 
 /**
@@ -37,6 +44,8 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 
 /**
  An optional action block, fired when the user selects this item in a list template.
+ 
+ You must call the completion block after processing the user's selection.
  */
 @property (nullable, nonatomic, copy) void (^handler) (id <CPSelectableListItem> item,
                                                        dispatch_block_t completionBlock);

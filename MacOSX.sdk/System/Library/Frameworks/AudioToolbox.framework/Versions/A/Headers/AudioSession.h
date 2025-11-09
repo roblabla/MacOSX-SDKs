@@ -174,7 +174,7 @@ extern "C"
 		kAudioSessionOverrideAudioRoute_None    = 0,
 		kAudioSessionOverrideAudioRoute_Speaker = 'spkr'
 	};
-	
+
 	//==================================================================================================
 #pragma mark    AudioSession reason codes for route change
 	
@@ -375,7 +375,7 @@ extern "C"
 	 The actual IO buffer duration may be different
 	 @constant       kAudioSessionProperty_AudioCategory 
 	 A UInt32 value indicating the audio category for the AudioSession (see constants above).
-	 @constant       kAudioSessionProperty_AudioRouteChange 
+     @constant       kAudioSessionProperty_AudioRouteChange
 	 The value for this property is ONLY provided with the property changed callback. You 
 	 cannot get the value of this property (or set it).
 	 The property changed callback provides a CFDictionaryRef with keyed values:

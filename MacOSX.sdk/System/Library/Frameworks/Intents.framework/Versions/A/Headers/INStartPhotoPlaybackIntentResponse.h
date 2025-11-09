@@ -7,6 +7,8 @@
 
 #import <Intents/INIntentResponse.h>
 
+@class CLPlacemark;
+
 typedef NS_ENUM(NSInteger, INStartPhotoPlaybackIntentResponseCode) {
     INStartPhotoPlaybackIntentResponseCodeUnspecified = 0,
     INStartPhotoPlaybackIntentResponseCodeReady,
@@ -14,11 +16,11 @@ typedef NS_ENUM(NSInteger, INStartPhotoPlaybackIntentResponseCode) {
     INStartPhotoPlaybackIntentResponseCodeFailure,
     INStartPhotoPlaybackIntentResponseCodeFailureRequiringAppLaunch,
     INStartPhotoPlaybackIntentResponseCodeFailureAppConfigurationRequired,
-} API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macos, tvos);
+} API_DEPRECATED("INStartPhotoPlaybackIntentResponseCode is deprecated. There is no replacement.", ios(10.0, 15.0), watchos(3.2, 8.0)) API_UNAVAILABLE(macos, tvos);
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), watchos(3.2))
+API_DEPRECATED("INStartPhotoPlaybackIntentResponse is deprecated. There is no replacement.", ios(10.0, 15.0), watchos(3.2, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INStartPhotoPlaybackIntentResponse : INIntentResponse
 

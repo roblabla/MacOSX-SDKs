@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIImage;
 
-UIKIT_CLASS_AVAILABLE_TVOS_ONLY(14.0)
+UIKIT_CLASS_AVAILABLE_TVOS_ONLY(14.0) NS_SWIFT_UI_ACTOR
 @protocol UISearchSuggestion <NSObject>
 
 /// The localized suggestion that will be displayed as the search string
@@ -29,7 +29,7 @@ UIKIT_CLASS_AVAILABLE_TVOS_ONLY(14.0)
 @end
 
 /// A concrete container for search suggestion string and optional image and associated information for providing shortcuts in search experience on tvOS.
-UIKIT_CLASS_AVAILABLE_TVOS_ONLY(14.0)
+UIKIT_CLASS_AVAILABLE_TVOS_ONLY(14.0) NS_SWIFT_UI_ACTOR
 @interface UISearchSuggestionItem : NSObject <UISearchSuggestion>
 
 /// Returns a new search suggestion object with a specified suggestion string.

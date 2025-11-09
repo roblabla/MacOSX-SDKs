@@ -73,9 +73,11 @@
 #include <mach/vm_attributes.h>
 #include <mach/boolean.h>
 #include <mach/vm_prot.h>
-
 #include <kern/trustcache.h>
 
+#if __has_include(<CoreEntitlements/CoreEntitlements.h>)
+#include <CoreEntitlements/CoreEntitlements.h>
+#endif
 
 
 #endif  /* _VM_PMAP_H_ */

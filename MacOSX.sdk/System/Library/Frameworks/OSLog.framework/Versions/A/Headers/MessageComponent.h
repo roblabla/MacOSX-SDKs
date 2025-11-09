@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, OSLogMessageComponentArgumentCategory) {
     OSLogMessageComponentArgumentCategoryString,
     OSLogMessageComponentArgumentCategoryUInt64,
 }
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 NS_SWIFT_NAME(OSLogMessageComponent.ArgumentCategory);
 
 /*!
@@ -39,9 +39,9 @@ NS_SWIFT_NAME(OSLogMessageComponent.ArgumentCategory);
  * component for each placeholder in the formatString plus one
  * component for any text after the last placeholder.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 OS_EXPORT
-@interface OSLogMessageComponent : NSObject
+@interface OSLogMessageComponent : NSObject <NSSecureCoding>
 
 /*!
  * @property formatSubstring
@@ -51,7 +51,8 @@ OS_EXPORT
  * empty string if there is nothing between two placeholders, or
  * between the placeholder and the bounds of the string.
  */
-@property (nonatomic, readonly) NSString *formatSubstring;
+@property (nonatomic, readonly) NSString *formatSubstring
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property placeholder
@@ -59,7 +60,8 @@ OS_EXPORT
  * @abstract
  * The placeholder text. Is empty for is the last component.
  */
-@property (nonatomic, readonly) NSString *placeholder;
+@property (nonatomic, readonly) NSString *placeholder
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property argumentCategory
@@ -68,7 +70,8 @@ OS_EXPORT
  * The type of argument corresponding to the placeholder; see
  * OSLogMessageComponentArgumentCategory.
  */
-@property (nonatomic, readonly) OSLogMessageComponentArgumentCategory argumentCategory;
+@property (nonatomic, readonly) OSLogMessageComponentArgumentCategory argumentCategory
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property argumentDataValue
@@ -78,7 +81,8 @@ OS_EXPORT
  * argument cannot be decoded (for example, it could be
  * redacted), or if this is the last component.
  */
-@property (nonatomic, readonly, nullable) NSData *argumentDataValue;
+@property (nonatomic, readonly, nullable) NSData *argumentDataValue
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property argumentDoubleValue
@@ -88,7 +92,8 @@ OS_EXPORT
  * value is undefined if the argument cannot be decoded or if this
  * is the last component.
  */
-@property (nonatomic, readonly) double argumentDoubleValue;
+@property (nonatomic, readonly) double argumentDoubleValue
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property argumentInt64Value
@@ -97,7 +102,8 @@ OS_EXPORT
  * The argument as a 64-bit signed integer; the value is undefined
  * if it cannot be decoded or if this is the last component.
  */
-@property (nonatomic, readonly) int64_t argumentInt64Value;
+@property (nonatomic, readonly) int64_t argumentInt64Value
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property argumentNumberValue
@@ -107,7 +113,8 @@ OS_EXPORT
  * be decoded (for example, it could be redacted), or if this is
  * the last component.
  */
-@property (nonatomic, readonly, nullable) NSNumber *argumentNumberValue;
+@property (nonatomic, readonly, nullable) NSNumber *argumentNumberValue
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property argumentStringValue
@@ -117,7 +124,8 @@ OS_EXPORT
  * be decoded (for example, it could be redacted), or if this is
  * the last component.
  */
-@property (nonatomic, readonly, nullable) NSString *argumentStringValue;
+@property (nonatomic, readonly, nullable) NSString *argumentStringValue
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property argumentUInt64Value
@@ -127,7 +135,8 @@ OS_EXPORT
  * undefined if the argument cannot be decoded or if this is the
  * last component.
  */
-@property (nonatomic, readonly) uint64_t argumentUInt64Value;
+@property (nonatomic, readonly) uint64_t argumentUInt64Value
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 

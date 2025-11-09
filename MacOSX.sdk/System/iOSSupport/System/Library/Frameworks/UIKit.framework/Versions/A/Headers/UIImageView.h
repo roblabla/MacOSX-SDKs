@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIImage, UIImageSymbolConfiguration;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIImageView : UIView 
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIImageView : UIView 
 
 - (instancetype)initWithImage:(nullable UIImage *)image;
 - (instancetype)initWithImage:(nullable UIImage *)image highlightedImage:(nullable UIImage *)highlightedImage API_AVAILABLE(ios(3.0));

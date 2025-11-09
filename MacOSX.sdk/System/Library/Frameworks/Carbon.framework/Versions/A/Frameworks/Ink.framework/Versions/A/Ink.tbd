@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           36446EAF-E2F5-38BD-849A-D489DC7700A8
+    value:           ADBDCD04-D910-3E0A-B245-1F8F5C2FE53D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CAE4D559-BEF7-37AE-B08C-0FBB6BFA9473
+    value:           985868A5-D8CA-39C2-A412-A61F29671785
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Ink.framework/Versions/A/Ink'
 current-version: 227
 parent-umbrella:

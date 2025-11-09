@@ -35,7 +35,8 @@ typedef NS_OPTIONS(NSUInteger, UIDocumentState) {
 
 UIKIT_EXTERN NSNotificationName const UIDocumentStateChangedNotification API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos) @interface UIDocument : NSObject <NSFilePresenter, NSProgressReporting>
+UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIDocument : NSObject <NSFilePresenter, NSProgressReporting>
 
 #pragma mark *** Initialization ***
 

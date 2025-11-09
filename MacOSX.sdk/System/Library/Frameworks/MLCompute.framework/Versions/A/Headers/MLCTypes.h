@@ -35,6 +35,9 @@ typedef NS_ENUM(int32_t, MLCDataType) {
     /*! The 32-bit floating-point data type.
      */
     MLCDataTypeFloat32 = 1,
+    /*! The 16-bit floating-point data type.
+     */
+    MLCDataTypeFloat16 MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0)) = 3,
     /*! The Boolean data type.
      */
     MLCDataTypeBoolean = 4,
@@ -44,6 +47,13 @@ typedef NS_ENUM(int32_t, MLCDataType) {
     /*! The 32-bit integer data type.
      */
     MLCDataTypeInt32   = 7,
+
+    /*! The 8-bit integer data type.
+     */
+    MLCDataTypeInt8 MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0)) = 8,
+    /*! The 8-bit unsigned integer data type.
+     */
+    MLCDataTypeUInt8 MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0)) NS_SWIFT_NAME(uint8) = 9,
 
     // Must be last
     MLCDataTypeCount   NS_SWIFT_UNAVAILABLE(""), // holds the number of MLCDataTypes
@@ -76,16 +86,22 @@ typedef NS_ENUM(int32_t, MLCRandomInitializerType) {
  */
 MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 typedef NS_ENUM(int32_t, MLCDeviceType) {
-    /*! The CPU device type.
+    /*! The CPU device
      */
     MLCDeviceTypeCPU NS_SWIFT_NAME(cpu) = 0,
-    /*! The GPU device type.  When selected, the framework will use a GPU.
+    /*! The GPU device.
      */
     MLCDeviceTypeGPU NS_SWIFT_NAME(gpu) = 1,
     /*! The any device type.  When selected, the framework will automatically use the appropriate devices to achieve the best
      *  performance.
      */
     MLCDeviceTypeAny = 2,
+    /*! The  Apple Neural Engine device.  When selected, the framework will use the  Neural Engine to execute all layers that can be executed on it.
+     *  Layers that cannot be executed on the ANE will run on the CPU or GPU.   The Neural Engine device must be explicitly selected.  MLDeviceTypeAny
+     *  will not select the Neural Engine device.  In addition, this device can be used with inference graphs only.  This device cannot be used with a
+     *  training graph or an inference graph that shares layers with a training graph.
+     */
+    MLCDeviceTypeANE MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0)) NS_SWIFT_NAME(ane) = 3,
 
     // Must be last
     MLCDeviceTypeCount  NS_SWIFT_UNAVAILABLE(""), // holds the number of MLCDeviceType
@@ -154,7 +170,7 @@ typedef NS_OPTIONS(uint64_t, MLCExecutionOptions) {
 
     /*! The option to return profiling information in the callback before returning from execution.
      *
-     *  @discussion Inlcude this option to return profliling information in the graph execute completion handler callback, including
+     *  @discussion Include this option to return profliling information in the graph execute completion handler callback, including
      *      device execution time.
      */
     MLCExecutionOptionsProfiling = 0x04,
@@ -168,7 +184,15 @@ typedef NS_OPTIONS(uint64_t, MLCExecutionOptions) {
      *      If you include this option and execute a training graph using one of the executeForward methods, such as
      *      \p -executeForwardWithBatchSize:options:completionHandler:), the framework executes the forward pass for inference only.
      */
-    MLCExecutionOptionsForwardForInference = 0x08
+    MLCExecutionOptionsForwardForInference = 0x08,
+
+    /*! The option to enable additional per layer profiling information currently emitted using signposts.
+     *
+     *  @discussion The option to enable per layer profiling information emitted as signposts. The per layer information
+     *      can be visualized using the Logging Instrument in Xcode's Instruments. This information may not be available for all MLCDevice.
+     */
+    MLCExecutionOptionsPerLayerProfiling MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0)) = 0x10,
+
 };
 
 #pragma mark - Layers
@@ -670,6 +694,16 @@ typedef NS_ENUM(int32_t, MLCComparisonOperation) {
     MLCComparisonOperationCount          NS_SWIFT_UNAVAILABLE(""),
 };
 
+/*!
+ *  @enum       MLCGradientClippingType
+ *  @abstract   The type of clipping applied to gradient
+ */
+MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
+typedef NS_ENUM(int32_t, MLCGradientClippingType) {
+    MLCGradientClippingTypeByValue      = 0,
+    MLCGradientClippingTypeByNorm       = 1,
+    MLCGradientClippingTypeByGlobalNorm = 2
+};
 
 NS_ASSUME_NONNULL_BEGIN
 /*! @abstract Returns a textual description of the activation type, suitable for debugging.
@@ -706,10 +740,14 @@ NSString *MLCSampleModeDebugDescription(MLCSampleMode mode) NS_SWIFT_NAME(getter
  */
 NSString *MLCLSTMResultModeDebugDescription(MLCLSTMResultMode mode)
     NS_SWIFT_NAME(getter:MLCLSTMResultMode.debugDescription(self:));
-/*! @abstract Returns a textual description of the compare operation, suitable for debugging.
+/*! @abstract Returns a textual description of the comparison operation, suitable for debugging.
  */
 NSString *MLCComparisonOperationDebugDescription(MLCComparisonOperation operation)
     NS_SWIFT_NAME(getter:MLCComparisonOperation.debugDescription(self:)) MLCOMPUTE_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5));
+/*! @abstract Returns a textual description of the gradient clipping type, suitable for debugging.
+ */
+NSString *MLCGradientClippingTypeDebugDescription(MLCGradientClippingType gradientClippingType)
+    NS_SWIFT_NAME(getter:MLCGradientClippingType.debugDescription(self:)) MLCOMPUTE_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
 NS_ASSUME_NONNULL_END
 

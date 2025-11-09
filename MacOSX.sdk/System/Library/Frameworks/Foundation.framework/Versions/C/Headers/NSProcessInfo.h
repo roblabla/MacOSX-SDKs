@@ -209,7 +209,7 @@ typedef NS_ENUM(NSInteger, NSProcessInfoThermalState) {
 @interface NSProcessInfo (NSProcessInfoPowerState)
 
 // Retrieve the current setting of the system for the low power mode setting. On systems where the low power mode is unknown or unsupported, the value returned from the lowPowerModeEnabled property is always NO
-@property (readonly, getter=isLowPowerModeEnabled) BOOL lowPowerModeEnabled API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+@property (readonly, getter=isLowPowerModeEnabled) BOOL lowPowerModeEnabled API_AVAILABLE(macos(12.0), ios(9.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -229,7 +229,7 @@ FOUNDATION_EXTERN NSNotificationName const NSProcessInfoThermalStateDidChangeNot
  
  This notification is posted on the global dispatch queue. Register for it using the default notification center. The object associated with the notification is NSProcessInfo.processInfo.
  */
-FOUNDATION_EXTERN NSNotificationName const NSProcessInfoPowerStateDidChangeNotification API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+FOUNDATION_EXTERN NSNotificationName const NSProcessInfoPowerStateDidChangeNotification API_AVAILABLE(macos(12.0), ios(9.0), watchos(2.0), tvos(9.0));
 
 @interface NSProcessInfo (NSProcessInfoPlatform)
 

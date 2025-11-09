@@ -7,6 +7,8 @@
 
 #import <Intents/INIntentResponse.h>
 
+@class CLPlacemark;
+
 typedef NS_ENUM(NSInteger, INSearchForPhotosIntentResponseCode) {
     INSearchForPhotosIntentResponseCodeUnspecified = 0,
     INSearchForPhotosIntentResponseCodeReady,
@@ -14,11 +16,11 @@ typedef NS_ENUM(NSInteger, INSearchForPhotosIntentResponseCode) {
     INSearchForPhotosIntentResponseCodeFailure,
     INSearchForPhotosIntentResponseCodeFailureRequiringAppLaunch,
     INSearchForPhotosIntentResponseCodeFailureAppConfigurationRequired,
-} API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macos, tvos);
+} API_DEPRECATED("INSearchForPhotosIntentResponseCode is deprecated. There is no replacement.", ios(10.0, 15.0), watchos(3.2, 8.0)) API_UNAVAILABLE(macos, tvos);
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), watchos(3.2))
+API_DEPRECATED("INSearchForPhotosIntentResponse is deprecated. There is no replacement.", ios(10.0, 15.0), watchos(3.2, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INSearchForPhotosIntentResponse : INIntentResponse
 

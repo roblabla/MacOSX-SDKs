@@ -16,9 +16,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0))
-API_UNAVAILABLE(macos, tvos)
-API_UNAVAILABLE(watchos)
+API_DEPRECATED("INSetAudioSourceInCarIntent is deprecated. There is no replacement.", ios(10.0, 15.0))
+API_UNAVAILABLE(macos, watchos, tvos)
 @interface INSetAudioSourceInCarIntent : INIntent
 
 - (instancetype)initWithAudioSource:(INCarAudioSource)audioSource
@@ -37,9 +36,8 @@ API_UNAVAILABLE(watchos)
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(10.0))
-API_UNAVAILABLE(macos, tvos)
-API_UNAVAILABLE(watchos)
+API_DEPRECATED("INSetAudioSourceInCarIntentHandling is deprecated. There is no replacement.", ios(10.0, 15.0))
+API_UNAVAILABLE(macos, watchos, tvos)
 @protocol INSetAudioSourceInCarIntentHandling <NSObject>
 
 @required
@@ -83,10 +81,10 @@ API_UNAVAILABLE(watchos)
  */
 
 - (void)resolveAudioSourceForSetAudioSourceInCar:(INSetAudioSourceInCarIntent *)intent
-                    withCompletion:(void (^)(INCarAudioSourceResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveAudioSource(for:with:));
+                                  withCompletion:(void (^)(INCarAudioSourceResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveAudioSource(for:with:));
 
 - (void)resolveRelativeAudioSourceReferenceForSetAudioSourceInCar:(INSetAudioSourceInCarIntent *)intent
-                    withCompletion:(void (^)(INRelativeReferenceResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveRelativeAudioSourceReference(for:with:));
+                                                   withCompletion:(void (^)(INRelativeReferenceResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveRelativeAudioSourceReference(for:with:));
 
 @end
 

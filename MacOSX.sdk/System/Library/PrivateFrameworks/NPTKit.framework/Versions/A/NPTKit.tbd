@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1A075BB4-B45E-3373-B9F3-CE2E819D29FE
+    value:           45F6E5D5-D86C-3029-B0C0-E64F06BC3FE9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9E485B2C-5FCA-3BBA-91CE-BD0B1AC61CA6
+    value:           D4E65F0D-D6C7-3B4D-B6B6-4566DD58D791
 install-name:    '/System/Library/PrivateFrameworks/NPTKit.framework/Versions/A/NPTKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _BASE_URL, _CDN_JSON_ENDPOINT, _GET_URL, _GET_URL_FORMAT_STRING, 
+    symbols:         [ _BASE_URL, _CDN_JSON_ENDPOINT, _DATE_FORMAT, _GET_URL, _GET_URL_FORMAT_STRING, 
                        _NPTKitVersionNumber, _NPTKitVersionString, _PING_URL, _POST_URL, 
                        _POST_URL_EXTENSION, _TEMP_FILE_NAME, _UNIQUE_QUERY_PARAM, 
                        _USER_AGENT_FORMAT_STRING ]

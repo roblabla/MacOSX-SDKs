@@ -237,42 +237,33 @@ typedef size_t (^CMBufferGetSizeHandler)(
 				CMBuffer.  Durations must always be positive.
 */
 typedef struct {
-	uint32_t					version;						/*! @field version
-																	Must be 0 or 1. */
-	void * CM_NULLABLE refcon;									/*! @field refcon
-																	Client refcon to be passed to all callbacks (can be NULL,
+	uint32_t					version;						/*!< Must be 0 or 1. */
+	void * CM_NULLABLE refcon;									/*!< Client refcon to be passed to all callbacks (can be NULL,
 																	if the callbacks don't require it). */
-	CMBufferGetTimeCallback CM_NULLABLE		getDecodeTimeStamp;	/*! @field getDecodeTimeStamp
-																	This callback is called from CMBufferQueueGetFirstDecodeTimeStamp (once),
+	CMBufferGetTimeCallback CM_NULLABLE		getDecodeTimeStamp;	/*!< This callback is called from CMBufferQueueGetFirstDecodeTimeStamp (once),
 																	and from CMBufferQueueGetMinDecodeTimeStamp (multiple times).  It should
 																	return the decode timestamp of the buffer.  If there are multiple samples
 																	in the buffer, this callback should return the minimum decode timestamp
 																	in the buffer. Can be NULL (CMBufferQueueGetFirstDecodeTimeStamp and
 																	CMBufferQueueGetMinDecodeTimeStamp will return kCMTimeInvalid). */
-	CMBufferGetTimeCallback CM_NULLABLE getPresentationTimeStamp;/*! @field getPresentationTimeStamp
-																	This callback is called from CMBufferQueueGetFirstPresentationTimeStamp
+	CMBufferGetTimeCallback CM_NULLABLE getPresentationTimeStamp;/*!< This callback is called from CMBufferQueueGetFirstPresentationTimeStamp
 																	(once) and from CMBufferQueueGetMinPresentationTimeStamp (multiple times).
 																	It should return the presentation timestamp of the buffer.  If there are
 																	multiple samples in the buffer, this callback should return the minimum
 																	presentation timestamp in the buffer. Can be NULL
 																	(CMBufferQueueGetFirstPresentationTimeStamp and
 																	CMBufferQueueGetMinPresentationTimeStamp will return kCMTimeInvalid). */
-	CMBufferGetTimeCallback CM_NONNULL getDuration;				/*! @field getDuration
-																	This callback is called (once) during enqueue and dequeue operations to
+	CMBufferGetTimeCallback CM_NONNULL getDuration;				/*!< This callback is called (once) during enqueue and dequeue operations to
 																	update the total duration of the queue.  Must not be NULL. */
-	CMBufferGetBooleanCallback CM_NULLABLE isDataReady;			/*! @field isDataReady
-																	This callback is called from CMBufferQueueDequeueIfDataReadyAndRetain, to
+	CMBufferGetBooleanCallback CM_NULLABLE isDataReady;			/*!< This callback is called from CMBufferQueueDequeueIfDataReadyAndRetain, to
 																	ask if the buffer that is about to be dequeued is ready.  Can be NULL
 																	(data will be assumed to be ready). */
-	CMBufferCompareCallback CM_NULLABLE compare;				/*! @field compare
-																	This callback is called (multiple times) from CMBufferQueueEnqueue, to
+	CMBufferCompareCallback CM_NULLABLE compare;				/*!< This callback is called (multiple times) from CMBufferQueueEnqueue, to
 																	perform an insertion sort. Can be NULL (queue will be FIFO). */
-	CFStringRef CM_NULLABLE dataBecameReadyNotification;		/*! @field dataBecameReadyNotification
-																	If triggers of type kCMBufferQueueTrigger_WhenDataBecomesReady are installed,
+	CFStringRef CM_NULLABLE dataBecameReadyNotification;		/*!< If triggers of type kCMBufferQueueTrigger_WhenDataBecomesReady are installed,
 																	the queue will listen for this notification on the head buffer. 
 																	Can be NULL (then the queue won't listen for it). */
-	CMBufferGetSizeCallback CM_NULLABLE getSize;				/*! @field getSize
-																	This callback is called (once) during enqueue and dequeue operation to
+	CMBufferGetSizeCallback CM_NULLABLE getSize;				/*!< This callback is called (once) during enqueue and dequeue operation to
 																	update the total size of the queue. Can be NULL.  Ignored if version < 1. */
 } CMBufferCallbacks API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
@@ -280,39 +271,31 @@ typedef struct {
 #pragma pack(push)
 #pragma pack()
 typedef struct {
-	uintptr_t version;											/*! @field version
-																	Must be 1. */
-	CMBufferGetTimeHandler CM_NULLABLE getDecodeTimeStamp;		/*! @field getDecodeTimeStamp
-																	This block is called from CMBufferQueueGetFirstDecodeTimeStamp (once),
+	uintptr_t version;											/*!< Must be 1. */
+	CMBufferGetTimeHandler CM_NULLABLE getDecodeTimeStamp;		/*!< This block is called from CMBufferQueueGetFirstDecodeTimeStamp (once),
 																	and from CMBufferQueueGetMinDecodeTimeStamp (multiple times).  It should
 																	return the decode timestamp of the buffer.  If there are multiple samples
 																	in the buffer, this block should return the minimum decode timestamp
 																	in the buffer. Can be NULL (CMBufferQueueGetFirstDecodeTimeStamp and
 																	CMBufferQueueGetMinDecodeTimeStamp will return kCMTimeInvalid). */
-	CMBufferGetTimeHandler CM_NULLABLE getPresentationTimeStamp;/*! @field getPresentationTimeStamp
-																	This block is called from CMBufferQueueGetFirstPresentationTimeStamp
+	CMBufferGetTimeHandler CM_NULLABLE getPresentationTimeStamp;/*!< This block is called from CMBufferQueueGetFirstPresentationTimeStamp
 																	(once) and from CMBufferQueueGetMinPresentationTimeStamp (multiple times).
 																	It should return the presentation timestamp of the buffer.  If there are
 																	multiple samples in the buffer, this block should return the minimum
 																	presentation timestamp in the buffer. Can be NULL
 																	(CMBufferQueueGetFirstPresentationTimeStamp and
 																	CMBufferQueueGetMinPresentationTimeStamp will return kCMTimeInvalid). */
-	CMBufferGetTimeHandler CM_NONNULL getDuration;				/*! @field getDuration
-																	This block is called (once) during enqueue and dequeue operations to
+	CMBufferGetTimeHandler CM_NONNULL getDuration;				/*!< This block is called (once) during enqueue and dequeue operations to
 																	update the total duration of the queue.  Must not be NULL. */
-	CMBufferGetBooleanHandler CM_NULLABLE isDataReady;			/*! @field isDataReady
-																	This block is called from CMBufferQueueDequeueIfDataReadyAndRetain, to
+	CMBufferGetBooleanHandler CM_NULLABLE isDataReady;			/*!< This block is called from CMBufferQueueDequeueIfDataReadyAndRetain, to
 																	ask if the buffer that is about to be dequeued is ready.  Can be NULL
 																	(data will be assumed to be ready). */
-	CMBufferCompareHandler CM_NULLABLE compare;					/*! @field compare
-																	This block is called (multiple times) from CMBufferQueueEnqueue, to
+	CMBufferCompareHandler CM_NULLABLE compare;					/*!< This block is called (multiple times) from CMBufferQueueEnqueue, to
 																	perform an insertion sort. Can be NULL (queue will be FIFO). */
-	CFStringRef CM_NULLABLE dataBecameReadyNotification;		/*! @field dataBecameReadyNotification
-																	If triggers of type kCMBufferQueueTrigger_WhenDataBecomesReady are installed,
+	CFStringRef CM_NULLABLE dataBecameReadyNotification;		/*!< If triggers of type kCMBufferQueueTrigger_WhenDataBecomesReady are installed,
 																	the queue will listen for this notification on the head buffer. 
 																	Can be NULL (then the queue won't listen for it). */
-	CMBufferGetSizeHandler CM_NULLABLE getSize;					/*! @field getSize
-																	This block is called (once) during enqueue and dequeue operation to
+	CMBufferGetSizeHandler CM_NULLABLE getSize;					/*!< This block is called (once) during enqueue and dequeue operation to
 																	update the total size of the queue. Can be NULL. */
 } CMBufferHandlers API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0));
 #pragma pack(pop)

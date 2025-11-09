@@ -51,7 +51,9 @@
 #include <CoreVideo/CVDirect3DTextureCache.h>
 #endif
 
+#if !0
 #if TARGET_OS_MAC
 #include <CoreVideo/CVMetalTexture.h>
 #include <CoreVideo/CVMetalTextureCache.h>
+#endif
 #endif

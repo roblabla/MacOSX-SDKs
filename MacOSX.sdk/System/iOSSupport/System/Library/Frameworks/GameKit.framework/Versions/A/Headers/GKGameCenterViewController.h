@@ -16,7 +16,8 @@ typedef NS_ENUM(NSInteger, GKGameCenterViewControllerState) {
     GKGameCenterViewControllerStateAchievements,
     GKGameCenterViewControllerStateChallenges,
     GKGameCenterViewControllerStateLocalPlayerProfile,
-    GKGameCenterViewControllerStateDashboard
+    GKGameCenterViewControllerStateDashboard,
+    GKGameCenterViewControllerStateLocalPlayerFriendsList
 };
 
 #if TARGET_OS_IPHONE

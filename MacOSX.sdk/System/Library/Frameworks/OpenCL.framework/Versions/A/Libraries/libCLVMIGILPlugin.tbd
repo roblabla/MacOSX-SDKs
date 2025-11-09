@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B30E8C3F-16C8-3881-8B49-9F8A9128D7BE
-install-name:    '/Library/Caches/com.apple.xbs/Binaries/GPUDriversIntel/install/Symbols/libCLVMIGILPlugin.dylib'
+    value:           F39A3882-503D-3AA8-88E0-33A96DDEF3C2
+install-name:    '/System/Volumes/Data/SWE/macOS/BuildRoots/0ed32b12e4/Library/Caches/com.apple.xbs/Sources/GPUDriversIntel/GPUDriversIntel-18.1.15/Common/lib/CLPlugin/igil/libCLVMIGILPlugin.dylib'
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ _cvmsPluginElementBuild, _cvmsPluginServiceInitialize, _cvmsPluginServiceTerminate ]

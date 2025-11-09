@@ -103,6 +103,7 @@ typedef NS_OPTIONS(NSUInteger, MTLTextureUsage)
     MTLTextureUsagePixelFormatView = 0x0010,
 } API_AVAILABLE(macos(10.11), ios(9.0));
 
+
 MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLTextureDescriptor : NSObject <NSCopying>
 

@@ -14,13 +14,12 @@ typedef NS_ENUM(NSInteger, INSetDefrosterSettingsInCarIntentResponseCode) {
     INSetDefrosterSettingsInCarIntentResponseCodeSuccess,
     INSetDefrosterSettingsInCarIntentResponseCodeFailure,
     INSetDefrosterSettingsInCarIntentResponseCodeFailureRequiringAppLaunch,
-} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+} API_DEPRECATED("INSetDefrosterSettingsInCarIntentResponseCode is deprecated. There is no replacement.", ios(10.0, 15.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0))
-API_UNAVAILABLE(macos, tvos)
-API_UNAVAILABLE(watchos)
+API_DEPRECATED("INSetDefrosterSettingsInCarIntentResponse is deprecated. There is no replacement.", ios(10.0, 15.0))
+API_UNAVAILABLE(macos, watchos, tvos)
 @interface INSetDefrosterSettingsInCarIntentResponse : INIntentResponse
 
 - (id)init NS_UNAVAILABLE;

@@ -389,6 +389,18 @@ Functions:
   SwiftName: "CMClockInvalidate(_:)"
 - Name: CMTimebaseGetTypeID
   SwiftName: "CMTimebaseGetTypeID()"
+- Name: CMTimebaseCreateWithSourceClock
+  SwiftName: "CMTimebaseCreateWithSourceClock(allocator:sourceClock:timebaseOut:)"
+- Name: CMTimebaseCreateWithSourceTimebase
+  SwiftName: "CMTimebaseCreateWithSourceTimebase(allocator:sourceTimebase:timebaseOut:)"
+- Name: CMTimebaseCopySourceTimebase
+  SwiftName: "CMTimebaseCopySourceTimebase(_:)"
+- Name: CMTimebaseCopySourceClock
+  SwiftName: "CMTimebaseCopySourceClock(_:)"
+- Name: CMTimebaseCopySource
+  SwiftName: "CMTimebaseCopySource(_:)"
+- Name: CMTimebaseCopyUltimateSourceClock
+  SwiftName: "CMTimebaseCopyUltimateSourceClock(_:)"
 - Name: CMTimebaseCreateWithMasterClock
   SwiftName: "CMTimebaseCreateWithMasterClock(allocator:masterClock:timebaseOut:)"
 - Name: CMTimebaseCreateWithMasterTimebase
@@ -408,7 +420,7 @@ Functions:
 - Name: CMTimebaseSetTime
   SwiftName: "CMTimebaseSetTime(_:time:)"
 - Name: CMTimebaseSetAnchorTime
-  SwiftName: "CMTimebaseSetAnchorTime(_:timebaseTime:immediateMasterTime:)"
+  SwiftName: "CMTimebaseSetAnchorTime(_:timebaseTime:immediateSourceTime:)"
 - Name: CMTimebaseGetRate
   SwiftName: "CMTimebaseGetRate(_:)"
 - Name: CMTimebaseGetTimeAndRate
@@ -416,7 +428,7 @@ Functions:
 - Name: CMTimebaseSetRate
   SwiftName: "CMTimebaseSetRate(_:rate:)"
 - Name: CMTimebaseSetRateAndAnchorTime
-  SwiftName: "CMTimebaseSetRateAndAnchorTime(_:rate:anchorTime:immediateMasterTime:)"
+  SwiftName: "CMTimebaseSetRateAndAnchorTime(_:rate:anchorTime:immediateSourceTime:)"
 - Name: CMTimebaseGetEffectiveRate
   SwiftName: "CMTimebaseGetEffectiveRate(_:)"
 - Name: CMTimebaseAddTimer

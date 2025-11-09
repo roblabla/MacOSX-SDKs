@@ -4,7 +4,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2018 Apple Inc. All rights reserved.
+    Copyright 2018-2021 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>

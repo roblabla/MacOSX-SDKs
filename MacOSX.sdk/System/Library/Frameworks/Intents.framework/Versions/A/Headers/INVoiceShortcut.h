@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @abstract A shortcut that has been added to Siri
  */
-API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx, tvos)
+API_AVAILABLE(ios(12.0), macos(12.0), watchos(5.0)) API_UNAVAILABLE(tvos)
 @interface INVoiceShortcut : NSObject <NSSecureCoding, NSCopying>
 
 /*!

@@ -295,8 +295,8 @@ MPSNNTrainingStyle
  *              from fusing away nodes involving images created by the padding policy because it doesn't know what the
  *              custom padding policy does. If the changes made by the padding policy modify to the MPSImageDescriptor
  *              alone (and not, critically, the MPSKernel properties or image dimensions) then it may be acceptable to pass
- *              MPSNNPaddingMethodCustomWhitelistForNodeFusion, which allows the fusion to proceed even with a custom
- *              padding policy. In usage of MPSNNPaddingMethodCustomWhitelistForNodeFusion, you are guaranteeing to MPS
+ *              MPSNNPaddingMethodCustomAllowForNodeFusion, which allows the fusion to proceed even with a custom
+ *              padding policy. In usage of MPSNNPaddingMethodCustomAllowForNodeFusion, you are guaranteeing to MPS
  *              that it can fuse the node with an adjacent filter node if it can. It makes no further checks.   You can
  *              get a detailed printout of graph optimizations including reasons why they didn't happen by setting the
  *              MPS_LOG_INFO environment variable.
@@ -340,7 +340,8 @@ MPSNNTrainingStyle
         MPSNNPaddingMethodSizeSame                      MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))  = 1UL << 4,        ///< The result is the same size as the input image (before strides)
         MPSNNPaddingMethodSizeFull                      MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))  = 2UL << 4,        ///< The result is the largest image for which *any* source pixel is valid for result pixels
         MPSNNPaddingMethodSize_reserved                 MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))  = 3UL << 4,
-        MPSNNPaddingMethodCustomWhitelistForNodeFusion  MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))  = (1UL << 13),   ///< By itself, MPSNNPaddingMethodCustom will inhibit automatic fusion between nodes producing and consuming the image described by the padding policy. MPSNNPaddingMethodCustomWhitelistForNodeFusion signals that the custom method is benign and fusion may go ahead.
+        MPSNNPaddingMethodCustomWhitelistForNodeFusion  MPS_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use MPSNNPaddingMethodCustomAllowForNodeFusion instead.",  macos(10.14, 12.0), ios(12.0, 15.0), macCatalyst(13.0, 15.0), tvos(12.0, 15.0))  = (1UL << 13),
+        MPSNNPaddingMethodCustomAllowForNodeFusion      MPS_ENUM_AVAILABLE_STARTING( macos(12.0), ios(15.0), macCatalyst(15.0), tvos(15.0))  = (1UL << 13),   ///< By itself, MPSNNPaddingMethodCustom will inhibit automatic fusion between nodes producing and consuming the image described by the padding policy. MPSNNPaddingMethodCustomAllowForNodeFusion signals that the custom method is benign and fusion may go ahead.
         MPSNNPaddingMethodCustom                        MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))  = (1UL << 14),   ///< Use destinationImageDescriptorForSourceImages:sourceStates:forKernel:suggestedDescriptor: to calculate padding and offset.
         MPSNNPaddingMethodSizeMask                      MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))  = 0x7f0,
 

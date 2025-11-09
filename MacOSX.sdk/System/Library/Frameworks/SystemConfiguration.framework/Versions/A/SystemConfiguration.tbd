@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BEDC3BFB-D680-3E56-9A3A-2FAB181C52A9
+    value:           4A7F147D-1A09-3FB9-B9A7-5CAE8F8D82CE
   - target:          x86_64-maccatalyst
-    value:           BEDC3BFB-D680-3E56-9A3A-2FAB181C52A9
+    value:           4A7F147D-1A09-3FB9-B9A7-5CAE8F8D82CE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B0F993E3-BA90-3981-88C3-4B06755DDAD2
+    value:           2FF9AFD7-AE25-3060-A5C7-BB0227728792
   - target:          arm64e-maccatalyst
-    value:           B0F993E3-BA90-3981-88C3-4B06755DDAD2
+    value:           2FF9AFD7-AE25-3060-A5C7-BB0227728792
 install-name:    '/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration'
-current-version: 1109.101.1
+current-version: 1163.0.4
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CNCopyCurrentNetworkInfo, _CNCopySupportedInterfaces, _CNMarkPortalOffline, 
                        _CNMarkPortalOnline, _CNSetSupportedSSIDs, _DHCPClientPreferencesCopyApplicationOptions, 
@@ -74,23 +74,30 @@ exports:
                        _SCNetworkConnectionSetClientInfo, _SCNetworkConnectionSetDispatchQueue, 
                        _SCNetworkConnectionStart, _SCNetworkConnectionStartWithUserPreferences, 
                        _SCNetworkConnectionStop, _SCNetworkConnectionSuspend, _SCNetworkConnectionTriggerOnDemandIfNeeded, 
-                       _SCNetworkConnectionUnscheduleFromRunLoop, _SCNetworkInterfaceAdvisoryIsSet, 
-                       _SCNetworkInterfaceCheckPassword, _SCNetworkInterfaceCopyAdvisoryNotificationKey, 
+                       _SCNetworkConnectionUnscheduleFromRunLoop, _SCNetworkInterfaceAdvisoryCopyInterfaceNames, 
+                       _SCNetworkInterfaceAdvisoryInfoGetAdvisory, _SCNetworkInterfaceAdvisoryInfoGetProcessID, 
+                       _SCNetworkInterfaceAdvisoryInfoGetProcessName, _SCNetworkInterfaceAdvisoryIsSet, 
+                       _SCNetworkInterfaceAdvisoryIsSpecificSet, _SCNetworkInterfaceCheckPassword, 
+                       _SCNetworkInterfaceCopyAdvisoryInfo, _SCNetworkInterfaceCopyAdvisoryNotificationKey, 
                        _SCNetworkInterfaceCopyAll, _SCNetworkInterfaceCopyCapability, 
                        _SCNetworkInterfaceCopyMTU, _SCNetworkInterfaceCopyMediaOptions, 
                        _SCNetworkInterfaceCopyMediaSubTypeOptions, _SCNetworkInterfaceCopyMediaSubTypes, 
-                       _SCNetworkInterfaceCopyPassword, _SCNetworkInterfaceCreateWithInterface, 
+                       _SCNetworkInterfaceCopyPassword, _SCNetworkInterfaceCopyRankAssertionInfo, 
+                       _SCNetworkInterfaceCopyRankAssertionNotificationKey, _SCNetworkInterfaceCreateWithInterface, 
                        _SCNetworkInterfaceForceConfigurationRefresh, _SCNetworkInterfaceGetBSDName, 
-                       _SCNetworkInterfaceGetConfiguration, _SCNetworkInterfaceGetDisableUntilNeeded, 
-                       _SCNetworkInterfaceGetExtendedConfiguration, _SCNetworkInterfaceGetHardwareAddressString, 
-                       _SCNetworkInterfaceGetInterface, _SCNetworkInterfaceGetInterfaceType, 
-                       _SCNetworkInterfaceGetLocalizedDisplayName, _SCNetworkInterfaceGetPrimaryRank, 
-                       _SCNetworkInterfaceGetQoSMarkingPolicy, _SCNetworkInterfaceGetSupportedInterfaceTypes, 
-                       _SCNetworkInterfaceGetSupportedProtocolTypes, _SCNetworkInterfaceGetTypeID, 
-                       _SCNetworkInterfaceProviderCreate, _SCNetworkInterfaceProviderResume, 
-                       _SCNetworkInterfaceProviderSetEventHandler, _SCNetworkInterfaceRefreshConfiguration, 
-                       _SCNetworkInterfaceRemovePassword, _SCNetworkInterfaceSetAdvisory, 
-                       _SCNetworkInterfaceSetCapability, _SCNetworkInterfaceSetConfiguration, 
+                       _SCNetworkInterfaceGetConfiguration, _SCNetworkInterfaceGetDisablePrivateRelay, 
+                       _SCNetworkInterfaceGetDisableUntilNeeded, _SCNetworkInterfaceGetExtendedConfiguration, 
+                       _SCNetworkInterfaceGetHardwareAddressString, _SCNetworkInterfaceGetInterface, 
+                       _SCNetworkInterfaceGetInterfaceType, _SCNetworkInterfaceGetLocalizedDisplayName, 
+                       _SCNetworkInterfaceGetPrimaryRank, _SCNetworkInterfaceGetQoSMarkingPolicy, 
+                       _SCNetworkInterfaceGetSupportedInterfaceTypes, _SCNetworkInterfaceGetSupportedProtocolTypes, 
+                       _SCNetworkInterfaceGetTypeID, _SCNetworkInterfaceProviderCreate, 
+                       _SCNetworkInterfaceProviderResume, _SCNetworkInterfaceProviderSetEventHandler, 
+                       _SCNetworkInterfaceRankAssertionCopyInterfaceNames, _SCNetworkInterfaceRankAssertionInfoGetPrimaryRank, 
+                       _SCNetworkInterfaceRankAssertionInfoGetProcessID, _SCNetworkInterfaceRankAssertionInfoGetProcessName, 
+                       _SCNetworkInterfaceRefreshConfiguration, _SCNetworkInterfaceRemovePassword, 
+                       _SCNetworkInterfaceSetAdvisory, _SCNetworkInterfaceSetCapability, 
+                       _SCNetworkInterfaceSetConfiguration, _SCNetworkInterfaceSetDisablePrivateRelay, 
                        _SCNetworkInterfaceSetDisableUntilNeeded, _SCNetworkInterfaceSetExtendedConfiguration, 
                        _SCNetworkInterfaceSetMTU, _SCNetworkInterfaceSetMediaOptions, 
                        _SCNetworkInterfaceSetPassword, _SCNetworkInterfaceSetPrimaryRank, 
@@ -166,13 +173,7 @@ exports:
                        _VPNConfigurationSetMessageCallback, _VPNConfigurationSetName, 
                        _VPNConfigurationSetPersistentData, _VPNConfigurationSetVendorData, 
                        _VPNConfigurationUnscheduleFromRunLoop, _VPNConfigurationValidateCertificate, 
-                       _VPNCopyLastError, _VPNFlowCanAcceptBytes, _VPNFlowCopyError, 
-                       _VPNFlowCopyProperty, _VPNFlowDatagramCopyNext, _VPNFlowDatagramSend, 
-                       _VPNFlowGetTypeID, _VPNFlowHasBytesAvailable, _VPNFlowOpen, 
-                       _VPNFlowReadClose, _VPNFlowScheduleWithRunLoop, _VPNFlowSetDispatchQueue, 
-                       _VPNFlowSetEventHandler, _VPNFlowSetProperty, _VPNFlowStreamRead, 
-                       _VPNFlowStreamWrite, _VPNFlowUnscheduleFromRunLoop, _VPNFlowWriteClose, 
-                       _VPNSerializeData, _VPNServiceCopyAll, _VPNServiceCopyAllMatchingExternalID, 
+                       _VPNCopyLastError, _VPNServiceCopyAll, _VPNServiceCopyAllMatchingExternalID, 
                        _VPNServiceCopyAppRule, _VPNServiceCopyAppRuleIDs, _VPNServiceIsManagedAppVPN, 
                        _VPNServiceRemoveAppRule, _VPNServiceSetAppRule, _VPNTunnelAuthenticate, 
                        _VPNTunnelClearConfiguration, _VPNTunnelCopyPersistentData, 
@@ -185,14 +186,13 @@ exports:
                        _VPNTunnelIPCSendMessage, _VPNTunnelIncrementDataReceived, 
                        _VPNTunnelIncrementDataSent, _VPNTunnelLog, _VPNTunnelSetConfigurationEntities, 
                        _VPNTunnelSetPersistentData, _VPNTunnelSetStatus, _VPNTunnelSetTunnelSocket, 
-                       _VPNTunnelUpdatePlugin, _VPNUnserializeData, __SCBondInterfaceCopyActive, 
-                       __SCBondInterfaceUpdateConfiguration, __SCBridgeInterfaceCopyActive, 
-                       __SCBridgeInterfaceUpdateConfiguration, __SCCopyDescription, 
-                       __SCCreatePropertyListFromResource, __SCDPluginExecCommand, 
-                       __SCDPluginExecCommand2, __SCDPluginExecInit, __SCDynamicStoreCacheClose, 
-                       __SCDynamicStoreCacheCommitChanges, __SCDynamicStoreCacheIsActive, 
-                       __SCDynamicStoreCacheOpen, __SCDynamicStoreSetSessionWatchLimit, 
-                       __SCErrorSet, __SCNetworkConfigurationBypassSystemInterfaces, 
+                       _VPNTunnelUpdatePlugin, __SCBondInterfaceCopyActive, __SCBondInterfaceUpdateConfiguration, 
+                       __SCBridgeInterfaceCopyActive, __SCBridgeInterfaceUpdateConfiguration, 
+                       __SCCopyDescription, __SCCreatePropertyListFromResource, __SCDPluginExecCommand, 
+                       __SCDPluginExecCommand2, __SCDPluginExecInit, __SCDPluginSpawnCommand, 
+                       __SCDynamicStoreCacheClose, __SCDynamicStoreCacheCommitChanges, 
+                       __SCDynamicStoreCacheIsActive, __SCDynamicStoreCacheOpen, 
+                       __SCDynamicStoreSetSessionWatchLimit, __SCErrorSet, __SCNetworkConfigurationBypassSystemInterfaces, 
                        __SCNetworkConfigurationCheckValidity, __SCNetworkConfigurationCheckValidityWithPreferences, 
                        __SCNetworkConfigurationCopyMigrationPaths, __SCNetworkConfigurationCopyMigrationRemovePaths, 
                        __SCNetworkConfigurationPerformMigration, __SCNetworkConfigurationSetBypassSystemInterfaces, 
@@ -226,7 +226,8 @@ exports:
                        __SCUnserializeString, __SCVLANInterfaceCopyActive, __SCVLANInterfaceUpdateConfiguration, 
                        __SC_CFBundleCopyNonLocalizedString, __SC_CFBundleGet, __SC_CFMachPortCreateWithPort, 
                        __SC_CFStringIsValidDNSName, __SC_CFStringIsValidNetBIOSName, 
-                       __SC_LOG_DEFAULT, __SC_cfstring_to_cstring, __SC_checkResolverReachabilityByAddress, 
+                       __SC_LOG_DEFAULT, __SC_cfstring_to_cstring, __SC_checkMachPortReceive, 
+                       __SC_checkMachPortSend, __SC_checkResolverReachabilityByAddress, 
                        __SC_copyBacktrace, __SC_crash, __SC_dlopen, __SC_domainEndsWithDomain, 
                        __SC_getApplicationBundleID, __SC_getconninfo, __SC_hostMatchesDomain, 
                        __SC_hw_model, __SC_isInstallEnvironment, __SC_logMachPortReferences, 
@@ -236,10 +237,9 @@ exports:
                        ___SCNetworkConfigurationReport, ___SCNetworkConfigurationSaveModel, 
                        ___SCNetworkConfigurationUpgrade, ___SCNetworkConnectionCopyOnDemandInfoWithName, 
                        ___SCNetworkInterfaceCreateCapabilities, ___SCNetworkInterfaceCreateMediaOptions, 
-                       ___SCNetworkInterfaceSetDisableUntilNeededValue, ___SC_Log, 
-                       ___SC_log_enabled, ___SC_log_send, __sc_debug, __sc_log, __sc_verbose, 
-                       __scprefs_observer_cancel, __scprefs_observer_watch, _isa_xpc_bool, 
-                       _isa_xpc_connection, _isa_xpc_dictionary, _isa_xpc_error, 
+                       ___SCNetworkInterfaceSetDisablePrivateRelayValue, ___SCNetworkInterfaceSetDisableUntilNeededValue, 
+                       ___SC_Log, ___SC_log_enabled, ___SC_log_send, __sc_debug, 
+                       __sc_log, __sc_verbose, __scprefs_observer_cancel, __scprefs_observer_watch, 
                        _kCFErrorDomainSystemConfiguration, _kCFErrorDomainVPNTunnel, 
                        _kCNNetworkInfoKeyBSSID, _kCNNetworkInfoKeySSID, _kCNNetworkInfoKeySSIDData, 
                        _kSCBondStatusDeviceAggregationStatus, _kSCBondStatusDeviceCollecting, 
@@ -285,8 +285,8 @@ exports:
                        _kSCPrefCurrentSet, _kSCPrefNetworkServices, _kSCPrefSets, 
                        _kSCPrefSystem, _kSCPrefVersion, _kSCPrefVirtualNetworkInterfaces, 
                        _kSCPreferencesUseEntitlementAuthorization, _kSCPropConfirmedInterfaceName, 
-                       _kSCPropDisableUntilNeeded, _kSCPropInterfaceName, _kSCPropMACAddress, 
-                       _kSCPropNet6to4Relay, _kSCPropNetAirPortAllowNetCreation, 
+                       _kSCPropDisablePrivateRelay, _kSCPropDisableUntilNeeded, _kSCPropInterfaceName, 
+                       _kSCPropMACAddress, _kSCPropNet6to4Relay, _kSCPropNetAirPortAllowNetCreation, 
                        _kSCPropNetAirPortAuthPassword, _kSCPropNetAirPortAuthPasswordEncryption, 
                        _kSCPropNetAirPortJoinMode, _kSCPropNetAirPortPowerEnabled, 
                        _kSCPropNetAirPortPreferredNetwork, _kSCPropNetAirPortSavePasswords, 
@@ -470,14 +470,8 @@ exports:
                        _kSCValNetVPNOnDemandRuleInterfaceTypeMatchCellular, _kSCValNetVPNOnDemandRuleInterfaceTypeMatchEthernet, 
                        _kSCValNetVPNOnDemandRuleInterfaceTypeMatchWiFi, _kSCValNetVPNPluginCapabilityAuth, 
                        _kSCValNetVPNPluginCapabilityConnect, _kVPNConfigurationKeyCertificateRef, 
-                       _kVPNConfigurationKeyPersistentRef, _kVPNConfigurationOptionTunnelType, 
-                       _kVPNFlowPropertyAppRuleIdentifier, _kVPNFlowPropertyAppUnique, 
-                       _kVPNFlowPropertyDestinationEndpoint, _kVPNFlowPropertyDestinationName, 
-                       _kVPNFlowPropertyNetworkServiceType, _kVPNFlowPropertyTunnelSocketNativeHandle, 
-                       _kVPNFlowPropertyType, _snhelper_flow_divert_uuid_policy_add, 
-                       _snhelper_flow_divert_uuid_policy_clear, _snhelper_flow_divert_uuid_policy_remove, 
-                       _snhelper_get_uuid_for_app ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+                       _kVPNConfigurationKeyPersistentRef, _kVPNConfigurationOptionTunnelType ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _VPNConfigurationSetAuthorization, __SC_dos_encoding_and_codepage, 
                        _kSCEntNetAppleTalk, _kSCEntNetNetInfo, _kSCPropNetAppleTalkConfigMethod, 
                        _kSCPropNetAppleTalkDefaultZone, _kSCPropNetAppleTalkNetworkID, 

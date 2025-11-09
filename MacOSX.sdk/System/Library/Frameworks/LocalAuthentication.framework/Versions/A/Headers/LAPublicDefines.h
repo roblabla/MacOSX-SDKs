@@ -36,7 +36,7 @@
 #define kLAErrorBiometryLockout                             kLAErrorTouchIDLockout
 #define kLAErrorBiometryNotPaired                         -12
 #define kLAErrorBiometryDisconnected                      -13
-
+#define kLAErrorInvalidDimensions                         -14
 
 // Error domain
 #define kLAErrorDomain        "com.apple.LocalAuthentication"

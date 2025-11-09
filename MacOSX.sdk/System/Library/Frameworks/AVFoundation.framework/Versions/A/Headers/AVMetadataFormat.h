@@ -167,6 +167,7 @@ AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyDirectionFacing    
 AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyDirectionMotion                 API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyContentIdentifier               API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyAccessibilityDescription        API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
+AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyIsMontage                       API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 // iTunesMetadata
 AVF_EXPORT AVMetadataFormat const AVMetadataFormatiTunesMetadata                             API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
@@ -232,7 +233,7 @@ AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyAttachedPicture          
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyAudioSeekPointIndex                   /* ASPI Audio seek point index */                               API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyComments                              /* COMM Comments */                                             API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyCommercial                            /* COMR Commercial frame */                                     API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
-AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyCommerical                            /* COMR Commercial frame */                                     API_DEPRECATED("No longer supported", macos(10.7, 10.11), ios(4.0, 9.0), tvos(9.0, 9.0), watchos(1.0, 1.0));
+AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyCommerical                            /* COMR Commercial frame */                                     API_DEPRECATED_WITH_REPLACEMENT("AVMetadataID3MetadataKeyCommercial", macos(10.7, 10.11), ios(4.0, 9.0), tvos(9.0, 9.0), watchos(1.0, 1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyEncryption                            /* ENCR Encryption method registration */                       API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyEqualization                          /* EQUA Equalization */                                         API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyEqualization2                         /* EQU2 Equalisation (2) */                                     API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));

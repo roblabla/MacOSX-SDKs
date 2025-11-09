@@ -72,6 +72,8 @@
 #ifndef _I386_PARAM_H_
 #define _I386_PARAM_H_
 
+#if defined (__i386__) || defined (__x86_64__)
+
 #include <i386/_param.h>
 
 /*
@@ -163,5 +165,7 @@
 
 #define DELAY(n) delay(n)
 
+
+#endif /* defined (__i386__) || defined (__x86_64__) */
 
 #endif /* _I386_PARAM_H_ */

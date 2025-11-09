@@ -24,6 +24,7 @@
 
 #define _MXSignpostEventEmit_guaranteed_args(log, event_id, name, format,...)
 #define _MXSignpostIntervalBegin_guaranteed_args(log, event_id, name, format,...)
+#define _MXSignpostAnimationIntervalBegin_guaranteed_args(log, event_id, name, format,...)
 #define _MXSignpostIntervalEnd_guaranteed_args(log, event_id, name, format,...)
 
 #else
@@ -35,6 +36,7 @@ void* _Nonnull _MXSignpostMetricsSnapshot(void);
 
 #define _MXSignpostEventEmit_guaranteed_args(log, event_id, name, format,...) os_signpost_event_emit(log, event_id, name, format _MXSIGNPOST_METRICS_SNAPSHOT_FORMAT, ##__VA_ARGS__, _MXSignpostMetricsSnapshot())
 #define _MXSignpostIntervalBegin_guaranteed_args(log, event_id, name, format,...) os_signpost_interval_begin(log, event_id, name, format _MXSIGNPOST_METRICS_SNAPSHOT_FORMAT, ##__VA_ARGS__, _MXSignpostMetricsSnapshot())
+#define _MXSignpostAnimationIntervalBegin_guaranteed_args(log, event_id, name, format,...) os_signpost_interval_begin(log, event_id, name, format "isAnimation=YES" _MXSIGNPOST_METRICS_SNAPSHOT_FORMAT, ##__VA_ARGS__, _MXSignpostMetricsSnapshot())
 #define _MXSignpostIntervalEnd_guaranteed_args(log, event_id, name, format,...) os_signpost_interval_end(log, event_id, name, format _MXSIGNPOST_METRICS_SNAPSHOT_FORMAT, ##__VA_ARGS__, _MXSignpostMetricsSnapshot())
 #endif
 

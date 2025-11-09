@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class UISearchBar, UITableView, UIViewController, UIPopoverController;
 @protocol UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate;
 
-UIKIT_EXTERN API_DEPRECATED("UISearchDisplayController has been replaced with UISearchController", ios(3.0, 8.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_DEPRECATED("UISearchDisplayController has been replaced with UISearchController", ios(3.0, 8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UISearchDisplayController : NSObject
 
 - (instancetype)initWithSearchBar:(UISearchBar *)searchBar contentsController:(UIViewController *)viewController;
@@ -41,7 +41,7 @@ UIKIT_EXTERN API_DEPRECATED("UISearchDisplayController has been replaced with UI
 
 @end
 
-API_UNAVAILABLE(tvos)
+API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @protocol UISearchDisplayDelegate <NSObject>
 
 @optional

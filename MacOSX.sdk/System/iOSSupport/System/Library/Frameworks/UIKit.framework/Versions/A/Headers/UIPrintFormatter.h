@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class UIPrintPageRenderer;
 @class UIView, UIFont, UIColor;
 
-UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) @interface UIPrintFormatter : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIPrintFormatter : NSObject <NSCopying>
 
 @property(nullable,nonatomic,readonly,weak) UIPrintPageRenderer *printPageRenderer API_UNAVAILABLE(tvos); // default is nil. set when formatter added to a print page renderer
 - (void)removeFromPrintPageRenderer API_UNAVAILABLE(tvos);
@@ -40,7 +41,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) @interface UIPrintFor
 
 //______________________________
 
-UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) @interface UISimpleTextPrintFormatter : UIPrintFormatter {
+UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UISimpleTextPrintFormatter : UIPrintFormatter {
 }
 
 - (instancetype)initWithText:(NSString *)text;
@@ -56,7 +58,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) @interface UISimpleTe
 
 //______________________________
 
-UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) @interface UIMarkupTextPrintFormatter : UIPrintFormatter {
+UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIMarkupTextPrintFormatter : UIPrintFormatter {
 }
 
 - (instancetype)initWithMarkupText:(NSString *)markupText;
@@ -66,7 +69,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) @interface UIMarkupTe
 
 //______________________________
 
-UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) @interface UIViewPrintFormatter : UIPrintFormatter 
+UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIViewPrintFormatter : UIPrintFormatter 
 
 @property(nonatomic,readonly) UIView *view;
 

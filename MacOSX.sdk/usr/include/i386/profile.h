@@ -33,7 +33,11 @@
 #ifndef _BSD_I386_PROFILE_H_
 #define _BSD_I386_PROFILE_H_
 
+#if defined (__i386__) || defined (__x86_64__)
+
 #include <sys/appleapiopts.h>
 
+
+#endif /* defined (__i386__) || defined (__x86_64__) */
 
 #endif /* _BSD_I386_PROFILE_H_ */

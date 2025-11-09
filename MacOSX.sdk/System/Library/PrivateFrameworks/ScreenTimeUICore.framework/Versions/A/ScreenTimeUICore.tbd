@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           B97DCEEF-4E41-3380-BF47-A3661B7A8687
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           839F3151-7FA6-3AF0-AB57-B87B6BBAA0DA
+install-name:    '/System/Library/PrivateFrameworks/ScreenTimeUICore.framework/Versions/A/ScreenTimeUICore'
+current-version: 500.0.19
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ '_$s7SwiftUI5ImageV16ScreenTimeUICoreE4fromAC10Foundation4DataV_tcfC' ]
+    objc-classes:    [ STScreenTimeUICoreBundle, STUICoreDevice ]
+...

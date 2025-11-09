@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C8C6391F-4679-36B3-94ED-C5638C2DB580
+    value:           19C68C31-8D6A-394C-B931-0B06AD3E0907
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A061AAE1-4583-360F-9F57-F0DF09246AC3
+    value:           EE40CB71-5C69-3035-A631-4C2F8BC05D36
 install-name:    '/usr/lib/libFDRDecode.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _AMFDRDecodeCertificate, _AMFDRDecodeCheckCertRevocation, 
                        _AMFDRDecodeCheckProducerIDRevocation, _AMFDRDecodeCombined, 
                        _AMFDRDecodeEvaluateTrust, _AMFDRDecodeEvaluateTrustCombined, 
@@ -27,5 +27,6 @@ exports:
                        _AMFDRDecodeMultiSealingResponse, _AMFDRDecodeOfflineBlob, 
                        _AMFDRDecodeParseDERLengthFromBuffer, _AMFDRDecodeSealingRequest, 
                        _AMFDRDecodeTrustEvaluation, _AMFDRDecodeTrustObject, _AMFDRDecodeVerifyCertIssuer, 
-                       _AMFDRDecodeVerifySealingManifest, _AMFDRDecodeVerifySealingRequest ]
+                       _AMFDRDecodeVerifyCertIssuerNoRevocation, _AMFDRDecodeVerifySealingManifest, 
+                       _AMFDRDecodeVerifySealingRequest ]
 ...

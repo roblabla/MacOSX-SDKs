@@ -134,12 +134,18 @@ IMAGEIO_EXTERN bool CGImageDestinationFinalize(CGImageDestinationRef _iio_Nonnul
  * destination. */
 IMAGEIO_EXTERN void CGImageDestinationAddImageAndMetadata(CGImageDestinationRef _iio_Nonnull idst, CGImageRef _iio_Nonnull image, CGImageMetadataRef _iio_Nullable metadata, CFDictionaryRef _iio_Nullable options)  IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
+CF_ASSUME_NONNULL_BEGIN
+/* For CGImageDestinationAddImageFromSource: when set to kCFBooleanTrue, a HEIF-embedded GainMap will be preserved.
+ * If the destination image is scaled (using kCGImageDestinationImageMaxPixelSize), the GainMap will be scaled accordingly.
+ * The value should be kCFBooleanTrue or kCFBooleanFalse
+ * Defaults to kCFBooleanFalse
+ */
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationPreserveGainMap IMAGEIO_AVAILABLE_STARTING(11.0, 14.1);
+
 /**
  ** Keys which may be used in the 'options' dictionary of
  ** "CGImageDestinationCopyImageSource" to effect the output.
  **/
-
-CF_ASSUME_NONNULL_BEGIN
 
 /* Set the metadata tags for the image destination. If present, the value of
  * this key is a CGImageMetadataRef. By default, all EXIF, IPTC, and XMP tags
@@ -158,9 +164,9 @@ IMAGEIO_EXTERN const CFStringRef kCGImageDestinationMetadata IMAGEIO_AVAILABLE_S
 IMAGEIO_EXTERN const CFStringRef kCGImageDestinationMergeMetadata IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
 /* XMP data will not be written to the destination. If used in conjunction with 
- * kCGImageDestinationMetadata, EXIF and/or IPTC tags will be preserved, but 
- * an XMP packet will not be written to the file. If present, the value for 
- * this key is a CFBooleanRef. The default is kCFBooleanFalse.
+ * kCGImageDestinationMetadata, EXIF tags will be preserved, but
+ * an XMP packet will not be written to the file. IPTC tags, that are stored in XMP, will not be preserved.
+ * If present, the value for this key is a CFBooleanRef. The default is kCFBooleanFalse.
  */
 IMAGEIO_EXTERN const CFStringRef kCGImageMetadataShouldExcludeXMP IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
@@ -186,13 +192,6 @@ IMAGEIO_EXTERN const CFStringRef kCGImageDestinationDateTime IMAGEIO_AVAILABLE_S
  */
 IMAGEIO_EXTERN const CFStringRef kCGImageDestinationOrientation IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
-/* For CGImageDestinationAddImageFromSource: when set to kCFBooleanTrue, a HEIF-embedded GainMap will be preserved.
- * If the destination image is scaled (using kCGImageDestinationImageMaxPixelSize), the GainMap will be scaled accordingly.
- * The value should be kCFBooleanTrue or kCFBooleanFalse
- * Defaults to kCFBooleanFalse
- */
-IMAGEIO_EXTERN const CFStringRef kCGImageDestinationPreserveGainMap IMAGEIO_AVAILABLE_STARTING(11.0, 14.1);
-
 CF_ASSUME_NONNULL_END
 
 /* Losslessly copies the contents of the image source, 'isrc', to the 
@@ -207,12 +206,12 @@ CF_ASSUME_NONNULL_END
  * for this operation. */
 IMAGEIO_EXTERN bool CGImageDestinationCopyImageSource(CGImageDestinationRef _iio_Nonnull idst, CGImageSourceRef _iio_Nonnull isrc, CFDictionaryRef _iio_Nullable options, _iio_Nullable CFErrorRef * _iio_Nullable err) IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
-/* Depth data support for JPEG, HEIF, and DNG images.
+/* Auxiliary data support for JPEG, HEIF, and DNG images.
  * The auxiliaryDataInfoDictionary should contain:
- *   - the depth data (CFDataRef) - (kCGImageAuxiliaryDataInfoData),
- *   - the depth data description (CFDictionary) - (kCGImageAuxiliaryDataInfoDataDescription)
+ *   - the auxiliary data (CFDataRef) - (kCGImageAuxiliaryDataInfoData),
+ *   - the auxiliary data description (CFDictionary) - (kCGImageAuxiliaryDataInfoDataDescription)
  *   - metadata (CGImageMetadataRef) - (kCGImageAuxiliaryDataInfoMetadata)
- * To add depth data to an image, call CGImageDestinationAddAuxiliaryDataInfo() after adding the CGImage to the CGImageDestinationRef.
+ * To add auxiliary data to an image, call CGImageDestinationAddAuxiliaryDataInfo() after adding the CGImage to the CGImageDestinationRef.
  */
 IMAGEIO_EXTERN void CGImageDestinationAddAuxiliaryDataInfo(CGImageDestinationRef _iio_Nonnull idst, CFStringRef _iio_Nonnull auxiliaryImageDataType, CFDictionaryRef _iio_Nonnull auxiliaryDataInfoDictionary ) IMAGEIO_AVAILABLE_STARTING(10.13, 11.0);
 

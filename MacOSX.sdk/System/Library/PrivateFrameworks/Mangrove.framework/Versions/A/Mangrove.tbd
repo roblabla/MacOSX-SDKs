@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D710AB65-999A-320F-9DA7-0ECF95A3D4A4
+    value:           4E630F55-92AB-33DB-9273-6CB1E6882813
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0FA7CFB6-DBDA-376C-AAB6-621AF1AA0BCB
+    value:           3040ACD8-408E-3258-B45D-4675FCAA479F
 install-name:    '/System/Library/PrivateFrameworks/Mangrove.framework/Versions/A/Mangrove'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -10,11 +10,11 @@
 typedef NS_ENUM(NSInteger, INDeleteTasksTaskUnsupportedReason) {
     INDeleteTasksTaskUnsupportedReasonNoTasksFound = 1,
     INDeleteTasksTaskUnsupportedReasonNoTasksInApp,
-} API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macos, tvos);
+} API_DEPRECATED("INDeleteTasksTaskUnsupportedReason is deprecated. There is no replacement.", ios(13.0, 15.0), watchos(6.0, 8.0)) API_UNAVAILABLE(macos, tvos);
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(13.0), watchos(6.0))
+API_DEPRECATED("INDeleteTasksTaskResolutionResult is deprecated. There is no replacement.", ios(13.0, 15.0), watchos(6.0, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INDeleteTasksTaskResolutionResult : INTaskResolutionResult
 

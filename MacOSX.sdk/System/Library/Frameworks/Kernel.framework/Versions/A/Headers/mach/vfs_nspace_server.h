@@ -49,9 +49,10 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	vfs_nspace_MSG_COUNT
-#define	vfs_nspace_MSG_COUNT	3
+#define	vfs_nspace_MSG_COUNT	7
 #endif	/* vfs_nspace_MSG_COUNT */
 
+#include <Availability.h>
 #include <mach/std_types.h>
 #include <mach/mig.h>
 #include <mach/mig.h>
@@ -112,6 +113,78 @@ kern_return_t receive_nspace_resolve_path
 	int *xxx_rdar44371223
 );
 
+/* Routine vfs_resolve_file */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+MIG_SERVER_ROUTINE
+kern_return_t receive_vfs_resolve_file
+(
+	mach_port_t nspace_handler_port,
+	uint32_t req_id,
+	uint32_t pid,
+	uint32_t op,
+	int64_t offset,
+	int64_t size,
+	nspace_path_t path
+);
+
+/* Routine vfs_resolve_dir */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+MIG_SERVER_ROUTINE
+kern_return_t receive_vfs_resolve_dir
+(
+	mach_port_t nspace_handler_port,
+	uint32_t req_id,
+	uint32_t pid,
+	uint32_t op,
+	nspace_name_t file_name,
+	nspace_path_t path
+);
+
+/* Routine vfs_resolve_file_with_audit_token */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+MIG_SERVER_ROUTINE
+kern_return_t receive_vfs_resolve_file_with_audit_token
+(
+	mach_port_t nspace_handler_port,
+	uint32_t req_id,
+	uint32_t op,
+	int64_t offset,
+	int64_t size,
+	nspace_path_t path,
+	audit_token_t req_atoken,
+	audit_token_t atoken
+);
+
+/* Routine vfs_resolve_dir_with_audit_token */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+MIG_SERVER_ROUTINE
+kern_return_t receive_vfs_resolve_dir_with_audit_token
+(
+	mach_port_t nspace_handler_port,
+	uint32_t req_id,
+	uint32_t op,
+	nspace_name_t file_name,
+	nspace_path_t path,
+	audit_token_t req_atoken,
+	audit_token_t atoken
+);
+
 #ifdef	mig_external
 mig_external
 #else
@@ -138,7 +211,7 @@ extern const struct receive_vfs_nspace_subsystem {
 	unsigned int	maxsize;	/* Max msg size */
 	vm_address_t	reserved;	/* Reserved */
 	struct routine_descriptor	/*Array of routine descriptors */
-		routine[3];
+		routine[7];
 } receive_vfs_nspace_subsystem;
 
 /* typedefs for all requests */
@@ -185,6 +258,72 @@ extern const struct receive_vfs_nspace_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		uint32_t req_id;
+		uint32_t pid;
+		uint32_t op;
+		int64_t offset;
+		int64_t size;
+		nspace_path_t path;
+	} __Request__vfs_resolve_file_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		uint32_t req_id;
+		uint32_t pid;
+		uint32_t op;
+		nspace_name_t file_name;
+		nspace_path_t path;
+	} __Request__vfs_resolve_dir_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		uint32_t req_id;
+		uint32_t op;
+		int64_t offset;
+		int64_t size;
+		nspace_path_t path;
+		audit_token_t req_atoken;
+	} __Request__vfs_resolve_file_with_audit_token_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		uint32_t req_id;
+		uint32_t op;
+		nspace_name_t file_name;
+		nspace_path_t path;
+		audit_token_t req_atoken;
+	} __Request__vfs_resolve_dir_with_audit_token_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Request__vfs_nspace_subsystem__defined */
 
 
@@ -196,6 +335,10 @@ union __RequestUnion__receive_vfs_nspace_subsystem {
 	__Request__nspace_handle_t Request_nspace_handle;
 	__Request__nspace_resolve_cancel_t Request_nspace_resolve_cancel;
 	__Request__nspace_resolve_path_t Request_nspace_resolve_path;
+	__Request__vfs_resolve_file_t Request_vfs_resolve_file;
+	__Request__vfs_resolve_dir_t Request_vfs_resolve_dir;
+	__Request__vfs_resolve_file_with_audit_token_t Request_vfs_resolve_file_with_audit_token;
+	__Request__vfs_resolve_dir_with_audit_token_t Request_vfs_resolve_dir_with_audit_token;
 };
 #endif /* __RequestUnion__receive_vfs_nspace_subsystem__defined */
 /* typedefs for all replies */
@@ -240,6 +383,54 @@ union __RequestUnion__receive_vfs_nspace_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__vfs_resolve_file_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__vfs_resolve_dir_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__vfs_resolve_file_with_audit_token_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__vfs_resolve_dir_with_audit_token_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Reply__vfs_nspace_subsystem__defined */
 
 
@@ -251,6 +442,10 @@ union __ReplyUnion__receive_vfs_nspace_subsystem {
 	__Reply__nspace_handle_t Reply_nspace_handle;
 	__Reply__nspace_resolve_cancel_t Reply_nspace_resolve_cancel;
 	__Reply__nspace_resolve_path_t Reply_nspace_resolve_path;
+	__Reply__vfs_resolve_file_t Reply_vfs_resolve_file;
+	__Reply__vfs_resolve_dir_t Reply_vfs_resolve_dir;
+	__Reply__vfs_resolve_file_with_audit_token_t Reply_vfs_resolve_file_with_audit_token;
+	__Reply__vfs_resolve_dir_with_audit_token_t Reply_vfs_resolve_dir_with_audit_token;
 };
 #endif /* __ReplyUnion__receive_vfs_nspace_subsystem__defined */
 
@@ -258,7 +453,11 @@ union __ReplyUnion__receive_vfs_nspace_subsystem {
 #define subsystem_to_name_map_vfs_nspace \
     { "nspace_handle", 867800 },\
     { "nspace_resolve_cancel", 867801 },\
-    { "nspace_resolve_path", 867802 }
+    { "nspace_resolve_path", 867802 },\
+    { "vfs_resolve_file", 867803 },\
+    { "vfs_resolve_dir", 867804 },\
+    { "vfs_resolve_file_with_audit_token", 867805 },\
+    { "vfs_resolve_dir_with_audit_token", 867806 }
 #endif
 
 #ifdef __AfterMigServerHeader

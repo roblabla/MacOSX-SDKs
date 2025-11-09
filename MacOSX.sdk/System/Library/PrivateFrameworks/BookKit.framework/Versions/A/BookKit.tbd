@@ -1,30 +1,38 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           75A3AED2-24E8-3AD1-A3BB-844F1E470549
+    value:           8EC76D17-207D-36E7-A5AD-3BD2AF6960E8
+  - target:          x86_64-maccatalyst
+    value:           8EC76D17-207D-36E7-A5AD-3BD2AF6960E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5B425AC3-9939-3D47-BCE7-3425CB91C8AB
+    value:           E1EBB8AD-13B7-3B65-9D35-C5E3337DF1D4
+  - target:          arm64e-maccatalyst
+    value:           E1EBB8AD-13B7-3B65-9D35-C5E3337DF1D4
 install-name:    '/System/Library/PrivateFrameworks/BookKit.framework/Versions/A/BookKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _BKAgentDynamicCast, _BKAgentLog, _BKApplicationAccessBundleID, 
                        _BKDisableBookStorePreferenceKey, _BKPreferenceApplicationID, 
                        _BKRestrictExplicitContentPreferenceKey, _BookKitVersionNumber, 
                        _BookKitVersionString, _kBKAgentErrorAssetNotFound, _kBKAgentErrorDomain, 
                        _kBKAgentErrorNoAssetID, _kBKAgentLibraryUpdatedNotification, 
                        _kBKAgentMetadataKeyAccountID, _kBKAgentMetadataKeyArtistName, 
-                       _kBKAgentMetadataKeyBookDescription, _kBKAgentMetadataKeyBookLongDescription, 
-                       _kBKAgentMetadataKeyBookmarkTime, _kBKAgentMetadataKeyBookmarkTimeUpdatedDate, 
-                       _kBKAgentMetadataKeyChapterTimes, _kBKAgentMetadataKeyCoverImageData, 
-                       _kBKAgentMetadataKeyCoverImageDataReplaced, _kBKAgentMetadataKeyDescription, 
-                       _kBKAgentMetadataKeyDesktopSupportLevel, _kBKAgentMetadataKeyDisplayName, 
-                       _kBKAgentMetadataKeyFileSize, _kBKAgentMetadataKeyGeneratedItemId, 
-                       _kBKAgentMetadataKeyGenerationCount, _kBKAgentMetadataKeyGenre, 
-                       _kBKAgentMetadataKeyGrouping, _kBKAgentMetadataKeyHumanVersionNumber, 
+                       _kBKAgentMetadataKeyBookDescription, _kBKAgentMetadataKeyBookInfo, 
+                       _kBKAgentMetadataKeyBookLongDescription, _kBKAgentMetadataKeyBookmarkTime, 
+                       _kBKAgentMetadataKeyBookmarkTimeUpdatedDate, _kBKAgentMetadataKeyChapterTimes, 
+                       _kBKAgentMetadataKeyCoverImageData, _kBKAgentMetadataKeyCoverImageDataReplaced, 
+                       _kBKAgentMetadataKeyDescription, _kBKAgentMetadataKeyDesktopSupportLevel, 
+                       _kBKAgentMetadataKeyDisplayName, _kBKAgentMetadataKeyFileSize, 
+                       _kBKAgentMetadataKeyGeneratedItemId, _kBKAgentMetadataKeyGenerationCount, 
+                       _kBKAgentMetadataKeyGenre, _kBKAgentMetadataKeyGrouping, _kBKAgentMetadataKeyHumanVersionNumber, 
                        _kBKAgentMetadataKeyIsLocked, _kBKAgentMetadataKeyIsProof, 
                        _kBKAgentMetadataKeyIsSample, _kBKAgentMetadataKeyItemId, 
                        _kBKAgentMetadataKeyItemName, _kBKAgentMetadataKeyItemSortName, 

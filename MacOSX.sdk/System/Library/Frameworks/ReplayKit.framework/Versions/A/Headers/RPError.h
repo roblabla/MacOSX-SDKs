@@ -48,6 +48,7 @@ typedef NS_ENUM (NSInteger, RPRecordingErrorCode) {
     RPRecordingErrorFailedToStartCaptureStack = -5833,              // Failed to start due to video/audio capture failure
     RPRecordingErrorInvalidParameter = -5834,                       // Failed due to invalid parameter
     RPRecordingErrorFilePermissions = -5835,                        // Failed due to file permissions error
+    RPRecordingErrorExportClipToURLInProgress = -5836,              // Failed due to clip export in progress
     RPRecordingErrorCodeSuccessful = 0                              // Successfully saved video to camera roll
 };
 

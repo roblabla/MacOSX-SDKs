@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3527EC40-E19E-3400-9A6A-1A5457947C94
+    value:           45B4423F-FC56-37A1-ACBC-DDEFBB437DEF
   - target:          x86_64-maccatalyst
-    value:           3527EC40-E19E-3400-9A6A-1A5457947C94
+    value:           45B4423F-FC56-37A1-ACBC-DDEFBB437DEF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           24D5CB6D-BF21-3A93-966A-5BE0CD6BFB53
+    value:           11503F87-AD79-3AEB-BB09-475358567C73
   - target:          arm64e-maccatalyst
-    value:           24D5CB6D-BF21-3A93-966A-5BE0CD6BFB53
+    value:           11503F87-AD79-3AEB-BB09-475358567C73
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSRayIntersector.framework/Versions/A/MPSRayIntersector'
-current-version: 124.4.12
+current-version: 125.0.30
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ MetalPerformanceShaders ]
+    clients:         [ MPSImage, MetalPerformanceShaders ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MPSAccelerationStructureBuilderCPU, _MPSAccelerationStructureBuilderGPU, 
                        _MPSAccelerationStructureGPUBuilderTypeDefault, _MPSAccelerationStructureGPUBuilderTypeFast, 
@@ -35,9 +35,13 @@ exports:
                        _MPSAccelerationStructureOptionMinFragmentsPerLeaf, _MPSAccelerationStructureOptionMinimumOverlap, 
                        _MPSAccelerationStructureOptionNodeLayout, _MPSAccelerationStructureOptionSplitHeuristic, 
                        _MPSAccelerationStructureSplitHeuristicBinnedSAH, _MPSAccelerationStructureSplitHeuristicBinnedSpatialSAH, 
-                       _MPSAccelerationStructureSplitHeuristicObjectMedian, _MPSAccelerationStructureSplitHeuristicSAH ]
-    objc-classes:    [ MPSAccelerationStructure, MPSAccelerationStructureGroup, MPSInstanceAccelerationStructure, 
-                       MPSPolygonAccelerationStructure, MPSPolygonBuffer, MPSQuadrilateralAccelerationStructure, 
-                       MPSRayIntersector, MPSSVGF, MPSSVGFDefaultTextureAllocator, 
-                       MPSSVGFDenoiser, MPSTemporalAA, MPSTriangleAccelerationStructure ]
+                       _MPSAccelerationStructureSplitHeuristicObjectMedian, _MPSAccelerationStructureSplitHeuristicSAH, 
+                       __Z20MPSRayDataTypeStride14MPSRayDataType, __Z29MPSIntersectionDataTypeStride23MPSIntersectionDataType ]
+    objc-classes:    [ MPSAccelerationStructure, MPSAccelerationStructureGroup, MPSCPUAccelerationStructure, 
+                       MPSCPUAccelerationStructureDescriptor, MPSCPUAccelerationStructureGeometryDescriptor, 
+                       MPSCPUAccelerationStructureTriangleGeometryDescriptor, MPSCPUPrimitiveAccelerationStructureDescriptor, 
+                       MPSCPURayIntersector, MPSInstanceAccelerationStructure, MPSPolygonAccelerationStructure, 
+                       MPSPolygonBuffer, MPSQuadrilateralAccelerationStructure, MPSRayIntersector, 
+                       MPSSVGF, MPSSVGFDefaultTextureAllocator, MPSSVGFDenoiser, 
+                       MPSTemporalAA, MPSTriangleAccelerationStructure ]
 ...

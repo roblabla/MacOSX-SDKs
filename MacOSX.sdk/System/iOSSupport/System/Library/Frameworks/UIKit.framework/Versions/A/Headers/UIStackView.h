@@ -120,7 +120,7 @@ static const CGFloat UIStackViewSpacingUseSystem API_AVAILABLE(ios(11.0),tvos(11
  viewForFirst/LastBaselineLayout from that stack view.
  */
 NS_ASSUME_NONNULL_BEGIN
-UIKIT_EXTERN API_AVAILABLE(ios(9.0))
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 @interface UIStackView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;

@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-AS_EXTERN API_AVAILABLE(ios(12.0), macos(10.15), tvos(13.0), watchos(6.0))
+AS_EXTERN API_AVAILABLE(ios(12.0), macos(10.15), tvos(15.0), watchos(6.0))
 @interface ASPasswordCredential : NSObject <ASAuthorizationCredential>
 
 /*! @abstract Initializes an ASPasswordCredential object.

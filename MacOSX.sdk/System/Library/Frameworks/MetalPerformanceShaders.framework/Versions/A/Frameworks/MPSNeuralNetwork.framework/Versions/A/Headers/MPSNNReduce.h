@@ -46,6 +46,13 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(
  */
 @property (readwrite, nonatomic) MTLRegion clipRectSource;
 
+/*!
+ * @discussion Since the clipRectSource replaces the MPSCNNKernel offset parameter for this filter,
+ *             this property is deprecated..
+ */
+@property (readwrite, nonatomic) MPSOffset offset    MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use clipRectSource property instead",
+                                                                                           macos(10.13.4, 10.15), ios(11.3, 13.0), tvos(11.3, 13.0) )  MPS_UNAVAILABLE(macCatalyst);
+
 /*
  * You must use one of the sub-classes of MPSNNReduceUnary.
  */
@@ -469,6 +476,20 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(
  *
  */
 @property (readwrite, nonatomic) MTLRegion secondarySourceClipRect;
+
+/*!
+ * @discussion Since the clipRectSource replaces the MPSCNNKernel offset parameter for this filter,
+ *             this property is deprecated..
+ */
+@property (readwrite, nonatomic) MPSOffset primaryOffset    MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use primarySourceClipRect property instead",
+                                                                                           macos(10.13.4, 10.15), ios(11.3, 13.0), tvos(11.3, 13.0) )  MPS_UNAVAILABLE(macCatalyst);
+
+/*!
+ * @discussion Since the clipRectSource replaces the MPSCNNKernel offset parameter for this filter,
+ *             this property is deprecated..
+ */
+@property (readwrite, nonatomic) MPSOffset secondaryOffset    MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use secondarySourceClipRect property instead",
+                                                                                           macos(10.13.4, 10.15), ios(11.3, 13.0), tvos(11.3, 13.0) )  MPS_UNAVAILABLE(macCatalyst);
 
 /*
  * You must use one of the sub-classes of MPSNNReduceBinary.

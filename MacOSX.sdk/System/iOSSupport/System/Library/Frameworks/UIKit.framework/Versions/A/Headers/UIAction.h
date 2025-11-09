@@ -13,11 +13,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NSString *UIActionIdentifier NS_SWIFT_NAME(UIAction.Identifier) NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0));
 
+/// Default action identifiers for paste variants
+UIKIT_EXTERN const UIActionIdentifier UIActionPaste API_AVAILABLE(ios(15.0));
+UIKIT_EXTERN const UIActionIdentifier UIActionPasteAndMatchStyle API_AVAILABLE(ios(15.0));
+UIKIT_EXTERN const UIActionIdentifier UIActionPasteAndGo API_AVAILABLE(ios(15.0));
+UIKIT_EXTERN const UIActionIdentifier UIActionPasteAndSearch API_AVAILABLE(ios(15.0));
+
 @class UIAction;
 
 typedef void (^UIActionHandler)(__kindof UIAction *action);
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIAction : UIMenuElement
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UIAction : UIMenuElement
 
 /// Short display title.
 @property (nonatomic, copy) NSString *title;
@@ -67,6 +74,23 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIAction : UIMenuElement
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@protocol UIKeyInput;
+@class UIResponder;
+
+@interface UIAction (UICaptureTextFromCameraSupporting)
+
+/*!
+ * @abstract Creates a new UIAction for the captureTextFromCamera: standard edit action.
+ *
+ * @param responder The UIKeyInput responder to send captureTextFromCamera: to.
+ * @param identifier  The action's identifier. Pass nil to use an auto-generated identifier.
+ *
+ * @return A new UIAction.
+ */
++ (instancetype)captureTextFromCameraActionForResponder:(UIResponder<UIKeyInput> *)responder identifier:(nullable UIActionIdentifier)identifier NS_SWIFT_NAME(captureTextFromCamera(responder:identifier:)) API_AVAILABLE(ios(15.0));
 
 @end
 

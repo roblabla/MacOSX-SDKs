@@ -2,7 +2,7 @@
  *  CVImageBuffer.h
  *  CoreVideo
  *
- *  Copyright (c) 2004-2015 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2021 Apple Inc. All rights reserved.
  *
  */
  
@@ -11,7 +11,7 @@
 	@availability Mac OS X 10.4 or later, and iOS 4.0 or later
     @discussion CVImageBufferRef types are abstract and define various attachments and convenience
 		calls for retreiving image related bits of data.
-		   
+		
 */
 
 #if !defined(__COREVIDEO_CVIMAGEBUFFER_H__)
@@ -22,7 +22,7 @@
 #include <AvailabilityMacros.h>
 
 // For legacy reasons CVImageBuffer.h includes CoreGraphics.h and ApplicationServices.h
-#if TARGET_OS_IPHONE || 0
+#if TARGET_OS_IPHONE || TARGET_OS_WIN32
 #include <CoreGraphics/CoreGraphics.h>
 #else
 #include <ApplicationServices/ApplicationServices.h>
@@ -201,7 +201,7 @@ CV_EXPORT CGColorSpaceRef CV_NULLABLE CVImageBufferGetColorSpace( CVImageBufferR
 /*!
    @function   CVImageBufferCreateColorSpaceFromAttachments
    @abstract   Attempts to synthesize a CGColorSpace from an image buffer's attachments.
-   @param      attachments A CFDictionary of attachments for an image buffer, obtained using CVBufferGetAttachments().
+   @param      attachments A CFDictionary of attachments for an image buffer, obtained using CVBufferCopyAttachments().
    @result     A CGColorSpaceRef representing the color space of the buffer.
 		Returns NULL if the attachments dictionary does not contain the information required to synthesize a CGColorSpace.
    @discussion
@@ -218,6 +218,19 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferMasteringDisplayColorVolume
 
 	// CFData (4 bytes) containing big-endian data matching payload of Content Light Level Information SEI message
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferContentLightLevelInfoKey __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+
+// CFData (8 bytes) containing big-endian data matching payload of Ambient Viewing Environment SEI message
+CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferAmbientViewingEnvironmentKey API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
+	@constant    kCVImageBufferRegionOfInterestKey
+	@abstract
+		Specifies region of interest that image statistics cover. This value should be a CGRect dictionary created by CGRectCreateDictionaryRepresentation(). The origin in the CGRect represents the x,y coordinate within the CVPixelBuffer where region of interest is located.
+	@discussion
+		
+*/
+CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferRegionOfInterestKey           API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
 
 #if defined(__cplusplus)
 }

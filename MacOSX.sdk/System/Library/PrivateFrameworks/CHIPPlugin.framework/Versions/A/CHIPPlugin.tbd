@@ -1,0 +1,25 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           60C64343-2587-303E-9CEA-D0792853D9B0
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C08163B8-AC17-31F4-8BD2-C887770E6096
+install-name:    '/System/Library/PrivateFrameworks/CHIPPlugin.framework/Versions/A/CHIPPlugin'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _CHIPPluginProtocolOperationErrorDomain ]
+    objc-classes:    [ CHIPAccessoryServer, CHIPAccessoryServerBrowser, CHIPAccessoryServerBuilder, 
+                       CHIPAccessoryServerFactory, CHIPPluginAccessoryReachabilityManager, 
+                       CHIPPluginAccessorySetupPayload, CHIPPluginClusterDescription, 
+                       CHIPPluginFileManager, CHIPPluginHAPServiceDescription, CHIPPluginMutableAccessorySetupPayload, 
+                       CHIPPluginMutableVendorMetadata, CHIPPluginMutableVendorMetadataProduct, 
+                       CHIPPluginMutableVendorMetadataVendor, CHIPPluginPairing, 
+                       CHIPPluginProtocolMap, CHIPPluginProtocolOperation, CHIPPluginProtocolOperationManager, 
+                       CHIPPluginResidentStateManager, CHIPPluginStorage, CHIPPluginUtilities, 
+                       CHIPPluginVendorMetadata, CHIPPluginVendorMetadataProduct, 
+                       CHIPPluginVendorMetadataStore, CHIPPluginVendorMetadataVendor ]
+...

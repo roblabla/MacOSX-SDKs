@@ -82,7 +82,12 @@ struct IORPCMessage {
 };
 typedef struct IORPCMessage IORPCMessage;
 
-extern "C" IORPCMessage *
+#if defined(__cplusplus)
+extern "C"
+#else
+extern
+#endif
+IORPCMessage *
 IORPCMessageFromMach(IORPCMessageMach * msg, bool reply);
 
 struct IORPCMessageErrorReturnContent {
@@ -90,6 +95,7 @@ struct IORPCMessageErrorReturnContent {
 	kern_return_t result;
 	uint32_t      pad;
 };
+typedef struct IORPCMessageErrorReturnContent IORPCMessageErrorReturnContent;
 
 #pragma pack(4)
 struct IORPCMessageErrorReturn {
@@ -99,9 +105,11 @@ struct IORPCMessageErrorReturn {
 #pragma pack()
 
 
+#if defined(__cplusplus)
 class OSMetaClassBase;
 struct IORPC;
 typedef kern_return_t (*OSDispatchMethod)(OSMetaClassBase * self, const IORPC rpc);
+#endif
 
 struct IORPC {
 	IORPCMessageMach * message;

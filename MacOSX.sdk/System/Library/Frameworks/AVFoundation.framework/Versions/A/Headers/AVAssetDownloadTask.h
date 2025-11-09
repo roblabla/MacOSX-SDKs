@@ -12,9 +12,13 @@
 #import <Foundation/Foundation.h>
 #import	<AVFoundation/AVAsset.h>
 #import <AVFoundation/AVMediaSelection.h>
+#import <AVFoundation/AVAssetVariant.h>
 #import <CoreMedia/CMTimeRange.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class AVAssetVariantQualifier;
+@class AVAssetDownloadContentConfiguration;
 
 // Keys for options dictionary for use with -[AVAssetDownloadURLSession assetDownloadTaskWithURLAsset:assetTitle:assetArtworkData:options:]
 
@@ -86,7 +90,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
  @abstract		The file URL supplied to the download task upon initialization.
  @discussion	This URL may have been appended with the appropriate extension for the asset.
 */
-@property (nonatomic, readonly) NSURL *destinationURL API_DEPRECATED("No longer supported", ios(9.0, 10.0)) API_UNAVAILABLE(tvos, watchos) API_UNAVAILABLE(macos);
+@property (nonatomic, readonly) NSURL *destinationURL API_DEPRECATED("Use the URL property of URLAsset instead", ios(9.0, 10.0)) API_UNAVAILABLE(tvos, watchos) API_UNAVAILABLE(macos);
 
 /*!
  @property		options
@@ -106,6 +110,83 @@ AV_INIT_UNAVAILABLE
 @property (readonly, copy) NSURLRequest *originalRequest NS_UNAVAILABLE;
 @property (readonly, copy) NSURLRequest *currentRequest NS_UNAVAILABLE;
 @property (readonly, copy) NSURLResponse *response NS_UNAVAILABLE;
+
+@end
+
+/*!
+ @class			AVAssetDownloadConfiguration
+ @abstract		Configuration parameters for the download task.
+ @discussion	Download configuration consists of primary and auxiliary content configurations. Primary content configuration represents the primary set of renditions essential for offline playback. Auxiliary content configurations represent additional configurations to complement the primary.
+				For example, the primary content configuration may represent stereo audio renditions and auxiliary configuration may represent complementing multichannel audio renditions.
+ 
+				It is important to configure your download configuration object appropriately before using it to create a download task. Download task makes a copy of the configuration settings you provide and use those settings to configure the task. Once configured, the task object ignores any changes you make to the NSURLSessionConfiguration object. If you need to modify your settings, you must update the download configuration object and use it to create a new download task object.
+ */
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+@interface AVAssetDownloadConfiguration : NSObject
+
+AV_INIT_UNAVAILABLE
+
+/*!
+ @method		downloadConfigurationWithAsset:title:
+ @abstract		Creates and initializes a download configuration object.
+ @discussion	This method will throw an exception if AVURLAsset has been invalidated.
+ @param			asset
+				The asset to create the download configuration for.
+ @param			title
+				A human readable title for this asset, expected to be as suitable as possible for the user's preferred languages. Will show up in the usage pane of the settings app.
+*/
++ (instancetype)downloadConfigurationWithAsset:(AVURLAsset *)asset title:(NSString *)title;
+
+/*!
+ @property		assetArtworkData
+ @abstract		NSData representing artwork data for this asset. Optional. May be displayed, for example, by the usage pane of the Settings app. Must work with +[UIImage imageWithData:].
+*/
+@property (nonatomic, copy, nullable) NSData *artworkData;
+
+/*!
+ @property		primaryContentConfiguration
+ @abstract		The primary content for the download.
+*/
+@property (nonatomic, readonly) AVAssetDownloadContentConfiguration *primaryContentConfiguration;
+
+/*!
+ @property		auxiliaryContentConfigurations
+ @abstract		The auxiliary content for the download. Optional.
+ @discussion	By default, auxiliaryContentConfigurations will have one or more default auxiliary content configurations. These content configurations can be augmented with additional content configurations or removed entirely if no auxiliary content is desired.
+*/
+@property (nonatomic, copy) NSArray <AVAssetDownloadContentConfiguration *> *auxiliaryContentConfigurations;
+
+/*!
+ @property		optimizesAuxiliaryContentConfigurations
+ @abstract		Optimizes auxiliary content selection depending on the primary to minimize total number of video renditions downloaded. True by default.
+ @discussion	For example, if the primary content configuration represents stereo renditions and auxiliary content configuration represents multichannel audio renditions, auxiliary multichannel variant will be chosen so as to avoid downloading duplicate video renditions.
+*/
+@property (nonatomic) BOOL optimizesAuxiliaryContentConfigurations;
+
+@end
+
+/*!
+ @class			AVAssetDownloadContentConfiguration
+ @abstract		Represents the configuration consisting of variant and the variant's media options.
+*/
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+@interface AVAssetDownloadContentConfiguration : NSObject <NSCopying>
+
+/*!
+ @property		variantQualifiers
+ @abstract		An array of variant qualifiers.
+ @discussion	The qualifiers are expected to be added in the preferential order and will be evaluated in that order until the qualifier matches one or more AVAssetVariants. Only those variants which can be played on the current device configuration will be initially chosen for evaluation. If there is more than one match, automatic variant selection will be used to choose among the matched.
+				If a variant qualifier is constructed to explicitly choose a variant, no evaluation is performed and the variant provided will be downloaded as is, even if it is not playable on current device configuration.
+				If a variant qualifier has not been provided, or if the variant qualifier when evaluated does not match any of the variants which can be played according to the current device configuration, automatic variant selection will be used.
+*/
+@property (nonatomic, copy) NSArray<AVAssetVariantQualifier *> *variantQualifiers;
+
+/*!
+ @property		mediaSelections
+ @abstract		An array of media selections obtained from the AVAsset.
+ @discussion	If a media selection is not provided, automatic media selection associated with the asset will be used.
+*/
+@property (nonatomic, copy) NSArray<AVMediaSelection *> *mediaSelections;
 
 @end
 
@@ -223,8 +304,20 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
 */
 - (void)URLSession:(NSURLSession *)session aggregateAssetDownloadTask:(AVAggregateAssetDownloadTask *)aggregateAssetDownloadTask didLoadTimeRange:(CMTimeRange)timeRange totalTimeRangesLoaded:(NSArray<NSValue *> *)loadedTimeRanges timeRangeExpectedToLoad:(CMTimeRange)timeRangeExpectedToLoad forMediaSelection:(AVMediaSelection *)mediaSelection API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
-@end
+@optional
+/*!
+ @method		URLSession:assetDownloadTask:willDownloadVariants:
+ @abstract		Sent when a download task has completed the variant selection.
+ @param			session
+				The session the asset download task is on.
+ @param			assetDownloadTask
+				The asset download task.
+ @param			variants
+				The variants chosen. Depends on the environmental condition when the download starts.
+*/
+- (void)URLSession:(NSURLSession *)session assetDownloadTask:(AVAssetDownloadTask *)assetDownloadTask willDownloadVariants:(NSArray <AVAssetVariant *> *)variants API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
+@end
 
 /*!
  @class			AVAssetDownloadURLSession
@@ -238,7 +331,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
  @abstract		Creates and initializes an AVAssetDownloadURLSession for use with AVAssetDownloadTasks.
  @param			configuration
 				The configuration for this URLSession. Must be a background configuration.
- @param			assetDownloadDelegate
+ @param			delegate
 				The delegate object to handle asset download progress updates and other session related events.
  @param			delegateQueue
 				The queue to receive delegate callbacks on. If nil, a serial queue will be provided.
@@ -256,7 +349,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
  @param			options
 				See AVAssetDownloadTask*Key above. Configures non-default behavior for the download task. Using this parameter is required for downloading non-default media selections for HLS assets.
 */
-- (nullable AVAssetDownloadTask *)assetDownloadTaskWithURLAsset:(AVURLAsset *)URLAsset destinationURL:(NSURL *)destinationURL options:(nullable NSDictionary<NSString *, id> *)options API_DEPRECATED("No longer supported", ios(9.0, 10.0)) API_UNAVAILABLE(tvos, watchos) API_UNAVAILABLE(macos);
+- (nullable AVAssetDownloadTask *)assetDownloadTaskWithURLAsset:(AVURLAsset *)URLAsset destinationURL:(NSURL *)destinationURL options:(nullable NSDictionary<NSString *, id> *)options API_DEPRECATED("Use assetDownloadTaskWithURLAsset:assetTitle:assetArtworkData:options: instead", ios(9.0, 10.0)) API_UNAVAILABLE(tvos, watchos) API_UNAVAILABLE(macos);
 
 /*!
  @method		assetDownloadTaskWithURLAsset:assetTitle:assetArtworkData:options:
@@ -264,9 +357,9 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
  @discussion	This method may return nil if the URLSession has been invalidated.
  @param			URLAsset
 				The AVURLAsset to download locally.
- @param			assetTitle
+ @param			title
 				A human readable title for this asset, expected to be as suitable as possible for the user's preferred languages. Will show up in the usage pane of the settings app.
- @param			assetArtworkData
+ @param			artworkData
 				NSData representing artwork data for this asset. Optional. Will show up in the usage pane of the settings app. Must work with +[UIImage imageWithData:].
  @param			options
 				See AVAssetDownloadTask*Key above. Configures non-default behavior for the download task. Using this parameter is required for downloading non-default media selections for HLS assets.
@@ -281,14 +374,23 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
 				The AVURLAsset to download locally.
  @param			mediaSelections
 				A list of AVMediaSelections. Each AVMediaSelection will correspond to a childAssetDownloadTask. Use -[AVAsset allMediaSelections] to download all AVMediaSelections on this AVAsset.
- @param			assetTitle
+ @param			title
 				A human readable title for this asset, expected to be as suitable as possible for the user's preferred languages. Will show up in the usage pane of the settings app.
- @param			assetArtworkData
+ @param			artworkData
 				Artwork data for this asset. Optional. Will show up in the usage pane of the settings app.
  @param			options
 				See AVAssetDownloadTask*Key above. Configures non-default behavior for the download task.
 */
 - (nullable AVAggregateAssetDownloadTask *)aggregateAssetDownloadTaskWithURLAsset:(AVURLAsset *)URLAsset mediaSelections:(NSArray <AVMediaSelection *> *)mediaSelections assetTitle:(NSString *)title assetArtworkData:(nullable NSData *)artworkData options:(nullable NSDictionary<NSString *, id> *)options API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @method		assetDownloadTaskWithConfiguration:
+ @abstract		Creates and initializes an AVAssetDownloadTask to be used with this AVAssetDownloadURLSession.
+ @discussion	This method will throw an exception if the URLSession has been invalidated.
+ @param			downloadConfiguration
+				The configuration to be used to create the download task.
+*/
+- (AVAssetDownloadTask *)assetDownloadTaskWithConfiguration:(AVAssetDownloadConfiguration *)downloadConfiguration API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 // only AVAssetDownloadTasks can be created with AVAssetDownloadURLSession
 AV_INIT_UNAVAILABLE

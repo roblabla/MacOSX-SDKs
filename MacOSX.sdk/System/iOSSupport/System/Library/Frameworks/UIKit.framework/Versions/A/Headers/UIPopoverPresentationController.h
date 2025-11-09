@@ -13,9 +13,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class UIPopoverPresentationController;
+@class UIPopoverPresentationController, UISheetPresentationController;
 
-API_UNAVAILABLE(tvos)
+API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @protocol UIPopoverPresentationControllerDelegate <UIAdaptivePresentationControllerDelegate>
 @optional
 
@@ -34,7 +34,8 @@ API_UNAVAILABLE(tvos)
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) @interface UIPopoverPresentationController : UIPresentationController
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIPopoverPresentationController : UIPresentationController
 
 @property (nullable, nonatomic, weak) id <UIPopoverPresentationControllerDelegate> delegate;
 
@@ -73,6 +74,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) @interface UIPopoverP
 // Clients may customize the popover background chrome by providing a class which subclasses `UIPopoverBackgroundView`
 // and which implements the required instance and class methods on that class.
 @property (nullable, nonatomic, readwrite, strong) Class <UIPopoverBackgroundViewMethods> popoverBackgroundViewClass;
+
+// The UISheetPresentationController instance this popover will adapt to in compact size classes. Access this instance to customize or adjust the adaptive sheet.
+@property (nonatomic, readonly, strong) UISheetPresentationController *adaptiveSheetPresentationController API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 

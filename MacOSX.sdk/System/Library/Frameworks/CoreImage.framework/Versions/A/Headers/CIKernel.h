@@ -54,6 +54,14 @@ NS_CLASS_AVAILABLE(10_4, 8_0)
  */
 + (nullable NSArray<CIKernel *> *)kernelsWithString:(NSString *)string  CIKL_DEPRECATED(10_4,10_14, 8_0,12_0);
 
+/* The string argument should contain a program in the Metal Language.
+ * All the kernel functions in the program are converted to instances of a CIKernel objects
+ * and returned in an array.
+ * The array will contain instances of CIKernel, CIColorKernel or CIWarpKernel classes.
+ * The kernels will only be usable on Metal-backed CIContext on a device that 'supportsDynamicLibraries'
+ */
++ (nullable NSArray<CIKernel *> *)kernelsWithMetalString:(NSString *)source error:(NSError **)error NS_AVAILABLE(12_0, 15_0);
+
 /* The string argument should contain a program with one kernel.
  * On OSX 10.10 and before, this returns a CIKernel object.
  * On OSX after 10.10, this returns a CIKernel, CIColorKernel, or CIWarpKernel object.

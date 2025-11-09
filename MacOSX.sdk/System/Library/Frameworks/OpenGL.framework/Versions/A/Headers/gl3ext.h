@@ -6,6 +6,7 @@
 #define __gl3ext_h_
 
 #include <OpenGL/gltypes.h>
+#include <OpenGL/OpenGLAvailability.h>
 
 #ifdef __cplusplus
 extern "C" {

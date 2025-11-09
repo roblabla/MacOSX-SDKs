@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIViewController;
 
-UIKIT_EXTERN API_AVAILABLE(ios(5.0)) @interface UIStoryboardSegue : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(5.0)) NS_SWIFT_UI_ACTOR
+@interface UIStoryboardSegue : NSObject
 
 // Convenience constructor for returning a segue that performs a handler block in its -perform method.
 + (instancetype)segueWithIdentifier:(nullable NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination performHandler:(void (^)(void))performHandler API_AVAILABLE(ios(6.0));
@@ -33,7 +34,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(5.0)) @interface UIStoryboardSegue : NSObject
 
 /// Encapsulates the source of a prospective unwind segue.
 /// You do not create instances of this class directly. Instead, UIKit creates an instance of this class and sends -allowedChildViewControllersForUnwindingFromSource: to each ancestor of the sourceViewController until it finds a view controller which returns YES from -canPerformUnwindSegueAction:fromViewController:sender:.
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIStoryboardUnwindSegueSource : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@interface UIStoryboardUnwindSegueSource : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 

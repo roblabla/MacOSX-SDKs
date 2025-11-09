@@ -11,10 +11,12 @@
 
 @protocol GKTurnBasedMatchmakerViewControllerDelegate;
 
+#import <Foundation/Foundation.h>
+#import <GameKit/GKMatchmakerViewController.h>
+
 /// View controller to manage turn-based matches, invite friends and perform auto-matching. Present modally from the top view controller.
 #if TARGET_OS_IPHONE
 
-#import <Foundation/Foundation.h> // NS_ASSUME_NONNULL_BEGIN
 #import <UIKit/UINavigationController.h> // UINavigationController
 
 NS_ASSUME_NONNULL_BEGIN
@@ -33,6 +35,9 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 
 @property (nonatomic, nullable, readwrite, weak) id<GKTurnBasedMatchmakerViewControllerDelegate> turnBasedMatchmakerDelegate;
 @property (nonatomic, readwrite, assign) BOOL showExistingMatches; /// defaults to YES
+
+/// This controls the mode of matchmaking to support in the UI (all, nearby only, automatch only, invite only). Throws an exception if you can not set to the desired mode (due to restrictions)
+@property (nonatomic, assign) GKMatchmakingMode matchmakingMode API_AVAILABLE(ios(15), macos(12), tvos(15));
 
 - (id)initWithMatchRequest:(GKMatchRequest *)request;
 

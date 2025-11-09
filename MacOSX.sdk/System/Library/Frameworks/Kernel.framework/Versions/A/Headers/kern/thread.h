@@ -95,7 +95,6 @@
 
 #include <kern/kern_types.h>
 #include <vm/vm_kern.h>
-
 #include <sys/cdefs.h>
 
 

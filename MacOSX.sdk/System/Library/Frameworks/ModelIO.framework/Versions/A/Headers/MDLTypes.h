@@ -25,8 +25,11 @@ MDL_EXPORT NSString * __nonnull const kUTTypePolygon API_AVAILABLE(macos(10.11),
 /* Stereolithography file format, file extension STL, UTI public.standard-tesselated-geometry-format */
 MDL_EXPORT NSString * __nonnull const kUTTypeStereolithography API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0));
 
-/* Universal Scene Description file format, file extension USDA or USDB, UTI com.pixar.universal-scene-description */
+/* Universal Scene Description file format, file extension USDA or USDC, UTI com.pixar.universal-scene-description */
 MDL_EXPORT NSString * __nonnull const kUTTypeUniversalSceneDescription API_AVAILABLE(macos(10.12), ios(10.0), tvos(9.0));
+
+/* Universal Scene Description Mobile file format, file extension USDZ, UTI com.pixar.universal-scene-description-mobile */
+MDL_EXPORT NSString * __nonnull const kUTTypeUniversalSceneDescriptionMobile API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)); 
 
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, MDLIndexBitDepth)

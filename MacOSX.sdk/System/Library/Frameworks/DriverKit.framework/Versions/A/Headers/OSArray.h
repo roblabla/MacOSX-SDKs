@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from OSArray.iig */
+/* iig(DriverKit-191) generated from OSArray.iig */
 
 /* OSArray.iig:1-36 */
 /*
@@ -107,7 +107,7 @@ public:
 
     /*!
      * @brief       Iterates the array calling a callback block for each member.
-     * @discussion  Calls the block with each member of the array, starting at index zero. The block must not modify the array during iteration. If the block returns true the iteration continues for all members, returning false halts the iteration early.
+     * @discussion  Calls the block with each member of the array, starting at index zero. The block must not modify the array during iteration. If the block returns false the iteration continues for all members, returning true halts the iteration early.
      * @param       block The block to invoke.
      * @return      false if the callback block returned false, otherwise true (including if the array is empty).
      */
@@ -390,12 +390,21 @@ class OSArray : public OSCollection, public OSArrayInterface
 
 #if !KERNEL
 public:
+#ifdef OSArray_DECLARE_IVARS
+OSArray_DECLARE_IVARS
+#else /* OSArray_DECLARE_IVARS */
     union
     {
         OSArray_IVars * ivars;
         OSArray_LocalIVars * lvars;
     };
+#endif /* OSArray_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gOSArrayMetaClass; };
+#endif /* KERNEL */
 
     using super = OSCollection;
 

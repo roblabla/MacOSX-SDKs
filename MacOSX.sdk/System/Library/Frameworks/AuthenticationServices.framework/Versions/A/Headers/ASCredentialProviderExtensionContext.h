@@ -23,7 +23,9 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  non-expiration invocation of the completionHandler.
  @discussion Calling this method will eventually dismiss the associated view controller.
  */
-- (void)completeRequestWithSelectedCredential:(ASPasswordCredential *)credential completionHandler:(void(^ _Nullable)(BOOL expired))completionHandler;
+- (void)completeRequestWithSelectedCredential:(ASPasswordCredential *)credential completionHandler:(void(^ _Nullable)(BOOL expired))completionHandler
+    NS_SWIFT_DISABLE_ASYNC
+    ;
 
 /*! @abstract Complete the request to configure the extension.
  @discussion Calling this method will eventually dismiss the associated view controller.

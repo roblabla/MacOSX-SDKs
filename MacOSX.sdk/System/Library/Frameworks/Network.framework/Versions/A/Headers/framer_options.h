@@ -350,6 +350,13 @@ typedef size_t (^nw_framer_input_handler_t)(nw_framer_t framer);
  *		run, the implementation should call functions like
  *		nw_framer_parse_input() and nw_framer_deliver_input().
  *
+ *		Input events are edge triggered. The input_handler block
+ *		should continue to call nw_framer_parse_input()
+ *		until nw_framer_parse_input() can no longer produce
+ *		enough bytes to satisfy the request, or the protocol
+ *		needs to wait for some other event to continue processing
+ *		later.
+ *
  *		This setter is required, and must only be set from within
  *		the invocation of a nw_framer_start_handler_t.
  *

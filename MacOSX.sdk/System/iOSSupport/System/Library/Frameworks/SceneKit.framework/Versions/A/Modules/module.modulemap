@@ -1,4 +1,4 @@
-framework module SceneKit {
+framework module SceneKit [system] {
   umbrella header "SceneKit.h"
   
   export *

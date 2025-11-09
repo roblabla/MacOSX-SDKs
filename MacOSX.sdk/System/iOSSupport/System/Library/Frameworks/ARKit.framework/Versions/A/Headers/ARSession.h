@@ -2,12 +2,13 @@
 //  ARSession.h
 //  ARKit
 //
-//  Copyright © 2016-2017 Apple Inc. All rights reserved.
+//  Copyright © 2016-2021 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <ARKit/ARConfiguration.h>
 #import <ARKit/ARGeoTrackingTypes.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class ARRaycastQuery;
 @class ARRaycastResult;
 @class ARTrackedRaycast;
+
+
 
 @protocol ARSessionDelegate;
 
@@ -77,6 +80,7 @@ API_AVAILABLE(ios(11.0))
  The configuration currently being used by the session.
  */
 @property (nonatomic, copy, nullable, readonly) ARConfiguration *configuration;
+
 
 
 /**
@@ -181,6 +185,10 @@ NS_SWIFT_NAME(createReferenceObject(transform:center:extent:completionHandler:))
  */
 - (nullable ARTrackedRaycast *)trackedRaycast:(ARRaycastQuery *)query updateHandler:(void (^)(NSArray<ARRaycastResult *> *))updateHandler API_AVAILABLE(ios(13.0));
 
+
+#pragma mark - Scene Graph Query
+
+
 #pragma mark - Collaboration
 
 /**
@@ -230,6 +238,7 @@ API_AVAILABLE(ios(11.0))
  */
 - (void)session:(ARSession *)session didFailWithError:(NSError *)error;
 
+
 /**
  This is called when the camera’s tracking state has changed.
  
@@ -237,6 +246,7 @@ API_AVAILABLE(ios(11.0))
  @param camera The camera that changed tracking states.
  */
 - (void)session:(ARSession *)session cameraDidChangeTrackingState:(ARCamera *)camera;
+
 
 /**
  This is called when a session is interrupted.
@@ -346,6 +356,7 @@ API_AVAILABLE(ios(11.0))
  @param anchors An array of removed anchors.
  */
 - (void)session:(ARSession *)session didRemoveAnchors:(NSArray<__kindof ARAnchor*>*)anchors;
+
 
 @end
 

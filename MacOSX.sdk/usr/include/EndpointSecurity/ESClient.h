@@ -95,10 +95,14 @@ es_respond_result_t
 es_respond_flags_result(es_client_t * _Nonnull client, const es_message_t * _Nonnull message, uint32_t authorized_flags, bool cache);
 
 /**
- * Suppress events relating to the process with `audit_token`
+ * @brief Suppress all events from the process described by the given `audit_token`
+ *
  * @param client The client for which events will be suppressed
  * @param audit_token The audit token of the process for which events will be suppressed
+ *
  * @return es_return_t indicating success or error
+ *
+ * @see es_mute_process_events
  */
 OS_EXPORT
 API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
@@ -106,15 +110,53 @@ es_return_t
 es_mute_process(es_client_t * _Nonnull client, const audit_token_t * _Nonnull audit_token);
 
 /**
- * Unmute a process muted with es_mute_process
+ * @brief Suppress a subset of events from the process described by the given `audit_token`
+ *
+ * @param client The client for which events will be suppressed
+ * @param audit_token The audit token of the process for which events will be suppressed
+ * @param events Array of event types for which the audit_token should be muted.
+ * @param event_count The number of items in the `events` array.
+ *
+ * @return es_return_t A value indicating whether or not the process was successfully muted.
+ *
+ * @see es_mute_process
+ */
+OS_EXPORT
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+es_return_t
+es_mute_process_events(es_client_t * _Nonnull client, const audit_token_t * _Nonnull audit_token, const es_event_type_t * _Nonnull events, size_t event_count);
+
+/**
+ * @brief Unmute a process for all event types
+ *
  * @param client The client for which the process will be unmuted
  * @param audit_token The audit token of the process to be unmuted
+ *
  * @return es_return_t indicating success or error
+ *
+ * @see es_unmute_process_events
  */
 OS_EXPORT
 API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 es_return_t
 es_unmute_process(es_client_t * _Nonnull client, const audit_token_t *_Nonnull audit_token);
+
+/**
+ * @brief Unmute a process for a subset of event types.
+ *
+ * @param client The client for which events will be unmuted
+ * @param audit_token The audit token of the process for which events will be unmuted
+ * @param events Array of event types to unmute for the process
+ * @param event_count The number of items in the `events` array.
+ *
+ * @return es_return_t A value indicating whether or not the process was successfully unmuted.
+ *
+ * @see es_unmute_path
+ */
+OS_EXPORT
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+es_return_t
+es_unmute_process_events(es_client_t * _Nonnull client, const audit_token_t * _Nonnull audit_token, const es_event_type_t * _Nonnull events, size_t event_count);
 
 /**
  * List muted processes
@@ -130,29 +172,104 @@ es_unmute_process(es_client_t * _Nonnull client, const audit_token_t *_Nonnull a
  *       respective processes.
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_DEPRECATED("Please use es_muted_processes_events.", macos(10.15, 12.0))
+API_UNAVAILABLE(ios, tvos, watchos)
 es_return_t
 es_muted_processes(es_client_t * _Nonnull client, size_t * _Nonnull count, audit_token_t * _Nonnull * _Nullable audit_tokens);
 
 /**
+ * @brief Retrieve a list of all muted processes.
+ *
+ * @param client The es_client_t for which the muted processes will be retrieved.
+ * @param muted_processes OUT param the will contain newly created memory describing the set of
+ *        muted processes. This memory must be deleted using `es_release_muted_processes`.
+ *
+ * @return es_return_t A value indicating whether or not the list of muted processes were
+ *         successfully retrieved.
+ *
+ * @see es_release_muted_processes
+ */
+OS_EXPORT
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+es_return_t
+es_muted_processes_events(es_client_t * _Nonnull client, es_muted_processes_t * _Nullable * _Nonnull muted_processes);
+
+/**
+ * @brief Delete a set of muted processes obtained from `es_muted_processes_events`, freeing resources.
+ *
+ * @param muted_processes A set of muted processes to delete.
+ *
+ * @see es_muted_processes_all_events
+ */
+OS_EXPORT
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+void
+es_release_muted_processes(es_muted_processes_t * _Nonnull muted_processes);
+
+/**
+ * @brief Suppress all events from executables matching a path.
+ *
+ * @param client The es_client_t for which the path will be muted.
+ * @param path The path to mute.
+ * @param type Describes the type of the `path` parameter, either a prefix path or literal path.
+ *
+ * @return es_return_t A value indicating whether or not the path was successfully muted.
+ *
+ * @see es_mute_path_events
+ */
+OS_EXPORT
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+es_return_t
+es_mute_path(es_client_t * _Nonnull client, const char * _Nonnull path, es_mute_path_type_t type);
+
+/**
+ * @brief Suppress a subset of events from executables matching a path.
+ *
+ * @param client The es_client_t for which the path will be muted.
+ * @param path The path to mute.
+ * @param type Describes the type of the `path` parameter, either a prefix path or literal path.
+ * @param events Array of event types for which the path should be muted.
+ * @param event_count The number of items in the `events` array.
+ *
+ * @return es_return_t A value indicating whether or not the path was successfully muted.
+ *
+ * @see es_mute_path
+ */
+OS_EXPORT
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+es_return_t
+es_mute_path_events(es_client_t * _Nonnull client, const char * _Nonnull path, es_mute_path_type_t type, const es_event_type_t * _Nonnull events, size_t event_count);
+
+/**
  * Suppress events from executables matching a path prefix
+ *
+ * @deprecated Please use `es_mute_path` or `es_mute_path_events`
+ *
  * @param client The client for which events will be suppressed
  * @param path_prefix The path against which supressed executables must prefix match
  * @return es_return_t indicating success or error
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_DEPRECATED("Please use es_mute_path or es_mute_path_events.", macos(10.15, 12.0))
+API_UNAVAILABLE(ios, tvos, watchos)
 es_return_t
 es_mute_path_prefix(es_client_t * _Nonnull client, const char * _Nonnull path_prefix);
 
 /**
  * Suppress events from executables matching a path literal
+ *
+ * @deprecated Please use `es_mute_path` or `es_mute_path_events`
+ *
  * @param client The client for which events will be suppressed
  * @param path_literal The path against which supressed executables must match exactly
  * @return es_return_t indicating success or error
+ *
+ * @see es_mute_path
+ * @see es_mute_path_events
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_DEPRECATED("Please use es_mute_path or es_mute_path_events.", macos(10.15, 12.0))
+API_UNAVAILABLE(ios, tvos, watchos)
 es_return_t
 es_mute_path_literal(es_client_t * _Nonnull client, const char * _Nonnull path_literal);
 
@@ -165,6 +282,69 @@ OS_EXPORT
 API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 es_return_t
 es_unmute_all_paths(es_client_t * _Nonnull client);
+
+/**
+ * @brief Unmute a path for all event types.
+ *
+ * @param client The es_client_t for which the path will be unmuted.
+ * @param path The path to unmute.
+ * @param type Describes the type of the `path` parameter, either a prefix path or literal path.
+ *
+ * @return es_return_t A value indicating whether or not the path was successfully unmuted.
+ *
+ * @see es_unmute_path_events
+ */
+OS_EXPORT
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+es_return_t
+es_unmute_path(es_client_t * _Nonnull client, const char * _Nonnull path, es_mute_path_type_t type);
+
+/**
+ * @brief Unmute a path for a subset of event types.
+ *
+ * @param client The es_client_t for which the path will be unmuted.
+ * @param path The path to unmute.
+ * @param type Describes the type of the `path` parameter, either a prefix path or literal path.
+ * @param events Array of event types for which the path should be unmuted.
+ * @param event_count The number of items in the `events` array.
+ *
+ * @return es_return_t A value indicating whether or not the path was successfully unmuted.
+ *
+ * @see es_unmute_path
+ */
+OS_EXPORT
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+es_return_t
+es_unmute_path_events(es_client_t * _Nonnull client, const char * _Nonnull path, es_mute_path_type_t type,
+		const es_event_type_t * _Nonnull events, size_t event_count);
+
+/**
+ * @brief Retrieve a list of all muted paths.
+ *
+ * @param client The es_client_t for which the muted paths will be retrieved.
+ * @param muted_paths OUT param the will contain newly created memory describing the set of
+ *        muted paths. This memory must be deleted using `es_release_muted_paths`.
+ *
+ * @return es_return_t A value indicating whether or not the list of muted paths were successfully retrieved.
+ *
+ * @see es_release_muted_paths
+ */
+OS_EXPORT
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+es_return_t
+es_muted_paths_events(es_client_t * _Nonnull client, es_muted_paths_t * _Nonnull * _Nullable muted_paths);
+
+/**
+ * @brief Delete a set of muted paths obtained from `es_muted_paths_events`, freeing resources.
+ *
+ * @param muted_paths A set of muted paths to delete.
+ *
+ * @see es_muted_paths_events
+ */
+OS_EXPORT
+API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+void
+es_release_muted_paths(es_muted_paths_t * _Nonnull muted_paths);
 
 /**
  * Clear all cached results for all clients.
@@ -201,9 +381,22 @@ typedef void (^es_handler_block_t)(es_client_t * _Nonnull, const es_message_t * 
  *		  	   The application calling this interface must also be approved by users via Transparency, Consent & Control
  *		  	   (TCC) mechanisms using the Privacy Preferences pane and adding the application to Full Disk Access.
  *		  	   When a new client is successfully created, all cached results are automatically cleared.
+ *
+ * @note When a new client is initialized, there will be a set of paths and a subset of `es_event_type_t` events that are
+ *       automatically muted by default. Generally, most AUTH event variants are muted but NOTIFY event variants will
+ *       still be sent to the client. The set of paths muted by default are ones that can have an extremely negative impact to
+ *       end users if their AUTH events are not allowed in a timely manner (for example, executable paths for processes
+ *       that are monitored by the watchdogd daemon). It is important to understand that this list is *not* exhaustive and
+ *       developers using the EndpointSecurity framework can still interfere with critical system components and must use
+ *       caution to limit user impact. The set of default muted paths and event types may change across macOS releases.
+ *       It is possible to both inspect and unmute the set of default muted paths and associated event types using the
+ *       appropriate mute-related API, however it is not recommended to unmute these items.
+ *
  * @see es_retain_message
  * @see es_release_message
  * @see es_new_client_result_t
+ * @see es_muted_paths_events
+ * @see es_unmute_path_events
  */
 OS_EXPORT
 API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)

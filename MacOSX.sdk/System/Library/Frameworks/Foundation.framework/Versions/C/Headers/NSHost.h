@@ -6,9 +6,18 @@
 
 @class NSString, NSArray<ObjectType>, NSMutableArray;
 
+/**
+ * DEPRECATION NOTICE
+ *
+ * If you’re using `NSHost` to resolve DNS names so that you can connect to a
+ * service, switch to a connect-by-name API, for example, `nw_connection`.
+ *
+ * If you have other DNS resolution needs, switch to <dns_sd.h>.
+ */
+
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos)
+API_DEPRECATED("Use Network framework instead, see deprecation notice in <Foundation/NSHost.h>", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NSHost : NSObject {
 @private
     NSArray 	*names;

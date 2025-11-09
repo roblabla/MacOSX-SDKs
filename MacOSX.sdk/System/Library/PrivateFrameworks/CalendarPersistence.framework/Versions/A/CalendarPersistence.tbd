@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C71A802D-0A01-3C81-BB68-771CCDB3FB9C
+    value:           3FA0A278-8A28-3C3D-BA9F-826AC69A5CFC
   - target:          x86_64-maccatalyst
-    value:           C71A802D-0A01-3C81-BB68-771CCDB3FB9C
+    value:           3FA0A278-8A28-3C3D-BA9F-826AC69A5CFC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1EDC0C19-937F-3256-AA8A-09743F36F519
+    value:           E998E648-EB5B-3206-A891-577FC56A6EBF
   - target:          arm64e-maccatalyst
-    value:           1EDC0C19-937F-3256-AA8A-09743F36F519
+    value:           E998E648-EB5B-3206-A891-577FC56A6EBF
 install-name:    '/System/Library/PrivateFrameworks/CalendarPersistence.framework/Versions/A/CalendarPersistence'
-current-version: 1071.4.2
+current-version: 1090
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -233,39 +233,40 @@ exports:
                        _II_COMMENTS_KEY, _II_END_KEY, _II_EVENT_TITLE_KEY, _II_LOCATION_KEY, 
                        _II_NOTE_KEY, _II_ORGANIZER_KEY, _II_PROPOSAL_KEY, _II_REPEAT_END_KEY, 
                        _II_REPEAT_FREQ_KEY, _II_START_DATE_KEY, _II_START_KEY, _II_START_TIME_KEY, 
-                       _II_TIME_ZONE_KEY, _II_URL_KEY, _LOCAL_MESSAGE_PREFIX, _PREV_ADDRESS_KEY, 
-                       _PREV_DISPLAY_NAME_KEY, _PREV_FIRST_NAME_KEY, _PREV_INDIVIDUAL_TYPE, 
-                       _PREV_LAST_NAME_KEY, _PREV_LOCATION_TYPE, _PREV_LOGIN_KEY, 
-                       _PREV_RESOURCE_TYPE, _PREV_TYPE_KEY, _QueueNSError, _RefreshCalendarConflictNotification, 
-                       _UploadDropBoxFileQueueableType, __ISDCreateUUID, _calFTPReadCallback, 
-                       _calFTPWriteCallback, _calcdate_absoluteday, _calcdate_absoluteday_for_year, 
-                       _calcdate_absoluteday_for_year_month, _calcdate_add_deltadate, 
-                       _calcdate_add_seconds, _calcdate_daycount_in_month, _calcdate_delta_ymdhms_with_flags, 
-                       _calcdate_diff_hms_and_return_day_carry, _calcdate_fill_ymd_with_absoluteday, 
-                       _calcdate_is_after, _calcdate_is_before, _calcdate_is_equal, 
-                       _calcdate_is_leap_year, _calcdate_normalize_hms, _calcdate_normalize_ymd, 
-                       _calcdate_seconds_for_date, _calcdate_weekday, _calcdate_yearday, 
-                       _checkOrCreatePath, _cleanupTempFiles, _compareWeekDay, _concatBufferWithCRLF, 
-                       _createPath, _davCompatibleFilenameForFilename, _exitWithStatus, 
-                       _explodeEntityID, _explodeOccurrenceID, _forgeEntityID, _forgeOccurrenceID, 
-                       _forgeOccurrenceIDFromParts, _forgeUID, _generateFilenameForUID, 
-                       _getNewUID, _getStringLocalUUID, _getStringUUID, _insureSet, 
-                       _isMainApp, _kCALSTR_XAPPLE_attachmentid_param, _kCALSTR_XAPPLE_auto_refresh_prop, 
-                       _kCALSTR_XAPPLE_autoarchived_param, _kCALSTR_XAPPLE_calendar_color_prop, 
-                       _kCALSTR_XAPPLE_changekey_prop, _kCALSTR_XAPPLE_ews_itemid_prop, 
-                       _kCALSTR_XAPPLE_ews_permission_prop, _kCALSTR_XAPPLE_filename_param, 
-                       _kCALSTR_XAPPLE_inviter_name_param, _kCALSTR_XAPPLE_needs_server_confirmation_prop, 
-                       _kCALSTR_XAPPLE_self_invited_param, _kCALSTR_XAPPLE_sort_order_prop, 
-                       _kCALSTR_XCS_attendee_comment_prop, _kCALSTR_XCS_attendee_ref_param, 
-                       _kCALSTR_XCS_dtstamp_param, _kCALSTR_XCS_private_comment_prop, 
-                       _kCALSTR_XWR_alarmuid_prop, _kCALSTR_XWR_attendee_prop, _kCALSTR_XWR_byday_prop, 
-                       _kCALSTR_XWR_byhour_prop, _kCALSTR_XWR_byminute_prop, _kCALSTR_XWR_bymonth_prop, 
-                       _kCALSTR_XWR_bymonthday_prop, _kCALSTR_XWR_bysecond_prop, 
-                       _kCALSTR_XWR_bysetpos_prop, _kCALSTR_XWR_byweekno_prop, _kCALSTR_XWR_byyearday_prop, 
-                       _kCALSTR_XWR_cachedenddate_prop, _kCALSTR_XWR_caldesc_prop, 
-                       _kCALSTR_XWR_calname_prop, _kCALSTR_XWR_caltype_prop, _kCALSTR_XWR_cancelid_prop, 
-                       _kCALSTR_XWR_count_prop, _kCALSTR_XWR_dontschedule_prop, _kCALSTR_XWR_expiration_prop, 
-                       _kCALSTR_XWR_iconinfo_prop, _kCALSTR_XWR_interval_prop, _kCALSTR_XWR_invitationid_prop, 
+                       _II_TIME_ZONE_KEY, _II_URL_KEY, _II_VIDEOCONFERENCE_KEY, _LOCAL_MESSAGE_PREFIX, 
+                       _PREV_ADDRESS_KEY, _PREV_DISPLAY_NAME_KEY, _PREV_FIRST_NAME_KEY, 
+                       _PREV_INDIVIDUAL_TYPE, _PREV_LAST_NAME_KEY, _PREV_LOCATION_TYPE, 
+                       _PREV_LOGIN_KEY, _PREV_RESOURCE_TYPE, _PREV_TYPE_KEY, _QueueNSError, 
+                       _RefreshCalendarConflictNotification, _UploadDropBoxFileQueueableType, 
+                       __ISDCreateUUID, _calFTPReadCallback, _calFTPWriteCallback, 
+                       _calcdate_absoluteday, _calcdate_absoluteday_for_year, _calcdate_absoluteday_for_year_month, 
+                       _calcdate_add_deltadate, _calcdate_add_seconds, _calcdate_daycount_in_month, 
+                       _calcdate_delta_ymdhms_with_flags, _calcdate_diff_hms_and_return_day_carry, 
+                       _calcdate_fill_ymd_with_absoluteday, _calcdate_is_after, _calcdate_is_before, 
+                       _calcdate_is_equal, _calcdate_is_leap_year, _calcdate_normalize_hms, 
+                       _calcdate_normalize_ymd, _calcdate_seconds_for_date, _calcdate_weekday, 
+                       _calcdate_yearday, _checkOrCreatePath, _cleanupTempFiles, 
+                       _compareWeekDay, _concatBufferWithCRLF, _createPath, _davCompatibleFilenameForFilename, 
+                       _exitWithStatus, _explodeEntityID, _explodeOccurrenceID, _forgeEntityID, 
+                       _forgeOccurrenceID, _forgeOccurrenceIDFromParts, _forgeUID, 
+                       _generateFilenameForUID, _getNewUID, _getStringLocalUUID, 
+                       _getStringUUID, _insureSet, _isMainApp, _kCALSTR_XAPPLE_attachmentid_param, 
+                       _kCALSTR_XAPPLE_auto_refresh_prop, _kCALSTR_XAPPLE_autoarchived_param, 
+                       _kCALSTR_XAPPLE_calendar_color_prop, _kCALSTR_XAPPLE_changekey_prop, 
+                       _kCALSTR_XAPPLE_ews_itemid_prop, _kCALSTR_XAPPLE_ews_permission_prop, 
+                       _kCALSTR_XAPPLE_filename_param, _kCALSTR_XAPPLE_inviter_name_param, 
+                       _kCALSTR_XAPPLE_needs_server_confirmation_prop, _kCALSTR_XAPPLE_self_invited_param, 
+                       _kCALSTR_XAPPLE_sort_order_prop, _kCALSTR_XCS_attendee_comment_prop, 
+                       _kCALSTR_XCS_attendee_ref_param, _kCALSTR_XCS_dtstamp_param, 
+                       _kCALSTR_XCS_private_comment_prop, _kCALSTR_XWR_alarmuid_prop, 
+                       _kCALSTR_XWR_attendee_prop, _kCALSTR_XWR_byday_prop, _kCALSTR_XWR_byhour_prop, 
+                       _kCALSTR_XWR_byminute_prop, _kCALSTR_XWR_bymonth_prop, _kCALSTR_XWR_bymonthday_prop, 
+                       _kCALSTR_XWR_bysecond_prop, _kCALSTR_XWR_bysetpos_prop, _kCALSTR_XWR_byweekno_prop, 
+                       _kCALSTR_XWR_byyearday_prop, _kCALSTR_XWR_cachedenddate_prop, 
+                       _kCALSTR_XWR_caldesc_prop, _kCALSTR_XWR_calname_prop, _kCALSTR_XWR_caltype_prop, 
+                       _kCALSTR_XWR_cancelid_prop, _kCALSTR_XWR_count_prop, _kCALSTR_XWR_dontschedule_prop, 
+                       _kCALSTR_XWR_expiration_prop, _kCALSTR_XWR_iconinfo_prop, 
+                       _kCALSTR_XWR_interval_prop, _kCALSTR_XWR_invitationid_prop, 
                        _kCALSTR_XWR_itatst_prop, _kCALSTR_XWR_itmscl_prop, _kCALSTR_XWR_itsent_prop, 
                        _kCALSTR_XWR_lang_prop, _kCALSTR_XWR_occdateid_param, _kCALSTR_XWR_occtrigger_prop, 
                        _kCALSTR_XWR_parent_prop, _kCALSTR_XWR_relcalid_prop, _kCALSTR_XWR_rsvpneeded_prop, 
@@ -393,15 +394,15 @@ exports:
                        CalExchangeDeleteAttachmentOperation, CalExchangeDeleteFolderOperation, 
                        CalExchangeDeleteItemOperation, CalExchangeDeleteOccurrenceItemOperation, 
                        CalExchangeErrorMessage, CalExchangeFreeBusyCache, CalExchangeGetAttachmentOperation, 
-                       CalExchangeGetCalendarItemOperation, CalExchangeGetDeclinedCalendarItemOperation, 
-                       CalExchangeGetDelegatesOperation, CalExchangeGetDelegeteFolderPermissionsOperation, 
-                       CalExchangeGetEffectiveRightsOperation, CalExchangeGetGrantedDelegatesOperation, 
-                       CalExchangeGetItemOperation, CalExchangeGetMeetingRequestItemsOperation, 
-                       CalExchangeGetTaskOperation, CalExchangeGetUserAvailabilityOperation, 
-                       CalExchangeGrantedDelegateOperation, CalExchangeMoveItemOperation, 
-                       CalExchangeOperation, CalExchangePersistentOperation, CalExchangeRemoveGrantedDelegateOperation, 
-                       CalExchangeRemoveMeetingRequestItemsOperation, CalExchangeSession, 
-                       CalExchangeSyncAccountOperation, CalExchangeSyncDeletedItemsFolderOperation, 
+                       CalExchangeGetCalendarItemHTMLOperation, CalExchangeGetCalendarItemOperation, 
+                       CalExchangeGetDeclinedCalendarItemOperation, CalExchangeGetDelegatesOperation, 
+                       CalExchangeGetDelegeteFolderPermissionsOperation, CalExchangeGetEffectiveRightsOperation, 
+                       CalExchangeGetGrantedDelegatesOperation, CalExchangeGetItemOperation, 
+                       CalExchangeGetMeetingRequestItemsOperation, CalExchangeGetTaskOperation, 
+                       CalExchangeGetUserAvailabilityOperation, CalExchangeGrantedDelegateOperation, 
+                       CalExchangeMoveItemOperation, CalExchangeOperation, CalExchangePersistentOperation, 
+                       CalExchangeRemoveGrantedDelegateOperation, CalExchangeRemoveMeetingRequestItemsOperation, 
+                       CalExchangeSession, CalExchangeSyncAccountOperation, CalExchangeSyncDeletedItemsFolderOperation, 
                        CalExchangeSyncFolderItemsOperation, CalExchangeTestConnectionOperation, 
                        CalExchangeUpdateCalendarItemOperation, CalExchangeUpdateFolderOperation, 
                        CalExchangeUpdateGrantedDelegatePermissionsOperation, CalExchangeUpdateTaskOperation, 
@@ -828,9 +829,7 @@ exports:
                        CalTruthFileDataWrite._path, CalTruthFileICSWrite._document, 
                        CalTruthFileICSWrite._path, CalTruthFileOperation._disabledSuddenTermination, 
                        CalTruthFileOperation._methods, CalTruthFileRemove._isDirectory, 
-                       CalTruthFileRemove._path, CalTruthFileStore._queue, CalUserAlarmNotification._alarm, 
-                       CalUserAlarmNotification._date, CalUserAlarmNotification._isForLocation, 
-                       CalUserAlarmNotification._notification, CalUserNotificationCenter._icalCenter, 
+                       CalTruthFileRemove._path, CalTruthFileStore._queue, CalUserNotificationCenter._icalCenter, 
                        CalUserNotificationCenter._icalCenterCache, CalUserNotificationCenterCache._center, 
                        CalUserNotificationCenterCache._deliveredNotifications, CalUserNotificationCenterCache._displayedNotifications, 
                        CalUserNotificationCenterCache._scheduledNotifications, CalUserNotificationCenterHelper._alarmScan, 

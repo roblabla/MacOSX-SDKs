@@ -65,7 +65,7 @@ typedef NS_ENUM(NSInteger, OSLogEntryStoreCategory) {
     OSLogEntryStoreCategoryLongTerm14,
     OSLogEntryStoreCategoryLongTerm30,
 }
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 NS_SWIFT_NAME(OSLogEntry.StoreCategory);
 
 /*!
@@ -74,7 +74,7 @@ NS_SWIFT_NAME(OSLogEntry.StoreCategory);
  * @abstract
  * A single entry from the unified logging system.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 OS_EXPORT
 @interface OSLogEntry : NSObject
 
@@ -84,7 +84,8 @@ OS_EXPORT
  * @abstract
  * The fully formatted message for the entry.
  */
-@property (nonatomic, readonly) NSString *composedMessage;
+@property (nonatomic, readonly) NSString *composedMessage
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property date
@@ -92,7 +93,8 @@ OS_EXPORT
  * @abstract
  * The timestamp of the entry.
  */
-@property (nonatomic, readonly) NSDate *date;
+@property (nonatomic, readonly) NSDate *date
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property storeCategory
@@ -100,7 +102,8 @@ OS_EXPORT
  * @abstract
  * This entry's storage tag. See OSLogEntryStoreCategory.
  */
-@property (nonatomic, readonly) OSLogEntryStoreCategory storeCategory;
+@property (nonatomic, readonly) OSLogEntryStoreCategory storeCategory
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 
@@ -112,7 +115,7 @@ OS_EXPORT
  * that are generated from a process; they have metadata about
  * the originator.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 OS_EXPORT
 @protocol OSLogEntryFromProcess
 
@@ -122,7 +125,8 @@ OS_EXPORT
  * @abstract
  * The activity ID associated with the entry.
  */
-@property (nonatomic, readonly) os_activity_id_t activityIdentifier;
+@property (nonatomic, readonly) os_activity_id_t activityIdentifier
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property process
@@ -130,7 +134,8 @@ OS_EXPORT
  * @abstract
  * The name of the process that made the entry.
  */
-@property (nonatomic, readonly) NSString *process;
+@property (nonatomic, readonly) NSString *process
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property processIdentifier
@@ -138,7 +143,8 @@ OS_EXPORT
  * @abstract
  * The pid of the process that made the entry.
  */
-@property (nonatomic, readonly) pid_t processIdentifier;
+@property (nonatomic, readonly) pid_t processIdentifier
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property sender
@@ -146,7 +152,8 @@ OS_EXPORT
  * @abstract
  * The name of the binary image that made the entry.
  */
-@property (nonatomic, readonly) NSString *sender;
+@property (nonatomic, readonly) NSString *sender
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property threadIdentifier
@@ -154,7 +161,8 @@ OS_EXPORT
  * @abstract
  * The tid of the thread that made the entry.
  */
-@property (nonatomic, readonly) uint64_t threadIdentifier;
+@property (nonatomic, readonly) uint64_t threadIdentifier
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 
@@ -165,7 +173,7 @@ OS_EXPORT
  * Entry subclasses conforming to this protocol represent
  * entries that were made using a handle and a format string.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 OS_EXPORT
 @protocol OSLogEntryWithPayload
 
@@ -175,7 +183,8 @@ OS_EXPORT
  * @abstract
  * The category from the os_log_t handle used.
  */
-@property (nonatomic, readonly) NSString *category;
+@property (nonatomic, readonly) NSString *category
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property components
@@ -183,7 +192,8 @@ OS_EXPORT
  * @abstract
  * An array of the various parts of the composed message.
  */
-@property (nonatomic, readonly) NSArray<OSLogMessageComponent *> *components;
+@property (nonatomic, readonly) NSArray<OSLogMessageComponent *> *components
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property formatString
@@ -191,7 +201,8 @@ OS_EXPORT
  * @abstract
  * The format string used.
  */
-@property (nonatomic, readonly) NSString *formatString;
+@property (nonatomic, readonly) NSString *formatString
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @property subsystem
@@ -199,7 +210,13 @@ OS_EXPORT
  * @abstract
  * The subsystem of the os_log_t handle used.
  */
-@property (nonatomic, readonly) NSString *subsystem;
+@property (nonatomic, readonly) NSString *subsystem
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
+
+@end
+
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
+@interface OSLogEntry () <NSSecureCoding>
 
 @end
 

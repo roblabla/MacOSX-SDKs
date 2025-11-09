@@ -1,7 +1,7 @@
 /*
 	NSImage.h
 	Application Kit
-	Copyright (c) 1994-2019, Apple Inc.
+	Copyright (c) 1994-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -206,6 +206,9 @@ __attribute__((objc_subclassing_restricted))
 @property NSImageResizingMode resizingMode API_AVAILABLE(macos(10.10));
 
 - (nullable NSImage *)imageWithSymbolConfiguration:(NSImageSymbolConfiguration *)configuration API_AVAILABLE(macos(11.0));
+
+@property (readonly, copy) NSImageSymbolConfiguration *symbolConfiguration API_AVAILABLE(macos(12.0));
+
 @end
 
 #if !NSIMAGE_UNAVAILABLE_MACCATALYST
@@ -490,12 +493,68 @@ typedef NS_ENUM(NSInteger, NSImageSymbolScale) {
 } NS_SWIFT_NAME(NSImage.SymbolScale) API_AVAILABLE(macos(11.0));
 
 API_AVAILABLE(macos(11.0)) NS_SWIFT_NAME(NSImage.SymbolConfiguration)
-@interface NSImageSymbolConfiguration : NSObject <NSCopying>
-+ (NSImageSymbolConfiguration *)configurationWithPointSize:(CGFloat)pointSize weight:(NSFontWeight)weight scale:(NSImageSymbolScale)scale;
-+ (NSImageSymbolConfiguration *)configurationWithPointSize:(CGFloat)pointSize weight:(NSFontWeight)weight;
-+ (NSImageSymbolConfiguration *)configurationWithTextStyle:(NSFontTextStyle)style scale:(NSImageSymbolScale)scale;
-+ (NSImageSymbolConfiguration *)configurationWithTextStyle:(NSFontTextStyle)style;
-+ (NSImageSymbolConfiguration *)configurationWithScale:(NSImageSymbolScale)scale;
+@interface NSImageSymbolConfiguration : NSObject <NSCopying, NSSecureCoding>
+
++ (instancetype)configurationWithPointSize:(CGFloat)pointSize weight:(NSFontWeight)weight scale:(NSImageSymbolScale)scale;
++ (instancetype)configurationWithPointSize:(CGFloat)pointSize weight:(NSFontWeight)weight;
++ (instancetype)configurationWithTextStyle:(NSFontTextStyle)style scale:(NSImageSymbolScale)scale;
++ (instancetype)configurationWithTextStyle:(NSFontTextStyle)style;
++ (instancetype)configurationWithScale:(NSImageSymbolScale)scale;
+
+/*
+ Create a color configuration with a palette derived from one color.
+
+ A color scheme will be created based on the provided color, deriving
+ secondary and tertiary colors by reducing the intensity of the base color.
+ This is typically (but not only) accomplished by reducing opacity of the
+ primary color.
+
+ When combined with another configuration creating a palette, the
+ last specified configuration will win, overwriting the other color
+ configuration.
+
+ If the symbol doesn't have a palette-based variant, the configuration will
+ have no effect and the result will be a monochrome (templated) symbol.
+ */
++ (instancetype)configurationWithHierarchicalColor:(NSColor *)hierarchicalColor API_AVAILABLE(macos(12.0));
+
+/*
+ Create a color configuration by specifying a palette of colors.
+ The colors are used sequentially per layer: the first color for the first
+ layer, the second color for the second layer etc. This is independent of
+ the hierarchy level of the layer.
+
+ When combined with another configuration creating a palette, the
+ last specified configuration will win, overwriting the other color
+ configuration.
+
+ If the symbol doesn't have a palette-based variant, the configuration will
+ have no effect and the result will be a monochrome (templated) symbol.
+ */
++ (instancetype)configurationWithPaletteColors:(NSArray<NSColor *> *)paletteColors API_AVAILABLE(macos(12.0));
+
+/*
+ Create a configuration that specifies that the symbol should prefer
+ its multicolor variant if one exists.
+
+ This configuration can be combined with one of the palette-based
+ configurations; in that case, the symbol will use the multicolor
+ variant if one exists, or the palette variant otherwise.
+
+ If the symbol supports neither, the result will be a monochrome
+ (templated) symbol.
+ */
++ (instancetype)configurationPreferringMulticolor NS_SWIFT_NAME(preferringMulticolor()) API_AVAILABLE(macos(12.0));
+
+/*
+ Returns a new configuration object whose values are defined by
+ applying values from the provided configuration and the receiver.
+
+ Values defined by both configurations will use the provided
+ configuration's values.
+ */
+- (instancetype)configurationByApplyingConfiguration:(NSImageSymbolConfiguration *)configuration API_AVAILABLE(macos(12.0));
+
 @end
 
 API_UNAVAILABLE_END

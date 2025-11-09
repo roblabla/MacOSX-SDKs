@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           785EC427-CF1D-321F-B54C-A74B615E7F6C
+    value:           06CF2B09-C502-3705-94F6-3DD57410550E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9A89BD86-536B-3A2C-AC66-2DBBA1C2A86E
+    value:           81846D02-C2B1-3AB2-B2A7-74E0EEF0E20B
 install-name:    '/System/Library/PrivateFrameworks/AccessibilityPlatformTranslation.framework/Versions/A/AccessibilityPlatformTranslation'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -16,12 +16,7 @@ exports:
                        _AXPCustomRotorTargetElement, _AXPCustomRotorTargetRange, 
                        _AXPCustomRotorUUID, _AXPIsCatalyst, _AXPIsGoodOldAppleCatalystApp, 
                        _AXPIsiOSAppOnMac, _AXPLinkedOnOrAfterGozul, _AXPNilOrEmptyString, 
-                       _AccessibilityPlatformTranslationVersionNumber, _AccessibilityPlatformTranslationVersionString, 
-                       __AXPActionToString, __AXPAttributeToString, __AXPConvertRoleToMacRole, 
-                       __AXPConvertSubroleToMacSubrole, __AXPNotificationToString, 
-                       __ApplicationElement, __convertAXPActionToMacActionName, __convertAXPRotorTypeToMacRotorType, 
-                       __convertMacRotorDirection ]
+                       __AXPActionToString, __AXPAttributeToString, __AXPNotificationToString ]
     objc-classes:    [ AXPMacPlatformElement, AXPTranslationObject, AXPTranslator, 
-                       AXPTranslatorRequest, AXPTranslatorResponse, AXPTranslator_iOS, 
-                       AXPTranslator_macOS, AXPiOSElementData ]
+                       AXPTranslatorRequest, AXPTranslatorResponse ]
 ...

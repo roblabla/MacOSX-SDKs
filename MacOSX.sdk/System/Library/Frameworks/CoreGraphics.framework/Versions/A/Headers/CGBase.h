@@ -203,7 +203,7 @@
 #define CG_UNAVAILABLE_DESKTOP API_UNAVAILABLE(macos)
 #define CG_UNAVAILABLE_EMBEDDED API_UNAVAILABLE(ios, tvos, watchos)
 
-#if defined(CG_LINUX) || defined(TARGET_OS_LINUX)  
+#if (defined(TARGET_OS_LINUX) && TARGET_OS_LINUX) || defined(CG_LINUX)
 # undef __OSX_AVAILABLE_STARTING
 # undef __OSX_AVAILABLE_BUT_DEPRECATED
 # undef CG_AVAILABLE_STARTING
@@ -336,11 +336,13 @@
 # define CGFLOAT_IS_DOUBLE 1
 # define CGFLOAT_MIN DBL_MIN
 # define CGFLOAT_MAX DBL_MAX
+# define CGFLOAT_EPSILON DBL_EPSILON
 #else
 # define CGFLOAT_TYPE float
 # define CGFLOAT_IS_DOUBLE 0
 # define CGFLOAT_MIN FLT_MIN
 # define CGFLOAT_MAX FLT_MAX
+# define CGFLOAT_EPSILON FLT_EPSILON
 #endif
 
 /* Definition of the `CGFloat' type and `CGFLOAT_DEFINED'. */

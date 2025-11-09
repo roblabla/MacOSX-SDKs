@@ -5,6 +5,9 @@
 //  Copyright (c) 2014 Apple, Inc. All rights reserved.
 //
 
+#ifndef __PKPAYMENTAUTHORIZATIONVIEWCONTROLLER_H
+#define __PKPAYMENTAUTHORIZATIONVIEWCONTROLLER_H
+
 #import <TargetConditionals.h>
 
 #if !TARGET_OS_WATCH && !TARGET_OS_TV
@@ -75,4 +78,5 @@ NS_CLASS_AVAILABLE_MAC(11_0)
 
 NS_ASSUME_NONNULL_END
 
+#endif
 #endif

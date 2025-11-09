@@ -1,24 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B2059ADF-4228-3CA5-9024-68A48E9F7095
+    value:           4ECA5366-67E2-36D5-9297-3CC7FFDDBE9D
   - target:          x86_64-maccatalyst
-    value:           B2059ADF-4228-3CA5-9024-68A48E9F7095
+    value:           4ECA5366-67E2-36D5-9297-3CC7FFDDBE9D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C620190C-0B42-3C23-8897-BAC3805380F4
+    value:           E10C1C7E-0B61-30D6-866D-E55BE527EE9D
   - target:          arm64e-maccatalyst
-    value:           C620190C-0B42-3C23-8897-BAC3805380F4
+    value:           E10C1C7E-0B61-30D6-866D-E55BE527EE9D
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLProgrammability.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]
     symbols:         [ _PPParserAttachLLVMIR, _PPParserAttachStream, _PPParserAttachString, 
                        _PPParserBuildErrorString, _PPParserCreate, _PPParserFree, 
                        _PPParserGetErrorString, _PPParserGetImageUnitsUsed, _PPParserGetLimits, 

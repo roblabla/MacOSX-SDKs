@@ -46,7 +46,8 @@ typedef NS_OPTIONS(NSInteger, UITouchProperties) {
     UITouchPropertyLocation = (1UL << 3), // For predicted Touches
 } API_AVAILABLE(ios(9.1));
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITouch : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UITouch : NSObject
 
 @property(nonatomic,readonly) NSTimeInterval      timestamp;
 @property(nonatomic,readonly) UITouchPhase        phase;

@@ -13,7 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UICubicTimingParameters : NSObject  <UITimingCurveProvider>
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) NS_SWIFT_UI_ACTOR
+@interface UICubicTimingParameters : NSObject  <UITimingCurveProvider>
 
 @property(nonatomic, readonly) UIViewAnimationCurve animationCurve;
 @property(nonatomic, readonly) CGPoint controlPoint1;
@@ -27,7 +28,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UICubicTimingParameters : NSObj
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UISpringTimingParameters : NSObject  <UITimingCurveProvider>
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) NS_SWIFT_UI_ACTOR
+@interface UISpringTimingParameters : NSObject  <UITimingCurveProvider>
 
 @property(nonatomic, readonly) CGVector initialVelocity;
 

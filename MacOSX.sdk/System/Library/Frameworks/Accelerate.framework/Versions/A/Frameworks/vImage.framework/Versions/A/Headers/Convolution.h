@@ -3389,7 +3389,7 @@ vImageSepConvolve_Planar16U(const vImage_Buffer *src, const vImage_Buffer *dest,
 *  @param scale            This value is multiplied with the sum of weighted pixels, before the bias
 *                          is applied. For example, for normalized kernels, where the weights add to 1.0,
 *                          specifying a scale of 257 ( = 65535 / 255 ) would expand the 8-bit input
-*                          range to a full 16-bit outut range.
+*                          range to a full 16-bit output range.
 *
 *  @param bias             This value is added to the sum of weighted pixels.
 *

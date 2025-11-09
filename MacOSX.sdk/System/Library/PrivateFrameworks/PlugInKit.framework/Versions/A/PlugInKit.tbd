@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E19167D9-645C-375A-BEB7-C6EBCF7D6806
+    value:           EEA5A6A9-C8A6-3815-A8B4-92EE1285FBC8
   - target:          x86_64-maccatalyst
-    value:           E19167D9-645C-375A-BEB7-C6EBCF7D6806
+    value:           EEA5A6A9-C8A6-3815-A8B4-92EE1285FBC8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BFB6FD85-38E4-3FA7-AB55-64F9660BB7A9
+    value:           C9F3838A-DB29-3B00-A3D9-1847ED586CE2
   - target:          arm64e-maccatalyst
-    value:           BFB6FD85-38E4-3FA7-AB55-64F9660BB7A9
+    value:           C9F3838A-DB29-3B00-A3D9-1847ED586CE2
 install-name:    '/System/Library/PrivateFrameworks/PlugInKit.framework/Versions/A/PlugInKit'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -28,6 +28,7 @@ exports:
                        _PKDAccessRequest, _PKDAddRequest, _PKDAnnotateRequest, _PKDAnnotationsKey, 
                        _PKDBulkAnnotateRequest, _PKDBulkRequest, _PKDConflictsKey, 
                        _PKDDataKey, _PKDEnvironmentKey, _PKDErrorCodeKey, _PKDErrorKey, 
+                       _PKDExtensionPointNameKey, _PKDExtensionPointPlatformsKey, 
                        _PKDExtensionsKey, _PKDFindRequest, _PKDFlagsKey, _PKDIdentifierKey, 
                        _PKDLockdownRequest, _PKDMatchRequest, _PKDMatchesKey, _PKDOneShotUUIDsKey, 
                        _PKDPathsKey, _PKDPidArrayKey, _PKDPreferredLanguagesKey, 
@@ -47,20 +48,22 @@ exports:
                        _PKManagerPlugInPathKey, _PKManagerPlugInVersionKey, _PKMultipleInfoKey, 
                        _PKNotifyAnnotationChange, _PKOriginalIdentifierFormKey, _PKOverrideEntitlement, 
                        _PKOverriderFormKey, _PKOverridingFormKey, _PKPassProxyInfoKey, 
-                       _PKPathFormKey, _PKPersonaEntitlement, _PKPersonaEntitlementNoneValue, 
-                       _PKPersonaEntitlementPersonalValue, _PKPersonaEntitlementSystemValue, 
-                       _PKPlugInIsRBManagedKey, _PKPlugInKitErrorDomain, _PKPlugInKitHostInfoKey, 
-                       _PKPlugInKitInfoKey, _PKPlugInKitInfoKey_L, _PKPlugInsFormKey, 
-                       _PKPreferenceDomain, _PKPreferredLanguagesEnv, _PKPrincipalClassInfoKey, 
-                       _PKProtocolAttribute, _PKProtocolAttribute_L, _PKProtocolInfoKey, 
-                       _PKProtocolInfoKey_L, _PKRequirementFormKey, _PKSDKInfoKey, 
-                       _PKSDKInfoKey_L, _PKSDKSpecInfoKey, _PKSandboxProfileKey, 
-                       _PKServiceExtensionFormKey, _PKSharedResourcesInfoKey, _PKSubsystemsInfoKey, 
-                       _PKSystemResidentFormKey, _PKURLFormKey, _PKUUIDAttribute, 
-                       _PKUUIDFormKey, _PKUserElectionAttribute, _PKUsesEmbeddedInfoKey, 
-                       _PKVersionAnnotationsKey, _PKVersionAttribute, _PKVersionAttribute_L, 
-                       _PKVersionFormKey, _PKXPCBootstrapSubsystemOptions, ___PLUGINKIT_CALLING_OUT_TO_CLIENT_SUBSYSTEM_FOR_BEGINUSING__, 
+                       _PKPathFormKey, _PKPersonaEntitlement, _PKPersonaEntitlementHostValue, 
+                       _PKPersonaEntitlementNoneValue, _PKPersonaEntitlementPersonalValue, 
+                       _PKPersonaEntitlementSystemValue, _PKPlugInIsRBManagedKey, 
+                       _PKPlugInKitErrorDomain, _PKPlugInKitHostInfoKey, _PKPlugInKitInfoKey, 
+                       _PKPlugInKitInfoKey_L, _PKPlugInsFormKey, _PKPreferenceDomain, 
+                       _PKPreferredLanguagesEnv, _PKPrincipalClassInfoKey, _PKProtocolAttribute, 
+                       _PKProtocolAttribute_L, _PKProtocolInfoKey, _PKProtocolInfoKey_L, 
+                       _PKRequirementFormKey, _PKSDKInfoKey, _PKSDKInfoKey_L, _PKSDKSpecInfoKey, 
+                       _PKSandboxProfileKey, _PKServiceExtensionFormKey, _PKSharedResourcesInfoKey, 
+                       _PKShouldTerminateOnHoldKey, _PKSubsystemsInfoKey, _PKSystemResidentFormKey, 
+                       _PKURLFormKey, _PKUUIDAttribute, _PKUUIDFormKey, _PKUserElectionAttribute, 
+                       _PKUsesEmbeddedInfoKey, _PKVersionAnnotationsKey, _PKVersionAttribute, 
+                       _PKVersionAttribute_L, _PKVersionFormKey, _PKXPCBootstrapSubsystemOptions, 
+                       ___PLUGINKIT_CALLING_OUT_TO_CLIENT_SUBSYSTEM_FOR_BEGINUSING__, 
                        ___PLUGINKIT_CALLING_OUT_TO_CLIENT_SUBSYSTEM_FOR_INIT__, ___PLUGINKIT_HANDING_CONTROL_TO_CLIENT__, 
-                       ___PLUGINKIT_HANDING_CONTROL_TO_MAIN_SERVICE_LISTENER__, _pklog_handle_for_category ]
+                       ___PLUGINKIT_HANDING_CONTROL_TO_MAIN_SERVICE_LISTENER__, _pklog_get_persona_type_and_name, 
+                       _pklog_handle_for_category ]
     objc-classes:    [ PKHost, PKManager, PKService ]
 ...

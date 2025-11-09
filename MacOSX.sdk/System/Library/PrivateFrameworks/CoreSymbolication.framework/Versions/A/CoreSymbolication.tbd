@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CC7DFC41-3C2A-3D11-93B1-0E5109E94C5F
+    value:           859EBCB2-CD09-38B8-9295-E48175B105E5
   - target:          x86_64-maccatalyst
-    value:           CC7DFC41-3C2A-3D11-93B1-0E5109E94C5F
+    value:           859EBCB2-CD09-38B8-9295-E48175B105E5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0F4594D2-2ADF-3A65-BCDF-433B4CFF487F
+    value:           CD1B1F94-D6F8-3DF7-A1CA-6DA268816B44
   - target:          arm64e-maccatalyst
-    value:           0F4594D2-2ADF-3A65-BCDF-433B4CFF487F
+    value:           CD1B1F94-D6F8-3DF7-A1CA-6DA268816B44
 install-name:    '/System/Library/PrivateFrameworks/CoreSymbolication.framework/Versions/A/CoreSymbolication'
-current-version: 64544.69.1
+current-version: 64550.84.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -34,17 +34,18 @@ exports:
                        _CSCppExtractMMapArchiveFromSymbolOwner, _CSCppExtractTRawSymbolOwnerDataFromSymbolOwner, 
                        _CSCppPopulateCachesWithMmapArchives, _CSCppPopulateCachesWithMmapArchivesAndGroupKey, 
                        _CSDemangleSymbolName, _CSEqual, _CSExceptionSafeThreadRunBlock, 
-                       _CSGetForceSafeMachVMReads, _CSGetRetainCount, _CSIsNull, 
-                       _CSMMapArchiveCacheCopyMMapArchive, _CSMMapArchiveCacheReleaseMMapArchive, 
-                       _CSMMapArchiveCacheSetShouldStoreToDaemon, _CSRangeContainsRange, 
-                       _CSRangeIntersectsRange, _CSRegionCopyDescriptionWithIndent, 
+                       _CSGetDebugLoggingLevel, _CSGetForceSafeMachVMReads, _CSGetRetainCount, 
+                       _CSIsNull, _CSMMapArchiveCacheCopyMMapArchive, _CSMMapArchiveCacheReleaseMMapArchive, 
+                       _CSMMapArchiveCacheSetShouldStoreToDaemon, _CSPlatformForTask, 
+                       _CSRangeContainsRange, _CSRangeIntersectsRange, _CSRegionCopyDescriptionWithIndent, 
                        _CSRegionForeachSourceInfo, _CSRegionForeachSymbol, _CSRegionGetName, 
                        _CSRegionGetRange, _CSRegionGetSymbolOwner, _CSRegionGetSymbolicator, 
                        _CSRelease, _CSRetain, _CSSectionGetSegment, _CSSegmentForeachSection, 
-                       _CSSetForceSafeMachVMReads, _CSShow, _CSSourceInfoCopyDescriptionWithIndent, 
-                       _CSSourceInfoGetColumn, _CSSourceInfoGetFilename, _CSSourceInfoGetLineNumber, 
-                       _CSSourceInfoGetPath, _CSSourceInfoGetRange, _CSSourceInfoGetRegion, 
-                       _CSSourceInfoGetSymbol, _CSSourceInfoGetSymbolOwner, _CSSourceInfoGetSymbolicator, 
+                       _CSSetDebugLoggingLevel, _CSSetForceSafeMachVMReads, _CSShow, 
+                       _CSSourceInfoCopyDescriptionWithIndent, _CSSourceInfoGetColumn, 
+                       _CSSourceInfoGetFilename, _CSSourceInfoGetLineNumber, _CSSourceInfoGetPath, 
+                       _CSSourceInfoGetRange, _CSSourceInfoGetRegion, _CSSourceInfoGetSymbol, 
+                       _CSSourceInfoGetSymbolOwner, _CSSourceInfoGetSymbolicator, 
                        _CSSymbolCopyDescriptionWithIndent, _CSSymbolForeachInlineRange, 
                        _CSSymbolForeachInlineRangeAtDepth, _CSSymbolForeachSourceInfo, 
                        _CSSymbolGetFlags, _CSSymbolGetInstructionData, _CSSymbolGetMangledName, 
@@ -67,7 +68,6 @@ exports:
                        _CSSymbolOwnerCacheSetMemoryLimit, _CSSymbolOwnerCopyDescriptionWithIndent, 
                        _CSSymbolOwnerCreateSignature, _CSSymbolOwnerCreateSignatureWithSlide, 
                        _CSSymbolOwnerCreateSparseDataWithBlock, _CSSymbolOwnerCreateSparseSignature, 
-                       _CSSymbolOwnerCreateUnmanagedWithSingleSymbolOwnerSignature, 
                        _CSSymbolOwnerEditRelocations, _CSSymbolOwnerForEachStackFrameAtAddress, 
                        _CSSymbolOwnerForeachRegion, _CSSymbolOwnerForeachRegionWithName, 
                        _CSSymbolOwnerForeachSection, _CSSymbolOwnerForeachSegment, 
@@ -157,18 +157,19 @@ exports:
                        _CSSymbolicatorResymbolicateFail, _CSSymbolicatorResymbolicateFromDebugSymbolsInfo, 
                        _CSSymbolicatorSetForceGlobalSafeMachVMReads, _CSSymbolicatorSetGroupKey, 
                        _CSSymbolicatorSubscribeToTaskMainNotification, _CSSymbolicatorTranslateFromNativeAddress, 
-                       _CSTotalBytesMapped, _CSUUIDCFUUIDBytesToPath, _CSUUIDCFUUIDBytesToString, 
-                       _CSUUIDStringToCFUUIDBytes, _clear_mapped_memory, _create_mapped_memory_cache_for_task, 
-                       _create_mapped_memory_cache_for_task_with_label, _create_sampling_context_for_task, 
-                       _create_sampling_context_for_task_pid_symbolicator, _demangle, 
-                       _destroy_mapped_memory_cache, _destroy_sampling_context, _dispatch_queue_name_for_serial_number, 
-                       _enumerate_mapped_memory_cache, _find_node, _get_remote_thread_dispatch_queue, 
-                       _kCSRegionMachHeaderName, _kCSTypeDictionaryKeyCallBacks, 
-                       _kCSTypeDictionaryValueCallBacks, _kCSTypeDictionaryWeakKeyCallBacks, 
-                       _kCSTypeDictionaryWeakValueCallBacks, _kCSTypeSetCallBacks, 
-                       _kCSTypeSetWeakCallBacks, _map_new_node, _mapped_memory_read, 
-                       _mapped_memory_read_pointer, _next_node, _retain_mapped_memory_cache, 
-                       _sample_remote_thread, _sample_remote_thread_with_dispatch_queue, 
+                       _CSTaskHasStarted, _CSTaskIs64Bit, _CSTaskIsDriverKit, _CSTaskIsSimulator, 
+                       _CSTaskIsTranslated, _CSTotalBytesMapped, _CSUUIDCFUUIDBytesToPath, 
+                       _CSUUIDCFUUIDBytesToString, _CSUUIDStringToCFUUIDBytes, _clear_mapped_memory, 
+                       _create_mapped_memory_cache_for_task, _create_mapped_memory_cache_for_task_with_label, 
+                       _create_sampling_context_for_task, _create_sampling_context_for_task_pid_symbolicator, 
+                       _demangle, _destroy_mapped_memory_cache, _destroy_sampling_context, 
+                       _dispatch_queue_name_for_serial_number, _enumerate_mapped_memory_cache, 
+                       _find_node, _get_remote_thread_dispatch_queue, _kCSRegionMachHeaderName, 
+                       _kCSTypeDictionaryKeyCallBacks, _kCSTypeDictionaryValueCallBacks, 
+                       _kCSTypeDictionaryWeakKeyCallBacks, _kCSTypeDictionaryWeakValueCallBacks, 
+                       _kCSTypeSetCallBacks, _kCSTypeSetWeakCallBacks, _map_new_node, 
+                       _mapped_memory_read, _mapped_memory_read_pointer, _next_node, 
+                       _retain_mapped_memory_cache, _sample_remote_thread, _sample_remote_thread_with_dispatch_queue, 
                        _sampling_context_clear_cache, _set_mapped_memory_cache_region_info_block, 
                        _task_get_mapped_memory_cache, _task_get_mapped_memory_cache_with_label, 
                        _task_is_64bit, _task_is_translated, _task_lookup_mapped_memory_cache, 

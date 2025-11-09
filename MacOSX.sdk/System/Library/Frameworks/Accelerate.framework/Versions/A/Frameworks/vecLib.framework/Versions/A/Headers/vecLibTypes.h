@@ -3,7 +3,7 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-760.100
+     Version:    vecLib-793.0
  
      Copyright:  Copyright (c) 2000-2021 by Apple Inc. All rights reserved.
  
@@ -27,66 +27,7 @@
 
 #pragma options align=power
 
-#if defined(__ppc__) || defined(__ppc64__)
-
-
-/*
-    The goal of the following preprocessor statements is to define the
-    preprocessor symbol _AltiVecPIMLanguageExtensionsAreEnabled if and only if
-    the AltiVec high-level language programming interface is enabled.  We
-    designed the statements to accommodate some non-Apple compilers but cannot
-    assure behavior with non-Apple products.
-
-    Apple GCC version 3.3 and earlier versions defined the preprocessor symbol
-    __VEC__ if and only if the AltiVec programming interface were enabled.
-    Later versions define __VEC__ when the AltiVec instruction set is enabled
-    (and thus available for the compiler's assembly code generation) even if
-    the programming interface is not enabled (and thus not available at the
-    source code level).  This occurs, for example, when -maltivec is specified
-    but neither -faltivec is specified nor <altivec.h> is included.
-
-    Due to this change, code that formerly used __VEC__ to select source code
-    with or without use of the AltiVec programming interface should now use
-    _AltiVecPIMLanguageExtensionsAreEnabled.
-
-    For more information about the interface, see AltiVec Technology
-    Programming Interface Manual (ALTIVECPIM/D 6/1999 Rev. 0, published by
-    Motorola Inc. [now Freescale, Inc.]).
- */
-
-#if			defined _ALTIVEC_H \
-		||	(defined __APPLE_CC__ && __APPLE_ALTIVEC__) \
-		|| 	(!defined __GNUC__ && defined __VEC__)
-	#define _AltiVecPIMLanguageExtensionsAreEnabled
-#endif
-
-#if defined _AltiVecPIMLanguageExtensionsAreEnabled
-	typedef __vector unsigned char            vUInt8;
-	typedef __vector signed char              vSInt8;
-	typedef __vector unsigned short           vUInt16;
-	typedef __vector signed short             vSInt16;
-	typedef __vector unsigned int             vUInt32;
-	typedef __vector signed int               vSInt32;
-	typedef __vector float                    vFloat;
-	typedef __vector bool int                 vBool32;
-
-    /* 
-     * GCC allows us to create a vDouble type, even on AltiVec which has no double precision vector 
-     * instructions (apart from boolean operations which are type agnostic). You can use standard 
-     * operators: +-* etc. with the vDouble type. GCC will use scalar code on PowerPC to do the work. 
-     * The type is provided for developers interested in writing shared Intel-PowerPC code. 
-     */
-    #if defined(__GNUC__) && ! defined( __XLC__ )
-        #if defined(__GNUC_MINOR__) && (((__GNUC__ == 3) && (__GNUC_MINOR__ <= 3)) || (__GNUC__ < 3))
-        #else
-            #define __VECLIBTYPES_VDOUBLE__ 1
-            typedef double vDouble         __attribute__ ((__vector_size__ (16)));
-        #endif
-    #endif
-
-#endif	/* defined _AltiVecPIMLanguageExtensionsAreEnabled */
-
-#elif defined(__i386__) || defined(__x86_64__)
+#if defined(__i386__) || defined(__x86_64__)
 #include <immintrin.h>
 #ifdef __SSE__
 #if defined(__GNUC__)

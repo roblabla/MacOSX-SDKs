@@ -15,11 +15,11 @@
 @class NSArray<ObjectType>, NSData, NSDate, NSDirectoryEnumerator<ObjectType>, NSError, NSNumber, NSFileProviderService, NSXPCConnection, NSLock;
 @protocol NSFileManagerDelegate;
 
-typedef NSString * NSFileAttributeKey NS_EXTENSIBLE_STRING_ENUM;
-typedef NSString * NSFileAttributeType NS_STRING_ENUM;
-typedef NSString * NSFileProtectionType NS_STRING_ENUM;
+typedef NSString * NSFileAttributeKey NS_TYPED_EXTENSIBLE_ENUM;
+typedef NSString * NSFileAttributeType NS_TYPED_ENUM;
+typedef NSString * NSFileProtectionType NS_TYPED_ENUM;
 
-typedef NSString * NSFileProviderServiceName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSFileProviderServiceName NS_TYPED_EXTENSIBLE_ENUM;
 
 NS_ASSUME_NONNULL_BEGIN
 

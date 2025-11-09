@@ -108,7 +108,8 @@ typedef struct {
 } MTLTriangleTessellationFactorsHalf;
 
 /*!
- @abstract Points at which a fence may be waited on or signaled.
+ @abstract Generic render stage enum
+ @brief Can also be used for points at which a fence may be waited on or signaled.
  @constant MTLRenderStageVertex   All vertex work prior to rasterization has completed.
  @constant MTLRenderStageFragment All rendering work has completed.
  */
@@ -116,6 +117,7 @@ typedef NS_OPTIONS(NSUInteger, MTLRenderStages)
 {
     MTLRenderStageVertex   = (1UL << 0),
     MTLRenderStageFragment = (1UL << 1),
+    MTLRenderStageTile API_AVAILABLE(macos(12.0), ios(15.0)) = (1UL << 2),
 } API_AVAILABLE(macos(10.13), ios(10.0));
 
 /*!
@@ -195,6 +197,36 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 - (void)setVertexSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers lodMinClamps:(const float [__nonnull])lodMinClamps lodMaxClamps:(const float [__nonnull])lodMaxClamps withRange:(NSRange)range;
 
 /*!
+ @method setVertexVisibleFunctionTable:atBufferIndex:
+ @brief Set a global visible function table for all vertex shaders at the given buffer bind point index.
+ */
+- (void)setVertexVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)functionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method setVertexVisibleFunctionTables:withBufferRange:
+ @brief Set an array of global visible function tables for all vertex shaders with the given buffer bind point range.
+ */
+- (void)setVertexVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])functionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method setVertexIntersectionFunctionTable:atBufferIndex:
+ @brief Set a global intersection function table for all vertex shaders at the given buffer bind point index.
+ */
+- (void)setVertexIntersectionFunctionTable:(nullable id <MTLIntersectionFunctionTable>)intersectionFunctionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method setVertexIntersectionFunctionTables:withBufferRange:
+ @brief Set an array of global intersection function tables for all vertex shaders with the given buffer bind point range.
+ */
+- (void)setVertexIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTable withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method setVertexAccelerationStructure:atBufferIndex:
+ @brief Set a global acceleration structure for all vertex shaders at the given buffer bind point index.
+ */
+- (void)setVertexAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
  @method setViewport:
  @brief Set the viewport, which is used to transform vertexes from normalized device coordinates to window coordinates.  Fragments that lie outside of the viewport are clipped, and optionally clamped for fragments outside of znear/zfar.
  */
@@ -205,7 +237,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @method setViewports:
  @brief Specifies an array of viewports, which are used to transform vertices from normalized device coordinates to window coordinates based on [[ viewport_array_index ]] value specified in the vertex shader.
  */
-- (void)setViewports:(const MTLViewport [__nonnull])viewports count:(NSUInteger)count API_AVAILABLE(macos(10.13), ios(12.0)) API_UNAVAILABLE(tvos);
+- (void)setViewports:(const MTLViewport [__nonnull])viewports count:(NSUInteger)count API_AVAILABLE(macos(10.13), ios(12.0), tvos(14.5));
 
 /*!
  @method setFrontFacingWinding:
@@ -251,7 +283,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @method setScissorRects:
  @brief Specifies an array of rectangles for a fragment scissor test. The specific rectangle used is based on the [[ viewport_array_index ]] value output by the vertex shader. Fragments that lie outside the scissor rectangle are discarded.
  */
-- (void)setScissorRects:(const MTLScissorRect [__nonnull])scissorRects count:(NSUInteger)count API_AVAILABLE(macos(10.13), ios(12.0)) API_UNAVAILABLE(tvos);
+- (void)setScissorRects:(const MTLScissorRect [__nonnull])scissorRects count:(NSUInteger)count API_AVAILABLE(macos(10.13), ios(12.0), tvos(14.5));
 
 /*!
  @method setTriangleFillMode:
@@ -321,6 +353,35 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 - (void)setFragmentSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers lodMinClamps:(const float [__nonnull])lodMinClamps lodMaxClamps:(const float [__nonnull])lodMaxClamps withRange:(NSRange)range;
 
+/*!
+ @method setFragmentVisibleFunctionTable:atBufferIndex:
+ @brief Set a global visible function table for all fragment shaders at the given buffer bind point index.
+ */
+- (void)setFragmentVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)functionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method setFragmentVisibleFunctionTables:withBufferRange:
+ @brief Set an array of global visible function tables for all fragment shaders with the given buffer bind point range.
+ */
+- (void)setFragmentVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])functionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method setFragmentIntersectionFunctionTable:atBufferIndex:
+ @brief Set a global intersection function table for all fragment shaders at the given buffer bind point index.
+ */
+- (void)setFragmentIntersectionFunctionTable:(nullable id <MTLIntersectionFunctionTable>)intersectionFunctionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method setFragmentIntersectionFunctionTables:withBufferRange:
+ @brief Set an array of global intersection function tables for all fragment shaders with the given buffer bind point range.
+ */
+- (void)setFragmentIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTable withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method setFragmentAccelerationStructure:atBufferIndex:
+ @brief Set a global acceleration structure for all fragment shaders at the given buffer bind point index.
+ */
+- (void)setFragmentAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
 
 /* Constant Blend Color */
 /*!
@@ -519,24 +580,24 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 
 -(void)drawPatches:(NSUInteger)numberOfPatchControlPoints patchStart:(NSUInteger)patchStart patchCount:(NSUInteger)patchCount patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset instanceCount:(NSUInteger)instanceCount baseInstance:(NSUInteger)baseInstance API_AVAILABLE(macos(10.12), ios(10.0));
 
--(void)drawPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(10.12), ios(12.0)) API_UNAVAILABLE(tvos);
+-(void)drawPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(10.12), ios(12.0), tvos(14.5));
 
 -(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchStart:(NSUInteger)patchStart patchCount:(NSUInteger)patchCount patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset instanceCount:(NSUInteger)instanceCount baseInstance:(NSUInteger)baseInstance API_AVAILABLE(macos(10.12), ios(10.0));
 
--(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(10.12), ios(12.0)) API_UNAVAILABLE(tvos);
+-(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(10.12), ios(12.0), tvos(14.5));
 
 /*!
  @property tileWidth:
  @abstract The width of the tile for this render pass.
  */
-@property (readonly) NSUInteger tileWidth API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+@property (readonly) NSUInteger tileWidth API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 
 /*!
  @property tileHeight:
  @abstract The height of the tile for this render pass.
  */
-@property (readonly) NSUInteger tileHeight API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+@property (readonly) NSUInteger tileHeight API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /* Tile Resources */
 
@@ -544,74 +605,105 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @method setTileBytes:length:atIndex:
  @brief Set the data (by copy) for a given tile buffer binding point.  This will remove any existing MTLBuffer from the binding point.
  */
-- (void)setTileBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+- (void)setTileBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /*!
  @method setTileBuffer:offset:atIndex:
  @brief Set a global buffer for all tile shaders at the given bind point index.
  */
-- (void)setTileBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+- (void)setTileBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /*!
  @method setTileBufferOffset:atIndex:
  @brief Set the offset within the current global buffer for all tile shaders at the given bind point index.
  */
-- (void)setTileBufferOffset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+- (void)setTileBufferOffset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /*!
  @method setTileBuffers:offsets:withRange:
  @brief Set an array of global buffers for all tile shaders with the given bind point range.
  */
-- (void)setTileBuffers:(const id <MTLBuffer> __nullable [__nonnull])buffers offsets:(const NSUInteger [__nonnull])offsets withRange:(NSRange)range API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+- (void)setTileBuffers:(const id <MTLBuffer> __nullable [__nonnull])buffers offsets:(const NSUInteger [__nonnull])offsets withRange:(NSRange)range API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /*!
  @method setTileTexture:atIndex:
  @brief Set a global texture for all tile shaders at the given bind point index.
  */
-- (void)setTileTexture:(nullable id <MTLTexture>)texture atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+- (void)setTileTexture:(nullable id <MTLTexture>)texture atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /*!
  @method setTileTextures:withRange:
  @brief Set an array of global textures for all tile shaders with the given bind point range.
  */
-- (void)setTileTextures:(const id <MTLTexture> __nullable [__nonnull])textures withRange:(NSRange)range API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+- (void)setTileTextures:(const id <MTLTexture> __nullable [__nonnull])textures withRange:(NSRange)range API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /*!
  @method setTileSamplerState:atIndex:
  @brief Set a global sampler for all tile shaders at the given bind point index.
  */
-- (void)setTileSamplerState:(nullable id <MTLSamplerState>)sampler atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+- (void)setTileSamplerState:(nullable id <MTLSamplerState>)sampler atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /*!
  @method setTileSamplerStates:withRange:
  @brief Set an array of global samplers for all fragment shaders with the given bind point range.
  */
-- (void)setTileSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers withRange:(NSRange)range API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+- (void)setTileSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers withRange:(NSRange)range API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /*!
  @method setTileSamplerState:lodMinClamp:lodMaxClamp:atIndex:
  @brief Set a global sampler for all tile shaders at the given bind point index.
  */
-- (void)setTileSamplerState:(nullable id <MTLSamplerState>)sampler lodMinClamp:(float)lodMinClamp lodMaxClamp:(float)lodMaxClamp atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+- (void)setTileSamplerState:(nullable id <MTLSamplerState>)sampler lodMinClamp:(float)lodMinClamp lodMaxClamp:(float)lodMaxClamp atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 
 /*!
  @method setTileSamplerStates:lodMinClamps:lodMaxClamps:withRange:
  @brief Set an array of global samplers for all tile shaders with the given bind point range.
  */
-- (void)setTileSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers lodMinClamps:(const float [__nonnull])lodMinClamps lodMaxClamps:(const float [__nonnull])lodMaxClamps withRange:(NSRange)range API_AVAILABLE(ios(11.0), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
+- (void)setTileSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers lodMinClamps:(const float [__nonnull])lodMinClamps lodMaxClamps:(const float [__nonnull])lodMaxClamps withRange:(NSRange)range API_AVAILABLE(ios(11.0), tvos(14.5), macos(11.0), macCatalyst(14.0));
+
+/*!
+ @method setTileVisibleFunctionTable:atBufferIndex:
+ @brief Set a global visible function table for all tile shaders at the given buffer bind point index.
+ */
+- (void)setTileVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)functionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method setTileVisibleFunctionTables:withBufferRange:
+ @brief Set an array of global visible function tables for all tile shaders with the given buffer bind point range.
+ */
+- (void)setTileVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])functionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method setTileIntersectionFunctionTable:atBufferIndex:
+ @brief Set a global intersection function table for all tile shaders at the given buffer bind point index.
+ */
+- (void)setTileIntersectionFunctionTable:(nullable id <MTLIntersectionFunctionTable>)intersectionFunctionTable atBufferIndex:(NSUInteger)bufferIndex
+    API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method setTileIntersectionFunctionTables:withBufferRange:
+ @brief Set an array of global intersection function tables for all tile shaders with the given buffer bind point range.
+ */
+- (void)setTileIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTable withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*!
+ @method setTileAccelerationStructure:atBufferIndex:
+ @brief Set a global acceleration structure for all tile shaders at the given buffer bind point index.
+ */
+- (void)setTileAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
 
 /*!
  @method dispatchThreadsPerTile:
  @brief dispatch threads to perform a mid-render compute operation.
  */
-- (void)dispatchThreadsPerTile:(MTLSize)threadsPerTile API_AVAILABLE(macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
+- (void)dispatchThreadsPerTile:(MTLSize)threadsPerTile API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 /*!
  @method setThreadgroupMemoryLength:offset:atIndex:
  @brief Set the size of the threadgroup memory argument at the given bind point index and offset.
  */
-- (void)setThreadgroupMemoryLength:(NSUInteger)length offset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
+- (void)setThreadgroupMemoryLength:(NSUInteger)length offset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5));
 
 
 /*!

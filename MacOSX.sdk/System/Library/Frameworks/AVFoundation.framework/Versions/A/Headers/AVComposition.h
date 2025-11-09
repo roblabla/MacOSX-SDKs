@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2017 Apple Inc. All rights reserved.
+	Copyright 2010-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -100,6 +100,16 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 - (nullable AVCompositionTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
 
 /*!
+	@method		loadTrackWithTrackID:completionHandler:
+	@abstract	Loads an instance of AVCompositionTrack that represents the track of the specified trackID.
+	@param		trackID
+				The trackID of the requested AVCompositionTrack.
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded track (which may be nil if no track of the specified trackID is available) or an error.
+*/
+- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^)(AVCompositionTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
     @method         tracksWithMediaType:
     @abstract       Provides an array of AVCompositionTracks of the asset that present media of the specified media type.
     @param          mediaType
@@ -111,6 +121,16 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 - (NSArray<AVCompositionTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
 
 /*!
+	@method		loadTracksWithMediaType:completionHandler:
+	@abstract	Loads an array of AVCompositionTracks of the asset that present media of the specified media type.
+	@param		mediaType
+				The media type according to which AVAsset filters its AVCompositionTracks. (Media types are defined in AVMediaFormat.h.)
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks of the specified media type are available) or an error.
+*/
+- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^)(NSArray<AVCompositionTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
     @method         tracksWithMediaCharacteristic:
     @abstract       Provides an array of AVCompositionTracks of the asset that present media with the specified characteristic.
     @param          mediaCharacteristic
@@ -120,6 +140,16 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
       Becomes callable without blocking when the key @"tracks" has been loaded
 */
 - (NSArray<AVCompositionTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
+
+/*!
+	@method		loadTracksWithMediaCharacteristic:completionHandler:
+	@abstract	Loads an array of AVCompositionTracks of the asset that present media with the specified characteristic.
+	@param		mediaCharacteristic
+				The media characteristic according to which AVAsset filters its AVCompositionTracks. (Media characteristics are defined in AVMediaFormat.h.)
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks with the specified characteristic are available) or an error.
+*/
+- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^)(NSArray<AVCompositionTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 
@@ -285,6 +315,16 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 - (nullable AVMutableCompositionTrack *)trackWithTrackID:(CMPersistentTrackID)trackID;
 
 /*!
+	@method		loadTrackWithTrackID:completionHandler:
+	@abstract	Loads an instance of AVMutableCompositionTrack that represents the track of the specified trackID.
+	@param		trackID
+				The trackID of the requested AVMutableCompositionTrack.
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded track (which may be nil if no track of the specified trackID is available) or an error.
+*/
+- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^)(AVMutableCompositionTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
     @method         tracksWithMediaType:
     @abstract       Provides an array of AVMutableCompositionTracks of the asset that present media of the specified media type.
     @param          mediaType
@@ -296,6 +336,16 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 - (NSArray<AVMutableCompositionTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
 
 /*!
+	@method		loadTracksWithMediaType:completionHandler:
+	@abstract	Loads an array of AVMutableCompositionTracks of the asset that present media of the specified media type.
+	@param		mediaType
+				The media type according to which AVAsset filters its AVMutableCompositionTracks. (Media types are defined in AVMediaFormat.h.)
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks of the specified media type are available) or an error.
+*/
+- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^)(NSArray<AVMutableCompositionTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
     @method         tracksWithMediaCharacteristic:
     @abstract       Provides an array of AVMutableCompositionTracks of the asset that present media with the specified characteristic.
     @param          mediaCharacteristic
@@ -305,6 +355,16 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
       Becomes callable without blocking when the key @"tracks" has been loaded
 */
 - (NSArray<AVMutableCompositionTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
+
+/*!
+	@method		loadTracksWithMediaCharacteristic:completionHandler:
+	@abstract	Loads an array of AVMutableCompositionTracks of the asset that present media with the specified characteristic.
+	@param		mediaCharacteristic
+				The media characteristic according to which AVAsset filters its AVMutableCompositionTracks. (Media characteristics are defined in AVMediaFormat.h.)
+	@param		completionHandler
+				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks with the specified characteristic are available) or an error.
+*/
+- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^)(NSArray<AVMutableCompositionTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 

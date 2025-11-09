@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4AF45855-DA54-34E2-91FD-045FCA842FEF
+    value:           A9CA0DC6-783D-3DE7-929D-BA2535BEF88A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E0268794-72D3-38E5-8980-841912CE5945
+    value:           6267C3BF-DB8E-3915-BCC4-212E1569AADB
 install-name:    '/System/Library/PrivateFrameworks/MarkupUI.framework/Versions/A/MarkupUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

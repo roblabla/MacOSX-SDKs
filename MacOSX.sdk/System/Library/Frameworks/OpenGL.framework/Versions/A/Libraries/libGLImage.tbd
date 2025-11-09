@@ -1,24 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EA3EDB9B-F44B-345F-A434-E940320A8CDC
+    value:           47AABEA4-5D40-3C08-92E4-8F2C3E367492
   - target:          x86_64-maccatalyst
-    value:           EA3EDB9B-F44B-345F-A434-E940320A8CDC
+    value:           47AABEA4-5D40-3C08-92E4-8F2C3E367492
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A8BFDC05-0129-3EB8-A986-CABBE1EC1123
+    value:           B50D24E2-86F9-3059-8AE0-32EE1BB62821
   - target:          arm64e-maccatalyst
-    value:           A8BFDC05-0129-3EB8-A986-CABBE1EC1123
+    value:           B50D24E2-86F9-3059-8AE0-32EE1BB62821
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLImage.dylib'
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos ]
     symbols:         [ _glgCompress, _glgConvertPixelHeightToBlocks, _glgConvertPixelWidthToBlocks, 
                        _glgConvertPixels, _glgConvertType, _glgCreateProcessor, _glgDecompress, 
                        _glgDestroyProcessor, _glgGetCompressedBlockBytes, _glgGetCompressedBlockHeight, 

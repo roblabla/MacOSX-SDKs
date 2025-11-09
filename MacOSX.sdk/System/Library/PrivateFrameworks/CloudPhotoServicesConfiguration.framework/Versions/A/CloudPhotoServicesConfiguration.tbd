@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6FCA2D12-1967-31A1-B005-663D80E2C0A1
+    value:           7132C1E4-BF98-3F0C-8EC1-EBB0148E631C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7B381D70-88D2-3CA5-B785-BE48596E01C7
+    value:           BB40398A-8556-3190-90D4-E2EEFF7008D6
 install-name:    '/System/Library/PrivateFrameworks/CloudPhotoServicesConfiguration.framework/Versions/A/CloudPhotoServicesConfiguration'
-current-version: 340.0.220
+current-version: 400.27.210
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CPSAccountAppleIDKey, _CPSAccountAuthTokenKey, _CPSAccountAvailabilityDataClassURLKey, 

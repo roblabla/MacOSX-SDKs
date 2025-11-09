@@ -31,7 +31,8 @@ typedef NS_ENUM(NSInteger, UITabBarSystemItem) {
 
 @class UIView, UIImage, UITabBarAppearance;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITabBarItem : UIBarItem 
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UITabBarItem : UIBarItem 
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -70,7 +71,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITabBarItem : UIBarItem
 
 ///  When set and this item is selected, overrides the hosting tab bar's standardAppearance.
 @property (nonatomic, readwrite, copy, nullable) UITabBarAppearance *standardAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0), tvos(13.0));
-
+///  When set and this item is selected, overrides the hosting tab bar's scrollEdgeAppearance.
+@property (nonatomic, readwrite, copy, nullable) UITabBarAppearance *scrollEdgeAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(15.0));
 @end
 
 #if TARGET_OS_IOS

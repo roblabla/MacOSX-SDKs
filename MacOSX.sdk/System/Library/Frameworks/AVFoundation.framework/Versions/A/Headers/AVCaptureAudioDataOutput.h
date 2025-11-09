@@ -4,7 +4,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2010-2017 Apple Inc. All rights reserved.
+    Copyright 2010-2021 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVCaptureOutputBase.h>
@@ -105,7 +105,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __
  
     Note that the dictionary of settings is dependent on the current configuration of the receiver's AVCaptureSession and its inputs. The settings dictionary may change if the session's configuration changes. As such, you should configure your session first, then query the recommended audio settings.
  */
-- (nullable NSDictionary *)recommendedAudioSettingsForAssetWriterWithOutputFileType:(AVFileType)outputFileType API_AVAILABLE(macos(10.15), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
+- (nullable NSDictionary<NSString *, id> *)recommendedAudioSettingsForAssetWriterWithOutputFileType:(AVFileType)outputFileType API_AVAILABLE(macos(10.15), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 @end
 

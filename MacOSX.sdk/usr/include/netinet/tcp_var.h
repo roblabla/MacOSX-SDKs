@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2020 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2021 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -455,6 +455,8 @@ struct  tcpstat {
 	u_int32_t       tcps_ka_offload_drops;  /* Keep alive drops for timeout reported by firmware */
 
 	u_int32_t       tcps_mptcp_triggered_cell;      /* Total number of times an MPTCP-connection triggered cell bringup */
+
+	u_int32_t       tcps_fin_timeout_drops;
 };
 
 

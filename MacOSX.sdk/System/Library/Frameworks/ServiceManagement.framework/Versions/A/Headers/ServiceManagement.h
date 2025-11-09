@@ -148,7 +148,9 @@ SMJobSubmit(CFStringRef domain, CFDictionaryRef job, AuthorizationRef auth,
  * @function SMJobRemove
  *
  * @abstract
- * Removes the job with the given label from the specified domain.
+ * Removes the job with the given label from the specified domain. When this
+ * function is used to remove a job that is running, the invocation blocks
+ * until the job exits, commonly taking several seconds.
  *
  * @param domain
  * The job's domain (e.g. {@link kSMDomainSystemLaunchd} or

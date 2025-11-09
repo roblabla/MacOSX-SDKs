@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     The targetVirtualMachineMemorySize property is initialized to VZVirtualMachineConfiguration.memorySize. The acceptable values for the targetVirtualMachineMemorySize
     property range from VZVirtualMachineConfiguration.minimumAllowedMemorySize to VZVirtualMachineConfiguration.memorySize, and must be a multiple of 1 megabyte
-    (1024 * 1024 bytes). If those constraints aren't satisfied, targetVirtualMachineMemorySize will be rounded down to the nearest multiple of megabyte, clamped to
+    (1024 * 1024 bytes). If those constraints aren't satisfied, targetVirtualMachineMemorySize will be rounded down to the nearest multiple of 1 megabyte, clamped to
     VZVirtualMachineConfiguration.minimumAllowedMemorySize and VZVirtualMachineConfiguration.memorySize respectively.
 
     For optimal performance, it is strongly recommended to perform a memory compaction operation in the guest (e.g. echo 1 > /proc/sys/vm/compact_memory) before invoking the device.
@@ -45,15 +45,15 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 /*!
  @abstract Target memory size for the virtual machine in bytes.
  @discussion
-    The targetVirtualMachineMemorySize must be a multiple of a 1 megabyte (1024 * 1024 bytes) between VZVirtualMachineConfiguration.minimumAllowedMemorySize
+    The targetVirtualMachineMemorySize must be a multiple of 1 megabyte (1024 * 1024 bytes) between VZVirtualMachineConfiguration.minimumAllowedMemorySize
     and VZVirtualMachineConfiguration.memorySize. If those constraints aren't satisfied, targetVirtualMachineMemorySize will be rounded down to the nearest multiple of
-    megabyte, clamped to VZVirtualMachineConfiguration.minimumAllowedMemorySize and VZVirtualMachineConfiguration.memorySize respectively.
+    1 megabyte, clamped to VZVirtualMachineConfiguration.minimumAllowedMemorySize and VZVirtualMachineConfiguration.memorySize respectively.
 
     The targetVMMemorySize represents the amount of physical memory to be made available to the guest.
  @see VZVirtualMachineConfiguration.minimumAllowedMemorySize
  @see VZVirtualMachineConfiguration.memorySize
  */
-@property (readwrite) unsigned long long targetVirtualMachineMemorySize;
+@property (readwrite) uint64_t targetVirtualMachineMemorySize;
 
 @end
 

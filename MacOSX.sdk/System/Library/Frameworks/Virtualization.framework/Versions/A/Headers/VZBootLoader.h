@@ -2,7 +2,7 @@
 //  VZBootLoader.h
 //  Virtualization
 //
-//  Copyright © 2019-2020 Apple Inc. All rights reserved.
+//  Copyright © 2019-2021 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -15,9 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
      VZVirtualMachineConfiguration requires a boot loader defining how to start the virtual machine.
      VZBootLoader is the abstract base class of boot loader definitions.
 
-     Don't instantiate VZBootLoader directly, instead use its subclass VZLinuxBootloader.
+     Don't instantiate VZBootLoader directly, instead use its subclass VZLinuxBootLoader or VZMacOSBootLoader.
 
- @see VZLinuxBootLoader.
+ @see VZLinuxBootLoader
+ @see VZMacOSBootLoader
  */
 VZ_EXPORT API_AVAILABLE(macos(11.0))
 @interface VZBootLoader : NSObject <NSCopying>

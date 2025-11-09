@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSFileProviderDomain;
 
-FILEPROVIDER_CLASS_AVAILABILITY
+FILEPROVIDER_API_AVAILABILITY_V1
 @interface NSFileProviderExtension : NSObject
 
 - (nullable NSFileProviderItem)itemForIdentifier:(NSFileProviderItemIdentifier)identifier error:(NSError * _Nullable *)error NS_SWIFT_NAME(item(for:)) FILEPROVIDER_API_AVAILABILITY_V2;
@@ -61,6 +61,7 @@ FILEPROVIDER_CLASS_AVAILABILITY
 
 @end
 
+FILEPROVIDER_API_AVAILABILITY_V2
 @interface NSFileProviderExtension (Deprecated)
 
 /**

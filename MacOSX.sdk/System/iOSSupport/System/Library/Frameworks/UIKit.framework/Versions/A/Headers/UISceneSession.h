@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIScene, UIStoryboard;
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UISceneConfiguration : NSObject <NSCopying, NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UISceneConfiguration : NSObject <NSCopying, NSSecureCoding>
 // creates a UISceneConfiguration instance from your Info.plist using the name & system type provided.
 // If nil is provided for the name, the first matching instance of the provided sessionType is used.
 // If no matching name is found, or no descriptions of the provided sessionType exist in your Info.plist,
@@ -32,7 +33,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UISceneConfiguration : NSObject
 @property (nonatomic, nullable, strong) UIStoryboard *storyboard;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UISceneSession : NSObject <NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UISceneSession : NSObject <NSSecureCoding>
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 

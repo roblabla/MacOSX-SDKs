@@ -19,7 +19,8 @@ typedef NS_ENUM(NSInteger, UICollectionUpdateAction) {
     UICollectionUpdateActionNone
 };
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionViewUpdateItem : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+@interface UICollectionViewUpdateItem : NSObject
 
 @property (nonatomic, readonly, nullable) NSIndexPath *indexPathBeforeUpdate; // nil for UICollectionUpdateActionInsert
 @property (nonatomic, readonly, nullable) NSIndexPath *indexPathAfterUpdate; // nil for UICollectionUpdateActionDelete

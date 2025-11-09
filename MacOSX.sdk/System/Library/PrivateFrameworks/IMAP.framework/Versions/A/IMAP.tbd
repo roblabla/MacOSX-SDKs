@@ -3,17 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           053524D6-2F1F-386A-9FA2-B4077F43A4FC
+    value:           2143744C-A475-3E7A-8D4C-D9CA471AB1BC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A8CAB21-E548-3601-B00C-B1D7B79CDF34
+    value:           B99DE0EC-4388-30A8-805E-B7903A7DAA9A
 install-name:    '/System/Library/PrivateFrameworks/IMAP.framework/Versions/A/IMAP'
-current-version: 3654.80
+current-version: 3662
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ EmailFunctionalTests, IMAPFunctionalTests, Mail, MailTests, 
-                       com.apple.MailServiceAgent, migrationhelper ]
+    clients:         [ EmailFunctionalTests, EmailTestSupport, IMAPFunctionalTests, 
+                       Mail, MailCoreTests, MailFrameworkTests, MailTests, com.apple.MailServiceAgent, 
+                       migrationhelper ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IMAPCreateArrayForMessageFlags, _IMAPGmailLabelChangeKeyAdd, 
@@ -52,10 +53,10 @@ exports:
                        _lookupFlag, _sIMAPCapabilityNames ]
     objc-classes:    [ IMAPAccountSyncTask, IMAPAggregateCommand, IMAPAggregateFetchUIDCommand, 
                        IMAPAggregateGetQuotaRootCommand, IMAPAggregateStatusCommand, 
-                       IMAPAppendCommand, IMAPAttachmentsDownload, IMAPAuthenticateCommand, 
-                       IMAPBadResponse, IMAPBasicResponse, IMAPBodyFetchContext, 
-                       IMAPBodyFetchResult, IMAPBodyFetchTask, IMAPBodyHeaderFetchResult, 
-                       IMAPBodySectionFetchResult, IMAPBodyStructureFetchResult, 
+                       IMAPAppendCommand, IMAPAppleRemoteLinksFetchResult, IMAPAttachmentsDownload, 
+                       IMAPAuthenticateCommand, IMAPBadResponse, IMAPBasicResponse, 
+                       IMAPBodyFetchContext, IMAPBodyFetchResult, IMAPBodyFetchTask, 
+                       IMAPBodyHeaderFetchResult, IMAPBodySectionFetchResult, IMAPBodyStructureFetchResult, 
                        IMAPBodyTextFetchResult, IMAPByeResponse, IMAPCapabilityCommand, 
                        IMAPCapabilityResponse, IMAPCheckCommand, IMAPClientData, 
                        IMAPCloseCommand, IMAPCommand, IMAPCommandPipeline, IMAPCompoundDownload, 
@@ -78,25 +79,25 @@ exports:
                        IMAPMessage, IMAPMessageActionPersistResultsOperation, IMAPMessageActionSyncOperation, 
                        IMAPMessageDownload, IMAPMessageSetFormatter, IMAPMessageWithCache, 
                        IMAPModificationSequenceFetchResult, IMAPNamespace, IMAPNamespaceCommand, 
-                       IMAPNamespaceExtension, IMAPNamespaceResponse, IMAPNetworkBlockOperation, 
-                       IMAPNetworkBlockTask, IMAPNetworkTaskHandler, IMAPNetworkTaskOperation, 
-                       IMAPNoResponse, IMAPNoopCommand, IMAPNumericResponse, IMAPOKResponse, 
-                       IMAPOtherResponse, IMAPParseContext, IMAPPersistBodiesOperation, 
-                       IMAPPersistDeletedMessagesOperation, IMAPPersistDeletedMessagesTask, 
-                       IMAPPersistFlagChangesOperation, IMAPPersistFlagChangesTask, 
-                       IMAPPersistLabelChangesOperation, IMAPPersistMessagesOperation, 
-                       IMAPPersistenceBlockOperation, IMAPPersistenceBlockTask, IMAPPersistenceTask, 
-                       IMAPPersistenceTaskOperation, IMAPPreauthResponse, IMAPQuotaResponse, 
-                       IMAPQuotaRoot, IMAPQuotaRootResponse, IMAPRFC822SizeFetchResult, 
-                       IMAPRecentResponse, IMAPRenameCommand, IMAPResponse, IMAPSearchResponse, 
-                       IMAPSelectCommand, IMAPSelectMailboxOperation, IMAPServerInterface, 
-                       IMAPSimpleDownload, IMAPSingleCommand, IMAPStartTLSCommand, 
-                       IMAPStatusCommand, IMAPStatusResponse, IMAPSubscribeCommand, 
-                       IMAPSyncAttachmentsOperation, IMAPSyncBodiesOperation, IMAPSyncSkeletonsOperation, 
-                       IMAPSyncUIDsFlagsAndLabelsOperation, IMAPTask, IMAPTaskManager, 
-                       IMAPUIDCommand, IMAPUIDCopyCommand, IMAPUIDCopyOrMoveCommand, 
-                       IMAPUIDExpungeCommand, IMAPUIDMoveCommand, IMAPUIDSearchCommand, 
-                       IMAPUIDStoreCommand, IMAPUidFetchResult, IMAPUnselectCommand, 
-                       IMAPUnsubscribeCommand, IMAPVanishedResponse, IMAPVerifyMailboxOperation, 
-                       _IMAPFetchUnit, _IMAPLock, _UIDsBatch ]
+                       IMAPNamespaceExtension, IMAPNamespaceResponse, IMAPNamespaceSet, 
+                       IMAPNetworkBlockOperation, IMAPNetworkBlockTask, IMAPNetworkTaskHandler, 
+                       IMAPNetworkTaskOperation, IMAPNoResponse, IMAPNoopCommand, 
+                       IMAPNumericResponse, IMAPOKResponse, IMAPOtherResponse, IMAPParseContext, 
+                       IMAPPersistBodiesOperation, IMAPPersistDeletedMessagesOperation, 
+                       IMAPPersistDeletedMessagesTask, IMAPPersistFlagChangesOperation, 
+                       IMAPPersistFlagChangesTask, IMAPPersistLabelChangesOperation, 
+                       IMAPPersistMessagesOperation, IMAPPersistenceBlockOperation, 
+                       IMAPPersistenceBlockTask, IMAPPersistenceTask, IMAPPersistenceTaskOperation, 
+                       IMAPPreauthResponse, IMAPQuotaResponse, IMAPQuotaRoot, IMAPQuotaRootResponse, 
+                       IMAPRFC822SizeFetchResult, IMAPRecentResponse, IMAPRenameCommand, 
+                       IMAPResponse, IMAPSearchResponse, IMAPSelectCommand, IMAPSelectMailboxOperation, 
+                       IMAPServerInterface, IMAPSimpleDownload, IMAPSingleCommand, 
+                       IMAPStartTLSCommand, IMAPStatusCommand, IMAPStatusResponse, 
+                       IMAPSubscribeCommand, IMAPSyncAttachmentsOperation, IMAPSyncBodiesOperation, 
+                       IMAPSyncSkeletonsOperation, IMAPSyncUIDsFlagsAndLabelsOperation, 
+                       IMAPTask, IMAPTaskManager, IMAPUIDCommand, IMAPUIDCopyCommand, 
+                       IMAPUIDCopyOrMoveCommand, IMAPUIDExpungeCommand, IMAPUIDMoveCommand, 
+                       IMAPUIDSearchCommand, IMAPUIDStoreCommand, IMAPUidFetchResult, 
+                       IMAPUnselectCommand, IMAPUnsubscribeCommand, IMAPVanishedResponse, 
+                       IMAPVerifyMailboxOperation, _IMAPFetchUnit, _IMAPLock, _UIDsBatch ]
 ...

@@ -4581,8 +4581,6 @@ SwiftVersions:
     SwiftName: "NSImage.Name.columnViewTemplate"
   - Name: NSImageNameComputer
     SwiftName: "NSImage.Name.computer"
-  - Name: NSImageNameDotMac NS_DEPRECATED_MAC(10_5, 10_7);
-    SwiftName: "NSImage.Name.dotMac"
   - Name: NSImageNameEnterFullScreenTemplate
     SwiftName: "NSImage.Name.enterFullScreenTemplate"
   - Name: NSImageNameEveryone
@@ -6027,11 +6025,21 @@ Classes:
     SwiftName: "makeView(withIdentifier:owner:)"
 - Name: NSTableViewDiffableDataSource
   SwiftName: NSTableViewDiffableDataSourceReference
+- Name: NSTextAttachmentViewProvider
+  Methods:
+  - Selector: "attachmentBoundsForAttributes:location:textContainer:proposedLineFragment:position:"
+    MethodKind: Instance
+    SwiftName: attachmentBounds(for:location:textContainer:proposedLineFragment:position:)
 - Name: NSTextBlock
   Methods:
   - Selector: init
     MethodKind: Instance
     DesignatedInit: true
+- Name: NSTextContentStorage
+  Methods:
+  - Selector: "locationFromLocation:withOffset:"
+    MethodKind: Instance
+    SwiftName: location(_:offsetBy:)
 - Name: NSTextField
   Methods:
   - Selector: "labelWithAttributedString:"
@@ -6062,6 +6070,62 @@ Classes:
   - Selector: "initWithClient:"
     MethodKind: Instance
     DesignatedInit: true
+- Name: NSTextLayoutManager
+  Methods:
+  - Selector: "ensureLayoutForBounds:"
+    MethodKind: Instance
+    SwiftName: ensureLayout(for:)
+  - Selector: "replaceTextContentManager:"
+    MethodKind: Instance
+    SwiftName: replace(_:)
+  - Selector: "textLayoutFragmentForPosition:"
+    MethodKind: Instance
+    SwiftName: textLayoutFragment(for:)
+- Name: NSTextRange
+  Methods:
+  - Selector: "containsLocation:"
+    MethodKind: Instance
+    SwiftName: contains(_:)
+  - Selector: "containsRange:"
+    MethodKind: Instance
+    SwiftName: contains(_:)
+  - Selector: "initWithLocation:"
+    MethodKind: Instance
+    SwiftName: init(location:)
+  - Selector: "intersectsWithTextRange:"
+    MethodKind: Instance
+    SwiftName: intersects(_:)
+  - Selector: "textRangeByFormingUnionWithTextRange:"
+    MethodKind: Instance
+    SwiftName: union(_:)
+  - Selector: "textRangeByIntersectingWithTextRange:"
+    MethodKind: Instance
+    SwiftName: intersection(_:)
+- Name: NSTextSelection
+  Methods:
+  - Selector: "initWithLocation:affinity:"
+    MethodKind: Instance
+    SwiftName: init(_:affinity:)
+  - Selector: "initWithRange:affinity:granularity:"
+    MethodKind: Instance
+    SwiftName: init(range:affinity:granularity:)
+  - Selector: "initWithRanges:affinity:granularity:"
+    MethodKind: Instance
+    SwiftName: init(_:affinity:granularity:)
+  - Selector: "textSelectionWithTextRanges:"
+    MethodKind: Instance
+    SwiftName: textSelection(_:)
+- Name: NSTextSelectionNavigation
+  Methods:
+  - Selector: "textSelectionForSelectionGranularity:enclosingPoint:inContainerAtLocation:"
+    MethodKind: Instance
+    SwiftName: textSelection(for:enclosing:inContainerAt:)
+  - Selector: "textSelectionForSelectionGranularity:enclosingTextSelection:"
+    MethodKind: Instance
+    SwiftName: textSelection(for:enclosing:)
+  - Selector: "textSelectionsInteractingAtPoint:inContainerAtLocation:anchors:modifiers:selecting:bounds:"
+    MethodKind: Instance
+    SwiftName: textSelections(interactingAt:inContainerAt:anchors:modifiers:selecting:bounds:)
 - Name: NSTextTableBlock
   Methods:
   - Selector: "initWithTable:startingRow:rowSpan:startingColumn:columnSpan:"
@@ -6438,6 +6502,12 @@ Classes:
     DesignatedInit: true
 - Name: NSWorkspace
   Methods:
+  - Selector: "URLForApplicationToOpenContentType:"
+    MethodKind: Instance
+    SwiftName: "urlForApplication(toOpen:)"
+  - Selector: "URLsForApplicationsToOpenContentType:"
+    MethodKind: Instance
+    SwiftName: "urlsForApplications(toOpen:)"
   - Selector: "absolutePathForAppBundleWithIdentifier:"
     MethodKind: Instance
     SwiftName: absolutePathForApplication(withBundleIdentifier:)
@@ -6450,6 +6520,18 @@ Classes:
   - Selector: "requestAuthorizationOfType:completionHandler:"
     MethodKind: Instance
     SwiftName: "requestAuthorization(to:completionHandler:)"
+  - Selector: "setDefaultApplicationAtURL:toOpenContentType:completionHandler:"
+    MethodKind: Instance
+    SwiftName: "setDefaultApplication(at:toOpen:completion:)"
+  - Selector: "setDefaultApplicationAtURL:toOpenContentTypeOfFileAtURL:completionHandler:"
+    MethodKind: Instance
+    SwiftName: "setDefaultApplication(at:toOpenContentTypeOfFileAt:completion:)"
+  - Selector: "setDefaultApplicationAtURL:toOpenFileAtURL:completionHandler:"
+    MethodKind: Instance
+    SwiftName: "setDefaultApplication(at:toOpenFileAt:completion:)"
+  - Selector: "setDefaultApplicationAtURL:toOpenURLsWithScheme:completionHandler:"
+    MethodKind: Instance
+    SwiftName: "setDefaultApplication(at:toOpenURLsWithScheme:completion:)"
 - Name: NSWorkspaceAuthorization
   SwiftName: NSWorkspace.Authorization
 - Name: NSWorkspaceOpenConfiguration
@@ -6514,6 +6596,30 @@ Protocols:
   - Selector: "trackMouse:inRect:ofView:untilMouseUp:"
     MethodKind: Instance
     SwiftName: trackMouse(with:in:of:untilMouseUp:)
+- Name: NSTextAttachmentLayout
+  Methods:
+  - Selector: "attachmentBoundsForAttributes:location:textContainer:proposedLineFragment:position:"
+    MethodKind: Instance
+    SwiftName: attachmentBounds(for:location:textContainer:proposedLineFragment:position:)
+  - Selector: "imageForBounds:attributes:location:textContainer:"
+    MethodKind: Instance
+    SwiftName: image(for:attributes:location:textContainer:)
+  - Selector: "viewProviderForParentView:location:textContainer:"
+    MethodKind: Instance
+    SwiftName: viewProvider(for:location:textContainer:)
+- Name: NSTextElementProvider
+  Methods:
+  - Selector: "locationFromLocation:withOffset:"
+    MethodKind: Instance
+    SwiftName: location(_:offsetBy:)
+- Name: NSTextSelectionDataSource
+  Methods:
+  - Selector: "locationFromLocation:withOffset:"
+    MethodKind: Instance
+    SwiftName: location(_:offsetBy:)
+  - Selector: "textRangeForSelectionGranularity:enclosingLocation:"
+    MethodKind: Instance
+    SwiftName: textRange(for:enclosing:)
 - Name: NSToolbarItemValidation
   Methods:
   - Selector: "validateToolbarItem:"
@@ -6883,16 +6989,40 @@ Tags:
   SwiftName: NSTextBlock.ValueType
 - Name: NSTextBlockVerticalAlignment
   SwiftName: NSTextBlock.VerticalAlignment
+- Name: NSTextContentManagerEnumerationOptions
+  SwiftName: NSTextContentManager.EnumerationOptions
 - Name: NSTextFieldBezelStyle
   SwiftName: NSTextField.BezelStyle
 - Name: NSTextFinderAction
   SwiftName: NSTextFinder.Action
 - Name: NSTextFinderMatchingType
   SwiftName: NSTextFinder.MatchingType
+- Name: NSTextLayoutFragmentEnumerationOptions
+  SwiftName: NSTextLayoutFragment.EnumerationOptions
+- Name: NSTextLayoutFragmentState
+  SwiftName: NSTextLayoutFragment.State
+- Name: NSTextLayoutManagerSegmentOptions
+  SwiftName: NSTextLayoutManager.SegmentOptions
+- Name: NSTextLayoutManagerSegmentType
+  SwiftName: NSTextLayoutManager.SegmentType
 - Name: NSTextLayoutOrientation
   SwiftName: NSLayoutManager.TextLayoutOrientation
 - Name: NSTextListOptions
   SwiftName: NSTextList.Options
+- Name: NSTextSelectionAffinity
+  SwiftName: NSTextSelection.Affinity
+- Name: NSTextSelectionGranularity
+  SwiftName: NSTextSelection.Granularity
+- Name: NSTextSelectionNavigationDestination
+  SwiftName: NSTextSelectionNavigation.Destination
+- Name: NSTextSelectionNavigationDirection
+  SwiftName: NSTextSelectionNavigation.Direction
+- Name: NSTextSelectionNavigationLayoutOrientation
+  SwiftName: NSTextSelectionNavigation.LayoutOrientation
+- Name: NSTextSelectionNavigationModifier
+  SwiftName: NSTextSelectionNavigation.Modifier
+- Name: NSTextSelectionNavigationWritingDirection
+  SwiftName: NSTextSelectionNavigation.WritingDirection
 - Name: NSTextTabType
   SwiftName: NSParagraphStyle.TextTabType
 - Name: NSTextTableLayoutAlgorithm
@@ -8586,6 +8716,10 @@ Globals:
   SwiftName: NSApplication.launchIsDefaultUserInfoKey
 - Name: NSApplicationLaunchUserNotificationKey
   SwiftName: NSApplication.launchUserNotificationUserInfoKey
+- Name: NSApplicationProtectedDataDidBecomeAvailableNotification
+  SwiftName: NSApplicationProtectedDataDidBecomeAvailable
+- Name: NSApplicationProtectedDataWillBecomeUnavailableNotification
+  SwiftName: NSApplicationProtectedDataWillBecomeUnavailable
 - Name: NSApplicationWillBecomeActiveNotification
   SwiftName: NSApplication.willBecomeActiveNotification
 - Name: NSApplicationWillFinishLaunchingNotification
@@ -9166,8 +9300,6 @@ Globals:
   SwiftName: "NSImage.columnViewTemplateName"
 - Name: NSImageNameComputer
   SwiftName: "NSImage.computerName"
-- Name: NSImageNameDotMac NS_DEPRECATED_MAC(10_5, 10_7);
-  SwiftName: "NSImage.dotMacName"
 - Name: NSImageNameEnterFullScreenTemplate
   SwiftName: "NSImage.enterFullScreenTemplateName"
 - Name: NSImageNameEveryone
@@ -10104,6 +10236,8 @@ Globals:
   SwiftName: selectedRange
 - Name: NSTextColorBinding
   SwiftName: textColor
+- Name: NSTextContentStorageUnsupportedAttributeAddedNotification
+  SwiftName: unsupportedAttributeAddedNotification
 - Name: NSTextDidBeginEditingNotification
   SwiftName: NSText.didBeginEditingNotification
 - Name: NSTextDidChangeNotification
@@ -10142,8 +10276,12 @@ Globals:
   SwiftName: NSTextView.didChangeSelectionNotification
 - Name: NSTextViewDidChangeTypingAttributesNotification
   SwiftName: NSTextView.didChangeTypingAttributesNotification
+- Name: NSTextViewDidSwitchToNSLayoutManagerNotification
+  SwiftName: NSTextView.didSwitchToNSLayoutManagerNotification
 - Name: NSTextViewWillChangeNotifyingTextViewNotification
   SwiftName: NSTextView.willChangeNotifyingTextViewNotification
+- Name: NSTextViewWillSwitchToNSLayoutManagerNotification
+  SwiftName: NSTextView.willSwitchToNSLayoutManagerNotification
 - Name: NSTextWritingDirectionEmbedding
   Availability: nonswift
 - Name: NSTextWritingDirectionOverride

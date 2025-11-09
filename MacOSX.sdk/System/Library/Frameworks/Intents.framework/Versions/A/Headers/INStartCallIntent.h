@@ -25,8 +25,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(13.0), watchos(6.0))
-API_UNAVAILABLE(macos, tvos)
+API_AVAILABLE(ios(13.0), macos(12.0), watchos(6.0))
+API_UNAVAILABLE(tvos)
 @interface INStartCallIntent : INIntent
 
 - (instancetype)initWithCallRecordFilter:(nullable INCallRecordFilter *)callRecordFilter
@@ -34,11 +34,11 @@ API_UNAVAILABLE(macos, tvos)
                               audioRoute:(INCallAudioRoute)audioRoute
                          destinationType:(INCallDestinationType)destinationType
                                 contacts:(nullable NSArray<INPerson *> *)contacts
-                          callCapability:(INCallCapability)callCapability NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(14.0), watchos(7.0), macosx(11.0));
+                          callCapability:(INCallCapability)callCapability NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(14.0), watchos(7.0));
 
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INCallRecordFilter *callRecordFilter API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos);
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INCallRecordFilter *callRecordFilter API_AVAILABLE(ios(14.0), watchos(7.0));
 
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INCallRecord *callRecordToCallBack API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos);
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INCallRecord *callRecordToCallBack API_AVAILABLE(ios(14.0), watchos(7.0));
 
 @property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallAudioRoute audioRoute;
 
@@ -57,8 +57,8 @@ API_UNAVAILABLE(macos, tvos)
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(13.0), watchos(6.0))
-API_UNAVAILABLE(macos, tvos)
+API_AVAILABLE(ios(13.0), macos(12.0), watchos(6.0))
+API_UNAVAILABLE(tvos)
 @protocol INStartCallIntentHandling <NSObject>
 
 @required
@@ -102,16 +102,16 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolveCallRecordToCallBackForStartCall:(INStartCallIntent *)intent
-                    withCompletion:(void (^)(INCallRecordResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCallRecordToCallBack(for:with:)) API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos);
+                                 withCompletion:(void (^)(INCallRecordResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCallRecordToCallBack(for:with:)) API_AVAILABLE(ios(14.0), watchos(7.0));
 
 - (void)resolveDestinationTypeForStartCall:(INStartCallIntent *)intent
-                    withCompletion:(void (^)(INCallDestinationTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDestinationType(for:with:));
+                            withCompletion:(void (^)(INCallDestinationTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDestinationType(for:with:));
 
 - (void)resolveContactsForStartCall:(INStartCallIntent *)intent
-                    withCompletion:(void (^)(NSArray<INStartCallContactResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveContacts(for:with:));
+                     withCompletion:(void (^)(NSArray<INStartCallContactResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveContacts(for:with:));
 
 - (void)resolveCallCapabilityForStartCall:(INStartCallIntent *)intent
-                    withCompletion:(void (^)(INStartCallCallCapabilityResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCallCapability(for:with:));
+                           withCompletion:(void (^)(INStartCallCallCapabilityResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCallCapability(for:with:));
 
 @end
 

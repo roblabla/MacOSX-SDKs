@@ -1,4 +1,4 @@
-framework module AssetsLibrary [extern_c] [system] {
+framework module AssetsLibrary [system] {
   umbrella header "AssetsLibrary.h"
   export *
   module * { export * }

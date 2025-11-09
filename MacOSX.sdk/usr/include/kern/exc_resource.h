@@ -63,6 +63,7 @@
 #define RESOURCE_TYPE_MEMORY    3
 #define RESOURCE_TYPE_IO        4
 #define RESOURCE_TYPE_THREADS   5
+#define RESOURCE_TYPE_PORTS     6
 
 /* RESOURCE_TYPE_CPU flavors */
 #define FLAVOR_CPU_MONITOR              1
@@ -208,6 +209,34 @@
 
 /* RESOURCE_TYPE_THREADS flavors */
 #define FLAVOR_THREADS_HIGH_WATERMARK 1
+
+/* RESOURCE_TYPE_PORTS flavors */
+#define FLAVOR_PORT_SPACE_FULL 1
+
+/*
+ * RESOURCE_TYPE_PORTS exception code & subcode.
+ *
+ * This is sent by the kernel when the process is
+ * leaking ipc ports and has filled its port space
+ *
+ * code:
+ * +-----------------------------------------------+
+ * |[63:61] RESOURCE |[60:58] FLAVOR_     |[57:32] |
+ * |_TYPE_PORTS      |PORT_SPACE_FULL      |Unused  |
+ * +-----------------------------------------------+
+ * | [31:24] Unused          | [23:0] # of ports   |
+ * |                         | allocated           |
+ * +-----------------------------------------------+
+ *
+ * subcode:
+ * +-----------------------------------------------+
+ * |                         | Unused              |
+ * |                         |                     |
+ * +-----------------------------------------------+
+ *
+ */
+#define EXC_RESOURCE_THREADS_DECODE_PORTS(code) \
+	((code) & 0xFFFFFFULL)
 
 
 

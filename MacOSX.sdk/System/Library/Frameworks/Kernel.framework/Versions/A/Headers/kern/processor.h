@@ -72,14 +72,14 @@
 
 __BEGIN_DECLS
 
+
 extern void             pset_deallocate(
 	processor_set_t         pset);
 
 extern void             pset_reference(
 	processor_set_t         pset);
 
+
 __END_DECLS
-
-
 
 #endif  /* _KERN_PROCESSOR_H_ */

@@ -99,6 +99,10 @@ API_AVAILABLE(ios(6.0), watchos(3.0))
 
 // Sign a payload using the pass
 - (void)signData:(NSData *)signData withSecureElementPass:(PKSecureElementPass *)secureElementPass completion:(void(^)(NSData * _Nullable signedData, NSData * _Nullable signature, NSError * _Nullable error))completion NS_SWIFT_NAME(sign(_:using:completion:)) API_AVAILABLE(ios(13.4), watchos(6.2));
+
+// Returns custom data for a given secure element pass, if supported by that pass
+- (void)serviceProviderDataForSecureElementPass:(PKSecureElementPass *)secureElementPass completion:(void(^)(NSData * _Nullable serviceProviderData, NSError* _Nullable error))completion NS_SWIFT_NAME(serviceProviderData(for:completion:)) API_AVAILABLE(ios(15.0), watchos(8.0));
+
 @end
 
 // This notification is issued by a library instance, with that instance as the sender.  If there are no instantiated library objects,

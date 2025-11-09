@@ -13,7 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos) @interface UIKey : NSObject <NSCopying, NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
+@interface UIKey : NSObject <NSCopying, NSCoding>
 
 /// @returns a string representing what would be inserted into a text field when this key is pressed.
 /// @discussion if a modifier key is held, this property will contain the modified characters according

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           909B8D6B-7842-3807-BBDC-7FF64BFB1338
+    value:           952912FB-5E05-3222-82F3-2D00CBDEA690
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E4E371FB-F59E-31C5-8B0E-94783F1DA026
+    value:           C76CCA07-2EC0-3149-8C81-82AFC2E218C2
 install-name:    '/System/Library/PrivateFrameworks/Backup.framework/Versions/A/Backup'
 current-version: 0
 exports:

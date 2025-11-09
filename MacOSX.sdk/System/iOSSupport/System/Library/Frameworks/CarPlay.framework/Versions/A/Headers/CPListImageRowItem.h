@@ -31,8 +31,8 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 
  UIImageAsset is used to combine multiple UIImages with different trait collections into a single UIImage.
  
- @note The expected image size is given by @c CPImageRowImageSize. Images provided
- will be resized to this size.
+ @note The expected image size is given by +[CPListImageRowItem maximumImageSize]. Images provided
+ will be resized to this size if necessary.
  
  @discussion To properly size your images, your app should size them to the display scale of the car screen.
  See -[CPInterfaceController carTraitCollection].
@@ -54,6 +54,13 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 @property (nullable, nonatomic, copy) void (^handler) (id <CPSelectableListItem> item,
                                                        dispatch_block_t completionBlock) API_AVAILABLE(ios(14.0));
+
+/**
+ A Boolean value indicating whether the list item is enabled.
+
+ @discussion Set the value of this property to @c YES to enable the list item or @c NO to disable it. The default value of this property is @c YES.
+ */
+@property (nonatomic, assign, getter=isEnabled) BOOL enabled API_AVAILABLE(ios(15.0));
 
 /**
  Read-only access to the grid images shown in a row in the cell.

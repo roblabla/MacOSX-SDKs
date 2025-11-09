@@ -24,7 +24,7 @@
 */
 
 API_UNAVAILABLE(ios, watchos, tvos)
-@interface IOBluetoothRFCOMMChannel : IOBluetoothObject <NSPortDelegate>
+@interface IOBluetoothRFCOMMChannel : IOBluetoothObject <NSPortDelegate, NSStreamDelegate>
 {
     BOOL											mChannelIsOpen;
     UInt16											mMTU;
@@ -160,6 +160,22 @@ API_UNAVAILABLE(ios, watchos, tvos)
 - (BOOL)isTransmissionPaused;
 
 /*!
+    @method  write:length:sleep:
+    @abstract Sends a block of data in the channel syncronously.
+    @discussion	***WARNING*** This method is being deprecated in favor of -writeSync:... and -writeAsync:...
+				Sends data through the channel. The number of bytes to be sent must not exceed the channel MTU. 
+				If the return value is an error condition none of the data was sent.
+    @param data is a pointer to the data buffer to be sent.
+    @param length the length of the buffer to be sent (in bytes).
+    @param sleep is a boolean if set to TRUE the call will wait until it is possible to send data.
+    If set to FALSE and it is not possible to send data the method will return immediately with an
+    error.
+    @result An error code value. 0 if successful. 
+*/
+
+- (IOReturn)write:(void *)data length:(UInt16)length sleep:(BOOL)sleep DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+/*!
     @method  writeAsync:length:refcon:
     @abstract Sends a block of data in the channel asynchronously.
     @discussion The number of bytes to be sent must not exceed the channel MTU. 
@@ -192,6 +208,22 @@ API_UNAVAILABLE(ios, watchos, tvos)
 */
 
 - (IOReturn)writeSync:(void *)data length:(UInt16)length;
+
+/*!
+    @method  writeSimple:length:sleep:
+    @abstract Sends a block of data in the channel.
+    @discussion ***WARNING*** This method is being deprecated in favor of -writeSync:... and -writeAsync:...
+				Sends data through the channel. The number of bytes to be sent is arbitrary. The caller
+				does not have to worry about the MTU. 
+    @param data a pointer to the data buffer to be sent.
+    @param length the length of the buffer to be sent (in bytes).
+    @param sleep a boolean if set to TRUE the call will wait until it is possible to send all the data.
+    @param a UInt32 pointer in which the caller received the nuber of bytes sent.
+    If set to FALSE and it is not possible to send part of the data the method will return immediately.
+    @result An error code value. 0 if successful.
+*/
+
+- (IOReturn)writeSimple:(void *)data length:(UInt16)length sleep:(BOOL)sleep bytesSent:(UInt32 *)numBytesSent DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*!
     @method  setSerialParameters:dataBits:parity:stopBits:
@@ -303,6 +335,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 - (void)rfcommChannelControlSignalsChanged:(IOBluetoothRFCOMMChannel*)rfcommChannel;
 - (void)rfcommChannelFlowControlChanged:(IOBluetoothRFCOMMChannel*)rfcommChannel;
 - (void)rfcommChannelWriteComplete:(IOBluetoothRFCOMMChannel*)rfcommChannel refcon:(void*)refcon status:(IOReturn)error;
+- (void)rfcommChannelWriteComplete:(IOBluetoothRFCOMMChannel*)rfcommChannel refcon:(void*)refcon status:(IOReturn)error bytesWritten:(size_t) length;
 - (void)rfcommChannelQueueSpaceAvailable:(IOBluetoothRFCOMMChannel*)rfcommChannel;
 
 @end

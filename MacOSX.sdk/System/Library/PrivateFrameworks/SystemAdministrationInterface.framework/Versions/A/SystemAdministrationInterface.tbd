@@ -3,16 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6CC0D08B-4DA7-3AAF-847C-1FEE9E62EBAE
+    value:           CF828FCA-D5FC-39A0-85C1-99EC53EF761D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           061F58A1-DEDB-3317-B80F-2DD9BA0CDD9B
+    value:           2CA59077-2756-3834-868E-511891556635
 install-name:    '/System/Library/PrivateFrameworks/SystemAdministrationInterface.framework/Versions/A/SystemAdministrationInterface'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _LAContextClass, _SecRequiresGracePeriod, _eEccountType, _isApplePayEnabled, 
-                       _isComputerUnlockEnabled, _isStorePurchaseEnabled ]
+    symbols:         [ _LAContextClass ]
     objc-classes:    [ ADMAddRecordController, ADMAutoLoginController, ADMChangePasswordController, 
                        ADMIndefiniteGracePeriodHandler, SysAdminUIUtilities ]
     objc-ivars:      [ ADMAddRecordController.mAccountNameView, ADMAddRecordController.mAccountType, 

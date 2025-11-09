@@ -28,7 +28,8 @@ typedef NS_ENUM(NSInteger, UIContextMenuInteractionAppearance) {
     UIContextMenuInteractionAppearanceCompact,         // Non-modal, compact menu with no preview.
 } API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @interface UIContextMenuInteraction : NSObject <UIInteraction>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIContextMenuInteraction : NSObject <UIInteraction>
 
 /// The interaction's delegate.
 @property (nonatomic, weak, readonly) id<UIContextMenuInteractionDelegate> delegate;
@@ -52,8 +53,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @interface 
 /*!
  * @abstract Call to update the currently visible menu. This method does nothing if called before a menu is presented.
  *
- * @param block  Called with the a mutable copy of the currently visible menu. Modify and return this menu (or an entirely
- *               new one) to change the currently visible menu items.
+ * @param block  Called with a mutable copy of the currently visible menu. Modify and return this menu (or an entirely
+ *               new one) to change the currently visible menu items. Starting in iOS 15, this block is called once for
+ *               every visible submenu. For example, in the following hierarchy:
+ *
+ *               *- Root Menu
+ *                  *- Submenu A
+ *                     *- Submenu B
+ *                  *- Submenu C
+ *
+ *               If Submenu A is visible, the block is called twice (once for the Root Menu and once for Submenu A).
+ *               If both A and B are visible, it's called 3 times (for the Root Menu, A, and B).
  */
 - (void)updateVisibleMenuWithBlock:(UIMenu *(NS_NOESCAPE ^)(UIMenu *visibleMenu))block API_AVAILABLE(ios(14.0));
 
@@ -65,17 +75,19 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @interface 
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @protocol UIContextMenuInteractionAnimating <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@protocol UIContextMenuInteractionAnimating <NSObject>
 
 /// Displayed preview view controller.
 @property (nonatomic, readonly, nullable) UIViewController *previewViewController;
 
 - (void)addAnimations:(void (^)(void))animations;
-- (void)addCompletion:(void (^)(void))completion;
+- (void)addCompletion:(void (^)(void))completion NS_SWIFT_DISABLE_ASYNC;
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @protocol UIContextMenuInteractionCommitAnimating <UIContextMenuInteractionAnimating>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@protocol UIContextMenuInteractionCommitAnimating <UIContextMenuInteractionAnimating>
 
 /// Preferred animation style for the menu's commit action. Triggered when the user taps the preview.
 @property (nonatomic) UIContextMenuInteractionCommitStyle preferredCommitStyle;
@@ -83,7 +95,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @protocol U
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @protocol UIContextMenuInteractionDelegate <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@protocol UIContextMenuInteractionDelegate <NSObject>
 
 /*!
  * @abstract Called when the interaction begins.

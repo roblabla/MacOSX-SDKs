@@ -69,14 +69,14 @@ MDL_EXPORT
 /*!
  @property instance
  @abstract Instance object
- @discussion nil, unless this object refers to master data to be instanced. The
-             master data object can be any MDLObject that does not have a parent.
-             If an MDLAsset has been created from a data file, any master objects
-             parsed from that file will be found in the masters property.
-             A typical use of a master and instance might be to have one master
+ @discussion nil, unless this object refers to original data to be instanced. The
+             original data object can be any MDLObject that does not have a parent.
+             If an MDLAsset has been created from a data file, any original objects
+             parsed from that file will be found in the originals property.
+             A typical use of a original and instance might be to have one original
              chair MDLObject, and instance six chairs around a table. The
              transform of each chair would be found on the parent MDLObject, but
-             the various items making up the chair would be found in the master
+             the various items making up the chair would be found in the original
              object.
  */
 @property (nonatomic, nullable, retain) MDLObject* instance;

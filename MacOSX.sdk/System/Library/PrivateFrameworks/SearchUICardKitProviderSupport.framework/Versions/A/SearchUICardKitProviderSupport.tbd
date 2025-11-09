@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4C070A45-FB11-3C37-A099-8A2171ED5B4A
+    value:           8FADDF49-B23E-3538-86BD-D3C51F45E12B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           747FC6DE-FCD9-35A4-87CC-D3507C283F13
+    value:           364FC4F0-26E0-32B3-81E8-A2AF0754C96A
 install-name:    '/System/Library/PrivateFrameworks/SearchUICardKitProviderSupport.framework/Versions/A/SearchUICardKitProviderSupport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

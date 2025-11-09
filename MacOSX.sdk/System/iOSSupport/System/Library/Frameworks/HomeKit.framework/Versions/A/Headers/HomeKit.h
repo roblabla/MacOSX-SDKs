@@ -60,3 +60,9 @@
 
 #import <HomeKit/HMCameraSettingsControl.h>
 #import <HomeKit/HMCameraAudioControl.h>
+
+#import <HomeKit/HMAccessorySetupManager.h>
+#import <HomeKit/HMCHIPServiceHome.h>
+#import <HomeKit/HMCHIPServiceRoom.h>
+#import <HomeKit/HMCHIPServiceTopology.h>
+#import <HomeKit/HMCHIPServiceRequestHandler.h>

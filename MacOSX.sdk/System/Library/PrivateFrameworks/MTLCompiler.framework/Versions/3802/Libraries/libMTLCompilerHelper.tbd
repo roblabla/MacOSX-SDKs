@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           08961BAA-124D-337F-90FC-D541CB837276
+    value:           7F1C0B16-0A42-3031-B9EC-06977C2CE420
   - target:          x86_64-maccatalyst
-    value:           08961BAA-124D-337F-90FC-D541CB837276
+    value:           7F1C0B16-0A42-3031-B9EC-06977C2CE420
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C3092AE6-30AD-318D-8308-1165B9E6058F
+    value:           7D5A036B-EDA0-3DBF-B826-805D0677AC21
   - target:          arm64e-maccatalyst
-    value:           C3092AE6-30AD-318D-8308-1165B9E6058F
+    value:           7D5A036B-EDA0-3DBF-B826-805D0677AC21
 install-name:    '/System/Library/PrivateFrameworks/MTLCompiler.framework/Versions/3802/Libraries/libMTLCompilerHelper.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

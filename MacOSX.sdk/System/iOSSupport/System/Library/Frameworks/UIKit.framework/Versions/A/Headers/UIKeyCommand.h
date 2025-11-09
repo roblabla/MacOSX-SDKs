@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunguarded-availability"
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIKeyCommand : UICommand
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UIKeyCommand : UICommand
 #pragma clang diagnostic pop
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -46,6 +47,15 @@ UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIKeyCommand : UICommand
 
 /// Alternates that differ in modifier flags, if any.
 @property (nonatomic, readonly) NSArray<UICommandAlternate *> *alternates API_AVAILABLE(ios(13.0));
+
+/// Indicates whether the key command should execute if it conflicts with focus or text-editing system commands, defaults to @c NO
+@property (nonatomic) BOOL wantsPriorityOverSystemBehavior API_AVAILABLE(ios(15.0));
+
+/// Suppose the system detects a given key command that is not reachable in the current keyboard layout; it will localize the key command to something reachable. By setting this property to NO, you will opt-out this menu item from the system-provided localization. YES by default for apps linked against 15.0 and later SDK. 
+@property (nonatomic) BOOL allowsAutomaticLocalization API_AVAILABLE(ios(15.0));
+
+/// Suppose the system detects a given key command with the following input string [ ] { } ( ) < > ← → in a right-to-left user interface environment (UIUserInterfaceLayoutDirectionRightToLeft); in that case, the system will automatically mirror the key command. For example, a pair of key commands with input { and } will be localized to } and { in a right-to-left user interface. By setting this property to NO, you will opt-out this key command of automatically mirroring in RTL. It would be best only to do this if your action will result in some sort of directional change in the UI, e.g. a segmented control for text alignment or a D-pad in a game. YES by default for apps linked against 15.0 and later SDK.
+@property (nonatomic) BOOL allowsAutomaticMirroring API_AVAILABLE(ios(15.0));
 
 /// Initializes a key command.
 ///

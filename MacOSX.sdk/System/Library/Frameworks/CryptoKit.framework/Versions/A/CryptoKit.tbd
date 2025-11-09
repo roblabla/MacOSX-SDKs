@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           85434A1A-4D35-32FF-BFC0-5D456198EBCD
+    value:           081CA852-B549-3458-BEC2-BE8DF3E1FECF
   - target:          x86_64-maccatalyst
-    value:           85434A1A-4D35-32FF-BFC0-5D456198EBCD
+    value:           081CA852-B549-3458-BEC2-BE8DF3E1FECF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9D4ACE82-E99C-3A30-BB8A-C19D73DE038A
+    value:           612C0B73-422C-3A21-8702-46960E077EB2
   - target:          arm64e-maccatalyst
-    value:           9D4ACE82-E99C-3A30-BB8A-C19D73DE038A
+    value:           612C0B73-422C-3A21-8702-46960E077EB2
 install-name:    '/System/Library/Frameworks/CryptoKit.framework/Versions/A/CryptoKit'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s6Digest9CryptoKit12HashFunctionPTl', '_$s9CryptoKit03ChaC4PolyO4open_5using10Foundation4DataVAC9SealedBoxV_AA12SymmetricKeyVtKFZ', 
                        '_$s9CryptoKit03ChaC4PolyO4open_5using14authenticating10Foundation4DataVAC9SealedBoxV_AA12SymmetricKeyVxtKAG0I8ProtocolRzlFZ', 
                        '_$s9CryptoKit03ChaC4PolyO4seal_5using5nonce14authenticatingAC9SealedBoxVx_AA12SymmetricKeyVAC5NonceVSgq_tK10Foundation12DataProtocolRzAoPR_r0_lFZ', 
@@ -42,6 +42,7 @@ exports:
                        '_$s9CryptoKit03ChaC4PolyO9SealedBoxVN', '_$s9CryptoKit03ChaC4PolyOMa', 
                        '_$s9CryptoKit03ChaC4PolyOMn', '_$s9CryptoKit03ChaC4PolyON', 
                        '_$s9CryptoKit0aB5ErrorO014underlyingCoreaC0yACs5Int32V_tcACmFWC', 
+                       '_$s9CryptoKit0aB5ErrorO11wrapFailureyA2CmFWC', '_$s9CryptoKit0aB5ErrorO13unwrapFailureyA2CmFWC', 
                        '_$s9CryptoKit0aB5ErrorO16incorrectKeySizeyA2CmFWC', '_$s9CryptoKit0aB5ErrorO21authenticationFailureyA2CmFWC', 
                        '_$s9CryptoKit0aB5ErrorO22incorrectParameterSizeyA2CmFWC', 
                        '_$s9CryptoKit0aB5ErrorOMa', '_$s9CryptoKit0aB5ErrorOMn', 
@@ -90,7 +91,23 @@ exports:
                        '_$s9CryptoKit10Curve25519O7SigningO9PublicKeyVN', '_$s9CryptoKit10Curve25519O7SigningOMa', 
                        '_$s9CryptoKit10Curve25519O7SigningOMn', '_$s9CryptoKit10Curve25519O7SigningON', 
                        '_$s9CryptoKit10Curve25519OMa', '_$s9CryptoKit10Curve25519OMn', 
-                       '_$s9CryptoKit10Curve25519ON', '_$s9CryptoKit12HashFunctionMp', 
+                       '_$s9CryptoKit10Curve25519ON', '_$s9CryptoKit10RSAPSSSPKIV12hashFunctionAA011RSABSSAHashE0OvM', 
+                       '_$s9CryptoKit10RSAPSSSPKIV12hashFunctionAA011RSABSSAHashE0Ovg', 
+                       '_$s9CryptoKit10RSAPSSSPKIV12hashFunctionAA011RSABSSAHashE0OvpMV', 
+                       '_$s9CryptoKit10RSAPSSSPKIV12hashFunctionAA011RSABSSAHashE0Ovs', 
+                       '_$s9CryptoKit10RSAPSSSPKIV13saltByteCounts6UInt64VvM', '_$s9CryptoKit10RSAPSSSPKIV13saltByteCounts6UInt64Vvg', 
+                       '_$s9CryptoKit10RSAPSSSPKIV13saltByteCounts6UInt64VvpMV', 
+                       '_$s9CryptoKit10RSAPSSSPKIV13saltByteCounts6UInt64Vvs', '_$s9CryptoKit10RSAPSSSPKIV17rsaPublicKeyBytes10Foundation4DataVvM', 
+                       '_$s9CryptoKit10RSAPSSSPKIV17rsaPublicKeyBytes10Foundation4DataVvg', 
+                       '_$s9CryptoKit10RSAPSSSPKIV17rsaPublicKeyBytes10Foundation4DataVvpMV', 
+                       '_$s9CryptoKit10RSAPSSSPKIV17rsaPublicKeyBytes10Foundation4DataVvs', 
+                       '_$s9CryptoKit10RSAPSSSPKIV3mgfAA19RSABSSAHashFunctionOvM', 
+                       '_$s9CryptoKit10RSAPSSSPKIV3mgfAA19RSABSSAHashFunctionOvg', 
+                       '_$s9CryptoKit10RSAPSSSPKIV3mgfAA19RSABSSAHashFunctionOvpMV', 
+                       '_$s9CryptoKit10RSAPSSSPKIV3mgfAA19RSABSSAHashFunctionOvs', 
+                       '_$s9CryptoKit10RSAPSSSPKIV4dataAC10Foundation4DataV_tKcfC', 
+                       '_$s9CryptoKit10RSAPSSSPKIVMa', '_$s9CryptoKit10RSAPSSSPKIVMn', 
+                       '_$s9CryptoKit10RSAPSSSPKIVN', '_$s9CryptoKit12HashFunctionMp', 
                        '_$s9CryptoKit12HashFunctionP14blockByteCountSivgZTj', '_$s9CryptoKit12HashFunctionP14blockByteCountSivgZTq', 
                        '_$s9CryptoKit12HashFunctionP6DigestAC_AaDTn', '_$s9CryptoKit12HashFunctionP6update13bufferPointerySW_tFTj', 
                        '_$s9CryptoKit12HashFunctionP6update13bufferPointerySW_tFTq', 
@@ -178,6 +195,11 @@ exports:
                        '_$s9CryptoKit16SymmetricKeySizeV8bitCountACSi_tcfC', '_$s9CryptoKit16SymmetricKeySizeV8bitCountSivg', 
                        '_$s9CryptoKit16SymmetricKeySizeV8bitCountSivpMV', '_$s9CryptoKit16SymmetricKeySizeVMa', 
                        '_$s9CryptoKit16SymmetricKeySizeVMn', '_$s9CryptoKit16SymmetricKeySizeVN', 
+                       '_$s9CryptoKit19RSABSSAHashFunctionO8rawValueACSgSi_tcfC', 
+                       '_$s9CryptoKit19RSABSSAHashFunctionO8rawValueSivg', '_$s9CryptoKit19RSABSSAHashFunctionO8rawValueSivpMV', 
+                       '_$s9CryptoKit19RSABSSAHashFunctionOMa', '_$s9CryptoKit19RSABSSAHashFunctionOMn', 
+                       '_$s9CryptoKit19RSABSSAHashFunctionON', '_$s9CryptoKit19RSABSSAHashFunctionOSHAAMc', 
+                       '_$s9CryptoKit19RSABSSAHashFunctionOSQAAMc', '_$s9CryptoKit19RSABSSAHashFunctionOSYAAMc', 
                        '_$s9CryptoKit24HashedAuthenticationCodeV11descriptionSSvg', 
                        '_$s9CryptoKit24HashedAuthenticationCodeV11descriptionSSvpMV', 
                        '_$s9CryptoKit24HashedAuthenticationCodeV15withUnsafeBytesyqd__qd__SWKXEKlF', 
@@ -224,8 +246,11 @@ exports:
                        '_$s9CryptoKit3AESO3GCMO9SealedBoxV8combinedAGx_tKc10Foundation12DataProtocolRzlufC', 
                        '_$s9CryptoKit3AESO3GCMO9SealedBoxVMa', '_$s9CryptoKit3AESO3GCMO9SealedBoxVMn', 
                        '_$s9CryptoKit3AESO3GCMO9SealedBoxVN', '_$s9CryptoKit3AESO3GCMOMa', 
-                       '_$s9CryptoKit3AESO3GCMOMn', '_$s9CryptoKit3AESO3GCMON', '_$s9CryptoKit3AESOMa', 
-                       '_$s9CryptoKit3AESOMn', '_$s9CryptoKit3AESON', '_$s9CryptoKit4HKDFV6expand15pseudoRandomKey4info15outputByteCountAA09SymmetricG0Vqd___qd_0_SgSit10Foundation15ContiguousBytesRd__AK12DataProtocolRd_0_r0_lFZ', 
+                       '_$s9CryptoKit3AESO3GCMOMn', '_$s9CryptoKit3AESO3GCMON', '_$s9CryptoKit3AESO7KeyWrapO4wrap_5using10Foundation4DataVAA09SymmetricD0V_ALtKFZ', 
+                       '_$s9CryptoKit3AESO7KeyWrapO6unwrap_5usingAA09SymmetricD0Vx_AItK10Foundation12DataProtocolRzlFZ', 
+                       '_$s9CryptoKit3AESO7KeyWrapOMa', '_$s9CryptoKit3AESO7KeyWrapOMn', 
+                       '_$s9CryptoKit3AESO7KeyWrapON', '_$s9CryptoKit3AESOMa', '_$s9CryptoKit3AESOMn', 
+                       '_$s9CryptoKit3AESON', '_$s9CryptoKit4HKDFV6expand15pseudoRandomKey4info15outputByteCountAA09SymmetricG0Vqd___qd_0_SgSit10Foundation15ContiguousBytesRd__AK12DataProtocolRd_0_r0_lFZ', 
                        '_$s9CryptoKit4HKDFV7extract16inputKeyMaterial4saltAA24HashedAuthenticationCodeVyxGAA09SymmetricF0V_qd__Sgt10Foundation12DataProtocolRd__lFZ', 
                        '_$s9CryptoKit4HKDFV9deriveKey05inputE8Material15outputByteCountAA09SymmetricE0VAH_SitFZ', 
                        '_$s9CryptoKit4HKDFV9deriveKey05inputE8Material4info15outputByteCountAA09SymmetricE0VAI_qd__Sit10Foundation12DataProtocolRd__lFZ', 

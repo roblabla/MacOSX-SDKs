@@ -54,8 +54,6 @@ enum{
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-class OSObject;
-
 #define OSObject_Instantiate_ID       0x0000000100000001ULL
 
 enum {

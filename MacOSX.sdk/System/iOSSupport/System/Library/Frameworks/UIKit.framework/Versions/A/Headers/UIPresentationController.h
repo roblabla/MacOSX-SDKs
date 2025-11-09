@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIPresentationController;
 
+NS_SWIFT_UI_ACTOR
 @protocol UIAdaptivePresentationControllerDelegate <NSObject>
 
 @optional
@@ -30,14 +31,18 @@ NS_ASSUME_NONNULL_BEGIN
 // Returning UIModalPresentationNone will indicate that an adaptation should not happen.
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller traitCollection:(UITraitCollection *)traitCollection API_AVAILABLE(ios(8.3));
 
+// Called during adaptation so the delegate may configure properties of the adaptive presentation controller before it is presented.
+- (void)presentationController:(UIPresentationController *)presentationController prepareAdaptivePresentationController:(UIPresentationController *)adaptivePresentationController API_AVAILABLE(ios(15.0));
+
 // If this method is not implemented, or returns nil, then the originally presented view controller is used.
 - (nullable UIViewController *)presentationController:(UIPresentationController *)controller viewControllerForAdaptivePresentationStyle:(UIModalPresentationStyle)style;
 
 // If there is no adaptation happening and an original style is used UIModalPresentationNone will be passed as an argument.
 - (void)presentationController:(UIPresentationController *)presentationController willPresentWithAdaptiveStyle:(UIModalPresentationStyle)style transitionCoordinator:(nullable id <UIViewControllerTransitionCoordinator>)transitionCoordinator API_AVAILABLE(ios(8.3));
 
-// Called on the delegate when the presentation controller will dismiss in response to user action.
-// This method is not called if the presentedViewController isModalInPresentation or if the presentation is dismissed programatically.
+// Called on the delegate to determine if the presentation controller may dismiss in response to user action.
+// This method may be called at any time, and may not necessarily be followed by presentationControllerWillDismiss: or presentationControllerDidDismiss:.
+// Any implementation of this method should be fast.
 // Return NO to prevent dismissal of the view controller.
 - (BOOL)presentationControllerShouldDismiss:(UIPresentationController *)presentationController API_AVAILABLE(ios(13.0));
 
@@ -56,7 +61,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UIPresentationController : NSObject <UIAppearanceContainer, UITraitEnvironment, UIContentContainer, UIFocusEnvironment>
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
+@interface UIPresentationController : NSObject <UIAppearanceContainer, UITraitEnvironment, UIContentContainer, UIFocusEnvironment>
 
 @property(nonatomic, strong, readonly) UIViewController *presentingViewController;
 @property(nonatomic, strong, readonly) UIViewController *presentedViewController;

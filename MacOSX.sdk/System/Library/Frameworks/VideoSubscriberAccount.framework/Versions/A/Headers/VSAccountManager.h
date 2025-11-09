@@ -77,12 +77,12 @@ API_AVAILABLE(ios(10.0), tvos(10.0)) API_UNAVAILABLE(macCatalyst)
 /// Called when the account manager needs user interaction to complete a request.
 /// @param accountManager The account manager instance that needs to show the view controller.
 /// @param viewController A view controller that needs to be presented to the user.  You must use -presentViewController:animated:completion: to begin presenting this view controller before returning from this method.
-- (void)accountManager:(VSAccountManager *)accountManager presentViewController:(UIViewController *)viewController;
+- (void)accountManager:(VSAccountManager *)accountManager presentViewController:(UIViewController *)viewController API_UNAVAILABLE(macos, macCatalyst);
 
 /// Called when the account manager is finished using the presented view controller.
 /// @param accountManager The account manager instance that previously asked to show the view controller.
 /// @param viewController The view controller that is being presented to the user.  You must use -dismissViewControllerAnimated:completion: to begin dismissing the view controller before returning from this method.
-- (void)accountManager:(VSAccountManager *)accountManager dismissViewController:(UIViewController *)viewController;
+- (void)accountManager:(VSAccountManager *)accountManager dismissViewController:(UIViewController *)viewController API_UNAVAILABLE(macos, macCatalyst);
 
 @optional
 

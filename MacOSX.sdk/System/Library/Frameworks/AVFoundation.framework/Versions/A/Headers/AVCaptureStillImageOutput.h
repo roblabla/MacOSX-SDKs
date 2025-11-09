@@ -4,7 +4,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2010-2017 Apple Inc. All rights reserved.
+    Copyright 2010-2021 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVCaptureOutputBase.h>
@@ -137,7 +137,7 @@ API_DEPRECATED("Use AVCapturePhotoOutput instead.", macos(10.7, 10.15), ios(4.0,
  
     Calls to captureStillImageAsynchronouslyFromConnection:completionHandler: are not synchronized with AVCaptureDevice manual control completion handlers. Setting a device manual control, waiting for its completion, then calling captureStillImageAsynchronouslyFromConnection:completionHandler: DOES NOT ensure that the still image returned reflects your manual control change. It may be from an earlier time. You can compare your manual control completion handler sync time to the returned still image's presentation time. You can retrieve the sample buffer's pts using CMSampleBufferGetPresentationTimestamp(). If the still image has an earlier timestamp, your manual control command does not apply to it.
  */
-- (void)captureStillImageAsynchronouslyFromConnection:(AVCaptureConnection *)connection completionHandler:(void (^)(CMSampleBufferRef _Nullable imageDataSampleBuffer, NSError * _Nullable error))handler;
+- (void)captureStillImageAsynchronouslyFromConnection:(AVCaptureConnection *)connection completionHandler:(void (^)(CMSampleBufferRef _Nullable imageDataSampleBuffer, NSError * _Nullable error))handler NS_SWIFT_DISABLE_ASYNC;
 
 /*!
  @method jpegStillImageNSDataRepresentation:
@@ -262,6 +262,7 @@ API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHO
  
     In a bracketed capture, AVCaptureDevice flashMode property is ignored (flash is forced off), as is AVCaptureStillImageOutput's automaticallyEnablesStillImageStabilizationWhenAvailable property (stabilization is forced off).
  */
+API_DEPRECATED("Use AVCapturePhotoOutput instead.", macos(10.7, 10.15), ios(4.0, 10.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureStillImageOutput (AVCaptureStillImageOutputBracketedCapture)
 
 /*!
@@ -309,7 +310,7 @@ API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHO
  @discussion
     -maxBracketedCaptureStillImageCount tells you the maximum number of images that may be taken in a single bracket given the current AVCaptureDevice/AVCaptureSession/AVCaptureStillImageOutput configuration. But before taking a still image bracket, additional resources may need to be allocated. By calling -prepareToCaptureStillImageBracketFromConnection:withSettingsArray:completionHandler: first, you are able to deterministically know when the receiver is ready to capture the bracket with the specified settings array.
  */
-- (void)prepareToCaptureStillImageBracketFromConnection:(AVCaptureConnection *)connection withSettingsArray:(NSArray<__kindof AVCaptureBracketedStillImageSettings *> *)settings completionHandler:(void (^)(BOOL prepared, NSError * _Nullable error))handler API_DEPRECATED("Use AVCapturePhotoOutput setPreparedPhotoSettingsArray:completionHandler: instead.", ios(8.0, 10.0)) API_UNAVAILABLE(macos);
+- (void)prepareToCaptureStillImageBracketFromConnection:(AVCaptureConnection *)connection withSettingsArray:(NSArray<__kindof AVCaptureBracketedStillImageSettings *> *)settings completionHandler:(void (^)(BOOL prepared, NSError * _Nullable error))handler API_DEPRECATED("Use AVCapturePhotoOutput setPreparedPhotoSettingsArray:completionHandler: instead.", ios(8.0, 10.0)) API_UNAVAILABLE(macos) NS_SWIFT_DISABLE_ASYNC;
 
 /*!
  @method captureStillImageBracketAsynchronouslyFromConnection:withSettingsArray:completionHandler:
@@ -326,7 +327,7 @@ API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHO
  @discussion
     If you have not called -prepareToCaptureStillImageBracketFromConnection:withSettingsArray:completionHandler: for this still image bracket request, the bracket may not be taken immediately, as the receiver may internally need to prepare resources.
  */
-- (void)captureStillImageBracketAsynchronouslyFromConnection:(AVCaptureConnection *)connection withSettingsArray:(NSArray<__kindof AVCaptureBracketedStillImageSettings *> *)settings completionHandler:(void (^)(CMSampleBufferRef _Nullable sampleBuffer, AVCaptureBracketedStillImageSettings * _Nullable stillImageSettings, NSError * _Nullable error))handler API_DEPRECATED("Use AVCapturePhotoOutput capturePhotoWithSettings:delegate: instead.", ios(8.0, 10.0)) API_UNAVAILABLE(macos);
+- (void)captureStillImageBracketAsynchronouslyFromConnection:(AVCaptureConnection *)connection withSettingsArray:(NSArray<__kindof AVCaptureBracketedStillImageSettings *> *)settings completionHandler:(void (^)(CMSampleBufferRef _Nullable sampleBuffer, AVCaptureBracketedStillImageSettings * _Nullable stillImageSettings, NSError * _Nullable error))handler API_DEPRECATED("Use AVCapturePhotoOutput capturePhotoWithSettings:delegate: instead.", ios(8.0, 10.0)) API_UNAVAILABLE(macos) NS_SWIFT_DISABLE_ASYNC;
 
 @end
 

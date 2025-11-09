@@ -1,10 +1,10 @@
-.Dd September 15, 2010 
+.Dd January 19, 2021 
 .Dt productbuild 1 
-.Os Mac OS X
+.Os macOS
 .\"																				NAME 
 .Sh NAME
 .Nm productbuild
-.Nd Build a product archive for the OS X Installer or the Mac App Store
+.Nd Build a product archive for the macOS Installer or the Mac App Store.
 .\"																				SYNOPSIS
 .Sh SYNOPSIS
 .Nm
@@ -265,6 +265,16 @@ location specified by the component package itself.
 Valid only if
 .Cm --distribution
 is not specified.
+.Pp
+If the package provided was created by the
+.Cm pkgbuild
+tool with the
+.Cm --large-payload
+option specified, then its large payload format will be preserved. The generated
+product's distribution will include a minimum system version requirement of
+.Cm macOS 12.0
+or the minimum allowable system version(s) in the requirements property list,
+whichever is greater.
 .\"                                                                             --synthesize
 .It Cm --synthesize
 Write the synthesized distribution directly instead of incorporating it into a product archive.
@@ -290,6 +300,22 @@ is added to the product archive for use by the OS X Installer application's plug
 It will normally contain a
 .Pa InstallerSections.plist
 file, and one or more plugin bundles.
+.\"                                                                             --large-payload
+.It Cm --large-payload
+By default, packages that are nested inside of products have a per‐file size limit
+associated with them. This method instructs
+.Cm productbuild
+to construct a product where the included payload format supports large files.
+A large file is defined as any file that is
+.Cm 8 GiB
+or larger.
+.Pp
+.Cm Note:
+Opting into
+.Cm --large-payload
+enforces a distribution requirement that mandates
+.Cm macOS 12.0
+or later.
 .\"                                                                             --sign
 .It Cm --sign Ar identity-name
 Adds a digital signature to the resulting package. See

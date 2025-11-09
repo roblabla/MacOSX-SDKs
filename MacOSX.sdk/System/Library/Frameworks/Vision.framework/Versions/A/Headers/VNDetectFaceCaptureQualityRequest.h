@@ -7,6 +7,7 @@
 
 #import <Vision/VNRequest.h>
 #import <Vision/VNFaceObservationAccepting.h>
+#import <Vision/VNObservation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -22,6 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
 @interface VNDetectFaceCaptureQualityRequest : VNImageBasedRequest <VNFaceObservationAccepting>
+
+/*!
+	@discussion VNFaceObservation with populated faceCaptureQuality property results.
+*/
+@property (readonly, copy, nullable) NSArray<VNFaceObservation*>* results;
+
 @end
 
 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))

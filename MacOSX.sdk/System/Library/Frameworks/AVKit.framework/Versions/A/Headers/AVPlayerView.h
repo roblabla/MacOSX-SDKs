@@ -10,13 +10,19 @@
 #import <AppKit/AppKit.h>
 #import <AVFoundation/AVFoundation.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol AVPlayerViewDelegate;
+@protocol AVPlayerViewPictureInPictureDelegate;
+
+
+// MARK: -
 
 /*!
 	@class		AVPlayerView
 	@abstract	AVPlayerView is a subclass of NSView that can be used to display the visual content of an AVPlayer object and the standard playback controls.
  */
-
 API_AVAILABLE(macosx(10.9))
 @interface AVPlayerView : NSView
 
@@ -49,6 +55,7 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 /*!
 	@property	controlsStyle
 	@abstract	The style of the playback controls pane currently associated with the view.
+ 	@discussion	After macOS 11, the floating style controls will always be used when presenting in fullscreen and AVPlayerViewControlsStyleNone is not specified.
  */
 @property AVPlayerViewControlsStyle controlsStyle;
 
@@ -83,8 +90,16 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
  */
 @property BOOL updatesNowPlayingInfoCenter API_AVAILABLE(macosx(10.13));
 
+/*!
+	@property	delegate
+	@abstract	The receiver's delegate.
+ */
+@property (nonatomic, readwrite, nullable, weak) id<AVPlayerViewDelegate> delegate API_AVAILABLE(macos(12.0));
+
 @end
 
+
+// MARK: -
 
 @interface AVPlayerView (AVPlayerViewCustomization)
 
@@ -121,6 +136,8 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 @end
 
 
+// MARK: -
+
 @interface AVPlayerView (AVPlayerViewTrimming)
 
 /*!
@@ -151,6 +168,8 @@ typedef NS_ENUM(NSInteger, AVPlayerViewTrimResult) {
 @end
 
 
+// MARK: -
+
 @interface AVPlayerView (AVPlayerViewChapterIndicator)
 
 /*!
@@ -166,7 +185,7 @@ typedef NS_ENUM(NSInteger, AVPlayerViewTrimResult) {
 @end
 
 
-@protocol AVPlayerViewPictureInPictureDelegate;
+// MARK: -
 
 @interface AVPlayerView (AVPlayerViewPictureInPictureSupport)
 
@@ -184,6 +203,63 @@ typedef NS_ENUM(NSInteger, AVPlayerViewTrimResult) {
 
 @end
 
+
+// MARK: -
+
+/*!
+	@protocol	AVPlayerViewDelegate
+	@abstract	A protocol for delegates of AVPlayerView.
+ */
+API_AVAILABLE(macos(12.0))
+@protocol AVPlayerViewDelegate <NSObject>
+@optional
+
+/*!
+	@method		playerViewWillEnterFullScreen:
+	@param		playerView
+				The player view.
+	@abstract	The delegate can implement this method to be notified when the AVPlayerView will enter full screen.
+ */
+- (void)playerViewWillEnterFullScreen:(AVPlayerView *)playerView;
+
+/*!
+	@method		playerViewDidEnterFullScreen:
+	@param		playerView
+				The player view.
+	@abstract	The delegate can implement this method to be notified when the AVPlayerView did enter full screen.
+ */
+- (void)playerViewDidEnterFullScreen:(AVPlayerView *)playerView;
+
+/*!
+	@method		playerViewWillExitFullScreen:
+	@param		playerView
+				The player view.
+	@abstract	The delegate can implement this method to be notified when the AVPlayerView will exit full screen.
+ */
+- (void)playerViewWillExitFullScreen:(AVPlayerView *)playerView;
+
+/*!
+	@method		playerViewDidExitFullScreen:
+	@param		playerView
+				The player view.
+	@abstract	The delegate can implement this method to be notified when the AVPlayerView did exit full screen.
+ */
+- (void)playerViewDidExitFullScreen:(AVPlayerView *)playerView;
+
+/*!
+	@method		playerView:restoreUserInterfaceForFullScreenExitWithCompletionHandler:
+	@param		playerView
+				The player view.
+	@param		completionHandler
+ 				The completion handler the delegate must call after restoring the interface for an exit full screen transition.
+	@abstract	The delegate can implement this method to restore the user interface before exiting fullscreen.
+ */
+- (void)playerView:(AVPlayerView *)playerView restoreUserInterfaceForFullScreenExitWithCompletionHandler:(void (^)(BOOL restored))completionHandler;
+
+@end
+
+
+// MARK: -
 
 API_AVAILABLE(macos(10.15))
 @protocol AVPlayerViewPictureInPictureDelegate <NSObject>

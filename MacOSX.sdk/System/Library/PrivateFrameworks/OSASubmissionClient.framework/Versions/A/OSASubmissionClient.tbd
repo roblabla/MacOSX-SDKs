@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C161466A-1BDD-3117-A6C2-5775ECD14A56
+    value:           DA7AED6E-5FA7-302D-94BC-7F08BB24AD5B
   - target:          x86_64-maccatalyst
-    value:           C161466A-1BDD-3117-A6C2-5775ECD14A56
+    value:           DA7AED6E-5FA7-302D-94BC-7F08BB24AD5B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6CD1C863-A0EB-3D89-9D6C-75422B3F22AB
+    value:           21C5FC84-F7E3-30C8-A599-68381F96E783
   - target:          arm64e-maccatalyst
-    value:           6CD1C863-A0EB-3D89-9D6C-75422B3F22AB
+    value:           21C5FC84-F7E3-30C8-A599-68381F96E783
 install-name:    '/System/Library/PrivateFrameworks/OSASubmissionClient.framework/Versions/A/OSASubmissionClient'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _OSASubmissionClientVersionNumber, _OSASubmissionClientVersionString ]
-    objc-classes:    [ OSASubmissionClient ]
+    objc-classes:    [ OSASubmissionClient, OSASubmissionClientOptions, OSASubmissionScheduler ]
 ...

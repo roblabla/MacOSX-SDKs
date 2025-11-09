@@ -55,6 +55,7 @@ typedef NS_ENUM(NSInteger, UIModalPresentationStyle) {
     UIModalPresentationAutomatic API_AVAILABLE(ios(13.0)) = -2,
 };
 
+NS_SWIFT_UI_ACTOR
 @protocol UIContentContainer <NSObject>
 
 @property (nonatomic, readonly) CGSize preferredContentSize API_AVAILABLE(ios(8.0));
@@ -94,7 +95,8 @@ typedef NS_ENUM(NSInteger, UIModalPresentationStyle) {
 // Sometimes view controllers that are using showViewController:sender and showDetailViewController:sender: will need to know when the split view controller environment above it has changed. This notification will be posted when that happens (for example, when a split view controller is collapsing or expanding). The NSNotification's object will be the view controller that caused the change.
 UIKIT_EXTERN NSNotificationName const UIViewControllerShowDetailTargetDidChangeNotification API_AVAILABLE(ios(8.0));
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIViewController : UIResponder <NSCoding, UIAppearanceContainer, UITraitEnvironment, UIContentContainer, UIFocusEnvironment>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIViewController : UIResponder <NSCoding, UIAppearanceContainer, UITraitEnvironment, UIContentContainer, UIFocusEnvironment>
 
 /*
   The designated initializer. If you subclass UIViewController, you must call the super implementation of this
@@ -194,8 +196,12 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIViewController : UIResponder <
 // A controller that defines the presentation context can also specify the modal transition style if this property is true.
 @property(nonatomic,assign) BOOL providesPresentationContextTransitionStyle API_AVAILABLE(ios(5.0));
 
-// If YES, when this view controller becomes visible and focusable, focus will be automatically restored to the item that was last focused. For example, when an item in this view controller is focused, and then another view controller is presented and dismissed, the original item will become focused again. Defaults to YES.
+/// If YES, when this view controller becomes visible and focusable, focus will be automatically restored to the item that was last focused. For example, when an item in this view controller is focused, and then another view controller is presented and dismissed, the original item will become focused again. Defaults to YES.
+/// @note On tvOS, this value for UISearchController is set to NO if the controller, or UISearchContainerViewController containing it, is embedded in UITabBarController.
 @property (nonatomic) BOOL restoresFocusAfterTransition API_AVAILABLE(ios(10.0));
+
+/// The identifier of the focus group that this view controller belongs to. If this is nil, the view controller inherits the focus group of its parent focus environment.
+@property (nonatomic, readwrite, nullable, copy) NSString *focusGroupIdentifier API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*
   These four methods can be used in a view controller's appearance callbacks to determine if it is being
@@ -215,9 +221,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIViewController : UIResponder <
   dismissModalViewControllerAnimated: The completion handler, if provided, will be invoked after the presented
   controllers viewDidAppear: callback is invoked.
 */
-- (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^ __nullable)(void))completion API_AVAILABLE(ios(5.0));
+- (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^ __nullable)(void))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(5.0));
 // The completion handler, if provided, will be invoked after the dismissed controller's viewDidDisappear: callback is invoked.
-- (void)dismissViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion API_AVAILABLE(ios(5.0));
+- (void)dismissViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(5.0));
 
 // Display another view controller as a modal child. Uses a vertical sheet transition if animated.This method has been replaced by presentViewController:animated:completion:
 - (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(tvos);
@@ -250,6 +256,21 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIViewController : UIResponder <
 @property(nonatomic,assign) UIRectEdge edgesForExtendedLayout API_AVAILABLE(ios(7.0)); // Defaults to UIRectEdgeAll
 @property(nonatomic,assign) BOOL extendedLayoutIncludesOpaqueBars API_AVAILABLE(ios(7.0)); // Defaults to NO, but bars are translucent by default on 7_0.  
 @property(nonatomic,assign) BOOL automaticallyAdjustsScrollViewInsets API_DEPRECATED("Use UIScrollView's contentInsetAdjustmentBehavior instead", ios(7.0,11.0),tvos(7.0,11.0)); // Defaults to YES
+
+/* Depending on the value passed in the `edge` parameter, a containing UINavigationController,
+ UITabBarController, or both will observe the UIScrollView instance in the
+ `contentScrollView` parameter to determine the background blur for the bars and to
+ update contentInset adjustments for the scroll view.
+
+ When contentScrollView is nil for an edge, UIKit uses a heuristic to search for
+ a UIScrollView to track. If none is found, the relevant bar will be transparent unless
+ otherwise customized with the `scrollEdgeAppearance` APIs.
+ */
+/// Aggregate values (e.g., NSDirectionalRectEdgeAll) are accepted in the `edge` parameter; NSDirectionalRectEdgeLeading and Trailing are ignored on iOS 15.0
+- (void)setContentScrollView:(nullable UIScrollView *)scrollView forEdge:(NSDirectionalRectEdge)edge API_AVAILABLE(ios(15.0),tvos(15.0));
+
+/// Pass only a single edge (e.g., NSDirectionalRectEdgeTop) in the `edge` parameter. Raises an exception when passed an aggregate edge (e.g., NSDirectionalRectEdgeAll)
+- (nullable UIScrollView *)contentScrollViewForEdge:(NSDirectionalRectEdge)edge API_AVAILABLE(ios(15.0),tvos(15.0)); // Subclass overrides will be called when available
 
 /* The preferredContentSize is used for any container laying out a child view controller.
  */
@@ -385,7 +406,7 @@ UIKIT_EXTERN NSExceptionName const UIViewControllerHierarchyInconsistencyExcepti
   UIView APIs directly. If they are used it is important to ensure that the toViewController's view is added
   to the visible view hierarchy while the fromViewController's view is removed.
 */
-- (void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))animations completion:(void (^ __nullable)(BOOL finished))completion API_AVAILABLE(ios(5.0));
+- (void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))animations completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(5.0));
 
 // If a custom container controller manually forwards its appearance callbacks, then rather than calling
 // viewWillAppear:, viewDidAppear: viewWillDisappear:, or viewDidDisappear: on the children these methods
@@ -527,12 +548,13 @@ UIKIT_EXTERN NSExceptionName const UIViewControllerHierarchyInconsistencyExcepti
 
 @end
 
-@class UIPresentationController, UIPopoverPresentationController;
+@class UIPresentationController, UISheetPresentationController, UIPopoverPresentationController;
 
 @interface UIViewController (UIPresentationController)
 
-@property (nullable, nonatomic,readonly) UIPresentationController *presentationController API_AVAILABLE(ios(8.0));
-@property (nullable, nonatomic,readonly) UIPopoverPresentationController *popoverPresentationController API_AVAILABLE(ios(8.0));
+@property (nullable, nonatomic, readonly) UIPresentationController *presentationController API_AVAILABLE(ios(8.0));
+@property (nullable, nonatomic, readonly) UISheetPresentationController *sheetPresentationController API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
+@property (nullable, nonatomic, readonly) UIPopoverPresentationController *popoverPresentationController API_AVAILABLE(ios(8.0));
 
 // modalInPresentation is set on the view controller when you wish to force the presentation hosting the view controller into modal behavior. When this is active, the presentation will prevent interactive dismiss and ignore events outside of the presented view controller's bounds until this is set to NO.
 @property (nonatomic, getter=isModalInPresentation) BOOL modalInPresentation API_AVAILABLE(ios(13.0));
@@ -542,6 +564,7 @@ UIKIT_EXTERN NSExceptionName const UIViewControllerHierarchyInconsistencyExcepti
 
 @protocol UIViewControllerPreviewingDelegate;
 
+NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerPreviewing <NSObject>
 
 // This gesture can be used to cause the previewing presentation to wait until one of your gestures fails or to allow simultaneous recognition during the initial phase of the preview presentation.
@@ -558,7 +581,8 @@ UIKIT_EXTERN NSExceptionName const UIViewControllerHierarchyInconsistencyExcepti
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @protocol UIViewControllerPreviewingDelegate <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@protocol UIViewControllerPreviewingDelegate <NSObject>
 
 // If you return nil, a preview presentation will not be performed
 - (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location API_DEPRECATED_WITH_REPLACEMENT("UIContextMenuInteraction", ios(9.0, 13.0));
@@ -626,7 +650,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @protocol UIViewControllerPreviewingDelegat
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @protocol UIPreviewActionItem <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@protocol UIPreviewActionItem <NSObject>
 @property(nonatomic, copy, readonly) NSString *title;
 @end
 
@@ -636,8 +661,8 @@ typedef NS_ENUM(NSInteger,UIPreviewActionStyle) {
     UIPreviewActionStyleDestructive,
 } API_AVAILABLE(ios(9.0));
 
-NS_CLASS_DEPRECATED_IOS(9_0, 13_0, "UIViewControllerPreviewing is deprecated. Please use UIContextMenuInteraction.")
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIPreviewAction : NSObject <NSCopying,UIPreviewActionItem>
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_DEPRECATED("Please use UIContextMenuInteraction.", ios(9.0, 13.0)) NS_SWIFT_UI_ACTOR
+@interface UIPreviewAction : NSObject <NSCopying,UIPreviewActionItem>
 
 @property(nonatomic, copy, readonly) void (^handler)(id<UIPreviewActionItem> action, UIViewController *previewViewController);
 
@@ -645,8 +670,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIPreviewAction : NSObject <NSCo
 
 @end
 
-NS_CLASS_DEPRECATED_IOS(9_0, 13_0, "UIViewControllerPreviewing is deprecated. Please use UIContextMenuInteraction.")
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIPreviewActionGroup : NSObject <NSCopying,UIPreviewActionItem>
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_DEPRECATED("Please use UIContextMenuInteraction.", ios(9.0, 13.0)) NS_SWIFT_UI_ACTOR
+@interface UIPreviewActionGroup : NSObject <NSCopying,UIPreviewActionItem>
 + (instancetype)actionGroupWithTitle:(NSString *)title style:(UIPreviewActionStyle)style actions:(NSArray<UIPreviewAction *> *)actions;
 @end
 

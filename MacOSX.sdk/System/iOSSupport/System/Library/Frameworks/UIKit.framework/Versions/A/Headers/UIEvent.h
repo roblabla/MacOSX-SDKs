@@ -58,7 +58,8 @@ typedef NS_OPTIONS(NSInteger, UIEventButtonMask) {
 /// .button(2) == .secondary
 UIKIT_EXTERN UIEventButtonMask UIEventButtonMaskForButtonNumber(NSInteger buttonNumber) NS_SWIFT_NAME(UIEventButtonMask.button(_:)) API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(tvos, watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIEvent : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIEvent : NSObject
 
 @property(nonatomic,readonly) UIEventType     type API_AVAILABLE(ios(3.0));
 @property(nonatomic,readonly) UIEventSubtype  subtype API_AVAILABLE(ios(3.0));

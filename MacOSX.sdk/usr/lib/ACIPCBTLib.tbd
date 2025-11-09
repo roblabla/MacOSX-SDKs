@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           323880D7-388B-314A-8A72-5B3C01709276
+    value:           219A8122-60A8-3FCD-8C45-5AACA3F2AD74
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2E2C6712-8A41-3E2A-8D2D-9D58A9175EC2
+    value:           A243F707-47B8-3ADE-8E91-45859D32AC41
 install-name:    '/usr/lib/ACIPCBTLib.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -27,8 +27,9 @@ exports:
                        __ZN12ACIPCBTClassC1Ev, __ZN12ACIPCBTClassC2Ev, __ZN12ACIPCBTClassD1Ev, 
                        __ZN12ACIPCBTClassD2Ev, __ZN19ACIPCBTControlClass10loggerTuneEjjPvS0_, 
                        __ZN19ACIPCBTControlClass13readLogsAsyncEPvjbPFvS0_iS0_ES0_, 
-                       __ZN19ACIPCBTControlClass19setNotificationPortEv, __ZN19ACIPCBTControlClass21clearNotificationPortEv, 
-                       __ZN19ACIPCBTControlClass21getLastKnownBootStageEPj, __ZN19ACIPCBTControlClass23generalInterestCallbackEPvjjS0_, 
+                       __ZN19ACIPCBTControlClass14waitforServiceEv, __ZN19ACIPCBTControlClass19setNotificationPortEv, 
+                       __ZN19ACIPCBTControlClass21clearNotificationPortEv, __ZN19ACIPCBTControlClass21getLastKnownBootStageEPj, 
+                       __ZN19ACIPCBTControlClass23generalInterestCallbackEPvjjS0_, 
                        __ZN19ACIPCBTControlClass24getLogInternalBufferSizeEPj, __ZN19ACIPCBTControlClass24setEventNotificationPortEv, 
                        __ZN19ACIPCBTControlClass25registerEventNotificationEP11__CFRunLoopP17ACIPCControlEvent, 
                        __ZN19ACIPCBTControlClass25registerEventNotificationEP16dispatch_queue_sP17ACIPCControlEvent, 

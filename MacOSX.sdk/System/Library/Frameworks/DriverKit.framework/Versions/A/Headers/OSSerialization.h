@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from OSSerialization.iig */
+/* iig(DriverKit-191) generated from OSSerialization.iig */
 
 /* OSSerialization.iig:1-38 */
 /*
@@ -196,12 +196,21 @@ class OSSerialization : public OSContainer, public OSSerializationInterface
 
 #if !KERNEL
 public:
+#ifdef OSSerialization_DECLARE_IVARS
+OSSerialization_DECLARE_IVARS
+#else /* OSSerialization_DECLARE_IVARS */
     union
     {
         OSSerialization_IVars * ivars;
         OSSerialization_LocalIVars * lvars;
     };
+#endif /* OSSerialization_DECLARE_IVARS */
 #endif /* !KERNEL */
+
+#if !KERNEL
+    static OSMetaClass *
+    sGetMetaClass() { return gOSSerializationMetaClass; };
+#endif /* KERNEL */
 
     using super = OSContainer;
 

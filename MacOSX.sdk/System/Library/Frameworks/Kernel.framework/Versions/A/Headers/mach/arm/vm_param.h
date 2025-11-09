@@ -36,6 +36,8 @@
 #ifndef _MACH_ARM_VM_PARAM_H_
 #define _MACH_ARM_VM_PARAM_H_
 
+#if defined (__arm__) || defined (__arm64__)
+
 
 
 #define BYTE_SIZE       8       /* byte size in bits */
@@ -138,20 +140,46 @@ extern int PAGE_SHIFT_CONST;
 
 #define VM_MIN_KERNEL_AND_KEXT_ADDRESS  VM_MIN_KERNEL_ADDRESS
 
+#if defined (__arm64__)
+/* Top-Byte-Ignore */
+#define TBI_MASK           0xff00000000000000ULL
+#define tbi_clear(addr)    ((typeof (addr))(((uintptr_t)(addr)) &~ (TBI_MASK)))
+#define tbi_fill(addr)     ((typeof (addr))(((uintptr_t)(addr)) | (TBI_MASK)))
+#endif /* __arm64__ */
+
+#if CONFIG_KERNEL_TBI
+/*
+ * 'strip' in PAC sense, therefore replacing the stripped bits sign extending
+ * the sign bit.
+ */
+#define VM_KERNEL_TBI_FILL(_v)  (tbi_fill(_v))
+#define VM_KERNEL_TBI_CLEAR(_v) (tbi_clear(_v))
+#define VM_KERNEL_STRIP_TBI(_v) (VM_KERNEL_TBI_FILL(_v))
+#else /* CONFIG_KERNEL_TBI */
+#define VM_KERNEL_TBI_FILL(_v)  (_v)
+#define VM_KERNEL_TBI_CLEAR(_v) (_v)
+#define VM_KERNEL_STRIP_TBI(_v) (_v)
+#endif /* CONFIG_KERNE_TBI */
+
 #if __has_feature(ptrauth_calls)
 #include <ptrauth.h>
-#define VM_KERNEL_STRIP_PTR(_v) (ptrauth_strip((void *)(uintptr_t)(_v), ptrauth_key_asia))
+#define VM_KERNEL_STRIP_PAC(_v) (ptrauth_strip((void *)(uintptr_t)(_v), ptrauth_key_asia))
 #else /* !ptrauth_calls */
-#define VM_KERNEL_STRIP_PTR(_v) (_v)
+#define VM_KERNEL_STRIP_PAC(_v) (_v)
 #endif /* ptrauth_calls */
 
+#define VM_KERNEL_STRIP_PTR(_va)        ((VM_KERNEL_STRIP_TBI(VM_KERNEL_STRIP_PAC(_va))))
+#define VM_KERNEL_STRIP_UPTR(_va)       ((vm_address_t)VM_KERNEL_STRIP_PTR((uintptr_t)(_va)))
 #define VM_KERNEL_ADDRESS(_va)  \
-	((((vm_address_t)VM_KERNEL_STRIP_PTR(_va)) >= VM_MIN_KERNEL_ADDRESS) && \
-	 (((vm_address_t)VM_KERNEL_STRIP_PTR(_va)) <= VM_MAX_KERNEL_ADDRESS))
+	((VM_KERNEL_STRIP_UPTR(_va) >= VM_MIN_KERNEL_ADDRESS) && \
+	 (VM_KERNEL_STRIP_UPTR(_va) <= VM_MAX_KERNEL_ADDRESS))
+
 
 
 #endif  /* !__ASSEMBLER__ */
 
 #define SWI_SYSCALL     0x80
+
+#endif /* defined (__arm__) || defined (__arm64__) */
 
 #endif  /* _MACH_ARM_VM_PARAM_H_ */

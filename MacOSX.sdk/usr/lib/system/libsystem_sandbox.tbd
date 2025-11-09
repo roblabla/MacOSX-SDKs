@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           24C8DF94-E258-3E24-AC96-2D1FB85F076A
+    value:           52B80C16-A457-3246-91AC-BF34D49C784B
   - target:          x86_64-maccatalyst
-    value:           24C8DF94-E258-3E24-AC96-2D1FB85F076A
+    value:           52B80C16-A457-3246-91AC-BF34D49C784B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           704F03F3-ABC8-3904-8395-DFA0FA94A824
+    value:           0260217A-B800-36E8-BBAB-416BE87D55DA
   - target:          arm64e-maccatalyst
-    value:           704F03F3-ABC8-3904-8395-DFA0FA94A824
+    value:           0260217A-B800-36E8-BBAB-416BE87D55DA
 install-name:    '/usr/lib/system/libsystem_sandbox.dylib'
-current-version: 1441.101.1
+current-version: 1654
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _APP_SANDBOX_IOKIT_CLIENT, _APP_SANDBOX_MACH, _APP_SANDBOX_READ, 
                        _APP_SANDBOX_READ_WRITE, _IOS_SANDBOX_APPLICATION_GROUP, _IOS_SANDBOX_CONTAINER, 

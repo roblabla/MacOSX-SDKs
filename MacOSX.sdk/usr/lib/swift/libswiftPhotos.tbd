@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7FD76816-E61C-3682-8E8E-D362E0C56AB3
+    value:           7ACB8546-565D-3D5F-8D98-EE35BAB2EFF0
   - target:          x86_64-maccatalyst
-    value:           7FD76816-E61C-3682-8E8E-D362E0C56AB3
+    value:           7ACB8546-565D-3D5F-8D98-EE35BAB2EFF0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6810CC89-BC8D-340F-9404-A2C75FBE61A3
+    value:           CF3E81B3-3151-3088-AD7B-38A3C88D05D3
   - target:          arm64e-maccatalyst
-    value:           6810CC89-BC8D-340F-9404-A2C75FBE61A3
+    value:           CF3E81B3-3151-3088-AD7B-38A3C88D05D3
 install-name:    '/usr/lib/swift/libswiftPhotos.dylib'
-current-version: 340.0.220
+current-version: 400.27.210
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftPhotos.dylib', '$ld$install_name$os10.11$@rpath/libswiftPhotos.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftPhotos.dylib', '$ld$install_name$os10.13$@rpath/libswiftPhotos.dylib', 

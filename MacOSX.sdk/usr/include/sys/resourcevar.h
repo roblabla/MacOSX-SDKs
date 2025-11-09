@@ -89,6 +89,4 @@ struct pstats {
 	uint64_t ps_start;              /* starting time ; compat only */
 };
 
-
-
 #endif  /* !_SYS_RESOURCEVAR_H_ */

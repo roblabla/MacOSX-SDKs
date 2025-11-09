@@ -20,7 +20,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.3), watchos(3.2))
+API_DEPRECATED("INSearchForBillsIntent is deprecated. There is no replacement.", ios(10.3, 15.0), watchos(3.2, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INSearchForBillsIntent : INIntent
 
@@ -49,7 +49,7 @@ API_UNAVAILABLE(macos, tvos)
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(10.3), watchos(3.2))
+API_DEPRECATED("INSearchForBillsIntentHandling is deprecated. There is no replacement.", ios(10.3, 15.0), watchos(3.2, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @protocol INSearchForBillsIntentHandling <NSObject>
 
@@ -94,19 +94,19 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolveBillPayeeForSearchForBills:(INSearchForBillsIntent *)intent
-                    withCompletion:(void (^)(INBillPayeeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveBillPayee(for:with:));
+                           withCompletion:(void (^)(INBillPayeeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveBillPayee(for:with:));
 
 - (void)resolvePaymentDateRangeForSearchForBills:(INSearchForBillsIntent *)intent
-                    withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePaymentDateRange(for:with:));
+                                  withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePaymentDateRange(for:with:));
 
 - (void)resolveBillTypeForSearchForBills:(INSearchForBillsIntent *)intent
-                    withCompletion:(void (^)(INBillTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveBillType(for:with:));
+                          withCompletion:(void (^)(INBillTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveBillType(for:with:));
 
 - (void)resolveStatusForSearchForBills:(INSearchForBillsIntent *)intent
-                    withCompletion:(void (^)(INPaymentStatusResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveStatus(for:with:));
+                        withCompletion:(void (^)(INPaymentStatusResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveStatus(for:with:));
 
 - (void)resolveDueDateRangeForSearchForBills:(INSearchForBillsIntent *)intent
-                    withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDueDateRange(for:with:));
+                              withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDueDateRange(for:with:));
 
 @end
 

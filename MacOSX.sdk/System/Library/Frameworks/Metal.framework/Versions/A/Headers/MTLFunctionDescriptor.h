@@ -11,6 +11,7 @@
 #import <Metal/MTLArgument.h>
 #import <Metal/MTLFunctionConstantValues.h>
 
+@protocol MTLBinaryArchive;
 
 typedef NS_OPTIONS(NSUInteger, MTLFunctionOptions) {
     /**
@@ -58,6 +59,12 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
 */
 @property (nonatomic) MTLFunctionOptions options;
 
+/*!
+@property binaryArchives
+@abstract The array of archives to be searched.
+@discussion Binary archives to be searched for precompiled functions during the compilation of this function.
+*/
+@property (readwrite, nullable, nonatomic, copy) NSArray<id<MTLBinaryArchive>> *binaryArchives API_AVAILABLE(macos(12.0), ios(15.0));
 
 @end
 

@@ -16,7 +16,7 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 @property (nonatomic, readonly, copy) NSString *substring;
 @property (nonatomic, readonly) NSRange substringRange;
 
-// Relative to start of utterance
+// Relative to start of audio
 @property (nonatomic, readonly) NSTimeInterval timestamp;
 @property (nonatomic, readonly) NSTimeInterval duration;
 
@@ -26,7 +26,7 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 // Other possible interpretations of this segment
 @property (nonatomic, readonly) NSArray<NSString *> *alternativeSubstrings;
 
-@property (nonatomic, nullable, readonly) SFVoiceAnalytics *voiceAnalytics API_AVAILABLE(ios(13.0), macos(10.15)) __deprecated_msg("voiceAnalytics is moved to SFSpeechRecognitionMetadata");
+@property (nonatomic, nullable, readonly) SFVoiceAnalytics *voiceAnalytics NS_DEPRECATED(10_15, 11_3, 13_0, 14_5, "voiceAnalytics is moved to SFSpeechRecognitionMetadata");
 
 @end
 

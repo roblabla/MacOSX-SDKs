@@ -2,7 +2,7 @@
  *  hv.h
  *  Hypervisor Framework
  *
- *  Copyright (c) 2013-2019 Apple Inc. All rights reserved.
+ *  Copyright (c) 2013-2021 Apple Inc. All rights reserved.
  */
 
 #ifndef __HYPERVISOR_HV__
@@ -16,10 +16,12 @@
 #include <Hypervisor/hv_error.h>
 #include <Hypervisor/hv_types.h>
 #include <Hypervisor/hv_arch_x86.h>
+#include <Hypervisor/hv_intr.h>
 
 #define __HV_10_10 __API_AVAILABLE(macos(10.10))
 #define __HV_10_15 __API_AVAILABLE(macos(10.15))
 #define __HV_11_0 __API_AVAILABLE(macos(11.0))
+#define __HV_12_0 __API_AVAILABLE(macos(12.0))
 
 OS_ASSUME_NONNULL_BEGIN
 
@@ -106,6 +108,28 @@ extern hv_return_t hv_vm_unmap(hv_gpaddr_t gpa, size_t size) __HV_10_10;
 extern hv_return_t hv_vm_protect(hv_gpaddr_t gpa, size_t size,
 	hv_memory_flags_t flags) __HV_10_10;
 
+
+/*!
+ * @function   hv_vm_allocate_map
+ * @abstract   Allocate anonymous memory and map it into the guest physical
+ *             address space of the VM
+ * @param      uvap   Returned virtual address of the allocated memory
+ * @param      gpa    Page aligned address in the guest physical address space
+ * @param      size   Size in bytes of the region to be allocated and mapped
+ * @param      flags  READ, WRITE and EXECUTE permissions of the guest mapped
+ *                    region
+ * @result     0 on success or error code
+ * @discussion
+ *             The region should be unmapped by calling hv_vm_unmap() and
+ *             memory should be deallocated by calling mach_vm_deallocate().
+ *             The memory returned by uvap is allocated with VM_PROT_DEFAULT
+ *             permissions
+ *             This API enables accurate memory accounting of the allocations
+ *             it creates.
+ */
+extern hv_return_t hv_vm_allocate_map(void * _Nullable * _Nonnull uvap,
+	hv_gpaddr_t gpa, size_t size, hv_memory_flags_t flags) __HV_12_0;
+
 /*!
  * @function   hv_vm_map_space
  * @abstract   Maps a region in the virtual address space of the current task
@@ -130,6 +154,29 @@ extern hv_return_t hv_vm_map_space(hv_vm_space_t asid, hv_uvaddr_t uva,
  */
 extern hv_return_t hv_vm_unmap_space(hv_vm_space_t asid, hv_gpaddr_t gpa,
 	size_t size) __HV_10_15;
+
+/*!
+ * @function   hv_vm_allocate_map_space
+ * @abstract   Allocate anonymous memory and map it into the guest physical
+ *             address space of the VM
+ * @param      asid   Address space ID
+ * @param      uvap   Returned virtual address of the allocated memory
+ * @param      gpa    Page aligned address in the guest physical address space
+ * @param      size   Size in bytes of the region to be allocated and mapped
+ * @param      flags  READ, WRITE and EXECUTE permissions of the guest mapped
+ *                    region
+ * @result     0 on success or error code
+ * @discussion
+ *             The region should be unmapped by calling hv_vm_unmap_space() and
+ *             memory should be deallocated by calling mach_vm_deallocate().
+ *             The memory returned by uvap is allocated with VM_PROT_DEFAULT
+ *             permissions
+ *             This API enables accurate memory accounting of the allocations it
+ *             creates.
+ */
+extern hv_return_t hv_vm_allocate_map_space(hv_vm_space_t asid,
+	void * _Nullable * _Nonnull uvap, hv_gpaddr_t gpa, size_t size,
+	hv_memory_flags_t flags) __HV_12_0;
 
 /*!
  * @function   hv_vm_protect_space
@@ -352,10 +399,14 @@ extern hv_return_t hv_vcpu_write_msr(hv_vcpuid_t vcpu, uint32_t msr,
  * @abstract   Forces flushing of cached vCPU state
  * @param      vcpu  vCPU ID
  * @result     0 on success or error code
+ * @deprecated This API has no effect and always returns HV_UNSUPPORTED.
  * @discussion
+ *             This API should be removed from your application.
+ *
  *             Must be called by the owning thread
  */
-extern hv_return_t hv_vcpu_flush(hv_vcpuid_t vcpu) __HV_10_10;
+extern hv_return_t hv_vcpu_flush(hv_vcpuid_t vcpu)
+__API_DEPRECATED("This API has no effect and always returns HV_UNSUPPORTED", macos(10.10, 11.0));
 
 /*!
  * @function   hv_vcpu_invalidate_tlb
@@ -372,7 +423,6 @@ extern hv_return_t hv_vcpu_invalidate_tlb(hv_vcpuid_t vcpu) __HV_10_10;
  * @abstract   Executes a vCPU
  * @param      vcpu  vCPU ID
  * @result     0 on success or error code
- * @deprecated Use hv_vcpu_run_until(..., HV_DEADLINE_FOREVER) instead.
  * @discussion
  *             Call blocks until the next VMEXIT of the vCPU, even if the
  *             VMEXIT was transparently handled. vm_vcpu_run_until()
@@ -385,6 +435,10 @@ extern hv_return_t hv_vcpu_invalidate_tlb(hv_vcpuid_t vcpu) __HV_10_10;
  *             Must be called by the owning thread
  */
 extern hv_return_t hv_vcpu_run(hv_vcpuid_t vcpu);
+
+enum {
+    HV_DEADLINE_FOREVER = (~0ull)
+} __HV_11_0;
 
 /*!
  * @function   hv_vcpu_run_until
@@ -407,10 +461,6 @@ extern hv_return_t hv_vcpu_run(hv_vcpuid_t vcpu);
  *
  *             Must be called by the owning thread
  */
-enum {
-    HV_DEADLINE_FOREVER = (~0ull)
-} __HV_11_0;
-
 extern hv_return_t hv_vcpu_run_until(hv_vcpuid_t vcpu,
 	uint64_t deadline) __HV_10_15;
 
@@ -437,6 +487,21 @@ extern hv_return_t hv_vcpu_get_exec_time(hv_vcpuid_t vcpu,
 	uint64_t *time) __HV_10_10;
 
 /*!
+ * @function   hv_vcpu_get_idle_time
+ * @abstract   Returns the cumulative idle time of a vCPU in nanoseconds
+ * @param      vcpu  vCPU ID
+ * @param      time  Pointer to idle time value (written on success)
+ * @result     0 on success or error code
+ * @discussion
+ *			   This is the time spent in the kernel emulating instructions
+ *			   that cause the virtual CPU to idle e.g. HLT.
+ *
+ *             Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_get_idle_time(hv_vcpuid_t vcpu,
+	uint64_t *time) __HV_12_0;
+
+/*!
  * @function	hv_tsc_clock
  * @abstract	Returns the value of an abstract clock.
  * @description	The abstract clock ticks at the same rate as the host TSC,
@@ -458,6 +523,503 @@ extern uint64_t hv_tsc_clock(void) __HV_11_0;
 extern hv_return_t hv_vcpu_set_tsc_relative(hv_vcpuid_t vcpu,
 	int64_t offset) __HV_11_0;
 
+/*!
+ * @function	hv_vcpu_vmx_status
+ * @abstract	Return the ZF and CF bits after running a VM
+ * @param		vcpu	vCPU ID
+ * @param		status	Pointer to 32-bit flags
+ * @result		0 on success or error code
+ * @discussion
+ * 				Returns the ZF (Zero) and CF (Carry) flag bits of the host
+ * 				RFLAGS register, captured on the last unsuccessful attempt
+ * 				to run the virtual CPU. If this routine returns HV_ERROR,
+ * 				the vcpu may have never run, or a different VM configuration
+ * 				problem was detected e.g. inconsistent configuration of MSRs.
+ *
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_vmx_status(hv_vcpuid_t vcpu, uint32_t *status) __HV_12_0;
+
+/*!
+ * @function	hv_vm_lapic_set_intr
+ * @abstract	Deliver an interrupt to the local APIC core
+ * @param		vcpu	Target vCPU ID
+ * @param		vector	Interrupt vector
+ * @param		trig	Trigger mode
+ * @result		0 on success or error code
+ * @discussion
+ *				Does not need to be called by the owning thread.
+ */
+extern hv_return_t hv_vm_lapic_set_intr(hv_vcpuid_t vcpu, uint8_t vector,
+	hv_apic_intr_trigger_t trig) __HV_12_0;
+
+/*!
+ * @function	hv_vm_lapic_msi
+ * @abstract	Deliver an MSI interrupt to one or more vCPUs in the VM
+ * @param		addr	MSI message address
+ * @param		data	MSI message data
+ * @result		0 on success or error code
+ */
+extern hv_return_t hv_vm_lapic_msi(uint64_t addr,
+	uint64_t data) __HV_12_0;
+
+/*!
+ * @function	hv_vm_ioapic_assert_irq
+ * @abstract	Raise the level on a virtual IOAPIC pin
+ * @param		intin	Interrupt pin number
+ * @result		0 on success or error code
+ */
+extern hv_return_t hv_vm_ioapic_assert_irq(int intin) __HV_12_0;
+
+/*!
+ * @function	hv_vm_ioapic_deassert_irq
+ * @abstract	Lower the level on a virtual IOAPIC pin
+ * @param		intin	Interrupt pin number
+ * @result		0 on success or error code
+ */
+extern hv_return_t hv_vm_ioapic_deassert_irq(int intin) __HV_12_0;
+
+/*!
+ * @function	hv_vm_ioapic_pulse_irq
+ * @abstract	Raise then lower the level on a virtual IOAPIC pin
+ * @param		intin	Interrupt pin number
+ * @result		0 on success or error code
+ */
+extern hv_return_t hv_vm_ioapic_pulse_irq(int intin) __HV_12_0;
+
+/*!
+ * @function	hv_vm_ioapic_read
+ * @abstract	Read a 32-bit IOAPIC register from the virtual IOAPIC
+ * @param		gpa		Guest physical address of the register
+ * @param		datap	Pointer to returned data
+ * @result		0 on success or error code
+ */
+extern hv_return_t hv_vm_ioapic_read(hv_gpaddr_t gpa, uint32_t *datap) __HV_12_0;
+
+/*!
+ * @function	hv_vm_ioapic_write
+ * @abstract	Write a 32-bit IOAPIC register to the virtual IOAPIC
+ * @param		gpa		Guest physical address of the register
+ * @param		data	Data to be written
+ * @result		0 on success or error code
+ */
+extern hv_return_t hv_vm_ioapic_write(hv_gpaddr_t gpa, uint32_t data) __HV_12_0;
+
+/*!
+ * @function	hv_vm_ioapic_get_state
+ * @abstract	Fetch the internal state of the virtual IOAPIC
+ * @param		state	Pointer to the virtual IOAPIC state
+ * @result		0 on success or error code
+ * @discussion
+ * 				The version field of the hv_ioapic_state_ext_t
+ * 				structure must be set to HV_IOAPIC_STATE_EXT_VER
+ * 				before invoking this API.
+ */
+extern hv_return_t hv_vm_ioapic_get_state(hv_ioapic_state_ext_t *state) __HV_12_0;
+
+/*!
+ * @function	hv_vm_ioapic_put_state
+ * @abstract	Validate and restore the internal state of the virtual IOAPIC
+ * @param		state	Pointer to the virtual IOAPIC state
+ * @result		0 on success or error code
+ * @discussion
+ * 				This routine should only be used to restore the state of the
+ * 				virtual IOAPIC captured by a previous call to
+ * 				hv_vm_ioapic_get_state() on a fully quiescent virtual machine.
+ */
+extern hv_return_t hv_vm_ioapic_put_state(const hv_ioapic_state_ext_t *state) __HV_12_0;
+
+/*!
+ * @function	hv_vm_send_ioapic_intr
+ * @abstract	Inject an IOAPIC interrupt into the VM
+ * @param		data	Interrupt information
+ * @result		0 on success or error code
+ * @discussion
+ * 				Allows interrupts to be sent to one or more APICs of the VM.
+ * 				The format of the data should correspond to an IOAPIC
+ * 				redirection table register.
+ */
+extern hv_return_t hv_vm_send_ioapic_intr(uint64_t data) __HV_12_0;
+
+/*!
+ * @function	hv_vm_atpic_assert_irq
+ * @abstract	Raise the level on a virtual ATPIC pin
+ * @param		irq		Interrupt pin number
+ * @result		0 on success or error code
+ */
+extern hv_return_t hv_vm_atpic_assert_irq(int irq) __HV_12_0;
+
+/*!
+ * @function	hv_vm_atpic_deassert_irq
+ * @abstract	Lower the level on a virtual ATPIC pin
+ * @param		irq		Interrupt pin number
+ * @result		0 on success or error code
+ */
+extern hv_return_t hv_vm_atpic_deassert_irq(int irq) __HV_12_0;
+
+/*!
+ * @function	hv_vm_atpic_port_read
+ * @abstract	Read from a virtual APIC I/O port
+ * @param		port	I/O port number
+ * @param		valuep	Pointer to result of I/O instruction
+ * @result		0 on success or error code
+ */
+extern hv_return_t hv_vm_atpic_port_read(int port, uint8_t *valuep);
+
+/*!
+ * @function	hv_vm_atpic_port_write
+ * @abstract	Write to a virtual APIC I/O port
+ * @param		port	I/O port number
+ * @param		value	Value to write to port
+ * @result		0 on success or error cod
+ */
+extern hv_return_t hv_vm_atpic_port_write(int port, uint8_t value);
+/*!
+ * @function	hv_vm_atpic_get_state
+ * @abstract	Fetch the internal state of a virtual ATPIC
+ * @param		state	Pointer to the virtual ATPIC state
+ * @param		is_primary	Selects the primary or secondary ATPIC
+ * @result		0 on success or error code
+ * @discussion
+ * 				The version field of the hv_atpic_state_ext_t
+ * 				structure must be set to HV_ATPIC_STATE_EXT_VER
+ * 				before invoking this API.
+ */
+extern hv_return_t hv_vm_atpic_get_state(hv_atpic_state_ext_t *state,
+	bool is_primary) __HV_12_0;
+
+/*!
+ * @function	hv_vm_atpic_put_state
+ * @abstract	Validate and restore the internal state of a virtual ATPIC
+ * @param		state	Pointer to the virtual ATPIC state
+ * @param		is_primary	Selects the primary or secondary ATPIC
+ * @result		0 on success or error code
+ * @discussion
+ * 				This routine should only be used to restore the state of the
+ * 				virtual ATPIC captured by a previous call to
+ * 				hv_vm_atpic_get_state() on a fully quiescent virtual machine.
+ */
+extern hv_return_t hv_vm_atpic_put_state(const hv_atpic_state_ext_t *state,
+	bool is_primary) __HV_12_0;
+
+/*!
+ * @function	hv_vm_set_apic_bus_freq
+ * @abstract	Set the APIC timer frequency in Hz
+ * @param		freq	Frequency in Hz
+ * @result		0 on success or error code
+ * @discussion
+ * 				Allows the virtual APIC timer frequency to be set. The
+ * 				implementation allows values to be set between 16MHz and 2GHz.
+ *				The value is shared by all APICs in the VM, and may
+ *				only be modified when there are zero vcpus in the VM.
+ */
+extern hv_return_t hv_vm_set_apic_bus_freq(uint64_t freq) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_inject_extint
+ * @abstract	Inject an external interrupt into the vCPU
+ * @param		vcpu	vCPU ID
+ * @result		0 on success or error code
+ * @discussion
+ * 				Only one external interrupt (injected via the VMCS) can
+ * 				be enqueued at a time.
+ *
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_inject_extint(hv_vcpuid_t vcpu) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_apic_read
+ * @abstract	Read from the vCPUs virtual local APIC
+ * @param		vcpu	vCPU ID
+ * @param		offset	Byte offset into the APIC page
+ * @param		data	Pointer to the APIC data
+ * @result		0 on success or error code
+ * @discussion
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_apic_read(hv_vcpuid_t vcpu,
+	uint32_t offset, uint32_t *data) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_apic_write
+ * @abstract	Write to the vCPUs virtual local APIC
+ * @param		vcpu	vCPU ID
+ * @param		offset	Byte offset into the APIC page
+ * @param		data	Value to be written
+ * @param		no_side_effect	Pointer to boolean flag value
+ * @result		0 on success or error code
+ * @discussion
+ * 				Writes to certain locations may succeed but have related
+ * 				side-effects which need to be handled by the caller. The
+ * 				no_side_effect parameter is used to indicate this.
+ * 				Use hv_vcpu_exit_info() to further identify the reason.
+ *
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_apic_write(hv_vcpuid_t vcpu,
+	uint32_t offset, uint32_t data, bool *no_side_effect) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_apic_get_state
+ * @abstract	Fetch the internal state of the virtual local APIC
+ * @param		vcpu	vCPU ID
+ * @param		state	Pointer to the virtual local APIC state
+ * @result		0 on success or error code
+ * @discussion
+ * 				The version field of the hv_apic_state_ext_t
+ * 				structure should be set to HV_APIC_STATE_EXT_VER
+ * 				before invoking this API.
+ *
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_apic_get_state(hv_vcpuid_t vcpu,
+	hv_apic_state_ext_t *state) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_apic_put_state
+ * @abstract	Validate and restore the internal state of the virtual local APIC
+ * @param		vcpu	vCPU ID
+ * @param		state	Pointer to the virtual local APIC state
+ * @result		0 on success or error code
+ * @discussion
+ * 				This API should only be used to restore the state of the
+ * 				virtual local APIC captured by a previous call to
+ * 				hv_vcpu_apic_get_state() on a fully quiescent virtual machine.
+ *
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_apic_put_state(hv_vcpuid_t vcpu,
+	const hv_apic_state_ext_t *state) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_exit_info
+ * @abstract	Return type of additional VM exit information
+ * @param		vcpu	vCPU ID
+ * @param		code	Pointer to type code
+ * @result		0 on success or error code
+ * @discussion
+ * 				Provides the type of additional information available
+ * 				about certain VM exits.
+ *
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_exit_info(hv_vcpuid_t vcpu, hv_vm_exitinfo_t *code) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_exit_init_ap
+ * @abstract	Return vCPU IDs targeted by AP initialization
+ * @param		vcpu	vCPU ID
+ * @param		is_actv	Applicable processors, indexed by vCPU ID
+ * @param		count	Number of array elements
+ * @result		0 on success or error code
+ * @discussion
+ * 				This API can be called when the code returned by
+ * 				hv_vcpu_exit_info() is HV_VM_EXITINFO_INIT_AP, which may
+ * 				occur as part of handling writes to the ICR register.
+ *
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_exit_init_ap(hv_vcpuid_t vcpu,
+	bool is_actv[_Nonnull], unsigned count) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_exit_startup_ap
+ * @abstract	Return vCPU IDs targeted by AP startup
+ * @param		vcpu	vCPU ID
+ * @param		is_actv	Applicable processors, indexed by vCPU ID
+ * @param		count	Number of array elements
+ * @result		0 on success or error code
+ * @discussion
+ * 				This API can be called when the code returned by
+ * 				hv_vcpu_exit_info() is HV_VM_EXITINFO_STARTUP_AP, which may
+ * 				occur as part of handling a guest write to the ICR register.
+ *
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_exit_startup_ap(hv_vcpuid_t vcpu,
+	bool is_actv[_Nonnull], unsigned count, uint64_t *ap_rip) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_exit_ioapic_eoi
+ * @abstract	Return IOAPIC EOI vector
+ * @param		vcpu	vCPU ID
+ * @param		vec		Pointer to vector associated with EOI
+ * @result		0 on success or error code
+ * @discussion
+ * 				This API can be called when the code returned by
+ * 				hv_vcpu_exit_info() is HV_VM_EXITINFO_IOAPIC_EOI, which
+ * 				may occur as part of handling a guest write to the EOI
+ * 				register.
+ *
+ * 				Must be called by the owning thread.
+ */
+extern hv_return_t hv_vcpu_exit_ioapic_eoi(hv_vcpuid_t vcpu,
+	uint8_t *vec) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_exit_apic_access_read
+ * @abstract	Return APIC value being read
+ * @param		vcpu	vCPU ID
+ * @param		value	Pointer to APIC register value
+ * @result		0 on success or error code
+ * @discussion
+ * 				This API can be called when the code returned by
+ * 				hv_vcpu_exit_info() is HV_VM_EXITINFO_APIC_ACCESS_READ, which
+ * 				can only occur as part of handling an APIC access VM exit.
+ * 				It provides a low-overhead way to access the value of
+ * 				the APIC register the guest is trying to read.
+ *
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_exit_apic_access_read(hv_vcpuid_t vcpu,
+	uint32_t *value) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_exit_inject_excp
+ * @abstract	Return exception parameters to be injected
+ * @param		vcpu	vCPU ID
+ * @param		vec		Pointer to exception vector number
+ * @param		valid	Pointer to valid flag
+ * @param		code	Pointer to exception error code
+ * @param		restart	Pointer to restart flag
+ * @result		0 on success or error code
+ * @discussion
+ * 				This API can be called when the code returned by
+ * 				hv_vcpu_exit_info() is HV_VM_EXITINFO_INJECT_EXCP.
+ * 				If this code is encountered, the guest vcpu may have performed
+ * 				an illegal operation on its APIC, so the exception should
+ * 				usually be directed back into the guest.
+ *
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_exit_inject_excp(hv_vcpuid_t vcpu,
+	uint8_t *vec, bool *valid, uint32_t *code, bool *restart) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_apic_lsc_enter_r32
+ * @abstract	Add an entry to the APIC load-store cache
+ * @param		vcpu	vCPU ID
+ * @param		is_load	True for a load register instruction
+ * @param		rip		Instruction pointer of movl instruction
+ * @param		ilen	Instruction length of movl instruction
+ * @param		cs		Code selector register at rip
+ * @param		reg		Register target of movl instruction
+ * @param		uva		User addresses of page(s) containing [rip, rip+ilen)
+ * @param		count	Number of valid addresses in uva[] (0, 1 or 2)
+ * @result		0 on success or error code
+ * @discussion
+ * 				Each virtual CPU implements a limited capacity cache which
+ * 				can performs a basic register move operation on the local
+ * 				APIC page in response to an APIC access VM exit.
+ * 				When an APIC access VM-exit occurs, iff the the set of
+ * 				(rip, ilen, cs) parameters specified matches, the kernel
+ * 				will perform the appropriate move to (or from) the
+ * 				target register.
+ *
+ *				If uva is non-NULL, it should contain an array of
+ *				page-aligned addresses in the current task that
+ *				correspond to the page(s) containing the guest rip in
+ *				the guest physical address space. If these addresses are
+ *				provided, the kernel will record the bytes at [rip, rip+ilen),
+ *				along with paging-related fields from guest control registers.
+ *				Each time a cache hit occurs these will be compared,
+ *				and the cache entry will be invalidated if any changes
+ *				are detected.
+ *
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_apic_lsc_enter_r32(hv_vcpuid_t vcpu, bool is_load,
+	uint64_t rip, unsigned ilen, uint16_t cs, hv_x86_reg_t reg,
+	uint64_t uva[_Nullable], unsigned count) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_apic_lsc_enter_imm32
+ * @abstract	Add an entry to the APIC load-store cache
+ * @param		vcpu	vCPU ID
+ * @param		rip		Instruction pointer of movl instruction
+ * @param		ilen	Instruction length of movl instruction
+ * @param		cs		Code selector register at rip
+ * @param		imm32	Constant value to be stored
+ * @param		uva		User addresses of page(s) containing [rip, rip+ilen)
+ * @param		count	Number of valid addresses in uva[] (0, 1, or 2)
+ * @result		0 on success or error code
+ * @discussion
+ * 				Each virtual CPU implements a limited capacity cache which
+ * 				can performs a basic register move operation on the local
+ * 				APIC page in response to an APIC access VM exit.
+ * 				When an APIC access VM-exit occurs, iff the the set of
+ * 				(rip, ilen, cs) parameters specified matches, the kernel
+ * 				will perform a move of the imm32 constant to the
+ * 				target APIC register.
+ *
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_apic_lsc_enter_imm32(hv_vcpuid_t vcpu,
+	uint64_t rip, unsigned ilen, uint16_t cs, uint32_t imm32,
+	uint64_t uva[_Nullable], unsigned count) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_apic_lsc_invalidate
+ * @abstract	Invalidate the APIC load-store cache
+ * @param		vcpu	vCPU ID
+ * @result		0 on success or error code
+ * @discussion
+ * 				Invalidates all cache entries for the vcpu.
+ *
+ * 				Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_apic_lsc_invalidate(hv_vcpuid_t vcpu) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_apic_ctrl
+ * @abstract	Modify the behavior of the virtual APIC
+ * @param		vcpu	vCPU ID
+ * @param		ctrls	APIC behavior flags
+ * @result		0 on success or error code
+ * @discussion
+ * 				The virtual CPU and APIC behavior can be modified
+ * 				by setting various flags from the hv_apic_ctls_t enumeration.
+ *
+ *				HV_APIC_CTRL_EOI_ICR_TPR enables support for MSRs that allow
+ *				the virtual APIC EOI, ICR and TPR registers to be accessed by
+ *				the guest via rdmsr and wrmsr instructions, even when the
+ *				APIC is in xAPIC mode.
+ *
+ *				HV_APIC_CTRL_GUEST_IDLE enables support for an MSR that
+ *				allows the vcpu to be placed into an idle state.
+ *
+ *				HV_APIC_CTRL_NO_TIMER disables all timer operations by
+ *				the virtual APIC and allows related VM exits to return the
+ *				client. The virtual APIC tracks guest updates to the APIC
+ *				timer registers, but the timer does not run, no timer
+ *				interrupts are generated, so the hypervisor client must
+ *				handle all timer operations.
+ *
+ *				HV_APIC_CTRL_IOAPIC_EOI causes the APIC to convert EOI
+ *				notifications intended for an IOAPIC into a VM exit instead.
+ *				The vector can be retrieved using hv_vcpu_exit_ioapic_eoi().
+ *
+ * 				Must be called by the owning thread.
+ */
+extern hv_return_t hv_vcpu_apic_ctrl(hv_vcpuid_t vcpu,
+	hv_apic_ctrl_t ctrls) __HV_12_0;
+
+/*!
+ * @function	hv_vcpu_apic_trigger_lvt
+ * @abstract	Trigger an APIC local vector entry
+ * @param		vcpu	vCPU ID
+ * @param		flavor	APIC vector type
+ * @result		0 on success or error code
+ * @discussion
+ * 				Causes the local vector table entry to issue an interrupt
+ * 				request.
+ * 				Only HV_APIC_LVT_TIMER is currently supported.
+ *
+ * 				Must be called by the owning thread.
+ */
+extern hv_return_t hv_vcpu_apic_trigger_lvt(hv_vcpuid_t vcpu, hv_apic_lvt_flavor_t flavor) __HV_12_0;
+
 __END_DECLS
 
 OS_ASSUME_NONNULL_END
@@ -465,6 +1027,7 @@ OS_ASSUME_NONNULL_END
 #undef __HV_10_10
 #undef __HV_10_15
 #undef __HV_11_0
+#undef __HV_12_0
 
 #endif /* __x86_64__ */
 

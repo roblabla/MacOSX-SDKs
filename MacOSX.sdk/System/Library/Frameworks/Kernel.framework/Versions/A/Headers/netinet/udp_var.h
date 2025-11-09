@@ -65,6 +65,8 @@
 
 #include <sys/appleapiopts.h>
 #include <sys/sysctl.h>
+#include <netinet/ip_var.h>
+#include <netinet/udp.h>
 
 /*
  * UDP kernel structures and variables.

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B9DB7EB9-A576-39E5-ACD8-C740A7007D58
+    value:           835FDC63-422A-3780-B377-FBDD23EA078B
   - target:          x86_64-maccatalyst
-    value:           B9DB7EB9-A576-39E5-ACD8-C740A7007D58
+    value:           835FDC63-422A-3780-B377-FBDD23EA078B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1BD72C27-7192-3E3B-BFC0-A6840C0AC70F
+    value:           3B6438B5-9DD8-3B73-A06B-6F69875E22E3
   - target:          arm64e-maccatalyst
-    value:           1BD72C27-7192-3E3B-BFC0-A6840C0AC70F
+    value:           3B6438B5-9DD8-3B73-A06B-6F69875E22E3
 install-name:    '/System/Library/PrivateFrameworks/GraphicsServices.framework/Versions/A/GraphicsServices'
 current-version: 14
 exports:
@@ -56,17 +56,18 @@ exports:
                        _GSGetPurpleWorkspacePort, _GSGetTimeEventHandling, _GSInitialize, 
                        _GSKeyboardCreate, _GSKeyboardCreateWithCountryCode, _GSKeyboardGetHWKeyboardType, 
                        _GSKeyboardGetKeyCodeForChar, _GSKeyboardGetLayout, _GSKeyboardGetLiveModifierState, 
-                       _GSKeyboardGetModifierState, _GSKeyboardGetStickyLockModifierState, 
+                       _GSKeyboardGetLocale, _GSKeyboardGetModifierState, _GSKeyboardGetStickyLockModifierState, 
                        _GSKeyboardGetTranslationOptions, _GSKeyboardGetTypeID, _GSKeyboardHWKeyboardLayoutsPlist, 
-                       _GSKeyboardHWKeyboardNormalizeInput, _GSKeyboardRelease, _GSKeyboardReset, 
-                       _GSKeyboardSetHardwareKeyboardAttached, _GSKeyboardSetLayout, 
-                       _GSKeyboardSetTranslationOptions, _GSKeyboardTranslateKey, 
+                       _GSKeyboardHWKeyboardNormalizeInput, _GSKeyboardIsGlobeKeyUsagePair, 
+                       _GSKeyboardRelease, _GSKeyboardReset, _GSKeyboardSetHardwareKeyboardAttached, 
+                       _GSKeyboardSetLayout, _GSKeyboardSetTranslationOptions, _GSKeyboardTranslateKey, 
                        _GSKeyboardTranslateKeyExtended, _GSKeyboardTranslateKeyExtendedCommand, 
-                       _GSKeyboardTranslateKeyWithModifiers, _GSMainScreenOrientation, 
-                       _GSMainScreenPixelSize, _GSMainScreenPointSize, _GSMainScreenPositionTransform, 
-                       _GSMainScreenScaleFactor, _GSMainScreenSize, _GSMainScreenWindowTransform, 
-                       _GSRegisterPurpleNamedPerPIDPort, _GSRegisterPurpleNamedPort, 
-                       _GSSaveEventHandlingTimes, _GSSendAppPreferencesChanged, _GSSendApplicationFinishedBackgroundContentFetchingEvent, 
+                       _GSKeyboardTranslateKeyExtendedCommandWithUsagePage, _GSKeyboardTranslateKeyWithModifiers, 
+                       _GSMainScreenOrientation, _GSMainScreenPixelSize, _GSMainScreenPointSize, 
+                       _GSMainScreenPositionTransform, _GSMainScreenScaleFactor, 
+                       _GSMainScreenSize, _GSMainScreenWindowTransform, _GSRegisterPurpleNamedPerPIDPort, 
+                       _GSRegisterPurpleNamedPort, _GSSaveEventHandlingTimes, _GSSendAppPreferencesChanged, 
+                       _GSSendApplicationFinishedBackgroundContentFetchingEvent, 
                        _GSSendApplicationFinishedBackgroundContentFetchingEventWithSequenceNumber, 
                        _GSSendApplicationFinishedBackgroundNotificationActionEvent, 
                        _GSSendApplicationSuspendEvent, _GSSendApplicationSuspendedSettingsUpdatedEvent, 

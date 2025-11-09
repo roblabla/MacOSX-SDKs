@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E048243E-100A-3043-A6CF-E9B78A29CBD1
+    value:           9D9BA9B1-0B4C-3E9D-9359-59997BBC22B7
 install-name:    '/usr/lib/updaters/libAppleTCONUpdater.dylib'
 exports:
   - targets:         [ arm64e-macos, arm64-macos ]

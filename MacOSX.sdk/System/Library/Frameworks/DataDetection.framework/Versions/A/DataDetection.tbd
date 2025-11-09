@@ -1,0 +1,27 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           8F32AA01-040D-3910-93C5-B995AECAF605
+  - target:          x86_64-maccatalyst
+    value:           8F32AA01-040D-3910-93C5-B995AECAF605
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F5FC8F09-95D7-3F62-AC30-704B21B5FC05
+  - target:          arm64e-maccatalyst
+    value:           F5FC8F09-95D7-3F62-AC30-704B21B5FC05
+install-name:    '/System/Library/Frameworks/DataDetection.framework/Versions/A/DataDetection'
+current-version: 692
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    objc-classes:    [ DDDetectedValue, DDDetectedValueCalendarEvent, DDDetectedValueEmailAddress, 
+                       DDDetectedValueFlightNumber, DDDetectedValueLink, DDDetectedValueMoneyAmount, 
+                       DDDetectedValuePhoneNumber, DDDetectedValuePostalAddress, 
+                       DDDetectedValueShipmentTrackingNumber ]
+...

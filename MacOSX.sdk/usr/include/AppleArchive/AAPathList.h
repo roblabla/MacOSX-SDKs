@@ -44,6 +44,21 @@ APPLE_ARCHIVE_API AAPathList _Nullable AAPathListCreateWithDirectoryContents(
 APPLE_ARCHIVE_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 
 /*!
+  @abstract Create a new path list with a single path
+
+  @discussion The path list only contains \p path, referring to existing filesystem object \p dir/path
+
+  @param dir base directory
+  @param path entry path under \p dir
+
+  @return a new non-NULL instance on success, and NULL on failure
+*/
+APPLE_ARCHIVE_API AAPathList _Nullable AAPathListCreateWithPath(
+  const char * dir,
+  const char * path)
+APPLE_ARCHIVE_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*!
   @abstract Destroy a path list
 
   @discussion Do nothing if \p path_list is NULL

@@ -98,6 +98,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemFields) {
     NSFileProviderItemContentModificationDate = 1 << 7,
     NSFileProviderItemFileSystemFlags = 1 << 8,
     NSFileProviderItemExtendedAttributes = 1 << 9,
+    NSFileProviderItemTypeAndCreator FILEPROVIDER_API_AVAILABILITY_V4_0 = 1 << 10,
 } FILEPROVIDER_API_AVAILABILITY_V3;
 
 #pragma mark - Extension with FPFS support
@@ -117,10 +118,13 @@ FILEPROVIDER_API_AVAILABILITY_V3
  Once this has been called, the directory and its children should be included in the
  working set.
 
- This is also used to subscribe to live updates for a single document.  In that
- case, -[NSFileProviderEnumerator enumerateChangesToObserver:fromSyncAnchor:]
- will be called and the enumeration results shouldn't include items other than
- the very item that the enumeration was started on.
+ This is also used to subscribe to live updates for a single document.
+
+ The system will keep an enumerator open in the extension on directories that are
+ presented to the user (for instance, in Finder), and on document on which an application
+ has a NSFilePresenter. The provider can use the existence of that enumerator as a hint
+ that the user is actively seeing / using the item in question, and prioritize the delivery
+ of updates on the item or its children in the working set.
 
  If returning nil, you must set the error out parameter.
 
@@ -169,8 +173,16 @@ FILEPROVIDER_API_AVAILABILITY_V3
  system will present an appropriate error message and back off until the
  next time it is signalled.
 
- Any other error will be considered to be transient and will cause the
- enumeration to be retried.
+ Any other error, including crashes of the extension process, will be considered to be transient
+ and will cause the enumeration to be retried.
+
+ Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain,
+ or NSPOSIXErrorDomain.
+
+ For errors which can not be represented using an existing error code in one of these domains, the extension
+ should construct an NSError with domain NSCocoaErrorDomain and code NSXPCConnectionReplyInvalid.
+ The extension should set the NSUnderlyingErrorKey in the NSError's userInfo to the error which could not
+ be represented.
  */
 - (nullable id<NSFileProviderEnumerator>)enumeratorForContainerItemIdentifier:(NSFileProviderItemIdentifier)containerItemIdentifier
                                                                       request:(NSFileProviderRequest *)request
@@ -195,6 +207,26 @@ FILEPROVIDER_API_AVAILABILITY_V3
  The provider can notify the system of changes on the items by publishing those on the
  enumerator for the working set. The system notifies the extension of changes made by the
  user on disk by calling createItemBasedOnTemplate, modifyItem, or deleteItemWithIdentifier.
+
+ Concurrency:
+ ------------
+ A replicated extension class must be prepared to handle multiple concurrent calls since the
+ system may perform several concurrent operations (for instance, modifying an item, while enumerating
+ the working set, creating another item, and fetching the contents of yet another item).
+
+ The system has limits to the number of concurrent operations.When the number of concurrent
+ operations is reached, the system will not schedule additional operations falling in that category
+ until at least one of the running operation has completed by calling its completion handler.
+
+ The system currently separates the operations into the following categories:
+ - enumeration of the working set. At most 1 enumeration of the working set can happen at a given time
+ - downloads. The system has a limit on the number of concurrent calls to fetchContents and similar calls
+   That limit is configurable by setting the NSExtensionFileProviderDownloadPipelineDepth key to an integer
+   value (between 1 and 128) in the Info.plist of the extension.
+ - uploads. The system has a limit on the number of concurrent calls to createItemBasedOnTemplate and
+   modifyItem when the call includes new content to be uploaded. That limit is configurable by setting the
+   NSExtensionFileProviderUploadPipelineDepth key to an integer value (between 1 and 128) in the Info.plist
+   of the extension.
  */
 FILEPROVIDER_API_AVAILABILITY_V3
 @protocol NSFileProviderReplicatedExtension <NSObject, NSFileProviderEnumerating>
@@ -232,8 +264,16 @@ FILEPROVIDER_API_AVAILABILITY_V3
  system will present an appropriate error message and back off until the
  next time it is signalled.
 
- Any other error will be considered to be transient and will cause the
- lookup to be retried.
+ Any other error, including crashes of the extension process, will be considered to be
+ transient and will cause the lookup to be retried.
+
+ Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain,
+ or NSPOSIXErrorDomain.
+
+ For errors which can not be represented using an existing error code in one of these domains, the extension
+ should construct an NSError with domain NSCocoaErrorDomain and code NSXPCConnectionReplyInvalid.
+ The extension should set the NSUnderlyingErrorKey in the NSError's userInfo to the error which could not
+ be represented.
 
  Cancellations:
  ------------
@@ -285,13 +325,27 @@ FILEPROVIDER_API_AVAILABILITY_V3
  moment the system unlinks the file, the file may unexpectedly still be on disk the next time an instance
  of the extension is created. The extension is then responsible for deleting that file.
 
+ Disallowing processes from fetching items:
+ ---------------
+
+ The system automatically downloads files on POSIX accesses. The extension may wish to disallow this class of
+ downloads for specific applications.
+
+ The extension can set an array of strings into the UserDefault key
+ "NSFileProviderExtensionNonMaterializingProcessNames". A process whose name is an exact match for an
+ entry in this array will not be allowed to fetch items in the extension's domains.
+
+ In macOS 11.0 and later, this list will be checked when a download is initiated through a POSIX filesystem call.
+ In macOS 11.4 and later, this list will also be checked for downloads initiated through file coordination.
+
  Error cases:
  ------------
- If the download fails because the item is unknown, the call should
+ If the download fails because the item was deleted on the server, the call should
  fail with the NSFileProviderErrorNoSuchItem error. In that case, the system
  will consider the item has been removed from the domain and will attempt to
  delete it from disk. In case that deletion fails because there are local
- changes on this item, the system will re-create the item using createItemBasedOnTemplate.
+ changes on this item, the system will re-create the item using createItemBasedOnTemplate,
+ passing the NSFileProviderCreateItemDeletionConflicted flag.
 
  If the user does not have access to the content of the file, the provider
  can fail the call with NSCocoaErrorDomain and code NSFileReadNoPermissionError.
@@ -301,8 +355,16 @@ FILEPROVIDER_API_AVAILABILITY_V3
  In those cases, the system will present an appropriate error message and back off
  until the next time it is signalled.
 
- Any other error will be considered to be transient and will cause the
- download to be retried.
+ Any other error, including crashes of the extension process, will be considered to be transient
+ and will cause the download to be retried.
+
+ Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain,
+ or NSPOSIXErrorDomain.
+
+ For errors which can not be represented using an existing error code in one of these domains, the extension
+ should construct an NSError with domain NSCocoaErrorDomain and code NSXPCConnectionReplyInvalid.
+ The extension should set the NSUnderlyingErrorKey in the NSError's userInfo to the error which could not
+ be represented.
 
  Cancellations:
  ------------
@@ -438,14 +500,22 @@ FILEPROVIDER_API_AVAILABILITY_V3
  the system will call createItemBasedOnTemplate again.
 
  The extension can also report the NSFileProviderErrorNotAuthenticated,
- NSFileProviderErrorServerUnreachable or NSFileProviderErrorInsufficientQuota
- in case the modification cannot be applied because of the current state of the
- system / domain. In that case, the system will present an appropriate error
- message and back off until the next time it is signalled.
+ NSFileProviderErrorServerUnreachable, NSFileProviderErrorInsufficientQuota
+ or NSFileProviderErrorCannotSynchronize in case the modification cannot be applied
+ because of the current state of the system / domain. In that case, the system will
+ present an appropriate error message and back off until the next time it is signalled.
  The provider can signal the error resolution by calling signalErrorResolved:completionHandler:.
 
- Any other error will be considered to be transient and will cause the
- creation to be retried.
+ Any other error, including crashes of the extension process, will be considered to be transient
+ and will cause the creation to be retried.
+
+ Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain,
+ or NSPOSIXErrorDomain.
+
+ For errors which can not be represented using an existing error code in one of these domains, the extension
+ should construct an NSError with domain NSCocoaErrorDomain and code NSXPCConnectionReplyInvalid.
+ The extension should set the NSUnderlyingErrorKey in the NSError's userInfo to the error which could not
+ be represented.
 
  Cancellations:
  ------------
@@ -473,6 +543,11 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  If the provider is not able to apply all the fields at once, it should return a
  set of stillPendingFields in its completion handler. In that case, the system will
  attempt to modify the item later by calling modifyItem with those fields.
+
+ Starting in macOS 12.0, if the set of stillPendingFields returned by the provider is
+ identical to the set of fields passed to modifyItem, then the system will consider that these fields
+ are not supported by the provider. The system will not send these fields to the provider again,
+ until the item is modified.
 
  If a field in the returned item does not match the itemTemplate, and is
  not in the list of stillPendingFields, the value from the item will be
@@ -508,6 +583,23 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  Modifications are gated by the corresponding capabilities of the item on a UI level,
  but direct file system changes (e.g. from Terminal) can still result in changes that
  must be handled.
+
+ Conflict resolution:
+ -------------------
+ The system passes a `baseVersion` parameter to the modifyItem call. This
+ baseVersion describes the latest version of the file which was reflected on disk.
+ This parameter can be used to detect conflicts with remote edits.
+
+ For instance, if content version A of the file was downloaded to the local system, and
+ the content was modified locally, the modifyItem call will receive baseVersion of A. If the server
+ has in the meantime received another content edit of the same file, the server may
+ have content version C. In this case, the extension can detect the mismatching baseVersion,
+ and decide how to resolve the conflict. The extension informs the system of how it
+ wishes to resolve the conflict by returning the resolved metadata on the completion handler.
+ As an example resolution, if the extension informs that it wishes for the remote version
+ of the item to be on disk (and to ignore the local edits), it should return the new
+ contentVersion in the completion handler's item. The system will subsequently call
+ fetchContents to retrieve the new contents and replace them on disk.
 
  Structural consistency and Cycle handling:
  ------------------------------------------
@@ -569,14 +661,22 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  modifyItem again.
 
  The extension can also report the NSFileProviderErrorNotAuthenticated,
- NSFileProviderErrorServerUnreachable or NSFileProviderErrorInsufficientQuota
- in case the modification cannot be applied because of the current state of the
- system / domain. In that case, the system will present an appropriate error
- message and back off until the next time it is signalled.
+ NSFileProviderErrorServerUnreachable, NSFileProviderErrorInsufficientQuota
+ or NSFileProviderErrorCannotSynchronize in case the modification cannot be applied
+ because of the current state of the system / domain. In that case, the system will
+ present an appropriate error message and back off until the next time it is signalled.
  The provider can signal the error resolution by calling signalErrorResolved:completionHandler:.
 
- Any other error will be considered to be transient and will cause the
- modification to be retried.
+ Any other error, including crashes of the extension process, will be considered to be transient
+ and will cause the modification to be retried.
+
+ Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain,
+ or NSPOSIXErrorDomain.
+
+ For errors which can not be represented using an existing error code in one of these domains, the extension
+ should construct an NSError with domain NSCocoaErrorDomain and code NSXPCConnectionReplyInvalid.
+ The extension should set the NSUnderlyingErrorKey in the NSError's userInfo to the error which could not
+ be represented.
 
  Cancellations:
  ------------
@@ -648,14 +748,22 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  that item may have already been deleted remotely, then the extension should
  report a success.
 
- The extension can also report the NSFileProviderErrorNotAuthenticated and
- NSFileProviderErrorServerUnreachable in case the deletion cannot be applied
- because of the current state of the system / domain. In that case, the system
- will present an appropriate error message and back off until the next time it
- is signalled.
+ The extension can also report the NSFileProviderErrorNotAuthenticated,
+ NSFileProviderErrorServerUnreachable, or NSFileProviderErrorCannotSynchronize
+ in case the deletion cannot be applied because of the current state of the
+ system / domain. In that case, the system will present an appropriate error
+ message and back off until the next time it is signalled.
 
- Any other error will be considered to be transient and will cause the
- deletion to be retried.
+ Any other error, including crashes of the extension process, will be considered to be transient
+ and will cause the deletion to be retried.
+
+ Errors must be in one of the following domains: NSCocoaErrorDomain, NSFileProviderErrorDomain,
+ or NSPOSIXErrorDomain.
+
+ For errors which can not be represented using an existing error code in one of these domains, the extension
+ should construct an NSError with domain NSCocoaErrorDomain and code NSXPCConnectionReplyInvalid.
+ The extension should set the NSUnderlyingErrorKey in the NSError's userInfo to the error which could not
+ be represented.
 
  Cancellations:
  ------------
@@ -677,17 +785,27 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
 
 /** Signal the end of import of on-disk items.
 
- This is called after an import of on-disk items has been triggered by either
- -[NSFileProviderManager reimportItemsBelowItemWithIdentifier:completionHandler:] or
- +[NSFileProviderManager importDomain:fromDirectoryAtURL:completionHandler:]. A
- reimport can also be started by the system independently from any request by the
- provider.
+ This is called after a reimport of on-disk items has been triggered by either
+ `-[NSFileProviderManager reimportItemsBelowItemWithIdentifier:completionHandler:]`
+ or after a new domain is created using
+ `+[NSFileProviderManager importDomain:fromDirectoryAtURL:completionHandler:]` or
+ `+[NSFileProviderManager addDomain:completionHandler:]`.
+
+ `reimport` can also be started by the system independently from any request by the
+ provider. The provider can detect those events by monitoring
+ `-[NSFileProviderDomain backingStoreIdentity]`.
 
  During import, found items will be created via the
  -[NSFileProviderExtension createItemBasedOnTemplate:fields:contents:options:completionHandler:]
  call with the NSFileProviderCreateItemMayAlreadyExist flag set.
  At the end of an import the -[NSFileProviderExtension importDidFinishWithCompletionHandler:]
  is called.
+
+ The system will attempt to import items as they are accessed by the user or applications. Import
+ of the other items is scheduled by the system as a background task. That task may be delayed,
+ for instance in low-power situations, or when the system is under heavy load. The provider can
+ force the system to process a folder and its direct children by issuing a coordination request
+ on that folder.
  */
 - (void)importDidFinishWithCompletionHandler:(void (^)(void))completionHandler;
 
@@ -864,6 +982,12 @@ FILEPROVIDER_API_AVAILABILITY_V3
  The system will cache the thumbnail for the item, and the cache will be
  invalidated when itemVersion.contentVersion changes.
 
+ Thread safety:
+ ------------
+
+ The @p perThumbnailCompletionHandler may be called from multiple threads
+ concurrently.
+
  Cancellations:
  ------------
  If the NSProgress returned by this method is cancelled, the extension should
@@ -902,6 +1026,38 @@ FILEPROVIDER_API_AVAILABILITY_V3
 
 @end
 
+/**
+ Protocol to implement for managing UserInteraction alerts.
+ */
+FILEPROVIDER_API_AVAILABILITY_V4_0
+@protocol NSFileProviderUserInteractionSuppressing  <NSObject>
+
+/**
+ Suppression management:
+
+ The extension may choose to give the user the option to suppress certain UserInteraction alerts.
+ In order to do so, the extension must both implement NSFileProviderUserInteractionSuppressing, as well as
+ configure the desired UserInteractions in the Info.plist with the `SuppressionIdentifier` field.
+
+ When FileProvider needs to evaluate whether to display a UserInteraction alert, it will call
+ -[NSFileProviderUserInteractionSuppressing isInteractionSuppressedForIdentifier:]. When the user indicates that they do not
+ wish to see a given SuppressionIdentifiers's alert again, FileProvider will call
+ -[NSFileProviderUserInteractionSuppressing setInteractionSuppressed:forIdentifier:].
+
+ The extension can choose whether the suppression should apply only to the domain upon which
+ -[NSFileProviderUserInteractionSuppressing setInteractionSuppressed:forIdentifier:] was called, or if it should apply to all
+ domains for their provider. For instance, the extension could choose to suppress future alerts related
+ to adding an item to a shared folder across all domains, after the user chooses to suppress the alerts
+ in a specific domain's context. Or, the extension could choose to only suppress that alert for the
+ specific domain it was displayed within, and in the future, the user would see the same alert in the same
+ context, if they take the same action in another domain.
+ */
+
+- (void)setInteractionSuppressed:(BOOL)suppression forIdentifier:(NSString *)suppressionIdentifier;
+- (BOOL)isInteractionSuppressedForIdentifier:(NSString *)suppressionIdentifier;
+
+@end
+
 FILEPROVIDER_API_AVAILABILITY_V3_1
 @protocol NSFileProviderDomainState <NSObject>
 
@@ -928,8 +1084,9 @@ FILEPROVIDER_API_AVAILABILITY_V3_1
 /**
  Global state of the domain.
 
- Use this dictionary to add state information to the domain. It is accessible to
- user interaction predicates via the `domainUserInfo` context key.
+ Use this dictionary to add state information to the domain. It is accessible to predicates for
+ User Interactions, FileProvider Actions, and FileProviderUI Actions, via the top-level `domainUserInfo` context
+ key.
 
  This dictionary must only contain key and value classes in the following list:
  NSString, NSNumber, NSDate, and NSPersonNameComponents.

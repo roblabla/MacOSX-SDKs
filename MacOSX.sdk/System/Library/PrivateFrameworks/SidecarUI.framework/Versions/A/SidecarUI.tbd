@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           06BC2B88-0099-334A-A04E-AFAA7BF5C299
+    value:           49CB01AA-00ED-35D0-8522-BD5E63EFB7FC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BF7DBDBC-A7ED-3E20-B9BB-70B8D6C78CE6
+    value:           11A9F8D3-6F8B-3DF5-9FF9-873D2F502198
 install-name:    '/System/Library/PrivateFrameworks/SidecarUI.framework/Versions/A/SidecarUI'
-current-version: 231
+current-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _SidecarBundle, _SidecarDisplayMenuControllerMenuItemsChangedNotification, 

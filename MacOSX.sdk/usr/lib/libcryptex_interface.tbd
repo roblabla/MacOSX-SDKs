@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           49A6C50D-F306-38FB-AC9B-81EF025F030B
+    value:           3A0DCC3C-76BE-365A-906C-5F0871796153
   - target:          arm64-macos
-    value:           D21010B4-A281-36CF-88F1-190BCAC65A49
+    value:           BD6580BC-4822-3C7A-B581-12317674666B
   - target:          arm64e-macos
-    value:           FC418008-C81B-3EA1-8F75-87367003DC0D
+    value:           DCA1DC01-9F0D-3336-9DDD-843F6790F02A
 install-name:    '/usr/lib/libcryptex_interface.dylib'
-current-version: 84.100.10
+current-version: 169
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ cryptex, cryptexctl, cryptexd, cryptexd.diagnostic ]
@@ -19,13 +19,18 @@ exports:
                        __cryptex_actor_init_invoke_u64, _codex_install_pack, _codex_install_reply_pack, 
                        _codex_install_reply_unpack, _codex_install_unpack, _codex_list_pack, 
                        _codex_list_reply_pack, _codex_list_reply_unpack, _codex_list_unpack, 
-                       _cryptex_actor_connect, _cryptex_actor_create, _cryptex_actor_trap, 
-                       _cryptex_subsystem_codex, _cryptex_subsystem_create_actor, 
-                       _cryptex_subsystem_cryptex, _cryptex_subsystem_daemon, _cryptex_uninstall_pack, 
-                       _cryptex_uninstall_reply_pack, _cryptex_uninstall_reply_unpack, 
+                       _codex_lockdown_pack, _codex_lockdown_reply_pack, _codex_lockdown_reply_unpack, 
+                       _codex_lockdown_unpack, _cryptex_actor_connect, _cryptex_actor_create, 
+                       _cryptex_actor_trap, _cryptex_subsystem_codex, _cryptex_subsystem_create_actor, 
+                       _cryptex_subsystem_cryptex, _cryptex_subsystem_daemon, _cryptex_subsystem_session, 
+                       _cryptex_uninstall_pack, _cryptex_uninstall_reply_pack, _cryptex_uninstall_reply_unpack, 
                        _cryptex_uninstall_unpack, _daemon_async_pack, _daemon_async_reply_pack, 
                        _daemon_async_reply_unpack, _daemon_async_unpack, _daemon_open_mountable_pack, 
                        _daemon_open_mountable_reply_pack, _daemon_open_mountable_reply_unpack, 
                        _daemon_open_mountable_unpack, _daemon_version_pack, _daemon_version_reply_pack, 
-                       _daemon_version_reply_unpack, _daemon_version_unpack ]
+                       _daemon_version_reply_unpack, _daemon_version_unpack, _session_activate_pack, 
+                       _session_activate_reply_pack, _session_activate_reply_unpack, 
+                       _session_activate_unpack, _session_list_pack, _session_list_reply_pack, 
+                       _session_list_reply_unpack, _session_list_unpack ]
+    objc-classes:    [ OS_cryptex_actor ]
 ...

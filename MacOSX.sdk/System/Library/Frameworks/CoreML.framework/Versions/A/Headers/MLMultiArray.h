@@ -30,7 +30,7 @@ ML_EXPORT
 @interface MLMultiArray : NSObject <NSSecureCoding>
 
 /// Unsafe pointer to underlying buffer holding the data
-@property (readonly, nonatomic) void *dataPointer;
+@property (readonly, nonatomic) void *dataPointer NS_RETURNS_INNER_POINTER;
 
 /// Type of element held
 @property (readonly, nonatomic) MLMultiArrayDataType dataType;

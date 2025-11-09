@@ -65,11 +65,11 @@ OS_EXPORT
 
 /// Asynchronously generate a new live photo suitable for playback in a PHLivePhotoView of the specified target size
 /// The options dictionary can contain additional options, see below
-- (void)prepareLivePhotoForPlaybackWithTargetSize:(CGSize)targetSize options:(nullable NSDictionary<PHLivePhotoEditingOption, id> *)options completionHandler:(void(^)(PHLivePhoto * _Nullable livePhoto, NSError * _Nullable error))handler;
+- (void)prepareLivePhotoForPlaybackWithTargetSize:(CGSize)targetSize options:(nullable NSDictionary<PHLivePhotoEditingOption, id> *)options completionHandler:(void(^)(PHLivePhoto * _Nullable livePhoto, NSError * _Nullable error))handler NS_SWIFT_ASYNC_NAME(livePhotoForPlayback(targetSize:options:));
 
 /// Asynchronously process and save the edited live photo to the specified content editing output
 /// Options dictionary should be nil, reserved for future expansion
-- (void)saveLivePhotoToOutput:(PHContentEditingOutput *)output options:(nullable NSDictionary<PHLivePhotoEditingOption, id> *)options completionHandler:(void(^)(BOOL success, NSError * _Nullable error))handler;
+- (void)saveLivePhotoToOutput:(PHContentEditingOutput *)output options:(nullable NSDictionary<PHLivePhotoEditingOption, id> *)options completionHandler:(void(^)(BOOL success, NSError * _Nullable error))handler NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /// Cancel the current asynchronous operation
 /// This is implicitly called whenever prepare or save is called
@@ -123,7 +123,7 @@ extern NSString * const PHLivePhotoEditingErrorDomain API_DEPRECATED_WITH_REPLAC
 
 /// Error code for Live Photo Editing errors (Deprecated)
 typedef NS_ENUM(NSInteger, PHLivePhotoEditingErrorCode) {
-    PHLivePhotoEditingErrorCodeUnknown API_DEPRECATED_WITH_REPLACEMENT("PHPhotosErrorInvalid", macos(10.12, 10.15)),
+    PHLivePhotoEditingErrorCodeUnknown API_DEPRECATED_WITH_REPLACEMENT("PHPhotosErrorInternalError", macos(10.12, 10.15)),
     PHLivePhotoEditingErrorCodeAborted API_DEPRECATED_WITH_REPLACEMENT("PHPhotosErrorUserCancelled", macos(10.12, 10.15)),
 } API_UNAVAILABLE(ios, tvos, macCatalyst);
 

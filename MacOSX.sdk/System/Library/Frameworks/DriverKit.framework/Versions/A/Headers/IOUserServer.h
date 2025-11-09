@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.100.6) generated from IOUserServer.iig */
+/* iig(DriverKit-191) generated from IOUserServer.iig */
 
 /* IOUserServer.iig:1-36 */
 /*
@@ -37,7 +37,7 @@
 #include <DriverKit/IOService.h>  /* .iig include */
 
 
-/* source class IOUserServer IOUserServer.iig:37-63 */
+/* source class IOUserServer IOUserServer.iig:37-67 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -53,6 +53,7 @@ public:
 		const char      name[64],
 		uint64_t        tag,
 		uint64_t        options,
+		OSString      * bundleID,
 		IOUserServer ** server);
 
 	virtual bool
@@ -66,12 +67,15 @@ public:
 
 	virtual kern_return_t
 	LoadModule(const char path[1024]) LOCAL;
+
+	virtual kern_return_t
+	RegisterService() override;
 };
 
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOUserServer IOUserServer.iig:37-63 */
+/* generated class IOUserServer IOUserServer.iig:37-67 */
 
 #define IOUserServer_Create_ID            0xc1dbaee5e75e22b9ULL
 #define IOUserServer_Exit_ID            0xe949d58832ebe980ULL
@@ -81,6 +85,7 @@ public:
         const char * name, \
         uint64_t tag, \
         uint64_t options, \
+        OSString * bundleID, \
         IOUserServer ** server
 
 #define IOUserServer_Exit_Args \
@@ -88,6 +93,9 @@ public:
 
 #define IOUserServer_LoadModule_Args \
         const char * path
+
+#define IOUserServer_RegisterService_Args \
+
 
 #define IOUserServer_Methods \
 \
@@ -104,6 +112,7 @@ public:\
         const char * name,\
         uint64_t tag,\
         uint64_t options,\
+        OSString * bundleID,\
         IOUserServer ** server);\
 \
     kern_return_t\
@@ -157,6 +166,9 @@ protected:\
     static kern_return_t\
     Create_Impl(IOUserServer_Create_Args);\
 \
+    kern_return_t\
+    RegisterService_Impl(IOService_RegisterService_Args);\
+\
 
 
 #define IOUserServer_VirtualMethods \
@@ -201,11 +213,18 @@ class IOUserServer : public IOService, public IOUserServerInterface
     friend class IOUserServerMetaClass;
 
 public:
+#ifdef IOUserServer_DECLARE_IVARS
+IOUserServer_DECLARE_IVARS
+#else /* IOUserServer_DECLARE_IVARS */
     union
     {
         IOUserServer_IVars * ivars;
         IOUserServer_LocalIVars * lvars;
     };
+#endif /* IOUserServer_DECLARE_IVARS */
+
+    static OSMetaClass *
+    sGetMetaClass() { return gIOUserServerMetaClass; };
 
     using super = IOService;
 
@@ -217,6 +236,6 @@ public:
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOUserServer.iig:65- */
+/* IOUserServer.iig:69- */
 
 #endif /* ! _IOKIT_UIOUSERSERVER_H */

@@ -11,7 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// PKInk provides a description of how marks on a PKCanvas render and are created.
-NS_REFINED_FOR_SWIFT
 API_AVAILABLE(ios(14.0), macos(11.0))
 @interface PKInk : NSObject <NSCopying>
 

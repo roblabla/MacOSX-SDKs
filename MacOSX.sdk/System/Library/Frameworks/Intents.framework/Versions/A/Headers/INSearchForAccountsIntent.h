@@ -89,16 +89,16 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolveAccountNicknameForSearchForAccounts:(INSearchForAccountsIntent *)intent
-                    withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveAccountNickname(for:with:));
+                                    withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveAccountNickname(for:with:));
 
 - (void)resolveAccountTypeForSearchForAccounts:(INSearchForAccountsIntent *)intent
-                    withCompletion:(void (^)(INAccountTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveAccountType(for:with:));
+                                withCompletion:(void (^)(INAccountTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveAccountType(for:with:));
 
 - (void)resolveOrganizationNameForSearchForAccounts:(INSearchForAccountsIntent *)intent
-                    withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveOrganizationName(for:with:));
+                                     withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveOrganizationName(for:with:));
 
 - (void)resolveRequestedBalanceTypeForSearchForAccounts:(INSearchForAccountsIntent *)intent
-                    withCompletion:(void (^)(INBalanceTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveRequestedBalanceType(for:with:));
+                                         withCompletion:(void (^)(INBalanceTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveRequestedBalanceType(for:with:));
 
 @end
 

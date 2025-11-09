@@ -493,7 +493,7 @@ UIKIT_EXTERN NSNotificationName const UIAccessibilityAssistiveTouchStatusDidChan
 
 // Returns whether the system preference for Differentiate without Color is enabled.
 UIKIT_EXTERN BOOL UIAccessibilityShouldDifferentiateWithoutColor(void) API_AVAILABLE(ios(13.0), tvos(13.0));
-UIKIT_EXTERN NSString *const UIAccessibilityShouldDifferentiateWithoutColorDidChangeNotification API_AVAILABLE(ios(13.0), tvos(13.0));
+UIKIT_EXTERN NSNotificationName const UIAccessibilityShouldDifferentiateWithoutColorDidChangeNotification API_AVAILABLE(ios(13.0), tvos(13.0));
 
 // Returns whether the system preference for On/Off labels is enabled.
 UIKIT_EXTERN BOOL UIAccessibilityIsOnOffSwitchLabelsEnabled(void) API_AVAILABLE(ios(13.0));

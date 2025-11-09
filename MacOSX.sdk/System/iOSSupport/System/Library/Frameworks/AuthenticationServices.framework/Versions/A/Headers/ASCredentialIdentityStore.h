@@ -40,7 +40,9 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  Use the provided ASCredentialIdentityStoreState to find out if the store is enabled and whether it supports incremental
  updates.
  */
-- (void)getCredentialIdentityStoreStateWithCompletion:(void (^)(ASCredentialIdentityStoreState *state))completion;
+- (void)getCredentialIdentityStoreStateWithCompletion:(void (^)(ASCredentialIdentityStoreState *state))completion
+    NS_SWIFT_ASYNC_NAME(state())
+    ;
 
 /*! @abstract Save the given credential identities to the store.
  @param credentialIdentities array of ASPasswordCredentialIdentity objects to save to the store.
@@ -53,7 +55,9 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  If some credential identities in credentialIdentities already exist in the store, they will be replaced by
  those from credentialIdentities.
  */
-- (void)saveCredentialIdentities:(NSArray<ASPasswordCredentialIdentity *> *)credentialIdentities completion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion;
+- (void)saveCredentialIdentities:(NSArray<ASPasswordCredentialIdentity *> *)credentialIdentities completion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion
+    NS_SWIFT_ASYNC_THROWS_ON_FALSE(1)
+    ;
 
 /*! @abstract Remove the given credential identities from the store.
  @param credentialIdentities array of ASPasswordCredentialIdentity objects to remove from the store.
@@ -63,14 +67,18 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  @discussion Use this method only if the store supports incremental updates to remove previously added
  credentials to the store.
  */
-- (void)removeCredentialIdentities:(NSArray<ASPasswordCredentialIdentity *> *)credentialIdentities completion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion;
+- (void)removeCredentialIdentities:(NSArray<ASPasswordCredentialIdentity *> *)credentialIdentities completion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion
+    NS_SWIFT_ASYNC_THROWS_ON_FALSE(1)
+    ;
 
 /*! @abstract Remove all existing credential identities from the store.
  @param completion optional completion handler to be called after removing all existing credential identities.
  If the operation fails, an error with domain ASCredentialIdentityStoreErrorDomain will be provided and none of
  the existing credential identities will be removed from the store.
  */
-- (void)removeAllCredentialIdentitiesWithCompletion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion;
+- (void)removeAllCredentialIdentitiesWithCompletion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion
+    NS_SWIFT_ASYNC_THROWS_ON_FALSE(1)
+    ;
 
 /*! @abstract Replace existing credential identities with new credential identities.
  @param newCredentialIdentities array of new credential identity objects to replace the old ones.
@@ -80,7 +88,9 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
  error with domain ASCredentialIdentityStoreErrorDomain will be provided and none of the new credential
  identities will be saved.
  */
-- (void)replaceCredentialIdentitiesWithIdentities:(NSArray<ASPasswordCredentialIdentity *> *)newCredentialIdentities completion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion;
+- (void)replaceCredentialIdentitiesWithIdentities:(NSArray<ASPasswordCredentialIdentity *> *)newCredentialIdentities completion:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completion
+    NS_SWIFT_ASYNC_THROWS_ON_FALSE(1)
+    ;
 
 @end
 

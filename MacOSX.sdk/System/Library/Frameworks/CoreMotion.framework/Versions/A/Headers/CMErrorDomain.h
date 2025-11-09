@@ -16,6 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  Discussion:
  *    Error returned as the domain to NSError from CoreMotion.
  */
-CM_EXTERN NSString *const CMErrorDomain API_AVAILABLE(ios(4.0));
+CM_EXTERN NSString *const CMErrorDomain API_AVAILABLE(macos(12.0), ios(4.0));
 
 NS_ASSUME_NONNULL_END

@@ -3,27 +3,27 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CDDC57BE-1BBA-3520-9B15-BE2079B11645
+    value:           4B8CD22E-1E65-3D54-A8ED-339526EBEB48
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3BDB8008-5C23-3C0A-99E4-C7AB69A43017
+    value:           F4CB4A3B-E578-342C-A1EE-8B59C2763CB4
 install-name:    '/System/Library/PrivateFrameworks/DigitalTouchShared.framework/Versions/A/DigitalTouchShared'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DOT_POINTSIZE, _DigitalTouchSharedVersionNumber, _DigitalTouchSharedVersionString, 
-                       _ETAggdEphemeralAddedKey, _ETAggdEphemeralBlockedKey, _ETAggdExpiredUnreadMessagesKey, 
-                       _ETAggdIMessageButtonTappedKey, _ETAggdMessageReceivedTransportTimeToAppKey, 
-                       _ETAggdMessageReceivedTransportTimeToDaemonKey, _ETAggdMessageReceivedTypeDoodleKey, 
-                       _ETAggdMessageReceivedTypeHeartbeatKey, _ETAggdMessageReceivedTypeQuickTapKey, 
-                       _ETAggdMessageReceivedTypeTapKey, _ETAggdMessageReceivedTypeVideoKey, 
-                       _ETAggdMessageSentNumberOfColorsPrefixKey, _ETAggdMessageSentSizeKey, 
-                       _ETAggdMessageSentTypeDoodleKey, _ETAggdMessageSentTypeHeartbeatKey, 
-                       _ETAggdMessageSentTypeQuickTapKey, _ETAggdMessageSentTypeTapKey, 
-                       _ETAggdPhoneButtonTappedKey, _ETAggdSenderCountKey, _ETAppServiceName, 
-                       _ETAppViewControllerActivatedNotification, _ETAppViewControllerDeactivatedNotification, 
-                       _ETDomain, _ETFallbackHeartRate, _ETFrameworkBundle, _ETMaxFriendGroups, 
-                       _ETMaxFriendsPerGroup, _ETMaxHeartRateMessageDuration, _ETMessageDictionaryABRecordGUIDKey, 
+                       _ETAggdExpiredUnreadMessagesKey, _ETAggdIMessageButtonTappedKey, 
+                       _ETAggdMessageReceivedTransportTimeToAppKey, _ETAggdMessageReceivedTransportTimeToDaemonKey, 
+                       _ETAggdMessageReceivedTypeDoodleKey, _ETAggdMessageReceivedTypeHeartbeatKey, 
+                       _ETAggdMessageReceivedTypeQuickTapKey, _ETAggdMessageReceivedTypeTapKey, 
+                       _ETAggdMessageReceivedTypeVideoKey, _ETAggdMessageSentNumberOfColorsPrefixKey, 
+                       _ETAggdMessageSentSizeKey, _ETAggdMessageSentTypeDoodleKey, 
+                       _ETAggdMessageSentTypeHeartbeatKey, _ETAggdMessageSentTypeQuickTapKey, 
+                       _ETAggdMessageSentTypeTapKey, _ETAggdPhoneButtonTappedKey, 
+                       _ETAggdSenderCountKey, _ETAppServiceName, _ETAppViewControllerActivatedNotification, 
+                       _ETAppViewControllerDeactivatedNotification, _ETDomain, _ETFallbackHeartRate, 
+                       _ETFrameworkBundle, _ETMaxFriendGroups, _ETMaxFriendsPerGroup, 
+                       _ETMaxHeartRateMessageDuration, _ETMessageDictionaryABRecordGUIDKey, 
                        _ETMessageDictionaryAddressKey, _ETMessageDictionaryAllCountKey, 
                        _ETMessageDictionaryContentKey, _ETMessageDictionaryDeliveryStatusDateKey, 
                        _ETMessageDictionaryFromIDKey, _ETMessageDictionaryIdentifierKey, 

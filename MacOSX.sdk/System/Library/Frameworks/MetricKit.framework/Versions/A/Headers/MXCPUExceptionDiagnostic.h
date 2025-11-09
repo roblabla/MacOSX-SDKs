@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @discussion    CPU exceptions occur when your application consumes excessive CPU time in a short period of time.
 @discussion    CPU exceptions can be both fatal and non-fatal to your application.
 */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(14.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
 @interface MXCPUExceptionDiagnostic : MXDiagnostic
 
 

@@ -11,7 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.0)) @interface UILocalizedIndexedCollation : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(3.0)) NS_SWIFT_UI_ACTOR
+@interface UILocalizedIndexedCollation : NSObject
 
 + (instancetype)currentCollation;
 

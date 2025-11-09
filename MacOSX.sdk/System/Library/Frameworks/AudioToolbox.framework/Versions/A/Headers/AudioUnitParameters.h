@@ -330,10 +330,8 @@ CF_ENUM(AudioUnitParameterID) {
 // Parameters for the AUTimePitch, AUTimePitch (offline), AUPitch units
 CF_ENUM(AudioUnitParameterID) {
 	kTimePitchParam_Rate						= 0,
-#if !TARGET_OS_IPHONE
 	kTimePitchParam_Pitch						= 1,
 	kTimePitchParam_EffectBlend					= 2		// only for the AUPitch unit
-#endif
 };
 
 // Parameters for AUNewTimePitch
@@ -475,7 +473,9 @@ CF_ENUM(AudioUnitParameterID) {
 	kDynamicsProcessorParam_ReleaseTime 		= 5,
 		
 		// Global, dB, -40->40, 0
-	kDynamicsProcessorParam_MasterGain 			= 6,
+	kDynamicsProcessorParam_OverallGain 		= 6,
+	
+	kDynamicsProcessorParam_MasterGain  API_DEPRECATED_WITH_REPLACEMENT("kDynamicsProcessorParam_OverallGain", ios(2.0, 2.0), watchos(2.0, 2.0), tvos(9.0, 9.0) ,macos(10.5,10.5)) = kDynamicsProcessorParam_OverallGain,
 	
 		// Global, dB, read-only parameter
 	kDynamicsProcessorParam_CompressionAmount 	= 1000,

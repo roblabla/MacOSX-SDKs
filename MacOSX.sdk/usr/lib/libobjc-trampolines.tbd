@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           01EC7966-DDEC-3128-B300-6767D77FABA8
+    value:           CF609D68-27DE-346E-ADE4-C823C1E15DE8
   - target:          x86_64-maccatalyst
-    value:           01EC7966-DDEC-3128-B300-6767D77FABA8
+    value:           CF609D68-27DE-346E-ADE4-C823C1E15DE8
   - target:          x86_64h-macos
-    value:           443A76FC-45AB-380A-98BF-EF0466708A33
+    value:           06E4ABDB-4E1F-3E14-BD2E-2970DD8CDDFA
   - target:          x86_64h-maccatalyst
-    value:           443A76FC-45AB-380A-98BF-EF0466708A33
+    value:           06E4ABDB-4E1F-3E14-BD2E-2970DD8CDDFA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E032758D-FE40-3C51-BB05-76A9855DF660
+    value:           FBECFC92-FB99-3632-8B95-CB34B0ABF4F9
   - target:          arm64e-maccatalyst
-    value:           E032758D-FE40-3C51-BB05-76A9855DF660
+    value:           FBECFC92-FB99-3632-8B95-CB34B0ABF4F9
 install-name:    '/usr/lib/libobjc-trampolines.dylib'
 current-version: 228
 exports:

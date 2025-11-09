@@ -55,6 +55,7 @@ typedef function_table_entry   *function_table_t;
 #define	kextd_kernel_request_MSG_COUNT	1
 #endif	/* kextd_kernel_request_MSG_COUNT */
 
+#include <Availability.h>
 #include <mach/std_types.h>
 #include <mach/mig.h>
 #include <mach/mig.h>

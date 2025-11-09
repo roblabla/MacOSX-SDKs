@@ -445,6 +445,16 @@ UT_EXPORT UTType *const UTTypeRubyScript NS_REFINED_FOR_SWIFT;
 */
 UT_EXPORT UTType *const UTTypePHPScript NS_REFINED_FOR_SWIFT;
 
+/**
+	\brief A makefile.
+
+	UTI: public.make-source
+
+	conforms to: public.script
+*/
+UT_EXPORT UTType *const UTTypeMakefile NS_REFINED_FOR_SWIFT
+API_AVAILABLE(macos(12.0), macCatalyst(15.0), ios(15.0), watchos(8.0), tvos(15.0));
+
 #pragma mark - Serialized data types
 /**
 	\brief JavaScript object notation (JSON) data

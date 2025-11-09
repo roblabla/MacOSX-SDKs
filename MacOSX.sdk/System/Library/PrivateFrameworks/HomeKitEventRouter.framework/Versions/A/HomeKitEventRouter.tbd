@@ -3,19 +3,24 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BAAF3100-986A-31B9-9C60-359F45CA5030
+    value:           E9231339-E75E-3DD3-99AD-AC3658582756
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           154FD7DE-1CF4-3318-8BBD-41642B89E8DE
+    value:           E7DBC1CD-6B55-34C8-9ACA-843EEE2B5B24
 install-name:    '/System/Library/PrivateFrameworks/HomeKitEventRouter.framework/Versions/A/HomeKitEventRouter'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _HMEErrorDomain, _HMEProtoEventInfoReadFrom, _HMEProtoEventReadFrom ]
-    objc-classes:    [ HMEEvent, HMEEventAccessControl, HMEEventInfo, HMEInMemoryLastEventCache, 
+    symbols:         [ _HMEErrorDomain, _HMEProtoEventInfoReadFrom, _HMEProtoEventMetadataReadFrom, 
+                       _HMEProtoEventReadFrom ]
+    objc-classes:    [ HMEEvent, HMEEventInfo, HMEEventMetadata, HMELastEventStore, 
                        HMEMemoryEventBus, HMEMessageDatagramClient, HMEMessageDatagramServer, 
                        HMEPendingEventsCollection, HMEPendingTopicsCombiner, HMEPersistentConnectionClient, 
                        HMEPersistentConnectionServer, HMEProtoEvent, HMEProtoEventInfo, 
-                       HMERouterClient, HMERouterServer, HMETopicRouter ]
-    objc-ivars:      [ HMEProtoEvent._eventData, HMEProtoEventInfo._event, HMEProtoEventInfo._topic ]
+                       HMEProtoEventMetadata, HMERouterClient, HMERouterServer, HMETopicRouter ]
+    objc-ivars:      [ HMEProtoEvent._eventData, HMEProtoEvent._eventMetadata, HMEProtoEventInfo._event, 
+                       HMEProtoEventInfo._topic, HMEProtoEventMetadata._cachePolicy, 
+                       HMEProtoEventMetadata._combinePolicy, HMEProtoEventMetadata._has, 
+                       HMEProtoEventMetadata._qos, HMEProtoEventMetadata._source, 
+                       HMEProtoEventMetadata._timestamp ]
 ...

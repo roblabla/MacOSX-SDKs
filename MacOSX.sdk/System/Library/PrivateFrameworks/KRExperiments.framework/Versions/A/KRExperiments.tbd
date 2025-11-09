@@ -1,0 +1,19 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           DF7F5AA4-00C0-3579-9626-54E45A38E774
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F3989763-2812-37ED-B126-10793D203A18
+install-name:    '/System/Library/PrivateFrameworks/KRExperiments.framework/Versions/A/KRExperiments'
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ mmaintenanced ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _KRExperimentsHandleUpdate, _KRExperimentsInit, _KRExperimentsVersionNumber, 
+                       _KRExperimentsVersionString ]
+...

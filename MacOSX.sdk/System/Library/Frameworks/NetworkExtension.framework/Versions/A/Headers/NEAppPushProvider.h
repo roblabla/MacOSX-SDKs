@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Apple Inc.
+ * Copyright (c) 2020-2021 Apple Inc.
  * All rights reserved.
  */
 
@@ -37,7 +37,14 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  * the subclass' implementation of this method must pass a non-nil NSError object to this block. A value of nil passed to the completion handler indicates that the connection
  * was successfully created.
  */
-- (void)startWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+- (void)startWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_DEPRECATED_WITH_REPLACEMENT("start", ios(14.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+
+/*!
+ * @method start
+ * @discussion This method is called by the framework when the provider is started. Subclasses must override this method to create a connection with its server.
+ */
+- (void)start API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+
 
 /*!
  * @method stopWithReason:reason:completionHandler:

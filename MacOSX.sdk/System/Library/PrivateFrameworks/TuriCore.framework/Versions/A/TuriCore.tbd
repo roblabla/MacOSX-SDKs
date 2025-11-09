@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D4DED478-85DC-3A06-A47F-A3E34D05850A
+    value:           83C4AD88-D2D1-3049-BC77-63F292F9F13E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E7FE89C4-5DEA-335A-8EDA-64E6E8DBDD05
+    value:           D5C63C90-600E-35AD-964C-FFD3CE6956CE
 install-name:    '/System/Library/PrivateFrameworks/TuriCore.framework/Versions/A/TuriCore'
 current-version: 0
 compatibility-version: 0
@@ -78,8 +78,7 @@ exports:
                        _tc_v1_parameters_retrieve_sframe, _tc_v1_parameters_retrieve_string, 
                        _tc_v1_plot_create_1d, _tc_v1_plot_create_2d, _tc_v1_plot_create_sframe_summary, 
                        _tc_v1_plot_finished_streaming, _tc_v1_plot_get_next_data, 
-                       _tc_v1_plot_get_vega_spec, _tc_v1_plot_render_final_into_context, 
-                       _tc_v1_plot_render_next_into_context, _tc_v1_plot_render_vega_spec_into_context, 
+                       _tc_v1_plot_get_vega_spec, _tc_v1_plot_render_next_into_context, 
                        _tc_v1_release, _tc_v1_sarray_all_nonzero, _tc_v1_sarray_any_nonzero, 
                        _tc_v1_sarray_append, _tc_v1_sarray_apply, _tc_v1_sarray_apply_mask, 
                        _tc_v1_sarray_clip, _tc_v1_sarray_count_character_ngrams, 

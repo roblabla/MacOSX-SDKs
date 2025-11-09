@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           19106DFB-75CF-3160-B7E5-D529D18D2F28
+    value:           85C29E57-BF98-3287-BE6F-6BDA686FE1E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           52B7FA95-369B-32B7-8923-537D81300857
+    value:           7B92E6A4-02BF-361C-BA45-12AA760EE832
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -84,18 +84,20 @@ exports:
                        _kSpeechWordCallBack, _kVoiceIndividuallySpokenCharacters, 
                        _kVoiceSupportedCharacters ]
   - targets:         [ arm64e-macos, arm64-macos ]
-    symbols:         [ _CancelTalkingAlertForPID, _DisposeServerConnection, _DisposeSpeechDoneUPP, 
-                       _DisposeSpeechErrorUPP, _DisposeSpeechPhonemeUPP, _DisposeSpeechSyncUPP, 
-                       _DisposeSpeechTextDoneUPP, _DisposeSpeechWordUPP, _InitServerConnection, 
-                       _InvokeSpeechDoneUPP, _InvokeSpeechErrorUPP, _InvokeSpeechPhonemeUPP, 
-                       _InvokeSpeechSyncUPP, _InvokeSpeechTextDoneUPP, _InvokeSpeechWordUPP, 
-                       _IsAppAlreadyRunning, _IsValueCArrayOK, _MTUOpenResourceFile, 
-                       _MTUReadResourceDataFile, _NewSpeechDoneUPP, _NewSpeechErrorUPP, 
-                       _NewSpeechPhonemeUPP, _NewSpeechSyncUPP, _NewSpeechTextDoneUPP, 
-                       _NewSpeechWordUPP, _SendMessagePrimitive, _SendMessageToServer, 
-                       _StartServerConnection, _TTSIsSpeakingSelection_XPC, _TTSStartSpeakingSelectionWithString_XPC, 
-                       _TTSStartSpeakingSelection_XPC, _TTSStopSpeakingSelection_XPC, 
-                       __Z16UseDictionaryPtrP19SpeechChannelRecordPKvm, __Z36SetPreferredVoiceIdentifierForLocalePK10__CFLocalePK10__CFString, 
+    symbols:         [ _CancelTalkingAlertForPID, _CopyIdentifierStringForPreferredVoiceInListWithLocale, 
+                       _CopyIdentifierStringForPreferredVoiceWithLocale, _DisposeServerConnection, 
+                       _DisposeSpeechDoneUPP, _DisposeSpeechErrorUPP, _DisposeSpeechPhonemeUPP, 
+                       _DisposeSpeechSyncUPP, _DisposeSpeechTextDoneUPP, _DisposeSpeechWordUPP, 
+                       _InitServerConnection, _InvokeSpeechDoneUPP, _InvokeSpeechErrorUPP, 
+                       _InvokeSpeechPhonemeUPP, _InvokeSpeechSyncUPP, _InvokeSpeechTextDoneUPP, 
+                       _InvokeSpeechWordUPP, _IsAppAlreadyRunning, _IsValueCArrayOK, 
+                       _MTUOpenResourceFile, _MTUReadResourceDataFile, _NewSpeechDoneUPP, 
+                       _NewSpeechErrorUPP, _NewSpeechPhonemeUPP, _NewSpeechSyncUPP, 
+                       _NewSpeechTextDoneUPP, _NewSpeechWordUPP, _SendMessagePrimitive, 
+                       _SendMessageToServer, _StartServerConnection, _TTSIsSpeakingSelection_XPC, 
+                       _TTSStartSpeakingSelectionWithString_XPC, _TTSStartSpeakingSelection_XPC, 
+                       _TTSStopSpeakingSelection_XPC, __Z16UseDictionaryPtrP19SpeechChannelRecordPKvm, 
+                       __Z36SetPreferredVoiceIdentifierForLocalePK10__CFLocalePK10__CFString, 
                        __Z37CopyPreferredVoiceIdentifierForLocalePK10__CFLocale, 
                        __ZN13SpeechGlobals11CopyVoiceIDEPK9VoiceSpecPPK10__CFString, 
                        __ZN13SpeechGlobals13CopyVoicePathEPK9VoiceSpecPPK10__CFString, 
@@ -165,7 +167,7 @@ exports:
                        __ZN19SpeechChannelHandle20CopyVoiceDescriptionEPK9VoiceSpecP16VoiceDescription, 
                        __ZN19SpeechChannelHandle22OutputToFileDescriptorEPKv, __ZN19SpeechChannelHandle32CopyIdentifierStringForVoiceSpecEPK9VoiceSpec, 
                        __ZN19SpeechChannelHandle32MakeVoiceSpecForIdentifierStringEPK10__CFStringP9VoiceSpec, 
-                       __ZN19SpeechChannelHandle36GetIdentifierStringForPreferredVoiceEPK9__CFArrayPK10__CFLocale, 
+                       __ZN19SpeechChannelHandle37CopyIdentifierStringForPreferredVoiceEPK9__CFArrayPK10__CFLocale, 
                        __ZN19SpeechChannelHandle8ShutdownEv, __ZN19SpeechChannelHandle9SetRefConEPv, 
                        __ZN19SpeechChannelHandleC1Ev, __ZN19SpeechChannelHandleC2Ev, 
                        __ZN19SpeechChannelHandleD1Ev, __ZN19SpeechChannelHandleD2Ev, 

@@ -27,6 +27,14 @@
 #endif
 
 
+/**
+ * DEPRECATION NOTICE
+ *
+ * If you’re using `CFHost` to resolve DNS names so that you can connect to a
+ * service, switch to a connect-by-name API, for example, `nw_connection`.
+ *
+ * If you have other DNS resolution needs, switch to <dns_sd.h>.
+ */
 
 #if PRAGMA_ONCE
 #pragma once
@@ -177,7 +185,7 @@ typedef CALLBACK_API_C( void , CFHostClientCallBack )(CFHostRef theHost, CFHostI
  *  
  */
 CFN_EXPORT CFTypeID 
-CFHostGetTypeID(void) CF_AVAILABLE(10_3, 2_0);
+CFHostGetTypeID(void) API_DEPRECATED("Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -207,7 +215,7 @@ CFHostGetTypeID(void) CF_AVAILABLE(10_3, 2_0);
  *  
  */
 CFN_EXPORT CFHostRef 
-CFHostCreateWithName(CFAllocatorRef __nullable allocator, CFStringRef hostname) CF_AVAILABLE(10_3, 2_0);
+CFHostCreateWithName(CFAllocatorRef __nullable allocator, CFStringRef hostname) API_DEPRECATED("Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -237,7 +245,7 @@ CFHostCreateWithName(CFAllocatorRef __nullable allocator, CFStringRef hostname) 
  *  
  */
 CFN_EXPORT CFHostRef 
-CFHostCreateWithAddress(CFAllocatorRef __nullable allocator, CFDataRef addr) CF_AVAILABLE(10_3, 2_0);
+CFHostCreateWithAddress(CFAllocatorRef __nullable allocator, CFDataRef addr) API_DEPRECATED("Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -268,7 +276,7 @@ CFHostCreateWithAddress(CFAllocatorRef __nullable allocator, CFDataRef addr) CF_
  *  
  */
 CFN_EXPORT CFHostRef 
-CFHostCreateCopy(CFAllocatorRef __nullable alloc, CFHostRef host) CF_AVAILABLE(10_3, 2_0);
+CFHostCreateCopy(CFAllocatorRef __nullable alloc, CFHostRef host) API_DEPRECATED("Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -306,7 +314,7 @@ CFHostCreateCopy(CFAllocatorRef __nullable alloc, CFHostRef host) CF_AVAILABLE(1
  *  
  */
 CFN_EXPORT Boolean 
-CFHostStartInfoResolution(CFHostRef theHost, CFHostInfoType info, CFStreamError * __nullable error) CF_AVAILABLE(10_3, 2_0);
+CFHostStartInfoResolution(CFHostRef theHost, CFHostInfoType info, CFStreamError * __nullable error) API_DEPRECATED("Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -339,7 +347,7 @@ CFHostStartInfoResolution(CFHostRef theHost, CFHostInfoType info, CFStreamError 
  *  
  */
 CFN_EXPORT __nullable CFArrayRef
-CFHostGetAddressing(CFHostRef theHost, Boolean * __nullable hasBeenResolved) CF_AVAILABLE(10_3, 2_0);
+CFHostGetAddressing(CFHostRef theHost, Boolean * __nullable hasBeenResolved) API_DEPRECATED("Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -371,7 +379,7 @@ CFHostGetAddressing(CFHostRef theHost, Boolean * __nullable hasBeenResolved) CF_
  *  
  */
 CFN_EXPORT __nullable CFArrayRef
-CFHostGetNames(CFHostRef theHost, Boolean * __nullable hasBeenResolved) CF_AVAILABLE(10_3, 2_0);
+CFHostGetNames(CFHostRef theHost, Boolean * __nullable hasBeenResolved) API_DEPRECATED("Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -407,7 +415,7 @@ CFHostGetNames(CFHostRef theHost, Boolean * __nullable hasBeenResolved) CF_AVAIL
  *  
  */
 CFN_EXPORT __nullable CFDataRef
-CFHostGetReachability(CFHostRef theHost, Boolean * __nullable hasBeenResolved) CF_AVAILABLE(10_3, 2_0);
+CFHostGetReachability(CFHostRef theHost, Boolean * __nullable hasBeenResolved) API_DEPRECATED("Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -432,7 +440,7 @@ CFHostGetReachability(CFHostRef theHost, Boolean * __nullable hasBeenResolved) C
  *  
  */
 CFN_EXPORT void 
-CFHostCancelInfoResolution(CFHostRef theHost, CFHostInfoType info) CF_AVAILABLE(10_3, 2_0);
+CFHostCancelInfoResolution(CFHostRef theHost, CFHostInfoType info) API_DEPRECATED("Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -470,7 +478,7 @@ CFHostCancelInfoResolution(CFHostRef theHost, CFHostInfoType info) CF_AVAILABLE(
  *  
  */
 CFN_EXPORT Boolean 
-CFHostSetClient(CFHostRef theHost, CFHostClientCallBack __nullable clientCB, CFHostClientContext * __nullable clientContext) CF_AVAILABLE(10_3, 2_0);
+CFHostSetClient(CFHostRef theHost, CFHostClientCallBack __nullable clientCB, CFHostClientContext * __nullable clientContext) API_DEPRECATED("Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -502,7 +510,7 @@ CFHostSetClient(CFHostRef theHost, CFHostClientCallBack __nullable clientCB, CFH
  *  
  */
 CFN_EXPORT void 
-CFHostScheduleWithRunLoop(CFHostRef theHost, CFRunLoopRef runLoop, CFStringRef runLoopMode) CF_AVAILABLE(10_3, 2_0);
+CFHostScheduleWithRunLoop(CFHostRef theHost, CFRunLoopRef runLoop, CFStringRef runLoopMode) API_DEPRECATED("Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -534,7 +542,7 @@ CFHostScheduleWithRunLoop(CFHostRef theHost, CFRunLoopRef runLoop, CFStringRef r
  *  
  */
 CFN_EXPORT void 
-CFHostUnscheduleFromRunLoop(CFHostRef theHost, CFRunLoopRef runLoop, CFStringRef runLoopMode) CF_AVAILABLE(10_3, 2_0);
+CFHostUnscheduleFromRunLoop(CFHostRef theHost, CFRunLoopRef runLoop, CFStringRef runLoopMode) API_DEPRECATED("Use Network framework instead, see deprecation notice in <CFNetwork/CFHost.h>", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 

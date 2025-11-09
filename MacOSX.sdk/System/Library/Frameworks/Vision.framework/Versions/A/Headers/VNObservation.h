@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class CIBarcodeDescriptor;
 @class MLFeatureValue;
 @class VNFaceLandmarks2D;
+@class VNPixelBufferObservation;
 
 
 /*!
@@ -79,14 +80,19 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  */
 @property (readonly, nonatomic, assign) CGRect boundingBox;
 
+/*!
+ @brief The resulting CVPixelBuffer from requests that generate a segmentation mask for the entire image.
+ */
+@property (readonly, nonatomic, nullable) VNPixelBufferObservation * globalSegmentationMask API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+
 @end
 
 
 /*!
  @class VNFaceObservation
- @superclass VNObservation
+ @superclass VNDetectedObjectObservation
  @brief VNFaceObservation is the result of a face detection request or derivatives like a face landmark request.
- @discussion The properties filled in this obervation depend on the request being performed. For instance if just a VNDetectFaceRectanglesRequest was performed the landmarks will not be populated. VNFaceObservation are also used as inputs to other request as defined by the VNFaceObservationAccepting protocol. An example would be the VNDetectFaceLandmarksRequest. This can be helpful for instance if the face rectangles in an image are not derived from a VNDetectFaceRectanglesRequest but instead come from other sources like EXIF or other face detectors. In that case the client of the API creates a VNFaceObservation with the boundingBox (in normalized coordinates) that were based on those detected faces.
+ @discussion The properties filled in this obervation depend on the request being performed. For instance, if just a VNDetectFaceRectanglesRequest was performed the landmarks will not be populated. VNFaceObservation are also used as inputs to other request as defined by the VNFaceObservationAccepting protocol. An example would be the VNDetectFaceLandmarksRequest. This can be helpful for instance if the face rectangles in an image are not derived from a VNDetectFaceRectanglesRequest but instead come from other sources like EXIF or other face detectors. In that case the client of the API creates a VNFaceObservation with the boundingBox (in normalized coordinates) that were based on those detected faces.
  
  */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
@@ -95,11 +101,12 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 /*!
  @brief Create a new VNFaceObservation with a normalized bounding box, roll and yaw.
  @param requestRevision The revision of the VNDetectFaceRectanglesRequest that provided the bounding box.  If this observation is being created with data that did not originate from a Vision request, this parameter should be VNRequestRevisionUnspecified.
- @param roll The roll angle of the face, reported in radians.  A positive angle corresponds to counterclockwise direction, range [-Pi, Pi). If no roll information is avilable, this parameter should be nil.
- @param yaw The yaw angle of the face, reported in radians.  A positive angle corresponds to counterclockwise direction, range [-Pi/2, Pi/2). If no yaw information is avilable, this parameter should be nil.
+ @param roll The roll angle of the face, reported in radians.  A positive angle corresponds to counterclockwise direction, range [-Pi, Pi). If no roll information is available, this parameter should be nil.
+ @param yaw The yaw angle of the face, reported in radians.  A positive angle corresponds to counterclockwise direction, range [-Pi/2, Pi/2). If no yaw information is available, this parameter should be nil.
+ @param pitch The pitch angle of the face, reported in radians.  A positive angle corresponds to nodding head down direction, range [-Pi/2, Pi/2]. If no pitch information is available, this parameter should be nil.
  */
-+ (instancetype)faceObservationWithRequestRevision:(NSUInteger)requestRevision boundingBox:(CGRect)boundingBox roll:(nullable NSNumber *)roll yaw:(nullable NSNumber *)yaw API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0));
-
++ (instancetype)faceObservationWithRequestRevision:(NSUInteger)requestRevision boundingBox:(CGRect)boundingBox roll:(nullable NSNumber *)roll yaw:(nullable NSNumber *)yaw API_DEPRECATED_WITH_REPLACEMENT("-faceObservationWithRequestRevision:boundingBox:roll:yaw:", macos(10.14, 12.0), ios(12.0, 15.0), tvos(12.0, 15.0));
++ (instancetype)faceObservationWithRequestRevision:(NSUInteger)requestRevision boundingBox:(CGRect)boundingBox roll:(nullable NSNumber *)roll yaw:(nullable NSNumber *)yaw pitch:(nullable NSNumber *)pitch API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 /*!
  @brief The face landmarks populated by the VNDetectFaceLandmarksRequest. This is set to nil if only a VNDetectFaceRectanglesRequest was performed.
  */
@@ -116,9 +123,15 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @property (readonly, nonatomic, strong, nullable) NSNumber *roll API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0));
 
 /*!
- @brief Face yaw angle populated by VNDetectFaceRectanglesRequest. The yaw is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi/2, Pi/2). nil value indicates that the yaw angle hasn't been computed
+ @brief Face yaw angle populated by VNDetectFaceRectanglesRequest. The yaw is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi/2, Pi/2]. nil value indicates that the yaw angle hasn't been computed
  */
 @property (readonly, nonatomic, strong, nullable) NSNumber *yaw API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0));
+
+/*!
+ @brief Face pitch angle populated by VNDetectFaceRectanglesRequest. The pitch is reported in radians, positive angle corresponds to nodding head down direction, range [-Pi/2, Pi/2]. nil value indicates that the pitch angle hasn't been computed
+ */
+@property (readonly, nonatomic, strong, nullable) NSNumber *pitch API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+
 
 @end
 
@@ -287,6 +300,13 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 */
 @property (readonly, nonatomic) simd_float3 equationCoefficients;
 
+/*!
+@brief The moving average radius of the object being tracked.
+@details This is the radius of the object at each detected point (used to determine the trajectory) averaged.
+*/
+@property (readonly, nonatomic, assign) CGFloat movingAverageRadius API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+
+
 @end
 
 
@@ -300,7 +320,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 
 /*!
 	@brief		Array of individual character bounding boxes found within the observation's boundingBox.
-	@discussion	If the associated request indicated that it is interested in character boxes by setting the VNRequestOptionReportCharacterBoxes option to @YES, this property will be non-nil (but may still be empty, depending on the detection results).
+	@discussion	If the associated request indicated that it is interested in character boxes by setting the VNDetectTextRectanglesRequest reportCharacterBoxes property to @YES, this property will be non-nil (but may still be empty, depending on the detection results).
 */
 @property (readonly, nonatomic, copy, nullable) NSArray<VNRectangleObservation *> *characterBoxes;
 
@@ -311,7 +331,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  @brief VNRecognizedText A block of recognized text. There can be multiple VNRecognizedText objects returned in a VNRecognizedTextObservation - one for each candidate.
  */
 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
-@interface VNRecognizedText : NSObject < NSCopying, NSSecureCoding >
+@interface VNRecognizedText : NSObject < NSCopying, NSSecureCoding, VNRequestRevisionProviding>
 
 /*!
  @brief        Field that contains recognized text.
@@ -413,7 +433,9 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNImageTranslationAlignmentObservation : VNImageAlignmentObservation
-@property (readwrite, nonatomic, assign) CGAffineTransform alignmentTransform;
+
+@property (readonly, nonatomic, assign) CGAffineTransform alignmentTransform;
+
 @end
 
 
@@ -424,7 +446,9 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNImageHomographicAlignmentObservation : VNImageAlignmentObservation
-@property (readwrite, nonatomic, assign) matrix_float3x3 warpTransform;
+
+@property (readonly, nonatomic, assign) matrix_float3x3 warpTransform;
+
 @end
 
 /*!
@@ -612,6 +636,20 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @end
 
 
+/*!
+ @class VNHumanObservation
+ @superclass VNDetectedObjectObservation
+ @brief VNHumanObservation is the result of a Human rectangles detection request
+  */
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0))
+@interface VNHumanObservation : VNDetectedObjectObservation
+
+/*!
+ @brief Boolean property to specify whether the human upper body or full body detection is recorded in the observation. This setting is propagated from [VNDetectHumanRectanglesRequest -upperBodyOnly]
+ */
+@property(readonly, nonatomic) BOOL upperBodyOnly API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+
+@end
 
 
 NS_ASSUME_NONNULL_END

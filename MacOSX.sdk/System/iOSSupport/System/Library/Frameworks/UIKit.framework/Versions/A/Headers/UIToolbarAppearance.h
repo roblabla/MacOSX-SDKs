@@ -11,7 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIToolbarAppearance : UIBarAppearance
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UIToolbarAppearance : UIBarAppearance
 
 /// The appearance for plain-style bar button items
 @property (nonatomic, readwrite, copy) UIBarButtonItemAppearance *buttonAppearance;

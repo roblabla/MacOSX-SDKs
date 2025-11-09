@@ -44,6 +44,7 @@
 #import <UIKit/UIBarButtonItemGroup.h>
 #import <UIKit/UIBarItem.h>
 #import <UIKit/UIButton.h>
+#import <UIKit/UIButtonConfiguration.h>
 #import <UIKit/UICollectionView.h>
 #import <UIKit/UICollectionViewCell.h>
 #import <UIKit/UICollectionViewController.h>
@@ -97,6 +98,7 @@
 #import <UIKit/UIGraphicsPDFRenderer.h>
 #import <UIKit/UIImageAsset.h>
 #import <UIKit/UIImagePickerController.h>
+#import <UIKit/UIImageVariants.h>
 #import <UIKit/UIImageView.h>
 #import <UIKit/UIInputView.h>
 #import <UIKit/UIInputViewController.h>
@@ -216,6 +218,8 @@
 #import <UIKit/NSLayoutConstraint.h>
 #import <UIKit/NSLayoutAnchor.h>
 #import <UIKit/UILayoutGuide.h>
+#import <UIKit/UIKeyboardLayoutGuide.h>
+#import <UIKit/UITrackingLayoutGuide.h>
 #import <UIKit/UIStackView.h>
 #import <UIKit/NSLayoutManager.h>
 #import <UIKit/NSTextAttachment.h>
@@ -226,6 +230,7 @@
 #import <UIKit/UIViewControllerTransitionCoordinator.h>
 #import <UIKit/UIPresentationController.h>
 #import <UIKit/UIPreviewInteraction.h>
+#import <UIKit/UISheetPresentationController.h>
 #import <UIKit/UIPopoverPresentationController.h>
 #import <UIKit/UIDynamicAnimator.h>
 #import <UIKit/UIDynamicBehavior.h>
@@ -277,6 +282,7 @@
 #import <UIKit/UIFocusMovementHint.h>
 #import <UIKit/UIPencilInteraction.h>
 #import <UIKit/UISceneDefinitions.h>
+#import <UIKit/UISceneEnhancedStateRestoration.h>
 #import <UIKit/UISceneOptions.h>
 #import <UIKit/UIScene.h>
 #import <UIKit/UIWindowScene.h>
@@ -300,8 +306,17 @@
 #import <UIKit/UIPointerInteraction.h>
 #import <UIKit/UIPointerStyle.h>
 #import <UIKit/UIPointerRegion.h>
+#import <UIKit/UIBandSelectionInteraction.h>
+#import <UIKit/UIPointerAccessory.h>
 #import <UIKit/UIColorWell.h>
 #import <UIKit/UIColorPickerViewController.h>
 #import <UIKit/UIEventAttribution.h>
 #import <UIKit/UIEventAttributionView.h>
+#import <UIKit/UIBehavioralStyle.h>
+#import <UIKit/UIWindowSceneActivationRequestOptions.h>
+#import <UIKit/UIWindowSceneActivationConfiguration.h>
+#import <UIKit/UIWindowSceneActivationAction.h>
+#import <UIKit/UIWindowSceneActivationInteraction.h>
+#import <UIKit/UIFocusEffect.h>
+#import <UIKit/UIToolTipInteraction.h>
 #endif

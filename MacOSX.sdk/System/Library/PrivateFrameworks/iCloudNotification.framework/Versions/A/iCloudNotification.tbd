@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EC01AAEF-B64A-3567-BEAD-F42259738830
+    value:           35CFF42F-8F8F-398B-9882-E5E9D894BD00
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E97A5CF4-EB66-3CE6-B1F8-F61270BEA511
+    value:           7BA330B5-7539-3320-91FD-4766A0C58E24
 install-name:    '/System/Library/PrivateFrameworks/iCloudNotification.framework/Versions/A/iCloudNotification'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -17,5 +17,5 @@ exports:
                        _INNextFreshmintRefreshDateKey, _INNextHeartbeatDateKey, _INSyslogOutputLevelKey, 
                        __INLogSystem ]
     objc-classes:    [ INDaemonConnection, INDaemonInterface, INDiagnosticReport, 
-                       INManagedDefaults ]
+                       INFamilyFollowupManager, INManagedDefaults ]
 ...

@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2019 Apple Inc. All rights reserved.
+	Copyright 2010-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -40,6 +40,7 @@
 
 @class AVPlayerItem;
 @class AVPlayerInternal;
+@class AVPlayerPlaybackCoordinator;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -132,6 +133,32 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 
 @end
 
+/**
+ @constant AVPlayerRateDidChangeNotification
+ @abstract Indicates a player rate change.
+ @discussion Posted by the player when its rate changes. Similar to KVO of AVPlayer.rate, but providing additional information about the rate change in the userInfo. See keys below.
+ */
+AVF_EXPORT NSNotificationName const AVPlayerRateDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/**
+ @constant AVPlayerRateDidChangeReasonKey
+ @abstract Indicates a reason for the rate change notification.
+ @discussion The value corresponding to this key is of type AVPlayerRateDidChangeReason.
+ */
+AVF_EXPORT NSString *const AVPlayerRateDidChangeReasonKey API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+
+/**
+ @constant AVPlayerRateDidChangeOriginatingParticipantKey
+ @abstract Indicates a rate change was caused by another participant connected through AVPlayerPlaybackCoordinator.
+ @discussion Informs the receiver of an AVPlayerRateDidChangeNotification about a rate change originated from another AVCoordinatedPlaybackParticipant connected through AVPlayerPlaybackCoordinator. This can be used to inform UI showing why the playback rate changed. The type of the value for this key is an AVCoordinatedPlaybackParticipant, which is part of the AVPlayerPlaybackCoordinator.otherParticipants array.
+ */
+AVF_EXPORT NSString *const AVPlayerRateDidChangeOriginatingParticipantKey API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+
+typedef NSString * AVPlayerRateDidChangeReason NS_STRING_ENUM;
+AVF_EXPORT AVPlayerRateDidChangeReason const AVPlayerRateDidChangeReasonSetRateCalled API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVPlayerRateDidChangeReason const AVPlayerRateDidChangeReasonSetRateFailed API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVPlayerRateDidChangeReason const AVPlayerRateDidChangeReasonAudioSessionInterrupted API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVPlayerRateDidChangeReason const AVPlayerRateDidChangeReasonAppBackgrounded API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 @interface AVPlayer (AVPlayerPlaybackControl)
 
@@ -145,22 +172,28 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
  AVPlayer can reset the desired rate to 0.0 when a change in overall state requires playback to be halted, such as when an interruption occurs on iOS, as announced by AVAudioSession, or when the playback buffer becomes empty and playback stalls while automaticallyWaitsToMinimizeStalling is NO.
 
  The effective rate of playback may differ from the desired rate even while timeControlStatus is AVPlayerTimeControlStatusPlaying, if the processing algorithm in use for managing audio pitch requires quantization of playback rate. For information about quantization of rates for audio processing, see AVAudioProcessingSettings.h. You can always obtain the effective rate of playback from the currentItem's timebase; see the timebase property of AVPlayerItem.
+ 
+ This property must be accessed on the main thread/queue.
  */
-@property (nonatomic) float rate;
+@property (nonatomic) float rate NS_SWIFT_UI_ACTOR;
 
 /*!
  @method		play
  @abstract		Signals the desire to begin playback at the current item's natural rate.
  @discussion	Equivalent to setting the value of rate to 1.0.
+ 
+ This method must be invoked on the main thread/queue.
  */
-- (void)play;
+- (void)play NS_SWIFT_UI_ACTOR;
 
 /*!
  @method		pause
  @abstract		Pauses playback.
  @discussion	Equivalent to setting the value of rate to 0.0.
+ 
+ This method must be invoked on the main thread/queue.
  */
-- (void)pause;
+- (void)pause NS_SWIFT_UI_ACTOR;
 
 /*!
  @enum AVPlayerTimeControlStatus
@@ -226,6 +259,12 @@ AVF_EXPORT AVPlayerWaitingReason const AVPlayerWaitingWhileEvaluatingBufferingRa
  */
 AVF_EXPORT AVPlayerWaitingReason const AVPlayerWaitingWithNoItemToPlayReason API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
+/**
+ @constant AVPlayerWaitingForCoordinatedPlaybackReason
+ @abstract Indicates that the player is waiting for another participant connected through its AVPlayerPlaybackCoordinator.
+ @discussion The player is waiting for playback because its connected AVPlayerPlaybackCoordinator requires information from one of the other participants before playback can start.
+*/
+AVF_EXPORT AVPlayerWaitingReason const AVPlayerWaitingForCoordinatedPlaybackReason API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property		reasonForWaitingToPlay
@@ -246,8 +285,10 @@ AVF_EXPORT AVPlayerWaitingReason const AVPlayerWaitingWithNoItemToPlayReason API
  @discussion
  When the player's currentItem has a value of NO for playbackBufferEmpty, this method causes the value of rate to change to the specified rate, the value of timeControlStatus to change to AVPlayerTimeControlStatusPlaying, and the receiver to play the available media immediately, whether or not prior buffering of media data is sufficient to ensure smooth playback.
  If insufficient media data is buffered for playback to start (e.g. if the current item has a value of YES for playbackBufferEmpty), the receiver will act as if the buffer became empty during playback, except that no AVPlayerItemPlaybackStalledNotification will be posted.
+ 
+ This method must be invoked on the main thread/queue.
  */
-- (void)playImmediatelyAtRate:(float)rate API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
+- (void)playImmediatelyAtRate:(float)rate NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 @end
 
@@ -323,7 +364,8 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
  @discussion		Use this method to seek to a specified time for the current player item and to be notified when the seek operation is complete.
 					The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter 
 					set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified 
-					completion handler will be invoked with the finished parameter set to YES. 
+					completion handler will be invoked with the finished parameter set to YES.  If no item is attached, the completion handler will be
+					invoked immediately with the finished parameter set to NO.
  */
 - (void)seekToDate:(NSDate *)date completionHandler:(void (^)(BOOL finished))completionHandler API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(1.0));
 
@@ -357,7 +399,8 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
  @discussion		Use this method to seek to a specified time for the current player item and to be notified when the seek operation is complete.
 					The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter 
 					set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified 
-					completion handler will be invoked with the finished parameter set to YES. 
+					completion handler will be invoked with the finished parameter set to YES.  If no item is attached, the completion handler will be
+					invoked immediately with the finished parameter set to NO.
  */
 - (void)seekToTime:(CMTime)time completionHandler:(void (^)(BOOL finished))completionHandler API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(1.0));
 
@@ -373,7 +416,7 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 					Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly.
 					The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter set to NO. If the new 
 					request completes without being interrupted by another seek request or by any other operation the specified completion handler will be invoked with the 
-					finished parameter set to YES.
+					finished parameter set to YES.  If no item is attached, the completion handler will be invoked immediately with the finished parameter set to NO.
  */
 - (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter completionHandler:(void (^)(BOOL finished))completionHandler API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(1.0));
 
@@ -401,9 +444,11 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
  If you employ an AVAssetResourceLoader delegate that loads media data for playback, you should set the value of your AVPlayer’s automaticallyWaitsToMinimizeStalling property to NO. Allowing the value of automaticallyWaitsToMinimizeStalling to remain YES when an AVAssetResourceLoader delegate is used for the loading of media data can result in poor start-up times for playback and poor recovery from stalls, because the behaviors provided by AVPlayer when automaticallyWaitsToMinimizeStalling has a value of YES depend on predictions of the future availability of media data that that do not function as expected when data is loaded via a client-controlled means, using the AVAssetResourceLoader delegate interface.
 
  You can allow the value of automaticallyWaitsToMinimizeStalling to remain YES if you use an AVAssetResourceLoader delegate to manage content keys for FairPlay Streaming, to provide dynamically-generated master playlists for HTTP Live Streaming, or to respond to authentication challenges, but not to load media data for playback.
+ 
+ This property must be accessed on the main thread/queue.
 */
 
-@property (nonatomic) BOOL automaticallyWaitsToMinimizeStalling API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
+@property (nonatomic) BOOL automaticallyWaitsToMinimizeStalling NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 
 
@@ -423,8 +468,10 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 					If hostClockTime is specified, the player will not ensure that media data is loaded before the timebase starts moving.
 					If hostClockTime is kCMTimeInvalid, the rate and time will be set together, but without external synchronization;
 					a host time in the near future will be used, allowing some time for media data loading.
+ 
+					This method must be invoked on the main thread/queue.
 */
-- (void)setRate:(float)rate time:(CMTime)itemTime atHostTime:(CMTime)hostClockTime API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
+- (void)setRate:(float)rate time:(CMTime)itemTime atHostTime:(CMTime)hostClockTime NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 /*!
 	@method			prerollAtRate:completionHandler:
@@ -445,8 +492,12 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 */
 - (void)cancelPendingPrerolls API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
-/* NULL by default.  if not NULL, overrides the automatic choice of master clock for item timebases. This is most useful for synchronizing video-only movies with audio played via other means. IMPORTANT: If you specify a master clock other than the appropriate audio device clock, audio may drift out of sync. */
-@property (nonatomic, retain, nullable) __attribute__((NSObject)) CMClockRef masterClock API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
+/*!
+	@property		sourceClock
+	@abstract		Set to override the automatic choice of source clock for item timebases.
+	@discussion		NULL by default. This is most useful for synchronizing video-only movies with audio played via other means. IMPORTANT NOTE: If you specify a source clock other than the appropriate audio device clock, audio may drift out of sync.
+*/
+@property (nonatomic, retain, nullable) __attribute__((NSObject)) CMClockRef sourceClock API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 
@@ -550,16 +601,20 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 		c) Underlying system preferences change, e.g. system language, accessibility captions.
 
    Specific selections made by -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:] within any group will override automatic selection in that group until -[AVPlayerItem selectMediaOptionAutomaticallyInMediaSelectionGroup:] is received.
+ 
+   This method must be invoked on the main thread/queue.
 */
-- (void)setMediaSelectionCriteria:(nullable AVPlayerMediaSelectionCriteria *)criteria forMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+- (void)setMediaSelectionCriteria:(nullable AVPlayerMediaSelectionCriteria *)criteria forMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @method     mediaSelectionCriteriaForMediaCharacteristic:
  @abstract   Returns the automatic selection criteria for media that has the specified media characteristic.
  @param      mediaCharacteristic
   The media characteristic for which the selection criteria is to be returned. Supported values include AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, and AVMediaCharacteristicVisual.
+ 
+  This method must be invoked on the main thread/queue.
 */
-- (nullable AVPlayerMediaSelectionCriteria *)mediaSelectionCriteriaForMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+- (nullable AVPlayerMediaSelectionCriteria *)mediaSelectionCriteriaForMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 @end
 
@@ -626,16 +681,16 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 
 /* Indicates whether the player allows AirPlay Video playback. The default value is YES. 
 	This property is deprecated. Use AVPlayer's -allowsExternalPlayback instead. */
-@property BOOL allowsAirPlayVideo API_DEPRECATED("No longer supported", ios(5.0, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
+@property BOOL allowsAirPlayVideo API_DEPRECATED_WITH_REPLACEMENT("allowsExternalPlayback", ios(5.0, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
 
 /* Indicates whether the player is currently playing video via AirPlay. 
 	This property is deprecated. Use AVPlayer's -externalPlaybackActive instead.*/
-@property (nonatomic, readonly, getter=isAirPlayVideoActive) BOOL airPlayVideoActive API_DEPRECATED("No longer supported", ios(5.0, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
+@property (nonatomic, readonly, getter=isAirPlayVideoActive) BOOL airPlayVideoActive API_DEPRECATED_WITH_REPLACEMENT("externalPlaybackActive", ios(5.0, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
 
 /* Indicates whether the player should automatically switch to AirPlay Video while AirPlay Screen is active in order to play video content, switching back to AirPlay Screen as soon as playback is done. 
 	The default value is NO. Has no effect if allowsAirPlayVideo is NO.
 	This property is deprecated. Use AVPlayer's -usesExternalPlaybackWhileExternalScreenIsActive instead. */
-@property BOOL usesAirPlayVideoWhileAirPlayScreenIsActive API_DEPRECATED("No longer supported", ios(5.0, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
+@property BOOL usesAirPlayVideoWhileAirPlayScreenIsActive API_DEPRECATED_WITH_REPLACEMENT("usesExternalPlaybackWhileExternalScreenIsActive", ios(5.0, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
 
 @end
 
@@ -750,8 +805,58 @@ AVF_EXPORT NSNotificationName const AVPlayerEligibleForHDRPlaybackDidChangeNotif
  @discussion
 	 Default is YES on iOS, tvOS and in Mac Catalyst apps.  Default is NO on macOS.
 	 Setting this property to NO does not force the display to sleep, it simply stops preventing display sleep.  Other apps or frameworks within your app may still be preventing display sleep for various reasons.
+
+	 This property must be accessed on the main thread/queue.
  */
-@property (nonatomic) BOOL preventsDisplaySleepDuringVideoPlayback API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) BOOL preventsDisplaySleepDuringVideoPlayback NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos);
+
+@end
+
+@interface AVPlayer (AVPlayerBackgroundSupport)
+
+/*!
+ @typedef AVPlayerAudiovisualBackgroundPlaybackPolicy
+ @discussion This policy describes how AVPlayer behaves when the application transitions to UIApplicationStateBackground while playing video.
+ 
+ @constant	AVPlayerAudiovisualBackgroundPlaybackPolicyAutomatic
+	Indicates that the system is free to decide. This is the default policy.
+ 
+ @constant  AVPlayerAudiovisualBackgroundPlaybackPolicyPauses
+	Indicates that the player must be paused on going to background.
+ 
+ @constant	AVPlayerAudiovisualBackgroundPlaybackPolicyContinuesIfPossible
+	Indicates that the player continues to play if possible in background.
+ */
+typedef NS_ENUM(NSInteger, AVPlayerAudiovisualBackgroundPlaybackPolicy) {
+	AVPlayerAudiovisualBackgroundPlaybackPolicyAutomatic = 1,
+	AVPlayerAudiovisualBackgroundPlaybackPolicyPauses = 2,
+	AVPlayerAudiovisualBackgroundPlaybackPolicyContinuesIfPossible = 3,
+} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
+	@property   audiovisualBackgroundPlaybackPolicy
+	@abstract   Controls the policy to be used in deciding how playback of audiovisual content should continue while the application transitions to background.
+	@discussion By default, the system is free to decide the background playback policy (AVPlayerAudiovisualBackgroundPlaybackPolicyAutomatic).
+		If set to AVPlayerAudiovisualBackgroundPlaybackPolicyPauses, player will be paused on entering background.
+		If set to AVPlayerAudiovisualBackgroundPlaybackPolicyContinuesIfPossible, the system makes the best effort to continue playback but the app also needs appropriate UIBackgroundModes for the system to let it continue running in the background. Note that this policy only applies to items with enabled video.
+ */
+@property (nonatomic) AVPlayerAudiovisualBackgroundPlaybackPolicy audiovisualBackgroundPlaybackPolicy API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+@end
+
+@interface AVPlayer (PlaybackCoordination)
+/**
+@property playbackCoordinator
+@abstract The playback coordinator for this player.
+@discussion If the playback coordinator is connected to other participants, rate changes and seeks on the current item will be automatically mirrored to all connected participants.
+			Depending on policies, the coordinator may also intercept rate changes to non-zero to coordinate playback start with the rest of the group.
+			Use [AVPlayer playImmediatelyAtRate:] to override the coordinated startup behavior and start playback immediately. This is useful to give users an opportunity to override waiting caused by other participants' suspensions.
+			Player configuration other than rate and seeks are not communicated to other participants and can be configured independently by each participant.
+			A player with a connected playbackCoordinator will change behavior in situations that require the player to pause for internal reasons, such as a route change or a stall.
+			When resuming after these events, the player will not resume at the stop time. Instead, it will attempt to rejoin the group, potentially seeking to match the other participant's progress.
+			It is left to the owner of the AVPlayer to ensure that all participants are playing the same item. See the discussion of AVPlaybackCoordinator for considerations about item transitions.
+*/
+@property (readonly, strong) AVPlayerPlaybackCoordinator *playbackCoordinator API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -774,6 +879,9 @@ AVF_EXPORT NSNotificationName const AVPlayerEligibleForHDRPlaybackDidChangeNotif
 		For further information about Media Accessibility preferences, see MediaAccessibility framework documentation.
  */
 @property (getter=isClosedCaptionDisplayEnabled) BOOL closedCaptionDisplayEnabled API_DEPRECATED("Allow AVPlayer to enable closed captions automatically according to user preferences by ensuring that the value of appliesMediaSelectionCriteriaAutomatically is YES.", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);
+
+/* Use sourceClock instead. */
+@property (nonatomic, retain, nullable) __attribute__((NSObject)) CMClockRef masterClock API_DEPRECATED_WITH_REPLACEMENT( "sourceClock", macos(10.8, API_TO_BE_DEPRECATED), ios(6.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 @end
 

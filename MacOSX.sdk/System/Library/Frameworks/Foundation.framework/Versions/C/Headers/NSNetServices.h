@@ -84,7 +84,7 @@ typedef NS_OPTIONS(NSUInteger, NSNetServiceOptions) {
 
 #pragma mark -
 
-API_AVAILABLE(macos(10.2), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_DEPRECATED("Use nw_connection_t or nw_listener_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos)
 @interface NSNetService : NSObject {
 @private
     id _netService;
@@ -197,7 +197,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 #pragma mark -
 
-API_AVAILABLE(macos(10.2), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_DEPRECATED("Use nw_browser_t in Network framework instead", macos(10.2, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos)
 @interface NSNetServiceBrowser : NSObject {
 @private
     id _netServiceBrowser;

@@ -1,24 +1,25 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target x86_64-apple-macos11.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUniformTypeIdentifiers -swift-version 5 -enforce-exclusivity=checked -O -module-name UniformTypeIdentifiers
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target x86_64-apple-macos12.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUniformTypeIdentifiers -swift-version 5 -enforce-exclusivity=checked -O -module-name UniformTypeIdentifiers
 import Foundation
 import Swift
 @_exported import UniformTypeIdentifiers
+import _Concurrency
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension URLResourceValues {
+extension Foundation.URLResourceValues {
   public var contentType: UniformTypeIdentifiers.UTType? {
     get
   }
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension URL {
+extension Foundation.URL {
   public func appendingPathComponent(_ partialName: Swift.String, conformingTo contentType: UniformTypeIdentifiers.UTType) -> Foundation.URL
   public mutating func appendPathComponent(_ partialName: Swift.String, conformingTo contentType: UniformTypeIdentifiers.UTType)
   public func appendingPathExtension(for contentType: UniformTypeIdentifiers.UTType) -> Foundation.URL
   public mutating func appendPathExtension(for contentType: UniformTypeIdentifiers.UTType)
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension String {
+extension Swift.String {
   @available(*, unavailable, message: "Use appendingPathExtension(for:) on URL instead.")
   public func appendingPathExtension(for contentType: UniformTypeIdentifiers.UTType) -> Swift.Never
   @available(*, unavailable, message: "Use appendingPathComponent(_:conformingTo:) on URL instead.")
@@ -28,7 +29,7 @@ extension String {
 public struct UTType {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension UTType {
+extension UniformTypeIdentifiers.UTType {
   public init?(_ identifier: Swift.String)
   public init?(filenameExtension: Swift.String, conformingTo supertype: UniformTypeIdentifiers.UTType = .data)
   public init?(mimeType: Swift.String, conformingTo supertype: UniformTypeIdentifiers.UTType = .data)
@@ -61,7 +62,7 @@ extension UTType {
   }
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension UTType {
+extension UniformTypeIdentifiers.UTType {
   public func conforms(to type: UniformTypeIdentifiers.UTType) -> Swift.Bool
   public func isSupertype(of type: UniformTypeIdentifiers.UTType) -> Swift.Bool
   public func isSubtype(of type: UniformTypeIdentifiers.UTType) -> Swift.Bool
@@ -70,7 +71,7 @@ extension UTType {
   }
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension UTType {
+extension UniformTypeIdentifiers.UTType {
   public init?(tag: Swift.String, tagClass: UniformTypeIdentifiers.UTTagClass, conformingTo supertype: UniformTypeIdentifiers.UTType?)
   public static func types(tag: Swift.String, tagClass: UniformTypeIdentifiers.UTTagClass, conformingTo supertype: UniformTypeIdentifiers.UTType?) -> [UniformTypeIdentifiers.UTType]
   public var tags: [UniformTypeIdentifiers.UTTagClass : [Swift.String]] {
@@ -78,12 +79,12 @@ extension UTType {
   }
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension UTType {
+extension UniformTypeIdentifiers.UTType {
   public init(exportedAs identifier: Swift.String, conformingTo parentType: UniformTypeIdentifiers.UTType? = nil)
   public init(importedAs identifier: Swift.String, conformingTo parentType: UniformTypeIdentifiers.UTType? = nil)
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension UTType : Swift.Equatable, Swift.Hashable {
+extension UniformTypeIdentifiers.UTType : Swift.Equatable, Swift.Hashable {
   public static func == (lhs: UniformTypeIdentifiers.UTType, rhs: UniformTypeIdentifiers.UTType) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -91,7 +92,7 @@ extension UTType : Swift.Equatable, Swift.Hashable {
   }
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension UTType : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
+extension UniformTypeIdentifiers.UTType : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
   }
@@ -100,7 +101,7 @@ extension UTType : Swift.CustomStringConvertible, Swift.CustomDebugStringConvert
   }
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension UTType : Foundation.ReferenceConvertible {
+extension UniformTypeIdentifiers.UTType : Foundation.ReferenceConvertible {
   public typealias ReferenceType = UniformTypeIdentifiers.UTTypeReference
   public func _bridgeToObjectiveC() -> UniformTypeIdentifiers.UTTypeReference
   public static func _forceBridgeFromObjectiveC(_ source: UniformTypeIdentifiers.UTTypeReference, result: inout UniformTypeIdentifiers.UTType?)
@@ -109,142 +110,406 @@ extension UTType : Foundation.ReferenceConvertible {
   public typealias _ObjectiveCType = UniformTypeIdentifiers.UTTypeReference
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension UTType : Swift.Codable {
+extension UniformTypeIdentifiers.UTType : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension UTType {
-  public static let item: UniformTypeIdentifiers.UTType
-  public static let content: UniformTypeIdentifiers.UTType
-  public static let compositeContent: UniformTypeIdentifiers.UTType
-  public static let diskImage: UniformTypeIdentifiers.UTType
-  public static let data: UniformTypeIdentifiers.UTType
-  public static let directory: UniformTypeIdentifiers.UTType
-  public static let resolvable: UniformTypeIdentifiers.UTType
-  public static let symbolicLink: UniformTypeIdentifiers.UTType
-  public static let executable: UniformTypeIdentifiers.UTType
-  public static let mountPoint: UniformTypeIdentifiers.UTType
-  public static let aliasFile: UniformTypeIdentifiers.UTType
-  public static let urlBookmarkData: UniformTypeIdentifiers.UTType
-  public static let url: UniformTypeIdentifiers.UTType
-  public static let fileURL: UniformTypeIdentifiers.UTType
-  public static let text: UniformTypeIdentifiers.UTType
-  public static let plainText: UniformTypeIdentifiers.UTType
-  public static let utf8PlainText: UniformTypeIdentifiers.UTType
-  public static let utf16ExternalPlainText: UniformTypeIdentifiers.UTType
-  public static let utf16PlainText: UniformTypeIdentifiers.UTType
-  public static let delimitedText: UniformTypeIdentifiers.UTType
-  public static let commaSeparatedText: UniformTypeIdentifiers.UTType
-  public static let tabSeparatedText: UniformTypeIdentifiers.UTType
-  public static let utf8TabSeparatedText: UniformTypeIdentifiers.UTType
-  public static let rtf: UniformTypeIdentifiers.UTType
-  public static let html: UniformTypeIdentifiers.UTType
-  public static let xml: UniformTypeIdentifiers.UTType
-  public static let yaml: UniformTypeIdentifiers.UTType
-  public static let sourceCode: UniformTypeIdentifiers.UTType
-  public static let assemblyLanguageSource: UniformTypeIdentifiers.UTType
-  public static let cSource: UniformTypeIdentifiers.UTType
-  public static let objectiveCSource: UniformTypeIdentifiers.UTType
-  public static let swiftSource: UniformTypeIdentifiers.UTType
-  public static let cPlusPlusSource: UniformTypeIdentifiers.UTType
-  public static let objectiveCPlusPlusSource: UniformTypeIdentifiers.UTType
-  public static let cHeader: UniformTypeIdentifiers.UTType
-  public static let cPlusPlusHeader: UniformTypeIdentifiers.UTType
-  public static let script: UniformTypeIdentifiers.UTType
-  public static let appleScript: UniformTypeIdentifiers.UTType
-  public static let osaScript: UniformTypeIdentifiers.UTType
-  public static let osaScriptBundle: UniformTypeIdentifiers.UTType
-  public static let javaScript: UniformTypeIdentifiers.UTType
-  public static let shellScript: UniformTypeIdentifiers.UTType
-  public static let perlScript: UniformTypeIdentifiers.UTType
-  public static let pythonScript: UniformTypeIdentifiers.UTType
-  public static let rubyScript: UniformTypeIdentifiers.UTType
-  public static let phpScript: UniformTypeIdentifiers.UTType
-  public static let json: UniformTypeIdentifiers.UTType
-  public static let propertyList: UniformTypeIdentifiers.UTType
-  public static let xmlPropertyList: UniformTypeIdentifiers.UTType
-  public static let binaryPropertyList: UniformTypeIdentifiers.UTType
-  public static let pdf: UniformTypeIdentifiers.UTType
-  public static let rtfd: UniformTypeIdentifiers.UTType
-  public static let flatRTFD: UniformTypeIdentifiers.UTType
-  public static let webArchive: UniformTypeIdentifiers.UTType
-  public static let image: UniformTypeIdentifiers.UTType
-  public static let jpeg: UniformTypeIdentifiers.UTType
-  public static let tiff: UniformTypeIdentifiers.UTType
-  public static let gif: UniformTypeIdentifiers.UTType
-  public static let png: UniformTypeIdentifiers.UTType
-  public static let icns: UniformTypeIdentifiers.UTType
-  public static let bmp: UniformTypeIdentifiers.UTType
-  public static let ico: UniformTypeIdentifiers.UTType
-  public static let rawImage: UniformTypeIdentifiers.UTType
-  public static let svg: UniformTypeIdentifiers.UTType
-  public static let livePhoto: UniformTypeIdentifiers.UTType
-  public static let heif: UniformTypeIdentifiers.UTType
-  public static let heic: UniformTypeIdentifiers.UTType
-  public static let webP: UniformTypeIdentifiers.UTType
-  public static let threeDContent: UniformTypeIdentifiers.UTType
-  public static let usd: UniformTypeIdentifiers.UTType
-  public static let usdz: UniformTypeIdentifiers.UTType
-  public static let realityFile: UniformTypeIdentifiers.UTType
-  public static let sceneKitScene: UniformTypeIdentifiers.UTType
-  public static let arReferenceObject: UniformTypeIdentifiers.UTType
-  public static let audiovisualContent: UniformTypeIdentifiers.UTType
-  public static let movie: UniformTypeIdentifiers.UTType
-  public static let video: UniformTypeIdentifiers.UTType
-  public static let audio: UniformTypeIdentifiers.UTType
-  public static let quickTimeMovie: UniformTypeIdentifiers.UTType
-  public static let mpeg: UniformTypeIdentifiers.UTType
-  public static let mpeg2Video: UniformTypeIdentifiers.UTType
-  public static let mpeg2TransportStream: UniformTypeIdentifiers.UTType
-  public static let mp3: UniformTypeIdentifiers.UTType
-  public static let mpeg4Movie: UniformTypeIdentifiers.UTType
-  public static let mpeg4Audio: UniformTypeIdentifiers.UTType
-  public static let appleProtectedMPEG4Audio: UniformTypeIdentifiers.UTType
-  public static let appleProtectedMPEG4Video: UniformTypeIdentifiers.UTType
-  public static let avi: UniformTypeIdentifiers.UTType
-  public static let aiff: UniformTypeIdentifiers.UTType
-  public static let wav: UniformTypeIdentifiers.UTType
-  public static let midi: UniformTypeIdentifiers.UTType
-  public static let playlist: UniformTypeIdentifiers.UTType
-  public static let m3uPlaylist: UniformTypeIdentifiers.UTType
-  public static let folder: UniformTypeIdentifiers.UTType
-  public static let volume: UniformTypeIdentifiers.UTType
-  public static let package: UniformTypeIdentifiers.UTType
-  public static let bundle: UniformTypeIdentifiers.UTType
-  public static let pluginBundle: UniformTypeIdentifiers.UTType
-  public static let spotlightImporter: UniformTypeIdentifiers.UTType
-  public static let quickLookGenerator: UniformTypeIdentifiers.UTType
-  public static let xpcService: UniformTypeIdentifiers.UTType
-  public static let framework: UniformTypeIdentifiers.UTType
-  public static let application: UniformTypeIdentifiers.UTType
-  public static let applicationBundle: UniformTypeIdentifiers.UTType
-  public static let applicationExtension: UniformTypeIdentifiers.UTType
-  public static let unixExecutable: UniformTypeIdentifiers.UTType
-  public static let exe: UniformTypeIdentifiers.UTType
-  public static let systemPreferencesPane: UniformTypeIdentifiers.UTType
-  public static let archive: UniformTypeIdentifiers.UTType
-  public static let gzip: UniformTypeIdentifiers.UTType
-  public static let bz2: UniformTypeIdentifiers.UTType
-  public static let zip: UniformTypeIdentifiers.UTType
-  public static let appleArchive: UniformTypeIdentifiers.UTType
-  public static let spreadsheet: UniformTypeIdentifiers.UTType
-  public static let presentation: UniformTypeIdentifiers.UTType
-  public static let database: UniformTypeIdentifiers.UTType
-  public static let message: UniformTypeIdentifiers.UTType
-  public static let contact: UniformTypeIdentifiers.UTType
-  public static let vCard: UniformTypeIdentifiers.UTType
-  public static let toDoItem: UniformTypeIdentifiers.UTType
-  public static let calendarEvent: UniformTypeIdentifiers.UTType
-  public static let emailMessage: UniformTypeIdentifiers.UTType
-  public static let internetLocation: UniformTypeIdentifiers.UTType
-  public static let internetShortcut: UniformTypeIdentifiers.UTType
-  public static let font: UniformTypeIdentifiers.UTType
-  public static let bookmark: UniformTypeIdentifiers.UTType
-  public static let pkcs12: UniformTypeIdentifiers.UTType
-  public static let x509Certificate: UniformTypeIdentifiers.UTType
-  public static let epub: UniformTypeIdentifiers.UTType
-  public static let log: UniformTypeIdentifiers.UTType
+extension UniformTypeIdentifiers.UTType {
+  public static var item: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var content: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var compositeContent: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var diskImage: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var data: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var directory: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var resolvable: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var symbolicLink: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var executable: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var mountPoint: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var aliasFile: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var urlBookmarkData: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var url: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var fileURL: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var text: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var plainText: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var utf8PlainText: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var utf16ExternalPlainText: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var utf16PlainText: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var delimitedText: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var commaSeparatedText: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var tabSeparatedText: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var utf8TabSeparatedText: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var rtf: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var html: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var xml: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var yaml: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var sourceCode: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var assemblyLanguageSource: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var cSource: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var objectiveCSource: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var swiftSource: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var cPlusPlusSource: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var objectiveCPlusPlusSource: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var cHeader: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var cPlusPlusHeader: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var script: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var appleScript: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var osaScript: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var osaScriptBundle: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var javaScript: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var shellScript: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var perlScript: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var pythonScript: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var rubyScript: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var phpScript: UniformTypeIdentifiers.UTType {
+    get
+  }
+  @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+  public static var makefile: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var json: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var propertyList: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var xmlPropertyList: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var binaryPropertyList: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var pdf: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var rtfd: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var flatRTFD: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var webArchive: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var image: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var jpeg: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var tiff: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var gif: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var png: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var icns: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var bmp: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var ico: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var rawImage: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var svg: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var livePhoto: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var heif: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var heic: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var webP: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var threeDContent: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var usd: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var usdz: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var realityFile: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var sceneKitScene: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var arReferenceObject: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var audiovisualContent: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var movie: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var video: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var audio: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var quickTimeMovie: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var mpeg: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var mpeg2Video: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var mpeg2TransportStream: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var mp3: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var mpeg4Movie: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var mpeg4Audio: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var appleProtectedMPEG4Audio: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var appleProtectedMPEG4Video: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var avi: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var aiff: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var wav: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var midi: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var playlist: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var m3uPlaylist: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var folder: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var volume: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var package: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var bundle: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var pluginBundle: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var spotlightImporter: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var quickLookGenerator: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var xpcService: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var framework: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var application: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var applicationBundle: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var applicationExtension: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var unixExecutable: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var exe: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var systemPreferencesPane: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var archive: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var gzip: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var bz2: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var zip: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var appleArchive: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var spreadsheet: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var presentation: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var database: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var message: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var contact: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var vCard: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var toDoItem: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var calendarEvent: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var emailMessage: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var internetLocation: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var internetShortcut: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var font: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var bookmark: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var pkcs12: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var x509Certificate: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var epub: UniformTypeIdentifiers.UTType {
+    get
+  }
+  public static var log: UniformTypeIdentifiers.UTType {
+    get
+  }
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public struct UTTagClass : Swift.RawRepresentable {
@@ -253,17 +518,21 @@ public struct UTTagClass : Swift.RawRepresentable {
   public typealias RawValue = Swift.String
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension UTTagClass {
-  public static let filenameExtension: UniformTypeIdentifiers.UTTagClass
-  public static let mimeType: UniformTypeIdentifiers.UTTagClass
+extension UniformTypeIdentifiers.UTTagClass {
+  public static var filenameExtension: UniformTypeIdentifiers.UTTagClass {
+    get
+  }
+  public static var mimeType: UniformTypeIdentifiers.UTTagClass {
+    get
+  }
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension UTTagClass : Swift.Equatable, Swift.Hashable {
+extension UniformTypeIdentifiers.UTTagClass : Swift.Equatable, Swift.Hashable {
   public static func == (lhs: UniformTypeIdentifiers.UTTagClass, rhs: UniformTypeIdentifiers.UTTagClass) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension UTTagClass : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
+extension UniformTypeIdentifiers.UTTagClass : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
   }
@@ -272,7 +541,7 @@ extension UTTagClass : Swift.CustomStringConvertible, Swift.CustomDebugStringCon
   }
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension UTTagClass : Swift.Codable {
+extension UniformTypeIdentifiers.UTTagClass : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }

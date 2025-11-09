@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class UICellConfigurationState;
 @class UIBackgroundConfiguration;
 @protocol UIContentConfiguration;
+@class UICollectionViewCell;
 
 typedef NS_ENUM(NSInteger, UICollectionViewCellDragState) {
     UICollectionViewCellDragStateNone,
@@ -33,7 +34,8 @@ typedef NS_ENUM(NSInteger, UICollectionViewCellDragState) {
     UICollectionViewCellDragStateDragging
 } API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionReusableView : UIView
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+@interface UICollectionReusableView : UIView
 
 @property (nonatomic, readonly, copy, nullable) NSString *reuseIdentifier;
 
@@ -56,7 +58,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionReusableView : UIVie
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionViewCell : UICollectionReusableView
+
+typedef void (^UICollectionViewCellConfigurationUpdateHandler)(__kindof UICollectionViewCell *cell, UICellConfigurationState *state) API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+@interface UICollectionViewCell : UICollectionReusableView
 
 /// Returns the current configuration state for the cell.
 /// To add your own custom state(s), override the getter and call super to obtain an instance with the
@@ -71,6 +77,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionViewCell : UICollect
 /// Subclasses should override this method and update the cell's configuration using the state provided.
 /// This method should not be called directly, use `setNeedsUpdateConfiguration` to request an update.
 - (void)updateConfigurationUsingState:(UICellConfigurationState *)state API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+/// Optional block-based alternative to overriding `-updateConfigurationUsingState:` in a subclass. This handler
+/// is called after `-updateConfigurationUsingState:`. Setting a new handler triggers `setNeedsUpdateConfiguration`.
+@property (nonatomic, copy, nullable) UICollectionViewCellConfigurationUpdateHandler configurationUpdateHandler API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
 
 /// Setting a content configuration replaces the existing contentView of the cell with a new content view instance from the configuration,
 /// or directly applies the configuration to the existing content view if the configuration is compatible with the existing content view type.

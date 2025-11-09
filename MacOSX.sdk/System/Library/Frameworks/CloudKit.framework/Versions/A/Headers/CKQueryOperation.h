@@ -38,6 +38,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 /*! @abstract Indicates which record zone to query.
  *
  *  @discussion For query operations constructed using a cursor, this property is ignored and instead will be evaluated in the record zone in which the cursor was originally created.
+ *  Queries that do not specify a @c zoneID will perform a query across all zones in the database.
  */
 @property (nonatomic, copy, nullable) CKRecordZoneID *zoneID;
 
@@ -59,16 +60,31 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 /*! @abstract This block will be called once for every record that is returned as a result of the query.
  *
  *  @discussion The callbacks will happen in the order that the results were sorted in.
+ *  If the replacement callback @c recordMatchedBlock is set, this callback block is ignored.
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
  */
-@property (nonatomic, copy, nullable) void (^recordFetchedBlock)(CKRecord *record);
+@property (nonatomic, copy, nullable) void (^recordFetchedBlock)(CKRecord *record)
+
+    API_DEPRECATED("Use recordMatchedBlock instead, which surfaces per-record errors", macos(10.10, 12.0), ios(8.0, 15.0), tvos(9.0, 15.0), watchos(3.0, 8.0));
+
+
+
+/*! @abstract This block will be called once for every record that is returned as a result of the query.
+ *
+ *  @discussion The callbacks will happen in the order that the results were sorted in.  If a record fails in post-processing (say, a network failure materializing a @c CKAsset record field), the per-record error will be passed here.
+ *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ */
+@property (nonatomic, copy, nullable) void (^recordMatchedBlock)(CKRecordID *recordID, CKRecord * _Nullable record, NSError * _Nullable error) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0)) NS_REFINED_FOR_SWIFT;
+
 
 /*! @abstract This block is called when the operation completes.
  *
  *  @discussion The @code -[NSOperation completionBlock] @endcode will also be called if both are set.
+ *  If the error is @c CKErrorPartialFailure, the error's userInfo dictionary contains a dictionary of recordIDs to errors keyed off of @c CKPartialErrorsByItemIDKey.  These errors are repeats of those sent back in previous @c recordMatchedBlock invocations
  *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
  */
-@property (nonatomic, copy, nullable) void (^queryCompletionBlock)(CKQueryCursor * _Nullable cursor, NSError * _Nullable operationError);
+@property (nonatomic, copy, nullable) void (^queryCompletionBlock)(CKQueryCursor * _Nullable cursor, NSError * _Nullable operationError)
+CK_SWIFT_DEPRECATED("Use queryResultBlock instead", macos(10.10, 12.0), ios(8.0, 15.0), tvos(9.0, 15.0), watchos(3.0, 8.0));
 
 @end
 

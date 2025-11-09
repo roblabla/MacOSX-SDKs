@@ -2,7 +2,7 @@
 //  CoreSpotlight.h
 //  CoreSpotlight
 //
-//  Copyright (c) 2014 Apple. All rights reserved.
+//  Copyright (c) 2021 Apple. All rights reserved.
 //
 
 #define  CoreSpotlightAPIVersion 40
@@ -15,6 +15,7 @@
 #import <CoreSpotlight/CSSearchableItemAttributeSet_Categories.h>
 #import <CoreSpotlight/CSIndexExtensionRequestHandler.h>
 #import <CoreSpotlight/CSSearchQuery.h>
+#import <CoreSpotlight/CSImportExtension.h>
 
 //! Project version number for CoreSpotlight.
 CORESPOTLIGHT_EXPORT double CoreSpotlightVersionNumber;

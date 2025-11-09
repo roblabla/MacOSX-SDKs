@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           347078F9-34AC-3AD5-AA02-B7E5E1D11FB6
+    value:           C193FF60-8045-35B9-B237-07D2C1FCCAF1
   - target:          x86_64-maccatalyst
-    value:           347078F9-34AC-3AD5-AA02-B7E5E1D11FB6
+    value:           C193FF60-8045-35B9-B237-07D2C1FCCAF1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           93368EFC-BBD5-340B-9810-6C714FDF90E7
+    value:           79A95C23-23F7-3630-B8A2-2CE1401A6B30
   - target:          arm64e-maccatalyst
-    value:           93368EFC-BBD5-340B-9810-6C714FDF90E7
+    value:           79A95C23-23F7-3630-B8A2-2CE1401A6B30
 install-name:    '/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork'
-current-version: 1237
+current-version: 1306
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ '$ld$hide$os10.9$_NSHTTPCookieComment', '$ld$hide$os10.9$_NSHTTPCookieCommentURL', 
@@ -65,7 +65,7 @@ exports:
                        '$ld$hide$os10.9$_OBJC_METACLASS_$_NSURLSessionDataTask', 
                        '$ld$hide$os10.9$_OBJC_METACLASS_$_NSURLSessionDownloadTask', 
                        '$ld$hide$os10.9$_OBJC_METACLASS_$_NSURLSessionTask', '$ld$hide$os10.9$_OBJC_METACLASS_$_NSURLSessionUploadTask' ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CFCachedURLResponseCopyReceiverDataArray, _CFCachedURLResponseCreateWithData, 
                        _CFCachedURLResponseGetReceiverData, _CFCachedURLResponseGetStoragePolicy, 
@@ -284,21 +284,22 @@ exports:
                        __CFURLStorageSessionCopyProcessDefault, __CFURLStorageSessionCreate, 
                        __CFURLStorageSessionCreateWithData, __CFURLStorageSessionGetTypeID, 
                        __CFURLWriteDataAndPropertiesToResource, __NSServerConfigurationOutboundConnectionProxyDictionary, 
-                       __NSServerConfigurationSOCKS5ServerCredentials, __NSURLErrorWebSocketHandshakeFailureReasonKey, 
-                       ___AuthBrokerMain, ___CFNetworkAgentMessageProcessorMain, 
-                       ___CFTubeSetTubeTypeNotifier, __kATSAllowsArbitraryLoadsForMediaKey, 
-                       __kCFHTTPCookiePolicyPropertyIsTopLevelNavigation, __kCFHTTPCookiePolicyPropertySiteForCookies, 
-                       __kCFHTTPServerAllInterfacesIdentifier, __kCFHTTPServerAllowAnonymousServer, 
-                       __kCFHTTPServerBoundInterfaceIdentifier, __kCFHTTPServerConnectionClientTrust, 
-                       __kCFHTTPServerConnectionMaxRequestBufferSize, __kCFHTTPServerConnectionPeer, 
-                       __kCFHTTPServerConnectionPeerCerts, __kCFHTTPServerConnectionServer, 
-                       __kCFHTTPServerErrorDomain, __kCFHTTPServerFailingRequest, 
-                       __kCFHTTPServerFailingResponse, __kCFHTTPServerHTTPServiceType, 
-                       __kCFHTTPServerIdleTimeout, __kCFHTTPServerKeychain, __kCFHTTPServerName, 
-                       __kCFHTTPServerRequestConnection, __kCFHTTPServerRequestHTTPVersion, 
-                       __kCFHTTPServerRequestHeaderOrderKey, __kCFHTTPServerRequestHeaderValuesKey, 
-                       __kCFHTTPServerRequestHeaders, __kCFHTTPServerRequestMethod, 
-                       __kCFHTTPServerRequestPath, __kCFHTTPServerRequestURL, __kCFHTTPServerRequireClientCertificate, 
+                       __NSServerConfigurationSOCKS5ServerCredentials, __NSURLErrorPrivacyProxyFailureKey, 
+                       __NSURLErrorWebSocketHandshakeFailureReasonKey, ___AuthBrokerMain, 
+                       ___CFNetworkAgentMessageProcessorMain, ___CFTubeSetTubeTypeNotifier, 
+                       __kATSAllowsArbitraryLoadsForMediaKey, __kCFHTTPCookiePolicyPropertyIsTopLevelNavigation, 
+                       __kCFHTTPCookiePolicyPropertySiteForCookies, __kCFHTTPServerAllInterfacesIdentifier, 
+                       __kCFHTTPServerAllowAnonymousServer, __kCFHTTPServerBoundInterfaceIdentifier, 
+                       __kCFHTTPServerConnectionClientTrust, __kCFHTTPServerConnectionMaxRequestBufferSize, 
+                       __kCFHTTPServerConnectionPeer, __kCFHTTPServerConnectionPeerCerts, 
+                       __kCFHTTPServerConnectionServer, __kCFHTTPServerErrorDomain, 
+                       __kCFHTTPServerFailingRequest, __kCFHTTPServerFailingResponse, 
+                       __kCFHTTPServerHTTPServiceType, __kCFHTTPServerIdleTimeout, 
+                       __kCFHTTPServerKeychain, __kCFHTTPServerName, __kCFHTTPServerRequestConnection, 
+                       __kCFHTTPServerRequestHTTPVersion, __kCFHTTPServerRequestHeaderOrderKey, 
+                       __kCFHTTPServerRequestHeaderValuesKey, __kCFHTTPServerRequestHeaders, 
+                       __kCFHTTPServerRequestMethod, __kCFHTTPServerRequestPath, 
+                       __kCFHTTPServerRequestURL, __kCFHTTPServerRequireClientCertificate, 
                        __kCFHTTPServerResponseConnection, __kCFHTTPServerResponseMessage, 
                        __kCFHTTPServerResponseRequest, __kCFHTTPServerSSLSettings, 
                        __kCFHTTPServerServerIdentity, __kCFHTTPServerServerTrustChain, 
@@ -335,29 +336,24 @@ exports:
                        __kCFURLConnectionPropertyATSContext, __kCFURLConnectionPropertyATSFrameworkOverrides, 
                        __kCFURLConnectionPropertyRespectConnectionClose, __kCFURLConnectionPropertyShouldReportTimingDataToAWD, 
                        __kCFURLConnectionPropertyShouldSniff, __kCFURLConnectionPropertyTimingDataOptions, 
-                       __kCFURLConnectionSessionDelegate, __kCFURLConnectionSessionEventConnectionDidFail, 
-                       __kCFURLConnectionSessionEventConnectionDidFinishLoading, 
-                       __kCFURLConnectionSessionEventConnectionDidReceiveData, __kCFURLConnectionSessionEventConnectionDidReceiveResponse, 
-                       __kCFURLConnectionSessionEventConnectionRequiresAuth, __kCFURLConnectionSessionEventConnectionTerminating, 
-                       __kCFURLConnectionSessionHTTPLoaderLimits, __kCFURLErrorAuthFailedResponseKey, 
-                       __kCFURLStorageSessionIsPrivate, __kCFURLStorageSessionProcessSharing, 
-                       __kTCPKeepAliveParametersEnabled, __kTCPKeepAliveParametersIdleTime, 
-                       __kTCPKeepAliveParametersInterval, _cfnTranslateCFError, _kCFDNSServiceFailureKey, 
-                       _kCFErrorDomainCFNetwork, _kCFErrorDomainWinSock, _kCFFTPResourceGroup, 
-                       _kCFFTPResourceLink, _kCFFTPResourceModDate, _kCFFTPResourceMode, 
-                       _kCFFTPResourceName, _kCFFTPResourceOwner, _kCFFTPResourceSize, 
-                       _kCFFTPResourceType, _kCFFTPStatusCodeKey, _kCFGetAddrInfoFailureKey, 
-                       _kCFHTTPAuthenticationAccountDomain, _kCFHTTPAuthenticationPassword, 
-                       _kCFHTTPAuthenticationSchemeBasic, _kCFHTTPAuthenticationSchemeDigest, 
-                       _kCFHTTPAuthenticationSchemeKerberos, _kCFHTTPAuthenticationSchemeNTLM, 
-                       _kCFHTTPAuthenticationSchemeNegotiate, _kCFHTTPAuthenticationSchemeNegotiate2, 
-                       _kCFHTTPAuthenticationSchemeXMobileMeAuthToken, _kCFHTTPAuthenticationUsername, 
-                       _kCFHTTPCookieDomain, _kCFHTTPCookieLocalFileDomain, _kCFHTTPCookieName, 
-                       _kCFHTTPCookiePath, _kCFHTTPCookieValue, _kCFHTTPRedirectionResponse, 
-                       _kCFHTTPVersion1_0, _kCFHTTPVersion1_1, _kCFHTTPVersion2_0, 
-                       _kCFHTTPVersion3_0, _kCFHostAddressesString, _kCFHostDNSTypeSRVString, 
-                       _kCFHostNamesString, _kCFHostReachabilityString, _kCFNIE, 
-                       _kCFNetDiagnosticPingOptionDataLength, _kCFNetDiagnosticPingOptionPacketCount, 
+                       __kCFURLErrorAuthFailedResponseKey, __kCFURLStorageSessionIsPrivate, 
+                       __kCFURLStorageSessionProcessSharing, __kTCPKeepAliveParametersEnabled, 
+                       __kTCPKeepAliveParametersIdleTime, __kTCPKeepAliveParametersInterval, 
+                       _cfnTranslateCFError, _kCFDNSServiceFailureKey, _kCFErrorDomainCFNetwork, 
+                       _kCFErrorDomainWinSock, _kCFFTPResourceGroup, _kCFFTPResourceLink, 
+                       _kCFFTPResourceModDate, _kCFFTPResourceMode, _kCFFTPResourceName, 
+                       _kCFFTPResourceOwner, _kCFFTPResourceSize, _kCFFTPResourceType, 
+                       _kCFFTPStatusCodeKey, _kCFGetAddrInfoFailureKey, _kCFHTTPAuthenticationAccountDomain, 
+                       _kCFHTTPAuthenticationPassword, _kCFHTTPAuthenticationSchemeBasic, 
+                       _kCFHTTPAuthenticationSchemeDigest, _kCFHTTPAuthenticationSchemeKerberos, 
+                       _kCFHTTPAuthenticationSchemeNTLM, _kCFHTTPAuthenticationSchemeNegotiate, 
+                       _kCFHTTPAuthenticationSchemeNegotiate2, _kCFHTTPAuthenticationSchemeXMobileMeAuthToken, 
+                       _kCFHTTPAuthenticationUsername, _kCFHTTPCookieDomain, _kCFHTTPCookieLocalFileDomain, 
+                       _kCFHTTPCookieName, _kCFHTTPCookiePath, _kCFHTTPCookieValue, 
+                       _kCFHTTPRedirectionResponse, _kCFHTTPVersion1_0, _kCFHTTPVersion1_1, 
+                       _kCFHTTPVersion2_0, _kCFHTTPVersion3_0, _kCFHostAddressesString, 
+                       _kCFHostDNSTypeSRVString, _kCFHostNamesString, _kCFHostReachabilityString, 
+                       _kCFNIE, _kCFNetDiagnosticPingOptionDataLength, _kCFNetDiagnosticPingOptionPacketCount, 
                        _kCFNetDiagnosticPingOptionTimeout, _kCFNetDiagnosticPingOptionTrafficClass, 
                        _kCFNetDiagnosticPingOptionTypeOfService, _kCFNetworkProxiesExceptionsList, 
                        _kCFNetworkProxiesExcludeSimpleHostnames, _kCFNetworkProxiesFTPEnable, 
@@ -457,6 +453,6 @@ exports:
                        _NSHTTPConnectionInfo, _NSURLSessionConnectionBeginProperties, 
                        _NSURLSessionConnectionEstablishProperties, __NSCFURLSessionTaskInfo, 
                        __NSCFURLSessionXPC, __NSURLSessionStatistics ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CFNetServiceGetProtocolSpecificInformation, _CFNetServiceSetProtocolSpecificInformation ]
 ...

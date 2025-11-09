@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CDB2C842-A573-3015-9563-1729D0F63501
+    value:           B1398A89-5523-3D20-B776-B3C0F9843B28
   - target:          x86_64-maccatalyst
-    value:           CDB2C842-A573-3015-9563-1729D0F63501
+    value:           B1398A89-5523-3D20-B776-B3C0F9843B28
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A4DEA81B-3D5F-375D-809B-AB7F4A584A29
+    value:           1037E94E-FB93-3BA8-BE44-4A2BC4921149
   - target:          arm64e-maccatalyst
-    value:           A4DEA81B-3D5F-375D-809B-AB7F4A584A29
+    value:           1037E94E-FB93-3BA8-BE44-4A2BC4921149
 install-name:    '/System/Library/PrivateFrameworks/CloudServices.framework/Versions/A/CloudServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -51,17 +51,17 @@ exports:
                        _kSecureBackupCFStingrayMetadataKey, _kSecureBackupCFTriggerUpdateKey, 
                        _kSecureBackupCFUsesMultipleiCSCKey, _kSecureBackupCFUsesRecoveryKeyKey, 
                        _kSecureBackupCFiCDPRecordsKey, _kSecureBackupCFiCloudDataProtectionDeleteAllRecordsKey, 
-                       _kSecureBackupCFiCloudDataProtectionEnabledKey, _kSecureBackupCFiCloudIdentityDataKey, 
-                       _kSecureBackupCFiCloudIdentityPublicDataKey, _kSecureBackupChallengeDeviceAreaDialCodeKey, 
-                       _kSecureBackupChallengeDeviceCountryDialCodeKey, _kSecureBackupChallengeDeviceIDKey, 
-                       _kSecureBackupChallengeDevicePhoneNumberKey, _kSecureBackupChallengeDeviceTypeKey, 
-                       _kSecureBackupClientMetadataKey, _kSecureBackupContainsEMCSDataKey, 
-                       _kSecureBackupContainsiCDPDataKey, _kSecureBackupContainsiCloudIdentityKey, 
-                       _kSecureBackupCoolOffEndKey, _kSecureBackupCountryCodeKey, 
-                       _kSecureBackupCountryDialCodeKey, _kSecureBackupCountrySMSCodesKey, 
-                       _kSecureBackupDeleteDoubleOnly, _kSecureBackupEMCSIDMSDictKey, 
-                       _kSecureBackupEMCSManagedCredentialKey, _kSecureBackupEMCSOldManagedCredentialKey, 
-                       _kSecureBackupErrorDomain, _kSecureBackupEscrowDateKey, _kSecureBackupEscrowDigestKey, 
+                       _kSecureBackupCFiCloudIdentityDataKey, _kSecureBackupCFiCloudIdentityPublicDataKey, 
+                       _kSecureBackupChallengeDeviceAreaDialCodeKey, _kSecureBackupChallengeDeviceCountryDialCodeKey, 
+                       _kSecureBackupChallengeDeviceIDKey, _kSecureBackupChallengeDevicePhoneNumberKey, 
+                       _kSecureBackupChallengeDeviceTypeKey, _kSecureBackupClientMetadataKey, 
+                       _kSecureBackupContainsEMCSDataKey, _kSecureBackupContainsiCDPDataKey, 
+                       _kSecureBackupContainsiCloudIdentityKey, _kSecureBackupCoolOffEndKey, 
+                       _kSecureBackupCountryCodeKey, _kSecureBackupCountryDialCodeKey, 
+                       _kSecureBackupCountrySMSCodesKey, _kSecureBackupDeleteDoubleOnly, 
+                       _kSecureBackupEMCSIDMSDictKey, _kSecureBackupEMCSManagedCredentialKey, 
+                       _kSecureBackupEMCSOldManagedCredentialKey, _kSecureBackupErrorDomain, 
+                       _kSecureBackupEscrowDateKey, _kSecureBackupEscrowDigestKey, 
                        _kSecureBackupEscrowTimestampKey, _kSecureBackupEscrowTrustStatusKey, 
                        _kSecureBackupEscrowedSPKIKey, _kSecureBackupExcludeiCDPRecords, 
                        _kSecureBackupFMiPDataKey, _kSecureBackupFMiPRecoveryKey, 
@@ -89,7 +89,7 @@ exports:
                        _kSecureBackupUsesNumericPassphraseKey, _kSecureBackupUsesRandomPassphraseKey, 
                        _kSecureBackupUsesRecoveryKeyKey, _kSecureBackupVerificationTokenKey, 
                        _kSecureBackupiCDPDoubleEnrollmentRecordIDsKey, _kSecureBackupiCDPRecordsKey, 
-                       _kSecureBackupiCloudDataProtectionDeleteAllRecordsKey, _kSecureBackupiCloudDataProtectionEnabledKey, 
-                       _kSecureBackupiCloudIdentityDataKey, _kSecureBackupiCloudIdentityPublicDataKey ]
+                       _kSecureBackupiCloudDataProtectionDeleteAllRecordsKey, _kSecureBackupiCloudIdentityDataKey, 
+                       _kSecureBackupiCloudIdentityPublicDataKey ]
     objc-classes:    [ SecureBackup, SecureBackupBeginPasscodeRequestResults, SecureBackupTermsInfo ]
 ...

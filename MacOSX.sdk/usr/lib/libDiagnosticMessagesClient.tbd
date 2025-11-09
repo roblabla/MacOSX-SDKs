@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           04F0E364-262E-3826-B0AF-1076FBAF304A
+    value:           1772D83A-6E43-3DB4-9428-04C5D724FE12
   - target:          x86_64-maccatalyst
-    value:           04F0E364-262E-3826-B0AF-1076FBAF304A
+    value:           1772D83A-6E43-3DB4-9428-04C5D724FE12
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CAE960CC-75A9-301E-ADA4-7998CAEF48B7
+    value:           9B61DF47-421A-3638-9A3F-D41C8F3DF90C
   - target:          arm64e-maccatalyst
-    value:           CAE960CC-75A9-301E-ADA4-7998CAEF48B7
+    value:           9B61DF47-421A-3638-9A3F-D41C8F3DF90C
 install-name:    '/usr/lib/libDiagnosticMessagesClient.dylib'
 current-version: 112
 exports:

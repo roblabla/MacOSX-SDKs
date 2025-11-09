@@ -44,6 +44,10 @@ Tags:
   SwiftName: SRWristDetection.WristLocation
 - Name: SRCrownOrientation
   SwiftName: SRWristDetection.CrownOrientation
+- Name: SRKeyboardMetricsSentimentCategory
+  SwiftName: SRKeyboardMetrics.SentimentCategory
+- Name: SRTextInputSessionType
+  SwiftName: SRTextInputSession.SessionType
 # Local Variables:
 # mode: yaml
 # End:

@@ -287,10 +287,9 @@ os_signpost_enabled(os_log_t log);
  * Log handle previously created with os_log_create.
  *
  * @param event_id
- * An ID for the event, see Signpost IDs above. If an event is emitted with the
- * same log handle, event_id, and name as an in-flight interval in the relevant
- * scope, it will be associated with the interval.  If there's no associated
- * interval, use an arbitrary valid number, like OS_SIGNPOST_ID_EXCLUSIVE.
+ * An ID for the event, see Signpost IDs above. This ID can be used to convey 
+ * additional information about the event that is being emitted without 
+ * incurring extra performance overhead.
  *
  * @param name
  * The name of this event. This must be a string literal.

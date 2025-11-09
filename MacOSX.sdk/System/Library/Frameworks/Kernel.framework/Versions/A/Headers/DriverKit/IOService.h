@@ -1,6 +1,6 @@
-/* iig(DriverKit-107.100.6) generated from IOService.iig */
+/* iig(DriverKit-191) generated from IOService.iig */
 
-/* IOService.iig:1-60 */
+/* IOService.iig:1-71 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -42,6 +42,7 @@ class IOMemoryDescriptor;
 class IOBufferMemoryDescriptor;
 class IOUserClient;
 class OSAction;
+class IOServiceStateNotificationDispatchSource;
 
 typedef char IOServiceName[128];
 typedef char IOPropertyName[128];
@@ -59,7 +60,17 @@ enum {
 	kIOServicePowerCapabilityLow = 0x00010000,
 };
 
-/* source class IOService IOService.iig:61-360 */
+enum {
+	_kIOPMWakeEventSource = 0x00000001,
+};
+
+// values for OSNumber kIOSystemStateHaltDescriptionKey:kIOSystemStateHaltDescriptionHaltStateKey
+enum {
+	kIOServiceHaltStatePowerOff = 0x00000001,
+	kIOServiceHaltStateRestart  = 0x00000002,
+};
+
+/* source class IOService IOService.iig:72-531 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -166,6 +177,16 @@ public:
 	CopyDispatchQueue(
 		const IODispatchQueueName name,
 		IODispatchQueue        ** queue) override;
+
+    /*!
+     * @brief       Create the default IODispatchQueue for an IOService. IOService::init()
+     *              calls this to create its default queue.
+     * @param       queue Returned, retained queue or NULL.
+     * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+     */
+	virtual kern_return_t
+	CreateDefaultDispatchQueue(
+		IODispatchQueue        ** queue) LOCAL;
 
     /*!
      * @brief       Obtain the IOKit registry properties for the IOService.
@@ -308,6 +329,38 @@ public:
 	RequireMaxBusStall(
 		uint64_t maxBusStall);
 
+	/*! @function AdjustBusy
+	 * @discussion Adjust the busy state of this service by applying a delta to the current busy state.
+	 *             Adjusting the busy state of a service to or from zero will change the provider's busy state by one, in the same direction.
+	 * @param       delta  The delta value to apply to the busy state.
+	 * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+	 */
+	virtual kern_return_t
+	AdjustBusy(int32_t delta);
+
+	/*! @function GetBusyState
+	 * @discussion Get the busy state of this service.
+	 * @param      busyState The returned busy state.
+	 * @return     kIOReturnSuccess on success. See IOReturn.h for error codes.
+	 */
+	virtual kern_return_t
+	GetBusyState(uint32_t *busyState);
+
+   /*!
+    * @brief       Post an event to CoreAnalytics.
+    * @discussion  Post an event to CoreAnalytics. See the CoreAnalytics documentation for
+    *              details.
+    * @param       options No options currently defined pass zero.
+    * @param       eventName See the CoreAnalytics documentation for details.
+    * @param       eventPayload See the CoreAnalytics documentation for details.
+    * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+    */
+	virtual kern_return_t
+	CoreAnalyticsSendEvent(
+		uint64_t       options,
+		OSString     * eventName,
+		OSDictionary * eventPayload);
+
 	/*! @function IOCreatePropertyMatchingDictionary
 	 *   @abstract Construct a matching dictionary for property matching.
 	 */
@@ -356,17 +409,133 @@ public:
 	static OSDictionary *
 	CreateNameMatchingDictionary(const char * serviceName, OSDictionary * matching) LOCALONLY;
 
+	/*! @function UpdateReport
+	 *  @abstract update an IOReporting subscription by reading out channel data.
+	 */
+	virtual IOReturn UpdateReport(OSData *channels, uint32_t action,
+                                   uint32_t *outElementCount,
+                                   uint64_t offset, uint64_t capacity,
+                                   IOMemoryDescriptor *buffer);
+
+	/*! @function ConfigureReport
+	*   @abstract Configure an IOReporting subscription
+	*   @discussion outCount is counting channels for enable,disable.  It is counting
+	*     elements for getDimensions
+	*/
+	virtual IOReturn ConfigureReport(OSData *channels, uint32_t action, uint32_t *outCount);
+
+	/*! @function SetLegend
+	 * @abstract set IORLegend and IORLegendPublic ioreg properties on this service.
+	 * @discussion For use by DriverKit userspace services, since they can't set
+	 *  registry properties directly.
+	 */
+	virtual IOReturn SetLegend(OSArray *legend, bool is_public);
+
+	/*!
+	 * @brief       Get the IORegistryEntry name.
+	 * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+	 */
+	virtual kern_return_t
+	CopyName(OSString ** name);
+
+	/*! @function StringFromReturn
+	 *   @abstract Get a string description for an IOReturn value.
+	 *   @return   kIOReturnSuccess on success. See IOReturn.h for error codes.
+	 */
+	virtual kern_return_t
+	StringFromReturn(
+		 IOReturn    retval,
+		 OSString ** str);
+
+	virtual kern_return_t
+	_ClaimSystemWakeEvent(
+		IOService          * device,
+		uint64_t             flags,
+		const IOPropertyName reason,
+		OSContainer       *  details);
+
+#if PRIVATE_WIFI_ONLY
+	/*!
+	 * @brief      Optionally supported external method to set properties in this service.
+	 * @param      properties The properties to set.
+	 * @return     kIOReturnSuccess on success. See IOReturn.h for error codes.
+	 */
+	virtual kern_return_t
+	UserSetProperties(OSContainer * properties) LOCAL;
+#endif /* PRIVATE_WIFI_ONLY */
+
+	/*! @function RemoveProperty
+	 *   @abstract Remove a property from the IOService.
+	 *   @return   kIOReturnSuccess on success. See IOReturn.h for error codes.
+	 */
+	virtual kern_return_t
+	RemoveProperty(OSString * propertyName);
+
+	/*! @function GetProvider
+	 *   @abstract Get the provider of this IOService.
+	 *   @discussion The DriverKit runtime caches the provider passed to IOService::Start(IOService * provider).
+	 *               This method returns the cached object.
+	 */
+	IOService *
+	GetProvider() const LOCALONLY;
+
+   /*!
+    * @function CopySystemStateNotificationService
+    * @abstract Obtain the system state notification service.
+    * @param    service Return IOService object with +1 retain count, to be released
+    *           by the caller.
+    * @return   kIOReturnSuccess on success. See IOReturn.h for error codes.
+	*/
+	virtual kern_return_t
+	CopySystemStateNotificationService(IOService ** service);
+
+   /*!
+    * @function StateNotificationItemCreate
+    * @abstract Create a state notification item.
+    * @param    itemName name of the item.
+    * @param    schema dictionary describing behaviors for the item. Keys are defined in
+    *           IOKitKeys.h kIOStateNotification*
+    * @return   kIOReturnSuccess on success. See IOReturn.h for error codes.
+	*/
+	virtual kern_return_t
+	StateNotificationItemCreate(OSString * itemName, OSDictionary * schema);
+
+   /*!
+    * @function StateNotificationItemSet
+    * @abstract Set the value of a state notification item.
+    * @param    itemName name of the item.
+    * @param    value dictionary value for the item, item creator to define.
+    * @return   kIOReturnSuccess on success. See IOReturn.h for error codes.
+	*/
+	virtual kern_return_t
+	StateNotificationItemSet(OSString * itemName, OSDictionary * value);
+
+   /*!
+    * @function StateNotificationItemCopy
+    * @abstract Set the value of a state notification item.
+    * @param    itemName name of the item.
+    * @param    value dictionary value for the item, item creator to define.
+    * @return   kIOReturnSuccess on success. See IOReturn.h for error codes.
+	*/
+	virtual kern_return_t
+	StateNotificationItemCopy(OSString * itemName, OSDictionary ** value);
 
 private:
 	virtual void
 	Stop_async(
 		IOService          * provider) LOCAL;
+
+	virtual kern_return_t
+	_NewUserClient(
+		uint32_t type,
+		OSDictionary *  entitlements,
+		IOUserClient ** userClient) LOCAL;
 };
 
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOService IOService.iig:61-360 */
+/* generated class IOService IOService.iig:72-531 */
 
 #define IOService_Start_ID            0xab6f76dde6d693f2ULL
 #define IOService_Stop_ID            0x98e715041c459fa5ULL
@@ -374,6 +543,7 @@ private:
 #define IOService_GetRegistryEntryID_ID            0x8a6f522f3894a0d7ULL
 #define IOService_SetName_ID            0xff378dd57615eb9fULL
 #define IOService_RegisterService_ID            0xe9722c2bb1347c28ULL
+#define IOService_CreateDefaultDispatchQueue_ID            0x805bb452f0b44ef7ULL
 #define IOService_CopyProperties_ID            0x833ec8f92f8b5362ULL
 #define IOService_SearchProperty_ID            0xad751cdb94c8dcc8ULL
 #define IOService_SetProperties_ID            0xd8a753ea156f9162ULL
@@ -384,7 +554,23 @@ private:
 #define IOService_Terminate_ID            0xf7a595d9927810c8ULL
 #define IOService_CopyProviderProperties_ID            0xc2a554959002c8e7ULL
 #define IOService_RequireMaxBusStall_ID            0xc21228652ff536afULL
+#define IOService_AdjustBusy_ID            0xde9f5ab8cc9758ebULL
+#define IOService_GetBusyState_ID            0xf5e47b685861dee5ULL
+#define IOService_CoreAnalyticsSendEvent_ID            0xedf64411b90d31caULL
+#define IOService_UpdateReport_ID            0x8509eed786c7ff1aULL
+#define IOService_ConfigureReport_ID            0x85d9def59e3f02beULL
+#define IOService_SetLegend_ID            0xa32ee5222548afa2ULL
+#define IOService_CopyName_ID            0xfe0617febc5b2cc4ULL
+#define IOService_StringFromReturn_ID            0xf62cec3df59db769ULL
+#define IOService__ClaimSystemWakeEvent_ID            0x845c18dfe6f75305ULL
+#define IOService_UserSetProperties_ID            0xad8461d6bb5e656dULL
+#define IOService_RemoveProperty_ID            0xdadeb06419d321b0ULL
+#define IOService_CopySystemStateNotificationService_ID            0x9165d1fce9b2ca5aULL
+#define IOService_StateNotificationItemCreate_ID            0xb35947bdab354e9eULL
+#define IOService_StateNotificationItemSet_ID            0xb318c8fa26b5b891ULL
+#define IOService_StateNotificationItemCopy_ID            0xad2e6404fde4b615ULL
 #define IOService_Stop_async_ID            0xa8c93137712a16a2ULL
+#define IOService__NewUserClient_ID            0x80b22dd60ee3abb6ULL
 
 #define IOService_Start_Args \
         IOService * provider
@@ -411,6 +597,9 @@ private:
 
 #define IOService_CopyDispatchQueue_Args \
         const char * name, \
+        IODispatchQueue ** queue
+
+#define IOService_CreateDefaultDispatchQueue_Args \
         IODispatchQueue ** queue
 
 #define IOService_CopyProperties_Args \
@@ -450,8 +639,75 @@ private:
 #define IOService_RequireMaxBusStall_Args \
         uint64_t maxBusStall
 
+#define IOService_AdjustBusy_Args \
+        int32_t delta
+
+#define IOService_GetBusyState_Args \
+        uint32_t * busyState
+
+#define IOService_CoreAnalyticsSendEvent_Args \
+        uint64_t options, \
+        OSString * eventName, \
+        OSDictionary * eventPayload
+
+#define IOService_UpdateReport_Args \
+        OSData * channels, \
+        uint32_t action, \
+        uint32_t * outElementCount, \
+        uint64_t offset, \
+        uint64_t capacity, \
+        IOMemoryDescriptor * buffer
+
+#define IOService_ConfigureReport_Args \
+        OSData * channels, \
+        uint32_t action, \
+        uint32_t * outCount
+
+#define IOService_SetLegend_Args \
+        OSArray * legend, \
+        bool is_public
+
+#define IOService_CopyName_Args \
+        OSString ** name
+
+#define IOService_StringFromReturn_Args \
+        IOReturn retval, \
+        OSString ** str
+
+#define IOService__ClaimSystemWakeEvent_Args \
+        IOService * device, \
+        uint64_t flags, \
+        const char * reason, \
+        OSContainer * details
+
+#define IOService_UserSetProperties_Args \
+        OSContainer * properties
+
+#define IOService_RemoveProperty_Args \
+        OSString * propertyName
+
+#define IOService_CopySystemStateNotificationService_Args \
+        IOService ** service
+
+#define IOService_StateNotificationItemCreate_Args \
+        OSString * itemName, \
+        OSDictionary * schema
+
+#define IOService_StateNotificationItemSet_Args \
+        OSString * itemName, \
+        OSDictionary * value
+
+#define IOService_StateNotificationItemCopy_Args \
+        OSString * itemName, \
+        OSDictionary ** value
+
 #define IOService_Stop_async_Args \
         IOService * provider
+
+#define IOService__NewUserClient_Args \
+        uint32_t type, \
+        OSDictionary * entitlements, \
+        IOUserClient ** userClient
 
 #define IOService_Methods \
 \
@@ -491,6 +747,11 @@ public:\
 \
     kern_return_t\
     RegisterService(\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    CreateDefaultDispatchQueue(\
+        IODispatchQueue ** queue,\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
@@ -550,6 +811,23 @@ public:\
         uint64_t maxBusStall,\
         OSDispatchMethod supermethod = NULL);\
 \
+    kern_return_t\
+    AdjustBusy(\
+        int32_t delta,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    GetBusyState(\
+        uint32_t * busyState,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    CoreAnalyticsSendEvent(\
+        uint64_t options,\
+        OSString * eventName,\
+        OSDictionary * eventPayload,\
+        OSDispatchMethod supermethod = NULL);\
+\
     static OSDictionary *\
     CreatePropertyMatchingDictionary(\
         const char * key,\
@@ -592,9 +870,95 @@ public:\
         const char * serviceName,\
         OSDictionary * matching);\
 \
+    IOReturn\
+    UpdateReport(\
+        OSData * channels,\
+        uint32_t action,\
+        uint32_t * outElementCount,\
+        uint64_t offset,\
+        uint64_t capacity,\
+        IOMemoryDescriptor * buffer,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    IOReturn\
+    ConfigureReport(\
+        OSData * channels,\
+        uint32_t action,\
+        uint32_t * outCount,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    IOReturn\
+    SetLegend(\
+        OSArray * legend,\
+        bool is_public,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    CopyName(\
+        OSString ** name,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    StringFromReturn(\
+        IOReturn retval,\
+        OSString ** str,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    _ClaimSystemWakeEvent(\
+        IOService * device,\
+        uint64_t flags,\
+        const IOPropertyName reason,\
+        OSContainer * details,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    UserSetProperties(\
+        OSContainer * properties,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    RemoveProperty(\
+        OSString * propertyName,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    IOService *\
+    GetProvider(\
+) const;\
+\
+    kern_return_t\
+    CopySystemStateNotificationService(\
+        IOService ** service,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    StateNotificationItemCreate(\
+        OSString * itemName,\
+        OSDictionary * schema,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    StateNotificationItemSet(\
+        OSString * itemName,\
+        OSDictionary * value,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    StateNotificationItemCopy(\
+        OSString * itemName,\
+        OSDictionary ** value,\
+        OSDispatchMethod supermethod = NULL);\
+\
     void\
     Stop_async(\
         IOService * provider,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    _NewUserClient(\
+        uint32_t type,\
+        OSDictionary * entitlements,\
+        IOUserClient ** userClient,\
         OSDispatchMethod supermethod = NULL);\
 \
 \
@@ -614,13 +978,22 @@ protected:\
     SetDispatchQueue_Impl(OSObject_SetDispatchQueue_Args);\
 \
     kern_return_t\
+    CreateDefaultDispatchQueue_Impl(IOService_CreateDefaultDispatchQueue_Args);\
+\
+    kern_return_t\
     SetPowerState_Impl(IOService_SetPowerState_Args);\
 \
     kern_return_t\
     Create_Impl(IOService_Create_Args);\
 \
+    kern_return_t\
+    UserSetProperties_Impl(IOService_UserSetProperties_Args);\
+\
     void\
     Stop_async_Impl(IOService_Stop_async_Args);\
+\
+    kern_return_t\
+    _NewUserClient_Impl(IOService__NewUserClient_Args);\
 \
 \
 public:\
@@ -661,6 +1034,12 @@ public:\
     RegisterService_Invoke(const IORPC rpc,\
         OSMetaClassBase * target,\
         RegisterService_Handler func);\
+\
+    typedef kern_return_t (*CreateDefaultDispatchQueue_Handler)(OSMetaClassBase * target, IOService_CreateDefaultDispatchQueue_Args);\
+    static kern_return_t\
+    CreateDefaultDispatchQueue_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        CreateDefaultDispatchQueue_Handler func);\
 \
     typedef kern_return_t (*CopyProperties_Handler)(OSMetaClassBase * target, IOService_CopyProperties_Args);\
     static kern_return_t\
@@ -722,11 +1101,107 @@ public:\
         OSMetaClassBase * target,\
         RequireMaxBusStall_Handler func);\
 \
+    typedef kern_return_t (*AdjustBusy_Handler)(OSMetaClassBase * target, IOService_AdjustBusy_Args);\
+    static kern_return_t\
+    AdjustBusy_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        AdjustBusy_Handler func);\
+\
+    typedef kern_return_t (*GetBusyState_Handler)(OSMetaClassBase * target, IOService_GetBusyState_Args);\
+    static kern_return_t\
+    GetBusyState_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        GetBusyState_Handler func);\
+\
+    typedef kern_return_t (*CoreAnalyticsSendEvent_Handler)(OSMetaClassBase * target, IOService_CoreAnalyticsSendEvent_Args);\
+    static kern_return_t\
+    CoreAnalyticsSendEvent_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        CoreAnalyticsSendEvent_Handler func);\
+\
+    typedef IOReturn (*UpdateReport_Handler)(OSMetaClassBase * target, IOService_UpdateReport_Args);\
+    static kern_return_t\
+    UpdateReport_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        UpdateReport_Handler func);\
+\
+    typedef IOReturn (*ConfigureReport_Handler)(OSMetaClassBase * target, IOService_ConfigureReport_Args);\
+    static kern_return_t\
+    ConfigureReport_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        ConfigureReport_Handler func);\
+\
+    typedef IOReturn (*SetLegend_Handler)(OSMetaClassBase * target, IOService_SetLegend_Args);\
+    static kern_return_t\
+    SetLegend_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        SetLegend_Handler func);\
+\
+    typedef kern_return_t (*CopyName_Handler)(OSMetaClassBase * target, IOService_CopyName_Args);\
+    static kern_return_t\
+    CopyName_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        CopyName_Handler func);\
+\
+    typedef kern_return_t (*StringFromReturn_Handler)(OSMetaClassBase * target, IOService_StringFromReturn_Args);\
+    static kern_return_t\
+    StringFromReturn_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        StringFromReturn_Handler func);\
+\
+    typedef kern_return_t (*_ClaimSystemWakeEvent_Handler)(OSMetaClassBase * target, IOService__ClaimSystemWakeEvent_Args);\
+    static kern_return_t\
+    _ClaimSystemWakeEvent_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        _ClaimSystemWakeEvent_Handler func);\
+\
+    typedef kern_return_t (*UserSetProperties_Handler)(OSMetaClassBase * target, IOService_UserSetProperties_Args);\
+    static kern_return_t\
+    UserSetProperties_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        UserSetProperties_Handler func);\
+\
+    typedef kern_return_t (*RemoveProperty_Handler)(OSMetaClassBase * target, IOService_RemoveProperty_Args);\
+    static kern_return_t\
+    RemoveProperty_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        RemoveProperty_Handler func);\
+\
+    typedef kern_return_t (*CopySystemStateNotificationService_Handler)(OSMetaClassBase * target, IOService_CopySystemStateNotificationService_Args);\
+    static kern_return_t\
+    CopySystemStateNotificationService_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        CopySystemStateNotificationService_Handler func);\
+\
+    typedef kern_return_t (*StateNotificationItemCreate_Handler)(OSMetaClassBase * target, IOService_StateNotificationItemCreate_Args);\
+    static kern_return_t\
+    StateNotificationItemCreate_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        StateNotificationItemCreate_Handler func);\
+\
+    typedef kern_return_t (*StateNotificationItemSet_Handler)(OSMetaClassBase * target, IOService_StateNotificationItemSet_Args);\
+    static kern_return_t\
+    StateNotificationItemSet_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        StateNotificationItemSet_Handler func);\
+\
+    typedef kern_return_t (*StateNotificationItemCopy_Handler)(OSMetaClassBase * target, IOService_StateNotificationItemCopy_Args);\
+    static kern_return_t\
+    StateNotificationItemCopy_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        StateNotificationItemCopy_Handler func);\
+\
     typedef void (*Stop_async_Handler)(OSMetaClassBase * target, IOService_Stop_async_Args);\
     static kern_return_t\
     Stop_async_Invoke(const IORPC rpc,\
         OSMetaClassBase * target,\
         Stop_async_Handler func);\
+\
+    typedef kern_return_t (*_NewUserClient_Handler)(OSMetaClassBase * target, IOService__NewUserClient_Args);\
+    static kern_return_t\
+    _NewUserClient_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        _NewUserClient_Handler func);\
 \
 
 
@@ -771,6 +1246,48 @@ protected:\
     kern_return_t\
     RequireMaxBusStall_Impl(IOService_RequireMaxBusStall_Args);\
 \
+    kern_return_t\
+    AdjustBusy_Impl(IOService_AdjustBusy_Args);\
+\
+    kern_return_t\
+    GetBusyState_Impl(IOService_GetBusyState_Args);\
+\
+    kern_return_t\
+    CoreAnalyticsSendEvent_Impl(IOService_CoreAnalyticsSendEvent_Args);\
+\
+    IOReturn\
+    UpdateReport_Impl(IOService_UpdateReport_Args);\
+\
+    IOReturn\
+    ConfigureReport_Impl(IOService_ConfigureReport_Args);\
+\
+    IOReturn\
+    SetLegend_Impl(IOService_SetLegend_Args);\
+\
+    kern_return_t\
+    CopyName_Impl(IOService_CopyName_Args);\
+\
+    kern_return_t\
+    StringFromReturn_Impl(IOService_StringFromReturn_Args);\
+\
+    kern_return_t\
+    _ClaimSystemWakeEvent_Impl(IOService__ClaimSystemWakeEvent_Args);\
+\
+    kern_return_t\
+    RemoveProperty_Impl(IOService_RemoveProperty_Args);\
+\
+    kern_return_t\
+    CopySystemStateNotificationService_Impl(IOService_CopySystemStateNotificationService_Args);\
+\
+    kern_return_t\
+    StateNotificationItemCreate_Impl(IOService_StateNotificationItemCreate_Args);\
+\
+    kern_return_t\
+    StateNotificationItemSet_Impl(IOService_StateNotificationItemSet_Args);\
+\
+    kern_return_t\
+    StateNotificationItemCopy_Impl(IOService_StateNotificationItemCopy_Args);\
+\
 
 
 #define IOService_VirtualMethods \
@@ -792,6 +1309,6 @@ public:\
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOService.iig:362- */
+/* IOService.iig:533- */
 
 #endif /* ! _IOKIT_UIOSERVICE_H */

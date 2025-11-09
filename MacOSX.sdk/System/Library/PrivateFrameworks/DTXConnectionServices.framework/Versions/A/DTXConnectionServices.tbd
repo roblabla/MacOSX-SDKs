@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4427EDFE-5739-33C9-BE69-8C9AE3DB955F
+    value:           AB88E6CE-EDA9-3498-83AD-F98770F83996
   - target:          x86_64-maccatalyst
-    value:           4427EDFE-5739-33C9-BE69-8C9AE3DB955F
+    value:           AB88E6CE-EDA9-3498-83AD-F98770F83996
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E263FB8F-E7B1-3E67-8CC0-1EF52D1D396E
+    value:           33F19E25-BF84-3AE5-AD8B-0102481BA19A
   - target:          arm64e-maccatalyst
-    value:           E263FB8F-E7B1-3E67-8CC0-1EF52D1D396E
+    value:           33F19E25-BF84-3AE5-AD8B-0102481BA19A
 install-name:    '/System/Library/PrivateFrameworks/DTXConnectionServices.framework/Versions/A/DTXConnectionServices'
-current-version: 64544.108.1
+current-version: 64550.124.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -37,17 +37,11 @@ exports:
                        _kDTXInterruptionMessage ]
     objc-classes:    [ DTXBlockCompressorFactory, DTXBlockCompressorLibCompression, 
                        DTXChannel, DTXConnection, DTXDecompressionException, DTXFileDescriptorTransport, 
-                       DTXFoundationURLTransport, DTXMachTransport, DTXMessage, DTXMessageParser, 
-                       DTXMessageTransmitter, DTXProxyChannel, DTXProxyRequestHandler, 
-                       DTXRemoteInvocationReceipt, DTXResourceTracker, DTXSendAndWaitRateLimiter, 
-                       DTXSendAndWaitStats, DTXService, DTXSharedMemoryTransport, 
+                       DTXMachTransport, DTXMessage, DTXMessageParser, DTXMessageTransmitter, 
+                       DTXProxyChannel, DTXProxyRequestHandler, DTXRemoteInvocationReceipt, 
+                       DTXResourceTracker, DTXService, DTXSharedMemoryTransport, 
                        DTXSocketTransport, DTXTransport, _DTXProxy ]
     objc-eh-types:   [ DTXDecompressionException ]
     objc-ivars:      [ DTXBlockCompressorLibCompression._lz4ScratchBuffer, DTXBlockCompressorLibCompression._lzfseScratchBuffer, 
-                       DTXSendAndWaitStats._compressionTotalDataCompressed, DTXSendAndWaitStats._compressionTotalDataUncompressed, 
-                       DTXSendAndWaitStats._compressionTotalNanosToCompress, DTXSendAndWaitStats._compressionTypeSet, 
-                       DTXSendAndWaitStats._lastStatTime, DTXSendAndWaitStats._microsecondsPerUnit, 
-                       DTXSendAndWaitStats._previousSendBytes, DTXSendAndWaitStats._statsQueue, 
-                       DTXSendAndWaitStats._timeBaseInfo, DTXSendAndWaitStats._totalSendBytes, 
                        _DTXProxy._proxyChannel ]
 ...

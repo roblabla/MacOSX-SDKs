@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           38CEA388-609B-38A4-82F7-9E61EBE900FF
+    value:           D068BED0-0768-3331-9E71-78A31BB0E955
   - target:          x86_64-maccatalyst
-    value:           38CEA388-609B-38A4-82F7-9E61EBE900FF
+    value:           D068BED0-0768-3331-9E71-78A31BB0E955
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0296D058-FE2D-3C0E-B4E8-7D777890B08A
+    value:           3E2CF61F-5839-355A-8226-51BCD20DCA7B
   - target:          arm64e-maccatalyst
-    value:           0296D058-FE2D-3C0E-B4E8-7D777890B08A
+    value:           3E2CF61F-5839-355A-8226-51BCD20DCA7B
 install-name:    '/System/Library/Frameworks/CoreWLAN.framework/Versions/A/CoreWLAN'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ACInterfaceCreate, _ACInterfaceDeviceNameCopy, _ACInterfaceGetPower, 
                        _ACInterfaceSetPower, _ACNetworkAssociate, _ACNetworkCopyBroadcastScanResults, 
@@ -83,6 +83,7 @@ exports:
                        _CWUpdatePasspointNetworkProfile, _CWUpdatePreferredOrderTimestamps, 
                        _CWValidLengthComputerNameSSIDWithEncoding, _CWValidLengthSSIDWithEncoding, 
                        _CWWiFiUIProxyEventXPCInterface, _CWWiFiUIProxyRequestXPCInterface, 
+                       _CWWiFiUserAgentXPCEventProtocolInterface, _CWWiFiUserAgentXPCRequestProtocolInterface, 
                        _CWWiFiXPCEventProtocolInterface, _CWWiFiXPCRequestProtocolInterface, 
                        _CoreWLANFrameworkBundleID, _EAPOLErrorDomain, _EAPOLSupplicantStateDidChangeNotification, 
                        _WiFiDeviceClientCopyAirplayStatistics, _WiFiDeviceClientCopyCurrentNetwork, 
@@ -155,13 +156,14 @@ exports:
                        _legacySecurityTypeForSecurityType, _legacySecurityTypeForSecurityTypeNoTranslate, 
                        _locStringForErrorCode, _locStringForKey, _locationServicesAuthorizedForCurrentProcess, 
                        _locationServicesAuthorizedForPID, _locationServicesBlockBSSIDAccessForXPCConnection, 
-                       _locationServicesEnabled, _networkHiddenOrBroadcast, _readCurrentNetworkFromNVRAM, 
-                       _readRecoveryNetworksFromNVRAM, _roamingProfileTypeForSchemaString, 
-                       _schemaStringForAutoHotspotMode, _schemaStringForRoamingProfileType, 
-                       _schemaStringForSecurityType, _schemaStringForShareMode, _schemaStringForUserRole, 
-                       _securityTypeForLegacySecurityType, _securityTypeForLegacySecurityTypeNoTranslate, 
-                       _securityTypeForSchemaString, _shareModeForSchemaString, _stringFromData, 
-                       _updateAPModeConfiguration, _userRoleForSchemaString, _verifyLatestPreferencesVersion, 
+                       _locationServicesEnabled, _locationServicesEnabledForWiFiNetworking, 
+                       _networkHiddenOrBroadcast, _readCurrentNetworkFromNVRAM, _readRecoveryNetworksFromNVRAM, 
+                       _roamingProfileTypeForSchemaString, _schemaStringForAutoHotspotMode, 
+                       _schemaStringForRoamingProfileType, _schemaStringForSecurityType, 
+                       _schemaStringForShareMode, _schemaStringForUserRole, _securityTypeForLegacySecurityType, 
+                       _securityTypeForLegacySecurityTypeNoTranslate, _securityTypeForSchemaString, 
+                       _shareModeForSchemaString, _stringFromData, _updateAPModeConfiguration, 
+                       _userRoleForSchemaString, _verifyLatestPreferencesVersion, 
                        _wlanNetworkInterfaceAvailable, _wow_get_parameters, _wow_get_wake_condition, 
                        _wow_preference_enabled, _wow_set_parameters, _wow_set_wake_condition, 
                        _wps_cancel, _wps_generate_pin, _wps_requires_pin, _wps_start, 

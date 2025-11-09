@@ -9,8 +9,10 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVBase.h>
+#import <AVFoundation/AVTimedMetadataGroup.h>
 #import <CoreVideo/CVPixelBufferPool.h>
 #import <CoreMedia/CMTimeRange.h>
+#import <CoreMedia/CMSampleBuffer.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -205,6 +207,28 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @property (nonatomic, readonly) BOOL supportsHDRSourceFrames API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 /*!
+ @property canConformColorOfSourceFrames
+ @abstract
+	Indicates that the custom compositor can conform supported sources to the composition color space by performing color conversions internally.
+ 
+ @discussion
+	When the composition engine sees this property set to YES, it will not convert source pixel buffers that meet the custom compositor's processing requirements, as indicated via its
+	implementation of the AVVideoCompositing protocol, including the values it provides for sourcePixelBufferAttributes and supportsWideColorSourceFrames.
+	Source pixel buffers that do not meet its processing requirements will be converted. This includes cases where:
+
+	1. supportsWideColorSourceFrames is set to NO and supportsHDRSourceFrames is set to NO or not implemented, and any source has a wide color gamut. In this case the source color space will be converted to BT.709 color space by the composition engine before it passes the source pixel buffer to the custom compositor. Note that if supportsHDRSourceFrames is YES, supportsWideColorSourceFrames is assumed to be YES.
+ 
+	2. supportsHDRSourceFrames is set to NO and any source has HDR color.  In this case the source color space will be converted to the composition color space by the composition engine before it passes the source pixel buffer to the custom compositor
+
+	3. The source frame's pixel format is not in the list specified in sourcePixelBufferAttributes. In this case the composition engine will convert the pixel format to one of the supported formats, AND convert the color space to the composition color space.
+
+	If a custom compositor does not implement this property, it is considered the same as returning NO.
+ */
+
+@optional
+@property (nonatomic, readonly) BOOL canConformColorOfSourceFrames API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
 	@method			anticipateRenderingUsingHint:
 	@abstract		Informs a custom video compositor about upcoming rendering requests.
 	@param			renderHint
@@ -260,8 +284,11 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 /* The time for which the frame should be composed */
 @property (nonatomic, readonly) CMTime compositionTime;
 
-/* Track ID of all the source buffers that are available to compose the frame. */
+/* Track IDs of all the source video buffers that are available to compose the frame. */
 @property (nonatomic, readonly) NSArray<NSNumber *> *sourceTrackIDs;
+
+/* Track IDs of all the source sample data buffers that are available to compose the frame.*/
+@property (nonatomic, readonly) NSArray<NSNumber *> *sourceSampleDataTrackIDs API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /* The AVVideoCompositionInstruction to use to compose the frame. */
 @property (nonatomic, readonly) id<AVVideoCompositionInstruction> videoCompositionInstruction;
@@ -273,6 +300,22 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 					The track ID for the requested source frame
 */
 - (nullable CVPixelBufferRef)sourceFrameByTrackID:(CMPersistentTrackID)trackID CF_RETURNS_NOT_RETAINED;
+
+/*!
+	@method			sourceSampleBufferByTrackID:
+	@abstract		Returns the source CMSampleBufferRef for the given track ID
+	@param			trackID
+					The track ID for the requested source sample buffer
+*/
+- (nullable CMSampleBufferRef)sourceSampleBufferByTrackID:(CMPersistentTrackID)trackID CF_RETURNS_NOT_RETAINED API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+
+/*!
+	@method			sourceTimedMetadataByTrackID:
+	@abstract		Returns the source AVTimedMetadataGroup * for the given track ID
+	@param			trackID
+					The track ID for the requested source timed metadata group.
+*/
+- (nullable AVTimedMetadataGroup *)sourceTimedMetadataByTrackID:(CMPersistentTrackID)trackID API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /* callback the custom compositor should call when composition succeeded */
 - (void)finishWithComposedVideoFrame:(CVPixelBufferRef)composedVideoFrame;
@@ -307,11 +350,11 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 /* The time for which the frame should be filtered */
 @property (nonatomic, readonly) CMTime compositionTime;
 
-/* CIImage for the first enabled source video track. The pixel format will be kCIFormatBGRA8 (kCVPixelFormatType_32BGRA). Unlike AVAsynchronousVideoCompositionRequest, renderContext.renderTransform is already applied to the source image. */
+/* CIImage for the first enabled source video track. Unlike AVAsynchronousVideoCompositionRequest, renderContext.renderTransform is already applied to the source image. */
 @property (nonatomic, readonly) CIImage *sourceImage;
 
 /*
-Callback the filter should call when filtering succeeded. The pixel format of the filteredImage must be kCIFormatBGRA8 (kCVPixelFormatType_32BGRA). If context is nil then a default context will be used, GPU-accelerated if possible.
+Callback the filter should call when filtering succeeded. If context is nil then a default context will be used, GPU-accelerated if possible.
 
 It is safe to pass in the sourceImage in which case the filter will appear to have no effect, essentially functioning as a pass-through.
 */
@@ -353,6 +396,13 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    frame will be used instead. The dimensions, clean aperture and pixel aspect ratio of the source buffer will be
    matched to the required values automatically */
 @property (nonatomic, readonly) CMPersistentTrackID passthroughTrackID; // kCMPersistentTrackID_Invalid if not a passthrough instruction
+
+
+@optional
+
+/* List of sample data track IDs required to compose frames for this instruction.  An empty array indicates that no sample data is required for this instruction. */
+@property (nonatomic, readonly) NSArray<NSNumber *> *requiredSourceSampleDataTrackIDs API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+
 
 @end
 

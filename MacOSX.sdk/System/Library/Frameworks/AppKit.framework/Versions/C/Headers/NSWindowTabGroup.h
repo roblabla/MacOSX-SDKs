@@ -1,7 +1,7 @@
 /*
     NSWindowTabGroup.h
     Application Kit
-    Copyright (c) 2017-2019, Apple Inc.
+    Copyright (c) 2017-2021, Apple Inc.
     All rights reserved.
 */
 

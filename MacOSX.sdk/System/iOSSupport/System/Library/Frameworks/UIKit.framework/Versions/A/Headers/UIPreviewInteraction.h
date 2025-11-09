@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol UIPreviewInteractionDelegate;
 
-UIKIT_CLASS_AVAILABLE_IOS_ONLY(10_0) @interface UIPreviewInteraction : NSObject
+UIKIT_CLASS_AVAILABLE_IOS_ONLY(10_0) NS_SWIFT_UI_ACTOR
+@interface UIPreviewInteraction : NSObject
 
 - (instancetype)initWithView:(UIView *)view NS_DESIGNATED_INITIALIZER;
 @property (nonatomic, readonly, weak) UIView *view;
@@ -28,6 +29,7 @@ UIKIT_CLASS_AVAILABLE_IOS_ONLY(10_0) @interface UIPreviewInteraction : NSObject
 
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UIPreviewInteractionDelegate <NSObject>
 
 - (void)previewInteraction:(UIPreviewInteraction *)previewInteraction didUpdatePreviewTransition:(CGFloat)transitionProgress ended:(BOOL)ended UIKIT_AVAILABLE_IOS_ONLY(10_0); // transitionProgress ranges from 0 to 1

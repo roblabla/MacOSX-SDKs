@@ -12,6 +12,7 @@
 #import <UIKit/UIStringDrawing.h>
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UISpringLoadedInteractionSupporting.h>
+#import <UIKit/UIButtonConfiguration.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -42,8 +43,10 @@ typedef NS_ENUM(NSInteger, UIButtonRole) {
 
 @class UIButton, UIPointerStyle, UIPointerEffect, UIPointerShape;
 typedef UIPointerStyle *_Nullable(^UIButtonPointerStyleProvider)(UIButton *button, UIPointerEffect *proposedEffect, UIPointerShape *proposedShape) API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos);
+typedef void (^UIButtonConfigurationUpdateHandler)(__kindof UIButton *button) API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIButton : UIControl <NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIButton : UIControl <NSCoding>
 
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -58,17 +61,34 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIButton : UIControl <NSCoding>
 /// Creates a button of the given type, registers primaryAction for the UIControlEventPrimaryActionTriggered control event, and if appropriate uses primaryAction's title & image as the button's title & image.
 + (instancetype)buttonWithType:(UIButtonType)buttonType primaryAction:(nullable UIAction *)primaryAction API_AVAILABLE(ios(14.0));
 
-@property(nonatomic)          UIEdgeInsets contentEdgeInsets UI_APPEARANCE_SELECTOR; // default is UIEdgeInsetsZero. On tvOS 10 or later, default is nonzero except for custom buttons.
-@property(nonatomic)          UIEdgeInsets titleEdgeInsets;                // default is UIEdgeInsetsZero
-@property(nonatomic)          BOOL         reversesTitleShadowWhenHighlighted; // default is NO. if YES, shadow reverses to shift between engrave and emboss appearance
-@property(nonatomic)          UIEdgeInsets imageEdgeInsets;                // default is UIEdgeInsetsZero
-@property(nonatomic)          BOOL         adjustsImageWhenHighlighted;    // default is YES. if YES, image is drawn darker when highlighted(pressed)
-@property(nonatomic)          BOOL         adjustsImageWhenDisabled;       // default is YES. if YES, image is drawn lighter when disabled
-@property(nonatomic)          BOOL         showsTouchWhenHighlighted API_UNAVAILABLE(tvos);      // default is NO. if YES, show a simple feedback (currently a glow) while highlighted
+/// Construct a new UIButton. `configuration` will be installed on the created button, and `primaryAction` added to handle the .primaryActionTriggered control event. If `primaryAction` has a title or image, they will be copied to `configuration`
++ (instancetype)buttonWithConfiguration:(UIButtonConfiguration *)configuration primaryAction:(nullable UIAction *)primaryAction API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+
+/// Setting a non-nil value for `configuration` will opt into configuration-based behavior on UIButton, update the button in a platform specific manner, and enable/disable some API.
+@property (nonatomic, readwrite, copy, nullable) UIButtonConfiguration *configuration API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+
+/// Requests the view update its configuration for its current state. This method is called automatically when the button's state may have changed, as well as in other circumstances where an update may be required. Multiple requests may be coalesced into a single update at the appropriate time.
+- (void)setNeedsUpdateConfiguration API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+
+/// Subclasses should override this method and update the button's `configuration`. This method should not be called directly, use `setNeedsUpdateConfiguration` to request an update.
+- (void)updateConfiguration API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+
+/// Block-based equivalent to overriding -updateConfiguration in a subclass. Setting this handler will force the button into configuration-based behavior (see the `configuration` property). This block is called after `-updateConfiguration`
+@property (nonatomic, readwrite, copy, nullable) UIButtonConfigurationUpdateHandler configurationUpdateHandler API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+
+/// When YES, the button will automatically call -updatedConfigurationForButton: on its `configuration ` when the button's state changes, and apply the updated configuration to the button. The default value is YES.
+@property (nonatomic, readwrite, assign) BOOL automaticallyUpdatesConfiguration API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+
 @property(null_resettable, nonatomic,strong)   UIColor     *tintColor API_AVAILABLE(ios(5.0)); // The tintColor is inherited through the superview hierarchy. See UIView for more information.
 @property(nonatomic,readonly) UIButtonType buttonType;
 
-@property (nonatomic) UIButtonRole role API_AVAILABLE(ios(14.0));   // default is UIButtonRoleNormal. 
+/// If pointer effects are enabled for the button, this will return true when an effect is active.
+@property (nonatomic, assign, readonly, getter = isHovered) BOOL hovered API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+
+/// Returns true while the button is presenting a menu.
+@property (nonatomic, assign, readonly, getter = isHeld) BOOL held API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+
+@property (nonatomic) UIButtonRole role API_AVAILABLE(ios(14.0));   // default is UIButtonRoleNormal.
 
 /// Enables this button's built-in pointer interaction.
 @property (nonatomic, readwrite, assign, getter = isPointerInteractionEnabled) BOOL pointerInteractionEnabled API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos);
@@ -77,11 +97,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIButton : UIControl <NSCoding>
  * @abstract Called when the system pointer hovers over this button if its pointer interaction is enabled. The
  *           system calls this block with a proposed UIPointerEffect and UIPointerShape. You may use them to construct
  *           a customized version of the system provided style or return an entirely custom one.
+ *           Setting this property automatically enables the button's pointer interaction and sets @c pointerInteractionEnabled to true.
  */
 @property (nonatomic, readwrite, copy, nullable) UIButtonPointerStyleProvider pointerStyleProvider API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT;
 
 /// An optional menu for the button to display. The button will automatically enable or disable its contextMenuInteraction when a non-nil or nil menu is set. Defaults to nil.
 @property (nonatomic, readwrite, copy, nullable) UIMenu *menu API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+
+/// Indicates if the button changes selection as its primary action.
+/// This shows the menu as options for selection if a menu is populated and showsMenuAsPrimaryAction is enabled.
+/// If no menu is provided or it is not the primary action, UIControlStateSelected is toggled on and off for the primary action.
+@property (nonatomic, readwrite, assign) BOOL changesSelectionAsPrimaryAction API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 
 // you can set the image, title color, title shadow color, and background image to use for each state. you can specify data
 // for a combined state by using the flags added together. in general, you should specify a value for the normal state to be used
@@ -118,22 +144,36 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIButton : UIControl <NSCoding>
 // return title and image views. will always create them if necessary. always returns nil for system buttons
 @property(nullable, nonatomic,readonly,strong) UILabel     *titleLabel API_AVAILABLE(ios(3.0));
 @property(nullable, nonatomic,readonly,strong) UIImageView *imageView  API_AVAILABLE(ios(3.0));
+/// The label used to display the subtitle, when present.
+@property(nonatomic, readonly, strong, nullable) UILabel *subtitleLabel API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
 
-// these return the rectangle for the background (assumes bounds), the content (image + title) and for the image and title separately. the content rect is calculated based
-// on the title and image size and padding and then adjusted based on the control content alignment. there are no draw methods since the contents
-// are rendered in separate subviews (UIImageView, UILabel)
-
-- (CGRect)backgroundRectForBounds:(CGRect)bounds;
-- (CGRect)contentRectForBounds:(CGRect)bounds;
-- (CGRect)titleRectForContentRect:(CGRect)contentRect;
-- (CGRect)imageRectForContentRect:(CGRect)contentRect;
 @end
 
-@interface UIButton(UIButtonDeprecated)
+@interface UIButton(/*UIButtonDeprecated*/)
 
-@property(nonatomic,strong) UIFont         *font              API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);
-@property(nonatomic)        NSLineBreakMode lineBreakMode     API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);
-@property(nonatomic)        CGSize          titleShadowOffset API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic,strong) UIFont         *font              API_DEPRECATED("Specify an attributed title with a custom font", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic)        NSLineBreakMode lineBreakMode     API_DEPRECATED("Specify an attributed title with a customized paragraph style", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic)        CGSize          titleShadowOffset API_DEPRECATED("Specify an attributed title with a customized shadow style", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);
+
+// The effect of these properties can be replicated via UIButtonConfiguration.contentInset and UIButtonConfiguration.imageToTitlePadding. They are ignored when a configuration is set.
+@property(nonatomic) UIEdgeInsets contentEdgeInsets API_DEPRECATED("This property is ignored when using UIButtonConfiguration", ios(2.0,15.0), tvos(2.0,15.0)) UI_APPEARANCE_SELECTOR; // default is UIEdgeInsetsZero. On tvOS 10 or later, default is nonzero except for custom buttons.
+@property(nonatomic) UIEdgeInsets titleEdgeInsets API_DEPRECATED("This property is ignored when using UIButtonConfiguration", ios(2.0,15.0), tvos(2.0,15.0));                // default is UIEdgeInsetsZero
+@property(nonatomic) UIEdgeInsets imageEdgeInsets API_DEPRECATED("This property is ignored when using UIButtonConfiguration", ios(2.0,15.0), tvos(2.0,15.0));                // default is UIEdgeInsetsZero
+
+// The effect of these properties can be replicated by providing an appropriate UIButtonConfiguration. They are ignored when a configuration set.
+@property(nonatomic) BOOL reversesTitleShadowWhenHighlighted API_DEPRECATED("This property is ignored when using UIButtonConfiguration, you may customize to replicate this behavior via a configurationUpdateHandler", ios(2.0,15.0), tvos(2.0,15.0)); // default is NO. if YES, shadow reverses to shift between engrave and emboss appearance
+@property(nonatomic) BOOL adjustsImageWhenHighlighted API_DEPRECATED("This property is ignored when using UIButtonConfiguration, you may customize to replicate this behavior via a configurationUpdateHandler", ios(2.0,15.0), tvos(2.0,15.0));    // default is YES. if YES, image is drawn darker when highlighted(pressed)
+@property(nonatomic) BOOL adjustsImageWhenDisabled API_DEPRECATED("This property is ignored when using UIButtonConfiguration, you may customize to replicate this behavior via a configurationUpdateHandler", ios(2.0,15.0), tvos(2.0,15.0));       // default is YES. if YES, image is drawn lighter when disabled
+
+// These properties are ignored when a configuration is set and have no replacement.
+@property(nonatomic) BOOL showsTouchWhenHighlighted  API_DEPRECATED("This property is ignored when using UIButtonConfiguration", ios(2.0,15.0)) API_UNAVAILABLE(tvos);
+
+// These methods will not be called when using a configuration.
+// To change the layout of button content, override -layoutSubviews, call super, and then position views as you see fit.
+- (CGRect)backgroundRectForBounds:(CGRect)bounds API_DEPRECATED("Override layoutSubviews, call super, and position views as you desire.", ios(2.0,15.0), tvos(2.0,15.0));
+- (CGRect)contentRectForBounds:(CGRect)bounds API_DEPRECATED("Override layoutSubviews, call super, and position views as you desire.", ios(2.0,15.0), tvos(2.0,15.0));
+- (CGRect)titleRectForContentRect:(CGRect)contentRect API_DEPRECATED("Override layoutSubviews, call super, and position views as you desire.", ios(2.0,15.0), tvos(2.0,15.0));
+- (CGRect)imageRectForContentRect:(CGRect)contentRect API_DEPRECATED("Override layoutSubviews, call super, and position views as you desire.", ios(2.0,15.0), tvos(2.0,15.0));
 
 @end
 

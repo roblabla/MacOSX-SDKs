@@ -49,7 +49,8 @@ typedef NS_OPTIONS(NSInteger, NSControlCharacterAction) {
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0)) @interface NSLayoutManager : NSObject <NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
+@interface NSLayoutManager : NSObject <NSSecureCoding>
 
 /**************************** Initialization ****************************/
 
@@ -352,12 +353,12 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0)) @interface NSLayoutManager : N
 
 /************************ Deprecated ************************/
 enum {
-    NSControlCharacterZeroAdvancementAction NS_ENUM_DEPRECATED_IOS(7_0, 9_0, "Use NSControlCharacterActionZeroAdvancement instead") = NSControlCharacterActionZeroAdvancement,
-    NSControlCharacterWhitespaceAction NS_ENUM_DEPRECATED_IOS(7_0, 9_0, "Use NSControlCharacterActionWhitespace instead") = NSControlCharacterActionWhitespace,
-    NSControlCharacterHorizontalTabAction NS_ENUM_DEPRECATED_IOS(7_0, 9_0, "Use NSControlCharacterActionHorizontalTab instead") = NSControlCharacterActionHorizontalTab,
-    NSControlCharacterLineBreakAction NS_ENUM_DEPRECATED_IOS(7_0, 9_0, "Use NSControlCharacterActionLineBreak instead") = NSControlCharacterActionLineBreak,
-    NSControlCharacterParagraphBreakAction NS_ENUM_DEPRECATED_IOS(7_0, 9_0, "Use NSControlCharacterActionParagraphBreak instead") = NSControlCharacterActionParagraphBreak,
-    NSControlCharacterContainerBreakAction NS_ENUM_DEPRECATED_IOS(7_0, 9_0, "Use NSControlCharacterActionContainerBreak instead") = NSControlCharacterActionContainerBreak
+    NSControlCharacterZeroAdvancementAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionZeroAdvancement", ios(7.0, 9.0)) = NSControlCharacterActionZeroAdvancement,
+    NSControlCharacterWhitespaceAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionWhitespace", ios(7.0, 9.0)) = NSControlCharacterActionWhitespace,
+    NSControlCharacterHorizontalTabAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionHorizontalTab", ios(7.0, 9.0)) = NSControlCharacterActionHorizontalTab,
+    NSControlCharacterLineBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionLineBreak", ios(7.0, 9.0)) = NSControlCharacterActionLineBreak,
+    NSControlCharacterParagraphBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionParagraphBreak", ios(7.0, 9.0)) = NSControlCharacterActionParagraphBreak,
+    NSControlCharacterContainerBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionContainerBreak", ios(7.0, 9.0)) = NSControlCharacterActionContainerBreak
 };
 
 @interface NSLayoutManager (NSLayoutManagerDeprecated)

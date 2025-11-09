@@ -1072,6 +1072,70 @@ typedef struct {
 } es_event_remote_thread_create_t;
 
 /**
+ * @brief Notification that a process has called setuid().
+ *
+ * @field uid The uid argument to the setuid() syscall.
+ */
+typedef struct {
+	uid_t uid;
+	uint8_t reserved[64];
+} es_event_setuid_t;
+
+/**
+ * @brief Notification that a process has called setgid().
+ *
+ * @field gid The gid argument to the setgid() syscall.
+ */
+typedef struct {
+	uid_t gid;
+	uint8_t reserved[64];
+} es_event_setgid_t;
+
+/**
+ * @brief Notification that a process has called seteuid().
+ *
+ * @field euid The euid argument to the seteuid() syscall.
+ */
+typedef struct {
+	uid_t euid;
+	uint8_t reserved[64];
+} es_event_seteuid_t;
+
+/**
+ * @brief Notification that a process has called setegid().
+ *
+ * @field egid The egid argument to the setegid() syscall.
+ */
+typedef struct {
+	uid_t egid;
+	uint8_t reserved[64];
+} es_event_setegid_t;
+
+/**
+ * @brief Notification that a process has called setreuid().
+ *
+ * @field ruid The ruid argument to the setreuid() syscall.
+ * @field euid The euid argument to the setreuid() syscall.
+ */
+typedef struct {
+	uid_t ruid;
+	uid_t euid;
+	uint8_t reserved[64];
+} es_event_setreuid_t;
+
+/**
+ * @brief Notification that a process has called setregid().
+ *
+ * @field rgid The rgid argument to the setregid() syscall.
+ * @field egid The egid argument to the setregid() syscall.
+ */
+typedef struct {
+	uid_t rgid;
+	uid_t egid;
+	uint8_t reserved[64];
+} es_event_setregid_t;
+
+/**
  * Union of all possible events that can appear in an es_message_t
  */
 typedef union {
@@ -1125,6 +1189,12 @@ typedef union {
 	es_event_setmode_t setmode;
 	es_event_setowner_t setowner;
 	es_event_settime_t settime;
+	es_event_setuid_t setuid;
+	es_event_setgid_t setgid;
+	es_event_seteuid_t seteuid;
+	es_event_setegid_t setegid;
+	es_event_setreuid_t setreuid;
+	es_event_setregid_t setregid;
 	es_event_signal_t signal;
 	es_event_stat_t stat;
 	es_event_trace_t trace;

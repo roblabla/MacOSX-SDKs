@@ -13,6 +13,23 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*
+ Visibility of the Assistant Cell
+ */
+typedef NS_ENUM(NSInteger, CPAssistantCellVisibility) {
+    CPAssistantCellVisibilityOff = 0,               // The list template will render without an assistant cell.
+    CPAssistantCellVisibilityWhileLimitedUIActive,  // The list template will render with an assistant cell, only while Limited UI is active.
+    CPAssistantCellVisibilityAlways,                // the list template will render with an assistant cell at all times.
+} API_AVAILABLE(ios(15.0));
+
+/*
+ Position of the Assistant Cell
+ */
+typedef NS_ENUM(NSInteger, CPAssistantCellPosition) {
+    CPAssistantCellPositionTop = 0, // The list template will display the assistant cell at the top of all visible cells.
+    CPAssistantCellPositionBottom,  // The list template will display the assistant cell at the bottom of all visible cells.
+} API_AVAILABLE(ios(15.0));
+
 @protocol CPListTemplateDelegate;
 @class CPListItem;
 
@@ -27,6 +44,21 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 - (instancetype)initWithTitle:(nullable NSString *)title
                      sections:(NSArray <CPListSection *> *)sections;
+
+/**
+ Initialize a list template with one or more sections of items, an optional title, and specifications
+ for the visibility and position of an Assistant Cell.
+ 
+ @note The Assistant Cell will only be rendered for the Audio and Communication app categories.
+ 
+ @discussion Unlike @c CPListItem, your application will not receive a callback when the user selects the cell.
+ Instead, configure an Intents app extention to receive user requests from SiriKit, in order to turn the requests into an
+ app-specific actions.
+ */
+- (instancetype)initWithTitle:(nullable NSString *)title
+                     sections:(NSArray <CPListSection *> *)sections
+      assistantCellVisibility:(CPAssistantCellVisibility)visibility
+        assistantCellPosition:(CPAssistantCellPosition)position API_AVAILABLE(ios(15.0));
 
 /**
  The list template's delegate is informed of list selection events.
@@ -112,6 +144,35 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  removed.
  */
 @property (nonatomic, copy) NSArray<NSString *> *emptyViewSubtitleVariants API_AVAILABLE(ios(14.0));
+
+#pragma mark - Assistant Cell
+
+/**
+ The visibility of the Assistant Cell.
+
+ Assigning to this property will dynamically update the List Template to reflect the visibility of the Assistant Cell.
+ The default value of this property is @c CPAssistantCellVisibilityOff.
+
+ @note The Assistant Cell will only be rendered for the Audio and Communication app categories.
+ 
+ @discussion Unlike @c CPListItem, your application will not receive a callback when the user selects the cell.
+ Instead, configure an Intents app extention to receive user requests from SiriKit, in order to turn the requests into an
+ app-specific actions.
+ */
+@property (nonatomic, assign) CPAssistantCellVisibility assistantCellVisibility API_AVAILABLE(ios(15.0));
+
+/**
+ The position of the Assistant Cell.
+ Assigning to this property will dynamically update the List Template to reflect the position of the Assistant Cell.
+ The default value of this property is @c CPAssistantCellPositionTop.
+
+ @note The Assistant Cell will only be rendered for the Audio and Communication app categories.
+ 
+ @discussion Unlike @c CPListItem, your application will not receive a callback when the user selects the cell.
+ Instead, configure an Intents app extention to receive user requests from SiriKit, in order to turn the requests into an
+ app-specific actions.
+ */
+@property (nonatomic, assign) CPAssistantCellPosition assistantCellPosition API_AVAILABLE(ios(15.0));
 
 @end
 

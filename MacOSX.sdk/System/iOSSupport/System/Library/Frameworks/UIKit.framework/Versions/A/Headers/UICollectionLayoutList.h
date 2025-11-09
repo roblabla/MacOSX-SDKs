@@ -55,7 +55,7 @@ typedef UIListSeparatorConfiguration *_Nonnull (^UICollectionLayoutListItemSepar
 
 
 /// A list configuration can be used to layout a section inside a UICollectionViewCompositionalLayout as a list.
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @interface UICollectionLayoutListConfiguration : NSObject <NSCopying>
 
 + (instancetype)new NS_UNAVAILABLE;
@@ -103,6 +103,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
 @property (nonatomic) UICollectionLayoutListHeaderMode headerMode;
 /// Defines whether the section has a footer. Defaults to UICollectionLayoutListFooterModeNone.
 @property (nonatomic) UICollectionLayoutListFooterMode footerMode;
+
+/// Padding above each section header. The default value is `UICollectionViewLayoutAutomaticDimension`
+@property (nonatomic) CGFloat headerTopPadding API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 

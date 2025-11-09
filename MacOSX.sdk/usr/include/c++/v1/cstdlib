@@ -97,80 +97,80 @@ void *aligned_alloc(size_t alignment, size_t size);                       // C11
 _LIBCPP_BEGIN_NAMESPACE_STD
 
 using ::size_t;
-using ::div_t;
-using ::ldiv_t;
+_LIBCPP_USING_IF_EXISTS(::div_t);
+_LIBCPP_USING_IF_EXISTS(::ldiv_t);
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
-using ::lldiv_t;
+_LIBCPP_USING_IF_EXISTS(::lldiv_t);
 #endif // _LIBCPP_HAS_NO_LONG_LONG
-using ::atof;
-using ::atoi;
-using ::atol;
+_LIBCPP_USING_IF_EXISTS(::atof);
+_LIBCPP_USING_IF_EXISTS(::atoi);
+_LIBCPP_USING_IF_EXISTS(::atol);
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
-using ::atoll;
+_LIBCPP_USING_IF_EXISTS(::atoll);
 #endif // _LIBCPP_HAS_NO_LONG_LONG
-using ::strtod;
-using ::strtof;
-using ::strtold;
-using ::strtol;
+_LIBCPP_USING_IF_EXISTS(::strtod);
+_LIBCPP_USING_IF_EXISTS(::strtof);
+_LIBCPP_USING_IF_EXISTS(::strtold);
+_LIBCPP_USING_IF_EXISTS(::strtol);
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
-using ::strtoll;
+_LIBCPP_USING_IF_EXISTS(::strtoll);
 #endif // _LIBCPP_HAS_NO_LONG_LONG
-using ::strtoul;
+_LIBCPP_USING_IF_EXISTS(::strtoul);
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
-using ::strtoull;
+_LIBCPP_USING_IF_EXISTS(::strtoull);
 #endif // _LIBCPP_HAS_NO_LONG_LONG
 
 #if !defined(_LIBCPP_DRIVERKIT_LIBC)
 
-using ::rand;
-using ::srand;
-using ::calloc;
-using ::free;
-using ::malloc;
-using ::realloc;
+_LIBCPP_USING_IF_EXISTS(::rand);
+_LIBCPP_USING_IF_EXISTS(::srand);
+_LIBCPP_USING_IF_EXISTS(::calloc);
+_LIBCPP_USING_IF_EXISTS(::free);
+_LIBCPP_USING_IF_EXISTS(::malloc);
+_LIBCPP_USING_IF_EXISTS(::realloc);
 
 #endif // _LIBCPP_DRIVERKIT_LIBC
 
-using ::abort;
+_LIBCPP_USING_IF_EXISTS(::abort);
 
 #if !defined(_LIBCPP_DRIVERKIT_LIBC)
 
-using ::atexit;
-using ::exit;
-using ::_Exit;
+_LIBCPP_USING_IF_EXISTS(::atexit);
+_LIBCPP_USING_IF_EXISTS(::exit);
+_LIBCPP_USING_IF_EXISTS(::_Exit);
 #ifndef _LIBCPP_WINDOWS_STORE_APP
-using ::getenv;
-using ::system;
+_LIBCPP_USING_IF_EXISTS(::getenv);
+_LIBCPP_USING_IF_EXISTS(::system);
 #endif
 
 #endif // _LIBCPP_DRIVERKIT_LIBC
 
-using ::bsearch;
-using ::qsort;
-using ::abs;
-using ::labs;
+_LIBCPP_USING_IF_EXISTS(::bsearch);
+_LIBCPP_USING_IF_EXISTS(::qsort);
+_LIBCPP_USING_IF_EXISTS(::abs);
+_LIBCPP_USING_IF_EXISTS(::labs);
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
-using ::llabs;
+_LIBCPP_USING_IF_EXISTS(::llabs);
 #endif // _LIBCPP_HAS_NO_LONG_LONG
-using ::div;
-using ::ldiv;
+_LIBCPP_USING_IF_EXISTS(::div);
+_LIBCPP_USING_IF_EXISTS(::ldiv);
 #ifndef _LIBCPP_HAS_NO_LONG_LONG
-using ::lldiv;
+_LIBCPP_USING_IF_EXISTS(::lldiv);
 #endif // _LIBCPP_HAS_NO_LONG_LONG
-using ::mblen;
-using ::mbtowc;
-using ::wctomb;
-using ::mbstowcs;
-using ::wcstombs;
+_LIBCPP_USING_IF_EXISTS(::mblen);
+_LIBCPP_USING_IF_EXISTS(::mbtowc);
+_LIBCPP_USING_IF_EXISTS(::wctomb);
+_LIBCPP_USING_IF_EXISTS(::mbstowcs);
+_LIBCPP_USING_IF_EXISTS(::wcstombs);
 
 #if !defined(_LIBCPP_DRIVERKIT_LIBC)
 
 #if !defined(_LIBCPP_CXX03_LANG) && defined(_LIBCPP_HAS_QUICK_EXIT)
-using ::at_quick_exit;
-using ::quick_exit;
+_LIBCPP_USING_IF_EXISTS(::at_quick_exit);
+_LIBCPP_USING_IF_EXISTS(::quick_exit);
 #endif
 #if _LIBCPP_STD_VER > 14 && defined(_LIBCPP_HAS_ALIGNED_ALLOC)
-using ::aligned_alloc;
+_LIBCPP_USING_IF_EXISTS(::aligned_alloc);
 #endif
 
 #endif // _LIBCPP_DRIVERKIT_LIBC

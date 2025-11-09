@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2CF95C11-5AFE-3FE6-AC00-10E953BA086B
+    value:           10F282C4-B294-3591-BA3C-C67C4D3E97FF
   - target:          x86_64-maccatalyst
-    value:           2CF95C11-5AFE-3FE6-AC00-10E953BA086B
+    value:           10F282C4-B294-3591-BA3C-C67C4D3E97FF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F15934FE-C5E8-3C07-91C8-929D40A22982
+    value:           84385F2F-2C81-3760-85E2-200FCE2C53B7
   - target:          arm64e-maccatalyst
-    value:           F15934FE-C5E8-3C07-91C8-929D40A22982
+    value:           84385F2F-2C81-3760-85E2-200FCE2C53B7
 install-name:    '/System/Library/PrivateFrameworks/FMNetworking.framework/Versions/A/FMNetworking'
 swift-abi-version: 7
 allowable-clients:
@@ -70,6 +70,7 @@ exports:
                        '_$s12FMNetworking13HeaderKeyNameOMa', '_$s12FMNetworking13HeaderKeyNameOMn', 
                        '_$s12FMNetworking13HeaderKeyNameON', '_$s12FMNetworking14FMNAccountTypeO11pairingLockyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO11searchPartyyA2CmFWC', 
+                       '_$s12FMNetworking14FMNAccountTypeO11w2AccessoryyACSSSg_tcACmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO15secureLocationsyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO20fmipPlaceholderForSPyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO3fmfyA2CmFWC', '_$s12FMNetworking14FMNAccountTypeO4fmipyA2CmFWC', 

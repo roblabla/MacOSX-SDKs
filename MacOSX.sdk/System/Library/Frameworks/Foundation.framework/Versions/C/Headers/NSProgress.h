@@ -9,9 +9,9 @@
 
 @class NSDictionary, NSMutableDictionary, NSMutableSet, NSURL, NSUUID, NSXPCConnection, NSLock;
 
-typedef NSString * NSProgressKind NS_EXTENSIBLE_STRING_ENUM;
-typedef NSString * NSProgressUserInfoKey NS_EXTENSIBLE_STRING_ENUM;
-typedef NSString * NSProgressFileOperationKind NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSProgressKind NS_TYPED_EXTENSIBLE_ENUM;
+typedef NSString * NSProgressUserInfoKey NS_TYPED_EXTENSIBLE_ENUM;
+typedef NSString * NSProgressFileOperationKind NS_TYPED_EXTENSIBLE_ENUM;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -275,6 +275,8 @@ FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindD
 FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindReceiving API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindCopying API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindUploading API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindDuplicating API_AVAILABLE(macosx(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
 
 /* A user info dictionary key. The value must be an NSURL identifying the item on which progress is being made. This is required for any NSProgress that is published using -publish to be reported to subscribers registered with +addSubscriberForFileURL:withPublishingHandler:.
 */

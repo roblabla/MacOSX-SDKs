@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2018 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2020 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -76,12 +76,14 @@
 
 #ifndef _NET_BPF_H_
 #define _NET_BPF_H_
+
+#include <stdint.h>
+
 #include <sys/param.h>
 #include <sys/appleapiopts.h>
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/cdefs.h>
-#include <stdint.h>
 
 
 
@@ -1165,6 +1167,11 @@ struct bpf_hdr {
 #define         BPF_TXA         0x80
 
 /*
+ * Number of scratch memory words (for BPF_LD|BPF_MEM and BPF_ST).
+ */
+#define BPF_MEMWORDS 16
+
+/*
  * The instruction data structure.
  */
 struct bpf_insn {
@@ -1198,9 +1205,6 @@ struct bpf_dltlist {
 
 
 
-/*
- * Number of scratch memory words (for BPF_LD|BPF_MEM and BPF_ST).
- */
-#define BPF_MEMWORDS 16
+
 
 #endif /* _NET_BPF_H_ */

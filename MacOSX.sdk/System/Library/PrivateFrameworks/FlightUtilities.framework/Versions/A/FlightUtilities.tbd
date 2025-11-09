@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3C37C81B-4BDA-39A1-AFB1-90FED5007585
+    value:           7982F56E-A7D0-3B43-B1B0-AD0A11481370
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FA0921C0-21E0-315B-BCFD-5992E4522547
+    value:           9AF4894D-243D-3D70-B89D-C084B4CE4771
 install-name:    '/System/Library/PrivateFrameworks/FlightUtilities.framework/Versions/A/FlightUtilities'
-current-version: 141
+current-version: 144
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/FlightUtilitiesCore.framework/Versions/A/FlightUtilitiesCore' ]
@@ -22,19 +22,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6026E91E-B2A8-3620-89B7-99A38924D32A
+    value:           6C7ECEBB-5D31-37BC-9EB7-DA33E39960F3
   - target:          x86_64-maccatalyst
-    value:           6026E91E-B2A8-3620-89B7-99A38924D32A
+    value:           6C7ECEBB-5D31-37BC-9EB7-DA33E39960F3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7288A3EE-F404-36BF-8CCF-8E9329AE412C
+    value:           9F96A2DC-6526-3F5B-AF68-1783A2C536A4
   - target:          arm64e-maccatalyst
-    value:           7288A3EE-F404-36BF-8CCF-8E9329AE412C
+    value:           9F96A2DC-6526-3F5B-AF68-1783A2C536A4
 install-name:    '/System/Library/PrivateFrameworks/FlightUtilitiesCore.framework/Versions/A/FlightUtilitiesCore'
-current-version: 141
+current-version: 144
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

@@ -22,8 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  * If updating/deleting an object (contact, group, container) and it is not in the contact store then the executing save request will fail to update/delete that object and will return the error CNErrorCodeRecordDoesNotExist with CNErrorUserInfoAffectedRecordsKey value as an array containing that object.
  *
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
-__WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.11), ios(9)) __WATCHOS_PROHIBITED
 @interface CNSaveRequest : NSObject
 
 /*!
@@ -113,6 +112,14 @@ __WATCHOS_PROHIBITED
  * @param group The group to remove the member from.
  */
 - (void)removeMember:(CNContact *)contact fromGroup:(CNGroup *)group;
+
+/*!
+ * @abstract    The author of this transaction.
+ *
+ * @discussion  Use this, in conjunction with @c CNChangeHistoryFetchRequest.excludedTransactionAuthors,
+ *              to suppress fetching of changes the author already knows about.
+ */
+@property (copy, nonatomic, nullable) NSString *transactionAuthor API_AVAILABLE(macos(12), ios(15));
 
 @end
 

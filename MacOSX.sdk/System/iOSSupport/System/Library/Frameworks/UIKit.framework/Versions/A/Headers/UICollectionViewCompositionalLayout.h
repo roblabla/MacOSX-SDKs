@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, UIContentInsetsReference) {
 } API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewCompositionalLayoutConfiguration : NSObject<NSCopying>
 @property(nonatomic) UICollectionViewScrollDirection scrollDirection;                                                       // default is UICollectionViewScrollDirectionVertical
 @property(nonatomic) CGFloat interSectionSpacing;                                                                           // default is 0
@@ -47,7 +47,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 
 typedef NSCollectionLayoutSection * _Nullable (^UICollectionViewCompositionalLayoutSectionProvider)(NSInteger section, id<NSCollectionLayoutEnvironment>);
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewCompositionalLayout : UICollectionViewLayout
 - (instancetype)initWithSection:(NSCollectionLayoutSection*)section;
 - (instancetype)initWithSection:(NSCollectionLayoutSection*)section configuration:(UICollectionViewCompositionalLayoutConfiguration*)configuration;
@@ -87,7 +87,7 @@ typedef NS_ENUM(NSInteger,UICollectionLayoutSectionOrthogonalScrollingBehavior) 
 
 typedef void (^NSCollectionLayoutSectionVisibleItemsInvalidationHandler)(NSArray<id<NSCollectionLayoutVisibleItem>> *visibleItems, CGPoint contentOffset, id<NSCollectionLayoutEnvironment> layoutEnvironment);
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutSection : NSObject<NSCopying>
 + (instancetype)sectionWithGroup:(NSCollectionLayoutGroup*)group;
 - (instancetype)init NS_UNAVAILABLE;
@@ -116,7 +116,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutItem : NSObject<NSCopying>
 + (instancetype)itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize;
 + (instancetype)itemWithLayoutSize:(NSCollectionLayoutSize*)layoutSize supplementaryItems:(NSArray<NSCollectionLayoutSupplementaryItem*>*)supplementaryItems;
@@ -170,7 +170,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 @property(nonatomic,readonly) NSArray<NSCollectionLayoutSupplementaryItem*> *supplementaryItems;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutGroupCustomItem : NSObject<NSCopying>
 + (instancetype)customItemWithFrame:(CGRect)frame;
 + (instancetype)customItemWithFrame:(CGRect)frame zIndex:(NSInteger)zIndex;
@@ -184,7 +184,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 
 typedef NSArray<NSCollectionLayoutGroupCustomItem*> * _Nonnull(^NSCollectionLayoutGroupCustomItemProvider)(id<NSCollectionLayoutEnvironment> layoutEnvironment);
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutGroup : NSCollectionLayoutItem<NSCopying>
 
 // Specifies a group that will have N items equally sized along the horizontal axis. use interItemSpacing to insert space between items
@@ -203,7 +203,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 + (instancetype)horizontalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitem:(NSCollectionLayoutItem*)subitem count:(NSInteger)count;
 
 // Specifies a group that will repeat items until available horizontal space is exhausted.
-//   note: any remaining space after laying out items can be apportioned among flexible interItemSpacing defintions
+//   note: any remaining space after laying out items can be apportioned among flexible interItemSpacing definitions
 + (instancetype)horizontalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitems:(NSArray<NSCollectionLayoutItem*>*)subitems;
 
 // Specifies a group that will have N items equally sized along the vertical axis. use interItemSpacing to insert space between items
@@ -228,7 +228,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 + (instancetype)verticalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitem:(NSCollectionLayoutItem*)subitem count:(NSInteger)count;
 
 // Specifies a group that will repeat items until available vertical space is exhausted.
-//   note: any remaining space after laying out items can be apportioned among flexible interItemSpacing defintions
+//   note: any remaining space after laying out items can be apportioned among flexible interItemSpacing definitions
 + (instancetype)verticalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitems:(NSArray<NSCollectionLayoutItem*>*)subitems;
 
 // Specifies a custom group with client-specified frames.
@@ -253,7 +253,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutDimension : NSObject<NSCopying>
 // dimension is computed as a fraction of the width of the containing group
 + (instancetype)fractionalWidthDimension:(CGFloat)fractionalWidth;
@@ -277,7 +277,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 @property(nonatomic,readonly) CGFloat dimension;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutSize : NSObject<NSCopying>
 + (instancetype)sizeWithWidthDimension:(NSCollectionLayoutDimension*)width heightDimension:(NSCollectionLayoutDimension*)height;
 - (instancetype)init NS_UNAVAILABLE;
@@ -287,7 +287,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 @property(nonatomic,readonly) NSCollectionLayoutDimension *heightDimension;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutSpacing : NSObject<NSCopying>
 + (instancetype)flexibleSpacing:(CGFloat)flexibleSpacing;  // i.e. >=
 + (instancetype)fixedSpacing:(CGFloat)fixedSpacing;        // i.e. ==
@@ -300,7 +300,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 @property(nonatomic,readonly) BOOL isFixedSpacing;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutEdgeSpacing : NSObject<NSCopying>
 
 // Edge spacing specifies additional outsets around items required when performing layout.
@@ -343,7 +343,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 @property(nonatomic,readonly,nullable) NSCollectionLayoutSpacing *bottom;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutSupplementaryItem : NSCollectionLayoutItem<NSCopying>
 
 //  Supplementary items are positioned (i.e. anchored) to coordinate spaces throughout the layout
@@ -395,7 +395,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 @property(nonatomic,readonly,nullable) NSCollectionLayoutAnchor *itemAnchor;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutBoundarySupplementaryItem : NSCollectionLayoutSupplementaryItem<NSCopying>
 
 // Specify the alignment of the supplementary relative the containing geometry's coordinate space to
@@ -444,7 +444,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 @property(nonatomic,readonly) CGPoint offset;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutDecorationItem : NSCollectionLayoutItem<NSCopying>
 
 // Useful for setting a background decoration view behind a section's content area.
@@ -483,7 +483,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 @property(nonatomic,readonly) NSString *elementKind;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutAnchor : NSObject<NSCopying>
 
 //                       +------------------+  +------+   +------------------+
@@ -540,7 +540,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 @property(nonatomic,readonly) BOOL isFractionalOffset;
 @end
 
-API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @protocol NSCollectionLayoutContainer<NSObject>
 @property(nonatomic,readonly) CGSize contentSize;                               // resolved size of container (before any insets are applied)
 @property(nonatomic,readonly) CGSize effectiveContentSize;                      // after insets are applied
@@ -548,13 +548,13 @@ API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 @property(nonatomic,readonly) NSDirectionalEdgeInsets effectiveContentInsets;   // resolved value after resolving any unit values
 @end
 
-API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @protocol NSCollectionLayoutEnvironment<NSObject>
 @property(nonatomic,readonly) id<NSCollectionLayoutContainer> container;
 @property(nonatomic,readonly) UITraitCollection *traitCollection;
 @end
 
-API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
+API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @protocol NSCollectionLayoutVisibleItem<NSObject,UIDynamicItem>
 @property(nonatomic) CGFloat alpha;
 @property(nonatomic) NSInteger zIndex;

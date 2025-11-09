@@ -12,10 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIDragPreviewParameters, UIView;
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @interface UIDragPreviewTarget : UIPreviewTarget
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UIDragPreviewTarget : UIPreviewTarget
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @interface UITargetedDragPreview : UITargetedPreview
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+@interface UITargetedDragPreview : UITargetedPreview
 
 /* Returns a preview with the same view and parameters, but a new target.
  *

@@ -81,13 +81,22 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  */
 @property (nonatomic) float     stereoPan;
 
-/*! @property masterGain
+
+/*! @property overallGain
 	@abstract
-    	adjusts the gain of all the notes played
+		adjusts the gain of all the notes played
 		Range:     -90.0 -> +12 db
 		Default: 0 db
  */
-@property (nonatomic) float     masterGain;
+@property (nonatomic) float     overallGain API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos) ;
+
+/*! @property masterGain
+	@abstract
+		adjusts the gain of all the notes played
+		Range:     -90.0 -> +12 db
+		Default: 0 db
+ */
+@property (nonatomic) float     masterGain API_DEPRECATED_WITH_REPLACEMENT("overallGain", ios(8.0, 15.0), macos(10.10, 12.0), tvos(9.0, 15.0)) ;
 
 /*! @property globalTuning
 	@abstract

@@ -2,7 +2,7 @@
 //  ARAnchor.h
 //  ARKit
 //
-//  Copyright © 2016-2017 Apple Inc. All rights reserved.
+//  Copyright © 2016-2021 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -55,6 +55,7 @@ API_AVAILABLE(ios(11.0))
  The transformation matrix that defines the anchor’s rotation, translation and scale in world coordinates.
  */
 @property (nonatomic, readonly) simd_float4x4 transform;
+
 
 /**
  Initializes a new anchor object.

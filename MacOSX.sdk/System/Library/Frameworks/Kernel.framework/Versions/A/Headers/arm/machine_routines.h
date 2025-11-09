@@ -43,8 +43,8 @@
 
 #include <stdarg.h>
 
-__BEGIN_DECLS
 
+__BEGIN_DECLS
 
 /* Interrupt handling */
 
@@ -62,6 +62,10 @@ void    ml_init_interrupt(void);
 boolean_t ml_get_interrupts_enabled(void);
 
 /* Set Interrupts Enabled */
+#if __has_feature(ptrauth_calls)
+uint64_t ml_pac_safe_interrupts_disable(void);
+void ml_pac_safe_interrupts_restore(uint64_t);
+#endif /* __has_feature(ptrauth_calls) */
 boolean_t ml_set_interrupts_enabled(boolean_t enable);
 boolean_t ml_early_set_interrupts_enabled(boolean_t enable);
 
@@ -71,43 +75,9 @@ boolean_t ml_at_interrupt_context(void);
 /* Generate a fake interrupt */
 void ml_cause_interrupt(void);
 
-/* Clear interrupt spin debug state for thread */
-#if INTERRUPT_MASKED_DEBUG
-extern boolean_t interrupt_masked_debug;
-extern uint64_t interrupt_masked_timeout;
-extern uint64_t stackshot_interrupt_masked_timeout;
-
-#define INTERRUPT_MASKED_DEBUG_START(handler_addr, type)                                    \
-do {                                                                                        \
-    if (interrupt_masked_debug) {                                                           \
-	    thread_t thread = current_thread();                                                 \
-	    thread->machine.int_type = type;                                                    \
-	    thread->machine.int_handler_addr = (uintptr_t)VM_KERNEL_STRIP_PTR(handler_addr);    \
-	    thread->machine.inthandler_timestamp = ml_get_timebase();                           \
-	    thread->machine.int_vector = (uintptr_t)NULL;                                       \
-    }                                                                                       \
-} while (0)
-
-#define INTERRUPT_MASKED_DEBUG_END()                                                        \
-do {                                                                                        \
-	if (interrupt_masked_debug) {                                                           \
-	    thread_t thread = current_thread();                                                 \
-	    ml_check_interrupt_handler_duration(thread);                                        \
-	}                                                                                       \
-} while (0)
-
-void ml_irq_debug_start(uintptr_t handler, uintptr_t vector);
-void ml_irq_debug_end(void);
-
-void ml_spin_debug_reset(thread_t thread);
-void ml_spin_debug_clear(thread_t thread);
-void ml_spin_debug_clear_self(void);
-void ml_check_interrupts_disabled_duration(thread_t thread);
-void ml_check_stackshot_interrupt_disabled_duration(thread_t thread);
-void ml_check_interrupt_handler_duration(thread_t thread);
-#else
-#define INTERRUPT_MASKED_DEBUG_START(handler_addr, type)
-#define INTERRUPT_MASKED_DEBUG_END()
+#if HAS_SIQ
+void siq_init(void);
+void siq_cpu_init(void);
 #endif
 
 
@@ -211,16 +181,30 @@ ex_cb_action_t ex_cb_invoke(
 	ex_cb_class_t   cb_class,
 	vm_offset_t         far);
 
+typedef enum {
+	CLUSTER_TYPE_SMP,
+	CLUSTER_TYPE_E,
+	CLUSTER_TYPE_P,
+	MAX_CPU_TYPES,
+} cluster_type_t;
 
 void ml_parse_cpu_topology(void);
 
 unsigned int ml_get_cpu_count(void);
+
+unsigned int ml_get_cpu_number_type(cluster_type_t cluster_type, bool logical, bool available);
+
+unsigned int ml_cpu_cache_sharing(unsigned int level, cluster_type_t cluster_type, bool include_all_cpu_types);
+
+unsigned int ml_get_cpu_types(void);
 
 unsigned int ml_get_cluster_count(void);
 
 int ml_get_boot_cpu_number(void);
 
 int ml_get_cpu_number(uint32_t phys_id);
+
+unsigned int ml_get_cpu_number_local(void);
 
 int ml_get_cluster_number(uint32_t phys_id);
 
@@ -232,7 +216,6 @@ unsigned int ml_get_first_cpu_id(unsigned int cluster_id);
 
 #ifdef __arm64__
 int ml_get_cluster_number_local(void);
-unsigned int ml_get_cpu_number_local(void);
 #endif /* __arm64__ */
 
 /* Struct for ml_cpu_get_info */
@@ -248,13 +231,7 @@ struct ml_cpu_info {
 };
 typedef struct ml_cpu_info ml_cpu_info_t;
 
-typedef enum {
-	CLUSTER_TYPE_SMP,
-	CLUSTER_TYPE_E,
-	CLUSTER_TYPE_P,
-} cluster_type_t;
-
-cluster_type_t ml_get_boot_cluster(void);
+cluster_type_t ml_get_boot_cluster_type(void);
 
 /*!
  * @typedef ml_topology_cpu_t
@@ -376,6 +353,8 @@ typedef struct ml_topology_info {
 	ml_topology_cpu_t               *boot_cpu;
 	ml_topology_cluster_t           *boot_cluster;
 	unsigned int                    chip_revision;
+	unsigned int                    cluster_types;
+	unsigned int                    cluster_type_num_cpus[MAX_CPU_TYPES];
 } ml_topology_info_t;
 
 /*!
@@ -515,18 +494,6 @@ unsigned int ml_phys_read_word(
 unsigned int ml_phys_read_word_64(
 	addr64_t paddr);
 
-unsigned long long ml_io_read(uintptr_t iovaddr, int iovsz);
-unsigned int ml_io_read8(uintptr_t iovaddr);
-unsigned int ml_io_read16(uintptr_t iovaddr);
-unsigned int ml_io_read32(uintptr_t iovaddr);
-unsigned long long ml_io_read64(uintptr_t iovaddr);
-
-extern void ml_io_write(uintptr_t vaddr, uint64_t val, int size);
-extern void ml_io_write8(uintptr_t vaddr, uint8_t val);
-extern void ml_io_write16(uintptr_t vaddr, uint16_t val);
-extern void ml_io_write32(uintptr_t vaddr, uint32_t val);
-extern void ml_io_write64(uintptr_t vaddr, uint64_t val);
-
 /* Read physical address double word */
 unsigned long long ml_phys_read_double(
 	vm_offset_t paddr);
@@ -577,6 +544,7 @@ vm_offset_t ml_vtophys(
 
 /* Get processor cache info */
 void ml_cpu_get_info(ml_cpu_info_t *ml_cpu_info);
+void ml_cpu_get_info_type(ml_cpu_info_t * ml_cpu_info, cluster_type_t cluster_type);
 
 #endif /* __APPLE_API_UNSTABLE */
 
@@ -684,6 +652,12 @@ uint64_t ml_gpu_stat(thread_t);
 
 
 
+
+extern uint32_t phy_read_panic;
+extern uint32_t phy_write_panic;
+#if DEVELOPMENT || DEBUG
+extern uint64_t simulate_stretched_io;
+#endif
 
 void ml_hibernate_active_pre(void);
 void ml_hibernate_active_post(void);

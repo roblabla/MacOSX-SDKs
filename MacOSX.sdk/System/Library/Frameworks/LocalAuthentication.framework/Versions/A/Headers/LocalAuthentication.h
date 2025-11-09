@@ -8,3 +8,4 @@
 #import <LocalAuthentication/LABase.h>
 #import <LocalAuthentication/LAContext.h>
 #import <LocalAuthentication/LAError.h>
+#import <LocalAuthentication/LAPublicDefines.h>

@@ -149,6 +149,16 @@ extern SInt64    gIOKitTrace;
 extern SInt64    gIODKDebug;
 
 #ifdef __cplusplus
+
+typedef kern_return_t (*IOCoreAnalyticsSendEventProc)(
+	uint64_t       options,
+	OSString     * eventName,
+	OSDictionary * eventPayload);
+
+
+#endif /* __cplusplus */
+
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -168,7 +178,10 @@ extern void    OSPrintMemory( void );
 #endif
 #define IOPrintMemory OSPrintMemory
 
-
+#if defined(KERNEL) && defined(__cplusplus)
+kern_return_t
+IOSetCoreAnalyticsSendEventProc(IOCoreAnalyticsSendEventProc proc);
+#endif /* defined(KERNEL) && defined(__cplusplus) */
 
 #define kIOKitDiagnosticsClientClassName "IOKitDiagnosticsClient"
 

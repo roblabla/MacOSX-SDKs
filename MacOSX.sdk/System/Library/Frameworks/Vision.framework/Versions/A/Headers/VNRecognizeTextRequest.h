@@ -6,6 +6,7 @@
 //
 
 #import <Vision/VNRequest.h>
+#import <Vision/VNObservation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -32,7 +33,19 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
 /*!
  @brief Returns all the supported languages for a given text recognition level. Note that a language supported in one recognition level might not be available in another.
  */
-+ (nullable NSArray<NSString *> *)supportedRecognitionLanguagesForTextRecognitionLevel:(VNRequestTextRecognitionLevel)recognitionLevel revision:(NSUInteger)requestRevision error:(NSError**)error;
++ (nullable NSArray<NSString *> *)supportedRecognitionLanguagesForTextRecognitionLevel:(VNRequestTextRecognitionLevel)recognitionLevel revision:(NSUInteger)requestRevision error:(NSError**)error API_DEPRECATED_WITH_REPLACEMENT("-supportedRecognitionLanguagesAndReturnError:", macos(10.15, 12.0), ios(13.0, 15.0), tvos(13.0, 15.0));
+
+
+/*!
+ @brief Obtain the collection of supported recognition languages.
+ @discussion This method will return the collection of all possible language identifiers that are recognized by the target request based on its current state of configuration at the time of the call.
+
+ @param error The address of the variable that will be populated with the error if the call fails.
+
+ @return The collection of language identifiers, or nil if a failure occurs.
+ */
+- (nullable NSArray<NSString *> *)supportedRecognitionLanguagesAndReturnError:(NSError**)error API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+
 
 /*!
  @brief Specify the languages used for the detection. The order of the languages in the array defines the order in which languages will be used during the language processing.
@@ -61,13 +74,17 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
 @property (readwrite, nonatomic, assign) float minimumTextHeight;
 
 
+/*!
+	@discussion VNRecognizedTextObservation results.
+*/
+@property (readonly, copy, nullable) NSArray<VNRecognizedTextObservation*>* results;
 
 @end
+
 
 /*
  @brief VNRecognizeTextRequestRevision1 only supports English
  */
-
 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
 static const NSUInteger VNRecognizeTextRequestRevision1 = 1;
 

@@ -72,5 +72,9 @@ typedef NS_ENUM(NSInteger, LAError)
     /// Authentication could not start because this device supports biometry only via removable accessories and the paired accessory is not connected.
     LAErrorBiometryDisconnected API_AVAILABLE(macos(11.2)) API_UNAVAILABLE(ios, watchos, tvos) = kLAErrorBiometryDisconnected,
 
+    /// Authentication could not start because dimensions of embedded UI are invalid.
+    LAErrorInvalidDimensions
+    API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos) = kLAErrorInvalidDimensions,
+
 } API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0), tvos(10.0));
 

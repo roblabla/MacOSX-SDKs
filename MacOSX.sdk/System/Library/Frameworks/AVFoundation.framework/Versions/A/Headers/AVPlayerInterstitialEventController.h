@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-   Copyright:  2020 by Apple Inc., all rights reserved.
+   Copyright:  2020-2021 by Apple Inc., all rights reserved.
 
 */
 
@@ -30,7 +30,7 @@ typedef NS_OPTIONS(NSUInteger, AVPlayerInterstitialEventRestrictions) {
 	AVPlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement = (1UL << 2),
 	
 	AVPlayerInterstitialEventRestrictionDefaultPolicy = AVPlayerInterstitialEventRestrictionNone
-} NS_SWIFT_NAME(AVPlayerInterstitialEvent.Restrictions) API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5));
+} NS_SWIFT_NAME(AVPlayerInterstitialEvent.Restrictions) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
   @class        AVPlayerInterstitialEvent
@@ -45,10 +45,10 @@ typedef NS_OPTIONS(NSUInteger, AVPlayerInterstitialEventRestrictions) {
 
     The alternative interstitial content is specified as an array of one or more AVPlayerItems that will be used as templates for the creation of items for interstitial playback. In other words, these template items are not the actual items that will be played during interstitial playback; instead they are used to generate the items that are to be played, with property values that match the configuration of your template items.
 
-    If you wish to observe the scheduling and progress of interstitial events, use an AVPlayerInterstitialEventObserver. If you wish to specify your own schedule of interstitial events, use an AVPlayerInterstitialEventController.
+    If you wish to observe the scheduling and progress of interstitial events, use an AVPlayerInterstitialEventMonitor. If you wish to specify your own schedule of interstitial events, use an AVPlayerInterstitialEventController.
 
 */
-API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5))
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface AVPlayerInterstitialEvent : NSObject
 
 AV_INIT_UNAVAILABLE
@@ -57,6 +57,8 @@ AV_INIT_UNAVAILABLE
   @abstract     Returns an instance of AVPlayerInterstitialEvent for use in scheduling interstitial playback.
   @param        primaryItem
                 An AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates.
+  @param        identifier
+                An external identifier for the event.
   @param        time
                 The time within the duration of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played.
   @param        templateItems
@@ -65,17 +67,21 @@ AV_INIT_UNAVAILABLE
                 Indicates restrictions on the use of end user playback controls that are imposed by the event.
   @param        resumptionOffset
                 Specifies the offset in time at which playback of the primary item should resume after interstitial playback has finished. Definite numeric values are supported. The value kCMTimeIndefinite can also be used, in order to specify that the effective resumption time offset should accord with the wallclock time elapsed during interstitial playback.
+  @param        playoutLimit
+                Specifies the offset from the beginning of the interstitial at which interstitial playback should end, if the interstitial asset(s) are longer. Pass a positive numeric value, or kCMTimeInvalid to indicate no playout limit.
+  @param        userDefinedAttributes
+			    Storage for attributes defined by the client or the content vendor. Attribute names should begin with X- for uniformity with server insertion.
   @result       An instance of AVPlayerInterstitialEvent.
 */
-+ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem time:(CMTime)time templateItems:(NSArray<AVPlayerItem *> *)templateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset;
-
-+ (instancetype)playerInterstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem time:(CMTime)time interstitialTemplateItems:(NSArray<AVPlayerItem *> *)interstitialTemplateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset;// COMPATIBILITY SHIM - 72562501
++ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem identifier:(nullable NSString *)identifier time:(CMTime)time templateItems:(NSArray<AVPlayerItem *> *)templateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset playoutLimit:(CMTime)playoutLimit userDefinedAttributes:(nullable NSDictionary*)userDefinedAttributes NS_REFINED_FOR_SWIFT;
 
 /*!
   @method       interstitialEventWithPrimaryItem:date:templateItems:restrictions:resumptionOffset:
   @abstract     Returns an instance of AVPlayerInterstitialEvent for use in scheduling interstitial playback.
   @param        primaryItem
                 An AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates.
+  @param        identifier
+                An external identifier for the event.
   @param        date
                 The date within the date range of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played.
   @param        templateItems
@@ -84,17 +90,26 @@ AV_INIT_UNAVAILABLE
                 Indicates restrictions on the use of end user playback controls that are imposed by the event.
   @param        resumptionOffset
                 Specifies the offset in time at which playback of the primary item should resume after interstitial playback has finished. Definite numeric values are supported. The value kCMTimeIndefinite can also be used, in order to specify that the effective resumption time offset should accord with the wallclock time elapsed during interstitial playback.
+  @param        playoutLimit
+                Specifies the offset from the beginning of the interstitial at which interstitial playback should end, if the interstitial asset(s) are longer. Pass a positive numeric value, or kCMTimeInvalid to indicate no playout limit.
+  @param        userDefinedAttributes
+			    Storage for attributes defined by the client or the content vendor. Attribute names should begin with X- for uniformity with server insertion.
   @result       An instance of AVPlayerInterstitialEvent.
 */
-+ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem date:(NSDate *)date templateItems:(NSArray<AVPlayerItem *> *)templateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset;
-
-+ (instancetype)playerInterstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem date:(NSDate *)date interstitialTemplateItems:(NSArray<AVPlayerItem *> *)interstitialTemplateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset;// COMPATIBILITY SHIM - 72562501
++ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem identifier:(nullable NSString *)identifier date:(NSDate *)date templateItems:(NSArray<AVPlayerItem *> *)templateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset playoutLimit:(CMTime)playoutLimit userDefinedAttributes:(nullable NSDictionary*)userDefinedAttributes NS_REFINED_FOR_SWIFT;
 
 /*!
   @property     primaryItem
   @abstract     An AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates.
 */
 @property (nonatomic, readonly, weak) AVPlayerItem *primaryItem;
+
+/*!
+  @property     identifier
+  @abstract     An external identifier for the event. 
+  @discussion	If an event is set on an AVPlayerInterstitialEventController that already has an event with the same identifier, the old event will be replaced by the new one.
+*/
+@property (nonatomic, readonly) NSString *identifier;
 
 /*!
   @property     time
@@ -115,7 +130,6 @@ AV_INIT_UNAVAILABLE
   @abstract     An array of AVPlayerItems with configurations that will be reproduced for the playback of interstitial content.
 */
 @property (nonatomic, readonly) NSArray<AVPlayerItem *> *templateItems;
-@property (nonatomic, readonly) NSArray<AVPlayerItem *> *interstitialTemplateItems;// COMPATIBILITY SHIM - 72562501
 
 /*!
   @property     restrictions
@@ -131,30 +145,45 @@ AV_INIT_UNAVAILABLE
 */
 @property (nonatomic, readonly) CMTime resumptionOffset;
 
+/*!
+  @property     playoutLimit
+  @abstract     Specifies the offset in time at which playback of the interstitial event should end.
+  @discussion
+    Can be any positive numeric value, or invalid. The default value is kCMTimeInvalid, which means there is no limit.
+*/
+@property (nonatomic, readonly) CMTime playoutLimit;
+
+/*!
+  @property     userDefinedAttributes
+  @abstract     Attributes of the event defined by the content vendor or the client.
+  @discussion
+    Dictionary keys are attribute names. Dictionary values are attribute values.
+*/
+@property (nonatomic, readonly) NSDictionary *userDefinedAttributes;
+
 @end
 
 /*!
-  @class        AVPlayerInterstitialEventObserver
+  @class        AVPlayerInterstitialEventMonitor
 
   @abstract
-    An AVPlayerInterstitialEventObserver allows you to observe the scheduling and progress of interstitial events, specified either intrinsically within the content of primary items, such as via use of directives carried by HLS media playlists, or via use of an AVPlayerInterstitialEventController.
+    An AVPlayerInterstitialEventMonitor allows you to observe the scheduling and progress of interstitial events, specified either intrinsically within the content of primary items, such as via use of directives carried by HLS media playlists, or via use of an AVPlayerInterstitialEventController.
     
   @discussion
     The schedule of interstitial events is provided as an array of AVPlayerInterstitialEvents. For each AVPlayerInterstitialEvent, when the primary player's current item is the primary item of the interstitial event and its currentDate reaches the date of the event, playback of the primary item by the primary player is temporarily suspended, i.e. its timeControlStatus changes to AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate and its reasonForWaitingToPlay will change to AVPlayerWaitingDuringInterstitialEventReason. During this suspension, playback of items that replicate the interstitial template items of the event are played by the interstitial player, which temporarily assumes the output configuration of the primary player; for example, its visual content will be routed to AVPlayerLayers that reference the primary player. Once the interstitial player has advanced through playback of the interstitial items specified by the event or its current item otherwise becomes nil, playback of the primary content will resume, at an offset from the time at which it was suspended as specified by the event.
   
 */
-API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5))
-@interface AVPlayerInterstitialEventObserver : NSObject
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
+@interface AVPlayerInterstitialEventMonitor : NSObject
 
 /*!
-  @method       interstitialEventObserverWithPrimaryPlayer:
+  @method       interstitialEventMonitorWithPrimaryPlayer:
   @abstract     Returns an instance of AVPlayerInterstitialEvent for use in observing and scheduling interstitial playback.
   @param        primaryPlayer
                 The AVPlayer that will play the primaryItems of the receiver's interstitial events.
-  @result       An instance of AVPlayerInterstitialEventObserver.
+  @result       An instance of AVPlayerInterstitialEventMonitor.
 */
-+ (instancetype)interstitialEventObserverWithPrimaryPlayer:(AVPlayer *)primaryPlayer;
-+ (instancetype)playerInterstitialEventObserverWithPrimaryPlayer:(AVPlayer *)primaryPlayer;// COMPATIBILITY SHIM - 72562501
++ (instancetype)interstitialEventMonitorWithPrimaryPlayer:(AVPlayer *)primaryPlayer;
 
 - (instancetype)initWithPrimaryPlayer:(AVPlayer *)primaryPlayer  NS_DESIGNATED_INITIALIZER;
 
@@ -168,7 +197,7 @@ API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5))
   @property     interstitialPlayer
   @abstract     The AVQueuePlayer that will play interstitial items during suspension of playback of primary items.
 */
-@property (nonatomic, readonly, weak) AVQueuePlayer *interstitialPlayer;
+@property (nonatomic, readonly) AVQueuePlayer *interstitialPlayer;
 
 /*!
   @property     events
@@ -178,7 +207,6 @@ API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5))
     When interstitial events follow a schedule specified via use of an AVPlayerInterstitialEventController, the value of this property changes only when a new schedule is set on the AVPlayerInterstitialEventController.
 */
 @property (readonly) NSArray<AVPlayerInterstitialEvent *> *events;
-@property (readonly) NSArray<AVPlayerInterstitialEvent *> *interstitialEvents;// COMPATIBILITY SHIM - 72562501
 
 /*!
   @property     currentEvent
@@ -189,17 +217,16 @@ API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5))
 @end
 
 /*!
-  @constant     AVPlayerInterstitialEventObserverEventsDidChangeNotification
-  @abstract     A notification that's posted whenever the value of events of an AVPlayerInterstitialEventObserver is changed.
+  @constant     AVPlayerInterstitialEventMonitorEventsDidChangeNotification
+  @abstract     A notification that's posted whenever the value of events of an AVPlayerInterstitialEventMonitor is changed.
 */
-AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventObserverEventsDidChangeNotification API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5));
+AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventMonitorEventsDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
-  @constant     AVPlayerInterstitialEventObserverCurrentEventDidChangeNotification
-  @abstract     A notification that's posted whenever the currentEvent of an AVPlayerInterstitialEventObserver changes.
+  @constant     AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification
+  @abstract     A notification that's posted whenever the currentEvent of an AVPlayerInterstitialEventMonitor changes.
 */
-AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventObserverCurrentEventDidChangeNotification API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5));
-
+AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 
 /*!
@@ -213,8 +240,8 @@ AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventObserverCurrentEven
     The schedule of interstitial events is specified as an array of AVPlayerInterstitialEvents. For each AVPlayerInterstitialEvent, when the primary player's current item is the primary item of the interstitial event and its currentDate reaches the date of the event, playback of the primary item by the primary player is temporarily suspended, i.e. its timeControlStatus changes to AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate and its reasonForWaitingToPlay will change to AVPlayerWaitingDuringInterstitialEventReason. During this suspension, playback of items that replicate the interstitial template items of the event are played by the interstitial player, which temporarily assumes the output configuration of the primary player; for example, its visual content will be routed to AVPlayerLayers that reference the primary player. Once the interstitial player has advanced through playback of the interstitial items specified by the event or its current item otherwise becomes nil, playback of the primary content will resume, at an offset from the time at which it was suspended as specified by the event.
 
 */
-API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5))
-@interface AVPlayerInterstitialEventController : AVPlayerInterstitialEventObserver
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
+@interface AVPlayerInterstitialEventController : AVPlayerInterstitialEventMonitor
 
 /*!
   @method       interstitialEventControllerWithPrimaryPlayer
@@ -224,7 +251,6 @@ API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5))
   @result       An instance of AVPlayerInterstitialEventController.
 */
 + (instancetype)interstitialEventControllerWithPrimaryPlayer:(AVPlayer *)primaryPlayer;
-+ (instancetype)playerInterstitialEventControllerWithPrimaryPlayer:(AVPlayer *)primaryPlayer;// COMPATIBILITY SHIM - 72562501
 
 - (instancetype)initWithPrimaryPlayer:(AVPlayer *)primaryPlayer;
 
@@ -241,7 +267,6 @@ API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5))
     If interstitial events are scheduled for the same date, they are ordered according to their position in the events array.
 */
 @property (copy, null_resettable) NSArray<AVPlayerInterstitialEvent *> *events;
-@property (copy, null_resettable) NSArray<AVPlayerInterstitialEvent *> *interstitialEvents;// COMPATIBILITY SHIM - 72562501
 
 /*!
   @method       cancelCurrentEventWithResumptionOffset:
@@ -263,9 +288,9 @@ API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5))
  @constant AVPlayerWaitingDuringInterstitialEventReason
  @abstract Indicates that the player is waiting for the completion of an interstitial event.
  @discussion
-    The player is waiting for playback because an interstitial event is currently in progress. Interstitial events can be monitored via use of an AVPlayerInterstitialEventObserver.
+    The player is waiting for playback because an interstitial event is currently in progress. Interstitial events can be monitored via use of an AVPlayerInterstitialEventMonitor.
  */
-AVF_EXPORT AVPlayerWaitingReason const AVPlayerWaitingDuringInterstitialEventReason API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5));
+AVF_EXPORT AVPlayerWaitingReason const AVPlayerWaitingDuringInterstitialEventReason API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 
@@ -274,14 +299,15 @@ AVF_EXPORT AVPlayerWaitingReason const AVPlayerWaitingDuringInterstitialEventRea
 /*!
   @property     automaticallyHandlesInterstitialEvents
   @abstract     Allows interstitials to be played according to a schedule that's specified by server-side directives. The default value is YES. A value of NO prevents automatic scheduling of future server-side interstitial events. Events specified by an AVPlayerInterstitialEventController override server-side events, regardless of the value of this property.
+  @discussion	This property must be accessed on the main thread/queue.
 */
-@property (nonatomic) BOOL automaticallyHandlesInterstitialEvents API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5));
+@property (nonatomic) BOOL automaticallyHandlesInterstitialEvents NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
   @property     templatePlayerItem
   @abstract     If the item was created automatically according to a template item for looping, for interstitial playback, or for other purposes, indicates the AVPlayerItem that was used as the template.
 */
-@property (nonatomic, readonly, nullable) AVPlayerItem *templatePlayerItem API_AVAILABLE(macos(11.4), ios(14.5), tvos(14.5));
+@property (nonatomic, readonly, nullable) AVPlayerItem *templatePlayerItem API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 

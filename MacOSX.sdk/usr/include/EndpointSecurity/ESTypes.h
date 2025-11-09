@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <stdint.h>
 #include <os/base.h>
+#include <mach/message.h>
 
 typedef struct {
 	uint8_t reserved[32];
@@ -140,6 +141,13 @@ typedef enum {
   , ES_EVENT_TYPE_AUTH_GET_TASK_READ
   , ES_EVENT_TYPE_NOTIFY_GET_TASK_READ
   , ES_EVENT_TYPE_NOTIFY_GET_TASK_INSPECT
+	// The following events are available beginning in macOS 12.0
+  , ES_EVENT_TYPE_NOTIFY_SETUID
+  , ES_EVENT_TYPE_NOTIFY_SETGID
+  , ES_EVENT_TYPE_NOTIFY_SETEUID
+  , ES_EVENT_TYPE_NOTIFY_SETEGID
+  , ES_EVENT_TYPE_NOTIFY_SETREUID
+  , ES_EVENT_TYPE_NOTIFY_SETREGID
     // ES_EVENT_TYPE_LAST is not a valid event type but a convenience
     // value for operating on the range of defined event types.
     // This value may change between releases and was available
@@ -240,5 +248,65 @@ typedef struct {
 	size_t length;
 	const char * data;
 } es_string_token_t;
+
+/*
+ * @brief Values that will be paired with path strings to describe the type of the path
+ */
+typedef enum {
+	/// Value to describe a path prefix
+	ES_MUTE_PATH_TYPE_PREFIX
+	/// Value to describe a path literal
+  , ES_MUTE_PATH_TYPE_LITERAL
+} es_mute_path_type_t;
+
+/*
+ * Structure to describe attributes of a muted path.
+ *
+ * @field type Indicates if the path is a prefix or literal.
+ * @field event_count The number of events contained in the `events` array.
+ * @field events Array of event types for which the path is muted.
+ * @field path The muted path. (Note: es_string_token_t is a char array and length)
+ */
+typedef struct {
+	es_mute_path_type_t type;
+	size_t event_count;
+	const es_event_type_t *events;
+	es_string_token_t path;
+} es_muted_path_t;
+
+/*
+ * Structure for a set of muted paths.
+ *
+ * @field count The number of elements in the `paths` array.
+ * @field paths Array of muted paths.
+ */
+typedef struct {
+	size_t count;
+	const es_muted_path_t *paths;
+} es_muted_paths_t;
+
+/*
+ * Structure to describe attributes of a muted process.
+ *
+ * @field token The audit token of a muted process.
+ * @field event_count The number of events contained in the `events` array.
+ * @field events Array of event types for which the process is muted.
+ */
+typedef struct {
+	audit_token_t audit_token;
+	size_t event_count;
+	const es_event_type_t *events;
+} es_muted_process_t;
+
+/*
+ * Structure for a set of muted processes.
+ *
+ * @field count The number of elements in the `processes` array.
+ * @field processes Array of muted processes.
+ */
+typedef struct {
+	size_t count;
+	const es_muted_process_t *processes;
+} es_muted_processes_t;
 
 #endif /* __ENDPOINT_SECURITY_TYPES_H */

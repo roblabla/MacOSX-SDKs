@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6F3481DC-8C9B-3658-995A-4C3D03E5F866
+    value:           D524549C-4273-3819-AB01-A3E82241732F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           486D4A9C-6AB0-3F8E-996E-9F9950BF2A14
+    value:           8A819036-2215-31B1-9E6A-A758DCD3C3B1
 install-name:    '/System/Library/PrivateFrameworks/BridgeOSSoftwareUpdate.framework/Versions/A/BridgeOSSoftwareUpdate'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

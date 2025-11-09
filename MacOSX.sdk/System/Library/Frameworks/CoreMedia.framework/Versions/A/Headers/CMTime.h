@@ -88,14 +88,14 @@ typedef CF_OPTIONS( uint32_t, CMTimeFlags ) {
 */
 typedef struct
 {
-	CMTimeValue	value;		/*! @field value The value of the CMTime. value/timescale = seconds. */
-	CMTimeScale	timescale;	/*! @field timescale The timescale of the CMTime. value/timescale = seconds.  */
-	CMTimeFlags	flags;		/*! @field flags The flags, eg. kCMTimeFlags_Valid, kCMTimeFlags_PositiveInfinity, etc. */
-	CMTimeEpoch	epoch;		/*! @field epoch Differentiates between equal timestamps that are actually different because
-												 of looping, multi-item sequencing, etc.  
-												 Will be used during comparison: greater epochs happen after lesser ones. 
-												 Additions/subtraction is only possible within a single epoch,
-												 however, since epoch length may be unknown/variable. */
+	CMTimeValue	value;		/*!< The value of the CMTime. value/timescale = seconds */
+	CMTimeScale	timescale;	/*!< The timescale of the CMTime. value/timescale = seconds. */
+	CMTimeFlags	flags;		/*!< The flags, eg. kCMTimeFlags_Valid, kCMTimeFlags_PositiveInfinity, etc. */
+	CMTimeEpoch	epoch;		/*!< Differentiates between equal timestamps that are actually different because
+								of looping, multi-item sequencing, etc.
+								Will be used during comparison: greater epochs happen after lesser ones.
+								Additions/subtraction is only possible within a single epoch,
+								however, since epoch length may be unknown/variable */
 } CMTime API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DB748E0C-9C29-347B-A732-26558E860547
+    value:           5E78EF63-E7A5-3926-8958-D8F681CCE913
   - target:          x86_64-maccatalyst
-    value:           DB748E0C-9C29-347B-A732-26558E860547
+    value:           5E78EF63-E7A5-3926-8958-D8F681CCE913
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           72BBD386-C2EF-3F86-9BCE-554D9BC2F987
+    value:           664549D0-893E-3DA1-8A8A-8C8060CBB2C3
   - target:          arm64e-maccatalyst
-    value:           72BBD386-C2EF-3F86-9BCE-554D9BC2F987
+    value:           664549D0-893E-3DA1-8A8A-8C8060CBB2C3
 install-name:    '/System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/AppleSystemInfo'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

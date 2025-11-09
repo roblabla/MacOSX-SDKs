@@ -1,6 +1,6 @@
-/* iig(DriverKit-107.100.6) generated from IOMemoryDescriptor.iig */
+/* iig(DriverKit-191) generated from IOMemoryDescriptor.iig */
 
-/* IOMemoryDescriptor.iig:1-72 */
+/* IOMemoryDescriptor.iig:1-78 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -43,6 +43,7 @@ class IOMemoryMap;
 
 // IOMemoryDescriptor Create options
 enum {
+	kIOMemoryDirectionNone       = 0x00000000,
 	kIOMemoryDirectionIn         = 0x00000001,
 	kIOMemoryDirectionOut        = 0x00000002,
 	kIOMemoryDirectionOutIn      = kIOMemoryDirectionIn | kIOMemoryDirectionOut,
@@ -54,6 +55,11 @@ enum {
 enum {
 	kIOMemoryMapFixedAddress          = 0x00000001,
 	kIOMemoryMapReadOnly              = 0x00000002,
+	kIOMemoryMapGuardedMask           = 0x0000001C,
+	kIOMemoryMapGuardedDefault        = 0x00000000,
+	kIOMemoryMapGuardedNone           = 0x00000004,
+	kIOMemoryMapGuardedSmall          = 0x00000008,
+	kIOMemoryMapGuardedLarge          = 0x0000000C,
 	kIOMemoryMapCacheModeDefault      = 0x00000000,
 	kIOMemoryMapCacheModeInhibit      = 0x00000100,
 	kIOMemoryMapCacheModeCopyback     = 0x00000200,
@@ -70,7 +76,7 @@ struct _IOMDPrivateState {
 	uint64_t options;
 };
 
-/* source class IOMemoryDescriptor IOMemoryDescriptor.iig:73-185 */
+/* source class IOMemoryDescriptor IOMemoryDescriptor.iig:79-191 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -190,7 +196,7 @@ private:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOMemoryDescriptor IOMemoryDescriptor.iig:73-185 */
+/* generated class IOMemoryDescriptor IOMemoryDescriptor.iig:79-191 */
 
 #define IOMemoryDescriptor__CopyState_ID            0xa2c0861d4118ce5eULL
 #define IOMemoryDescriptor_CreateMapping_ID            0xc5e69b0414ff6ee5ULL
@@ -367,11 +373,18 @@ class IOMemoryDescriptor : public OSObject, public IOMemoryDescriptorInterface
     friend class IOMemoryDescriptorMetaClass;
 
 public:
+#ifdef IOMemoryDescriptor_DECLARE_IVARS
+IOMemoryDescriptor_DECLARE_IVARS
+#else /* IOMemoryDescriptor_DECLARE_IVARS */
     union
     {
         IOMemoryDescriptor_IVars * ivars;
         IOMemoryDescriptor_LocalIVars * lvars;
     };
+#endif /* IOMemoryDescriptor_DECLARE_IVARS */
+
+    static OSMetaClass *
+    sGetMetaClass() { return gIOMemoryDescriptorMetaClass; };
 
     using super = OSObject;
 
@@ -384,7 +397,7 @@ public:
 #endif /* !__DOCUMENTATION__ */
 
 
-/* IOMemoryDescriptor.iig:194- */
+/* IOMemoryDescriptor.iig:200- */
 
 
 

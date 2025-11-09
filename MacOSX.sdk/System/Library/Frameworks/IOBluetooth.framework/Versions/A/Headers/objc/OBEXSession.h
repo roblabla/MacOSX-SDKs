@@ -526,7 +526,7 @@ API_UNAVAILABLE(ios, watchos, tvos)
 
 -(void)setEventSelector:(SEL)inEventSelector
 			target:(id)inEventSelectorTarget
-			refCon:(id)inUserRefCon;
+			refCon:(void *)inUserRefCon;
 	
 #if 0
 #pragma mark -

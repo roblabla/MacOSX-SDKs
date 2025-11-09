@@ -2,14 +2,17 @@
  *  SFNTLayoutTypes.h
  *  CoreText
  *
- *  Copyright 1994-2016 Apple Inc. All rights reserved.
+ *  Copyright 1994-2021 Apple Inc. All rights reserved.
  *
  */
 
 #ifndef __SFNTLAYOUTTYPES__
 #define __SFNTLAYOUTTYPES__
 
-#if !0
+#include <TargetConditionals.h>
+#include <Availability.h>
+
+#if !TARGET_OS_WIN32
 #include <MacTypes.h>
 #elif !defined(__MACTYPES__)
 typedef SInt32 Fixed;
@@ -1743,7 +1746,7 @@ struct ALMXHeader {
 
   SFNTLookupTable     lookup;                 /* lookup table */
 };
-typedef struct ALMXHeader               ALMXHeader;
+typedef struct ALMXHeader               ALMXHeader API_DEPRECATED("Superseded by OpenType", macos(10.0, 12.0), ios(1.0, 15.0), watchos(1.0, 8.0), tvos(1.0, 15.0));
 struct ALMXGlyphEntry {                       /* lookup data for ALMX table */
   SInt16              GlyphIndexOffset;
   SInt16              HorizontalAdvance;
@@ -1751,7 +1754,7 @@ struct ALMXGlyphEntry {                       /* lookup data for ALMX table */
   SInt16              VerticalAdvance;
   SInt16              YOffsetToVOrigin;
 };
-typedef struct ALMXGlyphEntry           ALMXGlyphEntry;
+typedef struct ALMXGlyphEntry           ALMXGlyphEntry API_DEPRECATED("Superseded by OpenType", macos(10.0, 12.0), ios(1.0, 15.0), watchos(1.0, 8.0), tvos(1.0, 15.0));
 /* --------------------------------------------------------------------------- */
 /* FORMATS FOR TABLE: 'ROTA' */
 /* TYPES */
@@ -1764,13 +1767,13 @@ struct ROTAHeader {
 
   SFNTLookupTable     lookup;                 /* lookup table */
 };
-typedef struct ROTAHeader               ROTAHeader;
+typedef struct ROTAHeader               ROTAHeader API_DEPRECATED("Superseded by OpenType", macos(10.0, 12.0), ios(1.0, 15.0), watchos(1.0, 8.0), tvos(1.0, 15.0));
 struct ROTAGlyphEntry {                       /* lookup data for ROTA table */
   SInt16              GlyphIndexOffset;
   SInt16              HBaselineOffset;        /* y offset to the rotated horizontal baseline */
   SInt16              VBaselineOffset;        /* x offset to the rotated vertical baseline */
 };
-typedef struct ROTAGlyphEntry           ROTAGlyphEntry;
+typedef struct ROTAGlyphEntry           ROTAGlyphEntry API_DEPRECATED("Superseded by OpenType", macos(10.0, 12.0), ios(1.0, 15.0), watchos(1.0, 8.0), tvos(1.0, 15.0));
 /* --------------------------------------------------------------------------- */
 /* FORMATS FOR TABLE 'ankr' */
 /* CONSTANTS */

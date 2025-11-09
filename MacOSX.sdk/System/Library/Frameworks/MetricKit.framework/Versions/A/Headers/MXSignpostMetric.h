@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @class         MXSignpostIntervalData
  @abstract      A class that encapsulates metrics associated with app specific signpost intervals.
- @discussion    These metrics will be collected and aggregated if the associated signposts were emit using the appropriate API.
+ @discussion    These metrics will be collected and aggregated if the associated signposts were emit using MXSignpost or MXSignpostAnimation APIs
  @discussion    To limit on-device overhead, the system will automatically limit the number of signposts (emitted using the MetricKit log handle) processed.
  @discussion    Avoid losing telemetry by limiting usage of signposts (emitted using the MetricKit log handle) to critical sections of code.
  */
@@ -51,6 +51,13 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
  */
 @property (readonly, strong, nullable)  NSMeasurement<NSUnitInformationStorage *> *cumulativeLogicalWrites;
+
+/*!
+ @property      cumulativeHitchTimeRatio
+ @abstract      Cumulative hitch time ratio aggregated over the MXSignpostAnimation intervals.
+ @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+ */
+@property (readonly, strong, nullable) NSMeasurement<NSUnit *> *cumulativeHitchTimeRatio API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 @end
 

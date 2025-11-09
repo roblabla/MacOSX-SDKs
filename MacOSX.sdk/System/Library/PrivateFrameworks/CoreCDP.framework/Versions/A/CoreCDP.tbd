@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5A319FCB-E353-3466-AE62-A1D9D1A3539C
+    value:           6F422B0B-9C48-3BFF-B814-824002F6C60A
   - target:          x86_64-maccatalyst
-    value:           5A319FCB-E353-3466-AE62-A1D9D1A3539C
+    value:           6F422B0B-9C48-3BFF-B814-824002F6C60A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4A7BFAAE-30C6-3EF3-B050-1BB380F47EC4
+    value:           C17A181F-88AF-3955-A61D-A5AFB3DEFB16
   - target:          arm64e-maccatalyst
-    value:           4A7BFAAE-30C6-3EF3-B050-1BB380F47EC4
+    value:           C17A181F-88AF-3955-A61D-A5AFB3DEFB16
 install-name:    '/System/Library/PrivateFrameworks/CoreCDP.framework/Versions/A/CoreCDP'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -32,12 +32,13 @@ exports:
                        __CDPStateError, __CDPStateErrorWithUnderlying, __CDPSuffixForDeviceClass, 
                        __CDPSuffixForSecretType, __CDPSuffixForUnqualifiedDeviceClass ]
     objc-classes:    [ CDPAccount, CDPAuthProviderProxy, CDPCircleProxyImpl, CDPContext, 
-                       CDPController, CDPDaemonConnection, CDPDataPrivacyController, 
-                       CDPDevice, CDPFollowUpContext, CDPFollowUpController, CDPKeychainSync, 
-                       CDPLocalDevice, CDPLocalDeviceSecretHandler, CDPLocalDeviceSecretProxyImpl, 
-                       CDPLocalSecret, CDPLocalizedStringBuilder, CDPManateeStateController, 
-                       CDPPCSUtilities, CDPProtectedCloudStorageProxyImpl, CDPRecoveryController, 
-                       CDPRecoveryKeyValidatorProxyImpl, CDPRemoteDeviceSecretValidator, 
+                       CDPController, CDPCustodianRecoveryInfo, CDPCustodianRecoveryKeyController, 
+                       CDPDaemonConnection, CDPDataPrivacyController, CDPDevice, 
+                       CDPFollowUpContext, CDPFollowUpController, CDPInheritanceTrustController, 
+                       CDPKeychainSync, CDPLocalDevice, CDPLocalDeviceSecretHandler, 
+                       CDPLocalDeviceSecretProxyImpl, CDPLocalSecret, CDPLocalizedStringBuilder, 
+                       CDPManateeStateController, CDPPCSUtilities, CDPProtectedCloudStorageProxyImpl, 
+                       CDPRecoveryController, CDPRecoveryKeyValidatorProxyImpl, CDPRemoteDeviceSecretValidator, 
                        CDPStateController, CDPStateUIProviderProxy, CDPTermsInfoBackupController, 
                        CDPToolFakeUIProvider, CDPUpdateDataPrivacyContext, CDPUtilities ]
     objc-ivars:      [ CDPDevice._deviceColor, CDPDevice._enclosureColor, CDPDevice._hasNumericSecret, 

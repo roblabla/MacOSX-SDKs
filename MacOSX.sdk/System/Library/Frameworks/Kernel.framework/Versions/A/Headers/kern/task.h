@@ -91,7 +91,9 @@
 #ifndef _KERN_TASK_H_
 #define _KERN_TASK_H_
 
+#include <kern/btlog.h>
 #include <kern/kern_types.h>
+#include <kern/task_ref.h>
 #include <mach/mach_types.h>
 #include <sys/cdefs.h>
 
@@ -101,7 +103,6 @@ __BEGIN_DECLS
 
 extern task_t   current_task(void);
 
-extern void             task_reference(task_t   task);
 extern bool task_is_driver(task_t task);
 
 #define TF_NONE                 0
@@ -127,25 +128,21 @@ __BEGIN_DECLS
 
 
 
-
 extern task_t   kernel_task;
 
-extern void             task_deallocate(
-	task_t          task);
-
-extern void             task_name_deallocate(
+extern void             task_name_deallocate_mig(
 	task_name_t             task_name);
 
-extern void             task_policy_set_deallocate(
+extern void             task_policy_set_deallocate_mig(
 	task_policy_set_t       task_policy_set);
 
-extern void             task_policy_get_deallocate(
+extern void             task_policy_get_deallocate_mig(
 	task_policy_get_t       task_policy_get);
 
-extern void             task_inspect_deallocate(
+extern void             task_inspect_deallocate_mig(
 	task_inspect_t          task_inspect);
 
-extern void             task_read_deallocate(
+extern void             task_read_deallocate_mig(
 	task_read_t          task_read);
 
 extern void             task_suspension_token_deallocate(
@@ -159,6 +156,14 @@ extern void task_ledgers_footprint(ledger_t ledger,
 extern void task_set_memory_ownership_transfer(
 	task_t task,
 	boolean_t value);
+
+#if DEVELOPMENT || DEBUG
+extern void task_set_no_footprint_for_debug(
+	task_t task,
+	boolean_t value);
+extern int task_get_no_footprint_for_debug(
+	task_t task);
+#endif /* DEVELOPMENT || DEBUG */
 
 #if CONFIG_X86_64_COMPAT
 extern boolean_t task_is_translated(task_t task);

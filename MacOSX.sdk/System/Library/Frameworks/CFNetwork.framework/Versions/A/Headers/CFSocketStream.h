@@ -379,7 +379,7 @@ CFStreamCreatePairWithSocketToCFHost(
   CFHostRef           host,
   SInt32              port,
   CFReadStreamRef __nullable *   __nullable readStream,
-  CFWriteStreamRef __nullable *  __nullable writeStream)            CF_AVAILABLE(10_3, 2_0);
+  CFWriteStreamRef __nullable *  __nullable writeStream)            API_DEPRECATED("Use Network framework instead", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 /*
@@ -419,7 +419,7 @@ CFStreamCreatePairWithSocketToNetService(
   CFAllocatorRef      __nullable alloc,
   CFNetServiceRef     service,
   CFReadStreamRef   __nullable *  __nullable readStream,
-  CFWriteStreamRef __nullable *  __nullable writeStream)           CF_AVAILABLE(10_3, 2_0);
+  CFWriteStreamRef __nullable *  __nullable writeStream)           API_DEPRECATED("Use Network framework instead", macos(10.3, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 
 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8D808D42-51E9-3DB3-8FB8-F8AC442C825E
+    value:           F0FC9E64-A658-35DE-B081-296420BBD439
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           80C58ECB-F721-3528-81C9-6AB31CBD3C6F
+    value:           A0D77F66-0613-33E4-8EC7-C4505699E5A6
 install-name:    '/System/Library/PrivateFrameworks/SetupAssistantFramework.framework/Versions/A/SetupAssistantFramework'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

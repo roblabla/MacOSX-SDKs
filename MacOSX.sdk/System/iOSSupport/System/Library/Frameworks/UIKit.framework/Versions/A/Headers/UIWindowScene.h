@@ -13,8 +13,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class UIScreen, UIWindow, UIWindowSceneDelegate, UISceneDestructionRequestOptions, CKShareMetadata, UISceneSizeRestrictions;
+@protocol UIActivityItemsConfigurationProviding;
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIWindowScene : UIScene
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UIWindowScene : UIScene
 
 #pragma mark Geometry
 @property (nonatomic, readonly) UIScreen *screen;
@@ -29,10 +31,20 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIWindowScene : UIScene
 // The array of all windows associated with this UIWindowScene
 @property (nonatomic, readonly) NSArray<UIWindow *> *windows;
 
+// The key window for this UIWindowScene
+@property (nonatomic, readonly, strong, nullable) UIWindow *keyWindow API_AVAILABLE(ios(15.0));
+
+/// An optional object used as a source of scene-level activity items configuration
+///
+/// If this property returns @c nil, the @c activityItemsConfiguration property of the most-presented view controller
+/// of the scene's key window will be used for scene-level sharing and activities.
+@property (nonatomic, nullable, weak) id<UIActivityItemsConfigurationProviding> activityItemsConfigurationSource API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
+
 @end
 
 #pragma mark - UIWindowSceneDelegate
-API_AVAILABLE(ios(13.0)) @protocol UIWindowSceneDelegate <UISceneDelegate>
+API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@protocol UIWindowSceneDelegate <UISceneDelegate>
 @optional
 @property (nullable, nonatomic, strong) UIWindow *window;
 
@@ -64,11 +76,13 @@ typedef NS_ENUM(NSInteger, UIWindowSceneDismissalAnimation) {
     UIWindowSceneDismissalAnimationDecline = 3
 } API_AVAILABLE(ios(13.0));
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIWindowSceneDestructionRequestOptions : UISceneDestructionRequestOptions
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UIWindowSceneDestructionRequestOptions : UISceneDestructionRequestOptions
 @property (nonatomic, readwrite) UIWindowSceneDismissalAnimation windowDismissalAnimation;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UISceneSizeRestrictions : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UISceneSizeRestrictions : NSObject
 
 // Clients should never make one of these directly. See -[UIWindowScene sizeRestrictions].
 - (instancetype)init NS_UNAVAILABLE;

@@ -54,7 +54,10 @@
 
  	@constant	CHHapticErrorCodeInvalidAudioSession
 		The AVAudioSession used to initialize the engine was invalid.
- 
+
+	@constant	CHHapticErrorCodeInvalidEngineParameter
+		A configuration parameter used to initialize the engine was invalid.
+
  	@constant	CHHapticErrorCodeInvalidParameterType
  		A pattern dictionary or parameter array contained an unknown or invalid parameter type.
 
@@ -82,6 +85,12 @@
     @constant   CHHapticErrorCodeInvalidTime
         An invalid (e.g., negative) time was passed to a method requiring an NSTimeInterval.
  
+    @constant   CHHapticErrorCodeFileNotFound
+        An audio or haptic asset could not be found.
+ 
+	@constant	CHHapticErrorCodeInsufficientPower
+		The operation failed due to power restrictions.
+
  	@constant	CHHapticErrorCodeUnknownError
  		An uncategorized error occurred.
 
@@ -102,6 +111,7 @@ typedef NS_ERROR_ENUM(CoreHapticsErrorDomain, CHHapticErrorCode)
 	CHHapticErrorCodeInvalidPatternData			= -4813,
 	CHHapticErrorCodeInvalidPatternDictionary	= -4814,
 	CHHapticErrorCodeInvalidAudioSession		= -4815,
+	CHHapticErrorCodeInvalidEngineParameter		= -4816,
 
     CHHapticErrorCodeInvalidParameterType       = -4820,
     CHHapticErrorCodeInvalidEventType           = -4821,
@@ -115,6 +125,9 @@ typedef NS_ERROR_ENUM(CoreHapticsErrorDomain, CHHapticErrorCode)
     
     CHHapticErrorCodeInvalidTime                = -4840,
     
+    CHHapticErrorCodeFileNotFound               = -4851,
+    
+	CHHapticErrorCodeInsufficientPower			= -4897,
 	CHHapticErrorCodeUnknownError				= -4898,
 	CHHapticErrorCodeMemoryError				= -4899
 } API_AVAILABLE(ios(13.0), macos(10.15),tvos(14.0));

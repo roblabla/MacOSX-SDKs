@@ -1,6 +1,6 @@
 /*
 	File:		IOBluetoothTypes.h
-	Copyright:	© 2010 by Apple Inc. All rights reserved.
+	Copyright:	ï¿½ 2010 by Apple Inc. All rights reserved.
 */
 
 #pragma once

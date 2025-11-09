@@ -120,9 +120,25 @@ struct selinfo;
 __BEGIN_DECLS
 
 extern int selwait;
+
+/*
+ * Now these are the laws of VNOP_SELECT, as old and as true as the sky,
+ * And the device that shall keep it may prosper, but the device that shall
+ * break it must receive ENODEV:
+ *
+ * 1. Take a lock to protect against other selects on the same vnode.
+ * 2. Return 1 if data is ready to be read.
+ * 3. Return 0 and call `selrecord` on a handy `selinfo` structure if there
+ *    is no data.
+ * 4. Call `selwakeup` when the vnode has an active `selrecord` and data
+ *    can be read or written (depending on the seltype).
+ * 5. If there's a `selrecord` and no corresponding `selwakeup`, but the
+ *    vnode is going away, call `selthreadclear`.
+ */
 void    selrecord(proc_t selector, struct selinfo *, void *);
 void    selwakeup(struct selinfo *);
 void    selthreadclear(struct selinfo *);
+
 
 __END_DECLS
 

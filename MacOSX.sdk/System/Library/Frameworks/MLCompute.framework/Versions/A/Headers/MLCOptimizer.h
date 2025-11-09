@@ -57,6 +57,25 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
  */
 @property (readonly, nonatomic) MLCRegularizationType regularizationType;
 
+/*! @property   gradientClippingType
+    @abstract   The type of clipping applied to gradient
+ */
+@property (readonly, nonatomic) MLCGradientClippingType gradientClippingType
+    MLCOMPUTE_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+/*! @property   maximumClippingNorm
+    @abstract   The maximum clipping value
+ */
+@property (readonly, nonatomic) float maximumClippingNorm
+    MLCOMPUTE_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+/*! @property   customGlobalNorm
+    @abstract   Used only with MLCGradientClippingTypeByGlobalNorm. If non zero, this norm will be used in place of global norm.
+ */
+@property (readonly, nonatomic) float customGlobalNorm
+    MLCOMPUTE_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
+
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 

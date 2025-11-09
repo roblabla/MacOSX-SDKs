@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0E626B84-5E95-3779-92B2-6355270821B0
+    value:           5050A11D-7A75-3B48-833C-F1A64330DB4D
   - target:          x86_64-maccatalyst
-    value:           0E626B84-5E95-3779-92B2-6355270821B0
+    value:           5050A11D-7A75-3B48-833C-F1A64330DB4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2D22EF24-1755-332C-85D1-8C2745521D91
+    value:           51B6EDD0-1FD7-3036-9A48-5C60EA00E307
   - target:          arm64e-maccatalyst
-    value:           2D22EF24-1755-332C-85D1-8C2745521D91
+    value:           51B6EDD0-1FD7-3036-9A48-5C60EA00E307
 install-name:    '/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -26,15 +26,16 @@ exports:
                        __ZTSNSt3__110__function6__baseIFvjPKcPvEEE, __ZTSNSt3__117bad_function_callE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _AnalyticsIsEventUsed, _AnalyticsSendEvent, _AnalyticsSendEventLazy, 
-                       _AnalyticsSendEventLazyHighPriority, _AnalyticsSetCallbackForQueriedEvent, 
-                       _AnalyticsSetCallbackForQueriedEventWithQueue, __Z19analytics_tool_dumpNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+    symbols:         [ _AnalyticsIsEventUsed, _AnalyticsRolloverEvents, _AnalyticsSendEvent, 
+                       _AnalyticsSendEventLazy, _AnalyticsSendEventLazyHighPriority, 
+                       _AnalyticsSetCallbackForQueriedEvent, _AnalyticsSetCallbackForQueriedEventWithQueue, 
+                       __Z19analytics_tool_dumpNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __Z19analytics_tool_saveNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __Z21analytics_tool_commitv, __Z23analytics_tool_rolloverv, 
                        __Z25analytics_tool_has_configv, __Z26analytics_tool_config_dumpv, 
                        __Z26analytics_tool_config_infov, __Z26analytics_tool_config_listv, 
-                       __Z28analytics_tool_config_reloadv, __Z29analytics_tool_get_cache_listv, 
-                       __Z29analytics_tool_transform_infoNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __Z28analytics_tool_config_reloadv, __Z29analytics_tool_app_usage_syncv, 
+                       __Z29analytics_tool_get_cache_listv, __Z29analytics_tool_transform_infoNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __Z30analytics_tool_transform_evictNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __Z32analytics_tool_transform_persistNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __Z33analytics_tool_config_set_taskingNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
@@ -61,7 +62,7 @@ exports:
                        __ZNK13CoreAnalytics6Client11getXPCQueueEv, __ZNK13CoreAnalytics6Client13sendAwdMetricEjPKvm, 
                        __ZNK13CoreAnalytics6Client14sendAwdTriggerEPKcjjjPKvm, __ZNK13CoreAnalytics6Client14sendXpcMessageEN10applesauce3xpc4dictE18XPCMessagePriority, 
                        __ZNK13CoreAnalytics6Client15sendEventAlwaysEPKcRKN10applesauce3xpc6objectE18XPCMessagePriority, 
-                       __ZNK13CoreAnalytics6Client16sendEventWithTagEPKcRKN10applesauce3xpc6objectES5_, 
+                       __ZNK13CoreAnalytics6Client16isEventNameValidEPKc, __ZNK13CoreAnalytics6Client16sendEventWithTagEPKcRKN10applesauce3xpc6objectES5_, 
                        __ZNK13CoreAnalytics6Client18isEventWhitelistedENSt3__117basic_string_viewIcNS1_11char_traitsIcEEEE, 
                        __ZNK13CoreAnalytics6Client19sendXpcMessage_syncEN10applesauce3xpc4dictE18XPCMessagePriority, 
                        __ZNK13CoreAnalytics6Client20sendAwdMetricWithTagEPKcjN10applesauce3xpc6objectEPKvm, 
@@ -74,11 +75,11 @@ exports:
                        __ZTSN13CoreAnalytics21ConfigurationObserverE, __ZTVN13CoreAnalytics13EventObserverE, 
                        __ZTVN13CoreAnalytics21ConfigurationObserverE, _ad_addScalarForKey, 
                        _analytics_cancel_queried_awd_metric, _analytics_is_awd_metric_enabled, 
-                       _analytics_is_event_used, _analytics_mark_awd_queriable, _analytics_send_awd_metric, 
-                       _analytics_send_awd_trigger, _analytics_send_event, _analytics_send_event_lazy, 
-                       _analytics_send_event_lazy_high_priority, _analytics_send_queried_awd_metric, 
-                       _analytics_send_queried_awd_trigger, _analytics_set_awd_query_callback, 
-                       _analytics_set_callback_for_queried_event, _analytics_set_callback_for_queried_event_with_queue, 
-                       _report_locale_prefs_to_analyticsd ]
+                       _analytics_is_event_used, _analytics_mark_awd_queriable, _analytics_rollover_events, 
+                       _analytics_send_awd_metric, _analytics_send_awd_trigger, _analytics_send_event, 
+                       _analytics_send_event_lazy, _analytics_send_event_lazy_high_priority, 
+                       _analytics_send_queried_awd_metric, _analytics_send_queried_awd_trigger, 
+                       _analytics_set_awd_query_callback, _analytics_set_callback_for_queried_event, 
+                       _analytics_set_callback_for_queried_event_with_queue, _report_locale_prefs_to_analyticsd ]
     objc-classes:    [ AnalyticsConfigurationObserver, AnalyticsEventObserver ]
 ...

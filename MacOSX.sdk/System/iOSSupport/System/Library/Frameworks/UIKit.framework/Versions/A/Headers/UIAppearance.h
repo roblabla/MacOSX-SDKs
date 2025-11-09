@@ -21,8 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 #define UI_APPEARANCE_SELECTOR __attribute__((annotate("ui_appearance_selector")))
 
+NS_SWIFT_UI_ACTOR
 @protocol UIAppearanceContainer <NSObject> @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UIAppearance <NSObject>
 /* To customize the appearance of all instances of a class, send the relevant appearance modification messages to the appearance proxy for the class. For example, to modify the bar tint color for all UINavigationBar instances:
     [[UINavigationBar appearance] setBarTintColor:myColor];

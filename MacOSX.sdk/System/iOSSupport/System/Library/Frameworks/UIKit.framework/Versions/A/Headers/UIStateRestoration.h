@@ -36,10 +36,12 @@ UIKIT_EXTERN NSString *const UIApplicationStateRestorationSystemVersionKey API_A
 #pragma mark -- State Restoration protocols for UIView and UIViewController --
 
 // A class must implement this protocol if it is specified as the restoration class of a UIViewController.
+NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerRestoration
 + (nullable UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray<NSString *> *)identifierComponents coder:(NSCoder *)coder;
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UIDataSourceModelAssociation
 - (nullable NSString *) modelIdentifierForElementAtIndexPath:(NSIndexPath *)idx inView:(UIView *)view;
 - (nullable NSIndexPath *) indexPathForElementWithModelIdentifier:(NSString *)identifier inView:(UIView *)view;
@@ -52,6 +54,7 @@ UIKIT_EXTERN NSString *const UIApplicationStateRestorationSystemVersionKey API_A
 //
 // To participate in state restoration, the function registerObjectForStateRestoration must
 // be called for the object.
+NS_SWIFT_UI_ACTOR
 @protocol UIStateRestoring <NSObject>
 @optional
 // The parent property is used to scope the restoration identifier path for an object, to
@@ -78,6 +81,7 @@ UIKIT_EXTERN NSString *const UIApplicationStateRestorationSystemVersionKey API_A
 
 // Protocol for classes that act as a factory to find a restorable object during state restoration
 // A class must implement this protocol if it is specified as the restoration class of a UIRestorableObject.
+NS_SWIFT_UI_ACTOR
 @protocol UIObjectRestoration
 + (nullable id<UIStateRestoring>) objectWithRestorationIdentifierPath:(NSArray<NSString *> *)identifierComponents coder:(NSCoder *)coder;
 @end

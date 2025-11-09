@@ -48,6 +48,7 @@ HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierSixMinuteWalkTe
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierStairAscentSpeed API_AVAILABLE(ios(14.0), watchos(7.0));                   // m/s,                         Discrete
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierStairDescentSpeed API_AVAILABLE(ios(14.0), watchos(7.0));                  // m/s),                        Discrete
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierAppleMoveTime API_AVAILABLE(ios(14.5), watchos(7.4));                      // Time,                        Cumulative
+HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierAppleWalkingSteadiness API_AVAILABLE(ios(15.0), watchos(8.0));             // Scalar(Percent, 0.0 - 1.0),  Discrete
 
 // Vitals
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierHeartRate API_AVAILABLE(ios(8.0), watchos(2.0));                           // Scalar(Count)/Time,          Discrete
@@ -77,6 +78,7 @@ HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierForcedExpirator
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierPeakExpiratoryFlowRate API_AVAILABLE(ios(8.0), watchos(2.0));              // Volume/Time,                 Discrete
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierEnvironmentalAudioExposure API_AVAILABLE(ios(13.0), watchos(6.0));         // Pressure,                    DiscreteEquivalentContinuousLevel
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierHeadphoneAudioExposure API_AVAILABLE(ios(13.0), watchos(6.0));             // Pressure,                    DiscreteEquivalentContinuousLevel
+HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierNumberOfAlcoholicBeverages API_AVAILABLE(ios(15.0), watchos(8.0));         // Scalar(Count),               Cumulative
 
 // Nutrition
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierDietaryFatTotal API_AVAILABLE(ios(8.0), watchos(2.0));                     // Mass,   Cumulative
@@ -132,6 +134,8 @@ HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierSleepAnalysis A
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierAppleStandHour API_AVAILABLE(ios(9.0), watchos(2.0));                      // HKCategoryValueAppleStandHour
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierCervicalMucusQuality API_AVAILABLE(ios(9.0), watchos(2.0));                // HKCategoryValueCervicalMucusQuality
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierOvulationTestResult API_AVAILABLE(ios(9.0), watchos(2.0));                 // HKCategoryValueOvulationTestResult
+HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierPregnancyTestResult API_AVAILABLE(ios(15.0), watchos(8.0));                // HKCategoryValuePregnancyTestResult
+HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierProgesteroneTestResult API_AVAILABLE(ios(15.0), watchos(8.0));             // HKCategoryValueProgesteroneTestResult
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierMenstrualFlow API_AVAILABLE(ios(9.0), watchos(2.0));                       // HKCategoryValueMenstrualFlow
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierIntermenstrualBleeding API_AVAILABLE(ios(9.0), watchos(2.0));              // (Spotting) HKCategoryValue
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierSexualActivity API_AVAILABLE(ios(9.0), watchos(2.0));                      // HKCategoryValue
@@ -149,6 +153,7 @@ HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierEnvironmentalAu
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierHeadphoneAudioExposureEvent API_AVAILABLE(ios(14.2), watchos(7.1));        // HKCategoryValueHeadphoneAudioExposureEvent
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierHandwashingEvent API_AVAILABLE(ios(14.0), watchos(7.0));                   // HKCategoryValue
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierLowCardioFitnessEvent API_AVAILABLE(ios(14.3), watchos(7.2));
+HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierAppleWalkingSteadinessEvent API_AVAILABLE(ios(15.0), watchos(8.0));        // HKCategoryValueAppleWalkingSteadinessEvent
 
 // Symptoms
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierAbdominalCramps API_AVAILABLE(ios(13.6), watchos(7.0));                    // HKCategoryValueSeverity

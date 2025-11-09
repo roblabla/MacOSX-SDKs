@@ -3,7 +3,7 @@
 
     Contains:   AltiVec DSP Interfaces
 
-    Version:    vecLib-760.100
+    Version:    vecLib-793.0
 
     Copyright:  Copyright (c) 2000-2021 by Apple Inc. All rights reserved.
 
@@ -238,8 +238,8 @@ extern "C" {
     vDSP_Version0 is a major version number.
     vDSP_Version1 is a minor version number.
 */
-#define vDSP_Version0   760
-#define vDSP_Version1   100
+#define vDSP_Version0   793
+#define vDSP_Version1   0
 
 
 /*  Define types:
@@ -375,6 +375,33 @@ extern __nullable vDSP_biquad_SetupD vDSP_biquad_CreateSetupD(
     const double *__Coefficients,
     vDSP_Length   __M)
         API_AVAILABLE(macos(10.9), ios(6.0));
+
+/*
+    vDSP_biquad_SetCoefficientsDouble will
+    update the filter coefficients within a valid vDSP_biquad_Setup object.
+
+    Coefficients are specified in double precision.
+ */
+extern void vDSP_biquad_SetCoefficientsDouble(
+    vDSP_biquad_Setup                  __setup,
+    const double                       *__coeffs,
+    vDSP_Length                         __start_sec,
+    vDSP_Length                         __nsec)
+        API_AVAILABLE(macos(12.0), ios(15.0));
+
+/*
+    vDSP_biquad_SetCoefficientsSingle will
+    update the filter coefficients within a valid vDSP_biquad_Setup object.
+
+    Coefficients are specified in single precision.
+ */
+extern void vDSP_biquad_SetCoefficientsSingle(
+    vDSP_biquad_Setup                  __setup,
+    const float                        *__coeffs,
+    vDSP_Length                         __start_sec,
+    vDSP_Length                         __nsec)
+        API_AVAILABLE(macos(12.0), ios(15.0));
+
 
 extern void vDSP_biquad_DestroySetup (
     __nullable vDSP_biquad_Setup __setup)
@@ -3901,7 +3928,7 @@ extern void vDSP_hann_windowD(
                 Length = N;
 
             If Flag & vDSP_HANN_NORM:
-                W = .8165;
+                W = .816496580927726;
             Else
                 W = .5;
 
@@ -5267,14 +5294,14 @@ extern void vDSP_vgathrD(
 
 // Vector gather, absolute pointers.
 extern void vDSP_vgathra(
-    const float * __nonnull * __nonnull __A,
+    const float * const __nonnull * __nonnull __A,
     vDSP_Stride                         __IA,
     float                              *__C,
     vDSP_Stride                         __IC,
     vDSP_Length                         __N)
         API_AVAILABLE(macos(10.4), ios(4.0));
 extern void vDSP_vgathraD(
-    const double * __nonnull * __nonnull __A,
+    const double * const __nonnull * __nonnull __A,
     vDSP_Stride                          __IA,
     double                              *__C,
     vDSP_Stride                          __IC,
@@ -6775,10 +6802,16 @@ void vDSP_FFT32_zopv(
 typedef struct vDSP_DFT_SetupStruct  *vDSP_DFT_Setup;
 typedef struct vDSP_DFT_SetupStructD *vDSP_DFT_SetupD;
 
-
 // DFT direction may be specified as vDSP_DFT_FORWARD or vDSP_DFT_INVERSE.
 typedef vDSP_ENUM(int, vDSP_DFT_Direction)
     { vDSP_DFT_FORWARD = +1, vDSP_DFT_INVERSE = -1 };
+
+typedef struct vDSP_DFT_Interleaved_SetupStruct  *vDSP_DFT_Interleaved_Setup;
+typedef struct vDSP_DFT_Interleaved_SetupStructD *vDSP_DFT_Interleaved_SetupD;
+
+// Interleaved DFT used as vDSP_DFT_Interleaved_ComplextoComplex or vDSP_DFT_Interleaved_Real2Complex.
+typedef vDSP_ENUM(bool, vDSP_DFT_RealtoComplex)
+    { vDSP_DFT_Interleaved_ComplextoComplex = false, vDSP_DFT_Interleaved_RealtoComplex = true };
 
 
 /*  vDSP_DFT_CreateSetup is a DFT setup routine.  It creates a setup object
@@ -7358,6 +7391,256 @@ void vDSP_DCT_Execute(
     const float                       *__Input,
     float                             *__Output)
         API_AVAILABLE(macos(10.9), ios(6.0));
+
+
+/*  vDSP_DFT_Interleaved_CreateSetup is a DFT setup routine.  It creates a setup object
+    for use with the vDSP_DFT_Interleaved_Execute execution routine, to perform
+    a complex-to-complex DFT for interleaved data format.
+
+    Parameters:
+
+        vDSP_DFT_Interleaved_Setup Previous
+
+            Previous is either zero or a previous DFT or DCT setup.  If a
+            previous setup is passed, the new setup will share data with the
+            previous setup, if feasible (and with any other setups the previous
+            setup shares with).  If zero is passed, the routine will allocate
+            and initialize new memory.
+
+        vDSP_Length Length
+
+            Length is the number of complex elements to be transformed.
+
+        vDSP_DFT_Direction Direction
+
+            Transform direction, vDSP_DFT_FORWARD or vDSP_DFT_INVERSE.
+
+        vDSP_DFT_RealtoComplex RealtoComplex specifies transform used as vDSP_DFT_Interleaved_ComplextoComplex or vDSP_DFT_Interleaved_RealtoComplex.
+
+            bool flag indicates whether the Setup is used for ComplextoComplex or RealtoComplex transform
+
+    Note:
+
+        For real-to-complex DFT, Length should be half of the length of the real signal.
+
+    Return value:
+
+        Zero is returned if memory is unavailable or if there is no
+        implementation for the requested case.  Currently, the implemented
+        cases are:
+
+            Length = f * 2**n, where f is 2, 3, 5, 3*3, 3*5, or 5*5 and n >= 2.
+
+        Additionally, it is recommended that the array addresses (passed to
+        vDSP_DFT_Interleaved_Execute) be 16-byte aligned.  For other cases, performance may
+        be slightly or greatly worse, depending on transform length and
+        processor model.
+
+    Function:
+
+        When vDSP_DFT_Interleaved_Execute is called with a setup returned from this
+        routine, it calculates:
+
+            For 0 <= k < N,
+
+                H[k] = sum(1**(S * j*k/N) * h[j], 0 <= j < N),
+
+        where:
+
+            N is the length given in the setup;
+
+            h is the array of complex numbers specified by a complex array Iri when
+            vDSP_DFT_Interleaved_Execute is called:
+
+                for 0 <= j < N,
+                    h[j] = Iri[2*j] + i * Iri[2*j+1];
+
+            H is the array of complex numbers specified by a complex array Ori when
+            vDSP_DFT_Interleaved_Execute returns:
+
+                for 0 <= k < N,
+                    H[k] = Ori[2*k] + i * Ori[2*k+1];
+
+            S is -1 if Direction is vDSP_DFT_FORWARD and +1 if Direction is
+            vDSP_DFT_INVERSE; and
+
+            1**x is e**(2*pi*i*x).
+
+    Performance:
+
+        Performance is good when the array addresses (passed to
+        vDSP_DFT_Interleaved_Execute) are 16-byte aligned.  Other alignments are supported,
+        but performance may be significantly worse in some cases, depending on
+        the processor model or the transform length (because different
+        algorithms are used for different forms of transform length).
+
+    In-Place Operation:
+
+        Ori may equal Iri (in the call to vDSP_DFT_Interleaved_Execute).
+        Otherwise, no overlap of Ori and Iri is supported.
+
+    The returned setup object may be used only with vDSP_DFT_Interleaved_Execute for the
+    length given during setup.  Unlike previous vDSP FFT routines, the setup
+    may not be used to execute transforms with shorter lengths.
+
+    Do not call this routine while any DFT or DCT routine sharing setup data
+    might be executing.
+*/
+
+/*! @abstract DFT setup routine for interleaved complex data, single-precision
+ *
+ *  @discussion
+ *  This routine creates the required butterfly weight factors needed in the computation
+ *  of the interleaved complex number DFT of a specified length. It returns with the pointer 
+ *  to the DFT setup, if the length is supported, or NULL otherwise.
+ *
+ *  @param Previous (input) Previous is either zero or a previous DFT_Interleaved setup
+ *
+ *  @param Length (input) the number of complex elements to be transformed.
+ *
+ *  @param Direction (input) Transform direction, vDSP_DFT_FORWARD or vDSP_DFT_INVERSE.
+ *
+ *  @param RealtoComplex (input) flag for real to complex transform, true or false.
+ *
+ *  @return a pointer to the requested DFT setup on success, or 0 if the Length is not supported,
+ *          or having other issues, such as memory allocation.
+ *
+ */
+__nullable vDSP_DFT_Interleaved_Setup vDSP_DFT_Interleaved_CreateSetup(
+    __nullable vDSP_DFT_Interleaved_Setup Previous,
+    vDSP_Length               Length,
+    vDSP_DFT_Direction        Direction,
+    vDSP_DFT_RealtoComplex    RealtoComplex)
+        API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*! @abstract DFT setup routine for interleaved complex data, double-precision
+ *
+ *  @discussion
+ *  This routine creates the required butterfly weight factors needed in the computation
+ *  of the interleaved complex number DFT of a specified length. It returns with the pointer 
+ *  to the DFT setup, if the length is supported, or NULL otherwise.
+ *
+ *  @param Previous (input) Previous is either zero or a previous DFT_Interleaved setup
+ *
+ *  @param Length (input) the number of complex elements to be transformed.
+ *
+ *  @param Direction (input) Transform direction, vDSP_DFT_FORWARD or vDSP_DFT_INVERSE.
+ *
+ *  @param RealtoComplex (input) flag for real to complex transform, true or false.
+ *
+ *  @return a pointer to the requested DFT setup on success, or 0 if the Length is not supported,
+ *          or having other issues, such as memory allocation.
+ *
+ */
+__nullable vDSP_DFT_Interleaved_SetupD vDSP_DFT_Interleaved_CreateSetupD(
+    __nullable vDSP_DFT_Interleaved_SetupD Previous,
+    vDSP_Length                Length,
+    vDSP_DFT_Direction         Direction,
+    vDSP_DFT_RealtoComplex     RealtoComplex)
+        API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*  vDSP_DFT_Execute_Interleaved and vDSP_DFT_Interleaved_ExecuteD are DFT execution routines (interleaved data format).
+    They perform a DFT, with the aid of previously created setup data.
+    Documentation below is written for vDSP_DFT_Interleaved_Execute.
+    vDSP_DFT_Interleaved_ExecuteD behaves the same way, with corresponding changes of the types, objects, and
+    routines to the double-precision versions.
+
+    Parameters:
+
+        vDSP_DFT_Interleaved_Setup Setup
+
+            A setup object returned by a previous call to vDSP_DFT_Interleaved_CreateSetup
+
+        const DSPComplex *Iri
+
+            Pointer to input data.
+
+        DSPComplex *Ori
+
+            Pointer to output data.
+
+            The input and output arrays may not overlap except as specified
+            in "In-Place Operation", below.
+
+    Performance and In-Place Operation:
+
+        See notes for the setup routine for the operation being executed.
+
+    Function:
+
+        The function performed by this routine is determined by the setup
+        passed to it.  The documentation for the routine used to create the
+        setup describes the function.
+
+        Note that different numbers of elements are required when this routine
+        is called, depending on the setup used:
+
+            When the setup is from vDSP_DFT_Interleaved_CreateSetup, each array (Iri and
+            Ori) must have Length elements.
+
+    Do not call this routine while any DFT setup or destroy routine sharing
+    setup data might be executing.
+*/
+
+/*! @abstract DFT execution routine for real data, single-precision
+ *
+ *  @discussion
+ *  This routine perform a DFT for real numbers, with the aid of previously created setup data.
+ *
+ *  @param Setup (input) A setup object returned by a previous call to vDSP_DFT_Interleaved_CreateSetup
+ *
+ *  @param Iri (input) Pointer to input data.
+ *
+ *  @param Ori (input) Pointer to output data.
+ *
+ */
+void vDSP_DFT_Interleaved_Execute(
+    const vDSP_DFT_Interleaved_Setup Setup,
+    const DSPComplex *Iri,
+          DSPComplex *Ori)
+        API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*! @abstract DFT execution routine for interleaved complex data, double-precision
+ *
+ *  @discussion
+ *  This routine perform a DFT for interleaved complex numbers, with the aid of previously created setup data.
+ *
+ *  @param Setup (input) A setup object returned by a previous call to vDSP_DFT_Interleaved_CreateSetupD
+ *
+ *  @param Iri (input) Pointer to input data.
+ *
+ *  @param Ori (input) Pointer to output data.
+ *
+ */
+void vDSP_DFT_Interleaved_ExecuteD(
+    const vDSP_DFT_Interleaved_SetupD Setup,
+    const DSPDoubleComplex *Iri,
+          DSPDoubleComplex *Ori)
+        API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*! @abstract DFT destroy routine, single-precision
+ *
+ *  @discussion
+ *  This routine releases the memory used by a setup object.
+ *
+ *  @param Setup (input) A setup object vDSP_DFT_Interleaved_Setup,
+ *    created by either vDSP_DFT_Interleaved_CreateSetup
+ *
+ */
+void vDSP_DFT_Interleaved_DestroySetup(__nullable vDSP_DFT_Interleaved_Setup Setup)
+        API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+
+/*! @abstract DFT destroy routine, double-precision
+ *
+ *  @discussion
+ *  This routine releases the memory used by a setup object.
+ *
+ *  @param Setup (input) A setup object vDSP_DFT_Interleaved_SetupD,
+ *    created by either vDSP_DFT_Interleaved_CreateSetupD
+ *
+ */
+void vDSP_DFT_Interleaved_DestroySetupD(__nullable vDSP_DFT_Interleaved_SetupD Setup)
+        API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 
 
 /*  vDSP_dotpr2, vector single-precision stereo dot product.

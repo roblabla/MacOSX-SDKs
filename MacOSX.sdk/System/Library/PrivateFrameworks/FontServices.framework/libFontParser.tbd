@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           746AD8C6-F112-336E-B96D-C2EB48072E8E
+    value:           161C426D-3C6B-3869-A99A-AB46486B7D6C
   - target:          x86_64-maccatalyst
-    value:           746AD8C6-F112-336E-B96D-C2EB48072E8E
+    value:           161C426D-3C6B-3869-A99A-AB46486B7D6C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           702B748C-1ECE-38FC-A1AF-DC60F7B24423
+    value:           1BB9D8E7-58B1-31C9-A335-156F4C34E3EA
   - target:          arm64e-maccatalyst
-    value:           702B748C-1ECE-38FC-A1AF-DC60F7B24423
+    value:           1BB9D8E7-58B1-31C9-A335-156F4C34E3EA
 install-name:    '/System/Library/PrivateFrameworks/FontServices.framework/libFontParser.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -28,12 +28,13 @@ exports:
                        _FPFontCopyGlyphBitmap, _FPFontCopyGlyphNameForGlyph, _FPFontCopyGlyphPath, 
                        _FPFontCopyMetadata, _FPFontCopyNameTablePostScriptName, _FPFontCopyNames, 
                        _FPFontCopyOriginalGlyphPath, _FPFontCopyPath, _FPFontCopyPostScriptName, 
-                       _FPFontCopyRegistryOrderingSupplement, _FPFontCopySplicedStash, 
-                       _FPFontCopyTable, _FPFontCopyTableTags, _FPFontCopyURLPerRegistryOrdering, 
-                       _FPFontCreateCopyWithVariation, _FPFontCreateFontSubset, _FPFontCreateFontsFromData, 
-                       _FPFontCreateFontsWithPath, _FPFontCreatePostScriptEncoding, 
-                       _FPFontCreatePostScriptSubset, _FPFontCreateVariationFromPostScriptNameSuffix, 
-                       _FPFontCreateWithData, _FPFontCreateWithDataAndExtra, _FPFontCreateWithPathAndName, 
+                       _FPFontCopyRegistryOrderingSupplement, _FPFontCopySFNTData, 
+                       _FPFontCopySplicedStash, _FPFontCopyTable, _FPFontCopyTableTags, 
+                       _FPFontCopyURLPerRegistryOrdering, _FPFontCreateCopyWithVariation, 
+                       _FPFontCreateFontSubset, _FPFontCreateFontsFromData, _FPFontCreateFontsWithPath, 
+                       _FPFontCreatePostScriptEncoding, _FPFontCreatePostScriptSubset, 
+                       _FPFontCreateVariationFromPostScriptNameSuffix, _FPFontCreateWithData, 
+                       _FPFontCreateWithDataAndExtra, _FPFontCreateWithPathAndName, 
                        _FPFontGetAscent, _FPFontGetAverageAdvance, _FPFontGetBoundingBox, 
                        _FPFontGetCIDsForGlyphs, _FPFontGetCapHeight, _FPFontGetDefaultInstance, 
                        _FPFontGetDescent, _FPFontGetFontInfo, _FPFontGetFormat, _FPFontGetGlyphDeviceAdvance, 
@@ -46,18 +47,20 @@ exports:
                        _FPFontGetGlyphsForCIDs, _FPFontGetGlyphsForCharacterRange, 
                        _FPFontGetGlyphsForGlyphNames, _FPFontGetGlyphsForText, _FPFontGetGlyphsForUnichars, 
                        _FPFontGetGlyphsXo, _FPFontGetInstanceNameID, _FPFontGetItalicAngle, 
-                       _FPFontGetLineGap, _FPFontGetMaximumAdvance, _FPFontGetMinimumLeftSideBearing, 
+                       _FPFontGetLineGap, _FPFontGetLongGlyphsForCharacterRange, 
+                       _FPFontGetMaximumAdvance, _FPFontGetMinimumLeftSideBearing, 
                        _FPFontGetMinimumRightSideBearing, _FPFontGetNumberOfGlyphs, 
                        _FPFontGetOS2UnicodeRanges, _FPFontGetPostScriptName, _FPFontGetStemH, 
                        _FPFontGetStemV, _FPFontGetTrueTypeEncoding, _FPFontGetTupleCount, 
                        _FPFontGetType1Encoding, _FPFontGetUnderlinePosition, _FPFontGetUnderlineThickness, 
                        _FPFontGetUnicharsForGlyph, _FPFontGetUnitsPerEm, _FPFontGetVMetrics, 
                        _FPFontGetVariation, _FPFontGetVariationAxes, _FPFontGetVariationAxisFlags, 
-                       _FPFontGetVariationScalar, _FPFontGetVariationScalars, _FPFontGetVariationValues, 
-                       _FPFontGetVersion, _FPFontGetXHeight, _FPFontIsBitmapOnly, 
-                       _FPFontIsItalic, _FPFontIsMonospaced, _FPFontIsNamedInstance, 
-                       _FPFontIsSFNT, _FPFontIsSuitcase, _FPFontPurgeCaches, _FPFontPurgeFromCaches, 
-                       _FPFontRelease, _FPFontRetain, _FPFontShouldAutoHint, _FPGetFontSubsetFormat, 
+                       _FPFontGetVariationAxisNameID, _FPFontGetVariationScalar, 
+                       _FPFontGetVariationScalars, _FPFontGetVariationValues, _FPFontGetVersion, 
+                       _FPFontGetXHeight, _FPFontIsBitmapOnly, _FPFontIsItalic, _FPFontIsMonospaced, 
+                       _FPFontIsNamedInstance, _FPFontIsSFNT, _FPFontIsSuitcase, 
+                       _FPFontPurgeCaches, _FPFontPurgeFromCaches, _FPFontRelease, 
+                       _FPFontRetain, _FPFontShouldAutoHint, _FPGetFontSubsetFormat, 
                        _FPTurnOffXoMetaData, _ReleaseFontForScaler, _TTScalerOpen, 
                        __Z24FPGetStandardEncodingSIDh, __Z25FPGetStandardEncodingNameh, 
                        __Z29GenerateGlyphNameForCIDPerROSt9TAdobeROSPc, __ZN10MCacheDataD0Ev, 
@@ -73,12 +76,14 @@ exports:
                        __ZN12TDefaultHeapD0Ev, __ZN12TDefaultHeapD1Ev, __ZN12TDefaultHeapD2Ev, 
                        __ZN14MDataReferenceC1ERKS_im, __ZN14MDataReferenceC2ERKS_im, 
                        __ZN14MDataReferenceD0Ev, __ZN14MDataReferenceD1Ev, __ZN14MDataReferenceD2Ev, 
-                       __ZN14TDataReferenceC1ERK9TFragmenti, __ZN14TDataReferenceC1ERKS_i, 
-                       __ZN14TDataReferenceC1Ev, __ZN14TDataReferenceC2ERK9TFragmenti, 
-                       __ZN14TDataReferenceC2ERKS_i, __ZN14TDataReferenceC2Ev, __ZN14TDataReferenceD0Ev, 
-                       __ZN14TDataReferenceD1Ev, __ZN14TDataReferenceD2Ev, __ZN14TDataReferenceaSERKS_, 
-                       __ZN14TFontSurrogateC1EPK5TFont, __ZN14TFontSurrogateC1ERKS_, 
-                       __ZN14TFontSurrogateC1Ev, __ZN14TFontSurrogateC2EPK5TFont, 
+                       __ZN14TDataReference5ResetEv, __ZN14TDataReferenceC1EOS_, 
+                       __ZN14TDataReferenceC1ERK9TFragmentim, __ZN14TDataReferenceC1ERKS_, 
+                       __ZN14TDataReferenceC1ERKS_im, __ZN14TDataReferenceC1Ev, __ZN14TDataReferenceC2EOS_, 
+                       __ZN14TDataReferenceC2ERK9TFragmentim, __ZN14TDataReferenceC2ERKS_, 
+                       __ZN14TDataReferenceC2ERKS_im, __ZN14TDataReferenceC2Ev, __ZN14TDataReferenceD0Ev, 
+                       __ZN14TDataReferenceD1Ev, __ZN14TDataReferenceD2Ev, __ZN14TDataReferenceaSEOS_, 
+                       __ZN14TDataReferenceaSERKS_, __ZN14TFontSurrogateC1EPK5TFont, 
+                       __ZN14TFontSurrogateC1ERKS_, __ZN14TFontSurrogateC1Ev, __ZN14TFontSurrogateC2EPK5TFont, 
                        __ZN14TFontSurrogateC2ERKS_, __ZN14TFontSurrogateC2Ev, __ZN14TFontSurrogateD0Ev, 
                        __ZN14TFontSurrogateD1Ev, __ZN14TFontSurrogateD2Ev, __ZN14TFontSurrogateaSERKS_, 
                        __ZN18TFileDataSurrogateC1EPK22TFileFragmentReference, __ZN18TFileDataSurrogateC1EPK22TFileFragmentReferenceb, 
@@ -109,8 +114,8 @@ exports:
                        __ZN26TResourceForkFileReferenceD1Ev, __ZN26TResourceForkFileReferenceD2Ev, 
                        __ZN5THeapC2Ev, __ZN5THeapD0Ev, __ZN5THeapD1Ev, __ZN5THeapD2Ev, 
                        __ZNK10TException12GetErrorCodeEv, __ZNK12MScalerCache12SetCacheDataEP10MCacheData, 
-                       __ZNK13TNFNTFontInfo11GetNFNTDataEsPm, __ZNK14TDataReference11AddRefCountEv, 
-                       __ZNK14TDataReference11DucRefCountEv, __ZNK14TDataReference7GetDataEv, 
+                       __ZNK14TDataReference11AddRefCountEv, __ZNK14TDataReference11DucRefCountEv, 
+                       __ZNK14TDataReference11SubdataFromEim, __ZNK14TDataReference7GetDataEv, 
                        __ZNK14TDataReference7GetSizeEv, __ZNK14TDataReferenceeqERKS_, 
                        __ZNK14TFontSurrogate12GetTablePartEjjjRj, __ZNK14TFontSurrogate13GetTableIndexEjPj, 
                        __ZNK14TFontSurrogate14GetTableOffsetEjPj, __ZNK14TFontSurrogate15FontTableExistsEj, 

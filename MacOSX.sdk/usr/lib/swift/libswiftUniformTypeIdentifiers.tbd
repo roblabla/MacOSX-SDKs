@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           59C2EDFB-E1E9-3D3B-83CD-6C472A7597DF
+    value:           6B512BEB-EFD7-31B8-ADE9-A2D33D34943C
   - target:          x86_64-maccatalyst
-    value:           59C2EDFB-E1E9-3D3B-83CD-6C472A7597DF
+    value:           6B512BEB-EFD7-31B8-ADE9-A2D33D34943C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           97A14475-C582-3730-A0A3-0A4392AE53EF
+    value:           10756BEC-BB19-378A-BBBF-92FA7D807DB9
   - target:          arm64e-maccatalyst
-    value:           97A14475-C582-3730-A0A3-0A4392AE53EF
+    value:           10756BEC-BB19-378A-BBBF-92FA7D807DB9
 install-name:    '/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib'
-current-version: 636.9
+current-version: 717
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s10Foundation17URLResourceValuesV22UniformTypeIdentifiersE07contentE0AD6UTTypeVSgvg', 
                        '_$s10Foundation17URLResourceValuesV22UniformTypeIdentifiersE07contentE0AD6UTTypeVSgvpMV', 
                        '_$s10Foundation3URLV22UniformTypeIdentifiersE19appendPathComponent_12conformingToySS_AD6UTTypeVtF', 
@@ -59,6 +59,8 @@ exports:
                        '_$s22UniformTypeIdentifiers15UTHardwareColorON', '_$s22UniformTypeIdentifiers15UTHardwareColorOSEAAMc', 
                        '_$s22UniformTypeIdentifiers15UTHardwareColorOSHAAMc', '_$s22UniformTypeIdentifiers15UTHardwareColorOSQAAMc', 
                        '_$s22UniformTypeIdentifiers15UTHardwareColorOSeAAMc', '_$s22UniformTypeIdentifiers6UTTypeV04_hfsB4Code12conformingToACSgs6UInt32V_ACtcfC', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV04_hfsB5CodesSays6UInt32VGvg', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV04_hfsB5CodesSays6UInt32VGvpMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV04mimeB012conformingToACSgSS_ACtcfC', 
                        '_$s22UniformTypeIdentifiers6UTTypeV05cPlusE6HeaderACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV05cPlusE6SourceACvgZ', 
@@ -80,6 +82,7 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV11_appleWatchACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV11_childTypesShyACGvg', 
                        '_$s22UniformTypeIdentifiers6UTTypeV11_childTypesShyACGvpMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV11_dropFolderACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV11_exportedAs4from12conformingToACSS_So8NSBundleCACSgtcfC', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV11_identifier15allowUndeclaredACSgSS_SbtcfC', 
                        '_$s22UniformTypeIdentifiers6UTTypeV11_importedAs4from12conformingToACSS_So8NSBundleCACSgtcfC', 
                        '_$s22UniformTypeIdentifiers6UTTypeV11_isExportedSbvg', '_$s22UniformTypeIdentifiers6UTTypeV11_isExportedSbvpMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV11_isImportedSbvg', '_$s22UniformTypeIdentifiers6UTTypeV11_isImportedSbvpMV', 
@@ -88,9 +91,9 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV11_kindStringSSSgvg', 
                        '_$s22UniformTypeIdentifiers6UTTypeV11_kindStringSSSgvpMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV11_macBookAirACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV11_macBookProACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV11_passBundleACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV11appleScriptACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV11applicationACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV11descriptionSSvg', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV11descriptionSSvpMV', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV11_passBundleACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV11_passesDataACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV11appleScriptACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV11applicationACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV11descriptionSSvg', '_$s22UniformTypeIdentifiers6UTTypeV11descriptionSSvpMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV11isSupertype2ofSbAC_tF', 
                        '_$s22UniformTypeIdentifiers6UTTypeV11m3uPlaylistACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV11realityFileACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV11shellScriptACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV11spreadsheetACvgZ', 
@@ -276,9 +279,9 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV8bookmarkACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8conforms2toSbAC_tF', 
                        '_$s22UniformTypeIdentifiers6UTTypeV8databaseACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8flatRTFDACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV8isPublicSbvg', '_$s22UniformTypeIdentifiers6UTTypeV8isPublicSbvpMV', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV8playlistACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8rawImageACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV8toDoItemACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV9_computerACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV9_ofItemAtAC10Foundation3URLV_tKcfC', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV8makefileACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8playlistACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV8rawImageACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8toDoItemACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV9_computerACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV9_ofItemAtAC10Foundation3URLV_tKcfC', 
                        '_$s22UniformTypeIdentifiers6UTTypeV9_passDataACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV9_subtypesShyACGvg', 
                        '_$s22UniformTypeIdentifiers6UTTypeV9_subtypesShyACGvpMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV9aliasFileACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV9directoryACvgZ', 

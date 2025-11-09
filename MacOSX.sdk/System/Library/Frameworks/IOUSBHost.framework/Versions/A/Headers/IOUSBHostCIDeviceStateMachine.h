@@ -2,7 +2,7 @@
 //  IOUSBHostCIDeviceStateMachine.h
 //  IOUSBHostFramework
 //
-//  Created by Dan Wilson on 4/28/20.
+//  Copyright © 2020 Apple. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -16,7 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
  * @class   IOUSBHostCIDeviceStateMachine
  * @brief   The object representing the state of a user-mode USB host controller device
  * @details This class assists with tracking internal state transitions of a user-mode USB host controller device, and parses IOUSBHostCIMessage command
- *          structures to update state and generate properly formatted command responses.
+ *          structures to update state and generate properly formatted command responses.  Clients should create an IOUSBHostCIDeviceStateMachine in
+ *          response to an IOUSBHostCIMessageTypeDeviceCreate command, and then use the provided interfaces to identify and process commands
+ *          for the device.  The IOUSBHostCIDeviceStateMachine should be destroyed in response to an IOUSBHostCIMessageTypeDeviceDestroy command.
  */
 @interface IOUSBHostCIDeviceStateMachine : NSObject
 

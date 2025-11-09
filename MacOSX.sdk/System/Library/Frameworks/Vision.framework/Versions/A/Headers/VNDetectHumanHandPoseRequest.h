@@ -10,7 +10,6 @@
 #import <Vision/VNObservation.h>
 
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 
@@ -55,45 +54,6 @@ NS_ASSUME_NONNULL_BEGIN
  *                                          Wrist
  */
 
-
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyWrist API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameWrist", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyThumbCMC API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameThumbCMC", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyThumbMP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameThumbMP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyThumbIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameThumbIP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyThumbTIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameThumbTip", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyIndexMCP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameIndexMCP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyIndexPIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameIndexPIP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyIndexDIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameIndexDIP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyIndexTIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameIndexTip", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyMiddleMCP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameMiddleMCP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyMiddlePIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameMiddlePIP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyMiddleDIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameMiddleDIP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyMiddleTIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameMiddleTip", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyRingMCP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameRingMCP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyRingPIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameRingPIP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyRingDIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameRingDIP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyRingTIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameRingTip", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyLittleMCP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameLittleMCP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyLittlePIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameLittlePIP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyLittleDIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameLittleDIP", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointKey const VNHandLandmarkKeyLittleTIP API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointNameLittleTip", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-
-VN_EXPORT VNRecognizedPointGroupKey const VNHandLandmarkRegionKeyThumb API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointsGroupNameThumb", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointGroupKey const VNHandLandmarkRegionKeyIndexFinger API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointsGroupNameIndexFinger", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointGroupKey const VNHandLandmarkRegionKeyMiddleFinger API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointsGroupNameMiddleFinger", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointGroupKey const VNHandLandmarkRegionKeyRingFinger API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointsGroupNameRingFinger", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-VN_EXPORT VNRecognizedPointGroupKey const VNHandLandmarkRegionKeyLittleFinger API_DEPRECATED_WITH_REPLACEMENT("VNHumanHandPoseObservationJointsGroupNameLittleFinger", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-
-
-
-
 typedef VNRecognizedPointKey VNHumanHandPoseObservationJointName NS_TYPED_ENUM NS_SWIFT_NAME(VNHumanHandPoseObservation.JointName) API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 VN_EXPORT VNHumanHandPoseObservationJointName const VNHumanHandPoseObservationJointNameWrist API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
@@ -136,6 +96,7 @@ VN_EXPORT VNHumanHandPoseObservationJointsGroupName const VNHumanHandPoseObserva
 
 
 
+
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @interface VNHumanHandPoseObservation : VNRecognizedPointsObservation
 
@@ -171,8 +132,12 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 */
 - (nullable NSDictionary<VNHumanHandPoseObservationJointName, VNRecognizedPoint*>*) recognizedPointsForJointsGroupName:(VNHumanHandPoseObservationJointsGroupName)jointsGroupName error:(NSError**)error NS_SWIFT_NAME(recognizedPoints(_:));
 
-@end
+/*!
+	@brief The chirality of the hand.
+*/
+@property (readonly) VNChirality chirality API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 
+@end
 
 
 
@@ -182,23 +147,6 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  */
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @interface VNDetectHumanHandPoseRequest : VNImageBasedRequest
-
-+ (nullable NSArray<VNRecognizedPointKey>*) supportedRecognizedPointKeysForRevision:(NSUInteger)revision error:(NSError **)error
-	API_DEPRECATED_WITH_REPLACEMENT("Use +supportedJointNamesForRevision:error:] instead", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-+ (nullable NSArray<VNRecognizedPointGroupKey>*) supportedRecognizedPointGroupKeysForRevision:(NSUInteger)revision error:(NSError **)error
-	API_DEPRECATED_WITH_REPLACEMENT("Use +supportedJointsGroupNamesForRevision:error:] instead", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-
-+ (nullable NSArray<VNRecognizedPointKey>*) supportedIdentifiedPointKeysForRevision:(NSUInteger)revision error:(NSError **)error
-	API_DEPRECATED_WITH_REPLACEMENT("Use +supportedJointNamesForRevision:error:] instead", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-+ (nullable NSArray<VNRecognizedPointGroupKey>*) supportedIdentifiedPointGroupKeysForRevision:(NSUInteger)revision error:(NSError **)error
-	API_DEPRECATED_WITH_REPLACEMENT("Use +supportedJointsGroupNamesForRevision:error:] instead", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
-
-
-
-
 
 /*!
  @brief Obtain the collection of human hand joint names that are supported by a given request revision.
@@ -229,6 +177,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @property (readonly, copy, nullable) NSArray<VNHumanHandPoseObservation*>* results;
 
 @end
+
 
 
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))

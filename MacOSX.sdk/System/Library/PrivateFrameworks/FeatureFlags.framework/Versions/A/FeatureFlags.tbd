@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           01CE259A-60B2-38D0-B04C-38DDE0C65358
+    value:           231547D0-E280-31AB-A503-62CFC12C46A8
   - target:          x86_64-maccatalyst
-    value:           01CE259A-60B2-38D0-B04C-38DDE0C65358
+    value:           231547D0-E280-31AB-A503-62CFC12C46A8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E3D1D608-ACA9-30A7-A462-F33EA8F48C71
+    value:           1A955E36-1FAF-3D5D-95F6-729839015551
   - target:          arm64e-maccatalyst
-    value:           E3D1D608-ACA9-30A7-A462-F33EA8F48C71
+    value:           1A955E36-1FAF-3D5D-95F6-729839015551
 install-name:    '/System/Library/PrivateFrameworks/FeatureFlags.framework/Versions/A/FeatureFlags'
-current-version: 28.60.1
+current-version: 53
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

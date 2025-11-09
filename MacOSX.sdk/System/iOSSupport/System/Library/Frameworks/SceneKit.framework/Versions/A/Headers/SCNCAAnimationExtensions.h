@@ -2,7 +2,7 @@
 //  SCNCAAnimationExtensions.h
 //  SceneKit
 //
-//  Copyright © 2012-2020 Apple Inc. All rights reserved.
+//  Copyright © 2012-2021 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SCNAnimation.h>

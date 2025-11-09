@@ -1,7 +1,7 @@
 /*
 	NSBitmapImageRep.h
 	Application Kit
-	Copyright (c) 1994-2019, Apple Inc.
+	Copyright (c) 1994-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -73,6 +73,7 @@ APPKIT_EXTERN NSBitmapImageRepPropertyKey NSImageLoopCount;                     
 APPKIT_EXTERN NSBitmapImageRepPropertyKey NSImageGamma;                               // PNG input/output (float in NSNumber)
 APPKIT_EXTERN NSBitmapImageRepPropertyKey NSImageProgressive;                   // JPEG input/output (BOOL in NSNumber)
 APPKIT_EXTERN NSBitmapImageRepPropertyKey NSImageEXIFData;                         // JPEG input/output (NSDictionary)
+APPKIT_EXTERN NSBitmapImageRepPropertyKey NSImageIPTCData;                      // Photo Metadata (NSDictionary)
 APPKIT_EXTERN NSBitmapImageRepPropertyKey NSImageFallbackBackgroundColor API_AVAILABLE(macos(10.5)); // JPEG output (NSColor)
 
 @interface NSBitmapImageRep : NSImageRep <NSSecureCoding>

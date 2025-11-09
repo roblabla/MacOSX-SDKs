@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Apple Inc. All rights reserved.
+ * Copyright (c) 2018-2019 Apple Inc. All rights reserved.
  */
 
 #ifndef __OSLOG_STORE_H__
@@ -11,6 +11,24 @@
 
 @class OSLogEnumerator;
 @class OSLogPosition;
+
+/*!
+ * @enum OSLogStoreScope
+ *
+ * @abstract
+ * Create a store to a subset of the libtrace entries.
+ *
+ * @constant OSLogStoreSystem
+ * @constant OSLogStoreCurrentProcessIdentifier
+ * "System" scope indicates the entire system; i.e., all logs. Entries can be
+ * retrieved for the current calling process, i.e., matching pid.
+ */
+typedef NS_ENUM(NSInteger, OSLogStoreScope) {
+    OSLogStoreSystem API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos) = 0,
+    OSLogStoreCurrentProcessIdentifier = 1,
+}
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
+NS_SWIFT_NAME(OSLogStore.Scope);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  * instances; one store can support multiple OSLogEnumerator
  * instances concurrently.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 OS_EXPORT
 @interface OSLogStore : NSObject
 
@@ -48,12 +66,28 @@ OS_EXPORT
  *
  * Gaining access to the local unified logging system requires
  * permission from the system. The caller must be run by an admin
- * account and the have the com.apple.logging.local-store
- * entitlement.
+ * account.
  */
 + (nullable instancetype)localStoreAndReturnError:(NSError **)error
 API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 NS_SWIFT_NAME(local());
+
+/*!
+ * @method storeWithScope
+ *
+ * @abstract
+ * Create an OSLogStore for a subset of entries in the local store.
+ *
+ * @param scope
+ * The kind of subset the OSLogStore is for.
+ *
+ * @param error
+ * If initialization is unsuccessful, return nil and set this parameter to a
+ * pointer to an error object that describes the reason.
+ */
++ (nullable instancetype)storeWithScope:(OSLogStoreScope)scope
+                                  error:(NSError **)error
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 /*!
  * @method storeWithURL
@@ -72,7 +106,11 @@ NS_SWIFT_NAME(local());
  */
 + (nullable instancetype)storeWithURL:(NSURL *)url
                                 error:(NSError **)error
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
+
+- (instancetype)init
+API_DEPRECATED("Use one of the factory methods", macos(10.15, 12.0))
+API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
  * @method entriesEnumeratorWithOptions
@@ -104,7 +142,7 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos);
                                                   position:(nullable OSLogPosition *)position
                                                  predicate:(nullable NSPredicate *)predicate
                                                      error:(NSError **)error
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 NS_REFINED_FOR_SWIFT;
 
 /*!
@@ -119,7 +157,7 @@ NS_REFINED_FOR_SWIFT;
  * to a pointer to an error object that describes the reason.
  */
 - (nullable OSLogEnumerator *)entriesEnumeratorAndReturnError:(NSError **)error
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 NS_SWIFT_UNAVAILABLE("Use `entries` method");
 
 /*!
@@ -137,7 +175,7 @@ NS_SWIFT_UNAVAILABLE("Use `entries` method");
  * --- the earliest occurrence is used.
  */
 - (OSLogPosition *)positionWithDate:(NSDate *)date
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 NS_SWIFT_NAME(position(date:));
 
 /*!
@@ -151,7 +189,7 @@ NS_SWIFT_NAME(position(date:));
  * The seconds to add to the last time point in the range of entries.
  */
 - (OSLogPosition *)positionWithTimeIntervalSinceEnd:(NSTimeInterval)seconds
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 NS_SWIFT_NAME(position(timeIntervalSinceEnd:));
 
 /*!
@@ -169,7 +207,7 @@ NS_SWIFT_NAME(position(timeIntervalSinceEnd:));
  * this function asserts that the interval is positive.
  */
 - (OSLogPosition *)positionWithTimeIntervalSinceLatestBoot:(NSTimeInterval)seconds
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 NS_SWIFT_NAME(position(timeIntervalSinceLatestBoot:));
 
 @end

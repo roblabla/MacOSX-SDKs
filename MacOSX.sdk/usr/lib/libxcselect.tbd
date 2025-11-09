@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D694E34C-FA1B-34E3-BAAA-B6CE9B8854A2
+    value:           32B2B433-88E6-3A9D-BF89-62F612743976
   - target:          x86_64-maccatalyst
-    value:           D694E34C-FA1B-34E3-BAAA-B6CE9B8854A2
+    value:           32B2B433-88E6-3A9D-BF89-62F612743976
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0E9325C1-42C8-3499-BD32-A524508A2D03
+    value:           085D5B20-A0C6-3BD1-8A73-F8640F8FA94D
   - target:          arm64e-maccatalyst
-    value:           0E9325C1-42C8-3499-BD32-A524508A2D03
+    value:           085D5B20-A0C6-3BD1-8A73-F8640F8FA94D
 install-name:    '/usr/lib/libxcselect.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

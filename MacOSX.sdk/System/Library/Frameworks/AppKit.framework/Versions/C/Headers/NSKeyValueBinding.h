@@ -1,7 +1,7 @@
 /*
 	NSKeyValueBinding.h
 	Application Kit
-	Copyright (c) 2002-2019, Apple Inc.
+	Copyright (c) 2002-2021, Apple Inc.
 	All rights reserved.
  */
 
@@ -76,8 +76,8 @@ APPKIT_EXTERN NSBindingInfoKey NSOptionsKey;
 
 @interface NSObject (NSPlaceholders)
 
-+ (void)setDefaultPlaceholder:(nullable id)placeholder forMarker:(nullable id)marker withBinding:(NSBindingName)binding API_DEPRECATED_WITH_REPLACEMENT("+[NSBindingSelectionMarker setDefaultPlaceholder:forMarker:withBinding:onClass:]", macos(10.0, 11.0));
-+ (nullable id)defaultPlaceholderForMarker:(nullable id)marker withBinding:(NSBindingName)binding API_DEPRECATED_WITH_REPLACEMENT("+[NSBindingSelectionMarker defaultPlaceholder:forMarker:withBinding:onClass:]", macos(10.0, 11.0));
++ (void)setDefaultPlaceholder:(nullable id)placeholder forMarker:(nullable id)marker withBinding:(NSBindingName)binding API_DEPRECATED_WITH_REPLACEMENT("+[NSBindingSelectionMarker setDefaultPlaceholder:forMarker:onClass:withBinding:]", macos(10.0, 11.0));
++ (nullable id)defaultPlaceholderForMarker:(nullable id)marker withBinding:(NSBindingName)binding API_DEPRECATED_WITH_REPLACEMENT("+[NSBindingSelectionMarker defaultPlaceholderForMarker:onClass:withBinding:]", macos(10.0, 11.0));
 
 @end
 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4B0BE6A5-33C4-377A-B2F5-7439CC155CDC
+    value:           8BD594EF-2651-3AC5-996F-4D38C11D6B20
   - target:          x86_64-maccatalyst
-    value:           4B0BE6A5-33C4-377A-B2F5-7439CC155CDC
+    value:           8BD594EF-2651-3AC5-996F-4D38C11D6B20
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1FD1DD34-7D2E-3F4C-8880-B54AF347FE2D
+    value:           AEF3EDA1-16FE-37BE-A36D-2EB47E896D6D
   - target:          arm64e-maccatalyst
-    value:           1FD1DD34-7D2E-3F4C-8880-B54AF347FE2D
+    value:           AEF3EDA1-16FE-37BE-A36D-2EB47E896D6D
 install-name:    '/System/Library/PrivateFrameworks/CalDAV.framework/Versions/A/CalDAV'
-current-version: 795
+current-version: 796
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

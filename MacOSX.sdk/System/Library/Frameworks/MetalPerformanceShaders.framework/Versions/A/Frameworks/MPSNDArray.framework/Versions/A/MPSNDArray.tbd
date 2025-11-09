@@ -4,26 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           58BD130C-DC37-3CC0-8DD5-4B783EFBE467
+    value:           9FBBAD0E-3BD3-3F7F-90F7-1600C8E59778
   - target:          x86_64-maccatalyst
-    value:           58BD130C-DC37-3CC0-8DD5-4B783EFBE467
+    value:           9FBBAD0E-3BD3-3F7F-90F7-1600C8E59778
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E95A075E-80F5-3399-96DE-CE67AB35852C
+    value:           1DDCE388-6A80-33A9-9479-EA5B666FE99D
   - target:          arm64e-maccatalyst
-    value:           E95A075E-80F5-3399-96DE-CE67AB35852C
+    value:           1DDCE388-6A80-33A9-9479-EA5B666FE99D
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNDArray.framework/Versions/A/MPSNDArray'
-current-version: 124.4.12
+current-version: 125.0.30
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ MetalPerformanceShaders ]
+    clients:         [ MPSImage, MetalPerformanceShaders ]
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _MPSSetResourcesOnCommandEncoder ]
     objc-classes:    [ MPSExternalNDArrayBinary, MPSExternalNDArrayBinaryGradient, 
                        MPSNDArrayACos, MPSNDArrayACosGradient, MPSNDArrayACosh, MPSNDArrayACoshGradient, 
                        MPSNDArrayAND, MPSNDArrayANDPrimaryGradient, MPSNDArrayANDSecondaryGradient, 
@@ -39,6 +40,7 @@ exports:
                        MPSNDArrayConvolution2D, MPSNDArrayConvolution2DDescriptor, 
                        MPSNDArrayConvolution2DGradientWithInput, MPSNDArrayConvolution2DGradientWithWeights, 
                        MPSNDArrayCos, MPSNDArrayCosGradient, MPSNDArrayCosh, MPSNDArrayCoshGradient, 
+                       MPSNDArrayCropResize, MPSNDArrayDepthwiseConvolution2DDescriptor, 
                        MPSNDArrayDepthwiseConvolutionKernel, MPSNDArrayDivision, 
                        MPSNDArrayDivisionPrimaryGradient, MPSNDArrayDivisionSecondaryGradient, 
                        MPSNDArrayEqual, MPSNDArrayEqualPrimaryGradient, MPSNDArrayEqualSecondaryGradient, 
@@ -50,8 +52,8 @@ exports:
                        MPSNDArrayGatherND, MPSNDArrayGatherNDGradient, MPSNDArrayGradientState, 
                        MPSNDArrayGreaterThan, MPSNDArrayGreaterThanOrEqualTo, MPSNDArrayGreaterThanOrEqualToPrimaryGradient, 
                        MPSNDArrayGreaterThanOrEqualToSecondaryGradient, MPSNDArrayGreaterThanPrimaryGradient, 
-                       MPSNDArrayGreaterThanSecondaryGradient, MPSNDArrayIdentity, 
-                       MPSNDArrayInitialization, MPSNDArrayInitializationConstant, 
+                       MPSNDArrayGreaterThanSecondaryGradient, MPSNDArrayGridSample, 
+                       MPSNDArrayIdentity, MPSNDArrayInitialization, MPSNDArrayInitializationConstant, 
                        MPSNDArrayInitializationGlorotNormal, MPSNDArrayInitializationGlorotUniform, 
                        MPSNDArrayInitializationIdentity, MPSNDArrayInitializationRandomNormal, 
                        MPSNDArrayInitializationRandomUniform, MPSNDArrayInitializationTruncatedNormal, 
@@ -59,17 +61,17 @@ exports:
                        MPSNDArrayIsInfiniteGradient, MPSNDArrayIsNaN, MPSNDArrayIsNaNGradient, 
                        MPSNDArrayLessThan, MPSNDArrayLessThanOrEqualTo, MPSNDArrayLessThanOrEqualToPrimaryGradient, 
                        MPSNDArrayLessThanOrEqualToSecondaryGradient, MPSNDArrayLessThanPrimaryGradient, 
-                       MPSNDArrayLessThanSecondaryGradient, MPSNDArrayLogSoftMax, 
-                       MPSNDArrayLogSoftMaxGradient, MPSNDArrayLogarithm, MPSNDArrayLogarithmBase10, 
-                       MPSNDArrayLogarithmBase10Gradient, MPSNDArrayLogarithmBase2, 
-                       MPSNDArrayLogarithmBase2Gradient, MPSNDArrayLogarithmGradient, 
-                       MPSNDArrayMathBinaryKernel, MPSNDArrayMathBinaryPrimaryGradient, 
+                       MPSNDArrayLessThanSecondaryGradient, MPSNDArrayLocalConvolution, 
+                       MPSNDArrayLogSoftMax, MPSNDArrayLogSoftMaxGradient, MPSNDArrayLogarithm, 
+                       MPSNDArrayLogarithmBase10, MPSNDArrayLogarithmBase10Gradient, 
+                       MPSNDArrayLogarithmBase2, MPSNDArrayLogarithmBase2Gradient, 
+                       MPSNDArrayLogarithmGradient, MPSNDArrayMathBinaryKernel, MPSNDArrayMathBinaryPrimaryGradient, 
                        MPSNDArrayMathBinarySecondaryGradient, MPSNDArrayMathTernaryKernel, 
                        MPSNDArrayMathTernaryPrimaryGradient, MPSNDArrayMathTernarySecondaryGradient, 
                        MPSNDArrayMathTernaryTertiaryGradient, MPSNDArrayMathUnaryGradient, 
                        MPSNDArrayMathUnaryKernel, MPSNDArrayMatrixMultiplication, 
-                       MPSNDArrayMatrixMultiplicationGradient, MPSNDArrayMaximum, 
-                       MPSNDArrayMaximumPrimaryGradient, MPSNDArrayMaximumSecondaryGradient, 
+                       MPSNDArrayMatrixMultiplicationGradient, MPSNDArrayMatrixMultiplicationSparse, 
+                       MPSNDArrayMaximum, MPSNDArrayMaximumPrimaryGradient, MPSNDArrayMaximumSecondaryGradient, 
                        MPSNDArrayMinimum, MPSNDArrayMinimumPrimaryGradient, MPSNDArrayMinimumSecondaryGradient, 
                        MPSNDArrayModulo, MPSNDArrayModuloPrimaryGradient, MPSNDArrayModuloSecondaryGradient, 
                        MPSNDArrayMultiaryBase, MPSNDArrayMultiaryGradientKernel, 
@@ -96,13 +98,17 @@ exports:
                        MPSNDArraySinGradient, MPSNDArraySinh, MPSNDArraySinhGradient, 
                        MPSNDArraySoftMax, MPSNDArraySoftMaxGradient, MPSNDArraySquare, 
                        MPSNDArraySquareGradient, MPSNDArraySquareRoot, MPSNDArraySquareRootGradient, 
-                       MPSNDArrayStridedSlice, MPSNDArrayStridedSliceGradient, MPSNDArraySubtraction, 
-                       MPSNDArraySubtractionPrimaryGradient, MPSNDArraySubtractionSecondaryGradient, 
-                       MPSNDArrayTan, MPSNDArrayTanGradient, MPSNDArrayTanh, MPSNDArrayTanhGradient, 
-                       MPSNDArrayTileGradientKernel, MPSNDArrayTileKernel, MPSNDArrayTopK, 
-                       MPSNDArrayTopKGradient, MPSNDArrayUnaryGradientKernel, MPSNDArrayUnaryKernel, 
-                       MPSNDArrayXNOR, MPSNDArrayXNORPrimaryGradient, MPSNDArrayXNORSecondaryGradient, 
+                       MPSNDArrayStencilKernel, MPSNDArrayStridedSlice, MPSNDArrayStridedSliceGradient, 
+                       MPSNDArraySubtraction, MPSNDArraySubtractionPrimaryGradient, 
+                       MPSNDArraySubtractionSecondaryGradient, MPSNDArrayTan, MPSNDArrayTanGradient, 
+                       MPSNDArrayTanh, MPSNDArrayTanhGradient, MPSNDArrayTileGradientKernel, 
+                       MPSNDArrayTileKernel, MPSNDArrayTopK, MPSNDArrayTopKGradient, 
+                       MPSNDArrayUnaryGradientKernel, MPSNDArrayUnaryKernel, MPSNDArrayXNOR, 
+                       MPSNDArrayXNORPrimaryGradient, MPSNDArrayXNORSecondaryGradient, 
                        MPSNDArrayXOR, MPSNDArrayXORPrimaryGradient, MPSNDArrayXORSecondaryGradient, 
                        MPSPluginNDArrayConvolutionDescriptor ]
-    objc-ivars:      [ MPSNDArrayGatherGradientState._axis ]
+    objc-ivars:      [ MPSNDArrayConvolution2D._autoTuningParams, MPSNDArrayConvolution2D._autoTuningTarget, 
+                       MPSNDArrayConvolution2DGradientWithWeights._autoTuning, MPSNDArrayConvolution2DGradientWithWeights._autoTuningParams, 
+                       MPSNDArrayGatherGradientState._axis, MPSNDArrayGradientState._provenance, 
+                       MPSNDArrayGradientState._srcCount, MPSNDArrayGradientState._srcInfo ]
 ...

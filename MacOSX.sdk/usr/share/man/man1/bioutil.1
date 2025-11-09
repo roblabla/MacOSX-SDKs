@@ -11,7 +11,7 @@
 .Nd tool for viewing/changing Touch ID configuration and listing/deleting enrolled fingerprints
 .Sh SYNOPSIS             \" Section Header - required - don't modify
 .Nm
-{-r | -w [-f { 0 | 1 }] [-u { 0 | 1 }] [-a { 0 | 1 }]} | [-c] | [-p] | [-d <uid>] [-s]
+{-r | -w [-f { 0 | 1 }] [-u { 0 | 1 }] [-a { 0 | 1 }] [-o <seconds>]} | [-c] | [-p] | [-d <uid>] [-s]
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 .Nm
 provides the possibility of viewing and changing Touch ID configuration, both system-wide and user-specific. It also allows listing and deleting enrolled fingerprints.
@@ -29,6 +29,8 @@ Enables (1) or disables (0) overall Touch ID functionality (system-wide configur
 Enables (1) or disables (0) Touch ID for unlock.
 .It Fl a, -applepay
 Enables (1) or disables (0) Touch ID for ApplePay (user-specific configuration only).
+.It Fl o, -timeout
+Sets Touch ID timeout (in seconds, system-wide configuration only).
 .It Fl c, -count
 Provides number of enrolled fingerprints of the current user or of all users (when run with -s as an administrator)
 .It Fl p, -purge
@@ -46,6 +48,8 @@ Reads system-wide Touch ID configuration.
 Enables Touch ID for unlock for the current user.
 .It Ic sudo Nm Fl w Fl s Fl u Ar 0
 Disables Touch ID for unlock for the whole system.
+.It Ic sudo Nm Fl w Fl s Fl o Ar 86400
+Sets Touch ID timeout to 24h.
 .It Nm Fl c
 Prints the number of enrolled fingerprints of the current user.
 .It Nm Fl p

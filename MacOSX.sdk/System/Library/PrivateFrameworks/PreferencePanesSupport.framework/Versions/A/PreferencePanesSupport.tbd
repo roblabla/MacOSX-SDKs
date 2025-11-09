@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           389598ED-902F-3DAB-9523-E0795BE3A6B7
+    value:           553134D7-5283-35FB-887A-03A63E19660E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           20A20A99-73E2-3A35-99A0-E46494449DDD
+    value:           B07A53D3-1BE0-3F58-9716-5BF4FB049B04
 install-name:    '/System/Library/PrivateFrameworks/PreferencePanesSupport.framework/Versions/A/PreferencePanesSupport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -15,8 +15,8 @@ exports:
                        _SetSymbolicHotKeyValue, _SetSymbolicHotModifierValue, _closeIOCOnnection, 
                        _copyAlertCautionIconImage, _copyPerHostValueForKey, _copySymbolicHotKeyPreferences, 
                        _getHotKeyEntry, _ioSetBoolProperty, _ioSetBoolPropertyWithNotification, 
-                       _ioSetIntProperty, _ioSetIntPropertyWithNotification, _logASLMessage, 
-                       _openIOCOnnection, _perHostBooleanForKey, _perHostBooleanForKeyWithDefaultValue, 
+                       _ioSetIntProperty, _ioSetIntPropertyWithNotification, _openIOCOnnection, 
+                       _perHostBooleanForKey, _perHostBooleanForKeyWithDefaultValue, 
                        _perHostIntegerForKey, _perHostIntegerForKeyWithDefaultValue, 
                        _setSwipeScrollDirection, _swipeScrollDirection ]
     objc-classes:    [ AccountsPrefFormatter, BTPointingDevicePairController, IOServiceObserver, 

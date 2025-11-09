@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-__API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
+API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 @interface UNNotificationTrigger : NSObject <NSCopying, NSSecureCoding>
 
 @property (NS_NONATOMIC_IOSONLY, readonly) BOOL repeats;
@@ -21,13 +21,13 @@ __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 @end
 
 // UNPushNotificationTrigger can be sent from a server using Apple Push Notification Service.
-__API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
+API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 @interface UNPushNotificationTrigger : UNNotificationTrigger
 
 @end
 
 // UNTimeIntervalNotificationTrigger can be scheduled on the device to notify after the time interval, and optionally repeat.
-__API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
+API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 @interface UNTimeIntervalNotificationTrigger : UNNotificationTrigger
 
 @property (NS_NONATOMIC_IOSONLY, readonly) NSTimeInterval timeInterval;
@@ -39,7 +39,7 @@ __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 @end
 
 // UNCalendarNotificationTrigger can be scheduled on the device to notify based on date and time values, and optionally repeat. For example, if a notification should be delivered at the next 8:00 AM then set the 'hour' property of dateComponents to 8. If the notification should be delivered every day at 8:00 AM then set repeats to YES.
-__API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
+API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 @interface UNCalendarNotificationTrigger : UNNotificationTrigger
 
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSDateComponents *dateComponents;
@@ -52,12 +52,12 @@ __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 @end
 
 // UNLocationNotificationTrigger can be scheduled on the device to notify when the user enters or leaves a geographic region. The identifier on CLRegion must be unique. Scheduling multiple UNNotificationRequests with different regions containing the same identifier will result in undefined behavior. The number of UNLocationNotificationTriggers that may be scheduled by an application at any one time is limited by the system. Applications must have "when-in-use" authorization through CoreLocation. See the CoreLocation documentation for more information.
-__API_AVAILABLE(ios(10.0), watchos(3.0)) __API_UNAVAILABLE(macos, tvos, macCatalyst)
+API_AVAILABLE(ios(10.0), watchos(3.0)) API_UNAVAILABLE(macos, tvos, macCatalyst)
 @interface UNLocationNotificationTrigger : UNNotificationTrigger
 
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) CLRegion *region;
 
-+ (instancetype)triggerWithRegion:(CLRegion *)region repeats:(BOOL)repeats __API_UNAVAILABLE(watchos);
++ (instancetype)triggerWithRegion:(CLRegion *)region repeats:(BOOL)repeats API_AVAILABLE(watchos(8.0));
 
 @end
 

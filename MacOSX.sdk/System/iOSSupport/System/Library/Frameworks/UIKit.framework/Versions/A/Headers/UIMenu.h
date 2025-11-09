@@ -19,11 +19,15 @@ typedef NS_OPTIONS(NSUInteger, UIMenuOptions) {
     /// Indicates whether the menu should be rendered with a destructive appearance in its parent
     UIMenuOptionsDestructive    = 1 << 1,
     
+    /// Indicates whether the menu (and any submenus) should only allow a single "on" menu item.
+    UIMenuOptionsSingleSelection API_AVAILABLE(ios(15.0)) = 1 << 5,
+    
 } NS_SWIFT_NAME(UIMenu.Options) API_AVAILABLE(ios(13.0));
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIMenu : UIMenuElement
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+@interface UIMenu : UIMenuElement
 
 /// Unique identifier.
 @property (nonatomic, readonly) UIMenuIdentifier identifier;
@@ -33,6 +37,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIMenu : UIMenuElement
 
 /// The menu's sub-elements and sub-menus. On iOS 14.0, elements of your own menus are mutable, -copying a menu will produce mutable elements, and UIKit will take immutable copies of menus it receives. Prior to iOS 14.0, menus are always fully immutable.
 @property (nonatomic, readonly) NSArray<UIMenuElement *> *children;
+
+/// The element(s) in the menu and sub-menus that have an "on" menu item state.
+@property (nonatomic, readonly) NSArray <UIMenuElement *> *selectedElements API_AVAILABLE(ios(15.0));
 
 /*!
  * @abstract Creates a UIMenu with an empty title, nil image, automatically generated identifier, and default options.
@@ -216,6 +223,9 @@ UIKIT_EXTERN const UIMenuIdentifier UIMenuAlignment API_AVAILABLE(ios(13.0));
 
 /// Show/Hide and Customize Toolbar menu
 UIKIT_EXTERN const UIMenuIdentifier UIMenuToolbar API_AVAILABLE(ios(13.0));
+
+/// Sidebar menu
+UIKIT_EXTERN const UIMenuIdentifier UIMenuSidebar API_AVAILABLE(ios(15.0));
 
 /// Fullscreen menu
 UIKIT_EXTERN const UIMenuIdentifier UIMenuFullscreen API_AVAILABLE(ios(13.0));

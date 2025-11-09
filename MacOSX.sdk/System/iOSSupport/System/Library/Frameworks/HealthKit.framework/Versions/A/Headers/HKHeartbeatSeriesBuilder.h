@@ -51,16 +51,16 @@ HK_EXTERN API_AVAILABLE(ios(13.0), watchos(6.0))
  @abstract           Associate a heartbeat with the receiver.
  @discussion         Use this method to asynchronously add a heartbeat to the series.
  
- @param              timeInterval   The elapsed time between the series startDate and the heartbeat occurence. Must be
+ @param     timeIntervalSinceStart  The elapsed time between the series startDate and the heartbeat occurence. Must be
                                     a positive value.
  @param              precededByGap  Whether or not this heartbeat was preceded by a gap in data collection.
  @param              completion     The completion callback handler returns the status of the save. If the completion
                                     handler success is NO, then error is non-nil. An error here is considered fatal and
                                     the series builder will be complete.
  */
-- (void)addHeartbeatWithTimeIntervalSinceSeriesStartDate:(NSTimeInterval)timeInterval
+- (void)addHeartbeatWithTimeIntervalSinceSeriesStartDate:(NSTimeInterval)timeIntervalSinceStart
                                            precededByGap:(BOOL)precededByGap
-                                              completion:(void(^)(BOOL success, NSError * _Nullable error))completion;
+                                              completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addHeartbeat(at:precededByGap:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method             addMetadata:completion:
@@ -77,7 +77,7 @@ HK_EXTERN API_AVAILABLE(ios(13.0), watchos(6.0))
                                  insertion operation. When an error occurs, the builder's metadata will remain unchanged.
  */
 - (void)addMetadata:(NSDictionary<NSString *, id> *)metadata
-         completion:(void(^)(BOOL success, NSError * _Nullable error))completion;
+         completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method             finishSeriesWithCompletion:
@@ -93,7 +93,7 @@ HK_EXTERN API_AVAILABLE(ios(13.0), watchos(6.0))
                                  HKHeartbeatSeriesSample can be made through HKSampleQuery or similar queries. To
                                  retrieve the data stored with an HKHeartbeatSeriesSample use HKHeartbeatSeriesQuery.
  */
-- (void)finishSeriesWithCompletion:(void(^)(HKHeartbeatSeriesSample * _Nullable heartbeatSeries, NSError * _Nullable error))completion;
+- (void)finishSeriesWithCompletion:(void (^)(HKHeartbeatSeriesSample * _Nullable heartbeatSeries, NSError * _Nullable error))completion;
 
 @end
 

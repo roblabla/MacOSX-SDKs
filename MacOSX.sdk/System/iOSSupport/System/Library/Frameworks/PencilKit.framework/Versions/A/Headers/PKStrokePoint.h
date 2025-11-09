@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// A point value stores all the attributes of a PKStroke at a specific point.
 /// `PKStrokePoint` stores its properties compressed, the value read for a property may not
 /// exactly equal the value set for a property.
-NS_REFINED_FOR_SWIFT
 API_AVAILABLE(ios(14.0), macos(11.0))
 @interface PKStrokePoint : NSObject <NSCopying>
 

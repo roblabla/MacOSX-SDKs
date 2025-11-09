@@ -146,6 +146,4 @@ NS_CLASS_DEPRECATED_IOS(3_0, 7_0, "Use GKVoiceChat instead")
 
 @end
 
-GK_EXTERN_WEAK    NSString *  const GKVoiceChatServiceErrorDomain;
-
 

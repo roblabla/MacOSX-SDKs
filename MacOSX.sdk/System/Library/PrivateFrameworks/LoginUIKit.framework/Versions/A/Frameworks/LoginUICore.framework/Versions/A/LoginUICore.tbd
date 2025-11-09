@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F7405A52-C8D4-3EAF-9322-9B9434775AD7
+    value:           E2C27571-4E33-3CCA-B5C4-26F4B116FCB2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           748BBF2C-9EF6-3E51-BB50-387CBE807DAD
+    value:           15275322-631D-3925-AD81-E829F5592A4D
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -48,13 +48,13 @@ exports:
                        _LUICImageSpinnerRegular22, _LUICImageSpinnerRegular23, _LUICImageSpinnerRegular3, 
                        _LUICImageSpinnerRegular4, _LUICImageSpinnerRegular5, _LUICImageSpinnerRegular6, 
                        _LUICImageSpinnerRegular7, _LUICImageSpinnerRegular8, _LUICImageSpinnerRegular9, 
-                       _LUICKeyboard, _LUICScreenSharing, _LUICStringBatteryPercentage, 
-                       _LUICTextFieldLeftCap, _LUICTextFieldRightCap, _LUICTextFieldSelectionLeftCap, 
-                       _LUICTextFieldSelectionRightCap, _LUICTextFieldSelectionTile, 
-                       _LUICTextFieldTile, _LUICopyColorForOptions, _LUICopyLocalizedStringForIdentifier, 
-                       _LUICoreBundleIdentifier, _LUICreateImageForIdentifierWithOptions, 
-                       _LUICreateImageFromImageWithColor, _LUICreateImageFromJPEGData, 
-                       _LUICreateUserImageFromImage, _LUICreateUserImageFromImageWithOptions, 
-                       _LUICreateUserImageFromURLWithOptions, _LUIGetImageForIdentifierWithOptions, 
-                       _LUIUseUpdatedUI ]
+                       _LUICKeyboard, _LUICMicrophoneIndicator, _LUICMicrophoneIndicatorError, 
+                       _LUICScreenSharing, _LUICStringBatteryPercentage, _LUICTextFieldLeftCap, 
+                       _LUICTextFieldRightCap, _LUICTextFieldSelectionLeftCap, _LUICTextFieldSelectionRightCap, 
+                       _LUICTextFieldSelectionTile, _LUICTextFieldTile, _LUICopyColorForOptions, 
+                       _LUICopyLocalizedStringForIdentifier, _LUICoreBundleIdentifier, 
+                       _LUICreateImageForIdentifierWithOptions, _LUICreateImageFromImageWithColor, 
+                       _LUICreateImageFromJPEGData, _LUICreateUserImageFromImage, 
+                       _LUICreateUserImageFromImageWithOptions, _LUICreateUserImageFromURLWithOptions, 
+                       _LUIGetImageForIdentifierWithOptions, _LUIUseUpdatedUI ]
 ...

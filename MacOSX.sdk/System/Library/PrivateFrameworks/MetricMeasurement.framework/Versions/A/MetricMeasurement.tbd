@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           51B3BF3D-3681-30D9-9514-61E745A905F1
+    value:           92296DE6-60CD-333C-A56B-F2B95E147CCC
   - target:          x86_64-maccatalyst
-    value:           51B3BF3D-3681-30D9-9514-61E745A905F1
+    value:           92296DE6-60CD-333C-A56B-F2B95E147CCC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5326AFB5-F65B-3922-8939-0BEBCE3F0F38
+    value:           CE11E7D0-EA51-3E62-BFE8-ECB6CDABCC3F
   - target:          arm64e-maccatalyst
-    value:           5326AFB5-F65B-3922-8939-0BEBCE3F0F38
+    value:           CE11E7D0-EA51-3E62-BFE8-ECB6CDABCC3F
 install-name:    '/System/Library/PrivateFrameworks/MetricMeasurement.framework/Versions/A/MetricMeasurement'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -26,12 +26,15 @@ exports:
                        _MXMAttributeNameOSSignpostTelemetryString2Name, _MXMAttributeNameOSSignpostTelemetryString2Value, 
                        _MXMAttributeNameProcessIdentifier, _MXMAttributeNameProcessName, 
                        _MXMAttributeNameThreadIdentifier, _MXMAutomaticDefault, _MXMCPUMetricIdentifier, 
-                       _MXMDiskMetricIdentifier, _MXMInstrumentOptionEnableParallelizedSampling, 
+                       _MXMDiskMetricIdentifier, _MXMDisplayName, _MXMInstrumentOptionEnableParallelizedSampling, 
                        _MXMInstrumentOptionIterationCount, _MXMInstrumentOptionKickOffThreadIdentifier, 
-                       _MXMInstrumentOptionPerformanceTraceEnabled, _MXMInstrumentOptionQuiesceCpuIdlePercent, 
-                       _MXMInstrumentOptionQuiesceCpuIdleTimeLimit, _MXMInstrumentOptionScheduleKickOffOnNewThread, 
-                       _MXMMemoryMetricIdentifier, _MXMMetricIdentifierClock, _MXMMetricIdentifierOSSignpost, 
-                       _MXMNetworkMetricIdentifier, _MetricMeasurementVersionNumber, 
+                       _MXMInstrumentOptionPerfdataEnabled, _MXMInstrumentOptionPerfdataTestName, 
+                       _MXMInstrumentOptionPerformanceTraceConfigurations, _MXMInstrumentOptionPerformanceTraceEnabled, 
+                       _MXMInstrumentOptionQuiesceCpuIdlePercent, _MXMInstrumentOptionQuiesceCpuIdleTimeLimit, 
+                       _MXMInstrumentOptionScheduleKickOffOnNewThread, _MXMMemoryMetricIdentifier, 
+                       _MXMMetricIdentifierClock, _MXMMetricIdentifierOSSignpost, 
+                       _MXMNetworkMetricIdentifier, _MXMSampleAttributeNameMetricIdentifier, 
+                       _MXMSampleAttributeNameMetricPolarity, _MetricMeasurementVersionNumber, 
                        _MetricMeasurementVersionString, __MXMGetInstrumentsLog, __MXMGetLog, 
                        _kMXMOSLogProbeDidUpdateConnectedDevicesList ]
     objc-classes:    [ MXMCPUMetric, MXMClockMetric, MXMClockSampleTag, MXMDiskMetric, 

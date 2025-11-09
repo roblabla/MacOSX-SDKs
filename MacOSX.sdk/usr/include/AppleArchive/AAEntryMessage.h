@@ -50,7 +50,8 @@ APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
 
   /*!
     @abstract End entry \p path
-    @discussion Signals we are done processing entry \p path. \p data is not used.
+    @discussion Signals we are done processing entry \p path.
+    If not NULL, \p data is a pointer to two uint64_t values containing the entry IDX,IDZ.
     This will be the last message relative to this entry.
     If the callback returns a negative value, the current operation will be aborted as soon as possible.
   */
@@ -58,7 +59,8 @@ APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
 
   /*!
     @abstract Processing entry \p path failed, abort?
-    @discussion Signals an error processing entry \p path. If the callback returns a >0 value, the current action is interrupted. \p data is not used.
+    @discussion Signals an error processing entry \p path. If the callback returns a >0 value, the current action is interrupted.
+    If not NULL, \p data is a pointer to two uint64_t values containing the entry IDX,IDZ.
     This will be the last message relative to this entry.
     If the callback returns a negative value, the current operation will be aborted as soon as possible.
   */
@@ -94,7 +96,9 @@ APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
 
   /*!
     @abstract Report entry writing from the archive encoder
-    @discussion \p data is not used
+    @discussion If not NULL, \p data is a pointer to two uint64_t values containing the total DAT blob size,
+    and the currently processed DAT blob size.  For files with large data blobs, this callback will be received
+    several times to allow progress tracking and cancellation.
     If the callback returns a negative value, the current operation will be aborted as soon as possible.
   */
   AA_ENTRY_MESSAGE_ENCODE_WRITING   = 31,
@@ -115,7 +119,9 @@ APPLE_ARCHIVE_ENUM(AAEntryMessages, uint32_t) {
 
   /*!
     @abstract Report entry reading from the archive decoder
-    @discussion \p data is not used
+    @discussion If not NULL, \p data is a pointer to two uint64_t values containing the total DAT blob size,
+    and the currently processed DAT blob size.  For files with large data blobs, this callback will be received
+    several times to allow progress tracking and cancellation.
     If the callback returns a negative value, the current operation will be aborted as soon as possible.
   */
   AA_ENTRY_MESSAGE_DECODE_READING   = 60,

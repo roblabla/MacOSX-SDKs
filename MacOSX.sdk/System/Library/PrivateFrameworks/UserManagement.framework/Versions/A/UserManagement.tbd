@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7921CB5B-BC73-300A-9A0F-F9C35F121A4A
+    value:           1DFE3AEB-0D38-313D-B7AA-CE2075074D47
   - target:          x86_64-maccatalyst
-    value:           7921CB5B-BC73-300A-9A0F-F9C35F121A4A
+    value:           1DFE3AEB-0D38-313D-B7AA-CE2075074D47
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3BB34A3E-D4CA-34E2-86F3-789F367A153F
+    value:           44E27778-7EA1-3CA9-A6F8-6BD20F6BA6D3
   - target:          arm64e-maccatalyst
-    value:           3BB34A3E-D4CA-34E2-86F3-789F367A153F
+    value:           44E27778-7EA1-3CA9-A6F8-6BD20F6BA6D3
 install-name:    '/System/Library/PrivateFrameworks/UserManagement.framework/Versions/A/UserManagement'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

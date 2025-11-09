@@ -22,6 +22,7 @@ typedef NS_OPTIONS(NSUInteger, UICollisionBehaviorMode) {
     UICollisionBehaviorModeEverything   = NSUIntegerMax
 } API_AVAILABLE(ios(7.0));
 
+NS_SWIFT_UI_ACTOR
 @protocol UICollisionBehaviorDelegate <NSObject>
 @optional
 
@@ -35,7 +36,8 @@ typedef NS_OPTIONS(NSUInteger, UICollisionBehaviorMode) {
 @end
 
     
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UICollisionBehavior : UIDynamicBehavior
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UICollisionBehavior : UIDynamicBehavior
 
 - (instancetype)initWithItems:(NSArray<id <UIDynamicItem>> *)items NS_DESIGNATED_INITIALIZER;
 

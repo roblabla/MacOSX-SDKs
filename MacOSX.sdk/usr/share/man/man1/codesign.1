@@ -47,7 +47,6 @@ options of the form --name and --name=value. Common options have both
 forms; less frequent and specialized options have only long form.
 Note that the form --name value (without equal sign) will not work as expected
 on options with optional values.
-.Pp
 .Sh OPTIONS
 The options are as follows:
 .Bl -tag -width indent
@@ -121,8 +120,10 @@ When signing, causes
 .Nm
 to replace any existing signature on the path(s) given. Without this option,
 existing signatures will not be replaced, and the signing operation fails.
-.It Fl -remove-signature
-Removes the current code signature from the path(s) given.
+.It Fl -generate-entitlement-der
+When signing, convert the supplied entitlements XML data to DER and embed the entitlements
+as both XML and DER in the signature. Embedding DER entitlements is default behavior
+as of macOS 12.0 when signing for all platforms. This argument was introduced in macOS 10.14 (Mojave).
 .It Fl h, -hosting
 Constructs and prints the hosting chain of a running program. The
 .Ar pid
@@ -146,6 +147,8 @@ As a special case, a pagesize of zero
 indicates that the entire code should be signed and verified as a single,
 possibly gigantic page. This option only applies to the main executable and has
 no effect on the sealing of associated data, including resources.
+.It Fl -remove-signature
+Removes the current code signature from the path(s) given.
 .It Fl r, -requirements Ar requirements
 During signing, indicates that internal requirements should be embedded in the
 code path(s) as specified. See "specifying requirements" below.
@@ -191,9 +194,13 @@ does not already begin with a suitable binary ("blob") header, one is attached a
 When displaying a signature, extract any entitlement data from the signature
 and write it to the
 .Ar path
-given. Use "-" to write to standard output.
-By default, the binary "blob" header is returned intact; prefix the path with a colon ":"
-to automatically strip it off.
+given in an abstract representation. If needed
+.Fl -xml
+or
+.Fl -der
+may be passed in to output the entitlements in a desired format, if you pass in both then DER will be printed. Use
+.Qq -
+as the path to write to standard output.
 If the signature has no entitlement data,
 nothing is written (this is not an error).
 .It Fl -extract-certificates Ar prefix
@@ -310,7 +317,6 @@ If this option is omitted, but the \fIruntime\fR
 OPTION FLAG is set then the hardened runtime version is omitted for non-Mach-O files and derived from the SDK
 version of Mach-O files.
 .El
-.Pp
 .Sh OPERATION
 .\" Signing
 .\" =============================================================================
@@ -517,10 +523,10 @@ verifier. Note that this flag does not affect any other checks that may cause
 signature validation to fail, including checks for certificate revocation.
 .It library
 Forces the signed code's library validation flag to be set when the code begins execution.
-The code will only be able to link against system libraries and frameworks, or libraries, frameworks, 
-and plug-in bundles with the same team identifier embedded in the code directory. 
-Team identifiers are automatically recorded in signatures when signing with suitable Apple-issued signing certificates. 
-Note that the flag is not supported for i386 binaries, and only applies to the main executable. 
+The code will only be able to link against system libraries and frameworks, or libraries, frameworks,
+and plug-in bundles with the same team identifier embedded in the code directory.
+Team identifiers are automatically recorded in signatures when signing with suitable Apple-issued signing certificates.
+Note that the flag is not supported for i386 binaries, and only applies to the main executable.
 The flag has no effect when set on frameworks and libraries.
 .It runtime
 On macOS versions >= 10.14.0, opts signed processes into a hardened runtime environment which
@@ -582,11 +588,14 @@ To extract the internal requirements from Terminal.app to standard output:
 .Dl codesign --display -r- Terminal.app
 .Pp
 To display the entitlements of a binary or bundle:
-.Dl codesign --display --entitlements :- /sbin/launchd
-.Dl codesign --display --entitlements :- Terminal.app
+.Dl codesign --display --entitlements - /sbin/launchd
+.Dl codesign --display --entitlements -  --der Terminal.app
 .Pp
 To display the entitlements of process 666:
-.Dl codesign --display --entitlements :- +666
+.Dl codesign --display --entitlements - +666
+.Pp
+To display the XML entitlements of process 1337:
+.Dl codesign --display --entitlements -  --xml +1337
 .Sh TROUBLESHOOTING
 A common source of confusion when using
 .Nm
@@ -689,15 +698,6 @@ to interpret the argument as a path. For example:
 .Dl codesign --verify 666
 would become:
 .Dl codesign --verify ./666
-.Pp
-Prefixing a number with
-.Qq +
-will force
-.Nm
-to interpret the number as a PID. For example:
-.Dl codesign --verify 666
-would become:
-.Dl codesign --verify +666
 .Sh NOTES
 The Xcode build system invokes
 .Nm

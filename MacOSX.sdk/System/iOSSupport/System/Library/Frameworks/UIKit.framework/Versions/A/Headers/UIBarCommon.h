@@ -16,8 +16,8 @@ typedef NS_ENUM(NSInteger, UIBarMetrics) {
     UIBarMetricsDefaultPrompt = 101, // Applicable only in bars with the prompt property, such as UINavigationBar and UISearchBar
     UIBarMetricsCompactPrompt,
 
-    UIBarMetricsLandscapePhone NS_ENUM_DEPRECATED_IOS(5_0, 8_0, "Use UIBarMetricsCompact instead") = UIBarMetricsCompact,
-    UIBarMetricsLandscapePhonePrompt NS_ENUM_DEPRECATED_IOS(7_0, 8_0, "Use UIBarMetricsCompactPrompt") = UIBarMetricsCompactPrompt,
+    UIBarMetricsLandscapePhone API_DEPRECATED_WITH_REPLACEMENT("UIBarMetricsCompact", ios(5.0, 8.0)) = UIBarMetricsCompact,
+    UIBarMetricsLandscapePhonePrompt API_DEPRECATED_WITH_REPLACEMENT("UIBarMetricsCompactPrompt", ios(7.0, 8.0)) = UIBarMetricsCompactPrompt,
 };
 
 typedef NS_ENUM(NSInteger, UIBarPosition) {
@@ -33,10 +33,12 @@ typedef NS_ENUM(NSInteger, UIBarPosition) {
 #define UIToolbarPositionTop UIBarPositionTop
 
 
+NS_SWIFT_UI_ACTOR
 @protocol UIBarPositioning <NSObject> // UINavigationBar, UIToolbar, and UISearchBar conform to this
 @property(nonatomic,readonly) UIBarPosition barPosition;
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UIBarPositioningDelegate <NSObject> // UINavigationBarDelegate, UIToolbarDelegate, and UISearchBarDelegate all extend from this
 @optional
 /* Implement this method on your manual bar delegate when not managed by a UIKit controller.

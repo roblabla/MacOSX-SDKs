@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2013-2018 Apple Inc. All rights reserved.
+	Copyright 2013-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -34,7 +34,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 	@discussion
 		By default, this timebase will be driven by the clock of an added AVSampleBufferAudioRenderer.
 	
-		If no AVSampleBufferAudioRenderer has been added, the master clock will be the host time clock (mach_absolute_time with the appropriate timescale conversion; this is the same as Core Animation's CACurrentMediaTime).
+		If no AVSampleBufferAudioRenderer has been added, the source clock will be the host time clock (mach_absolute_time with the appropriate timescale conversion; this is the same as Core Animation's CACurrentMediaTime).
 					
 		The timebase is a read-only timebase.  Use the rate property and corresponding methods to adjust the timebase.
 */

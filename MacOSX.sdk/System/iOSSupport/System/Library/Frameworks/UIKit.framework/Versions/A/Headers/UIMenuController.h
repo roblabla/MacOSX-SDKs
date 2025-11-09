@@ -22,7 +22,8 @@ typedef NS_ENUM(NSInteger, UIMenuControllerArrowDirection) {
 
 @class UIView, UIMenuItem;
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos) @interface UIMenuController : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIMenuController : NSObject
 
 @property(class, nonatomic, readonly) UIMenuController *sharedMenuController;
 
@@ -53,7 +54,8 @@ UIKIT_EXTERN NSNotificationName const UIMenuControllerWillHideMenuNotification A
 UIKIT_EXTERN NSNotificationName const UIMenuControllerDidHideMenuNotification API_UNAVAILABLE(tvos);
 UIKIT_EXTERN NSNotificationName const UIMenuControllerMenuFrameDidChangeNotification API_UNAVAILABLE(tvos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(tvos) @interface UIMenuItem : NSObject 
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UIMenuItem : NSObject 
 
 - (instancetype)initWithTitle:(NSString *)title action:(SEL)action NS_DESIGNATED_INITIALIZER;
 

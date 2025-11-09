@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8A4093AB-5039-381D-AB76-07A96612499C
+    value:           DE335642-5EE4-3B45-8EE4-B727CE33CDD3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8C9D5C9B-BD96-3B89-8B36-7B9A79E6F15D
+    value:           6401B116-B09E-3004-AF7D-777E4A73B6CB
 install-name:    '/System/Library/PrivateFrameworks/WebInspectorUI.framework/Versions/A/WebInspectorUI'
-current-version: 611.1.21
+current-version: 612.1.24
 ...

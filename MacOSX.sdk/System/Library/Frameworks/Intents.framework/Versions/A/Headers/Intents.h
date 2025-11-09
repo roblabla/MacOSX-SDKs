@@ -39,6 +39,10 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 // Generated
 #import <Intents/Intents_Generated.h>
 
+// Donation Metadata
+#import <Intents/INIntentDonationMetadata.h>
+#import <Intents/INSendMessageIntentDonationMetadata.h>
+
 // Extension
 #import <Intents/INExtension.h>
 
@@ -116,13 +120,14 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/INUpcomingMediaManager.h>
 
 // Utilities
-#import <Intents/INSiriAuthorizationStatus.h>
-#import <Intents/INPreferences.h>
 #import <Intents/CLPlacemark+IntentsAdditions.h>
-#import <Intents/NSUserActivity+IntentsAdditions.h>
 #import <Intents/INPerson+SiriAdditions.h>
-#import <Intents/NSString+Intents.h>
+#import <Intents/INPreferences.h>
+#import <Intents/INSiriAuthorizationStatus.h>
+#import <Intents/INFocusStatusCenter.h>
 #import <Intents/NSExtensionContext+ShareExtension.h>
+#import <Intents/NSString+Intents.h>
+#import <Intents/NSUserActivity+IntentsAdditions.h>
 
 // User Context
 #import <Intents/INUserContext.h>
@@ -142,6 +147,10 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 
 // Media
 #import <Intents/INMediaItem.h>
+
+// User Notifications
+#import <Intents/INSendMessageIntent+UserNotifications.h>
+#import <Intents/INStartCallIntent+UserNotifications.h>
 
 // Deprecated
 #import <Intents/INPerson_Deprecated.h>

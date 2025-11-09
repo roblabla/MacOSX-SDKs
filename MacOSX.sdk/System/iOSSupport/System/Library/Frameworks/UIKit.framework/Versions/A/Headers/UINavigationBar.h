@@ -20,7 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class UINavigationItem, UIBarButtonItem, UIImage, UIColor, UINavigationBarAppearance;
 @protocol UINavigationBarDelegate;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UINavigationBar : UIView <NSCoding, UIBarPositioning> 
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UINavigationBar : UIView <NSCoding, UIBarPositioning> 
 
 @property(nonatomic,assign) UIBarStyle barStyle UI_APPEARANCE_SELECTOR API_UNAVAILABLE(tvos);
 @property(nullable,nonatomic,weak) id<UINavigationBarDelegate> delegate;
@@ -101,10 +102,20 @@ vertically if necessary when the navigation bar is in the position UIBarPosition
 
 /*
  Fallback Behavior:
- 1) Appearance objects are used in whole – that is, all values will be sourced entirely from an instance of UINavigationBarAppearance defined by one of these named properties (standardAppearance, compactAppearance, scrollEdgeAppearance) on either UINavigationBar (self) or UINavigationItem (self.topItem).
- 2) The navigation bar will always attempt to use the most relevant appearance instances first, before falling back to less relevant ones. The fallback logic is:
-     AtScrollEdge: self.topItem.scrollEdgeAppearance => self.scrollEdgeAppearance => self.topItem.standardAppearance => self.standardAppearance
-     CompactSize: self.topItem.compactAppearance => self.compactAppearance => self.topItem.standardAppearance => self.standardAppearance
+ 1) Appearance objects are used in whole – that is, all values will be sourced entirely from an
+ instance of UINavigationBarAppearance defined by one of these named properties (standardAppearance,
+ compactAppearance, scrollEdgeAppearance, compactScrollEdgeAppearance) on either UINavigationBar
+ (self) or UINavigationItem (self.topItem).
+ 2) The navigation bar will always attempt to use the most relevant appearance instances first,
+ before falling back to less relevant ones. The fallback logic is:
+     AtScrollEdge: self.topItem.scrollEdgeAppearance => self.scrollEdgeAppearance
+         => self.topItem.standardAppearance => self.standardAppearance
+     AtCompactScrollEdge: self.topItem.compactScrollEdgeAppearance
+         => self.compactScrollEdgeAppearance => self.topItem.scrollEdgeAppearance
+         => self.scrollEdgeAppearance => self.topItem.compactAppearance
+         => self.compactAppearance => self.topItem.standardAppearance => self.standardAppearance
+     CompactSize: self.topItem.compactAppearance => self.compactAppearance
+         => self.topItem.standardAppearance => self.standardAppearance
      NormalSize: self.topItem.standardAppearance => self.standardAppearance
  */
 
@@ -114,9 +125,11 @@ vertically if necessary when the navigation bar is in the position UIBarPosition
 @property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *compactAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0));
 /// Describes the appearance attributes for the navigation bar to use when an associated UIScrollView has reached the edge abutting the bar (the top edge for the navigation bar). If not set, a modified standardAppearance will be used instead.
 @property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *scrollEdgeAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0));
-
+/// Describes the appearance attributes for the navigation bar to use when it is displayed with its compact heights, and an associated UIScrollView has reached the edge abutting the bar. If not set, first the scrollEdgeAppearance will be tried, and if that is nil then compactAppearance followed by a modified standardAppearance.
+@property(nonatomic,readwrite, copy, nullable) UINavigationBarAppearance *compactScrollEdgeAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(15.0));
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UINavigationBarDelegate <UIBarPositioningDelegate>
 
 @optional

@@ -173,42 +173,42 @@ type 'itl1' {
                 unsigned longint = (endAbbrevDays - abbrevDays) >> 3;       /* length of abbrevDays table   */
                 unsigned longint = abbrevMonths >> 3;                       /* offset to abbrevMonths table */
                 unsigned longint = (endAbbrevMonths - abbrevMonths) >> 3;   /* length of abbrevMonths table */
-                unsigned longint = extraSeparators >> 3;                    /* offset to extraSeparators table  */  /*<10>*/
-                unsigned longint = (endExtraSeparators - extraSeparators) >> 3; /* len of extraSeparators table */  /*<10>*/
+                unsigned longint = extraSeparators >> 3;                    /* offset to extraSeparators table  */  
+                unsigned longint = (endExtraSeparators - extraSeparators) >> 3; /* len of extraSeparators table */  
 extraDays:
                 integer = $$CountOf(extraDaysArray);            /* number of extra days */
                 array extraDaysArray {                          /* array of extra names     */
                     pstring;                                    /* extra day name string    */
                 };
-                align word;                                                                         /*<22>*/
+                align word;                                                                         
 endExtraDays:
 extraMonths:
                 integer = $$CountOf(extraMonthArray);           /* number of extra months   */
                 array extraMonthArray {                         /* array of extra names     */
                     pstring;                                    /* extra month name string  */
                 };
-                align word;                                                                         /*<22>*/
+                align word;                                                                         
 endExtraMonths:
 abbrevDays:
                 integer = $$CountOf(abbrevDaysArray);           /* number of abbrev days    */
                 array abbrevDaysArray {                         /* array of abbrev names    */
                     pstring;                                    /* abbrev day name string   */
                 };
-                align word;                                                                         /*<22>*/
+                align word;                                                                         
 endAbbrevDays:
 abbrevMonths:
                 integer = $$CountOf(abbrevMonthArray);          /* number of abbrev months  */
                 array abbrevMonthArray {                        /* array of abbrev names    */
                     pstring;                                    /* abbrev month name string */
                 };
-                align word;                                                                         /*<22>*/
+                align word;                                                                         
 endAbbrevMonths:
 extraSeparators:
-                integer = $$CountOf(extraSeparatorsArray);      /* number of extra separators   */  /*<10>*/
-                array extraSeparatorsArray {                    /* array of separator strings   */  /*<10>*/
-                    pstring;                                    /* separator string             */  /*<10>*/
+                integer = $$CountOf(extraSeparatorsArray);      /* number of extra separators   */  
+                array extraSeparatorsArray {                    /* array of separator strings   */  
+                    pstring;                                    /* separator string             */  
                 };
-                align word;                                                                         /*<22>*/
+                align word;                                                                         
 endExtraSeparators:
         };
 };
@@ -505,36 +505,36 @@ type 'itl4' {
 };
 /*----------------------------itlb ¥ International Script Bundle------------------------*/
 type 'itlb' {
-        integer;                                                /* itl0 id number       */              /*<6>*/
-        integer;                                                /* itl1 id number       */              /*<6>*/
-        integer;                                                /* itl2 id number       */              /*<6>*/
+        integer;                                                /* itl0 id number       */              
+        integer;                                                /* itl1 id number       */              
+        integer;                                                /* itl2 id number       */              
         unsigned hex integer;                                   /* script flags - see
                                                                    smScriptFlags info
                                                                    in ScriptEqu.a       */
-        integer;                                                /* itl4 id number       */              /*<6>*/
-        integer;                                                /* id number of optional itl5, or 0 */  /*<13>*/
+        integer;                                                /* itl4 id number       */              
+        integer;                                                /* id number of optional itl5, or 0 */  
         unsigned integer;                                       /* Script language      */
         unsigned integer;                                       /* high byte - number
                                                                    representation code,
                                                                    low byte - date
                                                                    representation code  */
-        integer;                                                /* KCHR id number       */              /*<6>*/
-        integer;                                                /* id no. of SICN or kcs#,kcs4,kcs8 */  /*<6>*/
-        unsigned longint;                                       /* size of script's local record    */  /*<6>*/
-        integer;                                                /* default monospace FOND ID        */  /*<6>*/
-        unsigned integer;                                       /* default monospace font size      */  /*<6>*/
-        integer;                                                /* preferred FOND ID                */  /*<6>*/
-        unsigned integer;                                       /* preferred font size              */  /*<6>*/
-        integer;                                                /* default small FOND ID            */  /*<6>*/
-        unsigned integer;                                       /* default small font size          */  /*<6>*/
-        integer;                                                /* default system FOND ID           */  /*<6>*/
-        unsigned integer;                                       /* default system font size         */  /*<6>*/
-        integer;                                                /* default application FOND ID      */  /*<6>*/
-        unsigned integer;                                       /* default application font size    */  /*<6>*/
-        integer;                                                /* default Help Mgr FOND ID         */  /*<6>*/
-        unsigned integer;                                       /* default Help Mgr font size       */  /*<6>*/
-        hex byte;                                               /* valid styles for script              /*<10>*/
-        hex byte;                                               /* alias style for script           */  /*<10>*/
+        integer;                                                /* KCHR id number       */              
+        integer;                                                /* id no. of SICN or kcs#,kcs4,kcs8 */  
+        unsigned longint;                                       /* size of script's local record    */  
+        integer;                                                /* default monospace FOND ID        */  
+        unsigned integer;                                       /* default monospace font size      */  
+        integer;                                                /* preferred FOND ID                */  
+        unsigned integer;                                       /* preferred font size              */  
+        integer;                                                /* default small FOND ID            */  
+        unsigned integer;                                       /* default small font size          */  
+        integer;                                                /* default system FOND ID           */  
+        unsigned integer;                                       /* default system font size         */  
+        integer;                                                /* default application FOND ID      */  
+        unsigned integer;                                       /* default application font size    */  
+        integer;                                                /* default Help Mgr FOND ID         */  
+        unsigned integer;                                       /* default Help Mgr font size       */  
+        hex byte;                                               /* valid styles for script          */
+        hex byte;                                               /* alias style for script           */  
 };
 /*----------------------------itlc ¥ International Configuration------------------------*/
 type 'itlc' {
@@ -552,11 +552,11 @@ type 'itlc' {
         unsigned integer;                                       /* pref. region code    */
 
         /* system flags */
-        boolean         directionLeftRight, directionRightLeft; /* to set TESysJust     */  /*<23>*/
-        fill bit[15];                                           /* reserved             */  /*<23>*/
+        boolean         directionLeftRight, directionRightLeft; /* to set TESysJust     */  
+        fill bit[15];                                           /* reserved             */  
 
         /* for future expansion */
-        hex string [32];                                        /* reserved             */  /*<23>*/
+        hex string [32];                                        /* reserved             */  
 };
 /*----------------------------itlk ¥ Keyboard-dependent Remapping-----------------------*/
 type 'itlk' {

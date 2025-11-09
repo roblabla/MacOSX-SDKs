@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           8C5D2FDC-72FC-35D4-B838-FFC02AB55384
+    value:           9A3A54E1-E50C-3185-8A7C-5385E73AF19F
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           5AE149CE-0C57-3946-B0A0-98954174DF55
+    value:           4CFF68F9-3D53-3873-B28B-55F3E1786BF8
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit'
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _PDFAnnotationHighlightingModeInvert, _PDFAnnotationHighlightingModeNone, 
                        _PDFAnnotationHighlightingModeOutline, _PDFAnnotationHighlightingModePush, 
                        _PDFAnnotationKeyAction, _PDFAnnotationKeyAdditionalActions, 
@@ -37,7 +37,8 @@ exports:
                        _PDFAnnotationSubtypeCircle, _PDFAnnotationSubtypeFreeText, 
                        _PDFAnnotationSubtypeHighlight, _PDFAnnotationSubtypeInk, 
                        _PDFAnnotationSubtypeLine, _PDFAnnotationSubtypeLink, _PDFAnnotationSubtypePopup, 
-                       _PDFAnnotationSubtypeSquare, _PDFAnnotationSubtypeStamp, _PDFAnnotationSubtypeStrikeOut, 
+                       _PDFAnnotationSubtypeSignature, _PDFAnnotationSubtypeSquare, 
+                       _PDFAnnotationSubtypeStamp, _PDFAnnotationSubtypeStrikeOut, 
                        _PDFAnnotationSubtypeText, _PDFAnnotationSubtypeUnderline, 
                        _PDFAnnotationSubtypeWidget, _PDFAnnotationTextIconTypeComment, 
                        _PDFAnnotationTextIconTypeHelp, _PDFAnnotationTextIconTypeInsert, 
@@ -49,15 +50,16 @@ exports:
                        _PDFAppearanceCharacteristicsKeyCaption, _PDFAppearanceCharacteristicsKeyDownCaption, 
                        _PDFAppearanceCharacteristicsKeyRolloverCaption, _PDFAppearanceCharacteristicsKeyRotation, 
                        _PDFBorderKeyDashPattern, _PDFBorderKeyLineWidth, _PDFBorderKeyStyle, 
-                       _PDFDocumentAuthorAttribute, _PDFDocumentCreationDateAttribute, 
-                       _PDFDocumentCreatorAttribute, _PDFDocumentDidBeginFindNotification, 
-                       _PDFDocumentDidBeginPageFindNotification, _PDFDocumentDidBeginPageWriteNotification, 
-                       _PDFDocumentDidBeginWriteNotification, _PDFDocumentDidEndFindNotification, 
-                       _PDFDocumentDidEndPageFindNotification, _PDFDocumentDidEndPageWriteNotification, 
-                       _PDFDocumentDidEndWriteNotification, _PDFDocumentDidFindMatchNotification, 
-                       _PDFDocumentDidUnlockNotification, _PDFDocumentKeywordsAttribute, 
+                       _PDFDocumentAccessPermissionsOption, _PDFDocumentAuthorAttribute, 
+                       _PDFDocumentCreationDateAttribute, _PDFDocumentCreatorAttribute, 
+                       _PDFDocumentDidBeginFindNotification, _PDFDocumentDidBeginPageFindNotification, 
+                       _PDFDocumentDidBeginPageWriteNotification, _PDFDocumentDidBeginWriteNotification, 
+                       _PDFDocumentDidEndFindNotification, _PDFDocumentDidEndPageFindNotification, 
+                       _PDFDocumentDidEndPageWriteNotification, _PDFDocumentDidEndWriteNotification, 
+                       _PDFDocumentDidFindMatchNotification, _PDFDocumentDidUnlockNotification, 
+                       _PDFDocumentFoundSelectionKey, _PDFDocumentKeywordsAttribute, 
                        _PDFDocumentModificationDateAttribute, _PDFDocumentOwnerPasswordOption, 
-                       _PDFDocumentProducerAttribute, _PDFDocumentSubjectAttribute, 
+                       _PDFDocumentPageIndexKey, _PDFDocumentProducerAttribute, _PDFDocumentSubjectAttribute, 
                        _PDFDocumentTitleAttribute, _PDFDocumentUserPasswordOption, 
                        _PDFPageAnnotationAddedNotification, _PDFPageAnnotationRemovedNotification, 
                        _PDFPageBackgroundCompleteNotification, _PDFPageChangedBoundsForBoxNotification, 
@@ -72,8 +74,8 @@ exports:
                        _PDFRectGetMinY, _PDFRectInset, _PDFRectIntegral, _PDFRectIntersection, 
                        _PDFRectIntersectsRect, _PDFRectIsEmpty, _PDFRectMake, _PDFRectOffset, 
                        _PDFRectToCGRect, _PDFRectUnion, _PDFScrollViewPageMayHaveChangedNotification, 
-                       _PDFSelectionChangedColorNotification, _PDFSizeFromCGSize, 
-                       _PDFSizeMake, _PDFSizeToCGSize, _PDFTextSelectionMenuDidChangeScrollPosition, 
+                       _PDFScrollViewWillBeginDraggingNotification, _PDFSelectionChangedColorNotification, 
+                       _PDFSizeFromCGSize, _PDFSizeMake, _PDFSizeToCGSize, _PDFTextSelectionMenuDidChangeScrollPosition, 
                        _PDFTextSelectionMenuWillChangeScrollPosition, _PDFTextSelectionMenuWillChangeZoomFactor, 
                        _PDFThumbnailViewDocumentEditedNotification, _PDFViewAnnotationHitNotification, 
                        _PDFViewAnnotationWillHitNotification, _PDFViewAnnotationsDidChangeNotification, 
@@ -84,8 +86,8 @@ exports:
                        _PDFViewPrintPermissionNotification, _PDFViewScaleChangedNotification, 
                        _PDFViewSelectionChangedNotification, _PDFViewVisiblePagesChangedNotification, 
                        _PDFViewWillBeginChangingSelectionNotification, _kPDFDestinationUnspecifiedValue, 
-                       _kPDFDocumentWriteOption_SaveWithCorePDFLayout, _kPDFDocumentWriteOption_SaveWithTaggedLayout, 
-                       _kPDFDocumentWriteOption_UseAppendMode ]
+                       _kPDFDocumentWriteOption_BurnInAnnotations, _kPDFDocumentWriteOption_SaveWithCorePDFLayout, 
+                       _kPDFDocumentWriteOption_SaveWithTaggedLayout, _kPDFDocumentWriteOption_UseAppendMode ]
     objc-classes:    [ PDFAction, PDFActionGoTo, PDFActionNamed, PDFActionRemoteGoTo, 
                        PDFActionResetForm, PDFActionURL, PDFAnnotation, PDFAppearanceCharacteristics, 
                        PDFBorder, PDFDestination, PDFDocument, PDFExtensionContext, 

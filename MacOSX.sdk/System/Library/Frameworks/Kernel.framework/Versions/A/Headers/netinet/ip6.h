@@ -94,6 +94,8 @@
 #ifndef _NETINET_IP6_H_
 #define _NETINET_IP6_H_
 #include <sys/appleapiopts.h>
+#include <sys/types.h>
+#include <netinet/in.h>
 
 /*
  * Definition for internet protocol version 6.

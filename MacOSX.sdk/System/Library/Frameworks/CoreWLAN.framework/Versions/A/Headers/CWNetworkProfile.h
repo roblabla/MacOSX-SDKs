@@ -86,6 +86,18 @@ NS_CLASS_AVAILABLE_MAC(10_7)
     NSDate          *_userPreferredOrderTimestamp;
     
     NSDate          *_updatedAt;
+    
+    NSDate          *_discoveredAt;
+    
+    NSDictionary<NSString *, NSDate *> *_userPreferredNetworkNames;
+    
+    NSDictionary<NSString *, NSDate *> *_userPreferredPasspointDomains;
+    
+    NSString        *_networkGroupID;
+    
+    NSUInteger      _networkGroupPriority;
+    
+    BOOL            _privacyProxyEnabled;
 }
 
 /*!

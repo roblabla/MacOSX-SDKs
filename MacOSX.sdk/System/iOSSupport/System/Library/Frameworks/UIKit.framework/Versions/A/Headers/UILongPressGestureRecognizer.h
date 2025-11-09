@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 // Changes: when a finger moves
 // Ends:    when a finger is lifted
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UILongPressGestureRecognizer : UIGestureRecognizer
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+@interface UILongPressGestureRecognizer : UIGestureRecognizer
 
 @property (nonatomic) NSUInteger numberOfTapsRequired;      // Default is 0. The number of full taps required before the press for gesture to be recognized
 @property (nonatomic) NSUInteger numberOfTouchesRequired API_UNAVAILABLE(tvos);   // Default is 1. Number of fingers that must be held down for the gesture to be recognized

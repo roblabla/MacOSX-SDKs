@@ -1,5 +1,5 @@
 .\"
-.\" Copyright (c) 1998-2020 Apple Inc. All rights reserved.
+.\" Copyright (c) 1998-2021 Apple Inc. All rights reserved.
 .\"
 .\" This file contains Original Code and/or Modifications of Original Code
 .\" as defined in and that are subject to the Apple Public Source License
@@ -16,10 +16,9 @@
 .\" Please see the License for the specific language governing rights and
 .\" limitations under the License.
 .\"
-.Dd 24 July 2020
-.Os "macOS"
+.Dd 11 January 2021
 .Dt DISKUTIL 8
-.Pp
+.Os "macOS"
 .Sh NAME
 .Nm diskutil
 .Nd modify, verify and repair local disks
@@ -30,6 +29,7 @@
 .Nm
 .Op Nm quiet
 .Ar verb
+.Op Ar subVerb
 .Op Ar options
 .\"
 .\"
@@ -148,7 +148,7 @@ daemon. Programs needing this information must become Disk Arbitration clients.
 .\"
 .\"             -- listFilesystems --
 .It Sy listFilesystems
-.Op Nm -plist
+.Op Sy -plist
 .br
 Show the file system personalities available for formatting in
 .Sy diskutil
@@ -165,7 +165,7 @@ is specified, then a property list instead of the normal user-readable output wi
 .\"
 .\"             -- unmount --
 .It Sy unmount | umount
-.Op Nm force 
+.Op Sy force
 .Ar device
 .br
 Unmount a single volume.
@@ -173,10 +173,14 @@ Unmount a single volume.
 will force-unmount the volume (less kind to any open files; see also
 .Sy umount
 (8)).
+.Pp
+Up to a few seconds (or more) may be required for any Disk Arbitration dissenters
+in the system to approve the unmount, and/or for the file system to flush data.
+This verb gives up and returns failure after a maximum of 1 minute in most situations.
 .\"
 .\"             -- unmountDisk --
 .It Sy unmountDisk | umountDisk
-.Op Nm force 
+.Op Sy force
 .Ar device
 .br
 Given a disk containing a partition map, unmount all of its volumes. That is,
@@ -229,6 +233,16 @@ If
 is specified, then the argument strings you specify will be passed (by diskarbitrationd) verbatim to
 "-o"; multiple arguments must be separated with commas.
 .Pp
+Up to a few seconds (or much longer in rare cases) may be required for any Disk Arbitration
+dissenters or disk claimers in the system to approve the
+mount, and/or for the file system to complete a minimal
+.Xr fsck 8 .
+(For example, Disk Arbitration might invoke
+.Sy fsck_apfs
+.Sy -q
+before mounting an APFS Volume.)
+This verb gives up and returns failure after a maximum of 1 minute in most situations.
+.Pp
 If
 .Sy -mountPoint
 is specified, then your path, rather than the standard path of
@@ -259,7 +273,7 @@ Ownership of the affected disk is required.
 .\"
 .\"             -- disableJournal --
 .It Sy disableJournal
-.Op Nm force
+.Op Sy force
 .Ar device
 .br
 Disable journaling on an HFS+ volume.  This normally works whether or not the volume is currently
@@ -414,7 +428,7 @@ Externally-connected disk(s) are not affected.
 Ownership of the affected disks is required.
 .\"
 .\"             -- eraseDisk --
-.It Sy eraseDisk Ar format Ar name 
+.It Sy eraseDisk Ar format Ar name
 .Op Nm APM[Format] | MBR[Format] | GPT[Format]
 .Ar device
 .br
@@ -428,7 +442,7 @@ verb.
 Ownership of the affected disk is required.
 .\"
 .\"             -- eraseVolume --
-.It Sy eraseVolume 
+.It Sy eraseVolume
 .Ar format
 .Ar name
 .Ar device
@@ -455,8 +469,8 @@ same volume name.
 Ownership of the affected disk is required.
 .\"
 .\"             -- eraseOptical --
-.It Sy eraseOptical 
-.Op Nm quick 
+.It Sy eraseOptical
+.Op Nm quick
 .Ar device
 .br
 Erase optical media (CD/RW, DVD/RW, etc.).
@@ -500,7 +514,7 @@ inadvertent identification by software, e.g. as filesystem data.
 Ownership of the affected disk is required.
 .\"
 .\"             -- randomDisk --
-.It Sy randomDisk 
+.It Sy randomDisk
 .Op Ar times
 .Ar device
 .br
@@ -575,7 +589,6 @@ Consider using APFS encryption (FileVault).
 .Op Ar numberOfPartitions
 .Op Nm APM[Format] | MBR[Format] | GPT[Format]
 .Op Ar part1Format Ar part1Name Ar part1Size Ar part2Format Ar part2Name Ar part2Size Ar part3Format part3Name part3Size Ar ...
-.br
 .Pp
 (re)Partition a disk, removing all volumes.  All volumes on this disk will be destroyed.
 The
@@ -608,7 +621,6 @@ This is the partitioning scheme
 used to start up an Intel-based Macintosh computer.
 .\" List-End-PartitioningSchemes
 .El
-.br
 .Pp
 For each partition, a triplet of the desired file system format, volume name, and size must be specified.
 Several other
@@ -661,8 +673,8 @@ If a name of
 is specified, then the partition is left blank such that the partition space is carved out, the partition type is set
 according to the file system format name or explicit type, the partition space is partially erased ("wiped"),
 but a file system structure
-is not initialized with any file system's formatter program (e.g.
-.Ns Xr newfs_hfs 8 ; this is useful for setting up partitions that will
+is not initialized with any file system's formatter program, e.g.
+.Xr newfs_hfs 8 . This is useful for setting up partitions that will
 contain user-defined (not necessarily file system) data.
 .Pp
 For a triplet whose
@@ -709,7 +721,7 @@ Ownership of the affected disk is required.
 |
 .Sy R
 |
-.Ar size 
+.Ar size
 .Op Ar numberOfPartitions
 .Op Ar part1Format Ar part1Name Ar part1Size Ar part2Format Ar part2Name Ar part2Size Ar part3Format part3Name part3Size Ar ...
 .br
@@ -757,7 +769,7 @@ parameters in the same manner as the triplet description for the
 .Sy partitionDisk
 verb.
 .Pp
-Resizing a volume that is currently set as the computer's startup disk will invalidate that setting; use the 
+Resizing a volume that is currently set as the computer's startup disk will invalidate that setting; use the
 .Sy Startup
 .Sy Disk
 System Preferences panel or
@@ -775,7 +787,7 @@ Ownership of the affected disk is required.
 .\"
 .\"             -- splitpartition --
 .It Sy splitPartition Ar device
-.Op Ar numberOfPartitions 
+.Op Ar numberOfPartitions
 .Op Ar part1Format Ar part1Name Ar part1Size Ar part2Format Ar part2Name Ar part2Size Ar part3Format part3Name part3Size Ar ...
 .br
 Destructively split a volume into multiple partitions.  You must supply a list of new partitions to create
@@ -976,7 +988,7 @@ metadata flags which give a hint as to their intended use.
 Not all combinations of flags are valid, and not all flags are allowed to be set or changed by a user.
 .Pp
 Efficient file copy cloning (copy-on-write) is supported; see
-.Ns Xr copyfile 3
+.Xr copyfile 3
 .Sy COPYFILE_CLONE.
 .Pp
 Optional volume-level encryption is supported (see also Volume Groups below).
@@ -1022,18 +1034,18 @@ a Snapshot; this removes the possibility of ever reverting to that Snapshot's st
 not affect the Volume's present-time content.
 .Pp
 An APFS Snapshot mount point's "source device" (its
-.Ns Xr statfs 2
+.Xr statfs 2
 .Sy f_mntfromname
 shown by the
-.Ns Xr mount 8
+.Xr mount 8
 command) is not necessarily a device node (e.g. disk0s2) as is common;
 it can be the Snapshot name followed by the '@' character and the "parent" Volume's device node,
 e.g. "SnapName123@/dev/disk2s1".
 See the
-.Ns Xr mount_apfs 8
+.Xr mount_apfs 8
 .Sy -s
 and
-.Ns Xr fs_snapshot_create 2
+.Xr fs_snapshot_create 2
 commands. However, it is also possible for
 .Sy f_mntfromname
 to have a 3-part form ("diskCsVsS") if you are rooted (booted) from
@@ -1063,7 +1075,6 @@ Backups should be always be performed on a regular basis and before modifying an
 The following is a list of
 .Sy APFS
 sub-verbs with their descriptions and individual arguments.
-.br
 .\"
 .\" List-Begin-APFSVerbs
 .Bl -hang -width "imageinfo"
@@ -1479,9 +1490,9 @@ As an alternative to a passphrase, you can specify
 .Sy -recoverykeychain
 with a full path to a keychain file if an Institutional Recovery Key has been previously
 set up on the APFS Volume. The keychain must be unlocked; see
-.Ns Xr security 1
+.Xr security 1
 and
-.Ns Xr fdesetup 8
+.Xr fdesetup 8
 for more information.
 .Pp
 This command will normally mount the APFS Volume after unlocking; if part of a Volume Group "System"/"Data"-role pair, both will be mounted.
@@ -1540,10 +1551,13 @@ for unlocking its APFS Volume; any of its users can do so.
 An APFS Volume need not be encrypted in order to contain crypto users;
 indeed, other than the Disk User, they should be added before encrypting.
 .Pp
-Types of Cryptographic Users include at-most-one-per-Volume "Disk" user, whose UUID value always matches its Volume's UUID;
-iCloud or personal "Recovery Keys", which are not users per se, but instead store partial crypto keys and are associated with
+Types of Cryptographic Users include the at-most-one-per-Volume "Disk" user, whose UUID value always matches its Volume's UUID;
+iCloud or personal "Recovery Keys", which are not users per se, but instead store partial crypto keys and are paired with
 corresponding "Recovery Users" and have fixed-constant UUID values;
-and "Open Directory" users, whose UUID values match corresponding local macOS Open Directory account user GUIDs.
+and, most commonly, "Open Directory" users, whose UUID values match corresponding local macOS Open Directory (OD) account user GUIDs
+(e.g. the common local user accounts; see
+.Xr dscl 1
+for more information).
 .Pp
 If
 .Sy -plist
@@ -1761,7 +1775,7 @@ AppleRAID supports three basic types of RAID sets:
 .It
 "stripe" - Striped Volume (RAID 0)
 .It
-"mirror" - Mirrored Volume (RAID 1) 
+"mirror" - Mirrored Volume (RAID 1)
 .It
 "concat" - Concatenated Volume (Spanning)
 .\" List-End-AppleRAIDSetTypes
@@ -1795,9 +1809,9 @@ GPT and APM partition formats cannot be mixed in the same RAID set.
 In addition to whole disk and partition device names, AppleRAID uses UUIDs to refer to existing RAID sets and their members.
 Existing RAID sets may also be specified by mount point (e.g.
 .Pa /Volume/raidset Ns ).
-In many cases, using the UUID for the device argument is preferred because disk device names may 
+In many cases, using the UUID for the device argument is preferred because disk device names may
 change over time when disks are added, disks are removed or when the system is rebooted.
-If RAID members have been physically disconnected from the system or are no longer responding, 
+If RAID members have been physically disconnected from the system or are no longer responding,
 you must use the member's UUID as the command argument.
 Messages in the system log will refer to RAID sets and their member disks by UUID.
 For more information on specifying device arguments, see the
@@ -1810,7 +1824,6 @@ Backups should be always be performed on a regular basis and before modifying an
 The following is a list of
 .Sy appleRAID
 sub-verbs with their descriptions and individual arguments.
-.br
 .\"
 .\" List-Begin-AppleRAIDVerbs
 .Bl -hang -width "imageinfo"
@@ -1952,7 +1965,7 @@ is a deprecated synonym for
 Convert a non-RAID disk partition containing a resizable file system
 (such as JHFS+) into an unpaired mirror or single disk concatenated
 RAID set.
-Disks that were originally partitioned on Mac OS X 10.2 Jaguar or earlier 
+Disks that were originally partitioned on Mac OS X 10.2 Jaguar or earlier
 or were partitioned to be Mac OS 9 compatible may not be resizable.
 Ownership of the affected disk is required.
 .Sy diskutil
@@ -2045,7 +2058,6 @@ section below.
 The following is a list of
 .Sy coreStorage
 sub-verbs with their descriptions and individual arguments.
-.br
 .\"
 .\" List-Begin-CoreStorageVerbs
 .Bl -hang -width "imageinfo"
@@ -2116,7 +2128,7 @@ Alternatively, you can specify
 with a path to a keychain
 .Ar file .
 The keychain must be unlocked; see
-.Ns Xr security 1 
+.Xr security 1
 for more information.
 .Pp
 The locked state means that the CoreStorage driver has not been given authentication
@@ -2161,7 +2173,7 @@ e.g.
 .It
 The volume mount point.
 Any entry of the form of
-.Pa /Volumes/* , 
+.Pa /Volumes/* ,
 e.g.
 .Pa /Volumes/Untitled .
 In most cases, a "custom" mount point e.g.
@@ -2278,7 +2290,6 @@ as the various UUIDs.
 .\"
 .\"
 .\"
-.Pp
 .Sh SIZES
 Wherever a size is emitted as an
 .Sy output ,
@@ -2452,6 +2463,9 @@ file system's minimum unit of backing store usage, often formatting-option-depen
 .Pp
 Examples: 10G (10 gigabytes), 4.23tb (4.23 terabytes), 5M (5 megabytes), 4GiB (exactly 2^32 bytes),
 126000 (exactly 126000 bytes), 25.4% (25.4 percent of whole disk size).
+.\"
+.\"
+.\"
 .Sh FORMAT
 The
 .Pa format
@@ -2469,7 +2483,9 @@ for use with it only).
 .Pp
 Common examples include JHFS+, JHFSX, MS-DOS, etc, as nicknames for the canonical
 forms from the file system bundles such as "Case-sensitive HFS+".
-.Pp
+.\"
+.\"
+.\"
 .Sh EXAMPLES
 Erase a whole disk (device)
 .br
@@ -2589,33 +2605,6 @@ diskutil partitionDisk disk3 APM HFS+ vol1 15% Journaled\\ HFS+ vol2 R Journaled
 .\"
 .\"
 .\"
-.Pp
-.Sh SEE ALSO
-.Ns Xr hdiutil 1 ,
-.Ns Xr mount 8 ,
-.Ns Xr umount 8 ,
-.Ns Xr diskmanagementd 8 ,
-.Ns Xr diskmanagementstartup 8 ,
-.Ns Xr diskarbitrationd 8 ,
-.Ns Xr corestoraged 8 ,
-.Ns Xr fdesetup 8 ,
-.Ns Xr ioreg 8 ,
-.Ns Xr newfs_hfs 8 ,
-.Ns Xr fsck_hfs 8 ,
-.Ns Xr authopen 1 ,
-.Ns Xr hfs.util 8 ,
-.Ns Xr msdos.util 8 ,
-.Ns Xr ufs.util 8 ,
-.Ns Xr drutil 1 ,
-.Ns Xr vsdbutil 8 , 
-.Ns Xr apfs.util 8 ,
-.Ns Xr fsck_apfs 8 ,
-.Ns Xr mount_apfs 8 ,
-.Ns Xr newfs_apfs 8
-.\"
-.\"
-.\"
-.Pp
 .Sh ERRORS
 .Sy diskutil
 will exit with status 0 if successful or 1 if it cannot complete the requested operation;
@@ -2629,7 +2618,31 @@ an underlying POSIX error, or some combination.
 .\"
 .\"
 .\"
-.Pp
+.Sh SEE ALSO
+.Xr authopen 1 ,
+.Xr drutil 1 ,
+.Xr hdiutil 1 ,
+.Xr apfs.util 8 ,
+.Xr corestoraged 8 ,
+.Xr diskarbitrationd 8 ,
+.Xr diskmanagementd 8 ,
+.Xr diskmanagementstartup 8 ,
+.Xr fdesetup 8 ,
+.Xr fsck_apfs 8 ,
+.Xr fsck_hfs 8 ,
+.Xr hfs.util 8 ,
+.Xr ioreg 8 ,
+.Xr mount 8 ,
+.Xr mount_apfs 8 ,
+.Xr msdos.util 8 ,
+.Xr newfs_apfs 8 ,
+.Xr newfs_hfs 8 ,
+.Xr ufs.util 8 ,
+.Xr umount 8 ,
+.Xr vsdbutil 8
+.\"
+.\"
+.\"
 .Sh HISTORY
 The eraseDisk and partitionDisk verbs had an option to add Mac OS 9 drivers (in partitions designated for that purpose);
 there was also a repairOS9Permissions verb.

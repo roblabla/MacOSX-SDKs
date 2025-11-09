@@ -1,7 +1,7 @@
 /*
         NSPopUpButton.h
         Application Kit
-        Copyright (c) 1997-2019, Apple Inc.
+        Copyright (c) 1997-2021, Apple Inc.
         All rights reserved.
 */
 

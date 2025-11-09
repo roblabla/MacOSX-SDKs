@@ -1,0 +1,22 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           FF37405C-0BCF-3359-8535-1C90E6C59D9B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           94EEA636-3F9D-358D-80B7-ABD766280F75
+install-name:    '/System/Library/PrivateFrameworks/Focus.framework/Versions/A/Focus'
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ Carousel, ControlCenter, CoverSheet, FocusSettingsUI, FocusUI, 
+                       FocusUIModule, NanoSettings, NanoSettingsGlance, SUIATPTests, 
+                       SUIMacTests, SUIWatchTests, SpringBoard, SpringBoardFramework ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _FCLogActivities, _FCRegisterLogging, _FocusVersionNumber, 
+                       _FocusVersionString ]
+    objc-classes:    [ FCActivityManager, _FCActivity, _FCActivityLifetime ]
+...

@@ -11,7 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @protocol UIContentSizeCategoryAdjusting <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) NS_SWIFT_UI_ACTOR
+@protocol UIContentSizeCategoryAdjusting <NSObject>
 
 /*
  Indicates whether the corresponding element should automatically update its font when the device’s UIContentSizeCategory is changed.

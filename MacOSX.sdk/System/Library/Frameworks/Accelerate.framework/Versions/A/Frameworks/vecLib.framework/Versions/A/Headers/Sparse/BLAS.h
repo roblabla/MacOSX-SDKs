@@ -104,7 +104,12 @@ extern "C" {
 #include <vecLib/Sparse/Types.h>
 #endif
 
-#include <os/availability.h>
+#if __has_include(<os/availability.h>)
+# include <os/availability.h>
+#else // __has_include(<os/availability.h>)
+# undef API_AVAILABLE
+# define API_AVAILABLE(...) /* Nothing */
+#endif
 
 #pragma mark - Level 1 Routines -
 

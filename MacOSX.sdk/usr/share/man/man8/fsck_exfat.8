@@ -15,6 +15,7 @@
 .Op Fl p
 .Op Fl y | n
 .Op Fl g | x
+.Op Fl S path_prefix
 .Op Fl d
 .Ar device ...
 .Sh DESCRIPTION
@@ -108,6 +109,39 @@ This generally contains additional details about problems found.
 When writing bug reports for
 .Nm ,
 it is usually helpful to include the output generated from this option.
+.It Fl S Ar path_prefix
+Causes
+.Nm
+to create a shadow file containing all metadata read from the device. This functionality
+is intended for inclusion with bug reports regarding excpetional problems. One file
+is created for each checked device. A shadow file's name is created by taking
+.Ar path_prefix ,
+appending a
+.Em -
+character, and then appending the
+.Em basename
+of the device being checked. For instance, given a
+.Ar path_prefix
+of
+.Ar ./metadata ,
+a check of disk
+.Em /dev/rdisk3s1
+would create the shadow file
+.Em ./metadata-rdisk3s1 .
+Note that the shadow file captures all metadata as read from disk. In some
+cases with large volumes,
+.Nm
+will limit its cache size and re-read metadata from disk at different phases
+of the repair process. If the repair process has repaired the metadata, the
+shadow file will capture its state as last read from disk. For optimal
+debug value, the shadow file should be captured in conjunction with the
+.Fl n
+option. This file will be created as a sparse file, if it is on a file system
+supporting sparse files, such as
+.Em APFS .
+The shadow file does not capture file contents. However be aware
+.Em the shadow file includes details about all current and some past files.
+Extreme care should be taken before sharing the shadow file with others.
 .El
 .Sh SEE ALSO
 .Xr mount_exfat 8 ,

@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (class, readonly, strong) NSThread *currentThread;
 
-+ (void)detachNewThreadWithBlock:(void (^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
++ (void)detachNewThreadWithBlock:(void (^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) NS_SWIFT_DISABLE_ASYNC;
 + (void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(nullable id)argument;
 
 + (BOOL)isMultiThreaded;

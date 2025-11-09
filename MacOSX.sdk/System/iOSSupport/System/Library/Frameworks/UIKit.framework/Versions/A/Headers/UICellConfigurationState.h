@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, UICellConfigurationDropState) {
 } API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos);
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @interface UICellConfigurationState : UIViewConfigurationState
 
 @property (nonatomic, getter=isEditing) BOOL editing;

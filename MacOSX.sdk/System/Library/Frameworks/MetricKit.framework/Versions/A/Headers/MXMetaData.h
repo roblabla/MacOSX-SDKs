@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class         MXMetaData
  @abstract      A class that contains miscellaneous metadata about an associated payload.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(13.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
 @interface MXMetaData : NSObject <NSSecureCoding>
 
 /*!
@@ -45,7 +45,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  @property      platformArchitecture
  @abstract      An NSString designating the current architecture.
  */
-@property (readonly, strong, nonnull) NSString *platformArchitecture API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos);
+@property (readonly, strong, nonnull) NSString *platformArchitecture API_AVAILABLE(ios(14.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos);
 
 
 /*!
@@ -67,7 +67,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
 @abstract      Convenience method to return a NSDictionary representation of this metadata.
 @result        An NSDictionary object containing the dictionary representation
 */
-- (NSDictionary *)dictionaryRepresentation API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos) NS_REFINED_FOR_SWIFT;
+- (NSDictionary *)dictionaryRepresentation API_AVAILABLE(ios(14.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos) NS_REFINED_FOR_SWIFT;
 
 @end
 

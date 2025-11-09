@@ -47,7 +47,8 @@ UIKIT_EXTERN const UIScrollViewDecelerationRate UIScrollViewDecelerationRateFast
 @class UIEvent, UIImageView, UIPanGestureRecognizer, UIPinchGestureRecognizer;
 @protocol UIScrollViewDelegate;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIScrollView : UIView <NSCoding, UIFocusItemScrollableContainer>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIScrollView : UIView <NSCoding, UIFocusItemScrollableContainer>
 
 @property(nonatomic)         CGPoint                      contentOffset;                  // default CGPointZero
 @property(nonatomic)         CGSize                       contentSize;                    // default CGSizeZero
@@ -170,6 +171,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIScrollView : UIView <NSCoding,
 
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UIScrollViewDelegate<NSObject>
 
 @optional

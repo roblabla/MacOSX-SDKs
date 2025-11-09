@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, UIDynamicItemCollisionBoundsType) {
     UIDynamicItemCollisionBoundsTypePath
 } API_AVAILABLE(ios(9.0));
 
+NS_SWIFT_UI_ACTOR
 @protocol UIDynamicItem <NSObject>
 
 @property (nonatomic, readwrite) CGPoint center;
@@ -42,7 +43,8 @@ typedef NS_ENUM(NSUInteger, UIDynamicItemCollisionBoundsType) {
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIDynamicItemGroup : NSObject <UIDynamicItem>
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@interface UIDynamicItemGroup : NSObject <UIDynamicItem>
 
 - (instancetype)initWithItems:(NSArray<id <UIDynamicItem>> *)items;
 
@@ -50,7 +52,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIDynamicItemGroup : NSObject <U
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIDynamicBehavior : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UIDynamicBehavior : NSObject
 
 - (void)addChildBehavior:(UIDynamicBehavior *)behavior;
 - (void)removeChildBehavior:(UIDynamicBehavior *)behavior;

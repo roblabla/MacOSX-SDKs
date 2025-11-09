@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1FDCA53C-3C37-3699-9D28-AD6D36BA174B
+    value:           111846ED-B339-3FBE-85F2-4B96D97FE614
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B9E71937-98E8-3997-8829-E7074ECF9932
+    value:           E3C45CE0-370E-3C45-B30D-85F8F6FADFBB
 install-name:    '/System/Library/PrivateFrameworks/DataDeliveryServices.framework/Versions/A/DataDeliveryServices'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _AggregatedDurationAnalyticKey, _AllowCellularOverride, _AnalyticKeyPrefix, 
-                       _AssetCenterQueueName, _AssetDownloadAnalytic, _AssetDownloadDurationBuckets, 
+    symbols:         [ _AggregatedDurationAnalyticKey, _AllowCellularOverride, _AllowExpensiveAccessOverride, 
+                       _AnalyticKeyPrefix, _AssetCenterQueueName, _AssetDownloadAnalytic, 
                        _AssetLocaleKey, _AssetNameAnalyticKey, _AssetUpdatedNotificationSuffix, 
                        _ClientQueueName, _CompatibilityVersionAnalyticKey, _CompatibilityVersionKey, 
                        _ContentVersionAnalyticKey, _ContentVersionKey, _DDSAssertionContentFile, 

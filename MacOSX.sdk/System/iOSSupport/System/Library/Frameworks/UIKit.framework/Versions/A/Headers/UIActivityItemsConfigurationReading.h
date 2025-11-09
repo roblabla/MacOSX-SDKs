@@ -14,24 +14,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIActivity;
 
-typedef NSString * UIActivityItemsConfigurationMetadataKey NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+typedef NSString * UIActivityItemsConfigurationMetadataKey NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
-UIKIT_EXTERN UIActivityItemsConfigurationMetadataKey const UIActivityItemsConfigurationMetadataKeyTitle API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos); // NSString or NSAttributedString - title
-UIKIT_EXTERN UIActivityItemsConfigurationMetadataKey const UIActivityItemsConfigurationMetadataKeyMessageBody API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos); // NSString or NSAttributedString - message body
-
-
-typedef NSString * UIActivityItemsConfigurationPreviewIntent NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
-
-UIKIT_EXTERN UIActivityItemsConfigurationPreviewIntent const UIActivityItemsConfigurationPreviewIntentFullSize API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos); // Full size preview image
-UIKIT_EXTERN UIActivityItemsConfigurationPreviewIntent const UIActivityItemsConfigurationPreviewIntentThumbnail API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos); // Thumbnail preview image
+UIKIT_EXTERN UIActivityItemsConfigurationMetadataKey const UIActivityItemsConfigurationMetadataKeyTitle API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos); // NSString or NSAttributedString - title
+UIKIT_EXTERN UIActivityItemsConfigurationMetadataKey const UIActivityItemsConfigurationMetadataKeyMessageBody API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos); // NSString or NSAttributedString - message body
+UIKIT_EXTERN UIActivityItemsConfigurationMetadataKey const UIActivityItemsConfigurationMetadataKeyLinkPresentationMetadata API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos); // LPLinkMetadata
 
 
-typedef NSString * UIActivityItemsConfigurationInteraction NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+typedef NSString * UIActivityItemsConfigurationPreviewIntent NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
-UIKIT_EXTERN UIActivityItemsConfigurationInteraction const UIActivityItemsConfigurationInteractionShare API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+UIKIT_EXTERN UIActivityItemsConfigurationPreviewIntent const UIActivityItemsConfigurationPreviewIntentFullSize API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos); // Full size preview image
+UIKIT_EXTERN UIActivityItemsConfigurationPreviewIntent const UIActivityItemsConfigurationPreviewIntentThumbnail API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos); // Thumbnail preview image
 
 
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos)
+typedef NSString * UIActivityItemsConfigurationInteraction NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
+
+UIKIT_EXTERN UIActivityItemsConfigurationInteraction const UIActivityItemsConfigurationInteractionShare API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
+
+
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @protocol UIActivityItemsConfigurationReading <NSObject>
 
 @property (nonatomic, readonly, copy) NSArray<NSItemProvider *> *itemProvidersForActivityItemsConfiguration;
@@ -50,6 +51,14 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos)
 
 @end
 
+
+/// Protocol adopted by classes that can provide activity items configurations
+API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos)
+@protocol UIActivityItemsConfigurationProviding <NSObject>
+
+@property (nonatomic, nullable, readonly, strong) id<UIActivityItemsConfigurationReading> activityItemsConfiguration API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
+
+@end
 NS_ASSUME_NONNULL_END
 
 #else

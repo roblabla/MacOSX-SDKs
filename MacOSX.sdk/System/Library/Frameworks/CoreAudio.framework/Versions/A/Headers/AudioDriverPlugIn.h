@@ -155,7 +155,7 @@ AudioDriverPlugInClose(AudioDeviceID inDevice);
     @param          inDevice
                         The AudioDevice to query.
     @param          inChannel
-                        The channel of the property to query where 0 is the master channel.
+                        The channel of the property to query where 0 is the main channel.
     @param          isInput
                         Which section of the AudioDevice to query.
     @param          inPropertyID
@@ -187,7 +187,7 @@ AudioDriverPlugInDeviceGetPropertyInfo( AudioDeviceID           inDevice,
     @param          inDevice
                         The AudioDevice to query.
     @param          inChannel
-                        The channel of the property to query where 0 is the master channel.
+                        The channel of the property to query where 0 is the main channel.
     @param          isInput
                         Which section of the AudioDevice to query.
     @param          inPropertyID
@@ -224,7 +224,7 @@ AudioDriverPlugInDeviceGetProperty( AudioDeviceID           inDevice,
                         relative to the device's time base. NULL means execute the change
                         immediately.
     @param          inChannel
-                        The channel of the property to change where 0 is the master channel.
+                        The channel of the property to change where 0 is the main channel.
     @param          isInput
                         Which section of the AudioDevice to change.
     @param          inPropertyID
@@ -255,7 +255,7 @@ AudioDriverPlugInDeviceSetProperty( AudioDeviceID                       inDevice
     @param          inIOAudioStream
                         The IOAudioStream to query.
     @param          inChannel
-                        The channel of the property to query where 0 is the master channel.
+                        The channel of the property to query where 0 is the main channel.
     @param          inPropertyID
                         The AudioDevicePropertyID of the property to query.
     @param          outSize
@@ -287,7 +287,7 @@ AudioDriverPlugInStreamGetPropertyInfo( AudioDeviceID           inDevice,
     @param          inIOAudioStream
                         The IOAudioStream to query.
     @param          inChannel
-                        The channel of the property to query where 0 is the master channel.
+                        The channel of the property to query where 0 is the main channel.
     @param          inPropertyID
                         The AudioDevicePropertyID of the property to query.
     @param          ioPropertyDataSize
@@ -324,7 +324,7 @@ AudioDriverPlugInStreamGetProperty( AudioDeviceID           inDevice,
                         relative to the device's time base. NULL means execute the change
                         immediately.
     @param          inChannel
-                        The channel of the property to change where 0 is the master channel.
+                        The channel of the property to change where 0 is the main channel.
     @param          inPropertyID
                         The AudioDevicePropertyID of the property to change.
     @param          inPropertyDataSize

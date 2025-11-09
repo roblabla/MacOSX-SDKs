@@ -14,8 +14,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(11.0), watchos(4.0))
-API_UNAVAILABLE(macos, tvos)
+API_AVAILABLE(ios(11.0), macos(12.0), watchos(4.0))
+API_UNAVAILABLE(tvos)
 @interface INCallRecord : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -28,7 +28,7 @@ API_UNAVAILABLE(macos, tvos)
                             unseen:(nullable NSNumber *)unseen
                       participants:(nullable NSArray<INPerson *> *)participants
                      numberOfCalls:(nullable NSNumber *)numberOfCalls
-                 isCallerIdBlocked:(nullable NSNumber *)isCallerIdBlocked NS_DESIGNATED_INITIALIZER NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(14.5), watchos(7.3), macosx(11.3));
+                 isCallerIdBlocked:(nullable NSNumber *)isCallerIdBlocked NS_DESIGNATED_INITIALIZER NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(14.5), watchos(7.3));
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                        dateCreated:(nullable NSDate *)dateCreated
@@ -43,7 +43,7 @@ API_UNAVAILABLE(macos, tvos)
                     callCapability:(INCallCapability)callCapability
                       callDuration:(nullable NSNumber *)callDuration
                             unseen:(nullable NSNumber *)unseen
-                     numberOfCalls:(nullable NSNumber *)numberOfCalls NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(13.0), watchos(6.0), macosx(10.15));
+                     numberOfCalls:(nullable NSNumber *)numberOfCalls NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(13.0), watchos(6.0));
 
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *identifier;
 
@@ -57,11 +57,11 @@ API_UNAVAILABLE(macos, tvos)
 
 @property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallCapability callCapability;
 
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSNumber *numberOfCalls NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macos);
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSNumber *numberOfCalls NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(13.0), watchos(6.0));
 
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSNumber *isCallerIdBlocked NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(14.5), watchos(7.3)) API_UNAVAILABLE(macos);
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSNumber *isCallerIdBlocked NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(14.5), watchos(7.3));
 
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INPerson *> *participants API_AVAILABLE(ios(14.5), watchos(7.3)) API_UNAVAILABLE(macos);
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INPerson *> *participants API_AVAILABLE(ios(14.5), watchos(7.3));
 
 @end
 

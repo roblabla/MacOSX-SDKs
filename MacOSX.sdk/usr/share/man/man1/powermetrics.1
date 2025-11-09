@@ -14,9 +14,9 @@
 .Sh SYNOPSIS             \" Section Header - required - don't modify
 .Nm
 .Op Fl i Ar sample_interval_ms
-.Op Fl o Ar order
+.Op Fl r Ar order
 .Op Fl t Ar wakeup_cost
-.Op Fl u Ar output_file
+.Op Fl o Ar output_file
 .Op Fl n Ar sample_count
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 .Nm
@@ -27,7 +27,7 @@ gathers and display CPU usage statistics (divided into time spent in user mode a
 Print help message.
 .It Fl s Ar samplers , Fl Fl samplers Ar samplers
 Comma separated list of samplers and sampler groups. Run with -h to see a list of samplers and sampler groups. Specifying "default" will display the default set, and specifying "all" will display all supported samplers.
-.It Fl u Ar file , Fl Fl output-file Ar file
+.It Fl o Ar file , Fl Fl output-file Ar file
 Output to
 .Ar file
 instead of stdout.
@@ -35,7 +35,7 @@ instead of stdout.
 Set output buffer
 .Ar size
 (0=none, 1=line)
-.It Fl i Ar N , Fl Fl sample-interval Ar N
+.It Fl i Ar N , Fl Fl sample-rate Ar N
 sample every
 .Ar N
 ms (0=disabled) [default: 5000ms]
@@ -47,7 +47,7 @@ periodic samples (0=infinite) [default: 0]
 Assume package idle wakeups have a CPU time cost of
 .Ar N
 us when using hybrid sort orders using idle wakeups with time-based metrics
-.It Fl o Ar method , Fl Fl order Ar method
+.It Fl r Ar method , Fl Fl order Ar method
 Order process list using specified
 .Ar method
 [default: composite]

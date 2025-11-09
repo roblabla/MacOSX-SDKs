@@ -1,7 +1,7 @@
 /*
 	NSPrintOperation.h
 	Application Kit
-	Copyright (c) 1994-2019, Apple Inc.
+	Copyright (c) 1994-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -38,6 +38,7 @@ typedef NS_ENUM(NSInteger, NSPrintRenderingQuality) {
 */
 APPKIT_EXTERN NSExceptionName NSPrintOperationExistsException;
 
+NS_SWIFT_UI_ACTOR
 @interface NSPrintOperation : NSObject {
 }
 

@@ -30,40 +30,65 @@
 #ifndef	_LIB_DER_CONFIG_H_
 #define _LIB_DER_CONFIG_H_
 
+#if !defined(EFI) || !EFI
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>
+#include <stdbool.h>
 
-#if defined(WIN32) && defined(__cplusplus)
+#else // EFI
+// This requires $(SDKROOT)/usr/local/efi/include/Platform to be in your header
+// search path.
+#include <Apple/Common/Library/Include/EfiCompatibility.h>
+#endif
 
-#if !defined(__BEGIN_DECLS) || !defined(__END_DECLS)
+#if (defined(EFI) && EFI) || defined(WIN32) || defined(_MSC_VER)
+#if defined(__cplusplus)
 #define __BEGIN_DECLS extern "C" {
 #define __END_DECLS }
-#endif //  __BEGIN_DECLS || __END_DECLS
-
+#else
+#define __BEGIN_DECLS
+#define __END_DECLS
+#endif
 #else
 #include <sys/cdefs.h>
-#endif // defined(WIN32) && defined(__cplusplus)
+#endif
 
 __BEGIN_DECLS
 
 /*
  * Basic data types: unsigned 8-bit integer, unsigned 32-bit integer
  */
+#if !defined(EFI) || !EFI
 typedef uint8_t DERByte;
 typedef uint16_t DERShort;
+typedef uint32_t DERInt;
+typedef uint64_t DERLong;
 typedef size_t DERSize;
-
+typedef bool DERBool;
+#else
+typedef UINT8 DERByte;
+typedef UINT16 DERShort;
+typedef UINT32 DERInt;
+typedef UINT64 DERLong;
+typedef size_t DERSize;
+typedef BOOLEAN DERBool;
+#endif
 
 /* 
  * Use these #defines of you have memset, memmove, and memcmp; else
  * write your own equivalents.
  */
 
+#if !defined(EFI) || !EFI
 #define DERMemset(ptr, c, len)		memset(ptr, c, len)
 #define DERMemmove(dst, src, len)	memmove(dst, src, len)
 #define DERMemcmp(b1, b2, len)		memcmp(b1, b2, len)
-
+#else
+void *DERMemset(void *b, int c, size_t len);
+void *DERMemmove(void *dst, const void *src, size_t len);
+int DERMemcmp(const void *s1, const void *s2, size_t n);
+#endif
 
 /***
  *** Compile time options to trim size of the library. 
@@ -87,6 +112,44 @@ typedef size_t DERSize;
 #define DER_TAG_SIZE            8
 #endif
 
+/* firebloom-evo defines */
+#if !defined(_MSC_VER) && __has_feature(firebloom)
+
+#define DER_counted_by(x)		__attribute__((counted_by(x)))
+#define DER_sized_by(x)			__attribute__((sized_by(x)))
+#define DER_ended_by(x)         __attribute__((ended_by(x)))
+#define DER_bidi_indexable		__attribute__((bidi_indexable))
+#define DER_indexable			__attribute__((indexable))
+#define DER_single				__attribute__((single))
+#define DER_unsafe_indexable	__attribute__((unsafe_indexable))
+#define DER_unsafe_forge_bidi_indexable(P, S)	__builtin_unsafe_forge_bidi_indexable(P, S)
+
+/* For some prototype patterns that firebloom-evo doesn't handle without
+ * compromise, we ask adopters to use a different entry point. The old
+ * entry point is marked unavailable _only_ in firebloom builds, since
+ * there's nothing wrong with it otherwise.
+ */
+#define DER_firebloom_replaced_platform(P, REP)    \
+    __attribute__((availability(P, unavailable, replacement=#REP)))
+
+#define DER_firebloom_replaced(REP) \
+    DER_firebloom_replaced_platform(macosx, REP) \
+    DER_firebloom_replaced_platform(ios, REP)
+
+#else // !__has_feature(firebloom)
+
+#define DER_counted_by(x)
+#define DER_sized_by(x)
+#define DER_ended_by(x)
+#define DER_bidi_indexable
+#define DER_indexable
+#define DER_single
+#define DER_unsafe_indexable
+#define DER_unsafe_forge_bidi_indexable(P, S) (P)
+
+#define DER_firebloom_replaced(...)
+
+#endif // !__has_feature(firebloom)
 
 /* ---------------------- Do not edit below this line ---------------------- */
 
@@ -101,13 +164,13 @@ typedef size_t DERSize;
 #if DER_MULTIBYTE_TAGS
 
 #if DER_TAG_SIZE == 1
-typedef uint8_t DERTag;
+typedef DERByte DERTag;
 #elif DER_TAG_SIZE == 2
-typedef uint16_t DERTag;
+typedef DERShort DERTag;
 #elif DER_TAG_SIZE == 4
-typedef uint32_t DERTag;
+typedef DERInt DERTag;
 #elif DER_TAG_SIZE == 8
-typedef uint64_t DERTag;
+typedef DERLong DERTag;
 #else
 #error DER_TAG_SIZE invalid
 #endif

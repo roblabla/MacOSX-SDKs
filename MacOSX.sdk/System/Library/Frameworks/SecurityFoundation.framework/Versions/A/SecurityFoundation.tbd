@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0B2C0366-0C1A-3A48-BC0E-02F95EDCC259
+    value:           E35F0C98-4287-39AF-8633-F9F94773A51D
   - target:          x86_64-maccatalyst
-    value:           0B2C0366-0C1A-3A48-BC0E-02F95EDCC259
+    value:           E35F0C98-4287-39AF-8633-F9F94773A51D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DE97EE3B-6BAA-3AD0-99D4-C015C167304F
+    value:           69A1CC5A-C778-3110-95BA-3F277F60A52B
   - target:          arm64e-maccatalyst
-    value:           DE97EE3B-6BAA-3AD0-99D4-C015C167304F
+    value:           69A1CC5A-C778-3110-95BA-3F277F60A52B
 install-name:    '/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation'
-current-version: 55240.40.4
+current-version: 55253
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -25,14 +25,15 @@ exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SFAccessibilityMakeWithMode, _SFCertificateAuthorityInputParmKeyDestinationKeychain, 
-                       _SFCertificateAuthorityInputParmKeySignerKeychain, _SFCryptoServicesErrorDecryptionFailed, 
-                       _SFCryptoServicesErrorDeserializationFailed, _SFCryptoServicesErrorDigest, 
-                       _SFCryptoServicesErrorDomain, _SFCryptoServicesErrorEncryptionFailed, 
-                       _SFCryptoServicesErrorIVGeneratorExhausted, _SFCryptoServicesErrorInvalidAuthenticationCodeLength, 
-                       _SFCryptoServicesErrorInvalidIVLengthRequested, _SFCryptoServicesErrorNoInitializationVector, 
-                       _SFCryptoServicesErrorUnsupportedDigest, _SFDefaultCertificateAuthority, 
-                       _SFDefaultCertificateAuthorityFullPath, _SFKeyDomainCPU, _SFKeyDomainSEP, 
-                       _SFKeychainErrorDomain, _SFKeychainErrorDuplicateItem, _SFKeychainErrorFailedToCommunicateWithServer, 
+                       _SFCertificateAuthorityInputParmKeySignerKeychain, _SFCoreCryptoErrorDomain, 
+                       _SFCryptoServicesErrorDecryptionFailed, _SFCryptoServicesErrorDeserializationFailed, 
+                       _SFCryptoServicesErrorDigest, _SFCryptoServicesErrorDomain, 
+                       _SFCryptoServicesErrorEncryptionFailed, _SFCryptoServicesErrorIVGeneratorExhausted, 
+                       _SFCryptoServicesErrorInvalidAuthenticationCodeLength, _SFCryptoServicesErrorInvalidIVLengthRequested, 
+                       _SFCryptoServicesErrorNoInitializationVector, _SFCryptoServicesErrorUnsupportedDigest, 
+                       _SFDefaultCertificateAuthority, _SFDefaultCertificateAuthorityFullPath, 
+                       _SFKeyDomainCPU, _SFKeyDomainSEP, _SFKeychainErrorDomain, 
+                       _SFKeychainErrorDuplicateItem, _SFKeychainErrorFailedToCommunicateWithServer, 
                        _SFKeychainErrorInternal, _SFKeychainErrorInvalidAccessGroup, 
                        _SFKeychainErrorInvalidKeyData, _SFKeychainErrorInvalidParameter, 
                        _SFKeychainErrorInvalidPersistentIdentifier, _SFKeychainErrorItemDecryptionFailed, 
@@ -65,9 +66,9 @@ exports:
                        _caSubjectInfoStateKey, _caValidityPeriodBindingKey ]
     objc-classes:    [ CAAdditionalCertInfo, CACertInfo, CAIdentityName, CAKeyPairAttributes, 
                        SFAuthorization, SFCSR, SFCertAuthorityInvitationSigner, SFCertificateAuthority, 
-                       SFCertificateAuthorityClient, SFMachPort, SFSyncManager, _SFAESKey, 
-                       _SFAESKeySpecifier, _SFAccessPolicy, _SFAsymmetricKeySpecifier, 
-                       _SFAuthenticatedCiphertext, _SFAuthenticatedEncryptionOperation, 
+                       SFCertificateAuthorityClient, SFMachPort, SFSyncManager, SPAKE2Prover, 
+                       SPAKE2Verifier, _SFAESKey, _SFAESKeySpecifier, _SFAccessPolicy, 
+                       _SFAsymmetricKeySpecifier, _SFAuthenticatedCiphertext, _SFAuthenticatedEncryptionOperation, 
                        _SFCiphertext, _SFCredential, _SFCredentialStore, _SFECDHKeySource, 
                        _SFECDHOperation, _SFECKeyPair, _SFECKeySpecifier, _SFECPublicKey, 
                        _SFEC_X962SigningOperation, _SFIESCiphertext, _SFIESOperation, 

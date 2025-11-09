@@ -6,6 +6,7 @@
 //
 
 #import <Vision/VNRequest.h>
+#import <Vision/VNObservation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,6 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNDetectHorizonRequest : VNImageBasedRequest
+
+/*!
+	@discussion VNHorizonObservation results.
+*/
+@property (readonly, copy, nullable) NSArray<VNHorizonObservation*>* results;
+
 @end
 
 

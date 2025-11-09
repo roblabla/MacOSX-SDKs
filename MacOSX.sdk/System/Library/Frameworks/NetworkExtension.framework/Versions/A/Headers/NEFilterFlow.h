@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, 2016, 2018, 2020 Apple Inc.
+ * Copyright (c) 2015, 2016, 2018, 2020, 2021 Apple Inc.
  * All rights reserved.
  */
 
@@ -59,7 +59,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 
 /*!
  *	@property direction
- *	@discussion Initial direciton of the flow (outgoing or incoming flow)
+ *	@discussion Initial direction of the flow (outgoing or incoming flow)
  */
 @property (readonly) NETrafficDirection direction API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 

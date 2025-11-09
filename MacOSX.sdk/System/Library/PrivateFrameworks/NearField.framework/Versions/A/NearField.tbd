@@ -3,23 +3,25 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1171C62B-3C1D-3E38-853E-7721D94403A1
+    value:           5B2B09B1-45A6-33F4-BAE2-9A31C63653FF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           652C9788-91D8-3F7D-8B7E-220AD4579753
+    value:           9DB90151-B088-39E2-B56F-F5251F8C5BD5
 install-name:    '/System/Library/PrivateFrameworks/NearField.framework/Versions/A/NearField'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _NFSecureElementManagerSessionECDSACertificateKey, _NFSecureElementManagerSessionRSAACertificateKey, 
                        _NFSignedPlatformData, _NFSignedPlatformSignatureBlob, _NF_DCK_EVENT_KEY_APPLET_IDENTIFIER, 
                        _NF_DCK_EVENT_KEY_ERROR, _NF_DCK_EVENT_KEY_KEY_IDENTIFIER, 
-                       _NF_DCK_EVENT_KEY_NAME, _NF_DCK_EVENT_KEY_RKE_ACTION, _NF_DCK_EVENT_KEY_RKE_EXECUTION_STATUS, 
-                       _NF_SECURE_XPC_EVENT_KEY_EVENT_NAME, _NF_SECURE_XPC_EVENT_KEY_EVENT_SIMPLE_NUMBER, 
-                       _NF_SECURE_XPC_EVENT_KEY_EVENT_SIMPLE_STRING, _NfRestoreCopyUniqueFDRKey, 
-                       _ObliterationDeleteAllApplets, _PTErrorInternal, _PTErrorInvalidParameters, 
-                       _PTErrorKeyAlreadyExist, _PTErrorKeyNotFound, _PTErrorNoMemory, 
-                       ___PTErrorString ]
+                       _NF_DCK_EVENT_KEY_NAME, _NF_DCK_EVENT_KEY_RANGING_SUSPENSION_REASONS, 
+                       _NF_DCK_EVENT_KEY_RANGING_TIMEOUT_SEC, _NF_DCK_EVENT_KEY_READER_IDENTIFIER, 
+                       _NF_DCK_EVENT_KEY_RKE_ACTION, _NF_DCK_EVENT_KEY_RKE_EXECUTION_STATUS, 
+                       _NF_DCK_EVENT_KEY_RKE_FUNCTION, _NF_SECURE_XPC_EVENT_KEY_EVENT_NAME, 
+                       _NF_SECURE_XPC_EVENT_KEY_EVENT_SIMPLE_NUMBER, _NF_SECURE_XPC_EVENT_KEY_EVENT_SIMPLE_STRING, 
+                       _NfRestoreCopyUniqueFDRKey, _ObliterationDeleteAllApplets, 
+                       _PTErrorInternal, _PTErrorInvalidParameters, _PTErrorKeyAlreadyExist, 
+                       _PTErrorKeyNotFound, _PTErrorNoMemory, ___PTErrorString ]
     objc-classes:    [ NFApplet, NFContactlessPaymentEndEvent, NFContactlessPaymentSession, 
                        NFContactlessPaymentSessionCallbacks, NFContactlessPaymentSessionInterface, 
                        NFContactlessPaymentStartEvent, NFContactlessSession, NFContactlessSessionCallbacks, 
@@ -43,5 +45,6 @@ exports:
                        NFTechnologyEvent, NFTrustKey, NFTrustKeyRequest, NFTrustLocalValidation, 
                        NFTrustObject, NFTrustPaymentSignResponse, NFTrustSession, 
                        NFTrustSessionInterface, NFTrustSignRequest, NFTrustSignResponse, 
-                       NFValueAddedServiceCard, NFValueAddedServiceTransaction ]
+                       NFVASRequest, NFVASResponse, NFValueAddedServiceCard, NFValueAddedServiceTransaction, 
+                       NFVehicleReport ]
 ...

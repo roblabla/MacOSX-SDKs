@@ -1,7 +1,7 @@
 /*
         NSTextView.h
         Application Kit
-        Copyright (c) 1994-2019, Apple Inc.
+        Copyright (c) 1994-2021, Apple Inc.
         All rights reserved.
 */
 
@@ -39,6 +39,8 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 @class NSTextContainer;
 @class NSTextStorage;
 @class NSLayoutManager;
+@class NSTextContentStorage;
+@class NSTextLayoutManager;
 @class NSRulerView;
 @class NSRulerMarker;
 @class NSUndoManager;
@@ -101,6 +103,12 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @property (nullable, readonly, assign) NSLayoutManager *layoutManager;
 
 @property (nullable, readonly, assign) NSTextStorage *textStorage;
+
+// The text views's text layout manager, if its text container is configured with one; null otherwise.
+@property (nullable, readonly, weak) NSTextLayoutManager *textLayoutManager API_AVAILABLE(macos(12.0));
+
+// The text view's text layout storage, if its text container is configured with one; null otherwise.
+@property (nullable, readonly, weak) NSTextContentStorage *textContentStorage API_AVAILABLE(macos(12.0));
 
 /************************* Key binding entry-point *************************/
 
@@ -649,6 +657,9 @@ APPKIT_EXTERN NSNotificationName NSTextViewWillChangeNotifyingTextViewNotificati
 APPKIT_EXTERN NSNotificationName NSTextViewDidChangeSelectionNotification;
 
 APPKIT_EXTERN NSNotificationName NSTextViewDidChangeTypingAttributesNotification;
+
+APPKIT_EXTERN NSNotificationName NSTextViewWillSwitchToNSLayoutManagerNotification;
+APPKIT_EXTERN NSNotificationName NSTextViewDidSwitchToNSLayoutManagerNotification;
 
 
 /* These constants are deprecated in favor of their NSTextFinder equivalents. */

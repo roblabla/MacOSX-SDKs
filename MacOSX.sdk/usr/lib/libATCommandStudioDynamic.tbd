@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7CAE4023-F892-3A6D-BCB2-43157939E1C9
+    value:           669C3078-9F71-3627-8A0B-B302C1BA408E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AB84D112-FED4-3E6E-8DB8-162942203B4F
+    value:           C77D1F88-0546-3A77-8688-A6D6DEA77B1C
 install-name:    '/usr/lib/libATCommandStudioDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -417,8 +417,6 @@ exports:
                        __ZThn104_N3qmi18QMuxServerAccepter5State6acceptERKN3xpc4dictERKN8dispatch5queueE, 
                        __ZThn104_N3qmi18QMuxServerAccepter5StateD0Ev, __ZThn104_N3qmi18QMuxServerAccepter5StateD1Ev, 
                        _asString, _getMessageIdFromBuffer ]
-    weak-symbols:    [ __ZGVN3ctu9SingletonINS_9LogServerEN4atcs9LogServerENS_23PthreadMutexGuardPolicyIS1_EEE9sInstanceE, 
-                       __ZN3ctu9SingletonINS_9LogServerEN4atcs9LogServerENS_23PthreadMutexGuardPolicyIS1_EEE9sInstanceE ]
   - targets:         [ arm64e-macos, arm64-macos ]
     symbols:         [ __ZN14_ATCSException15constructCommonEPKcjS1_Pc, __ZN14_ATCSException6appendEPKcPc ]
 ...

@@ -18,6 +18,31 @@ NS_ASSUME_NONNULL_BEGIN
 @class GCControllerButtonInput;
 
 /**
+ The primary directional input surface for the directional gamepad
+ 
+ @note Equivalent to microgamepad.dpad
+ 
+ @note For the 1st generation and 2nd generation Siri Remotes, this represents touching anywhere on the entire touch surface.
+*/
+GAMECONTROLLER_EXTERN NSString *const GCInputMicroGamepadDpad API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+
+/**
+ The primary button for the microgamepad
+ 
+ @note For the 1st generation and 2nd generation Siri Remotes, this represents pressing anywhere on the touch surface.
+*/
+GAMECONTROLLER_EXTERN NSString *const GCInputMicroGamepadButtonA API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+
+/**
+ The secondary button for the microgamepad
+ 
+ @note Equivalent to microgamepad.buttonX
+ 
+ @note For the 1st and 2nd generation Siri Remotes, this represents pressing the play/pause button.
+*/
+GAMECONTROLLER_EXTERN NSString *const GCInputMicroGamepadButtonX API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+
+/**
  Micro Gamepad profile.
  
  All controller profiles provide a base level of information about the controller they belong to.

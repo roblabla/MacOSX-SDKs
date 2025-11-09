@@ -1,7 +1,7 @@
 /*
 	NSWorkspace.h
 	Application Kit
-	Copyright (c) 1994-2019, Apple Inc.
+	Copyright (c) 1994-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -113,8 +113,32 @@ If the operation succeeded for every file, the error parameter will be nil.  If 
 /* Get the URL for the application with the given identifier.  This uses various heuristics in case multiple apps have the same bundle ID.  This returns nil if no app has the bundle identifier.*/
 - (nullable NSURL *)URLForApplicationWithBundleIdentifier:(NSString *)bundleIdentifier API_AVAILABLE(macos(10.6));
 
+/* Get the URL for all copies of an application with the given identifier. The system sorts the resulting array based on each application's suitability to launch. The first application is considered the best available match. This returns the empty array if no app has the bundle identifier. */
+- (NSArray<NSURL *> *)URLsForApplicationsWithBundleIdentifier:(NSString *)bundleIdentifier API_AVAILABLE(macos(12.0));
+
 /* Returns the URL to the default application that would be used to open the given URL, as if the file were double clicked in the Finder (for file URLs).  This returns nil if no app can open it, or if the file does not exist. */
 - (nullable NSURL *)URLForApplicationToOpenURL:(NSURL *)url API_AVAILABLE(macos(10.6));
+
+/* Returns URLs to all available applications that can open the given URL. The system sorts the resulting array based on each application's suitability to open the given URL. The first application is considered the best available match. This returns the empty array if no app can open it, or if the file does not exist. */
+- (NSArray<NSURL *> *)URLsForApplicationsToOpenURL:(NSURL *)url API_AVAILABLE(macos(12.0));
+
+/* Sets the default handler for files with the same UTType as the one specified. Does not apply to non-file URLs. Some UTTypes require user consent before you can change their handlers. If a change requires user consent, the system will ask the user asynchronously before invoking the completion handler. */
+- (void)setDefaultApplicationAtURL:(NSURL *)applicationURL toOpenContentTypeOfFileAtURL:(NSURL *)url completionHandler:(void (^_Nullable)(NSError *_Nullable error))completionHandler API_AVAILABLE(macos(12.0));
+
+/* Sets the default handler for URLs with the same scheme as the one specified. Some URL schemes require user consent before you can change their handlers. If a change requires user consent, the system will ask the user asynchronously before invoking the completion handler. */
+- (void)setDefaultApplicationAtURL:(NSURL *)applicationURL toOpenURLsWithScheme:(NSString *)urlScheme completionHandler:(void (^_Nullable)(NSError *_Nullable error))completionHandler API_AVAILABLE(macos(12.0));
+
+/* Sets the default handler for the specified file (rather than all files like it.) Does not apply to non-file URLs. Some files require user consent before you can change their handlers. Write access to the specified URL is required. If a change requires user consent, the system will ask the user asynchronously before invoking the completion handler. */
+- (void)setDefaultApplicationAtURL:(NSURL *)applicationURL toOpenFileAtURL:(NSURL *)url completionHandler:(void (^_Nullable)(NSError *_Nullable error))completionHandler API_AVAILABLE(macos(12.0));
+
+/* Returns the URL to the default application that would be used to open the given URL, as if the file were double clicked in the Finder.  This returns nil if no app can open it. */
+- (nullable NSURL *)URLForApplicationToOpenContentType:(UTType *)contentType API_AVAILABLE(macos(12.0));
+
+/* Returns URLs to all available applications that can open the given UTType. The system sorts the resulting array based on each application's suitability to open the given UTType. The first application is considered the best available match. This returns the empty array if no app can open it. */
+- (NSArray<NSURL *> *)URLsForApplicationsToOpenContentType:(UTType *)contentType API_AVAILABLE(macos(12.0));
+
+/* Sets the default handler for the specified UTType. Some types require user consent before you can change their handlers. If a change requires user consent, the system will ask the user asynchronously before invoking the completion handler. */
+- (void)setDefaultApplicationAtURL:(NSURL *)applicationURL toOpenContentType:(UTType *)contentType completionHandler:(void (^_Nullable)(NSError *_Nullable error))completionHandler API_AVAILABLE(macos(12.0));
 
 /* Gets the frontmost application, which is the application that will receive key events.  This is observable through KVO. */
 @property (nullable, readonly, strong) NSRunningApplication *frontmostApplication API_AVAILABLE(macos(10.7));
@@ -426,34 +450,34 @@ APPKIT_EXTERN NSWorkspaceLaunchConfigurationKey const NSWorkspaceLaunchConfigura
 - (BOOL)performFileOperation:(NSWorkspaceFileOperationName)operation source:(NSString *)source destination:(NSString *)destination files:(NSArray *)files tag:(nullable NSInteger *)tag API_DEPRECATED("", macos(10.0,10.11));
 
 /* Get, by reference, the name of the app used to open a file at the given path, and the type of the file.  The type of the file will either be a filename extension or an HFS type encoded with NSFileTypeForHFSTypeCode(). Both strings are returned autoreleased.  The method returns YES if successful, NO if not. */
-- (BOOL)getInfoForFile:(NSString *)fullPath application:(NSString * _Nullable* _Nullable)appName type:(NSString * _Nullable* _Nullable)type API_DEPRECATED("Use -[NSWorkspace URLForApplicationToOpenURL:] to get the URL of an application that will open a given item, or -[NSURL getResourceValue:forKey:error:] with NSURLContentTypeKey to get the type of the given item.", macos(10.0, API_TO_BE_DEPRECATED));
+- (BOOL)getInfoForFile:(NSString *)fullPath application:(NSString * _Nullable* _Nullable)appName type:(NSString * _Nullable* _Nullable)type API_DEPRECATED("Use -[NSWorkspace URLForApplicationToOpenURL:] to get the URL of an application that will open a given item, or -[NSURL getResourceValue:forKey:error:] with NSURLContentTypeKey to get the type of the given item.", macos(10.0, 12.0));
 
 /* Get the icon for a given file type.  The file type may be a filename extension, or a HFS code encoded via NSFileTypeForHFSTypeCode, or a Universal Type Identifier (UTI).   Returns a default icon if the operation fails.  */
-- (NSImage *)iconForFileType:(NSString *)fileType API_DEPRECATED("Use -[NSWorkspace iconForContentType:] instead.", macos(10.0, API_TO_BE_DEPRECATED));
+- (NSImage *)iconForFileType:(NSString *)fileType API_DEPRECATED("Use -[NSWorkspace iconForContentType:] instead.", macos(10.0, 12.0));
 
 /* Given an absolute file path, return the uniform type identifier (UTI) of the file, if one can be determined. Otherwise, return nil after setting *outError to an NSError that encapsulates the reason why the file's type could not be determined. If the file at the end of the path is a symbolic link the type of the symbolic link will be returned.
 
  You can invoke this method to get the UTI of an existing file.  To get the UTI of a URL, use the NSURLTypeIdentifierKey file system resource key from NSURL.h.
  */
-- (nullable NSString *)typeOfFile:(NSString *)absoluteFilePath error:(NSError **)outError API_DEPRECATED("Use -[NSURL getResourceValue:forKey:error:] with NSURLContentTypeKey instead.", macos(10.5, API_TO_BE_DEPRECATED));
+- (nullable NSString *)typeOfFile:(NSString *)absoluteFilePath error:(NSError **)outError API_DEPRECATED("Use -[NSURL getResourceValue:forKey:error:] with NSURLContentTypeKey instead.", macos(10.5, 12.0));
 
 /* Given a UTI, return a string that describes the document type and is fit to present to the user, or nil for failure.
 
  You can invoke this method to get the name of a type that must be shown to the user, in an alert about your application's inability to handle the type, for instance.
  */
-- (nullable NSString *)localizedDescriptionForType:(NSString *)typeName API_DEPRECATED("Use UTType.localizedDescription instead.", macos(10.5, API_TO_BE_DEPRECATED));
+- (nullable NSString *)localizedDescriptionForType:(NSString *)typeName API_DEPRECATED("Use UTType.localizedDescription instead.", macos(10.5, 12.0));
 
 /* Given a UTI, return the best file name extension to use when creating a file of that type, or nil for failure.
 
  You can invoke this method when your application has only the base name of a file that's being written and it has to append a file name extension so that the file's type can be reliably identified later on.
  */
-- (nullable NSString *)preferredFilenameExtensionForType:(NSString *)typeName API_DEPRECATED("Use UTType.preferredFilenameExtension instead.", macos(10.5, API_TO_BE_DEPRECATED));
+- (nullable NSString *)preferredFilenameExtensionForType:(NSString *)typeName API_DEPRECATED("Use UTType.preferredFilenameExtension instead.", macos(10.5, 12.0));
 
 /* Given a file name extension and a UTI, return YES if the file name extension is a valid tag for the identified type, NO otherwise.
 
  You can invoke this method when your application needs to check if a file name extension can be used to reliably identify the type later on. For example, NSSavePanel uses this method to validate any extension that the user types in the panel's file name field.
  */
-- (BOOL)filenameExtension:(NSString *)filenameExtension isValidForType:(NSString *)typeName API_DEPRECATED("Use +[UTType typesWithTag:tagClass:conformingToType:] to get a list of candidate types, then check if the input type conforms to any of them.", macos(10.5, API_TO_BE_DEPRECATED));
+- (BOOL)filenameExtension:(NSString *)filenameExtension isValidForType:(NSString *)typeName API_DEPRECATED("Use +[UTType typesWithTag:tagClass:conformingToType:] to get a list of candidate types, then check if the input type conforms to any of them.", macos(10.5, 12.0));
 
 /* Given two UTIs, return YES if the first "conforms to" to the second in the uniform type identifier hierarchy, NO otherwise. This method will always return YES if the two strings are equal, so you can also use it with other kinds of type name, including those declared in CFBundleTypeName Info.plist entries in apps that don't take advantage of the support for UTIs that was added to Cocoa in Mac OS 10.5.
 
@@ -461,7 +485,7 @@ APPKIT_EXTERN NSWorkspaceLaunchConfigurationKey const NSWorkspaceLaunchConfigura
 
  Use this method instead of merely comparing UTIs for equality.
  */
-- (BOOL)type:(NSString *)firstTypeName conformsToType:(NSString *)secondTypeName API_DEPRECATED("Use -[UTType conformsToType:] instead.", macos(10.5, API_TO_BE_DEPRECATED));
+- (BOOL)type:(NSString *)firstTypeName conformsToType:(NSString *)secondTypeName API_DEPRECATED("Use -[UTType conformsToType:] instead.", macos(10.5, 12.0));
 
 @end
 

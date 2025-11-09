@@ -294,18 +294,19 @@ CFPlugInTypes                   Dictionary      1 key/value pair
 /* 43C98C3C-306C-11D5-AF73-003065A8301E */
 
 /*!
-	@define			kMIDIDriverInterfaceXID
+	@define			kMIDIDriverInterface3ID
  
-	@abstract		The UUID for a provisional MIDI driver interface.
+	@abstract		The UUID for version 3 of the MIDI driver interface.
  
-	@discussion		See the description of the MIDIDriverInterface structure for
+	@discussion		This UUID uses UniversalMIDIPacket I/O functions.
+					See the description of the MIDIDriverInterface structure for
 					information about different versions of the MIDI driver interface.
  
 					This provisional driver interface is provided for the purpose of
                     prototyping MIDI 2.0 driver support. This driver interface will be replaced
                     in the future when transport specifications are defined.
 */
-#define kMIDIDriverInterfaceXID \
+#define kMIDIDriverInterface3ID \
 	CFUUIDGetConstantUUIDWithBytes(NULL, 0x2F, 0xD9, 0x4D, 0x0F, 0x8C, 0x2A, 0x48, 0x2A, 0x8A, 0xD8, 0x7D, 0x9E, 0xA3, 0x81, 0xC9, 0xC1)
 /* 2FD94D0F-8C2A-482A-8AD8-7D9EA381C9C1 */
 
@@ -322,7 +323,7 @@ CFPlugInTypes                   Dictionary      1 key/value pair
 					
 					New for CoreMIDI 1.1.
 */
-extern const CFStringRef kMIDIDriverPropertyUsesSerial		API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos);
+extern const CFStringRef kMIDIDriverPropertyUsesSerial		API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 #ifdef __cplusplus
@@ -358,7 +359,7 @@ extern "C" {
 extern OSStatus		MIDIDeviceCreate(MIDIDriverRef __nullable owner,
 							CFStringRef name, CFStringRef manufacturer,
 							CFStringRef model, MIDIDeviceRef *outDevice)
-																API_AVAILABLE(macos(10.0), ios(4.2));
+																API_AVAILABLE(macos(10.0), ios(4.2))  API_UNAVAILABLE(tvos, watchos);
 
 
 /*!
@@ -377,7 +378,7 @@ extern OSStatus		MIDIDeviceCreate(MIDIDriverRef __nullable owner,
 						The device to be disposed.
 	@result			An OSStatus result code.
 */
-extern OSStatus		MIDIDeviceDispose(MIDIDeviceRef device)		API_AVAILABLE(macos(10.3), ios(4.2));
+extern OSStatus		MIDIDeviceDispose(MIDIDeviceRef device)		API_AVAILABLE(macos(10.3), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 // ___________________________________________________________________________________________
 //	MIDIDeviceList
@@ -394,7 +395,7 @@ extern OSStatus		MIDIDeviceDispose(MIDIDeviceRef device)		API_AVAILABLE(macos(10
 	@result			The number of devices in the list, or 0 if an error occurred.
 */
 extern ItemCount		MIDIDeviceListGetNumberOfDevices(MIDIDeviceListRef devList)
-																API_AVAILABLE(macos(10.0), ios(4.2));
+																API_AVAILABLE(macos(10.0), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -410,7 +411,7 @@ extern ItemCount		MIDIDeviceListGetNumberOfDevices(MIDIDeviceListRef devList)
 	@result			A reference to a device, or NULL if an error occurred.
 */
 extern MIDIDeviceRef	MIDIDeviceListGetDevice(MIDIDeviceListRef devList, ItemCount index0)
-																API_AVAILABLE(macos(10.0), ios(4.2));
+																API_AVAILABLE(macos(10.0), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -425,7 +426,7 @@ extern MIDIDeviceRef	MIDIDeviceListGetDevice(MIDIDeviceListRef devList, ItemCoun
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIDeviceListAddDevice(MIDIDeviceListRef devList, MIDIDeviceRef dev)
-																API_AVAILABLE(macos(10.0), ios(4.2));
+																API_AVAILABLE(macos(10.0), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -438,7 +439,7 @@ extern OSStatus		MIDIDeviceListAddDevice(MIDIDeviceListRef devList, MIDIDeviceRe
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIDeviceListDispose(MIDIDeviceListRef devList)
-																API_AVAILABLE(macos(10.1), ios(4.2));
+																API_AVAILABLE(macos(10.1), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 
 // ___________________________________________________________________________________________
@@ -472,7 +473,7 @@ extern OSStatus		MIDIDeviceListDispose(MIDIDeviceListRef devList)
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIEndpointSetRefCons(MIDIEndpointRef endpt,
-					void * __nullable ref1, void * __nullable ref2)					API_AVAILABLE(macos(10.0), ios(4.2));
+					void * __nullable ref1, void * __nullable ref2)					API_AVAILABLE(macos(10.0), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -490,7 +491,7 @@ extern OSStatus		MIDIEndpointSetRefCons(MIDIEndpointRef endpt,
 */
 extern OSStatus		MIDIEndpointGetRefCons(MIDIEndpointRef endpt,
 					void * __nonnull * __nullable ref1, void * __nonnull * __nullable ref2)
-																					API_AVAILABLE(macos(10.0), ios(4.2));
+																					API_AVAILABLE(macos(10.0), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 // ___________________________________________________________________________________________
 
@@ -514,7 +515,7 @@ extern OSStatus		MIDIEndpointGetRefCons(MIDIEndpointRef endpt,
 
 	@result			The CFRunLoopRef of the server's driver I/O thread.
 */
-extern CFRunLoopRef	MIDIGetDriverIORunLoop(void)			API_AVAILABLE(macos(10.0), ios(4.2));
+extern CFRunLoopRef	MIDIGetDriverIORunLoop(void)			API_AVAILABLE(macos(10.0), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -532,7 +533,7 @@ extern CFRunLoopRef	MIDIGetDriverIORunLoop(void)			API_AVAILABLE(macos(10.0), io
 	@result			The requested device list.
 */
 extern MIDIDeviceListRef	MIDIGetDriverDeviceList(MIDIDriverRef __nonnull driver)
-															API_AVAILABLE(macos(10.1), ios(4.2));
+															API_AVAILABLE(macos(10.1), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -550,7 +551,7 @@ extern MIDIDeviceListRef	MIDIGetDriverDeviceList(MIDIDriverRef __nonnull driver)
 	@result			An OSStatus result code.
 */
 extern OSStatus			MIDIDriverEnableMonitoring(MIDIDriverRef __nonnull driver, Boolean enabled)
-															API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos);
+															API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 #ifdef __cplusplus

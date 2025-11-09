@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1FA365DB-2977-3185-90E6-E602223CD2E2
+    value:           2F2294DD-A73F-3545-BE37-2B441895F668
   - target:          x86_64-maccatalyst
-    value:           1FA365DB-2977-3185-90E6-E602223CD2E2
+    value:           2F2294DD-A73F-3545-BE37-2B441895F668
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F4086740-7564-353E-A565-BC00FF02CE7A
+    value:           AA3C18E4-7D1D-3FAC-A4CB-45F7CF6E2C51
   - target:          arm64e-maccatalyst
-    value:           F4086740-7564-353E-A565-BC00FF02CE7A
+    value:           AA3C18E4-7D1D-3FAC-A4CB-45F7CF6E2C51
 install-name:    '/System/Library/PrivateFrameworks/SyncedDefaults.framework/Versions/A/SyncedDefaults'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

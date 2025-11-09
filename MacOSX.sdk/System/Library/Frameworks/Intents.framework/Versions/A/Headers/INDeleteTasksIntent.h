@@ -17,7 +17,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(13.0), watchos(6.0))
+API_DEPRECATED("INDeleteTasksIntent is deprecated. There is no replacement.", ios(13.0, 15.0), watchos(6.0, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INDeleteTasksIntent : INIntent
 
@@ -40,7 +40,7 @@ API_UNAVAILABLE(macos, tvos)
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(13.0), watchos(6.0))
+API_DEPRECATED("INDeleteTasksIntentHandling is deprecated. There is no replacement.", ios(13.0, 15.0), watchos(6.0, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @protocol INDeleteTasksIntentHandling <NSObject>
 
@@ -85,7 +85,7 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolveTaskListForDeleteTasks:(INDeleteTasksIntent *)intent
-                    withCompletion:(void (^)(INDeleteTasksTaskListResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTaskList(for:with:));
+                       withCompletion:(void (^)(INDeleteTasksTaskListResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTaskList(for:with:));
 
 - (void)resolveTasksForDeleteTasks:(INDeleteTasksIntent *)intent
                     withCompletion:(void (^)(NSArray<INDeleteTasksTaskResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveTasks(for:with:));

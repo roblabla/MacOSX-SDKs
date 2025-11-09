@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
-#import "UIImage.h"
+#import <UIKit/UIImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UIAccessibilityCustomAction : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(8.0))
+@interface UIAccessibilityCustomAction : NSObject
 
 - (instancetype)initWithName:(NSString *)name target:(nullable id)target selector:(SEL)selector;
 - (instancetype)initWithAttributedName:(NSAttributedString *)attributedName target:(nullable id)target selector:(SEL)selector API_AVAILABLE(ios(11.0), tvos(11.0));

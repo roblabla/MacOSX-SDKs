@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F2E6D029-EE78-3AE5-A748-AB5B35427DCB
-install-name:    '/System/Volumes/Data/SWE/macOS/BuildRoots/2288acc43c/Library/Caches/com.apple.xbs/Binaries/GPUDriversNvidia/install/TempContent/Root/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/NVPTX.dylib'
+    value:           973E9F82-54E3-35AB-8C11-B61986CD9346
+install-name:    '/System/Volumes/Data/SWE/macOS/BuildRoots/0ed32b12e4/Library/Caches/com.apple.xbs/Binaries/GPUDriversNvidia/install/TempContent/Root/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/NVPTX.dylib'
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ _LLVMInitializeNVPTXAsmPrinter, _LLVMInitializeNVPTXBackendAsmPrinter, 

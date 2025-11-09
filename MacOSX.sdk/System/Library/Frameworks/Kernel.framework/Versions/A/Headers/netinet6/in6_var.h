@@ -93,8 +93,10 @@
 #ifndef _NETINET6_IN6_VAR_H_
 #define _NETINET6_IN6_VAR_H_
 #include <sys/appleapiopts.h>
+#include <net/if_var.h>
 #include <net/net_kev.h>
 
+#include <netinet/in.h>
 #include <netinet6/scope6_var.h>
 #include <sys/kern_event.h>
 #include <net/ethernet.h>
@@ -455,7 +457,7 @@ struct kev_in6_data {
 #define IN6_IFF_ANYCAST         0x0001  /* anycast address */
 #define IN6_IFF_TENTATIVE       0x0002  /* tentative address */
 #define IN6_IFF_DUPLICATED      0x0004  /* DAD detected duplicate */
-#define IN6_IFF_DETACHED        0x0008  /* may be detached from the link */
+#define IN6_IFF_DETACHED        0x0008  /* XXX Obsolete. May be detached from the link */
 #define IN6_IFF_DEPRECATED      0x0010  /* deprecated address */
 
 /* don't perform DAD on this address (used only at first SIOC* call) */

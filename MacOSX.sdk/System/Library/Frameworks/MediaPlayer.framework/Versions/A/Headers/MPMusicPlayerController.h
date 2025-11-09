@@ -57,13 +57,13 @@ API_UNAVAILABLE(watchos, macos)
 @interface MPMusicPlayerController : NSObject <MPMediaPlayback>
 
 /// Playing items with applicationMusicPlayer does not affect Music's playback state.
-@property (class, readonly) MPMusicPlayerController *applicationMusicPlayer;
+@property (class, nonatomic, readonly) MPMusicPlayerController *applicationMusicPlayer;
 
 /// Similar to applicationMusicPlayer, but allows direct manipulation of the queue.
-@property (class, readonly) MPMusicPlayerApplicationController *applicationQueuePlayer MP_API(ios(10.3), tvos(14.0));
+@property (class, nonatomic, readonly) MPMusicPlayerApplicationController *applicationQueuePlayer MP_API(ios(10.3), tvos(14.0));
 
 /// Playing media items with the systemMusicPlayer will replace the user's current Music state.
-@property (class, readonly) MPMusicPlayerController<MPSystemMusicPlayerController> *systemMusicPlayer;
+@property (class, nonatomic, readonly) MPMusicPlayerController<MPSystemMusicPlayerController> *systemMusicPlayer;
 
 MP_INIT_UNAVAILABLE
 
@@ -123,7 +123,7 @@ MP_INIT_UNAVAILABLE
 - (void)beginGeneratingPlaybackNotifications;
 - (void)endGeneratingPlaybackNotifications;
 
-@property (class, readonly) MPMusicPlayerController *iPodMusicPlayer
+@property (class, nonatomic, readonly) MPMusicPlayerController *iPodMusicPlayer
     MP_DEPRECATED_WITH_REPLACEMENT("systemMusicPlayer", ios(3.0, 8.0))
     API_UNAVAILABLE(tvos);
 

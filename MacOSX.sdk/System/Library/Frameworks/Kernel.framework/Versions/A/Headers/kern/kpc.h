@@ -78,15 +78,6 @@ __BEGIN_DECLS
  */
 typedef void (*kpc_pm_handler_t)(boolean_t);
 
-/*
- * Register a CPU to kpc and allocate its buffers.
- *
- * @param cpu_data
- * CPU data associated to the CPU being registered.
- *
- * @return
- * TRUE if buffers are correctly allocated, FALSE otherwise.
- */
 struct cpu_data;
 extern boolean_t kpc_register_cpu(struct cpu_data *cpu_data);
 extern void kpc_unregister_cpu(struct cpu_data *cpu_data);

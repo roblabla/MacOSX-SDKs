@@ -29,9 +29,9 @@ extern "C" {
  algorithms that we do not provide because using one of the algorithms we
  do provide is [almost] always a better choice.
  
- There are three commonly-known encoders implemented: LZ4, zlib (level 5), and
- LZMA (level 6).  If you require that your compression be interoperable with
- non-Apple devices, you should use one of these three schemes:
+ There are four commonly-known encoders implemented: LZ4, zlib (level 5),
+ LZMA (level 6) and Brotli (level 2). If you require that your compression be interoperable
+ with non-Apple devices, you should use one of these three schemes:
  
     - Use LZ4 if speed is critical, and you are willing to sacrifice
     compression ratio to achieve it.
@@ -48,6 +48,11 @@ extern "C" {
  algorithm that is faster than, and generally compresses better than zlib.
  It is slower than LZ4 and does not compress as well as LZMA, however, so
  you will still want to use those algorithms in the situations described.
+
+ Brotli is a widely adopted content-encoding-method for the web. Thus, Brotli
+ is included in libcompression escpecially to provide decoding capabilities.
+ In many other use-cases, one of the above mentioned algorithms is probably a
+ better choice.
 
  Further details on the supported public formats, and their implementation
  in the compression library:
@@ -101,6 +106,10 @@ extern "C" {
 
  - LZ4_RAW is supported by the buffer APIs only, and encodes/decodes payloads
    compatible with the LZ4 library, without the frame headers described above.
+
+ - We implement Brotli level 2 encoder only. This compression level provides
+   a good balance between compression speed and compression ratio. The Brotli
+   decoder supports decoding data compressed with any compression level.
  
 */
 typedef enum {
@@ -110,6 +119,7 @@ typedef enum {
     COMPRESSION_ZLIB     = 0x205,       // available starting OS X 10.11, iOS 9.0
     COMPRESSION_LZMA     = 0x306,       // available starting OS X 10.11, iOS 9.0
     COMPRESSION_LZ4_RAW  = 0x101,       // available starting OS X 10.11, iOS 9.0
+    COMPRESSION_BROTLI   = 0xB02,       // available starting OS X 12.0, iOS 15.0
 
     /* Apple-specific algorithm */
     COMPRESSION_LZFSE    = 0x801,       // available starting OS X 10.11, iOS 9.0

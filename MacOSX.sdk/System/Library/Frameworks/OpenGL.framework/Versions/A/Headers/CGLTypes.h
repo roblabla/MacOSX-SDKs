@@ -160,7 +160,8 @@ typedef enum _CGLContextEnable {
 typedef enum _CGLGPURestartStatus { /* GPU Restart Status */
 	kCGLCPGPURestartStatusNone        = 0, /* current context has not caused recent GPU restart */
 	kCGLCPGPURestartStatusCaused      = 1, /* current context caused recent GPU restart (auto-clear on query) */
-	kCGLCPGPURestartStatusBlacklisted = 2, /* current context is being ignored for excessive GPU restarts (won't clear on query) */
+	kCGLCPGPURestartStatusBlacklisted OPENGL_ENUM_DEPRECATED(10_0, 10_10) = 2, /* current context is being ignored for excessive GPU restarts (won't clear on query) */
+    kCGLCPGPURestartStatusDenied      = 2, /* current context is being ignored for excessive GPU restarts (won't clear on query) */
 } CGLGPURestartStatus;
 
 /*
@@ -194,7 +195,8 @@ typedef enum _CGLContextParameter {
 	kCGLCPHasDrawable OPENGL_ENUM_AVAILABLE(10_5)            = 314, /* 1 param.   Boolean returned if drawable is attached			*/
 	kCGLCPMPSwapsInFlight OPENGL_ENUM_AVAILABLE(10_5)        = 315, /* 1 param.   Max number of swaps queued by the MP GL engine	*/
 	kCGLCPGPURestartStatus OPENGL_ENUM_AVAILABLE(10_10)      = 317, /* 1 param.   Retrieves and clears the current CGLGPURestartStatus */
-	kCGLCPAbortOnGPURestartStatusBlacklisted OPENGL_ENUM_AVAILABLE(10_10) = 318, /* 1 param.  Establish action to take upon blacklisting */
+    kCGLCPAbortOnGPURestartStatusBlacklisted OPENGL_ENUM_DEPRECATED(10_0, 10_10) = 318, /* 1 param.  Establish action to take upon blacklisting */
+    kCGLCPAbortOnGPURestartStatusDenied OPENGL_ENUM_AVAILABLE(10_10) = 318, /* 1 param.  Establish action to take upon blacklisting */
 	kCGLCPSupportGPURestart OPENGL_ENUM_AVAILABLE(10_10)     = 319, /* 1 param.   Does driver support auto-restart of GPU on hang/crash? */
 	kCGLCPSupportSeparateAddressSpace OPENGL_ENUM_AVAILABLE(10_10) = 320, /* 1 param. Does context get its own GPU address space?   */
 	kCGLCPContextPriorityRequest OPENGL_ENUM_AVAILABLE(10_10) = 608, /* 1 param. kCGLCPContextPriorityRequest[High|Normal|Low] 0|1|2 */

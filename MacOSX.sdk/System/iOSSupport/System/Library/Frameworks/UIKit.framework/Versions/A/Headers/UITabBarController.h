@@ -29,7 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
  UITabBarController is rotatable if all of its view controllers are rotatable.
  */
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITabBarController : UIViewController <UITabBarDelegate, NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UITabBarController : UIViewController <UITabBarDelegate, NSCoding>
 
 @property(nullable, nonatomic,copy) NSArray<__kindof UIViewController *> *viewControllers;
 // If the number of view controllers is greater than the number displayable by a tab bar, a "More" navigation controller will automatically be shown.
@@ -48,6 +49,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITabBarController : UIViewContr
 
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UITabBarControllerDelegate <NSObject>
 @optional
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController API_AVAILABLE(ios(3.0));
@@ -75,7 +77,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITabBarController : UIViewContr
 
 @property(nullable, nonatomic, readonly, strong) UITabBarController *tabBarController; // If the view controller has a tab bar controller as its ancestor, return it. Returns nil otherwise.
 
-@property(nullable, nonatomic, strong) UIScrollView *tabBarObservedScrollView API_AVAILABLE(tvos(13.0)) API_UNAVAILABLE(ios, watchos); // Set this property to the full screen scroll view on the tab's top-level view controller, if one exists.
+/* Deprecated on tvOS 15.0 in favor of -[UIViewController setContentScrollView:forEdge:].
+ */
+@property(nullable, nonatomic, strong) UIScrollView *tabBarObservedScrollView API_DEPRECATED("Use -setContentScrollView:forEdge: instead.", tvos(13.0,API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos); // Set this property to the full screen scroll view on the tab's top-level view controller, if one exists.
 
 @end
 

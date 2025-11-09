@@ -44,6 +44,7 @@ class IOMemoryMap;
 class IOMapper;
 class IOService;
 class IODMACommand;
+class _IOMemoryDescriptorMixedData;
 
 /*
  * Direction of transfer, with respect to the described memory.
@@ -690,13 +691,14 @@ public:
 		mach_vm_size_t          length,
 		IOOptionBits            options );
 
-	virtual IOMemoryMap *      makeMapping(
+	virtual LIBKERN_RETURNS_NOT_RETAINED IOMemoryMap *      makeMapping(
 		IOMemoryDescriptor *    owner,
 		task_t                  intoTask,
 		IOVirtualAddress        atAddress,
 		IOOptionBits            options,
 		IOByteCount             offset,
 		IOByteCount             length );
+
 
 protected:
 	virtual void                addMapping(
@@ -919,7 +921,7 @@ private:
 #endif /* !__LP64__ */
 
 // Internal
-	OSPtr<OSData>   _memoryEntries;
+	OSPtr<_IOMemoryDescriptorMixedData> _memoryEntries;
 	unsigned int    _pages;
 	ppnum_t         _highestPage;
 	uint32_t        __iomd_reservedA;

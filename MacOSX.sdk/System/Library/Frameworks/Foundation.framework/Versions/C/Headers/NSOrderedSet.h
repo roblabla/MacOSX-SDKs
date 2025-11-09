@@ -168,11 +168,9 @@ API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0))
 - (void)minusSet:(NSSet<ObjectType> *)other;
 - (void)unionSet:(NSSet<ObjectType> *)other;
 
-#if NS_BLOCKS_AVAILABLE
 - (void)sortUsingComparator:(NSComparator NS_NOESCAPE)cmptr;
 - (void)sortWithOptions:(NSSortOptions)opts usingComparator:(NSComparator NS_NOESCAPE)cmptr;
 - (void)sortRange:(NSRange)range options:(NSSortOptions)opts usingComparator:(NSComparator NS_NOESCAPE)cmptr;
-#endif
 
 @end
 

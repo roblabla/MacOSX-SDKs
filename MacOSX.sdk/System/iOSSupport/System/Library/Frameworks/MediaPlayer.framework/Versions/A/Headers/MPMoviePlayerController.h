@@ -7,12 +7,16 @@
 
 #import <MediaPlayer/MediaPlayerDefines.h>
 
-#if MP_HAS_UIKIT
+#if MP_HAS_HEADER(UIKit, UIView.h)
 
 #import <Foundation/Foundation.h>
 #import <MediaPlayer/MPMediaPlayback.h>
 #import <UIKit/UIKit.h>
 
+#ifndef MP_DEPRECATED_BEGIN
+#define MP_DEPRECATED_BEGIN(...)
+#define MP_DEPRECATED_END
+#endif
 MP_DEPRECATED_BEGIN("Use AVPlayerViewController in AVKit", ios(3.2, 9.0))
 MP_UNAVAILABLE_BEGIN(watchos, macos)
 

@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, OSLogEntryLogLevel) {
     OSLogEntryLogLevelError,
     OSLogEntryLogLevelFault,
 }
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 NS_SWIFT_NAME(OSLogEntryLog.Level);
 
 /*!
@@ -34,7 +34,7 @@ NS_SWIFT_NAME(OSLogEntryLog.Level);
  * @abstract
  * Entries made by the os_log API.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 OS_EXPORT
 @interface OSLogEntryLog : OSLogEntry <OSLogEntryFromProcess, OSLogEntryWithPayload>
 
@@ -44,7 +44,8 @@ OS_EXPORT
  * @abstract
  * The level of the entry, e.g., info, debug.
  */
-@property (nonatomic, readonly) OSLogEntryLogLevel level;
+@property (nonatomic, readonly) OSLogEntryLogLevel level
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0));
 
 @end
 

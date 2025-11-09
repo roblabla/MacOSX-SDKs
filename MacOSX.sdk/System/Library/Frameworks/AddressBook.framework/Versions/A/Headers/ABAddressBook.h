@@ -48,39 +48,6 @@ extern NSString *ABMultiValueIdentifiersErrorKey AVAILABLE_MAC_OS_X_VERSION_10_7
 // ================================================================
 
 @interface ABAddressBook : NSObject
-{
-@private
-    id                   _reserved8;
-    
-    void                *_reserved2;
-    void                *_reserved3 __unused;
-    id                   _reserved4;
-    NSMutableDictionary *_tableSchemas;
-    NSMutableDictionary *_reserved5 __unused;
-    void                *_converterPort __unused;
-    NSTimer             *_inactivityTimer;
-    id                   _reserved;
-
-    id                   _reserved1;
-	
-    void                *_reserved6 __unused;
-    void                *_reserved7 __unused;
-
-    struct __ABBookflags {
-        unsigned int     hasUnsavedChanges:1;
-        unsigned int     readOnly:1;
-        unsigned int     importMe:1;
-        unsigned int     needConversion:1; // only used for puma conversion
-        unsigned int     cleanedUp:1;
-        unsigned int     importTips:1;
-        unsigned int     restoreFromMetaData:1;
-        unsigned int     prefsNeedSync:1;
-        unsigned int     waitingForReset:1;
-        unsigned int     enforcesConstraints:1;
-        unsigned int     tracksAllSources:1;
-        unsigned int     _reserved:21;
-    } _flags;
-}
 
 + (ABAddressBook *)sharedAddressBook;
     // Returns the unique shared instance of ABAddressBook

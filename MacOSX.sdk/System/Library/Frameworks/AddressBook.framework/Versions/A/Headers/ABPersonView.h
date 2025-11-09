@@ -22,17 +22,7 @@
 
 API_AVAILABLE(macos(10.7))
 API_UNAVAILABLE(macCatalyst)
-@interface ABPersonView : NSView {
-@private
-	ABAddressBook *_addressBook;
-    id _styleProvider;
-    id _adapter;
-    id _remoteView;
-	id _reserved1 __unused;
-    id _reserved2 __unused;
-    id _reserved3 __unused;
-    id _reserved4 __unused;
-}
+@interface ABPersonView : NSView
 
 @property (assign) BOOL editing;
 // A Boolean value that determines whether the receiver is in editing mode.

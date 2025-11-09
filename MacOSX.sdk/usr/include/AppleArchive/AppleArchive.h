@@ -42,9 +42,6 @@
 #define APPLE_ARCHIVE_ENUM(name,type) enum name
 #endif
 
-// API version
-#define APPLE_ARCHIVE_API_VERSION 1
-
 #include "AADefs.h"
 #include "AAEntryMessage.h"
 #include "AAFlagSet.h"
@@ -58,6 +55,8 @@
 #include "AAPathList.h"
 #include "AAArchiveStream.h"
 #include "AACustomArchiveStream.h"
+
+#include "AppleEncryptedArchive.h"
 
 // Deprecated calls
 

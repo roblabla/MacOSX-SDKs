@@ -3,22 +3,23 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6D1BF820-9916-3273-A937-B46FBAE055B4
+    value:           7FAD3E14-F33B-38E3-B069-468A81FBE8D3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           37983750-30AE-3834-9496-E8766098B26C
+    value:           E0FB881F-00C8-34FB-B3AC-27397D4F9196
 install-name:    '/System/Library/PrivateFrameworks/MailCore.framework/Versions/A/MailCore'
-current-version: 3654.80
+current-version: 3662
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ CoreSuggestionsTests, DebugBundle, EmailAuthenticationPlugin, 
-                       EmailFunctionalTests, EmailNotificationPlugin, EmailUIPlugin, 
-                       IMAP, IMAPFunctionalTests, Mail, MailCacheDelete, MailMigratorPlugin, 
-                       MailNotificationContentExtension, MailQuickLookExtension, 
-                       MailService, MailShareExtension, MailStorageManagement, MailTests, 
-                       MailUI, MailUIWebBundle, MailWebPlugIn, TestSuggestions, WebDocumentViewTestApp, 
-                       com.apple.MailServiceAgent, migrationhelper ]
+                       EmailFunctionalTests, EmailNotificationPlugin, EmailTestSupport, 
+                       EmailUIPlugin, IMAP, IMAPFunctionalTests, Mail, MailCacheDelete, 
+                       MailCoreTests, MailFrameworkTests, MailMigratorPlugin, MailNotificationContentExtension, 
+                       MailQuickLookExtension, MailService, MailShareExtension, MailStorageManagement, 
+                       MailTests, MailUI, MailUIWebBundle, MailWebPlugIn, Rot13Encryption, 
+                       TestSuggestions, WebDocumentViewTestApp, com.apple.MailServiceAgent, 
+                       migrationhelper ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DefaultsKeyUserOptedIntoAttachmentSending, _ECMessageHeaderKeyReceivedSpf, 
@@ -56,7 +57,7 @@ exports:
                        _MCFlagKeyNumberOfAttachments, _MCFlagKeyParentalControlState, 
                        _MCFlagKeyPartsHaveBeenCached, _MCFlagKeyPriorityLevel, _MCFlagKeyRead, 
                        _MCFlagKeyRedirected, _MCFlagKeyReplied, _MCFlagKeySigned, 
-                       _MCFlagsObjectForFlags, _MCFullScreenComposeFinishedIdentifier, 
+                       _MCFlagKeyWasActedOnByExtension, _MCFlagsObjectForFlags, _MCFullScreenComposeFinishedIdentifier, 
                        _MCGetFlagsAndMaskForFlagChange, _MCGetFlagsAndMaskForFlagChangeDictionary, 
                        _MCHeaderDictionaryKeyLabel, _MCHeaderDictionaryKeyOrderedKeys, 
                        _MCHeaderDictionaryKeyValueList, _MCHeaderDictionaryKeyValueString, 
@@ -165,21 +166,22 @@ exports:
                        MCFileWrapper, MCFileWrapperAttachmentDataSource, MCImageJunkMetadata, 
                        MCInvocationQueue, MCJunkRecorder, MCKeychainManager, MCMainThreadInvocationOperation, 
                        MCMemoryDataSource, MCMessage, MCMessageAttachmentMetadatum, 
-                       MCMessageBody, MCMessageGenerator, MCMessageHeaders, MCMessageTracer, 
-                       MCMessageURLProtocol, MCMimeCharset, MCMimeDataEncoding, MCMimePart, 
-                       MCMimePartAttachmentDataSource, MCMonitoredInvocation, MCMonitoredOperation, 
-                       MCMovingMessagesProgressEntry, MCMutableMessageHeaders, MCMutableMessageHeadersFactory, 
-                       MCNetworkController, MCOutgoingMessage, MCPlaceholderArchiveFileWrapper, 
-                       MCPlaceholderFileWrapper, MCPowerLog, MCPowerSourceManager, 
-                       MCPreparingToCopyProgressEntry, MCPreparingToMoveProgressEntry, 
-                       MCPriorityInvocation, MCProgressEntry, MCProgressGroup, MCProgressManager, 
-                       MCQOSInvocation, MCQuotaUsage, MCRemoteMessage, MCRemotePlaceholderFileWrapper, 
-                       MCRemoteURLAttachmentDataSource, MCResultTaskOperation, MCSavingDraftProgressEntry, 
-                       MCSendingMessagesProgressEntry, MCSharedPreferencesController, 
-                       MCSocket, MCSubdata, MCTask, MCTaskHandler, MCTaskHandlerOperation, 
-                       MCTaskList, MCTaskManager, MCTaskOperation, MCThrowingInvocationOperation, 
-                       MCTransferringMessagesProgressEntry, MCURLMatch, MCURLifier, 
-                       MCWorkerThread, MailCoreFramework, _FormatFlowedWriter, _MCActivityAggregateArrayController, 
+                       MCMessageBody, MCMessageDecoder, MCMessageGenerator, MCMessageHeaders, 
+                       MCMessageTracer, MCMessageURLProtocol, MCMimeCharset, MCMimeDataEncoding, 
+                       MCMimePart, MCMimePartAttachmentDataSource, MCMonitoredInvocation, 
+                       MCMonitoredOperation, MCMovingMessagesProgressEntry, MCMutableMessageHeaders, 
+                       MCMutableMessageHeadersFactory, MCNetworkController, MCOutgoingMessage, 
+                       MCPlaceholderArchiveFileWrapper, MCPlaceholderFileWrapper, 
+                       MCPowerLog, MCPowerSourceManager, MCPreparingToCopyProgressEntry, 
+                       MCPreparingToMoveProgressEntry, MCPriorityInvocation, MCProgressEntry, 
+                       MCProgressGroup, MCProgressManager, MCQOSInvocation, MCQuotaUsage, 
+                       MCRemoteMessage, MCRemotePlaceholderFileWrapper, MCRemoteURLAttachmentDataSource, 
+                       MCResultTaskOperation, MCSavingDraftProgressEntry, MCSendingMessagesProgressEntry, 
+                       MCSharedPreferencesController, MCSocket, MCSubdata, MCTask, 
+                       MCTaskHandler, MCTaskHandlerOperation, MCTaskList, MCTaskManager, 
+                       MCTaskOperation, MCThrowingInvocationOperation, MCTransferringMessagesProgressEntry, 
+                       MCURLMatch, MCURLifier, MCWorkerThread, MailCoreFramework, 
+                       _FormatFlowedWriter, _MCActivityAggregateArrayController, 
                        _MCActivityMonitorMultiTarget, _MCBatchingTimer, _MCCompositeImageRep, 
                        _MCConnectionAttempt, _MCCredentialRenewalResult, _MCDisplayNameInfoCacheItem, 
                        _MCInvocationOperation, _MCMemoryMessage, _MCMimeEnrichedReader, 

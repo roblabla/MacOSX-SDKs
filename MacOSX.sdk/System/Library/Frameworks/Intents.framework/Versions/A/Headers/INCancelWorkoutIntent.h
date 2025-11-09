@@ -76,7 +76,7 @@ API_UNAVAILABLE(macos, tvos)
  */
 
 - (void)resolveWorkoutNameForCancelWorkout:(INCancelWorkoutIntent *)intent
-                    withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveWorkoutName(for:with:));
+                            withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveWorkoutName(for:with:));
 
 @end
 

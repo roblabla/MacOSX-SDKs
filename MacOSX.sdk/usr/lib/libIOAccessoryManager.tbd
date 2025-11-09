@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           93E0BE41-F00F-345C-A757-07C6DD76FFAD
+    value:           E2A7D2E8-19D3-3FF2-B95C-D7D43376ADEE
   - target:          x86_64-maccatalyst
-    value:           93E0BE41-F00F-345C-A757-07C6DD76FFAD
+    value:           E2A7D2E8-19D3-3FF2-B95C-D7D43376ADEE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6A2FE41D-7559-3CC9-B96F-C80AE17125F5
+    value:           552140BC-2415-357B-A6AB-5CFCDE744192
   - target:          arm64e-maccatalyst
-    value:           6A2FE41D-7559-3CC9-B96F-C80AE17125F5
+    value:           552140BC-2415-357B-A6AB-5CFCDE744192
 install-name:    '/usr/lib/libIOAccessoryManager.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _IOAccesoryManagerGetDigitalIDAccessoryVersionInfo, _IOAccesoryManagerGetDigitalIDInterfaceDeviceInfo, 
                        _IOAccessoryConfigStreamInterfaceGetCategories, _IOAccessoryConfigStreamInterfaceGetCategoryProperties, 

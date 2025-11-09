@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           ACCC1A4F-7FDA-355B-902A-C33BF82AE875
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           56BCA4C8-0B55-34D2-874A-64B21EA7A342
+install-name:    '/System/Library/PrivateFrameworks/UVFSXPCService.framework/Versions/A/UVFSXPCService'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _UVFSXPCServiceVersionNumber, _UVFSXPCServiceVersionString ]
+...

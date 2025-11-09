@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9ABC6685-7FA9-369D-A93E-607D9B527D92
+    value:           639901C2-DB68-3FA2-A117-AA0F60DEAE41
   - target:          x86_64-maccatalyst
-    value:           9ABC6685-7FA9-369D-A93E-607D9B527D92
+    value:           639901C2-DB68-3FA2-A117-AA0F60DEAE41
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5A492EE9-9E65-3894-8B93-79CE5D24928B
+    value:           9DD60686-0B40-37A6-888F-C9EF0C4382D3
   - target:          arm64e-maccatalyst
-    value:           5A492EE9-9E65-3894-8B93-79CE5D24928B
+    value:           9DD60686-0B40-37A6-888F-C9EF0C4382D3
 install-name:    '/System/Library/PrivateFrameworks/PassKitMacHelper.framework/Versions/A/PassKitMacHelper'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2020 Apple Inc. All rights reserved.
+	Copyright 2010-2021 Apple Inc. All rights reserved.
 
 */
 
@@ -55,6 +55,12 @@ AVF_EXPORT NSNotificationName const AVPlayerItemMediaSelectionDidChangeNotificat
 
 // notification userInfo key                                                                    type
 AVF_EXPORT NSString *const AVPlayerItemFailedToPlayToEndTimeErrorKey     API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));   // NSError
+/**
+ @constant AVPlayerItemTimeJumpedOriginatingParticipantKey
+ @abstract Indicates a time jump was caused by another participant connected through AVPlayerPlaybackCoordinator.
+ @discussion Informs the receiver of an AVPlayerItemTimeJumpedNotification that a time jump originated from another AVCoordinatedPlaybackParticipant connected through AVPlayerPlaybackCoordinator. This can be used to inform UI showing why the current time changed. The type of the value for this key is an AVCoordinatedPlaybackParticipant, which is part of the AVPlayerPlaybackCoordinator.otherParticipants array.
+ */
+AVF_EXPORT NSString *const AVPlayerItemTimeJumpedOriginatingParticipantKey API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @enum AVPlayerItemStatus
@@ -74,27 +80,6 @@ typedef NS_ENUM(NSInteger, AVPlayerItemStatus) {
 	AVPlayerItemStatusUnknown = 0,
 	AVPlayerItemStatusReadyToPlay = 1,
 	AVPlayerItemStatusFailed = 2
-};
-
-/*!
-@enum AVAudioSpatializationFormats
- @abstract
-	These constants can be used to specify values for allowedAudioSpatializationFormats.
- 
- @constant	 AVAudioSpatializationFormatNone
-	Indicates that no audio spatialization is allowed.
- @constant	 AVAudioSpatializationFormatMonoAndStereo
-	Indicates that only mono and stereo formats may be used for audio spatialization.
- @constant	 AVAudioSpatializationFormatMultichannel
-	Indicates that only multichannel layouts may be used for audio spatialization.
- @constant	 AVAudioSpatializationFormatMonoStereoAndMultichannel
-	Indicates that mono, stereo and multichannel layouts may be used for audio spatialization.
- */
-typedef NS_OPTIONS(NSUInteger, AVAudioSpatializationFormats) {
-	AVAudioSpatializationFormatNone = 0UL,
-	AVAudioSpatializationFormatMonoAndStereo = 0x3UL,
-	AVAudioSpatializationFormatMultichannel = 0x4UL,
-	AVAudioSpatializationFormatMonoStereoAndMultichannel = 0x7UL
 };
 
 @class AVPlayer;
@@ -174,6 +159,9 @@ AV_INIT_UNAVAILABLE
  @discussion	The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading.
  */
 - (instancetype)initWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(nullable NSArray<NSString *> *)automaticallyLoadedAssetKeys NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+
+- (id)copyWithZone:(nullable NSZone *)zone NS_SWIFT_UI_ACTOR;
+- (id)copy NS_SWIFT_UI_ACTOR;
 
 /*!
  @property status
@@ -263,8 +251,10 @@ AV_INIT_UNAVAILABLE
  @discussion
    Notifications of changes are available via key-value observation.
    As an optimization for playback, AVPlayerItem may omit the processing of timed metadata when no observer of this property is registered. Therefore, when no such observer is registered, the value of the timedMetadata property may remain nil regardless of the contents of the underlying media.
+ 
+   This property must be accessed on the main thread/queue.
  */
-@property (nonatomic, readonly, nullable) NSArray<AVMetadataItem *> *timedMetadata API_DEPRECATED("Use AVPlayerItemMetadataOutput to obtain timed metadata", macos(10.7, 10.15), ios(4.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, nullable) NSArray<AVMetadataItem *> *timedMetadata NS_SWIFT_UI_ACTOR API_DEPRECATED("Use AVPlayerItemMetadataOutput to obtain timed metadata", macos(10.7, 10.15), ios(4.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property automaticallyLoadedAssetKeys
@@ -306,8 +296,10 @@ AV_INIT_UNAVAILABLE
  @property		configuredTimeOffsetFromLive
  @abstract		Indicates how close to the latest content in a live stream playback will begin after a live start or a seek to kCMTimePositiveInfinity.
  @discussion	For non-live assets this value is kCMTimeInvalid.
+ 
+ This property must be accessed on the main thread/queue.
  */
-@property CMTime configuredTimeOffsetFromLive API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+@property CMTime configuredTimeOffsetFromLive NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 /*!
  @property		recommendedTimeOffsetFromLive
@@ -327,9 +319,11 @@ AV_INIT_UNAVAILABLE
   Note that if the network cannot deliver media quickly enough to maintain the playback rate, playback may stall interminably.
  
  This property value has no effect if the asset is not a live stream. The default value of this property is NO.
+ 
+ This property must be accessed on the main thread/queue.
  */
 
-@property (nonatomic) BOOL automaticallyPreservesTimeOffsetFromLive API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0),watchos(6.0));
+@property (nonatomic) BOOL automaticallyPreservesTimeOffsetFromLive NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0),watchos(6.0));
 
 @end
 
@@ -453,14 +447,16 @@ AV_INIT_UNAVAILABLE
    The number of steps by which to move. A positive number results in stepping forward, a negative number in stepping backward.
  @discussion
    The size of each step depends on the enabled AVPlayerItemTracks of the AVPlayerItem. 
+
+   This method must be invoked on the main thread/queue.
  */
-- (void)stepByCount:(NSInteger)stepCount;
+- (void)stepByCount:(NSInteger)stepCount NS_SWIFT_UI_ACTOR;
 
 /*!
  @property		timebase
  @abstract		The item's timebase.
  @discussion 
-   You can examine the timebase to discover the relationship between the item's time and the master clock used for drift synchronization.
+   You can examine the timebase to discover the relationship between the item's time and the source clock used for drift synchronization.
    This timebase is read-only; you cannot set its time or rate to affect playback.  The value of this property may change during playback.
  */
 @property (nonatomic, readonly, nullable) __attribute__((NSObject)) CMTimebaseRef timebase API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
@@ -473,10 +469,12 @@ AV_INIT_UNAVAILABLE
 @interface AVPlayerItem (AVPlayerItemVisualPresentation)
 
 /*!
- @property videoComposition
- @abstract Indicates the video composition settings to be applied during playback.
+ @property 		videoComposition
+ @abstract 		Indicates the video composition settings to be applied during playback.
+ @discussion	This property must be accessed on the main thread/queue.
+
  */
-@property (nonatomic, copy, nullable) AVVideoComposition *videoComposition API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy, nullable) AVVideoComposition *videoComposition NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property customVideoCompositor
@@ -484,8 +482,10 @@ AV_INIT_UNAVAILABLE
  @discussion
  	This property is nil if there is no video compositor, or if the internal video compositor is in use. This reference can be used to provide
 	extra context to the custom video compositor instance if required.
+ 
+	This property must be accessed on the main thread/queue.
  */
-@property (nonatomic, readonly, nullable) id<AVVideoCompositing> customVideoCompositor API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, nullable) id<AVVideoCompositing> customVideoCompositor NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property seekingWaitsForVideoCompositionRendering
@@ -539,7 +539,8 @@ AV_INIT_UNAVAILABLE
  @abstract	Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits.
  @discussion
    Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
-   The default value on iOS is AVAudioTimePitchAlgorithmLowQualityZeroLatency and on OS X is AVAudioTimePitchAlgorithmSpectral.
+   The default value for applications linked on or after iOS 15.0 or macOS 12.0 is AVAudioTimePitchAlgorithmTimeDomain. For iOS versions prior to 15.0 the default value is AVAudioTimePitchAlgorithmLowQualityZeroLatency.
+   For macOS versions prior to 12.0 the default value is AVAudioTimePitchAlgorithmSpectral.
 */
 @property (copy) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
@@ -555,9 +556,11 @@ AV_INIT_UNAVAILABLE
  @property allowedAudioSpatializationFormats
  @abstract Indicates the source audio channel layouts allowed by the receiver for spatialization.
  @discussion
-   Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the AVPlayer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the AVPlayer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the AVPlayer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property is AVAudioSpatializationFormatMultichannel.
+   Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the AVPlayer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the AVPlayer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the AVPlayer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property with video content is AVAudioSpatializationFormatMonoStereoAndMultichannel. Otherwise, audio only content default value is AVAudioSpatializationFormatMultichannel.
+ 
+ This property must be accessed on the main thread/queue.
  */
-@property (nonatomic, assign) AVAudioSpatializationFormats allowedAudioSpatializationFormats API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos, watchos);
+@property (nonatomic, assign) AVAudioSpatializationFormats allowedAudioSpatializationFormats NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property audioMix
@@ -639,6 +642,23 @@ AV_INIT_UNAVAILABLE
 @property double preferredPeakBitRate API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /*!
+ @property preferredPeakBitRateForExpensiveNetworks
+ @abstract Indicates the desired limit of network bandwidth consumption for this item over expensive networks.
+
+ @discussion
+	When preferredPeakBitRateForExpensiveNetworks is set to non-zero, the player will attempt to limit item playback to that bit rate 
+	when streaming over an expensive network, such as when using a cellular data plan.  (See -[NWPath isExpensive])
+
+	If network bandwidth consumption cannot be lowered to meet the preferredPeakBitRateForExpensiveNetworks, it will be reduced as much as possible while continuing to play the item.
+	
+	Note that preferredPeakBitRate still applies unconditionally.  If preferredPeakBitRateForExpensiveNetworks is less restrictive (greater) than preferredPeakBitRate,
+	preferredPeakBitRateForExpensiveNetworks has no practical effect.
+ 
+	This property must be accessed on the main thread/queue.
+*/
+@property double preferredPeakBitRateForExpensiveNetworks NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
  @property preferredMaximumResolution
  @abstract Indicates a preferred upper limit on the resolution of the video to be downloaded (or otherwise transferred) and rendered by the player.
  @discussion
@@ -646,6 +666,22 @@ AV_INIT_UNAVAILABLE
 	It only applies to HTTP Live Streaming asset.
  */
 @property CGSize preferredMaximumResolution API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+
+/*!
+ @property preferredMaximumResolutionForExpensiveNetworks
+ @abstract Indicates a preferred upper limit on the resolution of the video to be downloaded that applies only when the download occurs over expensive networks.
+ @discussion
+	The default value is CGSizeZero, which indicates that the client enforces no limit on video resolution. Other values indicate a preferred maximum video resolution.
+	This limit applies only when streaming over an expensive network, such as when using a cellular data plan.  (See -[NWPath isExpensive])
+
+	It only applies to HTTP Live Streaming asset.
+ 
+	Note that preferredMaximumResolution still applies unconditionally.  If preferredMaximumResolutionForExpensiveNetworks is less restrictive (higher resolution)
+	than preferredMaximumResolution, preferredMaximumResolutionForExpensiveNetworks has no practical effect.
+ 
+	This property must be accessed on the main thread/queue.
+ */
+@property CGSize preferredMaximumResolutionForExpensiveNetworks NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property		startsOnFirstEligibleVariant
@@ -702,8 +738,10 @@ typedef NS_OPTIONS(NSUInteger, AVVariantPreferences) {
    If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, you can pass nil for mediaSelectionOption to deselect
    all media selection options in the group.
    Note that if multiple options within a group meet your criteria for selection according to locale or other considerations, and if these options are otherwise indistinguishable to you according to media characteristics that are meaningful for your application, content is typically authored so that the first available option that meets your criteria is appropriate for selection.
+ 
+   This method must be invoked on the main thread/queue.
  */
-- (void)selectMediaOption:(nullable AVMediaSelectionOption *)mediaSelectionOption inMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+- (void)selectMediaOption:(nullable AVMediaSelectionOption *)mediaSelectionOption inMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
  @method		selectMediaOptionAutomaticallyInMediaSelectionGroup:
@@ -712,8 +750,10 @@ typedef NS_OPTIONS(NSUInteger, AVVariantPreferences) {
  @param 		mediaSelectionGroup		The media selection group, obtained from the receiver's asset, that contains the specified option.
  @discussion
    Has no effect unless the appliesMediaSelectionCriteriaAutomatically property of the associated AVPlayer is YES and unless automatic media selection has previously been overridden via -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:].
+ 
+   This method must be invoked on the main thread/queue.
  */
-- (void)selectMediaOptionAutomaticallyInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+- (void)selectMediaOptionAutomaticallyInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
   @property		currentMediaSelection
@@ -982,7 +1022,7 @@ AV_INIT_UNAVAILABLE
  				This property is not observable.
  				This property is deprecated. Use numberOfMediaRequests instead.
  */
-@property (nonatomic, readonly) NSInteger numberOfSegmentsDownloaded API_DEPRECATED("No longer supported", macos(10.7, 10.9), ios(4.3, 7.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) NSInteger numberOfSegmentsDownloaded API_DEPRECATED_WITH_REPLACEMENT("numberOfMediaRequests", macos(10.7, 10.9), ios(4.3, 7.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property		numberOfMediaRequests
@@ -1152,7 +1192,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "c-observed-max-bitrate".
 				This property is not observable.
  */
-@property (nonatomic, readonly) double observedMaxBitrate API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) double observedMaxBitrate API_DEPRECATED("Use observedBitrateStandardDeviation to monitor variance in network bitrate.", macos(10.9, 12), ios(7.0, 15.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 
 /*!
  @property		observedMinBitrate
@@ -1160,7 +1200,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "c-observed-min-bitrate".
 				This property is not observable.
  */
-@property (nonatomic, readonly) double observedMinBitrate API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) double observedMinBitrate API_DEPRECATED("Use observedBitrateStandardDeviation to monitor variance in network bitrate.", macos(10.9, 12), ios(7.0, 15.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
 
 /*!
  @property		observedBitrateStandardDeviation

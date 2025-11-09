@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           65D66FF8-F361-31FD-9970-1798B9D43DBB
+    value:           C8F45942-B703-35CF-BAEB-5C0C7DC41EC6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           071FD2DE-D87C-3F71-B719-4D54A9B6C0BD
+    value:           B535623E-720B-3B96-BD3F-FAA4CEBC19A1
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox'
-current-version: 1061.9
+current-version: 1105
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
@@ -269,11 +269,12 @@ exports:
                        _TISCreateDefaultASCIIInputSourceForLocale, _TISCreateInputSourceList, 
                        _TISCreatePrunedPreferredInputSourcesWithABC, _TISCreateSecureKeyboardInputSourceList, 
                        _TISDeselectInputSource, _TISDisableInputSource, _TISEnableInputSource, 
-                       _TISGetAppleKeyLayoutCount, _TISGetAppleKeyLayoutIndexForKeyLayoutName, 
-                       _TISGetAppleKeyLayoutIndexForNumericID, _TISGetAppleKeyLayoutKLPropertyAtIndex, 
-                       _TISGetDictationShouldAutoEnable, _TISGetFnUsageType, _TISGetGestureHandwritingState, 
-                       _TISGetInputSourceProperty, _TISHardwareSupportsGestureHandwriting, 
-                       _TISInputMethodDataFileReaderCreateBasicProperties, _TISInputMethodDataFileReaderCreatePropertyListAndWordList, 
+                       _TISEnableInputSourceWithOptions, _TISGetAppleKeyLayoutCount, 
+                       _TISGetAppleKeyLayoutIndexForKeyLayoutName, _TISGetAppleKeyLayoutIndexForNumericID, 
+                       _TISGetAppleKeyLayoutKLPropertyAtIndex, _TISGetDictationShouldAutoEnable, 
+                       _TISGetFnUsageType, _TISGetGestureHandwritingState, _TISGetInputSourceProperty, 
+                       _TISHardwareSupportsGestureHandwriting, _TISInputMethodDataFileReaderCreateBasicProperties, 
+                       _TISInputMethodDataFileReaderCreatePropertyListAndWordList, 
                        _TISInputSourceGetTypeID, _TISIsKeyboardLayoutCapsLockSwitchAllowed, 
                        _TISIsKeyboardLayoutCapsLockSwitched, _TISIsRomanSwitchAllowed, 
                        _TISIsRomanSwitchEnabled, _TISKeyboardLayoutInputSourceIsQWERTY, 
@@ -341,20 +342,20 @@ exports:
                        __HIMenuCopyItemViewClass, __HIMenuCreateConfiguredMarkImage, 
                        __HIMenuDisableAutoDismissal, __HIMenuEnableAutoDismissal, 
                        __HIMenuGetBackgroundBleed, __HIMenuGetCommandKey, __HIMenuGetContentDirectionality, 
-                       __HIMenuGetContentSize, __HIMenuGetDefaultMenuBarHeightForDisplay, 
-                       __HIMenuGetEffectiveDirectionality, __HIMenuGetItemView, __HIMenuGetMenuBarHeight, 
-                       __HIMenuGetMenuBarHeightForDisplay, __HIMenuGetNewItemsCount, 
-                       __HIMenuIsCarbonMenuKeyEvent, __HIMenuIsDark, __HIMenuPerformKeyboardNavigation, 
-                       __HIMenuSendItemSelectedEvent, __HIMenuSetCommandKey, __HIMenuSetContentDirectionality, 
-                       __HIMenuSetContentSize, __HIMenuSetEventProc, __HIMenuSetIndentWidth, 
-                       __HIMenuSetItemIndent, __HIMenuSetItemViewClass, __HIMenuSetNSImageInterface, 
-                       __HIMenuSetNewItemsCount, __HIMenuUseBackdrops, __HIMenuViewRegisterClass, 
-                       __HIPopupButtonRegisterClass, __HIPresentationInstanceCreateForFullScreenSpace, 
+                       __HIMenuGetContentSize, __HIMenuGetEffectiveDirectionality, 
+                       __HIMenuGetItemView, __HIMenuGetMenuBarHeight, __HIMenuGetMenuBarHeightWithOptions, 
+                       __HIMenuGetNewItemsCount, __HIMenuIsCarbonMenuKeyEvent, __HIMenuIsDark, 
+                       __HIMenuPerformKeyboardNavigation, __HIMenuSendItemSelectedEvent, 
+                       __HIMenuSetCommandKey, __HIMenuSetContentDirectionality, __HIMenuSetContentSize, 
+                       __HIMenuSetEventProc, __HIMenuSetIndentWidth, __HIMenuSetItemIndent, 
+                       __HIMenuSetItemViewClass, __HIMenuSetNSImageInterface, __HIMenuSetNewItemsCount, 
+                       __HIMenuUseBackdrops, __HIMenuViewRegisterClass, __HIPopupButtonRegisterClass, 
+                       __HIPresentationInstanceCreateForFullScreenSpace, __HIPresentationInstanceCreateWithFullScreenMode, 
                        __HIPresentationInstanceDisplayDidChange, __HIPresentationInstanceRelease, 
-                       __HIPresentationInstanceSetSpace, __HIPresentationInstanceSetUIMode, 
-                       __HIPresentationModeStartMenuBarAnimation, __HIProgressBarRegisterClass, 
-                       __HIPushButtonRegisterClass, __HIRadioGroupRegisterClass, 
-                       __HIRawObjectRegisterClass, __HIRegisterAEWillInteractProc, 
+                       __HIPresentationInstanceSetAutoHideHeight, __HIPresentationInstanceSetSpace, 
+                       __HIPresentationInstanceSetUIMode, __HIPresentationInstanceStartMenuBarAnimation, 
+                       __HIProgressBarRegisterClass, __HIPushButtonRegisterClass, 
+                       __HIRadioGroupRegisterClass, __HIRawObjectRegisterClass, __HIRegisterAEWillInteractProc, 
                        __HIRoundButtonRegisterClass, __HIScrollViewRegisterClass, 
                        __HISegmentViewRegisterClass, __HISegmentViewSetIsInset, __HIShrinkToFitEditRegisterClass, 
                        __HISliderRegisterClass, __HIStandardMenuViewRegisterClass, 
@@ -362,11 +363,11 @@ exports:
                        __HIStdEventLoopRegisterClass, __HITextFieldRegisterClass, 
                        __HITextViewRegisterClass, __HIThemeCreateImage, __HIThemeDrawAppleMenuTitle, 
                        __HIThemeDrawSegment, __HIThemeDrawSelectionMarquee, __HIThemeDrawWell, 
-                       __HIThemeGetChasingArrowDimensions, __HIThemeGetMenuBarLogoRect, 
-                       __HIThemeGetMenuCalloutDimensions, __HIThemeGetWindowGrowSides, 
-                       __HIThemeGetWindowTitleBaselineOffset, __HIThemeRefreshPreferences, 
-                       __HIThemeSetColor, __HIThemeSetDrawingCallback, __HIThemeSetTextColor, 
-                       __HIToolbarItemRegisterClass, __HIToolbarViewRegisterClass, 
+                       __HIThemeGetChasingArrowDimensions, __HIThemeGetLegacyModeEnabled, 
+                       __HIThemeGetMenuBarLogoRect, __HIThemeGetMenuCalloutDimensions, 
+                       __HIThemeGetWindowGrowSides, __HIThemeGetWindowTitleBaselineOffset, 
+                       __HIThemeRefreshPreferences, __HIThemeSetColor, __HIThemeSetDrawingCallback, 
+                       __HIThemeSetTextColor, __HIToolbarItemRegisterClass, __HIToolbarViewRegisterClass, 
                        __HIViewAdvanceFocusFollowingView, __HIViewCopyVisibleShape, 
                        __HIViewNotifySetFocusPart, __HIViewRegisterClass, __HIViewScrollRectWithOptions, 
                        __HIWindowFrameViewRegisterClass, __HIWindowSetAutoReleaseFocus, 

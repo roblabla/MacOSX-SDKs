@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           59901324-F88E-33B1-9E38-DE4BAB3DDDC9
+    value:           913EE301-0A86-3C1C-B97C-B2723F002A59
   - target:          x86_64-maccatalyst
-    value:           59901324-F88E-33B1-9E38-DE4BAB3DDDC9
+    value:           913EE301-0A86-3C1C-B97C-B2723F002A59
   - target:          x86_64h-macos
-    value:           39129A81-0E78-3130-85AD-5FA0BFBCC6FA
+    value:           AD8390BC-9134-3CE9-8824-BC2681E54731
   - target:          x86_64h-maccatalyst
-    value:           39129A81-0E78-3130-85AD-5FA0BFBCC6FA
+    value:           AD8390BC-9134-3CE9-8824-BC2681E54731
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D8C91B63-0FA2-3208-9386-630B6A4C893F
+    value:           3292AD11-0D6D-3AC5-BBC6-F99B41D44B27
   - target:          arm64e-maccatalyst
-    value:           D8C91B63-0FA2-3208-9386-630B6A4C893F
+    value:           3292AD11-0D6D-3AC5-BBC6-F99B41D44B27
 install-name:    '/usr/lib/libsqlite3.dylib'
-current-version: 321.3
+current-version: 327
 compatibility-version: 9
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ __sqlite3_apple_archive, __sqlite3_apple_archive_type, __sqlite3_apple_unarchive, 
                        __sqlite3_db_clone, __sqlite3_db_copy, __sqlite3_db_copy_compact, 
@@ -42,14 +42,14 @@ exports:
                        _sqlite3_blob_bytes, _sqlite3_blob_close, _sqlite3_blob_open, 
                        _sqlite3_blob_read, _sqlite3_blob_reopen, _sqlite3_blob_write, 
                        _sqlite3_busy_handler, _sqlite3_busy_timeout, _sqlite3_cancel_auto_extension, 
-                       _sqlite3_carray_init, _sqlite3_changes, _sqlite3_clear_bindings, 
-                       _sqlite3_close, _sqlite3_close_v2, _sqlite3_collation_needed, 
-                       _sqlite3_collation_needed16, _sqlite3_column_blob, _sqlite3_column_bytes, 
-                       _sqlite3_column_bytes16, _sqlite3_column_count, _sqlite3_column_database_name, 
-                       _sqlite3_column_database_name16, _sqlite3_column_decltype, 
-                       _sqlite3_column_decltype16, _sqlite3_column_double, _sqlite3_column_int, 
-                       _sqlite3_column_int64, _sqlite3_column_name, _sqlite3_column_name16, 
-                       _sqlite3_column_origin_name, _sqlite3_column_origin_name16, 
+                       _sqlite3_carray_bind, _sqlite3_carray_init, _sqlite3_changes, 
+                       _sqlite3_clear_bindings, _sqlite3_close, _sqlite3_close_v2, 
+                       _sqlite3_collation_needed, _sqlite3_collation_needed16, _sqlite3_column_blob, 
+                       _sqlite3_column_bytes, _sqlite3_column_bytes16, _sqlite3_column_count, 
+                       _sqlite3_column_database_name, _sqlite3_column_database_name16, 
+                       _sqlite3_column_decltype, _sqlite3_column_decltype16, _sqlite3_column_double, 
+                       _sqlite3_column_int, _sqlite3_column_int64, _sqlite3_column_name, 
+                       _sqlite3_column_name16, _sqlite3_column_origin_name, _sqlite3_column_origin_name16, 
                        _sqlite3_column_table_name, _sqlite3_column_table_name16, 
                        _sqlite3_column_text, _sqlite3_column_text16, _sqlite3_column_type, 
                        _sqlite3_column_value, _sqlite3_commit_hook, _sqlite3_compileoption_get, 
@@ -79,14 +79,15 @@ exports:
                        _sqlite3_memory_highwater, _sqlite3_memory_used, _sqlite3_mprintf, 
                        _sqlite3_msize, _sqlite3_mutex_alloc, _sqlite3_mutex_enter, 
                        _sqlite3_mutex_free, _sqlite3_mutex_leave, _sqlite3_mutex_try, 
-                       _sqlite3_next_stmt, _sqlite3_open, _sqlite3_open16, _sqlite3_open_v2, 
-                       _sqlite3_os_end, _sqlite3_os_init, _sqlite3_overload_function, 
-                       _sqlite3_prepare, _sqlite3_prepare16, _sqlite3_prepare16_v2, 
-                       _sqlite3_prepare16_v3, _sqlite3_prepare_v2, _sqlite3_prepare_v3, 
-                       _sqlite3_preupdate_count, _sqlite3_preupdate_depth, _sqlite3_preupdate_hook, 
-                       _sqlite3_preupdate_new, _sqlite3_preupdate_old, _sqlite3_profile, 
-                       _sqlite3_progress_handler, _sqlite3_randomness, _sqlite3_realloc, 
-                       _sqlite3_realloc64, _sqlite3_rekey, _sqlite3_rekey_v2, _sqlite3_release_memory, 
+                       _sqlite3_next_stmt, _sqlite3_normalized_sql, _sqlite3_open, 
+                       _sqlite3_open16, _sqlite3_open_v2, _sqlite3_os_end, _sqlite3_os_init, 
+                       _sqlite3_overload_function, _sqlite3_prepare, _sqlite3_prepare16, 
+                       _sqlite3_prepare16_v2, _sqlite3_prepare16_v3, _sqlite3_prepare_v2, 
+                       _sqlite3_prepare_v3, _sqlite3_preupdate_blobwrite, _sqlite3_preupdate_count, 
+                       _sqlite3_preupdate_depth, _sqlite3_preupdate_hook, _sqlite3_preupdate_new, 
+                       _sqlite3_preupdate_old, _sqlite3_profile, _sqlite3_progress_handler, 
+                       _sqlite3_randomness, _sqlite3_realloc, _sqlite3_realloc64, 
+                       _sqlite3_rekey, _sqlite3_rekey_v2, _sqlite3_release_memory, 
                        _sqlite3_reset, _sqlite3_reset_auto_extension, _sqlite3_result_blob, 
                        _sqlite3_result_blob64, _sqlite3_result_double, _sqlite3_result_error, 
                        _sqlite3_result_error16, _sqlite3_result_error_code, _sqlite3_result_error_nomem, 
@@ -112,22 +113,23 @@ exports:
                        _sqlite3_system_errno, _sqlite3_table_column_metadata, _sqlite3_temp_directory, 
                        _sqlite3_test_control, _sqlite3_thread_cleanup, _sqlite3_threadsafe, 
                        _sqlite3_total_changes, _sqlite3_trace, _sqlite3_trace_v2, 
-                       _sqlite3_transfer_bindings, _sqlite3_update_hook, _sqlite3_uri_boolean, 
-                       _sqlite3_uri_int64, _sqlite3_uri_key, _sqlite3_uri_parameter, 
-                       _sqlite3_user_data, _sqlite3_value_blob, _sqlite3_value_bytes, 
-                       _sqlite3_value_bytes16, _sqlite3_value_double, _sqlite3_value_dup, 
-                       _sqlite3_value_free, _sqlite3_value_frombind, _sqlite3_value_int, 
-                       _sqlite3_value_int64, _sqlite3_value_nochange, _sqlite3_value_numeric_type, 
-                       _sqlite3_value_pointer, _sqlite3_value_subtype, _sqlite3_value_text, 
-                       _sqlite3_value_text16, _sqlite3_value_text16be, _sqlite3_value_text16le, 
-                       _sqlite3_value_type, _sqlite3_version, _sqlite3_vfs_find, 
-                       _sqlite3_vfs_register, _sqlite3_vfs_unregister, _sqlite3_vmprintf, 
-                       _sqlite3_vsnprintf, _sqlite3_vtab_collation, _sqlite3_vtab_config, 
-                       _sqlite3_vtab_nochange, _sqlite3_vtab_on_conflict, _sqlite3_wal_autocheckpoint, 
-                       _sqlite3_wal_checkpoint, _sqlite3_wal_checkpoint_v2, _sqlite3_wal_hook, 
-                       _sqlite3changegroup_add, _sqlite3changegroup_add_strm, _sqlite3changegroup_delete, 
-                       _sqlite3changegroup_new, _sqlite3changegroup_output, _sqlite3changegroup_output_strm, 
-                       _sqlite3changeset_apply, _sqlite3changeset_apply_strm, _sqlite3changeset_apply_v2, 
+                       _sqlite3_transfer_bindings, _sqlite3_txn_state, _sqlite3_update_hook, 
+                       _sqlite3_uri_boolean, _sqlite3_uri_int64, _sqlite3_uri_key, 
+                       _sqlite3_uri_parameter, _sqlite3_user_data, _sqlite3_value_blob, 
+                       _sqlite3_value_bytes, _sqlite3_value_bytes16, _sqlite3_value_double, 
+                       _sqlite3_value_dup, _sqlite3_value_free, _sqlite3_value_frombind, 
+                       _sqlite3_value_int, _sqlite3_value_int64, _sqlite3_value_nochange, 
+                       _sqlite3_value_numeric_type, _sqlite3_value_pointer, _sqlite3_value_subtype, 
+                       _sqlite3_value_text, _sqlite3_value_text16, _sqlite3_value_text16be, 
+                       _sqlite3_value_text16le, _sqlite3_value_type, _sqlite3_version, 
+                       _sqlite3_vfs_find, _sqlite3_vfs_register, _sqlite3_vfs_unregister, 
+                       _sqlite3_vmprintf, _sqlite3_vsnprintf, _sqlite3_vtab_collation, 
+                       _sqlite3_vtab_config, _sqlite3_vtab_nochange, _sqlite3_vtab_on_conflict, 
+                       _sqlite3_wal_autocheckpoint, _sqlite3_wal_checkpoint, _sqlite3_wal_checkpoint_v2, 
+                       _sqlite3_wal_hook, _sqlite3changegroup_add, _sqlite3changegroup_add_strm, 
+                       _sqlite3changegroup_delete, _sqlite3changegroup_new, _sqlite3changegroup_output, 
+                       _sqlite3changegroup_output_strm, _sqlite3changeset_apply, 
+                       _sqlite3changeset_apply_strm, _sqlite3changeset_apply_v2, 
                        _sqlite3changeset_apply_v2_strm, _sqlite3changeset_concat, 
                        _sqlite3changeset_concat_strm, _sqlite3changeset_conflict, 
                        _sqlite3changeset_finalize, _sqlite3changeset_fk_conflicts, 
@@ -137,9 +139,10 @@ exports:
                        _sqlite3changeset_start_v2, _sqlite3changeset_start_v2_strm, 
                        _sqlite3rebaser_configure, _sqlite3rebaser_create, _sqlite3rebaser_delete, 
                        _sqlite3rebaser_rebase, _sqlite3rebaser_rebase_strm, _sqlite3session_attach, 
-                       _sqlite3session_changeset, _sqlite3session_changeset_strm, 
-                       _sqlite3session_config, _sqlite3session_create, _sqlite3session_delete, 
-                       _sqlite3session_diff, _sqlite3session_enable, _sqlite3session_indirect, 
-                       _sqlite3session_isempty, _sqlite3session_patchset, _sqlite3session_patchset_strm, 
+                       _sqlite3session_changeset, _sqlite3session_changeset_size, 
+                       _sqlite3session_changeset_strm, _sqlite3session_config, _sqlite3session_create, 
+                       _sqlite3session_delete, _sqlite3session_diff, _sqlite3session_enable, 
+                       _sqlite3session_indirect, _sqlite3session_isempty, _sqlite3session_memory_used, 
+                       _sqlite3session_object_config, _sqlite3session_patchset, _sqlite3session_patchset_strm, 
                        _sqlite3session_table_filter ]
 ...

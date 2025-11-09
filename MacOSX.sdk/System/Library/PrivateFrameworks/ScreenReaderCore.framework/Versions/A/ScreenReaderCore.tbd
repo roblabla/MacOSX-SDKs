@@ -4,30 +4,30 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FB8D5676-71DB-37AC-B8BF-27919D39718D
+    value:           BACA5CDA-5C34-39E6-98CE-77F7B5E5A6BC
   - target:          x86_64-maccatalyst
-    value:           FB8D5676-71DB-37AC-B8BF-27919D39718D
+    value:           BACA5CDA-5C34-39E6-98CE-77F7B5E5A6BC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E337E0E4-01AE-3EA2-9E57-D6FFDD5681DF
+    value:           60652910-E57A-32DB-B921-DBEDAE5E9E94
   - target:          arm64e-maccatalyst
-    value:           E337E0E4-01AE-3EA2-9E57-D6FFDD5681DF
+    value:           60652910-E57A-32DB-B921-DBEDAE5E9E94
 install-name:    '/System/Library/PrivateFrameworks/ScreenReaderCore.framework/Versions/A/ScreenReaderCore'
 current-version: 390
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _CPSPSNFromPSN, _SCRCAddInformationToCrashTracerLog, _SCRCArgumentParserRunWithClassName, 
+    symbols:         [ _SCRCAddInformationToCrashTracerLog, _SCRCArgumentParserRunWithClassName, 
                        _SCRCCGFloatAlmostEqual, _SCRCCopyStringToUChar32Array, _SCRCCopyStringToUniCharArray, 
                        _SCRCDebugPrint, _SCRCDebugPrintToFile, _SCRCDoubleAlmostEqual, 
                        _SCRCEnableProcessKeepAlive, _SCRCFileHandleForTempFile, _SCRCFloatAlmostEqual, 
                        _SCRCFormatFloat, _SCRCFormatFloatWithPercentage, _SCRCFormatInteger, 
                        _SCRCFormatNumber, _SCRCFormatUnsignedInteger, _SCRCGestureStateToString, 
                        _SCRCIsConsoleSessionEnabled, _SCRCIsInt32BitSafe, _SCRCIsUInt32BitSafe, 
-                       _SCRCLinkRelationshipStringForType, _SCRCLogGestures, _SCRCLogInitializeWithKeys, 
+                       _SCRCLinkRelationshipStringForType, _SCRCLogInitializeWithKeys, 
                        _SCRCLogMaskAppleScript, _SCRCLogMaskBraille, _SCRCLogMaskBrailleAnnounce, 
                        _SCRCLogMaskBrailleVariant, _SCRCLogMaskBusySignal, _SCRCLogMaskConfiguration, 
                        _SCRCLogMaskElement, _SCRCLogMaskElementHistory, _SCRCLogMaskElementRestoration, 
@@ -123,7 +123,8 @@ exports:
                        _kSCRCUserDefaultsBrailleMasterStatusCellIndex, _kSCRCUserDefaultsBrailleOutputMode, 
                        _kSCRCUserDefaultsBrailleShowDotsSevenAndEight, _kSCRCUserDefaultsBrailleTableGuideItems, 
                        _kSCRCUserDefaultsBrailleTableIdentifier, _kSCRCUserDefaultsBrailleVirtualStatusAlignment, 
-                       _kSCRCUserDefaultsBrailleWordWrapEnabled, _kSCRCUserDefaultsCacheElementDictionaryTemporary, 
+                       _kSCRCUserDefaultsBrailleWordWrapEnabled, _kSCRCUserDefaultsCacheAudiographDisplayTemporary, 
+                       _kSCRCUserDefaultsCacheAudiographIsDisplayingTemporary, _kSCRCUserDefaultsCacheElementDictionaryTemporary, 
                        _kSCRCUserDefaultsCachePortablePreferencesDictionary, _kSCRCUserDefaultsCacheScreenCurtainState, 
                        _kSCRCUserDefaultsCategoryContent_CategoryIsEnabled, _kSCRCUserDefaultsCategoryContent_IntonationAsPercent, 
                        _kSCRCUserDefaultsCategoryContent_PitchAsPercent, _kSCRCUserDefaultsCategoryContent_RateAsPercent, 
@@ -208,17 +209,17 @@ exports:
                        _kSCRCUserDefaultsHighlightTextByWord, _kSCRCUserDefaultsImageCaptionLastAssetCatalogUpdateCheck, 
                        _kSCRCUserDefaultsImageMappingLevel, _kSCRCUserDefaultsInvertedTArrowToggleEnabled, 
                        _kSCRCUserDefaultsInvertedTCommanderCaptureEnabled, _kSCRCUserDefaultsInvertedTCommanderCommands, 
-                       _kSCRCUserDefaultsInvertedTCommanderEnabled, _kSCRCUserDefaultsKeyboardCommanderCommandKey, 
-                       _kSCRCUserDefaultsKeyboardCommanderEnabled, _kSCRCUserDefaultsKeyboardHelpEnabled, 
-                       _kSCRCUserDefaultsLastBounceTime, _kSCRCUserDefaultsLastMessageTracerTime, 
-                       _kSCRCUserDefaultsLaunchNotification, _kSCRCUserDefaultsLoginGreeting, 
-                       _kSCRCUserDefaultsMuteVoiceOver, _kSCRCUserDefaultsNumPadCommanderEnabled, 
-                       _kSCRCUserDefaultsOutputAXHelpTag, _kSCRCUserDefaultsPlannedShutdownSuccessful, 
-                       _kSCRCUserDefaultsPortableDeviceKey, _kSCRCUserDefaultsPortableDeviceModel, 
-                       _kSCRCUserDefaultsPortableDevicesChangedNotification, _kSCRCUserDefaultsPortableFullUserName, 
-                       _kSCRCUserDefaultsPortableIconPath, _kSCRCUserDefaultsPortableIsIDisk, 
-                       _kSCRCUserDefaultsPortableIsRemote, _kSCRCUserDefaultsPortablePreferencePath, 
-                       _kSCRCUserDefaultsPortablePreferencesChangedNotification, 
+                       _kSCRCUserDefaultsInvertedTCommanderEnabled, _kSCRCUserDefaultsKeyboardAccessTextEditingModeInstructionsCompleted, 
+                       _kSCRCUserDefaultsKeyboardCommanderCommandKey, _kSCRCUserDefaultsKeyboardCommanderEnabled, 
+                       _kSCRCUserDefaultsKeyboardHelpEnabled, _kSCRCUserDefaultsLastBounceTime, 
+                       _kSCRCUserDefaultsLastMessageTracerTime, _kSCRCUserDefaultsLaunchNotification, 
+                       _kSCRCUserDefaultsLoginGreeting, _kSCRCUserDefaultsMuteVoiceOver, 
+                       _kSCRCUserDefaultsNumPadCommanderEnabled, _kSCRCUserDefaultsOutputAXHelpTag, 
+                       _kSCRCUserDefaultsPlannedShutdownSuccessful, _kSCRCUserDefaultsPortableDeviceKey, 
+                       _kSCRCUserDefaultsPortableDeviceModel, _kSCRCUserDefaultsPortableDevicesChangedNotification, 
+                       _kSCRCUserDefaultsPortableFullUserName, _kSCRCUserDefaultsPortableIconPath, 
+                       _kSCRCUserDefaultsPortableIsIDisk, _kSCRCUserDefaultsPortableIsRemote, 
+                       _kSCRCUserDefaultsPortablePreferencePath, _kSCRCUserDefaultsPortablePreferencesChangedNotification, 
                        _kSCRCUserDefaultsPortablePreferencesDetectedNotification, 
                        _kSCRCUserDefaultsPortableVolumePath, _kSCRCUserDefaultsProfileApplications, 
                        _kSCRCUserDefaultsProfileKey, _kSCRCUserDefaultsProfileMask, 
@@ -227,9 +228,9 @@ exports:
                        _kSCRCUserDefaultsRemoveAllValues, _kSCRCUserDefaultsResetNotification, 
                        _kSCRCUserDefaultsRestoreSystemCursorSize, _kSCRCUserDefaultsRotorLastRotor, 
                        _kSCRCUserDefaultsShouldMessageTrace, _kSCRCUserDefaultsShouldOutputCustomActionRotorHelpTag, 
-                       _kSCRCUserDefaultsShouldOutputVOInstructions, _kSCRCUserDefaultsSingleLetterQuickNavEnabled, 
-                       _kSCRCUserDefaultsSkipRedundantLabelsEnabled, _kSCRCUserDefaultsSpeakAllStaticTextElementsInSheets, 
-                       _kSCRCUserDefaultsSpeakVoiceOverCursorMagnificationChanges, 
+                       _kSCRCUserDefaultsShouldOutputMoreContentRotorHelpTag, _kSCRCUserDefaultsShouldOutputVOInstructions, 
+                       _kSCRCUserDefaultsSingleLetterQuickNavEnabled, _kSCRCUserDefaultsSkipRedundantLabelsEnabled, 
+                       _kSCRCUserDefaultsSpeakAllStaticTextElementsInSheets, _kSCRCUserDefaultsSpeakVoiceOverCursorMagnificationChanges, 
                        _kSCRCUserDefaultsSpeakZoomMagnificationChanges, _kSCRCUserDefaultsSpeechCustomizedLanguageIDs, 
                        _kSCRCUserDefaultsSpeechSelectedVoiceLanguageID, _kSCRCUserDefaultsStartupOptions, 
                        _kSCRCUserDefaultsStaticTextValueUpdate, _kSCRCUserDefaultsSystemBrailleVerbosity, 
@@ -267,15 +268,11 @@ exports:
                        SCRCPhotoEvaluatorResultBlur, SCRCPhotoEvaluatorResultColor, 
                        SCRCPhotoEvaluatorResultLuminance, SCRCPhotoEvaluatorResults, 
                        SCRCProcessIdentifier, SCRCPunctuationVerboseness, SCRCRawImage, 
-                       SCRCRegularExpression, SCRCStackQueue, SCRCTargetSelector, 
-                       SCRCTargetSelectorTimer, SCRCThread, SCRCThreadKey, SCRCThreadedWeakLinkedObject, 
-                       SCRCUserDefaults, SCRCUserDefaultsBase, SCRCUserDefaultsRegistry, 
-                       SCRCWeakReferenceContainer, SCRCWebDateTimeParser, SCRKeyboardKey ]
-    objc-ivars:      [ SCRCComposedCharacter._normalFormDRepresentation, SCRCComposedCharacter._normalFormDRepresentationLength, 
-                       SCRCComposedCharacter._normalFormKCRepresentation, SCRCComposedCharacter._normalFormKCRepresentationLength, 
-                       SCRCComposedCharacter._originalCombinedCharacter, SCRCComposedCharacter._originalCombinedCharacterLength, 
-                       SCRCComposedCharacter._originalRepresentation, SCRCComposedCharacter._originalRepresentationLength, 
-                       SCRCConfiguration._dictionary, SCRCConfiguration._factories, 
+                       SCRCStackQueue, SCRCTargetSelector, SCRCTargetSelectorTimer, 
+                       SCRCThread, SCRCThreadKey, SCRCThreadedWeakLinkedObject, SCRCUserDefaults, 
+                       SCRCUserDefaultsBase, SCRCUserDefaultsRegistry, SCRCWeakReferenceContainer, 
+                       SCRCWebDateTimeParser, SCRKeyboardKey ]
+    objc-ivars:      [ SCRCConfiguration._dictionary, SCRCConfiguration._factories, 
                        SCRCGestureFinger._identifier, SCRCGestureFinger._location, 
                        SCRCGestureFinger._pressure, SCRCGestureStylus._altitude, 
                        SCRCGestureStylus._azimuth, SCRCIndexMap._map, SCRCPhotoEvaluatorResultBlur._blurLevel, 

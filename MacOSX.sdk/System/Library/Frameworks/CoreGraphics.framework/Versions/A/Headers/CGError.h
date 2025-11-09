@@ -27,4 +27,12 @@ typedef CF_ENUM (int32_t, CGError) {
   kCGErrorNoneAvailable = 1011,
 };
 
+typedef void (*CGErrorCallback)(void);
+
+/* Set a callback for easier detection of error conditions
+   causing CoreGraphics to raise an error.
+   Pass NULL to reset the callback.*/
+
+CG_EXTERN void CGErrorSetCallback(CGErrorCallback callback);
+
 #endif /* CGERROR_H_ */

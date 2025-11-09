@@ -15,7 +15,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.3), watchos(3.2))
+API_DEPRECATED("INBillDetails is deprecated. There is no replacement.", ios(10.3, 15.0), watchos(3.2, 8.0))
 API_UNAVAILABLE(macos, tvos)
 @interface INBillDetails : NSObject <NSCopying, NSSecureCoding>
 

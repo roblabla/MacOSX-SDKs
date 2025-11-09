@@ -36,6 +36,12 @@
 #include <DriverKit/OSDictionary.h>
 #include <DriverKit/OSArray.h>
 #include <DriverKit/OSDictionary.h>
+#if __has_include(<DriverKit/OSSet.h>)
+#include <DriverKit/OSSet.h>
+#endif
+#if __has_include(<DriverKit/OSOrderedSet.h>)
+#include <DriverKit/OSOrderedSet.h>
+#endif
 #include <DriverKit/OSString.h>
 #include <DriverKit/OSData.h>
 #include <DriverKit/OSNumber.h>
@@ -188,13 +194,13 @@ OSCollectionsInitialize();
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 const char *
-OSStringGetStringPtr(OSStringPtr obj);
+OSStringGetStringPtr(OSStringPtr obj) __attribute__((nonnull(1)));
 
 size_t
-OSStringGetLength(OSStringPtr string);
+OSStringGetLength(OSStringPtr string) __attribute__((nonnull(1)));
 
 OSStringPtr
-OSStringCreate(const char * cstring, size_t length);
+OSStringCreate(const char *cstring, size_t length)  __attribute__((nonnull(1)));
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -202,7 +208,7 @@ size_t
 OSDataGetLength(OSDataPtr obj);
 
 const void *
-OSDataGetBytesPtr(OSDataPtr obj, size_t offset, size_t length);
+OSDataGetBytesPtr(OSDataPtr obj, size_t offset, size_t length) __attribute__((nonnull(1)));
 
 size_t
 OSDataGetBytes(OSDataPtr obj, void * buffer, size_t offset, size_t length);
@@ -216,7 +222,7 @@ OSDataAppendBytes(OSDataPtr data, const void * bytes, size_t length);
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 uint64_t
-OSNumberGetUInt64Value(OSNumberPtr obj);
+OSNumberGetUInt64Value(OSNumberPtr obj) __attribute__((nonnull(1)));
 
 OSNumberPtr
 OSNumberCreateWithUInt64Value(uint64_t value);
@@ -233,10 +239,10 @@ uint32_t
 OSDictionaryGetCount(OSDictionaryPtr obj);
 
 bool
-OSDictionaryApply(OSDictionaryPtr obj, OSDictionaryApplier applier);
+OSDictionaryApply(OSDictionaryPtr obj, OSDictionaryApplier applier) __attribute__((nonnull(1,2)));
 
 bool
-OSDictionarySetValue(OSDictionaryPtr obj, const char * key, OSObjectPtr value);
+OSDictionarySetValue(OSDictionaryPtr obj, const char * key, OSObjectPtr value) __attribute__((nonnull(1,2)));
 
 OSObjectPtr
 OSDictionaryGetValue(OSDictionaryPtr obj, const char * key);
@@ -269,7 +275,7 @@ uint32_t
 OSArrayGetCount(OSArrayPtr obj);
 
 bool
-OSArrayApply(OSArrayPtr obj, OSArrayApplier applier);
+OSArrayApply(OSArrayPtr obj, OSArrayApplier applier) __attribute__((nonnull(1,2)));
 
 bool
 OSArraySetValue(OSArrayPtr obj, size_t index, OSObjectPtr value);

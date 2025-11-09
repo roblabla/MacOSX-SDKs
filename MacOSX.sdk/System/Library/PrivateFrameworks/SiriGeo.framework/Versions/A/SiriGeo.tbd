@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           37C7BED2-145F-3A5F-BC42-A5239EF3F3E4
+    value:           9322D172-2E3F-337A-A304-708867BF388F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D385A116-64DD-3E3C-A4CE-C62765C06B2B
+    value:           D5AB7703-050A-3D38-8E72-6371DCB18CF7
 install-name:    '/System/Library/PrivateFrameworks/SiriGeo.framework/Versions/A/SiriGeo'
 swift-abi-version: 7
 exports:
@@ -129,10 +129,12 @@ exports:
                        '_$s7SiriGeo38INRetrieveParkingLocationIntentHandlerCN', '_$s7SiriGeo38INRetrieveParkingLocationIntentHandlerCfD', 
                        '_$sSo14INPersonHandleC7SiriGeoE09toContactB00C9Inference0fB0VyF', 
                        '_$sSo18INPersonHandleTypeV7SiriGeoE09toContactbC00D9Inference0gB0V0bC0OyF', 
+                       '_$sSo8INPersonC7SiriGeoE014toContactQueryC00B9Inference0eF0VyF', 
                        '_$sSo8INPersonC7SiriGeoE12encodeBase64SSvg', '_$sSo8INPersonC7SiriGeoE12encodeBase64SSvpMV', 
                        '_$sSo8INPersonC7SiriGeoE14hasHandleLabelSbvg', '_$sSo8INPersonC7SiriGeoE14hasHandleLabelSbvpMV', 
                        '_$sSo8INPersonC7SiriGeoE14hasHandleValueSbvg', '_$sSo8INPersonC7SiriGeoE14hasHandleValueSbvpMV', 
-                       '_$sSo8INPersonC7SiriGeoE32contactsWithDistinctDisplayNamesySayABGAEFZ', 
+                       '_$sSo8INPersonC7SiriGeoE20hasUsefulHandleValueSbvg', '_$sSo8INPersonC7SiriGeoE20hasUsefulHandleValueSbvpMV', 
+                       '_$sSo8INPersonC7SiriGeoE30contactsWithContactIdentifiersySayABGAEFZ', 
                        _SiriGeoVersionNumber, _SiriGeoVersionString ]
     objc-classes:    [ _TtC7SiriGeo18LocationController, _TtC7SiriGeo23INShareETAIntentHandler, 
                        _TtC7SiriGeo27INStopShareETAIntentHandler, _TtC7SiriGeo34INSaveParkingLocationIntentHandler, 

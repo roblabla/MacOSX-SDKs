@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           496E5A50-4934-35A7-817D-1CE37CD35FBD
+    value:           37DD7B1C-350E-3D35-BA0C-148AA2B8D009
   - target:          x86_64-maccatalyst
-    value:           496E5A50-4934-35A7-817D-1CE37CD35FBD
+    value:           37DD7B1C-350E-3D35-BA0C-148AA2B8D009
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9886C62D-F891-3A5D-A8FC-5BDA530DD706
+    value:           DD4C40B5-CB7C-3F2F-8BB0-5FECD89712D6
   - target:          arm64e-maccatalyst
-    value:           9886C62D-F891-3A5D-A8FC-5BDA530DD706
+    value:           DD4C40B5-CB7C-3F2F-8BB0-5FECD89712D6
 install-name:    '/System/Library/PrivateFrameworks/ContactsAutocomplete.framework/Versions/A/ContactsAutocomplete'
-current-version: 1152.4
+current-version: 1174
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -68,11 +68,10 @@ exports:
     objc-classes:    [ CNAClassKitResultTransformVisitor, CNAutocompleteCalendarQueryAssembler, 
                        CNAutocompleteCalendarServerOperationFactory, CNAutocompleteCalendarServerResult, 
                        CNAutocompleteCalendarServerSearch, CNAutocompleteDelegateWrapper, 
-                       CNAutocompleteDirectoryServerResult, CNAutocompleteDirectoryServerSearch, 
-                       CNAutocompleteDuetContactResult, CNAutocompleteDuetSearch, 
-                       CNAutocompleteEntitlementVerifier, CNAutocompleteExtensionResult, 
-                       CNAutocompleteFetchBlockDelegate, CNAutocompleteFetchContext, 
-                       CNAutocompleteFetchRequest, CNAutocompleteFetchRequestTracing, 
+                       CNAutocompleteDirectoryServerResult, CNAutocompleteDuetContactResult, 
+                       CNAutocompleteDuetSearch, CNAutocompleteEntitlementVerifier, 
+                       CNAutocompleteExtensionResult, CNAutocompleteFetchBlockDelegate, 
+                       CNAutocompleteFetchContext, CNAutocompleteFetchRequest, CNAutocompleteFetchRequestTracing, 
                        CNAutocompleteFrequentRecentResult, CNAutocompleteGroupResult, 
                        CNAutocompleteInfrequentRecentResult, CNAutocompleteInputStringTokenizer, 
                        CNAutocompleteLocalContactResultTransformBuilder, CNAutocompleteLocalContactsFetcher, 
@@ -80,21 +79,23 @@ exports:
                        CNAutocompleteLocalQuery, CNAutocompleteLocalSearch, CNAutocompleteNameComponents, 
                        CNAutocompleteNetworkActivityPolicy, CNAutocompleteNetworkActivityThrottlingPolicy, 
                        CNAutocompleteObservable, CNAutocompleteObservableBuilder, 
-                       CNAutocompleteObservableBuilderBatchingHelperFactory, CNAutocompletePerformanceTracing, 
-                       CNAutocompleteProbeKeyBuilder, CNAutocompleteProbeProviderFactory, 
-                       CNAutocompleteQuery, CNAutocompleteQueryCacheHelper, CNAutocompleteQueryCacheMissAuditor, 
-                       CNAutocompleteQueryCacheMissLogger, CNAutocompleteQueryResponsePreparer, 
-                       CNAutocompleteQueryResponseUniqueResultFinder, CNAutocompleteRecentContactsLibrary, 
-                       CNAutocompleteRecentContactsTransform, CNAutocompleteRecentResult, 
-                       CNAutocompleteRecentsSearch, CNAutocompleteResult, CNAutocompleteResultFactory, 
-                       CNAutocompleteResultTokenMatcher, CNAutocompleteResultTracing, 
-                       CNAutocompleteResultValue, CNAutocompleteSearchObservableProvider, 
+                       CNAutocompleteObservableBuilderBatchingHelperFactory, CNAutocompletePeopleSuggesterFeedback, 
+                       CNAutocompletePerformanceTracing, CNAutocompleteProbeKeyBuilder, 
+                       CNAutocompleteProbeProviderFactory, CNAutocompleteQuery, CNAutocompleteQueryCacheHelper, 
+                       CNAutocompleteQueryCacheMissAuditor, CNAutocompleteQueryCacheMissLogger, 
+                       CNAutocompleteQueryResponsePreparer, CNAutocompleteQueryResponseUniqueResultFinder, 
+                       CNAutocompleteRecentContactsLibrary, CNAutocompleteRecentContactsTransform, 
+                       CNAutocompleteRecentResult, CNAutocompleteRecentsSearch, CNAutocompleteResult, 
+                       CNAutocompleteResultFactory, CNAutocompleteResultTokenMatcher, 
+                       CNAutocompleteResultTracing, CNAutocompleteResultValue, CNAutocompleteSearchObservableProvider, 
                        CNAutocompleteSearchProviderFactory, CNAutocompleteSourceInclusionPolicy, 
                        CNAutocompleteStore, CNAutocompleteStoreQueryContext, CNAutocompleteStoreQueryHelper, 
                        CNAutocompleteStoreReproStringRecorder, CNAutocompleteSuggestedContactResult, 
-                       CNAutocompleteSuggestionsProbe, CNAutocompleteSuggestionsSearch, 
-                       CNAutocompleteTokenMatcher, CNAutocompleteUsageMonitor, CNAutocompleteUsageMonitorTracing, 
-                       CNAutocompleteUserSession, _CNAutocompleteAggregateSourceInclusionPolicy, 
+                       CNAutocompleteSuggestedResultPrioritizer, CNAutocompleteSuggestionsProbe, 
+                       CNAutocompleteSuggestionsSearch, CNAutocompleteTokenMatcher, 
+                       CNAutocompleteUsageMonitor, CNAutocompleteUsageMonitorTracing, 
+                       CNAutocompleteUserSession, _CNAPassthroughResultPrioritizer, 
+                       _CNAPeopleSuggesterResultPrioritizer, _CNAutocompleteAggregateSourceInclusionPolicy, 
                        _CNAutocompleteCachingSearchProvider, _CNAutocompleteCalendarObservableBuilderBatchingHelper, 
                        _CNAutocompleteEntitlementSourceInclusionPolicy, _CNAutocompleteFetchDelegateSafeWrapper, 
                        _CNAutocompleteMessageTracingProbeProvider, _CNAutocompleteMutableSourceInclusionPolicy, 

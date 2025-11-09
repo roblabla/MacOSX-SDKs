@@ -1,10 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target arm64e-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftARKit -swift-version 5 -enforce-exclusivity=checked -O -module-name ARKit
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftARKit -swift-version 5 -enforce-exclusivity=checked -O -module-name ARKit
 @_exported import ARKit
 import Swift
+import _Concurrency
 @available(iOS 11.0, *)
-extension ARCamera {
+extension ARKit.ARCamera {
   @frozen public enum TrackingState {
     public enum Reason {
       case initializing
@@ -29,11 +30,11 @@ extension ARCamera {
   @nonobjc public func unprojectPoint(_ point: CoreGraphics.CGPoint, ontoPlane planeTransform: simd.simd_float4x4, orientation: UIKit.UIInterfaceOrientation, viewportSize: CoreGraphics.CGSize) -> simd.simd_float3?
 }
 @available(iOS 12.0, *)
-extension ARSCNView {
-  @nonobjc public func unprojectPoint(_ point: CoreGraphics.CGPoint, ontoPlane planeTransform: simd.simd_float4x4) -> simd.simd_float3?
+extension ARKit.ARSCNView {
+  @nonobjc @_Concurrency.MainActor(unsafe) public func unprojectPoint(_ point: CoreGraphics.CGPoint, ontoPlane planeTransform: simd.simd_float4x4) -> simd.simd_float3?
 }
 @available(iOS 11.0, *)
-extension ARPointCloud {
+extension ARKit.ARPointCloud {
   @nonobjc public var points: [SpriteKit.vector_float3] {
     get
   }
@@ -42,7 +43,7 @@ extension ARPointCloud {
   }
 }
 @available(iOS 11.0, *)
-extension ARFaceGeometry {
+extension ARKit.ARFaceGeometry {
   @nonobjc public var vertices: [SpriteKit.vector_float3] {
     get
   }
@@ -54,7 +55,7 @@ extension ARFaceGeometry {
   }
 }
 @available(iOS 11.3, *)
-extension ARPlaneGeometry {
+extension ARKit.ARPlaneGeometry {
   @nonobjc public var vertices: [SpriteKit.vector_float3] {
     get
   }
@@ -69,7 +70,7 @@ extension ARPlaneGeometry {
   }
 }
 @available(iOS 12.0, *)
-extension ARPlaneAnchor {
+extension ARKit.ARPlaneAnchor {
   public enum Classification {
     public enum Status {
       case notAvailable
@@ -95,14 +96,14 @@ extension ARPlaneAnchor {
   }
 }
 @available(iOS 13.0, *)
-extension ARSkeletonDefinition {
+extension ARKit.ARSkeletonDefinition {
   @nonobjc public var parentIndices: [Swift.Int] {
     get
   }
   @nonobjc public func index(for jointName: ARKit.ARSkeleton.JointName) -> Swift.Int
 }
 @available(iOS 13.0, *)
-extension ARSkeleton3D {
+extension ARKit.ARSkeleton3D {
   @nonobjc public var jointModelTransforms: [simd.simd_float4x4] {
     get
   }
@@ -113,18 +114,18 @@ extension ARSkeleton3D {
   @nonobjc public func localTransform(for jointName: ARKit.ARSkeleton.JointName) -> simd.simd_float4x4?
 }
 @available(iOS 13.0, *)
-extension ARSkeleton2D {
+extension ARKit.ARSkeleton2D {
   @nonobjc public var jointLandmarks: [simd.simd_float2] {
     get
   }
   @nonobjc public func landmark(for jointName: ARKit.ARSkeleton.JointName) -> simd.simd_float2?
 }
 @available(iOS 14.0, *)
-extension ARConfidenceLevel : Swift.Comparable {
+extension ARKit.ARConfidenceLevel : Swift.Comparable {
   public static func < (lhs: ARKit.ARConfidenceLevel, rhs: ARKit.ARConfidenceLevel) -> Swift.Bool
 }
 @available(iOS 13.4, *)
-extension ARGeometrySource {
+extension ARKit.ARGeometrySource {
   @available(iOS 14.0, *)
   @nonobjc public subscript(index: Swift.Int32) -> (Swift.Float, Swift.Float, Swift.Float) {
     get
@@ -135,14 +136,14 @@ extension ARGeometrySource {
   }
 }
 @available(iOS 13.4, *)
-extension ARGeometryElement {
+extension ARKit.ARGeometryElement {
   @available(iOS 14.0, *)
   @nonobjc public subscript(index: Swift.Int) -> [Swift.Int32] {
     get
   }
 }
 @available(iOS 14.0, *)
-extension ARGeoAnchor {
+extension ARKit.ARGeoAnchor {
   @nonobjc convenience public init(coordinate: CoreLocation.CLLocationCoordinate2D, altitude: CoreLocation.CLLocationDistance? = nil)
   @nonobjc convenience public init(name: Swift.String, coordinate: CoreLocation.CLLocationCoordinate2D, altitude: CoreLocation.CLLocationDistance? = nil)
   @nonobjc public var altitude: CoreLocation.CLLocationDistance? {

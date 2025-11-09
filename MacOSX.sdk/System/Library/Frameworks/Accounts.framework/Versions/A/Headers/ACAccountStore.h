@@ -34,7 +34,9 @@ typedef void(^ACAccountStoreCredentialRenewalHandler)(ACAccountCredentialRenewRe
 // WARNING: All synchronous methods on ACAccountStore invoke xpc methods
 // on accountsd. They are not appropriate to call on a UI Application's main thread.
 
-API_AVAILABLE(ios(5.0), macos(10.8))
+
+API_DEPRECATED("Use appropriate non-Apple SDK corresponding to the type of account you want to reference instead", ios(6.0, 15.0), macos(10.8, 12.0))
+
 @interface ACAccountStore : NSObject
 
 // An array of all the accounts in an account database

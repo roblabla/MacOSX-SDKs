@@ -85,6 +85,34 @@ extern "C" {
  * See @c <os/signpost.h> for more detailed discussion.
  */
 #define MXSignpostIntervalBegin(log, event_id, name, ...) _MXSignpostIntervalBegin_guaranteed_args(log, event_id, name, "" __VA_ARGS__)
+
+/*!
+ * @function MXSignpostAnimationIntervalBegin
+ *
+ * @abstract
+ * Begins an os_signpost animation interval with @c os_signpost_animation_interval_begin() and
+ * includes a snapshot of performance metrics of the emitting process.
+ *
+ *
+ * Please refer to @c <os/signpost.h> for more detailed discussion of the
+ * required parameters.
+ *
+ * @param log
+ * Log handle previously created with os_log_create.
+ *
+ * @param interval_id
+ * An ID for the interval. See @c <os/signpost.h> for more detailed discussion.
+ *
+ * @param name
+ * The name of this event. This must be a string literal.
+ *
+ * @param ... (format + arguments)
+ * Additional information to include with this signpost.  This format string
+ * must be a string literal, as with the os_log family of functions.
+ * See @c <os/signpost.h> for more detailed discussion.
+ */
+#define MXSignpostAnimationIntervalBegin(log, event_id, name, ...) _MXSignpostAnimationIntervalBegin_guaranteed_args(log, event_id, name, "" __VA_ARGS__)
+
 /*!
  * @function MXSignpostIntervalEnd
  *

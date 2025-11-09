@@ -12,7 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) @interface UILexiconEntry : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UILexiconEntry : NSObject <NSCopying>
 // -documentText returns the intended text to be inserted into the document for a given -userInput.
 // -userInput represents the expected typed string, which need not match the actual typed string.
 // for example, if the -documentText were "iPhone", the corresponding -userInput could be "iphone"
@@ -21,7 +22,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) @interface UILexiconE
 @property (nonatomic, readonly) NSString *userInput;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) @interface UILexicon : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+@interface UILexicon : NSObject <NSCopying>
 @property (nonatomic, readonly) NSArray<UILexiconEntry *> *entries;
 @end
 

@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F20A212F-ACEC-32BC-846D-9D1655DF64D0
+    value:           AFEDF4B0-D4FF-3358-AE89-0F33C68650D8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F66AA93E-FA30-3835-9887-60FE48AF4700
+    value:           87C3F130-CEEB-37BC-87CA-7D632B07691F
 install-name:    '/System/Library/PrivateFrameworks/AccessibilityPerformance.framework/Versions/A/AccessibilityPerformance'
+current-version: 0
+compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _AXPLoggingDefaultCategory, _AXPLoggingDefaultSubsystem, _AccessibilityPerformanceVersionNumber, 
-                       _AccessibilityPerformanceVersionString, _axp_log_performance ]
+    symbols:         [ _AXPLoggingDefaultCategory, _AXPLoggingDefaultSubsystem, _axp_log_performance ]
     objc-classes:    [ AXPSignpostEvent, AXPSignpostEventResult, AXPSignpostEventSummary, 
                        AXPSignpostParser, AXPSignpostParserConfiguration, AXPSignpostResult, 
-                       AXPSignpostSender, AXPSignpostSubsystemCategoryFilter, AXPSignpostTestUtility, 
-                       AXPSignpostUtility ]
+                       AXPSignpostSender, AXPSignpostSubsystemCategoryFilter, AXPSignpostTestUtility ]
 ...

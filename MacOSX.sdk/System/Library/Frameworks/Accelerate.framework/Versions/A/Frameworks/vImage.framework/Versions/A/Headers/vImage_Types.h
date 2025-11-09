@@ -20,7 +20,11 @@ extern "C" {
 #include <stdint.h>
 #include <stddef.h>
 #include <unistd.h>
-#include <os/availability.h>
+#if __has_include(<os/availability.h>)
+#    include <os/availability.h>
+#else
+#    define API_AVAILABLE(...) /* nothing */
+#endif // __has_include(<os/availability.h>)
 
 /*!
  *  @define     __has_attribute
@@ -92,7 +96,7 @@ extern "C" {
 #if __has_extension(enumerator_attributes)
 #   ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
 #       define VIMAGE_ENUM_AVAILABLE_STARTING(_osx, _ios) __AVAILABILITY_INTERNAL##_ios
-#   elif defined(__MAC_OS_X_VERSION_MIN_REQUIRED)
+#   elif defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && !defined(__linux__)
 #       define VIMAGE_ENUM_AVAILABLE_STARTING(_osx, _ios) __AVAILABILITY_INTERNAL##_osx
 #   else
 #       define VIMAGE_ENUM_AVAILABLE_STARTING(_osx, _ios)
@@ -269,6 +273,13 @@ typedef int16_t     Pixel_16Q12;		/* 16 bit signed pixel */
  @discussion The channel order is generally given by the function that consumes the value.
  */
 typedef uint16_t     Pixel_16U16U[2];	/* CbCr interleaved (16 bit/channel) pixel value. uint16_t[2] = { Cb, Cr } */
+
+/*!
+ @typedef   Pixel_16S16S
+ @abstract  A two channel, 16-bit per channel signed pixel.
+ @discussion The channel order is generally given by the function that consumes the value.
+ */
+typedef int16_t     Pixel_16S16S[2];    /* CbCr interleaved (16 bit/channel) signed pixel value. int16_t[2] = { Cb, Cr } */
 
 /*!
  @typedef   Pixel_32U

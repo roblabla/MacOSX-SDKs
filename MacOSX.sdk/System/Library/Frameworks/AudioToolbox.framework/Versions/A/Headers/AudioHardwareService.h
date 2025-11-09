@@ -46,16 +46,16 @@ extern "C"
                         clients can be informed when the service has been reset for some reason.
                         When a reset happens, any state the client has with AHS, such as cached data
                         or added listeners, must be re-established by the client.
-    @constant       kAudioHardwareServiceDeviceProperty_VirtualMasterVolume
+    @constant       kAudioHardwareServiceDeviceProperty_VirtualMainVolume
                         A Float32 that represents the value of the volume control. The range is
                         between 0.0 and 1.0 (inclusive). This actual volume controls this property
                         manipulates depends on what the device provides. If the device has a true
-                        master volume control, this property directly controls that. If the device
+                        main volume control, this property directly controls that. If the device
                         has individual channel volume controls, this property will apply to those
                         identified by the device's preferred multi-channel layout (or preferred
                         stereo pair if the device is stereo only). Note that this control maintains
                         the relative balance between all the channels it affects.
-    @constant       kAudioHardwareServiceDeviceProperty_VirtualMasterBalance
+    @constant       kAudioHardwareServiceDeviceProperty_VirtualMainBalance
                         A Float32 that represents the value of the stereo balance control. The range
                         is from 0.0 (all power to the left) to 1.0 (all power to the right) with
                         the value of 0.5 signifying that the channels have equal power. This control
@@ -66,8 +66,12 @@ extern "C"
 CF_ENUM(AudioObjectPropertySelector)
 {
     kAudioHardwareServiceProperty_ServiceRestarted              = 'srst',
-    kAudioHardwareServiceDeviceProperty_VirtualMasterVolume     = 'vmvc',
-    kAudioHardwareServiceDeviceProperty_VirtualMasterBalance    = 'vmbc'
+    
+	kAudioHardwareServiceDeviceProperty_VirtualMainVolume     = 'vmvc',
+	kAudioHardwareServiceDeviceProperty_VirtualMasterVolume   API_DEPRECATED_WITH_REPLACEMENT("kAudioHardwareServiceDeviceProperty_VirtualMainVolume", macos(10.5, 10.5)) API_UNAVAILABLE(ios, watchos, tvos) = kAudioHardwareServiceDeviceProperty_VirtualMainVolume,
+    
+	kAudioHardwareServiceDeviceProperty_VirtualMainBalance    = 'vmbc',
+	kAudioHardwareServiceDeviceProperty_VirtualMasterBalance   API_DEPRECATED_WITH_REPLACEMENT("kAudioHardwareServiceDeviceProperty_VirtualMainBalance", macos(10.5, 10.5)) API_UNAVAILABLE(ios, watchos, tvos) = kAudioHardwareServiceDeviceProperty_VirtualMainBalance,
 };
 
 //==================================================================================================

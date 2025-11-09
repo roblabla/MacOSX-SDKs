@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           81CF3C82-4C2A-3B04-AD53-30856B920914
+    value:           E3BF5B47-19D1-316F-94AF-00E314926381
   - target:          x86_64-maccatalyst
-    value:           81CF3C82-4C2A-3B04-AD53-30856B920914
+    value:           E3BF5B47-19D1-316F-94AF-00E314926381
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D0BA855E-5EF0-3550-A334-010A52015893
+    value:           315FB3D7-B53B-3401-8695-B90A3C8B22F6
   - target:          arm64e-maccatalyst
-    value:           D0BA855E-5EF0-3550-A334-010A52015893
+    value:           315FB3D7-B53B-3401-8695-B90A3C8B22F6
 install-name:    '/usr/lib/swift/libswiftCoreData.dylib'
-current-version: 3
+current-version: 18
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -253,10 +253,71 @@ exports:
                        '_$s10Foundation10CocoaErrorV8CoreDataE6sqliteAC4CodeVvgZ', 
                        '_$s10Foundation10CocoaErrorV8CoreDataE9migrationAC4CodeVvgZ', 
                        '_$sSo15NSManagedObjectC7Combine010ObservableB08CoreDataMc', 
+                       '_$sSo15NSManagedObjectC8CoreDataE12fetchRequestSo07NSFetchF0CySo0gF6Result_pGyFZ', 
                        '_$sSo15NSManagedObjectC8CoreDataE16objectWillChange7Combine010ObservableB9PublisherCvg', 
                        '_$sSo15NSManagedObjectC8CoreDataE16objectWillChange7Combine010ObservableB9PublisherCvpMV', 
+                       '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeV3xmlAEvgZ', '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeV3xpcAEvgZ', 
+                       '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeV6binaryAEvgZ', 
+                       '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeV6sqliteAEvgZ', 
+                       '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeV8inMemoryAEvgZ', 
+                       '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeV8rawValueAESS_tcfC', 
+                       '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeV8rawValueSSvM', 
+                       '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeV8rawValueSSvg', 
+                       '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeV8rawValueSSvpMV', 
+                       '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeV8rawValueSSvs', 
+                       '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeVMa', '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeVMn', 
+                       '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeVN', '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeVSHACMc', 
+                       '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeVSQACMc', '_$sSo17NSPersistentStoreC8CoreDataE0B4TypeVSYACMc', 
+                       '_$sSo18NSMigrationManagerC8CoreDataE12migrateStore4from4type7options7mapping2toAfGy10Foundation3URLV_So012NSPersistentF0CACE0F4TypeVSDys11AnyHashableVypGSgSo14NSMappingModelCAlpTtKF', 
+                       '_$sSo21NSPersistentContainerC8CoreDataE19defaultDirectoryURL10Foundation0G0VvgZ', 
+                       '_$sSo21NSPersistentContainerC8CoreDataE21performBackgroundTaskyxxSo22NSManagedObjectContextCKcYaKlF', 
+                       '_$sSo21NSPersistentContainerC8CoreDataE21performBackgroundTaskyxxSo22NSManagedObjectContextCKcYaKlFTu', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV06binaryD0AEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV13transformableAEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV3uriAEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV4dateAEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV4uuidAEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV5floatAEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV6doubleAEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV6stringAEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV7booleanAEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV7decimalAEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV8objectIDAEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV8rawValueAESo0aF0V_tcfC', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV8rawValueSo0aF0VvM', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV8rawValueSo0aF0Vvg', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV8rawValueSo0aF0VvpMV', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV8rawValueSo0aF0Vvs', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV9integer16AEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV9integer32AEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV9integer64AEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeV9undefinedAEvgZ', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeVMa', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeVMn', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeVN', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeVSHACMc', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeVSQACMc', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE13AttributeTypeVSYACMc', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE4typeAbCE13AttributeTypeVvM', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE4typeAbCE13AttributeTypeVvg', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE4typeAbCE13AttributeTypeVvpMV', 
+                       '_$sSo22NSAttributeDescriptionC8CoreDataE4typeAbCE13AttributeTypeVvs', 
                        '_$sSo22NSManagedObjectContextC8CoreDataE015didMergeChangesB15IDsNotificationSo18NSNotificationNameavgZ', 
                        '_$sSo22NSManagedObjectContextC8CoreDataE07didSaveB15IDsNotificationSo18NSNotificationNameavgZ', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE14performAndWaityxxyKXEKlF', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE15ConcurrencyTypeV12privateQueueAEvgZ', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE15ConcurrencyTypeV8rawValueAESo0abcfG0V_tcfC', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE15ConcurrencyTypeV8rawValueSo0abcfG0VvM', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE15ConcurrencyTypeV8rawValueSo0abcfG0Vvg', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE15ConcurrencyTypeV8rawValueSo0abcfG0VvpMV', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE15ConcurrencyTypeV8rawValueSo0abcfG0Vvs', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE15ConcurrencyTypeV9mainQueueAEvgZ', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE15ConcurrencyTypeVMa', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE15ConcurrencyTypeVMn', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE15ConcurrencyTypeVN', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE15ConcurrencyTypeVSHACMc', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE15ConcurrencyTypeVSQACMc', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE15ConcurrencyTypeVSYACMc', 
                        '_$sSo22NSManagedObjectContextC8CoreDataE15NotificationKeyO011invalidatedB3IDsyA2EmFWC', 
                        '_$sSo22NSManagedObjectContextC8CoreDataE15NotificationKeyO07deletedB3IDsyA2EmFWC', 
                        '_$sSo22NSManagedObjectContextC8CoreDataE15NotificationKeyO07updatedB3IDsyA2EmFWC', 
@@ -278,10 +339,41 @@ exports:
                        '_$sSo22NSManagedObjectContextC8CoreDataE15NotificationKeyOSHACMc', 
                        '_$sSo22NSManagedObjectContextC8CoreDataE15NotificationKeyOSQACMc', 
                        '_$sSo22NSManagedObjectContextC8CoreDataE15NotificationKeyOSYACMc', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE17ScheduledTaskTypeO2eeoiySbAE_AEtFZ', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE17ScheduledTaskTypeO4hash4intoys6HasherVz_tF', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE17ScheduledTaskTypeO8enqueuedyA2EmFWC', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE17ScheduledTaskTypeO9hashValueSivg', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE17ScheduledTaskTypeO9hashValueSivpMV', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE17ScheduledTaskTypeO9immediateyA2EmFWC', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE17ScheduledTaskTypeOMa', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE17ScheduledTaskTypeOMn', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE17ScheduledTaskTypeON', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE17ScheduledTaskTypeOSHACMc', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE17ScheduledTaskTypeOSQACMc', 
                        '_$sSo22NSManagedObjectContextC8CoreDataE26didSaveObjectsNotificationSo18NSNotificationNameavgZ', 
                        '_$sSo22NSManagedObjectContextC8CoreDataE27willSaveObjectsNotificationSo18NSNotificationNameavgZ', 
                        '_$sSo22NSManagedObjectContextC8CoreDataE28didChangeObjectsNotificationSo18NSNotificationNameavgZ', 
                        '_$sSo22NSManagedObjectContextC8CoreDataE5count3forSiSo14NSFetchRequestCyxG_tKSo0hI6ResultRzlF', 
                        '_$sSo22NSManagedObjectContextC8CoreDataE5fetchySayxGSo14NSFetchRequestCyxGKSo0gH6ResultRzlF', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE5fetchySayypGSo14NSFetchRequestCySo0gH6Result_pGKF', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE7perform8schedule_xAbCE17ScheduledTaskTypeO_xyKctYaKlF', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataE7perform8schedule_xAbCE17ScheduledTaskTypeO_xyKctYaKlFTu', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataEyA2bCE15ConcurrencyTypeVcfC', 
+                       '_$sSo22NSManagedObjectContextC8CoreDataEyA2bCE15ConcurrencyTypeVcfc', 
+                       '_$sSo23NSExpressionDescriptionC8CoreDataE10resultTypeSo011NSAttributeB0CACE09AttributeF0VvM', 
+                       '_$sSo23NSExpressionDescriptionC8CoreDataE10resultTypeSo011NSAttributeB0CACE09AttributeF0Vvg', 
+                       '_$sSo23NSExpressionDescriptionC8CoreDataE10resultTypeSo011NSAttributeB0CACE09AttributeF0VvpMV', 
+                       '_$sSo23NSExpressionDescriptionC8CoreDataE10resultTypeSo011NSAttributeB0CACE09AttributeF0Vvs', 
+                       '_$sSo28NSPersistentStoreCoordinatorC8CoreDataE013addPersistentB04type13configuration2at7optionsSo0aB0CAjCE0B4TypeV_SSSg10Foundation3URLVSDys11AnyHashableVypGSgtKF', 
+                       '_$sSo28NSPersistentStoreCoordinatorC8CoreDataE017destroyPersistentB02at4type7optionsy10Foundation3URLV_So0aB0CACE0B4TypeVSDys11AnyHashableVypGSgtKF', 
+                       '_$sSo28NSPersistentStoreCoordinatorC8CoreDataE017migratePersistentB0_2to7options4typeSo0aB0CAI_10Foundation3URLVSDys11AnyHashableVypGSgAiCE0B4TypeVtKF', 
+                       '_$sSo28NSPersistentStoreCoordinatorC8CoreDataE017replacePersistentB02at18destinationOptions04withgB4From06sourceJ04typey10Foundation3URLV_SDys11AnyHashableVypGSgAlPSo0aB0CACE0B4TypeVtKF', 
+                       '_$sSo28NSPersistentStoreCoordinatorC8CoreDataE021metadataForPersistentB04type2at7optionsSDySSypGSo0aB0CACE0B4TypeV_10Foundation3URLVSDys11AnyHashableVypGSgtKFZ', 
+                       '_$sSo28NSPersistentStoreCoordinatorC8CoreDataE08registerB5Class_4typeyyXlXpSg_So0aB0CACE0B4TypeVtFZ', 
+                       '_$sSo28NSPersistentStoreCoordinatorC8CoreDataE11setMetadata_4type2at7optionsySDySSypGSg_So0aB0CACE0B4TypeV10Foundation3URLVSDys11AnyHashableVypGSgtKFZ', 
+                       '_$sSo28NSPersistentStoreCoordinatorC8CoreDataE14performAndWaityxxyKXEKlF', 
+                       '_$sSo28NSPersistentStoreCoordinatorC8CoreDataE7performyxxyKcYaKlF', 
+                       '_$sSo28NSPersistentStoreCoordinatorC8CoreDataE7performyxxyKcYaKlFTu', 
+                       '_$sSo31NSCoreDataCoreSpotlightDelegateC0cB0E26indexDidUpdateNotificationSo18NSNotificationNameavgZ', 
                        '__swift_FORCE_LOAD_$_swiftCoreData' ]
 ...

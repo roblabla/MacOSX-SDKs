@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F37AC108-E29A-3433-A427-7439840CCAED
+    value:           75D1BB9E-26CB-3526-A4A7-83959925FD47
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1FD1FC19-4AF2-3CD6-829A-95AFECEE7612
+    value:           3CD3D784-9CC0-372D-8967-65132DD4F190
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdateCoreConnect.framework/Versions/A/SoftwareUpdateCoreConnect'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

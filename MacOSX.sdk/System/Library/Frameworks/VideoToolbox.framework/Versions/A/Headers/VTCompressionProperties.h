@@ -290,6 +290,7 @@ VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_5_0 API_AVAILABLE(maco
 VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_5_1 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
 VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_5_2 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
 VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_AutoLevel API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_ConstrainedBaseline_AutoLevel API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0));
 VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_0 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_1 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_2 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
@@ -312,6 +313,7 @@ VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_5_0 API_AVAILABLE(macosx(1
 VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_5_1 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
 VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_5_2 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
 VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_AutoLevel API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_ConstrainedHigh_AutoLevel API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0));
 
 VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L0 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L1 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
@@ -470,6 +472,17 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedFrameRate API_AVAI
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerFrameRateFraction API_AVAILABLE(macosx(11.3), ios(14.5), tvos(14.5)); // Read/write, CFNumber<Float>, Optional
 
 /*!
+	@constant	kVTCompressionPropertyKey_BaseLayerBitRateFraction
+	@abstract
+		This property indicates the desired bit rate fraction of the base layer
+	@discussion
+		This is not a hard limit; the encoder will attempt to satisfy this ratio when possible. If not set, the encoder will manage the ratio.
+		For example: If the target bitrate is set to 500kbps and kVTCompressionPropertyKey_BaseLayerBitRateFraction is set to 0.6, the base layer will be given a
+		budget of 300kbps and the enhancement layer 200kbps.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerBitRateFraction API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // Read/write, CFNumber<Float>, Optional
+
+/*!
 	@constant	kVTCompressionPropertyKey_ExpectedDuration
 	@abstract
 		Indicates the expected total duration for the compression session, if known.
@@ -568,6 +581,16 @@ VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_PreferredEncoderGPURegi
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_UsingGPURegistryID API_AVAILABLE(macosx(10.15)) ; // CFNumberRef, Read;
 
+/*!
+	@constant  kVTCompressionPropertyKey_SupportsBaseFrameQP
+	@abstract
+		This property can be queried to determine if the encoder supports base frame QP requests.
+	@discussion
+		If this property returns kCFBooleanTrue, it indicates that the encoder supports base frame QP requests through kVTEncodeFrameOptionKey_BaseFrameQP. If it returns false or kVTPropertyNotSupportedErr, base frame QP requests will cause errors on VTCompressionSessionEncodeFrame calls, or will be ignored.
+
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_SupportsBaseFrameQP API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // Read only, CFBoolean, Optional, false by default
+
 #pragma mark Per-frame configuration
 	
 /*!
@@ -582,6 +605,35 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_UsingGPURegistryID API_AVA
 		requests.
 */
 VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_ForceKeyFrame API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); //  CFBoolean
+
+/*!
+	@constant  kVTEncodeFrameOptionKey_BaseFrameQP
+	@abstract
+		CFNumberRef requesting the current frame to use the provided base frame QP.
+	@discussion
+		This value is set in the frameProperties CFDictionary passed to VTCompressionSessionEncodeFrame to force
+		the QP value for the current frame. This is an optional parameter. Use it only when you have a specific requirement
+		for the video quality and you are familiar with frame QP and are prepared to assume full responsibility for rate control.
+		Otherwise it is strongly encouraged to rely on the encoder’s rate control for adjusting frame QP.
+ 
+		Setting BaseFrameQP turns off standard rate control and will cause the following properties to be ignored::
+			kVTCompressionPropertyKey_DataRateLimits
+			kVTCompressionPropertyKey_AverageBitRate
+			kVTCompressionPropertyKey_BaseLayerBitRateFraction
+			kVTCompressionPropertyKey_Quality
+			kVTCompressionPropertyKey_MaxAllowedFrameQP
+
+		If kVTEncodeFrameOptionKey_BaseFrameQP is used, it must be set for all frames in a session. The QP value specified is
+		frame-level but macro-block level QP may be modulated inside a frame. There will be no rate-control related frame dropping
+		if kVTEncodeFrameOptionKey_BaseFrameQP is used.
+
+		kVTEncodeFrameOptionKey_BaseFrameQP is only supported if the encoder returns kCFBooleanTrue when the
+		kVTCompressionPropertyKey_SupportsBaseFrameQP is queried. If this FrameOptionKey is set for encoder which
+		does not support it, it will be ignored.
+
+		Note that it may not be possible for the encoder to accommodate all requests.
+*/
+VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_BaseFrameQP API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // CFNumberRef, Optional
 
 
 #pragma mark Clean aperture and pixel aspect ratio
@@ -830,6 +882,85 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PreserveDynamicHDRMetadata
 			kVTEncodeFrameOptionKey_ForceKeyFrame
 */
 VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EnableLowLatencyRateControl API_AVAILABLE(macosx(11.3), ios(14.5), tvos(14.5)); // Read/write, CFBoolean, Optional
+
+/*!
+	@constant	kVTCompressionPropertyKey_MaxAllowedFrameQP
+	@abstract
+		Specifies the maximum allowed encoded frame QP (Quantization Parameter).
+	@discussion
+		This is an optional parameter. Use it only when you have a specific requirement for the video quality and you are
+		familiar with frame QP. To satisfy this requirement, the encoder may drop frames to maintain bitrate and QP goals.
+		This is not supported in all encoders or in all encoder operating modes. kVTPropertyNotSupportedErr will be
+		returned when this option is not supported.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxAllowedFrameQP API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // Read/write, CFNumberRef, Optional
+
+/*!
+	@constant	kVTCompressionPropertyKey_EnableLTR
+	@abstract
+		Enable Long Term Reference (LTR) frames during encoding
+	@discussion
+		When an LTR frame is encoded, encoder will signal a unique token of the LTR frame in the encoder callback through:
+			kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
+		Clients are responsible for reporting acknowledged LTR frames to the encoder through:
+			kVTEncodeFrameOptionKey_AcknowledgedLTRTokens
+		Client can request a refresh frame at any time through:
+			kVTEncodeFrameOptionKey_ForceLTRRefresh
+		Encoder will encode a P frame by using one of acknowledged LTR frames
+		as the reference. Encoder will encode a new reference frame using an acknowledged LTR, or an IDR if no LTR frames have been acknowledged.
+
+		Also see:
+			kVTEncodeFrameOptionKey_AcknowledgedLTRTokens
+			kVTEncodeFrameOptionKey_ForceLTRRefresh
+			kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EnableLTR API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // Read/write, CFBoolean, Optional
+
+/*!
+	@constant	kVTEncodeFrameOptionKey_AcknowledgedLTRTokens
+	@abstract
+		A CFArray of CFNumbers containing the kVTSampleAttachmentKey_RequireLTRAcknowledgementToken values which have been successfully sent to the receiver and can be used as references
+	@discussion
+		When an LTR frame is encoded, the encoder will return a unique token for the LTR frame on the output CMSampleBuffer through kVTSampleAttachmentKey_RequireLTRAcknowledgementToken.
+					This token is then returned to the encoder via kVTEncodeFrameOptionKey_AcknowledgedLTRTokens when the LTR frame is received by the remote consumer(s).
+
+	Also see:
+		kVTCompressionPropertyKey_EnableLTR
+		kVTEncodeFrameOptionKey_ForceLTRRefresh
+		kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
+*/
+VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_AcknowledgedLTRTokens API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // CFArray[CFNumberRef], Optional
+
+/*!
+	@constant	kVTEncodeFrameOptionKey_ForceLTRRefresh
+	@abstract
+		Set this option to kCFBooleanTrue to force an LTR refresh
+	@discussion
+		When the encoder receives this request on an incoming frame, the encoder will encode a new reference frame using a previously 
+					acknowledged LTR, or it will encode a new IDR if no LTR frames have been acknowledged.
+
+		Also see:
+			kVTCompressionPropertyKey_EnableLTR
+			kVTEncodeFrameOptionKey_AcknowledgedLTRTokens
+			kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
+*/
+VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_ForceLTRRefresh API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // CFNumberRef, Optional
+
+/*!
+	@constant	kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
+	@abstract
+		CFNumber containing a unique token for this LTR
+	@discussion
+		This CMSampleBuffer attachment contains a unique token which can be returned to the encoder through 
+					kVTEncodeFrameOptionKey_AcknowledgedLTRTokens to indicate that the LTR has been received and may be used as a reference.
+
+		Also see:
+			kVTCompressionPropertyKey_EnableLTR
+			kVTEncodeFrameOptionKey_AcknowledgedLTRTokens
+			kVTEncodeFrameOptionKey_ForceLTRRefresh
+*/
+VT_EXPORT const CFStringRef kVTSampleAttachmentKey_RequireLTRAcknowledgementToken API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // CFNumberRef, Optional
+
 
 	
 CM_ASSUME_NONNULL_END

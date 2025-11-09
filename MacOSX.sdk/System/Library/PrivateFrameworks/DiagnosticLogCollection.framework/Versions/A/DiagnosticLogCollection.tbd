@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           32CAE77E-8124-3C85-BC1F-5C550B32B6F6
+    value:           D140781F-9B5D-321E-8BF9-563941D0CB40
   - target:          x86_64-maccatalyst
-    value:           32CAE77E-8124-3C85-BC1F-5C550B32B6F6
+    value:           D140781F-9B5D-321E-8BF9-563941D0CB40
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3F40AA3F-3666-3D92-849E-47249D286080
+    value:           DD17EEC9-4740-323E-B6B6-11B9C9617A21
   - target:          arm64e-maccatalyst
-    value:           3F40AA3F-3666-3D92-849E-47249D286080
+    value:           DD17EEC9-4740-323E-B6B6-11B9C9617A21
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticLogCollection.framework/Versions/A/DiagnosticLogCollection'
 current-version: 800
 exports:

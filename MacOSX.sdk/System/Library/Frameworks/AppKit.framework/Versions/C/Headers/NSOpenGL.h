@@ -1,7 +1,7 @@
 /*
         NSOpenGL.h
         Application Kit
-        Copyright (c) 2000-2019, Apple Inc.
+        Copyright (c) 2000-2021, Apple Inc.
         All rights reserved.
 */
 
@@ -190,8 +190,8 @@ NS_OPENGL_CLASS_DEPRECATED("Please use Metal or MetalKit.", 10.0, 10.14)
 @property (readonly, strong) NSOpenGLPixelFormat *pixelFormat API_AVAILABLE(macos(10.10));
 
 /* Drawable management */
-@property (nullable, weak) NSView *view API_DEPRECATED("", macos(10.0,10.14));
-- (void)setView:(nullable NSView *)view API_DEPRECATED("Use NSOpenGLView to provide OpenGL content in a Cocoa app.", macos(10.0,10.14));
+@property (nullable, weak) NSView *view NS_SWIFT_UI_ACTOR API_DEPRECATED("", macos(10.0,10.14));
+- (void)setView:(nullable NSView *)view NS_SWIFT_UI_ACTOR API_DEPRECATED("Use NSOpenGLView to provide OpenGL content in a Cocoa app.", macos(10.0,10.14));
 - (void)setFullScreen API_DEPRECATED("Use a fullscreen NSOpenGLView instead", macos(10.0,10.7));
 
 /* Deprecated in 10.7.  The -setOffScreen:width:height:rowbytes: API forces use of the software rasterizer, which is much slower than GPU rendering.  It is generally much better nowadays to use a normal pixel format with either an off-screen window or an FBO (GL_EXT_framebuffer_object), and then call glReadPixels() to read the rendered result back to CPU memory (if that's where it is needed).
@@ -199,7 +199,7 @@ NS_OPENGL_CLASS_DEPRECATED("Please use Metal or MetalKit.", 10.0, 10.14)
 - (void)setOffScreen:(void *)baseaddr width:(GLsizei)width height:(GLsizei)height rowbytes:(GLint)rowbytes API_DEPRECATED("", macos(10.0,10.7));
 
 - (void)clearDrawable;
-- (void)update;
+- (void)update NS_SWIFT_UI_ACTOR;
 
 /* Flush draw buffer */
 - (void)flushBuffer;

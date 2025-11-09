@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           615ECCC7-0130-3838-81BC-0110396D5663
+    value:           955E4A68-D783-3471-A0BF-82473153F8B9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6551495B-38BF-31F7-B30F-CEBA9B29DD53
+    value:           947BDB8D-D10D-37BE-9078-5F7D4765B46C
 install-name:    '/System/Library/PrivateFrameworks/PowerlogCore.framework/Versions/A/PowerlogCore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -19,8 +19,8 @@ exports:
                        _PLD_ManagedPreferencePath, _PLD_NSLogDebugKey, _PLDiagnosticLogSubmissionEnabled, 
                        _PLGetBoardID, _PLGetCPUFamily, _PLIsDeviceOfType, _PLLogCommon, 
                        _PLLogSubmission, _PLOSAMoveFileForSubmissions, _PLOSAPreferencesGetValue, 
-                       _PLOSAPreferencesSetValue, _PLOSAPreferencesSynchronize, _Stage, 
-                       _eventBlock, _kOSAProblemTypePowerLog, _kPLAccountingOperatorAggregateNameQualificationEnergy, 
+                       _PLOSAPreferencesSetValue, _PLOSAPreferencesSynchronize, _PPTLogCommon, 
+                       _Stage, _eventBlock, _kOSAProblemTypePowerLog, _kPLAccountingOperatorAggregateNameQualificationEnergy, 
                        _kPLAccountingOperatorAggregateNameQualificationEnergyEnergy, 
                        _kPLAccountingOperatorAggregateNameQualificationEnergyNodeID, 
                        _kPLAccountingOperatorAggregateNameQualificationEnergyQualificationID, 
@@ -60,30 +60,32 @@ exports:
                        _kPLAccountingOperatorNameQualificationEventsChildNodes, _kPLAccountingOperatorNameQualificationEventsEndOffset, 
                        _kPLAccountingOperatorNameQualificationEventsQualificationID, 
                        _kPLAccountingOperatorNameQualificationEventsStartOffset, 
-                       _kPLBB16, _kPLBB17, _kPLBB18, _kPLBB19, _kPLBB19B, _kPLCacheSizeForBackupDatabaseConnection, 
-                       _kPLCanSleepSemaphore, _kPLDefaultCacheSize, _kPLEDAggregateBucketRetainDuration, 
+                       _kPLBB16, _kPLBB17, _kPLBB18, _kPLBB19, _kPLBB19B, _kPLBB20B, 
+                       _kPLCacheSizeForBackupDatabaseConnection, _kPLCanSleepSemaphore, 
+                       _kPLDefaultCacheSize, _kPLDefaultCacheSpillSize, _kPLEDAggregateBucketRetainDuration, 
                        _kPLEDAggregateBuckets, _kPLEDAggregateFunction, _kPLEDAggregateKeys, 
-                       _kPLEDAggregateWallClockBucket, _kPLEDAllowNilTimestamp, _kPLEDArrayKeys, 
-                       _kPLEDBufferEntries, _kPLEDBufferFlushInterval, _kPLEDBufferSize, 
-                       _kPLEDCacheEntries, _kPLEDCacheSQLPrepareStatements, _kPLEDCalculatedValueKey, 
-                       _kPLEDConfigs, _kPLEDDynamicDefinition, _kPLEDDynamicKeys, 
-                       _kPLEDFilterEntryLogging, _kPLEDFilterEntryLoggingToleranceChangeBy, 
+                       _kPLEDAggregateWallClockBucket, _kPLEDAllowNilTimestamp, _kPLEDAppIdentifierKeys, 
+                       _kPLEDAppNameKey, _kPLEDArrayKeys, _kPLEDBufferEntries, _kPLEDBufferFlushInterval, 
+                       _kPLEDBufferSize, _kPLEDBundleIDKey, _kPLEDCacheEntries, _kPLEDCacheSQLPrepareStatements, 
+                       _kPLEDCalculatedValueKey, _kPLEDConfigs, _kPLEDDynamicDefinition, 
+                       _kPLEDDynamicKeys, _kPLEDFilterEntryLogging, _kPLEDFilterEntryLoggingToleranceChangeBy, 
                        _kPLEDFilterEntryLoggingToleranceChangeByLower, _kPLEDFilterEntryLoggingToleranceChangeByUpper, 
                        _kPLEDFilterEntryLoggingToleranceChangePercent, _kPLEDFilterEntryLoggingToleranceChangePercentLower, 
                        _kPLEDFilterEntryLoggingToleranceChangePercentUpper, _kPLEDFilterEntryLoggingToleranceIgnore, 
                        _kPLEDFilterEntryLoggingTolerances, _kPLEDFitlerEntryLoggingTolerancesSpecialCase, 
                        _kPLEDIndexKeys, _kPLEDIsAggregateValue, _kPLEDKeyValuePath, 
                        _kPLEDKeys, _kPLEDLogSelector, _kPLEDOnDemandQuery, _kPLEDOverridesEntryDate, 
-                       _kPLEDRateLimit, _kPLEDSafetyDropLimit, _kPLEDSchemaVersionKey, 
-                       _kPLEDSortOrderAutoKey, _kPLEDSortOrderManualKey, _kPLEDSubEntryKey, 
-                       _kPLEDTaskModeTable, _kPLEDTrimConditionsTemplateArgKey, _kPLEDTrimConditionsTemplateKey, 
-                       _kPLEDTypeArraySizeKey, _kPLEDTypeArrayValueKey, _kPLEDTypeKey, 
-                       _kPLEDUnitKey, _kPLEDWarningLimit, _kPLED_AggregateKey, _kPLED_DynamicKey, 
-                       _kPLED_EventBackwardKey, _kPLED_EventForwardKey, _kPLED_EventIntervalKey, 
-                       _kPLED_EventNoneKey, _kPLED_EventPointKey, _kPLEnhancedTaskingAgentAnimatorRunning, 
-                       _kPLEnhancedTaskingAgentCount, _kPLEnhancedTaskingAgentCustomNavigationTransition, 
-                       _kPLEnhancedTaskingAgentDiagonalScroll, _kPLEnhancedTaskingAgentDuration, 
-                       _kPLEnhancedTaskingAgentEventIntervalNameScrollView, _kPLEnhancedTaskingAgentEventIntervalNameUIInProcessAnimation, 
+                       _kPLEDProcessNameKey, _kPLEDRateLimit, _kPLEDSafetyDropLimit, 
+                       _kPLEDSchemaVersionKey, _kPLEDSortOrderAutoKey, _kPLEDSortOrderManualKey, 
+                       _kPLEDSubEntryKey, _kPLEDTaskModeTable, _kPLEDTrimConditionsTemplateArgKey, 
+                       _kPLEDTrimConditionsTemplateKey, _kPLEDTypeArraySizeKey, _kPLEDTypeArrayValueKey, 
+                       _kPLEDTypeKey, _kPLEDUnitKey, _kPLEDWarningLimit, _kPLED_AggregateKey, 
+                       _kPLED_DynamicKey, _kPLED_EventBackwardKey, _kPLED_EventForwardKey, 
+                       _kPLED_EventIntervalKey, _kPLED_EventNoneKey, _kPLED_EventPointKey, 
+                       _kPLEnhancedTaskingAgentAnimatorRunning, _kPLEnhancedTaskingAgentCount, 
+                       _kPLEnhancedTaskingAgentCustomNavigationTransition, _kPLEnhancedTaskingAgentDiagonalScroll, 
+                       _kPLEnhancedTaskingAgentDuration, _kPLEnhancedTaskingAgentEventIntervalNameScrollView, 
+                       _kPLEnhancedTaskingAgentEventIntervalNameUIInProcessAnimation, 
                        _kPLEnhancedTaskingAgentEventIntervalNameUINavigationController, 
                        _kPLEnhancedTaskingAgentEventNoneNameAppSwitchTrigger, _kPLEnhancedTaskingAgentHighRateDuration, 
                        _kPLEnhancedTaskingAgentHorizontalScroll, _kPLEnhancedTaskingAgentNavigationTransition, 
@@ -142,7 +144,7 @@ exports:
                        _kPLTaskingDefaultsCheckOnDemandTaskingStart, _kPLTaskingDefaultsCheckPLTaskingOnDemand, 
                        _kPLTaskingDefaultsCheckPLTaskingRequest, _kPLTaskingEndNotification, 
                        _kPLTaskingStartNotification, _kPLTimerFiredNotification, 
-                       _logHandle, _nanoSecondsFromMachTime ]
+                       _logHandle, _nanoSecondsFromMachTime, _sqlLog ]
     objc-classes:    [ OperatorTask, PLAccountingOperator, PLActivity, PLActivityCriterion, 
                        PLActivityCriterionEntry, PLActivityCriterionTime, PLActivityScheduler, 
                        PLAgent, PLAggregateEntry, PLArchiveEntry, PLArchiveJob, PLArchiveManager, 
@@ -162,6 +164,7 @@ exports:
                        PLTimeReference, PLTimeReferenceDynamic, PLTimeReferenceKernel, 
                        PLTimeReferenceSystem, PLTimer, PLUserIdleState, PLUtilities, 
                        PLValueComparison, PLValueUtilties, PLWakeState, PLXPCListenerOperatorComposition, 
-                       PLXPCRelay, PLXPCResponderOperatorComposition, PowerlogCore, 
-                       SignpostReaderHelper ]
+                       PLXPCRelay, PLXPCResponderOperatorComposition, PPTCollectionOperator, 
+                       PPTCoreStorage, PPTCoreUtilities, PPTEntryDefinition, PPTEntryKey, 
+                       PPTFlatStorage, PPTSQLStorage, PPTStorage, PowerlogCore, SignpostReaderHelper ]
 ...

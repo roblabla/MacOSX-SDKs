@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The data here are currently informational and carried in the
  * composedMessage property.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(15.0), tvos(15.0), watchos(8.0))
 OS_EXPORT
 @interface OSLogEntryBoundary : OSLogEntry
 @end

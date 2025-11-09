@@ -85,6 +85,13 @@ typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
                   detailText:(nullable NSString *)detailText;
 
 /**
+ A Boolean value indicating whether the list item is enabled.
+
+ @discussion Set the value of this property to @c YES to enable the list item or @c NO to disable it. The default value of this property is @c YES.
+ */
+@property (nonatomic, assign, getter=isEnabled) BOOL enabled API_AVAILABLE(ios(15.0));
+
+/**
  An accessory image type to display in the trailing portion of this list item.
  
  @note If you specify a custom accessoryImage, it will take priority over one of the
@@ -163,6 +170,8 @@ typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
 
 /**
  An optional action block, fired when the user selects this item in a list template.
+ 
+ You must call the completion block after processing the user's selection.
  */
 @property (nullable, nonatomic, copy) void (^handler) (id <CPSelectableListItem> item,
                                                        dispatch_block_t completionBlock) API_AVAILABLE(ios(14.0));

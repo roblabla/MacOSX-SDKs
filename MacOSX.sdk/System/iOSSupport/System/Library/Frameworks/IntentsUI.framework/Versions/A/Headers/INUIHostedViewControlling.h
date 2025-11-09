@@ -16,19 +16,19 @@
 typedef NS_ENUM(NSUInteger, INUIHostedViewContext) {
     INUIHostedViewContextSiriSnippet,
     INUIHostedViewContextMapsCard,
-} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macosx, watchos, tvos);
+} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos, tvos);
 
 typedef NS_ENUM(NSUInteger, INUIInteractiveBehavior) {
     INUIInteractiveBehaviorNone,
     INUIInteractiveBehaviorNextView, // Show UI representing navigation to a new view, such as a navigation chevron
     INUIInteractiveBehaviorLaunch, // Show UI representing a launch to leave the context, such as a button
     INUIInteractiveBehaviorGenericAction, // Show UI representing a generic follow-on action within the context, such as a large tap target
-} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macosx, watchos, tvos);
+} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(10.0))
-API_UNAVAILABLE(macosx, watchos, tvos)
+API_UNAVAILABLE(watchos, tvos)
 @protocol INUIHostedViewControlling <NSObject>
 
 @optional

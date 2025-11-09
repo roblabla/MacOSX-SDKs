@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class CLKComplicationDescriptor;
 
 API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+NS_SWIFT_UI_ACTOR
 @protocol CLKComplicationDataSource <NSObject>
 
 #pragma mark Timeline Configuration
@@ -26,23 +27,23 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 /// Timeline entries after the timeline end date will not be displayed.
 @optional
 - (void)getTimelineEndDateForComplication:(CLKComplication *)complication
-                              withHandler:(void(^)(NSDate * __nullable date))handler;
+                              withHandler:(void(^)(NSDate * __nullable date))handler NS_SWIFT_ASYNC(2);
 
 /// Indicate whether your complication's data should be hidden when the watch is locked.
 @optional
 - (void)getPrivacyBehaviorForComplication:(CLKComplication *)complication
-                              withHandler:(void(^)(CLKComplicationPrivacyBehavior behavior))handler;
+                              withHandler:(void(^)(CLKComplicationPrivacyBehavior behavior))handler NS_SWIFT_ASYNC(2);
 
 /// Indicate your complication's animation behavior when transitioning between timeline entries.
 @optional
 - (void)getTimelineAnimationBehaviorForComplication:(CLKComplication *)complication
-                                        withHandler:(void(^)(CLKComplicationTimelineAnimationBehavior behavior))handler;
+                                        withHandler:(void(^)(CLKComplicationTimelineAnimationBehavior behavior))handler NS_SWIFT_ASYNC(2);
 
 /// Provide the entry that should currently be displayed during always on time.
 /// If you pass back nil, we will continue to show the current timeline entry if it exists.
 @optional
 - (void)getAlwaysOnTemplateForComplication:(CLKComplication *)complication
-                               withHandler:(void(^)(CLKComplicationTemplate * __nullable))handler API_AVAILABLE(watchos(6.0)) API_UNAVAILABLE(ios);
+                               withHandler:(void(^)(CLKComplicationTemplate * __nullable))handler NS_SWIFT_ASYNC(2) API_AVAILABLE(watchos(6.0)) API_UNAVAILABLE(ios);
 
 
 #pragma mark Timeline Population
@@ -51,7 +52,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 /// If you pass back nil, we will conclude you have no content loaded and will stop talking to your until you next call -reloadTimelineForComplication:.
 @required
 - (void)getCurrentTimelineEntryForComplication:(CLKComplication *)complication
-                                   withHandler:(void(^)(CLKComplicationTimelineEntry * __nullable))handler;
+                                   withHandler:(void(^)(CLKComplicationTimelineEntry * __nullable))handler NS_SWIFT_ASYNC(2);
 
 /// The owning complication will use these methods to extend its timeline forward.
 /// @param date The date of the last entry we already have. Return the batch of entries after this date.
@@ -60,7 +61,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 - (void)getTimelineEntriesForComplication:(CLKComplication *)complication
                                 afterDate:(NSDate *)date
                                     limit:(NSUInteger)limit
-                              withHandler:(void(^)(NSArray<CLKComplicationTimelineEntry *> * __nullable entries))handler;
+                              withHandler:(void(^)(NSArray<CLKComplicationTimelineEntry *> * __nullable entries))handler NS_SWIFT_ASYNC(4);
 
 
 #pragma mark - Sample Templates
@@ -73,7 +74,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 /// If you pass back nil, we will use the default placeholder template (which is a combination of your icon and app name).
 @optional
 - (void)getLocalizableSampleTemplateForComplication:(CLKComplication *)complication
-                                        withHandler:(void(^)(CLKComplicationTemplate * __nullable complicationTemplate))handler API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios);
+                                        withHandler:(void(^)(CLKComplicationTemplate * __nullable complicationTemplate))handler NS_SWIFT_ASYNC(2) API_AVAILABLE(watchos(3.0)) API_UNAVAILABLE(ios);
 
 #pragma mark - Multiple Complications
 
@@ -82,13 +83,12 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 /// Provide a complete list of the current complication descriptors that your extension supports. These will be available
 /// during complication editing.
 @optional
-- (void)getComplicationDescriptorsWithHandler:(void(^)(NSArray<CLKComplicationDescriptor *> *))handler API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios);
+- (void)getComplicationDescriptorsWithHandler:(void(^)(NSArray<CLKComplicationDescriptor *> *))handler NS_SWIFT_ASYNC(1) NS_SWIFT_ASYNC_NAME(complicationDescriptors()) API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios);
 
 /// This method will be called each time a watch face is shared with this device that contains complications
 /// from your extension. Ensure you do any necessary work to support these complications as much as possible.
 @optional
 - (void)handleSharedComplicationDescriptors:(NSArray<CLKComplicationDescriptor *> *)complicationDescriptors API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios);
-
 
 
 #pragma mark - Deprecated
@@ -99,7 +99,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 #pragma mark Time Travel
 
 @optional
-- (void)getSupportedTimeTravelDirectionsForComplication:(CLKComplication *)complication withHandler:(void(^)(CLKComplicationTimeTravelDirections directions))handler API_DEPRECATED("Time Travel is no longer supported. Use CLKComplicationDataSource's getTimelineEndDateWithHandler: to specify forward timeline support.", watchos(2.0, 7.0));
+- (void)getSupportedTimeTravelDirectionsForComplication:(CLKComplication *)complication withHandler:(void(^)(CLKComplicationTimeTravelDirections directions))handler API_DEPRECATED("Time Travel is no longer supported. Use CLKComplicationDataSource's getTimelineEndDateForComplication:withHandler: to specify forward timeline support.", watchos(2.0, 7.0));
 
 @optional
 - (void)getTimelineStartDateForComplication:(CLKComplication *)complication withHandler:(void(^)(NSDate * __nullable date))handler API_DEPRECATED("Time Travel and backwards extension of timelines are no longer supported.", watchos(2.0, 7.0));
@@ -107,8 +107,6 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
 @optional
 - (void)getTimelineEntriesForComplication:(CLKComplication *)complication beforeDate:(NSDate *)date limit:(NSUInteger)limit
                               withHandler:(void(^)(NSArray<CLKComplicationTimelineEntry *> * __nullable entries))handler API_DEPRECATED("Time Travel and backwards extension of timelines are no longer supported.", watchos(2.0, 7.0));
-
-#pragma mark Update Scheduling
 
 /// These methods will no longer be called for clients adopting the WKRefreshBackgroundTask APIs, which are the recommended means of scheduling updates.
 /// In a future release these methods will no longer be called.

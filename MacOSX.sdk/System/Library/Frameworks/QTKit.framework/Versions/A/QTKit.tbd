@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0B3A8E8C-7269-36EF-B955-6E80F51D31A0
+    value:           552ABB3F-5CC1-38E0-902E-ED80391BB85A
 install-name:    '/System/Library/Frameworks/QTKit.framework/Versions/A/QTKit'
 exports:
   - targets:         [ x86_64-macos ]

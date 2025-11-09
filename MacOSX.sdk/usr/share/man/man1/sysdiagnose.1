@@ -17,6 +17,7 @@
 .Op Fl A Ar archive_name
 .Op Fl V Ar volume_path
 .Op Fl n
+.Op Fl C, -compression Ar compression_type
 .Op Fl k
 .Op Fl F
 .Op Fl S
@@ -103,6 +104,8 @@ Specify the name of the archive created in the results directory.
 Specify the root volume for sysdiagnose to run on.
 .It Fl n
 Do not tar the resulting sysdiagnose directory.
+.It Fl C, -compression Ar compression_type Op tar|yaa|default|no-compression
+Specify the compression type for the resulting sysdiagnose directory.
 .It Fl k
 Do not remove the temporary directory.
 .It Fl F

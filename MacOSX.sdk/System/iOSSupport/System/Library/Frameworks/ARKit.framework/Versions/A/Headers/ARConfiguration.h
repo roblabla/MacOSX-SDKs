@@ -2,12 +2,14 @@
 //  ARConfiguration.h
 //  ARKit
 //
-//  Copyright © 2016-2017 Apple Inc. All rights reserved.
+//  Copyright © 2016-2021 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreLocation/CoreLocation.h>
+
+#import <ARKit/ARPlaneDetectionTypes.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ARReferenceObject;
 @class ARVideoFormat;
 @class ARWorldMap;
+
 
 /**
 Option set indicating semantic understanding types of the image frame.
@@ -101,21 +104,6 @@ typedef NS_ENUM(NSInteger, AREnvironmentTexturing) {
 
 
 /**
- Option set indicating the type of planes to detect.
- */
-API_AVAILABLE(ios(11.0))
-typedef NS_OPTIONS(NSUInteger, ARPlaneDetection) {
-    /** No plane detection is run. */
-    ARPlaneDetectionNone                              = 0,
-    
-    /** Plane detection determines horizontal planes in the scene. */
-    ARPlaneDetectionHorizontal                        = (1 << 0),
-    
-    /** Plane detection determines vertical planes in the scene. */
-    ARPlaneDetectionVertical API_AVAILABLE(ios(11.3)) = (1 << 1)
-} NS_SWIFT_NAME(ARWorldTrackingConfiguration.PlaneDetection);
-
-/**
  Types of scene reconstruction.
  */
 API_AVAILABLE(ios(13.4))
@@ -129,6 +117,7 @@ typedef NS_OPTIONS(NSUInteger, ARSceneReconstruction) {
     /** Scene reconstruction generates a mesh of the world with classification for each face. */
     ARSceneReconstructionMeshWithClassification = (1 << 1) | (1 << 0)
 } NS_SWIFT_NAME(ARConfiguration.SceneReconstruction);
+
 
 /**
  An object to describe and configure the Augmented Reality techniques to be used in an ARSession.
@@ -648,7 +637,7 @@ API_AVAILABLE(ios(14.0))
         isAvailable - True if geo tracking is available at the current location, otherwise false.
         error - An error that indicates why geo tracking is not available at the current location.
  */
-+ (void)checkAvailabilityWithCompletionHandler:(void (^)(BOOL isAvailable, NSError * _Nullable error))completionHandler;
++ (void)checkAvailabilityWithCompletionHandler:(void (^)(BOOL isAvailable, NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC;
 
 /**
 Determines the availability of geo tracking at the given location.
@@ -658,12 +647,13 @@ Determines the availability of geo tracking at the given location.
        isAvailable - True if geo tracking is available at the given location, otherwise false.
        error - An error that indicates why geo tracking is not available at the given location.
 */
-+ (void)checkAvailabilityAtCoordinate:(CLLocationCoordinate2D)coordinate completionHandler:(void (^)(BOOL isAvailable, NSError * _Nullable error))completionHandler;
++ (void)checkAvailabilityAtCoordinate:(CLLocationCoordinate2D)coordinate completionHandler:(void (^)(BOOL isAvailable, NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC;
 
 - (instancetype)init;
 + (instancetype)new NS_SWIFT_UNAVAILABLE("Use init() instead");
 
 @end
+
 
 
 NS_ASSUME_NONNULL_END

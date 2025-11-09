@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BB4DED2A-7C79-3E43-9D05-63BF1FCCF2B0
+    value:           7EA711FB-DD9E-36A4-BB25-FC7643343C14
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7DA89EB0-B9C0-3DAD-AF18-7663D69E9902
+    value:           CDB5CAE4-A5EC-3C37-85B3-655DDE439341
 install-name:    '/System/Library/PrivateFrameworks/Restore.framework/Versions/A/Restore'
-current-version: 537.60.1
+current-version: 562
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _RestoreOperation ]

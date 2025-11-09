@@ -21,13 +21,15 @@ typedef NS_ENUM(NSInteger, UICollectionViewFlowLayoutSectionInsetReference) {
     UICollectionViewFlowLayoutSectionInsetFromLayoutMargins
 } API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UICollectionViewFlowLayoutInvalidationContext : UICollectionViewLayoutInvalidationContext
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+@interface UICollectionViewFlowLayoutInvalidationContext : UICollectionViewLayoutInvalidationContext
 
 @property (nonatomic) BOOL invalidateFlowLayoutDelegateMetrics; // if set to NO, flow layout will not requery the collection view delegate for size information etc.
 @property (nonatomic) BOOL invalidateFlowLayoutAttributes; // if set to NO, flow layout will keep all layout information, effectively not invalidating - useful for a subclass which invalidates only a piece of itself
 
 @end
 
+NS_SWIFT_UI_ACTOR
 @protocol UICollectionViewDelegateFlowLayout <UICollectionViewDelegate>
 @optional
 
@@ -40,7 +42,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UICollectionViewFlowLayoutInvali
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionViewFlowLayout : UICollectionViewLayout
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+@interface UICollectionViewFlowLayout : UICollectionViewLayout
 
 @property (nonatomic) CGFloat minimumLineSpacing;
 @property (nonatomic) CGFloat minimumInteritemSpacing;

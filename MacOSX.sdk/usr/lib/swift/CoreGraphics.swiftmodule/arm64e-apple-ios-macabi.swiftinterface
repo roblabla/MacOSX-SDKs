@@ -1,9 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
-// swift-module-flags: -target arm64e-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreGraphics -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreGraphics
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.27.6 clang-1300.0.27.2)
+// swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreGraphics -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreGraphics
 @_exported import CoreGraphics
 import Darwin
 import Swift
+import _Concurrency
 @frozen public struct CGFloat {
   public typealias NativeType = Swift.Double
   @_transparent public init() {
@@ -20,7 +21,7 @@ import Swift
   }
   public var native: CoreGraphics.CGFloat.NativeType
 }
-extension CGFloat : Swift.SignedNumeric {
+extension CoreGraphics.CGFloat : Swift.SignedNumeric {
   @_alwaysEmitIntoClient public init<T>(_ source: T) where T : Swift.BinaryInteger {
     self.native = NativeType(source)
   }
@@ -36,7 +37,7 @@ extension CGFloat : Swift.SignedNumeric {
   public typealias IntegerLiteralType = Swift.Int
   public typealias Magnitude = CoreGraphics.CGFloat
 }
-extension CGFloat : Swift.BinaryFloatingPoint {
+extension CoreGraphics.CGFloat : Swift.BinaryFloatingPoint {
   public typealias RawSignificand = Swift.UInt
   public typealias Exponent = Swift.Int
   @_transparent public static var exponentBitCount: Swift.Int {
@@ -251,7 +252,7 @@ extension CGFloat : Swift.BinaryFloatingPoint {
   public typealias FloatLiteralType = CoreGraphics.CGFloat.NativeType
   public typealias RawExponent = Swift.UInt
 }
-extension CGFloat {
+extension CoreGraphics.CGFloat {
   @available(*, unavailable, renamed: "leastNormalMagnitude")
   public static var min: CoreGraphics.CGFloat {
     get
@@ -269,19 +270,19 @@ public var CGFLOAT_MIN: CoreGraphics.CGFloat {
 public var CGFLOAT_MAX: CoreGraphics.CGFloat {
   get
 }
-extension CGFloat : Swift.CustomReflectable {
+extension CoreGraphics.CGFloat : Swift.CustomReflectable {
   public var customMirror: Swift.Mirror {
     get
   }
 }
-extension CGFloat : Swift.CustomStringConvertible {
+extension CoreGraphics.CGFloat : Swift.CustomStringConvertible {
   @_transparent public var description: Swift.String {
     @_transparent get {
     return native.description
   }
   }
 }
-extension CGFloat : Swift.Hashable {
+extension CoreGraphics.CGFloat : Swift.Hashable {
   @_transparent public var hashValue: Swift.Int {
     @_transparent get {
     return native.hashValue
@@ -294,67 +295,67 @@ extension CGFloat : Swift.Hashable {
     return native._rawHashValue(seed: seed)
   }
 }
-extension UInt8 {
+extension Swift.UInt8 {
   @_transparent public init(_ value: CoreGraphics.CGFloat) {
     self = UInt8(value.native)
   }
 }
-extension Int8 {
+extension Swift.Int8 {
   @_transparent public init(_ value: CoreGraphics.CGFloat) {
     self = Int8(value.native)
   }
 }
-extension UInt16 {
+extension Swift.UInt16 {
   @_transparent public init(_ value: CoreGraphics.CGFloat) {
     self = UInt16(value.native)
   }
 }
-extension Int16 {
+extension Swift.Int16 {
   @_transparent public init(_ value: CoreGraphics.CGFloat) {
     self = Int16(value.native)
   }
 }
-extension UInt32 {
+extension Swift.UInt32 {
   @_transparent public init(_ value: CoreGraphics.CGFloat) {
     self = UInt32(value.native)
   }
 }
-extension Int32 {
+extension Swift.Int32 {
   @_transparent public init(_ value: CoreGraphics.CGFloat) {
     self = Int32(value.native)
   }
 }
-extension UInt64 {
+extension Swift.UInt64 {
   @_transparent public init(_ value: CoreGraphics.CGFloat) {
     self = UInt64(value.native)
   }
 }
-extension Int64 {
+extension Swift.Int64 {
   @_transparent public init(_ value: CoreGraphics.CGFloat) {
     self = Int64(value.native)
   }
 }
-extension UInt {
+extension Swift.UInt {
   @_transparent public init(_ value: CoreGraphics.CGFloat) {
     self = UInt(value.native)
   }
 }
-extension Int {
+extension Swift.Int {
   @_transparent public init(_ value: CoreGraphics.CGFloat) {
     self = Int(value.native)
   }
 }
-extension Double {
+extension Swift.Double {
   @_transparent public init(_ value: CoreGraphics.CGFloat) {
     self = Double(value.native)
   }
 }
-extension Float {
+extension Swift.Float {
   @_transparent public init(_ value: CoreGraphics.CGFloat) {
     self = Float(value.native)
   }
 }
-extension CGFloat {
+extension CoreGraphics.CGFloat {
   @_transparent public static func + (lhs: CoreGraphics.CGFloat, rhs: CoreGraphics.CGFloat) -> CoreGraphics.CGFloat {
     var lhs = lhs
     lhs += rhs
@@ -376,7 +377,7 @@ extension CGFloat {
     return lhs
   }
 }
-extension CGFloat : Swift.Strideable {
+extension CoreGraphics.CGFloat : Swift.Strideable {
   @_transparent public func distance(to other: CoreGraphics.CGFloat) -> CoreGraphics.CGFloat {
     return CGFloat(other.native - self.native)
   }
@@ -547,7 +548,7 @@ public func signbit(_ value: CoreGraphics.CGFloat) -> Swift.Int
 @_transparent public func yn(_ n: Swift.Int, _ x: CoreGraphics.CGFloat) -> CoreGraphics.CGFloat {
   return CGFloat(yn(n, Double(x.native)))
 }
-extension CGFloat : Swift._CVarArgPassedAsDouble, Swift._CVarArgAligned {
+extension CoreGraphics.CGFloat : Swift._CVarArgPassedAsDouble, Swift._CVarArgAligned {
   @_transparent public var _cVarArgEncoding: [Swift.Int] {
     @_transparent get {
     return native._cVarArgEncoding
@@ -559,7 +560,7 @@ extension CGFloat : Swift._CVarArgPassedAsDouble, Swift._CVarArgAligned {
   }
   }
 }
-extension CGFloat : Swift.Codable {
+extension CoreGraphics.CGFloat : Swift.Codable {
   @_transparent public init(from decoder: Swift.Decoder) throws {
     let container = try decoder.singleValueContainer()
     do {
@@ -587,10 +588,10 @@ extension CGFloat : Swift.Codable {
     try container.encode(self.native)
   }
 }
-extension CGAffineTransform : Swift.Equatable {
+extension CoreGraphics.CGAffineTransform : Swift.Equatable {
   public static func == (lhs: CoreGraphics.CGAffineTransform, rhs: CoreGraphics.CGAffineTransform) -> Swift.Bool
 }
-extension CGColor {
+extension CoreGraphics.CGColor {
   @available(macOS 10.3, iOS 2.0, *)
   public var components: [CoreGraphics.CGFloat]? {
     get
@@ -599,17 +600,17 @@ extension CGColor {
 public protocol _CGColorInitTrampoline {
   init?(colorSpace space: CoreGraphics.CGColorSpace, components: Swift.UnsafePointer<CoreGraphics.CGFloat>)
 }
-extension _CGColorInitTrampoline {
+extension CoreGraphics._CGColorInitTrampoline {
   public init(_colorLiteralRed red: Swift.Float, green: Swift.Float, blue: Swift.Float, alpha: Swift.Float)
 }
-extension CGColor : CoreGraphics._CGColorInitTrampoline, Swift._ExpressibleByColorLiteral {
+extension CoreGraphics.CGColor : CoreGraphics._CGColorInitTrampoline, Swift._ExpressibleByColorLiteral {
 }
-extension CGColorSpace {
+extension CoreGraphics.CGColorSpace {
   public var colorTable: [Swift.UInt8]? {
     get
   }
 }
-extension CGContext {
+extension CoreGraphics.CGContext {
   public func setLineDash(phase: CoreGraphics.CGFloat, lengths: [CoreGraphics.CGFloat])
   public func move(to point: CoreGraphics.CGPoint)
   public func addLine(to point: CoreGraphics.CGPoint)
@@ -631,7 +632,7 @@ extension CGContext {
   }
   public func showGlyphs(_ glyphs: [CoreGraphics.CGGlyph], at positions: [CoreGraphics.CGPoint])
 }
-extension CGPoint {
+extension CoreGraphics.CGPoint {
   public static var zero: CoreGraphics.CGPoint {
     @_transparent get { return CGPoint(x: 0, y: 0) }
   }
@@ -643,32 +644,32 @@ extension CGPoint {
   }
   public init?(dictionaryRepresentation dict: CoreFoundation.CFDictionary)
 }
-extension CGPoint : Swift.CustomReflectable {
+extension CoreGraphics.CGPoint : Swift.CustomReflectable {
   public var customMirror: Swift.Mirror {
     get
   }
 }
-extension CGPoint : Swift._CustomPlaygroundQuickLookable {
+extension CoreGraphics.CGPoint : Swift._CustomPlaygroundQuickLookable {
   @available(*, deprecated, message: "CGPoint.customPlaygroundQuickLook will be removed in a future Swift version")
   public var customPlaygroundQuickLook: Swift.PlaygroundQuickLook {
     get
   }
 }
-extension CGPoint : Swift.CustomDebugStringConvertible {
+extension CoreGraphics.CGPoint : Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get
   }
 }
-extension CGPoint : Swift.Equatable {
+extension CoreGraphics.CGPoint : Swift.Equatable {
   @_transparent public static func == (lhs: CoreGraphics.CGPoint, rhs: CoreGraphics.CGPoint) -> Swift.Bool {
     return lhs.x == rhs.x  &&  lhs.y == rhs.y
   }
 }
-extension CGPoint : Swift.Codable {
+extension CoreGraphics.CGPoint : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-extension CGSize {
+extension CoreGraphics.CGSize {
   public static var zero: CoreGraphics.CGSize {
     @_transparent get { return CGSize(width: 0, height: 0) }
   }
@@ -680,32 +681,32 @@ extension CGSize {
   }
   public init?(dictionaryRepresentation dict: CoreFoundation.CFDictionary)
 }
-extension CGSize : Swift.CustomReflectable {
+extension CoreGraphics.CGSize : Swift.CustomReflectable {
   public var customMirror: Swift.Mirror {
     get
   }
 }
-extension CGSize : Swift._CustomPlaygroundQuickLookable {
+extension CoreGraphics.CGSize : Swift._CustomPlaygroundQuickLookable {
   @available(*, deprecated, message: "CGSize.customPlaygroundQuickLook will be removed in a future Swift version")
   public var customPlaygroundQuickLook: Swift.PlaygroundQuickLook {
     get
   }
 }
-extension CGSize : Swift.CustomDebugStringConvertible {
+extension CoreGraphics.CGSize : Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get
   }
 }
-extension CGSize : Swift.Equatable {
+extension CoreGraphics.CGSize : Swift.Equatable {
   @_transparent public static func == (lhs: CoreGraphics.CGSize, rhs: CoreGraphics.CGSize) -> Swift.Bool {
     return lhs.width == rhs.width  &&  lhs.height == rhs.height
   }
 }
-extension CGSize : Swift.Codable {
+extension CoreGraphics.CGSize : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-extension CGVector {
+extension CoreGraphics.CGVector {
   public static var zero: CoreGraphics.CGVector {
     @_transparent get { return CGVector(dx: 0, dy: 0) }
   }
@@ -716,21 +717,21 @@ extension CGVector {
     self.init(dx: CGFloat(dx), dy: CGFloat(dy))
   }
 }
-extension CGVector : Swift.Equatable {
+extension CoreGraphics.CGVector : Swift.Equatable {
   @_transparent public static func == (lhs: CoreGraphics.CGVector, rhs: CoreGraphics.CGVector) -> Swift.Bool {
     return lhs.dx == rhs.dx  &&  lhs.dy == rhs.dy
   }
 }
-extension CGVector : Swift.CustomDebugStringConvertible {
+extension CoreGraphics.CGVector : Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get
   }
 }
-extension CGVector : Swift.Codable {
+extension CoreGraphics.CGVector : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-extension CGRect {
+extension CoreGraphics.CGRect {
   public static var zero: CoreGraphics.CGRect {
     @_transparent get { return CGRect(x: 0, y: 0, width: 0, height: 0) }
   }
@@ -763,44 +764,44 @@ extension CGRect {
     get
   }
 }
-extension CGRect : Swift.CustomReflectable {
+extension CoreGraphics.CGRect : Swift.CustomReflectable {
   public var customMirror: Swift.Mirror {
     get
   }
 }
-extension CGRect : Swift._CustomPlaygroundQuickLookable {
+extension CoreGraphics.CGRect : Swift._CustomPlaygroundQuickLookable {
   @available(*, deprecated, message: "CGRect.customPlaygroundQuickLook will be removed in a future Swift version")
   public var customPlaygroundQuickLook: Swift.PlaygroundQuickLook {
     get
   }
 }
-extension CGRect : Swift.CustomDebugStringConvertible {
+extension CoreGraphics.CGRect : Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get
   }
 }
-extension CGRect : Swift.Equatable {
+extension CoreGraphics.CGRect : Swift.Equatable {
   @_transparent public static func == (lhs: CoreGraphics.CGRect, rhs: CoreGraphics.CGRect) -> Swift.Bool {
     return lhs.equalTo(rhs)
   }
 }
-extension CGRect : Swift.Codable {
+extension CoreGraphics.CGRect : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-extension CGAffineTransform {
+extension CoreGraphics.CGAffineTransform {
   public static var identity: CoreGraphics.CGAffineTransform {
     @_transparent get { return CGAffineTransform(a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0) }
   }
 }
-extension CGAffineTransform : Swift.Codable {
+extension CoreGraphics.CGAffineTransform : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-extension CGImage {
+extension CoreGraphics.CGImage {
   public func copy(maskingColorComponents components: [CoreGraphics.CGFloat]) -> CoreGraphics.CGImage?
 }
-extension CGContext {
+extension CoreGraphics.CGContext {
   public func draw(_ layer: CoreGraphics.CGLayer, in rect: CoreGraphics.CGRect)
   public func draw(_ layer: CoreGraphics.CGLayer, at point: CoreGraphics.CGPoint)
 }
@@ -813,12 +814,12 @@ public enum CGPathFillRule : Swift.Int {
     get
   }
 }
-extension CGPath {
+extension CoreGraphics.CGPath {
   public func copy(dashingWithPhase phase: CoreGraphics.CGFloat, lengths: [CoreGraphics.CGFloat], transform: CoreGraphics.CGAffineTransform = .identity) -> CoreGraphics.CGPath
   public func copy(strokingWithWidth lineWidth: CoreGraphics.CGFloat, lineCap: CoreGraphics.CGLineCap, lineJoin: CoreGraphics.CGLineJoin, miterLimit: CoreGraphics.CGFloat, transform: CoreGraphics.CGAffineTransform = .identity) -> CoreGraphics.CGPath
   public func contains(_ point: CoreGraphics.CGPoint, using rule: CoreGraphics.CGPathFillRule = .winding, transform: CoreGraphics.CGAffineTransform = .identity) -> Swift.Bool
 }
-extension CGMutablePath {
+extension CoreGraphics.CGMutablePath {
   public func addRoundedRect(in rect: CoreGraphics.CGRect, cornerWidth: CoreGraphics.CGFloat, cornerHeight: CoreGraphics.CGFloat, transform: CoreGraphics.CGAffineTransform = .identity)
   public func move(to point: CoreGraphics.CGPoint, transform: CoreGraphics.CGAffineTransform = .identity)
   public func addLine(to point: CoreGraphics.CGPoint, transform: CoreGraphics.CGAffineTransform = .identity)
@@ -945,6 +946,10 @@ public var kCGColorBlack: CoreFoundation.CFString {
 public var kCGColorClear: CoreFoundation.CFString {
   get
 }
+
+#if compiler(>=5.3) && $MarkerProtocol && $Sendable
+extension CoreGraphics.CGFloat : Swift.Sendable {}
+#endif
 extension CoreGraphics.CGPathFillRule : Swift.Equatable {}
 extension CoreGraphics.CGPathFillRule : Swift.Hashable {}
 extension CoreGraphics.CGPathFillRule : Swift.RawRepresentable {}

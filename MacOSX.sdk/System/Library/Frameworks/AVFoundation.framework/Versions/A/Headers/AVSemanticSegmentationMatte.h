@@ -4,7 +4,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2019 Apple Inc. All rights reserved.
+    Copyright 2019-2021 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -44,8 +44,7 @@ AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteType
  @constant AVSemanticSegmentationMatteTypeGlasses
  A matting image segmenting all glasses ( e.g. eyeglasses, sunglasses ) from all persons wearing glasses in the visible field-of-view of an image.
  */
-AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteTypeGlasses API_AVAILABLE(macos(11.0), ios(14.1), macCatalyst(14.1)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
-
+AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteTypeGlasses API_AVAILABLE(macos(11.0), ios(14.1), macCatalyst(14.1), tvos(14.5), watchos(8.0));
 
 /*!
  @class AVSemanticSegmentationMatte

@@ -121,6 +121,20 @@ OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 + (instancetype)deactivationRequestForExtension:(NSString *)identifier queue:(dispatch_queue_t)queue NS_SWIFT_NAME(deactivationRequest(forExtensionWithIdentifier:queue:)) API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
+ @brief Creates a request to get information about System Extensions.
+
+ @discussion This method creates a new request to retrieve the properties
+ of any System Extensions matching the given identifier.
+
+ @param identifier The bundle identifier of the target extension(s).
+
+ @param queue The dispatch queue to use when calling delegate methods.
+ */
++ (instancetype)propertiesRequestForExtension:(NSString *)identifier queue:(dispatch_queue_t)queue
+    NS_SWIFT_NAME(propertiesRequest(forExtensionWithIdentifier:queue:))
+    API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+
+/*!
  @brief A delegate to receive updates about the progress of a request
  */
 @property (weak, nonatomic) id<OSSystemExtensionRequestDelegate> delegate API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
@@ -154,6 +168,25 @@ OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
  @brief The bundle short version string of the extension (CFBundleShortVersionString)
  */
 @property (strong, readonly) NSString *bundleShortVersion API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @brief Returns the enabled state of the extension
+ */
+@property (readonly) BOOL isEnabled
+    API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @brief Returns whether an extension is waiting for user approval
+ */
+@property (readonly) BOOL isAwaitingUserApproval
+    API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @brief Returns if an extension is being uninstalled
+ */
+@property (readonly) BOOL isUninstalling
+    API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
 @end
 
 API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
@@ -219,6 +252,18 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
  @abstract Called when the target extension request failed.
  */
 - (void)request:(OSSystemExtensionRequest *)request didFailWithError:(NSError *)error API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+
+@optional
+
+/*!
+ @brief Called request for properties has completed.
+
+ @param properties Returns an array of OSSystemExtensionProperties matching the
+ requested bundle identifier.
+ */
+- (void)request:(OSSystemExtensionRequest *)request foundProperties:(NSArray<OSSystemExtensionProperties *> *)properties
+    API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+
 @end
 
 OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)

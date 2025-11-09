@@ -2,7 +2,7 @@
 //  connection_group.h
 //  Network
 //
-//  Copyright (c) 2019-2020 Apple Inc. All rights reserved.
+//  Copyright (c) 2019-2021 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_CONNECTION_GROUP_H__
@@ -350,6 +350,57 @@ nw_connection_group_copy_path_for_message(nw_connection_group_t group,
 										  nw_content_context_t context);
 
 /*!
+ * @function nw_connection_group_copy_protocol_metadata_for_message
+ *
+ * @abstract
+ *		Copy the metadata corresponding to a given inbound connection group message.
+ *
+ * @param group
+ *		The connection group object.
+ *
+ * @param definition
+ *		The protocol definition for which metadata will be returned.
+ *
+ * @result
+ *		Returns a retained protocol metadata object, or NULL if not found.
+ */
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
+_Nullable nw_protocol_metadata_t
+nw_connection_group_copy_protocol_metadata_for_message(nw_connection_group_t group,
+													   nw_content_context_t context,
+													   nw_protocol_definition_t definition);
+
+/*!
+ * @function nw_connection_group_extract_connection_for_message
+ *
+ * @abstract
+ *		Extract a connection corresponding to an inbound message from the
+ *		connection group. Once extracted, subsequent messages from this
+ *		remote endpoint on this connection will no longer be handled by the
+ *		connection group. The connection may be used to read the remainder
+ *		of a partial message or to send a large response with support for partial
+ *		messages and backpressure.
+ *		Any incoming messages from this remote endpoint which were saved from
+ *		the receive handler may no longer be valid after a connection is returned.
+ *
+ * @param group
+ *		The connection group object from which the context was received. If the context was
+ *		not received from this connection group, the extraction will fail.
+ *
+ *	@param context
+ *		A content context representing an inbound message received from this connection group.
+ *
+ * @result
+ *		Returns the connection associated with the provided message, or nil if the extraction
+ *		fails. Extraction will fail if the provided message is not an inbound message from
+ *		this connection group.
+ */
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+NW_RETURNS_RETAINED _Nullable nw_connection_t
+nw_connection_group_extract_connection_for_message(nw_connection_group_t group,
+												   nw_content_context_t context);
+
+/*!
  * @function nw_connection_group_reply
  *
  * @abstract
@@ -385,34 +436,58 @@ nw_connection_group_reply(nw_connection_group_t group,
 						  dispatch_data_t _Nullable content);
 
 /*!
- * @function nw_connection_group_extract_connection_for_message
+ * @function nw_connection_group_extract_connection
  *
  * @abstract
- *		Extract a connection corresponding to an inbound message from the
- *		connection group. Once extracted, subsequent messages from this
- *		remote endpoint on this connection will no longer be handled by the
- *		connection group. The connection may be used to read the remainder
- *		of a partial message or to send a large response with support for partial
- *		messages and backpressure.
- *		Any incoming messages from this remote endpoint which were saved from
- *		the receive handler may no longer be valid after a connection is returned.
+ *      Extract a connection from the connection group. For a multiplex connection group, this means that
+ *      a new stream is opened and the corresponding nw_connection_t object is returned. For non-multiplex
+ *      connection groups, a connection to the specified endpoint will be returned if allowed by the group descriptor.
+ *
+ *      The connection can be re-inserted into the group later. Once reinserted, the connection group
+ *      will handle subsequent messages from this remote endpoint.
  *
  * @param group
- *		The connection group object from which the context was received. If the context was
- *		not received from this connection group, the extraction will fail.
+ *      The connection group object from which to extract a connection.
  *
- *	@param context
- *		A content context representing an inbound message received from this connection group.
+ * @param endpoint
+ *      The endpoint to use as the remote endpoint for the extracted connection, if applicable.
+ *      For connection groups with multiplex group descriptors, this should be nil.
+ *
+ * @param protocol_options
+ *      The protocol options to apply to the extracted connection. May be nil if not applicable.
  *
  * @result
- *		Returns the connection associated with the provided message, or nil if the extraction
- *		fails. Extraction will fail if the provided message is not an inbound message from
- *		this connection group.
+ *      Returns the connection from the connection group.
  */
-API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
 NW_RETURNS_RETAINED _Nullable nw_connection_t
-nw_connection_group_extract_connection_for_message(nw_connection_group_t group,
-												   nw_content_context_t context);
+nw_connection_group_extract_connection(nw_connection_group_t group,
+									   _Nullable nw_endpoint_t endpoint,
+									   _Nullable nw_protocol_options_t protocol_options);
+
+/*!
+ * @function nw_connection_group_reinsert_extracted_connection
+ *
+ * @abstract
+ *		Reinsert a connection into a connection group. Once reinserted, the connection group
+ *		will handle subsequent messages from this remote endpoint, and any outstanding reads on
+ *		the connection will be cancelled.
+ *
+ * @param group
+ *		The connection group object from which the connection was extracted. If the connection was
+ *		not extracted from this connection group, the reinsertion will fail.
+ *
+ *	@param connection
+ *		A connection that was extracted from this connection group.
+ *
+ * @result
+ *		Returns true if the reinsertion was successful. Reinsertion will fail if the provided connection was
+ *		not extracted from this connection group.
+ */
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
+bool
+nw_connection_group_reinsert_extracted_connection(nw_connection_group_t group,
+												  nw_connection_t connection);
 
 #ifdef __BLOCKS__
 
@@ -474,12 +549,73 @@ typedef void (^nw_connection_group_send_completion_t)(_Nullable nw_error_t error
  *		enqueued to be sent.
  */
 API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+NW_SWIFT_DISABLE_ASYNC
 void
 nw_connection_group_send_message(nw_connection_group_t group,
 								 _Nullable dispatch_data_t content,
 								 _Nullable nw_endpoint_t endpoint,
 								 nw_content_context_t context,
 								 nw_connection_group_send_completion_t completion);
+
+/*!
+ * @typedef nw_connection_group_new_connection_handler_t
+ *
+ * @abstract
+ *		A block called with a new connection when a multiplex group receives a new stream. If a new connection
+ *		handler is set the user must handle connections received by this handler. There are three possible
+ *		actions to take and one of these three actions must be taken.
+ *		1) Take over the ownership of the connection. In this case, the connection is used by the client to
+ *		   send and receive data as any other connection would be used. The client may insert this
+ *		   connection back into the connection group at a later point if so desired.
+ *      2) If you want the connection group to handle this connection, simply insert this connection back into
+ *         the connection group right away.
+ *      3) If you don't want to accept this connection, simply cancel the connection.
+ *
+ * @param connection
+ *		The connection representing the new stream on this multiplexing protocol
+ */
+typedef void (^nw_connection_group_new_connection_handler_t)(nw_connection_t connection);
+
+/*!
+ * @function nw_connection_group_set_new_connection_handler
+ *
+ * @abstract
+ *		Sets the new connection handler to be invoked whenever a new inbound connection
+ *		is received by the connection group. This function must not be called
+ *		after starting the connection group.
+ *
+ * @param group
+ *		The connection group object.
+ *
+ * @param new_connection_handler
+ *		The new connection handler to call upon receipt of a new inbound connection.
+ *		Pass NULL to remove the handler.
+ */
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
+void
+nw_connection_group_set_new_connection_handler(nw_connection_group_t group,
+											   _Nullable nw_connection_group_new_connection_handler_t new_connection_handler);
+
+/*!
+ * @function nw_connection_group_copy_protocol_metadata
+ *
+ * @abstract
+ *		Copy the metadata corresponding to a given inbound connection group message.
+ *
+ * @param group
+ *		The connection group object.
+ *
+ * @param definition
+ *		The protocol definition for which metadata will be returned.
+ *
+ * @result
+ *		Returns a retained protocol metadata object, or NULL if the connection
+ *		group has not been established yet or is cancelled.
+ */
+API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0))
+_Nullable nw_protocol_metadata_t
+nw_connection_group_copy_protocol_metadata(nw_connection_group_t group,
+										   nw_protocol_definition_t definition);
 
 #endif // __BLOCKS__
 

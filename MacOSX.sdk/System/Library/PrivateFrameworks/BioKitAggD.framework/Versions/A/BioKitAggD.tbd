@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9990B0D8-892A-31DA-B7D4-0963937ADB30
+    value:           F4269C75-68E0-32BB-A862-D90FD8D67BAC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6C819D13-281E-33EF-A908-E8E32BAC9C8F
+    value:           82857394-008B-3E95-B257-73E51163D774
 install-name:    '/System/Library/PrivateFrameworks/BioKitAggD.framework/Versions/A/BioKitAggD'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

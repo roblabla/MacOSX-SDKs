@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIFontPickerViewController;
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos) @protocol UIFontPickerViewControllerDelegate <NSObject>
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
+@protocol UIFontPickerViewControllerDelegate <NSObject>
 
 @optional
 
@@ -24,7 +25,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos) @protocol U
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos) @interface UIFontPickerViewController : UIViewController
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
+@interface UIFontPickerViewController : UIViewController
 
 /*
   UIFontPickerViewController allows selecting a font family or specific face based on the configuration provided. Mutating the configuration after invoking the initializer has no effect on the view controller.

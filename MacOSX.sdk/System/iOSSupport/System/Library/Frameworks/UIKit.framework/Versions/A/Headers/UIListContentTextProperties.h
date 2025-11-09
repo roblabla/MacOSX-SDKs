@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, UIListContentTextTransform) {
     UIListContentTextTransformCapitalized
 } API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @interface UIListContentTextProperties : NSObject <NSCopying, NSSecureCoding>
 
 /// The font used for the text.

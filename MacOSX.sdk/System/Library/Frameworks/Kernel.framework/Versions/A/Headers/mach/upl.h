@@ -52,6 +52,7 @@ typedef function_table_entry   *function_table_t;
 #define	upl_MSG_COUNT	4
 #endif	/* upl_MSG_COUNT */
 
+#include <Availability.h>
 #include <mach/std_types.h>
 #include <mach/mig.h>
 #include <mach/mig.h>

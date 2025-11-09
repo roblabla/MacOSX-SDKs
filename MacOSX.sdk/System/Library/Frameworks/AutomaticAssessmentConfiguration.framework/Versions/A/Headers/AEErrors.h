@@ -10,9 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-AE_VISIBLE NSErrorDomain const AEAssessmentErrorDomain API_AVAILABLE(ios(13.4), macos(10.15.4), macCatalyst(14));
+AE_VISIBLE NSErrorDomain const AEAssessmentErrorDomain API_AVAILABLE(ios(13.4), macos(10.15.4), macCatalyst(14.0));
 
-API_AVAILABLE(ios(13.4), macos(10.15.4), macCatalyst(14))
+API_AVAILABLE(ios(13.4), macos(10.15.4), macCatalyst(14.0))
 typedef NS_ERROR_ENUM(AEAssessmentErrorDomain, AEAssessmentErrorCode) {
     AEAssessmentErrorUnknown = 1
 };

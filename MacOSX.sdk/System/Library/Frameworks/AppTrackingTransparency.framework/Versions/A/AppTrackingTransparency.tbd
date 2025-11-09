@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FD377597-63E4-3B0D-BA5B-EFE26D3BC6E1
+    value:           D4DA7871-9030-3EB3-932E-4F2C07727BBF
   - target:          x86_64-maccatalyst
-    value:           FD377597-63E4-3B0D-BA5B-EFE26D3BC6E1
+    value:           D4DA7871-9030-3EB3-932E-4F2C07727BBF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3B9920C1-C67A-3526-8343-887B2E0D4CB8
+    value:           5645B5A8-90FA-3D21-81A1-3F24099AB7A0
   - target:          arm64e-maccatalyst
-    value:           3B9920C1-C67A-3526-8343-887B2E0D4CB8
+    value:           5645B5A8-90FA-3D21-81A1-3F24099AB7A0
 install-name:    '/System/Library/Frameworks/AppTrackingTransparency.framework/Versions/A/AppTrackingTransparency'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

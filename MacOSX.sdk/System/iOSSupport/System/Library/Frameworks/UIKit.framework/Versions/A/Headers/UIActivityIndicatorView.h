@@ -20,7 +20,8 @@ typedef NS_ENUM(NSInteger, UIActivityIndicatorViewStyle) {
     UIActivityIndicatorViewStyleGray API_DEPRECATED_WITH_REPLACEMENT("UIActivityIndicatorViewStyleMedium", ios(2.0, 13.0)) API_UNAVAILABLE(tvos) = 2,
 };
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIActivityIndicatorView : UIView <NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIActivityIndicatorView : UIView <NSCoding>
 
 - (instancetype)initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style NS_DESIGNATED_INITIALIZER; // sizes the view according to the style
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3F49037F-F547-3A02-8DCD-04AC6EF4B477
+    value:           F17135FD-484C-3B0E-9667-F54C1A60D271
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8A87D7B4-6F8F-3386-81F6-973C6EC0FA1C
+    value:           8CB737BA-A9CC-3D6A-B99A-A6884989DB0E
 install-name:    '/usr/lib/libodmodule.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -152,12 +152,13 @@ exports:
                        _kODAuthenticationTypeGetKerberosPrincipal, _kODAuthenticationTypeGetPolicy, 
                        _kODAuthenticationTypeGetUserData, _kODAuthenticationTypeGetUserName, 
                        _kODAuthenticationTypeKerberosTickets, _kODAuthenticationTypeMPPEMasterKeys, 
-                       _kODAuthenticationTypeMSCHAP2, _kODAuthenticationTypeNTLMv2, 
-                       _kODAuthenticationTypeNTLMv2WithSessionKey, _kODAuthenticationTypeNewUser, 
-                       _kODAuthenticationTypeNewUserWithPolicy, _kODAuthenticationTypeNodeNativeClearTextOK, 
-                       _kODAuthenticationTypeNodeNativeNoClearText, _kODAuthenticationTypeNodeNativeRetainCredential, 
-                       _kODAuthenticationTypeNodePPS, _kODAuthenticationTypeReadSecureHash, 
-                       _kODAuthenticationTypeSMBNTv2UserSessionKey, _kODAuthenticationTypeSMBWorkstationCredentialSessionKey, 
+                       _kODAuthenticationTypeMPPEPrimaryKeys, _kODAuthenticationTypeMSCHAP2, 
+                       _kODAuthenticationTypeNTLMv2, _kODAuthenticationTypeNTLMv2WithSessionKey, 
+                       _kODAuthenticationTypeNewUser, _kODAuthenticationTypeNewUserWithPolicy, 
+                       _kODAuthenticationTypeNodeNativeClearTextOK, _kODAuthenticationTypeNodeNativeNoClearText, 
+                       _kODAuthenticationTypeNodeNativeRetainCredential, _kODAuthenticationTypeNodePPS, 
+                       _kODAuthenticationTypeReadSecureHash, _kODAuthenticationTypeSMBNTv2UserSessionKey, 
+                       _kODAuthenticationTypeSMBWorkstationCredentialSessionKey, 
                        _kODAuthenticationTypeSMB_LM_Key, _kODAuthenticationTypeSMB_NT_Key, 
                        _kODAuthenticationTypeSMB_NT_UserSessionKey, _kODAuthenticationTypeSMB_NT_WithUserSessionKey, 
                        _kODAuthenticationTypeSetCertificateHashAsCurrent, _kODAuthenticationTypeSetGlobalPolicy, 

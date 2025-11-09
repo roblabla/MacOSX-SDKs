@@ -12,7 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIRegion : NSObject <NSCopying, NSCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+@interface UIRegion : NSObject <NSCopying, NSCoding>
 
 /*! A shared infinite region
  */

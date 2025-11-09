@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class UIDynamicBehavior;
 @class UIDynamicAnimator;
 
+NS_SWIFT_UI_ACTOR
 @protocol UIDynamicAnimatorDelegate <NSObject>
 
 @optional

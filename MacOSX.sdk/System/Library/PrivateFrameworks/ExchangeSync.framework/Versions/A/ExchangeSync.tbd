@@ -3,29 +3,36 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2EA3457B-A8FA-37BF-9A1E-42E1078DBF3D
+    value:           F8CE4FCD-8BCB-3100-875C-28F5695F101C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6C38C6B7-2440-3471-8406-C9F300C771FF
+    value:           2D28F7CE-F4D2-3A89-931D-A85EFECFCE5E
 install-name:    '/System/Library/PrivateFrameworks/ExchangeSync.framework/Versions/A/ExchangeSync'
-current-version: 2002.80.2
+current-version: 2007
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ExchangeSyncVersionNumber, _ExchangeSyncVersionString, _kEWSFolderClassCalendar, 
                        _kEWSFolderClassContacts, _kEWSFolderClassNote, _kEWSFolderClassTasks, 
-                       _kExchangeBasicAccountMigrationLastAttemptDate, _kExchangeBasicAccountMigrationRetryInterval, 
-                       _kExchangeBasicAccountMigrationStatus, _kExchangeMigrationConfigurationURLString, 
+                       _kExchangeAccountUpgraderActivityIdentifier, _kExchangeBasicAccountMigrationLastAttemptDate, 
+                       _kExchangeBasicAccountMigrationRetryInterval, _kExchangeBasicAccountMigrationStatus, 
+                       _kExchangeFirstRunActivityIdentifier, _kExchangeMigrationConfigurationURLString, 
                        _kExchangeRenewCredentialsShouldTriggerMigrationKey, _kExchangeSyncD_SyncNowNotification ]
     objc-classes:    [ EXSAccount, EXSAccountAuthUpgrader, EXSAccountManager, EXSAccountMetadata, 
-                       EXSCalendarItemProperties, EXSChangeItem, EXSDataConsumerInstance, 
-                       EXSDataConsumerPlugin, EXSDataManager, EXSEWSCreateFolderOperation, 
-                       EXSEWSCreateTaskOperation, EXSEWSDeleteFolderOperation, EXSEWSDeleteItemOperation, 
-                       EXSEWSOperation, EXSEWSSyncProtocol, EXSEWSSyncUtils, EXSEWSUpdateFolderOperation, 
-                       EXSEWSUpdateTaskOperation, EXSEventItemProperties, EXSFolder, 
-                       EXSFolderProperties, EXSIDNADecoder, EXSIDNAEncoder, EXSItem, 
-                       EXSItemProperties, EXSLogging, EXSMain, EXSMaintenanceActivity, 
-                       EXSNetworkController, EXSNotificationController, EXSSyncEngine, 
-                       EXSSyncEngineInstance, EXSSyncProtocol, EXSSyncProtocolFactory, 
-                       EXSTaskItemProperties, EXSXPCInterfaceImplementation, EXSXPCServiceDelegate ]
+                       EXSAlarm, EXSAttendee, EXSBaseProperties, EXSCalendarItemProperties, 
+                       EXSChangeItem, EXSDataConsumerInstance, EXSDataConsumerPlugin, 
+                       EXSDataManager, EXSEWSCreateCalendarItemOperation, EXSEWSCreateFolderOperation, 
+                       EXSEWSCreateResponseOperation, EXSEWSCreateTaskOperation, 
+                       EXSEWSDeleteFolderOperation, EXSEWSDeleteItemOperation, EXSEWSGetMeetingRequestItemsOperation, 
+                       EXSEWSMoveItemOperation, EXSEWSOperation, EXSEWSRemoveMeetingRequestOperation, 
+                       EXSEWSSyncProtocol, EXSEWSSyncUtils, EXSEWSUpdateCalendarItemOperation, 
+                       EXSEWSUpdateFolderOperation, EXSEWSUpdateTaskOperation, EXSEmailAddress, 
+                       EXSFolder, EXSFolderProperties, EXSGlobalDataManager, EXSIDNADecoder, 
+                       EXSIDNAEncoder, EXSItem, EXSItemIDType, EXSItemProperties, 
+                       EXSLogging, EXSMain, EXSMaintenanceActivity, EXSNetworkController, 
+                       EXSNotificationController, EXSOccurrence, EXSPersonaPersistenceLayoutManager, 
+                       EXSRecurrenceProperties, EXSSyncEngine, EXSSyncEngineInstance, 
+                       EXSSyncProtocol, EXSSyncProtocolFactory, EXSTaskItemProperties, 
+                       EXSTimeChangeType, EXSTimeZoneType, EXSXPCInterfaceImplementation, 
+                       EXSXPCServiceDelegate ]
 ...

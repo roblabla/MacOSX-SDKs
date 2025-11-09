@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class SFSafariViewControllerConfiguration;
+@class SFSafariViewControllerPrewarmingToken;
 @protocol SFSafariViewControllerDelegate;
 
 typedef NS_ENUM(NSInteger, SFSafariViewControllerDismissButtonStyle) {
@@ -76,6 +77,21 @@ SF_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos)
     to the user's locale. Changing this property after SFSafariViewController is presented will animate the change.
  */
 @property (nonatomic) SFSafariViewControllerDismissButtonStyle dismissButtonStyle API_AVAILABLE(ios(11.0));
+
+/*! @abstract Prewarms a connection to each URL. SFSafariViewController will automatically use a
+    prewarmed connection if possible when loading its initial URL.
+    @param URLs the URLs of servers that SFSafariViewController should prewarm connections to.
+    Only supports URLs with http:// or https:// schemes.
+    @result Returns a token object that corresponds to the requested URLs. You must keep a strong
+    reference to this token as long as you expect the prewarmed connections to remain open. If the same
+    server is requested in multiple calls to this method, all of the corresponding tokens must be
+    invalidated or released to end the prewarmed connection to that server.
+    @discussion This method uses a best-effort approach to prewarming connections, but may delay
+    or drop requests based on the volume of requests made by your app. Use this method when you expect
+    to present SFSafariViewController soon. Many HTTP servers time out connections after a few minutes.
+    After a timeout, prewarming delivers less performance benefit.
+ */
++ (SFSafariViewControllerPrewarmingToken *)prewarmConnectionsToURLs:(NSArray<NSURL *> *)URLs NS_SWIFT_NAME(prewarmConnections(to:)) API_AVAILABLE(ios(15.0));
 
 @end
 

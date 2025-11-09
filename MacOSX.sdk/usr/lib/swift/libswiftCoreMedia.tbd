@@ -4,18 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DBF9F90A-93CD-3002-9C85-6AA5851C70C4
+    value:           701032CE-1DAA-36D5-89F8-36AC3907B158
   - target:          x86_64-maccatalyst
-    value:           DBF9F90A-93CD-3002-9C85-6AA5851C70C4
+    value:           701032CE-1DAA-36D5-89F8-36AC3907B158
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           880A3E24-314E-3900-9D57-54A5B28CC006
+    value:           0E2B5026-081D-3584-A817-5D522D686854
   - target:          arm64e-maccatalyst
-    value:           880A3E24-314E-3900-9D57-54A5B28CC006
+    value:           0E2B5026-081D-3584-A817-5D522D686854
 install-name:    '/usr/lib/swift/libswiftCoreMedia.dylib'
+current-version: 2896.19.3
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -73,7 +74,9 @@ exports:
                        '_$s9CoreMedia25_CMTimebaseInitTrampolineMp', '_$s9CoreMedia25_CMTimebaseInitTrampolineP11referencingxSo0C3Refa_tcfCTj', 
                        '_$s9CoreMedia25_CMTimebaseInitTrampolineP11referencingxSo0C3Refa_tcfCTq', 
                        '_$s9CoreMedia25_CMTimebaseInitTrampolinePAAE11masterClockxSo10CMClockRefa_tKcfC', 
+                       '_$s9CoreMedia25_CMTimebaseInitTrampolinePAAE11sourceClockxSo10CMClockRefa_tKcfC', 
                        '_$s9CoreMedia25_CMTimebaseInitTrampolinePAAE14masterTimebasexSo0C3Refa_tKcfC', 
+                       '_$s9CoreMedia25_CMTimebaseInitTrampolinePAAE14sourceTimebasexSo0C3Refa_tKcfC', 
                        '_$s9CoreMedia25_CMTimebaseInitTrampolineTL', '_$s9CoreMedia26CMAttachmentBearerProtocolMp', 
                        '_$s9CoreMedia26CMAttachmentBearerProtocolP11attachmentsAA0cD11AttachmentsVvgTj', 
                        '_$s9CoreMedia26CMAttachmentBearerProtocolP11attachmentsAA0cD11AttachmentsVvgTq', 
@@ -237,12 +240,16 @@ exports:
                        '_$sSo13CMTimebaseRefa9CoreMediaE11masterClockSo07CMClockB0aSgvpMV', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE11removeTimeryySo7NSTimerCKF', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE11removeTimeryyxKSo24OS_dispatch_source_timerRzlF', 
+                       '_$sSo13CMTimebaseRefa9CoreMediaE11sourceClockSo07CMClockB0aSgvg', 
+                       '_$sSo13CMTimebaseRefa9CoreMediaE11sourceClockSo07CMClockB0aSgvpMV', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE11timeAndRateSo6CMTimea0E0_Sd4ratetvg', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE11timeAndRateSo6CMTimea0E0_Sd4ratetvpMV', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE13effectiveRateSdvg', '_$sSo13CMTimebaseRefa9CoreMediaE13effectiveRateSdvpMV', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE13setAnchorTime_09referenceG0ySo6CMTimea_AGtKF', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE14masterTimebaseABSgvg', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE14masterTimebaseABSgvpMV', 
+                       '_$sSo13CMTimebaseRefa9CoreMediaE14sourceTimebaseABSgvg', 
+                       '_$sSo13CMTimebaseRefa9CoreMediaE14sourceTimebaseABSgvpMV', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE15NotificationKeyV8rawValueAESo08CFStringB0a_tcfC', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE15NotificationKeyV8rawValueSo08CFStringB0avM', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE15NotificationKeyV8rawValueSo08CFStringB0avg', 
@@ -260,6 +267,8 @@ exports:
                        '_$sSo13CMTimebaseRefa9CoreMediaE19notificationBarrieryyKF', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE19ultimateMasterClockSo07CMClockB0avg', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE19ultimateMasterClockSo07CMClockB0avpMV', 
+                       '_$sSo13CMTimebaseRefa9CoreMediaE19ultimateSourceClockSo07CMClockB0avg', 
+                       '_$sSo13CMTimebaseRefa9CoreMediaE19ultimateSourceClockSo07CMClockB0avpMV', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE20effectiveRateChangedSo18NSNotificationNameavgZ', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE20setRateAndAnchorTime4rate06anchorI009referenceI0ySd_So6CMTimeaAItKF', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE20setTimerNextFireTime_04fireI0ySo7NSTimerC_So6CMTimeatKF', 
@@ -281,6 +290,10 @@ exports:
                        '_$sSo13CMTimebaseRefa9CoreMediaE6masterAC14CMSyncProtocol_pvg', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE6masterAC14CMSyncProtocol_pvpMV', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE6masterAC14CMSyncProtocol_pvs', 
+                       '_$sSo13CMTimebaseRefa9CoreMediaE6sourceAC14CMSyncProtocol_pvM', 
+                       '_$sSo13CMTimebaseRefa9CoreMediaE6sourceAC14CMSyncProtocol_pvg', 
+                       '_$sSo13CMTimebaseRefa9CoreMediaE6sourceAC14CMSyncProtocol_pvpMV', 
+                       '_$sSo13CMTimebaseRefa9CoreMediaE6sourceAC14CMSyncProtocol_pvs', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE6typeIDSuvgZ', '_$sSo13CMTimebaseRefa9CoreMediaE7setRateyySdKF', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE7setTimeyySo6CMTimeaKF', 
                        '_$sSo13CMTimebaseRefa9CoreMediaE8addTimer_2onySo7NSTimerC_So9NSRunLoopCtKF', 
@@ -841,6 +854,7 @@ exports:
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV15defaultFontNameAGvgZ', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV15temporalQualityAGvgZ', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV16alphaChannelModeAGvgZ', 
+                       '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV16bitsPerComponentAGvgZ', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV16pixelAspectRatioAGvgZ', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV16transferFunctionAGvgZ', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV17auxiliaryTypeInfoAGvgZ', 
@@ -852,6 +866,7 @@ exports:
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV22chromaLocationTopFieldAGvgZ', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV22verbatimISOSampleEntryAGvgZ', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV23horizontalJustificationAGvgZ', 
+                       '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV25ambientViewingEnvironmentAGvgZ', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV25chromaLocationBottomFieldAGvgZ', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV27conformsToMPEG2VideoProfileAGvgZ', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV3KeyV27masteringDisplayColorVolumeAGvgZ', 
@@ -1133,6 +1148,7 @@ exports:
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV5ValueV26propertyListRepresentationyXlvpMV', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV5ValueV26propertyListRepresentationyXlvs', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV5ValueV2eeoiySbAG_AGtFZ', 
+                       '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV5ValueV4datayAGSo06CFDataC0aFZ', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV5ValueV4hash4intoys6HasherVz_tF', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV5ValueV6VendorV03rawG0AISo08CFStringC0a_tcfC', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE10ExtensionsV5ValueV6VendorV03rawG0So08CFStringC0avM', 

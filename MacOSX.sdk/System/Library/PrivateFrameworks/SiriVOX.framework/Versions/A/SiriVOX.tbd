@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A8AD0DE7-EB17-3B99-B0E3-5AC254E5AE25
+    value:           9F82023A-A447-3182-9D96-4BEC38B55B4C
   - target:          x86_64-maccatalyst
-    value:           A8AD0DE7-EB17-3B99-B0E3-5AC254E5AE25
+    value:           9F82023A-A447-3182-9D96-4BEC38B55B4C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           76203E1E-9D5E-3E86-ABD4-3D9F9685B220
+    value:           DB9DB47D-238D-3384-A94D-17251FD39AD9
   - target:          arm64e-maccatalyst
-    value:           76203E1E-9D5E-3E86-ABD4-3D9F9685B220
+    value:           DB9DB47D-238D-3384-A94D-17251FD39AD9
 install-name:    '/System/Library/PrivateFrameworks/SiriVOX.framework/Versions/A/SiriVOX'
 current-version: 0
 compatibility-version: 0
@@ -33,10 +33,10 @@ exports:
                        _SVXBooleanGetName, _SVXButtonEventKey, _SVXButtonEventTypeGetFromName, 
                        _SVXButtonEventTypeGetIsValid, _SVXButtonEventTypeGetIsValidAndSpecified, 
                        _SVXButtonEventTypeGetName, _SVXClientInfoGetCurrent, _SVXClientInfoIsCurrent, 
-                       _SVXClientInfoKey, _SVXDeactivationContextKey, _SVXDeactivationSourceGetFromName, 
-                       _SVXDeactivationSourceGetIsValid, _SVXDeactivationSourceGetIsValidAndSpecified, 
-                       _SVXDeactivationSourceGetName, _SVXDeactivationSourceKey, 
-                       _SVXDeviceSetupContextKey, _SVXDeviceSetupCreateOptionsArray, 
+                       _SVXClientInfoKey, _SVXDeactivationContextKey, _SVXDeactivationOptionsKey, 
+                       _SVXDeactivationSourceGetFromName, _SVXDeactivationSourceGetIsValid, 
+                       _SVXDeactivationSourceGetIsValidAndSpecified, _SVXDeactivationSourceGetName, 
+                       _SVXDeactivationSourceKey, _SVXDeviceSetupContextKey, _SVXDeviceSetupCreateOptionsArray, 
                        _SVXDeviceSetupCreateSpeechSynthesisRequestForSceneWithID, 
                        _SVXDeviceSetupCreateSpeechSynthesisRequestForSiriCapabilitiesScene, 
                        _SVXDeviceSetupCreateSpeechSynthesisRequestForSiriIntroScene, 
@@ -104,12 +104,13 @@ exports:
     objc-classes:    [ SVXActivationContext, SVXAlarmAndTimerFiringContext, SVXAnnouncer, 
                        SVXButtonEvent, SVXClientInfo, SVXClientServiceConnection, 
                        SVXClientServiceManager, SVXDaemon, SVXDeactivationContext, 
-                       SVXDeviceSetupContext, SVXDeviceSetupFlow, SVXDeviceSetupFlowDisplayKeyFrame, 
-                       SVXDeviceSetupFlowScene, SVXDeviceSetupFlowSceneBuilder, SVXDeviceSetupFlowSiriCapabilitiesHint, 
-                       SVXDeviceSetupOptions, SVXMyriadDeviceManager, SVXMyriadEndpointDevice, 
-                       SVXMyriadHostDevice, SVXPlatformDependency, SVXQueuePerformer, 
-                       SVXServiceCommandResult, SVXSpeechSynthesisConfiguration, 
-                       SVXSpeechSynthesisRequest, SVXSpeechSynthesisResult, SVXSpeechSynthesisUtteranceInfo, 
+                       SVXDeactivationOptions, SVXDeviceSetupContext, SVXDeviceSetupFlow, 
+                       SVXDeviceSetupFlowDisplayKeyFrame, SVXDeviceSetupFlowScene, 
+                       SVXDeviceSetupFlowSceneBuilder, SVXDeviceSetupFlowSiriCapabilitiesHint, 
+                       SVXDeviceSetupOptions, SVXMyriadDeviceManager, SVXMyriadHostDevice, 
+                       SVXPlatformDependency, SVXQueuePerformer, SVXServiceCommandResult, 
+                       SVXSpeechSynthesisConfiguration, SVXSpeechSynthesisRequest, 
+                       SVXSpeechSynthesisResult, SVXSpeechSynthesisUtteranceInfo, 
                        SVXSpeechSynthesisWordTiming, SVXStoreDemo, SVXSystemEvent, 
                        SVXTStubExpressionParsingService, SVXTaskContext, _SVXAddViewsExpressionParser, 
                        _SVXRemoteExpressionParsingService ]

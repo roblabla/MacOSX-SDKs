@@ -1,7 +1,7 @@
 /*
 	NSPrintPanel.h
 	Application Kit
-	Copyright (c) 1994-2019, Apple Inc.
+	Copyright (c) 1994-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -70,7 +70,7 @@ APPKIT_EXTERN NSPrintPanelAccessorySummaryKey const NSPrintPanelAccessorySummary
 
 @end
 
-
+NS_SWIFT_UI_ACTOR
 @interface NSPrintPanel : NSObject
 
 /* Create a new NSPrintPanel.

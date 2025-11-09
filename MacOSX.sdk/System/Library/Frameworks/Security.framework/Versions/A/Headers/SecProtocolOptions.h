@@ -34,6 +34,8 @@
 #include <dispatch/dispatch.h>
 #include <os/object.h>
 
+#define SEC_PROTOCOL_CERT_COMPRESSION_DEFAULT 1
+
 /*!
  * The following diagram shows how clients interact with sec_protocol_options
  * and sec_protocol_metadata when configuring and using network security protocols.
@@ -290,6 +292,19 @@ sec_protocol_options_get_default_max_dtls_protocol_version(void);
 API_UNAVAILABLE(macos, ios, watchos, tvos)
 bool
 sec_protocol_options_get_enable_encrypted_client_hello(sec_protocol_options_t options);
+
+/*!
+ * @function sec_protocol_options_get_quic_use_legacy_codepoint
+ *
+ * @abstract
+ *      Check whether the QUIC legacy codepoint has been enabled.
+ *
+ * @return A boolean that indicates whether or not the QUIC legacy codepoint has been
+ *         enabled.
+ */
+API_UNAVAILABLE(macos, ios, watchos, tvos)
+bool
+sec_protocol_options_get_quic_use_legacy_codepoint(sec_protocol_options_t options);
 
 /*!
  * @function sec_protocol_options_add_tls_application_protocol
@@ -586,8 +601,7 @@ sec_protocol_options_set_peer_authentication_optional(sec_protocol_options_t opt
  *
  * @abstract
  *      For experimental use only. When this is enabled, the Encrypted Client Hello extension will be sent on the Client
- *      Hello if TLS 1.3 is among the supported TLS versions. Default false for clients; always false for servers (servers
- *      ignore this option).
+ *      Hello if TLS 1.3 is among the supported TLS versions. Default false.
  *
  * @param options
  *      A `sec_protocol_options_t` instance.
@@ -598,6 +612,22 @@ sec_protocol_options_set_peer_authentication_optional(sec_protocol_options_t opt
 API_UNAVAILABLE(macos, ios, watchos, tvos)
 void
 sec_protocol_options_set_enable_encrypted_client_hello(sec_protocol_options_t options, bool enable_encrypted_client_hello);
+
+/*!
+ * @function sec_protocol_options_set_quic_use_legacy_codepoint
+ *
+ * @abstract
+ *      Set QUIC to use the legacy codepoint. Defaults to true.
+ *
+ * @param options
+ *      A `sec_protocol_options_t` instance.
+ *
+ * @param quic_use_legacy_codepoint
+ *      A boolean to enable/disable the legacy codepoint.
+ */
+API_UNAVAILABLE(macos, ios, watchos, tvos)
+void
+sec_protocol_options_set_quic_use_legacy_codepoint(sec_protocol_options_t options, bool quic_use_legacy_codepoint);
 
 #ifdef __BLOCKS__
 

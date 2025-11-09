@@ -134,6 +134,14 @@ CV_EXPORT CFArrayRef CF_RETURNS_RETAINED CV_NULLABLE CVPixelFormatDescriptionArr
 /* Register a new pixel format with CoreVideo */
 CV_EXPORT void CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType(CFDictionaryRef CV_NONNULL description, OSType pixelFormat) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
+/*!
+	@function   CVIsCompressedPixelFormatAvailable
+	@abstract   Checks if a compressed pixel format is supported on the current platform.
+	@param      pixelFormatType compressed pixel format.
+	@result     True if pixel format is supported on the current platform.
+*/
+CV_EXPORT Boolean CVIsCompressedPixelFormatAvailable( OSType pixelFormatType ) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
+
 #if COREVIDEO_SUPPORTS_DIRECT3D
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatDirect3DFormat;
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatDirect3DType;

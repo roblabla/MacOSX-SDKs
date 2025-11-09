@@ -1,7 +1,7 @@
 /*
     NSWindowController.h
     Application Kit
-    Copyright (c) 1997-2019, Apple Inc.
+    Copyright (c) 1997-2021, Apple Inc.
     All rights reserved.
 */
 
@@ -50,7 +50,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 */
 @property(copy) NSWindowFrameAutosaveName windowFrameAutosaveName;
 
-/* If this is set to YES then new windows loaded from nibs (only windows from nibs) will be cascaded based on the original frame of the window from the nib.
+/* If this is set to YES then new windows will be cascaded based on the original frame of the window.
 */
 @property BOOL shouldCascadeWindows;
 

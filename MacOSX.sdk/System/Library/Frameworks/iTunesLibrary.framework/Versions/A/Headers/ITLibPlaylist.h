@@ -1,6 +1,6 @@
 /*!
 	@file		ITLibPlaylist.h
-	@copyright	© 2012-2016 Apple Inc.
+	@copyright	© 2012-2021 Apple Inc.
  */
 
 #import <iTunesLibrary/ITLibMediaEntity.h>
@@ -123,8 +123,8 @@ ITLIB_EXPORT @interface ITLibPlaylist : ITLibMediaEntity
 /*! @abstract The name or title of this playlist. */
 @property (readonly, nonatomic, copy) NSString* name;
 
-/*! @abstract Whether this playlist is a master playlist. */
-@property (readonly, nonatomic, assign, getter=isMaster) BOOL master;
+/*! @abstract Whether this playlist is the primary playlist. */
+@property (readonly, nonatomic, assign, getter=isPrimary) BOOL primary API_AVAILABLE(macos(12.0));
 
 /*! @abstract The unique identifier of this playlist' parent. */
 @property (readonly, nonatomic, retain, nullable) NSNumber* parentID;
@@ -144,6 +144,9 @@ ITLIB_EXPORT @interface ITLibPlaylist : ITLibMediaEntity
 /*! @abstract The kind of this playlist. */
 @property (readonly, nonatomic, assign) ITLibPlaylistKind kind;
 
+/*! @abstract Whether this playlist is the primary playlist. */
+@property (readonly, nonatomic, assign, getter=isMaster) BOOL master API_DEPRECATED_WITH_REPLACEMENT("primary", macos(10.6, API_TO_BE_DEPRECATED));
+
 @end
 
 /*!
@@ -158,8 +161,8 @@ ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibPlaylistPropertyAllItemsPlaylist
 /*! @constant ITLibPlaylistPropertyDistinguisedKind. */
 ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibPlaylistPropertyDistinguisedKind;
 
-/*! @constant ITLibPlaylistPropertyMaster. */
-ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibPlaylistPropertyMaster;
+/*! @constant ITLibPlaylistPropertyPrimary. */
+ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibPlaylistPropertyPrimary API_AVAILABLE(macos(12.0));
 
 /*! @constant ITLibPlaylistPropertyParentPersistentID. */
 ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibPlaylistPropertyParentPersistentID;
@@ -172,5 +175,8 @@ ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibPlaylistPropertyItems;
 
 /*! @constant ITLibPlaylistPropertyFolder. */
 ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibPlaylistPropertyKind;
+
+/*! @constant ITLibPlaylistPropertyMaster. */
+ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibPlaylistPropertyMaster API_DEPRECATED_WITH_REPLACEMENT("ITLibPlaylistPropertyPrimary", macos(10.6, API_TO_BE_DEPRECATED));
 
 NS_ASSUME_NONNULL_END

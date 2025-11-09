@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FA4C5756-08E6-3962-BFA8-9CF834636C2E
+    value:           742F2136-6115-33AB-93B1-027CAF23BA3B
   - target:          x86_64-maccatalyst
-    value:           FA4C5756-08E6-3962-BFA8-9CF834636C2E
+    value:           742F2136-6115-33AB-93B1-027CAF23BA3B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BD01B91B-841D-3316-A3A6-F1B405D85C10
+    value:           74FF1B83-51C1-3348-B922-991A86B7B542
   - target:          arm64e-maccatalyst
-    value:           BD01B91B-841D-3316-A3A6-F1B405D85C10
+    value:           74FF1B83-51C1-3348-B922-991A86B7B542
 install-name:    '/System/Library/Frameworks/EventKit.framework/Versions/A/EventKit'
-current-version: 1414.3.1
+current-version: 1437
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
@@ -94,15 +94,24 @@ exports:
                        _EKTravelEngineLogInitialize, _EKTravelEngineThrottleLogHandle, 
                        _EKTravelLookupErrorDomain, _EKUtils_AdjustedAttendeeAddress, 
                        _EKViewModelAccountDisplayOrderKey, _EKViewModelChangedNotification, 
-                       _EKViewModelDisabledCalendarsKey, _EKViewModelDomain, __EKCalendarURLScheme, 
+                       _EKViewModelDisabledCalendarsKey, _EKViewModelDomain, _EKVirtualConferenceInfoDetailsKey, 
+                       _EKVirtualConferenceInfoTitleKey, _EKVirtualConferenceInfoTypeIdentifierKey, 
+                       _EKVirtualConferenceInvalidationResultFailed, _EKVirtualConferenceInvalidationResultKey, 
+                       _EKVirtualConferenceInvalidationResultSucceeded, _EKVirtualConferenceJoinMethodTitleKey, 
+                       _EKVirtualConferenceJoinMethodTypeIdentifierKey, _EKVirtualConferenceJoinMethodURLKey, 
+                       _EKVirtualConferenceRequestRoomTypeIdentifier, _EKVirtualConferenceRequestTypeJoinMethodsForRoomType, 
+                       _EKVirtualConferenceRequestTypeKey, _EKVirtualConferenceRequestTypeRoomTypes, 
+                       _EKVirtualConferenceRequestTypeURLInvalidate, _EKVirtualConferenceRequestURLParameterForInvalidation, 
+                       _EKVirtualConferenceRoomTypeIdentifierKey, _EKVirtualConferenceRoomTypeTitleKey, 
+                       _EKVirtualConferenceTypeIdentifierKey, __EKCalendarURLScheme, 
                        __EKEventURLScheme, __EKReminderURLHost, __EKReminderURLScheme, 
                        __bitmaskContainsOption, __bitmaskExclusivelyMatchesOption, 
                        __validMoveEventRequirementsCombination, _barrierSyncBool, 
                        _barrierSyncIfQueueNotNil, _dispatch_async_main_if_necessary, 
                        _dispatch_queue_create_recursive_concurrent, _dispatch_sync_recursive, 
-                       _kEKCalendarItemNotesPropertyName, _kEKCalendarItemStructuredLocationPropertyName, 
-                       _kEKCalendarItemURLPropertyName, _stringFromEKEntityType, 
-                       _syncBoolIfQueueNotNil, _syncIfQueueNotNil ]
+                       _gondolaDefaultExtensionName, _kEKCalendarItemNotesPropertyName, 
+                       _kEKCalendarItemStructuredLocationPropertyName, _kEKCalendarItemURLPropertyName, 
+                       _stringFromEKEntityType, _syncBoolIfQueueNotNil, _syncIfQueueNotNil ]
     objc-classes:    [ EKActionsAccounting, EKAlarm, EKAttachment, EKAttendee, EKAvailabilityCache, 
                        EKAvailabilityCachedSpanRange, EKAvailabilitySpan, EKAvailabilityUtilities, 
                        EKBackingObjectsTracker, EKBackingStore, EKBatchChangeInfo, 
@@ -113,19 +122,20 @@ exports:
                        EKCalendarSharedCalendarNotification, EKCalendarStoreBackingStore, 
                        EKCalendarSuggestionNotification, EKCalendarVisibilityManager, 
                        EKChangeListener, EKChangeSet, EKChangeTrackingClientId, EKCompatibility, 
-                       EKConflictDetails, EKConflictScanJob, EKConflictScanner, EKCoreDataFaultDelegate, 
-                       EKCreateEventIntent, EKCreateEventIntentResponse, EKCredentials, 
-                       EKDataProtectionObserver, EKDebugPreferences, EKDiff, EKDirectoryLocation, 
-                       EKDirectoryPerson, EKDirectoryRecord, EKDirectorySearchOperation, 
-                       EKDirectorySearchQuery, EKDirectorySearchResultSet, EKDuetSignalEventSerializer, 
-                       EKEphemeralCacheEventStoreProvider, EKEvent, EKEventActionHandler, 
-                       EKEventOccurrenceCache, EKEventRangePredicate, EKEventSliceInfo, 
-                       EKEventStore, EKFeatureSet, EKFrozenAlarm, EKFrozenCalendar, 
-                       EKFrozenCalendarItem, EKFrozenCalendarSource, EKFrozenEvent, 
-                       EKFrozenObject, EKFrozenReminder, EKICSImporter, EKInviteeAlternativeTime, 
-                       EKInviteeAlternativeTimeSearcher, EKJunkInvitationProtocol_Shared, 
-                       EKManagedObjectContext, EKMutableTravelEngineHypothesis, EKObject, 
-                       EKObjectChangeSummarizer, EKObjectPersistentChangesModel, 
+                       EKConferenceDeserializationResult, EKConferencePersistence, 
+                       EKConferenceUtils, EKConflictDetails, EKConflictScanJob, EKConflictScanner, 
+                       EKCoreDataFaultDelegate, EKCreateEventIntent, EKCreateEventIntentResponse, 
+                       EKCredentials, EKDataProtectionObserver, EKDebugPreferences, 
+                       EKDiff, EKDirectoryLocation, EKDirectoryPerson, EKDirectoryRecord, 
+                       EKDirectorySearchOperation, EKDirectorySearchQuery, EKDirectorySearchResultSet, 
+                       EKDuetSignalEventSerializer, EKEphemeralCacheEventStoreProvider, 
+                       EKEvent, EKEventActionHandler, EKEventOccurrenceCache, EKEventRangePredicate, 
+                       EKEventSliceInfo, EKEventStore, EKFeatureSet, EKFrozenAlarm, 
+                       EKFrozenCalendar, EKFrozenCalendarItem, EKFrozenCalendarSource, 
+                       EKFrozenEvent, EKFrozenObject, EKFrozenReminder, EKICSImporter, 
+                       EKInviteeAlternativeTime, EKInviteeAlternativeTimeSearcher, 
+                       EKJunkInvitationProtocol_Shared, EKManagedObjectContext, EKMutableTravelEngineHypothesis, 
+                       EKObject, EKObjectChangeSummarizer, EKObjectPersistentChangesModel, 
                        EKOccurrenceCacheLocationSearch, EKOfficeHour, EKOrganizer, 
                        EKParticipant, EKParticipantForSorting, EKPersistentHistoryTransactionChangeSummary, 
                        EKPersistentHistoryTransactionChangeSummaryModel, EKPredicate, 
@@ -137,7 +147,11 @@ exports:
                        EKSecureKeyedArchiverSerializer, EKSerializableEvent, EKSerializableObject, 
                        EKSharee, EKSource, EKSourceConstraints, EKStructuredLocation, 
                        EKSubscribedCalendar, EKSuggestedEventInfo, EKTimedEventStorePurger, 
-                       EKTravelEngineHypothesis, EKTravelEngineUtilities, EKTravelLookupManager ]
+                       EKTravelEngineHypothesis, EKTravelEngineUtilities, EKTravelLookupManager, 
+                       EKVirtualConference, EKVirtualConferenceDescriptor, EKVirtualConferenceExtensionContext, 
+                       EKVirtualConferenceJoinMethod, EKVirtualConferenceProvider, 
+                       EKVirtualConferenceRoomType, EKVirtualConferenceRoomTypeDescriptor, 
+                       EKVirtualConferenceURLDescriptor ]
     objc-ivars:      [ EKEventRangePredicate._endDate, EKEventRangePredicate._exclusionOptions, 
                        EKEventRangePredicate._faultingOption, EKEventRangePredicate._prefetchHint, 
                        EKEventRangePredicate._startDate, EKEventRangePredicate._timeZone, 

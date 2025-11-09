@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BE7C8BEB-C395-3B25-A62E-117E5B10BD95
+    value:           EB96E0FE-0ED1-3C9D-9693-457F881498DE
   - target:          x86_64-maccatalyst
-    value:           BE7C8BEB-C395-3B25-A62E-117E5B10BD95
+    value:           EB96E0FE-0ED1-3C9D-9693-457F881498DE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           68992E3C-031C-3A80-B676-AF668047BDB8
+    value:           18F1F459-F06B-3986-BF23-CCAA49828845
   - target:          arm64e-maccatalyst
-    value:           68992E3C-031C-3A80-B676-AF668047BDB8
+    value:           18F1F459-F06B-3986-BF23-CCAA49828845
 install-name:    '/System/Library/PrivateFrameworks/USDKit.framework/Versions/A/USDKit'
-current-version: 42.3
+current-version: 48
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIFbvE, __ZTIN3rml16versioned_objectE, __ZTIN3rml3jobE, 
@@ -70,7 +70,7 @@ exports:
                        _USKRoleTypeVector, _USKSchemaTypeARAnchoringAPI, _USKSchemaTypeBindingAPI, 
                        _USKSchemaTypeMaterialBindingAPI, _USKSchemaTypePhysicsColliderAPI, 
                        _USKSchemaTypePhysicsMaterialAPI, _USKSchemaTypePhysicsRigidBodyAPI, 
-                       _USKSchemaTypeUnknown, _USKShaderNodeTypeMeshAttributeReader, 
+                       _USKSchemaTypeSkelBindingAPI, _USKSchemaTypeUnknown, _USKShaderNodeTypeMeshAttributeReader, 
                        _USKShaderNodeTypePreviewSurface, _USKShaderNodeTypeTextureReader, 
                        _USKShaderNodeTypeUVTransformReader, _USKShaderNodeTypeUnknown ]
     objc-classes:    [ USKData, USKLayerOffset, USKNode, USKNodeSiblingIterator, 

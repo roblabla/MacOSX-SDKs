@@ -1,7 +1,7 @@
 /*
 	NSCell.h
 	Application Kit
-	Copyright (c) 1994-2019, Apple Inc.
+	Copyright (c) 1994-2021, Apple Inc.
 	All rights reserved.
 */
 
@@ -95,6 +95,7 @@ typedef NS_ENUM(NSUInteger, NSControlSize) {
     NSControlSizeLarge API_AVAILABLE(macos(11.0)) = 3
 };
 
+NS_SWIFT_UI_ACTOR
 @interface NSCell : NSObject <NSCopying, NSCoding, NSUserInterfaceItemIdentification, NSAccessibilityElement, NSAccessibility>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

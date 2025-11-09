@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A5368516-8B01-3292-AE83-35E3E18859F6
+    value:           48E44105-0B85-3E6A-B333-B9D15CC1B1EA
   - target:          x86_64-maccatalyst
-    value:           A5368516-8B01-3292-AE83-35E3E18859F6
+    value:           48E44105-0B85-3E6A-B333-B9D15CC1B1EA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           67EAFDE5-F187-3E60-A664-E552D08AE09C
+    value:           5656C395-0E11-3868-A087-0C76695E22F5
   - target:          arm64e-maccatalyst
-    value:           67EAFDE5-F187-3E60-A664-E552D08AE09C
+    value:           5656C395-0E11-3868-A087-0C76695E22F5
 install-name:    '/usr/lib/libTelephonyUtilDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -47,16 +47,16 @@ exports:
                        _TelephonyUtilBinToHex, _TelephonyUtilBinToHexGetBufferSize, 
                        _TelephonyUtilDebugRegisterDelegate, _TelephonyUtilDebugSetFlags, 
                        _TelephonyUtilDecodeHexWithDefault, _TelephonyUtilEncodeHex, 
-                       _TelephonyUtilGetSystemTime, _TelephonyUtilHexToBin, _TelephonyUtilLogBinaryToBuffer, 
-                       _TelephonyUtilLogGetBufferSize, _TelephonyUtilParseHardwareModel, 
-                       _TelephonyUtilRingBufferExtractFD, _TelephonyUtilRingBufferExtractRaw, 
-                       _TelephonyUtilRingBufferGetLinearReadRemaining, _TelephonyUtilRingBufferGetLinearWriteRemaining, 
-                       _TelephonyUtilRingBufferGetSize, _TelephonyUtilRingBufferInitialize, 
-                       _TelephonyUtilRingBufferInsertFDUnblockable, _TelephonyUtilRingBufferInsertRaw, 
-                       _TelephonyUtilRingBufferInsertTransport, _TelephonyUtilRingBufferLinearize, 
-                       _TelephonyUtilRingBufferReset, _TelephonyUtilRingBufferSkip, 
-                       _TelephonyUtilRunCommand, _TelephonyUtilRunCommandExt, _TelephonyUtilStrlcpy, 
-                       _TelephonyUtilSystemMachTime, _TelephonyUtilTransportFree, 
+                       _TelephonyUtilGetSystemTime, _TelephonyUtilGetSystemWakeReason, 
+                       _TelephonyUtilHexToBin, _TelephonyUtilLogBinaryToBuffer, _TelephonyUtilLogGetBufferSize, 
+                       _TelephonyUtilParseHardwareModel, _TelephonyUtilRingBufferExtractFD, 
+                       _TelephonyUtilRingBufferExtractRaw, _TelephonyUtilRingBufferGetLinearReadRemaining, 
+                       _TelephonyUtilRingBufferGetLinearWriteRemaining, _TelephonyUtilRingBufferGetSize, 
+                       _TelephonyUtilRingBufferInitialize, _TelephonyUtilRingBufferInsertFDUnblockable, 
+                       _TelephonyUtilRingBufferInsertRaw, _TelephonyUtilRingBufferInsertTransport, 
+                       _TelephonyUtilRingBufferLinearize, _TelephonyUtilRingBufferReset, 
+                       _TelephonyUtilRingBufferSkip, _TelephonyUtilRunCommand, _TelephonyUtilRunCommandExt, 
+                       _TelephonyUtilStrlcpy, _TelephonyUtilSystemMachTime, _TelephonyUtilTransportFree, 
                        _TelephonyUtilUnblockableReadToCompletionWithTimeout, _TelephonyUtilUnblockableReadWithTimeout, 
                        _TelephonyUtilWriteToCompletion, __TelephonyCapabilitiesRadioPreferencesBasebandMaximumBootupTime, 
                        __TelephonyCapabilitiesRadioPreferencesBasebandOemProductID, 
@@ -72,8 +72,7 @@ exports:
                        __TelephonyCapabilitiesRadioPreferencesHSICGetFlushTotalTimers, 
                        __TelephonyCapabilitiesRadioPreferencesHSICGetIOSuspendTimers, 
                        __TelephonyCapabilitiesRadioPreferencesHSICGetIdleDisconnectTime, 
-                       __TelephonyCapabilitiesRadioPreferencesOverrideProfile, __TelephonyCapabilitiesRadioPreferencesPanicSupported, 
-                       __TelephonyCapabilitiesRadioPreferencesRemoteFilesystemSupported, 
+                       __TelephonyCapabilitiesRadioPreferencesOverrideProfile, __TelephonyCapabilitiesRadioPreferencesRemoteFilesystemSupported, 
                        __TelephonyCapabilitiesRadioPreferencesUARTGetDesiredBaudRate, 
                        __TelephonyCapabilitiesRadioPreferencesUARTGetInactivityTimer, 
                        __TelephonyCapabilitiesRadioPreferencesUARTReliableRetryLimit, 
@@ -194,6 +193,7 @@ exports:
                        __ZN3ctu13TextConverter25decodeCbsDataCodingSchemeEiRNS0_12MessageClassERNS0_15MessageEncodingERb, 
                        __ZN3ctu13TextConverter25decodeCbsDataCodingSchemeEiRNS0_16DcsLanguageTypesE, 
                        __ZN3ctu13TextConverter25decodeSmsDataCodingSchemeEiRNS0_12MessageClassERNS0_15MessageEncodingERbS5_S5_S5_S5_RKNS_12StaticLoggerE, 
+                       __ZN3ctu13TextConverter25decodeSmsDataCodingSchemeEiRNS0_12MessageClassERNS0_15MessageEncodingERbS5_S5_S5_S5_RNSt3__112basic_stringIcNS6_11char_traitsIcEENS6_9allocatorIcEEEE, 
                        __ZN3ctu13TextConverter28countCharactersInUtf8MessageEPKcm, 
                        __ZN3ctu13TextConverter8nextCodeEv, __ZN3ctu13TextConverter9readCharsEm, 
                        __ZN3ctu13TextConverter9setSourceEPKcm, __ZN3ctu13TextConverterC1Ev, 
@@ -300,6 +300,7 @@ exports:
                        __ZN3ctu18XpcJetsamAssertion17getAssertionCountEv, __ZN3ctu18XpcJetsamAssertion21create_default_globalEv, 
                        __ZN3ctu18XpcJetsamAssertion6tidyUpEv, __ZN3ctu18XpcJetsamAssertionC1Ev, 
                        __ZN3ctu18XpcJetsamAssertionC2Ev, __ZN3ctu18appendLeftoverBitsERNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEmPKc, 
+                       __ZN3ctu18appendLeftoverBitsERNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEyPKc, 
                        __ZN3ctu18getBytePrettyPrintEmhRKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN3ctu18symbolicate_framesEPPvm, __ZN3ctu19RequestRestResource18createIfNotPresentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERN5boost9container16container_detail12vec_iteratorIPNS1_4pairIS7_NS1_10unique_ptrINS_24RequestRestResourceStateENS1_14default_deleteISG_EEEEEELb0EEE, 
                        __ZN3ctu19RequestRestResource21handleRestMessage_GETERNS_19RestResourceContextERKNS_8PathViewE, 
@@ -318,6 +319,7 @@ exports:
                        __ZN3ctu19RequestRestResourceD2Ev, __ZN3ctu19RestResourceContextD0Ev, 
                        __ZN3ctu19RestResourceContextD1Ev, __ZN3ctu19RestResourceContextD2Ev, 
                        __ZN3ctu19appendLabelIfBitSetERNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEERmPKcmSA_, 
+                       __ZN3ctu19appendLabelIfBitSetERNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEERyPKcySA_, 
                        __ZN3ctu19bitfieldPrettyPrintEaNSt3__14pairIhhEEc, __ZN3ctu19bitfieldPrettyPrintEcNSt3__14pairIhhEEc, 
                        __ZN3ctu19bitfieldPrettyPrintEhNSt3__14pairIhhEEc, __ZN3ctu19bitfieldPrettyPrintEiNSt3__14pairIhhEEc, 
                        __ZN3ctu19bitfieldPrettyPrintEjNSt3__14pairIhhEEc, __ZN3ctu19bitfieldPrettyPrintElNSt3__14pairIhhEEc, 
@@ -410,10 +412,13 @@ exports:
                        __ZN3ctu23MemoryBufferedLogWriterD0Ev, __ZN3ctu23MemoryBufferedLogWriterD1Ev, 
                        __ZN3ctu23MemoryBufferedLogWriterD2Ev, __ZN3ctu24RestListenerDelegateBaseD0Ev, 
                        __ZN3ctu24RestListenerDelegateBaseD1Ev, __ZN3ctu24RestListenerDelegateBaseD2Ev, 
+                       __ZN3ctu24getBitFieldPrintWithDescEhRKNSt3__14pairIhhEENS0_8functionIFNS0_12basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEiEEE, 
+                       __ZN3ctu24getBitFieldPrintWithDescEhRKNSt3__14pairIhhEERKNS0_12basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN3ctu25XpcRestResourceConnectionD0Ev, __ZN3ctu25XpcRestResourceConnectionD1Ev, 
                        __ZN3ctu25XpcRestResourceConnectionD2Ev, __ZN3ctu26EmptyMockCallArgsExceptionC1EPKc, 
                        __ZN3ctu26EmptyMockCallArgsExceptionC2EPKc, __ZN3ctu26EmptyMockCallArgsExceptionD0Ev, 
                        __ZN3ctu26EmptyMockCallArgsExceptionD1Ev, __ZN3ctu26EmptyMockCallArgsExceptionD2Ev, 
+                       __ZN3ctu26getStraddlingBitFieldPrintEiiRKNSt3__16vectorIhNS0_9allocatorIhEEEEmRKNS0_12basic_stringIcNS0_11char_traitsIcEENS2_IcEEEE, 
                        __ZN3ctu27IllegalTimerParamsExceptionC1EPKc, __ZN3ctu27IllegalTimerParamsExceptionC2EPKc, 
                        __ZN3ctu27IllegalTimerParamsExceptionD0Ev, __ZN3ctu27IllegalTimerParamsExceptionD1Ev, 
                        __ZN3ctu27IllegalTimerParamsExceptionD2Ev, __ZN3ctu27install_termination_handlerENSt3__110shared_ptrINS_9LogServerEEE, 
@@ -435,7 +440,8 @@ exports:
                        __ZN3ctu2cf13plist_adapterD0Ev, __ZN3ctu2cf13plist_adapterD1Ev, 
                        __ZN3ctu2cf13plist_adapterD2Ev, __ZN3ctu2cf13plist_adapteraSERKS1_, 
                        __ZN3ctu2cf14assign_looselyERbPKv, __ZN3ctu2cf14assign_looselyERdPKv, 
-                       __ZN3ctu2cf14assign_looselyERiPKv, __ZN3ctu2cf16create_allocatorERKNS_10MallocZoneEPK13__CFAllocator, 
+                       __ZN3ctu2cf14assign_looselyERiPKv, __ZN3ctu2cf14assign_looselyERxPKv, 
+                       __ZN3ctu2cf16create_allocatorERKNS_10MallocZoneEPK13__CFAllocator, 
                        __ZN3ctu2cf4copyEP9__CFErrorRPK10__CFString, __ZN3ctu2cf4showEPKv, 
                        __ZN3ctu2cf4showEbPKv, __ZN3ctu2cf6assignERNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEP9__CFError, 
                        __ZN3ctu2cf6assignERNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEPK10__CFString, 
@@ -449,8 +455,9 @@ exports:
                        __ZN3ctu2cf6assignERjPK10__CFNumber, __ZN3ctu2cf6assignERlPK10__CFNumber, 
                        __ZN3ctu2cf6assignERmPK10__CFNumber, __ZN3ctu2cf6assignERsPK10__CFNumber, 
                        __ZN3ctu2cf6assignERtPK10__CFNumber, __ZN3ctu2cf6assignERxPK10__CFNumber, 
-                       __ZN3ctu2fs10close_fileEi, __ZN3ctu2fs10remove_dirENS_4llvm9StringRefE, 
-                       __ZN3ctu2fs11file_existsENS_4llvm9StringRefE, __ZN3ctu2fs11read_folderENS_4llvm9StringRefERNSt3__16vectorINS3_12basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEENS8_ISA_EEEEb, 
+                       __ZN3ctu2cf6assignERyPK10__CFNumber, __ZN3ctu2fs10close_fileEi, 
+                       __ZN3ctu2fs10remove_dirENS_4llvm9StringRefE, __ZN3ctu2fs11file_existsENS_4llvm9StringRefE, 
+                       __ZN3ctu2fs11read_folderENS_4llvm9StringRefERNSt3__16vectorINS3_12basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEENS8_ISA_EEEEb, 
                        __ZN3ctu2fs11remove_fileENS_4llvm9StringRefE, __ZN3ctu2fs12get_dir_nameENS_4llvm9StringRefE, 
                        __ZN3ctu2fs12is_directoryENS_4llvm9StringRefE, __ZN3ctu2fs13get_base_nameENS_4llvm9StringRefE, 
                        __ZN3ctu2fs13get_file_sizeENS_4llvm9StringRefERm, __ZN3ctu2fs13get_file_sizeERNSt3__114basic_ifstreamIcNS1_11char_traitsIcEEEERm, 
@@ -582,7 +589,7 @@ exports:
                        __ZN3ctu5power7manager23handlePowerChanged_syncEjb, __ZN3ctu5power7manager23spawnRunLoopThread_syncEv, 
                        __ZN3ctu5power7manager24registerPowerSource_syncEv, __ZN3ctu5power7manager26deregisterPowerSource_syncEv, 
                        __ZN3ctu5power7manager28removePowerSourceFromRunLoopEP11__CFRunLoop, 
-                       __ZN3ctu5power7manager3getEv, __ZN3ctu5power7manager8asStringEj, 
+                       __ZN3ctu5power7manager3getEv, __ZN3ctu5power7manager9asCStringEj, 
                        __ZN3ctu5power7managerC1Ev, __ZN3ctu5power7managerC2Ev, __ZN3ctu5power7managerD1Ev, 
                        __ZN3ctu5power7managerD2Ev, __ZN3ctu6Logger18getTrackedLogLevelEv, 
                        __ZN3ctu6Logger19updateTrackedConfigENS_8LogLevelE, __ZN3ctu6Logger20getTrackedLoggerNameEv, 

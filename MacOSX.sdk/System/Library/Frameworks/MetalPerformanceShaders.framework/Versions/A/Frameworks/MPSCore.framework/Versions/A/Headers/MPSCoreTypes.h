@@ -241,13 +241,16 @@ typedef NS_ENUM(NSUInteger, MPSImageFeatureChannelFormat)
     MPSDataTypeInt8   MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))   = MPSDataTypeSignedBit | 8,
     MPSDataTypeInt16  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))   = MPSDataTypeSignedBit | 16,
     MPSDataTypeInt32  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))   = MPSDataTypeSignedBit | 32,
-    MPSDataTypeInt64  MPS_ENUM_AVAILABLE_STARTING( macos(11.0),  ios(14.0), macCatalyst(14.0), tvos(14.0))   = MPSDataTypeSignedBit | 64,
+    MPSDataTypeInt64  MPS_ENUM_AVAILABLE_STARTING( macos(11.0),  ios(14.1), macCatalyst(14.1), tvos(14.1))   = MPSDataTypeSignedBit | 64,
 
     // unsigned integers. Range: [0, UTYPE_MAX]
     MPSDataTypeUInt8   MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))   = 8,
     MPSDataTypeUInt16  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))   = 16,
     MPSDataTypeUInt32  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))   = 32,
-    MPSDataTypeUInt64  MPS_ENUM_AVAILABLE_STARTING( macos(11.0), ios(14.0), macCatalyst(14.0), tvos(14.0))    = 64,
+    MPSDataTypeUInt64  MPS_ENUM_AVAILABLE_STARTING( macos(11.0), ios(14.1), macCatalyst(14.1), tvos(14.1))    = 64,
+
+    MPSDataTypeAlternateEncodingBit MPS_ENUM_AVAILABLE_STARTING( macos(12.0), ios(15.0), tvos(15.0))                       = 0x80000000,
+    MPSDataTypeBool                 MPS_ENUM_AVAILABLE_STARTING( macos(12.0), ios(15.0), tvos(15.0))                       = MPSDataTypeAlternateEncodingBit | 8,
 
     // unsigned normalized  (see for example Metal's unorm8 and unorm16 pixel formats). Range: [0, 1.0]
     MPSDataTypeNormalizedBit MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))   = 0x40000000,

@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, UIPreferredPresentationStyle) {
 
 @end
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UIItemProviderPresentationSizeProviding <NSObject>
 
 // Implement this on an object which conforms to the NSItemProviderWriting protocol.

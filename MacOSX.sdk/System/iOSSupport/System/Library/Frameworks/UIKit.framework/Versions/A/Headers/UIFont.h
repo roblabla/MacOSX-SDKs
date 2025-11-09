@@ -15,7 +15,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIFont : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIFont : NSObject <NSCopying, NSSecureCoding>
 
 // Returns an instance of the font associated with the text style and scaled appropriately for the user's selected content size category. See UIFontDescriptor.h for the complete list.
 + (UIFont *)preferredFontForTextStyle:(UIFontTextStyle)style API_AVAILABLE(ios(7.0));

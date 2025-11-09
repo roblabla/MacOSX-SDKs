@@ -29,7 +29,7 @@ typedef NS_OPTIONS(NSInteger, UITextDragOptions) {
 
 /* Defines a text draggable control.
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UITextDraggable <UITextInput>
 
 @property (nonatomic, weak, nullable) id<UITextDragDelegate> textDragDelegate;
@@ -52,7 +52,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
 @class UIDragItem, UITargetedDragPreview;
 @protocol UIDragSession, UITextDragRequest;
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UITextDragDelegate <NSObject>
 
 @optional
@@ -98,7 +98,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
 @end
 
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UITextDragRequest <NSObject>
 
 @required

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C8563557-9C2E-3311-841A-E21F86DF410A
+    value:           1455B8D2-D226-335F-95E5-03319B332FCF
   - target:          x86_64-maccatalyst
-    value:           C8563557-9C2E-3311-841A-E21F86DF410A
+    value:           1455B8D2-D226-335F-95E5-03319B332FCF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A4040260-EC88-3C05-8739-084C2A0BB971
+    value:           F7740914-3422-3C48-A34A-FA42638B4635
   - target:          arm64e-maccatalyst
-    value:           A4040260-EC88-3C05-8739-084C2A0BB971
+    value:           F7740914-3422-3C48-A34A-FA42638B4635
 install-name:    '/System/Library/PrivateFrameworks/LocationSupport.framework/Versions/A/LocationSupport'
-current-version: 2420.16.22
+current-version: 2652
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -87,7 +87,7 @@ exports:
                        CLIntersiloService, CLIntersiloServiceMock, CLIntersiloServiceMockPayload, 
                        CLIntersiloUniverse, CLPermissiveTimer, CLRunLoopSilo, CLServiceVendor, 
                        CLSettingsDictionary, CLSettingsManagerInternal, CLSettingsMirror, 
-                       CLSilo, CLTimer ]
+                       CLSilo, CLSiloHeartbeatRecord, CLTimer ]
     objc-ivars:      [ CLIntersiloUniverse._silo, CLIntersiloUniverse._vendor, CLSettingsDictionary._internal, 
-                       CLSilo._identifier ]
+                       CLSilo._identifier, CLSiloHeartbeatRecord._ackCount, CLSiloHeartbeatRecord._synCount ]
 ...

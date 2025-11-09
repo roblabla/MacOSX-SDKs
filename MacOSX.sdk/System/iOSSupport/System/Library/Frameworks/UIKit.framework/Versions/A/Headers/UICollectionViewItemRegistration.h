@@ -15,7 +15,7 @@ typedef void(^UICollectionViewCellRegistrationConfigurationHandler)(__kindof UIC
 
 // Cell Registration
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewCellRegistration : NSObject
 
 + (instancetype)registrationWithCellClass:(Class)cellClass configurationHandler:(UICollectionViewCellRegistrationConfigurationHandler)configurationHandler;
@@ -31,7 +31,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0))
 
 typedef void(^UICollectionViewSupplementaryRegistrationConfigurationHandler)(__kindof UICollectionReusableView * _Nonnull supplementaryView, NSString * _Nonnull elementKind, NSIndexPath * _Nonnull indexPath);
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewSupplementaryRegistration : NSObject
 
 + (instancetype)registrationWithSupplementaryClass:(Class)supplementaryClass elementKind:(NSString*)elementKind  configurationHandler:(UICollectionViewSupplementaryRegistrationConfigurationHandler)configurationHandler;

@@ -2,10 +2,12 @@
 //  ARPlaneAnchor.h
 //  ARKit
 //
-//  Copyright © 2016-2017 Apple Inc. All rights reserved.
+//  Copyright © 2016-2021 Apple Inc. All rights reserved.
 //
 
 #import <ARKit/ARAnchor.h>
+
+#define AR_PLANE_ANCHOR_PROTOCOLS
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -59,7 +61,7 @@ typedef NS_ENUM(NSInteger, ARPlaneClassification) {
  @discussion Planes are defined in the X and Z direction, where Y is the surface’s normal.
  */
 API_AVAILABLE(ios(11.0))
-@interface ARPlaneAnchor : ARAnchor
+@interface ARPlaneAnchor : ARAnchor AR_PLANE_ANCHOR_PROTOCOLS
 
 /**
  Determines whether plane classification is supported on this device.

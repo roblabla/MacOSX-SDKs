@@ -10,7 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(11.0), watchos(5.0), tvos(13.0)) @protocol UIInteraction <NSObject>
+API_AVAILABLE(ios(11.0), watchos(5.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
+@protocol UIInteraction <NSObject>
 
 @property (nonatomic, nullable, weak, readonly) __kindof UIView *view;
 

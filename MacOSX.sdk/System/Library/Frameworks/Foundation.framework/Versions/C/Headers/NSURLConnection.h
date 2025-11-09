@@ -430,7 +430,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 
     @discussion
                   This is a convenience routine that allows for
-                  asynchronous loading of an url based resource.  If
+                  asynchronous loading of a url-based resource.  If
                   the resource load is successful, the data parameter
                   to the callback will contain the resource data and
                   the error parameter will be nil.  If the resource

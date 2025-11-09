@@ -1,7 +1,7 @@
 #if !__has_include(<UIFoundation/NSTextList.h>)
 /*
     NSTextList.h
-    Copyright (c) 2004-2019, Apple Inc.
+    Copyright (c) 2004-2021, Apple Inc.
     All rights reserved.
 
     Class to represent text lists.

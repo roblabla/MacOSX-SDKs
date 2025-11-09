@@ -12,10 +12,12 @@
 #import <UIKit/NSLayoutManager.h>
 
 @class UIBezierPath;
+@class NSTextLayoutManager;
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0)) @interface NSTextContainer : NSObject <NSSecureCoding, NSTextLayoutOrientationProvider>
+UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
+@interface NSTextContainer : NSObject <NSSecureCoding, NSTextLayoutOrientationProvider>
 
 /**************************** Initialization ****************************/
 
@@ -32,6 +34,8 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0)) @interface NSTextContainer : N
 // This method should be used instead of the primitive -setLayoutManager: if you need to replace a container's layoutManager with a new one leaving the rest of the web intact.  All the NSTextContainers on the old NSLayoutManager get transferred to the new one.  This method deals with all the work of making sure the containers don't get deallocated and removing the old layoutManager from the text storage and replacing it with the new one.
 - (void)replaceLayoutManager:(NSLayoutManager *)newLayoutManager API_AVAILABLE(macos(10.0), ios(9.0));
 
+// Returns NSTextLayoutManager owning the text container. When non-nil, -layoutManager should be nil.
+@property (weak, nullable, readonly, NS_NONATOMIC_IOSONLY) NSTextLayoutManager *textLayoutManager API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /************************* Container shape properties *************************/
 

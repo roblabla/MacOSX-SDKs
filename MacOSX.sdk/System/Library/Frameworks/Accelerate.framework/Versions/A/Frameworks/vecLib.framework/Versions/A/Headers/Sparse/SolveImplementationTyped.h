@@ -216,8 +216,8 @@ _SPARSE_VARIANT(SparseOpaqueSubfactor) _SPARSE_VARIANT(_SparseInvalidSubfactor)(
   return (_SPARSE_VARIANT(SparseOpaqueSubfactor)) {
     .contents = SparseSubfactorInvalid,
     .factor = {
+      .status = SparseInternalError,
       .symbolicFactorization = { .status = SparseInternalError },
-      .status = SparseInternalError
     }
   };
 }
@@ -226,8 +226,8 @@ _SPARSE_VARIANT(SparseOpaqueSubfactor) _SPARSE_VARIANT(_SparseInvalidSubfactor)(
 static inline __attribute__((__const__))
 _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseFailedFactor)(SparseStatus_t status) {
   return (_SPARSE_VARIANT(SparseOpaqueFactorization)) {
+    .status = status,
     .symbolicFactorization = { .status = status },
-    .status = status
   };
 }
 
@@ -727,9 +727,9 @@ _SPARSE_VARIANT(SparseOpaqueSubfactor) SparseCreateSubfactor(SparseSubfactor_t s
   options = _SparseGetOptionsFromSymbolicFactor(&Factor.symbolicFactorization);
   // Check user is requesting a valid combination of subfactor and Factor
   SparseAttributes_t attributes = {
-    .kind = SparseOrdinary,
     .transpose = false,
-    .triangle = SparseLowerTriangle
+    .triangle = SparseLowerTriangle,
+    .kind = SparseOrdinary,
   };
   SparseFactorization_t type = Factor.symbolicFactorization.type;
   switch(subfactor) {

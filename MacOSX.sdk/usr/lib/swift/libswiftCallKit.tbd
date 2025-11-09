@@ -4,27 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           51C7B368-0645-31CA-82D5-2FBF2236433E
+    value:           D864B190-3183-3478-B9E9-413E486B708A
   - target:          x86_64-maccatalyst
-    value:           51C7B368-0645-31CA-82D5-2FBF2236433E
+    value:           D864B190-3183-3478-B9E9-413E486B708A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9665011D-75F9-35B1-83AB-36047CE50F60
+    value:           4447F9EE-FDF3-365E-AAFB-CE52F2E49612
   - target:          arm64e-maccatalyst
-    value:           9665011D-75F9-35B1-83AB-36047CE50F60
+    value:           4447F9EE-FDF3-365E-AAFB-CE52F2E49612
 install-name:    '/usr/lib/swift/libswiftCallKit.dylib'
-current-version: 2
+current-version: 3
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCallKit.dylib', '$ld$install_name$os10.11$@rpath/libswiftCallKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftCallKit.dylib', '$ld$install_name$os10.13$@rpath/libswiftCallKit.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCallKit.dylib', '$ld$install_name$os10.9$@rpath/libswiftCallKit.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$sSo23CXProviderConfigurationC7CallKitE20supportedHandleTypesShySo12CXHandleTypeVGvM', 
                        '_$sSo23CXProviderConfigurationC7CallKitE20supportedHandleTypesShySo12CXHandleTypeVGvg', 
                        '_$sSo23CXProviderConfigurationC7CallKitE20supportedHandleTypesShySo12CXHandleTypeVGvpMV', 

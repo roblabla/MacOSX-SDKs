@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           2BC6D6C8-4EBC-37D2-9D13-90E9F3D0E6DA
+    value:           AD0E9493-3468-3B45-841C-3F37A3F3C028
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           FD93BCAD-F3A9-36F5-BB97-553CF115BFDC
+    value:           1A053078-12D1-3A86-9B33-844A056FFB93
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_AVKit_SwiftUI.framework/Versions/A/_AVKit_SwiftUI'
 swift-abi-version: 7
 exports:

@@ -51,6 +51,9 @@ SK_EXTERN NSString * const SKStoreProductParameterITunesItemIdentifier API_AVAIL
 // SKU for the In-App Purchase product (NSString) to render at the top of the product page
 SK_EXTERN NSString * const SKStoreProductParameterProductIdentifier API_AVAILABLE(ios(11.0), macCatalyst(13.0), macos(11.0));
 
+// Identifier to specify a custom product page for a given `SKStoreProductParameterITunesItemIdentifier` (NSString).
+SK_EXTERN NSString * const SKStoreProductParameterCustomProductPageIdentifier API_AVAILABLE(ios(15.0), macCatalyst(15.0), macos(12.0));
+
 // iTunes Store affiliate token (NSString)
 SK_EXTERN NSString * const SKStoreProductParameterAffiliateToken API_AVAILABLE(ios(8.0), macCatalyst(13.0), macos(11.0));
 

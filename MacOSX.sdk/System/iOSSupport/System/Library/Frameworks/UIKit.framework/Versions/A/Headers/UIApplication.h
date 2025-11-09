@@ -23,8 +23,8 @@ typedef NS_ENUM(NSInteger, UIStatusBarStyle) {
     UIStatusBarStyleLightContent     API_AVAILABLE(ios(7.0)) = 1, // Light content, for use on dark backgrounds
     UIStatusBarStyleDarkContent     API_AVAILABLE(ios(13.0)) = 3, // Dark content, for use on light backgrounds
     
-    UIStatusBarStyleBlackTranslucent NS_ENUM_DEPRECATED_IOS(2_0, 7_0, "Use UIStatusBarStyleLightContent") = 1,
-    UIStatusBarStyleBlackOpaque      NS_ENUM_DEPRECATED_IOS(2_0, 7_0, "Use UIStatusBarStyleLightContent") = 2,
+    UIStatusBarStyleBlackTranslucent API_DEPRECATED_WITH_REPLACEMENT("UIStatusBarStyleLightContent", ios(2.0, 7.0)) = 1,
+    UIStatusBarStyleBlackOpaque      API_DEPRECATED_WITH_REPLACEMENT("UIStatusBarStyleLightContent", ios(2.0, 7.0)) = 2,
 } API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSInteger, UIStatusBarAnimation) {
@@ -72,7 +72,7 @@ typedef NS_OPTIONS(NSUInteger, UIRemoteNotificationType) {
     UIRemoteNotificationTypeSound   = 1 << 1,
     UIRemoteNotificationTypeAlert   = 1 << 2,
     UIRemoteNotificationTypeNewsstandContentAvailability = 1 << 3,
-} NS_ENUM_DEPRECATED_IOS(3_0, 8_0, "Use UserNotifications Framework's UNAuthorizationOptions for user notifications and registerForRemoteNotifications for receiving remote notifications instead.") API_UNAVAILABLE(tvos);
+} API_DEPRECATED("Use UserNotifications Framework's UNAuthorizationOptions for user notifications and registerForRemoteNotifications for receiving remote notifications instead.", ios(3.0, 8.0)) API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSUInteger, UIBackgroundFetchResult) {
     UIBackgroundFetchResultNewData,
@@ -108,7 +108,8 @@ typedef NSString * UIApplicationOpenExternalURLOptionsKey NS_TYPED_ENUM;
 @class INIntentResponse;
 @class UIScene, UIWindowScene, UISceneSession, UISceneConfiguration, UISceneConnectionOptions, UISceneActivationRequestOptions, UISceneDestructionRequestOptions;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIApplication : UIResponder
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIApplication : UIResponder
 
 @property(class, nonatomic, readonly) UIApplication *sharedApplication NS_EXTENSION_UNAVAILABLE_IOS("Use view controller based solutions where appropriate instead.");
 
@@ -132,7 +133,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIApplication : UIResponder
 - (void)sendEvent:(UIEvent *)event;
 
 @property(nullable, nonatomic,readonly) UIWindow *keyWindow API_DEPRECATED("Should not be used for applications that support multiple scenes as it returns a key window across all connected scenes", ios(2.0, 13.0));
-@property(nonatomic,readonly) NSArray<__kindof UIWindow *>  *windows;
+@property(nonatomic,readonly) NSArray<__kindof UIWindow *>  *windows API_DEPRECATED("Use UIWindowScene.windows on a relevant window scene instead", ios(2.0, 15.0));
 
 - (BOOL)sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender forEvent:(nullable UIEvent *)event;
 
@@ -304,6 +305,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIApplication : UIResponder
 
 typedef NSString * UIApplicationLaunchOptionsKey NS_TYPED_ENUM;
 
+NS_SWIFT_UI_ACTOR
 @protocol UIApplicationDelegate<NSObject>
 
 @optional
@@ -363,7 +365,7 @@ typedef NSString * UIApplicationOpenURLOptionsKey NS_TYPED_ENUM;
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler API_AVAILABLE(ios(7.0));
 
 /// Applications with the "fetch" background mode may be given opportunities to fetch updated content in the background or when it is convenient for the system. This method will be called in these situations. You should call the fetchCompletionHandler as soon as you're finished performing that operation, so the system can accurately estimate its power and data cost.
-- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler API_DEPRECATED("Use a BGAppRefreshTask in the BackgroundTasks framework instead", ios(7.0, 13.0), tvos(11.0, 13.0));
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler NS_SWIFT_DISABLE_ASYNC API_DEPRECATED("Use a BGAppRefreshTask in the BackgroundTasks framework instead", ios(7.0, 13.0), tvos(11.0, 13.0));
 
 // Called when the user activates your application by selecting a shortcut on the home screen,
 // except when -application:willFinishLaunchingWithOptions: or -application:didFinishLaunchingWithOptions returns NO.
@@ -448,6 +450,13 @@ typedef NSString * UIApplicationExtensionPointIdentifier NS_TYPED_ENUM;
 // Called when the system, due to a user interaction or a request from the application itself, removes one or more representation from the -[UIApplication openSessions] set
 // If sessions are discarded while the application is not running, this method is called shortly after the applications next launch.
 - (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions API_AVAILABLE(ios(13.0));
+
+#pragma mark -- UIKeyCommand Support --
+// UIKeyCommand system-wide keyboard shortcut localization support
+// This method will be called during application launch.
+// Return NO if the receiving delegate object wishes to opt-out of system-wide keyboard shortcut localization for all application-supplied UIKeyCommands. Return YES by default for apps linked against 15.0 and later SDK.
+- (BOOL)applicationShouldAutomaticallyLocalizeKeyCommands:(UIApplication *)application API_AVAILABLE(ios(15.0));
+
 @end
 
 @interface UIApplication(UIApplicationDeprecated)

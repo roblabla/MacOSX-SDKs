@@ -4,25 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FB31F7E6-F5BA-3A6E-A7D5-ED7256E5854E
+    value:           9AD5A86F-723C-39E0-86E6-CFFC6876BE9C
   - target:          x86_64-maccatalyst
-    value:           FB31F7E6-F5BA-3A6E-A7D5-ED7256E5854E
+    value:           9AD5A86F-723C-39E0-86E6-CFFC6876BE9C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           41DC164B-B7E4-347D-9C20-1D799BC6537F
+    value:           2BAD633F-C09B-3909-B10B-8F6E0B0131DA
   - target:          arm64e-maccatalyst
-    value:           41DC164B-B7E4-347D-9C20-1D799BC6537F
+    value:           2BAD633F-C09B-3909-B10B-8F6E0B0131DA
 install-name:    '/System/Library/PrivateFrameworks/CloudKitCode.framework/Versions/A/CloudKitCode'
-current-version: 982
+current-version: 1041.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ '_$s10Foundation4DataV12CloudKitCodeE21CKBase64URLSafeStringSSyF', 
-                       '_$s12CloudKitCode0C10ConnectionC6invoke8function7request10completionySS_xyq_Sg_s5Error_pSgtct21InternalSwiftProtobuf7MessageRzAkLR_r0_lFTj', 
+    symbols:         [ '_$s12CloudKitCode0C10ConnectionC6invoke8function7request10completionySS_xyq_Sg_s5Error_pSgtct21InternalSwiftProtobuf7MessageRzAkLR_r0_lFTj', 
                        '_$s12CloudKitCode0C10ConnectionC6invoke8function7request10completionySS_xyq_Sg_s5Error_pSgtct21InternalSwiftProtobuf7MessageRzAkLR_r0_lFTq', 
                        '_$s12CloudKitCode0C10ConnectionCAA9InvocableAAMc', '_$s12CloudKitCode0C10ConnectionCAA9InvocableAAWP', 
                        '_$s12CloudKitCode0C10ConnectionCMa', '_$s12CloudKitCode0C10ConnectionCMm', 
@@ -44,6 +43,17 @@ exports:
                        '_$s12CloudKitCode0C9OperationC17DestinationServerO5localyAEyxq__GAGm21InternalSwiftProtobuf7MessageRzAhIR_r0_lFWC', 
                        '_$s12CloudKitCode0C9OperationC17DestinationServerO7defaultyAEyxq__GAGm21InternalSwiftProtobuf7MessageRzAhIR_r0_lFWC', 
                        '_$s12CloudKitCode0C9OperationC17DestinationServerOMa', '_$s12CloudKitCode0C9OperationC17DestinationServerOMn', 
+                       '_$s12CloudKitCode0C9OperationC18DataProtectionTypeO13trustedTargetyAEyxq__GSS_SStcAGm21InternalSwiftProtobuf7MessageRzAhIR_r0_lFWC', 
+                       '_$s12CloudKitCode0C9OperationC18DataProtectionTypeO3SGXyAEyxq__GAA17RemoteMeasurementVcAGm21InternalSwiftProtobuf7MessageRzAjKR_r0_lFWC', 
+                       '_$s12CloudKitCode0C9OperationC18DataProtectionTypeO4noneyAEyxq__GAGm21InternalSwiftProtobuf7MessageRzAhIR_r0_lFWC', 
+                       '_$s12CloudKitCode0C9OperationC18DataProtectionTypeOMa', '_$s12CloudKitCode0C9OperationC18DataProtectionTypeOMn', 
+                       '_$s12CloudKitCode0C9OperationC18dataProtectionTypeAC04DatafG0Oyxq__GvMTj', 
+                       '_$s12CloudKitCode0C9OperationC18dataProtectionTypeAC04DatafG0Oyxq__GvMTq', 
+                       '_$s12CloudKitCode0C9OperationC18dataProtectionTypeAC04DatafG0Oyxq__GvgTj', 
+                       '_$s12CloudKitCode0C9OperationC18dataProtectionTypeAC04DatafG0Oyxq__GvgTq', 
+                       '_$s12CloudKitCode0C9OperationC18dataProtectionTypeAC04DatafG0Oyxq__GvpMV', 
+                       '_$s12CloudKitCode0C9OperationC18dataProtectionTypeAC04DatafG0Oyxq__GvsTj', 
+                       '_$s12CloudKitCode0C9OperationC18dataProtectionTypeAC04DatafG0Oyxq__GvsTq', 
                        '_$s12CloudKitCode0C9OperationC22perRecordProgressBlockySo10CKRecordIDC_SdtcSgvMTj', 
                        '_$s12CloudKitCode0C9OperationC22perRecordProgressBlockySo10CKRecordIDC_SdtcSgvMTq', 
                        '_$s12CloudKitCode0C9OperationC22perRecordProgressBlockySo10CKRecordIDC_SdtcSgvgTj', 
@@ -110,19 +120,7 @@ exports:
                        '_$s12CloudKitCode0C9OperationCACyxq_GycfC', '_$s12CloudKitCode0C9OperationCACyxq_Gycfc', 
                        '_$s12CloudKitCode0C9OperationCMa', '_$s12CloudKitCode0C9OperationCMn', 
                        '_$s12CloudKitCode0C9OperationCMo', '_$s12CloudKitCode0C9OperationCMu', 
-                       '_$s12CloudKitCode0C9OperationCfD', '_$s12CloudKitCode10CKLogDebug_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode10CKLogError_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode10CKLogFault_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode11CKLogOpLife_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode12CKLogPCSInfo_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode12CKLogSQLInfo_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode13CKLogPCSDebug_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode13CKLogPCSError_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode13CKLogPCSFault_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode13CKLogSQLDebug_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode13CKLogSQLError_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode13CKLogSQLFault_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode15CKCodeOperationC04codeE11ResultBlockys0G0Oyq_s5Error_pGcSgvMTj', 
+                       '_$s12CloudKitCode0C9OperationCfD', '_$s12CloudKitCode15CKCodeOperationC04codeE11ResultBlockys0G0Oyq_s5Error_pGcSgvMTj', 
                        '_$s12CloudKitCode15CKCodeOperationC04codeE11ResultBlockys0G0Oyq_s5Error_pGcSgvMTq', 
                        '_$s12CloudKitCode15CKCodeOperationC04codeE11ResultBlockys0G0Oyq_s5Error_pGcSgvgTj', 
                        '_$s12CloudKitCode15CKCodeOperationC04codeE11ResultBlockys0G0Oyq_s5Error_pGcSgvgTq', 
@@ -140,6 +138,18 @@ exports:
                        '_$s12CloudKitCode15CKCodeOperationC12functionName7requestACyxq_GSS_xSgtcfCTj', 
                        '_$s12CloudKitCode15CKCodeOperationC12functionName7requestACyxq_GSS_xSgtcfCTq', 
                        '_$s12CloudKitCode15CKCodeOperationC12functionName7requestACyxq_GSS_xSgtcfc', 
+                       '_$s12CloudKitCode15CKCodeOperationC18DataProtectionTypeO13trustedTargetyAEyxq__GSS_SStcAGm21InternalSwiftProtobuf7MessageRzAhIR_r0_lFWC', 
+                       '_$s12CloudKitCode15CKCodeOperationC18DataProtectionTypeO3SGXyAEyxq__GAA17RemoteMeasurementVcAGm21InternalSwiftProtobuf7MessageRzAjKR_r0_lFWC', 
+                       '_$s12CloudKitCode15CKCodeOperationC18DataProtectionTypeO4noneyAEyxq__GAGm21InternalSwiftProtobuf7MessageRzAhIR_r0_lFWC', 
+                       '_$s12CloudKitCode15CKCodeOperationC18DataProtectionTypeOMa', 
+                       '_$s12CloudKitCode15CKCodeOperationC18DataProtectionTypeOMn', 
+                       '_$s12CloudKitCode15CKCodeOperationC18dataProtectionTypeAC04DatagH0Oyxq__GvMTj', 
+                       '_$s12CloudKitCode15CKCodeOperationC18dataProtectionTypeAC04DatagH0Oyxq__GvMTq', 
+                       '_$s12CloudKitCode15CKCodeOperationC18dataProtectionTypeAC04DatagH0Oyxq__GvgTj', 
+                       '_$s12CloudKitCode15CKCodeOperationC18dataProtectionTypeAC04DatagH0Oyxq__GvgTq', 
+                       '_$s12CloudKitCode15CKCodeOperationC18dataProtectionTypeAC04DatagH0Oyxq__GvpMV', 
+                       '_$s12CloudKitCode15CKCodeOperationC18dataProtectionTypeAC04DatagH0Oyxq__GvsTj', 
+                       '_$s12CloudKitCode15CKCodeOperationC18dataProtectionTypeAC04DatagH0Oyxq__GvsTq', 
                        '_$s12CloudKitCode15CKCodeOperationC20perRecordResultBlockySo10CKRecordIDC_s0H0OySo0J0Cs5Error_pGtcSgvMTj', 
                        '_$s12CloudKitCode15CKCodeOperationC20perRecordResultBlockySo10CKRecordIDC_s0H0OySo0J0Cs5Error_pGtcSgvMTq', 
                        '_$s12CloudKitCode15CKCodeOperationC20perRecordResultBlockySo10CKRecordIDC_s0H0OySo0J0Cs5Error_pGtcSgvgTj', 
@@ -203,12 +213,6 @@ exports:
                        '_$s12CloudKitCode15CKCodeOperationCACyxq_Gycfc', '_$s12CloudKitCode15CKCodeOperationCMa', 
                        '_$s12CloudKitCode15CKCodeOperationCMn', '_$s12CloudKitCode15CKCodeOperationCMo', 
                        '_$s12CloudKitCode15CKCodeOperationCMu', '_$s12CloudKitCode15CKCodeOperationCfD', 
-                       '_$s12CloudKitCode15CKLogEngineInfo_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode15CKLogStatusInfo_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode16CKActivityCreate_3dsoSo14OS_os_activity_ps12StaticStringV_SVSgtF', 
-                       '_$s12CloudKitCode16CKLogEngineDebug_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode16CKLogEngineError_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode16CKLogEngineFault_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
                        '_$s12CloudKitCode16Ckcode_Proto2AnyV10clearValueyyF', '_$s12CloudKitCode16Ckcode_Proto2AnyV10hasTypeURLSbvg', 
                        '_$s12CloudKitCode16Ckcode_Proto2AnyV10hasTypeURLSbvpMV', 
                        '_$s12CloudKitCode16Ckcode_Proto2AnyV12clearTypeURLyyF', '_$s12CloudKitCode16Ckcode_Proto2AnyV13decodeMessage7decoderyxz_tK21InternalSwiftProtobuf7DecoderRzlF', 
@@ -239,16 +243,7 @@ exports:
                        '_$s12CloudKitCode17RemoteMeasurementV4dataACSg10Foundation4DataV_tcfC', 
                        '_$s12CloudKitCode17RemoteMeasurementVMa', '_$s12CloudKitCode17RemoteMeasurementVMn', 
                        '_$s12CloudKitCode17RemoteMeasurementVN', '_$s12CloudKitCode17RemoteMeasurementVyACs5UInt8V_A31EtcfC', 
-                       '_$s12CloudKitCode18CKLogSchedulerInfo_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode19CKLogDataRepairInfo_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode19CKLogSchedulerDebug_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode19CKLogSchedulerError_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode19CKLogSchedulerFault_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode19CKSupportsTestHooksSbyF', '_$s12CloudKitCode19CK_TARGET_OS_IPHONESbvg', 
-                       '_$s12CloudKitCode20CKLogDataRepairDebug_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode20CKLogDataRepairError_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode20CKLogDataRepairFault_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode22CK_TARGET_OS_SIMULATORSbvg', '_$s12CloudKitCode22Ckcode_RecordTransportV13decodeMessage7decoderyxz_tK21InternalSwiftProtobuf7DecoderRzlF', 
+                       '_$s12CloudKitCode22Ckcode_RecordTransportV13decodeMessage7decoderyxz_tK21InternalSwiftProtobuf7DecoderRzlF', 
                        '_$s12CloudKitCode22Ckcode_RecordTransportV13unknownFields21InternalSwiftProtobuf14UnknownStorageVvM', 
                        '_$s12CloudKitCode22Ckcode_RecordTransportV13unknownFields21InternalSwiftProtobuf14UnknownStorageVvg', 
                        '_$s12CloudKitCode22Ckcode_RecordTransportV13unknownFields21InternalSwiftProtobuf14UnknownStorageVvpMV', 
@@ -331,14 +326,6 @@ exports:
                        '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeVMn', '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeVN', 
                        '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeVSHAAMc', '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeVSQAAMc', 
                        '_$s12CloudKitCode24Ckcode_ProtectedEnvelopeVs28CustomDebugStringConvertibleAAMc', 
-                       '_$s12CloudKitCode28CKLogDiscretionaryDaemonInfo_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode28CKUseSystemInstalledBinariesSbyF', '_$s12CloudKitCode29CKLogDiscretionaryDaemonDebug_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode29CKLogDiscretionaryDaemonError_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode29CKLogDiscretionaryDaemonFault_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode29CKLogNotificationListenerInfo_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode30CKLogNotificationListenerDebug_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode30CKLogNotificationListenerError_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
-                       '_$s12CloudKitCode30CKLogNotificationListenerFault_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
                        '_$s12CloudKitCode30Ckcode_Proto2ProtectedEnvelopeV13decodeMessage7decoderyxz_tK21InternalSwiftProtobuf7DecoderRzlF', 
                        '_$s12CloudKitCode30Ckcode_Proto2ProtectedEnvelopeV13unknownFields21InternalSwiftProtobuf14UnknownStorageVvM', 
                        '_$s12CloudKitCode30Ckcode_Proto2ProtectedEnvelopeV13unknownFields21InternalSwiftProtobuf14UnknownStorageVvg', 
@@ -377,17 +364,15 @@ exports:
                        '_$s12CloudKitCode30Ckcode_Proto2ProtectedEnvelopeVN', '_$s12CloudKitCode30Ckcode_Proto2ProtectedEnvelopeVSHAAMc', 
                        '_$s12CloudKitCode30Ckcode_Proto2ProtectedEnvelopeVSQAAMc', 
                        '_$s12CloudKitCode30Ckcode_Proto2ProtectedEnvelopeVs28CustomDebugStringConvertibleAAMc', 
-                       '_$s12CloudKitCode9CKLogInfo_3dso_ys12StaticStringV_SVSgs7CVarArg_pdtF', 
                        '_$s12CloudKitCode9InvocableMp', '_$s12CloudKitCode9InvocableP6invoke8function7request10completionySS_qd__yqd_0_Sg_s5Error_pSgtct21InternalSwiftProtobuf7MessageRd__AkLRd_0_r0_lFTj', 
                        '_$s12CloudKitCode9InvocableP6invoke8function7request10completionySS_qd__yqd_0_Sg_s5Error_pSgtct21InternalSwiftProtobuf7MessageRd__AkLRd_0_r0_lFTq', 
                        '_$s12CloudKitCode9InvocableP6invoke8function7request10completionySS_qd__ys5Error_pSgct21InternalSwiftProtobuf7MessageRd__lFTj', 
                        '_$s12CloudKitCode9InvocableP6invoke8function7request10completionySS_qd__ys5Error_pSgct21InternalSwiftProtobuf7MessageRd__lFTq', 
                        '_$s12CloudKitCode9InvocablePAAE6invoke8function7request10completionySS_qd__ys5Error_pSgct21InternalSwiftProtobuf7MessageRd__lF', 
-                       '_$s12CloudKitCode9InvocableTL', '_$sSo10CKDatabaseC12CloudKitCodeE14codeConnection9toService5localAC0dF0CSS_SbtF', 
-                       '_$sSo13CKCodeServiceC12CloudKitCodeE13databaseScopeSo010CKDatabaseG0VSgvM', 
+                       '_$s12CloudKitCode9InvocableTL', '_$s21InternalSwiftProtobuf7MessageP12CloudKitCodeE18substituteMessages16substitutionType13substitutionsxqd__m_Sayqd__GtKAaBRd__lF', 
+                       '_$sSo10CKDatabaseC12CloudKitCodeE14codeConnection9toService5localAC0dF0CSS_SbtF', 
                        '_$sSo13CKCodeServiceC12CloudKitCodeE13databaseScopeSo010CKDatabaseG0VSgvg', 
                        '_$sSo13CKCodeServiceC12CloudKitCodeE13databaseScopeSo010CKDatabaseG0VSgvpMV', 
-                       '_$sSo13CKCodeServiceC12CloudKitCodeE13databaseScopeSo010CKDatabaseG0VSgvs', 
                        '_$sSo13CKCodeServiceC12CloudKitCodeE3addyyAC0A9OperationCyxq_G21InternalSwiftProtobuf7MessageRzAhIR_r0_lF', 
                        '_$sSo8CKRecordC12CloudKitCodeEyABSgAC22Ckcode_RecordTransportVcfC' ]
 ...

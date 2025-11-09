@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  The -constraint* methods are available in multiple flavors to support use of different relations and omission of unused options.
  
  */
-NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
+NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0)) NS_SWIFT_UI_ACTOR
 @interface NSLayoutAnchor<AnchorType> : NSObject
 // NSLayoutAnchor conforms to <NSCopying> and <NSCoding> on macOS 10.12, iOS 10, and tvOS 10
 #if (__MAC_OS_X_VERSION_MIN_REQUIRED >= 101200) || \
@@ -58,7 +58,7 @@ NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
 // Axis-specific subclasses for location anchors: top/bottom, leading/trailing, baseline, etc.
 @class NSLayoutXAxisAnchor, NSLayoutYAxisAnchor, NSLayoutDimension;
 
-NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
+NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0)) NS_SWIFT_UI_ACTOR
 @interface NSLayoutXAxisAnchor : NSLayoutAnchor<NSLayoutXAxisAnchor *>
 
 // A composite anchor for creating constraints relating horizontal distances between locations.
@@ -66,7 +66,7 @@ NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
 
 @end
 
-NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
+NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0)) NS_SWIFT_UI_ACTOR
 @interface NSLayoutYAxisAnchor : NSLayoutAnchor<NSLayoutYAxisAnchor *>
 
 // A composite anchor for creating constraints relating vertical distances between locations.
@@ -75,7 +75,7 @@ NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
 @end
 
 // This layout anchor subclass is used for sizes (width & height).
-NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
+NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0)) NS_SWIFT_UI_ACTOR
 @interface NSLayoutDimension : NSLayoutAnchor<NSLayoutDimension *>
 
 // These methods return an inactive constraint of the form thisVariable = constant.

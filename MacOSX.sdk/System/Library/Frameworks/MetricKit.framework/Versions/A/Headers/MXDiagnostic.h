@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @abstract      An abstract class that describes a diagnostic report vended by MetricKit.
 @discussion    All supported diagnostics are subclasses of MXDiagnostic.
 */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(14.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
 @interface MXDiagnostic : NSObject <NSSecureCoding>
 
 @property (readonly, strong, nonnull) MXMetaData* metaData;

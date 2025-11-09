@@ -14,17 +14,17 @@ NS_ASSUME_NONNULL_BEGIN
 @class NIDiscoveryToken;
 
 /** A sentinel value indicating that a distance measurement could not be produced */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0), watchos(7.3)) API_UNAVAILABLE(macos, tvos)
 NI_EXPORT float NINearbyObjectDistanceNotAvailable NS_SWIFT_UNAVAILABLE("Use optional value semantics");
 
 /** A sentinel value indicating that a direction measurement could not be produced */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0), watchos(7.3)) API_UNAVAILABLE(macos, tvos)
 NI_EXPORT simd_float3 NINearbyObjectDirectionNotAvailable NS_SWIFT_UNAVAILABLE("Use optional value semantics");
 
 /**
  A nearby object with distance and direction measurements.
 */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0), watchos(7.3)) API_UNAVAILABLE(macos, tvos)
 NI_EXPORT
 @interface NINearbyObject : NSObject <NSCopying, NSSecureCoding>
 

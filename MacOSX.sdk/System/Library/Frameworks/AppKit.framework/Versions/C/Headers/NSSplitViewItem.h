@@ -1,7 +1,7 @@
 /*
     NSSplitViewItem.h
     Application Kit
-    Copyright (c) 2014-2019, Apple Inc.
+    Copyright (c) 2014-2021, Apple Inc.
     All rights reserved.
 */
 

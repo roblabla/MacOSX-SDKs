@@ -4,25 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C80F47B6-A1FD-33C3-948D-915F3C1BC059
+    value:           1D584EB6-E7D6-3747-BAC3-22491B8D9E8E
   - target:          x86_64-maccatalyst
-    value:           C80F47B6-A1FD-33C3-948D-915F3C1BC059
+    value:           1D584EB6-E7D6-3747-BAC3-22491B8D9E8E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D0BD0F53-29B3-3883-81DF-D169000EB6CE
+    value:           0709335E-5871-357D-8073-61ABBBFCB4D5
   - target:          arm64e-maccatalyst
-    value:           D0BD0F53-29B3-3883-81DF-D169000EB6CE
+    value:           0709335E-5871-357D-8073-61ABBBFCB4D5
 install-name:    '/System/Library/PrivateFrameworks/KeychainCircle.framework/Versions/A/KeychainCircle'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CoreCryptoError, _KCInitialMessageDataReadFrom, _KCJoiningErrorCreate, 
-                       _KCJoiningOctagonPiggybackingEnabled, _KCPairingIntent_Type_None, 
-                       _KCPairingIntent_Type_SilentRepair, _KCPairingIntent_Type_UserDriven, 
-                       _KCSetJoiningOctagonPiggybackingEnabled, _KeychainCircleVersionNumber, 
+                       _KCPairingIntent_Type_None, _KCPairingIntent_Type_SilentRepair, 
+                       _KCPairingIntent_Type_UserDriven, _KeychainCircleVersionNumber, 
                        _KeychainCircleVersionString, _OSStatusError, _RequirementError, 
                        _decode_initialmessage, _decode_seq_data_data, _decode_seq_string_data, 
                        _decode_version1, _decode_version2, _encode_initialmessage, 

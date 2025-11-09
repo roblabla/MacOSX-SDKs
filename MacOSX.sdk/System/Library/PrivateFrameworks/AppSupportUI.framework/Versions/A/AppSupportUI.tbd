@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4D0CE198-6F14-33D2-BE8F-339BAAEC7E53
+    value:           0B711E8B-0369-3268-B961-A108C8AD4920
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A4122DBE-E3CB-3E00-8763-37558D915DD1
+    value:           719F3CF6-FC4C-3748-9162-005D4DC9BE95
 install-name:    '/System/Library/PrivateFrameworks/AppSupportUI.framework/Versions/A/AppSupportUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
  * `accessibilityDropPointDescriptors` properties in the UIAccessibilityDragging informal protocol
  * use UIAccessibilityLocationDescriptor objects to describe where drags may begin and end.
  */
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) @interface UIAccessibilityLocationDescriptor : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+@interface UIAccessibilityLocationDescriptor : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

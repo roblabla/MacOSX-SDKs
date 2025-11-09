@@ -236,7 +236,7 @@ NS_ASSUME_NONNULL_BEGIN
  *              describe the frames that will be transferred.  See
  *              @link IOUSBHostIsochronousFrame @/link for information regarding structure
  *              initialization requirements and usage.
- * @param       data An NSMutableData* to be used as the backing store for the I/O. nil will send a zero length packet.
+ * @param       data An NSMutableData* to be used as the backing store for the I/O.
  * @param       frameList Pointer first element in an IOUSBHostIsochronousFrame array.  The array
  *              must contain at least frameListCount elements.
  * @param       frameListCount Number of elements in <code>frameList</code>.
@@ -249,7 +249,9 @@ NS_ASSUME_NONNULL_BEGIN
                     frameList:(IOUSBHostIsochronousFrame*)frameList
                frameListCount:(NSUInteger)frameListCount
              firstFrameNumber:(uint64_t)firstFrameNumber
-                        error:(NSError* _Nullable*)error;
+                        error:(NSError* _Nullable*)error
+        API_DEPRECATED_WITH_REPLACEMENT("sendIORequestWithData:transactionList:transactionListCount:firstFrameNumber:error",
+                                        macos(10.15, API_TO_BE_DEPRECATED));
 
 /*!
  * @brief       Send a request on an isochronous endpoint
@@ -258,7 +260,7 @@ NS_ASSUME_NONNULL_BEGIN
  *              describe the frames that will be transferred.  See
  *              @link IOUSBHostIsochronousFrame @/link for information regarding structure
  *              initialization requirements and usage.
- * @param       data An NSMutableData* to be used as the backing store for the I/O. nil will send a zero length packet.
+ * @param       data An NSMutableData* to be used as the backing store for the I/O.
  * @param       frameList Pointer first element in an IOUSBHostIsochronousFrame array.  The array
  *              must contain at least frameListCount elements.
  * @param       frameListCount Number of elements in <code>frameList</code>.
@@ -273,7 +275,62 @@ NS_ASSUME_NONNULL_BEGIN
                   frameListCount:(NSUInteger)frameListCount
                 firstFrameNumber:(uint64_t)firstFrameNumber
                            error:(NSError* _Nullable*)error
-               completionHandler:(nullable IOUSBHostIsochronousCompletionHandler)completionHandler;
+               completionHandler:(nullable IOUSBHostIsochronousCompletionHandler)completionHandler
+        API_DEPRECATED_WITH_REPLACEMENT("enqueueIORequestWithData:transactionList:transactionListCount:firstFrameNumber:error:completionHandler",
+                                        macos(10.15, API_TO_BE_DEPRECATED));
+
+/*!
+ * @brief       Send a request on an isochronous endpoint
+ * @discussion  This method is used to issue isochronous requests. The caller allocates and
+ *              initializes an array of IOUSBHostIsochronousTransaction structures, which is used to
+ *              describe the frames that will be transferred. See
+ *              @link IOUSBHostIsochronousTransaction @/link for information regarding structure
+ *              initialization requirements and usage.
+ * @param       data An NSMutableData* to be used as the backing store for the I/O.
+ * @param       transactionList Pointer to the first element in an IOUSBHostIsochronousTransaction
+ *              array.  The array must contain at least transactionListCount elements.
+ * @param       transactionListCount Number of elements in <code>transactionList</code>.
+ * @param       firstFrameNumber Frame number which this request should begin on.  The current frame
+ *              number can be queried via <code>[IOUSBHostObject getFrameNumber]</code>
+ *              If 0, the transfer will start on the next available frame (XHCI only).
+ * @param       options Flags that specify additional behavior for every transaction in this transfer.
+ *              See @link IOUSBHostIsochronousTransferOptions @/link for more details.
+ * @return      YES on success, an IOReturn error code will be reported on failure
+ */
+- (BOOL)sendIORequestWithData:(NSMutableData*)data
+              transactionList:(IOUSBHostIsochronousTransaction*)transactionList
+         transactionListCount:(NSUInteger)transactionListCount
+             firstFrameNumber:(uint64_t)firstFrameNumber
+                      options:(IOUSBHostIsochronousTransferOptions)options
+                        error:(NSError* _Nullable*)error
+        API_AVAILABLE(macos(12.0));
+
+/*!
+ * @brief       Send a request on an isochronous endpoint
+ * @discussion  This method is used to issue isochronous requests.  The caller allocates and
+ *              initializes an array of IOUSBHostIsochronousTransaction structures, which is used to
+ *              describe the frames that will be transferred. See
+ *              @link IOUSBHostIsochronousTransaction @/link for information regarding structure
+ *              initialization requirements and usage.
+ * @param       data An NSMutableData* to be used as the backing store for the I/O.
+ * @param       transactionList Pointer to the first element in an IOUSBHostIsochronousTransaction
+ *              array.  The array must contain at least transactionListCount elements.
+ * @param       transactionListCount Number of elements in <code>transactionList</code>.
+ * @param       firstFrameNumber Frame number which this request should begin on.  The current frame
+ *              number can be queried via <code>[IOUSBHostObject frameNumberWithTime]</code>
+ *              If 0, the transfer will start on the next available frame (XHCI only).
+ * @param       options Flags that specify additional behavior for every transaction in this transfer.
+ * @param       completionHandler an IOUSBHostIsochronousTransactionCompletionHandler
+ * @return      YES on success, an IOReturn error code will be reported on failure
+ */
+- (BOOL)enqueueIORequestWithData:(NSMutableData*)data
+                 transactionList:(IOUSBHostIsochronousTransaction*)transactionList
+            transactionListCount:(NSUInteger)transactionListCount
+                firstFrameNumber:(uint64_t)firstFrameNumber
+                         options:(IOUSBHostIsochronousTransferOptions)options
+                           error:(NSError* _Nullable*)error
+               completionHandler:(nullable IOUSBHostIsochronousTransactionCompletionHandler)completionHandler
+        API_AVAILABLE(macos(12.0));
 
 #pragma mark Streams
 /*!

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7517863D-5C55-307F-9230-5367AE3B0B44
+    value:           24219247-E9DC-3664-B5E8-B08E41FD1D14
   - target:          x86_64-maccatalyst
-    value:           7517863D-5C55-307F-9230-5367AE3B0B44
+    value:           24219247-E9DC-3664-B5E8-B08E41FD1D14
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5BBA29E9-C617-33B3-9643-5EC2C1597150
+    value:           D6F8EA73-DA10-36BD-B709-5DB84541E990
   - target:          arm64e-maccatalyst
-    value:           5BBA29E9-C617-33B3-9643-5EC2C1597150
+    value:           D6F8EA73-DA10-36BD-B709-5DB84541E990
 install-name:    '/System/Library/Frameworks/NaturalLanguage.framework/Versions/A/NaturalLanguage'
-current-version: 84
+current-version: 100
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
@@ -31,6 +31,7 @@ exports:
                        _NLLanguageIndonesian, _NLLanguageItalian, _NLLanguageJapanese, 
                        _NLLanguageKannada, _NLLanguageKhmer, _NLLanguageKorean, _NLLanguageLao, 
                        _NLLanguageMalay, _NLLanguageMalayalam, _NLLanguageMarathi, 
+                       _NLLanguageModelArchitectureLSTM, _NLLanguageModelArchitectureTransformer, 
                        _NLLanguageMongolian, _NLLanguageNorwegian, _NLLanguageOriya, 
                        _NLLanguagePersian, _NLLanguagePolish, _NLLanguagePortuguese, 
                        _NLLanguagePunjabi, _NLLanguageRomanian, _NLLanguageRussian, 
@@ -47,10 +48,13 @@ exports:
                        _NLModelConfigurationOptionsKeyUseCRF, _NLModelConfigurationOptionsKeyUseMaxEnt, 
                        _NLModelConfigurationOptionsKeyUseRNN, _NLModelConfigurationOptionsKeyUseTransfer, 
                        _NLModelEmbeddingTypeCustom, _NLModelEmbeddingTypeDynamic, 
-                       _NLModelEmbeddingTypeStatic, _NLModelTrainerOptionsKeyMaximumIterations, 
-                       _NLModelWritingOptionsKeyAtomicWrite, _NLModelWritingOptionsKeyInputFeatureName, 
-                       _NLModelWritingOptionsKeyOutputFeatureName, _NLNaturalLanguageErrorDomain, 
-                       _NLPClassifierModelCopyData, _NLPClassifierModelCopyPredictedLabelForText, 
+                       _NLModelEmbeddingTypeStatic, _NLModelEmbeddingTypeTransformer, 
+                       _NLModelTrainerOptionsKeyMaximumIterations, _NLModelWritingOptionsKeyAtomicWrite, 
+                       _NLModelWritingOptionsKeyInputFeatureName, _NLModelWritingOptionsKeyOutputFeatureName, 
+                       _NLNaturalLanguageErrorDomain, _NLOptionsKeyAdaptationEnabled, 
+                       _NLOptionsKeyAppContext, _NLOptionsKeyArchitecture, _NLOptionsKeyGranularity, 
+                       _NLOptionsKeyLanguage, _NLOptionsKeyLocale, _NLOptionsKeyLocalization, 
+                       _NLOptionsKeyUseLMS, _NLPClassifierModelCopyData, _NLPClassifierModelCopyPredictedLabelForText, 
                        _NLPClassifierModelCopyPredictedLabelHypothesesForText, _NLPClassifierModelCopyTestResults, 
                        _NLPClassifierModelCreateTrainedModelWithData, _NLPClassifierModelCreateWithData, 
                        _NLPClassifierModelCreateWithURL, _NLPClassifierModelGetCurrentRevision, 
@@ -71,17 +75,23 @@ exports:
                        _NLPSequenceModelCreateWithURL, _NLPSequenceModelGetCurrentRevision, 
                        _NLPSequenceModelGetRevision, _NLPSequenceModelIsRevisionSupported, 
                        _NLPSequenceModelWriteCoreMLModelToURL, _NLPSequenceModelWriteCoreMLModelToURLWithOptions, 
-                       _NLPSequenceModelWriteToURL, _NLTagAdjective, _NLTagAdverb, 
-                       _NLTagAnger, _NLTagClassifier, _NLTagCloseParenthesis, _NLTagCloseQuote, 
-                       _NLTagConjunction, _NLTagDash, _NLTagDeterminer, _NLTagFear, 
-                       _NLTagHappiness, _NLTagIdiom, _NLTagInterjection, _NLTagLove, 
-                       _NLTagNoun, _NLTagNumber, _NLTagOpenParenthesis, _NLTagOpenQuote, 
-                       _NLTagOrganizationName, _NLTagOther, _NLTagOtherEmotion, _NLTagOtherPunctuation, 
-                       _NLTagOtherWhitespace, _NLTagOtherWord, _NLTagParagraphBreak, 
-                       _NLTagParticle, _NLTagPersonalName, _NLTagPlaceName, _NLTagPreposition, 
-                       _NLTagPronoun, _NLTagPunctuation, _NLTagSadness, _NLTagSchemeEmotionalState, 
-                       _NLTagSchemeInternalClass, _NLTagSchemeLanguage, _NLTagSchemeLemma, 
-                       _NLTagSchemeLexicalClass, _NLTagSchemeNameType, _NLTagSchemeNameTypeOrLexicalClass, 
+                       _NLPSequenceModelWriteToURL, _NLParameterNameCharacterLanguageModelWeight, 
+                       _NLParameterNameLexiconWeight, _NLParameterNameWordLanguageModelWeight, 
+                       _NLParameterTunerAlgorithmGaussianProcess, _NLParameterTunerAlgorithmRandom, 
+                       _NLParameterTunerOptionsKeyAlgorithm, _NLParameterTunerOptionsKeyInitialParameterValues, 
+                       _NLParameterTunerOptionsKeyMaximumIterations, _NLParameterTunerOptionsKeyMetadata, 
+                       _NLParameterTunerOptionsKeyPreferLowerScore, _NLParameterTunerOptionsKeyRandomSeed, 
+                       _NLTagAdjective, _NLTagAdverb, _NLTagAnger, _NLTagClassifier, 
+                       _NLTagCloseParenthesis, _NLTagCloseQuote, _NLTagConjunction, 
+                       _NLTagDash, _NLTagDeterminer, _NLTagFear, _NLTagHappiness, 
+                       _NLTagIdiom, _NLTagInterjection, _NLTagLove, _NLTagNoun, _NLTagNumber, 
+                       _NLTagOpenParenthesis, _NLTagOpenQuote, _NLTagOrganizationName, 
+                       _NLTagOther, _NLTagOtherEmotion, _NLTagOtherPunctuation, _NLTagOtherWhitespace, 
+                       _NLTagOtherWord, _NLTagParagraphBreak, _NLTagParticle, _NLTagPersonalName, 
+                       _NLTagPlaceName, _NLTagPreposition, _NLTagPronoun, _NLTagPunctuation, 
+                       _NLTagSadness, _NLTagSchemeEmotionalState, _NLTagSchemeInternalClass, 
+                       _NLTagSchemeLanguage, _NLTagSchemeLemma, _NLTagSchemeLexicalClass, 
+                       _NLTagSchemeNameType, _NLTagSchemeNameTypeOrLexicalClass, 
                        _NLTagSchemeScript, _NLTagSchemeSentimentScore, _NLTagSchemeTokenType, 
                        _NLTagSchemeWordEmbedding, _NLTagSentenceTerminator, _NLTagSurprise, 
                        _NLTagVerb, _NLTagWhitespace, _NLTagWord, _NLTagWordJoiner, 
@@ -97,7 +107,11 @@ exports:
                        _kNLPUseRNNKey, _kNLPUseTransferKey ]
     objc-classes:    [ NLCFROLanguageRecognizer, NLClassifierModel, NLClassifierModelDataInstance, 
                        NLDataInstance, NLDataProvider, NLDataSet, NLEmbedding, NLGazetteer, 
-                       NLLanguageModel, NLLanguageRecognizer, NLLexicon, NLLexiconCursor, 
+                       NLLMLanguageModelSession, NLLanguageModel, NLLanguageModelSession, 
+                       NLLanguageModelState, NLLanguageRecognizer, NLLexicon, NLLexiconCursor, 
                        NLLexiconEntry, NLModel, NLModelConfiguration, NLModelTrainer, 
-                       NLSequenceModel, NLSequenceModelDataInstance, NLTagger, NLTokenizer ]
+                       NLParameter, NLParameterBundle, NLParameterTuner, NLPredictionInfo, 
+                       NLProbabilityInfo, NLSequenceModel, NLSequenceModelDataInstance, 
+                       NLTagger, NLTokenIDBasedLanguageModelSession, NLTokenIDBasedLanguageModelState, 
+                       NLTokenIDConverter, NLTokenizer ]
 ...

@@ -48,6 +48,15 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
  */
 + (BOOL)supportsDataType:(MLCDataType)dataType onDevice:(MLCDevice *)device;
 
+/*! @property   deviceType
+    @abstract   The device type where this layer will be executed
+    @discussion Typically the MLCDevice passed to compileWithOptions will be the device used to execute layers in the graph.
+                If MLCDeviceTypeANE is selected, it is possible that some of the layers of the graph may not be executed on the ANE
+                but instead on the CPU or GPU.  This property can be used to determine which device type the layer will be executed on.
+ */
+@property (readonly, nonatomic) MLCDeviceType deviceType
+    MLCOMPUTE_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
+
 /* This is a virtual base class. Make MLCLayer subclass objects instead. */
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;

@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIReferenceLibraryViewController : UIViewController {}
 
 /*! Returns YES if any installed dictionary has a definition for the provided term.

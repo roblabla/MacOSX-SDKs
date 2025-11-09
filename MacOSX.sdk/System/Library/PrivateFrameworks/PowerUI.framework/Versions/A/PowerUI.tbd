@@ -3,29 +3,32 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3F85ED53-D81E-3A70-A377-919391B3F967
+    value:           7EC860D5-4F33-3360-B7AE-E66CAF92C88D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F4BDD432-DD9B-3959-A0F4-BBF34C9803A3
+    value:           925B6757-167C-3452-9191-BCA0E9D9708E
 install-name:    '/System/Library/PrivateFrameworks/PowerUI.framework/Versions/A/PowerUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _PowerUIErrorDomain, _PowerUISmartChargeClientCallisto, _PowerUISmartChargeClientPTOTool, 
                        _PowerUISmartChargeClientSettings, _PowerUISmartChargeStatusHasChangedNote, 
-                       _PowerUIVersionNumber, _PowerUIVersionString, _kAnalyticsActualUsableEligibleDuration, 
-                       _kAnalyticsEligibleForIdleBatteryLevelKey, _kAnalyticsEstimatedUsableEligibleDuration, 
-                       _kAnalyticsFullChargeDurationKey, _kAnalyticsIdleBatteryLevelKey, 
-                       _kAnalyticsIdleDurationKey, _kAnalyticsPluginDurationKey, 
-                       _kAnalyticsRecentlyInterruptedKey, _kAnalyticsTopOffDurationKey, 
+                       _PowerUIVersionNumber, _PowerUIVersionString, _kAnalyticsAbsoluteShouldHaveEngaged, 
+                       _kAnalyticsActualUsableEligibleDuration, _kAnalyticsEligibleForIdleBatteryLevelKey, 
+                       _kAnalyticsEstimatedUsableEligibleDuration, _kAnalyticsFullChargeDurationKey, 
+                       _kAnalyticsIdleBatteryLevelKey, _kAnalyticsIdleDurationKey, 
+                       _kAnalyticsPluginDate, _kAnalyticsPluginDurationKey, _kAnalyticsRecentlyInterruptedKey, 
+                       _kAnalyticsShouldHaveEngaged, _kAnalyticsTopOffDurationKey, 
                        _kAnalyticsTotalEligibleDuration, _kAnalyticsUnderChargeAvoidable, 
                        _kAnalyticsUnderChargeTLC, _kAnalyticsUnderChargeUnavoidable, 
                        _kAnalyticsVersionKey, _kIdlingFloorCheckInterval, _kMinDurationForDesktopEvaluation, 
                        _kMinWaitInterval ]
     objc-classes:    [ PowerUIBatteryMitigationManager, PowerUICalendarSignalMonitor, 
                        PowerUIDefines, PowerUIDesktopModePredictor, PowerUILocationSignalMonitor, 
-                       PowerUIMLAudioAccessoryModelPredictor, PowerUIMLTwoStageModelPredictor, 
-                       PowerUIModelPredictionContainer, PowerUIPredictorHelper, PowerUISleepWakeMonitor, 
-                       PowerUISmartChargeClient, PowerUISmartChargeManager, PowerUISmartChargeManagerUnsupported, 
+                       PowerUIMLAudioAccessoryModelPredictor, PowerUIMLMacPredictor, 
+                       PowerUIMLPhonePredictor, PowerUIMLTwoStageModelPredictor, 
+                       PowerUIMLWatchPredictor, PowerUIModelPredictionContainer, 
+                       PowerUIPredictorHelper, PowerUISleepWakeMonitor, PowerUISmartChargeClient, 
+                       PowerUISmartChargeManager, PowerUISmartChargeManagerUnsupported, 
                        PowerUISmartChargeUtilities, PowerUITrialManager, PowerUIWakeRequestSignalMonitor ]
 ...

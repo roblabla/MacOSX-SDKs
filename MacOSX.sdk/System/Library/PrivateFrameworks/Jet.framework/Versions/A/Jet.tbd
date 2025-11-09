@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           264D0552-7953-32FD-9CF4-D302CEAA05CF
+    value:           E284A32F-C11F-3E42-9200-A01C52F90CE5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1D0AB220-A947-35FC-9D25-8243C8B13034
+    value:           BF2C1516-5267-3205-AF4D-9DB0AAB889B2
 install-name:    '/System/Library/PrivateFrameworks/Jet.framework/Versions/A/Jet'
-current-version: 8.22
+current-version: 9.12
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__117bad_function_callE ]
@@ -75,13 +75,6 @@ exports:
                        __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEDv4_i, 
                        __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEf, 
                        __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEi, 
-                       __ZN11jet_context25set_vertex_constant_valueEj13simd_float2x2, 
-                       __ZN11jet_context25set_vertex_constant_valueEj13simd_float3x3, 
-                       __ZN11jet_context25set_vertex_constant_valueEj13simd_float4x4, 
-                       __ZN11jet_context25set_vertex_constant_valueEjDv2_f, __ZN11jet_context25set_vertex_constant_valueEjDv2_i, 
-                       __ZN11jet_context25set_vertex_constant_valueEjDv3_f, __ZN11jet_context25set_vertex_constant_valueEjDv3_i, 
-                       __ZN11jet_context25set_vertex_constant_valueEjDv4_f, __ZN11jet_context25set_vertex_constant_valueEjDv4_i, 
-                       __ZN11jet_context25set_vertex_constant_valueEjf, __ZN11jet_context25set_vertex_constant_valueEji, 
                        __ZN11jet_context26change_dest_stencil_formatE18jet_texture_format, 
                        __ZN11jet_context26submit_command_buffer_implEP18jet_command_buffer, 
                        __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE13simd_float2x2, 
@@ -95,13 +88,6 @@ exports:
                        __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEDv4_i, 
                        __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEf, 
                        __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEi, 
-                       __ZN11jet_context27set_fragment_constant_valueEj13simd_float2x2, 
-                       __ZN11jet_context27set_fragment_constant_valueEj13simd_float3x3, 
-                       __ZN11jet_context27set_fragment_constant_valueEj13simd_float4x4, 
-                       __ZN11jet_context27set_fragment_constant_valueEjDv2_f, __ZN11jet_context27set_fragment_constant_valueEjDv2_i, 
-                       __ZN11jet_context27set_fragment_constant_valueEjDv3_f, __ZN11jet_context27set_fragment_constant_valueEjDv3_i, 
-                       __ZN11jet_context27set_fragment_constant_valueEjDv4_f, __ZN11jet_context27set_fragment_constant_valueEjDv4_i, 
-                       __ZN11jet_context27set_fragment_constant_valueEjf, __ZN11jet_context27set_fragment_constant_valueEji, 
                        __ZN11jet_contextC2Ev, __ZN11jet_contextD0Ev, __ZN11jet_contextD1Ev, 
                        __ZN11jet_contextD2Ev, __ZN11jet_programC1Ev, __ZN11jet_programC2Ev, 
                        __ZN11jet_programD0Ev, __ZN11jet_programD1Ev, __ZN11jet_programD2Ev, 
@@ -138,10 +124,12 @@ exports:
                        __ZN17jet_context_Metal18set_vertex_samplerEP11jet_sampleri, 
                        __ZN17jet_context_Metal18set_vertex_textureEP11jet_texturei, 
                        __ZN17jet_context_Metal18set_wireframe_modeEb, __ZN17jet_context_Metal19create_stencil_modeE19jet_compare_fuction14jet_stencil_opS1_S1_jj, 
-                       __ZN17jet_context_Metal19ensureCommandBufferEb, __ZN17jet_context_Metal19set_vertex_constantEP12jet_constanti, 
+                       __ZN17jet_context_Metal19ensureCommandBufferEb, __ZN17jet_context_Metal19set_vertex_constantE18jet_component_typejjPKvi, 
+                       __ZN17jet_context_Metal19set_vertex_constantEP12jet_constanti, 
                        __ZN17jet_context_Metal20set_fragment_samplerEP11jet_sampleri, 
                        __ZN17jet_context_Metal20set_fragment_textureEP11jet_texturei, 
-                       __ZN17jet_context_Metal21getNativeCommandQueueEv, __ZN17jet_context_Metal21set_fragment_constantEP12jet_constanti, 
+                       __ZN17jet_context_Metal21getNativeCommandQueueEv, __ZN17jet_context_Metal21set_fragment_constantE18jet_component_typejjPKvi, 
+                       __ZN17jet_context_Metal21set_fragment_constantEP12jet_constanti, 
                        __ZN17jet_context_Metal21set_scheduled_handlerENSt3__18functionIFvvEEE, 
                        __ZN17jet_context_Metal21submit_command_bufferEP18jet_command_buffer, 
                        __ZN17jet_context_Metal22use_depth_stencil_modeEP22jet_depth_stencil_mode, 
@@ -181,9 +169,11 @@ exports:
                        __ZN18jet_context_OpenGL18set_vertex_samplerEP11jet_sampleri, 
                        __ZN18jet_context_OpenGL18set_vertex_textureEP11jet_texturei, 
                        __ZN18jet_context_OpenGL19create_stencil_modeE19jet_compare_fuction14jet_stencil_opS1_S1_jj, 
+                       __ZN18jet_context_OpenGL19set_vertex_constantE18jet_component_typejjPKvi, 
                        __ZN18jet_context_OpenGL19set_vertex_constantEP12jet_constanti, 
                        __ZN18jet_context_OpenGL20set_fragment_samplerEP11jet_sampleri, 
                        __ZN18jet_context_OpenGL20set_fragment_textureEP11jet_texturei, 
+                       __ZN18jet_context_OpenGL21set_fragment_constantE18jet_component_typejjPKvi, 
                        __ZN18jet_context_OpenGL21set_fragment_constantEP12jet_constanti, 
                        __ZN18jet_context_OpenGL21submit_command_bufferEP18jet_command_buffer, 
                        __ZN18jet_context_OpenGL22use_depth_stencil_modeEP22jet_depth_stencil_mode, 

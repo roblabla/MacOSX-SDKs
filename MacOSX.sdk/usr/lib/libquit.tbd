@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C213DBFE-E015-3E7F-B5D1-054B8EAEF693
+    value:           49E7FB9B-7C3F-3D30-AC80-09F2184C8434
   - target:          x86_64-maccatalyst
-    value:           C213DBFE-E015-3E7F-B5D1-054B8EAEF693
+    value:           49E7FB9B-7C3F-3D30-AC80-09F2184C8434
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           901C744D-172C-30E9-A530-85FBA271B60A
+    value:           DFF1F86D-AC8B-3B25-85F9-CB03B2B919A7
   - target:          arm64e-maccatalyst
-    value:           901C744D-172C-30E9-A530-85FBA271B60A
+    value:           DFF1F86D-AC8B-3B25-85F9-CB03B2B919A7
 install-name:    '/usr/lib/libquit.dylib'
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

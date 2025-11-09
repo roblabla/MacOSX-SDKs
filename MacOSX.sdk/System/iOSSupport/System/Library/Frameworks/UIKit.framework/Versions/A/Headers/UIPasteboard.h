@@ -27,6 +27,76 @@ UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternProb
 /// NSNumber value
 UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternNumber API_AVAILABLE(ios(14.0));
 
+/// Array of UIPasteboardDetectionResultLink values
+UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternLink API_AVAILABLE(ios(15.0));
+/// Array of UIPasteboardDetectionResultPhoneNumber values
+UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternPhoneNumber API_AVAILABLE(ios(15.0));
+/// Array of UIPasteboardDetectionResultEmailAddress values
+UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternEmailAddress API_AVAILABLE(ios(15.0));
+/// Array of UIPasteboardDetectionResultAddress values
+UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternAddress API_AVAILABLE(ios(15.0));
+/// Array of UIPasteboardDetectionResultCalendarEvent values
+UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternCalendarEvent API_AVAILABLE(ios(15.0));
+/// Array of UIPasteboardDetectionResultShipmentTrackingNumber values
+UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternShipmentTrackingNumber API_AVAILABLE(ios(15.0));
+/// Array of UIPasteboardDetectionResultFlightNumber values
+UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternFlightNumber API_AVAILABLE(ios(15.0));
+/// Array of UIPasteboardDetectionResultMoneyAmount values
+UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternMoneyAmount API_AVAILABLE(ios(15.0));
+
+
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) @interface UIPasteboardDetectionResult : NSObject
+@property(nonatomic, readonly) NSString *matchedString;
+@property(nonatomic, readonly) NSRange matchedRange;
+- (instancetype)init NS_UNAVAILABLE;
+@end
+
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) @interface UIPasteboardDetectionResultLink : UIPasteboardDetectionResult
+@property(nonatomic, readonly) NSURL *url;
+@end
+
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) @interface UIPasteboardDetectionResultPhoneNumber : UIPasteboardDetectionResult
+@property(nonatomic, readonly) NSString *phoneNumber;
+@property(nonatomic, readonly, nullable) NSString *label;
+@end
+
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) @interface UIPasteboardDetectionResultEmailAddress : UIPasteboardDetectionResult
+@property(nonatomic, readonly) NSString *emailAddress;
+@property(nonatomic, readonly, nullable) NSString *label;
+@end
+
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) @interface UIPasteboardDetectionResultAddress : UIPasteboardDetectionResult
+@property(nonatomic, readonly, nullable) NSString *street;
+@property(nonatomic, readonly, nullable) NSString *city;
+@property(nonatomic, readonly, nullable) NSString *state;
+@property(nonatomic, readonly, nullable) NSString *postalCode;
+@property(nonatomic, readonly, nullable) NSString *country;
+@end
+
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) @interface UIPasteboardDetectionResultCalendarEvent : UIPasteboardDetectionResult
+@property(nonatomic, readonly) BOOL allDay;
+@property(nonatomic, readonly, nullable) NSDate *startDate;
+@property(nonatomic, readonly, nullable) NSTimeZone *startTimeZone;
+@property(nonatomic, readonly, nullable) NSDate *endDate;
+@property(nonatomic, readonly, nullable) NSTimeZone *endTimeZone;
+@end
+
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) @interface UIPasteboardDetectionResultShipmentTrackingNumber : UIPasteboardDetectionResult
+@property(nonatomic, readonly) NSString *carrier;
+@property(nonatomic, readonly) NSString *trackingNumber;
+@end
+
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) @interface UIPasteboardDetectionResultFlightNumber : UIPasteboardDetectionResult
+@property(nonatomic, readonly) NSString *airline;
+@property(nonatomic, readonly) NSString *flightNumber;
+@end
+
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) @interface UIPasteboardDetectionResultMoneyAmount : UIPasteboardDetectionResult
+@property(nonatomic, readonly) NSString *currency;
+@property(nonatomic, readonly) double amount;
+@end
+
+
 @class UIColor, UIImage;
 
 UIKIT_EXTERN API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) @interface UIPasteboard : NSObject

@@ -2,7 +2,7 @@
 //  SCNParticleSystem.h
 //  SceneKit
 //
-//  Copyright © 2014-2020 Apple Inc. All rights reserved.
+//  Copyright © 2014-2021 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -400,6 +400,12 @@ SCN_EXPORT API_AVAILABLE(macos(10.10))
 // Specifies the receiver's fresnel exponent value. Defaults to 3. Animatable.
 // Only used if the particleImage is a cube map. The bigger the amount, the more concentrated the reflection is around the edges
 @property(nonatomic) CGFloat fresnelExponent;
+
+/*!
+ @property writeToDepthBuffer
+ @abstract Determines whether the receiver writes to the depth buffer when rendered. Defaults to NO.
+ */
+@property(nonatomic) BOOL writesToDepthBuffer API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 // Property controllers.
 @property(nonatomic, copy, nullable) NSDictionary<SCNParticleProperty, SCNParticlePropertyController *> *propertyControllers;

@@ -41,6 +41,6 @@ typedef NS_OPTIONS(NSUInteger, INPhotoAttributeOptions) {
     INPhotoAttributeOptionLoopPhoto API_AVAILABLE(ios(12.0), macos(10.14), watchos(5.0)) = (1UL << 26),
     INPhotoAttributeOptionBouncePhoto API_AVAILABLE(ios(12.0), macos(10.14), watchos(5.0)) = (1UL << 27),
     INPhotoAttributeOptionLongExposurePhoto API_AVAILABLE(ios(12.0), macos(10.14), watchos(5.0)) = (1UL << 28),
-} API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macos, tvos);
+} API_DEPRECATED("INPhotoAttributeOptions is deprecated. There is no replacement.", ios(10.0, 15.0), watchos(3.2, 8.0)) API_UNAVAILABLE(macos, tvos);
 
 #endif // INPhotoAttributeOptions_h

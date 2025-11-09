@@ -365,8 +365,8 @@ CF_ENUM(UInt32) {
 					merges the two inputs to the single output
 
 	@constant		kAudioUnitSubType_NewTimePitch
-					An audio unit that provides good quality time stretching and pitch shifting 
-					while still being very fast.
+					An audio unit that provides good quality time stretching and pitch shifting.
+					It is computationally less expensive than kAudioUnitSubType_TimePitch.
 
 	@constant		kAudioUnitSubType_AUiPodTimeOther
 					An audio unit that provides time domain time stretching.
@@ -384,20 +384,19 @@ CF_ENUM(UInt32) {
 	kAudioUnitSubType_RoundTripAAC			= 'raac',
 };
 
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_WATCH
 /*!
-	@enum			Apple converter audio unit sub types (macOS only)
+	@enum			Apple converter audio unit sub types (macOS and iOS only)
 	@constant		kAudioUnitSubType_TimePitch
-					An audio unit that can be used to have independent control of both playback
-					rate and pitch. It provides a generic view, so can be used in both a UI and 
-					programmatic context. It also comes in an Offline version so can be used to 
-					process audio files.
+					An audio unit that provides high quality time stretching and pitch shifting.
 					
 */
 CF_ENUM(UInt32) {
 	kAudioUnitSubType_TimePitch				= 'tmpt'
 };
-#elif !TARGET_OS_MACCATALYST
+#endif //!TARGET_OS_WATCH
+
+#if TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
 /*!
 	@enum			Apple converter audio unit sub types (iOS only)
 	@constant		kAudioUnitSubType_AUiPodTime
@@ -1103,23 +1102,43 @@ extern const CFStringRef kAudioComponentRegistrationsChangedNotification
 
 /*!
 	@constant kAudioComponentInstanceInvalidationNotification
-	@abstract Notification generated when an audio unit extension process exits abnormally.
+	@abstract Notification generated when the connection to an audio unit extension process
+			  is invalidated.
 	@discussion
 		Register for this notification name with `[NSNotificationCenter defaultCenter]` or
-		`CFNotificationCenterGetLocalCenter()`. The "object" refers to an AUAudioUnit instance to
-		be observed, or can be nil to observe all instances. The notification's userInfo
-		dictionary contains a key, "audioUnit", an NSValue whose pointerValue is the
-		AudioUnit or AudioComponentInstance which is wrapping the AUAudioUnit communicating with the
-		extension process. (This may be null if there is no such component instance.) For example:
+		`CFNotificationCenterGetLocalCenter()`. The "object" refers to an AUAudioUnit instance
+		to be observed, or can be nil to observe all instances.
+
+		This notification can happen for several reasons, for instance the connection being
+		invalidated or the process abnormally ending. There can be multiple notifications for
+		the same event (i.e. a terminated process will also invalidate the connection).
+
+		The notification's userInfo dictionary may contain the following keys, depending on
+		the reason for the invalidation and the platform in which it's running:
+
+		@"audioUnit", a NSValue whose pointerValue is the AudioUnit or
+		AudioComponentInstance which is wrapping the AUAudioUnit communicating with
+		the extension process. (This may be null if there is no such component instance.).
+		For example:
 
 	```
-	[[NSNotificationCenter defaultCenter] addObserverForName:(NSString *)kAudioComponentInstanceInvalidationNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+	[[NSNotificationCenter defaultCenter]
+			addObserverForName:(NSString *)kAudioComponentInstanceInvalidationNotification
+				 	    object:nil queue:nil usingBlock:^(NSNotification *note) {
 		AUAudioUnit *auAudioUnit = (AUAudioUnit *)note.object;
 		NSValue *val = note.userInfo[@"audioUnit"];
 		AudioUnit audioUnit = (AudioUnit)val.pointerValue;
-		NSLog(@"Received kAudioComponentInstanceInvalidationNotification: auAudioUnit %@, audioUnit %p", auAudioUnit, audioUnit);
+		NSLog(@"Received kAudioComponentInstanceInvalidationNotification: auAudioUnit %@, audioUnit %p",
+			auAudioUnit, audioUnit);
 	}];
 	```
+
+		@"Service PID", a NSNumber with the process ID for the service.
+		@"Host PID", a NSNumber with the process ID for the host.
+		@"Executable Path", a NSString with the path for the executable that may be responsible
+		for the abnormal exit.
+		@"Descriptions" a NSArray of NSValues representing byte encoded
+		AudioComponentDescriptions that may be responsible for the abnormal exit.
 */
 extern const CFStringRef kAudioComponentInstanceInvalidationNotification
 												API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));

@@ -1259,4 +1259,18 @@ void vfs_set_root_unmounted_cleanly(void);
 __END_DECLS
 
 
+/*
+ * Generic file handle
+ */
+#define NFS_MAX_FH_SIZE         NFSV4_MAX_FH_SIZE
+#define NFSV4_MAX_FH_SIZE       128
+#define NFSV3_MAX_FH_SIZE       64
+#define NFSV2_MAX_FH_SIZE       32
+struct fhandle {
+	unsigned int    fh_len;                         /* length of file handle */
+	unsigned char   fh_data[NFS_MAX_FH_SIZE];       /* file handle value */
+};
+typedef struct fhandle  fhandle_t;
+
+
 #endif /* !_SYS_MOUNT_H_ */

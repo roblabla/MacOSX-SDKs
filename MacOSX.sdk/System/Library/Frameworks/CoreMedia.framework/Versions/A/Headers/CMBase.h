@@ -14,10 +14,8 @@
 #include <Availability.h>
 #include <AvailabilityMacros.h>
 
-// HLS Tools builds with 10.14.4 and TARGET_OS_MACCATALYST is defined, but the rest of the code has switched to TARGET_OS_MACCATALYST, so define TARGET_OS_MACCATALYST
-// Remove this once HLS Tools starts using 10.15.  See rdar://problem/58379699
-#ifndef TARGET_OS_MACCATALYST
-#define TARGET_OS_MACCATALYST TARGET_OS_MACCATALYST
+#ifndef TARGET_OS_WINDOWS
+#define TARGET_OS_WINDOWS 0
 #endif
 
 // Pre-10.16, weak import
@@ -167,7 +165,7 @@
 #include <stddef.h>						// size_t
 
 #include <CoreFoundation/CFBase.h>		// OSStatus, Boolean, Float32, Float64, CF_NOESCAPE
-#if ! 0
+#if ! TARGET_OS_WINDOWS
 #include <CoreFoundation/CFAvailability.h>	// CF_EXTENSIBLE_STRING_ENUM
 #endif
 
@@ -189,11 +187,15 @@ extern "C" {
 #define COREMEDIA_TRUE (1 && 1)
 #define COREMEDIA_FALSE (0 && 1)
 
-
+#if TARGET_OS_WIN32
+	#define CM_EXPORT __declspec( dllimport ) extern
+	#define VT_EXPORT __declspec( dllimport ) extern
+	#define MT_EXPORT __declspec( dllimport ) extern
+#else
 	#define CM_EXPORT extern
 	#define VT_EXPORT extern
 	#define MT_EXPORT extern
-
+#endif
 
 // These have 32-bit range in a 32-bit build, and 64-bit range in a 64-bit build.
 typedef CFIndex CMItemCount;
@@ -208,7 +210,7 @@ typedef CFIndex CMItemIndex;
 	typedef uint32_t CMBaseClassVersion, CMStructVersion;
 	#define COREMEDIA_CMBASECLASS_VERSION_IS_POINTER_ALIGNED COREMEDIA_FALSE
 #else
-#if (TARGET_OS_OSX || TARGET_OS_MACCATALYST || 0) && TARGET_CPU_X86_64
+#if (TARGET_OS_OSX || TARGET_OS_MACCATALYST || TARGET_OS_WINDOWS) && TARGET_CPU_X86_64
 	typedef uint32_t CMBaseClassVersion, CMStructVersion;
 	#define COREMEDIA_CMBASECLASS_VERSION_IS_POINTER_ALIGNED COREMEDIA_FALSE
 #else

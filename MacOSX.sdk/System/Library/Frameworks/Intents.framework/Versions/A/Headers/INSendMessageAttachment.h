@@ -11,8 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(14.0), watchos(7.0))
-API_UNAVAILABLE(macos, tvos)
+API_AVAILABLE(ios(14.0), watchos(7.0), macos(12.0))
+API_UNAVAILABLE(tvos)
 @interface INSendMessageAttachment : NSObject
 
 + (INSendMessageAttachment *)attachmentWithAudioMessageFile:(INFile *)audioMessageFile;

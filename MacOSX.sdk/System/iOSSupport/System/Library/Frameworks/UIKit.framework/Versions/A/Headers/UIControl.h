@@ -68,10 +68,12 @@ typedef NS_OPTIONS(NSUInteger, UIControlState) {
 
 @class UITouch;
 @class UIEvent;
+@class UIToolTipInteraction;
 
 //______________________________________________________
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIControl : UIView
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+@interface UIControl : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -135,6 +137,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIControl : UIView
 
 /// Return a point in this control's coordinate space to which to attach the given configuration's menu.
 - (CGPoint)menuAttachmentPointForConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+
+/// Assigning a value to this property causes the tool tip to be displayed for the view. Setting the property to nil cancels the display of the tool tip for the view.
+@property (nonatomic, copy, nullable) NSString *toolTip API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
+/// Returns the control's default UIToolTipInteraction.
+@property (nonatomic, readonly, strong, nullable) UIToolTipInteraction *toolTipInteraction API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

@@ -41,7 +41,8 @@ extern "C"
 #endif
     
 #pragma pack(push, 4)
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark Property Support Types
@@ -69,7 +70,7 @@ typedef UInt32 CMIOObjectPropertyScope;
     @abstract       A CMIOObjectPropertyElement is an integer that identifies, along with the CMIOObjectPropertySelector and CMIOObjectPropertyScope, a specific piece of information
                     about a CMIOObject.
     @discussion     The element selects one of possibly many items in the section of the object in which to look for the property. Elements are numbered sequentially where 0 represents the
-                    master element. Elements are particular to an instance of a class, meaning that two instances can have different numbers of elements in the same scope. There is no
+                    main element. Elements are particular to an instance of a class, meaning that two instances can have different numbers of elements in the same scope. There is no
                     inheritance of elements.
 */
 typedef UInt32 CMIOObjectPropertyElement;
@@ -178,8 +179,8 @@ typedef void
     @discussion     
     @constant       kCMIOObjectPropertyScopeGlobal
                         The CMIOObjectPropertyScope for properties that apply to the object as a whole. All CMIOObjects have a global scope and for some it is their only scope.
-    @constant       kCMIOObjectPropertyElementMaster
-                        The CMIOObjectPropertyElement value for properties that apply to the master element or to the entire scope.
+    @constant       kCMIOObjectPropertyElementMain
+                        The CMIOObjectPropertyElement value for properties that apply to the main element or to the entire scope.
     @constant       kCMIOObjectClassID
                         The CMIOClassID that identifies the CMIOObject class.
     @constant       kCMIOObjectClassIDWildcard
@@ -190,7 +191,8 @@ typedef void
 enum
 {
     kCMIOObjectPropertyScopeGlobal      = 'glob',
-    kCMIOObjectPropertyElementMaster    = 0UL,
+    kCMIOObjectPropertyElementMain    = 0UL,
+	kCMIOObjectPropertyElementMaster API_DEPRECATED_WITH_REPLACEMENT("kCMIOObjectPropertyElementMain", macos(10.4, 12.0)) = kCMIOObjectPropertyElementMain,
     kCMIOObjectClassID                  = 'aobj',
     kCMIOObjectClassIDWildcard          = '****',
     kCMIOObjectUnknown                  = 0UL
@@ -452,7 +454,7 @@ CMIOObjectRemovePropertyListenerBlock(  CMIOObjectID                        obje
                                         CMIOObjectPropertyListenerBlock     listener) API_AVAILABLE(macos(10.8));
 
 
-
+#pragma clang diagnostic pop
 #pragma pack(pop)
     
 #if defined(__cplusplus)
