@@ -1,5 +1,5 @@
 /*	NSPortCoder.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -10,14 +10,14 @@
 
 - (BOOL)isBycopy;
 - (BOOL)isByref;
-- (NSConnection *)connection;
 - (void)encodePortObject:(NSPort *)aport;
 - (NSPort *)decodePortObject;
 
-// Transport
-+ portCoderWithReceivePort:(NSPort *)rcvPort sendPort:(NSPort *)sndPort components:(NSArray *)comps;
-- (id)initWithReceivePort:(NSPort *)rcvPort sendPort:(NSPort *)sndPort components:(NSArray *)comps;
-- (void)dispatch;
+// The following methods are deprecated. Instead of using these methods, NSPort subclasses should look up an NSConnection object using +connectionWithReceivePort:sendPort: and then ask that object to dispatch recieved component data using -dispatchWithComponents:. The NSConnection object will take care of creating the right kind of NSPortCoder object and giving it the data to decode and dispatch.
+- (NSConnection *)connection NS_DEPRECATED(10_0, 10_7, 2_0, NA);
++ portCoderWithReceivePort:(NSPort *)rcvPort sendPort:(NSPort *)sndPort components:(NSArray *)comps NS_DEPRECATED(10_0, 10_7, 2_0, NA);
+- (id)initWithReceivePort:(NSPort *)rcvPort sendPort:(NSPort *)sndPort components:(NSArray *)comps NS_DEPRECATED(10_0, 10_7, 2_0, NA);
+- (void)dispatch NS_DEPRECATED(10_0, 10_7, 2_0, NA);
 
 @end
 

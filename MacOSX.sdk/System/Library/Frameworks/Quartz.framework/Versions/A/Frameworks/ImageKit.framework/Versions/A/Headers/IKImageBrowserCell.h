@@ -16,6 +16,8 @@
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 
+@class IKImageBrowserView;
+
 typedef enum{
 	IKImageStateNoImage=0,
 	IKImageStateInvalid,
@@ -31,7 +33,7 @@ extern NSString *const IKImageBrowserCellPlaceHolderLayer;
 
 @interface IKImageBrowserCell : NSObject
 {
-	id                          _parent;//for binary compatibility with XRay => todo remove
+	__weak id                   _parent;
 	void* __strong              _ibCellReserved;
 }
 

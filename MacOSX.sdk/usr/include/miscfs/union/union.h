@@ -67,26 +67,5 @@
 #ifndef __UNION_UNION_H__
 #define __UNION_UNION_H__
 
-#include  <sys/appleapiopts.h>
-#include  <sys/cdefs.h>
-
-#ifdef __APPLE_API_PRIVATE
-struct union_args {
-	char		*target;	/* Target of loopback  */
-	int		mntflags;	/* Options on the mount */
-};
-
-#define UNMNT_ABOVE	0x0001		/* Target appears above mount point */
-#define UNMNT_BELOW	0x0002		/* Target appears below mount point */
-#define UNMNT_REPLACE	0x0003		/* Target replaces mount point */
-#ifdef FAULTFS
-#define UNMNT_FAULTIN	0x0004		/* get the files to TOT on lookup */
-#define UNMNT_OPMASK	0x0007
-#else
-#define UNMNT_OPMASK	0x0003
-#endif
-
-
-#endif /* __APPLE_API_PRIVATE */
 
 #endif /* __UNION_UNION_H__ */

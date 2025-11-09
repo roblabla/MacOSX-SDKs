@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -131,9 +131,15 @@ struct	in6_drlist {
 };
 
 
+/* valid values for stateflags */
+#define	NDDRF_INSTALLED	0x1	/* installed in the routing table */
+#define	NDDRF_IFSCOPE	0x2	/* installed as a scoped route */
+#define	NDDRF_STATIC	0x4	/* for internal use only */
+
 struct	in6_defrouter {
 	struct	sockaddr_in6 rtaddr;
 	u_char	flags;
+	u_char	stateflags;
 	u_short	rtlifetime;
 	u_long	expire;
 	u_short if_index;
@@ -198,10 +204,15 @@ struct	in6_ndifreq {
 	u_long ifindex;
 };
 
+#define MAX_RTR_SOLICITATION_DELAY	1	/* 1sec */
+#define RTR_SOLICITATION_INTERVAL	4	/* 4sec */
+
 
 /* Prefix status */
 #define NDPRF_ONLINK		0x1
 #define NDPRF_DETACHED		0x2
+#define	NDPRF_STATIC		0x100
+#define	NDPRF_IFSCOPE		0x1000
 
 /* protocol constants */
 #define MAX_RTR_SOLICITATION_DELAY	1	/*1sec*/
@@ -209,6 +220,7 @@ struct	in6_ndifreq {
 #define MAX_RTR_SOLICITATIONS		3
 
 #define ND6_INFINITE_LIFETIME		0xffffffff
+#define ND6_MAX_LIFETIME		0x7fffffff
 
 
 

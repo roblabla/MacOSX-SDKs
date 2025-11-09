@@ -1,10 +1,8 @@
 /*  NSIndexPath.h
-    Copyright (c) 2003-2009, Apple Inc. All rights reserved.
+    Copyright (c) 2003-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @interface NSIndexPath : NSObject <NSCopying, NSCoding> {
 	@private
@@ -32,6 +30,4 @@
 - (NSComparisonResult)compare:(NSIndexPath *)otherObject; // sorting an array of indexPaths using this comparison results in an array representing nodes in depth-first traversal order
 
 @end
-
-#endif
 

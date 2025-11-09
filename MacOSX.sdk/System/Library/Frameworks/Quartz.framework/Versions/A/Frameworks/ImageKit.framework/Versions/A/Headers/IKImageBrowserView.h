@@ -132,7 +132,6 @@ typedef enum
 /*! 
   @method imageRepresentation
   @abstract Returns the image to display (required). Can return nil if the item has no image to display.
-  @discussion This methods is called frequently, so the receiver should cache the returned instance.
 */
 - (id) imageRepresentation; /* required */
 
@@ -144,13 +143,13 @@ typedef enum
 
 /*! 
   @method imageTitle
-  @abstract Returns the title to display as a NSString. Use setValue:forKey: with IKImageBrowserCellTitleAttribute to set text attributes.
+  @abstract Returns the title to display as a NSString. Use setValue:forKey: with IKImageBrowserCellsTitleAttributesKey on the IKImageBrowserView instance to set text attributes.
 */
 - (NSString *) imageTitle;
 
 /*! 
   @method imageSubtitle
-  @abstract Returns the subtitle to display as a NSString. Use setValue:forKey: with IKImageBrowserCellSubtitleAttribute to set text attributes.
+  @abstract Returns the subtitle to display as a NSString. Use setValue:forKey: with IKImageBrowserCellsSubtitleAttributesKey on the IKImageBrowserView instance to set text attributes.
 */
 - (NSString *) imageSubtitle;
 
@@ -168,16 +167,16 @@ typedef enum
   @class IKImageBrowserView
   @abstract An IKImageBrowserView object is a view that display and browse images and movies. It supports scrolling and zooming.  
 */
-@interface IKImageBrowserView : NSView {
+@interface IKImageBrowserView : NSView <NSDraggingSource> {
 @private
 
-    IBOutlet id                                 _dataSource;
-    IBOutlet id /*<NSDraggingDestination>*/     _dragDestinationDelegate;
-    IBOutlet NSScroller*                        _verticalScroller;
-    IBOutlet NSScroller*                        _horizontalScroller;
-    IBOutlet id                                 _delegate;
+    IBOutlet __weak id                            _dataSource;
+    IBOutlet __weak id /*<NSDraggingDestination>*/_dragDestinationDelegate;
+    IBOutlet __weak NSScroller*                   _verticalScroller;
+    IBOutlet __weak NSScroller*                   _horizontalScroller;
+    IBOutlet __weak id                            _delegate;
 
-    void* __strong                              _reserved;
+    void* __strong                                _reserved;
 }
 @end
 
@@ -508,6 +507,9 @@ typedef enum
 */
 - (BOOL) animates;
 
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+
 /* Group Control */
 /*! 
   @method expandGroupAtIndex:
@@ -526,6 +528,8 @@ typedef enum
   @abstract Returns YES if the group at index 'index' is expanded.
 */
 - (BOOL) isGroupExpandedAtIndex:(NSUInteger) index;
+
+#endif
 
 @end
 

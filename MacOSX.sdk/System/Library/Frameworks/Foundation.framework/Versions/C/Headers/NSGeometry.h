@@ -1,5 +1,5 @@
 /*	NSGeometry.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <AvailabilityMacros.h>
@@ -77,6 +77,37 @@ typedef enum {
 
 #endif
 
+enum {
+    NSAlignMinXInward   = 1ULL << 0,
+    NSAlignMinYInward   = 1ULL << 1,
+    NSAlignMaxXInward   = 1ULL << 2,
+    NSAlignMaxYInward   = 1ULL << 3,
+    NSAlignWidthInward  = 1ULL << 4,
+    NSAlignHeightInward = 1ULL << 5,
+    
+    NSAlignMinXOutward   = 1ULL << 8,
+    NSAlignMinYOutward   = 1ULL << 9,
+    NSAlignMaxXOutward   = 1ULL << 10,
+    NSAlignMaxYOutward   = 1ULL << 11,
+    NSAlignWidthOutward  = 1ULL << 12,
+    NSAlignHeightOutward = 1ULL << 13,
+    
+    NSAlignMinXNearest   = 1ULL << 16,
+    NSAlignMinYNearest   = 1ULL << 17,
+    NSAlignMaxXNearest   = 1ULL << 18,
+    NSAlignMaxYNearest   = 1ULL << 19,
+    NSAlignWidthNearest  = 1ULL << 20,
+    NSAlignHeightNearest = 1ULL << 21,
+    
+    NSAlignRectFlipped = 1ULL << 63, // pass this if the rect is in a flipped coordinate system. This allows 0.5 to be treated in a visually consistent way.
+
+    // convenience combinations
+    NSAlignAllEdgesInward = NSAlignMinXInward|NSAlignMaxXInward|NSAlignMinYInward|NSAlignMaxYInward,
+    NSAlignAllEdgesOutward = NSAlignMinXOutward|NSAlignMaxXOutward|NSAlignMinYOutward|NSAlignMaxYOutward,
+    NSAlignAllEdgesNearest = NSAlignMinXNearest|NSAlignMaxXNearest|NSAlignMinYNearest|NSAlignMaxYNearest,
+};
+typedef unsigned long long NSAlignmentOptions;
+
 @class NSString;
 
 FOUNDATION_EXPORT const NSPoint NSZeroPoint;
@@ -138,8 +169,6 @@ NS_INLINE CGFloat NSHeight(NSRect aRect) {
     return (aRect.size.height);
 }
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 NS_INLINE NSRect NSRectFromCGRect(CGRect cgrect) {
     union _ {NSRect ns; CGRect cg;};
     return ((union _ *)&cgrect)->ns;
@@ -170,8 +199,6 @@ NS_INLINE CGSize NSSizeToCGSize(NSSize nssize) {
     return ((union _ *)&nssize)->cg;
 }
 
-#endif
-
 FOUNDATION_EXPORT BOOL NSEqualPoints(NSPoint aPoint, NSPoint bPoint);
 FOUNDATION_EXPORT BOOL NSEqualSizes(NSSize aSize, NSSize bSize);
 FOUNDATION_EXPORT BOOL NSEqualRects(NSRect aRect, NSRect bRect);
@@ -179,6 +206,7 @@ FOUNDATION_EXPORT BOOL NSIsEmptyRect(NSRect aRect);
 
 FOUNDATION_EXPORT NSRect NSInsetRect(NSRect aRect, CGFloat dX, CGFloat dY);
 FOUNDATION_EXPORT NSRect NSIntegralRect(NSRect aRect);
+FOUNDATION_EXPORT NSRect NSIntegralRectWithOptions(NSRect aRect, NSAlignmentOptions opts) NS_AVAILABLE(10_7, 5_0);
 FOUNDATION_EXPORT NSRect NSUnionRect(NSRect aRect, NSRect bRect);
 FOUNDATION_EXPORT NSRect NSIntersectionRect(NSRect aRect, NSRect bRect);
 FOUNDATION_EXPORT NSRect NSOffsetRect(NSRect aRect, CGFloat dX, CGFloat dY);

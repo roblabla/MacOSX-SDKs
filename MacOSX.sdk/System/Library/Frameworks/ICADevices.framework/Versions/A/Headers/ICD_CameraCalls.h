@@ -1,24 +1,20 @@
-/*------------------------------------------------------------------------------------------------------------------------------
- *
- *  ICADevices/ICD_CameraCalls.h
- *
- *  Copyright (c) 2004-2006 Apple Computer, Inc. All rights reserved.
- *
- *  For bug reports, consult the following page onthe World Wide Web:
- *  http://developer.apple.com/bugreporter/
- *
- *----------------------------------------------------------------------------------------------------------------------------*/
+//------------------------------------------------------------------------------------------------------------------------------
+//
+//  ICD_CameraCalls.h
+//
+//  Copyright (c) 2000-2010 Apple Inc. All rights reserved.
+//
+//  For bug reports, consult the following page onthe World Wide Web:
+//  http://developer.apple.com/bugreporter/
+//------------------------------------------------------------------------------------------------------------------------------
 
 #pragma once
-
-#ifndef __ICD_CameraCalls__
-#define __ICD_CameraCalls__
 
 //------------------------------------------------------------------------------------------------------------------------------
 
 #include <Carbon/Carbon.h>
 #include <CoreFoundation/CoreFoundation.h>
-#import <IOBluetooth/Bluetooth.h>
+#include <IOBluetooth/Bluetooth.h>
 
 //------------------------------------------------------------------------------------------------------------------------------
 
@@ -48,10 +44,13 @@ enum {
 
 enum
 {
-	hasChildrenMask    = 0x00000001,
-	hasThumbnailMask   = 0x00000002,
-    fileLockedMask     = 0x00000004,
-    rawImageFormatMask = 0x00000008
+	hasChildrenMask     = 0x00000001,
+	hasThumbnailMask    = 0x00000002,
+    fileLockedMask      = 0x00000004,
+    rawImageFormatMask  = 0x00000008,
+	fileInTempCacheMask = 0x00000010,
+	largeFileSizeMask   = 0x00000100,
+    addedAfterCCCMask   = 0x00000020,
 };
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -72,6 +71,7 @@ typedef struct ObjectInfo
     Ptr				privateData;		// vendor
     UInt64			uniqueIDFireWire;	// vendor
     UInt32          tag;                // Apple
+	UInt64			dataSize64;			// vendor
 } ObjectInfo;
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -148,6 +148,9 @@ typedef CALLBACK_API_C(ICAError, __ICD_WriteDataToFile)
 typedef CALLBACK_API_C(ICAError, __ICD_WriteDataToFileDescriptor)
                                     (const ObjectInfo* objectInfo, int fd, UInt32 offset, long* length);
 
+typedef CALLBACK_API_C(ICAError, __ICD_WriteDataToFileDescriptor64)
+                                    (const ObjectInfo* objectInfo, int fd);
+	
 // camera related callBacks into the ICADevices.framework:
 
 int ICD_main (int argc, const char* argv[]);
@@ -164,17 +167,11 @@ ICAError ICDNewObjectCreated(const ObjectInfo* parentInfo, const ObjectInfo* obj
 
 ICAError ICDCopyDeviceInfoDictionary( const char* deviceName, CFDictionaryRef* theDict );
 
+ICAError ICDCreateICAThumbnailFromICNS( const char* fileName, void* thumbnail )     DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+ICAError ICDCreateICAThumbnailFromIconRef( const IconRef iconRef, void* thumbnail ) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-ICAError ICDCreateICAThumbnailFromICNS(const char* fileName,		// filename for .icns icon file
-                                             void* thumbnail);		// pointer to ICAThumbnail
-                                                                    // NOTE: you have to allocate and prefill the ICAThumbnail
-                                                                    //       malloc(sizeof(ICAThumbnail)+9215);
-                                                                    //         width & height -> 48
-                                                                    //		   dataSize       -> 9216  (= 48*48*4)
-
-ICAError ICDCreateICAThumbnailFromIconRef( const IconRef iconRef, void* thumbnail );
-ICAError ICDInitiateNotificationCallback(const void* pb);
-
+//Use ICDSendNotification or ICDSendNotificationAndWaitForReply instead of ICDInitiateNotificationCallback
+ICAError ICDInitiateNotificationCallback(const void* pb)                            DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 ICAError ICDCreateEventDataCookie(const ICAObject object, ICAEventDataCookie* cookie);
 
@@ -206,8 +203,8 @@ ICAError ICDConnectTCPIPDevice(CFDictionaryRef params);
 ICAError ICDDisconnectTCPIPDevice(CFDictionaryRef params);
                           
 //------------------------------------------------------------------------------------------------------------------------------
-// deprecated - use ICDInitiateNotificationCallback instead
-ICAError ICDStatusChanged (ICAObject object, OSType message);
+
+ICAError ICDStatusChanged( ICAObject object, OSType message )                     DEPRECATED_IN_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 //------------------------------------------------------------------------------------------------------------------------------
 
@@ -233,7 +230,9 @@ typedef struct ICD_callback_functions
     __ICD_WriteDataToFile                   f_ICD_WriteDataToFile;
     __ICD_OpenMassStorageDevice             f_ICD_OpenMassStorageDevice;
     __ICD_WriteDataToFileDescriptor         f_ICD_WriteDataToFileDescriptor;
+	__ICD_WriteDataToFileDescriptor64       f_ICD_WriteDataToFileDescriptor64;
 } ICD_callback_functions;
+
 extern ICD_callback_functions gICDCallbackFunctions;
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -242,10 +241,6 @@ extern ICD_callback_functions gICDCallbackFunctions;
 
 #ifdef __cplusplus
 }
-#endif
-
-//------------------------------------------------------------------------------------------------------------------------------
-
 #endif
 
 //------------------------------------------------------------------------------------------------------------------------------

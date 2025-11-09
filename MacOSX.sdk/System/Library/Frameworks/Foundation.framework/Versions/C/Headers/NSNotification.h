@@ -1,5 +1,5 @@
 /*	NSNotification.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -28,8 +28,8 @@
 @interface NSNotificationCenter : NSObject {
     @package
     void * __strong _impl;
-    void *_callback_block[4];
-    void *_pad[8];
+    void * __strong _callback;
+    void *_pad[11];
 }
 
 + (id)defaultCenter;
@@ -44,7 +44,9 @@
 - (void)removeObserver:(id)observer name:(NSString *)aName object:(id)anObject;
 
 #if NS_BLOCKS_AVAILABLE
-- (id)addObserverForName:(NSString *)name object:(id)obj queue:(NSOperationQueue *)queue usingBlock:(void (^)(NSNotification *))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (id)addObserverForName:(NSString *)name object:(id)obj queue:(NSOperationQueue *)queue usingBlock:(void (^)(NSNotification *note))block NS_AVAILABLE(10_6, 4_0);
+    // The return value is retained by the system, and should be held onto by the caller in
+    // order to remove the observer with removeObserver: later, to stop observation.
 #endif
 
 @end

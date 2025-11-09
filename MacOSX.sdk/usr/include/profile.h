@@ -187,4 +187,4 @@ extern void initialize_prof_error_table (void) /*@modifies internalState@*/;
 #define prof_err_base ERROR_TABLE_BASE_prof
 #endif
 
-#endif \* __KERBEROSPROFILE__ */
+#endif /* __KERBEROSPROFILE__ */

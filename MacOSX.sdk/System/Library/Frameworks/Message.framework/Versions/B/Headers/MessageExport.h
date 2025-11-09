@@ -1,34 +1,26 @@
-/*
- *    Message  --  MessageExport.h
- *
- *    Copyright (c) 1999, Apple Computer, Inc.
- *    All rights reserved.
- *
- */
+//
+//  MessageExport.h
+//  Message
+//  
+//  Copyright © 1999–2011 Apple Inc. All rights reserved.
+//
 
-#if !defined(__MESSAGE_EXPORT__)
-#define __MESSAGE_EXPORT__ 1
+#include <TargetConditionals.h>
 
+#if defined(__cplusplus)
+#define MESSAGE_EXTERN extern "C"
+#else
+#define MESSAGE_EXTERN extern
+#endif
 
-#if defined(macintosh)
-
-    #undef MESSAGE_EXPORT
-    #if defined(__MWERKS__)
-        #define MESSAGE_EXPORT __declspec(export) extern
+#if TARGET_OS_WIN32
+    #undef MESSAGE_EXTERN
+#else
+    #ifdef __MWERKS__
+        #define MESSAGE_EXPORT __declspec(export) MESSAGE_EXTERN
+    #else
+        #define MESSAGE_EXPORT MESSAGE_EXTERN
     #endif
-
+    
+    #define MESSAGE_IMPORT MESSAGE_EXTERN
 #endif
-
-#if !defined(MESSAGE_EXPORT)
-    #define MESSAGE_EXPORT extern
-#endif
-
-#if !defined(MESSAGE_IMPORT)
-    #define MESSAGE_IMPORT extern
-#endif
-
-
-
-#endif /* ! __MESSAGE_EXPORT__ */
-
-

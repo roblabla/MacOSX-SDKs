@@ -3,7 +3,7 @@
  
 	Contains:   AudioUnit Interfaces
   
-	Copyright:  © 2002-2008 by Apple Inc., all rights reserved.
+	Copyright:  © 2002-2008 by Apple, Inc., all rights reserved.
  
 	Bugs?:		For bug reports, consult the following page on
                 the World Wide Web:
@@ -24,9 +24,12 @@
 #define kAudioUnitSubType_DefaultOutput			'def '
 #define kAudioUnitSubType_SystemOutput			'sys '
 #define kAudioUnitSubType_GenericOutput			'genr'
+#define kAudioUnitSubType_VoiceProcessingIO		'vpio'
 
 #define kAudioUnitType_MusicDevice				'aumu'
 #define kAudioUnitSubType_DLSSynth				'dls '
+#define kAudioUnitSubType_GMSynth				'gms '
+#define kAudioUnitSubType_Sampler				'samp'
 
 #define kAudioUnitType_MusicEffect				'aumf'
 
@@ -35,8 +38,10 @@
 #define kAudioUnitSubType_Varispeed				'vari'
 #define kAudioUnitSubType_DeferredRenderer		'defr'
 #define kAudioUnitSubType_TimePitch				'tmpt'
+#define kAudioUnitSubType_NewTimePitch			'nutp'
 #define kAudioUnitSubType_Splitter				'splt'
 #define kAudioUnitSubType_Merger				'merg'
+#define kAudioUnitSubType_RoundTripAAC			'raac'
 
 #define kAudioUnitType_Effect					'aufx'
 #define kAudioUnitSubType_Delay					'dely'

@@ -1,14 +1,10 @@
 /*	
     NSURLResponse.h
-    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
     
     Public header file.
 */
 
-// Note: To use the APIs described in these headers, you must perform
-// a runtime check for Foundation-462.1 or later.
-#import <AvailabilityMacros.h>
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 
@@ -132,6 +128,18 @@
     NSHTTPURLResponseInternal *_httpInternal;
 }
 
+/*!
+  @method	initWithURL:statusCode:HTTPVersion:headerFields:
+  @abstract initializer for NSHTTPURLResponse objects.
+  @param 	url the URL from which the response was generated.
+  @param	statusCode an HTTP status code.
+  @param	HTTPVersion The version of the HTTP response as represented by the server.  This is typically represented as "HTTP/1.1".
+  @param 	headerFields A dictionary representing the header keys and values of the server response.
+  @result 	the instance of the object, or NULL if an error occurred during initialization.
+  @discussion This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
+*/
+-(id)initWithURL:(NSURL*) url statusCode:(NSInteger) statusCode HTTPVersion:(NSString*) HTTPVersion headerFields:(NSDictionary*) headerFields NS_AVAILABLE(10_7, 5_0);
+
 /*! 
     @method statusCode
     @abstract Returns the HTTP status code of the receiver. 
@@ -163,4 +171,3 @@
 
 @end
 
-#endif

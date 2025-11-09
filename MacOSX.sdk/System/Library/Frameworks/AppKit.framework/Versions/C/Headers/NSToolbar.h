@@ -1,14 +1,14 @@
 /*
 	NSToolbar.h
 	Application Kit
-	Copyright (c) 2000-2009, Apple Inc.
+	Copyright (c) 2000-2011, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/Foundation.h>
 
-@class NSArray, NSDictionary, NSMutableArray, NSNotification, NSString, NSToolbarItem, NSWindow;
+@class NSArray, NSDictionary, NSMutableArray, NSNotification, NSString, NSToolbarItem, NSWindow, NSView;
 @protocol NSToolbarDelegate;
 
 enum { NSToolbarDisplayModeDefault, NSToolbarDisplayModeIconAndLabel, NSToolbarDisplayModeIconOnly, NSToolbarDisplayModeLabelOnly };
@@ -24,14 +24,14 @@ typedef NSUInteger NSToolbarSizeMode;
     NSMutableArray *		_currentItems;
     NSMutableArray *		_currentItemIdentifiers;
 
-    NSDictionary *		_initPListDatabase;
-    id				_initPListTarget; 
+    id                          _res1;
+    id				_res2; 
     
     NSString *			_selectedItemIdentifier;
     __strong void *		_metrics;
 
     id				_delegate;
-    NSWindow *			_window;
+    NSWindow *			_logicalWindow;
     id				_configPalette;
     id 				_toolbarView;
     NSInteger			_syncPostEnabledCount;
@@ -40,7 +40,7 @@ typedef NSUInteger NSToolbarSizeMode;
 	unsigned int allowsUserCustomization:1;
 	unsigned int autosavesUsingIdentifier:1;
 	unsigned int initialConfigurationDone:1;
-	unsigned int shouldHideAfterCustomization:1;
+	unsigned int doesNotAttachToMenuBar:1;
         unsigned int delegateDefaultItemIdentifiers:1;
         unsigned int delegateAllowedItemIdentifiers:1;
         unsigned int delegateItemWithItemIdentifier:1;
@@ -54,7 +54,9 @@ typedef NSUInteger NSToolbarSizeMode;
         unsigned int showsNoContextMenu:1;
         unsigned int currentlyLoadingPlaceholders:1;
         unsigned int delegateItemWithItemIdentifier2:1;
-        unsigned int reserved:4;
+        unsigned int inGlobalWindow:1;
+        unsigned int reserved:2;
+        unsigned int usingFSMetrics:1;
         unsigned int keyboardLoopNeedsUpdating:1;
         unsigned int showHideDuringConfigurationChangeDisabled:1;
 	unsigned int displayMode:2;
@@ -95,27 +97,39 @@ typedef NSUInteger NSToolbarSizeMode;
 - (void)setDisplayMode:(NSToolbarDisplayMode)displayMode;
 - (NSToolbarDisplayMode)displayMode;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)setSelectedItemIdentifier:(NSString *)itemIdentifier;
 - (NSString *)selectedItemIdentifier;
     /* Sets the toolbar's selected item by identifier.  Use this to force an item identifier to be selected.  Toolbar manages selection of image items automatically.  This method can be used to select identifiers of custom view items, or to force a selection change.  (see toolbarSelectableItemIdentifiers: delegate method for more details). */
-#endif
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (void)setSizeMode:(NSToolbarSizeMode)sizeMode;
 - (NSToolbarSizeMode)sizeMode;
-#endif
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* Use this API to hide the baseline NSToolbar draws between itself and the main window contents.  The default is YES.  This method should only be used before the toolbar is attached to its window (-[NSWindow setToolbar:]).
 */
 - (void)setShowsBaselineSeparator:(BOOL)flag;
 - (BOOL)showsBaselineSeparator;
-#endif
 
 - (void)setAllowsUserCustomization:(BOOL)allowCustomization;
 - (BOOL)allowsUserCustomization;
     /* This flag controls whether or not users can configure the toolbar by dragging items around, and whether or not the customization palette can be used.  The default value is NO, but can be changed at any time.  For instance, a developer may not want users to be able to edit the toolbar while some event is being processed.  */
+
+
+/* Sets the toolbar full screen accessory view.  When entering full screen, the accessory view is removed from the window if necessary, and attaches underneath the toolbar.  When leaving full screen, the accessory view is returned to the window, if it was in the window previously. To customize this latter behavior, you can implement the NSWindow delegate method windowWillExitFullScreen:.
+*/
+- (void)setFullScreenAccessoryView:(NSView *)view   NS_AVAILABLE_MAC(10_7);
+- (NSView *)fullScreenAccessoryView                 NS_AVAILABLE_MAC(10_7);
+
+/* The following functions control the minimum and maximum height of the accessory view. The minimum height is used when the menu bar is hidden, and the max height to a fully revealed menu bar. During the reveal, the accessory view's frame is interpolated between its minimum and maximum height.
+ 
+ If the minimum height is zero (which it is by default), the accessory view is not resized; instead a special transition is used to reveal it with the menu bar. This simplifies the accessory view's task, because it does not have to handle the case of being set to zero height. To create a fixed-height accessory view, set the min and max height to be equal.
+ 
+ By default, the min height is 0 and the max height gets set to the height of the accessory view's frame when it is set.
+*/
+- (void)setFullScreenAccessoryViewMinHeight:(CGFloat)minHeight  NS_AVAILABLE_MAC(10_7);
+- (void)setFullScreenAccessoryViewMaxHeight:(CGFloat)maxHeight  NS_AVAILABLE_MAC(10_7);
+- (CGFloat)fullScreenAccessoryViewMinHeight                     NS_AVAILABLE_MAC(10_7);
+- (CGFloat)fullScreenAccessoryViewMaxHeight                     NS_AVAILABLE_MAC(10_7);
+
 
        
 // ----- Accessing toolbar info -----
@@ -165,10 +179,8 @@ each of the visible items.  The toolbar will iterate through the list of visible
 
 @optional
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar;
     /* Optional method. Those wishing to indicate item selection in a toolbar should implement this method to return a non-empty array of selectable item identifiers.  If implemented, the toolbar will remember and display the selected item with a special highlight.  A selected item is one whose item identifier matches the current selected item identifier.  Clicking on an item whose identifier is selectable will automatically update the toolbars selected item identifier when possible. (see setSelectedItemIdentifier: for more details) */
-#endif
 
     /* Notifications */
 

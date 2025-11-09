@@ -1,7 +1,28 @@
 /*
+ * Copyright (c) 2002, Oracle and/or its affiliates. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice (including the next
+ * paragraph) shall be included in all copies or substantial portions of the
+ * Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+/*
 
 Copyright 1993, 1994, 1998  The Open Group
-Copyright 2002 Sun Microsystems, Inc.  All rights reserved.
 
 Permission to use, copy, modify, distribute, and sell this software and its
 documentation for any purpose is hereby granted without fee, provided that
@@ -87,7 +108,7 @@ from the copyright holders.
 #endif /* !NO_TCP_H */
 
 #include <sys/ioctl.h>
-#if defined(SVR4) 
+#if defined(SVR4) || defined(__SVR4)
 #include <sys/filio.h>
 #endif
 
@@ -222,23 +243,10 @@ static int TRANS(SocketINETClose) (XtransConnInfo ciptr);
 
 #if defined HAVE_SOCKLEN_T || (defined(IPv6) && defined(AF_INET6))
 # define SOCKLEN_T socklen_t
-#elif defined(SVR4) || defined(__SCO__)
+#elif defined(SVR4) || defined(__SVR4) || defined(__SCO__)
 # define SOCKLEN_T size_t 
 #else
 # define SOCKLEN_T int
-#endif
-
-/*
- * This provides compatibility for apps linked against system libraries
- * that don't have IPv6 support.
- */
-#if defined(IPv6) && defined(AF_INET6)
-static const struct in6_addr local_in6addr_any = IN6ADDR_ANY_INIT;
-#pragma weak in6addr_any = local_in6addr_any
-#ifndef __USLC__
-#pragma weak getaddrinfo
-#endif
-static int haveIPv6 = 1;
 #endif
 
 /*
@@ -274,25 +282,21 @@ TRANS(SocketINETGetAddr) (XtransConnInfo ciptr)
 {
 #if defined(IPv6) && defined(AF_INET6)
     struct sockaddr_storage socknamev6;
-#endif
+#else
     struct sockaddr_in socknamev4;
+#endif
     void *socknamePtr;
     SOCKLEN_T namelen;
 
     PRMSG (3,"SocketINETGetAddr(%p)\n", ciptr, 0, 0);
 
 #if defined(IPv6) && defined(AF_INET6)
-    if (haveIPv6)
-    {
-	namelen = sizeof(socknamev6);
-	socknamePtr = &socknamev6;
-    }
-    else
+    namelen = sizeof(socknamev6);
+    socknamePtr = &socknamev6;
+#else
+    namelen = sizeof(socknamev4);
+    socknamePtr = &socknamev4;
 #endif
-    {
-	namelen = sizeof(socknamev4);
-	socknamePtr = &socknamev4;
-    }
 
     bzero(socknamePtr, namelen);
     
@@ -320,15 +324,10 @@ TRANS(SocketINETGetAddr) (XtransConnInfo ciptr)
     }
 
 #if defined(IPv6) && defined(AF_INET6)
-    if (haveIPv6)
-    {
-	ciptr->family = ((struct sockaddr *)socknamePtr)->sa_family;
-    }
-    else
+    ciptr->family = ((struct sockaddr *)socknamePtr)->sa_family;
+#else
+    ciptr->family = socknamev4.sin_family;
 #endif
-    {
-	ciptr->family = socknamev4.sin_family;
-    }
     ciptr->addrlen = namelen;
     memcpy (ciptr->addr, socknamePtr, ciptr->addrlen);
 
@@ -353,7 +352,7 @@ TRANS(SocketINETGetPeerAddr) (XtransConnInfo ciptr)
     SOCKLEN_T namelen;
 
 #if defined(IPv6) && defined(AF_INET6)
-    if (haveIPv6 && ciptr->family == AF_INET6)
+    if (ciptr->family == AF_INET6)
     {
 	namelen = sizeof(socknamev6);
 	socknamePtr = &socknamev6;
@@ -406,14 +405,6 @@ TRANS(SocketOpen) (int i, int type)
     XtransConnInfo	ciptr;
 
     PRMSG (3,"SocketOpen(%d,%d)\n", i, type, 0);
-
-#if defined(IPv6) && defined(AF_INET6)
-    if (getaddrinfo == NULL)
-	haveIPv6 = 0;
-
-    if (!haveIPv6 && Sockettrans2devtab[i].family == AF_INET6)
-	return NULL;
-#endif
 
     if ((ciptr = (XtransConnInfo) xcalloc (
 	1, sizeof(struct _XtransConnInfo))) == NULL)
@@ -528,7 +519,14 @@ TRANS(SocketReopen) (int i, int type, int fd, char *port)
     ciptr->family = AF_UNIX;
     memcpy(ciptr->peeraddr, ciptr->addr, sizeof(struct sockaddr));
     ciptr->port = rindex(addr->sa_data, ':');
-    if (ciptr->port[0] == ':') ciptr->port++; /* port should now point to portnum or NULL */
+    if (ciptr->port == NULL) {
+	if (is_numeric(addr->sa_data)) {
+	    ciptr->port = addr->sa_data;
+	}
+    } else if (ciptr->port[0] == ':') {
+	ciptr->port++;
+    }
+    /* port should now point to portnum or NULL */
     return ciptr;
 }
 
@@ -555,8 +553,12 @@ TRANS(SocketOpenCOTSClientBase) (char *transname, char *protocol,
 
     while ((i = TRANS(SocketSelectFamily) (i, transname)) >= 0) {
 	if ((ciptr = TRANS(SocketOpen) (
-		 i, Sockettrans2devtab[i].devcotsname)) != NULL)
+		i, Sockettrans2devtab[i].devcotsname)) != NULL) {
+	    /* Save the index for later use */
+
+	    ciptr->index = i;
 	    break;
+	}
     }
     if (i < 0) {
 	if (i == -1)
@@ -567,10 +569,6 @@ TRANS(SocketOpenCOTSClientBase) (char *transname, char *protocol,
 		   transname, 0, 0);
 	return NULL;
     }
-
-    /* Save the index for later use */
-
-    ciptr->index = i;
 
     return ciptr;
 }
@@ -1187,7 +1185,7 @@ TRANS(SocketUNIXResetListener) (XtransConnInfo ciptr)
     if (!abstract && (
 	stat (unsock->sun_path, &statb) == -1 ||
         ((statb.st_mode & S_IFMT) !=
-#if (defined (sun) && defined(SVR4)) || defined(NCR) || defined(SCO325) || !defined(S_IFSOCK)
+#if defined(NCR) || defined(SCO325) || !defined(S_IFSOCK)
 	  		S_IFIFO
 #else
 			S_IFSOCK
@@ -1476,7 +1474,7 @@ TRANS(SocketINETConnect) (XtransConnInfo ciptr, char *host, char *port)
 #endif
 
 #if defined(IPv6) && defined(AF_INET6)
-    if (haveIPv6) {
+    {
 	if (addrlist != NULL) {
 	    if (strcmp(host,addrlist->host) || strcmp(port,addrlist->port)) {
 		if (addrlist->firstaddr)
@@ -1618,8 +1616,8 @@ TRANS(SocketINETConnect) (XtransConnInfo ciptr, char *host, char *port)
 		addrlist->addr = addrlist->addr->ai_next;
 	    }
 	} 
-    } else
-#endif
+    }
+#else
     {
 	/*
 	 * Build the socket name.
@@ -1693,6 +1691,7 @@ TRANS(SocketINETConnect) (XtransConnInfo ciptr, char *host, char *port)
 	socketaddr = (struct sockaddr *) &sockname;
 	socketaddrlen = sizeof(sockname);
     }
+#endif
 
     /*
      * Turn on socket keepalive so the client process will eventually
@@ -1743,7 +1742,7 @@ TRANS(SocketINETConnect) (XtransConnInfo ciptr, char *host, char *port)
 
 	if (olderrno == ECONNREFUSED || olderrno == EINTR
 #if defined(IPv6) && defined(AF_INET6)
-	  || (haveIPv6 && ((addrlist->addr->ai_next != NULL) || 
+	  || (((addrlist->addr->ai_next != NULL) ||
 	        (addrlist->addr != addrlist->firstaddr)) &&
                (olderrno == ENETUNREACH || olderrno == EAFNOSUPPORT ||
 		 olderrno == EADDRNOTAVAIL || olderrno == ETIMEDOUT
@@ -1789,7 +1788,7 @@ TRANS(SocketINETConnect) (XtransConnInfo ciptr, char *host, char *port)
     }
 
 #if defined(IPv6) && defined(AF_INET6)
-   if (haveIPv6 && res != 0) { 
+   if (res != 0) {
 	addrlist->addr = addrlist->addr->ai_next;
    }
 #endif
@@ -1813,20 +1812,13 @@ UnixHostReallyLocal (char *host)
 {
     char hostnamebuf[256];
 
-#if defined(IPv6) && defined(AF_INET6)
-    if (getaddrinfo == NULL)
-	haveIPv6 = 0;
-#endif
-
     TRANS(GetHostname) (hostnamebuf, sizeof (hostnamebuf));
 
     if (strcmp (hostnamebuf, host) == 0)
     {
 	return (1);
-    }
+    } else {
 #if defined(IPv6) && defined(AF_INET6)
-    else if (haveIPv6)
-    {
 	struct addrinfo *localhostaddr;
 	struct addrinfo *otherhostaddr;
 	struct addrinfo *i, *j;
@@ -1872,10 +1864,7 @@ UnixHostReallyLocal (char *host)
 	freeaddrinfo(localhostaddr);
 	freeaddrinfo(otherhostaddr);
 	return equiv;
-    }
-#endif
-    else
-    {
+#else
 	/*
 	 * A host may have more than one network address.  If any of the
 	 * network addresses of 'host' (specified to the connect call)
@@ -1944,6 +1933,7 @@ UnixHostReallyLocal (char *host)
 	    i++;
 	}
 	return (equiv);
+#endif
     }
 }
 

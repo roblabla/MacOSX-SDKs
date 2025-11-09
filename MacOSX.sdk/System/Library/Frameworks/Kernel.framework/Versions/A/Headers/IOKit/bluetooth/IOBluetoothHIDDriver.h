@@ -99,7 +99,7 @@ class IOBluetoothHIDDriver : public IOHIDDevice
 
 		IOPMrootDomain *        fRootDomain;
 		IOPMDriverAssertionID   fNoDeepSleepAssertionId;
-    
+		
 		bool					mCommandGateCreated;
 		bool					mCommandGateAdded;
 		bool					mControlChannelRetained;
@@ -108,8 +108,10 @@ class IOBluetoothHIDDriver : public IOHIDDevice
 		bool					mCloseDownServicesCalled;
 		
 		bool					mGotNoDeepSleepAssertionID;
+		
+		uint32_t				mSleepingThreadCount;
 
-	};
+    };
     ExpansionData	*_expansionData;
 	
 public:
@@ -178,11 +180,6 @@ public:
 	static	IOReturn	staticCloseDownServicesAction( OSObject* owner, void* arg1, void* arg2, void* arg3, void* arg4 );
 	static	IOReturn	staticSendToAction( OSObject* owner, void* theChannel, void* theData, void *theSize, void* );
 	static	IOReturn	staticPrepControlChannelAction( OSObject* owner, void* arg1, void* arg2, void* arg3, void* arg4 );
-	static	IOReturn	staticPrepInterruptChannelAction( OSObject* owner, void* arg1, void* arg2, void* arg3, void* arg4 );
-	static	IOReturn	staticGetReportAction( OSObject* owner, void* arg1, void* arg2, void* arg3, void* arg4 );
-	static	IOReturn	staticSetReportAction( OSObject* owner, void* arg1, void* arg2, void* arg3, void* arg4 );
-	static	IOReturn	staticProcessCommandAction( OSObject* owner, void* arg1, void* arg2, void* arg3, void* arg4 );
-	static	IOReturn	staticGetDevicePropertiesAction( OSObject* owner, void* arg1, void* arg2, void* arg3, void* arg4 );
 	static	IOReturn	staticInterruptChannelOpeningAction( OSObject* owner, void* newService, void* arg2, void* arg3, void* arg4 );
 	static	IOReturn	staticWillTerminateAction( OSObject* owner, void* arg1, void* arg2, void* arg3, void* arg4 );
 	
@@ -224,9 +221,13 @@ public:
 	OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver,  4 );
     virtual IOReturn       	willTerminateWL( void );
 
-public:    
-    OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver,  5 );
-    OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver,  6 );
+	OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver,  5 );
+	virtual void			messageClientsWithString( UInt32 type, OSString* message );
+	
+    OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver,  6 );
+	virtual void			waitForInterruptChannel( void );
+	
+	
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver,  7 );
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver,  8 );
     OSMetaClassDeclareReservedUnused( IOBluetoothHIDDriver,  9 );

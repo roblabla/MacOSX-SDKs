@@ -202,7 +202,10 @@ enum {
 
   /* This field is not used. */
   kCGScrollWheelEventPointDeltaAxis3 = 98,
-
+    
+  /*  */
+  kCGScrollWheelEventScrollPhase = 99,
+    
   /* Key to access an integer field that indicates whether the event should
      be ignored by the Inkwell subsystem. If the value is non-zero, the
      event should be ignored. */
@@ -333,7 +336,11 @@ enum {
      contains continuous, pixel-based scrolling data. The value is non-zero
      when the scrolling data is pixel-based and zero when the scrolling data
      is line-based. */
-  kCGScrollWheelEventIsContinuous = 88    
+  kCGScrollWheelEventIsContinuous = 88,
+  
+  /* Added in 10.5; made public in 10.7 */
+  kCGMouseEventWindowUnderMousePointer = 91,
+  kCGMouseEventWindowUnderMousePointerThatCanHandleThisEvent = 92
 };
 typedef uint32_t CGEventField;
 

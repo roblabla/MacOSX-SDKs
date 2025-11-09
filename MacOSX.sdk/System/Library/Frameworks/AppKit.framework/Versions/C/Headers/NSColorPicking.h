@@ -1,7 +1,7 @@
 /*
     NSColorPicking.h
     Application Kit
-    Copyright (c) 1994-2009, Apple Inc.
+    Copyright (c) 1994-2011, Apple Inc.
     All rights reserved.
 */
 
@@ -41,17 +41,15 @@
 - (void)detachColorList:(NSColorList *)colorList;
 - (void)setMode:(NSColorPanelMode)mode;   
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 /* The tooltip to be used for the tool bar button.
 */
-- (NSString *)buttonToolTip;
+- (NSString *)buttonToolTip NS_AVAILABLE_MAC(10_5);
 
 /* The minimum content size for your picker. The NSColorPanel will not allow resizing smaller than this size. By default, you will not have to do anything if you properly setup the Autosizing attributes in IB for your view. 
 */
-- (NSSize)minContentSize;
+- (NSSize)minContentSize NS_AVAILABLE_MAC(10_5);
 
-#endif
 
 @end
 

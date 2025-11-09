@@ -2,7 +2,7 @@
 //  IOBluetoothUI.h
 //  IOBluetoothUI Framework
 //
-//  Copyright (c) 2007 Apple Inc. All rights reserved.
+//  Copyright (c) 2010 Apple, Inc. All rights reserved.
 //
 
 #if __OBJC__

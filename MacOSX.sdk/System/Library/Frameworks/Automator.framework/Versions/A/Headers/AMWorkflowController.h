@@ -5,9 +5,8 @@
     Public header file.
 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 #import <Foundation/Foundation.h>
+#import <Automator/AMAttributesForAnalyzer.h>
 
 @class AMAction;
 @class AMWorkflow;
@@ -22,7 +21,7 @@
 	AMWorkflow			*_workflow;
 	id					_runner;
 	id					_runnerInterface;
-	id					_eventMonitor;
+	AM_UNUSED_FOR_ANALYZER id	_eventMonitor;
 	id					_delegate;
 	struct __AMWorkflowControllerFlags {
 		NSUInteger shouldRunLocally:1;
@@ -51,10 +50,10 @@
         NSUInteger reserved:19;
     } _delegateRespondTo;
 	
-	id _future;
-	id _future2;
-	id _future3;
-	id _future4;
+	AM_UNUSED_FOR_ANALYZER id _future;
+	AM_UNUSED_FOR_ANALYZER id _future2;
+	AM_UNUSED_FOR_ANALYZER id _future3;
+	AM_UNUSED_FOR_ANALYZER id _future4;
 }
 
 - (AMWorkflow *)workflow;
@@ -69,6 +68,11 @@
 
 - (IBAction)run:(id)sender;
 - (IBAction)stop:(id)sender;
+
+- (BOOL)isPaused;
+- (IBAction)pause:(id)sender;
+- (IBAction)step:(id)sender;
+- (IBAction)reset:(id)sender;
 
 @end
 
@@ -86,4 +90,3 @@
 - (void)workflowController:(AMWorkflowController *)controller didError:(NSError *)error;
 @end
 
-#endif

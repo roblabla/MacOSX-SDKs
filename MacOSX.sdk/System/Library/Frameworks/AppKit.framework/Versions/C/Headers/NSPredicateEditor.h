@@ -1,16 +1,16 @@
 /*
         NSPredicateEditor.h
 	Application Kit
-	Copyright (c) 2006-2009, Apple Inc.
+	Copyright (c) 2006-2011, Apple Inc.
 	All rights reserved.
 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 #import <AppKit/NSRuleEditor.h>
 
 @class NSPredicateTemplate, NSArray;
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSPredicateEditor : NSRuleEditor {
     id _allTemplates;
     NSArray *_rootTrees;
@@ -34,4 +34,3 @@
 
 @end
 
-#endif

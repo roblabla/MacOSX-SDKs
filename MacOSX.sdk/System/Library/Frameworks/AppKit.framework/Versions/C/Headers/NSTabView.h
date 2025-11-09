@@ -1,7 +1,7 @@
 /*
         NSTabView.h
         Application Kit
-        Copyright (c) 2000-2009, Apple Inc.
+        Copyright (c) 2000-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -142,5 +142,5 @@ typedef NSUInteger NSTabViewType;
 - (BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 - (void)tabView:(NSTabView *)tabView willSelectTabViewItem:(NSTabViewItem *)tabViewItem;
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem;
-- (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)TabView;
+- (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView;
 @end

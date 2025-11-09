@@ -3,9 +3,9 @@
  
      Contains:   AltiVec DSP Interfaces
  
-     Version:    vecLib-268.0
+     Version:    vecLib-325.4
  
-     Copyright:  © 2000-2010 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 2000-2011 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,9 +16,8 @@
 #ifndef __VDSP__
 #define __VDSP__
 
-/*  For documentation on vDSP, see _vDSP Library_ at
-    http://developer.apple.com/documentation/Performance/index-date.html or
-    search for "vDSP Library" at http://developer.apple.com.
+/*  For documentation on vDSP, search for "vDSP" at http://developer.apple.com,
+	or search for one of the routine names below.
 */
 
 #if defined __ppc__ || defined __i386__
@@ -29,7 +28,7 @@
 #endif
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -47,8 +46,8 @@ extern "C" {
 	vDSP_Version0 is a major version number.
 	vDSP_Version1 is a minor version number.
 */
-#define	vDSP_Version0	268
-#define	vDSP_Version1	0
+#define	vDSP_Version0	325
+#define	vDSP_Version1	4
 
 
 typedef unsigned long                   vDSP_Length;
@@ -123,7 +122,7 @@ enum {
 extern FFTSetup 
 vDSP_create_fftsetup(
   vDSP_Length   __vDSP_log2n,
-  FFTRadix      __vDSP_radix)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTRadix      __vDSP_radix) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -135,7 +134,7 @@ vDSP_create_fftsetup(
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
 extern void 
-vDSP_destroy_fftsetup(FFTSetup __vDSP_setup)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+vDSP_destroy_fftsetup(FFTSetup __vDSP_setup) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -149,7 +148,7 @@ vDSP_destroy_fftsetup(FFTSetup __vDSP_setup)                  AVAILABLE_MAC_OS_X
 extern FFTSetupD 
 vDSP_create_fftsetupD(
   vDSP_Length   __vDSP_log2n,
-  FFTRadix      __vDSP_radix)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTRadix      __vDSP_radix) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -161,7 +160,7 @@ vDSP_create_fftsetupD(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-vDSP_destroy_fftsetupD(FFTSetupD __vDSP_setup)                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+vDSP_destroy_fftsetupD(FFTSetupD __vDSP_setup) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 
@@ -182,7 +181,7 @@ vDSP_ctoz(
   vDSP_Stride        __vDSP_strideC,
   DSPSplitComplex *  __vDSP_Z,
   vDSP_Stride        __vDSP_strideZ,
-  vDSP_Length        __vDSP_size)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length        __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -199,7 +198,7 @@ vDSP_ztoc(
   vDSP_Stride              __vDSP_strideZ,
   DSPComplex               __vDSP_C[],
   vDSP_Stride              __vDSP_strideC,
-  vDSP_Length              __vDSP_size)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length              __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -216,7 +215,7 @@ vDSP_ctozD(
   vDSP_Stride              __vDSP_strideC,
   DSPDoubleSplitComplex *  __vDSP_Z,
   vDSP_Stride              __vDSP_strideZ,
-  vDSP_Length              __vDSP_size)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -233,7 +232,7 @@ vDSP_ztocD(
   vDSP_Stride                    __vDSP_strideZ,
   DSPDoubleComplex               __vDSP_C[],
   vDSP_Stride                    __vDSP_strideC,
-  vDSP_Length                    __vDSP_size)                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length                    __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 
@@ -258,7 +257,7 @@ vDSP_fft_zip(
   DSPSplitComplex *  __vDSP_ioData,
   vDSP_Stride        __vDSP_stride,
   vDSP_Length        __vDSP_log2n,
-  FFTDirection       __vDSP_direction)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -276,7 +275,7 @@ vDSP_fft_zipt(
   vDSP_Stride        __vDSP_stride,
   DSPSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length        __vDSP_log2n,
-  FFTDirection       __vDSP_direction)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -293,7 +292,7 @@ vDSP_fft_zipD(
   DSPDoubleSplitComplex *  __vDSP_ioData,
   vDSP_Stride              __vDSP_stride,
   vDSP_Length              __vDSP_log2n,
-  FFTDirection             __vDSP_direction)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -311,7 +310,7 @@ vDSP_fft_ziptD(
   vDSP_Stride              __vDSP_stride,
   DSPDoubleSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length              __vDSP_log2n,
-  FFTDirection             __vDSP_direction)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 
@@ -338,7 +337,7 @@ vDSP_fft_zop(
   DSPSplitComplex *  __vDSP_result,
   vDSP_Stride        __vDSP_strideResult,
   vDSP_Length        __vDSP_log2n,
-  FFTDirection       __vDSP_direction)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -358,7 +357,7 @@ vDSP_fft_zopt(
   vDSP_Stride        __vDSP_strideResult,
   DSPSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length        __vDSP_log2n,
-  FFTDirection       __vDSP_direction)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -377,7 +376,7 @@ vDSP_fft_zopD(
   DSPDoubleSplitComplex *  __vDSP_result,
   vDSP_Stride              __vDSP_strideResult,
   vDSP_Length              __vDSP_log2n,
-  FFTDirection             __vDSP_direction)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -397,7 +396,7 @@ vDSP_fft_zoptD(
   vDSP_Stride              __vDSP_strideResult,
   DSPDoubleSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length              __vDSP_log2n,
-  FFTDirection             __vDSP_direction)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 
@@ -422,7 +421,7 @@ vDSP_fft_zrip(
   DSPSplitComplex *  __vDSP_ioData,
   vDSP_Stride        __vDSP_stride,
   vDSP_Length        __vDSP_log2n,
-  FFTDirection       __vDSP_direction)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -440,7 +439,7 @@ vDSP_fft_zript(
   vDSP_Stride        __vDSP_stride,
   DSPSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length        __vDSP_log2n,
-  FFTDirection       __vDSP_direction)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -457,7 +456,7 @@ vDSP_fft_zripD(
   DSPDoubleSplitComplex *  __vDSP_ioData,
   vDSP_Stride              __vDSP_stride,
   vDSP_Length              __vDSP_log2n,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -475,7 +474,7 @@ vDSP_fft_zriptD(
   vDSP_Stride              __vDSP_stride,
   DSPDoubleSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length              __vDSP_log2n,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 
@@ -502,7 +501,7 @@ vDSP_fft_zrop(
   DSPSplitComplex *  __vDSP_result,
   vDSP_Stride        __vDSP_strideResult,
   vDSP_Length        __vDSP_log2n,
-  FFTDirection       __vDSP_direction)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -522,7 +521,7 @@ vDSP_fft_zropt(
   vDSP_Stride        __vDSP_strideResult,
   DSPSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length        __vDSP_log2n,
-  FFTDirection       __vDSP_direction)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -541,7 +540,7 @@ vDSP_fft_zropD(
   DSPDoubleSplitComplex *  __vDSP_result,
   vDSP_Stride              __vDSP_strideResult,
   vDSP_Length              __vDSP_log2n,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -561,7 +560,7 @@ vDSP_fft_zroptD(
   vDSP_Stride              __vDSP_strideResult,
   DSPDoubleSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length              __vDSP_log2n,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 
@@ -588,7 +587,7 @@ vDSP_fft2d_zip(
   vDSP_Stride        __vDSP_strideInCol,
   vDSP_Length        __vDSP_log2nInCol,
   vDSP_Length        __vDSP_log2nInRow,
-  FFTDirection       __vDSP_direction)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -608,7 +607,7 @@ vDSP_fft2d_zipt(
   DSPSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length        __vDSP_log2nInCol,
   vDSP_Length        __vDSP_log2nInRow,
-  FFTDirection       __vDSP_direction)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -627,7 +626,7 @@ vDSP_fft2d_zipD(
   vDSP_Stride              __vDSP_strideInCol,
   vDSP_Length              __vDSP_log2nInCol,
   vDSP_Length              __vDSP_log2nInRow,
-  FFTDirection             __vDSP_direction)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -647,7 +646,7 @@ vDSP_fft2d_ziptD(
   DSPDoubleSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length              __vDSP_log2nInCol,
   vDSP_Length              __vDSP_log2nInRow,
-  FFTDirection             __vDSP_direction)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 
@@ -677,7 +676,7 @@ vDSP_fft2d_zop(
   vDSP_Stride        __vDSP_strideResultInCol,
   vDSP_Length        __vDSP_log2nInCol,
   vDSP_Length        __vDSP_log2nInRow,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -700,7 +699,7 @@ vDSP_fft2d_zopt(
   DSPSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length        __vDSP_log2nInCol,
   vDSP_Length        __vDSP_log2nInRow,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -722,7 +721,7 @@ vDSP_fft2d_zopD(
   vDSP_Stride              __vDSP_strideResultInCol,
   vDSP_Length              __vDSP_log2nInCol,
   vDSP_Length              __vDSP_log2nInRow,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -745,7 +744,7 @@ vDSP_fft2d_zoptD(
   DSPDoubleSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length              __vDSP_log2nInCol,
   vDSP_Length              __vDSP_log2nInRow,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 
@@ -773,7 +772,7 @@ vDSP_fft2d_zrip(
   vDSP_Stride        __vDSP_strideInCol,
   vDSP_Length        __vDSP_log2nInCol,
   vDSP_Length        __vDSP_log2nInRow,
-  FFTDirection       __vDSP_direction)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -793,7 +792,7 @@ vDSP_fft2d_zript(
   DSPSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length        __vDSP_log2nInCol,
   vDSP_Length        __vDSP_log2nInRow,
-  FFTDirection       __vDSP_direction)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_direction) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -812,7 +811,7 @@ vDSP_fft2d_zripD(
   vDSP_Stride              __vDSP_strideInCol,
   vDSP_Length              __vDSP_log2nInCol,
   vDSP_Length              __vDSP_log2nInRow,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -832,7 +831,7 @@ vDSP_fft2d_zriptD(
   DSPDoubleSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length              __vDSP_log2nInCol,
   vDSP_Length              __vDSP_log2nInRow,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 
@@ -863,7 +862,7 @@ vDSP_fft2d_zrop(
   vDSP_Stride        __vDSP_strideResultInCol,
   vDSP_Length        __vDSP_log2nInCol,
   vDSP_Length        __vDSP_log2nInRow,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -886,7 +885,7 @@ vDSP_fft2d_zropt(
   DSPSplitComplex *  __vDSP_bufferTemp,
   vDSP_Length        __vDSP_log2nInCol,
   vDSP_Length        __vDSP_log2nInRow,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /*
@@ -908,7 +907,7 @@ vDSP_fft2d_zropD(
   vDSP_Stride              __vDSP_Ic,
   vDSP_Length              __vDSP_log2nc,
   vDSP_Length              __vDSP_log2nr,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -931,7 +930,7 @@ vDSP_fft2d_zroptD(
   DSPDoubleSplitComplex *  __vDSP_temp,
   vDSP_Length              __vDSP_log2nc,
   vDSP_Length              __vDSP_log2nr,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 
@@ -958,7 +957,7 @@ vDSP_fftm_zip(
   vDSP_Stride        __vDSP_fftStride,
   vDSP_Length        __vDSP_log2n,
   vDSP_Length        __vDSP_numFFT,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -978,7 +977,7 @@ vDSP_fftm_zipt(
   DSPSplitComplex *  __vDSP_temp,
   vDSP_Length        __vDSP_log2n,
   vDSP_Length        __vDSP_numFFT,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -997,7 +996,7 @@ vDSP_fftm_zipD(
   vDSP_Stride              __vDSP_fftStride,
   vDSP_Length              __vDSP_log2n,
   vDSP_Length              __vDSP_numFFT,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -1017,7 +1016,7 @@ vDSP_fftm_ziptD(
   DSPDoubleSplitComplex *  __vDSP_temp,
   vDSP_Length              __vDSP_log2n,
   vDSP_Length              __vDSP_numFFT,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 
@@ -1047,7 +1046,7 @@ vDSP_fftm_zop(
   vDSP_Stride        __vDSP_rfftStride,
   vDSP_Length        __vDSP_log2n,
   vDSP_Length        __vDSP_numFFT,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -1070,7 +1069,7 @@ vDSP_fftm_zopt(
   DSPSplitComplex *  __vDSP_temp,
   vDSP_Length        __vDSP_log2n,
   vDSP_Length        __vDSP_numFFT,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -1092,7 +1091,7 @@ vDSP_fftm_zopD(
   vDSP_Stride              __vDSP_rfftStride,
   vDSP_Length              __vDSP_log2n,
   vDSP_Length              __vDSP_numFFT,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -1115,7 +1114,7 @@ vDSP_fftm_zoptD(
   DSPDoubleSplitComplex *  __vDSP_temp,
   vDSP_Length              __vDSP_log2n,
   vDSP_Length              __vDSP_numFFT,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*  In-place multiple real-to-complex Discrete Fourier Transform routines.
@@ -1141,7 +1140,7 @@ vDSP_fftm_zrip(
   vDSP_Stride        __vDSP_fftStride,
   vDSP_Length        __vDSP_log2n,
   vDSP_Length        __vDSP_numFFT,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -1161,7 +1160,7 @@ vDSP_fftm_zript(
   DSPSplitComplex *  __vDSP_temp,
   vDSP_Length        __vDSP_log2n,
   vDSP_Length        __vDSP_numFFT,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -1180,7 +1179,7 @@ vDSP_fftm_zripD(
   vDSP_Stride              __vDSP_fftStride,
   vDSP_Length              __vDSP_log2n,
   vDSP_Length              __vDSP_numFFT,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -1200,7 +1199,7 @@ vDSP_fftm_zriptD(
   DSPDoubleSplitComplex *  __vDSP_temp,
   vDSP_Length              __vDSP_log2n,
   vDSP_Length              __vDSP_numFFT,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 
@@ -1230,7 +1229,7 @@ vDSP_fftm_zrop(
   vDSP_Stride        __vDSP_rfftStride,
   vDSP_Length        __vDSP_log2n,
   vDSP_Length        __vDSP_numFFT,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -1253,7 +1252,7 @@ vDSP_fftm_zropt(
   DSPSplitComplex *  __vDSP_temp,
   vDSP_Length        __vDSP_log2n,
   vDSP_Length        __vDSP_numFFT,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -1275,7 +1274,7 @@ vDSP_fftm_zropD(
   vDSP_Stride              __vDSP_rfftStride,
   vDSP_Length              __vDSP_log2n,
   vDSP_Length              __vDSP_numFFT,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -1298,7 +1297,7 @@ vDSP_fftm_zroptD(
   DSPDoubleSplitComplex *  __vDSP_temp,
   vDSP_Length              __vDSP_log2n,
   vDSP_Length              __vDSP_numFFT,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*  Non-power-of-two out-of-place complex Discrete Fourier Transform routines.
@@ -1324,7 +1323,7 @@ vDSP_fft3_zop(
   DSPSplitComplex *  __vDSP_result,
   vDSP_Stride        __vDSP_resultStride,
   vDSP_Length        __vDSP_log2n,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -1343,7 +1342,7 @@ vDSP_fft5_zop(
   DSPSplitComplex *  __vDSP_result,
   vDSP_Stride        __vDSP_resultStride,
   vDSP_Length        __vDSP_log2n,
-  FFTDirection       __vDSP_flag)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection       __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -1362,7 +1361,7 @@ vDSP_fft3_zopD(
   DSPDoubleSplitComplex *  __vDSP_ioData2,
   vDSP_Stride              __vDSP_L,
   vDSP_Length              __vDSP_log2n,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /*
@@ -1381,7 +1380,7 @@ vDSP_fft5_zopD(
   DSPDoubleSplitComplex *  __vDSP_ioData2,
   vDSP_Stride              __vDSP_L,
   vDSP_Length              __vDSP_log2n,
-  FFTDirection             __vDSP_flag)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  FFTDirection             __vDSP_flag) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Convolution (or correlation), single-precision.*/
@@ -1402,7 +1401,7 @@ vDSP_conv(
   float         __vDSP_result[],
   vDSP_Stride   __vDSP_strideResult,
   vDSP_Length   __vDSP_lenResult,
-  vDSP_Length   __vDSP_lenFilter)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length   __vDSP_lenFilter) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Convolution (or correlation), double-precision.*/
@@ -1423,7 +1422,7 @@ vDSP_convD(
   double         __vDSP_result[],
   vDSP_Stride    __vDSP_strideResult,
   vDSP_Length    __vDSP_lenResult,
-  vDSP_Length    __vDSP_lenFilter)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length    __vDSP_lenFilter) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* 3*3 filter convolution, single-precision.*/
@@ -1441,7 +1440,7 @@ vDSP_f3x3(
   vDSP_Length   __vDSP_rows,
   vDSP_Length   __vDSP_cols,
   float *       __vDSP_filter,
-  float *       __vDSP_result)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  float *       __vDSP_result) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* 3*3 filter convolution, double-precision.*/
@@ -1459,7 +1458,7 @@ vDSP_f3x3D(
   vDSP_Length   __vDSP_rows,
   vDSP_Length   __vDSP_cols,
   double *      __vDSP_filter,
-  double *      __vDSP_result)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  double *      __vDSP_result) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* 5*5 filter convolution, single-precision.*/
@@ -1477,7 +1476,7 @@ vDSP_f5x5(
   vDSP_Length   __vDSP_rows,
   vDSP_Length   __vDSP_cols,
   float *       __vDSP_filter,
-  float *       __vDSP_result)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  float *       __vDSP_result) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* 5*5 filter convolution, double-precision.*/
@@ -1495,7 +1494,7 @@ vDSP_f5x5D(
   vDSP_Length   __vDSP_rows,
   vDSP_Length   __vDSP_cols,
   double *      __vDSP_filter,
-  double *      __vDSP_result)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  double *      __vDSP_result) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* General two-dimensional (image) convolution, single-precision.*/
@@ -1515,7 +1514,7 @@ vDSP_imgfir(
   float *       __vDSP_filter,
   float *       __vDSP_result,
   vDSP_Length   __vDSP_fnumRow,
-  vDSP_Length   __vDSP_fnumCol)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length   __vDSP_fnumCol) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* General two-dimensional (image) convolution, double-precision.*/
@@ -1535,7 +1534,7 @@ vDSP_imgfirD(
   double *      __vDSP_filter,
   double *      __vDSP_result,
   vDSP_Length   __vDSP_fnumRow,
-  vDSP_Length   __vDSP_fnumCol)                               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length   __vDSP_fnumCol) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Matrix transpose, single-precision.*/
@@ -1554,7 +1553,7 @@ vDSP_mtrans(
   float *       __vDSP_c,
   vDSP_Stride   __vDSP_cStride,
   vDSP_Length   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Matrix transpose, double-precision.*/
@@ -1573,7 +1572,7 @@ vDSP_mtransD(
   double *      __vDSP_c,
   vDSP_Stride   __vDSP_cStride,
   vDSP_Length   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Matrix multiply, single-precision.*/
@@ -1595,7 +1594,7 @@ vDSP_mmul(
   vDSP_Stride   __vDSP_cStride,
   vDSP_Length   __vDSP_M,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_P)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length   __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Matrix multiply, double-precision.*/
@@ -1617,7 +1616,7 @@ vDSP_mmulD(
   vDSP_Stride   __vDSP_cStride,
   vDSP_Length   __vDSP_M,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_P)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length   __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split matrix multiply and add, single-precision.*/
@@ -1641,7 +1640,7 @@ vDSP_zmma(
   vDSP_Stride        __vDSP_l,
   vDSP_Length        __vDSP_M,
   vDSP_Length        __vDSP_N,
-  vDSP_Length        __vDSP_P)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length        __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split matrix multiply and add, double-precision.*/
@@ -1665,7 +1664,7 @@ vDSP_zmmaD(
   vDSP_Stride              __vDSP_l,
   vDSP_Length              __vDSP_M,
   vDSP_Length              __vDSP_N,
-  vDSP_Length              __vDSP_P)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split matrix multiply and subtract, single-precision.*/
@@ -1689,7 +1688,7 @@ vDSP_zmms(
   vDSP_Stride        __vDSP_l,
   vDSP_Length        __vDSP_M,
   vDSP_Length        __vDSP_N,
-  vDSP_Length        __vDSP_P)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length        __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split matrix multiply and subtract, double-precision.*/
@@ -1713,7 +1712,7 @@ vDSP_zmmsD(
   vDSP_Stride              __vDSP_l,
   vDSP_Length              __vDSP_M,
   vDSP_Length              __vDSP_N,
-  vDSP_Length              __vDSP_P)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split matrix subtract and multiply, single-precision.*/
@@ -1737,7 +1736,7 @@ vDSP_zmsm(
   vDSP_Stride        __vDSP_l,
   vDSP_Length        __vDSP_M,
   vDSP_Length        __vDSP_N,
-  vDSP_Length        __vDSP_P)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length        __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split matrix subtract and multiply, double-precision.*/
@@ -1761,7 +1760,7 @@ vDSP_zmsmD(
   vDSP_Stride              __vDSP_l,
   vDSP_Length              __vDSP_M,
   vDSP_Length              __vDSP_N,
-  vDSP_Length              __vDSP_P)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split matrix multiply, single-precision.*/
@@ -1783,7 +1782,7 @@ vDSP_zmmul(
   vDSP_Stride        __vDSP_k,
   vDSP_Length        __vDSP_M,
   vDSP_Length        __vDSP_N,
-  vDSP_Length        __vDSP_P)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length        __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split matrix multiply, double-precision.*/
@@ -1805,7 +1804,7 @@ vDSP_zmmulD(
   vDSP_Stride              __vDSP_k,
   vDSP_Length              __vDSP_M,
   vDSP_Length              __vDSP_N,
-  vDSP_Length              __vDSP_P)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Vector add, single-precision.*/
@@ -1825,7 +1824,7 @@ vDSP_vadd(
   vDSP_Stride   __vDSP_stride2,
   float         __vDSP_result[],
   vDSP_Stride   __vDSP_strideResult,
-  vDSP_Length   __vDSP_size)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length   __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Vector add, double-precision.*/
@@ -1845,7 +1844,7 @@ vDSP_vaddD(
   vDSP_Stride    __vDSP_stride2,
   double         __vDSP_result[],
   vDSP_Stride    __vDSP_strideResult,
-  vDSP_Length    __vDSP_size)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length    __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Vector subtract, single-precision.*/
@@ -1865,7 +1864,7 @@ vDSP_vsub(
   vDSP_Stride   __vDSP_stride2,
   float         __vDSP_result[],
   vDSP_Stride   __vDSP_strideResult,
-  vDSP_Length   __vDSP_size)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length   __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Vector subtract, double-precision.*/
@@ -1885,7 +1884,7 @@ vDSP_vsubD(
   vDSP_Stride    __vDSP_stride2,
   double         __vDSP_result[],
   vDSP_Stride    __vDSP_strideResult,
-  vDSP_Length    __vDSP_size)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length    __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Vector multiply, single-precision.*/
@@ -1905,7 +1904,7 @@ vDSP_vmul(
   vDSP_Stride   __vDSP_stride2,
   float         __vDSP_result[],
   vDSP_Stride   __vDSP_strideResult,
-  vDSP_Length   __vDSP_size)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length   __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Vector multiply, double-precision.*/
@@ -1925,7 +1924,7 @@ vDSP_vmulD(
   vDSP_Stride    __vDSP_stride2,
   double         __vDSP_result[],
   vDSP_Stride    __vDSP_strideResult,
-  vDSP_Length    __vDSP_size)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length    __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Vector-scalar multiply, single-precision.*/
@@ -1944,7 +1943,7 @@ vDSP_vsmul(
   const float *  __vDSP_input2,
   float          __vDSP_result[],
   vDSP_Stride    __vDSP_strideResult,
-  vDSP_Length    __vDSP_size)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length    __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Vector-scalar multiply, double-precision.*/
@@ -1963,7 +1962,7 @@ vDSP_vsmulD(
   const double *  __vDSP_input2,
   double          __vDSP_result[],
   vDSP_Stride     __vDSP_strideResult,
-  vDSP_Length     __vDSP_size)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length     __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Vector square, single-precision.*/
@@ -1981,7 +1980,7 @@ vDSP_vsq(
   vDSP_Stride   __vDSP_strideInput,
   float         __vDSP_result[],
   vDSP_Stride   __vDSP_strideResult,
-  vDSP_Length   __vDSP_size)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length   __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Vector square, double-precision.*/
@@ -1999,7 +1998,7 @@ vDSP_vsqD(
   vDSP_Stride    __vDSP_strideInput,
   double         __vDSP_result[],
   vDSP_Stride    __vDSP_strideResult,
-  vDSP_Length    __vDSP_size)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length    __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 
@@ -2018,7 +2017,7 @@ vDSP_vssq(
   vDSP_Stride   __vDSP_strideInput,
   float         __vDSP_result[],
   vDSP_Stride   __vDSP_strideResult,
-  vDSP_Length   __vDSP_size)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length   __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Vector signed square, double-precision.*/
@@ -2036,7 +2035,7 @@ vDSP_vssqD(
   vDSP_Stride    __vDSP_strideInput,
   double         __vDSP_result[],
   vDSP_Stride    __vDSP_strideResult,
-  vDSP_Length    __vDSP_size)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length    __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Dot product, single-precision.*/
@@ -2055,7 +2054,7 @@ vDSP_dotpr(
   const float   __vDSP_input2[],
   vDSP_Stride   __vDSP_stride2,
   float *       __vDSP_result,
-  vDSP_Length   __vDSP_size)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length   __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Dot product, double-precision.*/
@@ -2074,7 +2073,7 @@ vDSP_dotprD(
   const double   __vDSP_input2[],
   vDSP_Stride    __vDSP_stride2,
   double *       __vDSP_result,
-  vDSP_Length    __vDSP_size)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length    __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Vector add and multiply, single-precision.*/
@@ -2096,7 +2095,7 @@ vDSP_vam(
   vDSP_Stride   __vDSP_stride3,
   float         __vDSP_result[],
   vDSP_Stride   __vDSP_strideResult,
-  vDSP_Length   __vDSP_size)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length   __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Vector add and multiply, double-precision.*/
@@ -2118,7 +2117,7 @@ vDSP_vamD(
   vDSP_Stride    __vDSP_stride3,
   double         __vDSP_result[],
   vDSP_Stride    __vDSP_strideResult,
-  vDSP_Length    __vDSP_size)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length    __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split convolution, single-precision.*/
@@ -2139,7 +2138,7 @@ vDSP_zconv(
   DSPSplitComplex *  __vDSP_result,
   vDSP_Stride        __vDSP_strideResult,
   vDSP_Length        __vDSP_lenResult,
-  vDSP_Length        __vDSP_lenFilter)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length        __vDSP_lenFilter) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Complex-split convolution, double-precision.*/
@@ -2160,7 +2159,7 @@ vDSP_zconvD(
   DSPDoubleSplitComplex *  __vDSP_result,
   vDSP_Stride              __vDSP_strideResult,
   vDSP_Length              __vDSP_lenResult,
-  vDSP_Length              __vDSP_lenFilter)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_lenFilter) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split vector add, single-precision.*/
@@ -2180,7 +2179,7 @@ vDSP_zvadd(
   vDSP_Stride        __vDSP_stride2,
   DSPSplitComplex *  __vDSP_result,
   vDSP_Stride        __vDSP_strideResult,
-  vDSP_Length        __vDSP_size)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length        __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Complex-split vector add, double-precision.*/
@@ -2200,7 +2199,7 @@ vDSP_zvaddD(
   vDSP_Stride              __vDSP_stride2,
   DSPDoubleSplitComplex *  __vDSP_result,
   vDSP_Stride              __vDSP_strideResult,
-  vDSP_Length              __vDSP_size)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split vector subtract, single-precision.*/
@@ -2220,7 +2219,7 @@ vDSP_zvsub(
   vDSP_Stride        __vDSP_stride2,
   DSPSplitComplex *  __vDSP_result,
   vDSP_Stride        __vDSP_strideResult,
-  vDSP_Length        __vDSP_size)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length        __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Complex-split vector subtract, double-precision.*/
@@ -2240,7 +2239,7 @@ vDSP_zvsubD(
   vDSP_Stride              __vDSP_stride2,
   DSPDoubleSplitComplex *  __vDSP_result,
   vDSP_Stride              __vDSP_strideResult,
-  vDSP_Length              __vDSP_size)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split vector multiply, single-precision.*/
@@ -2252,13 +2251,14 @@ vDSP_zvsubD(
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern void vDSP_zvmul(
+extern void 
+vDSP_zvmul(
 	const DSPSplitComplex *__vDSP_input1, vDSP_Stride __vDSP_stride1,
 	const DSPSplitComplex *__vDSP_input2, vDSP_Stride __vDSP_stride2,
 	const DSPSplitComplex *__vDSP_result, vDSP_Stride __vDSP_strideResult,
 	vDSP_Length __vDSP_size,
 	int __vDSP_conjugate)
-		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Complex-split vector multiply, double-precision.*/
@@ -2272,14 +2272,14 @@ extern void vDSP_zvmul(
  */
 extern void 
 vDSP_zvmulD(
-  DSPDoubleSplitComplex *  __vDSP_input1,
-  vDSP_Stride              __vDSP_stride1,
-  DSPDoubleSplitComplex *  __vDSP_input2,
-  vDSP_Stride              __vDSP_stride2,
-  DSPDoubleSplitComplex *  __vDSP_result,
-  vDSP_Stride              __vDSP_strideResult,
-  vDSP_Length              __vDSP_size,
-  int                      __vDSP_conjugate)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  const DSPDoubleSplitComplex *  __vDSP_input1,
+  vDSP_Stride							__vDSP_stride1,
+  const DSPDoubleSplitComplex *  __vDSP_input2,
+  vDSP_Stride							__vDSP_stride2,
+  const DSPDoubleSplitComplex *  __vDSP_result,
+  vDSP_Stride							__vDSP_strideResult,
+  vDSP_Length							__vDSP_size,
+  int										__vDSP_conjugate) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split dot product, single-precision.*/
@@ -2298,7 +2298,7 @@ vDSP_zdotpr(
   DSPSplitComplex *  __vDSP_input2,
   vDSP_Stride        __vDSP_stride2,
   DSPSplitComplex *  __vDSP_result,
-  vDSP_Length        __vDSP_size)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length        __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Complex-split dot product, double-precision.*/
@@ -2317,7 +2317,7 @@ vDSP_zdotprD(
   DSPDoubleSplitComplex *  __vDSP_input2,
   vDSP_Stride              __vDSP_stride2,
   DSPDoubleSplitComplex *  __vDSP_result,
-  vDSP_Length              __vDSP_size)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split inner (conjugate) dot product, single-precision.*/
@@ -2336,7 +2336,7 @@ vDSP_zidotpr(
   DSPSplitComplex *  __vDSP_input2,
   vDSP_Stride        __vDSP_stride2,
   DSPSplitComplex *  __vDSP_result,
-  vDSP_Length        __vDSP_size)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length        __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Complex-split inner (conjugate) dot product, double-precision.*/
@@ -2355,7 +2355,7 @@ vDSP_zidotprD(
   DSPDoubleSplitComplex *  __vDSP_input2,
   vDSP_Stride              __vDSP_stride2,
   DSPDoubleSplitComplex *  __vDSP_result,
-  vDSP_Length              __vDSP_size)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Dot product of complex-split with real, single-precision.*/
@@ -2374,7 +2374,7 @@ vDSP_zrdotpr(
   const float        __vDSP_input2[],
   vDSP_Stride        __vDSP_stride2,
   DSPSplitComplex *  __vDSP_result,
-  vDSP_Length        __vDSP_size)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length        __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Dot product of complex-split with real, double-precision.*/
@@ -2393,7 +2393,7 @@ vDSP_zrdotprD(
   const double             __vDSP_input2[],
   vDSP_Stride              __vDSP_stride2,
   DSPDoubleSplitComplex *  __vDSP_result,
-  vDSP_Length              __vDSP_size)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Complex-split conjugate multiply and add, single-precision.*/
@@ -2411,7 +2411,7 @@ extern void vDSP_zvcma(
 	const DSPSplitComplex *__vDSP_input3, vDSP_Stride __vDSP_stride3,
 	const DSPSplitComplex *__vDSP_result, vDSP_Stride __vDSP_strideResult,
 	vDSP_Length __vDSP_size)
-		AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Complex-split conjugate multiply and add, double-precision.*/
@@ -2433,7 +2433,7 @@ vDSP_zvcmaD(
   vDSP_Stride              __vDSP_stride3,
   DSPDoubleSplitComplex *  __vDSP_result,
   vDSP_Stride              __vDSP_strideResult,
-  vDSP_Length              __vDSP_size)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Add complex-split and real, single-precision.*/
@@ -2453,7 +2453,7 @@ vDSP_zrvadd(
   vDSP_Stride        __vDSP_stride2,
   DSPSplitComplex *  __vDSP_result,
   vDSP_Stride        __vDSP_strideResult,
-  vDSP_Length        __vDSP_size)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length        __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Add complex-split and real, double-precision.*/
@@ -2473,7 +2473,7 @@ vDSP_zrvaddD(
   vDSP_Stride              __vDSP_stride2,
   DSPDoubleSplitComplex *  __vDSP_result,
   vDSP_Stride              __vDSP_strideResult,
-  vDSP_Length              __vDSP_size)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Subtract real from complex-split, single-precision.*/
@@ -2493,7 +2493,7 @@ vDSP_zrvsub(
   vDSP_Stride        __vDSP_stride2,
   DSPSplitComplex *  __vDSP_result,
   vDSP_Stride        __vDSP_strideResult,
-  vDSP_Length        __vDSP_size)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length        __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Subtract real from complex-split, double-precision.*/
@@ -2513,7 +2513,7 @@ vDSP_zrvsubD(
   vDSP_Stride              __vDSP_stride2,
   DSPDoubleSplitComplex *  __vDSP_result,
   vDSP_Stride              __vDSP_strideResult,
-  vDSP_Length              __vDSP_size)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Multiply complex-split and real, single-precision.*/
@@ -2533,7 +2533,7 @@ vDSP_zrvmul(
   vDSP_Stride        __vDSP_stride2,
   DSPSplitComplex *  __vDSP_result,
   vDSP_Stride        __vDSP_strideResult,
-  vDSP_Length        __vDSP_size)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vDSP_Length        __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_0);
 
 
 /* Multiply complex-split and real, double-precision.*/
@@ -2553,7 +2553,7 @@ vDSP_zrvmulD(
   vDSP_Stride              __vDSP_stride2,
   DSPDoubleSplitComplex *  __vDSP_result,
   vDSP_Stride              __vDSP_strideResult,
-  vDSP_Length              __vDSP_size)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  vDSP_Length              __vDSP_size) __OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_4_0);
 
 
 /* Vector convert double-precision to single-precision.*/
@@ -2571,7 +2571,7 @@ vDSP_vdpsp(
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert single-precision to double-precision.*/
@@ -2589,7 +2589,7 @@ vDSP_vspdp(
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector absolute value, integer.*/
@@ -2607,7 +2607,7 @@ vDSP_vabsi(
   vDSP_Stride   __vDSP_I,
   int *         __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector (bit-wise) equivalence (not (A xor B)), integer.*/
@@ -2627,7 +2627,7 @@ vDSP_veqvi(
   vDSP_Stride   __vDSP_J,
   int *         __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector divide, integer.*/
@@ -2647,7 +2647,7 @@ vDSP_vdivi(
   vDSP_Stride   __vDSP_J,
   int *         __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector fill, integer.*/
@@ -2664,7 +2664,7 @@ vDSP_vfilli(
   int *         __vDSP_A,
   int *         __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector-scalar add, integer.*/
@@ -2683,7 +2683,7 @@ vDSP_vsaddi(
   int *         __vDSP_B,
   int *         __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector-scalar divide, integer.*/
@@ -2702,7 +2702,7 @@ vDSP_vsdivi(
   int *         __vDSP_B,
   int *         __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split accumulating autospectrum, single-precision.*/
@@ -2718,7 +2718,7 @@ extern void
 vDSP_zaspec(
   DSPSplitComplex *  __vDSP_A,
   float *            __vDSP_C,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split accumulating autospectrum, double-precision.*/
@@ -2734,7 +2734,7 @@ extern void
 vDSP_zaspecD(
   DSPDoubleSplitComplex *  A,
   double *                 __vDSP_C,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Create Blackman window, single-precision.*/
@@ -2750,7 +2750,7 @@ extern void
 vDSP_blkman_window(
   float *       __vDSP_C,
   vDSP_Length   __vDSP_N,
-  int           __vDSP_FLAG)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  int           __vDSP_FLAG) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Create Blackman window, double-precision.*/
@@ -2766,7 +2766,7 @@ extern void
 vDSP_blkman_windowD(
   double *      __vDSP_C,
   vDSP_Length   __vDSP_N,
-  int           __vDSP_FLAG)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  int           __vDSP_FLAG) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split coherence function, single-precision.*/
@@ -2784,7 +2784,7 @@ vDSP_zcoher(
   float *            __vDSP_B,
   DSPSplitComplex *  __vDSP_C,
   float *            __vDSP_D,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split coherence function, double-precision.*/
@@ -2802,7 +2802,7 @@ vDSP_zcoherD(
   double *                 __vDSP_B,
   DSPDoubleSplitComplex *  __vDSP_C,
   double *                 __vDSP_D,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split anti-aliasing down-sample with real filter, single-precision.*/
@@ -2821,7 +2821,7 @@ vDSP_zrdesamp(
   float *            __vDSP_B,
   DSPSplitComplex *  __vDSP_C,
   vDSP_Length        __vDSP_N,
-  vDSP_Length        __vDSP_M)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_M) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split anti-aliasing down-sample with real filter, double-precision.*/
@@ -2840,7 +2840,7 @@ vDSP_zrdesampD(
   double *                 __vDSP_B,
   DSPDoubleSplitComplex *  __vDSP_C,
   vDSP_Length              __vDSP_N,
-  vDSP_Length              __vDSP_M)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_M) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector complex-split divide by real, single-precision.*/
@@ -2860,7 +2860,7 @@ vDSP_zrvdiv(
   vDSP_Stride        __vDSP_J,
   DSPSplitComplex *  __vDSP_C,
   vDSP_Stride        __vDSP_K,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector complex-split divide by real, double-precision.*/
@@ -2880,7 +2880,7 @@ vDSP_zrvdivD(
   vDSP_Stride              __vDSP_J,
   DSPDoubleSplitComplex *  __vDSP_C,
   vDSP_Stride              __vDSP_K,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Transfer function (B/A), single-precision.*/
@@ -2897,7 +2897,7 @@ vDSP_ztrans(
   float *            __vDSP_A,
   DSPSplitComplex *  __vDSP_B,
   DSPSplitComplex *  __vDSP_C,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Transfer function (B/A), double-precision.*/
@@ -2914,7 +2914,7 @@ vDSP_ztransD(
   double *                 __vDSP_A,
   DSPDoubleSplitComplex *  __vDSP_B,
   DSPDoubleSplitComplex *  __vDSP_C,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector divide, single-precision.*/
@@ -2934,7 +2934,7 @@ vDSP_zvdiv(
   vDSP_Stride        __vDSP_J,
   DSPSplitComplex *  __vDSP_C,
   vDSP_Stride        __vDSP_K,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector divide, double-precision.*/
@@ -2954,7 +2954,7 @@ vDSP_zvdivD(
   vDSP_Stride              __vDSP_J,
   DSPDoubleSplitComplex *  __vDSP_C,
   vDSP_Stride              __vDSP_K,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split accumulating cross-spectrum, single-precision.*/
@@ -2971,7 +2971,7 @@ vDSP_zcspec(
   DSPSplitComplex *  __vDSP_A,
   DSPSplitComplex *  __vDSP_B,
   DSPSplitComplex *  __vDSP_C,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split accumulating cross-spectrum, double-precision.*/
@@ -2988,7 +2988,7 @@ vDSP_zcspecD(
   DSPDoubleSplitComplex *  A,
   DSPDoubleSplitComplex *  __vDSP_B,
   DSPDoubleSplitComplex *  __vDSP_C,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector absolute value, single-precision.*/
@@ -3006,7 +3006,7 @@ vDSP_zvabs(
   vDSP_Stride        __vDSP_I,
   float *            __vDSP_C,
   vDSP_Stride        __vDSP_K,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector absolute value, double-precision.*/
@@ -3024,7 +3024,7 @@ vDSP_zvabsD(
   vDSP_Stride              __vDSP_I,
   double *                 __vDSP_C,
   vDSP_Stride              __vDSP_K,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector conjugate and multiply, single-precision.*/
@@ -3038,13 +3038,13 @@ vDSP_zvabsD(
  */
 extern void 
 vDSP_zvcmul(
-  DSPSplitComplex *  __vDSP_A,
-  vDSP_Stride        __vDSP_I,
-  DSPSplitComplex *  __vDSP_B,
-  vDSP_Stride        __vDSP_J,
-  DSPSplitComplex *  __vDSP_C,
-  vDSP_Stride        __vDSP_K,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  const DSPSplitComplex *  __vDSP_A,
+  vDSP_Stride					__vDSP_I,
+  const DSPSplitComplex *  __vDSP_B,
+  vDSP_Stride					__vDSP_J,
+  const DSPSplitComplex *  __vDSP_C,
+  vDSP_Stride					__vDSP_K,
+  vDSP_Length					__vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector conjugate and multiply, double-precision.*/
@@ -3058,13 +3058,13 @@ vDSP_zvcmul(
  */
 extern void 
 vDSP_zvcmulD(
-  DSPDoubleSplitComplex *  __vDSP_A,
-  vDSP_Stride              __vDSP_I,
-  DSPDoubleSplitComplex *  __vDSP_B,
-  vDSP_Stride              __vDSP_J,
-  DSPDoubleSplitComplex *  __vDSP_C,
-  vDSP_Stride              __vDSP_K,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  const DSPDoubleSplitComplex *  __vDSP_A,
+  vDSP_Stride							__vDSP_I,
+  const DSPDoubleSplitComplex *  __vDSP_B,
+  vDSP_Stride							__vDSP_J,
+  const DSPDoubleSplitComplex *  __vDSP_C,
+  vDSP_Stride							__vDSP_K,
+  vDSP_Length							__vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector conjugate, single-precision.*/
@@ -3082,7 +3082,7 @@ vDSP_zvconj(
   vDSP_Stride        __vDSP_I,
   DSPSplitComplex *  __vDSP_C,
   vDSP_Stride        __vDSP_K,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector conjugate, double-precision.*/
@@ -3100,7 +3100,7 @@ vDSP_zvconjD(
   vDSP_Stride              __vDSP_I,
   DSPDoubleSplitComplex *  __vDSP_C,
   vDSP_Stride              __vDSP_K,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector multiply with scalar, single-precision.*/
@@ -3119,7 +3119,7 @@ vDSP_zvzsml(
   DSPSplitComplex *  __vDSP_B,
   DSPSplitComplex *  __vDSP_C,
   vDSP_Stride        __vDSP_K,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector multiply with scalar, double-precision.*/
@@ -3138,7 +3138,7 @@ vDSP_zvzsmlD(
   DSPDoubleSplitComplex *  __vDSP_B,
   DSPDoubleSplitComplex *  __vDSP_C,
   vDSP_Stride              __vDSP_K,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector fill, single-precision.*/
@@ -3155,7 +3155,7 @@ vDSP_zvfill(
   DSPSplitComplex *  __vDSP_A,
   DSPSplitComplex *  __vDSP_C,
   vDSP_Stride        __vDSP_K,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector fill, double-precision.*/
@@ -3172,7 +3172,7 @@ vDSP_zvfillD(
   DSPDoubleSplitComplex *  __vDSP_A,
   DSPDoubleSplitComplex *  __vDSP_C,
   vDSP_Stride              __vDSP_K,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector magnitudes squared, single-precision.*/
@@ -3190,7 +3190,7 @@ vDSP_zvmags(
   vDSP_Stride        __vDSP_I,
   float *            __vDSP_C,
   vDSP_Stride        __vDSP_K,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector magnitudes squared, double-precision.*/
@@ -3208,7 +3208,7 @@ vDSP_zvmagsD(
   vDSP_Stride              __vDSP_I,
   double *                 __vDSP_C,
   vDSP_Stride              __vDSP_K,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector magnitudes square and add, single-precision.*/
@@ -3228,7 +3228,7 @@ vDSP_zvmgsa(
   vDSP_Stride        __vDSP_J,
   float *            __vDSP_C,
   vDSP_Stride        __vDSP_K,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector magnitudes square and add, double-precision.*/
@@ -3248,7 +3248,7 @@ vDSP_zvmgsaD(
   vDSP_Stride              __vDSP_J,
   double *                 __vDSP_C,
   vDSP_Stride              __vDSP_K,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector move, single-precision.*/
@@ -3266,7 +3266,7 @@ vDSP_zvmov(
   vDSP_Stride        __vDSP_I,
   DSPSplitComplex *  __vDSP_C,
   vDSP_Stride        __vDSP_K,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector move, double-precision.*/
@@ -3284,7 +3284,7 @@ vDSP_zvmovD(
   vDSP_Stride              __vDSP_I,
   DSPDoubleSplitComplex *  __vDSP_C,
   vDSP_Stride              __vDSP_K,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector negate, single-precision.*/
@@ -3302,7 +3302,7 @@ vDSP_zvneg(
   vDSP_Stride        __vDSP_I,
   DSPSplitComplex *  __vDSP_C,
   vDSP_Stride        __vDSP_K,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector negate, double-precision.*/
@@ -3320,7 +3320,7 @@ vDSP_zvnegD(
   vDSP_Stride              __vDSP_I,
   DSPDoubleSplitComplex *  __vDSP_C,
   vDSP_Stride              __vDSP_K,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector phase, single-precision.*/
@@ -3338,7 +3338,7 @@ vDSP_zvphas(
   vDSP_Stride        __vDSP_I,
   float *            __vDSP_C,
   vDSP_Stride        __vDSP_K,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector phase, double-precision.*/
@@ -3356,7 +3356,7 @@ vDSP_zvphasD(
   vDSP_Stride              __vDSP_I,
   double *                 __vDSP_C,
   vDSP_Stride              __vDSP_K,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector multiply by scalar and add, single-precision.*/
@@ -3377,7 +3377,7 @@ vDSP_zvsma(
   vDSP_Stride        __vDSP_K,
   DSPSplitComplex *  __vDSP_D,
   vDSP_Stride        __vDSP_L,
-  vDSP_Length        __vDSP_N)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length        __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Complex-split vector multiply by scalar and add, double-precision.*/
@@ -3398,7 +3398,7 @@ vDSP_zvsmaD(
   vDSP_Stride              __vDSP_K,
   DSPDoubleSplitComplex *  __vDSP_D,
   vDSP_Stride              __vDSP_L,
-  vDSP_Length              __vDSP_N)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length              __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Difference equation, 2 poles, 2 zeros, single-precision.*/
@@ -3417,7 +3417,7 @@ vDSP_deq22(
   float *       __vDSP_B,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Difference equation, 2 poles, 2 zeros, double-precision.*/
@@ -3436,7 +3436,7 @@ vDSP_deq22D(
   double *      __vDSP_B,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Convolution with decimation (desampling), single-precision.*/
@@ -3455,7 +3455,7 @@ vDSP_desamp(
   float *       __vDSP_B,
   float *       __vDSP_C,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_M)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_M) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Convolution with decimation (desampling), double-precision.*/
@@ -3474,7 +3474,7 @@ vDSP_desampD(
   double *      __vDSP_B,
   double *      __vDSP_C,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_M)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_M) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Create Hamming window, single-precision.*/
@@ -3490,7 +3490,7 @@ extern void
 vDSP_hamm_window(
   float *       __vDSP_C,
   vDSP_Length   __vDSP_N,
-  int           __vDSP_FLAG)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  int           __vDSP_FLAG) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Create Hamming window, double-precision.*/
@@ -3506,7 +3506,7 @@ extern void
 vDSP_hamm_windowD(
   double *      __vDSP_C,
   vDSP_Length   __vDSP_N,
-  int           __vDSP_FLAG)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  int           __vDSP_FLAG) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Create Hanning window, single-precision.*/
@@ -3522,7 +3522,7 @@ extern void
 vDSP_hann_window(
   float *       __vDSP_C,
   vDSP_Length   __vDSP_N,
-  int           __vDSP_FLAG)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  int           __vDSP_FLAG) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Create Hanning window, double-precision.*/
@@ -3538,7 +3538,7 @@ extern void
 vDSP_hann_windowD(
   double *      __vDSP_C,
   vDSP_Length   __vDSP_N,
-  int           __vDSP_FLAG)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  int           __vDSP_FLAG) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Maximum magnitude of vector, single-precision.*/
@@ -3555,7 +3555,7 @@ vDSP_maxmgv(
   const float *  __vDSP_A,
   vDSP_Stride    __vDSP_I,
   float *        __vDSP_C,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Maximum magnitude of vector, double-precision.*/
@@ -3572,7 +3572,7 @@ vDSP_maxmgvD(
   const double *  __vDSP_A,
   vDSP_Stride     __vDSP_I,
   double *        __vDSP_C,
-  vDSP_Length     __vDSP_N)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length     __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Maximum magnitude of vector, with index, single-precision.*/
@@ -3590,7 +3590,7 @@ vDSP_maxmgvi(
   vDSP_Stride    __vDSP_I,
   float *        __vDSP_C,
   vDSP_Length *  __vDSP_IC,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Maximum magnitude of vector, with index, double-precision.*/
@@ -3608,7 +3608,7 @@ vDSP_maxmgviD(
   vDSP_Stride    __vDSP_I,
   double *       __vDSP_C,
   vDSP_Length *  __vDSP_IC,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Maximum value of vector, single-precision.*/
@@ -3625,7 +3625,7 @@ vDSP_maxv(
   float *       __vDSP_A,
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Maximum value of vector, double-precision.*/
@@ -3642,7 +3642,7 @@ vDSP_maxvD(
   double *      __vDSP_A,
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Maximum value of vector, with index, single-precision.*/
@@ -3660,7 +3660,7 @@ vDSP_maxvi(
   vDSP_Stride    __vDSP_I,
   float *        __vDSP_C,
   vDSP_Length *  __vDSP_IC,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Maximum value of vector, with index, double-precision.*/
@@ -3678,7 +3678,7 @@ vDSP_maxviD(
   vDSP_Stride    __vDSP_I,
   double *       __vDSP_C,
   vDSP_Length *  __vDSP_IC,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Mean magnitude of vector, single-precision.*/
@@ -3695,7 +3695,7 @@ vDSP_meamgv(
   float *       __vDSP_A,
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Mean magnitude of vector, double-precision.*/
@@ -3712,7 +3712,7 @@ vDSP_meamgvD(
   double *      __vDSP_A,
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Mean of vector, single-precision.*/
@@ -3729,7 +3729,7 @@ vDSP_meanv(
   float *       __vDSP_A,
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Mean of vector, double-precision.*/
@@ -3746,7 +3746,7 @@ vDSP_meanvD(
   double *      __vDSP_A,
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Mean square of vector, single-precision.*/
@@ -3763,7 +3763,7 @@ vDSP_measqv(
   float *       __vDSP_A,
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Mean square of vector, double-precision.*/
@@ -3780,7 +3780,7 @@ vDSP_measqvD(
   double *      __vDSP_A,
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Minimum magnitude of vector, single-precision.*/
@@ -3797,7 +3797,7 @@ vDSP_minmgv(
   float *       __vDSP_A,
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Minimum magnitude of vector, double-precision.*/
@@ -3814,7 +3814,7 @@ vDSP_minmgvD(
   double *      __vDSP_A,
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Minimum magnitude of vector, with index, single-precision.*/
@@ -3832,7 +3832,7 @@ vDSP_minmgvi(
   vDSP_Stride    __vDSP_I,
   float *        __vDSP_C,
   vDSP_Length *  __vDSP_IC,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Minimum magnitude of vector, with index, double-precision.*/
@@ -3850,7 +3850,7 @@ vDSP_minmgviD(
   vDSP_Stride    __vDSP_I,
   double *       __vDSP_C,
   vDSP_Length *  __vDSP_IC,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Minimum value of vector, single-precision.*/
@@ -3867,7 +3867,7 @@ vDSP_minv(
   float *       __vDSP_A,
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Minimum value of vector, double-precision.*/
@@ -3884,7 +3884,7 @@ vDSP_minvD(
   double *      __vDSP_A,
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Minimum value of vector, with index, single-precision.*/
@@ -3902,7 +3902,7 @@ vDSP_minvi(
   vDSP_Stride    __vDSP_I,
   float *        __vDSP_C,
   vDSP_Length *  __vDSP_IC,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Minimum value of vector, with index, double-precision.*/
@@ -3920,7 +3920,7 @@ vDSP_minviD(
   vDSP_Stride    __vDSP_I,
   double *       __vDSP_C,
   vDSP_Length *  __vDSP_IC,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Matrix move, single-precision.*/
@@ -3939,7 +3939,7 @@ vDSP_mmov(
   vDSP_Length   __vDSP_NC,
   vDSP_Length   __vDSP_NR,
   vDSP_Length   __vDSP_TCA,
-  vDSP_Length   __vDSP_TCC)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_TCC) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Matrix move, double-precision.*/
@@ -3958,7 +3958,7 @@ vDSP_mmovD(
   vDSP_Length   __vDSP_NC,
   vDSP_Length   __vDSP_NR,
   vDSP_Length   __vDSP_TCA,
-  vDSP_Length   __vDSP_TCC)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_TCC) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Mean of signed squares of vector, single-precision.*/
@@ -3975,7 +3975,7 @@ vDSP_mvessq(
   float *       __vDSP_A,
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Mean of signed squares of vector, double-precision.*/
@@ -3992,7 +3992,7 @@ vDSP_mvessqD(
   double *      __vDSP_A,
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Find zero crossing, single-precision.*/
@@ -4011,7 +4011,7 @@ vDSP_nzcros(
   vDSP_Length    __vDSP_B,
   vDSP_Length *  __vDSP_C,
   vDSP_Length *  __vDSP_D,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Find zero crossing, double-precision.*/
@@ -4030,7 +4030,7 @@ vDSP_nzcrosD(
   vDSP_Length    __vDSP_B,
   vDSP_Length *  __vDSP_C,
   vDSP_Length *  __vDSP_D,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Convert rectangular to polar, single-precision.*/
@@ -4048,7 +4048,7 @@ vDSP_polar(
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Convert rectangular to polar, double-precision.*/
@@ -4066,7 +4066,7 @@ vDSP_polarD(
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Convert polar to rectangular, single-precision.*/
@@ -4084,7 +4084,7 @@ vDSP_rect(
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Convert polar to rectangular, double-precision.*/
@@ -4102,7 +4102,7 @@ vDSP_rectD(
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Root-mean-square of vector, single-precision.*/
@@ -4119,7 +4119,7 @@ vDSP_rmsqv(
   float *       __vDSP_A,
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Root-mean-square of vector, double-precision.*/
@@ -4136,7 +4136,7 @@ vDSP_rmsqvD(
   double *      __vDSP_A,
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Scalar-vector divide, single-precision.*/
@@ -4155,7 +4155,7 @@ vDSP_svdiv(
   vDSP_Stride   __vDSP_J,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Scalar-vector divide, double-precision.*/
@@ -4174,7 +4174,7 @@ vDSP_svdivD(
   vDSP_Stride   __vDSP_J,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Sum of vector elements, single-precision.*/
@@ -4191,7 +4191,7 @@ vDSP_sve(
   float *       __vDSP_A,
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Sum of vector elements, double-precision.*/
@@ -4208,7 +4208,7 @@ vDSP_sveD(
   double *      __vDSP_A,
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Sum of vector elements magnitudes, single-precision.*/
@@ -4225,7 +4225,7 @@ vDSP_svemg(
   float *       __vDSP_A,
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Sum of vector elements' magnitudes, double-precision.*/
@@ -4242,7 +4242,7 @@ vDSP_svemgD(
   double *      __vDSP_A,
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Sum of vector elements' squares, single-precision.*/
@@ -4259,7 +4259,7 @@ vDSP_svesq(
   float *       __vDSP_A,
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Sum of vector elements' squares, double-precision.*/
@@ -4276,7 +4276,7 @@ vDSP_svesqD(
   double *      __vDSP_A,
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Sum of vector elements' signed squares, single-precision.*/
@@ -4293,7 +4293,7 @@ vDSP_svs(
   float *       __vDSP_A,
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Sum of vector elements' signed squares, double-precision.*/
@@ -4310,7 +4310,7 @@ vDSP_svsD(
   double *      __vDSP_A,
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector add, add, and multiply, single-precision.*/
@@ -4334,7 +4334,7 @@ vDSP_vaam(
   vDSP_Stride   __vDSP_L,
   float *       __vDSP_E,
   vDSP_Stride   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector add, add, and multiply, double-precision.*/
@@ -4358,7 +4358,7 @@ vDSP_vaamD(
   vDSP_Stride   __vDSP_L,
   double *      __vDSP_E,
   vDSP_Stride   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector absolute value, single-precision.*/
@@ -4376,7 +4376,7 @@ vDSP_vabs(
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector absolute value, double-precision.*/
@@ -4394,7 +4394,7 @@ vDSP_vabsD(
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector add, subtract, and multiply, single-precision.*/
@@ -4418,7 +4418,7 @@ vDSP_vasbm(
   vDSP_Stride   __vDSP_L,
   float *       __vDSP_E,
   vDSP_Stride   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector add, subtract, and multiply, double-precision.*/
@@ -4442,7 +4442,7 @@ vDSP_vasbmD(
   vDSP_Stride   __vDSP_L,
   double *      __vDSP_E,
   vDSP_Stride   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector add and scalar multiply, single-precision.*/
@@ -4463,7 +4463,7 @@ vDSP_vasm(
   float *       __vDSP_C,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector add and scalar multiply, double-precision.*/
@@ -4484,7 +4484,7 @@ vDSP_vasmD(
   double *      __vDSP_C,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector linear average, single-precision.*/
@@ -4503,7 +4503,7 @@ vDSP_vavlin(
   float *       __vDSP_B,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector linear average, double-precision.*/
@@ -4522,7 +4522,7 @@ vDSP_vavlinD(
   double *      __vDSP_B,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector clip, single-precision.*/
@@ -4542,7 +4542,7 @@ vDSP_vclip(
   float *       __vDSP_C,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector clip, double-precision.*/
@@ -4562,7 +4562,7 @@ vDSP_vclipD(
   double *      __vDSP_C,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector clip and count, single-precision.*/
@@ -4584,7 +4584,7 @@ vDSP_vclipc(
   vDSP_Stride    __vDSP_L,
   vDSP_Length    __vDSP_N,
   vDSP_Length *  __vDSP_NLOW,
-  vDSP_Length *  __vDSP_NHI)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length *  __vDSP_NHI) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector clip and count, double-precision.*/
@@ -4606,7 +4606,7 @@ vDSP_vclipcD(
   vDSP_Stride    __vDSP_L,
   vDSP_Length    __vDSP_N,
   vDSP_Length *  __vDSP_NLOW,
-  vDSP_Length *  __vDSP_NHI)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length *  __vDSP_NHI) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector clear, single-precision.*/
@@ -4622,7 +4622,7 @@ extern void
 vDSP_vclr(
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector clear, double-precision.*/
@@ -4638,7 +4638,7 @@ extern void
 vDSP_vclrD(
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector compress, single-precision.*/
@@ -4658,7 +4658,7 @@ vDSP_vcmprs(
   vDSP_Stride   __vDSP_J,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector compress, double-precision.*/
@@ -4678,7 +4678,7 @@ vDSP_vcmprsD(
   vDSP_Stride   __vDSP_J,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to decibels, power, or amplitude, single-precision.*/
@@ -4698,7 +4698,7 @@ vDSP_vdbcon(
   float *        __vDSP_C,
   vDSP_Stride    __vDSP_K,
   vDSP_Length    __vDSP_N,
-  unsigned int   __vDSP_F)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  unsigned int   __vDSP_F) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to decibels, power, or amplitude, double-precision.*/
@@ -4718,7 +4718,7 @@ vDSP_vdbconD(
   double *       __vDSP_C,
   vDSP_Stride    __vDSP_K,
   vDSP_Length    __vDSP_N,
-  unsigned int   __vDSP_F)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  unsigned int   __vDSP_F) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector distance, single-precision.*/
@@ -4738,7 +4738,7 @@ vDSP_vdist(
   vDSP_Stride   __vDSP_J,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector distance, double-precision.*/
@@ -4758,7 +4758,7 @@ vDSP_vdistD(
   vDSP_Stride   __vDSP_J,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector divide, single-precision.*/
@@ -4778,7 +4778,7 @@ vDSP_vdiv(
   vDSP_Stride   __vDSP_J,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector divide, double-precision.*/
@@ -4798,7 +4798,7 @@ vDSP_vdivD(
   vDSP_Stride   __vDSP_J,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector envelope, single-precision.*/
@@ -4820,7 +4820,7 @@ vDSP_venvlp(
   vDSP_Stride   __vDSP_K,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector envelope, double-precision.*/
@@ -4842,7 +4842,7 @@ vDSP_venvlpD(
   vDSP_Stride   __vDSP_K,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector fill, single-precision.*/
@@ -4859,7 +4859,7 @@ vDSP_vfill(
   float *       __vDSP_A,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector fill, double-precision.*/
@@ -4876,7 +4876,7 @@ vDSP_vfillD(
   double *      __vDSP_A,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to 8-bit integer, round toward zero, single-precision.*/
@@ -4894,7 +4894,7 @@ vDSP_vfix8(
   vDSP_Stride   __vDSP_I,
   char *        __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to 8-bit integer, round toward zero, double-precision.*/
@@ -4912,7 +4912,7 @@ vDSP_vfix8D(
   vDSP_Stride   __vDSP_I,
   char *        __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to 16-bit integer, round toward zero, single-precision.*/
@@ -4930,7 +4930,7 @@ vDSP_vfix16(
   vDSP_Stride   __vDSP_I,
   short *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to 16-bit integer, round toward zero, double-precision.*/
@@ -4948,7 +4948,7 @@ vDSP_vfix16D(
   vDSP_Stride   __vDSP_I,
   short *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to 32-bit integer, round toward zero, single-precision.*/
@@ -4966,7 +4966,7 @@ vDSP_vfix32(
   vDSP_Stride   __vDSP_I,
   int *         __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to 32-bit integer, round toward zero, double-precision.*/
@@ -4984,7 +4984,7 @@ vDSP_vfix32D(
   vDSP_Stride   __vDSP_I,
   int *         __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to 8-bit integer, round to nearest, single-precision.*/
@@ -5002,7 +5002,7 @@ vDSP_vfixr8(
   vDSP_Stride   __vDSP_I,
   char *        __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to 8-bit integer, round to nearest, double-precision.*/
@@ -5020,7 +5020,7 @@ vDSP_vfixr8D(
   vDSP_Stride   __vDSP_I,
   char *        __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to 16-bit integer, round to nearest, single-precision.*/
@@ -5038,7 +5038,7 @@ vDSP_vfixr16(
   vDSP_Stride   __vDSP_I,
   short *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to 16-bit integer, round to nearest, double-precision.*/
@@ -5056,7 +5056,7 @@ vDSP_vfixr16D(
   vDSP_Stride   __vDSP_I,
   short *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to 32-bit integer, round to nearest, single-precision.*/
@@ -5074,7 +5074,7 @@ vDSP_vfixr32(
   vDSP_Stride   __vDSP_I,
   int *         __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to 32-bit integer, round to nearest, double-precision.*/
@@ -5092,7 +5092,7 @@ vDSP_vfixr32D(
   vDSP_Stride   __vDSP_I,
   int *         __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to unsigned 8-bit integer, toward zero, single-precision.*/
@@ -5110,7 +5110,7 @@ vDSP_vfixu8(
   vDSP_Stride      __vDSP_I,
   unsigned char *  __vDSP_C,
   vDSP_Stride      __vDSP_K,
-  vDSP_Length      __vDSP_N)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length      __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to unsigned 8-bit integer, toward zero, double-precision.*/
@@ -5128,7 +5128,7 @@ vDSP_vfixu8D(
   vDSP_Stride      __vDSP_I,
   unsigned char *  __vDSP_C,
   vDSP_Stride      __vDSP_K,
-  vDSP_Length      __vDSP_N)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length      __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to unsigned 16-bit integer, toward zero, single-precision.*/
@@ -5146,7 +5146,7 @@ vDSP_vfixu16(
   vDSP_Stride       __vDSP_I,
   unsigned short *  __vDSP_C,
   vDSP_Stride       __vDSP_K,
-  vDSP_Length       __vDSP_N)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length       __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to unsigned 16-bit integer, toward zero, double-precision.*/
@@ -5164,7 +5164,7 @@ vDSP_vfixu16D(
   vDSP_Stride       __vDSP_I,
   unsigned short *  __vDSP_C,
   vDSP_Stride       __vDSP_K,
-  vDSP_Length       __vDSP_N)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length       __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to unsigned 32-bit integer, toward zero, single-precision.*/
@@ -5182,7 +5182,7 @@ vDSP_vfixu32(
   vDSP_Stride     __vDSP_I,
   unsigned int *  __vDSP_C,
   vDSP_Stride     __vDSP_K,
-  vDSP_Length     __vDSP_N)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length     __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to unsigned 32-bit integer, toward zero, double-precision.*/
@@ -5200,7 +5200,7 @@ vDSP_vfixu32D(
   vDSP_Stride     __vDSP_I,
   unsigned int *  __vDSP_C,
   vDSP_Stride     __vDSP_K,
-  vDSP_Length     __vDSP_N)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length     __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to unsigned 8-bit integer, to nearest, single-precision.*/
@@ -5218,7 +5218,7 @@ vDSP_vfixru8(
   vDSP_Stride      __vDSP_I,
   unsigned char *  __vDSP_C,
   vDSP_Stride      __vDSP_K,
-  vDSP_Length      __vDSP_N)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length      __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to unsigned 8-bit integer, to nearest, double-precision.*/
@@ -5236,7 +5236,7 @@ vDSP_vfixru8D(
   vDSP_Stride      __vDSP_I,
   unsigned char *  __vDSP_C,
   vDSP_Stride      __vDSP_K,
-  vDSP_Length      __vDSP_N)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length      __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to unsigned 16-bit integer, to nearest, single-precision.*/
@@ -5254,7 +5254,7 @@ vDSP_vfixru16(
   vDSP_Stride       __vDSP_I,
   unsigned short *  __vDSP_C,
   vDSP_Stride       __vDSP_K,
-  vDSP_Length       __vDSP_N)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length       __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to unsigned 16-bit integer, to nearest, double-precision.*/
@@ -5272,7 +5272,7 @@ vDSP_vfixru16D(
   vDSP_Stride       __vDSP_I,
   unsigned short *  __vDSP_C,
   vDSP_Stride       __vDSP_K,
-  vDSP_Length       __vDSP_N)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length       __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to unsigned 32-bit integer, to nearest, single-precision.*/
@@ -5290,7 +5290,7 @@ vDSP_vfixru32(
   vDSP_Stride     __vDSP_I,
   unsigned int *  __vDSP_C,
   vDSP_Stride     __vDSP_K,
-  vDSP_Length     __vDSP_N)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length     __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert to unsigned 32-bit integer, to nearest, double-precision.*/
@@ -5308,7 +5308,7 @@ vDSP_vfixru32D(
   vDSP_Stride     __vDSP_I,
   unsigned int *  __vDSP_C,
   vDSP_Stride     __vDSP_K,
-  vDSP_Length     __vDSP_N)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length     __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert from 8-bit integer, single-precision.*/
@@ -5326,7 +5326,7 @@ vDSP_vflt8(
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert from 8-bit integer, double-precision.*/
@@ -5344,7 +5344,7 @@ vDSP_vflt8D(
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert from 16-bit integer, single-precision.*/
@@ -5362,7 +5362,7 @@ vDSP_vflt16(
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert from 16-bit integer, double-precision.*/
@@ -5380,7 +5380,7 @@ vDSP_vflt16D(
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert from 32-bit integer, single-precision.*/
@@ -5398,7 +5398,7 @@ vDSP_vflt32(
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert from 32-bit integer, double-precision.*/
@@ -5416,7 +5416,7 @@ vDSP_vflt32D(
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert from 8-bit integer, single-precision.*/
@@ -5434,7 +5434,7 @@ vDSP_vfltu8(
   vDSP_Stride      __vDSP_I,
   float *          __vDSP_C,
   vDSP_Stride      __vDSP_K,
-  vDSP_Length      __vDSP_N)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length      __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert from 8-bit integer, double-precision.*/
@@ -5452,7 +5452,7 @@ vDSP_vfltu8D(
   vDSP_Stride      __vDSP_I,
   double *         __vDSP_C,
   vDSP_Stride      __vDSP_K,
-  vDSP_Length      __vDSP_N)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length      __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert from 16-bit integer, single-precision.*/
@@ -5470,7 +5470,7 @@ vDSP_vfltu16(
   vDSP_Stride       __vDSP_I,
   float *           __vDSP_C,
   vDSP_Stride       __vDSP_K,
-  vDSP_Length       __vDSP_N)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length       __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert from 16-bit integer, double-precision.*/
@@ -5488,7 +5488,7 @@ vDSP_vfltu16D(
   vDSP_Stride       __vDSP_I,
   double *          __vDSP_C,
   vDSP_Stride       __vDSP_K,
-  vDSP_Length       __vDSP_N)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length       __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert from 32-bit integer, single-precision.*/
@@ -5506,7 +5506,7 @@ vDSP_vfltu32(
   vDSP_Stride     __vDSP_I,
   float *         __vDSP_C,
   vDSP_Stride     __vDSP_K,
-  vDSP_Length     __vDSP_N)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length     __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector convert from 32-bit integer, double-precision.*/
@@ -5524,7 +5524,7 @@ vDSP_vfltu32D(
   vDSP_Stride     __vDSP_I,
   double *        __vDSP_C,
   vDSP_Stride     __vDSP_K,
-  vDSP_Length     __vDSP_N)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length     __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector fraction part (subtract integer toward zero), single-precision.*/
@@ -5542,7 +5542,7 @@ vDSP_vfrac(
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector fraction part (subtract integer toward zero), double-precision.*/
@@ -5560,7 +5560,7 @@ vDSP_vfracD(
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector gather, single-precision.*/
@@ -5579,7 +5579,7 @@ vDSP_vgathr(
   vDSP_Stride    __vDSP_J,
   float *        __vDSP_C,
   vDSP_Stride    __vDSP_K,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector gather, double-precision.*/
@@ -5598,7 +5598,7 @@ vDSP_vgathrD(
   vDSP_Stride    __vDSP_J,
   double *       __vDSP_C,
   vDSP_Stride    __vDSP_K,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector gather, absolute pointers, single-precision.*/
@@ -5616,7 +5616,7 @@ vDSP_vgathra(
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector gather, absolute pointers, double-precision.*/
@@ -5634,7 +5634,7 @@ vDSP_vgathraD(
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector generate tapered ramp, single-precision.*/
@@ -5652,7 +5652,7 @@ vDSP_vgen(
   float *       __vDSP_B,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector generate tapered ramp, double-precision.*/
@@ -5670,7 +5670,7 @@ vDSP_vgenD(
   double *      __vDSP_B,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector generate by extrapolation and interpolation, single-precision.*/
@@ -5691,7 +5691,7 @@ vDSP_vgenp(
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_M)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_M) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector generate by extrapolation and interpolation, double-precision.*/
@@ -5712,7 +5712,7 @@ vDSP_vgenpD(
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_M)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_M) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector inverted clip, single-precision.*/
@@ -5732,7 +5732,7 @@ vDSP_viclip(
   float *       __vDSP_C,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector inverted clip, double-precision.*/
@@ -5752,7 +5752,7 @@ vDSP_viclipD(
   double *      __vDSP_C,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector index (C[i] = A[truncate[B[i]]), single-precision.*/
@@ -5771,7 +5771,7 @@ vDSP_vindex(
   vDSP_Stride   __vDSP_J,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector index (C[i] = A[truncate[B[i]]), double-precision.*/
@@ -5790,7 +5790,7 @@ vDSP_vindexD(
   vDSP_Stride   __vDSP_J,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector interpolation between vectors, single-precision.*/
@@ -5811,7 +5811,7 @@ vDSP_vintb(
   float *       __vDSP_C,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector interpolation between vectors, double-precision.*/
@@ -5832,7 +5832,7 @@ vDSP_vintbD(
   double *      __vDSP_C,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector test limit, single-precision.*/
@@ -5852,7 +5852,7 @@ vDSP_vlim(
   float *       __vDSP_C,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector test limit, double-precision.*/
@@ -5872,7 +5872,7 @@ vDSP_vlimD(
   double *      __vDSP_C,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector linear interpolation, single-precision.*/
@@ -5892,7 +5892,7 @@ vDSP_vlint(
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_M)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_M) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector linear interpolation, double-precision.*/
@@ -5912,7 +5912,7 @@ vDSP_vlintD(
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_M)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_M) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector multiply and add, single-precision.*/
@@ -5934,7 +5934,7 @@ vDSP_vma(
   vDSP_Stride   __vDSP_K,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector multiply and add, double-precision.*/
@@ -5956,7 +5956,7 @@ vDSP_vmaD(
   vDSP_Stride   __vDSP_K,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector maxima, single-precision.*/
@@ -5976,7 +5976,7 @@ vDSP_vmax(
   vDSP_Stride   __vDSP_J,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector maxima, double-precision.*/
@@ -5996,7 +5996,7 @@ vDSP_vmaxD(
   vDSP_Stride   __vDSP_J,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector maximum magnitude, single-precision.*/
@@ -6016,7 +6016,7 @@ vDSP_vmaxmg(
   vDSP_Stride   __vDSP_J,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector maximum magnitude, double-precision.*/
@@ -6036,7 +6036,7 @@ vDSP_vmaxmgD(
   vDSP_Stride   __vDSP_J,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector minima, single-precision.*/
@@ -6056,7 +6056,7 @@ vDSP_vmin(
   vDSP_Stride   __vDSP_J,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector minima, double-precision.*/
@@ -6076,7 +6076,7 @@ vDSP_vminD(
   vDSP_Stride   __vDSP_J,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector minimum magnitude, single-precision.*/
@@ -6096,7 +6096,7 @@ vDSP_vminmg(
   vDSP_Stride   __vDSP_J,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector minimum magnitude, double-precision.*/
@@ -6116,7 +6116,7 @@ vDSP_vminmgD(
   vDSP_Stride   __vDSP_J,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector multiply, multiply, and add, single-precision.*/
@@ -6140,7 +6140,7 @@ vDSP_vmma(
   vDSP_Stride   __vDSP_L,
   float *       __vDSP_E,
   vDSP_Stride   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector multiply, multiply, and add, double-precision.*/
@@ -6164,7 +6164,7 @@ vDSP_vmmaD(
   vDSP_Stride   __vDSP_L,
   double *      __vDSP_E,
   vDSP_Stride   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector multiply, multiply, and subtract, single-precision.*/
@@ -6188,7 +6188,7 @@ vDSP_vmmsb(
   vDSP_Stride   __vDSP_L,
   float *       __vDSP_E,
   vDSP_Stride   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector multiply, multiply, and subtract, double-precision.*/
@@ -6212,7 +6212,7 @@ vDSP_vmmsbD(
   vDSP_Stride   __vDSP_L,
   double *      __vDSP_E,
   vDSP_Stride   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector multiply and scalar add, single-precision.*/
@@ -6233,7 +6233,7 @@ vDSP_vmsa(
   float *       __vDSP_C,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector multiply and scalar add, double-precision.*/
@@ -6254,7 +6254,7 @@ vDSP_vmsaD(
   double *      __vDSP_C,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector multiply and subtract, single-precision.*/
@@ -6276,7 +6276,7 @@ vDSP_vmsb(
   vDSP_Stride   __vDSP_K,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector multiply and subtract, double-precision.*/
@@ -6298,7 +6298,7 @@ vDSP_vmsbD(
   vDSP_Stride   __vDSP_K,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector negative absolute value, single-precision.*/
@@ -6316,7 +6316,7 @@ vDSP_vnabs(
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector negative absolute value, double-precision.*/
@@ -6334,7 +6334,7 @@ vDSP_vnabsD(
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector negate, single-precision.*/
@@ -6352,7 +6352,7 @@ vDSP_vneg(
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector negate, double-precision.*/
@@ -6370,7 +6370,7 @@ vDSP_vnegD(
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector polynomial, single-precision.*/
@@ -6391,7 +6391,7 @@ vDSP_vpoly(
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_P)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector polynomial, single-precision.*/
@@ -6412,7 +6412,7 @@ vDSP_vpolyD(
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_P)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector Pythagoras, single-precision.*/
@@ -6436,7 +6436,7 @@ vDSP_vpythg(
   vDSP_Stride   __vDSP_L,
   float *       __vDSP_E,
   vDSP_Stride   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector Pythagoras, double-precision.*/
@@ -6460,7 +6460,7 @@ vDSP_vpythgD(
   vDSP_Stride   __vDSP_L,
   double *      __vDSP_E,
   vDSP_Stride   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector quadratic interpolation, single-precision.*/
@@ -6480,7 +6480,7 @@ vDSP_vqint(
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_M)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_M) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector quadratic interpolation, double-precision.*/
@@ -6500,7 +6500,7 @@ vDSP_vqintD(
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_M)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_M) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector build ramp, single-precision.*/
@@ -6518,7 +6518,7 @@ vDSP_vramp(
   float *       __vDSP_B,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector build ramp, double-precision.*/
@@ -6536,7 +6536,7 @@ vDSP_vrampD(
   double *      __vDSP_B,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector running sum integration, single-precision.*/
@@ -6555,7 +6555,7 @@ vDSP_vrsum(
   float *       __vDSP_S,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector running sum integration, double-precision.*/
@@ -6574,7 +6574,7 @@ vDSP_vrsumD(
   double *      __vDSP_S,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector reverse order, in-place, single-precision.*/
@@ -6590,7 +6590,7 @@ extern void
 vDSP_vrvrs(
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector reverse order, in-place, double-precision.*/
@@ -6606,7 +6606,7 @@ extern void
 vDSP_vrvrsD(
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector-scalar add, single-precision.*/
@@ -6625,7 +6625,7 @@ vDSP_vsadd(
   float *       __vDSP_B,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector-scalar add, double-precision.*/
@@ -6644,7 +6644,7 @@ vDSP_vsaddD(
   double *      __vDSP_B,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector subtract and multiply, single-precision.*/
@@ -6666,7 +6666,7 @@ vDSP_vsbm(
   vDSP_Stride   __vDSP_K,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector subtract and multiply, double-precision.*/
@@ -6688,7 +6688,7 @@ vDSP_vsbmD(
   vDSP_Stride   __vDSP_K,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector subtract, subtract, and multiply, single-precision.*/
@@ -6712,7 +6712,7 @@ vDSP_vsbsbm(
   vDSP_Stride   __vDSP_L,
   float *       __vDSP_E,
   vDSP_Stride   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector subtract, subtract, and multiply, double-precision.*/
@@ -6736,7 +6736,7 @@ vDSP_vsbsbmD(
   vDSP_Stride   __vDSP_L,
   double *      __vDSP_E,
   vDSP_Stride   __vDSP_M,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector subtract and scalar multiply, single-precision.*/
@@ -6757,7 +6757,7 @@ vDSP_vsbsm(
   float *       __vDSP_C,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector subtract and scalar multiply, double-precision.*/
@@ -6778,7 +6778,7 @@ vDSP_vsbsmD(
   double *      __vDSP_C,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector-scalar divide, single-precision.*/
@@ -6797,7 +6797,7 @@ vDSP_vsdiv(
   float *       __vDSP_B,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector-scalar divide, double-precision.*/
@@ -6816,7 +6816,7 @@ vDSP_vsdivD(
   double *      __vDSP_B,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector Simpson integration, single-precision.*/
@@ -6835,7 +6835,7 @@ vDSP_vsimps(
   float *       __vDSP_B,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector Simpson integration, double-precision.*/
@@ -6854,7 +6854,7 @@ vDSP_vsimpsD(
   double *      __vDSP_B,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector-scalar multiply and vector add, single-precision.*/
@@ -6875,7 +6875,7 @@ vDSP_vsma(
   vDSP_Stride    __vDSP_K,
   float *        __vDSP_D,
   vDSP_Stride    __vDSP_L,
-  vDSP_Length    __vDSP_N)                                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length    __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector-scalar multiply and vector add, double-precision.*/
@@ -6896,7 +6896,7 @@ vDSP_vsmaD(
   vDSP_Stride     __vDSP_K,
   double *        __vDSP_D,
   vDSP_Stride     __vDSP_L,
-  vDSP_Length     __vDSP_N)                                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length     __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector-scalar multiply and scalar add, single-precision.*/
@@ -6916,7 +6916,7 @@ vDSP_vsmsa(
   float *       __vDSP_C,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector-scalar multiply and scalar add, double-precision.*/
@@ -6936,7 +6936,7 @@ vDSP_vsmsaD(
   double *      __vDSP_C,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector scalar multiply and vector subtract, single-precision.*/
@@ -6957,7 +6957,7 @@ vDSP_vsmsb(
   vDSP_Stride   __vDSP_K,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector scalar multiply and vector subtract, double-precision.*/
@@ -6978,7 +6978,7 @@ vDSP_vsmsbD(
   vDSP_Stride   __vDSP_K,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector sort, in-place, single-precision.*/
@@ -6994,7 +6994,7 @@ extern void
 vDSP_vsort(
   float *       __vDSP_C,
   vDSP_Length   __vDSP_N,
-  int           __vDSP_OFLAG)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  int           __vDSP_OFLAG) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector sort, in-place, double-precision.*/
@@ -7010,7 +7010,7 @@ extern void
 vDSP_vsortD(
   double *      __vDSP_C,
   vDSP_Length   __vDSP_N,
-  int           __vDSP_OFLAG)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  int           __vDSP_OFLAG) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector sort, in-place, integer, single-precision.*/
@@ -7028,7 +7028,7 @@ vDSP_vsorti(
   vDSP_Length *  __vDSP_IC,
   vDSP_Length *  __vDSP_List_addr,
   vDSP_Length    __vDSP_N,
-  int            __vDSP_OFLAG)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  int            __vDSP_OFLAG) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector sort, in-place, integer, double-precision.*/
@@ -7046,7 +7046,7 @@ vDSP_vsortiD(
   vDSP_Length *  __vDSP_IC,
   vDSP_Length *  __vDSP_List_addr,
   vDSP_Length    __vDSP_N,
-  int            __vDSP_OFLAG)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  int            __vDSP_OFLAG) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector swap, single-precision.*/
@@ -7064,7 +7064,7 @@ vDSP_vswap(
   vDSP_Stride   __vDSP_I,
   float *       __vDSP_B,
   vDSP_Stride   __vDSP_J,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector swap, double-precision.*/
@@ -7082,7 +7082,7 @@ vDSP_vswapD(
   vDSP_Stride   __vDSP_I,
   double *      __vDSP_B,
   vDSP_Stride   __vDSP_J,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector sliding window sum, single-precision.*/
@@ -7101,7 +7101,7 @@ vDSP_vswsum(
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_P)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector sliding window sum, double-precision.*/
@@ -7120,7 +7120,7 @@ vDSP_vswsumD(
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
   vDSP_Length   __vDSP_N,
-  vDSP_Length   __vDSP_P)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_P) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector table lookup and interpolation, single-precision.*/
@@ -7142,7 +7142,7 @@ vDSP_vtabi(
   vDSP_Length   __vDSP_M,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector table lookup and interpolation, double-precision.*/
@@ -7164,7 +7164,7 @@ vDSP_vtabiD(
   vDSP_Length   __vDSP_M,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector threshold, single-precision.*/
@@ -7183,7 +7183,7 @@ vDSP_vthr(
   float *       __vDSP_B,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector threshold, double-precision.*/
@@ -7202,7 +7202,7 @@ vDSP_vthrD(
   double *      __vDSP_B,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector threshold with zero fill, single-precision.*/
@@ -7221,7 +7221,7 @@ vDSP_vthres(
   float *       __vDSP_B,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector threshold with zero fill, double-precision.*/
@@ -7240,7 +7240,7 @@ vDSP_vthresD(
   double *      __vDSP_B,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector threshold with signed constant, single-precision.*/
@@ -7260,7 +7260,7 @@ vDSP_vthrsc(
   float *       __vDSP_C,
   float *       __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector threshold with signed constant, double-precision.*/
@@ -7280,7 +7280,7 @@ vDSP_vthrscD(
   double *      __vDSP_C,
   double *      __vDSP_D,
   vDSP_Stride   __vDSP_L,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector tapered merge, single-precision.*/
@@ -7300,7 +7300,7 @@ vDSP_vtmerg(
   vDSP_Stride   __vDSP_J,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector tapered merge, double-precision.*/
@@ -7320,7 +7320,7 @@ vDSP_vtmergD(
   vDSP_Stride   __vDSP_J,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector trapezoidal integration, single-precision.*/
@@ -7339,7 +7339,7 @@ vDSP_vtrapz(
   float *       __vDSP_B,
   float *       __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Vector trapezoidal integration, double-precision.*/
@@ -7358,7 +7358,7 @@ vDSP_vtrapzD(
   double *      __vDSP_B,
   double *      __vDSP_C,
   vDSP_Stride   __vDSP_K,
-  vDSP_Length   __vDSP_N)                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  vDSP_Length   __vDSP_N) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Wiener Levinson, single-precision.*/
@@ -7378,7 +7378,7 @@ vDSP_wiener(
   float *       __vDSP_F,
   float *       __vDSP_P,
   int           __vDSP_IFLG,
-  int *         __vDSP_IERR)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  int *         __vDSP_IERR) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
 
 
 /* Wiener Levinson, double-precision.*/
@@ -7398,7 +7398,1604 @@ vDSP_wienerD(
   double *      __vDSP_F,
   double *      __vDSP_P,
   int           __vDSP_IFLG,
-  int *         __vDSP_IERR)                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  int *         __vDSP_IERR) __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+
+
+/*	vDSP_FFT16_copv and vDSP_FFT32_copv perform 16- and 32-element FFTs on
+	interleaved complex unit-stride vector-block-aligned data.
+
+	Parameters:
+
+		float *Output
+
+			Pointer to space for output data (interleaved complex).  This
+			address must be vector-block aligned.
+
+		const float *Input
+
+			Pointer to input data (interleaved complex).  This address must be
+			vector-block aligned.
+
+		FFT_Direction Direction
+
+			Transform direction, FFT_FORWARD or FFT_INVERSE.
+
+	These routines calculate:
+
+		For 0 <= k < N,
+
+			H[k] = sum(1**(S * j*k/N) * h[j], 0 <= j < N),
+
+	where:
+
+		N is 16 or 32, as specified by the routine name,
+
+		h[j] is Input[2*j+0] + i * Input[2*j+1] at routine entry,
+
+		H[j] is Output[2*j+0] + i * Output[2*j+1] at routine exit,
+
+		S is -1 if Direction is FFT_FORWARD and +1 if Direction is FFT_INVERSE,
+		and
+
+		1**x is e**(2*pi*i*x).
+
+	Input and Output may be equal but may not otherwise overlap.
+*/
+void vDSP_FFT16_copv(float *__vDSP_Output, const float *__vDSP_Input,
+	FFTDirection __vDSP_Direction)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+void vDSP_FFT32_copv(float *__vDSP_Output, const float *__vDSP_Input,
+	FFTDirection __vDSP_Direction)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_FFT16_zopv and vDSP_FFT32_zopv perform 16- and 32-element FFTs on
+	separated complex unit-stride vector-block-aligned data.
+
+	Parameters:
+
+		float *Or, float *Oi
+
+			Pointers to space for real and imaginary output data.  These
+			addresses must be vector-block aligned.
+
+		const float *Ir, *Ii
+
+			Pointers to real and imaginary input data.  These addresses must be
+			vector-block aligned.
+
+		FFT_Direction Direction
+
+			Transform direction, FFT_FORWARD or FFT_INVERSE.
+
+	These routines calculate:
+
+		For 0 <= k < N,
+
+			H[k] = sum(1**(S * j*k/N) * h[j], 0 <= j < N),
+
+	where:
+
+		N is 16 or 32, as specified by the routine name,
+
+		h[j] is Ir[j] + i * Ii[j] at routine entry,
+
+		H[j] is Or[j] + i * Oi[j] at routine exit,
+
+		S is -1 if Direction is FFT_FORWARD and +1 if Direction is FFT_INVERSE,
+		and
+
+		1**x is e**(2*pi*i*x).
+
+	Or may equal Ir or Ii, and Oi may equal Ii or Ir, but the ararys may not
+	otherwise overlap.
+*/
+void vDSP_FFT16_zopv(
+	      float *__vDSP_Or,       float *__vDSP_Oi,
+	const float *__vDSP_Ir, const float *__vDSP_Ii,
+	FFTDirection __vDSP_Direction)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+void vDSP_FFT32_zopv(
+	      float *__vDSP_Or,       float *__vDSP_Oi,
+	const float *__vDSP_Ir, const float *__vDSP_Ii,
+	FFTDirection __vDSP_Direction)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	How to use the Discrete Fourier Transform (DFT) interface.
+
+	There are three steps to performing a DFT:
+
+		Call a setup routine (e.g., vDSP_DFT_zop_CreateSetup) to get a setup
+		object.
+
+			This is a preparation step to be done when a program is starting or
+			is starting some new phase (e.g., when a communication channel is
+			opened).  It should never be done during real-time processing.  The
+			setup routine is slow and is called only once to prepare data that
+			can be used many times.
+
+		Call an execution routine (e.g., vDSP_DFT_Execute) to perform a DFT,
+		and pass it the setup object.
+
+			The execution routine is fast (for selected cases) and is generally
+			called many times.
+
+		Call a destroy routine (e.g., vDSP_DFT_DestroySetup) to release the
+		memory held by the setup object.
+
+			This is done when a program is ending or is ending some phase.
+			After calling a destroy routine, the setup data is no longer valid
+			and should not be used.
+
+	Discussion:
+
+		The current sequences of setup, execution, destroy routines are:
+
+			vDSP_DFT_zop_CreateSetup, vDSP_DFT_Execute, vDSP_DestroySetup, or
+
+			vDSP_DFT_zrop_CreateSetup, vDSP_DFT_Execute, vDSP_DestroySetup, or
+		
+			vDSP_DFT_CreateSetup, vDSP_DFT_zop, vDSP_DestroySetup.
+
+		Sharing DFT setups:
+
+			Any setup returned by a DFT setup routine may be passed as input to
+			any DFT setup routine, in the parameter named Previous.  (This
+			allows the setups to share data, avoiding unnecessary duplication
+			of some setup data.)  Setup routines may be executed in any order.
+			Passing any setup of a group of setups sharing data will result in
+			a new setup sharing data with all of the group.
+
+			When calling an execution routine, each setup can be used only with
+			its intended execution routine.  Thus the setup returned by
+			vDSP_DFT_CreateSetup can only be used with vDSP_DFT_zop and not
+			with vDSP_DFT_Execute.
+
+			vDSP_DestroySetup is used to destroy any DFT setup.
+
+		History:
+
+			vDSP_DFT_CreateSetup and vDSP_DFT_zop are the original vDSP DFT
+			routines.  vDSP_DFT_zop_CreateSetup, vDSP_DFT_zrop_CreateSetup, and
+			vDSP_DFT_Execute are newer, more specialized DFT routines.  These
+			newer routines do not have stride parameters (stride is one) and
+			incorporate the direction parameter into the setup.  This reduces
+			the number of arguments passed to the execution routine, which
+			receives only the setup and four address parameters.  Additionally,
+			the complex-to-complex DFT (zop) and real-to-complex DFT (zrop) use
+			the same execution routine (the setup indicates which function to
+			perform).
+
+			We recommend you use vDSP_DFT_zop_CreateSetup,
+			vDPS_DFT_zrop_CreateSetup, and vDSP_DFT_Execute, and that you not
+			use vDSP_DFT_CreateSetup and vDSP_DFT_zop.
+
+	Multithreading:
+
+		Never call a setup or destroy routine in a thread when any DFT routine
+		(setup, execution, or destroy) that shares setup data may be
+		executing.  (This applies not just to multiple threads but also to
+		calling DFT routines in signal handlers.)
+
+		Multiple DFT execution routines may be called simultaneously.  (Their
+		access to the setup data is read-only.)
+
+		If you need to call setup and/or destroy routines while other DFT
+		routines might be executing, you can either use Grand Central Dispatch
+		or locks (costs time) to avoid simultaneous execution or you can create
+		separate setup objects for them (costs memory).
+*/
+
+
+/*	A vDSP_DFT_Setup object is a pointer to a structure whose definition is
+	unpublished.
+*/
+typedef struct vDSP_DFT_SetupStruct *vDSP_DFT_Setup;
+
+
+// DFT direction may be specified as vDSP_DFT_FORWARD or vDSP_DFT_INVERSE.
+typedef enum { vDSP_DFT_FORWARD = +1, vDSP_DFT_INVERSE = -1 }
+	vDSP_DFT_Direction;
+
+
+/*	vDSP_DFT_CreateSetup is a DFT setup routine.  It creates a setup object
+	for use with the vDSP_DFT_zop execution routine.  We recommend you use
+	vDSP_DFT_zop_CreateSetup instead of this routine.
+
+	Parameters:
+
+		vDSP_DFT_Setup Previous
+
+			Previous is either zero or a previous DFT setup.  If a previous
+			setup is passed, the new setup will share data with the previous
+			setup, if feasible (and with any other setups the previous setup
+			shares with).  If zero is passed, the routine will allocate and
+			initialize new memory.
+
+		vDSP_Length Length
+
+			Length is the number of complex elements to be transformed.
+
+	Return value:
+
+		Zero is returned if memory is unavailable.
+
+	The returned setup object may be used only with vDSP_DFT_zop for the length
+	given during setup.  Unlike previous vDSP FFT routines, the setup may not
+	be used to execute transforms with shorter lengths.
+
+	Do not call this routine while any DFT routine sharing setup data might be
+	executing.
+*/
+vDSP_DFT_Setup vDSP_DFT_CreateSetup(vDSP_DFT_Setup __vDSP_Previous,
+	vDSP_Length __vDSP_Length)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_DFT_zop_CreateSetup is a DFT setup routine.  It creates a setup object
+	for use with the vDSP_DFT_Execute execution routine, to perform a
+	complex-to-complex DFT.
+
+	Parameters:
+
+		vDSP_DFT_Setup Previous
+
+			Previous is either zero or a previous DFT setup.  If a previous
+			setup is passed, the new setup will share data with the previous
+			setup, if feasible (and with any other setups the previous setup
+			shares with).  If zero is passed, the routine will allocate and
+			initialize new memory.
+
+		vDSP_Length Length
+
+			Length is the number of complex elements to be transformed.
+
+		vDSP_DFT_Direction Direction
+
+			Transform direction, vDSP_DFT_FORWARD or vDSP_DFT_INVERSE.
+
+	Return value:
+
+		Zero is returned if memory is unavailable or if there is no
+		implementation for the requested case.  Currently, the implemented
+		cases are:
+
+			Length = f * 2**n, where f is 3, 5, or 15 and 4 <= n.
+
+		Additionally, only cases where the array addresses (passed to
+		vDSP_DFT_Execute) are 16-byte aligned are optimized.
+
+	Function:
+
+		When vDSP_DFT_Execute is called with a setup returned from this
+		routine, it calculates:
+
+			For 0 <= k < N,
+
+				H[k] = sum(1**(S * j*k/N) * h[j], 0 <= j < N),
+
+		where:
+
+			N is the length given in the setup;
+
+			h is the array of complex numbers specified by Ir and Ii when
+			vDSP_DFT_Execute is called:
+
+				for 0 <= j < N,
+					h[j] = Ir[j] + i * Ii[j];
+
+			H is the array of complex numbers specified by Or and Oi when
+			vDSP_DFT_Execute returns:
+
+				for 0 <= k < N,
+					H[k] = Or[k] + i * Oi[k];
+
+			S is -1 if Direction is vDSP_DFT_FORWARD and +1 if Direction is
+			vDSP_DFT_INVERSE; and
+
+			1**x is e**(2*pi*i*x).
+
+	Performance:
+
+		Performance is good for these cases:
+
+			All addresses are 16-byte aligned, and the length is f * 2**n,
+			where f is 3, 5, or 15 and 4 <= n.
+
+		Performance is extremely slow for all other cases.
+
+	In-Place Operation:
+
+		For the cases with good performance as described above, Or may equal Ir
+		and Oi may equal Ii (in the call to vDSP_DFT_Execute).  Otherwise, no
+		overlap of Or, Oi, Ir, and Ii is supported.
+
+	The returned setup object may be used only with vDSP_DFT_Execute for the
+	length given during setup.  Unlike previous vDSP FFT routines, the setup
+	may not be used to execute transforms with shorter lengths.
+
+	Do not call this routine while any DFT routine sharing setup data might be
+	executing.
+*/
+vDSP_DFT_Setup vDSP_DFT_zop_CreateSetup(vDSP_DFT_Setup __vDSP_Previous,
+	vDSP_Length __vDSP_Length, vDSP_DFT_Direction __vDSP_Direction)
+		__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_4_0);
+
+
+/*	vDSP_DFT_zrop_CreateSetup is a DFT setup routine.  It creates a setup
+	object for use with the vDSP_DFT_Execute execution routine, to perform a
+	real-to-complex DFT or a complex-to-real DFT.
+
+	Parameters:
+
+		vDSP_DFT_Setup Previous
+
+			Previous is either zero or a previous DFT setup.  If a previous
+			setup is passed, the new setup will share data with the previous
+			setup, if feasible (and with any other setups the previous setup
+			shares with).  If zero is passed, the routine will allocate and
+			initialize new memory.
+
+		vDSP_Length Length
+
+			Length is the number of real elements to be transformed (in a a
+			forward, real-to-complex transform) or produced (in a reverse,
+			complex-to-real transform).  Length must be even.
+
+		vDSP_DFT_Direction Direction
+
+			Transform direction, vDSP_DFT_FORWARD or vDSP_DFT_INVERSE.
+
+	Return value:
+
+		Zero is returned if memory is unavailable or if there is no
+		implementation for the requested case.  Currently, the implemented
+		cases are:
+
+			Length = f * 2**n, where f is 3, 5, or 15 and 5 <= n.
+
+		Additionally, only cases where the array addresses (passed to
+		vDSP_DFT_Execute) are 16-byte aligned are optimized.
+
+	Function:
+
+		When vDSP_DFT_Execute is called with a setup returned from this
+		routine, it calculates:
+
+			For 0 <= k < N,
+
+				H[k] = C * sum(1**(S * j*k/N) * h[j], 0 <= j < N),
+
+		where:
+
+			N is the Length given in the setup;
+
+			h is the array of numbers specified by Ir and Ii when
+			vDSP_DFT_Execute is called (see "Data Layout" below);
+
+			H is the array of numbers specified by Or and Oi when
+			vDSP_DFT_Execute returns (see "Data Layout" below);
+
+			C is 2 if Direction is vDSP_DFT_FORWARD and 1 if Direction is
+			vDSP_DFT_INVERSE;
+
+			S is -1 if Direction is vDSP_DFT_FORWARD and +1 if Direction is
+			vDSP_DFT_INVERSE; and
+
+			1**x is e**(2*pi*i*x).
+
+		Data Layout:
+
+			If Direction is vDSP_DFT_FORWARD, then:
+
+				h is an array of real numbers, with its even-index elements
+				stored in Ir and its odd-index elements stored in Ii:
+
+					For 0 <= j < N/2,
+						h[2*j+0] = Ir[j], and
+						h[2*j+1] = Ii[j].
+
+				H is an array of complex numbers, stored in Or and Oi:
+
+					H[0  ] = Or[0].  (H[0  ] is pure real.)
+					H[N/2] = Oi[0].  (H[N/2] is pure real.)
+					For 1 < k < N/2,
+						H[k] = Or[k] + i * Oi[k].
+
+				For N/2 < k < N, H[k] is not explicitly stored in memory but is
+				known because it necessarily equals the conjugate of H[N-k],
+				which is stored as described above.
+
+			If Direction is vDSP_DFT_Inverse, then the layouts of the input and
+			output arrays are swapped.  Ir and Ii describe an input array with
+			complex elements laid out as described above for Or and Oi.  When
+			vDSP_DFT_Execute returns, Or and Oi contain a pure real array, with
+			its even-index elements stored in Or and its odd-index elements in
+			Oi.
+
+	Performance:
+
+		Performance is good for these cases:
+
+			All addresses are 16-byte aligned, and the length is f * 2**n,
+			where f is 3, 5, or 15 and 5 <= n.
+
+		Performance is extremely slow for all other cases.
+
+	In-Place Operation:
+
+		For the cases with good performance as described above, Or may equal Ir
+		and Oi may equal Ii (in the call to vDSP_DFT_Execute).  Otherwise, no
+		overlap of Or, Oi, Ir, and Ii is supported.
+
+	The returned setup object may be used only with vDSP_DFT_Execute for the
+	length given during setup.  Unlike previous vDSP FFT routines, the setup
+	may not be used to execute transforms with shorter lengths.
+
+	Do not call this routine while any DFT routine sharing setup data might be
+	executing.
+*/
+vDSP_DFT_Setup vDSP_DFT_zrop_CreateSetup(vDSP_DFT_Setup __vDSP_Previous,
+	vDSP_Length __vDSP_Length, vDSP_DFT_Direction __vDSP_Direction)
+		__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_4_0);
+
+
+/*	vDSP_DFT_DestroySetup is a DFT destroy routine.  It releases the memory
+	used by a setup object.
+
+	Parameters:
+
+		vDSP_DFT_Setup Setup
+
+			Setup is the setup object to be released.  The object may have
+			been previously allocated with any DFT setup routine, such as
+			vDSP_DFT_zop_CreateSetup or vDSP_DFT_zrop_CreateSetup.
+
+	Destroying a setup with shared data is safe; it will release only memory
+	not needed by other undestroyed setups.  Memory (and the data it contains)
+	is freed only when all setup objects using it have been destroyed.
+
+	Do not call this routine while any DFT routine sharing setup data might be
+	executing.
+*/
+void vDSP_DFT_DestroySetup(vDSP_DFT_Setup __vDSP_Setup)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_DFT_zop is a DFT execution routine.  It performs a DFT, with the aid
+	of previously created setup data.
+
+	Parameters:
+
+		vDSP_DFT_Setup Setup
+
+			A setup object returned by a previous call to
+			vDSP_DFT_zop_CreateSetup.
+
+		const float *Ir
+		const float *Ii
+
+			Pointers to real and imaginary components of input data.
+
+		vDSP_Stride Is
+
+			The number of physical elements from one logical input element to
+			the next.
+
+		float *Or
+		float *Oi
+
+			Pointers to space for real and imaginary components of output
+			data.
+
+			The input and output arrays may not overlap except as specified
+			in "In-Place Operation", below.
+
+		vDSP_Stride Os
+
+			The number of physical elements from one logical output element to
+			the next.
+
+		vDSP_DFT_Direction Direction
+
+			Transform direction, vDSP_DFT_FORWARD or vDSP_DFT_INVERSE.
+
+	Observe there is no separate length parameter.  The length is passed via
+	the setup object.
+
+	Performance:
+
+		Performance is good for these cases:
+
+			All addresses are 16-byte aligned, all strides are one, and the
+			length is f * 2**n, where f is 3, 5, or 15 and 4 <= n.
+
+		Performance is extremely slow for all other cases.
+
+	In-Place Operation:
+
+		For the cases with good performance as described above, Or may equal Ir
+		and Oi may equal Ii.  Otherwise, no overlap of Or, Oi, Ir, and Ii is
+		supported.
+
+	This routine calculates:
+
+		For 0 <= k < N,
+
+			H[k] = sum(1**(S * j*k/N) * h[j], 0 <= j < N),
+
+	where:
+
+		N is the length given in the setup,
+
+		h is the array of complex numbers specified by Ir, Ii, and Is at
+		routine entry:
+
+			h[j] = Ir[j*Is] + i * Ii[j*Is],
+			for 0 <= j < N,
+
+		H is the array of complex numbers stored as specified by Or, Oi, and Os
+		at routine exit:
+
+			H[k] = Or[k*Os] + i * Oi[k*Os],
+			for 0 <= k < N,
+
+		S is -1 if Direction is vDSP_DFT_FORWARD and +1 if Direction is
+		vDSP_DFT_INVERSE, and
+
+		1**x is e**(2*pi*i*x).
+
+	Do not call this routine while any DFT setup or destroy routine sharing
+	setup data might be executing.
+*/
+void vDSP_DFT_zop(
+	const struct vDSP_DFT_SetupStruct *__vDSP_Setup,
+	const float *__vDSP_Ir, const float *__vDSP_Ii, vDSP_Stride __vDSP_Is,
+	      float *__vDSP_Or,       float *__vDSP_Oi, vDSP_Stride __vDSP_Os,
+	vDSP_DFT_Direction __vDSP_Direction)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_DFT_Execute is a DFT execution routine.  It performs a DFT, with the
+	aid of previously created setup data.
+
+	Parameters:
+
+		vDSP_DFT_Setup Setup
+
+			A setup object returned by a previous call to
+			vDSP_DFT_zop_CreateSetup or vDSP_DFT_zrop_CreateSetup.
+
+		const float *Ir
+		const float *Ii
+
+			Pointers to input data.
+
+		float *Or
+		float *Oi
+
+			Pointers to output data.
+
+			The input and output arrays may not overlap except as specified
+			in "In-Place Operation", below.
+
+	Performance and In-Place Operation:
+
+		See notes for the setup routine for the operation being executed.
+
+	Function:
+
+		The function performed by this routine is determined by the setup
+		passed to it.  The documentation for the routine used to create the
+		setup describes the function.
+
+		Note that different numbers of elements are required when this routine
+		is called, depending on the setup used:
+
+			When the setup is from vDSP_zop_CreateSetup, each array (Ir, Ii,
+			Or, and Oi) must have Length elements.
+
+			When the setup is from vDSP_zrop_CreateSetup, each array (Ir, Ii,
+			Or, and Oi) must have Length/2 elements.
+
+	Do not call this routine while any DFT setup or destroy routine sharing
+	setup data might be executing.
+*/
+void vDSP_DFT_Execute(
+	const struct vDSP_DFT_SetupStruct *__vDSP_Setup,
+	const float *__vDSP_Ir,  const float *__vDSP_Ii,
+	      float *__vDSP_Or,        float *__vDSP_Oi)
+	__OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_4_0);
+
+
+/*	vDSP_dotpr2, vector single-precision stereo dot product.
+
+	Function:
+
+		This routine calculates the dot product of A0 with B and the dot
+		product of A1 with B.  This is functionally equivalent to calculating
+		two dot products but might execute faster.
+
+		In pseudocode, the operation is:
+
+			sum0 = 0;
+			sum1 = 0;
+			for (i = 0; i < Length; ++i)
+			{
+				sum0 += A0[i*A0Stride] * B[i*BStride];
+				sum1 += A1[i*A1Stride] * B[i*BStride];
+			}
+			*C0 = sum0;
+			*C1 = sum1;
+
+	Input:
+
+		const float *A0, vDSP_Stride A0Stride.
+
+			Starting address and stride for input vector A0.
+
+		const float *A1, vDSP_Stride A1Stride.
+
+			Starting address and stride for input vector A1.
+
+		const float *B,  vDSP_Stride BStride.
+
+			Starting address and stride for input vector B.
+
+		float *C0.
+
+			Address for dot product of A0 and B.
+
+		float *C1.
+
+			Address for dot product of A1 and B.
+
+		vDSP_Length Length.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are written to *C0 and *C1.
+*/
+void vDSP_dotpr2(
+	const float *__vDSP_A0, vDSP_Stride __vDSP_A0Stride,
+	const float *__vDSP_A1, vDSP_Stride __vDSP_A1Stride,
+	const float *__vDSP_B,  vDSP_Stride __vDSP_BStride,
+	float *__vDSP_C0,
+	float *__vDSP_C1,
+	vDSP_Length __vDSP_Length)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_dotpr_s1_15, vector integer 1.15 format dot product.
+
+	Function:
+
+		This routine calculates the dot product of A with B.
+
+		In pseudocode, the operation is:
+
+			sum = 0;
+			for (i = 0; i < N; ++i)
+			{
+				sum0 += A[i*AStride] * B[i*BStride];
+			}
+			*C = sum;
+
+	The elements are fixed-point numbers, each with one sign bit and 15
+	fraction bits.  Where the value of the short int is normally x, it is
+	x/32768 for the purposes of this routine.
+
+	Input:
+
+		const short int *A, vDSP_Stride AStride.
+
+			Starting address and stride for input vector A.
+
+		const short int *B,  vDSP_Stride BStride.
+
+			Starting address and stride for input vector B.
+
+		short int *C.
+
+			Address for dot product of A and B.
+
+		vDSP_Length N.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The result is written to *C.
+*/
+void vDSP_dotpr_s1_15(
+	const short int *__vDSP_A, vDSP_Stride __vDSP_AStride,
+	const short int *__vDSP_B, vDSP_Stride __vDSP_BStride,
+	short int *__vDSP_C,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_dotpr2_s1_15, vector integer 1.15 format stereo dot product.
+
+	Function:
+
+		This routine calculates the dot product of A0 with B and the dot
+		product of A1 with B.  This is functionally equivalent to calculating
+		two dot products but might execute faster.
+
+		In pseudocode, the operation is:
+
+			sum0 = 0;
+			sum1 = 0;
+			for (i = 0; i < N; ++i)
+			{
+				sum0 += A0[i*A0Stride] * B[i*BStride];
+				sum1 += A1[i*A1Stride] * B[i*BStride];
+			}
+			*C0 = sum0;
+			*C1 = sum1;
+
+	The elements are fixed-point numbers, each with one sign bit and 15
+	fraction bits.  Where the value of the short int is normally x, it is
+	x/32768 for the purposes of this routine.
+
+	Input:
+
+		const short int *A0, vDSP_Stride A0Stride.
+
+			Starting address and stride for input vector A0.
+
+		const short int *A1, vDSP_Stride A1Stride.
+
+			Starting address and stride for input vector A1.
+
+		const short int *B,  vDSP_Stride BStride.
+
+			Starting address and stride for input vector B.
+
+		short int *C0.
+
+			Address for dot product of A0 and B.
+
+		short int *C1.
+
+			Address for dot product of A1 and B.
+
+		vDSP_Length N.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are written to *C0 and *C1.
+*/
+void vDSP_dotpr2_s1_15(
+	const short int *__vDSP_A0, vDSP_Stride __vDSP_A0Stride,
+	const short int *__vDSP_A1, vDSP_Stride __vDSP_A1Stride,
+	const short int *__vDSP_B,  vDSP_Stride __vDSP_BStride,
+	short int *__vDSP_C0,
+	short int *__vDSP_C1,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_dotpr_s8_24, vector integer 8.24 format dot product.
+
+	Function:
+
+		This routine calculates the dot product of A with B.
+
+		In pseudocode, the operation is:
+
+			sum = 0;
+			for (i = 0; i < N; ++i)
+			{
+				sum0 += A[i*AStride] * B[i*BStride];
+			}
+			*C = sum;
+
+	The elements are fixed-point numbers, each with eight integer bits
+	(including sign) and 24 fraction bits.  Where the value of the int is
+	normally x, it is x/16777216 for the purposes of this routine.
+
+	Input:
+
+		const int *A, vDSP_Stride AStride.
+
+			Starting address and stride for input vector A.
+
+		const int *B,  vDSP_Stride BStride.
+
+			Starting address and stride for input vector B.
+
+		int *C.
+
+			Address for dot product of A and B.
+
+		vDSP_Length N.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The result is written to *C.
+*/
+void vDSP_dotpr_s8_24(
+	const int *__vDSP_A, vDSP_Stride __vDSP_AStride,
+	const int *__vDSP_B, vDSP_Stride __vDSP_BStride,
+	int *__vDSP_C,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_dotpr2_s8_24, vector integer 8.24 format stereo dot product.
+
+	Function:
+
+		This routine calculates the dot product of A0 with B and the dot
+		product of A1 with B.  This is functionally equivalent to calculating
+		two dot products but might execute faster.
+
+		In pseudocode, the operation is:
+
+			sum0 = 0;
+			sum1 = 0;
+			for (i = 0; i < N; ++i)
+			{
+				sum0 += A0[i*A0Stride] * B[i*BStride];
+				sum1 += A1[i*A1Stride] * B[i*BStride];
+			}
+			*C0 = sum0;
+			*C1 = sum1;
+
+	The elements are fixed-point numbers, each with eight integer bits
+	(including sign) and 24 fraction bits.  Where the value of the int is
+	normally x, it is x/16777216 for the purposes of this routine.
+
+	Input:
+
+		const int *A0, vDSP_Stride A0Stride.
+
+			Starting address and stride for input vector A0.
+
+		const int *A1, vDSP_Stride A1Stride.
+
+			Starting address and stride for input vector A1.
+
+		const int *B,  vDSP_Stride BStride.
+
+			Starting address and stride for input vector B.
+
+		int *C0.
+
+			Address for dot product of A0 and B.
+
+		int *C1.
+
+			Address for dot product of A1 and B.
+
+		vDSP_Length N.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are written to *C0 and *C1.
+*/
+void vDSP_dotpr2_s8_24(
+	const int *__vDSP_A0, vDSP_Stride __vDSP_A0Stride,
+	const int *__vDSP_A1, vDSP_Stride __vDSP_A1Stride,
+	const int *__vDSP_B,  vDSP_Stride __vDSP_BStride,
+	int *__vDSP_C0,
+	int *__vDSP_C1,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+
+/*	vDSP_vrampmul, vector single-precision vramp and multiply.
+
+	This routine puts into O the product of I and a ramp function with initial
+	value *Start and slope *Step.  *Start is updated to continue the ramp
+	in a consecutive call.  To continue the ramp smoothly, the new value of
+	*Step includes rounding errors accumulated during the routine rather than
+	being calculated directly as *Start + N * *Step.
+
+	This routine calculates:
+
+		for (i = 0; i < N; ++i)
+		{
+			O[i*OS] = *Start * I[i*IS];
+			*Start += *Step;
+		}
+
+	Input:
+
+		const float *I, vDSP_Stride IS.
+
+			Starting address and stride for the input vector.
+
+		float *Start.
+
+			Starting value for the ramp.
+
+		const float *Step.
+
+			Value of the step for the ramp.
+
+		float *O, vDSP_Stride *OS.
+
+			Starting address and stride for the output vector.
+
+		vDSP_Length Length.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are written to O.
+
+		On return, *Start contains initial *Start + N * *Step.
+*/
+void vDSP_vrampmul(
+	const float *__vDSP_I, vDSP_Stride __vDSP_IS,
+	float *__vDSP_Start,
+	const float *__vDSP_Step,
+	float *__vDSP_O, vDSP_Stride __vDSP_OS,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_vrampmuladd, vector single-precision vramp, multiply and add.
+
+	This routine adds to O the product of I and a ramp function with initial
+	value *Start and slope *Step.  *Start is updated to continue the ramp in a
+	consecutive call.  To continue the ramp smoothly, the new value of *Step
+	includes rounding errors accumulated during the routine rather than being
+	calculated directly as *Start + N * *Step.
+
+	This routine calculates:
+
+		for (i = 0; i < N; ++i)
+		{
+			O[i*OS] += *Start * I[i*IS];
+			*Start += *Step;
+		}
+
+	Input:
+
+		const float *I, vDSP_Stride IS.
+
+			Starting address and stride for the input vector.
+
+		float *Start.
+
+			Starting value for the ramp.
+
+		const float *Step.
+
+			Value of the step for the ramp.
+
+		float *O, vDSP_Stride *OS.
+
+			Starting address and stride for the output vector.
+
+		vDSP_Length Length.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are added to O.
+
+		On return, *Start contains initial *Start + N * *Step.
+*/
+void vDSP_vrampmuladd(
+	const float *__vDSP_I, vDSP_Stride __vDSP_IS,
+	float *__vDSP_Start,
+	const float *__vDSP_Step,
+	float *__vDSP_O, vDSP_Stride __vDSP_OS,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_vrampmul2, stereo vector single-precision vramp and multiply.
+
+	This routine:
+
+		Puts into O0 the product of I0 and a ramp function with initial value
+		*Start and slope *Step.
+
+		Puts into O1 the product of I1 and a ramp function with initial value
+		*Start and slope *Step.
+
+	*Start is updated to continue the ramp in a consecutive call.  To continue
+	the ramp smoothly, the new value of *Step includes rounding errors
+	accumulated during the routine rather than being calculated directly as
+	*Start + N * *Step.
+
+	This routine calculates:
+
+		for (i = 0; i < N; ++i)
+		{
+			O0[i*OS] = *Start * I0[i*IS];
+			O1[i*OS] = *Start * I1[i*IS];
+			*Start += *Step;
+		}
+
+	Input:
+
+		const float *I0, const float *I1, vDSP_Stride IS.
+
+			Starting addresses of both inputs and stride for the input vectors.
+
+		float *Start.
+
+			Starting value for the ramp.
+
+		const float *Step.
+
+			Value of the step for the ramp.
+
+		float *O0, float *O1, vDSP_Stride *OS.
+
+			Starting addresses of both outputs and stride for the output vectors.
+
+		vDSP_Length Length.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are written to O0 and O1.
+
+		On return, *Start contains initial *Start + N * *Step.
+*/
+void vDSP_vrampmul2(
+	const float *__vDSP_I0, const float *__vDSP_I1, vDSP_Stride __vDSP_IS,
+	float *__vDSP_Start,
+	const float *__vDSP_Step,
+	float *__vDSP_O0, float *__vDSP_O1, vDSP_Stride __vDSP_OS,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_vrampmuladd2, stereo vector single-precision vramp, multiply and add.
+
+	This routine:
+
+		Adds to O0 the product of I0 and a ramp function with initial value
+		*Start and slope *Step.
+
+		Adds to O1 the product of I1 and a ramp function with initial value
+		*Start and slope *Step.
+
+	*Start is updated to continue the ramp in a consecutive call.  To continue
+	the ramp smoothly, the new value of *Step includes rounding errors
+	accumulated during the routine rather than being calculated directly as
+	*Start + N * *Step.
+
+	This routine calculates:
+
+		for (i = 0; i < N; ++i)
+		{
+			O0[i*OS] += *Start * I0[i*IS];
+			O1[i*OS] += *Start * I1[i*IS];
+			*Start += *Step;
+		}
+
+	Input:
+
+		const float *I0, const float *I1, vDSP_Stride IS.
+
+			Starting addresses of both inputs and stride for the input vectors.
+
+		float *Start.
+
+			Starting value for the ramp.
+
+		const float *Step.
+
+			Value of the step for the ramp.
+
+		float *O0, float *O1, vDSP_Stride *OS.
+
+			Starting addresses of both outputs and stride for the output vectors.
+
+		vDSP_Length Length.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are written to O0 and O1.
+
+		On return, *Start contains initial *Start + N * *Step.
+*/
+void vDSP_vrampmuladd2(
+	const float *__vDSP_I0, const float *__vDSP_I1, vDSP_Stride __vDSP_IS,
+	float *__vDSP_Start,
+	const float *__vDSP_Step,
+	float *__vDSP_O0, float *__vDSP_O1, vDSP_Stride __vDSP_OS,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_vrampmul_s1_15, vector integer 1.15 format vramp and multiply.
+
+	This routine puts into O the product of I and a ramp function with initial
+	value *Start and slope *Step.  *Start is updated to continue the ramp
+	in a consecutive call.
+
+	This routine calculates:
+
+		for (i = 0; i < N; ++i)
+		{
+			O[i*OS] = *Start * I[i*IS];
+			*Start += *Step;
+		}
+
+	The elements are fixed-point numbers, each with one sign bit and 15
+	fraction bits.  Where the value of the short int is normally x, it is
+	x/32768 for the purposes of this routine.
+
+	Input:
+
+		const short int *I, vDSP_Stride IS.
+
+			Starting address and stride for the input vector.
+
+		short int *Start.
+
+			Starting value for the ramp.
+
+		const short int *Step.
+
+			Value of the step for the ramp.
+
+		short int *O, vDSP_Stride *OS.
+
+			Starting address and stride for the output vector.
+
+		vDSP_Length Length.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are written to O.
+
+		On return, *Start contains initial *Start + N * *Step.
+*/
+void vDSP_vrampmul_s1_15(
+	const short int *__vDSP_I, vDSP_Stride __vDSP_IS,
+	short int *__vDSP_Start,
+	const short int *__vDSP_Step,
+	short int *__vDSP_O, vDSP_Stride __vDSP_OS,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_vrampmuladd_s1_15, vector integer 1.15 format vramp, multiply and add.
+
+	This routine adds to O the product of I and a ramp function with initial
+	value *Start and slope *Step.  *Start is updated to continue the ramp in a
+	consecutive call.
+
+	This routine calculates:
+
+		for (i = 0; i < N; ++i)
+		{
+			O[i*OS] += *Start * I[i*IS];
+			*Start += *Step;
+		}
+
+	The elements are fixed-point numbers, each with one sign bit and 15
+	fraction bits.  Where the value of the short int is normally x, it is
+	x/32768 for the purposes of this routine.
+
+	Input:
+
+		const short int *I, vDSP_Stride IS.
+
+			Starting address and stride for the input vector.
+
+		short int *Start.
+
+			Starting value for the ramp.
+
+		const short int *Step.
+
+			Value of the step for the ramp.
+
+		short int *O, vDSP_Stride *OS.
+
+			Starting address and stride for the output vector.
+
+		vDSP_Length Length.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are added to O.
+
+		On return, *Start contains initial *Start + N * *Step.
+*/
+void vDSP_vrampmuladd_s1_15(
+	const short int *__vDSP_I, vDSP_Stride __vDSP_IS,
+	short int *__vDSP_Start,
+	const short int *__vDSP_Step,
+	short int *__vDSP_O, vDSP_Stride __vDSP_OS,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_vrampmul2_s1_15, stereo vector integer 1.15 format vramp and multiply.
+
+	This routine:
+
+		Puts into O0 the product of I0 and a ramp function with initial value
+		*Start and slope *Step.
+
+		Puts into O1 the product of I1 and a ramp function with initial value
+		*Start and slope *Step.
+
+	*Start is updated to continue the ramp in a consecutive call.
+
+	This routine calculates:
+
+		for (i = 0; i < N; ++i)
+		{
+			O0[i*OS] = *Start * I0[i*IS];
+			O1[i*OS] = *Start * I1[i*IS];
+			*Start += *Step;
+		}
+
+	The elements are fixed-point numbers, each with one sign bit and 15
+	fraction bits.  Where the value of the short int is normally x, it is
+	x/32768 for the purposes of this routine.
+
+	Input:
+
+		const short int *I0, const short int *I1, vDSP_Stride IS.
+
+			Starting addresses of both inputs and stride for the input vectors.
+
+		short int *Start.
+
+			Starting value for the ramp.
+
+		const short int *Step.
+
+			Value of the step for the ramp.
+
+		short int *O0, short int *O1, vDSP_Stride *OS.
+
+			Starting addresses of both outputs and stride for the output vectors.
+
+		vDSP_Length Length.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are written to O0 and O1.
+
+		On return, *Start contains initial *Start + N * *Step.
+
+*/
+void vDSP_vrampmul2_s1_15(
+	const short int *__vDSP_I0, const short int *__vDSP_I1, vDSP_Stride __vDSP_IS,
+	short int *__vDSP_Start,
+	const short int *__vDSP_Step,
+	short int *__vDSP_O0, short int *__vDSP_O1, vDSP_Stride __vDSP_OS,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_vrampmuladd2_s1_15, stereo vector integer 1.15 format vramp, multiply
+	and add.
+
+	This routine:
+
+		Adds to O0 the product of I0 and a ramp function with initial value
+		*Start and slope *Step.
+
+		Adds to O1 the product of I1 and a ramp function with initial value
+		*Start and slope *Step.
+
+	*Start is updated to continue the ramp in a consecutive call.
+
+	This routine calculates:
+
+		for (i = 0; i < N; ++i)
+		{
+			O0[i*OS] += *Start * I0[i*IS];
+			O1[i*OS] += *Start * I1[i*IS];
+			*Start += *Step;
+		}
+
+	The elements are fixed-point numbers, each with one sign bit and 15
+	fraction bits.  Where the value of the short int is normally x, it is
+	x/32768 for the purposes of this routine.
+
+	Input:
+
+		const short int *I0, const short int *I1, vDSP_Stride IS.
+
+			Starting addresses of both inputs and stride for the input vectors.
+
+		short int *Start.
+
+			Starting value for the ramp.
+
+		const short int *Step.
+
+			Value of the step for the ramp.
+
+		short int *O0, short int *O1, vDSP_Stride *OS.
+
+			Starting addresses of both outputs and stride for the output vectors.
+
+		vDSP_Length Length.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are added to O0 and O1.
+
+		On return, *Start contains initial *Start + N * *Step.
+
+*/
+void vDSP_vrampmuladd2_s1_15(
+	const short int *__vDSP_I0, const short int *__vDSP_I1, vDSP_Stride __vDSP_IS,
+	short int *__vDSP_Start,
+	const short int *__vDSP_Step,
+	short int *__vDSP_O0, short int *__vDSP_O1, vDSP_Stride __vDSP_OS,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_vrampmul_s8_24, vector integer 8.24 format vramp and multiply.
+
+	This routine puts into O the product of I and a ramp function with initial
+	value *Start and slope *Step.  *Start is updated to continue the ramp
+	in a consecutive call.
+
+	This routine calculates:
+
+		for (i = 0; i < N; ++i)
+		{
+			O[i*OS] = *Start * I[i*IS];
+			*Start += *Step;
+		}
+
+	The elements are fixed-point numbers, each with eight integer bits
+	(including sign) and 24 fraction bits.  Where the value of the int is
+	normally x, it is x/16777216 for the purposes of this routine.
+
+	Input:
+
+		const int *I, vDSP_Stride IS.
+
+			Starting address and stride for the input vector.
+
+		int *Start.
+
+			Starting value for the ramp.
+
+		const int *Step.
+
+			Value of the step for the ramp.
+
+		int *O, vDSP_Stride *OS.
+
+			Starting address and stride for the output vector.
+
+		vDSP_Length Length.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are written to O.
+
+		On return, *Start contains initial *Start + N * *Step.
+*/
+void vDSP_vrampmul_s8_24(
+	const int *__vDSP_I, vDSP_Stride __vDSP_IS,
+	int *__vDSP_Start,
+	const int *__vDSP_Step,
+	int *__vDSP_O, vDSP_Stride __vDSP_OS,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_vrampmuladd_s8_24, vector integer 8.24 format vramp, multiply and add.
+
+	This routine adds to O the product of I and a ramp function with initial
+	value *Start and slope *Step.  *Start is updated to continue the ramp in a
+	consecutive call.
+
+	This routine calculates:
+
+		for (i = 0; i < N; ++i)
+		{
+			O[i*OS] += *Start * I[i*IS];
+			*Start += *Step;
+		}
+
+	The elements are fixed-point numbers, each with eight integer bits
+	(including sign) and 24 fraction bits.  Where the value of the int is
+	normally x, it is x/16777216 for the purposes of this routine.
+
+	Input:
+
+		const int *I, vDSP_Stride IS.
+
+			Starting address and stride for the input vector.
+
+		int *Start.
+
+			Starting value for the ramp.
+
+		const int *Step.
+
+			Value of the step for the ramp.
+
+		int *O, vDSP_Stride *OS.
+
+			Starting address and stride for the output vector.
+
+		vDSP_Length Length.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are added to O.
+
+		On return, *Start contains initial *Start + N * *Step.
+*/
+void vDSP_vrampmuladd_s8_24(
+	const int *__vDSP_I, vDSP_Stride __vDSP_IS,
+	int *__vDSP_Start,
+	const int *__vDSP_Step,
+	int *__vDSP_O, vDSP_Stride __vDSP_OS,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_vrampmul2_s8_24, stereo vector integer 8.24 format vramp and multiply.
+
+	This routine:
+
+		Puts into O0 the product of I0 and a ramp function with initial value
+		*Start and slope *Step.
+
+		Puts into O1 the product of I1 and a ramp function with initial value
+		*Start and slope *Step.
+
+	*Start is updated to continue the ramp in a consecutive call.
+
+	This routine calculates:
+
+		for (i = 0; i < N; ++i)
+		{
+			O0[i*OS] = *Start * I0[i*IS];
+			O1[i*OS] = *Start * I1[i*IS];
+			*Start += *Step;
+		}
+
+	The elements are fixed-point numbers, each with eight integer bits
+	(including sign) and 24 fraction bits.  Where the value of the int is
+	normally x, it is x/16777216 for the purposes of this routine.
+
+	Input:
+
+		const int *I0, const int *I1, vDSP_Stride IS.
+
+			Starting addresses of both inputs and stride for the input vectors.
+
+		int *Start.
+
+			Starting value for the ramp.
+
+		const int *Step.
+
+			Value of the step for the ramp.
+
+		int *O0, int *O1, vDSP_Stride *OS.
+
+			Starting addresses of both outputs and stride for the output vectors.
+
+		vDSP_Length Length.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are written to O0 and O1.
+
+		On return, *Start contains initial *Start + N * *Step.
+
+*/
+void vDSP_vrampmul2_s8_24(
+	const int *__vDSP_I0, const int *__vDSP_I1, vDSP_Stride __vDSP_IS,
+	int *__vDSP_Start,
+	const int *__vDSP_Step,
+	int *__vDSP_O0, int *__vDSP_O1, vDSP_Stride __vDSP_OS,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
+
+
+/*	vDSP_vrampmuladd2_s8_24, stereo vector integer 8.24 format vramp, multiply
+	and add.
+
+	This routine:
+
+		Adds to O0 the product of I0 and a ramp function with initial value
+		*Start and slope *Step.
+
+		Adds to O1 the product of I1 and a ramp function with initial value
+		*Start and slope *Step.
+
+	*Start is updated to continue the ramp in a consecutive call.
+
+	This routine calculates:
+
+		for (i = 0; i < N; ++i)
+		{
+			O0[i*OS] += *Start * I0[i*IS];
+			O1[i*OS] += *Start * I1[i*IS];
+			*Start += *Step;
+		}
+
+	The elements are fixed-point numbers, each with eight integer bits
+	(including sign) and 24 fraction bits.  Where the value of the int is
+	normally x, it is x/16777216 for the purposes of this routine.
+
+	Input:
+
+		const int *I0, const int *I1, vDSP_Stride IS.
+
+			Starting addresses of both inputs and stride for the input vectors.
+
+		int *Start.
+
+			Starting value for the ramp.
+
+		const int *Step.
+
+			Value of the step for the ramp.
+
+		int *O0, int *O1, vDSP_Stride *OS.
+
+			Starting addresses of both outputs and stride for the output vectors.
+
+		vDSP_Length Length.
+
+			Number of elements in each vector.
+
+	Output:
+
+		The results are written to O0 and O1.
+
+		On return, *Start contains initial *Start + N * *Step.
+
+*/
+void vDSP_vrampmuladd2_s8_24(
+	const int *__vDSP_I0, const int *__vDSP_I1, vDSP_Stride __vDSP_IS,
+	int *__vDSP_Start,
+	const int *__vDSP_Step,
+	int *__vDSP_O0, int *__vDSP_O1, vDSP_Stride __vDSP_OS,
+	vDSP_Length __vDSP_N)
+		__OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_4_0);
 
 
 

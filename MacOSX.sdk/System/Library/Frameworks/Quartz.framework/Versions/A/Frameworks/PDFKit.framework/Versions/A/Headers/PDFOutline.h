@@ -23,11 +23,6 @@
 // either a destination or action for it.  Also, you will need to add it as a child of another PDFOutline object.
 - (id) init;
 
-// DEPRECATED - now that we have a proper initializer for PDFOutline, this one only causes confusion.
-// DEPRECTAED - Its intent was to return a PDFOutline object for a PDFDocument that already had an outline.
-// DEPRECATED - Call -[PDFDocument outlineRoot] instead.
-//- (id) initWithDocument: (PDFDocument *) document;
-
 // -------- accessors
 
 // The PDFDocument the outline is associated with.
@@ -35,7 +30,7 @@
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
-// Returns the parent outline (the root outline will return NULL).
+// Returns the parent outline (the root outline will return nil).
 - (PDFOutline *) parent;
 
 #endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
@@ -83,7 +78,7 @@
 
 #endif	 // MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
-// The destination associated with the outline item.  The root PDFOutline has no destination.  May return NULL if the 
+// The destination associated with the outline item.  The root PDFOutline has no destination.  May return nil if the 
 // outline item has an associated action instead.  If however the associated action is a PDFActionGoTo type this method 
 // will return the destination from the PDFActionGoTo action. The preferred way though is to call -[action] below.
 

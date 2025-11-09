@@ -1,7 +1,6 @@
 /*
 	NSScriptObjectSpecifiers.h
-	Copyright (c) 1997-2009, Apple Inc.
-	All rights reserved.
+	Copyright (c) 1997-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -61,13 +60,9 @@ typedef NSUInteger NSWhoseSubelementIdentifier;
     NSInteger _error;
 }
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 /* Given a typeObjectSpecifier Apple event descriptor, create and return an object specifier, or nil for failure. If this is invoked and fails during the execution of a script command, information about the error that caused the failure is recorded in [NSScriptCommand currentCommand].
 */
-+ (NSScriptObjectSpecifier *)objectSpecifierWithDescriptor:(NSAppleEventDescriptor *)descriptor;
-
-#endif
++ (NSScriptObjectSpecifier *)objectSpecifierWithDescriptor:(NSAppleEventDescriptor *)descriptor NS_AVAILABLE(10_5, NA);
 
 - (id)initWithContainerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property;
     // This figures out the container class desc from the container specifier.
@@ -110,13 +105,9 @@ typedef NSUInteger NSWhoseSubelementIdentifier;
 
 - (NSScriptObjectSpecifier *)evaluationErrorSpecifier;
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 /* Return an Apple event descriptor that represents the receiver. If the receiver was created with +objectSpecifierWithDescriptor: that passed-in descriptor is returned. Otherwise a new one is created and returned (autoreleased, of course).
 */ 
-- (NSAppleEventDescriptor *)descriptor;
-
-#endif
+- (NSAppleEventDescriptor *)descriptor NS_AVAILABLE(10_5, NA);
 
 @end
 
@@ -154,8 +145,6 @@ typedef NSUInteger NSWhoseSubelementIdentifier;
 @end
 
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 // A Name specifier returns the object with the specified name.
 
 @interface NSNameSpecifier : NSScriptObjectSpecifier {
@@ -170,8 +159,6 @@ typedef NSUInteger NSWhoseSubelementIdentifier;
 
 @end
 
-#endif
-
 
 @interface NSPositionalSpecifier : NSObject {
     @private
@@ -185,20 +172,12 @@ typedef NSUInteger NSWhoseSubelementIdentifier;
 // Given an object specifier and an insertion position relative to the specified object, initialize.
 - (id)initWithPosition:(NSInsertionPosition)position objectSpecifier:(NSScriptObjectSpecifier *)specifier;
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 // Return the position or object specifier that was specified at initialization time.
-- (NSInsertionPosition)position;
-- (NSScriptObjectSpecifier *)objectSpecifier;
-
-#endif
-
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSInsertionPosition)position NS_AVAILABLE(10_5, NA);
+- (NSScriptObjectSpecifier *)objectSpecifier NS_AVAILABLE(10_5, NA);
 
 // Set the class description for the object or objects to be inserted.  This message can be sent at any time after object initialization, but must be sent before evaluation to have any effect.
 - (void)setInsertionClassDescription:(NSScriptClassDescription *)classDescription;
-
-#endif
 
 // Evaluate this positional specifier.  If evaluation is successful, subsequent -insertionContainer, -insertionKey, -insertionIndex, and -insertionReplaces messages sent to this object will return the results of the evaluation.
 - (void)evaluate;
@@ -212,12 +191,8 @@ typedef NSUInteger NSWhoseSubelementIdentifier;
 // Return an index into the set of keyed to-many relationship objects before which insertion should be done in the insertion container, if evaluation has been successful, or -1 otherwise.  If this object has never been evaluated, evaluation is attempted.
 - (NSInteger)insertionIndex;
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 // Return YES if evaluation has been successful and the object to be inserted should actually replace the keyed, indexed object in the insertion container, instead of being inserted before it, or NO otherwise.  If this object has never been evaluated, evaluation is attempted.
 - (BOOL)insertionReplaces;
-
-#endif
 
 @end
 
@@ -273,8 +248,6 @@ typedef NSUInteger NSWhoseSubelementIdentifier;
 @end
 
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 // A Unique ID specifier returns the object with the specified ID.
 
 @interface NSUniqueIDSpecifier : NSScriptObjectSpecifier {
@@ -288,8 +261,6 @@ typedef NSUInteger NSWhoseSubelementIdentifier;
 - (void)setUniqueID:(id)uniqueID;
 
 @end
-
-#endif
 
 
 // A Qualified specifier uses a qualifier and another object specifier to get a subset of the objects for the specifier's property.  The other object specifier is evaluated for each object using that object as the container and the objects that result are tested with the qualifier.  An example makes this easier to understand.

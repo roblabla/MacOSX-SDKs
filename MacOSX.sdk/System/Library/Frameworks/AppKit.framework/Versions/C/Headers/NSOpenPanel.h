@@ -1,7 +1,7 @@
 /*
     NSOpenPanel.h
     Application Kit
-    Copyright (c) 1994-2009, Apple Inc.
+    Copyright (c) 1994-2011, Apple Inc.
     All rights reserved.
 */
 
@@ -38,31 +38,31 @@
 
 @interface NSOpenPanel (NSDeprecated)
 
-/* This method is deprecated in 10.6, and will be formally deprecated in a future release. Use URLs instead.
+/* Use URLs instead.
  */
-- (NSArray *)filenames;
+- (NSArray *)filenames NS_DEPRECATED_MAC(10_0, 10_6);
 
-/* This method is deprecated in 10.6, and will be formally deprecated in a future release. Use -runModalForWindow:completionHandler: instead.
+/* Use -beginSheetModalForWindow:completionHandler: instead.
     Set the -directoryURL property instead of passing in a 'path'.
     Set the -allowedFileTypes property instead of passing in the 'fileTypes'.
  */
-- (void)beginSheetForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes modalForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
+- (void)beginSheetForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes modalForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_6);
 
-/* This method is deprecated in 10.6, and will be formally deprecated in a future release. Use -runWithCompletionHandler: instead. 
+/* Use -beginWithCompletionHandler: instead. 
     Set the -directoryURL property instead of passing in a 'path'.
     Set the -allowedFileTypes property instead of passing in the 'fileTypes'.
  */
-- (void)beginForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes modelessDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo ;
+- (void)beginForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes modelessDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo  NS_DEPRECATED_MAC(10_0, 10_6);
 
-/* This method is deprecated in 10.6, and will be formally deprecated in a future release. Use -runModal instead. 
+/* Use -runModal instead. 
     Set the -directoryURL property instead of passing in a 'path'.
     Set the -allowedFileTypes property instead of passing in the 'fileTypes'.
  */
-- (NSInteger)runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes;
+- (NSInteger)runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes NS_DEPRECATED_MAC(10_0, 10_6);
 
-/* This method is deprecated in 10.6, and will be formally deprecated in a future release. Use -runModal instead. 
+/* Use -runModal instead. 
     Set the -allowedFileTypes property instead of passing in the 'fileTypes'.
  */
-- (NSInteger)runModalForTypes:(NSArray *)fileTypes;
+- (NSInteger)runModalForTypes:(NSArray *)fileTypes NS_DEPRECATED_MAC(10_0, 10_6);
 
 @end

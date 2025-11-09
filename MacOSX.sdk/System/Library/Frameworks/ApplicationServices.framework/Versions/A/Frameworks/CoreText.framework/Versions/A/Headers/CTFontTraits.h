@@ -2,13 +2,14 @@
  *  CTFontTraits.h
  *  CoreText
  *
- *  Copyright (c) 2006-2008 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2011 Apple Inc. All rights reserved.
  *
  */
 
 #ifndef __CTFONTTRAITS__
 #define __CTFONTTRAITS__
 
+#include <CoreText/CTDefines.h>
 #include <CoreFoundation/CFNumber.h>
 #include <CoreFoundation/CFString.h>
 
@@ -21,25 +22,25 @@ extern "C" {
     @abstract   Dictionary key to access the symbolic traits value.
     @discussion Use this key to access the symbolic traits value from the font traits dictionary. The value is returned as a CFNumberRef.
 */
-extern const CFStringRef kCTFontSymbolicTrait AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTFontSymbolicTrait CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 /*!
     @defined    kCTFontWeightTrait
     @abstract   Dictionary key to access the weight trait value.
     @discussion Use this key to access the normalized weigth trait from the font traits dictionary. The value returned is a CFNumberRef representing a float value between -1.0 and 1.0 for normalized weight. The value of 0.0 corresponds to the regular or medium font weight.
 */
-extern const CFStringRef kCTFontWeightTrait AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTFontWeightTrait CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 /*!
     @defined    kCTFontWidthTrait
     @abstract   Dictionary key to access the width (condense/expand) trait value.
     @discussion Use this key to access the normalized proportion trait from the font traits dictionary. This value corresponds to the relative inter-glyph spacing for a given font. The value returned is a CFNumberRef representing a float between -1.0 and 1.0. The value of 0.0 corresponds to regular glyph spacing while negative values represent condensed glyph spacing.
 */
-extern const CFStringRef kCTFontWidthTrait AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTFontWidthTrait CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 /*!
     @defined    kCTFontSlantTrait
     @abstract   Dictionary key to access the slant trait value.
     @discussion Use this key to access the normalized slant angle from the font traits dictionary. The value returned is a CFNumberRef representing a float value between -1.0 and 1.0 for normalized slant angle. The value or 0.0 corresponds to 0 degree clockwise rotation from the vertical and 1.0 corresponds to 30 degrees clockwise rotation.
 */
-extern const CFStringRef kCTFontSlantTrait AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTFontSlantTrait CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 /*!
     @const      kCTFontClassMaskShift
@@ -66,6 +67,7 @@ enum {
     kCTFontMonoSpaceTrait           = (1 << 10),    // Use fixed-pitch glyphs if available. May have multiple glyph advances (most CJK glyphs may contain two spaces)
     kCTFontVerticalTrait            = (1 << 11),    // Use vertical glyph variants and metrics
     kCTFontUIOptimizedTrait         = (1 << 12),    // Synthesize appropriate attributes for UI rendering such as control titles if necessary
+    kCTFontColorGlyphsTrait         = (1 << 13),    // Color bitmap glyphs are available. 
 
     kCTFontClassMaskTrait           = (15 << kCTFontClassMaskShift) // Mask for the font class
 };

@@ -9,7 +9,7 @@
  *
  * The spline is described using a CGPath object and may have both fill
  * and stroke components (in which case the stroke is composited over
- * the fill.) The shape as a whole is composited between the layer's
+ * the fill). The shape as a whole is composited between the layer's
  * contents and its first sublayer.
  *
  * The path object may be animated using any of the concrete subclasses
@@ -33,7 +33,9 @@
 /* The path defining the shape to be rendered. If the path extends
  * outside the layer bounds it will not automatically be clipped to the
  * layer, only if the normal layer masking rules cause that. Defaults
- * to null. Animatable. */
+ * to null. Animatable. (Note that although the path property is
+ * animatable, no implicit animation will be created when the property
+ * is changed.) */
 
 @property CGPathRef path;
 
@@ -51,6 +53,15 @@
  * Defaults to nil. Animatable. */
 
 @property CGColorRef strokeColor;
+
+/* These values define the subregion of the path used to draw the
+ * stroked outline. The values must be in the range [0,1] with zero
+ * representing the start of the path and one the end. Values in
+ * between zero and one are interpolated linearly along the path
+ * length. strokeStart defaults to zero and strokeEnd to one. Both are
+ * animatable. */
+
+@property CGFloat strokeStart, strokeEnd;
 
 /* The line width used when stroking the path. Defaults to one.
  * Animatable. */
@@ -87,24 +98,24 @@
 /* `fillRule' values. */
 
 CA_EXTERN NSString *const kCAFillRuleNonZero
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 CA_EXTERN NSString *const kCAFillRuleEvenOdd
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 
 /* `lineJoin' values. */
 
 CA_EXTERN NSString *const kCALineJoinMiter
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 CA_EXTERN NSString *const kCALineJoinRound
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 CA_EXTERN NSString *const kCALineJoinBevel
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 
 /* `lineCap' values. */
 
 CA_EXTERN NSString *const kCALineCapButt
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 CA_EXTERN NSString *const kCALineCapRound
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 CA_EXTERN NSString *const kCALineCapSquare
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2006-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -23,8 +23,10 @@
 #ifndef _SANDBOX_H_
 #define _SANDBOX_H_
 
+#include <sys/cdefs.h>
 #include <stdint.h>
-#include <unistd.h>
+
+__BEGIN_DECLS
 
 /*
  * @function sandbox_init
@@ -56,35 +58,6 @@ int sandbox_init(const char *profile, uint64_t flags, char **errorbuf);
  * profile named by one of the kSBXProfile* string constants.
  */
 #define SANDBOX_NAMED		0x0001
-
-#ifdef __APPLE_API_PRIVATE
-
-/* The following flags are reserved for Mac OS X.  Developers should not
- * depend on their availability.
- */
-
-/*
- * @define SANDBOX_NAMED_BUILTIN   The `profile' argument specifies the
- * name of a builtin profile that is statically compiled into the
- * system.
- */
-#define SANDBOX_NAMED_BUILTIN	0x0002
-
-/*
- * @define SANDBOX_NAMED_EXTERNAL   The `profile' argument specifies the
- * pathname of a Sandbox profile.  The pathname may be abbreviated: If
- * the name does not start with a `/' it is treated as relative to
- * /usr/share/sandbox and a `.sb' suffix is appended.
- */
-#define SANDBOX_NAMED_EXTERNAL	0x0003
-
-/*
- * @define SANDBOX_NAMED_MASK   Mask for name types: 4 bits, 15 possible
- * name types, 3 currently defined.
- */
-#define SANDBOX_NAMED_MASK	0x000f
-
-#endif /* __APPLE_API_PRIVATE */
 
 /*
  * Available Sandbox profiles.
@@ -120,20 +93,13 @@ void sandbox_free_error(char *errorbuf);
 
 
 #ifdef __APPLE_API_PRIVATE
+#ifndef _SANDBOX_INTERNAL_
+#define _SANDBOX_INDIRECT_
+#include <sandbox/private.h>
+#undef _SANDBOX_INDIRECT_
+#endif
+#endif
 
-/* The following defintiions are reserved for Mac OS X.  Developers should not
- * depend on their availability.
- */
-
-enum sandbox_filter_type {
-	SANDBOX_FILTER_NONE,
-	SANDBOX_FILTER_PATH,
-	SANDBOX_FILTER_GLOBAL_NAME,
-	SANDBOX_FILTER_LOCAL_NAME
-};
-
-int sandbox_check(pid_t pid, const char *operation, enum sandbox_filter_type type, ...);
-
-#endif /* __APPLE_API_PRIVATE */
+__END_DECLS
 
 #endif /* _SANDBOX_H_ */

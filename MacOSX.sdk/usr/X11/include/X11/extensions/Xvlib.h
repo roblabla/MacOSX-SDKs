@@ -21,7 +21,6 @@ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
 SOFTWARE.
 
 ******************************************************************/
-/* $XFree86: xc/include/extensions/Xvlib.h,v 1.3 1999/12/11 19:28:48 mvojkovi Exp $ */
 
 #ifndef XVLIB_H
 #define XVLIB_H
@@ -55,6 +54,7 @@ SOFTWARE.
 
 #include <X11/Xfuncproto.h>
 #include <X11/extensions/Xv.h>
+#include <X11/extensions/XShm.h>
 
 typedef struct {
   int numerator;
@@ -366,8 +366,6 @@ extern int XvShmPutImage (
    Bool send_event
 );
 
-#ifdef _XSHM_H_
-
 extern XvImage * XvShmCreateImage (
    Display *display,
    XvPortID port,
@@ -377,8 +375,6 @@ extern XvImage * XvShmCreateImage (
    int height,
    XShmSegmentInfo *shminfo
 );
-
-#endif
 
 
 _XFUNCPROTOEND

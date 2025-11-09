@@ -1,7 +1,7 @@
 /*
         NSProgressIndicator.h
         Application Kit
-        Copyright (c) 1997-2009, Apple Inc.
+        Copyright (c) 1997-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -31,13 +31,11 @@ enum {
 typedef NSUInteger NSProgressIndicatorThickness;
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 enum {
     NSProgressIndicatorBarStyle = 0,
     NSProgressIndicatorSpinningStyle = 1
 };
 typedef NSUInteger NSProgressIndicatorStyle;
-#endif
 
 //================================================================================
 //	NSProgressIndicator interface
@@ -56,7 +54,7 @@ typedef NSUInteger NSProgressIndicatorStyle;
     /* Non-persitent properties */
     double		_value;			// _minimum by default
     
-    int			_animationIndex;
+    unsigned int        _animationIndex;
     NSTimeInterval	_animationDelay;	// 5/60 of a seconds by default
 
     id			_timer;
@@ -74,14 +72,15 @@ typedef NSUInteger NSProgressIndicatorStyle;
         unsigned int controlSize:2;
 	unsigned int style:1;
         unsigned int _delayedStartup:1;
-        unsigned int _orderOutForResize:1;
  	unsigned int hideWhenStopped:1;
         unsigned int revive:1;
         unsigned int _temporarilyBlockHeartBeating:1;
         unsigned int _isHidden:1;
         unsigned int _isHeartBeatInstalled:1;
+        unsigned int _customRenderer:1;
         unsigned int _lastFrame:8;
-        unsigned int RESERVED:8;
+        unsigned int _isDetaching:1;
+        unsigned int RESERVED:7;
     } _progressIndicatorFlags;
 
     /* For future use */
@@ -123,7 +122,6 @@ typedef NSUInteger NSProgressIndicatorStyle;
 - (void)stopAnimation:(id)sender;
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (void) setStyle: (NSProgressIndicatorStyle) style;
 - (NSProgressIndicatorStyle) style;
 
@@ -133,12 +131,11 @@ typedef NSUInteger NSProgressIndicatorStyle;
 
 - (BOOL) isDisplayedWhenStopped;
 - (void) setDisplayedWhenStopped: (BOOL) isDisplayed;
-#endif
 
 @end
 
 @interface NSProgressIndicator (NSProgressIndicatorDeprecated)
-- (NSTimeInterval)animationDelay AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
-- (void)setAnimationDelay:(NSTimeInterval)delay AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
-- (void)animate:(id)sender AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
+- (NSTimeInterval)animationDelay NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)setAnimationDelay:(NSTimeInterval)delay NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)animate:(id)sender NS_DEPRECATED_MAC(10_0, 10_6);
 @end

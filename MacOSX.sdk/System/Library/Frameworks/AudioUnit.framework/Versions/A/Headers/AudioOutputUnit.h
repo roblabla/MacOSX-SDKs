@@ -3,7 +3,7 @@
  
      Contains:   AudioOutputUnit Interfaces
  
-     Copyright:  © 2000-2008 by Apple Inc., all rights reserved.
+     Copyright:  © 2000-2008 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -53,13 +53,22 @@ extern OSStatus
 AudioOutputUnitStop(	AudioUnit	ci)											__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 //-----------------------------------------------------------------------------
-//	Selectors for component calls
+//	Selectors for component and audio plugin calls
 //-----------------------------------------------------------------------------
 enum {
 	kAudioOutputUnitRange						= 0x0200,	// selector range
 	kAudioOutputUnitStartSelect					= 0x0201,
 	kAudioOutputUnitStopSelect					= 0x0202
 };
+
+/*!
+*/
+typedef OSStatus	(*AudioOutputUnitStartProc) (void *self);
+
+/*!
+*/
+typedef OSStatus	(*AudioOutputUnitStopProc) (void *self);
+
 
 #if !__LP64__
 	#if PRAGMA_STRUCT_ALIGN

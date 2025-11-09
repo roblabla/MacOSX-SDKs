@@ -94,8 +94,9 @@ extern "C" {
 #define kPMTotalSidesImagedStr		    		"com.apple.print.PrintSettings.PMTotalSidesImaged"
 #define kPMTotalSidesImagedKey		    	CFSTR( kPMTotalSidesImagedStr )			/* CFNumber the total number of sides that will printed. Does not take into account duplex and collation */
 
-
-
+#define kPMFitToPageStr		    	"fit-to-page"
+#define kPMFitToPageKey		    	CFSTR( kPMFitToPageStr )			/* CFString - If CFSTR("true"), orient, scale to fit and/or center each page as appropriate. Default value: CFSTR("false"). */
+  
 /* Fax Related */
 #define kPMFaxNumberStr						"phone"
 #define kPMFaxNumberKey		    			CFSTR( kPMFaxNumberStr )			/* CFString - fax number to dial */

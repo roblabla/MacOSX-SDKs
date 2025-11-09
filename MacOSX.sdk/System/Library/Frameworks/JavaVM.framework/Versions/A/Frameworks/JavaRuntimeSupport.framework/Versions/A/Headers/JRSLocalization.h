@@ -1,9 +1,7 @@
 //
 //  JRSLocalization.h
-//  Copyright 2008 Apple Inc. All rights reserved.
+//  Copyright 2008-2011 Apple Inc. All rights reserved.
 //
-
-#import <Cocoa/Cocoa.h>
 
 char *JRSCopyPrimaryLanguage();
 char *JRSCopyCanonicalLanguageForPrimaryLanguage(const char *primaryLanguage);

@@ -1,12 +1,12 @@
 /*
         NSOpenGL.h
         Application Kit
-        Copyright (c) 2000-2009, Apple Inc.
+        Copyright (c) 2000-2011, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
-#import <OpenGL/gl.h>
+#import <OpenGL/gltypes.h>
 
 @class NSData, NSView, NSScreen;
 
@@ -15,14 +15,15 @@
 */
 #define NSOPENGL_CURRENT_VERSION  1
 
-/*
-** Option names for NSOpenGLSetOption and NSOpenGLGetOption.
-*/
+/* Option names for NSOpenGLSetOption() and NSOpenGLGetOption() */
 typedef enum {
 	NSOpenGLGOFormatCacheSize  = 501,	/* Set the size of the pixel format cache        */
 	NSOpenGLGOClearFormatCache = 502,	/* Reset the pixel format cache if true          */
 	NSOpenGLGORetainRenderers  = 503,	/* Whether to retain loaded renderers in memory  */
-	NSOpenGLGOResetLibrary     = 504	/* Do a soft reset of the CGL library if true    */
+	NSOpenGLGOUseBuildCache    = 506,	/* Enable the function compilation block cache.  Off by default.  Must be enabled at startup. */
+
+    /* Deprecated Global Option Values */
+	NSOpenGLGOResetLibrary     = 504	/* Deprecated in Mac OS X 10.4.  Do a soft reset of the CGL library if true    */
 } NSOpenGLGlobalOption;
 
 
@@ -48,6 +49,7 @@ extern void NSOpenGLGetVersion(GLint *major, GLint *minor);
 */
 enum {
 	NSOpenGLPFAAllRenderers       =   1,	/* choose from all available renderers          */
+	NSOpenGLPFATripleBuffer       =   3,	/* choose a triple buffered pixel format        */
 	NSOpenGLPFADoubleBuffer       =   5,	/* choose a double buffered pixel format        */
 	NSOpenGLPFAStereo             =   6,	/* stereo buffering supported                   */
 	NSOpenGLPFAAuxBuffers         =   7,	/* number of aux buffers                        */
@@ -64,21 +66,16 @@ enum {
 	NSOpenGLPFASamples            =  56,	/* number of samples per multi sample buffer    */
 	NSOpenGLPFAAuxDepthStencil    =  57,	/* each aux buffer has its own depth stencil    */
 	NSOpenGLPFAColorFloat         =  58,	/* color buffers store floating point pixels    */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 	NSOpenGLPFAMultisample        =  59,    /* choose multisampling                         */
 	NSOpenGLPFASupersample        =  60,    /* choose supersampling                         */
 	NSOpenGLPFASampleAlpha        =  61,    /* request alpha filtering                      */
-#endif
 	NSOpenGLPFARendererID         =  70,	/* request renderer by ID                       */
 	NSOpenGLPFASingleRenderer     =  71,	/* choose a single renderer for all screens     */
 	NSOpenGLPFANoRecovery         =  72,	/* disable all failure recovery systems         */
 	NSOpenGLPFAAccelerated        =  73,	/* choose a hardware accelerated renderer       */
 	NSOpenGLPFAClosestPolicy      =  74,	/* choose the closest color buffer to request   */
-	NSOpenGLPFARobust             =  75,	/* renderer does not need failure recovery      */
 	NSOpenGLPFABackingStore       =  76,	/* back buffer contents are valid after swap    */
-	NSOpenGLPFAMPSafe             =  78,	/* renderer is multi-processor safe             */
 	NSOpenGLPFAWindow             =  80,	/* can be used to render to an onscreen window  */
-	NSOpenGLPFAMultiScreen        =  81,	/* single window can span multiple screens      */
 	NSOpenGLPFACompliant          =  83,	/* renderer is opengl compliant                 */
 	NSOpenGLPFAScreenMask         =  84,	/* bit mask of supported physical screens       */
 	NSOpenGLPFAPixelBuffer        =  90,	/* can be used to render to a pbuffer           */
@@ -87,10 +84,26 @@ enum {
 	NSOpenGLPFAAllowOfflineRenderers = 96,  /* allow use of offline renderers               */
 #endif
 	NSOpenGLPFAAcceleratedCompute =  97,	/* choose a hardware accelerated compute device */
-	NSOpenGLPFAVirtualScreenCount = 128	/* number of virtual screens in this format     */
-};
-typedef  uint32_t NSOpenGLPixelFormatAttribute;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+	NSOpenGLPFAOpenGLProfile      =  99,	/* specify an OpenGL Profile to use             */
+#endif
+	NSOpenGLPFAVirtualScreenCount = 128,	/* number of virtual screens in this format     */
 
+    /* NSOpenGLPFARobust, NSOpenGLPFAMPSafe, and NSOpenGLPFAMultiScreen are deprecated.  Applications that specify these attributes will continue to work, but they are deprecated for new development.
+    */
+	NSOpenGLPFARobust             =  75,	/* renderer does not need failure recovery      */
+	NSOpenGLPFAMPSafe             =  78,	/* renderer is multi-processor safe             */
+	NSOpenGLPFAMultiScreen        =  81 	/* single window can span multiple screens      */
+};
+typedef uint32_t NSOpenGLPixelFormatAttribute;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+/* NSOpenGLPFAOpenGLProfile values */
+enum {
+	NSOpenGLProfileVersionLegacy    = 0x1000,   /* choose a Legacy/Pre-OpenGL 3.0 Implementation */
+	NSOpenGLProfileVersion3_2Core   = 0x3200    /* choose an OpenGL 3.2 Core Implementation      */
+};
+#endif
 
 /*
 ** NSOpenGLPixelFormat interface.
@@ -109,7 +122,7 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 
 - (id)initWithAttributes:(const NSOpenGLPixelFormatAttribute *)attribs;
 - (id)initWithData:(NSData*)attribs;
-- (id)initWithCGLPixelFormatObj:(void *)format AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (id)initWithCGLPixelFormatObj:(void *)format NS_AVAILABLE_MAC(10_6);
 
 - (NSData*)attributes;
 - (void)setAttributes:(NSData*)attribs;
@@ -117,17 +130,16 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 - (void)getValues:(GLint *)vals forAttribute:(NSOpenGLPixelFormatAttribute)attrib forVirtualScreen:(GLint)screen;
 - (GLint)numberOfVirtualScreens;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void *)CGLPixelFormatObj;
-#endif
 
 @end
 
 /*********************
 ** NSOpenGLPixelBuffer
 *********************/
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
+/* NOTE: PBuffers should be considered deprecated as of 10.7.  Use GL_EXT_framebuffer_object instead.
+*/
 @interface NSOpenGLPixelBuffer : NSObject
 {
 @private
@@ -145,34 +157,39 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 ** TEXTURE_RECTANGLE targets.
 */
 - (id)initWithTextureTarget:(GLenum)target textureInternalFormat:(GLenum)format textureMaxMipMapLevel:(GLint)maxLevel pixelsWide:(GLsizei)pixelsWide pixelsHigh:(GLsizei)pixelsHigh;
-- (id)initWithCGLPBufferObj:(void *)pbuffer AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void *)CGLPBufferObj AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (id)initWithCGLPBufferObj:(void *)pbuffer NS_AVAILABLE_MAC(10_6);
+- (void *)CGLPBufferObj NS_AVAILABLE_MAC(10_6);
 - (GLsizei)pixelsWide;
 - (GLsizei)pixelsHigh;
 - (GLenum)textureTarget;
 - (GLenum)textureInternalFormat;
 - (GLint)textureMaxMipMapLevel;
 @end
-#endif
 
 
 /*****************
 ** NSOpenGLContext
 *****************/
 
-/*
-** Parameter names for [NSOpenGLContext setParameter] and [NSOpenGLContext getParameter].
-*/
+/* Parameter names for NSOpenGLContext -setValues:forParameter: and -getValues:forParameter: */
 typedef enum {
-	NSOpenGLCPSwapRectangle       = 200,	/* Set or get the swap rectangle {x, y, w, h}       */
-	NSOpenGLCPSwapRectangleEnable = 201,	/* Enable or disable the swap rectangle             */
-	NSOpenGLCPRasterizationEnable = 221,	/* Enable or disable all rasterization              */
-	NSOpenGLCPSwapInterval        = 222,	/* 0 -> Don't sync, 1 -> Sync to vertical retrace   */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
-	NSOpenGLCPSurfaceOrder        = 235,	/* 1 -> Above Window (default), -1 -> Below Window  */
-	NSOpenGLCPSurfaceOpacity      = 236,	/* 1-> Surface is opaque (default), 0 -> non-opaque */
-#endif
-	NSOpenGLCPStateValidation     = 301	/* Validate state for multi-screen functionality    */
+    NSOpenGLCPSwapInterval           = 222, /* 1 param.  0 -> Don't sync, 1 -> Sync to vertical retrace     */
+    NSOpenGLCPSurfaceOrder           = 235, /* 1 param.  1 -> Above Window (default), -1 -> Below Window    */
+    NSOpenGLCPSurfaceOpacity         = 236, /* 1 param.  1-> Surface is opaque (default), 0 -> non-opaque   */
+    NSOpenGLCPSurfaceBackingSize     = 304, /* 2 params.  Width/height of surface backing size              */
+    NSOpenGLCPReclaimResources       = 308, /* 0 params.                                                    */
+    NSOpenGLCPCurrentRendererID      = 309, /* 1 param.   Retrieves the current renderer ID                 */
+    NSOpenGLCPGPUVertexProcessing    = 310, /* 1 param.   Currently processing vertices with GPU (get)      */
+    NSOpenGLCPGPUFragmentProcessing  = 311, /* 1 param.   Currently processing fragments with GPU (get)     */
+    NSOpenGLCPHasDrawable            = 314, /* 1 param.   Boolean returned if drawable is attached          */
+    NSOpenGLCPMPSwapsInFlight        = 315, /* 1 param.   Max number of swaps queued by the MP GL engine    */
+
+    /* The following parameters are obsolete and deprecated for new development. */
+    NSOpenGLCPSwapRectangle          = 200, /* 4 params.  Set or get the swap rectangle {x, y, w, h}        */
+    NSOpenGLCPSwapRectangleEnable    = 201, /* Enable or disable the swap rectangle                         */
+    NSOpenGLCPRasterizationEnable    = 221, /* Enable or disable all rasterization                          */
+    NSOpenGLCPStateValidation        = 301, /* Validate state for multi-screen functionality                */
+    NSOpenGLCPSurfaceSurfaceVolatile = 306  /* 1 param.   Surface volatile state                            */
 } NSOpenGLContextParameter;
 
 
@@ -184,19 +201,23 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 @interface NSOpenGLContext : NSObject
 {
 @private
-	NSView                   *_view;
+	__weak NSView            *_view;
 	NSOpenGLContextAuxiliary *_contextAuxiliary;
 }
 
 /* Context creation */
 - (id)initWithFormat:(NSOpenGLPixelFormat *)format shareContext:(NSOpenGLContext *)share;
-- (id)initWithCGLContextObj:(void *)context AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (id)initWithCGLContextObj:(void *)context NS_AVAILABLE_MAC(10_6);
 
 /* Drawable management */
 - (void)setView:(NSView *)view;
 - (NSView *)view;
 - (void)setFullScreen;
+
+/* Deprecated in 10.7.  The -setOffScreen:width:height:rowbytes: API forces use of the software rasterizer, which is much slower than GPU rendering.  It is generally much better nowadays to use a normal pixel format with either an off-screen window or an FBO (GL_EXT_framebuffer_object), and then call glReadPixels() to read the rendered result back to CPU memory (if that's where it is needed).
+*/
 - (void)setOffScreen:(void *)baseaddr width:(GLsizei)width height:(GLsizei)height rowbytes:(GLint)rowbytes;
+
 - (void)clearDrawable;
 - (void)update;
 
@@ -215,7 +236,6 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 - (void)setValues:(const GLint *)vals forParameter:(NSOpenGLContextParameter)param;
 - (void)getValues:(GLint *)vals forParameter:(NSOpenGLContextParameter)param;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 
 /* virtual screens */
 - (void)setCurrentVirtualScreen:(GLint)screen;
@@ -224,12 +244,12 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 /* creating textures */
 - (void)createTexture:(GLenum)target fromView:(NSView *)view internalFormat:(GLenum)format;
 
-#endif
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void *)CGLContextObj;
 
 /*
+** NOTE: PBuffers have been Deprecated as of 10.7.  Use GL_EXT_framebuffer_object instead.
+**
 ** Attach context to an NSOpenGLPixelBuffer instance.
 ** For GL_CUBE_MAP target pixel buffers, face should be one of GL_TEXTURE_CUBE_MAP_POSITIVE_X, 
 ** GL_TEXTURE_CUBE_MAP_POSITIVE_Y, etc.  Otherwise it should be 0.
@@ -242,13 +262,15 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 - (NSOpenGLPixelBuffer *)pixelBuffer;
 - (GLenum)pixelBufferCubeMapFace;
 - (GLint)pixelBufferMipMapLevel;
+
 /*
+** NOTE: PBuffers have been Deprecated as of 10.7.  Use GL_EXT_framebuffer_object instead.
+**
 ** This call is a mirror of CGLTexImagePBuffer.  This essentially "binds" the given pixel buffer's image data
 ** to the currently bound texture object.   Source specifies which of the PBuffer's color buffers should be used,
 ** and should be one of GL_FRONT, GL_BACK, GL_AUX0, etc.
 */
 - (void)setTextureImageToPixelBuffer:(NSOpenGLPixelBuffer *)pixelBuffer colorBuffer:(GLenum)source;
-#endif
 
 @end
 

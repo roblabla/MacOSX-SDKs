@@ -3,9 +3,9 @@
  
      Contains:   Basic Algebraic Operations for AltiVec
  
-     Version:    vecLib-268.0
+     Version:    vecLib-325.4
  
-     Copyright:  © 1999-2010 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2011 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -25,7 +25,7 @@
 */
 #include "vecLibTypes.h"
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -156,7 +156,7 @@ extern vUInt8
 vU8Divide(
   vUInt8    vN,
   vUInt8    vD,
-  vUInt8 *  vRemainder)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -171,7 +171,7 @@ extern vSInt8
 vS8Divide(
   vSInt8    vN,
   vSInt8    vD,
-  vSInt8 *  vRemainder)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt8 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -186,7 +186,7 @@ extern vUInt16
 vU16Divide(
   vUInt16    vN,
   vUInt16    vD,
-  vUInt16 *  vRemainder)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt16 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -201,7 +201,7 @@ extern vSInt16
 vS16Divide(
   vSInt16    vN,
   vSInt16    vD,
-  vSInt16 *  vRemainder)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt16 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -216,7 +216,7 @@ extern vUInt32
 vU32Divide(
   vUInt32    vN,
   vUInt32    vD,
-  vUInt32 *  vRemainder)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -231,7 +231,7 @@ extern vSInt32
 vS32Divide(
   vSInt32    vN,
   vSInt32    vD,
-  vSInt32 *  vRemainder)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -246,7 +246,7 @@ extern vUInt32
 vU64Divide(
   vUInt32    vN,
   vUInt32    vD,
-  vUInt32 *  vRemainder)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -261,7 +261,7 @@ extern vSInt32
 vS64Divide(
   vSInt32    vN,
   vSInt32    vD,
-  vSInt32 *  vRemainder)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -276,7 +276,7 @@ extern vUInt32
 vU128Divide(
   vUInt32    vN,
   vUInt32    vD,
-  vUInt32 *  vRemainder)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -291,7 +291,7 @@ extern vSInt32
 vS128Divide(
   vSInt32    vN,
   vSInt32    vD,
-  vSInt32 *  vRemainder)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32 *  vRemainder) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -306,7 +306,7 @@ vS128Divide(
 extern vUInt8 
 vU8HalfMultiply(
   vUInt8   vA,
-  vUInt8   vB)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -320,7 +320,7 @@ vU8HalfMultiply(
 extern vSInt8 
 vS8HalfMultiply(
   vSInt8   vA,
-  vSInt8   vB)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt8   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -334,7 +334,7 @@ vS8HalfMultiply(
 extern vUInt16 
 vU16HalfMultiply(
   vUInt16   vA,
-  vUInt16   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt16   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -348,7 +348,7 @@ vU16HalfMultiply(
 extern vSInt16 
 vS16HalfMultiply(
   vSInt16   vA,
-  vSInt16   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt16   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -362,7 +362,7 @@ vS16HalfMultiply(
 extern vUInt32 
 vU32HalfMultiply(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -376,7 +376,7 @@ vU32HalfMultiply(
 extern vSInt32 
 vS32HalfMultiply(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -390,7 +390,7 @@ vS32HalfMultiply(
 extern vUInt32 
 vU32FullMulEven(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -404,7 +404,7 @@ vU32FullMulEven(
 extern vUInt32 
 vU32FullMulOdd(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -418,7 +418,7 @@ vU32FullMulOdd(
 extern vSInt32 
 vS32FullMulEven(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -432,7 +432,7 @@ vS32FullMulEven(
 extern vSInt32 
 vS32FullMulOdd(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -446,7 +446,7 @@ vS32FullMulOdd(
 extern vUInt32 
 vU64FullMulEven(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -460,7 +460,7 @@ vU64FullMulEven(
 extern vUInt32 
 vU64FullMulOdd(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -474,7 +474,7 @@ vU64FullMulOdd(
 extern vUInt32 
 vU64HalfMultiply(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -488,7 +488,7 @@ vU64HalfMultiply(
 extern vSInt32 
 vS64HalfMultiply(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -502,7 +502,7 @@ vS64HalfMultiply(
 extern vSInt32 
 vS64FullMulEven(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -516,7 +516,7 @@ vS64FullMulEven(
 extern vSInt32 
 vS64FullMulOdd(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -530,7 +530,7 @@ vS64FullMulOdd(
 extern vUInt32 
 vU128HalfMultiply(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -544,7 +544,7 @@ vU128HalfMultiply(
 extern vSInt32 
 vS128HalfMultiply(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -559,7 +559,7 @@ vS128HalfMultiply(
 extern vUInt32 
 vU64Sub(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -573,7 +573,7 @@ vU64Sub(
 extern vUInt32 
 vU64SubS(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -587,7 +587,7 @@ vU64SubS(
 extern vUInt32 
 vU128Sub(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -601,7 +601,7 @@ vU128Sub(
 extern vUInt32 
 vU128SubS(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -615,7 +615,7 @@ vU128SubS(
 extern vSInt32 
 vS64Sub(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -629,7 +629,7 @@ vS64Sub(
 extern vSInt32 
 vS128Sub(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -643,7 +643,7 @@ vS128Sub(
 extern vSInt32 
 vS64SubS(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -657,7 +657,7 @@ vS64SubS(
 extern vSInt32 
 vS128SubS(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -672,7 +672,7 @@ vS128SubS(
 extern vUInt32 
 vU64Add(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -686,7 +686,7 @@ vU64Add(
 extern vUInt32 
 vU64AddS(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -700,7 +700,7 @@ vU64AddS(
 extern vUInt32 
 vU128Add(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -714,7 +714,7 @@ vU128Add(
 extern vUInt32 
 vU128AddS(
   vUInt32   vA,
-  vUInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -728,7 +728,7 @@ vU128AddS(
 extern vSInt32 
 vS64Add(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -742,7 +742,7 @@ vS64Add(
 extern vSInt32 
 vS64AddS(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -756,7 +756,7 @@ vS64AddS(
 extern vSInt32 
 vS128Add(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -770,7 +770,7 @@ vS128Add(
 extern vSInt32 
 vS128AddS(
   vSInt32   vA,
-  vSInt32   vB)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vSInt32   vB) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -779,7 +779,7 @@ vS128AddS(
  */  
 extern vUInt32 
 vU64Neg (
-  vUInt32   vA)                                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt32   vA) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -787,7 +787,7 @@ vU64Neg (
  */  
 extern vSInt32 
 vS64Neg (
-  vSInt32   vA)                                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  vSInt32   vA) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -795,7 +795,7 @@ vS64Neg (
  */  
 extern vUInt32 
 vU128Neg (
-  vUInt32   vA)                                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  vUInt32   vA) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -803,7 +803,7 @@ vU128Neg (
  */  
 extern vSInt32 
 vS128Neg (
-  vSInt32   vA)                                               AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  vSInt32   vA) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 
@@ -818,7 +818,7 @@ vS128Neg (
 extern vUInt32 
 vLL64Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -832,7 +832,7 @@ vLL64Shift(
 extern vUInt32 
 vA64Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -846,7 +846,7 @@ vA64Shift(
 extern vUInt32 
 vLR64Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -860,7 +860,7 @@ vLR64Shift(
 extern vUInt32 
 vLL64Shift2(
   vUInt32   vA,
-  vUInt8    vShiftFactor)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -874,7 +874,7 @@ vLL64Shift2(
 extern vUInt32 
 vA64Shift2(
   vUInt32   vA,
-  vUInt8    vShiftFactor)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -888,7 +888,7 @@ vA64Shift2(
 extern vUInt32 
 vLR64Shift2(
   vUInt32   vA,
-  vUInt8    vShiftFactor)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -902,7 +902,7 @@ vLR64Shift2(
 extern vUInt32 
 vLL128Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -916,7 +916,7 @@ vLL128Shift(
 extern vUInt32 
 vLR128Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -930,7 +930,7 @@ vLR128Shift(
 extern vUInt32 
 vA128Shift(
   vUInt32   vA,
-  vUInt8    vShiftFactor)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8    vShiftFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -945,7 +945,7 @@ vA128Shift(
 extern vUInt32 
 vL64Rotate(
   vUInt32   vA,
-  vUInt8    vRotateFactor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8    vRotateFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -959,7 +959,7 @@ vL64Rotate(
 extern vUInt32 
 vR64Rotate(
   vUInt32   vA,
-  vUInt8    vRotateFactor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8    vRotateFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -973,7 +973,7 @@ vR64Rotate(
 extern vUInt32 
 vL64Rotate2(
   vUInt32   vA,
-  vUInt8    vRotateFactor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8    vRotateFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -987,7 +987,7 @@ vL64Rotate2(
 extern vUInt32 
 vR64Rotate2(
   vUInt32   vA,
-  vUInt8    vRotateFactor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8    vRotateFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1001,7 +1001,7 @@ vR64Rotate2(
 extern vUInt32 
 vL128Rotate(
   vUInt32   vA,
-  vUInt8    vRotateFactor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8    vRotateFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -1015,7 +1015,7 @@ vL128Rotate(
 extern vUInt32 
 vR128Rotate(
   vUInt32   vA,
-  vUInt8    vRotateFactor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vUInt8    vRotateFactor) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 #endif	// defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__

@@ -1,8 +1,3 @@
-/*
-* $Xorg: CoreP.h,v 1.4 2001/02/09 02:03:54 xorgcvs Exp $
-* $oHeader: CoreP.h,v 1.2 88/08/18 15:54:37 asente Exp $
-*/
-
 /***********************************************************
 
 Copyright 1987, 1988, 1998  The Open Group
@@ -54,6 +49,8 @@ SOFTWARE.
 #define XtCoreP_h
 
 #include <X11/Core.h>
+
+_XFUNCPROTOBEGIN
 
 externalref int _XtInheritTranslations;
 
@@ -166,6 +163,8 @@ typedef struct _WidgetClassRec {
 
 externalref WidgetClassRec widgetClassRec;
 #define coreClassRec widgetClassRec
+
+_XFUNCPROTOEND
 
 #endif /* _XtCoreP_h */
 /* DON'T ADD STUFF AFTER THIS #endif */

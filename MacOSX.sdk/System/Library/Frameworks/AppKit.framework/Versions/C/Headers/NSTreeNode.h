@@ -1,20 +1,20 @@
 /*
         NSTreeNode.h
 	AppKit
-	Copyright (c) 2007-2009, Apple Inc.
+	Copyright (c) 2007-2011, Apple Inc.
 	All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 @class NSArray, NSMutableArray, NSIndexPath, NSTreeController;
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSTreeNode : NSObject {
     id _childNodesProxy;
     id _representedObject;
-    void *_observationInfo;
+    __strong void *_observationInfo;
     id _reserved2;
     NSMutableArray *_childNodes;
     NSTreeNode *_parentNode;//not retained
@@ -44,4 +44,3 @@
 
 @end
 
-#endif

@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2006-2010 The PHP Group                                |
+  | Copyright (c) 2006-2011 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_structs.h 304112 2010-10-05 16:27:49Z andrey $ */
+/* $Id: mysqlnd_structs.h 308673 2011-02-25 13:11:49Z andrey $ */
 
 #ifndef MYSQLND_STRUCTS_H
 #define MYSQLND_STRUCTS_H
@@ -406,6 +406,11 @@ typedef enum_func_status    (*func_mysqlnd_conn__ssl_set)(MYSQLND * const conn, 
 
 typedef MYSQLND_RES * 		(*func_mysqlnd_conn__result_init)(unsigned int field_count, zend_bool persistent TSRMLS_DC);
 
+typedef enum_func_status	(*func_mysqlnd_conn__set_autocommit)(MYSQLND * conn, unsigned int mode TSRMLS_DC);
+typedef enum_func_status	(*func_mysqlnd_conn__tx_commit)(MYSQLND * conn TSRMLS_DC);
+typedef enum_func_status	(*func_mysqlnd_conn__tx_rollback)(MYSQLND * conn TSRMLS_DC);
+
+
 struct st_mysqlnd_conn_methods
 {
 	func_mysqlnd_conn__init init;
@@ -477,6 +482,11 @@ struct st_mysqlnd_conn_methods
 	func_mysqlnd_conn__ssl_set ssl_set;
 
 	func_mysqlnd_conn__result_init result_init;
+#ifdef AUTOCOMMIT_TX_COMMIT_ROLLBACK
+	func_mysqlnd_conn__set_autocommit set_autocommit;
+	func_mysqlnd_conn__tx_commit tx_commit;
+	func_mysqlnd_conn__tx_rollback tx_rollback;
+#endif
 };
 
 

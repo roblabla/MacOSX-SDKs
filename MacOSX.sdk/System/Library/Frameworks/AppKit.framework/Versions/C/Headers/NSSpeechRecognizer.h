@@ -1,7 +1,7 @@
 /*
 	NSSpeechRecognizer.h
 	Application Kit
-	Copyright (c) 2003-2009, Apple Inc.
+	Copyright (c) 2003-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,7 +11,6 @@
 @class NSArray, NSString;
 @protocol NSSpeechRecognizerDelegate;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 @interface NSSpeechRecognizer : NSObject {
 @private // All instance variables are private
@@ -46,4 +45,3 @@
 
 @end
 
-#endif

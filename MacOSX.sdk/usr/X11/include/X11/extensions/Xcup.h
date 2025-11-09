@@ -1,4 +1,3 @@
-/* $Xorg: Xcup.h,v 1.4 2001/02/09 02:03:24 xorgcvs Exp $ */
 /*
 
 Copyright 1987, 1988, 1998  The Open Group
@@ -24,20 +23,12 @@ used in advertising or otherwise to promote the sale, use or other dealings
 in this Software without prior written authorization from The Open Group.
 
 */
-/* $XFree86$ */
 
 #ifndef _XCUP_H_
 #define _XCUP_H_
 
 #include <X11/Xfuncproto.h>
-
-#define X_XcupQueryVersion			0
-#define X_XcupGetReservedColormapEntries	1
-#define X_XcupStoreColors			2
-
-#define XcupNumberErrors			0
-
-#ifndef _XCUP_SERVER_
+#include <X11/extensions/cup.h>
 
 _XFUNCPROTOBEGIN
 
@@ -62,8 +53,6 @@ Status XcupStoreColors(
 );
 
 _XFUNCPROTOEND
-
-#endif /* _XCUP_SERVER_ */
 
 #endif /* _XCUP_H_ */
 

@@ -69,6 +69,28 @@
 #define kPMTargetPrinterAEKey			'trpr'
 #define kPMTargetPrinterAEType			typeChar
 
+// overrides all other settings
+#define kPMPDFWorkFlowAEProp		"PDF work flow"
+#define kPMPDFWorkFlowAEKey			'wrkf'
+#define kPMPDFWorkFlowAEType		typeUTF8Text
+
+// Overrides all other settings except kPMPDFWorkFlowAEProp
+// Can optionally target a specific printer's preset by setting kPMTargetPrinterAEProp
+// Search order is as follows: custom per printer presets, general printer presets, global presets
+#define kPMPresetAEProp				"preset"
+#define kPMPresetAEKey				'prst'
+#define kPMPresetAEType				typeUTF8Text
+
+// Pass in where to save the file Ex. "/tmp/foo.pdf"
+#define kPMSaveAsPDFAEProp			"save as PDF"
+#define kPMSaveAsPDFAEKey			'spdf'
+#define kPMSaveAsPDFAEType			typeFileURL
+
+// Pass in where to save the file Ex. "/tmp/foo.ps"
+#define kPMSaveAsPSAEProp			"save as PS"
+#define kPMSaveAsPSAEKey			'sps '
+#define kPMSaveAsPSAEType			typeFileURL
+
 /*** Enumerations ***/
 
 /* For kPMErrorHandlingAEType */

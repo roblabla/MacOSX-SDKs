@@ -1,14 +1,13 @@
 /*
 	NSArrayController.h
 	Application Kit
-	Copyright (c) 2002-2009, Apple Inc.
+	Copyright (c) 2002-2011, Apple Inc.
 	All rights reserved.
  */
 
 #import <AppKit/NSObjectController.h>
 #import <Foundation/NSPredicate.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 @class NSArray, NSIndexSet, NSMutableArray, NSMutableIndexSet;
 
@@ -45,18 +44,15 @@
 
 - (void)rearrangeObjects;    // triggers rearranging the content objects for the user interface, including sorting and filtering; subclasses can override and invoke this method if any parameter that affects the arranged objects changes
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (void)setAutomaticallyRearrangesObjects:(BOOL)flag;    // default: NO
-- (BOOL)automaticallyRearrangesObjects;
+- (void)setAutomaticallyRearrangesObjects:(BOOL)flag NS_AVAILABLE_MAC(10_5);    // default: NO
+- (BOOL)automaticallyRearrangesObjects NS_AVAILABLE_MAC(10_5);
 
-- (NSArray *)automaticRearrangementKeyPaths;    // computes the array of key paths that trigger automatic rearranging from the sort descriptors and filter predicates; subclasses may override this method to customize the default behavior (for example if additional arrangement criteria are used in custom implementations of -rearrangeObjects)
-- (void)didChangeArrangementCriteria;    // invoked by the controller itself when any criteria for arranging objects change (sort descriptors or filter predicates) to reset the key paths for automatic rearranging; subclasses should invoke this method if additional arrangement criteria are used in custom implementations of -rearrangeObjects and those criteria change
-#endif
+- (NSArray *)automaticRearrangementKeyPaths NS_AVAILABLE_MAC(10_5);    // computes the array of key paths that trigger automatic rearranging from the sort descriptors and filter predicates; subclasses may override this method to customize the default behavior (for example if additional arrangement criteria are used in custom implementations of -rearrangeObjects)
+- (void)didChangeArrangementCriteria NS_AVAILABLE_MAC(10_5);    // invoked by the controller itself when any criteria for arranging objects change (sort descriptors or filter predicates) to reset the key paths for automatic rearranging; subclasses should invoke this method if additional arrangement criteria are used in custom implementations of -rearrangeObjects and those criteria change
 
 - (void)setSortDescriptors:(NSArray *)sortDescriptors;
 - (NSArray *)sortDescriptors;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)setFilterPredicate:(NSPredicate *)filterPredicate;
 - (NSPredicate *)filterPredicate;
 
@@ -64,7 +60,6 @@
 */
 - (void)setClearsFilterPredicateOnInsertion:(BOOL)flag; // default: YES
 - (BOOL)clearsFilterPredicateOnInsertion;
-#endif
 
 - (NSArray *)arrangeObjects:(NSArray *)objects;    // returns objects to be arranged in the user interface for the content object array objects - method can be overridden to use a different kind of sort mechanism or to filter the display objects
 - (id)arrangedObjects;     // array of all displayed objects (after sorting and potentially filtering)
@@ -76,12 +71,10 @@
 - (void)setSelectsInsertedObjects:(BOOL)flag;    // default: YES
 - (BOOL)selectsInsertedObjects;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* Indicates whether the controller should indicate all multiple selections through the NSMultipleValuesMarker, whether the selected values are equal or not (by default, the controller will only use the NSMultipleValuesMarker if the selected objects actually have different values) - this may act as a performance enhancement in certain applications.
 */
 - (void)setAlwaysUsesMultipleValuesMarker:(BOOL)flag;
 - (BOOL)alwaysUsesMultipleValuesMarker;
-#endif
 
 /* All selection modification methods returning a BOOL indicate through that flag whether changing the selection was successful (changing the selection might trigger an commitEditing call which fails and thus deny's the selection change).
 */
@@ -117,4 +110,3 @@
 
 @end
 
-#endif

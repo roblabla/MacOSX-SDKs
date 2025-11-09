@@ -1,17 +1,14 @@
 /*
-     File:       LaunchServices/LaunchServices.h
+     File:       LaunchServices.h
  
      Contains:   Public interfaces for LaunchServices.framework
  
-     Version:    LaunchServices-362.3~1
- 
-     Copyright:  © 2001-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  Copyright 2003-2009 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
 
 #ifndef __LAUNCHSERVICES__

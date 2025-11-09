@@ -1,7 +1,7 @@
 /*
         NSPopUpButtonCell.h
         Application Kit
-        Copyright (c) 1997-2009, Apple Inc.
+        Copyright (c) 1997-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -95,9 +95,7 @@ typedef NSUInteger NSPopUpArrowPosition;
 - (void)selectItem:(NSMenuItem *)item;
 - (void)selectItemAtIndex:(NSInteger)index;
 - (void)selectItemWithTitle:(NSString *)title;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (BOOL)selectItemWithTag:(NSInteger)tag;
-#endif
 - (void)setTitle:(NSString *)aString;
 
 - (NSMenuItem *)selectedItem;

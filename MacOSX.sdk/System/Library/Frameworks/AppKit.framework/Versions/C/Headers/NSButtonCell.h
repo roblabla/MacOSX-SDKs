@@ -1,7 +1,7 @@
 /*
 	NSButtonCell.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -34,25 +34,23 @@ enum {
     NSRegularSquareBezelStyle    = 2,
     NSThickSquareBezelStyle      = 3,
     NSThickerSquareBezelStyle    = 4,
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
     NSDisclosureBezelStyle       = 5,
-#endif
     NSShadowlessSquareBezelStyle = 6,
     NSCircularBezelStyle         = 7,
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
     NSTexturedSquareBezelStyle   = 8,
     NSHelpButtonBezelStyle       = 9,
-#endif
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
     NSSmallSquareBezelStyle       = 10,
     NSTexturedRoundedBezelStyle   = 11,
     NSRoundRectBezelStyle         = 12,
     NSRecessedBezelStyle          = 13,
     NSRoundedDisclosureBezelStyle = 14,
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+    // The inline bezel style contains a solid round-rect border background. It can be used to create an "unread" indicator in an outline view, or another inline button in a tableview, such as a stop progress button in a download panel. Use text for an unread indicator, and a template image for other buttons.
+    NSInlineBezelStyle = 15,
 #endif
-
-    // this will be obsolete before GM
-
+    
+    // This bezel style is obsolete and should not be used.
     NSSmallIconButtonBezelStyle  = 2
     
 };
@@ -75,23 +73,25 @@ typedef struct __BCFlags {
     unsigned int        imageAndText:1;
     unsigned int        imageSizeDiff:1;
     unsigned int        hasKeyEquivalentInsteadOfImage:1;
-    unsigned int        lastState:1;
+    unsigned int        inIntermediateDisclosure:1;
     unsigned int        transparent:1;
     unsigned int        inset:2;
     unsigned int        doesNotDimImage:1;
     unsigned int        suppressAXValueChangeNote:1;
-    unsigned int        reserved:2;
+    unsigned int        isDrawingDisclosure:1;
+    unsigned int        reserved:1;
     unsigned int        useButtonImageSource:1;
     unsigned int        alternateMnemonicLocation:8;
 #else
     unsigned int        alternateMnemonicLocation:8;
     unsigned int        useButtonImageSource:1;
-    unsigned int        reserved:2;
+    unsigned int        reserved:1;
+    unsigned int        isDrawingDisclosure:1;
     unsigned int        suppressAXValueChangeNote:1;
     unsigned int        doesNotDimImage:1;
     unsigned int        inset:2;
     unsigned int        transparent:1;
-    unsigned int        lastState:1;
+    unsigned int        inIntermediateDisclosure:1;
     unsigned int        hasKeyEquivalentInsteadOfImage:1;
     unsigned int        imageSizeDiff:1;
     unsigned int        imageAndText:1;
@@ -152,10 +152,8 @@ typedef struct __BCFlags2 {
 - (void)setAlternateImage:(NSImage *)image;
 - (NSCellImagePosition)imagePosition;
 - (void)setImagePosition:(NSCellImagePosition)aPosition;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (NSImageScaling)imageScaling;
-- (void)setImageScaling:(NSImageScaling)scaling;
-#endif
+- (NSImageScaling)imageScaling NS_AVAILABLE_MAC(10_5);
+- (void)setImageScaling:(NSImageScaling)scaling NS_AVAILABLE_MAC(10_5);
 
 - (NSInteger)highlightsBy;
 - (void)setHighlightsBy:(NSInteger)aType;
@@ -177,11 +175,9 @@ typedef struct __BCFlags2 {
 - (void)setKeyEquivalentFont:(NSString *)fontName size:(CGFloat)fontSize;
 - (void)performClick:(id)sender; // Significant NSCell override, actually clicks itself.
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)drawImage:(NSImage*)image withFrame:(NSRect)frame inView:(NSView*)controlView;
 - (NSRect)drawTitle:(NSAttributedString*)title withFrame:(NSRect)frame inView:(NSView*)controlView;
 - (void)drawBezelWithFrame:(NSRect)frame inView:(NSView*)controlView;
-#endif
 @end
 
 @interface NSButtonCell(NSKeyboardUI)
@@ -223,10 +219,8 @@ typedef NSUInteger NSGradientType;
 - (void) mouseEntered:(NSEvent*)event;
 - (void) mouseExited:(NSEvent*)event;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (NSColor*)backgroundColor;
 - (void)setBackgroundColor:(NSColor*)color;
-#endif
 
 @end
 

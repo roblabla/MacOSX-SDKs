@@ -1,6 +1,6 @@
 /*
         NSStringDrawing.h
-        Copyright (c) 1994-2009, Apple Inc.  All rights reserved.
+        Copyright (c) 1994-2011, Apple Inc.  All rights reserved.
 
         Methods to deal with NSString drawing, measuring
    
@@ -25,7 +25,6 @@
 
 @end
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 enum {
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
     NSStringDrawingTruncatesLastVisibleLine = (1 << 5), // Truncates and adds the ellipsis character to the last visible line if the text doesn't fit into the bounds specified. Ignored if NSStringDrawingUsesLineFragmentOrigin is not also set.
@@ -52,5 +51,4 @@ typedef NSInteger NSStringDrawingOptions;
 - (void)drawWithRect:(NSRect)rect options:(NSStringDrawingOptions)options;
 - (NSRect)boundingRectWithSize:(NSSize)size options:(NSStringDrawingOptions)options;
 @end
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 

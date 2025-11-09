@@ -59,6 +59,8 @@
 #ifndef HEADER_MD2_H
 #define HEADER_MD2_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/opensslconf.h> /* OPENSSL_NO_MD2, MD2_INT */
 #ifdef OPENSSL_NO_MD2
 #error MD2 is disabled.
@@ -80,14 +82,14 @@ typedef struct MD2state_st
 	MD2_INT state[MD2_BLOCK];
 	} MD2_CTX;
 
-const char *MD2_options(void);
+const char *MD2_options(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifdef OPENSSL_FIPS
-int private_MD2_Init(MD2_CTX *c);
+int private_MD2_Init(MD2_CTX *c) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
-int MD2_Init(MD2_CTX *c);
-int MD2_Update(MD2_CTX *c, const unsigned char *data, size_t len);
-int MD2_Final(unsigned char *md, MD2_CTX *c);
-unsigned char *MD2(const unsigned char *d, size_t n,unsigned char *md);
+int MD2_Init(MD2_CTX *c) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int MD2_Update(MD2_CTX *c, const unsigned char *data, size_t len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int MD2_Final(unsigned char *md, MD2_CTX *c) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned char *MD2(const unsigned char *d, size_t n,unsigned char *md) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifdef  __cplusplus
 }
 #endif

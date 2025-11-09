@@ -387,6 +387,10 @@ typedef struct MIDIPacket			MIDIPacket;
 @/textblock
 </pre>
 	
+					The MIDIPacketNext macro is especially important when considering that
+					the alignment requirements of MIDIPacket may differ between CPU architectures.
+					On Intel and PowerPC, MIDIPacket is unaligned. 
+					
 	@field			numPackets
 						The number of MIDIPackets in the list.
 	@field			packet
@@ -446,17 +450,17 @@ struct MIDISysexSendRequest
 										message if messages 2-6 are handled.
 	@constant	kMIDIMsgObjectAdded		A device, entity or endpoint was added.
 										Structure is MIDIObjectAddRemoveNotification.
-										New for CoreMIDI 1.3.
+										New in Mac OS X 10.2.
 	@constant	kMIDIMsgObjectRemoved	A device, entity or endpoint was removed.
 										Structure is MIDIObjectAddRemoveNotification.
-										New for CoreMIDI 1.3.
+										New in Mac OS X 10.2.
 	@constant	kMIDIMsgPropertyChanged	An object's property was changed.
 										Structure is MIDIObjectPropertyChangeNotification.
-										New for CoreMIDI 1.3.
+										New in Mac OS X 10.2.
 	@constant	kMIDIMsgThruConnectionsChanged	A persistent MIDI Thru connection was created
-										or destroyed.  No data.  New for CoreMIDI 1.3.
+										or destroyed.  No data.  New in Mac OS X 10.2.
 	@constant	kMIDIMsgSerialPortOwnerChanged	A persistent MIDI Thru connection was created
-										or destroyed.  No data.  New for CoreMIDI 1.3.
+										or destroyed.  No data.  New in Mac OS X 10.2.
 	@constant	kMIDIMsgIOError			A driver I/O error occurred.
 */
 enum {	// MIDINotificationMessageID
@@ -569,7 +573,7 @@ typedef struct MIDIIOErrorNotification MIDIIOErrorNotification;
 		A setup editor may allow the user to set the names of both driver-owned and external
 		devices.
 */
-extern const CFStringRef	kMIDIPropertyName;		
+extern const CFStringRef	kMIDIPropertyName					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyManufacturer
@@ -582,7 +586,7 @@ extern const CFStringRef	kMIDIPropertyName;
 
 		Creators of virtual endpoints may set this property on their endpoints.
 */
-extern const CFStringRef	kMIDIPropertyManufacturer;
+extern const CFStringRef	kMIDIPropertyManufacturer			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyModel
@@ -595,7 +599,7 @@ extern const CFStringRef	kMIDIPropertyManufacturer;
 
 		Creators of virtual endpoints may set this property on their endpoints.
 */
-extern const CFStringRef	kMIDIPropertyModel;
+extern const CFStringRef	kMIDIPropertyModel					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyUniqueID
@@ -606,7 +610,7 @@ extern const CFStringRef	kMIDIPropertyModel;
 		this property on their endpoints, though doing so may fail if the chosen ID is not
 		unique.
 */
-extern const CFStringRef	kMIDIPropertyUniqueID;
+extern const CFStringRef	kMIDIPropertyUniqueID				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyDeviceID
@@ -619,7 +623,7 @@ extern const CFStringRef	kMIDIPropertyUniqueID;
 
 		Setup editors may allow the user to set this property on external devices.
 */
-extern const CFStringRef	kMIDIPropertyDeviceID;
+extern const CFStringRef	kMIDIPropertyDeviceID				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyReceiveChannels
@@ -635,7 +639,7 @@ extern const CFStringRef	kMIDIPropertyDeviceID;
 
 		Virtual destination may set this property on their endpoints.
 */
-extern const CFStringRef	kMIDIPropertyReceiveChannels;
+extern const CFStringRef	kMIDIPropertyReceiveChannels		__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyTransmitChannels
@@ -644,10 +648,8 @@ extern const CFStringRef	kMIDIPropertyReceiveChannels;
 
 		The value is a bitmap of channels on which the object transmits: 1=ch 1, 2=ch 2, 4=ch 3
 		... 0x8000=ch 16.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyTransmitChannels;
+extern const CFStringRef	kMIDIPropertyTransmitChannels		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyMaxSysExSpeed
@@ -658,7 +660,7 @@ extern const CFStringRef	kMIDIPropertyTransmitChannels;
 		The value is the maximum rate, in bytes/second, at which sysex messages may
 		be sent reliably to this object. (The default value is 3125, as with MIDI 1.0)
 */
-extern const CFStringRef	kMIDIPropertyMaxSysExSpeed;
+extern const CFStringRef	kMIDIPropertyMaxSysExSpeed			__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*!
@@ -680,7 +682,7 @@ extern const CFStringRef	kMIDIPropertyMaxSysExSpeed;
 		time, it receives timestamped messages as soon as they are sent, and must do its own
 		internal scheduling of received events.
 */
-extern const CFStringRef	kMIDIPropertyAdvanceScheduleTimeMuSec;
+extern const CFStringRef	kMIDIPropertyAdvanceScheduleTimeMuSec	__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyIsEmbeddedEntity
@@ -688,10 +690,8 @@ extern const CFStringRef	kMIDIPropertyAdvanceScheduleTimeMuSec;
 		entity/endpoint property, integer
 
 		0 if there are external MIDI connectors, 1 if not.
-
-		New for CoreMIDI 1.1 (Mac OS X 10.1)
 */
-extern const CFStringRef	kMIDIPropertyIsEmbeddedEntity;
+extern const CFStringRef	kMIDIPropertyIsEmbeddedEntity			__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 
 /*!
@@ -701,10 +701,8 @@ extern const CFStringRef	kMIDIPropertyIsEmbeddedEntity;
 
 		1 if the endpoint broadcasts messages to all of the other endpoints in the device, 0 if
 		not.  Set by the owning driver; should not be touched by other clients.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyIsBroadcast;
+extern const CFStringRef	kMIDIPropertyIsBroadcast				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertySingleRealtimeEntity
@@ -718,10 +716,8 @@ extern const CFStringRef	kMIDIPropertyIsBroadcast;
 		When this property is set on a driver device, it signifies the 0-based index of the
 		entity on which incoming realtime messages from the device will appear to have
 		originated from.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertySingleRealtimeEntity;
+extern const CFStringRef	kMIDIPropertySingleRealtimeEntity		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyConnectionUniqueID
@@ -733,10 +729,8 @@ extern const CFStringRef	kMIDIPropertySingleRealtimeEntity;
 		connected devices to devices).
 
 		The property is non-existant or 0 if there is no connection.
-
-		New for CoreMIDI 1.1 (Mac OS X 10.1)
 		
-		Beginning with CoreMIDI 1.3, this property may also be a CFDataRef containing an array of
+		Beginning with CoreMIDI 1.3 (Mac OS X 10.2), this property may also be a CFDataRef containing an array of
 		big-endian SInt32's, to allow specifying that a driver object connects to multiple
 		external objects (via MIDI thru-ing or splitting).
 
@@ -744,7 +738,7 @@ extern const CFStringRef	kMIDIPropertySingleRealtimeEntity;
 		signifies a MIDI Thru connection to another external device/entity/endpoint (again,
 		it is strongly recommended that it be an endpoint).
 */
-extern const CFStringRef	kMIDIPropertyConnectionUniqueID;
+extern const CFStringRef	kMIDIPropertyConnectionUniqueID			__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 
 /*!
@@ -755,10 +749,8 @@ extern const CFStringRef	kMIDIPropertyConnectionUniqueID;
 		1 = device is offline (is temporarily absent), 0 = present. Set by the owning driver, on
 		the device; should not be touched by other clients. Property is inherited from the
 		device by its entities and endpoints.
-
-		New for CoreMIDI 1.1 (Mac OS X 10.1)
 */
-extern const CFStringRef	kMIDIPropertyOffline;
+extern const CFStringRef	kMIDIPropertyOffline					__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyPrivate
@@ -768,10 +760,8 @@ extern const CFStringRef	kMIDIPropertyOffline;
 		1 = endpoint is private, hidden from other clients. May be set on a device or entity,
 		but they will still appear in the API; only affects whether the owned endpoints are
 		hidden.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyPrivate;
+extern const CFStringRef	kMIDIPropertyPrivate					__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyDriverOwner
@@ -781,10 +771,8 @@ extern const CFStringRef	kMIDIPropertyPrivate;
 		Name of the driver that owns a device. Set by the owning driver, on the device; should
 		not be touched by other clients. Property is inherited from the device by its entities
 		and endpoints.
-
-		New for CoreMIDI 1.1 (Mac OS X 10.1)
 */
-extern const CFStringRef	kMIDIPropertyDriverOwner;
+extern const CFStringRef	kMIDIPropertyDriverOwner				__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyFactoryPatchNameFile
@@ -796,7 +784,7 @@ extern const CFStringRef	kMIDIPropertyDriverOwner;
 		Added in CoreMIDI 1.1 (Mac OS X 10.1).  DEPRECATED as of CoreMIDI 1.3. Use
 		kMIDIPropertyNameConfiguration instead.
 */
-extern const CFStringRef	kMIDIPropertyFactoryPatchNameFile;
+extern const CFStringRef	kMIDIPropertyFactoryPatchNameFile		__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_2, __IPHONE_NA, __IPHONE_NA);
 
 
 /*!
@@ -809,7 +797,7 @@ extern const CFStringRef	kMIDIPropertyFactoryPatchNameFile;
 		Added in CoreMIDI 1.1 (Mac OS X 10.1).  DEPRECATED as of CoreMIDI 1.3. Use
 		kMIDIPropertyNameConfiguration instead.
 */
-extern const CFStringRef	kMIDIPropertyUserPatchNameFile;
+extern const CFStringRef	kMIDIPropertyUserPatchNameFile			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_2, __IPHONE_NA, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyNameConfiguration
@@ -840,10 +828,8 @@ extern const CFStringRef	kMIDIPropertyUserPatchNameFile;
 		Clients setting this property must take particular care to preserve dictionary values
 		other than the ones they are interested in changing, and to properly structure the
 		dictionary.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyNameConfiguration;
+extern const CFStringRef	kMIDIPropertyNameConfiguration			__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyImage
@@ -856,10 +842,8 @@ extern const CFStringRef	kMIDIPropertyNameConfiguration;
 		Drivers should set the icon on the devices they add.
 
 		A studio setup editor should allow the user to choose icons for external devices.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyImage;
+extern const CFStringRef	kMIDIPropertyImage						__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyDriverVersion
@@ -867,30 +851,24 @@ extern const CFStringRef	kMIDIPropertyImage;
 		device/entity/endpoint property, integer, returns the driver version API of the owning
 		driver (only for driver- owned devices).  Drivers need not set this property;
 		applications should not write to it.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyDriverVersion;
+extern const CFStringRef	kMIDIPropertyDriverVersion				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertySupportsGeneralMIDI
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity implements
 		the General MIDI specification.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertySupportsGeneralMIDI;
+extern const CFStringRef	kMIDIPropertySupportsGeneralMIDI		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertySupportsMMC
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity implements
 		the MIDI Machine Control portion of the MIDI specification.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertySupportsMMC;
+extern const CFStringRef	kMIDIPropertySupportsMMC				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyCanRoute
@@ -898,130 +876,104 @@ extern const CFStringRef	kMIDIPropertySupportsMMC;
 		device/entity property, integer (0/1). Indicates whether the device or entity can route
 		MIDI messages to or from other external MIDI devices (as with MIDI patch bays). This
 		should NOT be set on devices which are controlled by drivers.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyCanRoute;		// e.g. is patch bay
+extern const CFStringRef	kMIDIPropertyCanRoute					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyReceivesClock
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity  responds
 		to MIDI beat clock messages.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyReceivesClock;
+extern const CFStringRef	kMIDIPropertyReceivesClock				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyReceivesMTC
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity responds
 		to MIDI Time Code messages.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyReceivesMTC;
+extern const CFStringRef	kMIDIPropertyReceivesMTC				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyReceivesNotes
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity responds
 		to MIDI Note On messages.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyReceivesNotes;
+extern const CFStringRef	kMIDIPropertyReceivesNotes				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyReceivesProgramChanges
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity responds
 		to MIDI program change messages.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyReceivesProgramChanges;
+extern const CFStringRef	kMIDIPropertyReceivesProgramChanges		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyReceivesBankSelectMSB
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity responds
 		to MIDI bank select MSB messages (control 0).
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyReceivesBankSelectMSB;
+extern const CFStringRef	kMIDIPropertyReceivesBankSelectMSB		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyReceivesBankSelectLSB
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity responds
 		to MIDI bank select LSB messages (control 32).
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyReceivesBankSelectLSB;
+extern const CFStringRef	kMIDIPropertyReceivesBankSelectLSB		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyTransmitsClock
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity transmits
 		MIDI beat clock messages.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyTransmitsClock;
+extern const CFStringRef	kMIDIPropertyTransmitsClock				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyTransmitsMTC
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity transmits
 		MIDI Time Code messages.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyTransmitsMTC;
+extern const CFStringRef	kMIDIPropertyTransmitsMTC				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyTransmitsNotes
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity transmits
 		MIDI note messages.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyTransmitsNotes;
+extern const CFStringRef	kMIDIPropertyTransmitsNotes				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyTransmitsProgramChanges
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity transmits
 		MIDI program change messages.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyTransmitsProgramChanges;
+extern const CFStringRef	kMIDIPropertyTransmitsProgramChanges	__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyTransmitsBankSelectMSB
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity transmits
 		MIDI bank select MSB messages (control 0).
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyTransmitsBankSelectMSB;
+extern const CFStringRef	kMIDIPropertyTransmitsBankSelectMSB		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyTransmitsBankSelectLSB
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity transmits
 		MIDI bank select LSB messages (control 32).
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyTransmitsBankSelectLSB;
+extern const CFStringRef	kMIDIPropertyTransmitsBankSelectLSB		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyPanDisruptsStereo
@@ -1029,50 +981,40 @@ extern const CFStringRef	kMIDIPropertyTransmitsBankSelectLSB;
 		device/entity property, integer (0/1). Indicates whether the MIDI pan messages (control
 		10), when sent to the device or entity, cause undesirable effects when playing stereo
 		sounds (e.g. converting the signal to mono).
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyPanDisruptsStereo;
+extern const CFStringRef	kMIDIPropertyPanDisruptsStereo			__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyIsSampler
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity plays
 		audio samples in response to MIDI note messages.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyIsSampler;
+extern const CFStringRef	kMIDIPropertyIsSampler					__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyIsDrumMachine
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity's sound
 		presets tend to be collections of non-transposable samples (e.g. drum kits).
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyIsDrumMachine;
+extern const CFStringRef	kMIDIPropertyIsDrumMachine				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyIsMixer
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity mixes
 		external audio signals, controlled by MIDI messages.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyIsMixer;
+extern const CFStringRef	kMIDIPropertyIsMixer					__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyIsEffectUnit
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device or entity is
 		primarily a MIDI-controlled audio effect unit (i.e. does not generate sound on its own).
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyIsEffectUnit;
+extern const CFStringRef	kMIDIPropertyIsEffectUnit				__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyMaxReceiveChannels
@@ -1082,10 +1024,8 @@ extern const CFStringRef	kMIDIPropertyIsEffectUnit;
 		(devices which only respond to System Messages), 1 (non-multitimbral devices), and 16
 		(fully multitimbral devices). Other values are possible, for example devices which are
 		multi-timbral but have fewer than 16 "parts".
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyMaxReceiveChannels;
+extern const CFStringRef	kMIDIPropertyMaxReceiveChannels			__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyMaxTransmitChannels
@@ -1093,10 +1033,8 @@ extern const CFStringRef	kMIDIPropertyMaxReceiveChannels;
 		device/entity property, integer (0/1). Indicates the maximum number of MIDI channels on
 		which a device may simultaneously transmit MIDI Channel Messages. Common values are 0, 1
 		and 16.
-
-		New for CoreMIDI 1.3.
 */
-extern const CFStringRef	kMIDIPropertyMaxTransmitChannels;
+extern const CFStringRef	kMIDIPropertyMaxTransmitChannels		__OSX_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyDriverDeviceEditorApp
@@ -1104,20 +1042,16 @@ extern const CFStringRef	kMIDIPropertyMaxTransmitChannels;
 		device property, string, contains the full path to an application which knows how to
 		configure this driver-owned devices. Drivers may set this property on their owned
 		devices. Applications must not write to it.
-
-		New for CoreMIDI 1.4.
 */
-extern const CFStringRef	kMIDIPropertyDriverDeviceEditorApp;
+extern const CFStringRef	kMIDIPropertyDriverDeviceEditorApp		__OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertySupportsShowControl
 	@discussion
 		device/entity property, integer (0/1). Indicates whether the device implements the MIDI
 		Show Control specification.
-
-		New for CoreMIDI 1.5.
 */
-extern const CFStringRef	kMIDIPropertySupportsShowControl;
+extern const CFStringRef	kMIDIPropertySupportsShowControl		__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 /*!
 	@constant		kMIDIPropertyDisplayName
@@ -1128,10 +1062,8 @@ extern const CFStringRef	kMIDIPropertySupportsShowControl;
 		device and endpoint names.
 
 		For objects other than endpoints, the display name is the same as the name.
-
-		New for CoreMIDI 1.5.
 */
-extern const CFStringRef	kMIDIPropertyDisplayName;
+extern const CFStringRef	kMIDIPropertyDisplayName				__OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
 //==================================================================================================
 #pragma mark	Clients

@@ -1,5 +1,5 @@
 /*	NSMapTable.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPointerFunctions.h>
@@ -8,7 +8,6 @@
 
 @class NSArray, NSDictionary, NSMapTable;
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /****************	Class	****************/
 
@@ -25,6 +24,7 @@ enum {
 
 typedef NSUInteger NSMapTableOptions;
 
+NS_CLASS_AVAILABLE(10_5, 2_0)
 @interface NSMapTable : NSObject <NSCopying, NSCoding, NSFastEnumeration>
 
 - (id)initWithKeyOptions:(NSPointerFunctionsOptions)keyOptions valueOptions:(NSPointerFunctionsOptions)valueOptions capacity:(NSUInteger)initialCapacity;
@@ -56,7 +56,6 @@ typedef NSUInteger NSMapTableOptions;
 - (NSDictionary *)dictionaryRepresentation;  // create a dictionary of contents
 @end
 
-#endif
 
 
 
@@ -112,20 +111,20 @@ FOUNDATION_EXPORT NSMapTable *NSCreateMapTable(NSMapTableKeyCallBacks keyCallBac
 
 /****************	Common map table key callbacks	****************/
 
-FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSIntegerMapKeyCallBacks AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSIntegerMapKeyCallBacks NS_AVAILABLE(10_5, 2_0);
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSNonOwnedPointerMapKeyCallBacks;
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSNonOwnedPointerOrNullMapKeyCallBacks;
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSNonRetainedObjectMapKeyCallBacks;
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSObjectMapKeyCallBacks;
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSOwnedPointerMapKeyCallBacks;
-FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSIntMapKeyCallBacks DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSIntMapKeyCallBacks NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
 
 /****************	Common map table value callbacks	****************/
 
-FOUNDATION_EXPORT const NSMapTableValueCallBacks NSIntegerMapValueCallBacks AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT const NSMapTableValueCallBacks NSIntegerMapValueCallBacks NS_AVAILABLE(10_5, 2_0);
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSNonOwnedPointerMapValueCallBacks;
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSObjectMapValueCallBacks;
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSNonRetainedObjectMapValueCallBacks;
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSOwnedPointerMapValueCallBacks;
-FOUNDATION_EXPORT const NSMapTableValueCallBacks NSIntMapValueCallBacks DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT const NSMapTableValueCallBacks NSIntMapValueCallBacks NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
 

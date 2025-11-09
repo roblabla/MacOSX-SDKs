@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000, 2001, 2003-2005, 2008, 2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2000, 2001, 2003-2005, 2008-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -27,9 +27,7 @@
 #include <Availability.h>
 #include <TargetConditionals.h>
 #include <sys/cdefs.h>
-#if	!TARGET_OS_IPHONE
 #include <dispatch/dispatch.h>
-#endif	// !TARGET_OS_IPHONE
 #include <CoreFoundation/CoreFoundation.h>
 
 
@@ -92,6 +90,17 @@ typedef struct {
 		changes to the dynamic store is delivered.
 	@param store The dynamic store session.
 	@param changedKeys The list of changed keys.
+
+		The list includes any specific SCDynamicStore keys that
+		changed (add, update, remove, notify) since the last call
+		to SCDynamicStoreSetNotificationKeys or since the last
+		notification callback. The list also includes any specific
+		keys matching one of the pattern string(s) that changed.
+
+		An empty list indicates that the SCDynamicStore server
+		restarted and that any assumptions based on prior content
+		of the SCDynamicStore should be disgarded.
+
 	@param info A C pointer to a user-specified block of data.
  */
 typedef void (*SCDynamicStoreCallBack)	(
@@ -216,7 +225,6 @@ SCDynamicStoreCreateRunLoopSource	(
 					CFIndex				order
 					)				__OSX_AVAILABLE_STARTING(__MAC_10_1,__IPHONE_NA);
 
-#if	!TARGET_OS_IPHONE
 /*!
 	@function SCDynamicStoreSetDispatchQueue
 	@discussion Initiates notifications for the Notification
@@ -232,7 +240,6 @@ SCDynamicStoreSetDispatchQueue		(
 					SCDynamicStoreRef		store,
 					dispatch_queue_t		queue
 					)				__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA);
-#endif	// !TARGET_OS_IPHONE
 
 /*!
 	@function SCDynamicStoreCopyKeyList

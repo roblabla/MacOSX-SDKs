@@ -59,6 +59,8 @@
 #ifndef HEADER_MD4_H
 #define HEADER_MD4_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/e_os2.h>
 #include <stddef.h>
 
@@ -106,13 +108,13 @@ typedef struct MD4state_st
 	} MD4_CTX;
 
 #ifdef OPENSSL_FIPS
-int private_MD4_Init(MD4_CTX *c);
+int private_MD4_Init(MD4_CTX *c) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
-int MD4_Init(MD4_CTX *c);
-int MD4_Update(MD4_CTX *c, const void *data, size_t len);
-int MD4_Final(unsigned char *md, MD4_CTX *c);
-unsigned char *MD4(const unsigned char *d, size_t n, unsigned char *md);
-void MD4_Transform(MD4_CTX *c, const unsigned char *b);
+int MD4_Init(MD4_CTX *c) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int MD4_Update(MD4_CTX *c, const void *data, size_t len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int MD4_Final(unsigned char *md, MD4_CTX *c) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned char *MD4(const unsigned char *d, size_t n, unsigned char *md) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void MD4_Transform(MD4_CTX *c, const unsigned char *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifdef  __cplusplus
 }
 #endif

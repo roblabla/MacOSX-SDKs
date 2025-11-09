@@ -25,8 +25,6 @@
 
 #import <Foundation/Foundation.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 @interface NSObject (SyncUIHelperInformalProtocol)
 
 /* This is implemented by clients wishing to override the default display
@@ -54,7 +52,7 @@
    is (red: 47, green: 20, blue: 232)
  */
 
-- (NSAttributedString *)attributedStringForPropertiesWithNames:(NSArray *)propertyNames inRecord:(NSDictionary *)record comparisonRecords:(NSArray *)comparisonRecords defaultAttributes:(NSDictionary *)defaultAttributes;
+- (NSAttributedString *)attributedStringForPropertiesWithNames:(NSArray *)propertyNames inRecord:(NSDictionary *)record comparisonRecords:(NSArray *)comparisonRecords defaultAttributes:(NSDictionary *)defaultAttributes NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* This allows schemas to return a custom identity string
    including for example a picture (using NSTextAttachment) or specially colored text
@@ -72,9 +70,9 @@
    The suggested formatting is System Font 14 pt Bold for the first line, and System Font 12pt
    for any following lines.
  */
-- (NSAttributedString *)attributedStringForIdentityPropertiesWithNames:(NSArray *)propertyNames inRecord:(NSDictionary *)record comparisonRecords:(NSArray *)comparisonRecords firstLineAttributes:(NSDictionary *)firstLineAttributes secondLineAttributes:(NSDictionary *)secondLineAttributes;
+- (NSAttributedString *)attributedStringForIdentityPropertiesWithNames:(NSArray *)propertyNames inRecord:(NSDictionary *)record comparisonRecords:(NSArray *)comparisonRecords firstLineAttributes:(NSDictionary *)firstLineAttributes secondLineAttributes:(NSDictionary *)secondLineAttributes NS_DEPRECATED_MAC(10_4, 10_7);
 
 
 @end
 
-#endif /* MAC_OS_X_VERSION_MIN_REQUIRED */
+

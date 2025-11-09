@@ -3,7 +3,7 @@
 
      Contains:   umbrella header for the CoreAudio APIs
 
-     Copyright:  (c) 1985-2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 1985-2010 by Apple, Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

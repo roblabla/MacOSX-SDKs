@@ -1,17 +1,14 @@
 /*
-     File:       LaunchServices/IconsCore.h
+     File:       IconsCore.h
  
      Contains:   Icon Utilities and Icon Services Interfaces.
  
-     Version:    LaunchServices-362.3~1
- 
-     Copyright:  © 1990-2008 by Apple Computer, Inc. All rights reserved
+     Copyright:  Copyright 2003-2009 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
 #ifndef __ICONSCORE__
 #define __ICONSCORE__

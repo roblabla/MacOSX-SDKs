@@ -12,7 +12,7 @@
 @class PDFAnnotationChoiceWidgetPrivateVars;
 
 
-@interface PDFAnnotationChoiceWidget : PDFAnnotation
+@interface PDFAnnotationChoiceWidget : PDFAnnotation <NSCopying>
 {
 @private
     PDFAnnotationChoiceWidgetPrivateVars *_pdfPriv2;

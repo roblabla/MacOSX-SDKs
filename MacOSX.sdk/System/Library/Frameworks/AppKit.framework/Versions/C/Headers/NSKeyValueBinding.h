@@ -1,16 +1,15 @@
 /*
 	NSKeyValueBinding.h
 	Application Kit
-	Copyright (c) 2002-2009, Apple Inc.
+	Copyright (c) 2002-2011, Apple Inc.
 	All rights reserved.
  */
 
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/NSObject.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
-@class NSArray, NSDictionary, NSString;
+@class NSArray, NSDictionary, NSString, NSError;
 
 APPKIT_EXTERN id NSMultipleValuesMarker;
 APPKIT_EXTERN id NSNoSelectionMarker;
@@ -19,9 +18,9 @@ APPKIT_EXTERN id NSNotApplicableMarker;
 APPKIT_EXTERN BOOL NSIsControllerMarker(id object);
 
 // keys for the returned dictionary of -infoForBinding:
-APPKIT_EXTERN NSString *NSObservedObjectKey		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSObservedKeyPathKey		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSOptionsKey		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+APPKIT_EXTERN NSString *NSObservedObjectKey;
+APPKIT_EXTERN NSString *NSObservedKeyPathKey;
+APPKIT_EXTERN NSString *NSOptionsKey;
 
 @interface NSObject (NSKeyValueBindingCreation)
 
@@ -34,11 +33,9 @@ APPKIT_EXTERN NSString *NSOptionsKey		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 - (void)bind:(NSString *)binding toObject:(id)observable withKeyPath:(NSString *)keyPath options:(NSDictionary *)options;    // placeholders and value transformers are specified in options dictionary
 - (void)unbind:(NSString *)binding;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* Returns a dictionary with information about a binding or nil if the binding is not bound (this is mostly for use by subclasses which want to analyze the existing bindings of an object) - the dictionary contains three key/value pairs: NSObservedObjectKey: object bound, NSObservedKeyPathKey: key path bound, NSOptionsKey: dictionary with the options and their values for the bindings.
 */
 - (NSDictionary *)infoForBinding:(NSString *)binding;
-#endif
 
 /* Returns an array of NSAttributeDescriptions that describe the options for aBinding. The descriptions are used by Interface Builder to build the options editor UI of the bindings inspector. Each binding may have multiple options. The options and attribute descriptions have 3 properties in common: 
 
@@ -48,11 +45,9 @@ APPKIT_EXTERN NSString *NSOptionsKey		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
 - The default value shown in the options editor comes from the attribute description's defaultValue.*/
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
-- (NSArray *)optionDescriptionsForBinding:(NSString *)aBinding;
+- (NSArray *)optionDescriptionsForBinding:(NSString *)aBinding NS_AVAILABLE_MAC(10_5);
 
-#endif
 
 @end
 
@@ -77,7 +72,6 @@ APPKIT_EXTERN NSString *NSOptionsKey		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 - (void)discardEditing;    // forces changing to end (reverts back to the original value)
 - (BOOL)commitEditing;    // returns whether end editing was successful (while trying to apply changes to a model object, there might be validation problems or so that prevent the operation from being successful
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 /* Given that the receiver has been registered with -objectDidBeginEditing: as the editor of some object, and not yet deregistered by a subsequent invocation of -objectDidEndEditing:, attempt to commit the result of the editing. When committing has either succeeded or failed, send the selected message to the specified object with the context info as the last parameter. The method selected by didCommitSelector must have the same signature as:
 
@@ -87,116 +81,121 @@ If an error occurs while attempting to commit, because key-value coding validati
 */
 - (void)commitEditingWithDelegate:(id)delegate didCommitSelector:(SEL)didCommitSelector contextInfo:(void *)contextInfo;
 
-#endif
+
+/* During autosaving, commit editing may fail, due to a pending edit.  Rather than interrupt the user with an unexpected alert, this method provides the caller with the option to either present the error or fail silently, leaving the pending edit in place and the user's editing uninterrupted.  This method attempts to commit editing, but if there is a failure the error is returned to the caller to be presented or ignored as appropriate.  If an error occurs while attempting to commit, an implementation of this method should return NO as well as the generated error by reference.  Returns YES if commit is successful.
+ 
+ If you have enabled autosaving in your application, and your application has custom objects that implement or override the NSEditor protocol, you must also implement this method in those NSEditors.
+ */
+- (BOOL)commitEditingAndReturnError:(NSError **)error   NS_AVAILABLE_MAC(10_7);
 
 @end
 
 // constants for binding names
-APPKIT_EXTERN NSString *NSAlignmentBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSAlternateImageBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSAlternateTitleBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSAnimateBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSAnimationDelayBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSArgumentBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSAttributedStringBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSContentArrayBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSContentArrayForMultipleSelectionBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSContentBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSContentDictionaryBinding		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-APPKIT_EXTERN NSString *NSContentHeightBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSContentObjectBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSContentObjectsBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSContentSetBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSContentValuesBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSContentWidthBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSCriticalValueBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSDataBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSDisplayPatternTitleBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSDisplayPatternValueBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSDocumentEditedBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSDoubleClickArgumentBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSDoubleClickTargetBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSEditableBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSEnabledBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSExcludedKeysBinding		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-APPKIT_EXTERN NSString *NSFilterPredicateBinding        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSFontBinding                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSFontBoldBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSFontFamilyNameBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSFontItalicBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSFontNameBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSFontSizeBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSHeaderTitleBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSHiddenBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSImageBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSIncludedKeysBinding		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-APPKIT_EXTERN NSString *NSInitialKeyBinding		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-APPKIT_EXTERN NSString *NSInitialValueBinding		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-APPKIT_EXTERN NSString *NSIsIndeterminateBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSLabelBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSLocalizedKeyDictionaryBinding		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-APPKIT_EXTERN NSString *NSManagedObjectContextBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSMaximumRecentsBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSMaxValueBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSMaxWidthBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSMinValueBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSMinWidthBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSMixedStateImageBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSOffStateImageBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSOnStateImageBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSPredicateBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSRecentSearchesBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSRepresentedFilenameBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSRowHeightBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSSelectedIdentifierBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSSelectedIndexBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSSelectedLabelBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSSelectedObjectBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSSelectedObjectsBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSSelectedTagBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSSelectedValueBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSSelectedValuesBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSSelectionIndexesBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSSelectionIndexPathsBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSSortDescriptorsBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSTargetBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSTextColorBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSTitleBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSToolTipBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSTransparentBinding		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-APPKIT_EXTERN NSString *NSValueBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSValuePathBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSValueURLBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSVisibleBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSWarningValueBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSWidthBinding		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+APPKIT_EXTERN NSString *NSAlignmentBinding;
+APPKIT_EXTERN NSString *NSAlternateImageBinding;
+APPKIT_EXTERN NSString *NSAlternateTitleBinding;
+APPKIT_EXTERN NSString *NSAnimateBinding;
+APPKIT_EXTERN NSString *NSAnimationDelayBinding;
+APPKIT_EXTERN NSString *NSArgumentBinding;
+APPKIT_EXTERN NSString *NSAttributedStringBinding;
+APPKIT_EXTERN NSString *NSContentArrayBinding;
+APPKIT_EXTERN NSString *NSContentArrayForMultipleSelectionBinding;
+APPKIT_EXTERN NSString *NSContentBinding;
+APPKIT_EXTERN NSString *NSContentDictionaryBinding		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSString *NSContentHeightBinding;
+APPKIT_EXTERN NSString *NSContentObjectBinding;
+APPKIT_EXTERN NSString *NSContentObjectsBinding;
+APPKIT_EXTERN NSString *NSContentSetBinding;
+APPKIT_EXTERN NSString *NSContentValuesBinding;
+APPKIT_EXTERN NSString *NSContentWidthBinding;
+APPKIT_EXTERN NSString *NSCriticalValueBinding;
+APPKIT_EXTERN NSString *NSDataBinding;
+APPKIT_EXTERN NSString *NSDisplayPatternTitleBinding;
+APPKIT_EXTERN NSString *NSDisplayPatternValueBinding;
+APPKIT_EXTERN NSString *NSDocumentEditedBinding;
+APPKIT_EXTERN NSString *NSDoubleClickArgumentBinding;
+APPKIT_EXTERN NSString *NSDoubleClickTargetBinding;
+APPKIT_EXTERN NSString *NSEditableBinding;
+APPKIT_EXTERN NSString *NSEnabledBinding;
+APPKIT_EXTERN NSString *NSExcludedKeysBinding		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSString *NSFilterPredicateBinding;
+APPKIT_EXTERN NSString *NSFontBinding;
+APPKIT_EXTERN NSString *NSFontBoldBinding;
+APPKIT_EXTERN NSString *NSFontFamilyNameBinding;
+APPKIT_EXTERN NSString *NSFontItalicBinding;
+APPKIT_EXTERN NSString *NSFontNameBinding;
+APPKIT_EXTERN NSString *NSFontSizeBinding;
+APPKIT_EXTERN NSString *NSHeaderTitleBinding;
+APPKIT_EXTERN NSString *NSHiddenBinding;
+APPKIT_EXTERN NSString *NSImageBinding;
+APPKIT_EXTERN NSString *NSIncludedKeysBinding		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSString *NSInitialKeyBinding		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSString *NSInitialValueBinding		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSString *NSIsIndeterminateBinding;
+APPKIT_EXTERN NSString *NSLabelBinding;
+APPKIT_EXTERN NSString *NSLocalizedKeyDictionaryBinding		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSString *NSManagedObjectContextBinding;
+APPKIT_EXTERN NSString *NSMaximumRecentsBinding;
+APPKIT_EXTERN NSString *NSMaxValueBinding;
+APPKIT_EXTERN NSString *NSMaxWidthBinding;
+APPKIT_EXTERN NSString *NSMinValueBinding;
+APPKIT_EXTERN NSString *NSMinWidthBinding;
+APPKIT_EXTERN NSString *NSMixedStateImageBinding;
+APPKIT_EXTERN NSString *NSOffStateImageBinding;
+APPKIT_EXTERN NSString *NSOnStateImageBinding;
+APPKIT_EXTERN NSString *NSPositioningRectBinding            NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSString *NSPredicateBinding;
+APPKIT_EXTERN NSString *NSRecentSearchesBinding;
+APPKIT_EXTERN NSString *NSRepresentedFilenameBinding;
+APPKIT_EXTERN NSString *NSRowHeightBinding;
+APPKIT_EXTERN NSString *NSSelectedIdentifierBinding;
+APPKIT_EXTERN NSString *NSSelectedIndexBinding;
+APPKIT_EXTERN NSString *NSSelectedLabelBinding;
+APPKIT_EXTERN NSString *NSSelectedObjectBinding;
+APPKIT_EXTERN NSString *NSSelectedObjectsBinding;
+APPKIT_EXTERN NSString *NSSelectedTagBinding;
+APPKIT_EXTERN NSString *NSSelectedValueBinding;
+APPKIT_EXTERN NSString *NSSelectedValuesBinding;
+APPKIT_EXTERN NSString *NSSelectionIndexesBinding;
+APPKIT_EXTERN NSString *NSSelectionIndexPathsBinding;
+APPKIT_EXTERN NSString *NSSortDescriptorsBinding;
+APPKIT_EXTERN NSString *NSTargetBinding;
+APPKIT_EXTERN NSString *NSTextColorBinding;
+APPKIT_EXTERN NSString *NSTitleBinding;
+APPKIT_EXTERN NSString *NSToolTipBinding;
+APPKIT_EXTERN NSString *NSTransparentBinding		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSString *NSValueBinding;
+APPKIT_EXTERN NSString *NSValuePathBinding;
+APPKIT_EXTERN NSString *NSValueURLBinding;
+APPKIT_EXTERN NSString *NSVisibleBinding;
+APPKIT_EXTERN NSString *NSWarningValueBinding;
+APPKIT_EXTERN NSString *NSWidthBinding;
 
 // constants for binding options
-APPKIT_EXTERN NSString *NSAllowsEditingMultipleValuesSelectionBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSAllowsNullArgumentBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSAlwaysPresentsApplicationModalAlertsBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSConditionallySetsEditableBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSConditionallySetsEnabledBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSConditionallySetsHiddenBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSContinuouslyUpdatesValueBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSCreatesSortDescriptorBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSDeletesObjectsOnRemoveBindingsOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSDisplayNameBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSDisplayPatternBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSContentPlacementTagBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-APPKIT_EXTERN NSString *NSHandlesContentAsCompoundValueBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSInsertsNullPlaceholderBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSInvokesSeparatelyWithArrayObjectsBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSMultipleValuesPlaceholderBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSNoSelectionPlaceholderBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSNotApplicablePlaceholderBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSNullPlaceholderBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSRaisesForNotApplicableKeysBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSPredicateFormatBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSSelectorNameBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSSelectsAllWhenSettingContentBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSValidatesImmediatelyBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSValueTransformerNameBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString *NSValueTransformerBindingOption		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+APPKIT_EXTERN NSString *NSAllowsEditingMultipleValuesSelectionBindingOption;
+APPKIT_EXTERN NSString *NSAllowsNullArgumentBindingOption;
+APPKIT_EXTERN NSString *NSAlwaysPresentsApplicationModalAlertsBindingOption;
+APPKIT_EXTERN NSString *NSConditionallySetsEditableBindingOption;
+APPKIT_EXTERN NSString *NSConditionallySetsEnabledBindingOption;
+APPKIT_EXTERN NSString *NSConditionallySetsHiddenBindingOption;
+APPKIT_EXTERN NSString *NSContinuouslyUpdatesValueBindingOption;
+APPKIT_EXTERN NSString *NSCreatesSortDescriptorBindingOption;
+APPKIT_EXTERN NSString *NSDeletesObjectsOnRemoveBindingsOption;
+APPKIT_EXTERN NSString *NSDisplayNameBindingOption;
+APPKIT_EXTERN NSString *NSDisplayPatternBindingOption;
+APPKIT_EXTERN NSString *NSContentPlacementTagBindingOption		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSString *NSHandlesContentAsCompoundValueBindingOption;
+APPKIT_EXTERN NSString *NSInsertsNullPlaceholderBindingOption;
+APPKIT_EXTERN NSString *NSInvokesSeparatelyWithArrayObjectsBindingOption;
+APPKIT_EXTERN NSString *NSMultipleValuesPlaceholderBindingOption;
+APPKIT_EXTERN NSString *NSNoSelectionPlaceholderBindingOption;
+APPKIT_EXTERN NSString *NSNotApplicablePlaceholderBindingOption;
+APPKIT_EXTERN NSString *NSNullPlaceholderBindingOption;
+APPKIT_EXTERN NSString *NSRaisesForNotApplicableKeysBindingOption;
+APPKIT_EXTERN NSString *NSPredicateFormatBindingOption;
+APPKIT_EXTERN NSString *NSSelectorNameBindingOption;
+APPKIT_EXTERN NSString *NSSelectsAllWhenSettingContentBindingOption;
+APPKIT_EXTERN NSString *NSValidatesImmediatelyBindingOption;
+APPKIT_EXTERN NSString *NSValueTransformerNameBindingOption;
+APPKIT_EXTERN NSString *NSValueTransformerBindingOption;
 
-#endif

@@ -38,7 +38,7 @@
 //-----------------------------------------------------------------------------
 
 #include <IOKit/storage/IOStorageDeviceCharacteristics.h>
-
+#include <TargetConditionals.h>
 
 //-----------------------------------------------------------------------------
 //	Constants
@@ -313,7 +313,25 @@ enum
 	asynchronous notifications from the drive. This is used to prevent
 	polling for media, specifically for SATAPI devices on AHCI buses.
 	*/
-	kSCSIProtocolFeature_ProtocolSpecificAsyncNotification	= 14
+	kSCSIProtocolFeature_ProtocolSpecificAsyncNotification	= 14,
+	
+	/*!
+	kSCSIProtocolFeature_HierarchicalLogicalUnits:
+	If the SCSI Protocol Services layer supports hierarchical
+	logical units, then the protocol services layer should report true
+	and use IOSCSIProtocolServices::GetLogicalUnitBytes() to retrieve
+	the full 8 bytes of LUN information.
+	*/
+	kSCSIProtocolFeature_HierarchicalLogicalUnits			= 15,
+	
+	/*!
+	kSCSIProtocolFeature_MultiPathing:
+	If the SCSI Protocol Services layer supports multi-pathing,
+	then the protocol services layer should report true. 
+	This is used to support multiple paths to a logical unit
+	by creating a IOSCSIMultipathedLogicalUnit object.
+	*/
+	kSCSIProtocolFeature_MultiPathing						= 16
 	
 };
 
@@ -536,7 +554,7 @@ protected:
 	@function InitializePowerManagement
 	@abstract This method is called to initialize power management.
 	@discussion This method is called to initialize power management. It will call PMinit(), joinPMTree(),
-	setIdleTimerPeriod(), and makeUsable(). This method does not call registerPowerDriver().
+	and makeUsable(). This method does not call registerPowerDriver().
 	Subclasses may override this method to change the behavior (such as the number of power states).
 	@param provider The power management provider (i.e. the provider to attach to in the PowerManagement
 	tree). This may be a device that is not in the PM Tree itself, in which case, the IOService plane
@@ -835,6 +853,7 @@ public:
 	
 private:
 	
+#if !TARGET_OS_EMBEDDED
 	// Space reserved for future expansion.
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface,  7 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface,  8 );
@@ -846,6 +865,7 @@ private:
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface, 14 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface, 15 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface, 16 );
+#endif /* !TARGET_OS_EMBEDDED */
 	
 };
 

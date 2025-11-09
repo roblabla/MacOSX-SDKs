@@ -4,7 +4,7 @@
      Contains:   API for the CFPlugIn that implements an audio driver for the HAL
                  from user space.
 
-     Copyright:  (c) 1985-2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 1985-2010 by Apple, Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -126,6 +126,15 @@ typedef AudioHardwarePlugInInterface**      AudioHardwarePlugInRef;
 #define kAudioHardwarePlugInInterface4ID                                                            \
             CFUUIDGetConstantUUIDWithBytes( NULL, 0xE9, 0x6C, 0x3E, 0x92, 0xE7, 0x45, 0x4C, 0xB7,   \
                                             0xBA, 0x91, 0xB3, 0x3C, 0x68, 0xF2, 0xF0, 0x26)
+
+/*!
+    @defined        kAudioHardwarePlugInInterface5ID
+    @discussion     This is the UUID of version 5 of the plug-in interface
+                    (47023157-0C55-44AA-8996-B81F69AE876E).
+*/
+#define kAudioHardwarePlugInInterface5ID                                                            \
+            CFUUIDGetConstantUUIDWithBytes( NULL, 0x47, 0x02, 0x31, 0x57, 0x0C, 0x55, 0x44, 0xAA,   \
+                                            0x89, 0x96, 0xB8, 0x1F, 0x69, 0xAE, 0x87, 0x6E)
 
 //==================================================================================================
 #pragma mark    Plug-In Interface
@@ -812,6 +821,33 @@ struct  AudioHardwarePlugInInterface
     (*DeviceDestroyIOProcID)(   AudioHardwarePlugInRef  inSelf,
                                 AudioDeviceID           inDevice,
                                 AudioDeviceIOProcID     inIOProcID);
+
+/*!
+    @function       DeviceCreateIOProcIDWithBlock
+    @abstract       Creates an AudioDeviceIOProcID from an AudioDeviceIOBlock.
+    @param          inSelf
+                        The plug-in instance that owns the AudioDevice.
+    @param          outIOProcID
+                        The newly created AudioDeviceIOProcID.
+    @param          inDevice
+                        The AudioDevice to register the Block with.
+    @param          inDispatchQueue
+                        The dispatch queue on which the IOBlock will be dispatched. All
+                        IOBlocks are dispatched synchronously. Note that this dispatch queue will be
+                        retained until a matching call to AudioDeviceDestroyIOProcID is made. If
+                        this value is NULL, then the IOBlock will be directly invoked.
+    @param          inBlock
+                        The AudioDeviceIOBlock to register.  Note that this block will be
+                        Block_copy'd and the reference maintained until a matching call to
+                        AudioDeviceDestroyIOProcID is made.
+    @result         An OSStatus indicating success or failure.
+*/
+    OSStatus
+    (*DeviceCreateIOProcIDWithBlock)(   AudioHardwarePlugInRef  inSelf,
+                                        AudioDeviceIOProcID*    outIOProcID,
+                                        AudioDeviceID           inDevice,
+                                        dispatch_queue_t        inDispatchQueue,
+                                        AudioDeviceIOBlock      inBlock);
 
 };
 

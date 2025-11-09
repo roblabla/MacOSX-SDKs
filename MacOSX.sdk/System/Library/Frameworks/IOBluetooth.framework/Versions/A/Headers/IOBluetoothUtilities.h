@@ -69,12 +69,29 @@ extern	Boolean		IOBluetoothIsFileAppleDesignatedPIMData( NSString* inFileName );
 
 extern	NSString*	IOBluetoothGetUniqueFileNameAndPath( NSString* inName, NSString* inPath );
 
+#pragma mark -
+#pragma mark === Audio Utilities ===
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@function	IOBluetoothLaunchHandsFreeAgent
+	 @abstract	
+	 @param		deviceAddressString		Address of the device you want to connect to. If nil or empty, selects a paired hands free gateway.
+	 @result	YES or NO - were we able to launch the hands free agent successfully.
+	 @discussion	Connects to the hands free device and creates a service level connection.
+ */
+
+Boolean IOBluetoothLaunchHandsFreeAgent(NSString * deviceAddressString);
+
+		
 #else
 
 extern	IOReturn	IOBluetoothCFStringToDeviceAddress( CFStringRef inNameString, BluetoothDeviceAddress * outDeviceAddress );
 extern	CFStringRef	IOBluetoothCFStringFromDeviceAddress( const BluetoothDeviceAddress *deviceAddress );
 extern	Boolean		IOBluetoothIsFileAppleDesignatedPIMDataAtCFStringPath( CFStringRef inFileName );
 extern	CFStringRef	IOBluetoothGetUniqueFileNameAndWithCFStringPath( CFStringRef inName, CFStringRef inPath );
+extern	Boolean		IOBluetoothLaunchAudioAgent( CFStringRef deviceAddressString, Boolean useA2DP );
+extern	Boolean		IOBluetoothLaunchHandsFreeAgent( CFStringRef deviceAddressString );
+		
 
 #endif /* __OBJC__ */
 

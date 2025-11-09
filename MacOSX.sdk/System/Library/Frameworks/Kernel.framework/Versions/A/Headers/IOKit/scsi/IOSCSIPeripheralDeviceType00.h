@@ -85,6 +85,7 @@ public:
 	
 private:
 	
+#if !TARGET_OS_EMBEDDED
 	// Space reserved for future expansion.
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceType00, 1 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceType00, 2 );
@@ -94,6 +95,7 @@ private:
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceType00, 6 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceType00, 7 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceType00, 8 );
+#endif /* !TARGET_OS_EMBEDDED */
 	
 };
 

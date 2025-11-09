@@ -1,5 +1,5 @@
 /*	NSBundle.h
-	Copyright (c) 1994-2009, Apple Inc.  All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc.  All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,9 +10,9 @@
    to receive an already initialized object back from [super initWithPath:] */
 @interface NSBundle : NSObject {
 @private
-    NSUInteger	_flags;
+    NSUInteger		_flags;
     id		        _cfBundle;
-    NSUInteger	_refCount;
+    NSUInteger		_reserved2;
     Class		_principalClass;
     id                  _tmp1;
     id                  _tmp2;
@@ -25,8 +25,8 @@
 + (NSBundle *)bundleWithPath:(NSString *)path;
 - (id)initWithPath:(NSString *)path;
 
-+ (NSBundle *)bundleWithURL:(NSURL *)url AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (id)initWithURL:(NSURL *)url AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (NSBundle *)bundleWithURL:(NSURL *)url NS_AVAILABLE(10_6, 4_0);
+- (id)initWithURL:(NSURL *)url NS_AVAILABLE(10_6, 4_0);
 
 + (NSBundle *)bundleForClass:(Class)aClass;
 + (NSBundle *)bundleWithIdentifier:(NSString *)identifier;
@@ -36,22 +36,24 @@
 
 /* Methods for loading and unloading bundles. */
 - (BOOL)load;
-- (BOOL)isLoaded AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-- (BOOL)unload AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+- (BOOL)isLoaded;
+- (BOOL)unload;
 
-- (BOOL)preflightAndReturnError:(NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (BOOL)loadAndReturnError:(NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (BOOL)preflightAndReturnError:(NSError **)error NS_AVAILABLE(10_5, 2_0);
+- (BOOL)loadAndReturnError:(NSError **)error NS_AVAILABLE(10_5, 2_0);
 
 /* Methods for locating various components of a bundle. */
-- (NSURL *)bundleURL AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSURL *)resourceURL AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSURL *)executableURL AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSURL *)URLForAuxiliaryExecutable:(NSString *)executableName AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSURL *)bundleURL NS_AVAILABLE(10_6, 4_0);
+- (NSURL *)resourceURL NS_AVAILABLE(10_6, 4_0);
+- (NSURL *)executableURL NS_AVAILABLE(10_6, 4_0);
+- (NSURL *)URLForAuxiliaryExecutable:(NSString *)executableName NS_AVAILABLE(10_6, 4_0);
 
-- (NSURL *)privateFrameworksURL AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSURL *)sharedFrameworksURL AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSURL *)sharedSupportURL AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSURL *)builtInPlugInsURL AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSURL *)privateFrameworksURL NS_AVAILABLE(10_6, 4_0);
+- (NSURL *)sharedFrameworksURL NS_AVAILABLE(10_6, 4_0);
+- (NSURL *)sharedSupportURL NS_AVAILABLE(10_6, 4_0);
+- (NSURL *)builtInPlugInsURL NS_AVAILABLE(10_6, 4_0);
+
+- (NSURL *)appStoreReceiptURL NS_AVAILABLE_MAC(10_7);
 
 - (NSString *)bundlePath;
 - (NSString *)resourcePath;
@@ -65,15 +67,15 @@
 
 /* Methods for locating bundle resources.  Instance methods locate resources in the bundle indicated by the receiver; class methods take an argument pointing to a bundle on disk.  In the class methods, bundleURL is a URL pointing to the location of a bundle on disk, and may not be nil; bundlePath is the path equivalent of bundleURL, an absolute path pointing to the location of a bundle on disk.  By contrast, subpath is a relative path to a subdirectory inside the relevant global or localized resource directory, and should be nil if the resource file in question is not in a subdirectory.  Where appropriate, localizationName is the name of a .lproj directory in the bundle, minus the .lproj extension; passing nil for localizationName retrieves only global resources, whereas using a method without this argument retrieves both global and localized resources (using the standard localization search algorithm).  */
 
-+ (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subpath inBundleWithURL:(NSURL *)bundleURL AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-+ (NSArray *)URLsForResourcesWithExtension:(NSString *)ext subdirectory:(NSString *)subpath inBundleWithURL:(NSURL *)bundleURL AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subpath inBundleWithURL:(NSURL *)bundleURL NS_AVAILABLE(10_6, 4_0);
++ (NSArray *)URLsForResourcesWithExtension:(NSString *)ext subdirectory:(NSString *)subpath inBundleWithURL:(NSURL *)bundleURL NS_AVAILABLE(10_6, 4_0);
 
-- (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subpath AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subpath localization:(NSString *)localizationName AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext NS_AVAILABLE(10_6, 4_0);
+- (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subpath NS_AVAILABLE(10_6, 4_0);
+- (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subpath localization:(NSString *)localizationName NS_AVAILABLE(10_6, 4_0);
 
-- (NSArray *)URLsForResourcesWithExtension:(NSString *)ext subdirectory:(NSString *)subpath AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSArray *)URLsForResourcesWithExtension:(NSString *)ext subdirectory:(NSString *)subpath localization:(NSString *)localizationName AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSArray *)URLsForResourcesWithExtension:(NSString *)ext subdirectory:(NSString *)subpath NS_AVAILABLE(10_6, 4_0);
+- (NSArray *)URLsForResourcesWithExtension:(NSString *)ext subdirectory:(NSString *)subpath localization:(NSString *)localizationName NS_AVAILABLE(10_6, 4_0);
 
 + (NSString *)pathForResource:(NSString *)name ofType:(NSString *)ext inDirectory:(NSString *)bundlePath;
 + (NSArray *)pathsForResourcesOfType:(NSString *)ext inDirectory:(NSString *)bundlePath;
@@ -91,18 +93,18 @@
 /* Methods for obtaining various information about a bundle. */
 - (NSString *)bundleIdentifier;
 - (NSDictionary *)infoDictionary;
-- (NSDictionary *)localizedInfoDictionary AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-- (id)objectForInfoDictionaryKey:(NSString *)key AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+- (NSDictionary *)localizedInfoDictionary;
+- (id)objectForInfoDictionaryKey:(NSString *)key;
 - (Class)classNamed:(NSString *)className;
 - (Class)principalClass;
 
 /* Methods for dealing with localizations. */
 - (NSArray *)localizations;
 - (NSArray *)preferredLocalizations;
-- (NSString *)developmentLocalization AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+- (NSString *)developmentLocalization;
 
 + (NSArray *)preferredLocalizationsFromArray:(NSArray *)localizationsArray;
-+ (NSArray *)preferredLocalizationsFromArray:(NSArray *)localizationsArray forPreferences:(NSArray *)preferencesArray AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
++ (NSArray *)preferredLocalizationsFromArray:(NSArray *)localizationsArray forPreferences:(NSArray *)preferencesArray;
 
 /* Method for determining executable architectures. */
 enum {
@@ -112,7 +114,7 @@ enum {
     NSBundleExecutableArchitecturePPC64     = 0x01000012
 };
 
-- (NSArray *)executableArchitectures AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSArray *)executableArchitectures NS_AVAILABLE(10_5, 2_0);
 
 @end
 

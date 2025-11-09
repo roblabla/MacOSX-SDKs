@@ -3,13 +3,16 @@
 //  ICScannerFunctionalUnits.h
 //  ImageCaptureCore
 //
-//  Copyright (c) 2008 Apple Inc., all rights reserved.
+//  Copyright (c) 2008-2011 Apple Inc., all rights reserved.
 //
 //  Best viewed with the following settings: Tab width 4, Indent width 2, Wrap lines, Indent wrapped lines by 3, Page guide 128.
 //
 //------------------------------------------------------------------------------------------------------------------------------
+
+#pragma once
+
 /*!
-	@header ICScannerFunctionalUnit
+    @header ICScannerFunctionalUnit
     @abstract ICScannerFunctionalUnit is an abstract class that represents a scanner functiona unit. ImageCaptureCore defines three concrete subclasses of ICScannerFunctionalUnit: ICScannerFunctionalUnitFlatbed, ICScannerFunctionalUnitPositiveTransparency, ICScannerFunctionalUnitNegativeTransparency and ICScannerFunctionalUnitDocumentFeeder. ICScannerDevice creates instances of these concrete subclasses.
 */
 
@@ -68,9 +71,9 @@ typedef NSUInteger ICScannerMeasurementUnit;
 
 enum
 {
-    ICScannerBitDepth1Bit	= 1,
+    ICScannerBitDepth1Bit   = 1,
     ICScannerBitDepth8Bits  = 8,
-	ICScannerBitDepth16Bits	= 16
+    ICScannerBitDepth16Bits = 16
 };
 typedef NSUInteger ICScannerBitDepth;
 
@@ -92,6 +95,7 @@ typedef NSUInteger ICScannerColorDataFormatType;
   @enum ICScannerPixelDataType
   @abstract Pixel data types. Corresponds to "ICAP_PIXELTYPE" of the TWAIN Specification.
   @constant ICScannerPixelDataTypeBW Monochrome 1 bit pixel image.
+  @constant ICScannerPixelDataTypeGray 8 bit pixel Gray color space.
   @constant ICScannerPixelDataTypeRGB Color image RGB color space.
   @constant ICScannerPixelDataTypePalette Indexed Color image.
   @constant ICScannerPixelDataTypeCMY Color image in CMY color space.
@@ -184,6 +188,15 @@ typedef NSUInteger ICScannerPixelDataType;
   @constant ICScannerDocumentType11R            11R,             11"   x 14"      279.40 mm x  355.60 mm      11:14
   @constant ICScannerDocumentType12R            12R,             12"   x 15"      304.80 mm x  381.00 mm       4:5
   @constant ICScannerDocumentTypeS12R           S12R,            12"   x 18"      304.80 mm x  457.20 mm       2:3
+  @constant ICScannerDocumentTypeS12R           S12R,            12"   x 18"      304.80 mm x  457.20 mm       2:3
+
+  @constant ICScannerDocumentType110            Instamatic 110,                    13.00 mm x   17.00 mm
+  @constant ICScannerDocumentTypeAPSH           APS High Definition,               30.20 mm x   16.70 mm
+  @constant ICScannerDocumentTypeAPSC           APS Classic,                       25.10 mm x   16.70 mm
+  @constant ICScannerDocumentTypeAPSP           APS Panoramic,                     30.20 mm x    9.50 mm
+  @constant ICScannerDocumentType135            Standard 35 mm,                    36.00 mm x   24.00 mm
+  @constant ICScannerDocumentTypeMF             Medium Format,                     60.00 mm x   60.00 mm
+  @constant ICScannerDocumentTypeLF             Large Format,                     100.00 mm x  120.00 mm
 */
 
 enum
@@ -253,7 +266,14 @@ enum
     ICScannerDocumentTypeS10R         = 68,
     ICScannerDocumentType11R          = 69,
     ICScannerDocumentType12R          = 70,
-    ICScannerDocumentTypeS12R         = 71
+    ICScannerDocumentTypeS12R         = 71,
+    ICScannerDocumentType110          = 72,
+    ICScannerDocumentTypeAPSH         = 73,
+    ICScannerDocumentTypeAPSC         = 74,
+    ICScannerDocumentTypeAPSP         = 75,
+    ICScannerDocumentType135          = 76,
+    ICScannerDocumentTypeMF           = 77,
+    ICScannerDocumentTypeLF           = 78
 };
 typedef NSUInteger ICScannerDocumentType;
 
@@ -292,7 +312,7 @@ typedef NSUInteger ICScannerFeatureType;
 
 //------------------------------------------------------------------------------------------------------------- ICScannerFeature
 /*!
-	@class ICScannerFeature
+    @class ICScannerFeature
     @abstract ICScannerFeature class is an abstract base class used to describe a scanner feature. ImageCaptureCore defines three concrete subclasses of ICScannerFeature: ICScannerFeatureEnumeration, ICScannerFeatureRange and ICScannerFeatureBoolean.
     @discussion The scanner functional units may have one or more instances of these classes to allow users to choose scanner-specific settings or operations before performing a scan.
 */
@@ -334,7 +354,7 @@ typedef NSUInteger ICScannerFeatureType;
 
 //-------------------------------------------------------------------------------------------------- ICScannerFeatureEnumeration
 /*!
-	@class ICScannerFeatureEnumeration
+    @class ICScannerFeatureEnumeration
     @abstract ICScannerFeatureEnumeration object is used to represent a feature of a scanner functional unit that can have one of several discrete values.
     @discussion 
 */
@@ -383,7 +403,7 @@ typedef NSUInteger ICScannerFeatureType;
 
 //-------------------------------------------------------------------------------------------------------- ICScannerFeatureRange
 /*!
-	@class ICScannerFeatureRange
+    @class ICScannerFeatureRange
     @abstract ICScannerFeatureRange object is used to represent a property of a scanner functional unit whose value lies within a range.
     @discussion 
 */
@@ -432,7 +452,7 @@ typedef NSUInteger ICScannerFeatureType;
 
 //----------------------------------------------------------------------------------------------------- ICScannerFeatureBoolean
 /*!
-	@class ICScannerFeatureBoolean
+    @class ICScannerFeatureBoolean
     @abstract ICScannerFeatureBoolean object is used to represent a property of a scanner functional unit whose value can be YES or NO.
     @discussion 
 */
@@ -453,7 +473,7 @@ typedef NSUInteger ICScannerFeatureType;
 
 //---------------------------------------------------------------------------------------------------- ICScannerFeatureTemplate
 /*!
-	@class ICScannerFeatureTemplate
+    @class ICScannerFeatureTemplate
     @abstract ICScannerFeatureTemplate object is used to define a group of one or more rectangular scan areas that can be used with a scanner functional unit.
     @discussion 
 */
@@ -469,7 +489,7 @@ typedef NSUInteger ICScannerFeatureType;
 
 //------------------------------------------------------------------------------------------------------ ICScannerFunctionalUnit
 /*!
-	@class ICScannerFunctionalUnit
+    @class ICScannerFunctionalUnit
     @abstract ICScannerFunctionalUnit is an abstract class that represents a scanner functiona unit. ImageCaptureCore defines three concrete subclasses of ICScannerFunctionalUnit: ICScannerFunctionalUnitFlatbed, ICScannerFunctionalUnitPositiveTransparency, ICScannerFunctionalUnitNegativeTransparency and ICScannerFunctionalUnitDocumentFeeder. ICScannerDevice creates instances of these concrete subclasses.
 */
 
@@ -498,7 +518,7 @@ typedef NSUInteger ICScannerFeatureType;
     @abstract ￼Supported bit depths. The values in this set are valid values defined by ICScannerBitDepth.
 
 */
-@property(readonly)	  NSIndexSet*                   supportedBitDepths;
+@property(readonly)   NSIndexSet*                   supportedBitDepths;
 
 /*!
     @property bitDepth
@@ -512,7 +532,7 @@ typedef NSUInteger ICScannerFeatureType;
     @abstract ￼Supported measurement units. The values in this set are valid values defined by ICScannerMeasurementUnit.
 
 */
-@property(readonly)	  NSIndexSet*                   supportedMeasurementUnits;
+@property(readonly)   NSIndexSet*                   supportedMeasurementUnits;
 
 /*!
     @property measurementUnit
@@ -541,6 +561,20 @@ typedef NSUInteger ICScannerFeatureType;
 
 */
 @property(readwrite)  NSUInteger                    resolution;
+
+/*!
+    @property nativeXResolution
+    @abstract ￼Optical resolution along the X axis.
+
+*/
+@property(readonly)  NSUInteger                     nativeXResolution;
+
+/*!
+    @property nativeYResolution
+    @abstract ￼Optical resolution along the Y axis.
+
+*/
+@property(readonly)  NSUInteger                     nativeYResolution;
 
 /*!
     @property supportedScaleFactors
@@ -582,7 +616,7 @@ typedef NSUInteger ICScannerFeatureType;
     @abstract ￼Physical size of the scan area in current measurement unit.
 
 */
-@property(readonly) NSSize                          physicalSize;
+@property(readonly)   NSSize                        physicalSize;
 
 /*!
     @property scanArea
@@ -611,14 +645,14 @@ typedef NSUInteger ICScannerFeatureType;
     @abstract ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
 
 */
-@property(readwrite)   BOOL                         usesThresholdForBlackAndWhiteScanning;
+@property(readwrite)  BOOL                          usesThresholdForBlackAndWhiteScanning;
 
 /*!
     @property defaultThresholdForBlackAndWhiteScanning
     @abstract ￼Default threshold value used when performing a scan in black & white. This value is from 0 to 255.
 
 */
-@property(readonly)  unsigned char                  defaultThresholdForBlackAndWhiteScanning;
+@property(readonly)   unsigned char                 defaultThresholdForBlackAndWhiteScanning;
 
 /*!
     @property thresholdForBlackAndWhiteScanning
@@ -675,11 +709,12 @@ typedef NSUInteger ICScannerFeatureType;
 
 */
 @property(readwrite)  NSUInteger                    overviewResolution;
+
 @end
 
 //----------------------------------------------------------------------------------------------- ICScannerFunctionalUnitFlatbed
 /*!
-	@class ICScannerFunctionalUnitFlatbed
+    @class ICScannerFunctionalUnitFlatbed
     @abstract ICScannerFunctionalUnitFlatbed is a concrete subclass of ICScannerFunctionalUnit class. ICScannerDevice creates instances of this class.
     @discussion This represents the flatbed  unit on the scanner.
 */
@@ -689,11 +724,33 @@ typedef NSUInteger ICScannerFeatureType;
 @private
     id _fbProps;
 }
+
+/*!
+    @property supportedDocumentTypes
+    @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
+
+*/
+@property(readonly)   NSIndexSet*                   supportedDocumentTypes;
+
+/*!
+    @property documentType
+    @abstract ￼Current document type. This will always be one of the supported document types.
+
+*/
+@property(readwrite)  ICScannerDocumentType         documentType;
+
+/*!
+    @property documentSize
+    @abstract ￼Document size of the current document type expressed in current measurement unit.
+
+*/
+@property(readonly) NSSize                          documentSize;
+
 @end
 
 //---------------------------------------------------------------------------------- ICScannerFunctionalUnitPositiveTransparency
 /*!
-	@class ICScannerFunctionalUnitPositiveTransparency
+    @class ICScannerFunctionalUnitPositiveTransparency
     @abstract ICScannerFunctionalUnitPositiveTransparency is a concrete subclass of ICScannerFunctionalUnit class. ICScannerDevice creates instances of this class.
     @discussion This represents the transparency unit on the scanner for scanning postives
 */
@@ -703,11 +760,33 @@ typedef NSUInteger ICScannerFeatureType;
 @private
     id _ptrProps;
 }
+
+/*!
+    @property supportedDocumentTypes
+    @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
+
+*/
+@property(readonly)   NSIndexSet*                   supportedDocumentTypes;
+
+/*!
+    @property documentType
+    @abstract ￼Current document type. This will always be one of the supported document types.
+
+*/
+@property(readwrite)  ICScannerDocumentType         documentType;
+
+/*!
+    @property documentSize
+    @abstract ￼Document size of the current document type expressed in current measurement unit.
+
+*/
+@property(readonly) NSSize                          documentSize;
+
 @end
 
 //---------------------------------------------------------------------------------- ICScannerFunctionalUnitNegativeTransparency
 /*!
-	@class ICScannerFunctionalUnitNegativeTransparency
+    @class ICScannerFunctionalUnitNegativeTransparency
     @abstract ICScannerFunctionalUnitNegativeTransparency is a concrete subclass of ICScannerFunctionalUnit class. ICScannerDevice creates instances of this class.
     @discussion This represents the transparency unit on the scanner for scanning negatives.
 */
@@ -717,11 +796,33 @@ typedef NSUInteger ICScannerFeatureType;
 @private
     id _ntrProps;
 }
+
+/*!
+    @property supportedDocumentTypes
+    @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
+
+*/
+@property(readonly)   NSIndexSet*                   supportedDocumentTypes;
+
+/*!
+    @property documentType
+    @abstract ￼Current document type. This will always be one of the supported document types.
+
+*/
+@property(readwrite)  ICScannerDocumentType         documentType;
+
+/*!
+    @property documentSize
+    @abstract ￼Document size of the current document type expressed in current measurement unit.
+
+*/
+@property(readonly) NSSize                          documentSize;
+
 @end
 
 //---------------------------------------------------------------------------------------- ICScannerFunctionalUnitDocumentFeeder
 /*!
-	@class ICScannerFunctionalUnitDocumentFeeder
+    @class ICScannerFunctionalUnitDocumentFeeder
     @abstract ICScannerFunctionalUnitDocumentFeeder is a concrete subclass of ICScannerFunctionalUnit class. ICScannerDevice creates instances of this class.
     @discussion This represents the document feeder unit on the scanner.
 */
@@ -741,7 +842,7 @@ typedef NSUInteger ICScannerFeatureType;
 
 /*!
     @property documentType
-    @abstract ￼Current document type. This will always be one of the supported sizes.
+    @abstract ￼Current document type. This will always be one of the supported document types.
 
 */
 @property(readwrite)  ICScannerDocumentType         documentType;
@@ -790,6 +891,13 @@ typedef NSUInteger ICScannerFeatureType;
 
 */
 @property(readwrite)  ICEXIFOrientationType         evenPageOrientation;
+
+/*!
+ @property reverseFeederPageOrder
+ @abstract ￼Indicates whether the document feeder reads pages from back to front.
+ 
+ */
+@property(readonly)   BOOL                          reverseFeederPageOrder;
 
 @end
 

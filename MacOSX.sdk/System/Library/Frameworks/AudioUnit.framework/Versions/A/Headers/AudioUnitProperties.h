@@ -3,7 +3,7 @@
  
      Contains:   Property constants for AudioUnits
  
-     Copyright:  (c) 2001-2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2001-2008 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -93,17 +93,22 @@
 	@constant		kAudioUnitScope_Note	A scope that can be used to apply changes to an individual note. The 
 											elementID used with this scope is the unique note ID returned from
 											a started note (see MusicDeviceStartNote)
+	@constant		kAudioUnitScope_Layer	A context which functions as a layer within a part and allows
+											grouped control of LayerItem-scope parameters.
+											An example is the percussive attack layer for an electric organ instrument
+	@constant		kAudioUnitScope_LayerItem	A scope which represents an indivual element within a particular Layer scope.
+											The individual sample zones, envelope generators, and filters within a synth are
+											examples of this.
 */
 enum {
-	kAudioUnitScope_Global	= 0,
-	kAudioUnitScope_Input	= 1,
-	kAudioUnitScope_Output	= 2
-#if !TARGET_OS_IPHONE
-	,
-	kAudioUnitScope_Group	= 3,
-	kAudioUnitScope_Part	= 4,
-	kAudioUnitScope_Note	= 5
-#endif
+	kAudioUnitScope_Global		= 0,
+	kAudioUnitScope_Input		= 1,
+	kAudioUnitScope_Output		= 2,
+	kAudioUnitScope_Group		= 3,
+	kAudioUnitScope_Part		= 4,
+	kAudioUnitScope_Note		= 5,
+	kAudioUnitScope_Layer		= 6,
+	kAudioUnitScope_LayerItem	= 7
 };
 
 
@@ -117,10 +122,23 @@ enum {
 	@constant		kAudioUnitProperty_ClassInfo
 						Scope:			Global (or Part for a part scope preset)
 						Value Type:		CFDictionaryRef
-						Access:			Read / Write
+						Access:			read/write
 						
 						The complete state of an audio unit if on global scope. An audio unit that supports part scope, may also support presets on the part scope
-						that apply to individual parts
+						that apply to individual parts.
+						
+						After a host sets this property it needs to notify the parameter listeners that the values of the parameters of an AU may have changed (so
+						views, etc, can update their state). Something like the following code should be used:
+						
+						<code>
+						#include <AudioToolbox/AudioUnitUtilities.h>
+						
+						AudioUnitParameter changedUnit;
+						changedUnit.mAudioUnit = theChangedAU;
+						changedUnit.mParameterID = kAUParameterListener_AnyParameter;
+						AUParameterListenerNotify (NULL, NULL, &changedUnit);
+						</code>
+
 						
 	@constant		kAudioUnitProperty_MakeConnection
 						Scope:			Input
@@ -130,14 +148,14 @@ enum {
 	@constant		kAudioUnitProperty_SampleRate
 						Scope:			Input / Output
 						Value Type:		Float64
-						Access:			Read / Write
+						Access:			read/write
 						
 	@constant		kAudioUnitProperty_ParameterList
 						Scope:			Any
 						Value Type:		AudioUnitParameterID
 						Access:			Read
 						
-						The list of parameter IDs on the specifed scope
+						The list of parameter IDs on the specified scope
 						
 	@constant		kAudioUnitProperty_ParameterInfo
 						Scope:			Any
@@ -153,7 +171,7 @@ enum {
 						
 						The caller provides the selector for a given audio unit API, and retrieves a function pointer for that selector. For instance,
 						this enables the caller to retrieve the function pointer for the AudioUnitRender call, so that call can be made directly
-						through to the audio unit to avoid the overhead of the Component Mgr's dispatch.
+						through to the audio unit to avoid the overhead of the ComponentMgr's dispatch.
 	
 	@constant		kAudioUnitProperty_CPULoad
 						Scope:			Global
@@ -165,7 +183,7 @@ enum {
 	@constant		kAudioUnitProperty_StreamFormat
 						Scope:			Input / Output
 						Value Type:		AudioStreamBasicDescription
-						Access:			Read / Write
+						Access:			read/write
 						
 						An AudioStreamBasicDescription is used to specify the basic format for an audio data path. For instance, 2 channels, 44.1KHz, Float32 linear pcm.
 						The value can be both set and retrieve from an I/O element (bus)
@@ -173,7 +191,7 @@ enum {
 	@constant		kAudioUnitProperty_ElementCount
 						Scope:			Any (though Global scope will always have and element count of 1)
 						Value Type:		UInt32
-						Access:			Read / Write
+						Access:			read/write
 						
 						Most audio units will only implement the read version of this call, thus they would have a fixed bus topology (number of input and output elements/buses).
 						Some audio units possess the capability to add or remove elements, so in that case this property will be writable.
@@ -205,7 +223,7 @@ enum {
 	@constant		kAudioUnitProperty_MaximumFramesPerSlice
 						Scope:			Global
 						Value Type:		UInt32
-						Access:			Read / Write
+						Access:			read/write
 						
 						This property is used to describe to an audio unit the maximum number of samples it will be asked to produce on any single given call to audio unit render. 
 						
@@ -279,7 +297,7 @@ enum {
 	@constant		kAudioUnitProperty_BypassEffect
 						Scope:			Global
 						Value Type:		UInt32
-						Access:			Read / Write
+						Access:			read/write
 						
 						A boolean value that can be used to bypass the processing in an effect unit, so that the input is passed unchanged through to the output
 	
@@ -310,7 +328,7 @@ enum {
 	@constant		kAudioUnitProperty_ContextName
 						Scope:			Global
 						Value Type:		CFString
-						Access:			Read / Write
+						Access:			read/write
 						
 						The host can set this as information to the audio unit to describe something about the context within which the audio unit is instantiated. For instance, "track 3" could
 						be set as the context, so that the audio unit's view could then display "My audio unit on track 3" as information to the user of the particular context for any audio unit.
@@ -318,7 +336,7 @@ enum {
 	@constant		kAudioUnitProperty_RenderQuality
 						Scope:			Global
 						Value Type:		UInt32
-						Access:			Read / Write
+						Access:			read/write
 						
 						A value (0 - 127) that can be used to control the quality (complexity) of the rendering operation. A typical usage is to set render quality to maximum for best quality, but
 						if CPU usage is a concern a lesser quality can be set to trade off render quality.
@@ -340,7 +358,7 @@ enum {
 	@constant		kAudioUnitProperty_InPlaceProcessing
 						Scope:			Global
 						Value Type:		UInt32
-						Access:			Read / Write
+						Access:			read/write
 						
 						A property that can be used to determine if the audio unit can process input data on the same data as is provided to it, and if so this can be turned off if the host
 						has a particular buffer management strategy and such an operation would defeat that.
@@ -359,7 +377,7 @@ enum {
 						Access:				read
 
 						Publishes the audio unit's custom Cocoa NSViews. The Host can determine how big this structure is by 
-						querying the size of the property (ie. How many alternate UI classes there are for the unit)
+						querying the size of the property (i.e., How many alternate UI classes there are for the unit)
 						Typically, most audio units will provide 1 UI class per unit
 	
 	@constant		kAudioUnitProperty_SupportedChannelLayoutTags
@@ -399,7 +417,7 @@ enum {
 						this property can be used to ask the audio unit whether it can supply a truncated name, with
 						the host suggesting a length (number of characters). If the unit returns a longer
 						name than the host requests, that name maybe truncated to the requested characters in display.
-						The unit could return a shorter name than requeseted as well. The unit returns a CFString
+						The unit could return a shorter name than requested as well. The unit returns a CFString
 						that should be released by the host. When using this property, the host asks for
 						the name in the same scope and element as the unit publishes the parameter.
 
@@ -426,7 +444,7 @@ enum {
 	@constant		kAudioUnitProperty_OfflineRender
 						Scope:				Global
 						Value Type:			UInt32
-						Access:				Read / Write
+						Access:				read/write
 						
 						This is used by the host to indicate when an audio unit (that normally operates within a general real-time calling model) is 
 						rendering in an offline context. A typical usage of this is to set this to true when the rendering operation an audio unit is being used within is 
@@ -528,7 +546,7 @@ enum {
 							presentation latency will be the latency of the device itself - which is the I/O buffer size, 
 							and the device's safety offset and latency
 							
-							The previous audio unit's (connected to this last unit) output presenation latency will be that 
+							The previous audio unit's (connected to this last unit) output presentation latency will be that 
 							initial presentation latency plus the processing latency (as expressed by 
 							kAudioUnitProperty_Latency) of the last unit.
 							
@@ -641,7 +659,7 @@ enum {
 
 						This property allows a host application to determine which input samples correspond to a sample 
 						in the output buffer. It is useful only for audio units that do time-stretching, such as the 
-						AUVaripseed and AUTimePitch units, where the relationship between input and output samples is 
+						AUVarispeed and AUTimePitch units, where the relationship between input and output samples is 
 						non-trivial. For these units, the range of input samples that correspond to an output buffer 
 						typically differs from the range of input samples that were pulled for that render call. 
 						This difference arises because of internal buffering, processing latency, and other factors.
@@ -695,6 +713,14 @@ enum {
 						with the mFrequency field filled in. The array is returned with the mMagnitude fields filled in.
 						If fewer than kNumberOfResponseFrequencies are needed, then the first unused bin should be marked with 
 						a negative frequency.
+	
+	@constant		kAudioUnitProperty_ParameterHistoryInfo
+						Scope:			Global
+						Value Type:		AudioUnitParameterHistoryInfo
+						Access: 		read
+						
+						For parameters which have kAudioUnitParameterFlag_PlotHistory set, getting this property fills out the 
+						AudioUnitParameterHistoryInfo struct containing the recommended update rate and history duration.
  */	
 enum
 {
@@ -704,6 +730,7 @@ enum
 	kAudioUnitProperty_SampleRate					= 2,
 	kAudioUnitProperty_ParameterList				= 3,
 	kAudioUnitProperty_ParameterInfo				= 4,
+	kAudioUnitProperty_CPULoad						= 6,
 	kAudioUnitProperty_StreamFormat					= 8,
 	kAudioUnitProperty_ElementCount					= 11,
 	kAudioUnitProperty_Latency						= 12,
@@ -720,12 +747,12 @@ enum
 	kAudioUnitProperty_ElementName					= 30,
 	kAudioUnitProperty_SupportedChannelLayoutTags	= 32,
 	kAudioUnitProperty_PresentPreset				= 36,
-	kAudioUnitProperty_ShouldAllocateBuffer			= 51
+	kAudioUnitProperty_ShouldAllocateBuffer			= 51,
+	kAudioUnitProperty_ParameterHistoryInfo			= 53
 
 #if !TARGET_OS_IPHONE
 	,
 	kAudioUnitProperty_FastDispatch					= 5,
-	kAudioUnitProperty_CPULoad						= 6,
 	kAudioUnitProperty_SetExternalBuffer			= 15,
 	kAudioUnitProperty_ParameterValueStrings		= 16,
 	kAudioUnitProperty_GetUIComponentList			= 18,
@@ -887,7 +914,6 @@ typedef struct AudioUnitFrequencyResponseBin
 } AudioUnitFrequencyResponseBin;
 
 
-
 /*!
 	@typedef		HostCallback_GetBeatAndTempo
 	@abstract		Retrieve information about the current beat and/or tempo
@@ -931,7 +957,7 @@ typedef OSStatus (*HostCallback_GetMusicalTimeLocation) (void     *inHostUserDat
 			The AudioUnit can provide NULL for any of the requested parameters (except for inHostUserData) if it is not interested in that particular piece of information
 	
 	@param			inHostUserData					Must be provided by the audio unit when it makes this call. It is the client data provided by the host when it set the HostCallbacks property
-	@param			outIsPlaying					Returns true if the host's tranpsort is currently playing, false if stopped
+	@param			outIsPlaying					Returns true if the host's transport is currently playing, false if stopped
 	@param			outTransportStateChanged		Returns true if there was a change to the state of, or discontinuities in, the host's transport (generally since the callback was last called). Can indicate such state changes as start/top, time moves (jump from one time line to another).
 	@param			outCurrentSampleInTimeLine		Returns the current sample count in the time line of the host's transport time.  
 	@param			outIsCycling					Returns true if the host's transport is currently cycling or looping
@@ -1029,6 +1055,22 @@ typedef struct AUInputSamplesInOutputCallbackStruct {
 
 #endif //!TARGET_OS_IPHONE
 
+/*!
+	@struct			AudioUnitParameterHistoryInfo
+	@abstract		This structure contains the suggested update rate and history duration for parameters which have the kAudioUnitParameterFlag_PlotHistory flag set.
+					The structure is filled out by getting kAudioUnitProperty_ParameterHistoryInfo.
+	@field			updatesPerSecond
+						This is the number of times per second that it is suggested that the host get the value of this parameter.
+	@field			historyDurationInSeconds
+						This is the duration in seconds of history that should be plotted.
+*/
+typedef struct AudioUnitParameterHistoryInfo
+{
+	Float32		updatesPerSecond;
+	Float32		historyDurationInSeconds;
+} AudioUnitParameterHistoryInfo;
+
+
 //=====================================================================================================================
 #pragma mark - Parameter Definitions
 
@@ -1083,7 +1125,7 @@ typedef struct AUInputSamplesInOutputCallbackStruct {
 	@constant		kAudioUnitParameterUnit_BPM
 						beats per minute, ie tempo
     @constant		kAudioUnitParameterUnit_Beats
-						time relative to tempo, ie. 1.0 at 120 BPM would equal 1/2 a second
+						time relative to tempo, i.e., 1.0 at 120 BPM would equal 1/2 a second
 	@constant		kAudioUnitParameterUnit_Milliseconds
 						parameter is expressed in milliseconds
 	@constant		kAudioUnitParameterUnit_Ratio
@@ -1151,7 +1193,7 @@ typedef UInt32		AudioUnitParameterUnit;
 						the host should release those names when it is finished with them, but there was no way
 						to communicate this distinction in behavior.
 						Thus, if an audio unit will (or could) generate a name dynamically, it should set this flag in 
-						the paramter's info.. The host should check for this flag, and if present, release the parameter
+						the parameter's info. The host should check for this flag, and if present, release the parameter
 						name when it is finished with it.
 */
 typedef struct AudioUnitParameterInfo
@@ -1171,6 +1213,7 @@ typedef struct AudioUnitParameterInfo
 	@enum			Audio Unit Parameter Flags
 	@discussion		Bit positions 18, 17, and 16 are set aside for display scales. Bit 19 is reserved.
 	@constant		kAudioUnitParameterFlag_CFNameRelease
+	@constant		kAudioUnitParameterFlag_PlotHistory
 	@constant		kAudioUnitParameterFlag_MeterReadOnly
 	@constant		kAudioUnitParameterFlag_DisplayMask
 	@constant		kAudioUnitParameterFlag_DisplaySquareRoot
@@ -1195,6 +1238,7 @@ enum
 {
 	kAudioUnitParameterFlag_CFNameRelease		= (1L << 4),
 
+	kAudioUnitParameterFlag_PlotHistory			= (1L << 14),
 	kAudioUnitParameterFlag_MeterReadOnly		= (1L << 15),
 	
 	// bit positions 18,17,16 are set aside for display scales. bit 19 is reserved.
@@ -1387,7 +1431,7 @@ enum {
 						Value Type:			array of AUParameterMIDIMapping
 						Access:				read/write
 
-						This property allows setting and retreiving the current mapping state between 
+						This property allows setting and retrieving the current mapping state between 
 						(some/many/all of) an audio unit's parameters and MIDI messages. When set, it should replace 
 						any previous mapped settings the audio unit had.
 					
@@ -1843,7 +1887,7 @@ typedef struct AudioUnitParameterValueTranslation
 */
 typedef struct AudioUnitPresetMAS_SettingData
 {
-	UInt32 				isStockSetting; // zero or 1  i.e. "long bool"
+	UInt32 				isStockSetting; // zero or 1  i.e., "long bool"
 	UInt32 				settingID;
 	UInt32 				dataLen; //length of following data
 	UInt8 				data[1];
@@ -1914,7 +1958,7 @@ enum {
 	@constant		kAudioOutputUnitProperty_ChannelMap
 	@discussion			Scope:			Input/Output
 						Value Type:		Array of UInt32
-						Access:			Read / Write
+						Access:			read/write
 
 						This will also work with AUConverter. This property is used to map input channels from an input (source) to a destination.
 						The number of channels represented in the channel map is the number of channels of the destination. The channel map entries
@@ -1945,6 +1989,9 @@ enum {
 							used to provide a single callback to the host application from the input 
 							I/O proc, in order to notify the host that input is available and may be 
 							obtained by calling the AudioUnitRender function.
+							
+							Note that the inputProc will always receive a NULL AudioBufferList in ioData.
+							You must call AudioUnitRender in order to obtain the audio.
 
 	@constant		kAudioOutputUnitProperty_HasIO
 	@discussion			Scope: { scope output, element 0 = output } { scope input, element 1 = input }
@@ -1986,6 +2033,97 @@ typedef struct AudioOutputUnitStartAtTimeParams {
 	UInt32					mFlags;
 } AudioOutputUnitStartAtTimeParams;
 
+//=====================================================================================================================
+#pragma mark - AUVoiceProcessing unit
+/*!
+	@enum           Apple Voice Processing Property IDs
+	@abstract       The collection of property IDs for Apple voice processing units.
+
+	@constant		kAUVoiceIOProperty_BypassVoiceProcessing
+	@discussion			Scope: Global
+						Value Type: UInt32
+						Access: read/write
+							Bypass all processing done by the voice processing unit. When set to 0 
+							(default), the processing is activated otherwise it is disabled.
+
+	@constant		kAUVoiceIOProperty_VoiceProcessingEnableAGC
+	@discussion			Scope: Global
+						Value Type: UInt32
+						Access: read/write
+							Enable automatic gain control on the processed signal. On by default.
+ 
+	 @constant		kAUVoiceIOProperty_VoiceProcessingQuality
+	 @discussion		Scope: Global
+						Value Type: UInt32
+						Access: read/write
+							Sets the quality of the voice processing unit. Quality values are comprised
+							between 0 (lowest) and 127 (highest).
+	 
+	 @constant		kAUVoiceIOProperty_MuteOutput
+	 @discussion		Scope: Global
+						Value Type: UInt32
+						Access: read/write
+							Mutes the output of the voice processing unit. 
+							0 (default) = muting off. 1 = mute output.  
+ 
+	 @constant		kAUVoiceIOProperty_MaximumNumberPackets
+	 @discussion		Scope: Output
+						Value Type: UInt32
+						Access: read
+							The maximum number of packets that will be produced by the voice processing
+							unit on any single given call to AudioUnitRender / AudioUnitComplexRender.
+
+	 @constant		kAUVoiceIOProperty_MaximumOutputPacketByteSize
+	 @discussion		Scope: Output
+						Value Type: UInt32
+						Access: read
+							The maximum size in bytes of a packet produced by the voice processing unit.
+
+	 @constant		kAUVoiceIOProperty_MaximumMetadataByteSize
+	 @discussion		Scope: Output
+						Value Type: UInt32
+						Access: read
+							The maximum size in bytes of the metadata associated with a single packet
+							produced by the voice processing unit.
+ 
+	@constant		kAUVoiceIOProperty_RequestMetadata
+	@discussion			Scope: Global
+						Value Type: UInt32
+						Access: read/write
+							Enable metadata processing and voice activity detection.
+							0 (default) = disable metadata processing; 1 = enable metadata processing
+
+	 @constant		kAUVoiceIOProperty_DisableVP
+	 @discussion		Scope: Global
+						Value Type: UInt32
+						Access: read/write
+							Disable voice processing. When disabled, no echo processing is done on the
+							microphone input. Different from bypass voice processing in that bypassing
+							maintains the echo processing latency whereas disabling does not. 
+							0 (default)=enable voice processing; 1=disable voice processing.
+	 
+	@constant		kAUVoiceIOProperty_MaximumRenderFrameSize
+	@discussion			Scope: Output
+						Value Type: UInt32
+						Access: read/write
+							The maximum number of frames that the voice processing unit will provide
+							to the client on a call to render. Applicable only to the input element.
+							If the client sets this property, it should get the value of the property
+							post-initialization to determine the actual value.
+*/
+
+enum {
+	kAUVoiceIOProperty_BypassVoiceProcessing		= 2100,
+	kAUVoiceIOProperty_VoiceProcessingEnableAGC		= 2101,
+	kAUVoiceIOProperty_VoiceProcessingQuality		= 2103,
+	kAUVoiceIOProperty_MuteOutput					= 2104,
+	kAUVoiceIOProperty_MaximumNumberPackets			= 2110,
+	kAUVoiceIOProperty_MaximumOutputPacketByteSize	= 2111,
+	kAUVoiceIOProperty_MaximumMetadataByteSize		= 2112,
+	kAUVoiceIOProperty_RequestMetadata				= 2113,
+	kAUVoiceIOProperty_DisableVP					= 2114,
+	kAUVoiceIOProperty_MaximumRenderFrameSize		= 2115
+};
 
 //=====================================================================================================================
 #pragma mark - Mixers
@@ -2073,7 +2211,7 @@ typedef struct AudioUnitMeterClipping
 	@constant		kAudioUnitProperty_SpatializationAlgorithm
 	@discussion			Scope:			Input
 						Value Type:		UInt32
-						Access:			Read / Write
+						Access:			read/write
 						
 						Used to set the spatialisation algorithm used by an input of the 3DMixer. See kSpatializationAlgorithm_
 						
@@ -2087,7 +2225,7 @@ typedef struct AudioUnitMeterClipping
 	@constant		kAudioUnitProperty_3DMixerRenderingFlags
 	@discussion			Scope:			Input
 						Value Type:		UInt32
-						Access:			Read / Write
+						Access:			read/write
 
 						Used to enable various rendering operations on a given input for the 3DMixer. See k3DMixerRenderingFlags_
 						
@@ -2181,102 +2319,6 @@ enum {
 	k3DMixerRenderingFlags_DistanceDiffusion		= (1L << 4),
 	k3DMixerRenderingFlags_LinearDistanceAttenuation	= (1L << 5),
 	k3DMixerRenderingFlags_ConstantReverbBlend		= (1L << 6)
-};
-
-//=====================================================================================================================
-#pragma mark -
-#pragma mark Desktop Apple Specific Properties
-
-
-#if !TARGET_OS_IPHONE
-
-//=====================================================================================================================
-#pragma mark - DLSMusicDevice and Internal Reverb
-/*!
-    @enum           Generic Property IDs
-    @abstract       The collection of general audio unit property IDs
-	
-	@constant		kAudioUnitProperty_ReverbRoomType
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kAudioUnitProperty_UsesInternalReverb
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kMusicDeviceProperty_InstrumentName
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kMusicDeviceProperty_InstrumentNumber
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kMusicDeviceProperty_BankName
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kMusicDeviceProperty_SoundBankData
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kMusicDeviceProperty_StreamFromDisk
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kMusicDeviceProperty_SoundBankFSRef
-	@discussion			Scope:
-						Value Type:
-						Access:
-
-	@constant		kMusicDeviceProperty_SoundBankURL
-	@discussion			Scope:
-						Value Type:
-						Access:
-*/
-enum {
-	kAudioUnitProperty_ReverbRoomType				= 10,
-
-	// 3DMixer, DLSMusicDevice
-	kAudioUnitProperty_UsesInternalReverb			= 1005,
-
-	// DLS Music Device
-	kMusicDeviceProperty_InstrumentName				= 1001,
-	kMusicDeviceProperty_InstrumentNumber 			= 1004,
-	kMusicDeviceProperty_UsesInternalReverb			= kAudioUnitProperty_UsesInternalReverb,
-	kMusicDeviceProperty_BankName					= 1007,
-	kMusicDeviceProperty_SoundBankData				= 1008,
-	kMusicDeviceProperty_StreamFromDisk				= 1011,
-	kMusicDeviceProperty_SoundBankFSRef				= 1012,
-	kMusicDeviceProperty_SoundBankURL				= 1100
-};
-
-/*!
-	@enum	Reverb Room Types
-	@discussion Used to specify room type (as identified by a factory preset number) on Apple audio 
-				units that use internal reverb.
-*/
-enum {
-	kReverbRoomType_SmallRoom		= 0,
-	kReverbRoomType_MediumRoom		= 1,
-	kReverbRoomType_LargeRoom		= 2,
-	kReverbRoomType_MediumHall		= 3,
-	kReverbRoomType_LargeHall		= 4,
-	kReverbRoomType_Plate			= 5,
-	kReverbRoomType_MediumChamber	= 6,
-	kReverbRoomType_LargeChamber	= 7,
-	kReverbRoomType_Cathedral		= 8,
-	kReverbRoomType_LargeRoom2		= 9,
-	kReverbRoomType_MediumHall2		= 10,
-	kReverbRoomType_MediumHall3		= 11,
-	kReverbRoomType_LargeHall2		= 12	
 };
 
 //=====================================================================================================================
@@ -2474,7 +2516,7 @@ struct ScheduledAudioSlice {
 					Before starting playback, you must first open all audio files to be played
 					using the AudioFile API's (see AudioToolbox/AudioFile.h), and pass their
 					AudioFileIDs to the unit by setting the kAudioUnitProperty_ScheduledFileIDs
-					propery. This property must not be set during playback. The audio files must
+					property. This property must not be set during playback. The audio files must
 					be kept open for the duration of playback.
 
 
@@ -2495,7 +2537,7 @@ struct ScheduledAudioSlice {
 					You should set kAudioUnitProperty_ScheduledFilePrime after scheduling
 					initial file regions to be played and before starting playback. This SetProperty call
 					will begin reading the audio files and not return until the number of frames
-					specifed by the property value have been read.
+					specified by the property value have been read.
 					
 					
 					Completion Callbacks
@@ -2574,7 +2616,7 @@ enum {
 	kAudioUnitProperty_ScheduledFileNumberBuffers   = 3314
 };
 
-typedef struct ScheduledAudioFileRegion ScheduledAudioFileRegion; //forward declaraion, see definition below
+typedef struct ScheduledAudioFileRegion ScheduledAudioFileRegion; //forward declaration, see definition below
 /*!
 	@typedef		ScheduledAudioFileRegionCompletionProc
 */
@@ -2607,6 +2649,170 @@ struct ScheduledAudioFileRegion {
 	SInt64						mStartFrame;
 	UInt32						mFramesToPlay;
 };
+
+//=====================================================================================================================
+#pragma mark -
+#pragma mark Desktop Apple Specific Properties
+
+
+#if !TARGET_OS_IPHONE
+
+//=====================================================================================================================
+#pragma mark - DLSMusicDevice and Internal Reverb
+/*!
+    @enum           Generic Property IDs
+    @abstract       The collection of general audio unit property IDs
+	
+	@constant		kAudioUnitProperty_ReverbRoomType
+	@discussion			Scope:
+						Value Type:
+						Access:
+
+	@constant		kAudioUnitProperty_UsesInternalReverb
+	@discussion			Scope:
+						Value Type:
+						Access:
+
+	@constant		kMusicDeviceProperty_InstrumentName
+	@discussion			Scope:
+						Value Type:
+						Access:
+
+	@constant		kMusicDeviceProperty_InstrumentNumber
+	@discussion			Scope:
+						Value Type:
+						Access:
+
+	@constant		kMusicDeviceProperty_BankName
+	@discussion			Scope:
+						Value Type:
+						Access:
+
+	@constant		kMusicDeviceProperty_SoundBankData
+	@discussion			Scope:
+						Value Type:
+						Access:
+
+	@constant		kMusicDeviceProperty_StreamFromDisk
+	@discussion			Scope:
+						Value Type:
+						Access:
+
+	@constant		kMusicDeviceProperty_SoundBankFSRef
+	@discussion			Scope:
+						Value Type:
+						Access:
+
+	@constant		kMusicDeviceProperty_SoundBankURL
+	@discussion			Scope:
+						Value Type:
+						Access:
+*/
+enum {
+	kAudioUnitProperty_ReverbRoomType				= 10,
+
+	// 3DMixer, DLSMusicDevice
+	kAudioUnitProperty_UsesInternalReverb			= 1005,
+
+	// DLS Music Device
+	kMusicDeviceProperty_InstrumentName				= 1001,
+	kMusicDeviceProperty_InstrumentNumber 			= 1004,
+	kMusicDeviceProperty_UsesInternalReverb			= kAudioUnitProperty_UsesInternalReverb,
+	kMusicDeviceProperty_BankName					= 1007,
+	kMusicDeviceProperty_SoundBankData				= 1008,
+	kMusicDeviceProperty_StreamFromDisk				= 1011,
+	kMusicDeviceProperty_SoundBankFSRef				= 1012,
+	kMusicDeviceProperty_SoundBankURL				= 1100
+};
+
+/*!
+	@enum	Reverb Room Types
+	@discussion Used to specify room type (as identified by a factory preset number) on Apple audio 
+				units that use internal reverb.
+*/
+enum {
+	kReverbRoomType_SmallRoom		= 0,
+	kReverbRoomType_MediumRoom		= 1,
+	kReverbRoomType_LargeRoom		= 2,
+	kReverbRoomType_MediumHall		= 3,
+	kReverbRoomType_LargeHall		= 4,
+	kReverbRoomType_Plate			= 5,
+	kReverbRoomType_MediumChamber	= 6,
+	kReverbRoomType_LargeChamber	= 7,
+	kReverbRoomType_Cathedral		= 8,
+	kReverbRoomType_LargeRoom2		= 9,
+	kReverbRoomType_MediumHall2		= 10,
+	kReverbRoomType_MediumHall3		= 11,
+	kReverbRoomType_LargeHall2		= 12	
+};
+
+//=====================================================================================================================
+#pragma mark - AUSampler
+
+/*!
+	@enum			Apple AUSampler Property IDs
+	@abstract		The collection of property IDs for the Apple AUSampler audio unit.
+ 
+	@discussion		The AUSampler audio unit lets a client create an editable, interactive
+					sampler synthesizer instrument.
+ 
+	@constant		kAUSamplerProperty_LoadPresetFromBank
+	@discussion			Scope:			Global
+						Value Type:		AUSamplerBankPresetData
+						Access:			Write
+							Load a preset from an external DLS or Soundfont2 bank file.
+ 
+	@constant		kAUSamplerProperty_LoadAudioFiles
+	@discussion			Scope:			Global
+						Value Type:		CFArrayRef
+						Access:			Write
+							Create a new preset from a list of audio file paths.  The CFArray should contain a set
+							of CFURLRefs, one per file.  The previous preset will be completely cleared.
+ */
+enum {
+	// range (4100->4999)
+	kAUSamplerProperty_LoadPresetFromBank			= 4100,
+	kAUSamplerProperty_LoadAudioFiles				= 4101
+};
+
+/*
+	@struct			AUSamplerBankPresetData
+	@abstract		Used for loading a preset from an external bank file (i.e. DLS or SoundFont).  
+					The property accepts an AUSamplerBankPresetData struct. The fields of this struct represent values for MIDI controllers 0 and 32 
+					and the MIDI present change message that would be sent to a GM2-compatible synth for program changes.
+					Use the provided constants (kAUSampler_DefaultMelodicBankMSB , kAUSampler_DefaultPercussionBankMSB) to designate 
+					melodic or percussion banks per the GM2 specification (GM-compatible DLS or Soundfont banks).
+					For custom non-GM-compatible DLS and Soundfont banks, use the actual MSB/LSB values associated with the desired preset.
+
+	@field			bankURL
+						The URL of the path to the bank file.   Caller is responsible for releasing the provided CFURLRef.
+	@field			bankMSB
+						The most significant byte value for a particular bank variation within that file.  Range is 0 to 127.  
+						Use kAUSampler_DefaultMelodicBankMSB by default.
+	@field			bankLSB
+						The least significant byte value for a particular bank variation within that file.  Range is 0 to 127.
+						Use kAUSampler_DefaultBankLSB by default.
+	@field			presetID
+						The numeric ID of a particular preset within that bank to load.  Range is 0 to 127.
+	@field			reserved
+						Reserved for future use
+ */
+
+enum 
+{
+	kAUSampler_DefaultPercussionBankMSB	=	0x78,
+	kAUSampler_DefaultMelodicBankMSB	=	0x79,
+	kAUSampler_DefaultBankLSB			=	0x00
+};
+
+typedef struct AUSamplerBankPresetData {
+	CFURLRef				bankURL;
+	UInt8					bankMSB;
+	UInt8					bankLSB;
+	UInt8					presetID;
+	UInt8					reserved;
+} AUSamplerBankPresetData;
+
 
 //=====================================================================================================================
 #pragma mark - AUDeferredRenderer
@@ -2668,14 +2874,21 @@ enum {
 /*!
 	@enum			AUNetReceive
 	@constant		kAUNetReceiveProperty_Hostname
-	@discussion			Scope:
-						Value Type:
+	@discussion			Scope: Global
+						Value Type: CFStringRef
 						Access:
+						The hostname from which you wish to receive audio.
+						For GetProperty, the returned CFStringRef is a copy and therefore must be released by the caller.
+						The UI view for AUNetReceive does the resolution of Bonjour service names to hostnames. 
+						Clients who are using this AU programmatically using Bonjour will have to do this resolution themselves. 
+						It is not done by the AU.
 
 	@constant		kAUNetReceiveProperty_Password
-	@discussion			Scope:
-						Value Type:
-						Access:
+	@discussion			Scope: Global
+						Value Type: CFStringRef
+						Access: Read / Write
+						The password to send to the sender. Leave unset or set to the empty string for no password.
+						For GetProperty, the returned CFStringRef is a copy and therefore must be released by the caller.
 */
 enum {
 	kAUNetReceiveProperty_Hostname                  = 3511,
@@ -2687,34 +2900,49 @@ enum {
 /*!
 	@enum			AUNetSend
 	@constant		kAUNetSendProperty_PortNum
-	@discussion			Scope:
-						Value Type:
-						Access:
+	@discussion			Scope: Global
+						Value Type: UInt32
+						Access: Read / Write
+						The network port number on which to send.
 
 	@constant		kAUNetSendProperty_TransmissionFormat
-	@discussion			Scope:
-						Value Type:
-						Access:
+	@discussion			Scope: Global
+						Value Type: AudioStreamBasicDescription
+						Access: Read / Write
+						Get or set an arbitrary format that will be used to transmit the audio.
+						For compressed formats, it is recommended to use kAUNetSendProperty_TransmissionFormatIndex instead of this property,
+						since there is no way to specify a bit rate with this property.
 
 	@constant		kAUNetSendProperty_TransmissionFormatIndex
-	@discussion			Scope:
-						Value Type:
-						Access:
+	@discussion			Scope: Global
+						Value Type: UInt32
+						Access: Read / Write
+						Get or set the index of the preset format that will be used to transmit the audio.
+						The format indices can be found in the NetSendPresetFormat enum.
 
 	@constant		kAUNetSendProperty_ServiceName
-	@discussion			Scope:
-						Value Type:
-						Access:
+	@discussion			Scope: Global
+						Value Type: CFStringRef
+						Access: Read / Write
+						The name you want to publish for this network service.
+						For GetProperty, the returned CFStringRef is a copy and therefore must be released by the caller.
 
 	@constant		kAUNetSendProperty_Disconnect
-	@discussion			Scope:
-						Value Type:
-						Access:
+	@discussion			Scope: Global
+						Value Type: UInt32
+						Access: Read / Write
+						In order to disconnect, call this with a non-zero value.
+						In order to connect, call this with a zero value. 
+						For GetProperty, the returned value the last value set by the caller.
+						To get the current connection status, get the value of the parameter kAUNetReceiveParam_Status.
 
 	@constant		kAUNetSendProperty_Password
-	@discussion			Scope:
-						Value Type:
-						Access:
+	@discussion			Scope: Global
+						Value Type: CFStringRef
+						Access: Read / Write
+						The password that must be used by the receiver. Leave unset or set to the empty string for no password.
+						For GetProperty, the returned CFStringRef is a copy and therefore must be released by the caller.
+
 */
 enum {
 	kAUNetSendProperty_PortNum                      = 3513,
@@ -2754,7 +2982,7 @@ enum {
 	@constant		kAUNetSendPresetFormat_AAC_40kbpspc
 	@discussion			40 kilobits per second per channel
 	@constant		kAUNetSendPresetFormat_AAC_32kbpspc
-	@discussion			kilobits per second per channel
+	@discussion			32 kilobits per second per channel
 	@constant		kAUNetSendNumPresetFormats = 14
 */
 enum {
@@ -2798,7 +3026,7 @@ typedef struct AUNumVersion {
 } AUNumVersion;
 #else
 typedef struct AUNumVersion {
-                                              /* Numeric version part of 'vers' resource accessable in little endian format */
+                                              /* Numeric version part of 'vers' resource accessible in little endian format */
   UInt8               nonRelRev;              /*revision level of non-released version*/
   UInt8               stage;                  /*stage code: dev, alpha, beta, final*/
   UInt8               minorAndBugRev;         /*2nd & 3rd part of version number share a byte*/
@@ -2881,6 +3109,11 @@ enum {
 	kAudioUnitProperty_SpeakerConfiguration			= 3001
 };
 
+	// Deprecated.  Use kAUSamplerProperty_LoadPresetFromBank
+enum {
+	kAUSamplerProperty_BankAndPreset				= 4100
+};
+	
 	// Deprecated in favor of the newer AudioChannelLayout
 	// structure and its supporting property.
 enum {

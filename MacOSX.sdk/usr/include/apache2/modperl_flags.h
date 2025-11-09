@@ -8,8 +8,8 @@
  * ***********************************
  * 01: lib/ModPerl/Code.pm:733
  * 02: lib/ModPerl/Code.pm:759
- * 03: Makefile.PL:383
- * 04: Makefile.PL:96
+ * 03: Makefile.PL:384
+ * 04: Makefile.PL:97
  */
 
 

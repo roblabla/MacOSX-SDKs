@@ -42,6 +42,7 @@
 
 #ifndef _IP_FW_H
 #define _IP_FW_H
+#ifdef __APPLE_API_OBSOLETE
 
 #include <sys/appleapiopts.h>
 
@@ -300,4 +301,5 @@ struct ipfw_dyn_rule {
  */
 
 #endif /* !IPFW2 */
+#endif /* __APPLE_API_OBSOLETE */
 #endif /* _IP_FW_H */

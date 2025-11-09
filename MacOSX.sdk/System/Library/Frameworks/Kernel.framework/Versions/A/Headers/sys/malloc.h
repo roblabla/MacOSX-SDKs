@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -106,6 +106,9 @@
 #define FREE(addr, type) \
 	_FREE((void *)addr, type)
 
+#define	REALLOC(space, cast, addr, size, type, flags) \
+	(space) = (cast)_REALLOC(addr, size, type, flags)
+
 #define MALLOC_ZONE(space, cast, size, type, flags) \
 	(space) = (cast)_MALLOC_ZONE(size, type, flags)
 
@@ -120,6 +123,12 @@ extern void	*_MALLOC(
 extern void	_FREE(
 			void		*addr,
 			int		type);
+
+extern void	*_REALLOC(
+			void		*addr,
+			size_t		size,
+			int		type,
+			int		flags);
 
 extern void	*_MALLOC_ZONE(
 			size_t		size,

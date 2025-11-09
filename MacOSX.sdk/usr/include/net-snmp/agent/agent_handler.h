@@ -61,6 +61,7 @@ typedef struct netsnmp_mib_handler_s {
                                           struct
                                           netsnmp_agent_request_info_s *,
                                           struct netsnmp_request_info_s *);
+        void (*data_free)(void *myvoid); /**< data free hook for myvoid */
 
         struct netsnmp_mib_handler_s *next;
         struct netsnmp_mib_handler_s *prev;
@@ -206,21 +207,21 @@ typedef int (Netsnmp_Node_Handler) (netsnmp_mib_handler *handler,
     netsnmp_handler_registration *
     netsnmp_handler_registration_create(const char *name,
                                         netsnmp_mib_handler *handler,
-                                        oid * reg_oid, size_t reg_oid_len,
+                                        const oid * reg_oid, size_t reg_oid_len,
                                         int modes);
     netsnmp_handler_registration *
     netsnmp_create_handler_registration(const char *name, Netsnmp_Node_Handler*
-                                        handler_access_method, oid *reg_oid,
-                                        size_t reg_oid_len, int modes);
+                                        handler_access_method,
+                                        const oid *reg_oid, size_t reg_oid_len,
+                                        int modes);
 
-    NETSNMP_INLINE netsnmp_delegated_cache
+    netsnmp_delegated_cache
         *netsnmp_create_delegated_cache(netsnmp_mib_handler *,
                                         netsnmp_handler_registration *,
                                         netsnmp_agent_request_info *,
                                         netsnmp_request_info *, void *);
-    NETSNMP_INLINE void netsnmp_free_delegated_cache(netsnmp_delegated_cache
-                                                 *dcache);
-    NETSNMP_INLINE netsnmp_delegated_cache
+    void netsnmp_free_delegated_cache(netsnmp_delegated_cache *dcache);
+    netsnmp_delegated_cache
         *netsnmp_handler_check_cache(netsnmp_delegated_cache *dcache);
     void            netsnmp_register_handler_by_name(const char *,
                                                      netsnmp_mib_handler
@@ -228,22 +229,24 @@ typedef int (Netsnmp_Node_Handler) (netsnmp_mib_handler *handler,
 
     void            netsnmp_clear_handler_list(void);
 
-    NETSNMP_INLINE void
+    void
         netsnmp_request_add_list_data(netsnmp_request_info *request,
                                       netsnmp_data_list *node);
+    int netsnmp_request_remove_list_data(netsnmp_request_info *request,
+                                         const char *name);
 
-    NETSNMP_INLINE int
+    int
         netsnmp_request_remove_list_data(netsnmp_request_info *request,
                                          const char *name);
 
-    NETSNMP_INLINE void    *netsnmp_request_get_list_data(netsnmp_request_info
+    void    *netsnmp_request_get_list_data(netsnmp_request_info
                                                   *request,
                                                   const char *name);
 
-    NETSNMP_INLINE void
+    void
               netsnmp_free_request_data_set(netsnmp_request_info *request);
 
-    NETSNMP_INLINE void
+    void
              netsnmp_free_request_data_sets(netsnmp_request_info *request);
 
     void            netsnmp_handler_free(netsnmp_mib_handler *);

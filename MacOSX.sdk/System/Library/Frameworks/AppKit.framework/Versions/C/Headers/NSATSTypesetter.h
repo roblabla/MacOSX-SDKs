@@ -1,14 +1,13 @@
 /*
         NSATSTypesetter.h
         Application Kit
-        Copyright (c) 2002-2009, Apple Inc.
+        Copyright (c) 2002-2011, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSTypesetter.h>
 #import <AppKit/NSParagraphStyle.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 @interface NSATSTypesetter : NSTypesetter {
 /* Ivars used for primitive typesetting */
     NSAttributedString *attributedString; // The text backing-store (usually NSTextStorage)
@@ -43,10 +42,9 @@
 @interface NSATSTypesetter (NSPantherCompatibility)
 // This interface is deprecated.
 // Use -getLineFragmentRect:usedRect:forStartingGlyphAtIndex:proposedRect:lineSpacing:paragraphSpacingBefore:paragraphSpacingAfter:remainingRect: instead
-- (NSRect)lineFragmentRectForProposedRect:(NSRect)proposedRect remainingRect:(NSRectPointer)remainingRect DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSRect)lineFragmentRectForProposedRect:(NSRect)proposedRect remainingRect:(NSRectPointer)remainingRect NS_DEPRECATED_MAC(10_3, 10_4);
 @end
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_4
 // The following interfaces are moved to the abstract NSTypesetter class
 
 @interface NSATSTypesetter (NSPrimitiveInterface)
@@ -136,6 +134,4 @@
 - (void)setAttachmentSize:(NSSize)attachmentSize forGlyphRange:(NSRange)glyphRange;
 - (void)setBidiLevels:(const uint8_t *)levels forGlyphRange:(NSRange)glyphRange;
 @end
-#endif /* MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_4 */
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 

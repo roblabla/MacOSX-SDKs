@@ -77,7 +77,7 @@ extern "C"
   /*
    * To unregister service 
    */
-  int UnregisterService (LPCSTR lpszServiceName, int quiet);
+  int UnregisterService (LPCTSTR lpszServiceName, int quiet);
 
   /*
    * To parse command line for startup option 
@@ -93,17 +93,6 @@ extern "C"
    * To display generic windows error 
    */
   VOID DisplayError (LPCTSTR pszTitle, int quite);
-
-  /*
-   * To update windows service status to SCM 
-   */
-  static BOOL UpdateServiceStatus (DWORD dwStatus, DWORD dwErrorCode,
-				   DWORD dwWaitHint);
-
-  /*
-   * To Report current service status to SCM 
-   */
-  static BOOL ReportCurrentServiceStatus (VOID);
 
   /*
    * Service Main function,  Which will spawn a thread, and calls the
@@ -155,7 +144,7 @@ extern "C"
   /*
    * TheadFunction - To spawan as thread - Invokes registered service function 
    */
-  DWORD WINAPI ThreadFunction (LPVOID lpParam);
+  unsigned WINAPI ThreadFunction (LPVOID lpParam);
 
   /*
    * Service STOP function registration with this framewrok

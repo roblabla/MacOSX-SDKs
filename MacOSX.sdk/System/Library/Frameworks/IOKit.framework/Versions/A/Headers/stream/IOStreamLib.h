@@ -52,7 +52,6 @@ typedef struct IOStreamInterface_v1_t ** IOStreamRef;
 
 /*!
     @typedef IOStreamCallback
-    @callback
  */
 typedef void (*IOStreamOutputCallback) (
                                   IOStreamRef stream,
@@ -325,7 +324,7 @@ typedef struct IOStreamInterface_v1_t
         @function GetControlBuffer
      @abstract Get a pointer to the control area of an IOStreamBuffer.
      @param stream The IOStreamRef of the stream owning the buffer.
-     @param buffer The IOStreamBufferID of the buffer to operate on.
+     @param bufferID The IOStreamBufferID of the buffer to operate on.
      @result A pointer to the control buffer area of the IOStreamBuffer,
      or NULL if it does not have a control buffer.
      
@@ -344,27 +343,27 @@ typedef struct IOStreamInterface_v1_t
     IOByteCount (*GetControlBufferLength)( IOStreamRef stream, IOStreamBufferID bufferID );
     
     /*!
-        @function StartStream()
+        @function StartStream
     */
     IOReturn (*StartStream)( IOStreamRef stream );
     
     /*!
-        @function StopStream()
+        @function StopStream
      */
     IOReturn (*StopStream)( IOStreamRef stream );
     
     /*!
-        @function SuspendStream()
+        @function SuspendStream
      */
     IOReturn (*SuspendStream)( IOStreamRef stream );
     
     /*!
-        @function GetMode()
+        @function GetMode
      */
     IOStreamMode (*GetMode)( IOStreamRef stream );
     
     /*!
-        @function SetMode()
+        @function SetMode
      */
     IOReturn (*SetMode)( IOStreamRef stream, IOStreamMode mode );
     

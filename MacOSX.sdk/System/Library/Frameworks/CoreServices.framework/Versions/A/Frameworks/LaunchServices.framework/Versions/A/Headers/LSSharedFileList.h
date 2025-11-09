@@ -1,17 +1,14 @@
 /*
-     File:       LaunchServices/LSSharedFileList.h
+     File:       LSSharedFileList.h
  
      Contains:   Services to load and share file lists.
  
-     Version:    LaunchServices-362.3~1
- 
-     Copyright:  © 2005-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  Copyright 2003-2009 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
 #ifndef __LSSHAREDFILELIST__
 #define __LSSHAREDFILELIST__

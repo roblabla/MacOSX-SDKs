@@ -3,9 +3,9 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-268.0
+     Version:    vecLib-325.4
  
-     Copyright:  © 2000-2010 by Apple Inc., all rights reserved.
+     Copyright:  Â© 2000-2011 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,7 +17,7 @@
 #define __VECLIBTYPES__
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -139,8 +139,28 @@ typedef __m128                          vFloat;
     #endif /* __GNUC__ */
 #endif  /* defined(__SSE2__) */
 
+#elif defined( __ARM_NEON__ )
+	/* To use these types with intrinsics in arm_neon.h on GCC, #define ARM_NEON_GCC_COMPATIBILITY  */
+	#include <arm_neon.h>
+	typedef unsigned char  vUInt8  __attribute__((__vector_size__(16)));
+	typedef signed char    vSInt8  __attribute__((__vector_size__(16)));
+	typedef unsigned short vUInt16 __attribute__((__vector_size__(16)));
+	typedef signed short   vSInt16 __attribute__((__vector_size__(16)));
+	typedef unsigned int   vUInt32 __attribute__((__vector_size__(16)));
+	typedef signed int     vSInt32 __attribute__((__vector_size__(16)));
+	typedef float          vFloat  __attribute__((__vector_size__(16)));
+	typedef double         vDouble __attribute__((__vector_size__(16)));
+	typedef unsigned int   vBool32 __attribute__((__vector_size__(16)));
 #else
-    #error Unknown architecture
+	typedef unsigned char  vUInt8  __attribute__((__vector_size__(16)));
+	typedef signed char    vSInt8  __attribute__((__vector_size__(16)));
+	typedef unsigned short vUInt16 __attribute__((__vector_size__(16)));
+	typedef signed short   vSInt16 __attribute__((__vector_size__(16)));
+	typedef unsigned int   vUInt32 __attribute__((__vector_size__(16)));
+	typedef signed int     vSInt32 __attribute__((__vector_size__(16)));
+	typedef float          vFloat  __attribute__((__vector_size__(16)));
+	typedef double         vDouble __attribute__((__vector_size__(16)));
+	typedef unsigned int   vBool32 __attribute__((__vector_size__(16)));
 #endif  /*  */
 
 

@@ -52,11 +52,21 @@ kern_return_t memory_object_create
 	memory_object_t *new_memory_object
 );
 
-extern boolean_t memory_object_default_server(
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+boolean_t memory_object_default_server(
 		mach_msg_header_t *InHeadP,
 		mach_msg_header_t *OutHeadP);
 
-extern mig_routine_t memory_object_default_server_routine(
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+mig_routine_t memory_object_default_server_routine(
 		mach_msg_header_t *InHeadP);
 
 

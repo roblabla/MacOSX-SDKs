@@ -1,7 +1,7 @@
 /*
 	NSPrintInfo.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -63,19 +63,19 @@ APPKIT_EXTERN NSString *const NSPrintLastPage; // an NSNumber containing the one
 APPKIT_EXTERN NSString *const NSPrintMustCollate; // an NSNumber containing a boolean value
 APPKIT_EXTERN NSString *const NSPrintReversePageOrder; // an NSNumber containing a boolean value
 APPKIT_EXTERN NSString *const NSPrintJobDisposition; // an NSString equal to NSPrintSpoolJob, NSPrintPreviewJob, NSPrintSaveJob, or NSPrintCancelJob
-APPKIT_EXTERN NSString *const NSPrintPagesAcross AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing the number of logical pages to be placed across a physical sheet
-APPKIT_EXTERN NSString *const NSPrintPagesDown AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing the number of logical pages to be placed down a physical sheet
-APPKIT_EXTERN NSString *const NSPrintTime AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSDate containing the time at which printing should begin
-APPKIT_EXTERN NSString *const NSPrintDetailedErrorReporting AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSNumber containing a boolean value
-APPKIT_EXTERN NSString *const NSPrintFaxNumber AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSString containing a fax number
-APPKIT_EXTERN NSString *const NSPrintPrinterName AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // an NSString containing the name of a printer
-APPKIT_EXTERN NSString *const NSPrintSelectionOnly AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // an NSNumber containing a boolean value
-APPKIT_EXTERN NSString *const NSPrintJobSavingURL AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // an NSURL containing the location to which the job file will be saved, for NSPrintSaveJob
-APPKIT_EXTERN NSString *const NSPrintJobSavingFileNameExtensionHidden AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // A boolean NSNumber for whether the job file's name extension should be hidden, for NSPrintSaveJob
+APPKIT_EXTERN NSString *const NSPrintPagesAcross; // an NSNumber containing the number of logical pages to be placed across a physical sheet
+APPKIT_EXTERN NSString *const NSPrintPagesDown; // an NSNumber containing the number of logical pages to be placed down a physical sheet
+APPKIT_EXTERN NSString *const NSPrintTime; // an NSDate containing the time at which printing should begin
+APPKIT_EXTERN NSString *const NSPrintDetailedErrorReporting; // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *const NSPrintFaxNumber; // an NSString containing a fax number
+APPKIT_EXTERN NSString *const NSPrintPrinterName; // an NSString containing the name of a printer
+APPKIT_EXTERN NSString *const NSPrintSelectionOnly NS_AVAILABLE_MAC(10_6); // an NSNumber containing a boolean value
+APPKIT_EXTERN NSString *const NSPrintJobSavingURL NS_AVAILABLE_MAC(10_6); // an NSURL containing the location to which the job file will be saved, for NSPrintSaveJob
+APPKIT_EXTERN NSString *const NSPrintJobSavingFileNameExtensionHidden NS_AVAILABLE_MAC(10_6); // A boolean NSNumber for whether the job file's name extension should be hidden, for NSPrintSaveJob
 
 /* Keys for page adornment attributes that are recognized by NSPrintInfo.
 */
-APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // a boolean NSNumber for whether the results of -[NSView pageHeader] and -[NSView pageFooter] should be drawn on pages
+APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter; // a boolean NSNumber for whether the results of -[NSView pageHeader] and -[NSView pageFooter] should be drawn on pages
 
 @interface NSPrintInfo : NSObject<NSCopying, NSCoding> {
     @private
@@ -101,11 +101,11 @@ APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter AVAILABLE_MAC_OS_X_VERSION_
 - (void)setPaperName:(NSString *)name;
 - (void)setPaperSize:(NSSize)size;
 - (void)setOrientation:(NSPrintingOrientation)orientation;
-- (void)setScalingFactor:(CGFloat)scalingFactor AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setScalingFactor:(CGFloat)scalingFactor NS_AVAILABLE_MAC(10_6);
 - (NSString *)paperName;
 - (NSSize)paperSize;
 - (NSPrintingOrientation)orientation;
-- (CGFloat)scalingFactor AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (CGFloat)scalingFactor NS_AVAILABLE_MAC(10_6);
 
 /* Set or get the values of the pagination attributes.
 */
@@ -140,50 +140,44 @@ APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter AVAILABLE_MAC_OS_X_VERSION_
 */
 - (void)setUpPrintOperationDefaultValues;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 
 /* Return the imageable area of a page specified by this object, taking into account the current printer, paper, and orientation settings, but not scaling. "Imageable area" is the maximum area that can possibly be marked on by the printer hardware, not the area defined by the current margin settings. The rectangle is in a coordinate space measured by points, with (0, 0) being the lower-left corner of the oriented page and (paperWidth, paperHeight) being the upper-right corner of the oriented page. The imageable bounds may extend past the edges of the page when, for example, a printer driver specifies it so that borderless printing can be done reliably.
 */
 - (NSRect)imageablePageBounds;
 
-#endif
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 /* Return the human-readable name of the currently selected paper size, suitable for presentation in user interfaces.  This will typically be different from the name returned by -paperName, which is almost never suitable for presentation to to the user.
 */
 - (NSString *)localizedPaperName;
 
-#endif
 
 /* Return the default printer, if one has been selected by the user, nil otherwise.
 */
 + (NSPrinter *)defaultPrinter;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 /* The print info's print settings. You can put values in this dictionary to store them in any preset that the user creates while editing this print info with a print panel. Such values must be property list objects. This class is key-value coding (KVC) and key-value observing (KVO) compliant for "printSettings" so you can often bind controls in print panel accessory views directly to entries in this dictionary. You can also use this dictionary to get values that have been set by other parts of the printing system, like a printer driver's print dialog extension (the same sort of values that are returned by the Carbon Printing Manager's PMPrintSettingsGetValue() function). Other parts of the printing system often use key strings like "com.apple.print.PrintSettings.PMColorSyncProfileID" but dots like those in key strings wouldn't work well with KVC, so those dots are replaced with underscores in keys that appear in this dictionary, as in "com_apple_print_PrintSettings_PMColorSyncProfileID". You should use the same convention when adding entries to this dictionary.
 */
-- (NSMutableDictionary *)printSettings;
+- (NSMutableDictionary *)printSettings NS_AVAILABLE_MAC(10_5);
 
 /* Return a Printing Manager PMPrintSession, PMPageFormat, or PMPrintSettings object, respectively. The returned object is always consistent with the state of the NSPrintInfo at the moment the method is invoked, but isn't necessarily updated immediately if other NSPrintInfo methods like -setPaperSize: and -setPaperOrientation: are invoked. The returned object will always be valid (in the Printing Manager sense). If you set any values in the returned PMPageFormat or PMPrintSettings you should afterward invoke -updateFromPMPageFormat or -updateFromPMPrintSettings, respectively. You don't also have to call PMSessionValidatePageFormat() or PMSessionValidatePrintSettings() if you do that. You should not call PMRelease() for the returned object, except of course to balance any calls of PMRetain() you do.
 */
-- (void *)PMPrintSession; // the result should be cast to PMPrintSession
-- (void *)PMPageFormat; // the result should be cast to PMPageFormat
-- (void *)PMPrintSettings; // the result should be cast to PMPrintSettings
+- (void *)PMPrintSession NS_AVAILABLE_MAC(10_5); // the result should be cast to PMPrintSession
+- (void *)PMPageFormat NS_AVAILABLE_MAC(10_5); // the result should be cast to PMPageFormat
+- (void *)PMPrintSettings NS_AVAILABLE_MAC(10_5); // the result should be cast to PMPrintSettings
 
 /* Given that the NSPrintInfo's PMPageFormat or PMPrintSettings has been changed by something other than the NSPrintInfo itself, update the NSPrintInfo to be consistent.
 */
-- (void)updateFromPMPageFormat;
-- (void)updateFromPMPrintSettings;
+- (void)updateFromPMPageFormat NS_AVAILABLE_MAC(10_5);
+- (void)updateFromPMPrintSettings NS_AVAILABLE_MAC(10_5);
 
-#endif
 
 
 /* Set or get whether only the selected content should be printed.
 */
-- (void)setSelectionOnly:(BOOL)selectionOnly AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (BOOL)isSelectionOnly AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setSelectionOnly:(BOOL)selectionOnly NS_AVAILABLE_MAC(10_6);
+- (BOOL)isSelectionOnly NS_AVAILABLE_MAC(10_6);
 
 @end
 
@@ -191,21 +185,21 @@ APPKIT_EXTERN NSString *const NSPrintHeaderAndFooter AVAILABLE_MAC_OS_X_VERSION_
 
 /* A method that was deprecated in Mac OS 10.2. +[NSPrintInfo setDefaultPrinter:] does nothing.
 */
-+ (void)setDefaultPrinter:(NSPrinter *)printer DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
++ (void)setDefaultPrinter:(NSPrinter *)printer NS_DEPRECATED_MAC(10_0, 10_2);
 
 /* A method that was deprecated in Mac OS 10.2. NSPrintInfo's implementation of this method recognizes only a small fixed set of paper names, and does not take the details of any particular printer into account. You should use -[NSPrinter pageSizeForPaper:] instead.
 */
-+ (NSSize)sizeForPaperName:(NSString *)name DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
++ (NSSize)sizeForPaperName:(NSString *)name NS_DEPRECATED_MAC(10_0, 10_2);
 
 @end
 
 /* Keys for attributes that were deprecated in Mac OS 10.2. NSPrintInfo does not recognizes these attributes. For backward binary compatibility, -[NSPrintInfo setUpPrintOperationDefaultValues] does however set default values for the NSPrintJobFeatures (an empty dictionary) and NSPrintPagesPerSheet (1) attributes.
 */
-APPKIT_EXTERN NSString *const NSPrintFormName DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
-APPKIT_EXTERN NSString *const NSPrintJobFeatures DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
-APPKIT_EXTERN NSString *const NSPrintManualFeed DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
-APPKIT_EXTERN NSString *const NSPrintPagesPerSheet DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
-APPKIT_EXTERN NSString *const NSPrintPaperFeed DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
+APPKIT_EXTERN NSString *const NSPrintFormName NS_DEPRECATED_MAC(10_0, 10_2);
+APPKIT_EXTERN NSString *const NSPrintJobFeatures NS_DEPRECATED_MAC(10_0, 10_2);
+APPKIT_EXTERN NSString *const NSPrintManualFeed NS_DEPRECATED_MAC(10_0, 10_2);
+APPKIT_EXTERN NSString *const NSPrintPagesPerSheet NS_DEPRECATED_MAC(10_0, 10_2);
+APPKIT_EXTERN NSString *const NSPrintPaperFeed NS_DEPRECATED_MAC(10_0, 10_2);
 
 /* A key for an attribute that was deprecated in Mac OS 10.6. You can use NSPrintJobSavingURL instead.
 */

@@ -43,13 +43,16 @@ Define the Kind IDs for Universal and Standard Printing Dialog Extensions.
 #define kPMImagingOptionsPDEKindID		CFSTR("com.apple.print.pde.ImagingOptionsKind")
 #define kPMFaxCoverPagePDEKindID		CFSTR("com.apple.print.pde.FaxCoverPageKind")
 #define kPMFaxModemPDEKindID			CFSTR("com.apple.print.pde.FaxModemKind")
+#define kPMFaxAddressesPDEKindID		CFSTR("com.apple.print.pde.FaxAddressesKind")
 #define kPMPaperHandlingPDEKindID		CFSTR("com.apple.print.pde.PaperHandlingKind")
 #define kPMPDFEffectsPDEKindID			CFSTR("com.apple.print.pde.PDFEffects")
 #define kPMSummaryPanelKindID			CFSTR("com.apple.print.pde.SummaryKind")
+#define kPMUniPrinterPDEKindID			CFSTR("com.apple.print.pde.UniPrinterKind")
 /* Unimplemented Universal */
 #define kPMPaperSourcePDEKindID         CFSTR("com.apple.print.pde.PaperSourceKind")
 #define kPMPriorityPDEKindID            CFSTR("com.apple.print.pde.PriorityKind")
 #define kPMRotationScalingPDEKindID     CFSTR("com.apple.print.pde.RotationScalingKind")
+#define kPMUnsupportedPDEKindID			CFSTR("com.apple.print.pde.UnsupportedPDEKind")
 /* Implemented Standard */
 #define kPMErrorHandlingPDEKindID		CFSTR("com.apple.print.pde.ErrorHandlingKind")
 #define kPMPaperFeedPDEKindID           CFSTR("com.apple.print.pde.PaperFeedKind")
@@ -57,11 +60,13 @@ Define the Kind IDs for Universal and Standard Printing Dialog Extensions.
 #define kPMInkPDEKindID					CFSTR("com.apple.print.pde.InkKind")
 /* Unimplemented Standard */
 #define kPMColorPDEKindID               CFSTR("com.apple.print.pde.ColorKind")
-#define kPMQualityMediaPDEKindID        CFSTR("com.apple.print.pde.QualityMediaPDEKind")
+#define kPMMediaQualityPDEKindID        CFSTR("com.apple.print.pde.MediaQualityPDEKind")
 
 /* Key to represent information about display order for Cocoa summary info */
 #define	SUMMARY_DISPLAY_ORDER		CFSTR("Summary Display Order")
 
+/*  Boolean key in the Bundle's Info.plist file that sepecifies whether the PDEPanels created by the Bundle are Sandbox compatible */
+#define kPMSandboxCompatiblePDEs	CFSTR("PMSandboxCompatiblePDEs")
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Type Definitions

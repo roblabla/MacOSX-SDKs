@@ -5,15 +5,13 @@
     Public header file.
 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 #import <Cocoa/Cocoa.h>
+#import <Automator/AMAttributesForAnalyzer.h>
 
 @class AMWorkflow;
 @class AMWorkflowController;
 
-@interface AMWorkflowView : NSView 
-{	
+@interface AMWorkflowView : NSView {	
 @private
 	AMWorkflowController *_workflowController;
 	NSMutableArray *_actionViewControllers;
@@ -21,7 +19,7 @@
 	NSString *_messageString;
 	NSBezierPath *_messagePath;
 	id _variablesEditorController;
-	id _showWhenRunController;
+	AM_UNUSED_FOR_ANALYZER id _showWhenRunController;
 	struct __AMWorkflowViewFlags {
 		BOOL ignoreSubviewFrameChanges:1;
 		BOOL editingEnabled:1;
@@ -38,4 +36,3 @@
 
 @end
 
-#endif

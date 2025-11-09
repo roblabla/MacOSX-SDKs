@@ -13,7 +13,7 @@
 @interface CAAnimation : NSObject <NSCoding, NSCopying, CAMediaTiming, CAAction>
 {
 @private
-  struct _CAAttrList *_attr;
+  void *_attr;
   uint32_t _flags;
 }
 
@@ -67,7 +67,7 @@
 
 @interface CAPropertyAnimation : CAAnimation
 
-/* Creates a new animation object with it's `keyPath' property set to
+/* Creates a new animation object with its `keyPath' property set to
  * 'path'. */
 
 + (id)animationWithKeyPath:(NSString *)path;
@@ -108,7 +108,7 @@
 /* The objects defining the property values being interpolated between.
  * All are optional, and no more than two should be non-nil. The object
  * type should match the type of the property being animated (using the
- * standard rules described in CALayer.h.) The supported modes of
+ * standard rules described in CALayer.h). The supported modes of
  * animation are:
  *
  * - both `fromValue' and `toValue' non-nil. Interpolates between
@@ -167,11 +167,32 @@
 
 @property(copy) NSArray *timingFunctions;
 
-/* The "calculation mode". Possible values are `linear', `discrete' and
- * `paced'. Defaults to `linear'. When set to `paced' the `keyTimes' and
- * `timingFunctions' properties of the animation are ignored. */
+/* The "calculation mode". Possible values are `discrete', `linear',
+ * `paced', `cubic' and `cubicPaced'. Defaults to `linear'. When set to
+ * `paced' or `cubicPaced' the `keyTimes' and `timingFunctions'
+ * properties of the animation are ignored and calculated implicitly. */
 
 @property(copy) NSString *calculationMode;
+
+/* For animations with the cubic calculation modes, these properties
+ * provide control over the interpolation scheme. Each keyframe may
+ * have a tension, continuity and bias value associated with it, each
+ * in the range [-1, 1] (this defines a Kochanek-Bartels spline, see
+ * http://en.wikipedia.org/wiki/Kochanek-Bartels_spline).
+ *
+ * The tension value controls the "tightness" of the curve (positive
+ * values are tighter, negative values are rounder). The continuity
+ * value controls how segments are joined (positive values give sharp
+ * corners, negative values give inverted corners). The bias value
+ * defines where the curve occurs (positive values move the curve before
+ * the control point, negative values move it after the control point).
+ *
+ * The first value in each array defines the behavior of the tangent to
+ * the first control point, the second value controls the second
+ * point's tangents, and so on. Any unspecified values default to zero
+ * (giving a Catmull-Rom spline if all are unspecified). */
+
+@property(copy) NSArray *tensionValues, *continuityValues, *biasValues;
 
 /* Defines whether or objects animating along paths rotate to match the
  * path tangent. Possible values are `auto' and `autoReverse'. Defaults
@@ -191,6 +212,10 @@ CA_EXTERN NSString * const kCAAnimationDiscrete
     __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
 CA_EXTERN NSString * const kCAAnimationPaced
     __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
+CA_EXTERN NSString * const kCAAnimationCubic
+    __OSX_AVAILABLE_STARTING (__MAC_10_7, __IPHONE_4_0);
+CA_EXTERN NSString * const kCAAnimationCubicPaced
+    __OSX_AVAILABLE_STARTING (__MAC_10_7, __IPHONE_4_0);
 
 /* `rotationMode' strings. */
 

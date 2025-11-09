@@ -1,7 +1,7 @@
 /*
 	NSPrintOperation.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -20,6 +20,20 @@ enum {
     NSUnknownPageOrder			= 2  // No page order written out
 };
 typedef NSInteger NSPrintingPageOrder;
+
+#if MAC_OS_X_VERSION_10_7 <= MAC_OS_X_VERSION_MAX_ALLOWED
+enum {
+    /* Render at the best quality you can regardless of how slow that may be
+    */
+    NSPrintRenderingQualityBest,
+
+    /* Sacrifice the least possible amount of rendering quality for speed to maintain a responsive user interface. 
+       Note: Only do this after establishing that best quality rendering does indeed make the user interface unresponsive.
+    */
+    NSPrintRenderingQualityResponsive
+};
+#endif
+typedef NSInteger NSPrintRenderingQuality;
 
 /* An exception that may be thrown by the factory methods described below.
 */
@@ -51,16 +65,16 @@ APPKIT_EXTERN NSString *NSPrintOperationExistsException;
 */
 - (BOOL)isCopyingOperation;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+/* If the print sheet is unresponsive or sluggish due to the time is takes you to fully render a page, you can check this method in drawRect and other printing methods such as beginDocument and knowsPageRage: to determine if the print operation prefers speed over fidelity. Please see the comments for NSPrintRenderingQuality. Most applications render each page fast enough and do not need to call this method.
+*/
+- (NSPrintRenderingQuality)preferredRenderingQuality NS_AVAILABLE_MAC(10_7);
 
 /* The title of the print job. If a job title is set it overrides anything that might be gotten by sending the printed view an [NSView(NSPrinting) printJobTitle] message.
 */
-- (void)setJobTitle:(NSString *)jobTitle;
-- (NSString *)jobTitle;
+- (void)setJobTitle:(NSString *)jobTitle NS_AVAILABLE_MAC(10_5);
+- (NSString *)jobTitle NS_AVAILABLE_MAC(10_5);
 
-#endif
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 /* Whether the print and progress panels are shown during the operation.
 */
@@ -69,7 +83,6 @@ APPKIT_EXTERN NSString *NSPrintOperationExistsException;
 - (void)setShowsProgressPanel:(BOOL)flag;
 - (BOOL)showsProgressPanel;
 
-#endif
 
 /* The print panel to be presented by the operation when it is run, if showsProgressPanel is YES and isCopyingOperation is NO. -printPanel will create a new NSPrintPanel if one hasn't been set yet.
 */
@@ -111,13 +124,10 @@ This can only be invoked once. Create a new NSPrintOperation instance for each o
 */
 - (NSGraphicsContext *)context;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 /* The first through last one-based page numbers of the operation as it's being previewed or printed. The first page number might not be 1, and the page count might be NSIntegerMax to indicate that the number of pages is not known, depending on what the printed view returned when sent an [NSView(NSPrinting) knowsPageRange:] message.
 */
-- (NSRange)pageRange;
+- (NSRange)pageRange NS_AVAILABLE_MAC(10_5);
 
-#endif
 
 /* The current one-based page number of the operation as it's being previewed or printed.
 */
@@ -136,15 +146,15 @@ This can only be invoked once. Create a new NSPrintOperation instance for each o
 
 /* Methods that were deprecated in Mac OS 10.5. You can merely get the NSPrintPanel of the operation and invoke these methods on the result instead of invoking them on the operation. In Mac OS 10.5 -setAccessoryView:/-accessoryView are deprecated in NSPageLayout and NSPrintPanel too. You should consider using those class' support for NSViewControllers instead.
 */
-- (void)setAccessoryView:(NSView *)view DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (NSView *)accessoryView DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setAccessoryView:(NSView *)view NS_DEPRECATED_MAC(10_0, 10_5);
+- (NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
 
-- (void)setJobStyleHint:(NSString *)hint AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-- (NSString *)jobStyleHint AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+- (void)setJobStyleHint:(NSString *)hint NS_DEPRECATED_MAC(10_2, 10_5);
+- (NSString *)jobStyleHint NS_DEPRECATED_MAC(10_2, 10_5);
 
 /* Methods that were deprecated in Mac OS 10.4. Use the new -setShowsPrintPanel:/-showsPrintPanel and -setShowsProgressPanel:/-showsProgressPanel methods instead.
 */
-- (void)setShowPanels:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (BOOL)showPanels DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setShowPanels:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_4);
+- (BOOL)showPanels NS_DEPRECATED_MAC(10_0, 10_4);
 
 @end

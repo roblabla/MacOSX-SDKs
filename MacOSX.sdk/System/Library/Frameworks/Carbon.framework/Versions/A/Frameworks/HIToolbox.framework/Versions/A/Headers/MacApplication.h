@@ -3,7 +3,7 @@
  
      Contains:   Application-level APIs
  
-     Version:    HIToolbox-463~1
+     Version:    HIToolbox-567.2~1
  
      Copyright:  © 2000-2008 by Apple Inc., all rights reserved.
  
@@ -163,6 +163,15 @@ enum {
    * occupied by the menubar. Only valid with kUIModeAllHidden.
    */
   kUIOptionAutoShowMenuBar      = 1 << 0,
+
+  /*
+   * Requests that the menubar animate on or offscreen, if the UIMode
+   * is also being changed such that the menubar will change
+   * visibility. Unlike other UI options, this option is not stored and
+   * only affects the behavior of this call to SetSystemUIMode. Valid
+   * for all modes. Available in Mac OS X 10.7 and later.
+   */
+  kUIOptionAnimateMenuBar       = 1 << 1,
 
   /*
    * Disables all items in the Apple menu. Valid for all modes.

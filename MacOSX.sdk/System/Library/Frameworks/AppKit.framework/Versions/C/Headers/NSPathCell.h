@@ -1,13 +1,12 @@
 /*
     NSPathCell.h
     Application Kit
-    Copyright (c) 2005-2009, Apple Inc.
+    Copyright (c) 2005-2011, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 #import <AppKit/NSActionCell.h>
 
@@ -37,17 +36,14 @@ enum {
 */
     NSPathStyleStandard,
     
-/* The navigation bar display style and behavior. Similar to the NSPathStyleStandard with the navigation bar drawing style, which looks like a segemented button with large chevrons between cells. Also known as the "bread crumb" style.
-*/
-    NSPathStyleNavigationBar,
-    
 /* The pop up display style and behavior. Only the last path component is displayed with an image/icon and path component. The full path is shown when you click on the cell. If the cell isEditable, an option will be shown to select a different path.
 */
-    NSPathStylePopUp,
+    NSPathStylePopUp = 2,
 };
 
 typedef NSInteger NSPathStyle;
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSPathCell : NSActionCell <NSOpenSavePanelDelegate> {
 @private
     NSColor *_backgroundColor;
@@ -62,7 +58,8 @@ typedef NSInteger NSPathStyle;
     SEL _doubleAction;
     id _delegate;
     struct {
-        unsigned int reserved:32;
+        unsigned int cbs:4;
+        unsigned int reserved:28;
     } _piFlags;
     NSPathStyle _pathStyle;
     id _aux;
@@ -158,4 +155,10 @@ typedef NSInteger NSPathStyle;
 
 @end
 
-#endif
+
+enum {
+/* This style is deprecated as of Mac OS X 10.7. Please use one of the other NSPathStyle values.
+*/
+    NSPathStyleNavigationBar = 1
+};
+

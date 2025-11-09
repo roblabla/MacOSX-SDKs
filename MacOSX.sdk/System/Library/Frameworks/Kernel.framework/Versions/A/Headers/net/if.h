@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -96,6 +96,7 @@
 #define KEV_DL_LINK_ADDRESS_CHANGED	16
 #define KEV_DL_WAKEFLAGS_CHANGED	17
 #define KEV_DL_IF_IDLE_ROUTE_REFCNT	18
+#define KEV_DL_IFCAP_CHANGED		19
 
 #include <net/if_var.h>
 #include <sys/types.h>
@@ -120,6 +121,40 @@
 #define	IFF_ALTPHYS	IFF_LINK2	/* use alternate physical connection */
 #define	IFF_MULTICAST	0x8000		/* supports multicast */
 
+
+/*
+ * Capabilities that interfaces can advertise.
+ *
+ * struct ifnet.if_capabilities
+ *   contains the optional features & capabilities a particular interface
+ *   supports (not only the driver but also the detected hw revision).
+ *   Capabilities are defined by IFCAP_* below.
+ * struct ifnet.if_capenable
+ *   contains the enabled (either by default or through ifconfig) optional
+ *   features & capabilities on this interface.
+ *   Capabilities are defined by IFCAP_* below.
+ * struct if_data.ifi_hwassist in IFNET_* form, defined in net/kpi_interface.h,
+ *   contains the enabled optional features & capabilites that can be used
+ *   individually per packet and are specified in the mbuf pkthdr.csum_flags
+ *   field.  IFCAP_* and IFNET_* do not match one to one and IFNET_* may be
+ *   more detailed or differenciated than IFCAP_*.
+ *   IFNET_* hwassist flags have corresponding CSUM_* in sys/mbuf.h
+ */         
+#define IFCAP_RXCSUM            0x00001 /* can offload checksum on RX */
+#define IFCAP_TXCSUM            0x00002 /* can offload checksum on TX */
+#define IFCAP_VLAN_MTU          0x00004 /* VLAN-compatible MTU */
+#define IFCAP_VLAN_HWTAGGING    0x00008 /* hardware VLAN tag support */
+#define IFCAP_JUMBO_MTU         0x00010 /* 9000 byte MTU supported */
+#define IFCAP_TSO4              0x00020 /* can do TCP Segmentation Offload */
+#define IFCAP_TSO6              0x00040 /* can do TCP6 Segmentation Offload */
+#define IFCAP_LRO               0x00080 /* can do Large Receive Offload */
+#define IFCAP_AV		0x00100 /* can do 802.1 AV Bridging */
+
+#define IFCAP_HWCSUM    (IFCAP_RXCSUM | IFCAP_TXCSUM)
+#define IFCAP_TSO       (IFCAP_TSO4 | IFCAP_TSO6)
+
+#define IFCAP_VALID (IFCAP_HWCSUM | IFCAP_TSO | IFCAP_LRO | IFCAP_VLAN_MTU | \
+	IFCAP_VLAN_HWTAGGING | IFCAP_JUMBO_MTU | IFCAP_AV)
 
 #define	IFQ_MAXLEN	50
 #define	IFNET_SLOWHZ	1		/* granularity is 1 second */
@@ -277,6 +312,7 @@ struct	ifreq {
 		struct	ifkpi	ifru_kpi;
 		u_int32_t ifru_wake_flags;
 		u_int32_t ifru_route_refcnt;
+		int     ifru_cap[2];
 	} ifr_ifru;
 #define	ifr_addr	ifr_ifru.ifru_addr	/* address */
 #define	ifr_dstaddr	ifr_ifru.ifru_dstaddr	/* other end of p-to-p link */
@@ -297,6 +333,8 @@ struct	ifreq {
 #define ifr_kpi		ifr_ifru.ifru_kpi
 #define ifr_wake_flags	ifr_ifru.ifru_wake_flags /* wake capabilities of devive */
 #define ifr_route_refcnt ifr_ifru.ifru_route_refcnt /* route references on interface */
+#define ifr_reqcap      ifr_ifru.ifru_cap[0]    /* requested capabilities */
+#define ifr_curcap      ifr_ifru.ifru_cap[1]    /* current capabilities */
 };
 
 #define	_SIZEOF_ADDR_IFREQ(ifr) \

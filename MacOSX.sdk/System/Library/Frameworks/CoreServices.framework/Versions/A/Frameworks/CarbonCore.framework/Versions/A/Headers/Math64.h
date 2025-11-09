@@ -3,7 +3,7 @@
  
      Contains:   64-bit integer math Interfaces.
  
-     Version:    CarbonCore-861.39~1
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 1994-2008 by Apple Computer, Inc., all rights reserved
  
@@ -1359,20 +1359,20 @@ SInt64ToUInt64(SInt64 value);
 
    #if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199409L
 
-      static inline wide  SInt64ToWide ( SInt64 s ) { wide result; result.hi = ( s >> 32 ); result.lo = ( s & 0xffffffffUL ); return result; }
-       static inline SInt64 WideToSInt64 ( wide w ) { SInt64 result = w.hi; result = ( result << 32 ) | ( w.lo ); return result; }
+      static inline wide  SInt64ToWide ( SInt64 s ) { wide result; result.hi = (SInt32)(((s)>>32)&0xffffffffUL); result.lo = (UInt32)((s)&0xffffffffUL); return result; }
+        static inline SInt64 WideToSInt64 ( wide w ) { SInt64 result = w.hi; result = ( result << 32 ) | ( w.lo ); return result; }
 
-       static inline UnsignedWide  UInt64ToUnsignedWide ( UInt64 u ) { UnsignedWide result; result.hi = ( u >> 32 ); result.lo = ( u & 0xffffffffUL ); return result; }
-       static inline UInt64 UnsignedWideToUInt64 ( UnsignedWide uw ) { UInt64 result = uw.hi; result = ( result << 32 ) | ( uw.lo ); return result; }
+       static inline UnsignedWide  UInt64ToUnsignedWide ( UInt64 u ) { UnsignedWide result; result.hi = (SInt32)(((u)>>32)&0xffffffffUL); result.lo = (UInt32)((u)&0xffffffffUL); return result; }
+        static inline UInt64 UnsignedWideToUInt64 ( UnsignedWide uw ) { UInt64 result = uw.hi; result = ( result << 32 ) | ( uw.lo ); return result; }
 
 
    #elif defined(__GNUC__)
 
-       static __inline wide    SInt64ToWide ( SInt64 s ) { wide result; result.hi = ( s >> 32 ); result.lo = ( s & 0xffffffffUL ); return result; }
-       static __inline SInt64 WideToSInt64 ( wide w ) { SInt64 result = w.hi; result = ( result << 32 ) | ( w.lo ); return result; }
+       static __inline wide    SInt64ToWide ( SInt64 s ) { wide result; result.hi = (SInt32)(((s)>>32)&0xffffffffUL); result.lo = (UInt32)((s)&0xffffffffUL); return result; }
+        static __inline SInt64 WideToSInt64 ( wide w ) { SInt64 result = w.hi; result = ( result << 32 ) | ( w.lo ); return result; }
 
-     static __inline UnsignedWide    UInt64ToUnsignedWide ( UInt64 u ) { UnsignedWide result; result.hi = ( u >> 32 ); result.lo = ( u & 0xffffffffUL ); return result; }
-       static __inline UInt64 UnsignedWideToUInt64 ( UnsignedWide uw ) { UInt64 result = uw.hi ; result = ( result << 32 ) | ( uw.lo ); return result; }
+     static __inline UnsignedWide    UInt64ToUnsignedWide ( UInt64 u ) { UnsignedWide result; result.hi = (SInt32)(((u)>>32)&0xffffffffUL); result.lo = (UInt32)((u)&0xffffffffUL); return result; }
+        static __inline UInt64 UnsignedWideToUInt64 ( UnsignedWide uw ) { UInt64 result = uw.hi ; result = ( result << 32 ) | ( uw.lo ); return result; }
 
 
    #else

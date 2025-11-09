@@ -108,7 +108,7 @@ extern ICAError
 ICDNewObject(
     ICD_NewObjectPB*  pb,
     ICDCompletion     completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //------------------------------------------------------------------------------------------------------------- ICDDisposeObject
 /*!
@@ -144,7 +144,7 @@ extern ICAError
 ICDDisposeObject(
     ICD_DisposeObjectPB*  pb,
     ICDCompletion         completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //------------------------------------------------------------------------------------------------------------------------------
 

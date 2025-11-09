@@ -43,7 +43,7 @@ Returns the plug-in instance for this plug-in view controller.
 /*
 Override this method to return a new (not autoreleased) QCPlugInViewController instance for the plug-in instance.
 */
-- (QCPlugInViewController*) createViewController;
+- (QCPlugInViewController*) createViewController NS_RETURNS_RETAINED;
 
 @end
 

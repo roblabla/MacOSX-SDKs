@@ -1,21 +1,17 @@
 /*	
     NSURLError.h
-    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
     
     Public header file.
 */
 
-// Note: To use the APIs described in these headers, you must perform
-// a runtime check for Foundation-462.1 or later.
-#import <AvailabilityMacros.h>
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 // Retrieve kCFURLError* values used in the NSURLError* assignments
-#if DEPLOYMENT_TARGET_EMBEDDED || DEPLOYMENT_TARGET_WINDOWS
+#if TARGET_OS_EMBEDDED || TARGET_OS_IPHONE || TARGET_OS_WIN32
 #import <CFNetwork/CFNetwork.h>
 #else
 #import <CoreServices/CoreServices.h>
 #endif
+#import <Foundation/NSObjCRuntime.h>
 
 @class NSString;
 
@@ -23,33 +19,33 @@
     @discussion Constants used by NSError to differentiate between "domains" of error codes, serving as a discriminator for error codes that originate from different subsystems or sources.
     @constant WebFoundationErrorDomain Indicates a WebFoundation error.
 */
-extern NSString * const NSURLErrorDomain;
+FOUNDATION_EXPORT NSString * const NSURLErrorDomain;
 
 /*!
     @const NSURLErrorFailingURLErrorKey
     @abstract The NSError userInfo dictionary key used to store and retrieve the URL which caused a load to fail.
 */
-extern NSString * const NSURLErrorFailingURLErrorKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLErrorKey NS_AVAILABLE(10_6, 4_0);
 
 /*!
     @const NSURLErrorFailingURLStringErrorKey
     @abstract The NSError userInfo dictionary key used to store and retrieve the NSString object for the URL which caused a load to fail.
     @discussion This constant supersedes NSErrorFailingURLStringKey, which was deprecated in Mac OS X 10.6.  Both constants refer to the same value for backward-compatibility, but this symbol name has a better prefix.
 */
-extern NSString * const NSURLErrorFailingURLStringErrorKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLStringErrorKey NS_AVAILABLE(10_6, 4_0);
 
 /*!
     @const NSErrorFailingURLStringKey
     @abstract The NSError userInfo dictionary key used to store and retrieve the NSString object for the URL which caused a load to fail.
     @discussion This constant is deprecated in Mac OS X 10.6, and is superseded by NSURLErrorFailingURLStringErrorKey.  Both constants refer to the same value for backward-compatibility, but the new symbol name has a better prefix.
 */
-extern NSString * const NSErrorFailingURLStringKey DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSErrorFailingURLStringKey NS_DEPRECATED(10_0, 10_6, 2_0, 4_0);
 
 /*!
     @const NSURLErrorFailingURLPeerTrustErrorKey
     @abstract The NSError userInfo dictionary key used to store and retrieve the SecTrustRef object representing the state of a failed SSL handshake.
  */
-extern NSString * const NSURLErrorFailingURLPeerTrustErrorKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLPeerTrustErrorKey NS_AVAILABLE(10_6, 4_0);
 
 /*!
     @enum NSURL-related Error Codes
@@ -81,7 +77,7 @@ enum
     NSURLErrorFileDoesNotExist = 		kCFURLErrorFileDoesNotExist,
     NSURLErrorFileIsDirectory = 		kCFURLErrorFileIsDirectory,
     NSURLErrorNoPermissionsToReadFile = 	kCFURLErrorNoPermissionsToReadFile,
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_2_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
     NSURLErrorDataLengthExceedsMaximum =	kCFURLErrorDataLengthExceedsMaximum,
 #endif
     
@@ -104,6 +100,12 @@ enum
     NSURLErrorCannotMoveFile = 			kCFURLErrorCannotMoveFile,
     NSURLErrorDownloadDecodingFailedMidStream = kCFURLErrorDownloadDecodingFailedMidStream,
     NSURLErrorDownloadDecodingFailedToComplete =kCFURLErrorDownloadDecodingFailedToComplete,
+
+#if MAC_OS_X_VERSION_10_7 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    NSURLErrorInternationalRoamingOff =         kCFURLErrorInternationalRoamingOff,
+    NSURLErrorCallIsActive =                    kCFURLErrorCallIsActive,
+    NSURLErrorDataNotAllowed =                  kCFURLErrorDataNotAllowed,
+    NSURLErrorRequestBodyStreamExhausted =      kCFURLErrorRequestBodyStreamExhausted,
+#endif
 };
 
-#endif

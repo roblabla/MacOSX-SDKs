@@ -1,8 +1,3 @@
-/*
-* $Xorg: TextP.h,v 1.4 2001/02/09 02:03:46 xorgcvs Exp $
-*/
-
-
 /***********************************************************
 
 Copyright 1987, 1988, 1994, 1998  The Open Group
@@ -49,7 +44,6 @@ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
 SOFTWARE.
 
 ******************************************************************/
-/* $XFree86: xc/lib/Xaw/TextP.h,v 3.21 2001/12/14 19:54:44 dawes Exp $ */
 
 #ifndef _XawTextP_h
 #define _XawTextP_h
@@ -72,6 +66,8 @@ _XFUNCPROTOBEGIN
 
 extern XtActionsRec _XawTextActionsTable[];
 extern Cardinal _XawTextActionsTableCount;
+
+extern char _XawDefaultTextTranslations[];
 
 #define XawLF	  0x0a
 #define XawCR	  0x0d

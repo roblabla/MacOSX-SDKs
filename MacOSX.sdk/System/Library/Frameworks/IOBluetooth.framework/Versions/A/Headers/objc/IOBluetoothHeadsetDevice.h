@@ -3,6 +3,11 @@
 	@header
 	@abstract	APIs for managing a remote Headset device
 	@copywrite	(C) 2006 by Apple Computer, Inc., all rights reserved.
+ 	@discussion
+				 ***		DEPRECATED IN 10.7
+				 ***		You should transition your code to IOBluetoothHandsFreeDevice class.
+				 ***		This API may be removed any time in the future. 
+
  */
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
@@ -39,7 +44,7 @@
 	@param		device A valid IOBluetoothDevice
 	@result		The Headset SDP record for the device on success, nil on failure
  */
-+ (IOBluetoothSDPServiceRecord *) getRequiredSDPServiceRecordForDevice:(IOBluetoothDevice*)device;
++ (IOBluetoothSDPServiceRecord *) getRequiredSDPServiceRecordForDevice:(IOBluetoothDevice*)device DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 //
 /*!
 	@method		getRequiredSDPRFCOMMChannelIDForDevice
@@ -47,7 +52,7 @@
 	@param		device A valid IOBluetoothDevice
 	@result		The SDP specified RFCOMM channel ID for the device on success, 0 on failure
 */
-+ (BluetoothRFCOMMChannelID) getRequiredSDPRFCOMMChannelIDForDevice:(IOBluetoothDevice*)device;
++ (BluetoothRFCOMMChannelID) getRequiredSDPRFCOMMChannelIDForDevice:(IOBluetoothDevice*)device DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 /*!
@@ -65,7 +70,7 @@
  */
 - (id) initWithIncomingDevice: (IOBluetoothDevice *)device 
 	  incomingRFCOMMChannelID: (BluetoothRFCOMMChannelID)incomingRFCOMMChannelID
-					 delegate: (id)inDelegate;
+					 delegate: (id)inDelegate DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 /*!
@@ -77,7 +82,7 @@
 	@result		A newly created IOBluetoothHeadsetDevice object on success, nil on failure
 */
 - (id) initForConnectionToDevice: (IOBluetoothDevice *)device
-						delegate: (id)inDelegate;
+						delegate: (id)inDelegate DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 @end
 
@@ -88,7 +93,7 @@
  @discussion	Returns the headsetgateway SDP record.
  @result		The headset gateway SDP record
  */
-- (IOBluetoothSDPServiceRecord *)headsetAudioGatewayServiceRecord;
+- (IOBluetoothSDPServiceRecord *)headsetAudioGatewayServiceRecord DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
  @method		isHeadsetAudioGateway
@@ -96,7 +101,7 @@
  @discussion	Returns the devices support for headset gateway (obtained from the devices SDP record).
  @result		YES if the device supports headset gateway; otherwise, NO.
  */
-- (BOOL)isHeadsetAudioGateway;
+- (BOOL)isHeadsetAudioGateway DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
  @method		headsetDeviceServiceRecord
@@ -104,7 +109,7 @@
  @discussion	Returns the headset device SDP record.
  @result		The headset device SDP record
  */
-- (IOBluetoothSDPServiceRecord *)headsetDeviceServiceRecord;
+- (IOBluetoothSDPServiceRecord *)headsetDeviceServiceRecord DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
  @method		isHeadsetDevice
@@ -112,7 +117,7 @@
  @discussion	Returns the devices support for headset device (obtained from the devices SDP record).
  @result		YES if the device supports headset device; otherwise, NO.
  */
-- (BOOL)isHeadsetDevice;
+- (BOOL)isHeadsetDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 @end
 

@@ -16,13 +16,27 @@ typedef SInt32 netfsError;
 
 /*
  * Dictionary keys for the server parameters dictionary returned by
+ * GetServerInfo methods and for the open options passed to OpenSession
+ * methods.
+ */
+
+/*
+ * For GetServerInfo, information about the authentication for the connection;
+ * for OpenSession, information about the authentication to use for the
+ * connection.
+ *
+ * This is a dictionary as returned by NAHSelectionCopyAuthInfo().
+ */
+#define kNetFSAuthenticationInfoKey	CFSTR("AuthenticationInfo")
+
+/*
+ * Dictionary keys for the server parameters dictionary returned by
  * GetServerInfo methods.
  *
  * Note:
- * 1)  If Kerberos is supported, then kNetFSKerberosInfoKey is a dictionary
- *     with Kerberos info
- * 2)  kNetFSServerAddressKey is the DNS address or presentation form of the
- *     IP address like "192.168.1.1"
+ * 1)  If an authentication mechanism that uses an authentication info
+ *     dictionary, such as Kerberos or NTLMSSP, is supported, then
+ *     kNetFSAuthenticationInfoKey is that dictionary
  */
 #define kNetFSServerDisplayNameKey	CFSTR("ServerDisplayName")
 #define kNetFSSupportsChangePasswordKey	CFSTR("SupportsChangePassword")
@@ -34,15 +48,12 @@ typedef SInt32 netfsError;
  * XXX - the strings for these will change when NetAuth changes to
  * use these #defines rather than the kMountedBy... #defines.
  */
-#define	kNetFSConnectedWithKerberosKey	CFSTR("MountedByKerberos")
-#define kNetFSConnectedAsUserKey	CFSTR("MountedByUser")
-#define kNetFSConnectedAsGuestKey	CFSTR("MountedByGuest")
-#define kNetFSConnectedMultiUserKey	CFSTR("ConnectedMultiUser")
+#define kNetFSConnectedWithAuthenticationInfoKey	CFSTR("ConnectedWithAuthenticationInfo")
+#define kNetFSConnectedAsUserKey			CFSTR("MountedByUser")
+#define kNetFSConnectedAsGuestKey			CFSTR("MountedByGuest")
+#define kNetFSConnectedMultiUserKey			CFSTR("ConnectedMultiUser")
 
-#define kNetFSKerberosInfoKey		CFSTR("KerberosInfo")
-#define kNetFSServicePrincipalKey	CFSTR("ServicePrincipal")
-#define kNetFSServerAddressKey		CFSTR("ServerAddress")
-#define kNetFSClientPrincipalKey	CFSTR("ClientPrincipal")
+#define kNetFSMechTypesSupportedKey	CFSTR("MechTypesSupported")
 
 /*
  * Dictionary keys for the URL parameters dictionary returned by ParseURL
@@ -65,26 +76,31 @@ typedef SInt32 netfsError;
  */
 #define kNetFSNoUserPreferencesKey	CFSTR("NoUserPreferences")
 #define kNetFSForceNewSessionKey	CFSTR("ForceNewSession")
-#define kNetFSUseKerberosKey		CFSTR("Kerberos")
+#define kNetFSUseAuthenticationInfoKey	CFSTR("UseAuthenticationInfo")
 #define kNetFSUseGuestKey		CFSTR("Guest")
 #define kNetFSChangePasswordKey		CFSTR("ChangePassword")
-//#define kNetFSKerberosInfoKey		CFSTR("KerberosInfo")		/* defined for GetServerInfo above */
+#define kNetFSAllowLoopbackKey		CFSTR("AllowLoopback")
 
 /*
- * Dictionary keys for the kKerberosInfoKey dictionary.
+ * XXX - for backwards compatibility.
+ * Use kNetFSUseAuthenticationInfoKey instead.
  */
-#define kNetFSClientPrincipalKey	CFSTR("ClientPrincipal")
-//#define kNetFSServicePrincipalKey	CFSTR("ServicePrincipal")	/* defined for GetServerInfo above */
-#define kNetFSNoCanonName		CFSTR("NoCanonName")
-	
+#define kNetFSUseKerberosKey		CFSTR("Kerberos")
+
 /*
  * Dictionary keys for the session information returned by OpenSession
  * and GetMountInfo methods.
  */
-#define kNetFSMountedByUserKey		CFSTR("MountedByUser")
-#define kNetFSMountedByGuestKey		CFSTR("MountedByGuest")
+#define kNetFSMountedWithAuthenticationInfoKey	CFSTR("MountedWithAuthenticationInfo")
+#define kNetFSMountedByUserKey			CFSTR("MountedByUser")
+#define kNetFSMountedByGuestKey			CFSTR("MountedByGuest")
+#define kNetFSMountedMultiUserKey		CFSTR("MountedMultiUser")
+
+/*
+ * XXX - for backwards compatibility.
+ * Use kNetFSMountedWithAuthenticationInfoKey instead.
+ */
 #define	kNetFSMountedByKerberosKey	CFSTR("MountedByKerberos")
-#define kNetFSMountedMultiUserKey	CFSTR("MountedMultiUser")
 
 /*
  * Additional non-errno values that can be returned by various routines.
@@ -126,6 +142,14 @@ typedef SInt32 netfsError;
  * no share points are available to them.  There is no AFP error for
  * that, so we picked -5998.
  *
+ * ENETFSNOAUTHMECHSUPP should be returned if the server does not support
+ * any authentication mechanisms that the client can use.  There is no
+ * AFP error for that, so we picked -5997.
+ *
+ * ENETFSNOPROTOVERSSUPP should be returned if the server does not support
+ * any of the versions/dialects of the file access protocol that the
+ * client can use.  There is no AFP error for that, so we picked -5996.
+ *
  * XXX - SMB has a bunch of different errors giving more detail as to the
  * reason why the account is restricted; we could have separate errors
  * for all of them, so that different messages could be displayed.
@@ -134,6 +158,8 @@ typedef SInt32 netfsError;
 #define ENETFSPWDPOLICY			-5046
 #define ENETFSACCOUNTRESTRICTED		-5999
 #define ENETFSNOSHARESAVAIL		-5998
+#define ENETFSNOAUTHMECHSUPP		-5997
+#define ENETFSNOPROTOVERSSUPP		-5996
 
 /*
  * Dictionary keys for options passed to EnumerateShares methods.
@@ -150,12 +176,12 @@ typedef SInt32 netfsError;
  *
  * Note:
  * 1)  only one of the following may be set when a sharepoint is currently
- *     mounted - kMountedByUser or kMountedByGuest
- * 2)  If the sharepoint is currently mounted, then kMountPathKey is the
- *     path to the mounted sharepoint
- * 3)  kDisplayNameKey is optional and if not present, then use the name of
- *     the dictionary to display the sharepoint name.
- *     kDisplayName is for sharepoint names that need special handling
+ *     mounted - kNetFSMountedByUser or kNetFSMountedByGuest
+ * 2)  If the sharepoint is currently mounted, then kNetFSMountPathKey is
+ *     the path to the mounted sharepoint
+ * 3)  kNetFSDisplayNameKey is optional and if not present, then use the
+ *     name of the dictionary to display the sharepoint name.
+ *     kNetFSDisplayName is for sharepoint names that need special handling
  *     (ie '/' in AFP sharepoint name).
  * 4)  If there are no available sharepoints, then an empty dictionary is
  *     returned with no error.
@@ -182,12 +208,19 @@ typedef SInt32 netfsError;
  * 2)  kNetFSNoUserPreferencesKey is set when automounting volumes, as we
  *     might be automounting a user's home directory, and can't look in that
  *     directory for preferences before we mount that directory
+ * 3)  for file systems without the notion of shares (for the file systems
+ *     we ship, that's everything except AFP and SMB; NFS has the notion
+ *     of exports, at least for NFSv2 and v3, but it's a different notion,
+ *     and we've always supported NFS submounts, so we continue to do so)
+ *     the kNetFSAllowSubMountsKey has no effect, as there's no notion of
+ *     submounts
  */
 //#define kNetFSNoUserPreferencesKey	CFSTR("NoUserPreferences")	/* defined for GetServerInfo above */
 #define kNetFSPasswordKey		CFSTR("Password")
 #define kNetFSSoftMountKey		CFSTR("SoftMount")
 //#define kNetFSForceNewSessionKey	CFSTR("ForceNewSession")	/* defined for OpenSession above */
 #define kNetFSMountFlagsKey		CFSTR("MountFlags")
+#define kNetFSAllowSubMountsKey		CFSTR("AllowSubMounts")
 
 /*
  * Dictionary keys for the mount information dictionary returned by

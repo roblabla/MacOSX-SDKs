@@ -8,9 +8,12 @@
 //  Best viewed with the following settings: Tab width 4, Indent width 2, Wrap lines, Indent wrapped lines by 3, Page guide 128.
 //
 //------------------------------------------------------------------------------------------------------------------------------
+
+#pragma once
+
 /*!
-	@header ICDeviceBrowser
-    @discussion The ICDeviceBrowser object is used to find devices such as digital cameras and scanners that are supported by Image Capture. These device may be directly attached to the USB or FireWire bus on the host computer, shared by other computers, or available over a TCP/IP network. This object communicates with an Image Capture agent process asynchronously to accomplish this. There is only one instance of this class per process.
+    @header ICDeviceBrowser
+    @discussion The ICDeviceBrowser object is used to find devices such as digital cameras and scanners that are supported by Image Capture. These device may be directly attached to the USB or FireWire bus on the host computer, shared by other computers, or available over a TCP/IP network. This object communicates with an Image Capture agent process asynchronously to accomplish this.
 */
 
 #import <ImageCaptureCore/ICDevice.h>
@@ -69,7 +72,7 @@
 
 @optional
 /*! 
-  @method deviceBrowserDidEnumerateLocalDevices:deviceDidChangeSharingState:
+  @method deviceBrowserDidEnumerateLocalDevices:
   @abstract This message is sent after the device browser completes sending 'deviceBrowser:didAddDevice:moreComing:' message for all local devices.
   @discusson Detecting locally connected devices (USB and FireWire devices) is faster than detecting devices connected using a network protocol. An Image Capture client application may use this message to update its user interface to let the user know that it has completed looking for locally connected devices and then start looking for network devices.
 */
@@ -80,7 +83,7 @@
 //-------------------------------------------------------------------------------------------------------------- ICDeviceBrowser
 /*! 
   @class ICDeviceBrowser
-  @abstract The ICDeviceBrowser object is used to find devices such as digital cameras and scanners that are supported by Image Capture. These device may be directly attached to the USB or FireWire bus on the host computer, shared by other computers, or available over a TCP/IP network. This object communicates with an Image Capture agent process asynchronously to accomplish this. There is only one instance of this class per process.
+  @abstract The ICDeviceBrowser object is used to find devices such as digital cameras and scanners that are supported by Image Capture. These device may be directly attached to the USB or FireWire bus on the host computer, shared by other computers, or available over a TCP/IP network. This object communicates with an Image Capture agent process asynchronously to accomplish this.
 */
 @interface ICDeviceBrowser : NSObject
 {
@@ -108,12 +111,19 @@
 
 /*! 
   @property devices
-  @abstract All devices found by the browser. This property will change as devices appear and disappear.
+  @abstract All devices found by the browser. This property will change as devices appear and disappear. This array is empty before the first invocation of the delegate method 'deviceBrowser:didAddDevice:moreComing:'.
 */
 @property(readonly)                     NSArray*                      devices;
 
+/*!
+    @method preferredDevice
+    @abstract This method returns a device object that should be selected by the client application when it is launched.
+    @discussion If the client application that calls this method is the auto-launch application associated with a device and that device is the last device attached (through USB, FireWire or network), then that device will be the preferred device. The best place to call this method is in the implmentation of the ICDeviceBrowser delegate method "deviceBrowser:didAddDevice:moreComing:", if the "moreComing" parameter passed to the delegate is "NO"; or in the delegate method "deviceBrowserDidEnumerateLocalDevices:".
+*/
+- (ICDevice*)preferredDevice;
+
 /*! 
-  @method sharedDeviceBrowser
+  @method init
   @abstract This is the designated initializer.
 */
 - (id)init;

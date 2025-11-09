@@ -5,7 +5,7 @@
 
 	Version:	Mac OS X
 
-	Copyright:	© 2001-2006 by Apple Computer, Inc., all rights reserved.
+	Copyright:	Â© 2001-2010 by Apple Computer, Inc., all rights reserved.
 
 	Bugs?:		For bug reports, consult the following page on
 				the World Wide Web:
@@ -39,13 +39,15 @@ extern "C" {
  *	@constant kLSMMapWriteError		An error occurred writing the map
  *	@constant kLSMMapBadPath		The URL you specified does not exist
  *  @constant kLSMMapBadCluster		The clusters you specified are invalid
+ *	@constant kLSMMapOverflow		Cannot add more data to map
  */
 enum {
 	kLSMMapOutOfState		=	-6640,
 	kLSMMapNoSuchCategory	=	-6641,
 	kLSMMapWriteError		= 	-6642,
 	kLSMMapBadPath			= 	-6643,
-	kLSMMapBadCluster		=   -6644
+	kLSMMapBadCluster		=   -6644,
+	kLSMMapOverflow			=   -6645
 };
 
 
@@ -275,7 +277,9 @@ CFIndex LSMResultGetCount(LSMResultRef result);
 LSMCategory LSMResultGetCategory(LSMResultRef result, CFIndex n);
 
 /*! @function LSMResultGetScore
- * 	Returns the likelihood of the n-th best (zero based) result.
+ * 	Returns the likelihood of the n-th best (zero based) result. 
+ * A nan score often indicates that the category does not contain
+ * any token.
  */
 float LSMResultGetScore(LSMResultRef result, CFIndex n);
 
@@ -333,7 +337,7 @@ LSMMapRef LSMMapCreateFromURL(CFAllocatorRef alloc, CFURLRef file,
  */
 enum {
 	kLSMMapDiscardCounts		= 1,
-	kLSMMapLoadMutable		  	= 2
+	kLSMMapLoadMutable		  	= 2,
 };
 
 /*! @function LSMMapWriteToStream

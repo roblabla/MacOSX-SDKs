@@ -52,25 +52,25 @@ typedef enum {
 	XGConnectionStateOpening,
 	XGConnectionStateOpen,
 	XGConnectionStateClosing
-} XGConnectionState;
+} XGConnectionState NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@const XGConnectionKeyIsOpened
 	@abstract The key for the "isOpened" property of XGConnection.
  */
-extern NSString * const XGConnectionKeyIsOpened;
+extern NSString * const XGConnectionKeyIsOpened NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@const XGConnectionKeyIsClosed
 	@abstract The key for the "isClosed" property of XGConnection.
 */
-extern NSString * const XGConnectionKeyIsClosed;
+extern NSString * const XGConnectionKeyIsClosed NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@const XGConnectionKeyState
 	@abstract The key for the "state" property of XGConnection.
 */
-extern NSString * const XGConnectionKeyState;
+extern NSString * const XGConnectionKeyState NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@class XGConnection
@@ -98,7 +98,7 @@ extern NSString * const XGConnectionKeyState;
 	@param netService The net service to connect to. Must not be nil.
 	@result An initialized XGConnection object.
 */
-- (id)initWithNetService:(NSNetService *)netService;
+- (id)initWithNetService:(NSNetService *)netService NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method initWithHostname:portnumber:
@@ -108,7 +108,7 @@ extern NSString * const XGConnectionKeyState;
 	@param portnumber The portnumber to connect to. If portnumber is 0 then the
 	default portnumber will be used.
 */
-- (id)initWithHostname:(NSString *)hostname portnumber:(UInt32)portnumber;
+- (id)initWithHostname:(NSString *)hostname portnumber:(UInt32)portnumber NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method netService
@@ -116,7 +116,7 @@ extern NSString * const XGConnectionKeyState;
 	nil if the receiver wasn't initialized with an NSNetService.
 	@result The NSNetService the receiver connects to.
 */
-- (NSNetService *)netService;
+- (NSNetService *)netService NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method hostname
@@ -124,7 +124,7 @@ extern NSString * const XGConnectionKeyState;
 	if the receiver wasn't initialized with a hostname.
 	@result The hostname the receiver connects to.
 */
-- (NSString *)hostname;
+- (NSString *)hostname NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method portnumber
@@ -133,7 +133,7 @@ extern NSString * const XGConnectionKeyState;
 	or 0 if the receiver wasn't initialized with a portnumber.
 	@result The portnumber the receiver connects to.
 */
-- (UInt32)portnumber;
+- (UInt32)portnumber NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method name
@@ -142,7 +142,7 @@ extern NSString * const XGConnectionKeyState;
 	with.
 	@result The name of the receiver.
 */
-- (NSString *)name;
+- (NSString *)name NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method setDelegate:
@@ -152,14 +152,14 @@ extern NSString * const XGConnectionKeyState;
 	the methods in the XGConnectionDelegate protocol then it will receive callbacks
 	when connection events occur, prior to the notification of key-value observers.
 */
-- (void)setDelegate:(id)delegate;
+- (void)setDelegate:(id)delegate NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method delegate
 	@abstract Returns the delegate of the receiver.
 	@result The delegate of the receiver.
 */
-- (id)delegate;
+- (id)delegate NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method setAuthenticator:
@@ -168,14 +168,14 @@ extern NSString * const XGConnectionKeyState;
 	the connection if the client or controller requires the connection to be
 	authenticated.
 */
-- (void)setAuthenticator:(XGAuthenticator *)authenticator;
+- (void)setAuthenticator:(XGAuthenticator *)authenticator NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method authenticator
 	@abstract Returns the authenticator of the receiver.
 	@result The authenticator of the receiver.
 */
-- (XGAuthenticator *)authenticator;
+- (XGAuthenticator *)authenticator NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method error
@@ -186,26 +186,26 @@ extern NSString * const XGConnectionKeyState;
 	closes due to an error, then this will be set to that error.  If the connection
 	closes due to a -close message, then this will be a success error.
 */
-- (NSError *)error;
+- (NSError *)error NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method state
 	@abstract Returns the state of the receiver.
 	@result The state of the receiver.
 */
-- (XGConnectionState)state;
+- (XGConnectionState)state NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method isOpened
 	@abstract Returns YES iff the connection state is Open.
 */
-- (BOOL)isOpened;
+- (BOOL)isOpened NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method isClosed
 	@abstract Returns YES iff the connection state is Closed.
 */
-- (BOOL)isClosed;
+- (BOOL)isClosed NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method open
@@ -213,7 +213,7 @@ extern NSString * const XGConnectionKeyState;
 	@discussion This method may only be called when the connection is in the Closed
 	state.
 */
-- (void)open;
+- (void)open NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method close
@@ -221,9 +221,9 @@ extern NSString * const XGConnectionKeyState;
 	@discussion This method may only be called when the connection is in the Opening
 	or Open states.
 */
-- (void)close;
+- (void)close NS_DEPRECATED_MAC(10_4, 10_7);
 
-- (NSString *)servicePrincipal;
+- (NSString *)servicePrincipal NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end
 
@@ -239,7 +239,7 @@ extern NSString * const XGConnectionKeyState;
 	@abstract This method is called as soon as the connection enters the Open state.
 	@param connection The connection that just opened.
 */
-- (void)connectionDidOpen:(XGConnection *)connection;
+- (void)connectionDidOpen:(XGConnection *)connection NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method connectionDidNotOpen:withError:
@@ -248,7 +248,7 @@ extern NSString * const XGConnectionKeyState;
 	@param connection The connection that didn't open.
 	@param error The error that was encountered.
 */
-- (void)connectionDidNotOpen:(XGConnection *)connection withError:(NSError *)error;
+- (void)connectionDidNotOpen:(XGConnection *)connection withError:(NSError *)error NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method connectionDidClose:
@@ -256,7 +256,7 @@ extern NSString * const XGConnectionKeyState;
 	state from the Open state.
 	@param connection The connection that closed.
 */
-- (void)connectionDidClose:(XGConnection *)connection;
+- (void)connectionDidClose:(XGConnection *)connection NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end
 

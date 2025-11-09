@@ -22,13 +22,13 @@
 /*! Received from IMService's custom notification center. Posted when iChat AV's input state has changed. This notification
     is relevant to the shared IMAVManager instance. The user information dictionary will not contain keys. Clients should call
     <tt>state</tt> to get the new state. */
-extern NSString *IMAVManagerStateChangedNotification;
+extern NSString * const IMAVManagerStateChangedNotification;
 
 /*! Received from IMService's custom notification center. Posted when the selected document to be shared has been changed by
     the user during a running session. This notification is relevant to the shared IMAVManager instance. The user information
     dictionary will not contain keys. Clients should call <tt>URLToShare</tt> to get the new URL. This notification will not be
     sent when the IMAVManager's state first changes to IMAVRequested. */
-extern NSString *IMAVManagerURLToShareChangedNotification;
+extern NSString * const IMAVManagerURLToShareChangedNotification;
 
 /*! @group Constants */
 
@@ -226,7 +226,7 @@ typedef NSUInteger IMVideoOptimizationOptions;
     @method renderIntoPixelBuffer:forTime:
     @abstract Called for each frame to be sent to iChat. This method will not be called on the main thread.
     @param buffer The pixel buffer to fill. The dimensions can vary: use <tt>CVPixelBufferGetWidth()</tt> and <tt>CVPixelBufferGetHeight()</tt> every time.
-	@param timeStamp The frame time for which the buffer should be rendered.
+    @param timeStamp The frame time for which the buffer should be rendered.
     @result Return <tt>YES</tt> if the buffer was successfully filled with new frame data. Return <tt>NO</tt> if nothing has changed or an error was encountered.
 */
 - (BOOL) renderIntoPixelBuffer:(CVPixelBufferRef)buffer forTime:(CVTimeStamp *)timeStamp;
@@ -245,7 +245,7 @@ typedef NSUInteger IMVideoOptimizationOptions;
     @param buffer The OpenGL buffer to fill. The receiver should call <tt>CVOpenGLBufferAttach()</tt>, then render.
     @param screenInOut The recommended virtual screen number to pass to <tt>CVOpenGLBufferAttach()</tt> for maximum efficiency. The
                        delegate may use a different screen number, but must write that value back into <i>screenInOut</i> before returning.
-	@param timeStamp The frame time for which the buffer should be rendered.
+    @param timeStamp The frame time for which the buffer should be rendered.
     @result Return <tt>YES</tt> if the buffer was successfully filled with new frame data. Return <tt>NO</tt> if nothing has changed or an error was encountered.
 */
 - (BOOL) renderIntoOpenGLBuffer:(CVOpenGLBufferRef)buffer onScreen:(int *)screenInOut forTime:(CVTimeStamp *)timeStamp;

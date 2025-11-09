@@ -1,15 +1,14 @@
 /*
     NSPropertyMapping.h
     Core Data
-    Copyright (c) 2004-2009 Apple Inc.
+    Copyright (c) 2004-2010 Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 @class NSExpression;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
+NS_CLASS_AVAILABLE(10_5,3_0)
 @interface NSPropertyMapping : NSObject {
     @private
     void *_reserved;
@@ -30,12 +29,10 @@
 - (NSString *)name;
 - (void)setName:(NSString *)name;
 
-
 /* Returns/sets the value expression for the property mapping.  The expression is used to create the value for the destination property.
 */
 - (NSExpression *)valueExpression;
 - (void)setValueExpression:(NSExpression *)expression;
-
 
 /* Returns/sets the user info for the property mapping.
 */
@@ -43,5 +40,3 @@
 - (void)setUserInfo:(NSDictionary *)userInfo;
 
 @end
-
-#endif

@@ -59,6 +59,8 @@
 #ifndef HEADER_STORE_H
 #define HEADER_STORE_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/ossl_typ.h>
 #ifndef OPENSSL_NO_DEPRECATED
 #include <openssl/evp.h>
@@ -80,15 +82,15 @@ extern "C" {
    pointer, all depending on their purpose. */
 
 /* Creators and destructor.   */
-STORE *STORE_new_method(const STORE_METHOD *method);
-STORE *STORE_new_engine(ENGINE *engine);
-void STORE_free(STORE *ui);
+STORE *STORE_new_method(const STORE_METHOD *method) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE *STORE_new_engine(ENGINE *engine) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void STORE_free(STORE *ui) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 /* Give a user interface parametrised control commands.  This can be used to
    send down an integer, a data pointer or a function pointer, as well as
    be used to get information from a STORE. */
-int STORE_ctrl(STORE *store, int cmd, long i, void *p, void (*f)(void));
+int STORE_ctrl(STORE *store, int cmd, long i, void *p, void (*f)(void)) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* A control to set the directory with keys and certificates.  Used by the
    built-in directory level method. */
@@ -107,27 +109,27 @@ int STORE_ctrl(STORE *store, int cmd, long i, void *p, void (*f)(void));
 #define STORE_set_app_data(s,arg)	STORE_set_ex_data(s,0,arg)
 #define STORE_get_app_data(s)		STORE_get_ex_data(s,0)
 int STORE_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new *new_func,
-	CRYPTO_EX_dup *dup_func, CRYPTO_EX_free *free_func);
-int STORE_set_ex_data(STORE *r,int idx,void *arg);
-void *STORE_get_ex_data(STORE *r, int idx);
+	CRYPTO_EX_dup *dup_func, CRYPTO_EX_free *free_func) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_set_ex_data(STORE *r,int idx,void *arg) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void *STORE_get_ex_data(STORE *r, int idx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Use specific methods instead of the built-in one */
-const STORE_METHOD *STORE_get_method(STORE *store);
-const STORE_METHOD *STORE_set_method(STORE *store, const STORE_METHOD *meth);
+const STORE_METHOD *STORE_get_method(STORE *store) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const STORE_METHOD *STORE_set_method(STORE *store, const STORE_METHOD *meth) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* The standard OpenSSL methods. */
 /* This is the in-memory method.  It does everything except revoking and updating,
    and is of course volatile.  It's used by other methods that have an in-memory
    cache. */
-const STORE_METHOD *STORE_Memory(void);
+const STORE_METHOD *STORE_Memory(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #if 0 /* Not yet implemented */
 /* This is the directory store.  It does everything except revoking and updating,
    and uses STORE_Memory() to cache things in memory. */
-const STORE_METHOD *STORE_Directory(void);
+const STORE_METHOD *STORE_Directory(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* This is the file store.  It does everything except revoking and updating,
    and uses STORE_Memory() to cache things in memory.  Certificates are added
    to it with the store operation, and it will only get cached certificates. */
-const STORE_METHOD *STORE_File(void);
+const STORE_METHOD *STORE_File(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
 /* Store functions take a type code for the type of data they should store
@@ -220,102 +222,102 @@ typedef struct STORE_OBJECT_st
 		} data;
 	} STORE_OBJECT;
 DECLARE_STACK_OF(STORE_OBJECT)
-STORE_OBJECT *STORE_OBJECT_new(void);
-void STORE_OBJECT_free(STORE_OBJECT *data);
+STORE_OBJECT *STORE_OBJECT_new(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void STORE_OBJECT_free(STORE_OBJECT *data) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 
 /* The following functions handle the storage. They return 0, a negative number
    or NULL on error, anything else on success. */
 X509 *STORE_get_certificate(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_store_certificate(STORE *e, X509 *data, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_modify_certificate(STORE *e, OPENSSL_ITEM search_attributes[],
 	OPENSSL_ITEM add_attributes[], OPENSSL_ITEM modify_attributes[],
-	OPENSSL_ITEM delete_attributes[], OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM delete_attributes[], OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_revoke_certificate(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_delete_certificate(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void *STORE_list_certificate_start(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
-X509 *STORE_list_certificate_next(STORE *e, void *handle);
-int STORE_list_certificate_end(STORE *e, void *handle);
-int STORE_list_certificate_endp(STORE *e, void *handle);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+X509 *STORE_list_certificate_next(STORE *e, void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_list_certificate_end(STORE *e, void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_list_certificate_endp(STORE *e, void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 EVP_PKEY *STORE_generate_key(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 EVP_PKEY *STORE_get_private_key(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_store_private_key(STORE *e, EVP_PKEY *data,
-	OPENSSL_ITEM attributes[], OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM attributes[], OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_modify_private_key(STORE *e, OPENSSL_ITEM search_attributes[],
 	OPENSSL_ITEM add_sttributes[], OPENSSL_ITEM modify_attributes[],
-	OPENSSL_ITEM delete_attributes[], OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM delete_attributes[], OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_revoke_private_key(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_delete_private_key(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void *STORE_list_private_key_start(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
-EVP_PKEY *STORE_list_private_key_next(STORE *e, void *handle);
-int STORE_list_private_key_end(STORE *e, void *handle);
-int STORE_list_private_key_endp(STORE *e, void *handle);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+EVP_PKEY *STORE_list_private_key_next(STORE *e, void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_list_private_key_end(STORE *e, void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_list_private_key_endp(STORE *e, void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 EVP_PKEY *STORE_get_public_key(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_store_public_key(STORE *e, EVP_PKEY *data, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_modify_public_key(STORE *e, OPENSSL_ITEM search_attributes[],
 	OPENSSL_ITEM add_sttributes[], OPENSSL_ITEM modify_attributes[],
-	OPENSSL_ITEM delete_attributes[], OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM delete_attributes[], OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_revoke_public_key(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_delete_public_key(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void *STORE_list_public_key_start(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
-EVP_PKEY *STORE_list_public_key_next(STORE *e, void *handle);
-int STORE_list_public_key_end(STORE *e, void *handle);
-int STORE_list_public_key_endp(STORE *e, void *handle);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+EVP_PKEY *STORE_list_public_key_next(STORE *e, void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_list_public_key_end(STORE *e, void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_list_public_key_endp(STORE *e, void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 X509_CRL *STORE_generate_crl(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 X509_CRL *STORE_get_crl(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_store_crl(STORE *e, X509_CRL *data, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_modify_crl(STORE *e, OPENSSL_ITEM search_attributes[],
 	OPENSSL_ITEM add_sttributes[], OPENSSL_ITEM modify_attributes[],
-	OPENSSL_ITEM delete_attributes[], OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM delete_attributes[], OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_delete_crl(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void *STORE_list_crl_start(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
-X509_CRL *STORE_list_crl_next(STORE *e, void *handle);
-int STORE_list_crl_end(STORE *e, void *handle);
-int STORE_list_crl_endp(STORE *e, void *handle);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+X509_CRL *STORE_list_crl_next(STORE *e, void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_list_crl_end(STORE *e, void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_list_crl_endp(STORE *e, void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_store_number(STORE *e, BIGNUM *data, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_modify_number(STORE *e, OPENSSL_ITEM search_attributes[],
 	OPENSSL_ITEM add_sttributes[], OPENSSL_ITEM modify_attributes[],
-	OPENSSL_ITEM delete_attributes[], OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM delete_attributes[], OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 BIGNUM *STORE_get_number(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_delete_number(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_store_arbitrary(STORE *e, BUF_MEM *data, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_modify_arbitrary(STORE *e, OPENSSL_ITEM search_attributes[],
 	OPENSSL_ITEM add_sttributes[], OPENSSL_ITEM modify_attributes[],
-	OPENSSL_ITEM delete_attributes[], OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM delete_attributes[], OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 BUF_MEM *STORE_get_arbitrary(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_delete_arbitrary(STORE *e, OPENSSL_ITEM attributes[],
-	OPENSSL_ITEM parameters[]);
+	OPENSSL_ITEM parameters[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 /* Create and manipulate methods */
-STORE_METHOD *STORE_create_method(char *name);
-void STORE_destroy_method(STORE_METHOD *store_method);
+STORE_METHOD *STORE_create_method(char *name) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void STORE_destroy_method(STORE_METHOD *store_method) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* These callback types are use for store handlers */
 typedef int (*STORE_INITIALISE_FUNC_PTR)(STORE *);
@@ -331,37 +333,37 @@ typedef int (*STORE_MODIFY_OBJECT_FUNC_PTR)(STORE *, STORE_OBJECT_TYPES type, OP
 typedef int (*STORE_GENERIC_FUNC_PTR)(STORE *, OPENSSL_ITEM attributes[], OPENSSL_ITEM parameters[]);
 typedef int (*STORE_CTRL_FUNC_PTR)(STORE *, int cmd, long l, void *p, void (*f)(void));
 
-int STORE_method_set_initialise_function(STORE_METHOD *sm, STORE_INITIALISE_FUNC_PTR init_f);
-int STORE_method_set_cleanup_function(STORE_METHOD *sm, STORE_CLEANUP_FUNC_PTR clean_f);
-int STORE_method_set_generate_function(STORE_METHOD *sm, STORE_GENERATE_OBJECT_FUNC_PTR generate_f);
-int STORE_method_set_get_function(STORE_METHOD *sm, STORE_GET_OBJECT_FUNC_PTR get_f);
-int STORE_method_set_store_function(STORE_METHOD *sm, STORE_STORE_OBJECT_FUNC_PTR store_f);
-int STORE_method_set_modify_function(STORE_METHOD *sm, STORE_MODIFY_OBJECT_FUNC_PTR store_f);
-int STORE_method_set_revoke_function(STORE_METHOD *sm, STORE_HANDLE_OBJECT_FUNC_PTR revoke_f);
-int STORE_method_set_delete_function(STORE_METHOD *sm, STORE_HANDLE_OBJECT_FUNC_PTR delete_f);
-int STORE_method_set_list_start_function(STORE_METHOD *sm, STORE_START_OBJECT_FUNC_PTR list_start_f);
-int STORE_method_set_list_next_function(STORE_METHOD *sm, STORE_NEXT_OBJECT_FUNC_PTR list_next_f);
-int STORE_method_set_list_end_function(STORE_METHOD *sm, STORE_END_OBJECT_FUNC_PTR list_end_f);
-int STORE_method_set_update_store_function(STORE_METHOD *sm, STORE_GENERIC_FUNC_PTR);
-int STORE_method_set_lock_store_function(STORE_METHOD *sm, STORE_GENERIC_FUNC_PTR);
-int STORE_method_set_unlock_store_function(STORE_METHOD *sm, STORE_GENERIC_FUNC_PTR);
-int STORE_method_set_ctrl_function(STORE_METHOD *sm, STORE_CTRL_FUNC_PTR ctrl_f);
+int STORE_method_set_initialise_function(STORE_METHOD *sm, STORE_INITIALISE_FUNC_PTR init_f) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_cleanup_function(STORE_METHOD *sm, STORE_CLEANUP_FUNC_PTR clean_f) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_generate_function(STORE_METHOD *sm, STORE_GENERATE_OBJECT_FUNC_PTR generate_f) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_get_function(STORE_METHOD *sm, STORE_GET_OBJECT_FUNC_PTR get_f) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_store_function(STORE_METHOD *sm, STORE_STORE_OBJECT_FUNC_PTR store_f) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_modify_function(STORE_METHOD *sm, STORE_MODIFY_OBJECT_FUNC_PTR store_f) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_revoke_function(STORE_METHOD *sm, STORE_HANDLE_OBJECT_FUNC_PTR revoke_f) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_delete_function(STORE_METHOD *sm, STORE_HANDLE_OBJECT_FUNC_PTR delete_f) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_list_start_function(STORE_METHOD *sm, STORE_START_OBJECT_FUNC_PTR list_start_f) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_list_next_function(STORE_METHOD *sm, STORE_NEXT_OBJECT_FUNC_PTR list_next_f) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_list_end_function(STORE_METHOD *sm, STORE_END_OBJECT_FUNC_PTR list_end_f) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_update_store_function(STORE_METHOD *sm, STORE_GENERIC_FUNC_PTR) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_lock_store_function(STORE_METHOD *sm, STORE_GENERIC_FUNC_PTR) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_unlock_store_function(STORE_METHOD *sm, STORE_GENERIC_FUNC_PTR) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_method_set_ctrl_function(STORE_METHOD *sm, STORE_CTRL_FUNC_PTR ctrl_f) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-STORE_INITIALISE_FUNC_PTR STORE_method_get_initialise_function(STORE_METHOD *sm);
-STORE_CLEANUP_FUNC_PTR STORE_method_get_cleanup_function(STORE_METHOD *sm);
-STORE_GENERATE_OBJECT_FUNC_PTR STORE_method_get_generate_function(STORE_METHOD *sm);
-STORE_GET_OBJECT_FUNC_PTR STORE_method_get_get_function(STORE_METHOD *sm);
-STORE_STORE_OBJECT_FUNC_PTR STORE_method_get_store_function(STORE_METHOD *sm);
-STORE_MODIFY_OBJECT_FUNC_PTR STORE_method_get_modify_function(STORE_METHOD *sm);
-STORE_HANDLE_OBJECT_FUNC_PTR STORE_method_get_revoke_function(STORE_METHOD *sm);
-STORE_HANDLE_OBJECT_FUNC_PTR STORE_method_get_delete_function(STORE_METHOD *sm);
-STORE_START_OBJECT_FUNC_PTR STORE_method_get_list_start_function(STORE_METHOD *sm);
-STORE_NEXT_OBJECT_FUNC_PTR STORE_method_get_list_next_function(STORE_METHOD *sm);
-STORE_END_OBJECT_FUNC_PTR STORE_method_get_list_end_function(STORE_METHOD *sm);
-STORE_GENERIC_FUNC_PTR STORE_method_get_update_store_function(STORE_METHOD *sm);
-STORE_GENERIC_FUNC_PTR STORE_method_get_lock_store_function(STORE_METHOD *sm);
-STORE_GENERIC_FUNC_PTR STORE_method_get_unlock_store_function(STORE_METHOD *sm);
-STORE_CTRL_FUNC_PTR STORE_method_get_ctrl_function(STORE_METHOD *sm);
+STORE_INITIALISE_FUNC_PTR STORE_method_get_initialise_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_CLEANUP_FUNC_PTR STORE_method_get_cleanup_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_GENERATE_OBJECT_FUNC_PTR STORE_method_get_generate_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_GET_OBJECT_FUNC_PTR STORE_method_get_get_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_STORE_OBJECT_FUNC_PTR STORE_method_get_store_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_MODIFY_OBJECT_FUNC_PTR STORE_method_get_modify_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_HANDLE_OBJECT_FUNC_PTR STORE_method_get_revoke_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_HANDLE_OBJECT_FUNC_PTR STORE_method_get_delete_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_START_OBJECT_FUNC_PTR STORE_method_get_list_start_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_NEXT_OBJECT_FUNC_PTR STORE_method_get_list_next_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_END_OBJECT_FUNC_PTR STORE_method_get_list_end_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_GENERIC_FUNC_PTR STORE_method_get_update_store_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_GENERIC_FUNC_PTR STORE_method_get_lock_store_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_GENERIC_FUNC_PTR STORE_method_get_unlock_store_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_CTRL_FUNC_PTR STORE_method_get_ctrl_function(STORE_METHOD *sm) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Method helper structures and functions. */
 
@@ -374,55 +376,55 @@ typedef struct STORE_attr_info_st STORE_ATTR_INFO;
    Note that we do this in the list form, since the list of OPENSSL_ITEMs can
    come in blocks separated with STORE_ATTR_OR.  Note that the value returned
    by STORE_parse_attrs_next() must be freed with STORE_ATTR_INFO_free(). */
-void *STORE_parse_attrs_start(OPENSSL_ITEM *attributes);
-STORE_ATTR_INFO *STORE_parse_attrs_next(void *handle);
-int STORE_parse_attrs_end(void *handle);
-int STORE_parse_attrs_endp(void *handle);
+void *STORE_parse_attrs_start(OPENSSL_ITEM *attributes) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STORE_ATTR_INFO *STORE_parse_attrs_next(void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_parse_attrs_end(void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_parse_attrs_endp(void *handle) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Creator and destructor */
-STORE_ATTR_INFO *STORE_ATTR_INFO_new(void);
-int STORE_ATTR_INFO_free(STORE_ATTR_INFO *attrs);
+STORE_ATTR_INFO *STORE_ATTR_INFO_new(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int STORE_ATTR_INFO_free(STORE_ATTR_INFO *attrs) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Manipulators */
-char *STORE_ATTR_INFO_get0_cstr(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code);
+char *STORE_ATTR_INFO_get0_cstr(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 unsigned char *STORE_ATTR_INFO_get0_sha1str(STORE_ATTR_INFO *attrs,
-	STORE_ATTR_TYPES code);
-X509_NAME *STORE_ATTR_INFO_get0_dn(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code);
-BIGNUM *STORE_ATTR_INFO_get0_number(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code);
+	STORE_ATTR_TYPES code) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+X509_NAME *STORE_ATTR_INFO_get0_dn(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIGNUM *STORE_ATTR_INFO_get0_number(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_ATTR_INFO_set_cstr(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code,
-	char *cstr, size_t cstr_size);
+	char *cstr, size_t cstr_size) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_ATTR_INFO_set_sha1str(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code,
-	unsigned char *sha1str, size_t sha1str_size);
+	unsigned char *sha1str, size_t sha1str_size) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_ATTR_INFO_set_dn(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code,
-	X509_NAME *dn);
+	X509_NAME *dn) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_ATTR_INFO_set_number(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code,
-	BIGNUM *number);
+	BIGNUM *number) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_ATTR_INFO_modify_cstr(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code,
-	char *cstr, size_t cstr_size);
+	char *cstr, size_t cstr_size) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_ATTR_INFO_modify_sha1str(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code,
-	unsigned char *sha1str, size_t sha1str_size);
+	unsigned char *sha1str, size_t sha1str_size) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_ATTR_INFO_modify_dn(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code,
-	X509_NAME *dn);
+	X509_NAME *dn) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int STORE_ATTR_INFO_modify_number(STORE_ATTR_INFO *attrs, STORE_ATTR_TYPES code,
-	BIGNUM *number);
+	BIGNUM *number) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Compare on basis of a bit pattern formed by the STORE_ATTR_TYPES values
    in each contained attribute. */
-int STORE_ATTR_INFO_compare(STORE_ATTR_INFO *a, STORE_ATTR_INFO *b);
+int STORE_ATTR_INFO_compare(STORE_ATTR_INFO *a, STORE_ATTR_INFO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* Check if the set of attributes in a is within the range of attributes
    set in b. */
-int STORE_ATTR_INFO_in_range(STORE_ATTR_INFO *a, STORE_ATTR_INFO *b);
+int STORE_ATTR_INFO_in_range(STORE_ATTR_INFO *a, STORE_ATTR_INFO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* Check if the set of attributes in a are also set in b. */
-int STORE_ATTR_INFO_in(STORE_ATTR_INFO *a, STORE_ATTR_INFO *b);
+int STORE_ATTR_INFO_in(STORE_ATTR_INFO *a, STORE_ATTR_INFO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* Same as STORE_ATTR_INFO_in(), but also checks the attribute values. */
-int STORE_ATTR_INFO_in_ex(STORE_ATTR_INFO *a, STORE_ATTR_INFO *b);
+int STORE_ATTR_INFO_in_ex(STORE_ATTR_INFO *a, STORE_ATTR_INFO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 /* BEGIN ERROR CODES */
 /* The following lines are auto generated by the script mkerr.pl. Any changes
  * made after this point may be overwritten when the script is next run.
  */
-void ERR_load_STORE_strings(void);
+void ERR_load_STORE_strings(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Error codes for the STORE functions. */
 

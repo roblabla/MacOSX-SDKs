@@ -1,10 +1,9 @@
 /*	NSXMLDTDNode.h
-	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
 
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /*!
     @typedef NSXMLDTDNodeKind
@@ -116,4 +115,3 @@ typedef NSUInteger NSXMLDTDNodeKind;
 
 @end
 
-#endif		// Availability guard

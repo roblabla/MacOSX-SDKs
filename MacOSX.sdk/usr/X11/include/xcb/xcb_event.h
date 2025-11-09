@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 Julien Danjou <julien@danjou.info>
+ * Copyright (C) 2008-2009 Julien Danjou <julien@danjou.info>
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -167,6 +167,74 @@ XCB_EVENT_MAKE_EVENT_HANDLER(selection_notify, SELECTION_NOTIFY)
 XCB_EVENT_MAKE_EVENT_HANDLER(colormap_notify, COLORMAP_NOTIFY)
 XCB_EVENT_MAKE_EVENT_HANDLER(client_message, CLIENT_MESSAGE)
 XCB_EVENT_MAKE_EVENT_HANDLER(mapping_notify, MAPPING_NOTIFY)
+
+/** Everyting is ok */
+#define XCB_EVENT_ERROR_SUCESS 0
+/** Bad request code */
+#define XCB_EVENT_ERROR_BAD_REQUEST 1
+/** Int parameter out of range */
+#define XCB_EVENT_ERROR_BAD_VALUE 2
+/** Parameter not a Window */
+#define XCB_EVENT_ERROR_BAD_WINDOW 3
+/** Parameter not a Pixmap */
+#define XCB_EVENT_ERROR_BAD_PIXMAP 4
+/** Parameter not an Atom */
+#define XCB_EVENT_ERROR_BAD_ATOM 5
+/** Parameter not a Cursor */
+#define XCB_EVENT_ERROR_BAD_CURSOR 6
+/** Parameter not a Font */
+#define XCB_EVENT_ERROR_BAD_FONT 7
+/** Parameter mismatch */
+#define XCB_EVENT_ERROR_BAD_MATCH 8
+/** Parameter not a Pixmap or Window */
+#define XCB_EVENT_ERROR_BAD_DRAWABLE 9
+/* Depending on context:
+   - key/button already grabbed
+   - attempt to free an illegal
+     cmap entry
+   - attempt to store into a read-only
+     color map entry.
+   - attempt to modify the access control
+     list from other than the local host.
+*/
+#define XCB_EVENT_ERROR_BAD_ACCESS 10
+/** Insufficient resources */
+#define XCB_EVENT_ERROR_BAD_ALLOC 11
+/** No such colormap */
+#define XCB_EVENT_ERROR_BAD_COLOR 12
+/** Parameter not a GC */
+#define XCB_EVENT_ERROR_BAD_GC 13
+/** Choice not in range or already used */
+#define XCB_EVENT_ERROR_BAD_ID_CHOICE 14
+/** Font or color name doesn't exist */
+#define XCB_EVENT_ERROR_BAD_NAME 15
+/** Request length incorrect */
+#define XCB_EVENT_ERROR_BAD_LENGTH 16
+/** Server is defective */
+#define XCB_EVENT_ERROR_BAD_IMPLEMENTATION 17
+
+/**
+ * @brief Convert an event reponse type to a label.
+ * @param type The event type.
+ * @return A string with the event name, or NULL if unknown.
+ */
+const char * xcb_event_get_label(uint8_t type);
+
+/**
+ * @brief Convert an event error type to a label.
+ * @param type The erro type.
+ * @return A string with the event name, or NULL if unknown or if the event is
+ * not an error.
+ */
+const char * xcb_event_get_error_label(uint8_t type);
+
+/**
+ * @brief Convert an event request type to a label.
+ * @param type The request type.
+ * @return A string with the event name, or NULL if unknown or if the event is
+ * not an error.
+ */
+const char * xcb_event_get_request_label(uint8_t type);
 
 #ifdef __cplusplus
 }

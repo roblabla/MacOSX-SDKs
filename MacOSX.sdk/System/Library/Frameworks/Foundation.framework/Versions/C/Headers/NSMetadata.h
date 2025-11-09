@@ -1,11 +1,9 @@
 /*	NSMetadata.h
-	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSString, NSArray, NSDictionary, NSPredicate;
 @class NSMetadataItem, NSMetadataQueryAttributeValueTuple, NSMetadataQueryResultGroup;
@@ -83,17 +81,22 @@
 @end
 
 // There is no info associated with these notifications
-FOUNDATION_EXPORT NSString * const NSMetadataQueryDidStartGatheringNotification AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-FOUNDATION_EXPORT NSString * const NSMetadataQueryGatheringProgressNotification AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-FOUNDATION_EXPORT NSString * const NSMetadataQueryDidFinishGatheringNotification AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-FOUNDATION_EXPORT NSString * const NSMetadataQueryDidUpdateNotification AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSMetadataQueryDidStartGatheringNotification NS_AVAILABLE(10_4, 5_0);
+FOUNDATION_EXPORT NSString * const NSMetadataQueryGatheringProgressNotification NS_AVAILABLE(10_4, 5_0);
+FOUNDATION_EXPORT NSString * const NSMetadataQueryDidFinishGatheringNotification NS_AVAILABLE(10_4, 5_0);
+FOUNDATION_EXPORT NSString * const NSMetadataQueryDidUpdateNotification NS_AVAILABLE(10_4, 5_0);
 
-FOUNDATION_EXPORT NSString * const NSMetadataQueryResultContentRelevanceAttribute AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSMetadataQueryResultContentRelevanceAttribute NS_AVAILABLE(10_4, 5_0);
 
 // Scope constants for defined search locations
-FOUNDATION_EXPORT NSString * const NSMetadataQueryUserHomeScope AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // user home directory
-FOUNDATION_EXPORT NSString * const NSMetadataQueryLocalComputerScope AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // all local mounted volumes + user home (even if remote)
-FOUNDATION_EXPORT NSString * const NSMetadataQueryNetworkScope AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER; // all user-mounted remote volumes
+FOUNDATION_EXPORT NSString * const NSMetadataQueryUserHomeScope NS_AVAILABLE_MAC(10_4); // user home directory
+FOUNDATION_EXPORT NSString * const NSMetadataQueryLocalComputerScope NS_AVAILABLE_MAC(10_4); // all local mounted volumes + user home (even if remote)
+FOUNDATION_EXPORT NSString * const NSMetadataQueryNetworkScope NS_AVAILABLE_MAC(10_4); // all user-mounted remote volumes
+
+// -setSearchScopes: will throw an exception if the given array contains a mix of the scope constants below with constants above.
+FOUNDATION_EXPORT NSString * const NSMetadataQueryUbiquitousDocumentsScope NS_AVAILABLE(10_7, 5_0); // "Documents" subdirectory in the application's Ubiquity container
+FOUNDATION_EXPORT NSString * const NSMetadataQueryUbiquitousDataScope NS_AVAILABLE(10_7, 5_0); // application's Ubiquity container, excluding the "Documents" subdirectory
+
 
 @interface NSMetadataItem : NSObject {
 @private
@@ -141,4 +144,21 @@ FOUNDATION_EXPORT NSString * const NSMetadataQueryNetworkScope AVAILABLE_MAC_OS_
 
 @end
 
-#endif
+// The following NSMetadataItem attributes are available on Mac OS and iOS. See <Metadata/MDItem.h> for more attribute names on Mac OS.
+FOUNDATION_EXPORT NSString * const NSMetadataItemFSNameKey NS_AVAILABLE(10_7, 5_0); // NSString
+FOUNDATION_EXPORT NSString * const NSMetadataItemDisplayNameKey NS_AVAILABLE(10_7, 5_0); // NSString
+FOUNDATION_EXPORT NSString * const NSMetadataItemURLKey NS_AVAILABLE(10_7, 5_0); // NSURL
+FOUNDATION_EXPORT NSString * const NSMetadataItemPathKey NS_AVAILABLE(10_7, 5_0); // NSString
+FOUNDATION_EXPORT NSString * const NSMetadataItemFSSizeKey NS_AVAILABLE(10_7, 5_0); // file size in bytes; unsigned long long NSNumber
+FOUNDATION_EXPORT NSString * const NSMetadataItemFSCreationDateKey NS_AVAILABLE(10_7, 5_0); // NSDate
+FOUNDATION_EXPORT NSString * const NSMetadataItemFSContentChangeDateKey NS_AVAILABLE(10_7, 5_0); // NSDate
+
+FOUNDATION_EXPORT NSString * const NSMetadataItemIsUbiquitousKey NS_AVAILABLE(10_7, 5_0); // boolean NSNumber
+
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemHasUnresolvedConflictsKey NS_AVAILABLE(10_7, 5_0); // boolean NSNumber
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemIsDownloadedKey NS_AVAILABLE(10_7, 5_0); // boolean NSNumber
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemIsDownloadingKey NS_AVAILABLE(10_7, 5_0); // boolean NSNumber
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemIsUploadedKey NS_AVAILABLE(10_7, 5_0); // boolean NSNumber
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemIsUploadingKey NS_AVAILABLE(10_7, 5_0); // boolean NSNumber
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemPercentDownloadedKey NS_AVAILABLE(10_7, 5_0); // double NSNumber; range [0..100]
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemPercentUploadedKey NS_AVAILABLE(10_7, 5_0); // double NSNumber; range [0..100]

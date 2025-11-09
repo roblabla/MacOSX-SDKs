@@ -163,7 +163,12 @@ typedef unsigned int	IOAlignment;
 
 #ifndef __IOKIT_PORTS_DEFINED__
 #define __IOKIT_PORTS_DEFINED__
+#ifdef __cplusplus
+class OSObject;
+typedef OSObject * io_object_t;
+#else
 typedef struct OSObject * io_object_t;
+#endif
 #endif /* __IOKIT_PORTS_DEFINED__ */
 
 #include <device/device_types.h>
@@ -226,6 +231,10 @@ enum {
     kMillisecondScale = 1000 * 1000,
     kSecondScale      = 1000 * 1000 * 1000,
     kTickScale        = (kSecondScale / 100)
+};
+
+enum {
+    kIOConnectMethodVarOutputSize = -3
 };
 
 /* compatibility types */

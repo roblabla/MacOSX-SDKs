@@ -35,20 +35,20 @@
 	@abstract Sets the username with which to authenticate.
 	@param username The username. Must not be nil.
 */
-- (void)setUsername:(NSString *)username;
+- (void)setUsername:(NSString *)username NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method username
 	@abstract Returns the username of the receiver.
 	@result The username.
 */
-- (NSString *)username;
+- (NSString *)username NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method setPassword
 	@abstract Sets the password with which to authenticate.
 	@param password The password. Must not be nil.
 */
-- (void)setPassword:(NSString *)password;
+- (void)setPassword:(NSString *)password NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end

@@ -139,5 +139,10 @@
 
 @end
 
+/* Notifications */
+
+APPKIT_EXTERN NSString *SFCertificateViewDisclosureStateDidChange; /* sent when disclosure status changes */
+
+
 #endif /* !_SFCERTIFICATEVIEW_H_ */
 

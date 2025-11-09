@@ -28,7 +28,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	iokit_MSG_COUNT
-#define	iokit_MSG_COUNT	72
+#define	iokit_MSG_COUNT	73
 #endif	/* iokit_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -233,20 +233,6 @@ kern_return_t io_registry_entry_get_parent_iterator
 	mach_port_t registry_entry,
 	io_name_t plane,
 	mach_port_t *iterator
-);
-
-/* Routine io_service_open */
-#ifdef	mig_external
-mig_external
-#else
-extern
-#endif	/* mig_external */
-kern_return_t io_service_open
-(
-	mach_port_t service,
-	task_t owningTask,
-	uint32_t connect_type,
-	mach_port_t *connection
 );
 
 /* Routine io_service_close */
@@ -969,10 +955,10 @@ kern_return_t io_connect_method
 	mach_msg_type_number_t inband_inputCnt,
 	mach_vm_address_t ool_input,
 	mach_vm_size_t ool_input_size,
-	io_scalar_inband64_t scalar_output,
-	mach_msg_type_number_t *scalar_outputCnt,
 	io_struct_inband_t inband_output,
 	mach_msg_type_number_t *inband_outputCnt,
+	io_scalar_inband64_t scalar_output,
+	mach_msg_type_number_t *scalar_outputCnt,
 	mach_vm_address_t ool_output,
 	mach_vm_size_t *ool_output_size
 );
@@ -996,10 +982,10 @@ kern_return_t io_connect_async_method
 	mach_msg_type_number_t inband_inputCnt,
 	mach_vm_address_t ool_input,
 	mach_vm_size_t ool_input_size,
-	io_scalar_inband64_t scalar_output,
-	mach_msg_type_number_t *scalar_outputCnt,
 	io_struct_inband_t inband_output,
 	mach_msg_type_number_t *inband_outputCnt,
+	io_scalar_inband64_t scalar_output,
+	mach_msg_type_number_t *scalar_outputCnt,
 	mach_vm_address_t ool_output,
 	mach_vm_size_t *ool_output_size
 );
@@ -1014,6 +1000,30 @@ kern_return_t io_registry_entry_get_registry_entry_id
 (
 	mach_port_t registry_entry,
 	uint64_t *entry_id
+);
+
+/* Routine io_connect_method_var_output */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t io_connect_method_var_output
+(
+	mach_port_t connection,
+	uint32_t selector,
+	io_scalar_inband64_t scalar_input,
+	mach_msg_type_number_t scalar_inputCnt,
+	io_struct_inband_t inband_input,
+	mach_msg_type_number_t inband_inputCnt,
+	mach_vm_address_t ool_input,
+	mach_vm_size_t ool_input_size,
+	io_struct_inband_t inband_output,
+	mach_msg_type_number_t *inband_outputCnt,
+	io_scalar_inband64_t scalar_output,
+	mach_msg_type_number_t *scalar_outputCnt,
+	io_buf_ptr_t *var_output,
+	mach_msg_type_number_t *var_outputCnt
 );
 
 __END_DECLS
@@ -1214,22 +1224,6 @@ __END_DECLS
 		mach_msg_type_number_t planeCnt;
 		char plane[128];
 	} __Request__io_registry_entry_get_parent_iterator_t;
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_port_descriptor_t owningTask;
-		/* end of the kernel processed data */
-		NDR_record_t NDR;
-		uint32_t connect_type;
-	} __Request__io_service_open_t;
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1989,8 +1983,8 @@ __END_DECLS
 		char inband_input[4096];
 		mach_vm_address_t ool_input;
 		mach_vm_size_t ool_input_size;
-		mach_msg_type_number_t scalar_outputCnt;
 		mach_msg_type_number_t inband_outputCnt;
+		mach_msg_type_number_t scalar_outputCnt;
 		mach_vm_address_t ool_output;
 		mach_vm_size_t ool_output_size;
 	} __Request__io_connect_method_t;
@@ -2017,8 +2011,8 @@ __END_DECLS
 		char inband_input[4096];
 		mach_vm_address_t ool_input;
 		mach_vm_size_t ool_input_size;
-		mach_msg_type_number_t scalar_outputCnt;
 		mach_msg_type_number_t inband_outputCnt;
+		mach_msg_type_number_t scalar_outputCnt;
 		mach_vm_address_t ool_output;
 		mach_vm_size_t ool_output_size;
 	} __Request__io_connect_async_method_t;
@@ -2032,6 +2026,26 @@ __END_DECLS
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__io_registry_entry_get_registry_entry_id_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		uint32_t selector;
+		mach_msg_type_number_t scalar_inputCnt;
+		uint64_t scalar_input[16];
+		mach_msg_type_number_t inband_inputCnt;
+		char inband_input[4096];
+		mach_vm_address_t ool_input;
+		mach_vm_size_t ool_input_size;
+		mach_msg_type_number_t inband_outputCnt;
+		mach_msg_type_number_t scalar_outputCnt;
+	} __Request__io_connect_method_var_output_t;
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -2057,7 +2071,6 @@ union __RequestUnion__iokit_subsystem {
 	__Request__io_registry_entry_get_property_bytes_t Request_io_registry_entry_get_property_bytes;
 	__Request__io_registry_entry_get_child_iterator_t Request_io_registry_entry_get_child_iterator;
 	__Request__io_registry_entry_get_parent_iterator_t Request_io_registry_entry_get_parent_iterator;
-	__Request__io_service_open_t Request_io_service_open;
 	__Request__io_service_close_t Request_io_service_close;
 	__Request__io_connect_get_service_t Request_io_connect_get_service;
 	__Request__io_connect_set_notification_port_t Request_io_connect_set_notification_port;
@@ -2110,6 +2123,7 @@ union __RequestUnion__iokit_subsystem {
 	__Request__io_connect_method_t Request_io_connect_method;
 	__Request__io_connect_async_method_t Request_io_connect_async_method;
 	__Request__io_registry_entry_get_registry_entry_id_t Request_io_registry_entry_get_registry_entry_id;
+	__Request__io_connect_method_var_output_t Request_io_connect_method_var_output;
 };
 #endif /* !__RequestUnion__iokit_subsystem__defined */
 /* typedefs for all replies */
@@ -2322,20 +2336,6 @@ union __RequestUnion__iokit_subsystem {
 		mach_msg_port_descriptor_t iterator;
 		/* end of the kernel processed data */
 	} __Reply__io_registry_entry_get_parent_iterator_t;
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_port_descriptor_t connection;
-		/* end of the kernel processed data */
-	} __Reply__io_service_open_t;
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -3015,10 +3015,10 @@ union __RequestUnion__iokit_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-		mach_msg_type_number_t scalar_outputCnt;
-		uint64_t scalar_output[16];
 		mach_msg_type_number_t inband_outputCnt;
 		char inband_output[4096];
+		mach_msg_type_number_t scalar_outputCnt;
+		uint64_t scalar_output[16];
 		mach_vm_size_t ool_output_size;
 	} __Reply__io_connect_method_t;
 #ifdef  __MigPackStructs
@@ -3032,10 +3032,10 @@ union __RequestUnion__iokit_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-		mach_msg_type_number_t scalar_outputCnt;
-		uint64_t scalar_output[16];
 		mach_msg_type_number_t inband_outputCnt;
 		char inband_output[4096];
+		mach_msg_type_number_t scalar_outputCnt;
+		uint64_t scalar_output[16];
 		mach_vm_size_t ool_output_size;
 	} __Reply__io_connect_async_method_t;
 #ifdef  __MigPackStructs
@@ -3051,6 +3051,26 @@ union __RequestUnion__iokit_subsystem {
 		kern_return_t RetCode;
 		uint64_t entry_id;
 	} __Reply__io_registry_entry_get_registry_entry_id_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t var_output;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t inband_outputCnt;
+		char inband_output[4096];
+		mach_msg_type_number_t scalar_outputCnt;
+		uint64_t scalar_output[16];
+		mach_msg_type_number_t var_outputCnt;
+	} __Reply__io_connect_method_var_output_t;
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -3076,7 +3096,6 @@ union __ReplyUnion__iokit_subsystem {
 	__Reply__io_registry_entry_get_property_bytes_t Reply_io_registry_entry_get_property_bytes;
 	__Reply__io_registry_entry_get_child_iterator_t Reply_io_registry_entry_get_child_iterator;
 	__Reply__io_registry_entry_get_parent_iterator_t Reply_io_registry_entry_get_parent_iterator;
-	__Reply__io_service_open_t Reply_io_service_open;
 	__Reply__io_service_close_t Reply_io_service_close;
 	__Reply__io_connect_get_service_t Reply_io_connect_get_service;
 	__Reply__io_connect_set_notification_port_t Reply_io_connect_set_notification_port;
@@ -3129,6 +3148,7 @@ union __ReplyUnion__iokit_subsystem {
 	__Reply__io_connect_method_t Reply_io_connect_method;
 	__Reply__io_connect_async_method_t Reply_io_connect_async_method;
 	__Reply__io_registry_entry_get_registry_entry_id_t Reply_io_registry_entry_get_registry_entry_id;
+	__Reply__io_connect_method_var_output_t Reply_io_connect_method_var_output;
 };
 #endif /* !__RequestUnion__iokit_subsystem__defined */
 
@@ -3149,7 +3169,6 @@ union __ReplyUnion__iokit_subsystem {
     { "io_registry_entry_get_property_bytes", 2812 },\
     { "io_registry_entry_get_child_iterator", 2813 },\
     { "io_registry_entry_get_parent_iterator", 2814 },\
-    { "io_service_open", 2815 },\
     { "io_service_close", 2816 },\
     { "io_connect_get_service", 2817 },\
     { "io_connect_set_notification_port", 2818 },\
@@ -3201,7 +3220,8 @@ union __ReplyUnion__iokit_subsystem {
     { "io_connect_unmap_memory_from_task", 2864 },\
     { "io_connect_method", 2865 },\
     { "io_connect_async_method", 2866 },\
-    { "io_registry_entry_get_registry_entry_id", 2871 }
+    { "io_registry_entry_get_registry_entry_id", 2871 },\
+    { "io_connect_method_var_output", 2872 }
 #endif
 
 #ifdef __AfterMigUserHeader

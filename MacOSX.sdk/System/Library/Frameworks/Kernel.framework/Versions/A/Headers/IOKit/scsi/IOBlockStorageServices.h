@@ -108,9 +108,6 @@ public:
 	
     virtual UInt32		doGetFormatCapacities ( UInt64 *	capacities,
     											UInt32		capacitiesMaxCount ) const;
-	
-    virtual IOReturn	doLockUnlockMedia ( bool doLock );
-	
     virtual IOReturn	doSynchronizeCache ( void );
 	
     virtual char *		getVendorString ( void );
@@ -125,13 +122,8 @@ public:
     
     virtual IOReturn	reportEjectability ( bool * isEjectable );
     
-    virtual IOReturn	reportLockability ( bool * isLockable );
-    
     virtual IOReturn	reportMediaState ( bool * mediaPresent, bool * changed );
     
-    virtual IOReturn	reportPollRequirements ( 	bool * pollIsRequired,
-    												bool * pollIsExpensive );
-        
     virtual IOReturn	reportMaxValidBlock ( UInt64 * maxBlock );
         
     virtual IOReturn	reportRemovability ( bool * isRemovable );
@@ -142,6 +134,7 @@ public:
 	
 	virtual IOReturn	setWriteCacheState ( bool enabled );
 	
+#if !TARGET_OS_EMBEDDED
 	// Space reserved for future expansion.
     OSMetaClassDeclareReservedUnused ( IOBlockStorageServices, 1 );
     OSMetaClassDeclareReservedUnused ( IOBlockStorageServices, 2 );
@@ -151,6 +144,7 @@ public:
     OSMetaClassDeclareReservedUnused ( IOBlockStorageServices, 6 );
     OSMetaClassDeclareReservedUnused ( IOBlockStorageServices, 7 );
     OSMetaClassDeclareReservedUnused ( IOBlockStorageServices, 8 );
+#endif /* !TARGET_OS_EMBEDDED */
 	
 };
 

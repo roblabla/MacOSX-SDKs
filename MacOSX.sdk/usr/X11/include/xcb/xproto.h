@@ -316,6 +316,41 @@ typedef struct xcb_depth_iterator_t {
     int          index; /**<  */
 } xcb_depth_iterator_t;
 
+typedef enum xcb_event_mask_t {
+    XCB_EVENT_MASK_NO_EVENT = 0,
+    XCB_EVENT_MASK_KEY_PRESS = 1,
+    XCB_EVENT_MASK_KEY_RELEASE = 2,
+    XCB_EVENT_MASK_BUTTON_PRESS = 4,
+    XCB_EVENT_MASK_BUTTON_RELEASE = 8,
+    XCB_EVENT_MASK_ENTER_WINDOW = 16,
+    XCB_EVENT_MASK_LEAVE_WINDOW = 32,
+    XCB_EVENT_MASK_POINTER_MOTION = 64,
+    XCB_EVENT_MASK_POINTER_MOTION_HINT = 128,
+    XCB_EVENT_MASK_BUTTON_1_MOTION = 256,
+    XCB_EVENT_MASK_BUTTON_2_MOTION = 512,
+    XCB_EVENT_MASK_BUTTON_3_MOTION = 1024,
+    XCB_EVENT_MASK_BUTTON_4_MOTION = 2048,
+    XCB_EVENT_MASK_BUTTON_5_MOTION = 4096,
+    XCB_EVENT_MASK_BUTTON_MOTION = 8192,
+    XCB_EVENT_MASK_KEYMAP_STATE = 16384,
+    XCB_EVENT_MASK_EXPOSURE = 32768,
+    XCB_EVENT_MASK_VISIBILITY_CHANGE = 65536,
+    XCB_EVENT_MASK_STRUCTURE_NOTIFY = 131072,
+    XCB_EVENT_MASK_RESIZE_REDIRECT = 262144,
+    XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY = 524288,
+    XCB_EVENT_MASK_SUBSTRUCTURE_REDIRECT = 1048576,
+    XCB_EVENT_MASK_FOCUS_CHANGE = 2097152,
+    XCB_EVENT_MASK_PROPERTY_CHANGE = 4194304,
+    XCB_EVENT_MASK_COLOR_MAP_CHANGE = 8388608,
+    XCB_EVENT_MASK_OWNER_GRAB_BUTTON = 16777216
+} xcb_event_mask_t;
+
+typedef enum xcb_backing_store_t {
+    XCB_BACKING_STORE_NOT_USEFUL = 0,
+    XCB_BACKING_STORE_WHEN_MAPPED = 1,
+    XCB_BACKING_STORE_ALWAYS = 2
+} xcb_backing_store_t;
+
 /**
  * @brief xcb_screen_t
  **/
@@ -455,8 +490,29 @@ typedef enum xcb_mod_mask_t {
     XCB_MOD_MASK_2 = 16,
     XCB_MOD_MASK_3 = 32,
     XCB_MOD_MASK_4 = 64,
-    XCB_MOD_MASK_5 = 128
+    XCB_MOD_MASK_5 = 128,
+    XCB_MOD_MASK_ANY = 32768
 } xcb_mod_mask_t;
+
+typedef enum xcb_key_but_mask_t {
+    XCB_KEY_BUT_MASK_SHIFT = 1,
+    XCB_KEY_BUT_MASK_LOCK = 2,
+    XCB_KEY_BUT_MASK_CONTROL = 4,
+    XCB_KEY_BUT_MASK_MOD_1 = 8,
+    XCB_KEY_BUT_MASK_MOD_2 = 16,
+    XCB_KEY_BUT_MASK_MOD_3 = 32,
+    XCB_KEY_BUT_MASK_MOD_4 = 64,
+    XCB_KEY_BUT_MASK_MOD_5 = 128,
+    XCB_KEY_BUT_MASK_BUTTON_1 = 256,
+    XCB_KEY_BUT_MASK_BUTTON_2 = 512,
+    XCB_KEY_BUT_MASK_BUTTON_3 = 1024,
+    XCB_KEY_BUT_MASK_BUTTON_4 = 2048,
+    XCB_KEY_BUT_MASK_BUTTON_5 = 4096
+} xcb_key_but_mask_t;
+
+typedef enum xcb_window_enum_t {
+    XCB_WINDOW_NONE = 0
+} xcb_window_enum_t;
 
 /** Opcode for xcb_key_press. */
 #define XCB_KEY_PRESS 2
@@ -943,6 +999,83 @@ typedef struct xcb_selection_clear_event_t {
     xcb_atom_t      selection; /**<  */
 } xcb_selection_clear_event_t;
 
+typedef enum xcb_time_t {
+    XCB_TIME_CURRENT_TIME = 0
+} xcb_time_t;
+
+typedef enum xcb_atom_enum_t {
+    XCB_ATOM_NONE = 0,
+    XCB_ATOM_ANY = 0,
+    XCB_ATOM_PRIMARY,
+    XCB_ATOM_SECONDARY,
+    XCB_ATOM_ARC,
+    XCB_ATOM_ATOM,
+    XCB_ATOM_BITMAP,
+    XCB_ATOM_CARDINAL,
+    XCB_ATOM_COLORMAP,
+    XCB_ATOM_CURSOR,
+    XCB_ATOM_CUT_BUFFER0,
+    XCB_ATOM_CUT_BUFFER1,
+    XCB_ATOM_CUT_BUFFER2,
+    XCB_ATOM_CUT_BUFFER3,
+    XCB_ATOM_CUT_BUFFER4,
+    XCB_ATOM_CUT_BUFFER5,
+    XCB_ATOM_CUT_BUFFER6,
+    XCB_ATOM_CUT_BUFFER7,
+    XCB_ATOM_DRAWABLE,
+    XCB_ATOM_FONT,
+    XCB_ATOM_INTEGER,
+    XCB_ATOM_PIXMAP,
+    XCB_ATOM_POINT,
+    XCB_ATOM_RECTANGLE,
+    XCB_ATOM_RESOURCE_MANAGER,
+    XCB_ATOM_RGB_COLOR_MAP,
+    XCB_ATOM_RGB_BEST_MAP,
+    XCB_ATOM_RGB_BLUE_MAP,
+    XCB_ATOM_RGB_DEFAULT_MAP,
+    XCB_ATOM_RGB_GRAY_MAP,
+    XCB_ATOM_RGB_GREEN_MAP,
+    XCB_ATOM_RGB_RED_MAP,
+    XCB_ATOM_STRING,
+    XCB_ATOM_VISUALID,
+    XCB_ATOM_WINDOW,
+    XCB_ATOM_WM_COMMAND,
+    XCB_ATOM_WM_HINTS,
+    XCB_ATOM_WM_CLIENT_MACHINE,
+    XCB_ATOM_WM_ICON_NAME,
+    XCB_ATOM_WM_ICON_SIZE,
+    XCB_ATOM_WM_NAME,
+    XCB_ATOM_WM_NORMAL_HINTS,
+    XCB_ATOM_WM_SIZE_HINTS,
+    XCB_ATOM_WM_ZOOM_HINTS,
+    XCB_ATOM_MIN_SPACE,
+    XCB_ATOM_NORM_SPACE,
+    XCB_ATOM_MAX_SPACE,
+    XCB_ATOM_END_SPACE,
+    XCB_ATOM_SUPERSCRIPT_X,
+    XCB_ATOM_SUPERSCRIPT_Y,
+    XCB_ATOM_SUBSCRIPT_X,
+    XCB_ATOM_SUBSCRIPT_Y,
+    XCB_ATOM_UNDERLINE_POSITION,
+    XCB_ATOM_UNDERLINE_THICKNESS,
+    XCB_ATOM_STRIKEOUT_ASCENT,
+    XCB_ATOM_STRIKEOUT_DESCENT,
+    XCB_ATOM_ITALIC_ANGLE,
+    XCB_ATOM_X_HEIGHT,
+    XCB_ATOM_QUAD_WIDTH,
+    XCB_ATOM_WEIGHT,
+    XCB_ATOM_POINT_SIZE,
+    XCB_ATOM_RESOLUTION,
+    XCB_ATOM_COPYRIGHT,
+    XCB_ATOM_NOTICE,
+    XCB_ATOM_FONT_NAME,
+    XCB_ATOM_FAMILY_NAME,
+    XCB_ATOM_FULL_NAME,
+    XCB_ATOM_CAP_HEIGHT,
+    XCB_ATOM_WM_CLASS,
+    XCB_ATOM_WM_TRANSIENT_FOR
+} xcb_atom_enum_t;
+
 /** Opcode for xcb_selection_request. */
 #define XCB_SELECTION_REQUEST 30
 
@@ -982,6 +1115,10 @@ typedef enum xcb_colormap_state_t {
     XCB_COLORMAP_STATE_UNINSTALLED = 0,
     XCB_COLORMAP_STATE_INSTALLED = 1
 } xcb_colormap_state_t;
+
+typedef enum xcb_colormap_enum_t {
+    XCB_COLORMAP_NONE = 0
+} xcb_colormap_enum_t;
 
 /** Opcode for xcb_colormap_notify. */
 #define XCB_COLORMAP_NOTIFY 32
@@ -1205,41 +1342,6 @@ typedef enum xcb_gravity_t {
     XCB_GRAVITY_SOUTH_EAST = 9,
     XCB_GRAVITY_STATIC = 10
 } xcb_gravity_t;
-
-typedef enum xcb_backing_store_t {
-    XCB_BACKING_STORE_NOT_USEFUL = 0,
-    XCB_BACKING_STORE_WHEN_MAPPED = 1,
-    XCB_BACKING_STORE_ALWAYS = 2
-} xcb_backing_store_t;
-
-typedef enum xcb_event_mask_t {
-    XCB_EVENT_MASK_NO_EVENT = 0,
-    XCB_EVENT_MASK_KEY_PRESS = 1,
-    XCB_EVENT_MASK_KEY_RELEASE = 2,
-    XCB_EVENT_MASK_BUTTON_PRESS = 4,
-    XCB_EVENT_MASK_BUTTON_RELEASE = 8,
-    XCB_EVENT_MASK_ENTER_WINDOW = 16,
-    XCB_EVENT_MASK_LEAVE_WINDOW = 32,
-    XCB_EVENT_MASK_POINTER_MOTION = 64,
-    XCB_EVENT_MASK_POINTER_MOTION_HINT = 128,
-    XCB_EVENT_MASK_BUTTON_1_MOTION = 256,
-    XCB_EVENT_MASK_BUTTON_2_MOTION = 512,
-    XCB_EVENT_MASK_BUTTON_3_MOTION = 1024,
-    XCB_EVENT_MASK_BUTTON_4_MOTION = 2048,
-    XCB_EVENT_MASK_BUTTON_5_MOTION = 4096,
-    XCB_EVENT_MASK_BUTTON_MOTION = 8192,
-    XCB_EVENT_MASK_KEYMAP_STATE = 16384,
-    XCB_EVENT_MASK_EXPOSURE = 32768,
-    XCB_EVENT_MASK_VISIBILITY_CHANGE = 65536,
-    XCB_EVENT_MASK_STRUCTURE_NOTIFY = 131072,
-    XCB_EVENT_MASK_RESIZE_REDIRECT = 262144,
-    XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY = 524288,
-    XCB_EVENT_MASK_SUBSTRUCTURE_REDIRECT = 1048576,
-    XCB_EVENT_MASK_FOCUS_CHANGE = 2097152,
-    XCB_EVENT_MASK_PROPERTY_CHANGE = 4194304,
-    XCB_EVENT_MASK_COLOR_MAP_CHANGE = 8388608,
-    XCB_EVENT_MASK_OWNER_GRAB_BUTTON = 16777216
-} xcb_event_mask_t;
 
 /** Opcode for xcb_create_window. */
 #define XCB_CREATE_WINDOW 1
@@ -1834,6 +1936,10 @@ typedef enum xcb_grab_status_t {
     XCB_GRAB_STATUS_FROZEN = 4
 } xcb_grab_status_t;
 
+typedef enum xcb_cursor_enum_t {
+    XCB_CURSOR_NONE = 0
+} xcb_cursor_enum_t;
+
 /**
  * @brief xcb_grab_pointer_cookie_t
  **/
@@ -2225,7 +2331,8 @@ typedef struct xcb_warp_pointer_request_t {
 typedef enum xcb_input_focus_t {
     XCB_INPUT_FOCUS_NONE = 0,
     XCB_INPUT_FOCUS_POINTER_ROOT = 1,
-    XCB_INPUT_FOCUS_PARENT = 2
+    XCB_INPUT_FOCUS_PARENT = 2,
+    XCB_INPUT_FOCUS_FOLLOW_KEYBOARD = 3
 } xcb_input_focus_t;
 
 /** Opcode for xcb_set_input_focus. */
@@ -2682,7 +2789,7 @@ typedef enum xcb_cap_style_t {
 } xcb_cap_style_t;
 
 typedef enum xcb_join_style_t {
-    XCB_JOIN_STYLE_MITRE = 0,
+    XCB_JOIN_STYLE_MITER = 0,
     XCB_JOIN_STYLE_ROUND = 1,
     XCB_JOIN_STYLE_BEVEL = 2
 } xcb_join_style_t;
@@ -3553,6 +3660,10 @@ typedef struct xcb_lookup_color_reply_t {
     uint16_t visual_blue; /**<  */
 } xcb_lookup_color_reply_t;
 
+typedef enum xcb_pixmap_enum_t {
+    XCB_PIXMAP_NONE = 0
+} xcb_pixmap_enum_t;
+
 /** Opcode for xcb_create_cursor. */
 #define XCB_CREATE_CURSOR 93
 
@@ -3575,6 +3686,10 @@ typedef struct xcb_create_cursor_request_t {
     uint16_t     x; /**<  */
     uint16_t     y; /**<  */
 } xcb_create_cursor_request_t;
+
+typedef enum xcb_font_enum_t {
+    XCB_FONT_NONE = 0
+} xcb_font_enum_t;
 
 /** Opcode for xcb_create_glyph_cursor. */
 #define XCB_CREATE_GLYPH_CURSOR 94

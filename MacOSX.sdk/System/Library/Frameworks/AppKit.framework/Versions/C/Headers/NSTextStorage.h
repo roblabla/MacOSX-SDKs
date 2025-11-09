@@ -1,6 +1,6 @@
 /* 
         NSTextStorage.h
-        Copyright (c) 1994-2009, Apple Inc.
+        Copyright (c) 1994-2011, Apple Inc.
         All rights reserved.
 
 NSTextStorage is a semi-abstract subclass of NSMutableAttributedString. It implements change management (beginEditing/endEditing), verification of attributes, delegate handling, and layout management notification. The one aspect it does not implement is the actual attributed string storage --- this is left up to the subclassers, which need to override the two NSMutableAttributedString primitives:

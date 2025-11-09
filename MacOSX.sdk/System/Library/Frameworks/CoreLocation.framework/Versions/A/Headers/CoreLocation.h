@@ -2,15 +2,20 @@
  *  CoreLocation.h
  *  CoreLocation
  *
- *  Copyright 2008 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2010 Apple Inc. All rights reserved.
  *
  */
 
-#if ( !TARGET_OS_MAC || MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 )
 
+#ifndef __CORELOCATION__
+#define __CORELOCATION__
+
+#import <CoreLocation/CLErrorDomain.h>
 #import <CoreLocation/CLError.h>
+#import <CoreLocation/CLRegion.h>
+#import <CoreLocation/CLHeading.h>
 #import <CoreLocation/CLLocation.h>
 #import <CoreLocation/CLLocationManager.h>
 #import <CoreLocation/CLLocationManagerDelegate.h>
 
-#endif
+#endif /* __CORELOCATION__ */

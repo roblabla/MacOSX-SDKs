@@ -3,7 +3,7 @@
  
      Contains:   Window Manager Interfaces
  
-     Version:    HIToolbox-463~1
+     Version:    HIToolbox-567.2~1
  
      Copyright:  © 1997-2008 by Apple Inc., all rights reserved
  
@@ -694,7 +694,35 @@ enum {
    * Available for all windows in Mac OS X 10.6 and later. This
    * attribute is automatically given to all compositing windows.
    */
-  kHIWindowBitAutoCalibration   = 36
+  kHIWindowBitAutoCalibration   = 36,
+
+  /*
+   * Indicates that this window can become fullscreen, and causes the
+   * enter fullscreen title bar button to be added to the window's
+   * title bar. Including this bit on a window causes HIToolbox to add
+   * appropriate Enter/Exit Full Screen menu items to the app's menus,
+   * which HIToolbox will update appropriately. Only supported for
+   * windows of kDocumentWindowClass. Available in Mac OS X 10.7 and
+   * later.
+   */
+  kHIWindowBitFullScreenPrimary = 45,
+
+  /*
+   * Indicates that this window can coexist on a fullscreen space with
+   * a fullscreen window of another application, but is not capable of
+   * becoming fullscreen itself.
+   * This window attribute is used in conjunction with the
+   * kHIWindowCanJoinAllSpaces Availability option to allow the window
+   * to move across FullScreen workspaces. For applications that are
+   * BackgroundOnly or UIElements, this is the default behavior when
+   * kHIWindowCanJoinAllSpaces is also set. For other applications,
+   * kHIWindowBitFullScreenAuxiliary must be specified, and is
+   * supported for window classes including kUtilityWindowClass, and
+   * kFloatingWindowClass with a WindowActivationScope of
+   * kWindowActivationScopeIndependent or kWindowActivationScopeNone.
+   * Available in Mac OS X 10.7 and later.
+   */
+  kHIWindowBitFullScreenAuxiliary = 46
 };
 
 
@@ -4455,7 +4483,13 @@ enum {
 typedef UInt32                          HIWindowDepth;
 #if !__LP64__
 /*
- *  HIWindowSetDepth()
+ *  HIWindowSetDepth()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    This API is not actually functional in Mac OS X 10.6 or Mac OS X
+ *    10.7 and should not be used. Applications that need to control
+ *    the backing store depth of their windows should use NSWindows and
+ *    the [NSWindow setDepthLimit:] API.
  *  
  *  Summary:
  *    Sets the depth of a window's backing store.
@@ -4479,14 +4513,14 @@ typedef UInt32                          HIWindowDepth;
  *      kHIWindowDepth32Bit, 64Bit, or Float.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.6 and later in Carbon.framework [32-bit only]
+ *    Mac OS X:         in version 10.6 and later in Carbon.framework [32-bit only] but deprecated in 10.7
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
 HIWindowSetDepth(
   WindowRef       inWindow,
-  HIWindowDepth   inDepth)                                    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+  HIWindowDepth   inDepth)                                    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
@@ -6305,7 +6339,11 @@ enum {
 
   /*
    * Finder-like zoom rectangles. Use with TransitionWindow and Show or
-   * Hide transition actions
+   * Hide transition actions. In Mac OS X 10.7 and later, this effect
+   * can also be used with the Resize transition action to show the
+   * standard animation effect for zooming a window to a new size. The
+   * combination of the Zoom effect and the Resize action is only
+   * recommended for use with compositing windows.
    */
   kWindowZoomTransitionEffect   = 1,
 
@@ -6379,10 +6417,14 @@ enum {
   kWindowMoveTransitionAction   = 3,
 
   /*
-   * Resizes the window. Use with the Slide transition effect. The
-   * inRect parameter is the global coordinates of the window's new
-   * structure bounds; inRect must be non-NULL. Available in Mac OS X,
-   * and in CarbonLib 1.5 and later.
+   * Resizes the window. Use with the Slide transition effect. In Mac
+   * OS X 10.7 and later, the Zoom transition effect is also supported
+   * with this action, for use by applications that respond to a zoom
+   * box click by resizing the window programmatically without calling
+   * the ZoomWindow or ZoomWindowIdeal APIs. The inRect parameter is
+   * the global coordinates of the window's new structure bounds;
+   * inRect must be non-NULL. Available in Mac OS X, and in CarbonLib
+   * 1.5 and later.
    */
   kWindowResizeTransitionAction = 4
 };
@@ -7559,7 +7601,11 @@ IsWindowInStandardState(
  *    track the window’s zoom state reliably. The Window Manager
  *    provides the GetWindowIdealUserState and SetWindowIdealUserState
  *    APIs to access a window's current ideal user state, previously
- *    recorded by ZoomWindowIdeal.
+ *    recorded by ZoomWindowIdeal. 
+ *    
+ *    In Mac OS X 10.7 and later, the ZoomWindowIdeal API automatically
+ *    uses an animation to resize the window to its new size, if the
+ *    window uses composited mode.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -10001,19 +10047,14 @@ enum {
 
 #if !__LP64__
 /*
- *  HIWindowGetScaleMode()
- *  
- *  Summary:
- *    Provides the window's scale mode and the application's display
- *    scale factor.
+ *  HIWindowGetScaleMode()   *** DEPRECATED ***
  *  
  *  Discussion:
- *    HIWindowGetScaleMode returns the HIWindowScaleMode for the
- *    window, which is determined based on the application's display
- *    scale factor and any resolution-independence attributes specified
- *    at window creation time. Applications and the views within the
- *    window can use the scale mode and display scale factor to help
- *    draw or layout properly for a particular scale mode.
+ *    This function is deprecated and should not be used by
+ *    applications targeting Mac OS X 10.7 or later. Please use an
+ *    appropriate AppKit API instead. Clients desiring high resolution
+ *    windows should switch to use NSWindows instead of Carbon
+ *    WindowRefs.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -10024,20 +10065,16 @@ enum {
  *      The WindowRef whose scale mode to provide.
  *    
  *    outMode:
- *      On exit, an HIWindowScaleMode indicating the window's scale
- *      mode.
+ *      On exit, this is always kHIWindowScaleModeUnscaled.
  *    
  *    outScaleFactor:
- *      On exit, a float indicating the display scale factor for the
- *      application. You may pass NULL if you are not interested in
- *      acquiring the scale factor; it is provided only as a
- *      convenience.
+ *      On exit, this is always 1.0.
  *  
  *  Result:
  *    An operating system result code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only] but deprecated in 10.7
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
@@ -10045,7 +10082,69 @@ extern OSStatus
 HIWindowGetScaleMode(
   WindowRef            inWindow,
   HIWindowScaleMode *  outMode,
-  CGFloat *            outScaleFactor)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CGFloat *            outScaleFactor)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————*/
+/* • Window FullScreen Transition                                                       */
+/*——————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  HIWindowToggleFullScreen()
+ *  
+ *  Summary:
+ *    Causes a window to enter or exit fullscreen.
+ *  
+ *  Discussion:
+ *    If the window is not already fullscreen and the window is capable
+ *    of becoming fullscreen -- see kHIWindowBitFullScreenPrimary --
+ *    the window will enter fullscreen. Otherwise, if the window is
+ *    already fullscreen, the window will exit fullscreen.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose fullscreen state to toggle.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.7 and later in Carbon.framework [32-bit only]
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIWindowToggleFullScreen(WindowRef inWindow)                  AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+
+/*
+ *  HIWindowIsFullScreen()
+ *  
+ *  Summary:
+ *    Returns whether the window is fullscreen.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose fullscreen state to query.
+ *  
+ *  Result:
+ *    A Boolean indicating whether the window is fullscreen: True means
+ *    fullscreen, and false means not fullscreen.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.7 and later in Carbon.framework [32-bit only]
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+HIWindowIsFullScreen(WindowRef inWindow)                      AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 /*——————————————————————————————————————————————————————————————————————————————————————*/
@@ -10257,7 +10356,7 @@ RemoveWindowProperty(
 #endif  /* !__LP64__ */
 
 enum {
-  kWindowPropertyPersistent     = 0x00000001 /* whether this property gets saved when flattening the window */
+  kWindowPropertyPersistent     = 0x00000001 /* whether this property is preserved when the system causes your application to be quit and relaunched */
 };
 
 #if !__LP64__
@@ -10911,75 +11010,9 @@ typedef WCTabPtr *                      WCTabHandle;
 /*——————————————————————————————————————————————————————————————————————————————————————*/
 /* • WindowRecords                                                                      */
 /*——————————————————————————————————————————————————————————————————————————————————————*/
-#if !OPAQUE_TOOLBOX_STRUCTS
-typedef struct WindowRecord             WindowRecord;
-typedef WindowRecord *                  WindowPeek;
-struct WindowRecord {
-  GrafPort            port;                   /* in Carbon use GetWindowPort*/
-  short               windowKind;             /* in Carbon use Get/SetWindowKind*/
-  Boolean             visible;                /* in Carbon use Hide/ShowWindow, ShowHide, IsWindowVisible*/
-  Boolean             hilited;                /* in Carbon use HiliteWindow, IsWindowHilited*/
-  Boolean             goAwayFlag;             /* in Carbon use ChangeWindowAttributes*/
-  Boolean             spareFlag;              /* in Carbon use ChangeWindowAttributes*/
-  RgnHandle           strucRgn;               /* in Carbon use GetWindowRegion*/
-  RgnHandle           contRgn;                /* in Carbon use GetWindowRegion*/
-  RgnHandle           updateRgn;              /* in Carbon use GetWindowRegion*/
-  Handle              windowDefProc;          /* not supported in Carbon */
-  Handle              dataHandle;             /* not supported in Carbon */
-  StringHandle        titleHandle;            /* in Carbon use Get/SetWTitle */
-  short               titleWidth;             /* in Carbon use GetWindowRegion */
-  Handle              controlList;            /* in Carbon use GetRootControl */
-  WindowPeek          nextWindow;             /* in Carbon use GetNextWindow */
-  PicHandle           windowPic;              /* in Carbon use Get/SetWindowPic */
-  long                refCon;                 /* in Carbon use Get/SetWRefCon*/
-};
-
-#endif  /* !OPAQUE_TOOLBOX_STRUCTS */
-
-#if !OPAQUE_TOOLBOX_STRUCTS
-typedef struct CWindowRecord            CWindowRecord;
-typedef CWindowRecord *                 CWindowPeek;
-struct CWindowRecord {
-  CGrafPort           port;                   /* in Carbon use GetWindowPort*/
-  short               windowKind;             /* in Carbon use Get/SetWindowKind    */
-  Boolean             visible;                /* in Carbon use Hide/ShowWindow, ShowHide, IsWindowVisible     */
-  Boolean             hilited;                /* in Carbon use HiliteWindow, IsWindowHilited*/
-  Boolean             goAwayFlag;             /* in Carbon use ChangeWindowAttributes   */
-  Boolean             spareFlag;              /* in Carbon use ChangeWindowAttributes   */
-  RgnHandle           strucRgn;               /* in Carbon use GetWindowRegion  */
-  RgnHandle           contRgn;                /* in Carbon use GetWindowRegion  */
-  RgnHandle           updateRgn;              /* in Carbon use GetWindowRegion  */
-  Handle              windowDefProc;          /* not supported in Carbon */
-  Handle              dataHandle;             /* not supported in Carbon */
-  StringHandle        titleHandle;            /* in Carbon use Get/SetWTitle */
-  short               titleWidth;             /* in Carbon use GetWindowRegion */
-  Handle              controlList;            /* in Carbon use GetRootControl */
-  CWindowPeek         nextWindow;             /* in Carbon use GetNextWindow */
-  PicHandle           windowPic;              /* in Carbon use Get/SetWindowPic     */
-  long                refCon;                 /* in Carbon use Get/SetWRefCon      */
-};
-
-#endif  /* !OPAQUE_TOOLBOX_STRUCTS */
-
 /*——————————————————————————————————————————————————————————————————————————————————————*/
 /* • AuxWinHandle                                                                       */
 /*——————————————————————————————————————————————————————————————————————————————————————*/
-#if !OPAQUE_TOOLBOX_STRUCTS
-typedef struct AuxWinRec                AuxWinRec;
-typedef AuxWinRec *                     AuxWinPtr;
-typedef AuxWinPtr *                     AuxWinHandle;
-struct AuxWinRec {
-  AuxWinHandle        awNext;                 /* handle to next AuxWinRec, not supported in Carbon*/
-  WindowRef           awOwner;                /* not supported in Carbon*/
-  CTabHandle          awCTable;               /* color table for this window, use  Get/SetWindowContentColor in Carbon*/
-  Handle              reserved;               /* not supported in Carbon*/
-  long                awFlags;                /* reserved for expansion, not supported in Carbon*/
-  CTabHandle          awReserved;             /* reserved for expansion, not supported in Carbon*/
-  long                awRefCon;               /* user constant, in Carbon use Get/SetWindowProperty if you need more refCons*/
-};
-
-#endif  /* !OPAQUE_TOOLBOX_STRUCTS */
-
 /*——————————————————————————————————————————————————————————————————————————————————————*/
 /*  • BasicWindowDescription                                                            */
 /*                                                                                      */

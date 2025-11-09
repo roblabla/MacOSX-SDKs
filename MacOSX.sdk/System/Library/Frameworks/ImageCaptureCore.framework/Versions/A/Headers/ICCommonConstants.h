@@ -9,6 +9,8 @@
 //
 //------------------------------------------------------------------------------------------------------------------------------
 
+#pragma once
+
 /*!
   @enum ICEXIFOrientationType
   @abstract Type representing EXIF Orientation tag value
@@ -39,7 +41,7 @@ enum
     ICEXIFOrientation5  = 5,    // Rotated 90° CCW and flipped vertically
     ICEXIFOrientation6  = 6,    // Rotated 90° CCW
     ICEXIFOrientation7  = 7,    // Rotated 90° CW and flipped vertically
-    ICEXIFOrientation8  = 8,    // Rotated 90° CW
+    ICEXIFOrientation8  = 8     // Rotated 90° CW
 };
 typedef NSUInteger ICEXIFOrientationType;
 
@@ -81,6 +83,20 @@ typedef NSUInteger ICEXIFOrientationType;
         A non-specific error occurred while updownloading a file.
     @constant ICReturnFailedToCompletePassThroughCommand
         Failed to complete a pass-through (e.g., PTP pass-through) command.
+    @constant ICReturnDownloadCanceled
+        A download operation was canceled.
+    @constant ICReturnFailedToEnabeTethering
+        Failed to enable tethered-capture on a camera device.
+    @constant ICReturnFailedToDisabeTethering
+        Failed to disable tethered-capture on a camera device.
+    @constant ICReturnFailedToCompleteSendMessageRequest
+        A request to send a message to a device failed.
+    @constant ICReturnDeleteFilesFailed
+        A request to delete files failed.
+    @constant ICReturnDeleteFilesCanceled
+        A request to delete files was canceled.
+    @constant ICReturnDeviceIsPasscodeLocked
+        The device is locked with a passcode. Its contents cannot be seen unless it is unlocked.
 */
 typedef enum ICReturnCode
 {
@@ -100,7 +116,13 @@ typedef enum ICReturnCode
     ICReturnDownloadFailed                        = -9934,
     ICReturnUploadFailed                          = -9935,
     ICReturnFailedToCompletePassThroughCommand    = -9936,
-    ICReturnDownloadCanceled                      = -9937
+    ICReturnDownloadCanceled                      = -9937,
+    ICReturnFailedToEnabeTethering                = -9938,
+    ICReturnFailedToDisabeTethering               = -9939,
+    ICReturnFailedToCompleteSendMessageRequest    = -9940,
+    ICReturnDeleteFilesFailed                     = -9941,
+    ICReturnDeleteFilesCanceled                   = -9942,
+    ICReturnDeviceIsPasscodeLocked                = -9943
 } ICReturnCode;
 
 ////------------------------------------------------------------------------------------------------------------------------------

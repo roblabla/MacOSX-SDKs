@@ -33,6 +33,9 @@
 
 #include <IOKit/storage/IOStorageDeviceCharacteristics.h>
 
+// Build includes
+#include <TargetConditionals.h>
+
 
 //-----------------------------------------------------------------------------
 //	Constants
@@ -209,7 +212,7 @@ class IOSCSIMultimediaCommandsDevice : public IOSCSIPrimaryCommandsDevice
 	
 private:
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 
     SCSIMultimediaCommands *	fSCSIMultimediaCommandObject;
     SCSIMultimediaCommands *	GetSCSIMultimediaCommandObject ( void );
@@ -217,7 +220,7 @@ private:
     SCSIBlockCommands *			fSCSIBlockCommandObject;			/* OBSOLETE */
     SCSIBlockCommands *			GetSCSIBlockCommandObject ( void );	/* OBSOLETE */
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	static void		AsyncReadWriteComplete ( SCSITaskIdentifier completedTask );
 	
@@ -242,14 +245,14 @@ protected:
 	#define fDeviceSupportsFastSpindown			fIOSCSIMultimediaCommandsDeviceReserved->fDeviceSupportsFastSpindown
 	#define fCDLoadingMechanism					fIOSCSIMultimediaCommandsDeviceReserved->fCDLoadingMechanism
 	
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	
 	// This method will retreive the SCSI Primary Command Set object for
 	// the class.  For subclasses, this will be overridden using a
 	// dynamic cast on the subclasses base command set object.
 	virtual SCSIPrimaryCommands *	GetSCSIPrimaryCommandObject ( void );
 	
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	CDFeatures						fSupportedCDFeatures;
 	DVDFeatures						fSupportedDVDFeatures;
@@ -381,12 +384,12 @@ protected:
 	
 	virtual void		free ( void );
 	
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 
 	virtual bool 		CreateCommandSetObjects ( void );
 	virtual void 		FreeCommandSetObjects ( void );
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 
 	virtual IOReturn	VerifyDeviceState ( void );
 
@@ -447,7 +450,7 @@ public:
 	
 	virtual IOReturn	ReadTOC ( IOMemoryDescriptor * buffer );
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	
 	virtual IOReturn	AudioPause ( bool pause );
 	
@@ -463,7 +466,7 @@ public:
 	
 	virtual IOReturn	SetAudioVolume ( UInt8 leftVolume, UInt8 rightVolume );
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	/* DVD Specific */
 	virtual UInt32			GetMediaType		( void );
@@ -499,7 +502,7 @@ public:
 	
 	SCSICmdField4Byte ConvertMSFToLBA ( SCSICmdField3Byte MSF );
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 
 	// Command methods to access all commands available to MMC based devices.
 	// The BLANK command as defined in section 6.1.1
@@ -530,7 +533,7 @@ public:
 						SCSICmdField2Byte 			INTERLEAVE_VALUE, 
 						SCSICmdField1Byte 			CONTROL );
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	
 	// The GET CONFIGURATION command as defined in section 6.1.4
@@ -578,7 +581,7 @@ public:
 						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 
 	// The PAUSE/RESUME command as defined in section 6.1.9
     virtual bool PAUSE_RESUME (
@@ -625,7 +628,7 @@ public:
 						SCSICmdField1Byte 			CONTROL );
 	/*********************** END LEGACY COMMAND SUPPORT *******************/
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	virtual bool READ_10 (
 						SCSITaskIdentifier			request,
@@ -638,7 +641,7 @@ public:
 						SCSICmdField2Byte 			TRANSFER_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
 	
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	
 	/*********************** LEGACY COMMAND SUPPORT ***********************/
 	// The READ BUFFER CAPACITY command as defined in section 6.1.14
@@ -649,7 +652,7 @@ public:
 						SCSICmdField1Byte 			CONTROL );
 	/*********************** END LEGACY COMMAND SUPPORT *******************/
 	
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	// The READ CD command as defined in section 6.1.15
     virtual bool READ_CD (
@@ -716,7 +719,7 @@ public:
 						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	
 	/*********************** LEGACY COMMAND SUPPORT ***********************/
 	// The READ HEADER command as defined in section 6.1.21
@@ -739,7 +742,7 @@ public:
 						SCSICmdField1Byte 			CONTROL );
 	/*********************** END LEGACY COMMAND SUPPORT ***********************/
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	// The READ SUB-CHANNEL command as defined in section 6.1.23
     virtual bool READ_SUB_CHANNEL (
@@ -771,7 +774,7 @@ public:
 						SCSICmdField2Byte 			ALLOCATION_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	/*********************** LEGACY COMMAND SUPPORT ***********************/
 	// The REPAIR TRACK command as defined in section 6.1.27
     virtual bool REPAIR_TRACK (
@@ -844,7 +847,7 @@ public:
 						SCSICmdField1Bit 			DO_OPC, 
 						SCSICmdField2Byte 			PARAMETER_LIST_LENGTH, 
 						SCSICmdField1Byte 			CONTROL );
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 
 	/*********************** LEGACY COMMAND SUPPORT ***********************/
 	// The SET CD SPEED command as defined in section 6.1.36
@@ -877,14 +880,14 @@ public:
 						SCSICmdField1Bit 			START, 
 						SCSICmdField1Byte 			CONTROL );
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	
 	// The STOP PLAY/SCAN command as defined in section 6.1.39
     virtual bool STOP_PLAY_SCAN (
 						SCSITaskIdentifier			request,
 						SCSICmdField1Byte 			CONTROL );
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 
 	// The SYNCHRONIZE CACHE command as defined in section 6.1.40
     virtual bool SYNCHRONIZE_CACHE (

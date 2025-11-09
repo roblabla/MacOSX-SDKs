@@ -122,7 +122,7 @@ extern int proc_pid(proc_t);
 extern int proc_ppid(proc_t);
 /* returns 1 if the process is marked for no remote hangs */
 extern int proc_noremotehang(proc_t);
-/* returns 1 is the process is marked for force quota */
+/* returns 1 if the process is marked for force quota */
 extern int proc_forcequota(proc_t);
 
 /* this routine returns 1 if the process is running with 64bit address space, else 0 */
@@ -153,6 +153,7 @@ pid_t proc_pgrpid(proc_t);
 
 
 __END_DECLS
+
 
 
 #endif	/* !_SYS_PROC_H_ */

@@ -1,14 +1,9 @@
 /*	
     NSURLProtectionSpace.h
-    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
     
     Public header file.
 */
-
-// Note: To use the APIs described in these headers, you must perform
-// a runtime check for Foundation-462.1 or later.
-#import <AvailabilityMacros.h>
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 #import <Security/Security.h>
@@ -20,19 +15,19 @@
    @const NSURLProtectionSpaceHTTP
    @abstract The protocol for HTTP
 */
-FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTP AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTP NS_AVAILABLE(10_5, 2_0);
 
 /*!
    @const NSURLProtectionSpaceHTTPS
    @abstract The protocol for HTTPS
 */
-FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTPS AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTPS NS_AVAILABLE(10_5, 2_0);
 
 /*!
    @const NSURLProtectionSpaceFTP
    @abstract The protocol for FTP
 */
-FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceFTP AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceFTP NS_AVAILABLE(10_5, 2_0);
 
 /*!
     @const NSURLProtectionSpaceHTTPProxy
@@ -87,25 +82,25 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodHTMLForm;
    @const NSURLAuthenticationMethodNTLM
    @abstract NTLM authentication.
 */
-FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodNTLM AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodNTLM NS_AVAILABLE(10_5, 2_0);
 
 /*!
    @const NSURLAuthenticationMethodNegotiate
    @abstract Negotiate authentication.
 */
-FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodNegotiate AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodNegotiate NS_AVAILABLE(10_5, 2_0);
 
 /*!
     @const NSURLAuthenticationMethodClientCertificate
     @abstract SSL Client certificate.  Applies to any protocol.
  */
-FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodClientCertificate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodClientCertificate NS_AVAILABLE(10_6, 3_0);
 
 /*!
     @const NSURLAuthenticationMethodServerTrust
     @abstract SecTrustRef validation required.  Applies to any protocol.
  */
-FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAILABLE(10_6, 3_0);
 
 @class NSURLProtectionSpaceInternal;
 
@@ -224,7 +219,7 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust AVAILABL
     @abstract Returns an array of acceptable certificate issuing authorities for client certification authentication. Issuers are identified by their distinguished name and returned as a DER encoded data.
     @result An array of NSData objects.  (Nil if the authenticationMethod is not NSURLAuthenticationMethodClientCertificate)
  */
-- (NSArray *)distinguishedNames;
+- (NSArray *)distinguishedNames NS_AVAILABLE(10_6, 3_0);
 
 @end
 
@@ -239,8 +234,6 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust AVAILABL
     @abstract Returns a SecTrustRef which represents the state of the servers SSL transaction state
     @result A SecTrustRef from Security.framework.  (Nil if the authenticationMethod is not NSURLAuthenticationMethodServerTrust)
  */
-- (SecTrustRef)serverTrust;
+- (SecTrustRef)serverTrust NS_AVAILABLE(10_6, 3_0);
 
 @end
-
-#endif

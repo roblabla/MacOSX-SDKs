@@ -1,5 +1,5 @@
 /*	NSInvocation.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,8 +9,8 @@
 
 @interface NSInvocation : NSObject {
 @private
-    void *_frame;
-    void *_retdata;
+    __strong void *_frame;
+    __strong void *_retdata;
     id _signature;
     id _container;
     uint8_t _retainedArgs;
@@ -54,9 +54,7 @@ enum _NSObjCValueType {
     NSObjCLonglongType = 'q',
     NSObjCFloatType = 'f',
     NSObjCDoubleType = 'd',
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
     NSObjCBoolType = 'B',
-#endif
     NSObjCSelectorType = ':',
     NSObjCObjectType = '@',
     NSObjCStructType = '{',
@@ -65,10 +63,10 @@ enum _NSObjCValueType {
     NSObjCArrayType = '[',
     NSObjCUnionType = '(',
     NSObjCBitfield = 'b'
-} DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+} NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
 
 typedef struct {
-    NSInteger type DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+    NSInteger type NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
     union {
     	char charValue;
 	short shortValue;
@@ -76,16 +74,14 @@ typedef struct {
 	long long longlongValue;
 	float floatValue;
 	double doubleValue;
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 	bool boolValue;
-#endif
 	SEL selectorValue;
 	id objectValue;
 	void *pointerValue;
 	void *structLocation;
 	char *cStringLocation;
-    } value DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-} NSObjCValue DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+    } value NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
+} NSObjCValue NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
 
 #endif
 #endif

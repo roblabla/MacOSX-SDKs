@@ -1,6 +1,6 @@
 /*
         NSTextList.h
-        Copyright (c) 2004-2009, Apple Inc.
+        Copyright (c) 2004-2011, Apple Inc.
         All rights reserved.
 
         Class to represent text lists.
@@ -8,7 +8,6 @@
 
 #import <Foundation/NSObject.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 enum {
     NSTextListPrependEnclosingMarker = (1 << 0)
@@ -26,9 +25,8 @@ enum {
 - (NSString *)markerFormat;
 - (NSUInteger)listOptions;
 - (NSString *)markerForItemNumber:(NSInteger)itemNum;
-- (void)setStartingItemNumber:(NSInteger)itemNum AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSInteger)startingItemNumber AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setStartingItemNumber:(NSInteger)itemNum NS_AVAILABLE_MAC(10_6);
+- (NSInteger)startingItemNumber NS_AVAILABLE_MAC(10_6);
 
 @end
 
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */

@@ -67,28 +67,7 @@
         @param	sdpUUIDRef IOBluetoothSDPUUIDRef for which an IOBluetoothSDPUUID * is desired.
 	@result		Returns the IOBluetoothSDPUUID * for the given IOBluetoothSDPUUIDRef.
 */
-+ (IOBluetoothSDPUUID *)withSDPUUIDRef:(IOBluetoothSDPUUIDRef)sdpUUIDRef;
-
-/*!
-    @method initWithBytes:length:
-    @abstract Initializes a new IOBluetoothSDPUUID object with the given bytes of the given length.
-    @discussion If the length is invalid for a UUID, nil is returned.
-    @param bytes An array of bytes representing the UUID.
-    @param length The lenght of the array of bytes.
-    @result Returns self on success or nil on failure.
-*/
-
-- (id)initWithBytes:(const void *)bytes length:(unsigned)length;
-
-/*!
-    @method initWithData:
-    @abstract Initializes a new IOBluetoothSDPUUID object with the bytes in the given NSData.
-    @discussion If the length of the NSData is invalid for a UUID, nil is returned.
-    @param data The NSData containing the UUID bytes.
-    @result Returns self on success or nil on failure.
-*/
-
-- (id)initWithData:(NSData *)data;
++ (IOBluetoothSDPUUID *)withSDPUUIDRef:(IOBluetoothSDPUUIDRef)sdpUUIDRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method initWithUUID16:
@@ -112,27 +91,7 @@
 	@abstract	Returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
 	@result		Returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
 */
-- (IOBluetoothSDPUUIDRef)getSDPUUIDRef;
-
-// NSData primitive methods
-
-/*!
-    @method bytes
-    @abstract Returns a pointer to the array of UUID bytes.
-    @discussion This is one of the required NSData primitive methods.
-    @result Returns a pointer to the array of UUID bytes.
-*/
-
-- (const void *)bytes;
-
-/*!
-    @method length
-    @abstract Returns the length (in bytes) of the UUID.
-    @discussion This is one of the required NSData primitive methods.
-    @result Returns the length (in bytes) of the UUID.
-*/
-
-- (NSUInteger)length;
+- (IOBluetoothSDPUUIDRef)getSDPUUIDRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method getUUIDWithLength:
@@ -147,18 +106,6 @@
 */
 
 - (IOBluetoothSDPUUID *)getUUIDWithLength:(unsigned)newLength;
-
-/*!
-    @method isEqualToData:
-    @abstract Compares the target IOBluetoothSDPUUID data with that of the given NSData parameter.
-    @discussion This method will compare the bytes of the two objects even if the otherData parameter is
-                not an IOBluetoothSDPUUID object.
-    @param otherData An NSData object to be compared with the target.
-    @result Returns true if the UUID values of each object are equal.  This includes the case where the sizes are different
-            but the data itself is the same when the Bluetooth UUID base is applied.
-*/
-
-- (BOOL)isEqualToData:(NSData *)otherData;
 
 /*!
     @method isEqualToUUID:

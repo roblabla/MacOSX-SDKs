@@ -8,6 +8,7 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <Metadata/MDItem.h>
+#include <Metadata/MDLabel.h>
 #include <Metadata/MDQuery.h>
 #include <Metadata/MDSchema.h>
 #include <Metadata/MDImporter.h>

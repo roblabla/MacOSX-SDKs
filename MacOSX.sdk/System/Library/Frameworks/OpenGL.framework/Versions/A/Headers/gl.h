@@ -1,6 +1,10 @@
 #ifndef __gl_h_
 #define __gl_h_
 
+#if defined __gl3_h_ && !(defined GL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED)
+#warning gl.h and gl3.h are both included.  Compiler will not invoke errors if using removed OpenGL functionality.
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -37,6 +41,8 @@ extern "C" {
 // switches to providing function pointers
 //#define GL_GLEXT_FUNCTION_POINTERS 1
 
+#ifndef __gltypes_h_	
+	
 typedef unsigned int GLenum;
 typedef unsigned char GLboolean;
 typedef unsigned int GLbitfield;
@@ -56,11 +62,14 @@ typedef void GLvoid;
 typedef long GLintptr;
 typedef long GLsizeiptr;
 
+	
 #ifndef GL_TYPEDEFS_2_0
 #define GL_TYPEDEFS_2_0
-    typedef char GLchar;
+typedef char GLchar;
 #endif
 
+#endif
+	
 #ifndef GL_GLEXT_LEGACY
 #include <OpenGL/glext.h>
 #endif
@@ -1519,54 +1528,24 @@ typedef long GLsizeiptr;
 #define GL_SRC0_RGB                       0x8580
 #define GL_SRC1_RGB                       0x8581
 #define GL_SRC2_RGB                       0x8582
-#define GL_SRC3_RGB                       0x8583
-#define GL_SRC4_RGB                       0x8584
-#define GL_SRC5_RGB                       0x8585
-#define GL_SRC6_RGB                       0x8586
-#define GL_SRC7_RGB                       0x8587
 #define GL_SRC0_ALPHA                     0x8588
 #define GL_SRC1_ALPHA                     0x8589
 #define GL_SRC2_ALPHA                     0x858A
-#define GL_SRC3_ALPHA                     0x858B
-#define GL_SRC4_ALPHA                     0x858C
-#define GL_SRC5_ALPHA                     0x858D
-#define GL_SRC6_ALPHA                     0x858E
-#define GL_SRC7_ALPHA                     0x858F
 
 /* Obsolete */
 #define GL_SOURCE0_RGB                    0x8580
 #define GL_SOURCE1_RGB                    0x8581
 #define GL_SOURCE2_RGB                    0x8582
-#define GL_SOURCE3_RGB                    0x8583
-#define GL_SOURCE4_RGB                    0x8584
-#define GL_SOURCE5_RGB                    0x8585
-#define GL_SOURCE6_RGB                    0x8586
-#define GL_SOURCE7_RGB                    0x8587
 #define GL_SOURCE0_ALPHA                  0x8588
 #define GL_SOURCE1_ALPHA                  0x8589
 #define GL_SOURCE2_ALPHA                  0x858A
-#define GL_SOURCE3_ALPHA                  0x858B
-#define GL_SOURCE4_ALPHA                  0x858C
-#define GL_SOURCE5_ALPHA                  0x858D
-#define GL_SOURCE6_ALPHA                  0x858E
-#define GL_SOURCE7_ALPHA                  0x858F
 
 #define GL_OPERAND0_RGB                   0x8590
 #define GL_OPERAND1_RGB                   0x8591
 #define GL_OPERAND2_RGB                   0x8592
-#define GL_OPERAND3_RGB                   0x8593
-#define GL_OPERAND4_RGB                   0x8594
-#define GL_OPERAND5_RGB                   0x8595
-#define GL_OPERAND6_RGB                   0x8596
-#define GL_OPERAND7_RGB                   0x8597
 #define GL_OPERAND0_ALPHA                 0x8598
 #define GL_OPERAND1_ALPHA                 0x8599
 #define GL_OPERAND2_ALPHA                 0x859A
-#define GL_OPERAND3_ALPHA                 0x859B
-#define GL_OPERAND4_ALPHA                 0x859C
-#define GL_OPERAND5_ALPHA                 0x859D
-#define GL_OPERAND6_ALPHA                 0x859E
-#define GL_OPERAND7_ALPHA                 0x859F
 
 #define GL_DOT3_RGB                       0x86AE
 #define GL_DOT3_RGBA                      0x86AF
@@ -1969,10 +1948,10 @@ typedef void (* glGetMinmaxParameterivProcPtr) (GLenum target, GLenum pname, GLi
 typedef void (* glGetPixelMapfvProcPtr) (GLenum map, GLfloat *values);
 typedef void (* glGetPixelMapuivProcPtr) (GLenum map, GLuint *values);
 typedef void (* glGetPixelMapusvProcPtr) (GLenum map, GLushort *values);
-typedef void (* glGetPointervProcPtr) (GLenum pname, GLvoid* *params);
+typedef void (* glGetPointervProcPtr) (GLenum pname, GLvoid **params);
 typedef void (* glGetPolygonStippleProcPtr) (GLubyte *mask);
 typedef void (* glGetSeparableFilterProcPtr) (GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span);
-typedef const GLubyte * (* glGetStringProcPtr) (GLenum name);
+typedef const GLubyte *(* glGetStringProcPtr) (GLenum name);
 typedef void (* glGetTexEnvfvProcPtr) (GLenum target, GLenum pname, GLfloat *params);
 typedef void (* glGetTexEnvivProcPtr) (GLenum target, GLenum pname, GLint *params);
 typedef void (* glGetTexGendvProcPtr) (GLenum coord, GLenum pname, GLdouble *params);
@@ -2160,9 +2139,9 @@ typedef void (* glTexGenfProcPtr) (GLenum coord, GLenum pname, GLfloat param);
 typedef void (* glTexGenfvProcPtr) (GLenum coord, GLenum pname, const GLfloat *params);
 typedef void (* glTexGeniProcPtr) (GLenum coord, GLenum pname, GLint param);
 typedef void (* glTexGenivProcPtr) (GLenum coord, GLenum pname, const GLint *params);
-typedef void (* glTexImage1DProcPtr) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
-typedef void (* glTexImage2DProcPtr) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
-typedef void (* glTexImage3DProcPtr) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+typedef void (* glTexImage1DProcPtr) (GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+typedef void (* glTexImage2DProcPtr) (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+typedef void (* glTexImage3DProcPtr) (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
 typedef void (* glTexParameterfProcPtr) (GLenum target, GLenum pname, GLfloat param);
 typedef void (* glTexParameterfvProcPtr) (GLenum target, GLenum pname, const GLfloat *params);
 typedef void (* glTexParameteriProcPtr) (GLenum target, GLenum pname, GLint param);
@@ -2200,7 +2179,6 @@ typedef void (* glVertexPointerProcPtr) (GLint size, GLenum type, GLsizei stride
 typedef void (* glViewportProcPtr) (GLint x, GLint y, GLsizei width, GLsizei height);
 
 typedef void (* glSampleCoverageProcPtr) (GLclampf value, GLboolean invert);
-typedef void (* glSamplePassProcPtr) (GLenum pass);
 
 typedef void (* glLoadTransposeMatrixfProcPtr) (const GLfloat *m);
 typedef void (* glLoadTransposeMatrixdProcPtr) (const GLdouble *m);
@@ -2282,7 +2260,7 @@ typedef void (* glPointParameterivProcPtr) (GLenum pname, const GLint *params);
 typedef void (* glBlendFuncSeparateProcPtr) (GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
 
 typedef void (* glMultiDrawArraysProcPtr) (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-typedef void (* glMultiDrawElementsProcPtr) (GLenum mode, const GLsizei *count, GLenum type, const GLvoid* *indices, GLsizei primcount);
+typedef void (* glMultiDrawElementsProcPtr) (GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
 
 typedef void (* glWindowPos2dProcPtr) (GLdouble x, GLdouble y);
 typedef void (* glWindowPos2dvProcPtr) (const GLdouble *v);
@@ -2365,11 +2343,11 @@ typedef void (* glDisableVertexAttribArrayProcPtr) (GLuint index);
 typedef void (* glGetVertexAttribdvProcPtr) (GLuint index, GLenum pname, GLdouble *params);
 typedef void (* glGetVertexAttribfvProcPtr) (GLuint index, GLenum pname, GLfloat *params);
 typedef void (* glGetVertexAttribivProcPtr) (GLuint index, GLenum pname, GLint *params);
-typedef void (* glGetVertexAttribPointervProcPtr) (GLuint index, GLenum pname, GLvoid* *pointer);
+typedef void (* glGetVertexAttribPointervProcPtr) (GLuint index, GLenum pname, GLvoid **pointer);
 typedef void (* glDeleteShaderProcPtr) (GLuint shader);
 typedef void (* glDetachShaderProcPtr) (GLuint program, GLuint shader);
 typedef GLuint (* glCreateShaderProcPtr) (GLenum type);
-typedef void (* glShaderSourceProcPtr) (GLuint shader, GLsizei count, const GLchar* *string, const GLint *length);
+typedef void (* glShaderSourceProcPtr) (GLuint shader, GLsizei count, const GLchar **string, const GLint *length);
 typedef void (* glCompileShaderProcPtr) (GLuint shader);
 typedef GLuint (* glCreateProgramProcPtr) (void);
 typedef void (* glAttachShaderProcPtr) (GLuint program, GLuint shader);
@@ -2433,7 +2411,7 @@ extern void glBindTexture (GLenum target, GLuint texture);
 extern void glBitmap (GLsizei width, GLsizei height, GLfloat xorig, GLfloat yorig, GLfloat xmove, GLfloat ymove, const GLubyte *bitmap);
 extern void glBlendColor (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 extern void glBlendEquation (GLenum mode);
-extern void glBlendEquationSeparate(GLenum modeRGB, GLenum modeAlpha);
+extern void glBlendEquationSeparate (GLenum modeRGB, GLenum modeAlpha);
 extern void glBlendFunc (GLenum sfactor, GLenum dfactor);
 extern void glCallList (GLuint list);
 extern void glCallLists (GLsizei n, GLenum type, const GLvoid *lists);
@@ -2570,10 +2548,10 @@ extern void glGetMinmaxParameteriv (GLenum target, GLenum pname, GLint *params);
 extern void glGetPixelMapfv (GLenum map, GLfloat *values);
 extern void glGetPixelMapuiv (GLenum map, GLuint *values);
 extern void glGetPixelMapusv (GLenum map, GLushort *values);
-extern void glGetPointerv (GLenum pname, GLvoid* *params);
+extern void glGetPointerv (GLenum pname, GLvoid **params);
 extern void glGetPolygonStipple (GLubyte *mask);
 extern void glGetSeparableFilter (GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span);
-extern const GLubyte * glGetString (GLenum name);
+extern const GLubyte *glGetString (GLenum name);
 extern void glGetTexEnvfv (GLenum target, GLenum pname, GLfloat *params);
 extern void glGetTexEnviv (GLenum target, GLenum pname, GLint *params);
 extern void glGetTexGendv (GLenum coord, GLenum pname, GLdouble *params);
@@ -2761,9 +2739,9 @@ extern void glTexGenf (GLenum coord, GLenum pname, GLfloat param);
 extern void glTexGenfv (GLenum coord, GLenum pname, const GLfloat *params);
 extern void glTexGeni (GLenum coord, GLenum pname, GLint param);
 extern void glTexGeniv (GLenum coord, GLenum pname, const GLint *params);
-extern void glTexImage1D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
-extern void glTexImage2D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
-extern void glTexImage3D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+extern void glTexImage1D (GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+extern void glTexImage2D (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+extern void glTexImage3D (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
 extern void glTexParameterf (GLenum target, GLenum pname, GLfloat param);
 extern void glTexParameterfv (GLenum target, GLenum pname, const GLfloat *params);
 extern void glTexParameteri (GLenum target, GLenum pname, GLint param);
@@ -2801,7 +2779,6 @@ extern void glVertexPointer (GLint size, GLenum type, GLsizei stride, const GLvo
 extern void glViewport (GLint x, GLint y, GLsizei width, GLsizei height);
 
 extern void glSampleCoverage (GLclampf value, GLboolean invert);
-extern void glSamplePass (GLenum pass);
 
 extern void glLoadTransposeMatrixf (const GLfloat *m);
 extern void glLoadTransposeMatrixd (const GLdouble *m);
@@ -2854,7 +2831,7 @@ extern void glMultiTexCoord4sv (GLenum target, const GLshort *v);
 extern void glFogCoordf (GLfloat coord);
 extern void glFogCoordfv (const GLfloat *coord);  
 extern void glFogCoordd (GLdouble coord);
-extern void glFogCoorddv (const GLdouble * coord);   
+extern void glFogCoorddv (const GLdouble *coord);   
 extern void glFogCoordPointer (GLenum type, GLsizei stride, const GLvoid *pointer);
 
 extern void glSecondaryColor3b (GLbyte red, GLbyte green, GLbyte blue);
@@ -2883,7 +2860,7 @@ extern void glPointParameteriv (GLenum pname, const GLint *params);
 extern void glBlendFuncSeparate (GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
 
 extern void glMultiDrawArrays (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-extern void glMultiDrawElements (GLenum mode, const GLsizei *count, GLenum type, const GLvoid* *indices, GLsizei primcount);
+extern void glMultiDrawElements (GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
 
 extern void glWindowPos2d (GLdouble x, GLdouble y);
 extern void glWindowPos2dv (const GLdouble *v);
@@ -2902,14 +2879,14 @@ extern void glWindowPos3iv (const GLint *v);
 extern void glWindowPos3s (GLshort x, GLshort y, GLshort z);
 extern void glWindowPos3sv (const GLshort *v);
 
-extern void glGenQueries(GLsizei n, GLuint *ids);
-extern void glDeleteQueries(GLsizei n, const GLuint *ids);
-extern GLboolean glIsQuery(GLuint id);
-extern void glBeginQuery(GLenum target, GLuint id);
-extern void glEndQuery(GLenum target);
-extern void glGetQueryiv(GLenum target, GLenum pname, GLint *params);
-extern void glGetQueryObjectiv(GLuint id, GLenum pname, GLint *params);
-extern void glGetQueryObjectuiv(GLuint id, GLenum pname, GLuint *params);
+extern void glGenQueries (GLsizei n, GLuint *ids);
+extern void glDeleteQueries (GLsizei n, const GLuint *ids);
+extern GLboolean glIsQuery (GLuint id);
+extern void glBeginQuery (GLenum target, GLuint id);
+extern void glEndQuery (GLenum target);
+extern void glGetQueryiv (GLenum target, GLenum pname, GLint *params);
+extern void glGetQueryObjectiv (GLuint id, GLenum pname, GLint *params);
+extern void glGetQueryObjectuiv (GLuint id, GLenum pname, GLuint *params);
 
 extern void glBindBuffer (GLenum target, GLuint buffer);
 extern void glDeleteBuffers (GLsizei n, const GLuint *buffers);
@@ -2918,7 +2895,7 @@ extern GLboolean glIsBuffer (GLuint buffer);
 extern void glBufferData (GLenum target, GLsizeiptr size, const GLvoid *data, GLenum usage);
 extern void glBufferSubData (GLenum target, GLintptr offset, GLsizeiptr size, const GLvoid *data);
 extern void glGetBufferSubData (GLenum target, GLintptr offset, GLsizeiptr size, GLvoid *data);
-extern GLvoid * glMapBuffer (GLenum target, GLenum access);
+extern GLvoid *glMapBuffer (GLenum target, GLenum access);
 extern GLboolean glUnmapBuffer (GLenum target);
 extern void glGetBufferParameteriv (GLenum target, GLenum pname, GLint *params);
 extern void glGetBufferPointerv (GLenum target, GLenum pname, GLvoid **params);
@@ -2966,11 +2943,11 @@ extern void glDisableVertexAttribArray (GLuint index);
 extern void glGetVertexAttribdv (GLuint index, GLenum pname, GLdouble *params);
 extern void glGetVertexAttribfv (GLuint index, GLenum pname, GLfloat *params);
 extern void glGetVertexAttribiv (GLuint index, GLenum pname, GLint *params);
-extern void glGetVertexAttribPointerv (GLuint index, GLenum pname, GLvoid* *pointer);
+extern void glGetVertexAttribPointerv (GLuint index, GLenum pname, GLvoid **pointer);
 extern void glDeleteShader (GLuint shader);
 extern void glDetachShader (GLuint program, GLuint shader);
 extern GLuint glCreateShader (GLenum type);
-extern void glShaderSource (GLuint shader, GLsizei count, const GLchar* *string, const GLint *length);
+extern void glShaderSource (GLuint shader, GLsizei count, const GLchar **string, const GLint *length);
 extern void glCompileShader (GLuint shader);
 extern GLuint glCreateProgram (void);
 extern void glAttachShader (GLuint program, GLuint shader);

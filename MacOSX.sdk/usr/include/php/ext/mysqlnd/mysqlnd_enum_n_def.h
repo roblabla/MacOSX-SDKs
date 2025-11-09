@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2006-2010 The PHP Group                                |
+  | Copyright (c) 2006-2011 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_enum_n_def.h 305904 2010-12-02 13:59:56Z andrey $ */
+/* $Id: mysqlnd_enum_n_def.h 307883 2011-01-31 13:52:21Z andrey $ */
 #ifndef MYSQLND_ENUM_N_DEF_H
 #define MYSQLND_ENUM_N_DEF_H
 
@@ -92,6 +92,7 @@
 #define CLIENT_MULTI_STATEMENTS		(1UL << 16) /* Enable/disable multi-stmt support */
 #define CLIENT_MULTI_RESULTS		(1UL << 17) /* Enable/disable multi-results */
 #define CLIENT_PS_MULTI_RESULTS		(1UL << 18) /* Multi-results in PS-protocol */
+#define CLIENT_PLUGIN_AUTH			(1UL << 19) /* Client supports plugin authentication */
 
 #define CLIENT_SSL_VERIFY_SERVER_CERT (1UL << 30)
 
@@ -156,6 +157,8 @@ typedef enum mysqlnd_option
 	MYSQL_REPORT_DATA_TRUNCATION,
 	MYSQL_OPT_RECONNECT,
 	MYSQL_OPT_SSL_VERIFY_SERVER_CERT,
+	MYSQL_PLUGIN_DIR,
+	MYSQL_DEFAULT_AUTH,
 #if MYSQLND_UNICODE
 	MYSQLND_OPT_NUMERIC_AND_DATETIME_AS_UNICODE = 200,
 #endif

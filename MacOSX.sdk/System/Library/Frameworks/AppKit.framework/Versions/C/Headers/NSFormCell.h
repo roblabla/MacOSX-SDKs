@@ -1,7 +1,7 @@
 /*
 	NSFormCell.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -28,17 +28,13 @@
 - (void)setTitleAlignment:(NSTextAlignment)mode;
 - (BOOL)isOpaque;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)setPlaceholderString:(NSString*)string;
 - (NSString*)placeholderString;
 - (void)setPlaceholderAttributedString:(NSAttributedString*)string;
 - (NSAttributedString*)placeholderAttributedString;
-#endif
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (NSWritingDirection)titleBaseWritingDirection;
 - (void)setTitleBaseWritingDirection:(NSWritingDirection)writingDirection;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 @end
 

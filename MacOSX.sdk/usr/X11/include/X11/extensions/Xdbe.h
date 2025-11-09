@@ -1,4 +1,3 @@
-/* $Xorg: Xdbe.h,v 1.3 2000/08/18 04:05:45 coskrey Exp $ */
 /******************************************************************************
  * 
  * Copyright (c) 1994, 1995  Hewlett-Packard Company
@@ -30,25 +29,28 @@
  *     Header file for Xlib-related DBE
  *
  *****************************************************************************/
-/* $XFree86: xc/include/extensions/Xdbe.h,v 3.2 2001/08/01 00:44:35 tsi Exp $ */
 
 #ifndef XDBE_H
 #define XDBE_H
 
-
-/* INCLUDES */
-
 #include <X11/Xfuncproto.h>
-#include <X11/extensions/Xdbeproto.h>
+#include <X11/extensions/dbe.h>
 
+typedef struct
+{
+    VisualID    visual;    /* one visual ID that supports double-buffering */
+    int         depth;     /* depth of visual in bits                      */
+    int         perflevel; /* performance level of visual                  */
+}
+XdbeVisualInfo;
 
-/* DEFINES */
+typedef struct
+{
+    int                 count;          /* number of items in visual_depth   */
+    XdbeVisualInfo      *visinfo;       /* list of visuals & depths for scrn */
+}
+XdbeScreenVisualInfo;
 
-/* Errors */
-#define XdbeBadBuffer    0
-
-
-/* TYPEDEFS */
 
 typedef Drawable XdbeBackBuffer;
 

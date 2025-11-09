@@ -2,12 +2,20 @@
  *  ServiceManagement.h
  *  Copyright (c) 2008 Apple Inc.  All rights reserved.
  */
+/*! @header
+    The main header for the ServiceManagement framework.  This header
+    provides support for loading and unloading launchd jobs
+    and reading and manipulating job dictionaries from within
+    an application.
+ */
 
 #ifndef __SERVICE_MANAGEMENT_H__
 #define __SERVICE_MANAGEMENT_H__
 
 #include <ServiceManagement/SMErrors.h>
+#if !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 #include <ServiceManagement/SMLoginItem.h>
+#endif
 #include <CoreFoundation/CoreFoundation.h>
 
 #if !TARGET_OS_EMBEDDED
@@ -16,19 +24,29 @@
 typedef void * AuthorizationRef;
 #endif
 
+/*! @abstract The authorization rights key for blessing and installing a privileged helper tool. */
 #define kSMRightBlessPrivilegedHelper	"com.apple.ServiceManagement.blesshelper"
+/*! @abstract The authorization rights key for modifying system daemons. */
 #define kSMRightModifySystemDaemons		"com.apple.ServiceManagement.daemons.modify"
 
 __BEGIN_DECLS
 
+/*! @abstract System-level launchd domain.
+
+ */
 extern const CFStringRef kSMDomainSystemLaunchd;
+/*! @abstract User-level launchd domain.
+ */
 extern const CFStringRef kSMDomainUserLaunchd;
 
 // Info.plist Keys
+/*! @abstract Privileged executables property list key */
 extern const CFStringRef kSMInfoKeyPrivilegedExecutables;	/* "SMPrivilegedExecutables" */
+/*! @abstract Authorized clients property list key */
 extern const CFStringRef kSMInfoKeyAuthorizedClients;		/* "SMAuthorizedClients" */
 
 #pragma mark Examining Jobs
+/*! @group Examining Jobs */
 /*!
  * @function		SMJobCopyDictionary
  * @abstract		Copy the job description dictionary for the given job label.
@@ -36,7 +54,7 @@ extern const CFStringRef kSMInfoKeyAuthorizedClients;		/* "SMAuthorizedClients" 
  *					dictionary for the given job label, or NULL if no job with the given
  *					label was found or an error occurred.
  *
- * @param			domain		The job's domain (e.g. kSMDomainSystemLaunchd).
+ * @param			domain		The job's domain (e.g. {@link kSMDomainSystemLaunchd}).
  * @param			jobLabel	The label identifier for the job to copy.
  *
  * @result			A new dictionary describing the job, or NULL if the job could not be found.
@@ -45,14 +63,14 @@ extern const CFStringRef kSMInfoKeyAuthorizedClients;		/* "SMAuthorizedClients" 
 CFDictionaryRef SMJobCopyDictionary(CFStringRef domain, CFStringRef jobLabel);
 
 /*!
- * @function		SMJobCopyAllDictionaries
+ * @function		SMCopyAllJobDictionaries
  * @abstract		Copy the job description dictionaries for all jobs in the
  *					given domain.
- * @discussion		SMJobCopyAllDictionaries returns an array of the job
+ * @discussion		SMCopyAllJobDictionaries returns an array of the job
  *					description dictionaries for all jobs in the given domain, or NULL
  *					if an error occurred.
  *
- * @param			domain		The desired domain (e.g. kSMDomainSystemLaunchd).
+ * @param			domain		The desired domain (e.g. {@link kSMDomainSystemLaunchd}).
  *
  * @result			A new array containing all job dictionaries, or NULL if an error
  *					occurred.  Must be released by the caller.
@@ -64,10 +82,10 @@ CFArrayRef SMCopyAllJobDictionaries(CFStringRef domain);
  * @abstract		Submits the given job to the specified domain.
  * @discussion		SMJobSubmit submits the given job to the specified domain.
  * 
- * @param			domain		The job's domain (e.g. kSMDomainSystemLaunchd).
+ * @param			domain		The job's domain (e.g. {@link kSMDomainSystemLaunchd}).
  * @param			job			A dictionary describing a job.
- * @param			auth		An AuthorizationRef containing the kSMRightModifySystemDaemons right if the
- *								given domain is kSMDomainSystemLaunchd.
+ * @param			auth		An AuthorizationRef containing the {@link kSMRightModifySystemDaemons} right if the
+ *								given domain is {@link kSMDomainSystemLaunchd}.
  * @param			outError	An output reference to a CFErrorRef describing the specific
  *								error encountered while submitting the job dictionary, or NULL
  *								if no error occurred. It is the responsibility of the application to
@@ -83,10 +101,10 @@ Boolean SMJobSubmit(CFStringRef domain, CFDictionaryRef job, AuthorizationRef au
  *					currently running, it will conditionally block until the running process has
  *					exited.
  * 
- * @param			domain		The job's domain (e.g. kSMDomainSystemLaunchd).
+ * @param			domain		The job's domain (e.g. {@link kSMDomainSystemLaunchd}).
  * @param			jobLabel	The label for the job to remove.
- * @param			auth		An AuthorizationRef containing the kSMRightModifySystemDaemons right if the
- *								given domain is kSMDomainSystemLaunchd.
+ * @param			auth		An AuthorizationRef containing the {@link kSMRightModifySystemDaemons} right if the
+ *								given domain is {@link kSMDomainSystemLaunchd}.
  * @param			wait		Pass true to block until the process for the given job has exited.
  * @param			outError	An output reference to a CFErrorRef describing the specific
  *								error encountered while submitting the job dictionary, or NULL
@@ -98,6 +116,7 @@ Boolean SMJobSubmit(CFStringRef domain, CFDictionaryRef job, AuthorizationRef au
 Boolean SMJobRemove(CFStringRef domain, CFStringRef jobLabel, AuthorizationRef auth, Boolean wait, CFErrorRef *outError);
 
 #pragma mark Adding Jobs Securely
+/*! @group Adding Jobs Securely */
 /*!
  * @function		SMJobBless
  * @abstract		Submits the executable for the given label as a launchd job.
@@ -136,11 +155,11 @@ Boolean SMJobRemove(CFStringRef domain, CFStringRef jobLabel, AuthorizationRef a
  *		label is "com.apple.Mail.helper", this must be the name of the tool in your application
  *		bundle.
  * 
- * @param			domain				The job's domain. Only kSMDomainSystemLaunchd is supported.
+ * @param			domain				The job's domain. Only {@link kSMDomainSystemLaunchd} is supported.
  * @param			executableLabel		The label of the privileged executable to install.
  *										This label must be one of the keys found in the SMPrivilegedExecutables
  *										dictionary in the application's Info.plist.
- * @param			auth				An authorization reference containing the kSMRightBlessPrivilegedHelper right.
+ * @param			auth				An authorization reference containing the {@link kSMRightBlessPrivilegedHelper} right.
  * @param			outError			An output reference to a CFErrorRef describing the specific
  *										error encountered while submitting the executable tool, or NULL if
  *										successful.  It is the responsibility of the application to release the

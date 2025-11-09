@@ -16,7 +16,7 @@
 - (void)scrollToRect:(CGRect)r;
 
 /* Defines the axes in which the layer may be scrolled. Possible values
- * are `none', `vertically', `horizontally' or `both' (the default.) */
+ * are `none', `vertically', `horizontally' or `both' (the default). */
 
 @property(copy) NSString *scrollMode;
 

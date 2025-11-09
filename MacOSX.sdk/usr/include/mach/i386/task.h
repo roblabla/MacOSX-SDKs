@@ -33,6 +33,7 @@ typedef function_table_entry   *function_table_t;
 #include <mach/mig.h>
 #include <mach/mig.h>
 #include <mach/mach_types.h>
+#include <mach_debug/mach_debug_types.h>
 
 #ifdef __BeforeMigUserHeader
 __BeforeMigUserHeader
@@ -425,6 +426,21 @@ kern_return_t task_set_ras_pc
 	vm_address_t boundspc
 );
 
+/* Routine task_zone_info */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t task_zone_info
+(
+	task_t target_task,
+	mach_zone_name_array_t *names,
+	mach_msg_type_number_t *namesCnt,
+	task_zone_info_array_t *info,
+	mach_msg_type_number_t *infoCnt
+);
+
 /* Routine task_assign */
 #ifdef	mig_external
 mig_external
@@ -610,7 +626,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		task_flavor_t flavor;
 		mach_msg_type_number_t task_info_inCnt;
-		integer_t task_info_in[10];
+		integer_t task_info_in[32];
 	} __Request__task_set_info_t;
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -906,6 +922,16 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
+	} __Request__task_zone_info_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
 		/* start of the kernel processed data */
 		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t new_set;
@@ -1021,6 +1047,7 @@ union __RequestUnion__task_subsystem {
 	__Request__task_get_emulation_vector_t Request_task_get_emulation_vector;
 	__Request__task_set_emulation_vector_t Request_task_set_emulation_vector;
 	__Request__task_set_ras_pc_t Request_task_set_ras_pc;
+	__Request__task_zone_info_t Request_task_zone_info;
 	__Request__task_assign_t Request_task_assign;
 	__Request__task_assign_default_t Request_task_assign_default;
 	__Request__task_get_assignment_t Request_task_get_assignment;
@@ -1112,7 +1139,7 @@ union __RequestUnion__task_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_msg_type_number_t task_info_outCnt;
-		integer_t task_info_out[10];
+		integer_t task_info_out[32];
 	} __Reply__task_info_t;
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -1419,6 +1446,24 @@ union __RequestUnion__task_subsystem {
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t names;
+		mach_msg_ool_descriptor_t info;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t namesCnt;
+		mach_msg_type_number_t infoCnt;
+	} __Reply__task_zone_info_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__task_assign_t;
@@ -1524,6 +1569,7 @@ union __ReplyUnion__task_subsystem {
 	__Reply__task_get_emulation_vector_t Reply_task_get_emulation_vector;
 	__Reply__task_set_emulation_vector_t Reply_task_set_emulation_vector;
 	__Reply__task_set_ras_pc_t Reply_task_set_ras_pc;
+	__Reply__task_zone_info_t Reply_task_zone_info;
 	__Reply__task_assign_t Reply_task_assign;
 	__Reply__task_assign_default_t Reply_task_assign_default;
 	__Reply__task_get_assignment_t Reply_task_get_assignment;
@@ -1563,6 +1609,7 @@ union __ReplyUnion__task_subsystem {
     { "task_get_emulation_vector", 3425 },\
     { "task_set_emulation_vector", 3426 },\
     { "task_set_ras_pc", 3427 },\
+    { "task_zone_info", 3428 },\
     { "task_assign", 3429 },\
     { "task_assign_default", 3430 },\
     { "task_get_assignment", 3431 },\

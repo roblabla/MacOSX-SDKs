@@ -19,12 +19,16 @@
 #define __COREVIDEO_CVBUFFER_H__ 1
 
 #include <TargetConditionals.h>
+#include <Availability.h>
+#include <AvailabilityMacros.h>
 
 #include <CoreVideo/CVBase.h>
 #include <CoreVideo/CVReturn.h>
 #include <CoreFoundation/CFDictionary.h>
+#if TARGET_OS_MAC
 #include <stddef.h>
 #include <stdint.h>
+#endif
 
 #if defined(__cplusplus)
 extern "C" {
@@ -34,14 +38,14 @@ extern "C" {
 
 /* The following two keys are useful with the CoreVideo pool and texture cache APIs so that you can specify
    an initial set of default buffer attachments to automatically be attached to the buffer when it is created. */
-CV_EXPORT const CFStringRef kCVBufferPropagatedAttachmentsKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CV_EXPORT const CFStringRef kCVBufferNonPropagatedAttachmentsKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT const CFStringRef kCVBufferPropagatedAttachmentsKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT const CFStringRef kCVBufferNonPropagatedAttachmentsKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 #pragma mark CVBufferRef attachment keys
 
-CV_EXPORT const CFStringRef kCVBufferMovieTimeKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// Generally only available for frames emitted by QuickTime; CFDictionary containing these two keys:
-CV_EXPORT const CFStringRef kCVBufferTimeValueKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-CV_EXPORT const CFStringRef kCVBufferTimeScaleKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT const CFStringRef kCVBufferMovieTimeKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	// Generally only available for frames emitted by QuickTime; CFDictionary containing these two keys:
+CV_EXPORT const CFStringRef kCVBufferTimeValueKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT const CFStringRef kCVBufferTimeScaleKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 
 #pragma mark CVBufferRef
@@ -66,14 +70,14 @@ typedef struct __CVBuffer *CVBufferRef;
     @param      buffer A CVBuffer object that you want to retain.
     @result     A CVBuffer object that is the same as the passed in buffer.
 */
-CV_EXPORT CVBufferRef CVBufferRetain(CVBufferRef buffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVBufferRef CVBufferRetain(CVBufferRef buffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 /*!
     @function   CVBufferRelease
     @abstract   Release a CVBuffer object
     @discussion Like CFRetain CVBufferRetain decrements the retain count of a CVBuffer object. If that count consequently becomes zero the memory allocated to the object is deallocated and the object is destroyed. In contrast to the CF call it is NULL safe.
     @param      buffer A CVBuffer object that you want to release.
 */
-CV_EXPORT void CVBufferRelease(CVBufferRef buffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void CVBufferRelease(CVBufferRef buffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 #pragma mark CVBufferAttachment
 
@@ -87,7 +91,7 @@ CV_EXPORT void CVBufferRelease(CVBufferRef buffer) AVAILABLE_MAC_OS_X_VERSION_10
     @param      attachmentMode	Specifies which attachment mode is desired for this attachment.   A particular attachment key may only exist in
                                 a single mode at a time.
 */
-CV_EXPORT void	CVBufferSetAttachment(CVBufferRef buffer, CFStringRef key, CFTypeRef value, CVAttachmentMode attachmentMode) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void	CVBufferSetAttachment(CVBufferRef buffer, CFStringRef key, CFTypeRef value, CVAttachmentMode attachmentMode) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 
 /*!
@@ -99,7 +103,7 @@ CV_EXPORT void	CVBufferSetAttachment(CVBufferRef buffer, CFStringRef key, CFType
     @param      attachmentMode.  Returns the mode of the attachment, if desired.  May be NULL.
     @result     If found the attachment object
 */
-CV_EXPORT CFTypeRef CVBufferGetAttachment(CVBufferRef buffer,  CFStringRef key, CVAttachmentMode *attachmentMode) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CFTypeRef CVBufferGetAttachment(CVBufferRef buffer,  CFStringRef key, CVAttachmentMode *attachmentMode) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVBufferRemoveAttachment
@@ -108,7 +112,7 @@ CV_EXPORT CFTypeRef CVBufferGetAttachment(CVBufferRef buffer,  CFStringRef key, 
     @param      buffer  Target CVBuffer object.
     @param      key	Key in form of a CFString identifying the desired attachment.
 */
-CV_EXPORT void	CVBufferRemoveAttachment(CVBufferRef buffer, CFStringRef key) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void	CVBufferRemoveAttachment(CVBufferRef buffer, CFStringRef key) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVBufferRemoveAllAttachments
@@ -116,7 +120,7 @@ CV_EXPORT void	CVBufferRemoveAttachment(CVBufferRef buffer, CFStringRef key) AVA
     @discussion While CVBufferRemoveAttachment removes a specific attachement identified by a key CVBufferRemoveAllAttachments removes all attachments of a buffer and decrements their retain counts.
     @param      buffer  Target CVBuffer object.
 */
-CV_EXPORT void	CVBufferRemoveAllAttachments(CVBufferRef buffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void	CVBufferRemoveAllAttachments(CVBufferRef buffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVBufferGetAttachments
@@ -126,7 +130,7 @@ CV_EXPORT void	CVBufferRemoveAllAttachments(CVBufferRef buffer) AVAILABLE_MAC_OS
     @result     A CFDictionary with all buffer attachments identified by there keys. If no attachment is present, the dictionary is empty.  Returns NULL
 		for invalid attachment mode.
 */
-CV_EXPORT CFDictionaryRef CVBufferGetAttachments(CVBufferRef buffer, CVAttachmentMode attachmentMode) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CFDictionaryRef CVBufferGetAttachments(CVBufferRef buffer, CVAttachmentMode attachmentMode) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVBufferSetAttachments
@@ -134,7 +138,7 @@ CV_EXPORT CFDictionaryRef CVBufferGetAttachments(CVBufferRef buffer, CVAttachmen
     @discussion CVBufferSetAttachments is a convenience call that in turn calls CVBufferSetAttachment for each key and value in the given dictionary. All key value pairs must be in the root level of the dictionary.
     @param      buffer  Target CVBuffer object.
 */
-CV_EXPORT void CVBufferSetAttachments(CVBufferRef buffer, CFDictionaryRef theAttachments, CVAttachmentMode attachmentMode) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void CVBufferSetAttachments(CVBufferRef buffer, CFDictionaryRef theAttachments, CVAttachmentMode attachmentMode) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVBufferPropagateAttachments
@@ -144,7 +148,7 @@ CV_EXPORT void CVBufferSetAttachments(CVBufferRef buffer, CFDictionaryRef theAtt
     @param      sourceBuffer  CVBuffer to copy attachments from.
     @param      destinationBuffer  CVBuffer to copy attachments to.
 */
-CV_EXPORT void  CVBufferPropagateAttachments(CVBufferRef sourceBuffer, CVBufferRef destinationBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void  CVBufferPropagateAttachments(CVBufferRef sourceBuffer, CVBufferRef destinationBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 #if defined(__cplusplus)
 }

@@ -115,6 +115,11 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
       : __streambuf_type(), _M_mode(), _M_string(__str.data(), __str.size())
       { _M_stringbuf_init(__mode); }
 
+#if BUILDING_LIBSTDCXX
+		__attribute__((used))
+		~basic_stringbuf() {}
+#endif
+
       // Get and set:
       /**
        *  @brief  Copying out the string buffer.

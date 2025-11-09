@@ -277,6 +277,7 @@ SOFTWARE.
 #define SNMP_SEC_MODEL_SNMPv1		1
 #define SNMP_SEC_MODEL_SNMPv2c		2
 #define SNMP_SEC_MODEL_USM		3
+#define SNMP_SEC_MODEL_TSM              4
 #define SNMP_SEC_MODEL_SNMPv2p		256
 
 #define SNMP_SEC_LEVEL_NOAUTH		1
@@ -319,11 +320,15 @@ SOFTWARE.
 #define SNMPADMINLENGTH 255
 
 
+    NETSNMP_IMPORT
     char           *uptime_string(u_long, char *);
     char           *uptime_string_n(u_long, char *, size_t);
-    void            xdump(const u_char *, size_t, const char *);
+    NETSNMP_IMPORT
+    void            xdump(const void *, size_t, const char *);
+    NETSNMP_IMPORT
     u_char         *snmp_parse_var_op(u_char *, oid *, size_t *, u_char *,
                                       size_t *, u_char **, size_t *);
+    NETSNMP_IMPORT
     u_char         *snmp_build_var_op(u_char *, oid *, size_t *, u_char,
                                       size_t, u_char *, size_t *);
 

@@ -31,8 +31,8 @@
 @property(copy) NSURL *url;
 @property(copy) NSString *title;
 
-@property(readonly) NSString *uid;
-@property(readonly) NSDate *dateStamp;
+@property(copy, readonly) NSString *uid;
+@property(copy, readonly) NSDate *dateStamp;
 
 @property(copy) NSArray *alarms;                // An array of CalAlarms
 

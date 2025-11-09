@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_APACHE_LICENSE_HEADER_START@
  * 
@@ -42,7 +42,11 @@ struct timespec;
 #ifdef NSEC_PER_USEC
 #undef NSEC_PER_USEC
 #endif
+#ifdef NSEC_PER_MSEC
+#undef NSEC_PER_MSEC
+#endif
 #define NSEC_PER_SEC 1000000000ull
+#define NSEC_PER_MSEC 1000000ull
 #define USEC_PER_SEC 1000000ull
 #define NSEC_PER_USEC 1000ull
 
@@ -50,7 +54,7 @@ struct timespec;
  * @typedef dispatch_time_t
  *
  * @abstract
- * An somewhat abstract representation of time; where zero means "now" and
+ * A somewhat abstract representation of time; where zero means "now" and
  * DISPATCH_TIME_FOREVER means "infinity" and every value in between is an
  * opaque encoding.
  */
@@ -79,8 +83,8 @@ typedef uint64_t dispatch_time_t;
  * @result
  * A new dispatch_time_t.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
-DISPATCH_NOTHROW
+__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
+DISPATCH_EXPORT DISPATCH_WARN_RESULT DISPATCH_NOTHROW
 dispatch_time_t
 dispatch_time(dispatch_time_t when, int64_t delta);
 
@@ -103,8 +107,8 @@ dispatch_time(dispatch_time_t when, int64_t delta);
  * @result
  * A new dispatch_time_t.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
-DISPATCH_NOTHROW
+__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
+DISPATCH_EXPORT DISPATCH_WARN_RESULT DISPATCH_NOTHROW
 dispatch_time_t
 dispatch_walltime(const struct timespec *when, int64_t delta);
 

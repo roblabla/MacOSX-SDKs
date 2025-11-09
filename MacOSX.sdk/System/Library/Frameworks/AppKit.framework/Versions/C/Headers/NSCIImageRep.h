@@ -1,7 +1,7 @@
 /*
         NSCIImageRep.h
         Application Kit
-        Copyright (c) 2003-2009, Apple Inc.
+        Copyright (c) 2003-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -9,7 +9,6 @@
 #import <AppKit/NSGraphics.h>
 #import <QuartzCore/CIImage.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @class NSBitmapImageRep;
 
@@ -29,4 +28,3 @@
 - (void)drawAtPoint:(NSPoint)point fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
 @end
 
-#endif

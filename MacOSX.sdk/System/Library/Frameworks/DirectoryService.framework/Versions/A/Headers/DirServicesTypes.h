@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -528,10 +528,6 @@ typedef UInt32 tRecordReference;
 // Directory Services Function Pointers
 #pragma mark Function Pointers
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 // Function Pointers for allocation & deallocation routines...
 // these routines only need to be set if some reason the standard OS routines won't do..
 // otherwise standard OS routines will be used if nothing is registered...
@@ -557,9 +553,5 @@ typedef tDirStatus	(*fpCustomThreadUnBlock)	(	tDirReference	inDirReference,
 typedef	tDirStatus	(*fpCustomThreadYield)		(	tDirReference	inDirReference,
 													tClientData		inClientData		);
 
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

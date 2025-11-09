@@ -3,24 +3,14 @@
  
      Contains:   Public interface to the font access and data management functions of ATS.
  
-     DRI:        Julio Gonzalez
+     Version:    ATS
  
-     Copyright:  © 2000-2008 by Apple Inc., all rights reserved.
+     Copyright:  © 2000-2011 by Apple Inc., all rights reserved.
  
-     Warning:    *** APPLE INTERNAL USE ONLY ***
-                 This file may contain unreleased API's
+     Bugs?:      For bug reports, consult the following page on
+                 the World Wide Web:
  
-     BuildInfo:  Built by:            root
-                 On:                  Mon May 16 10:08:00 2011
-                 With Interfacer:     3.0d46   (Mac OS X for PowerPC)
-                 From:                ATSFont.i
-                     Revision:        
-                     Dated:           
-                     Last change by:  
-                     Last comment:    
- 
-     Bugs:       Report bugs to Radar component "System Interfaces", "Latest"
-                 List the version information (from above) in the Problem Description.
+                     http://developer.apple.com/bugreporter/
  
 */
 #ifndef __ATSFONT__

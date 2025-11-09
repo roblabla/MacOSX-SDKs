@@ -39,7 +39,7 @@ typedef enum {
 	XGAuthenticatorStateAuthenticating,
 	XGAuthenticatorStateAuthenticated,
 	XGAuthenticatorStateFailed
-} XGAuthenticatorState;
+} XGAuthenticatorState NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@class XGAuthenticator
@@ -67,7 +67,7 @@ typedef enum {
 	@abstract Returns the profileURI of the authentication channel.
 	@result The profileURI.
 */
-+ (NSString *)profileURI;
++ (NSString *)profileURI NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method setDelegate:
@@ -77,14 +77,14 @@ typedef enum {
 	callbacks when connection events occur, prior to the notification of key-value
 	observers.
 */
-- (void)setDelegate:(id)delegate;
+- (void)setDelegate:(id)delegate NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method delegate
 	@abstract Returns the delegate of the receiver.
 	@result The delegate of the receiver.
 */
-- (id)delegate;
+- (id)delegate NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method error
@@ -92,14 +92,14 @@ typedef enum {
 	@result The error of the receiver.
 	@discussion The error is set if the authenticator enters the Failed state.
 */
-- (NSError *)error;
+- (NSError *)error NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method state
 	@abstract Returns the state of the receiver.
 	@result The state of the receiver.
 */
-- (XGAuthenticatorState)state;
+- (XGAuthenticatorState)state NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*
 	Overrides -- the following methods must be implemented by subclasses.
@@ -112,7 +112,7 @@ typedef enum {
 	authentication channel.
 	@result The piggyback to be sent.
 */
-- (NSString *)piggyback;
+- (NSString *)piggyback NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method beginAuthentication:
@@ -120,14 +120,14 @@ typedef enum {
 	to the piggyback has been received.
 	@param piggybackReply The reply to the piggyback.
 */
-- (void)beginAuthentication:(NSString *)piggybackReply;
+- (void)beginAuthentication:(NSString *)piggybackReply NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method receiveData:
 	@abstract Called everytime data arrives on the authentication channel.
 	@param data The received data.
 */
-- (void)receiveData:(NSData *)data;
+- (void)receiveData:(NSData *)data NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*
 	Protected -- the following methods must only be called by subclasses.
@@ -138,21 +138,21 @@ typedef enum {
 	@method finishAuthentication
 	@abstract Called once the authentication has completed sucessfully.
 */
-- (void)finishAuthentication;
+- (void)finishAuthentication NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method sendData:
 	@abstract Sends the data on the authentication channel.
 	@param data The data to send.
 */
-- (void)sendData:(NSData *)data; // only to be called by subclasses
+- (void)sendData:(NSData *)data NS_DEPRECATED_MAC(10_4, 10_7); // only to be called by subclasses
 
 /*!
 	@method failWithError:
 	@abstract Causes the authenticator to fail and sets the error.
 	@param error The error that caused the failure.
 */
-- (void)failWithError:(NSError *)error; // only to be called by subclasses
+- (void)failWithError:(NSError *)error NS_DEPRECATED_MAC(10_4, 10_7); // only to be called by subclasses
 
 @end
 
@@ -169,7 +169,7 @@ typedef enum {
 	Authenticated state.
 	@param authenticator The authenticator that authenticated.
 */
-- (void)authenticatorDidAuthenticate:(XGAuthenticator *)authenticator;
+- (void)authenticatorDidAuthenticate:(XGAuthenticator *)authenticator NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method authenticatorDidNotAuthenticate:
@@ -177,6 +177,6 @@ typedef enum {
 	Failed state.
 	@param authenticator The authenticator that didn't authenticate.
 */
-- (void)authenticatorDidNotAuthenticate:(XGAuthenticator *)authenticator;
+- (void)authenticatorDidNotAuthenticate:(XGAuthenticator *)authenticator NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end

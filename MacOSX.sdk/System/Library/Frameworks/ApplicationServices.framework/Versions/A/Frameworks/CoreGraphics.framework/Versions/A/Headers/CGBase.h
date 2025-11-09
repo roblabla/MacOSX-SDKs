@@ -50,7 +50,7 @@
 
 #if !defined(CG_LOCAL)
 # if defined(__GNUC__)
-#  define CG_LOCAL __private_extern__
+#  define CG_LOCAL extern __attribute__((visibility("hidden")))
 # else /* !defined(__GNUC__) */
 #  define CG_LOCAL CG_EXTERN
 # endif /* !defined(__GNUC__) */
@@ -61,15 +61,19 @@
 #endif
 
 #if !defined(CG_OBSOLETE)
-# if defined(__GNUC__)
-#  if (__GNUC__ == 3 && __GNUC_MINOR__ >= 1) || __GNUC__ >= 4
-#   define CG_OBSOLETE __attribute__((deprecated))
-#  else
-#   define CG_OBSOLETE
-#  endif
-# else /* !defined(__GNUC__) */
+# if defined(CG_BUILDING_CG)
 #  define CG_OBSOLETE
-# endif /* !defined(__GNUC__) */
+# else /* !defined(CG_BUILDING_CG) */
+#  if defined(__GNUC__)
+#   if (__GNUC__ == 3 && __GNUC_MINOR__ >= 1) || __GNUC__ >= 4
+#    define CG_OBSOLETE __attribute__((deprecated))
+#   else
+#    define CG_OBSOLETE
+#   endif
+#  else /* !defined(__GNUC__) */
+#   define CG_OBSOLETE
+#  endif /* !defined(__GNUC__) */
+# endif /* !defined(CG_BUILDING_CG) */
 #endif /* !defined(CG_OBSOLETE) */
 
 #if !defined(CG_INLINE)

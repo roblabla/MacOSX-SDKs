@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -139,6 +139,7 @@ enum vtagtype	{
 #define IO_BACKGROUND IO_PASSIVE /* used for backward compatibility.  to be removed after IO_BACKGROUND is no longer
 								  * used by DiskImages in-kernel mode */
 #define	IO_NOAUTH	0x8000		/* No authorization checks. */
+#define IO_NODIRECT    0x10000		/* don't use direct synchronous writes if IO_NOCACHE is specified */
 
 
 /*
@@ -151,8 +152,8 @@ struct componentname {
 	 */
 	uint32_t	cn_nameiop;	/* lookup operation */
 	uint32_t	cn_flags;	/* flags (see below) */
-	void * obsolete1;	/* use vfs_context_t */
-	void * obsolete2;	/* use vfs_context_t */
+	void * cn_reserved1;	/* use vfs_context_t */
+	void * cn_reserved2;	/* use vfs_context_t */
 	/*
 	 * Shared between lookup and commit routines.
 	 */
@@ -185,8 +186,8 @@ struct componentname {
 #define	ISDOTDOT	0x00002000 /* current component name is .. */
 #define	MAKEENTRY	0x00004000 /* entry is to be added to name cache */
 #define	ISLASTCN	0x00008000 /* this is last component of pathname */
-#define	ISWHITEOUT	0x00020000 /* found whiteout */
-#define	DOWHITEOUT	0x00040000 /* do whiteouts */
+#define	ISWHITEOUT	0x00020000 /* OBSOLETE: found whiteout */
+#define	DOWHITEOUT	0x00040000 /* OBSOLETE: do whiteouts */
 
 
 /* The following structure specifies a vnode for creation */
@@ -211,6 +212,9 @@ struct vnode_fsparam {
 
 #define VNCREATE_FLAVOR	0
 #define VCREATESIZE sizeof(struct vnode_fsparam)
+
+
+
 
 /*
  * Vnode attributes, new-style.
@@ -271,6 +275,7 @@ struct vnode_fsparam {
 #define VNODE_ATTR_va_guuid		(1LL<<27)	/* 08000000 */
 #define VNODE_ATTR_va_nchildren		(1LL<<28)       /* 10000000 */
 #define VNODE_ATTR_va_dirlinkcount	(1LL<<29)       /* 20000000 */
+#define VNODE_ATTR_va_addedtime		(1LL<<30)		/* 40000000 */
 
 #define VNODE_ATTR_BIT(n)	(VNODE_ATTR_ ## n)
 /*
@@ -291,7 +296,8 @@ struct vnode_fsparam {
 				VNODE_ATTR_BIT(va_name) |		\
 				VNODE_ATTR_BIT(va_type) |		\
 				VNODE_ATTR_BIT(va_nchildren) |		\
-				VNODE_ATTR_BIT(va_dirlinkcount)) 
+				VNODE_ATTR_BIT(va_dirlinkcount)|		\
+                VNODE_ATTR_BIT(va_addedtime)) 
 /*
  * Attributes that can be applied to a new file object.
  */
@@ -365,14 +371,19 @@ struct vnode_attr {
 	uint64_t	va_dirlinkcount;  /* Real references to dir (i.e. excluding "." and ".." refs) */
 
 	/* add new fields here only */
+	void * 		va_reserved1;
+    struct timespec va_addedtime;	/* timestamp when item was added to parent directory */
+
 		
 };
 
 /*
  * Flags for va_vaflags.
  */
-#define	VA_UTIMES_NULL	0x010000	/* utimes argument was NULL */
-#define VA_EXCLUSIVE	0x020000	/* exclusive create request */
+#define	VA_UTIMES_NULL		0x010000	/* utimes argument was NULL */
+#define VA_EXCLUSIVE		0x020000	/* exclusive create request */
+#define VA_NOINHERIT		0x040000	/* Don't inherit ACLs from parent */
+#define VA_NOAUTH		0x080000	
 
 /*
  *  Modes.  Some values same as Ixxx entries from inode.h for now.
@@ -744,6 +755,14 @@ int	vnode_isnocache(vnode_t);
 int	vnode_israge(vnode_t);
 
 /*!
+ @function vnode_needssnapshots
+ @abstract Check if a vnode needs snapshots events (regardless of its ctime status)
+ @param vp The vnode to test.
+ @return Nonzero if vnode needs snapshot events, 0 otherwise
+ */
+int	vnode_needssnapshots(vnode_t);
+
+/*!
  @function vnode_setnocache
  @abstract Set a vnode to not have its data cached in memory (i.e. we write-through to disk and always read from disk).
  @param vp The vnode whose flags to set.
@@ -1027,6 +1046,7 @@ int 	vnode_get(vnode_t);
  */
 int 	vnode_getwithvid(vnode_t, uint32_t);
 
+
 /*!
  @function vnode_getwithref
  @abstract Increase the iocount on a vnode on which a usecount (persistent reference) is held.
@@ -1202,7 +1222,7 @@ int vn_getpath(struct vnode *vp, char *pathbuf, int *len);
  */
 #define VNODE_LOOKUP_NOFOLLOW		0x01
 #define	VNODE_LOOKUP_NOCROSSMOUNT	0x02
-#define VNODE_LOOKUP_DOWHITEOUT		0x04
+#define VNODE_LOOKUP_DOWHITEOUT		0x04	/* OBSOLETE */
 /*!
  @function vnode_lookup
  @abstract Convert a path into a vnode.
@@ -1435,6 +1455,7 @@ void	vnode_putname(const char *name);
  @return Parent if available, else NULL.
  */
 vnode_t	vnode_getparent(vnode_t vp);
+
 
 
 __END_DECLS

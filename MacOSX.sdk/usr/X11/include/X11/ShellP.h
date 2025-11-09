@@ -1,5 +1,3 @@
-/* $Xorg: ShellP.h,v 1.4 2001/02/09 02:03:58 xorgcvs Exp $ */
-
 /***********************************************************
 
 Copyright 1987, 1988, 1994, 1998  The Open Group
@@ -66,6 +64,8 @@ SOFTWARE.
  * ***** part of this header file
  * *****
  */
+
+_XFUNCPROTOBEGIN
 
 /***********************************************************************
  *
@@ -214,7 +214,11 @@ typedef  struct {
 	WMShellPart	wm;
 } WMShellRec, *WMShellWidget;
 
+_XFUNCPROTOEND
+
 #include <X11/VendorP.h>
+
+_XFUNCPROTOBEGIN
 
 /***********************************************************************
  *
@@ -424,5 +428,7 @@ typedef  struct {
 	ApplicationShellPart application;
 	SessionShellPart session;
 } SessionShellRec, *SessionShellWidget;
+
+_XFUNCPROTOEND
 
 #endif /* _XtShellPrivate_h */

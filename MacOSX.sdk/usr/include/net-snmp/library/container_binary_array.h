@@ -1,6 +1,6 @@
 /*
  * binary_array.h
- * $Id: container_binary_array.h 9757 2004-03-02 05:03:36Z rstory $
+ * $Id: container_binary_array.h 16726 2007-10-15 20:52:11Z rstory $
  */
 
 #ifndef BINARY_ARRAY_H
@@ -36,6 +36,9 @@ extern          "C" {
     void netsnmp_binary_array_release(netsnmp_container *c);
 
     void netsnmp_container_binary_array_init(void);
+
+    int netsnmp_binary_array_options_set(netsnmp_container *c, int set, u_int flags);
+
 
 #ifdef __cplusplus
 }

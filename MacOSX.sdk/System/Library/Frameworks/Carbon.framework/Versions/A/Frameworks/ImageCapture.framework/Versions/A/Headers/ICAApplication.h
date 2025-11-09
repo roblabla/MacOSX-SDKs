@@ -419,7 +419,6 @@ typedef struct ICAPTPEventDataset
 //------------------------------------------------------------------------------------- Keys used in object property dictionary
 /* Keys used in object property dictionary */
 #pragma mark -
-#pragma mark TODO: document the data types of values for these keys
 
 // Keys returned by ICACopyObjectDictionary() for deviceList object returned by ICAGetDeviceList()
 
@@ -634,7 +633,7 @@ extern ICAError
 ICAImportImage(
     ICAImportImagePB* pb,
     ICACompletion     completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //--------------------------------------------------------------------------------------------------------- ICAShowDeviceBrowser
 /*!
@@ -655,7 +654,7 @@ ICAImportImage(
 extern ICAError
 ICAShowDeviceBrowser(
     CFDictionaryRef options
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //---------------------------------------------------------------------------------------------- ICARegisterForEventNotification
 // Function prototype for an Image Capture notification callback proc
@@ -851,7 +850,7 @@ extern ICAError
 ICARegisterForEventNotification(
     ICARegisterForEventNotificationPB*	params,
     ICACompletion                       completionProc
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //---------------------------------------------------------------------------------------------------------- ICASendNotification
 // This parameter block is used with 'ICDSendNotification' and 'ICDSendNotificationAndWaitForReply' APIs defined
@@ -864,8 +863,8 @@ typedef struct ICASendNotificationPB
     UInt32                  replyCode;
 } ICASendNotificationPB;
 
-extern ICAError ICASendNotification( ICASendNotificationPB* pb );
-extern ICAError ICASendNotificationAndWaitForReply( ICASendNotificationPB* pb );
+extern ICAError ICASendNotification( ICASendNotificationPB* pb )                  DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+extern ICAError ICASendNotificationAndWaitForReply( ICASendNotificationPB* pb )   DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #pragma mark -
 #pragma mark Object related APIs
@@ -922,7 +921,7 @@ extern ICAError
 ICAGetDeviceList(
     ICAGetDeviceListPB* pb,
     ICACompletion       completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+)                                                                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 //---------------------------------------------------------------------------------------------- ICACopyObjectPropertyDictionary
 /*!
@@ -984,7 +983,7 @@ extern ICAError
 ICACopyObjectPropertyDictionary(
     ICACopyObjectPropertyDictionaryPB*  pb,
     ICACompletion                       completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //------------------------------------------------------------------------------------------------------- ICACopyObjectThumbnail
 /*!
@@ -1068,7 +1067,7 @@ extern ICAError
 ICACopyObjectThumbnail(
     ICACopyObjectThumbnailPB* pb,
     ICACompletion             completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //------------------------------------------------------------------------------------------------------------ ICACopyObjectData
 /*!
@@ -1111,7 +1110,7 @@ extern ICAError
 ICACopyObjectData(
     ICACopyObjectDataPB*  params,
     ICACompletion         completionProc
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //--------------------------------------------------------------------------------------------------------- ICAObjectSendMessage
 /*!
@@ -1205,7 +1204,7 @@ extern ICAError
 ICAObjectSendMessage(
     ICAObjectSendMessagePB* pb,
     ICACompletion           completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+)                                                                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 //-------------------------------------------------------------------------------------------------------------- ICADownloadFile
 /*!
@@ -1317,7 +1316,7 @@ extern ICAError
 ICADownloadFile(
     ICADownloadFilePB*  pb,
     ICACompletion       completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //---------------------------------------------------------------------------------------------------------------- ICAUploadFile
 /*!
@@ -1398,7 +1397,7 @@ extern ICAError
 ICAUploadFile(
     ICAUploadFilePB*  pb,
     ICACompletion     completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 #pragma mark -
 #pragma mark Device related APIs
@@ -1451,7 +1450,7 @@ extern ICAError
 ICALoadDeviceModule(
     ICALoadDeviceModulePB*  pb,
     ICACompletion           completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+)                                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //--------------------------------------------------------------------------------------------------------- ICAUnloadDeviceModule
 /*!
@@ -1483,7 +1482,7 @@ extern ICAError
 ICAUnloadDeviceModule(
     ICAUnloadDeviceModulePB*  pb,
     ICACompletion             completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //--------------------------------------------------------------------------------------------------------------- ICAOpenSession
 /*!
@@ -1518,7 +1517,7 @@ extern ICAError
 ICAOpenSession(
     ICAOpenSessionPB* pb,
     ICACompletion     completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //-------------------------------------------------------------------------------------------------------------- ICACloseSession
 /*!
@@ -1550,7 +1549,7 @@ extern ICAError
 ICACloseSession(
     ICACloseSessionPB*  pb,
     ICACompletion       completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //-------------------------------------------------------------------------------------------------------- ICAScannerOpenSession
 /*!
@@ -1585,7 +1584,7 @@ extern ICAError
 ICAScannerOpenSession(
     ICAScannerOpenSessionPB*  pb,
     ICACompletion             completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //------------------------------------------------------------------------------------------------------- ICAScannerCloseSession
 /*!
@@ -1617,7 +1616,7 @@ extern ICAError
 ICAScannerCloseSession(
     ICAScannerCloseSessionPB* pb,
     ICACompletion             completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //--------------------------------------------------------------------------------------------------------- ICAScannerInitialize
 /*!
@@ -1649,7 +1648,7 @@ extern ICAError
 ICAScannerInitialize(
     ICAScannerInitializePB* pb,
     ICACompletion           completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //------------------------------------------------------------------------------------------------------ ICAScannerGetParameters
 /*!
@@ -1684,7 +1683,7 @@ extern ICAError
 ICAScannerGetParameters(
     ICAScannerGetParametersPB*  pb,
     ICACompletion               completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //------------------------------------------------------------------------------------------------------ ICAScannerSetParameters
 /*!
@@ -1719,7 +1718,7 @@ extern ICAError
 ICAScannerSetParameters(
     ICAScannerSetParametersPB*  pb,
     ICACompletion               completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //------------------------------------------------------------------------------------------------------------- ICAScannerStatus
 /*!
@@ -1754,7 +1753,7 @@ extern ICAError
 ICAScannerStatus(
     ICAScannerStatusPB* pb,
     ICACompletion       completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //-------------------------------------------------------------------------------------------------------------- ICAScannerStart
 /*!
@@ -1786,7 +1785,7 @@ extern ICAError
 ICAScannerStart(
     ICAScannerStartPB*  pb,
     ICACompletion       completion
-)                                                                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+)                                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 //------------------------------------------------------------------------------------------------------------------------------
 

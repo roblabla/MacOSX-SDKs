@@ -194,6 +194,49 @@ MD_EXPORT MDQueryRef MDQueryCreate(CFAllocatorRef allocator, CFStringRef querySt
 MD_EXPORT MDQueryRef MDQueryCreateSubset(CFAllocatorRef allocator, MDQueryRef query, CFStringRef queryString, CFArrayRef valueListAttrs, CFArrayRef sortingAttrs) MD_AVAIL;
 
 /*!
+ @function MDQueryCreateForItems
+ Creates a new query with the given query expression.
+ @param allocator The CFAllocator which should be used to allocate
+ memory for the query and its sub-storage. This
+ parameter may be NULL in which case the current default
+ CFAllocator is used.
+ @param queryString The query expression string for this query. The
+ syntax for query expressions is explained above in the
+ header overview documentation.
+ @param valueListAttrs An optional array of attribute names. The
+ query will collect the values of these attributes into
+ uniqued lists, which can be used or displayed to summarize
+ the results of the query, or allow a user to further
+ qualify the items for which they are searching. This
+ parameter may be NULL if no value lists are desired. Value
+ list collection increases CPU usage and significantly
+ increases the memory usage of an MDQuery. The attribute
+ names are CFStrings.
+ @param sortingAttrs An optional array of attribute names. The
+ query will results of the query based on the values of
+ these attributes. The first name in the array is used as
+ the primary sort key, the second as the secondary key, and
+ so on. The comparison of like-typed values is a simple,
+ literal comparison. This parameter may be NULL if no
+ sorting is desired. Sorting increases memory usage and
+ significantly increases the CPU usage of an MDQuery.
+ However, when possible, it is almost always cheaper to have
+ the MDQuery do the sorting, rather than you fetching all
+ the results and attributes from each of them and doing the
+ sorting yourself. The attribute names are CFStrings.
+ @param items An array of items. The query will only return results
+ in this set.
+ @result An MDQueryRef, or NULL on failure. If the query string
+ is empty or malformed (invalid syntax), returns NULL.
+ */
+MD_EXPORT MDQueryRef MDQueryCreateForItems(CFAllocatorRef allocator,
+										   CFStringRef queryString,
+										   CFArrayRef valueListAttrs,
+										   CFArrayRef sortingAttrs,
+										   CFArrayRef items) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+
+/*!
         @function MDQueryCopyQueryString
         Returns the query string of the query.
         @param query The query to be interrogated.
@@ -558,6 +601,8 @@ MD_EXPORT void MDQueryStop(MDQueryRef query) MD_AVAIL;
                 disabled state is a counter, and disabling can be done
                 recursively and from different threads.
         @param query The query for which updates are to be disabled.
+		@result The generation number of the query. This changes each time the query's 
+				result set has changed.
 */
 MD_EXPORT void MDQueryDisableUpdates(MDQueryRef query) MD_AVAIL;
 
@@ -686,6 +731,49 @@ MD_EXPORT CFArrayRef MDQueryCopyValuesOfAttribute(MDQueryRef query, CFStringRef 
         @result The number of results with that attribute and value.
 */
 MD_EXPORT CFIndex MDQueryGetCountOfResultsWithAttributeValue(MDQueryRef query, CFStringRef name, CFTypeRef value) MD_AVAIL;
+
+/*!
+ @function MDQuerySetSortOrder
+ Sets the sort order for a query.
+ @param query The query for which the sort order is to be set.
+ @param sortingAttrs An array of attribute names, as in MDQueryCreate. 
+  The query's result set will be sorted according to the order of
+  these attributes. All names in the array have to have been passed
+  as sortingAttrs when the query was created. The attribute names 
+  are CFStrings
+ @result A boolean, true on success, false on failure.
+ */
+MD_EXPORT Boolean MDQuerySetSortOrder(MDQueryRef query, CFArrayRef sortingAttrs) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+/*!   
+ @enum MDQuerySortOptionFlags
+ @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order.
+ */
+typedef enum {
+    kMDQueryReverseSortOrderFlag    = (1<<0),
+} MDQuerySortOptionFlags;
+
+
+/*!
+ @function MDQuerySetOptionSortFlagsForAttribute
+ Sets the sort flags for a query.
+ @param query The query for which the sort flags is to be set.
+ @param fieldName The attribute name for which sort option flags are to be set.  
+  The attribute name must have been part of the sortingFlags when the query was created.
+ @param flags A uint32_t containing MDQuerySortOptionFlags to be applied to the attibute
+ @result A boolean, true on success, false on failure.
+ */
+MD_EXPORT Boolean MDQuerySetSortOptionFlagsForAttribute(MDQueryRef query, CFStringRef fieldName, uint32_t flags) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+/*!
+ @function MDQueryGetSortOptionFlagsForAttribute
+ Gets the sort option flags for a sorting attribute.
+ @param query The query for which fetch sort option flags.
+ @param fieldName The attribute name for which sort option flags are to be fetched.  
+ @result A uint32_t, with MDQuerySortOptionFlags set for the attribute.
+ */
+MD_EXPORT uint32_t MDQueryGetSortOptionFlagsForAttribute(MDQueryRef query, CFStringRef fieldName) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
 
 /*!
         @typedef MDQuerySortComparatorFunction
@@ -972,3 +1060,115 @@ MD_END_C_DECLS
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED */
 
 #endif /* __MDQUERY__ */
+
+#if 0
+
+
+/*!
+ @function MDItemsCreateWithURLs
+ Returns metadata items for the given urls.
+ @param allocator The CFAllocator which should be used to allocate
+ memory for the array. This parameter may be NULL in which case the current default
+ CFAllocator is used.
+ @param urls A CFArray of urls to the file for which to create the MDItem.
+ @result A CFArrayRef of MDItemRefs, or NULL on failure. Missing items will have kCFNull entries in the result array.
+ */
+MD_EXPORT CFArrayRef MDItemsCreateWithURLs(CFAllocatorRef allocator, CFArrayRef urls) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+/*!
+ @function MDItemsCopyAttributes
+ Returns metadata for the given items.
+ @param items A CFArray of MDItemRefs to items for which to fetch data
+ @param names A CFArray of attribute names for which to fetch data. 
+				The attribute names are CFStrings
+ @result A CFArrayRef, or NULL on failure. Each entry in the array is either kCFNull, 
+  if the item is not accessible, or a CFArray of attribute values.
+ */
+MD_EXPORT CFArrayRef MDItemsCopyAttributes(CFArrayRef items, CFArrayRef names) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+
+/*!
+ @function MDQueryCreateForItems
+ Creates a new query with the given query expression.
+ @param allocator The CFAllocator which should be used to allocate
+ memory for the query and its sub-storage. This
+ parameter may be NULL in which case the current default
+ CFAllocator is used.
+ @param queryString The query expression string for this query. The
+ syntax for query expressions is explained above in the
+ header overview documentation.
+ @param valueListAttrs An optional array of attribute names. The
+ query will collect the values of these attributes into
+ uniqued lists, which can be used or displayed to summarize
+ the results of the query, or allow a user to further
+ qualify the items for which they are searching. This
+ parameter may be NULL if no value lists are desired. Value
+ list collection increases CPU usage and significantly
+ increases the memory usage of an MDQuery. The attribute
+ names are CFStrings.
+ @param sortingAttrs An optional array of attribute names. The
+ query will results of the query based on the values of
+ these attributes. The first name in the array is used as
+ the primary sort key, the second as the secondary key, and
+ so on. The comparison of like-typed values is a simple,
+ literal comparison. This parameter may be NULL if no
+ sorting is desired. Sorting increases memory usage and
+ significantly increases the CPU usage of an MDQuery.
+ However, when possible, it is almost always cheaper to have
+ the MDQuery do the sorting, rather than you fetching all
+ the results and attributes from each of them and doing the
+ sorting yourself. The attribute names are CFStrings.
+ @param items An array of items. The query will only return results
+ in this set.
+ @result An MDQueryRef, or NULL on failure. If the query string
+ is empty or malformed (invalid syntax), returns NULL.
+ */
+MD_EXPORT MDQueryRef MDQueryCreateForItems(CFAllocatorRef allocator,
+										   CFStringRef queryString,
+										   CFArrayRef valueListAttrs,
+										   CFArrayRef sortingAttrs,
+										   CFArrayRef items) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+/*!
+ @function MDQuerySetSortOrder
+ Sets the sort order for a query.
+ @param query The query for which the sort order is to be set.
+ @param sortingAttrs An array of attribute names, as in MDQueryCreate. 
+  The query's result set will be sorted according to the order of
+  these attributes. All names in the array have to have been passed
+  as sortingAttrs when the query was created. The attribute names 
+  are CFStrings
+ @result A boolean, true on success, false on failure.
+ */
+MD_EXPORT Boolean MDQuerySetSortOrder(MDQueryRef query, CFArrayRef sortingAttrs) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+/*!   
+ @enum MDQuerySortOptionFlags
+ @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order.
+ */
+typedef enum {
+    kMDQueryReverseSortOrderFlag    = (1<<0),
+} MDQuerySortOptionFlags;
+
+
+/*!
+ @function MDQuerySetOptionSortFlagsForAttribute
+ Sets the sort flags for a query.
+ @param query The query for which the sort flags is to be set.
+ @param fieldName The attribute name for which sort option flags are to be set.  
+  The attribute name must have been part of the sortingFlags when the query was created.
+ @param flags A uint32_t containing MDQuerySortOptionFlags to be applied to the attibute
+ @result A boolean, true on success, false on failure.
+ */
+MD_EXPORT Boolean MDQuerySetOptionSortFlagsForAttribute(MDQueryRef query, CFStringRef fieldName, uint32_t flags) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+/*!
+ @function MDQueryGetSortOptionFlagsForAttribute
+ Gets the sort option flags for a sorting attribute.
+ @param query The query for which fetch sort option flags.
+ @param fieldName The attribute name for which sort option flags are to be fetched.  
+ @result A uint32_t, with MDQuerySortOptionFlags set for the attribute.
+ */
+MD_EXPORT uint32_t MDQueryGetSortOptionFlagsForAttribute(MDQueryRef query, CFStringRef fieldName) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+#endif

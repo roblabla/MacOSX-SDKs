@@ -38,7 +38,7 @@ typedef enum {
 	XGResourceStateCanceled,
 	XGResourceStateFailed,
 	XGResourceStateFinished
-} XGResourceState;
+} XGResourceState NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@class XGResource
@@ -60,21 +60,21 @@ typedef enum {
 	represented by the receiver.
 	@result The responsible XGController instance.
 */
-- (XGController *)controller;
+- (XGController *)controller NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method connection
 	@abstract Returns the connection associated with the receiver's controller.
 	@result The receiver's connection.
 */
-- (XGConnection *)connection;
+- (XGConnection *)connection NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method isUpdating
 	@abstract Returns YES if the receiver is in the process of updating.
 	@result Whether or not the receiver is updating.
 */
-- (BOOL)isUpdating;
+- (BOOL)isUpdating NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method isUpdated
@@ -82,14 +82,14 @@ typedef enum {
 	since the connection opened.
 	@result Whether or not the receiver is updated.
 */
-- (BOOL)isUpdated;
+- (BOOL)isUpdated NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method state
 	@abstract Returns the state of the receiver.
 	@result The state of the receiver.
 */
-- (XGResourceState)state;
+- (XGResourceState)state NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method identifier
@@ -100,7 +100,7 @@ typedef enum {
 	guaranteed to have a unique identifier, but no guarantee of uniqueness is made
 	between multiple Xgrid controllers.
 */
-- (NSString *)identifier;
+- (NSString *)identifier NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method performAction:withParameters:
@@ -112,7 +112,7 @@ typedef enum {
 	progress, success, or failure of the action. The parameters are
 	specific to the action being taken, and may be nil.
 */
-- (XGActionMonitor *)performAction:(XGResourceAction)action withParameters:(NSDictionary *)parameters;
+- (XGActionMonitor *)performAction:(XGResourceAction)action withParameters:(NSDictionary *)parameters NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method actionMonitors
@@ -120,6 +120,6 @@ typedef enum {
 	for the receiver.
 	@result The array of XGActionMonitor instances.
 */
-- (NSArray *)actionMonitors;
+- (NSArray *)actionMonitors NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end

@@ -3,22 +3,14 @@
  
      Contains:   SFNT file layout structures and constants.
  
-     Copyright:  © 1994-2008 by Apple Inc., all rights reserved.
+     Version:    ATS
  
-     Warning:    *** APPLE INTERNAL USE ONLY ***
-                 This file may contain unreleased API's
+     Copyright:  © 1994-2011 by Apple Inc., all rights reserved.
  
-     BuildInfo:  Built by:            root
-                 On:                  Mon May 16 10:08:00 2011
-                 With Interfacer:     3.0d46   (Mac OS X for PowerPC)
-                 From:                SFNTLayoutTypes.i
-                     Revision:        1.3
-                     Dated:           2007/01/15 23:28:27
-                     Last change by:  kurita
-                     Last comment:    <rdar://problem/4916090> updated copyright.
+     Bugs?:      For bug reports, consult the following page on
+                 the World Wide Web:
  
-     Bugs:       Report bugs to Radar component "System Interfaces", "Latest"
-                 List the version information (from above) in the Problem Description.
+                     http://developer.apple.com/bugreporter/
  
 */
 #ifndef __SFNTLAYOUTTYPES__
@@ -894,18 +886,18 @@ enum {
   kMORTLigStoreLigature         = 0x40000000,
   kMORTLigFormOffsetMask        = 0x3FFFFFFF,
   kMORTLigFormOffsetShift       = 2,    /* Rearrangement subtable actions */
-  kMORTraNoAction               = 0,    /*    no action   */
-  kMORTraxA                     = 1,    /*      Ax => xA    */
-  kMORTraDx                     = 2,    /*      xD => Dx    */
-  kMORTraDxA                    = 3,    /*     AxD => DxA   */
-  kMORTraxAB                    = 4,    /*   ABx => xAB   */
-  kMORTraxBA                    = 5,    /*   ABx => xBA   */
-  kMORTraCDx                    = 6,    /*   xCD => CDx   */
-  kMORTraDCx                    = 7,    /*   xCD => DCx   */
-  kMORTraCDxA                   = 8,    /*  AxCD => CDxA  */
-  kMORTraDCxA                   = 9,    /*  AxCD => DCxA  */
-  kMORTraDxAB                   = 10,   /*  ABxD => DxAB  */
-  kMORTraDxBA                   = 11,   /*  ABxD => DxBA  */
+  kMORTraNoAction               = 0,    /*      no action      */
+  kMORTraxA                     = 1,    /*      Ax => xA   */
+  kMORTraDx                     = 2,    /*      xD => Dx   */
+  kMORTraDxA                    = 3,    /*     AxD => DxA      */
+  kMORTraxAB                    = 4,    /*     ABx => xAB      */
+  kMORTraxBA                    = 5,    /*     ABx => xBA      */
+  kMORTraCDx                    = 6,    /*     xCD => CDx      */
+  kMORTraDCx                    = 7,    /*     xCD => DCx      */
+  kMORTraCDxA                   = 8,    /*    AxCD => CDxA  */
+  kMORTraDCxA                   = 9,    /*    AxCD => DCxA  */
+  kMORTraDxAB                   = 10,   /*    ABxD => DxAB  */
+  kMORTraDxBA                   = 11,   /*    ABxD => DxBA  */
   kMORTraCDxAB                  = 12,   /* ABxCD => CDxAB */
   kMORTraCDxBA                  = 13,   /* ABxCD => CDxBA */
   kMORTraDCxAB                  = 14,   /* ABxCD => DCxAB */
@@ -1329,6 +1321,198 @@ struct KernSubtableHeader {
 };
 typedef struct KernSubtableHeader       KernSubtableHeader;
 typedef KernSubtableHeader *            KernSubtableHeaderPtr;
+/* --------------------------------------------------------------------------- */
+/* FORMATS FOR TABLE: 'kerx' */
+/* CONSTANTS */
+enum {
+  kKERXTag                      = 0x6B657278, /* 'kerx' */
+  kKERXCurrentVersion           = 0x00020000,
+  kKERXVertical                 = (int)0x80000000, /* set if this table has vertical kerning information */
+  kKERXResetCrossStream         = 0x8000, /* this value in a cross-stream table means reset to zero */
+  kKERXCrossStream              = 0x40000000, /* set if this table contains cross-stream kerning values */
+  kKERXVariation                = 0x20000000, /* set if this table contains variation kerning values */
+  kKERXUnusedBits               = 0x1FFFFF00, /* UNUSED, MUST BE ZERO */
+  kKERXFormatMask               = 0x000000FF /* format of this subtable */
+};
+
+enum {
+  kKERXOrderedList              = 0,    /* ordered list of kerning pairs */
+  kKERXStateTable               = 1,    /* state table for n-way contextual kerning */
+  kKERXSimpleArray              = 2,    /* simple n X m array of kerning values */
+  kKERXIndexArray               = 3,    /* modifed version of SimpleArray */
+  kKERXControlPoint             = 4     /* state table for control point positioning */
+};
+
+/* Message Type Flags */
+enum {
+  kKERXLineStart                = 0x00000001, /* Array of glyphs starts a line */
+  kKERXLineEndKerning           = 0x00000002, /* Array of glyphs ends a line */
+  kKERXNoCrossKerning           = 0x00000004, /* Prohibit cross kerning */
+  kKERXNotesRequested           = 0x00000008, /* Caller wants kerning notes */
+  kKERXNoStakeNote              = 1,    /* Indicates a glyph was involved in a kerning pair/group */
+  kKERXCrossStreamResetNote     = 2,    /* Indicates a return-to-baseline in cross-stream kerning */
+  kKERXNotApplied               = 0x00000001 /* All kerning values were zero, kerning call had no effect */
+};
+
+/* Flags in KerxControlPointHeader */
+enum {
+  kKERXUsesCoordinates          = (int)0x80000000, /* Actions have control point coordinates */
+  kKERXActionOffsetMask         = 0x7FFFFFFF /* Mask to extract offset to action table */
+};
+
+/* TYPES */
+typedef UInt32                          KerxSubtableCoverage;
+typedef UInt32                          KerxArrayOffset;
+/* Header for an extended kerning table */
+struct KerxTableHeader {
+  Fixed               version;                /* font version number (currently 1.0) */
+  UInt32              nTables;                /* number of subtables present */
+  UInt32              firstSubtable[1];       /* first subtable starts here */
+};
+typedef struct KerxTableHeader          KerxTableHeader;
+typedef KerxTableHeader *               KerxTableHeaderPtr;
+typedef KerxTableHeaderPtr *            KerxTableHeaderHandle;
+/*
+ F O R M A T   S P E C I F I C   D E F I N I T I O N S
+ 
+ kerxOrderedList:
+ 
+ The table is a sorted list of [left glyph, right glyph, value] triples.
+ There's enough information in the header so that the list can be
+ efficiently binary searched. 
+ */
+/* defines a single kerning pair of Glyphcodes  */
+struct KerxKerningPair {
+  UInt16              left;
+  UInt16              right;
+};
+typedef struct KerxKerningPair          KerxKerningPair;
+/* a single list entry */
+struct KerxOrderedListEntry {
+  KerxKerningPair     pair;                   /* the kerning pair */
+  KernKerningValue    value;                  /* the kerning value for the above pair */
+};
+typedef struct KerxOrderedListEntry     KerxOrderedListEntry;
+typedef KerxOrderedListEntry *          KerxOrderedListEntryPtr;
+/* the header information for binary searching the list */
+struct KerxOrderedListHeader {
+  UInt32              nPairs;                 /* number of kerning pairs in table */
+  UInt32              searchRange;            /* (largest power of two <= nPairs) * entry size */
+  UInt32              entrySelector;          /* log2 (largest power of two <= nPairs) */
+  UInt32              rangeShift;             /* (nPairs - largest power of two <= nPairs) * entry size */
+  UInt32              table[1];               /* entries are first glyph, second glyph, and value */
+};
+typedef struct KerxOrderedListHeader    KerxOrderedListHeader;
+/* KernStateTable: like the the generic state tables */
+struct KerxStateHeader {
+  STXHeader           header;                 /* state table header */
+  UInt32              valueTable;             /* offset to kerning value table */
+  UInt8               firstTable[1];          /* first table starts here */
+};
+typedef struct KerxStateHeader          KerxStateHeader;
+struct KerxStateEntry {
+  UInt16              newState;
+  UInt16              flags;                  /* flags per above enum */
+  UInt16              valueIndex;
+};
+typedef struct KerxStateEntry           KerxStateEntry;
+/* KerxControlPointTable: like the the generic state tables */
+struct KerxControlPointHeader {
+  STXHeader           header;                 /* state table header */
+  UInt32              flags;                  /* flags */
+  UInt8               firstTable[1];          /* first table starts here */
+};
+typedef struct KerxControlPointHeader   KerxControlPointHeader;
+struct KerxControlPointEntry {
+  UInt16              newState;
+  UInt16              flags;                  /* flags per above enum */
+  UInt16              actionIndex;
+};
+typedef struct KerxControlPointEntry    KerxControlPointEntry;
+struct KerxControlPointAction {
+  UInt16              markControlPoint;
+  UInt16              currControlPoint;
+};
+typedef struct KerxControlPointAction   KerxControlPointAction;
+struct KerxCoordinateAction {
+  UInt16              markX;
+  UInt16              markY;
+  UInt16              currX;
+  UInt16              currY;
+};
+typedef struct KerxCoordinateAction     KerxCoordinateAction;
+/*
+ Kern offset table header.
+ The offset table is a trimmed array from firstGlyph to limitGlyph.
+ Glyphs outside of this range should get zero for right-hand glyphs
+ and the offset of the beginning of the kerning array for left-hand glyphs.
+ */
+struct KerxOffsetTable {
+  UInt16              firstGlyph;             /* first glyph in class range */
+  UInt16              nGlyphs;                /* number of glyphs in class range */
+  KerxArrayOffset     offsetTable[1];         /* offset table starts here */
+};
+typedef struct KerxOffsetTable          KerxOffsetTable;
+typedef KerxOffsetTable *               KerxOffsetTablePtr;
+/* Header information for accessing offset tables and kerning array */
+/*
+ KerxSimpleArray:
+ 
+ The array is an nXm array of kenring values. Each row in the array
+ represents one left-hand glyph, and each column one right-hand glyph.
+ The zeroth row and column always represent glyphs that are out of bounds
+ and will always contain zero.
+ 
+ A pair is looked up by indexing the left-hand glyph through the left
+ offset table, the right-hand glyph through the right offset table,
+ adding both offsets to the starting address of the kerning array,
+ and fetching the kerning value pointed to.
+ */
+/* Kern offset table header. */
+/* The offset table is a trimmed array from firstGlyph to limitGlyph. */
+/* Glyphs outside of this range should get zero for right-hand glyphs */
+/* and the offset of the beginning of the kerning array for left- */
+/* hand glyphs. */
+struct KerxSimpleArrayHeader {
+  UInt32              rowWidth;               /* width, in bytes, of a row in the table */
+  UInt32              leftOffsetTable;        /* offset to left-hand offset table */
+  UInt32              rightOffsetTable;       /* offset to right-hand offset table */
+  KerxArrayOffset     theArray;               /* offset to start of kerning array */
+  UInt32              firstTable[1];          /* first offset table starts here... */
+};
+typedef struct KerxSimpleArrayHeader    KerxSimpleArrayHeader;
+/* Index Array */
+struct KerxIndexArrayHeader {
+  UInt16              glyphCount;
+  UInt16              kernValueCount;
+  UInt16              leftClassCount;
+  UInt16              rightClassCount;
+  UInt16              flags;                  /* set to 0 for now */
+  SInt16              kernValue[1];           /* actual kerning values reference by index in kernIndex */
+  UInt16              leftClass[1];           /* maps left glyph to offset into kern index */
+  UInt16              rightClass[1];          /* maps right glyph to offset into kern index */
+  UInt16              kernIndex[1];           /* contains indicies into kernValue */
+};
+typedef struct KerxIndexArrayHeader     KerxIndexArrayHeader;
+/* format specific part of subtable header */
+union KerxFormatSpecificHeader {
+  KerxOrderedListHeader  orderedList;
+  KerxStateHeader     stateTable;
+  KerxSimpleArrayHeader  simpleArray;
+  KerxIndexArrayHeader  indexArray;
+  KerxControlPointHeader  controlPoint;
+
+};
+typedef union KerxFormatSpecificHeader  KerxFormatSpecificHeader;
+/* Overall Subtable header format */
+struct KerxSubtableHeader {
+  UInt32              length;                 /* length in bytes (including this header) */
+  KerxSubtableCoverage  stInfo;               /* subtable converage */
+  UInt32              tupleIndex;             /* tuple index for variation subtables */
+  KerxFormatSpecificHeader  fsHeader;         /* format specific sub-header */
+};
+typedef struct KerxSubtableHeader       KerxSubtableHeader;
+typedef KerxSubtableHeader *            KerxSubtableHeaderPtr;
 /* --------------------------------------------------------------------------- */
 /* FORMATS FOR TABLE: 'bsln' */
 /* CONSTANTS */

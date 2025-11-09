@@ -1,7 +1,7 @@
 /*
         NSTextView.h
         Application Kit
-        Copyright (c) 1994-2009, Apple Inc.
+        Copyright (c) 1994-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -14,6 +14,9 @@
 #import <AppKit/NSDragging.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <AppKit/NSTextInputClient.h>
+#import <AppKit/NSNibDeclarations.h>
+#import <AppKit/NSTextFinder.h>
+#import <AppKit/NSLayoutManager.h>
 #import <Foundation/NSTextCheckingResult.h>
 
 @class NSTextContainer;
@@ -41,49 +44,12 @@ enum {
 };
 typedef NSUInteger NSSelectionAffinity;
 
-/* Values for NSFindPanelAction */
-enum {
-    NSFindPanelActionShowFindPanel = 1,
-    NSFindPanelActionNext = 2,
-    NSFindPanelActionPrevious = 3,
-    NSFindPanelActionReplaceAll = 4,
-    NSFindPanelActionReplace = 5,
-    NSFindPanelActionReplaceAndFind = 6,
-    NSFindPanelActionSetFindString = 7,
-    NSFindPanelActionReplaceAllInSelection = 8
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-    ,
-    NSFindPanelActionSelectAll = 9,
-    NSFindPanelActionSelectAllInSelection = 10
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
-};
-typedef NSUInteger NSFindPanelAction;
-
-/* Values for NSFindPanel search metadata */
-
-APPKIT_EXTERN NSString *NSFindPanelSearchOptionsPboardType  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-
-APPKIT_EXTERN NSString *NSFindPanelCaseInsensitiveSearch AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;     // BOOL
-APPKIT_EXTERN NSString *NSFindPanelSubstringMatch AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;            // NSNumber containing NSFindPanelSubstringMatchType
-
-enum {
-    NSFindPanelSubstringMatchTypeContains = 0,
-    NSFindPanelSubstringMatchTypeStartsWith = 1,
-    NSFindPanelSubstringMatchTypeFullWord = 2,
-    NSFindPanelSubstringMatchTypeEndsWith = 3
-};
-typedef NSUInteger NSFindPanelSubstringMatchType;
-
 
 /* A meta locale identifier representing the set of Roman input sources available.  You can specify [NSArray arrayWithObject: NSAllRomanInputSourcesLocaleIdentifier] to restrict allowed input sources to Roman only.
 */
-APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier NS_AVAILABLE_MAC(10_5);
 
-@interface NSTextView : NSText <NSTextInput, NSUserInterfaceValidations
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-, NSTextInputClient
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
->
+@interface NSTextView : NSText <NSTextInput, NSUserInterfaceValidations, NSTextInputClient, NSTextLayoutOrientationProvider, NSDraggingSource>
 
 /**************************** Initializing ****************************/
 
@@ -128,9 +94,7 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 
 // These two complete the set of range: type set methods. to be equivalent to the set of non-range taking varieties.
 - (void)setAlignment:(NSTextAlignment)alignment range:(NSRange)range;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)setBaseWritingDirection:(NSWritingDirection)writingDirection range:(NSRange)range;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 /*************************** New Font menu commands ***************************/
 
@@ -144,31 +108,23 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (void)raiseBaseline:(id)sender;
 - (void)lowerBaseline:(id)sender;
 - (void)toggleTraditionalCharacterShape:(id)sender;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)outline:(id)sender;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 
 /*************************** Find menu commands ***************************/
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)performFindPanelAction:(id)sender;
     // See NSFindPanelAction for possible tags in sender
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 
 /*************************** New Text commands ***************************/
 
 - (void)alignJustified:(id)sender;
 - (void)changeColor:(id)sender;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)changeAttributes:(id)sender;
 - (void)changeDocumentBackgroundColor:(id)sender;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)orderFrontSpacingPanel:(id)sender;
 - (void)orderFrontLinkPanel:(id)sender;
 - (void)orderFrontListPanel:(id)sender;
 - (void)orderFrontTablePanel:(id)sender;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 /*************************** Ruler support ***************************/
 
@@ -190,10 +146,8 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (BOOL)shouldDrawInsertionPoint;
 - (void)drawInsertionPointInRect:(NSRect)rect color:(NSColor *)color turnedOn:(BOOL)flag;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)drawViewBackgroundInRect:(NSRect)rect;
     // This is the override point for view background drawing.
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 
 /*************************** Especially for subclassers ***************************/
 
@@ -214,16 +168,20 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (void)startSpeaking:(id)sender;
 - (void)stopSpeaking:(id)sender;
 
+/************************* Vertical text support *************************/
+- (void)setLayoutOrientation:(NSTextLayoutOrientation)theOrientation NS_AVAILABLE_MAC(10_7);
+    // Changes the receiver's layout orientation and invalidates the contents.  Unlike other NSTextView properties, this is not shared by sibling views.  It also rotates the bounds 90 degrees, swaps horizontal and vertical bits of the autoresizing mask, and reconfigures isHorizontallyResizable and isVerticallyResizable properties accordingly.  Also, if -enclosingScrollView returns non-nil, it reconfigures horizontal and vertical ruler views, horizontal and vertical scrollers, and the frame.
+
+- (void)changeLayoutOrientation:(id)sender NS_AVAILABLE_MAC(10_7);
+    // An action method that calls -setLayoutOrientation: with the sender's tag as the orientation.
+
 /************************* Helper for subclassers *************************/
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (NSUInteger)characterIndexForInsertionAtPoint:(NSPoint)point;
+- (NSUInteger)characterIndexForInsertionAtPoint:(NSPoint)point NS_AVAILABLE_MAC(10_5);
     // Here point is in view coordinates, and the return value is a character index appropriate for placing a zero-length selection for an insertion point associated with the mouse at the given point.  The NSTextInput method characterIndexForPoint: is not suitable for this role.
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
 @end
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 @interface NSTextView (NSCompletion)
 
 /************************* Completion support *********************/
@@ -240,7 +198,6 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (void)insertCompletion:(NSString *)word forPartialWordRange:(NSRange)charRange movement:(NSInteger)movement isFinal:(BOOL)flag;
     // Called with final == NO as the user moves through the potential completions, then with final == YES when a completion is definitively selected (or completion is cancelled and the original value is reinserted).  The default implementation inserts the completion into the text at the appropriate location.  The movement argument takes its values from the movement codes defined in NSText.h, and allows subclassers to distinguish between canceling completion and selection by arrow keys, by return, by tab, or by other means such as clicking.
 @end
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 
 @interface NSTextView (NSPasteboard)
 
@@ -313,12 +270,10 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 
 /*************************** Selected/Marked range ***************************/
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (NSArray *)selectedRanges;
 - (void)setSelectedRanges:(NSArray *)ranges affinity:(NSSelectionAffinity)affinity stillSelecting:(BOOL)stillSelectingFlag;
 - (void)setSelectedRanges:(NSArray *)ranges;
     // These multiple-range methods supersede the corresponding single-range methods.  The ranges argument must be a non-nil, non-empty array of objects responding to rangeValue.  The return value of selectedRanges obeys the same restrictions, and in addition its elements are sorted, non-overlapping, non-contiguous, and (except for the case of a single range) have non-zero-length.
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 - (void)setSelectedRange:(NSRange)charRange affinity:(NSSelectionAffinity)affinity stillSelecting:(BOOL)stillSelectingFlag;
 - (NSSelectionAffinity)selectionAffinity;
@@ -338,24 +293,18 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (NSDictionary *)markedTextAttributes;
     // Marked text attributes are applied as temporary attributes to selected text.  Candidates include those attributes that do not affect layout.
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)setLinkTextAttributes:(NSDictionary *)attributeDictionary;
 - (NSDictionary *)linkTextAttributes;
     // Link text attributes are applied as temporary attributes to any text with a link attribute.  Candidates include those attributes that do not affect layout.  Default attributes are blue color, single underline, and the pointing hand cursor.
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (BOOL)displaysLinkToolTips;
-- (void)setDisplaysLinkToolTips:(BOOL)flag;
+- (BOOL)displaysLinkToolTips NS_AVAILABLE_MAC(10_5);
+- (void)setDisplaysLinkToolTips:(BOOL)flag NS_AVAILABLE_MAC(10_5);
     // If set, then text with a link attribute will automatically be treated as if it had an implicit tooltip attribute with the same value as the link attribute.  An explicit tooltip attribute will take precedence over this implicit one.  The textView:willDisplayToolTip:forCharacterAtIndex: delegate method affects these tooltips as it does any other.
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
 /************************* Glyph info support *************************/
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (BOOL)acceptsGlyphInfo;
 - (void)setAcceptsGlyphInfo:(BOOL)flag;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2 */
 
 /*************************** Other NSTextView methods ***************************/
 
@@ -363,32 +312,31 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (BOOL)usesRuler;
 - (void)setUsesRuler:(BOOL)flag;
 
+- (BOOL)usesInspectorBar NS_AVAILABLE_MAC(10_7);
+- (void)setUsesInspectorBar:(BOOL)flag NS_AVAILABLE_MAC(10_7);
+
 - (void)setContinuousSpellCheckingEnabled:(BOOL)flag;
 - (BOOL)isContinuousSpellCheckingEnabled;
 - (void)toggleContinuousSpellChecking:(id)sender;
 
 - (NSInteger)spellCheckerDocumentTag;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (void)setGrammarCheckingEnabled:(BOOL)flag;
-- (BOOL)isGrammarCheckingEnabled;
-- (void)toggleGrammarChecking:(id)sender;
+- (void)setGrammarCheckingEnabled:(BOOL)flag NS_AVAILABLE_MAC(10_5);
+- (BOOL)isGrammarCheckingEnabled NS_AVAILABLE_MAC(10_5);
+- (void)toggleGrammarChecking:(id)sender NS_AVAILABLE_MAC(10_5);
     // If grammar checking is enabled, then it is performed whenever spellchecking is performed, whether continuously or manually.  
 
-- (void)setSpellingState:(NSInteger)value range:(NSRange)charRange;
+- (void)setSpellingState:(NSInteger)value range:(NSRange)charRange NS_AVAILABLE_MAC(10_5);
     // May be called or overridden to control setting of spelling and grammar indicators.  Values are those listed for NSSpellingStateAttributeName.  Calls the delegate method textView:shouldSetSpellingState:range:.
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
 - (NSDictionary *)typingAttributes;
 - (void)setTypingAttributes:(NSDictionary *)attrs;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
     // These multiple-range methods supersede the corresponding single-range methods.  For the first method, the affectedRanges argument obeys the same restrictions as the argument to setSelectedRanges:, and the replacementStrings array should either be nil (for attribute-only changes) or have the same number of elements as affectedRanges.  For the remaining three methods, the return values obey the same restrictions as that for selectedRanges, except that they will be nil if the corresponding change is not permitted, where the corresponding single-range methods return (NSNotFound, 0).
 - (BOOL)shouldChangeTextInRanges:(NSArray *)affectedRanges replacementStrings:(NSArray *)replacementStrings;
 - (NSArray *)rangesForUserTextChange;
 - (NSArray *)rangesForUserCharacterAttributeChange;
 - (NSArray *)rangesForUserParagraphAttributeChange;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 - (BOOL)shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString;
 - (void)didChangeText;
@@ -397,36 +345,25 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (NSRange)rangeForUserCharacterAttributeChange;
 - (NSRange)rangeForUserParagraphAttributeChange;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
-- (void)setUsesFindPanel:(BOOL)flag;
-- (BOOL)usesFindPanel;
-
 - (void)setAllowsDocumentBackgroundColorChange:(BOOL)flag;
 - (BOOL)allowsDocumentBackgroundColorChange;
 
 - (void)setDefaultParagraphStyle:(NSParagraphStyle *)paragraphStyle;
 - (NSParagraphStyle *)defaultParagraphStyle;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 
 - (void)setAllowsUndo:(BOOL)flag;
 - (BOOL)allowsUndo;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)breakUndoCoalescing;
     // May be called to introduce a break in the coalescing of undo actions for user typing, for example at a save point.
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-- (BOOL)isCoalescingUndo;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
+- (BOOL)isCoalescingUndo NS_AVAILABLE_MAC(10_6);
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (BOOL)allowsImageEditing;
-- (void)setAllowsImageEditing:(BOOL)flag;
+- (BOOL)allowsImageEditing NS_AVAILABLE_MAC(10_5);
+- (void)setAllowsImageEditing:(BOOL)flag NS_AVAILABLE_MAC(10_5);
     // Specifies whether image attachments should permit editing of their images, if the text view is editable and the text attachment cell supports image editing.
     
-- (void)showFindIndicatorForRange:(NSRange)charRange;
+- (void)showFindIndicatorForRange:(NSRange)charRange NS_AVAILABLE_MAC(10_5);
     // Applies a temporary highlighting effect, intended to indicate the result of a find operation.  Clients should perform any necessary scrolling before calling this method.  The effect will be removed after a certain time, or when other actions (such as scrolling) take place, but it can be removed immediately by calling this method again with a zero-length range.
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
 /*************************** NSText methods ***************************/
 
@@ -453,13 +390,10 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
     // Other NSText methods are implemented in the base NSTextView implementation rather than in this category.  See NSText.h for declarations.
 
 /*************************** Input Source support ***************************/
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 /* Returns an array of locale identifiers representing keyboard input sources allowed to be enabled when the receiver has the keyboard focus.
  */
-- (NSArray *)allowedInputSourceLocales;
-- (void)setAllowedInputSourceLocales:(NSArray *)localeIdentifiers;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
-
+- (NSArray *)allowedInputSourceLocales NS_AVAILABLE_MAC(10_5);
+- (void)setAllowedInputSourceLocales:(NSArray *)localeIdentifiers NS_AVAILABLE_MAC(10_5);
 @end
 
 @interface NSTextView (NSTextChecking)
@@ -469,56 +403,73 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (BOOL)smartInsertDeleteEnabled;
 - (void)setSmartInsertDeleteEnabled:(BOOL)flag;
 - (NSRange)smartDeleteRangeForProposedRange:(NSRange)proposedCharRange;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)toggleSmartInsertDelete:(id)sender;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 - (void)smartInsertForString:(NSString *)pasteString replacingRange:(NSRange)charRangeToReplace beforeString:(NSString **)beforeString afterString:(NSString **)afterString;
 - (NSString *)smartInsertBeforeStringForString:(NSString *)pasteString replacingRange:(NSRange)charRangeToReplace;
 - (NSString *)smartInsertAfterStringForString:(NSString *)pasteString replacingRange:(NSRange)charRangeToReplace;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (void)setAutomaticQuoteSubstitutionEnabled:(BOOL)flag;
-- (BOOL)isAutomaticQuoteSubstitutionEnabled;
-- (void)toggleAutomaticQuoteSubstitution:(id)sender;
-- (void)setAutomaticLinkDetectionEnabled:(BOOL)flag;
-- (BOOL)isAutomaticLinkDetectionEnabled;
-- (void)toggleAutomaticLinkDetection:(id)sender;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+- (void)setAutomaticQuoteSubstitutionEnabled:(BOOL)flag NS_AVAILABLE_MAC(10_5);
+- (BOOL)isAutomaticQuoteSubstitutionEnabled NS_AVAILABLE_MAC(10_5);
+- (void)toggleAutomaticQuoteSubstitution:(id)sender NS_AVAILABLE_MAC(10_5);
+- (void)setAutomaticLinkDetectionEnabled:(BOOL)flag NS_AVAILABLE_MAC(10_5);
+- (BOOL)isAutomaticLinkDetectionEnabled NS_AVAILABLE_MAC(10_5);
+- (void)toggleAutomaticLinkDetection:(id)sender NS_AVAILABLE_MAC(10_5);
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-- (void)setAutomaticDataDetectionEnabled:(BOOL)flag;
-- (BOOL)isAutomaticDataDetectionEnabled;
-- (void)toggleAutomaticDataDetection:(id)sender;
-- (void)setAutomaticDashSubstitutionEnabled:(BOOL)flag;
-- (BOOL)isAutomaticDashSubstitutionEnabled;
-- (void)toggleAutomaticDashSubstitution:(id)sender;
-- (void)setAutomaticTextReplacementEnabled:(BOOL)flag;
-- (BOOL)isAutomaticTextReplacementEnabled;
-- (void)toggleAutomaticTextReplacement:(id)sender;
-- (void)setAutomaticSpellingCorrectionEnabled:(BOOL)flag;
-- (BOOL)isAutomaticSpellingCorrectionEnabled;
-- (void)toggleAutomaticSpellingCorrection:(id)sender;
+- (void)setAutomaticDataDetectionEnabled:(BOOL)flag NS_AVAILABLE_MAC(10_6);
+- (BOOL)isAutomaticDataDetectionEnabled NS_AVAILABLE_MAC(10_6);
+- (void)toggleAutomaticDataDetection:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)setAutomaticDashSubstitutionEnabled:(BOOL)flag NS_AVAILABLE_MAC(10_6);
+- (BOOL)isAutomaticDashSubstitutionEnabled NS_AVAILABLE_MAC(10_6);
+- (void)toggleAutomaticDashSubstitution:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)setAutomaticTextReplacementEnabled:(BOOL)flag NS_AVAILABLE_MAC(10_6);
+- (BOOL)isAutomaticTextReplacementEnabled NS_AVAILABLE_MAC(10_6);
+- (void)toggleAutomaticTextReplacement:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)setAutomaticSpellingCorrectionEnabled:(BOOL)flag NS_AVAILABLE_MAC(10_6);
+- (BOOL)isAutomaticSpellingCorrectionEnabled NS_AVAILABLE_MAC(10_6);
+- (void)toggleAutomaticSpellingCorrection:(id)sender NS_AVAILABLE_MAC(10_6);
 
-- (NSTextCheckingTypes)enabledTextCheckingTypes;
-- (void)setEnabledTextCheckingTypes:(NSTextCheckingTypes)checkingTypes;
+- (NSTextCheckingTypes)enabledTextCheckingTypes NS_AVAILABLE_MAC(10_6);
+- (void)setEnabledTextCheckingTypes:(NSTextCheckingTypes)checkingTypes NS_AVAILABLE_MAC(10_6);
     // These two are bulk methods for setting and getting many checking type settings at once.  They will call the individual methods as necessary.
 
-- (void)checkTextInRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options;
-- (void)handleTextCheckingResults:(NSArray *)results forRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options orthography:(NSOrthography *)orthography wordCount:(NSInteger)wordCount;
+- (void)checkTextInRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options NS_AVAILABLE_MAC(10_6);
+- (void)handleTextCheckingResults:(NSArray *)results forRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options orthography:(NSOrthography *)orthography wordCount:(NSInteger)wordCount NS_AVAILABLE_MAC(10_6);
     // These two methods usually would not be called directly, since NSTextView itself will call them as needed, but they can be overridden.
 
-- (void)orderFrontSubstitutionsPanel:(id)sender;
-- (void)checkTextInSelection:(id)sender;
-- (void)checkTextInDocument:(id)sender;
+- (void)orderFrontSubstitutionsPanel:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)checkTextInSelection:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)checkTextInDocument:(id)sender NS_AVAILABLE_MAC(10_6);
     // Ordinarily text checking will occur in the background, and results that replace text will be applied only for text that has been typed in by the user, but these last two methods cause the currently enabled text checking types to be applied immediately to the selection or the document, respectively, with results that replace text applied to all text whatever its origin.
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
+
+- (void)setUsesFindPanel:(BOOL)flag;
+- (BOOL)usesFindPanel;
+
+- (void)setUsesFindBar:(BOOL)flag NS_AVAILABLE_MAC(10_7);
+- (BOOL)usesFindBar NS_AVAILABLE_MAC(10_7);
+
+- (void)setIncrementalSearchingEnabled:(BOOL)flag NS_AVAILABLE_MAC(10_7);
+- (BOOL)isIncrementalSearchingEnabled NS_AVAILABLE_MAC(10_7);
 
 @end
 
+@interface NSTextView (NSQuickLookPreview)
+/*************************** Quick Look support ***************************/
+- (IBAction)toggleQuickLookPreviewPanel:(id)sender NS_AVAILABLE_MAC(10_7);
+// This action message toggles the visiblity state of the Quick Look preview panel if the receiver is the current Quick Look controller.
+
+
+- (NSArray *)quickLookPreviewableItemsInRanges:(NSArray *)ranges NS_AVAILABLE_MAC(10_7);
+// Returns an array of preview items within the specified character ranges.  Each preview item conforms to the QLPreviewItem protocol.  The NSTextView implementation returns an array of NSURL objects, each url referring to the document URL of a text attachment content if available.
+
+- (void)updateQuickLookPreviewPanel NS_AVAILABLE_MAC(10_7);
+// Notifies QLPreviewPanel for possible status changes with the data source or controller.  Typically invoked from selection changes. 
+@end
+
 @interface NSTextView (NSDeprecated)
-- (void)toggleBaseWritingDirection:(id)sender   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+- (void)toggleBaseWritingDirection:(id)sender;
     // toggleBaseWritingDirection: will be deprecated in favor of the new NSResponder methods makeBaseWritingDirectionNatural:, makeBaseWritingDirectionLeftToRight:, and makeBaseWritingDirectionRightToLeft:, which NSTextView now implements.
+
 @end
 
 // Note that all delegation messages come from the first textView
@@ -547,7 +498,6 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (NSRange)textView:(NSTextView *)textView willChangeSelectionFromCharacterRange:(NSRange)oldSelectedCharRange toCharacterRange:(NSRange)newSelectedCharRange;
     // Delegate only.  Will not be called if textView:willChangeSelectionFromCharacterRanges:toCharacterRanges: is implemented.  Effectively prevents multiple selection.
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (NSArray *)textView:(NSTextView *)textView willChangeSelectionFromCharacterRanges:(NSArray *)oldSelectedCharRanges toCharacterRanges:(NSArray *)newSelectedCharRanges;
     // Delegate only.  Supersedes textView:willChangeSelectionFromCharacterRange:toCharacterRange:.  Return value must be a non-nil, non-empty array of objects responding to rangeValue.
 
@@ -556,11 +506,9 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 
 - (NSDictionary *)textView:(NSTextView *)textView shouldChangeTypingAttributes:(NSDictionary *)oldTypingAttributes toAttributes:(NSDictionary *)newTypingAttributes;
     // Delegate only.  The delegate should return newTypingAttributes to allow the change, oldTypingAttributes to prevent it, or some other dictionary to modify it.
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 - (void)textViewDidChangeSelection:(NSNotification *)notification;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)textViewDidChangeTypingAttributes:(NSNotification *)notification;
 
 - (NSString *)textView:(NSTextView *)textView willDisplayToolTip:(NSString *)tooltip forCharacterAtIndex:(NSUInteger)characterIndex;
@@ -568,20 +516,17 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 
 - (NSArray *)textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(NSInteger *)index;
     // Delegate only.  Allows delegate to modify the list of completions that will be presented for the partial word at the given range.  Returning nil or a zero-length array suppresses completion.  Optionally may specify the index of the initially selected completion; default is 0, and -1 indicates no selection.
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 
 - (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString;
     // Delegate only.  If characters are changing, replacementString is what will replace the affectedCharRange.  If attributes only are changing, replacementString will be nil.  Will not be called if textView:shouldChangeTextInRanges:replacementStrings: is implemented.
 
 - (BOOL)textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (NSInteger)textView:(NSTextView *)textView shouldSetSpellingState:(NSInteger)value range:(NSRange)affectedCharRange;
+- (NSInteger)textView:(NSTextView *)textView shouldSetSpellingState:(NSInteger)value range:(NSRange)affectedCharRange NS_AVAILABLE_MAC(10_5);
     // Delegate only.  Allows delegate to control the setting of spelling and grammar indicators.  Values are those listed for NSSpellingStateAttributeName. 
 
-- (NSMenu *)textView:(NSTextView *)view menu:(NSMenu *)menu forEvent:(NSEvent *)event atIndex:(NSUInteger)charIndex;
+- (NSMenu *)textView:(NSTextView *)view menu:(NSMenu *)menu forEvent:(NSEvent *)event atIndex:(NSUInteger)charIndex NS_AVAILABLE_MAC(10_5);
     // Delegate only.  Allows delegate to control the context menu returned by menuForEvent:.  The menu parameter is the context menu NSTextView would otherwise return; charIndex is the index of the character that was right-clicked. 
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 - (NSDictionary *)textView:(NSTextView *)view willCheckTextInRange:(NSRange)range options:(NSDictionary *)options types:(NSTextCheckingTypes *)checkingTypes;
@@ -590,6 +535,10 @@ APPKIT_EXTERN NSString *NSAllRomanInputSourcesLocaleIdentifier AVAILABLE_MAC_OS_
 - (NSArray *)textView:(NSTextView *)view didCheckTextInRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options results:(NSArray *)results orthography:(NSOrthography *)orthography wordCount:(NSInteger)wordCount;
     // Delegate only.  Called by handleTextCheckingResults:forRange:orthography:wordCount:, this method allows observation of text checking, or modification of the results (via the return value).
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
+
+- (NSURL *)textView:(NSTextView *)textView URLForContentsOfTextAttachment:(NSTextAttachment *)textAttachment atIndex:(NSUInteger)charIndex NS_AVAILABLE_MAC(10_7);
+// Returns an URL representing the document contents for textAttachment.  The returned NSURL object is utilized by NSTextView for providing default behaviors involving text attachments such as Quick Look and double-clicking.  -[NSTextView quickLookPreviewableItemsInRanges:] uses this method for mapping text attachments to their corresponding document URLs.  NSTextView invokes -[NSWorkspace openURL:] with the URL returned from this method when the delegate has no -textView:doubleClickedOnCell:inRect:atPoint: implementation.
+
 
 // The following delegate-only methods are deprecated in favor of the more verbose ones above.
 - (BOOL)textView:(NSTextView *)textView clickedOnLink:(id)link;
@@ -606,4 +555,37 @@ APPKIT_EXTERN NSString *NSTextViewWillChangeNotifyingTextViewNotification;
 APPKIT_EXTERN NSString *NSTextViewDidChangeSelectionNotification;
     // NSOldSelectedCharacterRange -> NSValue with old range.
 
-APPKIT_EXTERN NSString *NSTextViewDidChangeTypingAttributesNotification AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *NSTextViewDidChangeTypingAttributesNotification;
+
+
+/* These constants are deprecated in favor of their NSTextFinder equivalents. */
+
+/* Values for NSFindPanelAction */
+enum {
+    NSFindPanelActionShowFindPanel = 1,
+    NSFindPanelActionNext = 2,
+    NSFindPanelActionPrevious = 3,
+    NSFindPanelActionReplaceAll = 4,
+    NSFindPanelActionReplace = 5,
+    NSFindPanelActionReplaceAndFind = 6,
+    NSFindPanelActionSetFindString = 7,
+    NSFindPanelActionReplaceAllInSelection = 8,
+    NSFindPanelActionSelectAll = 9,
+    NSFindPanelActionSelectAllInSelection = 10
+};
+typedef NSUInteger NSFindPanelAction;
+
+/* Values for NSFindPanel search metadata */
+
+APPKIT_EXTERN NSString *NSFindPanelSearchOptionsPboardType  NS_AVAILABLE_MAC(10_5);
+
+APPKIT_EXTERN NSString *NSFindPanelCaseInsensitiveSearch NS_AVAILABLE_MAC(10_5);     // BOOL
+APPKIT_EXTERN NSString *NSFindPanelSubstringMatch NS_AVAILABLE_MAC(10_5);            // NSNumber containing NSFindPanelSubstringMatchType
+
+enum {
+    NSFindPanelSubstringMatchTypeContains = 0,
+    NSFindPanelSubstringMatchTypeStartsWith = 1,
+    NSFindPanelSubstringMatchTypeFullWord = 2,
+    NSFindPanelSubstringMatchTypeEndsWith = 3
+};
+typedef NSUInteger NSFindPanelSubstringMatchType;

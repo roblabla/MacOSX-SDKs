@@ -5,7 +5,7 @@
 
 	Version:	AppleShare X
 
-	Copyright:	© 2000 - 2007 by Apple Inc., all rights reserved.	
+	Copyright:	(c) 2000 - 2007 by Apple Inc., all rights reserved.	
 */
 
 #ifndef __CORESERVICES__

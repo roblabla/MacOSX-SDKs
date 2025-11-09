@@ -1,9 +1,10 @@
 /*	NSAutoreleasePool.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
+NS_AUTOMATED_REFCOUNT_UNAVAILABLE
 @interface NSAutoreleasePool : NSObject {
 @private
     void	*_token;
@@ -16,9 +17,7 @@
 
 - (void)addObject:(id)anObject;
 
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 - (void)drain;
-#endif
 
 @end
 

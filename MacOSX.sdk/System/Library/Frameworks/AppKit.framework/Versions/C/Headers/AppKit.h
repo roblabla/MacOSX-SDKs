@@ -1,7 +1,7 @@
 /*
 	AppKit.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 
 	This file is included by all AppKit application source files for easy building.  Using this file is preferred over importing individual files because it will use a precompiled version.
@@ -25,6 +25,7 @@
 #import <AppKit/NSControl.h>
 #import <AppKit/NSDockTile.h>
 #import <AppKit/NSFont.h>
+#import <AppKit/NSFontCollection.h>
 #import <AppKit/NSFontDescriptor.h>
 #import <AppKit/NSFontManager.h>
 #import <AppKit/NSFontPanel.h>
@@ -50,10 +51,12 @@
 #import <AppKit/NSDocument.h>
 #import <AppKit/NSDocumentController.h>
 #import <AppKit/NSDragging.h>
+#import <AppKit/NSDraggingItem.h>
+#import <AppKit/NSDraggingSession.h>
 #import <AppKit/NSEPSImageRep.h>
 #import <AppKit/NSErrors.h>
 #import <AppKit/NSEvent.h>
-#import <AppKit/NSFileWrapper.h>
+#import <AppKit/NSFileWrapperExtensions.h>
 #import <AppKit/NSHelpManager.h>
 #import <AppKit/NSGradient.h>
 #import <AppKit/NSGraphics.h>
@@ -61,6 +64,7 @@
 #import <AppKit/NSImageCell.h>
 #import <AppKit/NSImageRep.h>
 #import <AppKit/NSImageView.h>
+#import <AppKit/NSLayoutConstraint.h>
 #import <AppKit/NSNib.h>
 #import <AppKit/NSNibLoading.h>
 #import <AppKit/NSPrinter.h>
@@ -102,9 +106,11 @@
 #import <AppKit/NSRunningApplication.h>
 #import <AppKit/NSComboBox.h>
 #import <AppKit/NSComboBoxCell.h>
+#import <AppKit/NSTableCellView.h>
 #import <AppKit/NSTableColumn.h>
 #import <AppKit/NSTableHeaderCell.h>
 #import <AppKit/NSTableHeaderView.h>
+#import <AppKit/NSTableRowView.h>
 #import <AppKit/NSTableView.h>
 #import <AppKit/NSOutlineView.h>
 #import <AppKit/NSAttributedString.h>
@@ -179,8 +185,10 @@
 #import <AppKit/NSPathCell.h>
 #import <AppKit/NSPathControl.h>
 #import <AppKit/NSPathComponentCell.h>
+#import <AppKit/NSPopover.h>
 #import <AppKit/NSCollectionView.h>
 #import <AppKit/NSTextInputClient.h>
 #import <AppKit/NSTextInputContext.h>
 #import <AppKit/NSUserInterfaceItemSearching.h>
 #import <AppKit/NSTouch.h>
+#import <AppKit/NSWindowRestoration.h>

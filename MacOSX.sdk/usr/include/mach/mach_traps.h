@@ -134,7 +134,7 @@ extern kern_return_t pid_for_task(
 				mach_port_name_t t,
 				int *x);
 
-#if		!defined(__LP64__)
+#if		!defined(__LP64__) && !defined(__arm__)
 /* these should go away altogether - so no 64 legacy please */
 
 extern kern_return_t map_fd(
@@ -144,7 +144,7 @@ extern kern_return_t map_fd(
 				boolean_t findspace,
 				vm_size_t size);
 
-#endif	/* !defined(__LP64__) */
+#endif	/* !defined(__LP64__) && !defined(__arm__) */
 
 
 __END_DECLS

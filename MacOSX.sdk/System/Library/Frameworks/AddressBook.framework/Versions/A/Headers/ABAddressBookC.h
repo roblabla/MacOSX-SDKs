@@ -73,7 +73,7 @@ extern CFStringRef ABCopyRecordTypeFromUniqueId(ABAddressBookRef addressBook, CF
 
     // --- Properties
     // Property names must be unique for a record type
-extern CFIndex ABAddPropertiesAndTypes(ABAddressBookRef addressBook, CFStringRef recordType, CFDictionaryRef propertiesAnTypes);
+extern CFIndex ABAddPropertiesAndTypes(ABAddressBookRef addressBook, CFStringRef recordType, CFDictionaryRef propertiesAndTypes);
 extern CFIndex ABRemoveProperties(ABAddressBookRef addressBook, CFStringRef recordType, CFArrayRef properties);
 extern CFArrayRef ABCopyArrayOfPropertiesForRecordType(ABAddressBookRef addressBook, CFStringRef recordType);
 extern ABPropertyType ABTypeOfProperty(ABAddressBookRef addressBook, CFStringRef recordType, CFStringRef property);

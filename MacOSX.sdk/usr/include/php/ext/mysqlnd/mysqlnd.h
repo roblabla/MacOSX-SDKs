@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2006-2010 The PHP Group                                |
+  | Copyright (c) 2006-2011 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -17,13 +17,13 @@
   |          Ulf Wendel <uwendel@mysql.com>                              |
   +----------------------------------------------------------------------+
 */
-/* $Id: mysqlnd.h 304625 2010-10-22 14:34:33Z andrey $ */
+/* $Id: mysqlnd.h 308673 2011-02-25 13:11:49Z andrey $ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.7-dev - 091210 - $Revision: 304625 $"
-#define MYSQLND_VERSION_ID 50007
+#define MYSQLND_VERSION "mysqlnd 5.0.8-dev - 20102224 - $Revision: 308673 $"
+#define MYSQLND_VERSION_ID 50008
 
 /* This forces inlining of some accessor functions */
 #define MYSQLND_USE_OPTIMISATIONS 0
@@ -198,9 +198,15 @@ PHPAPI void mysqlnd_local_infile_default(MYSQLND *conn);
 PHPAPI void mysqlnd_set_local_infile_handler(MYSQLND * const conn, const char * const funcname);
 
 /* Simple commands */
+#ifdef AUTOCOMMIT_TX_COMMIT_ROLLBACK
+#define mysqlnd_autocommit(conn, mode)		(conn)->m->set_autocommit((conn), (mode) TSRMLS_CC)
+#define mysqlnd_commit(conn)				(conn)->m->tx_commit((conn) TSRMLS_CC)
+#define mysqlnd_rollback(conn)				(conn)->m->tx_rollback((conn) TSRMLS_CC)
+#else
 #define mysqlnd_autocommit(conn, mode)		(conn)->m->query((conn),(mode) ? "SET AUTOCOMMIT=1":"SET AUTOCOMMIT=0", 16 TSRMLS_CC)
 #define mysqlnd_commit(conn)				(conn)->m->query((conn), "COMMIT", sizeof("COMMIT")-1 TSRMLS_CC)
 #define mysqlnd_rollback(conn)				(conn)->m->query((conn), "ROLLBACK", sizeof("ROLLBACK")-1 TSRMLS_CC)
+#endif
 #define mysqlnd_list_dbs(conn, wild)		(conn)->m->list_method((conn), wild? "SHOW DATABASES LIKE %s":"SHOW DATABASES", (wild), NULL TSRMLS_CC)
 #define mysqlnd_list_fields(conn, tab,wild)	(conn)->m->list_fields((conn), (tab), (wild) TSRMLS_CC)
 #define mysqlnd_list_processes(conn)		(conn)->m->list_method((conn), "SHOW PROCESSLIST", NULL, NULL TSRMLS_CC)

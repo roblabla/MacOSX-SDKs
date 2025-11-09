@@ -1,14 +1,9 @@
 /*	
     NSURLCredential.h
-    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
     
     Public header file.
 */
-
-// Note: To use the APIs described in these headers, you must perform
-// a runtime check for Foundation-462.1 or later.
-#import <AvailabilityMacros.h>
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 #import <Security/Security.h>
@@ -123,7 +118,7 @@ typedef NSUInteger NSURLCredentialPersistence;
     @param persistence enum that says to store per session, permanently or not at all
     @result the Initialized NSURLCredential
  */
-- (id)initWithIdentity:(SecIdentityRef)identity certificates:(NSArray *)certArray persistence:(NSURLCredentialPersistence) persistence;
+- (id)initWithIdentity:(SecIdentityRef)identity certificates:(NSArray *)certArray persistence:(NSURLCredentialPersistence) persistence NS_AVAILABLE(10_6, 3_0);
 
 /*!
     @method credentialWithCertificateArray:password:persistence:
@@ -133,7 +128,7 @@ typedef NSUInteger NSURLCredentialPersistence;
     @param persistence enum that says to store per session, permanently or not at all
     @result The new autoreleased NSURLCredential
  */
-+ (NSURLCredential *)credentialWithIdentity:(SecIdentityRef)identity certificates:(NSArray *)certArray persistence:(NSURLCredentialPersistence)persistence;
++ (NSURLCredential *)credentialWithIdentity:(SecIdentityRef)identity certificates:(NSArray *)certArray persistence:(NSURLCredentialPersistence)persistence NS_AVAILABLE(10_6, 3_0);
 
 /*!
     @method identity
@@ -147,7 +142,7 @@ typedef NSUInteger NSURLCredentialPersistence;
     @abstract Returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate.
     @result an NSArray of SecCertificateRef or NULL if this is a username/password credential
  */
-- (NSArray *)certificates;
+- (NSArray *)certificates NS_AVAILABLE(10_6, 3_0);
 
 @end
 
@@ -158,16 +153,14 @@ typedef NSUInteger NSURLCredentialPersistence;
     @abstract Initialize a new NSURLCredential which specifies that the specified trust has been accepted.
     @result the Initialized NSURLCredential
  */
-- (id)initWithTrust:(SecTrustRef)trust;
+- (id)initWithTrust:(SecTrustRef)trust NS_AVAILABLE(10_6, 3_0);
 
 /*!
     @method continueWithHandshakeCredential
     @abstract Create a new NSURLCredential which specifies that a handshake has been trusted.
     @result The new autoreleased NSURLCredential
  */
-+ (NSURLCredential *)credentialForTrust:(SecTrustRef)trust;
++ (NSURLCredential *)credentialForTrust:(SecTrustRef)trust NS_AVAILABLE(10_6, 3_0);
 
 @end
 
-
-#endif

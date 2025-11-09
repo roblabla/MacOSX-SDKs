@@ -20,6 +20,8 @@
 
 
 #import <cups/cups.h>
+#import <cups/ppd.h>
+
 
 @class NSView;
 

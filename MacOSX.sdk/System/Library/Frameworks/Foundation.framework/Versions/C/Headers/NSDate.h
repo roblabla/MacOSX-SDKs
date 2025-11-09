@@ -1,12 +1,12 @@
 /*	NSDate.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
 @class NSString;
 
-FOUNDATION_EXPORT NSString * const NSSystemClockDidChangeNotification AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSSystemClockDidChangeNotification NS_AVAILABLE(10_6, 4_0);
 
 typedef double NSTimeInterval;
 
@@ -24,8 +24,8 @@ typedef double NSTimeInterval;
 - (NSTimeInterval)timeIntervalSinceNow;
 - (NSTimeInterval)timeIntervalSince1970;
 
-- (id)addTimeInterval:(NSTimeInterval)seconds DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (id)dateByAddingTimeInterval:(NSTimeInterval)ti AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (id)addTimeInterval:(NSTimeInterval)seconds NS_DEPRECATED(10_0, 10_6, 2_0, 4_0);
+- (id)dateByAddingTimeInterval:(NSTimeInterval)ti NS_AVAILABLE(10_6, 2_0);
 
 - (NSDate *)earlierDate:(NSDate *)anotherDate;
 - (NSDate *)laterDate:(NSDate *)anotherDate;
@@ -46,7 +46,7 @@ typedef double NSTimeInterval;
 + (id)dateWithTimeIntervalSinceNow:(NSTimeInterval)secs;    
 + (id)dateWithTimeIntervalSinceReferenceDate:(NSTimeInterval)secs;
 + (id)dateWithTimeIntervalSince1970:(NSTimeInterval)secs;
-+ (id)dateWithTimeInterval:(NSTimeInterval)ti sinceDate:(NSDate *)date AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
++ (id)dateWithTimeInterval:(NSTimeInterval)ti sinceDate:(NSDate *)date;
 
 + (id)distantFuture;
 + (id)distantPast;
@@ -54,7 +54,7 @@ typedef double NSTimeInterval;
 - (id)init;
 - (id)initWithTimeIntervalSinceNow:(NSTimeInterval)secs;
 - (id)initWithTimeIntervalSinceReferenceDate:(NSTimeInterval)secsToBeAdded;
-- (id)initWithTimeIntervalSince1970:(NSTimeInterval)ti AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (id)initWithTimeIntervalSince1970:(NSTimeInterval)ti;
 - (id)initWithTimeInterval:(NSTimeInterval)secsToBeAdded sinceDate:(NSDate *)anotherDate;
 
 @end

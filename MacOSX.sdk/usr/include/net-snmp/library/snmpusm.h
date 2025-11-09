@@ -26,7 +26,7 @@ extern          "C" {
 #define USM_MD5_AND_SHA_AUTH_LEN        12      /* bytes */
 #define USM_MAX_AUTHSIZE                USM_MD5_AND_SHA_AUTH_LEN
 
-#define USM_SEC_MODEL_NUMBER            3
+#define USM_SEC_MODEL_NUMBER            SNMP_SEC_MODEL_USM
 
     /*
      * Structures.
@@ -73,6 +73,7 @@ extern          "C" {
         u_char         *privKey;
         size_t          privKeyLen;
         u_char         *userPublicString;
+        size_t          userPublicStringLen;
         int             userStatus;
         int             userStorageType;
        /* these are actually DH * pointers but only if openssl is avail. */
@@ -174,6 +175,7 @@ extern          "C" {
                                                     u_int time_uint,
                                                     int *error);
 
+    SecmodSessionCallback usm_open_session;
     SecmodOutMsg    usm_secmod_generate_out_msg;
     SecmodOutMsg    usm_secmod_generate_out_msg;
     SecmodInMsg     usm_secmod_process_in_msg;
@@ -194,49 +196,63 @@ extern          "C" {
                                        void **, netsnmp_session *, u_char);
 
     int             usm_check_secLevel(int level, struct usmUser *user);
+    NETSNMP_IMPORT
     struct usmUser *usm_get_userList(void);
+    NETSNMP_IMPORT
     struct usmUser *usm_get_user(u_char * engineID, size_t engineIDLen,
                                  char *name);
     struct usmUser *usm_get_user_from_list(u_char * engineID,
                                            size_t engineIDLen, char *name,
                                            struct usmUser *userList,
                                            int use_default);
+    NETSNMP_IMPORT
     struct usmUser *usm_add_user(struct usmUser *user);
     struct usmUser *usm_add_user_to_list(struct usmUser *user,
                                          struct usmUser *userList);
+    NETSNMP_IMPORT
     struct usmUser *usm_free_user(struct usmUser *user);
+    NETSNMP_IMPORT
     struct usmUser *usm_create_user(void);
+    NETSNMP_IMPORT
     struct usmUser *usm_create_initial_user(const char *name,
                                             const oid * authProtocol,
                                             size_t authProtocolLen,
                                             const oid * privProtocol,
                                             size_t privProtocolLen);
+    NETSNMP_IMPORT
     struct usmUser *usm_cloneFrom_user(struct usmUser *from,
                                        struct usmUser *to);
+    NETSNMP_IMPORT
     struct usmUser *usm_remove_user(struct usmUser *user);
     struct usmUser *usm_remove_user_from_list(struct usmUser *user,
                                               struct usmUser **userList);
     char           *get_objid(char *line, oid ** optr, size_t * len);
+    NETSNMP_IMPORT
     void            usm_save_users(const char *token, const char *type);
     void            usm_save_users_from_list(struct usmUser *user,
                                              const char *token,
                                              const char *type);
     void            usm_save_user(struct usmUser *user, const char *token,
                                   const char *type);
+    NETSNMP_IMPORT
     SNMPCallback    usm_store_users;
-    struct usmUser *usm_read_user(char *line);
+    struct usmUser *usm_read_user(const char *line);
+    NETSNMP_IMPORT
     void            usm_parse_config_usmUser(const char *token,
                                              char *line);
 
     void            usm_set_password(const char *token, char *line);
+    NETSNMP_IMPORT
     void            usm_set_user_password(struct usmUser *user,
                                           const char *token, char *line);
     void            init_usm(void);
+    NETSNMP_IMPORT
     void            init_usm_conf(const char *app);
     int             init_usm_post_config(int majorid, int minorid,
                                          void *serverarg, void *clientarg);
     int             deinit_usm_post_config(int majorid, int minorid, void *serverarg,
 					   void *clientarg);
+    NETSNMP_IMPORT
     void            clear_user_list(void);
 
 #ifdef __cplusplus

@@ -1,14 +1,9 @@
 /*	
     NSURLDownload.h
-    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
     
     Public header file.
 */
-
-// Note: To use the APIs described in these headers, you must perform
-// a runtime check for Foundation-462.1 or later.
-#import <AvailabilityMacros.h>
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 
@@ -20,6 +15,7 @@
 @class NSURLRequest;
 @class NSURLResponse;
 @class NSURLProtectionSpace;
+@protocol NSURLDownloadDelegate;
 
 /*!
     @class NSURLDownload
@@ -51,7 +47,7 @@
     @param delegate The delegate of the download.
     @result An initialized NSURLDownload object.
 */
-- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate;
+- (id)initWithRequest:(NSURLRequest *)request delegate:(id <NSURLDownloadDelegate>)delegate;
 
 /*!
     @method initWithResumeData:delegate:path:
@@ -61,7 +57,7 @@
     @param path The path of the incomplete downloaded file.
     @result An initialized NSURLDownload object.
 */
-- (id)initWithResumeData:(NSData *)resumeData delegate:(id)delegate path:(NSString *)path;
+- (id)initWithResumeData:(NSData *)resumeData delegate:(id <NSURLDownloadDelegate>)delegate path:(NSString *)path;
 
 /*!
     @method cancel
@@ -125,7 +121,9 @@
     @protocol NSURLDownloadDelegate
     @discussion The NSURLDownloadDelegate delegate is used to report the progress of the download.
 */
-@interface NSObject (NSURLDownloadDelegate)
+@protocol NSURLDownloadDelegate <NSObject>
+
+@optional
 
 /*!
     @method downloadDidBegin:
@@ -287,4 +285,3 @@
 
 @end
 
-#endif

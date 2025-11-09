@@ -66,11 +66,21 @@ kern_return_t find_code_signature
 	int32_t new_pid
 );
 
-extern boolean_t task_access_server(
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+boolean_t task_access_server(
 		mach_msg_header_t *InHeadP,
 		mach_msg_header_t *OutHeadP);
 
-extern mig_routine_t task_access_server_routine(
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+mig_routine_t task_access_server_routine(
 		mach_msg_header_t *InHeadP);
 
 

@@ -1,5 +1,5 @@
 /*	NSSpellServer.h
-	Copyright (c) 1990-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1990-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -33,8 +33,8 @@ The server just handles all the checking in and IAC and delegates the real work 
         unsigned int _reserved:29;
     } _ssFlags;
 
-    void *_reservedSpellServer1;
-    void *_reservedSpellServer2;
+    id _checker;
+    void *_reservedSpellServer;
 }
 
 - (void)setDelegate:(id <NSSpellServerDelegate>)anObject;
@@ -78,22 +78,17 @@ The result should be an array of NSTextCheckingResult objects, of the spelling, 
 
 - (void)spellServer:(NSSpellServer *)sender didForgetWord:(NSString *)word inLanguage:(NSString *)language;
 
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 - (NSArray *)spellServer:(NSSpellServer *)sender suggestCompletionsForPartialWordRange:(NSRange)range inString:(NSString *)string language:(NSString *)language;
-#endif /* MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED */
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
-- (NSRange)spellServer:(NSSpellServer *)sender checkGrammarInString:(NSString *)stringToCheck language:(NSString *)language details:(NSArray **)details;
+- (NSRange)spellServer:(NSSpellServer *)sender checkGrammarInString:(NSString *)stringToCheck language:(NSString *)language details:(NSArray **)details NS_AVAILABLE(10_5, NA);
 
 /* Keys for the dictionaries in the details array. */
-FOUNDATION_EXPORT NSString *const NSGrammarRange;
-FOUNDATION_EXPORT NSString *const NSGrammarUserDescription;
-FOUNDATION_EXPORT NSString *const NSGrammarCorrections;
+FOUNDATION_EXPORT NSString *const NSGrammarRange NS_AVAILABLE(10_5, NA);
+FOUNDATION_EXPORT NSString *const NSGrammarUserDescription NS_AVAILABLE(10_5, NA);
+FOUNDATION_EXPORT NSString *const NSGrammarCorrections NS_AVAILABLE(10_5, NA);
 
-#endif /* MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED */
+- (NSArray *)spellServer:(NSSpellServer *)sender checkString:(NSString *)stringToCheck offset:(NSUInteger)offset types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options orthography:(NSOrthography *)orthography wordCount:(NSInteger *)wordCount NS_AVAILABLE(10_6, NA);
 
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
-- (NSArray *)spellServer:(NSSpellServer *)sender checkString:(NSString *)stringToCheck offset:(NSUInteger)offset types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary *)options orthography:(NSOrthography *)orthography wordCount:(NSInteger *)wordCount;
-#endif /* MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED */
+- (void)spellServer:(NSSpellServer *)sender recordResponse:(NSUInteger)response toCorrection:(NSString *)correction forWord:(NSString *)word language:(NSString *)language NS_AVAILABLE(10_7, NA);
 
 @end

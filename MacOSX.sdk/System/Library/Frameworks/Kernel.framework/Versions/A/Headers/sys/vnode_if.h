@@ -241,6 +241,7 @@ struct vnop_open_args {
 	vfs_context_t a_context;
 };
 
+
 /*!
  @function VNOP_OPEN
  @abstract Call down to a filesystem to open a file.
@@ -252,6 +253,7 @@ struct vnop_open_args {
  @param ctx Context against which to authenticate open.
  @return 0 for success or a filesystem-specific error. 
  */
+
 
 struct vnop_close_args {
 	struct vnodeop_desc *a_desc;
@@ -350,8 +352,7 @@ struct vnop_read_args {
  @discussion VNOP_READ() is where the hard work of of the read() system call happens.  The filesystem may use
  the buffer cache, the cluster layer, or an alternative method to get its data; uio routines will be used to see that data
  is copied to the correct virtual address in the correct address space and will update its uio argument
- to indicate how much data has been moved.  Filesystems will not receive a read request on a file without having
- first received a VNOP_OPEN().
+ to indicate how much data has been moved.  
  @param vp The vnode to read from.
  @param uio Description of request, including file offset, amount of data requested, destination address for data,
  and whether that destination is in kernel or user space.
@@ -375,8 +376,7 @@ struct vnop_write_args {
  @discussion VNOP_WRITE() is to write() as VNOP_READ() is to read().  The filesystem may use
  the buffer cache, the cluster layer, or an alternative method to write its data; uio routines will be used to see that data
  is copied to the correct virtual address in the correct address space and will update its uio argument
- to indicate how much data has been moved.  Filesystems will not receive a write request on a file without having
- first received a VNOP_OPEN().
+ to indicate how much data has been moved.  
  @param vp The vnode to write to.
  @param uio Description of request, including file offset, amount of data to write, source address for data,
  and whether that destination is in kernel or user space.
@@ -551,6 +551,7 @@ struct vnop_remove_args {
  @return 0 for success, else an error code.
  */
 
+
 struct vnop_link_args {
 	struct vnodeop_desc *a_desc;
 	vnode_t a_vp;
@@ -595,6 +596,8 @@ struct vnop_rename_args {
  @return 0 for success, else an error code.
  */
 
+
+
 struct vnop_mkdir_args {
 	struct vnodeop_desc *a_desc;
 	vnode_t a_dvp;
@@ -616,6 +619,9 @@ struct vnop_mkdir_args {
  @return 0 for success, else an error code.
  */
 
+
+
+
 struct vnop_rmdir_args {
 	struct vnodeop_desc *a_desc;
 	vnode_t a_dvp;
@@ -633,6 +639,9 @@ struct vnop_rmdir_args {
  @param ctx Context to authenticate for rmdir request.
  @return 0 for success, else an error code.
  */
+
+
+
 
 struct vnop_symlink_args {
        struct vnodeop_desc *a_desc;
@@ -658,7 +667,6 @@ struct vnop_symlink_args {
  @param ctx Context to authenticate for symlink request.
  @return 0 for success, else an error code.
  */
-
 
 /*
  *
@@ -856,7 +864,7 @@ struct vnop_allocate_args {
  a file.  It can be used to either shrink or grow a file.  If the file shrinks,
  its ubc size will be modified accordingly, but if it grows, then the ubc size is unchanged;
  space is set aside without being actively used by the file.  VNOP_ALLOCATE() is currently only 
- called as part of the F_PREALLOCATE fcntl, and is supported only by AFP and HFS.  
+ called as part of the F_PREALLOCATE fcntl.  
  @param vp The vnode for which to preallocate space.
  @param length Desired preallocated file length.
  @param flags 
@@ -918,12 +926,20 @@ struct vnop_pageout_args {
  @abstract Write data from a mapped file back to disk.
  @discussion VNOP_PAGEOUT() is called when data from a mapped file needs to be flushed to disk, either
  because of an msync() call or due to memory pressure.  Filesystems are for the most part expected to
- just call cluster_pageout().
+ just call cluster_pageout().   However, if they opt into the VFC_VFSVNOP_PAGEOUTV2 flag, then
+ they will be responsible for creating their own UPLs.
  @param vp The vnode for which to page out data.
- @param pl UPL describing pages needing to be paged out.
- @param pl_offset Offset in UPL from which to start paging out data.
- @param f_offset Offset in file of data needing to be paged out.
- @param size Amount of data to page out (in bytes).
+ @param pl UPL describing pages needed to be paged out.  If UPL is NULL, then it means the filesystem 
+ has opted into VFC_VFSVNOP_PAGEOUTV2 semantics, which means that it will create and operate on its own UPLs
+ as opposed to relying on the one passed down into the filesystem.  This means that the filesystem must be 
+ responsible for N cluster_pageout calls for N dirty ranges in the UPL. 
+ @param pl_offset Offset in UPL from which to start paging out data.  Under the new VFC_VFSVNOP_PAGEOUTV2
+ semantics, this is the offset in the range specified that must be paged out if the associated page is dirty. 
+ @param f_offset Offset in file of data needing to be paged out.    Under the new VFC_VFSVNOP_PAGEOUTV2
+ semantics, this represents the offset in the file where we should start looking for dirty pages.
+ @param size Amount of data to page out (in bytes).   Under VFC_VFSVNOP_PAGEOUTV2, this represents
+ the size of the range to be considered.  The fileystem is free to extend or shrink the specified range
+ to better fit its blocking model as long as the page at 'pl_offset' is included.
  @param flags UPL-style flags: UPL_IOSYNC, UPL_NOCOMMIT, UPL_NORDAHEAD, UPL_VNODE_PAGER, UPL_MSYNC.
  Filesystems should generally leave it to the cluster layer to handle these flags. See the
  memory_object_types.h header in the kernel framework if interested.
@@ -947,6 +963,36 @@ struct vnop_searchfs_args {
 	struct searchstate *a_searchstate;
 	vfs_context_t a_context;
 };
+
+/*
+   @function VNOP_SEARCHFS
+   @abstract Search a filesystem quickly for files or directories that match the passed-in search criteria.
+   @discussion VNOP_SEARCHFS is a getattrlist-based system call which is implemented almost entirely inside
+   supported filesystems.  Callers provide a set of criteria to match against, and the filesystem is responsible
+   for finding all files or directories that match the criteria.  Once these files or directories are found, 
+   the user-requested attributes of these files is provided as output.  The set of searchable attributes is a 
+   subset of the getattrlist  attributes.  For example, ATTR_CMN_UUID is not a valid searchable attribute as of 
+   10.6.  A common usage scenario could be to request all files whose mod dates is greater than time X, less than 
+   time Y, and provide the inode ID and filename of the matching objects as output.  
+   @param vp The vnode representing the mountpoint of the filesystem to be searched.
+   @param a_searchparams1 If one-argument search criteria is requested, the search criteria would go here. However,
+   some search criteria, like ATTR_CMN_MODTIME, can be bounded.  The user could request files modified between time X
+   and time Y.  In this case, the lower bound goes in a_searchparams1.
+   @param a_searchparams2 If two-argument search criteria is requested, the upper bound goes in here.
+   @param a_searchattrs Contains the getattrlist-style attribute bits which are requested by the current search.
+   @param a_maxmatches The maximum number of matches to return in a single system call.
+   @param a_timelimit The suggested maximum amount of time we can spend in the kernel to service this system call.  
+   Filesystems should use this as a guide only, and set their own internal maximum time to avoid denial of service.
+   @param a_returnattrs The getattrlist-style attributes to return for items in the filesystem that match the search 
+   criteria above.
+   @param a_scriptcode Currently ignored.
+   @param a_uio The uio in which to write out the search matches.
+   @param a_searchstate Sometimes searches cannot be completed in a single system call.  In this case, we provide 
+   an identifier back to the user which indicates where to resume a previously-started search.  This is an opaque structure
+   used by the filesystem to identify where to resume said search.
+   @param a_context The context in which to perform the filesystem search.
+   @return 0 on success, EAGAIN for searches which could not be completed in 1 call, and other ERRNOS as needed.
+ */
 
 
 struct vnop_copyfile_args {

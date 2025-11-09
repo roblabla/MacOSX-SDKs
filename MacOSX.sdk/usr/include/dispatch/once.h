@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_APACHE_LICENSE_HEADER_START@
  * 
@@ -55,22 +55,38 @@ typedef long dispatch_once_t;
  * initialized by the block.
  */
 #ifdef __BLOCKS__
-__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
-DISPATCH_NONNULL_ALL DISPATCH_NOTHROW
+__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
+DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_NOTHROW
 void
 dispatch_once(dispatch_once_t *predicate, dispatch_block_t block);
-#ifdef __GNUC__
-#define dispatch_once(x, ...) do { if (__builtin_expect(*(x), ~0l) != ~0l) dispatch_once((x), (__VA_ARGS__)); } while (0)
-#endif
+
+DISPATCH_INLINE DISPATCH_ALWAYS_INLINE DISPATCH_NONNULL_ALL DISPATCH_NOTHROW
+void
+_dispatch_once(dispatch_once_t *predicate, dispatch_block_t block)
+{
+	if (DISPATCH_EXPECT(*predicate, ~0l) != ~0l) {
+		dispatch_once(predicate, block);
+	}
+}
+#undef dispatch_once
+#define dispatch_once _dispatch_once
 #endif
 
-__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
-DISPATCH_NONNULL1 DISPATCH_NONNULL3 DISPATCH_NOTHROW
+__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
+DISPATCH_EXPORT DISPATCH_NONNULL1 DISPATCH_NONNULL3 DISPATCH_NOTHROW
 void
-dispatch_once_f(dispatch_once_t *predicate, void *context, void (*function)(void *));
-#ifdef __GNUC__
-#define dispatch_once_f(x, y, z) do { if (__builtin_expect(*(x), ~0l) != ~0l) dispatch_once_f((x), (y), (z)); } while (0)
-#endif
+dispatch_once_f(dispatch_once_t *predicate, void *context, dispatch_function_t function);
+
+DISPATCH_INLINE DISPATCH_ALWAYS_INLINE DISPATCH_NONNULL1 DISPATCH_NONNULL3 DISPATCH_NOTHROW
+void
+_dispatch_once_f(dispatch_once_t *predicate, void *context, dispatch_function_t function)
+{
+	if (DISPATCH_EXPECT(*predicate, ~0l) != ~0l) {
+		dispatch_once_f(predicate, context, function);
+	}
+}
+#undef dispatch_once_f
+#define dispatch_once_f _dispatch_once_f
 
 __END_DECLS
 

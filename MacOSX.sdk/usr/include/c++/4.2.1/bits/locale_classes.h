@@ -401,7 +401,7 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
     _M_add_reference() const throw()
     { __gnu_cxx::__atomic_add_dispatch(&_M_refcount, 1); }
 
-    inline void
+	inline void
     _M_remove_reference() const throw()
     {
       if (__gnu_cxx::__exchange_and_add_dispatch(&_M_refcount, -1) == 1)
@@ -506,7 +506,10 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
     _M_add_reference() throw()
     { __gnu_cxx::__atomic_add_dispatch(&_M_refcount, 1); }
 
-    inline void
+#if BUILDING_LIBSTDCXX
+	  __attribute__((used))
+#endif
+	  inline void
     _M_remove_reference() throw()
     {
       if (__gnu_cxx::__exchange_and_add_dispatch(&_M_refcount, -1) == 1)
@@ -529,7 +532,10 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
     void
     operator=(const _Impl&);  // Not defined.
 
-    inline bool
+#if BUILDING_LIBSTDCXX
+	  __attribute__((used))
+#endif
+	  inline bool
     _M_check_same_name()
     {
       bool __ret = true;

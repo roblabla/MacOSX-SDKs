@@ -5,8 +5,6 @@
     Public header file.
 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 #define AMAutomatorErrorDomain			@"com.apple.Automator"
 
 // NSError keys in userInfo
@@ -51,4 +49,3 @@ enum {
 	AMConversionFailedError								= -302		// Conversion failed (reason unknown)
 };
 
-#endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2004-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -106,11 +106,14 @@ struct kauth_identity_extlookup {
 #define KAUTH_EXTLOOKUP_WANT_MEMBERSHIP	(1<<12)
 #define KAUTH_EXTLOOKUP_VALID_MEMBERSHIP (1<<13)
 #define KAUTH_EXTLOOKUP_ISMEMBER	(1<<14)
+#define KAUTH_EXTLOOKUP_VALID_PWNAM	(1<<15)
+#define	KAUTH_EXTLOOKUP_WANT_PWNAM	(1<<16)
+#define KAUTH_EXTLOOKUP_VALID_GRNAM	(1<<17)
+#define	KAUTH_EXTLOOKUP_WANT_GRNAM	(1<<18)
 
 	__darwin_pid_t	el_info_pid;		/* request on behalf of PID */
+	u_int64_t	el_extend;		/* extension field */
 	u_int32_t	el_info_reserved_1;	/* reserved (APPLE) */
-	u_int32_t	el_info_reserved_2;	/* reserved (APPLE) */
-	u_int32_t	el_info_reserved_3;	/* reserved (APPLE) */
 
 	uid_t		el_uid;		/* user ID */
 	guid_t		el_uguid;	/* user GUID */

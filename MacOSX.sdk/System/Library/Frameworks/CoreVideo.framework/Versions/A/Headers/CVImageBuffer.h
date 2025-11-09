@@ -18,8 +18,10 @@
 #define __COREVIDEO_CVIMAGEBUFFER_H__ 1
 
 #include <TargetConditionals.h>
+#include <Availability.h>
+#include <AvailabilityMacros.h>
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE || TARGET_OS_WIN32
 #include <CoreGraphics/CoreGraphics.h>
 #else
 #include <ApplicationServices/ApplicationServices.h>
@@ -32,68 +34,68 @@ extern "C" {
 
 #pragma mark CVImageBufferRef attachment keys
 
-CV_EXPORT const CFStringRef kCVImageBufferCGColorSpaceKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CGColorSpaceRef
+CV_EXPORT const CFStringRef kCVImageBufferCGColorSpaceKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);				// CGColorSpaceRef
 
-CV_EXPORT const CFStringRef kCVImageBufferCleanApertureKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFDictionary containing the following four keys
-CV_EXPORT const CFStringRef	kCVImageBufferCleanApertureWidthKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;			// CFNumber
-CV_EXPORT const CFStringRef	kCVImageBufferCleanApertureHeightKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;			// CFNumber
-CV_EXPORT const CFStringRef	kCVImageBufferCleanApertureHorizontalOffsetKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFNumber
-CV_EXPORT const CFStringRef	kCVImageBufferCleanApertureVerticalOffsetKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFNumber
-CV_EXPORT const CFStringRef kCVImageBufferPreferredCleanApertureKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;			// CFDictionary containing same keys as kCVImageBufferCleanApertureKey
+CV_EXPORT const CFStringRef kCVImageBufferCleanApertureKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);				// CFDictionary containing the following four keys
+CV_EXPORT const CFStringRef	kCVImageBufferCleanApertureWidthKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);			// CFNumber
+CV_EXPORT const CFStringRef	kCVImageBufferCleanApertureHeightKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);			// CFNumber
+CV_EXPORT const CFStringRef	kCVImageBufferCleanApertureHorizontalOffsetKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		// CFNumber
+CV_EXPORT const CFStringRef	kCVImageBufferCleanApertureVerticalOffsetKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		// CFNumber
+CV_EXPORT const CFStringRef kCVImageBufferPreferredCleanApertureKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);			// CFDictionary containing same keys as kCVImageBufferCleanApertureKey
 
-CV_EXPORT const CFStringRef kCVImageBufferFieldCountKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFNumber
-CV_EXPORT const CFStringRef kCVImageBufferFieldDetailKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFString with one of the following four values
-CV_EXPORT const CFStringRef	kCVImageBufferFieldDetailTemporalTopFirst AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
-CV_EXPORT const CFStringRef	kCVImageBufferFieldDetailTemporalBottomFirst AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
-CV_EXPORT const CFStringRef	kCVImageBufferFieldDetailSpatialFirstLineEarly AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
-CV_EXPORT const CFStringRef	kCVImageBufferFieldDetailSpatialFirstLineLate AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
+CV_EXPORT const CFStringRef kCVImageBufferFieldCountKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);				// CFNumber
+CV_EXPORT const CFStringRef kCVImageBufferFieldDetailKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);				// CFString with one of the following four values
+CV_EXPORT const CFStringRef	kCVImageBufferFieldDetailTemporalTopFirst __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		// CFString
+CV_EXPORT const CFStringRef	kCVImageBufferFieldDetailTemporalBottomFirst __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		// CFString
+CV_EXPORT const CFStringRef	kCVImageBufferFieldDetailSpatialFirstLineEarly __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		// CFString
+CV_EXPORT const CFStringRef	kCVImageBufferFieldDetailSpatialFirstLineLate __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		// CFString
 
-CV_EXPORT const CFStringRef kCVImageBufferPixelAspectRatioKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFDictionary with the following two keys
-CV_EXPORT const CFStringRef	kCVImageBufferPixelAspectRatioHorizontalSpacingKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFNumber
-CV_EXPORT const CFStringRef	kCVImageBufferPixelAspectRatioVerticalSpacingKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	// CFNumber
+CV_EXPORT const CFStringRef kCVImageBufferPixelAspectRatioKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);				// CFDictionary with the following two keys
+CV_EXPORT const CFStringRef	kCVImageBufferPixelAspectRatioHorizontalSpacingKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	// CFNumber
+CV_EXPORT const CFStringRef	kCVImageBufferPixelAspectRatioVerticalSpacingKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	// CFNumber
 
-CV_EXPORT const CFStringRef kCVImageBufferDisplayDimensionsKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFDictionary with the following two keys
-CV_EXPORT const CFStringRef	kCVImageBufferDisplayWidthKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFNumber
-CV_EXPORT const CFStringRef	kCVImageBufferDisplayHeightKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFNumber
+CV_EXPORT const CFStringRef kCVImageBufferDisplayDimensionsKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);				// CFDictionary with the following two keys
+CV_EXPORT const CFStringRef	kCVImageBufferDisplayWidthKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);				// CFNumber
+CV_EXPORT const CFStringRef	kCVImageBufferDisplayHeightKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);				// CFNumber
 
-CV_EXPORT const CFStringRef kCVImageBufferGammaLevelKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFNumber describing the gamma level, used in absence of (or ignorance of) kCVImageBufferTransferFunctionKey
+CV_EXPORT const CFStringRef kCVImageBufferGammaLevelKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);				// CFNumber describing the gamma level, used in absence of (or ignorance of) kCVImageBufferTransferFunctionKey
 
-CV_EXPORT const CFStringRef kCVImageBufferICCProfileKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;				// CFData representation of the ICC profile
+CV_EXPORT const CFStringRef kCVImageBufferICCProfileKey __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);				// CFData representation of the ICC profile
 
-CV_EXPORT const CFStringRef kCVImageBufferYCbCrMatrixKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;				// CFString describing the color matrix for YCbCr->RGB. This key can be one of the following values:
-CV_EXPORT const CFStringRef	kCVImageBufferYCbCrMatrix_ITU_R_709_2 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;			// CFString
-CV_EXPORT const CFStringRef	kCVImageBufferYCbCrMatrix_ITU_R_601_4 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;			// CFString
-CV_EXPORT const CFStringRef	kCVImageBufferYCbCrMatrix_SMPTE_240M_1995 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		// CFString
+CV_EXPORT const CFStringRef kCVImageBufferYCbCrMatrixKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);				// CFString describing the color matrix for YCbCr->RGB. This key can be one of the following values:
+CV_EXPORT const CFStringRef	kCVImageBufferYCbCrMatrix_ITU_R_709_2 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);			// CFString
+CV_EXPORT const CFStringRef	kCVImageBufferYCbCrMatrix_ITU_R_601_4 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);			// CFString
+CV_EXPORT const CFStringRef	kCVImageBufferYCbCrMatrix_SMPTE_240M_1995 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		// CFString
 
-CV_EXPORT const CFStringRef kCVImageBufferColorPrimariesKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;				// CFString describing the color primaries. This key can be one of the following values
-CV_EXPORT const CFStringRef	kCVImageBufferColorPrimaries_ITU_R_709_2 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CV_EXPORT const CFStringRef	kCVImageBufferColorPrimaries_EBU_3213 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CV_EXPORT const CFStringRef	kCVImageBufferColorPrimaries_SMPTE_C AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CV_EXPORT const CFStringRef kCVImageBufferColorPrimariesKey __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);				// CFString describing the color primaries. This key can be one of the following values
+CV_EXPORT const CFStringRef	kCVImageBufferColorPrimaries_ITU_R_709_2 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);
+CV_EXPORT const CFStringRef	kCVImageBufferColorPrimaries_EBU_3213 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);
+CV_EXPORT const CFStringRef	kCVImageBufferColorPrimaries_SMPTE_C __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);
 
-CV_EXPORT const CFStringRef kCVImageBufferTransferFunctionKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;				// CFString describing the transfer function. This key can be one of the following values
-CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_ITU_R_709_2 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_SMPTE_240M_1995 AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_UseGamma AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_EBU_3213 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED;			// Should not be used.
-CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_SMPTE_C AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED;			// Should not be used.
+CV_EXPORT const CFStringRef kCVImageBufferTransferFunctionKey __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);				// CFString describing the transfer function. This key can be one of the following values
+CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_ITU_R_709_2 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);
+CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_SMPTE_240M_1995 __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);
+CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_UseGamma __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);
+CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_EBU_3213 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);			// Should not be used.
+CV_EXPORT const CFStringRef	kCVImageBufferTransferFunction_SMPTE_C __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);			// Should not be used.
 
 /* Chroma siting information. For progressive images, only the TopField value is used. */
-CV_EXPORT const CFStringRef kCVImageBufferChromaLocationTopFieldKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			// CFString with one of the following CFString values
-CV_EXPORT const CFStringRef kCVImageBufferChromaLocationBottomFieldKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;		// CFString with one of the following CFString values
-CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_Left AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			    // Chroma sample is horizontally co-sited with the left column of luma samples, but centered vertically.
-CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_Center AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			    // Chroma sample is fully centered
-CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_TopLeft AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			    // Chroma sample is co-sited with the top-left luma sample.
-CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_Top AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			    // Chroma sample is horizontally centered, but co-sited with the top row of luma samples.
-CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_BottomLeft AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;		    // Chroma sample is co-sited with the bottom-left luma sample.
-CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_Bottom AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			    // Chroma sample is horizontally centered, but co-sited with the bottom row of luma samples.
-CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_DV420 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;			    // Cr and Cb samples are alternately co-sited with the left luma samples of the same field.
+CV_EXPORT const CFStringRef kCVImageBufferChromaLocationTopFieldKey __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);			// CFString with one of the following CFString values
+CV_EXPORT const CFStringRef kCVImageBufferChromaLocationBottomFieldKey __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);		// CFString with one of the following CFString values
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_Left __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);			    // Chroma sample is horizontally co-sited with the left column of luma samples, but centered vertically.
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_Center __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);			    // Chroma sample is fully centered
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_TopLeft __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);			    // Chroma sample is co-sited with the top-left luma sample.
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_Top __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);			    // Chroma sample is horizontally centered, but co-sited with the top row of luma samples.
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_BottomLeft __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);		    // Chroma sample is co-sited with the bottom-left luma sample.
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_Bottom __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);			    // Chroma sample is horizontally centered, but co-sited with the bottom row of luma samples.
+CV_EXPORT const CFStringRef	kCVImageBufferChromaLocation_DV420 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);			    // Cr and Cb samples are alternately co-sited with the left luma samples of the same field.
 
 // These describe the format of the original subsampled data before conversion to 422/2vuy.   In order to use
 // these tags, the data must have been converted to 4:2:2 via simple pixel replication.
-CV_EXPORT const CFStringRef kCVImageBufferChromaSubsamplingKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;		// CFString/CFNumber with one of the following values
-CV_EXPORT const CFStringRef	kCVImageBufferChromaSubsampling_420 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CV_EXPORT const CFStringRef	kCVImageBufferChromaSubsampling_422 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-CV_EXPORT const CFStringRef	kCVImageBufferChromaSubsampling_411 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CV_EXPORT const CFStringRef kCVImageBufferChromaSubsamplingKey __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);		// CFString/CFNumber with one of the following values
+CV_EXPORT const CFStringRef	kCVImageBufferChromaSubsampling_420 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);
+CV_EXPORT const CFStringRef	kCVImageBufferChromaSubsampling_422 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);
+CV_EXPORT const CFStringRef	kCVImageBufferChromaSubsampling_411 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);
 
 #pragma mark CVImageBufferRef
 
@@ -112,7 +114,7 @@ typedef CVBufferRef CVImageBufferRef;
     @result     A CGSize returning the full encoded size of the buffer
 		Returns zero size if called with a non-CVImageBufferRef type or NULL.
 */
-CV_EXPORT CGSize CVImageBufferGetEncodedSize(CVImageBufferRef imageBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CGSize CVImageBufferGetEncodedSize(CVImageBufferRef imageBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVImageBufferGetDisplaySize
@@ -122,7 +124,7 @@ CV_EXPORT CGSize CVImageBufferGetEncodedSize(CVImageBufferRef imageBuffer) AVAIL
     @result     A CGSize returning the nominal display size of the buffer
 		Returns zero size if called with a non-CVImageBufferRef type or NULL.
 */
-CV_EXPORT CGSize CVImageBufferGetDisplaySize(CVImageBufferRef imageBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CGSize CVImageBufferGetDisplaySize(CVImageBufferRef imageBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVImageBufferGetCleanRect
@@ -135,8 +137,9 @@ CV_EXPORT CGSize CVImageBufferGetDisplaySize(CVImageBufferRef imageBuffer) AVAIL
     @result     A CGSize returning the nominal display size of the buffer
 		Returns zero rect if called with a non-CVImageBufferRef type or NULL.
 */
-CV_EXPORT CGRect CVImageBufferGetCleanRect(CVImageBufferRef imageBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CGRect CVImageBufferGetCleanRect(CVImageBufferRef imageBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
+#if COREVIDEO_SUPPORTS_COLORSPACE
 /*!
     @function   CVImageBufferGetColorSpace
     @abstract   Returns the color space of a CVImageBuffer.
@@ -144,7 +147,8 @@ CV_EXPORT CGRect CVImageBufferGetCleanRect(CVImageBufferRef imageBuffer) AVAILAB
     @result     A CGColorSpaceRef representing the color space of the buffer.
 		Returns NULL if called with a non-CVImageBufferRef type or NULL.
 */
-CV_EXPORT CGColorSpaceRef CVImageBufferGetColorSpace(CVImageBufferRef imageBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CGColorSpaceRef CVImageBufferGetColorSpace(CVImageBufferRef imageBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+#endif
 
 #if defined(__cplusplus)
 }

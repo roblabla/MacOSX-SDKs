@@ -14,15 +14,17 @@
 */
 
 #include <TargetConditionals.h>
+#include <Availability.h>
 #include <AvailabilityMacros.h>
-
 
 #include <CoreVideo/CVReturn.h>
 #include <CoreVideo/CVBase.h>
+
 #if COREVIDEO_SUPPORTS_DISPLAYLINK
 #include <CoreVideo/CVHostTime.h>
 #include <CoreVideo/CVDisplayLink.h>
 #endif
+
 #include <CoreVideo/CVBuffer.h>
 #include <CoreVideo/CVPixelBuffer.h>
 #include <CoreVideo/CVPixelBufferPool.h>
@@ -33,5 +35,11 @@
 #include <CoreVideo/CVOpenGLTexture.h>
 #include <CoreVideo/CVOpenGLTextureCache.h>
 #endif // COREVIDEO_SUPPORTS_OPENGL
-
 #include <CoreVideo/CVPixelFormatDescription.h>
+
+#if COREVIDEO_SUPPORTS_DIRECT3D
+#include <CoreVideo/CVDirect3DBuffer.h>
+#include <CoreVideo/CVDirect3DBufferPool.h>
+#include <CoreVideo/CVDirect3DTexture.h>
+#include <CoreVideo/CVDirect3DTextureCache.h>
+#endif

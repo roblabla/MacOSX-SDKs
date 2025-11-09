@@ -51,7 +51,8 @@
 
 enum {
 	kMemoryStatusLevelNote = 1,
-	kMemoryStatusSnapshotNote = 2
+	kMemoryStatusSnapshotNote = 2,
+	kMemoryStatusHibernationNote = 3
 };
 
 enum {
@@ -108,10 +109,23 @@ typedef struct jetsam_snapshot {
 	jetsam_snapshot_entry_t entries[1];
 } jetsam_snapshot_t;
 
+typedef struct jetsam_hibernation_entry {
+ 	uint32_t pid;
+ 	uint32_t flags;
+ 	uint32_t pages;
+} jetsam_hibernation_entry_t;
+
+
 enum {
-	kJetsamFlagsFrontmost =		(1 << 0),
-	kJetsamFlagsKilled =		(1 << 1),
-	kJetsamFlagsKilledHiwat =	(1 << 2)
+	kJetsamFlagsFrontmost =        (1 << 0),
+	kJetsamFlagsKilled =           (1 << 1),
+	kJetsamFlagsKilledHiwat =      (1 << 2),
+ 	kJetsamFlagsHibernated =       (1 << 3),
+ 	kJetsamFlagsKilledVnodes =     (1 << 4),
+ 	kJetsamFlagsKilledSwap =       (1 << 5),
+  	kJetsamFlagsThawed =           (1 << 6),
+  	kJetsamFlagsKilledVM =         (1 << 7),
+	kJetsamFlagsSuspForDiagnosis = (1 << 8)
 };
 
 #endif /* SYS_KERN_MEMORYSTATUS_H */

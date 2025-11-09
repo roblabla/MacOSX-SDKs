@@ -1,7 +1,7 @@
 /*
 	NSForm.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -28,8 +28,6 @@
 - (NSInteger)indexOfCellWithTag:(NSInteger)aTag;
 - (void)selectTextAtIndex:(NSInteger)index;
 - (void)setFrameSize:(NSSize)newSize;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)setTitleBaseWritingDirection:(NSWritingDirection)writingDirection;
 - (void)setTextBaseWritingDirection:(NSWritingDirection)writingDirection;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 @end

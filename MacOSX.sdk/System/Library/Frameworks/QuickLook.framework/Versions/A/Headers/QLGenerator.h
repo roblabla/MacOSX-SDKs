@@ -2,7 +2,7 @@
  *  QLGenerator.h
  *  Quick Look
  *
- *  Copyright 2007 Apple Inc.
+ *  Copyright 2007-2010 Apple Inc.
  *  All rights reserved.
  *
  */

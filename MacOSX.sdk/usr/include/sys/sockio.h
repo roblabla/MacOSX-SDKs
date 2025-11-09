@@ -133,6 +133,11 @@
 #define SIOCGIFALTMTU	_IOWR('i', 72, struct ifreq) 	/* get if alternate mtu */
 #define SIOCSIFBOND	 _IOW('i', 70, struct ifreq)	/* set bond if config */
 #define SIOCGIFBOND	_IOWR('i', 71, struct ifreq)	/* get bond if config */
+
+
+#define SIOCSIFCAP       _IOW('i', 90, struct ifreq)    /* set IF features */ 
+#define SIOCGIFCAP      _IOWR('i', 91, struct ifreq)    /* get IF features */
+
 #define	SIOCIFCREATE	_IOWR('i', 120, struct ifreq)	/* create clone if */
 #define	SIOCIFDESTROY	 _IOW('i', 121, struct ifreq)	/* destroy clone if */
 #define SIOCIFCREATE2   _IOWR('i', 122, struct ifreq)   /* create clone if with data */

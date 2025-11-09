@@ -71,66 +71,36 @@
 #define BLUETOOTH_VERSION_1_0	10000
 #define BLUETOOTH_VERSION_1_0_0	BLUETOOTH_VERSION_1_0
 #define BLUETOOTH_VERSION_1_0_1	10001
+		
 #define BLUETOOTH_VERSION_1_1	10100
 #define BLUETOOTH_VERSION_1_1_0	BLUETOOTH_VERSION_1_1
+		
 #define BLUETOOTH_VERSION_1_2	10200
 #define BLUETOOTH_VERSION_1_2_0	BLUETOOTH_VERSION_1_2
 #define BLUETOOTH_VERSION_1_2_1 10201
+		
 #define BLUETOOTH_VERSION_1_3	10300
 #define BLUETOOTH_VERSION_1_3_0	BLUETOOTH_VERSION_1_3
 #define BLUETOOTH_VERSION_1_3_1 10301
+		
 #define BLUETOOTH_VERSION_1_6	10600
 #define BLUETOOTH_VERSION_1_6_0	BLUETOOTH_VERSION_1_6
 #define BLUETOOTH_VERSION_1_6_3 10603
+		
 #define BLUETOOTH_VERSION_2_0	20000
 #define BLUETOOTH_VERSION_2_0_0 BLUETOOTH_VERSION_2_0
+		
 #define BLUETOOTH_VERSION_2_1	20100
 #define BLUETOOTH_VERSION_2_1_0 BLUETOOTH_VERSION_2_1
 #define BLUETOOTH_VERSION_2_1_1 20101
+		
+#define BLUETOOTH_VERSION_2_5	20500
+#define BLUETOOTH_VERSION_2_5_0	BLUETOOTH_VERSION_2_5
 
-#define BLUETOOTH_VERSION_CURRENT	BLUETOOTH_VERSION_2_1_1
+#define BLUETOOTH_VERSION_CURRENT	BLUETOOTH_VERSION_2_5
 
-#ifdef BLUETOOTH_VERSION_USE_CURRENT
-	#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_CURRENT
-	#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_CURRENT
-#else
-	#ifdef MAC_OS_X_VERSION_MIN_REQUIRED
-		#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_2_7
-			#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_1_3_1
-		#elif MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_2_5
-			#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_1_2
-		#elif MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_2_4
-			#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_1_1
-		#elif MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_2_2
-			#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_1_0_1
-		#elif MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_2
-			#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_1_0
-		#else
-			#error MAC_OS_X_VERSION_MIN_REQUIRED must be >= MAC_OS_X_VERSION_10_2 for Bluetooth support
-		#endif
-	#endif
-	
-	#ifdef MAC_OS_X_VERSION_MAX_ALLOWED
-		#if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_2
-			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_1_0
-		#elif MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_2_2
-			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_1_0_1
-		#elif MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_2_4
-			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_1_1
-		#elif MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_2_5
-			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_1_2
-		#elif MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_2_7
-			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_1_3_1
-		#elif MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5_0
-			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_2_0
-		#elif MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5_4
-			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_2_1_1
-		#else 
-			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_2_1_1
-		#endif
-	#endif
-#endif
-
+#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_CURRENT
+#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_CURRENT
 
 /*
  * AVAILABLE_BLUETOOTH_VERSION_1_0_1_AND_LATER
@@ -298,7 +268,7 @@
 	@discussion	Error or not, the software version will be returned correctly.
 */
 
-extern IOReturn	IOBluetoothGetVersion( NumVersion * outSoftwareVersion, BluetoothHCIVersionInfo * outHardwareVersion );
+extern IOReturn	IOBluetoothGetVersion( NumVersion * outSoftwareVersion, BluetoothHCIVersionInfo * outHardwareVersion ) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 typedef struct OpaqueIOBluetoothObjectRef *			IOBluetoothObjectRef;
 typedef struct OpaqueIOBluetoothObjectRef *			IOBluetoothDeviceRef;
@@ -1224,6 +1194,23 @@ struct 	IOBluetoothDeviceSearchAttributes
 	IOBluetoothDeviceSearchDeviceAttributes	*attributeList;	
 };
 
+//--------------------------------------------------------------------------------------------------------------------------
+/*!	@typedef		IOBluetoothDeviceSearchTypes
+ */
+
+typedef UInt32	IOBluetoothDeviceSearchTypes;
+
+//--------------------------------------------------------------------------------------------------------------------------
+/*!	@enum		IOBluetoothDeviceSearchTypesBits
+	@abstract	Bits to determine what Bluetooth devices to search for
+ */
+
+enum IOBluetoothDeviceSearchTypesBits
+{
+    kIOBluetoothDeviceSearchClassic = 1,
+    kIOBluetoothDeviceSearchLE = 2
+};
+
 //===========================================================================================================================
 // Local Device Interaction
 //===========================================================================================================================
@@ -1629,39 +1616,6 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
-    @function	IOBluetoothDeviceOpenL2CAPChannel
-	@abstract	Opens a new L2CAP channel to the target device.
-	@discussion	This function will begin the process of opening a new L2CAP channel to the target device.  
-                The baseband connection to the device will be opened if it is not open already.  The L2CAP
-                channel open process will not complete until the client has registered an incoming data 
-                listener on the new channel.  This prevents a situation where the channel succeeds
-                in being configured and opened and receives data before the client is listening and
-                is ready for it.
-                
-                Because a new IOBluetoothL2CAPChannelRef will be created for the client as a result of this
-                function, the client is responsible for releasing the resulting IOBluetoothL2CAPChannelRef
-                (by calling IOBluetoothObjectRelease()).
-
-				***		DEPRECATED IN BLUETOOTH 2.0 (Mac OS X 10.5)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-
-    @param		btDevice 		The target IOBluetoothDeviceRef
-	@param		psm				The L2CAP PSM value for the new channel.
-	@param		findExisting	This value should be set to TRUE if it should look for an existing channel 
-                                with the PSM.  Typically this value will be FALSE.  It should be TRUE only
-                                in the case where a single channel is allowed by the spec for the given PSM.
-	@param		newChannel		A pointer to an IOBluetoothL2CAPChannelRef to receive the L2CAP channel 
-                                requested to be opened.  The newChannel pointer will only be set if 
-                                kIOReturnSuccess is returned.
-	@result		Returns kIOReturnSuccess if the open process was successfully started (or if an existing
-                L2CAP channel was found). 
-*/
-
-extern IOReturn IOBluetoothDeviceOpenL2CAPChannel(IOBluetoothDeviceRef btDevice, BluetoothL2CAPPSM psm, Boolean findExisting, IOBluetoothL2CAPChannelRef *newChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!
     @function	IOBluetoothDeviceSendL2CAPEchoRequest
 	@abstract	Send an echo request over the L2CAP connection to a remote device.
 	@discussion	The current implementation returns when the request has been sent, but does not indicate when
@@ -1829,24 +1783,6 @@ extern IOReturn IOBluetoothL2CAPChannelCloseChannel(IOBluetoothL2CAPChannelRef l
 */
 
 extern IOReturn IOBluetoothL2CAPChannelRequestRemoteMTU( IOBluetoothL2CAPChannelRef l2capChannel, BluetoothL2CAPMTU remoteMTU ) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!
-    @function	IOBluetoothL2CAPChannelWrite
-	@abstract	Writes the given data over the target L2CAP channel to the remote device.
-    @discussion	The length of the data may not exceed the L2CAP channel's ougoing MTU.
-
-				***		DEPRECATED IN BLUETOOTH 2.0 (Mac OS X 10.5)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-
-    @param		l2capChannel	Target L2CAP channel ref
-    @param		data	Pointer to the buffer containing the data to send.
-    @param		length	The length of the given data buffer.
-	@result		Returns kIOReturnSuccess if the data was buffered successfully.
-*/
-
-extern IOReturn IOBluetoothL2CAPChannelWrite(IOBluetoothL2CAPChannelRef l2capChannel, void *data, UInt16 length) DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -2232,34 +2168,6 @@ typedef void (*IOBluetoothRFCOMMChannelIncomingEventListener)(IOBluetoothRFCOMMC
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
-    @function	IOBluetoothDeviceOpenRFCOMMChannel
-	@abstract	Opens a new RFCOMM channel to the target device.
-	@discussion	This function will begin the process of opening a new RFCOMM channel to the target device.  
-                The baseband connection to the device will be opened if it is not open already.  The RFCOMM
-                channel open process will not complete until the client has registered an incoming data 
-                listener on the new channel.
-                                
-                Because a new IOBluetoothRFCOMMChannelRef will be created for the client as a result of this
-                function, the client is responsible for releasing the resulting IOBluetoothRFCOMMChannelRef
-                (by calling IOBluetoothObjectRelease()).
-
-				***		DEPRECATED IN BLUETOOTH 2.0 (Mac OS X 10.5)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-
-    @param		btDevice The target IOBluetoothDeviceRef
-	@param		channelID		The RFCOMM channel ID for the new channel.
-	@param		rfcommChannel	A pointer to an IOBluetoothRFCOMMChannelRef to receive the RFCOMM channel 
-                                requested to be opened.  The rfcommChannel pointer will only be set if 
-                                kIOReturnSuccess is returned.
-	@result		Returns kIOReturnSuccess if the open process was successfully started (or if an existing
-                RFCOMM channel was found). 
-*/
-
-extern IOReturn IOBluetoothDeviceOpenRFCOMMChannel(IOBluetoothDeviceRef btDevice, BluetoothRFCOMMChannelID channelID, IOBluetoothRFCOMMChannelRef *rfcommChannel) DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!
     @function	IOBluetoothDeviceOpenRFCOMMChannelAsync
 	@abstract	Opens a new RFCOMM channel to the target device. Returns immedialty after starting the opening process.
 	@discussion	This function will begin the process of opening a new RFCOMM channel to the target device.  
@@ -2437,25 +2345,6 @@ extern Boolean IOBluetoothRFCOMMChannelIsTransmissionPaused( IOBluetoothRFCOMMCh
 extern BluetoothRFCOMMChannelID IOBluetoothRFCOMMChannelGetChannelID( IOBluetoothRFCOMMChannelRef rfcommChannel ) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
-/*!	@function	IOBluetoothRFCOMMChannelWrite
-	@abstract	Write data to a RFCOMM channel synchronusly.
-	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
-	@param 		data is a pointer to the data buffer to be sent.
-	@param 		length the length of the buffer to be sent (in bytes).
-	@param 		sleepFlag is a boolean if set to TRUE the call will wait until it is possible to send data.
-				If set to FALSE and it is not possible to send data the method will return immediately with an error
-	@result		An error code value. 0 if successful.
-	@discussion Sends data through the channel. The number of bytes to be sent must not exceed the channel MTU. 
-				If the return value is an error condition none of the data was sent.
-
-				***		DEPRECATED IN BLUETOOTH 2.0 (Mac OS X 10.5)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-extern IOReturn	IOBluetoothRFCOMMChannelWrite(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length, Boolean sleepFlag) DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
-
-//--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelWriteAsync
 	@abstract	Write data to a RFCOMM channel asynchronously.
 	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
@@ -2494,26 +2383,6 @@ extern IOReturn	IOBluetoothRFCOMMChannelWriteAsync(IOBluetoothRFCOMMChannelRef r
 */
 
 extern IOReturn	IOBluetoothRFCOMMChannelWriteSync(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!	@function	IOBluetoothRFCOMMChannelWriteSimple
-	@abstract	
-	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
-	@param		data a pointer to the data buffer to be sent.
-	@param		length the length of the buffer to be sent (in bytes).
-	@param		sleepFlag a boolean if set to true the call will wait until it is possible to send all the data.
-	@param		a UInt32 pointer in which the caller received the nuber of bytes sent.
-				If set to FALSE and it is not possible to send part of the data the method will return immediately.
-	@result		An error code value. 0 if successful.
-	@discussion	Sends data through the channel. The number of bytes to be sent is arbitrary. The caller
-				does not have to worry about the MTU. 
-
-				***		DEPRECATED IN BLUETOOTH 2.0 (Mac OS X 10.5)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-extern IOReturn IOBluetoothRFCOMMChannelWriteSimple(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length, Boolean sleepFlag, UInt32 *numBytesSent) DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMSetSerialParameters
@@ -2562,29 +2431,6 @@ extern IOBluetoothDeviceRef IOBluetoothRFCOMMChannelGetDevice(IOBluetoothRFCOMMC
 */
 
 extern IOReturn IOBluetoothRFCOMMSendRemoteLineStatus( IOBluetoothRFCOMMChannelRef rfcommChannel , BluetoothRFCOMMLineStatus lineStatus) DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!	@function	IOBluetoothRFCOMMChannelRegisterIncomingDataListener
-	@abstract	
-	@discussion Registers a callback for the incoming data. The form for the callback is:
-	
-				<br>void function(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length, void *refCon)<br>
-	
-				where rfcommChannel is the refernce to the channel that received data, data is a buffer with the received data, length is the buffer length
-				(in bytes) and refCon is a user defined void* (maybe the reference to the object to call back ?).
-
-				***		DEPRECATED IN BLUETOOTH 2.0 (Mac OS X 10.5)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-
-	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
-	@param 		listener is the callback function.
-	@param 		refCon is a void*, its meaning is up to the developer. This parameter will be passed back as last parameter of
-				the callback function.
-	@result		An error code value. 0 if successful. 	
-*/
-
-extern IOReturn	IOBluetoothRFCOMMChannelRegisterIncomingDataListener(IOBluetoothRFCOMMChannelRef rfcommChannel, IOBluetoothRFCOMMChannelIncomingDataListener listener, void *refCon) DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelRegisterIncomingEventListener
@@ -2883,7 +2729,7 @@ extern BluetoothSDPDataElementSizeDescriptor IOBluetoothSDPDataElementGetSizeDes
     @result		Returns the size in bytes of the target data element.
 */
 
-extern UInt32 IOBluetoothSDPDataElementGetSize(IOBluetoothSDPDataElementRef dataElement)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
+extern uint32_t IOBluetoothSDPDataElementGetSize(IOBluetoothSDPDataElementRef dataElement)	DEPRECATED_IN_BLUETOOTH_VERSION_2_2_AND_LATER;
 
 /*!
     @function	IOBluetoothSDPDataElementGetNumberValue
@@ -3695,7 +3541,7 @@ extern	IOReturn	IOBluetoothDeviceInquirySetSearchCriteria(	IOBluetoothDeviceInqu
 /*!
     @function	IOBluetoothAddSCOAudioDevice
     @abstract   Creates a persistent audio driver that will route audio data to/from the specified device.
-    @discussion Teh Bluetooth device must be paired before it can be added.
+    @discussion The Bluetooth device must be paired before it can be added.
 				The Bluetooth hardware must also support SCO connections for devices to be added.
  
 				When a client attempts to use the audio driver, it will automatically open the baseband connection

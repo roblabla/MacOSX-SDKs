@@ -1,6 +1,6 @@
 /*
         NSMovieView.h
-        Copyright (c) 1998-2009, Apple Inc. All rights reserved.
+        Copyright (c) 1998-2011, Apple Inc. All rights reserved.
 */
 
 // Please note that NSMovie and NSMovieView are deprecated. NSMovieView does not exist in 64-bit.
@@ -42,65 +42,65 @@ typedef struct __MVFlags {
     unsigned long  _fReserved3;
 }
 
-- (void) setMovie:(NSMovie*)movie DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (NSMovie*) movie DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void) setMovie:(NSMovie*)movie NS_DEPRECATED_MAC(10_0, 10_5);
+- (NSMovie*) movie NS_DEPRECATED_MAC(10_0, 10_5);
 
-- (void* /*MovieController*/) movieController DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (NSRect) movieRect DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void* /*MovieController*/) movieController NS_DEPRECATED_MAC(10_0, 10_5);
+- (NSRect) movieRect NS_DEPRECATED_MAC(10_0, 10_5);
 
     // playing
 
-- (void)start:(id)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)stop:(id)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (BOOL)isPlaying DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)start:(id)sender NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)stop:(id)sender NS_DEPRECATED_MAC(10_0, 10_5);
+- (BOOL)isPlaying NS_DEPRECATED_MAC(10_0, 10_5);
 
-- (void)gotoPosterFrame:(id)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)gotoBeginning:(id)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)gotoEnd:(id)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)stepForward:(id)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)stepBack:(id)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)gotoPosterFrame:(id)sender NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)gotoBeginning:(id)sender NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)gotoEnd:(id)sender NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)stepForward:(id)sender NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)stepBack:(id)sender NS_DEPRECATED_MAC(10_0, 10_5);
 
-- (void)setRate:(float)rate DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (float)rate DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setRate:(float)rate NS_DEPRECATED_MAC(10_0, 10_5);
+- (float)rate NS_DEPRECATED_MAC(10_0, 10_5);
 
     // sound
 
-- (void)setVolume:(float)volume DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (float)volume DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)setMuted:(BOOL)mute DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (BOOL)isMuted DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setVolume:(float)volume NS_DEPRECATED_MAC(10_0, 10_5);
+- (float)volume NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)setMuted:(BOOL)mute NS_DEPRECATED_MAC(10_0, 10_5);
+- (BOOL)isMuted NS_DEPRECATED_MAC(10_0, 10_5);
 
     // play modes
 
-- (void)setLoopMode:(NSQTMovieLoopMode)mode DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (NSQTMovieLoopMode)loopMode DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)setPlaysSelectionOnly:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (BOOL)playsSelectionOnly DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)setPlaysEveryFrame:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (BOOL)playsEveryFrame DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setLoopMode:(NSQTMovieLoopMode)mode NS_DEPRECATED_MAC(10_0, 10_5);
+- (NSQTMovieLoopMode)loopMode NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)setPlaysSelectionOnly:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_5);
+- (BOOL)playsSelectionOnly NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)setPlaysEveryFrame:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_5);
+- (BOOL)playsEveryFrame NS_DEPRECATED_MAC(10_0, 10_5);
 
     // controller
 
-- (void)showController:(BOOL)show adjustingSize:(BOOL)adjustSize DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (BOOL)isControllerVisible DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)showController:(BOOL)show adjustingSize:(BOOL)adjustSize NS_DEPRECATED_MAC(10_0, 10_5);
+- (BOOL)isControllerVisible NS_DEPRECATED_MAC(10_0, 10_5);
 
     // size
 
-- (void)resizeWithMagnification:(CGFloat)magnification DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (NSSize)sizeForMagnification:(CGFloat)magnification DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)resizeWithMagnification:(CGFloat)magnification NS_DEPRECATED_MAC(10_0, 10_5);
+- (NSSize)sizeForMagnification:(CGFloat)magnification NS_DEPRECATED_MAC(10_0, 10_5);
 
     // editing
 
-- (void)setEditable:(BOOL)editable DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (BOOL)isEditable DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setEditable:(BOOL)editable NS_DEPRECATED_MAC(10_0, 10_5);
+- (BOOL)isEditable NS_DEPRECATED_MAC(10_0, 10_5);
 
-- (void)cut:(id)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)copy:(id)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)paste:(id)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)delete:(id)sender AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
-- (void)selectAll:(id)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)cut:(id)sender NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)copy:(id)sender NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)paste:(id)sender NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)delete:(id)sender NS_DEPRECATED_MAC(10_3, 10_5);
+- (void)selectAll:(id)sender NS_DEPRECATED_MAC(10_0, 10_5);
 
-- (void)clear:(id)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;	// deprecated. use delete:
+- (void)clear:(id)sender NS_DEPRECATED_MAC(10_0, 10_5);	// deprecated. use delete:
 
 @end
 

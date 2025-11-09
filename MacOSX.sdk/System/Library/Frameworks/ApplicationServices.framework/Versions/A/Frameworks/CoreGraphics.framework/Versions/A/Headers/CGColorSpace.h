@@ -174,7 +174,7 @@ CG_EXTERN CGColorSpaceRef CGColorSpaceCreatePattern(CGColorSpaceRef baseSpace)
 /* Create a color space using `ref', a platform-specific color space
    reference. For MacOS X, `ref' should be a CMProfileRef. */
 
-CG_EXTERN CGColorSpaceRef CGColorSpaceCreateWithPlatformColorSpace(void *ref)
+CG_EXTERN CGColorSpaceRef CGColorSpaceCreateWithPlatformColorSpace(const void *ref)
   CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /* Create a color space using `name' as the identifier for the color

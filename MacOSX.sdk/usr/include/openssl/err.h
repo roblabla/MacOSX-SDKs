@@ -59,6 +59,8 @@
 #ifndef HEADER_ERR_H
 #define HEADER_ERR_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/e_os2.h>
 
 #ifndef OPENSSL_NO_FP_API
@@ -258,70 +260,70 @@ typedef struct ERR_string_data_st
 	const char *string;
 	} ERR_STRING_DATA;
 
-void ERR_put_error(int lib, int func,int reason,const char *file,int line);
-void ERR_set_error_data(char *data,int flags);
+void ERR_put_error(int lib, int func,int reason,const char *file,int line) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void ERR_set_error_data(char *data,int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-unsigned long ERR_get_error(void);
-unsigned long ERR_get_error_line(const char **file,int *line);
+unsigned long ERR_get_error(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned long ERR_get_error_line(const char **file,int *line) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 unsigned long ERR_get_error_line_data(const char **file,int *line,
-				      const char **data, int *flags);
-unsigned long ERR_peek_error(void);
-unsigned long ERR_peek_error_line(const char **file,int *line);
+				      const char **data, int *flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned long ERR_peek_error(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned long ERR_peek_error_line(const char **file,int *line) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 unsigned long ERR_peek_error_line_data(const char **file,int *line,
-				       const char **data,int *flags);
-unsigned long ERR_peek_last_error(void);
-unsigned long ERR_peek_last_error_line(const char **file,int *line);
+				       const char **data,int *flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned long ERR_peek_last_error(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned long ERR_peek_last_error_line(const char **file,int *line) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 unsigned long ERR_peek_last_error_line_data(const char **file,int *line,
-				       const char **data,int *flags);
-void ERR_clear_error(void );
-char *ERR_error_string(unsigned long e,char *buf);
-void ERR_error_string_n(unsigned long e, char *buf, size_t len);
-const char *ERR_lib_error_string(unsigned long e);
-const char *ERR_func_error_string(unsigned long e);
-const char *ERR_reason_error_string(unsigned long e);
+				       const char **data,int *flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void ERR_clear_error(void ) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+char *ERR_error_string(unsigned long e,char *buf) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void ERR_error_string_n(unsigned long e, char *buf, size_t len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const char *ERR_lib_error_string(unsigned long e) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const char *ERR_func_error_string(unsigned long e) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const char *ERR_reason_error_string(unsigned long e) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void ERR_print_errors_cb(int (*cb)(const char *str, size_t len, void *u),
-			 void *u);
+			 void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifndef OPENSSL_NO_FP_API
-void ERR_print_errors_fp(FILE *fp);
+void ERR_print_errors_fp(FILE *fp) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_BIO
-void ERR_print_errors(BIO *bp);
-void ERR_add_error_data(int num, ...);
+void ERR_print_errors(BIO *bp) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void ERR_add_error_data(int num, ...) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
-void ERR_load_strings(int lib,ERR_STRING_DATA str[]);
-void ERR_unload_strings(int lib,ERR_STRING_DATA str[]);
-void ERR_load_ERR_strings(void);
-void ERR_load_crypto_strings(void);
-void ERR_free_strings(void);
+void ERR_load_strings(int lib,ERR_STRING_DATA str[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void ERR_unload_strings(int lib,ERR_STRING_DATA str[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void ERR_load_ERR_strings(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void ERR_load_crypto_strings(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void ERR_free_strings(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-void ERR_remove_state(unsigned long pid); /* if zero we look it up */
-ERR_STATE *ERR_get_state(void);
+void ERR_remove_state(unsigned long pid) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* if zero we look it up */
+ERR_STATE *ERR_get_state(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifndef OPENSSL_NO_LHASH
-LHASH *ERR_get_string_table(void);
-LHASH *ERR_get_err_state_table(void);
-void ERR_release_err_state_table(LHASH **hash);
+LHASH *ERR_get_string_table(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+LHASH *ERR_get_err_state_table(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void ERR_release_err_state_table(LHASH **hash) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
-int ERR_get_next_error_library(void);
+int ERR_get_next_error_library(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int ERR_set_mark(void);
-int ERR_pop_to_mark(void);
+int ERR_set_mark(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int ERR_pop_to_mark(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifdef OPENSSL_FIPS
 void int_ERR_set_state_func(ERR_STATE *(*get_func)(void),
-				void (*remove_func)(unsigned long pid));
-void int_ERR_lib_init(void);
+				void (*remove_func)(unsigned long pid)) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void int_ERR_lib_init(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
 /* Already defined in ossl_typ.h */
 /* typedef struct st_ERR_FNS ERR_FNS; */
 /* An application can use this function and provide the return value to loaded
  * modules that should use the application's ERR state/functionality */
-const ERR_FNS *ERR_get_implementation(void);
+const ERR_FNS *ERR_get_implementation(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* A loaded module should call this function prior to any ERR operations using
  * the application's "ERR_FNS". */
-int ERR_set_implementation(const ERR_FNS *fns);
+int ERR_set_implementation(const ERR_FNS *fns) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifdef	__cplusplus
 }

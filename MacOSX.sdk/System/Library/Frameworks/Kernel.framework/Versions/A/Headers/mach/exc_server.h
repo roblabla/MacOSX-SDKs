@@ -95,11 +95,21 @@ kern_return_t catch_exception_raise_state_identity
 	mach_msg_type_number_t *new_stateCnt
 );
 
-extern boolean_t exc_server(
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+boolean_t exc_server(
 		mach_msg_header_t *InHeadP,
 		mach_msg_header_t *OutHeadP);
 
-extern mig_routine_t exc_server_routine(
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+mig_routine_t exc_server_routine(
 		mach_msg_header_t *InHeadP);
 
 

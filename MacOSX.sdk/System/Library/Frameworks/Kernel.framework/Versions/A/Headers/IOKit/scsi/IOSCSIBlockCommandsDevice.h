@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -66,6 +66,9 @@ enum
 // SCSI Architecture Model Family includes
 #include <IOKit/scsi/IOSCSIPrimaryCommandsDevice.h>
 
+// Build includes
+#include <TargetConditionals.h>
+
 
 // Forward declaration for the SCSIBlockCommands that is used internally by the
 // IOSCSIBlockCommandsDevice class.
@@ -83,12 +86,12 @@ class IOSCSIBlockCommandsDevice : public IOSCSIPrimaryCommandsDevice
 private:
 	
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	
 	SCSIBlockCommands *		fSCSIBlockCommandObject;
 	SCSIBlockCommands *		GetSCSIBlockCommandObject ( void );
 	
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 
 	IOReturn				GetWriteCacheState ( IOMemoryDescriptor * 	buffer,
 												 UInt8					modePageControlValue );
@@ -104,7 +107,9 @@ protected:
 		bool				fWriteCacheEnabled;
 		bool				fDeviceIsShared;
 		UInt64				fMediumBlockCount64;
+#if !TARGET_OS_EMBEDDED
 		bool				fDeviceHasSATTranslation;
+#endif /* !TARGET_OS_EMBEDDED */
 		bool				fProtocolSpecificPowerControl;
 		bool				fRequiresEjectWithStartStopUnit;
 	};
@@ -129,7 +134,9 @@ protected:
 	// SetMediumCharacteristics() should be used to set it.
 	#define fMediumBlockCount64	fIOSCSIBlockCommandsDeviceReserved->fMediumBlockCount64
 	
+#if !TARGET_OS_EMBEDDED
 	#define fDeviceHasSATTranslation fIOSCSIBlockCommandsDeviceReserved->fDeviceHasSATTranslation
+#endif /* !TARGET_OS_EMBEDDED */
 	
 	// Device support protocol specific power off
 	#define fProtocolSpecificPowerControl fIOSCSIBlockCommandsDeviceReserved->fProtocolSpecificPowerControl
@@ -191,7 +198,7 @@ protected:
 
 	virtual void 		free ( void );
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	
 	// This method will retrieve the SCSI Primary Command Set object for
 	// the class.  For subclasses, this will be overridden using a
@@ -201,11 +208,12 @@ protected:
 	virtual bool		CreateCommandSetObjects ( void );
 	virtual void		FreeCommandSetObjects ( void );
 	
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 
 	virtual bool		ClearNotReadyStatus ( void );
 	virtual void 		CreateStorageServiceNub ( void );
 	virtual bool		DetermineDeviceCharacteristics ( void );
+	void				GetMediumRotationRate ( void );
 	
 	// ---- Methods used for controlling the polling thread ----
 	virtual void		ProcessPoll ( void );
@@ -220,8 +228,8 @@ protected:
 							UInt64 * 				blockSize,
 							UInt64 * 				blockCount );
 	virtual bool		DetermineMediumWriteProtectState ( void );
-	
-	// Main and support methods for polling for Media removal
+    
+    // Main and support methods for polling for Media removal
 	virtual void		PollForMediaRemoval ( void );
 	
 	// ---- Methods used for handling medium characteristics ----
@@ -298,6 +306,10 @@ protected:
 	// anticipated being there is still there.
 	virtual bool		VerifyMediumPresence ( void );
 	
+	// The CheckMediumCapacity is called to see if the medium has indeed changed
+	// capacity data. If it has, it messages the upper layers.
+	void 				CheckMediumCapacityData ( void );
+	
 public:
 	
 	static 	void		sProcessPoll ( void * pdtDriver, void * refCon );
@@ -349,11 +361,15 @@ public:
 	virtual UInt64		ReportMediumTotalBlockCount ( void );
 	virtual bool		ReportMediumWriteProtection ( void );
 	
+	virtual IOReturn	message ( UInt32 type, IOService * nub, void * arg );
+	
+	// ---- Called prior to restarting or shutting down ----
+	virtual void systemWillShutdown ( IOOptionBits specifier );
 	
 protected:
 	
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	
 	// Command methods to access all commands available to SBC based devices.
 	virtual bool ERASE_10 (
@@ -465,7 +481,7 @@ protected:
 						SCSICmdField1Byte 			TRANSFER_LENGTH,
 						SCSICmdField1Byte 			CONTROL );
 
-#endif	/* __LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	virtual bool READ_10 (
 						SCSITaskIdentifier			request,
@@ -546,7 +562,7 @@ protected:
 						SCSICmdField1Bit 			PMI,
 						SCSICmdField1Byte 			CONTROL );
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 
 	virtual bool READ_DEFECT_DATA_10 (
 						SCSITaskIdentifier			request,
@@ -699,7 +715,7 @@ protected:
 						SCSICmdField4Byte 			NUMBER_OF_BLOCKS,
 						SCSICmdField1Byte 			CONTROL );
 
-#endif	/* __LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	virtual bool START_STOP_UNIT (
 						SCSITaskIdentifier			request,
@@ -736,7 +752,7 @@ protected:
 						SCSICmdField5Bit			GROUP_NUMBER,
 						SCSICmdField1Byte			CONTROL );
 						
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 
 	virtual bool UPDATE_BLOCK (
 						SCSITaskIdentifier			request,
@@ -805,7 +821,7 @@ protected:
 						SCSICmdField1Byte 			TRANSFER_LENGTH,
 						SCSICmdField1Byte 			CONTROL );
 	
-#endif	/* __LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 
 	virtual bool WRITE_10 (
 						SCSITaskIdentifier			request,
@@ -872,7 +888,7 @@ protected:
 						SCSICmdField5Bit			GROUP_NUMBER,
 						SCSICmdField1Byte			CONTROL );
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 				
 	virtual bool WRITE_AND_VERIFY_10 (
 						SCSITaskIdentifier			request,
@@ -1078,7 +1094,7 @@ protected:
 						SCSICmdField2Byte 			TRANSFER_LENGTH,
 						SCSICmdField1Byte 			CONTROL );
 
-#endif	/* __LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	
 	/* Added with 10.2 */	
@@ -1125,6 +1141,7 @@ public:
 	
 private:
 	
+#if !TARGET_OS_EMBEDDED
 	// Space reserved for future expansion.
 	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 5 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 6 );
@@ -1138,6 +1155,7 @@ private:
 	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 14 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 15 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 16 );
+#endif /* !TARGET_OS_EMBEDDED */
 	
 };
 

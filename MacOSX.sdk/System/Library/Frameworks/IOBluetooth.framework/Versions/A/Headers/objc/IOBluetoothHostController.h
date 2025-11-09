@@ -32,22 +32,30 @@
 	
 	BluetoothHCIEventMask		_eventCodeMask;
 	BluetoothClassOfDevice		_cachedClassOfDevice;
-	id __weak					_delegate;
+	id							_delegate;
 	NSTimer *					_timerClassOfDeviceSetting;
 	void *						_eventListener;
 
 	void *__strong				_expansion[4];
 }
 
-@property(assign) id __weak delegate;
+@property(assign) id delegate;
 
 //---------------------------------------------------------------------------------------------------------------------------
-/*!	@method		controllerWithDelegate
+/*!	@method		defaultController
 	@abstract	Gets the default HCI controller object.
-	@result		A pointer to the created IOBluetoothHostController object.
+	@result		A (autoreleased) pointer to the created IOBluetoothHostController object.
 */
 
 + (IOBluetoothHostController *)defaultController;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@method		powerState
+	@abstract	Gets the controller power state
+	@result		The current controller's power state.  This will be 1 for on, or 0 for off.  Only Apple Bluetooth adapters support power off
+ */
+@property(readonly) BluetoothHCIPowerState powerState;
+
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		classOfDevice

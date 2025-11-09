@@ -1,5 +1,3 @@
-/* $Xorg: HookObjI.h,v 1.4 2001/02/09 02:03:55 xorgcvs Exp $ */
-
 /*
 
 Copyright 1994, 1998  The Open Group
@@ -28,6 +26,8 @@ in this Software without prior written authorization from The Open Group.
 
 #ifndef _XtHookObjI_h
 #define _XtHookObjI_h
+
+_XFUNCPROTOBEGIN
 
 /* This object is implementation-dependent and private to the library. */
 
@@ -65,6 +65,8 @@ typedef struct _HookObjClassRec {
 } HookObjClassRec;
 
 externalref HookObjClassRec hookObjClassRec;
+
+_XFUNCPROTOEND
 
 #endif /* ifndef _Xt_HookObjI_h */
 

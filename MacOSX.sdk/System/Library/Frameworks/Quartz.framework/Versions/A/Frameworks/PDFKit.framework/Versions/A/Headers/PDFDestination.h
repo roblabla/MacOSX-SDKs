@@ -36,6 +36,18 @@
 // Destination point on the page above (in page space).
 - (NSPoint) point;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+
+// Returns the scale factor the PDF viewer should assume for this destination.
+// kPDFDestinationUnspecifiedValue indicates the scale factor is unaffected.
+- (CGFloat) zoom;
+
+// Specify the scale factor the PDF viewer should assume for this destination.
+// kPDFDestinationUnspecifiedValue indicates the scale factor is unaffected.
+- (void) setZoom: (CGFloat) zoom;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 // If destination passed in is further along in the document than the receiver we return NSOrderedAscending.  If 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -114,7 +114,7 @@ typedef __uint8_t		sa_family_t;
  * has the table of implementation/integration differences.
  */
 #define __KAME__
-#define __KAME_VERSION		"20010528/apple-darwin"
+#define __KAME_VERSION		"2009/apple-darwin"
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 /*
@@ -198,12 +198,21 @@ struct sockaddr_in6 {
 #define IN6ADDR_NODELOCAL_ALLNODES_INIT \
 	{{{ 0xff, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
 	    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 }}}
+#define IN6ADDR_INTFACELOCAL_ALLNODES_INIT \
+	{{{ 0xff, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
+	    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 }}}
 #define IN6ADDR_LINKLOCAL_ALLNODES_INIT \
 	{{{ 0xff, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
 	    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 }}}
 #define IN6ADDR_LINKLOCAL_ALLROUTERS_INIT \
 	{{{ 0xff, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
 	    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02 }}}
+#define IN6ADDR_LINKLOCAL_ALLV2ROUTERS_INIT \
+	{{{ 0xff, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
+	    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16 }}}
+#define IN6ADDR_V4MAPPED_INIT \
+	{{{ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
+	    0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00 }}}
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 extern const struct in6_addr in6addr_any;
@@ -212,6 +221,7 @@ extern const struct in6_addr in6addr_loopback;
 extern const struct in6_addr in6addr_nodelocal_allnodes;
 extern const struct in6_addr in6addr_linklocal_allnodes;
 extern const struct in6_addr in6addr_linklocal_allrouters;
+extern const struct in6_addr in6addr_linklocal_allv2routers;
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 /*
@@ -263,10 +273,16 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
 	 (*(const __uint32_t *)(const void *)(&(a)->s6_addr[8]) == ntohl(0x0000ffff)))
 
 /*
+ * 6to4
+ */
+#define	IN6_IS_ADDR_6TO4(x)	(ntohs((x)->s6_addr16[0]) == 0x2002)
+
+/*
  * KAME Scope Values
  */
 
 #define __IPV6_ADDR_SCOPE_NODELOCAL	0x01
+#define __IPV6_ADDR_SCOPE_INTFACELOCAL	0x01
 #define __IPV6_ADDR_SCOPE_LINKLOCAL	0x02
 #define __IPV6_ADDR_SCOPE_SITELOCAL	0x05
 #define __IPV6_ADDR_SCOPE_ORGLOCAL	0x08	/* just used in this file */
@@ -285,6 +301,11 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
  * Multicast
  */
 #define IN6_IS_ADDR_MULTICAST(a)	((a)->s6_addr[0] == 0xff)
+
+/*
+ * Unique Local IPv6 Unicast Addresses (per RFC 4193)
+ */
+#define IN6_IS_ADDR_UNIQUE_LOCAL(a)	(((a)->s6_addr[0] == 0xfc) || ((a)->s6_addr[0] == 0xfd))
 
 #define __IPV6_ADDR_MC_SCOPE(a)		((a)->s6_addr[1] & 0x0f)
 
@@ -320,6 +341,32 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
  */
 /* no hdrincl */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+/*
+ * RFC 3542 define the following socket options in a manner incompatible 
+ * with RFC 2292:
+ *   IPV6_PKTINFO
+ *   IPV6_HOPLIMIT
+ *   IPV6_NEXTHOP
+ *   IPV6_HOPOPTS
+ *   IPV6_DSTOPTS
+ *   IPV6_RTHDR
+ * 
+ * To use the new IPv6 Sockets options introduced by RFC 3542
+ * the constant __APPLE_USE_RFC_3542 must be defined before 
+ * including <netinet/in.h>
+ *
+ * To use the old IPv6 Sockets options from RFC 2292
+ * the constant __APPLE_USE_RFC_2292 must be defined before
+ * including <netinet/in.h>
+ *
+ * Note that eventually RFC 3542 is going to be the 
+ * default and RFC 2292 will be obsolete.
+ */
+
+#if defined(__APPLE_USE_RFC_3542) && defined(__APPLE_USE_RFC_2292)
+#error "__APPLE_USE_RFC_3542 and __APPLE_USE_RFC_2292 cannot be both defined"
+#endif
+
 #if 0 /* the followings are relic in IPv4 and hence are disabled */
 #define IPV6_OPTIONS		1  /* buf/ip6_opts; set/get IP6 options */
 #define IPV6_RECVOPTS		5  /* bool; receive all IP6 opts w/dgram */
@@ -339,14 +386,24 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define IPV6_PORTRANGE		14 /* int; range to choose for unspec port */
 #define ICMP6_FILTER		18 /* icmp6_filter; icmp6 filter */
-/* RFC2292 options */
-#define IPV6_PKTINFO		19 /* bool; send/recv if, src/dst addr */
-#define IPV6_HOPLIMIT		20 /* bool; hop limit */
-#define IPV6_NEXTHOP		21 /* bool; next hop addr */
-#define IPV6_HOPOPTS		22 /* bool; hop-by-hop option */
-#define IPV6_DSTOPTS		23 /* bool; destination option */
-#define IPV6_RTHDR		24 /* bool; routing header */
-#define IPV6_PKTOPTIONS		25 /* buf/cmsghdr; set/get IPv6 options */
+#define IPV6_2292PKTINFO	19 /* bool; send/recv if, src/dst addr */
+#define IPV6_2292HOPLIMIT	20 /* bool; hop limit */
+#define IPV6_2292NEXTHOP	21 /* bool; next hop addr */
+#define IPV6_2292HOPOPTS	22 /* bool; hop-by-hop option */
+#define IPV6_2292DSTOPTS	23 /* bool; destinaion option */
+#define IPV6_2292RTHDR		24 /* ip6_rthdr: routing header */
+#define IPV6_2292PKTOPTIONS	25 /* buf/cmsghdr; set/get IPv6 options */
+				   /* obsoleted by RFC3542 */
+
+#ifdef __APPLE_USE_RFC_2292
+#define IPV6_PKTINFO        IPV6_2292PKTINFO
+#define IPV6_HOPLIMIT       IPV6_2292HOPLIMIT
+#define IPV6_NEXTHOP        IPV6_2292NEXTHOP
+#define IPV6_HOPOPTS        IPV6_2292HOPOPTS
+#define IPV6_DSTOPTS        IPV6_2292DSTOPTS
+#define IPV6_RTHDR          IPV6_2292RTHDR
+#define IPV6_PKTOPTIONS     IPV6_2292PKTOPTIONS
+#endif /* __APPLE_USE_RFC_2292 */
 
 #define IPV6_CHECKSUM		26 /* int; checksum offset for raw socket */
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
@@ -368,8 +425,73 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
 #define IPV6_FW_GET		34 /* get entire firewall rule chain */
 #endif /* 1 */
 
-#define IPV6_RECVTCLASS         35 /* bool; recv traffic class values */
-#define IPV6_TCLASS             36 /* int; send traffic class value */
+/* APPLE: NOTE the value of those 2 options is kept unchanged from 
+ * 	  previous version of darwin/OS X for binary compatibility reasons
+ * 	  and differ from FreeBSD (values 57 and 61). See below.
+ */
+#define IPV6_RECVTCLASS		35 /* bool; recv traffic class values */
+#define IPV6_TCLASS		36 /* int; send traffic class value */
+
+#ifdef __APPLE_USE_RFC_3542
+/* new socket options introduced in RFC3542 */
+#define IPV6_RTHDRDSTOPTS	57 /* ip6_dest; send dst option before rthdr
+				    * APPLE: Value purposely different than FreeBSD (35) to avoid
+				    * collision with definition of IPV6_RECVTCLASS in previous
+				    * darwin implementations */
+
+#define IPV6_RECVPKTINFO	61 /* bool; recv if, dst addr 
+				    * APPLE: Value purposely different than FreeBSD (36) to avoid
+				    * collision with definition of IPV6_TCLASS in previous
+				    * darwin implementations */
+
+#define IPV6_RECVHOPLIMIT	37 /* bool; recv hop limit */
+#define IPV6_RECVRTHDR		38 /* bool; recv routing header */
+#define IPV6_RECVHOPOPTS	39 /* bool; recv hop-by-hop option */
+#define IPV6_RECVDSTOPTS	40 /* bool; recv dst option after rthdr */
+
+#define IPV6_USE_MIN_MTU	42 /* bool; send packets at the minimum MTU */
+#define IPV6_RECVPATHMTU	43 /* bool; notify an according MTU */
+
+#define IPV6_PATHMTU		44 /* mtuinfo; get the current path MTU (sopt),
+				      4 bytes int; MTU notification (cmsg) */
+#if 0 /*obsoleted during 2292bis -> 3542*/
+#define IPV6_REACHCONF		45 /* no data; ND reachability confirm
+				      (cmsg only/not in of RFC3542) */
+#endif
+/* more new socket options introduced in RFC3542 */
+#define IPV6_3542PKTINFO	46 /* in6_pktinfo; send if, src addr */
+#define IPV6_3542HOPLIMIT	47 /* int; send hop limit */
+#define IPV6_3542NEXTHOP	48 /* sockaddr; next hop addr */
+#define IPV6_3542HOPOPTS	49 /* ip6_hbh; send hop-by-hop option */
+#define IPV6_3542DSTOPTS	50 /* ip6_dest; send dst option befor rthdr */
+#define IPV6_3542RTHDR		51 /* ip6_rthdr; send routing header */
+
+#define IPV6_PKTINFO        IPV6_3542PKTINFO
+#define IPV6_HOPLIMIT       IPV6_3542HOPLIMIT
+#define IPV6_NEXTHOP        IPV6_3542NEXTHOP
+#define IPV6_HOPOPTS        IPV6_3542HOPOPTS
+#define IPV6_DSTOPTS        IPV6_3542DSTOPTS
+#define IPV6_RTHDR          IPV6_3542RTHDR
+
+#define IPV6_AUTOFLOWLABEL	59 /* bool; attach flowlabel automagically */
+
+#define IPV6_DONTFRAG		62 /* bool; disable IPv6 fragmentation */
+
+#define IPV6_PREFER_TEMPADDR	63 /* int; prefer temporary addresses as
+				    * the source address.
+				    */
+
+/*
+ * The following option is private; do not use it from user applications.
+ * It is deliberately defined to the same value as IP_MSFILTER.
+ */
+#define	IPV6_MSFILTER		74 /* struct __msfilterreq;
+				    * set/get multicast source filter list.
+				    */
+#endif /* __APPLE_USE_RFC_3542 */
+
+#define	IPV6_BOUND_IF		125 /* int; set/get bound interface */
+
 
 /* to define items, should talk with KAME guys first, for *BSD compatibility */
 
@@ -384,6 +506,21 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
 #define IPV6_DEFAULT_MULTICAST_LOOP 1	/* normally hear sends if a member  */
 
 /*
+ * The im6o_membership vector for each socket is now dynamically allocated at
+ * run-time, bounded by USHRT_MAX, and is reallocated when needed, sized
+ * according to a power-of-two increment.
+ */
+#define	IPV6_MIN_MEMBERSHIPS	31
+#define	IPV6_MAX_MEMBERSHIPS	4095
+
+/*
+ * Default resource limits for IPv6 multicast source filtering.
+ * These may be modified by sysctl.
+ */
+#define	IPV6_MAX_GROUP_SRC_FILTER	512	/* sources per group */
+#define	IPV6_MAX_SOCK_SRC_FILTER	128	/* sources per socket/group */
+
+/*
  * Argument structure for IPV6_JOIN_GROUP and IPV6_LEAVE_GROUP.
  */
 struct ipv6_mreq {
@@ -392,11 +529,19 @@ struct ipv6_mreq {
 };
 
 /*
- * IPV6_PKTINFO: Packet information(RFC2292 sec 5)
+ * IPV6_2292PKTINFO: Packet information(RFC2292 sec 5)
  */
 struct in6_pktinfo {
 	struct in6_addr	ipi6_addr;	/* src/dst IPv6 address */
 	unsigned int	ipi6_ifindex;	/* send/recv interface index */
+};
+
+/*
+ * Control structure for IPV6_RECVPATHMTU socket option.
+ */
+struct ip6_mtuinfo {
+	struct sockaddr_in6 ip6m_addr;	/* or sockaddr_storage? */
+	uint32_t ip6m_mtu;
 };
 
 /*
@@ -450,22 +595,27 @@ struct in6_pktinfo {
 #define IPV6CTL_RTMINEXPIRE	26	/* min value for expiration time */
 #define IPV6CTL_RTMAXCACHE	27	/* trigger level for dynamic expire */
 
-#define IPV6CTL_USETEMPADDR	32	/* use temporary addresses (RFC3041) */
+#define IPV6CTL_USETEMPADDR	32	/* use temporary addresses [RFC 4941] */
 #define IPV6CTL_TEMPPLTIME	33	/* preferred lifetime for tmpaddrs */
 #define IPV6CTL_TEMPVLTIME	34	/* valid lifetime for tmpaddrs */
 #define IPV6CTL_AUTO_LINKLOCAL	35	/* automatic link-local addr assign */
 #define IPV6CTL_RIP6STATS	36	/* raw_ip6 stats */
+#define IPV6CTL_PREFER_TEMPADDR	37	/* prefer temporary addr as src */
+#define IPV6CTL_ADDRCTLPOLICY	38	/* get/set address selection policy */
+#define IPV6CTL_USE_DEFAULTZONE	39	/* use default scope zone */
 
-#define IPV6CTL_MAXFRAGS        41      /* max fragments */
+#define IPV6CTL_MAXFRAGS	41	/* max fragments */
+#define IPV6CTL_MCAST_PMTU	44	/* enable pMTU discovery for multicast? */
 
 #define IPV6CTL_NEIGHBORGCTHRESH 46
 #define IPV6CTL_MAXIFPREFIXES	47
 #define IPV6CTL_MAXIFDEFROUTERS 48
 #define IPV6CTL_MAXDYNROUTES	49
+#define	ICMPV6CTL_ND6_ONLINKNSRFC4861	50
 
 /* New entries should be added here from current IPV6CTL_MAXID value. */
 /* to define items, should talk with KAME guys first, for *BSD compatibility */
-#define IPV6CTL_MAXID		50
+#define IPV6CTL_MAXID		51
 
 
 __BEGIN_DECLS
@@ -491,23 +641,24 @@ extern int inet6_rthdr_segments(const struct cmsghdr *);
 extern struct in6_addr *inet6_rthdr_getaddr(struct cmsghdr *, int);
 extern int inet6_rthdr_getflags(const struct cmsghdr *, int);
 
-extern int inet6_opt_init(void *, size_t);
-extern int inet6_opt_append(void *, size_t, int, __uint8_t,
-				 size_t, __uint8_t, void **);
-extern int inet6_opt_finish(void *, size_t, int);
-extern int inet6_opt_set_val(void *, size_t, void *, int);
+extern int inet6_opt_init(void *, socklen_t);
+extern int inet6_opt_append(void *, socklen_t, int, __uint8_t,
+				 socklen_t, __uint8_t, void **);
+extern int inet6_opt_finish(void *, socklen_t, int);
+extern int inet6_opt_set_val(void *, int, void *, socklen_t);
 
-extern int inet6_opt_next(void *, size_t, int, __uint8_t *,
-			       size_t *, void **);
-extern int inet6_opt_find(void *, size_t, int, __uint8_t,
-			  size_t *, void **);
-extern int inet6_opt_get_val(void *, size_t, void *, int);
-extern size_t inet6_rth_space(int, int);
-extern void *inet6_rth_init(void *, int, int, int);
+extern int inet6_opt_next(void *, socklen_t, int, __uint8_t *,
+			       socklen_t *, void **);
+extern int inet6_opt_find(void *, socklen_t, int, __uint8_t,
+			  socklen_t *, void **);
+extern int inet6_opt_get_val(void *, int, void *, socklen_t);
+extern socklen_t inet6_rth_space(int, int);
+extern void *inet6_rth_init(void *, socklen_t, int, int);
 extern int inet6_rth_add(void *, const struct in6_addr *);
 extern int inet6_rth_reverse(const void *, void *);
 extern int inet6_rth_segments(const void *);
 extern struct in6_addr *inet6_rth_getaddr(const void *, int);
+extern void addrsel_policy_init(void);
 __END_DECLS
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 #endif /* !_NETINET6_IN6_H_ */

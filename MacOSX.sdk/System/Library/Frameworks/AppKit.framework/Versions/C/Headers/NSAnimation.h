@@ -1,14 +1,13 @@
 /*
     NSAnimation.h
     Application Kit
-    Copyright (c) 2004-2009, Apple Inc.
+    Copyright (c) 2004-2011, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/Foundation.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @class NSArray, NSGraphicsContext, NSMutableArray, NSString, NSTimer;
 @protocol NSAnimationDelegate;
@@ -119,18 +118,18 @@ extern NSString*    NSAnimationProgressMark;		    // NSNumber(float) with NSAnim
 
 /*-----------------------------------------------------------------------------------------*/
 
-APPKIT_EXTERN NSString* NSViewAnimationTargetKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;       // NSWindow* or NSView* (required)
-APPKIT_EXTERN NSString* NSViewAnimationStartFrameKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;   // NSValue*(NSRect) (optional)
-APPKIT_EXTERN NSString* NSViewAnimationEndFrameKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;     // NSValue*(NSRect) (optional)
-APPKIT_EXTERN NSString* NSViewAnimationEffectKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;       // NSString*(effect strings) (optional)
-APPKIT_EXTERN NSString*     NSViewAnimationFadeInEffect AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-APPKIT_EXTERN NSString*     NSViewAnimationFadeOutEffect AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+APPKIT_EXTERN NSString* NSViewAnimationTargetKey;       // NSWindow* or NSView* (required)
+APPKIT_EXTERN NSString* NSViewAnimationStartFrameKey;   // NSValue*(NSRect) (optional)
+APPKIT_EXTERN NSString* NSViewAnimationEndFrameKey;     // NSValue*(NSRect) (optional)
+APPKIT_EXTERN NSString* NSViewAnimationEffectKey;       // NSString*(effect strings) (optional)
+APPKIT_EXTERN NSString*     NSViewAnimationFadeInEffect;
+APPKIT_EXTERN NSString*     NSViewAnimationFadeOutEffect;
 
 @interface NSViewAnimation : NSAnimation {
   @private
     NSArray*                _viewAnimations;
-    CFMutableDictionaryRef  _viewAnimationInfo;
-    CFMutableDictionaryRef  _windowAnimationInfo;
+    id                      _viewAnimationInfo;
+    id                      _windowAnimationInfo;
     NSUInteger                  _reserved4a;
     NSUInteger                  _reserved4b;
     NSUInteger                  _reserved4c;
@@ -150,9 +149,9 @@ APPKIT_EXTERN NSString*     NSViewAnimationFadeOutEffect AVAILABLE_MAC_OS_X_VERS
 
 @end
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 @protocol NSAnimatablePropertyContainer
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 /* Returns a proxy object for the receiver that can be used to initiate implied animation of property changes. An object's "animator" should be treated as if it was the object itself, and may be passed to any code that accepts the object as a parameter. Sending of KVC-compliant "set" messages to the proxy will trigger animation for automatically animated properties of its target object, if the active NSAnimationContext in the current thread has a duration value greater than zero, and an animation to use for the property key is found by the -animationForKey: search mechanism defined below. An object's automatically animated properties are those for which [theObject animationForKey:] finds and returns an CAAnimation instead of nil, often because [[theObject class] defaultAnimationForKey:] specifies a default animation for the key.
 
@@ -191,11 +190,10 @@ The full set of available CAAnimation classes can be found in QuartzCore/CAAnima
 */
 + (id)defaultAnimationForKey:(NSString *)key;
 
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 @end /* @protocol NSAnimatablePropertyContainer */
 
-APPKIT_EXTERN NSString *NSAnimationTriggerOrderIn AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-APPKIT_EXTERN NSString *NSAnimationTriggerOrderOut AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+APPKIT_EXTERN NSString *NSAnimationTriggerOrderIn NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSString *NSAnimationTriggerOrderOut NS_AVAILABLE_MAC(10_5);
 
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */

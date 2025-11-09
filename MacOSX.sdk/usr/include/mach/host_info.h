@@ -170,6 +170,7 @@ typedef struct host_priority_info	*host_priority_info_t;
 
 /* host_statistics64() */
 #define HOST_VM_INFO64		4	/* 64-bit virtual memory stats */
+#define HOST_EXTMOD_INFO64	5	/* External modification stats */
 
 
 struct host_load_info {
@@ -190,6 +191,13 @@ typedef struct host_load_info	*host_load_info_t;
 /* size of the latest version of the structure */
 #define HOST_VM_INFO64_LATEST_COUNT HOST_VM_INFO64_COUNT
 
+/* in <mach/vm_statistics.h> */
+/* vm_extmod_statistics */
+#define HOST_EXTMOD_INFO64_COUNT ((mach_msg_type_number_t) \
+	    (sizeof(vm_extmod_statistics_data_t)/sizeof(integer_t)))
+
+/* size of the latest version of the structure */
+#define HOST_EXTMOD_INFO64_LATEST_COUNT HOST_EXTMOD_INFO64_COUNT
 
 /* vm_statistics */
 #define	HOST_VM_INFO_COUNT ((mach_msg_type_number_t) \
@@ -214,5 +222,8 @@ typedef struct host_cpu_load_info	host_cpu_load_info_data_t;
 typedef struct host_cpu_load_info	*host_cpu_load_info_t;
 #define HOST_CPU_LOAD_INFO_COUNT ((mach_msg_type_number_t) \
 		(sizeof (host_cpu_load_info_data_t) / sizeof (integer_t)))
+
+
+
 
 #endif	/* _MACH_HOST_INFO_H_ */

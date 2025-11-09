@@ -292,7 +292,7 @@ CFPlugInTypes                   Dictionary      1 key/value pair
 					
 					New for CoreMIDI 1.1.
 */
-extern const CFStringRef kMIDIDriverPropertyUsesSerial;
+extern const CFStringRef kMIDIDriverPropertyUsesSerial		__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 
 #ifdef __cplusplus

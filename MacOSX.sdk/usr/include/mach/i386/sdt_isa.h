@@ -36,7 +36,7 @@
 #define DTRACE_STRINGIFY(s) #s
 #define DTRACE_TOSTRING(s) DTRACE_STRINGIFY(s)
 #define DTRACE_LABEL(p, n)									\
-	"__dtrace_probe$" DTRACE_TOSTRING(__LINE__) DTRACE_STRINGIFY(_##p##___##n) ":"	"\n\t"
+	"__dtrace_probe$" DTRACE_TOSTRING(%=__LINE__) DTRACE_STRINGIFY(_##p##___##n) ":"	"\n\t"
 
 #ifdef DTRACE_CALL_TEST
 
@@ -76,6 +76,8 @@
 #define DTRACE_CALL0ARGS(provider, name)							\
 	asm volatile (										\
 		      DTRACE_CALL(provider, name)						\
+	              :										\
+	              :										\
 	);
 
 #define DTRACE_CALL1ARG(provider, name)								\

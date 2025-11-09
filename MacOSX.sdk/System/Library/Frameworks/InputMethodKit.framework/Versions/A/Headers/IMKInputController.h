@@ -337,6 +337,12 @@ extern const NSString*		kIMKCommandClientName;
 */
 - (id<IMKTextInput, NSObject>)client;
 
+/*!
+ @method     
+ @abstract   Called to notify an input controller that it is about to be closed.
+*/
+-(void)inputControllerWillClose  AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
 #pragma mark __Candidate Window Methods__
 
 /*!

@@ -21,6 +21,12 @@
 	Bluetooth wireless technology
 */
 
+#if defined(__cplusplus)
+	#define IOBLUETOOTH_EXPORT extern "C"
+#else
+	#define IOBLUETOOTH_EXPORT extern
+#endif
+
 #ifdef	__cplusplus
 	extern "C" {
 #endif
@@ -35,29 +41,29 @@
 //	Baseband
 //===========================================================================================================================
 
-typedef UInt16		BluetoothConnectionHandle;		// Upper 4 bits are reserved.
+typedef uint16_t		BluetoothConnectionHandle;		// Upper 4 bits are reserved.
 typedef uint8_t		BluetoothLMPHandle;
 enum
 {
     kBluetoothConnectionHandleNone	= 0xffff
 };
 
-typedef UInt8		BluetoothReasonCode;
-typedef UInt8		BluetoothEncryptionEnable;
+typedef uint8_t		BluetoothReasonCode;
+typedef uint8_t		BluetoothEncryptionEnable;
 enum
 {
 	kBluetoothEncryptionEnableOff 	= 0x00, 
 	kBluetoothEncryptionEnableOn	= 0x01
 };
 
-typedef UInt8		BluetoothKeyFlag;
+typedef uint8_t		BluetoothKeyFlag;
 enum
 {
 	kBluetoothKeyFlagSemiPermanent 	= 0x00, 
 	kBluetoothKeyFlagTemporary 		= 0x01
 };
 
-typedef UInt8		BluetoothKeyType;
+typedef uint8_t		BluetoothKeyType;
 enum
 {
 	kBluetoothKeyTypeCombination					= 0x00, 
@@ -66,12 +72,12 @@ enum
 	kBluetoothKeyTypeDebugCombination				= 0x03,
 	kBluetoothKeyTypeUnauthenticatedCombination		= 0x04,
 	kBluetoothKeyTypeAuthenticatedCombination		= 0x05,
-	kBluetoothKeyTypeChangedCombination				= 0x06,
+	kBluetoothKeyTypeChangedCombination				= 0x06
 };
 
 // Packet types (Bluetooth spec section 7.1.5 - Create Connection)
 
-typedef UInt16		BluetoothPacketType;
+typedef uint16_t		BluetoothPacketType;
 enum
 {
 	kBluetoothPacketTypeReserved1	= 0x0001, 
@@ -104,6 +110,7 @@ enum
 
 enum
 {
+	kBluetoothSynchronousConnectionPacketTypeNone			= 0x0000,
 	kBluetoothSynchronousConnectionPacketTypeHV1			= 0x0001,
 	kBluetoothSynchronousConnectionPacketTypeHV2			= 0x0002,
 	kBluetoothSynchronousConnectionPacketTypeHV3			= 0x0004,
@@ -118,6 +125,8 @@ enum
 	kBluetoothSynchronousConnectionPacketType2EV5Omit		= 0x0100,
 	kBluetoothSynchronousConnectionPacketType3EV5Omit		= 0x0200,
 	
+	kBluetoothSynchronousConnectionPacketTypeFutureUse		= 0xFC00,
+	
 	kBluetoothSynchronousConnectionPacketTypeAll			= 0xFFFF,
 
 	kBluetoothSynchronousConnectionPacketTypeEnd
@@ -126,7 +135,7 @@ enum
 
 // LAP/Inquiry Access Codes
 
-typedef UInt32		BluetoothLAP;
+typedef uint32_t		BluetoothLAP;
 enum
 {
 	kBluetoothGeneralInquiryAccessCodeIndex		= 0, 			// General/Unlimited Inquiry Access Code (GIAC)
@@ -142,7 +151,7 @@ enum
 
 // PageScanRepetitionMode
 
-typedef	UInt8	BluetoothPageScanRepetitionMode;
+typedef	uint8_t	BluetoothPageScanRepetitionMode;
 enum
 {
 	kBluetoothPageScanRepetitionModeR0 			= 0x00, 
@@ -154,7 +163,7 @@ enum
 
 // PageScanPeriodMode
 
-typedef UInt8	BluetoothPageScanPeriodMode;
+typedef uint8_t	BluetoothPageScanPeriodMode;
 enum
 {
 	kBluetoothPageScanPeriodModeP0 				= 0x00, 
@@ -166,7 +175,7 @@ enum
 
 // PageScanMode
 
-typedef UInt8	BluetoothPageScanMode;
+typedef uint8_t	BluetoothPageScanMode;
 enum
 {
 	kBluetoothPageScanModeMandatory 			= 0x00, 
@@ -176,6 +185,29 @@ enum
 	
 	// All other values are reserved for future use.
 };
+		
+// PageScanType
+		
+typedef uint8_t	BluetoothHCIPageScanType;
+enum BluetoothHCIPageScanTypes
+{
+	kBluetoothHCIPageScanTypeStandard		= 0x00,
+	kBluetoothHCIPageScanTypeInterlaced		= 0x01,
+			
+	kBluetoothHCIPageScanTypeReservedStart	= 0x02,
+	kBluetoothHCIPageScanTypeReservedEnd	= 0xFF
+};	
+		
+// Erroneous Data Reporting
+typedef uint8_t	BluetoothHCIErroneousDataReporting;
+enum
+{
+	kBluetoothHCIErroneousDataReportingDisabled			= 0x00,
+	kBluetoothHCIErroneousDataReportingEnabled			= 0x01,
+			
+	kBluetoothHCIErroneousDataReportingReservedStart	= 0x02,
+	kBluetoothHCIErroneousDataReportingReservedEnd		= 0xFF
+};		
 
 #if 0
 #pragma mark -
@@ -185,19 +217,19 @@ enum
 typedef struct	BluetoothDeviceAddress		BluetoothDeviceAddress;
 struct	BluetoothDeviceAddress
 {
-	UInt8		data[ 6 ];
+	uint8_t		data[ 6 ];
 };
 
 typedef struct	BluetoothKey				BluetoothKey;
 struct	BluetoothKey
 {
-	UInt8		data[ 16 ];
+	uint8_t		data[ 16 ];
 };
 
 typedef struct	BluetoothPINCode			BluetoothPINCode;
 struct	BluetoothPINCode
 {
-	UInt8		data[ 16 ];		// PIN codes may be up to 128 bits.
+	uint8_t		data[ 16 ];		// PIN codes may be up to 128 bits.
 };
 
 
@@ -224,7 +256,7 @@ struct	BluetoothPINCode
 //	 | +- Telephony
 //	 +- Information
 
-typedef UInt32		BluetoothClassOfDevice;
+typedef uint32_t		BluetoothClassOfDevice;
 
 #define		BluetoothGetDeviceClassMajor( inCOD )		( (inCOD & 0x00001F00) >> 8 )
 #define		BluetoothGetDeviceClassMinor( inCOD )		( (inCOD & 0x000000FC) >> 2 )
@@ -236,21 +268,21 @@ typedef UInt32		BluetoothClassOfDevice;
 /// Major Service Classes (11-bit value - bits 13-23 of Device/Service field)
 ///
 
-typedef UInt32		BluetoothServiceClassMajor;
+typedef uint32_t		BluetoothServiceClassMajor;
 // Service Class Major enum in BluetoothAssignedNumbers.h
 
 ///
 /// Major Device Classes (5-bit value - bits 8-12 of Device/Service field)
 ///
 
-typedef UInt32		BluetoothDeviceClassMajor;
+typedef uint32_t		BluetoothDeviceClassMajor;
 // Device Class Major enum in BluetoothAssignedNumbers.h
 
 ///
 /// Minor Device Classes (6-bit value - bits 2-7 of Device/Service field)
 ///
 
-typedef UInt32		BluetoothDeviceClassMinor;
+typedef uint32_t		BluetoothDeviceClassMinor;
 // Device Class Minor enum in BluetoothAssignedNumbers.h
 
 // Misc Device Types
@@ -259,10 +291,11 @@ enum
 {
 	kBluetoothDeviceNameMaxLength	= 248
 };
-typedef UInt8	BluetoothDeviceName[ 256 ];		// Max 248 bytes of UTF-8 encoded Unicode.
-typedef UInt16	BluetoothClockOffset;			// Bits 14-0 come from bits 16-2 of CLKslav-CLKmaster.
-typedef UInt8	BluetoothRole;					// 
-typedef UInt8	BluetoothAllowRoleSwitch;		// 0x00-0x01 valid, 0x02-0xFF reserved.
+
+typedef uint8_t		BluetoothDeviceName[ 256 ];		// Max 248 bytes of UTF-8 encoded Unicode.
+typedef uint16_t	BluetoothClockOffset;			// Bits 14-0 come from bits 16-2 of CLKslav-CLKmaster.
+typedef uint8_t		BluetoothRole;					// 
+typedef uint8_t		BluetoothAllowRoleSwitch;		// 0x00-0x01 valid, 0x02-0xFF reserved.
 enum
 {
 	kBluetoothDontAllowRoleSwitch 	= 0x00, 
@@ -278,10 +311,10 @@ enum
 typedef struct BluetoothSetEventMask	BluetoothSetEventMask;
 struct	BluetoothSetEventMask
 {
-	UInt8		data[ 8 ];
+	uint8_t		data[ 8 ];
 };
 
-typedef UInt8	BluetoothPINType;
+typedef uint8_t	BluetoothPINType;
 
 
 #if 0
@@ -308,16 +341,18 @@ enum
 
 // Channel Identifiers (Bluetooth L2CAP spec section 2.1).
 
-typedef UInt16		BluetoothL2CAPChannelID;
+typedef uint16_t		BluetoothL2CAPChannelID;
 enum
 {
 	kBluetoothL2CAPChannelNull					= 0x0000, 	// Illegal, should not be used
 	kBluetoothL2CAPChannelSignalling	 		= 0x0001, 	// L2CAP signalling channel
 	kBluetoothL2CAPChannelConnectionLessData	= 0x0002, 	// L2CAP connection less data
 	kBluetoothL2CAPChannelAMPManagerProtocol	= 0x0003,	// AMP Manager Protocol
-	
+	kBluetoothL2CAPChannelAttributeProtocol		= 0x0004,
+	kBluetoothL2CAPChannelLESignalling			= 0x0005,
+	kBluetoothL2CAPChannelSecurityManager		= 0x0006,
 	// Range 0x0003 to 0x003F reserved for future use.
-	kBluetoothL2CAPChannelReservedStart			= 0x0004,
+	kBluetoothL2CAPChannelReservedStart			= 0x0007,
     kBluetoothL2CAPChannelReservedEnd			= 0x003F,
     
     // Range 0x0040 to 0xFFFF are dynamically allocated.
@@ -330,7 +365,7 @@ typedef BluetoothL2CAPChannelID		BluetoothL2CAPGroupID;
 
 // Protocol/Service Multiplexor (PSM) values (Bluetooth L2CAP spec section 5.2).
 
-typedef UInt16		BluetoothL2CAPPSM;
+typedef uint16_t		BluetoothL2CAPPSM;
 // PSM enum in BluetoothAssignedNumbers.h
 
 // Command Codes
@@ -355,6 +390,8 @@ typedef enum
 	kBluetoothL2CAPCommandCodeMoveChannelResponse				= 0x0F,
 	kBluetoothL2CAPCommandCodeMoveChannelConfirmation			= 0x10,
 	kBluetoothL2CAPCommandCodeMoveChannelConfirmationResponse	= 0x11,
+	kBluetoothL2CAPCommandCodeConnectionParameterUpdateRequest	= 0x12,
+	kBluetoothL2CAPCommandCodeConnectionParameterUpdateResponse	= 0x13,
 } BluetoothL2CAPCommandCode;
 
 // Command Reject
@@ -366,9 +403,9 @@ typedef enum
 	kBluetoothL2CAPCommandRejectReasonInvalidCIDInRequest 	= 0x0002, 
 } BluetoothL2CAPCommandRejectReason;
 
-typedef UInt16		BluetoothL2CAPMTU;
-typedef	UInt16		BluetoothL2CAPLinkTimeout;
-typedef UInt16		BluetoothL2CAPFlushTimeout;
+typedef uint16_t		BluetoothL2CAPMTU;
+typedef	uint16_t		BluetoothL2CAPLinkTimeout;
+typedef uint16_t		BluetoothL2CAPFlushTimeout;
 enum
 {
 	kBluetoothL2CAPFlushTimeoutUseExisting 	= 0x0000, 
@@ -381,24 +418,24 @@ enum
 typedef struct BluetoothL2CAPQualityOfServiceOptions	BluetoothL2CAPQualityOfServiceOptions;
 struct BluetoothL2CAPQualityOfServiceOptions
 {
-	UInt8		flags;
-	UInt8		serviceType;
-	UInt32		tokenRate;
-	UInt32		tokenBucketSize;
-	UInt32		peakBandwidth;
-	UInt32		latency;
-	UInt32		delayVariation;
+	uint8_t		flags;
+	uint8_t		serviceType;
+	uint32_t		tokenRate;
+	uint32_t		tokenBucketSize;
+	uint32_t		peakBandwidth;
+	uint32_t		latency;
+	uint32_t		delayVariation;
 };
 
 typedef struct BluetoothL2CAPRetransmissionAndFlowControlOptions BluetoothL2CAPRetransmissionAndFlowControlOptions;
 struct BluetoothL2CAPRetransmissionAndFlowControlOptions
 {
-	UInt8		flags;
-	UInt8		txWindowSize;
-	UInt8		maxTransmit;
-	UInt16		retransmissionTimeout;
-	UInt16		monitorTimeout;
-	UInt16		maxPDUPayloadSize;
+	uint8_t		flags;
+	uint8_t		txWindowSize;
+	uint8_t		maxTransmit;
+	uint16_t		retransmissionTimeout;
+	uint16_t		monitorTimeout;
+	uint16_t		maxPDUPayloadSize;
 };
 
 enum
@@ -413,9 +450,9 @@ enum
 	kBluetoothL2CAPPacketHeaderSize = 4
 };
 
-typedef UInt16		BluetoothL2CAPByteCount;
-typedef UInt8		BluetoothL2CAPCommandID;
-typedef UInt16		BluetoothL2CAPCommandByteCount;
+typedef uint16_t		BluetoothL2CAPByteCount;
+typedef uint8_t		BluetoothL2CAPCommandID;
+typedef uint16_t		BluetoothL2CAPCommandByteCount;
 
 typedef enum
 {
@@ -502,6 +539,7 @@ typedef enum
 
 enum
 {
+	kBluetoothL2CAPMTULowEnergyDefault			= 0x001b,	// 27 bytes
 	kBluetoothL2CAPMTUMinimum					= 0x0030,	// 48 bytes
 	kBluetoothL2CAPMTUDefault					= 0x03F9,	// 11.10.08 - dropped back to 1017 from 1021 (don't aggravate the 3DH5 problem between CSR<->BRCM just yet)
 	kBluetoothL2CAPMTUMaximum					= 0xffff,	
@@ -516,6 +554,104 @@ enum
 	kBluetoothL2CAPQoSLatencyDefault			= 0xffffffff,
 	kBluetoothL2CAPQoSDelayVariationDefault		= 0xffffffff
 };
+		
+#pragma mark === LE Security Manager ===
+
+#define kBluetoothLESMPTimeout 30		
+		
+#define kBluetoothLESMPMinEncryptionKeySize 7
+#define kBluetoothLESMPMaxEncryptionKeySize	16
+		
+enum BluetoothLESecurityManagerKeyDistributionFormat
+{
+	kBluetoothLESecurityManagerEncryptionKey			= (1 << 0L), // LTK, EDIV, RAND
+	kBluetoothLESecurityManagerIDKey					= (1 << 1L), // IRK 
+	kBluetoothLESecurityManagerSignKey					= (1 << 2L), // CSRK
+};				
+		
+typedef enum
+{
+	kBluetoothLESecurityManagerCommandCodeReserved					= 0x00,
+	kBluetoothLESecurityManagerCommandCodePairingRequest            = 0x01,
+	kBluetoothLESecurityManagerCommandCodePairingResponse           = 0x02,
+	kBluetoothLESecurityManagerCommandCodePairingConfirm            = 0x03,
+	kBluetoothLESecurityManagerCommandCodePairingRandom				= 0x04,
+	kBluetoothLESecurityManagerCommandCodePairingFailed				= 0x05,
+	kBluetoothLESecurityManagerCommandCodeEncryptionInfo            = 0x06,
+	kBluetoothLESecurityManagerCommandCodeMasterIdentification      = 0x07,
+	kBluetoothLESecurityManagerCommandCodeIdentityInfo				= 0x08,
+	kBluetoothLESecurityManagerCommandCodeIdentityAddressInfo       = 0x09,
+	kBluetoothLESecurityManagerCommandCodeSigningInfo				= 0x0A,
+	kBluetoothLESecurityManagerCommandCodeSecurityRequest			= 0x0B,
+	
+	// 0x0C - 0xFF reserved
+	kBluetoothLESecurityManagerCommandCodeReservedStart				= 0x0C,
+	kBluetoothLESecurityManagerCommandCodeReservedEnd				= 0xFF
+} BluetoothLESecurityManagerCommandCode;
+
+typedef enum
+{
+	kBluetoothLESecurityManagerUserInputCapabilityNoInput			= 0x01,
+	kBluetoothLESecurityManagerUserInputCapabilityYesNo				= 0x02,
+	kBluetoothLESecurityManagerUserInputCapabilityKeyboard			= 0x03
+} BluetoothLESecurityManagerUserInputCapability;
+
+typedef enum
+{
+	kBluetoothLESecurityManagerUserOutputCapabilityNoOutput			= 0x01,
+	kBluetoothLESecurityManagerUserOutputCapabilityNumericOutput	= 0x02
+} BluetoothLESecurityManagerUserOutputCapability;
+
+typedef enum
+{
+	kBluetoothLESecurityManagerIOCapabilityDisplayOnly				= 0x00,
+	kBluetoothLESecurityManagerIOCapabilityDisplayYesNo				= 0x01,
+	kBluetoothLESecurityManagerIOCapabilityKeyboardOnly				= 0x02,
+	kBluetoothLESecurityManagerIOCapabilityNoInputNoOutput          = 0x03,
+	kBluetoothLESecurityManagerIOCapabilityKeyboardDisplay          = 0x04,
+	
+	// 0x05 - 0xFF reserved
+	kBluetoothLESecurityManagerIOCapabilityReservedStart            = 0x05,
+	kBluetoothLESecurityManagerIOCapabilityReservedEnd				= 0xFF
+} BluetoothLESecurityManagerIOCapability;
+
+typedef enum
+{
+	kBluetoothLESecurityManagerOOBAuthenticationDataNotPresent      = 0x00,
+	kBluetoothLESecurityManagerOOBAuthenticationDataPresent         = 0x01,
+	
+	// 0x02 - 0xFF reserved
+	kBluetoothLESecurityManagerOOBDataReservedStart					= 0x02,
+	kBluetoothLESecurityManagerOOBDataReservedEnd					= 0xFF,
+} BluetoothLESecurityManagerOOBData;
+
+enum
+{
+	kBluetoothLESecurityManagerNoBonding							= 0,    // [00]
+	kBluetoothLESecurityManagerBonding								= 1,    // [01]
+	kBluetoothLESecurityManagerReservedStart						= 2,    // [10]
+	kBluetoothLESecurityManagerReservedEnd							= 3     // [11]
+};
+
+typedef enum
+{
+	kBluetoothLESecurityManagerReasonCodeReserved							= 0x00,
+	kBluetoothLESecurityManagerReasonCodePasskeyEntryFailed					= 0x01,
+	kBluetoothLESecurityManagerReasonCodeOOBNotAvailbale					= 0x02,
+	kBluetoothLESecurityManagerReasonCodeAuthenticationRequirements			= 0x03,
+	kBluetoothLESecurityManagerReasonCodeConfirmValueFailed                 = 0x04,
+	kBluetoothLESecurityManagerReasonCodePairingNotSupported                = 0x05,
+	kBluetoothLESecurityManagerReasonCodeEncryptionKeySize                  = 0x06,
+	kBluetoothLESecurityManagerReasonCodeCommandNotSupported                = 0x07,
+	kBluetoothLESecurityManagerReasonCodeUnspecifiedReason                  = 0x08,
+	kBluetoothLESecurityManagerReasonCodeRepeatedAttempts                   = 0x09,
+	kBluetoothLESecurityManagerReasonCodeInvalidParameters                  = 0x0A,
+	kBluetoothLESecurityManagerReasonCodeReservedStart						= 0x0B,
+	kBluetoothLESecurityManagerReasonCodeReservedEnd						= 0xFF,
+} BluetoothLESecurityManagerPairingFailedReasonCode;
+
+		
+		
 
 #pragma mark === AMP Manager ===
 typedef enum {
@@ -600,11 +736,11 @@ typedef enum {
 //	+---------------------------------------------------------------+
 
 // Commands
-
-typedef UInt8		BluetoothHCICommandOpCodeGroup;
-typedef UInt16		BluetoothHCICommandOpCodeCommand;
-typedef UInt16		BluetoothHCICommandOpCode;
-typedef	UInt32		BluetoothHCIVendorCommandSelector;
+		
+typedef uint8_t		BluetoothHCICommandOpCodeGroup;
+typedef uint16_t		BluetoothHCICommandOpCodeCommand;
+typedef uint16_t		BluetoothHCICommandOpCode;
+typedef	uint32_t		BluetoothHCIVendorCommandSelector;
 
 #define	BluetoothHCIMakeCommandOpCode( GROUP, CMD )				( ( ( ( GROUP ) & 0x003F ) << 10 ) | ( ( CMD ) & 0x03FF ) )
 #define	BluetoothHCIMakeCommandOpCodeEndianSwap( GROUP, CMD )	( CFSwapInt16HostToLittle ( BluetoothHCIMakeCommandOpCode( GROUP, CMD ) ) )
@@ -631,7 +767,7 @@ enum
 		kBluetoothHCICommandExitPeriodicInquiryMode						= 0x0004, 
 		kBluetoothHCICommandCreateConnection							= 0x0005, 
 		kBluetoothHCICommandDisconnect									= 0x0006, 
-		kBluetoothHCICommandAddSCOConnection							= 0x0007,
+		kBluetoothHCICommandAddSCOConnection							= 0x0007,	// DEPRECATED
 		kBluetoothHCICommandCreateConnectionCancel						= 0x0008,
 		kBluetoothHCICommandAcceptConnectionRequest						= 0x0009, 
 		kBluetoothHCICommandRejectConnectionRequest						= 0x000A, 
@@ -755,14 +891,24 @@ enum
 		kBluetoothHCICommandReadLocalOOBData							= 0x0057,
 		kBluetoothHCICommandReadInquiryResponseTransmitPower			= 0x0058,
 		kBluetoothHCICommandWriteInquiryResponseTransmitPower			= 0x0059,
+		kBluetoothHCICommandSendKeypressNotification					= 0x0060,
 		kBluetoothHCICommandReadDefaultErroneousDataReporting			= 0x005A,
 		kBluetoothHCICommandWriteDefaultErroneousDataReporting			= 0x005B,
-		kBluetoothHCICommandReadPersistentSniffInterval					= 0x005C,
-		kBluetoothHCICommandWritePersistentSniffInterval				= 0x005D,
-		kBluetoothHCICommandDeletePersistentSniffInterval				= 0x005E,
 		kBluetoothHCICommandEnhancedFlush								= 0x005F,
-		kBluetoothHCICommandSendKeypressNotification					= 0x0060,
-	
+		kBluetoothHCICommandReadLogicalLinkAcceptTimeout				= 0x0061,
+		kBluetoothHCICommandWriteLogicalLinkAcceptTimeout				= 0x0062,
+		kBluetoothHCICommandSetEventMaskPageTwo							= 0x0063,
+		kBluetoothHCICommandReadLocationData							= 0x0064,
+		kBluetoothHCICommandWriteLocationData							= 0x0065,
+		kBluetoothHCICommandReadFlowControlMode							= 0x0066,
+		kBluetoothHCICommandWriteFlowControlMode						= 0x0067,
+		kBluetoothHCICommandReadEnhancedTransmitPowerLevel				= 0x0068,
+		kBluetoothHCICommandReadBestEffortFlushTimeout					= 0x0069,
+		kBluetoothHCICommandWriteBestEffortFlushTimeout					= 0x006A,
+		kBluetoothHCICommandShortRangeMode								= 0x006B,
+		kBluetoothHCICommandReadLEHostSupported							= 0x006C,
+		kBluetoothHCICommandWriteLEHostSupported						= 0x006D,
+
 	// Command Group: Informational
 	
 	kBluetoothHCICommandGroupInformational								= 0x04, 
@@ -795,23 +941,48 @@ enum
 		kBluetoothHCICommandWriteLoopbackMode							= 0x0002, 
 		kBluetoothHCICommandEnableDeviceUnderTestMode					= 0x0003, 
 		kBluetoothHCICommandWriteSimplePairingDebugMode					= 0x0004,
+		kBluetoothHCICommandEnableAMPReceiverReports					= 0x0007,
+		kBluetoothHCICommandAMPTestEnd									= 0x0008,
+		kBluetoothHCICommandAMPTest										= 0x0009,
 
+	
+	kBluetoothHCICommandGroupLowEnergy									= 0x08,
+		kBluetoothHCICommandLESetEventMask								= 0x0001,
+		kBluetoothHCICommandLEReadBufferSize							= 0x0002,
+		kBluetoothHCICommandLEReadLocalSupportedFeatures				= 0x0003,
+		kBluetoothHCICommandLESetRandomAddress							= 0x0005,
+		kBluetoothHCICommandLESetAdvertisingParameters					= 0x0006,
+		kBluetoothHCICommandLEReadAdvertisingChannelTxPower				= 0x0007,
+		kBluetoothHCICommandLESetAdvertisingData						= 0x0008,
+		kBluetoothHCICommandLESetScanResponseData						= 0x0009,
+		kBluetoothHCICommandLESetAdvertiseEnable						= 0x000A,
+		kBluetoothHCICommandLESetScanParameters							= 0x000B,
+		kBluetoothHCICommandLESetScanEnable								= 0x000C,
+		kBluetoothHCICommandLECreateConnection							= 0x000D,
+		kBluetoothHCICommandLECreateConnectionCancel					= 0x000E,
+		kBluetoothHCICommandLEReadWhiteListSize							= 0x000F,
+		kBluetoothHCICommandLEClearWhiteList							= 0x0010,
+		kBluetoothHCICommandLEAddDeviceToWhiteList						= 0x0011,
+		kBluetoothHCICommandLERemoveDeviceFromWhiteList					= 0x0012,
+		kBluetoothHCICommandLEConnectionUpdate							= 0x0013,
+		kBluetoothHCICommandLESetHostChannelClassification				= 0x0014,
+		kBluetoothHCICommandLEReadChannelMap							= 0x0015,
+		kBluetoothHCICommandLEReadRemoteUsedFeatures					= 0x0016,
+		kBluetoothHCICommandLEEncrypt									= 0x0017,
+		kBluetoothHCICommandLERand										= 0x0018,
+		kBluetoothHCICommandLEStartEncryption							= 0x0019,
+		kBluetoothHCICommandLELongTermKeyRequestReply					= 0x001A,
+		kBluetoothHCICommandLELongTermKeyRequestNegativeReply			= 0x001B,
+		kBluetoothHCICommandLEReadSupportedStates						= 0x001C,
+		kBluetoothHCICommandLEReceiverTest								= 0x001D,
+		kBluetoothHCICommandLETransmitterTest							= 0x001E,
+		kBluetoothHCICommandLETestEnd									= 0x001F,
 	// Command Group: Logo Testing (no commands yet)
 	
 	kBluetoothHCICommandGroupLogoTesting 								= 0x3E, 
 	
-	// Command Group: Vendor Specific (from Broadcom HCI Programmer's Reference Guide)
-	
-	kBluetoothHCICommandGroupVendorSpecific								= 0x3f, 
-		kBluetoothHCICommandWriteDeviceAddress							= 0x0001, 
-		kBluetoothHCICommandWriteHoppingChannels						= 0x0012,
-		kBluetoothHCICommandInvalidateFlashAndReboot					= 0x0017,
-		kBluetoothHCICommandSetMaxPower									= 0x0026,
-		kBluetoothHCICommandEnableHIDEmulation							= 0x003B,
-		kBluetoothHCICommandEnableRadio									= 0x0034,
-		kBluetoothHCIGetHIDDeviceList									= 0x0036,
-		kBluetoothHCIAddHIDDevice										= 0x0037,
-		kBluetoothHCIRemoveHIDDevice									= 0x0039,
+	// Command Group: Vendor Specific
+	kBluetoothHCICommandGroupVendorSpecific								= 0x3F, 
 	
 	kBluetoothHCICommandGroupMax										= 0x40, 
 	kBluetoothHCICommandMax												= 0x03FF
@@ -819,24 +990,24 @@ enum
 
 // HCI Data Types
 
-typedef UInt8										BluetoothHCIQoSFlags;
-typedef UInt8										BluetoothHCIParamByteCount;
-typedef UInt16										BluetoothHCIACLDataByteCount;
-typedef UInt8										BluetoothHCISCODataByteCount;
-typedef UInt8										BluetoothHCIInquiryLength;
-typedef UInt8										BluetoothHCIResponseCount;
-typedef UInt8										BluetoothHCICountryCode;
-typedef UInt16										BluetoothHCIModeInterval;
-typedef UInt16										BluetoothHCISniffAttemptCount;
-typedef UInt16										BluetoothHCISniffTimeout;
-typedef UInt16										BluetoothHCIParkModeBeaconInterval;
+typedef uint8_t										BluetoothHCIQoSFlags;
+typedef uint8_t										BluetoothHCIParamByteCount;
+typedef uint16_t									BluetoothHCIACLDataByteCount;
+typedef uint8_t										BluetoothHCISCODataByteCount;
+typedef uint8_t										BluetoothHCIInquiryLength;
+typedef uint8_t										BluetoothHCIResponseCount;
+typedef uint8_t										BluetoothHCICountryCode;
+typedef uint16_t									BluetoothHCIModeInterval;
+typedef uint16_t									BluetoothHCISniffAttemptCount;
+typedef uint16_t									BluetoothHCISniffTimeout;
+typedef uint16_t									BluetoothHCIParkModeBeaconInterval;
 
-typedef UInt8										BluetoothMaxSlots;
-typedef UInt16										BluetoothManufacturerName;
-typedef UInt8										BluetoothLMPVersion;
-typedef UInt16										BluetoothLMPSubversion;
+typedef uint8_t										BluetoothMaxSlots;
+typedef uint16_t									BluetoothManufacturerName;
+typedef uint8_t										BluetoothLMPVersion;
+typedef uint16_t									BluetoothLMPSubversion;
 
-typedef UInt8										BluetoothHCIConnectionMode;
+typedef uint8_t										BluetoothHCIConnectionMode;
 enum BluetoothHCIConnectionModes
 {
 	kConnectionActiveMode					= 0,
@@ -845,21 +1016,27 @@ enum BluetoothHCIConnectionModes
 	kConnectionParkMode						= 3,
 	kConnectionModeReservedForFutureUse		= 4,
 };
-
+				
+typedef struct	BluetoothHCISupportedCommands		BluetoothHCISupportedCommands;
+struct BluetoothHCISupportedCommands
+{
+	uint8_t	data[64];
+};		
+		
 typedef struct	BluetoothHCISupportedFeatures		BluetoothHCISupportedFeatures;
 struct BluetoothHCISupportedFeatures
 {
-	UInt8	data[8];
+	uint8_t	data[8];
 };
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
-typedef UInt8										BluetoothHCIPageNumber;
+typedef uint8_t										BluetoothHCIPageNumber;
 typedef struct	BluetoothHCIExtendedFeaturesInfo	BluetoothHCIExtendedFeaturesInfo;
 struct BluetoothHCIExtendedFeaturesInfo
 {
 	BluetoothHCIPageNumber	page;
 	BluetoothHCIPageNumber	maxPage;
-	UInt8					data[8];
+	uint8_t					data[8];
 };
 #endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1 */
 		
@@ -918,7 +1095,7 @@ enum BluetoothFeatureBits
 	kBluetoothFeatureAFHCapableSlave					= (1 << 3L),
 	kBluetoothFeatureAFHClassificationSlave				= (1 << 4L),	
 	kBluetoothFeatureAliasAuhentication					= (1 << 5L),
-	kBluetoothFeatureAnonymityMode						= (1 << 6L),
+	kBluetoothFeatureLESupportedController				= (1 << 6L),
 	kBluetoothFeature3SlotEnhancedDataRateACLPackets	= (1 << 7L),
 	
 	// Byte 5 of the support features data structure.
@@ -952,7 +1129,13 @@ enum BluetoothFeatureBits
 
 };
 
-typedef UInt16										BluetoothHCIFailedContactCount;
+typedef struct BluetoothEventFilterCondition	BluetoothEventFilterCondition;
+struct BluetoothEventFilterCondition
+{
+    uint8_t		data[ 7 ];
+};        
+        
+typedef uint16_t										BluetoothHCIFailedContactCount;
 typedef struct BluetoothHCIFailedContactInfo		BluetoothHCIFailedContactInfo;
 struct BluetoothHCIFailedContactInfo
 {
@@ -968,7 +1151,7 @@ struct BluetoothHCIRSSIInfo
 	BluetoothHCIRSSIValue			RSSIValue;
 };
 
-typedef	UInt8										BluetoothHCILinkQuality;
+typedef	uint8_t										BluetoothHCILinkQuality;
 typedef struct BluetoothHCILinkQualityInfo			BluetoothHCILinkQualityInfo;
 struct BluetoothHCILinkQualityInfo
 {
@@ -976,11 +1159,11 @@ struct BluetoothHCILinkQualityInfo
 	BluetoothHCILinkQuality			qualityValue;
 };
 
-typedef UInt8	BluetoothHCIRole;
+typedef uint8_t	BluetoothHCIRole;
 typedef struct	BluetoothHCIRoleInfo					BluetoothHCIRoleInfo;
 struct BluetoothHCIRoleInfo
 {
-	UInt8						role;
+	uint8_t						role;
 	BluetoothConnectionHandle	handle;
 };
 
@@ -990,7 +1173,7 @@ enum BluetoothHCIRoles
 	kBluetoothHCISlaveRole				= 0x01
 };
 
-typedef UInt16										BluetoothHCILinkPolicySettings;
+typedef uint16_t										BluetoothHCILinkPolicySettings;
 enum BluetoothHCILinkPolicySettingsValues
 {
 	kDisableAllLMModes					= 0x0000,
@@ -1012,12 +1195,12 @@ struct BluetoothHCILinkPolicySettingsInfo
 typedef struct BluetoothHCIQualityOfServiceSetupParams	BluetoothHCIQualityOfServiceSetupParams;
 struct BluetoothHCIQualityOfServiceSetupParams
 {
-	UInt8		flags;
-	UInt8		serviceType;
-	UInt32		tokenRate;
-	UInt32		peakBandwidth;
-	UInt32		latency;
-	UInt32		delayVariation;
+	uint8_t		flags;
+	uint8_t		serviceType;
+	uint32_t		tokenRate;
+	uint32_t		peakBandwidth;
+	uint32_t		latency;
+	uint32_t		delayVariation;
 };
 
 typedef struct BluetoothHCISetupSynchronousConnectionParams	BluetoothHCISetupSynchronousConnectionParams;
@@ -1030,7 +1213,7 @@ struct BluetoothHCISetupSynchronousConnectionParams
 	uint8_t		retransmissionEffort;
 	uint16_t		packetType;
 };
-
+		
 typedef struct BluetoothHCIAcceptSynchronousConnectionRequestParams	BluetoothHCIAcceptSynchronousConnectionRequestParams;
 struct BluetoothHCIAcceptSynchronousConnectionRequestParams
 {
@@ -1042,21 +1225,42 @@ struct BluetoothHCIAcceptSynchronousConnectionRequestParams
 	uint16_t		packetType;
 };
 
-typedef UInt8										BluetoothHCILoopbackMode;
+typedef uint8_t	BluetoothHCILoopbackMode;
 enum
 {
 	kBluetoothHCILoopbackModeOff		= 0x00,
 	kBluetoothHCILoopbackModeLocal		= 0x01,
 	kBluetoothHCILoopbackModeRemote		= 0x02
 };
-
-typedef UInt32 BluetoothHCIOperationID;
-typedef UInt32 BluetoothHCIEventID;
-typedef UInt32 BluetoothHCIDataID;
-typedef UInt32 BluetoothHCISignalID;
-typedef UInt32 BluetoothHCITransportID;
-typedef UInt32 BluetoothHCITransportCommandID;
-typedef UInt32 BluetoothHCIRequestID;
+		
+typedef struct BluetoothReadClockInfo BluetoothReadClockInfo;
+struct BluetoothReadClockInfo
+{
+	BluetoothConnectionHandle	handle;
+	uint32_t					clock;
+	uint16_t					accuracy;			
+};
+        
+typedef struct BluetoothHCIEventFlowSpecificationData BluetoothHCIEventFlowSpecificationData;
+struct BluetoothHCIEventFlowSpecificationData
+{
+    BluetoothConnectionHandle					connectionHandle;
+    uint8_t										flags;
+    uint8_t										flowDirection;
+    uint8_t										serviceType;
+    uint32_t									tokenRate;
+    uint32_t									tokenBucketSize;
+    uint32_t									peakBandwidth;
+    uint32_t									accessLatency;
+};        
+                
+typedef uint32_t BluetoothHCIOperationID;
+typedef uint32_t BluetoothHCIEventID;
+typedef uint32_t BluetoothHCIDataID;
+typedef uint32_t BluetoothHCISignalID;
+typedef uint32_t BluetoothHCITransportID;
+typedef uint32_t BluetoothHCITransportCommandID;
+typedef uint32_t BluetoothHCIRequestID;
 		
 
 // Version Information
@@ -1072,8 +1276,8 @@ struct	BluetoothHCIVersionInfo
 	
 	// Local information only
 	
-	UInt8		hciVersion;
-	UInt16		hciRevision;
+	uint8_t						hciVersion;
+	uint16_t					hciRevision;
 };
 
 // HCI buffer sizes.
@@ -1081,15 +1285,22 @@ struct	BluetoothHCIVersionInfo
 typedef struct	BluetoothHCIBufferSize		BluetoothHCIBufferSize;
 struct	BluetoothHCIBufferSize
 {
-	UInt16	ACLDataPacketLength;
-	UInt8	SCODataPacketLength;
-	UInt16	totalNumACLDataPackets;
-	UInt16	totalNumSCODataPackets;
+	uint16_t	ACLDataPacketLength;
+	uint8_t		SCODataPacketLength;
+	uint16_t	totalNumACLDataPackets;
+	uint16_t	totalNumSCODataPackets;
+};
+
+typedef struct	BluetoothHCILEBufferSize	BluetoothHCILEBufferSize;
+struct	BluetoothHCILEBufferSize
+{
+	uint16_t	ACLDataPacketLength;
+	uint8_t		totalNumACLDataPackets;
 };
 
 // Timeouts
-typedef UInt16	BluetoothHCIConnectionAcceptTimeout;
-typedef UInt16	BluetoothHCIPageTimeout;
+typedef uint16_t	BluetoothHCIConnectionAcceptTimeout;
+typedef uint16_t	BluetoothHCIPageTimeout;
 enum BluetoothHCITimeoutValues
 {
 	kDefaultPageTimeout			= 0x2000,
@@ -1099,16 +1310,16 @@ enum BluetoothHCITimeoutValues
 
 
 // Link Keys
-typedef UInt16	BluetoothHCINumLinkKeysDeleted;
-typedef UInt8	BluetoothHCINumLinkKeysToWrite;
-typedef UInt8	BluetoothHCIDeleteStoredLinkKeyFlag;
+typedef uint16_t	BluetoothHCINumLinkKeysDeleted;
+typedef uint8_t	BluetoothHCINumLinkKeysToWrite;
+typedef uint8_t	BluetoothHCIDeleteStoredLinkKeyFlag;
 enum BluetoothHCIDeleteStoredLinkKeyFlags
 {
-	kDeleteKeyForSpecifiedDeviceOnly		= 0x00,
-	kDeleteAllStoredLinkKeys				= 0x01,
+	kDeleteKeyForSpecifiedDeviceOnly			= 0x00,
+	kDeleteAllStoredLinkKeys					= 0x01,
 };
 
-typedef UInt8	BluetoothHCIReadStoredLinkKeysFlag;
+typedef uint8_t	BluetoothHCIReadStoredLinkKeysFlag;
 enum BluetoothHCIReadStoredLinkKeysFlags
 {
 	kReturnLinkKeyForSpecifiedDeviceOnly		= 0x00,
@@ -1118,14 +1329,14 @@ enum BluetoothHCIReadStoredLinkKeysFlags
 typedef struct	BluetoothHCIStoredLinkKeysInfo	BluetoothHCIStoredLinkKeysInfo;
 struct BluetoothHCIStoredLinkKeysInfo
 {
-	UInt16	numLinkKeysRead;
-	UInt16	maxNumLinkKeysAllowedInDevice;
+	uint16_t	numLinkKeysRead;
+	uint16_t	maxNumLinkKeysAllowedInDevice;
 };
 
 
 // Page Scan
 
-typedef UInt8	BluetoothHCIPageScanMode;
+typedef uint8_t	BluetoothHCIPageScanMode;
 enum BluetoothHCIPageScanModes
 {
 	kMandatoryPageScanMode		= 0x00,
@@ -1134,7 +1345,7 @@ enum BluetoothHCIPageScanModes
 	kOptionalPageScanMode3		= 0x03,
 };
 
-typedef UInt8	BluetoothHCIPageScanPeriodMode;
+typedef uint8_t	BluetoothHCIPageScanPeriodMode;
 enum BluetoothHCIPageScanPeriodModes
 {
 	kP0Mode						= 0x00,
@@ -1142,7 +1353,7 @@ enum BluetoothHCIPageScanPeriodModes
 	kP2Mode						= 0x02,
 };
 
-typedef UInt8	BluetoothHCIPageScanEnableState;
+typedef uint8_t	BluetoothHCIPageScanEnableState;
 enum BluetoothHCIPageScanEnableStates
 {
 	kNoScansEnabled							= 0x00,
@@ -1154,17 +1365,17 @@ enum BluetoothHCIPageScanEnableStates
 typedef struct	BluetoothHCIScanActivity	BluetoothHCIScanActivity;
 struct BluetoothHCIScanActivity
 {
-	UInt16 	scanInterval;
-	UInt16	scanWindow;
+	uint16_t 	scanInterval;
+	uint16_t	scanWindow;
 };
 
 typedef struct	BluetoothHCIInquiryAccessCode	BluetoothHCIInquiryAccessCode;
 struct BluetoothHCIInquiryAccessCode
 {
-	UInt8 	data[3];
+	uint8_t 	data[3];
 };
 
-typedef UInt8 BluetoothHCIInquiryAccessCodeCount;
+typedef uint8_t BluetoothHCIInquiryAccessCodeCount;
 typedef struct	BluetoothHCICurrentInquiryAccessCodes	BluetoothHCICurrentInquiryAccessCodes;
 struct BluetoothHCICurrentInquiryAccessCodes
 {
@@ -1176,10 +1387,10 @@ typedef	struct BluetoothHCILinkSupervisionTimeout	BluetoothHCILinkSupervisionTim
 struct BluetoothHCILinkSupervisionTimeout
 {
 	BluetoothConnectionHandle 	handle;
-	UInt16						timeout;
+	uint16_t					timeout;
 };
 
-typedef UInt8 BluetoothHCIFlowControlState;
+typedef uint8_t BluetoothHCIFlowControlState;
 enum BluetoothHCISCOFlowControlStates
 {
 	kSCOFlowControlDisabled		= 0x00,
@@ -1195,14 +1406,14 @@ enum BluetoothHCIGeneralFlowControlStates
 };		
 		
 typedef SInt8 BluetoothHCITransmitPowerLevel;
-typedef UInt8 BluetoothHCITransmitPowerLevelType;
+typedef uint8_t BluetoothHCITransmitPowerLevelType;
 enum BluetoothHCITransmitReadPowerLevelTypes
 {
 	kReadCurrentTransmitPowerLevel	= 0x00,
 	kReadMaximumTransmitPowerLevel	= 0x01,
 };
 
-typedef UInt8	BluetoothHCIAFHChannelAssessmentMode;	
+typedef uint8_t	BluetoothHCIAFHChannelAssessmentMode;	
 enum BluetoothHCIAFHChannelAssessmentModes
 {
 	kAFHChannelAssessmentModeDisabled		= 0x00,
@@ -1217,8 +1428,8 @@ struct BluetoothHCITransmitPowerLevelInfo
 	BluetoothHCITransmitPowerLevel	level; // Range: -70 <= N <= 20 (units are dBm)
 };
 
-typedef UInt8	BluetoothHCINumBroadcastRetransmissions;
-typedef UInt8	BluetoothHCIHoldModeActivity;
+typedef uint8_t	BluetoothHCINumBroadcastRetransmissions;
+typedef uint8_t	BluetoothHCIHoldModeActivity;
 enum BluetoothHCIHoldModeActivityStates
 {
 	kMaintainCurrentPowerState		= 0x00,
@@ -1227,14 +1438,14 @@ enum BluetoothHCIHoldModeActivityStates
 	kSuspendPeriodicInquiries		= 0x03,
 };
 
-typedef UInt8 BluetoothHCIAuthenticationEnable;
+typedef uint8_t BluetoothHCIAuthenticationEnable;
 enum BluetoothHCIAuthentionEnableModes
 {
 	kAuthenticationDisabled			= 0x00,
 	kAuthenticationEnabled			= 0x01,
 };
 
-typedef UInt8	BluetoothHCIEncryptionMode;
+typedef uint8_t	BluetoothHCIEncryptionMode;
 enum BluetoothHCIEncryptionModes
 {
 	kEncryptionDisabled									= 0x00,		// Default.
@@ -1242,7 +1453,7 @@ enum BluetoothHCIEncryptionModes
 	kEncryptionForBothPointToPointAndBroadcastPackets	= 0x02,
 };
 
-typedef UInt16	BluetoothHCIAutomaticFlushTimeout;
+typedef uint16_t	BluetoothHCIAutomaticFlushTimeout;
 typedef struct	BluetoothHCIAutomaticFlushTimeoutInfo	BluetoothHCIAutomaticFlushTimeoutInfo;
 struct BluetoothHCIAutomaticFlushTimeoutInfo
 {
@@ -1255,11 +1466,16 @@ typedef struct	BluetoothTransportInfo 		BluetoothTransportInfo;
 typedef 		BluetoothTransportInfo*		BluetoothTransportInfoPtr;
 struct			BluetoothTransportInfo
 {
-	UInt32	productID;
-	UInt32	vendorID;
-	UInt32	type;
-	char	productName[kInfoStringMaxLength];
-	char	vendorName[kInfoStringMaxLength];
+	uint32_t	productID;
+	uint32_t	vendorID;
+	uint32_t	type;
+	char		productName[kInfoStringMaxLength];
+	char		vendorName[kInfoStringMaxLength];
+	
+	uint64_t	totalDataBytesSent;
+	uint64_t	totalSCOBytesSent;
+	uint64_t	totalDataBytesReceived;
+	uint64_t	totalSCOBytesReceived;
 };
 
 enum BluetoothTransportTypes
@@ -1299,7 +1515,7 @@ struct	BluetoothHCIInquiryWithRSSIResult
 {
 	BluetoothDeviceAddress				deviceAddress;
 	BluetoothPageScanRepetitionMode		pageScanRepetitionMode;
-	UInt8								reserved;
+	uint8_t								reserved;
 	BluetoothClassOfDevice				classOfDevice;
 	BluetoothClockOffset				clockOffset;
 	BluetoothHCIRSSIValue				RSSIValue;
@@ -1314,14 +1530,14 @@ struct	BluetoothHCIInquiryWithRSSIResults
 
 //Inquiries with 'Extended Inquiry Response' (v2.1 specification)
 
-typedef UInt8	BluetoothHCIFECRequired;
+typedef uint8_t	BluetoothHCIFECRequired;
 enum BluetoothHCIFECRequiredValues
 {
 	kBluetoothHCIFECRequired		= 0x00,
 	kBluetoothHCIFECNotRequired		= 0x01
 };
 
-typedef	UInt8	BluetoothHCIInquiryMode;
+typedef	uint8_t	BluetoothHCIInquiryMode;
 enum BluetoothHCIInquiryModes
 {
 	kBluetoothHCIInquiryModeResultFormatStandard								=	0x00,
@@ -1329,12 +1545,22 @@ enum BluetoothHCIInquiryModes
 	kBluetoothHCIInquiryModeResultFormatWithRSSIOrExtendedInquiryResultFormat	=	0x02
 };
 
-typedef	UInt8	BluetoothHCIExtendedInquiryResponseDataType;
+typedef uint8_t	BluetoothHCIInquiryScanType;
+enum BluetoothHCIInquiryScanTypes
+{
+	kBluetoothHCIInquiryScanTypeStandard		= 0x00,
+	kBluetoothHCIInquiryScanTypeInterlaced		= 0x01,
+	
+	kBluetoothHCIInquiryScanTypeReservedStart	= 0x02,
+	kBluetoothHCIInquiryScanTypeReservedEnd		= 0xFF
+};						
+
+typedef	uint8_t	BluetoothHCIExtendedInquiryResponseDataType;
 
 typedef struct	BluetoothHCIExtendedInquiryResponse		BluetoothHCIExtendedInquiryResponse;	/* Extended Inquiry Response [EIR] data, consisting of a sequence of data structures in this format: [length(1byte)][data type(1byte)][data(e.g. device name)] */
 struct	BluetoothHCIExtendedInquiryResponse
 {
-	UInt8		data[ 240 ];
+	uint8_t		data[ 240 ];
 };
 
 typedef struct	BluetoothHCIReadExtendedInquiryResponseResults	BluetoothHCIReadExtendedInquiryResponseResults;
@@ -1347,36 +1573,44 @@ struct	BluetoothHCIReadExtendedInquiryResponseResults
 typedef struct	BluetoothHCIExtendedInquiryResult	BluetoothHCIExtendedInquiryResult;
 struct	BluetoothHCIExtendedInquiryResult
 {
-	UInt8								numberOfReponses;			/* always a value of 1 */
+	uint8_t								numberOfReponses;			/* always a value of 1 */
 	BluetoothDeviceAddress				deviceAddress;
 	BluetoothPageScanRepetitionMode		pageScanRepetitionMode;
-	UInt8								reserved;
+	uint8_t								reserved;
 	BluetoothClassOfDevice				classOfDevice;
 	BluetoothClockOffset				clockOffset;
 	BluetoothHCIRSSIValue				RSSIValue;
 	BluetoothHCIExtendedInquiryResponse	extendedInquiryResponse;
 };
 
+typedef struct BluetoothHCIReadLMPHandleResults	BluetoothHCIReadLMPHandleResults;
+struct BluetoothHCIReadLMPHandleResults
+{
+	BluetoothConnectionHandle		handle;
+	BluetoothLMPHandle				lmp_handle;
+	uint32_t						reserved;
+};		
+						
 // 'Simple Pairing' (v2.1 specification)
 
-typedef	UInt8	BluetoothHCISimplePairingMode;
+typedef	uint8_t	BluetoothHCISimplePairingMode;
 enum BluetoothHCISimplePairingModes
 {
-	kBluetoothHCISimplePairingModeNotSet											=	0x00,
-	kBluetoothHCISimplePairingModeEnabled											=	0x01
+	kBluetoothHCISimplePairingModeNotSet									=	0x00,
+	kBluetoothHCISimplePairingModeEnabled									=	0x01
 };
 
-typedef	UInt8	BluetoothSimplePairingDebugMode;
+typedef	uint8_t	BluetoothSimplePairingDebugMode;
 enum BluetoothSimplePairingDebugModes
 {
-	kBluetoothHCISimplePairingDebugModeDisabled										=	0x00,
-	kBluetoothHCISimplePairingDebugModeEnabled										=	0x01
+	kBluetoothHCISimplePairingDebugModeDisabled								=	0x00,
+	kBluetoothHCISimplePairingDebugModeEnabled								=	0x01
 };
 
 typedef struct	BluetoothHCISimplePairingOOBData		BluetoothHCISimplePairingOOBData;
 struct BluetoothHCISimplePairingOOBData
 {
-	UInt8		data[ 16 ];
+	uint8_t		data[ 16 ];
 };
 
 typedef struct BluetoothHCIReadLocalOOBDataResults BluetoothHCIReadLocalOOBDataResults;
@@ -1386,7 +1620,7 @@ struct	BluetoothHCIReadLocalOOBDataResults
 	BluetoothHCISimplePairingOOBData		randomizer;
 };
 
-typedef UInt8	BluetoothIOCapability;
+typedef uint8_t	BluetoothIOCapability;
 enum BluetoothIOCapabilities
 {
 	kBluetoothCapabilityTypeDisplayOnly			= 0x00,
@@ -1395,18 +1629,18 @@ enum BluetoothIOCapabilities
 	kBluetoothCapabilityTypeNoInputNoOutput		= 0x03
 };
 
-typedef UInt8	BluetoothOOBDataPresence;
+typedef uint8_t	BluetoothOOBDataPresence;
 enum BluetoothOOBDataPresenceValues
 {
 	kBluetoothOOBAuthenticationDataNotPresent				= 0x00,
 	kBluetoothOOBAuthenticationDataFromRemoteDevicePresent	= 0x01
 };
 
-typedef UInt8	BluetoothAuthenticationRequirements;
+typedef uint8_t	BluetoothAuthenticationRequirements;
 enum BluetoothAuthenticationRequirementsValues
 {
-	kBluetoothAuthenticationRequirementsMITMProtectionNotRequired	= 0x00,		/* Numeric comparison with automatic accept allowed */
-	kBluetoothAuthenticationRequirementsMITMProtectionRequired		= 0x01,		/* Refer to BluetoothIOCapabilities to determine authentication procedure */
+	kBluetoothAuthenticationRequirementsMITMProtectionNotRequired					= 0x00,		/* Numeric comparison with automatic accept allowed */
+	kBluetoothAuthenticationRequirementsMITMProtectionRequired						= 0x01,		/* Refer to BluetoothIOCapabilities to determine authentication procedure */
 	kBluetoothAuthenticationRequirementsMITMProtectionNotRequiredNoBonding			= 0x00,
 	kBluetoothAuthenticationRequirementsMITMProtectionRequiredNoBonding				= 0x01,
 	kBluetoothAuthenticationRequirementsMITMProtectionNotRequiredDedicatedBonding	= 0x02,
@@ -1424,7 +1658,7 @@ struct BluetoothIOCapabilityResponse
 	BluetoothAuthenticationRequirements	authenticationRequirements;
 };
 
-typedef UInt32	BluetoothPasskey;
+typedef uint32_t	BluetoothPasskey;
 
 typedef struct BluetoothUserPasskeyNotification	BluetoothUserPasskeyNotification;
 struct BluetoothUserPasskeyNotification
@@ -1433,7 +1667,7 @@ struct BluetoothUserPasskeyNotification
 	BluetoothPasskey					passkey;				/* passkey for display. valid values are 000000 - 999999 */
 };
 
-typedef UInt8	BluetoothKeypressNotificationType;
+typedef uint8_t	BluetoothKeypressNotificationType;
 enum BluetoothKeypressNotificationTypes
 {
 	kBluetoothKeypressNotificationTypePasskeyEntryStarted		= 0,
@@ -1450,6 +1684,13 @@ struct BluetoothKeypressNotification
 	BluetoothKeypressNotificationType	notificationType;
 };
 		
+typedef struct BluetoothRemoteHostSupportedFeaturesNotification	BluetoothRemoteHostSupportedFeaturesNotification;
+struct BluetoothRemoteHostSupportedFeaturesNotification
+{
+	BluetoothDeviceAddress				deviceAddress;
+	BluetoothHCISupportedFeatures		hostSupportedFeatures;
+};		
+		
 typedef SInt8	TransmissionPower;
 
 typedef struct BluetoothAFHHostChannelClassification	BluetoothAFHHostChannelClassification;
@@ -1458,20 +1699,20 @@ struct BluetoothAFHHostChannelClassification
 	uint8_t		data[ 10 ];			/* 79 bits meaningful */
 };
 
-typedef UInt8	BluetoothAFHMode;
+typedef uint8_t	BluetoothAFHMode;
 typedef struct	BluetoothAFHResults					BluetoothAFHResults;
 struct BluetoothAFHResults
 {
 	BluetoothConnectionHandle	handle;
 	BluetoothAFHMode			mode;
-	UInt8						afhMap[10];
+	uint8_t						afhMap[10];
 };
 
 #endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
 
-typedef UInt32	BluetoothNumericValue;
+typedef uint32_t	BluetoothNumericValue;
 
 typedef struct BluetoothUserConfirmationRequest	BluetoothUserConfirmationRequest;
 struct BluetoothUserConfirmationRequest
@@ -1506,8 +1747,8 @@ enum
 	kBluetoothHCIMaxDataPacketSize			= kBluetoothHCIDataPacketHeaderSize + kBluetoothHCIDataPacketMaxDataSize
 };
 
-typedef UInt8		BluetoothHCIEventCode;
-typedef UInt8		BluetoothLinkType;
+typedef uint8_t		BluetoothHCIEventCode;
+typedef uint8_t		BluetoothLinkType;
 enum BluetoothLinkTypes
 {
 	kBluetoothSCOConnection		= 0,
@@ -1516,9 +1757,53 @@ enum BluetoothLinkTypes
     kBluetoothLinkTypeNone		= 0xff
 };
 
-typedef UInt16		BluetoothHCIVoiceSetting; // 10 bits meaningful
-typedef UInt8		BluetoothHCISupportedIAC;
+typedef uint16_t		BluetoothHCIContentFormat; // 10 bits meaningful
 
+typedef uint16_t		BluetoothHCIVoiceSetting; // 10 bits meaningful
+enum
+{
+	// Input Coding
+	kBluetoothVoiceSettingInputCodingMask					= 0x300,
+	kBluetoothVoiceSettingInputCodingLinearInputCoding		= 0x000,
+	kBluetoothVoiceSettingInputCodingULawInputCoding		= 0x100,
+	kBluetoothVoiceSettingInputCodingALawInputCoding		= 0x200,
+};
+
+enum
+{
+	// Input Data Format
+	kBluetoothVoiceSettingInputDataFormatMask				= 0x0C0,
+	kBluetoothVoiceSettingInputDataFormat1sComplement		= 0x000,
+	kBluetoothVoiceSettingInputDataFormat2sComplement		= 0x040,
+	kBluetoothVoiceSettingInputDataFormatSignMagnitude		= 0x080,
+	kBluetoothVoiceSettingInputDataFormatUnsigned			= 0x0C0,
+};
+
+enum
+{
+	// Input Sample Size
+	kBluetoothVoiceSettingInputSampleSizeMask				= 0x020,
+	kBluetoothVoiceSettingInputSampleSize8Bit				= 0x000,
+	kBluetoothVoiceSettingInputSampleSize16Bit				= 0x020,
+};
+
+enum
+{
+	// Linear PCM Bit Position
+	kBluetoothVoiceSettingPCMBitPositionMask				= 0x01C,
+};
+
+enum
+{
+	// Air Coding Format
+	kBluetoothVoiceSettingAirCodingFormatMask				= 0x003,
+	kBluetoothVoiceSettingAirCodingFormatCVSD				= 0x000,
+	kBluetoothVoiceSettingAirCodingFormatULaw				= 0x001,
+	kBluetoothVoiceSettingAirCodingFormatALaw				= 0x002,
+	kBluetoothVoiceSettingAirCodingFormatTransparentData	= 0x003,
+};
+
+typedef uint8_t		BluetoothHCISupportedIAC;
 typedef uint32_t	BluetoothHCITransmitBandwidth;
 typedef uint32_t	BluetoothHCIReceiveBandwidth;
 typedef uint16_t	BluetoothHCIMaxLatency;
@@ -1577,8 +1862,8 @@ struct			BluetoothHCIEventSynchronousConnectionChangedResults
 	uint16_t							transmitPacketLength;
 };
 
-typedef UInt8	BluetoothHCIStatus;
-typedef UInt8	BluetoothHCIEventStatus;
+typedef uint8_t	BluetoothHCIStatus;
+typedef uint8_t	BluetoothHCIEventStatus;
 
 // Events.
 
@@ -1638,10 +1923,36 @@ enum
 	kBluetoothHCIEventSimplePairingComplete								= 0x36,
 	kBluetoothHCIEventLinkSupervisionTimeoutChanged						= 0x38,
 	kBluetoothHCIEventEnhancedFlushComplete								= 0x39,
-	kBluetoothHCIEventSniffRequest										= 0x3A,
 	kBluetoothHCIEventUserPasskeyNotification							= 0x3B,
 	kBluetoothHCIEventKeypressNotification								= 0x3C,
 	kBluetoothHCIEventRemoteHostSupportedFeaturesNotification			= 0x3D,
+	
+	// [v4.0] (All LE Events come through this event, and the first following byte is the subevent
+	
+	kBluetoothHCIEventLEMetaEvent										= 0x3E,
+		kBluetoothHCISubEventLEConnectionComplete						= 0x01,
+		kBluetoothHCISubEventLEAdvertisingReport						= 0x02,
+		kBluetoothHCISubEventLEConnectionUpdateComplete					= 0x03,
+		kBluetoothHCISubEventLEReadRemoteUsedFeaturesComplete			= 0x04,
+		kBluetoothHCISubEventLELongTermKeyRequest						= 0x05,
+	
+	// [v3.0]
+	
+	kBluetoothHCIEventPhysicalLinkComplete								= 0x40,
+	kBluetoothHCIEventChannelSelected									= 0x41,
+	kBluetoothHCIEventDisconnectionPhysicalLinkComplete					= 0x42,
+	kBluetoothHCIEventPhysicalLinkLossEarlyWarning						= 0x43,
+	kBluetoothHCIEventPhysicalLinkRecovery								= 0x44,
+	kBluetoothHCIEventLogicalLinkComplete								= 0x45,
+	kBluetoothHCIEventDisconnectionLogicalLinkComplete					= 0x46,
+	kBluetoothHCIEventFlowSpecModifyComplete							= 0x47,
+	kBluetoothHCIEventNumberOfCompletedDataBlocks						= 0x48,
+	kBluetoothHCIEventShortRangeModeChangeComplete						= 0x4C,
+	kBluetoothHCIEventAMPStatusChange									= 0x4D,
+	kBluetoothHCIEventAMPStartTest										= 0x49,
+	kBluetoothHCIEventAMPTestEnd										= 0x4A,
+	kBluetoothHCIEventAMPReceiverReport									= 0x4B,
+	
 	
 	kBluetoothHCIEventLogoTesting										= 0xFE,
 	kBluetoothHCIEventVendorSpecific									= 0xFF
@@ -1655,34 +1966,41 @@ enum
 
 typedef uint64_t	BluetoothHCIEventMask;
 
-#define	kBluetoothHCIEventMaskDefault64Bit								0x00001FFFFFFFFFFFLL
-#define	kBluetoothHCIEventMaskAll64Bit									0xFFFFFFFFFFFFFFFFLL
+#define kBluetoothHCIEventMaskLEDefault64Bit									0x000000000000001FLL
+#define	kBluetoothHCIEventMaskDefault64Bit										0x00001FFFFFFFFFFFLL
+#define	kBluetoothHCIEventMaskAll64Bit											0xFFFFFFFFFFFFFFFFLL
 
 	// [v1.2]
 
-#define	kBluetoothHCIEventMaskFlowSpecificationCompleteEvent			0x0000000100000000LL
-#define	kBluetoothHCIEventMaskInquiryResultWithRSSIEvent				0x0000000200000000LL
-#define	kBluetoothHCIEventMaskReadRemoteExtendedFeaturesCompleteEvent	0x0000000400000000LL
-#define	kBluetoothHCIEventMaskSynchronousConnectionCompleteEvent		0x0000080000000000LL
-#define	kBluetoothHCIEventMaskSynchronousConnectionChangedEvent			0x0000100000000000LL
+#define	kBluetoothHCIEventMaskFlowSpecificationCompleteEvent					0x0000000100000000LL
+#define	kBluetoothHCIEventMaskInquiryResultWithRSSIEvent						0x0000000200000000LL
+#define	kBluetoothHCIEventMaskReadRemoteExtendedFeaturesCompleteEvent			0x0000000400000000LL
+#define	kBluetoothHCIEventMaskSynchronousConnectionCompleteEvent				0x0000080000000000LL
+#define	kBluetoothHCIEventMaskSynchronousConnectionChangedEvent					0x0000100000000000LL
 
 	// [v2.1]
 
-#define	kBluetoothHCIEventMaskSniffSubstrateEvent						0x0000200000000000LL
-#define	kBluetoothHCIEventMaskExtendedInquiryResultEvent				0x0000400000000000LL
-#define	kBluetoothHCIEventMaskLinkSupervisionTimeoutChangedEvent		0x0080000000000000LL
-#define	kBluetoothHCIEventMaskEnhancedFlushCompleteEvent				0x0100000000000000LL
+#define	kBluetoothHCIEventMaskSniffSubratingEvent								0x0000200000000000LL
+#define	kBluetoothHCIEventMaskExtendedInquiryResultEvent						0x0000400000000000LL
+#define kBluetoothHCIEventMaskEncryptionChangeEvent								0x0000000000000080LL
+#define kBluetoothHCIEventMaskEncryptionKeyRefreshCompleteEvent					0x0000800000000000LL
+#define	kBluetoothHCIEventMaskLinkSupervisionTimeoutChangedEvent				0x0080000000000000LL
+#define	kBluetoothHCIEventMaskEnhancedFlushCompleteEvent						0x0100000000000000LL
 	
 	// [v2.1 Secure Simple Pairing]
 
-#define	kBluetoothHCIEventMaskIOCapabilityRequestEvent					0x0001000000000000LL
-#define	kBluetoothHCIEventMaskIOCapabilityRequestReplyEvent				0x0002000000000000LL
-#define	kBluetoothHCIEventMaskUserConfirmationRequestEvent				0x0004000000000000LL
-#define	kBluetoothHCIEventMaskUserPasskeyRequestEvent					0x0008000000000000LL
-#define	kBluetoothHCIEventMaskRemoteOOBDataRequestEvent					0x0010000000000000LL
-#define	kBluetoothHCIEventMaskSimplePairingCompleteEvent				0x0020000000000000LL
-#define	kBluetoothHCIEventMaskUserPasskeyNotificationEvent				0x0400000000000000LL
-#define	kBluetoothHCIEventMaskKeypressNotificationEvent					0x0800000000000000LL
+#define	kBluetoothHCIEventMaskIOCapabilityRequestEvent							0x0001000000000000LL
+#define	kBluetoothHCIEventMaskIOCapabilityRequestReplyEvent						0x0002000000000000LL
+#define	kBluetoothHCIEventMaskUserConfirmationRequestEvent						0x0004000000000000LL
+#define	kBluetoothHCIEventMaskUserPasskeyRequestEvent							0x0008000000000000LL
+#define	kBluetoothHCIEventMaskRemoteOOBDataRequestEvent							0x0010000000000000LL
+#define	kBluetoothHCIEventMaskSimplePairingCompleteEvent						0x0020000000000000LL
+#define kBluetoothHCIEvnetMaskLinkSupervisionTimeoutChangedEvent				0x0080000000000000LL
+#define kBluetoothHCIEvnetMaskEnhancedFlushCompleteEvent						0x0100000000000000LL
+#define	kBluetoothHCIEventMaskUserPasskeyNotificationEvent						0x0400000000000000LL
+#define	kBluetoothHCIEventMaskKeypressNotificationEvent							0x0800000000000000LL
+#define	kBluetoothHCIEventMaskRemoteHostSupportedFeaturesNotificationEvent		0x1000000000000000LL
+#define	kBluetoothHCIEventMaskLEMetaEvent										0x2000000000000000LL
 	
 enum
 {
@@ -1736,6 +2054,19 @@ struct			BluetoothHCIEventConnectionCompleteResults
 	BluetoothHCIEncryptionMode					encryptionMode;
 };
 
+typedef struct	BluetoothHCIEventLEConnectionCompleteResults		BluetoothHCIEventLEConnectionCompleteResults;
+struct			BluetoothHCIEventLEConnectionCompleteResults
+{
+	BluetoothConnectionHandle					connectionHandle;
+	uint8_t										role;
+	uint8_t										peerAddressType;
+	BluetoothDeviceAddress						peerAddress;
+	uint16_t									connInterval;
+	uint16_t									connLatency;
+	uint16_t									supervisionTimeout;
+	uint8_t										masterClockAccuracy;
+} __attribute__((packed));		
+		
 typedef struct	BluetoothHCIEventDisconnectionCompleteResults		BluetoothHCIEventDisconnectionCompleteResults;
 struct			BluetoothHCIEventDisconnectionCompleteResults
 {
@@ -1816,7 +2147,7 @@ struct			BluetoothHCIEventModeChangeResults
 typedef struct	BluetoothHCIEventReturnLinkKeysResults	BluetoothHCIEventReturnLinkKeysResults;
 struct			BluetoothHCIEventReturnLinkKeysResults
 {
-	UInt8										numLinkKeys;
+	uint8_t										numLinkKeys;
 	struct {
 		BluetoothDeviceAddress					deviceAddress;
 		BluetoothKey							linkKey;
@@ -1898,20 +2229,6 @@ struct			BluetoothHCIEventReadRemoteSupportedFeaturesResults
 };
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
-typedef struct	BluetoothHCIEventFlowSpecificationCompleteResults 	BluetoothHCIEventFlowSpecificationCompleteResults;
-struct			BluetoothHCIEventFlowSpecificationCompleteResults
-{
-	BluetoothHCIStatus							error;
-	BluetoothConnectionHandle					connectionHandle;
-	uint8_t										flags;
-	uint8_t										flowDirection;
-	uint8_t										serviceType;
-	uint32_t									tokenRate;
-	uint32_t									tokenBucketSize;
-	uint32_t									peakBandwidth;
-	uint32_t									accessLatency;
-};
-
 typedef struct	BluetoothHCIEventReadRemoteExtendedFeaturesResults 	BluetoothHCIEventReadRemoteExtendedFeaturesResults;
 struct			BluetoothHCIEventReadRemoteExtendedFeaturesResults
 {
@@ -1946,10 +2263,42 @@ struct			BluetoothHCIEventPageScanRepetitionModeChangeResults
 typedef struct	BluetoothHCIEventVendorSpecificResults 	BluetoothHCIEventVendorSpecificResults;
 struct			BluetoothHCIEventVendorSpecificResults
 {
-	UInt8								length;
-	UInt8								data[255];
+	uint8_t								length;
+	uint8_t								data[255];
 };
 
+typedef struct	BluetoothHCIEventEncryptionKeyRefreshCompleteResults		BluetoothHCIEventEncryptionKeyRefreshCompleteResults;
+struct			BluetoothHCIEventEncryptionKeyRefreshCompleteResults
+{
+	BluetoothConnectionHandle					connectionHandle;
+};
+
+typedef struct BluetoothHCIEventSniffSubratingResults BluetoothHCIEventSniffSubratingResults;
+struct BluetoothHCIEventSniffSubratingResults
+{
+	BluetoothConnectionHandle			connectionHandle;
+	uint16_t							maxTransmitLatency;
+	uint16_t							maxReceiveLatency;
+	uint16_t							minRemoteTimeout;
+	uint16_t							minLocalTimeout;			
+};
+	
+// LE Meta Events	
+typedef struct BluetoothHCIEventLEMetaResults BluetoothHCIEventLEMetaResults;
+struct BluetoothHCIEventLEMetaResults
+{
+	uint8_t		length;
+	uint8_t		data[255];
+};
+		
+typedef struct BluetoothHCIEventLELongTermKeyRequestResults BluetoothHCIEventLELongTermKeyRequestResults;
+struct BluetoothHCIEventLELongTermKeyRequestResults
+{
+	BluetoothConnectionHandle	connectionHandle;
+	uint8_t						randomNumber[8];
+	uint16_t					ediv;	
+};
+		
 #define kNoNotifyProc	NULL
 #define kNoUserRefCon	NULL
 
@@ -2021,8 +2370,16 @@ enum
 	kBluetoothHCIErrorRoleSwitchFailed									= 0x35,		// 1.2
 	kBluetoothHCIErrorExtendedInquiryResponseTooLarge					= 0x36, 	// 2.1
 	kBluetoothHCIErrorSecureSimplePairingNotSupportedByHost				= 0x37, 	// 2.1
+	kBluetoothHCIErrorHostBusyPairing                                   = 0x38,
+	kBluetoothHCIErrorConnectionRejectedDueToNoSuitableChannelFound		= 0x39,
+	kBluetoothHCIErrorControllerBusy                                    = 0x3A,
+	kBluetoothHCIErrorUnacceptableConnectionInterval                    = 0x3B,
+	kBluetoothHCIErrorDirectedAdvertisingTimeout                        = 0x3C,
+	kBluetoothHCIErrorConnectionTerminatedDueToMICFailure				= 0x3D,
+	kBluetoothHCIErrorConnectionFailedToBeEstablished                   = 0x3E,
+	kBluetoothHCIErrorMACConnectionFailed                               = 0x3F,
 	
-	kBluetoothHCIErrorMax												= 0x37
+	kBluetoothHCIErrorMax												= 0x3F
 };
 
 #if 0
@@ -2042,7 +2399,7 @@ typedef enum
 
 enum
 {
-        kBluetoothHCIErrorPowerIsOFF		= (kBluetoothHCIErrorMax + 1)
+	kBluetoothHCIErrorPowerIsOFF			= (kBluetoothHCIErrorMax + 1)
 };
 
 #if 0
@@ -2120,11 +2477,11 @@ enum
 //===========================================================================================================================
 #define kMaxChannelIDPerSide	31
 
-typedef UInt8	BluetoothRFCOMMChannelID;
+typedef uint8_t	BluetoothRFCOMMChannelID;
 
 #define	RFCOMM_CHANNEL_ID_IS_VALID( CHANNEL ) (( CHANNEL >= 1 ) && ( CHANNEL <= 30 ))
 
-typedef UInt16	BluetoothRFCOMMMTU;
+typedef uint16_t	BluetoothRFCOMMMTU;
 
 typedef enum BluetoothRFCOMMParityType
 {
@@ -2151,7 +2508,7 @@ typedef enum BluetoothRFCOMMLineStatus
 //	SDP
 //===========================================================================================================================
 
-typedef UInt8	BluetoothSDPPDUID;
+typedef uint8_t	BluetoothSDPPDUID;
 enum {
     kBluetoothSDPPDUIDReserved							= 0,
     kBluetoothSDPPDUIDErrorResponse						= 1,
@@ -2172,7 +2529,7 @@ enum {
                                     ( _pduID == kBluetoothSDPPDUIDServiceAttributeResponse ) || \
                                     ( _pduID == kBluetoothSDPPDUIDServiceSearchAttributeResponse ) )
 
-typedef UInt16	BluetoothSDPErrorCode;
+typedef uint16_t	BluetoothSDPErrorCode;
 enum {
     kBluetoothSDPErrorCodeSuccess						= 0x0000,
     kBluetoothSDPErrorCodeReserved						= 0x0000,
@@ -2187,9 +2544,9 @@ enum {
     kBluetoothSDPErrorCodeReservedEnd					= 0xFFFF
 };
 
-typedef UInt16	BluetoothSDPTransactionID;
+typedef uint16_t	BluetoothSDPTransactionID;
 
-typedef UInt32	BluetoothSDPServiceRecordHandle;
+typedef uint32_t	BluetoothSDPServiceRecordHandle;
 
 enum {
     kBluetoothSDPDataElementTypeNil						= 0,
@@ -2205,13 +2562,13 @@ enum {
     kBluetoothSDPDataElementTypeReservedEnd				= 31
 };
 
-typedef UInt16	BluetoothSDPUUID16;
-typedef UInt32	BluetoothSDPUUID32;
+typedef uint16_t	BluetoothSDPUUID16;
+typedef uint32_t	BluetoothSDPUUID32;
 
-typedef UInt8	BluetoothSDPDataElementTypeDescriptor;
-typedef UInt8	BluetoothSDPDataElementSizeDescriptor;
+typedef uint8_t		BluetoothSDPDataElementTypeDescriptor;
+typedef uint8_t		BluetoothSDPDataElementSizeDescriptor;
 
-typedef UInt16	BluetoothSDPServiceAttributeID;
+typedef uint16_t	BluetoothSDPServiceAttributeID;
 
 #ifdef	__cplusplus
 	}

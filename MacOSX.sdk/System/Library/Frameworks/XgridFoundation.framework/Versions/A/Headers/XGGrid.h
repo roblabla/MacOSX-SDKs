@@ -34,21 +34,21 @@
     @abstract Returns the name associated with the grid.
     @result A string.
 */
-- (NSString *)name;
+- (NSString *)name NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method isDefault
 	@abstract Returns YES if the receiver is the default grid.
 	@result YES or NO.
 */
-- (BOOL)isDefault;
+- (BOOL)isDefault NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method jobs
 	@abstract Returns an array of the jobs associated with the receiver.
 	@result An array of XGJobs.
 */
-- (NSArray *)jobs;
+- (NSArray *)jobs NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method jobForIdentifier:
@@ -57,6 +57,6 @@
 	@param identifier The identifier of the job.
 	@result An XGJob instance, or nil.
 */
-- (XGJob *)jobForIdentifier:(NSString *)identifier;
+- (XGJob *)jobForIdentifier:(NSString *)identifier NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end

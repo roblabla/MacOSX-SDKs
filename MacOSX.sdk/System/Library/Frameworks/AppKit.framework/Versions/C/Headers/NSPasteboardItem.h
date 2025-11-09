@@ -1,7 +1,7 @@
 /*
 	NSPasteboardItem.h
 	Application Kit
-	Copyright (c) 2008-2009, Apple Inc.
+	Copyright (c) 2008-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,7 +10,6 @@
 #import <AppKit/NSPasteboard.h>
 #import <CoreFoundation/CFBase.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 
 @class NSPasteboard;
 @protocol NSPasteboardItemDataProvider;
@@ -32,6 +31,7 @@ The pasteboard item API is very similar to the NSPasteboard API for a single ite
 
 */
 
+NS_CLASS_AVAILABLE(10_6, NA)
 @interface NSPasteboardItem : NSObject <NSPasteboardWriting, NSPasteboardReading> {
     @private
     NSPasteboard    *_pasteboard;
@@ -82,4 +82,3 @@ The pasteboard item API is very similar to the NSPasteboard API for a single ite
 
 @end
 
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */

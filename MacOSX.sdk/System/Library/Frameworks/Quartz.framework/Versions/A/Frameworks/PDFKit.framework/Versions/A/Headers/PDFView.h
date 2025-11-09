@@ -36,6 +36,19 @@ enum
     kPDFPopupArea = 128
 };
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+
+// Interpolation quality.
+typedef NSInteger PDFInterpolationQuality;
+enum
+{
+    kPDFInterpolationQualityNone = 0, 
+    kPDFInterpolationQualityLow = 1, 
+    kPDFInterpolationQualityHigh = 2
+};
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+
 
 // Notifications.
 extern NSString *PDFViewDocumentChangedNotification;	// Notification when a new document is associated with view.
@@ -144,6 +157,14 @@ extern NSString *PDFViewDisplayBoxChangedNotification;	// Notification when the 
 - (void) setBackgroundColor: (NSColor *) newColor;
 - (NSColor *) backgroundColor;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+
+// Allows setting the interpolation quality for images drawn into the PDFView context. 
+- (void) setInterpolationQuality: (PDFInterpolationQuality) quality;
+- (PDFInterpolationQuality) interpolationQuality;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+
 // -------- delgate
 
 - (void) setDelegate: (id) anObject;
@@ -184,7 +205,7 @@ extern NSString *PDFViewDisplayBoxChangedNotification;	// Notification when the 
 // -------- selection
 
 // Returns actual instance of the current PDFSelection object.  If you wish to modify this, you should make a copy of 
-// the selection returned and modify that instead. Method may return NULL if there is no selection.
+// the selection returned and modify that instead. Method may return nil if there is no selection.
 - (PDFSelection *) currentSelection;
 
 // Set current selection to selection.  The view will redraw as necessary. The view will not scroll.
@@ -199,7 +220,7 @@ extern NSString *PDFViewDisplayBoxChangedNotification;	// Notification when the 
 
 #endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
-// Equivalent to -[PDFView setCurrentSelection: NULL].
+// Equivalent to -[PDFView setCurrentSelection: nil].
 - (void) clearSelection;
 - (IBAction) selectAll: (id) sender;
 
@@ -210,7 +231,7 @@ extern NSString *PDFViewDisplayBoxChangedNotification;	// Notification when the 
 
 // The following calls allow you to associate an array of PDFSelections with a PDFView.  Unlike the user selection 
 // (above), these selections do not go away when the user clicks in the PDFView, etc.  You must explicitly remove them 
-// by passing NULL to -[setHighlightedSelections:].  These methods allow you to highlight text perhaps to indicate 
+// by passing nil to -[setHighlightedSelections:].  These methods allow you to highlight text perhaps to indicate 
 // matches from a text search. To avoid confusion you should probably make sure the PDFSelections passed in are a 
 // different color from the user's default text selection color.
 - (void) setHighlightedSelections: (NSArray *) selections;
@@ -263,7 +284,7 @@ extern NSString *PDFViewDisplayBoxChangedNotification;	// Notification when the 
 
 // -------- conversion
 
-// Useful for subclasses. Given a point in view coordinates, returns the page at that point. May return NULL if no page 
+// Useful for subclasses. Given a point in view coordinates, returns the page at that point. May return nil if no page 
 // at point and nearest is NO.
 - (PDFPage *) pageForPoint: (NSPoint) point nearest: (BOOL) nearest;
 
@@ -335,8 +356,8 @@ extern NSString *PDFViewDisplayBoxChangedNotification;	// Notification when the 
 // default implementation calls [[NSWorkspace sharedWorkspace] openURL: url].
 - (void) PDFViewWillClickOnLink: (PDFView *) sender withURL: (NSURL *) url;
 
-// A delegate providing this method can override the job title when PDFVierw is printed. The default implementation 
-// uses the string, if any, asscoiated with the "Title" key from the view's PDFDocument attribute dictionary. Failing 
+// A delegate providing this method can override the job title when PDFView is printed. The default implementation 
+// uses the string, if any, associated with the "Title" key from the view's PDFDocument attribute dictionary. Failing 
 // that, it uses the last path component if the PDFDocument is URL-based.
 - (NSString *) PDFViewPrintJobTitle: (PDFView *) sender;
 

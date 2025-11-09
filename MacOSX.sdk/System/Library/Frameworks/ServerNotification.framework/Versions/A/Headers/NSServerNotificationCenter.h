@@ -1,11 +1,11 @@
 /*	NSServerNotificationCenter.h
- Copyright (c) 2008-2009, Apple Inc. All rights reserved.
+ Copyright (c) 2008-2011 Apple Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
 
 @interface NSServerNotificationCenter : NSNotificationCenter {
-	void* _internal;
+	__strong void * _internal;
 }
 
 // Get a notification center for a particular notification server (initiates a connection to that server)

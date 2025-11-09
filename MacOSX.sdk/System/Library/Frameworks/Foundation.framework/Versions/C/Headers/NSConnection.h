@@ -1,5 +1,5 @@
 /*	NSConnection.h
-	Copyright (c) 1989-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1989-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -25,8 +25,8 @@
     unsigned char wantsInvalid;
     unsigned char authGen:1;
     unsigned char authCheck:1;
-    unsigned char encryptFlag:1;
-    unsigned char decryptFlag:1;
+    unsigned char _reserved1:1;
+    unsigned char _reserved2:1;
     unsigned char doRequest:1;
     unsigned char isQueueing:1;
     unsigned char isMulti:1;
@@ -40,22 +40,22 @@
     id		replMode;
     id          classInfoImported;
     id		releasedProxies;
-    void *	reserved;
+    id		reserved;
 }
 
 - (NSDictionary *)statistics;
 
 + (NSArray *)allConnections;
 
-+ (NSConnection *)defaultConnection DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (NSConnection *)defaultConnection NS_DEPRECATED(10_0, 10_6, NA, NA);
 
 + (id)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName;
 + (id)connectionWithRegisteredName:(NSString *)name host:(NSString *)hostName usingNameServer:(NSPortNameServer *)server;
 + (NSDistantObject *)rootProxyForConnectionWithRegisteredName:(NSString *)name host:(NSString *)hostName;
 + (NSDistantObject *)rootProxyForConnectionWithRegisteredName:(NSString *)name host:(NSString *)hostName usingNameServer:(NSPortNameServer *)server;
 
-+ (id)serviceConnectionWithName:(NSString *)name rootObject:(id)root usingNameServer:(NSPortNameServer *)server AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-+ (id)serviceConnectionWithName:(NSString *)name rootObject:(id)root AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
++ (id)serviceConnectionWithName:(NSString *)name rootObject:(id)root usingNameServer:(NSPortNameServer *)server NS_AVAILABLE(10_5, 2_0);
++ (id)serviceConnectionWithName:(NSString *)name rootObject:(id)root NS_AVAILABLE(10_5, 2_0);
 
 - (void)setRequestTimeout:(NSTimeInterval)ti;
 - (NSTimeInterval)requestTimeout;
@@ -102,6 +102,9 @@
 
 - (NSArray *)remoteObjects;
 - (NSArray *)localObjects;
+
+// NSPort subclasses should use this method to ask a connection object to dispatch Distributed Objects component data received over the wire. This will decode the data, authenticate, and send the message.
+- (void)dispatchWithComponents:(NSArray *)components NS_AVAILABLE(10_7, 5_0);
 
 @end
 

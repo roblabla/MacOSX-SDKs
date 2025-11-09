@@ -2,7 +2,7 @@
  *	CTFramesetter.h
  *	CoreText
  *
- *	Copyright (c) 2003-2008 Apple Inc. All rights reserved.
+ *	Copyright (c) 2003-2011 Apple Inc. All rights reserved.
  *
  */
 
@@ -17,6 +17,7 @@
 #ifndef __CTFRAMESETTER__
 #define __CTFRAMESETTER__
 
+#include <CoreText/CTDefines.h>
 #include <CoreText/CTFrame.h>
 #include <CoreText/CTTypesetter.h>
 
@@ -36,7 +37,7 @@ typedef const struct __CTFramesetter * CTFramesetterRef;
 	@abstract	Returns the CFType of the framesetter object
 */
 
-CFTypeID CTFramesetterGetTypeID( void ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CFTypeID CTFramesetterGetTypeID( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -60,7 +61,7 @@ CFTypeID CTFramesetterGetTypeID( void ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATE
 */
 
 CTFramesetterRef CTFramesetterCreateWithAttributedString(
-	CFAttributedStringRef string ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CFAttributedStringRef string ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -88,7 +89,7 @@ CTFramesetterRef CTFramesetterCreateWithAttributedString(
 
 	@param		path
 				A CGPath object that specifies the shape which the frame will
-				take on.  Currently accepts only rectangles.
+				take on.
 
 	@param		frameAttributes
 				Additional attributes that control the frame filling process
@@ -103,7 +104,7 @@ CTFrameRef CTFramesetterCreateFrame(
 	CTFramesetterRef framesetter,
 	CFRange stringRange,
 	CGPathRef path,
-	CFDictionaryRef frameAttributes ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CFDictionaryRef frameAttributes ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -126,7 +127,7 @@ CTFrameRef CTFramesetterCreateFrame(
 */
 
 CTTypesetterRef CTFramesetterGetTypesetter(
-	CTFramesetterRef framesetter ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTFramesetterRef framesetter ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -171,7 +172,7 @@ CGSize CTFramesetterSuggestFrameSizeWithConstraints(
 	CFRange stringRange,
 	CFDictionaryRef frameAttributes,
 	CGSize constraints,
-	CFRange* fitRange ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CFRange* fitRange ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 #if defined(__cplusplus)

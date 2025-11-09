@@ -1,5 +1,5 @@
 /*	NSHost.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,17 +10,12 @@
 @private
     NSArray 	*names;
     NSArray 	*addresses;
-    void	*reserved;
+    id		reserved;
 }
 
 + (NSHost *)currentHost;
 + (NSHost *)hostWithName:(NSString *)name;
 + (NSHost *)hostWithAddress:(NSString *)address;
-
-// NSHost does not implement any caching any longer
-+ (void)setHostCacheEnabled:(BOOL)flag;
-+ (BOOL)isHostCacheEnabled;
-+ (void)flushHostCache;
 
 - (BOOL)isEqualToHost:(NSHost *)aHost;
 
@@ -30,7 +25,11 @@
 - (NSString *)address;	// arbitrary choice
 - (NSArray *)addresses;	// unordered list of IPv6 and IPv4 addresses
 
-- (NSString *)localizedName AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSString *)localizedName NS_AVAILABLE(10_6, NA);
 
+// NSHost does not implement any caching any longer
++ (void)setHostCacheEnabled:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_7);
++ (BOOL)isHostCacheEnabled NS_DEPRECATED_MAC(10_0, 10_7);
++ (void)flushHostCache NS_DEPRECATED_MAC(10_0, 10_7);
 @end
 

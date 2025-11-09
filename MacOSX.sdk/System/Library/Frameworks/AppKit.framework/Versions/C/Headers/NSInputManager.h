@@ -1,7 +1,7 @@
 /*
 	NSInputManager.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
  */
 
@@ -81,9 +81,9 @@
 + (void)cycleToNextInputLanguage:(id)sender;
 + (void)cycleToNextInputServerInLanguage:(id)sender;
 
-- (NSInputManager *) initWithName:(NSString *)inputServerName host:(NSString *)hostName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSInputManager *) initWithName:(NSString *)inputServerName host:(NSString *)hostName NS_DEPRECATED_MAC(10_0, 10_6);
 
-- (NSString *) localizedInputManagerName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSString *) localizedInputManagerName NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* These messages are sent by Views that conform to the NSTextInput protocol TO the Current Input Manager when things happen via user or programmatic action.  E.g., when the mouse moves outside the marked range, send markedTextWillBeAbandoned:.  If the user selects some new text or moves the mouse within the marked region, send markedTextSelectionChanged:.  Not all input manager/server combinations will allow all changes, but abandoning of the marked region cannot be aborted.
 */ 
@@ -93,13 +93,13 @@
 
 /* This corresponds to a server method for input managers that demand to do their own interepretation of command keys as long as they're active.  This will typically be called by a key binder to find out whether it shouldn't just pass along strings.
 */
-- (BOOL) wantsToInterpretAllKeystrokes DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (BOOL) wantsToInterpretAllKeystrokes NS_DEPRECATED_MAC(10_0, 10_6);
 
-- (NSString*) language DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSString*) language NS_DEPRECATED_MAC(10_0, 10_6);
 
-- (NSImage *) image DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSImage *) image NS_DEPRECATED_MAC(10_0, 10_6);
 
-- (NSInputServer *) server DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSInputServer *) server NS_DEPRECATED_MAC(10_0, 10_6);
 
 /* If corresponding input server wants to handle mouse events within marked region, this should return YES.  In that case, handleMouseEvent is sent. Otherwiese, mouse events are handled by first responder.
 */
@@ -109,5 +109,5 @@
 
 /* This should return YES when the input method (language) prefers to delay text change notification 'till the input is actually committed.
 */
-- (BOOL) wantsToDelayTextChangeNotifications DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (BOOL) wantsToDelayTextChangeNotifications NS_DEPRECATED_MAC(10_0, 10_6);
 @end

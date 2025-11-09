@@ -1,7 +1,7 @@
 /*
         NSSound.h
 	Application Kit
-	Copyright (c) 1997-2009, Apple Inc.
+	Copyright (c) 1997-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -15,18 +15,13 @@
 
 APPKIT_EXTERN NSString * const NSSoundPboardType;
 
-@interface NSSound : NSObject
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-<NSCopying, NSCoding, NSPasteboardReading, NSPasteboardWriting>
-#else
-<NSCopying, NSCoding>
-#endif
+@interface NSSound : NSObject <NSCopying, NSCoding, NSPasteboardReading, NSPasteboardWriting>
 {
 @private
     id _delegate;
     id _info;
     id _reserved[6];
-    NSUInteger _sFlags;
+    uint32_t _sFlags;
 }
 
 /* If this finds & creates the sound, only name is saved when archived.
@@ -49,9 +44,7 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 
 // Pasteboard support
 + (BOOL)canInitWithPasteboard:(NSPasteboard *)pasteboard;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-+ (NSArray*)soundUnfilteredTypes;
-#endif
++ (NSArray*)soundUnfilteredTypes NS_AVAILABLE_MAC(10_5);
 - (id)initWithPasteboard:(NSPasteboard *)pasteboard;
 - (void)writeToPasteboard:(NSPasteboard *)pasteboard;
 
@@ -65,49 +58,47 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 - (id <NSSoundDelegate>)delegate;
 - (void)setDelegate:(id <NSSoundDelegate>)aDelegate;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 /* Returns the duration of the sound in seconds.
 */
-- (NSTimeInterval)duration;
+- (NSTimeInterval)duration NS_AVAILABLE_MAC(10_5);
 
 /* Sets and gets the volume for the sound without affecting the system-wide volume. The valid range is between 0. and 1., inclusive.
 */
-- (void)setVolume:(float)volume;
-- (float)volume;
+- (void)setVolume:(float)volume NS_AVAILABLE_MAC(10_5);
+- (float)volume NS_AVAILABLE_MAC(10_5);
 
 /* If the sound is playing, currentTime returns the number of  seconds into the sound where playing is occurring.  If the sound is not playing, currentTime returns the number of seconds into the sound where playing would start.
 */
-- (NSTimeInterval)currentTime;
+- (NSTimeInterval)currentTime NS_AVAILABLE_MAC(10_5);
 
 /* Sets the location of the currently playing audio to seconds. If the sound is not playing, this sets the number of seconds into the sound where playing would begin. The currentTime is not archived, copied, or stored on the pasteboard - all new sounds start with a currentTime of 0.
 */
-- (void)setCurrentTime:(NSTimeInterval)seconds;
+- (void)setCurrentTime:(NSTimeInterval)seconds NS_AVAILABLE_MAC(10_5);
 
 /* Sets whether the sound should automatically restart when it is finished playing.  If the sound is currently playing, this takes effect immediately. The default is NO.  A looping sound does not send sound:didFinishPlaying: to its delegate unless it is sent a stop message.
 */
-- (void)setLoops:(BOOL)val;
+- (void)setLoops:(BOOL)val NS_AVAILABLE_MAC(10_5);
 
 /* Returns whether the sound will automatically restart when it is finished playing. */
-- (BOOL)loops;
+- (BOOL)loops NS_AVAILABLE_MAC(10_5);
 
 /* Set the UID of the audio device where playback will occur.  Pass nil to play on the default output device.
 */
-- (void)setPlaybackDeviceIdentifier:(NSString *)deviceUID;
+- (void)setPlaybackDeviceIdentifier:(NSString *)deviceUID NS_AVAILABLE_MAC(10_5);
 
 /* Get the UID of the audio device where playback will occur.  Returns nil if playback tracks the default device, which is the default.
 */
-- (NSString *)playbackDeviceIdentifier;
+- (NSString *)playbackDeviceIdentifier NS_AVAILABLE_MAC(10_5);
 
 /* Set the channel mapping for the sound.  Pass an array of NSNumbers, which maps sound channels to device channels.  Pass -1 to indicate that a particular sound channel should be ignored.  For any channel, instead of an NSNumber, you may also pass an NSArray of NSNumbers to map a single sound channel to multiple device channels.
 */
-- (void)setChannelMapping:(NSArray *)channelMapping;
+- (void)setChannelMapping:(NSArray *)channelMapping NS_AVAILABLE_MAC(10_5);
 
 /* Get the channel mapping for the sound.  By default, a stereo sound maps its first and second channels to the left and right device channels, while a mono sound maps its single channel across every device channel.
 */
-- (NSArray *)channelMapping;
+- (NSArray *)channelMapping NS_AVAILABLE_MAC(10_5);
 
-#endif
 
 @end
 
@@ -115,8 +106,8 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 
 /* Methods that were deprecated in Mac OS 10.5. You can now use +soundUnfilteredTypes to get an array of Uniform Type Identifiers (UTIs).
 */
-+ (NSArray *)soundUnfilteredFileTypes DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-+ (NSArray *)soundUnfilteredPasteboardTypes DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
++ (NSArray *)soundUnfilteredFileTypes NS_DEPRECATED_MAC(10_0, 10_5);
++ (NSArray *)soundUnfilteredPasteboardTypes NS_DEPRECATED_MAC(10_0, 10_5);
 
 @end
 

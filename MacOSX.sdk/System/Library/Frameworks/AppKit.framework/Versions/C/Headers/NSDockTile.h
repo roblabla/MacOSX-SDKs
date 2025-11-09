@@ -1,7 +1,7 @@
 /*
 	NSDockTile.h
 	Application Kit
-	Copyright (c) 2006-2009, Apple Inc.
+	Copyright (c) 2006-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,10 +11,10 @@
 
 #define NSAppKitVersionNumberWithDockTilePlugInSupport 1001.0
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 @class NSView;
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSDockTile : NSObject {
     @private;
     id _owner;
@@ -28,7 +28,8 @@
         unsigned int reserved:31;
     } _dFlags;
     NSSize _dockTileSize;
-    id reserved[5];
+    id _miniViewController;
+    id reserved[4];
 }
 
 /* get the size of the dock tile, in screen coordinates
@@ -60,22 +61,20 @@
 
 @end
 
-#endif
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 
 @class NSMenu;
 
 /* An application may customize its dock tile when not running via a plugin whose principal class implements the NSDockTilePlugIn protocol.  The name of the plugin is indicated by a NSDockTilePlugIn key in the application's Info.plist file.  The plugin is loaded in a system process at login time or when the application tile is added to the Dock.  When the plugin is loaded, the principal class' implementation of -setDockTile: is invoked.  If the principal class implements -dockMenu, -dockMenu is invoked whenever the user causes the application's dock menu to be shown.  When the dock tile is no longer valid (eg. the application has been removed from the dock, -setDockTile: is invoked with a nil NSDockTile.
 */
 @protocol NSDockTilePlugIn <NSObject>
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 
 @required
 - (void)setDockTile:(NSDockTile*)dockTile;
 
 @optional
 - (NSMenu*)dockMenu;
-
+#endif
 @end
 
-#endif

@@ -22,6 +22,7 @@
 #if !APR_HAS_THREADS
 typedef unsigned long apr_os_thread_t;
 typedef void * apr_thread_mutex_t;
+typedef void * apr_thread_rwlock_t;
 #endif
 
 /* back compat adjustements for older Apache versions
@@ -70,5 +71,9 @@ AP_DECLARE(const char *) ap_get_server_version(void);
                                         OPT_INCNOEXEC | \
                                         OPT_SYM_OWNER | \
                                         OPT_MULTI)
+
+#ifndef PROXYREQ_RESPONSE
+#define PROXYREQ_RESPONSE (3)
+#endif
 
 #endif /* MODPERL_APACHE_COMPAT_H */

@@ -1,17 +1,17 @@
 /*
 	NSTextInputContext.h
 	Application Kit
-	Copyright (c) 2008-2009, Apple Inc.
+	Copyright (c) 2008-2011, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSTextInputClient.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 
 @class NSEvent;
 
+NS_CLASS_AVAILABLE(10_6, NA)
 @interface NSTextInputContext : NSObject {
 @private
     id _client; // weak reference
@@ -29,6 +29,7 @@
 
     struct {
 	unsigned int _acceptsGlyphInfo:1;
+        unsigned int _secureInput:1;
 
 	unsigned int _attributedString:1;
 	unsigned int _fractionOfDistance:1;
@@ -46,7 +47,7 @@
 	unsigned int _preflight:1;
 	unsigned int _bindingFound:1;
 
-	unsigned int _reserved:3;
+	unsigned int _reserved:2;
     } _ticFlags;
 }
 
@@ -114,6 +115,5 @@
 /**** Notifications ****/
 /* Notified whenever the selected text input source changes.
  */
-APPKIT_EXTERN NSString *NSTextInputContextKeyboardSelectionDidChangeNotification;
+APPKIT_EXTERN NSString *NSTextInputContextKeyboardSelectionDidChangeNotification NS_AVAILABLE_MAC(10_6);
 
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */

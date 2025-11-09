@@ -1,5 +1,5 @@
 /*	NSCoder.h
-	Copyright (c) 1993-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1993-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -37,12 +37,11 @@
 - (id)decodePropertyList;
 #endif
 
-- (void)setObjectZone:(NSZone *)zone;
-- (NSZone *)objectZone;
+- (void)setObjectZone:(NSZone *)zone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
+- (NSZone *)objectZone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
 - (unsigned)systemVersion;
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 - (BOOL)allowsKeyedCoding;
 
 - (void)encodeObject:(id)objv forKey:(NSString *)key;
@@ -64,23 +63,20 @@
 - (float)decodeFloatForKey:(NSString *)key;
 - (double)decodeDoubleForKey:(NSString *)key;
 - (const uint8_t *)decodeBytesForKey:(NSString *)key returnedLength:(NSUInteger *)lengthp;   // returned bytes immutable!
-#endif
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
-- (void)encodeInteger:(NSInteger)intv forKey:(NSString *)key;
-- (NSInteger)decodeIntegerForKey:(NSString *)key;
-#endif
+- (void)encodeInteger:(NSInteger)intv forKey:(NSString *)key NS_AVAILABLE(10_5, 2_0);
+- (NSInteger)decodeIntegerForKey:(NSString *)key NS_AVAILABLE(10_5, 2_0);
 
 @end
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
-FOUNDATION_EXPORT NSObject *NXReadNSObjectFromCoder(NSCoder *decoder) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSObject *NXReadNSObjectFromCoder(NSCoder *decoder) NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
 /* Given an NSCoder, returns an object previously written with
    NXWriteNSObject(). The returned object is autoreleased. */
 
 @interface NSCoder (NSTypedstreamCompatibility)
 
-- (void)encodeNXObject:(id)object DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)encodeNXObject:(id)object NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
 /* Writes old-style object onto the coder. No sharing is done across
    separate -encodeNXObject:. Callers must have implemented an
    -encodeWithCoder:, which parallels the -write: methods, on all of
@@ -88,7 +84,7 @@ FOUNDATION_EXPORT NSObject *NXReadNSObjectFromCoder(NSCoder *decoder) DEPRECATED
    -replacementObjectForCoder: compatibility method will take care
    of calling -startArchiving:. */
     
-- (id)decodeNXObject DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (id)decodeNXObject NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
 /* Reads an object previously written with -encodeNXObject:. No
    sharing is done across separate -decodeNXObject. Callers must
    have implemented an -initWithCoder:, which parallels the -read:

@@ -10,7 +10,7 @@
 @class PDFAnnotationTextWidgetPrivateVars;
 
 
-@interface PDFAnnotationTextWidget : PDFAnnotation
+@interface PDFAnnotationTextWidget : PDFAnnotation <NSCopying>
 {
 @private
     PDFAnnotationTextWidgetPrivateVars	*_pdfPriv2;

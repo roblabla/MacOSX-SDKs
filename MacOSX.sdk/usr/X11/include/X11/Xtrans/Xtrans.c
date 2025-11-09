@@ -72,7 +72,7 @@ from The Open Group.
 #define TRANS_LOCAL_LOCAL_INDEX		9
 #define TRANS_LOCAL_PTS_INDEX		10
 #define TRANS_LOCAL_NAMED_INDEX		11
-#define TRANS_LOCAL_ISC_INDEX		12
+/* 12 used to be ISC, but that's gone. */
 #define TRANS_LOCAL_SCO_INDEX		13
 #define TRANS_SOCKET_INET6_INDEX	14
 #define TRANS_LOCAL_PIPE_INDEX		15
@@ -103,17 +103,15 @@ Xtransport_table Xtransports[] = {
 #ifndef sun
     { &TRANS(PTSFuncs),		TRANS_LOCAL_PTS_INDEX },
 #endif /* sun */
-#ifdef SVR4
+#if defined(SVR4) || defined(__SVR4)
     { &TRANS(NAMEDFuncs),	TRANS_LOCAL_NAMED_INDEX },
 #endif
 #ifdef sun
     { &TRANS(PIPEFuncs),	TRANS_LOCAL_PIPE_INDEX },
-#else /* !sun */
-#if !defined(__SCO__) && !defined(__UNIXWARE__)
-    { &TRANS(ISCFuncs),		TRANS_LOCAL_ISC_INDEX },
-#endif
-    { &TRANS(SCOFuncs),		TRANS_LOCAL_SCO_INDEX },
 #endif /* sun */
+#if defined(__SCO__) || defined(__UNIXWARE__)
+    { &TRANS(SCOFuncs),		TRANS_LOCAL_SCO_INDEX },
+#endif /* __SCO__ || __UNIXWARE__ */
 #endif /* LOCALCONN */
 };
 
@@ -1348,7 +1346,7 @@ static int TRANS(WriteV) (XtransConnInfo ciptr, struct iovec *iov, int iovcnt)
 #endif /* SYSV && __i386__ || WIN32 || __sxg__ */
 
 
-#if defined(_POSIX_SOURCE) || defined(USG) || defined(SVR4) || defined(__SCO__)
+#if defined(_POSIX_SOURCE) || defined(USG) || defined(SVR4) || defined(__SVR4) || defined(__SCO__)
 #ifndef NEED_UTSNAME
 #define NEED_UTSNAME
 #endif

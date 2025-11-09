@@ -9,6 +9,8 @@
 //
 //------------------------------------------------------------------------------------------------------------------------------
 
+#pragma once
+
 #import <ImageCaptureCore/ICCommonConstants.h>
 #import <ImageCaptureCore/ICDeviceBrowser.h>
 #import <ImageCaptureCore/ICDevice.h>
@@ -16,5 +18,6 @@
 #import <ImageCaptureCore/ICCameraDevice.h>
 #import <ImageCaptureCore/ICScannerFunctionalUnits.h>
 #import <ImageCaptureCore/ICScannerDevice.h>
+#import <ImageCaptureCore/ICScannerBandData.h>
 
 //------------------------------------------------------------------------------------------------------------------------------

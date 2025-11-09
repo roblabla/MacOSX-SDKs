@@ -1,14 +1,13 @@
 /*
 	NSObjectController.h
 	Application Kit
-	Copyright (c) 2002-2009, Apple Inc.
+	Copyright (c) 2002-2011, Apple Inc.
 	All rights reserved.
  */
 
 #import <AppKit/NSController.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 @class NSArray, NSPredicate, NSManagedObjectContext, NSFetchRequest, NSError;
 
@@ -63,7 +62,6 @@
 
 @end
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @interface NSObjectController (NSManagedController)
 
@@ -79,17 +77,13 @@
 
 - (void)fetch:(id)sender;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
-- (void)setUsesLazyFetching:(BOOL)enabled;
-- (BOOL)usesLazyFetching; // defaults to NO. 
+- (void)setUsesLazyFetching:(BOOL)enabled NS_AVAILABLE_MAC(10_5);
+- (BOOL)usesLazyFetching NS_AVAILABLE_MAC(10_5); // defaults to NO. 
 
-- (NSFetchRequest *)defaultFetchRequest;
+- (NSFetchRequest *)defaultFetchRequest NS_AVAILABLE_MAC(10_5);
 
-#endif
 
 @end
 
-#endif
 
-#endif

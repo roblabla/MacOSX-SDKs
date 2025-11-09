@@ -1,14 +1,12 @@
 /*
     NSManagedObject.h
     Core Data
-    Copyright (c) 2004-2009 Apple Inc.
+    Copyright (c) 2004-2010 Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSKeyValueObserving.h>
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @class NSDictionary;
 @class NSEntityDescription;
@@ -28,6 +26,7 @@ enum {
 
 typedef NSUInteger NSSnapshotEventType;
 
+NS_CLASS_AVAILABLE(10_4,3_0)
 @interface NSManagedObject : NSObject {
 @private
     int32_t             _cd_rc;
@@ -36,7 +35,7 @@ typedef NSUInteger NSSnapshotEventType;
     id                  _cd_entity;
     NSManagedObjectContext* _cd_managedObjectContext;
     NSManagedObjectID*  _cd_objectID;
-    id                  _cd_faultHandler;
+    uintptr_t           _cd_extraFlags;
     id                  _cd_observationInfo;
     id*                 _cd_snapshots;
     uintptr_t           _cd_lockingInfo;
@@ -44,7 +43,8 @@ typedef NSUInteger NSSnapshotEventType;
 }
 
 /*  Distinguish between changes that should and should not dirty the object for any key unknown to Core Data.  10.5 & earlier default to NO.  10.6 and later default to YES. */
-+ (BOOL)contextShouldIgnoreUnmodeledPropertyChanges AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+/*    Similarly, transient attributes may be individually flagged as not dirtying the object by adding +(BOOL)contextShouldIgnoreChangesFor<key> where <key> is the property name. */
++ (BOOL)contextShouldIgnoreUnmodeledPropertyChanges NS_AVAILABLE(10_6,3_0);
 
 // The designated initializer.
 - (id)initWithEntity:(NSEntityDescription *)entity insertIntoManagedObjectContext:(NSManagedObjectContext *)context;    
@@ -59,14 +59,16 @@ typedef NSUInteger NSSnapshotEventType;
 - (BOOL)isUpdated;
 - (BOOL)isDeleted;
 
+- (BOOL)hasChanges NS_AVAILABLE(10_7,NA);
+
 // this information is useful in many situations when computations are optional - this can be used to avoid growing the object graph unnecessarily (which allows to control performance as it can avoid time consuming fetches from databases)
 - (BOOL)isFault;    
 
 // returns a Boolean indicating if the relationship for the specified key is a fault.  If a value of NO is returned, the resulting relationship is a realized object;  otherwise the relationship is a fault.  If the specified relationship is a fault, calling this method does not result in the fault firing.
-- (BOOL)hasFaultForRelationshipNamed:(NSString *)key AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; 
+- (BOOL)hasFaultForRelationshipNamed:(NSString *)key NS_AVAILABLE(10_5,3_0); 
 
 /* Allow developers to determine if an object is in a transitional phase when receiving a KVO notification.  Returns 0 if the object is fully initialized as a managed object and not transitioning to or from another state */
-- (NSUInteger)faultingState AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSUInteger)faultingState NS_AVAILABLE(10_5,3_0);
 
 // lifecycle/change management (includes key-value observing methods)
 - (void)willAccessValueForKey:(NSString *)key;      // read notification
@@ -89,10 +91,10 @@ typedef NSUInteger NSSnapshotEventType;
 - (void)awakeFromInsert;
 
 /* Callback for undo, redo, and other multi-property state resets */
-- (void)awakeFromSnapshotEvents:(NSSnapshotEventType)flags AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)awakeFromSnapshotEvents:(NSSnapshotEventType)flags NS_AVAILABLE(10_6,3_0);
 
 /* Callback before delete propagation while the object is still alive.  Useful to perform custom propagation before the relationships are torn down or reconfigure KVO observers. */
-- (void)prepareForDeletion AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)prepareForDeletion NS_AVAILABLE(10_6,3_0);
 
 // commonly used to compute persisted values from other transient/scratchpad values, to set timestamps, etc. - this method can have "side effects" on the persisted values
 - (void)willSave;    
@@ -101,7 +103,7 @@ typedef NSUInteger NSSnapshotEventType;
 - (void)didSave;    
 
 // invoked automatically by the Core Data framework before receiver is converted (back) to a fault.  This method is the companion of the -didTurnIntoFault method, and may be used to (re)set state which requires access to property values (for example, observers across keypaths.)  The default implementation does nothing.  
-- (void)willTurnIntoFault AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)willTurnIntoFault NS_AVAILABLE(10_5,3_0);
 
 // commonly used to clear out additional transient values or caches
 - (void)didTurnIntoFault;    
@@ -118,12 +120,13 @@ typedef NSUInteger NSSnapshotEventType;
 - (id)primitiveValueForKey:(NSString *)key;    
 - (void)setPrimitiveValue:(id)value forKey:(NSString *)key;
 
-// returns a dictionary of the last fetched or saved keys and values of this object
+// returns a dictionary of the last fetched or saved keys and values of this object.  Pass nil to get all persistent modeled properties.
 - (NSDictionary *)committedValuesForKeys:(NSArray *)keys;    
 
 // returns a dictionary with the keys and (new) values that have been changed since last fetching or saving the object (this is implemented efficiently without firing relationship faults)
 - (NSDictionary *)changedValues;    
 
+- (NSDictionary *)changedValuesForCurrentEvent NS_AVAILABLE(10_7,NA);
 
 // validation - in addition to KVC validation managed objects have hooks to validate their lifecycle state; validation is a critical piece of functionality and the following methods are likely the most commonly overridden methods in custom subclasses
 - (BOOL)validateValue:(id *)value forKey:(NSString *)key error:(NSError **)error;    // KVC
@@ -133,4 +136,3 @@ typedef NSUInteger NSSnapshotEventType;
 
 @end
 
-#endif

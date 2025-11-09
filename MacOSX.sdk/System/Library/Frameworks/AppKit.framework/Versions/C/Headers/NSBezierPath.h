@@ -1,7 +1,7 @@
 /*
         NSBezierPath.h
         Application Kit
-        Copyright (c) 1997-2009, Apple Inc.
+        Copyright (c) 1997-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -71,9 +71,7 @@ typedef NSUInteger NSBezierPathElement;
 + (NSBezierPath *)bezierPath;
 + (NSBezierPath *)bezierPathWithRect:(NSRect)rect;
 + (NSBezierPath *)bezierPathWithOvalInRect:(NSRect)rect;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-+ (NSBezierPath *)bezierPathWithRoundedRect:(NSRect)rect xRadius:(CGFloat)xRadius yRadius:(CGFloat)yRadius;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
++ (NSBezierPath *)bezierPathWithRoundedRect:(NSRect)rect xRadius:(CGFloat)xRadius yRadius:(CGFloat)yRadius NS_AVAILABLE_MAC(10_5);
 
 // Immediate mode drawing of common paths.
 
@@ -193,17 +191,15 @@ typedef NSUInteger NSBezierPathElement;
 - (void)appendBezierPathWithGlyphs:(NSGlyph *)glyphs count:(NSInteger)count
 			    inFont:(NSFont *)font;
 - (void)appendBezierPathWithPackedGlyphs:(const char *)packedGlyphs;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 // Appends paths for a rounded rectangle.
-- (void)appendBezierPathWithRoundedRect:(NSRect)rect xRadius:(CGFloat)xRadius yRadius:(CGFloat)yRadius;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+- (void)appendBezierPathWithRoundedRect:(NSRect)rect xRadius:(CGFloat)xRadius yRadius:(CGFloat)yRadius NS_AVAILABLE_MAC(10_5);
 
 // Hit detection.
 - (BOOL)containsPoint:(NSPoint)point;
 @end
 
 @interface NSBezierPath (NSBezierPathDeprecated)
-- (BOOL)cachesBezierPath DEPRECATED_IN_MAC_OS_X_VERSION_10_0_AND_LATER;
-- (void)setCachesBezierPath:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_0_AND_LATER;
+- (BOOL)cachesBezierPath NS_DEPRECATED_MAC(10_0, 10_0);
+- (void)setCachesBezierPath:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_0);
 @end
 

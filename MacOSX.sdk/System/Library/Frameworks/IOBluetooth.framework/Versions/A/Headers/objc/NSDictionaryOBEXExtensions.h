@@ -1,9 +1,6 @@
 /*
-	Contains:	
-
-	Version:	xxx put version here xxx
-
-	Copyright:	(C) 2002-2004 by Apple Computer, Inc., all rights reserved.
+	Contains:	OBEX Header construction routines.
+	Copyright:	(C) 2010 by Apple, Inc., all rights reserved.
 */
 
 #import <IOKit/IOKitLib.h>
@@ -50,9 +47,7 @@
 -(OBEXError)addImageHandleHeader:(NSString*)type;
 -(OBEXError)addImageDescriptorHeader:(const void*)inHeaderData	length:(uint32_t)inHeaderDataLength;
 
-// This is going to be deprecated in favor of dictionaryWithOBEXHeadersData: above.
-
-+(NSMutableDictionary*)withOBEXHeadersData:(const void*)inHeadersData headersDataSize:(size_t)inDataSize;
++(NSMutableDictionary*)withOBEXHeadersData:(const void*)inHeadersData headersDataSize:(size_t)inDataSize DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 @end

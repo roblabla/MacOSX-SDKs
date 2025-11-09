@@ -3,7 +3,7 @@
  
      Contains:   Appearance Manager Interfaces.
  
-     Version:    HIToolbox-463~1
+     Version:    HIToolbox-567.2~1
  
      Copyright:  © 1994-2008 by Apple Computer, Inc., all rights reserved
  
@@ -417,11 +417,7 @@
 #define kThemeWidgetZoomBox 			1
 #define kThemeWidgetCollapseBox 		2
 #define kThemeWidgetDirtyCloseBox 		6
-
-															/*  Old/Obsolete name to be removed */
-#define kThemeWidgetABox 				3
-#define kThemeWidgetBBox 				4
-#define kThemeWidgetBOffBox 			5
+#define kThemeWidgetToolbarButton 		7
 
 #define kThemeArrowLeft 				0
 #define kThemeArrowDown 				1

@@ -1,5 +1,3 @@
-/* $Xorg: ObjectP.h,v 1.4 2001/02/09 02:03:56 xorgcvs Exp $ */
-
 /***********************************************************
 
 Copyright 1987, 1988, 1994, 1998  The Open Group
@@ -51,6 +49,8 @@ SOFTWARE.
 #define _Xt_ObjectP_h_
 
 #include <X11/Object.h>
+
+_XFUNCPROTOBEGIN
 
 /**********************************************************
  * Object Instance Data Structures
@@ -131,6 +131,8 @@ typedef struct _ObjectClassRec {
 } ObjectClassRec;
 
 externalref ObjectClassRec objectClassRec;
+
+_XFUNCPROTOEND
 
 #define XtObjectExtensionVersion 1L
 #define XtInheritAllocate ((XtAllocateProc) _XtInherit)

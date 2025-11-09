@@ -59,6 +59,8 @@
 #ifndef HEADER_PKCS7_H
 #define HEADER_PKCS7_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/asn1.h>
 #include <openssl/bio.h>
 #include <openssl/e_os2.h>
@@ -283,14 +285,14 @@ DECLARE_ASN1_FUNCTIONS(PKCS7_ISSUER_AND_SERIAL)
 
 #ifndef SSLEAY_MACROS
 int PKCS7_ISSUER_AND_SERIAL_digest(PKCS7_ISSUER_AND_SERIAL *data,const EVP_MD *type,
-	unsigned char *md,unsigned int *len);
+	unsigned char *md,unsigned int *len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifndef OPENSSL_NO_FP_API
-PKCS7 *d2i_PKCS7_fp(FILE *fp,PKCS7 **p7);
-int i2d_PKCS7_fp(FILE *fp,PKCS7 *p7);
+PKCS7 *d2i_PKCS7_fp(FILE *fp,PKCS7 **p7) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int i2d_PKCS7_fp(FILE *fp,PKCS7 *p7) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
-PKCS7 *PKCS7_dup(PKCS7 *p7);
-PKCS7 *d2i_PKCS7_bio(BIO *bp,PKCS7 **p7);
-int i2d_PKCS7_bio(BIO *bp,PKCS7 *p7);
+PKCS7 *PKCS7_dup(PKCS7 *p7) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+PKCS7 *d2i_PKCS7_bio(BIO *bp,PKCS7 **p7) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int i2d_PKCS7_bio(BIO *bp,PKCS7 *p7) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
 DECLARE_ASN1_FUNCTIONS(PKCS7_SIGNER_INFO)
@@ -308,75 +310,75 @@ DECLARE_ASN1_ITEM(PKCS7_ATTR_VERIFY)
 
 DECLARE_ASN1_NDEF_FUNCTION(PKCS7)
 
-long PKCS7_ctrl(PKCS7 *p7, int cmd, long larg, char *parg);
+long PKCS7_ctrl(PKCS7 *p7, int cmd, long larg, char *parg) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int PKCS7_set_type(PKCS7 *p7, int type);
-int PKCS7_set0_type_other(PKCS7 *p7, int type, ASN1_TYPE *other);
-int PKCS7_set_content(PKCS7 *p7, PKCS7 *p7_data);
+int PKCS7_set_type(PKCS7 *p7, int type) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_set0_type_other(PKCS7 *p7, int type, ASN1_TYPE *other) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_set_content(PKCS7 *p7, PKCS7 *p7_data) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int PKCS7_SIGNER_INFO_set(PKCS7_SIGNER_INFO *p7i, X509 *x509, EVP_PKEY *pkey,
-	const EVP_MD *dgst);
-int PKCS7_add_signer(PKCS7 *p7, PKCS7_SIGNER_INFO *p7i);
-int PKCS7_add_certificate(PKCS7 *p7, X509 *x509);
-int PKCS7_add_crl(PKCS7 *p7, X509_CRL *x509);
-int PKCS7_content_new(PKCS7 *p7, int nid);
+	const EVP_MD *dgst) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_add_signer(PKCS7 *p7, PKCS7_SIGNER_INFO *p7i) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_add_certificate(PKCS7 *p7, X509 *x509) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_add_crl(PKCS7 *p7, X509_CRL *x509) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_content_new(PKCS7 *p7, int nid) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int PKCS7_dataVerify(X509_STORE *cert_store, X509_STORE_CTX *ctx,
-	BIO *bio, PKCS7 *p7, PKCS7_SIGNER_INFO *si); 
+	BIO *bio, PKCS7 *p7, PKCS7_SIGNER_INFO *si) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; 
 int PKCS7_signatureVerify(BIO *bio, PKCS7 *p7, PKCS7_SIGNER_INFO *si,
-								X509 *x509);
+								X509 *x509) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-BIO *PKCS7_dataInit(PKCS7 *p7, BIO *bio);
-int PKCS7_dataFinal(PKCS7 *p7, BIO *bio);
-BIO *PKCS7_dataDecode(PKCS7 *p7, EVP_PKEY *pkey, BIO *in_bio, X509 *pcert);
+BIO *PKCS7_dataInit(PKCS7 *p7, BIO *bio) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_dataFinal(PKCS7 *p7, BIO *bio) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *PKCS7_dataDecode(PKCS7 *p7, EVP_PKEY *pkey, BIO *in_bio, X509 *pcert) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 PKCS7_SIGNER_INFO *PKCS7_add_signature(PKCS7 *p7, X509 *x509,
-	EVP_PKEY *pkey, const EVP_MD *dgst);
-X509 *PKCS7_cert_from_signer_info(PKCS7 *p7, PKCS7_SIGNER_INFO *si);
-int PKCS7_set_digest(PKCS7 *p7, const EVP_MD *md);
-STACK_OF(PKCS7_SIGNER_INFO) *PKCS7_get_signer_info(PKCS7 *p7);
+	EVP_PKEY *pkey, const EVP_MD *dgst) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+X509 *PKCS7_cert_from_signer_info(PKCS7 *p7, PKCS7_SIGNER_INFO *si) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_set_digest(PKCS7 *p7, const EVP_MD *md) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STACK_OF(PKCS7_SIGNER_INFO) *PKCS7_get_signer_info(PKCS7 *p7) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-PKCS7_RECIP_INFO *PKCS7_add_recipient(PKCS7 *p7, X509 *x509);
-int PKCS7_add_recipient_info(PKCS7 *p7, PKCS7_RECIP_INFO *ri);
-int PKCS7_RECIP_INFO_set(PKCS7_RECIP_INFO *p7i, X509 *x509);
-int PKCS7_set_cipher(PKCS7 *p7, const EVP_CIPHER *cipher);
+PKCS7_RECIP_INFO *PKCS7_add_recipient(PKCS7 *p7, X509 *x509) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_add_recipient_info(PKCS7 *p7, PKCS7_RECIP_INFO *ri) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_RECIP_INFO_set(PKCS7_RECIP_INFO *p7i, X509 *x509) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_set_cipher(PKCS7 *p7, const EVP_CIPHER *cipher) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-PKCS7_ISSUER_AND_SERIAL *PKCS7_get_issuer_and_serial(PKCS7 *p7, int idx);
-ASN1_OCTET_STRING *PKCS7_digest_from_attributes(STACK_OF(X509_ATTRIBUTE) *sk);
+PKCS7_ISSUER_AND_SERIAL *PKCS7_get_issuer_and_serial(PKCS7 *p7, int idx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+ASN1_OCTET_STRING *PKCS7_digest_from_attributes(STACK_OF(X509_ATTRIBUTE) *sk) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int PKCS7_add_signed_attribute(PKCS7_SIGNER_INFO *p7si,int nid,int type,
-	void *data);
+	void *data) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int PKCS7_add_attribute (PKCS7_SIGNER_INFO *p7si, int nid, int atrtype,
-	void *value);
-ASN1_TYPE *PKCS7_get_attribute(PKCS7_SIGNER_INFO *si, int nid);
-ASN1_TYPE *PKCS7_get_signed_attribute(PKCS7_SIGNER_INFO *si, int nid);
+	void *value) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+ASN1_TYPE *PKCS7_get_attribute(PKCS7_SIGNER_INFO *si, int nid) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+ASN1_TYPE *PKCS7_get_signed_attribute(PKCS7_SIGNER_INFO *si, int nid) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int PKCS7_set_signed_attributes(PKCS7_SIGNER_INFO *p7si,
-				STACK_OF(X509_ATTRIBUTE) *sk);
-int PKCS7_set_attributes(PKCS7_SIGNER_INFO *p7si,STACK_OF(X509_ATTRIBUTE) *sk);
+				STACK_OF(X509_ATTRIBUTE) *sk) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_set_attributes(PKCS7_SIGNER_INFO *p7si,STACK_OF(X509_ATTRIBUTE) *sk) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 PKCS7 *PKCS7_sign(X509 *signcert, EVP_PKEY *pkey, STACK_OF(X509) *certs,
-							BIO *data, int flags);
+							BIO *data, int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int PKCS7_verify(PKCS7 *p7, STACK_OF(X509) *certs, X509_STORE *store,
-					BIO *indata, BIO *out, int flags);
-STACK_OF(X509) *PKCS7_get0_signers(PKCS7 *p7, STACK_OF(X509) *certs, int flags);
+					BIO *indata, BIO *out, int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STACK_OF(X509) *PKCS7_get0_signers(PKCS7 *p7, STACK_OF(X509) *certs, int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 PKCS7 *PKCS7_encrypt(STACK_OF(X509) *certs, BIO *in, const EVP_CIPHER *cipher,
-								int flags);
-int PKCS7_decrypt(PKCS7 *p7, EVP_PKEY *pkey, X509 *cert, BIO *data, int flags);
+								int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_decrypt(PKCS7 *p7, EVP_PKEY *pkey, X509 *cert, BIO *data, int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int PKCS7_add_attrib_smimecap(PKCS7_SIGNER_INFO *si,
-			      STACK_OF(X509_ALGOR) *cap);
-STACK_OF(X509_ALGOR) *PKCS7_get_smimecap(PKCS7_SIGNER_INFO *si);
-int PKCS7_simple_smimecap(STACK_OF(X509_ALGOR) *sk, int nid, int arg);
+			      STACK_OF(X509_ALGOR) *cap) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+STACK_OF(X509_ALGOR) *PKCS7_get_smimecap(PKCS7_SIGNER_INFO *si) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int PKCS7_simple_smimecap(STACK_OF(X509_ALGOR) *sk, int nid, int arg) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int SMIME_write_PKCS7(BIO *bio, PKCS7 *p7, BIO *data, int flags);
-PKCS7 *SMIME_read_PKCS7(BIO *bio, BIO **bcont);
-int SMIME_crlf_copy(BIO *in, BIO *out, int flags);
-int SMIME_text(BIO *in, BIO *out);
+int SMIME_write_PKCS7(BIO *bio, PKCS7 *p7, BIO *data, int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+PKCS7 *SMIME_read_PKCS7(BIO *bio, BIO **bcont) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int SMIME_crlf_copy(BIO *in, BIO *out, int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int SMIME_text(BIO *in, BIO *out) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* BEGIN ERROR CODES */
 /* The following lines are auto generated by the script mkerr.pl. Any changes
  * made after this point may be overwritten when the script is next run.
  */
-void ERR_load_PKCS7_strings(void);
+void ERR_load_PKCS7_strings(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Error codes for the PKCS7 functions. */
 

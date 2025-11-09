@@ -23,6 +23,7 @@ typedef struct _CGLPBufferObject       *CGLPBufferObj;
 */
 typedef enum _CGLPixelFormatAttribute {
 	kCGLPFAAllRenderers       =   1,	/* choose from all available renderers          */
+	kCGLPFATripleBuffer       =   3,	/* choose a triple buffered pixel format        */
 	kCGLPFADoubleBuffer       =   5,	/* choose a double buffered pixel format        */
 	kCGLPFAStereo             =   6,	/* stereo buffering supported                   */
 	kCGLPFAAuxBuffers         =   7,	/* number of aux buffers                        */
@@ -56,6 +57,7 @@ typedef enum _CGLPixelFormatAttribute {
 	kCGLPFARemotePBuffer      =  91,	/* can be used to render offline to a pbuffer   */
 	kCGLPFAAllowOfflineRenderers = 96,	/* show offline renderers in pixel formats      */
 	kCGLPFAAcceleratedCompute =  97,	/* choose a hardware accelerated compute device */
+	kCGLPFAOpenGLProfile      =  99,	/* specify an OpenGL Profile to use             */
 	kCGLPFAVirtualScreenCount = 128,	/* number of virtual screens in this format     */
 
 /*
@@ -73,47 +75,50 @@ typedef enum _CGLPixelFormatAttribute {
 ** Property names for CGLDescribeRenderer.
 */
 typedef enum _CGLRendererProperty {
-	kCGLRPOffScreen           =  53,
-	kCGLRPFullScreen          =  54,
-	kCGLRPRendererID          =  70,
-	kCGLRPAccelerated         =  73,
-	kCGLRPRobust              =  75,
-	kCGLRPBackingStore        =  76,
-	kCGLRPMPSafe              =  78,
-	kCGLRPWindow              =  80,
-	kCGLRPMultiScreen         =  81,
-	kCGLRPCompliant           =  83,
-	kCGLRPDisplayMask         =  84,
-	kCGLRPBufferModes         = 100,	/* a bitfield of supported buffer modes          */
-	kCGLRPColorModes          = 103,	/* a bitfield of supported color buffer formats  */
-	kCGLRPAccumModes          = 104,	/* a bitfield of supported accum buffer formats  */
-	kCGLRPDepthModes          = 105,	/* a bitfield of supported depth buffer depths   */
-	kCGLRPStencilModes        = 106,	/* a bitfield of supported stencil buffer depths */
-	kCGLRPMaxAuxBuffers       = 107,	/* maximum number of auxilliary buffers          */
-	kCGLRPMaxSampleBuffers    = 108,	/* maximum number of sample buffers              */
-	kCGLRPMaxSamples          = 109,	/* maximum number of samples                     */
-	kCGLRPSampleModes         = 110,	/* a bitfield of supported sample modes          */
-	kCGLRPSampleAlpha         = 111,	/* support for alpha sampling                    */
-	kCGLRPVideoMemory         = 120,	/* total video memory                            */
-	kCGLRPTextureMemory       = 121,	/* video memory useable for texture storage      */
-	kCGLRPGPUVertProcCapable  = 122,	/* renderer capable of GPU vertex processing     */
-	kCGLRPGPUFragProcCapable  = 123,	/* renderer capable of GPU fragment processing   */
-	kCGLRPRendererCount       = 128,	/* the number of renderers in this renderer info */
-	kCGLRPOnline              = 129,	/* a boolean stating if renderer is on/offline   */
-	kCGLRPAcceleratedCompute  = 130 	/* hardware accelerated compute device           */
+	kCGLRPOffScreen              =  53,
+	kCGLRPFullScreen             =  54,
+	kCGLRPRendererID             =  70,
+	kCGLRPAccelerated            =  73,
+	kCGLRPRobust                 =  75,
+	kCGLRPBackingStore           =  76,
+	kCGLRPMPSafe                 =  78,
+	kCGLRPWindow                 =  80,
+	kCGLRPMultiScreen            =  81,
+	kCGLRPCompliant              =  83,
+	kCGLRPDisplayMask            =  84,
+	kCGLRPBufferModes            = 100,	/* a bitfield of supported buffer modes             */
+	kCGLRPColorModes             = 103,	/* a bitfield of supported color buffer formats     */
+	kCGLRPAccumModes             = 104,	/* a bitfield of supported accum buffer formats     */
+	kCGLRPDepthModes             = 105,	/* a bitfield of supported depth buffer depths      */
+	kCGLRPStencilModes           = 106,	/* a bitfield of supported stencil buffer depths    */
+	kCGLRPMaxAuxBuffers          = 107,	/* maximum number of auxilliary buffers             */
+	kCGLRPMaxSampleBuffers       = 108,	/* maximum number of sample buffers                 */
+	kCGLRPMaxSamples             = 109,	/* maximum number of samples                        */
+	kCGLRPSampleModes            = 110,	/* a bitfield of supported sample modes             */
+	kCGLRPSampleAlpha            = 111,	/* support for alpha sampling                       */
+	kCGLRPVideoMemory            = 120,	/* total video memory (in bytes)                    */
+	kCGLRPTextureMemory          = 121,	/* video memory useable for textures (in bytes)     */
+	kCGLRPGPUVertProcCapable     = 122,	/* renderer capable of GPU vertex processing        */
+	kCGLRPGPUFragProcCapable     = 123,	/* renderer capable of GPU fragment processing      */
+	kCGLRPRendererCount          = 128,	/* the number of renderers in this renderer info    */
+	kCGLRPOnline                 = 129,	/* a boolean stating if renderer is on/offline      */
+	kCGLRPAcceleratedCompute     = 130,	/* hardware accelerated compute device              */
+	kCGLRPVideoMemoryMegabytes   = 131,	/* total video memory (in megabytes)                */
+	kCGLRPTextureMemoryMegabytes = 132,	/* video memory useable for textures (in megabytes) */
 } CGLRendererProperty;
 
 /*
 ** Enable names for CGLEnable, CGLDisable, and CGLIsEnabled.
 */
 typedef enum _CGLContextEnable {
-	kCGLCESwapRectangle    = 201,	/* Enable or disable the swap rectangle          */
-	kCGLCESwapLimit        = 203,	/* Enable or disable the swap async limit        */
-	kCGLCERasterization    = 221,	/* Enable or disable all rasterization           */
-	kCGLCEStateValidation  = 301,	/* Validate state for multi-screen functionality */
-	kCGLCESurfaceBackingSize = 305,  /* Enable or disable surface backing size override */
-	kCGLCEDisplayListOptimization = 307,  /* Ability to turn off display list optimizer */
-	kCGLCEMPEngine         = 313 	/* Enable or disable multi-threaded GL engine    */
+	kCGLCESwapRectangle    = 201,        /* Enable or disable the swap rectangle              */
+	kCGLCESwapLimit        = 203,        /* Enable or disable the swap async limit            */
+	kCGLCERasterization    = 221,        /* Enable or disable all rasterization               */
+	kCGLCEStateValidation  = 301,	     /* Validate state for multi-screen functionality     */
+	kCGLCESurfaceBackingSize = 305,      /* Enable or disable surface backing size override   */
+	kCGLCEDisplayListOptimization = 307, /* Ability to turn off display list optimizer        */
+	kCGLCEMPEngine         = 313, 	     /* Enable or disable multi-threaded GL engine        */
+	kCGLCECrashOnRemovedFunctions = 316  /* Die on call to function removed from Core Profile */
 } CGLContextEnable;
 
 /*
@@ -125,7 +130,7 @@ typedef enum _CGLContextParameter {
 	kCGLCPDispatchTableSize      = 224, /* 1 param.   Get the dispatch table size                       */
 	/* Note: kCGLCPClientStorage is always a pointer-sized parameter, even though the API claims GLint. */
 	kCGLCPClientStorage          = 226, /* 1 param.   Context specific generic storage                  */
-	kCGLCPSurfaceTexture         = 228, /* 3 params.  SID, target, internal_format                      */
+	kCGLCPSurfaceTexture         = 228, /* 3 params.  Context, target, internal_format                      */
 /*  - Used by AGL - */
 /*  AGL_STATE_VALIDATION           230 */
 /*  AGL_BUFFER_NAME                231 */
@@ -157,10 +162,19 @@ typedef enum _CGLGlobalOption {
 	kCGLGORetainRenderers  = 503,	/* Whether to retain loaded renderers in memory  */
 	kCGLGOResetLibrary     = 504,	/* *** DEPRECATED in MacOS X 10.4 ***            */
 	                             	/* Do a soft reset of the CGL library if true    */
-	kCGLGOUseErrorHandler  = 505,	/* Call the Core Graphics handler on CGL errors  */
+	kCGLGOUseErrorHandler  = 505,	/* *** DEPRECATED in MacOS X 10.7 ***            */
+	                             	/* Call the Core Graphics handler on CGL errors  */
 	kCGLGOUseBuildCache    = 506,	/* Enable the function compilation block cache.  */
 	                                /* Off by default.  Must be enabled at startup.  */
 } CGLGlobalOption;
+
+/*
+** OpenGL Implementation Profiles
+*/
+typedef enum _CGLOpenGLProfile {
+	kCGLOGLPVersion_Legacy   = 0x1000,	/* choose a Legacy/Pre-OpenGL 3.0 Implementation */
+	kCGLOGLPVersion_3_2_Core = 0x3200,	/* choose an OpenGL 3.2 Core Implementation      */
+} CGLOpenGLProfile;
 
 /*
 ** Error return values from CGLGetError.
@@ -179,7 +193,7 @@ typedef enum _CGLError {
 	kCGLBadMatch           = 10009,	/* invalid share context           */
 	kCGLBadEnumeration     = 10010,	/* invalid enumerant               */
 	kCGLBadOffScreen       = 10011,	/* invalid offscreen drawable      */
-	kCGLBadFullScreen      = 10012,	/* invalid offscreen drawable      */
+	kCGLBadFullScreen      = 10012,	/* invalid fullscreen drawable     */
 	kCGLBadWindow          = 10013,	/* invalid window                  */
 	kCGLBadAddress         = 10014,	/* invalid pointer                 */
 	kCGLBadCodeModule      = 10015,	/* invalid code module             */
@@ -195,6 +209,7 @@ typedef enum _CGLError {
 #define kCGLStereoscopicBit 0x00000002
 #define kCGLSingleBufferBit 0x00000004
 #define kCGLDoubleBufferBit 0x00000008
+#define kCGLTripleBufferBit 0x00000010
 
 /*
 ** Depth and stencil buffer depths

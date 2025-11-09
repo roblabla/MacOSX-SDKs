@@ -22,7 +22,7 @@
 - (id) init;
 
 // Fields are an array of NSString objects corresponding to the fieldNames of Widget annotations on the page.
-// May return NULL.
+// May return nil.
 - (NSArray *) fields;
 - (void) setFields: (NSArray *) fields;
 

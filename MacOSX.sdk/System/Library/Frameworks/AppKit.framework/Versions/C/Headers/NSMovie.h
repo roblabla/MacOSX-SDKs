@@ -1,7 +1,7 @@
 /*
         NSMovie.h
         Application Kit
-        Copyright (c) 2000-2009, Apple Inc.
+        Copyright (c) 2000-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -34,16 +34,16 @@
 
 #if !__LP64__
 
-- (id) initWithMovie:(void* /*Movie*/)movie DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;			// When archived, saves contents
-- (id) initWithURL:(NSURL*)url byReference:(BOOL)byRef DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;	// When archived, saves ref or contents
-- (id) initWithPasteboard:(NSPasteboard*)pasteboard DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (id) initWithMovie:(void* /*Movie*/)movie NS_DEPRECATED_MAC(10_0, 10_5);			// When archived, saves contents
+- (id) initWithURL:(NSURL*)url byReference:(BOOL)byRef NS_DEPRECATED_MAC(10_0, 10_5);	// When archived, saves ref or contents
+- (id) initWithPasteboard:(NSPasteboard*)pasteboard NS_DEPRECATED_MAC(10_0, 10_5);
 
-- (void*/*Movie*/)QTMovie DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (NSURL*)URL DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void*/*Movie*/)QTMovie NS_DEPRECATED_MAC(10_0, 10_5);
+- (NSURL*)URL NS_DEPRECATED_MAC(10_0, 10_5);
 
-+ (NSArray*) movieUnfilteredFileTypes DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-+ (NSArray*) movieUnfilteredPasteboardTypes DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-+ (BOOL) canInitWithPasteboard:(NSPasteboard*)pasteboard DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
++ (NSArray*) movieUnfilteredFileTypes NS_DEPRECATED_MAC(10_0, 10_5);
++ (NSArray*) movieUnfilteredPasteboardTypes NS_DEPRECATED_MAC(10_0, 10_5);
++ (BOOL) canInitWithPasteboard:(NSPasteboard*)pasteboard NS_DEPRECATED_MAC(10_0, 10_5);
 
 #else
 

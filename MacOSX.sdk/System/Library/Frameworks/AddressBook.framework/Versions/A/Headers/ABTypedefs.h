@@ -29,13 +29,19 @@ enum _ABPropertyType {
     kABArrayProperty             = 0x5,
     kABDictionaryProperty        = 0x6,
     kABDataProperty              = 0x7,
+#if MAC_OS_X_VERSION_10_7 <= MAC_OS_X_VERSION_MAX_ALLOWED
+	kABDateComponentsProperty    = 0x8,
+#endif
     kABMultiStringProperty       = kABMultiValueMask | kABStringProperty,
     kABMultiIntegerProperty      = kABMultiValueMask | kABIntegerProperty,
     kABMultiRealProperty         = kABMultiValueMask | kABRealProperty,
     kABMultiDateProperty         = kABMultiValueMask | kABDateProperty,
     kABMultiArrayProperty        = kABMultiValueMask | kABArrayProperty,
     kABMultiDictionaryProperty   = kABMultiValueMask | kABDictionaryProperty,
-    kABMultiDataProperty         = kABMultiValueMask | kABDataProperty
+    kABMultiDataProperty         = kABMultiValueMask | kABDataProperty,
+#if MAC_OS_X_VERSION_10_7 <= MAC_OS_X_VERSION_MAX_ALLOWED
+	kABMultiDateComponentsProperty = kABMultiValueMask | kABDateComponentsProperty
+#endif
 };
 typedef CFIndex ABPropertyType;
 

@@ -5,9 +5,8 @@
     Public header file.
 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 #import <Foundation/Foundation.h>
+#import <Automator/AMAttributesForAnalyzer.h>
 
 @class AMAction;
 @class AMWorkflowController;
@@ -29,16 +28,16 @@
 	NSArray *_loadingErrors;
 	BOOL _isBeingEdited;
 	BOOL _hasUnsavedChanges;
-	BOOL _isLoading;
-	BOOL _workflowIsShared;
+	AM_UNUSED_FOR_ANALYZER BOOL _isLoading;
+	AM_UNUSED_FOR_ANALYZER BOOL _workflowIsShared;
 	NSUInteger _updateCount;
 	id _inputType;
 	id _outputType;
 	
 	id _future;
-	id _future2;
-	id _future3;
-	id _future4;
+	AM_UNUSED_FOR_ANALYZER id _future2;
+	AM_UNUSED_FOR_ANALYZER id _future3;
+	AM_UNUSED_FOR_ANALYZER id _future4;
 }
 
 + (id)runWorkflowAtURL:(NSURL *)fileURL withInput:(id)input error:(NSError **)error;
@@ -46,14 +45,6 @@
 - (id)initWithContentsOfURL:(NSURL *)fileURL error:(NSError **)outError;
 
 - (BOOL)writeToURL:(NSURL *)fileURL error:(NSError **)outError;
-
-- (NSURL *)fileURL;
-- (NSArray *)actions;
-
-- (id)input;
-- (void)setInput:(id)input;
-
-- (id)output AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 - (BOOL)setValue:(id)value forVariableWithName:(NSString *)variableName;
 - (id)valueForVariableWithName:(NSString *)variableName;
@@ -63,6 +54,9 @@
 - (void)insertAction:(AMAction *)action atIndex:(NSUInteger)index;
 - (void)moveActionAtIndex:(NSUInteger)startIndex toIndex:(NSUInteger)endIndex;
 
-@end
+@property (readonly, copy) NSURL *fileURL;
+@property (readonly, retain) NSArray *actions;
+@property (readwrite, retain) id input;
+@property (readonly, retain) id output AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-#endif
+@end

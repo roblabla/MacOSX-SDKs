@@ -1,18 +1,16 @@
 /*
     NSAtomicStoreCacheNode.h
     Core Data
-    Copyright (c) 2004-2009 Apple Inc.
+    Copyright (c) 2004-2010 Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 #import <CoreData/NSEntityDescription.h>
 #import <CoreData/NSManagedObjectID.h>
 #import <CoreData/NSManagedObject.h>
 
+NS_CLASS_AVAILABLE(10_5,3_0)
 @interface NSAtomicStoreCacheNode : NSObject {
     @private
     NSManagedObjectID *_objectID;
@@ -47,5 +45,3 @@ The default implementation forwards the request to the -propertyCache dictionary
 - (void)setValue:(id)value forKey:(NSString*)key;
 
 @end
-
-#endif

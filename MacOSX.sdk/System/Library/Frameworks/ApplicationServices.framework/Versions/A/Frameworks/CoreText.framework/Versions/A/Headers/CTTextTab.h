@@ -2,7 +2,7 @@
  *	CTTextTab.h
  *	CoreText
  *
- *	Copyright (c) 2004-2008 Apple Inc. All rights reserved.
+ *	Copyright (c) 2004-2011 Apple Inc. All rights reserved.
  *
  */
 
@@ -17,6 +17,7 @@
 #ifndef __CTTEXTTAB__
 #define __CTTEXTTAB__
 
+#include <CoreText/CTDefines.h>
 #include <CoreText/CTParagraphStyle.h>
 #include <CoreFoundation/CFCharacterSet.h>
 #include <CoreFoundation/CFDictionary.h>
@@ -50,7 +51,7 @@ typedef const struct __CTTextTab * CTTextTabRef;
 	@abstract	Returns the CFType of the text tab object
 */
 
-CFTypeID CTTextTabGetTypeID( void ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CFTypeID CTTextTabGetTypeID( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -69,7 +70,7 @@ CFTypeID CTTextTabGetTypeID( void ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 				optional.
 */
 
-extern const CFStringRef kCTTabColumnTerminatorsAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTTabColumnTerminatorsAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -100,7 +101,7 @@ extern const CFStringRef kCTTabColumnTerminatorsAttributeName AVAILABLE_MAC_OS_X
 CTTextTabRef CTTextTabCreate(
 	CTTextAlignment alignment,
 	double location,
-	CFDictionaryRef options ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CFDictionaryRef options ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -118,7 +119,7 @@ CTTextTabRef CTTextTabCreate(
 */
 
 CTTextAlignment CTTextTabGetAlignment(
-	CTTextTabRef tab ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTTextTabRef tab ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -132,7 +133,7 @@ CTTextAlignment CTTextTabGetAlignment(
 */
 
 double CTTextTabGetLocation(
-	CTTextTabRef tab ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTTextTabRef tab ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -147,7 +148,7 @@ double CTTextTabGetLocation(
 */
 
 CFDictionaryRef CTTextTabGetOptions(
-	CTTextTabRef tab ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTTextTabRef tab ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 #if defined(__cplusplus)

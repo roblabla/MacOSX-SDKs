@@ -331,6 +331,10 @@ Definitions for bits/masks in the INQUIRY SCCSReserved field.
 SCCS bit definition.
 @constant kINQUIRY_Byte5_ACC_Bit
 ACC bit definition.
+@constant kINQUIRY_Byte5_ExplicitTPGS_Bit
+Explicit TPGS bit definition.
+@constant kINQUIRY_Byte5_ImplicitTPGS_Bit
+Implicit TPGS bit definition.
 @constant kINQUIRY_Byte5_3PC_Bit
 3PC bit definition.
 @constant kINQUIRY_Byte5_PROTECT_Bit
@@ -339,8 +343,10 @@ PROTECT bit definition.
 Mask to use to test the SCCS bit.
 @constant kINQUIRY_Byte5_ACC_Mask
 Mask to use to test the ACC bit.
-@constant kINQUIRY_Byte5_TPGS_Mask
-Mask to use for the TPGS bits.
+@constant kINQUIRY_Byte5_ExplicitTPGS_Mask
+Mask to use for the Explicit TPGS bits.
+@constant kINQUIRY_Byte5_ImplicitTPGS_Mask
+Mask to use for the Implicit TPGS bits.
 @constant kINQUIRY_Byte5_3PC_Mask
 Mask to use to test the 3PC bit.
 @constant kINQUIRY_Byte5_PROTECT_Mask
@@ -351,7 +357,8 @@ enum
 	// Bit definitions
 	kINQUIRY_Byte5_SCCS_Bit					= 7,
 	kINQUIRY_Byte5_ACC_Bit					= 6,
-	// Bits 4-5: TPGS
+	kINQUIRY_Byte5_ExplicitTPGS_Bit			= 5,
+	kINQUIRY_Byte5_ImplicitTPGS_Bit			= 4,
 	kINQUIRY_Byte5_3PC_Bit					= 3,
 	// Bits 1-2: Reserved
 	kINQUIRY_Byte5_PROTECT_Bit				= 0,
@@ -359,7 +366,9 @@ enum
 	// Masks
 	kINQUIRY_Byte5_SCCS_Mask				= (1 << kINQUIRY_Byte5_SCCS_Bit),
 	kINQUIRY_Byte5_ACC_Mask					= (1 << kINQUIRY_Byte5_ACC_Bit),
-	kINQUIRY_Byte5_TPGS_Mask				= 0x18,
+	kINQUIRY_Byte5_ExplicitTPGS_Mask		= (1 << kINQUIRY_Byte5_ExplicitTPGS_Bit),
+	kINQUIRY_Byte5_ImplicitTPGS_Mask		= (1 << kINQUIRY_Byte5_ImplicitTPGS_Bit),
+
 	kINQUIRY_Byte5_3PC_Mask					= (1 << kINQUIRY_Byte5_3PC_Bit),
 	// Bits 1-2: Reserved
 	kINQUIRY_Byte5_PROTECT_Mask				= (1 << kINQUIRY_Byte5_PROTECT_Bit)
@@ -572,6 +581,24 @@ Size of the kIOPropertySCSIPeripheralDeviceType key.
 */
 #define kIOPropertySCSIPeripheralDeviceTypeSize		8
 
+/*!
+@define kIOPropertyTPGSInfo
+TPGS Info as reported in the INQUIRY data.
+*/
+#define kIOPropertyTPGSInfo							"TPGS Information"
+
+/*!
+@define kIOPropertyHiSup
+Hierarchical LUN Support as reported in the INQUIRY data.
+*/
+#define kIOPropertyHiSup							"Hierarchical LUN Support"
+
+/*!
+@define kIOPropertyTPGSInfoSize
+Size of the kIOPropertyTPGSInfo key.
+*/
+#define kIOPropertyTPGSInfoSize						8
+
 /* These properties are listed in order of matching priority */
 
 /*!
@@ -613,7 +640,8 @@ enum
 	kINQUIRY_Page00_PageCode				= 0x00,
 	kINQUIRY_Page80_PageCode				= 0x80,
 	kINQUIRY_Page83_PageCode				= 0x83,
-	kINQUIRY_Page89_PageCode				= 0x89
+	kINQUIRY_Page89_PageCode				= 0x89,
+	kINQUIRY_PageB1_PageCode				= 0xB1
 };	
 
 
@@ -743,7 +771,8 @@ enum
 	// a Target device.
 	kINQUIRY_Page83_AssociationTargetDevice	= 0x20,
 	
-	kINQUIRY_Page83_AssociationMask			= 0x30
+	kINQUIRY_Page83_AssociationMask			= 0x30,
+	kINQUIRY_Page83_AssociationShift		= 4
 };	
 		
 
@@ -751,8 +780,8 @@ enum
 @enum INQUIRY Page 83h Identifier Type
 @discussion
 Definitions for the Identifier Type field.
-@constant kINQUIRY_Page83_IdentifierTypeUndefined
-Undefined Identifier Type.
+@constant kINQUIRY_Page83_IdentifierTypeVendorSpecific
+Vendor Specific Identifier Type.
 @constant kINQUIRY_Page83_IdentifierTypeVendorID
 Vendor Specific Identifier Type.
 @constant kINQUIRY_Page83_IdentifierTypeIEEE_EUI64
@@ -778,7 +807,7 @@ Mask to use to determine if PIV is set.
 */
 enum
 {
-	kINQUIRY_Page83_IdentifierTypeUndefined					= 0,
+	kINQUIRY_Page83_IdentifierTypeVendorSpecific			= 0,
 	kINQUIRY_Page83_IdentifierTypeVendorID					= 1,
 	kINQUIRY_Page83_IdentifierTypeIEEE_EUI64				= 2,
 	kINQUIRY_Page83_IdentifierTypeNAAIdentifier				= 3,
@@ -798,6 +827,7 @@ enum
 
 // Backwards compatibility
 #define kINQUIRY_Page83_IdentifierTypeFCNameIdentifier		kINQUIRY_Page83_IdentifierTypeNAAIdentifier
+#define kINQUIRY_Page83_IdentifierTypeUndefined				kINQUIRY_Page83_IdentifierTypeVendorSpecific
 
 
 /*!
@@ -876,6 +906,41 @@ Identifier key (data or string).
 #define kIOPropertySCSIINQUIRYDeviceIdentifier			"Identifier"
 		
 
+
+
+/*!
+@struct SCSICmd_INQUIRY_Page83_RelativeTargetPort_Identifier
+@discussion INQUIRY Page 83h Relative Target Port Identifier.
+*/
+typedef struct SCSICmd_INQUIRY_Page83_RelativeTargetPort_Identifier
+{
+	UInt16		OBSOLETE;
+	UInt16		RELATIVE_TARGET_PORT_IDENTIFIER;
+} SCSICmd_INQUIRY_Page83_RelativeTargetPort_Identifier;
+
+
+/*!
+@struct SCSICmd_INQUIRY_Page83_TargetPortGroup_Identifier
+@discussion INQUIRY Page 83h Target Port Group Identifier.
+*/
+typedef struct SCSICmd_INQUIRY_Page83_TargetPortGroup_Identifier
+{
+	UInt16		RESERVED;
+	UInt16		TARGET_PORT_GROUP;
+} SCSICmd_INQUIRY_Page83_TargetPortGroup_Identifier;
+
+
+/*!
+@struct SCSICmd_INQUIRY_Page83_LogicalUnitGroup_Identifier
+@discussion INQUIRY Page 83h Logical Unit Group Identifier.
+*/
+typedef struct SCSICmd_INQUIRY_Page83_LogicalUnitGroup_Identifier
+{
+	UInt16		RESERVED;
+	UInt16		LOGICAL_UNIT_GROUP;
+} SCSICmd_INQUIRY_Page83_LogicalUnitGroup_Identifier;
+
+
 /*!
 @struct SCSICmd_INQUIRY_Page89_Data
 @discussion INQUIRY Page 89h data as defined in the SAT 1.0
@@ -897,6 +962,29 @@ typedef struct SCSICmd_INQUIRY_Page89_Data
 	UInt8		Reserved2[3];
 	UInt8		IDENTIFY_DATA[512];
 } SCSICmd_INQUIRY_Page89_Data;
+
+
+/*!
+@struct SCSICmd_INQUIRY_PageB1_Data
+@discussion INQUIRY Page B1h data as defined in the SBC 
+specification. This section contians all structures and
+definitions used by the INQUIRY command in response to a request
+for page B1h - Block Device Characteristics VPD Page.
+*/
+typedef struct SCSICmd_INQUIRY_PageB1_Data
+{
+	UInt8		PERIPHERAL_DEVICE_TYPE;				// 7-5 = Qualifier. 4-0 = Device type.
+	UInt8		PAGE_CODE;							// Must be equal to B1h
+	UInt8		Reserved;
+	UInt8		PAGE_LENGTH;						// Must be equal to 3Ch
+	UInt16		MEDIUM_ROTATION_RATE;	
+	UInt8		Reserved2[58];
+} SCSICmd_INQUIRY_PageB1_Data;
+
+enum
+{
+	kINQUIRY_PageB1_Page_Length	= 0x3C
+};
 
 
 /*!

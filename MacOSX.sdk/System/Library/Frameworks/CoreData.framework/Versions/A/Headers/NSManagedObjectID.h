@@ -1,13 +1,11 @@
 /*
     NSManagedObjectID.h
     Core Data
-    Copyright (c) 2004-2009 Apple Inc.
+    Copyright (c) 2004-2010 Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_5
 #ifndef NSPersistentStore
@@ -20,6 +18,7 @@
 @class NSURL;
 
 // Managed object IDs are opaque identifiers for managed objects.
+NS_CLASS_AVAILABLE(10_4,3_0)
 @interface NSManagedObjectID : NSObject <NSCopying> {
 }
 
@@ -31,5 +30,3 @@
 - (NSURL *)URIRepresentation;    // URI which provides an archivable reference to the object which this ID refers
 
 @end
-
-#endif

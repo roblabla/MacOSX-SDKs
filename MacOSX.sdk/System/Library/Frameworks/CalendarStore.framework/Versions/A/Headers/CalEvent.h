@@ -35,7 +35,7 @@
 @property(copy) NSDate *startDate;
 @property(copy) NSDate *endDate;
 
-@property(readonly) NSArray *attendees;       //  It is not possible to modify an event's attendees
+@property(copy, readonly) NSArray *attendees;       //  It is not possible to modify an event's attendees
 
 //  These properties are only meaningful for CalEvents which are instances of a repeating event.
 
@@ -52,7 +52,7 @@
 //  originally scheduled to occur. This value will remain the same even if the event has been detached and its start 
 //  date has changed. For CalEvents not part of a repeating pattern, this method will return the same value as startDate.
 
-@property(readonly) NSDate *occurrence;
+@property(copy, readonly) NSDate *occurrence;
 
 @end
 

@@ -1,29 +1,38 @@
 /*
     NSEntityMigrationPolicy.h
     Core Data
-    Copyright (c) 2004-2009 Apple Inc.
+    Copyright (c) 2004-2010 Apple Inc.
     All rights reserved.
 */
+
+#import <Availability.h>
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSError.h>
 #import <Foundation/NSArray.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 #import <CoreData/CoreDataDefines.h>
 
-COREDATA_EXTERN NSString * const NSMigrationManagerKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-COREDATA_EXTERN NSString * const NSMigrationSourceObjectKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-COREDATA_EXTERN NSString * const NSMigrationDestinationObjectKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-COREDATA_EXTERN NSString * const NSMigrationEntityMappingKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-COREDATA_EXTERN NSString * const NSMigrationPropertyMappingKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-COREDATA_EXTERN NSString * const NSMigrationEntityPolicyKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/* To access the entity migration policy keys in property mapping value expressions implemented in source code use the constants as declared.  To access them in custom value expression strings in the mapping model editor in Xcode follow the syntax rules outlined in the predicate format string syntax guide and refer to them as:
+ NSMigrationManagerKey           $manager
+ NSMigrationSourceObjectKey      $source
+ NSMigrationDestinationObjectKey $destination
+ NSMigrationEntityMappingKey     $entityMapping
+ NSMigrationPropertyMappingKey   $propertyMapping
+ NSMigrationEntityPolicyKey      $entityPolicy
+*/
+COREDATA_EXTERN NSString * const NSMigrationManagerKey NS_AVAILABLE(10_5,3_0);
+COREDATA_EXTERN NSString * const NSMigrationSourceObjectKey NS_AVAILABLE(10_5,3_0);
+COREDATA_EXTERN NSString * const NSMigrationDestinationObjectKey NS_AVAILABLE(10_5,3_0);
+COREDATA_EXTERN NSString * const NSMigrationEntityMappingKey NS_AVAILABLE(10_5,3_0);
+COREDATA_EXTERN NSString * const NSMigrationPropertyMappingKey NS_AVAILABLE(10_5,3_0);
+COREDATA_EXTERN NSString * const NSMigrationEntityPolicyKey NS_AVAILABLE(10_5,3_0);
 
 @class NSManagedObject;
 @class NSEntityMapping;
 @class NSMigrationManager;
 
+NS_CLASS_AVAILABLE(10_5,3_0)
 @interface NSEntityMigrationPolicy : NSObject
 
 
@@ -65,4 +74,3 @@ associate the source and destination instances as required if super is not calle
 
 @end
 
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */

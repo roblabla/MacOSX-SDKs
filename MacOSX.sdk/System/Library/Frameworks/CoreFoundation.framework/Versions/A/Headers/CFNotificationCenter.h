@@ -1,5 +1,5 @@
 /*	CFNotificationCenter.h
-	Copyright (c) 1998-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2011, Apple Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFNOTIFICATIONCENTER__)
@@ -28,13 +28,12 @@ typedef CFIndex CFNotificationSuspensionBehavior;
 
 CF_EXPORT CFTypeID CFNotificationCenterGetTypeID(void);
 
-CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetLocalCenter(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetLocalCenter(void);
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
 CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetDistributedCenter(void);
-#endif
+// Note that distributed notifications are not posted or received in the iOS Simulator.
 
-CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetDarwinNotifyCenter(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetDarwinNotifyCenter(void);
 // The Darwin Notify Center is based on the <notify.h> API.
 // For this center, there are limitations in the API. There are no notification "objects",
 // "userInfo" cannot be passed in the notification, and there are no suspension behaviors
@@ -59,16 +58,15 @@ CF_EXPORT void CFNotificationCenterRemoveEveryObserver(CFNotificationCenterRef c
 
 CF_EXPORT void CFNotificationCenterPostNotification(CFNotificationCenterRef center, CFStringRef name, const void *object, CFDictionaryRef userInfo, Boolean deliverImmediately);
 
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 enum {
     kCFNotificationDeliverImmediately = (1UL << 0),
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
+    // no multiple sessions on iOS
     kCFNotificationPostToAllSessions = (1UL << 1)
+#endif
 };
 
-void CFNotificationCenterPostNotificationWithOptions(CFNotificationCenterRef center, CFStringRef name, const void *object, CFDictionaryRef userInfo, CFOptionFlags options) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-
-#endif
+CF_EXPORT void CFNotificationCenterPostNotificationWithOptions(CFNotificationCenterRef center, CFStringRef name, const void *object, CFDictionaryRef userInfo, CFOptionFlags options);
 
 
 CF_EXTERN_C_END

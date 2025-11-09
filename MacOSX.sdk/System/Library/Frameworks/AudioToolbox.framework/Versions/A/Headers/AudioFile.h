@@ -119,7 +119,13 @@ typedef UInt32			AudioFileTypeID;
     @constant   kAudioFileOperationNotSupportedError 
 		The operation cannot be performed. For example, setting kAudioFilePropertyAudioDataByteCount to increase 
 		the size of the audio data in a file is not a supported operation. Write the data instead.
-*/
+	@constant   kAudioFileEndOfFileError 
+		End of file.
+	@constant   kAudioFilePositionError 
+		Invalid file position.
+	@constant   kAudioFileNotOpenError 
+		The file is closed.
+ */
 enum {
         kAudioFileUnspecifiedError						= 'wht?',
         kAudioFileUnsupportedFileTypeError 				= 'typ?',
@@ -133,7 +139,11 @@ enum {
         kAudioFileDoesNotAllow64BitDataSizeError		= 'off?',
         kAudioFileInvalidPacketOffsetError				= 'pck?',
         kAudioFileInvalidFileError						= 'dta?',
-		kAudioFileOperationNotSupportedError			= 0x6F703F3F // 'op??', integer used because of trigraph
+		kAudioFileOperationNotSupportedError			= 0x6F703F3F, // 'op??', integer used because of trigraph
+		// general file error codes
+		kAudioFileNotOpenError							= -38,
+		kAudioFileEndOfFileError						= -39,
+		kAudioFilePositionError							= -40
 };
 
 /*!
@@ -466,6 +476,8 @@ typedef struct AudioFilePacketTableInfo AudioFilePacketTableInfo;
 #define kAFInfoDictionary_ChannelLayout					"channel layout"
 #define kAFInfoDictionary_ApproximateDurationInSeconds  "approximate duration in seconds"
 #define kAFInfoDictionary_SourceBitDepth				"source bit depth"
+#define kAFInfoDictionary_ISRC							"ISRC"					// International Standard Recording Code
+#define kAFInfoDictionary_SubTitle						"subtitle"
 
 //=============================================================================
 //	Routines
@@ -662,7 +674,7 @@ AudioFileOptimize (AudioFileID  	inAudioFile)							__OSX_AVAILABLE_STARTING(__M
     @function	AudioFileReadBytes
     @abstract   Read bytes of audio data from the audio file. 
 				
-    @discussion				Returns eofErr when read encounters end of file.
+    @discussion				Returns kAudioFileEndOfFileError when read encounters end of file.
     @param inAudioFile		an AudioFileID.
     @param inUseCache 		true if it is desired to cache the data upon read, else false
     @param inStartingByte	the byte offset of the audio data desired to be returned
@@ -705,7 +717,7 @@ AudioFileWriteBytes (	AudioFileID  	inAudioFile,
 				If the buffer is too small for the number of packets 
 				requested, ioNumPackets and ioNumBytes will be reduced 
 				to the number of packets that can be accommodated and their byte size.
-				Returns eofErr when read encounters end of file.
+				Returns kAudioFileEndOfFileError when read encounters end of file.
 
     @param inAudioFile				an AudioFileID.
     @param inUseCache 				true if it is desired to cache the data upon read, else false
@@ -943,7 +955,7 @@ AudioFileRemoveUserData ( AudioFileID			inAudioFile,
     @constant   kAudioFilePropertyPacketTableInfo 
 					Gets or sets an AudioFilePacketTableInfo struct for the file types that support it.
 					When setting, the sum of mNumberValidFrames, mPrimingFrames and mRemainderFrames must be the same as the total
-					number of frames in all packets. If not you will get a paramErr. The best way to ensure this is to get the value of
+					number of frames in all packets. If not you will get a kAudio_ParamError. The best way to ensure this is to get the value of
 					the property and make sure the sum of the three values you set has the same sum as the three values you got.
 	@constant	kAudioFilePropertyPacketSizeUpperBound
 					a UInt32 for the theoretical maximum packet size in the file (without actually scanning
@@ -965,7 +977,10 @@ AudioFileRemoveUserData ( AudioFileID			inAudioFile,
 	@constant	kAudioFilePropertySourceBitDepth
 					For encoded data this property returns the bit depth of the source as an SInt32, if known.
 					The bit depth is expressed as a negative number if the source was floating point, e.g. -32 for float, -64 for double.
-*/
+	@constant	kAudioFilePropertyAlbumArtwork
+					returns a CFDataRef filled with the Album Art. Data will formatted as either JFIF (JPEG) or PNG (PNG) 
+					The caller is responsible for releasing the CFObject.
+ */
 enum
 {
 	kAudioFilePropertyFileFormat			=	'ffmt',
@@ -994,7 +1009,8 @@ enum
 	kAudioFilePropertyEstimatedDuration		=	'edur',
 	kAudioFilePropertyBitRate				=	'brat',
 	kAudioFilePropertyID3Tag				=	'id3t',
-	kAudioFilePropertySourceBitDepth		=	'sbtd'
+	kAudioFilePropertySourceBitDepth		=	'sbtd',
+	kAudioFilePropertyAlbumArtwork			=	'aart'
 };
 
 

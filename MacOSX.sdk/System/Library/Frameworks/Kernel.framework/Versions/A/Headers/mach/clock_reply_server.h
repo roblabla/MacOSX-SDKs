@@ -52,11 +52,21 @@ kern_return_t clock_alarm_reply
 	mach_timespec_t alarm_time
 );
 
-extern boolean_t clock_reply_server(
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+boolean_t clock_reply_server(
 		mach_msg_header_t *InHeadP,
 		mach_msg_header_t *OutHeadP);
 
-extern mig_routine_t clock_reply_server_routine(
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+mig_routine_t clock_reply_server_routine(
 		mach_msg_header_t *InHeadP);
 
 

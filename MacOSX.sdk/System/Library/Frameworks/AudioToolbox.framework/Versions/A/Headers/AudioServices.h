@@ -3,7 +3,7 @@
 
      Contains:   API for general high level audio services.
 
-     Copyright:  (c) 2006 - 2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2006 - 2008 by Apple, Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -28,7 +28,7 @@
     aspects of an audio hardware device without incurring the overhead of loading the full audio
     HAL. AHS provides access to all the AudioObjects and their properties on the system. However,
     access is limited to only those properties that do not directly impact IO. For example, you can
-    query the device's format but you can't query it's IO buffer size. As such, the AHS API directly
+    query the device's format but you can't query its IO buffer size. As such, the AHS API directly
     incorporates the various structures and constants in HAL's API, with the caveat that the
     AudioObjectIDs used in AHS cannot be used with the HAL.
 */
@@ -572,6 +572,15 @@ AudioHardwareServiceRemovePropertyListener( AudioObjectID                       
     @constant       kAudioSessionNotActiveError 
                         The operation failed because the AudioSession is not active.
                         Calling AudioSessionSetActive(true) first will fix this error in most cases.
+    @constant       kAudioSessionNoCategorySet
+                        The requested operation failed because it requires that the session have had an
+                        audio category explicitly set, and none was set.
+    @constant       kAudioSessionIncompatibleCategory
+                        The requested operation failed because the AudioSession has an incompatible
+                        category (e.g. attempting to play or record when the category is AudioProcessing).
+    @constant       kAudioSessionUnspecifiedError
+                        An audio session unspecified error has occurred.  This would indicate an 
+                        Apple-internal bug or that the audio system is currently in a bad state.
 */
 enum
 {
@@ -581,7 +590,11 @@ enum
     kAudioSessionInitializationError                    = 'ini?',
     kAudioSessionUnsupportedPropertyError               = 'pty?',
     kAudioSessionBadPropertySizeError                   = '!siz',
-    kAudioSessionNotActiveError                         = '!act'
+    kAudioSessionNotActiveError                         = '!act',
+    kAudioServicesNoHardwareError                       = 'nohw',
+    kAudioSessionNoCategorySet                          = '?cat',
+    kAudioSessionIncompatibleCategory                   = '!cat',
+    kAudioSessionUnspecifiedError                       = 'what'
 };
 
 //==================================================================================================
@@ -620,29 +633,27 @@ enum {
     @enum           AudioSession audio categories states
     @abstract       These are used with as values for the kAudioSessionProperty_AudioCategory property
                     to indicate the audio category of the AudioSession.
-    @constant       kAudioSessionCategory_UserInterfaceSoundEffects
-                        Use this category for sound effects such as touch feedback, explosions, etc.
     @constant       kAudioSessionCategory_AmbientSound 
-                        Use this category for backgound sounds such as rain, car engine noise, etc.  Mixes with other music.
+                        Use this category for background sounds such as rain, car engine noise, etc.  Mixes with other music.
     @constant       kAudioSessionCategory_SoloAmbientSound 
-                        Use this category for backgound sounds.  Other music will stop playing.
+                        Use this category for background sounds.  Other music will stop playing.
     @constant       kAudioSessionCategory_MediaPlayback 
                         Use this category for music tracks.
-    @constant       kAudioSessionCategory_LiveAudio 
-                        Use this category for interactive music such as playing an instrument on the screen.
     @constant       kAudioSessionCategory_RecordAudio 
                         Use this category when recording audio.
     @constant       kAudioSessionCategory_PlayAndRecord 
                         Use this category when recording and playing back audio.
+    @constant       kAudioSessionCategory_AudioProcessing
+                        Use this category when using a hardware codec or signal processor while
+                        not playing or recording audio.
 */
 enum {
-    kAudioSessionCategory_UserInterfaceSoundEffects  = 'uifx',
     kAudioSessionCategory_AmbientSound               = 'ambi',
     kAudioSessionCategory_SoloAmbientSound           = 'solo',
     kAudioSessionCategory_MediaPlayback              = 'medi',
-    kAudioSessionCategory_LiveAudio                  = 'live',
     kAudioSessionCategory_RecordAudio                = 'reca',
-    kAudioSessionCategory_PlayAndRecord              = 'plar'
+    kAudioSessionCategory_PlayAndRecord              = 'plar',
+    kAudioSessionCategory_AudioProcessing            = 'proc'
 };
 
 #pragma mark    AudioSession Audio Category Routing Overrides
@@ -677,10 +688,12 @@ enum {
                         The audio category has changed (e.g. kAudioSessionCategory_MediaPlayback
                         has been changed to kAudioSessionCategory_PlayAndRecord).
     @constant       kAudioSessionRouteChangeReason_Override
-                        The route has been overriden (e.g. category is kAudioSessionCategory_PlayAndRecord
+                        The route has been overridden (e.g. category is kAudioSessionCategory_PlayAndRecord
                         and the output has been changed from the receiver, which is the default, to the speaker).
     @constant       kAudioSessionRouteChangeReason_WakeFromSleep
                         The device woke from sleep.
+    @constant       kAudioSessionRouteChangeReason_NoSuitableRouteForCategory
+                        Returned when there is no route for the current category (for instance RecordCategory but no input device)
 */
 enum {
 	kAudioSessionRouteChangeReason_Unknown = 0,
@@ -689,6 +702,7 @@ enum {
 	kAudioSessionRouteChangeReason_CategoryChange = 3,
 	kAudioSessionRouteChangeReason_Override = 4,
 	kAudioSessionRouteChangeReason_WakeFromSleep = 6,
+    kAudioSessionRouteChangeReason_NoSuitableRouteForCategory = 7
 };
 
 #define kAudioSession_AudioRouteChangeKey_Reason    "OutputDeviceDidChange_Reason"
@@ -713,7 +727,7 @@ enum {
     @constant       kAudioSessionProperty_AudioRouteChange 
                         The value for this property is ONLY provided with the property changed callback. You cannot get the 
                         value of this property (or set it).
-                        The property changed callbak provides a CFDictionaryRef with two keyed values:
+                        The property changed callback provides a CFDictionaryRef with two keyed values:
                         Key = kAudioSession_AudioRouteChangeKey_Reason; value is a CFNumberRef with one of the reasons listed above.
                         Key = kAudioSession_AudioRouteChangeKey_OldRoute; value is a CFStringRef with the name of the old route.
                         The new route can be obtained by calling AudioSessionGetProperty(kAudioSessionProperty_AudioRoute).
@@ -723,7 +737,7 @@ enum {
                         A UInt32 indicating the current number of hardware input channels
     @constant       kAudioSessionProperty_CurrentHardwareOutputNumberChannels 
                         A UInt32 indicating the current number of hardware output channels
-     @constant       kAudioSessionProperty_CurrentHardwareOutputVolume 
+    @constant       kAudioSessionProperty_CurrentHardwareOutputVolume 
                         A Float32 indicating the current output volume
     @constant       kAudioSessionProperty_CurrentHardwareInputLatency 
                         A Float32 indicating the current hardware input latency in seconds.
@@ -740,6 +754,46 @@ enum {
                         Use this property, rather than the device model, to determine if audio input is available.
                         A listener will notify you when audio input becomes available.  For instance, when a headset is attached
                         to the second generation iPod Touch, audio input becomes available via the wired microphone. 
+    @constant       kAudioSessionProperty_ServerDied
+    					Available with iPhone 3.0 or greater
+                        The value for this property is ONLY provided with the property changed callback. You cannot get the 
+                        value of this property (or set it). The property changed callback notifies you that
+                        the audio server has died.
+    @constant       kAudioSessionProperty_OtherMixableAudioShouldDuck
+    					Available with iPhone 3.0 or greater
+                        If the current session category of an application allows mixing (iPod playback in the background for example), then that other audio will be ducked when the current application makes any sound. An example of this is the Nike app that does this as it provides periodic updates to its user (it ducks any iPod music currently being played while it provides its status).
+                        This defaults to off (0). Note that the other audio will be ducked for as long as the current session is active. You will need to deactivate your audio session when you want full volume playback of the other audio.
+    @constant       kAudioSessionProperty_OverrideCategoryMixWithOthers
+    					Available with iPhone 3.0 or greater
+                        This allows an application to change the default behavior of some audio session categories with regards to whether other applications can play while your session is active. The two typical cases are:
+                            (1) PlayAndRecord category
+                                this will default to false, but can be set to true. This would allow iPod to play in the background while an app had both audio input and output enabled
+                            (2) MediaPlayback category
+                                this will default to false, but can be set to true. This would allow iPod to play in the background, but an app will still be able to play regardless of the setting of the ringer switch 
+                            (3) Other categories
+                                this defaults to false and cannot be changed (that is, the mix with others setting of these categories cannot be overridden 
+                        An application must be prepared for setting this property to fail as behaviour may change in future releases. 
+                        If an application changes their category, they should reassert the override (it is not sticky across category changes)
+    @constant       kAudioSessionProperty_OverrideCategoryDefaultToSpeaker
+    					Available with iPhone 3.1 or greater
+                        This allows an application to change the default behaviour of some audio session categories with regards to the audio route. The current category behavior is:
+                            (1) PlayAndRecord category
+                                this will default to false, but can be set to true. this will route to Speaker (instead of Receiver) when no other audio route is connected.
+                            (2) Other categories
+                                this defaults to false and cannot be changed (that is, the default to speaker setting of these categories cannot be overridden 
+                        An application must be prepared for setting this property to fail as behaviour may change in future releases. 
+                        If an application changes their category, they should reassert the override (it is not sticky across category changes)
+    @constant       kAudioSessionProperty_OverrideCategoryEnableBluetoothInput
+    					Available with iPhone 3.1 or greater
+                        This allows an application to change the default behaviour of some audio session categories with regards to showing bluetooth devices as available routes. The current category behavior is:
+                            (1) PlayAndRecord category
+                                this will default to false, but can be set to true. This will allow a paired bluetooth device to show up as an available route for input, while playing through the category-appropriate output
+                            (2) Record category
+                                this will default to false, but can be set to true. This will allow a paired bluetooth device to show up as an available route for input 
+                            (3) Other categories
+                                this defaults to false and cannot be changed (that is, enabling bluetooth for input in these categories is not allowed) 
+                        An application must be prepared for setting this property to fail as behaviour may change in future releases. 
+                        If an application changes their category, they should reassert the override (it is not sticky across category changes)
 */
 enum { // typedef UInt32 AudioSessionPropertyID
     kAudioSessionProperty_PreferredHardwareSampleRate           = 'hwsr',   // Float64          (get/set)
@@ -756,7 +810,12 @@ enum { // typedef UInt32 AudioSessionPropertyID
     kAudioSessionProperty_CurrentHardwareIOBufferDuration       = 'chbd',   // Float32          (get only)
     kAudioSessionProperty_OtherAudioIsPlaying                   = 'othr',   // UInt32           (get only)
     kAudioSessionProperty_OverrideAudioRoute                    = 'ovrd',   // UInt32           (set only)
-    kAudioSessionProperty_AudioInputAvailable                   = 'aiav'    // UInt32           (get only/property listener)
+    kAudioSessionProperty_AudioInputAvailable                   = 'aiav',   // UInt32           (get only/property listener)
+    kAudioSessionProperty_ServerDied                            = 'died',   // UInt32           (property listener)
+    kAudioSessionProperty_OtherMixableAudioShouldDuck           = 'duck',   // UInt32           (get/set)
+    kAudioSessionProperty_OverrideCategoryMixWithOthers         = 'cmix',   // UInt32           (get, some set)
+    kAudioSessionProperty_OverrideCategoryDefaultToSpeaker      = 'cspk',   // UInt32           (get, some set)
+    kAudioSessionProperty_OverrideCategoryEnableBluetoothInput  = 'cblu',   // UInt32           (get, some set)
 };
 
 //==================================================================================================
@@ -779,9 +838,9 @@ typedef void (*AudioSessionInterruptionListener)(
 
 /*!
     @typedef        AudioSessionPropertyListener
-    @abstract       A function to be executed when a property chages.
+    @abstract       A function to be executed when a property changes.
     @discussion     AudioSessionPropertyListener may be provided by client application to be
-                    called when a property chages.
+                    called when a property changes.
     @param          inClientData
                         The client user data to use when calling the listener.
     @param          inID
@@ -880,7 +939,7 @@ AudioSessionSetProperty(            AudioSessionPropertyID              inID,
 
 /*!
     @function       AudioSessionGetPropertySize
-    @abstract       Get the size of the paload for a property.
+    @abstract       Get the size of the payload for a property.
     @discussion     This function can be called to get the size for the payload of a property.
                     Valid properties are listed in an enum above.
     @param          inID
@@ -933,6 +992,23 @@ extern OSStatus
 AudioSessionRemovePropertyListenerWithUserData(	AudioSessionPropertyID          inID,
                                                 AudioSessionPropertyListener    inProc,
                                                 void                            *inClientData)              __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_2_1);
+
+
+#pragma mark -
+#pragma mark Deprecated
+
+/*!
+    @enum           AudioSession audio categories states
+    @abstract       These two session categories are deprecated in iPhone 3.0 or later
+    @constant       kAudioSessionCategory_UserInterfaceSoundEffects
+                        use kAudioSessionCategory_AmbientSound
+    @constant       kAudioSessionCategory_LiveAudio 
+                        use kAudioSessionCategory_MediaPlayback
+*/
+enum {
+    kAudioSessionCategory_UserInterfaceSoundEffects  = 'uifx',
+    kAudioSessionCategory_LiveAudio                  = 'live'
+};
 
 //==================================================================================================
 #endif //TARGET_OS_IPHONE

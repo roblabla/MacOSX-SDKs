@@ -16,6 +16,8 @@
 #define __COREVIDEO_CVHOSTTIME_H__ 1
 
 #include <TargetConditionals.h>
+#include <Availability.h>
+#include <AvailabilityMacros.h>
 
 #include <CoreVideo/CVBase.h>
 
@@ -30,7 +32,7 @@ extern "C" {
                 may be used interchangeably.
     @result     The current host time.
 */
-extern uint64_t CVGetCurrentHostTime() AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT uint64_t CVGetCurrentHostTime() __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVGetHostClockFrequency
@@ -39,14 +41,14 @@ extern uint64_t CVGetCurrentHostTime() AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER
                 may be used interchangeably.
     @result     The current host frequency.
 */
-extern double   CVGetHostClockFrequency() AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT double   CVGetHostClockFrequency() __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVGetHostClockMinimumTimeDelta
     @abstract   Retrieve the smallest possible increment in the host time base.
     @result     The smallest valid increment in the host time base.
 */
-extern uint32_t CVGetHostClockMinimumTimeDelta() AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT uint32_t CVGetHostClockMinimumTimeDelta() __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 #if defined(__cplusplus)
 }

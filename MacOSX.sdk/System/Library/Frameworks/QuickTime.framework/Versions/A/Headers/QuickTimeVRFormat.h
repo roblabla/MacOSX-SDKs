@@ -3,7 +3,7 @@
  
      Contains:   QuickTime VR interfaces
  
-     Version:    QuickTime 7.6.6
+     Version:    QuickTime 7.7.1
  
      Copyright:  © 1997-2010 by Apple Inc., all rights reserved.
  

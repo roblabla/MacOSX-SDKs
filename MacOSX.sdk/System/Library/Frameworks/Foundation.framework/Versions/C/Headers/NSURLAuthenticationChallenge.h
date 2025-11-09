@@ -1,14 +1,9 @@
 /*	
     NSURLAuthenticationChallenge.h
-    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
     
     Public header file.
 */
-
-// Note: To use the APIs described in these headers, you must perform
-// a runtime check for Foundation-462.1 or later.
-#import <AvailabilityMacros.h>
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 
@@ -23,7 +18,9 @@
     @discussion This protocol represents the sender of an
     authentication challenge. It has methods to provide a credential,
     to continue without any credential, getting whatever failure
-    result would happen in that case, or to cancel.
+    result would happen in that case, cancel a challenge, perform the default
+    action as defined by the system, or reject the currently supplied protection-space
+    in the challenge.
 */
 
 @protocol NSURLAuthenticationChallengeSender <NSObject>
@@ -42,6 +39,17 @@
     @method cancelAuthenticationChallenge:
 */
 - (void)cancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+
+@optional
+/*!
+ @method performDefaultHandlingForAuthenticationChallenge:
+ */
+- (void)performDefaultHandlingForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+
+/*!
+ @method rejectProtectionSpaceAndContinueWithChallenge:
+ */
+- (void)rejectProtectionSpaceAndContinueWithChallenge:(NSURLAuthenticationChallenge *)challenge;
 
 @end
 
@@ -140,5 +148,3 @@
 - (id<NSURLAuthenticationChallengeSender>)sender;
 
 @end
-
-#endif

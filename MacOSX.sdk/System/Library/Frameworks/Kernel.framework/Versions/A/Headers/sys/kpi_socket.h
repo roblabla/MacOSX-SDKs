@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2008-2011 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -56,7 +56,12 @@ struct timeval;
 		Calls to your upcall function are not serialized and may be
 		called concurrently from multiple threads in the kernel.
 
-		Your upcall function will be called when:
+		Your upcall function will be called: 
+		    when there is data more than the low water mark for reading, 
+		    or when there is space for a write,
+		    or when there is a connection to accept,
+		    or when a socket is connected,
+		    or when a socket is closed or disconnected
 
 	@param so A reference to the socket that's ready.
 	@param cookie The cookie passed in when the socket was created.

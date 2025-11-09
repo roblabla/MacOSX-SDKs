@@ -3,7 +3,7 @@
  
      Contains:   Folder Manager Interfaces.
  
-     Version:    CarbonCore-861.39~1
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 1995-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -350,6 +350,11 @@ enum {
   kPublicFolderType             = 'pubb' /* Refers to the "Public" folder in a users home directory*/
 };
 
+/*  The following selectors are available on Mac OS X 10.7 and later.*/
+enum {
+  kDropBoxFolderType            = 'drop' /* Refers to the "Drop Box" folder inside the user's home directory*/
+};
+
 enum {
   kSharedLibrariesFolderType    = 0xC46C6962/*'Älib'*/, /* for general shared libs. */
   kVoicesFolderType             = 'fvoc', /* macintalk can live here */
@@ -438,7 +443,11 @@ enum {
 };
 
 enum {
-  kQuickLookFolderType          = 'qlck' /* The QuickLook folder, supported in Mac OS X SnowLeopard and later. */
+  kQuickLookFolderType          = 'qlck' /* The QuickLook folder, supported in Mac OS X 10.6 and later. */
+};
+
+enum {
+  kServicesFolderType           = 'svcs' /* The services folder, supported in Mac OS X 10.7 and later. */
 };
 
 enum {

@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 1999-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 1999-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
@@ -11,10 +11,10 @@
  * unlawful or unlicensed copies of an Apple operating system, or to
  * circumvent, violate, or enable the circumvention or violation of, any
  * terms of an Apple operating system software license agreement.
- * 
+ *
  * Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -22,12 +22,12 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 /* Copyright (c) 1998, 1999 Apple Computer, Inc. All Rights Reserved */
 /* Copyright (c) 1995 NeXT Computer, Inc. All Rights Reserved */
-/* 
+/*
  * Mach Operating System
  * Copyright (c) 1987 Carnegie-Mellon University
  * All rights reserved.  The CMU software License Agreement specifies
@@ -68,11 +68,6 @@
  * SUCH DAMAGE.
  *
  *	@(#)mbuf.h	8.3 (Berkeley) 1/21/94
- **********************************************************************
- * HISTORY
- * 20-May-95  Mac Gillon (mgillon) at NeXT
- *	New version based on 4.4
- *	Purged old history
  */
 /*
  * NOTICE: This file was modified by SPARTA, Inc. in 2005 to introduce
@@ -86,7 +81,6 @@
 
 #include <sys/cdefs.h>
 #include <sys/appleapiopts.h>
-
 
 
 /* mbuf types */
@@ -103,10 +97,10 @@
 #define	MT_FTABLE	11	/* fragment reassembly header */
 #define	MT_RIGHTS	12	/* access rights */
 #define	MT_IFADDR	13	/* interface address */
-#define MT_CONTROL	14	/* extra-data protocol message */
-#define MT_OOBDATA	15	/* expedited data  */
-#define MT_TAG          16      /* volatile metadata associated to pkts */
-#define MT_MAX		32	/* enough? */
+#define	MT_CONTROL	14	/* extra-data protocol message */
+#define	MT_OOBDATA	15	/* expedited data  */
+#define	MT_TAG		16	/* volatile metadata associated to pkts */
+#define	MT_MAX		32	/* enough? */
 
 
 /*
@@ -198,6 +192,8 @@ typedef struct mb_stat {
 #endif /* KERNEL || __LP64__ */
 	mb_class_stat_t	mbs_class[1];	/* class array */
 } mb_stat_t;
+
+
 
 #include <sys/kpi_mbuf.h>
 #endif	/* !_SYS_MBUF_H_ */

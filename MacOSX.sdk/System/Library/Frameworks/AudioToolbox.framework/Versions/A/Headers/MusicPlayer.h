@@ -3,7 +3,7 @@
  
      Contains:   MusicPlayer application interfaces
   
-     Copyright:  (c) 2000-2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2000-2008 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,7 +20,6 @@
 #include <AudioUnit/MusicDevice.h>
 #include <AudioToolbox/AUGraph.h>
 #include <CoreMIDI/MIDIServices.h>
-#include <AudioToolbox/CoreAudioClock.h>
 
 #if defined(__cplusplus)
 extern "C"
@@ -67,7 +66,6 @@ extern "C"
 	@abstract music event types, including both MIDI and "extended" protocol
 	@constant kMusicEventType_NULL	
 	@constant kMusicEventType_ExtendedNote		note with variable number of arguments (non-MIDI)
-	@constant kMusicEventType_ExtendedControl	control change (non-MIDI)
 	@constant kMusicEventType_ExtendedTempo		tempo change in BPM
 	@constant kMusicEventType_User				user defined data
 	@constant kMusicEventType_Meta				standard MIDI file meta event
@@ -79,18 +77,16 @@ extern "C"
 */
 enum
 {
-	kMusicEventType_NULL				= 0,
-	kMusicEventType_ExtendedNote,
-	kMusicEventType_ExtendedControl,
-	kMusicEventType_ExtendedTempo,
-	kMusicEventType_User,
-	kMusicEventType_Meta,
-	kMusicEventType_MIDINoteMessage,
-	kMusicEventType_MIDIChannelMessage,
-	kMusicEventType_MIDIRawData,
-	kMusicEventType_Parameter,
-	kMusicEventType_AUPreset,
-	kMusicEventType_Last	// always keep at end
+	kMusicEventType_NULL					= 0,
+	kMusicEventType_ExtendedNote			= 1,
+	kMusicEventType_ExtendedTempo			= 3,
+	kMusicEventType_User					= 4,
+	kMusicEventType_Meta					= 5,
+	kMusicEventType_MIDINoteMessage			= 6,
+	kMusicEventType_MIDIChannelMessage		= 7,
+	kMusicEventType_MIDIRawData				= 8,
+	kMusicEventType_Parameter				= 9,
+	kMusicEventType_AUPreset				= 10
 };
 typedef UInt32		MusicEventType;
 
@@ -253,19 +249,6 @@ typedef struct ExtendedNoteOnEvent
 } ExtendedNoteOnEvent;
 
 /*!
-	@struct		ExtendedControlEvent
-	@discussion	The parameters to specify an extended control event. This is a specialisation of
-				the ParameterEvent (where the scope is AudioUnitScope_Group and the parameter ID
-				on the group scope is the controlID).
-*/
-typedef struct ExtendedControlEvent
-{
-	MusicDeviceGroupID			groupID;
-	AudioUnitParameterID		controlID;
-	AudioUnitParameterValue		value;
-} ExtendedControlEvent;
-
-/*!
 	@struct		ParameterEvent
 	@discussion	The parameters to specify a parameter event to an audio unit.
 */
@@ -296,6 +279,46 @@ typedef struct AUPresetEvent
     AudioUnitElement			element;
 	CFPropertyListRef 			preset;
 } AUPresetEvent;
+
+
+#if TARGET_OS_IPHONE
+// CAClock is currently not supported on iOS, so we include the definition of this structure here 
+// (otherwise we include the CAClock header
+/*!
+	@struct		CABarBeatTime
+	@abstract	A display representation of a musical time in beats.
+	
+	@field	bar
+				A measure number.
+	@field	beat
+				A beat number (1..n).
+	@field	subbeat
+				The numerator of the fractional number of beats.
+	@field	subbeatDivisor
+				The denominator of the fractional number of beats.
+	@field	reserved
+				Must be 0.
+	@discussion
+				A clock's internal representation of musical time is in beats based on the
+				beginning of the timeline. Normally, such times should be displayed to the user
+				in terms of bars, beats, and subbeats (sometimes called "units" or "parts per
+				quarter" [PPQ]). This data structure is such a display representation.
+
+				By convention, bar 1 is the beginning of the sequence. Beat 1 is the first beat
+				of the measure. In 4/4 time, beat will have a value from 1 to 4. Music
+				applications often use beat divisions such as 480 and 960.
+*/
+struct CABarBeatTime {
+	SInt32				bar;
+	UInt16				beat;
+	UInt16				subbeat;
+	UInt16				subbeatDivisor;
+	UInt16				reserved;
+};
+typedef struct CABarBeatTime CABarBeatTime;
+#else
+	#include <AudioToolbox/CoreAudioClock.h>
+#endif
 
 typedef struct OpaqueMusicPlayer		*MusicPlayer;
 typedef struct OpaqueMusicSequence		*MusicSequence;
@@ -368,7 +391,7 @@ enum
 	@constant	kSequenceTrackProperty_AutomatedParameters
 		read/write	- UInt32
 		Determines whether a track is used for automating parameters.
-		If set to != 0 the track is used to automate paramter events to an AUNode.
+		If set to != 0 the track is used to automate parameter events to an AUNode.
 		The track can only contain parameter events and these events are interpreted 
 		as points in the automation curve
 		
@@ -377,7 +400,7 @@ enum
 		The time of the last event in the track plus any additional time that is allowed for fading out of ending notes
 		or round a loop point to musical bar, etc.
 		
-		If this is not set, the track length will alwasy be adjusted to the end of the last active event in a track and 
+		If this is not set, the track length will always be adjusted to the end of the last active event in a track and 
 		is adjusted dynamically as events are added or removed.
 		
 		The property will return the max of the user set track length, or the calculated length
@@ -389,7 +412,7 @@ enum
 		was contained within the midi file used to construct a sequence. If you want to keep a time resolution
 		when writing a new file, you can retrieve this value and then specify it when creating a new file from a sequence.
 		
-		It has no direct baring on the rendering or notion of time of the sequence itself (just its reprentation in file
+		It has no direct baring on the rendering or notion of time of the sequence itself (just its representation in file
 		formats such as MIDI files). By default this is set to either:
 			480 if the sequence is created manually
 			some_value based on what was in a MIDI file if the sequence was created from a MIDI file		
@@ -502,13 +525,13 @@ MusicPlayerGetTime(		MusicPlayer 	inPlayer,
 	@function	MusicPlayerGetHostTimeForBeats
 	@abstract	Returns the host time that will be (or was) played at the specified beat.
 	@discussion This call is only valid if the player is playing and will return an error if the player is not playing
-				or if the starting postion of the player (its "starting beat") was after the specified beat.
+				or if the starting position of the player (its "starting beat") was after the specified beat.
 				For general translation of beats to time in a sequence, see the MusicSequence calls for beat<->seconds.
 				
 				The call uses the player's sequence's tempo map to translate a beat time from the starting time and beat
 				of the player.
 	@param		inPlayer	the player
-	@param		inBeats		the specifed beat-time value
+	@param		inBeats		the specified beat-time value
 	@param		outHostTime the corresponding host time
 */
 extern OSStatus
@@ -517,7 +540,7 @@ MusicPlayerGetHostTimeForBeats(	MusicPlayer 	inPlayer,
 								UInt64 *		outHostTime)					__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
 
 /*!
-	@function	MusicPlayerGetHostTimeForBeats
+	@function	MusicPlayerGetBeatsForHostTime
 	@abstract	Returns the beat that will be (or was) played at the specified host time. 
 	@discussion This call is only valid if the player is playing and will return an error if the player is not playing
 				or if the starting time of the player was after the specified host time.
@@ -526,7 +549,7 @@ MusicPlayerGetHostTimeForBeats(	MusicPlayer 	inPlayer,
 				The call uses the player's sequence's tempo map to retrieve a beat time from the starting and specified host time. 
 				
 	@param		inPlayer	the player
-	@param		inHostTime	the specifed host time value
+	@param		inHostTime	the specified host time value
 	@param		outBeats	the corresponding beat time
 */
 extern OSStatus
@@ -665,7 +688,7 @@ MusicSequenceGetTrackCount(	MusicSequence 		inSequence,
 /*!
 	@function	MusicSequenceGetIndTrack
 	@abstract	Get a track at the specified index
-	@discussion Index is zero based. It will return paramErr if index is not in the range: 0 < TrackCount
+	@discussion Index is zero based. It will return kAudio_ParamError if index is not in the range: 0 < TrackCount
 				The track count and accessors exclude the tempo track (which is treated as a special case)
 	@param		inSequence		the sequence
 	@param		inTrackIndex	the index
@@ -693,7 +716,7 @@ MusicSequenceGetTrackIndex(	MusicSequence 		inSequence,
 /*!
 	@function	MusicSequenceGetTempoTrack
 	@abstract	Get the tempo track of the sequence
-	@discussion	Each sequence has a single tempot track. All tempo events are placed into this tempo track (as well
+	@discussion	Each sequence has a single tempo track. All tempo events are placed into this tempo track (as well
 				as other appropriate events (time sig for instance from a MIDI file). The tempo track, once retrieved
 				can be edited and iterated upon as any other track. Non-tempo events in a tempo track are ignored.
 	@param		inSequence		the sequence
@@ -710,7 +733,7 @@ MusicSequenceGetTempoTrack(	MusicSequence		inSequence,
 	@discussion	A sequence can be associated with an AUGraph and this graph will be used to render the events as 
 				controlled by the sequence when it is played. By default, all of the tracks of a sequence will
 				find the first AUNode that is an instance of Apple's DLSMusicDevice audio unit. This audio unit is a 
-				software synthiser that is compatible with the GM and GS MIDI standards.
+				software synthesiser that is compatible with the GM and GS MIDI standards.
 				
 				Specific nodes of the graph can be targeted for different tracks as well (MusicTrackSetDestNode)
 	@param		inSequence		the sequence
@@ -764,7 +787,7 @@ MusicSequenceSetMIDIEndpoint(	MusicSequence 	inSequence,
 				For beats - it can have as many tempo events as you want
 				For Samples and Seconds - you should add a single tempo event after setting the type
 					Samples - the tempo is the desired sample rate - e.g. 44100 and each "beat" in the sequence will be
-						interepreted as a sample count at that sample rate (so beat == 44100 is a second)
+						interpreted as a sample count at that sample rate (so beat == 44100 is a second)
 					Seconds - the tempo should be set to 60 - a beat is a second.
 
 				Beats is the default (and is the behaviour on pre 10.5 systems)
@@ -931,7 +954,7 @@ MusicSequenceFileCreateData (MusicSequence			inSequence,
 
 /*!
 	@function	MusicSequenceReverse
-	@abstract	Reverse in time all events in a sequence, incuding the tempo events
+	@abstract	Reverse in time all events in a sequence, including the tempo events
 	@param		inSequence		the sequence
 */
 extern OSStatus
@@ -1000,7 +1023,7 @@ MusicSequenceSetUserCallback(	MusicSequence				inSequence,
 	@param		inSequence		the sequence
 	@param		inBeats			the beat which should be represented by the bar-beat
 	@param		inSubbeatDivisor	The denominator of the fractional number of beats.
-	@param		outBarBeatTime	the formated bar/beat time
+	@param		outBarBeatTime	the formatted bar/beat time
 */
 extern OSStatus
 MusicSequenceBeatsToBarBeatTime(MusicSequence				inSequence,
@@ -1144,7 +1167,7 @@ MusicTrackGetProperty(	MusicTrack 			inTrack,
 /*!
 	@function	MusicTrackMoveEvents
 	@abstract	Move events in a track
-	@discussion	Moves all of the events in the specifed time range by the moveTime. MoveTime maybe negative to 
+	@discussion	Moves all of the events in the specified time range by the moveTime. MoveTime maybe negative to 
 				move events backwards (towards zero).
 				
 				All time ranges are [starttime < endtime]
@@ -1212,7 +1235,7 @@ MusicTrackCopyInsert(	MusicTrack 			inSourceTrack,
 						MusicTimeStamp		inDestInsertTime)					__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
-	@function	MusicTrackCopyInsert
+	@function	MusicTrackMerge
 	@abstract	Copies events from one track and merges them into another
 	@discussion	Copies all of the events with the specified time range of the source track. It then merges
 				those events into the destination track starting at inDestInsertTime.
@@ -1296,19 +1319,6 @@ MusicTrackNewExtendedNoteEvent(		MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
 									const ExtendedNoteOnEvent	*inInfo)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 										
-/*!
-	@function	MusicTrackNewExtendedControlEvent
-	@abstract	Adds a ExtendedControlEvent to a track
-	@discussion	The event is added at the specified time stamp. The time stamp should not be less than zero.
-	@param		inTrack			the track
-	@param		inTimeStamp		the time stamp
-	@param		inInfo			the event
-*/
-extern OSStatus
-MusicTrackNewExtendedControlEvent(	MusicTrack 					inTrack,
-									MusicTimeStamp				inTimeStamp,
-									const ExtendedControlEvent	*inInfo)		__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
-
 /*!
 	@function	MusicTrackNewParameterEvent
 	@abstract	Adds a ParameterEvent to a track
@@ -1440,7 +1450,7 @@ MusicEventIteratorSeek(				MusicEventIterator 	inIterator,
 				to an event. You can use check MusicEventIteratorHasCurrentEvent to see if there is an event at the 
 				iterator's current position. See also MusicEventIteratorHasNextEvent.
 				
-				Tyically this call is used to move the iterator forwards through the track's events.
+				Typically this call is used to move the iterator forwards through the track's events.
 	@param		inIterator		the iterator
 */
 extern OSStatus
@@ -1452,7 +1462,7 @@ MusicEventIteratorNextEvent(		MusicEventIterator 	inIterator)				__OSX_AVAILABLE
 	@discussion If the iterator was at the first event, then it will leave the iterator unchanged and return an error. 
 				See also MusicEventIteratorHasPreviousEvent
 
-				Tyically this call is used to move the iterator backwards through the track's events.
+				Typically this call is used to move the iterator backwards through the track's events.
 	@param		inIterator		the iterator
 */
 extern OSStatus
@@ -1521,8 +1531,8 @@ extern OSStatus
 MusicEventIteratorDeleteEvent(		MusicEventIterator	 	inIterator)			__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_NA);
 
 /*!
-	@function	MusicEventIteratorHasNextEvent
-	@abstract	Does the track have an event past the event the iterator is pointing too?
+	@function	MusicEventIteratorHasPreviousEvent
+	@abstract	Does the track have an event previous to the event the iterator is pointing to?
 	@discussion To use the iterator going backwards through a track:
 					iter = New Iterator (points at first event)
 					MusicEventIteratorSeek (iter, kMusicTimeStamp_EndOfTrack) // will point it past the last event
@@ -1583,27 +1593,14 @@ MusicEventIteratorHasCurrentEvent(	MusicEventIterator	inIterator,
 
 // MusicSequenceLoadSMF() also intelligently parses an RMID file to extract SMF part
 #if !__LP64__
-struct FSSpec;
-
-extern OSStatus
-MusicSequenceLoadSMF(		MusicSequence 	inSequence,
-							const struct FSSpec	*inFileSpec)			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4, __IPHONE_NA, __IPHONE_NA);
-
 extern OSStatus
 MusicSequenceLoadSMFData(	MusicSequence	inSequence,
 							CFDataRef		inData)					__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
-								
-// inResolution is relationship between "tick" and quarter note for saving to SMF
-//  - pass in zero to use default (480 PPQ, normally)
-extern OSStatus
-MusicSequenceSaveSMF(		MusicSequence 	inSequence,
-							const struct FSSpec	*inFileSpec,
-							UInt16			inResolution)			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 #endif // !__LP64__
 
 
 // passing a value of zero for the flags makes this call equivalent to MusicSequenceLoadSMFData
-// a paramErr is returned if the sequence has ANY data in it and the flags value is != 0
+// a kAudio_ParamError is returned if the sequence has ANY data in it and the flags value is != 0
 // This will create a sequence with the first tracks containing MIDI Channel data
 // IF the MIDI file had Meta events or SysEx data, then the last track in the sequence
 // will contain that data.
@@ -1629,21 +1626,31 @@ MusicSequenceSaveSMFData(	MusicSequence	inSequence,
 							CFDataRef		*outData,
 							UInt16			inResolution)			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_5, __IPHONE_NA, __IPHONE_NA);
 
-/*!
-	@function	NewMusicTrackFrom
-	@abstract	Create a new track from events within the specified range
-	@discussion	This is deprecated as it has never worked correctly. The functionality it embodies can be done
-				by:
-					MusicSequenceNewTrack (seq, newTrack)
-					MusicTrackCopyInsert (srcTrack,...,newTrack,...);
-*/
 extern OSStatus
 NewMusicTrackFrom(		MusicTrack			inSourceTrack,
 						MusicTimeStamp		inSourceStartTime,
 						MusicTimeStamp		inSourceEndTime,
 						MusicTrack 			*outNewTrack)			__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_6, __IPHONE_NA, __IPHONE_NA);
 
-																								
+#if !TARGET_OS_IPHONE
+enum {
+	kMusicEventType_ExtendedControl			= 2
+};
+
+typedef struct ExtendedControlEvent
+{
+	MusicDeviceGroupID			groupID;
+	AudioUnitParameterID		controlID;
+	AudioUnitParameterValue		value;
+} ExtendedControlEvent;
+
+extern OSStatus
+MusicTrackNewExtendedControlEvent(	MusicTrack 					inTrack,
+									MusicTimeStamp				inTimeStamp,
+									const ExtendedControlEvent	*inInfo)		
+																	__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+#endif
+
 #if defined(__cplusplus)
 }
 #endif

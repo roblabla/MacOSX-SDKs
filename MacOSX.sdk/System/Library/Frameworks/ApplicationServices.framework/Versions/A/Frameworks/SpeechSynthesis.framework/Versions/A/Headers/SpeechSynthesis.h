@@ -3,7 +3,7 @@
  
      Contains:   Speech Interfaces.
  
-     Version:    SpeechSynthesis-3.10.35~266
+     Version:    SpeechSynthesis-4.0.74~1
  
      Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -95,20 +95,13 @@ enum {
 };
 
 
-/* Type for stopSpeakingAtBoundary: and pauseSpeakingAtBoundary:*/
-enum {
-  kSpeechImmediateBoundary      = 0,
-  kSpeechWordBoundary           = 1,
-  kSpeechSentenceBoundary       = 2
-};
-
-typedef UInt32                          SpeechBoundary;
 /*------------------------------------------*/
 /* Speaking Mode Constants                  */
 /*------------------------------------------*/
 enum {
   modeText                      = 'TEXT', /* input mode constants             */
   modePhonemes                  = 'PHON',
+  modeTune                      = 'TUNE',
   modeNormal                    = 'NORM', /* character mode and number mode constants */
   modeLiteral                   = 'LTRL'
 };
@@ -474,6 +467,24 @@ extern CFStringRef kSpeechWordCFCallBack                             AVAILABLE_M
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef kSpeechPhonemeOptionsProperty                     AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+/*
+ *  kSpeechAudioUnitProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechAudioUnitProperty                          AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+/*
+ *  kSpeechAudioGraphProperty
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechAudioGraphProperty                         AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 /* Speaking Modes*/
 /*
  *  kSpeechModeText
@@ -493,6 +504,15 @@ extern CFStringRef kSpeechModeText                                   AVAILABLE_M
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef kSpeechModePhoneme                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+/*
+ *  kSpeechModeTune
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CFStringRef kSpeechModeTune                                   AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 /*
  *  kSpeechModeNormal
  *  

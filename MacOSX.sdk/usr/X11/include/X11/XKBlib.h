@@ -1,4 +1,3 @@
-/* $Xorg: XKBlib.h,v 1.6 2000/08/17 19:45:03 cpqbld Exp $ */
 /************************************************************
 Copyright (c) 1993 by Silicon Graphics Computer Systems, Inc.
 
@@ -24,10 +23,9 @@ OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION  WITH
 THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 ********************************************************/
-/* $XFree86: xc/lib/X11/XKBlib.h,v 3.5 2003/04/17 02:06:31 dawes Exp $ */
 
-#ifndef _XKBLIB_H_
-#define _XKBLIB_H_
+#ifndef _X11_XKBLIB_H_
+#define _X11_XKBLIB_H_
 
 #include <X11/Xlib.h>
 #include <X11/extensions/XKBstr.h>
@@ -1148,4 +1146,4 @@ extern void XkbUpdateKeyTypeVirtualMods(
 
 _XFUNCPROTOEND
 
-#endif /* _XKBLIB_H_ */
+#endif /* _X11_XKBLIB_H_ */

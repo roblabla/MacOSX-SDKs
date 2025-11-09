@@ -818,4 +818,4 @@ gss_canonicalize_name(
 
 #endif /* _GSSAPI_H_ */
 
-#endif \* __GSSAPI__ */
+#endif /* __GSSAPI__ */

@@ -1,5 +1,5 @@
 /*	NSProtocolChecker.h
-	Copyright (c) 1995-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSProxy.h>

@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Copyright © 2003 Keith Packard
  *
  * Permission to use, copy, modify, distribute, and sell this software and its
@@ -49,11 +47,13 @@ typedef struct {
 
 _XFUNCPROTOBEGIN
 
-Bool XDamageQueryExtension (Display *dpy, int *event_basep, int *error_basep);
+Bool XDamageQueryExtension (Display *dpy,
+                            int *event_base_return,
+                            int *error_base_return);
 
 Status XDamageQueryVersion (Display *dpy,
-			    int     *major_versionp,
-			    int     *minor_versionp);
+			    int     *major_version_return,
+			    int     *minor_version_return);
 
 Damage
 XDamageCreate (Display	*dpy, Drawable drawable, int level);

@@ -1,5 +1,5 @@
 /* CoreGraphics - CGPDFContentStream.h
-   Copyright (c) 2004-2008 Apple Inc.
+   Copyright (c) 2004-2011 Apple Inc.
    All rights reserved. */
 
 #ifndef CGPDFCONTENTSTREAM_H_

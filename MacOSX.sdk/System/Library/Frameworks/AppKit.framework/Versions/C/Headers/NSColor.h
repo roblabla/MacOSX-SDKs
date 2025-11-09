@@ -1,13 +1,13 @@
 /*
 	NSColor.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
 /* NSColors store colors. Often the only NSColor message you send is the "set" method, which makes the receiver the current color in the drawing context. There is usually no need to dive in and get the individual components (for instance, red, green, blue) that make up a color.
 
-An NSColor may be in one of various colorspaces. Different colorspaces have different ways of getting at the components which define colors in that colorspace. Implementations of NSColors exist for the following colorspaces:
+An NSColor may be in one of several fixed number of named colorspaces. Different named colorspaces have different ways of getting at the components which define colors in that colorspace. Implementations of NSColors exist for the following named colorspaces:
 
   NSDeviceCMYKColorSpace	Cyan, magenta, yellow, black, and alpha components
   NSDeviceWhiteColorSpace	White and alpha components
@@ -17,10 +17,13 @@ An NSColor may be in one of various colorspaces. Different colorspaces have diff
   NSCalibratedRGBColorSpace	Red, green, blue, and alpha components
 				Hue, saturation, brightness, and alpha components
   NSNamedColorSpace		Catalog name, color name components
+  NSCustomColorSpace		Color space specified using NSColorSpace, with appropriate number of CGFloat components
+
+The named colorspace NSCustomColorSpace allows flexibility of defining an arbitrary colorspace using an NSColorSpace. 
 
 Alpha component defines opacity on devices which support it (1.0 == full opacity). On other devices the alpha is ignored when the color is used.
 
-It's illegal to ask a color for components that are not defined for its colorspace. If you need to ask a color for a certain set of components (for instance, you need to know the RGB components of a color you got from the color panel), you should first convert the color to the appropriate colorspace using the colorUsingColorSpaceName: method.  If the color is already in the specified colorspace, you get the same color back; otherwise you get a conversion which is usually lossy or is correct only for the current device. You might also get back nil if the specified conversion cannot be done.
+It's illegal to ask a color for components that are not defined for its colorspace. If you need to ask a color for a certain set of components (for instance, you need to know the RGB components of a color you got from the color panel), you should first convert the color to the appropriate colorspace using colorUsingColorSpace:, or the appropriate named colorspace using  colorUsingColorSpaceName:.  If the color is already in the specified colorspace, you get the same color back; otherwise you get a conversion which is usually lossy or is correct only for the current device. You might also get back nil if the specified conversion cannot be done.
 
 Subclassers of NSColor need to implement the methods colorSpaceName, set, the various methods which return the components for that color space, and the NSCoding protocol. Some other methods such as colorWithAlphaComponent:, isEqual:, colorUsingColorSpaceName:device: may also be implemented if they make sense for the colorspace. If isEqual: is overridden, so should hash (because if [a isEqual:b] then [a hash] == [b hash]). Mutable subclassers (if any) should also implement copyWithZone: to a true copy.
 */
@@ -30,9 +33,7 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSCell.h>
 #import <AppKit/NSPasteboard.h>
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 #import <QuartzCore/CIColor.h>
-#endif
 
 @class NSDictionary, NSImage, NSColorSpace;
 
@@ -40,12 +41,7 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 
 
 
-@interface NSColor : NSObject
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-<NSCopying, NSCoding, NSPasteboardReading, NSPasteboardWriting>
-#else
-<NSCopying, NSCoding>
-#endif
+@interface NSColor : NSObject <NSCopying, NSCoding, NSPasteboardReading, NSPasteboardWriting>
 
 /* Create NSCalibratedWhiteColorSpace colors.
 */
@@ -58,7 +54,7 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 + (NSColor *)colorWithCalibratedRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
 
 
-/* Create colors in various device color spaces. In PostScript these colorspaces correspond directly to the device-dependent operators setgray, sethsbcolor, setrgbcolor, and setcmykcolor.
+/* Create colors in various device color spaces. 
 */
 + (NSColor *)colorWithDeviceWhite:(CGFloat)white alpha:(CGFloat)alpha;
 + (NSColor *)colorWithDeviceHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha;
@@ -71,11 +67,16 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 + (NSColor *)colorWithCatalogName:(NSString *)listName colorName:(NSString *)colorName;
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* Create colors with arbitrary colorspace. The number of components in the provided array should match the number dictated by the specified colorspace, plus one for alpha (supply 1.0 for opaque colors); otherwise an exception will be raised.  If the colorspace is one which cannot be used with NSColors, nil is returned.
 */
 + (NSColor *)colorWithColorSpace:(NSColorSpace *)space components:(const CGFloat *)components count:(NSInteger)numberOfComponents;
-#endif
+
+
+/* Create NSCustomColorSpace colors in the sRGB or GenericGamma22Gray colorspaces.  
+*/
++ (NSColor *)colorWithGenericGamma22White:(CGFloat)white alpha:(CGFloat)alpha  NS_AVAILABLE_MAC(10_7);
++ (NSColor *)colorWithSRGBRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha  NS_AVAILABLE_MAC(10_7);
+
 
 
 /* Some convenience methods to create colors in the calibrated color spaces...
@@ -131,35 +132,27 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 + (NSColor *)headerColor;			// Background color for header cells in Table/OutlineView
 + (NSColor *)headerTextColor;			// Text color for header cells in Table/OutlineView
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 + (NSColor *)alternateSelectedControlColor;	// Similar to selectedControlColor; for use in lists and tables 
 + (NSColor *)alternateSelectedControlTextColor;		// Similar to selectedControlTextColor; see alternateSelectedControlColor
-#endif
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 + (NSArray *)controlAlternatingRowBackgroundColors;	// Standard colors for alternating colored rows in tables and lists (for instance, light blue/white; don't assume just two colors)
-#endif
 
 - (NSColor *)highlightWithLevel:(CGFloat)val;	// val = 0 => receiver, val = 1 => highlightColor
 - (NSColor *)shadowWithLevel:(CGFloat)val;	// val = 0 => receiver, val = 1 => shadowColor
 
 + (NSColor *)colorForControlTint:(NSControlTint)controlTint;	// pass in valid tint to get rough color matching. returns default if invalid tint
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 + (NSControlTint) currentControlTint;	// returns current system control tint
-#endif
 
 
 /* Set the color: Sets the fill and stroke colors in the current drawing context. If the color doesn't know about alpha, it's set to 1.0. Should be implemented by subclassers.
 */
 - (void)set;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 /* Set the fill or stroke colors individually. These should be implemented by subclassers.
 */
 - (void)setFill;
 - (void)setStroke;
-#endif
 
 /* Get the color space of the color. Should be implemented by subclassers.
 */
@@ -178,11 +171,9 @@ If colorSpace is nil, then the most appropriate color space is used.
 - (NSColor *)colorUsingColorSpaceName:(NSString *)colorSpace device:(NSDictionary *)deviceDescription;
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* colorUsingColorSpace: will convert existing color to a new colorspace and create a new color, which will likely have different component values but look the same. It will return the same color if the colorspace is already the same as the one specified.  Will return nil if conversion is not possible.
 */
 - (NSColor *)colorUsingColorSpace:(NSColorSpace *)space;
-#endif
 
 
 /* Blend using the NSCalibratedRGB color space. Both colors are converted into the calibrated RGB color space, and they are blended by taking fraction of color and 1 - fraction of the receiver. The result is in the calibrated RGB color space. If the colors cannot be converted into the calibrated RGB color space the blending fails and nil is returned.
@@ -207,14 +198,14 @@ If colorSpace is nil, then the most appropriate color space is used.
 - (NSString *)localizedCatalogNameComponent;
 - (NSString *)localizedColorNameComponent;
 
-/* Get the red, green, or blue components of NSCalibratedRGB or NSDeviceRGB colors.
+/* Get the red, green, or blue components of NSCalibratedRGB or NSDeviceRGB colors.  Starting in 10.7, it's also possible to call these on NSCustomColorSpace colors with color spaces with RGB model. 
 */
 - (CGFloat)redComponent;
 - (CGFloat)greenComponent;
 - (CGFloat)blueComponent;
 - (void)getRed:(CGFloat *)red green:(CGFloat *)green blue:(CGFloat *)blue alpha:(CGFloat *)alpha;
 
-/* Get the components of NSCalibratedRGB or NSDeviceRGB colors as hue, saturation, or brightness.
+/* Get the components of NSCalibratedRGB or NSDeviceRGB colors as hue, saturation, or brightness. Starting in 10.7, it's also possible to call these on NSCustomColorSpace colors with color spaces with RGB model. 
 */
 - (CGFloat)hueComponent;
 - (CGFloat)saturationComponent;
@@ -222,13 +213,13 @@ If colorSpace is nil, then the most appropriate color space is used.
 - (void)getHue:(CGFloat *)hue saturation:(CGFloat *)saturation brightness:(CGFloat *)brightness alpha:(CGFloat *)alpha;
 
 
-/* Get the white component of NSCalibratedWhite or NSDeviceWhite colors.
+/* Get the white component of NSCalibratedWhite or NSDeviceWhite colors. Starting in 10.7, it's possible to call these on NSCustomColorSpace colors with color spaces with grayscale model. 
 */
 - (CGFloat)whiteComponent;
 - (void)getWhite:(CGFloat *)white alpha:(CGFloat *)alpha;
 
 
-/* Get the CMYK components of NSDeviceCMYK colors.
+/* Get the CMYK components of NSDeviceCMYK colors.  Starting in 10.7, it's possible to call these on NSCustomColorSpace colors with color spaces with CMYK model. 
 */
 - (CGFloat)cyanComponent;
 - (CGFloat)magentaComponent;
@@ -237,13 +228,11 @@ If colorSpace is nil, then the most appropriate color space is used.
 - (void)getCyan:(CGFloat *)cyan magenta:(CGFloat *)magenta yellow:(CGFloat *)yellow black:(CGFloat *)black alpha:(CGFloat *)alpha;
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* For colors with custom colorspace; get the colorspace and individual floating point components, including alpha. Note that all these methods will work for other NSColors which have floating point components. They will raise exceptions otherwise, like other existing colorspace-specific methods.
 */
 - (NSColorSpace *)colorSpace;
 - (NSInteger)numberOfComponents;
 - (void)getComponents:(CGFloat *)components;
-#endif
 
 
 /* Get the alpha component. For colors which do not have alpha components, this will return 1.0 (opaque).
@@ -276,7 +265,6 @@ This method provides a global approach to removing alpha which might not always 
 @end
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 @interface NSColor (NSQuartzCoreAdditions)
 + (NSColor *)colorWithCIColor:(CIColor *)color;
 @end
@@ -284,7 +272,6 @@ This method provides a global approach to removing alpha which might not always 
 @interface CIColor (NSAppKitAdditions)
 - (id)initWithColor:(NSColor *)color;
 @end
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 @interface NSCoder(NSAppKitColorExtensions)
 

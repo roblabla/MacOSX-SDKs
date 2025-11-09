@@ -1,6 +1,6 @@
 /*
         NSTextTable.h
-        Copyright (c) 2004-2009, Apple Inc.
+        Copyright (c) 2004-2011, Apple Inc.
         All rights reserved.
 
         Classes to represent text tables and other text blocks.
@@ -15,7 +15,6 @@
 @class NSLayoutManager;
 @class NSTextContainer;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 /* Values for NSTextBlockValueType */
 enum {
@@ -157,4 +156,3 @@ typedef NSUInteger NSTextTableLayoutAlgorithm;
 
 @end
 
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */

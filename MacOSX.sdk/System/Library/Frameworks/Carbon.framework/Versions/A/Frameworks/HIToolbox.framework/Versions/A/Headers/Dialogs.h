@@ -3,7 +3,7 @@
  
      Contains:   Dialog Manager interfaces.
  
-     Version:    HIToolbox-463~1
+     Version:    HIToolbox-567.2~1
  
      Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
  
@@ -131,19 +131,6 @@ enum {
 typedef SInt16                          StageList;
 /* DialogPtr is obsolete. Use DialogRef instead.*/
 typedef DialogPtr                       DialogRef;
-#if !OPAQUE_TOOLBOX_STRUCTS
-struct DialogRecord {
-  WindowRecord        window;                 /* in Carbon use GetDialogWindow or GetDialogPort*/
-  Handle              items;                  /* in Carbon use Get/SetDialogItem*/
-  TEHandle            textH;                  /* in Carbon use GetDialogTextEditHandle*/
-  SInt16              editField;              /* in Carbon use SelectDialogItemText/GetDialogKeyboardFocusItem*/
-  SInt16              editOpen;               /* not available in Carbon */
-  SInt16              aDefItem;               /* in Carbon use Get/SetDialogDefaultItem*/
-};
-typedef struct DialogRecord             DialogRecord;
-typedef DialogRecord *                  DialogPeek;
-#endif  /* !OPAQUE_TOOLBOX_STRUCTS */
-
 struct DialogTemplate {
   Rect                boundsRect;
   SInt16              procID;

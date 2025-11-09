@@ -1,4 +1,3 @@
-/* $Xorg: Xlocale.h,v 1.4 2001/02/09 02:03:38 xorgcvs Exp $ */
 /*
 
 Copyright 1991, 1998  The Open Group
@@ -26,10 +25,9 @@ other dealings in this Software without prior written authorization
 from The Open Group.
 
 */
-/* $XFree86: xc/lib/X11/Xlocale.h,v 1.4 2001/12/14 19:54:09 dawes Exp $ */
 
-#ifndef _XLOCALE_H_
-#define _XLOCALE_H_
+#ifndef _X11_XLOCALE_H_
+#define _X11_XLOCALE_H_
 
 #include <X11/Xfuncproto.h>
 #include <X11/Xosdefs.h>
@@ -58,4 +56,4 @@ _XFUNCPROTOEND
 
 #endif /* X_LOCALE */
 
-#endif /* _XLOCALE_H_ */
+#endif /* _X11_XLOCALE_H_ */

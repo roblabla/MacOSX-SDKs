@@ -1,4 +1,3 @@
-/* $Xorg: security.h,v 1.4 2001/02/09 02:03:24 xorgcvs Exp $ */
 /*
 Copyright 1996, 1998  The Open Group
 
@@ -24,7 +23,6 @@ not be used in advertising or otherwise to promote the sale, use or
 other dealings in this Software without prior written authorization
 from The Open Group.
 */
-/* $XFree86: xc/include/extensions/security.h,v 1.3 2001/12/14 19:53:29 dawes Exp $ */
 
 #ifndef _SECURITY_H
 #define _SECURITY_H
@@ -32,37 +30,7 @@ from The Open Group.
 #define _XAUTH_STRUCT_ONLY
 #include <X11/Xauth.h>
 
-/* constants that server, library, and application all need */
-
-#define XSecurityNumberEvents		1
-#define XSecurityNumberErrors		2
-#define XSecurityBadAuthorization	0
-#define XSecurityBadAuthorizationProtocol 1
-
-/* trust levels */
-#define XSecurityClientTrusted		0
-#define XSecurityClientUntrusted	1
-
-/* authorization attribute masks */
-#define XSecurityTimeout		(1<<0)
-#define XSecurityTrustLevel		(1<<1)
-#define XSecurityGroup  		(1<<2)
-#define XSecurityEventMask		(1<<3)
-#define XSecurityAllAuthorizationAttributes \
- (XSecurityTimeout | XSecurityTrustLevel | XSecurityGroup | XSecurityEventMask)
-
-/* event masks */
-#define XSecurityAuthorizationRevokedMask (1<<0)
-#define XSecurityAllEventMasks XSecurityAuthorizationRevokedMask
-
-/* event offsets */
-#define XSecurityAuthorizationRevoked 0
-    
-#define XSecurityAuthorizationName	"XC-QUERY-SECURITY-1"
-#define XSecurityAuthorizationNameLen	19
-
-
-#ifndef _SECURITY_SERVER
+#include <X11/extensions/secur.h>
 
 _XFUNCPROTOBEGIN
 
@@ -105,7 +73,5 @@ typedef struct {
     Display *display;	      /* Display the event was read from */
     XSecurityAuthorization auth_id; /* revoked authorization id */
 } XSecurityAuthorizationRevokedEvent;
-
-#endif /* _SECURITY_SERVER */
 
 #endif /* _SECURITY_H */

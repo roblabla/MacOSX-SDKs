@@ -1,13 +1,12 @@
 /*
 	NSSearchFieldCell.h
 	Application Kit
-	Copyright (c) 2003-2009, Apple Inc.
+	Copyright (c) 2003-2011, Apple Inc.
 	All rights reserved.
  */
 
 #import <AppKit/NSTextFieldCell.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 // Search menu template tags. Special items in the search menu are tagged so when the actual dynamic search menu is constructed, we know which items to show or hide.
 
@@ -89,11 +88,8 @@
 - (NSString*) recentsAutosaveName;
     // must be set to use. default is nil which means no autosave.
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (BOOL) sendsSearchStringImmediately;
 - (void) setSendsSearchStringImmediately:(BOOL)flag;
-#endif
 
 @end
 
-#endif

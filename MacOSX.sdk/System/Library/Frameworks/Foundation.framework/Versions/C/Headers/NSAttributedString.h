@@ -1,10 +1,12 @@
 /*	NSAttributedString.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
+
 
 #import <Foundation/NSString.h>
 #import <Foundation/NSDictionary.h>
 
+NS_CLASS_AVAILABLE(10_0, 3_2)
 @interface NSAttributedString : NSObject <NSCopying, NSMutableCopying, NSCoding>
 
 - (NSString *)string;
@@ -27,19 +29,20 @@
 - (id)initWithString:(NSString *)str attributes:(NSDictionary *)attrs;
 - (id)initWithAttributedString:(NSAttributedString *)attrStr;
 
-#if NS_BLOCKS_AVAILABLE
 enum {
   NSAttributedStringEnumerationReverse = (1UL << 1),
   NSAttributedStringEnumerationLongestEffectiveRangeNotRequired = (1UL << 20)
 };
 typedef NSUInteger NSAttributedStringEnumerationOptions;
 
-- (void)enumerateAttributesInRange:(NSRange)enumerationRange options:(NSAttributedStringEnumerationOptions)opts usingBlock:(void (^)(NSDictionary *attrs, NSRange range, BOOL *stop))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)enumerateAttribute:(NSString *)attrName inRange:(NSRange)enumerationRange options:(NSAttributedStringEnumerationOptions)opts usingBlock:(void (^)(id value, NSRange range, BOOL *stop))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+#if NS_BLOCKS_AVAILABLE
+- (void)enumerateAttributesInRange:(NSRange)enumerationRange options:(NSAttributedStringEnumerationOptions)opts usingBlock:(void (^)(NSDictionary *attrs, NSRange range, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
+- (void)enumerateAttribute:(NSString *)attrName inRange:(NSRange)enumerationRange options:(NSAttributedStringEnumerationOptions)opts usingBlock:(void (^)(id value, NSRange range, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 #endif
 
 @end
 
+NS_CLASS_AVAILABLE(10_0, 3_2)
 @interface NSMutableAttributedString : NSAttributedString
 
 - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)str;

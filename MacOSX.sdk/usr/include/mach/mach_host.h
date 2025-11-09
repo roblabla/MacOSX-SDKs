@@ -26,10 +26,11 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_host_MSG_COUNT
-#define	mach_host_MSG_COUNT	20
+#define	mach_host_MSG_COUNT	21
 #endif	/* mach_host_MSG_COUNT */
 
 #include <mach/std_types.h>
+#include <mach/mig.h>
 #include <mach/mig.h>
 #include <mach/mach_types.h>
 #include <mach/mach_types.h>
@@ -287,6 +288,21 @@ kern_return_t host_statistics64
 	mach_msg_type_number_t *host_info64_outCnt
 );
 
+/* Routine mach_zone_info */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_zone_info
+(
+	host_t host,
+	mach_zone_name_array_t *names,
+	mach_msg_type_number_t *namesCnt,
+	mach_zone_info_array_t *info,
+	mach_msg_type_number_t *infoCnt
+);
+
 __END_DECLS
 
 /********************** Caution **************************/
@@ -519,6 +535,16 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__mach_zone_info_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__mach_host_subsystem__defined */
 
 /* union of all requests */
@@ -544,6 +570,7 @@ union __RequestUnion__mach_host_subsystem {
 	__Request__host_request_notification_t Request_host_request_notification;
 	__Request__host_lockgroup_info_t Request_host_lockgroup_info;
 	__Request__host_statistics64_t Request_host_statistics64;
+	__Request__mach_zone_info_t Request_mach_zone_info;
 };
 #endif /* !__RequestUnion__mach_host_subsystem__defined */
 /* typedefs for all replies */
@@ -816,6 +843,24 @@ union __RequestUnion__mach_host_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t names;
+		mach_msg_ool_descriptor_t info;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t namesCnt;
+		mach_msg_type_number_t infoCnt;
+	} __Reply__mach_zone_info_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__mach_host_subsystem__defined */
 
 /* union of all replies */
@@ -841,6 +886,7 @@ union __ReplyUnion__mach_host_subsystem {
 	__Reply__host_request_notification_t Reply_host_request_notification;
 	__Reply__host_lockgroup_info_t Reply_host_lockgroup_info;
 	__Reply__host_statistics64_t Reply_host_statistics64;
+	__Reply__mach_zone_info_t Reply_mach_zone_info;
 };
 #endif /* !__RequestUnion__mach_host_subsystem__defined */
 
@@ -863,7 +909,8 @@ union __ReplyUnion__mach_host_subsystem {
     { "host_statistics", 216 },\
     { "host_request_notification", 217 },\
     { "host_lockgroup_info", 218 },\
-    { "host_statistics64", 219 }
+    { "host_statistics64", 219 },\
+    { "mach_zone_info", 220 }
 #endif
 
 #ifdef __AfterMigUserHeader

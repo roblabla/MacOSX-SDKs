@@ -1,13 +1,12 @@
 /*
 	NSDictionaryController.h
 	Application Kit
-	Copyright (c) 2002-2009, Apple Inc.
+	Copyright (c) 2002-2011, Apple Inc.
 	All rights reserved.
  */
 
 #import <AppKit/NSArrayController.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 @class NSDictionary;
 
@@ -27,6 +26,7 @@
 
 @end
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSDictionaryController : NSArrayController {
 @private
     void *_reserved5;
@@ -70,4 +70,3 @@
 
 @end
 
-#endif

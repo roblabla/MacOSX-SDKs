@@ -1,7 +1,7 @@
 /*
 	NSTabViewItem.h
         Application Kit
-        Copyright (c) 2000-2009, Apple Inc.
+        Copyright (c) 2000-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -74,8 +74,8 @@ typedef NSUInteger NSTabState;
 
 /* The following methods provide support for tooltips on the tabs a tab view.  The default behavior is to use the label as a tooltip if the label is truncated due to insufficient space; this automatic tooltip is never returned by the toolTip method.  If you explicitly set a non-nil tooltip, this default behavior is suppressed, and the given tooltip will be used whether or not the label is truncated.
 */
-- (NSString *)toolTip AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)setToolTip:(NSString *)toolTip AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSString *)toolTip NS_AVAILABLE_MAC(10_6);
+- (void)setToolTip:(NSString *)toolTip NS_AVAILABLE_MAC(10_6);
 
 	/* Tab Drawing/Measuring */
 

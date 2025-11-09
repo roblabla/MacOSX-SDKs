@@ -1,6 +1,6 @@
 /*
     File:		IOBluetoothL2CAPChannel.h
-    Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
+    Copyright:	(c) 2010 by Apple, Inc. All rights reserved.
 */
  
 #import <Foundation/Foundation.h>
@@ -97,23 +97,6 @@
 + (IOBluetoothUserNotification *)registerForChannelOpenNotifications:(id)object selector:(SEL)selector withPSM:(BluetoothL2CAPPSM)psm direction:(IOBluetoothUserNotificationChannelDirection)inDirection;
 
 /*!
-    @method	withL2CAPChannelRef:
-	@abstract	Method call to convert an IOBluetoothL2CAPChannelRef into an IOBluetoothL2CAPChannel *.
-        @param	channelRef IOBluetoothL2CAPChannelRef for which an IOBluetoothL2CAPChannel * is desired.
-	@result		Returns the IOBluetoothL2CAPChannel * for the given IOBluetoothL2CAPChannelRef.
-*/
-
-+ (IOBluetoothL2CAPChannel *)withL2CAPChannelRef:(IOBluetoothL2CAPChannelRef)l2capChannelRef;
-
-/*!
-    @method	getL2CAPChannelRef
-	@abstract	Returns an IOBluetoothL2CAPChannelRef representation of the target IOBluetoothL2CAPChannel object.
-	@result		Returns an IOBluetoothL2CAPChannelRef representation of the target IOBluetoothL2CAPChannel object.
-*/
-
-- (IOBluetoothL2CAPChannelRef)getL2CAPChannelRef;
-
-/*!
     @method	withObjectID:
 	@abstract	Returns the IObluetoothL2CAPChannel with the given IOBluetoothObjectID.
 	@discussion	The IOBluetoothObjectID can be used as a global reference for a given IOBluetoothL2CAPChannel.  It allows
@@ -143,7 +126,8 @@
 	@result		Returns the current outgoing MTU for the L2CAP channel.
 */
 
-- (BluetoothL2CAPMTU)getOutgoingMTU;
+@property(readonly) BluetoothL2CAPMTU outgoingMTU;
+- (BluetoothL2CAPMTU)getOutgoingMTU DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getIncomingMTU
@@ -152,7 +136,8 @@
 	@result		Returns the current incoming MTU for the L2CAP channel.
 */
 
-- (BluetoothL2CAPMTU)getIncomingMTU;
+@property(readonly) BluetoothL2CAPMTU incomingMTU;
+- (BluetoothL2CAPMTU)getIncomingMTU DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		requestRemoteMTU:
@@ -165,24 +150,6 @@
 */
 
 - (IOReturn)requestRemoteMTU:(BluetoothL2CAPMTU)remoteMTU;
-
-/*!
-    @method		write:length:
-	@abstract	Writes the given data over the target L2CAP channel to the remote device.
-    @discussion	***WARNING*** This method is being deprecated in favor of -writeSync:... and -writeAsync:...
-				The length of the data may not exceed the L2CAP channel's ougoing MTU.  The fact that
-                this method has returned doesn't mean that the data has been delivered successfully.  It just
-                means that it has been scheduled to be delivered.  In the future, additional API will be 
-                available to provide a notification that the write has been completed (both synchronously
-                and asynchronously).  This method may block if previous writes have not been delivered.
-    @param		data	Pointer to the buffer containing the data to send.
-    @param		length 	The length of the given data buffer.
-	@result		Returns kIOReturnSuccess if the data was written successfully.
-*/
-
-- (IOReturn)write:(void *)data length:(UInt16)length DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
-
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
 
 /*!
     @method		writeAsync:length:refcon:
@@ -216,26 +183,6 @@
 
 - (IOReturn)writeSync:(void *)data length:(UInt16)length;
 
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2 */
-
-/*!
-    @method		registerIncomingDataListener:refCon:
-	@abstract	***WARNING*** This method is being deprecated in favor of -setDelegate:
-				Allows a client to register a callback that gets called when new incoming data arrives.
-	@discussion A newly opened L2CAP channel will not complete its configuration process until the client
-                that opened it registers an incoming data listener.  This prevents that case where incoming
-                data is received before the client is ready.  The incoming data listener callback is currently
-                a C function.  In the future, API will be available that allows an objective-c listener to be
-                set.
-    @param		listener	Callback function that gets called when new incoming data is received.
-    @param		refCon 		Client-supplied reference that gets passed to the listener function.
-	@result		Returns kIOReturnSuccess if the listener is successfully registered.
-*/
-
-- (IOReturn)registerIncomingDataListener:(IOBluetoothL2CAPChannelIncomingDataListener)listener refCon:(void *)refCon DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
-
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
-
 /*!
     @method		setDelegate:
 	@abstract	Allows an object to register itself as client of the L2CAP channel.
@@ -253,10 +200,6 @@
 */
 
 - (IOReturn)setDelegate:(id)channelDelegate;
-
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2 */
-
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
 
 /*!
     @method		setDelegate:withConfiguration:
@@ -286,15 +229,14 @@
  */
 - (id) delegate;
 
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
-
 /*!
     @method		getDevice
 	@abstract	Returns the IOBluetoothDevice to which the target L2CAP channel is open.
 	@result		Returns the IOBluetoothDevice to which the target L2CAP channel is open.
 */
 
-- (IOBluetoothDevice *)getDevice;
+@property(readonly, retain) IOBluetoothDevice *device;
+- (IOBluetoothDevice *)getDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getObjectID
@@ -304,7 +246,8 @@
 	@result		Returns the IOBluetoothObjectID of the given IOBluetoothL2CAPChannel.
 */
 
-- (IOBluetoothObjectID)getObjectID;
+@property(readonly, assign) IOBluetoothObjectID objectID;
+- (IOBluetoothObjectID)getObjectID DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getPSM
@@ -312,7 +255,8 @@
 	@result		Returns the PSM for the target L2CAP channel.
 */
 
-- (BluetoothL2CAPPSM)getPSM;
+@property(readonly, assign) BluetoothL2CAPPSM PSM;
+- (BluetoothL2CAPPSM)getPSM DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getLocalChannelID
@@ -320,7 +264,8 @@
 	@result		Returns the local L2CAP channel ID for the target L2CAP channel.
 */
 
-- (BluetoothL2CAPChannelID)getLocalChannelID;
+@property(readonly, assign) BluetoothL2CAPChannelID localChannelID;
+- (BluetoothL2CAPChannelID)getLocalChannelID DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getRemoteChannelID
@@ -328,7 +273,8 @@
 	@result		Returns the remote L2CAP channel ID for the target L2CAP channel.
 */
 
-- (BluetoothL2CAPChannelID)getRemoteChannelID;
+@property(readonly, assign) BluetoothL2CAPChannelID remoteChannelID;
+- (BluetoothL2CAPChannelID)getRemoteChannelID DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		isIncoming
@@ -355,13 +301,12 @@
 - (IOBluetoothUserNotification *)registerForChannelCloseNotification:(id)observer selector:(SEL)inSelector;
 @end
 
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
-
 // Informal protocol to describe the L2CAP channel delegate methods:
 // If the developer wishes to take advantage of the asynchronous API in Objective C
 // these are the methods that may be implemented:
 
 @protocol IOBluetoothL2CAPChannelDelegate
+@optional
 - (void)l2capChannelData:(IOBluetoothL2CAPChannel*)l2capChannel data:(void *)dataPointer length:(size_t)dataLength;
 - (void)l2capChannelOpenComplete:(IOBluetoothL2CAPChannel*)l2capChannel status:(IOReturn)error;
 - (void)l2capChannelClosed:(IOBluetoothL2CAPChannel*)l2capChannel;
@@ -370,4 +315,16 @@
 - (void)l2capChannelQueueSpaceAvailable:(IOBluetoothL2CAPChannel*)l2capChannel;
 @end
 
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2 */
+extern NSString * const IOBluetoothL2CAPChannelPublishedNotification;
+extern NSString * const IOBluetoothL2CAPChannelTerminatedNotification;
+
+/* Deprecated API */
+
+@interface NSObject( IOBluetoothL2CAPChannelDeprecated )
+
+- (IOReturn)registerIncomingDataListener:(IOBluetoothL2CAPChannelIncomingDataListener)listener refCon:(void *)refCon DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
+- (IOReturn)write:(void *)data length:(UInt16)length DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
++ (IOBluetoothL2CAPChannel *)withL2CAPChannelRef:(IOBluetoothL2CAPChannelRef)l2capChannelRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+- (IOBluetoothL2CAPChannelRef)getL2CAPChannelRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+@end

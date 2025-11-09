@@ -1,7 +1,7 @@
 /*
 	File:		OBEXBluetooth.h
 	Contains:	Technology interfaces for OBEX over Bluetooth. See OBEX.h for more details about OBEX.
-	Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
+	Copyright:	(c) 2010 by Apple, Inc. All rights reserved.
 */
 
 #pragma once

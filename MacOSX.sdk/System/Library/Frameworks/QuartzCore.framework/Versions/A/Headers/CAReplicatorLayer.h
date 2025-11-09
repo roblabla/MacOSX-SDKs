@@ -16,14 +16,14 @@
 @interface CAReplicatorLayer : CALayer
 
 /* The number of copies to create, including the source object.
- * Default value is one (i.e. no extra copies.) Animatable. */
+ * Default value is one (i.e. no extra copies). Animatable. */
 
 @property NSInteger instanceCount;
 
 /* Defines whether this layer flattens its sublayers into its plane or
  * not (i.e. whether it's treated similarly to a transform layer or
- * not.) Defaults to NO. If YES, the standard restrictions apply (see
- * CATransformLayer.h.) */
+ * not). Defaults to NO. If YES, the standard restrictions apply (see
+ * CATransformLayer.h). */
 
 @property BOOL preservesDepth;
 
@@ -39,14 +39,14 @@
 
 @property CATransform3D instanceTransform;
 
-/* The color to multiply the first object by (the source object.) Defaults
+/* The color to multiply the first object by (the source object). Defaults
  * to opaque white. Animatable. */
 
 @property CGColorRef instanceColor;
 
 /* The color components added to the color of instance k-1 to produce
  * the modulation color of instance k. Defaults to the clear color (no
- * change.) Animatable. */
+ * change). Animatable. */
 
 @property float instanceRedOffset, instanceGreenOffset;
 @property float instanceBlueOffset, instanceAlphaOffset;

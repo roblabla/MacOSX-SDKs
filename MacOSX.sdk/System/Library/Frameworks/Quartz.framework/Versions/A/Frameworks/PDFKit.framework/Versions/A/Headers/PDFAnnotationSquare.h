@@ -10,7 +10,7 @@
 @class PDFAnnotationSquarePrivateVars;
 
 
-@interface PDFAnnotationSquare : PDFAnnotation
+@interface PDFAnnotationSquare : PDFAnnotation <NSCopying>
 {
 @private
     PDFAnnotationSquarePrivateVars	*_pdfPriv2;

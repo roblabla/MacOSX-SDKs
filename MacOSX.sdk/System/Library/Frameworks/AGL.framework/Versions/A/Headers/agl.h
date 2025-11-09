@@ -1,18 +1,17 @@
 /*
-    File:	    AGL/agl.h
+    File:       AGL/agl.h
 
-    Contains:	Basic AGL data types, constants and function prototypes.
+    Contains:   Basic AGL data types, constants and function prototypes.
 
-    Version:	Technology:	Mac OS X
-                Release:	GM
- 
-     Copyright:  (c) 2000, 2001, 2002, 2003, 2004, 2005 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                 http://developer.apple.com/bugreporter/
- 
+    Version:    Technology: Mac OS X
+                Release:    GM
+
+    Copyright:  (c) 2000-2010 Apple, Inc. All rights reserved.
+
+    Bugs?:      For bug reports, consult the following page on
+                the World Wide Web:
+
+                http://developer.apple.com/bugreporter/
 */
 
 #ifndef _AGL_H
@@ -328,7 +327,11 @@ extern HIViewRef aglGetHIViewRef(AGLContext ctx) AVAILABLE_MAC_OS_X_VERSION_10_5
 /*
 ** OffScreen buffer Function
 */
+#ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
+extern GLboolean aglSetOffScreen(AGLContext ctx, GLsizei width, GLsizei height, GLsizei rowbytes, GLvoid *baseaddr) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+#else
 extern GLboolean aglSetOffScreen(AGLContext ctx, GLsizei width, GLsizei height, GLsizei rowbytes, GLvoid *baseaddr);
+#endif
 
 /*
 ** FullScreen Function
@@ -388,23 +391,38 @@ extern void aglResetLibrary(void);
 ** Surface texture function
 *
 *  Note:
-*	aglSurfaceTexture has been deprecated, use GL_EXT_framebuffer_object or PBuffers instead
+*	aglSurfaceTexture has been deprecated, use GL_EXT_framebuffer_object instead
 */
 extern void aglSurfaceTexture (AGLContext context, GLenum target, GLenum internalformat, AGLContext surfacecontext) DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
 ** PBuffer functions
+*
+*  Note:
+*	PBuffers have been deprecated, use GL_EXT_framebuffer_object instead
 */
+#ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
+extern GLboolean aglCreatePBuffer (GLint width, GLint height, GLenum target, GLenum internalFormat, GLint max_level, AGLPbuffer *pbuffer)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+extern GLboolean aglDestroyPBuffer (AGLPbuffer pbuffer)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+extern GLboolean aglDescribePBuffer (AGLPbuffer pbuffer, GLint *width, GLint *height, GLenum *target, GLenum *internalFormat, GLint *max_level)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+extern GLboolean aglTexImagePBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint source)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+#else
 extern GLboolean aglCreatePBuffer (GLint width, GLint height, GLenum target, GLenum internalFormat, GLint max_level, AGLPbuffer *pbuffer)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern GLboolean aglDestroyPBuffer (AGLPbuffer pbuffer)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern GLboolean aglDescribePBuffer (AGLPbuffer pbuffer, GLint *width, GLint *height, GLenum *target, GLenum *internalFormat, GLint *max_level)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern GLboolean aglTexImagePBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint source)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+#endif
 
 /*
 ** Pbuffer Drawable Functions
 */
+#ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
+extern GLboolean aglSetPBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint face, GLint level, GLint screen)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+extern GLboolean aglGetPBuffer (AGLContext ctx, AGLPbuffer *pbuffer, GLint *face, GLint *level, GLint *screen)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+#else
 extern GLboolean aglSetPBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint face, GLint level, GLint screen)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern GLboolean aglGetPBuffer (AGLContext ctx, AGLPbuffer *pbuffer, GLint *face, GLint *level, GLint *screen)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+#endif
 
 /*
 ** CGL functions

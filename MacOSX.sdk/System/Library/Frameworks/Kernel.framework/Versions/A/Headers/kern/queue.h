@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -106,7 +106,7 @@ typedef	struct queue_entry	*queue_entry_t;
 /*
  *	enqueue puts "elt" on the "queue".
  *	dequeue returns the first element in the "queue".
- *	remqueue removes the specified "elt" from the specified "queue".
+ *	remqueue removes the specified "elt" from its queue.
  */
 
 #define enqueue(queue,elt)	enqueue_tail(queue, elt)
@@ -137,7 +137,6 @@ extern queue_entry_t	dequeue_tail(
 
 /* Dequeue element */
 extern void		remqueue(
-				queue_t		que,
 				queue_entry_t	elt);
 
 /* Enqueue element after a particular elem */
@@ -152,6 +151,8 @@ extern void		remque(
 __END_DECLS
 
 #else	/* !__GNUC__ */
+
+#define __DEQUEUE_ELT_CLEANUP(elt) do { } while(0)
 
 static __inline__ void
 enqueue_head(
@@ -185,6 +186,7 @@ dequeue_head(
 		elt = que->next;
 		elt->next->prev = que;
 		que->next = elt->next;
+		__DEQUEUE_ELT_CLEANUP(elt);
 	}
 
 	return (elt);
@@ -200,6 +202,7 @@ dequeue_tail(
 		elt = que->prev;
 		elt->prev->next = que;
 		que->prev = elt->prev;
+		__DEQUEUE_ELT_CLEANUP(elt);
 	}
 
 	return (elt);
@@ -207,11 +210,11 @@ dequeue_tail(
 
 static __inline__ void
 remqueue(
-	__unused queue_t		que,
 	queue_entry_t	elt)
 {
 	elt->next->prev = elt->prev;
 	elt->prev->next = elt->next;
+	__DEQUEUE_ELT_CLEANUP(elt);
 }
 
 static __inline__ void
@@ -231,6 +234,7 @@ remque(
 {
 	(elt->next)->prev = elt->prev;
 	(elt->prev)->next = elt->next;
+	__DEQUEUE_ELT_CLEANUP(elt);
 }
 
 #endif	/* !__GNUC__ */

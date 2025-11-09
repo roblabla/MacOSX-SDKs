@@ -24,16 +24,12 @@ enum
 };
 
 
-@interface PDFAnnotationText : PDFAnnotation
+@interface PDFAnnotationText : PDFAnnotation <NSCopying>
 {
 @private
     PDFAnnotationTextPrivateVars *_pdfPriv2;
 }
 
-// DEPRECATED: Use -[isOpen] on the annotation's popup. All PDFAnnotationText objects have a popup associated with them.
-//- (BOOL) windowIsOpen;
-// DEPRECATED: Call -[setIsOpen] on the annotation's popup. All PDFAnnotationText objects have a popup.
-//- (void) setWindowIsOpen: (BOOL) isOpen;
 
 // The type of icon displayed in the PDF.  Supported icons: "Comment", "Key", "Note", "Help", "NewParagraph", 
 // "Paragraph" and "Insert".

@@ -2,7 +2,7 @@
  *  QuickLookUI.h
  *  Quick Look
  *
- *  Copyright 2007 Apple Inc.
+ *  Copyright 2007-2010 Apple Inc.
  *  All rights reserved.
  *
  */
@@ -14,5 +14,6 @@
 
 #import <QuickLookUI/QLPreviewItem.h>
 #import <QuickLookUI/QLPreviewPanel.h>
+#import <QuickLookUI/QLPreviewView.h>
 
 #endif /* __QUICKLOOKUI_QUICKLOOKUI__ */

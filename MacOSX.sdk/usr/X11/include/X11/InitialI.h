@@ -1,5 +1,3 @@
-/* $Xorg: InitialI.h,v 1.4 2001/02/09 02:03:55 xorgcvs Exp $ */
-
 /***********************************************************
 
 Copyright 1987, 1988, 1994, 1998  The Open Group
@@ -46,7 +44,6 @@ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
 SOFTWARE.
 
 ******************************************************************/
-/* $XFree86: xc/lib/Xt/InitialI.h,v 3.10 2001/12/14 19:56:18 dawes Exp $ */
 
 #ifndef _XtinitialI_h
 #define _XtinitialI_h
@@ -83,6 +80,8 @@ SOFTWARE.
 
 #include <X11/Xos.h>
 #include <X11/Xpoll.h>
+
+_XFUNCPROTOBEGIN
 
 typedef struct _TimerEventRec {
         struct timeval        te_timer_value;
@@ -425,5 +424,7 @@ extern XrmDatabase _XtPreparseCommandLine(XrmOptionDescRec *urlist,
 			Cardinal num_urs, int argc, String *argv,
 			String *applName, String *displayName,
 			String *language);
+
+_XFUNCPROTOEND
 
 #endif /* _XtinitialI_h */

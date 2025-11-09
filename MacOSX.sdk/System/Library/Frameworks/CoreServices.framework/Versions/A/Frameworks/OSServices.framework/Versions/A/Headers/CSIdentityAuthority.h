@@ -3,9 +3,7 @@
  
      Contains:   CSIdentityAuthority APIs
  
-     Version:    OSServices-359.2~2
- 
-     Copyright:  © 2006-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 2006-2010 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -59,7 +57,7 @@ typedef struct __CSIdentityAuthority*   CSIdentityAuthorityRef;
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-CSIdentityAuthorityGetTypeID(void)                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityAuthorityGetTypeID(void)                            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 
@@ -87,7 +85,7 @@ CSIdentityAuthorityGetTypeID(void)                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CSIdentityAuthorityRef 
-CSGetDefaultIdentityAuthority(void)                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSGetDefaultIdentityAuthority(void)                           __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -110,7 +108,7 @@ CSGetDefaultIdentityAuthority(void)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CSIdentityAuthorityRef 
-CSGetLocalIdentityAuthority(void)                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSGetLocalIdentityAuthority(void)                             __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -138,7 +136,7 @@ CSGetLocalIdentityAuthority(void)                             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CSIdentityAuthorityRef 
-CSGetManagedIdentityAuthority(void)                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSGetManagedIdentityAuthority(void)                           __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -165,7 +163,7 @@ CSGetManagedIdentityAuthority(void)                           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSIdentityAuthorityCopyLocalizedName(CSIdentityAuthorityRef authority) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityAuthorityCopyLocalizedName(CSIdentityAuthorityRef authority) __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 

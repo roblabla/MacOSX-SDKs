@@ -3,6 +3,11 @@
 	@header
 	@abstract	APIs for managing a remote Handsfree device
 	@copyright	(C) 2006 by Apple Computer, Inc., all rights reserved.
+ 	@discussion 
+				 ***		DEPRECATED IN 10.7
+				 ***		You should transition your code to IOBluetoothHandsFree class.
+				 ***		This API may be removed any time in the future. 
+ 
  */
 
 
@@ -23,6 +28,7 @@
 				rfcommChannelData delegate method from the RFCOMMAudioController in a subclass of this object to support 
 				the features they would like to implement.  Developers should be aware that all "AT+" commands and 
 				responses used in this profile are to be wrapped with the proper terminators show here:  \r\nXX+XXX\r\n
+ 				
 */
 typedef enum IOBluetoothHandsFreeFeatures
 {
@@ -45,7 +51,12 @@ typedef enum IOBluetoothHandsFreeFeatures
 /*!
 	@class			IOBluetoothHandsFreeGateway
 	@abstract		
-	@discussion		In order to use this object with a Bluetooth Handsfree device, developers need to publish a Handsfree
+	@discussion		
+					 ***		DEPRECATED IN 10.7
+					 ***		You should transition your code to IOBluetoothHandsFree class.
+					 ***		This API may be removed any time in the future. 
+ 
+ 					In order to use this object with a Bluetooth Handsfree device, developers need to publish a Handsfree
 					 Audio Gateway SDP service.  Some devices will be fine without seeing a published HF Gateway service
 					 on your machine/device, but a majority of them will not like it and will behave sporadically. Fields
 					 in the SDP record are used to tell the device about what features the Gateway supports so its required
@@ -77,7 +88,7 @@ typedef enum IOBluetoothHandsFreeFeatures
 	@param		device A valid IOBluetoothDevice
 	@result		The Handsfree SDP record for the device on success, nil on failure
  */
-+ (IOBluetoothSDPServiceRecord *) getRequiredSDPServiceRecordForDevice:(IOBluetoothDevice*)device;
++ (IOBluetoothSDPServiceRecord *) getRequiredSDPServiceRecordForDevice:(IOBluetoothDevice*)device DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 //
 /*!
 	@method		getRequiredSDPRFCOMMChannelIDForDevice
@@ -85,7 +96,7 @@ typedef enum IOBluetoothHandsFreeFeatures
 	@param		device A valid IOBluetoothDevice
 	@result		The SDP specified RFCOMM channel ID for the device on success, 0 on failure
 */
-+ (BluetoothRFCOMMChannelID) getRequiredSDPRFCOMMChannelIDForDevice:(IOBluetoothDevice*)device;
++ (BluetoothRFCOMMChannelID) getRequiredSDPRFCOMMChannelIDForDevice:(IOBluetoothDevice*)device DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 // ---------------------------------------------------
@@ -108,7 +119,7 @@ typedef enum IOBluetoothHandsFreeFeatures
 - (id) initWithIncomingDevice: (IOBluetoothDevice *)device 
 	  incomingRFCOMMChannelID: (BluetoothRFCOMMChannelID)incomingRFCOMMChannelID 
 			supportedFeatures: (UInt32)supportedFeatures
-					 delegate: (id)inDelegate;
+					 delegate: (id)inDelegate DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	@method		initForConnectionToDevice:supportedFeatures:delegate:
@@ -121,7 +132,7 @@ typedef enum IOBluetoothHandsFreeFeatures
 */
 - (id) initForConnectionToDevice: (IOBluetoothDevice *)device 
 			   supportedFeatures: (UInt32)supportedFeatures
-						delegate: (id)inDelegate;
+						delegate: (id)inDelegate DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 // ---------------------------------------------------
@@ -137,7 +148,7 @@ typedef enum IOBluetoothHandsFreeFeatures
 				own to make the features work.
 	@param		gatewaySupportedFeatures A mask of feature values from the IOBluetoothHandsFreeFeatures enum
 */
-- (void) setGatewaySupportedFeatures:(UInt32)gatewaySupportedFeatures;
+- (void) setGatewaySupportedFeatures:(UInt32)gatewaySupportedFeatures DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
 	@method		getGatewaySupportedFeatures
@@ -145,7 +156,7 @@ typedef enum IOBluetoothHandsFreeFeatures
 	@discussion	
 	@result		A mask of feature values from the IOBluetoothHandsFreeFeatures enum
 */
-- (UInt32) getGatewaySupportedFeatures;
+- (UInt32) getGatewaySupportedFeatures DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 
@@ -158,7 +169,7 @@ typedef enum IOBluetoothHandsFreeFeatures
 	@discussion	Get the device features  set during the connection setup process with the device.
 	@result		A mask of feature values from the IOBluetoothHandsFreeFeatures enum
 */
-- (UInt32) getDeviceSupportedFeatures;
+- (UInt32) getDeviceSupportedFeatures DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 

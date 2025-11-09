@@ -1,11 +1,9 @@
 /*	NSXMLNode.h
-	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSXMLNodeOptions.h>
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSArray, NSDictionary, NSError, NSString, NSURL;
 @class NSXMLElement, NSXMLDocument;
@@ -53,10 +51,19 @@ typedef NSUInteger NSXMLNodeKind;
 
 @interface NSXMLNode : NSObject <NSCopying> {
 @protected
-	NSXMLNodeKind _kind;
-	NSXMLNode *_parent;
-	NSUInteger _index;
-	id _objectValue;
+#if __LP64__
+    NSXMLNode *_parent;
+    id _objectValue;
+    NSXMLNodeKind _kind:4;
+    uint32_t     _index:28;
+@private
+    int32_t _private;
+#else
+    NSXMLNodeKind _kind;
+    NSXMLNode *_parent;
+    uint32_t _index;
+    id _objectValue;
+#endif
 }
 
 /*!
@@ -380,4 +387,3 @@ typedef NSUInteger NSXMLNodeKind;
 - (NSArray *)objectsForXQuery:(NSString *)xquery error:(NSError **)error;
 @end
 
-#endif		// Availability guard

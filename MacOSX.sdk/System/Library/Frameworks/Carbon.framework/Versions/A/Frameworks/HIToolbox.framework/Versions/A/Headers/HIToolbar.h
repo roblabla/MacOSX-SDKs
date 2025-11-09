@@ -3,7 +3,7 @@
  
      Contains:   Toolbar and Toolbar Item API
  
-     Version:    HIToolbox-463~1
+     Version:    HIToolbox-567.2~1
  
      Copyright:  © 2001-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -50,7 +50,15 @@ typedef HIObjectRef                     HIToolbarItemRef;
 /*----------------------------------------------------------------------------------*/
 /* Standard Toolbox-provided item identifiers                                       */
 /*----------------------------------------------------------------------------------*/
-
+/*------------------------------------------------------------------------------------------*/
+/*  ¥ DEPRECATED Toolbar identifiers as of Mac OS X 10.7                                    */
+/*                                                                                          */
+/*  Items using these identifiers will be created, but will no longer be drawn              */
+/*  or visible via Accessibility, as of Mac OS X 10.7.                                      */
+/*                                                                                          */
+/*      kHIToolbarCustomizeIdentifier                                                       */
+/*      kHIToolbarSeparatorIdentifier                                                       */
+/*------------------------------------------------------------------------------------------*/
 #define kHIToolbarSeparatorIdentifier   CFSTR("com.apple.hitoolbox.toolbar.separator")
 #define kHIToolbarSpaceIdentifier       CFSTR("com.apple.hitoolbox.toolbar.space")
 #define kHIToolbarFlexibleSpaceIdentifier  CFSTR("com.apple.hitoolbox.toolbar.flexiblespace")

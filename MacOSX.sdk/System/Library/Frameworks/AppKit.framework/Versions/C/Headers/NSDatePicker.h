@@ -1,14 +1,13 @@
 /*
 	NSDatePicker.h
 	Application Kit
-	Copyright (c) 2004-2009, Apple Inc.
+	Copyright (c) 2004-2011, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSDatePickerCell.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @class NSCalendar, NSLocale, NSTimeZone;
 
@@ -78,4 +77,3 @@
 
 @end
 
-#endif

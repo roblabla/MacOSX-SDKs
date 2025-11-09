@@ -1,5 +1,5 @@
 /* CoreGraphics - CGDisplayConfiguration.h
-   Copyright (c) 2002-2009 Apple Inc.
+   Copyright (c) 2002-2011 Apple Inc.
    All rights reserved. */
 
 #ifndef CGDISPLAYCONFIGURATION_H_

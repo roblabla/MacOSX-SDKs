@@ -3,7 +3,7 @@
  
      Contains:   File Manager Interfaces.
  
-     Version:    CarbonCore-861.39~1
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 1985-2008 Apple, Inc. All rights reserved
  
@@ -93,17 +93,21 @@ typedef const HFSUniStr255 *            ConstHFSUniStr255Param;
     for a detailed discussion of the two separate models
     and how they are related.
 */
-/*  Permissions for File Manager routines which follow the original model */
+/*    Permissions for File Manager routines which follow the original model.
+    These values can be passed in the permissions parameter to FSOpenFork,
+    PBOpenForkSync, and PBOpenForkAsync.
+ */
 enum {
-  fsCurPerm                     = 0x00, /* open access permissions in ioPermssn */
+  fsCurPerm                     = 0x00,
   fsRdPerm                      = 0x01,
   fsWrPerm                      = 0x02,
   fsRdWrPerm                    = 0x03,
   fsRdWrShPerm                  = 0x04
 };
 
-/*    Permissions for File Manager routines which follow the AFP model
-    that is, routines with "OpenDeny" in the name.
+/*    Permissions for deprecated File Manager routines which follow the AFP model
+    that is, routines with "OpenDeny" in the name. (These values do not work with
+    FSOpenFork, PBOpenForkSync, and PBOpenForkAsync).
     
     The most useful combinations of these are:
         fsRdAccessPerm -> one writer, multiple readers: the readers
@@ -1086,7 +1090,7 @@ enum {
   kFSCatInfoCreateDate          = 0x00000020,
   kFSCatInfoContentMod          = 0x00000040,
   kFSCatInfoAttrMod             = 0x00000080,
-  kFSCatInfoAccessDate          = 0x00000100,
+  kFSCatInfoAccessDate          = 0x00000100, /* Note: although included in kFSCatInfoSettableInfo, attempts to set kFSCatInfoAccessDate will do nothing but will not cause an error */
   kFSCatInfoBackupDate          = 0x00000200,
   kFSCatInfoPermissions         = 0x00000400,
   kFSCatInfoFinderInfo          = 0x00000800,
@@ -4706,7 +4710,13 @@ enum {
    * Specify this option if you want the volume mounted on the mountdir
    * passed in instead of in it.
    */
-  kFSMountServerMountOnMountDir = (1 << 2)
+  kFSMountServerMountOnMountDir = (1 << 2),
+
+  /*
+   * Specify this option if you want to suppress connection-time UI
+   * when mounting the server volume.
+   */
+  kFSMountServerSuppressConnectionUI = (1 << 6)
 };
 
 
@@ -4923,7 +4933,8 @@ extern OSStatus  FSMountLocalVolumeAsync(CFStringRef diskID, CFURLRef mountDir, 
  *      The volume ref num of the newly mounted volume.
  *    
  *    flags:
- *      Options for future use.
+ *      Options (such as kFSMountServerMarkDoNotDisplay and
+ *      kFSMountServerMountOnMountDir).
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
@@ -4971,7 +4982,8 @@ extern OSStatus  FSMountServerVolumeSync(CFURLRef url, CFURLRef mountDir, CFStri
  *      client data associated with the operation.
  *    
  *    flags:
- *      Options for future use.
+ *      Options (such as kFSMountServerMarkDoNotDisplay and
+ *      kFSMountServerMountOnMountDir).
  *    
  *    callback:
  *      Function to call when mount is complete.
@@ -5052,7 +5064,7 @@ extern OSStatus  FSGetAsyncMountStatus(FSVolumeOperation volumeOp, FSMountStatus
  *      The volume reference number of the volume to unmount.
  *    
  *    flags:
- *      Options for future use.
+ *      Options (such as kFSUnmountVolumeForceUnmount).
  *    
  *    dissenter:
  *      pid of the process which denied the unmount if the unmount is
@@ -5085,7 +5097,7 @@ extern OSStatus  FSUnmountVolumeSync(FSVolumeRefNum vRefNum, OptionBits flags, p
  *      The volume reference number of the volume to unmount.
  *    
  *    flags:
- *      Options for future use.
+ *      Options (such as kFSUnmountVolumeForceUnmount).
  *    
  *    volumeOp:
  *      An FSVolumeOperation returned by FSCreateVolumeOperation
@@ -5195,7 +5207,7 @@ extern OSStatus  FSCancelVolumeOperation(FSVolumeOperation volumeOp) AVAILABLE_M
  *      The volume reference number of the volume to eject.
  *    
  *    flags:
- *      Options for future use.
+ *      Options (such as kFSEjectVolumeForceEject).
  *    
  *    dissenter:
  *      pid of the process which denied the unmount if the eject is
@@ -5228,7 +5240,7 @@ extern OSStatus  FSEjectVolumeSync(FSVolumeRefNum vRefNum, OptionBits flags, pid
  *      The volume reference number of the volume to eject.
  *    
  *    flags:
- *      Options for future use.
+ *      Options (such as kFSEjectVolumeForceEject).
  *    
  *    volumeOp:
  *      An FSVolumeOperation returned by FSCreateVolumeOperation
@@ -7735,7 +7747,7 @@ extern OSErr  PBFlushVolSync(ParmBlkPtr paramBlock)           AVAILABLE_MAC_OS_X
 extern OSErr  PBFlushVolAsync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/* This function is deprecated in Mac OS X 10.5. Use PBOpenForkSync with deny pos modes instead.*/
+/* This function is deprecated in Mac OS X 10.5.*/
 /*
  *  PBHOpenDenySync()   *** DEPRECATED ***
  *  
@@ -7750,7 +7762,7 @@ extern OSErr  PBFlushVolAsync(ParmBlkPtr paramBlock)          AVAILABLE_MAC_OS_X
 extern OSErr  PBHOpenDenySync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/* This function is deprecated in Mac OS X 10.5. Use PBOpenForkAsync with deny pos modes instead.*/
+/* This function is deprecated in Mac OS X 10.5.*/
 /*
  *  PBHOpenDenyAsync()   *** DEPRECATED ***
  *  
@@ -7765,7 +7777,7 @@ extern OSErr  PBHOpenDenySync(HParmBlkPtr paramBlock)         AVAILABLE_MAC_OS_X
 extern OSErr  PBHOpenDenyAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/* This function is deprecated in Mac OS X 10.5. Use PBOpenForkSync with deny pos modes instead.*/
+/* This function is deprecated in Mac OS X 10.5.*/
 /*
  *  PBHOpenRFDenySync()   *** DEPRECATED ***
  *  
@@ -7780,7 +7792,7 @@ extern OSErr  PBHOpenDenyAsync(HParmBlkPtr paramBlock)        AVAILABLE_MAC_OS_X
 extern OSErr  PBHOpenRFDenySync(HParmBlkPtr paramBlock)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 
 
-/* This function is deprecated in Mac OS X 10.5. Use PBOpenForkAsync with deny pos modes instead.*/
+/* This function is deprecated in Mac OS X 10.5.*/
 /*
  *  PBHOpenRFDenyAsync()   *** DEPRECATED ***
  *  

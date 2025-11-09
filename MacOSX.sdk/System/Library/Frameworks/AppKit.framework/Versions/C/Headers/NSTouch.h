@@ -1,7 +1,7 @@
 /*
     NSTouch.h
     Application Kit
-    Copyright (c) 2009, Apple Inc.
+    Copyright (c) 2009-2011, Apple Inc.
     All rights reserved.
 */
 
@@ -25,10 +25,10 @@ enum {
 #endif
 typedef NSUInteger NSTouchPhase;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 
 /* Unlike the iPhone, NSTouch objects do not persist for the life of the touch.
 */
+NS_CLASS_AVAILABLE(10_6, NA)
 @interface NSTouch : NSObject <NSCopying> {
 @private
     NSInteger _index;
@@ -67,4 +67,3 @@ typedef NSUInteger NSTouchPhase;
 
 @end
 
-#endif

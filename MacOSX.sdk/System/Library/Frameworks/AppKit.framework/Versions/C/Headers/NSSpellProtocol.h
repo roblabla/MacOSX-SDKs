@@ -1,7 +1,7 @@
 /*
         NSSpellProtocol.h
         Application Kit
-        Copyright (c) 1990-2009, Apple Inc.
+        Copyright (c) 1990-2011, Apple Inc.
         All rights reserved.
 */
 

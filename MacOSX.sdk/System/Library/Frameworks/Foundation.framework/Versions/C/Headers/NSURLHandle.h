@@ -1,5 +1,5 @@
 /*	NSURLHandle.h
-	Copyright (c) 1997-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2011, Apple Inc. All rights reserved.
 */
  
 #import <Foundation/NSObject.h>
@@ -9,35 +9,26 @@
 @class NSURLHandle, NSMutableArray, NSMutableData, NSData, NSURL;
 
 	// HTTP Specific Property Keys
-FOUNDATION_EXPORT NSString *NSHTTPPropertyStatusCodeKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-FOUNDATION_EXPORT NSString *NSHTTPPropertyStatusReasonKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-FOUNDATION_EXPORT NSString *NSHTTPPropertyServerHTTPVersionKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-FOUNDATION_EXPORT NSString *NSHTTPPropertyRedirectionHeadersKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-FOUNDATION_EXPORT NSString *NSHTTPPropertyErrorPageDataKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-FOUNDATION_EXPORT NSString *NSHTTPPropertyHTTPProxy DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER; // NSDictionary containing proxy information to use in place of proxy identified in SystemConfiguration.framework
+FOUNDATION_EXPORT NSString *NSHTTPPropertyStatusCodeKey NS_DEPRECATED(10_0, 10_4, NA, NA);
+FOUNDATION_EXPORT NSString *NSHTTPPropertyStatusReasonKey NS_DEPRECATED(10_0, 10_4, NA, NA);
+FOUNDATION_EXPORT NSString *NSHTTPPropertyServerHTTPVersionKey NS_DEPRECATED(10_0, 10_4, NA, NA);
+FOUNDATION_EXPORT NSString *NSHTTPPropertyRedirectionHeadersKey NS_DEPRECATED(10_0, 10_4, NA, NA);
+FOUNDATION_EXPORT NSString *NSHTTPPropertyErrorPageDataKey NS_DEPRECATED(10_0, 10_4, NA, NA);
+FOUNDATION_EXPORT NSString *NSHTTPPropertyHTTPProxy NS_DEPRECATED(10_2, 10_4, NA, NA); // NSDictionary containing proxy information to use in place of proxy identified in SystemConfiguration.framework
 													// To avoid any proxy use, pass an empty dictionary
-#endif
-
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 // FTP Specific Property Keys
 	// All keys are optional.  The default configuration allows an
 	// anonymous, passive-mode, one-off transfer of the specified URL.
-FOUNDATION_EXPORT NSString *NSFTPPropertyUserLoginKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER; // NSString - default "anonymous"
-FOUNDATION_EXPORT NSString *NSFTPPropertyUserPasswordKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER; // NSString - default "NSURLHandle@apple.com"
-FOUNDATION_EXPORT NSString *NSFTPPropertyActiveTransferModeKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER; // NSNumber BOOL - default NO (i.e. passive mode)
-FOUNDATION_EXPORT NSString *NSFTPPropertyFileOffsetKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER; // NSNumber - default 0
-
-#endif
-
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+FOUNDATION_EXPORT NSString *NSFTPPropertyUserLoginKey NS_DEPRECATED(10_2, 10_4, NA, NA); // NSString - default "anonymous"
+FOUNDATION_EXPORT NSString *NSFTPPropertyUserPasswordKey NS_DEPRECATED(10_2, 10_4, NA, NA); // NSString - default "NSURLHandle@apple.com"
+FOUNDATION_EXPORT NSString *NSFTPPropertyActiveTransferModeKey NS_DEPRECATED(10_2, 10_4, NA, NA); // NSNumber BOOL - default NO (i.e. passive mode)
+FOUNDATION_EXPORT NSString *NSFTPPropertyFileOffsetKey NS_DEPRECATED(10_2, 10_4, NA, NA); // NSNumber - default 0
 
 // NSDictionary containing proxy information to use in place of proxy identified in SystemConfiguration.framework
 // To avoid any proxy use, pass an empty dictionary
-FOUNDATION_EXPORT NSString *NSFTPPropertyFTPProxy DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+FOUNDATION_EXPORT NSString *NSFTPPropertyFTPProxy NS_DEPRECATED(10_3, 10_4, NA, NA);
 
-#endif
 
 
 enum {
@@ -49,11 +40,11 @@ enum {
 typedef NSUInteger NSURLHandleStatus;
 
 @protocol NSURLHandleClient
-- (void)URLHandle:(NSURLHandle *)sender resourceDataDidBecomeAvailable:(NSData *)newBytes DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)URLHandleResourceDidBeginLoading:(NSURLHandle *)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)URLHandleResourceDidFinishLoading:(NSURLHandle *)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)URLHandleResourceDidCancelLoading:(NSURLHandle *)sender DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)URLHandle:(NSURLHandle *)sender resourceDidFailLoadingWithReason:(NSString *)reason DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)URLHandle:(NSURLHandle *)sender resourceDataDidBecomeAvailable:(NSData *)newBytes NS_DEPRECATED(10_0, 10_4, NA, NA);
+- (void)URLHandleResourceDidBeginLoading:(NSURLHandle *)sender NS_DEPRECATED(10_0, 10_4, NA, NA);
+- (void)URLHandleResourceDidFinishLoading:(NSURLHandle *)sender NS_DEPRECATED(10_0, 10_4, NA, NA);
+- (void)URLHandleResourceDidCancelLoading:(NSURLHandle *)sender NS_DEPRECATED(10_0, 10_4, NA, NA);
+- (void)URLHandle:(NSURLHandle *)sender resourceDidFailLoadingWithReason:(NSString *)reason NS_DEPRECATED(10_0, 10_4, NA, NA);
 @end
 
 @interface NSURLHandle:NSObject
@@ -64,44 +55,42 @@ typedef NSUInteger NSURLHandleStatus;
     NSInteger _reserved;
 }
 
-+ (void)registerURLHandleClass:(Class)anURLHandleSubclass DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER; // Call this to register a new subclass of NSURLHandle
-+ (Class)URLHandleClassForURL:(NSURL *)anURL DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
++ (void)registerURLHandleClass:(Class)anURLHandleSubclass NS_DEPRECATED(10_0, 10_4, NA, NA); // Call this to register a new subclass of NSURLHandle
++ (Class)URLHandleClassForURL:(NSURL *)anURL NS_DEPRECATED(10_0, 10_4, NA, NA);
 
-- (NSURLHandleStatus)status DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (NSString *)failureReason DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER; // if status is NSURLHandleLoadFailed, then failureReason returns the reason for failure; otherwise, it returns nil
+- (NSURLHandleStatus)status NS_DEPRECATED(10_0, 10_4, NA, NA);
+- (NSString *)failureReason NS_DEPRECATED(10_0, 10_4, NA, NA); // if status is NSURLHandleLoadFailed, then failureReason returns the reason for failure; otherwise, it returns nil
 
-- (void)addClient:(id <NSURLHandleClient>)client DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)removeClient:(id <NSURLHandleClient>)client DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)addClient:(id <NSURLHandleClient>)client NS_DEPRECATED(10_0, 10_4, NA, NA);
+- (void)removeClient:(id <NSURLHandleClient>)client NS_DEPRECATED(10_0, 10_4, NA, NA);
 
-- (void)loadInBackground DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)cancelLoadInBackground DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)loadInBackground NS_DEPRECATED(10_0, 10_4, NA, NA);
+- (void)cancelLoadInBackground NS_DEPRECATED(10_0, 10_4, NA, NA);
 
-- (NSData *)resourceData DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER; // Blocks until all data is available
-- (NSData *)availableResourceData DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;  // Immediately returns whatever data is available
+- (NSData *)resourceData NS_DEPRECATED(10_0, 10_4, NA, NA); // Blocks until all data is available
+- (NSData *)availableResourceData NS_DEPRECATED(10_0, 10_4, NA, NA);  // Immediately returns whatever data is available
 
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
-- (long long) expectedResourceDataSize DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;	// Length of all of the resource data (can be queried before all data has arrived; negative if unknown)
-#endif
+- (long long) expectedResourceDataSize NS_DEPRECATED(10_3, 10_4, NA, NA);	// Length of all of the resource data (can be queried before all data has arrived; negative if unknown)
 
-- (void)flushCachedData DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)flushCachedData NS_DEPRECATED(10_0, 10_4, NA, NA);
 
 // As a background load progresses, subclasses should call these methods
-- (void)backgroundLoadDidFailWithReason:(NSString *)reason DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER; // Sends the failure message to clients
-- (void)didLoadBytes:(NSData *)newBytes loadComplete:(BOOL)yorn DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)backgroundLoadDidFailWithReason:(NSString *)reason NS_DEPRECATED(10_0, 10_4, NA, NA); // Sends the failure message to clients
+- (void)didLoadBytes:(NSData *)newBytes loadComplete:(BOOL)yorn NS_DEPRECATED(10_0, 10_4, NA, NA);
 
 // The primitives; these must be overridden by subclasses.
-+ (BOOL)canInitWithURL:(NSURL *)anURL DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-+ (NSURLHandle *)cachedHandleForURL:(NSURL *)anURL DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- initWithURL:(NSURL *)anURL cached:(BOOL)willCache DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
++ (BOOL)canInitWithURL:(NSURL *)anURL NS_DEPRECATED(10_0, 10_4, NA, NA);
++ (NSURLHandle *)cachedHandleForURL:(NSURL *)anURL NS_DEPRECATED(10_0, 10_4, NA, NA);
+- initWithURL:(NSURL *)anURL cached:(BOOL)willCache NS_DEPRECATED(10_0, 10_4, NA, NA);
 
-- (id)propertyForKey:(NSString *)propertyKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;  // Must be overridden by subclasses
-- (id)propertyForKeyIfAvailable:(NSString *)propertyKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (BOOL)writeProperty:(id)propertyValue forKey:(NSString *)propertyKey DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (BOOL)writeData:(NSData *)data DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER; // Must be overridden by subclasses; returns success or failure
+- (id)propertyForKey:(NSString *)propertyKey NS_DEPRECATED(10_0, 10_4, NA, NA);  // Must be overridden by subclasses
+- (id)propertyForKeyIfAvailable:(NSString *)propertyKey NS_DEPRECATED(10_0, 10_4, NA, NA);
+- (BOOL)writeProperty:(id)propertyValue forKey:(NSString *)propertyKey NS_DEPRECATED(10_0, 10_4, NA, NA);
+- (BOOL)writeData:(NSData *)data NS_DEPRECATED(10_0, 10_4, NA, NA); // Must be overridden by subclasses; returns success or failure
 
-- (NSData *)loadInForeground DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;   // Called from resourceData, above.
-- (void)beginLoadInBackground DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;  // Called from -loadInBackground, above.
-- (void)endLoadInBackground DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;    // Called from -cancelLoadInBackground, above.
+- (NSData *)loadInForeground NS_DEPRECATED(10_0, 10_4, NA, NA);   // Called from resourceData, above.
+- (void)beginLoadInBackground NS_DEPRECATED(10_0, 10_4, NA, NA);  // Called from -loadInBackground, above.
+- (void)endLoadInBackground NS_DEPRECATED(10_0, 10_4, NA, NA);    // Called from -cancelLoadInBackground, above.
 
 @end
 

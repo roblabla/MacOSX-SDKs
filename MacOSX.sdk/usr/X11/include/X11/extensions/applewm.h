@@ -1,4 +1,3 @@
-/* $XFree86: xc/lib/apple/applewm.h,v 1.1 2003/08/12 23:47:10 torrey Exp $ */
 /**************************************************************************
 
 Copyright (c) 2002 Apple Computer, Inc.
@@ -30,99 +29,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define _APPLEWM_H_
 
 #include <X11/Xfuncproto.h>
-
-#define X_AppleWMQueryVersion		0
-#define X_AppleWMFrameGetRect		1
-#define X_AppleWMFrameHitTest		2
-#define X_AppleWMFrameDraw		3
-#define X_AppleWMDisableUpdate		4
-#define X_AppleWMReenableUpdate		5
-#define X_AppleWMSelectInput		6
-#define X_AppleWMSetWindowMenuCheck	7
-#define X_AppleWMSetFrontProcess	8
-#define X_AppleWMSetWindowLevel		9
-#define X_AppleWMSetCanQuit		10
-#define X_AppleWMSetWindowMenu		11
-#define X_AppleWMSendPSN		12
-#define X_AppleWMAttachTransient	13
-
-/* Events */
-#define AppleWMControllerNotify		0
-#define AppleWMActivationNotify		1
-#define AppleWMPasteboardNotify		2
-#define AppleWMNumberEvents		3
-
-#define AppleWMControllerNotifyMask	(1L << 0)
-#define AppleWMActivationNotifyMask	(1L << 1)
-#define AppleWMPasteboardNotifyMask	(1L << 2)
-
-/* "Kinds" of ControllerNotify events */
-#define AppleWMMinimizeWindow		0
-#define AppleWMZoomWindow		1
-#define AppleWMCloseWindow		2
-#define AppleWMBringAllToFront		3
-#define AppleWMHideWindow		4
-#define AppleWMHideAll			5
-#define AppleWMShowAll			6
-#define AppleWMWindowMenuItem		9
-#define AppleWMWindowMenuNotify		10
-#define AppleWMNextWindow		11
-#define AppleWMPreviousWindow		12
-
-/* "Kinds" of ActivationNotify events */
-#define AppleWMIsActive			0
-#define AppleWMIsInactive		1
-#define AppleWMReloadPreferences	2
-
-/* "Kinds" of PasteboardNotify events */
-#define AppleWMCopyToPasteboard		0
-
-/* Errors */
-#define AppleWMClientNotLocal		0
-#define AppleWMOperationNotSupported	1
-#define AppleWMNumberErrors		(AppleWMOperationNotSupported + 1)
-
-/* Window level ids */
-#define AppleWMWindowLevelNormal	0
-#define AppleWMWindowLevelFloating	1
-#define AppleWMWindowLevelTornOff	2
-#define AppleWMWindowLevelDock		3
-#define AppleWMWindowLevelDesktop	4
-#define AppleWMNumWindowLevels		5
-
-/* Possible value for frame_rect argument to XAppleWMFrameGetRect() */
-#define AppleWMFrameRectTitleBar	1
-#define AppleWMFrameRectTracking	2
-#define AppleWMFrameRectGrowBox		3
-
-/* Window frame classes */
-#define AppleWMFrameClassDocument	1 << 0
-#define AppleWMFrameClassDialog		1 << 1
-#define AppleWMFrameClassModalDialog	1 << 2
-#define AppleWMFrameClassSystemModalDialog 1 << 3
-#define AppleWMFrameClassUtility	1 << 4
-#define AppleWMFrameClassToolbar	1 << 5
-#define AppleWMFrameClassMenu		1 << 6
-#define AppleWMFrameClassSplash		1 << 7
-#define AppleWMFrameClassBorderless	1 << 8
-
-/* Window frame attributes */
-#define AppleWMFrameActive		0x0001
-#define AppleWMFrameUrgent		0x0002
-#define AppleWMFrameTitle		0x0004
-#define AppleWMFramePrelight		0x0008
-#define AppleWMFrameShaded		0x0010
-#define AppleWMFrameCloseBox		0x0100
-#define AppleWMFrameCollapseBox		0x0200
-#define AppleWMFrameZoomBox		0x0400
-#define AppleWMFrameAnyBox		0x0700
-#define AppleWMFrameCloseBoxClicked	0x0800
-#define AppleWMFrameCollapseBoxClicked	0x1000
-#define AppleWMFrameZoomBoxClicked	0x2000
-#define AppleWMFrameAnyBoxClicked	0x3800
-#define AppleWMFrameGrowBox		0x4000
-
-#ifndef _APPLEWM_SERVER_
+#include <X11/extensions/applewmconst.h>
 
 typedef struct {
     int	type;		    /* of event */
@@ -193,5 +100,4 @@ Bool XAppleWMFrameDraw (Display *dpy, int screen, Window window,
 
 _XFUNCPROTOEND
 
-#endif /* _APPLEWM_SERVER_ */
 #endif /* _APPLEWM_H_ */

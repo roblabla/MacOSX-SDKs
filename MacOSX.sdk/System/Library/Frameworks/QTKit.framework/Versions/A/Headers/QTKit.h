@@ -37,3 +37,5 @@
 #import <QTKit/QTSampleBuffer.h>
 #import <QTKit/QTCompressionOptions.h>
 #import <QTKit/QTCaptureLayer.h>
+
+#import <QTKit/QTMetadataItem.h>

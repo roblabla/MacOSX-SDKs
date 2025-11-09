@@ -1,7 +1,7 @@
 /*
         NSRulerView.h
         Application Kit
-        Copyright (c) 1994-2009, Apple Inc.
+        Copyright (c) 1994-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -168,4 +168,7 @@ typedef NSUInteger NSRulerOrientation;
 - (void)rulerView:(NSRulerView *)ruler willSetClientView:(NSView *)newClient;
     // This is sent to the existing client before it is replaced by the new client.  The existing client can catch this to clean up any cached state it keeps while it is the client of a ruler.
 
+// This additional mapping allows mapping between location and point for clients with rotated coordinate system (i.e. vertical text view)
+- (CGFloat)rulerView:(NSRulerView *)ruler locationForPoint:(NSPoint)aPoint NS_AVAILABLE_MAC(10_7);
+- (NSPoint)rulerView:(NSRulerView *)ruler pointForLocation:(CGFloat)aPoint NS_AVAILABLE_MAC(10_7);
 @end

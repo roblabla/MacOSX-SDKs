@@ -161,7 +161,7 @@ Returns a snapshot of the current image in the QCView as a specific image type.
 The following image types are supported: NSBitmapImageRep, NSImage, CIImage, CGImage, CVOpenGLBuffer, CVPixelBuffer or QCImage (optimized abstract image object only to be used with -setValue:forInputKey: of a <QCCompositionRenderer>).
 The caller is responsible for releasing the returned object.
 */
-- (id) createSnapshotImageOfType:(NSString*)type;
+- (id) createSnapshotImageOfType:(NSString*)type NS_RETURNS_RETAINED;
 
 /*
 Returns the OpenGL context used by the QCView.

@@ -1,5 +1,3 @@
-/* $Xorg: Object.h,v 1.4 2001/02/09 02:03:56 xorgcvs Exp $ */
-/* $oHeader: Object.h,v 1.2 88/08/18 15:55:32 asente Exp $ */
 /***********************************************************
 
 Copyright 1987, 1988, 1998  The Open Group
@@ -50,11 +48,16 @@ SOFTWARE.
 #ifndef _XtObject_h
 #define _XtObject_h
 
+_XFUNCPROTOBEGIN
+
 typedef struct _ObjectRec *Object;
 typedef struct _ObjectClassRec *ObjectClass;
 
-#ifndef OBJECT
+#ifndef VMS
 externalref WidgetClass objectClass;
 #endif
+
+_XFUNCPROTOEND
+
 #endif /* _XtObject_h */
 /* DON'T ADD STUFF AFTER THIS #endif */

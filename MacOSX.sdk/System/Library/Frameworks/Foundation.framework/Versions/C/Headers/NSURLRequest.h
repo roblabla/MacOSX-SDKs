@@ -1,14 +1,9 @@
 /*	
     NSURLRequest.h
-    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
     
     Public header file.
 */
-
-// Note: To use the APIs described in these headers, you must perform
-// a runtime check for Foundation-462.1 or later.
-#import <AvailabilityMacros.h>
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
@@ -112,6 +107,39 @@ enum
 };
 typedef NSUInteger NSURLRequestCachePolicy;
 
+/*!
+ @enum NSURLRequestNetworkServiceType
+ 
+ @discussion The NSURLRequestNetworkServiceType enum defines constants that
+ can be used to specify the service type to associate with this request.  The
+ service type is used to provide the networking layers a hint of the purpose 
+ of the request.
+ 
+ @constant NSURLNetworkServiceTypeDefault Is the default value for an NSURLRequest
+ when created.  This value should be left unchanged for the vast majority of requests.
+ 
+ @constant NSURLNetworkServiceTypeVoIP Specifies that the request is for voice over IP
+ control traffic.
+ 
+ @constant NSURLNetworkServiceTypeVideo Specifies that the request is for video
+ traffic.
+
+ @constant NSURLNetworkServiceTypeBackground Specifies that the request is for background
+ traffic (such as a file download).
+
+ @constant NSURLNetworkServiceTypeVoice Specifies that the request is for voice data.
+
+*/
+enum
+{
+    NSURLNetworkServiceTypeDefault = 0,	// Standard internet traffic
+    NSURLNetworkServiceTypeVoIP = 1,	// Voice over IP control traffic
+    NSURLNetworkServiceTypeVideo = 2,	// Video traffic
+    NSURLNetworkServiceTypeBackground = 3, // Background traffic
+    NSURLNetworkServiceTypeVoice = 4	   // Voice data
+};
+typedef NSUInteger NSURLRequestNetworkServiceType;
+
 
 /*!
     @class NSURLRequest
@@ -163,7 +191,7 @@ typedef NSUInteger NSURLRequestCachePolicy;
 + (id)requestWithURL:(NSURL *)URL;
 
 /*! 
-    @method requestWithURL:cachePolicy:properties:
+    @method requestWithURL:cachePolicy:timeoutInterval:
     @abstract Allocates and initializes a NSURLRequest with the given
     URL and cache policy.
     @param URL The URL for the request. 
@@ -244,6 +272,15 @@ typedef NSUInteger NSURLRequestCachePolicy;
     @result The main document URL.
 */
 - (NSURL *)mainDocumentURL;
+
+/*!
+ @method networkServiceType
+ @abstract Returns the NSURLRequestNetworkServiceType associated with this request.
+ @discussion  This will return NSURLNetworkServiceTypeDefault for requests that have
+ not explicitly set a networkServiceType (using the setNetworkServiceType method).
+ @result The NSURLRequestNetworkServiceType associated with this request.
+ */
+- (NSURLRequestNetworkServiceType)networkServiceType NS_AVAILABLE(10_7, 4_0);
 
 @end
 
@@ -327,6 +364,15 @@ typedef NSUInteger NSURLRequestCachePolicy;
 */
 - (void)setMainDocumentURL:(NSURL *)URL;
 
+/*!
+ @method setNetworkServiceType:
+ @abstract Sets the NSURLRequestNetworkServiceType to associate with this request
+ @param networkServiceType The NSURLRequestNetworkServiceType to associate with the request.
+ @discussion This method is used to provide the network layers with a hint as to the purpose
+ of the request.  Most clients should not need to use this method.
+ */
+- (void)setNetworkServiceType:(NSURLRequestNetworkServiceType)networkServiceType NS_AVAILABLE(10_7, 4_0);
+
 @end
 
 
@@ -375,7 +421,6 @@ typedef NSUInteger NSURLRequestCachePolicy;
 */
 - (NSData *)HTTPBody;
 
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 /*!
     @method HTTPBodyStream
     @abstract Returns the request body stream of the receiver
@@ -389,7 +434,6 @@ typedef NSUInteger NSURLRequestCachePolicy;
     @result The request body stream of the receiver.
 */
 - (NSInputStream *)HTTPBodyStream;
-#endif
 
 /*! 
     @method HTTPShouldHandleCookies
@@ -400,6 +444,14 @@ typedef NSUInteger NSURLRequestCachePolicy;
     otherwise NO.
 */
 - (BOOL)HTTPShouldHandleCookies;
+
+/*!
+ @method HTTPShouldUsePipelining
+ @abstract Reports whether the receiver is not expected to wait for the previous response before transmitting.
+ @result YES if the receiver should transmit before the previous response is received. 
+ NO if the receiver should wait for the previous response before transmitting.
+ */
+- (BOOL)HTTPShouldUsePipelining NS_AVAILABLE(10_7, 4_0);
 
 @end
 
@@ -471,7 +523,6 @@ typedef NSUInteger NSURLRequestCachePolicy;
 */
 - (void)setHTTPBody:(NSData *)data;
 
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 /*!
     @method setHTTPBodyStream:
     @abstract Sets the request body to be the contents of the given stream. 
@@ -483,13 +534,12 @@ typedef NSUInteger NSURLRequestCachePolicy;
     @param inputStream the new input stream for use by the receiver
 */
 - (void)setHTTPBodyStream:(NSInputStream *)inputStream;
-#endif
 
 /*! 
     @method setHTTPShouldHandleCookies
     @abstract Decide whether default cookie handling will happen for 
     this request.
-    @param should YES if cookies should be sent with and set for this request; 
+    @param YES if cookies should be sent with and set for this request; 
     otherwise NO.
     @discussion The default is YES - in other words, cookies are sent from and 
     stored to the cookie manager by default.
@@ -497,6 +547,21 @@ typedef NSUInteger NSURLRequestCachePolicy;
 */
 - (void)setHTTPShouldHandleCookies:(BOOL)should;
 
+/*!
+ @method setHTTPShouldUsePipelining
+ @abstract Sets whether the request should not wait for the previous response 
+ before transmitting.
+ @param YES if the receiver should transmit before the previous response is
+ received.  NO to wait for the previous response before transmitting.
+ @discussion calling this method with a YES value does not guarantee HTTP 
+ pipelining behavior. HTTP 1.1 allows the client to send multiple requests to 
+ the server without waiting for a response.  
+ Though HTTP 1.1 requires support for pipelining, some servers report themselves 
+ as being HTTP 1.1 but do not support pipelining.  To maintain compatibility 
+ with these servers, requests may have to wait for the previous response before 
+ transmitting.
+ */
+- (void)setHTTPShouldUsePipelining:(BOOL)shouldUsePipelining NS_AVAILABLE(10_7, 4_0);
+
 @end
 
-#endif

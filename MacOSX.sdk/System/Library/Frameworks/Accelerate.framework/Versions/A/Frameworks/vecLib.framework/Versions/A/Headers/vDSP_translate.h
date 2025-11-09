@@ -3,9 +3,9 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-268.0
+     Version:    vecLib-325.4
  
-     Copyright:  © 2000-2010 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2011 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -18,7 +18,7 @@
 
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once

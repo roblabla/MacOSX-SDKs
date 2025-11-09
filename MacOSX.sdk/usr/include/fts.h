@@ -165,6 +165,7 @@ typedef struct _ftsent {
 } FTSENT;
 
 #include <sys/cdefs.h>
+#include <Availability.h>
 
 __BEGIN_DECLS
 FTSENT	*fts_children(FTS *, int) __DARWIN_INODE64(fts_children);
@@ -173,7 +174,7 @@ FTS	*fts_open(char * const *, int,
 	    int (*)(const FTSENT **, const FTSENT **)) __DARWIN_INODE64(fts_open);
 #ifdef __BLOCKS__
 FTS	*fts_open_b(char * const *, int,
-	    int (^)(const FTSENT **, const FTSENT **)) __DARWIN_INODE64(fts_open_b);
+	    int (^)(const FTSENT **, const FTSENT **)) __DARWIN_INODE64(fts_open_b) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
 #endif /* __BLOCKS__ */
 FTSENT	*fts_read(FTS *) __DARWIN_INODE64(fts_read);
 int	 fts_set(FTS *, FTSENT *, int) __DARWIN_INODE64(fts_set);

@@ -1,6 +1,7 @@
 /*	NSUndoManager.h
-	Copyright (c) 1995-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2011, Apple Inc. All rights reserved.
 */
+
 
 //
 // NSUndoManager is a general-purpose undo stack where clients can register
@@ -8,6 +9,7 @@
 //
 
 #import <Foundation/NSObject.h>
+#include <stdint.h>
 
 @class NSArray;
 @class NSString;
@@ -17,24 +19,17 @@ enum {
     NSUndoCloseGroupingRunLoopOrdering		= 350000
 };
 
+NS_CLASS_AVAILABLE(10_0, 3_0)
 @interface NSUndoManager : NSObject {
     @private
     id 			_undoStack;
     id 			_redoStack;
     NSArray 		*_runLoopModes;
-    NSInteger 		_disabled;
-    struct {
-        unsigned int undoing:1;
-        unsigned int redoing:1;
-        unsigned int registeredForCallback:1;
-        unsigned int postingCheckpointNotification:1;
-        unsigned int groupsByEvent:1;
-        unsigned int reserved:27;
-    } _flags;
+    uint64_t		_NSUndoManagerPrivate1;
     id 			_target;
     id			_proxy;
-    void		*_NSUndoManagerReserved1;
-    void		*_NSUndoManagerReserved2;
+    void		*_NSUndoManagerPrivate2;
+    void		*_NSUndoManagerPrivate3;
 }
 
         /* Begin/End Grouping */
@@ -113,6 +108,16 @@ enum {
    // When undo is called, the specified target will be called with
    // [target setFont:oldFont color:oldColor]
 
+- (void)setActionIsDiscardable:(BOOL)discardable NS_AVAILABLE(10_7, 5_0);
+   // Set the latest undo action to discardable if it may be safely discarded when a document can not be saved for any reason. An example might be an undo action that changes the viewable area of a document. To find out if an undo group contains only discardable actions, look for the NSUndoManagerGroupIsDiscardableKey in the userInfo dictionary of the NSUndoManagerDidCloseUndoGroupNotification.
+
+// This key is set on the user info dictionary of the NSUndoManagerDidCloseUndoGroupNotification, with a NSNumber boolean value of YES, if the undo group as a whole is discardable.
+FOUNDATION_EXPORT NSString * const NSUndoManagerGroupIsDiscardableKey NS_AVAILABLE(10_7, 5_0);
+
+- (BOOL)undoActionIsDiscardable NS_AVAILABLE(10_7, 5_0);
+- (BOOL)redoActionIsDiscardable NS_AVAILABLE(10_7, 5_0);
+   // Call to see if the next undo or redo action is discardable.
+
     	/* Undo/Redo action name */
 
 - (NSString *)undoActionName;
@@ -142,17 +147,20 @@ enum {
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSUndoManagerCheckpointNotification;
+FOUNDATION_EXPORT NSString * const NSUndoManagerCheckpointNotification NS_AVAILABLE(10_0, 3_0);
     // This is called before an undo group is begun or ended so any
     // clients that need to lazily register undos can do so in the
     // correct group.
 
-FOUNDATION_EXPORT NSString * const NSUndoManagerWillUndoChangeNotification;
-FOUNDATION_EXPORT NSString * const NSUndoManagerWillRedoChangeNotification;
+FOUNDATION_EXPORT NSString * const NSUndoManagerWillUndoChangeNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSString * const NSUndoManagerWillRedoChangeNotification NS_AVAILABLE(10_0, 3_0);
 
-FOUNDATION_EXPORT NSString * const NSUndoManagerDidUndoChangeNotification;
-FOUNDATION_EXPORT NSString * const NSUndoManagerDidRedoChangeNotification;
+FOUNDATION_EXPORT NSString * const NSUndoManagerDidUndoChangeNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSString * const NSUndoManagerDidRedoChangeNotification NS_AVAILABLE(10_0, 3_0);
 
-FOUNDATION_EXPORT NSString * const NSUndoManagerDidOpenUndoGroupNotification;
-FOUNDATION_EXPORT NSString * const NSUndoManagerWillCloseUndoGroupNotification;
+FOUNDATION_EXPORT NSString * const NSUndoManagerDidOpenUndoGroupNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSString * const NSUndoManagerWillCloseUndoGroupNotification NS_AVAILABLE(10_0, 3_0);
+
+// This notification is sent after an undo group closes. It should be safe to undo at this time.
+FOUNDATION_EXPORT NSString * const NSUndoManagerDidCloseUndoGroupNotification NS_AVAILABLE(10_7, 5_0);
 

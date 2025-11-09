@@ -14,9 +14,9 @@
 }
 
 /* When false the contents of the layer is only updated in response to
- * -setNeedsDisplay messages. When true
- * -drawInCGLContext:pixelFormat:forLayerTime:timeStamp: is called
- * periodically, matching the display characteristics. */
+ * -setNeedsDisplay messages. When true the layer is asked to redraw
+ * periodically with timestamps matching the display update frequency.
+ * The default value is NO. */
 
 @property(getter=isAsynchronous) BOOL asynchronous;
 
@@ -43,7 +43,7 @@
  * a pixel format object is needed for the layer. Should return an
  * OpenGL pixel format suitable for rendering to the set of displays
  * defined by the display mask 'mask'. The default implementation
- * returns a 32bpp fixed point pixelf format, with NoRecovery and
+ * returns a 32bpp fixed point pixel format, with NoRecovery and
  * Accelerated flags set. */
 
 - (CGLPixelFormatObj)copyCGLPixelFormatForDisplayMask:(uint32_t)mask;

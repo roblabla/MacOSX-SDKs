@@ -3,6 +3,16 @@
  * substantially enough to not warrant pretending it is a BSD flavor.
  * This first section are the vestigal BSD remnants.
  */
+/* Portions of this file are subject to the following copyright(s).  See
+ * the Net-SNMP's COPYING file for more details and other copyrights
+ * that may apply:
+ */
+/*
+ * Portions of this file are copyrighted by:
+ * Copyright (C) 2007 Apple, Inc. All rights reserved.
+ * Use is subject to license terms specified in the COPYING file
+ * distributed with the Net-SNMP package.
+ */
 
 /*
  * BSD systems use a different method of looking up sockaddr_in values 
@@ -59,11 +69,6 @@
 #define NETSNMP_INCLUDE_HRSWRUN_REWRITES
 #undef NETSNMP_INCLUDE_HRSWRUN_WRITE_SUPPORT
 #define NETSNMP_CAN_GET_DISK_LABEL 1
-
-/*
- * use new lmSensors rewrites as well
- */
-#define NETSNMP_INCLUDE_LMSENSORS_REWRITES 1
 
 /*
  * Enabling this restricts the compiler to mostly public APIs.
@@ -135,8 +140,10 @@
 /* #define USE_UNIFIED_IPV6_STRUCTS 1 */
 #undef STRUCT_in6pcb_HAS_inp_vflag
 
+/*
+ * utility macro used in several darwin specific files
+ */
 #define SNMP_CFRelease(x) do { if (x) { CFRelease(x); x = NULL; } } while(0)
-
 
 /*
  * Mac OS X runs on both PPC and Intel hardware,
@@ -146,3 +153,9 @@
 #ifdef TARGET_RT_LITTLE_ENDIAN
 #define UDP_ADDRESSES_IN_HOST_ORDER 1
 #endif
+
+/*
+ * as of 7/2010, openssl on darwin does not have sha256
+ */
+#define OPENSSL_NO_SHA256 1
+#define OPENSSL_NO_SHA512 1

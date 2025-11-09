@@ -50,6 +50,11 @@ extern "C" {
 #endif
 
 
+/*! @header ATASMARTLib
+ ATASMARTLib implements non-kernel task access to ATA SMART data.
+*/
+
+
 /* 5E659F92-20D3-11D6-BDB5-0003935A76B2 */
 /*! @defined kIOATASMARTLibFactoryID
     @discussion UUID for the IOATASMARTInterface Factory. */
@@ -158,7 +163,7 @@ typedef struct ATASMARTLogDirectory
 #if !KERNEL
 
 /*! 
- *	@struct IOATASMARTInterface
+ *	@interface IOATASMARTInterface
  *	@abstract Self-Monitoring, Analysis, and Reporting
  *	Technology Interface.  
  *	@discussion See section 6.14 and section 8.54 of T13:1410D ATA/ATAPI-6
@@ -216,7 +221,8 @@ typedef struct IOATASMARTInterface
 		device threshold exceeded condition. This would prompt the caller
 		to call ATASMARTReadData to get more information. See section
 		8.54.7 of ATA/ATAPI-6.
-		@param if exceededCondition is non-zero the device threshold
+		@param exceededCondition
+		if exceededCondition is non-zero the device threshold
 		exceeded condition.
 		@result Returns kIOReturnSuccess if successful, kIOReturnNoDevice
 		if there is no connection to an IOService, kIOReturnExclusiveAccess
@@ -238,7 +244,7 @@ typedef struct IOATASMARTInterface
 		@function SMARTExecuteOffLineImmediate
 		@abstract immediately initiate collection of SMART data.
 		@discussion	See section 8.54.4 of ATA/ATAPI-6.
-		@param passing true will collect "off-line" extended test,
+		@param extendedTest passing true will collect "off-line" extended test,
 		false short test.
 		@result Returns kIOReturnSuccess if successful,
 		kIOReturnNoDevice if there is no connection to an IOService,

@@ -1,13 +1,13 @@
 /*      NSCache.h
-        Copyright (c) 2008-2009, Apple Inc. All rights reserved.
+        Copyright (c) 2008-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 @class NSString;
+@protocol NSCacheDelegate;
 
+NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface NSCache : NSObject {
 @private
     id _delegate;
@@ -18,8 +18,8 @@
 - (void)setName:(NSString *)n;
 - (NSString *)name;
 
-- (void)setDelegate:(id)d;
-- (id)delegate;
+- (void)setDelegate:(id <NSCacheDelegate>)d;
+- (id <NSCacheDelegate>)delegate;
 
 - (id)objectForKey:(id)key;
 - (void)setObject:(id)obj forKey:(id)key; // 0 cost
@@ -39,10 +39,9 @@
 
 @end
 
-@protocol NSCacheDelegate
+@protocol NSCacheDelegate <NSObject>
 @optional
 - (void)cache:(NSCache *)cache willEvictObject:(id)obj;
 @end
 
-#endif
 

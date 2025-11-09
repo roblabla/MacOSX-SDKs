@@ -234,7 +234,9 @@ void IOSurfaceRemoveValue(IOSurfaceRef buffer, CFStringRef key)
 
 /* This call lets you get a mach_port_t that holds a reference to the IOSurface. This is useful 
    if you need to atomically or securely pass an IOSurface to another task without making the surface global to
-   the entire system.  The returned port must be deallocated with mach_port_deallocate or the equivalent.  */
+   the entire system.  The returned port must be deallocated with mach_port_deallocate or the equivalent.  
+   Note: Any live mach ports created from an IOSurfaceRef implicity increase the IOSurface's global use
+   count by one until the port is deleted. */
 mach_port_t IOSurfaceCreateMachPort(IOSurfaceRef buffer)
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
@@ -242,6 +244,16 @@ mach_port_t IOSurfaceCreateMachPort(IOSurfaceRef buffer)
    Note: This call does NOT destroy the port. */
 IOSurfaceRef IOSurfaceLookupFromMachPort(mach_port_t port)
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+	
+/* This call lets you get an xpc_object_t that holds a reference to the IOSurface.
+   Note: Any live XPC objects created from an IOSurfaceRef implicity increase the IOSurface's global use
+   count by one until the object is destroyed. */
+xpc_object_t IOSurfaceCreateXPCObject(IOSurfaceRef aSurface)
+	IOSFC_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+
+/* This call lets you take an xpc_object_t created via IOSurfaceCreatePort() and recreate an IOSurfaceRef from it. */
+IOSurfaceRef IOSurfaceLookupFromXPCObject(xpc_object_t xobj)
+	IOSFC_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 
 /* 
    IOSurfaceGetPropertyMaximum() will return the maximum of a given property that is guaranteed to be 
@@ -265,7 +277,6 @@ IOSurfaceRef IOSurfaceLookupFromMachPort(mach_port_t port)
 size_t	IOSurfaceGetPropertyMaximum(CFStringRef property)
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
-
 /* 
    If a property has a particular alignment requirement, then IOSurfaceGetPropertyAlignment() will return it.  
    If the property has no alignment requirement then 1 will be returned.   The following properties 
@@ -285,6 +296,43 @@ size_t	IOSurfaceGetPropertyAlignment(CFStringRef property)
 /* This is a convenience function to automatically align property values.  For properties with no alignment
    requirements, the original value will be returned. */
 size_t	IOSurfaceAlignProperty(CFStringRef property, size_t value)
+	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+
+/* There are cases where it is useful to know whether or not an IOSurface buffer is considered to be "in use"
+   by other users of the same IOSurface.  In particular, CoreVideo and other APIs make use of the IOSurface
+   use count facility to know when it is safe to recycle an IOSurface backed CVPixelBuffer object.  This is
+   particularly important when IOSurface objects are being shared across process boundaries and the normal
+   mechanisms one might use would not be viable.
+   
+   The IOSurface use count is similar in concept to any othe reference counting scheme.  When the global use
+   count of an IOSurface goes to zero, it is no longer considered "in use".   When it is anything other than
+   zero, then the IOSurface is still "in use" by someone and therefore anyone attempting to maintain a pool
+   of IOSurfaces to be recycled should not reclaim that IOSurface.
+   
+   Note that IOSurface maintains both a per-process and an internal system wide usage count.   In the current
+   implementation, when the per-process usage count goes from zero to one, the system wide usage count is
+   incremented by one.   When the per-process usage count drops back to zero (either via explicit decrement
+   calls or the process terminates), the global usage count is decremented by one.
+   
+   IOSurfaceGetUseCount() returns the local per-process usage count for an IOSurface.  This call is only
+   provided for logging/debugging purposes and should never be used to determine whether an IOSurface is
+   considered to be "in use".   IOSurfaceIsInUse() is the only call that should be used for that purpose. */
+   
+/* Increment the per-process usage count for an IOSurface */
+void IOSurfaceIncrementUseCount(IOSurfaceRef buffer)
+	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+	
+/* Decrement the per-process usage count for an IOSurface */
+void IOSurfaceDecrementUseCount(IOSurfaceRef buffer)
+	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/* Return the per-process usage count for an IOSurface */
+int32_t IOSurfaceGetUseCount(IOSurfaceRef buffer)
+	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+	
+/* Returns true of an IOSurface is in use by any process in the system, otherwise false. */
+Boolean IOSurfaceIsInUse(IOSurfaceRef buffer)
 	IOSFC_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 __END_DECLS

@@ -25,8 +25,11 @@
 /*
  *
  *	$Log: IOUSBHubPolicyMaker.h,v $
- *	Revision 1.10.686.1  2011/04/05 14:51:08  nano
- *	Fixes from 424.4.0 QL for 9190658 9190542 9195789 9121386 8979458 9121378
+ *	Revision 1.11  2011/02/01 21:13:43  rhoads
+ *	roll in 8802864, 8836233, 8894827, 8901515, 8909194
+ *
+ *	Revision 1.10.626.1  2011/01/25 17:46:09  nano
+ *	Get rid of unused extra power properties and rename a #define to make more sense
  *
  *	Revision 1.10  2009/05/07 19:43:09  nano
  *	Move our SnowLeopard branch to TOT

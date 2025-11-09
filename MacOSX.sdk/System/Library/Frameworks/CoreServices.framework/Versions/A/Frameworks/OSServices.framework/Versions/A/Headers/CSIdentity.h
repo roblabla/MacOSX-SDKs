@@ -3,9 +3,7 @@
  
      Contains:   CSIdentity APIs
  
-     Version:    OSServices-359.2~2
- 
-     Copyright:  © 2006-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 2006-2010 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,6 +18,9 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#ifndef __CSIDENTITYBASE__
+#include <OSServices/CSIdentityBase.h>
+#endif
 
 #ifndef __CSIDENTITYAUTHORITY__
 #include <OSServices/CSIdentityAuthority.h>
@@ -31,7 +32,10 @@
 #endif
 
 #ifndef __AUTHORIZATION__
+#include <Security/Security.h>
+#if !TARGET_OS_EMBEDDED && !TARGET_IPHONE_SIMULATOR
 #include <Security/Authorization.h>
+#endif
 #endif
 
 
@@ -49,69 +53,6 @@ extern "C" {
 #pragma pack(push, 2)
 
 #include <sys/types.h>
-/*
-    The error domain of all CFErrors reported by Identity Services 
-*/
-/*
- *  kCSIdentityErrorDomain
- *  
- *  Availability:
- *    Mac OS X:         in version 10.5 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kCSIdentityErrorDomain                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-
-/*
- *  CSIdentity error codes
- *  
- *  Discussion:
- *    Error codes in the CSIdentity error domain
- */
-enum {
-
-  /*
-   * The specified authority is not recognized
-   */
-  kCSIdentityUnknownAuthorityErr = -1,
-
-  /*
-   * The specified authority is currently not accessible
-   */
-  kCSIdentityAuthorityNotAccessibleErr = -2,
-
-  /*
-   * The caller does not have permission to perform the operation
-   */
-  kCSIdentityPermissionErr      = -3,
-
-  /*
-   * The requested identity has been deteled
-   */
-  kCSIdentityDeletedErr         = -4,
-
-  /*
-   * The full name is not valid (length: [1-255])
-   */
-  kCSIdentityInvalidFullNameErr = -5,
-
-  /*
-   * The full name is aleady assigned to another identity
-   */
-  kCSIdentityDuplicateFullNameErr = -6,
-
-  /*
-   * The Posix name is not valid (char set: [a-zA-Z0-9_-] length:
-   * [1-255])
-   */
-  kCSIdentityInvalidPosixNameErr = -7,
-
-  /*
-   * The Posix name is aleady assigned to another identity
-   */
-  kCSIdentityDuplicatePosixNameErr = -8
-};
-
 
 /*
     CSIdentity
@@ -168,7 +109,7 @@ typedef struct __CSIdentityQuery*       CSIdentityQueryRef;
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kCSIdentityGeneratePosixName                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCSIdentityGeneratePosixName                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 /*
@@ -234,7 +175,7 @@ typedef CFOptionFlags                   CSIdentityFlags;
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-CSIdentityGetTypeID(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityGetTypeID(void)                                     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 
@@ -302,7 +243,7 @@ CSIdentityCreate(
   CFStringRef              fullName,
   CFStringRef              posixName,
   CSIdentityFlags          flags,
-  CSIdentityAuthorityRef   authority)                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CSIdentityAuthorityRef   authority)                         __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -335,7 +276,7 @@ CSIdentityCreate(
 extern CSIdentityRef 
 CSIdentityCreateCopy(
   CFAllocatorRef   allocator,
-  CSIdentityRef    identity)                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CSIdentityRef    identity)                                  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 
@@ -367,7 +308,7 @@ CSIdentityCreateCopy(
  *    Non-Carbon CFM:   not available
  */
 extern CSIdentityClass 
-CSIdentityGetClass(CSIdentityRef identity)                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityGetClass(CSIdentityRef identity)                    __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 
@@ -394,7 +335,7 @@ CSIdentityGetClass(CSIdentityRef identity)                    AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CSIdentityAuthorityRef 
-CSIdentityGetAuthority(CSIdentityRef identity)                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityGetAuthority(CSIdentityRef identity)                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 
@@ -422,7 +363,7 @@ CSIdentityGetAuthority(CSIdentityRef identity)                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFUUIDRef 
-CSIdentityGetUUID(CSIdentityRef identity)                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityGetUUID(CSIdentityRef identity)                     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -454,7 +395,7 @@ CSIdentityGetUUID(CSIdentityRef identity)                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSIdentityGetFullName(CSIdentityRef identity)                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityGetFullName(CSIdentityRef identity)                 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 
@@ -481,7 +422,7 @@ CSIdentityGetFullName(CSIdentityRef identity)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern id_t 
-CSIdentityGetPosixID(CSIdentityRef identity)                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityGetPosixID(CSIdentityRef identity)                  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -514,7 +455,7 @@ CSIdentityGetPosixID(CSIdentityRef identity)                  AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSIdentityGetPosixName(CSIdentityRef identity)                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityGetPosixName(CSIdentityRef identity)                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 
@@ -543,7 +484,7 @@ CSIdentityGetPosixName(CSIdentityRef identity)                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSIdentityGetEmailAddress(CSIdentityRef identity)             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityGetEmailAddress(CSIdentityRef identity)             __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -573,7 +514,7 @@ CSIdentityGetEmailAddress(CSIdentityRef identity)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFURLRef 
-CSIdentityGetImageURL(CSIdentityRef identity)                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityGetImageURL(CSIdentityRef identity)                 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -602,7 +543,7 @@ CSIdentityGetImageURL(CSIdentityRef identity)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFDataRef 
-CSIdentityGetImageData(CSIdentityRef identity)                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityGetImageData(CSIdentityRef identity)                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -631,7 +572,7 @@ CSIdentityGetImageData(CSIdentityRef identity)                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSIdentityGetImageDataType(CSIdentityRef identity)            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityGetImageDataType(CSIdentityRef identity)            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -666,7 +607,7 @@ CSIdentityGetImageDataType(CSIdentityRef identity)            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFArrayRef 
-CSIdentityGetAliases(CSIdentityRef identity)                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityGetAliases(CSIdentityRef identity)                  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -699,7 +640,7 @@ CSIdentityGetAliases(CSIdentityRef identity)                  AVAILABLE_MAC_OS_X
 extern Boolean 
 CSIdentityIsMemberOfGroup(
   CSIdentityRef   identity,
-  CSIdentityRef   group)                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CSIdentityRef   group)                                      __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -726,7 +667,7 @@ CSIdentityIsMemberOfGroup(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-CSIdentityIsHidden(CSIdentityRef identity)                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityIsHidden(CSIdentityRef identity)                    __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -771,7 +712,7 @@ CSIdentityIsHidden(CSIdentityRef identity)                    AVAILABLE_MAC_OS_X
 extern CFDataRef 
 CSIdentityCreatePersistentReference(
   CFAllocatorRef   allocator,
-  CSIdentityRef    identity)                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CSIdentityRef    identity)                                  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 
@@ -810,7 +751,7 @@ CSIdentityCreatePersistentReference(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-CSIdentityIsEnabled(CSIdentityRef user)                       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityIsEnabled(CSIdentityRef user)                       __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -842,7 +783,7 @@ CSIdentityIsEnabled(CSIdentityRef user)                       AVAILABLE_MAC_OS_X
 extern Boolean 
 CSIdentityAuthenticateUsingPassword(
   CSIdentityRef   user,
-  CFStringRef     password)                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFStringRef     password)                                   __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -875,7 +816,7 @@ CSIdentityAuthenticateUsingPassword(
  *    Non-Carbon CFM:   not available
  */
 extern SecCertificateRef 
-CSIdentityGetCertificate(CSIdentityRef user)                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityGetCertificate(CSIdentityRef user)                  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -918,7 +859,7 @@ CSIdentityGetCertificate(CSIdentityRef user)                  AVAILABLE_MAC_OS_X
 extern CSIdentityQueryRef 
 CSIdentityCreateGroupMembershipQuery(
   CFAllocatorRef   allocator,
-  CSIdentityRef    group)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CSIdentityRef    group)                                     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -956,7 +897,7 @@ CSIdentityCreateGroupMembershipQuery(
 extern void 
 CSIdentitySetFullName(
   CSIdentityRef   identity,
-  CFStringRef     fullName)                                   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFStringRef     fullName)                                   __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -989,7 +930,7 @@ CSIdentitySetFullName(
 extern void 
 CSIdentitySetEmailAddress(
   CSIdentityRef   identity,
-  CFStringRef     emailAddress)       /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFStringRef     emailAddress)       /* can be NULL */       __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -1022,7 +963,7 @@ CSIdentitySetEmailAddress(
 extern void 
 CSIdentitySetImageURL(
   CSIdentityRef   identity,
-  CFURLRef        url)            /* can be NULL */           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFURLRef        url)            /* can be NULL */           __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -1059,7 +1000,7 @@ extern void
 CSIdentitySetImageData(
   CSIdentityRef   identity,
   CFDataRef       imageData,           /* can be NULL */
-  CFStringRef     imageDataType)       /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFStringRef     imageDataType)       /* can be NULL */      __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -1091,7 +1032,7 @@ CSIdentitySetImageData(
 extern void 
 CSIdentityAddAlias(
   CSIdentityRef   identity,
-  CFStringRef     alias)                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFStringRef     alias)                                      __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -1123,7 +1064,7 @@ CSIdentityAddAlias(
 extern void 
 CSIdentityRemoveAlias(
   CSIdentityRef   identity,
-  CFStringRef     alias)                                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFStringRef     alias)                                      __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -1162,7 +1103,7 @@ CSIdentityRemoveAlias(
 extern void 
 CSIdentityAddMember(
   CSIdentityRef   group,
-  CSIdentityRef   member)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CSIdentityRef   member)                                     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -1194,7 +1135,7 @@ CSIdentityAddMember(
 extern void 
 CSIdentityRemoveMember(
   CSIdentityRef   group,
-  CSIdentityRef   member)                                     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CSIdentityRef   member)                                     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -1236,7 +1177,7 @@ CSIdentityRemoveMember(
 extern void 
 CSIdentitySetIsEnabled(
   CSIdentityRef   user,
-  Boolean         isEnabled)                                  AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  Boolean         isEnabled)                                  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -1272,7 +1213,7 @@ CSIdentitySetIsEnabled(
 extern void 
 CSIdentitySetPassword(
   CSIdentityRef   user,
-  CFStringRef     password)       /* can be NULL */           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFStringRef     password)       /* can be NULL */           __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -1308,7 +1249,7 @@ CSIdentitySetPassword(
 extern void 
 CSIdentitySetCertificate(
   CSIdentityRef       user,
-  SecCertificateRef   certificate)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  SecCertificateRef   certificate)       /* can be NULL */    __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -1340,7 +1281,7 @@ CSIdentitySetCertificate(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-CSIdentityDelete(CSIdentityRef identity)                      AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityDelete(CSIdentityRef identity)                      __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -1351,6 +1292,8 @@ CSIdentityDelete(CSIdentityRef identity)                      AVAILABLE_MAC_OS_X
  *
  */
 
+
+#if !TARGET_OS_EMBEDDED && !TARGET_IPHONE_SIMULATOR
 /*
  *  CSIdentityCommit()
  *  
@@ -1390,9 +1333,8 @@ extern Boolean
 CSIdentityCommit(
   CSIdentityRef      identity,
   AuthorizationRef   authorization,       /* can be NULL */
-  CFErrorRef *       error)               /* can be NULL */   AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-
-
+  CFErrorRef *       error)               /* can be NULL */   __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+#endif // !TARGET_OS_EMBEDDED && !TARGET_IPHONE_SIMULATOR
 
 
 /*
@@ -1460,6 +1402,9 @@ struct CSIdentityClientContext {
   CSIdentityStatusUpdatedCallback  statusUpdated;
 };
 typedef struct CSIdentityClientContext  CSIdentityClientContext;
+
+
+#if !TARGET_OS_EMBEDDED && !TARGET_IPHONE_SIMULATOR
 /*
  *  CSIdentityCommitAsynchronously()
  *  
@@ -1510,8 +1455,8 @@ CSIdentityCommitAsynchronously(
   const CSIdentityClientContext *  clientContext,
   CFRunLoopRef                     runLoop,
   CFStringRef                      runLoopMode,
-  AuthorizationRef                 authorization)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-
+  AuthorizationRef                 authorization)       /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+#endif // !TARGET_OS_EMBEDDED && !TARGET_IPHONE_SIMULATOR
 
 
 /*
@@ -1537,7 +1482,7 @@ CSIdentityCommitAsynchronously(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-CSIdentityIsCommitting(CSIdentityRef identity)                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityIsCommitting(CSIdentityRef identity)                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -1568,7 +1513,7 @@ CSIdentityIsCommitting(CSIdentityRef identity)                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern void 
-CSIdentityRemoveClient(CSIdentityRef identity)                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityRemoveClient(CSIdentityRef identity)                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 

@@ -52,6 +52,13 @@ extern "C" {
 
 #include <AvailabilityMacros.h>
 
+#ifdef BUILDING_COLORSYNC
+#ifdef DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER
+#undef DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER
+#endif
+#define DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER
+#endif
+
 #if PRAGMA_ONCE
 #pragma once
 #endif
@@ -413,18 +420,18 @@ typedef struct CMDateTime {
   UInt16              hours;
   UInt16              minutes;
   UInt16              seconds;
-} CMDateTime;
+} CMDateTime DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMFixedXYColor {
   Fixed               x;
   Fixed               y;
-} CMFixedXYColor;
+} CMFixedXYColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMFixedXYZColor {
   Fixed               X;
   Fixed               Y;
   Fixed               Z;
-} CMFixedXYZColor;
+} CMFixedXYZColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef UInt16                          CMXYZComponent;
 
@@ -437,8 +444,8 @@ typedef struct CMXYZColor {
 /* Typedef for Profile MD5 message digest */
 /* Derived from the RSA Data Security, Inc. MD5 Message-Digest Algorithm */
 
-typedef unsigned char                   CMProfileMD5[16];
-typedef CMProfileMD5 *                  CMProfileMD5Ptr;
+typedef unsigned char                   CMProfileMD5[16] DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+typedef CMProfileMD5 *                  CMProfileMD5Ptr  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*
  *  CMProfileMD5AreEqual()
@@ -475,7 +482,7 @@ typedef struct CM2Header {
   CMFixedXYZColor     white;                  /* profile illuminant */
   OSType              creator;                /* profile creator */
   char                reserved[44];           /* reserved for future use */
-} CM2Header;
+} CM2Header DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CM4Header {
   UInt32              size;                   /* This is the total size of the Profile */
@@ -496,51 +503,51 @@ typedef struct CM4Header {
   OSType              creator;                /* profile creator */
   CMProfileMD5        digest;                 /* Profile message digest */
   char                reserved[28];           /* reserved for future use */
-} CM4Header;
+} CM4Header DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMTagRecord {
   OSType              tag;                    /* Registered with CS2 consortium */
   UInt32              elementOffset;          /* Relative to start of CMProfile */
   UInt32              elementSize;
-} CMTagRecord;
+} CMTagRecord DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMTagElemTable {
   UInt32              count;
   CMTagRecord         tagList[1];             /* variable size, determined by count */
-} CMTagElemTable;
+} CMTagElemTable DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CM2Profile {
   CM2Header           header;
   CMTagElemTable      tagTable;
   char                elemData[1];            /* variable size data for tagged element storage */
-} CM2Profile, *CM2ProfilePtr, **CM2ProfileHandle;
+} CM2Profile, *CM2ProfilePtr, **CM2ProfileHandle DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* Tag Type Definitions */
 typedef struct CMAdaptationMatrixType {
   OSType              typeDescriptor;         /* 'sf32' = cmSigS15Fixed16Type */
   UInt32              reserved;               /* fill with 0x00 */
   Fixed               adaptationMatrix[9];    /* fixed size of nine matrix entries */
-} CMAdaptationMatrixType;
+} CMAdaptationMatrixType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMCurveType {
   OSType              typeDescriptor;         /* 'curv' = cmSigCurveType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              countValue;             /* number of entries in table that follows */
   UInt16              data[1];                /* variable size, determined by countValue */
-} CMCurveType;
+} CMCurveType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMDataType {
   OSType              typeDescriptor;         /* 'data' = cmSigDataType*/
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              dataFlag;               /* 0 = ASCII, 1 = binary */
   char                data[1];                /* variable size, determined by tag element size */
-} CMDataType;
+} CMDataType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMDateTimeType {
   OSType              typeDescriptor;         /* 'dtim' = cmSigDateTimeType */
   UInt32              reserved;               /* fill with 0x00 */
   CMDateTime          dateTime;               /* */
-} CMDateTimeType;
+} CMDateTimeType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMLut16Type {
   OSType              typeDescriptor;         /* 'mft2' = cmSigLut16Type */
@@ -561,7 +568,7 @@ typedef struct CMLut16Type {
   UInt16              CLUT[];                 /* variable size, determined by (gridPoints^inputChannels)*outputChannels */
   UInt16              outputTable[];          /* variable size, determined by outputChannels*outputTableEntries */
 #endif
-} CMLut16Type;
+} CMLut16Type DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMLut8Type {
   OSType              typeDescriptor;         /* 'mft1' = cmSigLut8Type */
@@ -580,7 +587,7 @@ typedef struct CMLut8Type {
   UInt8               CLUT[];                 /* variable size, determined by (gridPoints^inputChannels)*outputChannels */
   UInt8               outputTable[];          /* variable size, determined by outputChannels*256 */
 #endif
-} CMLut8Type;
+} CMLut8Type DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMMultiFunctLutType {
   OSType              typeDescriptor;         /* 'mAB ' = cmSigMultiFunctA2BType or 'mBA ' = cmSigMultiFunctB2AType */
@@ -594,14 +601,14 @@ typedef struct CMMultiFunctLutType {
   UInt32              offsetCLUT;             /* offset to multi-dimensional LUT of type CMMultiFunctCLUTType */
   UInt32              offsetAcurves;          /* offset to first "A" curve */
   UInt8               data[1];                /* variable size */
-} CMMultiFunctLutType, CMMultiFunctLutA2BType, CMMultiFunctLutB2AType;
+} CMMultiFunctLutType, CMMultiFunctLutA2BType, CMMultiFunctLutB2AType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMMultiFunctCLUTType {
   UInt8               gridPoints[16];         /* grigpoints for each input channel dimension (remaining are 0) */
   UInt8               entrySize;              /* bytes per lut enrty (1 or 2) */
   UInt8               reserved[3];            /* fill with 0x00 */
   UInt8               data[2];                /* variable size, determined by above */
-} CMMultiFunctCLUTType;
+} CMMultiFunctCLUTType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMMeasurementType {
   OSType              typeDescriptor;         /* 'meas' = cmSigMeasurementType */
@@ -611,7 +618,7 @@ typedef struct CMMeasurementType {
   UInt32              geometry;               /* cmGeometryUnknown, cmGeometry045or450 (0/45), cmGeometry0dord0 (0/d or d/0) */
   UInt32              flare;                  /* cmFlare0, cmFlare100 */
   UInt32              illuminant;             /* cmIlluminantUnknown, cmIlluminantD50, ... */
-} CMMeasurementType;
+} CMMeasurementType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMNamedColorType {
   OSType              typeDescriptor;         /* 'ncol' = cmSigNamedColorType */
@@ -630,13 +637,13 @@ typedef struct CMNamedColorType {
     UInt8             colorCoords[];          /* variable size */
   } colorName[];                              /* variable size */
 #endif
-} CMNamedColorType;
+} CMNamedColorType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMNamedColor2EntryType {
   UInt8               rootName[32];           /* 32 byte field.  7 bit ASCII null terminated */
   UInt16              PCSColorCoords[3];      /* Lab or XYZ color */
   UInt16              DeviceColorCoords[1];   /* variable size */
-} CMNamedColor2EntryType;
+} CMNamedColor2EntryType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMNamedColor2Type {
   OSType              typeDescriptor;         /* 'ncl2' = cmSigNamedColor2Type */
@@ -647,7 +654,7 @@ typedef struct CMNamedColor2Type {
   UInt8               prefixName[32];         /* Fixed 32 byte size.  7 bit ASCII null terminated */
   UInt8               suffixName[32];         /* Fixed 32 byte size.  7 bit ASCII null terminated */
   char                data[1];                /* variable size data for CMNamedColor2EntryType */
-} CMNamedColor2Type;
+} CMNamedColor2Type DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMNativeDisplayInfo {
   UInt32              dataSize;               /* Size of this structure */
@@ -665,13 +672,13 @@ typedef struct CMNativeDisplayInfo {
   UInt16              gammaEntryCount;        /* 1-based number of entries per channel */
   UInt16              gammaEntrySize;         /* size in bytes of each entry */
   char                gammaData[1];           /* variable size, determined by channels*entryCount*entrySize */
-} CMNativeDisplayInfo;
+} CMNativeDisplayInfo DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMNativeDisplayInfoType {
   OSType              typeDescriptor;         /* 'ndin' = cmSigNativeDisplayInfoType */
   UInt32              reserved;               /* fill with 0x00 */
   CMNativeDisplayInfo nativeDisplayInfo;      /* data of type CMNativeDisplayInfo */
-} CMNativeDisplayInfoType;
+} CMNativeDisplayInfoType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMParametricCurveType {
   OSType              typeDescriptor;         /* 'para' = cmSigParametricCurveType */
@@ -679,7 +686,7 @@ typedef struct CMParametricCurveType {
   UInt16              functionType;           /* cmParametricType0, cmParametricType1, etc. */
   UInt16              reserved2;              /* fill with 0x00 */
   Fixed               value[1];               /* variable size, determined by functionType */
-} CMParametricCurveType;
+} CMParametricCurveType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMTextDescriptionType {
   OSType              typeDescriptor;         /* 'desc' = cmSigProfileDescriptionType */
@@ -698,25 +705,25 @@ typedef struct CMTextDescriptionType {
   UInt8               ScriptCodeCount;        /* Count of bytes (including null terminator) */
   UInt8               ScriptCodeName[];       /* variable size, determined by ScriptCodeCount */
 #endif
-} CMTextDescriptionType;
+} CMTextDescriptionType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMTextType {
   OSType              typeDescriptor;         /* 'text' = cmSigTextType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt8               text[1];                /* variable size, determined by tag element size */
-} CMTextType;
+} CMTextType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMUnicodeTextType {
   OSType              typeDescriptor;         /* 'utxt' = cmSigUnicodeTextType */
   UInt32              reserved;               /* fill with 0x00 */
   UniChar             text[1];                /* variable size, determined by tag element size  */
-} CMUnicodeTextType;
+} CMUnicodeTextType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMScreeningChannelRec {
   Fixed               frequency;
   Fixed               angle;
   UInt32              spotFunction;
-} CMScreeningChannelRec;
+} CMScreeningChannelRec DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMScreeningType {
   OSType              typeDescriptor;         /* 'scrn' = cmSigScreeningType */
@@ -724,49 +731,49 @@ typedef struct CMScreeningType {
   UInt32              screeningFlag;          /* bit 0 : use printer default screens, bit 1 : inch/cm */
   UInt32              channelCount;           /* */
   CMScreeningChannelRec  channelInfo[1];      /* variable size, determined by channelCount */
-} CMScreeningType;
+} CMScreeningType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMSignatureType {
   OSType              typeDescriptor;         /* 'sig ' = cmSigSignatureType */
   UInt32              reserved;               /* fill with 0x00 */
   OSType              signature;
-} CMSignatureType;
+} CMSignatureType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMS15Fixed16ArrayType {
   OSType              typeDescriptor;         /* 'sf32' = cmSigS15Fixed16Type */
   UInt32              reserved;               /* fill with 0x00 */
   Fixed               value[1];               /* variable size, determined by tag element size */
-} CMS15Fixed16ArrayType;
+} CMS15Fixed16ArrayType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMU16Fixed16ArrayType {
   OSType              typeDescriptor;         /* 'uf32' = cmSigU16Fixed16Type */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              value[1];               /* variable size, determined by tag element size */
-} CMU16Fixed16ArrayType;
+} CMU16Fixed16ArrayType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMUInt8ArrayType {
   OSType              typeDescriptor;         /* 'ui08' = cmSigUInt8Type */
   UInt32              reserved;               /* fill with 0x00 */
   UInt8               value[1];               /* variable size, determined by tag element size */
-} CMUInt8ArrayType;
+} CMUInt8ArrayType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMUInt16ArrayType {
   OSType              typeDescriptor;         /* 'ui16' = cmSigUInt16Type */
   UInt32              reserved;               /* fill with 0x00 */
   UInt16              value[1];               /* variable size, determined by tag element size */
-} CMUInt16ArrayType;
+} CMUInt16ArrayType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMUInt32ArrayType {
   OSType              typeDescriptor;         /* 'ui32' = cmSigUInt32Type */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              value[1];               /* variable size, determined by tag element size */
-} CMUInt32ArrayType;
+} CMUInt32ArrayType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMUInt64ArrayType {
   OSType              typeDescriptor;         /* 'ui64' = cmSigUInt64Type */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              value[1];               /* variable size, determined by tag element size */
-} CMUInt64ArrayType;
+} CMUInt64ArrayType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMViewingConditionsType {
   OSType              typeDescriptor;         /* 'view' = cmSigViewingConditionsType */
@@ -774,20 +781,20 @@ typedef struct CMViewingConditionsType {
   CMFixedXYZColor     illuminant;             /* absolute XYZs of illuminant  in cd/m^2 */
   CMFixedXYZColor     surround;               /* absolute XYZs of surround in cd/m^2 */
   UInt32              stdIlluminant;          /* see definitions of std illuminants */
-} CMViewingConditionsType;
+} CMViewingConditionsType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMXYZType {
   OSType              typeDescriptor;         /* 'XYZ ' = cmSigXYZType */
   UInt32              reserved;               /* fill with 0x00 */
   CMFixedXYZColor     XYZ[1];                 /* variable size, determined by tag element size */
-} CMXYZType;
+} CMXYZType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMProfileSequenceDescType {
   OSType              typeDescriptor;         /* 'pseq' = cmProfileSequenceDescTag */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              count;                  /* Number of descriptions */
   char                data[1];                /* variable size data explained in ICC spec */
-} CMProfileSequenceDescType;
+} CMProfileSequenceDescType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMUcrBgType {
   OSType              typeDescriptor;         /* 'bfd ' = cmSigUcrBgType */
@@ -803,7 +810,7 @@ typedef struct CMUcrBgType {
   UInt16              bgValues[];             /* variable size, determined by bgCount */
   UInt8               ucrbgASCII[];           /* null terminated ASCII string */
 #endif
-} CMUcrBgType;
+} CMUcrBgType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* Private Tag Type Definitions */
@@ -812,14 +819,14 @@ typedef struct CMUcrBgType {
 typedef struct CMIntentCRDVMSize {
   UInt32              renderingIntent;        /* rendering intent */
   UInt32              VMSize;                 /* VM size taken up by the CRD */
-} CMIntentCRDVMSize;
+} CMIntentCRDVMSize DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMPS2CRDVMSizeType {
   OSType              typeDescriptor;         /* 'psvm' = cmSigPS2CRDVMSizeType */
   UInt32              reserved;               /* fill with 0x00 */
   UInt32              count;                  /* number of intent entries */
   CMIntentCRDVMSize   intentCRD[1];           /* variable size, determined by count */
-} CMPS2CRDVMSizeType;
+} CMPS2CRDVMSizeType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 enum {
@@ -832,7 +839,7 @@ typedef struct CMVideoCardGammaTable {
   UInt16              entryCount;             /* 1-based number of entries per channel */
   UInt16              entrySize;              /* size in bytes of each entry */
   char                data[1];                /* variable size, determined by channels*entryCount*entrySize */
-} CMVideoCardGammaTable;
+} CMVideoCardGammaTable DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMVideoCardGammaFormula {
   Fixed               redGamma;               /* must be > 0.0 */
@@ -844,7 +851,7 @@ typedef struct CMVideoCardGammaFormula {
   Fixed               blueGamma;              /* must be > 0.0 */
   Fixed               blueMin;                /* must be > 0.0 and < 1.0 */
   Fixed               blueMax;                /* must be > 0.0 and < 1.0 */
-} CMVideoCardGammaFormula;
+} CMVideoCardGammaFormula DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMVideoCardGamma {
   UInt32              tagType;
@@ -852,13 +859,13 @@ typedef struct CMVideoCardGamma {
     CMVideoCardGammaTable    table;
     CMVideoCardGammaFormula  formula;
   }                       u;
-} CMVideoCardGamma;
+} CMVideoCardGamma DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMVideoCardGammaType {
   OSType              typeDescriptor;         /* 'vcgt' = cmSigVideoCardGammaType */
   UInt32              reserved;               /* fill with 0x00 */
   CMVideoCardGamma    gamma;
-} CMVideoCardGammaType;
+} CMVideoCardGammaType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMMakeAndModel {
   OSType              manufacturer;
@@ -869,20 +876,20 @@ typedef struct CMMakeAndModel {
   UInt32              reserved2;              /* fill with 0x00 */
   UInt32              reserved3;              /* fill with 0x00 */
   UInt32              reserved4;              /* fill with 0x00 */
-} CMMakeAndModel;
+} CMMakeAndModel DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMMakeAndModelType {
   OSType              typeDescriptor;         /* 'mmod' = cmSigMakeAndModelType */
   UInt32              reserved;               /* fill with 0x00 */
   CMMakeAndModel      makeAndModel;
-} CMMakeAndModelType;
+} CMMakeAndModelType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMMultiLocalizedUniCodeEntryRec {
   char                languageCode[2];        /* language code from ISO-639 */
   char                regionCode[2];          /* region code from ISO-3166 */
   UInt32              textLength;             /* the length in bytes of the string */
   UInt32              textOffset;             /* the offset from the start of tag in bytes */
-} CMMultiLocalizedUniCodeEntryRec;
+} CMMultiLocalizedUniCodeEntryRec DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMMultiLocalizedUniCodeType {
   OSType              typeDescriptor;         /* 'mluc' = cmSigMultiLocalizedUniCodeType */
@@ -891,7 +898,7 @@ typedef struct CMMultiLocalizedUniCodeType {
   UInt32              entrySize;              /* size in bytes of name records that follow */
                                               /* variable-length data for storage of CMMultiLocalizedUniCodeEntryRec */
                                               /* variable-length data for storage of Unicode strings*/
-} CMMultiLocalizedUniCodeType;
+} CMMultiLocalizedUniCodeType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 #if !__LP64__
@@ -923,7 +930,7 @@ enum {
 typedef struct CMIString {
   ScriptCode          theScript;
   Str63               theString;
-} CMIString;
+} CMIString DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* Profile options */
 enum {
@@ -939,8 +946,8 @@ enum {
 };
 
 
-typedef UInt32 CMMatchOption;
-typedef UInt32 CMMatchFlag;
+typedef UInt32 CMMatchOption DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+typedef UInt32 CMMatchFlag DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMHeader {
   UInt32              size;
@@ -957,7 +964,7 @@ typedef struct CMHeader {
   CMMatchOption       options;
   CMXYZColor          white;
   CMXYZColor          black;
-} CMHeader;
+} CMHeader DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMProfileChromaticities {
   CMXYZColor          red;
@@ -966,12 +973,12 @@ typedef struct CMProfileChromaticities {
   CMXYZColor          cyan;
   CMXYZColor          magenta;
   CMXYZColor          yellow;
-} CMProfileChromaticities;
+} CMProfileChromaticities DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMProfileResponse {
   UInt16              counts[9];
   UInt16              data[1];                /* Variable size */
-} CMProfileResponse;
+} CMProfileResponse DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMProfile {
   CMHeader            header;
@@ -979,7 +986,7 @@ typedef struct CMProfile {
   CMProfileResponse   response;
   CMIString           profileName;
   char                customData[1];          /* Variable size */
-} CMProfile, *CMProfilePtr, **CMProfileHandle;
+} CMProfile, *CMProfilePtr, **CMProfileHandle DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #endif // !__LP64__
 
@@ -989,27 +996,27 @@ typedef struct CMProfile {
 #pragma mark --- CMTypes.h ----
 
 /* Standard type for ColorSync and other system error codes */
-typedef OSStatus                        CMError;
+typedef OSStatus                        CMError DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* Abstract data type for memory-based Profile */
-typedef struct OpaqueCMProfileRef*      CMProfileRef;
+typedef struct OpaqueCMProfileRef*      CMProfileRef DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if !__LP64__
 /* Abstract data type for Profile search result */
-typedef struct OpaqueCMProfileSearchRef*  CMProfileSearchRef;
+typedef struct OpaqueCMProfileSearchRef*  CMProfileSearchRef DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* Abstract data type for BeginMatching(‚Ä¶) reference */
-typedef struct OpaqueCMMatchRef*        CMMatchRef;
+typedef struct OpaqueCMMatchRef*        CMMatchRef DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__
 
 /* Abstract data type for ColorWorld reference */
-typedef struct OpaqueCMWorldRef*        CMWorldRef;
+typedef struct OpaqueCMWorldRef*        CMWorldRef DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* Data type for ColorSync DisplayID reference */
 /* On 8 & 9 this is a AVIDType */
 /* On X this is a CGSDisplayID */
-typedef UInt32                          CMDisplayIDType;
-typedef UInt32                          CMChromaticAdaptation;
+typedef UInt32                          CMDisplayIDType DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+typedef UInt32                          CMChromaticAdaptation DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 enum {
   cmUseDefaultChromaticAdaptation = 0,
   cmLinearChromaticAdaptation   = 1,
@@ -1064,9 +1071,9 @@ typedef STACK_UPP_TYPE(CMFlattenProcPtr) CMFlattenUPP;
 #define CMBITMAPCALLBACKPROCPTR_DEFINED 1
 
 /* Caller-supplied progress function for Bitmap & PixMap matching routines */
-typedef CALLBACK_API( Boolean , CMBitmapCallBackProcPtr )(SInt32 progress, void *refCon);
+typedef CALLBACK_API( Boolean , CMBitmapCallBackProcPtr )(SInt32 progress, void *refCon) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-typedef STACK_UPP_TYPE(CMBitmapCallBackProcPtr) CMBitmapCallBackUPP;
+typedef STACK_UPP_TYPE(CMBitmapCallBackProcPtr) CMBitmapCallBackUPP DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if TARGET_RT_MAC_CFM
   CSEXTERN CMBitmapCallBackUPP
@@ -1088,11 +1095,11 @@ typedef STACK_UPP_TYPE(CMBitmapCallBackProcPtr) CMBitmapCallBackUPP;
     { return (*((CMBitmapCallBackProcPtr)userUPP))(progress, refCon); }
 
 #ifdef __cplusplus
-  CF_INLINE void DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP) 
+  CF_INLINE void DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP)
   {
   }
 #else
-  CF_INLINE void DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP userUPP) 
+  CF_INLINE void DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP userUPP)
   {
   #pragma unused (userUPP)
   }
@@ -1102,9 +1109,9 @@ typedef STACK_UPP_TYPE(CMBitmapCallBackProcPtr) CMBitmapCallBackUPP;
 #endif /* _DECLARE_CS_QD_API_ */
 
 /* Caller-supplied progress function for NCMMConcatInit & NCMMNewLinkProfile routines */
-typedef CALLBACK_API( Boolean , CMConcatCallBackProcPtr )(SInt32 progress, void *refCon);
+typedef CALLBACK_API( Boolean , CMConcatCallBackProcPtr )(SInt32 progress, void *refCon) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-typedef STACK_UPP_TYPE(CMConcatCallBackProcPtr) CMConcatCallBackUPP;
+typedef STACK_UPP_TYPE(CMConcatCallBackProcPtr) CMConcatCallBackUPP DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if TARGET_RT_MAC_CFM
   CSEXTERN CMConcatCallBackUPP
@@ -1142,9 +1149,9 @@ typedef STACK_UPP_TYPE(CMConcatCallBackProcPtr) CMConcatCallBackUPP;
 #if !__LP64__
 
 /* Caller-supplied filter function for Profile search*/
-typedef CALLBACK_API( Boolean , CMProfileFilterProcPtr )(CMProfileRef prof, void *refCon);
+typedef CALLBACK_API( Boolean , CMProfileFilterProcPtr )(CMProfileRef prof, void *refCon) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-typedef STACK_UPP_TYPE(CMProfileFilterProcPtr) CMProfileFilterUPP;
+typedef STACK_UPP_TYPE(CMProfileFilterProcPtr) CMProfileFilterUPP DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if TARGET_RT_MAC_CFM
   CSEXTERN CMProfileFilterUPP
@@ -1179,9 +1186,9 @@ typedef STACK_UPP_TYPE(CMProfileFilterProcPtr) CMProfileFilterUPP;
 
 
 /* Caller-supplied function for profile access*/
-typedef CALLBACK_API( OSErr , CMProfileAccessProcPtr )(SInt32 command, SInt32 offset, SInt32 *size, void *data, void *refCon);
+typedef CALLBACK_API( OSErr , CMProfileAccessProcPtr )(SInt32 command, SInt32 offset, SInt32 *size, void *data, void *refCon) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-typedef STACK_UPP_TYPE(CMProfileAccessProcPtr) CMProfileAccessUPP;
+typedef STACK_UPP_TYPE(CMProfileAccessProcPtr) CMProfileAccessUPP DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if TARGET_RT_MAC_CFM
   CSEXTERN CMProfileAccessUPP
@@ -1342,21 +1349,21 @@ union CMAppleProfileHeader {
   CM2Header           cm2;
   CM4Header           cm4;
 };
-typedef union CMAppleProfileHeader      CMAppleProfileHeader;
+typedef union CMAppleProfileHeader      CMAppleProfileHeader DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* CWConcatColorWorld() definitions */
 typedef struct CMConcatProfileSet {
   UInt16              keyIndex;               /* Zero-based */
   UInt16              count;                  /* Min 1 */
   CMProfileRef        profileSet[1];          /* Variable. Ordered from Source -> Dest */
-} CMConcatProfileSet;
+} CMConcatProfileSet DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* NCWConcatColorWorld() definitions */
 typedef struct NCMConcatProfileSpec {
   UInt32              renderingIntent;        /* renderingIntent override */
   UInt32              transformTag;           /* transform enumerations defined below */
   CMProfileRef        profile;                /* profile */
-} NCMConcatProfileSpec;
+} NCMConcatProfileSpec DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct NCMConcatProfileSet {
   OSType              cmm;                    /* e.g. 'KCMS', 'appl', ...  uniquely ids the cmm, or 0000 */
@@ -1364,7 +1371,7 @@ typedef struct NCMConcatProfileSet {
   UInt32              flagsMask;              /* which bits of 'flags' to use to override profile */
   UInt32              profileCount;           /* how many ProfileSpecs in the following set */
   NCMConcatProfileSpec  profileSpecs[1];      /* Variable. Ordered from Source -> Dest */
-} NCMConcatProfileSet;
+} NCMConcatProfileSet DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 enum {
   kNoTransform                  = 0,    /* Not used */
@@ -1384,74 +1391,74 @@ typedef struct CMRGBColor {
   UInt16              red;                    /* 0..65535 */
   UInt16              green;
   UInt16              blue;
-} CMRGBColor;
+} CMRGBColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMCMYKColor {
   UInt16              cyan;                   /* 0..65535 */
   UInt16              magenta;
   UInt16              yellow;
   UInt16              black;
-} CMCMYKColor;
+} CMCMYKColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMCMYColor {
   UInt16              cyan;                   /* 0..65535 */
   UInt16              magenta;
   UInt16              yellow;
-} CMCMYColor;
+} CMCMYColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMHLSColor {
   UInt16              hue;                    /* 0..65535. Fraction of circle. Red at 0 */
   UInt16              lightness;              /* 0..65535 */
   UInt16              saturation;             /* 0..65535 */
-} CMHLSColor;
+} CMHLSColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMHSVColor {
   UInt16              hue;                    /* 0..65535. Fraction of circle. Red at 0 */
   UInt16              saturation;             /* 0..65535 */
   UInt16              value;                  /* 0..65535 */
-} CMHSVColor;
+} CMHSVColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMLabColor {
   UInt16              L;                      /* 0..65535 maps to 0..100 */
   UInt16              a;                      /* 0..65535 maps to -128..127.996 */
   UInt16              b;                      /* 0..65535 maps to -128..127.996 */
-} CMLabColor;
+} CMLabColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMLuvColor {
   UInt16              L;                      /* 0..65535 maps to 0..100 */
   UInt16              u;                      /* 0..65535 maps to -128..127.996 */
   UInt16              v;                      /* 0..65535 maps to -128..127.996 */
-} CMLuvColor;
+} CMLuvColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMYxyColor {
   UInt16              capY;                   /* 0..65535 maps to 0..1 */
   UInt16              x;                      /* 0..65535 maps to 0..1 */
   UInt16              y;                      /* 0..65535 maps to 0..1 */
-} CMYxyColor;
+} CMYxyColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMGrayColor {
   UInt16              gray;                   /* 0..65535 */
-} CMGrayColor;
+} CMGrayColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMMultichannel5Color {
   UInt8               components[5];          /* 0..255 */
-} CMMultichannel5Color;
+} CMMultichannel5Color DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMMultichannel6Color {
   UInt8               components[6];          /* 0..255 */
-} CMMultichannel6Color;
+} CMMultichannel6Color DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMMultichannel7Color {
   UInt8               components[7];          /* 0..255 */
-} CMMultichannel7Color;
+} CMMultichannel7Color DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMMultichannel8Color {
   UInt8               components[8];          /* 0..255 */
-} CMMultichannel8Color;
+} CMMultichannel8Color DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMNamedColor {
   UInt32              namedColorIndex;        /* 0..a lot */
-} CMNamedColor;
+} CMNamedColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef union CMColor {
   CMRGBColor          rgb;
@@ -1469,7 +1476,7 @@ typedef union CMColor {
   CMMultichannel7Color  mc7;
   CMMultichannel8Color  mc8;
   CMNamedColor        namedColor;
-} CMColor;
+} CMColor DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if !__LP64__ && !TARGET_OS_WIN32
 /* GetIndexedProfile() search definition*/
@@ -1477,7 +1484,7 @@ typedef struct CMProfileSearchRecord {
   CMHeader            header;
   UInt32              fieldMask;
   UInt32              reserved[2];
-} CMProfileSearchRecord, *CMProfileSearchRecordPtr, **CMProfileSearchRecordHandle;
+} CMProfileSearchRecord, *CMProfileSearchRecordPtr, **CMProfileSearchRecordHandle DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* CMNewProfileSearch() search definition */
 typedef struct CMSearchRecord {
@@ -1491,7 +1498,7 @@ typedef struct CMSearchRecord {
   UInt32              profileFlags;
   UInt32              searchMask;
   CMProfileFilterUPP  filter;
-} CMSearchRecord;
+} CMSearchRecord DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 /* CMMIterateUPP() structure */
@@ -1506,7 +1513,7 @@ typedef struct CMMInfo {
   UniChar             UniCodeName[32];        /* the name in UniCode chars*/
   UniCharCount        UniCodeDescCount;       /* count of UniChars in following array*/
   UniChar             UniCodeDesc[256];       /* the description in UniCode chars*/
-} CMMInfo;
+} CMMInfo DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* GetCWInfo() structures */
 
@@ -1515,7 +1522,7 @@ typedef struct CMMInfo {
 typedef struct CMMInfoRecord {
   OSType              CMMType;
   long                CMMVersion;
-} CMMInfoRecord;
+} CMMInfoRecord DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMCWInfoRecord {
   UInt32              cmmCount;
@@ -1528,7 +1535,7 @@ typedef struct CMProfileIdentifier {
   CMDateTime          calibrationDate;
   UInt32              ASCIIProfileDescriptionLen;
   char                ASCIIProfileDescription[1]; /* variable length */
-} CMProfileIdentifier, *CMProfileIdentifierPtr;
+} CMProfileIdentifier, *CMProfileIdentifierPtr DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 /* colorspace masks */
@@ -1659,7 +1666,7 @@ enum {
 };
 
 
-typedef UInt32                          CMBitmapColorSpace;
+typedef UInt32                          CMBitmapColorSpace DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMBitmap {
   char *              image;
@@ -1670,7 +1677,7 @@ typedef struct CMBitmap {
   CMBitmapColorSpace  space;
   UInt32              user1;
   UInt32              user2;
-} CMBitmap;
+} CMBitmap DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* Profile Locations */
@@ -1704,24 +1711,24 @@ enum {
 /* This structure is deprecated in Mac OS X 10.5. Use CMPathLocation instead.*/
 typedef struct CMFileLocation {
   FSSpec              spec;
-} CMFileLocation;
+} CMFileLocation DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 typedef struct CMHandleLocation {
   Handle              h;
-} CMHandleLocation;
+} CMHandleLocation DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if !__LP64__ && !TARGET_OS_WIN32
 /* This structure is deprecated in Mac OS X 10.5. Use CMBufferLocation instead.*/
 typedef struct CMPtrLocation {
   Ptr                 p;
-} CMPtrLocation;
+} CMPtrLocation DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* This structure is deprecated in Mac OS X 10.5.*/
 typedef struct CMProcedureLocation {
   CMProfileAccessUPP  proc;
   void *              refCon;
-} CMProcedureLocation;
+} CMProcedureLocation DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 typedef struct CMPathLocation {
@@ -1730,12 +1737,12 @@ typedef struct CMPathLocation {
 #else
   char                path[CS_MAX_PATH];
 #endif
-} CMPathLocation;
+} CMPathLocation DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMBufferLocation {
   void *              buffer;
   UInt32              size;
-} CMBufferLocation;
+} CMBufferLocation DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef union CMProfLoc {
 #if !__LP64__ && !TARGET_OS_WIN32
@@ -1748,12 +1755,12 @@ typedef union CMProfLoc {
 #endif // !__LP64__ && !TARGET_OS_WIN32
   CMPathLocation      pathLoc;
   CMBufferLocation    bufferLoc;
-} CMProfLoc;
+} CMProfLoc DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct CMProfileLocation {
   short               locType;
   CMProfLoc           u;
-} CMProfileLocation;
+} CMProfileLocation DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 enum {
   cmOriginalProfileLocationSize = 72,
@@ -1781,14 +1788,14 @@ typedef struct CMProfileIterateData {
   unsigned char *     asciiName;
   CMMakeAndModel *    makeAndModel;
   CMProfileMD5 *      digest;                 /* Derived from the RSA Data Security, Inc. MD5 Message-Digest Algorithm */
-} CMProfileIterateData;
+} CMProfileIterateData DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* Caller-supplied callback function for Profile iteration */
 
-typedef CALLBACK_API( OSErr , CMProfileIterateProcPtr )(CMProfileIterateData *iterateData, void *refCon);
+typedef CALLBACK_API( OSErr , CMProfileIterateProcPtr )(CMProfileIterateData *iterateData, void *refCon) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-typedef STACK_UPP_TYPE(CMProfileIterateProcPtr)                 CMProfileIterateUPP;
+typedef STACK_UPP_TYPE(CMProfileIterateProcPtr)                 CMProfileIterateUPP DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if TARGET_RT_MAC_CFM
   CSEXTERN CMProfileIterateUPP
@@ -1822,9 +1829,9 @@ typedef STACK_UPP_TYPE(CMProfileIterateProcPtr)                 CMProfileIterate
 
 /* Caller-supplied callback function for CMM iteration */
 
-typedef CALLBACK_API( OSErr , CMMIterateProcPtr )(CMMInfo *iterateData, void *refCon);
+typedef CALLBACK_API( OSErr , CMMIterateProcPtr )(CMMInfo *iterateData, void *refCon) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-typedef STACK_UPP_TYPE(CMMIterateProcPtr)                       CMMIterateUPP;
+typedef STACK_UPP_TYPE(CMMIterateProcPtr)                       CMMIterateUPP DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if TARGET_RT_MAC_CFM
   CSEXTERN CMMIterateUPP
@@ -1856,7 +1863,7 @@ typedef STACK_UPP_TYPE(CMMIterateProcPtr)                       CMMIterateUPP;
 #endif // TARGET_RT_MAC_CFM
 
 
-typedef CALLBACK_API_C( void , CMLabToLabProcPtr )(float *L, float *a, float *b, void *refcon);
+typedef CALLBACK_API_C( void , CMLabToLabProcPtr )(float *L, float *a, float *b, void *refcon) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* Creating Profiles */
@@ -1864,7 +1871,7 @@ typedef CALLBACK_API_C( void , CMLabToLabProcPtr )(float *L, float *a, float *b,
 CSEXTERN CMError 
 CMNewProfile(
   CMProfileRef *             prof,
-  const CMProfileLocation *  theProfile)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const CMProfileLocation *  theProfile)                      DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 #if !__LP64__ && !TARGET_OS_WIN32
@@ -1883,7 +1890,7 @@ NCWNewLinkProfile(
   const CMProfileLocation *  targetLocation,
   NCMConcatProfileSet *      profileSet,
   CMConcatCallBackUPP        proc,
-  void *                     refCon)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                     refCon)                          DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -1950,7 +1957,7 @@ NCWNewLinkProfile(
 CSEXTERN CMError 
 CMMakeProfile(
   CMProfileRef      prof,
-  CFDictionaryRef   spec)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFDictionaryRef   spec)                                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* Accessing Profiles */
@@ -1958,29 +1965,29 @@ CMMakeProfile(
 CSEXTERN CMError 
 CMOpenProfile(
   CMProfileRef *             prof,
-  const CMProfileLocation *  theProfile)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const CMProfileLocation *  theProfile)                      DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
-CMCloseProfile(CMProfileRef prof)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CMCloseProfile(CMProfileRef prof)                             DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
-CMUpdateProfile(CMProfileRef prof)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CMUpdateProfile(CMProfileRef prof)                            DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMCopyProfile(
   CMProfileRef *             targetProf,
   const CMProfileLocation *  targetLocation,
-  CMProfileRef               srcProf)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CMProfileRef               srcProf)                         DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMValidateProfile(
   CMProfileRef   prof,
   Boolean *      valid,
-  Boolean *      preferredCMMnotfound)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *      preferredCMMnotfound)                        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 #if !__LP64__ && !TARGET_OS_WIN32
@@ -1988,7 +1995,7 @@ CMValidateProfile(
 CSEXTERN CMError 
 CMGetProfileLocation(
   CMProfileRef         prof,
-  CMProfileLocation *  location)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMProfileLocation *  location)                              DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 
@@ -1996,7 +2003,7 @@ CSEXTERN CMError
 NCMGetProfileLocation(
   CMProfileRef         prof,
   CMProfileLocation *  theProfile,
-  UInt32 *             locationSize)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *             locationSize)                          DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -2008,7 +2015,7 @@ NCMGetProfileLocation(
 CSEXTERN CFDataRef 
 CMProfileCopyICCData(
   CFAllocatorRef   allocator,
-  CMProfileRef     prof)                                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CMProfileRef     prof)                                      DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 #if !__LP64__ && !TARGET_OS_WIN32
@@ -2019,7 +2026,7 @@ CMFlattenProfile(
   UInt32         flags,
   CMFlattenUPP   proc,
   void *         refCon,
-  Boolean *      preferredCMMnotfound)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  Boolean *      preferredCMMnotfound)                        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 
@@ -2030,42 +2037,42 @@ NCMUnflattenProfile(
   CMProfileLocation *  targetLocation,
   CMFlattenUPP         proc,
   void *               refCon,
-  Boolean *            preferredCMMnotfound)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  Boolean *            preferredCMMnotfound)                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 
 CSEXTERN CMError 
 CMGetProfileHeader(
   CMProfileRef            prof,
-  CMAppleProfileHeader *  header)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CMAppleProfileHeader *  header)                             DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMSetProfileHeader(
   CMProfileRef                  prof,
-  const CMAppleProfileHeader *  header)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const CMAppleProfileHeader *  header)                       DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
-CMCloneProfileRef(CMProfileRef prof)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CMCloneProfileRef(CMProfileRef prof)                          DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMGetProfileRefCount(
   CMProfileRef   prof,
-  long *         count)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *         count)                                       DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMProfileModified(
   CMProfileRef   prof,
-  Boolean *      modified)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *      modified)                                    DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMGetProfileMD5(
   CMProfileRef   prof,
-  CMProfileMD5   digest)                                      AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CMProfileMD5   digest)                                      DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* Accessing Profile Elements */
@@ -2073,14 +2080,14 @@ CMGetProfileMD5(
 CSEXTERN CMError 
 CMCountProfileElements(
   CMProfileRef   prof,
-  UInt32 *       elementCount)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *       elementCount)                                DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMProfileElementExists(
   CMProfileRef   prof,
   OSType         tag,
-  Boolean *      found)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *      found)                                       DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2088,7 +2095,7 @@ CMGetProfileElement(
   CMProfileRef   prof,
   OSType         tag,
   UInt32 *       elementSize,
-  void *         elementData)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *         elementData)                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2096,21 +2103,21 @@ CMSetProfileElement(
   CMProfileRef   prof,
   OSType         tag,
   UInt32         elementSize,
-  const void *   elementData)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const void *   elementData)                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMSetProfileElementSize(
   CMProfileRef   prof,
   OSType         tag,
-  UInt32         elementSize)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32         elementSize)                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMSetProfileElementReference(
   CMProfileRef   prof,
   OSType         elementTag,
-  OSType         referenceTag)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType         referenceTag)                                DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2119,7 +2126,7 @@ CMGetPartialProfileElement(
   OSType         tag,
   UInt32         offset,
   UInt32 *       byteCount,
-  void *         elementData)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *         elementData)                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2128,7 +2135,7 @@ CMSetPartialProfileElement(
   OSType         tag,
   UInt32         offset,
   UInt32         byteCount,
-  const void *   elementData)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const void *   elementData)                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2137,7 +2144,7 @@ CMGetIndProfileElementInfo(
   UInt32         index,
   OSType *       tag,
   UInt32 *       elementSize,
-  Boolean *      refs)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *      refs)                                        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2145,13 +2152,13 @@ CMGetIndProfileElement(
   CMProfileRef   prof,
   UInt32         index,
   UInt32 *       elementSize,
-  void *         elementData)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *         elementData)                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMRemoveProfileElement(
   CMProfileRef   prof,
-  OSType         tag)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType         tag)                                         DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* Accessing Profile Descriptions */
@@ -2162,7 +2169,7 @@ CSEXTERN CMError
 CMGetScriptProfileDescription(
   CMProfileRef   prof,
   Str255         name,
-  ScriptCode *   code)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  ScriptCode *   code)                                        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 
@@ -2174,7 +2181,7 @@ CMGetProfileDescriptions(
   Str255          mName,
   ScriptCode *    mCode,
   UniChar *       uName,
-  UniCharCount *  uCount)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharCount *  uCount)                                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2185,21 +2192,21 @@ CMSetProfileDescriptions(
   ConstStr255Param   mName,
   ScriptCode         mCode,
   const UniChar *    uName,
-  UniCharCount       uCount)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UniCharCount       uCount)                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMCopyProfileLocalizedStringDictionary(
   CMProfileRef       prof,
   OSType             tag,
-  CFDictionaryRef *  theDict)                                 AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CFDictionaryRef *  theDict)                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMSetProfileLocalizedStringDictionary(
   CMProfileRef      prof,
   OSType            tag,
-  CFDictionaryRef   theDict)                                  AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CFDictionaryRef   theDict)                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2208,7 +2215,7 @@ CMCopyProfileLocalizedString(
   OSType         tag,
   CFStringRef    reqLocale,
   CFStringRef *  locale,
-  CFStringRef *  str)                                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CFStringRef *  str)                                         DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -2221,7 +2228,7 @@ CMCopyProfileLocalizedString(
 CSEXTERN CMError 
 CMCopyProfileDescriptionString(
   CMProfileRef   prof,
-  CFStringRef *  str)                                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef *  str)                                         DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* Accessing Name-Class Profiles */
@@ -2234,7 +2241,7 @@ CMGetNamedColorInfo(
   OSType *       PCSColorSpace,
   UInt32 *       count,
   StringPtr      prefix,
-  StringPtr      suffix)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StringPtr      suffix)                                      DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2242,7 +2249,7 @@ CMGetNamedColorValue(
   CMProfileRef   prof,
   StringPtr      name,
   CMColor *      deviceColor,
-  CMColor *      PCSColor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CMColor *      PCSColor)                                    DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2250,21 +2257,21 @@ CMGetIndNamedColorValue(
   CMProfileRef   prof,
   UInt32         index,
   CMColor *      deviceColor,
-  CMColor *      PCSColor)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CMColor *      PCSColor)                                    DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMGetNamedColorIndex(
   CMProfileRef   prof,
   StringPtr      name,
-  UInt32 *       index)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *       index)                                       DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMGetNamedColorName(
   CMProfileRef   prof,
   UInt32         index,
-  StringPtr      name)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  StringPtr      name)                                        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* Working with ColorWorlds */
@@ -2273,14 +2280,14 @@ CSEXTERN CMError
 NCWNewColorWorld(
   CMWorldRef *   cw,
   CMProfileRef   src,
-  CMProfileRef   dst)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CMProfileRef   dst)                                         DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 #if !__LP64__ && !TARGET_OS_WIN32
 CSEXTERN CMError 
 CWConcatColorWorld(
   CMWorldRef *          cw,
-  CMConcatProfileSet *  profileSet)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CMConcatProfileSet *  profileSet)                           DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 
@@ -2289,7 +2296,7 @@ NCWConcatColorWorld(
   CMWorldRef *           cw,
   NCMConcatProfileSet *  profileSet,
   CMConcatCallBackUPP    proc,
-  void *                 refCon)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                 refCon)                              DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 #if !__LP64__ && !TARGET_OS_WIN32
@@ -2297,19 +2304,19 @@ NCWConcatColorWorld(
 CSEXTERN CMError 
 CMGetCWInfo(
   CMWorldRef        cw,
-  CMCWInfoRecord *  info)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMCWInfoRecord *  info)                                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 
 CSEXTERN void 
-CWDisposeColorWorld(CMWorldRef cw)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CWDisposeColorWorld(CMWorldRef cw)                            DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CWMatchColors(
   CMWorldRef   cw,
   CMColor *    myColors,
-  size_t       count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  size_t       count)                                         DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2317,7 +2324,7 @@ CWCheckColors(
   CMWorldRef   cw,
   CMColor *    myColors,
   size_t       count,
-  UInt8 *      result)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt8 *      result)                                        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if !_DECLARE_CS_QD_API_
 
@@ -2327,7 +2334,7 @@ CWMatchBitmap(
   CMBitmap *            bitmap,
   CMBitmapCallBackUPP   progressProc,
   void *                refCon,
-  CMBitmap *            matchedBitmap)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CMBitmap *            matchedBitmap)                        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2336,13 +2343,13 @@ CWCheckBitmap(
   const CMBitmap *      bitmap,
   CMBitmapCallBackUPP   progressProc,
   void *                refCon,
-  CMBitmap *            resultBitmap)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CMBitmap *            resultBitmap)                         DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #endif /* _DECLARE_CS_QD_API_ */
 
 CSEXTERN UInt32
 CWGetCMMSignature(
-  CMWorldRef    cw)                                           AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CMWorldRef    cw)                                           DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* OpenGL support */
 enum {
@@ -2368,33 +2375,33 @@ CWFillLookupTexture(
   UInt32       gridPoints,
   UInt32       format,
   UInt32       dataSize,
-  void *       data)                                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  void *       data)                                          DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* Accessing Special Profiles */
 
 CSEXTERN CMError 
-CMGetSystemProfile(CMProfileRef * prof)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CMGetSystemProfile(CMProfileRef * prof)                       DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 #if !__LP64__ && !TARGET_OS_WIN32
 /* This function is deprecated in Mac OS X 10.5. Use CMSetProfileByAVID instead.*/
 CSEXTERN CMError 
-CMSetSystemProfile(const FSSpec * profileFileSpec)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+CMSetSystemProfile(const FSSpec * profileFileSpec)            DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 
 #if !__LP64__ && !TARGET_OS_WIN32
 /* This function is deprecated in Mac OS X 10.5. Use CMSetProfileByAVID instead.*/
 CSEXTERN CMError 
-NCMSetSystemProfile(const CMProfileLocation * profLoc)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+NCMSetSystemProfile(const CMProfileLocation * profLoc)        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 
 CSEXTERN CMError 
 CMGetDefaultProfileBySpace(
   OSType          dataColorSpace,
-  CMProfileRef *  prof)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CMProfileRef *  prof)                                       DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 #if !__LP64__ && !TARGET_OS_WIN32
@@ -2402,14 +2409,14 @@ CMGetDefaultProfileBySpace(
 CSEXTERN CMError 
 CMSetDefaultProfileBySpace(
   OSType         dataColorSpace,
-  CMProfileRef   prof)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMProfileRef   prof)                                        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 
 CSEXTERN CMError 
 CMGetDefaultProfileByUse(
   OSType          use,
-  CMProfileRef *  prof)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CMProfileRef *  prof)                                       DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 #if !__LP64__ && !TARGET_OS_WIN32
@@ -2417,33 +2424,33 @@ CMGetDefaultProfileByUse(
 CSEXTERN CMError 
 CMSetDefaultProfileByUse(
   OSType         use,
-  CMProfileRef   prof)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMProfileRef   prof)                                        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 
 CSEXTERN CMError 
 CMGetProfileByAVID(
   CMDisplayIDType   theID,
-  CMProfileRef *    prof)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CMProfileRef *    prof)                                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMSetProfileByAVID(
   CMDisplayIDType   theID,
-  CMProfileRef      prof)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CMProfileRef      prof)                                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMGetGammaByAVID(
   CMDisplayIDType     theID,
   CMVideoCardGamma *  gamma,
-  UInt32 *            size)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *            size)                                   DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMSetGammaByAVID(
   CMDisplayIDType     theID,
-  CMVideoCardGamma *  gamma)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  CMVideoCardGamma *  gamma)                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* Searching for Profiles */
@@ -2453,7 +2460,7 @@ CMIterateColorSyncFolder(
   CMProfileIterateUPP   proc,
   UInt32 *              seed,
   UInt32 *              count,
-  void *                refCon)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                refCon)                               DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 #if !__LP64__ && !TARGET_OS_WIN32
@@ -2464,7 +2471,7 @@ CMGetColorSyncFolderSpec(
   short     vRefNum,
   Boolean   createFolder,
   short *   foundVRefNum,
-  long *    foundDirID)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  long *    foundDirID)                                       DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMIterateColorSyncFolder instead.*/
@@ -2473,7 +2480,7 @@ CMNewProfileSearch(
   CMSearchRecord *      searchSpec,
   void *                refCon,
   UInt32 *              count,
-  CMProfileSearchRef *  searchResult)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMProfileSearchRef *  searchResult)                         DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMIterateColorSyncFolder instead.*/
@@ -2481,13 +2488,13 @@ CSEXTERN CMError
 CMUpdateProfileSearch(
   CMProfileSearchRef   search,
   void *               refCon,
-  UInt32 *             count)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  UInt32 *             count)                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMIterateColorSyncFolder instead.*/
 CSEXTERN void 
 CMDisposeProfileSearch(
-  CMProfileSearchRef search)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMProfileSearchRef search)                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMIterateColorSyncFolder instead.*/
@@ -2495,7 +2502,7 @@ CSEXTERN CMError
 CMSearchGetIndProfile(
   CMProfileSearchRef   search,
   UInt32               index,
-  CMProfileRef *       prof)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMProfileRef *       prof)                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMIterateColorSyncFolder instead.*/
@@ -2503,7 +2510,7 @@ CSEXTERN CMError
 CMSearchGetIndProfileFileSpec(
   CMProfileSearchRef   search,
   UInt32               index,
-  FSSpec *             spec)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  FSSpec *             spec)                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMIterateColorSyncFolder instead.*/
@@ -2511,7 +2518,7 @@ CSEXTERN CMError
 CMCreateProfileIdentifier(
   CMProfileRef             prof,
   CMProfileIdentifierPtr   ident,
-  UInt32 *                 size)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  UInt32 *                 size)                              DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMIterateColorSyncFolder instead.*/
@@ -2519,7 +2526,7 @@ CSEXTERN CMError
 CMProfileIdentifierFolderSearch(
   CMProfileIdentifierPtr   ident,
   UInt32 *                 matchedCount,
-  CMProfileSearchRef *     searchResult)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMProfileSearchRef *     searchResult)                      DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMIterateColorSyncFolder instead.*/
@@ -2529,7 +2536,7 @@ CMProfileIdentifierListSearch(
   CMProfileRef *           profileList,
   UInt32                   listSize,
   UInt32 *                 matchedCount,
-  CMProfileRef *           matchedList)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMProfileRef *           matchedList)                       DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
@@ -2541,12 +2548,12 @@ CMProfileIdentifierListSearch(
 CSEXTERN CMError 
 CMGetPreferredCMM(
   OSType *   cmmType,
-  Boolean *  prefCMMnotfound)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  Boolean *  prefCMMnotfound)                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMSetPreferredCMM(
-  OSType     cmmType)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  OSType     cmmType)                                         DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #endif /* !__LP64__ && !TARGET_OS_WIN32 */
 
@@ -2554,15 +2561,15 @@ CSEXTERN CMError
 CMIterateCMMInfo(
   CMMIterateUPP   proc,
   UInt32 *        count,
-  void *          refCon)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *          refCon)                                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
-CMGetColorSyncVersion(UInt32 * version)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CMGetColorSyncVersion(UInt32 * version)                       DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
-CMLaunchControlPanel(UInt32 flags)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+CMLaunchControlPanel(UInt32 flags)                            DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* Converting Colors */
@@ -2575,7 +2582,7 @@ CMConvertXYZToLab(
   const CMColor *     src,
   const CMXYZColor *  white,
   CMColor *           dst,
-  size_t              count)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t              count)                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMConvertXYZFloatBitmap instead.*/
@@ -2584,7 +2591,7 @@ CMConvertLabToXYZ(
   const CMColor *     src,
   const CMXYZColor *  white,
   CMColor *           dst,
-  size_t              count)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t              count)                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMConvertXYZFloatBitmap instead.*/
@@ -2593,7 +2600,7 @@ CMConvertXYZToLuv(
   const CMColor *     src,
   const CMXYZColor *  white,
   CMColor *           dst,
-  size_t              count)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t              count)                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMConvertXYZFloatBitmap instead.*/
@@ -2602,7 +2609,7 @@ CMConvertLuvToXYZ(
   const CMColor *     src,
   const CMXYZColor *  white,
   CMColor *           dst,
-  size_t              count)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t              count)                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMConvertXYZFloatBitmap instead.*/
@@ -2610,7 +2617,7 @@ CSEXTERN CMError
 CMConvertXYZToYxy(
   const CMColor *  src,
   CMColor *        dst,
-  size_t           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t           count)                                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMConvertXYZFloatBitmap instead.*/
@@ -2618,7 +2625,7 @@ CSEXTERN CMError
 CMConvertYxyToXYZ(
   const CMColor *  src,
   CMColor *        dst,
-  size_t           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t           count)                                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMConvertRGBFloatBitmap instead.*/
@@ -2626,7 +2633,7 @@ CSEXTERN CMError
 CMConvertRGBToHLS(
   const CMColor *  src,
   CMColor *        dst,
-  size_t           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t           count)                                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMConvertRGBFloatBitmap instead.*/
@@ -2634,7 +2641,7 @@ CSEXTERN CMError
 CMConvertHLSToRGB(
   const CMColor *  src,
   CMColor *        dst,
-  size_t           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t           count)                                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMConvertRGBFloatBitmap instead.*/
@@ -2642,7 +2649,7 @@ CSEXTERN CMError
 CMConvertRGBToHSV(
   const CMColor *  src,
   CMColor *        dst,
-  size_t           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t           count)                                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMConvertRGBFloatBitmap instead.*/
@@ -2650,7 +2657,7 @@ CSEXTERN CMError
 CMConvertHSVToRGB(
   const CMColor *  src,
   CMColor *        dst,
-  size_t           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t           count)                                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMConvertRGBFloatBitmap instead.*/
@@ -2658,7 +2665,7 @@ CSEXTERN CMError
 CMConvertRGBToGray(
   const CMColor *  src,
   CMColor *        dst,
-  size_t           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t           count)                                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5.*/
@@ -2666,7 +2673,7 @@ CSEXTERN CMError
 CMConvertXYZToFixedXYZ(
   const CMXYZColor *  src,
   CMFixedXYZColor *   dst,
-  size_t              count)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t              count)                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5.*/
@@ -2674,7 +2681,7 @@ CSEXTERN CMError
 CMConvertFixedXYZToXYZ(
   const CMFixedXYZColor *  src,
   CMXYZColor *             dst,
-  size_t                   count)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t                   count)                             DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /* This function is deprecated in Mac OS X 10.5. Use CMConvertXYZFloatBitmap instead.*/
@@ -2685,7 +2692,7 @@ CMConvertXYZToXYZ(
   CMColor *               dst,
   const CMXYZColor *      dstIlluminant,
   CMChromaticAdaptation   method,
-  size_t                  count)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  size_t                  count)                              DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
@@ -2698,7 +2705,7 @@ CMGetPS2ColorSpace(
   UInt32         flags,
   CMFlattenUPP   proc,
   void *         refCon,
-  Boolean *      preferredCMMnotfound)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *      preferredCMMnotfound)                        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2707,7 +2714,7 @@ CMGetPS2ColorRenderingIntent(
   UInt32         flags,
   CMFlattenUPP   proc,
   void *         refCon,
-  Boolean *      preferredCMMnotfound)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *      preferredCMMnotfound)                        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2717,7 +2724,7 @@ CMGetPS2ColorRendering(
   UInt32         flags,
   CMFlattenUPP   proc,
   void *         refCon,
-  Boolean *      preferredCMMnotfound)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *      preferredCMMnotfound)                        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -2725,7 +2732,7 @@ CMGetPS2ColorRenderingVMSize(
   CMProfileRef   srcProf,
   CMProfileRef   dstProf,
   UInt32 *       vmSize,
-  Boolean *      preferredCMMnotfound)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *      preferredCMMnotfound)                        DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 
@@ -2847,16 +2854,16 @@ typedef struct CMFloatBitmap {
   ptrdiff_t           colStride;
   OSType              space;
   CMFloatBitmapFlags  flags;
-} CMFloatBitmap;
+} CMFloatBitmap DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
  
  
  
 /* D50 illuminant {0.9642, 1.0000, 0.8249} */
-CSEXTERN const float kCMIlluminantD50[3]                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CSEXTERN const float kCMIlluminantD50[3]                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
  
  
 /* D65 illuminant {0.9504, 1.0000, 1.0889}*/
-CSEXTERN const float kCMIlluminantD65[3]                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CSEXTERN const float kCMIlluminantD65[3]                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
  
  
 
@@ -2875,7 +2882,7 @@ CMFloatBitmapMakeChunky(
   float *  buffer,
   size_t   height,
   size_t   width,
-  OSType   space)                                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  OSType   space)                                             DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -2895,7 +2902,7 @@ CMConvertXYZFloatBitmap(
   const float             srcIlluminantXYZ[3],
   CMFloatBitmap *         dst,
   const float             dstIlluminantXYZ[3],
-  CMChromaticAdaptation   method)                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CMChromaticAdaptation   method)                             DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -2909,7 +2916,7 @@ CMConvertXYZFloatBitmap(
 CSEXTERN CMError 
 CMConvertRGBFloatBitmap(
   const CMFloatBitmap *  src,
-  CMFloatBitmap *        dst)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CMFloatBitmap *        dst)                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 
@@ -2926,7 +2933,7 @@ CSEXTERN CMError
 CMMatchFloatBitmap(
   CMWorldRef             cw,
   const CMFloatBitmap *  src,
-  CMFloatBitmap *        dst)                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CMFloatBitmap *        dst)                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 
@@ -2949,13 +2956,13 @@ CSEXTERN void
 CWColorWorldSetProperty(
   CMWorldRef    cw,
   CFStringRef   key,
-  CFTypeRef     value) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFTypeRef     value) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN const void* 
 CWColorWorldGetProperty(
   CMWorldRef    cw,
-  CFStringRef   key) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFStringRef   key) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*
    The following declarations specify the calling conventions for CMM entry-points on Mac OS X.
@@ -2967,27 +2974,27 @@ CMM_ConcatColorWorld(
   CMWorldRef             cw,
   NCMConcatProfileSet *  profileSet,
   CMConcatCallBackUPP    proc,
-  void *                 refCon);
+  void *                 refCon) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 extern CMError 
 CMM_MatchColors(
   CMWorldRef  cw,
   CMColor *   colors,
-  UInt32      count);
+  UInt32      count) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 extern CMError 
 CMM_CheckColors(
   CMWorldRef  cw,
   CMColor *   colors,
   UInt32      count,
-  UInt8 *     result);
+  UInt8 *     result) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /* Optional */
 
 extern CMError 
 CMM_ValidateProfile(
   CMProfileRef   prof,
-  Boolean *      valid);
+  Boolean *      valid) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if !_DECLARE_CS_QD_API_
 
@@ -2997,7 +3004,7 @@ CMM_MatchBitmap(
   CMBitmap *            bitmap,
   CMBitmapCallBackUPP   progressProc,
   void *                refCon,
-  CMBitmap *            matchedBitmap);
+  CMBitmap *            matchedBitmap) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 extern CMError 
 CMM_CheckBitmap(
@@ -3005,7 +3012,7 @@ CMM_CheckBitmap(
   const CMBitmap *      bitmap,
   CMBitmapCallBackUPP   progressProc,
   void *                refCon,
-  CMBitmap *            resultBitmap);
+  CMBitmap *            resultBitmap) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #endif /* _DECLARE_CS_QD_API_ */
 
@@ -3013,19 +3020,19 @@ extern CMError
 CMM_MatchFloatBitmap(
   CMWorldRef             cw,
   const CMFloatBitmap *  bitmap,
-  CMFloatBitmap *        resultBitmap);
+  CMFloatBitmap *        resultBitmap) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 extern CMError 
 CMM_CreateLinkProfile(
   CMProfileRef           prof,
   NCMConcatProfileSet *  profileSet,
   CMConcatCallBackUPP    proc,
-  void *                 refCon);
+  void *                 refCon) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 extern CFTypeRef 
 CMM_GetProperty(
   CMWorldRef    cw,
-  CFStringRef   requestedKey);
+  CFStringRef   requestedKey) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #ifdef __cplusplus
 }
@@ -3061,13 +3068,13 @@ enum {
 
 
 CSEXTERN CMError 
-CMValidImage(const FSSpec * spec)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+CMValidImage(const FSSpec * spec)                             DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMGetImageSpace(
   const FSSpec *  spec,
-  OSType *        space)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  OSType *        space)                                      DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -3075,14 +3082,14 @@ CMEmbedImage(
   const FSSpec *  specFrom,
   const FSSpec *  specInto,
   Boolean         repl,
-  CMProfileRef    embProf)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMProfileRef    embProf)                                    DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMUnembedImage(
   const FSSpec *  specFrom,
   const FSSpec *  specInto,
-  Boolean         repl)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  Boolean         repl)                                       DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -3093,7 +3100,7 @@ CMMatchImage(
   UInt32          qual,
   CMProfileRef    srcProf,
   UInt32          srcIntent,
-  CMProfileRef    dstProf)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMProfileRef    dstProf)                                    DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -3105,7 +3112,7 @@ CMProofImage(
   CMProfileRef    srcProf,
   UInt32          srcIntent,
   CMProfileRef    dstProf,
-  CMProfileRef    prfProf)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMProfileRef    prfProf)                                    DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -3115,20 +3122,20 @@ CMLinkImage(
   Boolean         repl,
   UInt32          qual,
   CMProfileRef    lnkProf,
-  UInt32          lnkIntent)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  UInt32          lnkIntent)                                  DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMCountImageProfiles(
   const FSSpec *  spec,
-  UInt32 *        count)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  UInt32 *        count)                                      DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
 CMGetIndImageProfile(
   const FSSpec *  spec,
   UInt32          index,
-  CMProfileRef *  prof)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMProfileRef *  prof)                                       DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 CSEXTERN CMError 
@@ -3137,7 +3144,7 @@ CMSetIndImageProfile(
   const FSSpec *  specInto,
   Boolean         repl,
   UInt32          index,
-  CMProfileRef    prof)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMProfileRef    prof)                                       DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 
@@ -3269,18 +3276,18 @@ enum {
 /*
     Device state data.
 */
-typedef UInt32                          CMDeviceState;
+typedef UInt32                          CMDeviceState DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*
     A CMDeviceID must be unique within a device's class.
 */
 
-typedef UInt32                          CMDeviceID;
+typedef UInt32                          CMDeviceID DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*
     A CMDeviceProfileID must only be unique per device.
 */
-typedef UInt32                          CMDeviceProfileID;
+typedef UInt32                          CMDeviceProfileID DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 /*
     DeviceClass type.
 */
@@ -3301,7 +3308,7 @@ typedef OSType                          CMDeviceClass;
 typedef struct CMDeviceScope {
   CFStringRef         deviceUser;             /* kCFPreferencesCurrentUser | _AnyUser */
   CFStringRef         deviceHost;             /* kCFPreferencesCurrentHost | _AnyHost */
-} CMDeviceScope, CMDeviceProfileScope;
+} CMDeviceScope, CMDeviceProfileScope DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*
     CMDeviceInfo
@@ -3318,7 +3325,7 @@ typedef struct CMDeviceInfo {
                                               /* localized device names (could be nil) */
   UInt32              profileCount;           /* Count of registered profiles */
   UInt32              reserved;               /* Reserved for use by ColorSync */
-} CMDeviceInfo, *CMDeviceInfoPtr;
+} CMDeviceInfo, *CMDeviceInfoPtr DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*
     CMDeviceProfileInfo
@@ -3330,7 +3337,7 @@ typedef struct CMDeviceProfileInfo {
   CMProfileLocation   profileLoc;             /* The profile's location */
   CFDictionaryRef     profileName;            /* CFDictionary of localized profile names */
   UInt32              reserved;               /* Reserved for use by ColorSync */
-} CMDeviceProfileInfo;
+} CMDeviceProfileInfo DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 typedef struct NCMDeviceProfileInfo {
   UInt32              dataVersion;            /* cmDeviceProfileInfoVersion2 */
@@ -3339,7 +3346,7 @@ typedef struct NCMDeviceProfileInfo {
   CFDictionaryRef     profileName;            /* CFDictionary of localized profile names */
   CMDeviceProfileScope  profileScope;         /* The scope this profile applies to */
   UInt32              reserved;               /* Reserved for use by ColorSync */
-} NCMDeviceProfileInfo;
+} NCMDeviceProfileInfo DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*
@@ -3350,15 +3357,15 @@ typedef struct NCMDeviceProfileInfo {
 typedef struct CMDeviceProfileArray {
   UInt32              profileCount;           /* Count of profiles in array */
   CMDeviceProfileInfo  profiles[1];           /* The profile info records */
-} CMDeviceProfileArray, *CMDeviceProfileArrayPtr;
+} CMDeviceProfileArray, *CMDeviceProfileArrayPtr DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*
     Caller-supplied iterator functions
 */
 
-typedef CALLBACK_API_C( OSErr , CMIterateDeviceInfoProcPtr )(const CMDeviceInfo *deviceInfo, void *refCon);
-typedef CALLBACK_API_C( OSErr , CMIterateDeviceProfileProcPtr )(const CMDeviceInfo *deviceInfo, const NCMDeviceProfileInfo *profileInfo, void *refCon);
+typedef CALLBACK_API_C( OSErr , CMIterateDeviceInfoProcPtr )(const CMDeviceInfo *deviceInfo, void *refCon) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+typedef CALLBACK_API_C( OSErr , CMIterateDeviceProfileProcPtr )(const CMDeviceInfo *deviceInfo, const NCMDeviceProfileInfo *profileInfo, void *refCon) DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*
@@ -3382,7 +3389,7 @@ CMRegisterColorDevice(
   CMDeviceClass          deviceClass,
   CMDeviceID             deviceID,
   CFDictionaryRef        deviceName,
-  const CMDeviceScope *  deviceScope)                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  const CMDeviceScope *  deviceScope)                         DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -3399,7 +3406,7 @@ CMRegisterColorDevice(
 CSEXTERN CMError 
 CMUnregisterColorDevice(
   CMDeviceClass   deviceClass,
-  CMDeviceID      deviceID)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CMDeviceID      deviceID)                                   DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*
@@ -3415,7 +3422,7 @@ CMUnregisterColorDevice(
 CSEXTERN CMError 
 CMSetDefaultDevice(
   CMDeviceClass   deviceClass,
-  CMDeviceID      deviceID)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CMDeviceID      deviceID)                                   DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -3427,7 +3434,7 @@ CMSetDefaultDevice(
 CSEXTERN CMError 
 CMGetDefaultDevice(
   CMDeviceClass   deviceClass,
-  CMDeviceID *    deviceID)                                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CMDeviceID *    deviceID)                                   DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*
@@ -3450,7 +3457,7 @@ CMSetDeviceFactoryProfiles(
   CMDeviceClass                 deviceClass,
   CMDeviceID                    deviceID,
   CMDeviceProfileID             defaultProfID,
-  const CMDeviceProfileArray *  deviceProfiles)               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  const CMDeviceProfileArray *  deviceProfiles)               DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -3471,7 +3478,7 @@ CMGetDeviceFactoryProfiles(
   CMDeviceID              deviceID,
   CMDeviceProfileID *     defaultProfID,        /* can be NULL */
   UInt32 *                arraySize,
-  CMDeviceProfileArray *  deviceProfiles)                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CMDeviceProfileArray *  deviceProfiles)                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -3492,7 +3499,7 @@ CMSetDeviceProfiles(
   CMDeviceClass                 deviceClass,
   CMDeviceID                    deviceID,
   const CMDeviceProfileScope *  profileScope,         /* can be NULL */
-  const CMDeviceProfileArray *  deviceProfiles)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  const CMDeviceProfileArray *  deviceProfiles)       /* can be NULL */ DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 
@@ -3511,7 +3518,7 @@ CMGetDeviceProfiles(
   CMDeviceClass           deviceClass,
   CMDeviceID              deviceID,
   UInt32 *                arraySize,
-  CMDeviceProfileArray *  deviceProfiles)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
+  CMDeviceProfileArray *  deviceProfiles)                     DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 #endif // !__LP64__ && !TARGET_OS_WIN32
 
 
@@ -3528,7 +3535,7 @@ CSEXTERN CMError
 CMSetDeviceDefaultProfileID(
   CMDeviceClass       deviceClass,
   CMDeviceID          deviceID,
-  CMDeviceProfileID   defaultProfID)                          AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CMDeviceProfileID   defaultProfID)                          DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -3542,7 +3549,7 @@ CSEXTERN CMError
 CMGetDeviceDefaultProfileID(
   CMDeviceClass        deviceClass,
   CMDeviceID           deviceID,
-  CMDeviceProfileID *  defaultProfID)                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CMDeviceProfileID *  defaultProfID)                         DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -3564,7 +3571,7 @@ CMSetDeviceProfile(
   CMDeviceID                    deviceID,
   const CMDeviceProfileScope *  profileScope,
   CMDeviceProfileID             profileID,
-  const CMProfileLocation *     profileLoc)                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  const CMProfileLocation *     profileLoc)                   DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -3581,7 +3588,7 @@ CMGetDeviceProfile(
   CMDeviceClass        deviceClass,
   CMDeviceID           deviceID,
   CMDeviceProfileID    profileID,
-  CMProfileLocation *  profileLoc)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CMProfileLocation *  profileLoc)                            DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*
@@ -3603,7 +3610,7 @@ CSEXTERN CMError
 CMSetDeviceState(
   CMDeviceClass   deviceClass,
   CMDeviceID      deviceID,
-  CMDeviceState   deviceState)                                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CMDeviceState   deviceState)                                DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -3617,7 +3624,7 @@ CSEXTERN CMError
 CMGetDeviceState(
   CMDeviceClass    deviceClass,
   CMDeviceID       deviceID,
-  CMDeviceState *  deviceState)                               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CMDeviceState *  deviceState)                               DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -3637,7 +3644,7 @@ CSEXTERN CMError
 CMGetDeviceInfo(
   CMDeviceClass   deviceClass,
   CMDeviceID      deviceID,
-  CMDeviceInfo *  deviceInfo)                                 AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  CMDeviceInfo *  deviceInfo)                                 DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*
@@ -3663,7 +3670,7 @@ CMIterateColorDevices(
   CMIterateDeviceInfoProcPtr   proc,         /* can be NULL */
   UInt32 *                     seed,         /* can be NULL */
   UInt32 *                     count,        /* can be NULL */
-  void *                       refCon)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  void *                       refCon)       /* can be NULL */ DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 
 /*!
@@ -3691,7 +3698,7 @@ CMIterateDeviceProfiles(
   UInt32 *                        seed,         /* can be NULL */
   UInt32 *                        count,        /* can be NULL */
   UInt32                          flags,
-  void *                          refCon)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  void *                          refCon)       /* can be NULL */ DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 #if !__LP64__ && !TARGET_OS_WIN32
 #pragma options align=reset

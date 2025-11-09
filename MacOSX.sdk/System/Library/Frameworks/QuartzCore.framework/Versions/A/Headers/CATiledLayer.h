@@ -36,7 +36,7 @@
  * one. Each LOD is half the resolution of the previous level. If too
  * many levels are specified for the current size of the layer, then
  * the number of levels is clamped to the maximum value (the bottom
- * most LOD must contain at least a single pixel in each dimension.) */
+ * most LOD must contain at least a single pixel in each dimension). */
 
 @property size_t levelsOfDetail;
 
@@ -48,7 +48,9 @@
 @property size_t levelsOfDetailBias;
 
 /* The maximum size of each tile used to create the layer's content.
- * Defaults to (256, 256). */
+ * Defaults to (256, 256). Note that there is a maximum tile size, and
+ * requests for tiles larger than that limit will cause a suitable
+ * value to be substituted. */
 
 @property CGSize tileSize;
 

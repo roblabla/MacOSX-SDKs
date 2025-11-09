@@ -463,4 +463,26 @@
 
 #define kIOAudioSelectorControlClockSourceKey				"IOAudioSelectorControlClockSourceKey"
 
+#ifndef __OPEN_SOURCE__
+
+// <rdar://problem/8642774>
+
+// Device description
+#define kIOAudioEngineDeviceDescription								"IOAudioEngineDeviceDescription"
+#define kIOAudioEngineDeviceDescriptionKey_InputDigitalBoostGain	"driver digital input gain"
+#define kIOAudioEngineDeviceDescriptionKey_PostprocessingInputGain	"post-processing input gain"
+
+// Client descriptions
+#define kIOAudioEngineClientDescription						"IOAudioEngineClientDescription"
+
+#define kIOAudioEngineClientDescriptionKey					"kind"
+
+enum
+{
+	kIOAudioEngineGeneralClient    = 0,
+	kIOAudioEngineVoiceClient      = 1
+};
+
+#endif
+
 #endif /* _IOAUDIODEFINES_H */

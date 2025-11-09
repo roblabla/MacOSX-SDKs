@@ -3,22 +3,14 @@
  
      Contains:   Font file structures.
  
-     Copyright:  © 1994-2008 by Apple Inc., all rights reserved.
+     Version:    ATS
  
-     Warning:    *** APPLE INTERNAL USE ONLY ***
-                 This file may contain unreleased API's
+     Copyright:  © 1994-2011 by Apple Inc., all rights reserved.
  
-     BuildInfo:  Built by:            root
-                 On:                  Mon May 16 10:08:00 2011
-                 With Interfacer:     3.0d46   (Mac OS X for PowerPC)
-                 From:                SFNTTypes.i
-                     Revision:        1.4
-                     Dated:           2006/09/13 22:38:46
-                     Last change by:  ntaylor
-                     Last comment:    Fix last checkin comment.
+     Bugs?:      For bug reports, consult the following page on
+                 the World Wide Web:
  
-     Bugs:       Report bugs to Radar component "System Interfaces", "Latest"
-                 List the version information (from above) in the Problem Description.
+                     http://developer.apple.com/bugreporter/
  
 */
 #ifndef __SFNTTYPES__

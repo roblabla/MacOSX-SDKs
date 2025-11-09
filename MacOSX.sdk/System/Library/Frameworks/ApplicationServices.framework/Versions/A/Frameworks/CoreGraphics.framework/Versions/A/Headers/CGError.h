@@ -1,6 +1,6 @@
 /* CoreGraphics - CGError.h
- * Copyright (c) 2000-2008 Apple Inc.
- * All rights reserved. */
+   Copyright (c) 2000-2009 Apple Inc.
+   All rights reserved. */
 
 #ifndef CGERROR_H_
 #define CGERROR_H_

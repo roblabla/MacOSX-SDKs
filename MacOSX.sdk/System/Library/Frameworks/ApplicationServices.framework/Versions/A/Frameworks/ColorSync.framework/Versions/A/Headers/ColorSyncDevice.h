@@ -220,6 +220,16 @@ typedef bool (*ColorSyncDeviceProfileIterateCallback) (CFDictionaryRef colorSync
 CSEXTERN void ColorSyncIterateDeviceProfiles(ColorSyncDeviceProfileIterateCallback callBack,
                                             void* userInfo);
 
+    CSEXTERN CFUUIDRef CGDisplayCreateUUIDFromDisplayID (uint32_t displayID);
+    /*
+     * A utility function converting displayID to CFUUIDRef
+     */
+    
+    CSEXTERN uint32_t CGDisplayGetDisplayIDFromUUID (CFUUIDRef uuid);
+    /*
+     * A utility function converting first 32 bits of CFUUIDRef to displayID
+     */
+    
 
 #ifdef __cplusplus
 }

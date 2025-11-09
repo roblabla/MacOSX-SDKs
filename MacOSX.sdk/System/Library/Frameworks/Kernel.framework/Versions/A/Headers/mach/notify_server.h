@@ -96,11 +96,21 @@ kern_return_t do_mach_notify_dead_name
 	mach_port_name_t name
 );
 
-extern boolean_t notify_server(
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+boolean_t notify_server(
 		mach_msg_header_t *InHeadP,
 		mach_msg_header_t *OutHeadP);
 
-extern mig_routine_t notify_server_routine(
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+mig_routine_t notify_server_routine(
 		mach_msg_header_t *InHeadP);
 
 

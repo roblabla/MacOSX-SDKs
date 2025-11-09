@@ -3,7 +3,7 @@
 	
 	Public interface to the default audio output AudioUnit.
 	
-	Copyright (c) 2000 - 2008 Apple Inc.  All Rights Reserved
+	Copyright (c) 2000 - 2008 Apple, Inc.  All Rights Reserved
 =============================================================================*/
 
 #ifndef __DefaultAudioOutput_h__

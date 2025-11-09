@@ -1,10 +1,8 @@
 /*	NSStream.h
-        Copyright (c) 2003-2009, Apple Inc. All rights reserved
+        Copyright (c) 2003-2011, Apple Inc. All rights reserved
 */
 
 #import <Foundation/NSObject.h>
-
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSData, NSDictionary, NSError, NSHost, NSInputStream, NSOutputStream, NSRunLoop, NSString, NSURL;
 @protocol NSStreamDelegate;
@@ -84,11 +82,11 @@ typedef NSUInteger NSStreamEvent;
 @interface NSInputStream (NSInputStreamExtensions)
 - (id)initWithData:(NSData *)data;
 - (id)initWithFileAtPath:(NSString *)path;
-- (id)initWithURL:(NSURL *)url AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (id)initWithURL:(NSURL *)url NS_AVAILABLE(10_6, 4_0);
 
 + (id)inputStreamWithData:(NSData *)data;
 + (id)inputStreamWithFileAtPath:(NSString *)path;
-+ (id)inputStreamWithURL:(NSURL *)url AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (id)inputStreamWithURL:(NSURL *)url NS_AVAILABLE(10_6, 4_0);
 @end
 
 // The NSOutputStreamExtensions category contains additional initializers and convenience routines for dealing with NSOutputStreams.
@@ -96,12 +94,12 @@ typedef NSUInteger NSStreamEvent;
 - (id)initToMemory;
 - (id)initToBuffer:(uint8_t *)buffer capacity:(NSUInteger)capacity;
 - (id)initToFileAtPath:(NSString *)path append:(BOOL)shouldAppend;
-- (id)initWithURL:(NSURL *)url append:(BOOL)shouldAppend AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (id)initWithURL:(NSURL *)url append:(BOOL)shouldAppend NS_AVAILABLE(10_6, 4_0);
 
 + (id)outputStreamToMemory;
 + (id)outputStreamToBuffer:(uint8_t *)buffer capacity:(NSUInteger)capacity;
 + (id)outputStreamToFileAtPath:(NSString *)path append:(BOOL)shouldAppend;
-+ (id)outputStreamWithURL:(NSURL *)url append:(BOOL)shouldAppend AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (id)outputStreamWithURL:(NSURL *)url append:(BOOL)shouldAppend NS_AVAILABLE(10_6, 4_0);
 @end
 
 @protocol NSStreamDelegate <NSObject>
@@ -111,41 +109,52 @@ typedef NSUInteger NSStreamEvent;
 
 // NSString constants for the propertyForKey/setProperty:forKey: API
 // String constants for the setting of the socket security level.
-FOUNDATION_EXPORT NSString * const NSStreamSocketSecurityLevelKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;	// use this as the key for setting one of the following values for the security level of the target stream.
+FOUNDATION_EXPORT NSString * const NSStreamSocketSecurityLevelKey		NS_AVAILABLE(10_3, 2_0);	// use this as the key for setting one of the following values for the security level of the target stream.
 
-FOUNDATION_EXPORT NSString * const NSStreamSocketSecurityLevelNone		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-FOUNDATION_EXPORT NSString * const NSStreamSocketSecurityLevelSSLv2		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-FOUNDATION_EXPORT NSString * const NSStreamSocketSecurityLevelSSLv3		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-FOUNDATION_EXPORT NSString * const NSStreamSocketSecurityLevelTLSv1		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-FOUNDATION_EXPORT NSString * const NSStreamSocketSecurityLevelNegotiatedSSL	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSStreamSocketSecurityLevelNone		NS_AVAILABLE(10_3, 2_0);
+FOUNDATION_EXPORT NSString * const NSStreamSocketSecurityLevelSSLv2		NS_AVAILABLE(10_3, 2_0);
+FOUNDATION_EXPORT NSString * const NSStreamSocketSecurityLevelSSLv3		NS_AVAILABLE(10_3, 2_0);
+FOUNDATION_EXPORT NSString * const NSStreamSocketSecurityLevelTLSv1		NS_AVAILABLE(10_3, 2_0);
+FOUNDATION_EXPORT NSString * const NSStreamSocketSecurityLevelNegotiatedSSL	NS_AVAILABLE(10_3, 2_0);
 
-FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyConfigurationKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;	// Value is an NSDictionary containing the key/value pairs below. The dictionary returned from SystemConfiguration for SOCKS proxies will work without alteration.
+FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyConfigurationKey		NS_AVAILABLE(10_3, 2_0);	// Value is an NSDictionary containing the key/value pairs below. The dictionary returned from SystemConfiguration for SOCKS proxies will work without alteration.
 
-FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyHostKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyHostKey			NS_AVAILABLE(10_3, 2_0);
     // Value is an NSString
-FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyPortKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyPortKey			NS_AVAILABLE(10_3, 2_0);
     // Value is an NSNumber
-FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyVersionKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyVersionKey		NS_AVAILABLE(10_3, 2_0);
     // Value is one of NSStreamSOCKSProxyVersion4 or NSStreamSOCKSProxyVersion5
-FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyUserKey			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyUserKey			NS_AVAILABLE(10_3, 2_0);
     // Value is an NSString
-FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyPasswordKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyPasswordKey		NS_AVAILABLE(10_3, 2_0);
     // Value is an NSString
 
-FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyVersion4			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyVersion4			NS_AVAILABLE(10_3, 2_0);
     // Value for NSStreamSOCKProxyVersionKey
-FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyVersion5			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSStreamSOCKSProxyVersion5			NS_AVAILABLE(10_3, 2_0);
     // Value for NSStreamSOCKProxyVersionKey
 
-FOUNDATION_EXPORT NSString * const NSStreamDataWrittenToMemoryStreamKey	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSStreamDataWrittenToMemoryStreamKey	NS_AVAILABLE(10_3, 2_0);
     // Key for obtaining the data written to a memory stream.
 
-FOUNDATION_EXPORT NSString * const NSStreamFileCurrentOffsetKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSStreamFileCurrentOffsetKey		NS_AVAILABLE(10_3, 2_0);
     // Value is an NSNumber representing the current absolute offset of the stream.
 
 // NSString constants for error domains.
-FOUNDATION_EXPORT NSString * const NSStreamSocketSSLErrorDomain			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSStreamSocketSSLErrorDomain			NS_AVAILABLE(10_3, 2_0);
     // SSL errors are to be interpreted via <Security/SecureTransport.h>
-FOUNDATION_EXPORT NSString * const NSStreamSOCKSErrorDomain			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSStreamSOCKSErrorDomain			NS_AVAILABLE(10_3, 2_0);
 
-#endif		// Availability guard
+// Property key to specify the type of service for the stream.  This
+// allows the system to properly handle the request with respect to
+// routing, suspension behavior and other networking related attributes
+// appropriate for the given service type.  The service types supported
+// are documented below.
+FOUNDATION_EXPORT NSString * const NSStreamNetworkServiceType		    NS_AVAILABLE(10_7, 4_0);
+// Supported network service types:
+FOUNDATION_EXPORT NSString * const NSStreamNetworkServiceTypeVoIP	    NS_AVAILABLE(10_7, 4_0);
+FOUNDATION_EXPORT NSString * const NSStreamNetworkServiceTypeVideo	    NS_AVAILABLE(10_7, 5_0);
+FOUNDATION_EXPORT NSString * const NSStreamNetworkServiceTypeBackground	    NS_AVAILABLE(10_7, 5_0);
+FOUNDATION_EXPORT NSString * const NSStreamNetworkServiceTypeVoice	    NS_AVAILABLE(10_7, 5_0);
+

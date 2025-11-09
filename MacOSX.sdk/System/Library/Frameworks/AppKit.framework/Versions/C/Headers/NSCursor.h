@@ -1,7 +1,7 @@
 /*
 	NSCursor.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -34,25 +34,26 @@
  
  This method returns nil if the currently displayed cursor could not be fetched.
  */
-+ (NSCursor *)currentSystemCursor AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (NSCursor *)currentSystemCursor NS_AVAILABLE_MAC(10_6);
 
 + (NSCursor *)arrowCursor;
 + (NSCursor *)IBeamCursor;
-+ (NSCursor *)pointingHandCursor AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-+ (NSCursor *)closedHandCursor AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-+ (NSCursor *)openHandCursor AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-+ (NSCursor *)resizeLeftCursor AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-+ (NSCursor *)resizeRightCursor AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-+ (NSCursor *)resizeLeftRightCursor AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-+ (NSCursor *)resizeUpCursor AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-+ (NSCursor *)resizeDownCursor AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-+ (NSCursor *)resizeUpDownCursor AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-+ (NSCursor *)crosshairCursor AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-+ (NSCursor *)disappearingItemCursor AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-+ (NSCursor *)operationNotAllowedCursor AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-+ (NSCursor *)dragLinkCursor AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-+ (NSCursor *)dragCopyCursor AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-+ (NSCursor *)contextualMenuCursor AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (NSCursor *)pointingHandCursor;
++ (NSCursor *)closedHandCursor;
++ (NSCursor *)openHandCursor;
++ (NSCursor *)resizeLeftCursor;
++ (NSCursor *)resizeRightCursor;
++ (NSCursor *)resizeLeftRightCursor;
++ (NSCursor *)resizeUpCursor;
++ (NSCursor *)resizeDownCursor;
++ (NSCursor *)resizeUpDownCursor;
++ (NSCursor *)crosshairCursor;
++ (NSCursor *)disappearingItemCursor;
++ (NSCursor *)operationNotAllowedCursor NS_AVAILABLE_MAC(10_5);
++ (NSCursor *)dragLinkCursor NS_AVAILABLE_MAC(10_6);
++ (NSCursor *)dragCopyCursor NS_AVAILABLE_MAC(10_6);
++ (NSCursor *)contextualMenuCursor NS_AVAILABLE_MAC(10_6);
++ (NSCursor *)IBeamCursorForVerticalLayout NS_AVAILABLE_MAC(10_7);
 
 - (id)initWithImage:(NSImage *)newImage hotSpot:(NSPoint)aPoint;
 - (id)initWithImage:(NSImage *)newImage	foregroundColorHint:(NSColor *)fg backgroundColorHint:(NSColor *)bg hotSpot:(NSPoint)hotSpot;

@@ -27,5 +27,6 @@
 #endif /* !defined(IOSFC_BUILDING_IOSFC) */
 
 #include <CoreFoundation/CFBase.h>
+#include <xpc/xpc.h>
 
 #endif

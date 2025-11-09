@@ -1,7 +1,7 @@
 /*
 	NSFontPanel.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,13 +9,11 @@
 
 @class NSFontPanel, NSMutableDictionary, NSFontManager, NSMutableArray, NSTableView, NSFontDescriptor, NSFont;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 @interface NSObject (NSFontPanelValidationAdditions)
 - (NSUInteger) validModesForFontPanel: (NSFontPanel *) fontPanel;
 @end
 
-#endif
 
 @interface NSFontPanel : NSPanel {
     /*All instance variables are private*/
@@ -122,22 +120,16 @@ enum {
 };
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 enum {
     NSFontPanelFaceModeMask = 1 << 0,
     NSFontPanelSizeModeMask = 1 << 1,
     NSFontPanelCollectionModeMask = 1 << 2,
-#endif
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
     NSFontPanelUnderlineEffectModeMask = 1<<8,
     NSFontPanelStrikethroughEffectModeMask = 1<<9,
     NSFontPanelTextColorEffectModeMask = 1<< 10,
     NSFontPanelDocumentColorEffectModeMask = 1<<11,
     NSFontPanelShadowEffectModeMask = 1<<12,
     NSFontPanelAllEffectsModeMask = 0XFFF00,
-#endif
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
     NSFontPanelStandardModesMask = 0xFFFF,
     NSFontPanelAllModesMask = 0xFFFFFFFF
 };
-#endif

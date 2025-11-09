@@ -3,7 +3,7 @@
  
      Contains:   AppleEvents Registry Interface.
  
-     Version:    AppleEvents-496.5~1
+     Version:    AppleEvents-527.7~1
  
      Copyright:  © 1993-2008 by Apple Computer, Inc., all rights reserved
  
@@ -608,7 +608,9 @@ enum {
 };
 
 enum {
-  kAEQuitReason                 = 'why?' /* in a kAEQuitApplication event, this property if present is the reason the quit is being sent.  The possible values are kAEQuitAll, kAEShutDown, kAERestart, kAEReallyLogOut */
+  kAEQuitPreserveState          = 'stat', /* in a kAEQuitApplication event, this optional parameter hints the application as to whether it should write out */
+                                        /* persistent state which may be restored on the next launch. The possible values are kAENo ( the default ), or kAEYes */
+  kAEQuitReason                 = 'why?' /* in a kAEQuitApplication event, this parameter if present is the reason the quit is being sent.  The possible values are kAEQuitAll, kAEShutDown, kAERestart, kAEReallyLogOut */
 };
 
 enum {

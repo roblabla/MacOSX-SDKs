@@ -3,9 +3,9 @@
  
      Contains:   vector and matrix functions for AltiVec
  
-     Version:    vecLib-268.0
+     Version:    vecLib-325.4
  
-     Copyright:  © 1999-2010 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2011 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -25,7 +25,7 @@
 */
 #include "vecLibTypes.h"
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -73,7 +73,7 @@ extern "C" {
 extern int32_t 
 vIsamax(
   int32_t        count,
-  const vFloat   x[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -96,7 +96,7 @@ vIsamax(
 extern int32_t 
 vIsamin(
   int32_t        count,
-  const vFloat   x[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -119,7 +119,7 @@ vIsamin(
 extern int32_t 
 vIsmax(
   int32_t        count,
-  const vFloat   x[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -142,7 +142,7 @@ vIsmax(
 extern int32_t 
 vIsmin(
   int32_t        count,
-  const vFloat   x[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -165,7 +165,7 @@ vIsmin(
 extern float 
 vSasum(
   int32_t        count,
-  const vFloat   x[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -188,7 +188,7 @@ vSasum(
 extern float 
 vSsum(
   int32_t        count,
-  const vFloat   x[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -217,7 +217,7 @@ vSaxpy(
   int32_t        n,
   float          alpha,
   const vFloat   x[],
-  vFloat         y[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -241,7 +241,7 @@ extern void
 vScopy(
   int32_t        n,
   const vFloat   x[],
-  vFloat         y[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -264,7 +264,7 @@ extern float
 vSdot(
   int32_t        n,
   const vFloat   x[],
-  const vFloat   y[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const vFloat   y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -295,7 +295,7 @@ vSnaxpy(
   int32_t        m,
   const vFloat   a[],
   const vFloat   x[],
-  vFloat         y[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -336,7 +336,7 @@ vSndot(
   float          s[],
   int32_t        isw,
   const vFloat   x[],
-  const vFloat   y[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const vFloat   y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -359,7 +359,7 @@ vSndot(
 extern float 
 vSnrm2(
   int32_t        count,
-  const vFloat   x[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -381,7 +381,7 @@ vSnrm2(
 extern float 
 vSnorm2(
   int32_t        count,
-  const vFloat   x[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const vFloat   x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -414,7 +414,7 @@ vSrot(
   vFloat    x[],
   vFloat    y[],
   float     c,
-  float     s)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  float     s) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -440,7 +440,7 @@ extern void
 vSscal(
   int32_t   n,
   float     alpha,
-  vFloat    x[])                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat    x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -465,7 +465,7 @@ extern void
 vSswap(
   int32_t   n,
   vFloat    x[],
-  vFloat    y[])                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat    y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -493,7 +493,7 @@ vSyax(
   int32_t        n,
   float          alpha,
   const vFloat   x[],
-  vFloat         y[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -525,7 +525,7 @@ vSzaxpy(
   float          alpha,
   const vFloat   x[],
   const vFloat   yY[],
-  vFloat         z[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         z[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -587,7 +587,7 @@ vSgemv(
   const vFloat   a[],
   const vFloat   x[],
   float          beta,
-  vFloat         y[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -625,7 +625,7 @@ vSgemx(
   float          alpha,
   const vFloat   a[],
   const vFloat   x[],
-  vFloat         y[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -663,7 +663,7 @@ vSgemtx(
   float          alpha,
   const vFloat   a[],
   const vFloat   x[],
-  vFloat         y[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -727,7 +727,7 @@ vSgeadd(
   char           forma,
   const vFloat   b[],
   char           formb,
-  vFloat         c[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         c[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -784,7 +784,7 @@ vSgesub(
   char           forma,
   const vFloat   b[],
   char           formb,
-  vFloat         c[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         c[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -844,7 +844,7 @@ vSgemul(
   char           forma,
   const vFloat   b[],
   char           formb,
-  vFloat         matrix[])                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         matrix[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -914,7 +914,7 @@ vSgemm(
   vFloat         c[],
   float          alpha,
   float          beta,
-  vFloat         matrix[])                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         matrix[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -936,7 +936,7 @@ vSgemm(
 extern void 
 vSgetmi(
   int32_t   size,
-  vFloat    x[])                                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat    x[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -962,7 +962,7 @@ vSgetmo(
   int32_t        height,
   int32_t        width,
   const vFloat   x[],
-  vFloat         y[])                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         y[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -1002,7 +1002,7 @@ vSgevv(
   int32_t        n,
   const vFloat   A[],
   const vFloat   B[],
-  vFloat         M[]) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  vFloat         M[]) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 #endif	// defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE__

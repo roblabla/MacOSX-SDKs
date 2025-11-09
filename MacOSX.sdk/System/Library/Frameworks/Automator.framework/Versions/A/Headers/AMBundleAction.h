@@ -20,10 +20,10 @@
 	NSBundle *_bundle;
 	NSArray *_topLevelObjects;
 	
-	id _reserved;
-	id _reserved2;
-	id _reserved3;
-	id _reserved4;
+	AM_UNUSED_FOR_ANALYZER id _reserved;
+	AM_UNUSED_FOR_ANALYZER id _reserved2;
+	AM_UNUSED_FOR_ANALYZER id _reserved3;
+	AM_UNUSED_FOR_ANALYZER id _reserved4;
 }
 
 // Construction

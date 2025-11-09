@@ -1,5 +1,5 @@
 /*	NSKeyedArchiver.h
-	Copyright (c) 2001-2009, Apple Inc. All rights reserved.
+	Copyright (c) 2001-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -8,7 +8,6 @@
 #import <Foundation/NSGeometry.h>
 #endif
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSArray, NSMutableData, NSData;
 @protocol NSKeyedArchiverDelegate, NSKeyedUnarchiverDelegate;
@@ -86,7 +85,7 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
     id _objects;
     const uint8_t *_bytes;
     uint64_t _len;
-    id _white;
+    id _helper;
     void *  __strong _reserved0;
 }
 
@@ -214,11 +213,9 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
 	// -replacementObjectForCoder: as might be expected.  This is a concession
 	// to source compatibility.
 
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 + (NSArray *)classFallbacksForKeyedArchiver;
 
-#endif
 
 @end
 
@@ -232,5 +229,4 @@ FOUNDATION_EXPORT NSString * const NSInvalidUnarchiveOperationException;
 
 @end
 
-#endif
 

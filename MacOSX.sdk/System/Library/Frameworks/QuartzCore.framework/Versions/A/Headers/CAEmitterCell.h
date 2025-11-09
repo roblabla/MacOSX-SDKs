@@ -8,7 +8,7 @@
 @interface CAEmitterCell : NSObject <NSCoding, CAMediaTiming>
 {
 @private
-  struct _CAAttrList *_attr[2];
+  void *_attr[2];
   void *_state;
   uint32_t _flags;
 }
@@ -110,7 +110,7 @@
 @property float minificationFilterBias;
 
 /* An array containing the sub-cells of this cell, or nil (the default
- * value.) When non-nil each particle emitted by the cell will act as
+ * value). When non-nil each particle emitted by the cell will act as
  * an emitter for each of the cell's sub-cells. The emission point is
  * the current particle position and the emission angle is relative to
  * the current direction of the particle. Animatable. */

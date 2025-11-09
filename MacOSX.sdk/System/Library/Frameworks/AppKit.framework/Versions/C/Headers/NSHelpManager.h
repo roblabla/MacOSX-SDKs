@@ -1,7 +1,7 @@
 /*
 	NSHelpManager.h
 	Application Kit
-	Copyright (c) 1995-2009, Apple Inc.
+	Copyright (c) 1995-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -36,13 +36,11 @@
 
 - (BOOL)showContextHelpForObject:(id)object locationHint:(NSPoint)pt;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)openHelpAnchor:(NSString *)anchor inBook:(NSString *)book;
 - (void)findString:(NSString *)query inBook:(NSString *)book;
-#endif
 
 /* Register one or more help books in the given bundle.  The main bundle is automatically registered by -openHelpAnchor:inBook: and -findString:inBook:.  You can use -registerBooksInBundle: to register help books in a plugin bundle, for example.  The Info.plist in the bundle should contain a help book directory path, which specifies one or more folders containing help books.  Returns NO if the bundle doesn't contain any help books or if registration fails.  Returns YES on successful registration. */
-- (BOOL)registerBooksInBundle:(NSBundle *)bundle AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (BOOL)registerBooksInBundle:(NSBundle *)bundle NS_AVAILABLE_MAC(10_6);
 
 @end
 

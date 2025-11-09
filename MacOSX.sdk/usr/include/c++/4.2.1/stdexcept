@@ -77,6 +77,10 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
   {
   public:
     explicit domain_error(const string&  __arg);
+#if BUILDING_LIBSTDCXX
+	__attribute__((used))
+	virtual ~domain_error() throw() {}
+#endif
   };
 
   /** Thrown to report invalid arguments to functions.  */
@@ -84,6 +88,10 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
   {
   public:
     explicit invalid_argument(const string&  __arg);
+#if BUILDING_LIBSTDCXX
+	__attribute__((used))
+	virtual ~invalid_argument() throw() {}
+#endif
   };
 
   /** Thrown when an object is constructed that would exceed its maximum
@@ -92,6 +100,10 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
   {
   public:
     explicit length_error(const string&  __arg);
+#if BUILDING_LIBSTDCXX
+	__attribute__((used))
+	virtual ~length_error() throw() {}
+#endif
   };
 
   /** This represents an argument whose value is not within the expected
@@ -100,6 +112,10 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
   {
   public:
     explicit out_of_range(const string&  __arg);
+#if BUILDING_LIBSTDCXX
+	__attribute__((used))
+	virtual ~out_of_range() throw() {}
+#endif
   };
 
   /** Runtime errors represent problems outside the scope of a program;
@@ -130,6 +146,10 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
   {
   public:
     explicit range_error(const string&  __arg);
+#if BUILDING_LIBSTDCXX
+	__attribute__((used))
+	virtual ~range_error() throw() {}
+#endif
   };
 
   /** Thrown to indicate arithmetic overflow.  */
@@ -137,6 +157,10 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
   {
   public:
     explicit overflow_error(const string&  __arg);
+#if BUILDING_LIBSTDCXX
+	__attribute__((used))
+	virtual ~overflow_error() throw() {}
+#endif
   };
 
   /** Thrown to indicate arithmetic underflow.  */
@@ -144,6 +168,10 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
   {
   public:
     explicit underflow_error(const string&  __arg);
+#if BUILDING_LIBSTDCXX
+	__attribute__((used))
+	virtual ~underflow_error() throw() {}
+#endif
   };
 
 _GLIBCXX_END_NAMESPACE

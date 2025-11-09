@@ -3,9 +3,9 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-268.0
+     Version:    vecLib-325.4
  
-     Copyright:  © 2000-2010 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 2000-2011 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -49,17 +49,19 @@
 #ifndef __VDSP_TRANSLATE__
 #include <vecLib/vDSP_translate.h>
 #endif
-
 #endif
-#ifndef CBLAS_H
+
+#ifndef CBLAS_H	
 #include <vecLib/cblas.h>
 #endif
+
 #ifndef __CLAPACK_H
 #include <vecLib/clapack.h>
-#endif
+#endif	
+
 #ifndef __VFORCE_H
 #include <vecLib/vForce.h>
 #endif
 
-#endif /* __VECLIB__ */
 
+#endif /* __VECLIB__ */

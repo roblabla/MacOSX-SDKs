@@ -1,6 +1,6 @@
 /* -*- mode: C; c-basic-offset: 4; tab-width: 4 -*-
  *
- * Copyright (c) 2008-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -160,7 +160,7 @@ enum {
     UNWIND_X86_64_FRAMELESS_STACK_REG_COUNT         = 0x00001C00,
     UNWIND_X86_64_FRAMELESS_STACK_REG_PERMUTATION   = 0x000003FF,
 
-    UNWIND_X86_64_DWARF_SECTION_OFFSET              = 0x03FFFFFF,
+    UNWIND_X86_64_DWARF_SECTION_OFFSET              = 0x00FFFFFF,
 };
 
 enum {
@@ -206,7 +206,7 @@ enum {
     UNWIND_X86_FRAMELESS_STACK_REG_COUNT         = 0x00001C00,
     UNWIND_X86_FRAMELESS_STACK_REG_PERMUTATION   = 0x000003FF,
     
-    UNWIND_X86_DWARF_SECTION_OFFSET              = 0x03FFFFFF,
+    UNWIND_X86_DWARF_SECTION_OFFSET              = 0x00FFFFFF,
 };
 
 enum {

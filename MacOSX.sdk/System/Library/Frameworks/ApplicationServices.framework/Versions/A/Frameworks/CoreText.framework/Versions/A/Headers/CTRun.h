@@ -2,7 +2,7 @@
  *	CTRun.h
  *	CoreText
  *
- *	Copyright (c) 2004-2008 Apple Inc. All rights reserved.
+ *	Copyright (c) 2004-2011 Apple Inc. All rights reserved.
  *
  */
 
@@ -17,6 +17,7 @@
 #ifndef __CTRUN__
 #define __CTRUN__
 
+#include <CoreText/CTDefines.h>
 #include <CoreFoundation/CFDictionary.h>
 #include <CoreGraphics/CGContext.h>
 #include <AvailabilityMacros.h>
@@ -69,7 +70,7 @@ typedef uint32_t CTRunStatus;
 	@abstract	Returns the CFType of the run object
 */
 
-CFTypeID CTRunGetTypeID( void ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CFTypeID CTRunGetTypeID( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -89,7 +90,7 @@ CFTypeID CTRunGetTypeID( void ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 */
 
 CFIndex CTRunGetGlyphCount(
-	CTRunRef run ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -110,7 +111,7 @@ CFIndex CTRunGetGlyphCount(
 */
 
 CFDictionaryRef CTRunGetAttributes(
-	CTRunRef run ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -132,7 +133,7 @@ CFDictionaryRef CTRunGetAttributes(
 */
 
 CTRunStatus CTRunGetStatus(
-	CTRunRef run ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -153,7 +154,7 @@ CTRunStatus CTRunGetStatus(
 */
 
 const CGGlyph* CTRunGetGlyphsPtr(
-	CTRunRef run ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -176,7 +177,7 @@ const CGGlyph* CTRunGetGlyphsPtr(
 void CTRunGetGlyphs(
 	CTRunRef run,
 	CFRange range,
-	CGGlyph buffer[] ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CGGlyph buffer[] ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -199,7 +200,7 @@ void CTRunGetGlyphs(
 */
 
 const CGPoint* CTRunGetPositionsPtr(
-	CTRunRef run ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -226,7 +227,7 @@ const CGPoint* CTRunGetPositionsPtr(
 void CTRunGetPositions(
 	CTRunRef run,
 	CFRange range,
-	CGPoint buffer[] ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CGPoint buffer[] ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -251,7 +252,7 @@ void CTRunGetPositions(
 */
 
 const CGSize* CTRunGetAdvancesPtr(
-	CTRunRef run ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -275,7 +276,7 @@ const CGSize* CTRunGetAdvancesPtr(
 void CTRunGetAdvances(
 	CTRunRef run,
 	CFRange range,
-	CGSize buffer[] ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CGSize buffer[] ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -299,7 +300,7 @@ void CTRunGetAdvances(
 */
 
 const CFIndex* CTRunGetStringIndicesPtr(
-	CTRunRef run ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -327,7 +328,7 @@ const CFIndex* CTRunGetStringIndicesPtr(
 void CTRunGetStringIndices(
 	CTRunRef run,
 	CFRange range,
-	CFIndex buffer[] ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CFIndex buffer[] ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -343,7 +344,7 @@ void CTRunGetStringIndices(
 */
 
 CFRange CTRunGetStringRange(
-	CTRunRef run ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -379,12 +380,19 @@ double CTRunGetTypographicBounds(
 	CFRange range,
 	CGFloat* ascent,
 	CGFloat* descent,
-	CGFloat* leading ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CGFloat* leading ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
 	@function	CTRunGetImageBounds
 	@abstract	Calculates the image bounds for a glyph range.
+
+	@discussion The image bounds for a run is the union of all non-empty glyph
+				bounding rects, each positioned as it would be if drawn using
+				CTRunDraw using the current context. Note that the result is
+				ideal and does not account for raster coverage due to rendering.
+				This function is purely a convenience for using glyphs as an
+				image and should not be used for typographic purposes.
 
 	@param		run
 				The run that you want to calculate the image bounds for.
@@ -404,12 +412,14 @@ double CTRunGetTypographicBounds(
 				that is, it will be translated by the supplied context's text
 				position and the positions of the individual glyphs. If the run,
 				context, or range is invalid, CGRectNull will be returned.
+
+	@seealso	CTRunGetTypographicBounds
 */
 
 CGRect CTRunGetImageBounds(
 	CTRunRef run,
 	CGContextRef context,
-	CFRange range ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CFRange range ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -427,7 +437,7 @@ CGRect CTRunGetImageBounds(
 */
 
 CGAffineTransform CTRunGetTextMatrix(
-	CTRunRef run ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTRunRef run ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -457,7 +467,7 @@ CGAffineTransform CTRunGetTextMatrix(
 void CTRunDraw(
 	CTRunRef run,
 	CGContextRef context,
-	CFRange range ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CFRange range ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 #if defined(__cplusplus)

@@ -1,5 +1,5 @@
 /*	NSObjCRuntime.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #include <TargetConditionals.h>
@@ -58,20 +58,25 @@
 #endif
 
 #if !defined(NS_BLOCKS_AVAILABLE)
-    #if __BLOCKS__ && MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    #if __BLOCKS__ && (MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED)
         #define NS_BLOCKS_AVAILABLE 1
     #else
         #define NS_BLOCKS_AVAILABLE 0
     #endif
 #endif
 
-// Marks APIs whose iPhone versions are nonatomic, that is cannot be set/get from multiple threads safely without additional synchronization
-#if !defined(NS_NONATOMIC_IPHONEONLY)
+// Marks APIs whose iOS versions are nonatomic, that is cannot be set/get from multiple threads safely without additional synchronization
+#if !defined(NS_NONATOMIC_IOSONLY)
     #if TARGET_OS_IPHONE
-	#define NS_NONATOMIC_IPHONEONLY nonatomic
+	#define NS_NONATOMIC_IOSONLY nonatomic
     #else
-	#define NS_NONATOMIC_IPHONEONLY
+	#define NS_NONATOMIC_IOSONLY
     #endif
+#endif
+
+// Use NS_NONATOMIC_IOSONLY instead of this older macro
+#if !defined(NS_NONATOMIC_IPHONEONLY)
+#define NS_NONATOMIC_IPHONEONLY NS_NONATOMIC_IOSONLY
 #endif
 
 // Marks APIs which format strings by taking a format string and optional varargs as arguments
@@ -92,13 +97,53 @@
     #endif
 #endif
 
-// Marks methods and functions which return an object that needs to be released by the caller but whose names are not consistent with Cocoa naming rules. The recommended fix to this is the rename the methods or functions, but this macro can be used to let the clang static analyzer know of any exceptions that cannot be fixed.
-#if defined(__clang__)
+// Some compilers provide the capability to test if certain features are available. This macro provides a compatibility path for other compilers.
+#ifndef __has_feature
+#define __has_feature(x) 0
+#endif
+
+// Some compilers provide the capability to test if certain attributes are available. This macro provides a compatibility path for other compilers.
+#ifndef __has_attribute
+#define __has_attribute(x) 0
+#endif
+
+// Marks methods and functions which return an object that needs to be released by the caller but whose names are not consistent with Cocoa naming rules. The recommended fix to this is to rename the methods or functions, but this macro can be used to let the clang static analyzer know of any exceptions that cannot be fixed.
+// This macro is ONLY to be used in exceptional circumstances, not to annotate functions which conform to the Cocoa naming rules.
+#if __has_feature(attribute_ns_returns_retained)
 #define NS_RETURNS_RETAINED __attribute__((ns_returns_retained))
 #else
 #define NS_RETURNS_RETAINED
 #endif
 
+// Marks methods and functions which return an object that may need to be retained by the caller but whose names are not consistent with Cocoa naming rules. The recommended fix to this is to rename the methods or functions, but this macro can be used to let the clang static analyzer know of any exceptions that cannot be fixed.
+// This macro is ONLY to be used in exceptional circumstances, not to annotate functions which conform to the Cocoa naming rules.
+#if __has_feature(attribute_ns_returns_not_retained)
+#define NS_RETURNS_NOT_RETAINED __attribute__((ns_returns_not_retained))
+#else
+#define NS_RETURNS_NOT_RETAINED
+#endif
+
+// Marks methods and functions which cannot be used when compiling in automatic reference counting mode.
+#if __has_feature(objc_arc)
+#define NS_AUTOMATED_REFCOUNT_UNAVAILABLE __attribute__((unavailable("not available in automatic reference counting mode")))
+#else
+#define NS_AUTOMATED_REFCOUNT_UNAVAILABLE
+#endif
+
+// Marks classes which cannot participate in the ARC weak reference feature.
+#if __has_attribute(objc_arc_weak_reference_unavailable)
+#define NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE __attribute__((objc_arc_weak_reference_unavailable))
+#else
+#define NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
+#endif
+
+#if !defined(NS_UNAVAILABLE)
+#define NS_UNAVAILABLE UNAVAILABLE_ATTRIBUTE
+#endif
+
+#if !defined(__unsafe_unretained)
+#define __unsafe_unretained
+#endif
 
 
 #import <objc/objc.h>
@@ -106,6 +151,78 @@
 #include <stdint.h>
 #include <limits.h>
 #include <AvailabilityMacros.h>
+#include <Availability.h>
+
+// The arguments to these availability macros is a version number, e.g. 10_6, 3_0 or 'NA'
+#if TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+
+// These cover cases where NS_DEPRECATED indicates something is available and not deprecated on Mac OS but deprecated on iOS
+#define AVAILABLE_MAC_OS_X_VERSION_NA_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA UNAVAILABLE_ATTRIBUTE
+#define AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER
+#define AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER
+#define AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER
+#define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER
+#define AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER
+#define AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER
+#define AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
+#define AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_NA AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
+
+// Available on MacOS and iOS
+#define NS_AVAILABLE(_mac, _ios) AVAILABLE_MAC_OS_X_VERSION_##_mac##_AND_LATER
+
+// Available on MacOS only
+#define NS_AVAILABLE_MAC(_mac) AVAILABLE_MAC_OS_X_VERSION_##_mac##_AND_LATER
+
+// Available on iOS only
+#define NS_AVAILABLE_IOS(_ios) UNAVAILABLE_ATTRIBUTE
+
+// Deprecated on either MacOS or iOS, or deprecated on both (check version numbers for details)
+#define NS_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep) AVAILABLE_MAC_OS_X_VERSION_##_macIntro##_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_##_macDep
+
+// Deprecated on MacOS, unavailable on iOS
+#define NS_DEPRECATED_MAC(_macIntro, _macDep) AVAILABLE_MAC_OS_X_VERSION_##_macIntro##_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_##_macDep
+
+// Unavailable on MacOS, deprecated on iOS
+#define NS_DEPRECATED_IOS(_iosIntro, _iosDep) UNAVAILABLE_ATTRIBUTE
+
+#ifndef __IPHONE_5_0
+#define __IPHONE_5_0 50000
+#endif
+
+#elif (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+
+#define NS_AVAILABLE(_mac, _ios) __OSX_AVAILABLE_STARTING(__MAC_##_mac, __IPHONE_##_ios)
+#define NS_AVAILABLE_MAC(_mac) __OSX_AVAILABLE_STARTING(__MAC_##_mac, __IPHONE_NA)
+#define NS_AVAILABLE_IOS(_ios) __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_##_ios)
+#define NS_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##_macIntro, __MAC_##_macDep, __IPHONE_##_iosIntro, __IPHONE_##_iosDep)
+#define NS_DEPRECATED_MAC(_macIntro, _macDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##_macIntro, __MAC_##_macDep, __IPHONE_NA, __IPHONE_NA)
+#define NS_DEPRECATED_IOS(_iosIntro, _iosDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_NA, __MAC_NA, __IPHONE_##_iosIntro, __IPHONE_##_iosDep)
+
+#else
+
+#define NS_AVAILABLE(_mac, _ios)
+#define NS_AVAILABLE_MAC(_mac)
+#define NS_AVAILABLE_IOS(_ios)
+#define NS_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep)
+#define NS_DEPRECATED_MAC(_macIntro, _macDep)
+#define NS_DEPRECATED_IOS(_iosIntro, _iosDep)
+
+#endif
+
+// Older versions of these macro; use IOS versions instead
+#define NS_AVAILABLE_IPHONE(_ios) NS_AVAILABLE_IOS(_ios)
+#define NS_DEPRECATED_IPHONE(_iosIntro, _iosDep) NS_DEPRECATED_IOS(_iosIntro, _iosDep)
+
+// This macro is to be used by system frameworks to support the weak linking of classes. Weak linking is supported on iOS 3.1 and Mac OS X 10.6.8 or later.
+#if (__MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_6 || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_3_1) && \
+    ((__has_feature(objc_weak_class) || \
+     (defined(__llvm__) && defined(__APPLE_CC__) && (__APPLE_CC__ >= 5658)) || \
+     (defined(__APPLE_CC__) && (__APPLE_CC__ >= 5666))))
+#define NS_CLASS_AVAILABLE(_mac, _ios) __OSX_AVAILABLE_STARTING(__MAC_##_mac, __IPHONE_##_ios)
+#else
+// class weak import is not supported
+#define NS_CLASS_AVAILABLE(_mac, _ios)
+#endif
 
 FOUNDATION_EXPORT double NSFoundationVersionNumber;
 
@@ -161,6 +278,8 @@ FOUNDATION_EXPORT double NSFoundationVersionNumber;
 #define NSFoundationVersionNumber10_6_1 751.00
 #define NSFoundationVersionNumber10_6_2 751.14
 #define NSFoundationVersionNumber10_6_3 751.21
+#define NSFoundationVersionNumber10_6_4 751.29
+#define NSFoundationVersionNumber10_6_5 751.42
 #endif
 
 #if TARGET_OS_IPHONE
@@ -170,9 +289,12 @@ FOUNDATION_EXPORT double NSFoundationVersionNumber;
 #define NSFoundationVersionNumber_iPhoneOS_3_0  678.47
 #define NSFoundationVersionNumber_iPhoneOS_3_1  678.51
 #define NSFoundationVersionNumber_iPhoneOS_3_2  678.60
+#define NSFoundationVersionNumber_iOS_4_0  751.32
+#define NSFoundationVersionNumber_iOS_4_1  751.37
+#define NSFoundationVersionNumber_iOS_4_2  751.49
 #endif
 
-#if __LP64__ || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
+#if __LP64__ || (TARGET_OS_EMBEDDED && !TARGET_OS_IPHONE) || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
 typedef long NSInteger;
 typedef unsigned long NSUInteger;
 #else
@@ -194,8 +316,8 @@ FOUNDATION_EXPORT SEL NSSelectorFromString(NSString *aSelectorName);
 FOUNDATION_EXPORT NSString *NSStringFromClass(Class aClass);
 FOUNDATION_EXPORT Class NSClassFromString(NSString *aClassName);
 
-FOUNDATION_EXPORT NSString *NSStringFromProtocol(Protocol *proto) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-FOUNDATION_EXPORT Protocol *NSProtocolFromString(NSString *namestr) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString *NSStringFromProtocol(Protocol *proto) NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT Protocol *NSProtocolFromString(NSString *namestr) NS_AVAILABLE(10_5, 2_0);
 
 FOUNDATION_EXPORT const char *NSGetSizeAndAlignment(const char *typePtr, NSUInteger *sizep, NSUInteger *alignp);
 
@@ -206,8 +328,8 @@ enum _NSComparisonResult {NSOrderedAscending = -1, NSOrderedSame, NSOrderedDesce
 typedef NSInteger NSComparisonResult;
 
 #if NS_BLOCKS_AVAILABLE
-
 typedef NSComparisonResult (^NSComparator)(id obj1, id obj2);
+#endif
 
 enum {
     NSEnumerationConcurrent = (1UL << 0),
@@ -220,8 +342,6 @@ enum {
     NSSortStable = (1UL << 4),
 };
 typedef NSUInteger NSSortOptions;
-
-#endif
 
 
 enum {NSNotFound = NSIntegerMax};

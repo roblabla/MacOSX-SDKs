@@ -1,14 +1,9 @@
 /*	
     NSURLCache.h
-    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
     
     Public header file.
 */
-
-// Note: To use the APIs described in these headers, you must perform
-// a runtime check for Foundation-462.1 or later.
-#import <AvailabilityMacros.h>
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 
@@ -273,5 +268,3 @@ typedef NSUInteger NSURLCacheStoragePolicy;
 - (NSUInteger)currentDiskUsage;
 
 @end
-
-#endif

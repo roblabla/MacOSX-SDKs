@@ -1,7 +1,7 @@
 /*
 	NSTokenFieldCell.h
 	Application Kit
-	Copyright (c) 2004-2009, Apple Inc.
+	Copyright (c) 2004-2011, Apple Inc.
 	All rights reserved.
 
 */
@@ -9,7 +9,6 @@
 #import <AppKit/NSTextFieldCell.h>
 #import <Foundation/Foundation.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @class NSMutableArray, NSMutableCharacterSet, NSMutableDictionary, NSTextContainer;
 @protocol NSTokenFieldCellDelegate;
@@ -32,14 +31,15 @@ typedef NSUInteger NSTokenStyle;
     id _trackingArea;
     id _lastCell;
     NSRect _lastCellFrame;
-    id _reserved[7];
+    BOOL *_autoCompleteCancel;
+    id _reserved[6];
     struct {
         unsigned int _style:4;
 
         unsigned int _invalidCache:1;
         unsigned int _inDidChange:1;
         unsigned int _validationDisabled:1;
-        unsigned int _pendingComplete:1;
+        unsigned int _reserved1:1;
         unsigned int _autoCompleteMode:2;
         unsigned int _inValidateEditing:1;
         unsigned int _performingDrop:1;
@@ -104,4 +104,3 @@ typedef NSUInteger NSTokenStyle;
 - (NSTokenStyle)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell styleForRepresentedObject:(id)representedObject;
 
 @end
-#endif

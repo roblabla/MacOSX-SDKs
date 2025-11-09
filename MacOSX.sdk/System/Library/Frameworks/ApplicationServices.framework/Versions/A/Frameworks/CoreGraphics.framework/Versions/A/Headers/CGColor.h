@@ -42,7 +42,7 @@ CG_EXTERN CGColorRef CGColorCreateGenericCMYK(CGFloat cyan, CGFloat magenta,
    CF type. */
 
 CG_EXTERN CGColorRef CGColorGetConstantColor(CFStringRef colorName)
-  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+  CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /* Create a color in color space `space' with pattern `pattern' and
    components `components'. `space' must be a pattern color space. */

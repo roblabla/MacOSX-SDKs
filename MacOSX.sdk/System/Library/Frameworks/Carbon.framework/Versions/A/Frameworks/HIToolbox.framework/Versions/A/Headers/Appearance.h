@@ -3,7 +3,7 @@
  
      Contains:   Appearance Manager Interfaces.
  
-     Version:    HIToolbox-463~1
+     Version:    HIToolbox-567.2~1
  
      Copyright:  © 1994-2008 by Apple Computer, Inc., all rights reserved
  
@@ -1527,14 +1527,8 @@ enum {
   kThemeWidgetCloseBox          = 0,
   kThemeWidgetZoomBox           = 1,
   kThemeWidgetCollapseBox       = 2,
-  kThemeWidgetDirtyCloseBox     = 6
-};
-
-enum {
-                                        /* Old/Obsolete name to be removed*/
-  kThemeWidgetABox              = 3,
-  kThemeWidgetBBox              = 4,
-  kThemeWidgetBOffBox           = 5
+  kThemeWidgetDirtyCloseBox     = 6,
+  kThemeWidgetToolbarButton     = 7
 };
 
 typedef UInt16                          ThemeTitleBarWidget;
@@ -4050,7 +4044,7 @@ GetThemeTrackBounds(
  *    On Mac OS X 10.3 and later, use HIThemeGetTrackThumbShape.
  *  
  *  Summary:
- *    Constructs a region that covers the ara of a track thumb.
+ *    Constructs a region that covers the area of a track thumb.
  *  
  *  Mac OS X threading:
  *    Not thread safe

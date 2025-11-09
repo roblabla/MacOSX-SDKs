@@ -43,6 +43,7 @@ extern const NSString*	IMKDelegateClass;
 
 @class IMKServerPrivate;
 
+
 /*!
     @class      IMKServer
     @abstract   This class manages input sessions.
@@ -78,6 +79,24 @@ extern const NSString*	IMKDelegateClass;
     @discussion If the IMKServer contains a bundle identifier the NSBundle is created from that.  Otherwise, the bundle  is created for the main bundle.  The returned NSBundle is an autoreleased object.
 */
 - (NSBundle*)bundle;
+
+/*!
+ @method     
+ @abstract   Call this before terminating a palette IM.
+ @discussion Palettes need to be able to terminate.  When this method is called the IMKServer will notify each client of the palette that
+			 the palette is about to terminate.  The palette can terminate safely if a value of YES is returned.  If the caller of this method is not
+			 an input method of type palette an exception will be thrown.
+ 
+			 If the method returns NO the palette should not terminate.  
+ */
+-(BOOL)paletteWillTerminate AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+/*!
+ @method     
+ @abstract   Returns a BOOL indicating whether or not the last key press was a dead key.
+ */
+- (BOOL)lastKeyEventWasDeadKey AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;;
+
 
 
 @end

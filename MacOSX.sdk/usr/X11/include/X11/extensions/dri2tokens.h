@@ -42,7 +42,14 @@
 #define DRI2BufferAccum			6
 #define DRI2BufferFakeFrontLeft		7
 #define DRI2BufferFakeFrontRight	8
+#define DRI2BufferDepthStencil		9
 
 #define DRI2DriverDRI			0
+#define DRI2DriverVDPAU			1
+
+/* Event sub-types for the swap complete event */
+#define DRI2_EXCHANGE_COMPLETE		0x1
+#define DRI2_BLIT_COMPLETE		0x2
+#define DRI2_FLIP_COMPLETE		0x3
 
 #endif

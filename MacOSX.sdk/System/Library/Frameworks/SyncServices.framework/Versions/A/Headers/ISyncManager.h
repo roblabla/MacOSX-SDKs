@@ -3,6 +3,7 @@
  * Copyright (c) 2003 - 2008 Apple Computer, Inc.  All rights reserved.
  */
 
+#import <Foundation/Foundation.h>
 #import <SyncServices/ISyncCommon.h>
 
 @class ISyncClient, ISyncRecordSnapshot;
@@ -15,10 +16,10 @@
 
 @interface ISyncManager : NSObject
 
-+ (ISyncManager *)sharedManager;
++ (ISyncManager *) sharedManager NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Check if the Sync Engine is enabled and available for syncing. */
-- (BOOL)isEnabled;
+- (BOOL)isEnabled NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* After calling isEnabled, this method will return an NSError with one of the codes enumerated below. The returned NSError will have
    an info dictionary with an entry for the NSLocalizedDescriptionKey. The value of this key will be a string describing the disabled reason
@@ -29,9 +30,9 @@
    ISyncServerDisabledReasonUnresponsive,	    Returned if isEnabled has timed out messaging to the Sync Server  
    ISyncServerDisabledReasonUnknown,            Returned if the Sync Server fails to respond because of an unexpected error.
 */
-- (NSError *)syncDisabledReason;
+- (NSError *)syncDisabledReason NS_DEPRECATED_MAC(10_4, 10_7);
 
-- (ISyncClient *)clientWithIdentifier:(NSString *)clientId;
+- (ISyncClient *)clientWithIdentifier:(NSString *)clientId NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Register a new client.  You specify here all the details needed to  sync the client - supported
    entities and relationships, formatters, etc.  In return, you get back an ISyncClient to use
@@ -97,10 +98,10 @@
    next sync.  If a client adds support for additional properties in ISyncClientEntities, for
    example, the engine must slow-sync the client to guarantee the new keys are synchronized
    properly. */
-- (ISyncClient *)registerClientWithIdentifier:(NSString *)clientId descriptionFilePath:(NSString *)descriptionFilePath;
+- (ISyncClient *)registerClientWithIdentifier:(NSString *)clientId descriptionFilePath:(NSString *)descriptionFilePath NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Remove a previously registered client */
-- (void)unregisterClient:(ISyncClient *)client;
+- (void)unregisterClient:(ISyncClient *)client NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Register a schema.  You can define new entities and relationships; you can extend an entity with
    additional attributes; you can specify a data validator; you can specify a conflict resolver; and
@@ -317,9 +318,9 @@
    there is any overlap between the property and relationship descriptions which have changed with the
    properties and relationships supported by the client.  Changing a schema has serious implications for
    the clients synchronizing it - changes should not be undertaken lightly. */
-- (BOOL)registerSchemaWithBundlePath:(NSString *)bundlePath;
+- (BOOL)registerSchemaWithBundlePath:(NSString *)bundlePath NS_DEPRECATED_MAC(10_4, 10_7);
 
-- (void)unregisterSchemaWithName:(NSString *)schemaName;
+- (void)unregisterSchemaWithName:(NSString *)schemaName NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* This API is for sync clients that will only sync when another client, not of type application, is syncing
  * the same entities. This is NOT the preferred way that clients should sync their changes. However, for
@@ -331,7 +332,7 @@
  * pull. Clients that trickle sync or push their changes periodically on their own should not call this
  * method.
  */
-- (void)clientWithIdentifier:(NSString *)clientId needsSyncing:(BOOL)flag AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)clientWithIdentifier:(NSString *)clientId needsSyncing:(BOOL)flag NS_DEPRECATED_MAC(10_6, 10_7);
 
 /* Return a snapshot of the records in the Truth.  The Truth stores a copy of all synchronized records
    and contains the amalgamation of all properties from all clients.
@@ -344,7 +345,7 @@
    sync session.  Another client may have mutated the Truth after the engine prepared your changes but
    before you ask for the snapshot.  If that happens, the records in this snapshot will not match the
    state in the session.  Use the method on ISyncSession instead. */
-- (ISyncRecordSnapshot *)snapshotOfRecordsInTruthWithEntityNames:(NSArray /* NSString */ *)entityNames usingIdentifiersForClient:(ISyncClient *)client;
+- (ISyncRecordSnapshot *)snapshotOfRecordsInTruthWithEntityNames:(NSArray /* NSString */ *)entityNames usingIdentifiersForClient:(ISyncClient *)client NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Clients that register sync alert handlers may use the following three methods to manage the request modes
    of the connections that are sent alerts by the sync server. (These request modes are simply the runloop modes
@@ -352,9 +353,9 @@
    example, a client that registers a sync alert handler in a process that might present a modal dialog to the
    user should add the appropriate request mode of the loop, so alerts can be handled in a timely manner even
    when the application is blocked for user input. */
-- (void)addRequestMode:(NSString *)mode;
-- (void)removeRequestMode:(NSString *)mode;
-- (NSArray *)requestModes;
+- (void)addRequestMode:(NSString *)mode NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)removeRequestMode:(NSString *)mode NS_DEPRECATED_MAC(10_4, 10_7);
+- (NSArray *)requestModes NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end
 
@@ -369,11 +370,11 @@
 
    For clients that use an ISyncManager they should register with the NSNotificationCenter not the NSDistributedNotificationCenter.
 */
-SYNCSERVICES_EXPORT NSString * const ISyncAvailabilityChangedNotification;
+SYNCSERVICES_EXPORT NSString * const ISyncAvailabilityChangedNotification NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Exception raised when communication to the server is lost. The reason is a string aggregating
    the name, reason, and user info from the originating exception.
 */
-SYNCSERVICES_EXPORT NSString * const ISyncServerUnavailableException;
+SYNCSERVICES_EXPORT NSString * const ISyncServerUnavailableException NS_DEPRECATED_MAC(10_4, 10_7);
 
 

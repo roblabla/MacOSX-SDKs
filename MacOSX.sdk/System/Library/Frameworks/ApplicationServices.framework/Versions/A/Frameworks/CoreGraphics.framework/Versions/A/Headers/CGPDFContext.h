@@ -49,6 +49,16 @@ CG_EXTERN void CGPDFContextBeginPage(CGContextRef context,
 CG_EXTERN void CGPDFContextEndPage(CGContextRef context)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
+/* Add the metadata stream specified by `metadata' to the document catalog
+   of `context', as described in Table 3.25, "Entries in the catalog
+   dictionary", of the PDF 1.7 specification. The contents of metadata must
+   be XML formatted according to the Extensible Metadata Platform, as
+   described in section 10.2.2, "Metadata Streams", of the PDF 1.7
+   specification. */
+
+CG_EXTERN void CGPDFContextAddDocumentMetadata(CGContextRef context,
+  CFDataRef metadata) CG_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_4_0);
+
 /* Set the URL associated with `rect' to `url' in the PDF context
    `context'. */
 

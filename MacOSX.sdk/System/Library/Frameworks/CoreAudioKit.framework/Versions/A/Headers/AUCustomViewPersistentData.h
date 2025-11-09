@@ -3,7 +3,7 @@
  
      Contains:  Protocol definition for AU View persistent data
   
-     Copyright: (c) 2004-2008 by Apple Inc., all rights reserved.
+     Copyright: (c) 2004-2008 by Apple, Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

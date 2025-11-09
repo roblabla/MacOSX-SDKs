@@ -1,7 +1,7 @@
 /*
     NSManagedObjectContext.h
     Core Data
-    Copyright (c) 2004-2009 Apple Inc.
+    Copyright (c) 2004-2010 Apple Inc.
     All rights reserved.
 */
 
@@ -10,9 +10,6 @@
 #import <Foundation/NSLock.h>
 #import <CoreFoundation/CFArray.h>
 #import <CoreFoundation/CFDictionary.h>
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-
 #import <CoreData/CoreDataDefines.h>
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_5
@@ -38,43 +35,52 @@
 @class NSUndoManager;
 
 // Notifications immediately before and immediately after the context saves.  The user info dictionary contains information about the objects that changed and what changed
-COREDATA_EXTERN NSString * const NSManagedObjectContextWillSaveNotification AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-COREDATA_EXTERN NSString * const NSManagedObjectContextDidSaveNotification;
+COREDATA_EXTERN NSString * const NSManagedObjectContextWillSaveNotification NS_AVAILABLE(10_5, 3_0);
+COREDATA_EXTERN NSString * const NSManagedObjectContextDidSaveNotification NS_AVAILABLE(10_4, 3_0);
 
 // Notification when objects in a context changed:  the user info dictionary contains information about the objects that changed and what changed
-COREDATA_EXTERN NSString * const NSManagedObjectContextObjectsDidChangeNotification;    
+COREDATA_EXTERN NSString * const NSManagedObjectContextObjectsDidChangeNotification NS_AVAILABLE(10_4, 3_0);    
 
-// User info keys for NSManagedObjectContextObjectsDidChangeNotification:  the values for these keys are sets of managed obejcts
-COREDATA_EXTERN NSString * const NSInsertedObjectsKey;          // Inserted objects
-COREDATA_EXTERN NSString * const NSUpdatedObjectsKey;           // Updated objects
-COREDATA_EXTERN NSString * const NSDeletedObjectsKey;           // Deleted objects
+// User info keys for NSManagedObjectContextObjectsDidChangeNotification:  the values for these keys are sets of managed objects
+COREDATA_EXTERN NSString * const NSInsertedObjectsKey NS_AVAILABLE(10_4, 3_0);
+COREDATA_EXTERN NSString * const NSUpdatedObjectsKey NS_AVAILABLE(10_4, 3_0);
+COREDATA_EXTERN NSString * const NSDeletedObjectsKey NS_AVAILABLE(10_4, 3_0);
 
-COREDATA_EXTERN NSString * const NSRefreshedObjectsKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	   // Refreshed objects
-COREDATA_EXTERN NSString * const NSInvalidatedObjectsKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;	   // Invalidated objects
-COREDATA_EXTERN NSString * const NSInvalidatedAllObjectsKey AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER; // All objects in the context have been invalidated
+COREDATA_EXTERN NSString * const NSRefreshedObjectsKey NS_AVAILABLE(10_5, 3_0);
+COREDATA_EXTERN NSString * const NSInvalidatedObjectsKey NS_AVAILABLE(10_5, 3_0);
+
+// User info keys for NSManagedObjectContextObjectsDidChangeNotification:  the values for these keys are arrays of objectIDs
+COREDATA_EXTERN NSString * const NSInvalidatedAllObjectsKey NS_AVAILABLE(10_5, 3_0); // All objects in the context have been invalidated
 
 // Default policy for all managed object contexts - save returns with an error that contains the object IDs of the objects that had conflicts(NSInsertedObjectsKey, NSUpdatedObjectsKey).
-COREDATA_EXTERN id NSErrorMergePolicy;   
+COREDATA_EXTERN id NSErrorMergePolicy NS_AVAILABLE(10_4, 3_0);
 
-// This policy merges conflicts between the persistent store's version of the object and the current in memory version. The merge occurs by individual property. For properties which have been changed in both the external source and in memory, the external changes trump the in memory ones.
-COREDATA_EXTERN id NSMergeByPropertyStoreTrumpMergePolicy;    
+// This singleton policy merges conflicts between the persistent store's version of the object and the current in memory version. The merge occurs by individual property. For properties which have been changed in both the external source and in memory, the external changes trump the in memory ones.
+COREDATA_EXTERN id NSMergeByPropertyStoreTrumpMergePolicy NS_AVAILABLE(10_4, 3_0);    
 
-// This policy merges conflicts between the persistent store's version of the object and the current in memory version. The merge occurs by individual property. For properties which have been changed in both the external source and in memory, the in memory changes trump the external ones.
-COREDATA_EXTERN id NSMergeByPropertyObjectTrumpMergePolicy;    
+// This singleton policy merges conflicts between the persistent store's version of the object and the current in memory version. The merge occurs by individual property. For properties which have been changed in both the external source and in memory, the in memory changes trump the external ones.
+COREDATA_EXTERN id NSMergeByPropertyObjectTrumpMergePolicy NS_AVAILABLE(10_4, 3_0);    
 
-// This policy overwrites all state for the changed objects in conflict The current object's state is pushed upon the persistent store.
-COREDATA_EXTERN id NSOverwriteMergePolicy;    
+// This singleton policy overwrites all state for the changed objects in conflict The current object's state is pushed upon the persistent store.
+COREDATA_EXTERN id NSOverwriteMergePolicy NS_AVAILABLE(10_4, 3_0);    
 
-// This policy discards all state for the changed objects in conflict. The persistent store's version of the object is used.
-COREDATA_EXTERN id NSRollbackMergePolicy;    
+// This singleton policy discards all state for the changed objects in conflict. The persistent store's version of the object is used.
+COREDATA_EXTERN id NSRollbackMergePolicy NS_AVAILABLE(10_4, 3_0);    
 
+enum {
+    NSConfinementConcurrencyType		= 0x00,
+    NSPrivateQueueConcurrencyType		= 0x01,
+    NSMainQueueConcurrencyType			= 0x02
+};
+typedef NSUInteger NSManagedObjectContextConcurrencyType;
 
+NS_CLASS_AVAILABLE(10_4,3_0)
 @interface NSManagedObjectContext : NSObject <NSCoding, NSLocking> {
 @private
   int32_t _spinLock;
-  NSPersistentStoreCoordinator *_objectStore;
+  id _parentObjectStore;
   NSUndoManager *_undoManager;
-  NSMutableArray *_children;
+  void *_dispatchQueue;
   struct _managedObjectContextFlags {
       unsigned int _registeredForCallback:1;
       unsigned int _propagatesDeletesAtEndOfEvent:1;
@@ -91,7 +97,12 @@ COREDATA_EXTERN id NSRollbackMergePolicy;
 	  unsigned int _propagatingDeletes:1;
 	  unsigned int _isNSEditorEditing:1;
       unsigned int _isMainThreadBlessed:1;
-      unsigned int _reservedFlags:17;
+      unsigned int _isImportContext:1;
+      unsigned int _preflightSaveInProgress:1;
+      unsigned int _disableDiscardEditing:1;
+      unsigned int _isParentStoreContext:1;
+      unsigned int _postSaveNotifications:1;
+      unsigned int _reservedFlags:12;
   } _flags;
   NSMutableSet *_unprocessedChanges;
   NSMutableSet *_unprocessedDeletes;
@@ -110,23 +121,36 @@ COREDATA_EXTERN id NSRollbackMergePolicy;
   NSTimeInterval _fetchTimestamp;
   id _delegate;
   id _referenceQueue;
-  long _ignoreChangeNotification;
+  id _userinfo;
   id _mergePolicy;
   int32_t _cd_rc;
-  int32_t _reserved3;
+  int32_t _ignoreChangeNotification;
   id _editors;
   id* _debuggingRecords;
-  void *_reserved1;
-  void *_reserved2;
+  id _childObjectStores;
+  id _reserved2;
 }
+
+- (id)initWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct NS_AVAILABLE(10_7, NA);
+
+#if NS_BLOCKS_AVAILABLE
+- (void)performBlock:(void (^)())block NS_AVAILABLE(10_7, NA);
+- (void)performBlockAndWait:(void (^)())block NS_AVAILABLE(10_7, NA);
+#endif /* NS_BLOCKS_AVAILABLE */
 
 /* coordinator which provides model and handles persistency (multiple contexts can share a coordinator) */
 - (void)setPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 
+- (void)setParentContext:(NSManagedObjectContext*)parent NS_AVAILABLE(10_7, NA);
+- (NSManagedObjectContext*)parentContext NS_AVAILABLE(10_7, NA);
+
 - (void)setUndoManager:(NSUndoManager *)undoManager;
 - (NSUndoManager *)undoManager;
+
 - (BOOL)hasChanges;
+- (NSMutableDictionary*)userInfo NS_AVAILABLE(10_7, NA);
+- (NSManagedObjectContextConcurrencyType)concurrencyType NS_AVAILABLE(10_7, NA);
 
 /* returns the object for the specified ID if it is registered in the context already or nil. It never performs I/O. */
 - (NSManagedObject *)objectRegisteredForID:(NSManagedObjectID *)objectID;    
@@ -135,13 +159,13 @@ COREDATA_EXTERN id NSRollbackMergePolicy;
 - (NSManagedObject *)objectWithID:(NSManagedObjectID *)objectID;    
 
 /* returns the object for the specified ID if it is already registered in the context, or faults the object into the context.  It might perform I/O if the data is uncached.  If the object cannot be fetched, or does not exist, or cannot be faulted, it returns nil.  Unlike -objectWithID: it never returns a fault.  */
-- (NSManagedObject*)existingObjectWithID:(NSManagedObjectID*)objectID error:(NSError**)error AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSManagedObject*)existingObjectWithID:(NSManagedObjectID*)objectID error:(NSError**)error NS_AVAILABLE(10_6, 3_0);
 
 // method to fetch objects from the persistent stores into the context (fetch request defines the entity and predicate as well as a sort order for the objects); context will match the results from persistent stores with current changes in the context (so inserted objects are returned even if they are not persisted yet); to fetch a single object with an ID if it is not guaranteed to exist and thus -objectWithObjectID: cannot be used, one would create a predicate like [NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"objectID"] rightExpression:[NSExpression expressionForConstantValue:<object id>] modifier:NSPredicateModifierDirect type:NSEqualToPredicateOperatorType options:0]
 - (NSArray *)executeFetchRequest:(NSFetchRequest *)request error:(NSError **)error;    
 
 // returns the number of objects a fetch request would have returned if it had been passed to -executeFetchRequest:error:.   If an error occurred during the processing of the request, this method will return NSNotFound. 
-- (NSUInteger) countForFetchRequest: (NSFetchRequest *)request error: (NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;    
+- (NSUInteger) countForFetchRequest: (NSFetchRequest *)request error: (NSError **)error NS_AVAILABLE(10_5, 3_0);    
 
 - (void)insertObject:(NSManagedObject *)object;
 - (void)deleteObject:(NSManagedObject *)object;
@@ -193,12 +217,10 @@ COREDATA_EXTERN id NSRollbackMergePolicy;
 
 /* Converts the object IDs of the specified objects to permanent IDs.  This implementation will convert the object ID of each managed object in the specified array to a permanent ID.  Any object in the target array with a permanent ID will be ignored;  additionally, any managed object in the array not already assigned to a store will be assigned, based on the same rules Core Data uses for assignment during a save operation (first writable store supporting the entity, and appropriate for the instance and its related items.)  Although the object will have a permanent ID, it will still respond positively to -isInserted until it is saved.  If an error is encountered obtaining an identifier, the return value will be NO.
 */
-- (BOOL)obtainPermanentIDsForObjects:(NSArray *)objects error:(NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (BOOL)obtainPermanentIDsForObjects:(NSArray *)objects error:(NSError **)error NS_AVAILABLE(10_5, 3_0);
 
 /* Merges the changes specified in notification object received from another context's NSManagedObjectContextDidSaveNotification into the receiver.  This method will refresh any objects which have been updated in the other context, fault in any newly inserted objects, and invoke deleteObject: on those which have been deleted.  The developer is only responsible for the thread safety of the receiver.
 */
-- (void)mergeChangesFromContextDidSaveNotification:(NSNotification *)notification AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)mergeChangesFromContextDidSaveNotification:(NSNotification *)notification NS_AVAILABLE(10_5, 3_0);
 
 @end
-
-#endif

@@ -1,6 +1,6 @@
 /*
     File:		IOBluetoothDeviceSelectorController.h
-    Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
+    Copyright:	(c) 2010 by Apple, Inc. All rights reserved.
 */
  
 #import <Cocoa/Cocoa.h>
@@ -35,9 +35,7 @@
 	@abstract	
 	@discussion	Method call to instantiate a new IOBluetoothDeviceSelectorController object.
 	@result
-        
                         Success - a new instance of the device selector Controller
-        
                         Failure	- nil
 */
 + (IOBluetoothDeviceSelectorController *)deviceSelector;
@@ -47,21 +45,14 @@
         @param	deviceSelectorControllerRef IOBluetoothDeviceSelectorControllerRef for which an IOBluetoothDeviceSelectorController * is desired.
 	@result		Returns the IOBluetoothDeviceSelectorController * for the given IOBluetoothDeviceSelectorControllerRef.
 */
-+ (IOBluetoothDeviceSelectorController *)withDeviceSelectorControllerRef:(IOBluetoothDeviceSelectorControllerRef)deviceSelectorControllerRef;
++ (IOBluetoothDeviceSelectorController *)withDeviceSelectorControllerRef:(IOBluetoothDeviceSelectorControllerRef)deviceSelectorControllerRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!	@method	getDeviceSelectorControllerRef
 	@abstract	Returns an IOBluetoothDeviceSelectorControllerRef representation of the target IOBluetoothDeviceSelectorController object.
 	@result		Returns an IOBluetoothDeviceSelectorControllerRef representation of the target IOBluetoothDeviceSelectorController object.
 */
-- (IOBluetoothDeviceSelectorControllerRef)getDeviceSelectorControllerRef;
+- (IOBluetoothDeviceSelectorControllerRef)getDeviceSelectorControllerRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-//--------------------------------------------------------------------------------------------------------------------------
-/*!	@method	runPanelWithAttributes
-	@discussion	***WARNING*** This method has been deprecated in favor of -setSearchAttributes:, -runModal and -getResults.	
-	@param	attributes	(IOBluetoothDeviceSearchAttributes *) A pointer to a list of device attributes to allow.  This list of attributes is used to determine which device types to display in the UI.
-	@result		NSArray * of the selected IOBluetoothDevice objects.
-*/
--(NSArray *)runPanelWithAttributes:(IOBluetoothDeviceSearchAttributes *)attributes	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1
 

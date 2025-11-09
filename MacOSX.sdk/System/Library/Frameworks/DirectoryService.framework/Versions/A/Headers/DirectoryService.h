@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -21,9 +21,8 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-/*!
- * @header DirectoryService
- * Umbrella header file for the public API header files.
+/*
+ * This entire API is deprecated, please use OpenDirectory.framework
  */
 
 #ifndef __DirectoryService_h__

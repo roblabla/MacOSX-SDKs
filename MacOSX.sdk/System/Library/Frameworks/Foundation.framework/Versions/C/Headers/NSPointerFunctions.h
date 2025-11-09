@@ -1,14 +1,12 @@
 /*
  *  NSPointerFunctions.h
  *
- *  Copyright (c) 2005-2009, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2011, Apple Inc. All rights reserved.
  *
  */
  
 
 #import <Foundation/NSObject.h>
-
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /*
 
@@ -50,6 +48,7 @@ enum {
 
 typedef NSUInteger NSPointerFunctionsOptions;
 
+NS_CLASS_AVAILABLE(10_5, 2_0)
 @interface NSPointerFunctions : NSObject <NSCopying>
 // construction
 - (id)initWithOptions:(NSPointerFunctionsOptions)options;
@@ -70,6 +69,4 @@ typedef NSUInteger NSPointerFunctionsOptions;
 @property BOOL usesWeakReadAndWriteBarriers;       // pointers should (not) use GC weak read and write barriers
 
 @end
-
-#endif
 

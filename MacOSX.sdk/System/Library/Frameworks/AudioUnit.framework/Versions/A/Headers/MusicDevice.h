@@ -3,7 +3,7 @@
  
      Contains:   MusicDevice Interfaces
   
-     Copyright:  © 2000-2008 by Apple Inc., all rights reserved.
+     Copyright:  © 2000-2008 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,11 +16,11 @@
 
 #include <Availability.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
+	#include <CoreAudio/CoreAudioTypes.h>
 	#include <AudioUnit/AUComponent.h>
-	#include <CoreAudio/CoreAudio.h>
 #else
-	#include <AUComponent.h>
 	#include <CoreAudioTypes.h>
+	#include <AUComponent.h>
 #endif
 
 #if PRAGMA_ONCE
@@ -321,7 +321,7 @@ enum {
 					
 					The arguments are the same as are provided to the corresponding API call
 	
-	@param			inComponentStorage
+	@param			self
 					For a component manager component, this is the component instance storage pointer
 	@param			inStatus
 	@param			inData1
@@ -331,7 +331,7 @@ enum {
 	@result			noErr, or an audio unit error code
 */
 typedef OSStatus
-(*MusicDeviceMIDIEventProc)(	void *					inComponentStorage,
+(*MusicDeviceMIDIEventProc)(	void *					self,
 								UInt32					inStatus,
 								UInt32					inData1,
 								UInt32					inData2,
@@ -346,7 +346,7 @@ typedef OSStatus
 					
 					The arguments are the same as are provided to the corresponding API call
 	
-	@param			inComponentStorage
+	@param			self
 					For a component manager component, this is the component instance storage pointer
 	@param			inData
 	@param			inLength
@@ -354,7 +354,7 @@ typedef OSStatus
 	@result			noErr, or an audio unit error code
 */
 typedef OSStatus
-(*MusicDeviceSysExProc)(	void *						inComponentStorage,
+(*MusicDeviceSysExProc)(	void *						self,
 							const UInt8 *				inData,
 							UInt32						inLength);
 
@@ -367,7 +367,7 @@ typedef OSStatus
 					
 					The arguments are the same as are provided to the corresponding API call
 	
-	@param			inComponentStorage
+	@param			self
 					For a component manager component, this is the component instance storage pointer
 	@param			inInstrument
 	@param			inGroupID
@@ -378,7 +378,7 @@ typedef OSStatus
 	@result			noErr, or an audio unit error code
 */
 typedef OSStatus
-(*MusicDeviceStartNoteProc)(	void *					inComponentStorage,
+(*MusicDeviceStartNoteProc)(	void *					self,
 						MusicDeviceInstrumentID			inInstrument,
 						MusicDeviceGroupID				inGroupID,
 						NoteInstanceID *				outNoteInstanceID,
@@ -394,7 +394,7 @@ typedef OSStatus
 					
 					The arguments are the same as are provided to the corresponding API call
 	
-	@param			inComponentStorage
+	@param			self
 					For a component manager component, this is the component instance storage pointer
 	@param			inGroupID
 	@param			inNoteInstanceID
@@ -403,11 +403,10 @@ typedef OSStatus
 	@result			noErr, or an audio unit error code
 */
 typedef OSStatus
-(*MusicDeviceStopNoteProc)(	void *						inComponentStorage,
+(*MusicDeviceStopNoteProc)(	void *						self,
 						MusicDeviceGroupID				inGroupID,
 						NoteInstanceID					inNoteInstanceID,
 						UInt32							inOffsetSampleFrame);
-
 
 
 //=====================================================================================================================

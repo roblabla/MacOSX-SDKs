@@ -300,11 +300,12 @@ typedef struct x86_debug_state x86_debug_state_t;
  * enough stack
  */
 struct x86_seg_load_fault32 {
-	unsigned int    trapno;
-	unsigned int    err;
-	unsigned int    eip;
-	unsigned int    cs;
-	unsigned int    efl;
+	uint16_t	trapno;
+	uint16_t	cpu;
+	uint32_t	err;
+	uint32_t	eip;
+	uint32_t	cs;
+	uint32_t	efl;
 };
 
 

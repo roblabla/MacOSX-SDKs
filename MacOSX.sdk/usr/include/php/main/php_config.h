@@ -5,7 +5,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2011 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: acconfig.h 293155 2010-01-05 20:46:53Z sebastian $ */
+/* $Id: acconfig.h 306939 2011-01-01 02:19:59Z felipe $ */
 
 #ifndef ZEND_API
 
@@ -444,7 +444,7 @@
 #define HAVE_REALPATH 1
 
 /* Define if you have the rl_completion_matches function.  */
-/* #undef HAVE_RL_COMPLETION_MATCHES */
+#define HAVE_RL_COMPLETION_MATCHES 1
 
 /* Define if you have the scandir function.  */
 #define HAVE_SCANDIR 1
@@ -549,10 +549,10 @@
 #define HAVE_STRLCPY 1
 
 /* Define if you have the strndup function.  */
-/* #undef HAVE_STRNDUP */
+#define HAVE_STRNDUP 1
 
 /* Define if you have the strnlen function.  */
-/* #undef HAVE_STRNLEN */
+#define HAVE_STRNLEN 1
 
 /* Define if you have the strpbrk function.  */
 #define HAVE_STRPBRK 1
@@ -853,6 +853,9 @@
 
 /* Define if the target system has /dev/urandom device */
 #define HAVE_DEV_URANDOM 1
+
+/* Suhosin-Patch for PHP */
+#define SUHOSIN_PATCH 1
 
 /* Whether you have AOLserver */
 /* #undef HAVE_AOLSERVER */
@@ -1440,28 +1443,28 @@
 /* #undef DBA_DBM */
 
 /*   */
-/* #undef DBA_CDB_BUILTIN */
+#define DBA_CDB_BUILTIN 1
 
 /*   */
-/* #undef DBA_CDB_MAKE */
+#define DBA_CDB_MAKE 1
 
 /*   */
-/* #undef DBA_CDB */
+#define DBA_CDB 1
 
 /*   */
 /* #undef CDB_INCLUDE_FILE */
 
 /*   */
-/* #undef DBA_CDB */
+#define DBA_CDB 1
 
 /*   */
-/* #undef DBA_INIFILE */
+#define DBA_INIFILE 1
 
 /*   */
-/* #undef DBA_FLATFILE */
+#define DBA_FLATFILE 1
 
 /*   */
-/* #undef HAVE_DBA */
+#define HAVE_DBA 1
 
 /* Whether to build dba as dynamic module */
 /* #undef COMPILE_DL_DBA */
@@ -1512,10 +1515,10 @@
 #define USE_GD_IMGSTRTTF 1
 
 /*   */
-/* #undef HAVE_LIBFREETYPE */
+#define HAVE_LIBFREETYPE 1
 
 /*   */
-/* #undef ENABLE_GD_TTF */
+#define ENABLE_GD_TTF 1
 
 /*   */
 /* #undef HAVE_LIBT1 */
@@ -1590,13 +1593,13 @@
 /* #undef HAVE_GD_XPM */
 
 /*   */
-/* #undef HAVE_GD_STRINGFT */
+#define HAVE_GD_STRINGFT 1
 
 /*   */
-/* #undef HAVE_GD_STRINGFTEX */
+#define HAVE_GD_STRINGFTEX 1
 
 /*   */
-/* #undef ENABLE_GD_TTF */
+#define ENABLE_GD_TTF 1
 
 /*   */
 /* #undef USE_GD_JISX0208 */
@@ -1608,10 +1611,10 @@
 #define USE_GD_IMGSTRTTF 1
 
 /*   */
-/* #undef HAVE_LIBFREETYPE */
+#define HAVE_LIBFREETYPE 1
 
 /*   */
-/* #undef ENABLE_GD_TTF */
+#define ENABLE_GD_TTF 1
 
 /*   */
 /* #undef HAVE_LIBT1 */
@@ -1662,10 +1665,10 @@
 /* #undef HAVE_GD_STRINGTTF */
 
 /*   */
-/* #undef HAVE_GD_STRINGFT */
+#define HAVE_GD_STRINGFT 1
 
 /*   */
-/* #undef HAVE_GD_STRINGFTEX */
+#define HAVE_GD_STRINGFTEX 1
 
 /*   */
 #define HAVE_COLORCLOSESTHWB 1
@@ -2211,28 +2214,28 @@
 /* #undef COMPILE_DL_PDO_ODBC */
 
 /* Whether to have pg_config.h */
-/* #undef HAVE_PG_CONFIG_H */
+#define HAVE_PG_CONFIG_H 1
 
 /* Whether to have pg_config.h */
-/* #undef HAVE_PG_CONFIG_H */
+#define HAVE_PG_CONFIG_H 1
 
 /* Whether to build PostgreSQL for PDO support or not */
-/* #undef HAVE_PDO_PGSQL */
+#define HAVE_PDO_PGSQL 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQPARAMETERSTATUS */
+#define HAVE_PQPARAMETERSTATUS 1
 
 /* PostgreSQL 8.0 or later */
-/* #undef HAVE_PQPREPARE */
+#define HAVE_PQPREPARE 1
 
 /* PostgreSQL 8.1.4 or later */
-/* #undef HAVE_PQESCAPE_CONN */
+#define HAVE_PQESCAPE_CONN 1
 
 /* PostgreSQL 8.1.4 or later */
-/* #undef HAVE_PQESCAPE_BYTEA_CONN */
+#define HAVE_PQESCAPE_BYTEA_CONN 1
 
 /* Whether libpq is compiled with --enable-multibyte */
-/* #undef HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT */
+#define HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT 1
 
 /* Whether to build pdo_pgsql as dynamic module */
 /* #undef COMPILE_DL_PDO_PGSQL */
@@ -2250,94 +2253,94 @@
 /* #undef COMPILE_DL_PDO_SQLITE */
 
 /* Whether to have pg_config.h */
-/* #undef HAVE_PG_CONFIG_H */
+#define HAVE_PG_CONFIG_H 1
 
 /* Whether to have pg_config.h */
-/* #undef HAVE_PG_CONFIG_H */
+#define HAVE_PG_CONFIG_H 1
 
 /* Whether to build PostgreSQL support or not */
-/* #undef HAVE_PGSQL */
+#define HAVE_PGSQL 1
 
 /* PostgreSQL 7.2.0 or later */
-/* #undef HAVE_PQESCAPE */
+#define HAVE_PQESCAPE 1
 
 /* PostgreSQL 7.3.0 or later */
-/* #undef HAVE_PQUNESCAPEBYTEA */
+#define HAVE_PQUNESCAPEBYTEA 1
 
 /* PostgreSQL 7.0.x or later */
-/* #undef HAVE_PQSETNONBLOCKING */
+#define HAVE_PQSETNONBLOCKING 1
 
 /* Broken libpq under windows */
-/* #undef HAVE_PQCMDTUPLES */
+#define HAVE_PQCMDTUPLES 1
 
 /* Older PostgreSQL */
-/* #undef HAVE_PQOIDVALUE */
+#define HAVE_PQOIDVALUE 1
 
 /* PostgreSQL 7.0.x or later */
-/* #undef HAVE_PQCLIENTENCODING */
+#define HAVE_PQCLIENTENCODING 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQPARAMETERSTATUS */
+#define HAVE_PQPARAMETERSTATUS 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQPROTOCOLVERSION */
+#define HAVE_PQPROTOCOLVERSION 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PGTRANSACTIONSTATUS */
+#define HAVE_PGTRANSACTIONSTATUS 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQEXECPARAMS */
+#define HAVE_PQEXECPARAMS 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQPREPARE */
+#define HAVE_PQPREPARE 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQEXECPREPARED */
+#define HAVE_PQEXECPREPARED 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQRESULTERRORFIELD */
+#define HAVE_PQRESULTERRORFIELD 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQSENDQUERYPARAMS */
+#define HAVE_PQSENDQUERYPARAMS 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQSENDPREPARE */
+#define HAVE_PQSENDPREPARE 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQSENDQUERYPREPARED */
+#define HAVE_PQSENDQUERYPREPARED 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQPUTCOPYDATA */
+#define HAVE_PQPUTCOPYDATA 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQPUTCOPYEND */
+#define HAVE_PQPUTCOPYEND 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQGETCOPYDATA */
+#define HAVE_PQGETCOPYDATA 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQFREEMEM */
+#define HAVE_PQFREEMEM 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQSETERRORVERBOSITY */
+#define HAVE_PQSETERRORVERBOSITY 1
 
 /* PostgreSQL 7.4 or later */
-/* #undef HAVE_PQFTABLE */
+#define HAVE_PQFTABLE 1
 
 /* PostgreSQL 8.1.4 or later */
-/* #undef HAVE_PQESCAPE_CONN */
+#define HAVE_PQESCAPE_CONN 1
 
 /* PostgreSQL 8.1.4 or later */
-/* #undef HAVE_PQESCAPE_BYTEA_CONN */
+#define HAVE_PQESCAPE_BYTEA_CONN 1
 
 /* Whether libpq is compiled with --enable-multibyte */
-/* #undef HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT */
+#define HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT 1
 
 /* PostgreSQL 8.1 or later */
-/* #undef HAVE_PG_LO_CREATE */
+#define HAVE_PG_LO_CREATE 1
 
 /* PostgreSQL 8.4 or later */
-/* #undef HAVE_PG_LO_IMPORT_WITH_OID */
+#define HAVE_PG_LO_IMPORT_WITH_OID 1
 
 /* Whether to build pgsql as dynamic module */
 /* #undef COMPILE_DL_PGSQL */
@@ -2376,7 +2379,7 @@
 /* #undef HAVE_LIBREADLINE */
 
 /*   */
-/* #undef HAVE_LIBEDIT */
+#define HAVE_LIBEDIT 1
 
 /* Whether to build readline as dynamic module */
 /* #undef COMPILE_DL_READLINE */
@@ -2487,7 +2490,7 @@
 #define SQLITE_PTR_SZ SIZEOF_CHAR_P
 
 /*   */
-/* #undef SQLITE_UTF8 */
+#define SQLITE_UTF8 1
 
 /* Define if flush should be called explicitly after a buffered io. */
 #define HAVE_FLUSHIO 1
@@ -2706,13 +2709,13 @@
 /* #undef COMPILE_DL_SYSVSHM */
 
 /*   */
-/* #undef HAVE_TIDYOPTGETDOC */
+#define HAVE_TIDYOPTGETDOC 1
 
 /* Whether to build tidy as dynamic module */
 /* #undef COMPILE_DL_TIDY */
 
 /*   */
-/* #undef HAVE_TIDY */
+#define HAVE_TIDY 1
 
 /* Whether to build tokenizer as dynamic module */
 /* #undef COMPILE_DL_TOKENIZER */
@@ -2841,7 +2844,7 @@
 /* #undef HAVE__CONTROLFP_S */
 
 /* whether FPU control word can be manipulated by inline assembler */
-/* #undef HAVE_FPU_INLINE_ASM_X86 */
+#define HAVE_FPU_INLINE_ASM_X86 1
 
 /* Define if double cast to long preserves least significant bits */
 /* #undef ZEND_DVAL_TO_LVAL_CAST_OK */
@@ -2901,16 +2904,16 @@
 /* #undef PTHREADS */
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2010-12-15"
+#define PHP_BUILD_DATE "2011-09-08"
 
 /* hardcode for each of the cross compiler host */
 #define PHP_OS "Darwin"
 
 /* hardcode for each of the cross compiler host */
-#define PHP_UNAME "Darwin b01.apple.com 10.0 Darwin Kernel Version 10.0.0: Fri Jul 31 22:46:25 PDT 2009; root:xnu-1456.1.25~1/RELEASE_X86_64 x86_64"
+#define PHP_UNAME "Darwin melodie.apple.com 11.0 Darwin Kernel Version 11.0.0: Thu Aug 4 17:20:02 PDT 2011; root:xnu-1699.22.85~5/RELEASE_X86_64 x86_64"
 
 /* uname -a output */
-#define PHP_UNAME "Darwin b01.apple.com 10.0 Darwin Kernel Version 10.0.0: Fri Jul 31 22:46:25 PDT 2009; root:xnu-1456.1.25~1/RELEASE_X86_64 x86_64"
+#define PHP_UNAME "Darwin melodie.apple.com 11.0 Darwin Kernel Version 11.0.0: Thu Aug 4 17:20:02 PDT 2011; root:xnu-1699.22.85~5/RELEASE_X86_64 x86_64"
 
 /* uname output */
 #define PHP_OS "Darwin"

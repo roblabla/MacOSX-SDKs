@@ -105,7 +105,7 @@ vImage_Error vImageMatrixMultiply_Planar8(          const vImage_Buffer *srcs[],
                                                     int32_t             divisor,
                                                     const int16_t	*pre_bias,	//A packed array of src_plane int16_t values. NULL is okay
                                                     const int32_t	*post_bias,	//A packed array of dest_plane int32_t values. NULL is okay
-                                                    vImage_Flags 	flags )		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                    vImage_Flags 	flags )		__OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
 
 vImage_Error vImageMatrixMultiply_PlanarF(          const vImage_Buffer *srcs[],        //A set of src_planes as a const array of pointers to vImage_Buffer structs that reference vImage_Buffers.
                                                     const vImage_Buffer *dests[],       //A set of src_planes as a const array of pointers to vImage_Buffer structs that reference vImage_Buffers.
@@ -114,7 +114,7 @@ vImage_Error vImageMatrixMultiply_PlanarF(          const vImage_Buffer *srcs[],
                                                     const float		matrix[],		
                                                     const float 	*pre_bias,	//A packed array of float values. NULL is okay
                                                     const float 	*post_bias,	//A packed array of float values. NULL is okay
-                                                    vImage_Flags flags )		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                    vImage_Flags flags )		__OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
 
                 
 vImage_Error vImageMatrixMultiply_ARGB8888(         const vImage_Buffer *src,
@@ -123,14 +123,14 @@ vImage_Error vImageMatrixMultiply_ARGB8888(         const vImage_Buffer *src,
                                                     int32_t             divisor,
                                                     const int16_t	*pre_bias,	//Must be an array of 4 int16_t's. NULL is okay. 
                                                     const int32_t 	*post_bias,	//Must be an array of 4 int32_t's. NULL is okay. 
-                                                    vImage_Flags 	flags )		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                    vImage_Flags 	flags )		__OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
 
 vImage_Error vImageMatrixMultiply_ARGBFFFF(         const vImage_Buffer *src,
                                                     const vImage_Buffer *dest,
                                                     const float		matrix[4*4],
                                                     const float		*pre_bias,	//Must be an array of 4 floats. NULL is okay. 
                                                     const float		*post_bias,	//Must be an array of 4 floats. NULL is okay. 
-                                                    vImage_Flags 	flags )		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                    vImage_Flags 	flags )		__OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
 
 /*
  * The gamma calculation is at the simplest level:
@@ -181,41 +181,41 @@ vImage_Error vImageMatrixMultiply_ARGBFFFF(         const vImage_Buffer *src,
  */
 enum
 {
-    kvImageGamma_UseGammaValue                  =   0,          /* AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
-    kvImageGamma_UseGammaValue_half_precision   =   1,          /* AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
-    kvImageGamma_5_over_9_half_precision        =   2,          /* gamma = 5/9. (Gamma 1/1.8) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
-    kvImageGamma_9_over_5_half_precision        =   3,          /* gamma = 9/5. (Gamma 1.8)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
-    kvImageGamma_5_over_11_half_precision       =   4,          /* gamma = 5/11. (Gamma 1/2.2) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
-    kvImageGamma_11_over_5_half_precision       =   5,          /* gamma = 11/5. (Gamma 2.2) On exit, gamma = 5/11. AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
-    kvImageGamma_sRGB_forward_half_precision    =   6,          /* gamma = sRGB standard 2.2. (like 2.2 but offset a bit and with a linear segment: x<0.03928?x/12.92:pow((x+0.055)/1.055,2.4) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
-    kvImageGamma_sRGB_reverse_half_precision    =   7,          /* gamma = sRGB standard 1/2.2. (like 2.2 but offset a bit and with a linear segment: x<0.00304?12.92*x:1.055pow(x,1/2.4)-0.055) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
-    kvImageGamma_11_over_9_half_precision       =   8,          /* gamma = 11/9 (Gamma (11/5)/(9/5)) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
-    kvImageGamma_9_over_11_half_precision       =   9,          /* gamma = 9/11 (Gamma (9/5)/(11/5)) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
-	kvImageGamma_BT709_forward_half_precision	=	10,			/* gamma = ITU-R BT.709 standard (like sRGB above but without the 1.125 viewing gamma for computer graphics: x<0.081?x/4.5:pow((x+0.099)/1.099, 1/0.45) ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
-	kvImageGamma_BT709_reverse_half_precision	=	11			/* gamma = ITU-R BT.709 standard *reverse* (like sRGB 1/2.2 above but without the 1.125 viewing gamma for computer graphics: x<0.018?4.5*x:1.099*pow(x,0.45)-0.099) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
+    kvImageGamma_UseGammaValue                  =   0,          /* __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
+    kvImageGamma_UseGammaValue_half_precision   =   1,          /* __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
+    kvImageGamma_5_over_9_half_precision        =   2,          /* gamma = 5/9. (Gamma 1/1.8) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
+    kvImageGamma_9_over_5_half_precision        =   3,          /* gamma = 9/5. (Gamma 1.8)  __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
+    kvImageGamma_5_over_11_half_precision       =   4,          /* gamma = 5/11. (Gamma 1/2.2) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
+    kvImageGamma_11_over_5_half_precision       =   5,          /* gamma = 11/5. (Gamma 2.2) On exit, gamma = 5/11. __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
+    kvImageGamma_sRGB_forward_half_precision    =   6,          /* gamma = sRGB standard 2.2. (like 2.2 but offset a bit and with a linear segment: x<0.03928?x/12.92:pow((x+0.055)/1.055,2.4) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
+    kvImageGamma_sRGB_reverse_half_precision    =   7,          /* gamma = sRGB standard 1/2.2. (like 2.2 but offset a bit and with a linear segment: x<0.00304?12.92*x:1.055pow(x,1/2.4)-0.055) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
+    kvImageGamma_11_over_9_half_precision       =   8,          /* gamma = 11/9 (Gamma (11/5)/(9/5)) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
+    kvImageGamma_9_over_11_half_precision       =   9,          /* gamma = 9/11 (Gamma (9/5)/(11/5)) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
+	kvImageGamma_BT709_forward_half_precision	=	10,			/* gamma = ITU-R BT.709 standard (like sRGB above but without the 1.125 viewing gamma for computer graphics: x<0.081?x/4.5:pow((x+0.099)/1.099, 1/0.45) ) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
+	kvImageGamma_BT709_reverse_half_precision	=	11			/* gamma = ITU-R BT.709 standard *reverse* (like sRGB 1/2.2 above but without the 1.125 viewing gamma for computer graphics: x<0.018?4.5*x:1.099*pow(x,0.45)-0.099) __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
 };
 
 GammaFunction   vImageCreateGammaFunction(          float           gamma,
                                                     int             gamma_type,
-                                                    vImage_Flags    flags )             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                    vImage_Flags    flags )             __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
 
-void            vImageDestroyGammaFunction( GammaFunction f )                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+void            vImageDestroyGammaFunction( GammaFunction f )                           __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
 
 /* There is a 8 bit lookup table in Conversion.h, if you are looking for a 8bit to 8bit gamma function. */
 vImage_Error    vImageGamma_Planar8toPlanarF(       const vImage_Buffer *src,           
                                                     const vImage_Buffer *dest,           
                                                     const GammaFunction gamma,
-                                                    vImage_Flags        flags )         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                    vImage_Flags        flags )         __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
                                                     
 vImage_Error    vImageGamma_PlanarFtoPlanar8(       const vImage_Buffer *src,           
                                                     const vImage_Buffer *dest,          
                                                     const GammaFunction gamma,
-                                                    vImage_Flags        flags )         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                    vImage_Flags        flags )         __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
                                                     
 vImage_Error    vImageGamma_PlanarF(                const vImage_Buffer *src,           
                                                     const vImage_Buffer *dest,          
                                                     const GammaFunction gamma,
-                                                    vImage_Flags        flags )         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                    vImage_Flags        flags )         __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
                                         
 /*
  *  vImagePiecewisePolynomial*
@@ -343,7 +343,7 @@ vImage_Error    vImagePiecewisePolynomial_PlanarF(  const vImage_Buffer *src,   
                                                     const float         *boundaries,
                                                     uint32_t            order,
                                                     uint32_t            log2segments,
-                                                    vImage_Flags        flags )     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                    vImage_Flags        flags )     __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
 
 
 
@@ -353,7 +353,7 @@ vImage_Error    vImagePiecewisePolynomial_Planar8toPlanarF( const vImage_Buffer 
                                                             const float         *boundaries,
                                                             uint32_t            order,
                                                             uint32_t            log2segments,
-                                                            vImage_Flags        flags )     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                            vImage_Flags        flags )     __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
 
 vImage_Error    vImagePiecewisePolynomial_PlanarFtoPlanar8( const vImage_Buffer *src,       //floating point data
                                                             const vImage_Buffer *dest,      //8-bit data
@@ -361,7 +361,7 @@ vImage_Error    vImagePiecewisePolynomial_PlanarFtoPlanar8( const vImage_Buffer 
                                                             const float         *boundaries,	/*The 0th and Nth terms in the boundaries array are typically 0.0f and 255.0f respectively. Other values may incur additional computational cost. */
                                                             uint32_t            order,
                                                             uint32_t            log2segments,
-                                                            vImage_Flags        flags )     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                            vImage_Flags        flags )     __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
 
 /*
  *      vImagePiecewiseRational_PlanarF is similar to vImagePiecewisePolynomial_PlanarF
@@ -414,7 +414,7 @@ vImage_Error    vImagePiecewiseRational_PlanarF(  const vImage_Buffer *src,     
                                                     uint32_t            topOrder,
                                                     uint32_t            bottomOrder,
                                                     uint32_t            log2segments,
-                                                    vImage_Flags        flags )     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                    vImage_Flags        flags )     __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
 
 /*
  *  A simple lookup table:
@@ -431,13 +431,13 @@ vImage_Error    vImagePiecewiseRational_PlanarF(  const vImage_Buffer *src,     
 vImage_Error    vImageLookupTable_Planar8toPlanarF(     const vImage_Buffer *src,          /* 8-bit pixels */
                                                         const vImage_Buffer *dest,         /* floating point pixels */
                                                         const Pixel_F       table[256],
-                                                        vImage_Flags        flags )         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                        vImage_Flags        flags )         __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
                                                         
 /*
  *  A simple lookup table with floating point inputs:
  *
  *          uint8_t table[4096];
- *          uint32_t index =  (uint32_t) MIN( MAX( input_float_pixel * 4095.0f + 0.5f, 0.0f), 4095.0f);
+ *          uint32_t index =  (uint32_t) MIN( MAX( input_float_pixel * 4096.0f, 0.0f), 4095.0f);
  *          uint8_t result_pixel = table[ index ];
  *
  *  The input is a buffer of 8-bit pixels. The output is a buffer of floating point pixels. 
@@ -445,7 +445,7 @@ vImage_Error    vImageLookupTable_Planar8toPlanarF(     const vImage_Buffer *src
 vImage_Error    vImageLookupTable_PlanarFtoPlanar8(     const vImage_Buffer *src,          /* floating point pixels */
                                                         const vImage_Buffer *dest,         /* 8-bit pixels */
                                                         const Pixel_8       table[4096],
-                                                        vImage_Flags        flags )         AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                        vImage_Flags        flags )         __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
 
 
 /*
@@ -485,7 +485,7 @@ vImage_Error    vImageInterpolatedLookupTable_PlanarF(  const vImage_Buffer *src
                                                         vImagePixelCount            tableEntries,
                                                         float               maxFloat,
                                                         float               minFloat,
-                                                        vImage_Flags        flags )                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                                        vImage_Flags        flags )                     __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
 
 
 #ifdef __cplusplus

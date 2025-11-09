@@ -40,8 +40,8 @@
 #ifndef DRI_INTERFACE_H
 #define DRI_INTERFACE_H
 
-/* Make this something other than __APPLE__ for other arcs with no drm.h */
-#ifndef __APPLE__
+/* For archs with no drm.h */
+#if !defined(__APPLE__) && !defined(__CYGWIN__) && !defined(__GNU__)
 #include <drm.h>
 #else
 typedef unsigned int drm_context_t;
@@ -75,6 +75,11 @@ typedef struct __DRItexOffsetExtensionRec	__DRItexOffsetExtension;
 typedef struct __DRItexBufferExtensionRec	__DRItexBufferExtension;
 typedef struct __DRIlegacyExtensionRec		__DRIlegacyExtension;
 typedef struct __DRIswrastExtensionRec		__DRIswrastExtension;
+typedef struct __DRIbufferRec			__DRIbuffer;
+typedef struct __DRIdri2ExtensionRec		__DRIdri2Extension;
+typedef struct __DRIdri2LoaderExtensionRec	__DRIdri2LoaderExtension;
+typedef struct __DRI2flushExtensionRec	__DRI2flushExtension;
+
 /*@}*/
 
 
@@ -225,8 +230,15 @@ struct __DRItexOffsetExtensionRec {
 };
 
 
+/* Valid values for format in the setTexBuffer2 function below.  These
+ * values match the GLX tokens for compatibility reasons, but we
+ * define them here since the DRI interface can't depend on GLX. */
+#define __DRI_TEXTURE_FORMAT_NONE        0x20D8
+#define __DRI_TEXTURE_FORMAT_RGB         0x20D9
+#define __DRI_TEXTURE_FORMAT_RGBA        0x20DA
+
 #define __DRI_TEX_BUFFER "DRI_TexBuffer"
-#define __DRI_TEX_BUFFER_VERSION 1
+#define __DRI_TEX_BUFFER_VERSION 2
 struct __DRItexBufferExtensionRec {
     __DRIextension base;
 
@@ -234,11 +246,43 @@ struct __DRItexBufferExtensionRec {
      * Method to override base texture image with the contents of a
      * __DRIdrawable. 
      *
-     * For GLX_EXT_texture_from_pixmap with AIGLX.
+     * For GLX_EXT_texture_from_pixmap with AIGLX.  Deprecated in favor of
+     * setTexBuffer2 in version 2 of this interface
      */
     void (*setTexBuffer)(__DRIcontext *pDRICtx,
 			 GLint target,
 			 __DRIdrawable *pDraw);
+
+    /**
+     * Method to override base texture image with the contents of a
+     * __DRIdrawable, including the required texture format attribute.
+     *
+     * For GLX_EXT_texture_from_pixmap with AIGLX.
+     */
+    void (*setTexBuffer2)(__DRIcontext *pDRICtx,
+			  GLint target,
+			  GLint format,
+			  __DRIdrawable *pDraw);
+};
+
+/**
+ * Used by drivers that implement DRI2
+ */
+#define __DRI2_FLUSH "DRI2_Flush"
+#define __DRI2_FLUSH_VERSION 3
+struct __DRI2flushExtensionRec {
+    __DRIextension base;
+    void (*flush)(__DRIdrawable *drawable);
+
+    /**
+     * Ask the driver to call getBuffers/getBuffersWithFormat before
+     * it starts rendering again.
+     *
+     * \param drawable the drawable to invalidate
+     *
+     * \since 3
+     */
+    void (*invalidate)(__DRIdrawable *drawable);
 };
 
 
@@ -341,29 +385,6 @@ struct __DRIdamageExtensionRec {
 			 drm_clip_rect_t *rects, int num_rects,
 			 GLboolean front_buffer,
 			 void *loaderPrivate);
-};
-
-/**
- * DRI2 Loader extension.  This extension describes the basic
- * functionality the loader needs to provide for the DRI driver.
- */
-#define __DRI_LOADER "DRI_Loader"
-#define __DRI_LOADER_VERSION 1
-struct __DRIloaderExtensionRec {
-    __DRIextension base;
-
-    /**
-     * Ping the windowing system to get it to reemit info for the
-     * specified drawable in the DRI2 event buffer.
-     *
-     * \param draw the drawable for which to request info
-     * \param tail the new event buffer tail pointer
-     */
-    void (*reemitDrawableInfo)(__DRIdrawable *draw, unsigned int *tail,
-			       void *loaderPrivate);
-
-    void (*postDamage)(__DRIdrawable *draw, struct drm_clip_rect *rects,
-		       int num_rects, void *loaderPrivate);
 };
 
 #define __DRI_SWRAST_IMAGE_OP_DRAW	1
@@ -631,6 +652,158 @@ struct __DRIswrastExtensionRec {
     __DRIdrawable *(*createNewDrawable)(__DRIscreen *screen,
 					const __DRIconfig *config,
 					void *loaderPrivate);
+};
+
+/**
+ * DRI2 Loader extension.
+ */
+#define __DRI_BUFFER_FRONT_LEFT		0
+#define __DRI_BUFFER_BACK_LEFT		1
+#define __DRI_BUFFER_FRONT_RIGHT	2
+#define __DRI_BUFFER_BACK_RIGHT		3
+#define __DRI_BUFFER_DEPTH		4
+#define __DRI_BUFFER_STENCIL		5
+#define __DRI_BUFFER_ACCUM		6
+#define __DRI_BUFFER_FAKE_FRONT_LEFT	7
+#define __DRI_BUFFER_FAKE_FRONT_RIGHT	8
+#define __DRI_BUFFER_DEPTH_STENCIL	9  /**< Only available with DRI2 1.1 */
+
+struct __DRIbufferRec {
+    unsigned int attachment;
+    unsigned int name;
+    unsigned int pitch;
+    unsigned int cpp;
+    unsigned int flags;
+};
+
+#define __DRI_DRI2_LOADER "DRI_DRI2Loader"
+#define __DRI_DRI2_LOADER_VERSION 3
+struct __DRIdri2LoaderExtensionRec {
+    __DRIextension base;
+
+    __DRIbuffer *(*getBuffers)(__DRIdrawable *driDrawable,
+			       int *width, int *height,
+			       unsigned int *attachments, int count,
+			       int *out_count, void *loaderPrivate);
+
+    /**
+     * Flush pending front-buffer rendering
+     *
+     * Any rendering that has been performed to the
+     * \c __DRI_BUFFER_FAKE_FRONT_LEFT will be flushed to the
+     * \c __DRI_BUFFER_FRONT_LEFT.
+     *
+     * \param driDrawable    Drawable whose front-buffer is to be flushed
+     * \param loaderPrivate  Loader's private data that was previously passed
+     *                       into __DRIdri2ExtensionRec::createNewDrawable
+     */
+    void (*flushFrontBuffer)(__DRIdrawable *driDrawable, void *loaderPrivate);
+
+
+    /**
+     * Get list of buffers from the server
+     *
+     * Gets a list of buffer for the specified set of attachments.  Unlike
+     * \c ::getBuffers, this function takes a list of attachments paired with
+     * opaque \c unsigned \c int value describing the format of the buffer.
+     * It is the responsibility of the caller to know what the service that
+     * allocates the buffers will expect to receive for the format.
+     *
+     * \param driDrawable    Drawable whose buffers are being queried.
+     * \param width          Output where the width of the buffers is stored.
+     * \param height         Output where the height of the buffers is stored.
+     * \param attachments    List of pairs of attachment ID and opaque format
+     *                       requested for the drawable.
+     * \param count          Number of attachment / format pairs stored in
+     *                       \c attachments.
+     * \param loaderPrivate  Loader's private data that was previously passed
+     *                       into __DRIdri2ExtensionRec::createNewDrawable.
+     */
+    __DRIbuffer *(*getBuffersWithFormat)(__DRIdrawable *driDrawable,
+					 int *width, int *height,
+					 unsigned int *attachments, int count,
+					 int *out_count, void *loaderPrivate);
+};
+
+/**
+ * This extension provides alternative screen, drawable and context
+ * constructors for DRI2.
+ */
+#define __DRI_DRI2 "DRI_DRI2"
+#define __DRI_DRI2_VERSION 1
+
+struct __DRIdri2ExtensionRec {
+    __DRIextension base;
+
+    __DRIscreen *(*createNewScreen)(int screen, int fd,
+				    const __DRIextension **extensions,
+				    const __DRIconfig ***driver_configs,
+				    void *loaderPrivate);
+
+    __DRIdrawable *(*createNewDrawable)(__DRIscreen *screen,
+					const __DRIconfig *config,
+					void *loaderPrivate);
+
+    __DRIcontext *(*createNewContext)(__DRIscreen *screen,
+				      const __DRIconfig *config,
+				      __DRIcontext *shared,
+				      void *loaderPrivate);
+
+};
+
+
+/**
+ * This extension provides functionality to enable various EGLImage
+ * extensions.
+ */
+#define __DRI_IMAGE "DRI_IMAGE"
+#define __DRI_IMAGE_VERSION 1
+
+/**
+ * These formats correspond to the similarly named MESA_FORMAT_*
+ * tokens, except in the native endian of the CPU.  For example, on
+ * little endian __DRI_IMAGE_FORMAT_XRGB8888 corresponds to
+ * MESA_FORMAT_XRGB8888, but MESA_FORMAT_XRGB8888_REV on big endian.
+ */
+#define __DRI_IMAGE_FORMAT_RGB565       0x1001
+#define __DRI_IMAGE_FORMAT_XRGB8888     0x1002
+#define __DRI_IMAGE_FORMAT_ARGB8888     0x1003
+
+typedef struct __DRIimageRec          __DRIimage;
+typedef struct __DRIimageExtensionRec __DRIimageExtension;
+struct __DRIimageExtensionRec {
+    __DRIextension base;
+
+    __DRIimage *(*createImageFromName)(__DRIcontext *context,
+				       int width, int height, int format,
+				       int name, int pitch,
+				       void *loaderPrivate);
+
+    __DRIimage *(*createImageFromRenderbuffer)(__DRIcontext *context,
+					       int renderbuffer,
+					       void *loaderPrivate);
+
+    void (*destroyImage)(__DRIimage *image);
+};
+
+/**
+ * This extension must be implemented by the loader and passed to the
+ * driver at screen creation time.  The EGLImage entry points in the
+ * various client APIs take opaque EGLImage handles and use this
+ * extension to map them to a __DRIimage.  At version 1, this
+ * extensions allows mapping EGLImage pointers to __DRIimage pointers,
+ * but future versions could support other EGLImage-like, opaque types
+ * with new lookup functions.
+ */
+#define __DRI_IMAGE_LOOKUP "DRI_IMAGE_LOOKUP"
+#define __DRI_IMAGE_LOOKUP_VERSION 1
+
+typedef struct __DRIimageLookupExtensionRec __DRIimageLookupExtension;
+struct __DRIimageLookupExtensionRec {
+    __DRIextension base;
+
+    __DRIimage *(*lookupEGLImage)(__DRIcontext *context, void *image,
+				  void *loaderPrivate);
 };
 
 #endif

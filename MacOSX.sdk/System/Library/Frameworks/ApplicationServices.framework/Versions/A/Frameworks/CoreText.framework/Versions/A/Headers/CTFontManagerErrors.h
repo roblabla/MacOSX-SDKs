@@ -2,13 +2,14 @@
  *  CTFontManagerErrors.h
  *  CoreText
  *
- *  Copyright (c) 2008 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2011 Apple Inc. All rights reserved.
  *
  */
 
 #ifndef __CTFONTMANAGERERRORS__
 #define __CTFONTMANAGERERRORS__
 
+#include <CoreText/CTDefines.h>
 #include <CoreFoundation/CoreFoundation.h>
 
 #if defined(__cplusplus)
@@ -20,14 +21,14 @@ extern "C" {
     @abstract   CFError domain for CTFontManager errors
     @discussion CFErrors with this domain will have error codes corresponding to one of the CTFontManagerErrors above.
 */
-extern const CFStringRef kCTFontManagerErrorDomain AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern const CFStringRef kCTFontManagerErrorDomain CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_3_2);
 
 /*!
     @constant   kCTFontManagerErrorFontURLsKey
     @abstract   User info key to be used with CFError references returned from registration functions.
     @discussion The value associated with this key in the user info dictionary of a CFError is a CFArray of font URLs that failed with given error.
 */
-extern const CFStringRef kCTFontManagerErrorFontURLsKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern const CFStringRef kCTFontManagerErrorFontURLsKey CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_3_2);
 
 /*!
     @enum

@@ -229,6 +229,37 @@ extern const NSString* IMKTextOrientationName;
 */
 -(BOOL)supportsProperty:(TSMDocumentPropertyTag)property;
 
+/*!
+    @method     
+    @abstract   Return a unique ID for the client.
+    @discussion This method is a wrapper around the NSProcessInfo method globallyUniqueString.
+*/
+-(NSString*)uniqueClientIdentifierString AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+/*!
+    @method     
+    @abstract   Called to request a string along.
+    @discussion Input methods call this method to obtain a range of text from the client document The range should be document relative.
+                                
+               If the client does not support TSMDocumentAccess the returned string will be created from data obtained by sending the client application a kEventTextInputGetSelectedText Carbon event.
+			   Note that clients that do not support TSMDocumentAccess are extremely rare.  Certainly the text system for Cocoa does support this functionality.
+
+				The returned NSString is an autoreleased object.  Do not release this object unless you retain it first.
+				
+				Note it is possible that the returned string will be longer or shorter than the specified range.  This can be caused when there surrogate unicodes in a document, and the range's location or length splits a surrogate pair.
+				The parameter actualRange will contain the real range of the string in this case.
+*/
+- (NSString*)stringFromRange:(NSRange)range actualRange:(NSRangePointer)actualRange AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+
+/* 
+	@method     
+    @abstract   Returns a rectangle for a range of text.
+    @discussion Returns the first logical rectangular area for aRange. The return value is in the global  coordinate. The size value can be negative if the text flows to the left. If non-NULL, actuallRange contains the character range corresponding to the returned area.
+*/
+- (NSRect)firstRectForCharacterRange:(NSRange)aRange actualRange:(NSRangePointer)actualRange AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+
 
 @end
 

@@ -25,20 +25,39 @@
 #ifndef _CACHE_H_
 #define _CACHE_H_
 
+#include <TargetConditionals.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include <sys/cdefs.h> 
 
-#ifndef PUBLIC_API
+#if TARGET_OS_WIN32
+
+#ifndef CACHE_PUBLIC_API
+#define CACHE_PUBLIC_API __declspec( dllimport )
+#endif /* CACHE_PUBLIC_API */
+
+#else
+
+#include <sys/cdefs.h> 
+#ifndef CACHE_PUBLIC_API
 #ifdef __GNUC__
 /*! @parseOnly */
-#define PUBLIC_API     __attribute__((__visibility__("default")))
+#define CACHE_PUBLIC_API __attribute__((__visibility__("default")))
 #else
 /*! @parseOnly */
-#define PUBLIC_API
+#error __GNUC__ not defined
+#define CACHE_PUBLIC_API
 #endif /* __GNUC__ */
-#endif /* PUBLIC_API */
+#endif /* CACHE_PUBLIC_API */
+
+#endif /* ! TARGET_OS_WIN32 */
+
+#ifndef __BEGIN_DECLS
+#define __BEGIN_DECLS extern "C" {
+#endif
+#ifndef __END_DECLS 
+#define __END_DECLS }
+#endif
 
 __BEGIN_DECLS
 
@@ -98,7 +117,7 @@ typedef size_t cache_cost_t;
  * 
  *@result Returns 0 for success, non-zero for failure.
  */
-PUBLIC_API int cache_create(const char *name, cache_attributes_t *attrs, cache_t **cache_out);
+CACHE_PUBLIC_API int cache_create(const char *name, cache_attributes_t *attrs, cache_t **cache_out);
 
 /*!
  * @function cache_set_and_retain
@@ -134,7 +153,7 @@ PUBLIC_API int cache_create(const char *name, cache_attributes_t *attrs, cache_t
  * memory pressure to select which cache values to evict.  Zero is a 
  * valid cost. 
  */
-PUBLIC_API int cache_set_and_retain(cache_t *cache, void *key, void *value, cache_cost_t cost);
+CACHE_PUBLIC_API int cache_set_and_retain(cache_t *cache, void *key, void *value, cache_cost_t cost);
 
 /*!
  * @function cache_get_and_retain
@@ -157,7 +176,7 @@ PUBLIC_API int cache_set_and_retain(cache_t *cache, void *key, void *value, cach
  * Fetches value for key, retains value, and stores value in value_out.
  * Caller should release value using cache_release_value(). 
  */
-PUBLIC_API int cache_get_and_retain(cache_t *cache, void *key, void **value_out);
+CACHE_PUBLIC_API int cache_get_and_retain(cache_t *cache, void *key, void **value_out);
 
 /*!
  * @function cache_release_value
@@ -177,7 +196,7 @@ PUBLIC_API int cache_get_and_retain(cache_t *cache, void *key, void **value_out)
  * Releases a previously retained cache value. When the reference count 
  * reaches zero the cache may make the value purgeable or destroy it. 
  */
-PUBLIC_API int cache_release_value(cache_t *cache, void *value);
+CACHE_PUBLIC_API int cache_release_value(cache_t *cache, void *value);
 
 /*!
  * @function cache_remove
@@ -198,7 +217,7 @@ PUBLIC_API int cache_release_value(cache_t *cache, void *value);
  * will fail.  Invokes the key release callback immediately.  Invokes the 
  * value release callback once value's retain count is zero. 
  */
-PUBLIC_API int cache_remove(cache_t *cache, void *key);
+CACHE_PUBLIC_API int cache_remove(cache_t *cache, void *key);
 
 /*!
  *@function cache_remove_all
@@ -211,7 +230,7 @@ PUBLIC_API int cache_remove(cache_t *cache, void *key);
  *
  * @result Returns 0 for success, non-zero for failure.
  */
-PUBLIC_API int cache_remove_all(cache_t *cache);
+CACHE_PUBLIC_API int cache_remove_all(cache_t *cache);
 
 /*! 
  * @function cache_destroy
@@ -230,7 +249,7 @@ PUBLIC_API int cache_remove_all(cache_t *cache);
  * the cache object is freed.  If retained cache values exist then 
  * returns EAGAIN. 
  */
-PUBLIC_API int cache_destroy(cache_t *cache);
+CACHE_PUBLIC_API int cache_destroy(cache_t *cache);
 
 /*!
  * @group Cache Callbacks
@@ -395,7 +414,7 @@ typedef void (*cache_value_make_purgeable_cb_t)(void *value, void *user_data);
  * @field version Attributes version number used for binary compatibility.
  * @field user_data Passed to all callbacks.  May be NULL.
  */
-PUBLIC_API struct cache_attributes_s {
+CACHE_PUBLIC_API struct cache_attributes_s {
     uint32_t version;
     cache_key_hash_cb_t key_hash_cb;                               
     cache_key_is_equal_cb_t key_is_equal_cb;                        
@@ -418,3 +437,4 @@ PUBLIC_API struct cache_attributes_s {
 __END_DECLS
 
 #endif /* _CACHE_H_ */
+

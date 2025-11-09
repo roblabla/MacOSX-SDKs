@@ -1,7 +1,7 @@
 /*
         NSShadow.m
         Application Kit
-	Copyright (c) 2002-2009, Apple Inc.
+	Copyright (c) 2002-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -12,7 +12,6 @@
 
 @class NSColor;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 @interface NSShadow : NSObject <NSCopying, NSCoding> {
     /*All instance variables are private*/
@@ -39,4 +38,3 @@
 
 @end
 
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */

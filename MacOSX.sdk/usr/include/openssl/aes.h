@@ -52,6 +52,8 @@
 #ifndef HEADER_AES_H
 #define HEADER_AES_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/opensslconf.h>
 
 #ifdef OPENSSL_NO_AES
@@ -85,61 +87,61 @@ struct aes_key_st {
 };
 typedef struct aes_key_st AES_KEY;
 
-const char *AES_options(void);
+const char *AES_options(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int AES_set_encrypt_key(const unsigned char *userKey, const int bits,
-	AES_KEY *key);
+	AES_KEY *key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int AES_set_decrypt_key(const unsigned char *userKey, const int bits,
-	AES_KEY *key);
+	AES_KEY *key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 void AES_encrypt(const unsigned char *in, unsigned char *out,
-	const AES_KEY *key);
+	const AES_KEY *key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void AES_decrypt(const unsigned char *in, unsigned char *out,
-	const AES_KEY *key);
+	const AES_KEY *key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 void AES_ecb_encrypt(const unsigned char *in, unsigned char *out,
-	const AES_KEY *key, const int enc);
+	const AES_KEY *key, const int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void AES_cbc_encrypt(const unsigned char *in, unsigned char *out,
 	const unsigned long length, const AES_KEY *key,
-	unsigned char *ivec, const int enc);
+	unsigned char *ivec, const int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void AES_cfb128_encrypt(const unsigned char *in, unsigned char *out,
 	const unsigned long length, const AES_KEY *key,
-	unsigned char *ivec, int *num, const int enc);
+	unsigned char *ivec, int *num, const int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void AES_cfb1_encrypt(const unsigned char *in, unsigned char *out,
 	const unsigned long length, const AES_KEY *key,
-	unsigned char *ivec, int *num, const int enc);
+	unsigned char *ivec, int *num, const int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void AES_cfb8_encrypt(const unsigned char *in, unsigned char *out,
 	const unsigned long length, const AES_KEY *key,
-	unsigned char *ivec, int *num, const int enc);
+	unsigned char *ivec, int *num, const int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void AES_cfbr_encrypt_block(const unsigned char *in,unsigned char *out,
 			    const int nbits,const AES_KEY *key,
-			    unsigned char *ivec,const int enc);
+			    unsigned char *ivec,const int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void AES_ofb128_encrypt(const unsigned char *in, unsigned char *out,
 	const unsigned long length, const AES_KEY *key,
-	unsigned char *ivec, int *num);
+	unsigned char *ivec, int *num) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void AES_ctr128_encrypt(const unsigned char *in, unsigned char *out,
 	const unsigned long length, const AES_KEY *key,
 	unsigned char ivec[AES_BLOCK_SIZE],
 	unsigned char ecount_buf[AES_BLOCK_SIZE],
-	unsigned int *num);
+	unsigned int *num) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* For IGE, see also http://www.links.org/files/openssl-ige.pdf */
 /* NB: the IV is _two_ blocks long */
 void AES_ige_encrypt(const unsigned char *in, unsigned char *out,
 		     const unsigned long length, const AES_KEY *key,
-		     unsigned char *ivec, const int enc);
+		     unsigned char *ivec, const int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* NB: the IV is _four_ blocks long */
 void AES_bi_ige_encrypt(const unsigned char *in, unsigned char *out,
 			const unsigned long length, const AES_KEY *key,
 			const AES_KEY *key2, const unsigned char *ivec,
-			const int enc);
+			const int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int AES_wrap_key(AES_KEY *key, const unsigned char *iv,
 		unsigned char *out,
-		const unsigned char *in, unsigned int inlen);
+		const unsigned char *in, unsigned int inlen) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int AES_unwrap_key(AES_KEY *key, const unsigned char *iv,
 		unsigned char *out,
-		const unsigned char *in, unsigned int inlen);
+		const unsigned char *in, unsigned int inlen) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifdef  __cplusplus
 }

@@ -1,7 +1,6 @@
 /*
 	NSAppleEventManager.h
-	Copyright (c) 1997-2009, Apple Inc.
-	All rights reserved.
+	Copyright (c) 1997-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,11 +8,7 @@
 
 @class NSAppleEventDescriptor;
 
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 typedef const struct __NSAppleEventManagerSuspension* NSAppleEventManagerSuspensionID;
-
-#endif
 
 extern const double NSAppleEventTimeOutDefault;
 extern const double NSAppleEventTimeOutNone;
@@ -39,8 +34,6 @@ extern NSString *NSAppleEventManagerWillProcessFirstEventNotification;
 // This method is primarily meant for Cocoa's internal use.  It does not send events to other applications!
 - (OSErr)dispatchRawAppleEvent:(const AppleEvent *)theAppleEvent withRawReply:(AppleEvent *)theReply handlerRefCon:(SRefCon)handlerRefCon;
 
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 // If an Apple event is being handled on the current thread (i.e., a handler that was registered with -setEventHandler:andSelector:forEventClass:andEventID: is being messaged at this instant or -setCurrentAppleEventAndReplyEventWithSuspensionID: has just been invoked), return the descriptor for the event.  Return nil otherwise.  The effects of mutating or retaining the returned descriptor are undefined, though it may be copied.
 - (NSAppleEventDescriptor *)currentAppleEvent;
 
@@ -61,7 +54,5 @@ extern NSString *NSAppleEventManagerWillProcessFirstEventNotification;
 
 // Given a nonzero suspension ID returned by an invocation of -suspendCurrentAppleEvent, signal that handling of the suspended event may now continue.  This may result in the immediate sending of the reply event to the sender of the suspended event, if the sender has requested a reply.  If the suspension ID has been used in a previous invocation of -setCurrentAppleEventAndReplyEventWithSuspensionID: the effects of that invocation will be completely undone.  Subsequent invocations of other NSAppleEventManager methods using the same suspension ID are invalid.  This method may be invoked in any thread, not just the one in which the corresponding invocation of -suspendCurrentAppleEvent occurred.
 - (void)resumeWithSuspensionID:(NSAppleEventManagerSuspensionID)suspensionID;
-
-#endif
 
 @end

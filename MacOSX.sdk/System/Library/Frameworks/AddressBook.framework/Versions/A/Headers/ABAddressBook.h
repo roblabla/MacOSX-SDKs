@@ -8,6 +8,17 @@
 #import <AddressBook/ABTypedefs.h>
 #import <AddressBook/ABGlobals.h>
 
+enum {
+	ABAddRecordsError = 1001,
+	ABRemoveRecordsError = 1002,
+	ABPropertyValueValidationError = 1012,
+	ABPropertyUnsupportedBySourceError = 1013,
+	ABPropertyReadOnlyError = 1014
+};
+
+extern NSString *ABAddressBookErrorDomain AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+extern NSString *ABMultiValueIdentifiersErrorKey AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
 @class ABRecord;
 @class ABPerson;
 @class ABGroup;
@@ -36,7 +47,7 @@
 @interface ABAddressBook : NSObject
 {
 @private
-    id                  *_reserved8;
+    id                   _reserved8;
     
     void                *_reserved2;
     void                *_reserved3;
@@ -62,7 +73,9 @@
         unsigned int     restoreFromMetaData:1;
         unsigned int     prefsNeedSync:1;
         unsigned int     waitingForReset:1;
-        unsigned int     _reserved:23;
+        unsigned int     enforcesConstraints:1;
+        unsigned int     tracksAllSources:1;
+        unsigned int     _reserved:21;
     } _flags;
 }
 
@@ -70,12 +83,11 @@
     // Returns the unique shared instance of ABAddressBook
     // Returns nil if the address book database cannot be initialized 
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
-+ (ABAddressBook *)addressBook;
++ (ABAddressBook *)addressBook AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
     // Returns a new instance of ABAddressBook
-
-#endif
+    // Instances of ABAddressBook and its records should only be used
+    // on the thread where they were created.
+    // Returns nil if the address book database cannot be initialized.
 
 - (NSArray *)recordsMatchingSearchElement:(ABSearchElement *)search;
     // Returns an array of records matching the given search element
@@ -86,13 +98,9 @@
     // Saves changes made since the last save
     // Return YES if successful (or there was no change)
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
-- (BOOL)saveAndReturnError:(NSError **)error;
+- (BOOL)saveAndReturnError:(NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
     // Saves changes made since the last save
     // Return YES if successful (or there was no change)
-
-#endif
 
 - (BOOL)hasUnsavedChanges;
     // Returns YES if there are unsaved changes
@@ -111,10 +119,22 @@
     // Raises if uniqueId is nil
     // Returns nil if the record could not be found
 
-- (BOOL)addRecord:(ABRecord *)record;
-    // Adds a record (ABPerson or ABGroup) to the AddressBook database
+- (BOOL)addRecord:(ABRecord *)record error:(NSError**)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+    // Adds a record (ABPerson or ABGroup) to the AddressBook database and stores it in source
     // Raises if record is nil
     // Returns YES if the addition was successful
+    // When returning NO, includes additional information in error when its given value is not nil
+    // It is more efficient to use -[ABRecord initWithAddressBook:source:] where possible.
+
+- (BOOL)addRecord:(ABRecord *)record;
+    // Adds a record (ABPerson or ABGroup) to the AddressBook database.
+    // It is more efficient to use -[ABRecord initWithAddressBook:] where possible.
+
+- (BOOL)removeRecord:(ABRecord *)record error:(NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+    //  Removes a record (ABPerson or ABGroup) from the AddressBook database
+    //  Raises if record is nil
+    //  Returns YES if the removal was successful
+    //  When returning NO, includes additional information in error when its given value is not nil
 
 - (BOOL)removeRecord:(ABRecord *)record;
     // Removes a record (ABPerson or ABGroup) from the AddressBook database
@@ -123,30 +143,28 @@
 
 - (NSArray *)people;
     // Returns an array of all the people in the AddressBook database
-    // Returns an empty array in case the DB doesn't contain any people
+    // Returns an empty array if the DB doesn't contain any people
 
 - (NSArray *)groups;
     // Returns an array of all the groups in the AddressBook database
-    // Returns an empty array in case the DB doesn't contain any groups
+    // Returns an empty array if the DB doesn't contain any groups
 
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
-- (NSString *)recordClassFromUniqueId:(NSString *)uniqueId;
+- (NSString *)recordClassFromUniqueId:(NSString *)uniqueId AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
     // Given a record uniqueId returns the record class name
 
-- (NSAttributedString *)formattedAddressFromDictionary:(NSDictionary *)address;
+- (NSAttributedString *)formattedAddressFromDictionary:(NSDictionary *)address AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
     // Returns an attributed string containing the formatted address.
     // The string's attributes match address dictionary keys (kABAddressStreetKey for example).
     // Each attribute value contains the localized description of the key. (For example, the value
     // of a Canadian kABAddressZIPKey field would be Postal Code)
 
-- (NSString *)defaultCountryCode;
+- (NSString *)defaultCountryCode AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
     // Returns the default country code for records without specified codes.
 
-- (NSInteger)defaultNameOrdering;
+- (NSInteger)defaultNameOrdering AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
     // Returns the default name ordering defined by the user in the Address Book preferences.
     // Possible values: kABFirstNameFirst or kABLastNameFirst
 
-#endif
 
 @end
 

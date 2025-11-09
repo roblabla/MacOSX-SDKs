@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -107,16 +107,19 @@ extern wait_result_t	assert_wait_deadline(
 extern kern_return_t	thread_wakeup_prim(
 							event_t				event,
 							boolean_t			one_thread,
-							wait_result_t		result);
+							wait_result_t			result);
+
 
 #define thread_wakeup(x)					\
-			thread_wakeup_prim((x), FALSE, THREAD_AWAKENED)
+	                thread_wakeup_prim((x), FALSE, THREAD_AWAKENED)
 #define thread_wakeup_with_result(x, z)		\
-			thread_wakeup_prim((x), FALSE, (z))
+	                thread_wakeup_prim((x), FALSE, (z))
 #define thread_wakeup_one(x)				\
-			thread_wakeup_prim((x), TRUE, THREAD_AWAKENED)
+	                thread_wakeup_prim((x), TRUE, THREAD_AWAKENED)
+
 
 extern boolean_t		preemption_enabled(void);
+
 
 
 __END_DECLS

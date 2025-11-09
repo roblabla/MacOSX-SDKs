@@ -62,6 +62,8 @@
 
 #include <_types.h>
 #include <sys/time.h>
+#include <sys/cdefs.h>
+#include <Availability.h>
 
 #ifndef _PID_T
 #define _PID_T
@@ -144,14 +146,14 @@ __BEGIN_DECLS
 void	endutxent(void);
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-void	endutxent_wtmp(void);
+void	endutxent_wtmp(void) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 struct lastlogx *
-	getlastlogx(uid_t, struct lastlogx *);
+	getlastlogx(uid_t, struct lastlogx *) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 struct lastlogx *
-	getlastlogxbyname(const char*, struct lastlogx *);
+	getlastlogxbyname(const char*, struct lastlogx *)__OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 struct utmp;	/* forward reference */
-void	getutmp(const struct utmpx *, struct utmp *);
-void	getutmpx(const struct utmp *, struct utmpx *);
+void	getutmp(const struct utmpx *, struct utmp *) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+void	getutmpx(const struct utmp *, struct utmpx *) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 #endif /* !_POSIX_C_SOURCE || _DARWIN_C_SOURCE */
 
 struct utmpx *
@@ -159,7 +161,7 @@ struct utmpx *
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 struct utmpx *
-	getutxent_wtmp(void);
+	getutxent_wtmp(void) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 #endif /* !_POSIX_C_SOURCE || _DARWIN_C_SOURCE */
 
 struct utmpx *
@@ -171,9 +173,9 @@ struct utmpx *
 void	setutxent(void);
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-void	setutxent_wtmp(int);
-int	utmpxname(const char *);
-int	wtmpxname(const char *);
+void	setutxent_wtmp(int) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+int	utmpxname(const char *) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
+int	wtmpxname(const char *) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 #endif /* !_POSIX_C_SOURCE || _DARWIN_C_SOURCE */
 
 __END_DECLS

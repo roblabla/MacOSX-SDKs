@@ -14,7 +14,7 @@
  * @addtogroup agent
  * @addtogroup library *
  *
- * $Id: data_list.h 9583 2004-02-16 20:46:24Z hardaker $
+ * $Id: data_list.h 18212 2010-02-27 13:11:15Z bvassche $
  *
  * External definitions for functions and variables in netsnmp_data_list.c.
  *
@@ -56,7 +56,8 @@ extern          "C" {
        Netsnmp_Free_List_Data *data_list_free_ptr;
     } netsnmp_data_list_saveinfo;
 
-    NETSNMP_INLINE netsnmp_data_list * 
+    NETSNMP_IMPORT
+    netsnmp_data_list *
       netsnmp_create_data_list(const char *, void *, Netsnmp_Free_List_Data* );
     void            netsnmp_data_list_add_node(netsnmp_data_list **head,
                                                netsnmp_data_list *node);
@@ -64,17 +65,23 @@ extern          "C" {
       netsnmp_data_list_add_data(netsnmp_data_list **head,
                                  const char *name, void *data,
                                  Netsnmp_Free_List_Data * beer);
+    NETSNMP_IMPORT
     void           *netsnmp_get_list_data(netsnmp_data_list *head,
                                           const char *node);
+    NETSNMP_IMPORT
     void            netsnmp_free_list_data(netsnmp_data_list *head);    /* single */
+    NETSNMP_IMPORT
     void            netsnmp_free_all_list_data(netsnmp_data_list *head);        /* multiple */
+    NETSNMP_IMPORT
     int             netsnmp_remove_list_node(netsnmp_data_list **realhead,
                                              const char *name);
-    NETSNMP_INLINE netsnmp_data_list *
+    NETSNMP_IMPORT
+    netsnmp_data_list *
     netsnmp_get_list_node(netsnmp_data_list *head,
                           const char *name);
 
     /** depreciated: use netsnmp_data_list_add_node() */
+    NETSNMP_IMPORT
     void            netsnmp_add_list_data(netsnmp_data_list **head,
                                           netsnmp_data_list *node);
 

@@ -1,17 +1,14 @@
 /*
-     File:       LaunchServices/UTCoreTypes.h
+     File:       UTCoreTypes.h
  
      Contains:   String constants for core uniform type identifiers
  
-     Version:    LaunchServices-362.3~1
- 
-     Copyright:  © 2004-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  2004-2009 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
 #ifndef __UTCORETYPES__
 #define __UTCORETYPES__
@@ -21,7 +18,7 @@
 #endif
 
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -58,7 +55,7 @@
  *
  *  kUTTypeApplication
  *
- *    base type for Mac OS X applications, launchable items
+ *    base type for OS X applications, launchable items
  *
  *    UTI: com.apple.application
  *
@@ -90,78 +87,16 @@
  *
  *    UTI: public.disk-image
  */
-/*
- *  kUTTypeItem
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeItem                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeContent
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeContent                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeCompositeContent
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeCompositeContent                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeApplication
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeApplication                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeMessage
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeMessage                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeContact
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeContact                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeArchive
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeArchive                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeDiskImage
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeDiskImage                            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kUTTypeItem                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeContent                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeCompositeContent                     __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeApplication                          __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeMessage                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeContact                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeArchive                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeDiskImage                            __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+
+
 /* ================================================================================ *
  *  Concrete base types                                                             *
  * ================================================================================ */
@@ -186,7 +121,7 @@ extern const CFStringRef kUTTypeDiskImage                            AVAILABLE_M
  *
  *  kUTTypeResolvable
  *
- *    anything the Alias Manager can resolve
+ *    symlink and alias file types conform to this UTI
  *
  *    UTI: com.apple.resolvable
  *
@@ -240,87 +175,17 @@ extern const CFStringRef kUTTypeDiskImage                            AVAILABLE_M
  *    UTI: public.file-url
  *    conforms to: public.url
  */
-/*
- *  kUTTypeData
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeData                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeDirectory
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeDirectory                            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeResolvable
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeResolvable                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeSymLink
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeSymLink                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeMountPoint
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeMountPoint                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeAliasFile
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeAliasFile                            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeAliasRecord
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeAliasRecord                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeURL
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeURL                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeFileURL
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeFileURL                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kUTTypeData                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeDirectory                            __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeResolvable                           __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeSymLink                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeMountPoint                           __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeAliasFile                            __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeAliasRecord                          __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeURL                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeFileURL                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+
+
 /* ================================================================================ *
  *  Text types                                                                      *
  * ================================================================================ */
@@ -458,150 +323,23 @@ extern const CFStringRef kUTTypeFileURL                              AVAILABLE_M
  *    UTI: com.sun.java-source
  *    conforms to: public.plain-text
  */
-/*
- *  kUTTypeText
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeText                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypePlainText
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypePlainText                            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeUTF8PlainText
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeUTF8PlainText                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeUTF16ExternalPlainText
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeUTF16ExternalPlainText               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeUTF16PlainText
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeUTF16PlainText                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeRTF
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeRTF                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeHTML
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeHTML                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeXML
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeXML                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeSourceCode
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeSourceCode                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeCSource
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeCSource                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeObjectiveCSource
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeObjectiveCSource                     AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeCPlusPlusSource
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeCPlusPlusSource                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeObjectiveCPlusPlusSource
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeObjectiveCPlusPlusSource             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeCHeader
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeCHeader                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeCPlusPlusHeader
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeCPlusPlusHeader                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeJavaSource
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeJavaSource                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kUTTypeText                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypePlainText                            __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeUTF8PlainText                        __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeUTF16ExternalPlainText               __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeUTF16PlainText                       __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeRTF                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeHTML                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeXML                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeSourceCode                           __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeCSource                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeObjectiveCSource                     __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeCPlusPlusSource                      __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeObjectiveCPlusPlusSource             __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeCHeader                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeCPlusPlusHeader                      __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeJavaSource                           __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+
 
 /* ================================================================================ *
  *  Composite content types                                                         *
@@ -648,51 +386,12 @@ extern const CFStringRef kUTTypeJavaSource                           AVAILABLE_M
  *    UTI: com.apple.webarchive
  *    conforms to: public.data, public.composite-content
  */
-/*
- *  kUTTypePDF
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypePDF                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeRTFD
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeRTFD                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeFlatRTFD
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeFlatRTFD                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeTXNTextAndMultimediaData
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeTXNTextAndMultimediaData             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeWebArchive
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeWebArchive                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kUTTypePDF                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeRTFD                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeFlatRTFD                             __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeTXNTextAndMultimediaData             __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeWebArchive                           __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+
 
 /* ================================================================================ *
  *  Image content types                                                             *
@@ -785,105 +484,18 @@ extern const CFStringRef kUTTypeWebArchive                           AVAILABLE_M
  *    UTI: com.microsoft.ico
  *    conforms to: public.image
  */
-/*
- *  kUTTypeImage
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeImage                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeJPEG
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeJPEG                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeJPEG2000
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeJPEG2000                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeTIFF
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeTIFF                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypePICT
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypePICT                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeGIF
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeGIF                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypePNG
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypePNG                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeQuickTimeImage
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeQuickTimeImage                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeAppleICNS
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeAppleICNS                            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeBMP
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeBMP                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeICO
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeICO                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kUTTypeImage                                __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeJPEG                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeJPEG2000                             __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeTIFF                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypePICT                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeGIF                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypePNG                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeQuickTimeImage                       __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeAppleICNS                            __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeBMP                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeICO                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+
 
 /* ================================================================================ *
  *  Audiovisual content types                                                       *
@@ -971,96 +583,18 @@ extern const CFStringRef kUTTypeICO                                  AVAILABLE_M
  *    UTI: com.apple.protected-mpeg-4-audio
  *    conforms to: public.audio
  */
-/*
- *  kUTTypeAudiovisualContent
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeAudiovisualContent                   AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeMovie
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeMovie                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeVideo
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeVideo                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeAudio
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeAudio                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeQuickTimeMovie
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeQuickTimeMovie                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeMPEG
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeMPEG                                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeMPEG4
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeMPEG4                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeMP3
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeMP3                                  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeMPEG4Audio
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeMPEG4Audio                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeAppleProtectedMPEG4Audio
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeAppleProtectedMPEG4Audio             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kUTTypeAudiovisualContent                   __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeMovie                                __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeVideo                                __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeAudio                                __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeQuickTimeMovie                       __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeMPEG                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeMPEG4                                __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeMP3                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeMPEG4Audio                           __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeAppleProtectedMPEG4Audio             __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+
+
 /* ================================================================================ *
  *  Directory types                                                                 *
  * ================================================================================ */
@@ -1104,51 +638,13 @@ extern const CFStringRef kUTTypeAppleProtectedMPEG4Audio             AVAILABLE_M
  *    UTI: com.apple.framework
  *    conforms to: com.apple.bundle
  */
-/*
- *  kUTTypeFolder
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeFolder                               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeVolume
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeVolume                               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypePackage
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypePackage                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeBundle
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeBundle                               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeFramework
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeFramework                            AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kUTTypeFolder                               __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeVolume                               __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypePackage                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeBundle                               __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeFramework                            __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+
+
 /* ================================================================================ *
  *  Application types                                                               *
  * ================================================================================ */
@@ -1168,24 +664,10 @@ extern const CFStringRef kUTTypeFramework                            AVAILABLE_M
  *    UTI: com.apple.application-file
  *    conforms to: com.apple.application, public.data
  */
-/*
- *  kUTTypeApplicationBundle
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeApplicationBundle                    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-/*
- *  kUTTypeApplicationFile
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeApplicationFile                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kUTTypeApplicationBundle                    __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeApplicationFile                      __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+
+
 /* ================================================================================ *
  *  Contact types                                                                   *
  * ================================================================================ */
@@ -1197,15 +679,9 @@ extern const CFStringRef kUTTypeApplicationFile                      AVAILABLE_M
  *    UTI: public.vcard
  *    conforms to: public.data, public.contact
  */
-/*
- *  kUTTypeVCard
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeVCard                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kUTTypeVCard                                __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+
+
 /* ================================================================================ *
  *  Misc. types                                                                     *
  * ================================================================================ */
@@ -1217,16 +693,7 @@ extern const CFStringRef kUTTypeVCard                                AVAILABLE_M
  *    UTI: com.apple.ink.inktext
  *    conforms to: public.data
  */
-/*
- *  kUTTypeInkText
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern const CFStringRef kUTTypeInkText                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
+extern const CFStringRef kUTTypeInkText                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
 
 
 #endif /* __UTCORETYPES__ */

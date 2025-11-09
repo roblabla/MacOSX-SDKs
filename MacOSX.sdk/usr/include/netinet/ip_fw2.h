@@ -55,6 +55,7 @@
 
 #ifndef _IPFW2_H
 #define _IPFW2_H
+#ifdef __APPLE_API_OBSOLETE
 
 /*
  * Define IP Firewall event subclass, and associated events.
@@ -459,4 +460,5 @@ struct _ipfw_dyn_rule {
  */
 
 
+#endif /* __APPLE_API_OBSOLETE */
 #endif /* _IPFW2_H */

@@ -1,5 +1,3 @@
-/* $Xorg: TranslateI.h,v 1.4 2001/02/09 02:03:59 xorgcvs Exp $ */
-
 /***********************************************************
 
 Copyright 1987, 1988, 1998  The Open Group
@@ -46,7 +44,6 @@ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
 SOFTWARE.
 
 ******************************************************************/
-/* $XFree86: xc/lib/Xt/TranslateI.h,v 1.3 2001/12/14 19:56:32 dawes Exp $ */
 
 /* 
  * TranslateI.h - Header file private to translation management
@@ -342,6 +339,8 @@ typedef struct _TMGlobalRec{
 #endif /* TRACE_TM */
 }TMGlobalRec;
 
+_XFUNCPROTOBEGIN
+
 extern TMGlobalRec _XtGlobalTM;
 
 #define TM_MOD_SEGMENT_SIZE 	16
@@ -604,3 +603,4 @@ extern void _XtUnmergeTranslations(
 /* TMKey.c */
 extern void _XtAllocTMContext(XtPerDisplay pd);
 
+_XFUNCPROTOEND

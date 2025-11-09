@@ -40,16 +40,10 @@ enum CAEdgeAntialiasingMask
 @private
   struct _CALayerIvars {
     int32_t refcount;
-    uint32_t flags;
-    uintptr_t parent;
-    CALayerArray *sublayers;
-    CALayer *mask;
-    struct _CALayerState *state;
-    struct _CALayerState *previous_state;
-    struct _CALayerAnimation *animations;
-    uintptr_t slots[3];
-#if defined (__LP64__) && __LP64__
-    uint32_t reserved;
+    uint32_t magic;
+    void *layer;
+#if TARGET_OS_MAC && !TARGET_RT_64_BIT
+    void *unused1[8];
 #endif
   } _attr;
 }
@@ -65,7 +59,7 @@ enum CAEdgeAntialiasingMask
 /* This initializer is used by CoreAnimation to create shadow copies of
  * layers, e.g. for use as presentation layers. Subclasses can override
  * this method to copy their instance variables into the presentation
- * layer (subclasses should call the superclass afterwards.). Calling this
+ * layer (subclasses should call the superclass afterwards). Calling this
  * method in any other situation will result in undefined behavior. */
 
 - (id)initWithLayer:(id)layer;
@@ -124,7 +118,10 @@ enum CAEdgeAntialiasingMask
 /* Method for subclasses to override. Returning true for a given
  * property causes the layer's contents to be redrawn when the property
  * is changed (including when changed by an animation attached to the
- * layer). The default implementation returns false. */
+ * layer). The default implementation returns NO. Subclasses should
+ * call super for properties defined by the superclass. (For example,
+ * do not try to return YES for properties implemented by CALayer,
+ * doing will have undefined results.) */
 
 + (BOOL)needsDisplayForKey:(NSString *)key;
 
@@ -137,7 +134,7 @@ enum CAEdgeAntialiasingMask
 
 /** Geometry and layer hierarchy properties. **/
 
-/* The bounds of the layer. Defaults to the null rectangle. Animatable. */
+/* The bounds of the layer. Defaults to CGRectZero. Animatable. */
 
 @property CGRect bounds;
 
@@ -195,8 +192,7 @@ enum CAEdgeAntialiasingMask
  * flipped vertically. Defaults to false. Note that even when geometry
  * is flipped, image orientation remains the same (i.e. a CGImageRef
  * stored in the `contents' property will display the same with both
- * flipped=false and flipped=true, assuming no transform on the layer.)
- * Added in Mac OS X 10.6. */
+ * flipped=false and flipped=true, assuming no transform on the layer). */
 
 @property(getter=isGeometryFlipped) BOOL geometryFlipped;
 
@@ -204,11 +200,11 @@ enum CAEdgeAntialiasingMask
  * will be implicitly flipped when rendered in relation to the local
  * coordinate space (e.g. if there are an odd number of layers with
  * flippedGeometry=YES from the receiver up to and including the
- * implicit container of the root layer.) Subclasses should not attempt
+ * implicit container of the root layer). Subclasses should not attempt
  * to redefine this method. When this method returns true the
  * CGContextRef object passed to -drawInContext: by the default
  * -display method will have been y- flipped (and rectangles passed to
- * -setNeedsDisplayInRect: will be similarly flipped.) */
+ * -setNeedsDisplayInRect: will be similarly flipped). */
 
 - (BOOL)contentsAreFlipped;
 
@@ -295,7 +291,7 @@ enum CAEdgeAntialiasingMask
  * Siblings are searched in top-to-bottom order. 'p' is defined to be
  * in the coordinate space of the receiver's nearest ancestor that
  * isn't a CATransformLayer (transform layers don't have a 2D
- * coordinate space in which the point could be specified.) */
+ * coordinate space in which the point could be specified). */
 
 - (CALayer *)hitTest:(CGPoint)p;
 
@@ -329,6 +325,16 @@ enum CAEdgeAntialiasingMask
 
 @property(copy) NSString *contentsGravity;
 
+/* Defines the scale factor applied to the contents of the layer. If
+ * the physical size of the contents is '(w, h)' then the logical size
+ * (i.e. for contentsGravity calculations) is defined as '(w /
+ * contentsScale, h / contentsScale)'. Applies to both images provided
+ * explicitly and content provided via -drawInContext: (i.e. if
+ * contentsScale is two -drawInContext: will draw into a buffer twice
+ * as large as the layer bounds). Defaults to one. Animatable. */
+
+@property CGFloat contentsScale;
+
 /* A rectangle in normalized image coordinates defining the scaled
  * center part of the `contents' image.
  *
@@ -359,7 +365,8 @@ enum CAEdgeAntialiasingMask
 @property(copy) NSString *minificationFilter, *magnificationFilter;
 
 /* The bias factor added when determining which levels of detail to use
- * when minifying using trilinear filtering. The default value is 0. */
+ * when minifying using trilinear filtering. The default value is 0.
+ * Animatable. */
 
 @property float minificationFilterBias;
 
@@ -474,6 +481,30 @@ enum CAEdgeAntialiasingMask
 
 @property(copy) NSArray *backgroundFilters;
 
+/* When true, the layer is rendered as a bitmap in its local coordinate
+ * space ("rasterized"), then the bitmap is composited into the
+ * destination (with the minificationFilter and magnificationFilter
+ * properties of the layer applied if the bitmap needs scaling).
+ * Rasterization occurs after the layer's filters and shadow effects
+ * are applied, but before the opacity modulation. As an implementation
+ * detail the rendering engine may attempt to cache and reuse the
+ * bitmap from one frame to the next. (Whether it does or not will have
+ * no affect on the rendered output.)
+ *
+ * When false the layer is composited directly into the destination
+ * whenever possible (however, certain features of the compositing
+ * model may force rasterization, e.g. adding filters).
+ *
+ * Defaults to NO. Animatable. */
+
+@property BOOL shouldRasterize;
+
+/* The scale at which the layer will be rasterized (when the
+ * shouldRasterize property has been set to YES) relative to the
+ * coordinate space of the layer. Defaults to one. Animatable. */
+
+@property CGFloat rasterizationScale;
+
 /** Shadow properties. **/
 
 /* The color of the shadow. Defaults to opaque black. Colors created
@@ -493,6 +524,15 @@ enum CAEdgeAntialiasingMask
 /* The blur radius used to create the shadow. Defaults to 3. Animatable. */
 
 @property CGFloat shadowRadius;
+
+/* When non-null this path defines the outline used to construct the
+ * layer's shadow instead of using the layer's composited alpha
+ * channel. The path is rendered using the non-zero winding rule.
+ * Specifying the path explicitly using this property will usually
+ * improve rendering performance, as will sharing the same path
+ * reference across multiple layers. Defaults to null. Animatable. */
+
+@property CGPathRef shadowPath;
 
 /** Layout methods. **/
 
@@ -559,7 +599,7 @@ enum CAEdgeAntialiasingMask
 /** Action methods. **/
 
 /* An "action" is an object that responds to an "event" via the
- * CAAction protocol (see below.) Events are named using standard
+ * CAAction protocol (see below). Events are named using standard
  * dot-separated key paths. Each layer defines a mapping from event key
  * paths to action objects. Events are posted by looking up the action
  * object associated with the key path and sending it the method
@@ -574,7 +614,7 @@ enum CAEdgeAntialiasingMask
  * the same name as each property is posted whenever the value of the
  * property is modified. A suitable CAAnimation object is associated by
  * default with each implicit event (CAAnimation implements the action
- * protocol.)
+ * protocol).
  *
  * The layer class also defines the following events that are not
  * linked directly to properties:
@@ -722,7 +762,7 @@ enum CAEdgeAntialiasingMask
 
 /* If defined, called by the default implementation of the -display
  * method, in which case it should implement the entire display
- * process (typically by setting the `contents' property.) */
+ * process (typically by setting the `contents' property). */
 
 - (void)displayLayer:(CALayer *)layer;
 
@@ -740,8 +780,8 @@ enum CAEdgeAntialiasingMask
  * -actionForKey: method. Should return an object implementating the
  * CAAction protocol. May return 'nil' if the delegate doesn't specify
  * a behavior for the current event. Returning the null object (i.e.
- * '[NSNull null]') explicitly forces no further search. (i.e. the
- * +defaultActionForKey: method will not be called) */
+ * '[NSNull null]') explicitly forces no further search. (I.e. the
+ * +defaultActionForKey: method will not be called.) */
 
 - (id<CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event;
 
@@ -786,8 +826,7 @@ CA_EXTERN NSString * const kCAFilterLinear
  * as source images requiring power-of-two dimensions. */
 
 CA_EXTERN NSString * const kCAFilterTrilinear
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
-
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 
 /** Layer event names. **/
 

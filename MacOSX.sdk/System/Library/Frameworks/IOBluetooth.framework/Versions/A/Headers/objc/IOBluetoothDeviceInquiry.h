@@ -40,7 +40,7 @@
 
 	__strong void *					_expansion[4];
 
-	id __weak						_delegate;
+	id								_delegate;
 
 	BluetoothServiceClassMajor		_serviceClassMajor;
 	BluetoothDeviceClassMajor		_deviceClassMajor;
@@ -61,7 +61,7 @@
 	
 }
 
-@property(assign) id __weak delegate;
+@property(assign) id delegate;
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		inquiryWithDelegate
 	@abstract	Class method to create an inquiry object.
@@ -122,6 +122,23 @@
 */
 
 - (uint8_t)inquiryLength;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@method		setSearchType
+	@abstract   Set the devices that are found. 
+	@param		searchType		Bluetooth versions the search will discover.
+	@discussion A default of kIOBluetoothDeviceSearchClassic is used, unless a different value is specified using this method.
+*/
+
+- (void)setSearchType:(IOBluetoothDeviceSearchTypes)searchType;
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@method		searchType
+	@abstract   Returns the search type that will be performed.
+	@result		The search type that will be performed.
+*/
+
+- (IOBluetoothDeviceSearchTypes)searchType;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method		setUpdateNewDeviceNames
@@ -186,8 +203,8 @@
 					deadlock your process.
 */
 
-@interface NSObject( IOBluetoothDeviceInquiryDelegate )
-
+@protocol IOBluetoothDeviceInquiryDelegate
+@optional
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@method			deviceInquiryStarted
 	@discussion 	This message will be delivered when the inquiry actually starts. Since the inquiry could be throttled, this

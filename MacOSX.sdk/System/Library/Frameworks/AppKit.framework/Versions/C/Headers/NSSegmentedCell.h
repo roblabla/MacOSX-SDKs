@@ -1,7 +1,7 @@
 /*
 	NSSegmentedCell.h
 	Application Kit
-	Copyright (c) 2003-2009, Apple Inc.
+	Copyright (c) 2003-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,7 +9,6 @@
 #import <AppKit/NSActionCell.h>
 #import <AppKit/NSSegmentedControl.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 enum {
     NSSegmentSwitchTrackingSelectOne = 0,  // only one button can be selected
@@ -36,7 +35,9 @@ typedef NSUInteger NSSegmentSwitchTracking;
         unsigned int dontShowSelectedAndPressedAppearance:1;
         unsigned int menuShouldBeUniquedAgainstMain:1;
 	unsigned int style:8;
-	unsigned int reserved:13;
+        unsigned int flatMinX:1;
+        unsigned int flatMaxX:1;
+	unsigned int reserved:11;
     } _seFlags;
     id		    _segmentTrackingInfo;
     id		    _menuUniquer;
@@ -54,9 +55,7 @@ typedef NSUInteger NSSegmentSwitchTracking;
 - (void)setSelectedSegment:(NSInteger)selectedSegment;
 - (NSInteger)selectedSegment;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (BOOL)selectSegmentWithTag:(NSInteger)tag;
-#endif
 
 /* For keyboard UI. Wraps.
 */
@@ -77,12 +76,10 @@ typedef NSUInteger NSSegmentSwitchTracking;
 - (void)setImage:(NSImage *)image forSegment:(NSInteger)segment;
 - (NSImage *)imageForSegment:(NSInteger)segment;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
-- (void)setImageScaling:(NSImageScaling)scaling forSegment:(NSInteger)segment;
-- (NSImageScaling)imageScalingForSegment:(NSInteger)segment;
+- (void)setImageScaling:(NSImageScaling)scaling forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
+- (NSImageScaling)imageScalingForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
 
-#endif
 
 - (void)setLabel:(NSString *)label forSegment:(NSInteger)segment;
 - (NSString *)labelForSegment:(NSInteger)segment;
@@ -102,11 +99,9 @@ typedef NSUInteger NSSegmentSwitchTracking;
 - (void)setTag:(NSInteger)tag forSegment:(NSInteger)segment;
 - (NSInteger)tagForSegment:(NSInteger)segment;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 /* see NSSegmentedControl.h for segment style names and values */
-- (void)setSegmentStyle:(NSSegmentStyle)segmentStyle;
-- (NSSegmentStyle)segmentStyle;
-#endif
+- (void)setSegmentStyle:(NSSegmentStyle)segmentStyle NS_AVAILABLE_MAC(10_5);
+- (NSSegmentStyle)segmentStyle NS_AVAILABLE_MAC(10_5);
 
 /* For custom content drawing. frame has been adjusted to content area
 */
@@ -114,14 +109,11 @@ typedef NSUInteger NSSegmentSwitchTracking;
 
 @end
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 @interface NSSegmentedCell (NSSegmentBackgroundStyle)
 /* Describes the surface drawn onto in -[NSCell drawSegment:inFrame:withView:]. That method draws a segment interior, not the segment bezel.  This is both an override point and a useful method to call. A segmented cell that draws a custom bezel would override this to describe that surface. A cell that has custom segment drawing might query this method to help pick an image that looks good on the cell. Calling this method gives you some independence from changes in framework art style.
 */
-- (NSBackgroundStyle)interiorBackgroundStyleForSegment:(NSInteger)segment;
+- (NSBackgroundStyle)interiorBackgroundStyleForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
 @end
 
-#endif
 
-#endif

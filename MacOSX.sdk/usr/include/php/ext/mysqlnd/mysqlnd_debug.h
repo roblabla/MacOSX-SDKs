@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 2006-2010 The PHP Group                                |
+  | Copyright (c) 2006-2011 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: mysqlnd_debug.h 305878 2010-12-01 10:16:51Z andrey $ */
+/* $Id: mysqlnd_debug.h 306939 2011-01-01 02:19:59Z felipe $ */
 
 #ifndef MYSQLND_DEBUG_H
 #define MYSQLND_DEBUG_H

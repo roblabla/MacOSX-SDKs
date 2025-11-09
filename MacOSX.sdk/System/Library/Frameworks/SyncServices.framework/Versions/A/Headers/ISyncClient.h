@@ -4,6 +4,7 @@
  * updated for 64bit
  */
 
+#import <Foundation/Foundation.h>
 #import <SyncServices/ISyncCommon.h>
 
 
@@ -17,7 +18,7 @@
    and there is a method on ISyncManager for getting the list of all registered clients. */
 
 
-typedef SInt32 ISyncStatus;
+typedef SInt32 ISyncStatus NS_DEPRECATED_MAC(10_4, 10_7);
 enum __ISyncStatus {
     ISyncStatusRunning = 1,  // currently syncing
     ISyncStatusSuccess,      // the last sync completed with no errors
@@ -26,7 +27,7 @@ enum __ISyncStatus {
     ISyncStatusCancelled,    // the user cancelled the last sync
     ISyncStatusFailed,       // the last sync failed to complete (ie. crashed)
     ISyncStatusNever         // never been synced
-};
+} NS_DEPRECATED_MAC(10_4, 10_7);
 
 
 @interface ISyncClient : NSObject
@@ -34,12 +35,12 @@ enum __ISyncStatus {
 /* Each client is identified by an id.  There are no restrictions on the content or length of an
    id, but it must be unique across all clients.  This is specified when the client is registered
    and can never be changed afterwards. */
-- (NSString *)clientIdentifier;
+- (NSString *)clientIdentifier NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* A hint as to what kind of thing this client syncs data for.  Valid types are ISyncClientTypeApplication
    (an application such as iCal or AB), ISyncClientTypeDevice (a physical device like a phone,
    iPod or Palm), ISyncClientTypeServer (.Mac) and ISyncClientTypePeer (not yet implemented). */
-- (NSString *)clientType;
+- (NSString *)clientType NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* The name of the client - in an ideal world, this will be the actual name of the device or
    application, such as "My iPod" or iCal.  If you refer to this client when dealing with
@@ -49,13 +50,13 @@ enum __ISyncStatus {
    There is no magical discovery or divination of display names; the name is specified when the
    client is first registered and may be changed later by the client (or any other user of the
    SyncServices API). */
-- (NSString *)displayName;
-- (void)setDisplayName:(NSString *)displayName;
+- (NSString *)displayName NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)setDisplayName:(NSString *)displayName NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* An image may be associated with a client.  This is used in applications like iSync to represent
    the client. */
-- (NSString *)imagePath;
-- (void)setImagePath:(NSString *)path;
+- (NSString *)imagePath NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)setImagePath:(NSString *)path NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* These are the entities which are supported by the client.  These are not necessarily the
    entities that *will* be synchronized by a client - a phone might be capable of synchronizing
@@ -88,7 +89,7 @@ enum __ISyncStatus {
    synced. In this manner, conduits can easily evolve the properties and entities they synchronize
    without having to worry about when they need to slow sync to refresh their device with
    additional properties. */
-- (NSArray /* NSString */ *)supportedEntityNames;
+- (NSArray /* NSString */ *)supportedEntityNames NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* More information taken from the device description.  These methods indicate a conduit's ability
    to accept or provide changes to records of a particular type.  Again, these do not specify a
@@ -97,8 +98,8 @@ enum __ISyncStatus {
 
    For example, the iPod conduit will probably indicate that is can accept changes to contacts and
    calendars but will never provide changes to the same. */
-- (BOOL)canPushChangesForEntityName:(NSString *)entityName;
-- (BOOL)canPullChangesForEntityName:(NSString *)entityName;
+- (BOOL)canPushChangesForEntityName:(NSString *)entityName NS_DEPRECATED_MAC(10_4, 10_7);
+- (BOOL)canPullChangesForEntityName:(NSString *)entityName NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Return information about the last sync.  -lastSyncDate specifies the start date of the last
    sync, even if that sync was a failure.  It returns nil if the device has never synced a record
@@ -110,8 +111,8 @@ enum __ISyncStatus {
    a record type, this information is erased from the engine's database.  Should the device later
    start support the record type again, these methods will act as if the device had never before
    synced it. */
-- (NSDate *)lastSyncDateForEntityName:(NSString *)entityName;
-- (ISyncStatus)lastSyncStatusForEntityName:(NSString *)entityName;
+- (NSDate *)lastSyncDateForEntityName:(NSString *)entityName NS_DEPRECATED_MAC(10_4, 10_7);
+- (ISyncStatus)lastSyncStatusForEntityName:(NSString *)entityName NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* The entities which a device (probably) *will* synchronize on the next sync.  These methods
    can be used in an advisory fashion for the client and the engine.  Say, for example, that a
@@ -122,17 +123,17 @@ enum __ISyncStatus {
    A client should probably use -enabledEntityNames as the list of entity names passed to
    ISyncSession's constructor, for example.  If an entity is not enabled, the engine will not
    allow the client to apply any changes for it; nor will the engine provide any changes for it. */
-- (NSArray /* NSString */ *)enabledEntityNames;
-- (BOOL)isEnabledForEntityName:(NSString *)entityName;
-- (void)setEnabled:(BOOL)flag forEntityNames:(NSArray /* NSString */ *)entityNames;
+- (NSArray /* NSString */ *)enabledEntityNames NS_DEPRECATED_MAC(10_4, 10_7);
+- (BOOL)isEnabledForEntityName:(NSString *)entityName NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)setEnabled:(BOOL)flag forEntityNames:(NSArray /* NSString */ *)entityNames NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Some clients might accept records and specify a format dictionary that changes some of the relationships
  * that were pulled.  In 10.6 we make the assumption that clients will not do this. If a client needs
  * to format relationships they can indicate this by invoking setFormatsRelationships:. They can also
  * indicate this by using the FormatsRelationships keyword in their client description plist.
  */
-- (BOOL)formatsRelationships AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)setFormatsRelationships: (BOOL)flag AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (BOOL)formatsRelationships NS_DEPRECATED_MAC(10_6, 10_7);
+- (void)setFormatsRelationships: (BOOL)flag NS_DEPRECATED_MAC(10_6, 10_7);
 
 /* Tell the engine the client wants to pull the Truth.  The engine will not let the client push any
    changes.  The client is expected to erase its data store at the start of the pull phase, before
@@ -140,15 +141,15 @@ enum __ISyncStatus {
 
    This option remains in effect until the client successfully passes through the pull phase of a sync
    session.  After that, the engine expects the client to synchronize normally. */
-- (BOOL)shouldReplaceClientRecordsForEntityName:(NSString *)entityName;
-- (void)setShouldReplaceClientRecords:(BOOL)flag forEntityNames:(NSArray /* NSString */ *)entityNames;
+- (BOOL)shouldReplaceClientRecordsForEntityName:(NSString *)entityName NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)setShouldReplaceClientRecords:(BOOL)flag forEntityNames:(NSArray /* NSString */ *)entityNames NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* As a convenience to the conduit author, arbitrary objects can be associated with a device.  Any
    object can be used (we have a garbage-in-garbage-out policy) as long as it is archivable (ie.
    conforms to NSCoding).  Coordinating concurrent access to this information is entirely the
    responsibility of the client. */
-- (id)objectForKey:(NSString *)key;
-- (void)setObject:(id<NSCoding>)value forKey:(NSString *)key;
+- (id)objectForKey:(NSString *)key NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)setObject:(id<NSCoding>)value forKey:(NSString *)key NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* These are the filters used to control which records the client sees.  Don't call setFilters:
    trivially: every time the filter changes, the engine must re-examine all records in the Truth
@@ -161,8 +162,8 @@ enum __ISyncStatus {
    New records must be accepted by all matching filters (ie. filters whose -supportedEntityNames
    contains the record's entity).  If any matching filter rejects the record, the record will
    not be given to the client in the pull phase. */
-- (NSArray /* id <ISyncFiltering> */ *)filters;
-- (void)setFilters:(NSArray /* id <ISyncFiltering> */ *)filters;
+- (NSArray /* id <ISyncFiltering> */ *)filters NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)setFilters:(NSArray /* id <ISyncFiltering> */ *)filters NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Specifies that the receiver wants to synchronize with clients of the specified type (application,
    device, server or peer).  For example, Address Book might register to synchronize with all client
@@ -195,16 +196,16 @@ enum __ISyncStatus {
    When a client creates a sync session, it specifies how long it is willing to wait to start syncing (the
    "before date" parameter).  The sync engine will wait at most that amount of time for a notified
    clients to join the sync.  If a notified client takes too long, the sync will proceed without it. */
-- (BOOL)shouldSynchronizeWithClientsOfType:(NSString *)clientType;
-- (void)setShouldSynchronize:(BOOL)flag withClientsOfType:(NSString *)clientType;
-- (NSString *)syncAlertToolPath;
-- (void)setSyncAlertToolPath:(NSString *)path;
-- (void)setSyncAlertHandler:(id)handler selector:(SEL)selector;
+- (BOOL)shouldSynchronizeWithClientsOfType:(NSString *)clientType NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)setShouldSynchronize:(BOOL)flag withClientsOfType:(NSString *)clientType NS_DEPRECATED_MAC(10_4, 10_7);
+- (NSString *)syncAlertToolPath NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)setSyncAlertToolPath:(NSString *)path NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)setSyncAlertHandler:(id)handler selector:(SEL)selector NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end
 
 
-SYNCSERVICES_EXPORT NSString * const ISyncClientTypeApplication;
-SYNCSERVICES_EXPORT NSString * const ISyncClientTypeDevice;
-SYNCSERVICES_EXPORT NSString * const ISyncClientTypeServer;
-SYNCSERVICES_EXPORT NSString * const ISyncClientTypePeer;
+SYNCSERVICES_EXPORT NSString * const ISyncClientTypeApplication NS_DEPRECATED_MAC(10_4, 10_7);
+SYNCSERVICES_EXPORT NSString * const ISyncClientTypeDevice NS_DEPRECATED_MAC(10_4, 10_7);
+SYNCSERVICES_EXPORT NSString * const ISyncClientTypeServer NS_DEPRECATED_MAC(10_4, 10_7);
+SYNCSERVICES_EXPORT NSString * const ISyncClientTypePeer NS_DEPRECATED_MAC(10_4, 10_7);

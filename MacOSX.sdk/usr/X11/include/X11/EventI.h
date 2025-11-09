@@ -1,6 +1,3 @@
-/* $Xorg: EventI.h,v 1.4 2001/02/09 02:03:54 xorgcvs Exp $ */
-/* $oHeader: EventI.h,v 1.3 88/08/24 09:21:11 asente Exp $ */
-
 /***********************************************************
 
 Copyright 1987, 1988, 1998  The Open Group
@@ -47,7 +44,6 @@ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
 SOFTWARE.
 
 ******************************************************************/
-/* $XFree86: xc/lib/Xt/EventI.h,v 1.3 2001/12/14 19:56:12 dawes Exp $ */
 
 /* 
  * Event.h - exported types and functions for toolkit event handler
@@ -64,6 +60,8 @@ SOFTWARE.
 typedef struct _XtGrabRec  *XtGrabList;
 
 #include "PassivGraI.h"
+
+_XFUNCPROTOBEGIN
 
 extern void _XtEventInitialize(
     void
@@ -130,5 +128,7 @@ extern void _XtFillAncestorList(Widget **listPtr, int *maxElemsPtr,
 
 /* NextEvent.c */
 extern Boolean XtAppPeekEvent_SkipTimer;
+
+_XFUNCPROTOEND
 
 #endif /* _Event_h_ */

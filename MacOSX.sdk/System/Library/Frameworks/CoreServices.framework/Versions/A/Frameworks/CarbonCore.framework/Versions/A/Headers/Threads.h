@@ -3,7 +3,7 @@
  
      Contains:   Thread Manager Interfaces.
  
-     Version:    CarbonCore-861.39~1
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -41,6 +41,17 @@ extern "C" {
 #endif
 
 #pragma pack(push, 2)
+
+
+/*********************************************************************************************
+ 
+ The Thread Manager is deprecated.  Callers should use blocks, libDispatch, or pthreads.
+ 
+ No exact replacement exists for the 'cooperative' threads model, but converting all of the
+ former work done in cooperative threads into blocks and scheduling them on the same serial
+ dispatch queue ( or the main queue ) is essentially the same.
+ 
+*********************************************************************************************/
 
 /* Thread states*/
 typedef UInt16 ThreadState;
@@ -125,7 +136,7 @@ typedef STACK_UPP_TYPE(DebuggerThreadSchedulerProcPtr)          DebuggerThreadSc
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThreadEntryUPP
-NewThreadEntryUPP(ThreadEntryProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewThreadEntryUPP(ThreadEntryProcPtr userRoutine)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  NewThreadSchedulerUPP()
@@ -136,7 +147,7 @@ NewThreadEntryUPP(ThreadEntryProcPtr userRoutine)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThreadSchedulerUPP
-NewThreadSchedulerUPP(ThreadSchedulerProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewThreadSchedulerUPP(ThreadSchedulerProcPtr userRoutine)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  NewThreadSwitchUPP()
@@ -147,7 +158,7 @@ NewThreadSchedulerUPP(ThreadSchedulerProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThreadSwitchUPP
-NewThreadSwitchUPP(ThreadSwitchProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewThreadSwitchUPP(ThreadSwitchProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  NewThreadTerminationUPP()
@@ -158,7 +169,7 @@ NewThreadSwitchUPP(ThreadSwitchProcPtr userRoutine)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ThreadTerminationUPP
-NewThreadTerminationUPP(ThreadTerminationProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewThreadTerminationUPP(ThreadTerminationProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  NewDebuggerNewThreadUPP()
@@ -169,7 +180,7 @@ NewThreadTerminationUPP(ThreadTerminationProcPtr userRoutine) AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DebuggerNewThreadUPP
-NewDebuggerNewThreadUPP(DebuggerNewThreadProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewDebuggerNewThreadUPP(DebuggerNewThreadProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  NewDebuggerDisposeThreadUPP()
@@ -180,7 +191,7 @@ NewDebuggerNewThreadUPP(DebuggerNewThreadProcPtr userRoutine) AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DebuggerDisposeThreadUPP
-NewDebuggerDisposeThreadUPP(DebuggerDisposeThreadProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewDebuggerDisposeThreadUPP(DebuggerDisposeThreadProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  NewDebuggerThreadSchedulerUPP()
@@ -191,7 +202,7 @@ NewDebuggerDisposeThreadUPP(DebuggerDisposeThreadProcPtr userRoutine) AVAILABLE_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern DebuggerThreadSchedulerUPP
-NewDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  DisposeThreadEntryUPP()
@@ -202,7 +213,7 @@ NewDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerProcPtr userRoutine) AVAILA
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThreadEntryUPP(ThreadEntryUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeThreadEntryUPP(ThreadEntryUPP userUPP)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  DisposeThreadSchedulerUPP()
@@ -213,7 +224,7 @@ DisposeThreadEntryUPP(ThreadEntryUPP userUPP)                 AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThreadSchedulerUPP(ThreadSchedulerUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeThreadSchedulerUPP(ThreadSchedulerUPP userUPP)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  DisposeThreadSwitchUPP()
@@ -224,7 +235,7 @@ DisposeThreadSchedulerUPP(ThreadSchedulerUPP userUPP)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThreadSwitchUPP(ThreadSwitchUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeThreadSwitchUPP(ThreadSwitchUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  DisposeThreadTerminationUPP()
@@ -235,7 +246,7 @@ DisposeThreadSwitchUPP(ThreadSwitchUPP userUPP)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeThreadTerminationUPP(ThreadTerminationUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeThreadTerminationUPP(ThreadTerminationUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  DisposeDebuggerNewThreadUPP()
@@ -246,7 +257,7 @@ DisposeThreadTerminationUPP(ThreadTerminationUPP userUPP)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDebuggerNewThreadUPP(DebuggerNewThreadUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDebuggerNewThreadUPP(DebuggerNewThreadUPP userUPP)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  DisposeDebuggerDisposeThreadUPP()
@@ -257,7 +268,7 @@ DisposeDebuggerNewThreadUPP(DebuggerNewThreadUPP userUPP)     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDebuggerDisposeThreadUPP(DebuggerDisposeThreadUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDebuggerDisposeThreadUPP(DebuggerDisposeThreadUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  DisposeDebuggerThreadSchedulerUPP()
@@ -268,7 +279,7 @@ DisposeDebuggerDisposeThreadUPP(DebuggerDisposeThreadUPP userUPP) AVAILABLE_MAC_
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  InvokeThreadEntryUPP()
@@ -281,7 +292,7 @@ DisposeDebuggerThreadSchedulerUPP(DebuggerThreadSchedulerUPP userUPP) AVAILABLE_
 extern voidPtr
 InvokeThreadEntryUPP(
   void *          threadParam,
-  ThreadEntryUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThreadEntryUPP  userUPP)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  InvokeThreadSchedulerUPP()
@@ -294,7 +305,7 @@ InvokeThreadEntryUPP(
 extern ThreadID
 InvokeThreadSchedulerUPP(
   SchedulerInfoRecPtr  schedulerInfo,
-  ThreadSchedulerUPP   userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThreadSchedulerUPP   userUPP)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  InvokeThreadSwitchUPP()
@@ -308,7 +319,7 @@ extern void
 InvokeThreadSwitchUPP(
   ThreadID         threadBeingSwitched,
   void *           switchProcParam,
-  ThreadSwitchUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThreadSwitchUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  InvokeThreadTerminationUPP()
@@ -322,7 +333,7 @@ extern void
 InvokeThreadTerminationUPP(
   ThreadID              threadTerminated,
   void *                terminationProcParam,
-  ThreadTerminationUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThreadTerminationUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  InvokeDebuggerNewThreadUPP()
@@ -335,7 +346,7 @@ InvokeThreadTerminationUPP(
 extern void
 InvokeDebuggerNewThreadUPP(
   ThreadID              threadCreated,
-  DebuggerNewThreadUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DebuggerNewThreadUPP  userUPP)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  InvokeDebuggerDisposeThreadUPP()
@@ -348,7 +359,7 @@ InvokeDebuggerNewThreadUPP(
 extern void
 InvokeDebuggerDisposeThreadUPP(
   ThreadID                  threadDeleted,
-  DebuggerDisposeThreadUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DebuggerDisposeThreadUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  InvokeDebuggerThreadSchedulerUPP()
@@ -361,7 +372,7 @@ InvokeDebuggerDisposeThreadUPP(
 extern ThreadID
 InvokeDebuggerThreadSchedulerUPP(
   SchedulerInfoRecPtr         schedulerInfo,
-  DebuggerThreadSchedulerUPP  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DebuggerThreadSchedulerUPP  userUPP)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 #if __MACH__
   #ifdef __cplusplus
@@ -429,10 +440,10 @@ typedef DebuggerNewThreadUPP            DebuggerNewThreadTPP;
 typedef DebuggerDisposeThreadUPP        DebuggerDisposeThreadTPP;
 typedef DebuggerThreadSchedulerUPP      DebuggerThreadSchedulerTPP;
 /*
- *  NewThread()
+ *  NewThread()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
@@ -444,26 +455,26 @@ NewThread(
   Size             stackSize,
   ThreadOptions    options,
   void **          threadResult,       /* can be NULL */
-  ThreadID *       threadMade)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThreadID *       threadMade)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  SetThreadScheduler()
+ *  SetThreadScheduler()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-SetThreadScheduler(ThreadSchedulerTPP threadScheduler)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SetThreadScheduler(ThreadSchedulerTPP threadScheduler)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  SetThreadSwitcher()
+ *  SetThreadSwitcher()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
@@ -472,14 +483,14 @@ SetThreadSwitcher(
   ThreadID          thread,
   ThreadSwitchTPP   threadSwitcher,
   void *            switchProcParam,
-  Boolean           inOrOut)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean           inOrOut)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  SetThreadTerminator()
+ *  SetThreadTerminator()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
@@ -487,14 +498,14 @@ extern OSErr
 SetThreadTerminator(
   ThreadID               thread,
   ThreadTerminationTPP   threadTerminator,
-  void *                 terminationProcParam)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *                 terminationProcParam)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  SetDebuggerNotificationProcs()
+ *  SetDebuggerNotificationProcs()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
@@ -502,14 +513,14 @@ extern OSErr
 SetDebuggerNotificationProcs(
   DebuggerNewThreadTPP         notifyNewThread,
   DebuggerDisposeThreadTPP     notifyDisposeThread,
-  DebuggerThreadSchedulerTPP   notifyThreadScheduler)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DebuggerThreadSchedulerTPP   notifyThreadScheduler)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  CreateThreadPool()
+ *  CreateThreadPool()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
@@ -517,42 +528,42 @@ extern OSErr
 CreateThreadPool(
   ThreadStyle   threadStyle,
   SInt16        numToCreate,
-  Size          stackSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size          stackSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  GetDefaultThreadStackSize()
+ *  GetDefaultThreadStackSize()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
 GetDefaultThreadStackSize(
   ThreadStyle   threadStyle,
-  Size *        stackSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size *        stackSize)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  ThreadCurrentStackSpace()
+ *  ThreadCurrentStackSpace()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
 ThreadCurrentStackSpace(
   ThreadID     thread,
-  ByteCount *  freeStack)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount *  freeStack)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  DisposeThread()
+ *  DisposeThread()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
@@ -560,38 +571,38 @@ extern OSErr
 DisposeThread(
   ThreadID   threadToDump,
   void *     threadResult,
-  Boolean    recycleThread)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean    recycleThread)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  YieldToThread()
+ *  YieldToThread()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-YieldToThread(ThreadID suggestedThread)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+YieldToThread(ThreadID suggestedThread)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  YieldToAnyThread()
+ *  YieldToAnyThread()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-YieldToAnyThread(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+YieldToAnyThread(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  [Mac]GetCurrentThread()
+ *  [Mac]GetCurrentThread()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
@@ -599,28 +610,28 @@ YieldToAnyThread(void)                                        AVAILABLE_MAC_OS_X
     #define MacGetCurrentThread GetCurrentThread
 #endif
 extern OSErr 
-MacGetCurrentThread(ThreadID * currentThreadID)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MacGetCurrentThread(ThreadID * currentThreadID)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  GetThreadState()
+ *  GetThreadState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
 GetThreadState(
   ThreadID       threadToGet,
-  ThreadState *  threadState)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThreadState *  threadState)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  SetThreadState()
+ *  SetThreadState()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
@@ -628,14 +639,14 @@ extern OSErr
 SetThreadState(
   ThreadID      threadToSet,
   ThreadState   newState,
-  ThreadID      suggestedThread)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThreadID      suggestedThread)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  SetThreadStateEndCritical()
+ *  SetThreadStateEndCritical()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
@@ -643,50 +654,50 @@ extern OSErr
 SetThreadStateEndCritical(
   ThreadID      threadToSet,
   ThreadState   newState,
-  ThreadID      suggestedThread)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThreadID      suggestedThread)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  ThreadBeginCritical()
+ *  ThreadBeginCritical()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-ThreadBeginCritical(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ThreadBeginCritical(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  ThreadEndCritical()
+ *  ThreadEndCritical()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-ThreadEndCritical(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ThreadEndCritical(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  GetThreadCurrentTaskRef()
+ *  GetThreadCurrentTaskRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
-GetThreadCurrentTaskRef(ThreadTaskRef * threadTRef)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+GetThreadCurrentTaskRef(ThreadTaskRef * threadTRef)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  GetThreadStateGivenTaskRef()
+ *  GetThreadStateGivenTaskRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
@@ -694,21 +705,21 @@ extern OSErr
 GetThreadStateGivenTaskRef(
   ThreadTaskRef   threadTRef,
   ThreadID        threadToGet,
-  ThreadState *   threadState)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThreadState *   threadState)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  SetThreadReadyGivenTaskRef()
+ *  SetThreadReadyGivenTaskRef()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
 SetThreadReadyGivenTaskRef(
   ThreadTaskRef   threadTRef,
-  ThreadID        threadToSet)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ThreadID        threadToSet)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 #if !__LP64__

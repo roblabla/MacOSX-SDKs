@@ -126,6 +126,7 @@
 - (DOMNodeList *)getElementsByClassName:(NSString *)tagname AVAILABLE_IN_WEBKIT_VERSION_4_0;
 - (DOMElement *)querySelector:(NSString *)selectors AVAILABLE_IN_WEBKIT_VERSION_4_0;
 - (DOMNodeList *)querySelectorAll:(NSString *)selectors AVAILABLE_IN_WEBKIT_VERSION_4_0;
+- (void)webkitCancelFullScreen AVAILABLE_IN_WEBKIT_VERSION_4_0;
 @end
 
 @interface DOMDocument (DOMDocumentDeprecated)

@@ -10,18 +10,18 @@
 @class PDFDestination, PDFAnnotationLinkPrivateVars;
 
 
-@interface PDFAnnotationLink : PDFAnnotation
+@interface PDFAnnotationLink : PDFAnnotation <NSCopying>
 {
 @private
     PDFAnnotationLinkPrivateVars *_pdfPriv2;
 }
 
-// Destination for the link. May be NULL if no destination associated with link; in this case the -[URL] may be valid.
+// Destination for the link. May be nil if no destination associated with link; in this case the -[URL] may be valid.
 // The preferred way though is to call -[PDFAnnotation mouseUpAction] and -[PDFAnnotation setMouseUpAction].
 - (PDFDestination *) destination;
 - (void) setDestination: (PDFDestination *) destination;
 
-// URL for the link. May be NULL if no URL action associated with link; in this case the -[destination] may be valid.
+// URL for the link. May be nil if no URL action associated with link; in this case the -[destination] may be valid.
 // The preferred way though is to call -[PDFAnnotation mouseUpAction] and -[PDFAnnotation setMouseUpAction].
 - (NSURL *) URL;
 - (void) setURL: (NSURL *) url;

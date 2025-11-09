@@ -20,7 +20,7 @@ enum
 };
 
 
-@interface PDFAnnotationMarkup : PDFAnnotation
+@interface PDFAnnotationMarkup : PDFAnnotation <NSCopying>
 {
 @private
     PDFAnnotationMarkupPrivateVars *_pdfPriv2;

@@ -109,36 +109,36 @@ enum
  * between function calls. 
  */
 
-vImage_Error	vImageRotate_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, float angleInRadians, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageRotate_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, float angleInRadians, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageRotate_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, float angleInRadians, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageRotate_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, float angleInRadians, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageRotate_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, float angleInRadians, Pixel_8 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageRotate_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, float angleInRadians, Pixel_F backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageRotate_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, float angleInRadians, Pixel_8888 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageRotate_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, float angleInRadians, Pixel_FFFF backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
 /* Developers using vImage_Scale* on MacOS X.3 should pass kvImageEdgeExtend in the flags field to avoid ringing artifacts at the edges of images */
-vImage_Error	vImageScale_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageScale_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageScale_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageScale_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageScale_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageScale_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageScale_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageScale_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
-vImage_Error	vImageAffineWarp_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform *transform, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageAffineWarp_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform *transform, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageAffineWarp_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform *transform, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageAffineWarp_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform *transform, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageAffineWarp_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform *transform, Pixel_8 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageAffineWarp_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform *transform, Pixel_F backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageAffineWarp_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform *transform, Pixel_8888 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageAffineWarp_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform *transform, Pixel_FFFF backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
 #if VIMAGE_AFFINETRANSFORM_DOUBLE_IS_AVAILABLE
     /* A single precision transformation matrix is often not enough. This one uses double precision. */
-    vImage_Error	vImageAffineWarpD_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform_Double *transform, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-    vImage_Error	vImageAffineWarpD_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform_Double *transform, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-    vImage_Error	vImageAffineWarpD_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform_Double *transform, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-    vImage_Error	vImageAffineWarpD_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform_Double *transform, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    vImage_Error	vImageAffineWarpD_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform_Double *transform, Pixel_8 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+    vImage_Error	vImageAffineWarpD_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform_Double *transform, Pixel_F backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+    vImage_Error	vImageAffineWarpD_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform_Double *transform, Pixel_8888 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+    vImage_Error	vImageAffineWarpD_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_AffineTransform_Double *transform, Pixel_FFFF backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
 #endif
 
 #if VIMAGE_CGAFFINETRANSFORM_IS_AVAILABLE
     /* Convenience Interfaces for working directly with CGAffineTransform, which changes size depending on whether we are LP64 or not. */
-    vImage_Error	vImageAffineWarpCG_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_CGAffineTransform *transform, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-    vImage_Error	vImageAffineWarpCG_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_CGAffineTransform *transform, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-    vImage_Error	vImageAffineWarpCG_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_CGAffineTransform *transform, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-    vImage_Error	vImageAffineWarpCG_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_CGAffineTransform *transform, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    vImage_Error	vImageAffineWarpCG_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_CGAffineTransform *transform, Pixel_8 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+    vImage_Error	vImageAffineWarpCG_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_CGAffineTransform *transform, Pixel_F backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+    vImage_Error	vImageAffineWarpCG_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_CGAffineTransform *transform, Pixel_8888 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+    vImage_Error	vImageAffineWarpCG_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, const vImage_CGAffineTransform *transform, Pixel_FFFF backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
 #endif
 
 /*
@@ -159,7 +159,7 @@ vImage_Error	vImageAffineWarp_ARGBFFFF( const vImage_Buffer *src, const vImage_B
  * Simply pass the kvImageGetTempBufferSize flag in addition to all the regular parameters. The size will be returned in the  
  * vImage_Error result.  kvImageGetTempBufferSize is for MacOS X.4 and later. 
  */
-size_t		vImageGetMinimumGeometryTempBufferSize( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags, size_t bytesPerPixel )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+size_t		vImageGetMinimumGeometryTempBufferSize( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags, size_t bytesPerPixel )    __OSX_AVAILABLE_BUT_DEPRECATED( __MAC_10_3, __MAC_10_4, __IPHONE_NA, __IPHONE_NA );
 
 /*
  *	Low Level Geometry Functions
@@ -176,15 +176,15 @@ size_t		vImageGetMinimumGeometryTempBufferSize( const vImage_Buffer *src, const 
  *	left to right. Vertical reflection causes the image to appear upside down as if seen from behind.
  */
 
-vImage_Error	vImageHorizontalReflect_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageHorizontalReflect_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageHorizontalReflect_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageHorizontalReflect_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageHorizontalReflect_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageHorizontalReflect_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageHorizontalReflect_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageHorizontalReflect_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
-vImage_Error	vImageVerticalReflect_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageVerticalReflect_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageVerticalReflect_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageVerticalReflect_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageVerticalReflect_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageVerticalReflect_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageVerticalReflect_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageVerticalReflect_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
 /*
  * 	The Rotate90 function does simple 0, 90, 180 or 270 degree rotation according to the value of a rotation constant
@@ -209,10 +209,10 @@ vImage_Error	vImageVerticalReflect_ARGBFFFF( const vImage_Buffer *src, const vIm
  *			the input image does not completely cover the output image. 
  */
 
-vImage_Error	vImageRotate90_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, uint8_t rotationConstant, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageRotate90_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, uint8_t rotationConstant, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageRotate90_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, uint8_t rotationConstant, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageRotate90_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, uint8_t rotationConstant, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageRotate90_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, uint8_t rotationConstant, Pixel_8 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageRotate90_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, uint8_t rotationConstant, Pixel_F backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageRotate90_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, uint8_t rotationConstant, Pixel_8888 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageRotate90_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, uint8_t rotationConstant, Pixel_FFFF backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
  
 /*
  *	The Shearing functions use resampling to rescale a image and offset it to fractional pixel offsets. 
@@ -223,26 +223,26 @@ vImage_Error	vImageRotate90_ARGBFFFF( const vImage_Buffer *src, const vImage_Buf
  *      y directions. Scaling (making the image larger or smaller in one dimension) is done by adjusting the resampling kernel.
  */
 
-vImage_Error	vImageHorizontalShear_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageHorizontalShear_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageHorizontalShear_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageHorizontalShear_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageHorizontalShear_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageHorizontalShear_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageHorizontalShear_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_8888 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageHorizontalShear_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float xTranslate, float shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
-vImage_Error	vImageVerticalShear_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageVerticalShear_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageVerticalShear_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter,  Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-vImage_Error	vImageVerticalShear_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+vImage_Error	vImageVerticalShear_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageVerticalShear_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageVerticalShear_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter,  Pixel_8888 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+vImage_Error	vImageVerticalShear_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, float yTranslate, float shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
 /* Versions of shear functions that take coordinates in double precision */
-vImage_Error	vImageHorizontalShearD_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double xTranslate, double shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-vImage_Error	vImageHorizontalShearD_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double xTranslate, double shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-vImage_Error	vImageHorizontalShearD_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double xTranslate, double shearSlope, ResamplingFilter filter, Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-vImage_Error	vImageHorizontalShearD_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double xTranslate, double shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+vImage_Error	vImageHorizontalShearD_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double xTranslate, double shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+vImage_Error	vImageHorizontalShearD_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double xTranslate, double shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+vImage_Error	vImageHorizontalShearD_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double xTranslate, double shearSlope, ResamplingFilter filter, Pixel_8888 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+vImage_Error	vImageHorizontalShearD_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double xTranslate, double shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
 
-vImage_Error	vImageVerticalShearD_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-vImage_Error	vImageVerticalShearD_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-vImage_Error	vImageVerticalShearD_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter,  Pixel_8888 backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-vImage_Error	vImageVerticalShearD_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+vImage_Error	vImageVerticalShearD_Planar8( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter, Pixel_8 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+vImage_Error	vImageVerticalShearD_PlanarF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter, Pixel_F backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+vImage_Error	vImageVerticalShearD_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter,  Pixel_8888 backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+vImage_Error	vImageVerticalShearD_ARGBFFFF( const vImage_Buffer *src, const vImage_Buffer *dest, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, double yTranslate, double shearSlope, ResamplingFilter filter, Pixel_FFFF backColor, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
 
  
 /*
@@ -269,8 +269,8 @@ vImage_Error	vImageVerticalShearD_ARGBFFFF( const vImage_Buffer *src, const vIma
  *
  */
 
-ResamplingFilter	vImageNewResamplingFilter( float scale, vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-void			vImageDestroyResamplingFilter( ResamplingFilter filter )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+ResamplingFilter	vImageNewResamplingFilter( float scale, vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+void			vImageDestroyResamplingFilter( ResamplingFilter filter )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
 /*
  *	vImageNewResamplingFilter and vImageDestroyResamplingFilter are merely convenience functions to make
@@ -289,12 +289,12 @@ vImage_Error	vImageNewResamplingFilterForFunctionUsingBuffer( ResamplingFilter f
                                                         void (*kernelFunc)( const float *xArray, float *yArray, unsigned long count, void *userData ), 
                                                         float kernelWidth, 
                                                         void *userData,
-                                                        vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                        vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
 size_t		vImageGetResamplingFilterSize(  float scale, 
                                                 void (*kernelFunc)( const float *xArray, float *yArray, unsigned long count, void *userData ),
                                                 float kernelWidth, 
-                                                vImage_Flags flags )    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                vImage_Flags flags )    __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
 
 /*
  *	The scale parameter is the amount to enlarge or reduce the output image. It is the same meaning

@@ -1086,6 +1086,8 @@ enum {
 
 #define kIOFBMemorySizeKey              "IOFBMemorySize"
 
+#define kIOFBNeedsRefreshKey            "IOFBNeedsRefresh"
+
 #define kIOFBProbeOptionsKey            "IOFBProbeOptions"
 
 #define kIOFBGammaWidthKey              "IOFBGammaWidth"
@@ -1263,6 +1265,7 @@ enum {
 #define kIODisplayPowerStateKey       			"dsyp"
 
 #define kIODisplayControllerIDKey				"IODisplayControllerID"
+#define kIODisplayCapabilityStringKey       	"IODisplayCapabilityString"
 
 #define kIODisplayRedGammaScaleKey      "rgsc"
 #define kIODisplayGreenGammaScaleKey    "ggsc"

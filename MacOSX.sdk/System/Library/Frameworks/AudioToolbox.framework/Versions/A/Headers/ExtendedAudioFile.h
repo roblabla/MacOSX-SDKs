@@ -3,7 +3,7 @@
 
      Contains:   API for reading/writing AudioFiles via an AudioConverter
 
-     Copyright:  (c) 1985-2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 1985-2008 by Apple, Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -78,11 +78,19 @@ typedef struct OpaqueExtAudioFile *	ExtAudioFileRef;
 						to read/write.
 	@constant		kExtAudioFileProperty_ClientChannelLayout
 						An AudioChannelLayout. Specifies the channel layout of the
-						AudioBufferList's passed to ExtAudioFileReadFrames() and
-						ExtAudioFileWriteFrames(). The layout may be different from the file's
+						AudioBufferList's passed to ExtAudioFileRead() and
+						ExtAudioFileWrite(). The layout may be different from the file's
 						channel layout, in which the ExtAudioFileRef's underlying AudioConverter
 						performs the remapping. This must be set after ClientDataFormat, and the
 						number of channels in the layout must match.
+	@constant		kExtAudioFileProperty_CodecManufacturer
+						A UInt32 specifying the manufacturer of the codec to be used. This must be 
+						specified before setting kExtAudioFileProperty_ClientDataFormat, which
+						triggers the creation of the codec. This can be used on iOS
+						to choose between a hardware or software encoder, by specifying 
+						kAppleHardwareAudioCodecManufacturer or kAppleSoftwareAudioCodecManufacturer.
+						
+						Available starting on Mac OS X version 10.7 and iOS version 4.0.
 	@constant		kExtAudioFileProperty_AudioConverter
 						AudioConverterRef. The underlying AudioConverterRef, if any. Read-only.
 						
@@ -91,6 +99,13 @@ typedef struct OpaqueExtAudioFile *	ExtAudioFileRef;
 						property on the ExtAudioFileRef afterwards. A NULL configuration is 
 						sufficient. This will ensure that the output file's data format is consistent
 						with the format being produced by the converter.
+						
+						<pre>
+							CFArrayRef config = NULL;
+							err = ExtAudioFileSetProperty(myExtAF, kExtAudioFileProperty_ConverterConfig, 
+							  sizeof(config), &config);
+						</pre>
+						
 	@constant		kExtAudioFileProperty_AudioFile
 						The underlying AudioFileID. Read-only.
 	@constant		kExtAudioFileProperty_FileMaxPacketSize
@@ -119,12 +134,36 @@ typedef struct OpaqueExtAudioFile *	ExtAudioFileRef;
 						to its own buffer. After setting this property, the client must
 						subsequently set the kExtAudioFileProperty_IOBufferSizeBytes property. Note
 						that a pointer to a pointer should be passed to ExtAudioFileSetProperty.
+	@constant		kExtAudioFileProperty_PacketTable
+						AudioFilePacketTableInfo
+						This can be used to both override the priming and remainder information in an audio file and
+						to retrieve the current priming and remainder frames information for a given ExtAudioFile object. 
+						If the underlying file type does not provide packet table info, the Get call will return an error.
+						
+						If you set this, then you can override the setting for these values in the file to ones that you want to use.
+						When setting this, you can use a value of -1 for either the priming or remainder frames to use the value that
+						is currently stored in the file. If you set this to a non-negative number (or zero) then that value will override
+						whatever value is stored in the file that you are reading.
+						Retrieving the value of the property will always retrieve the value the ExtAudioFile object is using (whether this
+						is derived from the file, or from your override).
+						If you want to determine what the value is in the file, you should use the AudioFile property:
+						kAudioFilePropertyPacketTableInfo
+						
+						When the property is set, only the remaining and priming values are used. You should set the mNumberValidFrames to zero.
+						
+						For example, a file encoded using AAC may have 2112 samples of priming at the start of the file
+						and a remainder of 823 samples at the end. When ExtAudioFile returns decoded samples to you,
+						it will trim out the <priming num samples> at the start of the file, and the <remainder num samples> at the end.
+						It will get these numbers initially from the file. A common use case for overriding this would be to set the priming
+						and remainder samples to 0, so in this example you would retrieve an additional 2112 samples of silence from the start of the file
+						and 823 samples of silence at the end of the file (silence, because the encoders use silence to pad out these priming and remainder samples)
 */
 enum { // ExtAudioFilePropertyID
 	kExtAudioFileProperty_FileDataFormat		= 'ffmt',   // AudioStreamBasicDescription
 	kExtAudioFileProperty_FileChannelLayout		= 'fclo',   // AudioChannelLayout
 	kExtAudioFileProperty_ClientDataFormat		= 'cfmt',   // AudioStreamBasicDescription
 	kExtAudioFileProperty_ClientChannelLayout	= 'cclo',   // AudioChannelLayout
+	kExtAudioFileProperty_CodecManufacturer		= 'cman',	// UInt32
 	
 	// read-only:
 	kExtAudioFileProperty_AudioConverter		= 'acnv',	// AudioConverterRef
@@ -136,12 +175,33 @@ enum { // ExtAudioFilePropertyID
 	// writable:
 	kExtAudioFileProperty_ConverterConfig		= 'accf',   // CFPropertyListRef
 	kExtAudioFileProperty_IOBufferSizeBytes		= 'iobs',	// UInt32
-	kExtAudioFileProperty_IOBuffer				= 'iobf'	// void *
+	kExtAudioFileProperty_IOBuffer				= 'iobf',	// void *
+	kExtAudioFileProperty_PacketTable			= 'xpti'	// AudioFilePacketTableInfo
 };
 typedef UInt32						ExtAudioFilePropertyID;
 
-// Errors
+/*!
+    @enum           ExtAudioFile errors
+    @constant       kExtAudioFileError_CodecUnavailableInputConsumed
+						iOS only. Returned when ExtAudioFileWrite was interrupted. You must stop calling
+						ExtAudioFileWrite. If the underlying audio converter can resume after an
+						interruption (see kAudioConverterPropertyCanResumeFromInterruption), you must
+						wait for an EndInterruption notification from AudioSession, and call AudioSessionSetActive(true)
+						before resuming. In this situation, the buffer you provided to ExtAudioFileWrite was successfully
+						consumed and you may proceed to the next buffer.
+    @constant       kExtAudioFileError_CodecUnavailableInputNotConsumed
+						iOS only. Returned when ExtAudioFileWrite was interrupted. You must stop calling
+						ExtAudioFileWrite. If the underlying audio converter can resume after an
+						interruption (see kAudioConverterPropertyCanResumeFromInterruption), you must
+						wait for an EndInterruption notification from AudioSession, and call AudioSessionSetActive(true)
+						before resuming. In this situation, the buffer you provided to ExtAudioFileWrite was not
+						successfully consumed and you must try to write it again.
+*/
 enum {
+#if TARGET_OS_IPHONE
+	kExtAudioFileError_CodecUnavailableInputConsumed    = -66559,
+	kExtAudioFileError_CodecUnavailableInputNotConsumed = -66560,
+#endif
 	kExtAudioFileError_InvalidProperty			= -66561,
 	kExtAudioFileError_InvalidPropertySize		= -66562,
 	kExtAudioFileError_NonPCMClientFormat		= -66563,
@@ -168,7 +228,7 @@ enum {
 	@param		inURLRef
 					The audio file to read.
 	@param		outExtAudioFile
-					On exit, a newly-allocated ExtAudioAudioFileRef.
+					On exit, a newly-allocated ExtAudioFileRef.
 	@result		An OSStatus error code.
 
 	@discussion
@@ -187,7 +247,7 @@ ExtAudioFileOpenURL(		CFURLRef					inURL,
 	@param		inForWriting
 					True if the AudioFileID is a new file opened for writing.
 	@param		outExtAudioFile
-					On exit, a newly-allocated ExtAudioAudioFileRef.
+					On exit, a newly-allocated ExtAudioFileRef.
 	@result		An OSStatus error code.
 
 	@discussion
@@ -221,7 +281,7 @@ ExtAudioFileWrapAudioFileID(AudioFileID					inFileID,
 					The same flags as are used with AudioFileCreateWithURL
 					Can use these to control whether an existing file is overwritten (or not).
 	@param		outExtAudioFile
-					On exit, a newly-allocated ExtAudioAudioFileRef.
+					On exit, a newly-allocated ExtAudioFileRef.
 	@result		An OSStatus error code.
 
 	@discussion
@@ -249,7 +309,7 @@ ExtAudioFileCreateWithURL(	CFURLRef							inURL,
 	@param		inFSRef
 					The audio file to read.
 	@param		outExtAudioFile
-					On exit, a newly-allocated ExtAudioAudioFileRef.
+					On exit, a newly-allocated ExtAudioFileRef.
 	@result		An OSStatus error code.
 
 	@discussion
@@ -278,7 +338,7 @@ ExtAudioFileOpen(			const struct FSRef *		inFSRef,
 					The channel layout of the audio data. If non-null, this must be consistent
 					with the number of channels specified by inStreamDesc.
 	@param		outExtAudioFile
-					On exit, a newly-allocated ExtAudioAudioFileRef.
+					On exit, a newly-allocated ExtAudioFileRef.
 	@result		An OSStatus error code.
 
 	@discussion

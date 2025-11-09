@@ -1,4 +1,3 @@
-/* $Xorg: panoramiXext.h,v 1.4 2000/08/18 04:05:45 coskrey Exp $ */
 /*****************************************************************
 Copyright (c) 1991, 1997 Digital Equipment Corporation, Maynard, Massachusetts.
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,23 +25,61 @@ Equipment Corporation.
 /*  
  *	PanoramiX definitions
  */
-/* $XFree86: xc/include/extensions/panoramiXext.h,v 3.6 2001/01/17 17:53:22 dawes Exp $ */
 
 /* THIS IS NOT AN X PROJECT TEAM SPECIFICATION */
 
-#define PANORAMIX_MAJOR_VERSION         1       /* current version number */
-#define PANORAMIX_MINOR_VERSION         1
+#ifndef _panoramiXext_h
+#define _panoramiXext_h
+
+#include <X11/Xfuncproto.h>
 
 typedef struct {
     Window  window;         /* PanoramiX window - may not exist */
     int	    screen;
-    int     State;          /* PanroamiXOff, PanoramiXOn */
+    int     State;          /* PanoramiXOff, PanoramiXOn */
     int	    width;	    /* width of this screen */
     int     height;	    /* height of this screen */
     int     ScreenCount;    /* real physical number of screens */
     XID     eventMask;      /* selected events for this client */
 } XPanoramiXInfo;    
 
+_XFUNCPROTOBEGIN
+
+extern Bool XPanoramiXQueryExtension (
+    Display *		/* dpy */,
+    int *		/* event_base_return */,
+    int *		/* error_base_return */
+);
+
+extern Status XPanoramiXQueryVersion(
+    Display *		/* dpy */,
+    int *		/* major_version_return */,
+    int *		/* minor_version_return */
+);
+
 extern XPanoramiXInfo *XPanoramiXAllocInfo (
     void
-);        
+);
+
+extern Status XPanoramiXGetState (
+    Display *		/* dpy */,
+    Drawable		/* drawable */,
+    XPanoramiXInfo *	/* panoramiX_info */
+);
+
+extern Status XPanoramiXGetScreenCount (
+    Display *		/* dpy */,
+    Drawable		/* drawable */,
+    XPanoramiXInfo *	/* panoramiX_info */
+);
+
+extern Status XPanoramiXGetScreenSize (
+    Display *		/* dpy */,
+    Drawable		/* drawable */,
+    int			/* screen_num */,
+    XPanoramiXInfo *	/* panoramiX_info */
+);
+
+_XFUNCPROTOEND
+
+#endif /* _panoramiXext_h */

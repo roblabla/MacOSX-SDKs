@@ -211,6 +211,7 @@
 #define kAXLayoutItemRole				CFSTR("AXLayoutItem")
 #define kAXHandleRole					CFSTR("AXHandle")
 
+#define kAXPopoverRole					CFSTR("AXPopover")
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Subroles                                                                                */
@@ -221,6 +222,7 @@
 #define kAXMinimizeButtonSubrole			CFSTR("AXMinimizeButton")
 #define kAXZoomButtonSubrole				CFSTR("AXZoomButton")
 #define kAXToolbarButtonSubrole				CFSTR("AXToolbarButton")
+#define kAXFullScreenButtonSubrole			CFSTR("AXFullScreenButton")
 #define kAXSecureTextFieldSubrole			CFSTR("AXSecureTextField")
 #define kAXTableRowSubrole				CFSTR("AXTableRow")
 #define kAXOutlineRowSubrole				CFSTR("AXOutlineRow")
@@ -251,6 +253,7 @@
 #define kAXURLDockItemSubrole				CFSTR("AXURLDockItem")
 #define kAXDockExtraDockItemSubrole			CFSTR("AXDockExtraDockItem")
 #define kAXTrashDockItemSubrole				CFSTR("AXTrashDockItem")
+#define kAXSeparatorDockItemSubrole			CFSTR("AXSeparatorDockItem")
 #define kAXProcessSwitcherListSubrole			CFSTR("AXProcessSwitcherList")
 
 

@@ -2,7 +2,7 @@
  *  QuickLook.h
  *  Quick Look
  *
- *  Copyright 2007 Apple Inc.
+ *  Copyright 2007-2010 Apple Inc.
  *  All rights reserved.
  *
  */
@@ -14,5 +14,6 @@
 #include <QuickLook/QLBase.h>
 #include <QuickLook/QLGenerator.h>
 #include <QuickLook/QLThumbnailImage.h>
+#include <QuickLook/QLThumbnail.h>
 
 #endif /* __QUICKLOOK_QUICKLOOK__ */

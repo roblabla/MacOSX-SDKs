@@ -35,18 +35,20 @@ struct view_parameters {
 };
 
 struct register_parameters {
-    oid            *name;
-    size_t          namelen;
-    int             priority;
-    int             range_subid;
-    oid             range_ubound;
-    int             timeout;
-    u_char          flags;
-    const char     *contextName;
+    oid                          *name;
+    size_t                        namelen;
+    int                           priority;
+    int                           range_subid;
+    oid                           range_ubound;
+    int                           timeout;
+    u_char                        flags;
+    const char                   *contextName;
+    netsnmp_session              *session;
+    netsnmp_handler_registration *reginfo;
 };
 
 typedef struct subtree_context_cache_s {
-    char				*context_name;
+    const char				*context_name;
     struct netsnmp_subtree_s		*first_subtree;
     struct subtree_context_cache_s	*next;
 } subtree_context_cache;

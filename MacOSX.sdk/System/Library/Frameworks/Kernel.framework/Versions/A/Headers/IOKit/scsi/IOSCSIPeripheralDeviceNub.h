@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -56,6 +56,9 @@ enum
 // SCSI Architecture Model Family includes
 #include <IOKit/scsi/IOSCSIProtocolServices.h>
 
+// Build includes
+#include <TargetConditionals.h>
+
 
 // Forward definitions for internal use only classes.
 class SCSIPrimaryCommands;
@@ -88,15 +91,17 @@ protected:
 	SCSIServiceResponse SendTask ( SCSITask * request );
 	
 	bool			InterrogateDevice ( void );										
-
+	
 	// Reserve space for future expansion.
 	struct IOSCSIPeripheralDeviceNubExpansionData { };
 	IOSCSIPeripheralDeviceNubExpansionData * fIOSCSIPeripheralDeviceNubReserved;
 	
 	IOSCSIProtocolInterface *		fProvider;
-#ifndef __LP64__
+
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	SCSIPrimaryCommands *			fSCSIPrimaryCommandObject;
 #endif
+
 	UInt8							fDefaultInquiryCount;
 	
 	virtual bool		SendSCSICommand ( 	SCSITaskIdentifier 		request, 
@@ -111,9 +116,6 @@ protected:
 	virtual bool	IsProtocolServiceSupported ( SCSIProtocolFeature feature, void * serviceValue );
 	
 	virtual bool	HandleProtocolServiceFeature ( SCSIProtocolFeature feature, void * serviceValue );
-	
-	// We override this method in order to NOT do power management
-	virtual void	InitializePowerManagement ( IOService * provider );
 	
 public:
 	
@@ -153,6 +155,8 @@ public:
 	
 private:
 	
+
+#if !TARGET_OS_EMBEDDED
 	// Space reserved for future expansion.
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceNub,  1 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceNub,  2 );
@@ -170,9 +174,9 @@ private:
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceNub, 14 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceNub, 15 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceNub, 16 );
+#endif /* !TARGET_OS_EMBEDDED */
 	
 };
-
 
 
 class IOSCSILogicalUnitNub : public IOSCSIPeripheralDeviceNub
@@ -192,22 +196,16 @@ protected:
 	
 public:
 	
-	virtual bool		start	( IOService * provider );
-	
 	virtual void		SetLogicalUnitNumber ( UInt8 newLUN );
-	
 	UInt8				GetLogicalUnitNumber ( void );
 	
 	// The ExecuteCommand method will take a SCSITask object and transport
 	// it across the physical wires to the device
 	virtual	void		ExecuteCommand ( SCSITaskIdentifier	request );
 	
-	// The AbortCommand method will abort the indicated SCSI Task object,
-	// if it is possible and the SCSI Task has not already completed.
-	virtual SCSIServiceResponse		AbortCommand ( SCSITaskIdentifier	abortTask );
-	
 private:
 	
+#if !TARGET_OS_EMBEDDED
 	// Space reserved for future expansion.
 	OSMetaClassDeclareReservedUnused ( IOSCSILogicalUnitNub,  1 );
 	OSMetaClassDeclareReservedUnused ( IOSCSILogicalUnitNub,  2 );
@@ -225,8 +223,10 @@ private:
 	OSMetaClassDeclareReservedUnused ( IOSCSILogicalUnitNub, 14 );
 	OSMetaClassDeclareReservedUnused ( IOSCSILogicalUnitNub, 15 );
 	OSMetaClassDeclareReservedUnused ( IOSCSILogicalUnitNub, 16 );
+#endif /* !TARGET_OS_EMBEDDED */
 	
 };
+
 
 #endif	/* defined(KERNEL) && defined(__cplusplus) */
 

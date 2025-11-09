@@ -163,6 +163,7 @@ extern void	lck_mtx_unlock(lck_mtx_t		*lck) __DARWIN10_ALIAS(lck_mtx_unlock);
 extern void				lck_mtx_unlock(
 									lck_mtx_t		*lck);
 #endif	/* __i386__ */
+
 extern void				lck_mtx_destroy(
 									lck_mtx_t		*lck,
 									lck_grp_t		*grp);

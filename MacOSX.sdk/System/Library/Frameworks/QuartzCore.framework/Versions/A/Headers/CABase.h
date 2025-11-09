@@ -27,6 +27,12 @@
 # define __OSX_AVAILABLE_BUT_DEPRECATED(m0,m1,i0,i1)
 #endif
 
+#if !TARGET_OS_IPHONE
+#define CA_OS_VERSION(m, i) (MAC_OS_X_VERSION_MIN_REQUIRED >= (m))
+#else
+#define CA_OS_VERSION(m, i) (__IPHONE_OS_VERSION_MIN_REQUIRED >= (i))
+#endif
+
 /* FIXME: Needed until everyone is on Leopard. */
 #ifndef CGFLOAT_DEFINED
   typedef float CGFloat;

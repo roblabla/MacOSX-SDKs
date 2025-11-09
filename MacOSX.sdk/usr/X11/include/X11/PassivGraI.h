@@ -1,7 +1,3 @@
-/*
-* $Xorg: PassivGraI.h,v 1.4 2001/02/09 02:03:56 xorgcvs Exp $
-*/
-
 /********************************************************
 
 Copyright 1988 by Hewlett-Packard Company
@@ -51,7 +47,6 @@ used in advertising or otherwise to promote the sale, use or other dealings
 in this Software without prior written authorization from The Open Group.
 
 */
-/* $XFree86: xc/lib/Xt/PassivGraI.h,v 1.3 2001/12/14 19:56:27 dawes Exp $ */
 
 #ifndef _PDI_h_
 #define _PDI_h_
@@ -59,6 +54,8 @@ in this Software without prior written authorization from The Open Group.
 
 #define KEYBOARD TRUE
 #define POINTER  FALSE
+
+_XFUNCPROTOBEGIN
 
 typedef enum {
     XtNoServerGrab, 
@@ -182,5 +179,7 @@ extern void _XtRegisterPassiveGrabs(
 extern void _XtClearAncestorCache(
     Widget		/* widget */
 );
+
+_XFUNCPROTOEND
 
 #endif /* _PDI_h_ */

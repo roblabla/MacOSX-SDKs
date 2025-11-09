@@ -1,16 +1,16 @@
 /*
     NSUserInterfaceItemSearching.h
     Application Kit
-    Copyright (c) 2008-2009, Apple Inc.
+    Copyright (c) 2008-2011, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSString.h>
 #import <AppKit/NSApplication.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 
 @protocol NSUserInterfaceItemSearching <NSObject>
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 
 @required
 
@@ -36,6 +36,7 @@
  */
 - (void)showAllHelpTopicsForSearchString:(NSString *)searchString;
 
+#endif
 @end
 
 
@@ -43,17 +44,16 @@
 
 /* Register an an object that conforms to NSUserInterfaceItemSearching with the application.  You can register as many as you like.  If you register the same instance more than once the subsequent registrations are ignored
  */
-- (void)registerUserInterfaceItemSearchHandler:(id<NSUserInterfaceItemSearching>)handler;
+- (void)registerUserInterfaceItemSearchHandler:(id<NSUserInterfaceItemSearching>)handler NS_AVAILABLE_MAC(10_6);
 
 /* Unregister an object that conforms to NSUserInterfaceItemSearching with the application.  If you unregister the same instance more than once the subsequent registrations are ignored. Also, unregistering an instance that was never registered is a NOP.
  */
-- (void)unregisterUserInterfaceItemSearchHandler:(id<NSUserInterfaceItemSearching>)handler;
+- (void)unregisterUserInterfaceItemSearchHandler:(id<NSUserInterfaceItemSearching>)handler NS_AVAILABLE_MAC(10_6);
 
 /* returns YES if searchString matches the supplied range of stringToBeSearched according to Spotlight for Help default matching rules  
  * if found range is non null then the matching range is returned in it 
  */
-- (BOOL)searchString:(NSString *)searchString inUserInterfaceItemString:(NSString *)stringToSearch searchRange:(NSRange)searchRange foundRange:(NSRange *)foundRange;
+- (BOOL)searchString:(NSString *)searchString inUserInterfaceItemString:(NSString *)stringToSearch searchRange:(NSRange)searchRange foundRange:(NSRange *)foundRange NS_AVAILABLE_MAC(10_6);
 
 @end
 
-#endif

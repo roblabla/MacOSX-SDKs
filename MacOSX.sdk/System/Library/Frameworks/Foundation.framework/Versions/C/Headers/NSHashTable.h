@@ -1,5 +1,5 @@
 /*	NSHashTable.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPointerFunctions.h>
@@ -8,7 +8,6 @@
 
 @class NSArray, NSSet, NSHashTable;
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /* An NSHashTable is modeled after a set, although, because of its options, is not a set because it can behave differently (for example, if pointer equality is specified two isEqual strings will both be entered).  The major option is to provide for non-retained "weak" references that, under garbage collection, are removed automatically.
    An NSHashTable can also be configured to operate on arbitrary pointers and not just objects.  We recommend the C function API for "void *" access.  To configure for pointer use, consult and choose the appropriate NSPointerFunctionsOptions or configure or use an NSPointerFunctions object itself for initialization.
@@ -23,6 +22,7 @@ enum {
 
 typedef NSUInteger NSHashTableOptions;
 
+NS_CLASS_AVAILABLE(10_5, 2_0)
 @interface NSHashTable : NSObject <NSCopying, NSCoding, NSFastEnumeration>
 
 - (id)initWithOptions:(NSPointerFunctionsOptions)options capacity:(NSUInteger)initialCapacity;
@@ -65,7 +65,6 @@ typedef NSUInteger NSHashTableOptions;
 
 @end
 
-#endif
 
 
 /****************	(void *) Hash table operations	****************/
@@ -103,12 +102,12 @@ FOUNDATION_EXPORT NSHashTable *NSCreateHashTableWithZone(NSHashTableCallBacks ca
 FOUNDATION_EXPORT NSHashTable *NSCreateHashTable(NSHashTableCallBacks callBacks, NSUInteger capacity);
 
 
-FOUNDATION_EXPORT const NSHashTableCallBacks NSIntegerHashCallBacks AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT const NSHashTableCallBacks NSIntegerHashCallBacks NS_AVAILABLE(10_5, 2_0);
 FOUNDATION_EXPORT const NSHashTableCallBacks NSNonOwnedPointerHashCallBacks;
 FOUNDATION_EXPORT const NSHashTableCallBacks NSNonRetainedObjectHashCallBacks;
 FOUNDATION_EXPORT const NSHashTableCallBacks NSObjectHashCallBacks;
 FOUNDATION_EXPORT const NSHashTableCallBacks NSOwnedObjectIdentityHashCallBacks;
 FOUNDATION_EXPORT const NSHashTableCallBacks NSOwnedPointerHashCallBacks;
 FOUNDATION_EXPORT const NSHashTableCallBacks NSPointerToStructHashCallBacks;
-FOUNDATION_EXPORT const NSHashTableCallBacks NSIntHashCallBacks DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT const NSHashTableCallBacks NSIntHashCallBacks NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
 

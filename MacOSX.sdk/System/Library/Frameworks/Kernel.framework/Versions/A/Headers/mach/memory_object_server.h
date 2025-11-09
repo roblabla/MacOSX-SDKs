@@ -26,7 +26,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	memory_object_MSG_COUNT
-#define	memory_object_MSG_COUNT	9
+#define	memory_object_MSG_COUNT	10
 #endif	/* memory_object_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -160,11 +160,33 @@ kern_return_t memory_object_last_unmap
 	memory_object_t memory_object
 );
 
-extern boolean_t memory_object_server(
+/* Routine memory_object_data_reclaim */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t memory_object_data_reclaim
+(
+	memory_object_t memory_object,
+	boolean_t reclaim_backing_store
+);
+
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+boolean_t memory_object_server(
 		mach_msg_header_t *InHeadP,
 		mach_msg_header_t *OutHeadP);
 
-extern mig_routine_t memory_object_server_routine(
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+mig_routine_t memory_object_server_routine(
 		mach_msg_header_t *InHeadP);
 
 
@@ -176,7 +198,7 @@ extern const struct memory_object_subsystem {
 	unsigned int	maxsize;	/* Max msg size */
 	vm_address_t	reserved;	/* Reserved */
 	struct routine_descriptor	/*Array of routine descriptors */
-		routine[9];
+		routine[10];
 } memory_object_subsystem;
 
 /* typedefs for all requests */
@@ -303,6 +325,18 @@ extern const struct memory_object_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		boolean_t reclaim_backing_store;
+	} __Request__memory_object_data_reclaim_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__memory_object_subsystem__defined */
 
 
@@ -320,6 +354,7 @@ union __RequestUnion__memory_object_subsystem {
 	__Request__memory_object_synchronize_t Request_memory_object_synchronize;
 	__Request__memory_object_map_t Request_memory_object_map;
 	__Request__memory_object_last_unmap_t Request_memory_object_last_unmap;
+	__Request__memory_object_data_reclaim_t Request_memory_object_data_reclaim;
 };
 #endif /* __RequestUnion__memory_object_subsystem__defined */
 /* typedefs for all replies */
@@ -436,6 +471,18 @@ union __RequestUnion__memory_object_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__memory_object_data_reclaim_t;
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__memory_object_subsystem__defined */
 
 
@@ -453,6 +500,7 @@ union __ReplyUnion__memory_object_subsystem {
 	__Reply__memory_object_synchronize_t Reply_memory_object_synchronize;
 	__Reply__memory_object_map_t Reply_memory_object_map;
 	__Reply__memory_object_last_unmap_t Reply_memory_object_last_unmap;
+	__Reply__memory_object_data_reclaim_t Reply_memory_object_data_reclaim;
 };
 #endif /* __RequestUnion__memory_object_subsystem__defined */
 
@@ -466,7 +514,8 @@ union __ReplyUnion__memory_object_subsystem {
     { "memory_object_data_unlock", 2205 },\
     { "memory_object_synchronize", 2206 },\
     { "memory_object_map", 2207 },\
-    { "memory_object_last_unmap", 2208 }
+    { "memory_object_last_unmap", 2208 },\
+    { "memory_object_data_reclaim", 2209 }
 #endif
 
 #ifdef __AfterMigServerHeader

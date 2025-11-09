@@ -1,6 +1,6 @@
 /*
     File:		IOBluetoothServiceBrowserController.h
-    Copyright:	© 2002-2006 by Apple Computer, Inc. All rights reserved.
+    Copyright:	(c) 2010 by Apple, Inc. All rights reserved.
 */
  
 #import <Cocoa/Cocoa.h>
@@ -67,11 +67,8 @@
 	@param		inOptions	For future expansion.  Currently no options defined.
 	@param		inWindow	The window to be used as the anchor of the sheet.
 	@result		IOReturn - 
-        
                             * kIOReturnSuccess  - on successful completion.
-                            
                             * kCanceledErr - User canceled.
-                            
 	@discussion	This method will allocate and run the IOBluetoothServiceBrowserController browser window as a sheet for a window.
 */
 +(IOReturn)browseDevicesAsSheetForWindow:(IOBluetoothSDPServiceRecord**)outRecord
@@ -99,11 +96,8 @@
 	@discussion	***WARNING*** This method has been deprecated in favor of -runModal and -getResults.
 	@param		outRecord 	Pointer to a (IOBluetoothSDPServiceRecord *) object.  This will get allocated and returned to the client if the user selects a service.
 	@result		IOReturn - 
-        
                             * kIOReturnSuccess  - on successful completion.
-                            
                             * kCanceledErr - User canceled.
-                            
 	@discussion	This method will run the IOBluetoothServiceBrowserController browser window modally.
 */
 -(IOReturn)discover:(IOBluetoothSDPServiceRecord **)outRecord	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
@@ -116,11 +110,8 @@
 	@param		sheetWindow 	The window to use for the anchor of the sheet..
 	@param		outRecord 	Pointer to a (IOBluetoothSDPServiceRecord *) object.  This will get allocated and returned to the client if the user selects a service.
 	@result		IOReturn - 
-        
                             * kIOReturnSuccess  - on successful completion.
-                            
                             * kCanceledErr - User canceled.
-                            
 	@discussion	This method will run the IOBluetoothServiceBrowserController browser window as a sheet for the window passed to it in sheetWindow.
 */
 -(IOReturn)discoverAsSheetForWindow:(NSWindow *)sheetWindow withRecord:(IOBluetoothSDPServiceRecord **)outRecord	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
@@ -137,11 +128,8 @@
 	@param		outRecord 	Pointer to a (IOBluetoothSDPServiceRecord *) object.  This will get allocated
                                 and returned to the client if the user selects a service.
 	@result		IOReturn - 
-        
                             * kIOReturnSuccess  - on successful completion.
-                            
                             * kCanceledErr - User canceled.
-                            
 	@discussion	This method will run the IOBluetoothServiceBrowserController browser window as a sheet for the window passed to it in sheetWindow.
 */
 -(IOReturn)discoverWithDeviceAttributes:(IOBluetoothDeviceSearchAttributes *)deviceAttributes serviceList:(NSArray *)serviceArray serviceRecord:(IOBluetoothSDPServiceRecord**)outRecord	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;

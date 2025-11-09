@@ -1,5 +1,5 @@
 /*	NSZone.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
@@ -34,21 +34,28 @@ enum {
     NSCollectorDisabledOption = (1UL << 1),
 };
 
-FOUNDATION_EXPORT void *__strong NSAllocateCollectable(NSUInteger size, NSUInteger options) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-FOUNDATION_EXPORT void *__strong NSReallocateCollectable(void *ptr, NSUInteger size, NSUInteger options) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+FOUNDATION_EXPORT void *__strong NSAllocateCollectable(NSUInteger size, NSUInteger options);
+FOUNDATION_EXPORT void *__strong NSReallocateCollectable(void *ptr, NSUInteger size, NSUInteger options);
 
+#endif
+
+#ifndef CF_CONSUMED
+#if __has_feature(attribute_cf_consumed)
+#define CF_CONSUMED __attribute__((cf_consumed))
+#else
+#define CF_CONSUMED
+#endif
 #endif
 
 /*
  NSMakeCollectable
  CFTypeRef style objects are garbage collected, yet only sometime after the last CFRelease() is performed.  Particulary for fully-bridged CFTypeRef objects such as CFStrings and collections (CFDictionaryRef et alia) it is imperative that either CFMakeCollectable or the more type safe NSMakeCollectable be performed, preferably right upon allocation.  Conceptually, this moves them from a "C" style opaque pointer into an "id" style object.
+ This function is unavailable in ARC mode. Use CFBridgingRelease instead.
 */
- 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
-NS_INLINE id NSMakeCollectable(CFTypeRef cf) {
-    return cf ? (id)CFMakeCollectable(cf) : nil;
+NS_INLINE NS_RETURNS_RETAINED id NSMakeCollectable(CFTypeRef CF_CONSUMED cf) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
+NS_INLINE NS_RETURNS_RETAINED id NSMakeCollectable(CFTypeRef CF_CONSUMED cf) {
+    return (cf ? (id)CFMakeCollectable(cf) : nil);
 }
-#endif
 
 FOUNDATION_EXPORT NSUInteger NSPageSize(void);
 FOUNDATION_EXPORT NSUInteger NSLogPageSize(void);

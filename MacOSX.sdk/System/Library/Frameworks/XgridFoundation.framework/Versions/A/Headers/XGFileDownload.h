@@ -33,13 +33,13 @@
 	@param delegate The delegate of the download.
 	@result An initialized XGFileDownload object.
 */
-- (id)initWithFile:(XGFile *)file delegate:(id)delegate;
+- (id)initWithFile:(XGFile *)file delegate:(id)delegate NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method cancel
 	@abstract Cancels the download and deletes the partially downloaded file, if any.
 */
-- (void)cancel;
+- (void)cancel NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method setDestination:allowOverwrite:
@@ -53,28 +53,28 @@
 	use the path passed with didCreateDestination: to determine the actual path of the
 	downloaded file.
 */
-- (void)setDestination:(NSString *)destination allowOverwrite:(BOOL)allowOverwrite;
+- (void)setDestination:(NSString *)destination allowOverwrite:(BOOL)allowOverwrite NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method file
 	@abstract Returns the file of the download.
 	@result The file of the download.
 */
-- (XGFile *)file;
+- (XGFile *)file NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method delegate
 	@abstract Returns the delegate of the download.
 	@result The delegate of the download.
 */
-- (id)delegate;
+- (id)delegate NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method destination
 	@abstract Returns the destionation of the download, or nil if no destination has been set.
 	@result The destination of the download.
 */
-- (NSString *)destination;
+- (NSString *)destination NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end
 
@@ -90,7 +90,7 @@
 	@abstract This method is called immediately after the download has started.
 	@param fileDownload The download that just started downloading.
 */
-- (void)fileDownloadDidBegin:(XGFileDownload *)fileDownload;
+- (void)fileDownloadDidBegin:(XGFileDownload *)fileDownload NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method fileDownload:didReceiveAttributes:
@@ -99,7 +99,7 @@
 	@param data The received attributes.
 	@discussion This method will be called once.
 */
-- (void)fileDownload:(XGFileDownload *)fileDownload didReceiveAttributes:(NSDictionary *)attributes;
+- (void)fileDownload:(XGFileDownload *)fileDownload didReceiveAttributes:(NSDictionary *)attributes NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method fileDownload:decideDestinationWithSuggestedPath:
@@ -112,7 +112,7 @@
 	setDestination:allowOverwrite: has already been called.  If the destination is not
 	set, or if the destination is set to nil, no file will be saved to disk.
 */
-- (void)fileDownload:(XGFileDownload *)fileDownload decideDestinationWithSuggestedPath:(NSString *)path;
+- (void)fileDownload:(XGFileDownload *)fileDownload decideDestinationWithSuggestedPath:(NSString *)path NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method fileDownload:didCreateDestination:
@@ -120,7 +120,7 @@
 	@param fileDownload The download that created the downloaded file.
 	@param path The path of the downloaded file.
 */
-- (void)fileDownload:(XGFileDownload *)fileDownload didCreateDestination:(NSString *)destination;
+- (void)fileDownload:(XGFileDownload *)fileDownload didCreateDestination:(NSString *)destination NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method fileDownload:didReceiveData:
@@ -131,7 +131,7 @@
 	also being written to disk then this method will be called immediately after the
 	data is written to disk.
 */
-- (void)fileDownload:(XGFileDownload *)fileDownload didReceiveData:(NSData *)data;
+- (void)fileDownload:(XGFileDownload *)fileDownload didReceiveData:(NSData *)data NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method fileDownload:didFailWithError:
@@ -141,7 +141,7 @@
 	@discussion This method is called when the download encounters a network or file
 	I/O related error. This method or downloadDidFinish: will only be called once.
 */
-- (void)fileDownload:(XGFileDownload *)fileDownload didFailWithError:(NSError *)error;
+- (void)fileDownload:(XGFileDownload *)fileDownload didFailWithError:(NSError *)error NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method fileDownloadDidFinish:
@@ -150,6 +150,6 @@
 	@discussion This method is called after all the data has been received and written
 	to disk. This method or download:didFailWithError: will only be called once.
 */
-- (void)fileDownloadDidFinish:(XGFileDownload *)fileDownload;
+- (void)fileDownloadDidFinish:(XGFileDownload *)fileDownload NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end

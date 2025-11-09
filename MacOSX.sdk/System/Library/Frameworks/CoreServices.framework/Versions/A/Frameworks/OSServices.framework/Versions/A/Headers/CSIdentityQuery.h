@@ -3,9 +3,7 @@
  
      Contains:   Identity Query APIs
  
-     Version:    OSServices-359.2~2
- 
-     Copyright:  © 2006-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 2006-2010 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -51,7 +49,7 @@ extern "C" {
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-CSIdentityQueryGetTypeID(void)                                AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityQueryGetTypeID(void)                                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 
@@ -143,7 +141,7 @@ extern CSIdentityQueryRef
 CSIdentityQueryCreate(
   CFAllocatorRef           allocator,
   CSIdentityClass          identityClass,
-  CSIdentityAuthorityRef   authority)                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CSIdentityAuthorityRef   authority)                         __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -191,7 +189,7 @@ CSIdentityQueryCreateForName(
   CFStringRef                             name,
   CSIdentityQueryStringComparisonMethod   comparisonMethod,
   CSIdentityClass                         identityClass,
-  CSIdentityAuthorityRef                  authority)          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CSIdentityAuthorityRef                  authority)          __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 
@@ -230,7 +228,7 @@ extern CSIdentityQueryRef
 CSIdentityQueryCreateForUUID(
   CFAllocatorRef           allocator,
   CFUUIDRef                uuid,
-  CSIdentityAuthorityRef   authority)                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CSIdentityAuthorityRef   authority)                         __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -273,7 +271,7 @@ CSIdentityQueryCreateForPosixID(
   CFAllocatorRef           allocator,
   id_t                     posixID,
   CSIdentityClass          identityClass,
-  CSIdentityAuthorityRef   authority)                         AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CSIdentityAuthorityRef   authority)                         __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -310,7 +308,7 @@ CSIdentityQueryCreateForPosixID(
 extern CSIdentityQueryRef 
 CSIdentityQueryCreateForPersistentReference(
   CFAllocatorRef   allocator,
-  CFDataRef        referenceData)                             AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFDataRef        referenceData)                             __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -337,7 +335,7 @@ CSIdentityQueryCreateForPersistentReference(
  *    Non-Carbon CFM:   not available
  */
 extern CSIdentityQueryRef 
-CSIdentityQueryCreateForCurrentUser(CFAllocatorRef allocator) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityQueryCreateForCurrentUser(CFAllocatorRef allocator) __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
 
 
 
@@ -368,7 +366,7 @@ CSIdentityQueryCreateForCurrentUser(CFAllocatorRef allocator) AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFArrayRef 
-CSIdentityQueryCopyResults(CSIdentityQueryRef query)          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityQueryCopyResults(CSIdentityQueryRef query)          __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 
@@ -406,7 +404,7 @@ extern Boolean
 CSIdentityQueryExecute(
   CSIdentityQueryRef     query,
   CSIdentityQueryFlags   flags,
-  CFErrorRef *           error)       /* can be NULL */       AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFErrorRef *           error)       /* can be NULL */       __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 
@@ -536,7 +534,7 @@ CSIdentityQueryExecuteAsynchronously(
   CSIdentityQueryFlags                  flags,
   const CSIdentityQueryClientContext *  clientContext,
   CFRunLoopRef                          runLoop,
-  CFStringRef                           runLoopMode)          AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+  CFStringRef                           runLoopMode)          __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 
@@ -566,7 +564,7 @@ CSIdentityQueryExecuteAsynchronously(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-CSIdentityQueryStop(CSIdentityQueryRef query)                 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CSIdentityQueryStop(CSIdentityQueryRef query)                 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
 
 
 

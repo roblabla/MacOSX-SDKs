@@ -1,5 +1,5 @@
 /*	NSNumberFormatter.h
-	Copyright (c) 1996-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -19,15 +19,13 @@
 
 // Report the used range of the string and an NSError, in addition to the usual stuff from NSFormatter
 
-- (BOOL)getObjectValue:(out id *)obj forString:(NSString *)string range:(inout NSRange *)rangep error:(out NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (BOOL)getObjectValue:(out id *)obj forString:(NSString *)string range:(inout NSRange *)rangep error:(out NSError **)error;
 
 // Even though NSNumberFormatter responds to the usual NSFormatter methods,
 //   here are some convenience methods which are a little more obvious.
 
-- (NSString *)stringFromNumber:(NSNumber *)number AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (NSNumber *)numberFromString:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSString *)stringFromNumber:(NSNumber *)number;
+- (NSNumber *)numberFromString:(NSString *)string;
 
 enum {
     NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle,
@@ -48,26 +46,25 @@ enum {
 };
 typedef NSUInteger NSNumberFormatterBehavior;
 
-#endif
 
-+ (NSString *)localizedStringFromNumber:(NSNumber *)num numberStyle:(NSNumberFormatterStyle)nstyle AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (NSString *)localizedStringFromNumber:(NSNumber *)num numberStyle:(NSNumberFormatterStyle)nstyle NS_AVAILABLE(10_6, 4_0);
 
 // Attributes of an NSNumberFormatter
 
-- (NSNumberFormatterStyle)numberStyle AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setNumberStyle:(NSNumberFormatterStyle)style AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSNumberFormatterStyle)numberStyle;
+- (void)setNumberStyle:(NSNumberFormatterStyle)style;
 
-- (NSLocale *)locale AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setLocale:(NSLocale *)locale AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSLocale *)locale;
+- (void)setLocale:(NSLocale *)locale;
 
-- (BOOL)generatesDecimalNumbers AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setGeneratesDecimalNumbers:(BOOL)b AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (BOOL)generatesDecimalNumbers;
+- (void)setGeneratesDecimalNumbers:(BOOL)b;
 
-- (NSNumberFormatterBehavior)formatterBehavior AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setFormatterBehavior:(NSNumberFormatterBehavior)behavior AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSNumberFormatterBehavior)formatterBehavior;
+- (void)setFormatterBehavior:(NSNumberFormatterBehavior)behavior;
 
-+ (NSNumberFormatterBehavior)defaultFormatterBehavior AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-+ (void)setDefaultFormatterBehavior:(NSNumberFormatterBehavior)behavior AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
++ (NSNumberFormatterBehavior)defaultFormatterBehavior;
++ (void)setDefaultFormatterBehavior:(NSNumberFormatterBehavior)behavior;
 
 - (NSString *)negativeFormat;
 - (void)setNegativeFormat:(NSString *)format;
@@ -87,103 +84,102 @@ typedef NSUInteger NSNumberFormatterBehavior;
 - (NSString *)decimalSeparator;
 - (void)setDecimalSeparator:(NSString *)string;
 
-- (BOOL)alwaysShowsDecimalSeparator AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setAlwaysShowsDecimalSeparator:(BOOL)b AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (BOOL)alwaysShowsDecimalSeparator;
+- (void)setAlwaysShowsDecimalSeparator:(BOOL)b;
 
-- (NSString *)currencyDecimalSeparator AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setCurrencyDecimalSeparator:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)currencyDecimalSeparator;
+- (void)setCurrencyDecimalSeparator:(NSString *)string;
 
-- (BOOL)usesGroupingSeparator AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setUsesGroupingSeparator:(BOOL)b AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (BOOL)usesGroupingSeparator;
+- (void)setUsesGroupingSeparator:(BOOL)b;
 
-- (NSString *)groupingSeparator AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setGroupingSeparator:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-
-- (NSString *)zeroSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setZeroSymbol:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-- (NSDictionary *)textAttributesForZero AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setTextAttributesForZero:(NSDictionary *)newAttributes AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-- (NSString *)nilSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setNilSymbol:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-- (NSDictionary *)textAttributesForNil AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setTextAttributesForNil:(NSDictionary *)newAttributes AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-- (NSString *)notANumberSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setNotANumberSymbol:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-- (NSDictionary *)textAttributesForNotANumber AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setTextAttributesForNotANumber:(NSDictionary *)newAttributes AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-- (NSString *)positiveInfinitySymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setPositiveInfinitySymbol:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-- (NSDictionary *)textAttributesForPositiveInfinity AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setTextAttributesForPositiveInfinity:(NSDictionary *)newAttributes AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-- (NSString *)negativeInfinitySymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setNegativeInfinitySymbol:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-- (NSDictionary *)textAttributesForNegativeInfinity AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setTextAttributesForNegativeInfinity:(NSDictionary *)newAttributes AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)groupingSeparator;
+- (void)setGroupingSeparator:(NSString *)string;
 
 
-- (NSString *)positivePrefix AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setPositivePrefix:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)zeroSymbol;
+- (void)setZeroSymbol:(NSString *)string;
 
-- (NSString *)positiveSuffix AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setPositiveSuffix:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSDictionary *)textAttributesForZero;
+- (void)setTextAttributesForZero:(NSDictionary *)newAttributes;
 
-- (NSString *)negativePrefix AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setNegativePrefix:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)nilSymbol;
+- (void)setNilSymbol:(NSString *)string;
 
-- (NSString *)negativeSuffix AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setNegativeSuffix:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSDictionary *)textAttributesForNil;
+- (void)setTextAttributesForNil:(NSDictionary *)newAttributes;
 
-- (NSString *)currencyCode AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setCurrencyCode:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)notANumberSymbol;
+- (void)setNotANumberSymbol:(NSString *)string;
 
-- (NSString *)currencySymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setCurrencySymbol:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSDictionary *)textAttributesForNotANumber;
+- (void)setTextAttributesForNotANumber:(NSDictionary *)newAttributes;
 
-- (NSString *)internationalCurrencySymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setInternationalCurrencySymbol:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)positiveInfinitySymbol;
+- (void)setPositiveInfinitySymbol:(NSString *)string;
 
-- (NSString *)percentSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setPercentSymbol:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSDictionary *)textAttributesForPositiveInfinity;
+- (void)setTextAttributesForPositiveInfinity:(NSDictionary *)newAttributes;
 
-- (NSString *)perMillSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setPerMillSymbol:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)negativeInfinitySymbol;
+- (void)setNegativeInfinitySymbol:(NSString *)string;
 
-- (NSString *)minusSign AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setMinusSign:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-- (NSString *)plusSign AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setPlusSign:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-- (NSString *)exponentSymbol AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setExponentSymbol:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSDictionary *)textAttributesForNegativeInfinity;
+- (void)setTextAttributesForNegativeInfinity:(NSDictionary *)newAttributes;
 
 
-- (NSUInteger)groupingSize AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setGroupingSize:(NSUInteger)number AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)positivePrefix;
+- (void)setPositivePrefix:(NSString *)string;
 
-- (NSUInteger)secondaryGroupingSize AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setSecondaryGroupingSize:(NSUInteger)number AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)positiveSuffix;
+- (void)setPositiveSuffix:(NSString *)string;
 
-- (NSNumber *)multiplier AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setMultiplier:(NSNumber *)number AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)negativePrefix;
+- (void)setNegativePrefix:(NSString *)string;
 
-- (NSUInteger)formatWidth AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setFormatWidth:(NSUInteger)number AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)negativeSuffix;
+- (void)setNegativeSuffix:(NSString *)string;
 
-- (NSString *)paddingCharacter AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setPaddingCharacter:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)currencyCode;
+- (void)setCurrencyCode:(NSString *)string;
 
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSString *)currencySymbol;
+- (void)setCurrencySymbol:(NSString *)string;
+
+- (NSString *)internationalCurrencySymbol;
+- (void)setInternationalCurrencySymbol:(NSString *)string;
+
+- (NSString *)percentSymbol;
+- (void)setPercentSymbol:(NSString *)string;
+
+- (NSString *)perMillSymbol;
+- (void)setPerMillSymbol:(NSString *)string;
+
+- (NSString *)minusSign;
+- (void)setMinusSign:(NSString *)string;
+
+- (NSString *)plusSign;
+- (void)setPlusSign:(NSString *)string;
+
+- (NSString *)exponentSymbol;
+- (void)setExponentSymbol:(NSString *)string;
+
+
+- (NSUInteger)groupingSize;
+- (void)setGroupingSize:(NSUInteger)number;
+
+- (NSUInteger)secondaryGroupingSize;
+- (void)setSecondaryGroupingSize:(NSUInteger)number;
+
+- (NSNumber *)multiplier;
+- (void)setMultiplier:(NSNumber *)number;
+
+- (NSUInteger)formatWidth;
+- (void)setFormatWidth:(NSUInteger)number;
+
+- (NSString *)paddingCharacter;
+- (void)setPaddingCharacter:(NSString *)string;
+
 
 enum {
     NSNumberFormatterPadBeforePrefix = kCFNumberFormatterPadBeforePrefix,
@@ -204,30 +200,27 @@ enum {
 };
 typedef NSUInteger NSNumberFormatterRoundingMode;
 
-#endif
 
-- (NSNumberFormatterPadPosition)paddingPosition AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setPaddingPosition:(NSNumberFormatterPadPosition)position AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSNumberFormatterPadPosition)paddingPosition;
+- (void)setPaddingPosition:(NSNumberFormatterPadPosition)position;
 
-- (NSNumberFormatterRoundingMode)roundingMode AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setRoundingMode:(NSNumberFormatterRoundingMode)mode AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSNumberFormatterRoundingMode)roundingMode;
+- (void)setRoundingMode:(NSNumberFormatterRoundingMode)mode;
 
-- (NSNumber *)roundingIncrement AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setRoundingIncrement:(NSNumber *)number AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSNumber *)roundingIncrement;
+- (void)setRoundingIncrement:(NSNumber *)number;
 
-- (NSUInteger)minimumIntegerDigits AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setMinimumIntegerDigits:(NSUInteger)number AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSUInteger)minimumIntegerDigits;
+- (void)setMinimumIntegerDigits:(NSUInteger)number;
 
-- (NSUInteger)maximumIntegerDigits AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setMaximumIntegerDigits:(NSUInteger)number AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSUInteger)maximumIntegerDigits;
+- (void)setMaximumIntegerDigits:(NSUInteger)number;
 
-- (NSUInteger)minimumFractionDigits AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setMinimumFractionDigits:(NSUInteger)number AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSUInteger)minimumFractionDigits;
+- (void)setMinimumFractionDigits:(NSUInteger)number;
 
-- (NSUInteger)maximumFractionDigits AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setMaximumFractionDigits:(NSUInteger)number AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSUInteger)maximumFractionDigits;
+- (void)setMaximumFractionDigits:(NSUInteger)number;
 
 - (NSNumber *)minimum;
 - (void)setMinimum:(NSNumber *)number;
@@ -235,25 +228,23 @@ typedef NSUInteger NSNumberFormatterRoundingMode;
 - (NSNumber *)maximum;
 - (void)setMaximum:(NSNumber *)number;
 
-#endif
+- (NSString *)currencyGroupingSeparator NS_AVAILABLE(10_5, 2_0);
+- (void)setCurrencyGroupingSeparator:(NSString *)string NS_AVAILABLE(10_5, 2_0);
 
-- (NSString *)currencyGroupingSeparator AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)setCurrencyGroupingSeparator:(NSString *)string AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (BOOL)isLenient NS_AVAILABLE(10_5, 2_0);
+- (void)setLenient:(BOOL)b NS_AVAILABLE(10_5, 2_0);
 
-- (BOOL)isLenient AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)setLenient:(BOOL)b AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (BOOL)usesSignificantDigits NS_AVAILABLE(10_5, 2_0);
+- (void)setUsesSignificantDigits:(BOOL)b NS_AVAILABLE(10_5, 2_0);
 
-- (BOOL)usesSignificantDigits AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)setUsesSignificantDigits:(BOOL)b AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSUInteger)minimumSignificantDigits NS_AVAILABLE(10_5, 2_0);
+- (void)setMinimumSignificantDigits:(NSUInteger)number NS_AVAILABLE(10_5, 2_0);
 
-- (NSUInteger)minimumSignificantDigits AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)setMinimumSignificantDigits:(NSUInteger)number AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSUInteger)maximumSignificantDigits NS_AVAILABLE(10_5, 2_0);
+- (void)setMaximumSignificantDigits:(NSUInteger)number NS_AVAILABLE(10_5, 2_0);
 
-- (NSUInteger)maximumSignificantDigits AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)setMaximumSignificantDigits:(NSUInteger)number AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-
-- (BOOL)isPartialStringValidationEnabled AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)setPartialStringValidationEnabled:(BOOL)b AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (BOOL)isPartialStringValidationEnabled NS_AVAILABLE(10_5, 2_0);
+- (void)setPartialStringValidationEnabled:(BOOL)b NS_AVAILABLE(10_5, 2_0);
 
 @end
 
@@ -282,15 +273,6 @@ typedef NSUInteger NSNumberFormatterRoundingMode;
 
 - (NSDecimalNumberHandler *)roundingBehavior;
 - (void)setRoundingBehavior:(NSDecimalNumberHandler *)newRoundingBehavior;
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_3
-
-- (NSDecimalNumber *)minimum;
-- (void)setMinimum:(NSDecimalNumber *)aMinimum;
-- (NSDecimalNumber *)maximum;
-- (void)setMaximum:(NSDecimalNumber *)aMaximum;
-
-#endif
 
 @end
 #endif

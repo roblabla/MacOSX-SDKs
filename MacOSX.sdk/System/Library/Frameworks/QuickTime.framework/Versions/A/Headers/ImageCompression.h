@@ -3,7 +3,7 @@
  
      Contains:   QuickTime Image Compression Interfaces.
  
-     Version:    QuickTime 7.6.6
+     Version:    QuickTime 7.7.1
  
      Copyright:  © 1990-2010 by Apple Inc., all rights reserved
  
@@ -104,11 +104,13 @@ enum {
   kDVCProPALCodecType           = 'dvpp', /* available in QuickTime 6.0 or later*/
   kDVCPro50NTSCCodecType        = 'dv5n',
   kDVCPro50PALCodecType         = 'dv5p',
-  kDVCPro100NTSCCodecType       = 'dv1n',
-  kDVCPro100PALCodecType        = 'dv1p',
-  kDVCPROHD720pCodecType        = 'dvhp',
+  kDVCPROHD720p60CodecType      = 'dvhp',
+  kDVCPROHD720p50CodecType      = 'dvhq',
+  kDVCPROHD720pCodecType        = kDVCPROHD720p60CodecType,
   kDVCPROHD1080i60CodecType     = 'dvh6',
   kDVCPROHD1080i50CodecType     = 'dvh5',
+  kDVCPROHD1080p30CodecType     = 'dvh3',
+  kDVCPROHD1080p25CodecType     = 'dvh2',
   kBaseCodecType                = 'base',
   kFLCCodecType                 = 'flic',
   kTargaCodecType               = 'tga ',
@@ -6825,9 +6827,6 @@ ImageTranscoderEndSequence(ImageTranscoderComponent itc)      AVAILABLE_MAC_OS_X
 
 
 
-#if (MAC_OS_X_VERSION_MAX_ALLOWED == MAC_OS_X_VERSION_10_2) || !defined(kComponentPropertyListenerCollectionContextVersion)
-
-
 
 /* MixedMode ProcInfo constants for component property calls */
 enum {
@@ -6886,14 +6885,7 @@ struct ComponentPropertyInfo {
   UInt32              propFlags;
 };
 typedef struct ComponentPropertyInfo    ComponentPropertyInfo;
-
-
-#endif  /* #MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED */ 
-
-
-
 /* == "QT" prefixed Component Property calls == */
-
 typedef CALLBACK_API( void , QTComponentPropertyListenerProcPtr )(ComponentInstance inComponent, ComponentPropertyClass inPropClass, ComponentPropertyID inPropID, void *inUserData);
 typedef STACK_UPP_TYPE(QTComponentPropertyListenerProcPtr)      QTComponentPropertyListenerUPP;
 

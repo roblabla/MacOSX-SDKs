@@ -11,7 +11,7 @@
 @class PDFActionPrivateVars;
 
 
-@interface PDFAction : NSObject
+@interface PDFAction : NSObject <NSCopying>
 {
 @private
     PDFActionPrivateVars *_pdfPriv;

@@ -1,7 +1,7 @@
 /*
 	NSTokenField.h
 	Application Kit
-	Copyright (c) 2004-2009, Apple Inc.
+	Copyright (c) 2004-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,7 +12,6 @@
 
 @protocol NSTokenFieldDelegate;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @interface NSTokenField : NSTextField {    
     BOOL _reserved1;
@@ -80,4 +79,3 @@
 - (NSTokenStyle)tokenField:(NSTokenField *)tokenField styleForRepresentedObject:(id)representedObject;
 
 @end
-#endif

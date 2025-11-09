@@ -279,6 +279,69 @@ PMSetPrintSettingsExtendedData(
   UInt32            size,
   void *            extendedData)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
+/*
+ *  PMPaperGetName()
+ *  
+ *  Summary:
+ *    Returns the name for a given paper.
+ *  
+ *  Discussion:
+ *		Use PMPaperCreateLocalizedName instead
+ *
+ *  Parameters:
+ *    
+ *    paper:
+ *      Obtain the name for this paper.
+ *    
+ *    paperName:
+ *      If successful noErr is returned and *paperName is set to the
+ *      name of the paper. The returned paper name is that appropriate
+ *      to display to a user.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework but deprecated in 10.7
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
+ */
+extern OSStatus 
+PMPaperGetName(
+  PMPaper        paper,
+  CFStringRef *  paperName)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+
+/*
+ *  PMPrinterCreatePaperInfoListForMenu()
+ *  
+ *  Summary:
+ *    Hand back a list of paper info items that can be used to create a
+ *    paper size menu. Each item is a dictionary describing the menu item.
+ *  
+ *  Parameters:
+ *    
+ *    printer:
+ *      The printer whose page size list should be enumerated. To get
+ *      the session's current printer, see PMSessionGetCurrentPrinter().
+ *    
+ *    pageFormat:
+ *      The page format object that contains the current paper size. 
+ *    
+ *    paperInfoList:
+ *      If this function is successful then noErr will be returned and
+ *      *'paperInfoList' will be set to a newly created CFArray. Each
+ *      element in the array will be a CFDictionary describing the
+ *      menu item that needs to be added for the paper size menu. If this
+ *      function fails then a non-zero error code will be returned and
+ *      *'paperInfoList' will be set to NULL.
+ *
+ */
+extern OSStatus PMPrinterCreatePaperInfoListForMenu(
+  PMPrinter printer,
+  PMPageFormat pageFormat,
+  CFArrayRef *paperInfoList) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
+
 #if !__LP64__
 
 #ifndef PM_USE_SESSION_APIS

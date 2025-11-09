@@ -103,12 +103,34 @@
  * type given below. Each sysctl level defines a set of name/type
  * pairs to be used by sysctl(1) in manipulating the subsystem.
  *
- * When declaring new sysctl names, please use the CTLFLAG_LOCKED
- * flag in the type to indicate that all necessary locking will
- * be handled within the sysctl. Any sysctl defined without
- * CTLFLAG_LOCKED is considered legacy and will be protected by
- * both the kernel funnel and the sysctl memlock. This is not
- * optimal, so it is best to handle locking yourself.
+ * When declaring new sysctl names, unless your sysctl is callable
+ * from the paging path, please use the CTLFLAG_LOCKED flag in the
+ * type to indicate that all necessary locking will be handled
+ * within the sysctl.
+ *
+ * Any sysctl defined without CTLFLAG_LOCKED is considered legacy
+ * and will be protected by both wiring the user process pages and,
+ * if it is a 32 bit legacy KEXT, by the obsolete kernel funnel.
+ *
+ * Note:	This is not optimal, so it is best to handle locking
+ *		yourself, if you are able to do so.  A simple design
+ *		pattern for use to avoid in a single function known
+ *		to potentially be in the paging path ot doing a DMA
+ *		to physical memory in a user space process is:
+ *
+ *			lock
+ *			perform operation vs. local buffer
+ *			unlock
+ *			SYSCTL_OUT(rey, local buffer, length)
+ *
+ *		...this assumes you are not using a deep call graph
+ *		or are unable to pass a local buffer address as a
+ *		parameter into your deep call graph.
+ *
+ *		Note that very large user buffers can fail the wire
+ *		if to do so would require more physical pages than
+ *		are available (the caller will get an ENOMEM error,
+ *		see sysctl_mem_hold() for details).
  */
 struct ctlname {
 	char	*ctl_name;	/* subsystem name */
@@ -132,7 +154,8 @@ struct ctlname {
 #define CTLFLAG_MASKED	0x04000000	/* deprecated variable, do not display */
 #define CTLFLAG_NOAUTO	0x02000000	/* do not auto-register */
 #define CTLFLAG_KERN	0x01000000	/* valid inside the kernel */
-#define CTLFLAG_LOCKED	0x00800000	/* node will handle locking itself (highly encouraged) */
+#define CTLFLAG_LOCKED	0x00800000	/* node will handle locking itself */
+#define CTLFLAG_OID2	0x00400000	/* struct sysctl_oid has version info */
 
 /*
  * USE THIS instead of a hardwired number from the categories below
@@ -311,6 +334,9 @@ struct ctlname {
 #define KERN_KDPIDEX            14
 #define KERN_KDSETRTCDEC        15
 #define KERN_KDGETENTROPY       16
+#define KERN_KDWRITETR		17
+#define KERN_KDWRITEMAP		18
+
 
 /* KERN_PANICINFO types */
 #define	KERN_PANICINFO_MAXSIZE	1	/* quad: panic UI image size limit */

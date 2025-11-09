@@ -1,13 +1,12 @@
 /*
     NSPathControl.h
     Application Kit
-    Copyright (c) 2005-2009, Apple Inc.
+    Copyright (c) 2005-2011, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSPathCell.h>
@@ -25,6 +24,7 @@
  
     When the URL value in the NSPathControl changes from an automatic drag and drop operation, or from the user selecting a new path via the open panel, the action is sent, but the clickedPathComponentCell will be nil.
 */
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSPathControl : NSControl {
 @private
     NSDragOperation _draggingSourceOperationMaskForLocal;
@@ -108,4 +108,3 @@
 
 @end
 
-#endif

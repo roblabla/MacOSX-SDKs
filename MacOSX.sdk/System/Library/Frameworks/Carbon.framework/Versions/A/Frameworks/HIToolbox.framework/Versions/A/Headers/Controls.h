@@ -3,7 +3,7 @@
  
      Contains:   Control Manager interfaces
  
-     Version:    HIToolbox-463~1
+     Version:    HIToolbox-567.2~1
  
      Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
  
@@ -97,25 +97,6 @@ typedef STACK_UPP_TYPE(ControlActionProcPtr)                    ControlActionUPP
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ ControlRecord                                                                                     */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-#if !OPAQUE_TOOLBOX_STRUCTS
-struct ControlRecord {
-  ControlRef          nextControl;            /* in Carbon use embedding heirarchy functions*/
-  WindowRef           contrlOwner;            /* in Carbon use GetControlOwner or EmbedControl*/
-  Rect                contrlRect;             /* in Carbon use Get/SetControlBounds*/
-  UInt8               contrlVis;              /* in Carbon use IsControlVisible, SetControlVisibility*/
-  UInt8               contrlHilite;           /* in Carbon use GetControlHilite, HiliteControl*/
-  SInt16              contrlValue;            /* in Carbon use Get/SetControlValue, Get/SetControl32BitValue*/
-  SInt16              contrlMin;              /* in Carbon use Get/SetControlMinimum, Get/SetControl32BitMinimum*/
-  SInt16              contrlMax;              /* in Carbon use Get/SetControlMaximum, Get/SetControl32BitMaximum*/
-  Handle              contrlDefProc;          /* not supported in Carbon*/
-  Handle              contrlData;             /* in Carbon use Get/SetControlDataHandle*/
-  ControlActionUPP    contrlAction;           /* in Carbon use Get/SetControlAction*/
-  SInt32              contrlRfCon;            /* in Carbon use Get/SetControlReference*/
-  Str255              contrlTitle;            /* in Carbon use Get/SetControlTitle*/
-};
-typedef struct ControlRecord            ControlRecord;
-#endif  /* !OPAQUE_TOOLBOX_STRUCTS */
-
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* ¥ Control ActionProcPtr : Epilogue                                                                   */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -190,20 +171,6 @@ typedef CCTabPtr *                      CCTabHandle;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ Auxiliary Control Record                                                                          */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-#if !OPAQUE_TOOLBOX_STRUCTS
-struct AuxCtlRec {
-  Handle              acNext;                 /* not supported in Carbon*/
-  ControlRef          acOwner;                /* not supported in Carbon*/
-  CCTabHandle         acCTable;               /* not supported in Carbon*/
-  SInt16              acFlags;                /* not supported in Carbon*/
-  SInt32              acReserved;             /* not supported in Carbon*/
-  SInt32              acRefCon;               /* in Carbon use Get/SetControlProperty if you need more refCons*/
-};
-typedef struct AuxCtlRec                AuxCtlRec;
-typedef AuxCtlRec *                     AuxCtlPtr;
-typedef AuxCtlPtr *                     AuxCtlHandle;
-#endif  /* !OPAQUE_TOOLBOX_STRUCTS */
-
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ Control Variants                                                                  */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/

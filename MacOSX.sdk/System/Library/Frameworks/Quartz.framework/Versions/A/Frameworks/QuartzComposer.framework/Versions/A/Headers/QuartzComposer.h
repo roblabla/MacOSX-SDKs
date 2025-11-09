@@ -9,6 +9,7 @@
 #import <QuartzComposer/QCCompositionLayer.h>
 
 #import <QuartzComposer/QCView.h>
+#import <QuartzComposer/QCPatchController.h>
 #import <QuartzComposer/QCCompositionParameterView.h>
 #import <QuartzComposer/QCCompositionPickerView.h>
 #import <QuartzComposer/QCCompositionPickerPanel.h>

@@ -1,6 +1,6 @@
 /* 
 	NSTypesetter.h
-	Copyright (c) 1994-2009, Apple Inc.  All rights reserved. 
+	Copyright (c) 1994-2011, Apple Inc.  All rights reserved. 
 
 	An abstract class to lay glyphs out in horizontal or vertical boxes	
 */
@@ -10,7 +10,6 @@
 #import <AppKit/NSLayoutManager.h>
 #import <AppKit/NSParagraphStyle.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 enum {
     NSTypesetterZeroAdvancementAction = (1 << 0), // glyphs with this action are flitered out from layout (notShownAttribute == YES)
     NSTypesetterWhitespaceAction = (1 << 1), // the width for glyphs with this action are determined by -boundingBoxForControlGlyphAtIndex:forTextContainer:proposedLineFragment:glyphPosition:characterIndex: if the method is implemented; otherwise, same as NSTypesetterZeroAdvancementAction
@@ -20,7 +19,6 @@ enum {
     NSTypesetterContainerBreakAction = (1 << 5) // Causes container break
 };
 typedef NSUInteger NSTypesetterControlCharacterAction;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
     
 @interface NSTypesetter : NSObject {
 #if __LP64__
@@ -30,7 +28,6 @@ typedef NSUInteger NSTypesetterControlCharacterAction;
 #endif /* __LP64__ */
 }
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* Primitive typesetting methods */
 /* NSLayoutManager attributes */
 /* Controls whether leading value specified by fonts affects line spacing
@@ -108,7 +105,7 @@ typedef NSUInteger NSTypesetterControlCharacterAction;
 */
 - (NSTypesetterControlCharacterAction)actionForControlCharacterAtIndex:(NSUInteger)charIndex;
 
-/* Cocoa Text System sspecific interface methods */
+/* Cocoa Text System specific interface methods */
 /* Friend class accessors */
 - (NSLayoutManager *)layoutManager;
 - (NSArray *)textContainers;
@@ -118,7 +115,6 @@ typedef NSUInteger NSTypesetterControlCharacterAction;
 /* Forces NSLayoutManager to invalidate glyph cache in range when invalidating layout.
 */
 - (void)setHardInvalidation:(BOOL)flag forGlyphRange:(NSRange)glyphRange;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 /*  Actually lay out glyphs starting at the given index.  The given number of line fragments will be generated as long as the NSGlyphStorage doesn't run out of glyphs.  nextGlyph will be set to the index of the next glyph that needs to be laid out. New applications should use -layoutCharactersInRange:forLayoutManager:maximumNumberOfLineFragments: instead.
 */
@@ -126,7 +122,7 @@ typedef NSUInteger NSTypesetterControlCharacterAction;
 
 /* Layouts characters in characterRange for layoutManager. The method returns the actual character range that the receiving NSTypesetter processed. The layout process can be interrupted when the number of line fragments exceeds maxNumLines. Specify NSUIntegerMax for unlimited number of line fragments.
 */
-- (NSRange)layoutCharactersInRange:(NSRange)characterRange forLayoutManager:(NSLayoutManager *)layoutManager maximumNumberOfLineFragments:(NSUInteger)maxNumLines AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSRange)layoutCharactersInRange:(NSRange)characterRange forLayoutManager:(NSLayoutManager *)layoutManager maximumNumberOfLineFragments:(NSUInteger)maxNumLines NS_AVAILABLE_MAC(10_5);
 
 /* Returns the offset to be applied to the glyph in question when printing.
 */
@@ -137,13 +133,10 @@ typedef NSUInteger NSTypesetterControlCharacterAction;
 
 /* Factory methods */
 + (id)sharedSystemTypesetter;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 + (id)sharedSystemTypesetterForBehavior:(NSTypesetterBehavior)theBehavior;
 + (NSTypesetterBehavior)defaultTypesetterBehavior;
-#endif
 @end
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* NSLayoutPhaseInterface declares various subclass override points that are invoked if implemented */
 @interface NSTypesetter (NSLayoutPhaseInterface)
 // Called right before setLineFragmentRect:forGlyphRange:usedRect:
@@ -183,7 +176,6 @@ typedef NSUInteger NSTypesetterControlCharacterAction;
 - (void)setAttachmentSize:(NSSize)attachmentSize forGlyphRange:(NSRange)glyphRange;
 - (void)setBidiLevels:(const uint8_t *)levels forGlyphRange:(NSRange)glyphRange;
 @end
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 #if !__LP64__ && MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_4
 #import <AppKit/NSSimpleHorizontalTypesetter.h>

@@ -1,5 +1,4 @@
 /*
- * $XConsortium: scrnsaver.h,v 1.6 94/04/17 20:59:34 keith Exp $
  *
 Copyright (c) 1992  X Consortium
 
@@ -26,7 +25,6 @@ in this Software without prior written authorization from the X Consortium.
  *
  * Author:  Keith Packard, MIT X Consortium
  */
-/* $XFree86$ */
 
 #ifndef _SCRNSAVER_H_
 #define _SCRNSAVER_H_

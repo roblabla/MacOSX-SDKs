@@ -1,7 +1,7 @@
 /*
 	NSSliderCell.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -15,13 +15,11 @@ enum {
 };
 typedef NSUInteger NSTickMarkPosition;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 enum {
     NSLinearSlider   = 0,
     NSCircularSlider = 1
 };
 typedef NSUInteger NSSliderType;
-#endif
 
 @interface NSSliderCell : NSActionCell
 {
@@ -73,10 +71,8 @@ typedef NSUInteger NSSliderType;
 - (void)drawBarInside:(NSRect)aRect flipped:(BOOL)flipped;
 - (NSRect)trackRect;	// Only valid while tracking the mouse!
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void) setSliderType:(NSSliderType)sliderType;
 - (NSSliderType)sliderType;
-#endif
 
 @end
 

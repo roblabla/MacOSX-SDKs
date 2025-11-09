@@ -92,7 +92,7 @@ CG_EXTERN CGPoint CGPointApplyAffineTransform(CGPoint point,
   CGAffineTransform t) CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /* Transform `size' by `t' and return the result:
-    s' = s * t
+     s' = s * t
    where s = [ width height 0 ]. */
 
 CG_EXTERN CGSize CGSizeApplyAffineTransform(CGSize size, CGAffineTransform t)

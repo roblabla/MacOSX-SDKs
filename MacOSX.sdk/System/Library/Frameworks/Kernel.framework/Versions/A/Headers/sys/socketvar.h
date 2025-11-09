@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -92,6 +92,7 @@ struct sockutil;
 typedef	u_quad_t so_gen_t;
 
 
+
 /*
  * Socket state bits.
  */
@@ -112,6 +113,7 @@ typedef	u_quad_t so_gen_t;
 #define	SS_ISDISCONNECTED	0x2000	/* socket disconnected from peer */
 #define	SS_DRAINING		0x4000	/* close waiting for blocked system
 					   calls to drain */
+#define	SS_DEFUNCT		0x8000	/* has been fully defunct'd */
 
 #if defined(__LP64__)
 #define	_XSOCKET_PTR(x)		u_int32_t
@@ -122,13 +124,13 @@ typedef	u_quad_t so_gen_t;
 #pragma pack(4)
 
 struct xsockbuf {
-		u_int32_t	sb_cc;
-		u_int32_t	sb_hiwat;
-		u_int32_t	sb_mbcnt;
-		u_int32_t	sb_mbmax;
-		int32_t		sb_lowat;
-		short		sb_flags;
-		short		sb_timeo;
+	u_int32_t	sb_cc;
+	u_int32_t	sb_hiwat;
+	u_int32_t	sb_mbcnt;
+	u_int32_t	sb_mbmax;
+	int32_t		sb_lowat;
+	short		sb_flags;
+	short		sb_timeo;
 };
 
 /*
@@ -181,6 +183,7 @@ struct	xsocket64 {
 };
 
 #endif /* !CONFIG_EMBEDDED */
+
 
 #pragma pack()
 

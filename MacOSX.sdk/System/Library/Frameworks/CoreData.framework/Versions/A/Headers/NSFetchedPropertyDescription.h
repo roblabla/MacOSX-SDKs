@@ -1,19 +1,17 @@
 /*
     NSFetchedPropertyDescription.h
     Core Data
-    Copyright (c) 2004-2009 Apple Inc.
+    Copyright (c) 2004-2010 Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-
 #import <CoreData/NSPropertyDescription.h>
 
 @class NSFetchRequest;
 
 // Fetched properties allow to specify related objects through a "weakly" resolved property, so there is no actual join necessary.
+NS_CLASS_AVAILABLE(10_4,3_0)
 @interface NSFetchedPropertyDescription : NSPropertyDescription {
 @private
 	void *_reserved5;
@@ -27,5 +25,3 @@
 - (void)setFetchRequest:(NSFetchRequest *)fetchRequest;
 
 @end
-
-#endif

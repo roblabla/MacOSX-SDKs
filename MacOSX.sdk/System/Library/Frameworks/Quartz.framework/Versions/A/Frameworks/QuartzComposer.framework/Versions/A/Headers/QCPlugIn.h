@@ -13,7 +13,7 @@
 - All the methods related to the execution of the plug-in (called when the Quartz Composer engine is rendering) get passed an opaque object conforming to the <QCPlugInContext> protocol, which represents the execution context of the plug-in.
 - Do not retain the plug-in context or use it outside of the scope of the execution method it was passed to.
 - These execution methods should not assume they are called on the main thread of the process or that there is an active runloop available.
-	It's the responsability of the execution methods to ensure they can be called on any thread, and do not require a runloop to be running on the calling thread (they can however span a worker thread that would have a running runloop and handle communication with it).
+	It's the responsibility of the execution methods to ensure they can be called on any thread, and do not require a runloop to be running on the calling thread (they can however span a worker thread that would have a running runloop and handle communication with it).
 - Like a standard patch in Quartz Composer, a plug-in defines a set of input and output ports through which it communicates.
 - To minimize impedance issues within the Quartz Composer engine, only a restricted set of data types is supported when reading from / writing to ports:
 	Boolean, Index, Number port <-> NSNumber (BOOL, NSUInteger, double)
@@ -30,6 +30,7 @@
 - Retrieving values from input ports and setting values on output ports can only be done from within -execute:atTime:withArguments:.
 - Plug-ins must be packaged as Cocoa bundles with the ".plugin" extension and installed in /Library/Graphics/Quartz Composer Plug-Ins.
 	The Info.plist of these bundles must have a "QCPlugInClasses" key that is an array listing the names of the QCPlugIn subclasses implemented in the bundle.
+	The Resources of a plug-in may include example compositions that use the plug-in. Examples may also point to a web URL which describes the plug-in or shows samples of its usage.
 - All supported pixel formats assume premultiplied alpha and those using multi-components per word (e.g. ARGB8) assume components to be in memory order (for instance, A first, then R, G, B for ARGB8)
 */
 
@@ -38,6 +39,10 @@
 extern NSString* const QCPlugInAttributeNameKey;
 extern NSString* const QCPlugInAttributeDescriptionKey;
 extern NSString* const QCPlugInAttributeCopyrightKey;
+#endif
+#if defined(MAC_OS_X_VERSION_10_7) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7)
+extern NSString* const QCPlugInAttributeCategoriesKey; // Return an NSArray with category strings.
+extern NSString* const QCPlugInAttributeExamplesKey; // Return an NSArray of examples. Examples may be NSURLs or NSString paths that are relative to the plug-in's Resources directory.
 #endif
 
 /* Keys for input / output ports attributes */
@@ -373,7 +378,7 @@ Returning NO indicates a fatal error occured and prevents the Quartz Composer en
 - (BOOL) startExecution:(id<QCPlugInContext>)context;
 
 /*
-Override this execution method if the plug-in needs to know when the Quartz Composer engine stops using it.
+Override this execution method if the plug-in needs to know when the Quartz Composer engine starts using it.
 */
 - (void) enableExecution:(id<QCPlugInContext>)context;
 
@@ -392,7 +397,7 @@ Returning NO indicates the plug-in was not able to execute successfully and the 
 - (BOOL) execute:(id<QCPlugInContext>)context atTime:(NSTimeInterval)time withArguments:(NSDictionary*)arguments;
 
 /*
-Override this execution method if the plug-in needs to know when the Quartz Composer engine starts using it.
+Override this execution method if the plug-in needs to know when the Quartz Composer engine stops using it.
 */
 - (void) disableExecution:(id<QCPlugInContext>)context;
 

@@ -3,7 +3,7 @@
  
      Contains:   AppleEvent functions that deal with Events and interacting with user
  
-     Version:    HIToolbox-463~1
+     Version:    HIToolbox-567.2~1
  
      Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -268,7 +268,7 @@ enum {
 /* Constants for AEResumeTheCurrentEvent */
 enum {
   kAENoDispatch                 = 0,    /* dispatch parameter to AEResumeTheCurrentEvent takes a pointer to a dispatch */
-  kAEUseStandardDispatch        = (int)0xFFFFFFFF /* table, or one of these two constants */
+  kAEUseStandardDispatch        = -1L   /* table, or one of these two constants */
 };
 
 /*

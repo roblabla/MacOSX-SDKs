@@ -1,6 +1,6 @@
 /*
  *  NSPointerArray.h
- *  Copyright (c) 2005-2009, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2011, Apple Inc. All rights reserved.
  *
  */
  
@@ -8,8 +8,6 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSPointerFunctions.h>
-
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /*
    NSPointerArray.h
@@ -23,6 +21,7 @@
    The fast enumeration protocol (supporting the for..in statement) will yield NULLs if present.  It is defined for all types of pointers although the language syntax doesn't directly support this.
 */
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSPointerArray : NSObject <NSFastEnumeration, NSCopying, NSCoding>
 // construction
 - initWithOptions:(NSPointerFunctionsOptions)options;
@@ -53,7 +52,6 @@
 
 
 
-
 @interface NSPointerArray (NSArrayConveniences)  
 
 // construction
@@ -64,4 +62,3 @@
 
 @end
 
-#endif

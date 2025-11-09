@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2008 Apple Inc. All rights reserved.
+ * Copyright (c) 2009-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -21,18 +21,41 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+#if !defined(__ODCONSTANTS_H)
+#define __ODCONSTANTS_H
+
 /*!
-	@header		CFOpenDirectoryConstants
-	@abstract   Constants that are shared between CoreFoundation based and 
-				Objective-C based OpenDirectory APIs
-	@discussion Constants that are shared between CoreFoundation based and 
-				Objective-C based OpenDirectory APIs
+    @const      kODSessionProxyAddress
+    @abstract   the address to connect to via proxy, used when making the options dictionary
+    @discussion the address to connect to via proxy, used when making the options dictionary
 */
+CF_EXPORT
+const CFStringRef kODSessionProxyAddress __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
-#ifndef __CFOPENDIRECTORYCONSTANTS_H
-#define __CFOPENDIRECTORYCONSTANTS_H
+/*!
+    @const      kODSessionProxyPort
+    @abstract   the port to connect to via proxy, used when making the options dictionary
+    @discussion the port to connect to via proxy, used when making the options dictionary.  This parameter
+                is optional and should not be passed normally.
+*/
+CF_EXPORT
+const CFStringRef kODSessionProxyPort __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
-#include <stdint.h>
+/*!
+    @const      kODSessionProxyUsername
+    @abstract   the username to connect with via proxy, used when making the options dictionary
+    @discussion the username to connect with via proxy, used when making the options dictionary
+*/
+CF_EXPORT
+const CFStringRef kODSessionProxyUsername __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/*!
+    @const      kODSessionProxyPassword
+    @abstract   the password to connect with via proxy, used when making the options dictionary
+    @discussion the password to connect with via proxy, used when making the options dictionary
+*/
+CF_EXPORT
+const CFStringRef kODSessionProxyPassword __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /*!
 	@enum		ODNodeType
@@ -48,12 +71,11 @@ enum
 {
 	kODNodeTypeAuthentication			= 0x2201,
 	kODNodeTypeContacts					= 0x2204,
-	kODNodeTypeNetwork					= 0x2205,
+	kODNodeTypeNetwork					= 0x2205, /* deprecated, behaves identically to kODNodeTypeAuthentication */
 	
 	kODNodeTypeLocalNodes				= 0x2200,
 	kODNodeTypeConfigure   				= 0x2202
 };
-
 typedef uint32_t ODNodeType;
 
 /*!
@@ -88,7 +110,6 @@ enum
 	kODMatchGreaterThan				= 0x2006,
 	kODMatchLessThan				= 0x2007,
 };
-
 typedef uint32_t ODMatchType;
 
 /*!
@@ -105,7 +126,11 @@ typedef uint32_t ODMatchType;
 				Note:  CFStringRef can be use interchangeably with ODRecordType for ease
 				of use.
 */
-typedef _ODRecordType ODRecordType;
+#ifdef __OBJC__
+typedef NSString *ODRecordType;
+#else
+typedef CFStringRef ODRecordType;
+#endif
 
 /*!
 	@typedef	ODAttributeType
@@ -121,7 +146,11 @@ typedef _ODRecordType ODRecordType;
 				Note:  CFStringRef can be use interchangeably with ODAttributeType for ease
 				of use.
 */
-typedef _ODAttributeType ODAttributeType;
+#ifdef __OBJC__
+typedef NSString *ODAttributeType;
+#else
+typedef CFStringRef ODAttributeType;
+#endif
 
 /*!
 	@typedef	ODAuthenticationType
@@ -137,11 +166,18 @@ typedef _ODAttributeType ODAttributeType;
 				Note:  CFStringRef can be use interchangeably with ODAuthenticationType for ease
 				of use.
 */
-typedef _ODRecordType ODAuthenticationType;
+#ifdef __OBJC__
+typedef NSString *ODAuthenticationType;
+#else
+typedef CFStringRef ODAuthenticationType;
+#endif
 
-#pragma mark -
-#pragma mark Record Type Constants
-#pragma mark -
+// Compatibility
+typedef ODRecordType _ODRecordType;
+typedef ODAttributeType _ODAttributeType;
+typedef ODAuthenticationType _ODAuthenticationType;
+
+#pragma mark Record Types
 
 /*!
     @const		kODRecordTypeAttributeTypes
@@ -512,8 +548,7 @@ const ODRecordType kODRecordTypeUsers;
 CF_EXPORT
 const ODRecordType kODRecordTypeWebServer;
 
-#pragma mark -
-#pragma mark ODAttributeType constants
+#pragma mark Attribute Types
 
 /*!
     @const		kODAttributeTypeAllAttributes
@@ -540,12 +575,47 @@ CF_EXPORT
 const ODAttributeType kODAttributeTypeNativeOnly;
 
 /*!
+    @const		kODAttributeTypeMetaAmbiguousName
+    @abstract   Used to disambiguate a provided name.
+    @discussion Searches a configured list of attributes; by default: RecordName, FullName, EMailAddress.
+*/
+CF_EXPORT
+const ODAttributeType kODAttributeTypeMetaAmbiguousName;
+
+/*!
+    @const		kODAttributeTypeMetaAugmentedAttributes
+    @abstract   Attributes that have been augmented.
+    @discussion Attributes that have been augmented.
+*/
+CF_EXPORT
+const ODAttributeType kODAttributeTypeMetaAugmentedAttributes;
+
+/*!
+    @const		kODAttributeTypeMetaRecordName
+    @abstract   Native record name.
+    @discussion Native record name, e.g. LDAP DN
+*/
+CF_EXPORT
+const ODAttributeType kODAttributeTypeMetaRecordName;
+
+/*!
     @const		kODAttributeTypeAdminLimits
     @abstract   XML plist indicating what an admin user can edit.
     @discussion XML plist indicating what an admin user can edit. Found in kODRecordTypeUsers records.
 */
 CF_EXPORT
 const ODAttributeType kODAttributeTypeAdminLimits;
+
+/*!
+	@const		kODAttributeTypeAltSecurityIdentities
+	@abstract	Used to store alternate identities for the record
+	@discussion Used to store alternate identities for the record. Values will have standardized form as
+				specified by Microsoft LDAP schema (1.2.840.113556.1.4.867).
+
+ 				Kerberos:user\@REALM
+ */
+CF_EXPORT
+const ODAttributeType kODAttributeTypeAltSecurityIdentities __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /*!
     @const		kODAttributeTypeAuthenticationHint
@@ -727,6 +797,15 @@ CF_EXPORT
 const ODAttributeType kODAttributeTypeGUID;
 
 /*!
+    @const      kODAttributeTypeHardwareUUID
+    @abstract   Used to store hardware UUID in string form
+    @discussion Used to store hardware UUID in string form for a record.  Typically found in
+                kODRecordTypeComputers.
+*/
+CF_EXPORT
+const ODAttributeType kODAttributeTypeHardwareUUID __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/*!
     @const		kODAttributeTypeHomeDirectoryQuota
 	@abstract   Represents the allowed usage for a user's home directory in bytes.
 	@discussion Represents the allowed usage for a user's home directory in bytes.
@@ -769,6 +848,14 @@ const ODAttributeType kODAttributeTypeInternetAlias;
 */
 CF_EXPORT
 const ODAttributeType kODAttributeTypeKDCConfigData;
+
+/*!
+	@const		kODAttributeTypeKerberosServices
+	@abstract	This is used to store the principals in host records (i.e., "host", "vnc", etc.)
+	@discussion	This is used to store the principals in host records (i.e., "host", "vnc", etc.)
+*/
+CF_EXPORT
+const ODAttributeType kODAttributeTypeKerberosServices __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 
 /*!
     @const		kODAttributeTypeLastName
@@ -869,6 +956,24 @@ const ODAttributeType kODAttributeTypeNFSHomeDirectory;
 */
 CF_EXPORT
 const ODAttributeType kODAttributeTypeNote;
+
+/*!
+    @const		kODAttributeTypeOperatingSystem
+    @abstract   Returns the operating system type where the daemon is running
+    @discussion Returns the operating system type where the daemon is running,
+				e.g., Mac OS X or Mac OS X Server
+*/
+CF_EXPORT
+const ODAttributeType kODAttributeTypeOperatingSystem __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
+
+/*!
+	@const		kODAttributeTypeOperatingSystemVersion
+	@abstract   Returns the operating system version where the daemon is running
+	@discussion Returns the operating system version where the daemon is running,
+				e.g., 10.6
+ */
+CF_EXPORT
+const ODAttributeType kODAttributeTypeOperatingSystemVersion __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_NA);
 
 /*!
     @const		kODAttributeTypeOwner
@@ -1267,6 +1372,14 @@ CF_EXPORT
 const ODAttributeType kODAttributeTypeTimeToLive;
 
 /*!
+	@const		kODAttributeTypeTrustInformation
+	@abstract	Used to describe a node's trust information.
+	@discussion	Used to describe a node's trust information.
+*/
+CF_EXPORT
+const ODAttributeType kODAttributeTypeTrustInformation;
+
+/*!
     @const		kODAttributeTypeUniqueID
 	@abstract   This is the 32 bit unique ID that represents the user in the legacy manner.
 	@discussion This is the 32 bit unique ID that represents the user in the legacy manner.
@@ -1623,9 +1736,8 @@ const ODAttributeType kODAttributeTypeHTML;
 
 /*!
     @const		kODAttributeTypeHomeDirectory
-	@abstract   Represents the allowed usage for a user's home directory in bytes.
-	@discussion Represents the allowed usage for a user's home directory in bytes.
-				Found in user records (kODRecordTypeUsers).
+    @abstract   Network home directory URL.
+    @discussion Network home directory URL.
 */
 CF_EXPORT
 const ODAttributeType kODAttributeTypeHomeDirectory;
@@ -2194,8 +2306,43 @@ const ODAttributeType kODAttributeTypeLocalOnlySearchPath;
 CF_EXPORT
 const ODAttributeType kODAttributeTypeCustomSearchPath;
 
-#pragma mark -
-#pragma mark Configure Node attribute type Constants
+/*!
+	@const		kODAttributeTypeAdvertisedServices
+*/
+CF_EXPORT
+const ODAttributeType kODAttributeTypeAdvertisedServices __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+
+/*!
+	@const		kODAttributeTypeLocaleRelay
+*/
+CF_EXPORT
+const ODAttributeType kODAttributeTypeLocaleRelay __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+
+/*!
+	@const		kODAttributeTypeLocaleSubnets
+*/
+CF_EXPORT
+const ODAttributeType kODAttributeTypeLocaleSubnets __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+
+/*!
+	@const		kODAttributeTypeNetworkInterfaces
+*/
+CF_EXPORT
+const ODAttributeType kODAttributeTypeNetworkInterfaces __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+
+/*!
+	@const		kODAttributeTypeParentLocales
+*/
+CF_EXPORT
+const ODAttributeType kODAttributeTypeParentLocales __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+
+/*!
+	@const		kODAttributeTypePrimaryLocale
+*/
+CF_EXPORT
+const ODAttributeType kODAttributeTypePrimaryLocale __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
+
+#pragma mark Attribute Types (Configure Node)
 
 /*!
     @const		kODAttributeTypeBuildVersion
@@ -2375,8 +2522,7 @@ const ODAttributeType kODAttributeTypeAttrListRefs;
 CF_EXPORT
 const ODAttributeType kODAttributeTypeAttrListValueRefs;
 
-#pragma mark -
-#pragma mark Authentication Type Constants
+#pragma mark Authentication Types
 
 /*!
     @const		kODAuthenticationType2WayRandom
@@ -2642,11 +2788,11 @@ const ODAuthenticationType kODAuthenticationTypeMSCHAP2;
 
 				Authentication array has following items in order:
 					user name in UTF8 encoding,
-					samba server challenge,
+					SMB server challenge,
 					the client "blob" which includes 16 bytes of client digest prefixed
 						to the the blob data,
 					the user name used to calculate the digest in UTF8 encoding,
-					the samba domain in UTF8 encoding
+					the SMB domain in UTF8 encoding
 */
 CF_EXPORT
 const ODAuthenticationType kODAuthenticationTypeNTLMv2;
@@ -2661,11 +2807,11 @@ const ODAuthenticationType kODAuthenticationTypeNTLMv2;
 
 				Authentication array has following items in order:
 					user name in UTF8 encoding,
-					samba server challenge,
+					SMB server challenge,
 					the client "blob" which includes 16 bytes of client digest prefixed
 						to the the blob data,
 					the user name used to calculate the digest  in UTF8 encoding,
-					the samba domain in UTF8 encoding,
+					the SMB domain in UTF8 encoding,
 					user name in UTF8 encoding,
 					authenticator password in UTF8 encoding
 */
@@ -2800,8 +2946,8 @@ const ODAuthenticationType kODAuthenticationTypeSMB_NT_Key;
 
 /*!
     @const		kODAuthenticationTypeSMB_NT_UserSessionKey
-	@abstract   Used by Samba to get session keys.
-	@discussion Used by Samba to get session keys
+	@abstract   Used by SMB to get session keys.
+	@discussion Used by SMB to get session keys
 				This authentication method is only implemented by the PasswordServer node.
 
 				Authentication array has following items in order:
@@ -2815,8 +2961,8 @@ const ODAuthenticationType kODAuthenticationTypeSMB_NT_UserSessionKey;
 
 /*!
     @const		kODAuthenticationTypeSMB_NT_WithUserSessionKey
-	@abstract   Used by Samba to authenticate and get session keys.
-	@discussion Used by Samba to authenticate and get session keys
+	@abstract   Used by SMB to authenticate and get session keys.
+	@discussion Used by SMB to authenticate and get session keys
 
 				Authentication array has following items in order:
 					user name in UTF8 encoding,
@@ -2841,7 +2987,19 @@ const ODAuthenticationType kODAuthenticationTypeSMB_NT_WithUserSessionKey;
 					salted SHA1 hash
 */
 CF_EXPORT
-const ODAuthenticationType kODAuthenticationTypeSecureHash;
+const ODAuthenticationType kODAuthenticationTypeSecureHash __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_6, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+
+/*!
+	@const		kODAuthenticationTypeSetCertificateHashAsCurrent
+	@abstract	Set certificate using the authenticated user's credentials.
+	@discussion	Set certificate using the authenticated user's credentials.
+
+				Authentication array has the following items in order:
+					user name in UTF8 encoding
+					hashed certificate data (40 hex characters)
+*/
+CF_EXPORT
+const ODAuthenticationType kODAuthenticationTypeSetCertificateHashAsCurrent __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_NA);
 
 /*!
     @const		kODAuthenticationTypeSetGlobalPolicy
@@ -3002,5 +3160,157 @@ const ODAuthenticationType kODAuthenticationTypeWithAuthorizationRef;
 */
 CF_EXPORT
 const ODAuthenticationType kODAuthenticationTypeWriteSecureHash;
+
+#pragma mark Errors
+
+/*!
+ @enum   	ODFrameworkErrors
+ @abstract   Errors specific to the framework and to underlying calls
+ @discussion Errors specific to the framework and to underlying calls
+ @constant kODErrorSuccess is when operation was successful (if appropriate)
+ @constant kODErrorSessionLocalOnlyDaemonInUse is when a Local Only session was initiated and is still active
+ @constant kODErrorSessionNormalDaemonInUse is when the Normal daemon is still in use but request was issued for Local only
+ @constant kODErrorSessionDaemonNotRunning is when the daemon is not running
+ @constant kODErrorSessionDaemonRefused is when the daemon refused the session
+ @constant kODErrorSessionProxyCommunicationError is when there was a communication error with the remote daemon
+ @constant kODErrorSessionProxyVersionMismatch is when versions mismatch between the remote daemon and local framework
+ @constant kODErrorSessionProxyIPUnreachable is when the provided kODSessionProxyAddress did not respond
+ @constant kODErrorSessionProxyUnknownHost is when the provided kODSessionProxyAddress cannot be resolved
+ @constant kODErrorNodeUnknownName is when the node name provided does not exist and cannot be opened
+ @constant kODErrorNodeUnknownType is when the node type provided is not a known value
+ @constant kODErrorNodeConnectionFailed is when a node connection failed (commonly server closed connection, etc.)
+ @constant kODErrorNodeUnknownHost is when an invalid host is provided
+ @constant kODErrorQuerySynchronize is an error code that is returned when a synchronize has been initiated
+ @constant kODErrorQueryInvalidMatchType is when an invalid match type is provided in a query
+ @constant kODErrorQueryUnsupportedMatchType is when plugin does not support the requirested match type
+ @constant kODErrorQueryTimeout is when a query timed out during request
+ @constant kODErrorRecordReadOnlyNode is when a record cannot be modified
+ @constant kODErrorRecordPermissionError is when the changes requested were denied due to insufficient permissions
+ @constant kODErrorRecordParameterError is when an invalid parameter was provided
+ @constant kODErrorRecordInvalidType is when an invalid record type was provided
+ @constant kODErrorRecordAlreadyExists is when a record create failed because the record already exists
+ @constant kODErrorRecordTypeDisabled is when a particular record type is disabled by policy for a plugin
+ @constant kODErrorRecordAttributeUnknownType is when an unknown attribute type is provided
+ @constant kODErrorRecordAttributeNotFound is when an attribute requested is not found in the record
+ @constant kODErrorRecordAttributeValueSchemaError is when an attribute value does not meet schema requirements
+ @constant kODErrorRecordAttributeValueNotFound is when an attribute value is not found in a record
+ @constant kODErrorCredentialsInvalid is when credentials provided are invalid with the current node
+ @constant kODErrorCredentialsMethodNotSupported is when a particular extended method is not supported by the node
+ @constant kODErrorCredentialsNotAuthorized is when an operation such as changing a password is not authorized with current privileges
+ @constant kODErrorCredentialsParameterError is when a parameter provided is invalid
+ @constant kODErrorCredentialsOperationFailed is when the requested operation failed (usually due to some unrecoverable error)
+ @constant kODErrorCredentialsServerUnreachable is when the authententication server is not reachabable
+ @constant kODErrorCredentialsServerNotFound is when the authentication server could not be found for the operation requested
+ @constant kODErrorCredentialsServerError is when the authentication server encountered an error
+ @constant kODErrorCredentialsServerTimeout is when the authentication server timed out
+ @constant kODErrorCredentialsContactMaster is when the authentication server is not the master and the operation requires the master
+ @constant kODErrorCredentialsServerCommunicationError is when the authentication server had a communications error
+ @constant kODErrorCredentialsAccountNotFound is when the authentication server could not find the account provided
+ @constant kODErrorCredentialsAccountDisabled is when the account is disabled
+ @constant kODErrorCredentialsAccountExpired is when the account is expired
+ @constant kODErrorCredentialsAccountInactive is when the account is inactive
+ @constant kODErrorCredentialsPasswordExpired is when the password has expired and must be changed
+ @constant kODErrorCredentialsPasswordChangeRequired is when a password change is required
+ @constant kODErrorCredentialsPasswordQualityFailed is when a password provided for change did not meet quality minimum requirements
+ @constant kODErrorCredentialsPasswordTooShort is when a password provided is too short
+ @constant kODErrorCredentialsPasswordTooLong is when a password provided is too long
+ @constant kODErrorCredentialsPasswordNeedsLetter is when a password needs a letter
+ @constant kODErrorCredentialsPasswordNeedsDigit is when a password needs a digit
+ @constant kODErrorCredentialsPasswordChangeTooSoon is when a an attempt to change a password too soon before last change
+ @constant kODErrorCredentialsPasswordUnrecoverable is when password was not recoverable from the authentication database
+ @constant kODErrorCredentialsInvalidLogonHours is when an account attempts to login outside of set logon hours
+ @constant kODErrorCredentialsInvalidComputer is when an account attempts to login to a computer they are not authorized
+ @constant kODErrorPluginOperationNotSupported is when a plugin does not support the requested operation
+ @constant kODErrorPluginError is when a plugin has encountered some undefined error
+ @constant kODErrorDaemonError is when some error occurred inside the daemon
+ @constant kODErrorPluginOperationTimeout is when an operation exceeds an imposed timeout
+*/
+
+enum ODFrameworkErrors
+{
+    kODErrorSuccess                             = 0,
+    
+	/* ODSession error codes */
+	kODErrorSessionLocalOnlyDaemonInUse			=	1000,
+	kODErrorSessionNormalDaemonInUse			=	1001,
+	kODErrorSessionDaemonNotRunning				=	1002,
+	kODErrorSessionDaemonRefused				=	1003,
+
+	kODErrorSessionProxyCommunicationError		=	1100,
+	kODErrorSessionProxyVersionMismatch			=	1101,
+	kODErrorSessionProxyIPUnreachable			=	1102,
+	kODErrorSessionProxyUnknownHost				=	1103,
+	
+	/* ODNode error codes */
+	kODErrorNodeUnknownName						=	2000,
+	kODErrorNodeUnknownType						=	2001,
+	kODErrorNodeDisabled						=	2002,
+
+	kODErrorNodeConnectionFailed				=	2100,
+	
+	/* ODNode miscellaneous error codes */
+	kODErrorNodeUnknownHost						=	2200,
+	
+	/* ODQuery error codes */
+	kODErrorQuerySynchronize					=	3000,
+	
+	kODErrorQueryInvalidMatchType				=	3100,
+	kODErrorQueryUnsupportedMatchType			=	3101,
+	kODErrorQueryTimeout						=	3102,
+	
+	/* ODRecord error codes */
+	kODErrorRecordReadOnlyNode					=	4000,
+	kODErrorRecordPermissionError				=	4001,
+	
+	kODErrorRecordParameterError				=	4100,
+	kODErrorRecordInvalidType					=	4101,
+	kODErrorRecordAlreadyExists					=	4102,
+	kODErrorRecordTypeDisabled					=	4103,
+	kODErrorRecordNoLongerExists				=	4104,
+	
+	kODErrorRecordAttributeUnknownType			=	4200,
+	kODErrorRecordAttributeNotFound				=	4201,
+	kODErrorRecordAttributeValueSchemaError		=	4202,
+	kODErrorRecordAttributeValueNotFound		=   4203,
+	
+	/* Credential specific error codes */
+	kODErrorCredentialsInvalid					=	5000,
+	
+	kODErrorCredentialsMethodNotSupported		=	5100,
+	kODErrorCredentialsNotAuthorized			=	5101,
+	kODErrorCredentialsParameterError			=	5102,
+	kODErrorCredentialsOperationFailed			=	5103,
+	
+	kODErrorCredentialsServerUnreachable		=	5200,
+	kODErrorCredentialsServerNotFound			=	5201,
+	kODErrorCredentialsServerError				=	5202,
+	kODErrorCredentialsServerTimeout			=	5203,
+	kODErrorCredentialsContactMaster			=	5204,
+	kODErrorCredentialsServerCommunicationError	=	5205,
+	
+	kODErrorCredentialsAccountNotFound			=	5300,
+	kODErrorCredentialsAccountDisabled			=	5301,
+	kODErrorCredentialsAccountExpired			=	5302,
+	kODErrorCredentialsAccountInactive			=	5303,
+	
+	kODErrorCredentialsPasswordExpired			=	5400,
+	kODErrorCredentialsPasswordChangeRequired	=	5401,
+	kODErrorCredentialsPasswordQualityFailed	=	5402,
+	kODErrorCredentialsPasswordTooShort			=	5403,
+	kODErrorCredentialsPasswordTooLong			=	5404,
+	kODErrorCredentialsPasswordNeedsLetter		=	5405,
+	kODErrorCredentialsPasswordNeedsDigit		=	5406,
+	kODErrorCredentialsPasswordChangeTooSoon	=	5407,
+	kODErrorCredentialsPasswordUnrecoverable	=	5408,
+
+	kODErrorCredentialsInvalidLogonHours		= 	5500,
+	kODErrorCredentialsInvalidComputer			= 	5501,
+
+	/* Underlying plugin errors */
+	kODErrorPluginOperationNotSupported			=	10000,
+	kODErrorPluginError							=	10001,
+	kODErrorDaemonError							=	10002,
+    kODErrorPluginOperationTimeout              =   10003,
+};
 
 #endif

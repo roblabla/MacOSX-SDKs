@@ -1,5 +1,5 @@
 /*	NSIndexSet.h
-	Copyright (c) 2002-2009, Apple Inc. All rights reserved.
+	Copyright (c) 2002-2011, Apple Inc. All rights reserved.
 */
 
 /* Class for managing set of indexes. The set of valid indexes are 0 .. NSNotFound - 1; trying to use indexes outside this range is an error.  NSIndexSet uses NSNotFound as a return value in cases where the queried index doesn't exist in the set; for instance, when you ask firstIndex and there are no indexes; or when you ask for indexGreaterThanIndex: on the last index, and so on.
@@ -25,8 +25,6 @@ To enumerate without doing a call per index, you can use the method getIndexes:m
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
-
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @interface NSIndexSet : NSObject <NSCopying, NSMutableCopying, NSCoding> {
     @protected   // all instance variables are private
@@ -73,9 +71,7 @@ To enumerate without doing a call per index, you can use the method getIndexes:m
 */
 - (NSUInteger)getIndexes:(NSUInteger *)indexBuffer maxCount:(NSUInteger)bufferSize inIndexRange:(NSRangePointer)range;
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
-- (NSUInteger)countOfIndexesInRange:(NSRange)range;
-#endif
+- (NSUInteger)countOfIndexesInRange:(NSRange)range NS_AVAILABLE(10_5, 2_0);
 
 - (BOOL)containsIndex:(NSUInteger)value;
 - (BOOL)containsIndexesInRange:(NSRange)range;
@@ -84,21 +80,31 @@ To enumerate without doing a call per index, you can use the method getIndexes:m
 - (BOOL)intersectsIndexesInRange:(NSRange)range;
 
 #if NS_BLOCKS_AVAILABLE
-- (void)enumerateIndexesUsingBlock:(void (^)(NSUInteger idx, BOOL *stop))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)enumerateIndexesWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(NSUInteger idx, BOOL *stop))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)enumerateIndexesInRange:(NSRange)range options:(NSEnumerationOptions)opts usingBlock:(void (^)(NSUInteger idx, BOOL *stop))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)enumerateIndexesUsingBlock:(void (^)(NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
+- (void)enumerateIndexesWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
+- (void)enumerateIndexesInRange:(NSRange)range options:(NSEnumerationOptions)opts usingBlock:(void (^)(NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 
-- (NSUInteger)indexPassingTest:(BOOL (^)(NSUInteger idx, BOOL *stop))predicate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSUInteger)indexWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(NSUInteger idx, BOOL *stop))predicate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSUInteger)indexInRange:(NSRange)range options:(NSEnumerationOptions)opts passingTest:(BOOL (^)(NSUInteger idx, BOOL *stop))predicate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSUInteger)indexPassingTest:(BOOL (^)(NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSUInteger)indexWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSUInteger)indexInRange:(NSRange)range options:(NSEnumerationOptions)opts passingTest:(BOOL (^)(NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
 
-- (NSIndexSet *)indexesPassingTest:(BOOL (^)(NSUInteger idx, BOOL *stop))predicate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSIndexSet *)indexesWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(NSUInteger idx, BOOL *stop))predicate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSIndexSet *)indexesInRange:(NSRange)range options:(NSEnumerationOptions)opts passingTest:(BOOL (^)(NSUInteger idx, BOOL *stop))predicate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSIndexSet *)indexesPassingTest:(BOOL (^)(NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSIndexSet *)indexesWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSIndexSet *)indexesInRange:(NSRange)range options:(NSEnumerationOptions)opts passingTest:(BOOL (^)(NSUInteger idx, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+
+/*
+ The following three convenience methods allow you to enumerate the indexes in the receiver by ranges of contiguous indexes. The performance of these methods is not guaranteed to be any better than if they were implemented with enumerateIndexesInRange:options:usingBlock:. However, depending on the receiver's implementation, they may perform better than that.
+ 
+ If the specified range for enumeration intersects a range of contiguous indexes in the receiver, then the block will be invoked with the intersection of those two ranges.
+*/
+- (void)enumerateRangesUsingBlock:(void (^)(NSRange range, BOOL *stop))block NS_AVAILABLE(10_7, 5_0);
+- (void)enumerateRangesWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(NSRange range, BOOL *stop))block NS_AVAILABLE(10_7, 5_0);
+- (void)enumerateRangesInRange:(NSRange)range options:(NSEnumerationOptions)opts usingBlock:(void (^)(NSRange range, BOOL *stop))block NS_AVAILABLE(10_7, 5_0);
+
+
 #endif
 
 @end
-
 
 @interface NSMutableIndexSet : NSIndexSet {
     @protected
@@ -119,4 +125,3 @@ To enumerate without doing a call per index, you can use the method getIndexes:m
 
 @end
 
-#endif

@@ -3,32 +3,25 @@
  *  CLError.h
  *  CoreLocation
  *
- *  Copyright 2008 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2010 Apple Inc. All rights reserved.
  *
  */
 
-#if ( !TARGET_OS_MAC || MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 )
-
-#import <Foundation/Foundation.h>
-
-
 /*
- *  kCLErrorDomain
+ *  CLError
  *  
  *  Discussion:
- *    Error returned as the domain to NSError from CoreLocation.
+ *    Error returned as code to NSError from CoreLocation.
  */
-extern NSString *const kCLErrorDomain;
+typedef enum {
+    kCLErrorLocationUnknown  = 0,         // location is currently unknown, but CL will keep trying
+    kCLErrorDenied,                       // CL access has been denied (eg, user declined location use)
+    kCLErrorNetwork,                      // general, network-related error
+    kCLErrorHeadingFailure,               // heading could not be determined
+    kCLErrorRegionMonitoringDenied,       // Location region monitoring has been denied by the user
+    kCLErrorRegionMonitoringFailure,      // A registered region cannot be monitored
+    kCLErrorRegionMonitoringSetupDelayed, // CL could not immediately initialize region monitoring
+    kCLErrorGeocodeFoundNoResult,         // A geocode request yielded no result
+    kCLErrorGeocodeCanceled               // A geocode request was cancelled
+} CLError;
 
-/*
- *  Error codes
- *  
- *  Discussion:
- *    Returned as code to NSError from CoreLocation.
- */
-enum {
-	kCLErrorLocationUnknown  = 0, // location is currently unknown, but CL will keep trying
-	kCLErrorDenied // CL access has been denied (eg, user declined location use)
-};
-
-#endif

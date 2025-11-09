@@ -1,17 +1,14 @@
 /*
-     File:       LaunchServices/LSQuarantine.h
+     File:       LSQuarantine.h
  
      Contains:   File quarantine property keys
  
-     Version:    LaunchServices-362.3~1
- 
-     Copyright:  © 2007-2008 by Apple Inc., all rights reserved.
+     Copyright:  Copyright 2003-2009 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
 #ifndef __LSQUARANTINE__
 #define __LSQUARANTINE__

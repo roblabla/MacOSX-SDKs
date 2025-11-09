@@ -4,13 +4,11 @@
  */
 
 #import <Foundation/Foundation.h>
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 #import <SyncServices/ISyncCommon.h>
 
+
 // Predefined domain for errors from SyncServices APIs.
-SYNCSERVICES_EXPORT NSString *const ISyncErrorDomain            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+SYNCSERVICES_EXPORT NSString *const ISyncErrorDomain NS_DEPRECATED_MAC(10_5, 10_7);
 
 enum {
     ISyncSessionClientAlreadySyncingError =        100, // a sync session was requested for a client already participating in a session
@@ -18,7 +16,7 @@ enum {
     ISyncSessionDriverRegistrationError =          200, // an ISyncSessionDriver was unable to register a client
     ISyncSessionDriverPullFailureError =           201, // an ISyncSessionDriver failed an -[ISyncSession prepareToPullChangesForEntityNames:beforeDate:] call
 	ISyncSessionDriverFatalError =			       300  // ISyncSessionDriver received a fatal error
-};
+} NS_DEPRECATED_MAC(10_4, 10_7);
 
 typedef enum {
 	ISyncServerDisabledReasonNone = 1000,        // Returned when isEnabled has not been called or has returned YES.
@@ -26,14 +24,9 @@ typedef enum {
 	ISyncServerDisabledReasonSharedNetworkHome,// Returned if another sync server is running against a network home directory.
 	ISyncServerDisabledReasonUnresponsive,	 // Returned if isEnabled has timed out messaging to the Sync Server  
 	ISyncServerDisabledReasonUnknown,           // Returned if the Sync Server fails to respond because of an unexpected error.
-} ISyncServerDisabledReason;
+} ISyncServerDisabledReason NS_DEPRECATED_MAC(10_4, 10_7);
 
 
+SYNCSERVICES_EXPORT NSString * const ISyncInvalidSchemaException NS_DEPRECATED_MAC(10_4, 10_7);    // Raised when a client tries to register an invalid schema or schema extension.
+SYNCSERVICES_EXPORT NSString * const ISyncInvalidArgumentsException NS_DEPRECATED_MAC(10_4, 10_7); // Raised when the sync services API is passed bad or inconsistent arguments.
 
-#endif
-
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-SYNCSERVICES_EXPORT NSString * const ISyncInvalidSchemaException;    // Raised when a client tries to register an invalid schema or schema extension.
-SYNCSERVICES_EXPORT NSString * const ISyncInvalidArgumentsException; // Raised when the sync services API is passed bad or inconsistent arguments.
-#endif

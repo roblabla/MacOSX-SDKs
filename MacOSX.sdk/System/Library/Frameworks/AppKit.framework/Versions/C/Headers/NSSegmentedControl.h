@@ -1,14 +1,13 @@
 /*
 	NSSegmentedControl.h
 	Application Kit
-	Copyright (c) 2003-2009, Apple Inc.
+	Copyright (c) 2003-2011, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSCell.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 @class NSImage;
 
@@ -16,15 +15,13 @@
 enum {
     NSSegmentStyleAutomatic = 0, //Appearance is chosen depending on the type of window and the control's position inside it
     NSSegmentStyleRounded = 1,
-    NSSegmentStyleTexturedRounded = 2,
     NSSegmentStyleRoundRect = 3,
     NSSegmentStyleTexturedSquare = 4,
-    NSSegmentStyleCapsule = 5,
     NSSegmentStyleSmallSquare = 6
 };
+#endif
 
 typedef NSInteger NSSegmentStyle;
-#endif
 
 @interface NSSegmentedControl : NSControl {
   @private
@@ -40,9 +37,7 @@ typedef NSInteger NSSegmentStyle;
 - (void)setSelectedSegment:(NSInteger)selectedSegment;
 - (NSInteger)selectedSegment;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (BOOL)selectSegmentWithTag:(NSInteger)tag;
-#endif
 
 - (void)setWidth:(CGFloat)width forSegment:(NSInteger)segment;
 - (CGFloat)widthForSegment:(NSInteger)segment;
@@ -50,12 +45,10 @@ typedef NSInteger NSSegmentStyle;
 - (void)setImage:(NSImage *)image forSegment:(NSInteger)segment;
 - (NSImage *)imageForSegment:(NSInteger)segment;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
-- (void)setImageScaling:(NSImageScaling)scaling forSegment:(NSInteger)segment;
-- (NSImageScaling)imageScalingForSegment:(NSInteger)segment;
+- (void)setImageScaling:(NSImageScaling)scaling forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
+- (NSImageScaling)imageScalingForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
 
-#endif
 
 - (void)setLabel:(NSString *)label forSegment:(NSInteger)segment;
 - (NSString *)labelForSegment:(NSInteger)segment;
@@ -69,11 +62,15 @@ typedef NSInteger NSSegmentStyle;
 - (void)setEnabled:(BOOL)enabled forSegment:(NSInteger)segment;
 - (BOOL)isEnabledForSegment:(NSInteger)segment;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (void)setSegmentStyle:(NSSegmentStyle)segmentStyle;
-- (NSSegmentStyle)segmentStyle;
-#endif
+- (void)setSegmentStyle:(NSSegmentStyle)segmentStyle NS_AVAILABLE_MAC(10_5);
+- (NSSegmentStyle)segmentStyle NS_AVAILABLE_MAC(10_5);
 
 @end
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+/* In Mac OS X 10.7, the following styles have artwork identical with NSSegmentStyleTexturedSquare, and their usage is discouraged.  Prefer to use NSSegmentStyleTexturedSquare because it has the correct metrics for this artwork. */
+enum {
+    NSSegmentStyleTexturedRounded = 2,
+    NSSegmentStyleCapsule = 5
+};
 #endif

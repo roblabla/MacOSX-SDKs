@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2011 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        | 
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_errors.h 293155 2010-01-05 20:46:53Z sebastian $ */
+/* $Id: zend_errors.h 306939 2011-01-01 02:19:59Z felipe $ */
 
 #ifndef ZEND_ERRORS_H
 #define ZEND_ERRORS_H
@@ -40,6 +40,20 @@
 
 #define E_ALL (E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_COMPILE_WARNING | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_RECOVERABLE_ERROR | E_DEPRECATED | E_USER_DEPRECATED)
 #define E_CORE (E_CORE_ERROR | E_CORE_WARNING)
+
+#if SUHOSIN_PATCH
+#define S_MEMORY			(1<<0L)
+#define S_MISC				(1<<1L)
+#define S_VARS				(1<<2L)
+#define S_FILES				(1<<3L)
+#define S_INCLUDE			(1<<4L)
+#define S_SQL				(1<<5L)
+#define S_EXECUTOR			(1<<6L)
+#define S_MAIL				(1<<7L)
+#define S_SESSION			(1<<8L)
+#define S_INTERNAL			(1<<29L)
+#define S_ALL (S_MEMORY | S_VARS | S_INCLUDE | S_FILES | S_MAIL | S_SESSION | S_MISC | S_SQL | S_EXECUTOR)
+#endif
 
 #endif /* ZEND_ERRORS_H */
 

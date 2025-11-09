@@ -1,5 +1,5 @@
 /*	NSPortNameServer.h
-	Copyright (c) 1993-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1993-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -19,7 +19,7 @@
 
 @end
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_IPHONE_SIMULATOR
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
 
 @interface NSMachBootstrapServer : NSPortNameServer
 	// This port name server actually takes and
@@ -39,7 +39,7 @@
 // you have to destroy the port (invalidate the NSMachPort
 // given to registerPort:name:).
 
-- (NSPort *)servicePortWithName:(NSString *)name AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSPort *)servicePortWithName:(NSString *)name NS_AVAILABLE(10_5, 2_0);
 
 @end
 
@@ -63,6 +63,8 @@
 
 @end
 
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_WIN32)
+
 @interface NSSocketPortNameServer : NSPortNameServer
 	// This port name server actually takes and
 	// returns instances of NSSocketPort
@@ -84,5 +86,7 @@
 - (uint16_t)defaultNameServerPortNumber;
 
 @end
+
+#endif
 
 

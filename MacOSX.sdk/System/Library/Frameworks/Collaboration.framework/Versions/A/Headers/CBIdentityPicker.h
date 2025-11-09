@@ -8,8 +8,6 @@
 #import <Foundation/NSObject.h>
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 @class NSArray;
 @class NSString;
 @class NSWindow;
@@ -42,5 +40,3 @@
 - (NSArray *)identities;
 
 @end
-
-#endif

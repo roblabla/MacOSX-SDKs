@@ -3,7 +3,7 @@
  
      Contains:   Macros to handle exceptions and assertions.
  
-     Version:    CarbonCore-861.39~1
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -230,11 +230,11 @@ extern "C" {
 
 
 #define check_tasklevel0_string(cstring)                                       \
-  check_string(ATTASKLEVEL0(), cstring)
+  __Check_string(ATTASKLEVEL0(), cstring)
 
 
 #define verify_tasklevel0()                                                        \
-  verify(ATTASKLEVEL0())
+  __Verify(ATTASKLEVEL0())
 
 
 #define verify_tasklevel0_string(cstring)                                      \
@@ -242,27 +242,27 @@ extern "C" {
 
 
 #define require_tasklevel0(exceptionLabel)                                     \
-  require(ATTASKLEVEL0(), exceptionLabel)
+  __Require(ATTASKLEVEL0(), exceptionLabel)
 
 
 #define require_tasklevel0_action(exceptionLabel, action)                      \
-  require_action(ATTASKLEVEL0(), exceptionLabel, action)
+  __Require_action(ATTASKLEVEL0(), exceptionLabel, action)
 
 
 #define require_tasklevel0_quiet(exceptionLabel)                               \
-  require_quiet(ATTASKLEVEL0(), exceptionLabel)
+  __Require_quiet(ATTASKLEVEL0(), exceptionLabel)
 
 
 #define require_tasklevel0_action_quiet(exceptionLabel, action)                    \
-  require_action_quiet(ATTASKLEVEL0(), exceptionLabel, action)
+  __Require_action_quiet(ATTASKLEVEL0(), exceptionLabel, action)
 
 
 #define require_tasklevel0_string(exceptionLabel, cstring)                     \
-  require_string(ATTASKLEVEL0(), exceptionLabel, cstring)
+  __Require_string(ATTASKLEVEL0(), exceptionLabel, cstring)
 
 
 #define require_tasklevel0_action_string(exceptionLabel, action, cstring)      \
-  require_action_string(ATTASKLEVEL0(), exceptionLabel, action, cstring)
+  __Require_action_string(ATTASKLEVEL0(), exceptionLabel, action, cstring)
 
 /*
  *  You can use DPRINTF as a dprintf which goes away in production builds.

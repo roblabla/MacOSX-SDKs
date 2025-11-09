@@ -55,6 +55,7 @@
 
 #ifndef _IPFW2_H
 #define _IPFW2_H
+#ifdef __APPLE_API_OBSOLETE
 
 /*
  * Define IP Firewall event subclass, and associated events.
@@ -630,4 +631,5 @@ extern int fw_enable;
 #define	IPFW_LOADED	(ip_fw_chk_ptr != NULL)
 #endif /* IPFIREWALL */
 
+#endif /* __APPLE_API_OBSOLETE */
 #endif /* _IPFW2_H */

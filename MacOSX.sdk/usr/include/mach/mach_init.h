@@ -68,12 +68,11 @@
  */
 
 __BEGIN_DECLS
-extern mach_port_t mach_task_self(void);
 extern mach_port_t mach_host_self(void);
 extern mach_port_t mach_thread_self(void);
 extern kern_return_t host_page_size(host_t, vm_size_t *);
 
-extern	mach_port_t	mach_task_self_;
+extern mach_port_t	mach_task_self_;
 #define	mach_task_self() mach_task_self_
 #define	current_task()	mach_task_self()
 
@@ -86,9 +85,6 @@ __BEGIN_DECLS
  */
 
 extern	mach_port_t	bootstrap_port;
-extern	mach_port_t	name_server_port;
-extern	mach_port_t	environment_port;
-extern	mach_port_t	service_port;
 
 /*
  *	Where these ports occur in the "mach_ports_register"
@@ -125,6 +121,7 @@ extern	int		vm_page_shift;
  *	application to point to a user-specified output function
  */
 extern int (*vprintf_stderr_func)(const char *format, va_list ap);
+
 __END_DECLS
 
 #endif	/* _MACH_INIT_ */

@@ -46,7 +46,7 @@ extern const char sqlite_version[];
 ** UTF-8 encoded data.  The SQLITE_ISO8859 macro is defined if the
 ** iso8859 encoded should be used.
 */
-#define SQLITE_ISO8859 1
+#define SQLITE_UTF8 1
 
 /*
 ** The following constant holds one of two strings, "UTF-8" or "iso8859",

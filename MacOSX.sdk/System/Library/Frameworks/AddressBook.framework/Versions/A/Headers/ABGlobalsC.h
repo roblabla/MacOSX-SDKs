@@ -2,7 +2,7 @@
  *  ABGlobalsC.h
  *  AddressBook Framework
  *
- *  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
+ *  Copyright (c) 2003-2010 Apple Inc.  All rights reserved.
  *
  */
 
@@ -167,25 +167,46 @@ extern CFStringRef const kABPhoneProperty;                   // Generic phone nu
         extern CFStringRef const kABPhoneWorkFAXLabel;       // FAX number
         extern CFStringRef const kABPhonePagerLabel;         // Pager number
 
-extern CFStringRef const kABAIMInstantProperty;              // AIM Instant Messaging - kABMultiStringProperty
-        extern CFStringRef const kABAIMWorkLabel;
-        extern CFStringRef const kABAIMHomeLabel;
 
-extern CFStringRef const kABJabberInstantProperty;           // Jabber Instant Messaging - kABMultiStringProperty
-        extern CFStringRef const kABJabberWorkLabel;
-        extern CFStringRef const kABJabberHomeLabel;
 
-extern CFStringRef const kABMSNInstantProperty;              // MSN Instant Messaging - kABMultiStringProperty
-        extern CFStringRef const kABMSNWorkLabel;
-        extern CFStringRef const kABMSNHomeLabel;
+// Deprecated in Mac OS 10.7. You should use kABInstantMessageProperty.
+extern CFStringRef const kABAIMInstantProperty							DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;	// AIM Instant Messaging - kABMultiStringProperty
+        extern CFStringRef const kABAIMWorkLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+        extern CFStringRef const kABAIMHomeLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-extern CFStringRef const kABYahooInstantProperty;            // Yahoo Instant Messaging - kABMultiStringProperty
-        extern CFStringRef const kABYahooWorkLabel;
-        extern CFStringRef const kABYahooHomeLabel;
+// Deprecated in Mac OS 10.7. You should use kABInstantMessageProperty.
+extern CFStringRef const kABJabberInstantProperty						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;	// Jabber Instant Messaging - kABMultiStringProperty
+        extern CFStringRef const kABJabberWorkLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+        extern CFStringRef const kABJabberHomeLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-extern CFStringRef const kABICQInstantProperty;              // ICQ Instant Messaging - kABMultiStringProperty
-        extern CFStringRef const kABICQWorkLabel;
-        extern CFStringRef const kABICQHomeLabel;
+// Deprecated in Mac OS 10.7. You should use kABInstantMessageProperty.
+extern CFStringRef const kABMSNInstantProperty							DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;	// MSN Instant Messaging - kABMultiStringProperty
+        extern CFStringRef const kABMSNWorkLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+        extern CFStringRef const kABMSNHomeLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+// Deprecated in Mac OS 10.7. You should use kABInstantMessageProperty.
+extern CFStringRef const kABYahooInstantProperty						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;	// Yahoo Instant Messaging - kABMultiStringProperty
+        extern CFStringRef const kABYahooWorkLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+        extern CFStringRef const kABYahooHomeLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+// Deprecated in Mac OS 10.7. You should use kABInstantMessageProperty.
+extern CFStringRef const kABICQInstantProperty							DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;	// ICQ Instant Messaging - kABMultiStringProperty
+        extern CFStringRef const kABICQWorkLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+        extern CFStringRef const kABICQHomeLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+extern CFStringRef const kABInstantMessageProperty						AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;	// Instant Messaging - kABMultiDictionaryProperty
+	extern CFStringRef const kABInstantMessageUsernameKey				AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// dictionary key for the instant messaging handle/username
+	extern CFStringRef const kABInstantMessageServiceKey				AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// dictionary key for the service type; possible values follow
+		extern CFStringRef const kABInstantMessageServiceAIM			AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// AIM
+		extern CFStringRef const kABInstantMessageServiceFacebook		AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// Facebook
+		extern CFStringRef const kABInstantMessageServiceGaduGadu		AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// Gadu-Gadu
+		extern CFStringRef const kABInstantMessageServiceGoogleTalk	AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// Google Talk
+		extern CFStringRef const kABInstantMessageServiceICQ			AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// ICQ
+		extern CFStringRef const kABInstantMessageServiceJabber		AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// Jabber
+		extern CFStringRef const kABInstantMessageServiceMSN			AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// MSN
+		extern CFStringRef const kABInstantMessageServiceQQ				AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// QQ
+		extern CFStringRef const kABInstantMessageServiceSkype			AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// Skype
+		extern CFStringRef const kABInstantMessageServiceYahoo			AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// Yahoo!
 
 extern CFStringRef const kABNoteProperty;                    // Note (string)
 
@@ -210,6 +231,10 @@ extern CFStringRef const kABHomeLabel;
 
     // Can be used with any multi-value property
 extern CFStringRef const kABOtherLabel;
+
+    // MobileMe - for AIM or email values
+extern CFStringRef const kABMobileMeLabel AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
 
 // ================================================================
 //      RecordTypes

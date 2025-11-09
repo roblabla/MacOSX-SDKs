@@ -134,6 +134,7 @@ extern const OSSymbol *		gIOBusyInterest;
 extern const OSSymbol *		gIOOpenInterest;
 extern const OSSymbol *		gIOAppPowerStateInterest;
 extern const OSSymbol *		gIOPriorityPowerStateInterest;
+extern const OSSymbol *		gIOConsoleSecurityInterest;
 
 extern const OSSymbol *		gIODeviceMemoryKey;
 extern const OSSymbol *		gIOInterruptControllersKey;
@@ -433,25 +434,6 @@ private:
     OSMetaClassDeclareReservedUnused(IOService, 45);
     OSMetaClassDeclareReservedUnused(IOService, 46);
     OSMetaClassDeclareReservedUnused(IOService, 47);
-
-#ifdef __ppc__
-    OSMetaClassDeclareReservedUnused(IOService, 48);
-    OSMetaClassDeclareReservedUnused(IOService, 49);
-    OSMetaClassDeclareReservedUnused(IOService, 50);
-    OSMetaClassDeclareReservedUnused(IOService, 51);
-    OSMetaClassDeclareReservedUnused(IOService, 52);
-    OSMetaClassDeclareReservedUnused(IOService, 53);
-    OSMetaClassDeclareReservedUnused(IOService, 54);
-    OSMetaClassDeclareReservedUnused(IOService, 55);
-    OSMetaClassDeclareReservedUnused(IOService, 56);
-    OSMetaClassDeclareReservedUnused(IOService, 57);
-    OSMetaClassDeclareReservedUnused(IOService, 58);
-    OSMetaClassDeclareReservedUnused(IOService, 59);
-    OSMetaClassDeclareReservedUnused(IOService, 60);
-    OSMetaClassDeclareReservedUnused(IOService, 61);
-    OSMetaClassDeclareReservedUnused(IOService, 62);
-    OSMetaClassDeclareReservedUnused(IOService, 63);
-#endif
 
 public:
 /*! @function getState
@@ -1278,10 +1260,13 @@ private:
     static void terminateThread( void * arg, wait_result_t unused );
     static void terminateWorker( IOOptionBits options );
     static void actionWillTerminate( IOService * victim, IOOptionBits options, 
-                                        OSArray * doPhase2List );
-    static void actionDidTerminate( IOService * victim, IOOptionBits options );
-    static void actionFinalize( IOService * victim, IOOptionBits options );
-    static void actionStop( IOService * client, IOService * provider );
+                                     OSArray * doPhase2List, void*, void * );
+    static void actionDidTerminate( IOService * victim, IOOptionBits options,
+                                    void *, void *, void *);
+    static void actionFinalize( IOService * victim, IOOptionBits options,
+                                void *, void *, void *);
+    static void actionStop( IOService * client, IOService * provider,
+                            void *, void *, void *);
 
 	APPLE_KEXT_COMPATIBILITY_VIRTUAL
     IOReturn resolveInterrupt(IOService *nub, int source);
@@ -1300,8 +1285,8 @@ public:
     virtual void PMinit( void );
 
 /*! @function PMstop
-    @abstract Frees and removes the driver from power management.
-    @discussion The power managment variables don't exist after this call and the power managment methods in the caller shouldn't be called.    
+    @abstract Stop power managing the driver.
+    @discussion Removes the driver from the power plane and stop its power management. This method is synchronous against any power management method invocations (e.g. <code>setPowerState</code> or <code>setAggressiveness</code>), so when this method returns it is guaranteed those power management methods will not be entered. Driver should not call any power management methods after this call.
     Calling <code>PMstop</code> cleans up for the three power management initialization calls: @link PMinit PMinit@/link, @link joinPMtree joinPMtree@/link, and @link registerPowerDriver registerPowerDriver@/link. */
 
     virtual void PMstop( void );
@@ -1331,6 +1316,7 @@ public:
 /*! @function registerInterestedDriver
     @abstract Allows an IOService object to register interest in the changing power state of a power-managed IOService object.
     @discussion Call <code>registerInterestedDriver</code> on the IOService object you are interested in receiving power state messages from, and pass a pointer to the interested driver (<code>this</code>) as an argument.
+    The interested driver is retained until the power interest is removed by calling <code>deRegisterInterestedDriver</code>.
     The interested driver should override @link powerStateWillChangeTo powerStateWillChangeTo@/link and @link powerStateDidChangeTo powerStateDidChangeTo@/link to receive these power change messages.
     Interested drivers must acknowledge power changes in <code>powerStateWillChangeTo</code> or <code>powerStateDidChangeTo</code>, either via return value or later calls to @link acknowledgePowerChange acknowledgePowerChange@/link.
     @param theDriver The driver of interest adds this pointer to the list of interested drivers. It informs drivers on this list before and after the power change.
@@ -1341,7 +1327,8 @@ public:
 
 /*! @function deRegisterInterestedDriver
     @abstract De-registers power state interest from a previous call to <code>registerInterestedDriver</code>.
-    @discussion Most drivers do not need to override <code>deRegisterInterestedDriver</code>.
+    @discussion The retain from <code>registerInterestedDriver</code> is released. This method is synchronous against any <code>powerStateWillChangeTo</code> or <code>powerStateDidChangeTo</code> call targeting the interested driver, so when this method returns it is guaranteed those interest handlers will not be entered.
+    Most drivers do not need to override <code>deRegisterInterestedDriver</code>.
     @param theDriver The interested driver previously passed into @link registerInterestedDriver registerInterestedDriver@/link.
     @result A return code that can be ignored by the caller. */
 

@@ -44,7 +44,7 @@ vImage_Error  vImagePNGDecompressionFilter( const vImage_Buffer *buffer,
                                             uint32_t            bitsPerPixel,          
                                             uint32_t            filterMethodNumber, /* must be 0 */
                                             uint32_t            filterType,         /* For filter method 0, value 0-4 inclusive */
-                                            vImage_Flags        flags)  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                            vImage_Flags        flags)  __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA );
  
 
 #ifdef __cplusplus

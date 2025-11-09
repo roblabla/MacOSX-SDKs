@@ -1,7 +1,7 @@
 /*=============================================================================
 	AUMIDIController.h
 	
-	Copyright (c) 2002 - 2008 Apple Inc.  All Rights Reserved
+	Copyright (c) 2002 - 2008 Apple, Inc.  All Rights Reserved
 =============================================================================*/
 
 

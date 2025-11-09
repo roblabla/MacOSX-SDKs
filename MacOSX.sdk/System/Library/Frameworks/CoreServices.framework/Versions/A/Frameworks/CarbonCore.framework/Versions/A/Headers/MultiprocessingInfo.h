@@ -3,7 +3,7 @@
  
      Contains:   Multiprocessing Information interfaces
  
-     Version:    CarbonCore-861.39~1
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 1995-2008 DayStar Digital, Inc.
  
@@ -14,6 +14,11 @@
  
 */
 
+/*********************************************************************************************
+ 
+ The Multiprocessing Utilites are deprecated.  Callers should use blocks, libDispatch, or pthreads.
+  
+*********************************************************************************************/
 /*
    ==========================================================================================================================
    *** WARNING: You must properly check the availability of MP services before calling them!
@@ -146,17 +151,17 @@ extern "C" {
 
 
 /*
- *  MPGetNextCpuID()
+ *  MPGetNextCpuID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in MPDiagnostics 2.3 and later
  */
 extern OSStatus 
 MPGetNextCpuID(
   MPCoherenceID   owningCoherenceID,
-  MPCpuID *       cpuID)                                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  MPCpuID *       cpuID)                                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
@@ -180,17 +185,17 @@ MPGetNextCpuID(
 
 
 /*
- *  MPGetNextTaskID()
+ *  MPGetNextTaskID()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in MPDiagnostics 2.3 and later
  */
 extern OSStatus 
 MPGetNextTaskID(
   MPProcessID   owningProcessID,
-  MPTaskID *    taskID)                                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  MPTaskID *    taskID)                                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*

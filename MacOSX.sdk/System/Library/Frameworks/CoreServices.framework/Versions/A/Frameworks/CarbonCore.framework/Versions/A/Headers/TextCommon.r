@@ -3,7 +3,7 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Version:    CarbonCore-861.39~1
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 1995-2008 Apple Inc. All rights reserved.
  
@@ -95,7 +95,8 @@
 #define kTextEncodingUnicodeV3_2 		0x0106
 #define kTextEncodingUnicodeV4_0 		0x0108
 #define kTextEncodingUnicodeV5_0 		0x010A
-#define kTextEncodingUnicodeV5_1 		0x010B
+#define kTextEncodingUnicodeV5_1 		0x010B				/*  No constant for Unicode 5.2, but leave an opening. */
+#define kTextEncodingUnicodeV6_0 		0x010D				/*  Adds many symbols, including emoji support. */
 
 #define kTextEncodingISOLatin1 			0x0201				/*  ISO 8859-1, Western European */
 #define kTextEncodingISOLatin2 			0x0202				/*  ISO 8859-2, Central European */

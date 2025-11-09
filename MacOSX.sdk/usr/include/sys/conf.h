@@ -71,6 +71,8 @@
 
 #include <sys/appleapiopts.h>
 #include <sys/cdefs.h>
+#include <sys/queue.h>
+#include <stdint.h>
 
 /*
  * Definitions of device driver entry switches

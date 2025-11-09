@@ -1,7 +1,7 @@
 /*
   MeCab -- Yet Another Part-of-Speech and Morphological Analyzer
 
-  $Id: mecab.h,v 1.4 2009/01/09 01:58:05 guo1 Exp $;
+  $Id: mecab.h,v 1.6 2009/03/26 00:21:20 guo1 Exp $;
 
   Copyright(C) 2001-2006 Taku Kudo <taku@chasen.org>
   Copyright(C) 2004-2006 Nippon Telegraph and Telephone Corporation
@@ -23,11 +23,17 @@ struct mecab_dictionary_info_t {
 
 struct mecab_path_t {
   struct mecab_node_t* rnode;
+#if 1 /* MECAB_APPLE_ENHANCEMENT */
+#else  /* original */
   struct mecab_path_t* rnext;
+#endif
   struct mecab_node_t* lnode;
   struct mecab_path_t* lnext;
   int                  cost;
+#if 1 /* MECAB_APPLE_ENHANCEMENT */
+#else  /* original */
   float                prob;
+#endif
 };
 
 struct mecab_learner_path_t {
@@ -59,7 +65,10 @@ struct mecab_node_t {
   struct mecab_node_t **end_node_list;
   const char           *surface;
   const char           *feature;
+#if 1 /* MECAB_APPLE_ENHANCEMENT */
+#else  /* original */
   unsigned int          id;
+#endif
   unsigned short        length; /* length of morph */
   unsigned short        rlength; /* real length of morph(include white space before the morph) */
   unsigned short        rcAttr;
@@ -67,14 +76,20 @@ struct mecab_node_t {
   unsigned short        posid;
   unsigned char         char_type;
   unsigned char         stat;
+#if 1 /* MECAB_APPLE_ENHANCEMENT */
+#else  /* original */
   unsigned char         isbest;
   unsigned int          sentence_length; /* it is avaialbe only when BOS node */
   float                 alpha;
   float                 beta;
   float                 prob;
+#endif
   short                 wcost;
   long                  cost;
+#if 1 /* MECAB_APPLE_ENHANCEMENT */
+#else  /* original */
   struct mecab_token_t  *token;
+#endif
 };
 
 /* almost the same as mecab_node_t.
@@ -111,6 +126,9 @@ struct mecab_learner_node_t {
 #define MECAB_UNK_NODE  1
 #define MECAB_BOS_NODE  2
 #define MECAB_EOS_NODE  3
+#if 1 /* MECAB_APPLE_ENHANCEMENT */
+#define MECAB_PRE_NODE  4
+#endif
 
 #define MECAB_USR_DIC   1
 #define MECAB_SYS_DIC   0

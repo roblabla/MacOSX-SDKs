@@ -2,13 +2,14 @@
  *	CTStringAttributes.h
  *	CoreText
  *
- *	Copyright (c) 2004-2008 Apple Inc. All rights reserved.
+ *	Copyright (c) 2004-2011 Apple Inc. All rights reserved.
  *
  */
 
 #ifndef __CTSTRINGATTRIBUTES__
 #define __CTSTRINGATTRIBUTES__
 
+#include <CoreText/CTDefines.h>
 #include <CoreFoundation/CFNumber.h>
 #include <CoreFoundation/CFString.h>
 #include <CoreGraphics/CGColor.h>
@@ -34,7 +35,7 @@ extern "C" {
 	@discussion Value must be a CTFontRef. Default is Helvetica 12.
 */
 
-extern const CFStringRef kCTFontAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTFontAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -52,7 +53,7 @@ extern const CFStringRef kCTFontAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AN
 				overrides the foreground color.
 */
 
-extern const CFStringRef kCTForegroundColorFromContextAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTForegroundColorFromContextAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -69,7 +70,7 @@ extern const CFStringRef kCTForegroundColorFromContextAttributeName AVAILABLE_MA
 				set to 0.0, no kerning will be done at all.
 */
 
-extern const CFStringRef kCTKernAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTKernAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -90,7 +91,7 @@ extern const CFStringRef kCTKernAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AN
 				"fl" -- all others being considered more advanced or fancy.
 */
 
-extern const CFStringRef kCTLigatureAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTLigatureAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -100,7 +101,7 @@ extern const CFStringRef kCTLigatureAttributeName AVAILABLE_MAC_OS_X_VERSION_10_
 	@discussion Value must be a CGColorRef. Default value is black.
 */
 
-extern const CFStringRef kCTForegroundColorAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTForegroundColorAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -113,7 +114,7 @@ extern const CFStringRef kCTForegroundColorAttributeName AVAILABLE_MAC_OS_X_VERS
 				information.
 */
 
-extern const CFStringRef kCTParagraphStyleAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTParagraphStyleAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -127,7 +128,7 @@ extern const CFStringRef kCTParagraphStyleAttributeName AVAILABLE_MAC_OS_X_VERSI
 				typical value for outlined text is 3.0.
 */
 
-extern const CFStringRef kCTStrokeWidthAttributeName AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern const CFStringRef kCTStrokeWidthAttributeName CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_3_2);
 
 
 /*!
@@ -137,7 +138,7 @@ extern const CFStringRef kCTStrokeWidthAttributeName AVAILABLE_MAC_OS_X_VERSION_
 	@discussion Value must be a CGColorRef. Default is the foreground color.
 */
 
-extern const CFStringRef kCTStrokeColorAttributeName AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern const CFStringRef kCTStrokeColorAttributeName CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_3_2);
 
 
 /*!
@@ -152,7 +153,7 @@ extern const CFStringRef kCTStrokeColorAttributeName AVAILABLE_MAC_OS_X_VERSION_
 				will be determined by the text's foreground color.
 */
 
-extern const CFStringRef kCTUnderlineStyleAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTUnderlineStyleAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -164,7 +165,7 @@ extern const CFStringRef kCTUnderlineStyleAttributeName AVAILABLE_MAC_OS_X_VERSI
 				value of -1 enables subscripting.
 */
 
-extern const CFStringRef kCTSuperscriptAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTSuperscriptAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -174,7 +175,7 @@ extern const CFStringRef kCTSuperscriptAttributeName AVAILABLE_MAC_OS_X_VERSION_
 	@discussion Value must be a CGColorRef. Default is the foreground color.
 */
 
-extern const CFStringRef kCTUnderlineColorAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTUnderlineColorAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -186,7 +187,7 @@ extern const CFStringRef kCTUnderlineColorAttributeName AVAILABLE_MAC_OS_X_VERSI
 				indicates that vertical glyph forms are to be used.
 */
 
-extern const CFStringRef kCTVerticalFormsAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTVerticalFormsAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_NA);
 
 
 /*!
@@ -200,7 +201,7 @@ extern const CFStringRef kCTVerticalFormsAttributeName AVAILABLE_MAC_OS_X_VERSIO
 				kCTFontAttributeName. See CTGlyphInfo.h for more information.
 */
 
-extern const CFStringRef kCTGlyphInfoAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTGlyphInfoAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -214,7 +215,26 @@ extern const CFStringRef kCTGlyphInfoAttributeName AVAILABLE_MAC_OS_X_VERSION_10
 				to kTraditionalCharactersSelector.
 */
 
-extern const CFStringRef kCTCharacterShapeAttributeName AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTCharacterShapeAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
+
+
+/*!
+    @const		kCTRunDelegateAttributeName
+    @abstract   Allows customization of certain aspects of a range of text's
+				appearance.
+
+    @discussion Value must be a CTRunDelegateRef. The values returned by the
+    			embedded object for an attribute range apply to each glyph
+    			resulting from the text in that range. Because an embedded object
+    			is only a display-time modification, care should be taken to
+    			avoid applying this attribute to a range of text with complex
+    			behavior, such as a change of writing direction, combining marks,
+    			etc. Consequently, it is recommended that this attribute be
+    			applied to a range containing the single character U+FFFC. See
+    			CTRunDelegate.h for more information.
+*/
+
+extern const CFStringRef kCTRunDelegateAttributeName CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!

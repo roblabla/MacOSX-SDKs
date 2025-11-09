@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2006, 2008, 2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2003-2006, 2008-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -27,9 +27,7 @@
 #include <Availability.h>
 #include <TargetConditionals.h>
 #include <sys/cdefs.h>
-#if	!TARGET_OS_IPHONE
 #include <dispatch/dispatch.h>
-#endif	// !TARGET_OS_IPHONE
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <CoreFoundation/CoreFoundation.h>
@@ -215,18 +213,16 @@ typedef void (*SCNetworkConnectionCallBack)	(
 	@discussion A host name that will be used to select the
 		"best" SCNetworkConnection.
  */
-#if	(__MAC_OS_X_VERSION_MIN_REQUIRED >= 1060) || (__IPHONE_OS_VERSION_MIN_REQUIRED >= 30000) || TARGET_IPHONE_SIMULATOR
-#define kSCNetworkConnectionSelectionOptionOnDemandHostName	CFSTR("OnDemandHostName")	/* CFString */
-#endif
+#define kSCNetworkConnectionSelectionOptionOnDemandHostName	CFSTR("OnDemandHostName")	// CFString
+												// __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
 
 /*!
 	@define kSCNetworkConnectionSelectionOptionOnDemandRetry
 	@discussion A boolean value used to indicate whether a DNS query has
 		already been issued for the specified OnDemand host name.
  */
-#if	(__MAC_OS_X_VERSION_MIN_REQUIRED >= 1060) || (__IPHONE_OS_VERSION_MIN_REQUIRED >= 30000) || TARGET_IPHONE_SIMULATOR
-#define kSCNetworkConnectionSelectionOptionOnDemandRetry	CFSTR("OnDemandRetry")		/* CFBoolean */
-#endif
+#define kSCNetworkConnectionSelectionOptionOnDemandRetry	CFSTR("OnDemandRetry")		// CFBoolean
+												// __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
 
 __BEGIN_DECLS
 
@@ -235,7 +231,6 @@ __BEGIN_DECLS
 	@discussion Returns the type identifier of all SCNetworkConnection
 		instances.
  */
-CF_EXPORT
 CFTypeID
 SCNetworkConnectionGetTypeID			(void)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
 
@@ -548,7 +543,6 @@ SCNetworkConnectionUnscheduleFromRunLoop	(
 						)			__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
 
 
-#if	!TARGET_OS_IPHONE
 /*!
 	 @function SCNetworkConnectionSetDispatchQueue
 	 @discussion Caller provides a dispatch queue on which the callback contained in connection will run.
@@ -564,7 +558,6 @@ SCNetworkConnectionSetDispatchQueue		(
 						 SCNetworkConnectionRef		connection,
 						 dispatch_queue_t		queue
 						 )			__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA);
-#endif	// !TARGET_OS_IPHONE
 
 __END_DECLS
 

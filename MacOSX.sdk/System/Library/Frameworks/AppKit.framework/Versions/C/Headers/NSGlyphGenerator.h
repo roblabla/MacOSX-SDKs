@@ -1,14 +1,13 @@
 /*
         NSGlyphGenerator.h
         Application Kit
-        Copyright (c) 1993-2009, Apple Inc.
+        Copyright (c) 1993-2011, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSAttributedString.h>
 #import <AppKit/NSFont.h> // for NSGlyph
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 /* NSGlyphStorage layout options */
 enum {
     NSShowControlGlyphs = (1 << 0), // if set, generates displayable glyphs for control chars
@@ -31,4 +30,3 @@ enum {
 
 + (id) sharedGlyphGenerator;
 @end
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */

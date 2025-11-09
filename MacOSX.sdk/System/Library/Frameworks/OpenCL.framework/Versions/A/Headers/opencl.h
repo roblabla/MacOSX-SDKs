@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright:  (c) 2007-2009 by Apple, Inc., All Rights Reserved.
+ * Copyright:  (c) 2007-2011 by Apple, Inc., All Rights Reserved.
  ******************************************************************************/
 
 #ifndef __OPENCL_H
@@ -9,18 +9,15 @@
 extern "C" {
 #endif
 
-#include <AvailabilityMacros.h>
-#include <OpenGL/gl.h>
-#include <OpenGL/CGLDevice.h>
 #include <OpenCL/cl.h>
 #include <OpenCL/cl_gl.h>
 #include <OpenCL/cl_gl_ext.h>
 #include <OpenCL/cl_ext.h>
+#include <OpenCL/gcl.h>
 
-	
 #ifdef __cplusplus
 }
 #endif
 
-#endif  // __OPENCL_H
+#endif  /* __OPENCL_H  */
 

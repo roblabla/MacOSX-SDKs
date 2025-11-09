@@ -3,7 +3,7 @@
  
      Contains:   Menu Manager Interfaces.
  
-     Version:    HIToolbox-463~1
+     Version:    HIToolbox-567.2~1
  
      Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -451,24 +451,9 @@ enum {
 typedef SInt16                          MenuID;
 typedef UInt16                          MenuItemIndex;
 typedef OSType                          MenuCommand;
-#if !OPAQUE_TOOLBOX_STRUCTS
-struct MenuInfo {
-  MenuID              menuID;                 /* in Carbon use Get/SetMenuID*/
-  short               menuWidth;              /* in Carbon use Get/SetMenuWidth*/
-  short               menuHeight;             /* in Carbon use Get/SetMenuHeight*/
-  Handle              menuProc;               /* not supported in Carbon*/
-  long                enableFlags;            /* in Carbon use Enable/DisableMenuItem, IsMenuItemEnable*/
-  Str255              menuData;               /* in Carbon use Get/SetMenuTitle*/
-};
-typedef struct MenuInfo                 MenuInfo;
-typedef MenuInfo *                      MenuPtr;
-typedef MenuPtr *                       MenuHandle;
-#else
 typedef struct OpaqueMenuRef*           MenuRef;
 /* MenuHandle is old name for MenuRef*/
 typedef MenuRef                         MenuHandle;
-#endif  /* !OPAQUE_TOOLBOX_STRUCTS */
-
 
 /*
    A MenuBarHandle is a handle to a MenuBarHeader. An instance of this structure is returned

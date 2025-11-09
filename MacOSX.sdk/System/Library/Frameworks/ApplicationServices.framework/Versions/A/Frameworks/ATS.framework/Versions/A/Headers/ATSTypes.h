@@ -3,22 +3,14 @@
  
      Contains:   Public interfaces for Apple Type Services components.
  
-     Copyright:  © 1997-2008 by Apple Inc., all rights reserved.
+     Version:    ATS
  
-     Warning:    *** APPLE INTERNAL USE ONLY ***
-                 This file may contain unreleased API's
+     Copyright:  © 1997-2011 by Apple Inc., all rights reserved.
  
-     BuildInfo:  Built by:            root
-                 On:                  Mon May 16 10:08:00 2011
-                 With Interfacer:     3.0d46   (Mac OS X for PowerPC)
-                 From:                ATSTypes.i
-                     Revision:        1.14
-                     Dated:           2007/04/24 03:44:18
-                     Last change by:  juliog
-                     Last comment:    <rdar://problem/5152407> File based filter for 64bit causes binary
+     Bugs?:      For bug reports, consult the following page on
+                 the World Wide Web:
  
-     Bugs:       Report bugs to Radar component "System Interfaces", "Latest"
-                 List the version information (from above) in the Problem Description.
+                     http://developer.apple.com/bugreporter/
  
 */
 #ifndef __ATSTYPES__
@@ -162,7 +154,7 @@ typedef STACK_UPP_TYPE(FMFontCallbackFilterProcPtr)             FMFontCallbackFi
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern FMFontFamilyCallbackFilterUPP
-NewFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  NewFMFontCallbackFilterUPP()
@@ -173,7 +165,7 @@ NewFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterProcPtr userRoutine) 
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern FMFontCallbackFilterUPP
-NewFMFontCallbackFilterUPP(FMFontCallbackFilterProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewFMFontCallbackFilterUPP(FMFontCallbackFilterProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  DisposeFMFontFamilyCallbackFilterUPP()
@@ -184,7 +176,7 @@ NewFMFontCallbackFilterUPP(FMFontCallbackFilterProcPtr userRoutine) AVAILABLE_MA
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  DisposeFMFontCallbackFilterUPP()
@@ -195,7 +187,7 @@ DisposeFMFontFamilyCallbackFilterUPP(FMFontFamilyCallbackFilterUPP userUPP) AVAI
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeFMFontCallbackFilterUPP(FMFontCallbackFilterUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeFMFontCallbackFilterUPP(FMFontCallbackFilterUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  InvokeFMFontFamilyCallbackFilterUPP()
@@ -209,7 +201,7 @@ extern OSStatus
 InvokeFMFontFamilyCallbackFilterUPP(
   FMFontFamily                   iFontFamily,
   void *                         iRefCon,
-  FMFontFamilyCallbackFilterUPP  userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FMFontFamilyCallbackFilterUPP  userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  InvokeFMFontCallbackFilterUPP()
@@ -223,7 +215,7 @@ extern OSStatus
 InvokeFMFontCallbackFilterUPP(
   FMFont                   iFont,
   void *                   iRefCon,
-  FMFontCallbackFilterUPP  userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  FMFontCallbackFilterUPP  userUPP)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 #if __MACH__
   #ifdef __cplusplus

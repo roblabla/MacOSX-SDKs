@@ -3,22 +3,14 @@
  
      Contains:   Apple Type Services layout public structures and constants.
  
-     Copyright:  © 1994-2008 by Apple Inc., all rights reserved.
+     Version:    ATS
  
-     Warning:    *** APPLE INTERNAL USE ONLY ***
-                 This file may contain unreleased API's
+     Copyright:  © 1994-2011 by Apple Inc., all rights reserved.
  
-     BuildInfo:  Built by:            root
-                 On:                  Mon May 16 10:08:00 2011
-                 With Interfacer:     3.0d46   (Mac OS X for PowerPC)
-                 From:                ATSLayoutTypes.i
-                     Revision:        1.5
-                     Dated:           2007/01/15 23:28:25
-                     Last change by:  kurita
-                     Last comment:    <rdar://problem/4916090> updated copyright.
+     Bugs?:      For bug reports, consult the following page on
+                 the World Wide Web:
  
-     Bugs:       Report bugs to Radar component "System Interfaces", "Latest"
-                 List the version information (from above) in the Problem Description.
+                     http://developer.apple.com/bugreporter/
  
 */
 #ifndef __ATSLAYOUTTYPES__
@@ -614,7 +606,7 @@ typedef STACK_UPP_TYPE(ATSUDirectLayoutOperationOverrideProcPtr)  ATSUDirectLayo
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ATSUDirectLayoutOperationOverrideUPP
-NewATSUDirectLayoutOperationOverrideUPP(ATSUDirectLayoutOperationOverrideProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+NewATSUDirectLayoutOperationOverrideUPP(ATSUDirectLayoutOperationOverrideProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  DisposeATSUDirectLayoutOperationOverrideUPP()
@@ -625,7 +617,7 @@ NewATSUDirectLayoutOperationOverrideUPP(ATSUDirectLayoutOperationOverrideProcPtr
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeATSUDirectLayoutOperationOverrideUPP(ATSUDirectLayoutOperationOverrideUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+DisposeATSUDirectLayoutOperationOverrideUPP(ATSUDirectLayoutOperationOverrideUPP userUPP) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 /*
  *  InvokeATSUDirectLayoutOperationOverrideUPP()
@@ -642,7 +634,7 @@ InvokeATSUDirectLayoutOperationOverrideUPP(
   URefCon                               iRefCon,
   void *                                iOperationCallbackParameterPtr,
   ATSULayoutOperationCallbackStatus *   oCallbackStatus,
-  ATSUDirectLayoutOperationOverrideUPP  userUPP)              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  ATSUDirectLayoutOperationOverrideUPP  userUPP)              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 #if __MACH__
   #ifdef __cplusplus

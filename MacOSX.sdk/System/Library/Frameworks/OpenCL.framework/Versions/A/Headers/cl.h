@@ -51,14 +51,13 @@ typedef cl_ulong            cl_bitfield;
 typedef cl_bitfield         cl_device_type;
 typedef cl_uint             cl_platform_info;
 typedef cl_uint             cl_device_info;
-typedef cl_bitfield         cl_device_address_info;
 typedef cl_bitfield         cl_device_fp_config;
 typedef cl_uint             cl_device_mem_cache_type;
 typedef cl_uint             cl_device_local_mem_type;
 typedef cl_bitfield         cl_device_exec_capabilities;
 typedef cl_bitfield         cl_command_queue_properties;
 
-typedef intptr_t			cl_context_properties;
+typedef intptr_t            cl_context_properties;
 typedef cl_uint             cl_context_info;
 typedef cl_uint             cl_command_queue_info;
 typedef cl_uint             cl_channel_order;
@@ -67,6 +66,7 @@ typedef cl_bitfield         cl_mem_flags;
 typedef cl_uint             cl_mem_object_type;
 typedef cl_uint             cl_mem_info;
 typedef cl_uint             cl_image_info;
+typedef cl_uint             cl_buffer_create_type;
 typedef cl_uint             cl_addressing_mode;
 typedef cl_uint             cl_filter_mode;
 typedef cl_uint             cl_sampler_info;
@@ -80,16 +80,22 @@ typedef cl_uint             cl_event_info;
 typedef cl_uint             cl_command_type;
 typedef cl_uint             cl_profiling_info;
 
+
 typedef struct _cl_image_format {
     cl_channel_order        image_channel_order;
     cl_channel_type         image_channel_data_type;
 } cl_image_format;
 
 
+typedef struct _cl_buffer_region {
+    size_t                  origin;
+    size_t                  size;
+} cl_buffer_region;
+
 
 /******************************************************************************/
 
-// Error Codes
+/* Error Codes */
 #define CL_SUCCESS                                  0
 #define CL_DEVICE_NOT_FOUND                         -1
 #define CL_DEVICE_NOT_AVAILABLE                     -2
@@ -103,6 +109,8 @@ typedef struct _cl_image_format {
 #define CL_IMAGE_FORMAT_NOT_SUPPORTED               -10
 #define CL_BUILD_PROGRAM_FAILURE                    -11
 #define CL_MAP_FAILURE                              -12
+#define CL_MISALIGNED_SUB_BUFFER_OFFSET             -13
+#define CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST -14
 
 #define CL_INVALID_VALUE                            -30
 #define CL_INVALID_DEVICE_TYPE                      -31
@@ -138,29 +146,34 @@ typedef struct _cl_image_format {
 #define CL_INVALID_BUFFER_SIZE                      -61
 #define CL_INVALID_MIP_LEVEL                        -62
 #define CL_INVALID_GLOBAL_WORK_SIZE                 -63
+#define CL_INVALID_PROPERTY                         -64
 
-// OpenCL Version
+
+/* OpenCL Version */
 #define CL_VERSION_1_0                              1
+#define CL_VERSION_1_1                              1
 
-// cl_bool
+/* cl_bool */
 #define CL_FALSE                                    0
 #define CL_TRUE                                     1
+#define CL_BLOCKING                                 CL_TRUE
+#define CL_NON_BLOCKING                             CL_FALSE
 
-// cl_platform_info
+/* cl_platform_info */
 #define CL_PLATFORM_PROFILE                         0x0900
 #define CL_PLATFORM_VERSION                         0x0901
 #define CL_PLATFORM_NAME                            0x0902
 #define CL_PLATFORM_VENDOR                          0x0903
 #define CL_PLATFORM_EXTENSIONS                      0x0904
 
-// cl_device_type - bitfield
+/* cl_device_type - bitfield */
 #define CL_DEVICE_TYPE_DEFAULT                      (1 << 0)
 #define CL_DEVICE_TYPE_CPU                          (1 << 1)
 #define CL_DEVICE_TYPE_GPU                          (1 << 2)
 #define CL_DEVICE_TYPE_ACCELERATOR                  (1 << 3)
 #define CL_DEVICE_TYPE_ALL                          0xFFFFFFFF
 
-// cl_device_info
+/* cl_device_info */
 #define CL_DEVICE_TYPE                              0x1000
 #define CL_DEVICE_VENDOR_ID                         0x1001
 #define CL_DEVICE_MAX_COMPUTE_UNITS                 0x1002
@@ -211,49 +224,61 @@ typedef struct _cl_image_format {
 #define CL_DEVICE_VERSION                           0x102F
 #define CL_DEVICE_EXTENSIONS                        0x1030
 #define CL_DEVICE_PLATFORM                          0x1031
-// 0x1032 reserved for CL_DEVICE_DOUBLE_FP_CONFIG
-// 0x1033 reserved for CL_DEVICE_HALF_FP_CONFIG
-	
-// cl_device_fp_config - bitfield
+/* 0x1032 reserved for CL_DEVICE_DOUBLE_FP_CONFIG */
+/* 0x1033 reserved for CL_DEVICE_HALF_FP_CONFIG */
+#define CL_DEVICE_PREFERRED_VECTOR_WIDTH_HALF       0x1034
+#define CL_DEVICE_HOST_UNIFIED_MEMORY               0x1035
+#define CL_DEVICE_NATIVE_VECTOR_WIDTH_CHAR          0x1036
+#define CL_DEVICE_NATIVE_VECTOR_WIDTH_SHORT         0x1037
+#define CL_DEVICE_NATIVE_VECTOR_WIDTH_INT           0x1038
+#define CL_DEVICE_NATIVE_VECTOR_WIDTH_LONG          0x1039
+#define CL_DEVICE_NATIVE_VECTOR_WIDTH_FLOAT         0x103A
+#define CL_DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE        0x103B
+#define CL_DEVICE_NATIVE_VECTOR_WIDTH_HALF          0x103C
+#define CL_DEVICE_OPENCL_C_VERSION                  0x103D
+
+/* cl_device_fp_config - bitfield */
 #define CL_FP_DENORM                                (1 << 0)
 #define CL_FP_INF_NAN                               (1 << 1)
 #define CL_FP_ROUND_TO_NEAREST                      (1 << 2)
 #define CL_FP_ROUND_TO_ZERO                         (1 << 3)
 #define CL_FP_ROUND_TO_INF                          (1 << 4)
 #define CL_FP_FMA                                   (1 << 5)
+#define CL_FP_SOFT_FLOAT                            (1 << 6)
 
-// cl_device_mem_cache_type
+/* cl_device_mem_cache_type */
 #define CL_NONE                                     0x0
 #define CL_READ_ONLY_CACHE                          0x1
 #define CL_READ_WRITE_CACHE                         0x2
 
-// cl_device_local_mem_type
+/* cl_device_local_mem_type */
 #define CL_LOCAL                                    0x1
 #define CL_GLOBAL                                   0x2
 
-// cl_device_exec_capabilities - bitfield
+/* cl_device_exec_capabilities - bitfield */
 #define CL_EXEC_KERNEL                              (1 << 0)
 #define CL_EXEC_NATIVE_KERNEL                       (1 << 1)
 
-// cl_command_queue_properties - bitfield
+/* cl_command_queue_properties - bitfield */
 #define CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE      (1 << 0)
 #define CL_QUEUE_PROFILING_ENABLE                   (1 << 1)
 
-// cl_context_info
+/* cl_context_info  */
 #define CL_CONTEXT_REFERENCE_COUNT                  0x1080
 #define CL_CONTEXT_DEVICES                          0x1081
 #define CL_CONTEXT_PROPERTIES                       0x1082
+#define CL_CONTEXT_NUM_DEVICES                      0x1083
 
-// cl_context_properties
+/* cl_context_info + cl_context_properties */
 #define CL_CONTEXT_PLATFORM                         0x1084
 
-// cl_command_queue_info
+/* cl_command_queue_info */
 #define CL_QUEUE_CONTEXT                            0x1090
 #define CL_QUEUE_DEVICE                             0x1091
 #define CL_QUEUE_REFERENCE_COUNT                    0x1092
 #define CL_QUEUE_PROPERTIES                         0x1093
 
-// cl_mem_flags - bitfield
+/* cl_mem_flags - bitfield */
 #define CL_MEM_READ_WRITE                           (1 << 0)
 #define CL_MEM_WRITE_ONLY                           (1 << 1)
 #define CL_MEM_READ_ONLY                            (1 << 2)
@@ -261,7 +286,7 @@ typedef struct _cl_image_format {
 #define CL_MEM_ALLOC_HOST_PTR                       (1 << 4)
 #define CL_MEM_COPY_HOST_PTR                        (1 << 5)
 
-// cl_channel_order
+/* cl_channel_order */
 #define CL_R                                        0x10B0
 #define CL_A                                        0x10B1
 #define CL_RG                                       0x10B2
@@ -272,8 +297,11 @@ typedef struct _cl_image_format {
 #define CL_ARGB                                     0x10B7
 #define CL_INTENSITY                                0x10B8
 #define CL_LUMINANCE                                0x10B9
+#define CL_Rx                                       0x10BA
+#define CL_RGx                                      0x10BB
+#define CL_RGBx                                     0x10BC
 
-// cl_channel_type
+/* cl_channel_type */
 #define CL_SNORM_INT8                               0x10D0
 #define CL_SNORM_INT16                              0x10D1
 #define CL_UNORM_INT8                               0x10D2
@@ -290,12 +318,12 @@ typedef struct _cl_image_format {
 #define CL_HALF_FLOAT                               0x10DD
 #define CL_FLOAT                                    0x10DE
 
-// cl_mem_object_type
+/* cl_mem_object_type */
 #define CL_MEM_OBJECT_BUFFER                        0x10F0
 #define CL_MEM_OBJECT_IMAGE2D                       0x10F1
 #define CL_MEM_OBJECT_IMAGE3D                       0x10F2
 
-// cl_mem_info
+/* cl_mem_info */
 #define CL_MEM_TYPE                                 0x1100
 #define CL_MEM_FLAGS                                0x1101
 #define CL_MEM_SIZE                                 0x1102
@@ -303,8 +331,10 @@ typedef struct _cl_image_format {
 #define CL_MEM_MAP_COUNT                            0x1104
 #define CL_MEM_REFERENCE_COUNT                      0x1105
 #define CL_MEM_CONTEXT                              0x1106
+#define CL_MEM_ASSOCIATED_MEMOBJECT                 0x1107
+#define CL_MEM_OFFSET                               0x1108
 
-// cl_image_info
+/* cl_image_info */
 #define CL_IMAGE_FORMAT                             0x1110
 #define CL_IMAGE_ELEMENT_SIZE                       0x1111
 #define CL_IMAGE_ROW_PITCH                          0x1112
@@ -313,28 +343,29 @@ typedef struct _cl_image_format {
 #define CL_IMAGE_HEIGHT                             0x1115
 #define CL_IMAGE_DEPTH                              0x1116
 
-// cl_addressing_mode
+/* cl_addressing_mode */
 #define CL_ADDRESS_NONE                             0x1130
 #define CL_ADDRESS_CLAMP_TO_EDGE                    0x1131
 #define CL_ADDRESS_CLAMP                            0x1132
 #define CL_ADDRESS_REPEAT                           0x1133
+#define CL_ADDRESS_MIRRORED_REPEAT                  0x1134
 
-// cl_filter_mode
+/* cl_filter_mode */
 #define CL_FILTER_NEAREST                           0x1140
 #define CL_FILTER_LINEAR                            0x1141
 
-// cl_sampler_info
+/* cl_sampler_info */
 #define CL_SAMPLER_REFERENCE_COUNT                  0x1150
 #define CL_SAMPLER_CONTEXT                          0x1151
 #define CL_SAMPLER_NORMALIZED_COORDS                0x1152
 #define CL_SAMPLER_ADDRESSING_MODE                  0x1153
 #define CL_SAMPLER_FILTER_MODE                      0x1154
 
-// cl_map_flags - bitfield
+/* cl_map_flags - bitfield */
 #define CL_MAP_READ                                 (1 << 0)
 #define CL_MAP_WRITE                                (1 << 1)
 
-// cl_program_info
+/* cl_program_info */
 #define CL_PROGRAM_REFERENCE_COUNT                  0x1160
 #define CL_PROGRAM_CONTEXT                          0x1161
 #define CL_PROGRAM_NUM_DEVICES                      0x1162
@@ -343,36 +374,39 @@ typedef struct _cl_image_format {
 #define CL_PROGRAM_BINARY_SIZES                     0x1165
 #define CL_PROGRAM_BINARIES                         0x1166
 
-// cl_program_build_info
+/* cl_program_build_info */
 #define CL_PROGRAM_BUILD_STATUS                     0x1181
 #define CL_PROGRAM_BUILD_OPTIONS                    0x1182
 #define CL_PROGRAM_BUILD_LOG                        0x1183
 
-// cl_build_status
+/* cl_build_status */
 #define CL_BUILD_SUCCESS                            0
 #define CL_BUILD_NONE                               -1
 #define CL_BUILD_ERROR                              -2
 #define CL_BUILD_IN_PROGRESS                        -3
 
-// cl_kernel_info
+/* cl_kernel_info */
 #define CL_KERNEL_FUNCTION_NAME                     0x1190
 #define CL_KERNEL_NUM_ARGS                          0x1191
 #define CL_KERNEL_REFERENCE_COUNT                   0x1192
 #define CL_KERNEL_CONTEXT                           0x1193
 #define CL_KERNEL_PROGRAM                           0x1194
 
-// cl_kernel_work_group_info
+/* cl_kernel_work_group_info */
 #define CL_KERNEL_WORK_GROUP_SIZE                   0x11B0
 #define CL_KERNEL_COMPILE_WORK_GROUP_SIZE           0x11B1
 #define CL_KERNEL_LOCAL_MEM_SIZE                    0x11B2
+#define CL_KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE 0x11B3
+#define CL_KERNEL_PRIVATE_MEM_SIZE                  0x11B4
 
-// cl_event_info
+/* cl_event_info  */
 #define CL_EVENT_COMMAND_QUEUE                      0x11D0
 #define CL_EVENT_COMMAND_TYPE                       0x11D1
 #define CL_EVENT_REFERENCE_COUNT                    0x11D2
 #define CL_EVENT_COMMAND_EXECUTION_STATUS           0x11D3
+#define CL_EVENT_CONTEXT                            0x11D4
 
-// cl_command_type
+/* cl_command_type */
 #define CL_COMMAND_NDRANGE_KERNEL                   0x11F0
 #define CL_COMMAND_TASK                             0x11F1
 #define CL_COMMAND_NATIVE_KERNEL                    0x11F2
@@ -390,14 +424,21 @@ typedef struct _cl_image_format {
 #define CL_COMMAND_MARKER                           0x11FE
 #define CL_COMMAND_ACQUIRE_GL_OBJECTS               0x11FF
 #define CL_COMMAND_RELEASE_GL_OBJECTS               0x1200
+#define CL_COMMAND_READ_BUFFER_RECT                 0x1201
+#define CL_COMMAND_WRITE_BUFFER_RECT                0x1202
+#define CL_COMMAND_COPY_BUFFER_RECT                 0x1203
+#define CL_COMMAND_USER                             0x1204
 
-// command execution status
+/* command execution status */
 #define CL_COMPLETE                                 0x0
 #define CL_RUNNING                                  0x1
 #define CL_SUBMITTED                                0x2
 #define CL_QUEUED                                   0x3
-  
-// cl_profiling_info
+
+/* cl_buffer_create_type  */
+#define CL_BUFFER_CREATE_TYPE_REGION                0x1220
+
+/* cl_profiling_info  */
 #define CL_PROFILING_COMMAND_QUEUED                 0x1280
 #define CL_PROFILING_COMMAND_SUBMIT                 0x1281
 #define CL_PROFILING_COMMAND_START                  0x1282
@@ -405,7 +446,7 @@ typedef struct _cl_image_format {
 
 /********************************************************************************************************/
 
-// Platform API
+/* Platform API */
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetPlatformIDs(cl_uint          /* num_entries */,
                  cl_platform_id * /* platforms */,
@@ -418,7 +459,7 @@ clGetPlatformInfo(cl_platform_id   /* platform */,
                   void *           /* param_value */,
                   size_t *         /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
 
-// Device APIs
+/* Device APIs */
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetDeviceIDs(cl_platform_id   /* platform */,
                cl_device_type   /* device_type */, 
@@ -433,19 +474,19 @@ clGetDeviceInfo(cl_device_id    /* device */,
                 void *          /* param_value */,
                 size_t *        /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
 
-// Context APIs  
+/* Context APIs  */
 extern CL_API_ENTRY cl_context CL_API_CALL
 clCreateContext(const cl_context_properties * /* properties */,
                 cl_uint                 /* num_devices */,
                 const cl_device_id *    /* devices */,
-                void (*pfn_notify)(const char *, const void *, size_t, void *) /* pfn_notify */,
+                void (CL_CALLBACK * /* pfn_notify */)(const char *, const void *, size_t, void *),
                 void *                  /* user_data */,
                 cl_int *                /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
 
 extern CL_API_ENTRY cl_context CL_API_CALL
 clCreateContextFromType(const cl_context_properties * /* properties */,
                         cl_device_type          /* device_type */,
-                        void (*pfn_notify)(const char *, const void *, size_t, void *) /* pfn_notify */,
+                        void (CL_CALLBACK *     /* pfn_notify*/ )(const char *, const void *, size_t, void *),
                         void *                  /* user_data */,
                         cl_int *                /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
 
@@ -462,7 +503,7 @@ clGetContextInfo(cl_context         /* context */,
                  void *             /* param_value */, 
                  size_t *           /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
 
-// Command Queue APIs
+/* Command Queue APIs */
 extern CL_API_ENTRY cl_command_queue CL_API_CALL
 clCreateCommandQueue(cl_context                     /* context */, 
                      cl_device_id                   /* device */, 
@@ -482,19 +523,39 @@ clGetCommandQueueInfo(cl_command_queue      /* command_queue */,
                       void *                /* param_value */,
                       size_t *              /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
 
+#ifdef CL_USE_DEPRECATED_OPENCL_1_0_APIS
+#warning CL_USE_DEPRECATED_OPENCL_1_0_APIS is defined. These APIs are unsupported and untested in OpenCL 1.1!
+/* 
+ *  WARNING:
+ *     This API introduces mutable state into the OpenCL implementation. It has been REMOVED
+ *  to better facilitate thread safety.  The 1.0 API is not thread safe. It is not tested by the
+ *  OpenCL 1.1 conformance test, and consequently may not work or may not work dependably.
+ *  It is likely to be non-performant. Use of this API is not advised. Use at your own risk.
+ *
+ *  Software developers previously relying on this API are instructed to set the command queue 
+ *  properties when creating the queue, instead. 
+ */
 extern CL_API_ENTRY cl_int CL_API_CALL
 clSetCommandQueueProperty(cl_command_queue              /* command_queue */,
                           cl_command_queue_properties   /* properties */, 
                           cl_bool                        /* enable */,
-                          cl_command_queue_properties * /* old_properties */) CL_API_SUFFIX__VERSION_1_0;
+                          cl_command_queue_properties * /* old_properties */) CL_EXT_SUFFIX__VERSION_1_0_DEPRECATED;
+#endif /* CL_USE_DEPRECATED_OPENCL_1_0_APIS */
 
-// Memory Object APIs
+/* Memory Object APIs */
 extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateBuffer(cl_context   /* context */,
                cl_mem_flags /* flags */,
                size_t       /* size */,
                void *       /* host_ptr */,
                cl_int *     /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
+
+extern CL_API_ENTRY cl_mem CL_API_CALL
+clCreateSubBuffer(cl_mem                   /* buffer */,
+                  cl_mem_flags             /* flags */,
+                  cl_buffer_create_type    /* buffer_create_type */,
+                  const void *             /* buffer_create_info */,
+                  cl_int *                 /* errcode_ret */) CL_API_SUFFIX__VERSION_1_1;
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateImage2D(cl_context              /* context */,
@@ -546,7 +607,12 @@ clGetImageInfo(cl_mem           /* image */,
                void *           /* param_value */,
                size_t *         /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
 
-// Sampler APIs
+extern CL_API_ENTRY cl_int CL_API_CALL
+clSetMemObjectDestructorCallback(  cl_mem /* memobj */, 
+                                    void (CL_CALLBACK * /*pfn_notify*/)( cl_mem /* memobj */, void* /*user_data*/), 
+                                    void * /*user_data */ )             CL_API_SUFFIX__VERSION_1_1;  
+
+/* Sampler APIs */
 extern CL_API_ENTRY cl_sampler CL_API_CALL
 clCreateSampler(cl_context          /* context */,
                 cl_bool             /* normalized_coords */, 
@@ -567,7 +633,7 @@ clGetSamplerInfo(cl_sampler         /* sampler */,
                  void *             /* param_value */,
                  size_t *           /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
                             
-// Program Object APIs
+/* Program Object APIs  */
 extern CL_API_ENTRY cl_program CL_API_CALL
 clCreateProgramWithSource(cl_context        /* context */,
                           cl_uint           /* count */,
@@ -595,7 +661,7 @@ clBuildProgram(cl_program           /* program */,
                cl_uint              /* num_devices */,
                const cl_device_id * /* device_list */,
                const char *         /* options */, 
-               void (*pfn_notify)(cl_program /* program */, void * /* user_data */),
+               void (CL_CALLBACK *  /* pfn_notify */)(cl_program /* program */, void * /* user_data */),
                void *               /* user_data */) CL_API_SUFFIX__VERSION_1_0;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
@@ -616,7 +682,7 @@ clGetProgramBuildInfo(cl_program            /* program */,
                       void *                /* param_value */,
                       size_t *              /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
                             
-// Kernel Object APIs
+/* Kernel Object APIs */
 extern CL_API_ENTRY cl_kernel CL_API_CALL
 clCreateKernel(cl_program      /* program */,
                const char *    /* kernel_name */,
@@ -655,7 +721,7 @@ clGetKernelWorkGroupInfo(cl_kernel                  /* kernel */,
                          void *                     /* param_value */,
                          size_t *                   /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
 
-// Event Object APIs
+/* Event Object APIs */
 extern CL_API_ENTRY cl_int CL_API_CALL
 clWaitForEvents(cl_uint             /* num_events */,
                 const cl_event *    /* event_list */) CL_API_SUFFIX__VERSION_1_0;
@@ -667,13 +733,27 @@ clGetEventInfo(cl_event         /* event */,
                void *           /* param_value */,
                size_t *         /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
                             
+extern CL_API_ENTRY cl_event CL_API_CALL
+clCreateUserEvent(cl_context    /* context */,
+                  cl_int *      /* errcode_ret */) CL_API_SUFFIX__VERSION_1_1;               
+                            
 extern CL_API_ENTRY cl_int CL_API_CALL
 clRetainEvent(cl_event /* event */) CL_API_SUFFIX__VERSION_1_0;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clReleaseEvent(cl_event /* event */) CL_API_SUFFIX__VERSION_1_0;
 
-// Profiling APIs
+extern CL_API_ENTRY cl_int CL_API_CALL
+clSetUserEventStatus(cl_event   /* event */,
+                     cl_int     /* execution_status */) CL_API_SUFFIX__VERSION_1_1;
+                     
+extern CL_API_ENTRY cl_int CL_API_CALL
+clSetEventCallback( cl_event    /* event */,
+                    cl_int      /* command_exec_callback_type */,
+                    void (CL_CALLBACK * /* pfn_notify */)(cl_event, cl_int, void *),
+                    void *      /* user_data */) CL_API_SUFFIX__VERSION_1_1;
+
+/* Profiling APIs */
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetEventProfilingInfo(cl_event            /* event */,
                         cl_profiling_info   /* param_name */,
@@ -681,14 +761,14 @@ clGetEventProfilingInfo(cl_event            /* event */,
                         void *              /* param_value */,
                         size_t *            /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
                                 
-// Flush and Finish APIs
+/* Flush and Finish APIs */
 extern CL_API_ENTRY cl_int CL_API_CALL
 clFlush(cl_command_queue /* command_queue */) CL_API_SUFFIX__VERSION_1_0;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clFinish(cl_command_queue /* command_queue */) CL_API_SUFFIX__VERSION_1_0;
 
-// Enqueued Commands APIs
+/* Enqueued Commands APIs */
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueReadBuffer(cl_command_queue    /* command_queue */,
                     cl_mem              /* buffer */,
@@ -699,6 +779,22 @@ clEnqueueReadBuffer(cl_command_queue    /* command_queue */,
                     cl_uint             /* num_events_in_wait_list */,
                     const cl_event *    /* event_wait_list */,
                     cl_event *          /* event */) CL_API_SUFFIX__VERSION_1_0;
+                            
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueReadBufferRect(cl_command_queue    /* command_queue */,
+                        cl_mem              /* buffer */,
+                        cl_bool             /* blocking_read */,
+                        const size_t *      /* buffer_offset */,
+                        const size_t *      /* host_offset */, 
+                        const size_t *      /* region */,
+                        size_t              /* buffer_row_pitch */,
+                        size_t              /* buffer_slice_pitch */,
+                        size_t              /* host_row_pitch */,
+                        size_t              /* host_slice_pitch */,                        
+                        void *              /* ptr */,
+                        cl_uint             /* num_events_in_wait_list */,
+                        const cl_event *    /* event_wait_list */,
+                        cl_event *          /* event */) CL_API_SUFFIX__VERSION_1_1;
                             
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueWriteBuffer(cl_command_queue   /* command_queue */, 
@@ -712,6 +808,22 @@ clEnqueueWriteBuffer(cl_command_queue   /* command_queue */,
                      cl_event *         /* event */) CL_API_SUFFIX__VERSION_1_0;
                             
 extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueWriteBufferRect(cl_command_queue    /* command_queue */,
+                         cl_mem              /* buffer */,
+                         cl_bool             /* blocking_write */,
+                         const size_t *      /* buffer_offset */,
+                         const size_t *      /* host_offset */, 
+                         const size_t *      /* region */,
+                         size_t              /* buffer_row_pitch */,
+                         size_t              /* buffer_slice_pitch */,
+                         size_t              /* host_row_pitch */,
+                         size_t              /* host_slice_pitch */,                        
+                         const void *        /* ptr */,
+                         cl_uint             /* num_events_in_wait_list */,
+                         const cl_event *    /* event_wait_list */,
+                         cl_event *          /* event */) CL_API_SUFFIX__VERSION_1_1;
+                            
+extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueCopyBuffer(cl_command_queue    /* command_queue */, 
                     cl_mem              /* src_buffer */,
                     cl_mem              /* dst_buffer */, 
@@ -721,6 +833,21 @@ clEnqueueCopyBuffer(cl_command_queue    /* command_queue */,
                     cl_uint             /* num_events_in_wait_list */,
                     const cl_event *    /* event_wait_list */,
                     cl_event *          /* event */) CL_API_SUFFIX__VERSION_1_0;
+                            
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueCopyBufferRect(cl_command_queue    /* command_queue */, 
+                        cl_mem              /* src_buffer */,
+                        cl_mem              /* dst_buffer */, 
+                        const size_t *      /* src_origin */,
+                        const size_t *      /* dst_origin */,
+                        const size_t *      /* region */, 
+                        size_t              /* src_row_pitch */,
+                        size_t              /* src_slice_pitch */,
+                        size_t              /* dst_row_pitch */,
+                        size_t              /* dst_slice_pitch */,
+                        cl_uint             /* num_events_in_wait_list */,
+                        const cl_event *    /* event_wait_list */,
+                        cl_event *          /* event */) CL_API_SUFFIX__VERSION_1_1;
                             
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueReadImage(cl_command_queue     /* command_queue */,
@@ -857,18 +984,18 @@ clEnqueueWaitForEvents(cl_command_queue /* command_queue */,
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueBarrier(cl_command_queue /* command_queue */) CL_API_SUFFIX__VERSION_1_0;
 
-// Extension function access
-//
-// Returns the extension function address for the given function name,
-// or NULL if a valid function can not be found.  The client must
-// check to make sure the address is not NULL, before using or 
-// calling the returned function address.
-//
+/* Extension function access
+ *
+ * Returns the extension function address for the given function name,
+ * or NULL if a valid function can not be found.  The client must
+ * check to make sure the address is not NULL, before using or 
+ * calling the returned function address.
+ */
 extern CL_API_ENTRY void * CL_API_CALL clGetExtensionFunctionAddress(const char * /* func_name */) CL_API_SUFFIX__VERSION_1_0;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif  // __OPENCL_CL_H
+#endif  /* __OPENCL_CL_H */
 

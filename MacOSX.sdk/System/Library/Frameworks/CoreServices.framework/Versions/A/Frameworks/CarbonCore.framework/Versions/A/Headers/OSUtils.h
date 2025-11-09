@@ -3,7 +3,7 @@
  
      Contains:   OS Utilities Interfaces.
  
-     Version:    CarbonCore-861.39~1
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
  
@@ -132,7 +132,11 @@ struct MachineLocation {
 };
 typedef struct MachineLocation MachineLocation;
 /*
- *  IsMetric()
+ *  IsMetric()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use CFLocaleGetValue() and the property kCFLocaleUsesMetricSystem
+ *    to determine this value.
  *  
  *  Summary:
  *    Verifies whether the current script system is using the metric
@@ -164,12 +168,12 @@ typedef struct MachineLocation MachineLocation;
  *    system is being used.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Boolean 
-IsMetric(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+IsMetric(void)                                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*

@@ -94,7 +94,7 @@
 #define APU_HAVE_DB_VERSION    0
 #endif
 
-#define APU_HAVE_PGSQL         0
+#define APU_HAVE_PGSQL         1
 #define APU_HAVE_MYSQL         0
 #define APU_HAVE_SQLITE3       1
 #define APU_HAVE_SQLITE2       0

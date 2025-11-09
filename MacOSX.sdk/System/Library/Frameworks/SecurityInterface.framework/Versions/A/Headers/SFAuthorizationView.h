@@ -201,6 +201,14 @@ Calls to updateStatus: return YES if in the unlocked state, NO otherwise. Note t
     @param view
 */
 - (void)authorizationViewReleasedAuthorization:(SFAuthorizationView *)view;
+
+/*!
+ @method authorizationViewDidHide:
+ @abstract
+ @param view
+ */
+- (void)authorizationViewDidHide:(SFAuthorizationView *)view;
+
 @end
 
 #endif /* !_SFAUTHORIZATIONVIEW_H_ */

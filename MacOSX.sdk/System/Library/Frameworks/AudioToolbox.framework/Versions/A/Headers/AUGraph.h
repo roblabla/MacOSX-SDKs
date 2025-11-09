@@ -3,7 +3,7 @@
  
      Contains:   AUGraph application interfaces
  
-     Copyright:  (c) 2000 - 2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2000 - 2008 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -150,7 +150,7 @@ AUGraphAddNode(		AUGraph							  inGraph,
 
 /*!
     @function	AUGraphRemoveNode
-    @abstract   Remove a node to an AUGraph
+    @abstract   Remove a node from an AUGraph
     @discussion	Nodes can be removed from any thread context. The output node of
 				the AUGraph cannot be removed while the graph is running.
     @param		inGraph			the AUGraph object
@@ -425,7 +425,7 @@ AUGraphGetInteractionInfo(	AUGraph					inGraph,
 							AUNodeInteraction *		outInteraction)		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 
 /*! 
-	@function	AUGraphGetInteractionInfo
+	@function	AUGraphCountNodeInteractions
 	@abstract	Retrieve the number of interactions of a graph's node
 	@discussion	The number of node interactions currently being managed by the graph for the specified node
 	@param		inGraph
@@ -544,7 +544,7 @@ AUGraphInitialize(		AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,_
 
 /*!
 	@function	AUGraphUninitialize
-	@abstract	Initialise a graph
+	@abstract	Uninitialise a graph
 	@discussion The member of the graph are uninitialised 
 	@param		inGraph
 */
@@ -553,7 +553,7 @@ AUGraphUninitialize(	AUGraph		inGraph)						__OSX_AVAILABLE_STARTING(__MAC_10_0,
 
 /*!
 	@function	AUGraphStart
-	@abstract	Initialise a graph
+	@abstract	Start a graph
 	@discussion Start() is called on the "head" node(s) of the AUGraph	(now rendering starts) 
 				
 				The graph must be initialised before it can be started

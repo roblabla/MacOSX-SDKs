@@ -1,5 +1,5 @@
 /*	NSDictionary.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -33,17 +33,17 @@
 - (BOOL)writeToURL:(NSURL *)url atomically:(BOOL)atomically; // the atomically flag is ignored if url of a type that cannot be written atomically.
 
 - (NSArray *)keysSortedByValueUsingSelector:(SEL)comparator;
-- (void)getObjects:(id *)objects andKeys:(id *)keys;
+- (void)getObjects:(id __unsafe_unretained [])objects andKeys:(id __unsafe_unretained [])keys;
 
 #if NS_BLOCKS_AVAILABLE
-- (void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)enumerateKeysAndObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id key, id obj, BOOL *stop))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
+- (void)enumerateKeysAndObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id key, id obj, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 
-- (NSArray *)keysSortedByValueUsingComparator:(NSComparator)cmptr AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSArray *)keysSortedByValueWithOptions:(NSSortOptions)opts usingComparator:(NSComparator)cmptr AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSArray *)keysSortedByValueUsingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
+- (NSArray *)keysSortedByValueWithOptions:(NSSortOptions)opts usingComparator:(NSComparator)cmptr NS_AVAILABLE(10_6, 4_0);
 
-- (NSSet *)keysOfEntriesPassingTest:(BOOL (^)(id key, id obj, BOOL *stop))predicate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSSet *)keysOfEntriesWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(id key, id obj, BOOL *stop))predicate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSSet *)keysOfEntriesPassingTest:(BOOL (^)(id key, id obj, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSSet *)keysOfEntriesWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(id key, id obj, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
 #endif
 
 @end
@@ -52,12 +52,12 @@
 
 + (id)dictionary;
 + (id)dictionaryWithObject:(id)object forKey:(id)key;
-+ (id)dictionaryWithObjects:(id *)objects forKeys:(id *)keys count:(NSUInteger)cnt;
++ (id)dictionaryWithObjects:(const id [])objects forKeys:(const id [])keys count:(NSUInteger)cnt;
 + (id)dictionaryWithObjectsAndKeys:(id)firstObject, ... NS_REQUIRES_NIL_TERMINATION;
 + (id)dictionaryWithDictionary:(NSDictionary *)dict;
 + (id)dictionaryWithObjects:(NSArray *)objects forKeys:(NSArray *)keys;
 
-- (id)initWithObjects:(id *)objects forKeys:(id *)keys count:(NSUInteger)cnt;
+- (id)initWithObjects:(const id [])objects forKeys:(const id [])keys count:(NSUInteger)cnt;
 - (id)initWithObjectsAndKeys:(id)firstObject, ... NS_REQUIRES_NIL_TERMINATION;
 - (id)initWithDictionary:(NSDictionary *)otherDictionary;
 - (id)initWithDictionary:(NSDictionary *)otherDictionary copyItems:(BOOL)flag;

@@ -327,6 +327,17 @@ xcb_get_property_cookie_t xcb_get_wm_class(xcb_connection_t *c,
 xcb_get_property_cookie_t xcb_get_wm_class_unchecked(xcb_connection_t *c,
                                                      xcb_window_t window);
 
+
+/**
+ * @brief Fill give structure with the WM_CLASS property of a window.
+ * @param prop The property structur to fill.
+ * @param reply The property request reply.
+ * @return Return 1 on success, 0 otherwise.
+ */
+uint8_t
+xcb_get_wm_class_from_reply(xcb_get_wm_class_reply_t *prop,
+                            xcb_get_property_reply_t *reply);
+
 /**
  * @brief Fill given structure with the WM_CLASS property of a window.
  * @param c The connection to the X server.
@@ -858,6 +869,17 @@ xcb_get_property_cookie_t xcb_get_wm_protocols_unchecked(xcb_connection_t *c,
                                                          xcb_window_t window,
                                                          xcb_atom_t wm_protocol_atom);
 
+/**
+ * @brief Fill the given structure with the WM_PROTOCOLS property of a window.
+ * @param reply The reply of the GetProperty request.
+ * @param protocols WM_PROTOCOLS property value.
+ * @return Return 1 on success, 0 otherwise.
+ *
+ * protocols structure members should be freed by
+ * xcb_get_wm_protocols_reply_wipe().
+ */
+uint8_t xcb_get_wm_protocols_from_reply(xcb_get_property_reply_t *reply,
+                                        xcb_get_wm_protocols_reply_t *protocols);
 /**
  * @brief Fill the given structure with the WM_PROTOCOLS property of a window.
  * @param c The connection to the X server.

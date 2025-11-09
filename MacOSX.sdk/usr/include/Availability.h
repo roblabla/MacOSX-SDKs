@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2009 by Apple Inc.. All rights reserved.
+ * Copyright (c) 2007-2010 by Apple Inc.. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -51,7 +51,7 @@
         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5,__IPHONE_NA,__IPHONE_NA)
     means that the function/method was introduced in Mac OS X 10.0, then
     became deprecated beginning in Mac OS X 10.5.  On the iPhone the function 
-    has never been availlable.  
+    has never been available.  
     
     For these macros to function properly, a program must specify the OS version range 
     it is targeting.  The min OS version is specified as an option to the compiler:
@@ -74,18 +74,26 @@
             @end
 
         
-        An enum available on the phone in 2.1 and later, but not available on Mac OS X:
+        An enum available on the phone, but not available on Mac OS X:
         
-            #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 20100
+            #if __IPHONE_OS_VERSION_MIN_REQUIRED
                 enum { myEnum = 1 };
             #endif
-        Note: this works when targeting the Mac OS X platform because 
-        __IPHONE_OS_VERSION_MIN_REQUIRED is undefined which evaluates to zero, 
-        so test becomes #if 0 >= 20100 which is false.  Also, we use
-        20100 instead of __IPHONE_2_1 to be safe.  The __IPHONE_2_1 macro did not
-        exist in <Availability.h> prior to the 2.1 SDK.  So, if somehow this 
-        conditional was used with an earilier SDK, it would evaluate incorrectly.
+           Note: this works when targeting the Mac OS X platform because 
+           __IPHONE_OS_VERSION_MIN_REQUIRED is undefined which evaluates to zero. 
+        
 
+        An enum with values added in different iPhoneOS versions:
+		
+			enum {
+			    myX  = 1,	// Usable on iPhoneOS 2.1 and later
+			    myY  = 2,	// Usable on iPhoneOS 3.0 and later
+			    myZ  = 3,	// Usable on iPhoneOS 3.0 and later
+				...
+		      Note: you do not want to use #if with enumeration values
+			  when a client needs to see all values at compile time
+			  and use runtime logic to only use the viable values.
+			  
 
     It is also possible to use the *_VERSION_MIN_REQUIRED in source code to make one
     source base that can be compiled to target a range of OS versions.  It is best
@@ -115,12 +123,19 @@
 #define __MAC_10_4      1040
 #define __MAC_10_5      1050
 #define __MAC_10_6      1060
+#define __MAC_10_7      1070
 #define __MAC_NA        9999   /* not available */
 
-#define __IPHONE_2_0     20000  
-#define __IPHONE_2_1     20100  
-#define __IPHONE_2_2     20200  
-#define __IPHONE_3_0     30000  
+#define __IPHONE_2_0     20000
+#define __IPHONE_2_1     20100
+#define __IPHONE_2_2     20200
+#define __IPHONE_3_0     30000
+#define __IPHONE_3_1     30100
+#define __IPHONE_3_2     30200
+#define __IPHONE_4_0     40000
+#define __IPHONE_4_1     40100
+#define __IPHONE_4_2     40200
+#define __IPHONE_4_3     40300
 #define __IPHONE_NA      99999  /* not available */
 
 #include <AvailabilityInternal.h>

@@ -1,14 +1,9 @@
 /*	
     NSURLConnection.h
-    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
     
     Public header file.
 */
-
-// Note: To use the APIs described in these headers, you must perform
-// a runtime check for Foundation-462.1 or later.
-#import <AvailabilityMacros.h>
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 
@@ -22,6 +17,8 @@
 @class NSRunLoop;
 @class NSInputStream;
 @class NSURLProtectionSpace;
+@protocol NSURLConnectionDelegate;
+@class NSOperationQueue;
 
 /*!
     @class NSURLConnection
@@ -68,7 +65,7 @@
     given request and delegate. The asynchronous URL load process is
     started as part of this method.
     @discussion It is important to note that the delegate callbacks
-    defined by the NSURLConnectionDelegate informal protocol will be
+    defined by the NSURLConnectionDelegate protocol will be
     sent on the thread which calls this method. For this to work
     properly, the calling thread must be running its run loop and must
     be running the default run loop mode.
@@ -78,7 +75,7 @@
     request that is used for the loading process.
     @param delegate an object to which the NSURLConnection will send
     asynchronous callbacks to convey information about the progress of
-    the asynchronous URL load. See the NSURLConnectionDelegate informal 
+    the asynchronous URL load. See the NSURLConnectionDelegate
     protocol for the list of available delegate methods.
     @result A newly-created and autoreleased NSURLConnection instance.
 */
@@ -90,7 +87,7 @@
     and delegate. The asynchronous URL load process is started as part
     of this method.
     @discussion It is important to note that the delegate callbacks
-    defined by the NSURLConnectionDelegate informal protocol will be
+    defined by the NSURLConnectionDelegate protocol will be
     sent on the thread which calls this method. For this to work
     properly, the calling thread must be running its run loop and must
     be running the default run loop mode.
@@ -102,8 +99,8 @@
     request that is used for the loading process.
     @param delegate an object to which the NSURLConnection will send
     asynchronous callbacks to convey information about the progress of
-    the asynchronous URL load. See the NSURLConnectionDelegate informal 
-    protocol for the list of available delegate methods.
+    the asynchronous URL load. See the NSURLConnectionDelegate protocol
+    for the list of available delegate methods.
     @result An initialized NSURLConnection instance. 
 */
 - (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate;
@@ -116,8 +113,8 @@
     @discussion This method extends the older initWithRequest:delegate: by allowing
         the caller to delay the start of the connection.  This allows the caller
         to customize where the delegate will receive its NSURLConnectionDelegate
-        messages via -scheduleWithRunLoop:forMode: and -removeFromRunLoop:forMode:
-        before the connection starts its work.  If startImmediately is NO, the connection
+        messages via -scheduleWithRunLoop:forMode: or -setDelegateQueue: before the
+	connection starts its work.  If startImmediately is NO, the connection
         needs to be started by calling -start before any work to process the request wil be done.
     @param request The request to load.
     @param delegate The object which will receive the delegation messages for the connection
@@ -125,13 +122,13 @@
         or should delay processing until it receives the -start message.
     @result The initialized NSURLConnection instance
 */
-- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate startImmediately:(BOOL)startImmediately AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate startImmediately:(BOOL)startImmediately NS_AVAILABLE(10_5, 2_0);
 
 /*!
     @method start
     @abstract Causes the NSURLConnection to start processing its request, if it has not already.
 */
-- (void)start AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)start NS_AVAILABLE(10_5, 2_0);
 
 /*! 
     @method cancel
@@ -152,17 +149,24 @@
     or on the same run loop in multiple modes, so scheduling in one place does not cause unscheduling
     in another.
 */
-- (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)unscheduleFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode NS_AVAILABLE(10_5, 2_0);
+- (void)unscheduleFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSString *)mode NS_AVAILABLE(10_5, 2_0);
+
+/*
+    In Mac OS X 10.7, it is now possible to specify an NSOperationQueue upon which
+    connection delegate messages will be dispatched.  It is an error to schedule
+    with both an NSRunLoop and an NSOperationQueue.
+ */
+- (void)setDelegateQueue:(NSOperationQueue*) queue NS_AVAILABLE(10_7, 5_0);
 
 @end
 
 
 
 /*!
-    @category NSObject(NSURLConnectionDelegate)
+    @protocol NSURLConnectionDelegate <NSObject>
 
-    The NSURLConnectionDelegate category on NSObject defines
+    The NSURLConnectionDelegate formal protocol defines
     NSURLConnection delegate methods that can be implemented by
     objects to receive informational callbacks about the asynchronous
     load of a URL request. Other delegate methods provide hooks that
@@ -214,7 +218,9 @@
     given NSURLConnection. 
     </ul>
 */
-@interface NSObject (NSURLConnectionDelegate)
+@protocol NSURLConnectionDelegate <NSObject>
+
+@optional
 
 /*! 
     @method connection:willSendRequest:redirectResponse:   
@@ -274,7 +280,7 @@
     @param request The current NSURLRequest object associated with the connection.
     @result The new unopened body stream to use (see setHTTPBodyStream).
 */
-- (NSInputStream *)connection:(NSURLConnection *)connection needNewBodyStream:(NSURLRequest *)request;
+- (NSInputStream *)connection:(NSURLConnection *)connection needNewBodyStream:(NSURLRequest *)request NS_AVAILABLE(10_6, 3_0);
 
 /*!
     @method connection:canAuthenticateAgainstProtectionSpace:
@@ -289,7 +295,7 @@
     @param protectionSpace an NSURLProtectionSpace that will be used to generate an authentication challenge
     @result a boolean value that indicates the willingness of the delegate to handle the authentication
  */
-- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace;
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace NS_AVAILABLE(10_6, 3_0);
 
 /*!
     @method connection:didReceiveAuthenticationChallenge:
@@ -301,6 +307,23 @@
     @param challenge The NSURLAuthenticationChallenge to start authentication for
 */
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+
+/*!
+    @method connection:willSendRequestForAuthenticationChallenge:
+    @abstract Start authentication for a given challenge.
+    @discussion Call useCredential:forAuthenticationChallenge:,
+    continueWithoutCredentialForAuthenticationChallenge:, cancelAuthenticationChallenge:, 
+    performDefaultHandlingForAuthenticationChallenge:, or rejectProtectionSpaceAndContinueWithChallenge on
+    the challenge sender when done.  All information for making an authentication 
+    decision is provided in this callback.  If this callback is implemented, the delegate will not
+    receive callbacks to didReceiveAuthenticationChallenge, canAuthenticateAgainstProtectionSpace, or 
+    connectionShouldUseCredentialStorage. All the work of those three callbacks can be done in 
+    willSendRequestForAuthenticationChallenge:.
+    @param connection the connection for which authentication is needed
+    @param challenge The NSURLAuthenticationChallenge to start authentication for
+ */
+
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
 
 /*!
     @method connection:didCancelAuthenticationChallenge:
@@ -324,7 +347,7 @@
     @param connection  the NSURLConnection object asking if it should consult the credential storage.
     @result NO if the connection should not consult the credential storage, Yes if it should.
 */
-- (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection;
+- (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection NS_AVAILABLE(10_6, 3_0);
 
 /*! 
     @method connection:didReceiveResponse:   
@@ -333,7 +356,7 @@
     @discussion The given NSURLResponse is immutable and
     will not be modified by the URL loading system once it is
     presented to the NSURLConnectionDelegate by this method.
-    <p>See the category description for information regarding
+    <p>See the protocol description for information regarding
     the contract associated with the delivery of this delegate 
     callback.
     @param connection an NSURLConnection instance for which the
@@ -355,7 +378,7 @@
     out about load data. In other words, it is the responsibility of the
     delegate to retain or copy this data as it is delivered through this
     method.
-    <p>See the category description for information regarding
+    <p>See the protocol description for information regarding
     the contract associated with the delivery of this delegate 
     callback.
     @param connection  NSURLConnection that has received data.
@@ -380,13 +403,13 @@
     @param totalBytesWritten total number of bytes written for this connection
     @param totalBytesExpectedToWrite the number of bytes the connection expects to write (can change due to retransmission of body content)
 */
-- (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite;
+- (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite NS_AVAILABLE(10_6, 3_0);
 
 /*! 
     @method connectionDidFinishLoading:   
     @abstract This method is called when an NSURLConnection has
     finished loading successfully.
-    @discussion See the category description for information regarding
+    @discussion See the protocol description for information regarding
     the contract associated with the delivery of this delegate
     callback.
     @param connection an NSURLConnection that has finished loading
@@ -398,7 +421,7 @@
     @method connection:didFailWithError:   
     @abstract This method is called when an NSURLConnection has
     failed to load successfully.
-    @discussion See the category description for information regarding
+    @discussion See the protocol description for information regarding
     the contract associated with the delivery of this delegate
     callback.
     @param connection an NSURLConnection that has failed to load.
@@ -412,7 +435,7 @@
     @abstract This method gives the delegate an opportunity to inspect
     the NSCachedURLResponse that will be stored in the cache, and modify
     it if necessary.
-    @discussion See the category description for information regarding
+    @discussion See the protocol description for information regarding
     the contract associated with the delivery of this delegate
     callback.
     @param connection an NSURLConnection that has a NSCachedURLResponse
@@ -456,9 +479,9 @@
     request that is used for the loading process.
     @param response An out parameter which is filled in with the
     response generated by performing the load.
-    @param error An out parameter which is filled in with the
-    error generated by performing the load. If no error occurred
-    the load, this will be nil.
+    @param error Out parameter (may be NULL) used if an error occurs
+    while processing the request. Will not be modified if the load
+    succeeds.
     @result The content of the URL resulting from performing the load,
     or nil if the load failed.
 */
@@ -466,4 +489,47 @@
 
 @end
 
+#if NS_BLOCKS_AVAILABLE
+
+/*!
+    @category NSURLConnection(NSURLConnectionQueuedLoading)
+
+    The NSURLConnectionQueuedLoading category on NSURLConnection
+    provides the interface to perform asynchronous loading of URL
+    requests where the results of the request are delivered to a
+    block via an NSOperationQueue.
+
+    Note that there is no guarantee of load ordering implied by this
+    method.
+ */
+@interface NSURLConnection (NSURLConnectionQueuedLoading)
+
+/*!
+    @method sendAsynchronousRequest:queue:completionHandler:
+    @abstract Performs an asynchronous load of the given request. When
+    the request has completed or failed, the block will be executed
+    from the context of the specified NSOperationQueue.
+    @discussion This is a convenience routine that allows for
+    asynchronous loading of an url based resource.  If the resource load
+    is successful, the data parameter to the callback will contain the
+    resource data and the error parameter will be nil.  If the
+    resource load fails, the data parameter will be nil and the error
+    will contain information about the failure.
+    @param request The request to load. Note that the request is
+    deep-copied as part of the initialization process. Changes made to
+    the request argument after this method returns do not affect the
+    request that is used for the loading process.
+    @param queue An NSOperationQueue upon which	the handler block will
+    be dispatched.
+    @param handler A block which receives the results of the resource
+    load.
+ */
++ (void)sendAsynchronousRequest:(NSURLRequest *)request
+			  queue:(NSOperationQueue*) queue
+	      completionHandler:(void (^)(NSURLResponse*, NSData*, NSError*)) handler NS_AVAILABLE(10_7, 5_0);
+		   
+@end
+				   
 #endif
+
+		   

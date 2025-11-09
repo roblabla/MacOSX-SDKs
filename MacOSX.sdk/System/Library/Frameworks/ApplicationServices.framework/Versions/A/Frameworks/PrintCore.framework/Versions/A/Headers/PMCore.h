@@ -69,6 +69,10 @@ extern "C" {
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMRetain(PMObject object)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -102,6 +106,10 @@ PMRetain(PMObject object)                                     AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMRelease(PMObject object)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -124,6 +132,10 @@ PMRelease(PMObject object)                                    AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMCreateSession(PMPrintSession * printSession)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -136,6 +148,10 @@ PMCreateSession(PMPrintSession * printSession)                AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionError(PMPrintSession printSession)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -148,6 +164,10 @@ PMSessionError(PMPrintSession printSession)                   AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionSetError(
@@ -178,6 +198,10 @@ PMSessionSetError(
  *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionBeginCGDocumentNoDialog(
@@ -193,6 +217,10 @@ PMSessionBeginCGDocumentNoDialog(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionEndDocumentNoDialog(PMPrintSession printSession)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -212,6 +240,10 @@ PMSessionEndDocumentNoDialog(PMPrintSession printSession)     AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionBeginPageNoDialog(
@@ -234,6 +266,10 @@ PMSessionBeginPageNoDialog(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionEndPageNoDialog(PMPrintSession printSession)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -268,6 +304,10 @@ PMSessionEndPageNoDialog(PMPrintSession printSession)         AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionGetCGGraphicsContext(
@@ -320,6 +360,10 @@ PMSessionGetCGGraphicsContext(
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionGetDestinationType(
@@ -360,6 +404,10 @@ PMSessionGetDestinationType(
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionCopyDestinationFormat(
@@ -407,6 +455,10 @@ PMSessionCopyDestinationFormat(
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionCopyDestinationLocation(
@@ -473,6 +525,10 @@ PMSessionCopyDestinationLocation(
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.5 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionSetDestination(
@@ -521,6 +577,10 @@ PMSessionSetDestination(
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionCopyOutputFormatList(
@@ -570,6 +630,10 @@ PMSessionCopyOutputFormatList(
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionCreatePageFormatList(
@@ -587,6 +651,10 @@ PMSessionCreatePageFormatList(
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.4 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionCreatePrinterList(
@@ -605,6 +673,10 @@ PMSessionCreatePrinterList(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionGetCurrentPrinter(
@@ -621,6 +693,10 @@ PMSessionGetCurrentPrinter(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionSetCurrentPMPrinter(
@@ -634,6 +710,10 @@ PMSessionSetCurrentPMPrinter(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionGetDataFromSession(
@@ -648,6 +728,10 @@ PMSessionGetDataFromSession(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionSetDataInSession(
@@ -673,6 +757,10 @@ PMSessionSetDataInSession(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMCreatePageFormat(PMPageFormat * pageFormat)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -684,6 +772,10 @@ PMCreatePageFormat(PMPageFormat * pageFormat)                 AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionDefaultPageFormat(
@@ -697,6 +789,10 @@ PMSessionDefaultPageFormat(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionValidatePageFormat(
@@ -713,6 +809,10 @@ PMSessionValidatePageFormat(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMCopyPageFormat(
@@ -738,6 +838,10 @@ PMCopyPageFormat(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMCreatePageFormatWithPMPaper(
@@ -763,6 +867,10 @@ PMCreatePageFormatWithPMPaper(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPageFormatCreateDataRepresentation(
@@ -783,6 +891,10 @@ PMPageFormatCreateDataRepresentation(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPageFormatCreateWithDataRepresentation(
@@ -799,6 +911,10 @@ PMPageFormatCreateWithDataRepresentation(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetAdjustedPageRect(
@@ -813,6 +929,10 @@ PMGetAdjustedPageRect(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetAdjustedPaperRect(
@@ -827,6 +947,10 @@ PMGetAdjustedPaperRect(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetOrientation(
@@ -841,6 +965,10 @@ PMGetOrientation(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetPageFormatExtendedData(
@@ -871,6 +999,10 @@ PMGetPageFormatExtendedData(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern  OSStatus
 PMPageFormatGetPrinterID( 
@@ -892,6 +1024,10 @@ PMPageFormatGetPrinterID(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetScale(
@@ -915,6 +1051,10 @@ PMGetScale(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetUnadjustedPageRect(
@@ -938,6 +1078,10 @@ PMGetUnadjustedPageRect(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetUnadjustedPaperRect(
@@ -968,6 +1112,10 @@ PMGetUnadjustedPaperRect(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSetOrientation(
@@ -983,6 +1131,10 @@ PMSetOrientation(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSetPageFormatExtendedData(
@@ -999,6 +1151,10 @@ PMSetPageFormatExtendedData(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSetScale(
@@ -1025,6 +1181,10 @@ PMSetScale(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMCreatePrintSettings(PMPrintSettings * printSettings)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -1036,6 +1196,10 @@ PMCreatePrintSettings(PMPrintSettings * printSettings)        AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionDefaultPrintSettings(
@@ -1049,6 +1213,10 @@ PMSessionDefaultPrintSettings(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSessionValidatePrintSettings(
@@ -1065,6 +1233,10 @@ PMSessionValidatePrintSettings(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMCopyPrintSettings(
@@ -1092,6 +1264,10 @@ PMCopyPrintSettings(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrintSettingsCreateDataRepresentation(
@@ -1113,6 +1289,10 @@ PMPrintSettingsCreateDataRepresentation(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrintSettingsCreateWithDataRepresentation(
@@ -1129,6 +1309,10 @@ PMPrintSettingsCreateWithDataRepresentation(
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetCollate(
@@ -1143,6 +1327,10 @@ PMGetCollate(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetCopies(
@@ -1157,6 +1345,10 @@ PMGetCopies(
  *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetDuplex(
@@ -1171,6 +1363,10 @@ PMGetDuplex(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetFirstPage(
@@ -1185,6 +1381,10 @@ PMGetFirstPage(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetLastPage(
@@ -1208,6 +1408,10 @@ PMGetLastPage(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetPageRange(
@@ -1222,6 +1426,10 @@ PMGetPageRange(
  *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrintSettingsGetJobName(
@@ -1246,6 +1454,10 @@ PMPrintSettingsGetJobName(
  *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrintSettingsGetValue(
@@ -1262,6 +1474,10 @@ PMPrintSettingsGetValue(
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSetCollate(
@@ -1276,6 +1492,10 @@ PMSetCollate(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSetCopies(
@@ -1291,6 +1511,10 @@ PMSetCopies(
  *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSetDuplex(
@@ -1305,6 +1529,10 @@ PMSetDuplex(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSetFirstPage(
@@ -1320,6 +1548,10 @@ PMSetFirstPage(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSetLastPage(
@@ -1343,6 +1575,10 @@ PMSetLastPage(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMSetPageRange(
@@ -1358,6 +1594,10 @@ PMSetPageRange(
  *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrintSettingsSetJobName(
@@ -1388,6 +1628,10 @@ PMPrintSettingsSetJobName(
  *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrintSettingsSetValue(
@@ -1415,6 +1659,10 @@ PMPrintSettingsSetValue(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus
 PMPrintSettingsCopyAsDictionary(
@@ -1440,6 +1688,10 @@ PMPrintSettingsCopyAsDictionary(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus
 PMPrintSettingsCopyKeys(
@@ -1467,6 +1719,10 @@ PMPrintSettingsCopyKeys(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus
 PMCreateGenericPrinter( PMPrinter* printer )				AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
@@ -1492,6 +1748,10 @@ PMCreateGenericPrinter( PMPrinter* printer )				AVAILABLE_MAC_OS_X_VERSION_10_5_
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMServerCreatePrinterList(
@@ -1524,6 +1784,10 @@ PMServerCreatePrinterList(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMServerLaunchPrinterBrowser(
@@ -1552,6 +1816,10 @@ PMServerLaunchPrinterBrowser(
  *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern PMPrinter 
 PMPrinterCreateFromPrinterID(CFStringRef printerID)           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
@@ -1584,6 +1852,10 @@ PMPrinterCreateFromPrinterID(CFStringRef printerID)           AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterCopyDescriptionURL(
@@ -1613,6 +1885,10 @@ PMPrinterCopyDescriptionURL(
  *    Mac OS X:         in version 10.4 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterCopyDeviceURI(
@@ -1630,6 +1906,10 @@ PMPrinterCopyDeviceURI(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterCopyHostName(
@@ -1667,6 +1947,10 @@ PMPrinterCopyHostName(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterCopyPresets(
@@ -1712,6 +1996,10 @@ PMPrinterCopyPresets(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterGetCommInfo(
@@ -1727,6 +2015,10 @@ PMPrinterGetCommInfo(
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern CFStringRef 
 PMPrinterGetID(PMPrinter printer)                             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -1739,6 +2031,10 @@ PMPrinterGetID(PMPrinter printer)                             AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern CFStringRef 
 PMPrinterGetLocation(PMPrinter printer)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -1751,6 +2047,10 @@ PMPrinterGetLocation(PMPrinter printer)                       AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterGetDriverCreator(
@@ -1765,6 +2065,10 @@ PMPrinterGetDriverCreator(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterGetDriverReleaseInfo(
@@ -1791,6 +2095,10 @@ PMPrinterGetDriverReleaseInfo(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterGetPrinterResolutionCount(
@@ -1820,6 +2128,10 @@ PMPrinterGetPrinterResolutionCount(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterGetIndexedPrinterResolution(
@@ -1867,6 +2179,10 @@ PMPrinterGetIndexedPrinterResolution(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 OSStatus PMPrinterGetOutputResolution(
   PMPrinter printer,  
@@ -1906,6 +2222,10 @@ OSStatus PMPrinterGetOutputResolution(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 OSStatus PMPrinterSetOutputResolution(
   PMPrinter printer, 
@@ -1920,6 +2240,10 @@ OSStatus PMPrinterSetOutputResolution(
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterGetLanguageInfo(
@@ -1934,6 +2258,10 @@ PMPrinterGetLanguageInfo(
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterGetMakeAndModelName(
@@ -1970,6 +2298,10 @@ PMPrinterGetMakeAndModelName(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterGetMimeTypes(
@@ -1985,6 +2317,10 @@ PMPrinterGetMimeTypes(
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern CFStringRef 
 PMPrinterGetName(PMPrinter printer)                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -2010,6 +2346,10 @@ PMPrinterGetName(PMPrinter printer)                           AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterGetPaperList(
@@ -2024,6 +2364,10 @@ PMPrinterGetPaperList(
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterGetState(
@@ -2038,6 +2382,10 @@ PMPrinterGetState(
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern Boolean 
 PMPrinterIsDefault(PMPrinter printer)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -2053,6 +2401,10 @@ PMPrinterIsDefault(PMPrinter printer)                         AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern Boolean 
 PMPrinterIsFavorite(PMPrinter printer)                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -2065,6 +2417,10 @@ PMPrinterIsFavorite(PMPrinter printer)                        AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern Boolean 
 PMPrinterIsPostScriptCapable(PMPrinter printer)               AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
@@ -2079,6 +2435,10 @@ PMPrinterIsPostScriptCapable(PMPrinter printer)               AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus
 PMPrinterIsPostScriptPrinter(PMPrinter printer, Boolean *isPSPrinter)	AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
@@ -2105,6 +2465,10 @@ PMPrinterIsPostScriptPrinter(PMPrinter printer, Boolean *isPSPrinter)	AVAILABLE_
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterIsRemote(
@@ -2132,6 +2496,10 @@ PMPrinterIsRemote(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus PMPrinterSetDefault(PMPrinter printer)				AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
@@ -2159,6 +2527,10 @@ extern OSStatus PMPrinterSetDefault(PMPrinter printer)				AVAILABLE_MAC_OS_X_VER
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPresetCopyName(
@@ -2191,6 +2563,10 @@ PMPresetCopyName(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPresetCreatePrintSettings(
@@ -2198,8 +2574,8 @@ PMPresetCreatePrintSettings(
   PMPrintSession     session,
   PMPrintSettings *  printSettings)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-
-/*
+	
+	/*
  *  PMPresetGetAttributes()
  *  
  *  Summary:
@@ -2227,6 +2603,10 @@ PMPresetCreatePrintSettings(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPresetGetAttributes(
@@ -2257,6 +2637,10 @@ PMPresetGetAttributes(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMGetPageFormatPaper(
@@ -2305,6 +2689,10 @@ PMGetPageFormatPaper(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPaperCreateCustom(
@@ -2335,6 +2723,10 @@ PMPaperCreateCustom(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPaperGetWidth(
@@ -2360,6 +2752,10 @@ PMPaperGetWidth(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPaperGetHeight(
@@ -2385,6 +2781,10 @@ PMPaperGetHeight(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPaperGetMargins(
@@ -2411,37 +2811,15 @@ PMPaperGetMargins(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPaperGetID(
   PMPaper        paper,
   CFStringRef *  paperID)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-
-/*
- *  PMPaperGetName()
- *  
- *  Summary:
- *    Returns the name for a given paper.
- *  
- *  Parameters:
- *    
- *    paper:
- *      Obtain the name for this paper.
- *    
- *    paperName:
- *      If successful noErr is returned and *paperName is set to the
- *      name of the paper. The returned paper name is that appropriate
- *      to display to a user.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-PMPaperGetName(
-  PMPaper        paper,
-  CFStringRef *  paperName)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*
  *  PMPaperGetPPDPaperName()
@@ -2468,6 +2846,10 @@ PMPaperGetName(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPaperGetPPDPaperName(
@@ -2501,6 +2883,10 @@ PMPaperGetPPDPaperName(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPaperCreateLocalizedName(
@@ -2528,6 +2914,10 @@ PMPaperCreateLocalizedName(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPaperGetPrinterID(
@@ -2549,6 +2939,10 @@ PMPaperGetPrinterID(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern Boolean 
 PMPaperIsCustom(
@@ -2586,6 +2980,10 @@ PMPaperIsCustom(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMWorkflowCopyItems(CFArrayRef * workflowItems)               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
@@ -2633,6 +3031,10 @@ PMWorkflowCopyItems(CFArrayRef * workflowItems)               AVAILABLE_MAC_OS_X
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMWorkflowSubmitPDFWithOptions(
@@ -2679,6 +3081,10 @@ PMWorkflowSubmitPDFWithOptions(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMWorkflowSubmitPDFWithSettings(
@@ -2723,6 +3129,10 @@ PMWorkflowSubmitPDFWithSettings(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterPrintWithProvider(
@@ -2771,6 +3181,10 @@ PMPrinterPrintWithProvider(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrinterPrintWithFile(
@@ -2822,6 +3236,10 @@ PMPrinterPrintWithFile(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus
 PMPrinterWritePostScriptToURL(
@@ -2857,6 +3275,10 @@ PMPrinterWritePostScriptToURL(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrintSettingsToOptions(
@@ -2893,6 +3315,10 @@ PMPrintSettingsToOptions(
  *    Mac OS X:         in version 10.5 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMPrintSettingsToOptionsWithPrinterAndPageFormat(
@@ -2932,6 +3358,10 @@ PMPrintSettingsToOptionsWithPrinterAndPageFormat(
 *  Availability:
 *    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
 *    CarbonLib:        not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
 */
 extern OSStatus
 PMPrinterSendCommand(
@@ -2999,6 +3429,10 @@ PMPrinterSendCommand(
 *  Availability:
 *    Mac OS X:         in version 10.6 and later in ApplicationServices.framework
 *    CarbonLib:        not available
+*  
+*  Compatibility:
+*  	Not appropriate for CUPS filters, drivers, and backends.
+*  
 */
 
 extern OSStatus
@@ -3032,6 +3466,10 @@ PMPrinterCopyState(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMCopyAvailablePPDs(
@@ -3061,6 +3499,10 @@ PMCopyAvailablePPDs(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMCopyLocalizedPPD(
@@ -3091,6 +3533,10 @@ PMCopyLocalizedPPD(
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern OSStatus 
 PMCopyPPDData(
@@ -3159,6 +3605,10 @@ PMCopyPPDData(
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   not available
+ *  
+ *  Compatibility:
+ *  	Not appropriate for CUPS filters, drivers, and backends.
+ *  
  */
 extern CGImageRef 
 PMCGImageCreateWithEPSDataProvider(

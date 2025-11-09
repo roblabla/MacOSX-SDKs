@@ -1,5 +1,5 @@
 /*	NSDebug.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 /**************************************************************************
@@ -18,8 +18,6 @@ and in some cases invaluable, and are not likely to go away anytime soon.
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSAutoreleasePool.h>
-#import <Foundation/NSDate.h>
-#import <Foundation/NSPort.h>
 
 /* The environment component of this API
 
@@ -29,8 +27,7 @@ process's environment at process startup.  This is mostly a benefit
 if you need to initialize these variables to some non-default value
 before your program's main() routine gets control, but it also
 allows you to change the value without modifying your program's
-source. (Variables can be set and methods called around specific
-areas within a program, too, of course.)
+source.
 
 The initialization from the environment happens very early, but may
 not have happened yet at the time of a +load method statically linked
@@ -47,12 +44,6 @@ NAME OF ENV. VARIABLE		       DEFAULT	SET TO...
 NSDebugEnabled				  NO	"YES"
 NSZombieEnabled				  NO	"YES"
 NSDeallocateZombies			  NO	"YES"
-NSHangOnUncaughtException		  NO	"YES"
-
-NSEnableAutoreleasePool			 YES	"NO"
-NSAutoreleaseFreedObjectCheckEnabled	  NO	"YES"
-NSAutoreleaseHighWaterMark		  0	non-negative integer
-NSAutoreleaseHighWaterResolution	  0	non-negative integer
 
 */
 
@@ -70,7 +61,8 @@ FOUNDATION_EXPORT BOOL NSZombieEnabled;
 	// not the storage is then freed can be controlled by the
 	// NSDeallocateZombies variable). Messages sent to the zombie
 	// object cause logged messages and can be broken on in a debugger.
-	// The default is NO.
+	// The default is NO.  Note that changing this variable's value
+	// has no effect.
 
 FOUNDATION_EXPORT BOOL NSDeallocateZombies;
 	// Determines whether the storage of objects that have been
@@ -78,13 +70,8 @@ FOUNDATION_EXPORT BOOL NSDeallocateZombies;
 	// is most suitable for debugging messages sent to zombie
 	// objects. And since the memory is never freed, storage
 	// allocated to an object will never be reused, either (which
-	// is sometimes useful otherwise).
-
-FOUNDATION_EXPORT BOOL NSHangOnUncaughtException;
-	// If set to YES, causes the process to hang after logging the
-	// "*** Uncaught exception:" message. A backtrace can be gotten
-	// from the process with the 'sample' utility, or the process can
-	// be attached to with a debugger. The default is NO.
+	// is sometimes useful otherwise).  Note that changing this
+	// variable's value has no effect.
 
 FOUNDATION_EXPORT BOOL NSIsFreedObject(id anObject);
 	// Returns YES if the value passed as the parameter is a pointer
@@ -139,20 +126,6 @@ FOUNDATION_EXPORT NSUInteger NSCountFrames(void);
 	// Displays to stderr the state of the current thread's
 	// autorelease pool stack.
 
-+ (void)enableFreedObjectCheck:(BOOL)enable DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-	// This behavior is now always on.
-
-+ (void)enableRelease:(BOOL)enable DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-+ (void)resetTotalAutoreleasedObjects DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-+ (NSUInteger)totalAutoreleasedObjects DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-+ (NSUInteger)autoreleasedObjectCount DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-+ (NSUInteger)topAutoreleasePoolCount DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-+ (NSUInteger)poolCountHighWaterMark DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-+ (void)setPoolCountHighWaterMark:(NSUInteger)count DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-+ (NSUInteger)poolCountHighWaterResolution DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-+ (void)setPoolCountHighWaterResolution:(NSUInteger)res DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-	// There is no longer any way to do what these used to do.
-
 /* DTrace static probes for autorelease pool performance analysis and debugging
     provider Cocoa_Autorelease {
        probe pool_push(unsigned long value);		// arg is a token representing pool
@@ -173,7 +146,7 @@ FOUNDATION_EXPORT NSUInteger NSCountFrames(void);
 // allocation functions (NSZoneMalloc(), etc.), and allocation and
 // deallocation of objects (and other types of lifetime-related events).
 
-// This boolean is obsolete and unused
+// This boolean is obsolete and unused; don't use this.
 FOUNDATION_EXPORT BOOL NSKeepAllocationStatistics;
 
 // Object allocation event types

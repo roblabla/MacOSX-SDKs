@@ -3,7 +3,7 @@
  
      Contains:   Object Support Library Interfaces.
  
-     Version:    AppleEvents-496.5~1
+     Version:    AppleEvents-527.7~1
  
      Copyright:  © 1991-2008 by Apple Computer, Inc., all rights reserved
  

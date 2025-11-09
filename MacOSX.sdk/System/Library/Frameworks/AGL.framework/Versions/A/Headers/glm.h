@@ -1,18 +1,17 @@
 /*
-    File:	AGL/glm.h
+    File:       AGL/glm.h
 
-    Contains:	Basic GLMemoryLibrary data types, constants and function prototypes.
+    Contains:   Basic GLMemoryLibrary data types, constants and function prototypes.
 
-    Version:	Technology:	Mac OS X
-                Release:	GM
- 
-     Copyright:  (c) 2000-2002 by Apple Computer, Inc., all rights reserved.
- 
-     Bugs?:      For bug reports, consult the following page on
-                 the World Wide Web:
- 
-                     http://developer.apple.com/bugreporter/
- 
+    Version:    Technology: Mac OS X
+                Release:    GM
+
+    Copyright:  (c) 2000-2010 Apple, Inc. All rights reserved.
+
+    Bugs?:      For bug reports, consult the following page on
+                the World Wide Web:
+
+                    http://developer.apple.com/bugreporter/
 */
 
 #ifndef _GLM_H

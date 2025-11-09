@@ -1,7 +1,7 @@
 /*
 	NSGraphics.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -55,7 +55,6 @@ enum {
 };
 typedef NSUInteger NSFocusRingPlacement;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 /* used by NSView and NSCell to configure if and how the control should draw its focus ring */ 
 enum {
     NSFocusRingTypeDefault = 0,
@@ -63,7 +62,6 @@ enum {
     NSFocusRingTypeExterior = 2
 };
 typedef NSUInteger NSFocusRingType;
-#endif
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 enum {
@@ -73,8 +71,9 @@ enum {
     NSColorRenderingIntentPerceptual, // = kCGRenderingIntentPerceptual,
     NSColorRenderingIntentSaturation // = kCGRenderingIntentSaturation
 };
-typedef NSInteger NSColorRenderingIntent;  // values interchangeable with CGColorRenderingIntent values
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+typedef NSInteger NSColorRenderingIntent;  // values interchangeable with CGColorRenderingIntent values
+
 
 /* Predefined colorspace names.
 */
@@ -89,8 +88,8 @@ APPKIT_EXTERN NSString *NSCustomColorSpace;		/* Used to indicate a custom gstate
 
 /* Prefer colorspaces where 1.0 means white.
  */
-APPKIT_EXTERN NSString *NSCalibratedBlackColorSpace     /* 1.0 == black */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;	
-APPKIT_EXTERN NSString *NSDeviceBlackColorSpace 	/* 1.0 == black */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
+APPKIT_EXTERN NSString *NSCalibratedBlackColorSpace     /* 1.0 == black */ NS_DEPRECATED_MAC(10_0, 10_6);	
+APPKIT_EXTERN NSString *NSDeviceBlackColorSpace 	/* 1.0 == black */ NS_DEPRECATED_MAC(10_0, 10_6);
 
 
 /* NSWindowDepth defines the values used in setting window depth limits. "0" indicates default depth. Window depths should not be made persistent as they will not be the same across systems. Use the functions NSBitsPerSampleFromDepth(), NSColorSpaceFromDepth(), NSBitsPerPixelFromDepth(), and NSPlanarFromDepth() to extract info from an NSWindowDepth 
@@ -141,10 +140,10 @@ APPKIT_EXTERN NSString *NSDeviceSize;			/* NSValue containing NSSize */
 APPKIT_EXTERN void NSRectFill(NSRect aRect);
 APPKIT_EXTERN void NSRectFillList(const NSRect *rects, NSInteger count);
 APPKIT_EXTERN void NSRectFillListWithGrays(const NSRect *rects, const CGFloat *grays, NSInteger num);
-APPKIT_EXTERN void NSRectFillListWithColors(const NSRect *rects, NSColor **colors, NSInteger num);
+APPKIT_EXTERN void NSRectFillListWithColors(const NSRect *rects, NSColor * const *colors, NSInteger num);
 APPKIT_EXTERN void NSRectFillUsingOperation(NSRect aRect, NSCompositingOperation op);
 APPKIT_EXTERN void NSRectFillListUsingOperation(const NSRect *rects, NSInteger count, NSCompositingOperation op);
-APPKIT_EXTERN void NSRectFillListWithColorsUsingOperation(const NSRect *rects, NSColor **colors, NSInteger num, NSCompositingOperation op);
+APPKIT_EXTERN void NSRectFillListWithColorsUsingOperation(const NSRect *rects, NSColor * const *colors, NSInteger num, NSCompositingOperation op);
 APPKIT_EXTERN void NSFrameRect(NSRect aRect);
 APPKIT_EXTERN void NSFrameRectWithWidth(NSRect aRect, CGFloat frameWidth);
 APPKIT_EXTERN void NSFrameRectWithWidthUsingOperation(NSRect aRect, CGFloat frameWidth, NSCompositingOperation op);
@@ -183,10 +182,9 @@ APPKIT_EXTERN void NSSetFocusRingStyle(NSFocusRingPlacement placement);
 ** NSEnableScreenUpdates reenables drawing that was previously disabled by 
 ** NSDisableScreenUpdates.  Multiple calls stack.
 */
-APPKIT_EXTERN void NSDisableScreenUpdates(void)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-APPKIT_EXTERN void NSEnableScreenUpdates(void)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN void NSDisableScreenUpdates(void);
+APPKIT_EXTERN void NSEnableScreenUpdates(void);
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 /* Runs one of the standard system animation effects (display and sound).
 ** 'centerLocation' represents the center, in screen coordinates, to show the effect.
@@ -208,9 +206,8 @@ enum {
 };
 typedef NSUInteger NSAnimationEffect;
 
-APPKIT_EXTERN void NSShowAnimationEffect(NSAnimationEffect animationEffect, NSPoint centerLocation, NSSize size, id animationDelegate, SEL didEndSelector, void *contextInfo) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN void NSShowAnimationEffect(NSAnimationEffect animationEffect, NSPoint centerLocation, NSSize size, id animationDelegate, SEL didEndSelector, void *contextInfo);
 
-#endif
 
 /* NSCountWindows, NSWindowList, NSCountWindowsForContext, and NSWindowListForContext are deprecated on Mac OS 10.6 and later.  Use +[NSWindow windowNumbersWithOptions:] instead */
 APPKIT_EXTERN void NSCountWindows(NSInteger *count);

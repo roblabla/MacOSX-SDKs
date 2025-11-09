@@ -72,6 +72,8 @@
 #ifndef HEADER_EC_H
 #define HEADER_EC_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/opensslconf.h>
 
 #ifdef OPENSSL_NO_EC
@@ -124,67 +126,67 @@ typedef struct ec_point_st EC_POINT;
 /* EC_METHODs for curves over GF(p).
  * EC_GFp_simple_method provides the basis for the optimized methods.
  */
-const EC_METHOD *EC_GFp_simple_method(void);
-const EC_METHOD *EC_GFp_mont_method(void);
-const EC_METHOD *EC_GFp_nist_method(void);
+const EC_METHOD *EC_GFp_simple_method(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EC_METHOD *EC_GFp_mont_method(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EC_METHOD *EC_GFp_nist_method(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* EC_METHOD for curves over GF(2^m).
  */
-const EC_METHOD *EC_GF2m_simple_method(void);
+const EC_METHOD *EC_GF2m_simple_method(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
-EC_GROUP *EC_GROUP_new(const EC_METHOD *);
-void EC_GROUP_free(EC_GROUP *);
-void EC_GROUP_clear_free(EC_GROUP *);
-int EC_GROUP_copy(EC_GROUP *, const EC_GROUP *);
-EC_GROUP *EC_GROUP_dup(const EC_GROUP *);
+EC_GROUP *EC_GROUP_new(const EC_METHOD *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void EC_GROUP_free(EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void EC_GROUP_clear_free(EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_GROUP_copy(EC_GROUP *, const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+EC_GROUP *EC_GROUP_dup(const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-const EC_METHOD *EC_GROUP_method_of(const EC_GROUP *);
-int EC_METHOD_get_field_type(const EC_METHOD *);
+const EC_METHOD *EC_GROUP_method_of(const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_METHOD_get_field_type(const EC_METHOD *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int EC_GROUP_set_generator(EC_GROUP *, const EC_POINT *generator, const BIGNUM *order, const BIGNUM *cofactor);
-const EC_POINT *EC_GROUP_get0_generator(const EC_GROUP *);
-int EC_GROUP_get_order(const EC_GROUP *, BIGNUM *order, BN_CTX *);
-int EC_GROUP_get_cofactor(const EC_GROUP *, BIGNUM *cofactor, BN_CTX *);
+int EC_GROUP_set_generator(EC_GROUP *, const EC_POINT *generator, const BIGNUM *order, const BIGNUM *cofactor) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EC_POINT *EC_GROUP_get0_generator(const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_GROUP_get_order(const EC_GROUP *, BIGNUM *order, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_GROUP_get_cofactor(const EC_GROUP *, BIGNUM *cofactor, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-void EC_GROUP_set_curve_name(EC_GROUP *, int nid);
-int EC_GROUP_get_curve_name(const EC_GROUP *);
+void EC_GROUP_set_curve_name(EC_GROUP *, int nid) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_GROUP_get_curve_name(const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-void EC_GROUP_set_asn1_flag(EC_GROUP *, int flag);
-int EC_GROUP_get_asn1_flag(const EC_GROUP *);
+void EC_GROUP_set_asn1_flag(EC_GROUP *, int flag) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_GROUP_get_asn1_flag(const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-void EC_GROUP_set_point_conversion_form(EC_GROUP *, point_conversion_form_t);
-point_conversion_form_t EC_GROUP_get_point_conversion_form(const EC_GROUP *);
+void EC_GROUP_set_point_conversion_form(EC_GROUP *, point_conversion_form_t) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+point_conversion_form_t EC_GROUP_get_point_conversion_form(const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-unsigned char *EC_GROUP_get0_seed(const EC_GROUP *);
-size_t EC_GROUP_get_seed_len(const EC_GROUP *);
-size_t EC_GROUP_set_seed(EC_GROUP *, const unsigned char *, size_t len);
+unsigned char *EC_GROUP_get0_seed(const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+size_t EC_GROUP_get_seed_len(const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+size_t EC_GROUP_set_seed(EC_GROUP *, const unsigned char *, size_t len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int EC_GROUP_set_curve_GFp(EC_GROUP *, const BIGNUM *p, const BIGNUM *a, const BIGNUM *b, BN_CTX *);
-int EC_GROUP_get_curve_GFp(const EC_GROUP *, BIGNUM *p, BIGNUM *a, BIGNUM *b, BN_CTX *);
-int EC_GROUP_set_curve_GF2m(EC_GROUP *, const BIGNUM *p, const BIGNUM *a, const BIGNUM *b, BN_CTX *);
-int EC_GROUP_get_curve_GF2m(const EC_GROUP *, BIGNUM *p, BIGNUM *a, BIGNUM *b, BN_CTX *);
+int EC_GROUP_set_curve_GFp(EC_GROUP *, const BIGNUM *p, const BIGNUM *a, const BIGNUM *b, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_GROUP_get_curve_GFp(const EC_GROUP *, BIGNUM *p, BIGNUM *a, BIGNUM *b, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_GROUP_set_curve_GF2m(EC_GROUP *, const BIGNUM *p, const BIGNUM *a, const BIGNUM *b, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_GROUP_get_curve_GF2m(const EC_GROUP *, BIGNUM *p, BIGNUM *a, BIGNUM *b, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* returns the number of bits needed to represent a field element */
-int EC_GROUP_get_degree(const EC_GROUP *);
+int EC_GROUP_get_degree(const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* EC_GROUP_check() returns 1 if 'group' defines a valid group, 0 otherwise */
-int EC_GROUP_check(const EC_GROUP *group, BN_CTX *ctx);
+int EC_GROUP_check(const EC_GROUP *group, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* EC_GROUP_check_discriminant() returns 1 if the discriminant of the
  * elliptic curve is not zero, 0 otherwise */
-int EC_GROUP_check_discriminant(const EC_GROUP *, BN_CTX *);
+int EC_GROUP_check_discriminant(const EC_GROUP *, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* EC_GROUP_cmp() returns 0 if both groups are equal and 1 otherwise */
-int EC_GROUP_cmp(const EC_GROUP *, const EC_GROUP *, BN_CTX *);
+int EC_GROUP_cmp(const EC_GROUP *, const EC_GROUP *, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* EC_GROUP_new_GF*() calls EC_GROUP_new() and EC_GROUP_set_GF*()
  * after choosing an appropriate EC_METHOD */
-EC_GROUP *EC_GROUP_new_curve_GFp(const BIGNUM *p, const BIGNUM *a, const BIGNUM *b, BN_CTX *);
-EC_GROUP *EC_GROUP_new_curve_GF2m(const BIGNUM *p, const BIGNUM *a, const BIGNUM *b, BN_CTX *);
+EC_GROUP *EC_GROUP_new_curve_GFp(const BIGNUM *p, const BIGNUM *a, const BIGNUM *b, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+EC_GROUP *EC_GROUP_new_curve_GF2m(const BIGNUM *p, const BIGNUM *a, const BIGNUM *b, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* EC_GROUP_new_by_curve_name() creates a EC_GROUP structure
  * specified by a curve name (in form of a NID) */
-EC_GROUP *EC_GROUP_new_by_curve_name(int nid);
+EC_GROUP *EC_GROUP_new_by_curve_name(int nid) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* handling of internal curves */
 typedef struct { 
 	int nid;
@@ -194,72 +196,72 @@ typedef struct {
  * of all available curves or zero if a error occurred. 
  * In case r ist not zero nitems EC_builtin_curve structures 
  * are filled with the data of the first nitems internal groups */
-size_t EC_get_builtin_curves(EC_builtin_curve *r, size_t nitems);
+size_t EC_get_builtin_curves(EC_builtin_curve *r, size_t nitems) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 /* EC_POINT functions */
 
-EC_POINT *EC_POINT_new(const EC_GROUP *);
-void EC_POINT_free(EC_POINT *);
-void EC_POINT_clear_free(EC_POINT *);
-int EC_POINT_copy(EC_POINT *, const EC_POINT *);
-EC_POINT *EC_POINT_dup(const EC_POINT *, const EC_GROUP *);
+EC_POINT *EC_POINT_new(const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void EC_POINT_free(EC_POINT *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void EC_POINT_clear_free(EC_POINT *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_POINT_copy(EC_POINT *, const EC_POINT *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+EC_POINT *EC_POINT_dup(const EC_POINT *, const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
  
-const EC_METHOD *EC_POINT_method_of(const EC_POINT *);
+const EC_METHOD *EC_POINT_method_of(const EC_POINT *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int EC_POINT_set_to_infinity(const EC_GROUP *, EC_POINT *);
+int EC_POINT_set_to_infinity(const EC_GROUP *, EC_POINT *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int EC_POINT_set_Jprojective_coordinates_GFp(const EC_GROUP *, EC_POINT *,
-	const BIGNUM *x, const BIGNUM *y, const BIGNUM *z, BN_CTX *);
+	const BIGNUM *x, const BIGNUM *y, const BIGNUM *z, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int EC_POINT_get_Jprojective_coordinates_GFp(const EC_GROUP *, const EC_POINT *,
-	BIGNUM *x, BIGNUM *y, BIGNUM *z, BN_CTX *);
+	BIGNUM *x, BIGNUM *y, BIGNUM *z, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int EC_POINT_set_affine_coordinates_GFp(const EC_GROUP *, EC_POINT *,
-	const BIGNUM *x, const BIGNUM *y, BN_CTX *);
+	const BIGNUM *x, const BIGNUM *y, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int EC_POINT_get_affine_coordinates_GFp(const EC_GROUP *, const EC_POINT *,
-	BIGNUM *x, BIGNUM *y, BN_CTX *);
+	BIGNUM *x, BIGNUM *y, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int EC_POINT_set_compressed_coordinates_GFp(const EC_GROUP *, EC_POINT *,
-	const BIGNUM *x, int y_bit, BN_CTX *);
+	const BIGNUM *x, int y_bit, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int EC_POINT_set_affine_coordinates_GF2m(const EC_GROUP *, EC_POINT *,
-	const BIGNUM *x, const BIGNUM *y, BN_CTX *);
+	const BIGNUM *x, const BIGNUM *y, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int EC_POINT_get_affine_coordinates_GF2m(const EC_GROUP *, const EC_POINT *,
-	BIGNUM *x, BIGNUM *y, BN_CTX *);
+	BIGNUM *x, BIGNUM *y, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int EC_POINT_set_compressed_coordinates_GF2m(const EC_GROUP *, EC_POINT *,
-	const BIGNUM *x, int y_bit, BN_CTX *);
+	const BIGNUM *x, int y_bit, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 size_t EC_POINT_point2oct(const EC_GROUP *, const EC_POINT *, point_conversion_form_t form,
-        unsigned char *buf, size_t len, BN_CTX *);
+        unsigned char *buf, size_t len, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int EC_POINT_oct2point(const EC_GROUP *, EC_POINT *,
-        const unsigned char *buf, size_t len, BN_CTX *);
+        const unsigned char *buf, size_t len, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* other interfaces to point2oct/oct2point: */
 BIGNUM *EC_POINT_point2bn(const EC_GROUP *, const EC_POINT *,
-	point_conversion_form_t form, BIGNUM *, BN_CTX *);
+	point_conversion_form_t form, BIGNUM *, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 EC_POINT *EC_POINT_bn2point(const EC_GROUP *, const BIGNUM *,
-	EC_POINT *, BN_CTX *);
+	EC_POINT *, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 char *EC_POINT_point2hex(const EC_GROUP *, const EC_POINT *,
-	point_conversion_form_t form, BN_CTX *);
+	point_conversion_form_t form, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 EC_POINT *EC_POINT_hex2point(const EC_GROUP *, const char *,
-	EC_POINT *, BN_CTX *);
+	EC_POINT *, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int EC_POINT_add(const EC_GROUP *, EC_POINT *r, const EC_POINT *a, const EC_POINT *b, BN_CTX *);
-int EC_POINT_dbl(const EC_GROUP *, EC_POINT *r, const EC_POINT *a, BN_CTX *);
-int EC_POINT_invert(const EC_GROUP *, EC_POINT *, BN_CTX *);
+int EC_POINT_add(const EC_GROUP *, EC_POINT *r, const EC_POINT *a, const EC_POINT *b, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_POINT_dbl(const EC_GROUP *, EC_POINT *r, const EC_POINT *a, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_POINT_invert(const EC_GROUP *, EC_POINT *, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int EC_POINT_is_at_infinity(const EC_GROUP *, const EC_POINT *);
-int EC_POINT_is_on_curve(const EC_GROUP *, const EC_POINT *, BN_CTX *);
-int EC_POINT_cmp(const EC_GROUP *, const EC_POINT *a, const EC_POINT *b, BN_CTX *);
+int EC_POINT_is_at_infinity(const EC_GROUP *, const EC_POINT *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_POINT_is_on_curve(const EC_GROUP *, const EC_POINT *, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_POINT_cmp(const EC_GROUP *, const EC_POINT *a, const EC_POINT *b, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int EC_POINT_make_affine(const EC_GROUP *, EC_POINT *, BN_CTX *);
-int EC_POINTs_make_affine(const EC_GROUP *, size_t num, EC_POINT *[], BN_CTX *);
+int EC_POINT_make_affine(const EC_GROUP *, EC_POINT *, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_POINTs_make_affine(const EC_GROUP *, size_t num, EC_POINT *[], BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
-int EC_POINTs_mul(const EC_GROUP *, EC_POINT *r, const BIGNUM *, size_t num, const EC_POINT *[], const BIGNUM *[], BN_CTX *);
-int EC_POINT_mul(const EC_GROUP *, EC_POINT *r, const BIGNUM *, const EC_POINT *, const BIGNUM *, BN_CTX *);
+int EC_POINTs_mul(const EC_GROUP *, EC_POINT *r, const BIGNUM *, size_t num, const EC_POINT *[], const BIGNUM *[], BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_POINT_mul(const EC_GROUP *, EC_POINT *r, const BIGNUM *, const EC_POINT *, const BIGNUM *, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* EC_GROUP_precompute_mult() stores multiples of generator for faster point multiplication */
-int EC_GROUP_precompute_mult(EC_GROUP *, BN_CTX *);
+int EC_GROUP_precompute_mult(EC_GROUP *, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* EC_GROUP_have_precompute_mult() reports whether such precomputation has been done */
-int EC_GROUP_have_precompute_mult(const EC_GROUP *);
+int EC_GROUP_have_precompute_mult(const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 
@@ -267,17 +269,17 @@ int EC_GROUP_have_precompute_mult(const EC_GROUP *);
 
 /* EC_GROUP_get_basis_type() returns the NID of the basis type
  * used to represent the field elements */
-int EC_GROUP_get_basis_type(const EC_GROUP *);
-int EC_GROUP_get_trinomial_basis(const EC_GROUP *, unsigned int *k);
+int EC_GROUP_get_basis_type(const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_GROUP_get_trinomial_basis(const EC_GROUP *, unsigned int *k) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int EC_GROUP_get_pentanomial_basis(const EC_GROUP *, unsigned int *k1, 
-	unsigned int *k2, unsigned int *k3);
+	unsigned int *k2, unsigned int *k3) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #define OPENSSL_EC_NAMED_CURVE	0x001
 
 typedef struct ecpk_parameters_st ECPKPARAMETERS;
 
-EC_GROUP *d2i_ECPKParameters(EC_GROUP **, const unsigned char **in, long len);
-int i2d_ECPKParameters(const EC_GROUP *, unsigned char **out);
+EC_GROUP *d2i_ECPKParameters(EC_GROUP **, const unsigned char **in, long len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int i2d_ECPKParameters(const EC_GROUP *, unsigned char **out) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #define d2i_ECPKParameters_bio(bp,x) ASN1_d2i_bio_of(EC_GROUP,NULL,d2i_ECPKParameters,bp,x)
 #define i2d_ECPKParameters_bio(bp,x) ASN1_i2d_bio_of_const(EC_GROUP,i2d_ECPKParameters,bp,x)
@@ -287,10 +289,10 @@ int i2d_ECPKParameters(const EC_GROUP *, unsigned char **out);
 		(unsigned char *)(x))
 
 #ifndef OPENSSL_NO_BIO
-int     ECPKParameters_print(BIO *bp, const EC_GROUP *x, int off);
+int     ECPKParameters_print(BIO *bp, const EC_GROUP *x, int off) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_FP_API
-int     ECPKParameters_print_fp(FILE *fp, const EC_GROUP *x, int off);
+int     ECPKParameters_print_fp(FILE *fp, const EC_GROUP *x, int off) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
 /* the EC_KEY stuff */
@@ -300,56 +302,56 @@ typedef struct ec_key_st EC_KEY;
 #define EC_PKEY_NO_PARAMETERS	0x001
 #define EC_PKEY_NO_PUBKEY	0x002
 
-EC_KEY *EC_KEY_new(void);
-EC_KEY *EC_KEY_new_by_curve_name(int nid);
-void EC_KEY_free(EC_KEY *);
-EC_KEY *EC_KEY_copy(EC_KEY *, const EC_KEY *);
-EC_KEY *EC_KEY_dup(const EC_KEY *);
+EC_KEY *EC_KEY_new(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+EC_KEY *EC_KEY_new_by_curve_name(int nid) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void EC_KEY_free(EC_KEY *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+EC_KEY *EC_KEY_copy(EC_KEY *, const EC_KEY *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+EC_KEY *EC_KEY_dup(const EC_KEY *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int EC_KEY_up_ref(EC_KEY *);
+int EC_KEY_up_ref(EC_KEY *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-const EC_GROUP *EC_KEY_get0_group(const EC_KEY *);
-int EC_KEY_set_group(EC_KEY *, const EC_GROUP *);
-const BIGNUM *EC_KEY_get0_private_key(const EC_KEY *);
-int EC_KEY_set_private_key(EC_KEY *, const BIGNUM *);
-const EC_POINT *EC_KEY_get0_public_key(const EC_KEY *);
-int EC_KEY_set_public_key(EC_KEY *, const EC_POINT *);
-unsigned EC_KEY_get_enc_flags(const EC_KEY *);
-void EC_KEY_set_enc_flags(EC_KEY *, unsigned int);
-point_conversion_form_t EC_KEY_get_conv_form(const EC_KEY *);
-void EC_KEY_set_conv_form(EC_KEY *, point_conversion_form_t);
+const EC_GROUP *EC_KEY_get0_group(const EC_KEY *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_KEY_set_group(EC_KEY *, const EC_GROUP *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const BIGNUM *EC_KEY_get0_private_key(const EC_KEY *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_KEY_set_private_key(EC_KEY *, const BIGNUM *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EC_POINT *EC_KEY_get0_public_key(const EC_KEY *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_KEY_set_public_key(EC_KEY *, const EC_POINT *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned EC_KEY_get_enc_flags(const EC_KEY *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void EC_KEY_set_enc_flags(EC_KEY *, unsigned int) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+point_conversion_form_t EC_KEY_get_conv_form(const EC_KEY *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void EC_KEY_set_conv_form(EC_KEY *, point_conversion_form_t) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* functions to set/get method specific data  */
 void *EC_KEY_get_key_method_data(EC_KEY *, 
-	void *(*dup_func)(void *), void (*free_func)(void *), void (*clear_free_func)(void *));
+	void *(*dup_func)(void *), void (*free_func)(void *), void (*clear_free_func)(void *)) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void EC_KEY_insert_key_method_data(EC_KEY *, void *data,
-	void *(*dup_func)(void *), void (*free_func)(void *), void (*clear_free_func)(void *));
+	void *(*dup_func)(void *), void (*free_func)(void *), void (*clear_free_func)(void *)) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* wrapper functions for the underlying EC_GROUP object */
-void EC_KEY_set_asn1_flag(EC_KEY *, int);
-int EC_KEY_precompute_mult(EC_KEY *, BN_CTX *ctx);
+void EC_KEY_set_asn1_flag(EC_KEY *, int) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EC_KEY_precompute_mult(EC_KEY *, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* EC_KEY_generate_key() creates a ec private (public) key */
-int EC_KEY_generate_key(EC_KEY *);
+int EC_KEY_generate_key(EC_KEY *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* EC_KEY_check_key() */
-int EC_KEY_check_key(const EC_KEY *);
+int EC_KEY_check_key(const EC_KEY *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* de- and encoding functions for SEC1 ECPrivateKey */
-EC_KEY *d2i_ECPrivateKey(EC_KEY **a, const unsigned char **in, long len);
-int i2d_ECPrivateKey(EC_KEY *a, unsigned char **out);
+EC_KEY *d2i_ECPrivateKey(EC_KEY **a, const unsigned char **in, long len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int i2d_ECPrivateKey(EC_KEY *a, unsigned char **out) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* de- and encoding functions for EC parameters */
-EC_KEY *d2i_ECParameters(EC_KEY **a, const unsigned char **in, long len);
-int i2d_ECParameters(EC_KEY *a, unsigned char **out);
+EC_KEY *d2i_ECParameters(EC_KEY **a, const unsigned char **in, long len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int i2d_ECParameters(EC_KEY *a, unsigned char **out) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* de- and encoding functions for EC public key
  * (octet string, not DER -- hence 'o2i' and 'i2o') */
-EC_KEY *o2i_ECPublicKey(EC_KEY **a, const unsigned char **in, long len);
-int i2o_ECPublicKey(EC_KEY *a, unsigned char **out);
+EC_KEY *o2i_ECPublicKey(EC_KEY **a, const unsigned char **in, long len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int i2o_ECPublicKey(EC_KEY *a, unsigned char **out) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifndef OPENSSL_NO_BIO
-int	ECParameters_print(BIO *bp, const EC_KEY *x);
-int	EC_KEY_print(BIO *bp, const EC_KEY *x, int off);
+int	ECParameters_print(BIO *bp, const EC_KEY *x) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EC_KEY_print(BIO *bp, const EC_KEY *x, int off) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_FP_API
-int	ECParameters_print_fp(FILE *fp, const EC_KEY *x);
-int	EC_KEY_print_fp(FILE *fp, const EC_KEY *x, int off);
+int	ECParameters_print_fp(FILE *fp, const EC_KEY *x) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EC_KEY_print_fp(FILE *fp, const EC_KEY *x, int off) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
 #define ECParameters_dup(x) ASN1_dup_of(EC_KEY,i2d_ECParameters,d2i_ECParameters,x)
@@ -366,7 +368,7 @@ int	EC_KEY_print_fp(FILE *fp, const EC_KEY *x, int off);
 /* The following lines are auto generated by the script mkerr.pl. Any changes
  * made after this point may be overwritten when the script is next run.
  */
-void ERR_load_EC_strings(void);
+void ERR_load_EC_strings(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Error codes for the EC functions. */
 

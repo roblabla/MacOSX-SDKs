@@ -1,4 +1,3 @@
-/* $Xorg: Xresource.h,v 1.7 2001/02/09 02:03:39 xorgcvs Exp $ */
 
 /***********************************************************
 
@@ -46,10 +45,9 @@ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
 SOFTWARE.
 
 ******************************************************************/
-/* $XFree86: xc/lib/X11/Xresource.h,v 3.8 2001/12/14 19:54:10 dawes Exp $ */
 
-#ifndef _XRESOURCE_H_
-#define _XRESOURCE_H_
+#ifndef _X11_XRESOURCE_H_
+#define _X11_XRESOURCE_H_
 
 #ifndef _XP_PRINT_SERVER_
 #include <X11/Xlib.h>
@@ -356,5 +354,5 @@ extern void XrmParseCommand(
 
 _XFUNCPROTOEND
 
-#endif /* _XRESOURCE_H_ */
+#endif /* _X11_XRESOURCE_H_ */
 /* DON'T ADD STUFF AFTER THIS #endif */

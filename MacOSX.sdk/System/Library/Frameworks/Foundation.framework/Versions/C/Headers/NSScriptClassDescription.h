@@ -1,6 +1,6 @@
 /*
 	NSScriptClassDescription.h
-	Copyright (c) 1997-2009, Apple Inc.
+	Copyright (c) 1997-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -34,13 +34,9 @@
 - (NSString *)suiteName;
 - (NSString *)className;
 
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 /* Return the name of the Objective-C that implements the described scriptable class.
 */
 - (NSString *)implementationClassName;
-
-#endif
 
 /* Return the scripting class description of the superclass of the class described by the receiver.
 */
@@ -78,8 +74,6 @@
 */
 - (NSString *)keyWithAppleEventCode:(FourCharCode)appleEventCode;
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 /* Return the value of the DefaultSubcontainerAttribute entry of the class declaration dictionary provided when the receiver was instantiated, or nil if there was no such entry.
 */
 - (NSString *)defaultSubcontainerAttributeKey;
@@ -88,18 +82,12 @@
 */
 - (BOOL)isLocationRequiredToCreateForKey:(NSString *)toManyRelationshipKey;
 
-#endif
-
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 /* Return whether the described class has a property identified by the key, whether it's a to-many relationship, whether it's readable, or whether it's writable, respectively.
 */
-- (BOOL)hasPropertyForKey:(NSString *)key;
-- (BOOL)hasOrderedToManyRelationshipForKey:(NSString *)key;
-- (BOOL)hasReadablePropertyForKey:(NSString *)key;
-- (BOOL)hasWritablePropertyForKey:(NSString *)key;
-
-#endif
+- (BOOL)hasPropertyForKey:(NSString *)key NS_AVAILABLE(10_5, NA);
+- (BOOL)hasOrderedToManyRelationshipForKey:(NSString *)key NS_AVAILABLE(10_5, NA);
+- (BOOL)hasReadablePropertyForKey:(NSString *)key NS_AVAILABLE(10_5, NA);
+- (BOOL)hasWritablePropertyForKey:(NSString *)key NS_AVAILABLE(10_5, NA);
 
 @end
 
@@ -107,7 +95,7 @@
 
 /* A method that was deprecated in Mac OS 10.5. You should use -hasWritablePropertyForKey: instead.
 */
-- (BOOL)isReadOnlyKey:(NSString *)key DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (BOOL)isReadOnlyKey:(NSString *)key NS_DEPRECATED(10_0, 10_5, NA, NA);
 
 @end
 

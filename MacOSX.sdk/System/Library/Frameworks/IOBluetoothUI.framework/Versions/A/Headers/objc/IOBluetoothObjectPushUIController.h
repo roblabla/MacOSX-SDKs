@@ -2,7 +2,7 @@
 //  IOBluetoothObjectPushUIController.h
 //  IOBluetoothFamily
 //
-//  Copyright (c) 2004 Apple Computer. All rights reserved.
+//  Copyright (c) 2010 Apple, Inc. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

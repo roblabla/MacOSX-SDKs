@@ -1,7 +1,7 @@
 /*
         NSRuleEditor.h
 	Application Kit
-	Copyright (c) 2006-2009, Apple Inc.
+	Copyright (c) 2006-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -34,7 +34,7 @@ NSRuleEditor exposes one binding, "rows."  The "rows" binding may be bound to an
     These key paths can be set using the set*KeyPath: methods below
 */
 
-@class NSMutableArray, NSIndexSet, NSView, NSPredicate, NSString, NSViewAnimation, NSTimer;
+@class NSMutableArray, NSIndexSet, NSView, NSPredicate, NSString, NSViewAnimation;
 @protocol NSRuleEditorDelegate;
 
 enum {
@@ -66,7 +66,7 @@ typedef NSUInteger NSRuleEditorRowType;
     NSInteger _subviewIndexOfDropLine;
     id _dropLineView;
     NSViewAnimation *_currentAnimation;
-    NSTimer *_frameTimer;
+    id _unused1;
     NSString *_stringsFileName;
     id _standardLocalizer;
     id _headerLocalizer;

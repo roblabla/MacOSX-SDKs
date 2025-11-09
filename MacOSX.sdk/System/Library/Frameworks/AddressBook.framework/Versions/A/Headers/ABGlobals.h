@@ -2,7 +2,7 @@
  *  ABGlobals.h
  *  AddressBook Framework
  *
- *  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
+ *  Copyright (c) 2003-2010 Apple Inc.  All rights reserved.
  *
  */
 
@@ -30,6 +30,7 @@ extern NSString * const kABNicknameProperty;              // kABStringProperty
 extern NSString * const kABMaidenNameProperty;            // kABStringProperty
 
 extern NSString * const kABBirthdayProperty;              // Birth date - kABDateProperty
+extern NSString * const kABBirthdayComponentsProperty AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;  // Birth date - kABDateComponentsProperty
 
 extern NSString * const kABOrganizationProperty;          // Company name - kABStringProperty
 
@@ -127,6 +128,7 @@ extern NSString * const kABAddressProperty;                // Street Addresses -
  */
 
 extern NSString* const kABOtherDatesProperty       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;       // Dates associated with this person - kABMultiDateProperty - (Person)
+extern NSString* const kABOtherDateComponentsProperty AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;    // Dates associated with this person - kABMultiDateComponentsProperty - (Person)
        extern  NSString* const kABAnniversaryLabel AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 extern NSString* const kABRelatedNamesProperty     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;       // names - kABMultiStringProperty
@@ -157,35 +159,65 @@ extern NSString * const kABPersonFlags             AVAILABLE_MAC_OS_X_VERSION_10
     #define kABLastNameFirst                        000020
 
 extern NSString * const kABPhoneProperty;                  // Generic phone number - kABMultiStringProperty
-        extern NSString * const kABPhoneWorkLabel;         // Work phone
-        extern NSString * const kABPhoneHomeLabel;         // Home phone
+		extern NSString * const kABPhoneWorkLabel;         // Work phone
+		extern NSString * const kABPhoneHomeLabel;         // Home phone
 		extern NSString * const kABPhoneiPhoneLabel;       // iPhone
 		extern NSString * const kABPhoneMobileLabel;       // Cell phone
-        extern NSString * const kABPhoneMainLabel;         // Main phone
-        extern NSString * const kABPhoneHomeFAXLabel;      // FAX number
-        extern NSString * const kABPhoneWorkFAXLabel;      // FAX number
-        extern NSString * const kABPhonePagerLabel;        // Pager number
+		extern NSString * const kABPhoneMainLabel;         // Main phone
+		extern NSString * const kABPhoneHomeFAXLabel;      // FAX number
+		extern NSString * const kABPhoneWorkFAXLabel;      // FAX number
+		extern NSString * const kABPhonePagerLabel;        // Pager number
 
-extern NSString * const kABAIMInstantProperty;             // AIM Instant Messaging - kABMultiStringProperty
-        extern NSString * const kABAIMWorkLabel;
-        extern NSString * const kABAIMHomeLabel;
-        extern NSString * const kABAIMMobileMeLabel;
+// Deprecated in Mac OS 10.7. You should use kABInstantMessageProperty.
+extern NSString * const kABAIMInstantProperty						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;	// AIM Instant Messaging - kABMultiStringProperty
+		extern NSString * const kABAIMWorkLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+		extern NSString * const kABAIMHomeLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+		extern NSString * const kABAIMMobileMeLabel					DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-extern NSString * const kABJabberInstantProperty;          // Jabber Instant Messaging - kABMultiStringProperty
-        extern NSString * const kABJabberWorkLabel;
-        extern NSString * const kABJabberHomeLabel;
+// Deprecated in Mac OS 10.7. You should use kABInstantMessageProperty.
+extern NSString * const kABJabberInstantProperty					DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;	// Jabber Instant Messaging - kABMultiStringProperty
+		extern NSString * const kABJabberWorkLabel					DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+		extern NSString * const kABJabberHomeLabel					DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-extern NSString * const kABMSNInstantProperty;             // MSN Instant Messaging  - kABMultiStringProperty
-        extern NSString * const kABMSNWorkLabel;
-        extern NSString * const kABMSNHomeLabel;
+// Deprecated in Mac OS 10.7. You should use kABInstantMessageProperty.
+extern NSString * const kABMSNInstantProperty						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;	// MSN Instant Messaging  - kABMultiStringProperty
+		extern NSString * const kABMSNWorkLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+		extern NSString * const kABMSNHomeLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-extern NSString * const kABYahooInstantProperty;           // Yahoo Instant Messaging  - kABMultiStringProperty
-        extern NSString * const kABYahooWorkLabel;
-        extern NSString * const kABYahooHomeLabel;
+// Deprecated in Mac OS 10.7. You should use kABInstantMessageProperty.
+extern NSString * const kABYahooInstantProperty						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;	// Yahoo Instant Messaging  - kABMultiStringProperty
+		extern NSString * const kABYahooWorkLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+		extern NSString * const kABYahooHomeLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-extern NSString * const kABICQInstantProperty;             // ICQ Instant Messaging  - kABMultiStringProperty
-        extern NSString * const kABICQWorkLabel;
-        extern NSString * const kABICQHomeLabel;
+// Deprecated in Mac OS 10.7. You should use kABInstantMessageProperty.
+extern NSString * const kABICQInstantProperty						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;	// ICQ Instant Messaging  - kABMultiStringProperty
+		extern NSString * const kABICQWorkLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+		extern NSString * const kABICQHomeLabel						DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+extern NSString * const kABInstantMessageProperty					AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // Instant Messaging - kABMultiDictionaryProperty
+	extern NSString * const kABInstantMessageUsernameKey			AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// dictionary key for the instant messaging handle/username
+	extern NSString * const kABInstantMessageServiceKey				AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// dictionary key for the service type, not guaranteed to be present; possible values follow
+		extern NSString * const kABInstantMessageServiceAIM			AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// AIM
+		extern NSString * const kABInstantMessageServiceFacebook	AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// Facebook
+		extern NSString * const kABInstantMessageServiceGaduGadu	AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// Gadu-Gadu
+		extern NSString * const kABInstantMessageServiceGoogleTalk	AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// Google Talk
+		extern NSString * const kABInstantMessageServiceICQ			AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// ICQ
+		extern NSString * const kABInstantMessageServiceJabber		AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// Jabber
+		extern NSString * const kABInstantMessageServiceMSN			AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// MSN
+		extern NSString * const kABInstantMessageServiceQQ			AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// QQ
+		extern NSString * const kABInstantMessageServiceSkype		AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// Skype
+		extern NSString * const kABInstantMessageServiceYahoo		AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;		// Yahoo!
+
+extern NSString * const kABSocialProfileProperty                    AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;  // Social Profiles - kABMultiDictionaryProperty
+    extern NSString * const kABSocialProfileURLKey                  AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;  // String representation of the profile URL
+    extern NSString * const kABSocialProfileUsernameKey             AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;  // User-visible profile name
+    extern NSString * const kABSocialProfileUserIdentifierKey       AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;  // Service-specific identifier
+    extern NSString * const kABSocialProfileServiceKey              AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;  // Service name. Possible values follow.
+        extern NSString * const kABSocialProfileServiceTwitter      AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+        extern NSString * const kABSocialProfileServiceFacebook     AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+        extern NSString * const kABSocialProfileServiceLinkedIn     AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+        extern NSString * const kABSocialProfileServiceFlickr       AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+        extern NSString * const kABSocialProfileServiceMySpace      AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 extern NSString * const kABNoteProperty;                   // Note - kABStringProperty
 
@@ -210,6 +242,10 @@ extern NSString * const kABHomeLabel;
 
     // Can be used with any multi-value property
 extern NSString * const kABOtherLabel;
+
+    // MobileMe - for AIM or email values
+extern NSString * const kABMobileMeLabel AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
 
 // ================================================================
 //      Notifications published when something changes

@@ -149,6 +149,16 @@
 
 - (IOReturn)getServiceRecordHandle:(BluetoothSDPServiceRecordHandle *)outServiceRecordHandle;
 
+/*!
+ @method		matchesUUID16:
+ @abstract	Returns TRUE the UUID16 is found in the target service.
+ 
+ 			NOTE: This method is only available in Mac OS X 10.7 or later.
+ @param uuid16 A BluetoothSDPUUID16 to search for in the target service.	 
+ @result Returns TRUE if the UUID16 is present in the service.
+ */
+- (BOOL)matchesUUID16:(BluetoothSDPUUID16)uuid16;
+
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1
 
 /*!

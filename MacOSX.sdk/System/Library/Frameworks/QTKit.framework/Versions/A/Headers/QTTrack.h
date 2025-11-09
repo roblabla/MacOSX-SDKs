@@ -435,4 +435,30 @@ QTKIT_EXTERN NSString * const QTTrackVolumeAttribute						AVAILABLE_QTKIT_VERSIO
 - (void)removeApertureModeDimensions;
 #endif /* QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_2 */
 
+#if (defined(MAC_OS_X_VERSION_10_7) && (MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_7))
+/*!
+	@method			commonMetadata
+	@abstract		Returns an NSArray containing QTMetadataItem objects for each common metadata key for which a value for the current locale is available.
+	@result			An NSArray containing QTMetadataItem objects for each common metadata key for which a value for the current locale is available; may be nil if there is no metadata that's appropriately localized.
+	@discussion		The returned metadata may be tagged with default locale information or with no locale information, if that's the best available choice.
+*/
+- (NSArray *)commonMetadata;
+
+/*!
+	@method			availableMetadataFormats
+	@abstract		Returns an NSArray containing NSString objects representing the metadata formats available to the receiver.
+	@result			An NSArray containing an NSString objects, each of which represents a metadata format that is available to the receiver.
+*/
+- (NSArray *)availableMetadataFormats;
+
+/*!
+	@method			metadataForFormat:
+	@abstract		Returns an NSArray of QTMetadataItem objects having a specified format.
+	@param			format
+					The metadata format for which items are requested.
+	@result			An NSArray containing all QTMetadataItem objects of the receiver that have the specified format; may be nil if there is no metadata of the specified format.
+*/
+- (NSArray *)metadataForFormat:(NSString *)format;
+#endif
+
 @end

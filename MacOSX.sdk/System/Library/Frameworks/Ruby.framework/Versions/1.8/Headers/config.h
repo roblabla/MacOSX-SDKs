@@ -1,1 +1,1 @@
-../usr/lib/ruby/1.8//universal-darwin10.0/config.h
+../usr/lib/ruby/1.8//universal-darwin11.0/config.h

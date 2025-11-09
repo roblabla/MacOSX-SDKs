@@ -8,13 +8,17 @@
 //  Best viewed with the following settings: Tab width 4, Indent width 2, Wrap lines, Indent wrapped lines by 3, Page guide 128.
 //
 //------------------------------------------------------------------------------------------------------------------------------
+
+#pragma once
+
 /*!
-	@header ICScannerDevice
+    @header ICScannerDevice
     ICScannerDevice is a concrete subclass of ICDevice class. ICDeviceBrowser creates instances of this class. In this release, an instance of ICScannerDevice class is intended to be used by the IKScannerDeviceView object. The IKScannerDeviceView class encapsulates the complexities of setting scan parameters, performing scans and saving the result. The developer should consider using IKScannerDeviceView instead of building their own views using the ICScannerDevice object.
 */
 
 #import <ImageCaptureCore/ICDevice.h>
 #import <ImageCaptureCore/ICScannerFunctionalUnits.h>
+#import <ImageCaptureCore/ICScannerBandData.h>
 
 //------------------------------------------------------------------------------------------------------------------------------
 // Constants used for device status notifications.
@@ -87,9 +91,23 @@ typedef NSUInteger ICScannerTransferMode;
 /*! 
   @method scannerDevice:didScanToURL:data:
   @abstract This message is sent when the scanner device receives the requested scan. If selectedFunctionalUnit is a document feeder, then this message will be sent once for each scanned page.
-  @discusson This message is sent when the scanner device receives the requested scan. If selectedFunctionalUnit is a document feeder, then this message will be sent once for each scanned page.
+  @discusson This method has been deprecated and superceded by the didScanToURL: method for file based transfer, along with the didScanToBandData: for memory based transfer.
 */
-- (void)scannerDevice:(ICScannerDevice*)scanner didScanToURL:(NSURL*)url data:(NSData*)data;
+- (void)scannerDevice:(ICScannerDevice*)scanner didScanToURL:(NSURL*)url data:(NSData*)data NS_DEPRECATED(10_6, 10_7, NA, NA);
+
+/*! 
+ @method scannerDevice:didScanToURL:
+ @abstract This message is sent when the scanner device receives the requested scan. If selectedFunctionalUnit is a document feeder, then this message will be sent once for each scanned page.
+ @discusson This message is sent when the scanner device receives the requested scan. If selectedFunctionalUnit is a document feeder, then this message will be sent once for each scanned page.
+ */
+- (void)scannerDevice:(ICScannerDevice*)scanner didScanToURL:(NSURL*)url;
+
+/*! 
+ @method scannerDevice:didScanToBandData:
+ @abstract This message is sent when the scanner device receives the requested scan progress notification and a band of data is sent for each notification received.
+ @discusson In memory transfer mode, this will send a band of size that has been selected by the client via the maxMemoryBandSize property.
+ */
+- (void)scannerDevice:(ICScannerDevice*)scanner didScanToBandData:(ICScannerBandData*)data;
 
 /*! 
   @method scannerDevice:didCompleteOverviewScanWithError:
@@ -140,6 +158,13 @@ typedef NSUInteger ICScannerTransferMode;
 
 */
 @property           ICScannerTransferMode       transferMode;
+
+/*!
+ @property maxMemoryBandSize
+ @abstract ￼The total maximum band size requested when performing a ICScannerTransferModeMemoryBased.
+ 
+ */
+@property           UInt32                      maxMemoryBandSize;
 
 /*!
     @property downloadsDirectory

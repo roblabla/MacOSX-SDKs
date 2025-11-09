@@ -71,6 +71,8 @@
 
 #include <sys/appleapiopts.h>
 #include <sys/cdefs.h>
+#include <sys/queue.h>
+#include <stdint.h>
 
 /*
  * Definitions of device driver entry switches
@@ -216,6 +218,8 @@ struct cdevsw {
  *  else -1
  */
 __BEGIN_DECLS
+
+
 int  bdevsw_isfree(int);
 int  bdevsw_add(int, struct bdevsw *);
 int  bdevsw_remove(int, struct bdevsw *);

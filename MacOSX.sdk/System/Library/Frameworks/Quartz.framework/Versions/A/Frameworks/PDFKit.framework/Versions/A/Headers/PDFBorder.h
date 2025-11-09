@@ -21,7 +21,7 @@ enum
 };
 
 
-@interface PDFBorder : NSObject
+@interface PDFBorder : NSObject <NSCopying>
 {
 @private
 	PDFBorderPrivateVars *_pdfPriv;
@@ -38,10 +38,10 @@ enum
 - (void) setLineWidth: (CGFloat) width;
 
 // For rounded-rect borders, the corner radii.  Widget annotations generally do not specify a corder radius.
-- (CGFloat) horizontalCornerRadius;
-- (void) setHorizontalCornerRadius: (CGFloat) radius;
-- (CGFloat) verticalCornerRadius;
-- (void) setVerticalCornerRadius: (CGFloat) radius;
+//- (CGFloat) horizontalCornerRadius;						DEPRECATED
+//- (void) setHorizontalCornerRadius: (CGFloat) radius;		DEPRECATED
+//- (CGFloat) verticalCornerRadius;							DEPRECATED
+//- (void) setVerticalCornerRadius: (CGFloat) radius;		DEPRECATED
 
 // Array of floats specifying the dash pattern (see NSBezierPath for more detail).
 - (NSArray *) dashPattern;

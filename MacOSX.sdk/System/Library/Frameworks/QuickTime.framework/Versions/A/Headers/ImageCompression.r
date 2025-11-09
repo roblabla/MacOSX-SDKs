@@ -3,7 +3,7 @@
  
      Contains:   QuickTime Image Compression Interfaces.
  
-     Version:    QuickTime 7.6.6
+     Version:    QuickTime 7.7.1
  
      Copyright:  © 1990-2010 by Apple Inc., all rights reserved
  
@@ -55,11 +55,13 @@
 #define kDVCProPALCodecType 			'dvpp'				/*  available in QuickTime 6.0 or later */
 #define kDVCPro50NTSCCodecType 			'dv5n'
 #define kDVCPro50PALCodecType 			'dv5p'
-#define kDVCPro100NTSCCodecType 		'dv1n'
-#define kDVCPro100PALCodecType 			'dv1p'
+#define kDVCPROHD720p60CodecType 		'dvhp'
+#define kDVCPROHD720p50CodecType 		'dvhq'
 #define kDVCPROHD720pCodecType 			'dvhp'
 #define kDVCPROHD1080i60CodecType 		'dvh6'
 #define kDVCPROHD1080i50CodecType 		'dvh5'
+#define kDVCPROHD1080p30CodecType 		'dvh3'
+#define kDVCPROHD1080p25CodecType 		'dvh2'
 #define kBaseCodecType 					'base'
 #define kFLCCodecType 					'flic'
 #define kTargaCodecType 				'tga '

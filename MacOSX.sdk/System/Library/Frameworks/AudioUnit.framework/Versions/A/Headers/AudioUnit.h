@@ -3,7 +3,7 @@
  
      Contains:  Umbrella include for AudioUnit definitions
  
-     Copyright: (c) 2002-2008 by Apple Inc., all rights reserved.
+     Copyright: (c) 2002-2008 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -15,7 +15,7 @@
 #define __AUDIOUNIT__
 
 #include <TargetConditionals.h>
-#define AUDIO_UNIT_VERSION 1060
+#define AUDIO_UNIT_VERSION 1070
 
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
 	#include <AudioUnit/AudioComponent.h>

@@ -3,7 +3,7 @@
  
      Contains:   FSEventStream API
  
-     Version:    CarbonCore-861.39~1
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 2006-2008 by Apple Computer, Inc.  All rights reserved
  
@@ -252,7 +252,24 @@ enum {
    * it and can issue an F_GETPATH fcntl() to find the current path.
    */
   kFSEventStreamCreateFlagWatchRoot = 0x00000004,
-  kFSEventStreamCreateFlagIgnoreSelf = 0x00000008
+
+  /*
+   * Don't send events that were triggered by the current process. This
+   * is useful for reducing the volume of events that are sent. It is
+   * only useful if your process might modify the file system hierarchy
+   * beneath the path(s) being monitored. Note: this has no effect on
+   * historical events, i.e., those delivered before the HistoryDone
+   * sentinel event.
+   */
+  kFSEventStreamCreateFlagIgnoreSelf = 0x00000008,
+
+  /*
+   * Request file-level notifications.  Your stream will receive events
+   * about individual files in the hierarchy you're watching instead of
+   * only receiving directory level notifications.  Use this flag with
+   * care as it will generate significantly more events than without it.
+   */
+  kFSEventStreamCreateFlagFileEvents = 0x00000010
 };
 
 
@@ -369,7 +386,19 @@ enum {
    * unmounting a volume could uncover an arbitrarily large directory
    * hierarchy, although Mac OS X never does that.
    */
-  kFSEventStreamEventFlagUnmount = 0x00000080
+  kFSEventStreamEventFlagUnmount = 0x00000080, /* These flags are only set if you specified the FileEvents*/
+                                        /* flags when creating the stream.*/
+  kFSEventStreamEventFlagItemCreated = 0x00000100,
+  kFSEventStreamEventFlagItemRemoved = 0x00000200,
+  kFSEventStreamEventFlagItemInodeMetaMod = 0x00000400,
+  kFSEventStreamEventFlagItemRenamed = 0x00000800,
+  kFSEventStreamEventFlagItemModified = 0x00001000,
+  kFSEventStreamEventFlagItemFinderInfoMod = 0x00002000,
+  kFSEventStreamEventFlagItemChangeOwner = 0x00004000,
+  kFSEventStreamEventFlagItemXattrMod = 0x00008000,
+  kFSEventStreamEventFlagItemIsFile = 0x00010000,
+  kFSEventStreamEventFlagItemIsDir = 0x00020000,
+  kFSEventStreamEventFlagItemIsSymlink = 0x00040000
 };
 
 

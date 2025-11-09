@@ -3,7 +3,7 @@
  
      Contains:   Multiprocessing interfaces
  
-     Version:    CarbonCore-861.39~1
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 1995-2008 DayStar Digital, Inc.
  
@@ -14,7 +14,11 @@
  
 */
 
-
+/*********************************************************************************************
+ 
+ The Multiprocessing Utilities are deprecated.  Callers should use blocks, libDispatch, or pthreads.
+  
+*********************************************************************************************/
 /*
    ===========================================================================================
    *** WARNING: You must properly check the availability of MP services before calling them!
@@ -275,35 +279,35 @@ enum {
 
 
 /*
- *  MPProcessors()
+ *  MPProcessors()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern ItemCount 
-MPProcessors(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPProcessors(void)                                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* The physical total.*/
 
 /*
- *  MPProcessorsScheduled()
+ *  MPProcessorsScheduled()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern ItemCount 
-MPProcessorsScheduled(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPProcessorsScheduled(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* Those currently in use.*/
@@ -334,13 +338,13 @@ enum {
 typedef CALLBACK_API_C( OSStatus , TaskProc )(void * parameter);
 
 /*
- *  MPCreateTask()
+ *  MPCreateTask()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
@@ -353,113 +357,113 @@ MPCreateTask(
   void *          terminationParameter1,
   void *          terminationParameter2,
   MPTaskOptions   options,
-  MPTaskID *      task)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MPTaskID *      task)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPTerminateTask()
+ *  MPTerminateTask()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
 MPTerminateTask(
   MPTaskID   task,
-  OSStatus   terminationStatus)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSStatus   terminationStatus)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPSetTaskWeight()
+ *  MPSetTaskWeight()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
 MPSetTaskWeight(
   MPTaskID       task,
-  MPTaskWeight   weight)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MPTaskWeight   weight)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPTaskIsPreemptive()
+ *  MPTaskIsPreemptive()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern Boolean 
-MPTaskIsPreemptive(MPTaskID taskID)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPTaskIsPreemptive(MPTaskID taskID)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* May be kInvalidID.*/
 
 /*
- *  MPExit()
+ *  MPExit()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern void 
-MPExit(OSStatus status)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPExit(OSStatus status)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPYield()
+ *  MPYield()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern void 
-MPYield(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPYield(void)                                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPCurrentTaskID()
+ *  MPCurrentTaskID()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern MPTaskID 
-MPCurrentTaskID(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPCurrentTaskID(void)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
@@ -493,71 +497,71 @@ MPSetTaskType(
 
 
 /*
- *  MPAllocateTaskStorageIndex()
+ *  MPAllocateTaskStorageIndex()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPAllocateTaskStorageIndex(TaskStorageIndex * taskIndex)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPAllocateTaskStorageIndex(TaskStorageIndex * taskIndex)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPDeallocateTaskStorageIndex()
+ *  MPDeallocateTaskStorageIndex()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDeallocateTaskStorageIndex(TaskStorageIndex taskIndex)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPDeallocateTaskStorageIndex(TaskStorageIndex taskIndex)      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPSetTaskStorageValue()
+ *  MPSetTaskStorageValue()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
 MPSetTaskStorageValue(
   TaskStorageIndex   taskIndex,
-  TaskStorageValue   value)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TaskStorageValue   value)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPGetTaskStorageValue()
+ *  MPGetTaskStorageValue()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern TaskStorageValue 
-MPGetTaskStorageValue(TaskStorageIndex taskIndex)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPGetTaskStorageValue(TaskStorageIndex taskIndex)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
@@ -571,47 +575,47 @@ MPGetTaskStorageValue(TaskStorageIndex taskIndex)             AVAILABLE_MAC_OS_X
 
 
 /*
- *  MPCreateQueue()
+ *  MPCreateQueue()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPCreateQueue(MPQueueID * queue)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPCreateQueue(MPQueueID * queue)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPDeleteQueue()
+ *  MPDeleteQueue()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPDeleteQueue(MPQueueID queue)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPDeleteQueue(MPQueueID queue)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPNotifyQueue()
+ *  MPNotifyQueue()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
@@ -620,19 +624,19 @@ MPNotifyQueue(
   MPQueueID   queue,
   void *      param1,
   void *      param2,
-  void *      param3)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *      param3)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPWaitOnQueue()
+ *  MPWaitOnQueue()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
@@ -642,26 +646,26 @@ MPWaitOnQueue(
   void **     param1,
   void **     param2,
   void **     param3,
-  Duration    timeout)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Duration    timeout)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPSetQueueReserve()
+ *  MPSetQueueReserve()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
 MPSetQueueReserve(
   MPQueueID   queue,
-  ItemCount   count)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ItemCount   count)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
@@ -670,13 +674,13 @@ MPSetQueueReserve(
 
 
 /*
- *  MPCreateSemaphore()
+ *  MPCreateSemaphore()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
@@ -684,60 +688,60 @@ extern OSStatus
 MPCreateSemaphore(
   MPSemaphoreCount   maximumValue,
   MPSemaphoreCount   initialValue,
-  MPSemaphoreID *    semaphore)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MPSemaphoreID *    semaphore)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPDeleteSemaphore()
+ *  MPDeleteSemaphore()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPDeleteSemaphore(MPSemaphoreID semaphore)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPDeleteSemaphore(MPSemaphoreID semaphore)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPSignalSemaphore()
+ *  MPSignalSemaphore()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPSignalSemaphore(MPSemaphoreID semaphore)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPSignalSemaphore(MPSemaphoreID semaphore)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPWaitOnSemaphore()
+ *  MPWaitOnSemaphore()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
 MPWaitOnSemaphore(
   MPSemaphoreID   semaphore,
-  Duration        timeout)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Duration        timeout)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
@@ -749,71 +753,71 @@ MPWaitOnSemaphore(
 
 
 /*
- *  MPCreateCriticalRegion()
+ *  MPCreateCriticalRegion()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPCreateCriticalRegion(MPCriticalRegionID * criticalRegion)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPCreateCriticalRegion(MPCriticalRegionID * criticalRegion)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPDeleteCriticalRegion()
+ *  MPDeleteCriticalRegion()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPDeleteCriticalRegion(MPCriticalRegionID criticalRegion)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPDeleteCriticalRegion(MPCriticalRegionID criticalRegion)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPEnterCriticalRegion()
+ *  MPEnterCriticalRegion()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
 MPEnterCriticalRegion(
   MPCriticalRegionID   criticalRegion,
-  Duration             timeout)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Duration             timeout)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPExitCriticalRegion()
+ *  MPExitCriticalRegion()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPExitCriticalRegion(MPCriticalRegionID criticalRegion)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPExitCriticalRegion(MPCriticalRegionID criticalRegion)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
@@ -821,64 +825,64 @@ MPExitCriticalRegion(MPCriticalRegionID criticalRegion)       AVAILABLE_MAC_OS_X
 
 
 /*
- *  MPCreateEvent()
+ *  MPCreateEvent()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPCreateEvent(MPEventID * event)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPCreateEvent(MPEventID * event)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 /*
- *  MPDeleteEvent()
+ *  MPDeleteEvent()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDeleteEvent(MPEventID event)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPDeleteEvent(MPEventID event)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPSetEvent()
+ *  MPSetEvent()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
 MPSetEvent(
   MPEventID      event,
-  MPEventFlags   flags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MPEventFlags   flags)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 /*
- *  MPWaitForEvent()
+ *  MPWaitForEvent()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
@@ -886,7 +890,7 @@ extern OSStatus
 MPWaitForEvent(
   MPEventID       event,
   MPEventFlags *  flags,
-  Duration        timeout)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Duration        timeout)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
@@ -899,47 +903,47 @@ MPWaitForEvent(
 
 
 /*
- *  MPCreateNotification()
+ *  MPCreateNotification()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.1 and later
  */
 extern OSStatus 
-MPCreateNotification(MPNotificationID * notificationID)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPCreateNotification(MPNotificationID * notificationID)       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPDeleteNotification()
+ *  MPDeleteNotification()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.1 and later
  */
 extern OSStatus 
-MPDeleteNotification(MPNotificationID notificationID)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPDeleteNotification(MPNotificationID notificationID)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPModifyNotification()
+ *  MPModifyNotification()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.1 and later
  */
@@ -949,19 +953,19 @@ MPModifyNotification(
   MPOpaqueID         anID,
   void *             notifyParam1,
   void *             notifyParam2,
-  void *             notifyParam3)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *             notifyParam3)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPModifyNotificationParameters()
+ *  MPModifyNotificationParameters()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.1 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.3 and later
  */
@@ -971,24 +975,24 @@ MPModifyNotificationParameters(
   MPOpaqueIDClass    kind,
   void *             notifyParam1,
   void *             notifyParam2,
-  void *             notifyParam3)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  void *             notifyParam3)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPCauseNotification()
+ *  MPCauseNotification()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.1 and later
  */
 extern OSStatus 
-MPCauseNotification(MPNotificationID notificationID)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPCauseNotification(MPNotificationID notificationID)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
@@ -1017,18 +1021,18 @@ enum {
 
 
 /*
- *  MPDelayUntil()
+ *  MPDelayUntil()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDelayUntil(AbsoluteTime * expirationTime)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPDelayUntil(AbsoluteTime * expirationTime)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
@@ -1046,47 +1050,47 @@ MPDelayUntil(AbsoluteTime * expirationTime)                   AVAILABLE_MAC_OS_X
 
 
 /*
- *  MPCreateTimer()
+ *  MPCreateTimer()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPCreateTimer(MPTimerID * timerID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPCreateTimer(MPTimerID * timerID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPDeleteTimer()
+ *  MPDeleteTimer()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDeleteTimer(MPTimerID timerID)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPDeleteTimer(MPTimerID timerID)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPSetTimerNotify()
+ *  MPSetTimerNotify()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
@@ -1096,19 +1100,19 @@ MPSetTimerNotify(
   MPOpaqueID   anID,
   void *       notifyParam1,
   void *       notifyParam2,
-  void *       notifyParam3)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *       notifyParam3)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPArmTimer()
+ *  MPArmTimer()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
@@ -1116,26 +1120,26 @@ extern OSStatus
 MPArmTimer(
   MPTimerID       timerID,
   AbsoluteTime *  expirationTime,
-  OptionBits      options)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OptionBits      options)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPCancelTimer()
+ *  MPCancelTimer()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
 MPCancelTimer(
   MPTimerID       timerID,
-  AbsoluteTime *  timeRemaining)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AbsoluteTime *  timeRemaining)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
@@ -1184,13 +1188,13 @@ enum {
 
 
 /*
- *  MPAllocateAligned()
+ *  MPAllocateAligned()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
@@ -1198,58 +1202,58 @@ extern LogicalAddress
 MPAllocateAligned(
   ByteCount    size,
   UInt8        alignment,
-  OptionBits   options)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OptionBits   options)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* ! MPAllocateAligned is new in version 2.0.*/
 
 /*
- *  MPAllocate()
+ *  MPAllocate()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern LogicalAddress 
-MPAllocate(ByteCount size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPAllocate(ByteCount size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* Use MPAllocateAligned instead.*/
 
 /*
- *  MPFree()
+ *  MPFree()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern void 
-MPFree(LogicalAddress object)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPFree(LogicalAddress object)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPGetAllocatedBlockSize()
+ *  MPGetAllocatedBlockSize()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern ByteCount 
-MPGetAllocatedBlockSize(LogicalAddress object)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPGetAllocatedBlockSize(LogicalAddress object)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
@@ -1258,13 +1262,13 @@ MPGetAllocatedBlockSize(LogicalAddress object)                AVAILABLE_MAC_OS_X
 
 
 /*
- *  MPBlockCopy()
+ *  MPBlockCopy()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
@@ -1272,46 +1276,46 @@ extern void
 MPBlockCopy(
   LogicalAddress   source,
   LogicalAddress   destination,
-  ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPBlockClear()
+ *  MPBlockClear()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern void 
 MPBlockClear(
   LogicalAddress   address,
-  ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 #if !__LP64__
 /*
- *  MPDataToCode()
+ *  MPDataToCode()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only]
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern void 
 MPDataToCode(
   LogicalAddress   address,
-  ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ByteCount        size)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* NOTE:    MPDataToCode is not supported for 64-bit applications. Use mprotect(2) instead.*/
@@ -1467,51 +1471,51 @@ typedef struct MPTaskInfo               MPTaskInfo;
 
 
 /*
- *  MPSetExceptionHandler()
+ *  MPSetExceptionHandler()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
 MPSetExceptionHandler(
   MPTaskID    task,
-  MPQueueID   exceptionQ)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MPQueueID   exceptionQ)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPDisposeTaskException()
+ *  MPDisposeTaskException()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
 MPDisposeTaskException(
   MPTaskID     task,
-  OptionBits   action)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OptionBits   action)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPExtractTaskState()
+ *  MPExtractTaskState()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
@@ -1519,19 +1523,19 @@ extern OSStatus
 MPExtractTaskState(
   MPTaskID          task,
   MPTaskStateKind   kind,
-  void *            info)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *            info)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPSetTaskState()
+ *  MPSetTaskState()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
@@ -1539,26 +1543,26 @@ extern OSStatus
 MPSetTaskState(
   MPTaskID          task,
   MPTaskStateKind   kind,
-  void *            info)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *            info)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPThrowException()
+ *  MPThrowException()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
 MPThrowException(
   MPTaskID          task,
-  MPExceptionKind   kind)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MPExceptionKind   kind)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
@@ -1575,37 +1579,37 @@ enum {
 
 
 /*
- *  MPRegisterDebugger()
+ *  MPRegisterDebugger()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
 MPRegisterDebugger(
   MPQueueID         queue,
-  MPDebuggerLevel   level)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MPDebuggerLevel   level)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
 
 /*
- *  MPUnregisterDebugger()
+ *  MPUnregisterDebugger()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPUnregisterDebugger(MPQueueID queue)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+MPUnregisterDebugger(MPQueueID queue)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 
@@ -1630,7 +1634,7 @@ enum {
 
 
 /*
- *  MPRemoteCall()
+ *  MPRemoteCall()   *** DEPRECATED ***
  *  
  *  Summary:
  *    Calls a nonreentrant function and blocks the current task.
@@ -1659,7 +1663,8 @@ enum {
  *    shared library. Even these functions may switch to 68K mode if
  *    the operands to them are not aligned. If you need to access
  *    system software functions from a preemptive task, you must do so
- *    using the MPRemoteCall function.
+ *    using the MPRemoteCall function. %%     @deprecated Use blocks to
+ *    make a call on anothed dispatch queue() and block on the result.
  *  
  *  Mac OS X threading:
  *    Thread safe
@@ -1684,7 +1689,7 @@ enum {
  *      values.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
@@ -1692,11 +1697,15 @@ extern void *
 MPRemoteCall(
   MPRemoteProcedure   remoteProc,
   void *              parameter,
-  MPRemoteContext     context)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  MPRemoteContext     context)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
- *  MPRemoteCallCFM()
+ *  MPRemoteCallCFM()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    No longer applicable now that the Multiprocessing Utilities have
+ *    been deprecated.
  *  
  *  Summary:
  *    Calls a nonreentrant function and blocks the current task.
@@ -1744,7 +1753,7 @@ MPRemoteCall(
  *      values.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.4 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
@@ -1752,7 +1761,7 @@ extern void *
 MPRemoteCallCFM(
   MPRemoteProcedure   remoteProc,
   void *              parameter,
-  MPRemoteContext     context)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  MPRemoteContext     context)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
@@ -1820,18 +1829,18 @@ MPRemoteCallCFM(
 
 
 /*
- *  _MPIsFullyInitialized()
+ *  _MPIsFullyInitialized()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern Boolean 
-_MPIsFullyInitialized(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+_MPIsFullyInitialized(void)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 typedef CALLBACK_API_C( Boolean , MPIsFullyInitializedProc )(void);
@@ -1846,10 +1855,10 @@ typedef CALLBACK_API_C( Boolean , MPIsFullyInitializedProc )(void);
 
 
 /*
- *  _MPLibraryVersion()
+ *  _MPLibraryVersion()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
@@ -1859,7 +1868,7 @@ _MPLibraryVersion(
   UInt32 *       major,
   UInt32 *       minor,
   UInt32 *       release,
-  UInt32 *       revision)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *       revision)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /*
@@ -1916,10 +1925,10 @@ _MPLibraryVersion(
 #endif  /* CALL_NOT_IN_CARBON */
 
 /*
- *  _MPLibraryIsCompatible()
+ *  _MPLibraryIsCompatible()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
@@ -1929,7 +1938,7 @@ _MPLibraryIsCompatible(
   UInt32        major,
   UInt32        minor,
   UInt32        release,
-  UInt32        revision)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32        revision)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 

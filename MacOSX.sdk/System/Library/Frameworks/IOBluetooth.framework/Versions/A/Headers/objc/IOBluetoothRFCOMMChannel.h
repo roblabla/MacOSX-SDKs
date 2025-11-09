@@ -35,7 +35,7 @@
     NSPort											*mDataAvailablePort;
     IODataQueueMemory								*mIncomingDataQueue;
 
-	id __weak										delegate;
+	id												delegate;
 	
     IOBluetoothRFCOMMChannelIncomingDataListener	mIncomingDataListener;
     void											*mIncomingDataListenerRefCon;

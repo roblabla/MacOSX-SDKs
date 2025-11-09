@@ -1,13 +1,11 @@
 /*
     NSEntityMapping.h
     Core Data
-    Copyright (c) 2004-2009 Apple Inc.
+    Copyright (c) 2004-2010 Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 @class NSEntityDescription;
 @class NSEntityMapping;
@@ -24,13 +22,13 @@ enum {
 };
 typedef NSUInteger NSEntityMappingType;
 
-
+NS_CLASS_AVAILABLE(10_5,3_0)
 @interface NSEntityMapping : NSObject {
 
 @private
     void *_reserved;
     void *_reserved1;
-    void *_reserved2;
+    NSDictionary *_mappingsByName;
     NSString *_name;
     NSEntityMappingType _mappingType;
     NSString *_sourceEntityName;
@@ -55,60 +53,50 @@ typedef NSUInteger NSEntityMappingType;
 - (NSString *)name;
 - (void)setName:(NSString *)name;
 
-
 /* Returns/sets the mapping type.  (If a custom entity mapping type is utilized, the developer must specify a migrationPolicyClassName as well.) 
 */
 - (NSEntityMappingType)mappingType;
 - (void)setMappingType:(NSEntityMappingType)type;
-
 
 /* Returns/sets the source entity name for the mapping.  (Mappings are not directly bound to NSEntityDescriptions;  developers can use the sourceEntityForEntityMapping: API on the NSMigrationManager to retrieve the entity description for this name.)
 */
 - (NSString *)sourceEntityName;
 - (void)setSourceEntityName:(NSString *)name;
 
-
 /* Returns/sets the version hash for the source entity for the mapping.  VersionHashes are calculated by the Core Data framework (see NSEntityDescrition's versionHash method). The sourceEntityVersionHash must equal the version hash of the source entity represented by the mapping.
 */
 - (NSData *)sourceEntityVersionHash;
 - (void)setSourceEntityVersionHash:(NSData *)vhash;
-
 
 /* Returns/sets the destination entity name for the mapping.  (Mappings are not directly bound to NSEntityDescriptions;  developers can use the destinationEntityForEntityMapping: API on the NSMigrationManager to retrieve the entity description for this name.)
 */
 - (NSString *)destinationEntityName;
 - (void)setDestinationEntityName:(NSString *)name;
 
-
 /* Returns/sets the version hash for the destination entity for the mapping.  VersionHashes are calculated by the Core Data framework (see NSEntityDescrition's versionHash method). The destinationEntityVersionHash must equal the version hash of the destination entity represented by the mapping.
 */
 - (NSData *)destinationEntityVersionHash;
 - (void)setDestinationEntityVersionHash:(NSData *)vhash;
-
 
 /* Returns/sets the array of attribute mappings for the entity mapping.  The order of mappings in this collection dictates the order in which the mappings will be processed during a migration.
 */
 - (NSArray *)attributeMappings;
 - (void)setAttributeMappings:(NSArray *)mappings;
 
-
 /* Returns/sets the array of relationship mappings for the entity mapping.  The order of mappings in this collection dictates the order in which the mappings will be processed during a migration.
 */
 - (NSArray *)relationshipMappings;
 - (void)setRelationshipMappings:(NSArray *)mappings;
-
 
 /* Returns/sets the source expression for the mapping.  The source expression is used to obtain the collection of managed object instances to process through the mapping.  The expression can be a fetch request expression, or any other expression which evaluates to a collection.  
 */
 - (NSExpression *)sourceExpression;
 - (void)setSourceExpression:(NSExpression *)source;
 
-
 /* Returns/sets the user info dictionary for the mapping
 */
 - (NSDictionary *)userInfo;
 - (void)setUserInfo:(NSDictionary *)dict;
-
 
 /* Returns/sets the class name of the migration policy for the class.  If not specified, the default migration class name is NSEntityMigrationPolicy, though developers can specify a subclass for specific behavior.
 */
@@ -116,5 +104,3 @@ typedef NSUInteger NSEntityMappingType;
 - (void)setEntityMigrationPolicyClassName:(NSString *)name;
 
 @end
-
-#endif

@@ -2,7 +2,7 @@
  *	CTGlyphInfo.h
  *	CoreText
  *
- *	Copyright (c) 2006-2008 Apple Inc. All rights reserved.
+ *	Copyright (c) 2006-2011 Apple Inc. All rights reserved.
  *
  */
 
@@ -17,6 +17,7 @@
 #ifndef __CTGLYPHINFO__
 #define __CTGLYPHINFO__
 
+#include <CoreText/CTDefines.h>
 #include <CoreText/CTFont.h>
 
 #if defined(__cplusplus)
@@ -34,7 +35,7 @@ typedef const struct __CTGlyphInfo * CTGlyphInfoRef;
 	@abstract	Returns the CFType of the glyph info object
 */
 
-CFTypeID CTGlyphInfoGetTypeID( void ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CFTypeID CTGlyphInfoGetTypeID( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -106,7 +107,7 @@ typedef uint16_t CTCharacterCollection;
 CTGlyphInfoRef CTGlyphInfoCreateWithGlyphName(
 	CFStringRef glyphName,
 	CTFontRef font,
-	CFStringRef baseString ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CFStringRef baseString ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -134,7 +135,7 @@ CTGlyphInfoRef CTGlyphInfoCreateWithGlyphName(
 CTGlyphInfoRef CTGlyphInfoCreateWithGlyph(
 	CGGlyph glyph,
 	CTFontRef font,
-	CFStringRef baseString ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CFStringRef baseString ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -162,7 +163,7 @@ CTGlyphInfoRef CTGlyphInfoCreateWithGlyph(
 CTGlyphInfoRef CTGlyphInfoCreateWithCharacterIdentifier(
 	CGFontIndex cid,
 	CTCharacterCollection collection,
-	CFStringRef baseString ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CFStringRef baseString ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -184,7 +185,7 @@ CTGlyphInfoRef CTGlyphInfoCreateWithCharacterIdentifier(
 */
 
 CFStringRef CTGlyphInfoGetGlyphName(
-	CTGlyphInfoRef glyphInfo ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTGlyphInfoRef glyphInfo ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -202,7 +203,7 @@ CFStringRef CTGlyphInfoGetGlyphName(
 */
 
 CGFontIndex CTGlyphInfoGetCharacterIdentifier(
-	CTGlyphInfoRef glyphInfo ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTGlyphInfoRef glyphInfo ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -223,7 +224,7 @@ CGFontIndex CTGlyphInfoGetCharacterIdentifier(
 */
 
 CTCharacterCollection CTGlyphInfoGetCharacterCollection(
-	CTGlyphInfoRef glyphInfo ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CTGlyphInfoRef glyphInfo ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 #if defined(__cplusplus)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -97,6 +97,7 @@
 #define _NETINET6_IN6_VAR_H_
 #include <sys/appleapiopts.h>
 
+
 #ifdef __APPLE__
 #include <sys/kern_event.h>
 #endif
@@ -116,6 +117,15 @@ struct in6_addrlifetime {
 	u_int32_t ia6t_pltime;	/* prefix lifetime */
 };
 
+
+/* control structure to manage address selection policy */
+struct in6_addrpolicy {
+	struct sockaddr_in6 addr; /* prefix address */
+	struct sockaddr_in6 addrmask; /* prefix mask */
+	int preced;		/* precedence */
+	int label;		/* matching label */
+	u_quad_t use;		/* statistics */
+};
 
 /*
  * IPv6 interface statistics, as defined in RFC2465 Ipv6IfStatsEntry (p12).
@@ -241,7 +251,7 @@ struct	in6_ifreq {
 	union {
 		struct	sockaddr_in6 ifru_addr;
 		struct	sockaddr_in6 ifru_dstaddr;
-		short	ifru_flags;
+		int	ifru_flags;
 		int	ifru_flags6;
 		int	ifru_metric;
 		caddr_t	ifru_data;
@@ -443,6 +453,9 @@ struct kev_in6_data {
 				      struct sioc_sg_req6) /* get s,g pkt cnt */
 #define SIOCGETMIFCNT_IN6	_IOWR('u', 107, \
 				      struct sioc_mif_req6) /* get pkt cnt per if */
+
+#define SIOCAADDRCTL_POLICY	_IOW('u', 108, struct in6_addrpolicy)
+#define SIOCDADDRCTL_POLICY	_IOW('u', 109, struct in6_addrpolicy)
 
 
 #define IN6_IFF_ANYCAST		0x01	/* anycast address */

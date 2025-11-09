@@ -1,7 +1,7 @@
 /*
 	NSControl.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -83,16 +83,12 @@
 - (void)validateEditing;
 - (void)mouseDown:(NSEvent *)theEvent;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (NSWritingDirection)baseWritingDirection;
 - (void)setBaseWritingDirection:(NSWritingDirection)writingDirection;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (NSInteger)integerValue;
-- (void)setIntegerValue:(NSInteger)anInteger;
-- (void)takeIntegerValueFrom:(id)sender;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+- (NSInteger)integerValue NS_AVAILABLE_MAC(10_5);
+- (void)setIntegerValue:(NSInteger)anInteger NS_AVAILABLE_MAC(10_5);
+- (void)takeIntegerValueFrom:(id)sender NS_AVAILABLE_MAC(10_5);
 
 @end
 
@@ -124,9 +120,7 @@
 - (BOOL)control:(NSControl *)control isValidObject:(id)obj;
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (NSArray *)control:(NSControl *)control textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(NSInteger *)index;
-#endif
 @end
 
 								// userInfo keys:
@@ -142,7 +136,7 @@ APPKIT_EXTERN NSString *NSControlTextDidChangeNotification;		//	@"NSFieldEditor"
 @interface NSControl (NSDeprecated)
 
 // Use formatters instead.  See -[NSControl formatter] and -[NSControl setFormatter:].
-- (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits DEPRECATED_IN_MAC_OS_X_VERSION_10_0_AND_LATER;
+- (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits NS_DEPRECATED_MAC(10_0, 10_0);
 
 @end
 

@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2011 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        |
@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend_vm_def.h 300990 2010-07-05 09:08:35Z dmitry $ */
+/* $Id: zend_vm_def.h 309300 2011-03-16 11:14:33Z dmitry $ */
 
 /* If you change this file, please regenerate the zend_vm_execute.h and
  * zend_vm_opcodes.h files by running:
@@ -2694,10 +2694,9 @@ ZEND_VM_HANDLER(67, ZEND_SEND_REF, VAR|CV, ANY)
 	}
 
 	if (OP1_TYPE == IS_VAR && *varptr_ptr == EG(error_zval_ptr)) {
-		Z_DELREF_PP(varptr_ptr);
-		ALLOC_ZVAL(*varptr_ptr);
-		INIT_ZVAL(**varptr_ptr);
-		Z_SET_REFCOUNT_PP(varptr_ptr, 0);
+		ALLOC_INIT_ZVAL(varptr);
+		zend_vm_stack_push(varptr TSRMLS_CC);
+		ZEND_VM_NEXT_OPCODE();
 	}
 
 	if (EX(function_state).function->type == ZEND_INTERNAL_FUNCTION && !ARG_SHOULD_BE_SENT_BY_REF(EX(fbc), opline->op2.u.opline_num)) {

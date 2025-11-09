@@ -1,1 +1,1 @@
-../usr/lib/ruby/1.8//universal-darwin10.0/regex.h
+../usr/lib/ruby/1.8//universal-darwin11.0/regex.h

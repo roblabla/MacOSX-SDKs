@@ -1,7 +1,7 @@
 /*
 	NSApplication.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,9 +12,7 @@
 
 @class NSDate, NSDictionary, NSError, NSException, NSNotification;
 @class NSGraphicsContext, NSImage, NSPasteboard, NSWindow;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 @class NSDockTile;
-#endif
 @protocol NSApplicationDelegate;
 
 /* The version of the AppKit framework */
@@ -38,6 +36,7 @@ APPKIT_EXTERN const double NSAppKitVersionNumber;
 #define NSAppKitVersionNumber10_5 949
 #define NSAppKitVersionNumber10_5_2 949.27
 #define NSAppKitVersionNumber10_5_3 949.33
+#define NSAppKitVersionNumber10_6 1038
 
 
 /* Modes passed to NSRunLoop */
@@ -74,6 +73,14 @@ enum {
     NSApplicationPresentationDisableMenuBarTransparency = (1 <<  9)     // Menu Bar's transparent appearance is disabled
 };
 #endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+enum {
+    NSApplicationPresentationFullScreen = (1 << 10),                     // Application is in fullscreen mode
+    NSApplicationPresentationAutoHideToolbar = (1 << 11)                 // Fullscreen window toolbar is detached from window and hides/shows with autoHidden menuBar.  May be used only when both NSApplicationPresentationFullScreen and NSApplicationPresentationAutoHideMenuBar are also set
+};
+#endif
+
 typedef NSUInteger NSApplicationPresentationOptions;
 
 APPKIT_EXTERN id NSApp;
@@ -112,7 +119,7 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
         unsigned int        _wantsToActivate:1;
         unsigned int        _doingHide:1;
 	unsigned int	    _dontSendShouldTerminate:1;
-        unsigned int        _skipWin32DelayedRestoreKeyWindowAfterHide:1;
+        unsigned int        _ignoresFullScreen:1;
         unsigned int        _finishedLaunching:1;
         unsigned int	    _hasEventDelegate:1;
         unsigned int        _appDying:1;
@@ -123,14 +130,17 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
         unsigned int	    _panelsNonactivating:1;
         unsigned int	    _hiddenOnLaunch:1;
         unsigned int	    _openStatus:2;
-	unsigned int	    _batchOrdering:1;
+        unsigned int	    _batchOrdering:1;
         unsigned int        _waitingForTerminationReply:1;
         unsigned int        _windowMoveDisabled:1;
-	unsigned int        _reserved:4;
+        unsigned int        _dontSaveWindowsDuringTerminate:1;
+        unsigned int        _didTryRestoringPersistentState:1;
+        unsigned int        _contentsHaveInvalidPersistentState:1;
+        unsigned int        _inImplicitFullScreen:1;
     }                   _appFlags;
     id                  _mainMenu;
     id                  _appIcon;
-    id                  _nameTable;	// unused
+    void*		    _unused;
     id                  _eventDelegate;
     _NSThreadPrivate     *_threadingSupport;
 }
@@ -204,27 +214,25 @@ typedef NSUInteger NSRequestUserAttentionType;
 - (void)setMainMenu:(NSMenu *)aMenu;
 - (NSMenu *)mainMenu;
 
-/* Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from -helpMenu).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  NSApplicaton retains its Help menu and releases it when a different menu is set.
+/* Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from -helpMenu).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  NSApplication retains its Help menu and releases it when a different menu is set.
  
  */
-- (void)setHelpMenu:(NSMenu *)helpMenu AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSMenu *)helpMenu AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setHelpMenu:(NSMenu *)helpMenu NS_AVAILABLE_MAC(10_6);
+- (NSMenu *)helpMenu NS_AVAILABLE_MAC(10_6);
 
 - (void)setApplicationIconImage:(NSImage *)image;
 - (NSImage *)applicationIconImage;
 
 /* Returns the activation policy of the application.
  */
-- (NSApplicationActivationPolicy)activationPolicy AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSApplicationActivationPolicy)activationPolicy NS_AVAILABLE_MAC(10_6);
 
 /* Attempts to modify the application's activation policy.  Currently, NSApplicationActivationPolicyNone and NSApplicationActivationPolicyAccessory may be changed to NSApplicationActivationPolicyRegular, but other modifications are not supported.  This returns YES if setting the activation policy is successful, and NO if not.
  */
-- (BOOL)setActivationPolicy:(NSApplicationActivationPolicy)activationPolicy AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (BOOL)setActivationPolicy:(NSApplicationActivationPolicy)activationPolicy NS_AVAILABLE_MAC(10_6);
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (NSDockTile *)dockTile;
-#endif
+- (NSDockTile *)dockTile NS_AVAILABLE_MAC(10_5);
 
 - (BOOL)sendAction:(SEL)theAction to:(id)theTarget from:(id)sender;
 - (id)targetForAction:(SEL)theAction;
@@ -237,7 +245,6 @@ typedef NSUInteger NSRequestUserAttentionType;
 
 /*  If an application delegate returns NSTerminateLater from -applicationShouldTerminate:, -replyToApplicationShouldTerminate: must be called with YES or NO once the application decides if it can terminate */
 - (void)replyToApplicationShouldTerminate:(BOOL)shouldTerminate;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 enum {
     NSApplicationDelegateReplySuccess = 0,
@@ -252,16 +259,15 @@ typedef NSUInteger NSApplicationDelegateReply;
 /* Opens the character palette
 */
 - (void)orderFrontCharacterPalette:(id)sender;
-#endif
 
 /* Gets or sets the presentationOptions that should be in effect for the system when this application is the active application.  Only certain combinations of NSApplicationPresentationOptions flags are allowed, as detailed in the AppKit Release Notes and the reference documentation for -setPresentationOptions:.  When given an invalid combination of option flags, -setPresentationOptions: raises an exception.
 */
-- (NSApplicationPresentationOptions)presentationOptions AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)setPresentationOptions:(NSApplicationPresentationOptions)newOptions AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSApplicationPresentationOptions)presentationOptions NS_AVAILABLE_MAC(10_6);
+- (void)setPresentationOptions:(NSApplicationPresentationOptions)newOptions NS_AVAILABLE_MAC(10_6);
 
 /* Returns the set of application presentation options that are currently in effect for the system.  These are the presentation options that have been put into effect by the currently active application.
 */
-- (NSApplicationPresentationOptions)currentSystemPresentationOptions AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSApplicationPresentationOptions)currentSystemPresentationOptions NS_AVAILABLE_MAC(10_6);
 
 @end
 
@@ -279,7 +285,7 @@ typedef NSUInteger NSApplicationDelegateReply;
 @interface NSApplication(NSFullKeyboardAccess)
 /* Use this method to get the status of Full Keyboard Access, as configured in the Keyboard preference pane. You may use this status to implement your own key loop or to implement in-control tabbing behavior similar to NSTableView. Because of the nature of the preference storage, you will not be notified of changes to the key if you attempt to observe it via key-value observing; however, calling this method is fairly inexpensive, so you should always call it when you need the underlying value instead of caching it.
  */
-- (BOOL)isFullKeyboardAccessEnabled AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (BOOL)isFullKeyboardAccessEnabled NS_AVAILABLE_MAC(10_6);
 @end
 
 // return values for -applicationShouldTerminate:
@@ -290,7 +296,6 @@ enum {
 };
 typedef NSUInteger NSApplicationTerminateReply;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 // return values for -application:printFiles:withSettings:showPrintPanels:.
 enum {
     NSPrintingCancelled = 0,
@@ -299,7 +304,6 @@ enum {
     NSPrintingReplyLater = 2
 };
 typedef NSUInteger NSApplicationPrintReply;
-#endif
 
 @protocol NSApplicationDelegate <NSObject>
 @optional
@@ -312,23 +316,31 @@ typedef NSUInteger NSApplicationPrintReply;
 */
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
 - (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames;
-#endif
 - (BOOL)application:(NSApplication *)sender openTempFile:(NSString *)filename;
 - (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender;
 - (BOOL)applicationOpenUntitledFile:(NSApplication *)sender;
 - (BOOL)application:(id)sender openFileWithoutUI:(NSString *)filename;
 - (BOOL)application:(NSApplication *)sender printFile:(NSString *)filename;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (NSApplicationPrintReply)application:(NSApplication *)application printFiles:(NSArray *)fileNames withSettings:(NSDictionary *)printSettings showPrintPanels:(BOOL)showPrintPanels;
-#endif
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender;
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag;
 - (NSMenu *)applicationDockMenu:(NSApplication *)sender;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (NSError *)application:(NSApplication *)application willPresentError:(NSError *)error;
-#endif
+
+- (void)application:(NSApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken NS_AVAILABLE_MAC(10_7);
+- (void)application:(NSApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error NS_AVAILABLE_MAC(10_7);
+- (void)application:(NSApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo NS_AVAILABLE_MAC(10_7);
+
+/* Method called by -[NSApplication encodeRestorableStateWithCoder:] to give the delegate a chance to encode any additional state into the NSCoder. If the restorable state managed by the delegate changes, you must call -[NSApplication invalidateRestorableState] so that it will be re-encoded. See the header NSWindowRestoration.h for more information.
+*/
+- (void)application:(NSApplication *)app willEncodeRestorableState:(NSCoder *)coder NS_AVAILABLE_MAC(10_7);
+
+/* Method called by -[NSApplication restoreStateWithCoder:] to give the delegate a chance to restore its own state, which it may decode from the NSCoder. See the header NSWindowRestoration.h for more information.
+*/
+- (void)application:(NSApplication *)app didDecodeRestorableState:(NSCoder *)coder NS_AVAILABLE_MAC(10_7);
+
+
 
 /* Notifications:
  */
@@ -404,18 +416,45 @@ enum {
 typedef NSInteger NSUserInterfaceLayoutDirection;
 
 @interface NSApplication (NSApplicationLayoutDirection)
-- (NSUserInterfaceLayoutDirection)userInterfaceLayoutDirection AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // Returns the application-wide user interface layout direction.
+- (NSUserInterfaceLayoutDirection)userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_6); // Returns the application-wide user interface layout direction.
+@end
+
+@interface NSApplication (NSRestorableUserInterface)
+
+/* Disable or reenable relaunching this app on login, if the app was running at the time the user logged out.  These methods increment and decrement a counter respectively; if the counter is 0 at the time the user logs out, then the app may be relaunched when the user logs back in.  The counter is initially zero, so by default apps are relaunched.
+ 
+ If your app should not be relaunched because it launches via some other mechanism (e.g. launchd), then the recommended usage is to call [NSApp disableRelaunchOnLogin] once, and never pair it with an -enable call.
+ 
+ If your app should not be relaunched because it triggers a restart (e.g. an installer), then the recommended usage is to call [NSApp disableRelaunchOnLogin] immediately before you attempt to trigger a restart, and [NSApp enableRelaunchOnLogin] immediately after.  This is because the user may cancel restarting; if the user later restarts for another reason, then your app should be brought back.
+ 
+ These methods are thread safe.
+ */
+- (void)disableRelaunchOnLogin NS_AVAILABLE_MAC(10_7);
+- (void)enableRelaunchOnLogin NS_AVAILABLE_MAC(10_7);
+@end
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+enum {
+    NSRemoteNotificationTypeNone    = 0,
+    NSRemoteNotificationTypeBadge   = 1 << 0
+};
+#endif
+typedef NSUInteger NSRemoteNotificationType;
+
+@interface NSApplication (NSRemoteNotifications)
+- (void)registerForRemoteNotificationTypes:(NSRemoteNotificationType)types NS_AVAILABLE_MAC(10_7);
+- (void)unregisterForRemoteNotifications NS_AVAILABLE_MAC(10_7);
+
+- (NSRemoteNotificationType)enabledRemoteNotificationTypes NS_AVAILABLE_MAC(10_7);
 @end
 
 /* An Application's startup function */
 
 APPKIT_EXTERN int NSApplicationMain(int argc, const char *argv[]);
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 /* NSApplicationLoad should be called when loading a Cocoa bundle in a Carbon app in order to initialize NSApplication and other Cocoa objects.  Redundant calls are ignored.
 */  
 APPKIT_EXTERN BOOL NSApplicationLoad(void);
-#endif
 
 /* NSShowsServicesMenuItem() always returns YES. */
 APPKIT_EXTERN BOOL NSShowsServicesMenuItem(NSString * itemName);
@@ -423,7 +462,7 @@ APPKIT_EXTERN BOOL NSShowsServicesMenuItem(NSString * itemName);
 /* NSSetShowsServicesMenuItem() has no effect, and always returns 0. */
 APPKIT_EXTERN NSInteger NSSetShowsServicesMenuItem(NSString * itemName, BOOL enabled);
 
-/* NSUpdateDynamicServices() causes the services information for the system to be updated.  This will only be necessary if your program adds dynamic services to the system (i.e. services not found in macho segments of executables).
+/* NSUpdateDynamicServices() causes the services information for the system to be updated.  This will only be necessary if your program adds dynamic services to the system (i.e. services not found in mach-o segments of executables).
 */
 APPKIT_EXTERN void NSUpdateDynamicServices(void);
 APPKIT_EXTERN BOOL NSPerformService(NSString *itemName, NSPasteboard *pboard);
@@ -447,22 +486,29 @@ APPKIT_EXTERN NSString *NSApplicationWillUpdateNotification;
 APPKIT_EXTERN NSString *NSApplicationWillTerminateNotification;
 APPKIT_EXTERN NSString *NSApplicationDidChangeScreenParametersNotification;
 
-/* Depcrecated Methods */
+/* User info keys for NSApplicationDidFinishLaunchingNotification */
+APPKIT_EXTERN NSString * const NSApplicationLaunchRemoteNotificationKey NS_AVAILABLE_MAC(10_7);
+
+/* The following key is present in the userInfo of NSApplicationDidFinishLaunchingNotification.  Its value is an NSNumber containing a bool.  It will be NO if the app was launched to open or print a file, to perform a Service, if the app had saved state that will be restored, or if the app launch was in some other sense not a "default" launch.  Otherwise its value will be YES.
+ */
+APPKIT_EXTERN NSString * const NSApplicationLaunchIsDefaultLaunchKey NS_AVAILABLE_MAC(10_7);
+
+/* Deprecated Methods */
 @interface NSApplication (NSDeprecated)
 
 /*
  ** runModalForWindow:relativeToWindow: was deprecated in Mac OS 10.0.  
  ** Please use beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:
  */
-- (NSInteger)runModalForWindow:(NSWindow *)theWindow relativeToWindow:(NSWindow *)docWindow DEPRECATED_IN_MAC_OS_X_VERSION_10_0_AND_LATER;
+- (NSInteger)runModalForWindow:(NSWindow *)theWindow relativeToWindow:(NSWindow *)docWindow NS_DEPRECATED_MAC(10_0, 10_0);
 
 /* 
  ** beginModalSessionForWindow:relativeToWindow: was deprecated in Mac OS 10.0.
  ** Please use beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:
  */
-- (NSModalSession)beginModalSessionForWindow:(NSWindow *)theWindow relativeToWindow:(NSWindow *)docWindow DEPRECATED_IN_MAC_OS_X_VERSION_10_0_AND_LATER;
+- (NSModalSession)beginModalSessionForWindow:(NSWindow *)theWindow relativeToWindow:(NSWindow *)docWindow NS_DEPRECATED_MAC(10_0, 10_0);
 
 // -application:printFiles: was deprecated in Mac OS 10.4. Implement application:printFiles:withSettings:showPrintPanels: in your application delegate instead.
-- (void)application:(NSApplication *)sender printFiles:(NSArray *)filenames AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+- (void)application:(NSApplication *)sender printFiles:(NSArray *)filenames NS_DEPRECATED_MAC(10_3, 10_4);
 
 @end

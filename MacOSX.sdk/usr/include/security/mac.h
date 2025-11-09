@@ -126,6 +126,14 @@ typedef struct mac	*mac_t;
 #define MAC_DEVICE_TYPE_KEY	"DeviceType"
 
 /*
+ * Flags for mac_proc_check_suspend_resume()
+ */
+#define MAC_PROC_CHECK_SUSPEND   		0
+#define MAC_PROC_CHECK_RESUME    		1
+#define MAC_PROC_CHECK_HIBERNATE 		2
+#define MAC_PROC_CHECK_SHUTDOWN_SOCKETS	3
+
+/*
  * Location of the userland MAC framework configuration file.  mac.conf
  * binds policy names to shared libraries that understand those policies,
  * as well as setting defaults for MAC-aware applications.

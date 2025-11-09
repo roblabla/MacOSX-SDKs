@@ -205,7 +205,15 @@ enum {
   kCGWindowImageShouldBeOpaque = (1 << 1),
 
   /* Only draw the windows' shadows, not the windows themselves. */
-  kCGWindowImageOnlyShadows = (1 << 2)
+  kCGWindowImageOnlyShadows = (1 << 2),
+
+  /* Return the best image resolution. The screen size may be
+     different than the returned image size. */
+  kCGWindowImageBestResolution = (1 << 3),
+
+  /* Return the nominal image resolution. The screen size
+     equals the returned image size. */
+  kCGWindowImageNominalResolution = (1 << 4)
 };
 
 /* Create an image containing a composite of the specified set of windows

@@ -1,7 +1,7 @@
 /*
         NSStatusItem.h
         Application Kit
-        Copyright (c) 1997-2009, Apple Inc.  All rights reserved.
+        Copyright (c) 1997-2011, Apple Inc.  All rights reserved.
         All rights reserved.
 */
 
@@ -52,10 +52,8 @@
 - (SEL)action;
 - (void)setAction:(SEL)action;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (SEL)doubleAction;
 - (void)setDoubleAction:(SEL)action;
-#endif
 
 - (id)target;
 - (void)setTarget:(id)target;
@@ -69,10 +67,8 @@
 - (NSImage* )image;
 - (void)setImage:(NSImage*)image;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (NSImage *)alternateImage;
 - (void)setAlternateImage:(NSImage*)image;
-#endif
 
 - (NSMenu* )menu;
 - (void)setMenu:(NSMenu*)menu;
@@ -88,10 +84,8 @@
 
 - (NSInteger)sendActionOn:(NSInteger)mask;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)popUpStatusItemMenu:(NSMenu*)menu;
 - (void)drawStatusBarBackgroundInRect:(NSRect)rect withHighlight:(BOOL)highlight;
-#endif
 
 @end
 

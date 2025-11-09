@@ -6,17 +6,27 @@
 */
 
 #import <Foundation/Foundation.h>
+#import <Automator/AMAttributesForAnalyzer.h>
 
 @class NSImage;
 
 // AMAction
 // =======
 
+enum {
+	AMLogLevelDebug = 0, 
+	AMLogLevelInfo = 1, 
+	AMLogLevelWarn = 2, 
+	AMLogLevelError = 3
+};
+
+typedef NSUInteger AMLogLevel;
+
 @interface AMAction : NSObject 
 {
 @private
     NSMutableDictionary *_definition;
-    NSDictionary *_argumentsWithOutlets;
+    AM_UNUSED_FOR_ANALYZER NSDictionary *_argumentsWithOutlets;
     NSString *_currentInput;
     NSString *_error;
     NSString *_output;
@@ -52,18 +62,26 @@
 - (NSString *)selectedOutputType AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 - (void)setSelectedOutputType:(NSString *)outputType AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
-// Values from 0 to 1 are used to show determinate progress
+// Values from 0 to 1 are used to show or determinate progress
 - (CGFloat)progressValue AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 - (void)setProgressValue:(CGFloat)value AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 // Operations
-- (id)runWithInput:(id)input fromAction:(AMAction *)anAction error:(NSDictionary **)errorInfo;
-- (void)willFinishRunning AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (id)output AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)setOutput:(id)theOutput AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (id)runWithInput:(id)input fromAction:(AMAction *)anAction error:(NSDictionary **)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
+#ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
+- (id)runWithInput:(id)input error:(NSError **)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+#endif
 
 - (void)runAsynchronouslyWithInput:(id)input AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)didFinishRunningWithError:(NSDictionary *)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+
+- (void)willFinishRunning AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)didFinishRunningWithError:(NSDictionary *)errorInfo AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED;
+#ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
+- (void)finishRunningWithError:(NSError *)error AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+#endif
+
+- (id)output AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setOutput:(id)theOutput AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 - (void)stop;
 - (void)reset;
@@ -75,5 +93,11 @@
 
 - (void)updateParameters;
 - (void)parametersUpdated;
+
+#ifdef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
+- (void)logMessageWithLevel:(AMLogLevel)level format:(NSString *)format, ... NS_FORMAT_FUNCTION (2,3) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+#endif
+
+- (BOOL)isStopped;
 
 @end

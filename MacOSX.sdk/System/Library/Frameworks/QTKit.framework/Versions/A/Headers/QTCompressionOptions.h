@@ -24,6 +24,7 @@
 		@"QTCompressionOptions120SizeH264Video";
 		@"QTCompressionOptions240SizeH264Video";
 		@"QTCompressionOptionsSD480SizeH264Video";
+		@"QTCompressionOptionsHD720SizeH264Video";
 		@"QTCompressionOptions120SizeMPEG4Video";		// Not available in 64-bit
 		@"QTCompressionOptions240SizeMPEG4Video";		// Not available in 64-bit
 		@"QTCompressionOptionsSD480SizeMPEG4Video";		// Not available in 64-bit

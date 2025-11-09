@@ -1,7 +1,7 @@
 /*
         NSTextContainer.h
         Application Kit
-        Copyright (c) 1994-2009, Apple Inc.
+        Copyright (c) 1994-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -10,8 +10,8 @@
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+#import <AppKit/NSLayoutManager.h>
 
-@class NSLayoutManager;
 @class NSTextView;
 
 /* Values for NSLineSweepDirection */
@@ -34,8 +34,8 @@ enum {
 typedef NSUInteger NSLineMovementDirection;
 
 
-@interface NSTextContainer : NSObject <NSCoding> {
-
+@interface NSTextContainer : NSObject <NSCoding, NSTextLayoutOrientationProvider> {
+    
   /*All instance variables are private*/
     
   @private

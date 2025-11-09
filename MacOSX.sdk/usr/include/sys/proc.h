@@ -163,7 +163,7 @@ struct extern_proc {
 #define	P_TIMEOUT	0x00000400	/* Timing out during sleep */
 #define	P_TRACED	0x00000800	/* Debugged process being traced */
 
-#define	P_RESV3 	0x00001000	/* (P_WAITED)Debugging prc has waited for child */
+#define	P_DISABLE_ASLR	0x00001000	/* Disable address space layout randomization */
 #define	P_WEXIT		0x00002000	/* Working on exiting */
 #define	P_EXEC		0x00004000	/* Process called exec. */
 
@@ -202,6 +202,7 @@ struct extern_proc {
 #define	P_PHYSIO	0		/* Obsolete: retained for compilation */
 #define	P_FSTRACE	0		/* Obsolete: retained for compilation */
 #define	P_SSTEP		0		/* Obsolete: retained for compilation */
+
 
 
 

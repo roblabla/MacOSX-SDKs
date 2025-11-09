@@ -26,7 +26,7 @@
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  *
- * $P4: //depot/projects/trustedbsd/openbsm/bsm/libbsm.h#45 $
+ * $P4: //depot/projects/trustedbsd/openbsm/bsm/libbsm.h#48 $
  */
 
 #ifndef _LIBBSM_H_
@@ -84,6 +84,14 @@
 #define	POLICY_CONTROL_ENTRY		"policy"
 #define	AUDIT_HOST_CONTROL_ENTRY	"host"
 #define	EXPIRE_AFTER_CONTROL_ENTRY	"expire-after"
+#define MEMBER_SET_SFLAGS_MASK_CONTROL_ENTRY \
+    "member-set-sflags-mask"
+#define MEMBER_CLEAR_SFLAGS_MASK_CONTROL_ENTRY \
+    "member-clear-sflags-mask"
+#define SUPERUSER_SET_SFLAGS_MASK_CONTROL_ENTRY \
+    "superuser-set-sflags-mask"
+#define SUPERUSER_CLEAR_SFLAGS_MASK_CONTROL_ENTRY \
+    "superuser-clear-sflags-mask"
 
 #define	AU_CLASS_NAME_MAX	8
 #define	AU_CLASS_DESC_MAX	72
@@ -99,6 +107,15 @@
  */
 #define	AU_TO_NO_WRITE		0	/* Abandon audit record. */
 #define	AU_TO_WRITE		1	/* Commit audit record. */
+
+/*
+ * Output format flags for au_print_flags_tok().
+ */
+#define	AU_OFLAG_NONE		0x0000	/* Default form. */
+#define	AU_OFLAG_RAW		0x0001	/* Raw, numeric form. */
+#define	AU_OFLAG_SHORT		0x0002	/* Short form. */
+#define	AU_OFLAG_XML		0x0004	/* XML form. */
+#define	AU_OFLAG_NORESOLVE	0x0008	/* No user/group name resolution. */
 
 __BEGIN_DECLS
 struct au_event_ent {
@@ -772,6 +789,7 @@ int			 getacfilesz(size_t *size_val);
 int			 getacflg(char *auditstr, int len);
 int			 getacna(char *auditstr, int len);
 int			 getacpol(char *auditstr, size_t len);
+int			 getacsflagsmask(const char *which, char *auditstr, size_t len);
 int			 getachost(char *auditstr, size_t len);
 int			 getacexpire(int *andflg, time_t *age, size_t *size);
 int			 getauditflagsbin(char *auditstr, au_mask_t *masks);
@@ -781,6 +799,8 @@ int			 au_preselect(au_event_t event, au_mask_t *mask_p,
 			    int sorf, int flag);
 ssize_t			 au_poltostr(int policy, size_t maxsize, char *buf);
 int			 au_strtopol(const char *polstr, int *policy);
+ssize_t			 au_sflagstostr(uint64_t flags, size_t maxsize, char *buf);
+int			 au_strtosflags(const char *sflagsstr, uint64_t *flags);
 
 /*
  * Functions relating to querying audit event information.
@@ -821,6 +841,8 @@ int			 au_fetch_tok(tokenstr_t *tok, u_char *buf, int len);
 //XXX The following interface has different prototype from BSM
 void			 au_print_tok(FILE *outfp, tokenstr_t *tok,
 			    char *del, char raw, char sfrm);
+void			 au_print_flags_tok(FILE *outfp, tokenstr_t *tok,
+			    char *del, int oflags);
 void			 au_print_tok_xml(FILE *outfp, tokenstr_t *tok,
 			    char *del, char raw, char sfrm);
 
@@ -1292,6 +1314,10 @@ int audit_get_policy(int *policy);
 int audit_set_policy(int *policy);
 int audit_get_qctrl(au_qctrl_t *qctrl, size_t sz);
 int audit_set_qctrl(au_qctrl_t *qctrl, size_t sz);
+int audit_get_sflags(uint64_t *flags);
+int audit_set_sflags(uint64_t flags);
+int audit_get_sflags_mask(const char *which, uint64_t *mask);
+int audit_set_sflags_mask(const char *which, uint64_t mask);
 int audit_get_sinfo_addr(auditinfo_addr_t *aia, size_t sz);
 int audit_get_stat(au_stat_t *stats, size_t sz);
 int audit_set_stat(au_stat_t *stats, size_t sz);

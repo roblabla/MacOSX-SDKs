@@ -1,7 +1,7 @@
 /*
 	File:		OBEX.h
 	Contains:	Technology interfaces for OBEX.
-	Copyright:	© 2002-2008 by Apple Inc. All rights reserved.
+	Copyright:	(c) 2010 by Apple, Inc. All rights reserved.
 */
 
 #pragma once
@@ -70,6 +70,14 @@ enum OBEXErrorCodes
 	kOBEXForbiddenError					= -21858,		// operation was not allowed on remote device (wrong permissions, etc.).
 #endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1 */
 	
+	kOBEXUnauthorizedError				= -21859,		// Unauthorized
+	kOBEXNotAcceptableError				= -21860,		// Not Acceptable
+	kOBEXConflictError					= -21861,		// Conflict
+	kOBEXMethodNotAllowedError			= -21862,		// Method not allowed
+	kOBEXNotFoundError					= -21863,		// File/Folder not found
+	kOBEXNotImplementedError			= -21864,		// Not Implemented
+	kOBEXPreconditionFailedError		= -21865,		// Precondition failed
+		
 	kOBEXSessionBusyError				= -21875,		// Session is busy with a command already.
 	kOBEXSessionNotConnectedError		= -21876,		// Session does not have an open connection.
 	kOBEXSessionBadRequestError			= -21877,		// Whatever you are trying to do is invalid (trying to send more data than the max packet size supports, e.g.).
@@ -173,8 +181,6 @@ enum OBEXHeaderIdentifiers
 	kOBEXHeaderIDTime4Byte						= 0xC4,
 	kOBEXHeaderIDConnectionID					= 0xCB,
 
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
-
 	/* OBEX 1.3 and later specification */
 	
 	kOBEXHeaderIDOBEX13WANUUID					= 0x50, 
@@ -184,8 +190,6 @@ enum OBEXHeaderIdentifiers
 	kOBEXHeaderIDOBEX13CreatorID				= 0xCF,
 	
 	/* End OBEX 1.3 and later specification */
-
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1 */
 	
 };
 
@@ -1526,7 +1530,7 @@ extern CFStringRef	kOBEXHeaderIDKeyUserDefined;
 	</pre>
 */
 
-CFDictionaryRef OBEXGetHeaders( const void* inData, size_t inDataSize );
+CFDictionaryRef OBEXGetHeaders( const void* inData, size_t inDataSize ) CF_RETURNS_RETAINED;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function		OBEXHeadersToBytes

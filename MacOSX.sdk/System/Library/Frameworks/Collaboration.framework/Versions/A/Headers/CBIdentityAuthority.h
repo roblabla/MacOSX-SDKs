@@ -10,8 +10,6 @@
 #import <CoreServices/CoreServices.h>
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 @class NSString;
 
 /* CBIdentityAuthority - A wrapper for CSIdentityAuthorityRef */
@@ -42,5 +40,3 @@
 - (NSString *)localizedName;
 
 @end
-
-#endif

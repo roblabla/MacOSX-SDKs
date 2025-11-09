@@ -59,6 +59,8 @@
 #ifndef HEADER_PEM_H
 #define HEADER_PEM_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/e_os2.h>
 #ifndef OPENSSL_NO_BIO
 #include <openssl/bio.h>
@@ -568,19 +570,19 @@ typedef int pem_password_cb(char *buf, int size, int rwflag, void *userdata);
 typedef int pem_password_cb(char *buf, int size, int rwflag);
 #endif
 
-int	PEM_get_EVP_CIPHER_INFO(char *header, EVP_CIPHER_INFO *cipher);
+int	PEM_get_EVP_CIPHER_INFO(char *header, EVP_CIPHER_INFO *cipher) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	PEM_do_header (EVP_CIPHER_INFO *cipher, unsigned char *data,long *len,
-	pem_password_cb *callback,void *u);
+	pem_password_cb *callback,void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifndef OPENSSL_NO_BIO
 int	PEM_read_bio(BIO *bp, char **name, char **header,
-		unsigned char **data,long *len);
+		unsigned char **data,long *len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	PEM_write_bio(BIO *bp,const char *name,char *hdr,unsigned char *data,
-		long len);
+		long len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int PEM_bytes_read_bio(unsigned char **pdata, long *plen, char **pnm, const char *name, BIO *bp,
-	     pem_password_cb *cb, void *u);
+	     pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void *	PEM_ASN1_read_bio(d2i_of_void *d2i, const char *name, BIO *bp,
-			  void **x, pem_password_cb *cb, void *u);
+			  void **x, pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #define PEM_ASN1_read_bio_of(type,d2i,name,bp,x,cb,u) \
     ((type*)PEM_ASN1_read_bio(CHECKED_D2I_OF(type, d2i), \
@@ -590,7 +592,7 @@ void *	PEM_ASN1_read_bio(d2i_of_void *d2i, const char *name, BIO *bp,
 
 int	PEM_ASN1_write_bio(i2d_of_void *i2d,const char *name,BIO *bp,char *x,
 			   const EVP_CIPHER *enc,unsigned char *kstr,int klen,
-			   pem_password_cb *cb, void *u);
+			   pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #define PEM_ASN1_write_bio_of(type,i2d,name,bp,x,enc,kstr,klen,cb,u) \
     (PEM_ASN1_write_bio(CHECKED_I2D_OF(type, i2d), \
@@ -598,40 +600,40 @@ int	PEM_ASN1_write_bio(i2d_of_void *i2d,const char *name,BIO *bp,char *x,
 			CHECKED_PTR_OF(type, x), \
 			enc, kstr, klen, cb, u))
 
-STACK_OF(X509_INFO) *	PEM_X509_INFO_read_bio(BIO *bp, STACK_OF(X509_INFO) *sk, pem_password_cb *cb, void *u);
+STACK_OF(X509_INFO) *	PEM_X509_INFO_read_bio(BIO *bp, STACK_OF(X509_INFO) *sk, pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	PEM_X509_INFO_write_bio(BIO *bp,X509_INFO *xi, EVP_CIPHER *enc,
-		unsigned char *kstr, int klen, pem_password_cb *cd, void *u);
+		unsigned char *kstr, int klen, pem_password_cb *cd, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
 #ifndef OPENSSL_SYS_WIN16
 int	PEM_read(FILE *fp, char **name, char **header,
-		unsigned char **data,long *len);
-int	PEM_write(FILE *fp,char *name,char *hdr,unsigned char *data,long len);
+		unsigned char **data,long *len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	PEM_write(FILE *fp,char *name,char *hdr,unsigned char *data,long len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void *  PEM_ASN1_read(d2i_of_void *d2i, const char *name, FILE *fp, void **x,
-		      pem_password_cb *cb, void *u);
+		      pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	PEM_ASN1_write(i2d_of_void *i2d,const char *name,FILE *fp,
 		       char *x,const EVP_CIPHER *enc,unsigned char *kstr,
-		       int klen,pem_password_cb *callback, void *u);
+		       int klen,pem_password_cb *callback, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 STACK_OF(X509_INFO) *	PEM_X509_INFO_read(FILE *fp, STACK_OF(X509_INFO) *sk,
-	pem_password_cb *cb, void *u);
+	pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
 int	PEM_SealInit(PEM_ENCODE_SEAL_CTX *ctx, EVP_CIPHER *type,
 		EVP_MD *md_type, unsigned char **ek, int *ekl,
-		unsigned char *iv, EVP_PKEY **pubk, int npubk);
+		unsigned char *iv, EVP_PKEY **pubk, int npubk) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void	PEM_SealUpdate(PEM_ENCODE_SEAL_CTX *ctx, unsigned char *out, int *outl,
-		unsigned char *in, int inl);
+		unsigned char *in, int inl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	PEM_SealFinal(PEM_ENCODE_SEAL_CTX *ctx, unsigned char *sig,int *sigl,
-		unsigned char *out, int *outl, EVP_PKEY *priv);
+		unsigned char *out, int *outl, EVP_PKEY *priv) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-void    PEM_SignInit(EVP_MD_CTX *ctx, EVP_MD *type);
-void    PEM_SignUpdate(EVP_MD_CTX *ctx,unsigned char *d,unsigned int cnt);
+void    PEM_SignInit(EVP_MD_CTX *ctx, EVP_MD *type) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void    PEM_SignUpdate(EVP_MD_CTX *ctx,unsigned char *d,unsigned int cnt) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	PEM_SignFinal(EVP_MD_CTX *ctx, unsigned char *sigret,
-		unsigned int *siglen, EVP_PKEY *pkey);
+		unsigned int *siglen, EVP_PKEY *pkey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int	PEM_def_callback(char *buf, int num, int w, void *key);
-void	PEM_proc_type(char *buf, int type);
-void	PEM_dek_info(char *buf, const char *type, int len, char *str);
+int	PEM_def_callback(char *buf, int num, int w, void *key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	PEM_proc_type(char *buf, int type) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	PEM_dek_info(char *buf, const char *type, int len, char *str) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifndef SSLEAY_MACROS
 
@@ -693,31 +695,31 @@ DECLARE_PEM_rw(PUBKEY, EVP_PKEY)
 
 int PEM_write_bio_PKCS8PrivateKey_nid(BIO *bp, EVP_PKEY *x, int nid,
 				  char *kstr, int klen,
-				  pem_password_cb *cb, void *u);
+				  pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int PEM_write_bio_PKCS8PrivateKey(BIO *, EVP_PKEY *, const EVP_CIPHER *,
-                                  char *, int, pem_password_cb *, void *);
+                                  char *, int, pem_password_cb *, void *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int i2d_PKCS8PrivateKey_bio(BIO *bp, EVP_PKEY *x, const EVP_CIPHER *enc,
 				  char *kstr, int klen,
-				  pem_password_cb *cb, void *u);
+				  pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int i2d_PKCS8PrivateKey_nid_bio(BIO *bp, EVP_PKEY *x, int nid,
 				  char *kstr, int klen,
-				  pem_password_cb *cb, void *u);
-EVP_PKEY *d2i_PKCS8PrivateKey_bio(BIO *bp, EVP_PKEY **x, pem_password_cb *cb, void *u);
+				  pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+EVP_PKEY *d2i_PKCS8PrivateKey_bio(BIO *bp, EVP_PKEY **x, pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int i2d_PKCS8PrivateKey_fp(FILE *fp, EVP_PKEY *x, const EVP_CIPHER *enc,
 				  char *kstr, int klen,
-				  pem_password_cb *cb, void *u);
+				  pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int i2d_PKCS8PrivateKey_nid_fp(FILE *fp, EVP_PKEY *x, int nid,
 				  char *kstr, int klen,
-				  pem_password_cb *cb, void *u);
+				  pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int PEM_write_PKCS8PrivateKey_nid(FILE *fp, EVP_PKEY *x, int nid,
 				  char *kstr, int klen,
-				  pem_password_cb *cb, void *u);
+				  pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-EVP_PKEY *d2i_PKCS8PrivateKey_fp(FILE *fp, EVP_PKEY **x, pem_password_cb *cb, void *u);
+EVP_PKEY *d2i_PKCS8PrivateKey_fp(FILE *fp, EVP_PKEY **x, pem_password_cb *cb, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int PEM_write_PKCS8PrivateKey(FILE *fp,EVP_PKEY *x,const EVP_CIPHER *enc,
-			      char *kstr,int klen, pem_password_cb *cd, void *u);
+			      char *kstr,int klen, pem_password_cb *cd, void *u) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #endif /* SSLEAY_MACROS */
 
@@ -726,7 +728,7 @@ int PEM_write_PKCS8PrivateKey(FILE *fp,EVP_PKEY *x,const EVP_CIPHER *enc,
 /* The following lines are auto generated by the script mkerr.pl. Any changes
  * made after this point may be overwritten when the script is next run.
  */
-void ERR_load_PEM_strings(void);
+void ERR_load_PEM_strings(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Error codes for the PEM functions. */
 

@@ -3,7 +3,7 @@
 
      Contains:   Tthe data structures contained within a CAF File
 
-     Copyright:  (c) 2004 - 2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2004 - 2008 by Apple, Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -23,6 +23,7 @@
 
 #if TARGET_OS_WIN32
 #define ATTRIBUTE_PACKED
+#pragma pack(push, 1)
 #else
 #define ATTRIBUTE_PACKED __attribute__((__packed__))
 #endif
@@ -55,7 +56,8 @@ enum {
 	kCAF_OverviewChunkID			= 'ovvw',
 	kCAF_MIDIChunkID				= 'midi',
 	kCAF_UMIDChunkID				= 'umid',
-	kCAF_FormatListID				= 'ldsc'
+	kCAF_FormatListID				= 'ldsc',
+	kCAF_iXMLChunkID				= 'iXML'
 };
 
 
@@ -200,7 +202,10 @@ enum {
 	kCAFMarkerType_SustainLoopEnd			= 'slen',
 	kCAFMarkerType_ReleaseLoopStart			= 'rlbg',
 	kCAFMarkerType_ReleaseLoopEnd			= 'rlen',
-	kCAFMarkerType_SavedPlayPosition		= 'sply'
+	kCAFMarkerType_SavedPlayPosition		= 'sply',
+	kCAFMarkerType_Tempo					= 'tmpo',
+	kCAFMarkerType_TimeSignature			= 'tsig',
+	kCAFMarkerType_KeySignature				= 'ksig'
 };
 
 enum
@@ -362,7 +367,9 @@ struct CAFUMIDChunk
 } ATTRIBUTE_PACKED;
 typedef struct CAFUMIDChunk CAFUMIDChunk;
 
-
+#if TARGET_OS_WIN32
+#pragma pack(pop)
+#endif
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #endif

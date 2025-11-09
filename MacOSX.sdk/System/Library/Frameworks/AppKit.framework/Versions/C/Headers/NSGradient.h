@@ -1,7 +1,7 @@
 /*
 	NSGradient.h
 	Application Kit
-	Copyright (c) 2006-2009, Apple Inc.
+	Copyright (c) 2006-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,7 +9,6 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 @class NSArray, NSBezierPath, NSColor, NSColorSpace;
 
@@ -46,7 +45,7 @@ An NSGradient has a color space.  When initialized, all colors provided are conv
 
 */
 
-
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSGradient : NSObject <NSCopying, NSCoding> {
 @private
     NSArray *_colorArray;
@@ -147,4 +146,3 @@ You should not need to override this method, it reports the color value of the g
 
 @end
 
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */

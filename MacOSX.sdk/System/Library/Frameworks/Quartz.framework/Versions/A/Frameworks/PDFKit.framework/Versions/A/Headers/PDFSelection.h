@@ -50,6 +50,18 @@
 // Given a PDFPage, returns the bounds in page-space of the text covered by the selection on that page.
 - (NSRect) boundsForPage: (PDFPage *) page;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+
+// Returns the number of contiguous ranges of text on the specified page. Returns zero if page is not in selection.
+// A typical, simple selection will contain a single range of text.
+- (NSUInteger) numberOfTextRangesOnPage: (PDFPage *) page;
+
+// Returns a range of contiguous text at index on the specified page. A simple selection 
+// A typical, simple selection will contain a single range of text.
+- (NSRange) rangeAtIndex: (NSUInteger) index onPage: (PDFPage *) page;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 // Returns an array of PDFSelection objects - one for each line of text covered by the receiver.  For example if the 

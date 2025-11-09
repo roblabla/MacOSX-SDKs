@@ -1,15 +1,14 @@
 /*	NSOrthography.h
-	Copyright (c) 2008-2009, Apple Inc. All rights reserved.
+	Copyright (c) 2008-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
-
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSString, NSArray, NSDictionary;
 
 /* NSOrthography is a class used to describe the linguistic content of a piece of text, especially for the purposes of spelling and grammar checking.  It describes (a) which scripts the text contains, (b) a dominant language and possibly other languages for each of these scripts, and (c) a dominant script and language for the text as a whole.  Scripts are uniformly described by standard four-letter tags (Latn, Grek, Cyrl, etc.) with the supertags Jpan and Kore typically used for Japanese and Korean text, Hans and Hant for Chinese text; the tag Zyyy is used if a specific script cannot be identified.  Languages are uniformly described by BCP-47 tags, preferably in canonical form; the tag und is used if a specific language cannot be determined. */
 
+NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface NSOrthography : NSObject <NSCopying, NSCoding>
 
 /* These are the primitive properties which a subclass must implement.  The dominantScript should be a script tag (such as Latn, Cyrl, and so forth) and the languageMap should be a dictionary whose keys are script tags and whose values are arrays of language tags (such as en, fr, de, and so forth). */
@@ -38,4 +37,3 @@
 
 @end
 
-#endif

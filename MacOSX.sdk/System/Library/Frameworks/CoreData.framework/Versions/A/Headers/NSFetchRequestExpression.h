@@ -1,18 +1,17 @@
 /*
     NSFetchRequestExpression.h
     Core Data
-    Copyright (c) 2004-2009 Apple Inc.
+    Copyright (c) 2004-2010 Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 enum {
     NSFetchRequestExpressionType = 50
 };
 
+NS_CLASS_AVAILABLE(10_5,3_0)
 @interface NSFetchRequestExpression : NSExpression {
 @private
     void* _reserved1;
@@ -47,6 +46,3 @@ enum {
 - (BOOL)isCountOnlyRequest;
 
 @end
-
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
-

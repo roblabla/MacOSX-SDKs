@@ -1,16 +1,18 @@
 /*	NSComparisonPredicate.h
-	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPredicate.h>
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 // Flags(s) that can be passed to the factory to indicate that a operator operating on strings should do so in a case insensitive fashion.
 enum {
     NSCaseInsensitivePredicateOption = 0x01,
     NSDiacriticInsensitivePredicateOption = 0x02,
+#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <=  __IPHONE_OS_VERSION_MAX_ALLOWED
+    NSNormalizedPredicateOption = 0x04, /* Indicate that the strings to be compared have been preprocessed; this supersedes other options and is intended as a performance optimization option */
+#endif
 };
+typedef NSUInteger NSComparisonPredicateOptions;
 
 // Describes how the operator is modified: can be direct, ALL, or ANY
 enum {
@@ -35,11 +37,11 @@ enum {
     NSEndsWithPredicateOperatorType,
     NSInPredicateOperatorType, // rhs contains lhs returns true
     NSCustomSelectorPredicateOperatorType
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_3_0 <=  __IPHONE_OS_VERSION_MAX_ALLOWED
     ,
     NSContainsPredicateOperatorType = 99, // lhs contains rhs returns true
     NSBetweenPredicateOperatorType
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 || __IPHONE_3_0 <=  __IPHONE_OS_VERSION_MAX_ALLOWED*/
 };
 typedef NSUInteger NSPredicateOperatorType;
 
@@ -48,6 +50,7 @@ typedef NSUInteger NSPredicateOperatorType;
 
 // Comparison predicates are predicates which do some form of comparison between the results of two expressions and return a BOOL. They take an operator, a left expression, and a right expression, and return the result of invoking the operator with the results of evaluating the expressions.
 
+NS_CLASS_AVAILABLE(10_4, 3_0)
 @interface NSComparisonPredicate : NSPredicate {
     @private
     void *_reserved2;
@@ -56,10 +59,10 @@ typedef NSUInteger NSPredicateOperatorType;
     NSExpression *_rhs;
 }
 
-+ (NSPredicate *)predicateWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs modifier:(NSComparisonPredicateModifier)modifier type:(NSPredicateOperatorType)type options:(NSUInteger)options;
++ (NSPredicate *)predicateWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs modifier:(NSComparisonPredicateModifier)modifier type:(NSPredicateOperatorType)type options:(NSComparisonPredicateOptions)options;
 + (NSPredicate *)predicateWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs customSelector:(SEL)selector;
 
-- (id)initWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs modifier:(NSComparisonPredicateModifier)modifier type:(NSPredicateOperatorType)type options:(NSUInteger)options;
+- (id)initWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs modifier:(NSComparisonPredicateModifier)modifier type:(NSPredicateOperatorType)type options:(NSComparisonPredicateOptions)options;
 - (id)initWithLeftExpression:(NSExpression *)lhs rightExpression:(NSExpression *)rhs customSelector:(SEL)selector;
 
 - (NSPredicateOperatorType)predicateOperatorType;
@@ -67,8 +70,7 @@ typedef NSUInteger NSPredicateOperatorType;
 - (NSExpression *)leftExpression;
 - (NSExpression *)rightExpression;
 - (SEL)customSelector;
-- (NSUInteger)options;
+- (NSComparisonPredicateOptions)options;
 
 @end
 
-#endif

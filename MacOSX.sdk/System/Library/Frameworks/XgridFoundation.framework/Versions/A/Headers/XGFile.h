@@ -31,19 +31,19 @@ typedef enum {
 	XGFileTypeNone = 0,
 	XGFileTypeRegular,
 	XGFileTypeStream
-} XGFileType;
+} XGFileType NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@const XGFileStandardOutputPath
 	@discussion The standard output stream has this path.
 */
-extern NSString * const XGFileStandardOutputPath;
+extern NSString * const XGFileStandardOutputPath NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@const XGFileStandardErrorPath
 	@discussion The standard error stream has this path.
 */
-extern NSString * const XGFileStandardErrorPath;
+extern NSString * const XGFileStandardErrorPath NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@class XGFile
@@ -64,27 +64,27 @@ extern NSString * const XGFileStandardErrorPath;
 	@abstract Returns the XGJob instance associated with the receiver.
 	@result The XGJob instance.
 */
-- (XGJob *)job;
+- (XGJob *)job NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method taskIdentifier
 	@abstract Returns the identifier of the task associated with the receiver.
 	@result The task identifier.
 */
-- (NSString *)taskIdentifier;
+- (NSString *)taskIdentifier NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method type
 	@abstract Returns the XGFileType of the receiver.
 	@result The file type.
 */
-- (XGFileType)type;
+- (XGFileType)type NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method path
 	@abstract Returns the path of the receiver.
 	@result The path.
 */
-- (NSString *)path;
+- (NSString *)path NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end

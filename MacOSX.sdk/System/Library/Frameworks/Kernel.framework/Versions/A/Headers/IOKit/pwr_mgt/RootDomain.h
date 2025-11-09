@@ -31,11 +31,8 @@
 #include <IOKit/IOService.h>
 #include <IOKit/pwr_mgt/IOPM.h>
 #include "IOKit/pwr_mgt/IOPMPrivate.h"
+#include <IOKit/IOBufferMemoryDescriptor.h> 
 
-
-class IOPMPowerStateQueue;
-class RootDomainUserClient;
-class PMTraceWorker;
 
 /*!
  * Types for PM Assertions
@@ -97,19 +94,6 @@ enum {
 #define kIOPMLowPowerSleepKey               "Low Power Sleep"
 #define kIOPMThermalEmergencySleepKey       "Thermal Emergency Sleep"
 #define kIOPMMaintenanceSleepKey            "Maintenance Sleep"
-
-enum
-{
-    kIOPMSleepReasonClamshell           = 1,
-    kIOPMSleepReasonPowerButton         = 2,
-    kIOPMSleepReasonSoftware            = 3,
-    kIOPMSleepReasonOSSwitchHibernation = 4,
-    kIOPMSleepReasonIdle                = 5,
-    kIOPMSleepReasonLowPower            = 6,
-    kIOPMSleepReasonThermalEmergency    = 7,
-    kIOPMSleepReasonMaintenance         = 8,
-    kIOPMSleepReasonMax
-};
 
 /*
  * String constants for communication with PM CPU
@@ -261,17 +245,6 @@ public:
                                 const OSSymbol * typeOfInterest,
                                 IOServiceInterestHandler handler,
                                 void * target, void * ref = 0 );
-                                
-    void                pmStatsRecordEvent(
-                                int             eventIndex,
-                                AbsoluteTime    timestamp);
-
-    void                pmStatsRecordApplicationResponse(
-                            const OSSymbol		*response,
-                            const char 		    *name,
-                            int                 messageType,
-                            uint32_t			delay_ms,
-                            int     			app_pid);
 
     virtual IOReturn    callPlatformFunction(
                                 const OSSymbol *functionName,

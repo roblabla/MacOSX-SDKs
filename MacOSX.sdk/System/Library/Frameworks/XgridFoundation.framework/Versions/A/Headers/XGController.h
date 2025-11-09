@@ -24,7 +24,7 @@
 	@const XGControllerWillDeallocNotification
 	@discussion This notification gets posted from the controller's dealloc method.
 */	
-extern NSString * const XGControllerWillDeallocNotification; 
+extern NSString * const XGControllerWillDeallocNotification NS_DEPRECATED_MAC(10_4, 10_7); 
 
 /*!
 	@class XGController
@@ -52,28 +52,28 @@ extern NSString * const XGControllerWillDeallocNotification;
 	@param connection The connection to be used by the receiver.
 	@result An initialized instance.
 */
-- (id)initWithConnection:(XGConnection *)connection;
+- (id)initWithConnection:(XGConnection *)connection NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method setJobsPredicateString:
 	@abstract Sets the predicate string used to filter jobs.
 	@param predicateString The predicate string used to filter jobs.
 */
-- (void)setJobsPredicateString:(NSString *)predicateString;
+- (void)setJobsPredicateString:(NSString *)predicateString NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method jobsPredicateString
 	@abstract Returns the predicate string used to filter jobs.
 	@result A predicate string.
 */
-- (NSString *)jobsPredicateString;
+- (NSString *)jobsPredicateString NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method grids
 	@abstract Returns an array of the grids lists managed by the controller.
 	@result An array of XGGrids.
 */
-- (NSArray *)grids;
+- (NSArray *)grids NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method gridForIdentifier:
@@ -82,21 +82,21 @@ extern NSString * const XGControllerWillDeallocNotification;
 	@param identifier The identifier of the grid.
 	@result An XGGrid instance, or nil.
 */
-- (XGGrid *)gridForIdentifier:(NSString *)identifier;
+- (XGGrid *)gridForIdentifier:(NSString *)identifier NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method defaultGrid
 	@abstract Returns the default grid, or nil if there is no default grid.
 	@result An XGGrid instance, or nil.
 */
-- (XGGrid *)defaultGrid;
+- (XGGrid *)defaultGrid NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method performSubmitJobActionWithJobSpecification:gridIdentifier:
 	@abstract Attempts to submit a job to the specified grid, or the default grid if no grid is specified.
 	@result An XGActionMontior instance for tracking the action progress.
 */
-- (id)performSubmitJobActionWithJobSpecification:(NSDictionary *)jobSpecification gridIdentifier:(NSString *)gridIdentifier;
+- (id)performSubmitJobActionWithJobSpecification:(NSDictionary *)jobSpecification gridIdentifier:(NSString *)gridIdentifier NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end
 
@@ -111,21 +111,22 @@ extern NSString * const XGControllerWillDeallocNotification;
 	@abstract Returns an instance initialized with a connection to the specified
 	net service.
 */
-+ (id)controllerWithNetService:(NSNetService *)netService;
++ (id)controllerWithNetService:(NSNetService *)netService NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method controllerWithHostname:portnumber:
 	@abstract Returns an instance initialized with a connection to the specified
 	hostname and portnumber.
 */
-+ (id)controllerWithHostname:(NSString *)hostname portnumber:(UInt32)portnumber;
++ (id)controllerWithHostname:(NSString *)hostname portnumber:(UInt32)portnumber NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
     @method privateController
-    @abstract Returns an instance initialized with a connection to a private controller.
-    This controller is not shared with anyone else, and has its own private agent.
+    @abstract Returns an instance initialized with a connection to a private
+    controller.  This controller is shared by all clients running in the current
+    user context, and has its own private agent.
 */
-+ (id)privateController;
++ (id)privateController NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
     @method defaultController
@@ -133,6 +134,6 @@ extern NSString * const XGControllerWillDeallocNotification;
     controller.  If no default controller has been set then this is equivalent
     to calling +privateController.
 */
-+ (id)defaultController;
++ (id)defaultController NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end

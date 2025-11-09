@@ -27,10 +27,10 @@
 - (NSInteger)beginLoadingImageDataForClient:(id<ABImageClient>)client;
     // Starts an asynchronous fetch for image data in all locations using all. Returns a non-zero tag for tracking.
     // The consumer will not be called back until after this method has returned.
-    // Cancel with -[ABPerson cancelLoadingImageDataForTag:].
+    // Cancel with +[ABPerson cancelLoadingImageDataForTag:].
 
 + (void)cancelLoadingImageDataForTag:(NSInteger)tag;
     // Cancels an asynchronous fetch for a specific tag
-	// Use the tag returned by the -beginLoadingImageDataForClient: method
+    // Use the tag returned by the -beginLoadingImageDataForClient: method
 
 @end

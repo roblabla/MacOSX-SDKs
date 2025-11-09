@@ -66,6 +66,7 @@
 
 #include <sys/cdefs.h>
 #include <sys/_types.h>
+#include <Availability.h>
 
 /*
  * [XSI] The fd_set type shall be defined as described in <sys/select.h>.
@@ -202,7 +203,7 @@ __BEGIN_DECLS
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 int	adjtime(const struct timeval *, struct timeval *);
 int	futimes(int, const struct timeval *);
-int	lutimes(const char *, const struct timeval *);
+int	lutimes(const char *, const struct timeval *) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
 int	settimeofday(const struct timeval *, const struct timezone *);
 #endif /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 

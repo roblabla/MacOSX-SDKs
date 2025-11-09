@@ -1,13 +1,11 @@
 /*
 	CoreDataErrors.h
 	Core Data
-    Copyright (c) 2004-2009 Apple Inc.
+    Copyright (c) 2004-2010 Apple Inc.
 	All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /* NSError codes for Core Data added errors in NSCocoaErrorDomain. Foundation error codes can be found in <Foundation/FoundationErrors.h>. AppKit error codes can be found in <AppKit/AppKitErrors.h>.
 */
@@ -15,17 +13,19 @@
 #import <CoreData/CoreDataDefines.h>
 
 // User info keys for errors created by Core Data:
-COREDATA_EXTERN NSString * const NSDetailedErrorsKey;           // if multiple validation errors occur in one operation, they are collected in an array and added with this key to the "top-level error" of the operation
+COREDATA_EXTERN NSString * const NSDetailedErrorsKey NS_AVAILABLE(10_4,3_0);           // if multiple validation errors occur in one operation, they are collected in an array and added with this key to the "top-level error" of the operation
 
-COREDATA_EXTERN NSString * const NSValidationObjectErrorKey;    // object that failed to validate for a validation error
-COREDATA_EXTERN NSString * const NSValidationKeyErrorKey;       // key that failed to validate for a validation error
-COREDATA_EXTERN NSString * const NSValidationPredicateErrorKey; // for predicate-based validation, the predicate for the condition that failed to validate
-COREDATA_EXTERN NSString * const NSValidationValueErrorKey;     // if non-nil, the value for the key that failed to validate for a validation error
+COREDATA_EXTERN NSString * const NSValidationObjectErrorKey NS_AVAILABLE(10_4,3_0);    // object that failed to validate for a validation error
+COREDATA_EXTERN NSString * const NSValidationKeyErrorKey NS_AVAILABLE(10_4,3_0);       // key that failed to validate for a validation error
+COREDATA_EXTERN NSString * const NSValidationPredicateErrorKey NS_AVAILABLE(10_4,3_0); // for predicate-based validation, the predicate for the condition that failed to validate
+COREDATA_EXTERN NSString * const NSValidationValueErrorKey NS_AVAILABLE(10_4,3_0);     // if non-nil, the value for the key that failed to validate for a validation error
 
-COREDATA_EXTERN NSString * const NSAffectedStoresErrorKey;      // stores prompting an error
-COREDATA_EXTERN NSString * const NSAffectedObjectsErrorKey;     // objects prompting an error
+COREDATA_EXTERN NSString * const NSAffectedStoresErrorKey NS_AVAILABLE(10_4,3_0);      // stores prompting an error
+COREDATA_EXTERN NSString * const NSAffectedObjectsErrorKey NS_AVAILABLE(10_4,3_0);     // objects prompting an error
 
-COREDATA_EXTERN NSString * const NSSQLiteErrorDomain AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;           // Predefined domain for SQLite errors, value of "code" will correspond to preexisting values in SQLite.
+COREDATA_EXTERN NSString * const NSPersistentStoreSaveConflictsErrorKey NS_AVAILABLE(10_7,NA);     // key in NSError's userInfo specifying the NSArray of NSMergeConflict
+
+COREDATA_EXTERN NSString * const NSSQLiteErrorDomain NS_AVAILABLE(10_5,3_0);           // Predefined domain for SQLite errors, value of "code" will correspond to preexisting values in SQLite.
 
 enum {
     NSManagedObjectValidationError                   = 1550,   // generic validation error
@@ -55,12 +55,13 @@ enum {
     NSPersistentStoreIncompatibleSchemaError         = 134020, // store returned an error for save operation (database level errors ie missing table, no permissions)
     NSPersistentStoreSaveError                       = 134030, // unclassified save error - something we depend on returned an error
     NSPersistentStoreIncompleteSaveError             = 134040, // one or more of the stores returned an error during save (stores/objects that failed will be in userInfo)
+	NSPersistentStoreSaveConflictsError				 = 134050, // an unresolved merge conflict was encountered during a save.  userInfo has NSPersistentStoreSaveConflictsErrorKey
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
     NSCoreDataError                                  = 134060, // general Core Data error
     NSPersistentStoreOperationError                  = 134070, // the persistent store operation failed 
     NSPersistentStoreOpenError                       = 134080, // an error occured while attempting to open the persistent store
     NSPersistentStoreTimeoutError                    = 134090, // failed to connect to the persistent store within the specified timeout (see NSPersistentStoreTimeoutOption)
+	NSPersistentStoreUnsupportedRequestTypeError	 = 134091, // an NSPersistentStore subclass was passed an NSPersistentStoreRequest that it did not understand
 
     NSPersistentStoreIncompatibleVersionHashError    = 134100, // entity version hashes incompatible with data model
     NSMigrationError                                 = 134110, // general migration error
@@ -71,13 +72,11 @@ enum {
     NSMigrationManagerDestinationStoreError          = 134160, // migration failed due to a problem with the destination data store
     NSEntityMigrationPolicyError                     = 134170, // migration failed during processing of the entity migration policy 
 
-    NSSQLiteError                                    = 134180  // general SQLite error 
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+    NSSQLiteError                                    = 134180,  // general SQLite error 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-    , NSInferredMappingModelError                      = 134190 // inferred mapping model creation error
-    , NSExternalRecordImportError                      = 134200 // general error encountered while importing external records
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
+    NSInferredMappingModelError                      = 134190, // inferred mapping model creation error
+    NSExternalRecordImportError                      = 134200 // general error encountered while importing external records
+
 };
 
-#endif
+

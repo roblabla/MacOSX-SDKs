@@ -31,6 +31,7 @@ typedef function_table_entry   *function_table_t;
 
 #include <mach/std_types.h>
 #include <mach/mig.h>
+#include <mach/mig.h>
 #include <mach/mach_types.h>
 #include <mach_debug/mach_debug_types.h>
 

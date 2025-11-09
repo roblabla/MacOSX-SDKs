@@ -1,7 +1,7 @@
 /*=============================================================================
     AudioUnitUtilities.h
         
-    Copyright (c) 2002-2008 Apple Inc.  All Rights Reserved
+    Copyright (c) 2002-2008 Apple, Inc.  All Rights Reserved
 =============================================================================*/
 
 /*!
@@ -202,7 +202,7 @@ typedef void (*AUEventListenerProc)(void *                      inUserData,
     @function   AUListenerCreateWithDispatchQueue
     @abstract   Create an object for fielding notifications when AudioUnit parameter values change.
     @param      outListener
-                    On succcessful return, an AUParameterListenerRef.
+                    On successful return, an AUParameterListenerRef.
     @param      inNotificationInterval
                     The minimum time interval, in seconds, at which the callback will be called.
                     If multiple parameter value changes occur within this time interval, the
@@ -247,7 +247,7 @@ AUListenerCreateWithDispatchQueue(  AUParameterListenerRef *        outListener,
                     and inRunLoopMode arguments are ignored, and the callback will be issued
                     immediately, on the thread on which the parameter was changed.
     @param      outListener
-                    On succcessful return, an AUParameterListenerRef.
+                    On successful return, an AUParameterListenerRef.
     @discussion 
         Note that only parameter changes issued through AUParameterSet will generate
         notifications to listeners; thus, in most cases, AudioUnit clients should use
@@ -380,11 +380,11 @@ AUParameterListenerNotify(          AUParameterListenerRef          inSendingLis
     @function   AUEventListenerCreateWithDispatchQueue
     @abstract   Creates an Audio Unit event listener.
     @param      outListener
-                    On succcessful return, an AUEventListenerRef.
+                    On successful return, an AUEventListenerRef.
     @param      inNotificationInterval
                     The minimum time interval, in seconds, at which the callback will be called.
     @param      inValueChangeGranularity
-                    Determines how parameter value changes occuring within this interval are
+                    Determines how parameter value changes occurring within this interval are
                     queued; when an event follows a previous one by a smaller time interval than
                     the granularity, then the listener will only be notified for the second
                     parameter change.
@@ -446,12 +446,12 @@ AUEventListenerCreateWithDispatchQueue(
     @param      inNotificationInterval
                     The minimum time interval, in seconds, at which the callback will be called.
     @param      inValueChangeGranularity
-                    Determines how parameter value changes occuring within this interval are
+                    Determines how parameter value changes occurring within this interval are
                     queued; when an event follows a previous one by a smaller time interval than
                     the granularity, then the listener will only be notified for the second
                     parameter change.
     @param      outListener
-                    On succcessful return, an AUEventListenerRef.
+                    On successful return, an AUEventListenerRef.
     
     @discussion
         See the discussion of AUEventListenerCreateWithDispatchQueue.

@@ -69,6 +69,8 @@
 #ifndef	_SYS_ERRNO_H_
 #define	_SYS_ERRNO_H_
 
+#include <sys/cdefs.h>
+
 
 /*
  * Error codes
@@ -89,7 +91,7 @@
 #define	ENOMEM		12		/* Cannot allocate memory */
 #define	EACCES		13		/* Permission denied */
 #define	EFAULT		14		/* Bad address */
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 #define	ENOTBLK		15		/* Block device required */
 #endif
 #define	EBUSY		16		/* Device / Resource busy */
@@ -127,9 +129,9 @@
 #define	EPROTOTYPE	41		/* Protocol wrong type for socket */
 #define	ENOPROTOOPT	42		/* Protocol not available */
 #define	EPROTONOSUPPORT	43		/* Protocol not supported */
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 #define	ESOCKTNOSUPPORT	44		/* Socket type not supported */
-#endif /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
+#endif
 #define ENOTSUP		45		/* Operation not supported */
 #if !__DARWIN_UNIX03 && !defined(KERNEL)
 /*
@@ -143,9 +145,9 @@
 #define	EOPNOTSUPP	 ENOTSUP	/* Operation not supported on socket */
 #endif /* !__DARWIN_UNIX03 && !KERNEL */
 
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 #define	EPFNOSUPPORT	46		/* Protocol family not supported */
-#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
+#endif
 #define	EAFNOSUPPORT	47		/* Address family not supported by protocol family */
 #define	EADDRINUSE	48		/* Address already in use */
 #define	EADDRNOTAVAIL	49		/* Can't assign requested address */
@@ -159,10 +161,10 @@
 #define	ENOBUFS		55		/* No buffer space available */
 #define	EISCONN		56		/* Socket is already connected */
 #define	ENOTCONN	57		/* Socket is not connected */
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 #define	ESHUTDOWN	58		/* Can't send after socket shutdown */
 #define	ETOOMANYREFS	59		/* Too many references: can't splice */
-#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
+#endif
 #define	ETIMEDOUT	60		/* Operation timed out */
 #define	ECONNREFUSED	61		/* Connection refused */
 
@@ -170,34 +172,34 @@
 #define	ENAMETOOLONG	63		/* File name too long */
 
 /* should be rearranged */
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 #define	EHOSTDOWN	64		/* Host is down */
-#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
+#endif
 #define	EHOSTUNREACH	65		/* No route to host */
 #define	ENOTEMPTY	66		/* Directory not empty */
 
 /* quotas & mush */
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 #define	EPROCLIM	67		/* Too many processes */
 #define	EUSERS		68		/* Too many users */
-#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
+#endif
 #define	EDQUOT		69		/* Disc quota exceeded */
 
 /* Network File System */
 #define	ESTALE		70		/* Stale NFS file handle */
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 #define	EREMOTE		71		/* Too many levels of remote in path */
 #define	EBADRPC		72		/* RPC struct is bad */
 #define	ERPCMISMATCH	73		/* RPC version wrong */
 #define	EPROGUNAVAIL	74		/* RPC prog. not avail */
 #define	EPROGMISMATCH	75		/* Program version wrong */
 #define	EPROCUNAVAIL	76		/* Bad procedure for program */
-#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
+#endif
 
 #define	ENOLCK		77		/* No locks available */
 #define	ENOSYS		78		/* Function not implemented */
 
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 #define	EFTYPE		79		/* Inappropriate file type or format */
 #define	EAUTH		80		/* Authentication error */
 #define	ENEEDAUTH	81		/* Need authenticator */
@@ -205,26 +207,26 @@
 /* Intelligent device errors */
 #define	EPWROFF		82	/* Device power is off */
 #define	EDEVERR		83	/* Device error, e.g. paper out */
-#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
+#endif
 
 #define	EOVERFLOW	84		/* Value too large to be stored in data type */
 
 /* Program loading errors */
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 #define EBADEXEC	85	/* Bad executable */
 #define EBADARCH	86	/* Bad CPU type in executable */
 #define ESHLIBVERS	87	/* Shared library version mismatch */
 #define EBADMACHO	88	/* Malformed Macho file */
-#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
+#endif
 
 #define	ECANCELED	89		/* Operation canceled */
 
 #define EIDRM		90		/* Identifier removed */
 #define ENOMSG		91		/* No message of desired type */   
 #define EILSEQ		92		/* Illegal byte sequence */
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 #define ENOATTR		93		/* Attribute not found */
-#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
+#endif
 
 #define EBADMSG		94		/* Bad message */
 #define EMULTIHOP	95		/* Reserved */
@@ -242,9 +244,14 @@
 
 #define ENOPOLICY	103		/* No such policy registered */
 
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-#define	ELAST		103		/* Must be equal largest errno */
-#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
+#if __DARWIN_C_LEVEL >= 200809L
+#define ENOTRECOVERABLE 104		/* State not recoverable */
+#define EOWNERDEAD      105		/* Previous owner died */
+#endif
+
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
+#define	ELAST		105		/* Must be equal largest errno */
+#endif
 
 /* pseudo-errors returned inside kernel to modify return to process */
 #define	ERESTART	(-1)		/* restart syscall */

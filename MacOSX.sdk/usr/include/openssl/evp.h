@@ -59,6 +59,8 @@
 #ifndef HEADER_ENVELOPE_H
 #define HEADER_ENVELOPE_H
 
+#include <AvailabilityMacros.h>
+
 #ifdef OPENSSL_ALGORITHM_DEFINES
 # include <openssl/opensslconf.h>
 #else
@@ -474,35 +476,35 @@ typedef int (EVP_PBE_KEYGEN)(EVP_CIPHER_CTX *ctx, const char *pass, int passlen,
 
 #define M_EVP_CIPHER_CTX_set_flags(ctx,flgs) ((ctx)->flags|=(flgs))
 
-int EVP_MD_type(const EVP_MD *md);
+int EVP_MD_type(const EVP_MD *md) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #define EVP_MD_nid(e)			EVP_MD_type(e)
 #define EVP_MD_name(e)			OBJ_nid2sn(EVP_MD_nid(e))
-int EVP_MD_pkey_type(const EVP_MD *md);	
-int EVP_MD_size(const EVP_MD *md);
-int EVP_MD_block_size(const EVP_MD *md);
+int EVP_MD_pkey_type(const EVP_MD *md) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;	
+int EVP_MD_size(const EVP_MD *md) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_MD_block_size(const EVP_MD *md) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-const EVP_MD * EVP_MD_CTX_md(const EVP_MD_CTX *ctx);
+const EVP_MD * EVP_MD_CTX_md(const EVP_MD_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #define EVP_MD_CTX_size(e)		EVP_MD_size(EVP_MD_CTX_md(e))
 #define EVP_MD_CTX_block_size(e)	EVP_MD_block_size(EVP_MD_CTX_md(e))
 #define EVP_MD_CTX_type(e)		EVP_MD_type(EVP_MD_CTX_md(e))
 
-int EVP_CIPHER_nid(const EVP_CIPHER *cipher);
+int EVP_CIPHER_nid(const EVP_CIPHER *cipher) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #define EVP_CIPHER_name(e)		OBJ_nid2sn(EVP_CIPHER_nid(e))
-int EVP_CIPHER_block_size(const EVP_CIPHER *cipher);
-int EVP_CIPHER_key_length(const EVP_CIPHER *cipher);
-int EVP_CIPHER_iv_length(const EVP_CIPHER *cipher);
-unsigned long EVP_CIPHER_flags(const EVP_CIPHER *cipher);
+int EVP_CIPHER_block_size(const EVP_CIPHER *cipher) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_CIPHER_key_length(const EVP_CIPHER *cipher) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_CIPHER_iv_length(const EVP_CIPHER *cipher) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned long EVP_CIPHER_flags(const EVP_CIPHER *cipher) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #define EVP_CIPHER_mode(e)		(EVP_CIPHER_flags(e) & EVP_CIPH_MODE)
 
-const EVP_CIPHER * EVP_CIPHER_CTX_cipher(const EVP_CIPHER_CTX *ctx);
-int EVP_CIPHER_CTX_nid(const EVP_CIPHER_CTX *ctx);
-int EVP_CIPHER_CTX_block_size(const EVP_CIPHER_CTX *ctx);
-int EVP_CIPHER_CTX_key_length(const EVP_CIPHER_CTX *ctx);
-int EVP_CIPHER_CTX_iv_length(const EVP_CIPHER_CTX *ctx);
-void * EVP_CIPHER_CTX_get_app_data(const EVP_CIPHER_CTX *ctx);
-void EVP_CIPHER_CTX_set_app_data(EVP_CIPHER_CTX *ctx, void *data);
+const EVP_CIPHER * EVP_CIPHER_CTX_cipher(const EVP_CIPHER_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_CIPHER_CTX_nid(const EVP_CIPHER_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_CIPHER_CTX_block_size(const EVP_CIPHER_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_CIPHER_CTX_key_length(const EVP_CIPHER_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_CIPHER_CTX_iv_length(const EVP_CIPHER_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void * EVP_CIPHER_CTX_get_app_data(const EVP_CIPHER_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void EVP_CIPHER_CTX_set_app_data(EVP_CIPHER_CTX *ctx, void *data) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #define EVP_CIPHER_CTX_type(c)         EVP_CIPHER_type(EVP_CIPHER_CTX_cipher(c))
-unsigned long EVP_CIPHER_CTX_flags(const EVP_CIPHER_CTX *ctx);
+unsigned long EVP_CIPHER_CTX_flags(const EVP_CIPHER_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #define EVP_CIPHER_CTX_mode(e)		(EVP_CIPHER_CTX_flags(e) & EVP_CIPH_MODE)
 
 #define EVP_ENCODE_LENGTH(l)	(((l+2)/3*4)+(l/48+1)*2+80)
@@ -518,7 +520,7 @@ unsigned long EVP_CIPHER_CTX_flags(const EVP_CIPHER_CTX *ctx);
 #define EVP_SealUpdate(a,b,c,d,e)	EVP_EncryptUpdate(a,b,c,d,e)	
 
 #ifdef CONST_STRICT
-void BIO_set_md(BIO *,const EVP_MD *md);
+void BIO_set_md(BIO *,const EVP_MD *md) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #else
 # define BIO_set_md(b,md)		BIO_ctrl(b,BIO_C_SET_MD,0,(char *)md)
 #endif
@@ -531,7 +533,7 @@ void BIO_set_md(BIO *,const EVP_MD *md);
 int EVP_Cipher(EVP_CIPHER_CTX *c,
 		unsigned char *out,
 		const unsigned char *in,
-		unsigned int inl);
+		unsigned int inl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #define EVP_add_cipher_alias(n,alias) \
 	OBJ_NAME_add((alias),OBJ_NAME_TYPE_CIPHER_METH|OBJ_NAME_ALIAS,(n))
@@ -542,185 +544,185 @@ int EVP_Cipher(EVP_CIPHER_CTX *c,
 #define EVP_delete_digest_alias(alias) \
 	OBJ_NAME_remove(alias,OBJ_NAME_TYPE_MD_METH|OBJ_NAME_ALIAS);
 
-void	EVP_MD_CTX_init(EVP_MD_CTX *ctx);
-int	EVP_MD_CTX_cleanup(EVP_MD_CTX *ctx);
-EVP_MD_CTX *EVP_MD_CTX_create(void);
-void	EVP_MD_CTX_destroy(EVP_MD_CTX *ctx);
-int     EVP_MD_CTX_copy_ex(EVP_MD_CTX *out,const EVP_MD_CTX *in);  
-void	EVP_MD_CTX_set_flags(EVP_MD_CTX *ctx, int flags);
-void	EVP_MD_CTX_clear_flags(EVP_MD_CTX *ctx, int flags);
-int 	EVP_MD_CTX_test_flags(const EVP_MD_CTX *ctx,int flags);
-int	EVP_DigestInit_ex(EVP_MD_CTX *ctx, const EVP_MD *type, ENGINE *impl);
+void	EVP_MD_CTX_init(EVP_MD_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_MD_CTX_cleanup(EVP_MD_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+EVP_MD_CTX *EVP_MD_CTX_create(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	EVP_MD_CTX_destroy(EVP_MD_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int     EVP_MD_CTX_copy_ex(EVP_MD_CTX *out,const EVP_MD_CTX *in) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;  
+void	EVP_MD_CTX_set_flags(EVP_MD_CTX *ctx, int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	EVP_MD_CTX_clear_flags(EVP_MD_CTX *ctx, int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int 	EVP_MD_CTX_test_flags(const EVP_MD_CTX *ctx,int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_DigestInit_ex(EVP_MD_CTX *ctx, const EVP_MD *type, ENGINE *impl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	EVP_DigestUpdate(EVP_MD_CTX *ctx,const void *d,
-			 size_t cnt);
-int	EVP_DigestFinal_ex(EVP_MD_CTX *ctx,unsigned char *md,unsigned int *s);
+			 size_t cnt) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_DigestFinal_ex(EVP_MD_CTX *ctx,unsigned char *md,unsigned int *s) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	EVP_Digest(const void *data, size_t count,
-		unsigned char *md, unsigned int *size, const EVP_MD *type, ENGINE *impl);
+		unsigned char *md, unsigned int *size, const EVP_MD *type, ENGINE *impl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int     EVP_MD_CTX_copy(EVP_MD_CTX *out,const EVP_MD_CTX *in);  
-int	EVP_DigestInit(EVP_MD_CTX *ctx, const EVP_MD *type);
-int	EVP_DigestFinal(EVP_MD_CTX *ctx,unsigned char *md,unsigned int *s);
+int     EVP_MD_CTX_copy(EVP_MD_CTX *out,const EVP_MD_CTX *in) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;  
+int	EVP_DigestInit(EVP_MD_CTX *ctx, const EVP_MD *type) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_DigestFinal(EVP_MD_CTX *ctx,unsigned char *md,unsigned int *s) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int	EVP_read_pw_string(char *buf,int length,const char *prompt,int verify);
-void	EVP_set_pw_prompt(const char *prompt);
-char *	EVP_get_pw_prompt(void);
+int	EVP_read_pw_string(char *buf,int length,const char *prompt,int verify) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	EVP_set_pw_prompt(const char *prompt) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+char *	EVP_get_pw_prompt(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int	EVP_BytesToKey(const EVP_CIPHER *type,const EVP_MD *md,
 		const unsigned char *salt, const unsigned char *data,
-		int datal, int count, unsigned char *key,unsigned char *iv);
+		int datal, int count, unsigned char *key,unsigned char *iv) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-void	EVP_CIPHER_CTX_set_flags(EVP_CIPHER_CTX *ctx, int flags);
-void	EVP_CIPHER_CTX_clear_flags(EVP_CIPHER_CTX *ctx, int flags);
-int 	EVP_CIPHER_CTX_test_flags(const EVP_CIPHER_CTX *ctx,int flags);
+void	EVP_CIPHER_CTX_set_flags(EVP_CIPHER_CTX *ctx, int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	EVP_CIPHER_CTX_clear_flags(EVP_CIPHER_CTX *ctx, int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int 	EVP_CIPHER_CTX_test_flags(const EVP_CIPHER_CTX *ctx,int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int	EVP_EncryptInit(EVP_CIPHER_CTX *ctx,const EVP_CIPHER *cipher,
-		const unsigned char *key, const unsigned char *iv);
+		const unsigned char *key, const unsigned char *iv) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	EVP_EncryptInit_ex(EVP_CIPHER_CTX *ctx,const EVP_CIPHER *cipher, ENGINE *impl,
-		const unsigned char *key, const unsigned char *iv);
+		const unsigned char *key, const unsigned char *iv) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	EVP_EncryptUpdate(EVP_CIPHER_CTX *ctx, unsigned char *out,
-		int *outl, const unsigned char *in, int inl);
-int	EVP_EncryptFinal_ex(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl);
-int	EVP_EncryptFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl);
+		int *outl, const unsigned char *in, int inl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_EncryptFinal_ex(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_EncryptFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int	EVP_DecryptInit(EVP_CIPHER_CTX *ctx,const EVP_CIPHER *cipher,
-		const unsigned char *key, const unsigned char *iv);
+		const unsigned char *key, const unsigned char *iv) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	EVP_DecryptInit_ex(EVP_CIPHER_CTX *ctx,const EVP_CIPHER *cipher, ENGINE *impl,
-		const unsigned char *key, const unsigned char *iv);
+		const unsigned char *key, const unsigned char *iv) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	EVP_DecryptUpdate(EVP_CIPHER_CTX *ctx, unsigned char *out,
-		int *outl, const unsigned char *in, int inl);
-int	EVP_DecryptFinal(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
-int	EVP_DecryptFinal_ex(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
+		int *outl, const unsigned char *in, int inl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_DecryptFinal(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_DecryptFinal_ex(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int	EVP_CipherInit(EVP_CIPHER_CTX *ctx,const EVP_CIPHER *cipher,
 		       const unsigned char *key,const unsigned char *iv,
-		       int enc);
+		       int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	EVP_CipherInit_ex(EVP_CIPHER_CTX *ctx,const EVP_CIPHER *cipher, ENGINE *impl,
 		       const unsigned char *key,const unsigned char *iv,
-		       int enc);
+		       int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	EVP_CipherUpdate(EVP_CIPHER_CTX *ctx, unsigned char *out,
-		int *outl, const unsigned char *in, int inl);
-int	EVP_CipherFinal(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
-int	EVP_CipherFinal_ex(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
+		int *outl, const unsigned char *in, int inl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_CipherFinal(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_CipherFinal_ex(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int	EVP_SignFinal(EVP_MD_CTX *ctx,unsigned char *md,unsigned int *s,
-		EVP_PKEY *pkey);
+		EVP_PKEY *pkey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int	EVP_VerifyFinal(EVP_MD_CTX *ctx,const unsigned char *sigbuf,
-		unsigned int siglen,EVP_PKEY *pkey);
+		unsigned int siglen,EVP_PKEY *pkey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int	EVP_OpenInit(EVP_CIPHER_CTX *ctx,const EVP_CIPHER *type,
 		const unsigned char *ek, int ekl, const unsigned char *iv,
-		EVP_PKEY *priv);
-int	EVP_OpenFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl);
+		EVP_PKEY *priv) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_OpenFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int	EVP_SealInit(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *type,
 		 unsigned char **ek, int *ekl, unsigned char *iv,
-		EVP_PKEY **pubk, int npubk);
-int	EVP_SealFinal(EVP_CIPHER_CTX *ctx,unsigned char *out,int *outl);
+		EVP_PKEY **pubk, int npubk) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_SealFinal(EVP_CIPHER_CTX *ctx,unsigned char *out,int *outl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-void	EVP_EncodeInit(EVP_ENCODE_CTX *ctx);
+void	EVP_EncodeInit(EVP_ENCODE_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void	EVP_EncodeUpdate(EVP_ENCODE_CTX *ctx,unsigned char *out,int *outl,
-		const unsigned char *in,int inl);
-void	EVP_EncodeFinal(EVP_ENCODE_CTX *ctx,unsigned char *out,int *outl);
-int	EVP_EncodeBlock(unsigned char *t, const unsigned char *f, int n);
+		const unsigned char *in,int inl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	EVP_EncodeFinal(EVP_ENCODE_CTX *ctx,unsigned char *out,int *outl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_EncodeBlock(unsigned char *t, const unsigned char *f, int n) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-void	EVP_DecodeInit(EVP_ENCODE_CTX *ctx);
+void	EVP_DecodeInit(EVP_ENCODE_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	EVP_DecodeUpdate(EVP_ENCODE_CTX *ctx,unsigned char *out,int *outl,
-		const unsigned char *in, int inl);
+		const unsigned char *in, int inl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	EVP_DecodeFinal(EVP_ENCODE_CTX *ctx, unsigned
-		char *out, int *outl);
-int	EVP_DecodeBlock(unsigned char *t, const unsigned char *f, int n);
+		char *out, int *outl) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	EVP_DecodeBlock(unsigned char *t, const unsigned char *f, int n) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-void EVP_CIPHER_CTX_init(EVP_CIPHER_CTX *a);
-int EVP_CIPHER_CTX_cleanup(EVP_CIPHER_CTX *a);
-EVP_CIPHER_CTX *EVP_CIPHER_CTX_new(void);
-void EVP_CIPHER_CTX_free(EVP_CIPHER_CTX *a);
-int EVP_CIPHER_CTX_set_key_length(EVP_CIPHER_CTX *x, int keylen);
-int EVP_CIPHER_CTX_set_padding(EVP_CIPHER_CTX *c, int pad);
-int EVP_CIPHER_CTX_ctrl(EVP_CIPHER_CTX *ctx, int type, int arg, void *ptr);
-int EVP_CIPHER_CTX_rand_key(EVP_CIPHER_CTX *ctx, unsigned char *key);
+void EVP_CIPHER_CTX_init(EVP_CIPHER_CTX *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_CIPHER_CTX_cleanup(EVP_CIPHER_CTX *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+EVP_CIPHER_CTX *EVP_CIPHER_CTX_new(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void EVP_CIPHER_CTX_free(EVP_CIPHER_CTX *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_CIPHER_CTX_set_key_length(EVP_CIPHER_CTX *x, int keylen) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_CIPHER_CTX_set_padding(EVP_CIPHER_CTX *c, int pad) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_CIPHER_CTX_ctrl(EVP_CIPHER_CTX *ctx, int type, int arg, void *ptr) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_CIPHER_CTX_rand_key(EVP_CIPHER_CTX *ctx, unsigned char *key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifndef OPENSSL_NO_BIO
-BIO_METHOD *BIO_f_md(void);
-BIO_METHOD *BIO_f_base64(void);
-BIO_METHOD *BIO_f_cipher(void);
-BIO_METHOD *BIO_f_reliable(void);
+BIO_METHOD *BIO_f_md(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO_METHOD *BIO_f_base64(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO_METHOD *BIO_f_cipher(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO_METHOD *BIO_f_reliable(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void BIO_set_cipher(BIO *b,const EVP_CIPHER *c,const unsigned char *k,
-		const unsigned char *i, int enc);
+		const unsigned char *i, int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
-const EVP_MD *EVP_md_null(void);
+const EVP_MD *EVP_md_null(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifndef OPENSSL_NO_MD2
-const EVP_MD *EVP_md2(void);
+const EVP_MD *EVP_md2(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_MD4
-const EVP_MD *EVP_md4(void);
+const EVP_MD *EVP_md4(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_MD5
-const EVP_MD *EVP_md5(void);
+const EVP_MD *EVP_md5(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_SHA
-const EVP_MD *EVP_sha(void);
-const EVP_MD *EVP_sha1(void);
-const EVP_MD *EVP_dss(void);
-const EVP_MD *EVP_dss1(void);
-const EVP_MD *EVP_ecdsa(void);
+const EVP_MD *EVP_sha(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_MD *EVP_sha1(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_MD *EVP_dss(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_MD *EVP_dss1(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_MD *EVP_ecdsa(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_SHA256
-const EVP_MD *EVP_sha224(void);
-const EVP_MD *EVP_sha256(void);
+const EVP_MD *EVP_sha224(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_MD *EVP_sha256(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_SHA512
-const EVP_MD *EVP_sha384(void);
-const EVP_MD *EVP_sha512(void);
+const EVP_MD *EVP_sha384(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_MD *EVP_sha512(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_MDC2
-const EVP_MD *EVP_mdc2(void);
+const EVP_MD *EVP_mdc2(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_RIPEMD
-const EVP_MD *EVP_ripemd160(void);
+const EVP_MD *EVP_ripemd160(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
-const EVP_CIPHER *EVP_enc_null(void);		/* does nothing :-) */
+const EVP_CIPHER *EVP_enc_null(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;		/* does nothing :-) */
 #ifndef OPENSSL_NO_DES
-const EVP_CIPHER *EVP_des_ecb(void);
-const EVP_CIPHER *EVP_des_ede(void);
-const EVP_CIPHER *EVP_des_ede3(void);
-const EVP_CIPHER *EVP_des_ede_ecb(void);
-const EVP_CIPHER *EVP_des_ede3_ecb(void);
-const EVP_CIPHER *EVP_des_cfb64(void);
+const EVP_CIPHER *EVP_des_ecb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_ede(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_ede3(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_ede_ecb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_ede3_ecb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_cfb64(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 # define EVP_des_cfb EVP_des_cfb64
-const EVP_CIPHER *EVP_des_cfb1(void);
-const EVP_CIPHER *EVP_des_cfb8(void);
-const EVP_CIPHER *EVP_des_ede_cfb64(void);
+const EVP_CIPHER *EVP_des_cfb1(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_cfb8(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_ede_cfb64(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 # define EVP_des_ede_cfb EVP_des_ede_cfb64
 #if 0
-const EVP_CIPHER *EVP_des_ede_cfb1(void);
-const EVP_CIPHER *EVP_des_ede_cfb8(void);
+const EVP_CIPHER *EVP_des_ede_cfb1(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_ede_cfb8(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
-const EVP_CIPHER *EVP_des_ede3_cfb64(void);
+const EVP_CIPHER *EVP_des_ede3_cfb64(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 # define EVP_des_ede3_cfb EVP_des_ede3_cfb64
-const EVP_CIPHER *EVP_des_ede3_cfb1(void);
-const EVP_CIPHER *EVP_des_ede3_cfb8(void);
-const EVP_CIPHER *EVP_des_ofb(void);
-const EVP_CIPHER *EVP_des_ede_ofb(void);
-const EVP_CIPHER *EVP_des_ede3_ofb(void);
-const EVP_CIPHER *EVP_des_cbc(void);
-const EVP_CIPHER *EVP_des_ede_cbc(void);
-const EVP_CIPHER *EVP_des_ede3_cbc(void);
-const EVP_CIPHER *EVP_desx_cbc(void);
+const EVP_CIPHER *EVP_des_ede3_cfb1(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_ede3_cfb8(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_ofb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_ede_ofb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_ede3_ofb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_ede_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_des_ede3_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_desx_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* This should now be supported through the dev_crypto ENGINE. But also, why are
  * rc4 and md5 declarations made here inside a "NO_DES" precompiler branch? */
 #if 0
 # ifdef OPENSSL_OPENBSD_DEV_CRYPTO
-const EVP_CIPHER *EVP_dev_crypto_des_ede3_cbc(void);
+const EVP_CIPHER *EVP_dev_crypto_des_ede3_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 const EVP_CIPHER *EVP_dev_crypto_rc4(void);
-const EVP_MD *EVP_dev_crypto_md5(void);
+const EVP_MD *EVP_dev_crypto_md5(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 # endif
 #endif
 #endif
 #ifndef OPENSSL_NO_RC4
-const EVP_CIPHER *EVP_rc4(void);
-const EVP_CIPHER *EVP_rc4_40(void);
+const EVP_CIPHER *EVP_rc4(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_rc4_40(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_IDEA
 const EVP_CIPHER *EVP_idea_ecb(void);
@@ -730,63 +732,63 @@ const EVP_CIPHER *EVP_idea_ofb(void);
 const EVP_CIPHER *EVP_idea_cbc(void);
 #endif
 #ifndef OPENSSL_NO_RC2
-const EVP_CIPHER *EVP_rc2_ecb(void);
-const EVP_CIPHER *EVP_rc2_cbc(void);
-const EVP_CIPHER *EVP_rc2_40_cbc(void);
-const EVP_CIPHER *EVP_rc2_64_cbc(void);
-const EVP_CIPHER *EVP_rc2_cfb64(void);
+const EVP_CIPHER *EVP_rc2_ecb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_rc2_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_rc2_40_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_rc2_64_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_rc2_cfb64(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 # define EVP_rc2_cfb EVP_rc2_cfb64
-const EVP_CIPHER *EVP_rc2_ofb(void);
+const EVP_CIPHER *EVP_rc2_ofb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_BF
-const EVP_CIPHER *EVP_bf_ecb(void);
-const EVP_CIPHER *EVP_bf_cbc(void);
-const EVP_CIPHER *EVP_bf_cfb64(void);
+const EVP_CIPHER *EVP_bf_ecb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_bf_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_bf_cfb64(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 # define EVP_bf_cfb EVP_bf_cfb64
-const EVP_CIPHER *EVP_bf_ofb(void);
+const EVP_CIPHER *EVP_bf_ofb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_CAST
-const EVP_CIPHER *EVP_cast5_ecb(void);
-const EVP_CIPHER *EVP_cast5_cbc(void);
-const EVP_CIPHER *EVP_cast5_cfb64(void);
+const EVP_CIPHER *EVP_cast5_ecb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_cast5_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_cast5_cfb64(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 # define EVP_cast5_cfb EVP_cast5_cfb64
-const EVP_CIPHER *EVP_cast5_ofb(void);
+const EVP_CIPHER *EVP_cast5_ofb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_RC5
-const EVP_CIPHER *EVP_rc5_32_12_16_cbc(void);
-const EVP_CIPHER *EVP_rc5_32_12_16_ecb(void);
-const EVP_CIPHER *EVP_rc5_32_12_16_cfb64(void);
+const EVP_CIPHER *EVP_rc5_32_12_16_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_rc5_32_12_16_ecb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_rc5_32_12_16_cfb64(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 # define EVP_rc5_32_12_16_cfb EVP_rc5_32_12_16_cfb64
-const EVP_CIPHER *EVP_rc5_32_12_16_ofb(void);
+const EVP_CIPHER *EVP_rc5_32_12_16_ofb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_AES
-const EVP_CIPHER *EVP_aes_128_ecb(void);
-const EVP_CIPHER *EVP_aes_128_cbc(void);
-const EVP_CIPHER *EVP_aes_128_cfb1(void);
-const EVP_CIPHER *EVP_aes_128_cfb8(void);
-const EVP_CIPHER *EVP_aes_128_cfb128(void);
+const EVP_CIPHER *EVP_aes_128_ecb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_aes_128_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_aes_128_cfb1(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_aes_128_cfb8(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_aes_128_cfb128(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 # define EVP_aes_128_cfb EVP_aes_128_cfb128
-const EVP_CIPHER *EVP_aes_128_ofb(void);
+const EVP_CIPHER *EVP_aes_128_ofb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #if 0
 const EVP_CIPHER *EVP_aes_128_ctr(void);
 #endif
-const EVP_CIPHER *EVP_aes_192_ecb(void);
-const EVP_CIPHER *EVP_aes_192_cbc(void);
-const EVP_CIPHER *EVP_aes_192_cfb1(void);
-const EVP_CIPHER *EVP_aes_192_cfb8(void);
-const EVP_CIPHER *EVP_aes_192_cfb128(void);
+const EVP_CIPHER *EVP_aes_192_ecb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_aes_192_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_aes_192_cfb1(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_aes_192_cfb8(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_aes_192_cfb128(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 # define EVP_aes_192_cfb EVP_aes_192_cfb128
-const EVP_CIPHER *EVP_aes_192_ofb(void);
+const EVP_CIPHER *EVP_aes_192_ofb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #if 0
 const EVP_CIPHER *EVP_aes_192_ctr(void);
 #endif
-const EVP_CIPHER *EVP_aes_256_ecb(void);
-const EVP_CIPHER *EVP_aes_256_cbc(void);
-const EVP_CIPHER *EVP_aes_256_cfb1(void);
-const EVP_CIPHER *EVP_aes_256_cfb8(void);
-const EVP_CIPHER *EVP_aes_256_cfb128(void);
+const EVP_CIPHER *EVP_aes_256_ecb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_aes_256_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_aes_256_cfb1(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_aes_256_cfb8(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_aes_256_cfb128(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 # define EVP_aes_256_cfb EVP_aes_256_cfb128
-const EVP_CIPHER *EVP_aes_256_ofb(void);
+const EVP_CIPHER *EVP_aes_256_ofb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #if 0
 const EVP_CIPHER *EVP_aes_256_ctr(void);
 #endif
@@ -816,15 +818,15 @@ const EVP_CIPHER *EVP_camellia_256_ofb(void);
 #endif
 
 #ifndef OPENSSL_NO_SEED
-const EVP_CIPHER *EVP_seed_ecb(void);
-const EVP_CIPHER *EVP_seed_cbc(void);
-const EVP_CIPHER *EVP_seed_cfb128(void);
+const EVP_CIPHER *EVP_seed_ecb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_seed_cbc(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_CIPHER *EVP_seed_cfb128(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 # define EVP_seed_cfb EVP_seed_cfb128
-const EVP_CIPHER *EVP_seed_ofb(void);
+const EVP_CIPHER *EVP_seed_ofb(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
-void OPENSSL_add_all_algorithms_noconf(void);
-void OPENSSL_add_all_algorithms_conf(void);
+void OPENSSL_add_all_algorithms_noconf(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void OPENSSL_add_all_algorithms_conf(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifdef OPENSSL_LOAD_CONF
 #define OpenSSL_add_all_algorithms() \
@@ -834,99 +836,99 @@ void OPENSSL_add_all_algorithms_conf(void);
 		OPENSSL_add_all_algorithms_noconf()
 #endif
 
-void OpenSSL_add_all_ciphers(void);
-void OpenSSL_add_all_digests(void);
+void OpenSSL_add_all_ciphers(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void OpenSSL_add_all_digests(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #define SSLeay_add_all_algorithms() OpenSSL_add_all_algorithms()
 #define SSLeay_add_all_ciphers() OpenSSL_add_all_ciphers()
 #define SSLeay_add_all_digests() OpenSSL_add_all_digests()
 
-int EVP_add_cipher(const EVP_CIPHER *cipher);
-int EVP_add_digest(const EVP_MD *digest);
+int EVP_add_cipher(const EVP_CIPHER *cipher) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_add_digest(const EVP_MD *digest) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-const EVP_CIPHER *EVP_get_cipherbyname(const char *name);
-const EVP_MD *EVP_get_digestbyname(const char *name);
-void EVP_cleanup(void);
+const EVP_CIPHER *EVP_get_cipherbyname(const char *name) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const EVP_MD *EVP_get_digestbyname(const char *name) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void EVP_cleanup(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int		EVP_PKEY_decrypt(unsigned char *dec_key,
 			const unsigned char *enc_key,int enc_key_len,
-			EVP_PKEY *private_key);
+			EVP_PKEY *private_key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int		EVP_PKEY_encrypt(unsigned char *enc_key,
 			const unsigned char *key,int key_len,
-			EVP_PKEY *pub_key);
-int		EVP_PKEY_type(int type);
-int		EVP_PKEY_bits(EVP_PKEY *pkey);
-int		EVP_PKEY_size(EVP_PKEY *pkey);
-int 		EVP_PKEY_assign(EVP_PKEY *pkey,int type,char *key);
+			EVP_PKEY *pub_key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int		EVP_PKEY_type(int type) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int		EVP_PKEY_bits(EVP_PKEY *pkey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int		EVP_PKEY_size(EVP_PKEY *pkey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int 		EVP_PKEY_assign(EVP_PKEY *pkey,int type,char *key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifndef OPENSSL_NO_RSA
 struct rsa_st;
-int EVP_PKEY_set1_RSA(EVP_PKEY *pkey,struct rsa_st *key);
-struct rsa_st *EVP_PKEY_get1_RSA(EVP_PKEY *pkey);
+int EVP_PKEY_set1_RSA(EVP_PKEY *pkey,struct rsa_st *key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+struct rsa_st *EVP_PKEY_get1_RSA(EVP_PKEY *pkey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_DSA
 struct dsa_st;
-int EVP_PKEY_set1_DSA(EVP_PKEY *pkey,struct dsa_st *key);
-struct dsa_st *EVP_PKEY_get1_DSA(EVP_PKEY *pkey);
+int EVP_PKEY_set1_DSA(EVP_PKEY *pkey,struct dsa_st *key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+struct dsa_st *EVP_PKEY_get1_DSA(EVP_PKEY *pkey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_DH
 struct dh_st;
-int EVP_PKEY_set1_DH(EVP_PKEY *pkey,struct dh_st *key);
-struct dh_st *EVP_PKEY_get1_DH(EVP_PKEY *pkey);
+int EVP_PKEY_set1_DH(EVP_PKEY *pkey,struct dh_st *key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+struct dh_st *EVP_PKEY_get1_DH(EVP_PKEY *pkey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifndef OPENSSL_NO_EC
 struct ec_key_st;
-int EVP_PKEY_set1_EC_KEY(EVP_PKEY *pkey,struct ec_key_st *key);
-struct ec_key_st *EVP_PKEY_get1_EC_KEY(EVP_PKEY *pkey);
+int EVP_PKEY_set1_EC_KEY(EVP_PKEY *pkey,struct ec_key_st *key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+struct ec_key_st *EVP_PKEY_get1_EC_KEY(EVP_PKEY *pkey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
-EVP_PKEY *	EVP_PKEY_new(void);
-void		EVP_PKEY_free(EVP_PKEY *pkey);
+EVP_PKEY *	EVP_PKEY_new(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void		EVP_PKEY_free(EVP_PKEY *pkey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 EVP_PKEY *	d2i_PublicKey(int type,EVP_PKEY **a, const unsigned char **pp,
-			long length);
-int		i2d_PublicKey(EVP_PKEY *a, unsigned char **pp);
+			long length) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int		i2d_PublicKey(EVP_PKEY *a, unsigned char **pp) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 EVP_PKEY *	d2i_PrivateKey(int type,EVP_PKEY **a, const unsigned char **pp,
-			long length);
+			long length) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 EVP_PKEY *	d2i_AutoPrivateKey(EVP_PKEY **a, const unsigned char **pp,
-			long length);
-int		i2d_PrivateKey(EVP_PKEY *a, unsigned char **pp);
+			long length) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int		i2d_PrivateKey(EVP_PKEY *a, unsigned char **pp) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int EVP_PKEY_copy_parameters(EVP_PKEY *to, const EVP_PKEY *from);
-int EVP_PKEY_missing_parameters(const EVP_PKEY *pkey);
-int EVP_PKEY_save_parameters(EVP_PKEY *pkey,int mode);
-int EVP_PKEY_cmp_parameters(const EVP_PKEY *a, const EVP_PKEY *b);
+int EVP_PKEY_copy_parameters(EVP_PKEY *to, const EVP_PKEY *from) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_PKEY_missing_parameters(const EVP_PKEY *pkey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_PKEY_save_parameters(EVP_PKEY *pkey,int mode) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_PKEY_cmp_parameters(const EVP_PKEY *a, const EVP_PKEY *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int EVP_PKEY_cmp(const EVP_PKEY *a, const EVP_PKEY *b);
+int EVP_PKEY_cmp(const EVP_PKEY *a, const EVP_PKEY *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int EVP_CIPHER_type(const EVP_CIPHER *ctx);
+int EVP_CIPHER_type(const EVP_CIPHER *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* calls methods */
-int EVP_CIPHER_param_to_asn1(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
-int EVP_CIPHER_asn1_to_param(EVP_CIPHER_CTX *c, ASN1_TYPE *type);
+int EVP_CIPHER_param_to_asn1(EVP_CIPHER_CTX *c, ASN1_TYPE *type) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_CIPHER_asn1_to_param(EVP_CIPHER_CTX *c, ASN1_TYPE *type) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* These are used by EVP_CIPHER methods */
-int EVP_CIPHER_set_asn1_iv(EVP_CIPHER_CTX *c,ASN1_TYPE *type);
-int EVP_CIPHER_get_asn1_iv(EVP_CIPHER_CTX *c,ASN1_TYPE *type);
+int EVP_CIPHER_set_asn1_iv(EVP_CIPHER_CTX *c,ASN1_TYPE *type) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int EVP_CIPHER_get_asn1_iv(EVP_CIPHER_CTX *c,ASN1_TYPE *type) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* PKCS5 password based encryption */
 int PKCS5_PBE_keyivgen(EVP_CIPHER_CTX *ctx, const char *pass, int passlen,
 			 ASN1_TYPE *param, const EVP_CIPHER *cipher, const EVP_MD *md,
-			 int en_de);
+			 int en_de) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int PKCS5_PBKDF2_HMAC_SHA1(const char *pass, int passlen,
 			   const unsigned char *salt, int saltlen, int iter,
-			   int keylen, unsigned char *out);
+			   int keylen, unsigned char *out) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int PKCS5_v2_PBE_keyivgen(EVP_CIPHER_CTX *ctx, const char *pass, int passlen,
 			 ASN1_TYPE *param, const EVP_CIPHER *cipher, const EVP_MD *md,
-			 int en_de);
+			 int en_de) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-void PKCS5_PBE_add(void);
+void PKCS5_PBE_add(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int EVP_PBE_CipherInit (ASN1_OBJECT *pbe_obj, const char *pass, int passlen,
-	     ASN1_TYPE *param, EVP_CIPHER_CTX *ctx, int en_de);
+	     ASN1_TYPE *param, EVP_CIPHER_CTX *ctx, int en_de) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int EVP_PBE_alg_add(int nid, const EVP_CIPHER *cipher, const EVP_MD *md,
-		    EVP_PBE_KEYGEN *keygen);
-void EVP_PBE_cleanup(void);
+		    EVP_PBE_KEYGEN *keygen) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void EVP_PBE_cleanup(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifdef OPENSSL_FIPS
 #ifndef OPENSSL_NO_ENGINE
@@ -934,23 +936,23 @@ void int_EVP_MD_set_engine_callbacks(
 	int (*eng_md_init)(ENGINE *impl),
 	int (*eng_md_fin)(ENGINE *impl),
 	int (*eng_md_evp)
-		(EVP_MD_CTX *ctx, const EVP_MD **ptype, ENGINE *impl));
-void int_EVP_MD_init_engine_callbacks(void);
+		(EVP_MD_CTX *ctx, const EVP_MD **ptype, ENGINE *impl)) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void int_EVP_MD_init_engine_callbacks(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void int_EVP_CIPHER_set_engine_callbacks(
 	int (*eng_ciph_fin)(ENGINE *impl),
 	int (*eng_ciph_evp)
-		(EVP_CIPHER_CTX *ctx, const EVP_CIPHER **pciph, ENGINE *impl));
-void int_EVP_CIPHER_init_engine_callbacks(void);
+		(EVP_CIPHER_CTX *ctx, const EVP_CIPHER **pciph, ENGINE *impl)) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void int_EVP_CIPHER_init_engine_callbacks(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #endif
 
-void EVP_add_alg_module(void);
+void EVP_add_alg_module(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* BEGIN ERROR CODES */
 /* The following lines are auto generated by the script mkerr.pl. Any changes
  * made after this point may be overwritten when the script is next run.
  */
-void ERR_load_EVP_strings(void);
+void ERR_load_EVP_strings(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Error codes for the EVP functions. */
 

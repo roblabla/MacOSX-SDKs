@@ -8,17 +8,23 @@
 /* Define if compiling with the ucd-snmp/loadave module files.  */
 #define USING_UCD_SNMP_LOADAVE_MODULE 1
  
-/* Define if compiling with the ucd-snmp/lmSensorsTables module files.  */
-#define USING_UCD_SNMP_LMSENSORSTABLES_MODULE 1
- 
 /* Define if compiling with the default_modules module files.  */
 #define USING_DEFAULT_MODULES_MODULE 1
  
-/* Define if compiling with the host/hr_system module files.  */
-#define USING_HOST_HR_SYSTEM_MODULE 1
- 
 /* Define if compiling with the host/hr_storage module files.  */
 #define USING_HOST_HR_STORAGE_MODULE 1
+ 
+/* Define if compiling with the host/hr_filesys module files.  */
+#define USING_HOST_HR_FILESYS_MODULE 1
+ 
+/* Define if compiling with the host/hrSWInstalledTable module files.  */
+#define USING_HOST_HRSWINSTALLEDTABLE_MODULE 1
+ 
+/* Define if compiling with the host/hrSWRunTable module files.  */
+#define USING_HOST_HRSWRUNTABLE_MODULE 1
+ 
+/* Define if compiling with the host/hr_system module files.  */
+#define USING_HOST_HR_SYSTEM_MODULE 1
  
 /* Define if compiling with the host/hr_device module files.  */
 #define USING_HOST_HR_DEVICE_MODULE 1
@@ -41,35 +47,8 @@
 /* Define if compiling with the host/hr_partition module files.  */
 #define USING_HOST_HR_PARTITION_MODULE 1
  
-/* Define if compiling with the host/hr_filesys module files.  */
-#define USING_HOST_HR_FILESYS_MODULE 1
- 
-/* Define if compiling with the host/hrSWInstalledTable module files.  */
-#define USING_HOST_HRSWINSTALLEDTABLE_MODULE 1
- 
-/* Define if compiling with the host/hrSWRunTable module files.  */
-#define USING_HOST_HRSWRUNTABLE_MODULE 1
- 
-/* Define if compiling with the host/hrSWRunPerfTable module files.  */
-#define USING_HOST_HRSWRUNPERFTABLE_MODULE 1
- 
-/* Define if compiling with the util_funcs module files.  */
-#define USING_UTIL_FUNCS_MODULE 1
- 
-/* Define if compiling with the ucd-snmp/data_access/sensors module files.  */
-#define USING_UCD_SNMP_DATA_ACCESS_SENSORS_MODULE 1
- 
-/* Define if compiling with the ucd-snmp/lmTempSensorsTable module files.  */
-#define USING_UCD_SNMP_LMTEMPSENSORSTABLE_MODULE 1
- 
-/* Define if compiling with the ucd-snmp/lmFanSensorsTable module files.  */
-#define USING_UCD_SNMP_LMFANSENSORSTABLE_MODULE 1
- 
-/* Define if compiling with the ucd-snmp/lmVoltSensorsTable module files.  */
-#define USING_UCD_SNMP_LMVOLTSENSORSTABLE_MODULE 1
- 
-/* Define if compiling with the ucd-snmp/lmMiscSensorsTable module files.  */
-#define USING_UCD_SNMP_LMMISCSENSORSTABLE_MODULE 1
+/* Define if compiling with the util_funcs/header_simple_table module files.  */
+#define USING_UTIL_FUNCS_HEADER_SIMPLE_TABLE_MODULE 1
  
 /* Define if compiling with the snmpv3mibs module files.  */
 #define USING_SNMPV3MIBS_MODULE 1
@@ -107,32 +86,38 @@
 /* Define if compiling with the hardware/memory module files.  */
 #define USING_HARDWARE_MEMORY_MODULE 1
  
-/* Define if compiling with the hardware/cpu module files.  */
-#define USING_HARDWARE_CPU_MODULE 1
- 
-/* Define if compiling with the mibII/ifTable module files.  */
-#define USING_MIBII_IFTABLE_MODULE 1
- 
 /* Define if compiling with the host/data_access/swinst module files.  */
 #define USING_HOST_DATA_ACCESS_SWINST_MODULE 1
  
 /* Define if compiling with the host/data_access/swrun module files.  */
 #define USING_HOST_DATA_ACCESS_SWRUN_MODULE 1
  
-/* Define if compiling with the ucd-snmp/data_access/sensors_darwin module files.  */
-#define USING_UCD_SNMP_DATA_ACCESS_SENSORS_DARWIN_MODULE 1
+/* Define if compiling with the host/hrSWRunPerfTable module files.  */
+#define USING_HOST_HRSWRUNPERFTABLE_MODULE 1
+ 
+/* Define if compiling with the hardware/cpu module files.  */
+#define USING_HARDWARE_CPU_MODULE 1
+ 
+/* Define if compiling with the mibII/ifTable module files.  */
+#define USING_MIBII_IFTABLE_MODULE 1
+ 
+/* Define if compiling with the util_funcs module files.  */
+#define USING_UTIL_FUNCS_MODULE 1
+ 
+/* Define if compiling with the snmpv3/snmpMPDStats_5_5 module files.  */
+#define USING_SNMPV3_SNMPMPDSTATS_5_5_MODULE 1
+ 
+/* Define if compiling with the snmpv3/usmStats_5_5 module files.  */
+#define USING_SNMPV3_USMSTATS_5_5_MODULE 1
  
 /* Define if compiling with the snmpv3/snmpEngine module files.  */
 #define USING_SNMPV3_SNMPENGINE_MODULE 1
  
-/* Define if compiling with the snmpv3/snmpMPDStats module files.  */
-#define USING_SNMPV3_SNMPMPDSTATS_MODULE 1
- 
-/* Define if compiling with the snmpv3/usmStats module files.  */
-#define USING_SNMPV3_USMSTATS_MODULE 1
- 
 /* Define if compiling with the snmpv3/usmUser module files.  */
 #define USING_SNMPV3_USMUSER_MODULE 1
+ 
+/* Define if compiling with the mibII/snmp_mib_5_5 module files.  */
+#define USING_MIBII_SNMP_MIB_5_5_MODULE 1
  
 /* Define if compiling with the mibII/system_mib module files.  */
 #define USING_MIBII_SYSTEM_MIB_MODULE 1
@@ -145,9 +130,6 @@
  
 /* Define if compiling with the mibII/ip module files.  */
 #define USING_MIBII_IP_MODULE 1
- 
-/* Define if compiling with the mibII/snmp_mib module files.  */
-#define USING_MIBII_SNMP_MIB_MODULE 1
  
 /* Define if compiling with the mibII/tcp module files.  */
 #define USING_MIBII_TCP_MODULE 1
@@ -167,6 +149,9 @@
 /* Define if compiling with the if-mib module files.  */
 #define USING_IF_MIB_MODULE 1
  
+/* Define if compiling with the ucd-snmp/disk module files.  */
+#define USING_UCD_SNMP_DISK_MODULE 1
+ 
 /* Define if compiling with the ucd-snmp/proc module files.  */
 #define USING_UCD_SNMP_PROC_MODULE 1
  
@@ -178,9 +163,6 @@
  
 /* Define if compiling with the ucd-snmp/pass_persist module files.  */
 #define USING_UCD_SNMP_PASS_PERSIST_MODULE 1
- 
-/* Define if compiling with the ucd-snmp/disk module files.  */
-#define USING_UCD_SNMP_DISK_MODULE 1
  
 /* Define if compiling with the agent/extend module files.  */
 #define USING_AGENT_EXTEND_MODULE 1
@@ -218,6 +200,9 @@
 /* Define if compiling with the notification-log-mib/notification_log module files.  */
 #define USING_NOTIFICATION_LOG_MIB_NOTIFICATION_LOG_MODULE 1
  
+/* Define if compiling with the target/target_counters_5_5 module files.  */
+#define USING_TARGET_TARGET_COUNTERS_5_5_MODULE 1
+ 
 /* Define if compiling with the target/snmpTargetAddrEntry module files.  */
 #define USING_TARGET_SNMPTARGETADDRENTRY_MODULE 1
  
@@ -226,9 +211,6 @@
  
 /* Define if compiling with the target/target module files.  */
 #define USING_TARGET_TARGET_MODULE 1
- 
-/* Define if compiling with the target/target_counters module files.  */
-#define USING_TARGET_TARGET_COUNTERS_MODULE 1
  
 /* Define if compiling with the agent/nsTransactionTable module files.  */
 #define USING_AGENT_NSTRANSACTIONTABLE_MODULE 1
@@ -311,8 +293,14 @@
 /* Define if compiling with the hardware/memory/hw_mem module files.  */
 #define USING_HARDWARE_MEMORY_HW_MEM_MODULE 1
  
-/* Define if compiling with the hardware/memory/memory_darwin module files.  */
-#define USING_HARDWARE_MEMORY_MEMORY_DARWIN_MODULE 1
+/* Define if compiling with the hardware/memory/memory_null module files.  */
+#define USING_HARDWARE_MEMORY_MEMORY_NULL_MODULE 1
+ 
+/* Define if compiling with the host/data_access/swinst_darwin module files.  */
+#define USING_HOST_DATA_ACCESS_SWINST_DARWIN_MODULE 1
+ 
+/* Define if compiling with the host/data_access/swrun_darwin module files.  */
+#define USING_HOST_DATA_ACCESS_SWRUN_DARWIN_MODULE 1
  
 /* Define if compiling with the hardware/cpu/cpu module files.  */
 #define USING_HARDWARE_CPU_CPU_MODULE 1
@@ -323,11 +311,17 @@
 /* Define if compiling with the if-mib/ifTable module files.  */
 #define USING_IF_MIB_IFTABLE_MODULE 1
  
-/* Define if compiling with the host/data_access/swinst_darwin module files.  */
-#define USING_HOST_DATA_ACCESS_SWINST_DARWIN_MODULE 1
+/* Define if compiling with the util_funcs/Exit module files.  */
+#define USING_UTIL_FUNCS_EXIT_MODULE 1
  
-/* Define if compiling with the host/data_access/swrun_darwin module files.  */
-#define USING_HOST_DATA_ACCESS_SWRUN_DARWIN_MODULE 1
+/* Define if compiling with the util_funcs/header_generic module files.  */
+#define USING_UTIL_FUNCS_HEADER_GENERIC_MODULE 1
+ 
+/* Define if compiling with the util_funcs/restart module files.  */
+#define USING_UTIL_FUNCS_RESTART_MODULE 1
+ 
+/* Define if compiling with the mibII/updates module files.  */
+#define USING_MIBII_UPDATES_MODULE 1
  
 /* Define if compiling with the mibII/ipAddr module files.  */
 #define USING_MIBII_IPADDR_MODULE 1

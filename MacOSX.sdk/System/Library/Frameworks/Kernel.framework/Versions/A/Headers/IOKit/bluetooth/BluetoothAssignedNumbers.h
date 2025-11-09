@@ -1,6 +1,6 @@
 /*
 	File:		BluetoothAssignedNumbers.h
-	Copyright:	(c) 2002-2008 by Apple Computer, Inc. All rights reserved.
+	Copyright:	(c) 2010 by Apple Computer, Inc. All rights reserved.
 */
 
 #pragma once
@@ -8,8 +8,6 @@
 #ifdef	__cplusplus
 	extern "C" {
 #endif
-
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
 
 #pragma mark -
 #pragma mark === General ===
@@ -96,11 +94,20 @@ enum BluetoothCompanyIdentifers
 	kBluetoothCompanyIdentiferStaccatoCommunications							=	77,
 	kBluetoothCompanyIdentiferAvagoTechnologies									=	78,
 	kBluetoothCompanyIdentiferAPT												=	79,
+	kBluetoothCompanyIdentiferSiRFTechnology									=	80,
+	kBluetoothCompanyIdentiferTZeroTechnologies									=	81,
+	kBluetoothCompanyIdentiferJandM												=	82,
+	kBluetoothCompanyIdentiferFree2Move											=	83,
+	kBluetoothCompanyIdentifer3DiJoy											=	84,
+	kBluetoothCompanyIdentiferPlantronics										=	85,
+	kBluetoothCompanyIdentiferSonyEricssonMobileCommunications					=	86,
+	kBluetoothCompanyIdentiferHarmonInternational								=	87,
+	kBluetoothCompanyIdentiferVisio												=	88,
+	kBluetoothCompanyIdentiferNordicSemiconductor								=	89,
+	kBluetoothCompanyIdentiferEMMicroElectronicMarin							=	90,
 
 	kBluetoothCompanyIdentiferInteropIdentifier									=	65535
 };
-
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
 
 #pragma mark -
 #pragma mark === Baseband ===
@@ -146,6 +153,9 @@ enum
 	kBluetoothDeviceClassMajorAudio							= 0x04, 	// [00100] Headset, Speaker, Stereo, etc...
 	kBluetoothDeviceClassMajorPeripheral					= 0x05, 	// [00101] Mouse, Joystick, Keyboards, etc...
     kBluetoothDeviceClassMajorImaging						= 0x06,		// [00110] Printing, scanner, camera, display, etc...
+	kBluetoothDeviceClassMajorWearable						= 0x07,		// [00111] Wearable
+	kBluetoothDeviceClassMajoToy							= 0x08,		// [01000] Toy
+	kBluetoothDeviceClassMajoHealth							= 0x09,		// [01001] Health devices
 	kBluetoothDeviceClassMajorUnclassified					= 0x1F, 	// [11111] Specific device code not assigned
 	
 	// Range 0x06 to 0x1E Reserved for future use.
@@ -195,11 +205,11 @@ enum
 	/// LAN Access Point Major Class
 	///
 	
-	// $$$ TO DO: LAN Access Point minor classes are broken into bits 5-7 for utilization and bits 2-4 for class.
+	// See the Bluetooth specification for LAN Access Point minor classes, which are broken into bits 5-7 for utilization and bits 2-4 for class.
 	
     
 	///
-	/// Audio Major Class
+	/// Audio Minor Class
 	///
 	
 	kBluetoothDeviceClassMinorAudioUnclassified					= 0x00, 	// [000000] Specific device code not assigned
@@ -227,7 +237,7 @@ enum
 	
     
 	///
-	/// Peripheral Major Class
+	/// Peripheral Minor Class
 	///
     
     // Peripheral1 subclass is bits 7 & 6
@@ -245,6 +255,9 @@ enum
     kBluetoothDeviceClassMinorPeripheral2SensingDevice		= 0x04,		// [XX0100] Sensing device
     kBluetoothDeviceClassMinorPeripheral2DigitizerTablet	= 0x05,		// [XX0101] Digitizer Tablet	
     kBluetoothDeviceClassMinorPeripheral2CardReader			= 0x06,		// [XX0110] Card Reader
+    kBluetoothDeviceClassMinorPeripheral2DigitalPen         = 0x07,     // [XX0111] Digital Pen
+    kBluetoothDeviceClassMinorPeripheral2HandheldScanner    = 0x08,     // [XX1000] Handheld scanner for bar-codes, RFID, etc.
+    kBluetoothDeviceClassMinorPeripheral2GesturalInputDevice = 0x09,    // [XX1001] Handheld gestural input device (e.g., "wand" form factor)
     
 	kBluetoothDeviceClassMinorPeripheral2AnyPointing		= 'poin',	// Anything under MinorPeripheral1Pointing
 	
@@ -252,7 +265,7 @@ enum
 	
     
 	///
-	/// Imaging Major Class
+	/// Imaging Minor Class
 	///
     
     // Imaging1 subclass is bits 7 - 4
@@ -268,6 +281,38 @@ enum
     
     // Range 0x01 - 0x03 reserved for future use
     
+	///
+	/// Wearable Minor Class
+	///
+        
+    kBluetoothDeviceClassMinorWearableWristWatch			= 0x01,		// [000001] Watch
+    kBluetoothDeviceClassMinorWearablePager					= 0x02,		// [000010] Pager
+    kBluetoothDeviceClassMinorWearableJacket				= 0x03,		// [000011] Jacket
+    kBluetoothDeviceClassMinorWearableHelmet				= 0x04,		// [000100] Helmet
+    kBluetoothDeviceClassMinorWearableGlasses				= 0x05,		// [000101] Glasses
+    
+	///
+	/// Toy Minor Class
+	///
+        
+    kBluetoothDeviceClassMinorToyRobot						= 0x01,		// [000001] Robot
+    kBluetoothDeviceClassMinorToyVehicle					= 0x02,		// [000010] Vehicle
+    kBluetoothDeviceClassMinorToyDollActionFigure			= 0x03,		// [000011] Doll / Action Figure
+    kBluetoothDeviceClassMinorToyController					= 0x04,		// [000100] Controller
+    kBluetoothDeviceClassMinorToyGame						= 0x05,		// [000101] Game
+    
+	///
+	/// Health Minor Class
+	///
+        
+    kBluetoothDeviceClassMinorHealthUndefined				= 0x00,		// [000000] Undefined
+    kBluetoothDeviceClassMinorHealthBloodPressureMonitor	= 0x01,		// [000001] Blood Pressure Monitor
+    kBluetoothDeviceClassMinorHealthThermometer				= 0x02,		// [000010] Thermometer
+    kBluetoothDeviceClassMinorHealthScale					= 0x03,		// [000011] Scale
+    kBluetoothDeviceClassMinorHealthGlucoseMeter			= 0x04,		// [000100] Glucose Meter
+    kBluetoothDeviceClassMinorHealthPulseOximeter			= 0x05,		// [000101] Pulse Oximeter
+    kBluetoothDeviceClassMinorHealthHeartRateMonitor		= 0x06,		// [000111] Heart Rate Monitor
+    kBluetoothDeviceClassMinorHealthDataDisplay				= 0x07,		// [001000] Display
     
 	///
 	///	Misc
@@ -449,8 +494,6 @@ enum SDPAttributeIdentifierCodes
     // PAN
     kBluetoothSDPAttributeIdentifierIPSubnet							= 0x0200,
 
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_1_1
-
     // HID																			Required		Type		Section		Notes
     kBluetoothSDPAttributeIdentifierHIDReleaseNumber					= 0x0200,	// O			uint16		7.11.1
     kBluetoothSDPAttributeIdentifierHIDParserVersion					= 0x0201,	// M			uint16		-
@@ -467,8 +510,6 @@ enum SDPAttributeIdentifierCodes
     kBluetoothSDPAttributeIdentifierHIDSupervisionTimeout				= 0x020C,	// O			uint16		7.11.12		Default to 5 seconds or longer if not defined
     kBluetoothSDPAttributeIdentifierHIDNormallyConnectable				= 0x020D,	// O			bool		7.11.13
     kBluetoothSDPAttributeIdentifierHIDBootDevice						= 0x020E,	// M			bool		7.11.11		Only defined for mice and keyboards as of HID 1.0
-
-#endif
     
 	kBluetoothSDPAttributeIdentifierServiceVersion						= 0x0300,
 	kBluetoothSDPAttributeIdentifierExternalNetwork						= 0x0301,	// Cordless telephony
@@ -499,17 +540,16 @@ enum SDPAttributeIdentifierCodes
 
 enum SDPAttributeDeviceIdentificationRecord
 {
-	/* Values taken from the Bluetooth Device Identification specification, 1.0 draft, 1.16.2003 */
-	
-	kBluetoothSDPAttributeDeviceIdentifierServiceDescription			= 0x0001,	/* String */
-	kBluetoothSDPAttributeDeviceIdentifierDocumentationURL				= 0x000A,	/* URL */
-	kBluetoothSDPAttributeDeviceIdentifierClientExecutableURL			= 0x000B,	/* URL */
-	kBluetoothSDPAttributeDeviceIdentifierSpecificationID				= 0x0200,	/* 2 byte unsigned integer */
-	kBluetoothSDPAttributeDeviceIdentifierVendorID						= 0x0201,	/* 2 byte unsigned integer */
-	kBluetoothSDPAttributeDeviceIdentifierProductID						= 0x0202,	/* 2 byte unsigned integer */
-	kBluetoothSDPAttributeDeviceIdentifierVersion						= 0x0203,	/* 2 byte unsigned integer */
-	kBluetoothSDPAttributeDeviceIdentifierPrimaryRecord					= 0x0204,	/* Boolean */
-	kBluetoothSDPAttributeDeviceIdentifierVendorIDSource				= 0x0205,	/* 2 byte unsigned integer */
+	// DeviceID v1.3																Required		Type		Section		Notes
+	kBluetoothSDPAttributeDeviceIdentifierServiceDescription			= 0x0001,	// O			string		-
+	kBluetoothSDPAttributeDeviceIdentifierDocumentationURL				= 0x000A,	// O			url			-
+	kBluetoothSDPAttributeDeviceIdentifierClientExecutableURL			= 0x000B,	// O			url			-
+	kBluetoothSDPAttributeDeviceIdentifierSpecificationID				= 0x0200,	// M			uint16		5.1
+	kBluetoothSDPAttributeDeviceIdentifierVendorID						= 0x0201,	// M			uint16		5.2
+	kBluetoothSDPAttributeDeviceIdentifierProductID						= 0x0202,	// M			uint16		5.3
+	kBluetoothSDPAttributeDeviceIdentifierVersion						= 0x0203,	// M			uint16		5.4
+	kBluetoothSDPAttributeDeviceIdentifierPrimaryRecord					= 0x0204,	// M			bool		5.5
+	kBluetoothSDPAttributeDeviceIdentifierVendorIDSource				= 0x0205,	// M			uint16		5.6
 	kBluetoothSDPAttributeDeviceIdentifierReservedRangeStart			= 0x0206,
 	kBluetoothSDPAttributeDeviceIdentifierReservedRangeEnd				= 0x02FF
 	
@@ -525,8 +565,6 @@ enum ProtocolParameters
     kBluetoothSDPProtocolParameterBNEPSupportedNetworkPacketTypeList	= 2
 };
 
-#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0
-
 //Inquiries with 'Extended Inquiry Response' (v2.1 specification)
 
 enum BluetoothHCIExtendedInquiryResponseDataTypes
@@ -540,12 +578,47 @@ enum BluetoothHCIExtendedInquiryResponseDataTypes
 	kBluetoothHCIExtendedInquiryResponseDataType128BitServiceClassUUIDsCompleteList			=	0x07,
 	kBluetoothHCIExtendedInquiryResponseDataTypeShortenedLocalName							=	0x08,
 	kBluetoothHCIExtendedInquiryResponseDataTypeCompleteLocalName							=	0x09,
+    kBluetoothHCIExtendedInquiryResponseDataTypeTransmitPowerLevel                          =   0x0A,
+    kBluetoothHCIExtendedInquiryResponseDataTypeSSPOOBClassOfDevice                         =   0x0D,
+    kBluetoothHCIExtendedInquiryResponseDataTypeSSPOOBSimplePairingHashC                    =   0x0E,
+    kBluetoothHCIExtendedInquiryResponseDataTypeSSPOOBSimplePairingRandomizerR              =   0x0F,
 	kBluetoothHCIExtendedInquiryResponseDataTypeDeviceID									=	0x10,
+	kBluetoothHCIExtendedInquiryResponseDataTypeSecurityManagerTKValue						=	0x10,
+    kBluetoothHCIExtendedInquiryResponseDataTypeSecurityManagerOOBFlags                     =   0x11,
+    kBluetoothHCIExtendedInquiryResponseDataTypeSlaveConnectionIntervalRange                =   0x12,
+    kBluetoothHCIExtendedInquiryResponseDataTypeServiceSolicitation16BitUUIDs               =   0x14,
+    kBluetoothHCIExtendedInquiryResponseDataTypeServiceSolicitation128BitUUIDs              =   0x15,
+    kBluetoothHCIExtendedInquiryResponseDataTypeServiceData                                 =   0x16,
 	kBluetoothHCIExtendedInquiryResponseDataTypeManufacturerSpecificData					=	0xFF
 };
 
-#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_2_0 */
 
+// HCI Versions
+
+enum BluetoothHCIVersions
+{
+	kBluetoothHCIVersionCoreSpecification1_0b												=	0x00,
+	kBluetoothHCIVersionCoreSpecification1_1												=	0x01,
+	kBluetoothHCIVersionCoreSpecification1_2												=	0x02,
+	kBluetoothHCIVersionCoreSpecification2_0EDR												=	0x03,
+	kBluetoothHCIVersionCoreSpecification2_1EDR												=	0x04,
+	kBluetoothHCIVersionCoreSpecification3_0HS												=	0x05,
+	kBluetoothHCIVersionCoreSpecification4_0												=	0x06
+};
+
+
+// LMP Versions
+
+enum BluetoothLMPVersions
+{
+	kBluetoothLMPVersionCoreSpecification1_0b												=	0x00,
+	kBluetoothLMPVersionCoreSpecification1_1												=	0x01,
+	kBluetoothLMPVersionCoreSpecification1_2												=	0x02,
+	kBluetoothLMPVersionCoreSpecification2_0EDR												=	0x03,
+	kBluetoothLMPVersionCoreSpecification2_1EDR												=	0x04,
+	kBluetoothLMPVersionCoreSpecification3_0HS												=	0x05,
+	kBluetoothLMPVersionCoreSpecification4_0												=	0x06
+};
 
 #ifdef	__cplusplus
 	}

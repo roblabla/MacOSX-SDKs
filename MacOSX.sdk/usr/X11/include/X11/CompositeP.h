@@ -1,5 +1,3 @@
-/* $Xorg: CompositeP.h,v 1.4 2001/02/09 02:03:54 xorgcvs Exp $ */
-
 /***********************************************************
 
 Copyright 1987, 1988, 1998  The Open Group
@@ -52,6 +50,8 @@ SOFTWARE.
 
 #include <X11/Composite.h>
 
+_XFUNCPROTOBEGIN
+
 /************************************************************************
  *
  * Additional instance fields for widgets of (sub)class 'Composite' 
@@ -100,6 +100,8 @@ typedef struct _CompositeClassRec {
 } CompositeClassRec;
 
 externalref CompositeClassRec compositeClassRec;
+
+_XFUNCPROTOEND
 
 #define XtCompositeExtensionVersion 2L
 #define XtInheritGeometryManager ((XtGeometryHandler) _XtInherit)

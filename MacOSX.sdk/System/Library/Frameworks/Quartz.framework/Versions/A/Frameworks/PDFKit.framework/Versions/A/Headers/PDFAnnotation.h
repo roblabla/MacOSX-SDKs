@@ -10,7 +10,7 @@
 @class PDFAction, PDFBorder, PDFPage, PDFAnnotationPopup, PDFAnnotationPrivateVars;
 
 
-@interface PDFAnnotation : NSObject
+@interface PDFAnnotation : NSObject <NSCopying>
 {
 @private
     PDFAnnotationPrivateVars *_pdfPriv;
@@ -22,13 +22,13 @@
 
 // -------- initializer
 
-// You should only call this method for the subclasses, otherwise you will get a type of NULL Ñ which is not a legal 
+// You should only call this method for the subclasses, otherwise you will get a type of nil Ñ which is not a legal 
 // annotation.
 - (id) initWithBounds: (NSRect) bounds;
 
 // -------- accessors
 
-// Returns the page the annotation is associated with (may return NULL if annotation not associated with a page).
+// Returns the page the annotation is associated with (may return nil if annotation not associated with a page).
 - (PDFPage *) page;
 
 // Returns the annotation type (called "Subtype" in the PDF specification since "Annot" is the type). Examples include: 
@@ -41,15 +41,15 @@
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
-// Optional (-[modificationDate] may return NULL).  Modification date of the annotation.
+// Optional (-[modificationDate] may return nil).  Modification date of the annotation.
 - (NSDate *) modificationDate;
 - (void) setModificationDate: (NSDate *) date;
 
-// Optional (-[userName] may return NULL).  Name of the user who created the annotation.
+// Optional (-[userName] may return nil).  Name of the user who created the annotation.
 - (NSString *) userName;
 - (void) setUserName: (NSString *) name;
 
-// Optional (-[popup] may return NULL).  Not used with links or widgets, a popup annotation associated with this 
+// Optional (-[popup] may return nil).  Not used with links or widgets, a popup annotation associated with this 
 // annotation.  The bounds and open state of the popup indicate the placement and open state of the popup window.
 - (PDFAnnotationPopup *) popup;
 - (void) setPopup: (PDFAnnotationPopup *) popup;

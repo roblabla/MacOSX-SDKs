@@ -26,21 +26,11 @@ in this Software without prior written authorization from The Open Group.
 
 /* RANDOM CRUFT! THIS HAS NO OFFICIAL X CONSORTIUM OR X PROJECT TEAM BLESSING */
 
-/* $Xorg: MITMisc.h,v 1.4 2001/02/09 02:03:23 xorgcvs Exp $ */
-
 #ifndef _XMITMISC_H_
 #define _XMITMISC_H_
 
 #include <X11/Xfuncproto.h>
-
-#define X_MITSetBugMode			0
-#define X_MITGetBugMode			1
-
-#define MITMiscNumberEvents		0
-
-#define MITMiscNumberErrors		0
-
-#ifndef _MITMISC_SERVER_
+#include <X11/extensions/mitmiscconst.h>
 
 _XFUNCPROTOBEGIN
 
@@ -60,7 +50,5 @@ Bool XMITMiscGetBugMode(
 );
 
 _XFUNCPROTOEND
-
-#endif
 
 #endif

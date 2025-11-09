@@ -1,5 +1,5 @@
 /* CoreGraphics - CGDirectDisplay.h
-   Copyright (c) 2000-2009 Apple Inc.
+   Copyright (c) 2000-2011 Apple Inc.
    All rights reserved. */
 
 #ifndef CGDIRECTDISPLAY_H_
@@ -14,7 +14,6 @@ typedef uint32_t CGDirectDisplayID;
 typedef uint32_t CGOpenGLDisplayMask;
 typedef double CGRefreshRate;
 
-typedef struct _CGDirectPaletteRef *CGDirectPaletteRef;
 typedef struct CGDisplayMode *CGDisplayModeRef;
 
 #define kCGNullDirectDisplay ((CGDirectDisplayID)0)
@@ -81,7 +80,7 @@ CG_EXTERN CGError CGGetOnlineDisplayList(uint32_t maxDisplays,
   CGDirectDisplayID *onlineDisplays, uint32_t *displayCount)
   CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_NA);
 
-/* Return the OpenGL display mask for `display', or 0 is `display' is an
+/* Return the OpenGL display mask for `display', or 0 if `display' is an
    invalid display. */
 
 CG_EXTERN CGOpenGLDisplayMask CGDisplayIDToOpenGLDisplayMask(
@@ -376,41 +375,6 @@ CG_EXTERN CGError CGDisplayMoveCursorToPoint(CGDirectDisplayID display,
 CG_EXTERN void CGGetLastMouseDelta(int32_t *deltaX, int32_t *deltaY)
   CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
-/* Return true if the current display mode of `display' supports palettes,
-   false otherwise. */
-
-CG_EXTERN boolean_t CGDisplayCanSetPalette(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-
-/* Set the palette for `display' to `palette'. */
-
-CG_EXTERN CGError CGDisplaySetPalette(CGDirectDisplayID display,
-  CGDirectPaletteRef palette) CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-
-/* Wait until the beam position moves outside the region specified by
-   `upperScanLine' and `lowerScanLine' of `display'. If `upperScanLine' is
-   greater than `lowerScanLine' or if `upperScanLine' and `lowerScanLine'
-   encompass the entire display height, return an error.
-
-   Some display systems may not use conventional video vertical and
-   horizontal sweep. These displays report a `kCGDisplayRefreshRate' of 0 in
-   the dictionary returned by `CGDisplayCurrentMode'. On such displays, this
-   function returns at once. Also, some display device drivers may not
-   implement support for this mechanism. On such displays, this function
-   returns at once. */
-
-CG_EXTERN CGError CGDisplayWaitForBeamPositionOutsideLines(CGDirectDisplayID
-  display, uint32_t upperScanLine, uint32_t lowerScanLine)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-
-/* Return the current beam position of `display', or 0 if `display' is
-   invalid, if `display' does not implement conventional video vertical and
-   horizontal sweep, or if the display device driver does not implement this
-   functionality. */
-
-CG_EXTERN uint32_t CGDisplayBeamPosition(CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-
 /* Return a CGContext suitable for drawing to the captured display
    `display', or NULL if `display' has not been captured. The context is
    owned by the device and should not be released by the caller.
@@ -420,7 +384,7 @@ CG_EXTERN uint32_t CGDisplayBeamPosition(CGDirectDisplayID display)
    reconfiguring the display invalidates the drawing context.
 
    The determine when the display configuration is changing, use
-   `CGRegisterDisplayRegisterReconfigurationCallback'. */
+   `CGDisplayRegisterReconfigurationCallback'. */
 
 CG_EXTERN CGContextRef CGDisplayGetDrawingContext(CGDirectDisplayID display)
   CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
@@ -459,22 +423,9 @@ typedef int32_t CGMouseDelta CG_OBSOLETE;
 typedef uint32_t CGTableCount CG_OBSOLETE;
 #define CGDisplayNoErr kCGErrorSuccess
 
+typedef struct _CGDirectPaletteRef *CGDirectPaletteRef;
+
 /* These functions are deprecated; do not use them. */
-
-/* Use `CGDisplayCreateImage' instead. */
-CG_EXTERN void *CGDisplayBaseAddress(CGDirectDisplayID display)
-  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
-    __IPHONE_NA, __IPHONE_NA);
-
-/* Use `CGDisplayCreateImageForRect' instead. */
-CG_EXTERN void *CGDisplayAddressForPosition(CGDirectDisplayID display,
-  int32_t x, int32_t y) CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6,
-    __IPHONE_NA, __IPHONE_NA);
-
-/* Use `CGDisplayCreateImage' or `CGDisplayCreateImageForRect' instead. */
-CG_EXTERN size_t CGDisplayBytesPerRow(CGDirectDisplayID display)
-  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
-    __IPHONE_NA, __IPHONE_NA);
 
 /* Use the CGDisplayMode APIs instead. */
 CG_EXTERN CFArrayRef CGDisplayAvailableModes(CGDirectDisplayID display)
@@ -512,18 +463,18 @@ CG_EXTERN CGError CGDisplaySwitchToMode(CGDirectDisplayID display,
   CFDictionaryRef mode) CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
     __IPHONE_NA, __IPHONE_NA);
 
-/* Use the CGDisplayMode APIs instead. */
-CG_EXTERN size_t CGDisplayBitsPerPixel(CGDirectDisplayID display)
-  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
-    __IPHONE_NA, __IPHONE_NA);
+CG_EXTERN boolean_t CGDisplayCanSetPalette(CGDirectDisplayID display)
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
-/* Use the CGDisplayMode APIs instead. */
-CG_EXTERN size_t CGDisplayBitsPerSample(CGDirectDisplayID display)
-  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
-    __IPHONE_NA, __IPHONE_NA);
+CG_EXTERN CGError CGDisplaySetPalette(CGDirectDisplayID display,
+  CGDirectPaletteRef palette)
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
-CG_EXTERN size_t CGDisplaySamplesPerPixel(CGDirectDisplayID display)
-  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_6,
-    __IPHONE_NA, __IPHONE_NA);
+CG_EXTERN CGError CGDisplayWaitForBeamPositionOutsideLines(CGDirectDisplayID
+  display, uint32_t upperScanLine, uint32_t lowerScanLine)
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+
+CG_EXTERN uint32_t CGDisplayBeamPosition(CGDirectDisplayID display)
+  CG_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
 
 #endif /* CGDIRECTDISPLAY_H_ */

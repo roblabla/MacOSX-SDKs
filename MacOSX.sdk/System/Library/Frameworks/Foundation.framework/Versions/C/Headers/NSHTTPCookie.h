@@ -1,14 +1,9 @@
 /*	
     NSHTTPCookie.h
-    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
     
     Public header file.
 */
-
-// Note: To use the APIs described in these headers, you must perform
-// a runtime check for Foundation-462.1 or later.
-#import <AvailabilityMacros.h>
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 
@@ -22,79 +17,79 @@
     @const NSHTTPCookieName
     @discussion Key for cookie name
 */
-extern NSString * const NSHTTPCookieName;
+FOUNDATION_EXPORT NSString * const NSHTTPCookieName;
 
 /*!
     @const NSHTTPCookieValue
     @discussion Key for cookie value
 */
-extern NSString * const NSHTTPCookieValue;
+FOUNDATION_EXPORT NSString * const NSHTTPCookieValue;
 
 /*!
     @const NSHTTPCookieOriginURL
     @discussion Key for cookie origin URL
 */
-extern NSString * const NSHTTPCookieOriginURL;
+FOUNDATION_EXPORT NSString * const NSHTTPCookieOriginURL;
 
 /*!
     @const NSHTTPCookieVersion
     @discussion Key for cookie version
 */
-extern NSString * const NSHTTPCookieVersion;
+FOUNDATION_EXPORT NSString * const NSHTTPCookieVersion;
 
 /*!
     @const NSHTTPCookieDomain
     @discussion Key for cookie domain
 */
-extern NSString * const NSHTTPCookieDomain;
+FOUNDATION_EXPORT NSString * const NSHTTPCookieDomain;
 
 /*!
     @const NSHTTPCookiePath
     @discussion Key for cookie path
 */
-extern NSString * const NSHTTPCookiePath;
+FOUNDATION_EXPORT NSString * const NSHTTPCookiePath;
 
 /*!
     @const NSHTTPCookieSecure
     @discussion Key for cookie secure flag
 */
-extern NSString * const NSHTTPCookieSecure;
+FOUNDATION_EXPORT NSString * const NSHTTPCookieSecure;
 
 /*!
     @const NSHTTPCookieExpires
     @discussion Key for cookie expiration date
 */
-extern NSString * const NSHTTPCookieExpires;
+FOUNDATION_EXPORT NSString * const NSHTTPCookieExpires;
 
 /*!
     @const NSHTTPCookieComment
     @discussion Key for cookie comment text
 */
-extern NSString * const NSHTTPCookieComment;
+FOUNDATION_EXPORT NSString * const NSHTTPCookieComment;
 
 /*!
     @const NSHTTPCookieCommentURL
     @discussion Key for cookie comment URL
 */
-extern NSString * const NSHTTPCookieCommentURL;
+FOUNDATION_EXPORT NSString * const NSHTTPCookieCommentURL;
 
 /*!
     @const NSHTTPCookieDiscard
     @discussion Key for cookie discard (session-only) flag
 */
-extern NSString * const NSHTTPCookieDiscard;
+FOUNDATION_EXPORT NSString * const NSHTTPCookieDiscard;
 
 /*!
     @const NSHTTPCookieMaximumAge
     @discussion Key for cookie maximum age (an alternate way of specifying the expiration)
 */
-extern NSString * const NSHTTPCookieMaximumAge;
+FOUNDATION_EXPORT NSString * const NSHTTPCookieMaximumAge;
 
 /*!
     @const NSHTTPCookiePort
     @discussion Key for cookie ports
 */
-extern NSString * const NSHTTPCookiePort;
+FOUNDATION_EXPORT NSString * const NSHTTPCookiePort;
 
 
 @class NSHTTPCookieInternal;
@@ -417,4 +412,3 @@ extern NSString * const NSHTTPCookiePort;
 
 @end
 
-#endif

@@ -42,6 +42,7 @@
 
 #ifndef _IP6_FW_H
 #define _IP6_FW_H
+#ifdef __APPLE_API_OBSOLETE
 
 #include <sys/appleapiopts.h>
 
@@ -252,4 +253,5 @@ struct ip6_fw_chain {
  * Main firewall chains definitions and global var's definitions.
  */
 
+#endif /* __APPLE_API_OBSOLETE */
 #endif /* _IP6_FW_H */

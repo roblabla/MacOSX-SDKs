@@ -98,6 +98,7 @@ typedef struct __IOStreamBufferQueue {
     @constant kIOStreamBufferIDMask
     @constant kIOStreamMemoryTypeMask
     @abstract Memory types used with IOConnectMapMemory().
+    @discussion
  */
 enum {
     kIOStreamMemoryTypeOutputQueue   = 0x10000000,
@@ -113,6 +114,7 @@ enum {
     @constant kIOStreamPortTypeOutput
     @constant kIOStreamPortTypeInput
     @abstract Port types used with IOConnectSetNotificationPort().
+    @discussion
  */
 enum {
     kIOStreamPortTypeOutput,
@@ -121,6 +123,7 @@ enum {
 
 /*!
     @enum IOStream open options
+    @discussion
  */
  
 enum {
@@ -139,6 +142,7 @@ enum {
     @constant kIOStreamMethodSetMode
  
     @abstract Client method numbers used with IOConnectMethod...() functions.
+    @discussion
  */
 enum {
     kIOStreamMethodOpen,
@@ -156,6 +160,7 @@ enum {
     @constant kIOStreamEnqueueInputTrap
     @constant kIOStreamEnqueueInputSyncTrap
     @abstract Client trap numbers used with IOConnectTrap..() functions.
+    @discussion
  */
 enum {
     kIOStreamEnqueueInputTrap,

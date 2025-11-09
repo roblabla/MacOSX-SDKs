@@ -1,4 +1,4 @@
-/* -*- mode: C++; c-basic-offset: 4; -*- 
+/* -*- mode: C; c-basic-offset: 4; -*- 
  *
  * Copyright (c) 2008 Apple Inc. All rights reserved.
  *

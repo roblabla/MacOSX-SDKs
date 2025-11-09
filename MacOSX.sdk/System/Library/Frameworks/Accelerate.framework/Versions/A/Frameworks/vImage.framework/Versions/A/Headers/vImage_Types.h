@@ -17,7 +17,7 @@ extern "C" {
 #include <stdbool.h>   
 #include <stdint.h>
 #include <stddef.h>
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 
 /* Please see vImage.h and vImage documentation for the meaning of these types. */
@@ -100,14 +100,14 @@ enum
 enum
 {
     kvImageNoFlags                      =    0,
-    kvImageLeaveAlphaUnchanged          =    1,     /* Operate on red, green and blue channels only. Alpha is copied from source to destination. For Interleaved formats only. AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER*/
-    kvImageCopyInPlace                  =    2,     /* Copy edge pixels. Convolution Only. AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER*/
-    kvImageBackgroundColorFill          =    4,     /* Use the background color for missing pixels. AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER*/
-    kvImageEdgeExtend                   =    8,     /* Extend border data elements. (For 3D LUTs, extend the table.) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER*/
-    kvImageDoNotTile                    =   16,     /* Pass to turn off internal tiling. Use this if you want to do your own tiling, or to use the Min/Max filters in place. AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER*/
-    kvImageHighQualityResampling        =   32,     /* Use a higher quality, slower resampling filter for Geometry operations (shear, scale, rotate, affine transform, etc.) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER*/
-    kvImageTruncateKernel               =   64,     /* Use only the part of the kernel that overlaps the image. For integer kernels, real_divisor = divisor * (sum of used kernel elements) / (sum of kernel elements). This should preserve image brightness at the edges. Convolution only. AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
-    kvImageGetTempBufferSize            =  128,     /* The function will return the number of bytes required for the temp buffer. If this value is negative, it is an error, per standard usage.  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER */
+    kvImageLeaveAlphaUnchanged          =    1,     /* Operate on red, green and blue channels only. Alpha is copied from source to destination. For Interleaved formats only. __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA )*/
+    kvImageCopyInPlace                  =    2,     /* Copy edge pixels. Convolution Only. __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA )*/
+    kvImageBackgroundColorFill          =    4,     /* Use the background color for missing pixels. __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA )*/
+    kvImageEdgeExtend                   =    8,     /* Extend border data elements. (For 3D LUTs, extend the table.) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA )*/
+    kvImageDoNotTile                    =   16,     /* Pass to turn off internal tiling. Use this if you want to do your own tiling, or to use the Min/Max filters in place. __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA )*/
+    kvImageHighQualityResampling        =   32,     /* Use a higher quality, slower resampling filter for Geometry operations (shear, scale, rotate, affine transform, etc.) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA )*/
+    kvImageTruncateKernel               =   64,     /* Use only the part of the kernel that overlaps the image. For integer kernels, real_divisor = divisor * (sum of used kernel elements) / (sum of kernel elements). This should preserve image brightness at the edges. Convolution only. __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
+    kvImageGetTempBufferSize            =  128,     /* The function will return the number of bytes required for the temp buffer. If this value is negative, it is an error, per standard usage.  __OSX_AVAILABLE_STARTING( __MAC_10_4, __IPHONE_NA ) */
 };
 
 

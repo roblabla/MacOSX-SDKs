@@ -19,24 +19,6 @@ typedef struct CGContext *CGContextRef;
 #include <CoreGraphics/CGPDFDocument.h>
 #include <CoreGraphics/CGShading.h>
 
-/* Line join styles. */
-
-enum CGLineJoin {
-    kCGLineJoinMiter,
-    kCGLineJoinRound,
-    kCGLineJoinBevel
-};
-typedef enum CGLineJoin CGLineJoin;
-
-/* Line cap styles. */
-
-enum CGLineCap {
-    kCGLineCapButt,
-    kCGLineCapRound,
-    kCGLineCapSquare
-};
-typedef enum CGLineCap CGLineCap;
-
 /* Drawing modes for paths. */
 
 enum CGPathDrawingMode {

@@ -31,7 +31,6 @@ enum
 
 // For subclassers, just call the standard -(id) init.  
 // Note: -[PDFPage init] create a new empty page with a media box set to (0.0, 0.0), [612.0, 792.0].
-//- (id) initWithDocument: (PDFDocument *) document;	DEPRECATED
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
@@ -114,7 +113,8 @@ enum
 // the specified point, only the first character encountered is returned.
 - (NSRect) characterBoundsAtIndex: (NSInteger) index;
 
-// Returns the index of the character at point (in page space).  Returns -1 if no character at point.
+// Returns the index of the character at point (in page space).  Returns NSNotFound if no character at point.
+// Earlier viresion of PDF Kit (prior to Lion) returned -1 if no character at point.
 - (NSInteger) characterIndexAtPoint: (NSPoint) point;
 
 // -------- selections

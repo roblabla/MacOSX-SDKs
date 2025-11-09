@@ -1,5 +1,5 @@
 /*	NSSet.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -31,16 +31,16 @@
 - (void)makeObjectsPerformSelector:(SEL)aSelector;
 - (void)makeObjectsPerformSelector:(SEL)aSelector withObject:(id)argument;
 
-- (NSSet *)setByAddingObject:(id)anObject AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (NSSet *)setByAddingObjectsFromSet:(NSSet *)other AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (NSSet *)setByAddingObjectsFromArray:(NSArray *)other AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSSet *)setByAddingObject:(id)anObject NS_AVAILABLE(10_5, 2_0);
+- (NSSet *)setByAddingObjectsFromSet:(NSSet *)other NS_AVAILABLE(10_5, 2_0);
+- (NSSet *)setByAddingObjectsFromArray:(NSArray *)other NS_AVAILABLE(10_5, 2_0);
 
 #if NS_BLOCKS_AVAILABLE
-- (void)enumerateObjectsUsingBlock:(void (^)(id obj, BOOL *stop))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)enumerateObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id obj, BOOL *stop))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)enumerateObjectsUsingBlock:(void (^)(id obj, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
+- (void)enumerateObjectsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (^)(id obj, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
 
-- (NSSet *)objectsPassingTest:(BOOL (^)(id obj, BOOL *stop))predicate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSSet *)objectsWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(id obj, BOOL *stop))predicate AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSSet *)objectsPassingTest:(BOOL (^)(id obj, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
+- (NSSet *)objectsWithOptions:(NSEnumerationOptions)opts passingTest:(BOOL (^)(id obj, BOOL *stop))predicate NS_AVAILABLE(10_6, 4_0);
 #endif
 
 @end
@@ -49,12 +49,12 @@
 
 + (id)set;
 + (id)setWithObject:(id)object;
-+ (id)setWithObjects:(id *)objects count:(NSUInteger)cnt;
++ (id)setWithObjects:(const id *)objects count:(NSUInteger)cnt;
 + (id)setWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
 + (id)setWithSet:(NSSet *)set;
 + (id)setWithArray:(NSArray *)array;
 
-- (id)initWithObjects:(id *)objects count:(NSUInteger)cnt;
+- (id)initWithObjects:(const id *)objects count:(NSUInteger)cnt;
 - (id)initWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
 - (id)initWithSet:(NSSet *)set;
 - (id)initWithSet:(NSSet *)set copyItems:(BOOL)flag;

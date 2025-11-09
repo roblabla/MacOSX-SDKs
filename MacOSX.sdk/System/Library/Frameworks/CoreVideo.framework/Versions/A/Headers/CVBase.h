@@ -17,10 +17,19 @@
 #define __COREVIDEO_CVBASE_H__ 1
 
 #include <TargetConditionals.h>
+#include <Availability.h>
 #include <AvailabilityMacros.h>
+
+#if TARGET_OS_WIN32
+#pragma warning (disable: 4068)		// ignore unknown pragmas
+#endif
 
 #ifndef AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
 #define AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER       WEAK_IMPORT_ATTRIBUTE
+#endif
+
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_7
+#define __AVAILABILITY_INTERNAL__MAC_10_7        __AVAILABILITY_INTERNAL_WEAK_IMPORT
 #endif
 
 #include <CoreFoundation/CFBase.h>
@@ -29,13 +38,32 @@
 extern "C" {
 #endif
 
+#define COREVIDEO_SUPPORTS_DIRECT3D 	(TARGET_OS_WIN32)
 #define COREVIDEO_SUPPORTS_OPENGL 		(TARGET_OS_MAC && ! TARGET_OS_IPHONE)
-#define COREVIDEO_SUPPORTS_COLORSPACE 	(TARGET_OS_MAC && ! TARGET_OS_IPHONE)
-#define COREVIDEO_SUPPORTS_DISPLAYLINK 	(! TARGET_OS_IPHONE)
+#define COREVIDEO_SUPPORTS_COLORSPACE 	((TARGET_OS_MAC && ! TARGET_OS_IPHONE) || (TARGET_OS_WIN32))
+#define COREVIDEO_SUPPORTS_DISPLAYLINK 	(TARGET_OS_MAC && ! TARGET_OS_IPHONE)
 #define COREVIDEO_SUPPORTS_IOSURFACE	(TARGET_OS_IPHONE ? TARGET_OS_EMBEDDED : (TARGET_OS_MAC && ((MAC_OS_X_VERSION_MAX_ALLOWED >= 1060))))
 
+#if TARGET_OS_WIN32 && defined(CV_BUILDING_CV) && defined(__cplusplus)
+#define CV_EXPORT extern "C" __declspec(dllexport) 
+#elif TARGET_OS_WIN32 && defined(CV_BUILDING_CV) && !defined(__cplusplus)
+#define CV_EXPORT extern __declspec(dllexport) 
+#elif TARGET_OS_WIN32 && defined(__cplusplus)
+#define CV_EXPORT extern "C" __declspec(dllimport) 
+#elif TARGET_OS_WIN32
+#define CV_EXPORT extern __declspec(dllimport) 
+#else
 #define CV_EXPORT CF_EXPORT 
+#endif
+
 #define CV_INLINE CF_INLINE
+
+#if COREVIDEO_SUPPORTS_DIRECT3D
+#define CVDIRECT3DDEVICE LPDIRECT3DDEVICE9
+#define CVDIRECT3DTEXTURE LPDIRECT3DTEXTURE9
+#define CVDIRECT3DSURFACE LPDIRECT3DSURFACE9
+#define CVDIRECT3D LPDIRECT3D9
+#endif //COREVIDEO_SUPPORTS_DIRECT3D
 
 /*!
     @typedef	CVOptionFlags

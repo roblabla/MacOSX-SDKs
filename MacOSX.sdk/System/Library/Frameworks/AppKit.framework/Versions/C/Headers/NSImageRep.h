@@ -1,7 +1,7 @@
 /*
 	NSImageRep.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -43,7 +43,7 @@ enum {
 - (BOOL)draw;
 - (BOOL)drawAtPoint:(NSPoint)point;
 - (BOOL)drawInRect:(NSRect)rect;
-- (BOOL)drawInRect:(NSRect)dstSpacePortionRect fromRect:(NSRect)srcSpacePortionRect operation:(NSCompositingOperation)op fraction:(CGFloat)requestedAlpha respectFlipped:(BOOL)respectContextIsFlipped hints:(NSDictionary *)hints AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (BOOL)drawInRect:(NSRect)dstSpacePortionRect fromRect:(NSRect)srcSpacePortionRect operation:(NSCompositingOperation)op fraction:(CGFloat)requestedAlpha respectFlipped:(BOOL)respectContextIsFlipped hints:(NSDictionary *)hints NS_AVAILABLE_MAC(10_6);
 
 /* Methods to return info about the image. NSImageRep provides storage for all of these; however, it's illegal to set them in some subclasses.
 */
@@ -72,9 +72,7 @@ enum {
 + (NSArray *)registeredImageRepClasses;
 + (Class)imageRepClassForFileType:(NSString *)type;
 + (Class)imageRepClassForPasteboardType:(NSString *)type;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-+ (Class)imageRepClassForType:(NSString *)type;
-#endif
++ (Class)imageRepClassForType:(NSString *)type NS_AVAILABLE_MAC(10_5);
 + (Class)imageRepClassForData:(NSData *)data;
 	
 /* Should be overridden by subclassers to load an unfiltered image. 
@@ -91,17 +89,15 @@ enum {
 + (NSArray *)imageFileTypes;
 + (NSArray *)imagePasteboardTypes;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 /* Implemented by subclassers to indicate what UTI-identified data types they can deal with.
 */
-+ (NSArray *)imageUnfilteredTypes;
++ (NSArray *)imageUnfilteredTypes NS_AVAILABLE_MAC(10_5);
 
 /* This expands the unfiltered list returned by imageUnfilteredTypes.
 */
-+ (NSArray *)imageTypes;
++ (NSArray *)imageTypes NS_AVAILABLE_MAC(10_5);
 
-#endif
 
 /* Convenience method: Checks to see if any of the types on the pasteboard can be understood by a registered imagerep class after filtering or if the pasteboard contains a filename that can be understood by a registered imagerep class after filtering. If sent to a subclass, does this for just the types understood by the subclass.
 */
@@ -126,7 +122,7 @@ enum {
  
  The CGImageRef returned is guaranteed to live as long as the current autorelease pool.  The caller should not release the CGImage.  This is the standard Cocoa convention, but people may not realize that it applies to CFTypes.
  */
-- (CGImageRef)CGImageForProposedRect:(NSRect *)proposedDestRect context:(NSGraphicsContext *)context hints:(NSDictionary *)hints AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; 
+- (CGImageRef)CGImageForProposedRect:(NSRect *)proposedDestRect context:(NSGraphicsContext *)context hints:(NSDictionary *)hints NS_AVAILABLE_MAC(10_6); 
 
 @end
 

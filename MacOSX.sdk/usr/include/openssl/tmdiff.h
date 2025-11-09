@@ -73,17 +73,19 @@
 #ifndef HEADER_TMDIFF_H
 #define HEADER_TMDIFF_H
 
+#include <AvailabilityMacros.h>
+
 #ifdef  __cplusplus
 extern "C" {
 #endif
 
 typedef struct ms_tm MS_TM;
 
-MS_TM *ms_time_new(void );
-void ms_time_free(MS_TM *a);
-void ms_time_get(MS_TM *a);
-double ms_time_diff(MS_TM *start, MS_TM *end);
-int ms_time_cmp(const MS_TM *ap, const MS_TM *bp);
+MS_TM *ms_time_new(void ) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void ms_time_free(MS_TM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void ms_time_get(MS_TM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+double ms_time_diff(MS_TM *start, MS_TM *end) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int ms_time_cmp(const MS_TM *ap, const MS_TM *bp) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifdef  __cplusplus
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -1351,7 +1351,7 @@
 /*!
  * @defined kDSNAttrCompany
  * @discussion attribute that defines the user's company.
- * Example: Apple Computer, Inc
+ * Example: Apple Inc
  */
 #define		kDSNAttrCompany						"dsAttrTypeStandard:Company"
 

@@ -1,13 +1,12 @@
 /*
 	NSUserDefaultsController.h
 	Application Kit
-	Copyright (c) 2002-2009, Apple Inc.
+	Copyright (c) 2002-2011, Apple Inc.
 	All rights reserved.
  */
 
 #import <AppKit/NSController.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 @class NSDictionary, NSUserDefaults;
 
@@ -36,9 +35,7 @@
 - (void)setAppliesImmediately:(BOOL)flag;   // default: YES
 - (BOOL)appliesImmediately;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (BOOL)hasUnappliedChanges;
-#endif
 
 - (id)values;    // accessor object for default values (independent of whether they are derived directly from the NSUserDefaults or from the initial values)
 
@@ -48,4 +45,3 @@
 
 @end
 
-#endif

@@ -3,7 +3,7 @@
 
      Contains:   A component API for encoding/decoding audio data.
 
-     Copyright:  (c) 1985-2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 1985-2008 by Apple, Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -51,7 +51,7 @@
 	output using the AudioCodecAppendInputData and AudioCodecProduceOutputData
 	routines. Input data can be fed into an encoder and some decoders in any size (even 
 	byte by byte). Input data fed to a decoder should be in terms of whole packets in the 
-	encoded format if the format is variable bit rate and is not self framing (e.g. MPEG 4 AAC). 
+	encoded format if the format is variable bit rate and is not self framing (e.g. MPEG-4 AAC). 
 	Output data can only be produced in whole packet sizes. Both routines will return 
 	the amount of data they consume/produce.
  
@@ -84,7 +84,6 @@
 	#include <CoreAudio/CoreAudioTypes.h>
 	#include <AudioUnit/AudioComponent.h>
 #else
-	#include "Components.h"
 	#include "AudioComponent.h"
 	#include "CoreAudioTypes.h"
 #endif
@@ -129,6 +128,7 @@ typedef struct AudioCodecMagicCookieInfo	AudioCodecMagicCookieInfo;
 //=============================================================================
 
 
+#if !TARGET_OS_IPHONE
 /*!
 	@enum           AudioCodecComponentType
  
@@ -150,7 +150,7 @@ enum
 	kAudioEncoderComponentType								= 'aenc',	
 	kAudioUnityCodecComponentType							= 'acdc'
 };
-
+#endif
 
 //=============================================================================
 #pragma	mark Global Codec Properties
@@ -168,15 +168,6 @@ enum
 				
 				These properties can be read at any time the codec is open.
 
-	@constant	kAudioCodecPropertyNameCFString
-					The name of the codec component as a CFStringRef. The CFStringRef
-					retrieved via this property must be released by the caller.
-	@constant	kAudioCodecPropertyManufacturerCFString
-					The manufacturer of the codec as a CFStringRef. The CFStringRef 
-					retrieved via this property must be released by the caller.
-	@constant	kAudioCodecPropertyFormatCFString
-					The name of the codec's format as a CFStringRef. The CFStringRef
-					retrieved via this property must be released by the caller.
 	@constant	kAudioCodecPropertySupportedInputFormats
 					An array of AudioStreamBasicDescription structs describing what formats 
 					the codec supports for input data
@@ -240,10 +231,6 @@ enum
 */
 enum
 {
-	kAudioCodecPropertyNameCFString							= 'lnam',
-	kAudioCodecPropertyManufacturerCFString					= 'lmak',
-	kAudioCodecPropertyFormatCFString						= 'lfor',
-	kAudioCodecPropertyHasVariablePacketByteSizes			= 'vpk?',
 	kAudioCodecPropertySupportedInputFormats				= 'ifm#',
 	kAudioCodecPropertySupportedOutputFormats				= 'ofm#',
 	kAudioCodecPropertyAvailableInputSampleRates			= 'aisr',
@@ -338,7 +325,7 @@ enum
 	@constant		kAudioCodecPropertyIsInitialized
 						A UInt32 where 0 means the codec is uninitialized and anything
 						else means the codec is initialized. This should never be settable directly.
-						Must be set by AudioCodecInitialize and AudioCodecUnitialize.
+						Must be set by AudioCodecInitialize and AudioCodecUninitialize.
 	@constant		kAudioCodecPropertyCurrentTargetBitRate
 						A UInt32 containing the number of bits per second to aim for when encoding
 						data. This property is usually only relevant to encoders, but if a decoder
@@ -442,6 +429,7 @@ enum
 {
 	kAudioCodecPropertyInputBufferSize											= 'tbuf',
 	kAudioCodecPropertyPacketFrameSize											= 'pakf',
+	kAudioCodecPropertyHasVariablePacketByteSizes								= 'vpk?',
 	kAudioCodecPropertyMaximumPacketByteSize									= 'pakb',
 	kAudioCodecPropertyCurrentInputFormat										= 'ifmt',
 	kAudioCodecPropertyCurrentOutputFormat										= 'ofmt',
@@ -656,7 +644,7 @@ enum
 
 //=============================================================================
 #pragma mark -
-#pragma mark Selectors for the component routines (preliminary)
+#pragma mark Selectors for the component routines
 //=============================================================================
 /*!
 	@enum			AudioCodecSelectors
@@ -672,6 +660,8 @@ enum
 	@constant		kAudioCodecAppendInputDataSelect
 	@constant		kAudioCodecProduceOutputDataSelect
 	@constant		kAudioCodecResetSelect
+	@constant		kAudioCodecAppendInputBufferListSelect
+	@constant		kAudioCodecProduceOutputBufferListSelect
 */
 enum
 {
@@ -682,7 +672,9 @@ enum
 	kAudioCodecUninitializeSelect							= 0x0005,
 	kAudioCodecAppendInputDataSelect						= 0x0006,
 	kAudioCodecProduceOutputDataSelect						= 0x0007,
-	kAudioCodecResetSelect									= 0x0008
+	kAudioCodecResetSelect									= 0x0008,
+	kAudioCodecAppendInputBufferListSelect					= 0x0009,
+	kAudioCodecProduceOutputBufferListSelect				= 0x000A
 };
 
 
@@ -922,6 +914,22 @@ AudioCodecProduceOutputPackets(	AudioCodec						inCodec,
 								UInt32*							outStatus)
 																		__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
+extern OSStatus
+AudioCodecAppendInputBufferList(	AudioCodec							inCodec,
+									const AudioBufferList *				inBufferList,
+									UInt32*								ioNumberPackets,
+									const AudioStreamPacketDescription*	inPacketDescription,
+									UInt32*								outBytesConsumed)
+																		__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+
+extern OSStatus
+AudioCodecProduceOutputBufferList(	AudioCodec						inCodec,
+									AudioBufferList *				ioBufferList,
+									UInt32*							ioNumberPackets,
+									AudioStreamPacketDescription*	outPacketDescription,
+									UInt32*							outStatus)
+																		__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_NA);
+
 /*!
 	@function		AudioCodecReset
 
@@ -936,11 +944,72 @@ AudioCodecProduceOutputPackets(	AudioCodec						inCodec,
 extern OSStatus
 AudioCodecReset(AudioCodec inCodec)										__OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_2_0);
 
+//=====================================================================================================================
+typedef OSStatus
+(*AudioCodecGetPropertyInfoProc)(void *self, AudioCodecPropertyID inPropertyID, UInt32 *outSize, Boolean *outWritable);
+
+typedef OSStatus
+(*AudioCodecGetPropertyProc)(void *self, AudioCodecPropertyID inPropertyID, UInt32 *ioPropertyDataSize, 
+								void *outPropertyData);
+
+typedef OSStatus
+(*AudioCodecSetPropertyProc)(void *self, AudioCodecPropertyID inPropertyID, UInt32 inPropertyDataSize, 
+								const void *inPropertyData);
+
+typedef OSStatus
+(*AudioCodecInitializeProc)(void *self, const AudioStreamBasicDescription *inInputFormat, 
+								const AudioStreamBasicDescription *inOutputFormat, const void *inMagicCookie, 
+								UInt32 inMagicCookieByteSize);
+
+typedef OSStatus
+(*AudioCodecUninitializeProc)(void *self);
+
+typedef OSStatus
+(*AudioCodecAppendInputDataProc)(void *self, const void *inInputData, UInt32 *ioInputDataByteSize, UInt32 *ioNumberPackets, 
+								const AudioStreamPacketDescription *inPacketDescription);
+
+typedef OSStatus
+(*AudioCodecProduceOutputPacketsProc)(void *self, void *outOutputData, UInt32 *ioOutputDataByteSize, UInt32 *ioNumberPackets, 
+								AudioStreamPacketDescription *outPacketDescription, UInt32 *outStatus);
+
+typedef OSStatus
+(*AudioCodecResetProc)(void *self);
+
+typedef OSStatus
+(*AudioCodecAppendInputBufferListProc)(void *self, const AudioBufferList *ioBufferList, UInt32 *inNumberPackets, 
+								const AudioStreamPacketDescription *inPacketDescription, UInt32 *outBytesConsumed);
+
+typedef OSStatus
+(*AudioCodecProduceOutputBufferListProc)(void *self, AudioBufferList *ioBufferList, UInt32 *ioNumberPackets, 
+								AudioStreamPacketDescription *outPacketDescription, UInt32 *outStatus);
+
 
 //=====================================================================================================================
 #pragma mark -
 #pragma mark Deprecated Properties
 
+/*!
+	@enum		AudioCodecProperty
+	@deprecated	in version 10.7
+
+	@constant	kAudioCodecPropertyNameCFString
+					The name of the codec component as a CFStringRef. The CFStringRef
+					retrieved via this property must be released by the caller.
+	@constant	kAudioCodecPropertyManufacturerCFString
+					The manufacturer of the codec as a CFStringRef. The CFStringRef 
+					retrieved via this property must be released by the caller.
+	@constant	kAudioCodecPropertyFormatCFString
+					The name of the codec's format as a CFStringRef. The CFStringRef
+					retrieved via this property must be released by the caller.
+
+*/
+
+enum
+{
+	kAudioCodecPropertyNameCFString						= 'lnam',
+	kAudioCodecPropertyManufacturerCFString				= 'lmak',
+	kAudioCodecPropertyFormatCFString						= 'lfor'
+};		
 
 /*!
 	@enum		AudioCodecProperty
@@ -1021,7 +1090,7 @@ enum
 
 	@discussion	Constants to be used with kAudioCodecBitRateFormat.
 					This is deprecated. 
-					Use kAudioCodecVariablePacketSizeBitRateControlMode instead.
+					Use kAudioCodecPropertyBitRateControlMode instead.
  
 	@constant	kAudioCodecBitRateFormat_CBR is mapped to kAudioCodecBitRateControlMode_Constant
 	@constant	kAudioCodecBitRateFormat_ABR is mapped to kAudioCodecBitRateControlMode_LongTermAverage

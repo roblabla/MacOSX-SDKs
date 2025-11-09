@@ -1,7 +1,7 @@
 /*
         NSGraphicsContext.h
         Application Kit
-        Copyright (c) 1997-2009, Apple Inc.
+        Copyright (c) 1997-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -45,7 +45,6 @@ typedef NSUInteger NSImageInterpolation;
 // Convenience cover method for [NSGraphicsContext graphicsContextWithAttributes:[NSDictionary dictionaryWithObject:<NSWindow instance> forKey:NSGraphicsContextDestinationAttributeName]]
 + (NSGraphicsContext *)graphicsContextWithWindow:(NSWindow *)window;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* Convenience cover method for [NSGraphicsContext graphicsContextWithAttributes:[NSDictionary dictionaryWithObject:<NSBitmapImageRep instance> forKey:NSGraphicsContextDestinationAttributeName]]. Only NSBitmapImageRep instances with isPlanar == NO are supported.
 */
 + (NSGraphicsContext *)graphicsContextWithBitmapImageRep:(NSBitmapImageRep *)bitmapRep;
@@ -53,7 +52,6 @@ typedef NSUInteger NSImageInterpolation;
 /* Instantiates from an arbitrary graphicsPort (usually CGContextRef).  initialFlippedState is used to determine the return value from -isFlipped when no view is focused in the context.
 */
 + (NSGraphicsContext *)graphicsContextWithGraphicsPort:(void *)graphicsPort flipped:(BOOL)initialFlippedState;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 // Setting and identifying the current context in the thread
 + (NSGraphicsContext *)currentContext;
@@ -85,11 +83,9 @@ typedef NSUInteger NSImageInterpolation;
 // Platform specific drawing context (usually CGContextRef)
 - (void *)graphicsPort;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 /* Returns the flip state of the receiver.  The state is determined by messaging -isFlipped to the focus view in the context.  If no view has focus, returns NO unless the receiver is instantiated via graphicsContextWithGraphicsPort:drawingToScreen:flipped: with initialFlippedState == YES.
 */
 - (BOOL)isFlipped;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 @end
 
 @interface NSGraphicsContext(NSGraphicsContext_RenderingOptions)
@@ -99,26 +95,18 @@ typedef NSUInteger NSImageInterpolation;
 - (void)setImageInterpolation:(NSImageInterpolation)interpolation;
 - (NSImageInterpolation)imageInterpolation;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (void)setPatternPhase:(NSPoint)phase;
 - (NSPoint)patternPhase;
-#endif
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)setCompositingOperation:(NSCompositingOperation)operation;
 - (NSCompositingOperation)compositingOperation;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (NSColorRenderingIntent)colorRenderingIntent;
-- (void)setColorRenderingIntent:(NSColorRenderingIntent)renderingIntent;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+- (NSColorRenderingIntent)colorRenderingIntent NS_AVAILABLE_MAC(10_5);
+- (void)setColorRenderingIntent:(NSColorRenderingIntent)renderingIntent NS_AVAILABLE_MAC(10_5);
 @end
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 @class CIContext;
 @interface NSGraphicsContext (NSQuartzCoreAdditions)
 - (CIContext *)CIContext;
 @end
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 /********* Deprecated API *********/
 // The remaining portion is deprecated on Mac OS X 10.6 and Later.

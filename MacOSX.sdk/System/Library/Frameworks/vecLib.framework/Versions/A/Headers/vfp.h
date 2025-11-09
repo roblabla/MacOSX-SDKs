@@ -3,9 +3,9 @@
  
      Contains:   MathLib style functions for vectors
  
-     Version:    vecLib-268.0
+     Version:    vecLib-325.4
  
-     Copyright:  © 1999-2010 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2011 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -25,7 +25,7 @@
 */
 #include "vecLibTypes.h"
 
-#include <AvailabilityMacros.h>
+#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -61,7 +61,7 @@ extern "C" {
  *  Availability:
  *    Mac OS X:         in version 10.5 and later in Accelerate.framework
  */
-extern vFloat  vceilf( vFloat A )                                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern vFloat  vceilf( vFloat A ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /*
  *  vfloorf()  -- vector floorf()
@@ -69,7 +69,7 @@ extern vFloat  vceilf( vFloat A )                                            AVA
  *  Availability:
  *    Mac OS X:         in version 10.5 and later in Accelerate.framework
  */
-extern vFloat  vfloorf( vFloat A )                                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern vFloat  vfloorf( vFloat A ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /*
  *  vintf()  -- vector truncf()
@@ -77,7 +77,7 @@ extern vFloat  vfloorf( vFloat A )                                            AV
  *  Availability:
  *    Mac OS X:         in version 10.5 and later in Accelerate.framework
  */
-extern vFloat  vintf( vFloat A )                                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern vFloat  vintf( vFloat A ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 /*
  *  vnintf()  -- vector rintf()   (round-to-nearest-even rounding mode)
@@ -85,7 +85,7 @@ extern vFloat  vintf( vFloat A )                                            AVAI
  *  Availability:
  *    Mac OS X:         in version 10.5 and later in Accelerate.framework
  */
-extern vFloat  vnintf( vFloat A )                                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern vFloat  vnintf( vFloat A ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -94,7 +94,7 @@ extern vFloat  vnintf( vFloat A )                                            AVA
  *  Availability:
  *    Mac OS X:         in version 10.5 and later in Accelerate.framework
  */
-extern vFloat  vrecf( vFloat A )                                            AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern vFloat  vrecf( vFloat A ) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -105,7 +105,7 @@ extern vFloat  vrecf( vFloat A )                                            AVAI
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vdivf(vFloat A, vFloat B)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vdivf(vFloat A, vFloat B) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -116,7 +116,7 @@ extern vFloat  vdivf(vFloat A, vFloat B)                                    AVAI
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vsqrtf(vFloat X)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vsqrtf(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -127,7 +127,7 @@ extern vFloat  vsqrtf(vFloat X)                               AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vrsqrtf(vFloat X)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vrsqrtf(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -159,7 +159,7 @@ extern vFloat  vrsqrtf(vFloat X)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vexpf(vFloat X)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vexpf(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -170,7 +170,7 @@ extern vFloat  vexpf(vFloat X)                                AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vexpm1f(vFloat X)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vexpm1f(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -181,7 +181,7 @@ extern vFloat  vexpm1f(vFloat X)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vlogf(vFloat X)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vlogf(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*
  *  vlogf()
@@ -189,7 +189,7 @@ extern vFloat  vlogf(vFloat X)                                AVAILABLE_MAC_OS_X
  *  Availability:
  *    Mac OS X:         in version 10.5 and later in Accelerate.framework
  */
-extern vFloat  vlog10f(vFloat X)                              AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern vFloat  vlog10f(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -200,7 +200,7 @@ extern vFloat  vlog10f(vFloat X)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vlog1pf(vFloat X)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vlog1pf(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -211,7 +211,7 @@ extern vFloat  vlog1pf(vFloat X)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vlogbf(vFloat X)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vlogbf(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -222,7 +222,7 @@ extern vFloat  vlogbf(vFloat X)                               AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vscalbf(vFloat X, vSInt32 n)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vscalbf(vFloat X, vSInt32 n) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -248,7 +248,7 @@ extern vFloat  vscalbf(vFloat X, vSInt32 n)                                  AVA
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vfabf(vFloat v)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vfabf(vFloat v) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -259,7 +259,7 @@ extern vFloat  vfabf(vFloat v)                                AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vcopysignf(vFloat arg2, vFloat arg1)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vcopysignf(vFloat arg2, vFloat arg1) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -270,7 +270,7 @@ extern vFloat  vcopysignf(vFloat arg2, vFloat arg1)                         AVAI
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vnextafterf(vFloat x, vFloat y)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vnextafterf(vFloat x, vFloat y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -290,7 +290,7 @@ extern vFloat  vnextafterf(vFloat x, vFloat y)                              AVAI
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vUInt32  vclassifyf(vFloat arg)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vUInt32  vclassifyf(vFloat arg) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -301,7 +301,7 @@ extern vUInt32  vclassifyf(vFloat arg)                        AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vUInt32  vsignbitf(vFloat arg)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vUInt32  vsignbitf(vFloat arg) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -321,7 +321,7 @@ extern vUInt32  vsignbitf(vFloat arg)                         AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vsinf(vFloat arg)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vsinf(vFloat arg) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /*
  *  vsincosf()   -- simultaneous calculation of sine and cosine of input. (Cheaper than doing these separately.)
@@ -330,7 +330,7 @@ extern vFloat  vsinf(vFloat arg)                              AVAILABLE_MAC_OS_X
  *  Availability:
  *    Mac OS X:         in version 10.5 and later in Accelerate.framework
  */
-extern vFloat  vsincosf( vFloat arg, vFloat *sine_result)     AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern vFloat  vsincosf( vFloat arg, vFloat *sine_result) __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
 
 /*
@@ -341,7 +341,7 @@ extern vFloat  vsincosf( vFloat arg, vFloat *sine_result)     AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vcosf(vFloat arg)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vcosf(vFloat arg) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -352,7 +352,7 @@ extern vFloat  vcosf(vFloat arg)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vtanf(vFloat arg)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vtanf(vFloat arg) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -376,7 +376,7 @@ extern vFloat  vtanf(vFloat arg)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vasinf(vFloat arg)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vasinf(vFloat arg) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -387,7 +387,7 @@ extern vFloat  vasinf(vFloat arg)                             AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vacosf(vFloat arg)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vacosf(vFloat arg) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -398,7 +398,7 @@ extern vFloat  vacosf(vFloat arg)                             AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vatanf(vFloat arg)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vatanf(vFloat arg) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -409,7 +409,7 @@ extern vFloat  vatanf(vFloat arg)                             AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vatan2f(vFloat arg1, vFloat arg2)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vatan2f(vFloat arg1, vFloat arg2) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -434,7 +434,7 @@ extern vFloat  vatan2f(vFloat arg1, vFloat arg2)                            AVAI
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vsinhf(vFloat X)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vsinhf(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -445,7 +445,7 @@ extern vFloat  vsinhf(vFloat X)                               AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vcoshf(vFloat X)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vcoshf(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -456,7 +456,7 @@ extern vFloat  vcoshf(vFloat X)                               AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vtanhf(vFloat X)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vtanhf(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -467,7 +467,7 @@ extern vFloat  vtanhf(vFloat X)                               AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vasinhf(vFloat X)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vasinhf(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -478,7 +478,7 @@ extern vFloat  vasinhf(vFloat X)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vacoshf(vFloat X)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vacoshf(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -489,7 +489,7 @@ extern vFloat  vacoshf(vFloat X)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vatanhf(vFloat X)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vatanhf(vFloat X) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -513,7 +513,7 @@ extern vFloat  vatanhf(vFloat X)                              AVAILABLE_MAC_OS_X
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vfmodf(vFloat X, vFloat Y)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vfmodf(vFloat X, vFloat Y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -524,7 +524,7 @@ extern vFloat  vfmodf(vFloat X, vFloat Y)                                   AVAI
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vremainderf(vFloat X, vFloat Y)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vremainderf(vFloat X, vFloat Y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -535,7 +535,7 @@ extern vFloat  vremainderf(vFloat X, vFloat Y)                              AVAI
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vremquof(vFloat X, vFloat Y, vUInt32 *QUO)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vremquof(vFloat X, vFloat Y, vUInt32 *QUO) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -557,7 +557,7 @@ extern vFloat  vremquof(vFloat X, vFloat Y, vUInt32 *QUO)                       
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vipowf(vFloat X, vSInt32 Y)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vipowf(vFloat X, vSInt32 Y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 /*
@@ -568,7 +568,7 @@ extern vFloat  vipowf(vFloat X, vSInt32 Y)                                   AVA
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vFloat  vpowf(vFloat X, vFloat Y)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vFloat  vpowf(vFloat X, vFloat Y) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 
@@ -585,7 +585,7 @@ extern vFloat  vpowf(vFloat X, vFloat Y)                                    AVAI
  *    CarbonLib:        not in Carbon, but vecLib is compatible with CarbonLib
  *    Non-Carbon CFM:   in vecLib 1.0 and later
  */
-extern vUInt32  vtablelookup(vSInt32 Index_Vect, uint32_t *Table)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern vUInt32  vtablelookup(vSInt32 Index_Vect, uint32_t *Table) __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 
 #endif	// defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE__

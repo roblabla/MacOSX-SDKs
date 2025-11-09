@@ -3,7 +3,7 @@
  
      Contains:   Process Manager Interfaces.
  
-     Version:    HIServices-311~1
+     Version:    HIServices-382.2~1
  
      Copyright:  © 1989-2008 by Apple Computer, Inc., all rights reserved
  
@@ -134,7 +134,9 @@ enum {
 
 typedef UInt32 ProcessApplicationTransformState;
 enum {
-  kProcessTransformToForegroundApplication = 1
+  kProcessTransformToForegroundApplication = 1,
+  kProcessTransformToBackgroundApplication = 2, /* functional in Mac OS X Barolo and later */
+  kProcessTransformToUIElementApplication = 4 /* functional in Mac OS X Barolo and later */
 };
 
 /*
@@ -682,9 +684,9 @@ SameProcess(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 #if __GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ >= 5
-void ExitToShell() __attribute__ (( __noreturn__ ));
+void ExitToShell( void ) __attribute__ (( __noreturn__ ));
 #else
-void ExitToShell();
+void ExitToShell( void );
 #endif
 
 /*
@@ -950,14 +952,24 @@ ShowHideProcess(
  *     The type is specified in the transformState parameter.
  *  
  *  Discussion:
- *    Given a psn which is a background-only application, this call can
- *    cause that application to be transformed into a foreground
- *    application.  A background only application does not appear in
- *    the Dock or in the Force Quit dialog, and never has a menu bar or
- *    is frontmost, while a foreground application does appear in the
- *    Dock and Force Quit dialog and does have a menu bar.  This call
- *    does not cause the application to be brought to the front ( use
- *    SetFrontProcess for that ).
+ *    Given a psn for an application, this call transforms that
+ *    application into the given type.  Foreground applications have a
+ *    menu bar and appear in the Dock.  Background applications do not
+ *    appear in the Dock, do not have a menu bar ( and should not have
+ *    windows or other user interface ).  UIElement applications do not
+ *    have a menu bar, do not appear in the dock, but may in limited
+ *    circumstances present windows and user interface. If a foreground
+ *    application is frontmost when transformed into a background
+ *    application, it is first hidden and another application is made
+ *    frontmost.  A UIElement or background-only application which is
+ *    transformed into a foreground application is not brought to the
+ *    front (use SetFrontProcess() after the transform if this is
+ *    required) nor will it be shown if it is hidden ( even if hidden
+ *    automatically by being transformed into a background-only
+ *    application ), so the caller should use ShowHideProcess() to show
+ *    the application after it is transformed into a foreground
+ *    application. Applications can only transform themselves; this
+ *    call cannot change the type of another application.
  *  
  *  Mac OS X threading:
  *    Thread safe since version 10.3

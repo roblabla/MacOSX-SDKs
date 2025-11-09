@@ -1,7 +1,7 @@
 /*
 	NSFontManager.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -36,13 +36,11 @@ enum {
 };
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
 enum {
    NSFontCollectionApplicationOnlyMask = 1 << 0  
 };
 
-#endif
 
 /* And these "actions" are really tag values in Font Menu cells which send any of the action messages listed above.  Normally, they're pre-defined in the font panel.
  */
@@ -118,7 +116,6 @@ typedef NSUInteger NSFontAction;
 
 - (NSString *) localizedNameForFamily:(NSString *)family face:(NSString *)faceKey;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)setSelectedAttributes:(NSDictionary *)attributes isMultiple:(BOOL)flag;
 - (NSDictionary *)convertAttributes:(NSDictionary *)attributes;
 
@@ -131,21 +128,18 @@ typedef NSUInteger NSFontAction;
 
 - (void)addFontDescriptors:(NSArray *)descriptors  toCollection:(NSString *)collectionName;
 - (void)removeFontDescriptor:(NSFontDescriptor *)descriptor fromCollection:(NSString *)collection;
-#endif
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 /* Returns the current font action used by -convertFont:. This method is intended to be invoked to query the font conversion action while the action message (usually -changeFont:) is being invoked.
  */
-- (NSFontAction)currentFontAction;
+- (NSFontAction)currentFontAction NS_AVAILABLE_MAC(10_5);
 
 /* Converts fontTraits to a new traits mask value just as -convertFont:. This method is intended to be invoked to query the font traits while the action message (usually -changeFont:) is being invoked when the current font action is either NSAddTraitFontAction or NSRemoveTraitFontAction.
  */
-- (NSFontTraitMask)convertFontTraits:(NSFontTraitMask)traits;
+- (NSFontTraitMask)convertFontTraits:(NSFontTraitMask)traits NS_AVAILABLE_MAC(10_5);
 
-- (void)setTarget:(id)aTarget;
-- (id)target;
+- (void)setTarget:(id)aTarget NS_AVAILABLE_MAC(10_5);
+- (id)target NS_AVAILABLE_MAC(10_5);
 
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
 @end
 
 @interface NSFontManager(NSFontManagerMenuActionMethods)
@@ -163,9 +157,7 @@ typedef NSUInteger NSFontAction;
 - (void)modifyFontViaPanel:(id)sender;
 - (void)modifyFont:(id)sender;
 - (void)orderFrontFontPanel:(id)sender;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)orderFrontStylesPanel:(id)sender;
-#endif
 
 @end
 

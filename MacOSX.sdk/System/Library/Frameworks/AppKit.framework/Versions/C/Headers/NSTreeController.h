@@ -1,18 +1,15 @@
 /*
 	NSTreeController.h
 	Application Kit
-	Copyright (c) 2003-2009, Apple Inc.
+	Copyright (c) 2003-2011, Apple Inc.
 	All rights reserved.
  */
 
 #import <AppKit/NSObjectController.h>
 #import <Foundation/NSIndexPath.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 @class NSTreeNode;
-#endif
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 @interface NSTreeController : NSObjectController {
     id _treeControllerReserved1;
@@ -97,18 +94,15 @@
 - (BOOL)addSelectionIndexPaths:(NSArray *)indexPaths;
 - (BOOL)removeSelectionIndexPaths:(NSArray *)indexPaths;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (NSArray *)selectedNodes;
+- (NSArray *)selectedNodes NS_AVAILABLE_MAC(10_5);
 
-- (void)moveNode:(NSTreeNode *)node toIndexPath:(NSIndexPath *)indexPath;
-- (void)moveNodes:(NSArray *)nodes toIndexPath:(NSIndexPath *)startingIndexPath;
+- (void)moveNode:(NSTreeNode *)node toIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_5);
+- (void)moveNodes:(NSArray *)nodes toIndexPath:(NSIndexPath *)startingIndexPath NS_AVAILABLE_MAC(10_5);
 
-- (NSString *)childrenKeyPathForNode:(NSTreeNode *)node;
-- (NSString *)countKeyPathForNode:(NSTreeNode *)node;
-- (NSString *)leafKeyPathForNode:(NSTreeNode *)node;
-#endif
+- (NSString *)childrenKeyPathForNode:(NSTreeNode *)node NS_AVAILABLE_MAC(10_5);
+- (NSString *)countKeyPathForNode:(NSTreeNode *)node NS_AVAILABLE_MAC(10_5);
+- (NSString *)leafKeyPathForNode:(NSTreeNode *)node NS_AVAILABLE_MAC(10_5);
 
 
 @end
 
-#endif

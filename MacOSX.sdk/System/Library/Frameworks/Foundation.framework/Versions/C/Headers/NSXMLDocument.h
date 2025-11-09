@@ -1,10 +1,8 @@
 /*	NSXMLDocument.h
-	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSData, NSXMLDTD, NSXMLDocument, NSDictionary, NSArray;
 
@@ -19,6 +17,8 @@
 //  NSXMLNodePreserveEmptyElements
 //  NSXMLNodePreserveQuotes
 //  NSXMLNodePreserveWhitespace
+//  NSXMLNodeLoadExternalEntities
+//  NSXMLNodeLoadExternalEntitiesSameOriginOnly
 	
 //  NSXMLDocumentTidyHTML
 //  NSXMLDocumentTidyXML
@@ -58,10 +58,10 @@ typedef NSUInteger NSXMLDocumentContentKind;
 	NSArray *_children;
 	BOOL _childrenHaveMutated;
 	BOOL _standalone;
-	uint8_t _padding3[2];
+	int8_t padding[2];
 	NSXMLElement *_rootElement;
 	NSString *_URI;
-	NSString *_MIMEType;
+	id	 _extraIvars;
 	NSUInteger _fidelityMask;
 	NSXMLDocumentContentKind _contentKind;
 }
@@ -265,5 +265,3 @@ typedef NSUInteger NSXMLDocumentContentKind;
 - (BOOL)validateAndReturnError:(NSError **)error;
 
 @end
-
-#endif		// Availability guard

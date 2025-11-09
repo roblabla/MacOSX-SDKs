@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_APACHE_LICENSE_HEADER_START@
  * 
@@ -49,8 +49,8 @@ __BEGIN_DECLS
  * @result
  * The newly created group, or NULL on failure.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
-DISPATCH_WARN_RESULT
+__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
+DISPATCH_EXPORT DISPATCH_MALLOC DISPATCH_WARN_RESULT DISPATCH_NOTHROW
 dispatch_group_t
 dispatch_group_create(void);
 
@@ -78,8 +78,8 @@ dispatch_group_create(void);
  * The block to perform asynchronously.
  */
 #ifdef __BLOCKS__
-__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
-DISPATCH_NONNULL_ALL
+__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
+DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_NOTHROW
 void
 dispatch_group_async(dispatch_group_t group,
 	dispatch_queue_t queue,
@@ -112,8 +112,8 @@ dispatch_group_async(dispatch_group_t group,
  * parameter passed to this function is the context provided to
  * dispatch_group_async_f().
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
-DISPATCH_NONNULL1 DISPATCH_NONNULL2 DISPATCH_NONNULL4
+__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
+DISPATCH_EXPORT DISPATCH_NONNULL1 DISPATCH_NONNULL2 DISPATCH_NONNULL4 DISPATCH_NOTHROW
 void
 dispatch_group_async_f(dispatch_group_t group,
 	dispatch_queue_t queue,
@@ -124,11 +124,11 @@ dispatch_group_async_f(dispatch_group_t group,
  * @function dispatch_group_wait
  *
  * @abstract
- * Wait synchronously for the previously submitted blocks to complete;
- * returns if the blocks have not completed within the specified timeout.
+ * Wait synchronously until all the blocks associated with a group have
+ * completed or until the specified timeout has elapsed.
  *
  * @discussion
- * This function waits  for the completion of the blocks associated with the
+ * This function waits for the completion of the blocks associated with the
  * given dispatch group, and returns after all blocks have completed or when
  * the specified timeout has elapsed. When a timeout occurs, the group is
  * restored to its original state.
@@ -155,8 +155,8 @@ dispatch_group_async_f(dispatch_group_t group,
  * Returns zero on success (all blocks associated with the group completed
  * within the specified timeout) or non-zero on error (i.e. timed out).
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
-DISPATCH_NONNULL_ALL
+__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
+DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_NOTHROW
 long
 dispatch_group_wait(dispatch_group_t group, dispatch_time_t timeout);
 
@@ -164,8 +164,8 @@ dispatch_group_wait(dispatch_group_t group, dispatch_time_t timeout);
  * @function dispatch_group_notify
  *
  * @abstract
- * Schedule a block to be submitted to a queue when a group of previously
- * submitted blocks have completed.
+ * Schedule a block to be submitted to a queue when all the blocks associated
+ * with a group have completed.
  *
  * @discussion
  * This function schedules a notification block to be submitted to the specified
@@ -191,8 +191,8 @@ dispatch_group_wait(dispatch_group_t group, dispatch_time_t timeout);
  * The block to submit when the group completes.
  */
 #ifdef __BLOCKS__
-__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
-DISPATCH_NONNULL_ALL
+__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
+DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_NOTHROW
 void
 dispatch_group_notify(dispatch_group_t group,
 	dispatch_queue_t queue,
@@ -203,8 +203,8 @@ dispatch_group_notify(dispatch_group_t group,
  * @function dispatch_group_notify_f
  *
  * @abstract
- * Schedule a function to be submitted to a queue when a group of previously
- * submitted functions have completed.
+ * Schedule a function to be submitted to a queue when all the blocks
+ * associated with a group have completed.
  *
  * @discussion
  * See dispatch_group_notify() for details.
@@ -221,8 +221,8 @@ dispatch_group_notify(dispatch_group_t group,
  * parameter passed to this function is the context provided to
  * dispatch_group_notify_f().
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
-DISPATCH_NONNULL1 DISPATCH_NONNULL2 DISPATCH_NONNULL4
+__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
+DISPATCH_EXPORT DISPATCH_NONNULL1 DISPATCH_NONNULL2 DISPATCH_NONNULL4 DISPATCH_NOTHROW
 void
 dispatch_group_notify_f(dispatch_group_t group,
 	dispatch_queue_t queue,
@@ -244,8 +244,8 @@ dispatch_group_notify_f(dispatch_group_t group,
  * The dispatch group to update.
  * The result of passing NULL in this parameter is undefined.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
-DISPATCH_NOTHROW DISPATCH_NONNULL_ALL
+__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
+DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_NOTHROW
 void
 dispatch_group_enter(dispatch_group_t group);
 
@@ -263,8 +263,8 @@ dispatch_group_enter(dispatch_group_t group);
  * The dispatch group to update.
  * The result of passing NULL in this parameter is undefined.
  */
-__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_NA)
-DISPATCH_NOTHROW DISPATCH_NONNULL_ALL
+__OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0)
+DISPATCH_EXPORT DISPATCH_NONNULL_ALL DISPATCH_NOTHROW
 void
 dispatch_group_leave(dispatch_group_t group);
 

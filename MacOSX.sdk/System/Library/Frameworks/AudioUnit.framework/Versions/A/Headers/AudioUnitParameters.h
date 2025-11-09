@@ -3,7 +3,7 @@
  
      Contains:   Parameter constants for Apple AudioUnits
  
-     Copyright:  (c) 2002-2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2002-2008 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -17,7 +17,6 @@
 
 #pragma mark General Declarations
 
-#if !TARGET_OS_IPHONE
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The following specifies the equivalent parameterID's for the Group scope for standard
 MIDI Controllers. This list is not exhaustive. It represents the parameters, and their corresponding 
@@ -28,6 +27,7 @@ Group scope parameter IDs from 0 < 512 are reserved for mapping MIDI controllers
 enum {
 	kAUGroupParameterID_Volume					= 7,	// value 0 < 128
 	kAUGroupParameterID_Sustain					= 64, 	// value 0-63 (off), 64-127 (on)
+	kAUGroupParameterID_Sostenuto				= 66, 	// value 0-63 (off), 64-127 (on)
 	kAUGroupParameterID_AllNotesOff				= 123,	// value ignored
 	kAUGroupParameterID_ModWheel				= 1,	// value 0 < 128
 	kAUGroupParameterID_PitchBend				= 0xE0,	// value -8192 - 8191
@@ -49,9 +49,9 @@ enum {
 	
 	kAUGroupParameterID_KeyPressure_FirstKey	= 256,	// value 0 < 128
 	kAUGroupParameterID_KeyPressure_LastKey		= 383	// value 0 < 128
-};	
+};
 
-
+#if !TARGET_OS_IPHONE
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Supporting the kAUGroupParameterID_KeyPressure parameter indicates to hosts that your audio unit
 supports polyphonic "aftertouch" key pressure. 
@@ -82,7 +82,7 @@ enum {
 #pragma mark Apple Specific
 
 // Parameters for the AUMixer3D unit
-// only some of these parameters are available in the embedded implementation of this AU
+// these are available for both desktop and iphone
 enum {
         // Input, Degrees, -180->180, 0
     k3DMixerParam_Azimuth		= 0,
@@ -97,14 +97,17 @@ enum {
     k3DMixerParam_Gain			= 3,
 	
 		// Input, rate scaler	0.5 -> 2.0
-    k3DMixerParam_PlaybackRate	= 4
+    k3DMixerParam_PlaybackRate	= 4,
 	
 };
 
 // Parameters for the AUMultiChannelMixer unit
+// these are available for both desktop and iphone
 enum {
 	kMultiChannelMixerParam_Volume 	= 0,
 	kMultiChannelMixerParam_Enable 	= 1,
+	kMultiChannelMixerParam_Pan     = 2,			// -1 - 0 - 1, only valid when output is not mono
+													// relationship to mix matrix: last one in wins
 
 		// read-only
 	// these report level in dB, as do the other mixers
@@ -130,6 +133,15 @@ enum {
 #endif
 };
 
+// Parameters for AUNewTimePitch
+enum {
+	kNewTimePitchParam_Rate							= 0,
+	kNewTimePitchParam_Pitch						= 1,
+	kNewTimePitchParam_Overlap						= 4,
+	kNewTimePitchParam_EnablePeakLocking			= 6
+};
+
+
 #if !TARGET_OS_IPHONE
 enum {
 		// Input, Dry/Wet equal-power blend, %	  0.0 -> 100.0
@@ -145,7 +157,13 @@ enum {
 		// Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
 		// smaller values make sound more muffled; a value of 0.0 indicates no filtering
     k3DMixerParam_ObstructionAttenuation = 8,
+
+		// Input/Output, dB, -120->20, 0
+    k3DMixerParam_MinGain		= 9,
 	
+		// Input/Output, dB, -120->20, 0
+    k3DMixerParam_MaxGain		= 10,
+
 		// read-only
 		//
 		// For each of the following, use the parameter ID plus the channel number
@@ -564,6 +582,22 @@ enum {
 	
 // See the MusicDevice.h header file for more about using the extended control semantics 
 // of this API.	
+
+// Parameters for the AURoundTripAACParam unit
+enum {
+		// Global, indexed : AAC, AAC HE, AAC HEv2, AAC ELD
+	kRoundTripAACParam_Format				= 0,
+		
+		// Global, kilobits per second
+	kRoundTripAACParam_BitRate				= 1,
+		
+		// Global, indexed : min, low, med, high, max
+	kRoundTripAACParam_Quality 				= 2,
+	
+		// Global, Hertz
+	kRoundTripAACParam_CompressedFormatSampleRate = 3
+};
+
 
 #endif // !TARGET_OS_IPHONE
 #endif //__AudioUnitParameters

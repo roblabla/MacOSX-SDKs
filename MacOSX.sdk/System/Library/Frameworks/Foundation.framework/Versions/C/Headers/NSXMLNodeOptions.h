@@ -1,10 +1,8 @@
 /*	NSXMLNodeOptions.h
-	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 /*!
     @enum Init, input, and output options
@@ -30,6 +28,10 @@
     @constant NSXMLDocumentTidyXML Try to change malformed XML into valid XML
     
     @constant NSXMLDocumentValidate Valid this document against its DTD
+ 
+    @constant NSXMLNodeLoadExternalEntitiesAlways Load all external entities instead of just non-network ones
+    @constant NSXMLNodeLoadExternalEntitiesSameOriginOnly Load non-network external entities and external entities from urls with the same domain, host, and port as the document
+    @constant NSXMLNodeLoadExternalEntitiesNever Load no external entities, even those that don't require network access
 
     @constant NSXMLNodePrettyPrint Output this node with extra space for readability
     @constant NSXMLDocumentIncludeContentTypeDeclaration Include a content type declaration for HTML or XHTML
@@ -51,7 +53,13 @@ enum {
     
     // Validate
     NSXMLDocumentValidate = 1UL << 13,
-
+    
+    // External Entity Loading
+    // Choose only zero or one option. Choosing none results in system-default behavior.
+    NSXMLNodeLoadExternalEntitiesAlways = 1UL << 14,
+    NSXMLNodeLoadExternalEntitiesSameOriginOnly = 1UL << 15,
+    NSXMLNodeLoadExternalEntitiesNever = 1UL << 19,
+    
     // Parse
     NSXMLDocumentXInclude = 1UL << 16,
     
@@ -85,6 +93,4 @@ enum {
             NSXMLNodePreserveCharacterReferences |
             0xFFF00000) // high 12 bits
 };
-
-#endif		// Availability guard
 

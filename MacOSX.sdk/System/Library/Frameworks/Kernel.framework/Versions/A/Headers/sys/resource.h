@@ -119,6 +119,12 @@ typedef __uint64_t	rlim_t;
  */
 #define PRIO_DARWIN_BG 0x1000
 
+/*
+ * use PRIO_DARWIN_NONUI to restrict a process's ability to make calls to
+ * the GPU.
+ */
+#define PRIO_DARWIN_NONUI 0x1001
+
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 

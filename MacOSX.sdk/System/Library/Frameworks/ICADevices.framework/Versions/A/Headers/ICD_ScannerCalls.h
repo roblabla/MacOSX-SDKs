@@ -1,18 +1,14 @@
-/*------------------------------------------------------------------------------------------------------------------------------
- *
- *  ICADevices/ICD_ScannerCalls.h
- *
- *  Copyright (c) 2004-2006 Apple Computer, Inc. All rights reserved.
- *
- *  For bug reports, consult the following page onthe World Wide Web:
- *  http://developer.apple.com/bugreporter/
- *
- *----------------------------------------------------------------------------------------------------------------------------*/
+//------------------------------------------------------------------------------------------------------------------------------
+//
+//  ICD_ScannerCalls.h
+//
+//  Copyright (c) 2000-2010 Apple Inc. All rights reserved.
+//
+//  For bug reports, consult the following page onthe World Wide Web:
+//  http://developer.apple.com/bugreporter/
+//------------------------------------------------------------------------------------------------------------------------------
 
 #pragma once
-
-#ifndef __ICD_ScannerCalls__
-#define __ICD_ScannerCalls__
 
 //------------------------------------------------------------------------------------------------------------------------------
 
@@ -238,6 +234,10 @@ typedef CALLBACK_API_C(ICAError, __ICD_ScannerWriteDataToFile)
 typedef CALLBACK_API_C(ICAError, __ICD_ScannerWriteDataToFileDescriptor)
                                       (const ScannerObjectInfo* objectInfo, int fd, UInt32 offset, long* length);
 
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerWriteDataToFileDescriptor64)
+                                      (const ScannerObjectInfo* objectInfo, int fd);
+
+	
 //------------------------------------------------------------------------------------------------------------------------------
 
 // callback functions
@@ -270,7 +270,9 @@ typedef struct ICD_Scannerscanner_callback_functions
     __ICD_ScannerWriteDataToFile                    f_ICD_ScannerWriteDataToFile;
     __ICD_ScannerOpenMassStorageDevice              f_ICD_ScannerOpenMassStorageDevice;
     __ICD_ScannerWriteDataToFileDescriptor          f_ICD_ScannerWriteDataToFileDescriptor;
+    __ICD_ScannerWriteDataToFileDescriptor64        f_ICD_ScannerWriteDataToFileDescriptor64;	
 } ICD_scanner_callback_functions;
+
 extern ICD_scanner_callback_functions gICDScannerCallbackFunctions;
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -286,15 +288,10 @@ ICAError ICDScannerNewObjectInfoCreated(const ScannerObjectInfo* parentInfo, UIn
 ICAError ICDScannerCopyDeviceInfoDictionary(const char*		deviceName,		// name of the device (from device's objectInfo)
                                          CFDictionaryRef*	theDict);		// this CFDictionaryRef contains information about the camera, e.g. the icon file,...
 
-ICAError ICDScannerCreateICAThumbnailFromICNS(const char*		fileName,		// filename for .icns icon file
-                                                    void*	thumbnail);		// pointer to ICAThumbnail
-                                                                      // NOTE: you have to allocate and prefill the ICAThumbnail
-                                                                      //       malloc(sizeof(ICAThumbnail)+9215);
-                                                                      //         width & height -> 48
-                                                                      //		 dataSize       -> 9216  (= 48*48*4)
+ICAError ICDScannerCreateICAThumbnailFromICNS( const char* fileName, void* thumbnail ) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-
-ICAError ICDScannerInitiateNotificationCallback(const void* pb);
+//Use ICDSendNotification or ICDSendNotificationAndWaitForReply instead of ICDInitiateNotificationCallback
+ICAError ICDScannerInitiateNotificationCallback(const void* pb)                   DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 ICAError ICDScannerCreateEventDataCookie(const ICAObject object, ICAEventDataCookie* cookie);
 
@@ -332,10 +329,6 @@ ICAError ICDScannerDisconnectTCPIPDevice(CFDictionaryRef params);
 
 #ifdef __cplusplus
 }
-#endif
-
-//------------------------------------------------------------------------------------------------------------------------------
-
 #endif
 
 //------------------------------------------------------------------------------------------------------------------------------

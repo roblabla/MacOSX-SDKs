@@ -1,5 +1,3 @@
-/* $Xorg: XInput.h,v 1.4 2001/02/09 02:03:23 xorgcvs Exp $ */
-
 /************************************************************
 
 Copyright 1989, 1998  The Open Group
@@ -45,7 +43,6 @@ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
 SOFTWARE.
 
 ********************************************************/
-/* $XFree86: xc/include/extensions/XInput.h,v 1.3 2001/12/14 19:53:28 dawes Exp $ */
 
 /* Definitions used by the library and client */
 
@@ -156,13 +153,28 @@ SOFTWARE.
 #define NoExtensionEvent(d,type,_class) \
     { _class =  ((XDevice *) d)->device_id << 8 | _noExtensionEvent;}
 
+
+/* We need the declaration for DevicePresence. */
+#if defined(__cplusplus) || defined(c_plusplus)
+extern "C" {
+#endif
+    extern int _XiGetDevicePresenceNotifyEvent(Display *);
+    extern void _xibaddevice( Display *dpy, int *error);
+    extern void _xibadclass( Display *dpy, int *error);
+    extern void _xibadevent( Display *dpy, int *error);
+    extern void _xibadmode( Display *dpy, int *error);
+    extern void _xidevicebusy( Display *dpy, int *error);
+#if defined(__cplusplus) || defined(c_plusplus)
+}
+#endif
+
 #define DevicePresence(dpy, type, _class)                       \
     {                                                           \
-        extern int _XiGetDevicePresenceNotifyEvent(Display *);  \
         type = _XiGetDevicePresenceNotifyEvent(dpy);            \
         _class =  (0x10000 | _devicePresence);                  \
     }
 
+/* Errors */
 #define BadDevice(dpy,error) _xibaddevice(dpy, &error)
 
 #define BadClass(dpy,error) _xibadclass(dpy, &error)
@@ -172,6 +184,8 @@ SOFTWARE.
 #define BadMode(dpy,error) _xibadmode(dpy, &error)
 
 #define DeviceBusy(dpy,error) _xidevicebusy(dpy, &error)
+
+typedef struct _XAnyClassinfo *XAnyClassPtr;
 
 /***************************************************************
  *
@@ -471,6 +485,7 @@ typedef struct {
     int           state;        /* PropertyNewValue or PropertyDeleted */
 } XDevicePropertyNotifyEvent;
 
+
 /*******************************************************************
  *
  * Control structures for input devices that support input class
@@ -740,8 +755,6 @@ typedef struct {
  *
  */
 
-typedef struct _XAnyClassinfo *XAnyClassPtr;
-
 typedef struct _XAnyClassinfo {
 #if defined(__cplusplus) || defined(c_plusplus)
     XID 	c_class;
@@ -813,7 +826,6 @@ typedef struct	_XValuatorInfo
     unsigned long       motion_buffer;
     XAxisInfoPtr        axes;
     } XValuatorInfo;
-
 
 /*******************************************************************
  *
@@ -921,6 +933,8 @@ typedef struct {
     short		num_buttons;
     char        	buttons[32];
 } XButtonState;
+
+
 
 /*******************************************************************
  *
@@ -1218,15 +1232,6 @@ extern void	XFreeDeviceControl(
     XDeviceControl*	/* control */
 );
 
-typedef struct {
-    Bool    pending;
-    Bool    range;
-    Bool    immutable;
-    Bool    fromClient;
-    int     num_values;
-    long    *values;
-} XIPropertyInfo;
-
 extern Atom*   XListDeviceProperties(
     Display*            /* dpy */,
     XDevice*            /* dev */,
@@ -1266,7 +1271,6 @@ XGetDeviceProperty(
      unsigned long*     /* bytes_after*/,
      unsigned char**    /* prop*/
 );
-
 
 _XFUNCPROTOEND
 

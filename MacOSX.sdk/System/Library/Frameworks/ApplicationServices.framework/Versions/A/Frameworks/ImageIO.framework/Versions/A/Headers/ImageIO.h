@@ -1,6 +1,6 @@
 /*
  * ImageIO - ImageIO.h
- * Copyright (c) 2004 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2004-2010 Apple Inc. All rights reserved.
  *
  */
 
@@ -10,6 +10,8 @@
 #ifndef __COREFOUNDATION__
 #include <CoreFoundation/CoreFoundation.h>
 #endif
+
+#include <ImageIO/ImageIOBase.h>
 
 #include <ImageIO/CGImageSource.h>
 

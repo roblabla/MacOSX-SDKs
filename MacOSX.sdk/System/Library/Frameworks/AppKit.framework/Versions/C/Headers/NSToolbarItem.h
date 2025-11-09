@@ -1,7 +1,7 @@
 /*
 	NSToolbarItem.h
 	Application Kit
-	Copyright (c) 2000-2009, Apple Inc.
+	Copyright (c) 2000-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -121,7 +121,6 @@
 - (NSSize)maxSize;
     /* Unless you have set your own custom view, you should not call this method. */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 enum {
    NSToolbarItemVisibilityPriorityStandard = 0, // The default visibility priority value.  By default, all items have this priority
@@ -132,22 +131,19 @@ enum {
 
 - (void)setVisibilityPriority:(NSInteger)visibilityPriority;
 - (NSInteger)visibilityPriority;
-    /* When a toolbar does not have enough space to fit all its items, it must push some into the overflow menu.  Items with the highest visibility priority level are choosen last for the overflow menu.  The default visibilityPriority value is NSToolbarItemVisibilityPriorityStandard.  To suggest that an item always remain visible, give it a value greater than NSToolbarItemVisibilityPriorityStandard, but less than NSToolbarItemVisibilityPriorityUser.  In configurable toolbars, users can control the setting of any item, and the value is rememeber by NSToolbar along with its other autosaved information.  You should allow user setting to have the highest priority. */
+    /* When a toolbar does not have enough space to fit all its items, it must push some into the overflow menu.  Items with the highest visibility priority level are choosen last for the overflow menu.  The default visibilityPriority value is NSToolbarItemVisibilityPriorityStandard.  To suggest that an item always remain visible, give it a value greater than NSToolbarItemVisibilityPriorityStandard, but less than NSToolbarItemVisibilityPriorityUser.   In 10.7, users can no longer modify the toolbar item visibility priority. */
 
-#endif
 
 // ----- Validation of the items -----
 
 - (void)validate;
     /* Typically you should not invoke this method.  This method is called by its toolbar during validation.  Standard items validate themselves by sending the validateToolbarItem: validate message to the current validator.  Since items with custom views don't always have meaningful target/actions, they do nothing.  So for your custom items it may be useful to override this method and invent your own validation. */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 - (void)setAutovalidates:(BOOL)resistance;
 - (BOOL)autovalidates;
     /* By default NSToolbar automatically invokes its items validate method on a regular basis.  To be in complete control of when the -validate method is invoked, you can disable automatic validation on a per-item basis.  In particular, if your validation code is slow, you may want to do this for performance reasons. */
 
-#endif
 
 
 // ----- Controlling Duplicates In The Toolbar -----
@@ -175,4 +171,3 @@ APPKIT_EXTERN NSString *NSToolbarShowColorsItemIdentifier;        // Shows the c
 APPKIT_EXTERN NSString *NSToolbarShowFontsItemIdentifier;         // Shows the font panel.
 APPKIT_EXTERN NSString *NSToolbarCustomizeToolbarItemIdentifier;  // Puts the current toolbar into customize mode.
 APPKIT_EXTERN NSString *NSToolbarPrintItemIdentifier;             // Sends printDocument: to firstResponder, but you can change this in toolbarWillAddItem: if you need to do so.
-

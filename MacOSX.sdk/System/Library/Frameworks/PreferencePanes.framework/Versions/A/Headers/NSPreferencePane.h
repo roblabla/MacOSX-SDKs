@@ -2,7 +2,7 @@
  *  NSPreferencePane.h
  *  PreferencePanes
  *
- *  Copyright (c) 2001 Apple. All rights reserved.
+ *  Copyright (c) 2001-2010 Apple. All rights reserved.
  *
  */
 
@@ -15,15 +15,29 @@ typedef enum NSPreferencePaneUnselectReply
     NSUnselectLater = 2
 } NSPreferencePaneUnselectReply;
 
-extern NSString *NSPreferencePaneDoUnselectNotification;
-extern NSString *NSPreferencePaneCancelUnselectNotification;
 
+extern NSString * const NSPreferencePaneDoUnselectNotification;
+extern NSString * const	NSPreferencePaneCancelUnselectNotification;
 
 // Help Menu support
-#define	kNSPrefPaneHelpMenuInfoPListKey			@"NSPrefPaneHelpAnchors"
-#define	kNSPrefPaneHelpMenuTitleKey				@"title"		
-#define	kNSPrefPaneHelpMenuAnchorKey			@"anchor"				
+APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuInfoPListKey;
+APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuTitleKey;
+APPKIT_EXTERN NSString * const				NSPrefPaneHelpMenuAnchorKey;
 
+
+#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_7
+
+#define kNSPrefPaneHelpMenuInfoPListKey		NSPrefPaneHelpMenuInfoPListKey	
+#define kNSPrefPaneHelpMenuTitleKey			NSPrefPaneHelpMenuTitleKey		
+#define kNSPrefPaneHelpMenuAnchorKey		NSPrefPaneHelpMenuAnchorKey		
+
+#else /* MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_7 */
+
+#define	kNSPrefPaneHelpMenuInfoPListKey		@"NSPrefPaneHelpAnchors"
+#define	kNSPrefPaneHelpMenuTitleKey			@"title"		
+#define	kNSPrefPaneHelpMenuAnchorKey		@"anchor"				
+
+#endif
 
 @interface NSPreferencePane : NSObject
 {

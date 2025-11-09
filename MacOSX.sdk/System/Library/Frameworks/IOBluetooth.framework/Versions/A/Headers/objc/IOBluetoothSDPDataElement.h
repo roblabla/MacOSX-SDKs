@@ -54,7 +54,7 @@
                 needed since the size will be taken directly from the value (data, array, string).
                 
                 In the case where the element is an unsigned, 32-bit integer (type descriptor 1, size descriptor
-                2), the value itself may simply be a number (instead of a dictionary as in the previous examples).
+                4), the value itself may simply be a number (instead of a dictionary as in the previous examples).
                 
                 In the case where the element is a UUID (type descriptor 3), the value itself may be a data object.  
                 The UUID type will be inferred and the size taken from the length of the data object.
@@ -70,7 +70,7 @@
 @interface IOBluetoothSDPDataElement : NSObject <NSCoding> {
     BluetoothSDPDataElementTypeDescriptor	mTypeDescriptor;
     BluetoothSDPDataElementSizeDescriptor	mSizeDescriptor;
-    UInt32									mSize;
+    uint32_t								mSize;
     NSObject								*mValue;
     
     void									*_mReserved;
@@ -107,7 +107,7 @@
                     object is to be referenced and kept around, retain should be called.
 */
 
-+ (IOBluetoothSDPDataElement *)withType:(BluetoothSDPDataElementTypeDescriptor)type sizeDescriptor:(BluetoothSDPDataElementSizeDescriptor)newSizeDescriptor size:(UInt32)newSize value:(NSObject *)newValue;
++ (IOBluetoothSDPDataElement *)withType:(BluetoothSDPDataElementTypeDescriptor)type sizeDescriptor:(BluetoothSDPDataElementSizeDescriptor)newSizeDescriptor size:(uint32_t)newSize value:(NSObject *)newValue;
 
 /*!
     @method	withSDPDataElementRef:
@@ -144,7 +144,7 @@
                     due to the limited error checking currently done).
 */
 
-- (id)initWithType:(BluetoothSDPDataElementTypeDescriptor)newType sizeDescriptor:(BluetoothSDPDataElementSizeDescriptor)newSizeDescriptor size:(UInt32)newSize value:(NSObject *)newValue;
+- (id)initWithType:(BluetoothSDPDataElementTypeDescriptor)newType sizeDescriptor:(BluetoothSDPDataElementSizeDescriptor)newSizeDescriptor size:(uint32_t)newSize value:(NSObject *)newValue;
 
 /*!
     @method	getSDPDataElementRef
@@ -177,7 +177,7 @@
     @result Returns the size in bytes of the target data element.
 */
 
-- (UInt32)getSize;
+- (uint32_t)getSize;
 
 /*!
     @method getNumberValue

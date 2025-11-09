@@ -1,7 +1,7 @@
 /*
 	NSDocumentController.h
 	Application Kit
-	Copyright (c) 1997-2009, Apple Inc.
+	Copyright (c) 1997-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -50,7 +50,7 @@
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self documentForFileName:[url path]] if -documentForFileName: is overridden and the URL uses the "file:" scheme.  
 */
-- (id)documentForURL:(NSURL *)absoluteURL AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (id)documentForURL:(NSURL *)url;
 
 /* Given a window, return the document corresponding to the window, nil if no document corrresponds to the window.
 */
@@ -69,19 +69,21 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 /* Create a new untitled document, present its user interface if displayDocument is YES, and return the document if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why a new untitled document could not be created. The default implementation of this method invokes [self defaultType] to determine the type of new document to create, invokes -makeUntitledDocumentOfType:error: to create it, then invokes -addDocument: to record its opening. If displayDocument is YES, it then sends the new document -makeWindowControllers and -showWindows messages.
 
+The default implementation of this method uses the file coordination mechanism that was added to the Foundation framework in Mac OS 10.7. It passes the document to +[NSFileCoordinator addFilePresenter:] right after -addDocument: is invoked. (The balancing invocation of +[NSFileCoordinator removeFilePresenter:] is in -[NSDocument close]).
+
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self openUntitledDocumentOfType:[self defaultType] display:displayDocument] if -openUntitledDocumentOfType:display: is overridden.
 */
-- (id)openUntitledDocumentAndDisplay:(BOOL)displayDocument error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (id)openUntitledDocumentAndDisplay:(BOOL)displayDocument error:(NSError **)outError;
 
 /* Instantiate a new untitled document of the specified type and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why a new untitled document could not be instantiated. The default implementation of this method invokes -documentClassForType: to find out the class of document to instantiate, allocates a document object, and initializes it by sending it an -initWithType:error: message.
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self makeUntitledDocumentOfType:typeName] if -makeUntitledDocumentOfType: is overridden.
 */
-- (id)makeUntitledDocumentOfType:(NSString *)typeName error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (id)makeUntitledDocumentOfType:(NSString *)typeName error:(NSError **)outError;
 
 #pragma mark *** Document Opening ***
 
-/* The action of the File menu's Open... item in a document-based application. The default implementation of this method invokes -URLsFromRunningOpenPanel, unless -fileNamesFromRunningOpenPanel is overridden, in which case that method is invoked instead for backward binary compatibility with Mac OS 10.3 and earlier. If something other than nil is returned, it invokes -openDocumentWithContentsOfURL:display:error: for each URL and, if nil is returned for any of them, presents the error in an application-modal panel and stops trying to open documents.
+/* The action of the File menu's Open... item in a document-based application. The default implementation of this method invokes -URLsFromRunningOpenPanel, unless -fileNamesFromRunningOpenPanel is overridden, in which case that method is invoked instead for backward binary compatibility with Mac OS 10.3 and earlier. If something other than nil is returned, it invokes -openDocumentWithContentsOfURL:display:completionHandler: for each URL and, if an error is signaled for any of them, presents the error in an application-modal panel.
 */
 - (IBAction)openDocument:(id)sender;
 
@@ -93,34 +95,58 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 */
 - (NSInteger)runModalOpenPanel:(NSOpenPanel *)openPanel forTypes:(NSArray *)types;
 
-/* Open a document located by a URL, present its user interface if displayDocuments is YES, and return the document if successful. If not  successful, return nil after setting *outError to an NSError that encapsulates the reason why the document could not be opened. The default implementation of this method checks to see if the document is already open according to -documentForURL:, and if it is not open determines the type of the document, invokes -makeDocumentWithContentsOfURL:ofType:error: to instantiate it, then invokes -addDocument: to record its opening, and sends the document -makeWindowControllers and -showWindows messages if displayDocument is YES. If the document is already open it is just sent a -showWindows message if displayDocument is YES.
+#if NS_BLOCKS_AVAILABLE
 
-For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self openDocumentWithContentsOfFile:[absoluteURL path] display:displayDocuments], if -openDocumentWithContentsOfFile:display: is overridden and the URL uses the "file:" scheme.
+/* Open a document located by a URL, present its user interface if displayDocument is YES, and invoke the passed-in completion handler at some point in the future, perhaps after the method invocation has returned. The completion handler must be invoked on the main thread. If successful, pass the document to the completion handler, and also whether the document was already open or being opened before this method was invoked. If not successful, pass a nil document and an NSError that encapsulates the reason why the document could not be opened.
+ 
+The default implementation of this method checks to see if the document is already open or being opened, and if it is not determines the type of the document, invokes -makeDocumentWithContentsOfURL:ofType:error: to instantiate it, invokes -addDocument: to record its opening, and sends the document -makeWindowControllers and -showWindows messages if displayDocument is YES. If the document is already open it is just sent a -showWindows message if displayDocument is YES. If the relevant document class returns YES when sent +canConcurrentlyReadDocumentsOfType: then the invocation of -makeDocumentWithContentsOfURL:ofType:error: is done on a thread other than the main one and when that has returned the rest of the operation is done on the main thread.
+
+The default implementation of this method uses the file coordination mechanism that was added to the Foundation framework in Mac OS 10.7. All of the work it does is one big coordinated read, and it passes the document to +[NSFileCoordinator addFilePresenter:] right after -addDocument: is invoked. (The balancing invocation of +[NSFileCoordinator removeFilePresenter:] is in -[NSDocument close]).
+
+You can override this method to customize how documents are opened. Its implemention however is somewhat complex so unless your customization is to do additional work before invoking super, or to invoke super with a completion handler that does additional work before invoking the original completion handler, you should investigate overriding one of the methods that it invokes instead. If you do override this method you should investigate whether you should also override -reopenDocumentForURL:withContentsOfURL:display:completionHandler: to apply the same customization. In either cause take care to always invoke the completion handler on the main thread.
+
+You can of course invoke this method to open a document.
+
+For backward binary compatibility with Mac OS 10.6 and earlier, the default implementation of this method invokes [self openDocumentWithContentsOfURL:url display:displayDocument error:&anError] if that method or the even older -openDocumentWithContentsOfFile:display: method is overridden and this one is not, instead of invoking -makeDocumentWithContentsOfURL:ofType:error: and all the rest.
 */
-- (id)openDocumentWithContentsOfURL:(NSURL *)absoluteURL display:(BOOL)displayDocument error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error))completionHandler NS_AVAILABLE_MAC(10_7);
+
+#endif
 
 /* Instantiate a document located by a URL, of a specified type, and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document could not be instantiated. The default implementation of this method invokes -documentClassForType: to find out the class of document to instantiate, allocates a document object, and initializes it by sending it an -initWithContentsOfURL:ofType:error: message.
 
-For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self makeDocumentWithContentsOfFile:[absoluteURL path] ofType:typeName] if -makeDocumentWithContentsOfFile:ofType: is overridden and the URL uses the "file:" scheme.
+For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self makeDocumentWithContentsOfFile:[url path] ofType:typeName] if -makeDocumentWithContentsOfFile:ofType: is overridden and the URL uses the "file:" scheme.
 */
-- (id)makeDocumentWithContentsOfURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (id)makeDocumentWithContentsOfURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError;
 
 #pragma mark *** Document Reopening ***
 
-/* Reopen a document located by a URL by reading the contents for the document from another URL, present its user interface, and return YES if successful. If not  successful, return NO after setting *outError to an NSError that encapsulates the reason why the document could not be reopened. The default implementation of this method determines the type of document being reopened, sends a -makeDocumentForURL:withContentsOfURL:ofType:error: to instantiate it, then invokes -addDocument: to record its opening. It then sends the document -makeWindowControllers and -showWindows messages.
-*/
-- (BOOL)reopenDocumentForURL:(NSURL *)absoluteDocumentURL withContentsOfURL:(NSURL *)absoluteDocumentContentsURL error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+#if NS_BLOCKS_AVAILABLE
 
-/* Instantiate a document located by a URL, of a specified type, but by reading the contents for the document from another URL, and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document could not be instantiated. The default implementation of this method invokes -documentClassForType: to find out the class of document to instantiate, allocates a document object, and initializes it by sending it an -initForURL:withContentsOfURL:ofType:error: message.
+/* Reopen a document, perhaps located by a URL, perhaps not, by reading the contents for the document from another URL, which may or may not be a different URL, present its user interface if displayDocument is YES, and invoke the passed-in completion handler at some point in the future, perhaps after the method invocation has returned. The completion handler must be invoked on the main thread. If successful, pass the document to the completion handler, and also whether the document was already open or being opened before this method was invoked. If not successful, pass a nil document and an NSError that encapsulates the reason why the document could not be opened. A nil URL indicates that the opened document is to have no fileURL, much like an untitled document has.
+ 
+The default implementation of this method is very similar to -openDocumentWithContentsOfURL:display:completionHandler:'s, the primary difference being that it invokes -makeDocumentForURL:withContentsOfURL:ofType:error: instead of -makeDocumentWithContentsOfURL:ofType:error:.
+
+You can override this method to customize how documents are reopened during application launching by the restorable state mechanism that was added to the AppKit framework in Mac OS 10.7. Its implemention however is somewhat complex so unless your customization is to do additional work before invoking super, or to invoke super with a completion handler that does additional work before invoking the original completion handler, you should investigate overriding one of the methods that it invokes instead.
+
+We don't anticipate any uses for an application to invoke this method directly, but you may discover one.
+
+For backward binary compatibility with Mac OS 10.6 and earlier, the default implementation of this method invokes [self reopenDocumentForURL:url withContentsOfURLcontentsURL error:&anError] if that method is overridden and this one is not, instead of invoking -makeDocumentForURL:withContentsOfURL:ofType:error: and all the rest.
 */
-- (id)makeDocumentForURL:(NSURL *)absoluteDocumentURL withContentsOfURL:(NSURL *)absoluteDocumentContentsURL ofType:(NSString *)typeName error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)reopenDocumentForURL:(NSURL *)urlOrNil withContentsOfURL:(NSURL *)contentsURL display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error))completionHandler NS_AVAILABLE_MAC(10_7);
+
+#endif
+
+/* Instantiate a document, perhaps located by a URL, perhaps not, by reading the contents for the document from another URL, which may or may not be a different URL, and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document could not be instantiated. The default implementation of this method invokes -documentClassForType: to find out the class of document to instantiate, allocates a document object, and initializes it by sending it an -initForURL:withContentsOfURL:ofType:error: message.
+*/
+- (id)makeDocumentForURL:(NSURL *)urlOrNil withContentsOfURL:(NSURL *)contentsURL ofType:(NSString *)typeName error:(NSError **)outError;
 
 #pragma mark *** Document Autosaving ***
 
-/* The time interval in seconds for periodic autosaving. A value of 0 indicates that periodic autosaving should not be done at all. NSDocumentController will use this number as the amount of time to wait between detecting that a document has unautosaved changes and sending the document an -autosaveDocumentWithDelegate:didAutosaveSelector:contextInfo: message. The default value is 0. You can change it to enable periodic autosaving.
+/* The time interval in seconds for periodic autosaving. A value of 0 indicates that periodic autosaving should not be done at all. NSDocument will use this number as the minimum amount of time to wait between detecting that a document has unautosaved changes and sending the document an -autosaveDocumentWithDelegate:didAutosaveSelector:contextInfo: message. The default value is 0. You can change it to enable periodic autosaving.
 */
-- (void)setAutosavingDelay:(NSTimeInterval)autosavingDelay AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (NSTimeInterval)autosavingDelay AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)setAutosavingDelay:(NSTimeInterval)autosavingDelay;
+- (NSTimeInterval)autosavingDelay;
 
 #pragma mark *** Document Saving ***
 
@@ -146,6 +172,20 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 */
 - (void)closeAllDocumentsWithDelegate:(id)delegate didCloseAllSelector:(SEL)didCloseAllSelector contextInfo:(void *)contextInfo;
 
+#pragma mark *** Document Duplicating ***
+
+/* Create a new document that will not yet have a location by reading the contents for the document from another URL, present its user interface, and return the document if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why a new document could not be created. If duplicateByCopying is YES then first copy the contents located at the passed-in URL into a file located in the same directory that is used for the autosaved contents of untitled documents and with the same sort of name. if displayNameOrNil is not nil then use that value to derive a display name for the new document that does not match one that is already in use by an open document.
+ 
+The default implementation of this method copies the file if specified, determines the type of the document, invokes -makeDocumentForURL:withContentsOfURL:ofType:error: to instantiate it, sends the document -setDisplayName: to name it if displayNameOrNil is not nil, invokes -addDocument: to record its opening, and sends the document -makeWindowControllers and -showWindows messages.
+
+The default implementation of this method uses the file coordination mechanism that was added to the Foundation framework in Mac OS 10.7. It passes the document to +[NSFileCoordinator addFilePresenter:] right after -addDocument: is invoked. (The balancing invocation of +[NSFileCoordinator removeFilePresenter:] is in -[NSDocument close]).
+
+You can override this method to customize how documents are duplicated. It is invoked by -[NSDocument duplicateAndReturnError:]. It may however also be invoked from other places in AppKit.
+ 
+We don't anticipate any uses for your application to invoke this method directly, but you may discover one.
+*/
+- (NSDocument *)duplicateDocumentWithContentsOfURL:(NSURL *)url copying:(BOOL)duplicateByCopying displayName:(NSString *)displayNameOrNil error:(NSError **)outError NS_AVAILABLE_MAC(10_7);
+
 #pragma mark *** Error Presentation ***
 
 /* Methods that are declared by NSResponder and also implemented by NSDocumentController, even though for historical reasons NSDocumentController is not a subclass of NSResponder. NSDocumentController's default implementations are equivalent to NSResponder's while treating the application object as the "next responder" and forwarding error presentation messages to it.
@@ -156,15 +196,15 @@ The default implementations of several NSDocumentController methods invoke -pres
 
 You can customize the presentation of errors for all kinds of documents by overriding -willPresentError:. Your override should follow the advice given for overriding of -[NSResponder willPresentError:].
 */
-- (void)presentError:(NSError *)error modalForWindow:(NSWindow *)window delegate:(id)delegate didPresentSelector:(SEL)didPresentSelector contextInfo:(void *)contextInfo AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (BOOL)presentError:(NSError *)error AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (NSError *)willPresentError:(NSError *)error AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (void)presentError:(NSError *)error modalForWindow:(NSWindow *)window delegate:(id)delegate didPresentSelector:(SEL)didPresentSelector contextInfo:(void *)contextInfo;
+- (BOOL)presentError:(NSError *)error;
+- (NSError *)willPresentError:(NSError *)error;
 
 #pragma mark *** The Open Recent Menu ***
 
 /* Return the maximum number of items that may be presented in the standard Open Recent menu. A value of 0 indicates that NSDocumentController will not attempt to add an Open Recent menu to your application's File menu, though NSDocumentController will not attempt to remove any Open Recent menu item if there is one already there. The default implementation returns a value that is subject to change and may or may not be derived from a setting made by the user in a System Preferences panel.
 */
-- (NSUInteger)maximumRecentDocumentCount AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSUInteger)maximumRecentDocumentCount;
 
 /* The action of the Open Recent menu's Clear Menu item.
 */
@@ -176,7 +216,7 @@ You can customize the presentation of errors for all kinds of documents by overr
 
 /* Add an item corresponding to the data located by a URL to the Open Recent menu, or replace an existing item with the same URL. You can use this even in non-NSDocument-based applications.
 */
-- (void)noteNewRecentDocumentURL:(NSURL *)absoluteURL;
+- (void)noteNewRecentDocumentURL:(NSURL *)url;
 
 /* Return an array of URLs for the entries currently appearing in the Open Recent menu.
 */
@@ -186,17 +226,17 @@ You can customize the presentation of errors for all kinds of documents by overr
 
 /* Return the name of the document type that should be used when creating new documents. The default implementation of this method returns the first Editor type declared in the application's Info.plist, or returns nil if no Editor type is declared. You can override it to customize the type of document that is created when, for instance, the user chooses New in the File menu.
 */
-- (NSString *)defaultType AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)defaultType;
 
 /* Given a URL, return the name of the document type that should be used when opening the document at that location, if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document's type could not be determined, or the fact that the document's type is just unrecognized. The default implementation of this method merely returns the URL's NSURLTypeIdentifierKey resource value. You can override this to customize type determination for documents being opened.
 
 For backward binary compatibility with Mac OS 10.4 and earlier, the default implementation of this method actually first does the same thing that it did in Mac OS 10.4 (invoke -typeFromFileExtension:, possibly twice, passing an HFS file type string for the second invocation) if there are any CFBundleDocumentTypes Info.plist entries that don't have LSItemContentTypes subentries, and only gets the URL's NSURLTypeIdentifierKey resource value if that does not succeed.
 */
-- (NSString *)typeForContentsOfURL:(NSURL *)inAbsoluteURL error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSString *)typeForContentsOfURL:(NSURL *)url error:(NSError **)outError;
 
 /* Return the names of NSDocument subclasses supported by this application. The default implementation of this method returns information derived from the application's Info.plist. You can override it to return the names of document classes that are dynamically loaded from plugins.
 */
-- (NSArray *)documentClassNames AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (NSArray *)documentClassNames;
 
 /* Given a document type name, return the subclass of NSDocument that should be instantiated when opening a document of that type, or nil for failure.
 */
@@ -218,22 +258,27 @@ For backward binary compatibility with Mac OS 10.4 and earlier, the default impl
 
 #pragma mark *** Backward Compatibility
 
+/* Methods that were deprecated in Mac OS 10.6. See the comments above for information about when your overrides of them are still invoked, for backward binary compatibility.
+*/
+- (id)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument error:(NSError **)outError;
+- (BOOL)reopenDocumentForURL:(NSURL *)url withContentsOfURL:(NSURL *)contentsURL error:(NSError **)outError;
+
 /* Methods that were deprecated in Mac OS 10.5, and don't work well in applications whose document types are declared with UTIs. In general, if each of the application's CFBundleDocumentTypes Info.plist entries has a valid LSItemContentTypes subentry, and the application doesn't invoke deprecated methods like -fileNamesFromRunningOpenPanel, then these methods will never be invoked from within Cocoa.
 */
-- (NSArray *)fileExtensionsFromType:(NSString *)typeName DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (NSString *)typeFromFileExtension:(NSString *)fileNameExtensionOrHFSFileType DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (NSArray *)fileExtensionsFromType:(NSString *)typeName NS_DEPRECATED_MAC(10_0, 10_5);
+- (NSString *)typeFromFileExtension:(NSString *)fileNameExtensionOrHFSFileType NS_DEPRECATED_MAC(10_0, 10_5);
 
 /* Methods that were deprecated in Mac OS 10.4. See the comments above for information about when your overrides of them are still invoked, for backward binary compatibility.
 */
-- (id)documentForFileName:(NSString *)fileName DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (NSArray *)fileNamesFromRunningOpenPanel DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (id)makeDocumentWithContentsOfFile:(NSString *)fileName ofType:(NSString *)type DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (id)makeDocumentWithContentsOfURL:(NSURL *)url ofType:(NSString *)type DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (id)makeUntitledDocumentOfType:(NSString *)type DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (id)openDocumentWithContentsOfFile:(NSString *)fileName display:(BOOL)display DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (id)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)display DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (id)openUntitledDocumentOfType:(NSString*)type display:(BOOL)display DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (void)setShouldCreateUI:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
-- (BOOL)shouldCreateUI DEPRECATED_IN_MAC_OS_X_VERSION_10_4_AND_LATER;
+- (id)documentForFileName:(NSString *)fileName NS_DEPRECATED_MAC(10_0, 10_4);
+- (NSArray *)fileNamesFromRunningOpenPanel NS_DEPRECATED_MAC(10_0, 10_4);
+- (id)makeDocumentWithContentsOfFile:(NSString *)fileName ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
+- (id)makeDocumentWithContentsOfURL:(NSURL *)url ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
+- (id)makeUntitledDocumentOfType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
+- (id)openDocumentWithContentsOfFile:(NSString *)fileName display:(BOOL)display NS_DEPRECATED_MAC(10_0, 10_4);
+- (id)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)display NS_DEPRECATED_MAC(10_0, 10_4);
+- (id)openUntitledDocumentOfType:(NSString*)type display:(BOOL)display NS_DEPRECATED_MAC(10_0, 10_4);
+- (void)setShouldCreateUI:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_4);
+- (BOOL)shouldCreateUI NS_DEPRECATED_MAC(10_0, 10_4);
 
 @end

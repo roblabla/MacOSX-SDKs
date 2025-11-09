@@ -75,7 +75,7 @@ extern "C" {
             
 */
 extern CGLError CGLTexImageIOSurface2D(CGLContextObj ctx, GLenum target, GLenum internal_format,
-						GLsizei width, GLsizei height, GLenum format, GLenum type, IOSurfaceRef ioSurface, GLuint plane);
+						GLsizei width, GLsizei height, GLenum format, GLenum type, IOSurfaceRef ioSurface, GLuint plane) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
 

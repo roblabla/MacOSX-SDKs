@@ -2,7 +2,7 @@
  *  CTFontManager.h
  *  CoreText
  *
- *  Copyright (c) 2008 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2011 Apple Inc. All rights reserved.
  *
  */
 
@@ -17,6 +17,7 @@
 #ifndef __CTFONTMANAGER__
 #define __CTFONTMANAGER__
 
+#include <CoreText/CTDefines.h>
 #include <CoreText/CTFontDescriptor.h>
 #include <CoreText/CTFontManagerErrors.h>
 
@@ -37,7 +38,7 @@ extern "C" {
  
 	@result     This function returns a retained reference to a CFArray of CFString references, or NULL on error. The caller is responsible for releasing the array.
  */
-CFArrayRef CTFontManagerCopyAvailablePostScriptNames( void ) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+CFArrayRef CTFontManagerCopyAvailablePostScriptNames( void ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA);
 
 /*!
     @function   CTFontManagerCopyAvailableFontFamilyNames
@@ -45,7 +46,7 @@ CFArrayRef CTFontManagerCopyAvailablePostScriptNames( void ) AVAILABLE_MAC_OS_X_
 
     @result     This function returns a retained reference to a CFArray of CFString references, or NULL on error. The caller is responsible for releasing the array.
 */
-CFArrayRef CTFontManagerCopyAvailableFontFamilyNames( void ) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+CFArrayRef CTFontManagerCopyAvailableFontFamilyNames( void ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA);
 
 /*!
     @function   CTFontManagerCopyAvailableFontURLs
@@ -53,12 +54,12 @@ CFArrayRef CTFontManagerCopyAvailableFontFamilyNames( void ) AVAILABLE_MAC_OS_X_
 
     @result     This function returns a retained reference to a CFArray of CFURL references, or NULL on error. The caller is responsible for releasing the array.
 */
-CFArrayRef CTFontManagerCopyAvailableFontURLs( void ) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+CFArrayRef CTFontManagerCopyAvailableFontURLs( void ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA);
 
 /*!
     @function   CTFontManagerCompareFontFamilyNames
     @abstract   A CFComparatorFunction to compare font family names and sort them according to Apple guidelines.
-    @discussion This function compares font family names and sorts them in the Apple preferred order, accounting for foundry prefix. Family names with recognized prefixes are sorted after the un-prefixed names in prefix order.
+    @discussion This function compares font family names and sorts them in the preferred order for display in user interfaces.
     @param      family1
                 The first localized font family name, as CFStringRef.
     @param      family2
@@ -70,12 +71,12 @@ CFArrayRef CTFontManagerCopyAvailableFontURLs( void ) AVAILABLE_MAC_OS_X_VERSION
 CFComparisonResult CTFontManagerCompareFontFamilyNames(
     const void *        family1,
     const void *        family2,
-    void *              context) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    void *              context) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA);
 
 /*!
     @function   CTFontManagerCreateFontDescriptorsFromURL
     @abstract   Returns an array of font descriptors representing each of the fonts in the specified URL.
-				Note: these font descriptors are not availabe through font descriptor matching.
+				Note: these font descriptors are not available through font descriptor matching.
 
     @param      fileURL
                 A file system URL referencing a valid font file.
@@ -83,7 +84,7 @@ CFComparisonResult CTFontManagerCompareFontFamilyNames(
     @result     This function returns a retained reference to a CFArray, or NULL on error. The caller is responsible for releasing the array.
 */
 CFArrayRef CTFontManagerCreateFontDescriptorsFromURL(
-    CFURLRef            fileURL ) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    CFURLRef            fileURL ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA);
 
 /*!
     @enum       CTFontManagerScope
@@ -92,14 +93,16 @@ CFArrayRef CTFontManagerCreateFontDescriptorsFromURL(
                 The font is available to the current process for the duration of the process unless directly unregistered.
     @constant   kCTFontManagerScopeUser
                 The font is available to all processes for the current user session and will be available in subsequent sessions unless unregistered.
+                User scope is unsupported in iOS.
     @constant   kCTFontManagerScopeSession
                 The font is available to the current user session, and will not be available in subsequent sessions.
+                User scope is unsupported in iOS.
 */
 enum {
     kCTFontManagerScopeNone         = 0,
     kCTFontManagerScopeProcess      = 1,
-    kCTFontManagerScopeUser         = 2,
-    kCTFontManagerScopeSession      = 3
+    kCTFontManagerScopeUser         = 2,    /* not supported in iOS */
+    kCTFontManagerScopeSession      = 3     /* not supported in iOS */
 };
 typedef uint32_t CTFontManagerScope;
 
@@ -121,11 +124,12 @@ typedef uint32_t CTFontManagerScope;
 bool CTFontManagerRegisterFontsForURL(
     CFURLRef                fontURL,
     CTFontManagerScope      scope,
-    CFErrorRef *            error ) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    CFErrorRef *            error ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_4_1);
 
 /*!
     @function   CTFontManagerUnregisterFontsForURL
     @abstract   Unregisters fonts from the specified font URL with the font manager. Unregistered fonts are no longer discoverable through font descriptor matching.
+                iOS note: only fonts registered with CTFontManagerRegisterFontsForURL or CTFontManagerRegisterFontsForURLs can be unregistered with this API.
 
     @param      fontURL
                 Font URL.
@@ -142,9 +146,45 @@ bool CTFontManagerRegisterFontsForURL(
 bool CTFontManagerUnregisterFontsForURL(
     CFURLRef                fontURL,
     CTFontManagerScope      scope,
-    CFErrorRef *            error ) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    CFErrorRef *            error ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_4_1);
 
 /*!
+    @function   CTFontManagerRegisterGraphicsFont
+    @abstract   Registers the specified graphics font with the font manager. Registered fonts are discoverable through font descriptor matching.
+                Attempts to register a font that is either already registered or contains the same Postscript of an already registered font will fail.
+                This functionality is useful for fonts that may be embedded in documents or present/constructed in memory. A graphics font is obtained
+                by calling CGFontCreateWithDataProvider. Fonts that are backed by files should be registered using CTFontManagerRegisterFontsForURL.
+ 
+    @param      font
+                Graphics font to be registered.
+ 
+    @param      error
+                Pointer to receive CFError in the case of failed registration.
+ 
+    @result     Returns true if registration of the fonts was successful.
+ */
+bool CTFontManagerRegisterGraphicsFont(
+    CGFontRef               font,
+    CFErrorRef *            error ) CT_AVAILABLE_STARTING( __MAC_NA, __IPHONE_4_1);
+	
+/*!
+    @function   CTFontManagerUnregisterGraphicsFont
+    @abstract   Unregisters the specified graphics font with the font manager. Unregistered fonts are no longer discoverable through font descriptor matching.
+ 
+    @param      font
+                Graphics font to be unregistered.
+ 
+    @param      error
+                Pointer to receive CFError in the case of failed unregistration.
+ 
+    @result     Returns true if unregistration of the font was successful.
+ */
+bool CTFontManagerUnregisterGraphicsFont(
+    CGFontRef               font,
+    CFErrorRef *            error ) CT_AVAILABLE_STARTING( __MAC_NA, __IPHONE_4_1);
+	
+
+	/*!
     @function   CTFontManagerRegisterFontsForURLs
     @abstract   Registers fonts from the specified font URLs with the font manager. Registered fonts are discoverable through font descriptor matching.
 
@@ -162,11 +202,12 @@ bool CTFontManagerUnregisterFontsForURL(
 bool CTFontManagerRegisterFontsForURLs(
     CFArrayRef              fontURLs,
     CTFontManagerScope      scope,
-    CFArrayRef *            errors ) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    CFArrayRef *            errors ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_4_1);
 
 /*!
     @function   CTFontManagerUnregisterFontsForURLs
     @abstract   Unregisters fonts from the specified font URLs with the font manager. Unregistered fonts are no longer discoverable through font descriptor matching.
+                iOS note: only fonts registered with CTFontManagerRegisterFontsForURL or CTFontManagerRegisterFontsForURLs can be unregistered with this API.
 
     @param      fontURLs
                 Array of font URLs.
@@ -182,7 +223,7 @@ bool CTFontManagerRegisterFontsForURLs(
 bool CTFontManagerUnregisterFontsForURLs(
     CFArrayRef              fontURLs,
     CTFontManagerScope      scope,
-    CFArrayRef *            errors ) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    CFArrayRef *            errors ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_4_1);
 
 /*!
     @function   CTFontManagerEnableFontDescriptors
@@ -196,7 +237,7 @@ bool CTFontManagerUnregisterFontsForURLs(
 */
 void CTFontManagerEnableFontDescriptors(
     CFArrayRef              descriptors,
-    bool                    enable ) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    bool                    enable ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA);
 
 /*!
     @function   CTFontManagerGetScopeForURL
@@ -208,7 +249,7 @@ void CTFontManagerEnableFontDescriptors(
     @result     Returns the registration scope of the specified URL, will return kCTFontManagerScopeNone if not currently registered.
 */
 CTFontManagerScope CTFontManagerGetScopeForURL(
-    CFURLRef                fontURL ) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    CFURLRef                fontURL ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA);
 
 /*!
     @function   CTFontManagerIsSupportedFontFile
@@ -220,7 +261,7 @@ CTFontManagerScope CTFontManagerGetScopeForURL(
     @result     This function returns true if the URL represents a valid font that can be used on the current platform.
 */
 bool CTFontManagerIsSupportedFont(
-    CFURLRef                fontURL ) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    CFURLRef                fontURL ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA);
 
 /*! --------------------------------------------------------------------------
     @group Manager Auto-Activation
@@ -238,7 +279,7 @@ bool CTFontManagerIsSupportedFont(
 */
 CFRunLoopSourceRef CTFontManagerCreateFontRequestRunLoopSource(
 	CFIndex							sourceOrder, 
-	CFArrayRef (^createMatchesCallback)(CFDictionaryRef requestAttributes, pid_t requestingProcess)) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+	CFArrayRef (^createMatchesCallback)(CFDictionaryRef requestAttributes, pid_t requestingProcess)) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA);
 #endif // defined(__BLOCKS__)
 
 /*!
@@ -246,7 +287,7 @@ CFRunLoopSourceRef CTFontManagerCreateFontRequestRunLoopSource(
     @abstract   CTFontManage bundle identifier
     @discussion The CTFontManager bundle identifier to be used with get or set global auto-activation settings.
 */
-extern const CFStringRef kCTFontManagerBundleIdentifier AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern const CFStringRef kCTFontManagerBundleIdentifier CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA);
 
 /*!
     @enum
@@ -282,7 +323,7 @@ typedef uint32_t CTFontManagerAutoActivationSetting;
 */
 void CTFontManagerSetAutoActivationSetting(
     CFStringRef                         bundleIdentifier,
-    CTFontManagerAutoActivationSetting  setting ) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    CTFontManagerAutoActivationSetting  setting ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA);
 
 /*!
     @function   CTFontManagerGetAutoActivationSetting
@@ -294,7 +335,7 @@ void CTFontManagerSetAutoActivationSetting(
     @result     Will return the auto-activation setting for specified bundle identifier.
 */
 CTFontManagerAutoActivationSetting CTFontManagerGetAutoActivationSetting(
-    CFStringRef                         bundleIdentifier ) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+    CFStringRef                         bundleIdentifier ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA);
 
 /*! --------------------------------------------------------------------------
     @group Manager Notifications
@@ -310,7 +351,7 @@ CTFontManagerAutoActivationSetting CTFontManagerGetAutoActivationSetting(
                 for changes to the session or user scopes, and with a local notification
                 for changes to the process scope.
 */
-extern const CFStringRef kCTFontManagerRegisteredFontsChangedNotification AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+extern const CFStringRef kCTFontManagerRegisteredFontsChangedNotification CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA);
 
 #if defined(__cplusplus)
 }

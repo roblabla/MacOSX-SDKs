@@ -1,6 +1,6 @@
 /*
 	NSScriptSuiteRegistry.h
-	Copyright (c) 1997-2009, Apple Inc.
+	Copyright (c) 1997-2011, Apple Inc.
 	All rights reserved.
 */
 

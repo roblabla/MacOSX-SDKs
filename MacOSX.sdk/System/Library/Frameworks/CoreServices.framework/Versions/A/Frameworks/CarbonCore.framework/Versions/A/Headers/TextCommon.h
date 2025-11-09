@@ -3,7 +3,7 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Version:    CarbonCore-861.39~1
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 1995-2008 Apple Inc. All rights reserved.
  
@@ -169,7 +169,8 @@ enum {
   kTextEncodingUnicodeV3_2      = 0x0106,
   kTextEncodingUnicodeV4_0      = 0x0108,
   kTextEncodingUnicodeV5_0      = 0x010A,
-  kTextEncodingUnicodeV5_1      = 0x010B
+  kTextEncodingUnicodeV5_1      = 0x010B, /* No constant for Unicode 5.2, but leave an opening.*/
+  kTextEncodingUnicodeV6_0      = 0x010D /* Adds many symbols, including emoji support.*/
 };
 
 /* ISO 8-bit and 7-bit encodings begin at 0x200*/

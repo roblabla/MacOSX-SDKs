@@ -1,6 +1,6 @@
 /*
 	File:		IOBluetoothPairingController.h
-	Copyright (c) 2002-2006 Apple Computer, Inc. All rights reserved.
+	Copyright (c) 2010 Apple, Inc. All rights reserved.
 */
  
 #import <Cocoa/Cocoa.h>
@@ -37,7 +37,6 @@
 	@result		An IOBluetoothPairingController instance.  Call runPanelWithAttributes
         
                         Success - a new instance of the Pairing Controller
-        
                         Failure	- nil
 */
 + (IOBluetoothPairingController *)pairingController;
@@ -47,23 +46,13 @@
         @param	pairingControllerRef IOBluetoothPairingControllerRef for which an IOBluetoothPairingController * is desired.
 	@result		Returns the IOBluetoothPairingController * for the given IOBluetoothPairingControllerRef.
 */
-+ (IOBluetoothPairingController *)withPairingControllerRef:(IOBluetoothPairingControllerRef)pairingControllerRef;
++ (IOBluetoothPairingController *)withPairingControllerRef:(IOBluetoothPairingControllerRef)pairingControllerRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!	@method	getPairingControllerRef
 	@abstract	Returns an IOBluetoothPairingControllerRef representation of the target IOBluetoothPairingController object.
 	@result		Returns an IOBluetoothPairingControllerRef representation of the target IOBluetoothPairingController object.
 */
-- (IOBluetoothPairingControllerRef)getPairingControllerRef;
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!	@method	runPanelWithAttributes
-	@abstract	Run the IOBluetoothPairingController with a list of device attributes to filter on.
-	@param		attributes	A pointer to an IOBluetoothDeviceSearchAttributes list.  This list can be used to include the devices to allow the UI IOBluetoothPairingController to display.  Set to NULL to allow any devices to be shown.
-	@discussion	***WARNING*** This method has been deprecated in favor of -setSearchAttributes:, -runModal and -getResults
-				When called this routine will display the PairingController window, using the attributes parameter as a filter of device types to display in the UI.
-	@result		none - runs the panel from a previously created pairing controller.
-*/
-- (void)runPanelWithAttributes:(IOBluetoothDeviceSearchAttributes *)attributes	DEPRECATED_IN_BLUETOOTH_VERSION_2_0_AND_LATER;
+- (IOBluetoothPairingControllerRef)getPairingControllerRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1
 

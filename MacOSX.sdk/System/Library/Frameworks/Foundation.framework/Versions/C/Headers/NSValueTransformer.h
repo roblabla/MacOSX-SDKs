@@ -1,19 +1,18 @@
 /*	NSValueTransformer.h
-        Copyright (c) 2002-2009, Apple Inc. All rights reserved.
+        Copyright (c) 2002-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 @class NSArray, NSString;
 
-FOUNDATION_EXPORT NSString * const NSNegateBooleanTransformerName	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-FOUNDATION_EXPORT NSString * const NSIsNilTransformerName		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-FOUNDATION_EXPORT NSString * const NSIsNotNilTransformerName		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-FOUNDATION_EXPORT NSString * const NSUnarchiveFromDataTransformerName		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-FOUNDATION_EXPORT NSString * const NSKeyedUnarchiveFromDataTransformerName		AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+FOUNDATION_EXPORT NSString * const NSNegateBooleanTransformerName	NS_AVAILABLE(10_3, 3_0);
+FOUNDATION_EXPORT NSString * const NSIsNilTransformerName		NS_AVAILABLE(10_3, 3_0);
+FOUNDATION_EXPORT NSString * const NSIsNotNilTransformerName		NS_AVAILABLE(10_3, 3_0);
+FOUNDATION_EXPORT NSString * const NSUnarchiveFromDataTransformerName	NS_AVAILABLE(10_3, 3_0);
+FOUNDATION_EXPORT NSString * const NSKeyedUnarchiveFromDataTransformerName	NS_AVAILABLE(10_5, 3_0);
 
+NS_CLASS_AVAILABLE(10_3, 3_0)
 @interface NSValueTransformer : NSObject {
 }
 
@@ -32,4 +31,3 @@ FOUNDATION_EXPORT NSString * const NSKeyedUnarchiveFromDataTransformerName		AVAI
 
 @end
 
-#endif

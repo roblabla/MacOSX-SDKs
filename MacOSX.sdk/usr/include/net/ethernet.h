@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000,2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -64,6 +64,14 @@
  * The maximum packet length.
  */
 #define	ETHER_MAX_LEN		1518
+
+/*
+ * Mbuf adjust factor to force 32-bit alignment of IP header.
+ * Drivers should do m_adj(m, ETHER_ALIGN) when setting up a
+ * receive so the upper layers get the IP header properly aligned
+ * past the 14-byte Ethernet header.
+ */
+#define ETHER_ALIGN             2       /* driver adjust for IP hdr alignment */
 
 /*
  * A macro to validate a length with

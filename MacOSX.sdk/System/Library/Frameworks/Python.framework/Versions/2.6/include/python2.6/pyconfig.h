@@ -78,7 +78,7 @@
 #define HAVE_C99_BOOL 1
 
 /* Define to 1 if you have the `chflags' function. */
-#define HAVE_CHFLAGS 1
+/* #undef HAVE_CHFLAGS */
 
 /* Define to 1 if you have the `chown' function. */
 #define HAVE_CHOWN 1
@@ -115,6 +115,18 @@
 
 /* Define if you have the 'resize_term' function. */
 #define HAVE_CURSES_RESIZE_TERM 1
+
+/* Define to 1 if you have the declaration of `isfinite', and to 0 if you
+   don't. */
+#define HAVE_DECL_ISFINITE 1
+
+/* Define to 1 if you have the declaration of `isinf', and to 0 if you don't.
+   */
+#define HAVE_DECL_ISINF 1
+
+/* Define to 1 if you have the declaration of `isnan', and to 0 if you don't.
+   */
+#define HAVE_DECL_ISNAN 1
 
 /* Define to 1 if you have the declaration of `tzname', and to 0 if you don't.
    */
@@ -316,12 +328,6 @@
 /* Define to 1 if you have the <io.h> header file. */
 /* #undef HAVE_IO_H */
 
-/* Define to 1 if you have the `isinf' function. */
-#define HAVE_ISINF 1
-
-/* Define to 1 if you have the `isnan' function. */
-#define HAVE_ISNAN 1
-
 /* Define to 1 if you have the `kill' function. */
 #define HAVE_KILL 1
 
@@ -345,7 +351,7 @@
 #endif
 
 /* Define to 1 if you have the `lchflags' function. */
-#define HAVE_LCHFLAGS 1
+/* #undef HAVE_LCHFLAGS */
 
 /* Define to 1 if you have the `lchmod' function. */
 #define HAVE_LCHMOD 1
@@ -365,7 +371,7 @@
 /* Define to 1 if you have the <libintl.h> header file. */
 /* #undef HAVE_LIBINTL_H */
 
-/* Define to 1 if you have the `readline' library (-lreadline). */
+/* Define if you have the readline library (-lreadline). */
 #define HAVE_LIBREADLINE 1
 
 /* Define to 1 if you have the `resolv' library (-lresolv). */
@@ -465,7 +471,7 @@
 #define HAVE_PTHREAD_H 1
 
 /* Define to 1 if you have the `pthread_init' function. */
-/* #undef HAVE_PTHREAD_INIT */
+#define HAVE_PTHREAD_INIT 1
 
 /* Define to 1 if you have the `pthread_sigmask' function. */
 #define HAVE_PTHREAD_SIGMASK 1
@@ -496,6 +502,9 @@
 
 /* Define if you have readline 4.2 */
 #define HAVE_RL_COMPLETION_MATCHES 1
+
+/* Define if you have rl_completion_suppress_append */
+/* #undef HAVE_RL_COMPLETION_SUPPRESS_APPEND */
 
 /* Define if you have readline 4.0 */
 #define HAVE_RL_PRE_INPUT_HOOK 1
@@ -1014,6 +1023,9 @@
 #define WORDS_BIGENDIAN 1
 #endif /* __BIG_ENDIAN__ */
 
+/* Define if arithmetic is subject to x87-style double rounding issue */
+/* #undef X87_DOUBLE_ROUNDING */
+
 /* Define to 1 if on AIX 3.
    System headers sometimes define this.
    We just want to avoid a redefinition error message.  */
@@ -1046,7 +1058,7 @@
 /* #undef _OSF_SOURCE */
 
 /* Define to activate features from IEEE Stds 1003.1-2001 */
-#define _POSIX_C_SOURCE 200112L
+/* #undef _POSIX_C_SOURCE */
 
 /* Define if you have POSIX threads, and your system does not define that. */
 /* #undef _POSIX_THREADS */
@@ -1055,10 +1067,10 @@
 #define _REENTRANT 1
 
 /* Define to the level of X/Open that your system supports */
-#define _XOPEN_SOURCE 600
+/* #undef _XOPEN_SOURCE */
 
 /* Define to activate Unix95-and-earlier features */
-#define _XOPEN_SOURCE_EXTENDED 1
+/* #undef _XOPEN_SOURCE_EXTENDED */
 
 /* Define on FreeBSD to activate all library features */
 #define __BSD_VISIBLE 1

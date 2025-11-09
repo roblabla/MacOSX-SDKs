@@ -6,7 +6,7 @@
 #                            | (__| |_| |  _ <| |___
 #                             \___|\___/|_| \_\_____|
 #
-# Copyright (C) 2001 - 2009, Daniel Stenberg, <daniel@haxx.se>, et al.
+# Copyright (C) 2001 - 2010, Daniel Stenberg, <daniel@haxx.se>, et al.
 #
 # This software is licensed as described in the file COPYING, which
 # you should have received as part of this distribution. The terms
@@ -19,7 +19,6 @@
 # This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
 # KIND, either express or implied.
 #
-# $Id: curl-config.in,v 1.36 2009-03-20 12:42:29 bagder Exp $
 ###########################################################################
 
 prefix=/usr
@@ -33,10 +32,12 @@ Usage: curl-config [OPTION]
 
 Available values for OPTION include:
 
+  --built-shared says 'yes' if libcurl was built shared
   --ca        ca bundle install path
   --cc        compiler
   --cflags    pre-processor and compiler flags
   --checkfor [version] check for (lib)curl of the specified version
+  --configure the arguments given to configure when building curl
   --features  newline separated list of enabled features
   --help      display this help and exit
   --libs      library linking information
@@ -64,6 +65,10 @@ while test $# -gt 0; do
     esac
 
     case "$1" in
+    --built-shared)
+        echo yes
+        ;;
+
     --ca)
 	echo ""
 	;;
@@ -77,18 +82,19 @@ while test $# -gt 0; do
 	;;
 
     --feature|--features)
-        for feature in  SSL IPv6 libz NTLM ""; do
+        for feature in SSL IPv6 libz AsynchDNS NTLM ""; do
             test -n "$feature" && echo "$feature"
         done
 	;;
 
     --protocols)
-        for protocol in  HTTP HTTPS FTP FTPS FILE TELNET LDAP DICT TFTP; do
+        for protocol in DICT FILE FTP FTPS GOPHER HTTP HTTPS IMAP IMAPS LDAP LDAPS POP3 POP3S RTSP SMTP SMTPS TELNET TFTP; do
             echo "$protocol"
         done
 	;;
+
     --version)
-	echo libcurl 7.19.7
+	echo libcurl 7.21.4
 	exit 0
 	;;
 
@@ -100,20 +106,20 @@ while test $# -gt 0; do
 	# dash as that's used for things like version 1.2.3-CVS
 	cpatch=`echo $checkfor | cut -d. -f3 | cut -d- -f1`
         checknum=`echo "$cmajor*256*256 + $cminor*256 + ${cpatch:-0}" | bc`
-        numuppercase=`echo 071307 | tr 'a-f' 'A-F'`
+        numuppercase=`echo 071504 | tr 'a-f' 'A-F'`
         nownum=`echo "obase=10; ibase=16; $numuppercase" | bc`
 
 	if test "$nownum" -ge "$checknum"; then
 	  # silent success
 	  exit 0
 	else
-	  echo "requested version $checkfor is newer than existing 7.19.7"
+	  echo "requested version $checkfor is newer than existing 7.21.4"
 	  exit 1
 	fi
 	;;
 
     --vernum)
-	echo 071307
+	echo 071504
 	exit 0
 	;;
 
@@ -144,6 +150,10 @@ while test $# -gt 0; do
 
     --static-libs)
 	;;
+
+    --configure)
+      echo " '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--with-gssapi' '--enable-hidden-symbols' '--disable-static' '--enable-threaded-resolver' 'CFLAGS=-arch x86_64 -arch i386 -g -Os -pipe ' 'LDFLAGS=-arch x86_64 -arch i386            '"
+    ;;
 
     *)
         echo "unknown option: $1"

@@ -2,7 +2,7 @@
 //  IOBluetooth.h
 //  IOBluetooth Framework
 //
-//  Copyright (c) 2007 Apple Inc. All rights reserved.
+//  Copyright (c) 2010 Apple Inc. All rights reserved.
 //
 
 #if __OBJC__
@@ -19,8 +19,10 @@
 		#import	<IOBluetooth/BluetoothAssignedNumbers.h>
 		#import	<IOBluetooth/IOBluetoothTypes.h>
 		#import	<IOBluetooth/IOBluetoothUtilities.h>
-		#import <IOBluetooth/objc/IOBluetoothDeviceInquiry.h>
+		#import <IOBluetooth/objc/IOBluetoothObject.h>
 		#import <IOBluetooth/objc/IOBluetoothDevice.h>
+		#import <IOBluetooth/objc/IOBluetoothDeviceInquiry.h>
+		#import <IOBluetooth/objc/IOBluetoothDevicePair.h>
 		
 		// Core - Host Controller (HCI)
 
@@ -45,16 +47,22 @@
 		// Profiles - OBEX
 
 		#import <IOBluetooth/OBEX.h>
+		#import <IOBluetooth/OBEXBluetooth.h>
 		#import <IOBluetooth/objc/OBEXSession.h>
 		#import <IOBluetooth/objc/IOBluetoothOBEXSession.h>
 		#import <IOBluetooth/objc/OBEXFileTransferServices.h>
+		#import <IOBluetooth/objc/NSDictionaryOBEXExtensions.h>
 
 		// Profiles - Audio, etc.
 
 		#import <IOBluetooth/objc/IOBluetoothRFCOMMAudioController.h>
 		#import <IOBluetooth/objc/IOBluetoothHandsFreeGateway.h>
+		#import <IOBluetooth/objc/IOBluetoothHandsFreeAudioGateway.h>
 		#import <IOBluetooth/objc/IOBluetoothHeadsetDevice.h>
+		#import <IOBluetooth/objc/IOBluetoothHandsFree.h>
+		#import <IOBluetooth/objc/IOBluetoothHandsFreeDevice.h>
 
+        #import <CoreBluetooth/CoreBluetooth.h>
 	#if defined(__cplusplus)
 	}
 	#endif

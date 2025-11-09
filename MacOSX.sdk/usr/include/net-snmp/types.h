@@ -15,11 +15,7 @@
                          * For 'timeval' 
                          */
 #if TIME_WITH_SYS_TIME
-# ifdef WIN32
-#  include <sys/timeb.h>
-# else
-#  include <sys/time.h>
-# endif
+# include <sys/time.h>
 # include <time.h>
 #else
 # if HAVE_SYS_TIME_H
@@ -33,26 +29,39 @@
 #include <inttypes.h>
 #endif
 #include <sys/types.h>
-#ifdef HAVE_WINSOCK_H
-#include <winsock.h>
+#if ! defined(_WINSOCKAPI_) && ! defined(_WINSOCK_H)
+/*
+ * If neither the Microsoft winsock header file nor the MinGW winsock header
+ * file has already been included, do this now.
+ */
+# if defined(HAVE_WINSOCK2_H) && defined(HAVE_WS2TCPIP_H)
+#  if !defined(HAVE_WIN32_PLATFORM_SDK) && _MSC_VER -0 <= 1200 \
+    && _WIN32_WINNT -0 >= 0x0400
+    /*
+     * When using the MSVC 6 header files, including <winsock2.h> when
+     * _WIN32_WINNT >= 0x0400 results in a compilation error. Hence include
+     * <windows.h> instead, because <winsock2.h> is included from inside
+     * <windows.h> when _WIN32_WINNT >= 0x0400. The SDK version of <windows.h>
+     * does not include <winsock2.h> however.
+     */
+#   include <windows.h>
+#  else
+#   include <winsock2.h>
+#  endif
+#   include <ws2tcpip.h>
+# elif defined(HAVE_WINSOCK_H)
+#  include <winsock.h>
+# endif
 #endif
 
 #if HAVE_NETINET_IN_H
 #include <netinet/in.h>		/* For definition of in_addr_t */
 #endif
 
+#include <net-snmp/library/oid.h>
+
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#ifndef MAX_SUBID               /* temporary - duplicate definition protection */
-#ifndef EIGHTBIT_SUBIDS
-typedef u_long  oid;
-#define MAX_SUBID   0xFFFFFFFF
-#else
-typedef u_char  oid;
-#define MAX_SUBID   0xFF
-#endif
 #endif
 
 #ifndef HAVE_SOCKLEN_T
@@ -60,7 +69,11 @@ typedef u_int socklen_t;
 #endif
 
 #ifndef HAVE_IN_ADDR_T
-typedef u_int in_addr_t;
+  /*
+   * The type in_addr_t must match the type of sockaddr_in::sin_addr.
+   * For MSVC and MinGW32, this is u_long.
+   */
+typedef u_long in_addr_t;
 #endif
 
 #ifndef HAVE_SSIZE_T
@@ -73,142 +86,10 @@ typedef long ssize_t;
 #endif
 #endif
 
-    /*
-     * Try to ensure we have 32-bit (and hopefully 64-bit)
-     *    integer types available.
-     */
-
-#ifndef HAVE_INT8_T
-typedef signed char int8_t;
-#endif /* !HAVE_INT8_T */
-
-#ifndef HAVE_UINT8_T
-#ifdef HAVE_U_INT8_T
-typedef u_int8_t      uint8_t;
-#else
-typedef unsigned char uint8_t;
-#endif
-#endif /* !HAVE_UINT8_T */
-
-#ifndef HAVE_INT16_T
-#if   SIZEOF_INT == 2
-#define INT16_T int
-#elif SIZEOF_SHORT == 2
-#define INT16_T short
-#else
-#define _INT16_IS_NOT_16BIT
-#define INT16_T short
-#endif
-typedef INT16_T int16_t;
-#endif /* !HAVE_INT16_T */
-
-#ifndef HAVE_UINT16_T
-#ifdef HAVE_U_INT16_T
-typedef u_int16_t        uint16_t;
-#else
-#ifdef INT16_T
-typedef unsigned INT16_T uint16_t;
-#else
-typedef unsigned short   uint16_t;
-#endif
-#endif
-#endif /* !HAVE_UINT16_T */
-
-#ifndef HAVE_INT32_T
-#if   SIZEOF_INT == 4
-#define INT32_T int 
-#elif SIZEOF_LONG == 4
-#define INT32_T long 
-#elif SIZEOF_SHORT == 4
-#define INT32_T short 
-#else
-#define _INT32_IS_NOT_32BIT
-#define INT32_T int 
-#endif
-typedef INT32_T int32_t;
-#endif /* !HAVE_INT32_T */
-
-#ifndef HAVE_UINT32_T
-#ifdef HAVE_U_INT32_T
-typedef u_int32_t        uint32_t;
-#else
-#ifdef INT32_T
-typedef unsigned INT32_T uint32_t;
-#else
-typedef unsigned int     uint32_t;
-#endif
-#endif
-#endif /* !HAVE_UINT32_T */
-
-#ifndef HAVE_INT64_T
-#if SIZEOF_LONG == 8
-#define INT64_T long 
-#elif SIZEOF_LONG_LONG == 8
-#define INT64_T long long
-#elif   SIZEOF_INT == 8
-#define INT64_T int 
-#elif SIZEOF_LONG >= 8
-#define INT64_T long 
-#define _INT64_IS_NOT_64BIT
-#endif
-#ifdef INT64_T
-typedef INT64_T int64_t;
-#define HAVE_INT64_T 1
-#endif
-#endif /* !HAVE_INT64_T */
-
-#ifndef HAVE_UINT64_T
-#ifdef HAVE_U_INT64_T
-typedef u_int64_t        uint64_t;
-#elif defined(INT64_T)
-typedef unsigned INT64_T uint64_t;
-#endif
-#define HAVE_UINT64_T 1
+#ifndef HAVE_NFDS_T
+typedef unsigned long int nfds_t;
 #endif
 
-#ifndef HAVE_INTMAX_T
-#ifdef SIZEOF_LONG_LONG
-typedef long long intmax_t;
-#define SIZEOF_INTMAX_T SIZEOF_LONG_LONG
-#elif defined(HAVE_INT64_T) && !defined(_INT64_IS_NOT_64BIT)
-typedef int64_t   intmax_t;
-#define SIZEOF_INTMAX_T 8
-#else
-typedef long      intmax_t;
-#define SIZEOF_INTMAX_T SIZEOF_LONG
-#endif
-#define HAVE_INTMAX_T 1
-#endif
-
-#ifndef HAVE_UINTMAX_T
-#ifdef SIZEOF_LONG_LONG
-typedef unsigned long long uintmax_t;
-#elif defined(HAVE_UINT64_T) && !defined(_INT64_IS_NOT_64BIT)
-typedef uint64_t           uintmax_t;
-#else
-typedef unsigned long      uintmax_t;
-#endif
-#define HAVE_UINTMAX_T 1
-#endif
-
-#ifndef HAVE_UINTPTR_T
-#if SIZEOF_LONG == 8
-/* likely 64bit machine with 64bit addressing? */
-    typedef unsigned long uintptr_t;
-#else
-    typedef unsigned uintptr_t;
-#endif
-#endif
-
-#ifndef HAVE_INTPTR_T
-#if SIZEOF_LONG == 8
-/* likely 64bit machine with 64bit addressing? */
-    typedef long intptr_t;
-#else
-    typedef int intptr_t;
-#endif
-#endif
-    
     /*
      *  For the initial release, this will just refer to the
      *  relevant UCD header files.
@@ -219,69 +100,314 @@ typedef unsigned long      uintmax_t;
      *  to allow application writers to adopt the new header file names.
      */
 
+typedef union {
+   long           *integer;
+   u_char         *string;
+   oid            *objid;
+   u_char         *bitstring;
+   struct counter64 *counter64;
+#ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
+   float          *floatVal;
+   double         *doubleVal;
+   /*
+    * t_union *unionVal; 
+    */
+#endif                          /* NETSNMP_WITH_OPAQUE_SPECIAL_TYPES */
+} netsnmp_vardata;
 
-#include <net-snmp/definitions.h>
-#include <net-snmp/library/snmp_api.h>
-/*
- * #include <net-snmp/library/libsnmp.h> 
+
+#define MAX_OID_LEN	    128 /* max subid's in an oid */
+
+/** @typedef struct variable_list netsnmp_variable_list
+ * Typedefs the variable_list struct into netsnmp_variable_list */
+/** @struct variable_list
+ * The netsnmp variable list binding structure, it's typedef'd to
+ * netsnmp_variable_list.
  */
+typedef struct variable_list {
+   /** NULL for last variable */
+   struct variable_list *next_variable;    
+   /** Object identifier of variable */
+   oid            *name;   
+   /** number of subid's in name */
+   size_t          name_length;    
+   /** ASN type of variable */
+   u_char          type;   
+   /** value of variable */
+    netsnmp_vardata val;
+   /** the length of the value to be copied into buf */
+   size_t          val_len;
+   /** buffer to hold the OID */
+   oid             name_loc[MAX_OID_LEN];  
+   /** 90 percentile < 40. */
+   u_char          buf[40];
+   /** (Opaque) hook for additional data */
+   void           *data;
+   /** callback to free above */
+   void            (*dataFreeHook)(void *);    
+   int             index;
+} netsnmp_variable_list;
 
-    typedef struct netsnmp_index_s {
-       size_t      len;
-       oid         *oids;
-    } netsnmp_index;
 
+/** @typedef struct snmp_pdu to netsnmp_pdu
+ * Typedefs the snmp_pdu struct into netsnmp_pdu */
+/** @struct snmp_pdu
+ * The snmp protocol data unit.
+ */	
+typedef struct snmp_pdu {
 
-    typedef struct netsnmp_void_array_s {
-       size_t  size;
-       void * *array;
-    } netsnmp_void_array;
+#define non_repeaters	errstat
+#define max_repetitions errindex
 
     /*
-     * references to various types
+     * Protocol-version independent fields
      */
-    typedef struct netsnmp_ref_void {
-       void * val;
-    } netsnmp_ref_void;
+    /** snmp version */
+    long            version;
+    /** Type of this PDU */	
+    int             command;
+    /** Request id - note: not incremented on retries */
+    long            reqid;  
+    /** Message id for V3 messages note: incremented for each retry */
+    long            msgid;
+    /** Unique ID for incoming transactions */
+    long            transid;
+    /** Session id for AgentX messages */
+    long            sessid;
+    /** Error status (non_repeaters in GetBulk) */
+    long            errstat;
+    /** Error index (max_repetitions in GetBulk) */
+    long            errindex;       
+    /** Uptime */
+    u_long          time;   
+    u_long          flags;
 
-    typedef union {
-        u_long  ul;
-        u_int   ui;
-        u_short us;
-        u_char  uc;
-        long    sl;
-        int     si;
-        short   ss;
-        char    sc;
-        char *  cp;
-        void *  vp;
-    } netsnmp_cvalue;
+    int             securityModel;
+    /** noAuthNoPriv, authNoPriv, authPriv */
+    int             securityLevel;  
+    int             msgParseModel;
 
-#if 0
-    typedef struct netsnmp_ref_u_char {
-       u_char * val;
-    } netsnmp_ref_U_char;
+    /**
+     * Transport-specific opaque data.  This replaces the IP-centric address
+     * field.  
+     */
+    
+    void           *transport_data;
+    int             transport_data_length;
 
-    typedef struct netsnmp_ref_char {
-       char * val;
-    } netsnmp_ref_void;
+    /**
+     * The actual transport domain.  This SHOULD NOT BE FREE()D.  
+     */
 
-    typedef struct netsnmp_ref_int_s {
-       int val;
-    } netsnmp_ref_int;
+    const oid      *tDomain;
+    size_t          tDomainLen;
 
-    typedef struct netsnmp_ref_u_int_s {
-       u_int val;
-    } netsnmp_ref_int;
+    netsnmp_variable_list *variables;
 
-    typedef struct netsnmp_ref_u_long_s {
-       u_long val;
-    } netsnmp_ref_u_long;
-#endif
 
-    typedef struct netsnmp_ref_size_t_s {
-       size_t val;
-    } * netsnmp_ref_size_t;
+    /*
+     * SNMPv1 & SNMPv2c fields
+     */
+    /** community for outgoing requests. */
+    u_char         *community;
+    /** length of community name. */
+    size_t          community_len;  
+
+    /*
+     * Trap information
+     */
+    /** System OID */
+    oid            *enterprise;     
+    size_t          enterprise_length;
+    /** trap type */
+    long            trap_type;
+    /** specific type */
+    long            specific_type;
+    /** This is ONLY used for v1 TRAPs  */
+    unsigned char   agent_addr[4];  
+
+    /*
+     *  SNMPv3 fields
+     */
+    /** context snmpEngineID */
+    u_char         *contextEngineID;
+    /** Length of contextEngineID */
+    size_t          contextEngineIDLen;     
+    /** authoritative contextName */
+    char           *contextName;
+    /** Length of contextName */
+    size_t          contextNameLen;
+    /** authoritative snmpEngineID for security */
+    u_char         *securityEngineID;
+    /** Length of securityEngineID */
+    size_t          securityEngineIDLen;    
+    /** on behalf of this principal */
+    char           *securityName;
+    /** Length of securityName. */
+    size_t          securityNameLen;        
+    
+    /*
+     * AgentX fields
+     *      (also uses SNMPv1 community field)
+     */
+    int             priority;
+    int             range_subid;
+    
+    void           *securityStateRef;
+} netsnmp_pdu;
+
+
+/** @typedef struct snmp_session netsnmp_session
+ * Typedefs the snmp_session struct intonetsnmp_session */
+        struct snmp_session;
+typedef struct snmp_session netsnmp_session;
+
+#define USM_AUTH_KU_LEN     32
+#define USM_PRIV_KU_LEN     32
+
+typedef int        (*snmp_callback) (int, netsnmp_session *, int,
+                                          netsnmp_pdu *, void *);
+typedef int     (*netsnmp_callback) (int, netsnmp_session *, int,
+                                          netsnmp_pdu *, void *);
+
+struct netsnmp_container_s;
+
+/** @struct snmp_session
+ * The snmp session structure.
+ */
+struct snmp_session {
+    /*
+     * Protocol-version independent fields
+     */
+    /** snmp version */
+    long            version;
+    /** Number of retries before timeout. */
+    int             retries;
+    /** Number of uS until first timeout, then exponential backoff */
+    long            timeout;        
+    u_long          flags;
+    struct snmp_session *subsession;
+    struct snmp_session *next;
+
+    /** name or address of default peer (may include transport specifier and/or port number) */
+    char           *peername;
+    /** UDP port number of peer. (NO LONGER USED - USE peername INSTEAD) */
+    u_short         remote_port;
+    /** My Domain name or dotted IP address, 0 for default */
+    char           *localname;
+    /** My UDP port number, 0 for default, picked randomly */
+    u_short         local_port;     
+    /**
+     * Authentication function or NULL if null authentication is used 
+     */
+    u_char         *(*authenticator) (u_char *, size_t *, u_char *, size_t);
+    /** Function to interpret incoming data */
+    netsnmp_callback callback;      
+    /**
+     * Pointer to data that the callback function may consider important 
+     */
+    void           *callback_magic;
+    /** copy of system errno */
+    int             s_errno;
+    /** copy of library errno */
+    int             s_snmp_errno;   
+    /** Session id - AgentX only */
+    long            sessid; 
+
+    /*
+     * SNMPv1 & SNMPv2c fields
+     */
+    /** community for outgoing requests. */
+    u_char         *community;
+    /** Length of community name. */
+    size_t          community_len;  
+    /**  Largest message to try to receive.  */
+    size_t          rcvMsgMaxSize;
+    /**  Largest message to try to send.  */
+    size_t          sndMsgMaxSize;  
+
+    /*
+     * SNMPv3 fields
+     */
+    /** are we the authoritative engine? */
+    u_char          isAuthoritative;
+    /** authoritative snmpEngineID */
+    u_char         *contextEngineID;
+    /** Length of contextEngineID */
+    size_t          contextEngineIDLen;     
+    /** initial engineBoots for remote engine */
+    u_int           engineBoots;
+    /** initial engineTime for remote engine */
+    u_int           engineTime;
+    /** authoritative contextName */
+    char           *contextName;
+    /** Length of contextName */
+    size_t          contextNameLen;
+    /** authoritative snmpEngineID */
+    u_char         *securityEngineID;
+    /** Length of contextEngineID */
+    size_t          securityEngineIDLen;    
+    /** on behalf of this principal */
+    char           *securityName;
+    /** Length of securityName. */
+    size_t          securityNameLen;
+
+    /** auth protocol oid */
+    oid            *securityAuthProto;
+    /** Length of auth protocol oid */
+    size_t          securityAuthProtoLen;
+    /** Ku for auth protocol XXX */
+    u_char          securityAuthKey[USM_AUTH_KU_LEN];       
+    /** Length of Ku for auth protocol */
+    size_t          securityAuthKeyLen;
+    /** Kul for auth protocol */
+    u_char          *securityAuthLocalKey;       
+    /** Length of Kul for auth protocol XXX */
+    size_t          securityAuthLocalKeyLen;       
+
+    /** priv protocol oid */
+    oid            *securityPrivProto;
+    /** Length of priv protocol oid */
+    size_t          securityPrivProtoLen;
+    /** Ku for privacy protocol XXX */
+    u_char          securityPrivKey[USM_PRIV_KU_LEN];       
+    /** Length of Ku for priv protocol */
+    size_t          securityPrivKeyLen;
+    /** Kul for priv protocol */
+    u_char          *securityPrivLocalKey;       
+    /** Length of Kul for priv protocol XXX */
+    size_t          securityPrivLocalKeyLen;       
+
+    /** snmp security model, v1, v2c, usm */
+    int             securityModel;
+    /** noAuthNoPriv, authNoPriv, authPriv */
+    int             securityLevel;  
+    /** target param name */
+    char           *paramName;
+
+    /**
+     * security module specific 
+     */
+    void           *securityInfo;
+
+    /**
+     * transport specific configuration 
+     */
+   struct netsnmp_container_s *transport_configuration;
+
+    /**
+     * use as you want data 
+     *
+     *     used by 'SNMP_FLAGS_RESP_CALLBACK' handling in the agent
+     * XXX: or should we add a new field into this structure?
+     */
+    void           *myvoid;
+};
+
+
+#include <net-snmp/library/types.h>
+#include <net-snmp/definitions.h>
+#include <net-snmp/library/snmp_api.h>
 
 #ifdef __cplusplus
 }

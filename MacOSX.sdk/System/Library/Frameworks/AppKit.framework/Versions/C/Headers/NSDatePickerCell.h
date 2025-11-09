@@ -1,14 +1,13 @@
 /*
 	NSDatePickerCell.h
 	Application Kit
-	Copyright (c) 2004-2009, Apple Inc.
+	Copyright (c) 2004-2011, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSDate.h>
 #import <AppKit/NSActionCell.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 enum {
     NSTextFieldAndStepperDatePickerStyle    = 0,
@@ -131,4 +130,3 @@ enum {
 - (void)datePickerCell:(NSDatePickerCell *)aDatePickerCell validateProposedDateValue:(NSDate **)proposedDateValue timeInterval:(NSTimeInterval *)proposedTimeInterval;
 @end
 
-#endif

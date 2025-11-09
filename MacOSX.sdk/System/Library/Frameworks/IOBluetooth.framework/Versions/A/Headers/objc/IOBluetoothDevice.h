@@ -148,7 +148,7 @@
 - (IOBluetoothUserNotification *)registerForDisconnectNotification:(id)observer selector:(SEL)inSelector;
 
 /*!
-    @method		withAddress:
+    @method		deviceWithAddress:
 	@abstract	Returns the IOBluetoothDevice object for the given BluetoothDeviceAddress
 	@discussion	Within a single application, there will be only one instance of IOBluetoothDevice for a
                 given remote device address.
@@ -156,24 +156,38 @@
 	@result		Returns the IOBluetoothDevice object for the given BluetoothDeviceAddress
 */
 
-+ (IOBluetoothDevice *)withAddress:(const BluetoothDeviceAddress *)address;
++ (IOBluetoothDevice *)deviceWithAddress:(const BluetoothDeviceAddress *)address;
++ (IOBluetoothDevice *)withAddress:(const BluetoothDeviceAddress *)address DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+/*!
+ @method		deviceWithAddressString:
+ @abstract	Returns the IOBluetoothDevice object for the given BluetoothDeviceAddress
+ @discussion	Within a single application, there will be only one instance of IOBluetoothDevice for a
+ given remote device address.
+ @param		address	Pointer to an NSString containing the BD_ADDR for which an IOBluetoothDevice instance is desired.  The string should be of the form xx:xx:xx:xx:xx:xx
+ @result		Returns the IOBluetoothDevice object for the given BluetoothDeviceAddress
+ */
+
++ (IOBluetoothDevice *)deviceWithAddressString:(NSString *)address ;
 
 /*!
     @method		withDeviceRef:
 	@abstract	Method call to convert an IOBluetoothDeviceRef into an IOBluetoothDevice *.
+	@discussion	IOBluetoothDeviceRef and it's API are deprecated.  An IOBluetoothDeviceRef can be cast to a IOBluetoothDevice *
 	@param		deviceRef IOBluetoothDeviceRef for which an IOBluetoothDevice * is desired.
 	@result		Returns the IOBluetoothDevice * for the given IOBluetoothDeviceRef.
 */
 
-+ (IOBluetoothDevice *)withDeviceRef:(IOBluetoothDeviceRef)deviceRef;
++ (IOBluetoothDevice *)withDeviceRef:(IOBluetoothDeviceRef)deviceRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getDeviceRef
 	@abstract	Returns an IOBluetoothDeviceRef representation of the target IOBluetoothDevice object.
+	@discussion	IOBluetoothDeviceRef and it's API are deprecated.  An IOBluetoothDeviceRef can be cast to a IOBluetoothDevice *
 	@result		Returns an IOBluetoothDeviceRef representation of the target IOBluetoothDevice object.
 */
 
-- (IOBluetoothDeviceRef)getDeviceRef;
+- (IOBluetoothDeviceRef)getDeviceRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 // L2CAP channel.
 
@@ -376,7 +390,8 @@
 	@result		Returns the class of device for the remote device.
 */
 
-- (BluetoothClassOfDevice)getClassOfDevice;
+@property(readonly) BluetoothClassOfDevice classOfDevice;
+- (BluetoothClassOfDevice)getClassOfDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getServiceClassMajor
@@ -387,7 +402,8 @@
 	@result		Returns the major service class of the device.
 */
 
-- (BluetoothServiceClassMajor)getServiceClassMajor;
+@property(readonly) BluetoothServiceClassMajor serviceClassMajor;
+- (BluetoothServiceClassMajor)getServiceClassMajor DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getDeviceClassMajor
@@ -398,7 +414,8 @@
 	@result		Returns the major device class of the remote device.
 */
 
-- (BluetoothDeviceClassMajor)getDeviceClassMajor;
+@property(readonly) BluetoothDeviceClassMajor deviceClassMajor;
+- (BluetoothDeviceClassMajor)getDeviceClassMajor DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getDeviceClassMinor
@@ -409,7 +426,8 @@
 	@result		Returns the minor device class of the remote device.
 */
 
-- (BluetoothDeviceClassMinor)getDeviceClassMinor;
+@property(readonly) BluetoothDeviceClassMinor deviceClassMinor;
+- (BluetoothDeviceClassMinor)getDeviceClassMinor DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getName
@@ -422,7 +440,7 @@
                 format of the most recent remote name request.
 */
 
-@property(readonly) NSString *name;
+@property(readonly, copy) NSString *name;
 - (NSString *)getName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
@@ -444,7 +462,8 @@
                 completed on the target device, nil is returned.
 */
 
-- (NSDate *)getLastNameUpdate;
+@property(readonly, retain) NSDate *lastNameUpdate;
+- (NSDate *)getLastNameUpdate DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getAddress
@@ -464,7 +483,8 @@
 	@result		Returns an NSString containing the Bluetooth device address of the target device.
 */
 
-- (NSString *)getAddressString;
+@property(readonly) NSString *addressString;
+- (NSString *)getAddressString DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1 */
 
@@ -523,7 +543,27 @@
 
 - (NSDate *)getLastInquiryUpdate;
 
-// Baseband Connection info.
+/*!
+    @method		RSSI
+	@abstract	Get the RSSI device (if connected), above or below the golden range. If the RSSI is within the golden
+				range, a value of 0 is returned. For the actual RSSI value, use getRawRSSI. For more information, see
+				the Bluetooth 4.0 Core Specification.
+	@result		Returns the RSSI of the device. If the value cannot be read (e.g. the device is disconnected), a value 
+				of +127 will be returned.
+*/
+
+- (BluetoothHCIRSSIValue)RSSI AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+/*!
+    @method		rawRSSI
+	@abstract	Get the raw RSSI device (if connected).
+	@result		Returns the raw RSSI of the device.
+	@discussion	This value is the perceived RSSI value, not relative the the golden range (see getRSSI for that value).
+				This value will not available on all Bluetooth modules. If the value cannot be read (e.g. the device
+				is disconnected) or is not available on a module, a value of +127 will be returned.
+*/
+
+- (BluetoothHCIRSSIValue)rawRSSI AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		isConnected
@@ -540,7 +580,11 @@
                 or the create connection has failed (perhaps timed out).  This method does the same thing as
 				calling -openConnection: with a nil target.	 This call with proceed without authentication required, and
 				using the default page timeout value.  If authentication or a non-default page timeout is required the method
-				-openConnection:withPageTimeout:authenticationRequired: should be used instead.			
+				-openConnection:withPageTimeout:authenticationRequired: should be used instead.	
+				
+				As of Mac OS X 10.7, this method will no longer mask out "Connection Exists" 'errors' with a success result code;
+				your code must account for the cases where the baseband connection is already open.
+										
 	@result		Returns kIOReturnSuccess if the connection was successfully created.
 */
 
@@ -555,6 +599,10 @@
 				or the CREATE_CONNECTION call has failed.  This call with proceed without authentication required, and
 				using the default page timeout value.  If authentication or a non-default page timeout is required the method
 				-openConnection:withPageTimeout:authenticationRequired: should be used instead.
+
+				As of Mac OS X 10.7, this method will no longer mask out "Connection Exists" 'errors' with a success result code;
+				your code must account for the cases where the baseband connection is already open.
+
 	@result		Returns kIOReturnSuccess if the connection was successfully created (or if asynchronous, if the
 				CREATE_CONNECTION command was successfully issued).
 */
@@ -572,6 +620,10 @@
 				or the CREATE_CONNECTION call has failed.
 
 				NOTE: This method is only available in Mac OS X 10.2.7 (Bluetooth v1.3) or later.
+
+				As of Mac OS X 10.7, this method will no longer mask out "Connection Exists" 'errors' with a success result code;
+				your code must account for the cases where the baseband connection is already open.
+
 	@param		target The target to message when the create connection call is complete
 	@param		pageTimeoutValue The page timeout value to use for this call
 	@param		authenticationRequired BOOL value to indicate whether authentication should be required for the connection
@@ -649,7 +701,8 @@
                 kBluetoothConnectionHandleNone is returned.
 */
 
-- (BluetoothConnectionHandle)getConnectionHandle;
+@property(readonly, assign) BluetoothConnectionHandle connectionHandle;
+- (BluetoothConnectionHandle)getConnectionHandle DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_3
 
@@ -705,7 +758,26 @@
 - (IOReturn)performSDPQuery:(id)target;
 
 /*!
-    @method		getServices
+ @method		performSDPQuery:uuids:
+ @abstract	Performs an SDP query on the target device with the specified service UUIDs.
+ @discussion	As a result of this call, a baseband connection will be built to the device (if not already connected).
+ Then, an L2CAP channel will be opened to the SDP server on the device.  At that point, a Service
+ Search Attribute request will be issued for each service UUID specified in the UUID array.
+ 
+ This function is always asynchronous.  If a target is specified, when the SDP query is complete (or
+ an error is encountered), the method -sdpQueryComplete:status: will be called on the given target.  If no target 
+ is specified, the request is still asynchronous, but no callback will be made.  That can be useful if the client 
+ has	registered for SDP service changed notifications.
+ @param		target The target to message when the SDP query is complete
+ @param		uuidArray An array of IOBluetoothSDPUUID objects for each service the caller is interested in
+ 
+ @result		Returns kIOReturnSuccess if the SDP query was successfully started.
+ */
+
+- (IOReturn)performSDPQuery:(id)target uuids:(NSArray *)uuidArray AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
+/*!
+    @method		services
 	@abstract	Gets an array of service records for the device.
 	@discussion	The resulting array contains IOBluetoothSDPServiceRecord objects.  The service records are only
                 present if an SDP query has been done on the target object.  This can be determined by calling
@@ -718,7 +790,8 @@
                 SDP query has been performed, nil is returned.
 */
 
-- (NSArray *)getServices;
+@property(readonly, retain) NSArray *services;
+- (NSArray *)getServices DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getLastServicesUpdate

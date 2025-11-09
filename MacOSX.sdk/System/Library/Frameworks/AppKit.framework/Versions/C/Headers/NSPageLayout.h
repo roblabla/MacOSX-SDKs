@@ -1,7 +1,7 @@
 /*
 	NSPageLayout.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -29,15 +29,13 @@
 */
 + (NSPageLayout *)pageLayout;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 /* Controllers for the accessory views that will be presented in the page setup panel by the methods below. When the page setup panel is presented to the user each controller is automatically sent a -setRepresentedObject: message with this object's NSPrintInfo. Because NSViewControllers are KVC and KVO compliant for "representedObject," you can use one as the file's owner of an accessory view's nib and bind controls to the file's owner using key paths that start with "representedObject." to take advantage of NSPrintInfo's KVC and KVO compliance. Each controller is also automatically sent a -title message. If that returns nil the application's short name is used in the popup menu that lets the user choose an accessory view.
 */
-- (void)addAccessoryController:(NSViewController *)accessoryController;
-- (void)removeAccessoryController:(NSViewController *)accessoryController;
-- (NSArray *)accessoryControllers;
+- (void)addAccessoryController:(NSViewController *)accessoryController NS_AVAILABLE_MAC(10_5);
+- (void)removeAccessoryController:(NSViewController *)accessoryController NS_AVAILABLE_MAC(10_5);
+- (NSArray *)accessoryControllers NS_AVAILABLE_MAC(10_5);
 
-#endif
 
 /* Present a page setup panel to the user, document-modally. When the user has dismissed it, send the message selected by didEndSelector to the delegate, with the contextInfo as the last argument. The method selected by didEndSelector must have the same signature as:
 
@@ -60,13 +58,13 @@
 
 /* Methods that were deprecated in Mac OS 10.5. -setAccessoryView: replaces all of the accessory controllers that have been added so far by -addAccessoryController:. -accessoryView merely returns the view of the first accessory controller, or nil.
 */
-- (void)setAccessoryView:(NSView *)accessoryView DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (NSView *)accessoryView DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)setAccessoryView:(NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
+- (NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
 
 /* Methods that were deprecated in Mac OS 10.5.
 */
-- (void)readPrintInfo DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)writePrintInfo DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)readPrintInfo NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)writePrintInfo NS_DEPRECATED_MAC(10_0, 10_5);
 
 @end
 

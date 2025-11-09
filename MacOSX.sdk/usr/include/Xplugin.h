@@ -34,7 +34,7 @@
 #ifndef XPLUGIN_H
 #define XPLUGIN_H 1
 
-#define XPLUGIN_VERSION 3
+#define XPLUGIN_VERSION 4
 
 #include <stdint.h>
 
@@ -482,55 +482,75 @@ enum xp_frame_rect_enum {
     XP_FRAME_RECT_TRACKING		= 2,
     XP_FRAME_RECT_GROWBOX		= 3,
 };
+typedef enum xp_frame_rect_enum xp_frame_rect;
 
-/* Classes of window frame. */
+/* Classes of window frame.
+ * All classes *MUST* have one of the DECOR bits set.  BEHAVIOR bits are
+ * optional.  If no BEHAVIOR bit is set, default values are used based on 
+ * DECOR (MANAGED for LARGE/SMALL, TRANSIENT for NONE).
+ *
+ * RESERVED bits are currently used for binary compatability with older
+ * quartz-wm versions, but they may be allocated to other purposes in the
+ * future.
+ */
 
 enum xp_frame_class_enum {
-    XP_FRAME_CLASS_DOCUMENT		= 1 << 0,
-    XP_FRAME_CLASS_DIALOG		= 1 << 1,
-    XP_FRAME_CLASS_MODAL_DIALOG		= 1 << 2,
-    XP_FRAME_CLASS_SYSTEM_MODAL_DIALOG	= 1 << 3,
-    XP_FRAME_CLASS_UTILITY		= 1 << 4,
-    XP_FRAME_CLASS_TOOLBAR		= 1 << 5,
-    XP_FRAME_CLASS_MENU			= 1 << 6,
-    XP_FRAME_CLASS_SPLASH		= 1 << 7,
-    XP_FRAME_CLASS_BORDERLESS		= 1 << 8,
+    XP_FRAME_CLASS_DECOR_LARGE		= 1 << 0,
+    XP_FRAME_CLASS_RESERVED1		= 1 << 1,
+    XP_FRAME_CLASS_RESERVED2		= 1 << 2,
+    XP_FRAME_CLASS_RESERVED3		= 1 << 3,
+    XP_FRAME_CLASS_DECOR_SMALL		= 1 << 4,
+    XP_FRAME_CLASS_RESERVED5		= 1 << 5,
+    XP_FRAME_CLASS_RESERVED6		= 1 << 6,
+    XP_FRAME_CLASS_DECOR_NONE		= 1 << 7,
+    XP_FRAME_CLASS_RESERVED8		= 1 << 8,
+    XP_FRAME_CLASS_BEHAVIOR_MANAGED	= 1 << 15,
+    XP_FRAME_CLASS_BEHAVIOR_TRANSIENT	= 1 << 16,
+    XP_FRAME_CLASS_BEHAVIOR_STATIONARY	= 1 << 17,
 };
+typedef enum xp_frame_class_enum xp_frame_class;
 
 /* Attributes of window frames. */
 
 enum xp_frame_attr_enum {
-    XP_FRAME_ACTIVE			= 0x0001,
-    XP_FRAME_URGENT			= 0x0002,
-    XP_FRAME_TITLE			= 0x0004,
-    XP_FRAME_PRELIGHT			= 0x0008,
-    XP_FRAME_SHADED			= 0x0010,
-    XP_FRAME_CLOSE_BOX			= 0x0100,
-    XP_FRAME_COLLAPSE			= 0x0200,
-    XP_FRAME_ZOOM			= 0x0400,
-    XP_FRAME_ANY_BUTTON			= 0x0700,
-    XP_FRAME_CLOSE_BOX_CLICKED		= 0x0800,
-    XP_FRAME_COLLAPSE_BOX_CLICKED	= 0x1000,
-    XP_FRAME_ZOOM_BOX_CLICKED		= 0x2000,
-    XP_FRAME_ANY_CLICKED		= 0x3800,
-    XP_FRAME_GROW_BOX			= 0x4000,
+    XP_FRAME_ATTR_ACTIVE		= 0x0001,
+    XP_FRAME_ATTR_URGENT		= 0x0002,
+    XP_FRAME_ATTR_TITLE			= 0x0004,
+    XP_FRAME_ATTR_PRELIGHT		= 0x0008,
+    XP_FRAME_ATTR_SHADED		= 0x0010,
+    XP_FRAME_ATTR_CLOSE_BOX		= 0x0100,
+    XP_FRAME_ATTR_COLLAPSE		= 0x0200,
+    XP_FRAME_ATTR_ZOOM			= 0x0400,
+    XP_FRAME_ATTR_CLOSE_BOX_CLICKED	= 0x0800,
+    XP_FRAME_ATTR_COLLAPSE_BOX_CLICKED	= 0x1000,
+    XP_FRAME_ATTR_ZOOM_BOX_CLICKED	= 0x2000,
+    XP_FRAME_ATTR_GROW_BOX		= 0x4000,
 };
+typedef enum xp_frame_attr_enum xp_frame_attr;
 
 #define XP_FRAME_ATTR_IS_SET(a,b)	(((a) & (b)) == (b))
 #define XP_FRAME_ATTR_IS_CLICKED(a,m)	((a) & ((m) << 3))
 #define XP_FRAME_ATTR_SET_CLICKED(a,m)	((a) |= ((m) << 3))
 #define XP_FRAME_ATTR_UNSET_CLICKED(a,m) ((a) &= ~((m) << 3))
 
-#define XP_FRAME_POINTER_ATTRS		(XP_FRAME_PRELIGHT		\
-					 | XP_FRAME_ANY_BUTTON		\
-					 | XP_FRAME_ANY_CLICKED)
+#define XP_FRAME_ATTRS_ANY_BUTTON       (XP_FRAME_ATTR_CLOSE_BOX | \
+                                         XP_FRAME_ATTR_COLLAPSE | \
+                                         XP_FRAME_ATTR_ZOOM)
 
-extern xp_error xp_frame_get_rect (int type, int class, const xp_box *outer,
+#define XP_FRAME_ATTRS_ANY_CLICKED      (XP_FRAME_ATTR_CLOSE_BOX_CLICKED | \
+                                         XP_FRAME_ATTR_COLLAPSE_BOX_CLICKED | \
+                                         XP_FRAME_ATTR_ZOOM_BOX_CLICKED)
+
+#define XP_FRAME_ATTRS_POINTER		(XP_FRAME_ATTR_PRELIGHT | \
+					 XP_FRAME_ATTRS_ANY_BUTTON | \
+					 XP_FRAME_ATTRS_ANY_CLICKED)
+
+extern xp_error xp_frame_get_rect (xp_frame_rect type, xp_frame_class class, const xp_box *outer,
 				   const xp_box *inner, xp_box *ret);
-extern xp_error xp_frame_hit_test (int class, int x, int y,
+extern xp_error xp_frame_hit_test (xp_frame_class class, int x, int y,
 				   const xp_box *outer,
 				   const xp_box *inner, int *ret);
-extern xp_error xp_frame_draw (xp_window_id wid, int class, unsigned int attr,
+extern xp_error xp_frame_draw (xp_window_id wid, xp_frame_class class, xp_frame_attr attr,
 			       const xp_box *outer, const xp_box *inner,
 			       unsigned int title_len,
 			       const unsigned char *title_bytes);

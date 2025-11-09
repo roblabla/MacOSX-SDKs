@@ -3,6 +3,7 @@
  * Copyright (c) 2003, Apple Computer, Inc.  All rights reserved.
  */
 
+#import <Foundation/Foundation.h>
 #import <SyncServices/ISyncCommon.h>
 
 
@@ -12,7 +13,7 @@
 @interface ISyncSession : NSObject
 
 /* Phase I: negotiating the sync mode. */
-+ (ISyncSession *)beginSessionWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames beforeDate:(NSDate *)date;
++ (ISyncSession *)beginSessionWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames beforeDate:(NSDate *)date NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Returns immediately and invokes a target callback when the session can start or if the session.
    cannot be started. The target is invoked with the selector and two arguments, the ISyncClient
@@ -20,8 +21,8 @@
    -(void)client:(ISyncClient *)can beginSession:(ISyncSession *)session;
    If the session cannot be started, the session parameter is nil.
 */
-+ (void)beginSessionInBackgroundWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames target:(id)target selector:(SEL)selector;
-+ (void)cancelPreviousBeginSessionWithClient:(ISyncClient *)client;
++ (void)beginSessionInBackgroundWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames target:(id)target selector:(SEL)selector NS_DEPRECATED_MAC(10_4, 10_7);
++ (void)cancelPreviousBeginSessionWithClient:(ISyncClient *)client NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* If a client is using sync anchors, when starting a sync session, the client passes in the previous
    sync anchors, one per entity. The anchors dictionary is a map from the entity name to the sync anchor
@@ -52,9 +53,9 @@
    these methods are called on a session that was created using the earlier API that did not include a
    lastAnchors argument.
 */
-+ (ISyncSession *)beginSessionWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames beforeDate:(NSDate *)date lastAnchors:(NSDictionary /* string entity name -> string anchor */ *)anchors AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
++ (ISyncSession *)beginSessionWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames beforeDate:(NSDate *)date lastAnchors:(NSDictionary /* string entity name -> string anchor */ *)anchors NS_DEPRECATED_MAC(10_5, 10_7);
 
-+ (void)beginSessionInBackgroundWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames target:(id)target selector:(SEL)selector lastAnchors:(NSDictionary /* string entity name -> string anchor */ *)anchors AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
++ (void)beginSessionInBackgroundWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames target:(id)target selector:(SEL)selector lastAnchors:(NSDictionary /* string entity name -> string anchor */ *)anchors NS_DEPRECATED_MAC(10_5, 10_7);
 
 // + (ISyncSession *)beginSessionWithClient:(ISyncClient *)client entityNames:(NSArray /* entity name */ *)entityNames beforeDate:(NSDate *)date lastAnchors: (NSDictionary *)anchors hasChanges:(BOOL)flag error: (NSError **)error;
 
@@ -65,8 +66,8 @@
    means that you, the client, can't figure out which records have changed since the last sync and so
    you're going to give all of your records to the engine.  The engine will figure out what has changed
    since the last sync and only provide to you the appropriate sets of changes. */
-- (void)clientDidResetEntityNames:(NSArray /* NSString */ *)entityNames;
-- (void)clientWantsToPushAllRecordsForEntityNames:(NSArray /* NSString */ *)entityNames;
+- (void)clientDidResetEntityNames:(NSArray /* NSString */ *)entityNames NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)clientWantsToPushAllRecordsForEntityNames:(NSArray /* NSString */ *)entityNames NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* These methods query how the engine is going to sync you, the client. -shouldPushChangesForEntityName:
    returns NO if you should not push any changes for an entity.  -shouldPushAllRecordsForEntityName:
@@ -76,10 +77,10 @@
    should delete all of your records and replace them with the records the engine will hand you.  To a
    certain extent, these values may be modified by the methods -clientDidResetEntityNames: and
    -clientWantsToPushAllRecordsForEntityNames: as described above. */
-- (BOOL)shouldPushChangesForEntityName:(NSString *)entityName;
-- (BOOL)shouldPushAllRecordsForEntityName:(NSString *)entityName;
-- (BOOL)shouldPullChangesForEntityName:(NSString *)entityName;
-- (BOOL)shouldReplaceAllRecordsOnClientForEntityName:(NSString *)entityName;
+- (BOOL)shouldPushChangesForEntityName:(NSString *)entityName NS_DEPRECATED_MAC(10_4, 10_7);
+- (BOOL)shouldPushAllRecordsForEntityName:(NSString *)entityName NS_DEPRECATED_MAC(10_4, 10_7);
+- (BOOL)shouldPullChangesForEntityName:(NSString *)entityName NS_DEPRECATED_MAC(10_4, 10_7);
+- (BOOL)shouldReplaceAllRecordsOnClientForEntityName:(NSString *)entityName NS_DEPRECATED_MAC(10_4, 10_7);
 
 
 /* Phase II: pushing changes from the client.  You can create an ISyncChange object yourself and
@@ -124,11 +125,11 @@
             email = qwerty@keyboard.com;
         }
 */
-- (void)pushChange:(ISyncChange *)change;
-- (void)pushChangesFromRecord:(NSDictionary *)record withIdentifier:(NSString *)recordId;
+- (void)pushChange:(ISyncChange *)change NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)pushChangesFromRecord:(NSDictionary *)record withIdentifier:(NSString *)recordId NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* A convenience to delete a record so you don't have to manually construct an ISyncChange. */
-- (void)deleteRecordWithIdentifier:(NSString *)recordId;
+- (void)deleteRecordWithIdentifier:(NSString *)recordId NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* The proverbial "soft delete".  This indicates that a record no longer exists on the client but this
    should not be considered a delete.  This method is special in that it can be used during either the
@@ -144,7 +145,7 @@
 
    This method will not touch the client info, if any, associated with this record.
 */
-- (void)clientLostRecordWithIdentifier:(NSString *)recordId shouldReplaceOnNextSync:(BOOL)flag;
+- (void)clientLostRecordWithIdentifier:(NSString *)recordId shouldReplaceOnNextSync:(BOOL)flag NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* If a client is using Sync Anchors, after pushing all changes, a client must create a new sync anchor
    string for each entity name that was synced, save the anchors in the client datastore, and pass the
@@ -152,16 +153,16 @@
    entity name to anchor mapping may be used for all of the entities in a dataclass. If the client is
    pulling the truth, the anchor is specified when calling clientCommittedAcceptedChanges.
 */
-- (void)clientFinishedPushingChangesWithNextAnchors:(NSDictionary /* string entity  name -> string anchor */ *)anchors AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)clientFinishedPushingChangesWithNextAnchors:(NSDictionary /* string entity  name -> string anchor */ *)anchors NS_DEPRECATED_MAC(10_5, 10_7);
 
 /* Phase III: pulling changes for the client.  The entities that you specify here must be a subset of
    the entities specified when the session was created. */
-- (BOOL)prepareToPullChangesForEntityNames:(NSArray /* NSString */ *)entityNames beforeDate:(NSDate *)date;
-- (void)prepareToPullChangesInBackgroundForEntityNames:(NSArray /* NSString */ *)entityNames target:(id)target selector:(SEL)selector;
+- (BOOL)prepareToPullChangesForEntityNames:(NSArray /* NSString */ *)entityNames beforeDate:(NSDate *)date NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)prepareToPullChangesInBackgroundForEntityNames:(NSArray /* NSString */ *)entityNames target:(id)target selector:(SEL)selector NS_DEPRECATED_MAC(10_4, 10_7);
 
-- (NSEnumerator /* ISyncChange */ *)changeEnumeratorForEntityNames:(NSArray /* NSString */ *)entityNames;
+- (NSEnumerator /* ISyncChange */ *)changeEnumeratorForEntityNames:(NSArray /* NSString */ *)entityNames NS_DEPRECATED_MAC(10_4, 10_7);
 
-- (void)clientAcceptedChangesForRecordWithIdentifier:(NSString *)recordId formattedRecord:(NSDictionary *)formattedRecord newRecordIdentifier:(NSString *)recordId;
+- (void)clientAcceptedChangesForRecordWithIdentifier:(NSString *)recordId formattedRecord:(NSDictionary *)formattedRecord newRecordIdentifier:(NSString *)recordId NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* This method informs the sync engine that the client has
    refused to apply the changes for the record specified by recordIdentifier.
@@ -174,8 +175,8 @@
 
    This method will not touch the client info, if any, associated with this record.
 */
-- (void)clientRefusedChangesForRecordWithIdentifier:(NSString *)recordId;
-- (void)clientCommittedAcceptedChanges;
+- (void)clientRefusedChangesForRecordWithIdentifier:(NSString *)recordId NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)clientCommittedAcceptedChanges NS_DEPRECATED_MAC(10_4, 10_7);
 /* If a client is using sync anchors, after accepting pulled changes, a client must create a new sync anchor
    string for each entity that was synced, save the anchors in the client datastore, and pass the anchors to
    the call to clientCommittedAcceptedChangesWithNextAnchors. As a convenience a single representative entity
@@ -183,30 +184,30 @@
    truth, this method won't be called, but that is fine, as the sync anchors passed into the method
    clientFinishedPushingChangesWithNextAnchors will be used.
 */
-- (void)clientCommittedAcceptedChangesWithNextAnchors:(NSDictionary /* string entity name -> string anchor */ *)anchors AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)clientCommittedAcceptedChangesWithNextAnchors:(NSDictionary /* string entity name -> string anchor */ *)anchors NS_DEPRECATED_MAC(10_5, 10_7);
 
-- (void)clientChangedRecordIdentifiers:(NSDictionary *)oldToNew;
+- (void)clientChangedRecordIdentifiers:(NSDictionary *)oldToNew NS_DEPRECATED_MAC(10_4, 10_7);
 
-- (BOOL)isCancelled;
-- (void)cancelSyncing;
-- (void)finishSyncing;
+- (BOOL)isCancelled NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)cancelSyncing NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)finishSyncing NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Conduit-specific, unsynchronized information stored with a record.  The data is removed when
    the client removes the associated record.  You can specify any object here, but it must conform
    to the NSCoding protocol. */
-- (id)clientInfoForRecordWithIdentifier:(NSString *)recordId;
-- (void)setClientInfo:(id <NSCoding>)clientInfo forRecordWithIdentifier:(NSString *)recordId;
+- (id)clientInfoForRecordWithIdentifier:(NSString *)recordId NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)setClientInfo:(id <NSCoding>)clientInfo forRecordWithIdentifier:(NSString *)recordId NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Return a snapshot of the records in the Truth.  ISyncSession creates two snap shots during the sync.
    The first is made when the session is created.  The second is made at the same time as the changes
    for the client are prepared (when -prepareToPullChangesForEntityNames:beforeDate: is called).
    Compare to the method on ISyncManager. */
-- (ISyncRecordSnapshot *)snapshotOfRecordsInTruth;
+- (ISyncRecordSnapshot *)snapshotOfRecordsInTruth NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Clients can call this method to inform the server that they are still alive
    but doing something that keeps them busy and prevents them from talking to the server
    process. This will prevent the server from timing them out on the watchdog. */ 
-- (void)ping AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)ping NS_DEPRECATED_MAC(10_5, 10_7);
 
 @end
 
@@ -234,9 +235,9 @@
    the changes it received prior to the cancellation; it may invoke -clientCommittedAcceptedChanges to
    indicate its acceptance of these changes; and it may use -clientChangedRecordIdentifiers: to update
    the client Ids.  It will not be given any further changes, however. */
-SYNCSERVICES_EXPORT NSString * const ISyncSessionCancelledException;
+SYNCSERVICES_EXPORT NSString * const ISyncSessionCancelledException NS_DEPRECATED_MAC(10_4, 10_7);
 
-SYNCSERVICES_EXPORT NSString * const ISyncSessionUnavailableException;
+SYNCSERVICES_EXPORT NSString * const ISyncSessionUnavailableException NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* This exception may be thrown during the push phase.  It is thrown when the engine detects the client
    trying to push "bad" data - bad data being defined as anything which fails a data validation test.
@@ -248,16 +249,16 @@ SYNCSERVICES_EXPORT NSString * const ISyncSessionUnavailableException;
    have been applied.
 
    The userInfo object in the exception contains the list of rejected records and the reasons for each. */
-SYNCSERVICES_EXPORT NSString * const    ISyncInvalidRecordException;
-SYNCSERVICES_EXPORT NSString * const    ISyncInvalidRecordIdentifiersKey; // an array of record ids
-SYNCSERVICES_EXPORT NSString * const    ISyncInvalidRecordReasonsKey; // a dictionary, keyed by record id
-SYNCSERVICES_EXPORT NSString * const    ISyncInvalidRecordsKey; // a dictionary, keyed by record id
+SYNCSERVICES_EXPORT NSString * const    ISyncInvalidRecordException NS_DEPRECATED_MAC(10_4, 10_7);
+SYNCSERVICES_EXPORT NSString * const    ISyncInvalidRecordIdentifiersKey NS_DEPRECATED_MAC(10_4, 10_7); // an array of record ids
+SYNCSERVICES_EXPORT NSString * const    ISyncInvalidRecordReasonsKey NS_DEPRECATED_MAC(10_4, 10_7); // a dictionary, keyed by record id
+SYNCSERVICES_EXPORT NSString * const    ISyncInvalidRecordsKey NS_DEPRECATED_MAC(10_4, 10_7); // a dictionary, keyed by record id
 
 
 /* These exceptions are thrown when trying to synchronize an invalid entity (one that has not been
    registered) or a valid entity that the client was not registered to synchronize. */
-SYNCSERVICES_EXPORT NSString * const ISyncInvalidEntityException;
-SYNCSERVICES_EXPORT NSString * const ISyncUnsupportedEntityException;
+SYNCSERVICES_EXPORT NSString * const ISyncInvalidEntityException NS_DEPRECATED_MAC(10_4, 10_7);
+SYNCSERVICES_EXPORT NSString * const ISyncUnsupportedEntityException NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Other exceptions that can be generated on 10.6 include
  * ISyncInvalidSchemaException and ISyncInvalidArgumentsException.  These are
@@ -270,4 +271,4 @@ SYNCSERVICES_EXPORT NSString * const ISyncUnsupportedEntityException;
 /* Every record passed to the sync engine (and every record received from the sync engine) must be
    associated with an entity.  The name of the entity is stored in the record dictionary using
    this key. */
-SYNCSERVICES_EXPORT NSString * const ISyncRecordEntityNameKey;
+SYNCSERVICES_EXPORT NSString * const ISyncRecordEntityNameKey NS_DEPRECATED_MAC(10_4, 10_7);

@@ -51,12 +51,8 @@ class OSSerialize;
  */
  
  
-#if !defined(__ppc__) || __GNUC__ < 3
 /*! @parseOnly */
 #define APPLE_KEXT_COMPATIBILITY
-#else
-#define APPLE_KEXT_COMPATIBILITY __attribute__ ((apple_kext_compatibility))
-#endif
 
 #ifdef __arm__
 #define APPLE_KEXT_VTABLE_PADDING   0
@@ -888,6 +884,9 @@ private:
 class OSMetaClass : private OSMetaClassBase
 {
     friend class OSKext;
+#if IOKITSTATS
+	friend class IOStatistics;
+#endif
 
 private:
     // Can never be allocated must be created at compile time
@@ -904,7 +903,7 @@ private:
    /* className OSSymbol of the class' name. */
     const OSSymbol *className;
 
-   /* classSize How big is a single instancde of this class. */
+   /* classSize How big is a single instance of this class. */
     unsigned int classSize;
 
    /* instanceCount Roughly number of instances of the object,

@@ -59,6 +59,8 @@
 #ifndef HEADER_ECDSA_H
 #define HEADER_ECDSA_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/opensslconf.h>
 
 #ifdef OPENSSL_NO_ECDSA
@@ -85,13 +87,13 @@ typedef struct ECDSA_SIG_st
  * allocates and initialize a ECDSA_SIG structure
  * \return pointer to a ECDSA_SIG structure or NULL if an error occurred
  */
-ECDSA_SIG *ECDSA_SIG_new(void);
+ECDSA_SIG *ECDSA_SIG_new(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /** ECDSA_SIG_free
  * frees a ECDSA_SIG structure
  * \param a pointer to the ECDSA_SIG structure
  */
-void	  ECDSA_SIG_free(ECDSA_SIG *a);
+void	  ECDSA_SIG_free(ECDSA_SIG *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /** i2d_ECDSA_SIG
  * DER encode content of ECDSA_SIG object (note: this function modifies *pp
@@ -100,7 +102,7 @@ void	  ECDSA_SIG_free(ECDSA_SIG *a);
  * \param pp pointer to a unsigned char pointer for the output or NULL
  * \return the length of the DER encoded ECDSA_SIG object or 0 
  */
-int	  i2d_ECDSA_SIG(const ECDSA_SIG *a, unsigned char **pp);
+int	  i2d_ECDSA_SIG(const ECDSA_SIG *a, unsigned char **pp) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /** d2i_ECDSA_SIG
  * decodes a DER encoded ECDSA signature (note: this function changes *pp
@@ -110,7 +112,7 @@ int	  i2d_ECDSA_SIG(const ECDSA_SIG *a, unsigned char **pp);
  * \param len bufferlength
  * \return pointer to the decoded ECDSA_SIG structure (or NULL)
  */
-ECDSA_SIG *d2i_ECDSA_SIG(ECDSA_SIG **v, const unsigned char **pp, long len);
+ECDSA_SIG *d2i_ECDSA_SIG(ECDSA_SIG **v, const unsigned char **pp, long len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /** ECDSA_do_sign
  * computes the ECDSA signature of the given hash value using
@@ -120,7 +122,7 @@ ECDSA_SIG *d2i_ECDSA_SIG(ECDSA_SIG **v, const unsigned char **pp, long len);
  * \param eckey pointer to the EC_KEY object containing a private EC key
  * \return pointer to a ECDSA_SIG structure or NULL
  */
-ECDSA_SIG *ECDSA_do_sign(const unsigned char *dgst,int dgst_len,EC_KEY *eckey);
+ECDSA_SIG *ECDSA_do_sign(const unsigned char *dgst,int dgst_len,EC_KEY *eckey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /** ECDSA_do_sign_ex
  * computes ECDSA signature of a given hash value using the supplied
@@ -134,7 +136,7 @@ ECDSA_SIG *ECDSA_do_sign(const unsigned char *dgst,int dgst_len,EC_KEY *eckey);
  * \return pointer to a ECDSA_SIG structure or NULL
  */
 ECDSA_SIG *ECDSA_do_sign_ex(const unsigned char *dgst, int dgstlen, 
-		const BIGNUM *kinv, const BIGNUM *rp, EC_KEY *eckey);
+		const BIGNUM *kinv, const BIGNUM *rp, EC_KEY *eckey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /** ECDSA_do_verify
  * verifies that the supplied signature is a valid ECDSA
@@ -146,21 +148,21 @@ ECDSA_SIG *ECDSA_do_sign_ex(const unsigned char *dgst, int dgstlen,
  * \return 1 if the signature is valid, 0 if the signature is invalid and -1 on error
  */
 int	  ECDSA_do_verify(const unsigned char *dgst, int dgst_len,
-		const ECDSA_SIG *sig, EC_KEY* eckey);
+		const ECDSA_SIG *sig, EC_KEY* eckey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-const ECDSA_METHOD *ECDSA_OpenSSL(void);
+const ECDSA_METHOD *ECDSA_OpenSSL(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /** ECDSA_set_default_method
  * sets the default ECDSA method
  * \param meth the new default ECDSA_METHOD
  */
-void	  ECDSA_set_default_method(const ECDSA_METHOD *meth);
+void	  ECDSA_set_default_method(const ECDSA_METHOD *meth) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /** ECDSA_get_default_method
  * returns the default ECDSA method
  * \return pointer to ECDSA_METHOD structure containing the default method
  */
-const ECDSA_METHOD *ECDSA_get_default_method(void);
+const ECDSA_METHOD *ECDSA_get_default_method(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /** ECDSA_set_method
  * sets method to be used for the ECDSA operations
@@ -168,14 +170,14 @@ const ECDSA_METHOD *ECDSA_get_default_method(void);
  * \param meth  pointer to the new method
  * \return 1 on success and 0 otherwise 
  */
-int 	  ECDSA_set_method(EC_KEY *eckey, const ECDSA_METHOD *meth);
+int 	  ECDSA_set_method(EC_KEY *eckey, const ECDSA_METHOD *meth) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /** ECDSA_size
  * returns the maximum length of the DER encoded signature
  * \param  eckey pointer to a EC_KEY object
  * \return numbers of bytes required for the DER encoded signature
  */
-int	  ECDSA_size(const EC_KEY *eckey);
+int	  ECDSA_size(const EC_KEY *eckey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /** ECDSA_sign_setup
  * precompute parts of the signing operation. 
@@ -186,7 +188,7 @@ int	  ECDSA_size(const EC_KEY *eckey);
  * \return 1 on success and 0 otherwise
  */
 int 	  ECDSA_sign_setup(EC_KEY *eckey, BN_CTX *ctx, BIGNUM **kinv, 
-		BIGNUM **rp);
+		BIGNUM **rp) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /** ECDSA_sign
  * computes ECDSA signature of a given hash value using the supplied
@@ -200,7 +202,7 @@ int 	  ECDSA_sign_setup(EC_KEY *eckey, BN_CTX *ctx, BIGNUM **kinv,
  * \return 1 on success and 0 otherwise
  */
 int	  ECDSA_sign(int type, const unsigned char *dgst, int dgstlen, 
-		unsigned char *sig, unsigned int *siglen, EC_KEY *eckey);
+		unsigned char *sig, unsigned int *siglen, EC_KEY *eckey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 /** ECDSA_sign_ex
@@ -219,7 +221,7 @@ int	  ECDSA_sign(int type, const unsigned char *dgst, int dgstlen,
  */
 int	  ECDSA_sign_ex(int type, const unsigned char *dgst, int dgstlen, 
 		unsigned char *sig, unsigned int *siglen, const BIGNUM *kinv,
-		const BIGNUM *rp, EC_KEY *eckey);
+		const BIGNUM *rp, EC_KEY *eckey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /** ECDSA_verify
  * verifies that the given signature is valid ECDSA signature
@@ -233,20 +235,20 @@ int	  ECDSA_sign_ex(int type, const unsigned char *dgst, int dgstlen,
  * \return 1 if the signature is valid, 0 if the signature is invalid and -1 on error
  */
 int 	  ECDSA_verify(int type, const unsigned char *dgst, int dgstlen, 
-		const unsigned char *sig, int siglen, EC_KEY *eckey);
+		const unsigned char *sig, int siglen, EC_KEY *eckey) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* the standard ex_data functions */
 int 	  ECDSA_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new 
-		*new_func, CRYPTO_EX_dup *dup_func, CRYPTO_EX_free *free_func);
-int 	  ECDSA_set_ex_data(EC_KEY *d, int idx, void *arg);
-void 	  *ECDSA_get_ex_data(EC_KEY *d, int idx);
+		*new_func, CRYPTO_EX_dup *dup_func, CRYPTO_EX_free *free_func) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int 	  ECDSA_set_ex_data(EC_KEY *d, int idx, void *arg) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void 	  *ECDSA_get_ex_data(EC_KEY *d, int idx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 
 /* BEGIN ERROR CODES */
 /* The following lines are auto generated by the script mkerr.pl. Any changes
  * made after this point may be overwritten when the script is next run.
  */
-void ERR_load_ECDSA_strings(void);
+void ERR_load_ECDSA_strings(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Error codes for the ECDSA functions. */
 

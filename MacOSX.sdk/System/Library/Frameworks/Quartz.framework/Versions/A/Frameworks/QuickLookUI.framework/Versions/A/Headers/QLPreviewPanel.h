@@ -2,7 +2,7 @@
  *  QLPreviewPanel.h
  *  Quick Look
  *
- *  Copyright 2007-2008 Apple Inc. All rights reserved.
+ *  Copyright 2007-2010 Apple Inc. All rights reserved.
  *
  */
 
@@ -18,10 +18,10 @@
 
 /*!
  * @abstract The QLPreviewPanel class implements the Preview Panel - a user interface object that displays the preview of a list of items.
- * @discussion Every application only has on instance of QLPreviewPanel. You can not subclass QLPreviewPanel.
+ * @discussion Each application has only one instance of QLPreviewPanel. You can not subclass QLPreviewPanel.
  *
  *      QLPreviewPanel follows the responder chain and adapts to the first responder willing to control it. It uses a data source to
- *      gets its content. QLPreviewPanel also can have a delegate.
+ *      gets its content. QLPreviewPanel can also have a delegate.
  */
 @interface QLPreviewPanel : NSPanel
 {

@@ -1,7 +1,7 @@
 /*
 	NSBox.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -43,7 +43,7 @@ typedef NSUInteger NSBoxType;
 	NSBorderType	borderType:2;
 	NSTitlePosition	titlePosition:3;
 	unsigned int	backgroundTransparent:1;
-        unsigned int	reserved:2;
+        unsigned int	orientation:2;
         unsigned int	needsTile:1;
         unsigned int	transparent:1;
         unsigned int	colorAltInterpretation:1;
@@ -73,11 +73,9 @@ typedef NSUInteger NSBoxType;
 - (id)contentView;
 - (void)setContentView:(NSView *)aView;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 // Transparent boxes do not draw anything.  Subview drawing is unaffected.  The 'transparent' property corresponds to the binding 'NSTransparentBinding'.
-- (BOOL)isTransparent;
-- (void)setTransparent:(BOOL)flag;
-#endif
+- (BOOL)isTransparent NS_AVAILABLE_MAC(10_5);
+- (void)setTransparent:(BOOL)flag NS_AVAILABLE_MAC(10_5);
 
 @end
 
@@ -85,22 +83,20 @@ typedef NSUInteger NSBoxType;
 - (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand;
 @end
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 @interface NSBox (NSCustomBoxTypeProperties)
 /* These properties only apply to boxes with boxType NSBoxCustom.
  */
 
-- (CGFloat)borderWidth;
-- (void)setBorderWidth:(CGFloat)borderWidth;	// Only meaningful for boxes configured with NSBoxCustom
+- (CGFloat)borderWidth NS_AVAILABLE_MAC(10_5);
+- (void)setBorderWidth:(CGFloat)borderWidth NS_AVAILABLE_MAC(10_5);	// Only meaningful for boxes configured with NSBoxCustom
 
-- (CGFloat)cornerRadius;
-- (void)setCornerRadius:(CGFloat)cornerRadius;	// Only meaningful for boxes configured with NSBoxCustom
+- (CGFloat)cornerRadius NS_AVAILABLE_MAC(10_5);
+- (void)setCornerRadius:(CGFloat)cornerRadius NS_AVAILABLE_MAC(10_5);	// Only meaningful for boxes configured with NSBoxCustom
 
-- (NSColor *)borderColor;
-- (void)setBorderColor:(NSColor *)borderColor;	// Only meaningful for boxes configured with NSBoxCustom
+- (NSColor *)borderColor NS_AVAILABLE_MAC(10_5);
+- (void)setBorderColor:(NSColor *)borderColor NS_AVAILABLE_MAC(10_5);	// Only meaningful for boxes configured with NSBoxCustom
 
-- (NSColor *)fillColor;
-- (void)setFillColor:(NSColor *)fillColor;	// Only meaningful for boxes configured with NSBoxCustom
+- (NSColor *)fillColor NS_AVAILABLE_MAC(10_5);
+- (void)setFillColor:(NSColor *)fillColor NS_AVAILABLE_MAC(10_5);	// Only meaningful for boxes configured with NSBoxCustom
 
 @end
-#endif

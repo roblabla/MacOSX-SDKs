@@ -3,7 +3,7 @@
  
      Contains:   Folder Manager Interfaces.
  
-     Version:    CarbonCore-861.39~1
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 1995-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -76,6 +76,7 @@
 #define kInternetSitesFolderType 		'site'				/*  Refers to the "Sites" folder in a users home directory */
 #define kPublicFolderType 				'pubb'				/*  Refers to the "Public" folder in a users home directory */
 
+#define kDropBoxFolderType 				'drop'				/*  Refers to the "Drop Box" folder inside the user's home directory */
 #define kSharedLibrariesFolderType 		'Älib'				/*  for general shared libs.  */
 #define kVoicesFolderType 				'fvoc'				/*  macintalk can live here  */
 #define kUtilitiesFolderType 			'utiÄ'				/*  for Utilities folder  */
@@ -152,7 +153,8 @@
 #define kScriptingAdditionsFolderType 	'Äscr'				/*  at root of system folder  */
 
 #define kClassicPreferencesFolderType 	'cprf'				/*  "Classic" folder in ~/Library/ for redirected preference files.  */
-#define kQuickLookFolderType 			'qlck'				/*  The QuickLook folder, supported in Mac OS X SnowLeopard and later.  */
+#define kQuickLookFolderType 			'qlck'				/*  The QuickLook folder, supported in Mac OS X 10.6 and later.  */
+#define kServicesFolderType 			'svcs'				/*  The services folder, supported in Mac OS X 10.7 and later.  */
 															/*     The following selectors really only make sense when used within the Classic environment on Mac OS X. */
 #define kSystemFolderType 				'macs'				/*  the system folder  */
 #define kSystemDesktopFolderType 		'sdsk'				/*  the desktop folder at the root of the hard drive, never the redirected user desktop folder  */

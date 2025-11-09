@@ -1,3 +1,13 @@
+/* Portions of this file are subject to the following copyright(s).  See
+ * the Net-SNMP's COPYING file for more details and other copyrights
+ * that may apply:
+ */
+/*
+ * Portions of this file are copyrighted by:
+ * Copyright (C) 2007 Apple, Inc. All rights reserved.
+ * Use is subject to license terms specified in the COPYING file
+ * distributed with the Net-SNMP package.
+ */
 #ifndef NETSNMP_CACHE_HANDLER_H
 #define NETSNMP_CACHE_HANDLER_H
 
@@ -74,7 +84,7 @@ extern          "C" {
     int            netsnmp_is_cache_valid(    netsnmp_agent_request_info *);
     netsnmp_mib_handler *netsnmp_get_cache_handler(int, NetsnmpCacheLoad *,
                                                         NetsnmpCacheFree *,
-                                                        oid*, int);
+                                                        const oid*, int);
     int   netsnmp_register_cache_handler(netsnmp_handler_registration *reginfo,
                                          int, NetsnmpCacheLoad *,
                                               NetsnmpCacheFree *);
@@ -84,13 +94,14 @@ extern          "C" {
     netsnmp_cache *
     netsnmp_cache_create(int timeout, NetsnmpCacheLoad * load_hook,
                          NetsnmpCacheFree * free_hook,
-                         oid * rootoid, int rootoid_len);
+                         const oid * rootoid, int rootoid_len);
+    int netsnmp_cache_remove(netsnmp_cache *cache);
     int netsnmp_cache_free(netsnmp_cache *cache);
 
     netsnmp_mib_handler *
     netsnmp_cache_handler_get(netsnmp_cache* cache);
 
-    netsnmp_cache * netsnmp_cache_find_by_oid(oid * rootoid,
+    netsnmp_cache * netsnmp_cache_find_by_oid(const oid * rootoid,
                                               int rootoid_len);
 
     unsigned int netsnmp_cache_timer_start(netsnmp_cache *cache);

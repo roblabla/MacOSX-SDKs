@@ -1,5 +1,5 @@
 /*	NSArchiver.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -60,8 +60,8 @@
 
 - (id)initForReadingWithData:(NSData *)data;
 
-- (void)setObjectZone:(NSZone *)zone;
-- (NSZone *)objectZone;
+- (void)setObjectZone:(NSZone *)zone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
+- (NSZone *)objectZone NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
 - (BOOL)isAtEnd;
 

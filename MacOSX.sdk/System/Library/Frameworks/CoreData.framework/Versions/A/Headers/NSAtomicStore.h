@@ -1,18 +1,16 @@
 /*
     NSAtomicStore.h
     Core Data
-    Copyright (c) 2004-2009 Apple Inc.
+    Copyright (c) 2004-2010 Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 #import <CoreData/NSPersistentStore.h>
 #import <CoreData/NSAtomicStoreCacheNode.h>
 #import <CoreData/NSManagedObject.h>
 
+NS_CLASS_AVAILABLE(10_5,3_0)
 @interface NSAtomicStore : NSPersistentStore {
 	@private
     NSMutableDictionary *_nodeCache;
@@ -63,5 +61,3 @@
 - (id)referenceObjectForObjectID:(NSManagedObjectID *)objectID;
 
 @end
-
-#endif

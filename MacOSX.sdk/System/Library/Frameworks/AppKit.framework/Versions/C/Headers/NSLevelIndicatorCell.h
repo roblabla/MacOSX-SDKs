@@ -1,14 +1,13 @@
 /*
     NSLevelIndicatorCell.h
     Application Kit
-    Copyright (c) 2004-2009, Apple Inc.
+    Copyright (c) 2004-2011, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSActionCell.h>
 #import <AppKit/NSSliderCell.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 enum {
     NSRelevancyLevelIndicatorStyle,
@@ -31,7 +30,8 @@ typedef NSUInteger NSLevelIndicatorStyle;
 	unsigned int indicatorStyle:4;
         unsigned int tickMarkPosition:1;
         unsigned int selectable:1;
-	unsigned int reserved:26;
+	unsigned int ratingPlaceholder:1;
+	unsigned int reserved:25;
     } _liFlags;
     NSRect _cellFrame;
     int    _reserved1;
@@ -73,4 +73,3 @@ typedef NSUInteger NSLevelIndicatorStyle;
 
 @end
 
-#endif

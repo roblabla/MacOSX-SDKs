@@ -251,6 +251,7 @@ typedef errno_t (*ctl_disconnect_func)(kern_ctl_ref kctlref, u_int32_t unit, voi
 	@param unitinfo The user-defined private data initialized by the
 		ctl_connect_func callback.
 	@param m The data sent by the client to the kernel control in an
+		mbuf chain. Your function is responsible for releasing the
 		mbuf chain.
 	@param flags The flags specified by the client when calling
 		send/sendto/sendmsg (MSG_OOB/MSG_DONTROUTE).
@@ -431,6 +432,7 @@ ctl_enqueuembuf(kern_ctl_ref kctlref, u_int32_t unit, mbuf_t m, u_int32_t flags)
  */
 errno_t 
 ctl_getenqueuespace(kern_ctl_ref kctlref, u_int32_t unit, size_t *space);
+
 
 __END_DECLS
 

@@ -3,7 +3,7 @@
  
      Contains:   AppleEvent Data Model Interfaces.
  
-     Version:    AppleEvents-496.5~1
+     Version:    AppleEvents-527.7~1
  
      Copyright:  © 1996-2008 by Apple Computer, Inc., all rights reserved
  
@@ -128,8 +128,8 @@ enum {
   typeAppParameters             = 'appa',
   typeProperty                  = 'prop',
   typeFSRef                     = 'fsrf', /* FSRef */
-  typeFileURL                   = 'furl',
-  typeBookmarkData              = 'bmrk',
+  typeFileURL                   = 'furl', /* a UTF-8 encoded full path, using native path separators */
+  typeBookmarkData              = 'bmrk', /* the bytes of a CFURLBookmarkData */
   typeKeyword                   = 'keyw', /* OSType */
   typeSectionH                  = 'sect',
   typeWildCard                  = '****',
@@ -402,7 +402,8 @@ enum {
   kAECanSwitchLayer             = 0x00000040, /* interaction may switch layer */
   kAEDontRecord                 = 0x00001000, /* don't record this event - available only in vers 1.0.1 and greater */
   kAEDontExecute                = 0x00002000, /* don't send the event for recording - available only in vers 1.0.1 and greater */
-  kAEProcessNonReplyEvents      = 0x00008000 /* allow processing of non-reply events while awaiting synchronous AppleEvent reply */
+  kAEProcessNonReplyEvents      = 0x00008000, /* allow processing of non-reply events while awaiting synchronous AppleEvent reply */
+  kAEDoNotAutomaticallyAddAnnotationsToEvent = 0x00010000 /* if set, don't automatically add any sandbox or other annotations to the event */
 };
 
 

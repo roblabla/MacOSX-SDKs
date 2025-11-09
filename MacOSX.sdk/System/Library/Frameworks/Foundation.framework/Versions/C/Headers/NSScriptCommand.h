@@ -1,7 +1,6 @@
 /*
 	NSScriptCommand.h
-	Copyright (c) 1997-2009, Apple Inc.
-	All rights reserved.
+	Copyright (c) 1997-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -78,21 +77,15 @@ enum {
 
 // Set the error number, offending object descriptor, type descriptor, or message, respectively, that will be put in the reply to the Apple event from which this command was constructed, when execution of the command is completed, if the sender of the event requested a reply. If -setScriptErrorNumber: is invoked during an invocation of -executeCommand, the invocation of -executeCommand may stop invoking command handling methods in the receiver and return early.
 - (void)setScriptErrorNumber:(int)errorNumber;
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
-- (void)setScriptErrorOffendingObjectDescriptor:(NSAppleEventDescriptor *)errorOffendingObjectDescriptor;
-- (void)setScriptErrorExpectedTypeDescriptor:(NSAppleEventDescriptor *)errorExpectedTypeDescriptor;
-#endif
+- (void)setScriptErrorOffendingObjectDescriptor:(NSAppleEventDescriptor *)errorOffendingObjectDescriptor NS_AVAILABLE(10_5, NA);
+- (void)setScriptErrorExpectedTypeDescriptor:(NSAppleEventDescriptor *)errorExpectedTypeDescriptor NS_AVAILABLE(10_5, NA);
 - (void)setScriptErrorString:(NSString *)errorString;
 
 // Getters that match the above setters.
 - (int)scriptErrorNumber;
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
-- (NSAppleEventDescriptor *)scriptErrorOffendingObjectDescriptor;
-- (NSAppleEventDescriptor *)scriptErrorExpectedTypeDescriptor;
-#endif
+- (NSAppleEventDescriptor *)scriptErrorOffendingObjectDescriptor NS_AVAILABLE(10_5, NA);
+- (NSAppleEventDescriptor *)scriptErrorExpectedTypeDescriptor NS_AVAILABLE(10_5, NA);
 - (NSString *)scriptErrorString;
-
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 // If a command is being executed in the current thread by Cocoa Scripting's built-in Apple event handling (i.e., an instance of NSScriptCommand is handling an -executeCommand message at this instant, as the result of the dispatch of an Apple event), return the command.  Return nil otherwise.  -setScriptErrorNumber: and -setScriptErrorString: messages sent to the returned command object will affect the reply event sent to the sender of the event from which the command was constructed, if the sender has requested a reply.
 + (NSScriptCommand *)currentCommand;
@@ -108,7 +101,5 @@ enum {
 // - If -suspendExecution was invoked from within an override of -performDefaultImplementation the result is treated as if it were the return value of the invocation of -performDefaultImplementation.
 // This method may be invoked in any thread, not just the one in which the corresponding invocation of -suspendExecution occurred.
 - (void)resumeExecutionWithResult:(id)result;
-
-#endif
 
 @end

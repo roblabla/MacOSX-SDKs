@@ -37,8 +37,10 @@
 #if defined(macintosh) || (defined(__MACH__) && defined(__APPLE__))
 #include <TargetConditionals.h>
 #include <AvailabilityMacros.h>
+#ifndef CCAPI_DEPRECATED
 #ifdef DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER
 #define CCAPI_DEPRECATED DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER
+#endif
 #endif
 #endif
 

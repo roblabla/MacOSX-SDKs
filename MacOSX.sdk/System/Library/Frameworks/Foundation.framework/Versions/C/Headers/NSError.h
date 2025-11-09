@@ -1,37 +1,35 @@
 /*	NSError.h
-	Copyright (c) 2003-2009, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
-
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSDictionary, NSArray;
 
 
 // Predefined domain for errors from most AppKit and Foundation APIs.
-FOUNDATION_EXPORT NSString *const NSCocoaErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+FOUNDATION_EXPORT NSString *const NSCocoaErrorDomain;
 
 // Other predefined domains; value of "code" will correspond to preexisting values in these domains.
-FOUNDATION_EXPORT NSString *const NSPOSIXErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-FOUNDATION_EXPORT NSString *const NSOSStatusErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-FOUNDATION_EXPORT NSString *const NSMachErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString *const NSPOSIXErrorDomain;
+FOUNDATION_EXPORT NSString *const NSOSStatusErrorDomain;
+FOUNDATION_EXPORT NSString *const NSMachErrorDomain;
 
 // Key in userInfo. A recommended standard way to embed NSErrors from underlying calls. The value of this key should be an NSError.
-FOUNDATION_EXPORT NSString *const NSUnderlyingErrorKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString *const NSUnderlyingErrorKey;
 
 // Keys in userInfo, for subsystems wishing to provide their error messages up-front.
-FOUNDATION_EXPORT NSString *const NSLocalizedDescriptionKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;  // NSString
-FOUNDATION_EXPORT NSString *const NSLocalizedFailureReasonErrorKey      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSString
-FOUNDATION_EXPORT NSString *const NSLocalizedRecoverySuggestionErrorKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSString
-FOUNDATION_EXPORT NSString *const NSLocalizedRecoveryOptionsErrorKey    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSArray of NSStrings
-FOUNDATION_EXPORT NSString *const NSRecoveryAttempterErrorKey		AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // Instance of a subclass of NSObject that conforms to the NSErrorRecoveryAttempting informal protocol
-FOUNDATION_EXPORT NSString *const NSHelpAnchorErrorKey                 AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSString containing a help anchor
+FOUNDATION_EXPORT NSString *const NSLocalizedDescriptionKey;  // NSString
+FOUNDATION_EXPORT NSString *const NSLocalizedFailureReasonErrorKey     ;  // NSString
+FOUNDATION_EXPORT NSString *const NSLocalizedRecoverySuggestionErrorKey;  // NSString
+FOUNDATION_EXPORT NSString *const NSLocalizedRecoveryOptionsErrorKey   ;  // NSArray of NSStrings
+FOUNDATION_EXPORT NSString *const NSRecoveryAttempterErrorKey;  // Instance of a subclass of NSObject that conforms to the NSErrorRecoveryAttempting informal protocol
+FOUNDATION_EXPORT NSString *const NSHelpAnchorErrorKey                ;  // NSString containing a help anchor
 
 // Other standard keys in userInfo, for various error codes
-FOUNDATION_EXPORT NSString *const NSStringEncodingErrorKey  AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSNumber containing NSStringEncoding
-FOUNDATION_EXPORT NSString *const NSURLErrorKey		    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSURL
-FOUNDATION_EXPORT NSString *const NSFilePathErrorKey	    AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // NSString
+FOUNDATION_EXPORT NSString *const NSStringEncodingErrorKey ;  // NSNumber containing NSStringEncoding
+FOUNDATION_EXPORT NSString *const NSURLErrorKey		   ;  // NSURL
+FOUNDATION_EXPORT NSString *const NSFilePathErrorKey	   ;  // NSString
 
 
 
@@ -61,8 +59,6 @@ FOUNDATION_EXPORT NSString *const NSFilePathErrorKey	    AVAILABLE_MAC_OS_X_VERS
 */
 - (NSString *)localizedDescription;
 
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
-
 /* Return a complete sentence which describes why the operation failed. In many cases this will be just the "because" part of the error message (but as a complete sentence, which makes localization easier). This will return nil if string is not available. Default implementation of this will pick up the value of the NSLocalizedFailureReasonErrorKey from the userInfo dictionary.
 */
 - (NSString *)localizedFailureReason;
@@ -84,11 +80,8 @@ FOUNDATION_EXPORT NSString *const NSFilePathErrorKey	    AVAILABLE_MAC_OS_X_VERS
 - (NSString *)helpAnchor;
 
 
-#endif
 
 @end
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @interface NSObject(NSErrorRecoveryAttempting)
 
@@ -106,7 +99,4 @@ The value passed for didRecover must be YES if error recovery was completely suc
 
 @end
 
-#endif
-
-#endif
 

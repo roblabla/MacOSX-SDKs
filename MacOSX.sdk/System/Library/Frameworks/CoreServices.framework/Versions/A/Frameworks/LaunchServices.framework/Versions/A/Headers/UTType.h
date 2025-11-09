@@ -1,17 +1,14 @@
 /*
-     File:       LaunchServices/UTType.h
+     File:       UTType.h
  
-     Contains:   Public interfaces for Uniform Type Identification
+     Contains:   Public interfaces for uniform type identifiers
  
-     Version:    LaunchServices-362.3~1
- 
-     Copyright:  © 2003-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  Copyright 2003-2009 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
                      http://developer.apple.com/bugreporter/
- 
 */
 #ifndef __UTTYPE__
 #define __UTTYPE__
@@ -20,12 +17,9 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
-#ifndef __CARBONCORE__
-#include <CarbonCore/CarbonCore.h>
-#endif
 
+#include <Availability.h>
 
-#include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -56,7 +50,6 @@ extern "C" {
         public.jpeg
         public.utf16-plain-text
         com.apple.xml-property-list
-        com.apple.appleworks.doc
 
     Types which are standard or not controlled by any one organization 
     are declared in the "public" domain. Currently, public types may  
@@ -208,85 +201,40 @@ extern "C" {
 */
 /*
  *  kUTExportedTypeDeclarationsKey
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kUTExportedTypeDeclarationsKey              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kUTExportedTypeDeclarationsKey              __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 /*
  *  kUTImportedTypeDeclarationsKey
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kUTImportedTypeDeclarationsKey              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kUTImportedTypeDeclarationsKey              __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 /*
  *  kUTTypeIdentifierKey
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kUTTypeIdentifierKey                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kUTTypeIdentifierKey                        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 /*
  *  kUTTypeTagSpecificationKey
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kUTTypeTagSpecificationKey                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kUTTypeTagSpecificationKey                  __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 /*
  *  kUTTypeConformsToKey
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kUTTypeConformsToKey                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kUTTypeConformsToKey                        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 /*
  *  kUTTypeDescriptionKey
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kUTTypeDescriptionKey                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kUTTypeDescriptionKey                       __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 /*
  *  kUTTypeIconFileKey
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kUTTypeIconFileKey                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kUTTypeIconFileKey                          __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 /*
  *  kUTTypeReferenceURLKey
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kUTTypeReferenceURLKey                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kUTTypeReferenceURLKey                      __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 /*
  *  kUTTypeVersionKey
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kUTTypeVersionKey                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kUTTypeVersionKey                           __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 /*
@@ -298,40 +246,20 @@ extern const CFStringRef kUTTypeVersionKey                           AVAILABLE_M
 */
 /*
  *  kUTTagClassFilenameExtension
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kUTTagClassFilenameExtension                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kUTTagClassFilenameExtension                __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 /*
  *  kUTTagClassMIMEType
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kUTTagClassMIMEType                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kUTTagClassMIMEType                         __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 /*
  *  kUTTagClassNSPboardType
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kUTTagClassNSPboardType                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kUTTagClassNSPboardType                     __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
 /*
  *  kUTTagClassOSType
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kUTTagClassOSType                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kUTTagClassOSType                           __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
 
 /*
  *  UTTypeCreatePreferredIdentifierForTag()
@@ -355,7 +283,7 @@ extern const CFStringRef kUTTagClassOSType                           AVAILABLE_M
  *    likely to be correct. When there a choice must be made between
  *    multiple public types or multiple non-public types, the selection
  *    rules are undefined. Clients needing finer control should use
- *    UTTypeCreateAllIdentifiersWithTag. If no declared type is
+ *    UTTypeCreateAllIdentifiersForTag. If no declared type is
  *    indicated, a dynamic type identifier is generated which satisfies
  *    the parameters.
  *  
@@ -376,17 +304,12 @@ extern const CFStringRef kUTTagClassOSType                           AVAILABLE_M
  *  Result:
  *    a new CFStringRef containing the type identifier, or NULL if
  *    inTagClass is not a known tag class
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
 UTTypeCreatePreferredIdentifierForTag(
   CFStringRef   inTagClass,
   CFStringRef   inTag,
-  CFStringRef   inConformingToUTI)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef   inConformingToUTI)       /* can be NULL */    __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -427,17 +350,12 @@ UTTypeCreatePreferredIdentifierForTag(
  *  Result:
  *    An array of uniform type identifiers, or NULL if inTagClass is
  *    not a known tag class
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
 extern CFArrayRef 
 UTTypeCreateAllIdentifiersForTag(
   CFStringRef   inTagClass,
   CFStringRef   inTag,
-  CFStringRef   inConformingToUTI)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef   inConformingToUTI)       /* can be NULL */    __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -464,16 +382,11 @@ UTTypeCreateAllIdentifiersForTag(
  *  
  *  Result:
  *    the tag string, or NULL if there is no tag of the specified class.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
 UTTypeCopyPreferredTagWithClass(
   CFStringRef   inUTI,
-  CFStringRef   inTagClass)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef   inTagClass)                                   __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -498,16 +411,11 @@ UTTypeCopyPreferredTagWithClass(
  *    
  *    inUTI2:
  *      another uniform type identifier
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
 extern Boolean 
 UTTypeEqual(
   CFStringRef   inUTI1,
-  CFStringRef   inUTI2)                                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef   inUTI2)                                       __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -529,16 +437,11 @@ UTTypeEqual(
  *    
  *    inConformsToUTI:
  *      the uniform type identifier against which to test conformance.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
 extern Boolean 
 UTTypeConformsTo(
   CFStringRef   inUTI,
-  CFStringRef   inConformsToUTI)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef   inConformsToUTI)                              __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -558,14 +461,9 @@ UTTypeConformsTo(
  *  
  *  Result:
  *    a localized string, or NULL of no type description is available
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-UTTypeCopyDescription(CFStringRef inUTI)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+UTTypeCopyDescription(CFStringRef inUTI)                      __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -588,14 +486,9 @@ UTTypeCopyDescription(CFStringRef inUTI)                      AVAILABLE_MAC_OS_X
  *  
  *  Result:
  *    a tag declaration dictionary, or NULL if the type is not declared
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
 extern CFDictionaryRef 
-UTTypeCopyDeclaration(CFStringRef inUTI)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+UTTypeCopyDeclaration(CFStringRef inUTI)                      __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -616,14 +509,9 @@ UTTypeCopyDeclaration(CFStringRef inUTI)                      AVAILABLE_MAC_OS_X
  *  
  *  Result:
  *    a URL, or NULL if the bundle cannot be located.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
 extern CFURLRef 
-UTTypeCopyDeclaringBundleURL(CFStringRef inUTI)               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+UTTypeCopyDeclaringBundleURL(CFStringRef inUTI)               __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
 
 
 
@@ -643,16 +531,11 @@ UTTypeCopyDeclaringBundleURL(CFStringRef inUTI)               AVAILABLE_MAC_OS_X
  *      the OSType value to encode
  *  
  *  Result:
- *    a new CFString representing the OSType. Returns the empty string
- *    when the argument is 0
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
+ *    a new CFString representing the OSType, or NULL if the argument
+ *    is 0 or '????'
  */
 extern CFStringRef 
-UTCreateStringForOSType(OSType inOSType)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+UTCreateStringForOSType(OSType inOSType)                      __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
 
 
 
@@ -674,14 +557,9 @@ UTCreateStringForOSType(OSType inOSType)                      AVAILABLE_MAC_OS_X
  *  Result:
  *    the OSType value encoded in the string, or 0 if the string is not
  *    a valid encoding of an OSType
- *  
- *  Availability:
- *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
- *    CarbonLib:        not available in CarbonLib 1.x
- *    Non-Carbon CFM:   not available
  */
 extern OSType 
-UTGetOSTypeFromString(CFStringRef inString)                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+UTGetOSTypeFromString(CFStringRef inString)                   __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
 
 
 

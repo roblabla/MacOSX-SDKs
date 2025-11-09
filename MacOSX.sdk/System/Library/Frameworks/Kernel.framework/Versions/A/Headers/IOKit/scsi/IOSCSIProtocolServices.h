@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -43,6 +43,9 @@
 #include <IOKit/scsi/SCSITask.h>
 #include <IOKit/scsi/IOSCSIProtocolInterface.h>
 #include <IOKit/scsi/SCSICmds_REQUEST_SENSE_Defs.h>
+
+// Build includes
+#include <TargetConditionals.h>
 
 
 //-----------------------------------------------------------------------------
@@ -133,6 +136,7 @@ protected:
 	SCSITaskState	GetTaskState ( 	SCSITaskIdentifier request );
 	
 	UInt8			GetLogicalUnitNumber ( SCSITaskIdentifier request );
+	void			GetLogicalUnitBytes ( SCSITaskIdentifier request, SCSILogicalUnitBytes * lunBytes );
 	
 	// Method to determine the size of the command descriptor block.
 	UInt8	GetCommandDescriptorBlockSize ( SCSITaskIdentifier request );
@@ -333,7 +337,7 @@ protected:
     // protocol the driver represents for the TargetReset management function.
 	virtual SCSIServiceResponse		HandleTargetReset ( void );
 
-
+#if !TARGET_OS_EMBEDDED
     OSMetaClassDeclareReservedUsed ( IOSCSIProtocolServices,  7 );
     // The CreateSCSITargetDevice member routine will create the appropriate object
     // to represent the Target portion of a SCSI Device.  This object is responsible
@@ -342,9 +346,12 @@ protected:
     // If the SCSITargetDevice object was successfully created, a true value will be
     // returned, otherwisw, this will return false.
 	virtual bool					CreateSCSITargetDevice ( void );
+#endif /* !TARGET_OS_EMBEDDED */
 	
 private:
 	
+	
+#if !TARGET_OS_EMBEDDED
 	// Space reserved for future expansion.
     OSMetaClassDeclareReservedUnused ( IOSCSIProtocolServices,  8 );
     OSMetaClassDeclareReservedUnused ( IOSCSIProtocolServices, 	9 );
@@ -355,6 +362,7 @@ private:
     OSMetaClassDeclareReservedUnused ( IOSCSIProtocolServices, 14 );
     OSMetaClassDeclareReservedUnused ( IOSCSIProtocolServices, 15 );
     OSMetaClassDeclareReservedUnused ( IOSCSIProtocolServices, 16 );
+#endif /* !TARGET_OS_EMBEDDED */
     
 };
 

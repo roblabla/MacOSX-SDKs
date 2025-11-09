@@ -1,4 +1,3 @@
-/* $XFree86: xc/include/extensions/xf86vmode.h,v 3.30 2001/05/07 20:09:50 mvojkovi Exp $ */
 /*
 
 Copyright 1995  Kaleb S. KEITHLEY
@@ -28,7 +27,6 @@ or other dealings in this Software without prior written authorization
 from Kaleb S. KEITHLEY
 
 */
-/* $Xorg: xf86vmode.h,v 1.3 2000/08/18 04:05:46 coskrey Exp $ */
 
 /* THIS IS NOT AN X CONSORTIUM STANDARD OR AN X PROJECT TEAM SPECIFICATION */
 
@@ -37,29 +35,7 @@ from Kaleb S. KEITHLEY
 
 #include <X11/Xfuncproto.h>
 #include <X11/Xmd.h>
-
-#define X_XF86VidModeQueryVersion	0
-#define X_XF86VidModeGetModeLine	1
-#define X_XF86VidModeModModeLine	2
-#define X_XF86VidModeSwitchMode		3
-#define X_XF86VidModeGetMonitor		4
-#define X_XF86VidModeLockModeSwitch	5
-#define X_XF86VidModeGetAllModeLines	6
-#define X_XF86VidModeAddModeLine	7
-#define X_XF86VidModeDeleteModeLine	8
-#define X_XF86VidModeValidateModeLine	9
-#define X_XF86VidModeSwitchToMode	10
-#define X_XF86VidModeGetViewPort	11
-#define X_XF86VidModeSetViewPort	12
-/* new for version 2.x of this extension */
-#define X_XF86VidModeGetDotClocks	13
-#define X_XF86VidModeSetClientVersion	14
-#define X_XF86VidModeSetGamma		15
-#define X_XF86VidModeGetGamma		16
-#define X_XF86VidModeGetGammaRamp	17
-#define X_XF86VidModeSetGammaRamp	18
-#define X_XF86VidModeGetGammaRampSize	19
-#define X_XF86VidModeGetPermissions	20
+#include <X11/extensions/xf86vm.h>
 
 #define CLKFLAG_PROGRAMABLE		1
 

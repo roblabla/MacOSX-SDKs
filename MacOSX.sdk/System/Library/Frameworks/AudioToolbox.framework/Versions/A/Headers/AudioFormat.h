@@ -3,7 +3,7 @@
 
      Contains:   API for finding things out about audio formats.
 
-     Copyright:  (c) 1985-2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 1985-2008 by Apple, Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -135,6 +135,27 @@ struct AudioFormatInfo
 typedef struct AudioFormatInfo AudioFormatInfo;
 
 /*!
+    @struct		ExtendedAudioFormatInfo
+    @abstract   this struct is used as a specifier for the kAudioFormatProperty_FormatList property
+    @field      mASBD 
+					an AudioStreamBasicDescription
+    @field      mMagicCookie 
+					a pointer to the decompression info for the data described in mASBD
+    @field      mMagicCookieSize 
+					the size in bytes of mMagicCookie
+	@field		mClassDescription
+					an AudioClassDescription specifying the codec to be used in answering the question.
+*/
+struct ExtendedAudioFormatInfo
+{
+	AudioStreamBasicDescription		mASBD;
+	const void*						mMagicCookie;
+	UInt32							mMagicCookieSize;
+	AudioClassDescription			mClassDescription;
+};
+typedef struct ExtendedAudioFormatInfo ExtendedAudioFormatInfo;
+
+/*!
     @struct		AudioFormatListItem
     @abstract   this struct is used as output from the kAudioFormatProperty_FormatList property
     @field      mASBD 
@@ -240,6 +261,11 @@ typedef struct AudioFormatListItem AudioFormatListItem;
 	@constant	kAudioFormatProperty_FirstPlayableFormatFromList
 					The specifier is a list of 1 or more AudioFormatListItem. Generally it is the list of these items returned from kAudioFormatProperty_FormatList. The property value retrieved is an UInt32 that specifies an index into that list. The list that the caller provides is generally sorted with the first item as the best format (most number of channels, highest sample rate), and the returned index represents the first item in that list that can be played by the system. 
 					Thus, the property is typically used to determine the best playable format for a given (layered) audio stream
+	@constant   kAudioFormatProperty_ValidateChannelLayout
+					The specifier is an AudioChannelLayout. The property value and size are not used and must be set to NULL.
+					This property validates an AudioChannelLayout. This is useful if the layout has come from an untrusted source such as a file.
+					It returns noErr if the AudioChannelLayout is OK, kAudio_ParamError if there is a structural problem with the layout,
+					or kAudioFormatUnknownFormatError for unrecognized layout tags or channel labels.
 	@constant   kAudioFormatProperty_ChannelLayoutForTag
 					Returns the channel descriptions for a standard channel layout.
 					The specifier is a AudioChannelLayoutTag (the mChannelLayoutTag field 
@@ -269,6 +295,12 @@ typedef struct AudioFormatListItem AudioFormatListItem;
 					is kAudioChannelLayoutTag_UseChannelBitmap and the bitmap is filled in.
     @constant   kAudioFormatProperty_ChannelLayoutName
 					Returns the a name for a particular channel layout. The specifier is
+					an AudioChannelLayout containing the layout description. The value
+					is a CFStringRef. The caller is responsible for releasing the
+					returned string.
+    @constant   kAudioFormatProperty_ChannelLayoutSimpleName
+					Returns the a simpler name for a channel layout than does kAudioFormatProperty_ChannelLayoutName. 
+					It omits the channel labels from the name. The specifier is
 					an AudioChannelLayout containing the layout description. The value
 					is a CFStringRef. The caller is responsible for releasing the
 					returned string.
@@ -370,9 +402,11 @@ enum
 	kAudioFormatProperty_MatrixMixMap					= 'mmap',
     kAudioFormatProperty_ChannelMap						= 'chmp',
 	kAudioFormatProperty_NumberOfChannelsForLayout		= 'nchm',
+	kAudioFormatProperty_ValidateChannelLayout			= 'vacl',
 	kAudioFormatProperty_ChannelLayoutForTag			= 'cmpl',
 	kAudioFormatProperty_TagForChannelLayout			= 'cmpt',
 	kAudioFormatProperty_ChannelLayoutName				= 'lonm',
+	kAudioFormatProperty_ChannelLayoutSimpleName		= 'lsnm',
 	kAudioFormatProperty_ChannelLayoutForBitmap			= 'cmpb',
 	kAudioFormatProperty_ChannelName					= 'cnam',
 	kAudioFormatProperty_ChannelShortName				= 'csnm',
@@ -388,6 +422,103 @@ enum
 	kAudioFormatProperty_ID3TagSize						= 'id3s',
 	kAudioFormatProperty_ID3TagToDictionary				= 'id3d'
 };
+
+#if TARGET_OS_IPHONE
+/*
+	@constant	kAudioFormatProperty_HardwareCodecCapabilities
+					Available with iPhone 3.0 or later
+					Use this property to determine whether a desired set of codecs can be
+					simultaneously instantiated.
+					
+					The specifier is an array of AudioClassDescription, describing a set of one or more
+					audio codecs. The property value is a UInt32 indicating how many of the requested
+					set of codecs, if the application were to begin using them in the specified order, could be 
+					used before a failure. If the return value is the same as the size of the array,
+					all of the requested codecs can be used.
+					
+					Here are some examples. Suppose an application wants to use a hardware AAC encoder
+					and a hardware AAC decoder (in that order of priority).
+					
+						AudioClassDescription requestedCodecs[2] = {
+							{ kAudioEncoderComponentType, kAudioFormatAAC, kAppleHardwareAudioCodecManufacturer },
+							{ kAudioDecoderComponentType, kAudioFormatAAC, kAppleHardwareAudioCodecManufacturer } };
+						
+						UInt32 successfulCodecs = 0, size = sizeof(successfulCodecs);
+						OSStatus result = AudioFormatGetProperty(kAudioFormatProperty_HardwareCodecCapabilities,
+											requestedCodecs, sizeof(requestedCodecs), &size, &successfulCodecs);
+						switch (successfulCodecs) {
+						case 0:
+							// there is no hardware encoder. status of any hardware AAC decoder is unknown;
+							// could ask again with only that class description.
+						case 1:
+							// can use hardware AAC encoder. while using it, no hardware AAC decoder available.
+						case 2:
+							// can use hardware AAC encoder and AAC decoder simultaneously
+						}
+					
+					Software-based codecs can always be instantiated.
+					
+					Hardware-based codecs may only be used via AudioQueue (and other higher-level APIs which
+					use AudioQueue). When describing the presence of a hardware codec, AudioFormat does
+					not take into consideration the current AudioSession's category, which may or may not permit
+					the use of hardware codecs. A set of hardware codecs is considered to be available based
+					only on whether the hardware supports that combination of codecs.
+
+					kAudioFormatProperty_Decoders and kAudioFormatProperty_Encoders may be used to determine
+					not only whether a given codec is present, but also whether it is hardware or
+					software-based. Note that some codecs may be available in both hardware and software forms.
+
+					See also the AudioCodecComponentType and AudioCodecComponentManufacturer constants above.
+
+*/
+enum {
+	kAudioFormatProperty_HardwareCodecCapabilities		= 'hwcc',
+};
+
+
+/*!
+	@enum           AudioCodecComponentType
+ 
+	@discussion     Collection of audio codec component types.
+					(On Mac OS X these declarations are in AudioUnit/AudioCodec.h).
+ 
+	@constant		kAudioDecoderComponentType
+					A codec that translates data in some other format into linear PCM.
+					The component subtype specifies the format ID of the other format.
+	@constant		kAudioEncoderComponentType
+					A codec that translates linear PCM data into some other format
+					The component subtype specifies the format ID of the other format
+*/
+enum
+{
+	kAudioDecoderComponentType								= 'adec',	
+	kAudioEncoderComponentType								= 'aenc',	
+};
+
+/*!
+	@enum			AudioCodecComponentManufacturer
+
+	@discussion		Audio codec component manufacturer codes. On iPhoneOS, a codec's
+					manufacturer can be used to distinguish between hardware and
+					software codecs. There are no restrictions on the usage
+					of software codecs. Hardware codecs may only be used via
+					AudioQueue.
+					
+					See also the discussion of kAudioFormatProperty_CodecAvailability.
+
+	@constant		kAppleSoftwareAudioCodecManufacturer
+					Apple software audio codecs.
+	@constant		kAppleHardwareAudioCodecManufacturer
+					Apple hardware audio codecs.
+*/
+enum
+{
+	kAppleSoftwareAudioCodecManufacturer					= 'appl',
+	kAppleHardwareAudioCodecManufacturer					= 'aphw'
+};
+
+#endif
+
 
 //=============================================================================
 //	Routines

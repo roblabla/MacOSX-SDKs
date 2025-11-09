@@ -113,15 +113,6 @@ struct vm_statistics {
 typedef struct vm_statistics	*vm_statistics_t;
 typedef struct vm_statistics	vm_statistics_data_t;
 
-#if defined(__ppc__) /* On ppc, vm statistics are still 32-bit */
-
-typedef struct vm_statistics	*vm_statistics64_t;
-typedef struct vm_statistics	vm_statistics64_data_t;
-
-#define VM_STATISTICS_TRUNCATE_TO_32_BIT(value) value
-
-#else /* !(defined(__ppc__))  */
-
 /* 
  * vm_statistics64
  *
@@ -133,6 +124,8 @@ typedef struct vm_statistics	vm_statistics64_data_t;
  *	rev3 - 	changed name to vm_statistics64.
  *		changed some fields in structure to 64-bit on 
  *		arm, i386 and x86_64 architectures.
+ *	rev4 -  require 64-bit alignment for efficient access
+ *		in the kernel. No change to reported data.
  *
  */
 
@@ -163,11 +156,7 @@ struct vm_statistics64 {
 	 */
 	natural_t	speculative_count;	/* # of pages speculative */
 
-}
-#ifdef __arm__
-__attribute__((aligned(8)))
-#endif
-;
+} __attribute__((aligned(8)));
 
 typedef struct vm_statistics64	*vm_statistics64_t;
 typedef struct vm_statistics64	vm_statistics64_data_t;
@@ -180,7 +169,27 @@ typedef struct vm_statistics64	vm_statistics64_data_t;
  */
 #define VM_STATISTICS_TRUNCATE_TO_32_BIT(value) ((uint32_t)(((value) > UINT32_MAX ) ? UINT32_MAX : (value)))
 
-#endif /* !(defined(__ppc__)) */
+/* 
+ * vm_extmod_statistics
+ *
+ * Structure to record modifications to a task by an
+ * external agent.
+ *
+ * History:
+ *	rev0 - 	original structure.
+ */
+
+struct vm_extmod_statistics {
+	int64_t	task_for_pid_count;			/* # of times task port was looked up */
+	int64_t task_for_pid_caller_count;	/* # of times this task called task_for_pid */
+	int64_t	thread_creation_count;		/* # of threads created in task */
+	int64_t	thread_creation_caller_count;	/* # of threads created by task */
+	int64_t	thread_set_state_count;		/* # of register state sets in task */
+	int64_t	thread_set_state_caller_count;	/* # of register state sets by task */
+} __attribute__((aligned(8)));
+
+typedef struct vm_extmod_statistics *vm_extmod_statistics_t;
+typedef struct vm_extmod_statistics vm_extmod_statistics_data_t;
 
 
 /* included for the vm_map_page_query call */
@@ -240,10 +249,12 @@ typedef struct vm_statistics64	vm_statistics64_data_t;
 #define VM_FLAGS_SUPERPAGE_SHIFT 16
 
 #define SUPERPAGE_NONE			0	/* no superpages, if all bits are 0 */
-#define VM_FLAGS_SUPERPAGE_NONE		(SUPERPAGE_NONE<<VM_FLAGS_SUPERPAGE_SHIFT)
+#define SUPERPAGE_SIZE_ANY		1
+#define VM_FLAGS_SUPERPAGE_NONE     (SUPERPAGE_NONE     << VM_FLAGS_SUPERPAGE_SHIFT)
+#define VM_FLAGS_SUPERPAGE_SIZE_ANY (SUPERPAGE_SIZE_ANY << VM_FLAGS_SUPERPAGE_SHIFT)
 #if defined(__x86_64__) || !defined(KERNEL)
-#define SUPERPAGE_SIZE_2MB		1
-#define VM_FLAGS_SUPERPAGE_SIZE_2MB	(SUPERPAGE_SIZE_2MB<<VM_FLAGS_SUPERPAGE_SHIFT)
+#define SUPERPAGE_SIZE_2MB		2
+#define VM_FLAGS_SUPERPAGE_SIZE_2MB (SUPERPAGE_SIZE_2MB<<VM_FLAGS_SUPERPAGE_SHIFT)
 #endif
 
 #define VM_FLAGS_ALIAS_MASK	0xFF000000
@@ -330,6 +341,24 @@ typedef struct vm_statistics64	vm_statistics64_data_t;
 
 /* memory allocated for GLSL */
 #define VM_MEMORY_GLSL  66
+
+/* memory allocated for OpenCL.framework */
+#define VM_MEMORY_OPENCL    67
+
+/* memory allocated for QuartzCore.framework */
+#define VM_MEMORY_COREIMAGE 68
+
+/* memory allocated for WebCore Purgeable Buffers */
+#define VM_MEMORY_WEBCORE_PURGEABLE_BUFFERS 69
+
+/* ImageIO memory */
+#define VM_MEMORY_IMAGEIO	70
+
+/* CoreProfile memory */
+#define VM_MEMORY_COREPROFILE	71
+
+/* assetsd / MobileSlideShow memory */
+#define VM_MEMORY_ASSETSD    72
 
 /* Reserve 240-255 for application */
 #define VM_MEMORY_APPLICATION_SPECIFIC_1 240

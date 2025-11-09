@@ -803,6 +803,21 @@
 
 
 /*
+ kAXFullScreenButtonAttribute
+ 
+ A convenience attribute so assistive apps can quickly access a window's full screen
+ button element.
+ 
+ Value: An AXUIElementRef of the window's full screen button element.
+ 
+ Writable? No.
+ 
+ Required for all window elements that have a full screen button.
+ */
+#define kAXFullScreenButtonAttribute			CFSTR("AXFullScreenButton")
+
+
+/*
 	kAXProxyAttribute
 	
 	A convenience attribute so assistive apps can quickly access a window's document
@@ -1176,6 +1191,9 @@
 #define kAXVisibleTextAttribute				CFSTR("AXVisibleText")
 #define kAXIsEditableAttribute				CFSTR("AXIsEditable")
 #define kAXColumnTitlesAttribute			CFSTR("AXColumnTitles")
+
+// UI element identification attributes
+#define kAXIdentifierAttribute				CFSTR("AXIdentifier")
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/

@@ -1,7 +1,7 @@
 /*
         NSTrackingArea.h
         Application Kit
-        Copyright (c) 2006-2009, Apple Inc.
+        Copyright (c) 2006-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -9,7 +9,6 @@
 #import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSGeometry.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 @class NSDictionary;
 
@@ -30,13 +29,14 @@ enum {
     
 /* Behavior of tracking area.  These values are used in NSTrackingAreaOptions.  You may specify any number of the following in the NSTrackingAreaOptions argument of -initWithRect:options:owner:userInfo: */
 enum {
-    NSTrackingAssumeInside              = 0x100,    // If set, generate mouseExited event when mouse leaves area (same as assumeInside argument in deprecated addtrackingArea:owner:userData:assumeInside:)
+    NSTrackingAssumeInside              = 0x100,    // If set, generate mouseExited event when mouse leaves area (same as assumeInside argument in deprecated addTrackingRect:owner:userData:assumeInside:)
     NSTrackingInVisibleRect             = 0x200,    // If set, tracking occurs in visibleRect of view and rect is ignored
     NSTrackingEnabledDuringMouseDrag    = 0x400     // If set, mouseEntered events will be generated as mouse is dragged.  If not set, mouseEntered events will be generated as mouse is moved, and on mouseUp after a drag.  mouseExited events are paired with mouseEntered events so their delivery is affected indirectly.  That is, if a mouseEntered event is generated and the mouse subsequently moves out of the trackingArea, a mouseExited event will be generated whether the mouse is being moved or dragged, independent of this flag.
 }; 
 
 typedef NSUInteger NSTrackingAreaOptions;
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSTrackingArea : NSObject <NSCopying, NSCoding>
 {
 @private
@@ -53,4 +53,3 @@ typedef NSUInteger NSTrackingAreaOptions;
 - (id)owner;
 - (NSDictionary *)userInfo;
 @end
-#endif

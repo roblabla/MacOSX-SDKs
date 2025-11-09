@@ -3,9 +3,7 @@
  
      Contains:   Services to load and share icon family data.
  
-     Version:    OSServices-359.2~2
- 
-     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2008 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -44,6 +42,7 @@ enum {
 enum {
   kIconServices256PixelDataARGB = 'ic08', /* non-premultiplied 256x256 ARGB bitmap*/
   kIconServices512PixelDataARGB = 'ic09', /* non-premultiplied 512x512 ARGB bitmap*/
+  kIconServices1024PixelDataARGB = 'ic10', /* non-premultiplied 1024x1024 ARGB bitmap*/
   kThumbnail32BitData           = 'it32',
   kThumbnail8BitMask            = 't8mk'
 };

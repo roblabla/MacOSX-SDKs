@@ -128,7 +128,7 @@ typedef int NSInteger;
  *   IKPictureTakerOutputImageMaxSizeKey      NSValue(NSSize)				    none
  *   IKPictureTakerCropAreaSizeKey            NSValue(NSSize)				    none
  *   IKPictureTakerShowAddressBookPictureKey  NSNumber(BOOL)					NO
- *   IKPictureTakerShowAddressBookPictureKey  NSImage						    nil
+ *   IKPictureTakerShowEmptyPictureKey        NSImage						    nil
  *   IKPictureTakerRemainOpenAfterValidateKey NSNumber(BOOL)					NO
  */
 extern NSString *const IKPictureTakerAllowsVideoCaptureKey;

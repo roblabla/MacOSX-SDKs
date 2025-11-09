@@ -1,14 +1,14 @@
 /*
 	File:		OBEXSession.h
 	Contains:	OBEX session object.
-    Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
+    Copyright:	(c) 2010 by Apple, Inc. All rights reserved.
 */
 
 #import <IOKit/IOKitLib.h>
 
-#import <IOBluetooth/OBEX.h>
-
 #import <Foundation/Foundation.h>
+
+#import <IOBluetooth/OBEX.h>
 
 #pragma mark === Types ===
 

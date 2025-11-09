@@ -1,7 +1,7 @@
 /*
 	NSColorPanel.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -24,9 +24,7 @@ enum {
     NSCustomPaletteModeColorPanel	= 4,
     NSColorListModeColorPanel		= 5,
     NSWheelModeColorPanel		= 6,
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
     NSCrayonModeColorPanel		= 7
-#endif
 };
 
 enum {
@@ -37,9 +35,7 @@ enum {
     NSColorPanelCustomPaletteModeMask	= 0x00000010,
     NSColorPanelColorListModeMask	= 0x00000020,
     NSColorPanelWheelModeMask		= 0x00000040,
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
     NSColorPanelCrayonModeMask		= 0x00000080,
-#endif
     NSColorPanelAllModesMask		= 0x0000ffff
 };
     

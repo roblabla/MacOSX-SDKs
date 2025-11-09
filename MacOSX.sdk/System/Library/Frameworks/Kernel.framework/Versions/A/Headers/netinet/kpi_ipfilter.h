@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2008-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -50,7 +50,7 @@ struct ipf_pktopts {
 	int				ippo_mcast_loop;
 	u_int8_t			ippo_mcast_ttl;
 };
-#define IPPOF_MCAST_OPTS 0x1
+#define IPPOF_MCAST_OPTS	0x1
 
 typedef struct ipf_pktopts *ipf_pktopts_t;
 

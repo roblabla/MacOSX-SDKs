@@ -10,6 +10,9 @@
 extern "C" {
 #endif
     #import <AddressBook/ABPeoplePickerView.h>
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+    #import <AddressBook/ABPersonView.h>
+#endif
     #import <AddressBook/ABActions.h>
 #if defined(__cplusplus)
 }

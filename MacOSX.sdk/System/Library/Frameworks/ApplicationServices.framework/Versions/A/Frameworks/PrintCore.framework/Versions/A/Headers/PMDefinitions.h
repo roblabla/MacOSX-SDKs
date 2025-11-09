@@ -203,6 +203,9 @@ enum {
 #define kPDFWorkflowDisplayNameKey      CFSTR("displayName")
 #define kPDFWorkflowItemsKey            CFSTR("items")
 
+/* Print Selection Title string */
+#define kPMPrintSelectionTitleKey		CFSTR("com.apple.printSelection.title")
+
 /* OSStatus return codes */
 enum {
   kPMNoError                    = noErr,

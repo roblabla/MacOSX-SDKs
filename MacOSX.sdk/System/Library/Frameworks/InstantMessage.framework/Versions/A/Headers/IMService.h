@@ -28,30 +28,30 @@
 /*! Received from IMService's custom notification center. Posted when the user logs in, logs off, goes away, and so on. 
  This notification is for the IMService object. The user information dictionary will not contain keys. The client 
  should call <tt>status</tt> to get the new status. */
-extern NSString *IMServiceStatusChangedNotification;
+extern NSString * const IMServiceStatusChangedNotification;
 
 /*! Received from IMService's custom notification center. Posted when the local user changes online status.
  This notification is relevant to no particular object. The user information dictionary will not contain keys. 
  The client should call <tt>myStatus</tt> to get the new status. */
-extern NSString *IMMyStatusChangedNotification;
+extern NSString * const IMMyStatusChangedNotification;
 
 /*! Received from IMService's custom notification center. Posted when a different user (screenName) logs in, logs off, goes away, 
  and so on. This notification is for the IMService object. The user information dictionary will always contain an 
  IMPersonScreenNameKey and an IMPersonStatusKey, and no others. */
-extern NSString *IMPersonStatusChangedNotification;
+extern NSString * const IMPersonStatusChangedNotification;
 
 /*! Received from IMService's custom notification center. Posted when a screenName changes some aspect of their published information. 
  This notification is for the IMService object. The user information dictionary will always contain an IMPersonScreenNameKey and may 
  contain any of the following keys as described by "Dictionary Keys" in this document: <tt>IMPersonStatusMessageKey, IMPersonIdleSinceKey, 
  IMPersonFirstNameKey, IMPersonLastNameKey, IMPersonEmailKey, IMPersonPictureDataKey, IMPersonAVBusyKey, IMPersonCapabilitiesKey</tt>.
  If a particular attribute has been removed, the value for the relevant key will be NSNull.*/
-extern NSString *IMPersonInfoChangedNotification;
+extern NSString * const IMPersonInfoChangedNotification;
 
 /*! Received from IMService's custom notification center. Posted when the user changes their preferred images for displaying status. 
  This notification is relevant to no particular object. The user information dictionary will not contain keys. Clients that display 
  status information graphically (using the green/yellow/red dots) should call <tt>imageURLForStatus:</tt> to get the new image. 
  See "Class Methods" for IMService in this document. */
-extern NSString *IMStatusImagesChangedAppearanceNotification;
+extern NSString * const IMStatusImagesChangedAppearanceNotification;
 
 /*! @group Status States */
 
@@ -116,17 +116,17 @@ extern NSString* IMPersonCapabilitiesKey;
 /*! @group Capabilities */
 
 /*! Text capability */
-extern NSString *IMCapabilityText;
+extern NSString * const IMCapabilityText;
 /*! Direct connect capability */
-extern NSString *IMCapabilityDirectIM;
+extern NSString * const IMCapabilityDirectIM;
 /*! File transfer capability */
-extern NSString *IMCapabilityFileTransfer;
+extern NSString * const IMCapabilityFileTransfer;
 /*! File sharing capability */
-extern NSString *IMCapabilityFileSharing;
+extern NSString * const IMCapabilityFileSharing;
 /*! Audio chat capability */
-extern NSString *IMCapabilityAudioConference;
+extern NSString * const IMCapabilityAudioConference;
 /*! Video chat capability */
-extern NSString *IMCapabilityVideoConference;
+extern NSString * const IMCapabilityVideoConference;
 
 /*! @class IMService
  @abstract An IMService object represents a service available to a user through iChat, such as AIM, Jabber, and Bonjour.

@@ -3,7 +3,7 @@
  
      Contains:   Carbon Event Manager
  
-     Version:    HIToolbox-463~1
+     Version:    HIToolbox-567.2~1
  
      Copyright:  © 1999-2008 by Apple Inc., all rights reserved.
  
@@ -24,6 +24,8 @@
 #define kHICommandOK 					'ok  '
 #define kHICommandCancel 				'not!'
 #define kHICommandQuit 					'quit'
+#define kHICommandQuitAndDiscardWindows  'qudw'
+#define kHICommandQuitAndKeepWindows 	'qukw'
 #define kHICommandUndo 					'undo'
 #define kHICommandRedo 					'redo'
 #define kHICommandCut 					'cut '
@@ -49,10 +51,12 @@
 #define kHICommandRotateWindowsBackward  'rotb'
 #define kHICommandRotateFloatingWindowsForward  'rtfw'
 #define kHICommandRotateFloatingWindowsBackward  'rtfb'
+#define kHICommandToggleFullScreen 		'fsm '
 #define kHICommandAbout 				'abou'
 #define kHICommandNew 					'new '
 #define kHICommandOpen 					'open'
 #define kHICommandClose 				'clos'
+#define kHICommandCloseAll 				'cloa'
 #define kHICommandCloseFile 			'clof'
 #define kHICommandSave 					'save'
 #define kHICommandSaveAs 				'svas'

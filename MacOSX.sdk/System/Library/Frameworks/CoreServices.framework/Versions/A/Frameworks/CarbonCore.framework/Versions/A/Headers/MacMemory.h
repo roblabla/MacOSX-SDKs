@@ -3,7 +3,7 @@
  
      Contains:   Memory Manager Interfaces.
  
-     Version:    CarbonCore-861.39~1
+     Version:    CarbonCore-960.18~3
  
      Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
  
@@ -25,7 +25,7 @@
 #endif
 
 
-#include <string.h>
+#include <strings.h>
 
 #include <AvailabilityMacros.h>
 
@@ -40,8 +40,17 @@ extern "C" {
 #pragma pack(push, 2)
 
 enum {
-  maxSize                       = 0x7FFFFFF0 /*the largest block possible*/
+  kMacMemoryMaximumMemoryManagerBlockSize = 0x7FFFFFF0
 };
+
+
+// maxSize is a somewhat common name for a variable, and with this defined as an enum in the global scope any other usages would get warnings.
+#if ! defined( MAC_OS_X_VERSION_10_7 ) || ! defined( MAC_OS_X_VERSION_MIN_REQUIRED ) || ( MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_7 )
+enum {
+ maxSize = kMacMemoryMaximumMemoryManagerBlockSize /*the largest block possible*/
+};
+#endif
+
 
 /*
     If you define a macro named __MAC_OS_X_MEMORY_MANAGER_CLEAN__ with a non-zero value, then

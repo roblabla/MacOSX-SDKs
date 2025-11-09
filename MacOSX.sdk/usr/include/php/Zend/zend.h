@@ -2,7 +2,7 @@
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
-   | Copyright (c) 1998-2010 Zend Technologies Ltd. (http://www.zend.com) |
+   | Copyright (c) 1998-2011 Zend Technologies Ltd. (http://www.zend.com) |
    +----------------------------------------------------------------------+
    | This source file is subject to version 2.00 of the Zend license,     |
    | that is bundled with this package in the file LICENSE, and is        | 
@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: zend.h 293590 2010-01-15 18:26:53Z rasmus $ */
+/* $Id: zend.h 307522 2011-01-16 20:39:22Z stas $ */
 
 #ifndef ZEND_H
 #define ZEND_H
@@ -627,6 +627,9 @@ extern ZEND_API int (*zend_stream_open_function)(const char *filename, zend_file
 extern int (*zend_vspprintf)(char **pbuf, size_t max_len, const char *format, va_list ap);
 extern ZEND_API char *(*zend_getenv)(char *name, size_t name_len TSRMLS_DC);
 extern ZEND_API char *(*zend_resolve_path)(const char *filename, int filename_len TSRMLS_DC);
+#if SUHOSIN_PATCH
+extern ZEND_API void (*zend_suhosin_log)(int loglevel, char *fmt, ...);
+#endif
 
 ZEND_API void zend_error(int type, const char *format, ...) ZEND_ATTRIBUTE_FORMAT(printf, 2, 3);
 
@@ -770,6 +773,19 @@ typedef struct {
 ZEND_API void zend_save_error_handling(zend_error_handling *current TSRMLS_DC);
 ZEND_API void zend_replace_error_handling(zend_error_handling_t error_handling, zend_class_entry *exception_class, zend_error_handling *current TSRMLS_DC);
 ZEND_API void zend_restore_error_handling(zend_error_handling *saved TSRMLS_DC);
+
+#define DEBUG_BACKTRACE_PROVIDE_OBJECT (1<<0)
+#define DEBUG_BACKTRACE_IGNORE_ARGS    (1<<1)
+
+#if SUHOSIN_PATCH
+#include "suhosin_globals.h"
+#include "suhosin_patch.h"
+#include "php_syslog.h"
+
+ZEND_API void zend_canary(void *buf, int len);
+ZEND_API char suhosin_get_config(int element);
+
+#endif
 
 #endif /* ZEND_H */
 

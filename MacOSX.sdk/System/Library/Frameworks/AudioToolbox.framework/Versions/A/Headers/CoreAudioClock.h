@@ -3,7 +3,7 @@
 
      Contains:   Core Audio Clock APIs
 
-     Copyright:  (c) 2004-2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2004-2008 by Apple, Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -80,7 +80,7 @@
 	@constant	kCAClockProperty_MeterTrack
 					Type: array of CAMeterTrackEntry. Specifies the positions of musical time 
 					signature changes in the timeline. Used only for converting between beats
-					and CABarBeatTime's (a display representaiton of a beat time).
+					and CABarBeatTime's (a display representation of a beat time).
 	@constant	kCAClockProperty_Name
 					Type: CFStringRef. Sets a name for the clock. When a client sets the
 					property, the clock retains a reference to the string. When a client gets

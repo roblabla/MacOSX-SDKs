@@ -3,9 +3,7 @@
  
      Contains:   Power Manager Interfaces.
  
-     Version:    OSServices-359.2~2
- 
-     Copyright:  © 1990-2008 by Apple Computer, Inc.  All rights reserved
+     Copyright:  © 1990-2010 by Apple Inc.  All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

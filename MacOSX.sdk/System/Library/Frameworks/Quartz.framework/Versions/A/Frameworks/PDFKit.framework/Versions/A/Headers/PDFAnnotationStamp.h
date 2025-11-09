@@ -12,7 +12,7 @@
 @class PDFAnnotationStampPrivateVars;
 
 
-@interface PDFAnnotationStamp : PDFAnnotation
+@interface PDFAnnotationStamp : PDFAnnotation <NSCopying>
 {
 @private
     PDFAnnotationStampPrivateVars	*_pdfPriv2;

@@ -21,7 +21,7 @@ enum
 };
 
 
-@interface PDFAnnotationButtonWidget : PDFAnnotation
+@interface PDFAnnotationButtonWidget : PDFAnnotation <NSCopying>
 {
 @private
     PDFAnnotationButtonWidgetPrivateVars *_pdfPriv2;
@@ -35,8 +35,6 @@ enum
 - (void) setControlType: (PDFWidgetControlType) type;
 
 #endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
-//- (unsigned) parentID; DEPRECATED
 
 - (NSInteger) state;
 - (void) setState: (NSInteger) value;
@@ -55,6 +53,16 @@ enum
 
 // For radio buttons, indicates whether clicking on widget whose state is already On toggles it Off.
 - (BOOL) allowsToggleToOff;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+
+- (void) setAllowsToggleToOff: (BOOL) allowOff;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 // Font attributes.
 - (NSFont *) font;
@@ -79,5 +87,6 @@ enum
 - (void) setOnStateValue: (NSString *) name;
 
 #endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
+
 
 @end

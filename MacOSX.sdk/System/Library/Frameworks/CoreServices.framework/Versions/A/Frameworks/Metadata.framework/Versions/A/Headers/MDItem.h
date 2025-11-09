@@ -1,5 +1,5 @@
 /*      MDItem.h
-        Copyright (c) 2003-2004, Apple Computer, Inc. All rights reserved.
+        Copyright (c) 2003-2010, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -66,7 +66,7 @@ MD_BEGIN_C_DECLS
         @typedef MDItemRef
         This is the type of a reference to MDItems.
 */
-typedef struct __MDItem *MDItemRef;
+typedef struct __MDItem * MDItemRef;
 
 /*!
         @function MDItemGetTypeID
@@ -101,6 +101,17 @@ MD_EXPORT MDItemRef MDItemCreate(CFAllocatorRef allocator, CFStringRef path) MD_
  @result An MDItemRef, or NULL on failure.
  */
 MD_EXPORT MDItemRef MDItemCreateWithURL(CFAllocatorRef allocator, CFURLRef url) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ @function MDItemsCreateWithURLs
+ Returns metadata items for the given urls.
+ @param allocator The CFAllocator which should be used to allocate
+ memory for the array. This parameter may be NULL in which case the current default
+ CFAllocator is used.
+ @param urls A CFArray of urls to the file for which to create the MDItem.
+ @result A CFArrayRef of MDItemRefs, or NULL on failure. Missing items will have kCFNull entries in the result array.
+ */
+MD_EXPORT CFArrayRef MDItemsCreateWithURLs(CFAllocatorRef allocator, CFArrayRef urls) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
         @function MDItemCopyAttribute
@@ -148,6 +159,17 @@ MD_EXPORT CFDictionaryRef MDItemCopyAttributeList(MDItemRef item, ... /* CFStrin
 */
 MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
 
+/*!
+ @function MDItemsCopyAttributes
+ Returns metadata for the given items.
+ @param items A CFArray of MDItemRefs to items for which to fetch data
+ @param names A CFArray of attribute names for which to fetch data. 
+				The attribute names are CFStrings
+ @result A CFArrayRef, or NULL on failure. Each entry in the array is either kCFNull, 
+  if the item is not accessible, or a CFArray of attribute values. 
+  If an attribute is not available, there will be a kCFNull in its slot in the nested array.
+ */
+MD_EXPORT CFArrayRef MDItemsCopyAttributes(CFArrayRef items, CFArrayRef names) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* List of well-known attributes */
 
@@ -203,6 +225,9 @@ MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
 
    @constant kMDItemCopyright
    This is the copyright of the content. Type is a CFString
+   
+   @constant kMDItemDownloadedDate
+   This is the date that the file was last downloaded / received.
 
    @constant kMDItemWhereFroms
    This attribute indicates where the item was obtained from.
@@ -231,6 +256,11 @@ MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
    date, but can be independent of that. This allows tracking of the
    last time the content was modified irrespective of the last time the
    file was modified. Type is a CFDate.
+   
+   @constant kMDItemDateAdded
+   This is the date that the file was moved into the current location.
+   Not all files will have this attribute.  Not all file systems support
+   this attribute.
 
    @constant kMDItemDurationSeconds
    This is the duration, in seconds, of the content of the file (if
@@ -365,7 +395,7 @@ MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
    The class of the program used by the camera to set exposure when
    the picture is taken (Manual, Normal, Aperture priority, ...)
 
-   const kMDItemExposureTimeString
+   @const kMDItemExposureTimeString
    The time  of the exposure.
 
    @const kMDItemHeadline
@@ -431,12 +461,14 @@ MD_EXPORT const CFStringRef     kMDItemAuthors MD_AVAIL;                   // CF
 MD_EXPORT const CFStringRef     kMDItemEditors MD_AVAIL_LEOPARD;           // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemParticipants AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemProjects MD_AVAIL;                  // CFArray of CFString
+MD_EXPORT const CFStringRef     kMDItemDownloadedDate AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFDate
 MD_EXPORT const CFStringRef     kMDItemWhereFroms MD_AVAIL;                // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemComment MD_AVAIL;                   // CFString
 MD_EXPORT const CFStringRef     kMDItemCopyright MD_AVAIL;                 // CFString
 MD_EXPORT const CFStringRef     kMDItemLastUsedDate MD_AVAIL;              // CFDate
 MD_EXPORT const CFStringRef     kMDItemContentCreationDate MD_AVAIL;       // CFDate
 MD_EXPORT const CFStringRef     kMDItemContentModificationDate MD_AVAIL;   // CFDate
+MD_EXPORT const CFStringRef     kMDItemDateAdded MD_AVAIL;                 // CFDate
 MD_EXPORT const CFStringRef     kMDItemDurationSeconds MD_AVAIL;           // CFNumber
 MD_EXPORT const CFStringRef     kMDItemContactKeywords MD_AVAIL;           // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemVersion MD_AVAIL;                   // CFString
@@ -462,6 +494,10 @@ MD_EXPORT const CFStringRef     kMDItemExposureMode MD_AVAIL;              // CF
 MD_EXPORT const CFStringRef     kMDItemExposureTimeSeconds MD_AVAIL;       // CFNumber
 MD_EXPORT const CFStringRef     kMDItemEXIFVersion MD_AVAIL;               // CFString
 
+MD_EXPORT const CFStringRef kMDItemCameraOwner AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemFocalLength35mm AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemLensModel AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+
 MD_EXPORT const CFStringRef     kMDItemEXIFGPSVersion MD_AVAIL_LEOPARD;    // CFString
 MD_EXPORT const CFStringRef     kMDItemAltitude MD_AVAIL_LEOPARD;          // CFNumber
 MD_EXPORT const CFStringRef     kMDItemLatitude MD_AVAIL_LEOPARD;          // CFNumber
@@ -471,6 +507,19 @@ MD_EXPORT const CFStringRef     kMDItemTimestamp MD_AVAIL_LEOPARD;         // CF
 MD_EXPORT const CFStringRef     kMDItemGPSTrack MD_AVAIL_LEOPARD;          // CFNumber
 MD_EXPORT const CFStringRef     kMDItemImageDirection MD_AVAIL_LEOPARD;    // CFNumber
 MD_EXPORT const CFStringRef     kMDItemNamedLocation AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // CFString
+
+MD_EXPORT const CFStringRef kMDItemGPSStatus AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemGPSMeasureMode AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemGPSDOP AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemGPSMapDatum AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemGPSDestLatitude AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemGPSDestLongitude AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemGPSDestBearing AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemGPSDestDistance AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemGPSProcessingMethod AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemGPSAreaInformation AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemGPSDateStamp AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT const CFStringRef kMDItemGPSDifferental AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 MD_EXPORT const CFStringRef     kMDItemCodecs MD_AVAIL;                    // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemMediaTypes MD_AVAIL;                // CFArray of CFString
@@ -909,6 +958,15 @@ MD_EXPORT const CFStringRef    kMDItemSupportFileType AVAILABLE_MAC_OS_X_VERSION
  
         @const kMDItemURL
         Url of the item
+        
+        @const kMDItemIsLikelyJunk
+        This attribute indicates if the document is likely to be considered junk.
+        
+        @const kMDItemExecutableArchitectures
+        Array of executables architectures the item contains.
+
+        @const kMDItemApplicationCategories
+        Array of categories the item application is a member of.
 
 */
 MD_EXPORT const CFStringRef    kMDItemInformation MD_AVAIL_LEOPARD;              // CFString
@@ -923,6 +981,18 @@ MD_EXPORT const CFStringRef    kMDItemRecipientEmailAddresses MD_AVAIL_LEOPARD; 
 MD_EXPORT const CFStringRef    kMDItemAuthorAddresses AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;     // CFArray of CFString
 MD_EXPORT const CFStringRef    kMDItemRecipientAddresses AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;  // CFArray of CFString
 MD_EXPORT const CFStringRef    kMDItemURL MD_AVAIL_LEOPARD;                      // CFString
+
+MD_EXPORT const CFStringRef    kMDItemLabelIcon AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED;
+MD_EXPORT const CFStringRef    kMDItemLabelID AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED;
+MD_EXPORT const CFStringRef    kMDItemLabelKind AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED;
+MD_EXPORT const CFStringRef    kMDItemLabelUUID AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED;
+
+MD_EXPORT const CFStringRef    kMDItemIsLikelyJunk AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFBoolean
+MD_EXPORT const CFStringRef    kMDItemExecutableArchitectures AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFArray of CFString
+MD_EXPORT const CFStringRef    kMDItemApplicationCategories AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFArray of CFString
+
+MD_EXPORT const CFStringRef    kMDItemIsApplicationManaged AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFBoolean
+
 MD_END_C_DECLS
 
 /* ================================================================ */

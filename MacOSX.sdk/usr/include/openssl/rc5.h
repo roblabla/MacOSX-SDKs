@@ -59,6 +59,8 @@
 #ifndef HEADER_RC5_H
 #define HEADER_RC5_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/opensslconf.h> /* OPENSSL_NO_RC5 */
 
 #ifdef  __cplusplus
@@ -100,23 +102,23 @@ typedef struct rc5_key_st
 
 #ifdef OPENSSL_FIPS 
 void private_RC5_32_set_key(RC5_32_KEY *key, int len, const unsigned char *data,
-	int rounds);
+	int rounds) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 void RC5_32_set_key(RC5_32_KEY *key, int len, const unsigned char *data,
-	int rounds);
+	int rounds) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void RC5_32_ecb_encrypt(const unsigned char *in,unsigned char *out,RC5_32_KEY *key,
-	int enc);
-void RC5_32_encrypt(unsigned long *data,RC5_32_KEY *key);
-void RC5_32_decrypt(unsigned long *data,RC5_32_KEY *key);
+	int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void RC5_32_encrypt(unsigned long *data,RC5_32_KEY *key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void RC5_32_decrypt(unsigned long *data,RC5_32_KEY *key) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void RC5_32_cbc_encrypt(const unsigned char *in, unsigned char *out,
 			long length, RC5_32_KEY *ks, unsigned char *iv,
-			int enc);
+			int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void RC5_32_cfb64_encrypt(const unsigned char *in, unsigned char *out,
 			  long length, RC5_32_KEY *schedule,
-			  unsigned char *ivec, int *num, int enc);
+			  unsigned char *ivec, int *num, int enc) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void RC5_32_ofb64_encrypt(const unsigned char *in, unsigned char *out,
 			  long length, RC5_32_KEY *schedule,
-			  unsigned char *ivec, int *num);
+			  unsigned char *ivec, int *num) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifdef  __cplusplus
 }

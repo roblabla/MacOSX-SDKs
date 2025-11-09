@@ -70,7 +70,7 @@ SCPreferencesSetComputerName		(
 
 		Note: To commit these changes to permanent storage you must
 		call the SCPreferencesCommitChanges function.
-		In addition, you must call theSCPreferencesApplyChanges
+		In addition, you must call the SCPreferencesApplyChanges
 		function for the new name to become active.
 	@param prefs The preferences session.
 	@param name The local host name to be set.

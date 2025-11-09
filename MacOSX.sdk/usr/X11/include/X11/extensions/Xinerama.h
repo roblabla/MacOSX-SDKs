@@ -1,4 +1,3 @@
-/* $XdotOrg: xc/include/extensions/Xinerama.h,v 1.2 2004/04/23 18:43:06 eich Exp $ */
 /*
 
 Copyright 2003  The Open Group
@@ -24,7 +23,6 @@ used in advertising or otherwise to promote the sale, use or other dealings
 in this Software without prior written authorization from The Open Group.
 
 */
-/* $XFree86: xc/include/extensions/Xinerama.h,v 3.3 2002/09/16 18:05:19 eich Exp $ */
 
 #ifndef _Xinerama_h
 #define _Xinerama_h

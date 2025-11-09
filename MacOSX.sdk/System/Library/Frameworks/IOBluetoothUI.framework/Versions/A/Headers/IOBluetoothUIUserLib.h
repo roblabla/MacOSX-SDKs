@@ -1,7 +1,6 @@
 /*
 	File:		IOBluetoothUIUserLib.h
-	Contains:	Library to allow user-side clients to use Bluetooth UI C API's.
-	Copyright:	(c) 2002-2006 by Apple Computer, Inc. All rights reserved.
+	Copyright:	(c) 2010 by Apple, Inc. All rights reserved.
 */
 
 #pragma once
@@ -46,116 +45,22 @@ enum
 	kIOBluetoothUIUserCanceledErr	= (-1001)	// Same as NSRunAbortedResponse
 };
 
-//--------------------------------------------------------------------------------------------------------------------------
-/*!	@function	IOBluetoothServiceBrowserControllerCreate
-	@abstract	
-	@param						
-	@result		
-	@discussion	
-*/
+IOReturn IOBluetoothValidateHardware( CFStringRef cancelButtonTitle ) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+		
+IOReturn IOBluetoothValidateHardwareWithDescription( CFStringRef cancelButtonTitle,  CFStringRef descriptionText) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+		
+		
+// Deprecated API; use obj-c equivalents.
 
-IOBluetoothServiceBrowserControllerRef	IOBluetoothServiceBrowserControllerCreate(IOBluetoothServiceBrowserControllerOptions inOptions);
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!	@function	IOBluetoothServiceBrowserControllerBrowseDevices
-	@abstract	
-	@param						
-	@result		
-	@discussion	
-*/
-
-IOReturn IOBluetoothServiceBrowserControllerBrowseDevices(IOBluetoothSDPServiceRecordRef *outRecord,  IOBluetoothServiceBrowserControllerOptions inOptions);
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!	@function	IOBluetoothServiceBrowserControllerSetOptions
-	@abstract	
-	@param						
-	@result		
-	@discussion	
-*/
-
-void IOBluetoothServiceBrowserControllerSetOptions(IOBluetoothServiceBrowserControllerRef controller, IOBluetoothServiceBrowserControllerOptions inOptions);
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!	@function	IOBluetoothServiceBrowserControllerDiscover
-	@abstract	
-	@param						
-	@result		
-	@discussion	
-*/
-
-IOReturn IOBluetoothServiceBrowserControllerDiscover(IOBluetoothServiceBrowserControllerRef controller, IOBluetoothSDPServiceRecordRef *outRecord);
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!	@function	IOBluetoothServiceBrowserControllerDiscoverWithDeviceAttributes
-	@abstract	
-	@param						
-	@result		
-	@discussion	
-*/
-
-IOReturn IOBluetoothServiceBrowserControllerDiscoverWithDeviceAttributes(IOBluetoothServiceBrowserControllerRef controller, IOBluetoothSDPServiceRecordRef *outRecord, IOBluetoothDeviceSearchAttributes *deviceAttributes, CFArrayRef serviceArray);
-
-
-#if 0
-#pragma mark -
-#pragma mark === Bluetooth Pairing Controller ===
-#endif
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!	@function	IOBluetoothGetPairingController
-	@abstract	
-	@param						
-	@result		
-	@discussion	
-*/
-
+IOBluetoothServiceBrowserControllerRef	IOBluetoothServiceBrowserControllerCreate(IOBluetoothServiceBrowserControllerOptions inOptions) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+IOReturn IOBluetoothServiceBrowserControllerBrowseDevices(IOBluetoothSDPServiceRecordRef *outRecord,  IOBluetoothServiceBrowserControllerOptions inOptions)  DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void IOBluetoothServiceBrowserControllerSetOptions(IOBluetoothServiceBrowserControllerRef controller, IOBluetoothServiceBrowserControllerOptions inOptions)  DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+IOReturn IOBluetoothServiceBrowserControllerDiscover(IOBluetoothServiceBrowserControllerRef controller, IOBluetoothSDPServiceRecordRef *outRecord)  DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+IOReturn IOBluetoothServiceBrowserControllerDiscoverWithDeviceAttributes(IOBluetoothServiceBrowserControllerRef controller, IOBluetoothSDPServiceRecordRef *outRecord, IOBluetoothDeviceSearchAttributes *deviceAttributes, CFArrayRef serviceArray)  DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 IOBluetoothPairingControllerRef	IOBluetoothGetPairingController();
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!	@function	IOBluetoothPairingControllerRunPanelWithAttributes
-	@abstract	
-	@param						
-	@result		
-	@discussion	
-*/
-
-void	IOBluetoothPairingControllerRunPanelWithAttributes(IOBluetoothPairingControllerRef pairingController, IOBluetoothDeviceSearchAttributes *attributes);
-
-#if 0
-#pragma mark -
-#pragma mark === Bluetooth Device Selector Controller ===
-#endif
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!	@function	IOBluetoothGetDeviceSelectorController
-	@abstract	
-	@param						
-	@result		
-	@discussion	
-*/
-
+void	IOBluetoothPairingControllerRunPanelWithAttributes(IOBluetoothPairingControllerRef pairingController, IOBluetoothDeviceSearchAttributes *attributes)  DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 IOBluetoothDeviceSelectorControllerRef	IOBluetoothGetDeviceSelectorController();
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-/*!	@function	IOBluetoothDeviceSelectorRunPanelWithAttributes
-	@abstract	
-	@param						
-	@result		
-	@discussion	
-*/
-
-CFArrayRef	IOBluetoothDeviceSelectorRunPanelWithAttributes(IOBluetoothDeviceSelectorControllerRef deviceSelector, IOBluetoothDeviceSearchAttributes *attributes);
-
-#if 0
-#pragma mark -
-#pragma mark === Other functions ===
-#endif
-
-
-IOReturn IOBluetoothValidateHardware( CFStringRef cancelButtonTitle ) AVAILABLE_BLUETOOTH_VERSION_1_1_AND_LATER;
+CFArrayRef	IOBluetoothDeviceSelectorRunPanelWithAttributes(IOBluetoothDeviceSelectorControllerRef deviceSelector, IOBluetoothDeviceSearchAttributes *attributes)  DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifdef	__cplusplus
 	}

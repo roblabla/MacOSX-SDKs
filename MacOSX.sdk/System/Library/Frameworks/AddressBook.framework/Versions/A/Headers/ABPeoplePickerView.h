@@ -1,10 +1,10 @@
 //
 //  ABPeoplePickerView.h
-//  ABNG
+//  AddressBook Framework
 //
-//  Created by Colter Reed on 7/17/08.
-//  Copyright 2008 Apple, Inc. All rights reserved.
+//  Copyright (c) 2003-2007 Apple Inc.  All rights reserved.
 //
+
 
 #import <Cocoa/Cocoa.h>
 
@@ -21,16 +21,16 @@ typedef enum {
 
 @interface ABPeoplePickerView : NSView {
 @private
-    void  *_reserved1;
-    void  *_reserved2;
-    void  *_reserved3;
-    void  *_reserved4;
-    void  *_reserved5;
+    id _reserved1;
+    id _reserved2;
+    id _reserved3;
+    id _reserved4;
+    id _reserved5;
     SEL    _reserved6;
     SEL    _reserved7;
-    void  *_reserved8;
-    void  *_reserved9;
-    void  *_reserved10;
+    id _reserved8;
+    id _reserved9;
+    id _reserved10;
 }
 
 /*

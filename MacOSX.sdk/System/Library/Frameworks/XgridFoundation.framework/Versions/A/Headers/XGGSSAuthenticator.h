@@ -36,13 +36,13 @@ abstract XGAuthenticator class.
 	@abstract Sets the service principal of the controller with which to authenticate.
 	@param servicePrincipal The service principal. Must not be nil.
 */
-- (void)setServicePrincipal:(NSString *)servicePrincipal;
+- (void)setServicePrincipal:(NSString *)servicePrincipal NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method servicePrincipal
 	@abstract Returns the service principal associated with the receiver.
 	@result The service principal.
 */
-- (NSString *)servicePrincipal;
+- (NSString *)servicePrincipal NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end

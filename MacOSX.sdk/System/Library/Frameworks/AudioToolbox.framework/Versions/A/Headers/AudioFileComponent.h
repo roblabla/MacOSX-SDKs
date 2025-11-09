@@ -3,7 +3,7 @@
 
      Contains:   API for implementing Audio File Components.
 
-     Copyright:  (c) 2004 - 2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2004 - 2008 by Apple, Inc., all rights reserved.
 
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -32,11 +32,11 @@
 	#include "AudioFile.h"
 #endif
 
+
 #if defined(__cplusplus)
 extern "C"
 {
 #endif
-
 
 /*!
     @header AudioFileComponent
@@ -178,7 +178,7 @@ AudioFileComponentOptimize(
     @function	AudioFileComponentReadBytes
     @abstract   implements AudioFileReadBytes. 
 				
-    @discussion				Returns eofErr when read encounters end of file.
+    @discussion				Returns kAudioFileEndOfFileError when read encounters end of file.
     @param inComponent		an AudioFileComponent
     @param inUseCache 		true if it is desired to cache the data upon read, else false
     @param inStartingByte	the byte offset of the audio data desired to be returned
@@ -254,7 +254,7 @@ AudioFileComponentReadPackets(
 				If the buffer is too small for the number of packets 
 				requested, ioNumPackets and ioNumBytes will be reduced 
 				to the number of packets that can be accommodated and their byte size.
-				Returns eofErr when read encounters end of file.
+				Returns kAudioFileEndOfFileError when read encounters end of file.
 
     @param inComponent				an AudioFileComponent
     @param inUseCache 				true if it is desired to cache the data upon read, else false
@@ -577,6 +577,12 @@ AudioFileComponentGetGlobalInfo(
     @constant   kAudioFileComponent_ExtensionsForType
 					Returns a CFArray of CFStrings containing the file extensions 
 					that are recognized for this file type. 
+    @constant   kAudioFileComponent_UTIsForType
+					Returns a CFArray of CFStrings containing the universal type identifiers 
+					for this file type. 
+    @constant   kAudioFileComponent_MIMETypesForType
+					Returns a CFArray of CFStrings containing the MIME types 
+					for this file type. 
     @constant   kAudioFileComponent_AvailableFormatIDs
 					Returns a array of format IDs for formats that can be read. 
     @constant   kAudioFileComponent_AvailableStreamDescriptionsForFormat
@@ -585,7 +591,7 @@ AudioFileComponentGetGlobalInfo(
 					formats for a particular file type and format ID. The AudioStreamBasicDescriptions
 					have the following fields filled in: mFormatID, mFormatFlags, mBitsPerChannel
     @constant   kAudioFileComponent_FastDispatchTable
-					AudioFile gets an AudioFileFDFTable to speed up dispatching. 
+					Deprecated. This selector is no longer called by the implementation. 
     @constant   kAudioFileComponent_HFSTypeCodesForType
 					Returns an array of HFSTypeCodes corresponding to this file type.
 					The first type in the array is the preferred one for use when
@@ -596,6 +602,8 @@ enum
 	kAudioFileComponent_CanRead									= 'cnrd',
 	kAudioFileComponent_CanWrite								= 'cnwr',
 	kAudioFileComponent_FileTypeName							= 'ftnm',
+	kAudioFileComponent_UTIsForType								= 'futi',
+	kAudioFileComponent_MIMETypesForType						= 'fmim',
 	kAudioFileComponent_ExtensionsForType						= 'fext',
 	kAudioFileComponent_AvailableFormatIDs						= 'fmid',
 	kAudioFileComponent_AvailableStreamDescriptionsForFormat	= 'sdid',
@@ -643,8 +651,11 @@ enum
 };
 
 
+#pragma mark -
+#pragma mark Deprecated
+
 //==================================================================================================
-// Fast Dispatch Function typedefs for those component operations that need to be fast.
+// Fast Dispatch Function typedefs. Deprecated. These are no longer used by the implementation.
 //==================================================================================================
 
 typedef OSStatus (*ReadBytesFDF)(	void			*inComponentStorage,
@@ -719,10 +730,8 @@ typedef OSStatus (*SetUserDataFDF)(		void					*inComponentStorage,
 										UInt32					inUserDataSize,
 										const void				*inUserData);
 										
-/* no fast dispatch for kAudioFileRemoveUserDataSelect */
-
 //==================================================================================================
-// Fast Dispatch Function table.
+// Fast Dispatch Function tables. Deprecated. These are no longer used by the implementation.
 //==================================================================================================
 
 typedef struct AudioFileFDFTable
@@ -763,13 +772,10 @@ typedef struct AudioFileFDFTableExtended
 	ReadPacketDataFDF	mReadPacketDataFDF;
 } AudioFileFDFTableExtended;
 
-#pragma mark -
-#pragma mark Deprecated
-
 /*!
 	@functiongroup Deprecated AFComponent
 	@discussion		These API calls are no longer called on Snow Leopard, instead the URL versions are used.
-					They can be provided by the file component for compatability with Leopard and Tiger systems
+					They can be provided by the file component for compatibility with Leopard and Tiger systems
 */
 
 struct FSRef;
@@ -829,10 +835,168 @@ AudioFileComponentOpenFile(
 								SInt8  								inPermissions,
 								SInt16								inRefNum)		__OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_NA);
 
-
-
 #if defined(__cplusplus)
 }
 #endif
+
+//=====================================================================================================================
+
+typedef	OSStatus	(*AudioFileComponentCreateURLProc)(
+								void								*self, 
+								CFURLRef							inFileRef, 
+								const AudioStreamBasicDescription*	inFormat, 
+								UInt32								inFlags);
+typedef	OSStatus	(*AudioFileComponentOpenURLProc)(
+								void								*self, 
+								CFURLRef					inFileRef, 
+								SInt8						inPermissions, 
+								int							inFileDescriptor);
+								
+typedef	OSStatus	(*AudioFileComponentOpenWithCallbacksProc)(
+								void								*self,
+								void								*inClientData, 
+								AudioFile_ReadProc					inReadFunc, 
+								AudioFile_WriteProc					inWriteFunc, 
+								AudioFile_GetSizeProc				inGetSizeFunc,
+								AudioFile_SetSizeProc				inSetSizeFunc);
+
+typedef	OSStatus	(*AudioFileComponentInitializeWithCallbacksProc)(
+								void								*self,
+								void								*inClientData, 
+								AudioFile_ReadProc					inReadFunc, 
+								AudioFile_WriteProc					inWriteFunc, 
+								AudioFile_GetSizeProc				inGetSizeFunc,
+								AudioFile_SetSizeProc				inSetSizeFunc,
+								UInt32								inFileType,
+								const AudioStreamBasicDescription	*inFormat,
+								UInt32								inFlags);
+
+typedef	OSStatus	(*AudioFileComponentCloseProc)(
+								void								*self);
+				
+typedef	OSStatus	(*AudioFileComponentOptimizeProc)(
+								void								*self);
+				
+typedef	OSStatus	(*AudioFileComponentReadBytesProc)(		
+								void							*self,
+								Boolean							inUseCache,
+								SInt64							inStartingByte, 
+								UInt32							*ioNumBytes, 
+								void							*outBuffer);	
+						
+typedef	OSStatus	(*AudioFileComponentWriteBytesProc)(		
+								void							*self,
+								Boolean							inUseCache,
+								SInt64							inStartingByte, 
+								UInt32							*ioNumBytes, 
+								const void						*inBuffer);	
+						
+typedef	OSStatus	(*AudioFileComponentReadPacketsProc)(		
+								void							*self,
+								Boolean							inUseCache,
+								UInt32							*outNumBytes,
+								AudioStreamPacketDescription	*outPacketDescriptions,
+								SInt64							inStartingPacket, 
+								UInt32  						*ioNumPackets, 
+								void							*outBuffer);	
+									
+
+typedef	OSStatus	(*AudioFileComponentReadPacketDataProc)(		
+								void							*self,
+								Boolean							inUseCache,
+								UInt32							*ioNumBytes,
+								AudioStreamPacketDescription	*outPacketDescriptions,
+								SInt64							inStartingPacket, 
+								UInt32  						*ioNumPackets, 
+								void							*outBuffer);	
+									
+typedef	OSStatus	(*AudioFileComponentWritePacketsProc)(	
+								void								*self,
+								Boolean								inUseCache,
+								UInt32								inNumBytes,
+								const AudioStreamPacketDescription	*inPacketDescriptions,
+								SInt64								inStartingPacket, 
+								UInt32								*ioNumPackets, 
+								const void							*inBuffer);
+
+
+typedef	OSStatus	(*AudioFileComponentGetPropertyInfoProc)(	
+								void							*self,
+								AudioFileComponentPropertyID	inPropertyID,
+								UInt32							*outPropertySize,
+								UInt32							*outWritable);
+
+
+typedef	OSStatus	(*AudioFileComponentGetPropertyProc)(	
+								void							*self,
+								AudioFileComponentPropertyID	inPropertyID,
+								UInt32							*ioPropertyDataSize,
+								void							*outPropertyData);
+
+typedef	OSStatus	(*AudioFileComponentSetPropertyProc)(	
+								void							*self,
+								AudioFileComponentPropertyID	inPropertyID,
+								UInt32							inPropertyDataSize,
+								const void						*inPropertyData);
+
+
+typedef	OSStatus	(*AudioFileComponentCountUserDataProc)(	
+								void							*self,
+								UInt32							inUserDataID,
+								UInt32							*outNumberItems);
+
+typedef	OSStatus	(*AudioFileComponentGetUserDataSizeProc)(	
+								void							*self,
+								UInt32							inUserDataID,
+								UInt32							inIndex,
+								UInt32							*outUserDataSize);
+
+typedef	OSStatus	(*AudioFileComponentGetUserDataProc)(	
+								void							*self,
+								UInt32							inUserDataID,
+								UInt32							inIndex,
+								UInt32							*ioUserDataSize,
+								void							*outUserData);
+
+typedef	OSStatus	(*AudioFileComponentSetUserDataProc)(	
+								void							*self,
+								UInt32							inUserDataID,
+								UInt32							inIndex,
+								UInt32							inUserDataSize,
+								const void						*inUserData);
+
+
+typedef	OSStatus	(*AudioFileComponentRemoveUserDataProc)(	
+								void							*self,
+								UInt32							inUserDataID,
+								UInt32							inIndex);
+
+typedef	OSStatus	(*AudioFileComponentExtensionIsThisFormatProc)(	
+								void							*self,
+								CFStringRef 					inExtension,
+								UInt32							*outResult);	
+
+
+typedef	OSStatus	(*AudioFileComponentFileDataIsThisFormatProc)(	
+								void							*self,
+								UInt32							inDataByteSize,
+								const void*						inData,
+								UInt32							*outResult);	
+
+
+typedef	OSStatus	(*AudioFileComponentGetGlobalInfoSizeProc)(	
+								void							*self,
+								AudioFileComponentPropertyID	inPropertyID,
+								UInt32							inSpecifierSize,
+								const void						*inSpecifier,
+								UInt32							*outPropertySize);
+
+typedef	OSStatus	(*AudioFileComponentGetGlobalInfoProc)(	
+								void							*self,
+								AudioFileComponentPropertyID	inPropertyID,
+								UInt32							inSpecifierSize,
+								const void						*inSpecifier,
+								UInt32							*ioPropertyDataSize,
+								void							*outPropertyData);
 
 #endif

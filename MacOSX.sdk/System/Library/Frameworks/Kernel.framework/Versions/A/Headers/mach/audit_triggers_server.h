@@ -51,11 +51,21 @@ kern_return_t audit_triggers
 	int flags
 );
 
-extern boolean_t audit_triggers_server(
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+boolean_t audit_triggers_server(
 		mach_msg_header_t *InHeadP,
 		mach_msg_header_t *OutHeadP);
 
-extern mig_routine_t audit_triggers_server_routine(
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+mig_routine_t audit_triggers_server_routine(
 		mach_msg_header_t *InHeadP);
 
 

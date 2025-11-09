@@ -3,9 +3,9 @@
  
      Contains:   Master include for QD private framework
  
-     Version:    Quickdraw-264.3~1
+     Version:    Quickdraw-282~3
  
-     Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2008 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -37,52 +37,12 @@
 #endif
 
 
-#ifndef __QUICKDRAWTYPES__
-#include <QD/QuickdrawTypes.h>
-#endif
-
-#ifndef __QUICKDRAWAPI__
-#include <QD/QuickdrawAPI.h>
-#endif
-
 #ifndef __QUICKDRAW__
 #include <QD/Quickdraw.h>
 #endif
 
-#ifndef __QDOFFSCREEN__
-#include <QD/QDOffscreen.h>
-#endif
-
-#ifndef __QDPICTTOCGCONTEXT__
-#include <QD/QDPictToCGContext.h>
-#endif
-
-#ifndef __QUICKDRAWTEXT__
-#include <QD/QuickdrawText.h>
-#endif
-
 #ifndef __FONTS__
 #include <QD/Fonts.h>
-#endif
-
-#ifndef __PALETTES__
-#include <QD/Palettes.h>
-#endif
-
-#ifndef __PICTUTILS__
-#include <QD/PictUtils.h>
-#endif
-
-#ifndef __VIDEO__
-#include <QD/Video.h>
-#endif
-
-#ifndef __DISPLAYS__
-#include <QD/Displays.h>
-#endif
-
-#ifndef __FONTSYNC__
-#include <QD/FontSync.h>
 #endif
 
 #ifndef __ATSUNICODE__

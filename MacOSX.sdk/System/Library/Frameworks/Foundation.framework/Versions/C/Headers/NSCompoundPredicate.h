@@ -1,10 +1,8 @@
 /*	NSCompoundPredicate.h
-	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPredicate.h>
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSArray;
 
@@ -17,6 +15,7 @@ enum {
 };
 typedef NSUInteger NSCompoundPredicateType;
 
+NS_CLASS_AVAILABLE(10_4, 3_0)
 @interface NSCompoundPredicate : NSPredicate {
     @private
     void *_reserved2;
@@ -35,4 +34,3 @@ typedef NSUInteger NSCompoundPredicateType;
 + (NSPredicate *)notPredicateWithSubpredicate:(NSPredicate *)predicate;
 @end
 
-#endif

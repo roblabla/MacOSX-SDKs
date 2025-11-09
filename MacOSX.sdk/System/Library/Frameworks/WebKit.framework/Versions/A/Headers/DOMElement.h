@@ -34,6 +34,10 @@
 @class DOMNodeList;
 @class NSString;
 
+enum {
+    DOM_ALLOW_KEYBOARD_INPUT = 1
+};
+
 @interface DOMElement : DOMNode
 @property(readonly, copy) NSString *tagName;
 @property(readonly, retain) DOMCSSStyleDeclaration *style;
@@ -82,6 +86,7 @@
 - (DOMNodeList *)getElementsByClassName:(NSString *)name AVAILABLE_IN_WEBKIT_VERSION_4_0;
 - (DOMElement *)querySelector:(NSString *)selectors AVAILABLE_IN_WEBKIT_VERSION_4_0;
 - (DOMNodeList *)querySelectorAll:(NSString *)selectors AVAILABLE_IN_WEBKIT_VERSION_4_0;
+- (void)webkitRequestFullScreen:(unsigned short)flags AVAILABLE_IN_WEBKIT_VERSION_4_0;
 @end
 
 @interface DOMElement (DOMElementDeprecated)

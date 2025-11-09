@@ -99,7 +99,7 @@ namespace std
 #endif
     bool operator!=(const type_info& __arg) const
     { return !operator==(__arg); }
-    
+#if 0    
    // APPLE LOCAL begin
    // For ABI stability these virtuals must be ordered: __is_pointer_p, __is_function_p, __do_catch, __do_upcast
 
@@ -123,7 +123,7 @@ namespace std
 			     void **__obj_ptr) const;
 
    // APPLE LOCAL end
-
+#endif
   protected:
     const char *__name;
     

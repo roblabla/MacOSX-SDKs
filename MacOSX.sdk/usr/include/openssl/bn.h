@@ -72,6 +72,8 @@
 #ifndef HEADER_BN_H
 #define HEADER_BN_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/e_os2.h>
 #ifndef OPENSSL_NO_FP_API
 #include <stdio.h> /* FILE */
@@ -338,7 +340,7 @@ struct bn_gencb_st
 		} cb;
 	};
 /* Wrapper function to make using BN_GENCB easier,  */
-int BN_GENCB_call(BN_GENCB *cb, int a, int b);
+int BN_GENCB_call(BN_GENCB *cb, int a, int b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* Macro to populate a BN_GENCB structure with an "old"-style callback */
 #define BN_GENCB_set_old(gencb, callback, cb_arg) { \
 		BN_GENCB *tmp_gencb = (gencb); \
@@ -396,42 +398,42 @@ int BN_GENCB_call(BN_GENCB *cb, int a, int b);
 #define BN_zero(a)	(BN_set_word((a),0))
 #endif
 
-const BIGNUM *BN_value_one(void);
-char *	BN_options(void);
-BN_CTX *BN_CTX_new(void);
+const BIGNUM *BN_value_one(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+char *	BN_options(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BN_CTX *BN_CTX_new(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifndef OPENSSL_NO_DEPRECATED
-void	BN_CTX_init(BN_CTX *c);
+void	BN_CTX_init(BN_CTX *c) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
-void	BN_CTX_free(BN_CTX *c);
-void	BN_CTX_start(BN_CTX *ctx);
-BIGNUM *BN_CTX_get(BN_CTX *ctx);
-void	BN_CTX_end(BN_CTX *ctx);
-int     BN_rand(BIGNUM *rnd, int bits, int top,int bottom);
-int     BN_pseudo_rand(BIGNUM *rnd, int bits, int top,int bottom);
-int	BN_rand_range(BIGNUM *rnd, const BIGNUM *range);
-int	BN_pseudo_rand_range(BIGNUM *rnd, const BIGNUM *range);
-int	BN_num_bits(const BIGNUM *a);
-int	BN_num_bits_word(BN_ULONG);
-BIGNUM *BN_new(void);
-void	BN_init(BIGNUM *);
-void	BN_clear_free(BIGNUM *a);
-BIGNUM *BN_copy(BIGNUM *a, const BIGNUM *b);
-void	BN_swap(BIGNUM *a, BIGNUM *b);
-BIGNUM *BN_bin2bn(const unsigned char *s,int len,BIGNUM *ret);
-int	BN_bn2bin(const BIGNUM *a, unsigned char *to);
-BIGNUM *BN_mpi2bn(const unsigned char *s,int len,BIGNUM *ret);
-int	BN_bn2mpi(const BIGNUM *a, unsigned char *to);
-int	BN_sub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b);
-int	BN_usub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b);
-int	BN_uadd(BIGNUM *r, const BIGNUM *a, const BIGNUM *b);
-int	BN_add(BIGNUM *r, const BIGNUM *a, const BIGNUM *b);
-int	BN_mul(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, BN_CTX *ctx);
-int	BN_sqr(BIGNUM *r, const BIGNUM *a,BN_CTX *ctx);
+void	BN_CTX_free(BN_CTX *c) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	BN_CTX_start(BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIGNUM *BN_CTX_get(BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	BN_CTX_end(BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int     BN_rand(BIGNUM *rnd, int bits, int top,int bottom) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int     BN_pseudo_rand(BIGNUM *rnd, int bits, int top,int bottom) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_rand_range(BIGNUM *rnd, const BIGNUM *range) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_pseudo_rand_range(BIGNUM *rnd, const BIGNUM *range) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_num_bits(const BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_num_bits_word(BN_ULONG) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIGNUM *BN_new(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	BN_init(BIGNUM *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	BN_clear_free(BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIGNUM *BN_copy(BIGNUM *a, const BIGNUM *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	BN_swap(BIGNUM *a, BIGNUM *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIGNUM *BN_bin2bn(const unsigned char *s,int len,BIGNUM *ret) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_bn2bin(const BIGNUM *a, unsigned char *to) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIGNUM *BN_mpi2bn(const unsigned char *s,int len,BIGNUM *ret) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_bn2mpi(const BIGNUM *a, unsigned char *to) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_sub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_usub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_uadd(BIGNUM *r, const BIGNUM *a, const BIGNUM *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_add(BIGNUM *r, const BIGNUM *a, const BIGNUM *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_mul(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_sqr(BIGNUM *r, const BIGNUM *a,BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /** BN_set_negative sets sign of a BIGNUM
  * \param  b  pointer to the BIGNUM object
  * \param  n  0 if the BIGNUM b should be positive and a value != 0 otherwise 
  */
-void	BN_set_negative(BIGNUM *b, int n);
+void	BN_set_negative(BIGNUM *b, int n) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /** BN_is_negative returns 1 if the BIGNUM is negative
  * \param  a  pointer to the BIGNUM object
  * \return 1 if a < 0 and 0 otherwise
@@ -439,159 +441,159 @@ void	BN_set_negative(BIGNUM *b, int n);
 #define BN_is_negative(a) ((a)->neg != 0)
 
 int	BN_div(BIGNUM *dv, BIGNUM *rem, const BIGNUM *m, const BIGNUM *d,
-	BN_CTX *ctx);
+	BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #define BN_mod(rem,m,d,ctx) BN_div(NULL,(rem),(m),(d),(ctx))
-int	BN_nnmod(BIGNUM *r, const BIGNUM *m, const BIGNUM *d, BN_CTX *ctx);
-int	BN_mod_add(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m, BN_CTX *ctx);
-int	BN_mod_add_quick(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m);
-int	BN_mod_sub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m, BN_CTX *ctx);
-int	BN_mod_sub_quick(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m);
+int	BN_nnmod(BIGNUM *r, const BIGNUM *m, const BIGNUM *d, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_mod_add(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_mod_add_quick(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_mod_sub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_mod_sub_quick(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	BN_mod_mul(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
-	const BIGNUM *m, BN_CTX *ctx);
-int	BN_mod_sqr(BIGNUM *r, const BIGNUM *a, const BIGNUM *m, BN_CTX *ctx);
-int	BN_mod_lshift1(BIGNUM *r, const BIGNUM *a, const BIGNUM *m, BN_CTX *ctx);
-int	BN_mod_lshift1_quick(BIGNUM *r, const BIGNUM *a, const BIGNUM *m);
-int	BN_mod_lshift(BIGNUM *r, const BIGNUM *a, int n, const BIGNUM *m, BN_CTX *ctx);
-int	BN_mod_lshift_quick(BIGNUM *r, const BIGNUM *a, int n, const BIGNUM *m);
+	const BIGNUM *m, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_mod_sqr(BIGNUM *r, const BIGNUM *a, const BIGNUM *m, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_mod_lshift1(BIGNUM *r, const BIGNUM *a, const BIGNUM *m, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_mod_lshift1_quick(BIGNUM *r, const BIGNUM *a, const BIGNUM *m) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_mod_lshift(BIGNUM *r, const BIGNUM *a, int n, const BIGNUM *m, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_mod_lshift_quick(BIGNUM *r, const BIGNUM *a, int n, const BIGNUM *m) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-BN_ULONG BN_mod_word(const BIGNUM *a, BN_ULONG w);
-BN_ULONG BN_div_word(BIGNUM *a, BN_ULONG w);
-int	BN_mul_word(BIGNUM *a, BN_ULONG w);
-int	BN_add_word(BIGNUM *a, BN_ULONG w);
-int	BN_sub_word(BIGNUM *a, BN_ULONG w);
-int	BN_set_word(BIGNUM *a, BN_ULONG w);
-BN_ULONG BN_get_word(const BIGNUM *a);
+BN_ULONG BN_mod_word(const BIGNUM *a, BN_ULONG w) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BN_ULONG BN_div_word(BIGNUM *a, BN_ULONG w) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_mul_word(BIGNUM *a, BN_ULONG w) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_add_word(BIGNUM *a, BN_ULONG w) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_sub_word(BIGNUM *a, BN_ULONG w) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_set_word(BIGNUM *a, BN_ULONG w) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BN_ULONG BN_get_word(const BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int	BN_cmp(const BIGNUM *a, const BIGNUM *b);
-void	BN_free(BIGNUM *a);
-int	BN_is_bit_set(const BIGNUM *a, int n);
-int	BN_lshift(BIGNUM *r, const BIGNUM *a, int n);
-int	BN_lshift1(BIGNUM *r, const BIGNUM *a);
-int	BN_exp(BIGNUM *r, const BIGNUM *a, const BIGNUM *p,BN_CTX *ctx);
+int	BN_cmp(const BIGNUM *a, const BIGNUM *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	BN_free(BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_is_bit_set(const BIGNUM *a, int n) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_lshift(BIGNUM *r, const BIGNUM *a, int n) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_lshift1(BIGNUM *r, const BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_exp(BIGNUM *r, const BIGNUM *a, const BIGNUM *p,BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int	BN_mod_exp(BIGNUM *r, const BIGNUM *a, const BIGNUM *p,
-	const BIGNUM *m,BN_CTX *ctx);
+	const BIGNUM *m,BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	BN_mod_exp_mont(BIGNUM *r, const BIGNUM *a, const BIGNUM *p,
-	const BIGNUM *m, BN_CTX *ctx, BN_MONT_CTX *m_ctx);
+	const BIGNUM *m, BN_CTX *ctx, BN_MONT_CTX *m_ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int BN_mod_exp_mont_consttime(BIGNUM *rr, const BIGNUM *a, const BIGNUM *p,
-	const BIGNUM *m, BN_CTX *ctx, BN_MONT_CTX *in_mont);
+	const BIGNUM *m, BN_CTX *ctx, BN_MONT_CTX *in_mont) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	BN_mod_exp_mont_word(BIGNUM *r, BN_ULONG a, const BIGNUM *p,
-	const BIGNUM *m, BN_CTX *ctx, BN_MONT_CTX *m_ctx);
+	const BIGNUM *m, BN_CTX *ctx, BN_MONT_CTX *m_ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	BN_mod_exp2_mont(BIGNUM *r, const BIGNUM *a1, const BIGNUM *p1,
 	const BIGNUM *a2, const BIGNUM *p2,const BIGNUM *m,
-	BN_CTX *ctx,BN_MONT_CTX *m_ctx);
+	BN_CTX *ctx,BN_MONT_CTX *m_ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	BN_mod_exp_simple(BIGNUM *r, const BIGNUM *a, const BIGNUM *p,
-	const BIGNUM *m,BN_CTX *ctx);
+	const BIGNUM *m,BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int	BN_mask_bits(BIGNUM *a,int n);
+int	BN_mask_bits(BIGNUM *a,int n) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifndef OPENSSL_NO_FP_API
-int	BN_print_fp(FILE *fp, const BIGNUM *a);
+int	BN_print_fp(FILE *fp, const BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifdef HEADER_BIO_H
-int	BN_print(BIO *fp, const BIGNUM *a);
+int	BN_print(BIO *fp, const BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #else
-int	BN_print(void *fp, const BIGNUM *a);
+int	BN_print(void *fp, const BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
-int	BN_reciprocal(BIGNUM *r, const BIGNUM *m, int len, BN_CTX *ctx);
-int	BN_rshift(BIGNUM *r, const BIGNUM *a, int n);
-int	BN_rshift1(BIGNUM *r, const BIGNUM *a);
-void	BN_clear(BIGNUM *a);
-BIGNUM *BN_dup(const BIGNUM *a);
-int	BN_ucmp(const BIGNUM *a, const BIGNUM *b);
-int	BN_set_bit(BIGNUM *a, int n);
-int	BN_clear_bit(BIGNUM *a, int n);
-char *	BN_bn2hex(const BIGNUM *a);
-char *	BN_bn2dec(const BIGNUM *a);
-int 	BN_hex2bn(BIGNUM **a, const char *str);
-int 	BN_dec2bn(BIGNUM **a, const char *str);
-int	BN_gcd(BIGNUM *r,const BIGNUM *a,const BIGNUM *b,BN_CTX *ctx);
-int	BN_kronecker(const BIGNUM *a,const BIGNUM *b,BN_CTX *ctx); /* returns -2 for error */
+int	BN_reciprocal(BIGNUM *r, const BIGNUM *m, int len, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_rshift(BIGNUM *r, const BIGNUM *a, int n) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_rshift1(BIGNUM *r, const BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	BN_clear(BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIGNUM *BN_dup(const BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_ucmp(const BIGNUM *a, const BIGNUM *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_set_bit(BIGNUM *a, int n) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_clear_bit(BIGNUM *a, int n) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+char *	BN_bn2hex(const BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+char *	BN_bn2dec(const BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int 	BN_hex2bn(BIGNUM **a, const char *str) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int 	BN_dec2bn(BIGNUM **a, const char *str) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_gcd(BIGNUM *r,const BIGNUM *a,const BIGNUM *b,BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_kronecker(const BIGNUM *a,const BIGNUM *b,BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* returns -2 for error */
 BIGNUM *BN_mod_inverse(BIGNUM *ret,
-	const BIGNUM *a, const BIGNUM *n,BN_CTX *ctx);
+	const BIGNUM *a, const BIGNUM *n,BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 BIGNUM *BN_mod_sqrt(BIGNUM *ret,
-	const BIGNUM *a, const BIGNUM *n,BN_CTX *ctx);
+	const BIGNUM *a, const BIGNUM *n,BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Deprecated versions */
 #ifndef OPENSSL_NO_DEPRECATED
 BIGNUM *BN_generate_prime(BIGNUM *ret,int bits,int safe,
 	const BIGNUM *add, const BIGNUM *rem,
-	void (*callback)(int,int,void *),void *cb_arg);
+	void (*callback)(int,int,void *),void *cb_arg) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	BN_is_prime(const BIGNUM *p,int nchecks,
 	void (*callback)(int,int,void *),
-	BN_CTX *ctx,void *cb_arg);
+	BN_CTX *ctx,void *cb_arg) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	BN_is_prime_fasttest(const BIGNUM *p,int nchecks,
 	void (*callback)(int,int,void *),BN_CTX *ctx,void *cb_arg,
-	int do_trial_division);
+	int do_trial_division) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif /* !defined(OPENSSL_NO_DEPRECATED) */
 
 /* Newer versions */
 int	BN_generate_prime_ex(BIGNUM *ret,int bits,int safe, const BIGNUM *add,
-		const BIGNUM *rem, BN_GENCB *cb);
-int	BN_is_prime_ex(const BIGNUM *p,int nchecks, BN_CTX *ctx, BN_GENCB *cb);
+		const BIGNUM *rem, BN_GENCB *cb) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_is_prime_ex(const BIGNUM *p,int nchecks, BN_CTX *ctx, BN_GENCB *cb) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	BN_is_prime_fasttest_ex(const BIGNUM *p,int nchecks, BN_CTX *ctx,
-		int do_trial_division, BN_GENCB *cb);
+		int do_trial_division, BN_GENCB *cb) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int BN_X931_generate_Xpq(BIGNUM *Xp, BIGNUM *Xq, int nbits, BN_CTX *ctx);
+int BN_X931_generate_Xpq(BIGNUM *Xp, BIGNUM *Xq, int nbits, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int BN_X931_derive_prime_ex(BIGNUM *p, BIGNUM *p1, BIGNUM *p2,
 			const BIGNUM *Xp, const BIGNUM *Xp1, const BIGNUM *Xp2,
-			const BIGNUM *e, BN_CTX *ctx, BN_GENCB *cb);
+			const BIGNUM *e, BN_CTX *ctx, BN_GENCB *cb) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int BN_X931_generate_prime_ex(BIGNUM *p, BIGNUM *p1, BIGNUM *p2,
 			BIGNUM *Xp1, BIGNUM *Xp2,
 			const BIGNUM *Xp,
 			const BIGNUM *e, BN_CTX *ctx,
-			BN_GENCB *cb);
+			BN_GENCB *cb) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-BN_MONT_CTX *BN_MONT_CTX_new(void );
-void BN_MONT_CTX_init(BN_MONT_CTX *ctx);
+BN_MONT_CTX *BN_MONT_CTX_new(void ) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void BN_MONT_CTX_init(BN_MONT_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int BN_mod_mul_montgomery(BIGNUM *r,const BIGNUM *a,const BIGNUM *b,
-	BN_MONT_CTX *mont, BN_CTX *ctx);
+	BN_MONT_CTX *mont, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #define BN_to_montgomery(r,a,mont,ctx)	BN_mod_mul_montgomery(\
 	(r),(a),&((mont)->RR),(mont),(ctx))
 int BN_from_montgomery(BIGNUM *r,const BIGNUM *a,
-	BN_MONT_CTX *mont, BN_CTX *ctx);
-void BN_MONT_CTX_free(BN_MONT_CTX *mont);
-int BN_MONT_CTX_set(BN_MONT_CTX *mont,const BIGNUM *mod,BN_CTX *ctx);
-BN_MONT_CTX *BN_MONT_CTX_copy(BN_MONT_CTX *to,BN_MONT_CTX *from);
+	BN_MONT_CTX *mont, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void BN_MONT_CTX_free(BN_MONT_CTX *mont) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BN_MONT_CTX_set(BN_MONT_CTX *mont,const BIGNUM *mod,BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BN_MONT_CTX *BN_MONT_CTX_copy(BN_MONT_CTX *to,BN_MONT_CTX *from) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 BN_MONT_CTX *BN_MONT_CTX_set_locked(BN_MONT_CTX **pmont, int lock,
-					const BIGNUM *mod, BN_CTX *ctx);
+					const BIGNUM *mod, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* BN_BLINDING flags */
 #define	BN_BLINDING_NO_UPDATE	0x00000001
 #define	BN_BLINDING_NO_RECREATE	0x00000002
 
-BN_BLINDING *BN_BLINDING_new(const BIGNUM *A, const BIGNUM *Ai, /* const */ BIGNUM *mod);
-void BN_BLINDING_free(BN_BLINDING *b);
-int BN_BLINDING_update(BN_BLINDING *b,BN_CTX *ctx);
-int BN_BLINDING_convert(BIGNUM *n, BN_BLINDING *b, BN_CTX *ctx);
-int BN_BLINDING_invert(BIGNUM *n, BN_BLINDING *b, BN_CTX *ctx);
-int BN_BLINDING_convert_ex(BIGNUM *n, BIGNUM *r, BN_BLINDING *b, BN_CTX *);
-int BN_BLINDING_invert_ex(BIGNUM *n, const BIGNUM *r, BN_BLINDING *b, BN_CTX *);
-unsigned long BN_BLINDING_get_thread_id(const BN_BLINDING *);
-void BN_BLINDING_set_thread_id(BN_BLINDING *, unsigned long);
-unsigned long BN_BLINDING_get_flags(const BN_BLINDING *);
-void BN_BLINDING_set_flags(BN_BLINDING *, unsigned long);
+BN_BLINDING *BN_BLINDING_new(const BIGNUM *A, const BIGNUM *Ai, /* const */ BIGNUM *mod) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void BN_BLINDING_free(BN_BLINDING *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BN_BLINDING_update(BN_BLINDING *b,BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BN_BLINDING_convert(BIGNUM *n, BN_BLINDING *b, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BN_BLINDING_invert(BIGNUM *n, BN_BLINDING *b, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BN_BLINDING_convert_ex(BIGNUM *n, BIGNUM *r, BN_BLINDING *b, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BN_BLINDING_invert_ex(BIGNUM *n, const BIGNUM *r, BN_BLINDING *b, BN_CTX *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned long BN_BLINDING_get_thread_id(const BN_BLINDING *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void BN_BLINDING_set_thread_id(BN_BLINDING *, unsigned long) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned long BN_BLINDING_get_flags(const BN_BLINDING *) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void BN_BLINDING_set_flags(BN_BLINDING *, unsigned long) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 BN_BLINDING *BN_BLINDING_create_param(BN_BLINDING *b,
 	const BIGNUM *e, /* const */ BIGNUM *m, BN_CTX *ctx,
 	int (*bn_mod_exp)(BIGNUM *r, const BIGNUM *a, const BIGNUM *p,
 			  const BIGNUM *m, BN_CTX *ctx, BN_MONT_CTX *m_ctx),
-	BN_MONT_CTX *m_ctx);
+	BN_MONT_CTX *m_ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifndef OPENSSL_NO_DEPRECATED
-void BN_set_params(int mul,int high,int low,int mont);
-int BN_get_params(int which); /* 0, mul, 1 high, 2 low, 3 mont */
+void BN_set_params(int mul,int high,int low,int mont) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BN_get_params(int which) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* 0, mul, 1 high, 2 low, 3 mont */
 #endif
 
-void	BN_RECP_CTX_init(BN_RECP_CTX *recp);
-BN_RECP_CTX *BN_RECP_CTX_new(void);
-void	BN_RECP_CTX_free(BN_RECP_CTX *recp);
-int	BN_RECP_CTX_set(BN_RECP_CTX *recp,const BIGNUM *rdiv,BN_CTX *ctx);
+void	BN_RECP_CTX_init(BN_RECP_CTX *recp) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BN_RECP_CTX *BN_RECP_CTX_new(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	BN_RECP_CTX_free(BN_RECP_CTX *recp) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_RECP_CTX_set(BN_RECP_CTX *recp,const BIGNUM *rdiv,BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	BN_mod_mul_reciprocal(BIGNUM *r, const BIGNUM *x, const BIGNUM *y,
-	BN_RECP_CTX *recp,BN_CTX *ctx);
+	BN_RECP_CTX *recp,BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	BN_mod_exp_recp(BIGNUM *r, const BIGNUM *a, const BIGNUM *p,
-	const BIGNUM *m, BN_CTX *ctx);
+	const BIGNUM *m, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int	BN_div_recp(BIGNUM *dv, BIGNUM *rem, const BIGNUM *m,
-	BN_RECP_CTX *recp, BN_CTX *ctx);
+	BN_RECP_CTX *recp, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Functions for arithmetic over binary polynomials represented by BIGNUMs. 
  *
@@ -602,70 +604,70 @@ int	BN_div_recp(BIGNUM *dv, BIGNUM *rem, const BIGNUM *m,
  * be expanded to the appropriate size if needed.
  */
 
-int	BN_GF2m_add(BIGNUM *r, const BIGNUM *a, const BIGNUM *b); /*r = a + b*/
+int	BN_GF2m_add(BIGNUM *r, const BIGNUM *a, const BIGNUM *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /*r = a + b*/
 #define BN_GF2m_sub(r, a, b) BN_GF2m_add(r, a, b)
-int	BN_GF2m_mod(BIGNUM *r, const BIGNUM *a, const BIGNUM *p); /*r=a mod p*/
+int	BN_GF2m_mod(BIGNUM *r, const BIGNUM *a, const BIGNUM *p) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /*r=a mod p*/
 int	BN_GF2m_mod_mul(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
-	const BIGNUM *p, BN_CTX *ctx); /* r = (a * b) mod p */
+	const BIGNUM *p, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r = (a * b) mod p */
 int	BN_GF2m_mod_sqr(BIGNUM *r, const BIGNUM *a, const BIGNUM *p,
-	BN_CTX *ctx); /* r = (a * a) mod p */
+	BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r = (a * a) mod p */
 int	BN_GF2m_mod_inv(BIGNUM *r, const BIGNUM *b, const BIGNUM *p,
-	BN_CTX *ctx); /* r = (1 / b) mod p */
+	BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r = (1 / b) mod p */
 int	BN_GF2m_mod_div(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
-	const BIGNUM *p, BN_CTX *ctx); /* r = (a / b) mod p */
+	const BIGNUM *p, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r = (a / b) mod p */
 int	BN_GF2m_mod_exp(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
-	const BIGNUM *p, BN_CTX *ctx); /* r = (a ^ b) mod p */
+	const BIGNUM *p, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r = (a ^ b) mod p */
 int	BN_GF2m_mod_sqrt(BIGNUM *r, const BIGNUM *a, const BIGNUM *p,
-	BN_CTX *ctx); /* r = sqrt(a) mod p */
+	BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r = sqrt(a) mod p */
 int	BN_GF2m_mod_solve_quad(BIGNUM *r, const BIGNUM *a, const BIGNUM *p,
-	BN_CTX *ctx); /* r^2 + r = a mod p */
+	BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r^2 + r = a mod p */
 #define BN_GF2m_cmp(a, b) BN_ucmp((a), (b))
 /* Some functions allow for representation of the irreducible polynomials
  * as an unsigned int[], say p.  The irreducible f(t) is then of the form:
  *     t^p[0] + t^p[1] + ... + t^p[k]
  * where m = p[0] > p[1] > ... > p[k] = 0.
  */
-int	BN_GF2m_mod_arr(BIGNUM *r, const BIGNUM *a, const unsigned int p[]);
+int	BN_GF2m_mod_arr(BIGNUM *r, const BIGNUM *a, const unsigned int p[]) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 	/* r = a mod p */
 int	BN_GF2m_mod_mul_arr(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
-	const unsigned int p[], BN_CTX *ctx); /* r = (a * b) mod p */
+	const unsigned int p[], BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r = (a * b) mod p */
 int	BN_GF2m_mod_sqr_arr(BIGNUM *r, const BIGNUM *a, const unsigned int p[],
-	BN_CTX *ctx); /* r = (a * a) mod p */
+	BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r = (a * a) mod p */
 int	BN_GF2m_mod_inv_arr(BIGNUM *r, const BIGNUM *b, const unsigned int p[],
-	BN_CTX *ctx); /* r = (1 / b) mod p */
+	BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r = (1 / b) mod p */
 int	BN_GF2m_mod_div_arr(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
-	const unsigned int p[], BN_CTX *ctx); /* r = (a / b) mod p */
+	const unsigned int p[], BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r = (a / b) mod p */
 int	BN_GF2m_mod_exp_arr(BIGNUM *r, const BIGNUM *a, const BIGNUM *b,
-	const unsigned int p[], BN_CTX *ctx); /* r = (a ^ b) mod p */
+	const unsigned int p[], BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r = (a ^ b) mod p */
 int	BN_GF2m_mod_sqrt_arr(BIGNUM *r, const BIGNUM *a,
-	const unsigned int p[], BN_CTX *ctx); /* r = sqrt(a) mod p */
+	const unsigned int p[], BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r = sqrt(a) mod p */
 int	BN_GF2m_mod_solve_quad_arr(BIGNUM *r, const BIGNUM *a,
-	const unsigned int p[], BN_CTX *ctx); /* r^2 + r = a mod p */
-int	BN_GF2m_poly2arr(const BIGNUM *a, unsigned int p[], int max);
-int	BN_GF2m_arr2poly(const unsigned int p[], BIGNUM *a);
+	const unsigned int p[], BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* r^2 + r = a mod p */
+int	BN_GF2m_poly2arr(const BIGNUM *a, unsigned int p[], int max) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BN_GF2m_arr2poly(const unsigned int p[], BIGNUM *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* faster mod functions for the 'NIST primes' 
  * 0 <= a < p^2 */
-int BN_nist_mod_192(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, BN_CTX *ctx);
-int BN_nist_mod_224(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, BN_CTX *ctx);
-int BN_nist_mod_256(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, BN_CTX *ctx);
-int BN_nist_mod_384(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, BN_CTX *ctx);
-int BN_nist_mod_521(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, BN_CTX *ctx);
+int BN_nist_mod_192(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BN_nist_mod_224(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BN_nist_mod_256(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BN_nist_mod_384(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BN_nist_mod_521(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, BN_CTX *ctx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-const BIGNUM *BN_get0_nist_prime_192(void);
-const BIGNUM *BN_get0_nist_prime_224(void);
-const BIGNUM *BN_get0_nist_prime_256(void);
-const BIGNUM *BN_get0_nist_prime_384(void);
-const BIGNUM *BN_get0_nist_prime_521(void);
+const BIGNUM *BN_get0_nist_prime_192(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const BIGNUM *BN_get0_nist_prime_224(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const BIGNUM *BN_get0_nist_prime_256(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const BIGNUM *BN_get0_nist_prime_384(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+const BIGNUM *BN_get0_nist_prime_521(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* library internal functions */
 
 #define bn_expand(a,bits) ((((((bits+BN_BITS2-1))/BN_BITS2)) <= (a)->dmax)?\
 	(a):bn_expand2((a),(bits+BN_BITS2-1)/BN_BITS2))
 #define bn_wexpand(a,words) (((words) <= (a)->dmax)?(a):bn_expand2((a),(words)))
-BIGNUM *bn_expand2(BIGNUM *a, int words);
+BIGNUM *bn_expand2(BIGNUM *a, int words) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifndef OPENSSL_NO_DEPRECATED
-BIGNUM *bn_dup_expand(const BIGNUM *a, int words); /* unused */
+BIGNUM *bn_dup_expand(const BIGNUM *a, int words) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER; /* unused */
 #endif
 
 /* Bignum consistency macros
@@ -704,7 +706,7 @@ BIGNUM *bn_dup_expand(const BIGNUM *a, int words); /* unused */
 #ifdef BN_DEBUG_RAND
 /* To avoid "make update" cvs wars due to BN_DEBUG, use some tricks */
 #ifndef RAND_pseudo_bytes
-int RAND_pseudo_bytes(unsigned char *buf,int num);
+int RAND_pseudo_bytes(unsigned char *buf,int num) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #define BN_DEBUG_TRIX
 #endif
 #define bn_pollute(a) \
@@ -759,32 +761,32 @@ int RAND_pseudo_bytes(unsigned char *buf,int num);
 	bn_pollute(a); \
 	}
 
-BN_ULONG bn_mul_add_words(BN_ULONG *rp, const BN_ULONG *ap, int num, BN_ULONG w);
-BN_ULONG bn_mul_words(BN_ULONG *rp, const BN_ULONG *ap, int num, BN_ULONG w);
-void     bn_sqr_words(BN_ULONG *rp, const BN_ULONG *ap, int num);
-BN_ULONG bn_div_words(BN_ULONG h, BN_ULONG l, BN_ULONG d);
-BN_ULONG bn_add_words(BN_ULONG *rp, const BN_ULONG *ap, const BN_ULONG *bp,int num);
-BN_ULONG bn_sub_words(BN_ULONG *rp, const BN_ULONG *ap, const BN_ULONG *bp,int num);
+BN_ULONG bn_mul_add_words(BN_ULONG *rp, const BN_ULONG *ap, int num, BN_ULONG w) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BN_ULONG bn_mul_words(BN_ULONG *rp, const BN_ULONG *ap, int num, BN_ULONG w) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void     bn_sqr_words(BN_ULONG *rp, const BN_ULONG *ap, int num) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BN_ULONG bn_div_words(BN_ULONG h, BN_ULONG l, BN_ULONG d) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BN_ULONG bn_add_words(BN_ULONG *rp, const BN_ULONG *ap, const BN_ULONG *bp,int num) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BN_ULONG bn_sub_words(BN_ULONG *rp, const BN_ULONG *ap, const BN_ULONG *bp,int num) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Primes from RFC 2409 */
-BIGNUM *get_rfc2409_prime_768(BIGNUM *bn);
-BIGNUM *get_rfc2409_prime_1024(BIGNUM *bn);
+BIGNUM *get_rfc2409_prime_768(BIGNUM *bn) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIGNUM *get_rfc2409_prime_1024(BIGNUM *bn) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Primes from RFC 3526 */
-BIGNUM *get_rfc3526_prime_1536(BIGNUM *bn);
-BIGNUM *get_rfc3526_prime_2048(BIGNUM *bn);
-BIGNUM *get_rfc3526_prime_3072(BIGNUM *bn);
-BIGNUM *get_rfc3526_prime_4096(BIGNUM *bn);
-BIGNUM *get_rfc3526_prime_6144(BIGNUM *bn);
-BIGNUM *get_rfc3526_prime_8192(BIGNUM *bn);
+BIGNUM *get_rfc3526_prime_1536(BIGNUM *bn) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIGNUM *get_rfc3526_prime_2048(BIGNUM *bn) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIGNUM *get_rfc3526_prime_3072(BIGNUM *bn) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIGNUM *get_rfc3526_prime_4096(BIGNUM *bn) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIGNUM *get_rfc3526_prime_6144(BIGNUM *bn) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIGNUM *get_rfc3526_prime_8192(BIGNUM *bn) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int BN_bntest_rand(BIGNUM *rnd, int bits, int top,int bottom);
+int BN_bntest_rand(BIGNUM *rnd, int bits, int top,int bottom) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* BEGIN ERROR CODES */
 /* The following lines are auto generated by the script mkerr.pl. Any changes
  * made after this point may be overwritten when the script is next run.
  */
-void ERR_load_BN_strings(void);
+void ERR_load_BN_strings(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Error codes for the BN functions. */
 

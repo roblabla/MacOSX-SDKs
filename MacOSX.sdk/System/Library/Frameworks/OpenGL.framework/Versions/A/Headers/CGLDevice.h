@@ -11,7 +11,6 @@
 extern "C" {
 #endif
 
-typedef struct CGLShareGroupRec	*CGLShareGroup;
 typedef struct CGLShareGroupRec	*CGLShareGroupObj;
 
 CGLShareGroupObj CGLGetShareGroup(CGLContextObj ctx);

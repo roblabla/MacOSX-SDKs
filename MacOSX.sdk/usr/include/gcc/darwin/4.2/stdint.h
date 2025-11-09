@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000, 2001, 2003, 2004, 2008 Apple Computer, Inc.
+ * Copyright (c) 2000-2010 Apple Inc.
  * All rights reserved.
  */
 

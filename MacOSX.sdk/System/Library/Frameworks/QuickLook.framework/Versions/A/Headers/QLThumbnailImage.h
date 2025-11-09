@@ -2,7 +2,7 @@
  *  QLThumbnailImage.h
  *  Quick Look
  *
- *  Copyright 2007 Apple Inc.
+ *  Copyright 2007-2010 Apple Inc.
  *  All rights reserved.
  *
  */
@@ -27,7 +27,7 @@ QL_EXTERN_C_BEGIN
  *      @discussion QLThumbnailImageCreate() does not replace IconServices.
  *                  Also QLThumbnailImageCreate() will block until the thumbnail is generated so you should consider calling it in a thread.
  */
-QL_EXPORT CGImageRef QLThumbnailImageCreate(CFAllocatorRef allocator, CFURLRef url, CGSize maxThumbnailSize, CFDictionaryRef options);
+QL_EXPORT CGImageRef QLThumbnailImageCreate(CFAllocatorRef allocator, CFURLRef url, CGSize maxThumbnailSize, CFDictionaryRef options) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 /*
  * Options for the thumbnail.

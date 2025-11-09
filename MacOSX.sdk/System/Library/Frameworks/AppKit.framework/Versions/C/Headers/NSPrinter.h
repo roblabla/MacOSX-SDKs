@@ -1,7 +1,7 @@
 /*
 	NSPrinter.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -91,20 +91,20 @@ typedef NSUInteger NSPrinterTableStatus;
 
 /* A method that was deprecated in Mac OS 10.2. -[NSPrinter imageRectForPaper:] will attempt to determine and return the bounds of the imageable area for a particular paper name, but querying such information by paper name alone is not reliable. Use -[NSPrintInfo imageablePageBounds], which was introduced in Mac OS 10.2, instead.
 */
-- (NSRect)imageRectForPaper:(NSString *)paperName DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
+- (NSRect)imageRectForPaper:(NSString *)paperName NS_DEPRECATED_MAC(10_0, 10_2);
 
 /* Methods that were deprecated in Mac OS 10.2. NSPrinter's implementations of these methods return values that are not reliable or meaningful for some printers.
 */
-- (BOOL)acceptsBinary DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
-- (BOOL)isColor DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
-- (BOOL)isFontAvailable:(NSString *)faceName DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
-- (BOOL)isOutputStackInReverseOrder DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
+- (BOOL)acceptsBinary NS_DEPRECATED_MAC(10_0, 10_2);
+- (BOOL)isColor NS_DEPRECATED_MAC(10_0, 10_2);
+- (BOOL)isFontAvailable:(NSString *)faceName NS_DEPRECATED_MAC(10_0, 10_2);
+- (BOOL)isOutputStackInReverseOrder NS_DEPRECATED_MAC(10_0, 10_2);
 
 /* Methods that were deprecated in Mac OS 10.2. NSPrinter's implementation of each of these methods returns nil.
 */
-+ (NSPrinter *)printerWithName:(NSString *)name domain:(NSString *)domain includeUnavailable:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
-- (NSString *)domain DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
-- (NSString *)host DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
-- (NSString *)note DEPRECATED_IN_MAC_OS_X_VERSION_10_2_AND_LATER;
++ (NSPrinter *)printerWithName:(NSString *)name domain:(NSString *)domain includeUnavailable:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_2);
+- (NSString *)domain NS_DEPRECATED_MAC(10_0, 10_2);
+- (NSString *)host NS_DEPRECATED_MAC(10_0, 10_2);
+- (NSString *)note NS_DEPRECATED_MAC(10_0, 10_2);
 
 @end

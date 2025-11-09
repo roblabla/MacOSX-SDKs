@@ -1,7 +1,7 @@
 /*
 	NSText.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -37,9 +37,7 @@ typedef NSUInteger NSTextAlignment;
 
 /* Values for NSWritingDirection */
 enum {
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
     NSWritingDirectionNatural       = -1,   // Determines direction using the Unicode Bidi Algorithm rules P2 and P3
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
     NSWritingDirectionLeftToRight   = 0,    // Left to right writing direction
     NSWritingDirectionRightToLeft   = 1     // Right to left writing direction
 };
@@ -61,12 +59,9 @@ enum {
     NSLeftTextMovement			= 0x13,
     NSRightTextMovement			= 0x14,
     NSUpTextMovement			= 0x15,
-    NSDownTextMovement			= 0x16
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
-    ,
+    NSDownTextMovement			= 0x16,
     NSCancelTextMovement		= 0x17,
     NSOtherTextMovement			= 0
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 };
 
 @interface NSText : NSView <NSChangeSpelling, NSIgnoreMisspelledWords> {
@@ -120,10 +115,8 @@ enum {
 - (NSColor *)textColor;
 - (NSTextAlignment)alignment;
 - (void)setAlignment:(NSTextAlignment)mode;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (NSWritingDirection)baseWritingDirection;
 - (void)setBaseWritingDirection:(NSWritingDirection)writingDirection;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
 
 - (void)setTextColor:(NSColor *)color range:(NSRange)range;
 - (void)setFont:(NSFont *)font range:(NSRange)range;

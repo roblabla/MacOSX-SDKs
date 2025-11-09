@@ -1,13 +1,12 @@
 /*	
 	NSGlyphInfo.h
-	Copyright (c) 2002-2009, Apple Inc.
+	Copyright (c) 2002-2011, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSString.h>
 #import <AppKit/NSFont.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 enum {
     NSIdentityMappingCharacterCollection = 0, // Identity mapping (CID == NSGlyph)
     NSAdobeCNS1CharacterCollection = 1, // Adobe-CNS1
@@ -40,4 +39,3 @@ typedef NSUInteger NSCharacterCollection;
 // Returns RO (character collection).  Returns NSIdentityMappingCharacterCollection if instantiated with NSGlyph or glyph name
 - (NSCharacterCollection)characterCollection;
 @end
-#endif

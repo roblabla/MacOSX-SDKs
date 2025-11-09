@@ -1,10 +1,8 @@
 /*	NSXMLElement.h
-	Copyright (c) 2004-2009, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
-
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSDictionary, NSMutableArray, NSEnumerator;
 
@@ -16,11 +14,13 @@
 @interface NSXMLElement : NSXMLNode {
 @protected
 	NSString *_name;
-	NSMutableArray *_attributes;
-	NSMutableArray *_namespaces;
+	id _attributes;
+	id _namespaces;
 	NSArray *_children;
 	BOOL _childrenHaveMutated;
-	uint8_t _padding3[3];
+	BOOL _zeroOrOneAttributes;
+	BOOL _zeroOrOneNamespaces;
+	uint8_t _padding;
 	NSString *_URI;	
 	NSInteger _prefixIndex;
 }
@@ -88,10 +88,10 @@
 - (void)setAttributes:(NSArray *)attributes; //primitive
 
 /*!
-    @method setAttributesAsDictionary:
-    @abstract Set the attributes base on a name-value dictionary.
-*/
-- (void)setAttributesAsDictionary:(NSDictionary *)attributes;
+ @method setAttributesWithDictionary:
+ @abstract Set the attributes based on a name-value dictionary.
+ */
+- (void)setAttributesWithDictionary:(NSDictionary *)attributes;
 
 /*!
     @method attributes
@@ -205,5 +205,12 @@
 
 @end
 
-#endif		// Availability guard
+@interface NSXMLElement (NSDeprecated)
+/*!
+    @method setAttributesAsDictionary:
+    @abstract Set the attributes base on a name-value dictionary.
+    @discussion This method is deprecated and does not function correctly. Use -setAttributesWithDictionary: instead.
+ */
+- (void)setAttributesAsDictionary:(NSDictionary *)attributes;
+@end
 

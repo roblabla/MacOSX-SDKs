@@ -1,3 +1,4 @@
+/* include/X11/Xft/Xft.h.  Generated from Xft.h.in by configure.  */
 /*
  * Copyright © 2000 Keith Packard
  *
@@ -24,14 +25,13 @@
 #define _XFT_H_
 
 /*
-  * Current Xft version number.  This same number
-  * must appear in the Xft configure.ac file. Yes,
-  * it'a a pain to synchronize version numbers like this.
-  */
+ * Current Xft version number, set from version in the Xft configure.ac file.
+ */
+/* #undef will be substituted by configure */
+#define XFT_MAJOR 2
+#define XFT_MINOR 2
+#define XFT_REVISION 0
 
-#define XFT_MAJOR	2
-#define XFT_MINOR	1
-#define XFT_REVISION	13
 #define XFT_VERSION	((XFT_MAJOR * 10000) + (XFT_MINOR * 100) + (XFT_REVISION))
 #define XftVersion	XFT_VERSION
 
@@ -126,16 +126,6 @@ XftColorFree (Display	*dpy,
 	      Visual	*visual,
 	      Colormap	cmap,
 	      XftColor	*color);
-
-
-/* xftcore.c */
-
-/* xftdir.c */
-FcBool
-XftDirScan (FcFontSet *set, _Xconst char *dir, FcBool force);
-
-FcBool
-XftDirSave (FcFontSet *set, _Xconst char *dir);
 
 /* xftdpy.c */
 Bool
@@ -618,8 +608,6 @@ XftTextRenderUtf16 (Display	    *dpy,
 		    _Xconst FcChar8 *string,
 		    FcEndian	    endian,
 		    int		    len);
-
-/* xftstr.c */
 
 /* xftxlfd.c */
 FcPattern *

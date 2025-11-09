@@ -3,7 +3,7 @@
  
      Contains:   HIToolbox interfaces for geometry
  
-     Version:    HIToolbox-463~1
+     Version:    HIToolbox-567.2~1
  
      Copyright:  © 1984-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -73,24 +73,26 @@ typedef CGSize                          HISize;
 typedef CGRect                          HIRect;
 #if !__LP64__
 /*
- *  HIGetScaleFactor()
+ *  HIGetScaleFactor()   *** DEPRECATED ***
  *  
  *  Discussion:
- *    Returns the resolution independence scale factor.
+ *    This function is deprecated and should not be used by
+ *    applications targeting Mac OS X 10.7 or later. Please use an
+ *    appropriate AppKit API instead.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Result:
- *    A float indicating the resolution independence scale factor.
+ *    This function always returns 1.0.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only]
+ *    Mac OS X:         in version 10.4 and later in Carbon.framework [32-bit only] but deprecated in 10.7
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.4 and later
  *    Non-Carbon CFM:   not available
  */
 extern CGFloat 
-HIGetScaleFactor(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+HIGetScaleFactor(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 

@@ -2,7 +2,7 @@
  *	CTTypesetter.h
  *	CoreText
  *
- *	Copyright (c) 2003-2008 Apple Inc. All rights reserved.
+ *	Copyright (c) 2003-2011 Apple Inc. All rights reserved.
  *
  */
 
@@ -17,6 +17,7 @@
 #ifndef __CTTYPESETTER__
 #define __CTTYPESETTER__
 
+#include <CoreText/CTDefines.h>
 #include <CoreText/CTLine.h>
 
 #if defined(__cplusplus)
@@ -35,7 +36,7 @@ typedef const struct __CTTypesetter * CTTypesetterRef;
 	@abstract	Returns the CFType of the typesetter object
 */
 
-CFTypeID CTTypesetterGetTypeID( void ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+CFTypeID CTTypesetterGetTypeID( void ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -52,7 +53,7 @@ CFTypeID CTTypesetterGetTypeID( void ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER
 				performed and any directional control characters are ignored.
 */
 
-extern const CFStringRef kCTTypesetterOptionDisableBidiProcessing AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTTypesetterOptionDisableBidiProcessing CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 /*!
 	@const		kCTTypesetterOptionForcedEmbeddingLevel
@@ -63,7 +64,7 @@ extern const CFStringRef kCTTypesetterOptionDisableBidiProcessing AVAILABLE_MAC_
 				level and any directional control characters are ignored.
 */
 
-extern const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -88,7 +89,7 @@ extern const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel AVAILABLE_MAC_O
 */
 
 CTTypesetterRef CTTypesetterCreateWithAttributedString(
-	CFAttributedStringRef string ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CFAttributedStringRef string ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
@@ -113,7 +114,7 @@ CTTypesetterRef CTTypesetterCreateWithAttributedString(
 
 CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
 	CFAttributedStringRef string,
-	CFDictionaryRef options ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CFDictionaryRef options ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -121,7 +122,7 @@ CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
 /* --------------------------------------------------------------------------- */
 
 /*!
-	@function	CTTypesetterCreateLine
+	@function	CTTypesetterCreateLineWithOffset
 	@abstract	Creates an immutable line from the typesetter.
 
 	@discussion The resultant line will consist of glyphs in the correct visual
@@ -138,13 +139,26 @@ CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
 				string. The location and length of the range must be within the
 				bounds of the string, othewise the call will fail.
 
+	@param		offset
+				The line position offset.
+
 	@result		This function will return a reference to a CTLine if the call was
 				successful. Otherwise, it will return NULL.
 */
 
+CTLineRef CTTypesetterCreateLineWithOffset(
+	CTTypesetterRef typesetter,
+	CFRange stringRange,
+	double offset ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_3_2);
+
+/*!
+	@function	CTTypesetterCreateLine
+	@abstract	Equivalent to CTTypesetterCreateLineWithOffset with offset = 0.0.
+*/
+
 CTLineRef CTTypesetterCreateLine(
 	CTTypesetterRef typesetter,
-	CFRange stringRange ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	CFRange stringRange ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /* --------------------------------------------------------------------------- */
@@ -152,7 +166,7 @@ CTLineRef CTTypesetterCreateLine(
 /* --------------------------------------------------------------------------- */
 
 /*!
-	@function	CTTypesetterSuggestLineBreak
+	@function	CTTypesetterSuggestLineBreakWithOffset
 	@abstract	Suggests a contextual line break point based on the width
 				provided.
 
@@ -170,19 +184,33 @@ CTLineRef CTTypesetterCreateLine(
 	@param		width
 				The requested line break width.
 
+	@param		offset
+				The line position offset.
+
 	@result		The value returned is a count of the characters from startIndex
 				that would cause the line break. This value returned can be used
 				to construct a character range for CTTypesetterCreateLine.
 */
 
+CFIndex CTTypesetterSuggestLineBreakWithOffset(
+	CTTypesetterRef typesetter,
+	CFIndex startIndex,
+	double width,
+	double offset ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_3_2);
+
+/*!
+	@function	CTTypesetterSuggestLineBreak
+	@abstract	Equivalent to CTTypesetterSuggestLineBreakWithOffset with offset = 0.0.
+*/
+
 CFIndex CTTypesetterSuggestLineBreak(
 	CTTypesetterRef typesetter,
 	CFIndex startIndex,
-	double width ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	double width ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 /*!
-	@function	CTTypesetterSuggestClusterBreak
+	@function	CTTypesetterSuggestClusterBreakWithOffset
 	@abstract	Suggests a cluster line break point based on the width provided.
 
 	@discussion Suggests a typographic cluster line break point based on the width
@@ -205,15 +233,30 @@ CFIndex CTTypesetterSuggestLineBreak(
 	@param		width
 				The requested typographic cluster break width.
 
+	@param		offset
+				The line position offset.
+
 	@result		The value returned is a count of the characters from startIndex
 				that would cause the cluster break. This value returned can be
 				used to construct a character range for CTTypesetterCreateLine.
 */
 
+CFIndex CTTypesetterSuggestClusterBreakWithOffset(
+	CTTypesetterRef typesetter,
+	CFIndex startIndex,
+	double width,
+	double offset ) CT_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_3_2);
+
+
+/*!
+	@function	CTTypesetterSuggestClusterBreak
+	@abstract	Equivalent to CTTypesetterSuggestClusterBreakWithOffset with offset = 0.0.
+*/
+
 CFIndex CTTypesetterSuggestClusterBreak(
 	CTTypesetterRef typesetter,
 	CFIndex startIndex,
-	double width ) AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+	double width ) CT_AVAILABLE_STARTING( __MAC_10_5, __IPHONE_3_2);
 
 
 #if defined(__cplusplus)

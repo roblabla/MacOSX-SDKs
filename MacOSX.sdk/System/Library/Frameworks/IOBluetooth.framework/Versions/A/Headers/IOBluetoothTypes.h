@@ -1,7 +1,6 @@
 /*
 	File:		IOBluetoothTypes.h
-	Contains:	Family provided types and defines - shared between user and kernel code.
-	Copyright:	© 2002-2007 by Apple Inc. All rights reserved.
+	Copyright:	© 2010 by Apple Inc. All rights reserved.
 */
 
 #pragma once

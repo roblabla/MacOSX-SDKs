@@ -45,7 +45,7 @@
 /* Methods to lock and unlock the global lock. Layer methods automatically
  * obtain this while modifying shared state, but callers may need to lock
  * around multiple operations to ensure consistency. The lock is a
- * recursive spin-lock (i.e shouldn't be held for extended periods.) */
+ * recursive spin-lock (i.e shouldn't be held for extended periods). */
 
 + (void)lock;
 + (void)unlock;
@@ -76,9 +76,9 @@
 /* Accessors for the "completionBlock" per-thread transaction property.
  * Once set to a non-nil value the block is guaranteed to be called (on
  * the main thread) as soon as all animations subsequently added by
- * this transaction group have completed (or been removed.) If no
+ * this transaction group have completed (or been removed). If no
  * animations are added before the current transaction group is
- * committed (or the completion block is set to a different value,) the
+ * committed (or the completion block is set to a different value), the
  * block will be invoked immediately. Added in Mac OS X 10.6. */
 
 #if __BLOCKS__
@@ -87,7 +87,7 @@
 #endif
 
 /* Associate arbitrary keyed-data with the current transaction (i.e.
- * with the current thread.)
+ * with the current thread).
  *
  * Nested transactions have nested data scope, i.e. reading a key
  * searches for the innermost scope that has set it, setting a key
@@ -113,6 +113,6 @@ CA_EXTERN NSString * const kCATransactionAnimationDuration
 CA_EXTERN NSString * const kCATransactionDisableActions
     __OSX_AVAILABLE_STARTING (__MAC_10_5, __IPHONE_2_0);
 CA_EXTERN NSString * const kCATransactionAnimationTimingFunction
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 CA_EXTERN NSString * const kCATransactionCompletionBlock
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_4_0);

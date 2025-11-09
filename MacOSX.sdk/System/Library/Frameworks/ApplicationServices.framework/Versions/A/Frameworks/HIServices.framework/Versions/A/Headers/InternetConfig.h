@@ -3,7 +3,7 @@
  
      Contains:   Internet Config interfaces
  
-     Version:    HIServices-311~1
+     Version:    HIServices-382.2~1
  
      Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
  
@@ -12,6 +12,18 @@
  
                      http://developer.apple.com/bugreporter/
  
+*/
+
+/*
+
+    ***DEPRECATION NOTICE***
+
+    The Internet Config APIs are officially deprecated in 10.7.
+
+    You can replace your use of Internet Config APIs with LaunchServices APIs.
+    For example, to find which application is currently preferred for a
+    particular MIME type, use LSCopyApplicationForMIMEType().
+
 */
 
 /*
@@ -647,20 +659,20 @@ typedef ICServicesPtr *                 ICServicesHandle;
 
 /* ***** Starting Up and Shutting Down *****  */
 /*
- *  ICStart()
+ *  ICStart()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
 ICStart(
   ICInstance *  inst,
-  OSType        signature)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType        signature)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* Call this at application initialisation. Set signature to a value
@@ -668,18 +680,18 @@ ICStart(
    * of the IC system. Returns inst as a connection to the IC system.
    */
 /*
- *  ICStop()
+ *  ICStop()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
-ICStop(ICInstance inst)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ICStop(ICInstance inst)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [b5] 
@@ -687,13 +699,13 @@ ICStop(ICInstance inst)                                       AVAILABLE_MAC_OS_X
    * is no longer valid connection to IC.
    */
 /*
- *  ICGetVersion()
+ *  ICGetVersion()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -701,7 +713,7 @@ extern OSStatus
 ICGetVersion(
   ICInstance   inst,
   long         whichVersion,
-  UInt32 *     version)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  UInt32 *     version)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r4] [c3] [b3] 
@@ -710,13 +722,13 @@ ICGetVersion(
    * Pass kICNumVersion to get a NumVersion structure.
    */
 /*
- *  ICGetConfigName()
+ *  ICGetConfigName()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -724,7 +736,7 @@ extern OSStatus
 ICGetConfigName(
   ICInstance   inst,
   Boolean      longname,
-  Str255       name)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255       name)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r2] [c1] [b3] 
@@ -738,20 +750,20 @@ ICGetConfigName(
    */
 /* ***** Getting Information *****  */
 /*
- *  ICGetSeed()
+ *  ICGetSeed()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
 ICGetSeed(
   ICInstance   inst,
-  long *       seed)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *       seed)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [c3] [b3] 
@@ -760,20 +772,20 @@ ICGetSeed(
    * You can poll this to determine if any cached preferences change.
    */
 /*
- *  ICGetPerm()
+ *  ICGetPerm()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
 ICGetPerm(
   ICInstance   inst,
-  ICPerm *     perm)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICPerm *     perm)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [c3] [b3] 
@@ -783,20 +795,20 @@ ICGetPerm(
    */
 /* ***** Reading and Writing Preferences *****  */
 /*
- *  ICBegin()
+ *  ICBegin()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
 ICBegin(
   ICInstance   inst,
-  ICPerm       perm)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICPerm       perm)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [c1] [b5] 
@@ -809,13 +821,13 @@ ICBegin(
    * until you call ICEnd.
    */
 /*
- *  ICGetPref()
+ *  ICGetPref()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -825,7 +837,7 @@ ICGetPref(
   ConstStr255Param   key,
   ICAttr *           attr,
   void *             buf,
-  long *             size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *             size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [c1] [b4] 
@@ -844,13 +856,13 @@ ICGetPref(
    * Returns icPrefNotFound if there is no preference for the key.
    */
 /*
- *  ICSetPref()
+ *  ICSetPref()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -860,7 +872,7 @@ ICSetPref(
   ConstStr255Param   key,
   ICAttr             attr,
   const void *       buf,
-  long               size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long               size)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [c1] [b4] 
@@ -877,13 +889,13 @@ ICSetPref(
    * Returns icPermErr if current attr is locked, new attr is locked and buf <> nil.
    */
 /*
- *  ICFindPrefHandle()
+ *  ICFindPrefHandle()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -892,7 +904,7 @@ ICFindPrefHandle(
   ICInstance         inst,
   ConstStr255Param   key,
   ICAttr *           attr,
-  Handle             prefh)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle             prefh)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r2] [c1] [b4] 
@@ -905,13 +917,13 @@ ICFindPrefHandle(
    * If the preference does not exist, icPrefNotFoundErr is returned.
    */
 /*
- *  ICGetPrefHandle()
+ *  ICGetPrefHandle()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -920,7 +932,7 @@ ICGetPrefHandle(
   ICInstance         inst,
   ConstStr255Param   key,
   ICAttr *           attr,
-  Handle *           prefh)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle *           prefh)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b4] 
@@ -936,13 +948,13 @@ ICGetPrefHandle(
    * to an empty handle.
    */
 /*
- *  ICSetPrefHandle()
+ *  ICSetPrefHandle()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -951,7 +963,7 @@ ICSetPrefHandle(
   ICInstance         inst,
   ConstStr255Param   key,
   ICAttr             attr,
-  Handle             prefh)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle             prefh)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b4] 
@@ -967,20 +979,20 @@ ICSetPrefHandle(
    * Returns icPermErr if current attr is locked, new attr is locked and prefh <> nil.
    */
 /*
- *  ICCountPref()
+ *  ICCountPref()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
 ICCountPref(
   ICInstance   inst,
-  long *       count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *       count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [c1] [b1] 
@@ -988,13 +1000,13 @@ ICCountPref(
    * If the routine returns an error, count is set to 0.
    */
 /*
- *  ICGetIndPref()
+ *  ICGetIndPref()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1002,7 +1014,7 @@ extern OSStatus
 ICGetIndPref(
   ICInstance   inst,
   long         index,
-  Str255       key)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255       key)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [c1] [b1] 
@@ -1012,20 +1024,20 @@ ICGetIndPref(
    * If the routine returns an error, key is undefined.
    */
 /*
- *  ICDeletePref()
+ *  ICDeletePref()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
 ICDeletePref(
   ICInstance         inst,
-  ConstStr255Param   key)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param   key)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [c1] [b2] 
@@ -1034,18 +1046,18 @@ ICDeletePref(
    * Returns icPrefNotFound if the preference specified by key is not present.
    */
 /*
- *  ICEnd()
+ *  ICEnd()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
-ICEnd(ICInstance inst)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+ICEnd(ICInstance inst)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [c1] [b1] 
@@ -1053,13 +1065,13 @@ ICEnd(ICInstance inst)                                        AVAILABLE_MAC_OS_X
    * You must have called ICBegin before calling this routine.
    */
 /*
- *  ICGetDefaultPref()
+ *  ICGetDefaultPref()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1067,7 +1079,7 @@ extern OSStatus
 ICGetDefaultPref(
   ICInstance         inst,
   ConstStr255Param   key,
-  Handle             prefH)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle             prefH)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r4] [c3] [b5] 
@@ -1076,20 +1088,20 @@ ICGetDefaultPref(
    */
 /* ***** User Interface Stuff *****  */
 /*
- *  ICEditPreferences()
+ *  ICEditPreferences()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
 ICEditPreferences(
   ICInstance         inst,
-  ConstStr255Param   key)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param   key)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b3] 
@@ -1106,13 +1118,13 @@ ICEditPreferences(
    */
 /* ***** URL Handling *****  */
 /*
- *  ICLaunchURL()
+ *  ICLaunchURL()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1123,7 +1135,7 @@ ICLaunchURL(
   const void *       data,
   long               len,
   long *             selStart,
-  long *             selEnd)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *             selEnd)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b3] 
@@ -1144,13 +1156,13 @@ ICLaunchURL(
    * helper using the GURL AppleEvent.
    */
 /*
- *  ICParseURL()
+ *  ICParseURL()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1162,7 +1174,7 @@ ICParseURL(
   long               len,
   long *             selStart,
   long *             selEnd,
-  Handle             url)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle             url)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b3] 
@@ -1183,13 +1195,13 @@ ICParseURL(
    * and copied into the url handle, which is resized to fit.
    */
 /*
- *  ICCreateGURLEvent()
+ *  ICCreateGURLEvent()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1198,7 +1210,7 @@ ICCreateGURLEvent(
   ICInstance    inst,
   OSType        helperCreator,
   Handle        urlH,
-  AppleEvent *  theEvent)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AppleEvent *  theEvent)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r4] [c1] [b3] 
@@ -1206,20 +1218,20 @@ ICCreateGURLEvent(
    * code is helperCreator, with a direct object containing the URL text from urlH.
    */
 /*
- *  ICSendGURLEvent()
+ *  ICSendGURLEvent()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
 ICSendGURLEvent(
   ICInstance    inst,
-  AppleEvent *  theEvent)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AppleEvent *  theEvent)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r4] [c1] [b3] 
@@ -1232,13 +1244,13 @@ ICSendGURLEvent(
  * ----- High Level Routines -----
   */
 /*
- *  ICMapFilename()
+ *  ICMapFilename()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1246,7 +1258,7 @@ extern OSStatus
 ICMapFilename(
   ICInstance         inst,
   ConstStr255Param   filename,
-  ICMapEntry *       entry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICMapEntry *       entry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b4] 
@@ -1256,13 +1268,13 @@ ICMapFilename(
    * Returns icPrefNotFoundErr if no suitable entry is found.
    */
 /*
- *  ICMapTypeCreator()
+ *  ICMapTypeCreator()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1272,7 +1284,7 @@ ICMapTypeCreator(
   OSType             fType,
   OSType             fCreator,
   ConstStr255Param   filename,
-  ICMapEntry *       entry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICMapEntry *       entry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b4] 
@@ -1284,13 +1296,13 @@ ICMapTypeCreator(
    */
 /* ----- Mid Level Routines -----  */
 /*
- *  ICMapEntriesFilename()
+ *  ICMapEntriesFilename()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1299,7 +1311,7 @@ ICMapEntriesFilename(
   ICInstance         inst,
   Handle             entries,
   ConstStr255Param   filename,
-  ICMapEntry *       entry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICMapEntry *       entry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b3] 
@@ -1310,13 +1322,13 @@ ICMapEntriesFilename(
    * Returns icPrefNotFoundErr if no suitable entry is found.
    */
 /*
- *  ICMapEntriesTypeCreator()
+ *  ICMapEntriesTypeCreator()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1327,7 +1339,7 @@ ICMapEntriesTypeCreator(
   OSType             fType,
   OSType             fCreator,
   ConstStr255Param   filename,
-  ICMapEntry *       entry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICMapEntry *       entry)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b3] 
@@ -1340,13 +1352,13 @@ ICMapEntriesTypeCreator(
    */
 /* ----- Low Level Routines -----  */
 /*
- *  ICCountMapEntries()
+ *  ICCountMapEntries()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1354,7 +1366,7 @@ extern OSStatus
 ICCountMapEntries(
   ICInstance   inst,
   Handle       entries,
-  long *       count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *       count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b3] 
@@ -1363,13 +1375,13 @@ ICCountMapEntries(
    * count is set to the number of entries.
    */
 /*
- *  ICGetIndMapEntry()
+ *  ICGetIndMapEntry()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1379,7 +1391,7 @@ ICGetIndMapEntry(
   Handle        entries,
   long          index,
   long *        pos,
-  ICMapEntry *  entry)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICMapEntry *  entry)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b3] 
@@ -1392,13 +1404,13 @@ ICGetIndMapEntry(
    * Does not return any user data associated with the entry.
    */
 /*
- *  ICGetMapEntry()
+ *  ICGetMapEntry()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1407,7 +1419,7 @@ ICGetMapEntry(
   ICInstance    inst,
   Handle        entries,
   long          pos,
-  ICMapEntry *  entry)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICMapEntry *  entry)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b3] 
@@ -1418,13 +1430,13 @@ ICGetMapEntry(
    * Does not return any user data associated with the entry.
    */
 /*
- *  ICSetMapEntry()
+ *  ICSetMapEntry()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1433,7 +1445,7 @@ ICSetMapEntry(
   ICInstance          inst,
   Handle              entries,
   long                pos,
-  const ICMapEntry *  entry)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ICMapEntry *  entry)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b3] 
@@ -1446,13 +1458,13 @@ ICSetMapEntry(
    * Any user data associated with the entry is unmodified.
    */
 /*
- *  ICDeleteMapEntry()
+ *  ICDeleteMapEntry()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1460,7 +1472,7 @@ extern OSStatus
 ICDeleteMapEntry(
   ICInstance   inst,
   Handle       entries,
-  long         pos)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long         pos)                                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b3] 
@@ -1471,13 +1483,13 @@ ICDeleteMapEntry(
    * Also deletes any user data associated with the entry.
    */
 /*
- *  ICAddMapEntry()
+ *  ICAddMapEntry()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1485,7 +1497,7 @@ extern OSStatus
 ICAddMapEntry(
   ICInstance          inst,
   Handle              entries,
-  const ICMapEntry *  entry)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const ICMapEntry *  entry)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r1] [c1] [b3] 
@@ -1496,73 +1508,73 @@ ICAddMapEntry(
    */
 /* ***** Profile Management Routines *****  */
 /*
- *  ICGetCurrentProfile()
+ *  ICGetCurrentProfile()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
 ICGetCurrentProfile(
   ICInstance     inst,
-  ICProfileID *  currentID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICProfileID *  currentID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r3] [c1] [b3] 
    * Returns the profile ID of the current profile.
    */
 /*
- *  ICSetCurrentProfile()
+ *  ICSetCurrentProfile()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
 ICSetCurrentProfile(
   ICInstance    inst,
-  ICProfileID   newID)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICProfileID   newID)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r3] [c1] [b3] 
    * Sets the current profile to the profile specified in newProfile.
    */
 /*
- *  ICCountProfiles()
+ *  ICCountProfiles()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
 ICCountProfiles(
   ICInstance   inst,
-  long *       count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *       count)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r3] [c1] [b1] 
    * Returns the total number of profiles.
    */
 /*
- *  ICGetIndProfile()
+ *  ICGetIndProfile()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1570,7 +1582,7 @@ extern OSStatus
 ICGetIndProfile(
   ICInstance     inst,
   long           index,
-  ICProfileID *  thisID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICProfileID *  thisID)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r3] [c1] [b1] 
@@ -1579,13 +1591,13 @@ ICGetIndProfile(
    * of profiles.
    */
 /*
- *  ICGetProfileName()
+ *  ICGetProfileName()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1593,7 +1605,7 @@ extern OSStatus
 ICGetProfileName(
   ICInstance    inst,
   ICProfileID   thisID,
-  Str255        name)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str255        name)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r3] [c1] [b3] 
@@ -1602,13 +1614,13 @@ ICGetProfileName(
    * is assumed to be in the system script.
    */
 /*
- *  ICSetProfileName()
+ *  ICSetProfileName()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1616,7 +1628,7 @@ extern OSStatus
 ICSetProfileName(
   ICInstance         inst,
   ICProfileID        thisID,
-  ConstStr255Param   name)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ConstStr255Param   name)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r3] [c1] [b3] 
@@ -1624,13 +1636,13 @@ ICSetProfileName(
    * need not be unique.  The name should be in the system script.
    */
 /*
- *  ICAddProfile()
+ *  ICAddProfile()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
@@ -1638,7 +1650,7 @@ extern OSStatus
 ICAddProfile(
   ICInstance     inst,
   ICProfileID    prototypeID,
-  ICProfileID *  newID)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICProfileID *  newID)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r3] [c1] [b2] 
@@ -1650,20 +1662,20 @@ ICAddProfile(
    * This does not switch to the new profile.
    */
 /*
- *  ICDeleteProfile()
+ *  ICDeleteProfile()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.7
  *    CarbonLib:        in CarbonLib 1.0.2 and later
  *    Non-Carbon CFM:   in InternetConfig 2.5 and later
  */
 extern OSStatus 
 ICDeleteProfile(
   ICInstance    inst,
-  ICProfileID   thisID)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ICProfileID   thisID)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7;
 
 
 /* [r3] [c1] [b2] 

@@ -1,47 +1,52 @@
 /*!
  * @header CWWirelessProfile.h
- * @copyright 2009 Apple Inc. All rights reserved.
- * @updated 2009-05-20
+ * @copyright 2010 Apple Inc. All rights reserved.
+ * @updated 2010-03-09
  * @version 1.0.0
  */
 
 #ifndef _CORE_WLAN_WIRELESS_PROFILE_H_
 #define _CORE_WLAN_WIRELESS_PROFILE_H_
 
-@class CW8021XProfile;
+#import <Foundation/Foundation.h>
+
+@class CW8021XProfile, CWMutableNetworkProfile;
 
 /*!
  * @class
  * @abstract CoreWLAN wireless profile.
  * @discussion Encapsulates a stored wireless profile entry.
  */
-@interface CWWirelessProfile : NSObject <NSCopying, NSCoding>
+@interface CWWirelessProfile : NSObject <NSCopying, NSCoding> {
+@private
+    CWMutableNetworkProfile *_networkProfile;
+}
+
 
 /*!
  * @property
  * @abstract Wireless network name for the given CWWirelessProfile.
  */
-@property(readwrite, copy) NSString *ssid __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+@property(readwrite, copy) NSString *ssid NS_DEPRECATED_MAC(10_6, 10_7);
 
 /*!
  * @property
  * @abstract Security mode for the given CWWirelessProfile.
- * @see //apple_ref/occ/tdef/CWSecurityMode CWSecurityMode
  */
-@property(readwrite, retain) NSNumber *securityMode __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+@property(readwrite, retain) NSNumber *securityMode NS_DEPRECATED_MAC(10_6, 10_7);
 
 /*!
  * @property
  * @abstract The passphrase from the default login keychain for the given CWWirelessProfile.
  * @discussion This method may prompt the user to allow access to their default login keychain.
  */
-@property(readwrite, copy) NSString *passphrase __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+@property(readwrite, copy) NSString *passphrase NS_DEPRECATED_MAC(10_6, 10_7);
 
 /*!
  * @property
  * @abstract User CW8021XProfile for the given CWWirelessProfile.
  */
-@property(readwrite, retain) CW8021XProfile *user8021XProfile __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+@property(readwrite, retain) CW8021XProfile *user8021XProfile NS_DEPRECATED_MAC(10_6, 10_7);
 
 /*! @methodgroup Getting a wireless profile */
 /*!
@@ -50,14 +55,14 @@
  * @abstract Creates and returns an CWWirelessProfile.
  * @discussion This method is the designated initializer for the CWWirelessProfile class.
  */
-- (CWWirelessProfile*)init __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+- (CWWirelessProfile*)init NS_DEPRECATED_MAC(10_6, 10_7);
 
 /*!
  * @method
  * @result An CWWirelessProfile object.
  * @abstract Convenience method for getting an CWWirelessProfile object.
  */
-+ (CWWirelessProfile*)profile __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
++ (CWWirelessProfile*)profile NS_DEPRECATED_MAC(10_6, 10_7);
 
 /*! @methodgroup Comparing wireless profiles */
 /*!
@@ -67,7 +72,7 @@
  * @abstract Method for determining CWWirelessProfile object equality.
  * @discussion Two CWWirelessProfile objects are considered equal if all their corresponding properties are equal. 
  */
-- (BOOL)isEqualToProfile:(CWWirelessProfile*)profile __OSX_AVAILABLE_STARTING( __MAC_10_6, __IPHONE_NA );
+- (BOOL)isEqualToProfile:(CWWirelessProfile*)profile NS_DEPRECATED_MAC(10_6, 10_7);
 @end
 
 #endif /* _CORE_WLAN_WIRELESS_PROFILE_H_ */

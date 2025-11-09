@@ -110,7 +110,10 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
   // significantly more efficient than incrementing iterators.
   template<typename _CharT>
     inline
-    ostreambuf_iterator<_CharT>
+#if BUILDING_LIBSTDCXX
+	__attribute__((used))
+#endif
+	ostreambuf_iterator<_CharT>
     __write(ostreambuf_iterator<_CharT> __s, const _CharT* __ws, int __len)
     {
       __s._M_put(__ws, __len);

@@ -1,5 +1,5 @@
 /*	NSPort.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -20,7 +20,6 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 // class.  Otherwise, it returns an instance of a concrete
 // subclass which can be used for messaging between threads
 // or processes on the local machine.
-+ (id)allocWithZone:(NSZone *)zone;
 
 + (NSPort *)port;
 
@@ -52,7 +51,7 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 	// receives this message.  If multiple DO transports are
 	// being used in the same program, this requires some care.
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_WIN32)
 - (void)addConnection:(NSConnection *)conn toRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
 - (void)removeConnection:(NSConnection *)conn fromRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode;
 	// The default implementation of these two methods is to
@@ -74,6 +73,7 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
 
+NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE 
 @interface NSMachPort : NSPort {
     @private
     id _delegate;
@@ -88,16 +88,16 @@ FOUNDATION_EXPORT NSString * const NSPortDidBecomeInvalidNotification;
 - (void)setDelegate:(id <NSMachPortDelegate>)anObject;
 - (id <NSMachPortDelegate>)delegate;
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_2_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
 enum {
     NSMachPortDeallocateNone = 0,
     NSMachPortDeallocateSendRight = (1UL << 0),
     NSMachPortDeallocateReceiveRight = (1UL << 1)
 };
-
-+ (NSPort *)portWithMachPort:(uint32_t)machPort options:(NSUInteger)f AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (id)initWithMachPort:(uint32_t)machPort options:(NSUInteger)f AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 #endif
+
++ (NSPort *)portWithMachPort:(uint32_t)machPort options:(NSUInteger)f NS_AVAILABLE(10_5, 2_0);
+- (id)initWithMachPort:(uint32_t)machPort options:(NSUInteger)f NS_AVAILABLE(10_5, 2_0);
 
 - (uint32_t)machPort;
 
@@ -122,6 +122,7 @@ enum {
 
 // A subclass of NSPort which can be used for local
 // message sending on all platforms.
+NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE 
 @interface NSMessagePort : NSPort {
     @private
     void * __strong _port;
@@ -138,7 +139,7 @@ enum {
 @interface NSSocketPort : NSPort {
     @private
     void * __strong _receiver;
-    void * __strong _connectors;
+    id _connectors;
     void * __strong _loops;
     void * __strong _data;
     id _signature;

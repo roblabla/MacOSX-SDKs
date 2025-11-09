@@ -1,7 +1,7 @@
 /*
         NSOpenGLLayer.h
         Application Kit
-        Copyright (c) 2008-2009, Apple Inc.
+        Copyright (c) 2008-2011, Apple Inc.
         All rights reserved.
 */
 
@@ -9,8 +9,8 @@
 #import <AppKit/NSOpenGL.h>
 #import <QuartzCore/CAOpenGLLayer.h>
 
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
+NS_CLASS_AVAILABLE(10_6, NA)
 @interface NSOpenGLLayer : CAOpenGLLayer
 {
 @private
@@ -49,4 +49,3 @@
 
 @end
 
-#endif

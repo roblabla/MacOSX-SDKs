@@ -41,6 +41,8 @@
 extern "C" {
 #endif
 
+#define __SAFE_CAST_PTR(type, var) ((type)(var))
+
 /*!
  * @header
  *
@@ -64,6 +66,8 @@ extern Boolean OSCompareAndSwap64(
     UInt64            oldValue,
     UInt64            newValue,
     volatile UInt64 * address);
+#define OSCompareAndSwap64(a, b, c) \
+	(OSCompareAndSwap64(a, b, __SAFE_CAST_PTR(volatile UInt64*,c)))
 
 #endif /* defined(__i386__) || defined(__x86_64__) */
 
@@ -81,6 +85,8 @@ extern Boolean OSCompareAndSwap64(
 extern SInt64 OSAddAtomic64(
     SInt64            theAmount,
     volatile SInt64 * address);
+#define OSAddAtomic64(a, b) \
+	(OSAddAtomic64(a, __SAFE_CAST_PTR(volatile SInt64*,b)))
 
 /*!
  * @function OSIncrementAtomic64
@@ -113,18 +119,6 @@ inline static SInt64 OSDecrementAtomic64(volatile SInt64 * address)
 #endif  /* defined(__i386__) || defined(__x86_64__) || defined(__arm__) */
 
 
-/*
- * The macro SAFE_CAST_PTR() casts one type of pointer to another type, making sure
- * the data the pointer is referencing is the same size. If it is not, it will cause
- * a division by zero compiler warning. This is to work around "SInt32" being defined
- * as "long" on ILP32 and as "int" on LP64, which would require an explicit cast to
- * "SInt32*" when for instance passing an "int*" to OSAddAtomic() - which masks size
- * mismatches.
- * -- var is used twice, but sizeof does not evaluate the
- *    argument, i.e. we're safe against "++" etc. in var --
- */
-#define SAFE_CAST_PTR(type, var) ((type)(var))
-
 /*!
  * @function OSCompareAndSwap
  *
@@ -146,7 +140,7 @@ extern Boolean OSCompareAndSwap(
     UInt32            newValue,
     volatile UInt32 * address);
 #define OSCompareAndSwap(a, b, c) \
-	(OSCompareAndSwap(a, b, SAFE_CAST_PTR(volatile UInt32*,c)))
+	(OSCompareAndSwap(a, b, __SAFE_CAST_PTR(volatile UInt32*,c)))
 
 /*!
  * @function OSCompareAndSwapPtr
@@ -168,7 +162,7 @@ extern Boolean OSCompareAndSwapPtr(
     void            * newValue,
     void * volatile * address);
 #define OSCompareAndSwapPtr(a, b, c) \
-	(OSCompareAndSwapPtr(a, b, SAFE_CAST_PTR(void * volatile *,c)))
+	(OSCompareAndSwapPtr(a, b, __SAFE_CAST_PTR(void * volatile *,c)))
 
 /*!
  * @function OSAddAtomic
@@ -188,7 +182,7 @@ extern SInt32 OSAddAtomic(
     SInt32            amount,
     volatile SInt32 * address);
 #define OSAddAtomic(a, b) \
-	(OSAddAtomic(a, SAFE_CAST_PTR(volatile SInt32*,b)))
+	(OSAddAtomic(a, __SAFE_CAST_PTR(volatile SInt32*,b)))
 
 /*!
  * @function OSAddAtomic16
@@ -241,7 +235,7 @@ extern SInt8 OSAddAtomic8(
  */
 extern SInt32 OSIncrementAtomic(volatile SInt32 * address);
 #define OSIncrementAtomic(a) \
-	(OSIncrementAtomic(SAFE_CAST_PTR(volatile SInt32*,a)))
+	(OSIncrementAtomic(__SAFE_CAST_PTR(volatile SInt32*,a)))
 
 /*!
  * @function OSIncrementAtomic16
@@ -288,7 +282,7 @@ extern SInt8 OSIncrementAtomic8(volatile SInt8 * address);
  */
 extern SInt32 OSDecrementAtomic(volatile SInt32 * address);
 #define OSDecrementAtomic(a) \
-	(OSDecrementAtomic(SAFE_CAST_PTR(volatile SInt32*,a)))
+	(OSDecrementAtomic(__SAFE_CAST_PTR(volatile SInt32*,a)))
 
 /*!
  * @function OSDecrementAtomic16
@@ -338,7 +332,7 @@ extern UInt32 OSBitAndAtomic(
     UInt32            mask,
     volatile UInt32 * address);
 #define OSBitAndAtomic(a, b) \
-	(OSBitAndAtomic(a, SAFE_CAST_PTR(volatile UInt32*,b)))
+	(OSBitAndAtomic(a, __SAFE_CAST_PTR(volatile UInt32*,b)))
 
 /*!
  * @function OSBitAndAtomic16
@@ -394,7 +388,7 @@ extern UInt32 OSBitOrAtomic(
     UInt32            mask,
     volatile UInt32 * address);
 #define OSBitOrAtomic(a, b) \
-	(OSBitOrAtomic(a, SAFE_CAST_PTR(volatile UInt32*,b)))
+	(OSBitOrAtomic(a, __SAFE_CAST_PTR(volatile UInt32*,b)))
 
 /*!
  * @function OSBitOrAtomic16
@@ -450,7 +444,7 @@ extern UInt32 OSBitXorAtomic(
     UInt32            mask,
     volatile UInt32 * address);
 #define OSBitXorAtomic(a, b) \
-	(OSBitXorAtomic(a, SAFE_CAST_PTR(volatile UInt32*,b)))
+	(OSBitXorAtomic(a, __SAFE_CAST_PTR(volatile UInt32*,b)))
 
 /*!
  * @function OSBitXorAtomic16
@@ -524,44 +518,28 @@ extern Boolean OSTestAndClear(
     UInt32           bit,
     volatile UInt8 * startAddress);
 
-#ifdef __ppc__
 /*!
- * @function OSEnqueueAtomic
+ * @defined OS_SPINLOCK_INIT
  *
  * @abstract
- * Singly linked list head insertion, performed atomically with respect to all devices that participate in the coherency architecture of the platform.
+ * The default value for an OSSpinLock.
  *
  * @discussion
- * The OSEnqueueAtomic function places an element at the head of a single linked list, which is specified with the address of a head pointer, listHead. The element structure has a next field whose offset is specified.
- *
- * This function guarantees atomicity only with main system memory. It is specifically unsuitable for use on noncacheable memory such as that in devices; this function cannot guarantee atomicity, for example, on memory mapped from a PCI device. Additionally, this function incorporates a memory barrier on systems with weakly-ordered memory architectures.
- * @param listHead The address of a head pointer for the list .
- * @param element The list element to insert at the head of the list.
- * @param elementNextFieldOffset The byte offset into the element where a pointer to the next element in the list is stored.
+ * The convention is that unlocked is zero, locked is nonzero.
  */
-extern void OSEnqueueAtomic(
-    void * volatile * listHead,
-    void            * element,
-    SInt32            elementNextFieldOffset);
+#define	OS_SPINLOCK_INIT 0
 
-/*!
- * @function OSDequeueAtomic
+/*! 
+ * @typedef OSSpinLock
  *
  * @abstract
- * Singly linked list element head removal, performed atomically with respect to all devices that participate in the coherency architecture of the platform.
+ * Data type for a spinlock.
  *
  * @discussion
- * The OSDequeueAtomic function removes an element from the head of a single linked list, which is specified with the address of a head pointer, listHead. The element structure has a next field whose offset is specified.
- *
- * This function guarantees atomicity only with main system memory. It is specifically unsuitable for use on noncacheable memory such as that in devices; this function cannot guarantee atomicity, for example, on memory mapped from a PCI device. Additionally, this function incorporates a memory barrier on systems with weakly-ordered memory architectures.
- * @param listHead The address of a head pointer for the list .
- * @param elementNextFieldOffset The byte offset into the element where a pointer to the next element in the list is stored.
- * @result A removed element, or zero if the list is empty.
+ * You should always initialize a spinlock to OS_SPINLOCK_INIT before using it.
  */
-extern void * OSDequeueAtomic(
-    void * volatile * listHead,
-    SInt32            elementNextFieldOffset);
-#endif /* __ppc__ */
+typedef SInt32 OSSpinLock;
+
 
 /*!
  * @function OSSynchronizeIO
@@ -577,9 +555,6 @@ extern void OSSynchronizeIO(void);
 #else
 static __inline__ void OSSynchronizeIO(void)
 {
-#if defined(__ppc__)
-        __asm__ ("eieio");
-#endif
 }
 #endif
 

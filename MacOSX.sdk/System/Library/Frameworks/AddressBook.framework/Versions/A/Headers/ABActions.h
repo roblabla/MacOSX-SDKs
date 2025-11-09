@@ -36,7 +36,7 @@
 //
 // Action plugins are stored in ~/Library/Address Book Plug-Ins or /Library/Address Book Plug-Ins
 
-// The Principle class of the NSBundle is the object that is expected to implement the
+// The Principal class of the NSBundle is the object that is expected to implement the
 // methods below.
 // There can be only 1 Action plugin per bundle.
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -70,6 +70,11 @@
 #include <sys/cdefs.h>
 
 #define	PR_SLOWHZ	2		/* 2 slow timeouts per second */
+#ifndef __APPLE__
+/*
+ * See rdar://7617868: pr_fasttimo was removed use your own timer or pr_slowtimo instead
+ */
 #define	PR_FASTHZ	5		/* 5 fast timeouts per second */
+#endif
 
 #endif	/* !_SYS_PROTOSW_H_ */

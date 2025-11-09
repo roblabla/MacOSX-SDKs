@@ -42,6 +42,8 @@
 // SCSI Architecture Model Family includes
 #include <IOKit/scsi/IOSCSIPrimaryCommandsDevice.h>
 
+// Build includes
+#include <TargetConditionals.h>
 
 //-----------------------------------------------------------------------------
 //	Constants
@@ -83,12 +85,12 @@ class IOSCSIReducedBlockCommandsDevice : public IOSCSIPrimaryCommandsDevice
 	
 private:
 	
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	
     SCSIReducedBlockCommands *		fSCSIReducedBlockCommandObject;
     SCSIReducedBlockCommands *		GetSCSIReducedBlockCommandObject ( void );
 	
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	static void			AsyncReadWriteComplete ( SCSITaskIdentifier completedTask );
 	
@@ -161,14 +163,14 @@ protected:
 									 UInt64					blockCount,
 									 void *					clientData );
 
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	
 	// This method will retreive the SCSI Primary Command Set object for
 	// the class.  For subclasses, this will be overridden using a
 	// dynamic cast on the subclasses base command set object.
 	virtual SCSIPrimaryCommands *	GetSCSIPrimaryCommandObject ( void );
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 	// ----- Power Management Support ------
 		
@@ -217,12 +219,12 @@ protected:
 	
 	virtual void 		free ( void );
 	
-#ifndef __LP64__
+#if ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED )
 	
 	virtual bool		CreateCommandSetObjects ( void );
 	virtual void		FreeCommandSetObjects ( void );
 
-#endif	/* !__LP64__ */
+#endif	/* ( !defined ( __LP64__ ) && !TARGET_OS_EMBEDDED ) */
 	
 public:
 	

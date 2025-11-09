@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -65,16 +65,22 @@
 #define _NETINET_TCP_TIMER_H_
 #include <sys/appleapiopts.h>
 
+
 /*
- * Definitions of the TCP timers.  These timers are counted
- * down PR_SLOWHZ times a second.
+ * Definitions of the TCP timers.
  */
-#define	TCPT_NTIMERS	4
+#define	TCPT_NTIMERS	5
+
+/* Keep the external definition the same for binary compatibility */
+#define TCPT_NTIMERS_EXT	4
 
 #define	TCPT_REXMT	0		/* retransmit */
 #define	TCPT_PERSIST	1		/* retransmit persistence */
 #define	TCPT_KEEP	2		/* keep alive */
 #define	TCPT_2MSL	3		/* 2*msl quiet time timer */
+#define	TCPT_DELACK	4		/* delayed ack timer */
+#define	TCPT_MAX	4
+#define	TCPT_NONE	(TCPT_MAX + 1)	
 
 /*
  * The TCPT_REXMT timer is used to force retransmissions.

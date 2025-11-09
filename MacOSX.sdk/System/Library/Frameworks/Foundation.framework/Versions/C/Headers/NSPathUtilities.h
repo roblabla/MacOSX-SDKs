@@ -1,5 +1,5 @@
 /*	NSPathUtilities.h
-	Copyright (c) 1994-2009, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSString.h>
@@ -57,28 +57,22 @@ enum {
     NSDemoApplicationDirectory,             // unsupported applications, demonstration versions (Demos)
     NSDeveloperApplicationDirectory,        // developer applications (Developer/Applications). DEPRECATED - there is no one single Developer directory.
     NSAdminApplicationDirectory,            // system and network administration applications (Administration)
-    NSLibraryDirectory,                     // various user-visible documentation, support, and configuration files, resources (Library)
+    NSLibraryDirectory,                     // various documentation, support, and configuration files, resources (Library)
     NSDeveloperDirectory,                   // developer resources (Developer) DEPRECATED - there is no one single Developer directory.
     NSUserDirectory,                        // user home directories (Users)
     NSDocumentationDirectory,               // documentation (Documentation)
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
     NSDocumentDirectory,                    // documents (Documents)
-#endif
-#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
     NSCoreServiceDirectory,                 // location of CoreServices directory (System/Library/CoreServices)
-#endif
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
     NSAutosavedInformationDirectory = 11,   // location of autosaved documents (Documents/Autosaved)
 #endif
-#if MAC_OS_X_VERSION_10_4 <= MAC_OS_X_VERSION_MAX_ALLOWED
     NSDesktopDirectory = 12,                // location of user's desktop
     NSCachesDirectory = 13,                 // location of discardable cache files (Library/Caches)
     NSApplicationSupportDirectory = 14,     // location of application support files (plug-ins, etc) (Library/Application Support)
-#endif
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_2_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
     NSDownloadsDirectory = 15,              // location of the user's "Downloads" directory
 #endif
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED || __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED
     NSInputMethodsDirectory = 16,           // input methods (Library/Input Methods)
     NSMoviesDirectory = 17,                 // location of user's Movies directory (~/Movies)
     NSMusicDirectory = 18,                  // location of user's Music directory (~/Music)

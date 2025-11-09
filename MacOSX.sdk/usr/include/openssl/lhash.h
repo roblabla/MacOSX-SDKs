@@ -63,6 +63,8 @@
 #ifndef HEADER_LHASH_H
 #define HEADER_LHASH_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/e_os2.h>
 #ifndef OPENSSL_NO_FP_API
 #include <stdio.h>
@@ -171,26 +173,26 @@ typedef struct lhash_st
  * in lh_insert(). */
 #define lh_error(lh)	((lh)->error)
 
-LHASH *lh_new(LHASH_HASH_FN_TYPE h, LHASH_COMP_FN_TYPE c);
-void lh_free(LHASH *lh);
-void *lh_insert(LHASH *lh, void *data);
-void *lh_delete(LHASH *lh, const void *data);
-void *lh_retrieve(LHASH *lh, const void *data);
-void lh_doall(LHASH *lh, LHASH_DOALL_FN_TYPE func);
-void lh_doall_arg(LHASH *lh, LHASH_DOALL_ARG_FN_TYPE func, void *arg);
-unsigned long lh_strhash(const char *c);
-unsigned long lh_num_items(const LHASH *lh);
+LHASH *lh_new(LHASH_HASH_FN_TYPE h, LHASH_COMP_FN_TYPE c) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void lh_free(LHASH *lh) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void *lh_insert(LHASH *lh, void *data) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void *lh_delete(LHASH *lh, const void *data) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void *lh_retrieve(LHASH *lh, const void *data) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void lh_doall(LHASH *lh, LHASH_DOALL_FN_TYPE func) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void lh_doall_arg(LHASH *lh, LHASH_DOALL_ARG_FN_TYPE func, void *arg) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned long lh_strhash(const char *c) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned long lh_num_items(const LHASH *lh) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifndef OPENSSL_NO_FP_API
-void lh_stats(const LHASH *lh, FILE *out);
-void lh_node_stats(const LHASH *lh, FILE *out);
-void lh_node_usage_stats(const LHASH *lh, FILE *out);
+void lh_stats(const LHASH *lh, FILE *out) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void lh_node_stats(const LHASH *lh, FILE *out) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void lh_node_usage_stats(const LHASH *lh, FILE *out) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
 #ifndef OPENSSL_NO_BIO
-void lh_stats_bio(const LHASH *lh, BIO *out);
-void lh_node_stats_bio(const LHASH *lh, BIO *out);
-void lh_node_usage_stats_bio(const LHASH *lh, BIO *out);
+void lh_stats_bio(const LHASH *lh, BIO *out) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void lh_node_stats_bio(const LHASH *lh, BIO *out) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void lh_node_usage_stats_bio(const LHASH *lh, BIO *out) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 #ifdef  __cplusplus
 }

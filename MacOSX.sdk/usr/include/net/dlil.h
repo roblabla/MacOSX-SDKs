@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009 Apple Inc. All rights reserved.
+ * Copyright (c) 1999-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -24,12 +24,6 @@
  * limitations under the License.
  * 
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
- */
-/*
- *	Copyright (c) 1999 Apple Computer, Inc. 
- *
- *	Data Link Inteface Layer
- *	Author: Ted Walker
  */
 #ifndef DLIL_H
 #define DLIL_H

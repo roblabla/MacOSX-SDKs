@@ -4,7 +4,7 @@
    All rights reserved. */
 
 /* The gradient layer draws a color gradient over its background color,
- * filling the shape of the layer (i.e. including rounded corners.) */
+ * filling the shape of the layer (i.e. including rounded corners). */
 
 #import <QuartzCore/CALayer.h>
 
@@ -28,14 +28,14 @@
  * coordinate space. The start point corresponds to the first gradient
  * stop, the end point to the last gradient stop. Both points are
  * defined in a unit coordinate space that is then mapped to the
- * layer's bounds rectangle when drawn. (i.e. [0,0] is the bottom-left
+ * layer's bounds rectangle when drawn. (I.e. [0,0] is the bottom-left
  * corner of the layer, [1,1] is the top-right corner.) The default values
  * are [.5,0] and [.5,1] respectively. Both are animatable. */
 
 @property CGPoint startPoint, endPoint;
 
 /* The kind of gradient that will be drawn. Currently the only allowed
- * value is `axial' (the default value.). */
+ * value is `axial' (the default value). */
 
 @property(copy) NSString *type;
 
@@ -44,4 +44,4 @@
 /** `type' values. **/
 
 CA_EXTERN NSString * const kCAGradientLayerAxial
-    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_NA);
+    __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);

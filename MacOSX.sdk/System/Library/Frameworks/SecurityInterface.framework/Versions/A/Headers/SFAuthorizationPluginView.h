@@ -8,8 +8,6 @@
 #ifndef _SFAUTHORIZATIONPLUGINVIEW_H_
 #define _SFAUTHORIZATIONPLUGINVIEW_H_
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 #import <Cocoa/Cocoa.h>
 #import <Security/AuthorizationPlugin.h>
 
@@ -192,9 +190,6 @@ typedef enum
 extern NSString	* const SFAuthorizationPluginViewUserNameKey;
 extern NSString	* const SFAuthorizationPluginViewUserShortNameKey;
 extern NSString	* const SFDisplayViewException;
-
-
-#endif /* MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED */
 
 #endif /* !_SFAUTHORIZATIONPLUGINVIEW_H_ */
 

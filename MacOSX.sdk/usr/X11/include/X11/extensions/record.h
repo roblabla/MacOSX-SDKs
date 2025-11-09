@@ -1,7 +1,3 @@
-/* 
-$Xorg: record.h,v 1.3 2000/08/18 04:05:46 coskrey Exp $
-*/
-
 /***************************************************************************
  * Copyright 1995 Network Computing Devices
  *
@@ -9,66 +5,44 @@ $Xorg: record.h,v 1.3 2000/08/18 04:05:46 coskrey Exp $
  * its documentation for any purpose is hereby granted without fee, provided
  * that the above copyright notice appear in all copies and that both that
  * copyright notice and this permission notice appear in supporting
- * documentation, and that the name of Network Computing Devices 
+ * documentation, and that the name of Network Computing Devices
  * not be used in advertising or publicity pertaining to distribution
  * of the software without specific, written prior permission.
  *
- * NETWORK COMPUTING DEVICES DISCLAIMs ALL WARRANTIES WITH REGARD TO 
- * THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY 
- * AND FITNESS, IN NO EVENT SHALL NETWORK COMPUTING DEVICES BE LIABLE 
- * FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES 
- * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN 
- * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING 
+ * NETWORK COMPUTING DEVICES DISCLAIMs ALL WARRANTIES WITH REGARD TO
+ * THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+ * AND FITNESS, IN NO EVENT SHALL NETWORK COMPUTING DEVICES BE LIABLE
+ * FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
+ * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  **************************************************************************/
-/* $XFree86$ */
 
 #ifndef _RECORD_H_
 #define _RECORD_H_
 
-#define XRecordBadContext       0	/* Not a valid RC */
-
-/*
- * Constants for arguments of various requests
- */
-#define	XRecordFromServerTime		0x01
-#define	XRecordFromClientTime		0x02
-#define	XRecordFromClientSequence	0x04
-
-#define XRecordCurrentClients		1
-#define XRecordFutureClients		2
-#define XRecordAllClients		3
-
-#define XRecordFromServer           	0
-#define XRecordFromClient               1
-#define XRecordClientStarted           	2
-#define XRecordClientDied               3
-#define XRecordStartOfData		4
-#define XRecordEndOfData		5
+#include <X11/extensions/recordconst.h>
 
 typedef unsigned long   XRecordClientSpec;
-
-#ifndef _XRECORD_SERVER_
-
-typedef unsigned long 	XRecordContext;
+typedef unsigned long	XRecordContext;
 
 typedef struct
 {
-    unsigned char 	first;
-    unsigned char 	last;
+    unsigned char	first;
+    unsigned char	last;
 } XRecordRange8;
 
 typedef struct
 {
-    unsigned short 	first;
-    unsigned short 	last;
-} XRecordRange16; 
+    unsigned short	first;
+    unsigned short	last;
+} XRecordRange16;
 
 typedef struct
 {
     XRecordRange8	ext_major;
-    XRecordRange16 	ext_minor; 
-} XRecordExtRange; 
+    XRecordRange16	ext_minor;
+} XRecordExtRange;
 
 typedef struct
 {
@@ -77,43 +51,43 @@ typedef struct
     XRecordExtRange   ext_requests;	/* extension requests */
     XRecordExtRange   ext_replies;	/* extension replies */
     XRecordRange8     delivered_events;	/* delivered core and ext events */
-    XRecordRange8     device_events; 	/* all core and ext device events */
+    XRecordRange8     device_events;	/* all core and ext device events */
     XRecordRange8     errors;		/* core X and ext errors */
     Bool	      client_started;	/* connection setup reply */
-    Bool              client_died; 	/* notice of client disconnect */    
+    Bool              client_died;	/* notice of client disconnect */
 } XRecordRange;
 
 typedef struct
 {
-    XRecordClientSpec 	client;
-    unsigned long 	nranges; 
-    XRecordRange 	**ranges;
+    XRecordClientSpec	client;
+    unsigned long	nranges;
+    XRecordRange	**ranges;
 } XRecordClientInfo;
 
 typedef struct
 {
-    Bool 		enabled;
-    int			datum_flags; 
-    unsigned long 	nclients; 
-    XRecordClientInfo 	**client_info;
+    Bool		enabled;
+    int			datum_flags;
+    unsigned long	nclients;
+    XRecordClientInfo	**client_info;
 } XRecordState;
 
 typedef struct
 {
-    XID 		id_base;
-    Time		server_time; 
-    unsigned long 	client_seq;
-    int			category; 
-    Bool 		client_swapped;
-    unsigned char 	*data;
-    unsigned long 	data_len;	/* in 4-byte units */
+    XID		id_base;
+    Time		server_time;
+    unsigned long	client_seq;
+    int			category;
+    Bool		client_swapped;
+    unsigned char	*data;
+    unsigned long	data_len;	/* in 4-byte units */
 } XRecordInterceptData;
 
 _XFUNCPROTOBEGIN
 
 /*********************************************************
  *
- * Prototypes 
+ * Prototypes
  *
  */
 
@@ -122,16 +96,16 @@ XID XRecordIdBaseMask(
 );
 
 extern Status XRecordQueryVersion(
-    Display* 			/* dpy */,
-    int* 			/* cmajor_return */, 
-    int*			/* cminor_return */  
+    Display*			/* dpy */,
+    int*			/* cmajor_return */,
+    int*			/* cminor_return */
 );
 
 extern XRecordContext XRecordCreateContext(
-    Display*			/* dpy */, 
-    int				/* datum_flags */, 
+    Display*			/* dpy */,
+    int				/* datum_flags */,
     XRecordClientSpec*		/* clients */,
-    int				/* nclients */,     
+    int				/* nclients */,
     XRecordRange**              /* ranges */,
     int				/* nranges */
 );
@@ -141,71 +115,69 @@ extern XRecordRange *XRecordAllocRange(
 );
 
 extern Status XRecordRegisterClients(
-    Display* 			/* dpy */, 
-    XRecordContext 		/* context */, 
+    Display*			/* dpy */,
+    XRecordContext		/* context */,
     int				/* datum_flags */,
     XRecordClientSpec*		/* clients */,
-    int				/* nclients */, 
-    XRecordRange** 		/* ranges */,  
+    int				/* nclients */,
+    XRecordRange**		/* ranges */,
     int				/* nranges */
 );
 
 extern Status XRecordUnregisterClients(
-    Display* 			/* dpy */, 
-    XRecordContext 		/* context */, 
+    Display*			/* dpy */,
+    XRecordContext		/* context */,
     XRecordClientSpec*		/* clients */,
-    int				/* nclients */ 
+    int				/* nclients */
 );
 
 extern Status XRecordGetContext(
     Display*			/* dpy */,
-    XRecordContext 		/* context */, 
-    XRecordState** 		/* state_return */ 
+    XRecordContext		/* context */,
+    XRecordState**		/* state_return */
 );
 
 extern void XRecordFreeState(
 XRecordState*			/* state */
-); 
+);
 
 typedef void (*XRecordInterceptProc) (
-    XPointer			/* closure */, 
+    XPointer			/* closure */,
     XRecordInterceptData*	/* recorded_data */
 );
 
 extern Status XRecordEnableContext(
     Display*			/* dpy */,
-    XRecordContext 		/* context */, 
+    XRecordContext		/* context */,
     XRecordInterceptProc	/* callback */,
     XPointer			/* closure */
-); 
+);
 
 extern Status XRecordEnableContextAsync(
     Display*			/* dpy */,
-    XRecordContext 		/* context */, 
+    XRecordContext		/* context */,
     XRecordInterceptProc	/* callback */,
     XPointer			/* closure */
-); 
+);
 
 extern void XRecordProcessReplies(
     Display*			/* dpy */
-); 
+);
 
 extern void XRecordFreeData(
 XRecordInterceptData*	/* data */
-); 
+);
 
 extern Status XRecordDisableContext(
     Display*			/* dpy */,
-    XRecordContext 		/* context */
-); 
+    XRecordContext		/* context */
+);
 
 extern Status XRecordFreeContext(
-    Display* 			/* dpy */, 
-    XRecordContext 		/* context */
+    Display*			/* dpy */,
+    XRecordContext		/* context */
 );
 
 _XFUNCPROTOEND
 
-#endif /* _XRECORD_SERVER_ */
-
-#endif /* _RECORD_H_ */
+#endif

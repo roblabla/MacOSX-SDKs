@@ -47,7 +47,7 @@ typedef enum {
 	XGResourceActionGetOutputStreams,
 	XGResourceActionGetOutputFiles,
 	XGResourceActionGetSpecification
-} XGResourceAction;
+} XGResourceAction NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@enum XGActionMonitorOutcome
@@ -60,21 +60,21 @@ typedef enum {
 	XGActionMonitorOutcomeNone = 0,
 	XGActionMonitorOutcomeSuccess,
 	XGActionMonitorOutcomeFailure
-} XGActionMonitorOutcome;
+} XGActionMonitorOutcome NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@const XGActionMonitorResultsOutputStreamsKey
 	@discussion The key used to retrieve the output streams from the results dictionary following
 	a successful outcome to a XGResourceActionGetOutputStreams action.
 */
-extern NSString * const XGActionMonitorResultsOutputStreamsKey;
+extern NSString * const XGActionMonitorResultsOutputStreamsKey NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@const XGActionMonitorResultsOutputFilesKey
 	@discussion The key used to retrieve the output files from the results dictionary following
 	a successful outcome to a XGResourceActionGetOutputFiles action.
 */
-extern NSString * const XGActionMonitorResultsOutputFilesKey;
+extern NSString * const XGActionMonitorResultsOutputFilesKey NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@class XGActionMonitor
@@ -97,13 +97,13 @@ extern NSString * const XGActionMonitorResultsOutputFilesKey;
 	@method actionMonitorWithResource:action:
 	@abstract Returns an instance initialized with a resource and an action.
 */
-+ (id)actionMonitorWithResource:(XGResource *)resource action:(XGResourceAction)action;
++ (id)actionMonitorWithResource:(XGResource *)resource action:(XGResourceAction)action NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method actionMonitorWithResource:action:
 	@abstract Returns an instance initialized with a resource, action, and parameters.
 */
-+ (id)actionMonitorWithResource:(XGResource *)resource action:(XGResourceAction)action parameters:(NSDictionary *)parameters;
++ (id)actionMonitorWithResource:(XGResource *)resource action:(XGResourceAction)action parameters:(NSDictionary *)parameters NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method initWithResource:action:parameters:
@@ -113,28 +113,28 @@ extern NSString * const XGActionMonitorResultsOutputFilesKey;
 	@param parameters The parameters to perform the action with.
 	@result An initialized XGActionMonitor object.
 */
-- (id)initWithResource:(id)resource action:(XGResourceAction)action parameters:(NSDictionary *)parameters;
+- (id)initWithResource:(id)resource action:(XGResourceAction)action parameters:(NSDictionary *)parameters NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method resource
 	@abstract Returns the XGResource instance the monitored action is being performed on.
 	@result The XGResource instance.
 */
-- (XGResource *)resource;
+- (XGResource *)resource NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method action
 	@abstract Returns the XGResourceAction being monitored.
 	@result The XGResourceAction.
 */
-- (XGResourceAction)action;
+- (XGResourceAction)action NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method parameters
 	@abstract Returns the parameters of the action being monitored.
 	@result The parameters dictionary.
 */
-- (NSDictionary *)parameters;
+- (NSDictionary *)parameters NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method performAction
@@ -142,41 +142,41 @@ extern NSString * const XGActionMonitorResultsOutputFilesKey;
 	@discussion This method does not need to be called on XGActionMonitor instances
 	that are returned by XGResource performXXXAction methods.
 */
-- (void)performAction;
+- (void)performAction NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method outcome
 	@abstract Returns the XGActionMonitorOutcome of the action being monitored.
 	@result The XGActionMonitorOutcome.
 */
-- (XGActionMonitorOutcome)outcome;
+- (XGActionMonitorOutcome)outcome NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method results
 	@abstract Returns the results of the action being monitored.
 	@result The results dictionary.
 */
-- (NSDictionary *)results;
+- (NSDictionary *)results NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method error
 	@abstract Returns the NSError from the results dictionary, if any.
 	@result The NSError instance.
 */
-- (NSError *)error;
+- (NSError *)error NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method actionDidSucceed
 	@abstract Returns whether or not the action succeeded.
 	@result The success of the action.
 */
-- (BOOL)actionDidSucceed;
+- (BOOL)actionDidSucceed NS_DEPRECATED_MAC(10_4, 10_7);
 
 /*!
 	@method actionDidFail
 	@abstract Returns whether or not the action failed.
 	@result The failure of the action.
 */
-- (BOOL)actionDidFail;
+- (BOOL)actionDidFail NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end

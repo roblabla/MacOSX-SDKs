@@ -44,6 +44,7 @@ extern "C" {
     @constant   kCVReturnInvalidPixelBufferAttributes A CVBuffer cannot be created with the given attributes.
     @constant   kCVReturnPixelBufferNotOpenGLCompatible The Buffer cannot be used with OpenGL as either its size, pixelformat or attributes are not supported by OpenGL.
 
+    @constant   kCVReturnWouldExceedAllocationThreshold The allocation request failed because it would have exceeded a specified allocation threshold (see kCVPixelBufferPoolAllocationThresholdKey).
     @constant   kCVReturnPoolAllocationFailed The allocation for the buffer pool failed. Most likely because of lack of resources. Check if your parameters are in range.
     @constant   kCVReturnInvalidPoolAttributes A CVBufferPool cannot be created with the given attributes.
 */
@@ -65,16 +66,17 @@ enum _CVReturn
     kCVReturnDisplayLinkCallbacksNotSet      = -6673,
     
     // Buffer related errors
-    kCVReturnInvalidPixelFormat		     = -6680,
+    kCVReturnInvalidPixelFormat              = -6680,
     kCVReturnInvalidSize                     = -6681,
-    kCVReturnInvalidPixelBufferAttributes    = -6682,    
+    kCVReturnInvalidPixelBufferAttributes    = -6682,
     kCVReturnPixelBufferNotOpenGLCompatible  = -6683,
     
     // Buffer Pool related errors
+    kCVReturnWouldExceedAllocationThreshold  = -6689,
     kCVReturnPoolAllocationFailed            = -6690,
     kCVReturnInvalidPoolAttributes           = -6691,
     
-    kCVReturnLast			     = -6699
+    kCVReturnLast                            = -6699
     
 };
 typedef int32_t CVReturn;

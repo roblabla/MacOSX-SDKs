@@ -9,8 +9,6 @@
 #import <CoreServices/CoreServices.h>
 
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-
 @class CBUserIdentity;
 @class CBGroupIdentity;
 @class CBIdentityAuthority;
@@ -125,5 +123,3 @@
 - (NSArray *)members;
 
 @end
-
-#endif

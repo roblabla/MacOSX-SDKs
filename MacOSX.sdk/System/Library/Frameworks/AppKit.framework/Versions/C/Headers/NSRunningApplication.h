@@ -1,7 +1,7 @@
 /*
 	NSRunningApplication.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -49,16 +49,16 @@ enum {
 };
 typedef NSInteger NSApplicationActivationPolicy;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 
 @class NSLock, NSDate, NSImage, NSURL;
 
+NS_CLASS_AVAILABLE(10_6, NA)
 @interface NSRunningApplication : NSObject {
     @private
     id _superReserved;
     __strong void *_asn;
     __strong void **_helpers;
-    void *_obsInfo;
+    id _obsInfo;
     NSLock *_lock;
     NSString *_bundleID;
     NSString *_localizedName;
@@ -78,9 +78,10 @@ typedef NSInteger NSApplicationActivationPolicy;
         unsigned finishedLaunching:1;
         unsigned hidden:1;
         unsigned active:1;
+        unsigned ownsMenuBar:1;
 	unsigned arch:3;
 	unsigned activationPolicy:3;
-        unsigned reserved1:20;
+        unsigned reserved1:19;
     } _aflags;
     id _appReserved;
 }
@@ -96,6 +97,9 @@ typedef NSInteger NSApplicationActivationPolicy;
 
 /* Indicates whether the application is currently frontmost.  This is observable through KVO. */
 @property (readonly, getter=isActive) BOOL active;
+
+/* Indicates whether the application currently owns the menu bar.  This is observable through KVO. */
+@property (readonly) BOOL ownsMenuBar NS_AVAILABLE_MAC(10_7);
 
 /* Indicates the activation policy of the application.   This is observable through KVO (the type is usually fixed, but may be changed through a call to -[NSApplication setActivationPolicy:]).  */
 @property (readonly) NSApplicationActivationPolicy activationPolicy;
@@ -115,7 +119,7 @@ typedef NSInteger NSApplicationActivationPolicy;
 /* Indicates the process identifier (pid) of the application.  Do not rely on this for comparing processes.  Use isEqual: instead.  Not all applications have a pid.  Applications without a pid return -1 from this method. */
 @property (readonly) pid_t processIdentifier;
 
-/* Indicates the date when the application was launched.  This property is not available for all applications.  Specifically, it is not avaialble for applications that were launched without going through LaunchServices.   */
+/* Indicates the date when the application was launched.  This property is not available for all applications.  Specifically, it is not available for applications that were launched without going through LaunchServices.   */
 @property (readonly) NSDate *launchDate;
 
 /* Returns the icon of the application. */
@@ -146,6 +150,12 @@ typedef NSInteger NSApplicationActivationPolicy;
 /* Returns an NSRunningApplication representing this application. */
 + (NSRunningApplication *)currentApplication;
 
+/*
+ *  Cause any applications that are invisibly still running (see NSProcessInfo.h automatic termination methods and docs) to terminate as if triggered by system memory pressure
+ *  This is intended for installer apps and the like to make sure that nothing is unexpectedly relying on the files they're replacing
+ */
++ (void) terminateAutomaticallyTerminableApplications;
+
 @end
 
 @interface NSWorkspace (NSWorkspaceRunningApplications)
@@ -156,8 +166,7 @@ typedef NSInteger NSApplicationActivationPolicy;
  
  This property is thread safe, in that it may be called from background threads and the result is returned atomically.  This property is observable through KVO.
  */
-- (NSArray *)runningApplications AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSArray *)runningApplications NS_AVAILABLE_MAC(10_6);
 
 @end
 
-#endif

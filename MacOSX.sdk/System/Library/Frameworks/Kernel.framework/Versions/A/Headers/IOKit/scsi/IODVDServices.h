@@ -114,9 +114,6 @@ public:
 
     virtual UInt32		doGetFormatCapacities ( UInt64 *	capacities,
     											UInt32		capacitiesMaxCount ) const;
-
-    virtual IOReturn	doLockUnlockMedia ( bool doLock );
-
     virtual IOReturn	doSynchronizeCache ( void );
 	
 	virtual IOReturn	getWriteCacheState ( bool * enabled );
@@ -135,13 +132,8 @@ public:
     
     virtual IOReturn	reportEjectability ( bool * isEjectable );
     
-    virtual IOReturn	reportLockability ( bool * isLockable );
-    
     virtual IOReturn	reportMediaState ( bool * mediaPresent, bool * changed );
     
-    virtual IOReturn	reportPollRequirements ( 	bool * pollIsRequired,
-    												bool * pollIsExpensive );
-        
     virtual IOReturn	reportMaxValidBlock ( UInt64 * maxBlock );
         
     virtual IOReturn	reportRemovability ( bool * isRemovable );

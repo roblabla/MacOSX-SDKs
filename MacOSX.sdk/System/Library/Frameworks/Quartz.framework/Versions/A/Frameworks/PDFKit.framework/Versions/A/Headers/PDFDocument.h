@@ -63,7 +63,7 @@ extern NSString *PDFDocumentModificationDateAttribute;	// NSDate representing la
 extern NSString *PDFDocumentKeywordsAttribute;			// NSArray of NSStrings containing document keywords.
 
 
-@interface PDFDocument : NSObject
+@interface PDFDocument : NSObject <NSCopying>
 {
 @private
     PDFDocumentPrivateVars *_pdfPriv;
@@ -217,14 +217,22 @@ extern NSString *PDFDocumentKeywordsAttribute;			// NSArray of NSStrings contain
 // Returns next instance as a PDFSelection or NULL if the end of the document is reached. Supported options are: 
 // NSCaseInsensitiveSearch, NSLiteralSearch, and NSBackwardsSearch. Passing in NULL for selection will start the 
 // search from the beginning of the document (or end if NSBackwardsSearch is specified).
-- (PDFSelection *) findString: (NSString *) string fromSelection: (PDFSelection *) selection 
-		withOptions: (NSUInteger) options;
+- (PDFSelection *) findString: (NSString *) string fromSelection: (PDFSelection *) selection withOptions: (NSUInteger) options;
 
 // Returns YES if document is currently searching for a string.
 - (BOOL) isFinding;
 
 // Method to cancel a search.  Can be called from a user method being serviced by a find notification.
 - (void) cancelFindString;
+
+// -------- printing
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+
+// Returns a print operation suitable for printing the PDF document. Specify scaling mode and autorotate behaviors desired.
+- (NSPrintOperation *) printOperationForPrintInfo: (NSPrintInfo *) printInfo scalingMode: (PDFPrintScalingMode) scaleMode autoRotate: (BOOL) doRotate;
+
+#endif	// MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
 
 // -------- selections
 

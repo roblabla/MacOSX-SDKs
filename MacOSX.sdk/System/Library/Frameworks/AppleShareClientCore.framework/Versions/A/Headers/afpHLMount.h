@@ -3,11 +3,8 @@
 
 	Contains:	High level url based access to the AppleShare Client
 
-	Version:	AppleShare X
-
-	Copyright:	© 2000 - 2007 by Apple Inc., all rights reserved.	
+	Copyright:	(c) 2000 - 2010 by Apple Inc., all rights reserved.	
 */
-
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,6 +22,7 @@ extern "C" {
 #define		kAFPSupressKeychainBit		8
 #define		kAFPAllowUNCHIBit			9
 #define		kAFPSoftMountBit			12
+#define		kAFPAllowSelfConnection		13
 
 /*
     if no bits are set and the volume is already mounted we return afpAlreadyMounted (-5062)

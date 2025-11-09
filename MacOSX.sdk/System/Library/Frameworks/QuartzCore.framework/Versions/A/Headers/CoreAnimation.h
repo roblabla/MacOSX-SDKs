@@ -21,6 +21,8 @@
 #import <QuartzCore/CAMediaTiming.h>
 #import <QuartzCore/CAMediaTimingFunction.h>
 #import <QuartzCore/CAOpenGLLayer.h>
+#import <QuartzCore/CARemoteLayerClient.h>
+#import <QuartzCore/CARemoteLayerServer.h>
 #import <QuartzCore/CARenderer.h>
 #import <QuartzCore/CAReplicatorLayer.h>
 #import <QuartzCore/CAScrollLayer.h>

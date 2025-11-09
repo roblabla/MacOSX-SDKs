@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2009 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -28,17 +28,13 @@
 #ifndef __DirServicesUtils_h__
 #define	__DirServicesUtils_h__	1
 
-// App
-
 #include <stdarg.h>
 
 #include <AvailabilityMacros.h>
 #include <DirectoryService/DirServicesTypes.h>
 #include <CoreFoundation/CoreFoundation.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+__BEGIN_DECLS
 
 //-----------------------------------------------
 
@@ -448,8 +444,69 @@ tDirStatus dsServiceInformationAllocate			(	CFDictionaryRef inServiceInfo,
 													tDataBufferPtr *outPackedServiceInfo )
 AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6;
 
-#ifdef __cplusplus
-}
-#endif
 
+/*!
+ * @function dsBuildListFromNodes
+ * @discussion Included only for backward compatibility.
+ */
+tDataListPtr	dsBuildListFromNodes		(	tDirReference	inDirReferences,
+												tDataNodePtr	in1stDataNodePtr,
+												... )
+DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ * @function dsAppendStringToList
+ * @discussion Included only for backward compatibility.
+ */
+tDirStatus		dsAppendStringToList		(	tDataListPtr	inDataList,
+												const char		* inCString )
+DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ * @function dsDataListInsertNode
+ * @discussion Included only for backward compatibility.
+ */
+tDirStatus		dsDataListInsertNode		(	tDataListPtr	inDataList,
+												tDataNodePtr	inAfterDataNode,
+												tDataNodePtr	inInsertDataNode )
+DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ * @function dsDataListMergeList
+ * @discussion Included only for backward compatibility.
+ */
+tDirStatus		dsDataListMergeList			(	tDataListPtr	inDataList,
+												tDataNodePtr	inAfterDataNode,
+												tDataListPtr	inMergeDataList )
+DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ * @function dsDataListRemoveThisNode
+ * @discussion Included only for backward compatibility.
+ */
+tDirStatus		dsDataListRemoveThisNode	(	tDataListPtr		inDataList,
+												UInt32				inNodeIndex,
+												UInt32				inDeleteCount )
+DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ * @function dsDataListRemoveNodes
+ * @discussion Included only for backward compatibility.
+ */
+tDirStatus		dsDataListRemoveNodes		(	tDataListPtr		inDataList,
+												tDataNodePtr		in1stDataNode,
+												UInt32				inDeleteCount )
+DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+
+/*!
+ * @function dsDataListGetNode
+ * @discussion Included only for backward compatibility.
+ */
+tDirStatus		dsDataListGetNode			(	tDataListPtr		inDataListPtr,
+												UInt32				inNodeIndex,
+												tDataNodePtr	   *outDataNode )
+DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
+	
+__END_DECLS
+	
 #endif

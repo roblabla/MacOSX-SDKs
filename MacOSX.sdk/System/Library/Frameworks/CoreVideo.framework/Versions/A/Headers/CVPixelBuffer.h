@@ -17,13 +17,11 @@
 #define __COREVIDEO_CVPIXELBUFFER_H__ 1
 
 #include <TargetConditionals.h>
+#include <Availability.h>
+#include <AvailabilityMacros.h>
 
 #include <CoreVideo/CVImageBuffer.h>
 #include <CoreFoundation/CFArray.h>
-
-#if COREVIDEO_SUPPORTS_IOSURFACE
-#include <IOSurface/IOSurface.h>
-#endif // COREVIDEO_SUPPORTS_IOSURFACE
 
 #if defined(__cplusplus)
 extern "C" {
@@ -57,15 +55,23 @@ enum {
   kCVPixelFormatType_48RGB          = 'b48r',     /* 48 bit RGB, 16-bit big-endian samples */
   kCVPixelFormatType_32AlphaGray    = 'b32a',     /* 32 bit AlphaGray, 16-bit big-endian samples, black is zero */
   kCVPixelFormatType_16Gray         = 'b16g',     /* 16 bit Grayscale, 16-bit big-endian samples, black is zero */
+  kCVPixelFormatType_30RGB          = 'R10k',     /* 30 bit RGB, 10-bit big-endian samples, 2 unused padding bits (at least significant end). */
   kCVPixelFormatType_422YpCbCr8     = '2vuy',     /* Component Y'CbCr 8-bit 4:2:2, ordered Cb Y'0 Cr Y'1 */
   kCVPixelFormatType_4444YpCbCrA8   = 'v408',     /* Component Y'CbCrA 8-bit 4:4:4:4, ordered Cb Y' Cr A */
   kCVPixelFormatType_4444YpCbCrA8R  = 'r408',     /* Component Y'CbCrA 8-bit 4:4:4:4, rendering format. full range alpha, zero biased YUV, ordered A Y' Cb Cr */
+  kCVPixelFormatType_4444AYpCbCr8   = 'y408',     /* Component Y'CbCrA 8-bit 4:4:4:4, ordered A Y' Cb Cr, full range alpha, video range Y'CbCr. */
+  kCVPixelFormatType_4444AYpCbCr16  = 'y416',     /* Component Y'CbCrA 16-bit 4:4:4:4, ordered A Y' Cb Cr, full range alpha, video range Y'CbCr, 16-bit little-endian samples. */
   kCVPixelFormatType_444YpCbCr8     = 'v308',     /* Component Y'CbCr 8-bit 4:4:4 */
   kCVPixelFormatType_422YpCbCr16    = 'v216',     /* Component Y'CbCr 10,12,14,16-bit 4:2:2 */
   kCVPixelFormatType_422YpCbCr10    = 'v210',     /* Component Y'CbCr 10-bit 4:2:2 */
   kCVPixelFormatType_444YpCbCr10    = 'v410',     /* Component Y'CbCr 10-bit 4:4:4 */
   kCVPixelFormatType_420YpCbCr8Planar = 'y420',   /* Planar Component Y'CbCr 8-bit 4:2:0.  baseAddr points to a big-endian CVPlanarPixelBufferInfo_YCbCrPlanar struct */
+  kCVPixelFormatType_420YpCbCr8PlanarFullRange    = 'f420',   /* Planar Component Y'CbCr 8-bit 4:2:0, full range.  baseAddr points to a big-endian CVPlanarPixelBufferInfo_YCbCrPlanar struct */
   kCVPixelFormatType_422YpCbCr_4A_8BiPlanar = 'a2vy', /* First plane: Video-range Component Y'CbCr 8-bit 4:2:2, ordered Cb Y'0 Cr Y'1; second plane: alpha 8-bit 0-255 */
+  kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange = '420v', /* Bi-Planar Component Y'CbCr 8-bit 4:2:0, video-range (luma=[16,235] chroma=[16,240]).  baseAddr points to a big-endian CVPlanarPixelBufferInfo_YCbCrBiPlanar struct */
+  kCVPixelFormatType_420YpCbCr8BiPlanarFullRange  = '420f', /* Bi-Planar Component Y'CbCr 8-bit 4:2:0, full-range (luma=[0,255] chroma=[1,255]).  baseAddr points to a big-endian CVPlanarPixelBufferInfo_YCbCrBiPlanar struct */ 
+  kCVPixelFormatType_422YpCbCr8_yuvs = 'yuvs',     /* Component Y'CbCr 8-bit 4:2:2, ordered Y'0 Cb Y'1 Cr */
+  kCVPixelFormatType_422YpCbCr8FullRange = 'yuvf', /* Component Y'CbCr 8-bit 4:2:2, full range, ordered Y'0 Cb Y'1 Cr */
 };
 
 	
@@ -102,29 +108,27 @@ struct CVPlanarPixelBufferInfo_YCbCrPlanar {
   CVPlanarComponentInfo  componentInfoCr;
 };
 typedef struct CVPlanarPixelBufferInfo_YCbCrPlanar   CVPlanarPixelBufferInfo_YCbCrPlanar;
+struct CVPlanarPixelBufferInfo_YCbCrBiPlanar {
+  CVPlanarComponentInfo  componentInfoY;
+  CVPlanarComponentInfo  componentInfoCbCr;
+};
+typedef struct CVPlanarPixelBufferInfo_YCbCrBiPlanar   CVPlanarPixelBufferInfo_YCbCrBiPlanar;
 
 #pragma mark BufferAttributeKeys
-CV_EXPORT const CFStringRef kCVPixelBufferPixelFormatTypeKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		    // A single CFNumber or a CFArray of CFNumbers (OSTypes)
-CV_EXPORT const CFStringRef kCVPixelBufferMemoryAllocatorKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		    // CFAllocatorRef
-CV_EXPORT const CFStringRef kCVPixelBufferWidthKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;			    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferHeightKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;			    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferExtendedPixelsLeftKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferExtendedPixelsTopKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;		    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferExtendedPixelsRightKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferExtendedPixelsBottomKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferBytesPerRowAlignmentKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferCGBitmapContextCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;  // CFBoolean
-CV_EXPORT const CFStringRef kCVPixelBufferCGImageCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	    // CFBoolean
-CV_EXPORT const CFStringRef kCVPixelBufferOpenGLCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;	    // CFBoolean
-CV_EXPORT const CFStringRef kCVPixelBufferPlaneAlignmentKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;		    // CFNumber
-CV_EXPORT const CFStringRef kCVPixelBufferIOSurfacePropertiesKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;     // CFDictionary; presence requests buffer allocation via IOSurface
-// Ensures that CGLTexImageIOSurface2D() will succeed in creating a valid texture object from the CVPixelBuffer's IOSurface.
-CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;	// CFBoolean
-// Ensures that CGLTexImageIOSurface2D() will succeed in creating a valid texture object from the CVPixelBuffer's IOSurface AND that the resulting texture may be used as a color buffer attachment to a OpenGL frame buffer object.
-CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;	// CFBoolean
-// Ensures that the CVPixelBuffer's IOSurfaceRef can be displayed in an CoreAnimation CALayer.
-CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;	// CFBoolean
-
+CV_EXPORT const CFStringRef kCVPixelBufferPixelFormatTypeKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		    // A single CFNumber or a CFArray of CFNumbers (OSTypes)
+CV_EXPORT const CFStringRef kCVPixelBufferMemoryAllocatorKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		    // CFAllocatorRef
+CV_EXPORT const CFStringRef kCVPixelBufferWidthKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);			    // CFNumber
+CV_EXPORT const CFStringRef kCVPixelBufferHeightKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);			    // CFNumber
+CV_EXPORT const CFStringRef kCVPixelBufferExtendedPixelsLeftKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
+CV_EXPORT const CFStringRef kCVPixelBufferExtendedPixelsTopKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		    // CFNumber
+CV_EXPORT const CFStringRef kCVPixelBufferExtendedPixelsRightKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
+CV_EXPORT const CFStringRef kCVPixelBufferExtendedPixelsBottomKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
+CV_EXPORT const CFStringRef kCVPixelBufferBytesPerRowAlignmentKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
+CV_EXPORT const CFStringRef kCVPixelBufferCGBitmapContextCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);  // CFBoolean
+CV_EXPORT const CFStringRef kCVPixelBufferCGImageCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFBoolean
+CV_EXPORT const CFStringRef kCVPixelBufferOpenGLCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFBoolean
+CV_EXPORT const CFStringRef kCVPixelBufferPlaneAlignmentKey __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);		    // CFNumber
+CV_EXPORT const CFStringRef kCVPixelBufferIOSurfacePropertiesKey __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);     // CFDictionary; presence requests buffer allocation via IOSurface
 
 /*!
     @typedef	CVPixelBufferRef
@@ -133,7 +137,7 @@ CV_EXPORT const CFStringRef kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey
 */
 typedef CVImageBufferRef CVPixelBufferRef;
 
-CV_EXPORT CFTypeID CVPixelBufferGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CFTypeID CVPixelBufferGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferRetain
@@ -142,7 +146,7 @@ CV_EXPORT CFTypeID CVPixelBufferGetTypeID(void) AVAILABLE_MAC_OS_X_VERSION_10_4_
     @param      buffer A CVPixelBuffer object that you want to retain.
     @result     A CVPixelBuffer object that is the same as the passed in buffer.
 */
-CV_EXPORT CVPixelBufferRef CVPixelBufferRetain( CVPixelBufferRef texture ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVPixelBufferRef CVPixelBufferRetain( CVPixelBufferRef texture ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferRelease
@@ -150,7 +154,7 @@ CV_EXPORT CVPixelBufferRef CVPixelBufferRetain( CVPixelBufferRef texture ) AVAIL
     @discussion Equivalent to CFRelease, but NULL safe
     @param      buffer A CVPixelBuffer object that you want to release.
 */
-CV_EXPORT void CVPixelBufferRelease( CVPixelBufferRef texture ) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void CVPixelBufferRelease( CVPixelBufferRef texture ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferCreateResolvedAttributesDictionary
@@ -161,7 +165,7 @@ CV_EXPORT void CVPixelBufferRelease( CVPixelBufferRef texture ) AVAILABLE_MAC_OS
     @param      resolvedDictionaryOut The resulting dictionary will be placed here.
     @result     Return value that may be useful in discovering why resolution failed.
 */
-CV_EXPORT CVReturn CVPixelBufferCreateResolvedAttributesDictionary(CFAllocatorRef allocator, CFArrayRef attributes, CFDictionaryRef *resolvedDictionaryOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVPixelBufferCreateResolvedAttributesDictionary(CFAllocatorRef allocator, CFArrayRef attributes, CFDictionaryRef *resolvedDictionaryOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 
 /*!
@@ -180,7 +184,7 @@ CV_EXPORT CVReturn CVPixelBufferCreate(CFAllocatorRef allocator,
                                       size_t height,
                                       OSType pixelFormatType,
                                       CFDictionaryRef pixelBufferAttributes,
-                                      CVPixelBufferRef *pixelBufferOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+                                      CVPixelBufferRef *pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 typedef void (*CVPixelBufferReleaseBytesCallback)( void *releaseRefCon, const void *baseAddress );
 
@@ -208,7 +212,7 @@ CV_EXPORT CVReturn CVPixelBufferCreateWithBytes(CFAllocatorRef allocator,
 					       CVPixelBufferReleaseBytesCallback releaseCallback,
 					       void *releaseRefCon,
 					       CFDictionaryRef pixelBufferAttributes,
-				               CVPixelBufferRef *pixelBufferOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+				               CVPixelBufferRef *pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 typedef void (*CVPixelBufferReleasePlanarBytesCallback)( void *releaseRefCon, const void *dataPtr, size_t dataSize, size_t numberOfPlanes, const void *planeAddresses[] );
 
@@ -246,7 +250,7 @@ CV_EXPORT CVReturn CVPixelBufferCreateWithPlanarBytes(CFAllocatorRef allocator,
 							 CVPixelBufferReleasePlanarBytesCallback releaseCallback,
 							 void *releaseRefCon,
 							 CFDictionaryRef pixelBufferAttributes,
-							 CVPixelBufferRef *pixelBufferOut) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+							 CVPixelBufferRef *pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 
 /*!
@@ -256,7 +260,7 @@ CV_EXPORT CVReturn CVPixelBufferCreateWithPlanarBytes(CFAllocatorRef allocator,
 	@param      lockFlags See CVPixelBufferLockFlags.
 	@result     kCVReturnSuccess if the lock succeeded, or error code on failure
 */
-CV_EXPORT CVReturn CVPixelBufferLockBaseAddress(CVPixelBufferRef pixelBuffer, CVOptionFlags lockFlags) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVPixelBufferLockBaseAddress(CVPixelBufferRef pixelBuffer, CVOptionFlags lockFlags) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
 	@function   CVPixelBufferUnlockBaseAddress
@@ -265,7 +269,7 @@ CV_EXPORT CVReturn CVPixelBufferLockBaseAddress(CVPixelBufferRef pixelBuffer, CV
 	@param      unlockFlags See CVPixelBufferLockFlags.
 	@result     kCVReturnSuccess if the unlock succeeded, or error code on failure
 */
-CV_EXPORT CVReturn CVPixelBufferUnlockBaseAddress(CVPixelBufferRef pixelBuffer, CVOptionFlags unlockFlags) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVPixelBufferUnlockBaseAddress(CVPixelBufferRef pixelBuffer, CVOptionFlags unlockFlags) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetWidth
@@ -273,7 +277,7 @@ CV_EXPORT CVReturn CVPixelBufferUnlockBaseAddress(CVPixelBufferRef pixelBuffer, 
     @param      pixelBuffer Target PixelBuffer.
     @result     Width in pixels.
 */
-CV_EXPORT size_t CVPixelBufferGetWidth(CVPixelBufferRef pixelBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT size_t CVPixelBufferGetWidth(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetHeight
@@ -281,7 +285,7 @@ CV_EXPORT size_t CVPixelBufferGetWidth(CVPixelBufferRef pixelBuffer) AVAILABLE_M
     @param      pixelBuffer Target PixelBuffer.
     @result     Height in pixels.
 */
-CV_EXPORT size_t CVPixelBufferGetHeight(CVPixelBufferRef pixelBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT size_t CVPixelBufferGetHeight(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetPixelFormatType
@@ -289,7 +293,7 @@ CV_EXPORT size_t CVPixelBufferGetHeight(CVPixelBufferRef pixelBuffer) AVAILABLE_
     @param      pixelBuffer Target PixelBuffer.
     @result     OSType identifying the pixel format by its type.
 */
-CV_EXPORT OSType CVPixelBufferGetPixelFormatType(CVPixelBufferRef pixelBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT OSType CVPixelBufferGetPixelFormatType(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetBaseAddress
@@ -301,7 +305,7 @@ CV_EXPORT OSType CVPixelBufferGetPixelFormatType(CVPixelBufferRef pixelBuffer) A
 		For chunky buffers, this will return a pointer to the pixel at 0,0 in the buffer
 		For planar buffers this will return a pointer to a PlanarComponentInfo struct (defined in QuickTime).
 */
-CV_EXPORT void *CVPixelBufferGetBaseAddress(CVPixelBufferRef pixelBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void *CVPixelBufferGetBaseAddress(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetBytesPerRow
@@ -310,7 +314,7 @@ CV_EXPORT void *CVPixelBufferGetBaseAddress(CVPixelBufferRef pixelBuffer) AVAILA
     @result     Bytes per row of the image data.   For planar buffers this will return a rowBytes value such that bytesPerRow * height
                 will cover the entire image including all planes.
 */
-CV_EXPORT size_t CVPixelBufferGetBytesPerRow(CVPixelBufferRef pixelBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT size_t CVPixelBufferGetBytesPerRow(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetDataSize
@@ -318,7 +322,7 @@ CV_EXPORT size_t CVPixelBufferGetBytesPerRow(CVPixelBufferRef pixelBuffer) AVAIL
     @param      pixelBuffer Target PixelBuffer.
     @result     Data size used in CVPixelBufferCreateWithPlanarBytes.
 */
-CV_EXPORT size_t CVPixelBufferGetDataSize(CVPixelBufferRef pixelBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT size_t CVPixelBufferGetDataSize(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferIsPlanar
@@ -326,7 +330,7 @@ CV_EXPORT size_t CVPixelBufferGetDataSize(CVPixelBufferRef pixelBuffer) AVAILABL
     @param      pixelBuffer Target PixelBuffer.
     @result     True if the PixelBuffer was created using CVPixelBufferCreateWithPlanarBytes.
 */
-CV_EXPORT Boolean CVPixelBufferIsPlanar(CVPixelBufferRef pixelBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT Boolean CVPixelBufferIsPlanar(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetPlaneCount
@@ -334,7 +338,7 @@ CV_EXPORT Boolean CVPixelBufferIsPlanar(CVPixelBufferRef pixelBuffer) AVAILABLE_
     @param      pixelBuffer Target PixelBuffer.
     @result     Number of planes.  Returns 0 for non-planar CVPixelBufferRefs.
 */
-CV_EXPORT size_t CVPixelBufferGetPlaneCount(CVPixelBufferRef pixelBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT size_t CVPixelBufferGetPlaneCount(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetWidthOfPlane
@@ -343,7 +347,7 @@ CV_EXPORT size_t CVPixelBufferGetPlaneCount(CVPixelBufferRef pixelBuffer) AVAILA
     @param      planeIndex  Identifying the plane.
     @result     Width in pixels, or 0 for non-planar CVPixelBufferRefs.
 */
-CV_EXPORT size_t CVPixelBufferGetWidthOfPlane(CVPixelBufferRef pixelBuffer, size_t planeIndex) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT size_t CVPixelBufferGetWidthOfPlane(CVPixelBufferRef pixelBuffer, size_t planeIndex) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetHeightOfPlane
@@ -352,7 +356,7 @@ CV_EXPORT size_t CVPixelBufferGetWidthOfPlane(CVPixelBufferRef pixelBuffer, size
     @param      planeIndex  Identifying the plane.
     @result     Height in pixels, or 0 for non-planar CVPixelBufferRefs.
 */
-CV_EXPORT size_t CVPixelBufferGetHeightOfPlane(CVPixelBufferRef pixelBuffer, size_t planeIndex) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT size_t CVPixelBufferGetHeightOfPlane(CVPixelBufferRef pixelBuffer, size_t planeIndex) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetBaseAddressOfPlane
@@ -363,7 +367,7 @@ CV_EXPORT size_t CVPixelBufferGetHeightOfPlane(CVPixelBufferRef pixelBuffer, siz
     @param      planeIndex  Identifying the plane.
     @result     Base address of the plane, or NULL for non-planar CVPixelBufferRefs.
 */
-CV_EXPORT void *CVPixelBufferGetBaseAddressOfPlane(CVPixelBufferRef pixelBuffer, size_t planeIndex) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT void *CVPixelBufferGetBaseAddressOfPlane(CVPixelBufferRef pixelBuffer, size_t planeIndex) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetBytesPerRowOfPlane
@@ -372,7 +376,7 @@ CV_EXPORT void *CVPixelBufferGetBaseAddressOfPlane(CVPixelBufferRef pixelBuffer,
     @param      planeIndex  Identifying the plane.
     @result     Row bytes of the plane, or NULL for non-planar CVPixelBufferRefs.
 */
-CV_EXPORT size_t CVPixelBufferGetBytesPerRowOfPlane(CVPixelBufferRef pixelBuffer, size_t planeIndex) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT size_t CVPixelBufferGetBytesPerRowOfPlane(CVPixelBufferRef pixelBuffer, size_t planeIndex) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferGetExtendedPixels
@@ -387,49 +391,22 @@ CV_EXPORT void CVPixelBufferGetExtendedPixels(CVPixelBufferRef pixelBuffer,
 					      size_t *extraColumnsOnLeft,
 					      size_t *extraColumnsOnRight,
 					      size_t *extraRowsOnTop,
-					      size_t *extraRowsOnBottom) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+					      size_t *extraRowsOnBottom) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVPixelBufferFillExtendedPixels
     @abstract   Fills the extended pixels of the PixelBuffer with Zero.   This function replicates edge pixels to fill the entire extended region of the image.
     @param      pixelBuffer Target PixelBuffer.
 */
-CV_EXPORT CVReturn CVPixelBufferFillExtendedPixels(CVPixelBufferRef pixelBuffer) AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+CV_EXPORT CVReturn CVPixelBufferFillExtendedPixels(CVPixelBufferRef pixelBuffer) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
-#if COREVIDEO_SUPPORTS_IOSURFACE
-
-/*!
-	@function   CVPixelBufferGetIOSurface
-	@abstract   Returns the IOSurface backing the pixel buffer, or NULL if it is not backed by an IOSurface.
-	@param      pixelBuffer Target PixelBuffer.
-*/
-CV_EXPORT IOSurfaceRef CVPixelBufferGetIOSurface(CVPixelBufferRef pixelBuffer) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-/*!
-    @function   CVPixelBufferCreateWithIOSurface
-    @abstract   Call to create a single CVPixelBuffer for a passed-in IOSurface.
-    @discussion The CVPixelBuffer will retain the IOSurface.
-    	IMPORTANT NOTE: If you are using IOSurface to share CVPixelBuffers between processes
-    	and those CVPixelBuffers are allocated via a CVPixelBufferPool, it is important
-    	that the CVPixelBufferPool does not reuse CVPixelBuffers whose IOSurfaces are still
-    	in use in other processes.  
-    	CoreVideo and IOSurface will take care of this for if you use IOSurfaceCreateMachPort 
-    	and IOSurfaceLookupFromMachPort, but NOT if you pass IOSurfaceIDs.
-    @param      surface		            The IOSurface to wrap.
-    @param      pixelBufferAttributes   A dictionary with additional attributes for a a pixel buffer. This parameter is optional. See PixelBufferAttributes for more details.
-    @param      pixelBufferOut          The new pixel buffer will be returned here
-    @result     returns kCVReturnSuccess on success.
-*/
-CV_EXPORT CVReturn CVPixelBufferCreateWithIOSurface(
-		CFAllocatorRef allocator,
-		IOSurfaceRef surface,
-		CFDictionaryRef pixelBufferAttributes,
-		CVPixelBufferRef *pixelBufferOut) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-#endif // COREVIDEO_SUPPORTS_IOSURFACE
 
 #if defined(__cplusplus)
 }
+#endif
+
+#if (COREVIDEO_SUPPORTS_IOSURFACE && ! TARGET_OS_IPHONE && ! TARGET_OS_EMBEDDED)
+#include <CoreVideo/CVPixelBufferIOSurface.h>
 #endif
 
 #endif

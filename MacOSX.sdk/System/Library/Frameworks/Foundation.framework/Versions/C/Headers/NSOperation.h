@@ -1,17 +1,20 @@
 /*	NSOperation.h
-	Copyright (c) 2006-2009, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2011, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-#if MAC_OS_X_VERSION_10_5 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 @class NSArray, NSSet;
 
+NS_CLASS_AVAILABLE(10_5, 2_0)
 @interface NSOperation : NSObject {
 @private
     id _private;
-    void *_reserved;
+    int32_t _private1;
+#if __LP64__
+    int32_t _private1b;
+#endif
 }
 
 - (id)init; // designated initializer
@@ -47,38 +50,37 @@ typedef NSInteger NSOperationQueuePriority;
 - (void)setQueuePriority:(NSOperationQueuePriority)p;
 
 #if NS_BLOCKS_AVAILABLE
-- (void (^)(void))completionBlock AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)setCompletionBlock:(void (^)(void))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void (^)(void))completionBlock NS_AVAILABLE(10_6, 4_0);
+- (void)setCompletionBlock:(void (^)(void))block NS_AVAILABLE(10_6, 4_0);
 #endif
 
-- (void)waitUntilFinished AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)waitUntilFinished NS_AVAILABLE(10_6, 4_0);
 
-- (double)threadPriority AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (void)setThreadPriority:(double)p AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (double)threadPriority NS_AVAILABLE(10_6, 4_0);
+- (void)setThreadPriority:(double)p NS_AVAILABLE(10_6, 4_0);
 
 @end
 
 
-#if MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
-#if NS_BLOCKS_AVAILABLE
 
+NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface NSBlockOperation : NSOperation {
 @private
     id _private2;
     void *_reserved2;
 }
 
-+ (id)blockOperationWithBlock:(void (^)(void))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+#if NS_BLOCKS_AVAILABLE
++ (id)blockOperationWithBlock:(void (^)(void))block;
 
-- (void)addExecutionBlock:(void (^)(void))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSArray *)executionBlocks AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)addExecutionBlock:(void (^)(void))block;
+- (NSArray *)executionBlocks;
+#endif
 
 @end
 
-#endif
-#endif
 
-
+NS_CLASS_AVAILABLE(10_5, 2_0)
 @interface NSInvocationOperation : NSOperation {
 @private
     id _inv;
@@ -95,10 +97,10 @@ typedef NSInteger NSOperationQueuePriority;
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSInvocationOperationVoidResultException;
-FOUNDATION_EXPORT NSString * const NSInvocationOperationCancelledException;
+FOUNDATION_EXPORT NSString * const NSInvocationOperationVoidResultException NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSString * const NSInvocationOperationCancelledException NS_AVAILABLE(10_5, 2_0);
 
-
+NS_CLASS_AVAILABLE(10_5, 2_0)
 @interface NSOperationQueue : NSObject {
 @private
     id _private;
@@ -106,14 +108,14 @@ FOUNDATION_EXPORT NSString * const NSInvocationOperationCancelledException;
 }
 
 - (void)addOperation:(NSOperation *)op;
-- (void)addOperations:(NSArray *)ops waitUntilFinished:(BOOL)wait AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)addOperations:(NSArray *)ops waitUntilFinished:(BOOL)wait NS_AVAILABLE(10_6, 4_0);
 
 #if NS_BLOCKS_AVAILABLE
-- (void)addOperationWithBlock:(void (^)(void))block AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)addOperationWithBlock:(void (^)(void))block NS_AVAILABLE(10_6, 4_0);
 #endif
 
 - (NSArray *)operations;
-- (NSUInteger)operationCount AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (NSUInteger)operationCount NS_AVAILABLE(10_6, 4_0);
 
 - (NSInteger)maxConcurrentOperationCount;
 - (void)setMaxConcurrentOperationCount:(NSInteger)cnt;
@@ -125,17 +127,16 @@ enum {
 - (void)setSuspended:(BOOL)b;
 - (BOOL)isSuspended;
 
-- (void)setName:(NSString *)n AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-- (NSString *)name AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)setName:(NSString *)n NS_AVAILABLE(10_6, 4_0);
+- (NSString *)name NS_AVAILABLE(10_6, 4_0);
 
 - (void)cancelAllOperations;
 
 - (void)waitUntilAllOperationsAreFinished;
 
-+ (id)currentQueue AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
-+ (id)mainQueue AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
++ (id)currentQueue NS_AVAILABLE(10_6, 4_0);
++ (id)mainQueue NS_AVAILABLE(10_6, 4_0);
 
 @end
 
-#endif
 

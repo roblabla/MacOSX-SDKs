@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -80,8 +80,8 @@ typedef	u_quad_t	inp_gen_t;
 
 /*
  * PCB with AF_INET6 null bind'ed laddr can receive AF_INET input packet.
- * So, AF_INET6 null laddr is also used as AF_INET null laddr,
- * by utilize following structure. (At last, same as INRIA)
+ * So, AF_INET6 null laddr is also used as AF_INET null laddr, by utilizing
+ * the following structure.
  */
 struct in_addr_4in6 {
 	u_int32_t	ia46_pad32[3];
@@ -235,28 +235,29 @@ struct	xinpcb64 {
 	u_char			inp_vflag;
 	u_char			inp_ip_ttl;	/* time to live */
 	u_char			inp_ip_p;	/* protocol */
-        union {					/* foreign host table entry */
-                struct  in_addr_4in6	inp46_foreign;
-                struct  in6_addr	inp6_foreign;
-        }			inp_dependfaddr;
-        union {					/* local host table entry */
-                struct  in_addr_4in6	inp46_local;
-                struct  in6_addr	inp6_local;
-        }			inp_dependladdr;
-        struct {
-                u_char		inp4_ip_tos;	/* type of service */
-        }			inp_depend4;
-        struct {
-                u_int8_t        inp6_hlim;
-		int		inp6_cksum;
-                u_short		inp6_ifindex;
-                short   	inp6_hops;
-        }			inp_depend6;
-        struct  xsocket64       xi_socket;
+	union {					/* foreign host table entry */
+			struct  in_addr_4in6	inp46_foreign;
+			struct  in6_addr	inp6_foreign;
+	}			inp_dependfaddr;
+	union {					/* local host table entry */
+			struct  in_addr_4in6	inp46_local;
+			struct  in6_addr	inp6_local;
+	}			inp_dependladdr;
+	struct {
+			u_char		inp4_ip_tos;	/* type of service */
+	}			inp_depend4;
+	struct {
+			u_int8_t        inp6_hlim;
+	int		inp6_cksum;
+			u_short		inp6_ifindex;
+			short   	inp6_hops;
+	}			inp_depend6;
+	struct  xsocket64       xi_socket;
 	u_quad_t		xi_alignment_hack;
 };
 
 #endif /* !CONFIG_EMBEDDED */
+
 
 struct	xinpgen {
 	u_int32_t xig_len;	/* length of this structure */
@@ -299,6 +300,7 @@ struct	xinpgen {
 #define	in6p_ppcb	inp_ppcb  /* for KAME src sync over BSD*'s */
 #define	in6p_state	inp_state
 #define	in6p_wantcnt	inp_wantcnt
+#define	in6p_last_outif	inp_last_outif
 
 
 /* flags in inp_flags: */
@@ -314,24 +316,28 @@ struct	xinpgen {
 #ifdef __APPLE__
 #define INP_STRIPHDR		0x200	/* Strip headers in raw_ip, for OT support */
 #endif
-#define  INP_FAITH			0x400   /* accept FAITH'ed connections */
+#define  INP_FAITH		0x400   /* accept FAITH'ed connections */
 #define  INP_INADDR_ANY 	0x800   /* local address wasn't specified */
 
 #define INP_RECVTTL		0x1000
 #define	INP_UDP_NOCKSUM		0x2000	/* Turn off outbound UDP checksum */
 #define	INP_BOUND_IF		0x4000	/* bind socket to an ifindex */
 
-#define IN6P_IPV6_V6ONLY	0x008000 /* restrict AF_INET6 socket for v6 */
-
-#define	IN6P_PKTINFO		0x010000 /* receive IP6 dst and I/F */
-#define	IN6P_HOPLIMIT		0x020000 /* receive hoplimit */
-#define	IN6P_HOPOPTS		0x040000 /* receive hop-by-hop options */
-#define	IN6P_DSTOPTS		0x080000 /* receive dst options after rthdr */
-#define	IN6P_RTHDR			0x100000 /* receive routing header */
+#define IN6P_IPV6_V6ONLY	0x8000 /* restrict AF_INET6 socket for v6 */
+#define	IN6P_PKTINFO		0x10000 /* receive IP6 dst and I/F */
+#define	IN6P_HOPLIMIT		0x20000 /* receive hoplimit */
+#define	IN6P_HOPOPTS		0x40000 /* receive hop-by-hop options */
+#define	IN6P_DSTOPTS		0x80000 /* receive dst options after rthdr */
+#define	IN6P_RTHDR		0x100000 /* receive routing header */
 #define	IN6P_RTHDRDSTOPTS	0x200000 /* receive dstoptions before rthdr */
-#define	IN6P_TCLASS			0x400000 /* receive traffic class value */
+#define	IN6P_TCLASS		0x400000 /* receive traffic class value */
 #define	IN6P_AUTOFLOWLABEL	0x800000 /* attach flowlabel automatically */
-#define	IN6P_BINDV6ONLY		0x10000000 /* do not grab IPv4 traffic */
+#define	IN6P_BINDV6ONLY		0x1000000 /* do not grab IPv4 traffic */
+#define	IN6P_RFC2292		0x2000000 /* used RFC2292 API on the socket */
+#define	IN6P_MTU		0x4000000 /* receive path MTU */
+#define	INP_PKTINFO		0x8000000 /* receive and send PKTINFO for IPv4 */
+
+#define	INP_NO_IFT_CELLULAR	0x20000000 /* do not use IFT_CELLULAR route */
 
 
 #endif /* !_NETINET_IN_PCB_H_ */

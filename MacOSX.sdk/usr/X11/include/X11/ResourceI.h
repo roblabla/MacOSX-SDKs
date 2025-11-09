@@ -1,5 +1,3 @@
-/* $Xorg: ResourceI.h,v 1.4 2001/02/09 02:03:56 xorgcvs Exp $ */
-
 /***********************************************************
 
 Copyright 1987, 1988, 1994, 1998  The Open Group
@@ -46,7 +44,6 @@ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
 SOFTWARE.
 
 ******************************************************************/
-/* $XFree86: xc/lib/Xt/ResourceI.h,v 1.5 2001/12/14 19:56:28 dawes Exp $ */
 
 /****************************************************************
  *
@@ -60,6 +57,8 @@ SOFTWARE.
 #define StringToQuark(string) XrmStringToQuark(string)
 #define StringToName(string) XrmStringToName(string)
 #define StringToClass(string) XrmStringToClass(string)
+
+_XFUNCPROTOBEGIN
 
 extern void _XtDependencies(
     XtResourceList  * /* class_resp */,
@@ -96,5 +95,6 @@ extern XrmResourceList* _XtCreateIndirectionTable(XtResourceList resources,
 						  Cardinal num_resources);
 extern void _XtResourceListInitialize(void);
 
+_XFUNCPROTOEND
 
 #endif /* _XtresourceI_h */

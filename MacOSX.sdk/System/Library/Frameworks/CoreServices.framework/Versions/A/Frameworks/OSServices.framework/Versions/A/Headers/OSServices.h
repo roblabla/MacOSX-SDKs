@@ -3,9 +3,7 @@
  
      Contains:   Master include for OSServices private framework
  
-     Version:    OSServices-359.2~2
- 
-     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 2000-2010 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -24,10 +22,12 @@
 #include <CarbonCore/CarbonCore.h>
 #endif
 
-
-
 #ifndef __CSIDENTITYAUTHORITY__
 #include <OSServices/CSIdentityAuthority.h>
+#endif
+
+#ifndef __CSIDENTITYBASE__
+#include <OSServices/CSIdentityBase.h>
 #endif
 
 #ifndef __CSIDENTITY__
@@ -74,7 +74,6 @@
 #include <OSServices/OpenTransportProtocol.h>
 #endif
 #endif
-#include <OSServices/NSLCore.h>
 #include <OSServices/SecurityCore.h>
 
 #endif /* __OSSERVICES__ */

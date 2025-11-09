@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2008 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -79,7 +79,14 @@ struct name {				\
 #define _TCPCB_LIST_HEAD(name, type)	LIST_HEAD(name, type)
 #endif
 
-#define TCP_RETRANSHZ	    10		/* tcp retrans timer (100ms) per hz */		
+#define TCP_RETRANSHZ	1000	/* granularity of TCP timestamps, 1ms */		
+#define TCP_TIMERHZ	100		/* frequency of TCP fast timer, 100 ms */
+
+/* Minimum time quantum within which the timers are coalesced */
+#define TCP_FASTTIMER_QUANTUM   TCP_TIMERHZ	/* fast mode, once every 100ms */
+#define TCP_SLOWTIMER_QUANTUM   TCP_RETRANSHZ / PR_SLOWHZ	/* slow mode, once every 500ms */
+
+#define TCP_RETRANSHZ_TO_USEC 1000
 
 struct tseg_qent;
 _TCPCB_LIST_HEAD(tsegqe_head, tseg_qent);
@@ -89,7 +96,7 @@ struct tcpcb {
 	int	t_dupacks;		/* consecutive dup acks recd */
 	u_int32_t unused;		/* unused now: was t_template */
 
-	int	t_timer[TCPT_NTIMERS];	/* tcp timers */
+	int	t_timer[TCPT_NTIMERS_EXT];	/* tcp timers */
 
 	_TCPCB_PTR(struct inpcb *) t_inpcb;	/* back pointer to internet pcb */
 	int	t_state;		/* state of this connection */
@@ -142,7 +149,7 @@ struct tcpcb {
 					 */
 	u_int	t_maxopd;		/* mss plus options */
 
-	u_int32_t t_rcvtime;		/* inactivity time */
+	u_int32_t t_rcvtime;		/* time at which a packet was received */
 	u_int32_t t_starttime;		/* time connection was established */
 	int	t_rtttime;		/* round trip time */
 	tcp_seq	t_rtseq;		/* sequence number being timed */
@@ -285,9 +292,8 @@ struct	tcpstat {
 	u_int32_t  tcps_sack_send_blocks;	    /* SACK blocks (options) sent     */
 	u_int32_t  tcps_sack_sboverflow;	    /* SACK sendblock overflow   */
 
-#if TRAFFIC_MGT
 	u_int32_t	tcps_bg_rcvtotal;	/* total background packets received */
-#endif /* TRAFFIC_MGT */
+	u_int32_t	tcps_rxtfindrop;	/* drop conn after retransmitting FIN */
 };
 
 #pragma pack(4)
@@ -315,7 +321,7 @@ struct  xtcpcb64 {
         u_int64_t t_segq;
         int     t_dupacks;              /* consecutive dup acks recd */
 
-        int     t_timer[TCPT_NTIMERS];  /* tcp timers */
+        int t_timer[TCPT_NTIMERS_EXT];  /* tcp timers */
 
         int     t_state;                /* state of this connection */
         u_int   t_flags;
@@ -347,7 +353,7 @@ struct  xtcpcb64 {
                                          */
         u_int   t_maxopd;               /* mss plus options */
 
-        u_int32_t t_rcvtime;            /* inactivity time */
+        u_int32_t t_rcvtime;            /* time at which a packet was received */
         u_int32_t t_starttime;          /* time connection was established */
         int     t_rtttime;              /* round trip time */
         tcp_seq t_rtseq;                /* sequence number being timed */
@@ -388,6 +394,7 @@ struct  xtcpcb64 {
 };
 
 #endif /* !CONFIG_EMBEDDED */
+
 
 #pragma pack()
 

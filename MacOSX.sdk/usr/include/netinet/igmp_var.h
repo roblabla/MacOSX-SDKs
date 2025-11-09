@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -68,7 +68,6 @@
 #define _NETINET_IGMP_VAR_H_
 #include <sys/appleapiopts.h>
 
-
 /*
  * Internet Group Management Protocol (IGMP),
  * implementation-specific definitions.
@@ -76,6 +75,48 @@
  * Written by Steve Deering, Stanford, May 1988.
  *
  * MULTICAST Revision: 3.5.1.3
+ */
+
+struct igmpstat_v3 {
+	/*
+	 * Structure header (to insulate ABI changes).
+	 */
+	uint32_t igps_version;		/* version of this structure */
+	uint32_t igps_len;		/* length of this structure */
+	/*
+	 * Message statistics.
+	 */
+	uint64_t igps_rcv_total;	/* total IGMP messages received */
+	uint64_t igps_rcv_tooshort;	/* received with too few bytes */
+	uint64_t igps_rcv_badttl;	/* received with ttl other than 1 */
+	uint64_t igps_rcv_badsum;	/* received with bad checksum */
+	/*
+	 * Query statistics.
+	 */
+	uint64_t igps_rcv_v1v2_queries;	/* received IGMPv1/IGMPv2 queries */
+	uint64_t igps_rcv_v3_queries;	/* received IGMPv3 queries */
+	uint64_t igps_rcv_badqueries;	/* received invalid queries */
+	uint64_t igps_rcv_gen_queries;	/* received general queries */
+	uint64_t igps_rcv_group_queries;/* received group queries */
+	uint64_t igps_rcv_gsr_queries;	/* received group-source queries */
+	uint64_t igps_drop_gsr_queries;	/* dropped group-source queries */
+	/*
+	 * Report statistics.
+	 */
+	uint64_t igps_rcv_reports;	/* received membership reports */
+	uint64_t igps_rcv_badreports;	/* received invalid reports */
+	uint64_t igps_rcv_ourreports;	/* received reports for our groups */
+	uint64_t igps_rcv_nora;		/* received w/o Router Alert option */
+	uint64_t igps_snd_reports;	/* sent membership reports */
+	/*
+	 * Padding for future additions.
+	 */
+	uint64_t __igps_pad[4];
+} __attribute__((aligned(8)));
+
+/*
+ * Old IGMPv2 stat structure for backward compatibility
+ *
  */
 
 struct igmpstat {
@@ -89,6 +130,10 @@ struct igmpstat {
 	u_int	igps_rcv_ourreports;	/* received reports for our groups */
 	u_int	igps_snd_reports;	/* sent membership reports */
 };
+
+#define IGPS_VERSION_3	3
+#define IGPS_VERSION3_LEN		168
+
 
 
 /*

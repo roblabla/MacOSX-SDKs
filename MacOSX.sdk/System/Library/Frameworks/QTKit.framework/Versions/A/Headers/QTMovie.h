@@ -25,6 +25,12 @@
 					and to create a valid QTMovie object must occur asynchronously. In other words, initWithAttributes:error: will return almost immediately, 
 					performing any lengthy operations on another thread.
  
+					The initializer for a QTMovie object must be called on the main thread. As just indicated, you can use the QTMovieOpenAsyncRequiredAttribute
+					to request that any lengthy loading operations be done on a background thread. In that case, you must monitor the movie load state to determine
+					when and if the movie has loaded successfully. Some media types cannot successfully be loaded on a background thread and your application should
+					be prepared for that possibility. Once a QTMovie object has been successfully loaded, you can migrate it to other threads; see the 
+					QTMovie_Threading category below for methods that you can use to do this. 
+ 
 					An exception, QTDisallowedForInitializationPurposeException, is raised whenever the client attempts to call a method that is not allowed
 					under a requested movie-opening behavior. For example, if a QTMovie object is initialized with QTMovieOpenForPlaybackAttribute set to YES,
 					then QTDisallowedForInitializationPurposeException is raised if the client attempts to call methods that export the media data.
@@ -131,7 +137,7 @@ QTKIT_EXTERN NSString * const QTMovieAskUnresolvedDataRefsAttribute			AVAILABLE_
 
 /*!
 	@constant		QTMovieOpenAsyncOKAttribute
-	@abstract		Indicates whether a movie file can be opened asynchronously if possible (NSNumber NO) or not (NSNumber YES).
+	@abstract		Indicates whether a movie file can be opened asynchronously if possible (NSNumber YES) or not (NSNumber NO).
 	@discussion		Opening a movie file and initializing a QTMovie object for that file may require a considerable amount of time, perhaps to
 					convert the data in the file from one format to another. By setting this attribute to an NSNumber wrapping the value YES, you
 					grant QTMovie permission to return a non-nil QTMovie identifier to your application immediately and then to continue processing the
@@ -971,6 +977,7 @@ typedef NSInteger QTMovieLoadState;
 /*!
 	@method			initWithMovie:timeRange:error:
 	@abstract		Creates a QTMovie object initialized with some or all of the data from an existing QTMovie object.
+	@discussion		This method cannot be called when the QTMovie object specified by the movie parameter has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@param			movie
 					A QTMovie object.
 	@param			range
@@ -1034,7 +1041,6 @@ typedef NSInteger QTMovieLoadState;
 	@method			initToWritableFile:error:
 	@abstract		Creates an empty, writable storage container at the location specified by the data reference and returns an editable QTMovie object associated with that container.
 	@discussion		Movie data can be added to the QTMovie object returned by this method (for example, using the addImage:forDuration:withAttributes: method).
-					This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@param			filename
 					An NSString object that specifies a full pathname to a file.
 	@param			errorPtr
@@ -1047,7 +1053,6 @@ typedef NSInteger QTMovieLoadState;
 	@method			initToWritableData:error:
 	@abstract		Creates an empty, writable storage container in memory and returns an editable QTMovie object associated with that container.
 	@discussion		Movie data can be added to the QTMovie object returned by this method (for example, using the addImage:forDuration:withAttributes: method).
-					This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@param			data
 					An NSMutableData object.
 	@param			errorPtr
@@ -1060,7 +1065,6 @@ typedef NSInteger QTMovieLoadState;
 	@method			initToWritableDataReference:error:
 	@abstract		Creates an empty, writable storage container at the location specified by the data reference and returns an editable QTMovie object associated with that container.
 	@discussion		Movie data can be added to the QTMovie object returned by this method (for example, using the addImage:forDuration:withAttributes: method).
-					This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@param			dataReference
 					A QTDataReference object.
 	@param			errorPtr
@@ -1181,7 +1185,6 @@ typedef NSInteger QTMovieLoadState;
 /*!
 	@method			frameImageAtTime:withAttributes:error:
 	@abstract		Returns the frame image at a specified time in a QTMovie object.
-	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 	@param			time
 					A QTTime structure that specifies the time at which a frame image is to returned.
 	@param			attributes
@@ -1190,8 +1193,10 @@ typedef NSInteger QTMovieLoadState;
 					A pointer to an NSError object; if a frame image cannot be created, an NSError object is returned in this location.
 	@result			An NSImage object, a CIImage object, a CGImageRef reference, a CVPixelBufferRef reference, or a  CVOpenGLTextureRef reference 
 					for the movie image at the specified time. If the movie has no visual data at the specified time, nil is returned.
-					All images returned by this method are autoreleased objects and must be retained by the caller
-					if they are to be accessed outside of the current run loop cycle.
+	@discussion		This method can be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
+					All images returned by this method are autoreleased objects and must be retained by the caller if they are to be accessed outside
+					of the current run loop cycle. However, applications running under garbage collection must call CVPixelBufferRelease on any
+					CVPixelBufferRef returned by this method.
 */
 - (void *)frameImageAtTime:(QTTime)time withAttributes:(NSDictionary *)attributes error:(NSError **)errorPtr;
 #endif
@@ -1561,6 +1566,7 @@ typedef NSInteger QTMovieLoadState;
 	@abstract		Inserts into a QTMovie object the specified segment of a QTTrack object.
 	@discussion		This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 					If the movie is not editable, an exception will be raised.
+					This method is deprecated and should not be used in new code.
 	@param			track
 					The QTTrack object from which the segment to be inserted is copied.
 	@param			range
@@ -1576,6 +1582,7 @@ typedef NSInteger QTMovieLoadState;
 	@abstract		Inserts into a QTMovie object the specified segment of a QTTrack object, scaling that new segment to a specified start time and duration.
 	@discussion		This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
 					If the movie is not editable, an exception will be raised.
+					This method is deprecated and should not be used in new code.
 	@param			track
 					The QTTrack object from which the segment to be inserted is copied.
 	@param			srcRange
@@ -1595,6 +1602,38 @@ typedef NSInteger QTMovieLoadState;
 					The QTTrack object to be removed.
 */
 - (void)removeTrack:(QTTrack *)track;
+#endif
+
+#if QTKIT_VERSION_MAX_ALLOWED >= QTKIT_VERSION_7_7
+/*!
+	@method			trackByInsertingSegmentOfTrack:timeRange:atTime:
+	@abstract		Inserts into a QTMovie object the specified segment of a QTTrack object.
+	@discussion		This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
+					If the movie is not editable, an exception will be raised.
+	@param			track
+					The QTTrack object from which the segment to be inserted is copied.
+	@param			range
+					A QTTimeRange structure that indicates the segment in track to be copied.
+	@param			time
+					A QTTime structure that indicates the time in the target movie at which the copied segment is to be inserted.
+	@result			The QTTrack object into which the copied segment is inserted; this is an autoreleased object.
+*/
+- (QTTrack *)trackByInsertingSegmentOfTrack:(QTTrack *)track timeRange:(QTTimeRange)range atTime:(QTTime)time;
+
+/*!
+	@method			trackByInsertingSegmentOfTrack:fromRange:scaledToRange:
+	@abstract		Inserts into a QTMovie object the specified segment of a QTTrack object, scaling that new segment to a specified start time and duration.
+	@discussion		This method cannot be called when the movie has been initialized with QTMovieOpenForPlaybackAttribute set to YES.
+					If the movie is not editable, an exception will be raised.
+	@param			track
+					The QTTrack object from which the segment to be inserted is copied.
+	@param			srcRange
+					A QTTimeRange structure that indicates the segment in track to be copied.
+	@param			dstRange
+					A QTTimeRange structure that indicates the range in the target movie at which the copied segment is to be inserted.
+	@result			The QTTrack object into which the copied segment is inserted; this is an autoreleased object.
+*/
+- (QTTrack *)trackByInsertingSegmentOfTrack:(QTTrack *)track fromRange:(QTTimeRange)srcRange scaledToRange:(QTTimeRange)dstRange;
 #endif
 
 @end
@@ -1836,6 +1875,38 @@ typedef NSInteger QTMovieLoadState;
 					A QTTime structure that indicates the time in the movie at which to find the current chapter.
 */
 - (NSInteger)chapterIndexForTime:(QTTime)time;				// 0-based index
+
 #endif
 
 @end
+
+@interface QTMovie (QTMovie_MetadataReading)
+
+#if (defined(MAC_OS_X_VERSION_10_7) && (MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_7))
+/*!
+	@method			commonMetadata
+	@abstract		Returns an NSArray containing QTMetadataItem objects for each common metadata key for which a value for the current locale is available.
+	@result			An NSArray containing QTMetadataItem objects for each common metadata key for which a value for the current locale is available; may be nil if there is no metadata that's appropriately localized.
+	@discussion		The returned metadata may be tagged with default locale information or with no locale information, if that's the best available choice.
+*/
+- (NSArray *)commonMetadata;
+
+/*!
+	@method			availableMetadataFormats
+	@abstract		Returns an NSArray containing NSString objects representing the metadata formats available to the receiver.
+	@result			An NSArray containing an NSString objects, each of which represents a metadata format that is available to the receiver.
+*/
+- (NSArray *)availableMetadataFormats;
+
+/*!
+	@method			metadataForFormat:
+	@abstract		Returns an NSArray of QTMetadataItem objects having a specified format.
+	@param			format
+					The metadata format for which items are requested.
+	@result			An NSArray containing all QTMetadataItem objects of the receiver that have the specified format; may be nil if there is no metadata of the specified format.
+*/
+- (NSArray *)metadataForFormat:(NSString *)format;
+#endif
+
+@end
+

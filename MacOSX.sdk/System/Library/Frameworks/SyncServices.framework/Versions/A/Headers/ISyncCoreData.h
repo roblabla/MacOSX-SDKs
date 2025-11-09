@@ -5,12 +5,10 @@
  */
 
 #import <CoreData/CoreData.h>
+#import <Foundation/Foundation.h>
 #import <SyncServices/ISyncCommon.h>
 
 @class ISyncClient, ISyncSession, ISyncChange;
-
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 
 @protocol NSPersistentStoreCoordinatorSyncing;
@@ -25,12 +23,12 @@
    (eg. if you registered the sync alert handler on the main thread).  When the sync session is
    ready to begin, we spawn off a new thread and perform the sync on that thread.  If inBackground
    is false, the sync is performed immediately, returning when done, in the caller's thread. */
-- (BOOL)syncWithClient:(ISyncClient *)client inBackground:(BOOL)flag handler:(id <NSPersistentStoreCoordinatorSyncing>)syncHandler error:(NSError **)rError;
+- (BOOL)syncWithClient:(ISyncClient *)client inBackground:(BOOL)flag handler:(id <NSPersistentStoreCoordinatorSyncing>)syncHandler error:(NSError **)rError NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Tell the persistent store coordinator where to store the details it needs to fast sync the stores.
    This must be called before any of its persistent stores are mutated.  If one of its stores is mutated
    without this path being set, we will slow sync on the next sync. */
-- (void)setStoresFastSyncDetailsAtURL:(NSURL *)url forPersistentStore:(NSPersistentStore *)store;
+- (void)setStoresFastSyncDetailsAtURL:(NSURL *)url forPersistentStore:(NSPersistentStore *)store NS_DEPRECATED_MAC(10_4, 10_7);
 @end
 
 
@@ -47,44 +45,43 @@
    in a monitored context after the sync client has updated it.  The application must either prevent changes
    to objects modified during a sync or must be prepared to merge changes from the persistent stores with its
    contexts. */
-- (NSArray *)managedObjectContextsToMonitorWhenSyncingPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+- (NSArray *)managedObjectContextsToMonitorWhenSyncingPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* Get the list of contexts that will be updated when we save changes to the persistent store.  If the
    sync handler does not implement this method, it is the caller's responsibility to reload its contexts
    at the end of a sync. */
-- (NSArray *)managedObjectContextsToReloadAfterSyncingPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+- (NSArray *)managedObjectContextsToReloadAfterSyncingPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* The following methods are called as we progress through the sync session (negotiation, pushing,
    pulling, done).  You may explicitly finish or cancel the sync session to finish syncing early. */
-- (BOOL)persistentStoreCoordinatorShouldStartSyncing:(NSPersistentStoreCoordinator *)coordinator;
-- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator willPushChangesInSyncSession:(ISyncSession *)session;
-- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator didPushChangesInSyncSession:(ISyncSession *)session;
-- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator willPullChangesInSyncSession:(ISyncSession *)session;
-- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator didPullChangesInSyncSession:(ISyncSession *)session;
-- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator didFinishSyncSession:(ISyncSession *)session;
-- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator didCancelSyncSession:(ISyncSession *)session error:(NSError *)error;
+- (BOOL)persistentStoreCoordinatorShouldStartSyncing:(NSPersistentStoreCoordinator *)coordinator NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator willPushChangesInSyncSession:(ISyncSession *)session NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator didPushChangesInSyncSession:(ISyncSession *)session NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator willPullChangesInSyncSession:(ISyncSession *)session NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator didPullChangesInSyncSession:(ISyncSession *)session NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator didFinishSyncSession:(ISyncSession *)session NS_DEPRECATED_MAC(10_4, 10_7);
+- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator didCancelSyncSession:(ISyncSession *)session error:(NSError *)error NS_DEPRECATED_MAC(10_4, 10_7);
 
 
 /* This method is called before the synchronizer pushes a record to the sync server. It can be used 
    by the delegate to modify the record on the fly.  If you return nil, no record will be pushed for
    the specified object. */
-- (NSDictionary *)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator willPushRecord:(NSDictionary *)record forManagedObject:(NSManagedObject *)managedObject inSyncSession:(ISyncSession *)session;
-- (BOOL)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator willDeleteRecordWithIdentifier:(NSString *)identifier inSyncSession:(ISyncSession *)session;
+- (NSDictionary *)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator willPushRecord:(NSDictionary *)record forManagedObject:(NSManagedObject *)managedObject inSyncSession:(ISyncSession *)session NS_DEPRECATED_MAC(10_4, 10_7);
+- (BOOL)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator willDeleteRecordWithIdentifier:(NSString *)identifier inSyncSession:(ISyncSession *)session NS_DEPRECATED_MAC(10_4, 10_7);
 
 
 /* This method is called after the synchronizer pulls a record from the truth, and before it applies 
    it to its managed object context.  You can change the change that will be applied to the object. */
-- (ISyncChange *)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator willApplyChange:(ISyncChange *)change toManagedObject:(NSManagedObject *)managedObject inSyncSession:(ISyncSession *)session;
+- (ISyncChange *)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator willApplyChange:(ISyncChange *)change toManagedObject:(NSManagedObject *)managedObject inSyncSession:(ISyncSession *)session NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* This method is called after applying a change to an object. */
-- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator didApplyChange:(ISyncChange *)change toManagedObject:(NSManagedObject *)managedObject inSyncSession:(ISyncSession *)session;
+- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator didApplyChange:(ISyncChange *)change toManagedObject:(NSManagedObject *)managedObject inSyncSession:(ISyncSession *)session NS_DEPRECATED_MAC(10_4, 10_7);
 
 /* This method is called after saving changes to the persistent stores.  Typically, this happens at the end
    of a sync but may occur multiple times during a sync.  (Essentially, whenever clientCommittedAcceptedChanges
    is called on the sync session.) */
-- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator didCommitChanges:(NSDictionary *)changes inSyncSession:(ISyncSession *)session;
+- (void)persistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator didCommitChanges:(NSDictionary *)changes inSyncSession:(ISyncSession *)session NS_DEPRECATED_MAC(10_4, 10_7);
 
 @end
 
-#endif /* MAC_OS_X_VERSION_10_5 */
 

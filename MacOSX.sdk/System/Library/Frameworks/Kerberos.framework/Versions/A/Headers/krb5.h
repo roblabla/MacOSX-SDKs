@@ -2929,4 +2929,4 @@ extern void initialize_asn1_error_table (void) /*@modifies internalState@*/;
 #endif
 #endif /* KRB5_KRB5_H_INCLUDED */
 
-#endif \* __KERBEROS5__ */
+#endif /* __KERBEROS5__ */

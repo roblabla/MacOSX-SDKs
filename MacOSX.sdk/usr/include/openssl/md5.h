@@ -59,6 +59,8 @@
 #ifndef HEADER_MD5_H
 #define HEADER_MD5_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/e_os2.h>
 #include <stddef.h>
 
@@ -106,13 +108,13 @@ typedef struct MD5state_st
 	} MD5_CTX;
 
 #ifdef OPENSSL_FIPS
-int private_MD5_Init(MD5_CTX *c);
+int private_MD5_Init(MD5_CTX *c) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
-int MD5_Init(MD5_CTX *c);
-int MD5_Update(MD5_CTX *c, const void *data, size_t len);
-int MD5_Final(unsigned char *md, MD5_CTX *c);
-unsigned char *MD5(const unsigned char *d, size_t n, unsigned char *md);
-void MD5_Transform(MD5_CTX *c, const unsigned char *b);
+int MD5_Init(MD5_CTX *c) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int MD5_Update(MD5_CTX *c, const void *data, size_t len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int MD5_Final(unsigned char *md, MD5_CTX *c) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned char *MD5(const unsigned char *d, size_t n, unsigned char *md) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void MD5_Transform(MD5_CTX *c, const unsigned char *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifdef  __cplusplus
 }
 #endif

@@ -5,8 +5,7 @@
 #ifndef _GLIDISPATCH_H
 #define _GLIDISPATCH_H
 
-#include <OpenGL/gl.h>
-#include <OpenGL/glext.h>
+#include <OpenGL/gltypes.h>
 #include <OpenGL/gliContext.h>
 
 #ifdef __cplusplus
@@ -707,7 +706,7 @@ typedef struct __GLIFunctionDispatchRec
 	void (*generate_mipmap_EXT) (GLIContext ctx, GLenum target);
 
 	void (*buffer_parameteri_APPLE) (GLIContext ctx, GLenum target, GLenum pname, GLint param);
-	void (*flush_mapped_buffer_range_APPLE) (GLIContext ctx, GLenum target, GLintptrARB offset, GLsizeiptrARB size);
+	void (*flush_mapped_buffer_range_APPLE) (GLIContext ctx, GLenum target, GLintptr offset, GLsizeiptr size);
     
 	void (*program_env_parameters4fv_EXT)(GLIContext ctx, GLenum target, GLuint index, GLsizei count, const GLfloat *params);
 	void (*program_local_parameters4fv_EXT)(GLIContext ctx, GLenum target, GLuint index, GLsizei count, const GLfloat *params);
@@ -815,6 +814,84 @@ typedef struct __GLIFunctionDispatchRec
 	void (*draw_arrays_instanced)(GLIContext ctx, GLenum mode, GLint first, GLsizei count, GLsizei primcount);
 	void (*draw_elements_instanced)(GLIContext ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount);
 
+	/* ARB_draw_elements_base_vertex */
+	void (*draw_elements_base_vertex)(GLIContext ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint base_vertex);
+	void (*draw_range_elements_base_vertex)(GLIContext ctx, GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint base_vertex);
+	void (*draw_elements_instanced_base_vertex)(GLIContext ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint base_vertex);
+	void (*multi_draw_elements_base_vertex)(GLIContext ctx, GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount, const GLint *base_vertex);
+
+	/* ARB_vertex_array_object / OES_vertex_array_object */
+	void (*bind_vertex_array_ARB)(GLIContext ctx, GLuint array);
+	void (*delete_vertex_arrays_ARB)(GLIContext ctx, GLsizei n, const GLuint *arrays);
+	void (*gen_vertex_arrays_ARB)(GLIContext ctx, GLsizei n, GLuint *arrays);
+	GLboolean (*is_vertex_array_ARB)(GLIContext ctx, GLuint array);
+
+	/* APPLE_vertex_point_size */
+	void (*point_size_pointer) (GLIContext ctx, GLenum type, GLsizei stride, const GLvoid *pointer);
+	void (*vertex_point_sizef_APPLE) (GLIContext ctx, GLfloat size);
+
+	/* OpenGL 3.0 */
+	void (*clear_bufferiv)(GLIContext ctx, GLenum buffer, GLint drawbuffer, const GLint *value);
+	void (*clear_bufferuiv)(GLIContext ctx, GLenum buffer, GLint drawbuffer, const GLuint *value);
+	void (*clear_bufferfv)(GLIContext ctx, GLenum buffer, GLint drawbuffer, const GLfloat *value);
+	void (*clear_bufferfi)(GLIContext ctx, GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil);
+	const GLubyte* (*get_stringi)(GLIContext ctx, GLenum name, GLuint index);
+	
+	
+	/* ARB_sync */
+	GLsync (*fence_sync) (GLIContext ctx, GLenum condition, GLbitfield flags);
+	GLboolean (*is_sync) (GLIContext ctx, GLsync sync);
+	void (*delete_sync) (GLIContext ctx, GLsync sync);
+	GLenum (*client_wait_sync) (GLIContext ctx, GLsync sync, GLbitfield flags, GLuint64 timeout);
+	void (*wait_sync) (GLIContext ctx, GLsync sync, GLbitfield flags, GLuint64 timeout);
+	void (*get_integer64v_sync) (GLIContext ctx, GLenum pname, GLint64 *params);
+	void (*get_synciv) (GLIContext ctx, GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values);
+
+	/* GL_ARB_texture_multisample */
+	void (*tex_image2D_multisample)(GLIContext ctx, GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
+	void (*tex_image3D_multisample)(GLIContext ctx, GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
+	void (*get_multisamplefv)(GLIContext ctx, GLenum pname, GLuint index, GLfloat *val);
+	void (*sample_maski)(GLIContext ctx, GLuint index, GLbitfield mask);
+
+    /* GL_ARB_texture_buffer_object (OpenGL 3.1) */
+    void (*tex_buffer)(GLIContext ctx, GLenum target, GLenum internalformat, GLuint buffer);
+
+    /* GL_ARB_copy_buffer (OpenGL 3.1) */
+	void (*copy_buffer_sub_data)(GLIContext ctx, GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size);
+
+	/* primitive_restart (OpenGL 3.1) */
+	void (*primitive_restart_index)(GLIContext ctx, GLuint index);
+
+	/* EXT_timer_query */
+	void (*get_query_objecti64v) (GLIContext ctx, GLuint id, GLenum pname, GLint64EXT *params);
+	void (*get_query_objectui64v) (GLIContext ctx, GLuint id, GLenum pname, GLuint64EXT *params);
+
+	/* 3.2 API */
+	/* ARB_map_buffer_range (OpenGL 3.2) */
+	GLvoid *(*map_buffer_range) (GLIContext ctx, GLenum target, GLintptr offset, GLsizeiptr length, GLenum access);
+	void (*flush_mapped_buffer_range) (GLIContext ctx, GLenum target, GLintptr offset, GLsizeiptr length);
+ 
+	/* ARB_timer_query (OpenGL 3.3) */
+	void (*query_counter) (GLIContext ctx, GLuint id, GLenum target);
+	void (*get_integer64i_v) (GLIContext ctx, GLenum target, GLuint index, GLint64 *data);
+	void (*get_buffer_parameteri64v)(GLIContext ctx, GLenum target, GLenum pname, GLint64 *params);
+	
+	/* ARB_sampler_object (OpenGL 3.3) */
+	void (*gen_samplers) (GLIContext ctx, GLsizei count, GLuint *samplers);
+	void (*delete_samplers) (GLIContext ctx, GLsizei count, const GLuint *samplers);
+	GLboolean (*is_sampler) (GLIContext ctx, GLuint sampler);
+	void (*bind_sampler) (GLIContext ctx, GLenum unit, GLuint sampler);
+	void (*sampler_parameteri) (GLIContext ctx, GLuint sampler, GLenum pname, GLint param);
+	void (*sampler_parameteriv) (GLIContext ctx, GLuint sampler, GLenum pname, const GLint *param);
+	void (*sampler_parameterf) (GLIContext ctx, GLuint sampler, GLenum pname, GLfloat param);
+	void (*sampler_parameterfv) (GLIContext ctx, GLuint sampler, GLenum pname, const GLfloat *param);
+	void (*sampler_parameterIiv) (GLIContext ctx, GLuint sampler, GLenum pname, const GLint *param);
+	void (*sampler_parameterIuiv) (GLIContext ctx, GLuint sampler, GLenum pname, const GLuint *param);
+	void (*get_sampler_parameteriv) (GLIContext ctx, GLuint sampler, GLenum pname, GLint *params);
+	void (*get_sampler_parameterfv) (GLIContext ctx, GLuint sampler, GLenum pname, GLfloat *params);
+	void (*get_sampler_parameterIiv) (GLIContext ctx, GLuint sampler, GLenum pname, GLint *params);
+	void (*get_sampler_parameterIuiv) (GLIContext ctx, GLuint sampler, GLenum pname, GLuint *params);
+ 
 } GLIFunctionDispatch;
 
 #ifdef __cplusplus

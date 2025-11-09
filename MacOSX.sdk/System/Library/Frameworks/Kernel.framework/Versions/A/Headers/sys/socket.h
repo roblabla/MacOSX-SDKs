@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2010 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -76,6 +76,8 @@
 #include <sys/cdefs.h>
 #include <machine/_param.h>
 
+
+
 /*
  * Definitions related to sockets: types, address families, options.
  */
@@ -130,6 +132,7 @@ struct iovec {
 	size_t	 iov_len;	/* [XSI] Size of region iov_base points to */
 };
 #endif
+
  
 /*
  * Types
@@ -161,6 +164,7 @@ struct iovec {
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define	SO_REUSEPORT	0x0200		/* allow local address & port reuse */
 #define	SO_TIMESTAMP	0x0400		/* timestamp received dgram traffic */
+#define SO_TIMESTAMP_MONOTONIC	0x0800	/* Monotonically increasing timestamp on rcvd dgram */
 #ifndef __APPLE__
 #define	SO_ACCEPTFILTER	0x1000		/* there is an accept filter */
 #else
@@ -184,6 +188,8 @@ struct iovec {
 #define	SO_TYPE		0x1008		/* get socket type */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 /*efine	SO_PRIVSTATE	0x1009		   get/deny privileged state */
+#define SO_LABEL        0x1010          /* socket's MAC label */
+#define SO_PEERLABEL    0x1011          /* socket's peer MAC label */
 #ifdef __APPLE__
 #define SO_NREAD	0x1020		/* APPLE: get 1st-packet byte count */
 #define SO_NKE		0x1021		/* APPLE: Install socket-level NKE */
@@ -203,8 +209,7 @@ struct iovec {
 #define SO_RANDOMPORT   0x1082  /* APPLE: request local port randomization */
 #define SO_NP_EXTENSIONS	0x1083	/* To turn off some POSIX behavior */
 #endif
-#define	SO_LABEL	0x1010		/* socket's MAC label */
-#define	SO_PEERLABEL	0x1011		/* socket's peer MAC label */
+
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /*
@@ -433,14 +438,14 @@ struct sockaddr_storage {
  *	Fifth: type of info, defined below
  *	Sixth: flag(s) to mask with for NET_RT_FLAGS
  */
-#define NET_RT_DUMP			1		/* dump; may limit to a.f. */
-#define NET_RT_FLAGS		2		/* by flags, e.g. RESOLVING */
-#define NET_RT_IFLIST		3		/* survey interface list */
-#define NET_RT_STAT			4		/* routing statistics */
-#define NET_RT_TRASH		5		/* routes not in table but not freed */
-#define NET_RT_IFLIST2	6		/* interface list with addresses */
-#define NET_RT_DUMP2                     7               /* dump; may limit to a.f. */
-#define	NET_RT_MAXID		8
+#define NET_RT_DUMP		1	/* dump; may limit to a.f. */
+#define NET_RT_FLAGS		2	/* by flags, e.g. RESOLVING */
+#define NET_RT_IFLIST		3	/* survey interface list */
+#define NET_RT_STAT		4	/* routing statistics */
+#define NET_RT_TRASH		5	/* routes not in table but not freed */
+#define NET_RT_IFLIST2		6	/* interface list with addresses */
+#define NET_RT_DUMP2		7	/* dump; may limit to a.f. */
+#define	NET_RT_MAXID		10
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
 
@@ -521,7 +526,9 @@ struct user32_msghdr {
 #define	MSG_DONTWAIT	0x80		/* this message should be nonblocking */
 #define	MSG_EOF		0x100		/* data completes connection */
 #ifdef __APPLE__
+#ifdef __APPLE_API_OBSOLETE
 #define MSG_WAITSTREAM  0x200           /* wait up to full request.. may return partial */
+#endif
 #define MSG_FLUSH	0x400		/* Start of 'hold' seq; dump so_temp */
 #define MSG_HOLD	0x800		/* Hold frag in so_temp */
 #define MSG_SEND	0x1000		/* Send the packet in so_temp */
@@ -598,7 +605,7 @@ struct cmsgcred {
 	    ((unsigned char *)(mhdr)->msg_control +			\
 	     (mhdr)->msg_controllen)) ?					\
 	  (struct cmsghdr *)0L /* NULL */ :				\
-	  (struct cmsghdr *)((unsigned char *)(cmsg) +			\
+	  (struct cmsghdr *)(void *)((unsigned char *)(cmsg) +		\
 	 		    __DARWIN_ALIGN32((__uint32_t)(cmsg)->cmsg_len))))
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
@@ -610,10 +617,11 @@ struct cmsgcred {
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /* "Socket"-level control message types: */
-#define	SCM_RIGHTS	0x01		/* access rights (array of int) */
+#define	SCM_RIGHTS			0x01	/* access rights (array of int) */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-#define	SCM_TIMESTAMP	0x02		/* timestamp (struct timeval) */
-#define	SCM_CREDS	0x03		/* process creds (struct cmsgcred) */
+#define	SCM_TIMESTAMP			0x02	/* timestamp (struct timeval) */
+#define	SCM_CREDS			0x03	/* process creds (struct cmsgcred) */
+#define	SCM_TIMESTAMP_MONOTONIC		0x04	/* timestamp (uint64_t) */ 
 
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 

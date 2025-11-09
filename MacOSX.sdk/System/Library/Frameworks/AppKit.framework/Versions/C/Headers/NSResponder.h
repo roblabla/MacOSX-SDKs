@@ -1,11 +1,12 @@
 /*
         NSResponder.h
         Application Kit
-        Copyright (c) 1994-2009, Apple Inc.
+        Copyright (c) 1994-2011, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <AppKit/NSEvent.h>
 
 @class NSArray, NSError, NSEvent, NSMenu, NSUndoManager, NSWindow;
 
@@ -36,37 +37,33 @@
 - (void)keyDown:(NSEvent *)theEvent;
 - (void)keyUp:(NSEvent *)theEvent;
 - (void)flagsChanged:(NSEvent *)theEvent;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)tabletPoint:(NSEvent *)theEvent;
 - (void)tabletProximity:(NSEvent *)theEvent;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (void)cursorUpdate:(NSEvent *)event;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+- (void)cursorUpdate:(NSEvent *)event NS_AVAILABLE_MAC(10_5);
 /* The following *WithEvent methods are available on 10.5.2 or later, and will be sent only on hardware capable of generating the corresponding NSEvent types 
 */
-- (void)magnifyWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)rotateWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)swipeWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)beginGestureWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (void)endGestureWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+- (void)magnifyWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_5);
+- (void)rotateWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_5);
+- (void)swipeWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_5);
+- (void)beginGestureWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_5);
+- (void)endGestureWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_5);
 
 
 /* A new set of touches has been recognized. To get the set of touches that began for this view (or descendants of this view): [event touchesMatchingPhase:NSTouchPhaseBegan inView:self]; Note: this is not always the point of contact with the touch device. A touch that transitions from resting to active may be part of a Began set.
 */
-- (void)touchesBeganWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)touchesBeganWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_6);
 
 /* One or more touches has moved. To get the set of touches that moved for this view (or descendants of this view): [event touchesMatchingPhase:NSTouchPhaseMoved inView:self];
 */ 
-- (void)touchesMovedWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)touchesMovedWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_6);
 
 /* A set of touches have been removed. To get the set of touches that ended for this view (or descendants of this view): [event touchesMatchingPhase:NSTouchPhaseEnded inView:self]; Note: this is not always the point of removal with the touch device. A touch that transitions from active to resting may be part of an Ended set.
 */
-- (void)touchesEndedWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)touchesEndedWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_6);
 
 /* The System has cancelled the tracking of touches for any reason.
 */
-- (void)touchesCancelledWithEvent:(NSEvent *)event AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+- (void)touchesCancelledWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_6);
 
 - (void)noResponderFor:(SEL)eventSelector;
 - (BOOL)acceptsFirstResponder;
@@ -83,9 +80,19 @@
 
 - (void)helpRequested:(NSEvent *)eventPtr;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (BOOL)shouldBeTreatedAsInkEvent:(NSEvent *)theEvent;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2 */
+
+/* Some views process gesture scroll events to perform elastic scrolling. In some cases, you may want to track gesture scroll events like a swipe. (see -trackSwipeEventWithOptions:dampenAmountThresholdMin:max:usingHandler: in NSEvent.h) Implement this method and return YES in your swipe controller and views that perform elastic scrolling will forward gesture scroll events up the responder chain on the following condition: the content to be scrolled is already at the edge of the scrolled direction at the beginning of the scroll gesture. Otherwise, the view will perform elastic scrolling. Default implementation returns NO.
+*/
+- (BOOL)wantsScrollEventsForSwipeTrackingOnAxis:(NSEventGestureAxis)axis NS_AVAILABLE_MAC(10_7);
+
+/* Some views process gesture scroll events to perform elastic scrolling. In some cases, the scroll events should be forwarded up the responder chain for further processing (for example an enclosing scroll view). Implement this method returning yes and views that perform elastic scrolling will forward gesture scroll events up the responder chain on the following condition: the content to be scrolled is already at the edge of the scrolled direction at the beginning of the scroll gesture. Otherwise, the view will perform elastic scrolling. Note: If you intend to call -trackSwipeEventWithOptions:dampenAmountThresholdMin:max:usingHandler: implement -wantsToTrackScrollEventsAsSwipeForAxis, as defined above instead. Default implementation returns NO.
+*/
+- (BOOL)wantsForwardedScrollEventsForAxis:(NSEventGestureAxis)axis NS_AVAILABLE_MAC(10_7);
+
+/* This method is used in the process of finding a target for an action method. If this NSResponder instance does not itself respondsToSelector:action, then supplementalTargetForAction:sender: is called. This method should return an object which responds to the action; if this responder does not have a supplemental object that does that, the implementation of this method should call super's supplementalTargetForAction:sender:. NSResponder's implementation returns nil.
+*/
+- (id)supplementalTargetForAction:(SEL)action sender:(id)sender NS_AVAILABLE_MAC(10_7);
 @end
 
 @interface NSResponder(NSKeyboardUI)
@@ -144,21 +151,17 @@
 - (void)moveParagraphForwardAndModifySelection:(id)sender;
 - (void)moveParagraphBackwardAndModifySelection:(id)sender;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)moveWordRight:(id)sender;
 - (void)moveWordLeft:(id)sender;
 - (void)moveRightAndModifySelection:(id)sender;
 - (void)moveLeftAndModifySelection:(id)sender;
 - (void)moveWordRightAndModifySelection:(id)sender;
 - (void)moveWordLeftAndModifySelection:(id)sender;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-- (void)moveToLeftEndOfLine:(id)sender;
-- (void)moveToRightEndOfLine:(id)sender;
-- (void)moveToLeftEndOfLineAndModifySelection:(id)sender;
-- (void)moveToRightEndOfLineAndModifySelection:(id)sender;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
+- (void)moveToLeftEndOfLine:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)moveToRightEndOfLine:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)moveToLeftEndOfLineAndModifySelection:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)moveToRightEndOfLineAndModifySelection:(id)sender NS_AVAILABLE_MAC(10_6);
 
 - (void)scrollPageUp:(id)sender;
 - (void)scrollPageDown:(id)sender;
@@ -189,14 +192,10 @@
 - (void)insertParagraphSeparator:(id)sender;
 - (void)insertNewlineIgnoringFieldEditor:(id)sender;
 - (void)insertTabIgnoringFieldEditor:(id)sender;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 - (void)insertLineBreak:(id)sender;
 - (void)insertContainerBreak:(id)sender;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4 */
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
-- (void)insertSingleQuoteIgnoringSubstitution:(id)sender;
-- (void)insertDoubleQuoteIgnoringSubstitution:(id)sender;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 */
+- (void)insertSingleQuoteIgnoringSubstitution:(id)sender NS_AVAILABLE_MAC(10_5);
+- (void)insertDoubleQuoteIgnoringSubstitution:(id)sender NS_AVAILABLE_MAC(10_5);
 
     /* Case changes */
 
@@ -209,9 +208,7 @@
 
 - (void)deleteForward:(id)sender;
 - (void)deleteBackward:(id)sender;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)deleteBackwardByDecomposingPreviousCharacter:(id)sender;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 - (void)deleteWordForward:(id)sender;
 - (void)deleteWordBackward:(id)sender;
 - (void)deleteToBeginningOfLine:(id)sender;
@@ -234,21 +231,17 @@
 
     /* Cancellation */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 - (void)cancelOperation:(id)sender;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3 */
 
     /* Writing Direction */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-- (void)makeBaseWritingDirectionNatural:(id)sender;
-- (void)makeBaseWritingDirectionLeftToRight:(id)sender;
-- (void)makeBaseWritingDirectionRightToLeft:(id)sender;
+- (void)makeBaseWritingDirectionNatural:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)makeBaseWritingDirectionLeftToRight:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)makeBaseWritingDirectionRightToLeft:(id)sender NS_AVAILABLE_MAC(10_6);
 
-- (void)makeTextWritingDirectionNatural:(id)sender;
-- (void)makeTextWritingDirectionLeftToRight:(id)sender;
-- (void)makeTextWritingDirectionRightToLeft:(id)sender;
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6 */
+- (void)makeTextWritingDirectionNatural:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)makeTextWritingDirectionLeftToRight:(id)sender NS_AVAILABLE_MAC(10_6);
+- (void)makeTextWritingDirectionRightToLeft:(id)sender NS_AVAILABLE_MAC(10_6);
 
 @end
 
@@ -256,7 +249,15 @@
 - (NSUndoManager *)undoManager;
 @end
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+@interface NSResponder (NSControlEditingSupport)
+
+/* This is a responder chain method to allow controls to determine when they should become first responder or not. Some controls, such as NSTextField, should only become first responder when the enclosing NSTableView/NSBrowser indicates that the view can begin editing. It is up to the particular control that wants to be validated to call this method in its -mouseDown: (or other time) to determine if it should attempt to become the first responder or not. The default implementation returns YES when there is no -nextResponder, otherwise, it is forwarded up the responder chain. NSTableView/NSBrowser implements this to only allow first responder status if the responder is a view in a selected row. It also delays the first responder assignment if a doubleAction needs to (possibly) be sent. 'event' may be nil if there is no applicable event.
+ */
+- (BOOL)validateProposedFirstResponder:(NSResponder *)responder forEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_7);
+
+@end
+
+
 
 @interface NSResponder(NSErrorPresentation)
 
@@ -279,7 +280,7 @@ Between the responder chain in a typical application and various overrides of th
     For windows that have no window controller at all:
     view -> superviews -> window -> application
 
-You can invoke this method to present error alert sheets. For example, Cocoa's own -[NSDocument saveToURL:ofType:forSaveOperation:delegate:didSaveSelector:contextInfo:] invokes this method when it's just invoked -saveToURL:ofType:forSaveOperation:error: and that method has returned NO.
+You can invoke this method to present error alert sheets. For example, Cocoa's own -[NSDocument saveToURL:ofType:forSaveOperation:delegate:didSaveSelector:contextInfo:] invokes this method when it's just invoked -saveToURL:ofType:forSaveOperation:completionHandler: and that method has signalled an error.
 
 You probably shouldn't override this method, because you have no way of reliably predicting whether this method vs. -presentError will be invoked for any particular error. You should instead override the -willPresentError: method described below.
 */
@@ -287,7 +288,7 @@ You probably shouldn't override this method, because you have no way of reliably
 
 /* Present an error alert to the user, as an application-modal panel, and return YES if error recovery was done, NO otherwise. This method behaves much like the previous one except it does not return until the user has dismissed the alert and, if the error had recovery options and a recovery delegate, the error's recovery delegate has been sent an -attemptRecoveryFromError:optionIndex: message.
 
-You can invoke this method to present error alert dialog boxes. For example, Cocoa's own [NSDocumentController openDocument:] invokes this method when it's just invoked -openDocumentWithContentsOfURL:display:error: and that method has returned nil.
+You can invoke this method to present error alert dialog boxes. For example, Cocoa's own [NSDocumentController openDocument:] invokes this method when document opening fails.
 
 You probably shouldn't override this method, because you have no way of reliably predicting whether this method vs. -presentError:modalForWindow:delegate:didPresentSelector:contextInfo: will be invoked for any particular error. You should instead override the -willPresentError: method described below.
 */
@@ -301,4 +302,9 @@ You can override this method to customize the presentation of errors by examinin
 
 @end
 
-#endif
+
+@interface NSResponder(NSTextFinderSupport)
+
+- (void)performTextFinderAction:(id)sender NS_AVAILABLE_MAC(10_7);
+
+@end

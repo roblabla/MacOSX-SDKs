@@ -72,7 +72,12 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
       : _M_file(__f), _M_unget_buf(traits_type::eof())
       { }
 
-      /**
+#if BUILDING_LIBSTDCXX
+	__attribute__((used))
+	virtual ~stdio_sync_filebuf() {}
+#endif
+		
+		/**
        *  @return  The underlying FILE*.
        *
        *  This function can be used to access the underlying "C" file pointer.

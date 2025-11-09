@@ -1,7 +1,7 @@
 /*
 	NSColorWell.h
 	Application Kit
-	Copyright (c) 1994-2009, Apple Inc.
+	Copyright (c) 1994-2011, Apple Inc.
 	All rights reserved.
 */
 
@@ -18,7 +18,8 @@
 	unsigned int        isBordered:1;
 	unsigned int        cantDraw:1;
 	unsigned int        isNotContinuous:1;
-	unsigned int	    reservedColorWell:28;
+        unsigned int        refusesFR:1;
+	unsigned int	    reservedColorWell:27;
     } _cwFlags;
 }
 

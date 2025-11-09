@@ -75,7 +75,7 @@ extern const CFStringRef kDRDataPreparer			AVAILABLE_MAC_OS_X_VERSION_10_2_AND_L
 				will be used, after being mapped into a legal character set.
 				Note, this value will NOT be used if Mac extensions are turned
 				on - with Mac extensions, the system identifier will always be
-				"APPLE COMPUTER, INC., TYPE: 0002"
+				"APPLE COMPUTER, INC., TYPE: 0002" or "APPLE INC., TYPE: 0002"
 */
 extern const CFStringRef kDRSystemIdentifier		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 

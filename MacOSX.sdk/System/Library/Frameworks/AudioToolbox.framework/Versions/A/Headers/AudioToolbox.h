@@ -5,7 +5,7 @@
 				Also includes CAShow that allows you to print
 				internal state of an object.
   
-     Copyright:  (c) 2002 - 2008 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2002 - 2008 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

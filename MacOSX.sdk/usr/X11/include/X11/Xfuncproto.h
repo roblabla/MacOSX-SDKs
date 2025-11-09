@@ -1,5 +1,4 @@
 /* Xfuncproto.h.  Generated from Xfuncproto.h.in by configure.  */
-/* $Xorg: Xfuncproto.h,v 1.4 2001/02/09 02:03:22 xorgcvs Exp $ */
 /*
  *
 Copyright 1989, 1991, 1998  The Open Group
@@ -25,7 +24,6 @@ used in advertising or otherwise to promote the sale, use or other dealings
 in this Software without prior written authorization from The Open Group.
  *
  */
-/* $XFree86: xc/include/Xfuncproto.h,v 3.4 2001/12/14 19:53:25 dawes Exp $ */
 
 /* Definitions to make function prototypes manageable */
 
@@ -80,13 +78,11 @@ in this Software without prior written authorization from The Open Group.
 
 #if defined(__GNUC__) && (__GNUC__ >= 4)
 # define _X_SENTINEL(x) __attribute__ ((__sentinel__(x)))
-# define _X_ATTRIBUTE_PRINTF(x,y) __attribute__((__format__(__printf__,x,y)))
 #else
 # define _X_SENTINEL(x)
-# define _X_ATTRIBUTE_PRINTF(x,y)
 #endif /* GNUC >= 4 */
 
-#if defined(__GNUC__) && (__GNUC__ >= 4)
+#if defined(__GNUC__) && (__GNUC__ >= 4) && !defined(__CYGWIN__)
 # define _X_EXPORT      __attribute__((visibility("default")))
 # define _X_HIDDEN      __attribute__((visibility("hidden")))
 # define _X_INTERNAL    __attribute__((visibility("internal")))
@@ -103,21 +99,51 @@ in this Software without prior written authorization from The Open Group.
 #if defined(__GNUC__) && ((__GNUC__ * 100 + __GNUC_MINOR__) >= 303)
 # define _X_LIKELY(x)   __builtin_expect(!!(x), 1)
 # define _X_UNLIKELY(x) __builtin_expect(!!(x), 0)
-# define _X_INLINE      inline
-#elif defined(__SUNPRO_C) && (__SUNPRO_C >= 0x550)
+#else /* not gcc >= 3.3 */
 # define _X_LIKELY(x)   (x)
 # define _X_UNLIKELY(x) (x)
-# define _X_INLINE      inline
-#else /* not gcc >= 3.3 and not Sun Studio >= 8 */
-# define _X_LIKELY(x)   (x)
-# define _X_UNLIKELY(x) (x)
-# define _X_INLINE
 #endif
 
 #if defined(__GNUC__) && ((__GNUC__ * 100 + __GNUC_MINOR__) >= 301)
 # define _X_DEPRECATED  __attribute__((deprecated))
 #else /* not gcc >= 3.1 */
 # define _X_DEPRECATED
+#endif
+
+#if (defined(__GNUC__) && ((__GNUC__ * 100 + __GNUC_MINOR__) >= 205)) \
+	|| (defined(__SUNPRO_C) && (__SUNPRO_C >= 0x590))
+# define _X_NORETURN __attribute((noreturn))
+#else
+# define _X_NORETURN
+#endif /* GNUC  */
+
+#if defined(__GNUC__) && ((__GNUC__ * 100 + __GNUC_MINOR__) >= 203)
+# define _X_ATTRIBUTE_PRINTF(x,y) __attribute__((__format__(__printf__,x,y)))
+#else /* not gcc >= 2.3 */
+# define _X_ATTRIBUTE_PRINTF(x,y)
+#endif
+
+/* C99 keyword "inline" or equivalent extensions in pre-C99 compilers */
+#if defined(inline) /* assume autoconf set it correctly */ || \
+   (defined(__STDC__) && (__STDC_VERSION__ - 0 >= 199901L)) /* C99 */ || \
+   (defined(__SUNPRO_C) && (__SUNPRO_C >= 0x550))
+# define _X_INLINE inline
+#elif defined(__GNUC__) && !defined(__STRICT_ANSI__) /* gcc w/C89+extensions */
+# define _X_INLINE __inline__
+#else
+# define _X_INLINE
+#endif
+
+/* C99 keyword "restrict" or equivalent extensions in pre-C99 compilers */
+#ifndef _X_RESTRICT_KYWD
+# if defined(restrict) /* assume autoconf set it correctly */ || \
+   (defined(__STDC__) && (__STDC_VERSION__ - 0 >= 199901L)) /* C99 */
+#  define _X_RESTRICT_KYWD  restrict
+# elif defined(__GNUC__) && !defined(__STRICT_ANSI__) /* gcc w/C89+extensions */
+#  define _X_RESTRICT_KYWD __restrict__
+# else
+#  define _X_RESTRICT_KYWD
+# endif
 #endif
 
 #endif /* _XFUNCPROTO_H_ */

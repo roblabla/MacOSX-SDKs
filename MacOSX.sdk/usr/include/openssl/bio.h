@@ -59,6 +59,8 @@
 #ifndef HEADER_BIO_H
 #define HEADER_BIO_H
 
+#include <AvailabilityMacros.h>
+
 #include <openssl/e_os2.h>
 
 #ifndef OPENSSL_NO_FP_API
@@ -202,9 +204,9 @@ extern "C" {
 
 typedef struct bio_st BIO;
 
-void BIO_set_flags(BIO *b, int flags);
-int  BIO_test_flags(const BIO *b, int flags);
-void BIO_clear_flags(BIO *b, int flags);
+void BIO_set_flags(BIO *b, int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int  BIO_test_flags(const BIO *b, int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void BIO_clear_flags(BIO *b, int flags) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #define BIO_get_flags(b) BIO_test_flags(b, ~(0x0))
 #define BIO_set_retry_special(b) \
@@ -254,14 +256,14 @@ void BIO_clear_flags(BIO *b, int flags);
 #define BIO_cb_pre(a)	(!((a)&BIO_CB_RETURN))
 #define BIO_cb_post(a)	((a)&BIO_CB_RETURN)
 
-long (*BIO_get_callback(const BIO *b)) (struct bio_st *,int,const char *,int, long,long);
+long (*BIO_get_callback(const BIO *b)) (struct bio_st *,int,const char *,int, long,long) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 void BIO_set_callback(BIO *b, 
-	long (*callback)(struct bio_st *,int,const char *,int, long,long));
-char *BIO_get_callback_arg(const BIO *b);
-void BIO_set_callback_arg(BIO *b, char *arg);
+	long (*callback)(struct bio_st *,int,const char *,int, long,long)) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+char *BIO_get_callback_arg(const BIO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void BIO_set_callback_arg(BIO *b, char *arg) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-const char * BIO_method_name(const BIO *b);
-int BIO_method_type(const BIO *b);
+const char * BIO_method_name(const BIO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_method_type(const BIO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 typedef void bio_info_cb(struct bio_st *, int, const char *, int, long, long);
 
@@ -460,7 +462,7 @@ typedef struct bio_f_buffer_ctx_struct
 /* If you are wondering why this isn't defined, its because CONST_STRICT is
  * purely a compile-time kludge to allow const to be checked.
  */
-int BIO_read_filename(BIO *b,const char *name);
+int BIO_read_filename(BIO *b,const char *name) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #else
 #define BIO_read_filename(b,name) BIO_ctrl(b,BIO_C_SET_FILENAME, \
 		BIO_CLOSE|BIO_FP_READ,(char *)name)
@@ -512,8 +514,8 @@ int BIO_read_filename(BIO *b,const char *name);
 #define BIO_pending(b)		(int)BIO_ctrl(b,BIO_CTRL_PENDING,0,NULL)
 #define BIO_wpending(b)		(int)BIO_ctrl(b,BIO_CTRL_WPENDING,0,NULL)
 /* ...pending macros have inappropriate return type */
-size_t BIO_ctrl_pending(BIO *b);
-size_t BIO_ctrl_wpending(BIO *b);
+size_t BIO_ctrl_pending(BIO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+size_t BIO_ctrl_wpending(BIO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #define BIO_flush(b)		(int)BIO_ctrl(b,BIO_CTRL_FLUSH,0,NULL)
 #define BIO_get_info_callback(b,cbp) (int)BIO_ctrl(b,BIO_CTRL_GET_CALLBACK,0, \
 						   cbp)
@@ -531,9 +533,9 @@ size_t BIO_ctrl_wpending(BIO *b);
 /* macros with inappropriate type -- but ...pending macros use int too: */
 #define BIO_get_write_guarantee(b) (int)BIO_ctrl(b,BIO_C_GET_WRITE_GUARANTEE,0,NULL)
 #define BIO_get_read_request(b)    (int)BIO_ctrl(b,BIO_C_GET_READ_REQUEST,0,NULL)
-size_t BIO_ctrl_get_write_guarantee(BIO *b);
-size_t BIO_ctrl_get_read_request(BIO *b);
-int BIO_ctrl_reset_read_request(BIO *b);
+size_t BIO_ctrl_get_write_guarantee(BIO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+size_t BIO_ctrl_get_read_request(BIO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_ctrl_reset_read_request(BIO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* ctrl macros for dgram */
 #define BIO_ctrl_dgram_connect(b,peer)  \
@@ -552,105 +554,105 @@ int BIO_ctrl_reset_read_request(BIO *b);
 /* These two aren't currently implemented */
 /* int BIO_get_ex_num(BIO *bio); */
 /* void BIO_set_ex_free_func(BIO *bio,int idx,void (*cb)()); */
-int BIO_set_ex_data(BIO *bio,int idx,void *data);
-void *BIO_get_ex_data(BIO *bio,int idx);
+int BIO_set_ex_data(BIO *bio,int idx,void *data) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void *BIO_get_ex_data(BIO *bio,int idx) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int BIO_get_ex_new_index(long argl, void *argp, CRYPTO_EX_new *new_func,
-	CRYPTO_EX_dup *dup_func, CRYPTO_EX_free *free_func);
-unsigned long BIO_number_read(BIO *bio);
-unsigned long BIO_number_written(BIO *bio);
+	CRYPTO_EX_dup *dup_func, CRYPTO_EX_free *free_func) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned long BIO_number_read(BIO *bio) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+unsigned long BIO_number_written(BIO *bio) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 # ifndef OPENSSL_NO_FP_API
 #  if defined(OPENSSL_SYS_WIN16) && defined(_WINDLL)
-BIO_METHOD *BIO_s_file_internal(void);
-BIO *BIO_new_file_internal(char *filename, char *mode);
-BIO *BIO_new_fp_internal(FILE *stream, int close_flag);
+BIO_METHOD *BIO_s_file_internal(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *BIO_new_file_internal(char *filename, char *mode) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *BIO_new_fp_internal(FILE *stream, int close_flag) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #    define BIO_s_file	BIO_s_file_internal
 #    define BIO_new_file	BIO_new_file_internal
 #    define BIO_new_fp	BIO_new_fp_internal
 #  else /* FP_API */
-BIO_METHOD *BIO_s_file(void );
-BIO *BIO_new_file(const char *filename, const char *mode);
-BIO *BIO_new_fp(FILE *stream, int close_flag);
+BIO_METHOD *BIO_s_file(void ) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *BIO_new_file(const char *filename, const char *mode) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *BIO_new_fp(FILE *stream, int close_flag) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #    define BIO_s_file_internal		BIO_s_file
 #    define BIO_new_file_internal	BIO_new_file
 #    define BIO_new_fp_internal		BIO_s_file
 #  endif /* FP_API */
 # endif
-BIO *	BIO_new(BIO_METHOD *type);
-int	BIO_set(BIO *a,BIO_METHOD *type);
-int	BIO_free(BIO *a);
-void	BIO_vfree(BIO *a);
-int	BIO_read(BIO *b, void *data, int len);
-int	BIO_gets(BIO *bp,char *buf, int size);
-int	BIO_write(BIO *b, const void *data, int len);
-int	BIO_puts(BIO *bp,const char *buf);
-int	BIO_indent(BIO *b,int indent,int max);
-long	BIO_ctrl(BIO *bp,int cmd,long larg,void *parg);
-long BIO_callback_ctrl(BIO *b, int cmd, void (*fp)(struct bio_st *, int, const char *, int, long, long));
-char *	BIO_ptr_ctrl(BIO *bp,int cmd,long larg);
-long	BIO_int_ctrl(BIO *bp,int cmd,long larg,int iarg);
-BIO *	BIO_push(BIO *b,BIO *append);
-BIO *	BIO_pop(BIO *b);
-void	BIO_free_all(BIO *a);
-BIO *	BIO_find_type(BIO *b,int bio_type);
-BIO *	BIO_next(BIO *b);
-BIO *	BIO_get_retry_BIO(BIO *bio, int *reason);
-int	BIO_get_retry_reason(BIO *bio);
-BIO *	BIO_dup_chain(BIO *in);
+BIO *	BIO_new(BIO_METHOD *type) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BIO_set(BIO *a,BIO_METHOD *type) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BIO_free(BIO *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	BIO_vfree(BIO *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BIO_read(BIO *b, void *data, int len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BIO_gets(BIO *bp,char *buf, int size) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BIO_write(BIO *b, const void *data, int len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BIO_puts(BIO *bp,const char *buf) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BIO_indent(BIO *b,int indent,int max) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+long	BIO_ctrl(BIO *bp,int cmd,long larg,void *parg) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+long BIO_callback_ctrl(BIO *b, int cmd, void (*fp)(struct bio_st *, int, const char *, int, long, long)) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+char *	BIO_ptr_ctrl(BIO *bp,int cmd,long larg) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+long	BIO_int_ctrl(BIO *bp,int cmd,long larg,int iarg) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *	BIO_push(BIO *b,BIO *append) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *	BIO_pop(BIO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void	BIO_free_all(BIO *a) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *	BIO_find_type(BIO *b,int bio_type) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *	BIO_next(BIO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *	BIO_get_retry_BIO(BIO *bio, int *reason) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int	BIO_get_retry_reason(BIO *bio) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *	BIO_dup_chain(BIO *in) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int BIO_nread0(BIO *bio, char **buf);
-int BIO_nread(BIO *bio, char **buf, int num);
-int BIO_nwrite0(BIO *bio, char **buf);
-int BIO_nwrite(BIO *bio, char **buf, int num);
+int BIO_nread0(BIO *bio, char **buf) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_nread(BIO *bio, char **buf, int num) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_nwrite0(BIO *bio, char **buf) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_nwrite(BIO *bio, char **buf, int num) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 #ifndef OPENSSL_SYS_WIN16
 long BIO_debug_callback(BIO *bio,int cmd,const char *argp,int argi,
-	long argl,long ret);
+	long argl,long ret) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #else
 long _far _loadds BIO_debug_callback(BIO *bio,int cmd,const char *argp,int argi,
-	long argl,long ret);
+	long argl,long ret) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
-BIO_METHOD *BIO_s_mem(void);
-BIO *BIO_new_mem_buf(void *buf, int len);
-BIO_METHOD *BIO_s_socket(void);
-BIO_METHOD *BIO_s_connect(void);
-BIO_METHOD *BIO_s_accept(void);
-BIO_METHOD *BIO_s_fd(void);
+BIO_METHOD *BIO_s_mem(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *BIO_new_mem_buf(void *buf, int len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO_METHOD *BIO_s_socket(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO_METHOD *BIO_s_connect(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO_METHOD *BIO_s_accept(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO_METHOD *BIO_s_fd(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifndef OPENSSL_SYS_OS2
-BIO_METHOD *BIO_s_log(void);
+BIO_METHOD *BIO_s_log(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
-BIO_METHOD *BIO_s_bio(void);
-BIO_METHOD *BIO_s_null(void);
-BIO_METHOD *BIO_f_null(void);
-BIO_METHOD *BIO_f_buffer(void);
+BIO_METHOD *BIO_s_bio(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO_METHOD *BIO_s_null(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO_METHOD *BIO_f_null(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO_METHOD *BIO_f_buffer(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifdef OPENSSL_SYS_VMS
 BIO_METHOD *BIO_f_linebuffer(void);
 #endif
-BIO_METHOD *BIO_f_nbio_test(void);
+BIO_METHOD *BIO_f_nbio_test(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifndef OPENSSL_NO_DGRAM
-BIO_METHOD *BIO_s_datagram(void);
+BIO_METHOD *BIO_s_datagram(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
 
 /* BIO_METHOD *BIO_f_ber(void); */
 
-int BIO_sock_should_retry(int i);
-int BIO_sock_non_fatal_error(int error);
-int BIO_dgram_non_fatal_error(int error);
+int BIO_sock_should_retry(int i) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_sock_non_fatal_error(int error) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_dgram_non_fatal_error(int error) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-int BIO_fd_should_retry(int i);
-int BIO_fd_non_fatal_error(int error);
+int BIO_fd_should_retry(int i) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_fd_non_fatal_error(int error) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int BIO_dump_cb(int (*cb)(const void *data, size_t len, void *u),
-		void *u, const char *s, int len);
+		void *u, const char *s, int len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int BIO_dump_indent_cb(int (*cb)(const void *data, size_t len, void *u),
-		       void *u, const char *s, int len, int indent);
-int BIO_dump(BIO *b,const char *bytes,int len);
-int BIO_dump_indent(BIO *b,const char *bytes,int len,int indent);
+		       void *u, const char *s, int len, int indent) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_dump(BIO *b,const char *bytes,int len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_dump_indent(BIO *b,const char *bytes,int len,int indent) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #ifndef OPENSSL_NO_FP_API
-int BIO_dump_fp(FILE *fp, const char *s, int len);
-int BIO_dump_indent_fp(FILE *fp, const char *s, int len, int indent);
+int BIO_dump_fp(FILE *fp, const char *s, int len) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_dump_indent_fp(FILE *fp, const char *s, int len, int indent) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #endif
-struct hostent *BIO_gethostbyname(const char *name);
+struct hostent *BIO_gethostbyname(const char *name) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* We might want a thread-safe interface too:
  * struct hostent *BIO_gethostbyname_r(const char *name,
  *     struct hostent *result, void *buffer, size_t buflen);
@@ -659,31 +661,31 @@ struct hostent *BIO_gethostbyname(const char *name);
  * substructures; if the buffer does not suffice, NULL is returned
  * and an appropriate error code is set).
  */
-int BIO_sock_error(int sock);
-int BIO_socket_ioctl(int fd, long type, void *arg);
-int BIO_socket_nbio(int fd,int mode);
-int BIO_get_port(const char *str, unsigned short *port_ptr);
-int BIO_get_host_ip(const char *str, unsigned char *ip);
-int BIO_get_accept_socket(char *host_port,int mode);
-int BIO_accept(int sock,char **ip_port);
-int BIO_sock_init(void );
-void BIO_sock_cleanup(void);
-int BIO_set_tcp_ndelay(int sock,int turn_on);
+int BIO_sock_error(int sock) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_socket_ioctl(int fd, long type, void *arg) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_socket_nbio(int fd,int mode) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_get_port(const char *str, unsigned short *port_ptr) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_get_host_ip(const char *str, unsigned char *ip) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_get_accept_socket(char *host_port,int mode) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_accept(int sock,char **ip_port) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_sock_init(void ) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+void BIO_sock_cleanup(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+int BIO_set_tcp_ndelay(int sock,int turn_on) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
-BIO *BIO_new_socket(int sock, int close_flag);
-BIO *BIO_new_dgram(int fd, int close_flag);
-BIO *BIO_new_fd(int fd, int close_flag);
-BIO *BIO_new_connect(char *host_port);
-BIO *BIO_new_accept(char *host_port);
+BIO *BIO_new_socket(int sock, int close_flag) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *BIO_new_dgram(int fd, int close_flag) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *BIO_new_fd(int fd, int close_flag) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *BIO_new_connect(char *host_port) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+BIO *BIO_new_accept(char *host_port) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 int BIO_new_bio_pair(BIO **bio1, size_t writebuf1,
-	BIO **bio2, size_t writebuf2);
+	BIO **bio2, size_t writebuf2) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 /* If successful, returns 1 and in *bio1, *bio2 two BIO pair endpoints.
  * Otherwise returns 0 and sets *bio1 and *bio2 to NULL.
  * Size 0 uses default value.
  */
 
-void BIO_copy_next_retry(BIO *b);
+void BIO_copy_next_retry(BIO *b) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*long BIO_ghbn_ctrl(int cmd,int iarg,char *parg);*/
 
@@ -693,20 +695,20 @@ void BIO_copy_next_retry(BIO *b);
 #  define __bio_h__attr__(x)
 #endif
 int BIO_printf(BIO *bio, const char *format, ...)
-	__bio_h__attr__((__format__(__printf__,2,3)));
+	__bio_h__attr__((__format__(__printf__,2,3))) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int BIO_vprintf(BIO *bio, const char *format, va_list args)
-	__bio_h__attr__((__format__(__printf__,2,0)));
+	__bio_h__attr__((__format__(__printf__,2,0))) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int BIO_snprintf(char *buf, size_t n, const char *format, ...)
-	__bio_h__attr__((__format__(__printf__,3,4)));
+	__bio_h__attr__((__format__(__printf__,3,4))) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 int BIO_vsnprintf(char *buf, size_t n, const char *format, va_list args)
-	__bio_h__attr__((__format__(__printf__,3,0)));
+	__bio_h__attr__((__format__(__printf__,3,0))) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 #undef __bio_h__attr__
 
 /* BEGIN ERROR CODES */
 /* The following lines are auto generated by the script mkerr.pl. Any changes
  * made after this point may be overwritten when the script is next run.
  */
-void ERR_load_BIO_strings(void);
+void ERR_load_BIO_strings(void) DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /* Error codes for the BIO functions. */
 

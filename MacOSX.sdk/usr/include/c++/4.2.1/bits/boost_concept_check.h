@@ -58,7 +58,11 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
 // as possible at runtime, use as few resources as possible, and hopefully
 // be elided out of existence... hmmm.
 template <class _Concept>
-inline void __function_requires()
+inline
+#if BUILDING_LIBSTDCXX
+__attribute__((used))
+#endif
+void __function_requires()
 {
   void (_Concept::*__x)() _IsUnused = &_Concept::__constraints;
 }

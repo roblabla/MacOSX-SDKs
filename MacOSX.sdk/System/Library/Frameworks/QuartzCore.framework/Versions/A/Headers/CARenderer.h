@@ -16,24 +16,24 @@
  *    the bottom left corner. (That is, window coordinates must match
  *    vertex coordinates.)
  *
+ *    Sample code to initialize the OpenGL context for a window of width
+ *    W and height H could be:
+ *
+ *      glViewport (0, 0, W, H);
+ *      glMatrixMode (GL_PROJECTION);
+ *      glLoadIdentity ();
+ *      glOrtho (0, W, 0, H, -1, 1);
+ *
  * 2. all OpenGL state apart from the viewport and projection matrices
  *    must have their default values when -render is called. On return
  *    from the -render method, the default values will be preserved.
- *
- * Sample code to initialize the OpenGL context for a window of width W
- * and height H could be:
- *
- *    glViewport (0, 0, W, H);
- *    glMatrixMode (GL_PROJECTION);
- *    glLoadIdentity ();
- *    glOrtho (0, W, 0, H, -1, 1);
  */
 
 #import <QuartzCore/CABase.h>
 #import <CoreVideo/CVBase.h>
 #import <Foundation/NSObject.h>
 
-@class NSDictionary, CALayer, CIContext;
+@class NSDictionary, CALayer;
 
 @interface CARenderer : NSObject
 {

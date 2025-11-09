@@ -1,13 +1,12 @@
 /*
     NSPathComponentCell.h
     Application Kit
-    Copyright (c) 2006-2009, Apple Inc.
+    Copyright (c) 2006-2011, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
 
 #import <AppKit/NSTextFieldCell.h>
 
@@ -16,6 +15,7 @@
 /* Use the 'stringValue' or 'attributedStringValue' to set the display title for this component cell. Use 'image' and 'setImage:' to control the icon displayed for this component cell.
 */
 
+NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSPathComponentCell : NSTextFieldCell {
 @private
     NSImage *_image;
@@ -49,4 +49,3 @@
 
 @end
 
-#endif

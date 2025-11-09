@@ -1,14 +1,9 @@
 /*	
     NSHTTPCookieStorage.h
-    Copyright (C) 2003-2009, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2011, Apple Inc. All rights reserved.    
     
     Public header file.
 */
-
-// Note: To use the APIs described in these headers, you must perform
-// a runtime check for Foundation-462.1 or later.
-#import <AvailabilityMacros.h>
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import <Foundation/NSObject.h>
 
@@ -55,14 +50,6 @@ typedef NSUInteger NSHTTPCookieAcceptPolicy;
     @result The shared cookie storage
 */
 + (NSHTTPCookieStorage *)sharedHTTPCookieStorage;
-
-/*!
-    @method initWithStorageLocation
-    @abstract initialize an NSHTTPCookieStorage to use the given storage location as the disk backing.
-    @param storageFileURL a file:// URL pointing at the desired filename for the resulting cookie storage.
-    @result A cookie storage object that will persist to the given file url.
- */
-- (id)initWithStorageLocation:(NSURL*)storageFileURL;
 
 /*!
     @method cookies
@@ -132,6 +119,14 @@ typedef NSUInteger NSHTTPCookieAcceptPolicy;
 */
 - (void)setCookieAcceptPolicy:(NSHTTPCookieAcceptPolicy)cookieAcceptPolicy;
 
+/*!
+  @method sortedCookiesUsingDescriptors:
+  @abstract Returns an array of all cookies in the store, sorted according to the key value and sorting direction of the NSSortDescriptors specified in the parameter.
+  @param sortOrder an array of NSSortDescriptors which represent the preferred sort order of the resulting array.
+  @discussion proper sorting of cookies may require extensive string conversion, which can be avoided by allowing the system to perform the sorting.  This API is to be preferred over the more generic -[NSHTTPCookieStorage cookies] API, if sorting is going to be performed.
+*/
+- (NSArray*)sortedCookiesUsingDescriptors:(NSArray*) sortOrder NS_AVAILABLE(10_7, 5_0);
+
 @end
 
 /*!
@@ -140,12 +135,11 @@ typedef NSUInteger NSHTTPCookieAcceptPolicy;
     distributed notification center whenever the accept cookies
     preference is changed
 */
-extern NSString * const NSHTTPCookieManagerAcceptPolicyChangedNotification;
+FOUNDATION_EXPORT NSString * const NSHTTPCookieManagerAcceptPolicyChangedNotification;
 
 /*!
     @const NSHTTPCookieManagerCookiesChangedNotification
     @abstract Notification sent when the set of cookies changes
 */
-extern NSString * const NSHTTPCookieManagerCookiesChangedNotification;
+FOUNDATION_EXPORT NSString * const NSHTTPCookieManagerCookiesChangedNotification;
 
-#endif

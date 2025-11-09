@@ -66,7 +66,7 @@
 #define HAVE_CHOWN 1
 
 /* Define if you have the 'chroot' function. */
-#define HAVE_CHROOT 1
+/* #undef HAVE_CHROOT */
 
 /* Define to 1 if you have the `clock' function. */
 #define HAVE_CLOCK 1
@@ -218,7 +218,7 @@
 #define HAVE_GETNAMEINFO 1
 
 /* Define if you have the 'getpagesize' function. */
-#define HAVE_GETPAGESIZE 1
+/* #undef HAVE_GETPAGESIZE */
 
 /* Define to 1 if you have the `getpeername' function. */
 #define HAVE_GETPEERNAME 1
@@ -399,7 +399,7 @@
 #define HAVE_PTHREAD_H 1
 
 /* Define to 1 if you have the `pthread_init' function. */
-/* #undef HAVE_PTHREAD_INIT */
+#define HAVE_PTHREAD_INIT 1
 
 /* Define to 1 if you have the `pthread_sigmask' function. */
 #define HAVE_PTHREAD_SIGMASK 1

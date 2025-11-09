@@ -1,8 +1,6 @@
 /*
    Copyright (c) 2002  XFree86 Inc
 */
-/* $XdotOrg: xc/include/extensions/XRes.h,v 1.4 2003/12/18 05:48:06 dawes Exp $ */
-/* $XFree86: xc/include/extensions/XRes.h,v 1.3 2002/03/10 22:05:51 mvojkovi Exp $ */
 
 #ifndef _XRES_H
 #define _XRES_H
@@ -24,14 +22,14 @@ _XFUNCPROTOBEGIN
 
 Bool XResQueryExtension (
    Display *dpy,
-   int *event_base,
-   int *error_base
+   int *event_base_return,
+   int *error_base_return
 );
 
 Status XResQueryVersion (
    Display *dpy,
-   int *major_versionp,
-   int *minor_versionp
+   int *major_version_return,
+   int *minor_version_return
 );
 
 Status XResQueryClients (

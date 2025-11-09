@@ -3,7 +3,7 @@
  
      Contains:   Master include for CoreServices (non-UI toolbox)
  
-     Version:    CoreServices-44~355
+     Version:    CoreServices-53~104
  
      Copyright:  © 1999-2008 by Apple Computer, Inc., all rights reserved.
  
