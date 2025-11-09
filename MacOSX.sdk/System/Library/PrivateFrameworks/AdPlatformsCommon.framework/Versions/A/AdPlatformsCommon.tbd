@@ -19,8 +19,9 @@ exports:
                        APCoordinatedRankRequestBox, APCoordinatedRetryBox, APFrequencyCapData, 
                        APInstallAttribution, APMescalSigning, APMescalSigningRequestor, 
                        APPCControllerRequester, APPolicyData, APRepresentationData, 
-                       APRequestCoordinator, APTapAction, PCNativeAsset, PCNativeAssetInfo, 
-                       PCNativeBorderStyle, PCNativeButton, PCNativeButtonStyle, 
-                       PCNativeColor, PCNativeElement, PCNativePrimitiveColor, PCNativeRepresentation, 
-                       PCNativeShadowStyle, PCNativeStyle ]
+                       APRequestCoordinator, APTapAction, APTargetingCriteria, APTargetingDimensions, 
+                       PCNativeAsset, PCNativeAssetInfo, PCNativeBorderStyle, PCNativeButton, 
+                       PCNativeButtonStyle, PCNativeColor, PCNativeElement, PCNativeLocalizedHeadline, 
+                       PCNativePrimitiveColor, PCNativeRepresentation, PCNativeShadowStyle, 
+                       PCNativeStyle ]
 ...

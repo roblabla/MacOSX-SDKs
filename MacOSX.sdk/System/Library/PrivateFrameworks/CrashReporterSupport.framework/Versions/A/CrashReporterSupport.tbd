@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport'
-current-version: 15125.1
+current-version: 15125.4
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -171,11 +171,14 @@ exports:
                        _kOSASandboxExtensionKey, _kOSASubmissionDomain, _kOSASubmissionPolicyAlternate, 
                        _kPathOptionUntrusted, _logEventForAppleCare, _logForAppleCare, 
                        _logLineForAppleCare, _ns2xpc, _rollAppleCareLogs, _rtcsc_send, 
-                       _runCrashMoverService, _symbolicateSpeedTracer, _xpc2ns ]
-    objc-classes:    [ OSABinaryImageCatalog, OSABinaryImageSegment, OSABridgeLinkProxy, 
-                       OSACrackShotReport, OSADateCounter, OSADefaults, OSADiagnosticsReporterSupport, 
-                       OSALegacyXform, OSALog, OSALogTrackerObject, OSAOsLogPackParser, 
-                       OSAParsedOsLogPart, OSAProxyConfiguration, OSAReport, OSASafeCreateDirectoryOptions, 
+                       _rtcsc_send_realtime, _runCrashMoverService, _symbolicateSpeedTracer, 
+                       _xpc2ns ]
+    objc-classes:    [ ExclaveAddressSpace, ExclaveLayout, ExclaveStackEntry, ExclaveThread, 
+                       KCContainer, OSABinaryImageCatalog, OSABinaryImageSegment, 
+                       OSABridgeLinkProxy, OSACrackShotReport, OSADateCounter, OSADefaults, 
+                       OSADiagnosticsReporterSupport, OSAExclaveContainer, OSALegacyXform, 
+                       OSALog, OSALogTrackerObject, OSAOsLogPackParser, OSAParsedOsLogPart, 
+                       OSAProxyConfiguration, OSAReport, OSASafeCreateDirectoryOptions, 
                        OSAStackShotReport, OSAStateMonitor, OSASymbolInfo, OSASystemConfiguration, 
                        OSASystemWatchdogCrashReport, OSATasking ]
     objc-ivars:      [ OSABinaryImageCatalog._absolute_segment, OSABinaryImageCatalog._kernel_cache_segment, 

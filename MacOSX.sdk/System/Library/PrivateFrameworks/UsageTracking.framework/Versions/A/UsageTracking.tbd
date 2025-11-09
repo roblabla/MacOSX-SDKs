@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UsageTracking.framework/Versions/A/UsageTracking'
-current-version: 336
+current-version: 346
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -13,9 +13,10 @@ allowable-clients:
                        DeviceManagementTests, FamilyControlsAgent, FamilyControlsTests, 
                        PowerlogHelperdOperators, PowerlogLiteOperators, RemoteManagementTests, 
                        SafariShared, ScreenTime, ScreenTimeAgent, ScreenTimeAgentTests, 
-                       ScreenTimeAgentUnitTests, ScreenTimeIntegrationTests, ScreenTimePreferencesExtension, 
-                       ScreenTimeSettingsFunctionalTests, ScreenTimeSettingsUI, ScreenTimeSettingsUIUnitTests, 
-                       ScreenTimeTests, ScreenTimeUI, ScreenTimeUICoreTestApp, ScreenTimeUICoreUIUnitTests, 
+                       ScreenTimeAgentUnitTests, ScreenTimeCore, ScreenTimeIntegrationTests, 
+                       ScreenTimePreferencesExtension, ScreenTimeSettingsFunctionalTests, 
+                       ScreenTimeSettingsUI, ScreenTimeSettingsUIUnitTests, ScreenTimeTests, 
+                       ScreenTimeUI, ScreenTimeUICoreTestApp, ScreenTimeUICoreUIUnitTests, 
                        ScreenTimeUITests, ScreenTimeUnitTests, ScreenTimeWebExtension, 
                        ScreenTimeWidgetExtensionFunctionalTests, UsageTrackingAgent, 
                        UsageTrackingFunctionalTests, dmd, iCloudSubscriptionOptimizerCore, 

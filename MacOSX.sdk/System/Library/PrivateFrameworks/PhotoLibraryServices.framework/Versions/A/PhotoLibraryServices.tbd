@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibraryServices.framework/Versions/A/PhotoLibraryServices'
-current-version: 646.2.101
+current-version: 651.0.100
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -100,6 +100,8 @@ exports:
                        _PLComputeCacheBackupFeatureVersion, _PLComputeCacheEncryptedArchiveFilename, 
                        _PLComputeCacheInitialSyncBounds, _PLComputeCachePathComponentBackupCreatedMarker, 
                        _PLComputeCachePathComponentPrepare, _PLComputeCachePathComponentRestore, 
+                       _PLComputeCachePolicyAmbientSuggestionSnapshotEntryLimit, 
+                       _PLComputeCachePolicyAmbientSuggestionSnapshotEntryLimitKey, 
                        _PLComputeCachePolicyAppPrivateDataKeyPath, _PLComputeCachePolicyBackupFeatureVersionKey, 
                        _PLComputeCachePolicyCPLConfigurationKey, _PLComputeCachePolicyMinAssetCount, 
                        _PLComputeCachePolicyMinAssetCountKey, _PLComputeCachePolicyMinCloudStorageTier, 
@@ -1040,6 +1042,7 @@ exports:
                        PLAccountStore, PLAdditionalAssetAttributes, PLAdjustmentVirtualResource, 
                        PLAggdLogging, PLAggregateAlbumList, PLAggregateAlbumListChangeNotification, 
                        PLAggregationProcessor, PLAlbumJournalEntryPayload, PLAlbumListJournalEntryPayload, 
+                       PLAmbientSuggestionComputeJournalEntryPayload, PLAmbientSuggestionComputePayloadAdapter, 
                        PLAnalyticsLibraryCounters, PLAnalyticsResourceCounters, PLAnalyticsSyndicationLibraryCounters, 
                        PLAssetAnalysisState, PLAssetChangeNotification, PLAssetCluster, 
                        PLAssetCollectionGenerationResult, PLAssetCollectionGenerator, 
@@ -1185,7 +1188,8 @@ exports:
                        PLManagedObjectJournalEntryPayload, PLManagedObjectValidationResult, 
                        PLManagedObjectValidator, PLMediaAnalysisAssetAttributes, 
                        PLMediaAnalysisServiceRequestAdapter, PLMediaMetadataVirtualResource, 
-                       PLMediaMiningUtilities, PLMemory, PLMemoryJournalEntryPayload, 
+                       PLMediaMiningUtilities, PLMemory, PLMemoryComputeJournalEntryPayload, 
+                       PLMemoryComputePayloadAdapter, PLMemoryJournalEntryPayload, 
                        PLMergePolicy, PLMigrationContext, PLMigrationHistory, PLMigrationHistoryJournalEntryPayload, 
                        PLMinMaxSettings, PLModelMigration, PLModelMigrationAction, 
                        PLModelMigrationActionBackground, PLModelMigrationActionCore, 
@@ -1245,7 +1249,8 @@ exports:
                        PLModelMigrationAction_ResetCurationScoreSyndicatedAsset, 
                        PLModelMigrationAction_ResetDuplicateAlbums, PLModelMigrationAction_ResetDuplicateDetectorProcessingToken, 
                        PLModelMigrationAction_ResetDuplicateProcessingValue, PLModelMigrationAction_ResetExternalAssets, 
-                       PLModelMigrationAction_ResetGraphPersons, PLModelMigrationAction_ResetRecentHighlightTitleUpdateDate, 
+                       PLModelMigrationAction_ResetFilesystemImportToken, PLModelMigrationAction_ResetGraphPersons, 
+                       PLModelMigrationAction_ResetRecentHighlightTitleUpdateDate, 
                        PLModelMigrationAction_ResetRevGeoAndShiftedLocation, PLModelMigrationAction_ResetSharedLibrarySharingSuggestionsAssets, 
                        PLModelMigrationAction_ResetSyndication, PLModelMigrationAction_ResetSyndicationAssetSyncToken, 
                        PLModelMigrationAction_ResetVideoDuplicateAssetFromDuplicateAlbums, 

@@ -400,6 +400,7 @@ typedef integer_t       cpu_threadtype_t;
 #define CPUFAMILY_ARM_PALMA 0x72015832
 #define CPUFAMILY_ARM_COLL 0x2876f5b5
 #define CPUFAMILY_ARM_LOBOS 0x5f4dea93
+#define CPUFAMILY_ARM_DONAN 0x6f5129ac
 
 /* Described in rdar://64125549 */
 #define CPUSUBFAMILY_UNKNOWN            0

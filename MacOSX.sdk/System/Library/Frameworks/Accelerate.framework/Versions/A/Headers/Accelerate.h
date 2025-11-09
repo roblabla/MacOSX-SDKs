@@ -24,7 +24,6 @@
 
 
 
-
 #ifndef VIMAGE_H
 #include <vImage/vImage.h>
 #endif

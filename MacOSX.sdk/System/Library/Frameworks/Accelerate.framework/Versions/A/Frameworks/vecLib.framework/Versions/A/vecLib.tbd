@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/vecLib'
-current-version: 1043.100.6
+current-version: 1043.120.8
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
@@ -436,24 +436,25 @@ exports:
                        _BNNSGraphCompileOptionsGetDownconvertMode, _BNNSGraphCompileOptionsGetFileWriteFSyncBarrier, 
                        _BNNSGraphCompileOptionsGetGenerateDebugInfo, _BNNSGraphCompileOptionsGetOptimizationPreference, 
                        _BNNSGraphCompileOptionsGetOutputFD, _BNNSGraphCompileOptionsGetOutputPath, 
-                       _BNNSGraphCompileOptionsGetPredefinedOptimizations, _BNNSGraphCompileOptionsGetTarget, 
-                       _BNNSGraphCompileOptionsGetTargetSingleThread, _BNNSGraphCompileOptionsGetUpconvertMode, 
-                       _BNNSGraphCompileOptionsGetUserData, _BNNSGraphCompileOptionsGetValidateMILFile, 
-                       _BNNSGraphCompileOptionsGetWeightsFD, _BNNSGraphCompileOptionsGetWeightsPath, 
-                       _BNNSGraphCompileOptionsMakeDefault, _BNNSGraphCompileOptionsSetCompilationEnableSignposts, 
-                       _BNNSGraphCompileOptionsSetDeduplicationMode, _BNNSGraphCompileOptionsSetDownconvertMode, 
-                       _BNNSGraphCompileOptionsSetFileWriteFSyncBarrier, _BNNSGraphCompileOptionsSetGenerateDebugInfo, 
-                       _BNNSGraphCompileOptionsSetMessageLogCallback, _BNNSGraphCompileOptionsSetMessageLogMask, 
-                       _BNNSGraphCompileOptionsSetOptimizationPreference, _BNNSGraphCompileOptionsSetOutputFD, 
-                       _BNNSGraphCompileOptionsSetOutputPath, _BNNSGraphCompileOptionsSetOutputPathWithPermissions, 
-                       _BNNSGraphCompileOptionsSetOutputPathWithPermissionsAndProtectionClass, 
-                       _BNNSGraphCompileOptionsSetPredefinedOptimizations, _BNNSGraphCompileOptionsSetTarget, 
-                       _BNNSGraphCompileOptionsSetTargetSingleThread, _BNNSGraphCompileOptionsSetUpconvertMode, 
-                       _BNNSGraphCompileOptionsSetUserData, _BNNSGraphCompileOptionsSetValidateMILFile, 
-                       _BNNSGraphCompileOptionsSetWeightsFD, _BNNSGraphCompileOptionsSetWeightsPathWithPermissions, 
-                       _BNNSGraphContextCreate, _BNNSGraphContextDestroy, _BNNSGraphContextDestroy_v2, 
-                       _BNNSGraphContextEnablePerformanceData, _BNNSGraphContextEnableSignposts, 
-                       _BNNSGraphContextExecute, _BNNSGraphContextExecute_v2, _BNNSGraphContextGetArgPosition, 
+                       _BNNSGraphCompileOptionsGetPreallocateOutputFile, _BNNSGraphCompileOptionsGetPredefinedOptimizations, 
+                       _BNNSGraphCompileOptionsGetTarget, _BNNSGraphCompileOptionsGetTargetSingleThread, 
+                       _BNNSGraphCompileOptionsGetUpconvertMode, _BNNSGraphCompileOptionsGetUserData, 
+                       _BNNSGraphCompileOptionsGetValidateMILFile, _BNNSGraphCompileOptionsGetWeightsFD, 
+                       _BNNSGraphCompileOptionsGetWeightsPath, _BNNSGraphCompileOptionsMakeDefault, 
+                       _BNNSGraphCompileOptionsSetCompilationEnableSignposts, _BNNSGraphCompileOptionsSetDeduplicationMode, 
+                       _BNNSGraphCompileOptionsSetDownconvertMode, _BNNSGraphCompileOptionsSetFileWriteFSyncBarrier, 
+                       _BNNSGraphCompileOptionsSetGenerateDebugInfo, _BNNSGraphCompileOptionsSetMessageLogCallback, 
+                       _BNNSGraphCompileOptionsSetMessageLogMask, _BNNSGraphCompileOptionsSetOptimizationPreference, 
+                       _BNNSGraphCompileOptionsSetOutputFD, _BNNSGraphCompileOptionsSetOutputPath, 
+                       _BNNSGraphCompileOptionsSetOutputPathWithPermissions, _BNNSGraphCompileOptionsSetOutputPathWithPermissionsAndProtectionClass, 
+                       _BNNSGraphCompileOptionsSetPreallocateOutputFile, _BNNSGraphCompileOptionsSetPredefinedOptimizations, 
+                       _BNNSGraphCompileOptionsSetTarget, _BNNSGraphCompileOptionsSetTargetSingleThread, 
+                       _BNNSGraphCompileOptionsSetUpconvertMode, _BNNSGraphCompileOptionsSetUserData, 
+                       _BNNSGraphCompileOptionsSetValidateMILFile, _BNNSGraphCompileOptionsSetWeightsFD, 
+                       _BNNSGraphCompileOptionsSetWeightsPathWithPermissions, _BNNSGraphContextCreate, 
+                       _BNNSGraphContextDestroy, _BNNSGraphContextDestroy_v2, _BNNSGraphContextEnablePerformanceData, 
+                       _BNNSGraphContextEnableSignposts, _BNNSGraphContextExecute, 
+                       _BNNSGraphContextExecute_v2, _BNNSGraphContextGetArgPosition, 
                        _BNNSGraphContextGetArgumentPosition, _BNNSGraphContextGetContextSize, 
                        _BNNSGraphContextGetInputNames, _BNNSGraphContextGetNumInputs, 
                        _BNNSGraphContextGetNumOutputs, _BNNSGraphContextGetOutputNames, 
@@ -3349,7 +3350,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib'
-current-version: 1043.100.6
+current-version: 1043.120.8
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]

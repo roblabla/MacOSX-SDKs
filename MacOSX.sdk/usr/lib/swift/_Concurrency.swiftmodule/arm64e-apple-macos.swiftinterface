@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -disable-objc-attr-requires-foundation-module -target arm64e-apple-macosx14.4 -enable-objc-interop -enable-library-evolution -module-link-name swift_Concurrency -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -enable-experimental-concurrency -target-min-inlining-version min -user-module-version 5.10.0.12.5 -module-name _Concurrency -disable-availability-checking
+// swift-module-flags: -disable-objc-attr-requires-foundation-module -target arm64e-apple-macosx14.5 -enable-objc-interop -enable-library-evolution -module-link-name swift_Concurrency -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -enable-experimental-concurrency -target-min-inlining-version min -user-module-version 5.10.0.12.5 -module-name _Concurrency -disable-availability-checking
 // swift-module-flags-ignorable: -enable-lexical-lifetimes=false
 import Swift
 import SwiftShims

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/libLLVM.dylib'
-current-version: 32023.155
+current-version: 32023.194
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __ZN4llvm3sys6detail3x8618getVendorSignatureEPj ]
@@ -13651,8 +13651,7 @@ exports:
                        __ZN4llvm10RegionBaseINS_12RegionTraitsINS_8FunctionEEEED2Ev, 
                        __ZN4llvm11APFloatBase12rmTowardZeroE, __ZN4llvm11APFloatBase16rmTowardNegativeE, 
                        __ZN4llvm11APFloatBase16rmTowardPositiveE, __ZN4llvm11APFloatBase19rmNearestTiesToAwayE, 
-                       __ZN4llvm11APFloatBase19rmNearestTiesToEvenE, __ZN4llvm11IntervalMapINS_9SlotIndexEPKNS_12LiveIntervalELj8ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
-                       __ZN4llvm11IntervalMapINS_9SlotIndexEjLj9ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
+                       __ZN4llvm11APFloatBase19rmNearestTiesToEvenE, __ZN4llvm11IntervalMapINS_9SlotIndexEjLj9ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
                        __ZN4llvm11IntervalMapIycLj11ENS_15IntervalMapInfoIyEEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
                        __ZN4llvm11PassManagerINS_13LazyCallGraph3SCCENS_15AnalysisManagerIS2_JRS1_EEEJS4_RNS_17CGSCCUpdateResultEEE10isRequiredEv, 
                        __ZN4llvm11PassManagerINS_13LazyCallGraph3SCCENS_15AnalysisManagerIS2_JRS1_EEEJS4_RNS_17CGSCCUpdateResultEEE13printPipelineERNS_11raw_ostreamENS_12function_refIFNS_9StringRefESC_EEE, 
@@ -15280,4 +15279,6 @@ exports:
                        __ZZN11flatbuffers4dataINS_6OffsetINS_6StringEEENSt3__19allocatorIS3_EEEEPKT_RKNS4_6vectorIS7_T0_EEE1t, 
                        __ZZN11flatbuffers4dataIhNSt3__19allocatorIhEEEEPKT_RKNS1_6vectorIS4_T0_EEE1t, 
                        __ZZN11flatbuffers4dataIjNSt3__19allocatorIjEEEEPKT_RKNS1_6vectorIS4_T0_EEE1t ]
+  - targets:         [ arm64-macos, arm64e-macos ]
+    weak-symbols:    [ __ZN4llvm11IntervalMapINS_9SlotIndexEPKNS_12LiveIntervalELj8ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj ]
 ...

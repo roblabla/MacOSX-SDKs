@@ -17,6 +17,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(
 /// call when the selection changes (not on initial selection)
 - (void)selectionChanged;
 
+/// call when the selection changes (not on initial selection)
+/// provide the location in the `view` the change occured at
+- (void)selectionChangedAtLocation:(CGPoint)location API_AVAILABLE(ios(17.5)) API_UNAVAILABLE(visionos) NS_SWIFT_NAME(selectionChanged(at:));
+
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/DiskImages'
-current-version: 654.100.1
+current-version: 654.120.2
 compatibility-version: 1.0.8
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

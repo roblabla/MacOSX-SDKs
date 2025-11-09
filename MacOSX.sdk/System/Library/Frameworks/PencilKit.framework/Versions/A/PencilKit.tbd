@@ -778,11 +778,12 @@ exports:
                        PKInkProperties, PKInkRenderingDescriptor, PKInkSmoothingDescriptor, 
                        PKInkingTool, PKLassoTool, PKLegacyDrawingRegressionTester, 
                        PKLinedPaper, PKMacLinedPaperView, PKMetalUtility, PKMutableStroke, 
-                       PKPaintAreaView, PKReplicaManager, PKSearchQueryItem, PKShape, 
-                       PKShapeDrawingTimerHelper, PKStroke, PKStrokeDelta, PKStrokeGenerator, 
-                       PKStrokeMask, PKStrokePath, PKStrokePoint, PKStrokeProvider, 
-                       PKStrokeProviderSlice, PKStrokeProviderSliceIdentifier, PKStrokeSelection, 
-                       PKStrokeSelectionImage, PKStrokeSelectionImageConfig, PKTextAttachmentDrawingView, 
-                       PKTitleQuery, PKTitleQueryItem, PKTool, PKUndoCommand, PKVisualizationManager, 
-                       _PKStrokeClipPlane, _PKStrokeConcrete ]
+                       PKPaintAreaView, PKReplicaManager, PKRulerTool, PKSearchQueryItem, 
+                       PKShape, PKShapeDrawingTimerHelper, PKStroke, PKStrokeDelta, 
+                       PKStrokeGenerator, PKStrokeMask, PKStrokePath, PKStrokePoint, 
+                       PKStrokeProvider, PKStrokeProviderSlice, PKStrokeProviderSliceIdentifier, 
+                       PKStrokeSelection, PKStrokeSelectionImage, PKStrokeSelectionImageConfig, 
+                       PKTextAttachmentDrawingView, PKTitleQuery, PKTitleQueryItem, 
+                       PKTool, PKUndoCommand, PKVisualizationManager, _PKStrokeClipPlane, 
+                       _PKStrokeConcrete ]
 ...

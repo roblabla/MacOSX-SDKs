@@ -21,8 +21,8 @@ typedef NS_ENUM(NSInteger, PKContentVersion) {
     PKContentVersion2 NS_SWIFT_NAME(version2),
     
     /// New Fountain Pen
-    PKContentVersion3 NS_SWIFT_NAME(version3),
+    PKContentVersion3 NS_SWIFT_NAME(version3) API_AVAILABLE(ios(17.5), macos(14.5)),
 
     /// The latest version including all features.
-    PKContentVersionLatest = PKContentVersion3
+    PKContentVersionLatest = 3
 };

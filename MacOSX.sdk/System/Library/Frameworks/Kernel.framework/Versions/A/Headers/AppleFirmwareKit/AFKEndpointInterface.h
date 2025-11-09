@@ -1,4 +1,4 @@
-/* iig(DriverKit-380) generated from AFKEndpointInterface.iig */
+/* iig(DriverKit-380.120.5) generated from AFKEndpointInterface.iig */
 
 /* AFKEndpointInterface.iig:1-24 */
 /*

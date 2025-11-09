@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_PhotosUI_SwiftUI.framework/Versions/A/_PhotosUI_SwiftUI'
-current-version: 646.2.101
+current-version: 651.0.100
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -75,6 +75,8 @@ exports:
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E12photosPicker11isPresented9selection8matching21preferredItemEncodingQrAA7BindingVySbG_AKyAD0dfL0VSgG0dB014PHPickerFilterVSgAN0M20DisambiguationPolicyVtFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E17photosPickerStyleyQrAD0dfG0VF', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E17photosPickerStyleyQrAD0dfG0VFQOMQ', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E28_photosPickerSuggestionGroupyQr0dB009_PHPickergH0VSgF', 
+                       '_$s7SwiftUI4ViewP07_Photosb1_aB0E28_photosPickerSuggestionGroupyQr0dB009_PHPickergH0VSgFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E31photosPickerAccessoryVisibility_5edgesQrAA0H0O_AA4EdgeO3SetVtF', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E31photosPickerAccessoryVisibility_5edgesQrAA0H0O_AA4EdgeO3SetVtFQOMQ', 
                        '_$s7SwiftUI4ViewP07_Photosb1_aB0E32photosPickerDisabledCapabilitiesyQrSo08PHPickerH0VF', 

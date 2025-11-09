@@ -27,8 +27,9 @@ exports:
                        _kAAFDidSucceed, _kAAFDisableCertPinningKey, _kAAFDuration, 
                        _kAAFErrorCode, _kAAFErrorDomain, _kAAFEventCreationTimestamp, 
                        _kAAFEventName, _kAAFFlowId, _kAAFFlowIdString, _kAAFInternalSettingsDomain, 
-                       _kAAFNumberOfUnderlyingErrors, _kAAFTestSignature, _kAAFTestSignatureString, 
-                       _kAAFUnderlyingErrorCode, _kAAFUnderlyingErrorDomain ]
+                       _kAAFNumberOfUnderlyingErrors, _kAAFRecordBuildVersionString, 
+                       _kAAFTestSignature, _kAAFTestSignatureString, _kAAFUnderlyingErrorCode, 
+                       _kAAFUnderlyingErrorDomain ]
     objc-classes:    [ AAFAnalyticsEvent, AAFAnalyticsReporter, AAFAnalyticsTransportCA, 
                        AAFAnalyticsTransportInProcessRTC, AAFAnalyticsTransportRTC, 
                        AAFCertificateTrustValidator, AAFDefaultSerializer, AAFDeviceInfo, 

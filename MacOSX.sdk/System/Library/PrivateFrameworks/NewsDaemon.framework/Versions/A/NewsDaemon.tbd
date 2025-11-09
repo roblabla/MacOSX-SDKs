@@ -6,12 +6,19 @@ install-name:    '/System/Library/PrivateFrameworks/NewsDaemon.framework/Version
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _NDAnalyticsMachServiceName, _NDDownloadMachServiceName, _NDDownloadServiceHasUnfinishedWorkKey, 
-                       _NDDownloadServiceXPCConnection, _NDDownloadServiceXPCInterface, 
-                       _NDNewsdDataContainerClass, _NDNewsdDataContainerIdentifier, 
-                       _NDNewsdProcessName, _NDSharedClientLog, _NDSharedServiceLog, 
+    symbols:         [ _NDANFDecodingServiceXPCConnection, _NDANFDecodingServiceXPCInterface, 
+                       _NDAnalyticsMachServiceName, _NDArticleIDFromAudioContentID, 
+                       _NDAudioContentIDFromArticleID, _NDAudioContentIDPrefix, _NDDownloadMachServiceName, 
+                       _NDDownloadServiceHasUnfinishedWorkKey, _NDDownloadServiceXPCConnection, 
+                       _NDDownloadServiceXPCInterface, _NDNewsdDataContainerClass, 
+                       _NDNewsdDataContainerIdentifier, _NDNewsdProcessName, _NDSharedClientLog, 
+                       _NDSharedServiceLog, _NDTodayFeedConfigDecodingServiceXPCConnection, 
+                       _NDTodayFeedConfigDecodingServiceXPCInterface, _NDTodayFeedMachServiceName, 
+                       _NDTodayFeedServiceXPCConnection, _NDTodayFeedServiceXPCInterface, 
                        _NDTodayMachServiceName, _NDURLResolutionMachServiceName, 
                        _NewsDaemonVersionNumber, _NewsDaemonVersionString ]
-    objc-classes:    [ NDANFImageResource, NDANFParsingService, NDANFResource, NDDownloadRequest, 
-                       NDNewsDaemonContext, NDNewsServiceConnection, NDNewsServiceConnectionClientProxy ]
+    objc-classes:    [ NDANFHelper, NDANFHelperProxy, NDANFHelperProxyWithFallback, 
+                       NDANFImageResource, NDANFResource, NDDownloadLimits, NDDownloadRequest, 
+                       NDNewsDaemonContext, NDNewsServiceConnection, NDNewsServiceConnectionClientProxy, 
+                       NDTodayFeed, NDTodayFeedConfig ]
 ...

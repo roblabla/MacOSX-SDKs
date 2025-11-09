@@ -48,6 +48,8 @@ extern PKPaymentNetwork const PKPaymentNetworkNanaco API_AVAILABLE(macos(12.0), 
 extern PKPaymentNetwork const PKPaymentNetworkPostFinance API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4));
 extern PKPaymentNetwork const PKPaymentNetworkTmoney API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0));
 extern PKPaymentNetwork const PKPaymentNetworkMeeza API_AVAILABLE(macos(14.4), ios(17.4), watchos(10.4));
+extern PKPaymentNetwork const PKPaymentNetworkNAPAS API_AVAILABLE(macos(14.5), ios(17.5), watchos(10.5));
+extern PKPaymentNetwork const PKPaymentNetworkBankAxept API_AVAILABLE(macos(14.5), ios(17.5), watchos(10.5));
 
 typedef NSString * PKContactField NS_STRING_ENUM;
 extern PKContactField const PKContactFieldPostalAddress API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0));

@@ -7189,6 +7189,8 @@ exports:
                        '_$s8MusicKit4SongV0aB8InternalE14favoriteStatusAD0a8FavoriteF0OvpMV', 
                        '_$s8MusicKit4SongV0aB8InternalE14pickerSubtitleSSSgvg', '_$s8MusicKit4SongV0aB8InternalE14pickerSubtitleSSSgvpMV', 
                        '_$s8MusicKit4SongV0aB8InternalE15mappingItemKindAD0A14LibraryMappingV0fG0OvgZ', 
+                       '_$s8MusicKit4SongV0aB8InternalE16presto_catalogIDAA0a4ItemG0VSgvg', 
+                       '_$s8MusicKit4SongV0aB8InternalE16presto_catalogIDAA0a4ItemG0VSgvpMV', 
                        '_$s8MusicKit4SongV0aB8InternalE18presto_audioTraitsAD012Presto_AudioG0VSgvg', 
                        '_$s8MusicKit4SongV0aB8InternalE18presto_audioTraitsAD012Presto_AudioG0VSgvpMV', 
                        '_$s8MusicKit4SongV0aB8InternalE18siriRepresentationAD0a4SiriF0Vvg', 

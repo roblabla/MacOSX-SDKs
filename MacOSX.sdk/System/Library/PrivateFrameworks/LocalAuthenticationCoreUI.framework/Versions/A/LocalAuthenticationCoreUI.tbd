@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LocalAuthenticationCoreUI.framework/Versions/A/LocalAuthenticationCoreUI'
-current-version: 1394.100.151
+current-version: 1394.120.27
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -45,15 +45,17 @@ exports:
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO12ratchetTableSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO12ratchetTableSSvpZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO23ratchetCoolOffLearnMoreSSvgZ', 
+                       '_$s25LocalAuthenticationCoreUI16LocalizedStringsO23ratchetGracePeriodTitleSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO24ratchetCoolOffDelayTitleSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO24ratchetCoolOffTitleBeginSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO24ratchetCoolOffTitleReadySSvgZ', 
+                       '_$s25LocalAuthenticationCoreUI16LocalizedStringsO25ratchetGracePeriodMessageSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO26ratchetCoolOffMessageBeginSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO26ratchetCoolOffTitlePendingSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO28ratchetCoolOffMessagePendingSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO32ratchetCoolOffBeginSecurityDelaySSvgZ', 
-                       '_$s25LocalAuthenticationCoreUI16LocalizedStringsO34ratchetCoolOffSecurityDelayOneHourSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO34ratchetCoolOffWillBeAbleToUsePhoneSSvgZ', 
+                       '_$s25LocalAuthenticationCoreUI16LocalizedStringsO35ratchetCoolOffSecurityDelayDurationSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO38ratchetCoolOffiPhoneLocationNotVisibleSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO4doneSSvgZ', 
                        '_$s25LocalAuthenticationCoreUI16LocalizedStringsO4nextSSvgZ', 
@@ -143,6 +145,7 @@ exports:
                        '_$s25LocalAuthenticationCoreUI21LACUIRatchetViewModelC5StateO10beginDelayyAeA31LACUIAuthCountdownConfigurationV_tcAEmFWC', 
                        '_$s25LocalAuthenticationCoreUI21LACUIRatchetViewModelC5StateO10evaluatingyA2EmFWC', 
                        '_$s25LocalAuthenticationCoreUI21LACUIRatchetViewModelC5StateO14countdownEndedyAeA31LACUIAuthCountdownConfigurationV_tcAEmFWC', 
+                       '_$s25LocalAuthenticationCoreUI21LACUIRatchetViewModelC5StateO17gracePeriodActiveyAeA31LACUIAuthCountdownConfigurationV_tcAEmFWC', 
                        '_$s25LocalAuthenticationCoreUI21LACUIRatchetViewModelC5StateO2eeoiySbAE_AEtFZ', 
                        '_$s25LocalAuthenticationCoreUI21LACUIRatchetViewModelC5StateO6finishyAESDys11AnyHashableVypGSg_s5Error_pSgtcAEmFWC', 
                        '_$s25LocalAuthenticationCoreUI21LACUIRatchetViewModelC5StateO7initialyA2EmFWC', 
@@ -346,6 +349,7 @@ exports:
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV11actionItemsSayAA0ef4ItemG0VGSgvg', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV11actionItemsSayAA0ef4ItemG0VGSgvpMV', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV11actionItemsSayAA0ef4ItemG0VGSgvs', 
+                       '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV11gracePeriod17customCancelTitleACSSSg_tFZ', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV12learnMoreURL10Foundation0J0Vvau', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV12learnMoreURL10Foundation0J0VvgZ', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV12learnMoreURL10Foundation0J0VvpZ', 
@@ -364,6 +368,7 @@ exports:
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV15learnMoreButtonAA0ejG0VvgZ', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV22ActionButtonIdentifierO12customCancelyA2EmFWC', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV22ActionButtonIdentifierO18beginSecurityDelayyA2EmFWC', 
+                       '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV22ActionButtonIdentifierO21continueInGracePeriodyA2EmFWC', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV22ActionButtonIdentifierO4doneyA2EmFWC', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV22ActionButtonIdentifierO6cancelyA2EmFWC', 
                        '_$s25LocalAuthenticationCoreUI31LACUIAuthCountdownConfigurationV22ActionButtonIdentifierO8continueyA2EmFWC', 

@@ -162,6 +162,8 @@ exports:
                        '_$s10WorkflowUI12LibraryGroupPAAE16tipShouldDisplaySbvpMV', 
                        '_$s10WorkflowUI12LibraryGroupPAAE21maybeTipSectionHeaderAA0cG7OptionsV0H0Ovg', 
                        '_$s10WorkflowUI12LibraryGroupPAAE21maybeTipSectionHeaderAA0cG7OptionsV0H0OvpMV', 
+                       '_$s10WorkflowUI12LibraryGroupPAAE33maybeSyncUnavailableSectionHeaderAA0cH7OptionsV0I0Ovg', 
+                       '_$s10WorkflowUI12LibraryGroupPAAE33maybeSyncUnavailableSectionHeaderAA0cH7OptionsV0I0OvpMV', 
                        '_$s10WorkflowUI12LibraryGroupTL', '_$s10WorkflowUI12LibraryTableV05SwiftB04ViewAAMc', 
                        '_$s10WorkflowUI12LibraryTableV10dataSource8database15libraryDelegateAcA0c4DataF0C_So10WFDatabaseCAA0cI0_pSgtcfC', 
                        '_$s10WorkflowUI12LibraryTableV10dataSourceAA0c4DataF0CvM', 

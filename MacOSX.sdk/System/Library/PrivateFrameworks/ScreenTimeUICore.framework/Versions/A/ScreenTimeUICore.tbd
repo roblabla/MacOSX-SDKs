@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeUICore.framework/Versions/A/ScreenTimeUICore'
-current-version: 503.4.14
+current-version: 503.5.13
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -101,11 +101,13 @@ exports:
                        '_$s16ScreenTimeUICore12DevicePickerVMa', '_$s16ScreenTimeUICore12DevicePickerVMn', 
                        '_$s16ScreenTimeUICore12DevicePickerVN', '_$s16ScreenTimeUICore13ModelProviderV011pickupsViewD014selectedFilter11startOfWeek0jK3Day06weeklyI0AA07PickupsG0V0D0V14DeviceActivity0pqI0V_10Foundation4DateVArOSgtKF', 
                        '_$s16ScreenTimeUICore13ModelProviderV017notificationsViewD014selectedFilter11startOfWeek0jK3Day06weeklyI0AA013NotificationsG0V0D0V14DeviceActivity0pqI0V_10Foundation4DateVArOSgtKF', 
-                       '_$s16ScreenTimeUICore13ModelProviderV022fetchDeviceRecordsFromG8Activity18forUserWithAltDSIDSay0gJ001_gJ4DataV0G0VGSSSg_tKF', 
+                       '_$s16ScreenTimeUICore13ModelProviderV022fetchDeviceRecordsFromG8Activity18forUserWithAltDSIDSay0gJ001_gJ4DataV8MetadataVGSSSg_tKF', 
                        '_$s16ScreenTimeUICore13ModelProviderV025appAndWebsiteActivityViewD014selectedFilter11startOfWeek0mN3Day06weeklyL005todayL09limitInfoAA03AppghiJ0V0D0V06DeviceI00viL0V_10Foundation4DateVAtQSgAUSDySSAA017MostUsedTableAppsG10CategoriesV05LimitT0VGtKF', 
                        '_$s16ScreenTimeUICore13ModelProviderV10dataSource33_EFD72E0C0B930DACA88AFC21F7F681B7LL14DeviceActivity0qr4DataG0Vvpfi', 
                        '_$s16ScreenTimeUICore13ModelProviderV25refreshAndUploadLocalData9sinceDatey10Foundation0L0VSg_tYaKF', 
                        '_$s16ScreenTimeUICore13ModelProviderV25refreshAndUploadLocalData9sinceDatey10Foundation0L0VSg_tYaKFTu', 
+                       '_$s16ScreenTimeUICore13ModelProviderVAA0D9ProvidingAAMc', 
+                       '_$s16ScreenTimeUICore13ModelProviderVAA0D9ProvidingAAWP', 
                        '_$s16ScreenTimeUICore13ModelProviderVACycfC', '_$s16ScreenTimeUICore13ModelProviderVMa', 
                        '_$s16ScreenTimeUICore13ModelProviderVMn', '_$s16ScreenTimeUICore13ModelProviderVN', 
                        '_$s16ScreenTimeUICore13OverviewChartV12selectedItemSayAC3DayVGSgvpfi', 
@@ -145,7 +147,8 @@ exports:
                        '_$s16ScreenTimeUICore13OverviewChartV5model11interactive11selectedDay0H4ItemA2C5ModelV_Sb7SwiftUI7BindingVy10Foundation4DateVSgGSayAC0I0VGSgtcfC', 
                        '_$s16ScreenTimeUICore13OverviewChartV7SwiftUI4ViewAAMc', 
                        '_$s16ScreenTimeUICore13OverviewChartVMa', '_$s16ScreenTimeUICore13OverviewChartVMn', 
-                       '_$s16ScreenTimeUICore13OverviewChartVN', '_$s16ScreenTimeUICore15ChartHeaderViewV4bodyQrvg', 
+                       '_$s16ScreenTimeUICore13OverviewChartVN', '_$s16ScreenTimeUICore14ModelProvidingMp', 
+                       '_$s16ScreenTimeUICore14ModelProvidingTL', '_$s16ScreenTimeUICore15ChartHeaderViewV4bodyQrvg', 
                        '_$s16ScreenTimeUICore15ChartHeaderViewV4bodyQrvpMV', '_$s16ScreenTimeUICore15ChartHeaderViewV4bodyQrvpQOMQ', 
                        '_$s16ScreenTimeUICore15ChartHeaderViewV5ModelV11dailyCountsSDy10Foundation4DateVSdGvpfi', 
                        '_$s16ScreenTimeUICore15ChartHeaderViewV5ModelV3now10Foundation4DateVSgvpfi', 
@@ -174,19 +177,19 @@ exports:
                        '_$s16ScreenTimeUICore16UsageDetailChartV4bodyQrvg', '_$s16ScreenTimeUICore16UsageDetailChartV4bodyQrvpMV', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV4bodyQrvpQOMQ', '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV03maxD0Sdvg', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV03maxD0SdvpMV', 
-                       '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV09maxHourlyaB0Sdvpfi', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV10startOfDay5usage8calendarAE10Foundation4DateV_SayAC06HourlyD0VGAI8CalendarVtcfC', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV10xAxisScaleSay10Foundation4DateVGvg', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV10xAxisScaleSay10Foundation4DateVGvpMV', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV10yAxisScaleSaySdGvg', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV10yAxisScaleSaySdGvpMV', 
-                       '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV11yAxisValuesSaySdGvg', 
-                       '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV11yAxisValuesSaySdGvpMV', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV16topCategoriesMax33_A3BC4E70E47A8962941D0E08294F1D64LLSivpfi', 
+                       '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV19minimumMaxYAxisUnit33_A3BC4E70E47A8962941D0E08294F1D64LLSdvpfi', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV23__derived_struct_equalsySbAE_AEtFZ', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV23orderedStackedBarColors5index12selectedItem7SwiftUI5ColorVSi_SayAC06HourlyD0VGSgtF', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV2id10Foundation4DateVvg', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV2id10Foundation4DateVvpMV', 
+                       '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV5lastYSdvg', 
+                       '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV5lastYSdvpMV', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV7yStrideSaySdGvg', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV7yStrideSaySdGvpMV', 
                        '_$s16ScreenTimeUICore16UsageDetailChartV5ModelV8contains4dateSb10Foundation4DateV_tF', 
@@ -287,6 +290,7 @@ exports:
                        '_$s16ScreenTimeUICore20CategoriesLegendViewV4bodyQrvpQOMQ', 
                        '_$s16ScreenTimeUICore20CategoriesLegendViewV5ModelV15dailyTotalUsage33_80C98F962E39BF349A6EFBB57F907514LLSDy10Foundation4DateVSdGvpfi', 
                        '_$s16ScreenTimeUICore20CategoriesLegendViewV5ModelV18dailyCategoryUsage33_80C98F962E39BF349A6EFBB57F907514LLSDy10Foundation12DateIntervalVAE011CategorizedJ0VGvpfi', 
+                       '_$s16ScreenTimeUICore20CategoriesLegendViewV5ModelV21dailyApplicationUsage33_80C98F962E39BF349A6EFBB57F907514LLSDy10Foundation12DateIntervalVAE011CategorizedJ0VGvpfi', 
                        '_$s16ScreenTimeUICore20CategoriesLegendViewV5ModelV21filteredCategoryUsage33_80C98F962E39BF349A6EFBB57F907514LLSDy10Foundation12DateIntervalVAE011CategorizedJ0VGSgvpfi', 
                        '_$s16ScreenTimeUICore20CategoriesLegendViewV5ModelVMa', '_$s16ScreenTimeUICore20CategoriesLegendViewV5ModelVMn', 
                        '_$s16ScreenTimeUICore20CategoriesLegendViewV5ModelVN', '_$s16ScreenTimeUICore20CategoriesLegendViewV5model12dateIntervalA2C5ModelV_10Foundation04DateI0VtcfC', 
@@ -381,7 +385,7 @@ exports:
                        '_$s16ScreenTimeUICore25AppAndWebsiteActivityViewV4bodyQrvg', 
                        '_$s16ScreenTimeUICore25AppAndWebsiteActivityViewV4bodyQrvpMV', 
                        '_$s16ScreenTimeUICore25AppAndWebsiteActivityViewV4bodyQrvpQOMQ', 
-                       '_$s16ScreenTimeUICore25AppAndWebsiteActivityViewV5ModelV11startOfWeek0jK3Day9limitInfoAE10Foundation4DateV_AKSDySSAA017MostUsedTableAppsE10CategoriesV05LimitO0VGtcfC', 
+                       '_$s16ScreenTimeUICore25AppAndWebsiteActivityViewV5ModelV11startOfWeek0jK3Day9limitInfo4modeAE10Foundation4DateV_ALSDySSAA017MostUsedTableAppsE10CategoriesV05LimitO0VGSo14STActivityModeVtcfC', 
                        '_$s16ScreenTimeUICore25AppAndWebsiteActivityViewV5ModelVMa', 
                        '_$s16ScreenTimeUICore25AppAndWebsiteActivityViewV5ModelVMn', 
                        '_$s16ScreenTimeUICore25AppAndWebsiteActivityViewV5ModelVN', 

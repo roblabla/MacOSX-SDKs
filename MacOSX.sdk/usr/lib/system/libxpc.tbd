@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libxpc.dylib'
-current-version: 2748.101.4
+current-version: 2748.120.20
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -287,9 +287,10 @@ exports:
                        _xpc_pipe_routine_async, _xpc_pipe_routine_forward, _xpc_pipe_routine_reply, 
                        _xpc_pipe_routine_with_flags, _xpc_pipe_simpleroutine, _xpc_pipe_try_receive, 
                        _xpc_pointer_create, _xpc_pointer_get_value, _xpc_receive_mach_msg, 
-                       _xpc_receive_remote_msg, _xpc_release, _xpc_retain, _xpc_rich_error_can_retry, 
-                       _xpc_rich_error_copy_description, _xpc_service_attach, _xpc_service_attach_with_flags, 
-                       _xpc_service_create, _xpc_service_create_from_specifier, _xpc_service_get_rendezvous_token, 
+                       _xpc_receive_mach_msg_validate_hdr, _xpc_receive_remote_msg, 
+                       _xpc_release, _xpc_retain, _xpc_rich_error_can_retry, _xpc_rich_error_copy_description, 
+                       _xpc_service_attach, _xpc_service_attach_with_flags, _xpc_service_create, 
+                       _xpc_service_create_from_specifier, _xpc_service_get_rendezvous_token, 
                        _xpc_service_instance_dup2, _xpc_service_instance_get_context, 
                        _xpc_service_instance_get_host_pid, _xpc_service_instance_get_pid, 
                        _xpc_service_instance_get_type, _xpc_service_instance_is_configurable, 

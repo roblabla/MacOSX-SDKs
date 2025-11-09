@@ -18,7 +18,7 @@ exports:
                        _PLOSAPreferencesGetValue, _PLOSAPreferencesSetValue, _PLOSAPreferencesSynchronize, 
                        _PLServiceTypeBatteryGaugeName, _PLServiceTypeMetricMonitorName, 
                        _PLServiceTypeXPCName, _PPSCoreStorageLog, _PPSDataStreamLog, 
-                       _PPSLogCommon, _Stage, _eventBlock, _kOSAProblemTypePowerLog, 
+                       _PPSLogCommon, _Stage, _eventBlock, _guiPrefix, _kOSAProblemTypePowerLog, 
                        _kPLAccountingOperatorAggregateNameQualificationEnergy, _kPLAccountingOperatorAggregateNameQualificationEnergyEnergy, 
                        _kPLAccountingOperatorAggregateNameQualificationEnergyNodeID, 
                        _kPLAccountingOperatorAggregateNameQualificationEnergyQualificationID, 
@@ -152,8 +152,9 @@ exports:
                        _kPPSMetadataTableKeyCategory, _kPPSMetadataTableKeySubsystem, 
                        _kPPSMetadataTableName, _kPPSMetadataVersionTableKeyVersion, 
                        _kPPSMetadataVersionTableName, _kTaskingMSS_Filename, _logHandle, 
-                       _logHandleRbdcHelper, _logPPSFeatureFlagReaderHelper, _nanoSecondsFromMachTime, 
-                       _sqlConnectionHandle, _sqlLog ]
+                       _logHandleRbdcHelper, _logPPSFeatureFlagReaderHelper, _macAppPrefix, 
+                       _nanoSecondsFromMachTime, _pidPrefix, _sqlConnectionHandle, 
+                       _sqlLog, _systemPrefix, _uikitAppPrefix, _userPrefix ]
     objc-classes:    [ OperatorTask, PLAccountingOperator, PLActivity, PLActivityCriterion, 
                        PLActivityCriterionEntry, PLActivityCriterionTime, PLActivityScheduler, 
                        PLAgent, PLAggregateEntry, PLArchiveEntry, PLArchiveJob, PLArchiveManager, 

@@ -25,5 +25,6 @@ exports:
                        APConfigurationMigrator, APConfigurationResponseHandler, APECDiagnosticPurposeConfig, 
                        APECGroupRandomizerConfig, APECJourneyPurposeConfig, APECObservabilityConfig, 
                        APECObservabilityPurposeConfig, APECReportsPurposeConfig, 
-                       APECSettingsConfig, APVersionData, APVersionHelper, APVersionTestData ]
+                       APECSettingsConfig, APSLPPlacementConfig, APVersionData, APVersionHelper, 
+                       APVersionTestData ]
 ...

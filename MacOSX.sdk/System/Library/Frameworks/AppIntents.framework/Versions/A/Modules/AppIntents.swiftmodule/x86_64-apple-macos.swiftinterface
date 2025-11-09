@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 174.100.17.0.1 -module-name AppIntents
+// swift-module-flags: -target x86_64-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-bare-slash-regex -user-module-version 174.200.3 -module-name AppIntents
 @_exported import AppIntents
 import CoreGraphics
 import CoreLocation
@@ -1221,7 +1221,7 @@ extension AppIntents.IntentItemSection {
   @_disfavoredOverload public static func buildExpression(_ component: AppIntents.AppShortcut) -> AppIntents.AppShortcut
   @_disfavoredOverload public static func buildBlock(_ components: AppIntents.AppShortcut...) -> [AppIntents.AppShortcut]
 }
-@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, visionOS 1.1, *)
 extension AppIntents.AppShortcutsBuilder {
   public static func buildExpression(_ component: AppIntents.AppShortcut) -> [AppIntents.AppShortcut]
   public static func buildBlock(_ components: [AppIntents.AppShortcut]...) -> [AppIntents.AppShortcut]
@@ -1233,7 +1233,7 @@ extension AppIntents.AppShortcutsBuilder {
   public static func buildOptional(_ appShortcuts: [AppIntents.AppShortcut]?) -> [AppIntents.AppShortcut]
   public static func buildLimitedAvailability(_ components: [AppIntents.AppShortcut]) -> (any AppIntents._AppShortcutsContentMarker & AppIntents._LimitedAvailabilityAppShortcutsContentMarker)
 }
-@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, visionOS 1.1, *)
 public protocol AppShortcutsContent {
   var appShortcuts: [AppIntents.AppShortcut] { get }
 }
@@ -1243,7 +1243,7 @@ public protocol AppShortcutsContent {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 @_marker public protocol _LimitedAvailabilityAppShortcutsContentMarker {
 }
-@available(macOS 14.2, iOS 17.2, watchOS 10.2, tvOS 17.2, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, visionOS 1.1, *)
 @usableFromInline
 @frozen internal struct LimitedAvailabilityAppShortcuts : AppIntents.AppShortcutsContent, AppIntents._AppShortcutsContentMarker, AppIntents._LimitedAvailabilityAppShortcutsContentMarker {
   @usableFromInline

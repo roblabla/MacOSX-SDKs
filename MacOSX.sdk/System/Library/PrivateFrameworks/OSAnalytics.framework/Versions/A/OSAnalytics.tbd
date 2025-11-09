@@ -65,15 +65,17 @@ exports:
                        _logEventForAppleCare, _logForAppleCare, _logLineForAppleCare, 
                        _mach_exception_raise, _mach_exception_raise_state, _mach_exception_raise_state_identity, 
                        _ns2xpc, _rc_sync_request, _rollAppleCareLogs, _rtcsc_send, 
-                       _runCrashMoverService, _seedFeedbackPromptingEnabled, _symbolicateSpeedTracer, 
-                       _xpc2ns ]
-    objc-classes:    [ KCContainer, OSABinaryImageCatalog, OSABinaryImageSegment, 
+                       _rtcsc_send_base, _rtcsc_send_realtime, _runCrashMoverService, 
+                       _seedFeedbackPromptingEnabled, _symbolicateSpeedTracer, _xpc2ns ]
+    objc-classes:    [ ExclaveAddressSpace, ExclaveLayout, ExclaveStackEntry, ExclaveThread, 
+                       KCContainer, OSABinaryImageCatalog, OSABinaryImageSegment, 
                        OSABridgeLinkProxy, OSACrackShotReport, OSADateCounter, OSADefaults, 
-                       OSADiagnosticsReporterSupport, OSALegacyXform, OSALog, OSALogTrackerObject, 
-                       OSAOsLogPackParser, OSAParsedOsLogPart, OSAProxyConfiguration, 
-                       OSAReport, OSASafeCreateDirectoryOptions, OSASharedCacheEntry, 
-                       OSAStackShotReport, OSAStateMonitor, OSASymbolInfo, OSASystemConfiguration, 
-                       OSASystemWatchdogCrashReport, OSATasking ]
+                       OSADiagnosticsReporterSupport, OSAExclaveContainer, OSALegacyXform, 
+                       OSALog, OSALogTrackerObject, OSAOsLogPackParser, OSAParsedOsLogPart, 
+                       OSAProxyConfiguration, OSAReport, OSASafeCreateDirectoryOptions, 
+                       OSASharedCacheEntry, OSAStackShotReport, OSAStateMonitor, 
+                       OSASymbolInfo, OSASystemConfiguration, OSASystemWatchdogCrashReport, 
+                       OSATasking ]
     objc-ivars:      [ OSABinaryImageCatalog._absolute_segment, OSABinaryImageCatalog._kernel_cache_segment, 
                        OSABinaryImageCatalog._kernel_segments, OSABinaryImageCatalog._kernel_text_exec_segments, 
                        OSABinaryImageCatalog._notes, OSABinaryImageCatalog._rootedCacheLibs, 

@@ -21,12 +21,6 @@ typedef NS_ENUM(NSInteger, UIPreferredPresentationStyle) {
     UIPreferredPresentationStyleAttachment,
 };
 
-// workaround for
-// rdar://120810891 (NSItemProvider canLoadObjectOfClass disagreement with loadObjectOfClass)
-@interface NSItemProvider (NSItemProviderTypeAvailability)
-- (NSArray<NSString *> *)_availableTypes API_AVAILABLE(ios(17.3));
-@end
-
 @interface NSItemProvider (UIKitAdditions)
 
 @property (nonatomic, copy, nullable) NSData *teamData API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NeutrinoKit.framework/Versions/A/NeutrinoKit'
-current-version: 646.2.101
+current-version: 651.0.100
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSStringFromCATransform3D, _NUBoundingRectForRotatedRect, 

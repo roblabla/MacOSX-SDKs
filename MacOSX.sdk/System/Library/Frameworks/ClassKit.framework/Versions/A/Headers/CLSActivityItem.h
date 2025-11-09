@@ -2,7 +2,7 @@
 //  CLSActivityItem.h
 //  ClassKit
 //
-//  Copyright © 2018-2023 Apple Inc. All rights reserved.
+//  Copyright © 2018-2024 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -18,7 +18,7 @@ API_AVAILABLE(ios(11.3), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos
 @interface CLSActivityItem : CLSObject
 
 /*!
- @abstract      Title of what this ActivityItem respresents.
+ @abstract      Title of what this ActivityItem represents.
  @discussion    This will be the title associated with the activity item in the generated progress report.
  */
 @property (nonatomic, copy) NSString *title;

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitCore.framework/Versions/A/HomeKitCore'
-current-version: 1124.5.8
+current-version: 1124.6.30
 compatibility-version: 0
 swift-abi-version: 7
 exports:

@@ -22,6 +22,7 @@ exports:
                        '_$sSo26CoreEmbeddedSpeechAnalyzerC0abC11RecognitionE06resumeE014withPrefixText07postfixI008selectedI0ySS_S2StF', 
                        '_$sSo26CoreEmbeddedSpeechAnalyzerC0abC11RecognitionE07preheatcE04with0F6Source16modelOverrideURLySo21SFEntitledAssetConfigC_SSSg10Foundation0K0VSgtF', 
                        '_$sSo26CoreEmbeddedSpeechAnalyzerC0abC11RecognitionE10invalidateyyF', 
+                       '_$sSo26CoreEmbeddedSpeechAnalyzerC0abC11RecognitionE10resetCacheyyFZ', 
                        '_$sSo26CoreEmbeddedSpeechAnalyzerC0abC11RecognitionE11finishAudioyyF', 
                        '_$sSo26CoreEmbeddedSpeechAnalyzerC0abC11RecognitionE14addAudioPacket_18packetRecordedTime0i13ReadyUpstreamK0y10Foundation4DataV_So8NSNumberCSgALtF', 
                        '_$sSo26CoreEmbeddedSpeechAnalyzerC0abC11RecognitionE14addAudioPacketyy10Foundation4DataVF', 

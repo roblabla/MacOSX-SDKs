@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Wallpaper.framework/Versions/A/Wallpaper'
-current-version: 95.113
+current-version: 95.201
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1461,12 +1461,16 @@ exports:
                        '_$s9Wallpaper33LegacyDesktopPictureConfigurationV24defaultAnimationDurationSdvgZ', 
                        '_$s9Wallpaper33LegacyDesktopPictureConfigurationV24dictionaryRepresentationSDys11AnyHashableVypGvg', 
                        '_$s9Wallpaper33LegacyDesktopPictureConfigurationV24dictionaryRepresentationSDys11AnyHashableVypGvpMV', 
+                       '_$s9Wallpaper33LegacyDesktopPictureConfigurationV25backgroundColorComponentsSaySdGSgvM', 
+                       '_$s9Wallpaper33LegacyDesktopPictureConfigurationV25backgroundColorComponentsSaySdGSgvg', 
+                       '_$s9Wallpaper33LegacyDesktopPictureConfigurationV25backgroundColorComponentsSaySdGSgvpMV', 
+                       '_$s9Wallpaper33LegacyDesktopPictureConfigurationV25backgroundColorComponentsSaySdGSgvs', 
                        '_$s9Wallpaper33LegacyDesktopPictureConfigurationV4fromACs7Decoder_p_tKcfC', 
                        '_$s9Wallpaper33LegacyDesktopPictureConfigurationV4path10Foundation3URLVSgvM', 
                        '_$s9Wallpaper33LegacyDesktopPictureConfigurationV4path10Foundation3URLVSgvg', 
                        '_$s9Wallpaper33LegacyDesktopPictureConfigurationV4path10Foundation3URLVSgvpMV', 
                        '_$s9Wallpaper33LegacyDesktopPictureConfigurationV4path10Foundation3URLVSgvs', 
-                       '_$s9Wallpaper33LegacyDesktopPictureConfigurationV4path9placement10changePath0H00H8Duration9randomize7animate0lJ012dynamicStyleAC10Foundation3URLVSg_So0cD9PlacementVSgAPSo0cD6ChangeVSgSdSgSbSgAxWSo0cd7DynamicN0VSgtcfC', 
+                       '_$s9Wallpaper33LegacyDesktopPictureConfigurationV4path9placement10changePath0H00H8Duration9randomize7animate0lJ012dynamicStyle25backgroundColorComponentsAC10Foundation3URLVSg_So0cD9PlacementVSgAQSo0cD6ChangeVSgSdSgSbSgAyXSo0cd7DynamicN0VSgSaySdGSgtcfC', 
                        '_$s9Wallpaper33LegacyDesktopPictureConfigurationV6changeSo0cD6ChangeVSgvM', 
                        '_$s9Wallpaper33LegacyDesktopPictureConfigurationV6changeSo0cD6ChangeVSgvg', 
                        '_$s9Wallpaper33LegacyDesktopPictureConfigurationV6changeSo0cD6ChangeVSgvpMV', 

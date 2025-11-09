@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ClassKit.framework/Versions/A/ClassKit'
-current-version: 149.4.56
+current-version: 149.5.20
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -47,10 +47,10 @@ exports:
                        _CLSExecutableLinkedOnOrAfter_iOS14_0, _CLSExecutableLinkedOnOrAfter_iOS14_0_macOS_10_16, 
                        _CLSExecutableLinkedOnOrAfter_iOS14_2, _CLSExecutableLinkedOnOrAfter_iOS14_2_macOS_10_16, 
                        _CLSExecutableLinkedOnOrAfter_iOS15_1_macOS_12_0, _CLSExecutableLinkedOnOrAfter_iOS16_2_macOS_13_1, 
-                       _CLSExpectedPersonaKey, _CLSExtensionPropertiesForConnection, 
-                       _CLSExtensionPropertiesForCurrentTask, _CLSFavoriteTypeFromString, 
-                       _CLSHandoutAttachmentCompletionStatusFromString, _CLSHandoutAttachmentTypeFromString, 
-                       _CLSHandoutClasses, _CLSHandoutPublishingStateFromString, 
+                       _CLSExecutableLinkedOnOrAfter_iOS17_5_macOS_14_5, _CLSExpectedPersonaKey, 
+                       _CLSExtensionPropertiesForConnection, _CLSExtensionPropertiesForCurrentTask, 
+                       _CLSFavoriteTypeFromString, _CLSHandoutAttachmentCompletionStatusFromString, 
+                       _CLSHandoutAttachmentTypeFromString, _CLSHandoutClasses, _CLSHandoutPublishingStateFromString, 
                        _CLSHandoutStateFromString, _CLSHandoutSubstateFromString, 
                        _CLSInitLog, _CLSInitialServerSyncCompleteNotificationName, 
                        _CLSInitialSyncCompleteDarwinNotificationName, _CLSInitialiCloudDriveSyncCompleteNotificationName, 

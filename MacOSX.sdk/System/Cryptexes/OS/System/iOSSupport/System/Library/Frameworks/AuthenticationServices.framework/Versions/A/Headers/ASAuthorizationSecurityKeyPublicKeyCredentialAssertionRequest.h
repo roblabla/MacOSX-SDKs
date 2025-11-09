@@ -16,6 +16,9 @@ API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
  */
 @property (nonatomic, copy) NSArray<ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor *> *allowedCredentials;
 
+/// Use this value to request the appid WebAuthn extension. This can only be requested by web browsers.
+@property (nonatomic, nullable, copy) NSString *appID AS_API_AVAILABLE(macos(14.5), ios(17.5));
+
 @end
 
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION

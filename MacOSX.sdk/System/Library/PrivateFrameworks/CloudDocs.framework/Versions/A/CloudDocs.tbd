@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CloudDocs.framework/Versions/A/CloudDocs'
-current-version: 2720.100.117
+current-version: 2720.120.29
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -184,15 +184,15 @@ exports:
                        BRFileObjectID, BRFileProviderHelper, BRFileProvidingOperation, 
                        BRFrameworkCloudDocsHelper, BRGetPausedFileListUpdater, BRInodeObjectID, 
                        BRListNonLocalVersionsOperation, BRMangledID, BRNonLocalVersion, 
-                       BRNotificationQueue, BROperation, BRPair, BRPosixOperationsWrapper, 
-                       BRProcessMonitor, BRProgressUpdate, BRQueryItem, BRReachabilityMonitor, 
-                       BRRemoteUserDefaults, BRRuntimeBehavior, BRScreenLockMonitor, 
-                       BRServerMetrics, BRShareAcceptOperation, BRShareCopyAccessTokenOperation, 
-                       BRShareCopyDocumentURLForRecordID, BRShareCopyOperation, BRShareCopyShareURLOperation, 
-                       BRShareCopyiWorkShareURLOperation, BRShareDestroyOperation, 
-                       BRShareLookupParticipantsOperation, BRSharePrepFolderForSharing, 
-                       BRShareProcessSubitems, BRShareSaveOperation, BRShareUnshareOperation, 
-                       BRSharingCopyEtagOperation, BRSharingCopyShareInfoOperation, 
+                       BRNotificationQueue, BROperation, BRPair, BRPersonaUtils, 
+                       BRPosixOperationsWrapper, BRProcessMonitor, BRProgressUpdate, 
+                       BRQueryItem, BRReachabilityMonitor, BRRemoteUserDefaults, 
+                       BRRuntimeBehavior, BRScreenLockMonitor, BRServerMetrics, BRShareAcceptOperation, 
+                       BRShareCopyAccessTokenOperation, BRShareCopyDocumentURLForRecordID, 
+                       BRShareCopyOperation, BRShareCopyShareURLOperation, BRShareCopyiWorkShareURLOperation, 
+                       BRShareDestroyOperation, BRShareLookupParticipantsOperation, 
+                       BRSharePrepFolderForSharing, BRShareProcessSubitems, BRShareSaveOperation, 
+                       BRShareUnshareOperation, BRSharingCopyEtagOperation, BRSharingCopyShareInfoOperation, 
                        BRSharingCopyShareTokenOperation, BRSharingCopyShortTokenOperation, 
                        BRSharingModifyRecordAccessOperation, BRStopwatch, BRTask, 
                        BRTransfersStatusManager, BRTrashItem, BRUploadAllFilesForLogOutOperation, 

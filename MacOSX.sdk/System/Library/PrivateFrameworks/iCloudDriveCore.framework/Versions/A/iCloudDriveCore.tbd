@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/iCloudDriveCore.framework/Versions/A/iCloudDriveCore'
-current-version: 2720.100.117
+current-version: 2720.120.29
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -89,17 +89,17 @@ exports:
                        BRCDeviceConfiguration, BRCDocumentItem, BRCDocumentSignatureCalculator, 
                        BRCDownloadContent, BRCDownloadContentsBatchOperation, BRCDumpContext, 
                        BRCEAccessReport, BRCErrorGrouping, BRCEventsAnalytics, BRCExtensionErrorPayload, 
-                       BRCFSDownloader, BRCFSEventsPersistedState, BRCFSImporter, 
-                       BRCFSUploader, BRCFairScheduler, BRCFairSource, BRCFetchQuotaOperation, 
-                       BRCFetchiWorkSharingInfoOperation, BRCFileProviderDaemonUtils, 
-                       BRCFileProvidingRequestOperation, BRCFlatLevelEnumerator, 
-                       BRCGenerationID, BRCGlobalProgress, BRCImportBookmark, BRCImportUtil, 
-                       BRCItemDBRowIDAndZoneJobIdentifier, BRCItemGlobalID, BRCItemID, 
-                       BRCLRUDictionary, BRCListNonLocalVersionsOperation, BRCLocalItem, 
-                       BRCLocalVersion, BRCMigrateZonePCSOperation, BRCMigrationParameters, 
-                       BRCMigrationQueryOperation, BRCMigrationReport, BRCMigrationStats, 
-                       BRCMinHeap, BRCNotification, BRCNotificationManager, BRCPQLConnection, 
-                       BRCPackageChecksummer, BRCPackageItem, BRCPackageManifestReader, 
+                       BRCFSDownloader, BRCFSDownloaderUtil, BRCFSEventsPersistedState, 
+                       BRCFSImporter, BRCFSUploader, BRCFairScheduler, BRCFairSource, 
+                       BRCFetchQuotaOperation, BRCFetchiWorkSharingInfoOperation, 
+                       BRCFileProviderDaemonUtils, BRCFileProvidingRequestOperation, 
+                       BRCFlatLevelEnumerator, BRCGenerationID, BRCGlobalProgress, 
+                       BRCImportBookmark, BRCImportUtil, BRCItemDBRowIDAndZoneJobIdentifier, 
+                       BRCItemGlobalID, BRCItemID, BRCLRUDictionary, BRCListNonLocalVersionsOperation, 
+                       BRCLocalItem, BRCLocalVersion, BRCMigrateZonePCSOperation, 
+                       BRCMigrationParameters, BRCMigrationQueryOperation, BRCMigrationReport, 
+                       BRCMigrationStats, BRCMinHeap, BRCNotification, BRCNotificationManager, 
+                       BRCPQLConnection, BRCPackageChecksummer, BRCPackageItem, BRCPackageManifestReader, 
                        BRCPackageManifestWriter, BRCPendingChangesStream, BRCPeriodicSyncOperation, 
                        BRCPrivateClientZone, BRCPrivateServerZone, BRCProgress, BRCProgressMultiplex, 
                        BRCQueryItemUtil, BRCRTCReporter, BRCSQLBackedSet, BRCSafeDBHolder, 
@@ -156,6 +156,7 @@ exports:
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityDasdContext, 
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityIsActive, 
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityRegisteredWithDuet, 
+                       AppTelemetryFPFSMigrationInvestigation._xpcActivityTimeSinceLastAbleToRun, 
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityTimeSinceLastActivation, 
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityTimeSinceLastRegistration, 
                        AppTelemetryFPFSMigrationNonMigratedItemInvestigation._apfsAvailableSpace, 
@@ -308,10 +309,11 @@ exports:
                        BRCDocumentItem._resolvedConflictLoserEtags, BRCExtensionErrorPayload._minimumOSName, 
                        BRCExtensionErrorPayload._recordId, BRCFSDownloader._pendingOperationProgress, 
                        BRCFileProvidingRequestOperation._appLibrariesMonitored, BRCFileProvidingRequestOperation._client, 
-                       BRCFileProvidingRequestOperation._etagIfLoser, BRCFileProvidingRequestOperation._session, 
-                       BRCFileProvidingRequestOperation._stageFileName, BRCFileProvidingRequestOperation._trackerFileObjects, 
-                       BRCLocalItem._dbRowID, BRCLocalItem._isUserVisible, BRCLocalItem._itemID, 
-                       BRCLocalItem._knownByServer, BRCLocalItem._localDiffs, BRCLocalItem._minimumSupportedOSRowID, 
+                       BRCFileProvidingRequestOperation._etagIfLoser, BRCFileProvidingRequestOperation._options, 
+                       BRCFileProvidingRequestOperation._session, BRCFileProvidingRequestOperation._stageFileName, 
+                       BRCFileProvidingRequestOperation._trackerFileObjects, BRCLocalItem._dbRowID, 
+                       BRCLocalItem._isUserVisible, BRCLocalItem._itemID, BRCLocalItem._knownByServer, 
+                       BRCLocalItem._localDiffs, BRCLocalItem._minimumSupportedOSRowID, 
                        BRCLocalItem._notifsRank, BRCLocalItem._orig, BRCLocalItem._ownerKey, 
                        BRCLocalItem._parentFileID, BRCLocalItem._parentZoneRowID, 
                        BRCLocalItem._sharingOptions, BRCLocalItem._sideCarCKInfo, 

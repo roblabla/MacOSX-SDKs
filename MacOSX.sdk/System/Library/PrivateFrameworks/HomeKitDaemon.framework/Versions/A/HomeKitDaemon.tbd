@@ -2,11 +2,13 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitDaemon.framework/Versions/A/HomeKitDaemon'
-current-version: 1124.5.8
+current-version: 1124.6.30
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s13HomeKitDaemon13MatterServiceC010makeEnergybE02onAcA0D15ServicesManager_p_tYaFZ', 
+    symbols:         [ '_$s13HomeKitDaemon13InterfaceInfoV4name4type6hwAddrACSS_S2StcfC', 
+                       '_$s13HomeKitDaemon13InterfaceInfoVMa', '_$s13HomeKitDaemon13InterfaceInfoVMn', 
+                       '_$s13HomeKitDaemon13InterfaceInfoVN', '_$s13HomeKitDaemon13MatterServiceC010makeEnergybE02onAcA0D15ServicesManager_p_tYaFZ', 
                        '_$s13HomeKitDaemon13MatterServiceC010makeEnergybE02onAcA0D15ServicesManager_p_tYaFZTu', 
                        '_$s13HomeKitDaemon13MatterServiceC0E13SpecificationVAEycfC', 
                        '_$s13HomeKitDaemon13MatterServiceC0E13SpecificationVMa', 
@@ -100,8 +102,39 @@ exports:
                        '_$s13HomeKitDaemon19AsyncSerialWorkloopCMa', '_$s13HomeKitDaemon19AsyncSerialWorkloopCMm', 
                        '_$s13HomeKitDaemon19AsyncSerialWorkloopCMn', '_$s13HomeKitDaemon19AsyncSerialWorkloopCN', 
                        '_$s13HomeKitDaemon19AsyncSerialWorkloopCScAAAMc', '_$s13HomeKitDaemon19AsyncSerialWorkloopCfD', 
-                       '_$s13HomeKitDaemon19AsyncSerialWorkloopCfd', '_$s13HomeKitDaemon21MatterServicesManagerMp', 
-                       '_$s13HomeKitDaemon21MatterServicesManagerTL', '_$s13HomeKitDaemon36PrimaryResidentMatterServicesManagerC10invalidateyyF', 
+                       '_$s13HomeKitDaemon19AsyncSerialWorkloopCfd', '_$s13HomeKitDaemon19DiscoveryControllerC16visibleSFDevicesSDySS12HMFoundation3HMFO13VisibleDeviceVGvpfi', 
+                       '_$s13HomeKitDaemon19DiscoveryControllerC27obtainSFVisibleDevicesProtoSaySo025HMAccessoryDiagnosticInfoi13VisibleDeviceL0CGyF', 
+                       '_$s13HomeKitDaemon19DiscoveryControllerC27obtainSFVisibleDevicesProtoSaySo025HMAccessoryDiagnosticInfoi13VisibleDeviceL0CGyFTq', 
+                       '_$s13HomeKitDaemon19DiscoveryControllerC32obtainNetworkVisibleDevicesProtoSaySo025HMAccessoryDiagnosticInfojh6DeviceM0CGyF', 
+                       '_$s13HomeKitDaemon19DiscoveryControllerC32obtainNetworkVisibleDevicesProtoSaySo025HMAccessoryDiagnosticInfojh6DeviceM0CGyFTq', 
+                       '_$s13HomeKitDaemon19DiscoveryControllerC5queueSo012OS_dispatch_F0Cvpfi', 
+                       '_$s13HomeKitDaemon19DiscoveryControllerC5startyyF', '_$s13HomeKitDaemon19DiscoveryControllerC5startyyFTq', 
+                       '_$s13HomeKitDaemon19DiscoveryControllerC6logger2os6LoggerVvpfi', 
+                       '_$s13HomeKitDaemon19DiscoveryControllerCACycfC', '_$s13HomeKitDaemon19DiscoveryControllerCACycfc', 
+                       '_$s13HomeKitDaemon19DiscoveryControllerCMa', '_$s13HomeKitDaemon19DiscoveryControllerCMn', 
+                       '_$s13HomeKitDaemon19DiscoveryControllerCN', '_$s13HomeKitDaemon19DiscoveryControllerCfD', 
+                       '_$s13HomeKitDaemon21MatterServicesManagerMp', '_$s13HomeKitDaemon21MatterServicesManagerTL', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC06obtaindE0Say12HMFoundation3HMFO0dE0VG_SayAG0d7ServiceE0VGtyF', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC06obtaindE0Say12HMFoundation3HMFO0dE0VG_SayAG0d7ServiceE0VGtyFTq', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC06obtaindE5ProtoSDySSSayyXlGGyF', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC06obtaindE5ProtoSDySSSayyXlGGyFTq', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC0d7ServiceE3KeySSvau', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC0d7ServiceE3KeySSvgZ', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC0d7ServiceE3KeySSvpZ', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC0dE3KeySSvau', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC0dE3KeySSvgZ', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC0dE3KeySSvpZ', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC10dataSourceAcA0de4DataH0_p_tcfC', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC10dataSourceAcA0de4DataH0_p_tcfCTq', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC10dataSourceAcA0de4DataH0_p_tcfc', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC5startyyF', '_$s13HomeKitDaemon21NetworkInfoControllerC5startyyFTq', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC5store33_6461C73C9B4A6D46C62B63D491AA7B90LLSo17SCDynamicStoreRefaSgvpfi', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerC6logger33_6461C73C9B4A6D46C62B63D491AA7B90LL2os6LoggerVvpfi', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerCACycfC', '_$s13HomeKitDaemon21NetworkInfoControllerCACycfc', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerCMa', '_$s13HomeKitDaemon21NetworkInfoControllerCMn', 
+                       '_$s13HomeKitDaemon21NetworkInfoControllerCN', '_$s13HomeKitDaemon21NetworkInfoControllerCfD', 
+                       '_$s13HomeKitDaemon21NetworkInfoDataSourceMp', '_$s13HomeKitDaemon21NetworkInfoDataSourceTL', 
+                       '_$s13HomeKitDaemon36PrimaryResidentMatterServicesManagerC10invalidateyyF', 
                        '_$s13HomeKitDaemon36PrimaryResidentMatterServicesManagerC15registerServiceyyAA0fJ0CF', 
                        '_$s13HomeKitDaemon36PrimaryResidentMatterServicesManagerC15unownedExecutorScevg', 
                        '_$s13HomeKitDaemon36PrimaryResidentMatterServicesManagerC15unownedExecutorScevpMV', 
@@ -121,5 +154,6 @@ exports:
                        '_$sSo10HMCContextC13HomeKitDaemonE11saveOrThrowyyKF', '_$sSo10HMCContextC13HomeKitDaemonE14performAndWait5blockxxyYbKc_tYaKs8SendableRzlF', 
                        '_$sSo10HMCContextC13HomeKitDaemonE14performAndWait5blockxxyYbKc_tYaKs8SendableRzlFTu', 
                        '_$sSo10HMCContextC13HomeKitDaemonE30unsafeSynchronousThrowingBlock5blockxxyKXE_tKs8SendableRzlF' ]
-    objc-classes:    [ HMDMainDriver, HMDPrimaryResidentMatterServicesManager ]
+    objc-classes:    [ HMDDiscoveryController, HMDMainDriver, HMDNetworkInfoController, 
+                       HMDPrimaryResidentMatterServicesManager ]
 ...

@@ -261,6 +261,7 @@
 #import <UIKit/UISelectionFeedbackGenerator.h>
 #import <UIKit/UIImpactFeedbackGenerator.h>
 #import <UIKit/UINotificationFeedbackGenerator.h>
+#import <UIKit/UICanvasFeedbackGenerator.h>
 #import <UIKit/UITimingCurveProvider.h>
 #import <UIKit/NSIndexPath+UIKitAdditions.h>
 #import <UIKit/UIPopoverSupport.h>

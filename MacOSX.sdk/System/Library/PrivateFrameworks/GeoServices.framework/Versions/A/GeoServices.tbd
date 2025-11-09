@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GeoServices.framework/Versions/A/GeoServices'
-current-version: 1940.24.10
+current-version: 1940.25.2
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1874,16 +1874,16 @@ exports:
                        _GEOTelemetricEntityIsValid, _GEOTelemetricEntityReadAllFrom, 
                        _GEOTelemetricEntityReadFrom, _GEOTerritoryDataTerritoryInfoContainsLocation, 
                        _GEOTerritoryLookupIsEnabled, _GEOTextLinkIsDirty, _GEOTextLinkIsValid, 
-                       _GEOTextLinkReadAllFrom, _GEOTextLinkReadFrom, _GEOTileCoordinateIsValid, 
-                       _GEOTileCoordinateReadAllFrom, _GEOTileCoordinateReadFrom, 
-                       _GEOTileDBBindData, _GEOTileDBBindString, _GEOTileDBCheckVersion, 
-                       _GEOTileDBDecomposeKey, _GEOTileDBDevicePostureRegion, _GEOTileDBEditionUpdateBegin, 
-                       _GEOTileDBEditionUpdateEnd, _GEOTileDBEditionUpgradeEditionKey, 
-                       _GEOTileDBEditionUpgradeNotification, _GEOTileDBEditionUpgradeProviderKey, 
-                       _GEOTileDBEditionUpgradeTileSetKey, _GEOTileDBExecuteSQL, 
-                       _GEOTileDBLanguageLocale, _GEOTileDBPathKey, _GEOTileDBQuerySQL, 
-                       _GEOTileDBReadData, _GEOTileDBResetNotification, _GEOTileDBSetPragmas, 
-                       _GEOTileDBTileSetShortDescription, _GEOTileEditionUpdateKey, 
+                       _GEOTextLinkReadAllFrom, _GEOTextLinkReadFrom, _GEOThrottleKeyStringForRequest, 
+                       _GEOTileCoordinateIsValid, _GEOTileCoordinateReadAllFrom, 
+                       _GEOTileCoordinateReadFrom, _GEOTileDBBindData, _GEOTileDBBindString, 
+                       _GEOTileDBCheckVersion, _GEOTileDBDecomposeKey, _GEOTileDBDevicePostureRegion, 
+                       _GEOTileDBEditionUpdateBegin, _GEOTileDBEditionUpdateEnd, 
+                       _GEOTileDBEditionUpgradeEditionKey, _GEOTileDBEditionUpgradeNotification, 
+                       _GEOTileDBEditionUpgradeProviderKey, _GEOTileDBEditionUpgradeTileSetKey, 
+                       _GEOTileDBExecuteSQL, _GEOTileDBLanguageLocale, _GEOTileDBPathKey, 
+                       _GEOTileDBQuerySQL, _GEOTileDBReadData, _GEOTileDBResetNotification, 
+                       _GEOTileDBSetPragmas, _GEOTileDBTileSetShortDescription, _GEOTileEditionUpdateKey, 
                        _GEOTileEditionUpdateNotification, _GEOTileGroupIsDirty, _GEOTileGroupIsValid, 
                        _GEOTileGroupReadAllFrom, _GEOTileGroupReadFrom, _GEOTileIsCacheableKey, 
                        _GEOTileKeyAssertIsStandard, _GEOTileKeyContainsKey, _GEOTileKeyEquals, 
@@ -2369,8 +2369,9 @@ exports:
                        _GeoServicesConfig_ProactiveLoadSubscriptionsEnabled, _GeoServicesConfig_ProactiveRoutingURL, 
                        _GeoServicesConfig_ProbeCrumbDuration, _GeoServicesConfig_ProbeCrumbFrequency, 
                        _GeoServicesConfig_ProbeCrumbsEnabled, _GeoServicesConfig_ProblemOptInURL, 
-                       _GeoServicesConfig_PuckLocationTracing, _GeoServicesConfig_RAPDebugSubmissionKeywords, 
-                       _GeoServicesConfig_RAPWebModuleBaseURL, _GeoServicesConfig_RadialDistanceToImplicateTransitTilesForACoordinate, 
+                       _GeoServicesConfig_ProtobufSessionAdditionalHTTPHeaders, _GeoServicesConfig_PuckLocationTracing, 
+                       _GeoServicesConfig_RAPDebugSubmissionKeywords, _GeoServicesConfig_RAPWebModuleBaseURL, 
+                       _GeoServicesConfig_RadialDistanceToImplicateTransitTilesForACoordinate, 
                        _GeoServicesConfig_RealtimeTrafficProbeURL, _GeoServicesConfig_RealtimeTransitInitialUpdateDelay, 
                        _GeoServicesConfig_RealtimeTransitUpdateIntervalOverride, 
                        _GeoServicesConfig_RecommendedDishesForceTextDisplayStyle, 
@@ -2394,7 +2395,7 @@ exports:
                        _GeoServicesConfig_RoutePreloaderUseCellularCoverage, _GeoServicesConfig_SKURegionsServiceAllowlist, 
                        _GeoServicesConfig_SKURegionsServiceAllowlistAppliesToTiles, 
                        _GeoServicesConfig_SearchACMPTCPServiceType, _GeoServicesConfig_SearchAttributionManifestURL, 
-                       _GeoServicesConfig_SetProtobufContentType, _GeoServicesConfig_ShouldAlwaysUpdateNetworkDefaultsAtLaunch, 
+                       _GeoServicesConfig_ShouldAlwaysUpdateNetworkDefaultsAtLaunch, 
                        _GeoServicesConfig_ShouldCreateDebugTableForGeod, _GeoServicesConfig_ShouldOverrideCountryCode, 
                        _GeoServicesConfig_ShouldPassABClientMetadata, _GeoServicesConfig_ShouldRecoverFromMissingDecoderData, 
                        _GeoServicesConfig_ShouldSpeakWrittenAddresses, _GeoServicesConfig_ShouldSpeakWrittenPlaceNames, 
@@ -3816,7 +3817,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/GeoServicesCore.framework/Versions/A/GeoServicesCore'
-current-version: 1940.24.10
+current-version: 1940.25.2
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

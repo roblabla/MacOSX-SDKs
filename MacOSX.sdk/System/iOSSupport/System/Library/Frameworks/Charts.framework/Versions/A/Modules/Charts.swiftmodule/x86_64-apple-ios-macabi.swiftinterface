@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2.4.8.2 -module-name Charts
+// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2.4.10 -module-name Charts
 import Foundation
 import Swift
 import SwiftUI
@@ -908,10 +908,9 @@ extension Charts.ChartContent {
   @_alwaysEmitIntoClient public static func buildEither<T1, T2>(second: T2) -> Charts.BuilderConditional<T1, T2> where T1 : Charts.ChartContent, T2 : Charts.ChartContent {
         return .init(storage: .falseContent(second))
     }
-  @_alwaysEmitIntoClient public static func buildLimitedAvailability<Content>(_ content: Content) -> some Charts.ChartContent where Content : Charts.ChartContent {
-        content
+  @_alwaysEmitIntoClient public static func buildLimitedAvailability(_ content: some ChartContent) -> Charts.AnyChartContent {
+        AnyChartContent(content)
     }
-  
   @_alwaysEmitIntoClient public static func buildExpression<Content>(_ content: Content) -> Content where Content : Charts.ChartContent {
         content
     }
@@ -1173,10 +1172,9 @@ extension SwiftUI.ForEach where Content : Charts.ChartContent {
   @_alwaysEmitIntoClient public static func buildEither<T1, T2>(second: T2) -> Charts.BuilderConditional<T1, T2> where T1 : Charts.AxisMark, T2 : Charts.AxisMark {
         return .init(storage: .falseContent(second))
     }
-  @_alwaysEmitIntoClient public static func buildLimitedAvailability<Content>(_ content: Content) -> some Charts.AxisMark where Content : Charts.AxisMark {
+  @_alwaysEmitIntoClient public static func buildLimitedAvailability<Content>(_ content: Content) -> Charts.AnyAxisMark where Content : Charts.AxisMark {
         return AnyAxisMark(content)
     }
-  
   @_alwaysEmitIntoClient public static func buildExpression<Content>(_ content: Content) -> Content where Content : Charts.AxisMark {
         content
     }
@@ -1400,10 +1398,9 @@ extension Charts.ChartSymbolShape where Self == Charts.BasicChartSymbolShape {
   @_alwaysEmitIntoClient public static func buildEither<T1, T2>(second: T2) -> Charts.BuilderConditional<T1, T2> where T1 : Charts.AxisContent, T2 : Charts.AxisContent {
         .init(storage: .falseContent(second))
     }
-  @_alwaysEmitIntoClient public static func buildLimitedAvailability<Content>(_ content: Content) -> some Charts.AxisContent where Content : Charts.AxisContent {
+  @_alwaysEmitIntoClient public static func buildLimitedAvailability<Content>(_ content: Content) -> Charts.AnyAxisContent where Content : Charts.AxisContent {
         AnyAxisContent(content)
     }
-  
   @_alwaysEmitIntoClient public static func buildExpression<Content>(_ content: Content) -> Content where Content : Charts.AxisContent {
         content
     }

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_AppIntents_SwiftUI.framework/Versions/A/_AppIntents_SwiftUI'
-current-version: 174.100.17
+current-version: 174.200.3
 compatibility-version: 0
 swift-abi-version: 7
 exports:

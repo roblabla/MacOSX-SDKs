@@ -261,6 +261,16 @@ typedef union {
 
 
 
+/* H16G Donan e-Core. */
+#define CPU_PART_ECORE_DONAN 0x52
+
+/* H16H Donan p-Core. */
+#define CPU_PART_PCORE_DONAN 0x53
+
+
+
+
+
 
 /* Cache type identification */
 

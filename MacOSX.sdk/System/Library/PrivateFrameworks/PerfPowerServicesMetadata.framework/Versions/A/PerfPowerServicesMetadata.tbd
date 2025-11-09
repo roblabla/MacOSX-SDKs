@@ -19,9 +19,9 @@ exports:
                        PPSPBCadence, PPSPBCadenceTuple, PPSPBEnumMapping, PPSPBEnumTuple, 
                        PPSPBGroupingDimensions, PPSPBMetric, PPSPBMetricHistory, 
                        PPSPBMetricStream, PPSPBMetricType, PPSPBRounding, PPSPBSource, 
-                       PPSPBUnit, PPSRenderMetrics, PPSRounding, PPSSQLMetadataStore, 
-                       PPSSensorsMetrics, PPSStorageMetrics, PPSUnit, PPSUtilities, 
-                       PPSWifiMetrics, PPSXPCMetrics, PPSXcodeMetrics ]
+                       PPSPBUnit, PPSPerformanceMetrics, PPSRenderMetrics, PPSRounding, 
+                       PPSSQLMetadataStore, PPSSensorsMetrics, PPSStorageMetrics, 
+                       PPSUnit, PPSUtilities, PPSWifiMetrics, PPSXPCMetrics, PPSXcodeMetrics ]
     objc-ivars:      [ PPSPBCadence._cadences, PPSPBCadenceTuple._has, PPSPBCadenceTuple._type, 
                        PPSPBCadenceTuple._value, PPSPBEnumMapping._enumMaps, PPSPBEnumTuple._key, 
                        PPSPBEnumTuple._value, PPSPBGroupingDimensions._groupBys, 

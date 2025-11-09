@@ -4,6 +4,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class BEWebAppManifest;
+
 /*! 
  @protocol SFAddToHomeScreenActivityItem
  An activity item for adding "Add to Home Screen" activity type into activity view (share sheet) list.
@@ -18,7 +20,7 @@ API_AVAILABLE(ios(17.4))
 @property (nonatomic, readonly) NSURL *URL;
 
 /*! @abstract The title for the home screen bookmark item.
- This URL will be shown to user in the confirmation sheet.
+ This title will be shown to user in the confirmation sheet.
  */
 @property (nonatomic, readonly) NSString *title;
 
@@ -28,6 +30,11 @@ API_AVAILABLE(ios(17.4))
  */
 @optional
 @property (nonatomic, nullable, readonly) NSItemProvider *iconItemProvider;
+
+/*! @abstract An optional method to provide the web app manifest.
+ This is only available to apps that can use BrowserEngineKit.
+*/
+- (void)getWebAppManifestWithCompletionHandler:(void (^)(BEWebAppManifest *_Nullable))completionHandler API_AVAILABLE(ios(17.5));
 
 @end
 

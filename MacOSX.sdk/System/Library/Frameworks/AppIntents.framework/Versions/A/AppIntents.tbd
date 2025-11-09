@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/AppIntents.framework/Versions/A/AppIntents'
-current-version: 174.100.17
+current-version: 174.200.3
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -621,10 +621,6 @@ exports:
                        '_$s10AppIntents0A7ManagerC22getApplicationMetadatayXlyKF', 
                        '_$s10AppIntents0A7ManagerC24decrementViewActionCountyyAA0A6Intent_pXpF', 
                        '_$s10AppIntents0A7ManagerC24incrementViewIntentCountyyAA0aF0_pXpF', 
-                       '_$s10AppIntents0A7ManagerC26siriLanguageCodeIdentifierSSSgvM', 
-                       '_$s10AppIntents0A7ManagerC26siriLanguageCodeIdentifierSSSgvg', 
-                       '_$s10AppIntents0A7ManagerC26siriLanguageCodeIdentifierSSSgvpMV', 
-                       '_$s10AppIntents0A7ManagerC26siriLanguageCodeIdentifierSSSgvs', 
                        '_$s10AppIntents0A7ManagerC6bundleSo8NSBundleCvM', '_$s10AppIntents0A7ManagerC6bundleSo8NSBundleCvg', 
                        '_$s10AppIntents0A7ManagerC6bundleSo8NSBundleCvpMV', '_$s10AppIntents0A7ManagerC6bundleSo8NSBundleCvs', 
                        '_$s10AppIntents0A7ManagerC6sharedACvgZ', '_$s10AppIntents0A7ManagerC8register_19forBundleIdentifierySo8NSBundleC_SStKF', 

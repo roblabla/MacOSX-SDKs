@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PrintingPrivate.framework/Versions/A/PrintingPrivate'
-current-version: 232.1
+current-version: 232.2
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CreateTemporaryFile, _HttpConnectionFromURI, _LoadAndGetPMPrinterInfoBundle, 

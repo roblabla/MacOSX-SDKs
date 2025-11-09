@@ -1336,6 +1336,13 @@ AV_INIT_UNAVAILABLE
  */
 @property (nonatomic, readonly, nullable) NSString *errorComment;
 
+ /*
+ @property		allHTTPResponseHeaderFields
+ @abstract		The HTTP header fields returned by the server, if an HTTP response was received as part of this error.
+ @discussion	See -[NSHTTPURLResponse allHeaderFields] for more information.
+ */
+ @property (nonatomic, readonly, nullable) NSDictionary <NSString *, NSString *> *allHTTPResponseHeaderFields API_AVAILABLE(macos(14.5), ios(17.5), tvos(17.5), watchos(10.5), visionos(1.2));
+
 @end
 
 NS_ASSUME_NONNULL_END

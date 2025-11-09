@@ -22,6 +22,7 @@ exports:
                        _IRCreateServicePackageAdapter, _IRDefaultsDomain, _IRDispatchAsyncAndWaitWithStrongSelf, 
                        _IRDispatchAsyncWithStrongSelf, _IRDispatchSyncWithStrongSelf, 
                        _IRGetDiskUsageForPath, _IRLocationSemanticUserSpecificPlaceTypeToString, 
+                       _IRSessionAnalyticsMetricEventTypeFromEvent, _IRSessionAnalyticsMetricPostBannerInteractionToString, 
                        _kIRRuleCandidateActiveRouteKey, _kIRRuleCandidateAppleTVControlUserRejectedInLastDayWithoutPickerChoiceKey, 
                        _kIRRuleCandidateMediaUserRejectedInLastDayWithoutPickerChoiceKey, 
                        _kIRRuleCandidateProximityKey, _kIRRuleCandidateProximityShortestRangeInHistoryOrSameICloudKey, 
@@ -80,9 +81,10 @@ exports:
                        IRRuleOutputHistoryPattern, IRRuleOutputSystemState, IRRuleSystemState, 
                        IRServiceContainer, IRServiceDO, IRServiceLogPrefix, IRServiceMO, 
                        IRServicePackageAdapterAppleTVControl, IRServicePackageAdapterClassification, 
-                       IRServicePackageAdapterMedia, IRServiceStore, IRSessionClientProxy, 
-                       IRSessionConnection, IRSessionServer, IRStatisticsDO, IRStatisticsMO, 
-                       IRStatisticsManager, IRStore, IRSystemStateDO, IRSystemStateMO, 
-                       IRSystemStateManager, IRTTRPrompt, IRTTRURLQuery, IRTTRpopup, 
-                       IRTapToRadar, IRTimer, IRXPCServicesManager ]
+                       IRServicePackageAdapterMedia, IRServiceStore, IRSessionAnalytics, 
+                       IRSessionAnalyticsMetric, IRSessionClientProxy, IRSessionConnection, 
+                       IRSessionServer, IRStatisticsDO, IRStatisticsMO, IRStatisticsManager, 
+                       IRStore, IRSystemStateDO, IRSystemStateMO, IRSystemStateManager, 
+                       IRTTRPrompt, IRTTRURLQuery, IRTTRpopup, IRTapToRadar, IRTimer, 
+                       IRXPCServicesManager ]
 ...

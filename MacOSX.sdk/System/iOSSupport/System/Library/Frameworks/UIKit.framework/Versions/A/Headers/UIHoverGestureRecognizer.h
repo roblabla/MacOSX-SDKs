@@ -37,6 +37,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @interface 
 /// The altitude angle of the current device. 0 is returned for devices that don't support altitude.
 @property (nonatomic, readonly) CGFloat altitudeAngle API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos, tvos);
 
+// Roll angle in radians. Devices that do not support roll angle will always return 0. The roll angle
+// for the Pencil Pro is relative to the angle it has when the pencil becomes active/wakes up.
+@property(nonatomic, readonly) CGFloat rollAngle API_AVAILABLE(ios(17.5)) API_UNAVAILABLE(watchos, tvos);
+
 
 @end
 

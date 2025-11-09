@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PAImagingCore.framework/Versions/A/PAImagingCore'
-current-version: 646.2.101
+current-version: 651.0.100
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIN2PA10RectFinderE, __ZTIN2PA14PathRectFinderE, __ZTIN2PA16AnchorRectFinderE, 

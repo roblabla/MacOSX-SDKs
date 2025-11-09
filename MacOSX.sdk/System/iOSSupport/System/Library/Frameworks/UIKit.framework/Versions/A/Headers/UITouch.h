@@ -44,6 +44,7 @@ typedef NS_OPTIONS(NSInteger, UITouchProperties) {
     UITouchPropertyAzimuth = (1UL << 1),
     UITouchPropertyAltitude = (1UL << 2),
     UITouchPropertyLocation = (1UL << 3), // For predicted Touches
+    UITouchPropertyRoll API_AVAILABLE(ios(17.5)) API_UNAVAILABLE(watchos, tvos) = (1UL << 4),
 } API_AVAILABLE(ios(9.1));
 
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
@@ -99,6 +100,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // This happens e.g. for azimuth/altitude values when entering from the edges
 @property(nonatomic,readonly) UITouchProperties estimatedPropertiesExpectingUpdates API_AVAILABLE(ios(9.1));
 
+// Roll angle in radians. Devices that do not support roll angle will always return 0. The roll angle
+// for the Pencil Pro is relative to the angle it has when the pencil becomes active/wakes up.
+@property(nonatomic, readonly) CGFloat rollAngle API_AVAILABLE(ios(17.5)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

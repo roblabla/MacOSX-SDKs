@@ -25,9 +25,9 @@ API_UNAVAILABLE(visionos)
 
 - (void)assessmentSessionDidEnd:(AEAssessmentSession *)session;
 
-- (void)assessmentSessionDidUpdate:(AEAssessmentSession *)session API_AVAILABLE(macCatalyst(15.0), macos(12.0)) API_UNAVAILABLE(ios);
+- (void)assessmentSessionDidUpdate:(AEAssessmentSession *)session API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
 
-- (void)assessmentSession:(AEAssessmentSession *)session failedToUpdateToConfiguration:(AEAssessmentConfiguration *)configuration error:(NSError *)error API_AVAILABLE(macCatalyst(15.0), macos(12.0)) API_UNAVAILABLE(ios);
+- (void)assessmentSession:(AEAssessmentSession *)session failedToUpdateToConfiguration:(AEAssessmentConfiguration *)configuration error:(NSError *)error API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
 
 @end
 

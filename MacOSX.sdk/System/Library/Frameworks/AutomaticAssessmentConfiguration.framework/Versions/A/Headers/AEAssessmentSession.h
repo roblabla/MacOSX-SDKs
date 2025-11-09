@@ -17,6 +17,9 @@ API_AVAILABLE(ios(13.4), macos(10.15.4), macCatalyst(14.0))
 API_UNAVAILABLE(visionos)
 @interface AEAssessmentSession : NSObject
 
+@property (class, assign, readonly) BOOL supportsMultipleParticipants API_AVAILABLE(ios(17.5), macCatalyst(17.5), macos(14.5));
+@property (class, assign, readonly) BOOL supportsConfigurationUpdates API_AVAILABLE(ios(17.5), macCatalyst(17.5), macos(14.5));
+
 @property (nonatomic, weak, nullable) id<AEAssessmentSessionDelegate> delegate;
 @property (nonatomic, copy, readonly) AEAssessmentConfiguration *configuration API_AVAILABLE(ios(15.0), macCatalyst(15.0), macos(12.0));
 @property (nonatomic, assign, readonly, getter=isActive) BOOL active;
@@ -27,7 +30,7 @@ API_UNAVAILABLE(visionos)
 
 - (void)begin;
 - (void)end;
-- (void)updateToConfiguration:(AEAssessmentConfiguration *)configuration API_AVAILABLE(macCatalyst(15.0), macos(12.0)) API_UNAVAILABLE(ios);
+- (void)updateToConfiguration:(AEAssessmentConfiguration *)configuration API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
 
 @end
 

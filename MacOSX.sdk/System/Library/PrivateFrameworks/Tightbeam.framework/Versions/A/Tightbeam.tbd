@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Tightbeam.framework/Versions/A/Tightbeam'
-current-version: 253.100.1
+current-version: 257.120.21
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -336,8 +336,8 @@ exports:
                        '_$sSo10tb_error_ta10Foundation26_ObjectiveCBridgeableError9TightbeamMc', 
                        '_$sSo10tb_error_ta9TightbeamE11descriptionSSvg', '_$sSo10tb_error_ta9TightbeamE11descriptionSSvpMV', 
                        '_$sSo10tb_error_ta9TightbeamE14_nsErrorDomainSSvgZ', '_$sSo10tb_error_tas23CustomStringConvertible9TightbeamMc', 
-                       '_$sSo10tb_error_tas5Error9TightbeamMc', __tb_message_reset, 
-                       _tb_afk_transport_create, _tb_client_connection_activate, 
+                       '_$sSo10tb_error_tas5Error9TightbeamMc', __tb_message_buffer_reset, 
+                       __tb_message_reset, _tb_afk_transport_create, _tb_client_connection_activate, 
                        _tb_client_connection_create, _tb_client_connection_create_with_endpoint, 
                        _tb_client_connection_create_with_endpoint_static, _tb_client_connection_message_construct, 
                        _tb_client_connection_message_destruct, _tb_client_connection_message_reset, 
@@ -371,26 +371,27 @@ exports:
                        _tb_message_get_capability, _tb_message_get_client_identifier, 
                        _tb_message_get_disposition, _tb_message_get_msg_identifier, 
                        _tb_message_get_num_caps, _tb_message_get_state, _tb_message_get_transport_buffer, 
-                       _tb_message_measure_subrange, _tb_message_reset, _tb_message_set_client_identifier, 
-                       _tb_message_set_connection_identifier, _tb_message_set_disposition, 
-                       _tb_message_set_msg_identifier, _tb_message_set_state, _tb_message_set_transport_buffer, 
-                       _tb_message_size_bool, _tb_message_size_capability, _tb_message_size_f32, 
-                       _tb_message_size_f64, _tb_message_size_s16, _tb_message_size_s32, 
-                       _tb_message_size_s64, _tb_message_size_s8, _tb_message_size_u16, 
-                       _tb_message_size_u32, _tb_message_size_u64, _tb_message_size_u8, 
-                       _tb_message_splitter_send, _tb_message_splitter_split_required, 
-                       _tb_message_subrange, _tb_null_transport_clear_observers, 
-                       _tb_null_transport_create, _tb_null_transport_get_observers, 
-                       _tb_null_transport_init_observers, _tb_owned_buffer_allocate, 
-                       _tb_owned_buffer_deallocate, _tb_reply_splitter_add_reply, 
+                       _tb_message_initialize, _tb_message_measure_subrange, _tb_message_reset, 
+                       _tb_message_set_client_identifier, _tb_message_set_connection_identifier, 
+                       _tb_message_set_disposition, _tb_message_set_msg_identifier, 
+                       _tb_message_set_state, _tb_message_set_transport_buffer, _tb_message_size_bool, 
+                       _tb_message_size_capability, _tb_message_size_f32, _tb_message_size_f64, 
+                       _tb_message_size_s16, _tb_message_size_s32, _tb_message_size_s64, 
+                       _tb_message_size_s8, _tb_message_size_u16, _tb_message_size_u32, 
+                       _tb_message_size_u64, _tb_message_size_u8, _tb_message_splitter_send, 
+                       _tb_message_splitter_split_required, _tb_message_subrange, 
+                       _tb_null_transport_clear_observers, _tb_null_transport_create, 
+                       _tb_null_transport_get_observers, _tb_null_transport_init_observers, 
+                       _tb_owned_buffer_allocate, _tb_owned_buffer_deallocate, _tb_reply_splitter_add_reply, 
                        _tb_reply_splitter_next_message, _tb_service_connection_activate, 
                        _tb_service_connection_create, _tb_service_connection_create_with_endpoint, 
                        _tb_service_connection_message_configure_reply, _tb_service_connection_message_construct, 
                        _tb_service_connection_message_destruct, _tb_transport_call_message_handler, 
                        _tb_transport_get_context, _tb_transport_get_tx_buffer_size, 
                        _tb_transport_initialize_message_buffer, _tb_transport_message_buffer_copy, 
-                       _tb_transport_message_buffer_wrap_buffer, _tb_transport_reset_message_buffer, 
-                       _tb_transport_set_message_handler, _tb_transport_set_message_handler_f, 
-                       _tb_transport_set_reply_sent_handler, _tb_transport_supports_multipart_messages, 
-                       _tb_unix_client_transport_create_with_endpoint, _tb_unix_service_transport_create_with_endpoint ]
+                       _tb_transport_message_buffer_deep_copy, _tb_transport_message_buffer_wrap_buffer, 
+                       _tb_transport_reset_message_buffer, _tb_transport_set_message_handler, 
+                       _tb_transport_set_message_handler_f, _tb_transport_set_reply_sent_handler, 
+                       _tb_transport_supports_multipart_messages, _tb_unix_client_transport_create_with_endpoint, 
+                       _tb_unix_service_transport_create_with_endpoint ]
 ...

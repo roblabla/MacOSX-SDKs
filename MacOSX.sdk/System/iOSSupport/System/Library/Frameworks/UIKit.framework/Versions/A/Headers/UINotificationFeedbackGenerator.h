@@ -22,6 +22,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(
 
 /// call when a notification is displayed, passing the corresponding type
 - (void)notificationOccurred:(UINotificationFeedbackType)notificationType;
+- (void)notificationOccurred:(UINotificationFeedbackType)notificationType atLocation:(CGPoint)location API_AVAILABLE(ios(17.5)) API_UNAVAILABLE(visionos) NS_SWIFT_NAME(notificationOccurred(_:at:));
 
 @end
 

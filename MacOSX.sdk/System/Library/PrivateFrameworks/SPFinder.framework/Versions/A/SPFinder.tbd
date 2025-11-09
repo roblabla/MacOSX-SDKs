@@ -29,6 +29,6 @@ exports:
                        SPAdvertisementCacheSearchResult, SPBeaconAdvertisement, SPBeaconPayload, 
                        SPBeaconPayloadCacheSearchCriteria, SPBeaconPayloadCacheSearchResult, 
                        SPEstimatedLocation, SPFinderInterface, SPFinderStateInfo, 
-                       SPFinderStateManager, SPScheduler, SPSchedulerInformation, 
+                       SPFinderStateManager, SPPublishResult, SPScheduler, SPSchedulerInformation, 
                        SPSearchResultMarker, _TtC8SPFinder15ObjCSwiftBridge ]
 ...

@@ -21,8 +21,8 @@ exports:
                        _DeveloperNameForPath, _DeveloperNameForURL, _InternalAttributionsByLabel, 
                        _ItemIdentifierForURLAndType, _ItemIdentifierWithRegistrationInfo, 
                        _ItemNameForLaunchdPlist, _ItemNameForURL, _LabelForLaunchdPlist, 
-                       _SecCodeGetSigningIdentifiers, _ServiceInterfaceV2, _copyDeveloperName, 
-                       _kBTMBackgroundItemsChangeNotification ]
+                       _RegisterParentApps, _SecCodeGetSigningIdentifiers, _ServiceInterfaceV2, 
+                       _copyDeveloperName, _kBTMBackgroundItemsChangeNotification ]
     objc-classes:    [ BTMAgentConnection, BTMBackgroundItem, BTMBackgroundItemController, 
                        BTMBackgroundTaskManager, BTMItem, BTMList, BTMLoginItem, 
                        BTMLoginItemController, BTMManager, BTMUserSettings ]

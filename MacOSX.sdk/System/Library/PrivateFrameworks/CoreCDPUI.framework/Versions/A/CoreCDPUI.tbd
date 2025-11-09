@@ -5,7 +5,10 @@ install-name:    '/System/Library/PrivateFrameworks/CoreCDPUI.framework/Versions
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s9CoreCDPUI20InformationLabelViewV4LinkV4text3urlAESS_SSSgtcfC', 
+    symbols:         [ '_$s9CoreCDPUI20ADPUpsellViewFactoryC010makeUpsellD010cdpContext6urlBag15networkObserver17viewModelDelegate10completionySo10CDPContextC_So8AKURLBagCSo09AKNetworkM0CSo014CDPUIADPUpselldoP0_pSgySo16NSViewControllerC_So0U14ErrorPresenter_ptctFZ', 
+                       '_$s9CoreCDPUI20ADPUpsellViewFactoryCMa', '_$s9CoreCDPUI20ADPUpsellViewFactoryCMn', 
+                       '_$s9CoreCDPUI20ADPUpsellViewFactoryCMo', '_$s9CoreCDPUI20ADPUpsellViewFactoryCN', 
+                       '_$s9CoreCDPUI20ADPUpsellViewFactoryCfD', '_$s9CoreCDPUI20InformationLabelViewV4LinkV4text3urlAESS_SSSgtcfC', 
                        '_$s9CoreCDPUI20InformationLabelViewV4LinkVMa', '_$s9CoreCDPUI20InformationLabelViewV4LinkVMn', 
                        '_$s9CoreCDPUI20InformationLabelViewV4LinkVN', '_$s9CoreCDPUI20InformationLabelViewV4bodyQrvg', 
                        '_$s9CoreCDPUI20InformationLabelViewV4bodyQrvpMV', '_$s9CoreCDPUI20InformationLabelViewV4bodyQrvpQOMQ', 
@@ -57,9 +60,9 @@ exports:
                        CDPRecoveryKeyPrintController, CDPRecoveryKeySheetBaseController, 
                        CDPRecoveryKeySheetController, CDPStateBaseUIController, CDPStateUIController, 
                        CDPStateiCloudPrefUIController, CDPTrustedDeviceViewItem, 
-                       CDPUIAccessCodeEntryTextField, CDPUIDeviceToDeviceEncryptionCancelCreateViewModel, 
-                       CDPUIDeviceToDeviceEncryptionFlowContext, CDPUIDeviceToDeviceEncryptionHelper, 
-                       CDPUIDeviceToDeviceEncryptionIneligibilityAlertViewModel, 
+                       CDPUIADPUpsellViewController, CDPUIADPUpsellViewFactory, CDPUIAccessCodeEntryTextField, 
+                       CDPUIDeviceToDeviceEncryptionCancelCreateViewModel, CDPUIDeviceToDeviceEncryptionFlowContext, 
+                       CDPUIDeviceToDeviceEncryptionHelper, CDPUIDeviceToDeviceEncryptionIneligibilityAlertViewModel, 
                        CDPUIDeviceToDeviceEncryptionMessagingViewModel, CDPUIDeviceToDeviceEncryptionUIProviderImp, 
                        CDPUIDeviceToDeviceEncryptionUpgradeMessageViewModel, CDPUIInfoViewModel, 
                        CDPUIInheritanceUIProviderImpl, CDPUIStatusChangeController, 

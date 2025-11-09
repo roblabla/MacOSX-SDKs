@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CloudDocsDaemon.framework/Versions/A/CloudDocsDaemon'
-current-version: 2720.100.117
+current-version: 2720.120.29
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -87,9 +87,10 @@ exports:
                        BRCDownloadContentsBatchOperation, BRCDownloadThumbnail, BRCDownloadThumbnailsBatchOperation, 
                        BRCDownloadVersion, BRCDownloadVersionsBatchOperation, BRCDumpContext, 
                        BRCEAccessReport, BRCErrorGrouping, BRCEventsAnalytics, BRCEvictItemOperation, 
-                       BRCExtensionErrorPayload, BRCFSDownloader, BRCFSEventsMonitor, 
-                       BRCFSEventsPersistedState, BRCFSReader, BRCFSUploader, BRCFSWriter, 
-                       BRCFairScheduler, BRCFairSource, BRCFetchQuotaOperation, BRCFetchiWorkSharingInfoOperation, 
+                       BRCExtensionErrorPayload, BRCFSDownloader, BRCFSDownloaderUtil, 
+                       BRCFSEventsMonitor, BRCFSEventsPersistedState, BRCFSReader, 
+                       BRCFSUploader, BRCFSWriter, BRCFairScheduler, BRCFairSource, 
+                       BRCFetchQuotaOperation, BRCFetchiWorkSharingInfoOperation, 
                        BRCFileCoordinator, BRCFileProviderDaemonUtils, BRCFileProvidingRequestOperation, 
                        BRCFlatLevelEnumerator, BRCGenerationID, BRCGlobalProgress, 
                        BRCInflightProgressTracker, BRCItemDBRowIDAndZoneJobIdentifier, 
@@ -155,6 +156,7 @@ exports:
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityDasdContext, 
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityIsActive, 
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityRegisteredWithDuet, 
+                       AppTelemetryFPFSMigrationInvestigation._xpcActivityTimeSinceLastAbleToRun, 
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityTimeSinceLastActivation, 
                        AppTelemetryFPFSMigrationInvestigation._xpcActivityTimeSinceLastRegistration, 
                        AppTelemetryFPFSMigrationNonMigratedItemInvestigation._apfsAvailableSpace, 

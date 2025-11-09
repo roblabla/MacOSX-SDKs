@@ -246,6 +246,6 @@ exports:
                        '_$s16BrowserEngineKit32WebContentExtensionConfigurationVN', 
                        '_$s17BrowserEngineCore0aB11EntitlementO0aB3KitE5check10auditTokenSbSo0G8_token_taSg_tF' ]
     objc-classes:    [ BENetworkingProcess, BEProcessCapability, BERenderingProcess, 
-                       BETextAlternatives, BETextSuggestion, BEWebContentProcess, 
+                       BETextAlternatives, BETextSuggestion, BEWebAppManifest, BEWebContentProcess, 
                        _TtC16BrowserEngineKit18BEMediaEnvironment ]
 ...

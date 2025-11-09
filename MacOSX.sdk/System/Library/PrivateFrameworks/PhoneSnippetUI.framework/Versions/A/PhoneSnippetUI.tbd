@@ -829,6 +829,7 @@ exports:
                        '_$s7SwiftUI5ColorV012PhoneSnippetB0E12emergencyRedACvgZ', 
                        '_$s7SwiftUI5ColorV012PhoneSnippetB0E12emergencyRedACvpZ', 
                        '_$s8ViewType14PhoneSnippetUI21CustomCanvasComponentPTl', 
+                       '_$sSS14PhoneSnippetUIE02isA6NumberSbvg', '_$sSS14PhoneSnippetUIE02isA6NumberSbvpMV', 
                        '_$sSS14PhoneSnippetUIE21firstLetterLowercasedSSyF', '_$sSS14PhoneSnippetUIE22firstLetterCapitalizedSSyF', 
                        '_$sSS14PhoneSnippetUIE29lowercasedWithFirstUppercasedSSvg', 
                        '_$sSS14PhoneSnippetUIE29lowercasedWithFirstUppercasedSSvpMV', 

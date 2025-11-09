@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-ios17.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ExtensionMacros -enable-bare-slash-regex -user-module-version 21.30.4 -module-name DeveloperToolsSupport
+// swift-module-flags: -target x86_64-apple-ios17.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ExtensionMacros -enable-bare-slash-regex -user-module-version 21.40.2 -module-name DeveloperToolsSupport
 @_exported import DeveloperToolsSupport
 import Foundation
 import Swift
@@ -27,7 +27,7 @@ public struct PreviewUnavailable : Swift.Error {
   public init()
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-public struct ColorResource : Swift.Hashable {
+public struct ColorResource : Swift.Hashable, Swift.Sendable {
   public init(name: Swift.String, bundle: Foundation.Bundle)
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: DeveloperToolsSupport.ColorResource, b: DeveloperToolsSupport.ColorResource) -> Swift.Bool
@@ -36,7 +36,7 @@ public struct ColorResource : Swift.Hashable {
   }
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-public struct ImageResource : Swift.Hashable {
+public struct ImageResource : Swift.Hashable, Swift.Sendable {
   public init(name: Swift.String, bundle: Foundation.Bundle)
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: DeveloperToolsSupport.ImageResource, b: DeveloperToolsSupport.ImageResource) -> Swift.Bool

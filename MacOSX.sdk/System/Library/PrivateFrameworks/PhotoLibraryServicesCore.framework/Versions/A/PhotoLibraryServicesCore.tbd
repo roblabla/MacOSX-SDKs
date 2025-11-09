@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibraryServicesCore.framework/Versions/A/PhotoLibraryServicesCore'
-current-version: 646.2.101
+current-version: 651.0.100
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -127,12 +127,14 @@ exports:
                        _PLCoreAnalyticsLibraryBackgroundMigrationActionEventStatusKey, 
                        _PLCoreAnalyticsLibraryComputeCacheArchiveBytesKey, _PLCoreAnalyticsLibraryComputeCacheBackupAllowPolicyKey, 
                        _PLCoreAnalyticsLibraryComputeCacheErrorCodeKey, _PLCoreAnalyticsLibraryComputeCacheEvent, 
-                       _PLCoreAnalyticsLibraryComputeCacheLibraryAssetCountKey, _PLCoreAnalyticsLibraryComputeCacheProcessingTimeKey, 
-                       _PLCoreAnalyticsLibraryComputeCacheRestoreAttemptsKey, _PLCoreAnalyticsLibraryComputeCacheSuccessKey, 
-                       _PLCoreAnalyticsLibraryComputeCacheTypeKey, _PLCoreAnalyticsLibraryCreateEvent, 
-                       _PLCoreAnalyticsLibraryCreateEventErrorKey, _PLCoreAnalyticsLibraryCreateEventSchemaVersionKey, 
-                       _PLCoreAnalyticsLibraryCreateEventSuccessKey, _PLCoreAnalyticsLibraryEventWellKnownIdentifierKey, 
-                       _PLCoreAnalyticsLibraryLegacyLibraryUpgradeEvent, _PLCoreAnalyticsLibraryLegacyLibraryUpgradeEventClientIDKey, 
+                       _PLCoreAnalyticsLibraryComputeCacheLibraryAssetCountKey, _PLCoreAnalyticsLibraryComputeCacheOverallRestoreTimeKey, 
+                       _PLCoreAnalyticsLibraryComputeCachePhotosICloudBackupStatusKey, 
+                       _PLCoreAnalyticsLibraryComputeCacheProcessingTimeKey, _PLCoreAnalyticsLibraryComputeCacheRestoreAttemptsKey, 
+                       _PLCoreAnalyticsLibraryComputeCacheSuccessKey, _PLCoreAnalyticsLibraryComputeCacheTypeKey, 
+                       _PLCoreAnalyticsLibraryCreateEvent, _PLCoreAnalyticsLibraryCreateEventErrorKey, 
+                       _PLCoreAnalyticsLibraryCreateEventSchemaVersionKey, _PLCoreAnalyticsLibraryCreateEventSuccessKey, 
+                       _PLCoreAnalyticsLibraryEventWellKnownIdentifierKey, _PLCoreAnalyticsLibraryLegacyLibraryUpgradeEvent, 
+                       _PLCoreAnalyticsLibraryLegacyLibraryUpgradeEventClientIDKey, 
                        _PLCoreAnalyticsLibraryLegacyLibraryUpgradeEventClientVersionKey, 
                        _PLCoreAnalyticsLibraryLegacyLibraryUpgradeEventDurationCheckPermission0Key, 
                        _PLCoreAnalyticsLibraryLegacyLibraryUpgradeEventDurationCloneUpgrade2Key, 

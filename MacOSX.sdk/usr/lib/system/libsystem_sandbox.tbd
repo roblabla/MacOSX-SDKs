@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_sandbox.dylib'
-current-version: 2190.101.1
+current-version: 2190.120.12
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -18,10 +18,10 @@ exports:
                        _SANDBOX_EXTENSION_CANONICAL, _SANDBOX_EXTENSION_DEFAULT, 
                        _SANDBOX_EXTENSION_MAGIC, _SANDBOX_EXTENSION_NOFOLLOW, _SANDBOX_EXTENSION_NO_REPORT, 
                        _SANDBOX_EXTENSION_NO_STORAGE_CLASS, _SANDBOX_EXTENSION_PREFIXMATCH, 
-                       _SANDBOX_EXTENSION_UNRESOLVED, __amkrtemp, __sandbox_in_a_container, 
-                       __sandbox_register_app_bundle_0, __sandbox_register_app_bundle_1, 
-                       _kSBXProfileNoInternet, _kSBXProfileNoNetwork, _kSBXProfileNoWrite, 
-                       _kSBXProfileNoWriteExceptTemporary, _kSBXProfilePureComputation, 
+                       _SANDBOX_EXTENSION_UNRESOLVED, __amkrtemp, __sandbox_enter_notify_libxpc, 
+                       __sandbox_in_a_container, __sandbox_register_app_bundle_0, 
+                       __sandbox_register_app_bundle_1, _kSBXProfileNoInternet, _kSBXProfileNoNetwork, 
+                       _kSBXProfileNoWrite, _kSBXProfileNoWriteExceptTemporary, _kSBXProfilePureComputation, 
                        _kSandboxAppBundleAnySigningId, _kSandboxAppBundlePlatformTeamId, 
                        _kSandboxAppContainerAnySigningId, _kSandboxAppContainerPlatformTeamId, 
                        _rootless_allows_task_for_pid, _rootless_check_datavault_flag, 

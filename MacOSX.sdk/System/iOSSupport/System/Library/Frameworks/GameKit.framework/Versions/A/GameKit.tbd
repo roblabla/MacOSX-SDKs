@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/GameKit.framework/Versions/A/GameKit'
-current-version: 818.4.37
+current-version: 818.5.11
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -639,7 +639,8 @@ exports:
                        _GKMultiplayerMainLandingImpression, _GKMuseBuddyIdentifier, 
                        _GKNearbyDataReceivedNotification, _GKNearbyEnabledKey, _GKNearbyInviteInitiate, 
                        _GKNearbyPlayerFoundNotification, _GKNearbyPlayerLostNotification, 
-                       _GKNetworkRequestCount, _GKNetworkRequestFailure, _GKNumberOfAchievementPointsKey, 
+                       _GKNetworkRequestCount, _GKNetworkRequestFailure, _GKNewsAppIdentifier, 
+                       _GKNewsGameCenterTesterIdentifier, _GKNumberOfAchievementPointsKey, 
                        _GKNumberOfAchievementsKey, _GKNumberOfFriendsInCommonKey, 
                        _GKNumberOfFriendsKey, _GKNumberOfGamesInCommonKey, _GKNumberOfGamesPlayedKey, 
                        _GKOSLoggers, _GKOptedOutOfGameCenter, _GKParticipantIndexKey, 
@@ -1326,7 +1327,6 @@ exports:
                        '_$sSo13GKLocalPlayerC12GameCenterUIE20highlightPlaceholderAC9HighlightVvgZ', 
                        '_$sSo13GKLocalPlayerC12GameCenterUIE22didAcceptFriendRequest_6playerySb_So16GKPlayerInternalCtFZ', 
                        '_$sSo13GKLocalPlayerC12GameCenterUIE23loadDashboardHighlights7handleryySayAC9HighlightVGc_tFZ', 
-                       '_$sSo18ASCLockupViewGroupC12GameCenterUIE9dashboardABvgZ', 
                        '_$sSo21GKAchievementInternalC12GameCenterUI15LoadsHighlightsACMc', 
                        '_$sSo21GKAchievementInternalC12GameCenterUI15LoadsHighlightsACWP', 
                        '_$sSo21GKAchievementInternalC12GameCenterUIE14loadHighlights7handleryySayAC9HighlightVGc_tFZ', 

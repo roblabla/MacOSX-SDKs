@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/DeviceActivity.framework/Versions/A/DeviceActivity'
-current-version: 336
+current-version: 346
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -284,7 +284,9 @@ exports:
                        '_$s14DeviceActivity0aB10DataSourceVAA22CodableElementFetchingAAWP', 
                        '_$s14DeviceActivity0aB10DataSourceVACycfC', '_$s14DeviceActivity0aB10DataSourceVMa', 
                        '_$s14DeviceActivity0aB10DataSourceVMn', '_$s14DeviceActivity0aB10DataSourceVN', 
-                       '_$s14DeviceActivity0aB11DataStoringMp', '_$s14DeviceActivity0aB11DataStoringP011deleteLocalC0yyKFTj', 
+                       '_$s14DeviceActivity0aB11DataStoringMp', '_$s14DeviceActivity0aB11DataStoringP011deleteLocalC00eA10IdentifierySb_tKFTj', 
+                       '_$s14DeviceActivity0aB11DataStoringP011deleteLocalC00eA10IdentifierySb_tKFTq', 
+                       '_$s14DeviceActivity0aB11DataStoringP011deleteLocalC0yyKFTj', 
                        '_$s14DeviceActivity0aB11DataStoringP011deleteLocalC0yyKFTq', 
                        '_$s14DeviceActivity0aB11DataStoringP012deleteRemoteC016deviceIdentifier15segmentIntervalySS_AA08_SegmentJ0OtKFTj', 
                        '_$s14DeviceActivity0aB11DataStoringP012deleteRemoteC016deviceIdentifier15segmentIntervalySS_AA08_SegmentJ0OtKFTq', 
@@ -753,14 +755,13 @@ exports:
                        '_$s14DeviceActivity0aB8ScheduleV2eeoiySbAC_ACtFZ', '_$s14DeviceActivity0aB8ScheduleV7repeatsSbvg', 
                        '_$s14DeviceActivity0aB8ScheduleV7repeatsSbvpMV', '_$s14DeviceActivity0aB8ScheduleVMa', 
                        '_$s14DeviceActivity0aB8ScheduleVMn', '_$s14DeviceActivity0aB8ScheduleVN', 
-                       '_$s14DeviceActivity0aB8ScheduleVSQAAMc', '_$s14DeviceActivity0aB9DataStoreV011deleteLocalC0yyKF', 
-                       '_$s14DeviceActivity0aB9DataStoreV012deleteRemoteC016deviceIdentifier15segmentIntervalySS_AA08_SegmentJ0OtKF', 
+                       '_$s14DeviceActivity0aB8ScheduleVSQAAMc', '_$s14DeviceActivity0aB9DataStoreV011deleteLocalC00eA10IdentifierySb_tKF', 
+                       '_$s14DeviceActivity0aB9DataStoreV011deleteLocalC0yyKF', '_$s14DeviceActivity0aB9DataStoreV012deleteRemoteC016deviceIdentifier15segmentIntervalySS_AA08_SegmentJ0OtKF', 
                        '_$s14DeviceActivity0aB9DataStoreV026deviceIdentifierByCoreDuetF0SDyS2SGvg', 
                        '_$s14DeviceActivity0aB9DataStoreV026deviceIdentifierByCoreDuetF0SDyS2SGvpMV', 
                        '_$s14DeviceActivity0aB9DataStoreV05localA10IdentifierSSyKF', 
                        '_$s14DeviceActivity0aB9DataStoreV06deleteC09olderThanShySSG9zoneNames_SDySSAFG06recordI10ByZoneNamet10Foundation4DateV_tKF', 
-                       '_$s14DeviceActivity0aB9DataStoreV09deleteAllC00eA10IdentifierySb_tKF', 
-                       '_$s14DeviceActivity0aB9DataStoreV09moveLocalB14SegmentToCloud11userAltDSID16deviceIdentifier15segmentInterval10recordNameySS_SSAA01_gP0OSStKF', 
+                       '_$s14DeviceActivity0aB9DataStoreV09deleteAllC0yyKF', '_$s14DeviceActivity0aB9DataStoreV09moveLocalB14SegmentToCloud11userAltDSID16deviceIdentifier15segmentInterval10recordNameySS_SSAA01_gP0OSStKF', 
                        '_$s14DeviceActivity0aB9DataStoreV10fetchLocal11userAltDSID15segmentIntervalAA01_abC0VSSSg_AA08_SegmentK0OtKF', 
                        '_$s14DeviceActivity0aB9DataStoreV11fetchRemote11userAltDSID16deviceIdentifier15segmentIntervalAA01_abC0VSS_SSAA08_SegmentM0OtKF', 
                        '_$s14DeviceActivity0aB9DataStoreV13SyncStateTypeO2eeoiySbAE_AEtFZ', 
@@ -789,11 +790,14 @@ exports:
                        '_$s14DeviceActivity0aB9DataStoreV25fetchLocalEncodedMetadata15segmentInterval10Foundation0C0VAA08_SegmentJ0O_tKF', 
                        '_$s14DeviceActivity0aB9DataStoreV26localRecordNamesByZoneNameSDySSSaySSGGyKF', 
                        '_$s14DeviceActivity0aB9DataStoreV30deviceIdentifiersByUserAltDSIDSDySSSaySSGGyKF', 
+                       '_$s14DeviceActivity0aB9DataStoreV37deviceIdentifiersByCoreDuetIdentifierSDySSShySSGGvg', 
+                       '_$s14DeviceActivity0aB9DataStoreV37deviceIdentifiersByCoreDuetIdentifierSDySSShySSGGvpMV', 
                        '_$s14DeviceActivity0aB9DataStoreV5write13localTimeZoney10Foundation0gH0V_tKF', 
                        '_$s14DeviceActivity0aB9DataStoreV5write14localStartDatey10Foundation0H0VSg_tKF', 
                        '_$s14DeviceActivity0aB9DataStoreV5write17localFirstWeekdayySi_tKF', 
                        '_$s14DeviceActivity0aB9DataStoreV5write_4typeyx_AC13SyncStateTypeOtKSeRzSERzlF', 
                        '_$s14DeviceActivity0aB9DataStoreV9locationsAcA0abC8Locating_p_tcfC', 
+                       '_$s14DeviceActivity0aB9DataStoreV9overwrite14localStartDatey10Foundation0H0VSg_tKF', 
                        '_$s14DeviceActivity0aB9DataStoreV9syncStateyxAC04SyncF4TypeOKSeRzSERzlF', 
                        '_$s14DeviceActivity0aB9DataStoreVAA0abC7StoringAAMc', '_$s14DeviceActivity0aB9DataStoreVAA0abC7StoringAAWP', 
                        '_$s14DeviceActivity0aB9DataStoreVACycfC', '_$s14DeviceActivity0aB9DataStoreVMa', 

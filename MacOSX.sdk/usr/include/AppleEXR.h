@@ -1609,7 +1609,7 @@ __nonnull axr_encoder_t axr_encoder_create( axr_flags_t flags ) AXR_RETURNS_RETA
  *  @param  tileHeight     The height of the tile. Will be ignored for axr_compression_none/zips/rle, in which case it is 1. If 0, AppleEXR will pick a value.
  *  @param  levelMode       {ripmap/mipmap/one_level} | {round_up / round_down}.   Must be axr_level_mode_one_level for axr_compression_none/zips/rle
  *  @return  on success, a valid axr_part_t owned by the encoder. You should not release this object unless you have also retained it. */
-__nonnull axr_part_t axr_encoder_append_part(__nonnull axr_encoder_t encoder,
+__nullable axr_part_t axr_encoder_append_part(__nonnull axr_encoder_t encoder,
                                              const char * __nonnull  partName,      // "name" attribute
                                              const char * __nullable viewName,      // "view" attribute
                                              axr_compression_t compression,

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/WidgetKit.framework/Versions/A/WidgetKit'
-current-version: 402.116
+current-version: 402.200
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -185,6 +185,7 @@ exports:
                        '_$s7SwiftUI19WidgetConfigurationP0C3KitE40visibilityConfigurableByInternalSettings07visibleH7DefaultQrSb_tF', 
                        '_$s7SwiftUI19WidgetConfigurationP0C3KitE40visibilityConfigurableByInternalSettings07visibleH7DefaultQrSb_tFQOMQ', 
                        '_$s7SwiftUI28ContainerBackgroundPlacementV9WidgetKitE6widgetACvgZ', 
+                       '_$s7SwiftUI4ViewP9WidgetKitE04hideC10OnSnapshotQryF', '_$s7SwiftUI4ViewP9WidgetKitE04hideC10OnSnapshotQryFQOMQ', 
                        '_$s7SwiftUI4ViewP9WidgetKitE06hiddenD3URLyQr10Foundation0G0VSgF', 
                        '_$s7SwiftUI4ViewP9WidgetKitE06hiddenD3URLyQr10Foundation0G0VSgFQOMQ', 
                        '_$s7SwiftUI4ViewP9WidgetKitE09removableD10Background7contentQrqd__yc_tAaBRd__lF', 
@@ -1139,7 +1140,15 @@ exports:
                        '_$s9WidgetKit25AppIntentTimelineProviderPAAE8snapshot3for2in5EntryQz0D0Qz_AA0eF7ContextVtYaFTu', 
                        '_$s9WidgetKit25AppIntentTimelineProviderPAAE8timeline3for2inAA0E0Vy5EntryQzG0D0Qz_AA0eF7ContextVtYaF', 
                        '_$s9WidgetKit25AppIntentTimelineProviderPAAE8timeline3for2inAA0E0Vy5EntryQzG0D0Qz_AA0eF7ContextVtYaFTu', 
-                       '_$s9WidgetKit25AppIntentTimelineProviderTL', '_$s9WidgetKit26TimelineEntryPreviewSourceV04makeA07SwiftUI0A0_pycvg', 
+                       '_$s9WidgetKit25AppIntentTimelineProviderTL', '_$s9WidgetKit26HideViewOnSnapshotModifierV4body7contentQr7SwiftUI01_dG8_ContentVyACG_tF', 
+                       '_$s9WidgetKit26HideViewOnSnapshotModifierV4body7contentQr7SwiftUI01_dG8_ContentVyACG_tFQOMQ', 
+                       '_$s9WidgetKit26HideViewOnSnapshotModifierV4fromACs7Decoder_p_tKcfC', 
+                       '_$s9WidgetKit26HideViewOnSnapshotModifierV6encode2toys7Encoder_p_tKF', 
+                       '_$s9WidgetKit26HideViewOnSnapshotModifierV7SwiftUI011_ArchivabledG0AAMc', 
+                       '_$s9WidgetKit26HideViewOnSnapshotModifierV7SwiftUI0dG0AAMc', 
+                       '_$s9WidgetKit26HideViewOnSnapshotModifierVMa', '_$s9WidgetKit26HideViewOnSnapshotModifierVMn', 
+                       '_$s9WidgetKit26HideViewOnSnapshotModifierVN', '_$s9WidgetKit26HideViewOnSnapshotModifierVSEAAMc', 
+                       '_$s9WidgetKit26HideViewOnSnapshotModifierVSeAAMc', '_$s9WidgetKit26TimelineEntryPreviewSourceV04makeA07SwiftUI0A0_pycvg', 
                        '_$s9WidgetKit26TimelineEntryPreviewSourceV04makeA07SwiftUI0A0_pycvpMV', 
                        '_$s9WidgetKit26TimelineEntryPreviewSourceV06unwrapC03forSayxGxm_tYaKAA0cD0RzlF', 
                        '_$s9WidgetKit26TimelineEntryPreviewSourceV06unwrapC03forSayxGxm_tYaKAA0cD0RzlFTu', 

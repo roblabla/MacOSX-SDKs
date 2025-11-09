@@ -8,12 +8,11 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _GTBulkDataCompress, _GTBulkDataDecompress, _GTFileTransferCompressionAlgorithmToNSDataCompressionAlgorithm, 
                        _GTFileWriterTransferFileEntries, _GTTelemetryErrorDomain, 
-                       _GTTransportEnvironment_init, _GTTransportErrorDomain, _GTTransportServiceDaemonConnectAndConfirm, 
-                       _GTTransportServiceDaemonConnectIfVersionNotOlderThan, _GTTransportServiceDaemonConnectionNew, 
-                       _MessagePathEndsWith, _MessageSetHasReply, _allServices, _allServicesForDevice, 
-                       _filteredArrayByPort, _filteredArrayByService, _newConnectionForService, 
-                       _registerService, _xpc_dictionary_get_nsarray, _xpc_dictionary_set_flag, 
-                       _xpc_dictionary_set_nsobject ]
+                       _GTTransportEnvironment_init, _GTTransportErrorDomain, _GTTransportServiceDaemonConnectIfVersionNotOlderThan, 
+                       _GTTransportServiceDaemonConnectionNew, _MessagePathEndsWith, 
+                       _MessageSetHasReply, _allServices, _allServicesForDevice, 
+                       _filteredArrayByPort, _filteredArrayByService, _registerService, 
+                       _xpc_dictionary_get_nsarray, _xpc_dictionary_set_flag, _xpc_dictionary_set_nsobject ]
     objc-classes:    [ DYGTCAMetalLayerInfo, DYGTDeviceInfo, DYGTGPUToolsVersionInfo, 
                        DYGTMTLCaptureScopeInfo, DYGTMTLCommandQueueInfo, DYGTMTLDeviceProfile, 
                        GTBulkDataService, GTBulkDataServiceXPCDispatcher, GTBulkDataServiceXPCProxy, 

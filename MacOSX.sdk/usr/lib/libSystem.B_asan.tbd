@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ i386-macos, i386-maccatalyst, x86_64-macos, x86_64-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libSystem.B.dylib'
-current-version: 1345.100.2
+current-version: 1345.120.2
 reexported-libraries:
   - targets:         [ i386-macos, i386-maccatalyst, x86_64-macos, x86_64-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
@@ -1601,7 +1601,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_configuration.dylib'
-current-version: 1300.100.9
+current-version: 1300.120.2
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1869,7 +1869,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_dnssd.dylib'
-current-version: 2200.100.94
+current-version: 2200.120.24
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1905,7 +1905,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/system/libsystem_eligibility.dylib'
-current-version: 47.101.3
+current-version: 47.120.13
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        System
@@ -2059,7 +2059,7 @@ tbd-version:     4
 targets:         [ i386-macos, i386-maccatalyst, x86_64-macos, x86_64-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_kernel.dylib'
-current-version: 10063.101.14
+current-version: 10063.121.3
 parent-umbrella:
   - targets:         [ i386-macos, i386-maccatalyst, x86_64-macos, x86_64-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
@@ -2814,7 +2814,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_malloc.dylib'
-current-version: 521.100.59
+current-version: 521.120.7
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -2937,18 +2937,18 @@ exports:
                        _ne_session_release, _ne_session_retain, _ne_session_send_barrier, 
                        _ne_session_service_copy_cached_match_domains, _ne_session_service_get_dns_service_id, 
                        _ne_session_service_get_dns_service_id_for_interface, _ne_session_service_matches_address, 
-                       _ne_session_service_matches_address_for_interface, _ne_session_set_event_handler, 
-                       _ne_session_set_socket_attributes, _ne_session_set_socket_context_attribute, 
-                       _ne_session_set_socket_tracker_attributes, _ne_session_should_disable_nexus, 
-                       _ne_session_start, _ne_session_start_on_behalf_of, _ne_session_start_with_options, 
-                       _ne_session_status_to_string, _ne_session_stop, _ne_session_stop_all_with_plugin_type, 
-                       _ne_session_stop_reason_to_string, _ne_session_type_to_string, 
-                       _ne_session_use_as_system_vpn, _ne_session_vod_evaluate_connection_present, 
-                       _ne_session_vpn_include_all_networks_configs_present, _ne_socket_set_attribution, 
-                       _ne_socket_set_domains, _ne_socket_set_is_app_initiated, _ne_socket_set_website_attribution, 
-                       _ne_tracker_build_cache, _ne_tracker_build_trie, _ne_tracker_check_info_changed, 
-                       _ne_tracker_check_is_hostname_blocked, _ne_tracker_check_tcc, 
-                       _ne_tracker_clear_cache, _ne_tracker_context_can_block_request, 
+                       _ne_session_service_matches_address_for_interface, _ne_session_set_device_communication_exception, 
+                       _ne_session_set_event_handler, _ne_session_set_socket_attributes, 
+                       _ne_session_set_socket_context_attribute, _ne_session_set_socket_tracker_attributes, 
+                       _ne_session_should_disable_nexus, _ne_session_start, _ne_session_start_on_behalf_of, 
+                       _ne_session_start_with_options, _ne_session_status_to_string, 
+                       _ne_session_stop, _ne_session_stop_all_with_plugin_type, _ne_session_stop_reason_to_string, 
+                       _ne_session_type_to_string, _ne_session_use_as_system_vpn, 
+                       _ne_session_vod_evaluate_connection_present, _ne_session_vpn_include_all_networks_configs_present, 
+                       _ne_socket_set_attribution, _ne_socket_set_domains, _ne_socket_set_is_app_initiated, 
+                       _ne_socket_set_website_attribution, _ne_tracker_build_cache, 
+                       _ne_tracker_build_trie, _ne_tracker_check_info_changed, _ne_tracker_check_is_hostname_blocked, 
+                       _ne_tracker_check_tcc, _ne_tracker_clear_cache, _ne_tracker_context_can_block_request, 
                        _ne_tracker_context_get_domain, _ne_tracker_context_get_domain_owner, 
                        _ne_tracker_context_is_from_app_list, _ne_tracker_context_is_from_web_list, 
                        _ne_tracker_copy_current_stacktrace, _ne_tracker_create_xcode_issue, 
@@ -2965,7 +2965,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_notify.dylib'
-current-version: 317.100.2
+current-version: 317.120.2
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -3065,7 +3065,7 @@ tbd-version:     4
 targets:         [ i386-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_pthread.dylib'
-current-version: 519.101.1
+current-version: 519.120.4
 parent-umbrella:
   - targets:         [ i386-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos, 
                        arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
@@ -3175,7 +3175,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_sandbox.dylib'
-current-version: 2190.101.1
+current-version: 2190.120.12
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -3190,10 +3190,10 @@ exports:
                        _SANDBOX_EXTENSION_CANONICAL, _SANDBOX_EXTENSION_DEFAULT, 
                        _SANDBOX_EXTENSION_MAGIC, _SANDBOX_EXTENSION_NOFOLLOW, _SANDBOX_EXTENSION_NO_REPORT, 
                        _SANDBOX_EXTENSION_NO_STORAGE_CLASS, _SANDBOX_EXTENSION_PREFIXMATCH, 
-                       _SANDBOX_EXTENSION_UNRESOLVED, __amkrtemp, __sandbox_in_a_container, 
-                       __sandbox_register_app_bundle_0, __sandbox_register_app_bundle_1, 
-                       _kSBXProfileNoInternet, _kSBXProfileNoNetwork, _kSBXProfileNoWrite, 
-                       _kSBXProfileNoWriteExceptTemporary, _kSBXProfilePureComputation, 
+                       _SANDBOX_EXTENSION_UNRESOLVED, __amkrtemp, __sandbox_enter_notify_libxpc, 
+                       __sandbox_in_a_container, __sandbox_register_app_bundle_0, 
+                       __sandbox_register_app_bundle_1, _kSBXProfileNoInternet, _kSBXProfileNoNetwork, 
+                       _kSBXProfileNoWrite, _kSBXProfileNoWriteExceptTemporary, _kSBXProfilePureComputation, 
                        _kSandboxAppBundleAnySigningId, _kSandboxAppBundlePlatformTeamId, 
                        _kSandboxAppContainerAnySigningId, _kSandboxAppContainerPlatformTeamId, 
                        _rootless_allows_task_for_pid, _rootless_check_datavault_flag, 
@@ -3283,7 +3283,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_secinit.dylib'
-current-version: 147.100.1
+current-version: 147.120.2
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -3316,7 +3316,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_trace.dylib'
-current-version: 1510.100.36
+current-version: 1510.121.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -3419,7 +3419,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libxpc.dylib'
-current-version: 2748.101.4
+current-version: 2748.120.20
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -3703,9 +3703,10 @@ exports:
                        _xpc_pipe_routine_async, _xpc_pipe_routine_forward, _xpc_pipe_routine_reply, 
                        _xpc_pipe_routine_with_flags, _xpc_pipe_simpleroutine, _xpc_pipe_try_receive, 
                        _xpc_pointer_create, _xpc_pointer_get_value, _xpc_receive_mach_msg, 
-                       _xpc_receive_remote_msg, _xpc_release, _xpc_retain, _xpc_rich_error_can_retry, 
-                       _xpc_rich_error_copy_description, _xpc_service_attach, _xpc_service_attach_with_flags, 
-                       _xpc_service_create, _xpc_service_create_from_specifier, _xpc_service_get_rendezvous_token, 
+                       _xpc_receive_mach_msg_validate_hdr, _xpc_receive_remote_msg, 
+                       _xpc_release, _xpc_retain, _xpc_rich_error_can_retry, _xpc_rich_error_copy_description, 
+                       _xpc_service_attach, _xpc_service_attach_with_flags, _xpc_service_create, 
+                       _xpc_service_create_from_specifier, _xpc_service_get_rendezvous_token, 
                        _xpc_service_instance_dup2, _xpc_service_instance_get_context, 
                        _xpc_service_instance_get_host_pid, _xpc_service_instance_get_pid, 
                        _xpc_service_instance_get_type, _xpc_service_instance_is_configurable, 

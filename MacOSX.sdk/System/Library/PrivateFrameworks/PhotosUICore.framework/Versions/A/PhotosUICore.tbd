@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosUICore.framework/Versions/A/PhotosUICore'
-current-version: 646.2.101
+current-version: 651.0.100
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -56,6 +56,7 @@ exports:
                        '_$s12PhotosUICore033MediaViewDataSourceManagerContentF0TL', 
                        '_$s12PhotosUICore0A12FeatureFlagsO0cD00cD3KeyAAMc', '_$s12PhotosUICore0A12FeatureFlagsO10PetsParityyA2CmFWC', 
                        '_$s12PhotosUICore0A12FeatureFlagsO15OfframpLockdownyA2CmFWC', 
+                       '_$s12PhotosUICore0A12FeatureFlagsO16RetailExperienceyA2CmFWC', 
                        '_$s12PhotosUICore0A12FeatureFlagsO2eeoiySbAC_ACtFZ', '_$s12PhotosUICore0A12FeatureFlagsO39MemoriesTitlesInternationalAuthenticityyA2CmFWC', 
                        '_$s12PhotosUICore0A12FeatureFlagsO4hash4intoys6HasherVz_tF', 
                        '_$s12PhotosUICore0A12FeatureFlagsO6domains12StaticStringVvg', 
@@ -3986,7 +3987,7 @@ exports:
                        PXSyntheticUIMediaProvider, PXSystemAuthenticationTypeObserver, 
                        PXSystemMediaAnalyzer, PXSystemNavigation, PXSystemNavigationSettings, 
                        PXTaggedRect, PXTapToRadarConcreteDiagnosticContainer, PXTextContainer, 
-                       PXThumbnailCacheEntry, PXTileIdentifierIdentityConverter, 
+                       PXThreadSafeDictionary, PXThumbnailCacheEntry, PXTileIdentifierIdentityConverter, 
                        PXTileStatePool, PXTileTransitionSimpleAnimationCoordinator, 
                        PXTilingChange, PXTilingChangeEvent, PXTilingController, PXTilingControllerComposition, 
                        PXTilingControllerCompositionEngine, PXTilingControllerCompositionInvalidationContext, 

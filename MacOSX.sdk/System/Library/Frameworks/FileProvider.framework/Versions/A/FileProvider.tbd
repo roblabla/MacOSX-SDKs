@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/FileProvider.framework/Versions/A/FileProvider'
-current-version: 1835.101.2
+current-version: 1835.120.53
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -110,9 +110,10 @@ exports:
                        _FPICloudDriveFeaturesUserDefaultsSuiteName, _FPICloudDriveMovedToFPFSEnabledUserDefaultsKey, 
                        _FPICloudDriveOnFPFSEnabledUserDefaultsKey, _FPICloudDriveOnFPFSLastBootTimestampUserDefaultsKey, 
                        _FPICloudDriveOnFPFSLastBootUUIDUserDefaultsKey, _FPInvalidBookmarkableStringError, 
-                       _FPInvalidParameterError, _FPInvalidProtocolError, _FPInvalidURLError, 
-                       _FPIsBinCompatSymlinkToDetachedRoot, _FPIsCloudDocsWithFPFSEnabled, 
-                       _FPIsFPCKXPCServiceEnabled, _FPIsFileProviderBookmark, _FPIsImportingDomainsForUserURL, 
+                       _FPInvalidParameterError, _FPInvalidParameterErrorWithExpectation, 
+                       _FPInvalidProtocolError, _FPInvalidURLError, _FPIsBinCompatSymlinkToDetachedRoot, 
+                       _FPIsCloudDocsWithFPFSEnabled, _FPIsFPCKXPCServiceEnabled, 
+                       _FPIsFileProviderBookmark, _FPIsImportingDomainsForUserURL, 
                        _FPIsImportingInVolumeAtURL, _FPIsSpaceAttributionEnabledAndUsedByStorageUI, 
                        _FPIsSuppressed, _FPItemDecorationTypeBadge, _FPItemDecorationTypeFolderBadge, 
                        _FPItemDecorationTypeFolderStatus, _FPItemDecorationTypeSharing, 
@@ -164,8 +165,10 @@ exports:
                        _NSFileProviderErrorPostponeUpload, _NSFileProviderErrorSpeculativeCanceledByProvider, 
                        _NSFileProviderErrorTransientErrorKey, _NSFileProviderErrorUnsafeDisconnect, 
                        _NSFileProviderFavoriteRankUnranked, _NSFileProviderInitialPageSortedByDate, 
-                       _NSFileProviderInitialPageSortedByName, _NSFileProviderInternalErrorDomain, 
-                       _NSFileProviderInternalErrorProviderDisplayNamesKey, _NSFileProviderItemCapabilitiesAllowsCopyingPublishingURL, 
+                       _NSFileProviderInitialPageSortedByName, _NSFileProviderInternalErrorActualKey, 
+                       _NSFileProviderInternalErrorDomain, _NSFileProviderInternalErrorExpectedKey, 
+                       _NSFileProviderInternalErrorParameterKey, _NSFileProviderInternalErrorProviderDisplayNamesKey, 
+                       _NSFileProviderItemCapabilitiesAllowsCopyingPublishingURL, 
                        _NSFileProviderItemCapabilitiesAllowsEvadeSpotlight, _NSFileProviderItemCapabilitiesAllowsPinning, 
                        _NSFileProviderItemCapabilitiesAllowsRecursiveDownloading, 
                        _NSFileProviderItemCapabilitiesAllowsTagging, _NSFileProviderItemCapabilitiesAllowsUnpinning, 
@@ -209,8 +212,8 @@ exports:
                        _fpfs_get_is_ignore_root, _fpfs_get_is_pinned, _fpfs_get_is_sync_paused, 
                        _fpfs_get_is_sync_resuming_with_drop_local_changes, _fpfs_get_last_use_date, 
                        _fpfs_get_long_parent, _fpfs_get_materialization_alignment, 
-                       _fpfs_get_purgeable_info, _fpfs_get_syncable_xattrs, _fpfs_get_tag_data, 
-                       _fpfs_gethandle_at, _fpfs_icd_package_extension_list_contains, 
+                       _fpfs_get_purgeable_info, _fpfs_get_purgeable_stats, _fpfs_get_syncable_xattrs, 
+                       _fpfs_get_tag_data, _fpfs_gethandle_at, _fpfs_icd_package_extension_list_contains, 
                        _fpfs_icd_package_extension_list_reload, _fpfs_is_busy_date, 
                        _fpfs_is_dataless_fault, _fpfs_is_dataless_fault_at, _fpfs_is_detached_root, 
                        _fpfs_is_finder_alias_at, _fpfs_is_resurrected, _fpfs_is_type_purgeable, 
@@ -316,8 +319,9 @@ exports:
                        NSFileProviderSearchQuery ]
     objc-ivars:      [ FPDaemonConnection._connectionQueue, FPDaemonConnection._connectionQueueConnection, 
                        FPDaemonConnection._getAttributeConnections, FPDaemonConnection._getAttributeConnectionsIdleCleanupTimer, 
-                       FPDaemonConnection._user, FPFrameworkOverridesIterator._currentIndex, 
-                       FPFrameworkOverridesIterator._invocation, FPFrameworkOverridesIterator._noSuitableModuleFoundHandler, 
+                       FPDaemonConnection._user, FPFrameworkOverridesIterator._checkURL, 
+                       FPFrameworkOverridesIterator._currentIndex, FPFrameworkOverridesIterator._invocation, 
+                       FPFrameworkOverridesIterator._mightBeFPURL, FPFrameworkOverridesIterator._noSuitableModuleFoundHandler, 
                        FPFrameworkOverridesIterator._overrides ]
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _NSFileProviderErrorCollidingItemKey ]

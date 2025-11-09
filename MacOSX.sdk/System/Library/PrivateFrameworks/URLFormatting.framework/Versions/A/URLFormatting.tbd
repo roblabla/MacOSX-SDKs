@@ -2,5 +2,5 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/URLFormatting.framework/Versions/A/URLFormatting'
-current-version: 240.13
+current-version: 240.17
 ...

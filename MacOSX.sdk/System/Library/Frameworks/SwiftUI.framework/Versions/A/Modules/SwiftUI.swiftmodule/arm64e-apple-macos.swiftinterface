@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macos14.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -package-name SwiftUI -enable-bare-slash-regex -user-module-version 5.4.38.401 -module-name SwiftUI
+// swift-module-flags: -target arm64e-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -library-level api -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -package-name SwiftUI -enable-bare-slash-regex -user-module-version 5.5.8 -module-name SwiftUI
 import Accessibility
 import AppKit
 import Combine
@@ -519,12 +519,29 @@ extension SwiftUI.TableColumnBuilder {
   @_alwaysEmitIntoClient public static func buildIf<C>(_ content: C?) -> C? where RowValue == C.TableRowValue, Sort == C.TableColumnSortComparator, C : SwiftUI.TableColumnContent {
         content
     }
+  @_alwaysEmitIntoClient @_disfavoredOverload public static func buildIf<C>(_ content: C?) -> C? where RowValue == C.TableRowValue, C : SwiftUI.TableColumnContent, C.TableColumnSortComparator == Swift.Never {
+        content
+    }
   @_alwaysEmitIntoClient public static func buildEither<T, F>(first: T) -> SwiftUI._ConditionalContent<T, F> where RowValue == T.TableRowValue, Sort == T.TableColumnSortComparator, T : SwiftUI.TableColumnContent, F : SwiftUI.TableColumnContent, T.TableColumnSortComparator == F.TableColumnSortComparator, T.TableRowValue == F.TableRowValue {
+        _ConditionalContent<T, F>(storage: .trueContent(first))
+    }
+  @_alwaysEmitIntoClient @_disfavoredOverload public static func buildEither<T, F>(first: T) -> SwiftUI._ConditionalContent<T, F> where RowValue == T.TableRowValue, T : SwiftUI.TableColumnContent, F : SwiftUI.TableColumnContent, T.TableColumnSortComparator == Swift.Never, T.TableRowValue == F.TableRowValue, F.TableColumnSortComparator == Swift.Never {
         _ConditionalContent<T, F>(storage: .trueContent(first))
     }
   @_alwaysEmitIntoClient public static func buildEither<T, F>(second: F) -> SwiftUI._ConditionalContent<T, F> where RowValue == T.TableRowValue, Sort == T.TableColumnSortComparator, T : SwiftUI.TableColumnContent, F : SwiftUI.TableColumnContent, T.TableColumnSortComparator == F.TableColumnSortComparator, T.TableRowValue == F.TableRowValue {
         _ConditionalContent<T, F>(storage: .falseContent(second))
     }
+  @_alwaysEmitIntoClient @_disfavoredOverload public static func buildEither<T, F>(second: F) -> SwiftUI._ConditionalContent<T, F> where RowValue == T.TableRowValue, T : SwiftUI.TableColumnContent, F : SwiftUI.TableColumnContent, T.TableColumnSortComparator == Swift.Never, T.TableRowValue == F.TableRowValue, F.TableColumnSortComparator == Swift.Never {
+        _ConditionalContent<T, F>(storage: .falseContent(second))
+    }
+  @_alwaysEmitIntoClient public static func buildLimitedAvailability(_ content: some TableColumnContent<RowValue, Sort>) -> some SwiftUI.TableColumnContent<RowValue, Sort> {
+        content
+    }
+  
+  @_alwaysEmitIntoClient @_disfavoredOverload public static func buildLimitedAvailability(_ content: some TableColumnContent<RowValue, Never>) -> some SwiftUI.TableColumnContent<RowValue, Swift.Never> {
+        content
+    }
+  
 }
 @available(iOS 17.4, macOS 14.4, visionOS 1.1, *)
 @available(tvOS, unavailable)
@@ -597,6 +614,8 @@ public struct SensoryFeedback : Swift.Equatable, Swift.Sendable {
   public static let stop: SwiftUI.SensoryFeedback
   public static let alignment: SwiftUI.SensoryFeedback
   public static let levelChange: SwiftUI.SensoryFeedback
+  @available(iOS 17.5, macOS 14.5, tvOS 17.5, watchOS 10.5, *)
+  public static let pathComplete: SwiftUI.SensoryFeedback
   public static let impact: SwiftUI.SensoryFeedback
   public static func impact(weight: SwiftUI.SensoryFeedback.Weight = .medium, intensity: Swift.Double = 1.0) -> SwiftUI.SensoryFeedback
   public static func impact(flexibility: SwiftUI.SensoryFeedback.Flexibility, intensity: Swift.Double = 1.0) -> SwiftUI.SensoryFeedback
@@ -10196,6 +10215,26 @@ extension SwiftUI.TextFieldLink where Label == SwiftUI.Text {
   public init(_ titleKey: SwiftUI.LocalizedStringKey, prompt: SwiftUI.Text? = nil, onSubmit: @escaping (Swift.String) -> Swift.Void)
   @_disfavoredOverload public init<S>(_ title: S, prompt: SwiftUI.Text? = nil, onSubmit: @escaping (Swift.String) -> Swift.Void) where S : Swift.StringProtocol
 }
+@available(iOS 17.5, macOS 14.5, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+public struct PencilHoverPose : Swift.Hashable {
+  public let location: CoreFoundation.CGPoint
+  public let anchor: SwiftUI.UnitPoint
+  public let zDistance: CoreFoundation.CGFloat
+  public let altitude: SwiftUI.Angle
+  public let azimuth: SwiftUI.Angle
+  public let roll: SwiftUI.Angle
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: SwiftUI.PencilHoverPose, b: SwiftUI.PencilHoverPose) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(*, unavailable)
+extension SwiftUI.PencilHoverPose : Swift.Sendable {
+}
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @frozen @propertyWrapper public struct State<Value> : SwiftUI.DynamicProperty {
   @usableFromInline
@@ -15720,6 +15759,65 @@ extension SwiftUI.MultiDatePicker where Label == SwiftUI.Text {
   @_disfavoredOverload public init<S>(_ title: S, selection: SwiftUI.Binding<Swift.Set<Foundation.DateComponents>>, in bounds: Swift.PartialRangeFrom<Foundation.Date>) where S : Swift.StringProtocol
   @_disfavoredOverload public init<S>(_ title: S, selection: SwiftUI.Binding<Swift.Set<Foundation.DateComponents>>, in bounds: Swift.PartialRangeUpTo<Foundation.Date>) where S : Swift.StringProtocol
 }
+@available(iOS 17.5, macOS 14.5, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension SwiftUI.View {
+  public func onPencilDoubleTap(perform action: @escaping (_ value: SwiftUI.PencilDoubleTapGestureValue) -> Swift.Void) -> some SwiftUI.View
+  
+}
+@available(iOS 17.5, macOS 14.5, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+public struct PencilDoubleTapGestureValue : Swift.Hashable {
+  public let hoverPose: SwiftUI.PencilHoverPose?
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: SwiftUI.PencilDoubleTapGestureValue, b: SwiftUI.PencilDoubleTapGestureValue) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(*, unavailable)
+extension SwiftUI.PencilDoubleTapGestureValue : Swift.Sendable {
+}
+@available(iOS 17.5, macOS 14.5, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension SwiftUI.View {
+  public func onPencilSqueeze(perform action: @escaping (_ phase: SwiftUI.PencilSqueezeGesturePhase) -> Swift.Void) -> some SwiftUI.View
+  
+}
+@available(iOS 17.5, macOS 14.5, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+@frozen public enum PencilSqueezeGesturePhase : Swift.Equatable {
+  case active(SwiftUI.PencilSqueezeGestureValue)
+  case ended(SwiftUI.PencilSqueezeGestureValue)
+  case failed
+  public static func == (a: SwiftUI.PencilSqueezeGesturePhase, b: SwiftUI.PencilSqueezeGesturePhase) -> Swift.Bool
+}
+@available(*, unavailable)
+extension SwiftUI.PencilSqueezeGesturePhase : Swift.Sendable {
+}
+@available(iOS 17.5, macOS 14.5, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+public struct PencilSqueezeGestureValue : Swift.Hashable {
+  public let hoverPose: SwiftUI.PencilHoverPose?
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: SwiftUI.PencilSqueezeGestureValue, b: SwiftUI.PencilSqueezeGestureValue) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(*, unavailable)
+extension SwiftUI.PencilSqueezeGestureValue : Swift.Sendable {
+}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct ContentShapeKinds : Swift.OptionSet, Swift.Sendable {
   public var rawValue: Swift.Int
@@ -16328,6 +16426,10 @@ extension SwiftUI.TableRowBuilder {
   @_alwaysEmitIntoClient public static func buildEither<T, F>(second: F) -> SwiftUI._ConditionalContent<T, F> where Value == T.TableRowValue, T : SwiftUI.TableRowContent, F : SwiftUI.TableRowContent, T.TableRowValue == F.TableRowValue {
         _ConditionalContent<T, F>(storage: .falseContent(second))
     }
+  @_alwaysEmitIntoClient public static func buildLimitedAvailability(_ content: some TableRowContent<Value>) -> some SwiftUI.TableRowContent<Value> {
+        content
+    }
+  
 }
 @available(iOS 16.0, macOS 13.0, *)
 @available(tvOS, unavailable)
@@ -20784,6 +20886,45 @@ extension SwiftUI.TapGesture : Swift.Sendable {
 extension SwiftUI.View {
   public func onTapGesture(count: Swift.Int = 1, perform action: @escaping () -> Swift.Void) -> some SwiftUI.View
   
+}
+@available(iOS 17.5, macOS 14.5, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+public struct PencilPreferredAction : Swift.Hashable {
+  public static let switchEraser: SwiftUI.PencilPreferredAction
+  public static let switchPrevious: SwiftUI.PencilPreferredAction
+  public static let showColorPalette: SwiftUI.PencilPreferredAction
+  public static let showInkAttributes: SwiftUI.PencilPreferredAction
+  public static let showContextualPalette: SwiftUI.PencilPreferredAction
+  public static let runSystemShortcut: SwiftUI.PencilPreferredAction
+  public static let ignore: SwiftUI.PencilPreferredAction
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: SwiftUI.PencilPreferredAction, b: SwiftUI.PencilPreferredAction) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(*, unavailable)
+extension SwiftUI.PencilPreferredAction : Swift.Sendable {
+}
+@available(iOS 17.5, macOS 14.5, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension SwiftUI.EnvironmentValues {
+  public var preferredPencilDoubleTapAction: SwiftUI.PencilPreferredAction {
+    get
+  }
+}
+@available(iOS 17.5, macOS 14.5, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension SwiftUI.EnvironmentValues {
+  public var preferredPencilSqueezeAction: SwiftUI.PencilPreferredAction {
+    get
+  }
 }
 @_hasMissingDesignatedInitializers @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public class _PreviewHost : Combine.ObservableObject {
@@ -25895,6 +26036,11 @@ extension SwiftUI.View {
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   public func interactionActivityTrackingTag(_ tag: Swift.String) -> some SwiftUI.View
   
+}
+@available(iOS 17.5, macOS 14.5, tvOS 17.5, watchOS 10.5, visionOS 1.2, *)
+extension SwiftUI.WindowGroup {
+  @usableFromInline
+  internal init(id: Swift.String? = nil, title: SwiftUI.Text? = nil, @SwiftUI.ViewBuilder lazyContent: @escaping () -> Content)
 }
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension SwiftUI.Anchor.Source where Value == CoreFoundation.CGPoint {

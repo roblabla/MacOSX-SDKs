@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Sharing.framework/Versions/A/Sharing'
-current-version: 1937.51.45
+current-version: 1937.60.71
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -131,12 +131,15 @@ exports:
                        '_$s7Sharing13SFAirDropSendO4ItemV8metadataAC0E8MetadataVvpMV', 
                        '_$s7Sharing13SFAirDropSendO4ItemVMa', '_$s7Sharing13SFAirDropSendO4ItemVMn', 
                        '_$s7Sharing13SFAirDropSendO4ItemVN', '_$s7Sharing13SFAirDropSendO4ItemVSEAAMc', 
-                       '_$s7Sharing13SFAirDropSendO4ItemVSeAAMc', '_$s7Sharing13SFAirDropSendO7FailureO10badRequestyA2EmFWC', 
+                       '_$s7Sharing13SFAirDropSendO4ItemVSeAAMc', '_$s7Sharing13SFAirDropSendO7FailureO07resolveE0yAESb_tcAEmFWC', 
+                       '_$s7Sharing13SFAirDropSendO7FailureO10badRequestyA2EmFWC', 
                        '_$s7Sharing13SFAirDropSendO7FailureO10unexpectedyAeA12CodableErrorVcAEmFWC', 
                        '_$s7Sharing13SFAirDropSendO7FailureO11badResponseyA2EmFWC', 
                        '_$s7Sharing13SFAirDropSendO7FailureO11serverErroryA2EmFWC', 
                        '_$s7Sharing13SFAirDropSendO7FailureO11streamErroryA2EmFWC', 
                        '_$s7Sharing13SFAirDropSendO7FailureO15missingEndpointyAE10Foundation4UUIDVcAEmFWC', 
+                       '_$s7Sharing13SFAirDropSendO7FailureO16errorDescriptionSSvg', 
+                       '_$s7Sharing13SFAirDropSendO7FailureO16errorDescriptionSSvpMV', 
                        '_$s7Sharing13SFAirDropSendO7FailureO16receiverDeclinedyA2EmFWC', 
                        '_$s7Sharing13SFAirDropSendO7FailureO17missingOwnContactyA2EmFWC', 
                        '_$s7Sharing13SFAirDropSendO7FailureO17missingRecordDatayA2EmFWC', 
@@ -2809,11 +2812,12 @@ exports:
                        _SFIsKeynoteLiveLink, _SFIsLivePhotos, _SFIsManagedConfigurationType, 
                        _SFIsMapLink, _SFIsMusicLink, _SFIsMusicStoreLink, _SFIsNewsLink, 
                        _SFIsNote, _SFIsPDF, _SFIsPass, _SFIsPasskeyCredentialLink, 
-                       _SFIsPhoneLink, _SFIsPhotosApp, _SFIsPhotosAssetBundle, _SFIsPlainText, 
-                       _SFIsPlaygroundItem, _SFIsPodcastsLink, _SFIsPureGreenTeaDevice, 
-                       _SFIsRangingSupported, _SFIsRunningUnitTests, _SFIsSharediCloudDocumentsLink, 
-                       _SFIsVideo, _SFIsVoiceMemo, _SFIsWebLink, _SFIsWiFiEnabled, 
-                       _SFIsePub, _SFIsiBooksLink, _SFIsiCloudDriveEnabled, _SFIsiCloudFamilyLink, 
+                       _SFIsPencilHapticsEnabled, _SFIsPhoneLink, _SFIsPhotosApp, 
+                       _SFIsPhotosAssetBundle, _SFIsPlainText, _SFIsPlaygroundItem, 
+                       _SFIsPodcastsLink, _SFIsPureGreenTeaDevice, _SFIsRangingSupported, 
+                       _SFIsRunningUnitTests, _SFIsSharediCloudDocumentsLink, _SFIsVideo, 
+                       _SFIsVoiceMemo, _SFIsWebLink, _SFIsWiFiEnabled, _SFIsePub, 
+                       _SFIsiBooksLink, _SFIsiCloudDriveEnabled, _SFIsiCloudFamilyLink, 
                        _SFIsiTunesULink, _SFIsiWorkLink, _SFJoinDataChunks, _SFLocalizePhoneNumber, 
                        _SFLocalizedNameForBluetoothProductID, _SFLocalizedStringEx, 
                        _SFLocalizedStringForKey, _SFLocalizedStringForKeyInStringsFileNamed, 

@@ -827,7 +827,7 @@ exports:
                        PKPencilTextInputElement, PKPencilTextInputElementInteraction, 
                        PKPencilTouchDetection, PKPencilTouchDetectionService, PKProgressAlertController, 
                        PKRecognitionDataCollectionViewController, PKReplicaManager, 
-                       PKScribbleInteraction, PKSearchQueryItem, PKSelectionInteraction, 
+                       PKRulerTool, PKScribbleInteraction, PKSearchQueryItem, PKSelectionInteraction, 
                        PKShape, PKShapeDrawingTimerHelper, PKSpaceInsertionController, 
                        PKStroke, PKStrokeDelta, PKStrokeGenerator, PKStrokeMask, 
                        PKStrokePath, PKStrokePoint, PKStrokeProvider, PKStrokeProviderSlice, 

@@ -10,7 +10,7 @@ exports:
                        _NFDeviceModelString, _NFDeviceOSVersion, _NFDevicePlatform, 
                        _NFGeneralDeviceString, _NFInternalBuild, _NFLockSync, _NFPromiseInvokeOnQueue, 
                        _NFSeedBuild, _NFStateMachineErrorDomain, _NFStoreDemoMode, 
-                       _NewsFoundationVersionNumber, _NewsFoundationVersionString, 
+                       _NFSystemName, _NewsFoundationVersionNumber, _NewsFoundationVersionString, 
                        __UIValueCGRectValue, _kNFPromiseErrorDomain, _kNFPromiseSealingErrorCode, 
                        _kNFPromiseTimeoutErrorCode, _kNFReachabilityChangedNotification, 
                        _zalgo, _zalgoIfMain ]

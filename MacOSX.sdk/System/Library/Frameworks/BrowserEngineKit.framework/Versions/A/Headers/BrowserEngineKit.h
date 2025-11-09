@@ -36,5 +36,6 @@
 #import <BrowserEngineKit/BETextDocumentRequest.h>
 #import <BrowserEngineKit/BETextDocumentContext.h>
 
-
 #import <BrowserEngineKit/BECapability.h>
+
+#import <BrowserEngineKit/BEWebAppManifest.h>

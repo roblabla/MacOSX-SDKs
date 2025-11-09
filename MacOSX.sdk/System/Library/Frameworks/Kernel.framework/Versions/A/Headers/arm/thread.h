@@ -95,21 +95,6 @@ extern void *act_thread_csave(void);
 extern void act_thread_catt(void *ctx);
 extern void act_thread_cfree(void *ctx);
 
-#if HAS_AMX
-extern arm_amx_saved_state_t *machine_thread_get_amx_state(thread_t thread);
-extern kern_return_t machine_thread_amx_state_alloc(thread_t thread);
-extern void machine_thread_amx_state_free(thread_t thread);
-#endif /* HAS_AMX */
-
-#if HAS_ARM_FEAT_SME
-extern arm_sme_saved_state_t *machine_thread_get_sme_state(thread_t thread);
-extern kern_return_t machine_thread_sme_state_alloc(thread_t thread);
-extern void machine_thread_sme_state_free(thread_t thread);
-#endif
-
-#if HAVE_MACHINE_THREAD_MATRIX_STATE
-extern void machine_thread_matrix_state_dup(thread_t target);
-#endif
 
 /*
  * Return address of the function that called current function, given

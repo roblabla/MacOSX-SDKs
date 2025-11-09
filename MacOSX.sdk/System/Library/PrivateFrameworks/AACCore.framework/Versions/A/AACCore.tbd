@@ -8,17 +8,23 @@ compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _AACLoggingSubsystem, _AEAssessmentStateDidChangeNotificationName, 
+    symbols:         [ _AACLoggingSubsystem, _AEAssessmentModeEntitlement, _AEAssessmentModeLegacyEntitlement, 
+                       _AEAssessmentSessionExpirationTimeInSeconds, _AEAssessmentStateDidChangeNotificationName, 
                        _AEAssessmentStatePublisherRegisteringMachServiceName, _AEAssessmentUIServiceName, 
-                       _AECoreError, _AECoreErrorDomain, _AECoreErrorUserInfo, _AELocalizedStringFromTableInBundle, 
-                       _AEPolicySessionFailedToActivateSubsystemsKey, _AEPolicySessionFailedToDeactivateSubsystemsKey ]
-    objc-classes:    [ AEActivePolicySession, AEAssessmentApplicationDescriptor, 
+                       _AECoreError, _AECoreErrorDomain, _AECoreErrorUserInfo, _AEIsAssessmentModeAvailableForDeviceType, 
+                       _AEIsMultiAppAvailableForDeviceType, _AEIsProcessEntitledForAssessmentMode, 
+                       _AEIsProcessEntitledForMultiApp, _AEKillAssessmentAgentNotificationName, 
+                       _AELocalizedStringFromTableInBundle, _AEPolicySessionFailedToActivateSubsystemsKey, 
+                       _AEPolicySessionFailedToDeactivateSubsystemsKey ]
+    objc-classes:    [ AEActivePolicySession, AEAssessmentAgentService, AEAssessmentApplicationDescriptor, 
                        AEAssessmentIndividualConfiguration, AEAssessmentModeGestalt, 
-                       AEAssessmentState, AEAssessmentStatePublishingProxy, AEAssessmentStatePublishingXPCInterfaceFactory, 
+                       AEAssessmentModeRestrictionEnforcerProxy, AEAssessmentState, 
+                       AEAssessmentStatePublishingProxy, AEAssessmentStatePublishingXPCInterfaceFactory, 
                        AEAssessmentStateSourceRegisteringProxy, AEAssessmentStateSourceRegisteringXPCInterfaceFactory, 
                        AEAssessmentUIConfiguration, AEAssessmentUIServiceProxy, AEAssessmentUIServiceXPCInterfaceFactory, 
-                       AEFeatureFlagsProvider, AEFileSystem, AELifecycleEventHandlingProxy, 
-                       AELifecycleEventHandlingXPCInterfaceFactory, AELocalizedErrorDescriptions, 
-                       AEOSGestalt, AEOptionMirror, AEPerformancePrimitivesProvider, 
-                       AEPolicyBundle, AEPreferencesProvider ]
+                       AEDevicePrimitivesProvider, AEFeatureFlagsProvider, AEFileSystem, 
+                       AELifecycleEventHandlingProxy, AELifecycleEventHandlingXPCInterfaceFactory, 
+                       AELocalizedErrorDescriptions, AEOSGestalt, AEOptionMirror, 
+                       AEPerformancePrimitivesProvider, AEPolicyBundle, AEPreferencesProvider, 
+                       AESystemNotificationObservation ]
 ...

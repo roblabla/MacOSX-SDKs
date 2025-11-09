@@ -278,12 +278,12 @@ exports:
                        _WFLogCategorySystemActionConfiguration, _WFRecentDocumentsKey, 
                        _WFRemoteWidgetConfigurationErrorDomain, _WFStaccatoConfigurationContextBuddy, 
                        _WFStaccatoConfigurationContextSettings, _WFSystemActionConfigurationContextActionButtonBuddy, 
-                       _WFSystemActionConfigurationContextActionButtonSettings, _WFSystemActionConfigurationContextUnknown, 
-                       _WFSystemActionConfigurationContextUserInfoKey, _WFSystemActionConfigurationHostXPCInterface, 
-                       _WFSystemActionConfigurationServiceXPCInterface, _WFWidgetColorsFromBundle, 
-                       _WFWidgetConfigurationHostXPCInterface, _WFWidgetConfigurationServiceXPCInterface, 
-                       _WFWidgetGetDefaultColors, _getWFFocusConfigurationLogObject, 
-                       _getWFSystemActionConfigurationLogObject ]
+                       _WFSystemActionConfigurationContextActionButtonSettings, _WFSystemActionConfigurationContextPencilSettings, 
+                       _WFSystemActionConfigurationContextUnknown, _WFSystemActionConfigurationContextUserInfoKey, 
+                       _WFSystemActionConfigurationHostXPCInterface, _WFSystemActionConfigurationServiceXPCInterface, 
+                       _WFWidgetColorsFromBundle, _WFWidgetConfigurationHostXPCInterface, 
+                       _WFWidgetConfigurationServiceXPCInterface, _WFWidgetGetDefaultColors, 
+                       _getWFFocusConfigurationLogObject, _getWFSystemActionConfigurationLogObject ]
     objc-classes:    [ WFAppIconColorMatcher, WFDockTileMenu, WFFloatingLayer, WFFloatingViewConfiguration, 
                        WFFocusConfigurationButton, WFFocusConfigurationContextualActionOptions, 
                        WFFocusConfigurationOptions, WFFocusConfigurationRequest, 

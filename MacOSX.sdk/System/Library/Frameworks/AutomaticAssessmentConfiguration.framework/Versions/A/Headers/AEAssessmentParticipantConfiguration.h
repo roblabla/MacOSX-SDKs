@@ -13,10 +13,10 @@ API_AVAILABLE(ios(15.0), macCatalyst(15.0), macos(12.0))
 API_UNAVAILABLE(visionos)
 @interface AEAssessmentParticipantConfiguration : NSObject <NSCopying>
 
-@property (nonatomic, assign) BOOL allowsNetworkAccess API_AVAILABLE(macCatalyst(15.0), macos(12.0)) API_UNAVAILABLE(ios);
+@property (nonatomic, assign) BOOL allowsNetworkAccess API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
 
-- (instancetype)init API_AVAILABLE(macCatalyst(15.0), macos(12.0)) API_UNAVAILABLE(ios);
-+ (instancetype)new API_AVAILABLE(macCatalyst(15.0), macos(12.0)) API_UNAVAILABLE(ios);
+- (instancetype)init API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
++ (instancetype)new API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
 
 @end
 

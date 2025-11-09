@@ -9,10 +9,9 @@ exports:
     symbols:         [ _OSAStabilityMonitorEvaluateStabilityForBundleID, _OSAStabilityMonitorLoadParameters, 
                        _OSAStabilityMonitorLogDomain, _OSAnalyticsPrivateVersionNumber, 
                        _OSAnalyticsPrivateVersionString ]
-    objc-classes:    [ OSADailyTelemetryMonitor, OSAEphemeralLog, OSAHttpSubmitter, 
-                       OSAStreamDeflater, OSASubmissionPolicy, OSASubmitter, PCCBridgeEndpoint, 
-                       PCCEndpoint, PCCGroupJob, PCCJob, PCCProxiedDevice, PCCProxyingDevice, 
-                       PCCRequest ]
+    objc-classes:    [ OSAEphemeralLog, OSAHttpSubmitter, OSAStreamDeflater, OSASubmissionPolicy, 
+                       OSASubmitter, PCCBridgeEndpoint, PCCEndpoint, PCCGroupJob, 
+                       PCCJob, PCCProxiedDevice, PCCProxyingDevice, PCCRequest ]
     objc-ivars:      [ OSASubmitter._dryRun, OSASubmitter._responseCode, OSASubmitter._responseData, 
                        OSASubmitter._responseError, OSASubmitter._responseHeaders, 
                        PCCEndpoint._delegate, PCCJob._errObj, PCCJob._package ]

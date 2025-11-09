@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CoreMotion.framework/Versions/A/CoreMotion'
-current-version: 2890.12.17
+current-version: 2890.16.16
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -244,13 +244,12 @@ exports:
                        CMMotionUtils, CMNatalieData, CMNatalimeter, CMOdometer, CMOdometerData, 
                        CMOdometry, CMOdometryManager, CMOnBodyStatus, CMOnBodyStatusManager, 
                        CMPedestrianFenceManager, CMPedometer, CMPedometerBin, CMPedometerData, 
-                       CMPedometerEvent, CMPerceivedExertionScore, CMPose, CMProxPDP, 
-                       CMProxPDPManager, CMRecordedAccelerometerData, CMRecordedGyroData, 
-                       CMRecordedPressureData, CMRecordedRotationRateData, CMRotationRateData, 
-                       CMRunningMetricsManager, CMSWOLFSummary, CMSedentaryTimer, 
-                       CMSedentaryTimerData, CMSensorDataList, CMSensorRecorder, 
-                       CMSignificantElevationSample, CMSkeletonCollection, CMSkiData, 
-                       CMSkiTracker, CMSleepData, CMSleepTracker, CMStepCounter, 
+                       CMPedometerEvent, CMPose, CMProxPDP, CMProxPDPManager, CMRecordedAccelerometerData, 
+                       CMRecordedGyroData, CMRecordedPressureData, CMRecordedRotationRateData, 
+                       CMRotationRateData, CMRunningMetricsManager, CMSWOLFSummary, 
+                       CMSedentaryTimer, CMSedentaryTimerData, CMSensorDataList, 
+                       CMSensorRecorder, CMSignificantElevationSample, CMSkeletonCollection, 
+                       CMSkiData, CMSkiTracker, CMSleepData, CMSleepTracker, CMStepCounter, 
                        CMStrideCalibrationData, CMStrideCalibrationEntry, CMStrideCalibrationEntryArray, 
                        CMStrideCalibrationEntryInternal, CMStrideCalibrationHistory, 
                        CMSuppressionEvent, CMSwimData, CMSwimTracker, CMSwimWorkout, 

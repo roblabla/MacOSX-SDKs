@@ -37,11 +37,11 @@ typedef NS_OPTIONS(NSUInteger, AEAutocorrectMode) {
 @property (nonatomic, assign) BOOL allowsPasswordAutoFill API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, macCatalyst);
 @property (nonatomic, assign) BOOL allowsContinuousPathKeyboard API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, macCatalyst);
 
-@property (nonatomic, strong, readonly) AEAssessmentParticipantConfiguration *mainParticipantConfiguration API_AVAILABLE(macCatalyst(15.0), macos(12.0)) API_UNAVAILABLE(ios);
-@property (nonatomic, copy, readonly) NSDictionary<AEAssessmentApplication *, AEAssessmentParticipantConfiguration *> *configurationsByApplication API_AVAILABLE(macCatalyst(15.0), macos(12.0)) API_UNAVAILABLE(ios);
+@property (nonatomic, strong, readonly) AEAssessmentParticipantConfiguration *mainParticipantConfiguration API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
+@property (nonatomic, copy, readonly) NSDictionary<AEAssessmentApplication *, AEAssessmentParticipantConfiguration *> *configurationsByApplication API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
 
-- (void)setConfiguration:(AEAssessmentParticipantConfiguration *)configuration forApplication:(AEAssessmentApplication *)application API_AVAILABLE(macCatalyst(15.0), macos(12.0)) API_UNAVAILABLE(ios);
-- (void)removeApplication:(AEAssessmentApplication *)application API_AVAILABLE(macCatalyst(15.0), macos(12.0)) API_UNAVAILABLE(ios);
+- (void)setConfiguration:(AEAssessmentParticipantConfiguration *)configuration forApplication:(AEAssessmentApplication *)application API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
+- (void)removeApplication:(AEAssessmentApplication *)application API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
 
 @end
 

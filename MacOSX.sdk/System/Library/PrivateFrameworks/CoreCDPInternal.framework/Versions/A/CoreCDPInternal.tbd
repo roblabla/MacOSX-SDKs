@@ -14,9 +14,12 @@ exports:
                        _CDPBackupMetadataDeviceModelVersionKey, _CDPBackupMetadataDeviceNameKey, 
                        _CDPBackupMetadataDevicePlatformKey, _CDPBackupMetadataMIDKey, 
                        _CDPBackupMetadataPasswordResetKey, _CDPDConnectionInvalidatedNotification, 
+                       _CDPRPDExtendedProbationTimeInterval, _CDPRPDProbationTimeInterval, 
                        _CoreCDPInternalVersionNumber, _CoreCDPInternalVersionString, 
                        _IV_LENGTH, _TAG_LENGTH, __CDPDClientBundleIDBuddy, __CDPDClientBundleIDSettings, 
-                       _kAKAnalyticsEventMIDInvalidation, _kCDPCAAccountInfoRepairEffectivenessReporter, 
+                       _kADPEnrollAction, _kADPUpsellItemIdentifier, _kADPUpsellTearDownAction, 
+                       _kAKAnalyticsEventMIDInvalidation, _kCDPAKFollowUpURLKey, 
+                       _kCDPAKNativeActionKey, _kCDPCAAccountInfoRepairEffectivenessReporter, 
                        _kCDPCADidAttemptEscrowPreRecord, _kCDPCADidChangeLocalSecret, 
                        _kCDPCADidRemoveLocalSecret, _kCDPCADomainForDomainNotInAllowlist, 
                        _kCDPCAErrorCode, _kCDPCAErrorDomain, _kCDPCAEscrowPreRecordResult, 
@@ -53,11 +56,12 @@ exports:
                        CDPDSOSRecoveryValidatedJoinFlowController, CDPDSOSSecureBackupController, 
                        CDPDSecureBackupConfiguration, CDPDSecureBackupContext, CDPDSecureBackupController, 
                        CDPDSecureBackupProxyImpl, CDPDSecureChannelContext, CDPDSecureChannelController, 
-                       CDPDStateMachine, CDPDTermsInfoBackupController, CDPDXPCEventObserver, 
-                       CDPDXPCListener, CDPInternalWalrusStateController, CDPKeychainItemDescriptor, 
-                       CDPMobileGestaltWrapper, CDPPiggybackingChannel, CDPPiggybackingPayloadProvider, 
-                       CDPRecoveryKeyCache, CDPStateHandlerResult, CDPTTSUChannel, 
-                       CDPTTSUPayloadProvider, CDPWalrusDaemonService, CDPWalrusSecurityProxyImpl ]
+                       CDPDStateMachine, CDPDTTRController, CDPDTermsInfoBackupController, 
+                       CDPDXPCEventObserver, CDPDXPCListener, CDPInternalWalrusStateController, 
+                       CDPKeychainItemDescriptor, CDPMobileGestaltWrapper, CDPPiggybackingChannel, 
+                       CDPPiggybackingPayloadProvider, CDPRecoveryKeyCache, CDPStateHandlerResult, 
+                       CDPTTSUChannel, CDPTTSUPayloadProvider, CDPWalrusDaemonService, 
+                       CDPWalrusSecurityProxyImpl ]
     objc-ivars:      [ CDPDBackupErrorProviderImpl._context, CDPDBackupErrorProviderImpl._prevailingSecret, 
                        CDPDBackupErrorProviderImpl._uiProvider ]
 ...

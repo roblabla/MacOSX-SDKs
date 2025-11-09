@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-ios17.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature AccessLevelOnImport -enable-experimental-feature NestedProtocols -enable-bare-slash-regex -user-module-version 149.4.56 -module-name Assignables
+// swift-module-flags: -target arm64e-apple-ios17.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature AccessLevelOnImport -enable-experimental-feature NestedProtocols -enable-bare-slash-regex -user-module-version 149.5.20 -module-name Assignables
 import AppKit
 import AppleArchive
 @_exported import Assignables
@@ -279,12 +279,38 @@ public struct AssignableDocument : Swift.Identifiable {
     public typealias Document = Assignables.AssignableDocument
     public static let all: [Assignables.MergeablePartsContainerPartID]
   }
+  @available(*, deprecated, message: "Use merge(_:)")
   @discardableResult
   public mutating func merge(other: Assignables.AssignableDocument) throws -> Swift.Bool
+  @available(*, deprecated, message: "Use merge(partData:into:)")
   @discardableResult
   public mutating func merge(partID: Assignables.AssignableDocument.PartID, partDataURL: Foundation.URL) throws -> Swift.Bool
   #if compiler(>=5.3) && $AsyncAwait
+  @available(*, deprecated, message: "Use exportParts(identifiedBy:)")
   public func export(partIDs: [Assignables.AssignableDocument.PartID]) async throws -> [Assignables.AssignableDocument.PartID : Foundation.URL]
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 17.5, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  public func exportParts(identifiedBy partIDs: [Assignables.AssignableDocument.PartID]) async throws -> [Assignables.AssignableDocument.PartID : Assignables.MergeablePartData]
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 17.5, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  @discardableResult
+  public mutating func merge(_ other: Assignables.AssignableDocument) async throws -> Swift.Bool
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 17.5, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  @discardableResult
+  public mutating func merge(partData: Assignables.MergeablePartData, into partID: Assignables.AssignableDocument.PartID) async throws -> Swift.Bool
   #endif
   public var isPartial: Swift.Bool {
     get
@@ -327,9 +353,18 @@ public struct AssignableDocument : Swift.Identifiable {
   public var authors: [Assignables.AnyUserIdentity] {
     get
   }
+  @available(*, deprecated, message: "Use init(pdfURL:id:) instead")
   public init(pdfURL: Foundation.URL, authors: [some UserIdentity], id: Swift.String? = nil) throws
   public init(pdfURL: Foundation.URL, id: Swift.String? = nil) throws
+  @available(*, deprecated, message: "Use async init(id:partData:)")
   public init(id: Assignables.AssignableDocument.ID, partData: [Assignables.AssignableDocument.PartID : Foundation.URL]) throws
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 17.5, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  public init(id: Assignables.AssignableDocument.ID, partData: [Assignables.AssignableDocument.PartID : Assignables.MergeablePartData]) async throws
+  #endif
   #if compiler(>=5.3) && $AsyncAwait
   public func exportBaseAsPDF() async -> PDFKit.PDFDocument
   #endif
@@ -457,12 +492,38 @@ public struct AssignedWorkDocument : Swift.Identifiable {
     public typealias Document = Assignables.AssignedWorkDocument
     public static let all: [Assignables.MergeablePartsContainerPartID]
   }
+  @available(*, deprecated, message: "Use merge(_:)")
   @discardableResult
   public mutating func merge(other: Assignables.AssignedWorkDocument) throws -> Swift.Bool
+  @available(*, deprecated, message: "Use merge(partData:into:)")
   @discardableResult
   public mutating func merge(partID: Assignables.AssignedWorkDocument.PartID, partDataURL: Foundation.URL) throws -> Swift.Bool
   #if compiler(>=5.3) && $AsyncAwait
+  @available(*, deprecated, message: "Use exportParts(identifiedBy:)")
   public func export(partIDs: [Assignables.AssignedWorkDocument.PartID]) async throws -> [Assignables.AssignedWorkDocument.PartID : Foundation.URL]
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 17.5, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  public func exportParts(identifiedBy partIDs: [Assignables.AssignedWorkDocument.PartID]) async throws -> [Assignables.AssignedWorkDocument.PartID : Assignables.MergeablePartData]
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 17.5, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  @discardableResult
+  public mutating func merge(_ other: Assignables.AssignedWorkDocument) async throws -> Swift.Bool
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 17.5, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  @discardableResult
+  public mutating func merge(partData: Assignables.MergeablePartData, into partID: Assignables.AssignedWorkDocument.PartID) async throws -> Swift.Bool
   #endif
   public var isPartial: Swift.Bool {
     get
@@ -488,7 +549,15 @@ public struct AssignedWorkDocument : Swift.Identifiable {
   public var scorers: [Assignables.AnyUserIdentity] {
     get
   }
+  @available(*, deprecated, message: "Use async init(id:assignableDocument:partData:)")
   public init(id: Assignables.AssignedWorkDocument.ID, assignableDocument: Assignables.AssignableDocument, partData: [Assignables.AssignedWorkDocument.PartID : Foundation.URL]) throws
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 17.5, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  public init(id: Assignables.AssignedWorkDocument.ID, assignableDocument: Assignables.AssignableDocument, partData: [Assignables.AssignedWorkDocument.PartID : Assignables.MergeablePartData]) async throws
+  #endif
   public var hashValue: Swift.Int {
     get
   }
@@ -499,6 +568,8 @@ public struct AssignedWorkDocument : Swift.Identifiable {
 @available(tvOS, unavailable)
 extension Assignables.AssignableDocument : Assignables.Assignable {
   public func assign(to userIdentity: Assignables.AnyUserIdentity) throws -> Assignables.AssignedWorkDocument
+  @available(iOS 17.5, *)
+  public func makeAssignedWorkDocument() throws -> Assignables.AssignedWorkDocument
 }
 @available(iOS 17.4, *)
 @available(macOS, unavailable)
@@ -561,6 +632,12 @@ extension Assignables.AssignableDocument {
     public var size: CoreFoundation.CGSize {
       get
     }
+    @available(iOS 17.5, macOS 14.5, *)
+    @available(watchOS, unavailable)
+    @available(tvOS, unavailable)
+    public var rotation: CoreFoundation.CGFloat {
+      get
+    }
     public var hashValue: Swift.Int {
       get
     }
@@ -574,11 +651,23 @@ extension Assignables.AssignableDocument {
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 public struct MergeablePartsContainerPartID : Swift.Hashable {
+  @available(iOS 17.5, *)
+  public var rawValue: Swift.String
+  @available(iOS 17.5, *)
+  public init(_ rawValue: Swift.String)
   public static func == (a: Assignables.MergeablePartsContainerPartID, b: Assignables.MergeablePartsContainerPartID) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
+}
+@available(iOS 17.5, *)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+public enum MergeablePartData {
+  case data(Foundation.Data)
+  case fileURL(Foundation.URL)
 }
 @available(iOS 17.4, *)
 @available(macOS, unavailable)
@@ -586,10 +675,34 @@ public struct MergeablePartsContainerPartID : Swift.Hashable {
 @available(tvOS, unavailable)
 public protocol MergeablePartsContainer : Swift.Hashable {
   typealias PartID = Assignables.MergeablePartsContainerPartID
+  @available(*, deprecated, message: "Use merge(_:)")
   mutating func merge(other: Self) throws -> Swift.Bool
+  @available(*, deprecated, message: "Use merge(partData:into:)")
   mutating func merge(partID: Self.PartID, partDataURL: Foundation.URL) throws -> Swift.Bool
   #if compiler(>=5.3) && $AsyncAwait
+  @available(*, deprecated, message: "Use exportParts(identifiedBy:)")
   func export(partIDs: [Self.PartID]) async throws -> [Self.PartID : Foundation.URL]
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 17.5, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  func exportParts(identifiedBy partIDs: [Self.PartID]) async throws -> [Self.PartID : Assignables.MergeablePartData]
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 17.5, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  mutating func merge(_ other: Self) async throws -> Swift.Bool
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 17.5, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  mutating func merge(partData: Assignables.MergeablePartData, into partID: Self.PartID) async throws -> Swift.Bool
   #endif
   var isPartial: Swift.Bool { get }
   var partIDs: [Self.PartID] { get }

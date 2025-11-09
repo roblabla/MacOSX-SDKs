@@ -257,6 +257,8 @@ exports:
                        '_$s13CDMFoundation31SSUInferenceServiceStateBuilderC3add8appNames11forBundleIdySaySSG_SStKFTq', 
                        '_$s13CDMFoundation31SSUInferenceServiceStateBuilderC4copy18appIntentsMetadata11forBundleIdy10Foundation3URLV_SStKFTj', 
                        '_$s13CDMFoundation31SSUInferenceServiceStateBuilderC4copy18appIntentsMetadata11forBundleIdy10Foundation3URLV_SStKFTq', 
+                       '_$s13CDMFoundation31SSUInferenceServiceStateBuilderC4copy9appBundle03forH2Idy10Foundation3URLV_SStKFTj', 
+                       '_$s13CDMFoundation31SSUInferenceServiceStateBuilderC4copy9appBundle03forH2Idy10Foundation3URLV_SStKFTq', 
                        '_$s13CDMFoundation31SSUInferenceServiceStateBuilderC5build10Foundation3URLVyKFTj', 
                        '_$s13CDMFoundation31SSUInferenceServiceStateBuilderC5build10Foundation3URLVyKFTq', 
                        '_$s13CDMFoundation31SSUInferenceServiceStateBuilderC5clean07serviceD9Directoryy10Foundation3URLV_tFZ', 

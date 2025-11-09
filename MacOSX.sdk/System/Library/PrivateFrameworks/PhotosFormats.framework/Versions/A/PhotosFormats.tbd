@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosFormats.framework/Versions/A/PhotosFormats'
-current-version: 646.2.101
+current-version: 651.0.100
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN2pf17ArchiveLineParserE, __ZTIN5boost10wrapexceptINS_7bad_getEEE, 
@@ -131,6 +131,7 @@ exports:
                        _PFLegacyBundleRelativePath_Recovery, _PFLivePhotoBundleExtension, 
                        _PFLocalDateFromGMTDate, _PFLocationAccessUnknownWithAuthorizationStatus, 
                        _PFMap, _PFMapDictionary, _PFMediaCapabilitiesFromHostCharacteristicsKey, 
+                       _PFMediaCapabilitiesOptionsSortSourceEnumerationAscending, 
                        _PFMediaCapabilitiesOptionsSupportsTranscodeChoice, _PFMediaCapabilitiesOptionsWantsPlatformInfo, 
                        _PFMediaCapabilitiesOutOfBandHintsExtraSupportedContentTypesKey, 
                        _PFMediaCapabilitiesOutOfBandHintsExtraSupportedVideoCodecsKey, 

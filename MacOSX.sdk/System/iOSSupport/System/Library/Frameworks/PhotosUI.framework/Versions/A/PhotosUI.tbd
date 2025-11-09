@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PhotosUI.framework/Versions/A/PhotosUI'
-current-version: 646.2.101
+current-version: 651.0.100
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -465,8 +465,22 @@ exports:
                        '_$s8PhotosUI21PHPickerConfigurationVACycfC', '_$s8PhotosUI21PHPickerConfigurationVMa', 
                        '_$s8PhotosUI21PHPickerConfigurationVMn', '_$s8PhotosUI21PHPickerConfigurationVN', 
                        '_$s8PhotosUI21PHPickerConfigurationVSHAAMc', '_$s8PhotosUI21PHPickerConfigurationVSQAAMc', 
+                       '_$s8PhotosUI23PickerSpatialSuggestionC20supportsSecureCodingSbvgZ', 
+                       '_$s8PhotosUI23PickerSpatialSuggestionC22shouldReverseSortOrderSbvg', 
+                       '_$s8PhotosUI23PickerSpatialSuggestionC22shouldReverseSortOrderSbvpMV', 
+                       '_$s8PhotosUI23PickerSpatialSuggestionC5coderACSgSo7NSCoderC_tcfC', 
+                       '_$s8PhotosUI23PickerSpatialSuggestionC5coderACSgSo7NSCoderC_tcfCTj', 
+                       '_$s8PhotosUI23PickerSpatialSuggestionC5coderACSgSo7NSCoderC_tcfCTq', 
+                       '_$s8PhotosUI23PickerSpatialSuggestionC5coderACSgSo7NSCoderC_tcfc', 
+                       '_$s8PhotosUI23PickerSpatialSuggestionC6encode4withySo7NSCoderC_tF', 
+                       '_$s8PhotosUI23PickerSpatialSuggestionC7isEqualySbypSgF', 
+                       '_$s8PhotosUI23PickerSpatialSuggestionCACycfC', '_$s8PhotosUI23PickerSpatialSuggestionCACycfc', 
+                       '_$s8PhotosUI23PickerSpatialSuggestionCMa', '_$s8PhotosUI23PickerSpatialSuggestionCMn', 
+                       '_$s8PhotosUI23PickerSpatialSuggestionCMo', '_$s8PhotosUI23PickerSpatialSuggestionCMu', 
+                       '_$s8PhotosUI23PickerSpatialSuggestionCN', '_$s8PhotosUI23PickerSpatialSuggestionCfD', 
                        '_$s8PhotosUI24_PHPickerSuggestionGroupV11deviceOwnerACvgZ', 
                        '_$s8PhotosUI24_PHPickerSuggestionGroupV15assetCollection10identifier25extendedCuratedAssetsOnly22shouldReverseSortOrderACSS_S2btFZ', 
+                       '_$s8PhotosUI24_PHPickerSuggestionGroupV16retailExperienceACvgZ', 
                        '_$s8PhotosUI24_PHPickerSuggestionGroupV16shuffleWallpaperACvgZ', 
                        '_$s8PhotosUI24_PHPickerSuggestionGroupV17portraitWallpaperACvgZ', 
                        '_$s8PhotosUI24_PHPickerSuggestionGroupV18livePhotoWallpaperACvgZ', 
@@ -477,7 +491,20 @@ exports:
                        '_$s8PhotosUI24_PHPickerSuggestionGroupV9wallpaperACvgZ', 
                        '_$s8PhotosUI24_PHPickerSuggestionGroupVMa', '_$s8PhotosUI24_PHPickerSuggestionGroupVMn', 
                        '_$s8PhotosUI24_PHPickerSuggestionGroupVN', '_$s8PhotosUI24_PHPickerSuggestionGroupVSHAAMc', 
-                       '_$s8PhotosUI24_PHPickerSuggestionGroupVSQAAMc', '_$s8PhotosUI25PickerWallpaperSuggestionC20supportsSecureCodingSbvgZ', 
+                       '_$s8PhotosUI24_PHPickerSuggestionGroupVSQAAMc', '_$s8PhotosUI25PickerPanoramasSuggestionC20supportsSecureCodingSbvgZ', 
+                       '_$s8PhotosUI25PickerPanoramasSuggestionC22shouldReverseSortOrderSbvg', 
+                       '_$s8PhotosUI25PickerPanoramasSuggestionC22shouldReverseSortOrderSbvpMV', 
+                       '_$s8PhotosUI25PickerPanoramasSuggestionC5coderACSgSo7NSCoderC_tcfC', 
+                       '_$s8PhotosUI25PickerPanoramasSuggestionC5coderACSgSo7NSCoderC_tcfCTj', 
+                       '_$s8PhotosUI25PickerPanoramasSuggestionC5coderACSgSo7NSCoderC_tcfCTq', 
+                       '_$s8PhotosUI25PickerPanoramasSuggestionC5coderACSgSo7NSCoderC_tcfc', 
+                       '_$s8PhotosUI25PickerPanoramasSuggestionC6encode4withySo7NSCoderC_tF', 
+                       '_$s8PhotosUI25PickerPanoramasSuggestionC7isEqualySbypSgF', 
+                       '_$s8PhotosUI25PickerPanoramasSuggestionCACycfC', '_$s8PhotosUI25PickerPanoramasSuggestionCACycfc', 
+                       '_$s8PhotosUI25PickerPanoramasSuggestionCMa', '_$s8PhotosUI25PickerPanoramasSuggestionCMn', 
+                       '_$s8PhotosUI25PickerPanoramasSuggestionCMo', '_$s8PhotosUI25PickerPanoramasSuggestionCMu', 
+                       '_$s8PhotosUI25PickerPanoramasSuggestionCN', '_$s8PhotosUI25PickerPanoramasSuggestionCfD', 
+                       '_$s8PhotosUI25PickerWallpaperSuggestionC20supportsSecureCodingSbvgZ', 
                        '_$s8PhotosUI25PickerWallpaperSuggestionC22shouldReverseSortOrderSbvg', 
                        '_$s8PhotosUI25PickerWallpaperSuggestionC22shouldReverseSortOrderSbvpMV', 
                        '_$s8PhotosUI25PickerWallpaperSuggestionC4ModeO8rawValueAESgSi_tcfC', 
@@ -636,7 +663,8 @@ exports:
                        PUPickerAssetPlaybackStyleFilter, PUPickerCompoundFilter, 
                        PUPickerExtensionContext, PUPickerExtensionHostContext, PUPickerExtensionVendorContext, 
                        PUPickerLivePhotoWithPossibleMotionEffectSuggestion, PUPickerOtherFilter, 
-                       PUPickerSearchBasedSuggestion, PUPickerSuggestionAll, PUPickerSuggestionAvailableClasses, 
+                       PUPickerPanoramasSuggestion, PUPickerSearchBasedSuggestion, 
+                       PUPickerSpatialSuggestion, PUPickerSuggestionAll, PUPickerSuggestionAvailableClasses, 
                        PUPickerUnavailableViewController, PUPickerWallpaperSuggestion, 
                        _PHPickerCollectionConfiguration, _PHPickerResultMetadata, 
                        _PHPickerSuggestionGroup ]

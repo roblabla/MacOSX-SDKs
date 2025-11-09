@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/WebKit'
-current-version: 618.1.15
+current-version: 618.2.12
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebKitLegacy.framework/Versions/A/WebKitLegacy', 
@@ -962,11 +962,12 @@ exports:
                        _WKFrameTreeNode, _WKHitTestResult, _WKInspector, _WKInspectorConfiguration, 
                        _WKInspectorDebuggableInfo, _WKInspectorExtension, _WKInspectorWindow, 
                        _WKInternalDebugFeature, _WKLinkIconParameters, _WKModalContainerInfo, 
-                       _WKNotificationData, _WKProcessPoolConfiguration, _WKPublicKeyCredentialCreationOptions, 
-                       _WKPublicKeyCredentialDescriptor, _WKPublicKeyCredentialEntity, 
-                       _WKPublicKeyCredentialParameters, _WKPublicKeyCredentialRelyingPartyEntity, 
-                       _WKPublicKeyCredentialRequestOptions, _WKPublicKeyCredentialUserEntity, 
-                       _WKRemoteObjectInterface, _WKRemoteObjectRegistry, _WKRemoteWebInspectorViewController, 
+                       _WKNotificationData, _WKProcessInfo, _WKProcessPoolConfiguration, 
+                       _WKPublicKeyCredentialCreationOptions, _WKPublicKeyCredentialDescriptor, 
+                       _WKPublicKeyCredentialEntity, _WKPublicKeyCredentialParameters, 
+                       _WKPublicKeyCredentialRelyingPartyEntity, _WKPublicKeyCredentialRequestOptions, 
+                       _WKPublicKeyCredentialUserEntity, _WKRemoteObjectInterface, 
+                       _WKRemoteObjectRegistry, _WKRemoteWebInspectorViewController, 
                        _WKResourceLoadInfo, _WKResourceLoadStatisticsFirstParty, 
                        _WKResourceLoadStatisticsThirdParty, _WKSessionState, _WKSystemPreferences, 
                        _WKTextInputContext, _WKTextManipulationConfiguration, _WKTextManipulationExclusionRule, 
@@ -974,17 +975,18 @@ exports:
                        _WKUserContentExtensionStore, _WKUserContentFilter, _WKUserContentWorld, 
                        _WKUserInitiatedAction, _WKUserStyleSheet, _WKVisitedLinkStore, 
                        _WKWebAuthenticationAssertionResponse, _WKWebAuthenticationPanel, 
-                       _WKWebExtension, _WKWebExtensionAction, _WKWebExtensionCommand, 
-                       _WKWebExtensionContext, _WKWebExtensionController, _WKWebExtensionControllerConfiguration, 
-                       _WKWebExtensionDeclarativeNetRequestRule, _WKWebExtensionDeclarativeNetRequestTranslator, 
-                       _WKWebExtensionMatchPattern, _WKWebExtensionMessagePort, _WKWebExtensionTabCreationOptions, 
+                       _WKWebContentProcessInfo, _WKWebExtension, _WKWebExtensionAction, 
+                       _WKWebExtensionCommand, _WKWebExtensionContext, _WKWebExtensionController, 
+                       _WKWebExtensionControllerConfiguration, _WKWebExtensionDeclarativeNetRequestRule, 
+                       _WKWebExtensionDeclarativeNetRequestTranslator, _WKWebExtensionMatchPattern, 
+                       _WKWebExtensionMessagePort, _WKWebExtensionTabCreationOptions, 
                        _WKWebExtensionWebNavigationURLFilter, _WKWebExtensionWindowCreationOptions, 
                        _WKWebsiteDataSize, _WKWebsiteDataStoreConfiguration ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebKitLegacy.framework/Versions/A/WebKitLegacy'
-current-version: 618.1.15
+current-version: 618.2.12
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DOMEventException, _DOMException, _DOMRangeException, _DOMXPathException, 

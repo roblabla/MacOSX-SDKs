@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebCore.framework/Versions/A/Frameworks/libANGLE-shared.dylib'
-current-version: 618.1.15
+current-version: 618.2.12
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ WebCore, WebCoreTestSupport ]
@@ -121,7 +121,8 @@ exports:
                        _GL_EndQuery, _GL_EndQueryEXT, _GL_EndTransformFeedback, _GL_FenceSync, 
                        _GL_Finish, _GL_FinishFenceNV, _GL_Flush, _GL_FlushMappedBufferRange, 
                        _GL_FlushMappedBufferRangeEXT, _GL_Fogf, _GL_Fogfv, _GL_Fogx, 
-                       _GL_Fogxv, _GL_FramebufferFetchBarrierEXT, _GL_FramebufferMemorylessPixelLocalStorageANGLE, 
+                       _GL_Fogxv, _GL_FramebufferFetchBarrierEXT, _GL_FramebufferFoveationConfigQCOM, 
+                       _GL_FramebufferFoveationParametersQCOM, _GL_FramebufferMemorylessPixelLocalStorageANGLE, 
                        _GL_FramebufferParameteri, _GL_FramebufferParameteriMESA, 
                        _GL_FramebufferPixelLocalClearValuefvANGLE, _GL_FramebufferPixelLocalClearValueivANGLE, 
                        _GL_FramebufferPixelLocalClearValueuivANGLE, _GL_FramebufferPixelLocalStorageInterruptANGLE, 
@@ -314,26 +315,27 @@ exports:
                        _GL_TexStorageMemFlags2DANGLE, _GL_TexStorageMemFlags2DMultisampleANGLE, 
                        _GL_TexStorageMemFlags3DANGLE, _GL_TexStorageMemFlags3DMultisampleANGLE, 
                        _GL_TexSubImage2D, _GL_TexSubImage2DRobustANGLE, _GL_TexSubImage3D, 
-                       _GL_TexSubImage3DOES, _GL_TexSubImage3DRobustANGLE, _GL_TransformFeedbackVaryings, 
-                       _GL_Translatef, _GL_Translatex, _GL_Uniform1f, _GL_Uniform1fv, 
-                       _GL_Uniform1i, _GL_Uniform1iv, _GL_Uniform1ui, _GL_Uniform1uiv, 
-                       _GL_Uniform2f, _GL_Uniform2fv, _GL_Uniform2i, _GL_Uniform2iv, 
-                       _GL_Uniform2ui, _GL_Uniform2uiv, _GL_Uniform3f, _GL_Uniform3fv, 
-                       _GL_Uniform3i, _GL_Uniform3iv, _GL_Uniform3ui, _GL_Uniform3uiv, 
-                       _GL_Uniform4f, _GL_Uniform4fv, _GL_Uniform4i, _GL_Uniform4iv, 
-                       _GL_Uniform4ui, _GL_Uniform4uiv, _GL_UniformBlockBinding, 
-                       _GL_UniformMatrix2fv, _GL_UniformMatrix2x3fv, _GL_UniformMatrix2x4fv, 
-                       _GL_UniformMatrix3fv, _GL_UniformMatrix3x2fv, _GL_UniformMatrix3x4fv, 
-                       _GL_UniformMatrix4fv, _GL_UniformMatrix4x2fv, _GL_UniformMatrix4x3fv, 
-                       _GL_UnmapBuffer, _GL_UnmapBufferOES, _GL_UseProgram, _GL_UseProgramStages, 
-                       _GL_UseProgramStagesEXT, _GL_ValidateProgram, _GL_ValidateProgramPipeline, 
-                       _GL_ValidateProgramPipelineEXT, _GL_VertexAttrib1f, _GL_VertexAttrib1fv, 
-                       _GL_VertexAttrib2f, _GL_VertexAttrib2fv, _GL_VertexAttrib3f, 
-                       _GL_VertexAttrib3fv, _GL_VertexAttrib4f, _GL_VertexAttrib4fv, 
-                       _GL_VertexAttribBinding, _GL_VertexAttribDivisor, _GL_VertexAttribDivisorANGLE, 
-                       _GL_VertexAttribDivisorEXT, _GL_VertexAttribFormat, _GL_VertexAttribI4i, 
-                       _GL_VertexAttribI4iv, _GL_VertexAttribI4ui, _GL_VertexAttribI4uiv, 
-                       _GL_VertexAttribIFormat, _GL_VertexAttribIPointer, _GL_VertexAttribPointer, 
-                       _GL_VertexBindingDivisor, _GL_VertexPointer, _GL_Viewport, 
-                       _GL_WaitSemaphoreEXT, _GL_WaitSync, _GL_WeightPointerOES ]
+                       _GL_TexSubImage3DOES, _GL_TexSubImage3DRobustANGLE, _GL_TextureFoveationParametersQCOM, 
+                       _GL_TransformFeedbackVaryings, _GL_Translatef, _GL_Translatex, 
+                       _GL_Uniform1f, _GL_Uniform1fv, _GL_Uniform1i, _GL_Uniform1iv, 
+                       _GL_Uniform1ui, _GL_Uniform1uiv, _GL_Uniform2f, _GL_Uniform2fv, 
+                       _GL_Uniform2i, _GL_Uniform2iv, _GL_Uniform2ui, _GL_Uniform2uiv, 
+                       _GL_Uniform3f, _GL_Uniform3fv, _GL_Uniform3i, _GL_Uniform3iv, 
+                       _GL_Uniform3ui, _GL_Uniform3uiv, _GL_Uniform4f, _GL_Uniform4fv, 
+                       _GL_Uniform4i, _GL_Uniform4iv, _GL_Uniform4ui, _GL_Uniform4uiv, 
+                       _GL_UniformBlockBinding, _GL_UniformMatrix2fv, _GL_UniformMatrix2x3fv, 
+                       _GL_UniformMatrix2x4fv, _GL_UniformMatrix3fv, _GL_UniformMatrix3x2fv, 
+                       _GL_UniformMatrix3x4fv, _GL_UniformMatrix4fv, _GL_UniformMatrix4x2fv, 
+                       _GL_UniformMatrix4x3fv, _GL_UnmapBuffer, _GL_UnmapBufferOES, 
+                       _GL_UseProgram, _GL_UseProgramStages, _GL_UseProgramStagesEXT, 
+                       _GL_ValidateProgram, _GL_ValidateProgramPipeline, _GL_ValidateProgramPipelineEXT, 
+                       _GL_VertexAttrib1f, _GL_VertexAttrib1fv, _GL_VertexAttrib2f, 
+                       _GL_VertexAttrib2fv, _GL_VertexAttrib3f, _GL_VertexAttrib3fv, 
+                       _GL_VertexAttrib4f, _GL_VertexAttrib4fv, _GL_VertexAttribBinding, 
+                       _GL_VertexAttribDivisor, _GL_VertexAttribDivisorANGLE, _GL_VertexAttribDivisorEXT, 
+                       _GL_VertexAttribFormat, _GL_VertexAttribI4i, _GL_VertexAttribI4iv, 
+                       _GL_VertexAttribI4ui, _GL_VertexAttribI4uiv, _GL_VertexAttribIFormat, 
+                       _GL_VertexAttribIPointer, _GL_VertexAttribPointer, _GL_VertexBindingDivisor, 
+                       _GL_VertexPointer, _GL_Viewport, _GL_WaitSemaphoreEXT, _GL_WaitSync, 
+                       _GL_WeightPointerOES ]
 ...

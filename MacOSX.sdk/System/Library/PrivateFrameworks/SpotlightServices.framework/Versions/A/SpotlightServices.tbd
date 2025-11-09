@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightServices.framework/Versions/A/SpotlightServices'
-current-version: 2274.23
+current-version: 2274.31
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -272,7 +272,7 @@ exports:
                        _SSSuggestionIdentifierSearchRecent, _SSSuggestionIdentifierSearchWeb, 
                        _SSSuggestionTypeForResultType, _SSTargetApplicationURLForString, 
                        _SSTemporarySuggestionForAppStore, _SSTemporarySuggestionForMaps, 
-                       _SSThresholdRankedItem, _SSTipsBundleIdentifier, _SSUniversalSearchSydroEnabled, 
+                       _SSThresholdRankedItem, _SSTipsBundleIdentifier, _SSUniversalSearch2022Enabled, 
                        _SSValuesFromPlistWithPath, _SSWalletBundleIdentifier, _SpotlightServicesVersionNumber, 
                        _SpotlightServicesVersionString, _TIPS_QUERY_LENGTH_CUTOFF_THRESHOLD, 
                        _TIPS_QUERY_LENGTH_DEMOTE_THRESHOLD, _TIPS_TOKEN_DISCOUNT_THRESHOLD, 

@@ -96,6 +96,20 @@ API_AVAILABLE(macos(12.0), ios(15.0))
  */
 - (instancetype) initWithProcesses:(NSArray<NSNumber*>*)processesObjectIDsToIncludeInTap andDeviceUID:(NSString*) deviceUID withStream:(NSInteger) stream NS_REFINED_FOR_SWIFT;
 
+/*! @method initExcludingProcesses:andDeviceUID:withStreams
+	@abstract
+         Mix all process audio streams destined for the selected device stream except the given processes
+	@param	processesObjectIDsToExcludeFromTap
+         An NSArray of NSNumbers where each NSNumber holds an AudioObjectID of the process object to exclude from the tap.
+         All other processes that output audio will be included in the tap.
+	@param	deviceUID
+         The device UID of the output device who's audio will be captured
+	@param	stream
+         NSInteger that represents the index of the stream on the device who's audio will be captured. The format of the tap
+         will match the format of this stream.
+ */
+- (instancetype) initExcludingProcesses:(NSArray<NSNumber*>*)processesObjectIDsToExcludeFromTap andDeviceUID:(NSString*) deviceUID withStream:(NSInteger) stream NS_REFINED_FOR_SWIFT;
+
 /*!
  @property name
  @abstract Human readable name of this tap.

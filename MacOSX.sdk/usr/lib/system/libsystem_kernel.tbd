@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ i386-macos, i386-maccatalyst, x86_64-macos, x86_64-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_kernel.dylib'
-current-version: 10063.101.14
+current-version: 10063.121.3
 parent-umbrella:
   - targets:         [ i386-macos, i386-maccatalyst, x86_64-macos, x86_64-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
