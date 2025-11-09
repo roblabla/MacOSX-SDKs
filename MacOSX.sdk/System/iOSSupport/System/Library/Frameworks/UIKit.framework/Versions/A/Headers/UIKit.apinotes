@@ -164,6 +164,8 @@ Classes:
   - Name: 'configuration'
     PropertyKind: Instance
     SwiftPrivate: true
+- Name: UIListSeparatorConfiguration
+  SwiftPrivate: true
 - Name: UITableViewCell
   Methods:
   - Selector: 'updateConfigurationUsingState:'
@@ -997,6 +999,8 @@ Tags:
   SwiftPrivate: true
 - Name: UICollectionLayoutListFooterMode
   SwiftPrivate: true
+- Name: UIListSeparatorVisibility
+  SwiftPrivate: true
 - Name: UICellConfigurationDragState
   SwiftPrivate: true
 - Name: UICellConfigurationDropState
@@ -1182,6 +1186,8 @@ Tags:
   SwiftName: UISplitViewController.Column
 - Name: UISplitViewControllerSplitBehavior
   SwiftName: UISplitViewController.SplitBehavior
+- Name: UISplitViewControllerDisplayModeButtonVisibility
+  SwiftName: UISplitViewController.DisplayModeButtonVisibility
 - Name: UINavigationControllerOperation
   SwiftName: UINavigationController.Operation
 - Name: UIPageViewControllerNavigationOrientation
@@ -1312,6 +1318,8 @@ Typedefs:
 - Name: UICollectionViewSupplementaryRegistrationConfigurationHandler
   SwiftPrivate: true
 - Name: UICollectionLayoutListSwipeActionsConfigurationProvider
+  SwiftPrivate: true
+- Name: UICollectionLayoutListItemSeparatorHandler
   SwiftPrivate: true
 - Name: UITableViewDiffableDataSourceCellProvider
   SwiftName: UITableViewDiffableDataSourceReferenceCellProvider
@@ -1475,6 +1483,8 @@ Enumerators:
 - Name: UIImageSymbolWeightBlack
   SwiftName: black
 Globals:
+- Name: UIListSeparatorAutomaticInsets
+  SwiftPrivate: true
 - Name: UIConfigurationColorTransformerGrayscale
   SwiftPrivate: true
 - Name: UIConfigurationColorTransformerPreferredTint

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B7B25190-C2CC-3461-BCA6-170955DB5B16
+    value:           C7A8E2E6-8A9B-3DD5-ADEC-846DD803EB96
   - target:          x86_64-maccatalyst
-    value:           B7B25190-C2CC-3461-BCA6-170955DB5B16
+    value:           C7A8E2E6-8A9B-3DD5-ADEC-846DD803EB96
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B1D3E51D-E98E-3354-8903-95B619BD8B84
+    value:           A4E7353E-A980-3EAB-B75E-2403EB80C5C4
   - target:          arm64e-maccatalyst
-    value:           B1D3E51D-E98E-3354-8903-95B619BD8B84
+    value:           A4E7353E-A980-3EAB-B75E-2403EB80C5C4
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsInternals.framework/Versions/A/CoreSuggestionsInternals'
 current-version: 1115.255
 exports:
@@ -454,21 +454,22 @@ exports:
                        SGPortraitRequestClient, SGPortraitRequestHandler, SGPortraitRequestServerDelegate, 
                        SGPortraitRequestServerHandlerCache, SGPortraitUtils, SGPostalAddressExtraction, 
                        SGPseudoContactKey, SGPseudoEventKey, SGPseudoReminderKey, 
-                       SGQuickResponsesML, SGRTCLogging, SGRawKey, SGRe2, SGRe2Basic, 
-                       SGRe2Lazy, SGRe2PrefilterTree, SGRe2Subregexps, SGRealtimeEventResponse, 
-                       SGRealtimeSuggestionsTuple, SGReminderDissector, SGReminderDueLocation, 
-                       SGReminderExtractionModel, SGReminderMessage, SGReminderTrialClientWrapper, 
-                       SGReminderTrialClientWrapperGuardedData, SGRemindersAdapter, 
-                       SGRequestContext, SGReverseTemplateJS, SGReverseTemplatesJSDataDetectors, 
-                       SGSGtoCNContactsCacheUpdateAdapter, SGSchemaKeys, SGSchemaOrgKey, 
-                       SGSearchableItemIdTriple, SGSeekableData, SGSelfIDSupervision, 
-                       SGSelfIdentification, SGSelfIdentificationDetection, SGSelfIdentificationModel, 
-                       SGServiceContext, SGSignatureDissector, SGSignificantAddressModel, 
-                       SGSignificantAddressModelForIMessage, SGSignificantEmailAddressModel, 
-                       SGSignificantEmailAddressModelForIMessage, SGSignificantPhonenumberModel, 
-                       SGSimpleMailHeaderKeyValue, SGSimpleMailMessage, SGSlice, 
-                       SGSpotlightContactsAdapter, SGSqlEntityStore, SGSqliteDatabase, 
-                       SGSqliteDatabaseImpl, SGSqliteDatabaseSharedLock, SGSqliteExitOnDeviceLockErrorHandler, 
+                       SGQuickResponsesEngagementMetrics, SGQuickResponsesML, SGRTCLogging, 
+                       SGRawKey, SGRe2, SGRe2Basic, SGRe2Lazy, SGRe2PrefilterTree, 
+                       SGRe2Subregexps, SGRealtimeEventResponse, SGRealtimeSuggestionsTuple, 
+                       SGReminderDissector, SGReminderDueLocation, SGReminderExtractionModel, 
+                       SGReminderMessage, SGReminderTrialClientWrapper, SGReminderTrialClientWrapperGuardedData, 
+                       SGRemindersAdapter, SGRequestContext, SGReverseTemplateJS, 
+                       SGReverseTemplatesJSDataDetectors, SGSGtoCNContactsCacheUpdateAdapter, 
+                       SGSchemaKeys, SGSchemaOrgKey, SGSearchableItemIdTriple, SGSeekableData, 
+                       SGSelfIDSupervision, SGSelfIdentification, SGSelfIdentificationDetection, 
+                       SGSelfIdentificationModel, SGServiceContext, SGSignatureDissector, 
+                       SGSignificantAddressModel, SGSignificantAddressModelForIMessage, 
+                       SGSignificantEmailAddressModel, SGSignificantEmailAddressModelForIMessage, 
+                       SGSignificantPhonenumberModel, SGSimpleMailHeaderKeyValue, 
+                       SGSimpleMailMessage, SGSlice, SGSpotlightContactsAdapter, 
+                       SGSqlEntityStore, SGSqliteDatabase, SGSqliteDatabaseImpl, 
+                       SGSqliteDatabaseSharedLock, SGSqliteExitOnDeviceLockErrorHandler, 
                        SGStorageContact, SGStorageEvent, SGStorageLocation, SGStorageReminder, 
                        SGStringDonationHandler, SGStringMappingTransformer, SGStructuredEventClassification, 
                        SGStructuredEventDissector, SGStructuredEventDocument, SGStructuredEventExtractionModel, 

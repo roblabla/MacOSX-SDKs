@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DAE3BE21-1007-3597-A2D5-3357225C2C8D
+    value:           035090F7-7401-3B4C-A061-6BB1010DBE1D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9C6933C0-4E92-3E06-9063-E6F6DBC3CDD4
+    value:           1FC2AE01-F671-3074-A060-D00838EE387F
 install-name:    '/System/Library/PrivateFrameworks/CalendarUI.framework/Versions/A/CalendarUI'
-current-version: 1063
+current-version: 1063.4.2
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CALGroupPboardType, _CALLocationPboardType, _CALPixelAlignedPoint, 

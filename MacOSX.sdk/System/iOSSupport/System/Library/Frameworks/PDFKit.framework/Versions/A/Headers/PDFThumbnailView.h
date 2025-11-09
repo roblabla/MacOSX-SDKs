@@ -11,6 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#if defined(PDFKIT_PLATFORM_IOS)
 
 // Layout mode for thumbnail view.
 PDFKIT_ENUM_AVAILABLE(NA, 11_0)
@@ -20,6 +21,7 @@ typedef NS_ENUM(NSInteger, PDFThumbnailLayoutMode)
     PDFThumbnailLayoutModeHorizontal = 1
 };
 
+#endif
 
 @class PDFView, PDFPage, PDFThumbnailViewPrivate;
 
@@ -45,6 +47,23 @@ PDFKIT_CLASS_AVAILABLE(10_5, 11_0)
 // The maximum thumbnail size.
 @property (nonatomic) PDFSize thumbnailSize;
 
+#if defined(PDFKIT_PLATFORM_OSX)
+
+// Maximum number of columns (0 indicates no limit - as many columns as will fit).
+@property (nonatomic) NSUInteger maximumNumberOfColumns;
+
+// Font used for the page labels.
+@property (nonatomic, copy, nullable) PDFKitPlatformFont *labelFont;
+
+// Dragging. Allows a user to move icons within the PDFThumbnailView, changing page order. Default is false.
+@property (nonatomic) BOOL allowsDragging;
+
+// Multiple selections. By default, PDFThumbnailView allows only a single page to be selected at once - the selected 
+// thumbnail always corresponds to -[PDFView currentPage]. When you enable multiple selections, the user is allowed to 
+// select more than one thumbnail.
+@property (nonatomic) BOOL allowsMultipleSelection;
+
+#elif defined(PDFKIT_PLATFORM_IOS)
 
 // Defines if the thumbnail view is to be displayed vertically or horizontally.
 // Default PDFThumbnailLayoutModeVertical.
@@ -53,6 +72,7 @@ PDFKIT_CLASS_AVAILABLE(10_5, 11_0)
 // Inset for the placement of icons within the thumbnail view. Default UIEdgeInsetsZero.
 @property (nonatomic) UIEdgeInsets contentInset PDFKIT_AVAILABLE(NA, 11_0);
 
+#endif //PDFKIT_PLATFORM_IOS
 
 @end
 

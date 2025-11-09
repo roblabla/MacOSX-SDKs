@@ -102,24 +102,24 @@ typedef NS_ENUM(NSUInteger, MTLPixelFormat)
     /* Compressed formats. */
 
     /* S3TC/DXT */
-    MTLPixelFormatBC1_RGBA              API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 130,
-    MTLPixelFormatBC1_RGBA_sRGB         API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 131,
-    MTLPixelFormatBC2_RGBA              API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 132,
-    MTLPixelFormatBC2_RGBA_sRGB         API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 133,
-    MTLPixelFormatBC3_RGBA              API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 134,
-    MTLPixelFormatBC3_RGBA_sRGB         API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 135,
+    MTLPixelFormatBC1_RGBA              API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 130,
+    MTLPixelFormatBC1_RGBA_sRGB         API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 131,
+    MTLPixelFormatBC2_RGBA              API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 132,
+    MTLPixelFormatBC2_RGBA_sRGB         API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 133,
+    MTLPixelFormatBC3_RGBA              API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 134,
+    MTLPixelFormatBC3_RGBA_sRGB         API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 135,
 
     /* RGTC */
-    MTLPixelFormatBC4_RUnorm            API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 140,
-    MTLPixelFormatBC4_RSnorm            API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 141,
-    MTLPixelFormatBC5_RGUnorm           API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 142,
-    MTLPixelFormatBC5_RGSnorm           API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 143,
+    MTLPixelFormatBC4_RUnorm            API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 140,
+    MTLPixelFormatBC4_RSnorm            API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 141,
+    MTLPixelFormatBC5_RGUnorm           API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 142,
+    MTLPixelFormatBC5_RGSnorm           API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 143,
 
     /* BPTC */
-    MTLPixelFormatBC6H_RGBFloat         API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 150,
-    MTLPixelFormatBC6H_RGBUfloat        API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 151,
-    MTLPixelFormatBC7_RGBAUnorm         API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 152,
-    MTLPixelFormatBC7_RGBAUnorm_sRGB    API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(14.0)) = 153,
+    MTLPixelFormatBC6H_RGBFloat         API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 150,
+    MTLPixelFormatBC6H_RGBUfloat        API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 151,
+    MTLPixelFormatBC7_RGBAUnorm         API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 152,
+    MTLPixelFormatBC7_RGBAUnorm_sRGB    API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 153,
 
     /* PVRTC */
     MTLPixelFormatPVRTC_RGB_2BPP        API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(8.0)) = 160,

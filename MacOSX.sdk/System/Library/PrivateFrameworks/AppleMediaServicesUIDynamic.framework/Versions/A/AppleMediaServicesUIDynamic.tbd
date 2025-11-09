@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A1CF8545-1E6E-3BFC-B562-6187653E6C1F
+    value:           48C3D010-B17A-3270-8931-1BAA03A70D32
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F58B2924-6B5B-33CA-B022-7CB00046E9C6
+    value:           6124CD02-97ED-3B81-BB45-E96375413176
 install-name:    '@rpath/AppleMediaServicesUIDynamic.framework/Versions/A/AppleMediaServicesUIDynamic'
 swift-abi-version: 7
 exports:
@@ -36,10 +36,6 @@ exports:
                        '_$s27AppleMediaServicesUIDynamic12LayoutLoaderCMn', '_$s27AppleMediaServicesUIDynamic12LayoutLoaderCN', 
                        '_$s27AppleMediaServicesUIDynamic12LayoutLoaderCfD', '_$s27AppleMediaServicesUIDynamic12LayoutLoaderCfd', 
                        '_$s27AppleMediaServicesUIDynamic12PageProviderMp', '_$s27AppleMediaServicesUIDynamic12PageProviderTL', 
-                       '_$s27AppleMediaServicesUIDynamic13ActionFactoryC011deserializeE010withObject7context9JetEngine0E5Model_pSgAG10JSONObjectV_AG11JSONContextVtKF', 
-                       '_$s27AppleMediaServicesUIDynamic13ActionFactoryC011deserializeE010withObject7context9JetEngine0E5Model_pSgAG10JSONObjectV_AG11JSONContextVtKFTq', 
-                       '_$s27AppleMediaServicesUIDynamic13ActionFactoryC015deserializePageE010withObject7context9JetEngine0E5Model_pSgAG10JSONObjectV_AG11JSONContextVtKF', 
-                       '_$s27AppleMediaServicesUIDynamic13ActionFactoryC015deserializePageE010withObject7context9JetEngine0E5Model_pSgAG10JSONObjectV_AG11JSONContextVtKFTq', 
                        '_$s27AppleMediaServicesUIDynamic13ActionFactoryC6action13deserializing5using9JetEngine0E5Model_pAG10JSONObjectV_AG11JSONContextVtKF', 
                        '_$s27AppleMediaServicesUIDynamic13ActionFactoryC6action13deserializing5using9JetEngine0E5Model_pAG10JSONObjectV_AG11JSONContextVtKFTq', 
                        '_$s27AppleMediaServicesUIDynamic13ActionFactoryCACycfC', 
@@ -56,9 +52,7 @@ exports:
                        '_$s27AppleMediaServicesUIDynamic13ComponentCellPAAE5apply10contentsOf4with06asPartI0y9JetEngine12DiffableLensVyAH0E5Model_pG_AH05StateP0Vys5NeverOGAH15BaseObjectGraphCtF', 
                        '_$s27AppleMediaServicesUIDynamic13ComponentCellPAAE9didSelect10contentsOf4with06asPartJ0y9JetEngine12DiffableLensVy0E0QzG_AH013WritableStateQ0Vy0S0QzGAH15BaseObjectGraphCtF', 
                        '_$s27AppleMediaServicesUIDynamic13ComponentCellPAAE9didSelect10contentsOf4with06asPartJ0y9JetEngine12DiffableLensVyAH0E5Model_pG_AH013WritableStateQ0Vys5NeverOGAH15BaseObjectGraphCtF', 
-                       '_$s27AppleMediaServicesUIDynamic13ComponentCellTL', '_$s27AppleMediaServicesUIDynamic13LayoutFactoryC011deserializeE010withObject7contextAA0E5Model_pSg9JetEngine10JSONObjectV_AI11JSONContextVtKF', 
-                       '_$s27AppleMediaServicesUIDynamic13LayoutFactoryC011deserializeE010withObject7contextAA0E5Model_pSg9JetEngine10JSONObjectV_AI11JSONContextVtKFTq', 
-                       '_$s27AppleMediaServicesUIDynamic13LayoutFactoryC6layout13deserializing5usingAA0E5Model_p9JetEngine10JSONObjectV_AH11JSONContextVtKF', 
+                       '_$s27AppleMediaServicesUIDynamic13ComponentCellTL', '_$s27AppleMediaServicesUIDynamic13LayoutFactoryC6layout13deserializing5usingAA0E5Model_p9JetEngine10JSONObjectV_AH11JSONContextVtKF', 
                        '_$s27AppleMediaServicesUIDynamic13LayoutFactoryC6layout13deserializing5usingAA0E5Model_p9JetEngine10JSONObjectV_AH11JSONContextVtKFTq', 
                        '_$s27AppleMediaServicesUIDynamic13LayoutFactoryCACycfC', 
                        '_$s27AppleMediaServicesUIDynamic13LayoutFactoryCACycfCTq', 
@@ -393,6 +387,15 @@ exports:
                        '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC21internalClientOptionsSDys11AnyHashableVypGSgvpfi', 
                        '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC21internalClientOptionsSDys11AnyHashableVypGSgvs', 
                        '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC21internalClientOptionsSDys11AnyHashableVypGSgvsTq', 
+                       '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC21mediaClientIdentifierSSSgvM', 
+                       '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC21mediaClientIdentifierSSSgvMTq', 
+                       '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC21mediaClientIdentifierSSSgvg', 
+                       '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC21mediaClientIdentifierSSSgvgTq', 
+                       '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC21mediaClientIdentifierSSSgvpMV', 
+                       '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC21mediaClientIdentifierSSSgvpWvd', 
+                       '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC21mediaClientIdentifierSSSgvpfi', 
+                       '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC21mediaClientIdentifierSSSgvs', 
+                       '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC21mediaClientIdentifierSSSgvsTq', 
                        '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC22viewWillLayoutSubviewsyyF', 
                        '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC3bag0H5ValueACSo14AMSBagProtocol_p_So0jI0CySo5NSURLCGtcfC', 
                        '_$s27AppleMediaServicesUIDynamic21DynamicViewControllerC3bag0H5ValueACSo14AMSBagProtocol_p_So0jI0CySo5NSURLCGtcfc', 
@@ -901,8 +904,6 @@ exports:
                        '_$s9Component27AppleMediaServicesUIDynamic0A4CellPTl', '_$s9JetEngine10JSONObjectV27AppleMediaServicesUIDynamicE5colorSo7NSColorCSgvg', 
                        '_$s9JetEngine10JSONObjectV27AppleMediaServicesUIDynamicE5colorSo7NSColorCSgvpMV', 
                        '_$s9JetEngine20MetricsFieldsContextV27AppleMediaServicesUIDynamicE06createdE018impressionsTrackerAcA011ImpressionsL0_pSg_tFZ', 
-                       '_$s9JetEngine7PromiseC27AppleMediaServicesUIDynamicE9onFailure10catchError0H0yys0K0_pc_AA13TaskScheduler_ptF', 
-                       '_$s9JetEngine7PromiseC27AppleMediaServicesUIDynamicE9onSuccess7perform0H0yyxc_AA13TaskScheduler_ptF', 
                        '_$sSo24NSOperationQueuePriorityV27AppleMediaServicesUIDynamicE1loiySbAB_ABtFZ', 
                        '_$sSo24NSOperationQueuePriorityVSL27AppleMediaServicesUIDynamicMc', 
                        '_$sSo6CGSizeV27AppleMediaServicesUIDynamicE6scaledyAB12CoreGraphics7CGFloatVF', 

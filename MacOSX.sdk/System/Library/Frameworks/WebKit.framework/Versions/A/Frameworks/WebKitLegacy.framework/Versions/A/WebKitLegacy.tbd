@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F5F5FA9A-0871-3A1D-8140-E4F6706A63AF
+    value:           0189FD22-9265-3281-9AE9-B6D11D308F59
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           93702060-2359-345A-BAB0-62A9D0BFF3BE
+    value:           5EC24AEC-3F84-3FD0-B634-28CBD0A4D73E
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebKitLegacy.framework/Versions/A/WebKitLegacy'
-current-version: 610.3.7
+current-version: 611.1.21
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DOMEventException, _DOMException, _DOMRangeException, _DOMXPathException, 
@@ -97,7 +97,7 @@ exports:
                        WebCoreScrollView, WebCoreStatistics, WebDataSource, WebDatabaseManager, 
                        WebDatabaseQuotaManager, WebDefaultPolicyDelegate, WebDeviceOrientation, 
                        WebDeviceOrientationProviderMock, WebDownload, WebDynamicScrollBarsView, 
-                       WebFormDelegate, WebFrame, WebFrameView, WebGeolocationPosition, 
+                       WebFeature, WebFormDelegate, WebFrame, WebFrameView, WebGeolocationPosition, 
                        WebHTMLRepresentation, WebHTMLView, WebHistory, WebHistoryItem, 
                        WebIconDatabase, WebInspector, WebJavaScriptTextInputPanel, 
                        WebKitStatistics, WebNavigationData, WebNotification, WebPanelAuthenticationHandler, 

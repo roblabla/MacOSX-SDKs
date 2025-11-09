@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0D5AD16E-A871-3ACB-B910-39B87928E937
+    value:           2CF6A7EC-9AD1-316B-A59E-E6C2FC56E3A7
   - target:          x86_64-maccatalyst
-    value:           0D5AD16E-A871-3ACB-B910-39B87928E937
+    value:           2CF6A7EC-9AD1-316B-A59E-E6C2FC56E3A7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B877220F-1199-3F9F-B00E-2DD96231D7DF
+    value:           C2D7DCD8-6DCB-3DE6-B286-E01AF88793A4
   - target:          arm64e-maccatalyst
-    value:           B877220F-1199-3F9F-B00E-2DD96231D7DF
+    value:           C2D7DCD8-6DCB-3DE6-B286-E01AF88793A4
 install-name:    '/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo'
 current-version: 1.5
 compatibility-version: 1.2
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CVBufferDumpToQTES, _CVBufferGetAttachment, _CVBufferGetAttachments, 
                        _CVBufferPropagateAttachments, _CVBufferRelease, _CVBufferRemoveAllAttachments, 
@@ -203,9 +203,10 @@ exports:
                        _kCVPixelFormatOpenGLFormat, _kCVPixelFormatOpenGLInternalFormat, 
                        _kCVPixelFormatOpenGLType, _kCVPixelFormatPlanes, _kCVPixelFormatQDCompatibility, 
                        _kCVPixelFormatVerticalSubsampling, _kCVZeroTime ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64e-maccatalyst, arm64-macos, 
+  - targets:         [ arm64e-macos, x86_64-macos, arm64e-maccatalyst, arm64-macos, 
                        arm64-maccatalyst ]
     symbols:         [ _CVPixelBufferCalculateCompressedTileDataRegionMemoryUsedOfPlane, 
+                       _CVPixelBufferCalculateSparseHistogramOfCompressedTileDataUsageOfPlane, 
                        _kCVPixelBufferCompressedDataRegionAlignmentKey, _kCVPixelBufferCompressedTileHeaderGroupBytesPerRowAlignmentKey, 
                        _kCVPixelFormatBytesPerCompressedTileHeader, _kCVPixelFormatCompressedTileHeight, 
                        _kCVPixelFormatCompressedTileWidth, _kCVPixelFormatCompressionFootprint, 

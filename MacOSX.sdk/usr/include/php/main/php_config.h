@@ -2251,7 +2251,7 @@
 #define MYSQLND_SSL_SUPPORTED 1
 
 /* */
-#define NDBM_INCLUDE_FILE "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.Internal.sdk/usr/include/ndbm.h"
+#define NDBM_INCLUDE_FILE "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.Internal.sdk/usr/include/ndbm.h"
 
 /* Define to 1 if your C compiler doesn't accept -c and -o together. */
 /* #undef NO_MINUS_C_MINUS_O */
@@ -2296,7 +2296,7 @@
 /* #undef PHPDBG_DEBUG */
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2020-11-23"
+#define PHP_BUILD_DATE "2021-02-28"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
@@ -2365,7 +2365,7 @@
 /* #undef PHP_HPUX_TIME_R */
 
 /* Path to iconv.h */
-#define PHP_ICONV_H_PATH </Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.Internal.sdk/usr/include/iconv.h>
+#define PHP_ICONV_H_PATH </Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.Internal.sdk/usr/include/iconv.h>
 
 /* Which iconv implementation to use */
 #define PHP_ICONV_IMPL "libiconv"
@@ -2407,7 +2407,7 @@
 #define PHP_SIGCHILD 0
 
 /* uname -a output */
-#define PHP_UNAME "Darwin osx372.sd.apple.com 20.0 Darwin Kernel Version 19.0.0: Mon Apr 27 10:16:52 PDT 2020; root:xnu-6153.11.26.100.4~1/DEVELOPMENT_X86_64 x86_64"
+#define PHP_UNAME "Darwin bb-g9-pdb125.ta10.sd.apple.com 20.0 Darwin Kernel Version 20.1.0: Mon Jan 11 10:18:29 PST 2021; root:xnu-7195.41.8.100.5~1/DEVELOPMENT_X86_64 x86_64"
 
 /* Whether PHP has to use its own crypt_r for blowfish, des and ext des */
 #define PHP_USE_PHP_CRYPT_R 1

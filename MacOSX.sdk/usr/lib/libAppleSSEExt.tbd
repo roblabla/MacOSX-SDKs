@@ -3,10 +3,10 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           74639B8B-BE15-3CEC-9658-C354D03B78AE
+    value:           C3C8F261-E7DA-3382-B6CB-8424525BFF1E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8FCF3026-CE55-3169-BC25-53E4949062B3
+    value:           978ADBC3-60D5-343B-A1D5-73483195F268
 install-name:    '/usr/lib/libAppleSSEExt.dylib'
 ...

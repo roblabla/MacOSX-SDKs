@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  
     AVCaptureDepthDataOutput always provides depth data in the format expressed by its source's -[AVCaptureDevice activeDepthDataFormat] property. If you wish to receive depth data in another format, you may choose from the -[AVCaptureDevice activeFormat]'s -[AVCaptureDeviceFormat supportedDepthDataFormats], and set it using -[AVCaptureDevice setActiveDepthDataFormat:].
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDepthDataOutput : AVCaptureOutput
 {
 @private
@@ -106,7 +106,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROH
  @abstract
     Defines an interface for delegates of AVCaptureDepthDataOutput to receive captured depth data and be notified of late depth data that were dropped.
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
 @protocol AVCaptureDepthDataOutputDelegate <NSObject>
 
 @optional

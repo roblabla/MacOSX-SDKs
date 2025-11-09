@@ -4,28 +4,28 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8DD3A0BC-2C92-31E3-BBAB-CE923A4342E4
+    value:           52F807B1-41A0-3D1E-AE89-115CA570863F
   - target:          x86_64-maccatalyst
-    value:           8DD3A0BC-2C92-31E3-BBAB-CE923A4342E4
+    value:           52F807B1-41A0-3D1E-AE89-115CA570863F
   - target:          arm64-macos
-    value:           7EDAEC3F-03BB-3E2D-8DBD-6F86979C566F
+    value:           2C9CD496-6C4E-3C44-92DA-4931CCA8D85D
   - target:          arm64-maccatalyst
-    value:           7EDAEC3F-03BB-3E2D-8DBD-6F86979C566F
+    value:           2C9CD496-6C4E-3C44-92DA-4931CCA8D85D
   - target:          arm64e-macos
-    value:           EDB716F3-BF94-3941-B7DA-D6C91094C645
+    value:           84CF19CF-0E7D-3604-900D-B16E6EDEAD0A
   - target:          arm64e-maccatalyst
-    value:           EDB716F3-BF94-3941-B7DA-D6C91094C645
+    value:           84CF19CF-0E7D-3604-900D-B16E6EDEAD0A
 install-name:    '/usr/lib/system/libsystem_pthread.dylib'
-current-version: 454.60.1
+current-version: 454.100.8
 parent-umbrella:
-  - targets:         [ i386-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos, 
-                       arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __pthread_is_threaded, _cthread_yield ]
-  - targets:         [ arm64-macos, x86_64-macos, arm64e-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos, x86_64-maccatalyst, 
                        arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ ____chkstk_darwin, ___is_threaded, ___pthread_init, ___pthread_workqueue_setkill, 
                        ___unix_conforming, __pthread_atfork_child, __pthread_atfork_child_handlers, 

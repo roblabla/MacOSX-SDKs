@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           10F67BF3-77FB-3D1D-B486-68149B1DCAA5
+    value:           A95859B2-4867-3960-8472-7F708CB543B3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B1D38E93-7066-38BF-98A4-909E4AF42A09
+    value:           A6290AEF-0F47-38E3-ACEA-E6CB8E1D9B87
 install-name:    '/System/Library/PrivateFrameworks/ConditionInducer.framework/Versions/A/ConditionInducer'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

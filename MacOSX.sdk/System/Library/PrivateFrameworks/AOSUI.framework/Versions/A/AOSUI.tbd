@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5FD94497-2000-3E0C-AE50-E32EEDE79051
+    value:           6E438195-9ECE-3B93-B102-0EF55798BB4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B88B2A01-24A9-3AB8-9A7F-33D0C030C272
+    value:           924B2697-4FA3-300C-AB07-C41E3A8AB97C
 install-name:    '/System/Library/PrivateFrameworks/AOSUI.framework/Versions/A/AOSUI'
 current-version: 415
 exports:

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BF6D5746-BB4F-3AEB-B243-CC0404D328AC
+    value:           84B38446-E830-3C45-933F-A56F78BBA895
   - target:          x86_64-maccatalyst
-    value:           BF6D5746-BB4F-3AEB-B243-CC0404D328AC
+    value:           84B38446-E830-3C45-933F-A56F78BBA895
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C050EFD0-33DB-3F7B-99BB-A1A922A9167A
+    value:           2DC3B588-713B-385A-A462-4185C0FA1349
   - target:          arm64e-maccatalyst
-    value:           C050EFD0-33DB-3F7B-99BB-A1A922A9167A
+    value:           2DC3B588-713B-385A-A462-4185C0FA1349
 install-name:    '/System/Library/PrivateFrameworks/CoreMaterial.framework/Versions/A/CoreMaterial'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -28,7 +28,7 @@ exports:
     symbols:         [ _CoreMaterialVersionNumber, _CoreMaterialVersionString, _MTAllMaterialConfigurations, 
                        _MTAllMaterialOverlayConfigurations, _MTAllMaterialValueConfigurations, 
                        _MTAllOrdinalVisualStyles, _MTAllPlatformColorVisualStyles, 
-                       _MTBuiltInScreenScale, _MTCAColorMatrixCreateDictionaryRepresentation, 
+                       _MTAllVisualStyleCategories, _MTBuiltInScreenScale, _MTCAColorMatrixCreateDictionaryRepresentation, 
                        _MTCAColorMatrixEqualToMatrix, _MTCAColorMatrixInterpolate, 
                        _MTCAColorMatrixIsDictionaryRepresentation, _MTCAColorMatrixIsIdentity, 
                        _MTCAColorMatrixMakeWithDictionaryRepresentation, _MTCAColorMatrixMakeWithVibrantShadowAttributes, 
@@ -100,7 +100,8 @@ exports:
                        MTMaterialLayer, MTMaterialSettingsInterpolator, MTPrunePromise, 
                        MTRGBColor, MTRecipeMaterialSettings, MTStylingProvidingSolidColorLayer, 
                        MTTintingFilteringMaterialSettings, MTTintingMaterialSettings, 
-                       MTVisualStyleSet, MTWhiteColor ]
+                       MTVisualStyleSet, MTVisualStylingLayer, MTVisualStylingLayerHelper, 
+                       MTVisualStylingTextLayer, MTWhiteColor ]
     objc-ivars:      [ MTColor._cachedColor, MTPrunePromise._materialLayer, MTPrunePromise._timeStamp, 
                        MTTintingFilteringMaterialSettings._variableBlurInputMask ]
 ...

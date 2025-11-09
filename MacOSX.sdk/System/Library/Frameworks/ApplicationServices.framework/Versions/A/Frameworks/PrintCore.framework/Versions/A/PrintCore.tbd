@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FC56A643-F502-3578-9EFF-375BE6B87691
+    value:           9299D57A-FA79-30B6-ADA6-580A55EFE95C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           456F8F80-DDEC-397C-B43C-EE799ECDA3F7
+    value:           0BA704CB-1069-3855-A3EB-62FDB054E25D
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore'
-current-version: 531
+current-version: 531.1
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CPLAutoSelectCancel, _CPLAutoSelectCreateContext, _CPLAutoSelectGetInfo, 
                        _CPLAutoSelectHasNewPPD, _CPLAutoSelectInstallableOptions, 
                        _CPLAutoSelectPPD, _CPLAutoSelectReleaseContext, _CPLAutoSelectSetIsBinaryOK, 

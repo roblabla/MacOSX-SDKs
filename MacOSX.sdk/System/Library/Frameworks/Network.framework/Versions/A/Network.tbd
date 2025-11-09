@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EED4099E-B17C-3E0B-AA8F-78A2D4F26CBF
+    value:           E70D5387-9843-34AB-B8C4-F468EB7EB1EF
   - target:          x86_64-maccatalyst
-    value:           EED4099E-B17C-3E0B-AA8F-78A2D4F26CBF
+    value:           E70D5387-9843-34AB-B8C4-F468EB7EB1EF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6112E930-7DB0-369D-9536-930C8C3CD690
+    value:           898F25C7-E600-307C-AFAD-E39EEFCFF979
   - target:          arm64e-maccatalyst
-    value:           6112E930-7DB0-369D-9536-930C8C3CD690
+    value:           898F25C7-E600-307C-AFAD-E39EEFCFF979
 install-name:    '/System/Library/Frameworks/Network.framework/Versions/A/Network'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/usr/lib/libnetwork.dylib' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NWCreateDispatchDataFromNSData, _NWCreateNSDataFromDispatchData, 
                        _NWMonitorStatusToString, _NWNetworkAgentStartOptionClientUUID, 
@@ -44,7 +44,7 @@ exports:
                        NWRemoteConnectionDirector, NWRemotePacketProxy, NWResolver, 
                        NWStreamConnection, NWSystemPathMonitor, NWTCPConnection, 
                        NWTCPListener, NWUDPListener, NWUDPSession ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.11$/System/Library/PrivateFrameworks/Network.framework/Versions/A/Network', 
                        '$ld$install_name$os10.12$/System/Library/PrivateFrameworks/Network.framework/Versions/A/Network', 
                        '$ld$install_name$os10.13$/System/Library/PrivateFrameworks/Network.framework/Versions/A/Network' ]

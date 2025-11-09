@@ -385,6 +385,17 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  */
 @property float priority API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
+/* Provides a hint indicating if incremental delivery of a partial response body
+ * would be useful for the application, or if it cannot process the response
+ * until it is complete. Indicating that incremental delivery is not desired may
+ * improve task performance. For example, if a response cannot be decoded until
+ * the entire content is received, set this property to false.
+ *
+ * Defaults to true unless this task is created with completion-handler based
+ * convenience methods, or if it is a download task.
+ */
+@property BOOL prefersIncrementalDelivery API_AVAILABLE(macos(11.3), ios(14.5), watchos(7.4), tvos(14.5));
+
 
 - (instancetype)init API_DEPRECATED("Not supported", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
 + (instancetype)new API_DEPRECATED("Not supported", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BF1831BC-CF65-3DDC-8DB9-078657B8148B
+    value:           41303F29-51CF-390C-BC28-46D4B61C6C36
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           65B95597-D3D1-32D0-AD82-D1DC930B340F
+    value:           092FAB21-E836-3C30-B702-A115267B21C4
 install-name:    '/System/Library/PrivateFrameworks/WeatherFoundation.framework/Versions/A/WeatherFoundation'
-current-version: 377
+current-version: 390
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AqiScaleForCountryCode, _AqiScaleFromIdentifier, _CLLocationCoordinate2DFromString, 

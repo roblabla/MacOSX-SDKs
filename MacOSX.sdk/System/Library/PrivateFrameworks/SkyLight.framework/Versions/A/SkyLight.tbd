@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BABEC06C-214E-3D30-A36F-53AB473ABC93
+    value:           5DB42D5D-CF51-3433-96E6-B2987E0C33C8
   - target:          x86_64-maccatalyst
-    value:           BABEC06C-214E-3D30-A36F-53AB473ABC93
+    value:           5DB42D5D-CF51-3433-96E6-B2987E0C33C8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           750CB992-DD41-37BC-8E51-4ABAAD0AC9A2
+    value:           20A8A506-1D77-3915-8C28-259D55DC8373
   - target:          arm64e-maccatalyst
-    value:           750CB992-DD41-37BC-8E51-4ABAAD0AC9A2
+    value:           20A8A506-1D77-3915-8C28-259D55DC8373
 install-name:    '/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight'
 current-version: 600
 compatibility-version: 64

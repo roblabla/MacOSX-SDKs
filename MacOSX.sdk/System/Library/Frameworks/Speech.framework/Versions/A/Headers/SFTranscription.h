@@ -19,10 +19,10 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 @property (nonatomic, readonly, copy) NSArray<SFTranscriptionSegment *> *segments;
 
 // Measures the number of words spoken per minute
-@property (nonatomic, readonly) double speakingRate API_AVAILABLE(ios(13.0), macos(10.15));
+@property (nonatomic, readonly) double speakingRate API_AVAILABLE(ios(13.0), macos(10.15)) __deprecated_msg("speakingRate is moved to SFSpeechRecognitionMetadata");
 
 // Measures average pause between words (in seconds)
-@property (nonatomic, readonly) NSTimeInterval averagePauseDuration API_AVAILABLE(ios(13.0), macos(10.15));
+@property (nonatomic, readonly) NSTimeInterval averagePauseDuration API_AVAILABLE(ios(13.0), macos(10.15)) __deprecated_msg("averagePauseDuration is moved to SFSpeechRecognitionMetadata");
 
 @end
 

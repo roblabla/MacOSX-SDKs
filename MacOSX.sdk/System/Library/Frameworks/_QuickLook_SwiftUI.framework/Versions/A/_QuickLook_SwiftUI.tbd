@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D3903C41-2062-3FA9-8CFF-E98671CFE21D
+    value:           12DAD6FA-DBB0-310A-A4F7-0280A5520080
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1AB17106-4520-3566-80BD-F481E6CAE7B8
+    value:           32F30C87-2D06-3EE2-A50B-7A7587F29EEF
 install-name:    '/System/Library/Frameworks/_QuickLook_SwiftUI.framework/Versions/A/_QuickLook_SwiftUI'
 swift-abi-version: 7
 exports:

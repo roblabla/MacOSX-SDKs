@@ -1,16 +1,16 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target arm64e-apple-macos11.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppleArchive -swift-version 5 -enforce-exclusivity=checked -O -module-name AppleArchive
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target arm64e-apple-macos11.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppleArchive -swift-version 5 -enforce-exclusivity=checked -O -module-name AppleArchive
 @_exported import AppleArchive
 import Compression
 import Swift
 import System
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public struct _AAHeaderTraits : AppleArchive._AAObjectTraits {
   public typealias AAType = AppleArchive.__AAHeader
   public static func aaDestroy(_ object: AppleArchive._AAHeaderTraits.AAType?)
 }
-@_hasMissingDesignatedInitializers @available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public class ArchiveHeader : AppleArchive._AAObjectWrapper<AppleArchive._AAHeaderTraits>, AppleArchive._AAEncodableProtocol {
   required public init()
   public init?(keySet: AppleArchive.ArchiveHeader.FieldKeySet, directory: System.FilePath, path: System.FilePath, flags: AppleArchive.ArchiveFlags)
@@ -18,10 +18,10 @@ public class ArchiveHeader : AppleArchive._AAObjectWrapper<AppleArchive._AAHeade
   public func field(forKey key: AppleArchive.ArchiveHeader.FieldKey) -> AppleArchive.ArchiveHeader.Field?
   required public init?(withAAEncodedData data: Swift.UnsafeBufferPointer<Swift.UInt8>)
   public func withAAEncodedData<R>(_ body: (Swift.UnsafeBufferPointer<Swift.UInt8>) throws -> R) rethrows -> R
-  @objc deinit
   override public init(object aaObject: AppleArchive._AAObjectWrapper<AppleArchive._AAHeaderTraits>.AAType, owned aaObjectOwned: Swift.Bool)
+  @objc deinit
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader : Swift.RandomAccessCollection, Swift.MutableCollection {
   public var startIndex: Swift.Int {
     get
@@ -38,11 +38,11 @@ extension ArchiveHeader : Swift.RandomAccessCollection, Swift.MutableCollection 
   public func append(_ newElement: AppleArchive.ArchiveHeader.Field)
   public typealias Element = AppleArchive.ArchiveHeader.Field
   public typealias Index = Swift.Int
+  public typealias Indices = Swift.Range<Swift.Int>
   public typealias Iterator = Swift.IndexingIterator<AppleArchive.ArchiveHeader>
   public typealias SubSequence = Swift.Slice<AppleArchive.ArchiveHeader>
-  public typealias Indices = Swift.Range<Swift.Int>
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader {
   public struct _FieldTypes : Swift.RandomAccessCollection {
     public let base: AppleArchive.ArchiveHeader
@@ -57,9 +57,9 @@ extension ArchiveHeader {
     }
     public typealias Element = AppleArchive.ArchiveHeader.FieldType
     public typealias Index = Swift.Int
+    public typealias Indices = Swift.Range<Swift.Int>
     public typealias Iterator = Swift.IndexingIterator<AppleArchive.ArchiveHeader._FieldTypes>
     public typealias SubSequence = Swift.Slice<AppleArchive.ArchiveHeader._FieldTypes>
-    public typealias Indices = Swift.Range<Swift.Int>
   }
   public struct _FieldKeys : Swift.RandomAccessCollection {
     public let base: AppleArchive.ArchiveHeader
@@ -75,9 +75,9 @@ extension ArchiveHeader {
     public func _customIndexOfEquatableElement(_ element: AppleArchive.ArchiveHeader.FieldKey) -> Swift.Int??
     public typealias Element = AppleArchive.ArchiveHeader.FieldKey
     public typealias Index = Swift.Int
+    public typealias Indices = Swift.Range<Swift.Int>
     public typealias Iterator = Swift.IndexingIterator<AppleArchive.ArchiveHeader._FieldKeys>
     public typealias SubSequence = Swift.Slice<AppleArchive.ArchiveHeader._FieldKeys>
-    public typealias Indices = Swift.Range<Swift.Int>
   }
   public var fieldType: AppleArchive.ArchiveHeader._FieldTypes {
     get
@@ -86,7 +86,7 @@ extension ArchiveHeader {
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader {
   public var entryType: AppleArchive.ArchiveHeader.EntryType? {
     get
@@ -95,17 +95,17 @@ extension ArchiveHeader {
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public enum ArchiveError : Swift.Hashable, Swift.Error {
   case ioError
   case invalidValue
   public static func == (a: AppleArchive.ArchiveError, b: AppleArchive.ArchiveError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader {
   public struct EntryMessage : Swift.Equatable, Swift.Hashable, Swift.RawRepresentable, Swift.CustomStringConvertible {
     public static let searchPruneDirectory: AppleArchive.ArchiveHeader.EntryMessage
@@ -130,7 +130,7 @@ extension ArchiveHeader {
     public typealias RawValue = Swift.UInt32
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader {
   public enum Field {
     case flag(key: AppleArchive.ArchiveHeader.FieldKey)
@@ -147,7 +147,7 @@ extension ArchiveHeader {
     }
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public protocol ArchiveStreamProtocol {
   func writeHeader(_ header: AppleArchive.ArchiveHeader) throws
   func writeBlob(key: AppleArchive.ArchiveHeader.FieldKey, from buffer: Swift.UnsafeRawBufferPointer) throws
@@ -156,7 +156,7 @@ public protocol ArchiveStreamProtocol {
   func cancel()
   func close() throws
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader {
   @_hasMissingDesignatedInitializers public class EntryAttributes {
     public var uid: Swift.UInt32? {
@@ -190,7 +190,7 @@ extension ArchiveHeader {
     @objc deinit
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader {
   public enum EntryFilterData {
     case header(AppleArchive.ArchiveHeader)
@@ -202,7 +202,7 @@ extension ArchiveHeader {
     @objc deinit
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public struct ArchiveHash : Swift.Equatable, Swift.Hashable, Swift.RawRepresentable, Swift.CustomStringConvertible {
   public static let crc32: AppleArchive.ArchiveHash
   public static let sha1: AppleArchive.ArchiveHash
@@ -220,7 +220,7 @@ public struct ArchiveHash : Swift.Equatable, Swift.Hashable, Swift.RawRepresenta
   }
   public typealias RawValue = Swift.UInt32
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader {
   public struct EntryMessageStatus : Swift.Equatable, Swift.Hashable, Swift.RawRepresentable, Swift.CustomStringConvertible {
     public static let ok: AppleArchive.ArchiveHeader.EntryMessageStatus
@@ -234,7 +234,7 @@ extension ArchiveHeader {
     public typealias RawValue = Swift.Int32
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveStream {
   public static func withEncodeStream<E>(writingTo stream: AppleArchive.ArchiveByteStream, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0, _ body: (AppleArchive.ArchiveStream) throws -> E) throws -> E
   public static func withDecodeStream<E>(readingFrom stream: AppleArchive.ArchiveByteStream, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0, _ body: (AppleArchive.ArchiveStream) throws -> E) throws -> E
@@ -242,7 +242,7 @@ extension ArchiveStream {
   public static func withConvertStream<E>(writingTo stream: AppleArchive.ArchiveStream, insertKeySet: AppleArchive.ArchiveHeader.FieldKeySet, removeKeySet: AppleArchive.ArchiveHeader.FieldKeySet, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0, _ body: (AppleArchive.ArchiveStream) throws -> E) throws -> E
   public static func withStream<C, E>(wrapping instance: C, _ body: (AppleArchive.ArchiveStream) throws -> E) throws -> E where C : AnyObject, C : AppleArchive.ArchiveStreamProtocol
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public struct ArchiveCompression : Swift.Equatable, Swift.Hashable, Swift.RawRepresentable, Swift.CustomStringConvertible {
   public static let none: AppleArchive.ArchiveCompression
   public static let lz4: AppleArchive.ArchiveCompression
@@ -257,7 +257,7 @@ public struct ArchiveCompression : Swift.Equatable, Swift.Hashable, Swift.RawRep
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader {
   public struct EntryType : Swift.Equatable, Swift.Hashable, Swift.RawRepresentable, Swift.CustomStringConvertible {
     public static let regularFile: AppleArchive.ArchiveHeader.EntryType
@@ -279,12 +279,12 @@ extension ArchiveHeader {
     public typealias RawValue = Swift.UInt32
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public struct _AAEntryXATBlobTraits : AppleArchive._AAObjectTraits {
   public typealias AAType = AppleArchive.__AAEntryXATBlob
   public static func aaDestroy(_ object: AppleArchive._AAEntryXATBlobTraits.AAType?)
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader {
   @_hasMissingDesignatedInitializers public class EntryXATBlob : AppleArchive._AAObjectWrapper<AppleArchive._AAEntryXATBlobTraits>, AppleArchive._AAEncodableProtocol {
     public struct ExtendedAttribute : Swift.CustomStringConvertible, Swift.Equatable, Swift.Hashable {
@@ -292,21 +292,21 @@ extension ArchiveHeader {
         get
       }
       public static func == (a: AppleArchive.ArchiveHeader.EntryXATBlob.ExtendedAttribute, b: AppleArchive.ArchiveHeader.EntryXATBlob.ExtendedAttribute) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
-      public func hash(into hasher: inout Swift.Hasher)
     }
     required public init()
     public init?(directory: System.FilePath, path: System.FilePath, flags: AppleArchive.ArchiveFlags)
     public func apply(directory: System.FilePath, path: System.FilePath, flags: AppleArchive.ArchiveFlags = []) throws
     required public init?(withAAEncodedData data: Swift.UnsafeBufferPointer<Swift.UInt8>)
     public func withAAEncodedData<R>(_ body: (Swift.UnsafeBufferPointer<Swift.UInt8>) throws -> R) rethrows -> R
-    @objc deinit
     override public init(object aaObject: AppleArchive._AAObjectWrapper<AppleArchive._AAEntryXATBlobTraits>.AAType, owned aaObjectOwned: Swift.Bool)
+    @objc deinit
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader.EntryXATBlob : Swift.RandomAccessCollection, Swift.MutableCollection {
   public var startIndex: Swift.Int {
     get
@@ -323,16 +323,16 @@ extension ArchiveHeader.EntryXATBlob : Swift.RandomAccessCollection, Swift.Mutab
   public func append(_ newElement: AppleArchive.ArchiveHeader.EntryXATBlob.ExtendedAttribute)
   public typealias Element = AppleArchive.ArchiveHeader.EntryXATBlob.ExtendedAttribute
   public typealias Index = Swift.Int
+  public typealias Indices = Swift.Range<Swift.Int>
   public typealias Iterator = Swift.IndexingIterator<AppleArchive.ArchiveHeader.EntryXATBlob>
   public typealias SubSequence = Swift.Slice<AppleArchive.ArchiveHeader.EntryXATBlob>
-  public typealias Indices = Swift.Range<Swift.Int>
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public struct _AAByteStreamTraits : AppleArchive._AAObjectTraits {
   public typealias AAType = AppleArchive.__AAByteStream
   public static func aaDestroy(_ object: AppleArchive._AAByteStreamTraits.AAType?)
 }
-@_inheritsConvenienceInitializers @available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@_inheritsConvenienceInitializers @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public class ArchiveByteStream : AppleArchive._AAOptionalObjectWrapper<AppleArchive._AAByteStreamTraits>, AppleArchive.ArchiveByteStreamProtocol {
   public func read(into buffer: Swift.UnsafeMutableRawBufferPointer) throws -> Swift.Int
   public func read(into buffer: Swift.UnsafeMutableRawBufferPointer, atOffset offset: Swift.Int64) throws -> Swift.Int
@@ -341,10 +341,10 @@ public class ArchiveByteStream : AppleArchive._AAOptionalObjectWrapper<AppleArch
   public func seek(toOffset offset: Swift.Int64, relativeTo origin: System.FileDescriptor.SeekOrigin) throws -> Swift.Int64
   public func cancel()
   public func close() throws
-  @objc deinit
   override public init(object aaObject: AppleArchive._AAOptionalObjectWrapper<AppleArchive._AAByteStreamTraits>.AAType?, owned aaObjectOwned: Swift.Bool)
+  @objc deinit
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveByteStream {
   public static func fileStream(path: System.FilePath, mode: System.FileDescriptor.AccessMode, options: System.FileDescriptor.OpenOptions, permissions: System.FilePermissions) -> AppleArchive.ArchiveByteStream?
   public static func fileStream(fd: System.FileDescriptor, automaticClose: Swift.Bool = true) -> AppleArchive.ArchiveByteStream?
@@ -354,11 +354,11 @@ extension ArchiveByteStream {
   public static func randomAccessDecompressionStream(readingFrom compressedStream: AppleArchive.ArchiveByteStream, allocationLimit: Swift.Int = Int.max, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0) -> AppleArchive.ArchiveByteStream?
   public static func sharedBufferPipe(capacity: Swift.Int) -> (output: AppleArchive.ArchiveByteStream, input: AppleArchive.ArchiveByteStream)?
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveByteStream {
   public static func process(readingFrom input: AppleArchive.ArchiveByteStream, writingTo output: AppleArchive.ArchiveByteStream) throws -> Swift.Int64
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader {
   public struct FieldType : Swift.Equatable, Swift.Hashable, Swift.RawRepresentable, Swift.CustomStringConvertible {
     public static let flag: AppleArchive.ArchiveHeader.FieldType
@@ -375,35 +375,35 @@ extension ArchiveHeader {
     public typealias RawValue = Swift.UInt32
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public protocol _AAEncodableProtocol {
   init?(withAAEncodedData data: Swift.UnsafeBufferPointer<Swift.UInt8>)
   func withAAEncodedData<R>(_ body: (Swift.UnsafeBufferPointer<Swift.UInt8>) throws -> R) rethrows -> R
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public protocol _AAObjectTraits {
   associatedtype AAType
   static func aaDestroy(_: Self.AAType?)
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public class _AAObjectWrapper<T> where T : AppleArchive._AAObjectTraits {
   public init(object aaObject: AppleArchive._AAObjectWrapper<T>.AAType, owned aaObjectOwned: Swift.Bool)
   @objc deinit
   public typealias AAType = T.AAType
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public class _AAOptionalObjectWrapper<T> where T : AppleArchive._AAObjectTraits {
   public init(object aaObject: AppleArchive._AAOptionalObjectWrapper<T>.AAType?, owned aaObjectOwned: Swift.Bool)
   @objc deinit
   public typealias AAType = T.AAType
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public class _AAOptionalObjectWrapperWithFilter<T> where T : AppleArchive._AAObjectTraits {
   public init(object aaObject: AppleArchive._AAOptionalObjectWrapperWithFilter<T>.AAType?, owned aaObjectOwned: Swift.Bool, messageProc filter: AppleArchive.ArchiveHeader._EntryFilterWrapper? = nil)
   @objc deinit
   public typealias AAType = T.AAType
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public struct ArchiveFlags : Swift.Hashable, Swift.OptionSet {
   public static let ignoreOperationNotPermitted: AppleArchive.ArchiveFlags
   public static let archiveDeduplicateData: AppleArchive.ArchiveFlags
@@ -414,16 +414,16 @@ public struct ArchiveFlags : Swift.Hashable, Swift.OptionSet {
   public var rawValue: Swift.UInt64
   public init()
   public init(rawValue: Swift.UInt64)
-  public typealias RawValue = Swift.UInt64
-  public typealias Element = AppleArchive.ArchiveFlags
   public typealias ArrayLiteralElement = AppleArchive.ArchiveFlags
+  public typealias Element = AppleArchive.ArchiveFlags
+  public typealias RawValue = Swift.UInt64
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public struct _AAArchiveStreamTraits : AppleArchive._AAObjectTraits {
   public typealias AAType = AppleArchive.__AAArchiveStream
   public static func aaDestroy(_ object: AppleArchive._AAArchiveStreamTraits.AAType?)
 }
-@_inheritsConvenienceInitializers @available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@_inheritsConvenienceInitializers @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public class ArchiveStream : AppleArchive._AAOptionalObjectWrapperWithFilter<AppleArchive._AAArchiveStreamTraits>, AppleArchive.ArchiveStreamProtocol {
   public func writeHeader(_ header: AppleArchive.ArchiveHeader) throws
   public func writeBlob(key: AppleArchive.ArchiveHeader.FieldKey, from buffer: Swift.UnsafeRawBufferPointer) throws
@@ -431,33 +431,33 @@ public class ArchiveStream : AppleArchive._AAOptionalObjectWrapperWithFilter<App
   public func readBlob(key: AppleArchive.ArchiveHeader.FieldKey, into buffer: Swift.UnsafeMutableRawBufferPointer) throws
   public func cancel()
   public func close() throws
-  @objc deinit
   override public init(object aaObject: AppleArchive._AAOptionalObjectWrapperWithFilter<AppleArchive._AAArchiveStreamTraits>.AAType?, owned aaObjectOwned: Swift.Bool, messageProc filter: AppleArchive.ArchiveHeader._EntryFilterWrapper? = super)
+  @objc deinit
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveStream {
   public func writeDirectoryContents(archiveFrom directory: System.FilePath, path: System.FilePath? = nil, keySet: AppleArchive.ArchiveHeader.FieldKeySet, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0) throws
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveStream {
   public static func process(readingFrom input: AppleArchive.ArchiveStream, writingTo output: AppleArchive.ArchiveStream, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0) throws -> Swift.Int
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveStream {
   public static func encodeStream(writingTo stream: AppleArchive.ArchiveByteStream, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0) -> AppleArchive.ArchiveStream?
   public static func decodeStream(readingFrom stream: AppleArchive.ArchiveByteStream, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0) -> AppleArchive.ArchiveStream?
   public static func extractStream(extractingTo directory: System.FilePath, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0) -> AppleArchive.ArchiveStream?
   public static func convertStream(writingTo stream: AppleArchive.ArchiveStream, insertKeySet: AppleArchive.ArchiveHeader.FieldKeySet, removeKeySet: AppleArchive.ArchiveHeader.FieldKeySet, selectUsing filter: AppleArchive.ArchiveHeader.EntryFilter? = nil, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0) -> AppleArchive.ArchiveStream?
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveStream {
   public static func customStream<C>(instance: C) -> AppleArchive.ArchiveStream? where C : AnyObject, C : AppleArchive.ArchiveStreamProtocol
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveByteStream {
   public static func customStream<C>(instance: C) -> AppleArchive.ArchiveByteStream? where C : AnyObject, C : AppleArchive.ArchiveByteStreamProtocol
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveByteStream {
   public static func withFileStream<E>(path: System.FilePath, mode: System.FileDescriptor.AccessMode, options: System.FileDescriptor.OpenOptions, permissions: System.FilePermissions, _ body: (AppleArchive.ArchiveByteStream) throws -> E) throws -> E
   public static func withFileStream<E>(fd: System.FileDescriptor, automaticClose: Swift.Bool = true, _ body: (AppleArchive.ArchiveByteStream) throws -> E) throws -> E
@@ -468,7 +468,7 @@ extension ArchiveByteStream {
   public static func withRandomAccessDecompressionStream<E>(readingFrom compressedStream: AppleArchive.ArchiveByteStream, allocationLimit: Swift.Int = Int.max, flags: AppleArchive.ArchiveFlags = [], threadCount: Swift.Int = 0, _ body: (AppleArchive.ArchiveByteStream) throws -> E) throws -> E
   public static func withStream<C, E>(wrapping instance: C, _ body: (AppleArchive.ArchiveByteStream) throws -> E) throws -> E where C : AnyObject, C : AppleArchive.ArchiveByteStreamProtocol
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader {
   public struct FieldKey : Swift.Equatable, Swift.Hashable, Swift.CustomStringConvertible {
     public init(_ key: Swift.String)
@@ -482,7 +482,7 @@ extension ArchiveHeader {
     }
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public protocol ArchiveByteStreamProtocol {
   func read(into buffer: Swift.UnsafeMutableRawBufferPointer) throws -> Swift.Int
   func read(into buffer: Swift.UnsafeMutableRawBufferPointer, atOffset offset: Swift.Int64) throws -> Swift.Int
@@ -492,22 +492,22 @@ public protocol ArchiveByteStreamProtocol {
   func cancel()
   func close() throws
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public struct _AAFieldKeySetTraits : AppleArchive._AAObjectTraits {
   public typealias AAType = AppleArchive.__AAFieldKeySet
   public static func aaDestroy(_ object: AppleArchive._AAFieldKeySetTraits.AAType?)
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader {
   @_hasMissingDesignatedInitializers final public class FieldKeySet : AppleArchive._AAObjectWrapper<AppleArchive._AAFieldKeySetTraits> {
     required public init()
     public init?(_ s: Swift.String)
     public init(copying s: AppleArchive.ArchiveHeader.FieldKeySet)
-    @objc deinit
     override public init(object aaObject: AppleArchive._AAObjectWrapper<AppleArchive._AAFieldKeySetTraits>.AAType, owned aaObjectOwned: Swift.Bool)
+    @objc deinit
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension ArchiveHeader.FieldKeySet : Swift.CustomStringConvertible, Swift.RandomAccessCollection, Swift.SetAlgebra {
   public typealias Index = Swift.Int
   public typealias Element = AppleArchive.ArchiveHeader.FieldKey
@@ -540,8 +540,8 @@ extension ArchiveHeader.FieldKeySet : Swift.CustomStringConvertible, Swift.Rando
   final public var description: Swift.String {
     get
   }
-  public typealias SubSequence = Swift.Slice<AppleArchive.ArchiveHeader.FieldKeySet>
-  public typealias Indices = Swift.Range<AppleArchive.ArchiveHeader.FieldKeySet.Index>
   public typealias ArrayLiteralElement = AppleArchive.ArchiveHeader.FieldKeySet.Element
+  public typealias Indices = Swift.Range<AppleArchive.ArchiveHeader.FieldKeySet.Index>
   public typealias Iterator = Swift.IndexingIterator<AppleArchive.ArchiveHeader.FieldKeySet>
+  public typealias SubSequence = Swift.Slice<AppleArchive.ArchiveHeader.FieldKeySet>
 }

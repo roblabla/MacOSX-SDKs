@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CD1E2AD2-D6E2-33C4-B0C8-0EEB92947506
+    value:           32BCA9B6-A1A9-39AA-9702-927F5C9AB69D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D3BB3C25-9F5C-3EB6-981D-B243DCF06FA5
+    value:           9D6308FC-C152-3796-8977-EDCF4508E987
 install-name:    '/System/Library/Frameworks/MapKit.framework/Versions/A/MapKit'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _ImageForShieldDataSourceTypeShouldBeFlipped, _MKAddressDictionaryFromCLPlacemark, 
                        _MKAddressDictionaryFromContactsDictionary, _MKAddressDictionaryFromPostalAddress, 
                        _MKAddressStringForAddressDictionary, _MKAnnotationCalloutInfoDidChangeNotification, 
@@ -169,11 +169,12 @@ exports:
                        _MapKitConfig_SnapshotServiceMaxPixels, _MapKitConfig_SnapshotServicePerProcessSerializationEnabled, 
                        _MapKitConfig_SnapshotServiceQueueWidth, _MapKitConfig_SnapshotterNumberOfRequestsAllowedPerThrottle, 
                        _MapKitConfig_SnapshotterThrottleResetInterval, _MapKitConfig_SpotlightShouldUseStyleAttributes, 
-                       _MapKitConfig_UserLocation_MinAccuracyRadius, _MapKitConfig_UserLocation_MinAccuracyUncertainty, 
-                       _MapKitConfig_WebContentURLBlockingPattern, _MapKitIdiomIsMacCatalyst, 
-                       _MapsButtonETAUpdatedNotification, _MapsExtensionCapabilities, 
-                       __MKBalloonCalloutInnerDiameter, __MKBalloonCalloutInnerDiameterUserLocation, 
-                       __MKIsAlmondApp, __MKIsRunningInExtension, __MKLaunchOptionsFromTimeToLeaveNotificationKey, 
+                       _MapKitConfig_UserConsentState, _MapKitConfig_UserLocation_MinAccuracyRadius, 
+                       _MapKitConfig_UserLocation_MinAccuracyUncertainty, _MapKitConfig_WebContentURLBlockingPattern, 
+                       _MapKitIdiomIsMacCatalyst, _MapsButtonETAUpdatedNotification, 
+                       _MapsExtensionCapabilities, __MKBalloonCalloutInnerDiameter, 
+                       __MKBalloonCalloutInnerDiameterUserLocation, __MKIsAlmondApp, 
+                       __MKIsRunningInExtension, __MKLaunchOptionsFromTimeToLeaveNotificationKey, 
                        __MKLaunchOptionsMapZoomKey, __MKLaunchOptionsPreserveSearchResultsKey, 
                        __MKLaunchOptionsRoutingArrivalDateKey, __MKLaunchOptionsRoutingAvoidHighwaysKey, 
                        __MKLaunchOptionsRoutingAvoidTollsKey, __MKLaunchOptionsSearchAlongRouteKey, 
@@ -198,13 +199,13 @@ exports:
                        _kStackingViewSeparatorHeightMedium, _kStackingViewSeparatorHeightNone, 
                        _kStackingViewSeparatorHeightSmall, _kTransitUIDisplayRefreshTimeInterval, 
                        _kWillShowReportAProblemWindow ]
-    objc-classes:    [ MKAllRouteETAsManager, MKAnnotationView, MKAppImageManager, 
-                       MKAppleMediaServices, MKArtworkDataSourceCache, MKArtworkImageView, 
-                       MKArtworkLabelView, MKAutocompleteAnalyticsProvider, MKBlurBackedControlView, 
-                       MKCalloutView, MKCircle, MKCircleRenderer, MKClipServices, 
-                       MKClusterAnnotation, MKCollectionStorageRefiner, MKCompassButton, 
-                       MKCompassView, MKCustomSeparatorTableViewCell, MKDirections, 
-                       MKDirectionsRequest, MKDirectionsResponse, MKDistanceFormatter, 
+    objc-classes:    [ MKAllRouteETAsManager, MKAnnotatedMapSnapshotter, MKAnnotationView, 
+                       MKAppImageManager, MKAppleMediaServices, MKArtworkDataSourceCache, 
+                       MKArtworkImageView, MKArtworkLabelView, MKAutocompleteAnalyticsProvider, 
+                       MKBlurBackedControlView, MKCalloutView, MKCircle, MKCircleRenderer, 
+                       MKClipServices, MKClusterAnnotation, MKCollectionStorageRefiner, 
+                       MKCompassButton, MKCompassView, MKCustomSeparatorTableViewCell, 
+                       MKDirections, MKDirectionsRequest, MKDirectionsResponse, MKDistanceFormatter, 
                        MKETAProvider, MKETAResponse, MKFontManager, MKGeoJSONDecoder, 
                        MKGeoJSONFeature, MKGeodesicPolyline, MKGradientPolylineRenderer, 
                        MKGroupedPlacesSnapshotter, MKHapticEngine, MKIconManager, 
@@ -226,15 +227,14 @@ exports:
                        MKPlaceActionManager, MKPlaceActivityProvider, MKPlaceCardActionItem, 
                        MKPlaceCardActionsRowView, MKPlaceCardHeaderViewController, 
                        MKPlaceCollectionMapItem, MKPlaceCuratedCollectionRefiner, 
-                       MKPlaceLinkPresentationActivityProvider, MKPlaceLocVCardActivityProvider, 
-                       MKPlaceMapItemActivityProvider, MKPlacePhotosViewController, 
-                       MKPlacePublisherRefiner, MKPlaceReservationRowView, MKPlaceSectionItemView, 
-                       MKPlaceSectionRowView, MKPlaceSectionView, MKPlaceSectionViewController, 
-                       MKPlaceServiceHoursViewController, MKPlaceTextActivityProvider, 
-                       MKPlaceURLActivityProvider, MKPlacemark, MKPointAnnotation, 
-                       MKPointOfInterestFilter, MKPolygon, MKPolygonRenderer, MKPolyline, 
-                       MKPolylineRenderer, MKRatingStringBuilder, MKRoute, MKRouteActivityProvider, 
-                       MKRouteContextBuilder, MKRouteLinkPresentationActivityProvider, 
+                       MKPlaceLinkPresentationActivityProvider, MKPlaceMapItemActivityProvider, 
+                       MKPlacePhotosViewController, MKPlacePublisherRefiner, MKPlaceReservationRowView, 
+                       MKPlaceSectionItemView, MKPlaceSectionRowView, MKPlaceSectionView, 
+                       MKPlaceSectionViewController, MKPlaceServiceHoursViewController, 
+                       MKPlaceTextActivityProvider, MKPlaceURLActivityProvider, MKPlacemark, 
+                       MKPointAnnotation, MKPointOfInterestFilter, MKPolygon, MKPolygonRenderer, 
+                       MKPolyline, MKPolylineRenderer, MKRatingStringBuilder, MKRoute, 
+                       MKRouteActivityProvider, MKRouteContextBuilder, MKRouteLinkPresentationActivityProvider, 
                        MKRouteStep, MKRouteTextActivityProvider, MKRouteURLActivityProvider, 
                        MKScaleView, MKSearchCompletion, MKSearchFoundationResult, 
                        MKServerFormattedString, MKServerFormattedStringParameters, 

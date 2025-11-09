@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8F3B72D0-B408-3D61-A96E-D4F3A6AE3EA9
+    value:           46612212-557A-3D3A-A717-28E8079A5434
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8DD5E9F3-5940-3028-B09D-A943F58D484C
+    value:           749B09E2-D659-37A6-99F6-02EA7F2286B6
 install-name:    '/System/Library/PrivateFrameworks/MFiAuthentication.framework/Versions/A/MFiAuthentication'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

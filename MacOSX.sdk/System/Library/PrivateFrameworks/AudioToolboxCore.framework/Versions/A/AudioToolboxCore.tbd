@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           56821802-07B9-3FA9-AF73-D943BAE0DE57
+    value:           EB4DE2B5-7947-3422-8151-9E1BDA2B3183
   - target:          x86_64-maccatalyst
-    value:           56821802-07B9-3FA9-AF73-D943BAE0DE57
+    value:           EB4DE2B5-7947-3422-8151-9E1BDA2B3183
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           70295FDE-F110-3D9F-B696-D8E4995D2FE4
+    value:           45FB2DDB-679F-3A57-BF43-E819F263C194
   - target:          arm64e-maccatalyst
-    value:           70295FDE-F110-3D9F-B696-D8E4995D2FE4
+    value:           45FB2DDB-679F-3A57-BF43-E819F263C194
 install-name:    '/System/Library/PrivateFrameworks/AudioToolboxCore.framework/Versions/A/AudioToolboxCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

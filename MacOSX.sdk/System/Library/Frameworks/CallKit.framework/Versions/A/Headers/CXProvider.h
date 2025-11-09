@@ -103,6 +103,9 @@ CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(11.0))  API_UNAVAILA
 /// Report that an outgoing call connected. A nil value for `dateConnected` results in the connected date being set to now.
 - (void)reportOutgoingCallWithUUID:(NSUUID *)UUID connectedAtDate:(nullable NSDate *)dateConnected;
 
+/// From within a Notification Service Extension, request the containing application be launched to handle an incoming VoIP call. The application's PKPushRegistryDelegate must handle the push upon launch.
++ (void)reportNewIncomingVoIPPushPayload:(NSDictionary *)dictionaryPayload completion:(nullable void (^)(NSError *_Nullable))completion API_UNAVAILABLE( tvos, watchos, macos) API_AVAILABLE(ios(14.5), macCatalyst(14.5));
+
 /// The receiver's current configuration.
 @property (nonatomic, readwrite, copy) CXProviderConfiguration *configuration;
 

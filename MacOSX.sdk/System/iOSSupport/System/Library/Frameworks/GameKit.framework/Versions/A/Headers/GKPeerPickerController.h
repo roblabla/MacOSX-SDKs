@@ -63,10 +63,7 @@ NS_DEPRECATED_IOS(3_0, 7_0, "Use MCBrowserViewController along with MCBrowserVie
  You must provide a delegate that conforms to the GKPeerPickerControllerDelegate protocol in order to use this class. After the user interface starts, this class notifies your delegate of the user’s actions.
  */
 NS_CLASS_DEPRECATED_IOS(3_0, 7_0, "Use MCBrowserViewController from the MultipeerConnectivity framework") 
-@interface GKPeerPickerController : NSObject {
-@private
-	id _picker;
-}
+@interface GKPeerPickerController : NSObject
 
 /* An integer bit mask that determines what connection types are supported by the application, and displays system-supplied UI as appropriate. 
  

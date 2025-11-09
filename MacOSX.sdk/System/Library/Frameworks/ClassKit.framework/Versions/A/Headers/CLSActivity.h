@@ -2,9 +2,10 @@
 //  CLSActivity.h
 //  ClassKit
 //
-//  Copyright © 2018 - 2019 Apple Inc. All rights reserved.
+//  Copyright © 2018-2020 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <ClassKit/CLSObject.h>
 #import <ClassKit/CLSContext.h>
 #import <ClassKit/CLSActivityItem.h>
@@ -82,6 +83,12 @@ API_AVAILABLE(ios(11.3), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos
  @discussion    Stops or pauses the activity and ends the time being tracked on it.
  */
 - (void)stop;
+
+/*!
+@abstract Deletes all activity items.
+@discussion Convenience method to delete all activity items associated with the current activity.
+*/
+- (void)removeAllActivityItems API_AVAILABLE(ios(14.5), macos(11.3), macCatalyst(14.5)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

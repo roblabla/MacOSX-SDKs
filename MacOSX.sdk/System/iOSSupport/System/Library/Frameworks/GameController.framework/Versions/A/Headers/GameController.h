@@ -7,12 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-#if TARGET_OS_IPHONE
-#import <UIKit/UIViewController.h>
-#else
-#import <AppKit/NSViewController.h>
-#endif
-
 #import <GameController/GCExtern.h>
 #import <GameController/GCColor.h>
 
@@ -24,6 +18,7 @@
 #import <GameController/GCControllerButtonInput.h>
 #import <GameController/GCControllerDirectionPad.h>
 #import <GameController/GCControllerTouchpad.h>
+#import <GameController/GCDualSenseAdaptiveTrigger.h>
 #import <GameController/GCDeviceCursor.h>
 
 #import <GameController/GCMotion.h>
@@ -44,6 +39,7 @@
 
 #import <GameController/GCXboxGamepad.h>
 #import <GameController/GCDualShockGamepad.h>
+#import <GameController/GCDualSenseGamepad.h>
 
 #import <GameController/GCMicroGamepad.h>
 #import <GameController/GCMicroGamepadSnapshot.h>

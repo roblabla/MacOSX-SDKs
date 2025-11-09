@@ -4,21 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AC2752B1-F2AB-375F-89CD-1A667587D9A3
+    value:           C376C97B-D808-3436-A9AE-1F19D0A46318
   - target:          x86_64-maccatalyst
-    value:           AC2752B1-F2AB-375F-89CD-1A667587D9A3
+    value:           C376C97B-D808-3436-A9AE-1F19D0A46318
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A485945-1156-3AB5-A0A6-72B582BDD97F
+    value:           93A1E057-60D2-3ED7-ACA3-04FD3BCBC319
   - target:          arm64e-maccatalyst
-    value:           7A485945-1156-3AB5-A0A6-72B582BDD97F
+    value:           93A1E057-60D2-3ED7-ACA3-04FD3BCBC319
 install-name:    '/usr/lib/swift/libswiftObjectiveC.dylib'
+current-version: 3
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos ]
+    symbols:         [ '_$s10ObjectiveC8ObjCBoolV6_values4Int8VvM', '_$s10ObjectiveC8ObjCBoolV6_values4Int8Vvg', 
+                       '_$s10ObjectiveC8ObjCBoolV6_values4Int8VvpMV', '_$s10ObjectiveC8ObjCBoolV6_values4Int8Vvs' ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftObjectiveC.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftObjectiveC.dylib', 
@@ -33,8 +37,6 @@ exports:
                        '_$s10ObjectiveC6NSZoneVMn', '_$s10ObjectiveC6NSZoneVN', '_$s10ObjectiveC8ObjCBoolV11descriptionSSvg', 
                        '_$s10ObjectiveC8ObjCBoolV11descriptionSSvpMV', '_$s10ObjectiveC8ObjCBoolV12customMirrors0E0Vvg', 
                        '_$s10ObjectiveC8ObjCBoolV12customMirrors0E0VvpMV', '_$s10ObjectiveC8ObjCBoolV14booleanLiteralACSb_tcfC', 
-                       '_$s10ObjectiveC8ObjCBoolV6_values4Int8VvM', '_$s10ObjectiveC8ObjCBoolV6_values4Int8Vvg', 
-                       '_$s10ObjectiveC8ObjCBoolV6_values4Int8VvpMV', '_$s10ObjectiveC8ObjCBoolV6_values4Int8Vvs', 
                        '_$s10ObjectiveC8ObjCBoolV9boolValueSbvg', '_$s10ObjectiveC8ObjCBoolV9boolValueSbvpMV', 
                        '_$s10ObjectiveC8ObjCBoolVMa', '_$s10ObjectiveC8ObjCBoolVMn', 
                        '_$s10ObjectiveC8ObjCBoolVN', '_$s10ObjectiveC8ObjCBoolVs17CustomReflectableAAMc', 
@@ -60,4 +62,7 @@ exports:
                        '_$sSo8NSObjectC10ObjectiveCE9hashValueSivg', '_$sSo8NSObjectC10ObjectiveCE9hashValueSivpMV', 
                        '_$sSo8NSObjectCSH10ObjectiveCMc', '_$sSo8NSObjectCSQ10ObjectiveCMc', 
                        '_$sSo8NSObjectCs7CVarArg10ObjectiveCMc', '__swift_FORCE_LOAD_$_swiftObjectiveC' ]
+  - targets:         [ arm64e-macos, arm64-macos ]
+    symbols:         [ '_$s10ObjectiveC8ObjCBoolV6_valueSbvM', '_$s10ObjectiveC8ObjCBoolV6_valueSbvg', 
+                       '_$s10ObjectiveC8ObjCBoolV6_valueSbvpMV', '_$s10ObjectiveC8ObjCBoolV6_valueSbvs' ]
 ...

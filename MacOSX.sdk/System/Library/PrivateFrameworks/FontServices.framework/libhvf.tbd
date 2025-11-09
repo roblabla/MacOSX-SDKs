@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CAD78803-0F56-316E-A7F1-D2BF26CA2DD6
+    value:           E7B0CA22-7546-3680-A4E6-4A8E98EAE7D2
   - target:          x86_64-maccatalyst
-    value:           CAD78803-0F56-316E-A7F1-D2BF26CA2DD6
+    value:           E7B0CA22-7546-3680-A4E6-4A8E98EAE7D2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           145974E6-1A9C-3481-A55E-529E84F0CD94
+    value:           989A748E-8062-37A4-9ED5-E2E4D1C18BA2
   - target:          arm64e-maccatalyst
-    value:           145974E6-1A9C-3481-A55E-529E84F0CD94
+    value:           989A748E-8062-37A4-9ED5-E2E4D1C18BA2
 install-name:    '/System/Library/PrivateFrameworks/FontServices.framework/libhvf.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

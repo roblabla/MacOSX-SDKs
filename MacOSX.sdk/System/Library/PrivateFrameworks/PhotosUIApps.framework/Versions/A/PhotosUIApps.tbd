@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4E6C2E22-2966-33C5-A9AF-ADEB14DD9661
+    value:           415BF7A3-AF98-3C27-AB9A-72581A75C551
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           92540BFD-9470-3119-B2F4-925EB38FE63C
+    value:           39A3CC12-393F-3D68-A8A0-646F10089A71
 install-name:    '/System/Library/PrivateFrameworks/PhotosUIApps.framework/Versions/A/PhotosUIApps'
-current-version: 321.0.102
+current-version: 340.0.220
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

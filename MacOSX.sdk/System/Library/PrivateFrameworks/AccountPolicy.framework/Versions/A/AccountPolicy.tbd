@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3D410C8D-5E61-37F4-8781-247D37BD2D23
+    value:           BE3AE39D-63E7-39D7-A30E-781D7FFA771F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           642355FB-BB86-3C5C-B3CD-A1A62E557CD7
+    value:           F5613C04-A699-3392-B5E9-E73B2F4D3D6F
 install-name:    '/System/Library/PrivateFrameworks/AccountPolicy.framework/Versions/A/AccountPolicy'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -51,11 +51,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AB085CF6-14D1-3BCC-8A50-BF5461849EB6
+    value:           24C66DB3-F1C1-3D24-8EED-3C8EDED3CDD1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A04C6A05-12C5-3666-8FBF-E7ECC5B296C3
+    value:           9613D6BB-90A5-3426-8DC0-1C391F39E1F0
 install-name:    '/System/Library/PrivateFrameworks/AccountPolicy.framework/Frameworks/CFAccountPolicy.framework/Versions/A/CFAccountPolicy'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

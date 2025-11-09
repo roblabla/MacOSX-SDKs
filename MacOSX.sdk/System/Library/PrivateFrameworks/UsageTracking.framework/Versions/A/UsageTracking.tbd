@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C351AA96-6E77-3F45-AA92-8C61B30DECAA
+    value:           51258597-7430-3940-8146-544229BD97E0
   - target:          x86_64-maccatalyst
-    value:           C351AA96-6E77-3F45-AA92-8C61B30DECAA
+    value:           51258597-7430-3940-8146-544229BD97E0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           91C8E076-ACB5-3267-8EB4-405E5B99B438
+    value:           F82D810F-743D-317F-8A55-B6EA16D2BAD2
   - target:          arm64e-maccatalyst
-    value:           91C8E076-ACB5-3267-8EB4-405E5B99B438
+    value:           F82D810F-743D-317F-8A55-B6EA16D2BAD2
 install-name:    '/System/Library/PrivateFrameworks/UsageTracking.framework/Versions/A/UsageTracking'
 current-version: 145
 allowable-clients:

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           477D3C0E-7B50-3427-83AF-AC294E100956
+    value:           EEFAB06E-B1F0-3FCA-9BD4-03B0D1471B90
   - target:          x86_64-maccatalyst
-    value:           477D3C0E-7B50-3427-83AF-AC294E100956
+    value:           EEFAB06E-B1F0-3FCA-9BD4-03B0D1471B90
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           225E8AE5-21EA-3000-B74B-2555E75F7157
+    value:           1D7693D3-18F1-3930-9697-433C7B7DC07B
   - target:          arm64e-maccatalyst
-    value:           225E8AE5-21EA-3000-B74B-2555E75F7157
+    value:           1D7693D3-18F1-3930-9697-433C7B7DC07B
 install-name:    '/usr/lib/swift/libswiftAVFoundation.dylib'
-current-version: 2000.5.4
+current-version: 2010.31
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

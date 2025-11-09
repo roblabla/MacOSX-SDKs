@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           78BD3E93-B547-3EC1-8182-AAC7E817C6DA
+    value:           79F8B75E-0A76-3CFE-B98E-8109458CBA08
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           E02824BF-394D-33FB-AEA1-FD534CC869D6
+    value:           9F1FC8A5-1BF2-3CAA-9F6B-E78ECF999074
 install-name:    '/System/iOSSupport/System/Library/Frameworks/CarPlay.framework/Versions/A/CarPlay'
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _CPButtonMaximumImageSize, _CPColorMeetsContrastRequirement, 
                        _CPContrastRatioForColors, _CPContrastingColorForColor, _CPCurrentProcessHasAudioEntitlement, 
                        _CPCurrentProcessHasChargingEntitlement, _CPCurrentProcessHasCommunicationEntitlement, 

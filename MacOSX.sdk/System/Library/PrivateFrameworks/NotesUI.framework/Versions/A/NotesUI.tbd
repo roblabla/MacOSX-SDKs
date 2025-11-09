@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8F933496-4A55-33F6-ACF7-B2A06FB73E2A
+    value:           6C20F4F0-B7C8-3473-90EA-C8CA1C0EAA37
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AE134168-F6AB-343B-9E8C-967A9F285083
+    value:           71FA9D04-D813-3916-B96F-D682B4917F8A
 install-name:    '/System/Library/PrivateFrameworks/NotesUI.framework/Versions/A/NotesUI'
-current-version: 1800
+current-version: 1851
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ MacUIFrameworkTests, Notes, NotesAccountNotificationPlugin, 
@@ -82,7 +82,8 @@ exports:
                        _kNoteWebViewFaderViewInset, _kNoteWebViewMinimumHorizontalMargin, 
                        _kNoteWebViewMinimumVerticalMargin, _kNoteWebViewUpdateContentDelay, 
                        _sDefaultFontSize ]
-    objc-classes:    [ ICAccessibility, ICAccessibilityCustomizableTextFieldCell, 
+    objc-classes:    [ ICAbstractAttachmentViewController, ICAbstractTextAttachment, 
+                       ICAccessibility, ICAccessibilityCustomizableTextFieldCell, 
                        ICAddAttachmentsManager, ICAddAttachmentsManagerAttachmentInfo, 
                        ICArcLayer, ICAttachmentBrickAudioPlayerViewV2, ICAttachmentBrickFrostedView, 
                        ICAttachmentBrickImageViewV2, ICAttachmentBrickInfo, ICAttachmentBrickLabelV2, 
@@ -104,10 +105,10 @@ exports:
                        ICEvernoteResource, ICExportPanel, ICFlippedView, ICFullDeviceInfo, 
                        ICGalleryAttachmentUtilities, ICGalleryTextAttachment, ICHTMLConverterClient, 
                        ICImageAndMovieThumbnailView, ICImageCache, ICImageTextAttachment, 
-                       ICIndexHandwritingOperation, ICInlineDrawingChangeCoalescer, 
-                       ICInlineDrawingTextAttachment, ICLabel, ICLegacyAttachment, 
-                       ICLegacyContentUtilities, ICLegacyNoteUtilities, ICLoadingPieLayer, 
-                       ICLongRunningTaskController, ICMDatePickerDebugWindowController, 
+                       ICIndexHandwritingOperation, ICInlineAttachmentView, ICInlineDrawingChangeCoalescer, 
+                       ICInlineDrawingTextAttachment, ICInlineTextAttachment, ICLabel, 
+                       ICLegacyAttachment, ICLegacyContentUtilities, ICLegacyNoteUtilities, 
+                       ICLoadingPieLayer, ICLongRunningTaskController, ICMDatePickerDebugWindowController, 
                        ICMFontManager, ICMProgressWindowController, ICMZoomController, 
                        ICMediaTime, ICMediaTimeFormatter, ICMediaTimeLabel, ICMigrationDeviceInfo, 
                        ICMinimalDeviceInfo, ICMovieTextAttachment, ICNoteEditorIconImageView, 

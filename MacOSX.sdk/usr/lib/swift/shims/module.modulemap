@@ -6,8 +6,10 @@ module SwiftShims {
   header "HeapObject.h"
   header "KeyPath.h"
   header "LibcShims.h"
+  header "MetadataSections.h"
   header "Random.h"
   header "RefCount.h"
+  header "Reflection.h"
   header "RuntimeShims.h"
   header "RuntimeStubs.h"
   header "SwiftStdbool.h"
@@ -86,4 +88,8 @@ module _SwiftCoreMediaOverlayShims {
 
 module _SwiftCoreNFCOverlayShims {
   header "CoreNFCOverlayShims.h"
+}
+
+module _SwiftConcurrencyShims {
+  header "_SwiftConcurrency.h"
 }

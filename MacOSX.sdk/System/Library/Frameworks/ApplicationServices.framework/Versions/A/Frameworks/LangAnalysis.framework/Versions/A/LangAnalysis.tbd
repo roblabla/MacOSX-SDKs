@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           120945D9-B74D-3A6F-B160-2678E6B6481D
+    value:           27988FBF-93AC-375C-B4B3-3179C3BD6715
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           10918D61-B681-339C-A380-89F3B66D7232
+    value:           EDC75306-A4BA-3BF7-870E-EA18B27AAF3D
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LangAnalysis.framework/Versions/A/LangAnalysis'
 current-version: 254
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _DCMAddFoundRecordToIteratorAM, _DCMAddRecord, _DCMCloseDictionary, 
                        _DCMCompactDictionary, _DCMCopyParametersFromData, _DCMCountObjectIterator, 
                        _DCMCountRecord, _DCMCountRecordIterator, _DCMCreateAccessMethodIterator, 

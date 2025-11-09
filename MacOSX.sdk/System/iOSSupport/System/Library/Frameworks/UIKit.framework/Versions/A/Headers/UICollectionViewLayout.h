@@ -12,6 +12,7 @@
 #import <QuartzCore/CATransform3D.h>
 #import <UIKit/UIDynamicBehavior.h>
 #import <UIKit/UIInterface.h>
+#import <UIKit/UICollectionViewUpdateItem.h>
 
 // The UICollectionViewLayout class is provided as an abstract class for subclassing to define custom collection layouts.
 // Defining a custom layout is an advanced operation intended for applications with complex needs.
@@ -55,22 +56,6 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionViewLayoutAttributes
 + (instancetype)layoutAttributesForCellWithIndexPath:(NSIndexPath *)indexPath;
 + (instancetype)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind withIndexPath:(NSIndexPath *)indexPath;
 + (instancetype)layoutAttributesForDecorationViewOfKind:(NSString *)decorationViewKind withIndexPath:(NSIndexPath *)indexPath;
-
-@end
-
-typedef NS_ENUM(NSInteger, UICollectionUpdateAction) {
-    UICollectionUpdateActionInsert,
-    UICollectionUpdateActionDelete,
-    UICollectionUpdateActionReload,
-    UICollectionUpdateActionMove,
-    UICollectionUpdateActionNone
-};
-
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) @interface UICollectionViewUpdateItem : NSObject
-
-@property (nonatomic, readonly, nullable) NSIndexPath *indexPathBeforeUpdate; // nil for UICollectionUpdateActionInsert
-@property (nonatomic, readonly, nullable) NSIndexPath *indexPathAfterUpdate; // nil for UICollectionUpdateActionDelete
-@property (nonatomic, readonly) UICollectionUpdateAction updateAction;
 
 @end
 

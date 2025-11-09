@@ -75,6 +75,7 @@
 #include <sys/appleapiopts.h>
 #include <sys/cdefs.h>
 #include <sys/types.h> /* u_quad_t */
+#include <TargetConditionals.h>
 
 typedef u_quad_t so_gen_t;
 
@@ -125,7 +126,7 @@ struct  xsocket {
 	uid_t                   so_uid;         /* XXX */
 };
 
-#if XNU_TARGET_OS_OSX || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR)
+#if XNU_TARGET_OS_OSX || KERNEL || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR)
 struct  xsocket64 {
 	u_int32_t               xso_len;        /* length of this structure */
 	u_int64_t               xso_so;         /* makes a convenient handle */
@@ -147,7 +148,7 @@ struct  xsocket64 {
 	struct xsockbuf         so_snd;
 	uid_t                   so_uid;         /* XXX */
 };
-#endif /* XNU_TARGET_OS_OSX || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR) */
+#endif /* XNU_TARGET_OS_OSX || KERNEL || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR) */
 
 
 #pragma pack()

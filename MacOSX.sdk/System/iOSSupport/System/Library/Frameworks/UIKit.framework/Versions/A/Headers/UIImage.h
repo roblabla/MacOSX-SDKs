@@ -245,11 +245,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIImage : NSObject <NSSecureCodi
 @property (nullable, nonatomic, copy, readonly) UIImageSymbolConfiguration *symbolConfiguration API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0));
 
 /*
- * This is a convience method to apply another symbol configuration over an existing one.
- * If the image doesn't have a symbolconfiguration, it will just merge the traits of the existing
- * with the new one (where the new traits override the old traits). The symbol in
+ * This is a convenience method to apply another symbol configuration over an existing one.
+ * If the image doesn't have a symbol configuration, it will just merge the traits of the existing
+ * with the new one (where the new traits override the old traits).
  *
- * Create a new image by applying the specified configuration over the existing  one.
+ * Create a new image by applying the specified configuration over the existing one.
  * This only works if the configuration already has a configuration (i.e. is a symbol image).
  * The image will be configured with a combination of both configurations.
  *
@@ -268,7 +268,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIImage : NSObject <NSSecureCodi
 @interface UIImage (PreconfiguredSystemImages)
 
 @property (class, readonly, strong) UIImage *actionsImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)); // currently: white ellipsis on tinted filled circle
-@property (class, readonly, strong) UIImage *addImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)); // currently: white + on green filled cirlce
+@property (class, readonly, strong) UIImage *addImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)); // currently: white + on green filled circle
 @property (class, readonly, strong) UIImage *removeImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)); // currently: white - on red filled circle
 @property (class, readonly, strong) UIImage *checkmarkImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)); // currently: white ✓ on tinted filled circle
 @property (class, readonly, strong) UIImage *strokedCheckmarkImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)); // currently: white ✓ on tinted filled and white stroked circle

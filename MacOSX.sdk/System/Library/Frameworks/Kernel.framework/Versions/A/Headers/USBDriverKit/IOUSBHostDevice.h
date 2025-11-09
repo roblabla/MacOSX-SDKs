@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.60.3) generated from IOUSBHostDevice.iig */
+/* iig(DriverKit-107.100.6) generated from IOUSBHostDevice.iig */
 
 /* IOUSBHostDevice.iig:1-38 */
 /*

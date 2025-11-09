@@ -5,8 +5,6 @@
 
 #import <TargetConditionals.h>
 
-    #define PDFKIT_PLATFORM_IOS
-
 #ifndef PDFKIT_EXTERN
     #ifdef __cplusplus
         #define PDFKIT_EXTERN extern "C" __attribute__((visibility ("default")))
@@ -36,10 +34,60 @@
     NS_ENUM_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep)
 
 
+#if (TARGET_OS_MAC && !(TARGET_OS_SIMULATOR || TARGET_OS_IPHONE || TARGET_OS_MACCATALYST))
+
+// OSX Headers
+#import <Cocoa/Cocoa.h>
+#import <AppKit/NSAccessibilityProtocols.h>
+
+#define PDFKIT_PLATFORM_OSX
+
+// AppKit types
+#define PDFKitPlatformView                                      NSView
+#define PDFKitPlatformViewController                            NSViewController
+#define PDFKitPlatformScrollView                                NSScrollView
+#define PDFKitPlatformColor                                     NSColor
+#define PDFKitPlatformBezierPath                                NSBezierPath
+#define PDFKitPlatformBezierPathElement                         NSBezierPathElement
+#define PDFKitPlatformImage                                     NSImage
+#define PDFKitPlatformImageView                                 NSImageView
+#define PDFKitPlatformEvent                                     NSEvent
+#define PDFKitPlatformFont                                      NSFont
+#define PDFKitPlatformColor                                     NSColor
+#define PDFKitPlatformControl                                   NSControl
+#define PDFKitPlatformTextField                                 NSTextField
+#define PDFKitPlatformTextView                                  NSTextView
+#define PDFKitPlatformTextViewDelegate                          NSTextViewDelegate
+#define PDFKitPlatformChoiceWidgetComboBoxView                  NSPopUpButton
+#define PDFKitPlatformChoiceWidgetListView                      NSTableView
+#define PDFKitPlatformButton                                    NSButton
+#define PDFKitPlatformButtonCell                                NSButtonCell
+#define PDFKitPlatformAccessibilityElement                      NSAccessibilityElement
+#define PDFKitResponder                                         NSResponder
+
+// Geometry types
+#define PDFPoint                                                NSPoint
+#define PDFRect                                                 NSRect
+#define PDFSize                                                 NSSize
+#define PDFEdgeInsets                                           NSEdgeInsets
+
+// Constants
+#define PDFPointZero                                            NSZeroPoint
+#define PDFSizeZero                                             NSZeroSize
+#define PDFRectZero                                             NSZeroRect
+#define PDFEdgeInsetsZero                                       NSEdgeInsetsZero
+
+#elif (TARGET_OS_SIMULATOR || TARGET_OS_IPHONE || TARGET_OS_MACCATALYST)
 
 // iOS Headers
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
+#define PDFKIT_PLATFORM_IOS
+
+#if TARGET_OS_MACCATALYST
+    #define PDFKIT_PLATFORM_MACCATALYST
+#endif
 
 // UIKit types
 #define PDFKitPlatformView                                      UIView
@@ -76,4 +124,9 @@
 #define PDFRectZero                                             CGRectZero
 #define PDFEdgeInsetsZero                                       UIEdgeInsetsZero
 
+#else
+
+#error "Failure: PDFKit unsupported platform"
+
+#endif
 

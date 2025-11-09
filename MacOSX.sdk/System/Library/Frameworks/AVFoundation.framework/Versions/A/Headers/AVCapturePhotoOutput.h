@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
  
     AVCapturePhotoOutput implicitly supports wide color photo capture, following the activeColorSpace of the source AVCaptureDevice. If the source device's activeColorSpace is AVCaptureColorSpace_P3_D65, photos are encoded with wide color information, unless you've specified an output format of '420v', which does not support wide color.
  */
-API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCapturePhotoOutput : AVCaptureOutput
 {
 @private
@@ -171,7 +171,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
 	The AVCapturePhotoSettings appleProRAWEnabled property may only be set to YES if this property returns YES. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isAppleProRAWSupported) BOOL appleProRAWSupported API_AVAILABLE(ios(14.3)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, readonly, getter=isAppleProRAWSupported) BOOL appleProRAWSupported API_AVAILABLE(ios(14.3), macCatalyst(14.3)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property appleProRAWEnabled
@@ -183,7 +183,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  
     Enabling this property requires a lengthy reconfiguration of the capture render pipeline, so you should set this property to YES before calling -[AVCaptureSession startRunning].
  */
-@property(nonatomic, getter=isAppleProRAWEnabled) BOOL appleProRAWEnabled API_AVAILABLE(ios(14.3)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, getter=isAppleProRAWEnabled) BOOL appleProRAWEnabled API_AVAILABLE(ios(14.3), macCatalyst(14.3)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @method isBayerRAWPixelFormat:
@@ -193,7 +193,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     May be used to distinguish Bayer RAW from Apple ProRAW pixel formats in -availableRawPhotoPixelFormatTypes once appleProRAWEnabled has been set to YES.
  */
-+ (BOOL)isBayerRAWPixelFormat:(OSType)pixelFormat API_AVAILABLE(ios(14.3)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
++ (BOOL)isBayerRAWPixelFormat:(OSType)pixelFormat API_AVAILABLE(ios(14.3), macCatalyst(14.3)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @method isAppleProRAWPixelFormat:
@@ -205,7 +205,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  
     See appleProRAWEnabled for more information on Apple ProRAW.
  */
-+ (BOOL)isAppleProRAWPixelFormat:(OSType)pixelFormat API_AVAILABLE(ios(14.3)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
++ (BOOL)isAppleProRAWPixelFormat:(OSType)pixelFormat API_AVAILABLE(ios(14.3), macCatalyst(14.3)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property availableRawPhotoPixelFormatTypes
@@ -225,7 +225,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     If you wish to capture a photo that is formatted for a particular file container, such as HEIF, you must ensure that the fileType you desire is present in the receiver's availablePhotoFileTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no file types are available. This property is key-value observable.
  */
-@property(nonatomic, readonly) NSArray<AVFileType> *availablePhotoFileTypes API_AVAILABLE(ios(11.0));
+@property(nonatomic, readonly) NSArray<AVFileType> *availablePhotoFileTypes API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property availableRawPhotoFileTypes
@@ -235,7 +235,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     If you wish to capture a RAW photo that is formatted for a particular file container, such as DNG, you must ensure that the fileType you desire is present in the receiver's availableRawPhotoFileTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no file types are available. This property is key-value observable.
  */
-@property(nonatomic, readonly) NSArray<AVFileType> *availableRawPhotoFileTypes API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) NSArray<AVFileType> *availableRawPhotoFileTypes API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @method supportedPhotoPixelFormatTypesForFileType:
@@ -250,7 +250,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     If you wish to capture a photo for storage in a particular file container, such as TIFF, you must ensure that the photo pixel format type you request is valid for that file type. If no pixel format types are supported for a given fileType, an empty array is returned. If you've not yet added your receiver to an AVCaptureSession with a video source, no pixel format types are supported.
  */
-- (NSArray<NSNumber *> *)supportedPhotoPixelFormatTypesForFileType:(AVFileType)fileType API_AVAILABLE(ios(11.0));
+- (NSArray<NSNumber *> *)supportedPhotoPixelFormatTypesForFileType:(AVFileType)fileType API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method supportedPhotoCodecTypesForFileType:
@@ -265,7 +265,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     If you wish to capture a photo for storage in a particular file container, such as HEIF, you must ensure that the photo codec type you request is valid for that file type. If no codec types are supported for a given fileType, an empty array is returned. If you've not yet added your receiver to an AVCaptureSession with a video source, no codec types are supported.
  */
-- (NSArray<AVVideoCodecType> *)supportedPhotoCodecTypesForFileType:(AVFileType)fileType API_AVAILABLE(ios(11.0));
+- (NSArray<AVVideoCodecType> *)supportedPhotoCodecTypesForFileType:(AVFileType)fileType API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method supportedRawPhotoPixelFormatTypesForFileType:
@@ -280,7 +280,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     If you wish to capture a photo for storage in a particular file container, such as DNG, you must ensure that the RAW pixel format type you request is valid for that file type. If no RAW pixel format types are supported for a given fileType, an empty array is returned. If you've not yet added your receiver to an AVCaptureSession with a video source, no pixel format types are supported.
  */
-- (NSArray<NSNumber *> *)supportedRawPhotoPixelFormatTypesForFileType:(AVFileType)fileType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+- (NSArray<NSNumber *> *)supportedRawPhotoPixelFormatTypesForFileType:(AVFileType)fileType API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @enum AVCapturePhotoQualityPrioritization
@@ -298,7 +298,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
     AVCapturePhotoQualityPrioritizationSpeed    = 1,
 	AVCapturePhotoQualityPrioritizationBalanced = 2,
 	AVCapturePhotoQualityPrioritizationQuality  = 3,
-} API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+} API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property maxPhotoQualityPrioritization
@@ -310,7 +310,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  
     Changing the maxPhotoQualityPrioritization while the session is running can result in a lengthy rebuild of the session in which video preview is disrupted.
  */
-@property(nonatomic) AVCapturePhotoQualityPrioritization maxPhotoQualityPrioritization API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic) AVCapturePhotoQualityPrioritization maxPhotoQualityPrioritization API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property stillImageStabilizationSupported
@@ -322,7 +322,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  
     As of iOS 13 hardware, the AVCapturePhotoOutput is capable of applying a variety of multi-image fusion techniques to improve photo quality (reduce noise, preserve detail in low light, freeze motion, etc), all of which have been previously lumped under the stillImageStabilization moniker. This property should no longer be used as it no longer provides meaningful information about the techniques used to improve quality in a photo capture. Instead, you should use -maxPhotoQualityPrioritization to indicate the highest quality prioritization level you might request in a photo capture, understanding that the higher the quality, the longer the potential wait. You may also use AVCapturePhotoSettings' photoQualityPrioritization property to specify a prioritization level for a particular photo capture, and then query the AVCaptureResolvedPhotoSettings photoProcessingTimeRange property to find out how long it might take to receive the resulting photo in your delegate callback.
  */
-@property(nonatomic, readonly, getter=isStillImageStabilizationSupported) BOOL stillImageStabilizationSupported API_DEPRECATED_WITH_REPLACEMENT("maxPhotoQualityPrioritization", ios(10.0, 13.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isStillImageStabilizationSupported) BOOL stillImageStabilizationSupported API_DEPRECATED_WITH_REPLACEMENT("maxPhotoQualityPrioritization", ios(10.0, 13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @property isStillImageStabilizationScene
@@ -334,7 +334,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  
     As of iOS 13 hardware, the AVCapturePhotoOutput is capable of applying a variety of multi-image fusion techniques to improve photo quality (reduce noise, preserve detail in low light, freeze motion, etc), all of which have been previously lumped under the stillImageStabilization moniker. This property should no longer be used as it no longer provides meaningful information about the techniques used to improve quality in a photo capture. Instead, you should use -maxPhotoQualityPrioritization to indicate the highest quality prioritization level you might request in a photo capture, understanding that the higher the quality, the longer the potential wait. You may also use AVCapturePhotoSettings' photoQualityPrioritization property to specify a prioritization level for a particular photo capture, and then query the AVCaptureResolvedPhotoSettings photoProcessingTimeRange property to find out how long it might take to receive the resulting photo in your delegate callback.
  */
-@property(nonatomic, readonly) BOOL isStillImageStabilizationScene API_DEPRECATED_WITH_REPLACEMENT("maxPhotoQualityPrioritization", ios(10.0, 13.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) BOOL isStillImageStabilizationScene API_DEPRECATED_WITH_REPLACEMENT("maxPhotoQualityPrioritization", ios(10.0, 13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @property virtualDeviceFusionSupported
@@ -344,7 +344,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     This property may change as the session's -sessionPreset or source device's -activeFormat change. When using a virtual AVCaptureDevice, its constituent camera images can be fused together to improve image quality when this property answers YES. When virtual device fusion is not supported by the current configuration, your capture requests always resolve virtualDeviceFusionEnabled to NO. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isVirtualDeviceFusionSupported) BOOL virtualDeviceFusionSupported API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, readonly, getter=isVirtualDeviceFusionSupported) BOOL virtualDeviceFusionSupported API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property dualCameraFusionSupported
@@ -354,7 +354,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     This property may change as the session's -sessionPreset or source device's -activeFormat change. When using the AVCaptureDevice with deviceType AVCaptureDeviceTypeBuiltInDualCamera, the wide-angle and telephoto camera images can be fused together to improve image quality in some configurations. When DualCamera image fusion is not supported by the current configuration, your capture requests always resolve dualCameraFusionEnabled to NO. This property is key-value observable. As of iOS 13, this property is deprecated in favor of virtualDeviceFusionSupported.
  */
-@property(nonatomic, readonly, getter=isDualCameraFusionSupported) BOOL dualCameraFusionSupported API_DEPRECATED_WITH_REPLACEMENT("virtualDeviceFusionSupported", ios(10.2, 13.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isDualCameraFusionSupported) BOOL dualCameraFusionSupported API_DEPRECATED_WITH_REPLACEMENT("virtualDeviceFusionSupported", ios(10.2, 13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @property virtualDeviceConstituentPhotoDeliverySupported
@@ -364,7 +364,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     Virtual device constituent photo delivery is only supported for certain AVCaptureSession sessionPresets and AVCaptureDevice activeFormats. When switching cameras or formats this property may change. When this property changes from YES to NO, virtualDeviceConstituentPhotoDeliveryEnabled also reverts to NO. If you've previously opted in for virtual device constituent photo delivery and then change configurations, you may need to set virtualDeviceConstituentPhotoDeliveryEnabled = YES again. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isVirtualDeviceConstituentPhotoDeliverySupported) BOOL virtualDeviceConstituentPhotoDeliverySupported API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, readonly, getter=isVirtualDeviceConstituentPhotoDeliverySupported) BOOL virtualDeviceConstituentPhotoDeliverySupported API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property dualCameraDualPhotoDeliverySupported
@@ -374,7 +374,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     DualCamera dual photo delivery is only supported for certain AVCaptureSession sessionPresets and AVCaptureDevice activeFormats. When switching cameras or formats this property may change. When this property changes from YES to NO, dualCameraDualPhotoDeliveryEnabled also reverts to NO. If you've previously opted in for DualCamera dual photo delivery and then change configurations, you may need to set dualCameraDualPhotoDeliveryEnabled = YES again. This property is key-value observable. As of iOS 13, this property is deprecated in favor of virtualDeviceConstituentPhotoDeliverySupported.
  */
-@property(nonatomic, readonly, getter=isDualCameraDualPhotoDeliverySupported) BOOL dualCameraDualPhotoDeliverySupported API_DEPRECATED_WITH_REPLACEMENT("virtualDeviceConstituentPhotoDeliverySupported", ios(11.0, 13.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isDualCameraDualPhotoDeliverySupported) BOOL dualCameraDualPhotoDeliverySupported API_DEPRECATED_WITH_REPLACEMENT("virtualDeviceConstituentPhotoDeliverySupported", ios(11.0, 13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @property virtualDeviceConstituentPhotoDeliveryEnabled
@@ -384,7 +384,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     Default value is NO. This property may only be set to YES if virtualDeviceConstituentPhotoDeliverySupported is YES. Virtual device constituent photo delivery requires a lengthy reconfiguration of the capture render pipeline, so if you intend to do any constituent photo delivery captures, you should set this property to YES before calling -[AVCaptureSession startRunning]. See also -[AVCapturePhotoSettings virtualDeviceConstituentPhotoDeliveryEnabledDevices].
  */
-@property(nonatomic, getter=isVirtualDeviceConstituentPhotoDeliveryEnabled) BOOL virtualDeviceConstituentPhotoDeliveryEnabled API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, getter=isVirtualDeviceConstituentPhotoDeliveryEnabled) BOOL virtualDeviceConstituentPhotoDeliveryEnabled API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property dualCameraDualPhotoDeliveryEnabled
@@ -394,7 +394,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     Default value is NO. This property may only be set to YES if dualCameraDualPhotoDeliverySupported is YES. DualCamera dual photo delivery requires a lengthy reconfiguration of the capture render pipeline, so if you intend to do any dual photo delivery captures, you should set this property to YES before calling -[AVCaptureSession startRunning]. See also -[AVCapturePhotoSettings dualCameraDualPhotoDeliveryEnabled]. As of iOS 13, this property is deprecated in favor of virtualDeviceConstituentPhotoDeliveryEnabled.
  */
-@property(nonatomic, getter=isDualCameraDualPhotoDeliveryEnabled) BOOL dualCameraDualPhotoDeliveryEnabled API_DEPRECATED_WITH_REPLACEMENT("virtualDeviceConstituentPhotoDeliveryEnabled", ios(11.0, 13.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, getter=isDualCameraDualPhotoDeliveryEnabled) BOOL dualCameraDualPhotoDeliveryEnabled API_DEPRECATED_WITH_REPLACEMENT("virtualDeviceConstituentPhotoDeliveryEnabled", ios(11.0, 13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @property cameraCalibrationDataDeliverySupported
@@ -404,7 +404,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     Camera calibration data delivery (intrinsics, extrinsics, lens distortion characteristics, etc.) is only supported if virtualDeviceConstituentPhotoDeliveryEnabled is YES and contentAwareDistortionCorrectionEnabled is NO and the source device's geometricDistortionCorrectionEnabled property is set to NO. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isCameraCalibrationDataDeliverySupported) BOOL cameraCalibrationDataDeliverySupported API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isCameraCalibrationDataDeliverySupported) BOOL cameraCalibrationDataDeliverySupported API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property supportedFlashModes
@@ -424,7 +424,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     Flash images may cause subjects' eyes to appear red, golden, or white. Automatic red-eye reduction detects and corrects for reflected light in eyes, at the cost of additional processing time per image. This property may change as the session's -sessionPreset or source device's -activeFormat change. When red-eye reduction is not supported, your capture requests always resolve redEyeReductionEnabled to NO. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isAutoRedEyeReductionSupported) BOOL autoRedEyeReductionSupported API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, readonly, getter=isAutoRedEyeReductionSupported) BOOL autoRedEyeReductionSupported API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property isFlashScene
@@ -524,7 +524,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     Prior to iOS 11, all Live Photo movie video tracks are compressed using H.264. Beginning in iOS 11, you can select the Live Photo movie video compression format using one of the AVVideoCodecKey strings presented in this property. The system's default (preferred) video codec is always presented first in the list. If you've not yet added your receiver to an AVCaptureSession with a video source, no codecs are available. This property is key-value observable.
  */
-@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableLivePhotoVideoCodecTypes API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableLivePhotoVideoCodecTypes API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @method JPEGPhotoDataRepresentationForJPEGSampleBuffer:previewPhotoSampleBuffer:
@@ -541,7 +541,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     AVCapturePhotoOutput's depecrated -captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error: callback delivers JPEG photos to clients as CMSampleBuffers. To re-package these buffers in a data format suitable for writing to a JPEG file, you may call this class method, optionally inserting your own metadata into the JPEG CMSampleBuffer first, and optionally passing a preview image to be written to the JPEG file format as a thumbnail image.
  */
-+ (nullable NSData *)JPEGPhotoDataRepresentationForJPEGSampleBuffer:(CMSampleBufferRef)JPEGSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer API_DEPRECATED_WITH_REPLACEMENT("-[AVCapturePhoto fileDataRepresentation]", ios(10.0, 11.0)) API_UNAVAILABLE(macos);
++ (nullable NSData *)JPEGPhotoDataRepresentationForJPEGSampleBuffer:(CMSampleBufferRef)JPEGSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer API_DEPRECATED_WITH_REPLACEMENT("-[AVCapturePhoto fileDataRepresentation]", ios(10.0, 11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @method DNGPhotoDataRepresentationForRawSampleBuffer:previewPhotoSampleBuffer:
@@ -558,7 +558,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     AVCapturePhotoOutput's deprecated -captureOutput:didFinishProcessingRawPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error: callback delivers RAW photos to clients as CMSampleBuffers. To re-package these buffers in a data format suitable for writing to a DNG file, you may call this class method, optionally inserting your own metadata into the RAW CMSampleBuffer first, and optionally passing a preview image to be written to the DNG file format as a thumbnail image. Only RAW images from Apple built-in cameras are supported.
  */
-+ (nullable NSData *)DNGPhotoDataRepresentationForRawSampleBuffer:(CMSampleBufferRef)rawSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer API_DEPRECATED_WITH_REPLACEMENT("-[AVCapturePhoto fileDataRepresentation]", ios(10.0, 11.0)) API_UNAVAILABLE(macos);
++ (nullable NSData *)DNGPhotoDataRepresentationForRawSampleBuffer:(CMSampleBufferRef)rawSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer API_DEPRECATED_WITH_REPLACEMENT("-[AVCapturePhoto fileDataRepresentation]", ios(10.0, 11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @property contentAwareDistortionCorrectionSupported
@@ -568,7 +568,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     The rectilinear model used in optical design and by geometric distortion correction only preserves lines but not area, angles, or distance. Thus the wider the field of view of a lens, the greater the areal distortion at the edges of images. Content aware distortion correction, when enabled, intelligently corrects distortions by taking content into consideration, such as faces near the edges of the image. This property returns YES if the session's current configuration allows photos to be captured with content aware distortion correction. When switching cameras or formats or enabling depth data delivery this property may change. When this property changes from YES to NO, contentAwareDistortionCorrectionEnabled also reverts to NO. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isContentAwareDistortionCorrectionSupported) BOOL contentAwareDistortionCorrectionSupported API_AVAILABLE(ios(14.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, readonly, getter=isContentAwareDistortionCorrectionSupported) BOOL contentAwareDistortionCorrectionSupported API_AVAILABLE(ios(14.1), macCatalyst(14.1)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property contentAwareDistortionCorrectionEnabled
@@ -578,7 +578,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     Default is NO. Set to YES if you wish content aware distortion correction to be performed on your AVCapturePhotos. This property may only be set to YES if contentAwareDistortionCorrectionSupported is YES. Note that warping the photos to preserve more natural looking content may result in a small change in field of view compared to what you see in the AVCaptureVideoPreviewLayer. The amount of field of view lost or gained is content specific and may vary from photo to photo. Enabling this property requires a lengthy reconfiguration of the capture render pipeline, so you should set this property to YES before calling -[AVCaptureSession startRunning].
  */
-@property(nonatomic, getter=isContentAwareDistortionCorrectionEnabled) BOOL contentAwareDistortionCorrectionEnabled API_AVAILABLE(ios(14.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, getter=isContentAwareDistortionCorrectionEnabled) BOOL contentAwareDistortionCorrectionEnabled API_AVAILABLE(ios(14.1), macCatalyst(14.1)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 @end
 
 
@@ -594,7 +594,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     Some cameras and configurations support the delivery of depth data (e.g. disparity maps) along with the photo. This property returns YES if the session's current configuration allows photos to be captured with depth data, from which depth-related filters may be applied. When switching cameras or formats this property may change. When this property changes from YES to NO, depthDataDeliveryEnabled also reverts to NO. If you've previously opted in for depth data delivery and then change configurations, you may need to set depthDataDeliveryEnabled = YES again. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isDepthDataDeliverySupported) BOOL depthDataDeliverySupported API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isDepthDataDeliverySupported) BOOL depthDataDeliverySupported API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property depthDataDeliveryEnabled
@@ -604,7 +604,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     Default is NO. Set to YES if you wish depth data to be delivered with your AVCapturePhotos. This property may only be set to YES if depthDataDeliverySupported is YES. Enabling depth data delivery requires a lengthy reconfiguration of the capture render pipeline, so if you intend to capture depth data, you should set this property to YES before calling -[AVCaptureSession startRunning].
  */
-@property(nonatomic, getter=isDepthDataDeliveryEnabled) BOOL depthDataDeliveryEnabled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, getter=isDepthDataDeliveryEnabled) BOOL depthDataDeliveryEnabled API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property portraitEffectsMatteDeliverySupported
@@ -614,7 +614,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     Some cameras and configurations support the delivery of a matting image to augment depth data and aid in high quality portrait effect rendering (see AVPortraitEffectsMatte.h). This property returns YES if the session's current configuration allows photos to be captured with a portrait effects matte. When switching cameras or formats this property may change. When this property changes from YES to NO, portraitEffectsMatteDeliveryEnabled also reverts to NO. If you've previously opted in for portrait effects matte delivery and then change configurations, you may need to set portraitEffectsMatteDeliveryEnabled = YES again. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isPortraitEffectsMatteDeliverySupported) BOOL portraitEffectsMatteDeliverySupported API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, readonly, getter=isPortraitEffectsMatteDeliverySupported) BOOL portraitEffectsMatteDeliverySupported API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property portraitEffectsMatteDeliveryEnabled
@@ -624,7 +624,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     Default is NO. Set to YES if you wish portrait effects mattes to be delivered with your AVCapturePhotos. This property may only be set to YES if portraitEffectsMatteDeliverySupported is YES. Portrait effects matte generation requires depth to be present, so when enabling portrait effects matte delivery, you must also set depthDataDeliveryEnabled to YES. Enabling portrait effects matte delivery requires a lengthy reconfiguration of the capture render pipeline, so if you intend to capture portrait effects mattes, you should set this property to YES before calling -[AVCaptureSession startRunning].
  */
-@property(nonatomic, getter=isPortraitEffectsMatteDeliveryEnabled) BOOL portraitEffectsMatteDeliveryEnabled API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, getter=isPortraitEffectsMatteDeliveryEnabled) BOOL portraitEffectsMatteDeliveryEnabled API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property availableSemanticSegmentationMatteTypes
@@ -634,7 +634,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     Some cameras and configurations support the delivery of semantic segmentation matting images (e.g. segmentations of the hair, skin, or teeth in the photo). This property returns an array of AVSemanticSegmentationMatteTypes available given the session's current configuration. When switching cameras or formats this property may change. When this property changes, enabledSemanticSegmentationMatteTypes reverts to an empty array. If you've previously opted in for delivery of one or more semantic segmentation mattes and then change configurations, you need to set up your enabledSemanticSegmentationMatteTypes again. This property is key-value observable.
  */
-@property(nonatomic, readonly) NSArray<AVSemanticSegmentationMatteType> *availableSemanticSegmentationMatteTypes API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, readonly) NSArray<AVSemanticSegmentationMatteType> *availableSemanticSegmentationMatteTypes API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property enabledSemanticSegmentationMatteTypes
@@ -644,7 +644,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  @discussion
     Default is empty array. You may set this to the array of matte types you'd like to be delivered with your AVCapturePhotos. The array may only contain values present in availableSemanticSegmentationMatteTypes. Enabling semantic segmentation matte delivery requires a lengthy reconfiguration of the capture render pipeline, so if you intend to capture semantic segmentation mattes, you should set this property to YES before calling -[AVCaptureSession startRunning].
  */
-@property(nonatomic) NSArray<AVSemanticSegmentationMatteType> *enabledSemanticSegmentationMatteTypes API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic) NSArray<AVSemanticSegmentationMatteType> *enabledSemanticSegmentationMatteTypes API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -663,7 +663,7 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
  
     In the event of an error, all expected callbacks are fired with an appropriate error.
  */
-API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @protocol AVCapturePhotoCaptureDelegate <NSObject>
 
 @optional
@@ -727,7 +727,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     This callback fires resolvedSettings.expectedPhotoCount number of times for a given capture request. Note that the photo parameter is always non nil, even if an error is returned. The delivered AVCapturePhoto's rawPhoto property can be queried to know if it's a RAW image or processed image.
  */
-- (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhoto:(AVCapturePhoto *)photo error:(nullable NSError *)error API_AVAILABLE(ios(11.0));
+- (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhoto:(AVCapturePhoto *)photo error:(nullable NSError *)error API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:
@@ -750,7 +750,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     If you've requested a single processed image (uncompressed or compressed) capture, the photo is delivered here. If you've requested a bracketed capture, this callback is fired bracketedSettings.count times (once for each photo in the bracket).
  */
-- (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhotoSampleBuffer:(nullable CMSampleBufferRef)photoSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer resolvedSettings:(AVCaptureResolvedPhotoSettings *)resolvedSettings bracketSettings:(nullable AVCaptureBracketedStillImageSettings *)bracketSettings error:(nullable NSError *)error API_DEPRECATED_WITH_REPLACEMENT("-captureOutput:didFinishProcessingPhoto:error:", ios(10.0, 11.0)) API_UNAVAILABLE(macos);
+- (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhotoSampleBuffer:(nullable CMSampleBufferRef)photoSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer resolvedSettings:(AVCaptureResolvedPhotoSettings *)resolvedSettings bracketSettings:(nullable AVCaptureBracketedStillImageSettings *)bracketSettings error:(nullable NSError *)error API_DEPRECATED_WITH_REPLACEMENT("-captureOutput:didFinishProcessingPhoto:error:", ios(10.0, 11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @method captureOutput:didFinishProcessingRawPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:
@@ -773,7 +773,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Single RAW image and bracketed RAW photos are delivered here. If you've requested a RAW bracketed capture, this callback is fired bracketedSettings.count times (once for each photo in the bracket).
  */
-- (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingRawPhotoSampleBuffer:(nullable CMSampleBufferRef)rawSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer resolvedSettings:(AVCaptureResolvedPhotoSettings *)resolvedSettings bracketSettings:(nullable AVCaptureBracketedStillImageSettings *)bracketSettings error:(nullable NSError *)error API_DEPRECATED_WITH_REPLACEMENT("-captureOutput:didFinishProcessingPhoto:error:", ios(10.0, 11.0)) API_UNAVAILABLE(macos);
+- (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingRawPhotoSampleBuffer:(nullable CMSampleBufferRef)rawSampleBuffer previewPhotoSampleBuffer:(nullable CMSampleBufferRef)previewPhotoSampleBuffer resolvedSettings:(AVCaptureResolvedPhotoSettings *)resolvedSettings bracketSettings:(nullable AVCaptureBracketedStillImageSettings *)bracketSettings error:(nullable NSError *)error API_DEPRECATED_WITH_REPLACEMENT("-captureOutput:didFinishProcessingPhoto:error:", ios(10.0, 11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @method captureOutput:didFinishRecordingLivePhotoMovieForEventualFileAtURL:resolvedSettings:
@@ -847,7 +847,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     To take a picture, a client instantiates and configures an AVCapturePhotoSettings object, then calls AVCapturePhotoOutput's -capturePhotoWithSettings:delegate:, passing the settings and a delegate to be informed when events relating to the photo capture occur. Since AVCapturePhotoSettings has no reference to the AVCapturePhotoOutput instance with which it will be used, minimal validation occurs while you configure an AVCapturePhotoSettings instance. The bulk of the validation is executed when you call AVCapturePhotoOutput's -capturePhotoWithSettings:delegate:.
  */
-API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCapturePhotoSettings : NSObject <NSCopying>
 {
 @private
@@ -933,7 +933,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     rawPixelFormatType must be one of the OSTypes contained in AVCapturePhotoOutput's -availableRawPhotoPixelFormatTypes array. Set rawPixelFormatType to 0 if you do not desire a RAW photo callback. If you are specifying a rawFileType, it must be present in AVCapturePhotoOutput's -availableRawPhotoFileTypes array. If you wish an uncompressed processedFormat, your dictionary must contain kCVPixelBufferPixelFormatTypeKey, and the processedFormat specified must be present in AVCapturePhotoOutput's -availablePhotoPixelFormatTypes array. kCVPixelBufferPixelFormatTypeKey is the only supported key when expressing uncompressed processedFormat. If you wish a compressed format, your dictionary must contain AVVideoCodecKey and the codec specified must be present in AVCapturePhotoOutput's -availablePhotoCodecTypes array. If you are specifying a compressed format, the AVVideoCompressionPropertiesKey is also supported, with a payload dictionary containing a single AVVideoQualityKey. If you are specifying a processedFileType, it must be present in AVCapturePhotoOutput's -availablePhotoFileTypes array. Pass a nil processedFormat dictionary if you only desire a RAW photo capture. See AVCapturePhotoOutput's -capturePhotoWithSettings:delegate: inline documentation for a discussion of restrictions on AVCapturePhotoSettings when requesting RAW capture.
  */
-+ (instancetype)photoSettingsWithRawPixelFormatType:(OSType)rawPixelFormatType rawFileType:(nullable AVFileType)rawFileType processedFormat:(nullable NSDictionary<NSString *, id> *)processedFormat processedFileType:(nullable AVFileType)processedFileType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
++ (instancetype)photoSettingsWithRawPixelFormatType:(OSType)rawPixelFormatType rawFileType:(nullable AVFileType)rawFileType processedFormat:(nullable NSDictionary<NSString *, id> *)processedFormat processedFileType:(nullable AVFileType)processedFileType API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @method photoSettingsFromPhotoSettings:
@@ -978,7 +978,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     The formatting of data within a photo buffer is often dependent on the file format intended for storage. For instance, a JPEG encoded photo buffer intended for storage in a JPEG (JPEG File Interchange Format) file differs from JPEG to be stored in HEIF. The HEIF-containerized JPEG buffer is tiled for readback efficiency and partitioned into the box structure dictated by the HEIF file format. Some codecs are only supported by AVCapturePhotoOutput if containerized. For instance, the AVVideoCodecTypeHEVC is only supported with AVFileTypeHEIF and AVFileTypeHEIC formatting. To discover which photo pixel format types and video codecs are supported for a given file type, you may query AVCapturePhotoOutput's -supportedPhotoPixelFormatTypesForFileType:, or -supportedPhotoCodecTypesForFileType: respectively.
  */
-@property(nullable, readonly) AVFileType processedFileType API_AVAILABLE(ios(11.0));
+@property(nullable, readonly) AVFileType processedFileType API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property rawPhotoPixelFormatType
@@ -998,7 +998,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     The formatting of data within a RAW photo buffer may be dependent on the file format intended for storage. To discover which RAW photo pixel format types are supported for a given file type, you may query AVCapturePhotoOutput's -supportedRawPhotoPixelFormatTypesForFileType:.
  */
-@property(nullable, readonly) AVFileType rawFileType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nullable, readonly) AVFileType rawFileType API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property flashMode
@@ -1018,7 +1018,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Default is YES on platforms that support automatic red-eye reduction unless you are capturing a bracket using AVCapturePhotoBracketSettings or a RAW photo without a processed photo.  For RAW photos with a processed photo the red-eye reduction will be applied to the processed photo only (RAW photos by definition are not processed). When set to YES, red-eye reduction is applied as needed for flash captures if the photo output's autoRedEyeReductionSupported property returns YES.
  */
-@property(nonatomic, getter=isAutoRedEyeReductionEnabled) BOOL autoRedEyeReductionEnabled API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, getter=isAutoRedEyeReductionEnabled) BOOL autoRedEyeReductionEnabled API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property photoQualityPrioritization
@@ -1028,7 +1028,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Default value is AVCapturePhotoQualityPrioritizationBalanced. The AVCapturePhotoOutput is capable of applying a variety of techniques to improve photo quality (reduce noise, preserve detail in low light, freeze motion, etc), depending on the source device's activeFormat. Some of these techniques can take significant processing time before the photo is returned to your delegate callback. The photoQualityPrioritization property allows you to specify your preferred quality vs speed of delivery. By default, speed and quality are considered to be of equal importance. When you specify AVCapturePhotoQualityPrioritizationSpeed, you indicate that speed should be prioritized at the expense of quality. Likewise, when you choose AVCapturePhotoQualityPrioritizationQuality, you signal your willingness to prioritize the very best quality at the expense of speed, and your readiness to wait (perhaps significantly) longer for the photo to be returned to your delegate.
  */
-@property(nonatomic) AVCapturePhotoQualityPrioritization photoQualityPrioritization API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic) AVCapturePhotoQualityPrioritization photoQualityPrioritization API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property autoStillImageStabilizationEnabled
@@ -1040,7 +1040,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  
     As of iOS 13 hardware, the AVCapturePhotoOutput is capable of applying a variety of multi-image fusion techniques to improve photo quality (reduce noise, preserve detail in low light, freeze motion, etc), all of which have been previously lumped under the stillImageStabilization moniker. This property should no longer be used as it no longer provides meaningful information about the techniques used to improve quality in a photo capture. Instead, you should use -photoQualityPrioritization to indicate your preferred quality vs speed.
  */
-@property(nonatomic, getter=isAutoStillImageStabilizationEnabled) BOOL autoStillImageStabilizationEnabled API_DEPRECATED_WITH_REPLACEMENT("photoQualityPrioritization", ios(10.0, 13.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, getter=isAutoStillImageStabilizationEnabled) BOOL autoStillImageStabilizationEnabled API_DEPRECATED_WITH_REPLACEMENT("photoQualityPrioritization", ios(10.0, 13.0)) API_UNAVAILABLE(macos)  API_UNAVAILABLE(tvos);
 
 /*!
  @property autoVirtualDeviceFusionEnabled
@@ -1050,7 +1050,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Default is YES unless you are capturing a RAW photo (RAW photos may not be processed by definition) or a bracket using AVCapturePhotoBracketSettings. When set to YES, and -[AVCapturePhotoOutput isVirtualDeviceFusionSupported] is also YES, constituent camera images of a virtual device may be fused to improve still image quality, depending on the current zoom factor, light levels, and focus position. You may determine whether virtual device fusion is enabled for a particular capture request by inspecting the virtualDeviceFusionEnabled property of the AVCaptureResolvedPhotoSettings. Note that when using the deprecated AVCaptureStillImageOutput interface with a virtual device, autoVirtualDeviceFusionEnabled fusion is always enabled if supported, and may not be turned off.
  */
-@property(nonatomic, getter=isAutoVirtualDeviceFusionEnabled) BOOL autoVirtualDeviceFusionEnabled API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, getter=isAutoVirtualDeviceFusionEnabled) BOOL autoVirtualDeviceFusionEnabled API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property autoDualCameraFusionEnabled
@@ -1060,7 +1060,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Default is YES unless you are capturing a RAW photo (RAW photos may not be processed by definition) or a bracket using AVCapturePhotoBracketSettings. When set to YES, and -[AVCapturePhotoOutput isDualCameraFusionSupported] is also YES, wide-angle and telephoto images may be fused to improve still image quality, depending on the current zoom factor, light levels, and focus position. You may determine whether DualCamera fusion is enabled for a particular capture request by inspecting the dualCameraFusionEnabled property of the AVCaptureResolvedPhotoSettings. Note that when using the deprecated AVCaptureStillImageOutput interface with the DualCamera, auto DualCamera fusion is always enabled and may not be turned off. As of iOS 13, this property is deprecated in favor of autoVirtualDeviceFusionEnabled.
  */
-@property(nonatomic, getter=isAutoDualCameraFusionEnabled) BOOL autoDualCameraFusionEnabled API_DEPRECATED_WITH_REPLACEMENT("autoVirtualDeviceFusionEnabled", ios(10.2, 13.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, getter=isAutoDualCameraFusionEnabled) BOOL autoDualCameraFusionEnabled API_DEPRECATED_WITH_REPLACEMENT("autoVirtualDeviceFusionEnabled", ios(10.2, 13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @property virtualDeviceConstituentPhotoDeliveryEnabledDevices
@@ -1070,7 +1070,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Default is empty array. To opt in for constituent device photo delivery, you may set this property to any subset of 2 or more of the devices in virtualDevice.constituentDevices. Your captureOutput:didFinishProcessingPhoto:error: callback will be called n times -- one for each of the devices you include in the array. You may only set this property to a non-nil array if you've set your AVCapturePhotoOutput's virtualDeviceConstituentPhotoDeliveryEnabled property to YES, and your delegate responds to the captureOutput:didFinishProcessingPhoto:error: selector.
  */
-@property(nonatomic, copy) NSArray<AVCaptureDevice *> *virtualDeviceConstituentPhotoDeliveryEnabledDevices API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, copy) NSArray<AVCaptureDevice *> *virtualDeviceConstituentPhotoDeliveryEnabledDevices API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property dualCameraDualPhotoDeliveryEnabled
@@ -1080,7 +1080,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Default is NO. When set to YES, your captureOutput:didFinishProcessingPhoto:error: callback will receive twice the number of callbacks, as both the telephoto image(s) and wide-angle image(s) are delivered. You may only set this property to YES if you've set your AVCapturePhotoOutput's dualCameraDualPhotoDeliveryEnabled property to YES, and your delegate responds to the captureOutput:didFinishProcessingPhoto:error: selector. As of iOS 13, this property is deprecated in favor of virtualDeviceConstituentPhotoDeliveryEnabledDevices.
  */
-@property(nonatomic, getter=isDualCameraDualPhotoDeliveryEnabled) BOOL dualCameraDualPhotoDeliveryEnabled API_DEPRECATED_WITH_REPLACEMENT("virtualDeviceConstituentPhotoDeliveryEnabledDevices", ios(11.0, 13.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, getter=isDualCameraDualPhotoDeliveryEnabled) BOOL dualCameraDualPhotoDeliveryEnabled API_DEPRECATED_WITH_REPLACEMENT("virtualDeviceConstituentPhotoDeliveryEnabledDevices", ios(11.0, 13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @property highResolutionPhotoEnabled
@@ -1089,6 +1089,8 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 
  @discussion
     Default is NO. By default, AVCapturePhotoOutput emits images with the same dimensions as its source AVCaptureDevice's activeFormat.formatDescription. However, if you set this property to YES, the AVCapturePhotoOutput emits images at its source AVCaptureDevice's activeFormat.highResolutionStillImageDimensions. Note that if you enable video stabilization (see AVCaptureConnection's preferredVideoStabilizationMode) for any output, the high resolution photos emitted by AVCapturePhotoOutput may be smaller by 10 or more percent. You may inspect your AVCaptureResolvedPhotoSettings in the delegate callbacks to discover the exact dimensions of the capture photo(s).
+
+    Starting in iOS 14.5 if you disable geometric distortion correction, the high resolution photo emitted by AVCapturePhotoOutput may be is smaller depending on the format.
  */
 @property(nonatomic, getter=isHighResolutionPhotoEnabled) BOOL highResolutionPhotoEnabled API_UNAVAILABLE(macos);
 
@@ -1102,7 +1104,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  
     For best rendering results in Apple's Photos.app, portrait photos should be captured with both embedded depth data and a portrait effects matte (see portraitEffectsMatteDeliveryEnabled). When supported, it is recommended to opt in for both of these auxiliary images in your photo captures involving depth.
  */
-@property(nonatomic, getter=isDepthDataDeliveryEnabled) BOOL depthDataDeliveryEnabled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, getter=isDepthDataDeliveryEnabled) BOOL depthDataDeliveryEnabled API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property embedsDepthDataInPhoto
@@ -1112,7 +1114,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Default is YES. When depthDataDeliveryEnabled is set to YES, this property specifies whether the included depth data should be written to the resulting photo's internal file structure. Depth data is currently only supported in HEIF and JPEG. This property is ignored if depthDataDeliveryEnabled is set to NO.
  */
-@property(nonatomic) BOOL embedsDepthDataInPhoto API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic) BOOL embedsDepthDataInPhoto API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property depthDataFiltered
@@ -1122,7 +1124,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Default is YES. This property is ignored unless depthDataDeliveryEnabled is set to YES. Depth data maps may contain invalid pixel values due to a variety of factors including occlusions and low light. When depthDataFiltered is set to YES, the photo output interpolates missing data, filling in all holes.
  */
-@property(nonatomic, getter=isDepthDataFiltered) BOOL depthDataFiltered API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, getter=isDepthDataFiltered) BOOL depthDataFiltered API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property cameraCalibrationDataDeliveryEnabled
@@ -1132,7 +1134,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Default is NO. Set to YES if you wish to receive camera calibration data with your photo. Camera calibration data is delivered as a property of an AVCapturePhoto, so if you are using the CMSampleBuffer delegate callbacks rather than -captureOutput:didFinishProcessingPhoto:error:, an exception is thrown. Also, you may only set this property to YES if your AVCapturePhotoOutput's cameraCalibrationDataDeliverySupported property is YES and 2 or more devices are selected for virtual device constituent photo delivery. When requesting virtual device constituent photo delivery plus camera calibration data, the photos for each constituent device each contain camera calibration data. Note that AVCameraCalibrationData can be delivered as a property of an AVCapturePhoto or an AVDepthData, thus your delegate must respond to the captureOutput:didFinishProcessingPhoto:error: selector.
  */
-@property(nonatomic, getter=isCameraCalibrationDataDeliveryEnabled) BOOL cameraCalibrationDataDeliveryEnabled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, getter=isCameraCalibrationDataDeliveryEnabled) BOOL cameraCalibrationDataDeliveryEnabled API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property portraitEffectsMatteDeliveryEnabled
@@ -1144,7 +1146,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  
     For best rendering results in Apple's Photos.app, portrait photos should be captured with both embedded depth data (see depthDataDeliveryEnabled) and a portrait effects matte. When supported, it is recommended to opt in for both of these auxiliary images in your photo captures involving depth.
  */
-@property(nonatomic, getter=isPortraitEffectsMatteDeliveryEnabled) BOOL portraitEffectsMatteDeliveryEnabled API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, getter=isPortraitEffectsMatteDeliveryEnabled) BOOL portraitEffectsMatteDeliveryEnabled API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property embedsPortraitEffectsMatteInPhoto
@@ -1154,7 +1156,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Default is YES. When portraitEffectsMatteDeliveryEnabled is set to YES, this property specifies whether the included portrait effects matte should be written to the resulting photo's internal file structure. Portrait effects mattes are currently only supported in HEIF and JPEG. This property is ignored if portraitEffectsMatteDeliveryEnabled is set to NO.
  */
-@property(nonatomic) BOOL embedsPortraitEffectsMatteInPhoto API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic) BOOL embedsPortraitEffectsMatteInPhoto API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property enabledSemanticSegmentationMatteTypes
@@ -1164,7 +1166,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Default is empty array. You may set this property to an array of AVSemanticSegmentationMatteTypes you'd like to capture. Throws an exception if -[AVCapturePhotoOutput enabledSemanticSegmentationMatteTypes] does not contain any of the AVSemanticSegmentationMatteTypes specified. In other words, when setting up a capture session, you opt in for the superset of segmentation matte types you might like to receive, and then on a shot-by-shot basis, you may opt in to all or a subset of the previously specified types by setting this property. An exception is also thrown during -[AVCapturePhotoOutput capturePhotoWithSettings:delegate:] if your delegate does not respond to the captureOutput:didFinishProcessingPhoto:error: selector. Setting this property to YES does not guarantee that the specified mattes will be present in the resulting AVCapturePhoto. If the photo's content lacks any persons, for instance, no hair, skin, or teeth mattes are generated, and the -[AVCapturePhoto semanticSegmentationMatteForType:] property returns nil. Note that setting this property to YES may add significant processing time to the delivery of your didFinishProcessingPhoto: callback.
  */
-@property(nonatomic, copy) NSArray<AVSemanticSegmentationMatteType> *enabledSemanticSegmentationMatteTypes API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, copy) NSArray<AVSemanticSegmentationMatteType> *enabledSemanticSegmentationMatteTypes API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property embedsSemanticSegmentationMattesInPhoto
@@ -1174,7 +1176,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Default is YES. This property specifies whether the captured semantic segmentation mattes should be written to the resulting photo's internal file structure. Semantic segmentation mattes are currently only supported in HEIF and JPEG. This property is ignored if enabledSemanticSegmentationMatteTypes is set to an empty array.
  */
-@property(nonatomic) BOOL embedsSemanticSegmentationMattesInPhoto API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic) BOOL embedsSemanticSegmentationMattesInPhoto API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property metadata
@@ -1184,7 +1186,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Valid metadata keys are found in <ImageIO/CGImageProperties.h>. AVCapturePhotoOutput inserts a base set of metadata into each photo it captures, such as kCGImagePropertyOrientation, kCGImagePropertyExifDictionary, and kCGImagePropertyMakerAppleDictionary. You may specify metadata keys and values that should be written to each photo in the capture request. If you've specified metadata that also appears in AVCapturePhotoOutput's base set, your value replaces the base value. An NSInvalidArgumentException is thrown if you specify keys other than those found in <ImageIO/CGImageProperties.h>.
  */
-@property(nonatomic, copy) NSDictionary<NSString *, id> *metadata API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, copy) NSDictionary<NSString *, id> *metadata API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property livePhotoMovieFileURL
@@ -1204,7 +1206,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Prior to iOS 11, all Live Photo movie video tracks are compressed using H.264. Beginning in iOS 11, you can select the Live Photo movie video compression format by specifying one of the strings present in AVCapturePhotoOutput's availableLivePhotoVideoCodecTypes array.
  */
-@property(nonatomic, copy) AVVideoCodecType livePhotoVideoCodecType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, copy) AVVideoCodecType livePhotoVideoCodecType API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property livePhotoMovieMetadata
@@ -1244,7 +1246,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     The array is sorted such that the thumbnail codec type that is most backward compatible is listed first.
  */
-@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableEmbeddedThumbnailPhotoCodecTypes API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableEmbeddedThumbnailPhotoCodecTypes API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property embeddedThumbnailPhotoFormat
@@ -1254,7 +1256,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     A dictionary of AVVideoSettings keys specifying a thumbnail (usually smaller) version of the processed photo to be embedded in that image before calling the AVCapturePhotoCaptureDelegate. This image is sometimes referred to as a "thumbnail image". The AVVideoCodecKey is required and must be present in the receiver's -availableEmbeddedThumbnailPhotoCodecTypes array. Optional keys are { AVVideoWidthKey | AVVideoHeightKey }. If you wish to specify dimensions, you must specify both width and height. If you specify a width and height whose aspect ratio differs from the processed photo, the larger of the two dimensions is honored and aspect ratio of the RAW or processed photo is always preserved. For RAW captures, use -rawEmbeddedThumbnailPhotoFormat to specify the thumbnail format you'd like to capture in the RAW image. For apps linked on or after iOS 12, the raw thumbnail format must be specified using the -rawEmbeddedThumbnailPhotoFormat API rather than -embeddedThumbnailPhotoFormat. Beginning in iOS 12, HEIC files may contain thumbnails up to the full resolution of the main image.
  */
-@property(nonatomic, copy, nullable) NSDictionary<NSString *, id> *embeddedThumbnailPhotoFormat API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, copy, nullable) NSDictionary<NSString *, id> *embeddedThumbnailPhotoFormat API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property availableRawEmbeddedThumbnailPhotoCodecTypes
@@ -1264,7 +1266,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     The array is sorted such that the thumbnail codec type that is most backward compatible is listed first.
  */
-@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableRawEmbeddedThumbnailPhotoCodecTypes API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableRawEmbeddedThumbnailPhotoCodecTypes API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property rawEmbeddedThumbnailPhotoFormat
@@ -1274,7 +1276,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     A dictionary of AVVideoSettings keys specifying a thumbnail (usually smaller) version of the RAW photo to be embedded in that image's DNG before calling back the AVCapturePhotoCaptureDelegate. The AVVideoCodecKey is required and must be present in the receiver's -availableRawEmbeddedThumbnailPhotoCodecTypes array. Optional keys are { AVVideoWidthKey | AVVideoHeightKey }. If you wish to specify dimensions, you must specify both width and height. If you specify a width and height whose aspect ratio differs from the RAW or processed photo, the larger of the two dimensions is honored and aspect ratio of the RAW or processed photo is always preserved. For apps linked on or after iOS 12, the raw thumbnail format must be specified using the -rawEmbeddedThumbnailPhotoFormat API rather than -embeddedThumbnailPhotoFormat. Beginning in iOS 12, DNG files may contain thumbnails up to the full resolution of the RAW image.
  */
-@property(nonatomic, copy, nullable) NSDictionary<NSString *, id> *rawEmbeddedThumbnailPhotoFormat API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, copy, nullable) NSDictionary<NSString *, id> *rawEmbeddedThumbnailPhotoFormat API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property autoContentAwareDistortionCorrectionEnabled
@@ -1284,7 +1286,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     Default is NO. Set to YES if you wish content aware distortion correction to be performed on your AVCapturePhotos, when the photo output deems it necessary. Photos may or may not benefit from distortion correction. For instance, photos lacking faces may be left as is. Setting this property to YES does introduce a small additional amount of latency to the photo processing. You may check your AVCaptureResolvedPhotoSettings to see whether content aware distortion correction will be enabled for a given photo request. Throws an exception if -[AVCapturePhotoOutput contentAwareDistortionCorrectionEnabled] is not set to YES.
  */
-@property(nonatomic, getter=isAutoContentAwareDistortionCorrectionEnabled) BOOL autoContentAwareDistortionCorrectionEnabled API_AVAILABLE(ios(14.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, getter=isAutoContentAwareDistortionCorrectionEnabled) BOOL autoContentAwareDistortionCorrectionEnabled API_AVAILABLE(ios(14.1), macCatalyst(14.1)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 @end
 
 
@@ -1302,7 +1304,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 
     When you request a bracketed capture, your AVCapturePhotoCaptureDelegate's -captureOutput:didFinishProcessing{Photo | RawPhoto}... callbacks are called back bracketSettings.count times and provided with the corresponding AVCaptureBracketedStillImageSettings object from your request.
  */
-API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
 @interface AVCapturePhotoBracketSettings : AVCapturePhotoSettings
 {
 @private
@@ -1353,7 +1355,7 @@ API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROH
  
     AVCapturePhotoBracketSettings do not support flashMode, autoStillImageStabilizationEnabled, livePhotoMovieFileURL or livePhotoMovieMetadata.
  */
-+ (instancetype)photoBracketSettingsWithRawPixelFormatType:(OSType)rawPixelFormatType rawFileType:(nullable AVFileType)rawFileType processedFormat:(nullable NSDictionary<NSString *, id> *)processedFormat processedFileType:(nullable AVFileType)processedFileType bracketedSettings:(NSArray<AVCaptureBracketedStillImageSettings *> *)bracketedSettings API_AVAILABLE(ios(11.0));
++ (instancetype)photoBracketSettingsWithRawPixelFormatType:(OSType)rawPixelFormatType rawFileType:(nullable AVFileType)rawFileType processedFormat:(nullable NSDictionary<NSString *, id> *)processedFormat processedFileType:(nullable AVFileType)processedFileType bracketedSettings:(NSArray<AVCaptureBracketedStillImageSettings *> *)bracketedSettings API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property bracketedSettings
@@ -1390,7 +1392,7 @@ API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROH
  @discussion
     When you initiate a photo capture request using -capturePhotoWithSettings:delegate:, some of your settings are not yet certain. For instance, auto flash and auto still image stabilization allow the AVCapturePhotoOutput to decide just in time whether to employ flash or still image stabilization, depending on the current scene. Once the request is issued, AVCapturePhotoOutput begins the capture, resolves the uncertain settings, and in its first callback informs you of its choices through an AVCaptureResolvedPhotoSettings object. This same object is presented to all the callbacks fired for a particular photo capture request. Its uniqueID property matches that of the AVCapturePhotoSettings instance you used to initiate the photo request.
  */
-API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureResolvedPhotoSettings : NSObject
 {
 @private
@@ -1444,7 +1446,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     If you don't request an embedded thumbnail image, embeddedThumbnailDimensions resolve to { 0, 0 }.
  */
-@property(readonly) CMVideoDimensions embeddedThumbnailDimensions API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(readonly) CMVideoDimensions embeddedThumbnailDimensions API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property rawEmbeddedThumbnailDimensions
@@ -1454,7 +1456,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     If you don't request a raw embedded thumbnail image, rawEmbeddedThumbnailDimensions resolve to { 0, 0 }.
  */
-@property(readonly) CMVideoDimensions rawEmbeddedThumbnailDimensions API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(readonly) CMVideoDimensions rawEmbeddedThumbnailDimensions API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property portraitEffectsMatteDimensions
@@ -1464,7 +1466,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     If you request a portrait effects matte by calling -[AVCapturePhotoSettings setPortraitEffectsMatteDeliveryEnabled:YES], portraitEffectsMatteDimensions resolve to the expected dimensions of the portrait effects matte, assuming one is generated (see -[AVCapturePhotoSettings portraitEffectsMatteDeliveryEnabled] for a discussion of why a portrait effects matte might not be delivered). If you don't request a portrait effects matte, portraitEffectsMatteDimensions always resolve to { 0, 0 }.
  */
-@property(readonly) CMVideoDimensions portraitEffectsMatteDimensions API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(readonly) CMVideoDimensions portraitEffectsMatteDimensions API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @method dimensionsForSemanticSegmentationMatteOfType:
@@ -1474,7 +1476,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     If you request semantic segmentation mattes by calling -[AVCapturePhotoSettings setEnabledSemanticSegmentationMatteTypes:] with a non-empty array, the dimensions resolve to the expected dimensions for each of the mattes, assuming they are generated (see -[AVCapturePhotoSettings enabledSemanticSegmentationMatteTypes] for a discussion of why a particular matte might not be delivered). If you don't request any semantic segmentation mattes, the result will always be { 0, 0 }.
  */
-- (CMVideoDimensions)dimensionsForSemanticSegmentationMatteOfType:(AVSemanticSegmentationMatteType)semanticSegmentationMatteType API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (CMVideoDimensions)dimensionsForSemanticSegmentationMatteOfType:(AVSemanticSegmentationMatteType)semanticSegmentationMatteType API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property livePhotoMovieDimensions
@@ -1501,7 +1503,7 @@ AV_INIT_UNAVAILABLE
  @abstract
     Indicates whether red-eye reduction will be applied as necessary when capturing the photo if flashEnabled is YES.
  */
-@property(readonly, getter=isRedEyeReductionEnabled) BOOL redEyeReductionEnabled API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(readonly, getter=isRedEyeReductionEnabled) BOOL redEyeReductionEnabled API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property stillImageStabilizationEnabled
@@ -1517,35 +1519,35 @@ AV_INIT_UNAVAILABLE
  @abstract
     Indicates whether fusion of virtual device constituent camera images will be used when capturing the photo, such as the wide-angle and telephoto images on a DualCamera.
  */
-@property(readonly, getter=isVirtualDeviceFusionEnabled) BOOL virtualDeviceFusionEnabled API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(readonly, getter=isVirtualDeviceFusionEnabled) BOOL virtualDeviceFusionEnabled API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property dualCameraFusionEnabled
  @abstract
     Indicates whether DualCamera wide-angle and telephoto image fusion will be employed when capturing the photo. As of iOS 13, this property is deprecated in favor of virtualDeviceFusionEnabled.
  */
-@property(readonly, getter=isDualCameraFusionEnabled) BOOL dualCameraFusionEnabled API_DEPRECATED_WITH_REPLACEMENT("virtualDeviceFusionEnabled", ios(10.2, 13.0)) API_UNAVAILABLE(macos);
+@property(readonly, getter=isDualCameraFusionEnabled) BOOL dualCameraFusionEnabled API_DEPRECATED_WITH_REPLACEMENT("virtualDeviceFusionEnabled", ios(10.2, 13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @property expectedPhotoCount
  @abstract
     Indicates the number of times your -captureOutput:didFinishProcessingPhoto:error: callback will be called. For instance, if you've requested an auto exposure bracket of 3 with JPEG and RAW, the expectedPhotoCount is 6.
  */
-@property(readonly) NSUInteger expectedPhotoCount API_AVAILABLE(ios(11.0));
+@property(readonly) NSUInteger expectedPhotoCount API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property photoProcessingTimeRange
  @abstract
     Indicates the processing time range you can expect for this photo to be delivered to your delegate. the .start field of the CMTimeRange is zero-based. In other words, if photoProcessingTimeRange.start is equal to .5 seconds, then the minimum processing time for this photo is .5 seconds. The .start field plus the .duration field of the CMTimeRange indicate the max expected processing time for this photo. Consider implementing a UI affordance if the max processing time is uncomfortably long.
  */
-@property(readonly) CMTimeRange photoProcessingTimeRange API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos);
+@property(readonly) CMTimeRange photoProcessingTimeRange API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property contentAwareDistortionCorrectionEnabled
  @abstract
     Indicates whether content aware distortion correction will be employed when capturing the photo.
  */
-@property(readonly, getter=isContentAwareDistortionCorrectionEnabled) BOOL contentAwareDistortionCorrectionEnabled API_AVAILABLE(ios(14.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(readonly, getter=isContentAwareDistortionCorrectionEnabled) BOOL contentAwareDistortionCorrectionEnabled API_AVAILABLE(ios(14.1), macCatalyst(14.1)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 @end
 
 
@@ -1563,7 +1565,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Beginning in iOS 11, AVCapturePhotoOutput's AVCapturePhotoCaptureDelegate supports a simplified callback for delivering image data, namely -captureOutput:didFinishingProcessingPhoto:error:. This callback presents each image result for your capture request as an AVCapturePhoto object, an immutable wrapper from which various properties of the photo capture may be queried, such as the photo's preview pixel buffer, metadata, depth data, camera calibration data, and image bracket specific properties. AVCapturePhoto can wrap file-containerized photo results, such as HEVC encoded image data, containerized in the HEIC file format. CMSampleBufferRef, on the other hand, may only be used to express non file format containerized photo data. For this reason, the AVCapturePhotoCaptureDelegate protocol methods that return CMSampleBuffers have been deprecated in favor of -captureOutput:didFinishingProcessingPhoto:error:. A AVCapturePhoto wraps a single image result. For instance, if you've requested a bracketed capture of 3 images, your callback is called 3 times, each time delivering an AVCapturePhoto.
  */
-API_AVAILABLE(macos(10.15), ios(11.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.15), ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCapturePhoto : NSObject
 {
 @private
@@ -1640,7 +1642,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     If you requested portrait effects matte delivery by calling -[AVCapturePhotoSettings setPortraitEffectsMatteDeliveryEnabled:YES], this property offers access to the resulting AVPortraitEffectsMatte object. Nil is returned if you did not request portrait effects matte delivery. Note that the portrait effects matte is only embedded in the photo's internal file format container if you set -[AVCapturePhotoSettings setEmbedsPortraitEffectsMatteInPhoto:YES].
  */
-@property(nullable, readonly) AVPortraitEffectsMatte *portraitEffectsMatte API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nullable, readonly) AVPortraitEffectsMatte *portraitEffectsMatte API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @method semanticSegmentationMatteForType:
@@ -1655,7 +1657,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     If you requested one or more semantic segmentation mattes by calling -[AVCapturePhotoSettings setEnabledSemanticSegmentationMatteTypes:] with a non-empty array of types, this property offers access to the resulting AVSemanticSegmentationMatte objects. Nil is returned if you did not request semantic segmentation matte delivery, or if no mattes of the specified type are available. Note that semantic segmentation mattes are only embedded in the photo's internal file format container if you call -[AVCapturePhotoSettings setEmbedsSemanticSegmentationMattesInPhoto:YES].
  */
-- (nullable AVSemanticSegmentationMatte *)semanticSegmentationMatteForType:(AVSemanticSegmentationMatteType)semanticSegmentationMatteType API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+- (nullable AVSemanticSegmentationMatte *)semanticSegmentationMatteForType:(AVSemanticSegmentationMatteType)semanticSegmentationMatteType API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property metadata
@@ -1721,7 +1723,7 @@ AV_INIT_UNAVAILABLE
  @result
     An NSData containing bits in the file container's format, or nil if the flattening process fails.
  */
-- (nullable NSData *)fileDataRepresentation API_AVAILABLE(ios(11.0));
+- (nullable NSData *)fileDataRepresentation API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method fileDataRepresentationWithCustomizer:
@@ -1733,7 +1735,7 @@ AV_INIT_UNAVAILABLE
  @result
     An NSData containing bits in the file container's format, or nil if the flattening process fails.
  */
-- (nullable NSData *)fileDataRepresentationWithCustomizer:(id<AVCapturePhotoFileDataRepresentationCustomizer>)customizer API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+- (nullable NSData *)fileDataRepresentationWithCustomizer:(id<AVCapturePhotoFileDataRepresentationCustomizer>)customizer API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @method fileDataRepresentationWithReplacementMetadata:replacementEmbeddedThumbnailPhotoFormat:replacementEmbeddedThumbnailPixelBuffer:replacementDepthData:
@@ -1751,7 +1753,7 @@ AV_INIT_UNAVAILABLE
  @result
     An NSData containing bits in the file container's format, or nil if the flattening process fails.
  */
-- (nullable NSData *)fileDataRepresentationWithReplacementMetadata:(nullable NSDictionary<NSString *, id> *)replacementMetadata replacementEmbeddedThumbnailPhotoFormat:(nullable NSDictionary<NSString *, id> *)replacementEmbeddedThumbnailPhotoFormat replacementEmbeddedThumbnailPixelBuffer:(nullable CVPixelBufferRef)replacementEmbeddedThumbnailPixelBuffer replacementDepthData:(nullable AVDepthData *)replacementDepthData API_DEPRECATED_WITH_REPLACEMENT("fileDataRepresentationWithCustomizer:", ios(11.0, 12.0)) API_UNAVAILABLE(macos);
+- (nullable NSData *)fileDataRepresentationWithReplacementMetadata:(nullable NSDictionary<NSString *, id> *)replacementMetadata replacementEmbeddedThumbnailPhotoFormat:(nullable NSDictionary<NSString *, id> *)replacementEmbeddedThumbnailPhotoFormat replacementEmbeddedThumbnailPixelBuffer:(nullable CVPixelBufferRef)replacementEmbeddedThumbnailPixelBuffer replacementDepthData:(nullable AVDepthData *)replacementDepthData API_DEPRECATED_WITH_REPLACEMENT("fileDataRepresentationWithCustomizer:", ios(11.0, 12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @method CGImageRepresentation
@@ -1764,7 +1766,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Each time you access this method, AVCapturePhoto generates a new CGImageRef. When backed by a compressed container (such as HEIC), the CGImageRepresentation is decoded lazily as needed. When backed by an uncompressed format such as BGRA, it is copied into a separate backing buffer whose lifetime is not tied to that of the AVCapturePhoto. For a 12 megapixel image, a BGRA CGImage represents ~48 megabytes per call. If you only intend to use the CGImage for on-screen rendering, use the previewCGImageRepresentation instead. Note that the physical rotation of the CGImageRef matches that of the main image. Exif orientation has not been applied. If you wish to apply rotation when working with UIImage, you can do so by querying the photo's metadata[kCGImagePropertyOrientation] value, and passing it as the orientation parameter to +[UIImage imageWithCGImage:scale:orientation:]. RAW images always return a CGImageRepresentation of nil. If you wish to make a CGImageRef from a RAW image, use CIRAWFilter in the CoreImage framework.
  */
-- (nullable CGImageRef)CGImageRepresentation API_AVAILABLE(ios(11.0));
+- (nullable CGImageRef)CGImageRepresentation API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method CGImageRepresentation
@@ -1777,7 +1779,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Each time you access this method, AVCapturePhoto generates a new CGImageRef. This CGImageRepresentation is a RGB rendering of the previewPixelBuffer property. If you did not request a preview photo by setting the -[AVCapturePhotoSettings previewPhotoFormat] property, this method returns nil. Note that the physical rotation of the CGImageRef matches that of the main image. Exif orientation has not been applied. If you wish to apply rotation when working with UIImage, you can do so by querying the photo's metadata[kCGImagePropertyOrientation] value, and passing it as the orientation parameter to +[UIImage imageWithCGImage:scale:orientation:].
  */
-- (nullable CGImageRef)previewCGImageRepresentation API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+- (nullable CGImageRef)previewCGImageRepresentation API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 @end
 
@@ -1804,7 +1806,7 @@ typedef NS_ENUM(NSInteger, AVCaptureLensStabilizationStatus) {
     AVCaptureLensStabilizationStatusActive      = 2,
     AVCaptureLensStabilizationStatusOutOfRange  = 3,
     AVCaptureLensStabilizationStatusUnavailable = 4,
-} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 @interface AVCapturePhoto (AVCapturePhotoBracketedCapture)
 
@@ -1816,7 +1818,7 @@ typedef NS_ENUM(NSInteger, AVCaptureLensStabilizationStatus) {
  @discussion
     When specifying a bracketed capture using AVCapturePhotoBracketSettings, you specify an array of AVCaptureBracketedStillImageSettings -- one per image in the bracket. This property indicates the AVCaptureBracketedStillImageSettings associated with this particular photo, or nil if this photo is not part of a bracketed capture.
  */
-@property(nullable, readonly) AVCaptureBracketedStillImageSettings *bracketSettings API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nullable, readonly) AVCaptureBracketedStillImageSettings *bracketSettings API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property sequenceCount
@@ -1826,7 +1828,7 @@ typedef NS_ENUM(NSInteger, AVCaptureLensStabilizationStatus) {
  @discussion
     If this photo is part of a bracketed capture (invoked using AVCapturePhotoBracketSettings), this property indicates the current result's count in the sequence, starting with 1 for the first result, or 0 if this photo is not part of a bracketed capture.
  */
-@property(readonly) NSInteger sequenceCount API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(readonly) NSInteger sequenceCount API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property lensStabilizationStatus
@@ -1836,7 +1838,7 @@ typedef NS_ENUM(NSInteger, AVCaptureLensStabilizationStatus) {
  @discussion
     In configurations where lens stabilization (OIS) is unsupported, AVCaptureLensStabilizationStatusUnsupported is returned. If lens stabilization is supported, but this photo is not part of a bracketed capture in which -[AVCapturePhotoBracketSettings setLensStabilizationEnabled:YES] was called, AVCaptureLensStabilizationStatusOff is returned. Otherwise a lens stabilization status is returned indicating how lens stabilization was applied during the capture.
  */
-@property(readonly) AVCaptureLensStabilizationStatus lensStabilizationStatus API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(readonly) AVCaptureLensStabilizationStatus lensStabilizationStatus API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 @end
 
@@ -1849,7 +1851,7 @@ typedef NS_ENUM(NSInteger, AVCaptureLensStabilizationStatus) {
  @discussion
     AVCapturePhoto is a wrapper representing a file-containerized photo in memory. If you simply wish to flatten the photo to an NSData to be written to a file, you may call -[AVCapturePhoto fileDataRepresentation]. For more complex flattening operations in which you wish to replace or strip metadata, you should call -[AVCapturePhoto fileDataRepresentationWithCustomizer:] instead, providing a delegate for customized stripping / replacing behavior. This delegate's methods are called synchronously before the flattening process commences.
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos)
 @protocol AVCapturePhotoFileDataRepresentationCustomizer <NSObject>
 
 @optional
@@ -1930,7 +1932,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos)
  @discussion
     This callback is optional. If your delegate does not implement this callback, the existing semantic segmentation matte of the specified type in the in-memory AVCapturePhoto container will be written to the file data representation.
  */
-- (nullable AVSemanticSegmentationMatte *)replacementSemanticSegmentationMatteOfType:(AVSemanticSegmentationMatteType)semanticSegmentationMatteType forPhoto:(AVCapturePhoto *)photo API_AVAILABLE(ios(13.0));
+- (nullable AVSemanticSegmentationMatte *)replacementSemanticSegmentationMatteOfType:(AVSemanticSegmentationMatteType)semanticSegmentationMatteType forPhoto:(AVCapturePhoto *)photo API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method replacementAppleProRAWCompressionSettingsForPhoto:defaultSettings:maximumBitDepth:
@@ -1954,7 +1956,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos)
  @discussion
 	This callback is optional. If your delegate does not implement this callback, the default compression settings for the file type will be used.
  */
-- (NSDictionary<NSString *, id> *)replacementAppleProRAWCompressionSettingsForPhoto:(AVCapturePhoto *)photo defaultSettings:(NSDictionary<NSString *, id> *)defaultSettings maximumBitDepth:(NSInteger)maximumBitDepth API_AVAILABLE(ios(14.3)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (NSDictionary<NSString *, id> *)replacementAppleProRAWCompressionSettingsForPhoto:(AVCapturePhoto *)photo defaultSettings:(NSDictionary<NSString *, id> *)defaultSettings maximumBitDepth:(NSInteger)maximumBitDepth API_AVAILABLE(ios(14.3), macCatalyst(14.3)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 @end
 

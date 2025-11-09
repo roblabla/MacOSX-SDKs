@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C7826D32-4B8B-3F17-9138-AA978CA579FA
+    value:           A1DDAECA-DC79-326E-BC7A-411FA9BC5B9E
   - target:          x86_64-maccatalyst
-    value:           C7826D32-4B8B-3F17-9138-AA978CA579FA
+    value:           A1DDAECA-DC79-326E-BC7A-411FA9BC5B9E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F28712AA-4178-37ED-915E-A926054B49E1
+    value:           A3FA9976-1BEB-3F4A-BE16-B3BC6D8C65E9
   - target:          arm64e-maccatalyst
-    value:           F28712AA-4178-37ED-915E-A926054B49E1
+    value:           A3FA9976-1BEB-3F4A-BE16-B3BC6D8C65E9
 install-name:    '/System/Library/Frameworks/QuickLookThumbnailing.framework/Versions/A/QuickLookThumbnailing'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _QLCGImageRefPNGRepresentation, _QLCompareVersion, _QLCreateCGImageWithData, 
                        _QLCreateColorSpaceForThumbnailExtension, _QLImageCreateForDefaultThumbnailGenerationFromData, 

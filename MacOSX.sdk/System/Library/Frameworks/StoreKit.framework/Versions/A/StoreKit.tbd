@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6D9A806E-D824-3D34-AF88-50F9A1A65276
+    value:           473190CC-BFB3-33D8-9451-9D094B9A3C2E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CC937FF3-261D-3D10-A1CA-90F0E96A32F0
+    value:           8D58B7E4-4AAA-3572-BB0B-1BF95428E250
 install-name:    '/System/Library/Frameworks/StoreKit.framework/Versions/A/StoreKit'
 current-version: 379
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _SKCloudServiceCapabilitiesDidChangeNotification, _SKDownloadTimeRemainingUnknown, 
                        _SKErrorDomain, _SKReceiptPropertyIsExpired, _SKReceiptPropertyIsRevoked, 
                        _SKReceiptPropertyIsVolumePurchase, _SKStoreProductParameterAdvertisingPartnerToken, 
@@ -24,11 +24,10 @@ exports:
                        _SKUIServiceNavigationOptionRightButtonTitle, _SKUIServiceNavigationOptionTitle, 
                        _SKUIServiceReviewSandboxMode ]
     objc-classes:    [ SKAccountPageSpecifierProvider, SKArcadeService, SKCloudServiceController, 
-                       SKCloudServiceSetupConfiguration, SKDownload, SKInGameAnalytics, 
-                       SKMutablePayment, SKPayment, SKPaymentDiscount, SKPaymentQueue, 
-                       SKPaymentQueueClient, SKPaymentTransaction, SKProduct, SKProductDiscount, 
-                       SKProductStorePromotionController, SKProductSubscriptionPeriod, 
-                       SKProductsRequest, SKProductsResponse, SKReceiptRefreshRequest, 
-                       SKRequest, SKSpecifierWithSubtitleCell, SKStoreProductViewController, 
-                       SKStoreReviewController, SKStorefront ]
+                       SKCloudServiceSetupConfiguration, SKDownload, SKMutablePayment, 
+                       SKPayment, SKPaymentDiscount, SKPaymentQueue, SKPaymentQueueClient, 
+                       SKPaymentTransaction, SKProduct, SKProductDiscount, SKProductStorePromotionController, 
+                       SKProductSubscriptionPeriod, SKProductsRequest, SKProductsResponse, 
+                       SKReceiptRefreshRequest, SKRequest, SKSpecifierWithSubtitleCell, 
+                       SKStoreProductViewController, SKStoreReviewController, SKStorefront ]
 ...

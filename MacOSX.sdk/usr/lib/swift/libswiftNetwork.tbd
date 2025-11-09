@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AC1C7D02-583A-3F83-840F-1D2386D06CAB
+    value:           54970FDE-A676-31FF-A8CD-DDD3A454E98B
   - target:          x86_64-maccatalyst
-    value:           AC1C7D02-583A-3F83-840F-1D2386D06CAB
+    value:           54970FDE-A676-31FF-A8CD-DDD3A454E98B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           92A88755-1648-3207-B9C6-A280AFD0E1A0
+    value:           2EE36AE8-38D9-3352-9022-BE50B09DE898
   - target:          arm64e-maccatalyst
-    value:           92A88755-1648-3207-B9C6-A280AFD0E1A0
+    value:           2EE36AE8-38D9-3352-9022-BE50B09DE898
 install-name:    '/usr/lib/swift/libswiftNetwork.dylib'
-current-version: 2288.60.5
+current-version: 2288.100.111
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftNetwork.dylib', '$ld$install_name$os10.11$@rpath/libswiftNetwork.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftNetwork.dylib', '$ld$install_name$os10.13$@rpath/libswiftNetwork.dylib', 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CBA6F342-2755-3244-8BDC-F4F30FFC8418
+    value:           E801957A-E9B7-3027-A84F-E53E25F8C7BC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BB049899-CBB4-3054-AE0F-37EA827A9CB7
+    value:           516A5968-6847-3656-8BE4-3CF18A74F637
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticRequestService.framework/Versions/A/DiagnosticRequestService'
 current-version: 4
 exports:
@@ -22,11 +22,12 @@ exports:
                        _kDRSDBFileShmName, _kDRSDBFileWalName, _kDRSDMAcceptAll, 
                        _kDRSDMDefaultSignatureAcceptanceRate, _kDRSDMDefaultSignatureCap, 
                        _kDRSDMDefaultSignatureHysteresis, _kDRSDMDefaultTailspinHysteresis, 
-                       _kDRSDMDefaultTotalCap, _kDRSDMHangTracerFirstPartyLongHangIssueCategory, 
-                       _kDRSDMHangTracerFirstPartyMicroHangIssueCategory, _kDRSDMHangTracerFirstPartyNormalHangIssueCategory, 
-                       _kDRSDMHangTracerTeamID, _kDRSDMHangTracerThirdPartyLongHangIssueCategory, 
-                       _kDRSDMHangTracerThirdPartyNormalHangIssueCategory, _kDRSDMNandTeamID, 
-                       _kDRSDMNoCap, _kDRSDMNoHysteresis, _kDRSDMSentryMacOsAppLaunchIssueCategory, 
+                       _kDRSDMHangTracerFirstPartyLongHangIssueCategory, _kDRSDMHangTracerFirstPartyMicroHangIssueCategory, 
+                       _kDRSDMHangTracerFirstPartyNormalHangIssueCategory, _kDRSDMHangTracerTeamID, 
+                       _kDRSDMHangTracerThirdPartyLongHangIssueCategory, _kDRSDMHangTracerThirdPartyNormalHangIssueCategory, 
+                       _kDRSDMMemoryToolsMemgraphDmonThresholdCategory, _kDRSDMMemoryToolsMemgraphOverTimeCategory, 
+                       _kDRSDMMemoryToolsTeamID, _kDRSDMNandTeamID, _kDRSDMNoCap, 
+                       _kDRSDMNoHysteresis, _kDRSDMSentryMacOsAppLaunchIssueCategory, 
                        _kDRSDMSentryTeamID, _kDRSEnableDataQueryNoFetchLimit, _kDRSRequestInFlightPurgeableUrgency, 
                        _kDRSRequestNoFetchLimit, _kDRSRequestResourceTailspin, _kDRSRequestTerminalPurgeableUrgency ]
     objc-classes:    [ DRRequestStateStats, DRSCloudKitHelper, DRSDampeningConfiguration, 

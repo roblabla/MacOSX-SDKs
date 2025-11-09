@@ -18,7 +18,7 @@
 // mouse buttons have been released.
 //
 // On iOS, this gesture recognizer doesn't recognize anything and is effectively
-// a noop.
+// a no-op.
 UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @interface UIHoverGestureRecognizer : UIGestureRecognizer
 @end
 

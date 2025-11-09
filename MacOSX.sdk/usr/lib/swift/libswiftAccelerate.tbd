@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9F338A15-0058-32DE-A624-DE9FF7B443FA
+    value:           209D1ACD-E333-3C36-B704-7B29C25E5FCC
   - target:          x86_64-maccatalyst
-    value:           9F338A15-0058-32DE-A624-DE9FF7B443FA
+    value:           209D1ACD-E333-3C36-B704-7B29C25E5FCC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           79C6FF60-8378-3FD7-8A75-58A58AADA725
+    value:           93008662-D4A7-39B3-8FEF-AF931988E959
   - target:          arm64e-maccatalyst
-    value:           79C6FF60-8378-3FD7-8A75-58A58AADA725
+    value:           93008662-D4A7-39B3-8FEF-AF931988E959
 install-name:    '/usr/lib/swift/libswiftAccelerate.dylib'
 current-version: 10.40.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftAccelerate.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftAccelerate.dylib', 

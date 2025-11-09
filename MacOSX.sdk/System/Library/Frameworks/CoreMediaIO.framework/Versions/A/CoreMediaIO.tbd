@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B4252984-90C7-38EC-B4AF-15B703A4E3E4
+    value:           A4D30295-24B3-3570-87EE-B02B4BDBFA50
   - target:          x86_64-maccatalyst
-    value:           B4252984-90C7-38EC-B4AF-15B703A4E3E4
+    value:           A4D30295-24B3-3570-87EE-B02B4BDBFA50
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E61EDC39-0138-304D-83D6-66ABF5DC5A1F
+    value:           BFD4CCE4-8533-368F-AEAB-1BDFAFBC6EC8
   - target:          arm64e-maccatalyst
-    value:           E61EDC39-0138-304D-83D6-66ABF5DC5A1F
+    value:           BFD4CCE4-8533-368F-AEAB-1BDFAFBC6EC8
 install-name:    '/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/CoreMediaIO'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CMIOAddAtExitListener, _CMIOAnalyticsRegisterDevice, _CMIOAnalyticsSendStart, 
                        _CMIODeviceProcessAVCCommand, _CMIODeviceProcessRS422Command, 

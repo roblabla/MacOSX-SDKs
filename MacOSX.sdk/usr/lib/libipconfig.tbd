@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           580F6FEF-1123-3082-8B81-270F03CFB675
+    value:           C9189B1F-B4F1-3B99-9DA8-E770BE33A8AC
   - target:          x86_64-maccatalyst
-    value:           580F6FEF-1123-3082-8B81-270F03CFB675
+    value:           C9189B1F-B4F1-3B99-9DA8-E770BE33A8AC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5B6EF3C8-3E10-3E6D-AA49-D0DF13E4451C
+    value:           968829D3-3CD9-3074-89FB-F8B3C87B56FC
   - target:          arm64e-maccatalyst
-    value:           5B6EF3C8-3E10-3E6D-AA49-D0DF13E4451C
+    value:           968829D3-3CD9-3074-89FB-F8B3C87B56FC
 install-name:    '/usr/lib/libipconfig.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _IPConfigurationForgetNetwork, _IPConfigurationServiceCopyInformation, 
                        _IPConfigurationServiceCreate, _IPConfigurationServiceGetNotificationKey, 

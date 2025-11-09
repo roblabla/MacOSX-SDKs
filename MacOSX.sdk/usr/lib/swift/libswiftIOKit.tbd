@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           651621B4-9381-31FC-872B-E0BB9265EE9F
+    value:           E7D22C76-6493-36D5-BE79-7A5FFC64F2B0
   - target:          x86_64-maccatalyst
-    value:           651621B4-9381-31FC-872B-E0BB9265EE9F
+    value:           E7D22C76-6493-36D5-BE79-7A5FFC64F2B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           29DBEEB3-08C2-3C9E-86BB-F10AD8EEB109
+    value:           B669A7A8-DFCA-318F-9E38-B2AB6BB9F214
   - target:          arm64e-maccatalyst
-    value:           29DBEEB3-08C2-3C9E-86BB-F10AD8EEB109
+    value:           B669A7A8-DFCA-318F-9E38-B2AB6BB9F214
 install-name:    '/usr/lib/swift/libswiftIOKit.dylib'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftIOKit.dylib', '$ld$install_name$os10.11$@rpath/libswiftIOKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftIOKit.dylib', '$ld$install_name$os10.13$@rpath/libswiftIOKit.dylib', 

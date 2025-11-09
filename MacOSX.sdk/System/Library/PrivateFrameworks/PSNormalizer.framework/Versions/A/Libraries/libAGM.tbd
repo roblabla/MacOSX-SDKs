@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A197DDA2-DE3C-3E13-9BA4-8C8FFD5BC4A1
+    value:           CD77BA8C-8AE2-35B6-B281-516F70A374AD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3172F03B-E816-3E34-B629-099E369259FA
+    value:           3CF7C8A6-E20D-3B5A-9BC7-64E192487AE6
 install-name:    '/System/Library/PrivateFrameworks/PSNormalizer.framework/Versions/A/Libraries/libAGM.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -130,6 +130,7 @@ struct mbstat {
 	u_int32_t       m_bigclusters;  /* clusters obtained from page pool */
 	u_int32_t       m_bigclfree;    /* free clusters */
 	u_int32_t       m_bigmclbytes;  /* length of an mbuf cluster */
+	u_int32_t       m_forcedefunct; /* times we force defunct'ed an app's sockets */
 };
 
 /* Compatibillity with 10.3 */

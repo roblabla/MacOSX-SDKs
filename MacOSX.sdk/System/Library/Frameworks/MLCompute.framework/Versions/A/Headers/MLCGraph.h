@@ -130,6 +130,45 @@ NS_REFINED_FOR_SWIFT;
                                           source:(MLCTensor *)source
 NS_REFINED_FOR_SWIFT;
 
+
+/*! @abstract   Add a select layer to the graph
+    @param      sources            The source tensors
+    @param      condition        The condition mask
+    @return     A result tensor
+ */
+- (MLCTensor * _Nullable)selectWithSources:(NSArray<MLCTensor *> *)sources
+                                 condition:(MLCTensor *)condition
+MLCOMPUTE_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5))
+NS_REFINED_FOR_SWIFT;
+
+/*! @abstract   Add a scatter layer to the graph
+    @param      dimension             The dimension along which to index
+    @param      source                    The updates to use with scattering with index positions specified in indices to result tensor
+    @param      indices                  The index of elements to scatter
+    @param      copyFrom                The source tensor whose data is  to be first copied to the result tensor
+    @param      reductionType     The reduction type applied for all values in source tensor that are scattered to a specific location in the result tensor.
+                                Must be: MLCReductionTypeNone or MLCReductionTypeSum.
+    @return     A result tensor
+ */
+- (MLCTensor * _Nullable)scatterWithDimension:(NSUInteger)dimension
+                                       source:(MLCTensor *)source
+                                      indices:(MLCTensor *)indices
+                                     copyFrom:(MLCTensor *)copyFrom
+                                reductionType:(MLCReductionType)reductionType
+MLCOMPUTE_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5));
+
+/*! @abstract   Add a gather layer to the graph
+    @param      dimension       The dimension along which to index
+    @param      source              The source tensor
+    @param      indices            The index of elements to gather
+    @return     A result tensor
+ */
+- (MLCTensor * _Nullable)gatherWithDimension:(NSUInteger)dimension
+                                      source:(MLCTensor *)source
+                                     indices:(MLCTensor *)indices
+MLCOMPUTE_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5));
+
+
 /*! @abstract   Associates data with input tensors. If the device is GPU, also copies the data to the device memory.
                 Returns true if the data is successfully associated with input tensors.
     @discussion This function should be used if you execute the forward, gradient and optimizer updates independently.

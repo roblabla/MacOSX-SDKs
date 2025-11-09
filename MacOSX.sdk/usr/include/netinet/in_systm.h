@@ -63,7 +63,9 @@
 
 #ifndef _NETINET_IN_SYSTM_H_
 #define _NETINET_IN_SYSTM_H_
+
 #include <sys/appleapiopts.h>
+
 #include <sys/_types.h>
 
 /*

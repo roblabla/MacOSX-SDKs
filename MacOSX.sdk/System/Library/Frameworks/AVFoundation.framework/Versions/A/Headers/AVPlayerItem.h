@@ -663,6 +663,29 @@ AV_INIT_UNAVAILABLE
  */
 @property (nonatomic) BOOL startsOnFirstEligibleVariant API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
 
+/*!
+  @enum			AVVariantPreferences
+  @abstract		These constants can be used in any combination as the value of variantPreferences.
+
+  @constant		AVVariantPreferenceNone
+	Indicates that only the basic behaviors of the player for choosing among variants should be applied, including considerations of available bandwidth, compatibility of the indicated codec or codecs, the dimensions of visual output, and the number of available audio output channels.
+  @constant		AVVariantPreferenceScalabilityToLosslessAudio
+	Directs the item to permit the use of variants with lossless audio encodings, if sufficient bandwidth is available for their use.
+*/
+typedef NS_OPTIONS(NSUInteger, AVVariantPreferences) {
+	AVVariantPreferenceNone							= 0,
+	AVVariantPreferenceScalabilityToLosslessAudio	= 1U << 0,
+} API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4));
+
+/*!
+	@property		variantPreferences
+	@abstract		Indicates preferences for variant switching.
+	@discussion
+		Changing variant preferences during playback may result in a variant switch.
+		The default value is AVVariantPreferenceNone.
+*/
+@property AVVariantPreferences variantPreferences API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4));
+
 @end
 
 

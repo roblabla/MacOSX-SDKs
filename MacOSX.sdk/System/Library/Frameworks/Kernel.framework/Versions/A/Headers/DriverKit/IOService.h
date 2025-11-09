@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.60.3) generated from IOService.iig */
+/* iig(DriverKit-107.100.6) generated from IOService.iig */
 
 /* IOService.iig:1-60 */
 /*
@@ -59,7 +59,7 @@ enum {
 	kIOServicePowerCapabilityLow = 0x00010000,
 };
 
-/* source class IOService IOService.iig:61-351 */
+/* source class IOService IOService.iig:61-360 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -108,6 +108,15 @@ public:
      */
 	virtual kern_return_t
 	Stop(IOService * provider) LOCAL;
+
+	/*! @function   ClientCrashed
+	 * @discussion  Notification for kernel objects of a client crash.
+     * @param       client Attached client.
+     * @param       options No options are currently defined.
+	 * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+	 */
+	virtual kern_return_t
+	ClientCrashed(IOService * client, uint64_t options);
 
     /*!
      * @brief       Obtain IOKit IORegistryEntryID.
@@ -357,10 +366,11 @@ private:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOService IOService.iig:61-351 */
+/* generated class IOService IOService.iig:61-360 */
 
 #define IOService_Start_ID            0xab6f76dde6d693f2ULL
 #define IOService_Stop_ID            0x98e715041c459fa5ULL
+#define IOService_ClientCrashed_ID            0xf608d8d479c824a3ULL
 #define IOService_GetRegistryEntryID_ID            0x8a6f522f3894a0d7ULL
 #define IOService_SetName_ID            0xff378dd57615eb9fULL
 #define IOService_RegisterService_ID            0xe9722c2bb1347c28ULL
@@ -381,6 +391,10 @@ private:
 
 #define IOService_Stop_Args \
         IOService * provider
+
+#define IOService_ClientCrashed_Args \
+        IOService * client, \
+        uint64_t options
 
 #define IOService_GetRegistryEntryID_Args \
         uint64_t * registryEntryID
@@ -457,6 +471,12 @@ public:\
     kern_return_t\
     Stop(\
         IOService * provider,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    ClientCrashed(\
+        IOService * client,\
+        uint64_t options,\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
@@ -618,6 +638,12 @@ public:\
         OSMetaClassBase * target,\
         Stop_Handler func);\
 \
+    typedef kern_return_t (*ClientCrashed_Handler)(OSMetaClassBase * target, IOService_ClientCrashed_Args);\
+    static kern_return_t\
+    ClientCrashed_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        ClientCrashed_Handler func);\
+\
     typedef kern_return_t (*GetRegistryEntryID_Handler)(OSMetaClassBase * target, IOService_GetRegistryEntryID_Args);\
     static kern_return_t\
     GetRegistryEntryID_Invoke(const IORPC rpc,\
@@ -710,6 +736,9 @@ protected:\
     /* _Impl methods */\
 \
     kern_return_t\
+    ClientCrashed_Impl(IOService_ClientCrashed_Args);\
+\
+    kern_return_t\
     SetName_Impl(IOService_SetName_Args);\
 \
     kern_return_t\
@@ -763,6 +792,6 @@ public:\
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOService.iig:353- */
+/* IOService.iig:362- */
 
 #endif /* ! _IOKIT_UIOSERVICE_H */

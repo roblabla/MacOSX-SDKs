@@ -656,9 +656,15 @@ typedef struct {
 } es_event_iokit_open_t;
 
 /**
- * @brief Get a process's task port
+ * @brief Get a process's task control port
  *
- * @field target The process for which the task port will be retrieved
+ * @field target The process for which the task control port will be retrieved.
+ *
+ * This event is fired when a process obtains a send right to a task control
+ * port (e.g. task_for_pid(), task_identity_token_get_task_port(),
+ * processor_set_tasks() and other means).
+ *
+ * @note Task control ports were formerly known as simply "task ports".
  */
 typedef struct {
 	es_process_t * _Nonnull target;
@@ -666,9 +672,38 @@ typedef struct {
 } es_event_get_task_t;
 
 /**
+ * @brief Get a process's task read port
+ *
+ * @field target The process for which the task read port will be retrieved.
+ *
+ * This event is fired when a process obtains a send right to a task read
+ * port (e.g. task_read_for_pid(), task_identity_token_get_task_port()).
+ */
+typedef struct {
+	es_process_t * _Nonnull target;
+	uint8_t reserved[64];
+} es_event_get_task_read_t;
+
+/**
+ * @brief Get a process's task inspect port
+ *
+ * @field target The process for which the task inspect port will be retrieved.
+ *
+ * This event is fired when a process obtains a send right to a task inspect
+ * port (e.g. task_inspect_for_pid(), task_identity_token_get_task_port()).
+ */
+typedef struct {
+	es_process_t * _Nonnull target;
+	uint8_t reserved[64];
+} es_event_get_task_inspect_t;
+
+/**
  * @brief Get a process's task name port
  *
- * @field target The process for which the task name port will be retrieved
+ * @field target The process for which the task name port will be retrieved.
+ *
+ * This event is fired when a process obtains a send right to a task name
+ * port (e.g. task_name_for_pid(), task_identity_token_get_task_port()).
  */
 typedef struct {
 	es_process_t * _Nonnull target;
@@ -1058,6 +1093,8 @@ typedef union {
 	es_event_fork_t fork;
 	es_event_fsgetpath_t fsgetpath;
 	es_event_get_task_t get_task;
+	es_event_get_task_read_t get_task_read;
+	es_event_get_task_inspect_t get_task_inspect;
 	es_event_get_task_name_t get_task_name;
 	es_event_getattrlist_t getattrlist;
 	es_event_getextattr_t getextattr;

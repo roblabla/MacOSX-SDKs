@@ -4,25 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           139BEEF2-5BB5-3675-838A-9009DAE3AB82
+    value:           11F34790-CBDC-336E-B410-5A25ECD07CE1
   - target:          x86_64-maccatalyst
-    value:           139BEEF2-5BB5-3675-838A-9009DAE3AB82
+    value:           11F34790-CBDC-336E-B410-5A25ECD07CE1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           329FE131-BA9C-372B-9847-0E73C457E5AC
+    value:           749D62C9-3007-3B57-8025-F85DBCC30D86
   - target:          arm64e-maccatalyst
-    value:           329FE131-BA9C-372B-9847-0E73C457E5AC
+    value:           749D62C9-3007-3B57-8025-F85DBCC30D86
 install-name:    '/System/Library/PrivateFrameworks/VectorKit.framework/Versions/A/VectorKit'
-current-version: 1721.22.10
+current-version: 1721.24.10
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+    weak-symbols:    [ __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEtEEE, 
+                       __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEtEEE, 
+                       __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -79,9 +81,9 @@ exports:
                        VKRouteContext, VKRouteEtaDescription, VKRouteInfo, VKRouteWaypointInfo, 
                        VKSceneConfiguration, VKTimedAnimation, VKTimer, VKTrafficCameraFeature, 
                        VKTrafficFeature, VKTrafficIncidentFeature, VKTrafficSignalFeature, 
-                       VKTransitLineMarker, VKVectorOverlayCircle, VKVectorOverlayData, 
-                       VKVectorOverlayPolygon, VKVectorOverlayPolygonGroup, VKVectorOverlayPolyline, 
-                       VKVectorOverlayPolylineGroup, VKVenueBuildingFeatureMarker, 
+                       VKTransitLineMarker, VKUserReportedTrafficIncident, VKVectorOverlayCircle, 
+                       VKVectorOverlayData, VKVectorOverlayPolygon, VKVectorOverlayPolygonGroup, 
+                       VKVectorOverlayPolyline, VKVectorOverlayPolylineGroup, VKVenueBuildingFeatureMarker, 
                        VKVenueFeatureMarker, VKViewportInfo ]
     objc-ivars:      [ VKAnimation._completionHandler, VKAnimation._frequency, VKAnimation._name, 
                        VKAnimation._priority, VKAnimation._runner, VKAnimation._runsForever, 

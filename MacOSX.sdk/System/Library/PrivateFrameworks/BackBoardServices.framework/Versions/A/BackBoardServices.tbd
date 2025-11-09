@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D0CC2360-6785-3FFF-9311-71A03C78B51A
+    value:           3AC9F33A-48A7-3365-95E3-DDC241D53D93
   - target:          x86_64-maccatalyst
-    value:           D0CC2360-6785-3FFF-9311-71A03C78B51A
+    value:           3AC9F33A-48A7-3365-95E3-DDC241D53D93
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4045F2C2-EBF4-3A30-9F26-93667BD0D0C0
+    value:           896FFDAB-72E6-33F1-8401-D3405E4FCA56
   - target:          arm64e-maccatalyst
-    value:           4045F2C2-EBF4-3A30-9F26-93667BD0D0C0
+    value:           896FFDAB-72E6-33F1-8401-D3405E4FCA56
 install-name:    '/System/Library/PrivateFrameworks/BackBoardServices.framework/Versions/A/BackBoardServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -55,32 +55,35 @@ exports:
                        _BKSHIDEventSetPointerAttributes, _BKSHIDEventSetSimpleDeliveryInfo, 
                        _BKSHIDEventSetSimpleInfo, _BKSHIDEventSetSmartCoverState, 
                        _BKSHIDEventSourceStringName, _BSDescriptionStreamAppendBKSKeyModifierFlags, 
-                       _NSStringFromBKSHIDEventPointerAttributeOptions, _NSStringFromBKSHIDEventPointerAttributeState, 
-                       _NSStringFromBKSHIDEventScreenEdgeMask, _NSStringFromBKSHIDEventSmartCoverState, 
-                       _NSStringFromBKSHIDEventSource, _NSStringFromBKSHIDTouchLocus, 
-                       _NSStringFromBKSKeyModifierFlags, _NSStringFromBKSTouchStreamIdentifier, 
-                       __BKSHIDEventGetConciseDescriptionButton, __BKSHIDEventGetConciseDescriptionGenericGesture, 
-                       __BKSHIDEventGetConciseDescriptionKeyboard, __BKSHIDEventGetConciseDescriptionPointer, 
-                       __BKSHIDEventGetConciseDescriptionProximity, __BKSHIDEventGetConciseDescriptionRotation, 
-                       __BKSHIDEventGetConciseDescriptionScale, __BKSHIDEventGetConciseDescriptionScroll, 
-                       __BKSHIDEventGetConciseDescriptionTranslation, __BKSHIDEventGetEventInfoDescription, 
-                       __BKSHIDEventGetSubEventInfoFromDigitierEventForPathEvent, 
+                       _NSStringFromBKSHIDEventAuthenticationStatus, _NSStringFromBKSHIDEventPointerAttributeOptions, 
+                       _NSStringFromBKSHIDEventPointerAttributeState, _NSStringFromBKSHIDEventScreenEdgeMask, 
+                       _NSStringFromBKSHIDEventSmartCoverState, _NSStringFromBKSHIDEventSource, 
+                       _NSStringFromBKSHIDTouchLocus, _NSStringFromBKSKeyModifierFlags, 
+                       _NSStringFromBKSTouchStreamIdentifier, __BKSHIDEventGetConciseDescriptionButton, 
+                       __BKSHIDEventGetConciseDescriptionGenericGesture, __BKSHIDEventGetConciseDescriptionKeyboard, 
+                       __BKSHIDEventGetConciseDescriptionPointer, __BKSHIDEventGetConciseDescriptionProximity, 
+                       __BKSHIDEventGetConciseDescriptionRotation, __BKSHIDEventGetConciseDescriptionScale, 
+                       __BKSHIDEventGetConciseDescriptionScroll, __BKSHIDEventGetConciseDescriptionTranslation, 
+                       __BKSHIDEventGetEventInfoDescription, __BKSHIDEventGetSubEventInfoFromDigitierEventForPathEvent, 
                        __BKSHIDEventSetRedirectInfo, __RedirectEventToClient, _kBKSFenceArbiterMessageKey_Port, 
                        _kBKSFenceArbiterMessageKey_Type ]
     objc-classes:    [ BKSAnimationFenceAssertion, BKSAnimationFenceHandle, BKSAnimationFenceObserver, 
                        BKSCAAnimationFenceHandle, BKSHIDEventAuthenticationKey, BKSHIDEventAuthenticationMessage, 
-                       BKSHIDEventBaseAttributes, BKSHIDEventDeferringEnvironment, 
-                       BKSHIDEventDeferringPredicate, BKSHIDEventDeferringRule, BKSHIDEventDeferringTarget, 
-                       BKSHIDEventDeferringToken, BKSHIDEventDigitizerAttributes, 
-                       BKSHIDEventDigitizerPathAttributes, BKSHIDEventDisplay, BKSHIDEventHitTestClientContext, 
-                       BKSHIDEventPointerAttributes, BKSHIDEventRedirectAttributes, 
+                       BKSHIDEventAuthenticationOriginator, BKSHIDEventBaseAttributes, 
+                       BKSHIDEventDeferringEnvironment, BKSHIDEventDeferringPredicate, 
+                       BKSHIDEventDeferringRule, BKSHIDEventDeferringTarget, BKSHIDEventDeferringToken, 
+                       BKSHIDEventDigitizerAttributes, BKSHIDEventDigitizerPathAttributes, 
+                       BKSHIDEventDisplay, BKSHIDEventHitTestClientContext, BKSHIDEventPointerAttributes, 
+                       BKSHIDEventRedirectAttributes, BKSHIDKeyboardDeviceProperties, 
                        BKSMutableHIDEventAuthenticationMessage, BKSMutableHIDEventDeferringPredicate, 
-                       BKSMutableHIDEventDeferringTarget, BKSSystemAnimationFenceHandle, 
-                       _BKSAnimationFenceXPCClient ]
+                       BKSMutableHIDEventDeferringTarget, BKSMutableHIDKeyboardDeviceProperties, 
+                       BKSSystemAnimationFenceHandle, _BKSAnimationFenceXPCClient, 
+                       _BKSHIDEventAuthenticationKey ]
     objc-ivars:      [ BKSHIDEventAuthenticationMessage._context, BKSHIDEventAuthenticationMessage._eventType, 
                        BKSHIDEventAuthenticationMessage._keyGeneration, BKSHIDEventAuthenticationMessage._originIdentifier, 
-                       BKSHIDEventAuthenticationMessage._signature, BKSHIDEventAuthenticationMessage._timestamp, 
-                       BKSHIDEventAuthenticationMessage._versionedPID, BKSHIDEventDeferringPredicate._display, 
-                       BKSHIDEventDeferringPredicate._environment, BKSHIDEventDeferringPredicate._token, 
-                       BKSHIDEventDeferringTarget._pid, BKSHIDEventDeferringTarget._token ]
+                       BKSHIDEventAuthenticationMessage._registrantEntitled, BKSHIDEventAuthenticationMessage._signature, 
+                       BKSHIDEventAuthenticationMessage._timestamp, BKSHIDEventAuthenticationMessage._versionedPID, 
+                       BKSHIDEventDeferringPredicate._display, BKSHIDEventDeferringPredicate._environment, 
+                       BKSHIDEventDeferringPredicate._token, BKSHIDEventDeferringTarget._pid, 
+                       BKSHIDEventDeferringTarget._token ]
 ...

@@ -8,9 +8,16 @@
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKitDefines.h>
 
+#import "SKAdImpression.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 SK_EXTERN_CLASS API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED @interface SKAdNetwork : NSObject
+
+// Source apps should call these methods for performing a non-mediated attribution
++ (void)startImpression:(SKAdImpression *)impression completionHandler:(nullable void (^)(NSError *__nullable error))completion NS_SWIFT_NAME(startImpression(_:completionHandler:)) API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
+
++ (void)endImpression:(SKAdImpression *)impression completionHandler:(nullable void (^)(NSError *__nullable error))completion NS_SWIFT_NAME(endImpression(_:completionHandler:)) API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
 
 // Participating apps should call this on launch to complete the install+open action associated with a product view
 + (void)registerAppForAdNetworkAttribution API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;

@@ -171,7 +171,7 @@ exports:
                        __ZN7morphun4util12LoggerConfig13isWarnEnabledEv, __ZN7morphun4util12LoggerConfig14consoleLoggingE, 
                        __ZN7morphun4util12LoggerConfig14isDebugEnabledEv, __ZN7morphun4util12LoggerConfig14isErrorEnabledEv, 
                        __ZN7morphun4util12LoggerConfig14isTraceEnabledEv, __ZN7morphun4util12LoggerConfig8logLevelE, 
-                       __ZN7morphun4util7ULocaleC1ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_SA_SA_, 
+                       __ZN7morphun4util12VersionUtils17getLibraryVersionEv, __ZN7morphun4util7ULocaleC1ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_SA_SA_, 
                        __ZN7morphun4util7ULocaleC1ERKS1_, __ZN7morphun4util7ULocaleC2ERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_SA_SA_, 
                        __ZN7morphun4util7ULocaleC2ERKS1_, __ZN7morphun4util7ULocaleD0Ev, 
                        __ZN7morphun4util7ULocaleD1Ev, __ZN7morphun4util7ULocaleD2Ev, 

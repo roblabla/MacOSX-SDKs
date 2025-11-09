@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           1D11A163-8022-38A0-83A5-0F7D9767F785
+    value:           12E0D6EA-9DCC-3679-B4B0-09152BAD19FF
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           A6F0A2C9-443B-3686-A3B0-D2F365800471
+    value:           62C98DAA-179B-3E64-8F7F-8ED8808EE15F
 install-name:    '/System/iOSSupport/System/Library/Frameworks/LinkPresentation.framework/Versions/A/LinkPresentation'
-current-version: 146.8
+current-version: 146.22
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/URLFormatting.framework/Versions/A/URLFormatting' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _LPErrorDomain, _LPLogChannelFetching, _LPLogChannelPlugin, 
                        _LPLogChannelSerialization, _LPLogChannelTranscoding, _LPLogChannelUI, 
                        _LPLogChannelVideo, _LPYouTubePlayerErrorDomain ]
@@ -29,8 +29,8 @@ exports:
                        LPImagePresentationProperties, LPImageProperties, LPInlineMediaPlaybackInformation, 
                        LPLinkMetadata, LPLinkMetadataObserver, LPLinkMetadataPresentationTransformer, 
                        LPLinkMetadataPreviewTransformer, LPLinkMetadataStatusTransformer, 
-                       LPLinkMetadataStoreTransformer, LPLinkView, LPMIMETypeRegistry, 
-                       LPMapCollectionMetadata, LPMapCollectionPublisherMetadata, 
+                       LPLinkMetadataStoreTransformer, LPLinkView, LPLyricExcerptMetadata, 
+                       LPMIMETypeRegistry, LPMapCollectionMetadata, LPMapCollectionPublisherMetadata, 
                        LPMapMetadata, LPMessagesPayload, LPMetadataProvider, LPMultipleMetadataPresentationTransformer, 
                        LPPresentationSpecializations, LPSharingMetadataWrapper, LPSharingStatusMetadata, 
                        LPSpecializationMetadata, LPSummarizedLinkMetadata, LPTestingOverrides, 
@@ -51,21 +51,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B77A6E0A-66AD-3044-AB17-10ECA706A151
+    value:           DA864D31-1AF2-3CE2-9B02-EF57EAB1157E
   - target:          x86_64-maccatalyst
-    value:           B77A6E0A-66AD-3044-AB17-10ECA706A151
+    value:           DA864D31-1AF2-3CE2-9B02-EF57EAB1157E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           28505AFE-050F-3BA5-B27A-95939234C9D3
+    value:           E0326A66-2BB4-39F8-B945-0345ACC2D48F
   - target:          arm64e-maccatalyst
-    value:           28505AFE-050F-3BA5-B27A-95939234C9D3
+    value:           E0326A66-2BB4-39F8-B945-0345ACC2D48F
 install-name:    '/System/Library/PrivateFrameworks/URLFormatting.framework/Versions/A/URLFormatting'
-current-version: 146.8
+current-version: 146.22
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     objc-classes:    [ URLFormattingTestingOverrides ]
 ...

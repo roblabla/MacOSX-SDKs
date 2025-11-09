@@ -31,7 +31,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIGraphicsRendererFormat : NSOb
 @end
 
 /*
- A UIGraphicsRendererContext provides primative drawing routines not provided through other
+ A UIGraphicsRendererContext provides primitive drawing routines not provided through other
  UIKit classes (UIImage, UIBezierPath, etc) in addition to providing access to the underlying
  CGContextRef.
  */

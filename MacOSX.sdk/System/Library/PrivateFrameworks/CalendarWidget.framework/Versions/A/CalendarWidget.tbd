@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4F2861DE-AEAE-37B7-B12C-85E40B8B0FE6
+    value:           5EDCC1C9-2E2A-3F7C-92D0-705B35E43181
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           81CD894B-31FD-30FA-92DA-F0C129C94089
+    value:           546D179C-40F8-3A1C-99A6-A6682178C27B
 install-name:    '/System/Library/PrivateFrameworks/CalendarWidget.framework/Versions/A/CalendarWidget'
 swift-abi-version: 7
 exports:

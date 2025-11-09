@@ -55,10 +55,6 @@ struct sbuf {
 
 __BEGIN_DECLS
 
-struct uio;
-struct sbuf     *sbuf_uionew(struct sbuf *, struct uio *, int *);
-int              sbuf_bcopyin(struct sbuf *, const void *, size_t);
-int              sbuf_copyin(struct sbuf *, const void *, size_t);
 __END_DECLS
 
 #endif

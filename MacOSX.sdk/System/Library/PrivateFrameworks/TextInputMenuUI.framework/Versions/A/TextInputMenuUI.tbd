@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           614AFC82-AF11-3B5D-8616-A9FC71773A68
+    value:           A0CC632B-D386-3C7B-A88F-39C6EAA903D4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           185AFB77-5583-32A7-9B25-026A5E76580C
+    value:           2A8FA953-AA91-3871-B423-836FAA31B7C0
 install-name:    '/System/Library/PrivateFrameworks/TextInputMenuUI.framework/Versions/A/TextInputMenuUI'
-current-version: 268
+current-version: 267.2
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AmTargetProcess, _CarbonModifiersToAppkitModifiers, _CreateClassFromKey, 

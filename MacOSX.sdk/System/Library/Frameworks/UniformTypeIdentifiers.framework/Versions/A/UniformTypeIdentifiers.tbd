@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7BEC7DDC-2B7A-3B5D-B994-5FA352FC485A
+    value:           5F110054-A401-34EA-B789-F62B6B152DC4
   - target:          x86_64-maccatalyst
-    value:           7BEC7DDC-2B7A-3B5D-B994-5FA352FC485A
+    value:           5F110054-A401-34EA-B789-F62B6B152DC4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           894D4234-E2B3-3154-B7C5-C7C1042100A0
+    value:           F97F79FE-AB31-3B62-90A9-C3B8D16F2D6C
   - target:          arm64e-maccatalyst
-    value:           894D4234-E2B3-3154-B7C5-C7C1042100A0
+    value:           F97F79FE-AB31-3B62-90A9-C3B8D16F2D6C
 install-name:    '/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers'
-current-version: 633.0.2
+current-version: 636.9
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
@@ -84,17 +84,17 @@ exports:
                        __UTTypeAppCategorySportsGames, __UTTypeAppCategoryStrategyGames, 
                        __UTTypeAppCategoryTravel, __UTTypeAppCategoryTriviaGames, 
                        __UTTypeAppCategoryUtilities, __UTTypeAppCategoryVideo, __UTTypeAppCategoryWeather, 
-                       __UTTypeAppCategoryWordGames, __UTTypeAppleDevice, __UTTypeAppleTV, 
-                       __UTTypeAppleWatch, __UTTypeApplicationsFolder, __UTTypeBlockSpecial, 
-                       __UTTypeCharacterSpecial, __UTTypeComputer, __UTTypeDataContainer, 
-                       __UTTypeDevice, __UTTypeDisplay, __UTTypeDropFolder, __UTTypeGenericPC, 
-                       __UTTypeHEIFStandard, __UTTypeHomePod, __UTTypeLibraryFolder, 
-                       __UTTypeMac, __UTTypeMacBook, __UTTypeMacBookAir, __UTTypeMacBookPro, 
-                       __UTTypeMacLaptop, __UTTypeMacMini, __UTTypeMacPro, __UTTypeNamedPipeOrFIFO, 
-                       __UTTypeNetworkNeighborhood, __UTTypePassBundle, __UTTypePassData, 
-                       __UTTypeServersFolder, __UTTypeSocket, __UTTypeSpeaker, __UTTypeiMac, 
-                       __UTTypeiOSDevice, __UTTypeiOSSimulator, __UTTypeiPad, __UTTypeiPhone, 
-                       __UTTypeiPodTouch, ___UNIFORM_TYPE_IDENTIFIER_WAS_NOT_DECLARED_IN_INFO_PLIST_OF_BUNDLE__, 
+                       __UTTypeAppCategoryWordGames, __UTTypeAppleDevice, __UTTypeAppleEncryptedArchive, 
+                       __UTTypeAppleTV, __UTTypeAppleWatch, __UTTypeApplicationsFolder, 
+                       __UTTypeBlockSpecial, __UTTypeCharacterSpecial, __UTTypeComputer, 
+                       __UTTypeDataContainer, __UTTypeDevice, __UTTypeDisplay, __UTTypeDropFolder, 
+                       __UTTypeGenericPC, __UTTypeHEIFStandard, __UTTypeHomePod, 
+                       __UTTypeLibraryFolder, __UTTypeMac, __UTTypeMacBook, __UTTypeMacBookAir, 
+                       __UTTypeMacBookPro, __UTTypeMacLaptop, __UTTypeMacMini, __UTTypeMacPro, 
+                       __UTTypeNamedPipeOrFIFO, __UTTypeNetworkNeighborhood, __UTTypePassBundle, 
+                       __UTTypePassData, __UTTypeServersFolder, __UTTypeSocket, __UTTypeSpeaker, 
+                       __UTTypeiMac, __UTTypeiOSDevice, __UTTypeiOSSimulator, __UTTypeiPad, 
+                       __UTTypeiPhone, __UTTypeiPodTouch, ___UNIFORM_TYPE_IDENTIFIER_WAS_NOT_DECLARED_IN_INFO_PLIST_OF_BUNDLE__, 
                        ___UTFindCoreTypesConstantWithIdentifier ]
     objc-classes:    [ UTType ]
 ...

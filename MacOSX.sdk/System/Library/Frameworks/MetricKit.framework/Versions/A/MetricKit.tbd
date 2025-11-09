@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4D1C2EC5-76C6-3F22-B347-A24251818E64
+    value:           4DBC8202-AC76-31D5-96DD-AF8E77DB7E06
   - target:          x86_64-maccatalyst
-    value:           4D1C2EC5-76C6-3F22-B347-A24251818E64
+    value:           4DBC8202-AC76-31D5-96DD-AF8E77DB7E06
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3391F8AC-B205-3785-A974-5EECB92663EF
+    value:           02B76B29-F1BE-3432-99FB-04F0556B8243
   - target:          arm64e-maccatalyst
-    value:           3391F8AC-B205-3785-A974-5EECB92663EF
+    value:           02B76B29-F1BE-3432-99FB-04F0556B8243
 install-name:    '/System/Library/Frameworks/MetricKit.framework/Versions/A/MetricKit'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/SignpostMetrics.framework/Versions/A/SignpostMetrics' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MetricKitVersionNumber, _MetricKitVersionString ]
     objc-classes:    [ MXAnimationMetric, MXAppExitMetric, MXAppLaunchMetric, MXAppResponsivenessMetric, 
@@ -40,21 +40,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F23F28C4-7933-36A9-8830-3EFF5169C9F5
+    value:           83A3C9C0-F998-3505-808E-B2352D4D54A3
   - target:          x86_64-maccatalyst
-    value:           F23F28C4-7933-36A9-8830-3EFF5169C9F5
+    value:           83A3C9C0-F998-3505-808E-B2352D4D54A3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7FC63342-BE12-37B5-B782-AE05BE5D5C53
+    value:           78311CD5-0253-3DCE-B596-340F8A660F3D
   - target:          arm64e-maccatalyst
-    value:           7FC63342-BE12-37B5-B782-AE05BE5D5C53
+    value:           78311CD5-0253-3DCE-B596-340F8A660F3D
 install-name:    '/System/Library/PrivateFrameworks/SignpostMetrics.framework/Versions/A/SignpostMetrics'
-current-version: 53
+current-version: 60
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ __MXSignpostMetricsSnapshot ]
 ...

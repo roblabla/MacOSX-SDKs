@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           792EB7A8-B5CA-3999-8C52-383C8166EEB8
+    value:           28BD8EDD-45D0-3BB0-8856-9433C985B8B6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BDE72092-E5BB-344E-B2F0-6D890BCD2409
+    value:           0270BB7D-BC03-34E6-A9D8-1D63A7D5E64B
 install-name:    '/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller'
 current-version: 660
 exports:
@@ -28,17 +28,19 @@ exports:
                        __msu_progress_callback, _appleUpgradePath, _kDefaultChoiceChangesPath, 
                        _kFirmlinkDestinationKey, _kFirmlinkSourceKey, _kInstallerCompatibilityRelativePath, 
                        _kInstallerLegacyDebuggerOptionsRelativePath, _kOSIMSUOptionsAdditionalInstallerPaths, 
-                       _kOSIMSUOptionsAlternateBootUUID, _kOSIMSUOptionsDidRequestEraseInstall, 
-                       _kOSIMSUOptionsDoNotSealKey, _kOSIMSUOptionsEraseInstallVolumeUUIDToErase, 
-                       _kOSIMSUOptionsExtractedBrainPathKey, _kOSIMSUOptionsExtractedBundlePathKey, 
-                       _kOSIMSUOptionsFilename, _kOSIMSUOptionsNVRAMKey, _kOSInstallerMSUClientID, 
-                       _kPreviousSystemPath, _kRecoveredItemsPath, _kTemplatePackageGroup, 
-                       _kTemplateReceiptIdentifier, _kValidTargetsDidUpdateNotificationName, 
-                       _nullNotifyCallback, _stagedAppleUpgradePath ]
+                       _kOSIMSUOptionsAlternateBootUUID, _kOSIMSUOptionsCleanUpSharedSupportKey, 
+                       _kOSIMSUOptionsDidRequestEraseInstall, _kOSIMSUOptionsDoNotSealKey, 
+                       _kOSIMSUOptionsEraseInstallVolumeUUIDToErase, _kOSIMSUOptionsExtractedBrainPathKey, 
+                       _kOSIMSUOptionsExtractedBundlePathKey, _kOSIMSUOptionsFilename, 
+                       _kOSIMSUOptionsNVRAMKey, _kOSInstallerMSUClientID, _kPreviousSystemPath, 
+                       _kRecoveredItemsPath, _kTemplatePackageGroup, _kTemplateReceiptIdentifier, 
+                       _kValidTargetsDidUpdateNotificationName, _nullNotifyCallback, 
+                       _stagedAppleUpgradePath ]
     objc-classes:    [ APFSMachineSupport, OSIAIPostInstall, OSIAPFSCondenserElement, 
                        OSIAttachLoggingElement, OSICleanUpElement, OSICleanupFailedInstallElement, 
-                       OSICollectionInstallElement, OSIConvertToAPFSElement, OSICopyTemplateElement, 
-                       OSICreateBootSnapshot, OSICreateSystemVolumeElement, OSIDIYInstallRecoveryElement, 
+                       OSICleanupSharedSupportElement, OSICollectionInstallElement, 
+                       OSIConvertToAPFSElement, OSICopyTemplateElement, OSICreateBootSnapshot, 
+                       OSICreateSystemVolumeElement, OSIDIYInstallRecoveryElement, 
                        OSIDebuggerTool, OSIDetachLoggingElement, OSIDisableFirmlinksElement, 
                        OSIEraseInstallElement, OSIEraseSystemVolumeElement, OSIError, 
                        OSIFirstBootController, OSIGatherGPUStatistics, OSIInstallElement, 
@@ -49,9 +51,9 @@ exports:
                        OSIOSVersion, OSIPersonalizedManifests, OSIPowerButtonMonitor, 
                        OSIPowerController, OSIPreSizingElement, OSIPrepareVolumeElement, 
                        OSIPromoteInstallVolumeElement, OSIPurgeSnapshotsElement, 
-                       OSIReapPreviousSystem, OSIReapableSpaceChecker, OSIRebuildCachesElement, 
-                       OSIRepairDiskElement, OSISyntheticChoice, OSISystemProfiler, 
-                       OSITemplateMigrationController, OSITemplateMigrationOptions, 
+                       OSIReapPreviousSystem, OSIReapableSpaceChecker, OSIReblessInstallerElement, 
+                       OSIRebuildCachesElement, OSIRepairDiskElement, OSISyntheticChoice, 
+                       OSISystemProfiler, OSITemplateMigrationController, OSITemplateMigrationOptions, 
                        OSIUABaseController, OSIUnmountBaseSystemElement, OSIUnmountPayloadElement, 
                        OSIUpdateFirmwareElement, OSIUtilities, OSIVerifyROMElement, 
                        OSInstallController, OSInstallLegacyOptions, OSInstallOptions, 

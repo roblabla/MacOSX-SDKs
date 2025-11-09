@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target arm64e-apple-macos11.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -module-name AVFoundation
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target arm64e-apple-macos11.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -module-name AVFoundation
 @_exported import AVFoundation
 import CoreGraphics
 import CoreMedia
@@ -47,31 +47,31 @@ extension AVError {
     get
   }
   @available(swift 4.2)
-  @available(OSX 10.10, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
+  @available(macOS 10.10, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
   public var presentationTimeStamp: CoreMedia.CMTime? {
     get
   }
   @available(swift 4.2)
-  @available(OSX 10.10, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
+  @available(macOS 10.10, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
   public var persistentTrackID: CoreMedia.CMPersistentTrackID? {
     get
   }
   @available(swift 4.2)
-  @available(OSX 10.10, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
+  @available(macOS 10.10, iOS 8.0, tvOS 9.0, watchOS 6.0, *)
   public var fileType: AVFoundation.AVFileType? {
     get
   }
 }
-@available(OSX 11.0, iOS 7.0, macCatalyst 14.0, *)
+@available(macOS 11.0, iOS 7.0, macCatalyst 14.0, *)
 extension AVMetadataMachineReadableCodeObject {
   @nonobjc public var corners: [CoreGraphics.CGPoint] {
     get
   }
 }
 @available(iOS 7.0, watchOS 2.0, tvOS 9.0, *)
-@available(OSX, unavailable)
+@available(macOS, unavailable)
 extension AVAudioSession.Location {
-  @available(OSX, unavailable)
+  @available(macOS, unavailable)
   @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.Orientation.top")
   @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.Orientation.top")
   @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.Orientation.top")
@@ -80,7 +80,7 @@ extension AVAudioSession.Location {
         Self(rawValue: AVAudioSession.Orientation.top.rawValue)
     }
   }
-  @available(OSX, unavailable)
+  @available(macOS, unavailable)
   @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.Orientation.bottom")
   @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.Orientation.bottom")
   @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.Orientation.bottom")
@@ -89,7 +89,7 @@ extension AVAudioSession.Location {
         Self(rawValue: AVAudioSession.Orientation.bottom.rawValue)
     }
   }
-  @available(OSX, unavailable)
+  @available(macOS, unavailable)
   @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.Orientation.front")
   @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.Orientation.front")
   @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.Orientation.front")
@@ -98,7 +98,7 @@ extension AVAudioSession.Location {
         Self(rawValue: AVAudioSession.Orientation.front.rawValue)
     }
   }
-  @available(OSX, unavailable)
+  @available(macOS, unavailable)
   @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.Orientation.back")
   @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.Orientation.back")
   @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.Orientation.back")
@@ -107,8 +107,8 @@ extension AVAudioSession.Location {
         Self(rawValue: AVAudioSession.Orientation.back.rawValue)
     }
   }
-  @available(OSX, unavailable)
-  @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.Orientation.left")
+  @available(macOS, unavailable)
+  @available(iOS, deprecated, introduced: 8.0, renamed: "AVAudioSession.Orientation.left")
   @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.Orientation.left")
   @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.Orientation.left")
   @_alwaysEmitIntoClient public static var orientationLeft: AVFoundation.AVAudioSession.Location {
@@ -116,8 +116,8 @@ extension AVAudioSession.Location {
         Self(rawValue: AVAudioSession.Orientation.left.rawValue)
     }
   }
-  @available(OSX, unavailable)
-  @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.Orientation.right")
+  @available(macOS, unavailable)
+  @available(iOS, deprecated, introduced: 8.0, renamed: "AVAudioSession.Orientation.right")
   @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.Orientation.right")
   @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.Orientation.right")
   @_alwaysEmitIntoClient public static var orientationRight: AVFoundation.AVAudioSession.Location {
@@ -127,9 +127,9 @@ extension AVAudioSession.Location {
   }
 }
 @available(iOS 7.0, watchOS 2.0, tvOS 9.0, *)
-@available(OSX, unavailable)
+@available(macOS, unavailable)
 extension AVAudioSession.Location {
-  @available(OSX, unavailable)
+  @available(macOS, unavailable)
   @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.PolarPattern.cardioid")
   @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.PolarPattern.cardioid")
   @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.PolarPattern.cardioid")
@@ -138,7 +138,7 @@ extension AVAudioSession.Location {
         Self(rawValue: AVAudioSession.PolarPattern.cardioid.rawValue)
     }
   }
-  @available(OSX, unavailable)
+  @available(macOS, unavailable)
   @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.PolarPattern.omnidirectional")
   @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.PolarPattern.omnidirectional")
   @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.PolarPattern.omnidirectional")
@@ -147,7 +147,7 @@ extension AVAudioSession.Location {
         Self(rawValue: AVAudioSession.PolarPattern.omnidirectional.rawValue)
     }
   }
-  @available(OSX, unavailable)
+  @available(macOS, unavailable)
   @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.PolarPattern.subcardioid")
   @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.PolarPattern.subcardioid")
   @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.PolarPattern.subcardioid")
@@ -157,7 +157,7 @@ extension AVAudioSession.Location {
     }
   }
 }
-@available(OSX 11.0, iOS 10.0, macCatalyst 14.0, *)
+@available(macOS 11.0, iOS 10.0, macCatalyst 14.0, *)
 extension AVCapturePhotoOutput {
   @nonobjc public var supportedFlashModes: [AVFoundation.AVCaptureDevice.FlashMode] {
     get
@@ -169,7 +169,7 @@ extension AVCapturePhotoOutput {
     get
   }
 }
-@available(OSX 11.0, iOS 10.0, macCatalyst 14.0, *)
+@available(macOS 11.0, iOS 10.0, macCatalyst 14.0, *)
 extension AVCapturePhotoSettings {
   @nonobjc public var availablePreviewPhotoPixelFormatTypes: [Darwin.OSType] {
     get
@@ -199,13 +199,13 @@ extension CMTimeMapping : Swift._ObjectiveCBridgeable {
   public static func _unconditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue?) -> CoreMedia.CMTimeMapping
   public typealias _ObjectiveCType = Foundation.NSValue
 }
-@available(OSX 10.7, iOS 5.0, *)
+@available(macOS 10.7, iOS 5.0, *)
 extension AVCaptureVideoDataOutput {
   @nonobjc public var availableVideoPixelFormatTypes: [Darwin.OSType] {
     get
   }
 }
-@available(OSX 11.0, iOS 10.0, macCatalyst 14.0, *)
+@available(macOS 11.0, iOS 10.0, macCatalyst 14.0, *)
 extension AVCaptureDevice.Format {
   @nonobjc public var supportedColorSpaces: [AVFoundation.AVCaptureColorSpace] {
     get

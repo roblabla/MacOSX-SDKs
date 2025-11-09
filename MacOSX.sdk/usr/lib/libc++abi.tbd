@@ -1,25 +1,19 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DDFCBF9C-432D-3B8A-8641-578D2EDDCAD8
+    value:           22AFC7FC-2DB6-3EF0-9CC0-EFFB9B65D5E2
   - target:          x86_64-maccatalyst
-    value:           DDFCBF9C-432D-3B8A-8641-578D2EDDCAD8
+    value:           22AFC7FC-2DB6-3EF0-9CC0-EFFB9B65D5E2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9291CD18-15AA-33CB-96FD-C5CB7F500470
-  - target:          arm64e-maccatalyst
-    value:           9291CD18-15AA-33CB-96FD-C5CB7F500470
+    value:           3409B6F1-870E-39D9-A61F-5FE711738D1B
 install-name:    '/usr/lib/libc++abi.dylib'
-current-version: 904.4
+current-version: 905.6
 exports:
-  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
-                       arm64-macos, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __ZNKSt10bad_typeid4whatEv, __ZNKSt11logic_error4whatEv, __ZNKSt13bad_exception4whatEv, 
                        __ZNKSt13runtime_error4whatEv, __ZNKSt20bad_array_new_length4whatEv, 
                        __ZNKSt8bad_cast4whatEv, __ZNKSt9bad_alloc4whatEv, __ZNKSt9exception4whatEv, 

@@ -4,22 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           204C3909-CEF3-37E2-BC2B-2E10A1DCEA12
+    value:           835BDD68-BCA7-336C-AE17-9346E6E9C212
   - target:          x86_64-maccatalyst
-    value:           204C3909-CEF3-37E2-BC2B-2E10A1DCEA12
+    value:           835BDD68-BCA7-336C-AE17-9346E6E9C212
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE177188-9719-3FAB-BDE2-0AAEA2BBB546
+    value:           E2A35CD4-58E9-3055-9894-66C581427B7E
   - target:          arm64e-maccatalyst
-    value:           CE177188-9719-3FAB-BDE2-0AAEA2BBB546
+    value:           E2A35CD4-58E9-3055-9894-66C581427B7E
 install-name:    '/System/Library/PrivateFrameworks/PhysicsKit.framework/Versions/A/PhysicsKit'
 current-version: 32
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__114default_deleteI6PKPathEE, 
+    weak-symbols:    [ __ZTINSt3__110__function6__baseIFvffiEEE, __ZTINSt3__117bad_function_callE, 
+                       __ZTSNSt3__110__function6__baseIFvffiEEE, __ZTSNSt3__110shared_ptrI6PKPathE27__shared_ptr_default_deleteIS1_S1_EE, 
                        __ZTSNSt3__117bad_function_callE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

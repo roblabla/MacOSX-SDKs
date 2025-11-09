@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           56CFE248-4E62-3D1C-BA85-6EE8573FAF60
+    value:           E0B21EAE-6A5B-383F-978E-B80F80B0A911
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0C217509-78A2-3767-B53C-E9715B92683F
+    value:           BEE58FF7-2798-39BB-8FBF-BEF882472505
 install-name:    '/usr/lib/swift/libswiftDemangle.dylib'
 current-version: 0
 exports:
@@ -66,7 +66,7 @@ exports:
                        __ZN5swift8Demangle9Demangler15createSwiftTypeENS0_4Node4KindEPKc, 
                        __ZN5swift8Demangle9Demangler15createWithChildENS0_4Node4KindEPS2_, 
                        __ZN5swift8Demangle9Demangler15demangleNaturalEv, __ZN5swift8Demangle9Demangler15demangleWitnessEv, 
-                       __ZN5swift8Demangle9Demangler15popFunctionTypeENS0_4Node4KindE, 
+                       __ZN5swift8Demangle9Demangler15popFunctionTypeENS0_4Node4KindEb, 
                        __ZN5swift8Demangle9Demangler16DemangleInitRAIIC1ERS1_N4llvm9StringRefENSt3__18functionIFPNS0_4NodeENS0_21SymbolicReferenceKindENS0_10DirectnessEiPKvEEE, 
                        __ZN5swift8Demangle9Demangler16DemangleInitRAIIC2ERS1_N4llvm9StringRefENSt3__18functionIFPNS0_4NodeENS0_21SymbolicReferenceKindENS0_10DirectnessEiPKvEEE, 
                        __ZN5swift8Demangle9Demangler16DemangleInitRAIID1Ev, __ZN5swift8Demangle9Demangler16DemangleInitRAIID2Ev, 
@@ -74,8 +74,8 @@ exports:
                        __ZN5swift8Demangle9Demangler16demangleMetatypeEv, __ZN5swift8Demangle9Demangler16demangleOperatorEv, 
                        __ZN5swift8Demangle9Demangler16demangleVariableEv, __ZN5swift8Demangle9Demangler16popAssocTypeNameEv, 
                        __ZN5swift8Demangle9Demangler16popAssocTypePathEv, __ZN5swift8Demangle9Demangler17demangleArchetypeEv, 
-                       __ZN5swift8Demangle9Demangler17demangleSubscriptEv, __ZN5swift8Demangle9Demangler17parseAndPushNodesEv, 
-                       __ZN5swift8Demangle9Demangler17popFunctionParamsENS0_4Node4KindE, 
+                       __ZN5swift8Demangle9Demangler17demangleClangTypeEv, __ZN5swift8Demangle9Demangler17demangleSubscriptEv, 
+                       __ZN5swift8Demangle9Demangler17parseAndPushNodesEv, __ZN5swift8Demangle9Demangler17popFunctionParamsENS0_4Node4KindE, 
                        __ZN5swift8Demangle9Demangler18createWithChildrenENS0_4Node4KindEPS2_S4_, 
                        __ZN5swift8Demangle9Demangler18createWithChildrenENS0_4Node4KindEPS2_S4_S4_, 
                        __ZN5swift8Demangle9Demangler18createWithChildrenENS0_4Node4KindEPS2_S4_S4_S4_, 
@@ -112,6 +112,7 @@ exports:
                        __ZN5swift8Demangle9Demangler28demangleStandardSubstitutionEv, 
                        __ZN5swift8Demangle9Demangler28getDependentGenericParamTypeEii, 
                        __ZN5swift8Demangle9Demangler29demangleGenericSpecializationENS0_4Node4KindE, 
+                       __ZN5swift8Demangle9Demangler29demangleImplDifferentiabilityEv, 
                        __ZN5swift8Demangle9Demangler29demangleThunkOrSpecializationEv, 
                        __ZN5swift8Demangle9Demangler29popAnyProtocolConformanceListEv, 
                        __ZN5swift8Demangle9Demangler30demangleAssociatedTypeCompoundEPNS0_4NodeE, 

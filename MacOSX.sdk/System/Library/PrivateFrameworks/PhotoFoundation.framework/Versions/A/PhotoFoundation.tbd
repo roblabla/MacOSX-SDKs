@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D6B9797F-D86A-3447-A2C5-876AA0B5D136
+    value:           AD210041-1B9F-3EFC-B8DC-C27E9DCEDF7D
   - target:          x86_64-maccatalyst
-    value:           D6B9797F-D86A-3447-A2C5-876AA0B5D136
+    value:           AD210041-1B9F-3EFC-B8DC-C27E9DCEDF7D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           992B0916-4FAC-3063-AE35-428D159BF8EB
+    value:           519913B3-F6C9-327D-AC98-CEB712DE47C6
   - target:          arm64e-maccatalyst
-    value:           992B0916-4FAC-3063-AE35-428D159BF8EB
+    value:           519913B3-F6C9-327D-AC98-CEB712DE47C6
 install-name:    '/System/Library/PrivateFrameworks/PhotoFoundation.framework/Versions/A/PhotoFoundation'
-current-version: 321.0.102
+current-version: 340.0.220
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

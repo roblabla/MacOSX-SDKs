@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           58B4505B-F0EA-37FC-9F5A-6F9F05B0F2A5
+    value:           10D0F0C5-A6F3-349F-BDE2-A3A13A155F3E
   - target:          x86_64-maccatalyst
-    value:           58B4505B-F0EA-37FC-9F5A-6F9F05B0F2A5
+    value:           10D0F0C5-A6F3-349F-BDE2-A3A13A155F3E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7AE3473A-AC33-34E8-B2A1-28CBB86BD302
+    value:           AFA31B41-0A7C-361F-85FD-A4DD5DDD24EE
   - target:          arm64e-maccatalyst
-    value:           7AE3473A-AC33-34E8-B2A1-28CBB86BD302
+    value:           AFA31B41-0A7C-361F-85FD-A4DD5DDD24EE
 install-name:    '/usr/lib/libAudioToolboxUtility.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

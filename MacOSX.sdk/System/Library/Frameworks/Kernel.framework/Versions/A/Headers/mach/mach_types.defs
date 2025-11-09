@@ -153,6 +153,14 @@ type task_read_t = mach_port_t
 #endif	/* KERNEL_SERVER */
 		;
 
+type task_id_token_t = mach_port_t
+#if KERNEL_SERVER
+		intran: task_id_token_t convert_port_to_task_id_token(mach_port_t)
+		outtran: mach_port_t convert_task_id_token_to_port(task_id_token_t)
+		destructor: task_id_token_release(task_id_token_t)
+#endif	/* KERNEL_SERVER */
+		;
+
 type thread_t = mach_port_t
 #if	KERNEL_SERVER
 		intran: thread_t convert_port_to_thread(mach_port_t)
@@ -550,8 +558,13 @@ type exception_behavior_t	= int;
 
 type    exception_handler_t = mach_port_t;
 
+type    exception_handler_info_t = struct[2] of natural_t;
+
 type	exception_handler_array_t	=
 			array[*:32] of exception_handler_t;
+
+type    exception_handler_info_array_t =
+			array[*:32] of exception_handler_info_t;
 
 type	exception_behavior_array_t	=
 			array[*:32] of exception_behavior_t;
@@ -686,9 +699,10 @@ type dyld_kernel_process_info_t = struct[64] of MACH_MSG_TYPE_BYTE;
 
 #if KERNEL_SERVER
 
-simport <kern/ipc_mig.h>;	/* pick up kernel-specific MIG things */
+simport <kern/ipc_mig.h>;	    /* pick up kernel-specific MIG things */
 
 simport <kern/suid_cred.h>;
+simport <kern/task_ident.h>;    /* for task_id_token conversions */
 #endif /* KERNEL_SERVER */
 
 import <mach/mig.h>;

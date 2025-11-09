@@ -153,6 +153,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 
 @end
 
+#if defined( PDFKIT_PLATFORM_OSX )
 
 @interface PDFPage (PDFPageDeprecated)
 
@@ -175,6 +176,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 
 @end
 
+#endif
 
 
 NS_ASSUME_NONNULL_END

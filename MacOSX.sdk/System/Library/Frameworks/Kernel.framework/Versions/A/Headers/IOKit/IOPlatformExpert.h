@@ -79,7 +79,8 @@ enum {
 	kPEPagingOff,
 	kPEPanicBegin,
 	kPEPanicEnd,
-	kPEPanicRestartCPUNoCallouts
+	kPEPanicRestartCPUNoCallouts,
+	kPEPanicDiagnosticsDone,
 };
 
 /* Bitmask of details related to panic callouts */

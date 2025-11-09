@@ -29,7 +29,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-WK_EXTERN API_AVAILABLE(macos(11.0), ios(14.0))
+WK_EXTERN API_AVAILABLE(macos(10.15.4), ios(13.4))
 @interface WKPDFConfiguration : NSObject <NSCopying>
 
 /*! @abstract The rect to capture in web page coordinates

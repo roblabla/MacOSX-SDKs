@@ -69,6 +69,7 @@
 #include <netinet/in_pcb.h>
 #include <netinet/tcp.h>
 #include <netinet/tcp_timer.h>
+#include <TargetConditionals.h>
 
 #if defined(__LP64__)
 #define _TCPCB_PTR(x)                   u_int32_t
@@ -490,7 +491,7 @@ struct  xtcpcb {
 	u_quad_t        xt_alignment_hack;
 };
 
-#if XNU_TARGET_OS_OSX || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR)
+#if XNU_TARGET_OS_OSX || KERNEL || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR)
 
 struct  xtcpcb64 {
 	u_int32_t               xt_len;
@@ -571,7 +572,7 @@ struct  xtcpcb64 {
 	u_quad_t                xt_alignment_hack;
 };
 
-#endif /* XNU_TARGET_OS_OSX || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR) */
+#endif /* XNU_TARGET_OS_OSX || KERNEL || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR) */
 
 
 #pragma pack()

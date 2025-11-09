@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C33490A1-38C3-3E27-8354-29D3AAB278E9
+    value:           E7F1C113-A545-30D5-9507-9EC033F2496F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E64AF3C6-A530-3834-B62B-3C9EE4416D2F
+    value:           7CD09E75-C8B8-3367-8626-61F139718DED
 install-name:    '/System/Library/PrivateFrameworks/IMCorePipeline.framework/Versions/A/IMCorePipeline'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

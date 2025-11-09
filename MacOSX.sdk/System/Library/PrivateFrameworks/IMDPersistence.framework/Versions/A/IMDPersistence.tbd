@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AD3D3C6F-2BDB-3014-B4BE-72643BF221E3
+    value:           C5559028-F61B-37D8-BC9F-31EA6F77E556
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DF2B3FD9-D38B-3E23-813D-C7C100CBDB4B
+    value:           24B04B91-7916-3F86-8384-6A250BC56C1E
 install-name:    '/System/Library/PrivateFrameworks/IMDPersistence.framework/Versions/A/IMDPersistence'
 current-version: 800
 exports:
@@ -41,15 +41,16 @@ exports:
                        _IMDAttachmentRecordCreate, _IMDAttachmentRecordCreateEphemeralRecord, 
                        _IMDAttachmentRecordCreateFromRecordID, _IMDAttachmentRecordCreateFromRecordIDUnlocked, 
                        _IMDAttachmentRecordDeleteAttachmentForGUID, _IMDAttachmentRecordDeleteAttachmentPreviewsOlderThan, 
-                       _IMDAttachmentRecordDeleteAttachmentsOlderThanDays, _IMDAttachmentRecordDeleteTombStonedAttachmentsWithRecordIDs, 
+                       _IMDAttachmentRecordDeleteAttachmentsOlderThanDays, _IMDAttachmentRecordDeleteAttachmentsWithoutMessage, 
+                       _IMDAttachmentRecordDeleteTombStonedAttachmentsWithRecordIDs, 
                        _IMDAttachmentRecordDoesAttachmentWithGUIDExist, _IMDAttachmentRecordDoesStickerPathHaveAttachments, 
-                       _IMDAttachmentRecordEstimateSpaceTakenByAttachmentsOlderThanDays, 
-                       _IMDAttachmentRecordGetCreatedDate, _IMDAttachmentRecordGetIdentifier, 
-                       _IMDAttachmentRecordGetIsOutgoing, _IMDAttachmentRecordGetNonSyncedAttachmentDiskSpace, 
-                       _IMDAttachmentRecordGetPurgeableDiskSpace, _IMDAttachmentRecordGetStartDate, 
-                       _IMDAttachmentRecordGetTotalBytes, _IMDAttachmentRecordGetTransferState, 
-                       _IMDAttachmentRecordGetTypeID, _IMDAttachmentRecordIsSticker, 
-                       _IMDAttachmentRecordMarkAllAttachmentsAsNeedingCloudKitSync, 
+                       _IMDAttachmentRecordDoubleCheckSize, _IMDAttachmentRecordEstimateSpaceTakenByAttachmentsOlderThanDays, 
+                       _IMDAttachmentRecordGetAttachmentDiagnosticInfo, _IMDAttachmentRecordGetCreatedDate, 
+                       _IMDAttachmentRecordGetIdentifier, _IMDAttachmentRecordGetIsOutgoing, 
+                       _IMDAttachmentRecordGetNonSyncedAttachmentDiskSpace, _IMDAttachmentRecordGetPurgeableDiskSpace, 
+                       _IMDAttachmentRecordGetStartDate, _IMDAttachmentRecordGetTotalBytes, 
+                       _IMDAttachmentRecordGetTransferState, _IMDAttachmentRecordGetTypeID, 
+                       _IMDAttachmentRecordIsSticker, _IMDAttachmentRecordMarkAllAttachmentsAsNeedingCloudKitSync, 
                        _IMDAttachmentRecordRowIDForGUID, _IMDAttachmentRecordUpdateAttachmentGUIDWithGUID, 
                        _IMDAttachmentResetAllAttachmentsInFailedCloudDownloadState, 
                        _IMDAttachmentSpaceTakenByAttachmentClass, _IMDAttachmentUpdateAttachmentFileSizeWithRowIDGreaterThanWatermark, 
@@ -301,7 +302,7 @@ exports:
                        __IMDChatRecordBulkCopy, __IMDChatRecordBulkCopyXPCDictionary, 
                        __IMDChatRecordCopyProperty, __IMDChatRecordGetDateProperty, 
                        __IMDChatRecordGetProperty, __IMDChatRecordSetProperty, __IMDContactNameForNickname, 
-                       __IMDContactsKindForID, __IMDCopyAttachmentsNeedingFileSizeUpdatesForWatermark, 
+                       __IMDContactStore, __IMDContactsKindForID, __IMDCopyAttachmentsNeedingFileSizeUpdatesForWatermark, 
                        __IMDCopyIMDAttachmentRecordFromXPCObjectClient, __IMDCopyIMDAttachmentRecordFromXPCObjectServer, 
                        __IMDCopyIMDChatRecordFromXPCObjectClient, __IMDCopyIMDChatRecordFromXPCObjectServer, 
                        __IMDCopyIMDHandleRecordFromXPCObjectClient, __IMDCopyIMDHandleRecordFromXPCObjectServer, 
@@ -350,9 +351,9 @@ exports:
                        _kMaxTransfersPerMessage, _sCatalystSearchableIndex, _sSearchableIndex, 
                        _sSpotlightIndexQueue ]
     objc-classes:    [ IMAbstractDatabaseArchiver, IMAbstractDatabaseTrimmer, IMDAbstractDatabaseDowngrader, 
-                       IMDCNPersonAliasResolver, IMDCoreSpotlightBaseIndexer, IMDCoreSpotlightChatParticipant, 
-                       IMDCoreSpotlightContactCache, IMDCoreSpotlightDispatchObject, 
-                       IMDCoreSpotlightManager, IMDCoreSpotlightMessageAttachmentIndexer, 
+                       IMDAttachmentDiagnosticInfo, IMDCNPersonAliasResolver, IMDCoreSpotlightBaseIndexer, 
+                       IMDCoreSpotlightChatParticipant, IMDCoreSpotlightContactCache, 
+                       IMDCoreSpotlightDispatchObject, IMDCoreSpotlightManager, IMDCoreSpotlightMessageAttachmentIndexer, 
                        IMDCoreSpotlightMessageBalloonPluginIndexer, IMDCoreSpotlightMessageBodyIndexer, 
                        IMDCoreSpotlightMessageDataDetectorsIndexer, IMDCoreSpotlightMessageMetadataIndexer, 
                        IMDCoreSpotlightMessageSubjectIndexer, IMDCoreSpotlightRecipientIndexer, 

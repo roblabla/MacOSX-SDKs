@@ -36,18 +36,18 @@ NSString* const NSSystemExtensionUsageDescriptionKey;
 
 typedef NS_ERROR_ENUM(OSSystemExtensionErrorDomain, OSSystemExtensionErrorCode) {
     OSSystemExtensionErrorUnknown = 1,
-    OSSystemExtensionErrorMissingEntitlement,
-    OSSystemExtensionErrorUnsupportedParentBundleLocation,
-    OSSystemExtensionErrorExtensionNotFound,
-    OSSystemExtensionErrorExtensionMissingIdentifier,
-    OSSystemExtensionErrorDuplicateExtensionIdentifer,
-    OSSystemExtensionErrorUnknownExtensionCategory,
-    OSSystemExtensionErrorCodeSignatureInvalid,
-    OSSystemExtensionErrorValidationFailed,
-    OSSystemExtensionErrorForbiddenBySystemPolicy,
-    OSSystemExtensionErrorRequestCanceled,
-    OSSystemExtensionErrorRequestSuperseded,
-    OSSystemExtensionErrorAuthorizationRequired,
+    OSSystemExtensionErrorMissingEntitlement = 2,
+    OSSystemExtensionErrorUnsupportedParentBundleLocation = 3,
+    OSSystemExtensionErrorExtensionNotFound = 4,
+    OSSystemExtensionErrorExtensionMissingIdentifier = 5,
+    OSSystemExtensionErrorDuplicateExtensionIdentifer = 6,
+    OSSystemExtensionErrorUnknownExtensionCategory = 7,
+    OSSystemExtensionErrorCodeSignatureInvalid = 8,
+    OSSystemExtensionErrorValidationFailed = 9,
+    OSSystemExtensionErrorForbiddenBySystemPolicy = 10,
+    OSSystemExtensionErrorRequestCanceled = 11,
+    OSSystemExtensionErrorRequestSuperseded = 12,
+    OSSystemExtensionErrorAuthorizationRequired = 13,
 } NS_ENUM_AVAILABLE_MAC(10.15);
 
 typedef NS_ENUM(NSInteger, OSSystemExtensionReplacementAction) {

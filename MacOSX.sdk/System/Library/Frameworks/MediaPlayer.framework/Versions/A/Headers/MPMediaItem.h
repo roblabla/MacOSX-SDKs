@@ -198,6 +198,10 @@ MP_EXTERN NSString * const MPMediaItemPropertyPlaybackStoreID
     MP_API(ios(10.3), tvos(10.3), watchos(5.0), macos(10.13));
 @property (nonatomic, readonly) NSString *playbackStoreID MP_API(ios(10.3));
 
+MP_EXTERN NSString * const MPMediaItemPropertyIsPreorder
+    MP_API(ios(14.5), tvos(14.5), watchos(7.3), macos(11.3));
+@property (nonatomic, readonly, getter=isPreorder) BOOL preorder MP_API(ios(10.3));
+
 @end
 
 //-----------------------------------------------------

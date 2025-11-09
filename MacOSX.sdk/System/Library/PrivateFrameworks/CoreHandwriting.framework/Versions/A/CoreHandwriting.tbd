@@ -4,26 +4,27 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           503717BE-E9B6-3805-B9C8-8DA329788629
+    value:           5515F8B6-2C94-3609-91D1-190D1105692C
   - target:          x86_64-maccatalyst
-    value:           503717BE-E9B6-3805-B9C8-8DA329788629
+    value:           5515F8B6-2C94-3609-91D1-190D1105692C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           661F1287-380F-37E6-A356-66D63086EC1E
+    value:           EE804585-6F09-3336-BD78-55E1B5DAAA1E
   - target:          arm64e-maccatalyst
-    value:           661F1287-380F-37E6-A356-66D63086EC1E
+    value:           EE804585-6F09-3336-BD78-55E1B5DAAA1E
 install-name:    '/System/Library/PrivateFrameworks/CoreHandwriting.framework/Versions/A/CoreHandwriting'
 current-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CHDescriptionForCorrectionResultType, _CHRecognitionOptionDrawingAnchorPoint, 
-                       _CHRecognitionOptionFrameContext, _CHRecognitionOptionPrecedingSpaceBehavior, 
-                       _CHRecognitionOptionShouldPreserveCaseVariantCandidates, _CHRecognitionOptionShouldRefineCandidates, 
-                       _CHRecognitionOptionTextAfter, _CHRecognitionOptionTextBefore ]
+                       _CHRecognitionOptionFrameContext, _CHRecognitionOptionInferenceCache, 
+                       _CHRecognitionOptionPrecedingSpaceBehavior, _CHRecognitionOptionShouldPreserveCaseVariantCandidates, 
+                       _CHRecognitionOptionShouldRefineCandidates, _CHRecognitionOptionTextAfter, 
+                       _CHRecognitionOptionTextBefore ]
     objc-classes:    [ CHBottomUpStrokeGroupingStrategy, CHBoxcarFilterPointFIFO, 
                        CHContextualTextResult, CHContextualTextResults, CHDataDetectorQuery, 
                        CHDataDetectorQueryItem, CHDrawing, CHEncodedStrokeIdentifier, 
@@ -32,8 +33,9 @@ exports:
                        CHNonTextCandidateStroke, CHPointFIFO, CHPointStrokeFIFO, 
                        CHQuadCurvePointFIFO, CHQuery, CHRecognitionInsight, CHRecognitionInsightRequest, 
                        CHRecognitionResult, CHRecognitionSession, CHRecognitionSessionIndexableContent, 
-                       CHRecognitionSessionResult, CHRecognizer, CHRecognizerOptions, 
-                       CHRemoteRecognizer, CHSearchQuery, CHSearchQueryItem, CHStrokeClassificationModel, 
+                       CHRecognitionSessionResult, CHRecognizer, CHRecognizerConfiguration, 
+                       CHRecognizerInferenceCache, CHRecognizerOptions, CHRemoteRecognizer, 
+                       CHSearchQuery, CHSearchQueryItem, CHStrokeClassificationModel, 
                        CHStrokeClassificationResult, CHStrokeClassifier, CHStrokeClutterFilter, 
                        CHStrokeGroup, CHStrokeGroupQuery, CHStrokeGroupQueryItem, 
                        CHStrokeGroupRecognitionResult, CHStrokeGroupTextCorrectionResult, 
@@ -45,7 +47,7 @@ exports:
                        CHTopDownStrokeGroupingStrategy, CHTranscriptionQuery, CHVisualizationManager ]
     objc-ivars:      [ CHNonTextCandidateStroke._support, CHNonTextCandidateStroke._supportByStrokeIdentifier, 
                        CHTextInputTargetContentInfo._activePreviewRange, CHTextInputTargetContentInfo._autoCapitalizationMode, 
-                       CHTextInputTargetContentInfo._characterRectsInReferenceSubstring, 
+                       CHTextInputTargetContentInfo._autoCorrectionMode, CHTextInputTargetContentInfo._characterRectsInReferenceSubstring, 
                        CHTextInputTargetContentInfo._containsCommittedStrokes, CHTextInputTargetContentInfo._contentType, 
                        CHTextInputTargetContentInfo._isCursorStrong, CHTextInputTargetContentInfo._isSingleLine, 
                        CHTextInputTargetContentInfo._lastCharacterLevelPosition, 

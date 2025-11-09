@@ -14,6 +14,58 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NSString *NSFileProviderDomainIdentifier NS_EXTENSIBLE_STRING_ENUM;
 
 /**
+ File provider domain version.
+
+ This object can be used by the `NSFileProviderReplicatedExtension` to describe the
+ current version of the domain. This object is immutable and can safely be used as
+ a key in a dictionary.
+ */
+FILEPROVIDER_API_AVAILABILITY_V3_1
+@interface NSFileProviderDomainVersion : NSObject <NSSecureCoding>
+
+/** Build a version that is strictly greater than the receiver.
+ */
+- (NSFileProviderDomainVersion *)next;
+
+/** Compare two domain versions.
+
+ This returns the NSComparisonResult of the comparison of the receiver and the
+ other version:
+  - NSOrderedAscending if the receiver predates the otherVersion
+  - NSOrderedDescending if the otherVersion predates the receiver
+  - NSOrderedSame if both versions are equal
+
+ In Swift, NSFileProviderDomainVersion is comparable.
+ */
+- (NSComparisonResult)compare:(NSFileProviderDomainVersion *)otherVersion NS_REFINED_FOR_SWIFT;
+
+@end
+
+/** Testing modes.
+ */
+FILEPROVIDER_API_AVAILABILITY_V3_1
+typedef NS_OPTIONS(NSUInteger, NSFileProviderDomainTestingModes) {
+    /** Enable the domain without any user action required.
+     */
+    NSFileProviderDomainTestingModeAlwaysEnabled = 1 << 0,
+
+    /** Enable interactive mode.
+
+     Disable the automatic scheduling from the system and allow external tools to
+     control the execution of operations.
+
+     When manual scheduling is enabled, an external tool should use
+     -[NSFileProviderManager listAvailableTestingOperationsWithError:] and
+     -[NSFileProviderManager runTestingOperations:error:] to control the system.
+
+     If that mode is enabled, some crash recovery guarantees are lost. For instance,
+     the system may lose any event that hasn't been ingested. The system does not
+     support removing this mode from a domain on which it has been enabled.
+     */
+    NSFileProviderDomainTestingModeInteractive = 1 << 1
+} NS_SWIFT_NAME(NSFileProviderDomain.TestingModes);
+
+/**
  File provider domain.
 
  A file provider domain can be used to represent accounts or different locations
@@ -40,7 +92,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  Initialize a new NSFileProviderDomain
 
  The file provider extension implementation can pick any @c identifier as it sees
- fit to identify the group of items.
+ fit to identify the group of items. The identifier must not contain any characters from this set: [/:]
 
  @param displayName a user visible string representing the group of items the
  file provider extension is using.
@@ -54,7 +106,7 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  Initialize a new NSFileProviderDomain
 
  The file provider extension implementation can pick any @c identifier as it sees
- fit to identify the group of items.
+ fit to identify the group of items. The identifier must not contain any characters from this set: [/:]
 
  @param displayName a user visible string representing the group of items the
  file provider extension is using.
@@ -98,6 +150,17 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  Typically, this can be used for dry-run migration. The files are still on disk though.
 */
 @property (readwrite, assign, getter=isHidden) BOOL hidden FILEPROVIDER_API_AVAILABILITY_V3;
+
+/** Testing modes.
+
+ Testing modes are exposed as a means for the provider to have more control over the system in
+ a testing environment. Enabling a testing mode alters the behavior of the system and enables
+ some APIs for that mode.
+
+ A process must have the com.apple.developer.fileprovider.testing-mode entitlement in order to
+ configure a domain with non-empty testing modes.
+ */
+@property (readwrite, assign) NSFileProviderDomainTestingModes testingModes FILEPROVIDER_API_AVAILABILITY_V3_1;
 
 @end
 

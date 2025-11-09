@@ -24,7 +24,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIBarButtonItemGroup : NSObject<
 
 /// In order to display as many items as possible, bars that support UIBarButtonItemGroup may choose to collapse items associated with groups to the representativeItem specified by the group.
 /// A bar will only collapse groups that have a representativeItem set, but may still choose to use an alternate presentation of these items.
-/// A UIBarButtonItem may only be either the representativeItem or a member of the barbuttonItems of a single UIBarButtonItemGroup and may only represent a single group.
+/// A UIBarButtonItem may only be either the representativeItem or a member of the barButtonItems of a single UIBarButtonItemGroup and may only represent a single group.
 /// If the representativeItem has an action, then that action will be invoked, otherwise the bar will present a standard UI to allow selection of the barButtonItems in the representedItem's group.
 @property (nonatomic, readwrite, strong, nullable) UIBarButtonItem *representativeItem;
 

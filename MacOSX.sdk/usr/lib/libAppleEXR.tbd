@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           84B1FAA5-8D5A-3B1F-AB8D-E58B8226223D
+    value:           517050AC-D410-3B21-A605-CD96A355AEB5
   - target:          x86_64-maccatalyst
-    value:           84B1FAA5-8D5A-3B1F-AB8D-E58B8226223D
+    value:           517050AC-D410-3B21-A605-CD96A355AEB5
   - target:          x86_64h-macos
-    value:           41659EF9-B787-3821-BF0A-1D02A81C5227
+    value:           38A1F4D7-FCF8-329C-8BDC-7B0D51A39A70
   - target:          x86_64h-maccatalyst
-    value:           41659EF9-B787-3821-BF0A-1D02A81C5227
+    value:           38A1F4D7-FCF8-329C-8BDC-7B0D51A39A70
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ACABDA5A-CD16-3F6D-B56C-85265FE638B9
+    value:           37992F8F-731C-3416-9F56-13EE67E1805F
   - target:          arm64e-maccatalyst
-    value:           ACABDA5A-CD16-3F6D-B56C-85265FE638B9
+    value:           37992F8F-731C-3416-9F56-13EE67E1805F
 install-name:    '/usr/lib/libAppleEXR.dylib'
-current-version: 1.2.7
+current-version: 1.3.4
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _axr_channel_type_get_name, _axr_compression_get_name, _axr_data_create, 
                        _axr_data_get_channel_count, _axr_data_get_channel_info, _axr_data_get_layer_count, 

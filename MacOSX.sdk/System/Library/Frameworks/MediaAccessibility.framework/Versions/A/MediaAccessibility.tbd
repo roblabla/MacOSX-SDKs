@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9B4710C9-6238-3507-9918-FDA38CDC0B00
+    value:           6AFE5FEE-DEC6-3649-9238-75AB7F9BF683
   - target:          x86_64-maccatalyst
-    value:           9B4710C9-6238-3507-9918-FDA38CDC0B00
+    value:           6AFE5FEE-DEC6-3649-9238-75AB7F9BF683
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4B386CC2-EA1A-38DA-9335-30B39FF7A57D
+    value:           1D058C73-4A27-310A-A98C-79EE802DBDAE
   - target:          arm64e-maccatalyst
-    value:           4B386CC2-EA1A-38DA-9335-30B39FF7A57D
+    value:           1D058C73-4A27-310A-A98C-79EE802DBDAE
 install-name:    '/System/Library/Frameworks/MediaAccessibility.framework/Versions/A/MediaAccessibility'
 current-version: 62
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MAAudibleMediaCopyPreferredCharacteristics, _MAAudibleMediaPrefCopyPreferDescriptiveVideo, 
                        _MAAudibleMediaPrefResetAll, _MAAudibleMediaPrefSetPreferDescriptiveVideo, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FB62A727-F7C8-39B2-972E-C75FD4854ADD
+    value:           EA285D4E-29B1-3521-9EEC-5D0C7D85BD69
   - target:          x86_64-maccatalyst
-    value:           FB62A727-F7C8-39B2-972E-C75FD4854ADD
+    value:           EA285D4E-29B1-3521-9EEC-5D0C7D85BD69
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A8CB89E2-9E45-3B21-8EAA-E8D2B80AF68F
+    value:           307F8665-7008-3071-89C9-D88655A0F56F
   - target:          arm64e-maccatalyst
-    value:           A8CB89E2-9E45-3B21-8EAA-E8D2B80AF68F
+    value:           307F8665-7008-3071-89C9-D88655A0F56F
 install-name:    '/System/Library/PrivateFrameworks/AppleLDAP.framework/Versions/A/AppleLDAP'
 current-version: 54
 exports:

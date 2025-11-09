@@ -318,6 +318,14 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  */
 @property (readonly) BOOL allowsConstrainedNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
+/*!
+ @abstract returns whether we assume that server supports HTTP/3. Enables QUIC
+ racing without HTTP/3 service discovery.
+ @result YES if server endpoint is known to support HTTP/3. Defaults to NO.
+ The default may be YES in a future OS update.
+ */
+@property (readonly) BOOL assumesHTTP3Capable API_AVAILABLE(macos(11.3), ios(14.5), watchos(7.4), tvos(14.5));
+
 @end
 
 
@@ -423,6 +431,14 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  satify the request, YES otherwise.
  */
 @property BOOL allowsConstrainedNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*!
+ @abstract returns whether we assume that server supports HTTP/3. Enables QUIC
+ racing without HTTP/3 service discovery.
+ @result YES if server endpoint is known to support HTTP/3. Defaults to NO.
+ The default may be YES in a future OS update.
+ */
+@property BOOL assumesHTTP3Capable API_AVAILABLE(macos(11.3), ios(14.5), watchos(7.4), tvos(14.5));
 
 @end
 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D6CE9BF5-BB5C-3BFB-81DA-DB02D6A0A1B2
+    value:           E9B3D777-8A96-3FFA-8421-916463264D5F
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/unorm8_a.dylib'
 exports:
   - targets:         [ x86_64-macos ]

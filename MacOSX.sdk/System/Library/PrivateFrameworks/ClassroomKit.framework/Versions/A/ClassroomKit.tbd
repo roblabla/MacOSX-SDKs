@@ -1,23 +1,33 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           936BD72B-1FBE-3235-98FA-B269D8D7F4E7
+    value:           5D5F3009-8BCF-3A28-AFB2-59699D4B6636
+  - target:          x86_64-maccatalyst
+    value:           5D5F3009-8BCF-3A28-AFB2-59699D4B6636
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DA4D4B65-1ED7-3A6E-B19C-CF591AD15B89
+    value:           BBF4F7B1-471E-3503-963B-6E8F47701FBC
+  - target:          arm64e-maccatalyst
+    value:           BBF4F7B1-471E-3503-963B-6E8F47701FBC
 install-name:    '/System/Library/PrivateFrameworks/ClassroomKit.framework/Versions/A/ClassroomKit'
 reexported-libraries:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CACHE_DIRECTORY, _CRKActiveInstructorIdentifiersUserInfoKey, 
-                       _CRKActiveStudentCourseIdentifierStringsUserInfoKey, _CRKActiveStudentCoursesDidChangeNotificationName, 
+                       _CRKActiveInstructorsDidChangeNotificationName, _CRKActiveStudentCourseIdentifierStringsUserInfoKey, 
+                       _CRKActiveStudentCoursesDidChangeNotificationName, _CRKAllClassroomBundleIdentifiers, 
                        _CRKApplicationInfoServiceXPCInterface, _CRKBooksServiceXPCInterface, 
-                       _CRKClassSessionServiceType, _CRKClassroomBundleIdentifier, 
+                       _CRKBoolCompare, _CRKClassSessionServiceType, _CRKClassroomBundleIdentifier, 
                        _CRKClassroomEnrollmentRecordMaxDaysBeforeCleanup, _CRKClassroomKeychainGroupIdentifier, 
                        _CRKClassroomKitBundleIdentifier, _CRKClassroomMacOSBundleIdentifier, 
                        _CRKClassroomServiceInvitationBeaconUUIDString, _CRKClassroomServicePortNumber, 
@@ -58,39 +68,38 @@ exports:
                        _CRKEDUProfileErrorTopLevelUserIdentifierKey, _CRKEDUProfileErrorValueKey, 
                        _CRKErrorDomain, _CRKErrorWithCodeAndUserInfo, _CRKEventRecordingKey, 
                        _CRKFinderBundleIdentifier, _CRKFoundationClasses, _CRKHalfYearInterval, 
-                       _CRKIdentityServiceName, _CRKIdleStateKey, _CRKInstructorActiveCourseDidChangeNotificationName, 
-                       _CRKInstructorActiveCourseIdentifierStringUserInfoKey, _CRKInstructorDidAssertEnrollmentStateNotificationName, 
-                       _CRKInstructordBundleIdentifier, _CRKInstructordMacOSBundleIdentifier, 
-                       _CRKInstructordiOSBundleIdentifier, _CRKInternetDateFetchingXPCInterface, 
+                       _CRKIdentityServiceName, _CRKIdleStateKey, _CRKInstructordBundleIdentifier, 
+                       _CRKInstructordMacOSBundleIdentifier, _CRKInstructordiOSBundleIdentifier, 
+                       _CRKIntegerCompare, _CRKInternetDateFetchingXPCInterface, 
                        _CRKInviteToCourseDidAcceptNotificationName, _CRKInviteToCourseDidFailNotificationName, 
                        _CRKInviteToCourseDidSucceedNotificationName, _CRKInviteToCourseFailureReasonEnrollmentDenied, 
                        _CRKInviteToCourseFailureReasonInvalidConfiguration, _CRKInviteToCourseFailureReasonInvalidPin, 
                        _CRKInviteToCourseFailureReasonStudentNotSupported, _CRKInviteToCoursePinAcceptedNotificationName, 
                        _CRKInviteToCoursePinUserInfoKey, _CRKInviteToCourseReasonUserInfoKey, 
-                       _CRKInviteToCourseStudentInformationUserInfoKey, _CRKIsOSX, 
-                       _CRKIsSimulator, _CRKIsiOS, _CRKLogAddStateHandler, _CRKLogEventsDidChangeNotificationName, 
-                       _CRKLogRemoveStateHandler, _CRKOpenAppsDidChangeEventBundleIdentifiersUserInfoKey, 
-                       _CRKOpenAppsDidChangeEventName, _CRKOpenAppsDidChangeEventPlatformUserInfoKey, 
-                       _CRKOpenAppsDidChangeEventPrimaryBundleIdentifierUserInfoKey, 
+                       _CRKInviteToCourseStudentInformationUserInfoKey, _CRKIsClassroomBundleIdentifier, 
+                       _CRKIsOSX, _CRKIsSimulator, _CRKIsiOS, _CRKLogAddStateHandler, 
+                       _CRKLogEventsDidChangeNotificationName, _CRKLogRemoveStateHandler, 
+                       _CRKOpenAppsDidChangeEventBundleIdentifiersUserInfoKey, _CRKOpenAppsDidChangeEventName, 
+                       _CRKOpenAppsDidChangeEventPlatformUserInfoKey, _CRKOpenAppsDidChangeEventPrimaryBundleIdentifierUserInfoKey, 
                        _CRKOperationDidBeginPromptingForRequestPermissionNotificationName, 
                        _CRKOperationDidEndPromptingForRequestPermissionNotificationName, 
                        _CRKRectFromDictionary, _CRKRectHash, _CRKRemoteBoolFromBOOL, 
                        _CRKRestrictionClientAppLockIdentifier, _CRKRestrictionClientIdentifier, 
-                       _CRKScreenObservingInstructorsDidChangeNotificationName, _CRKScreenshotServiceBundleIdentifier, 
-                       _CRKScreenshotServiceXPCInterface, _CRKSettingsAppDidLaunchNotificationName, 
-                       _CRKSettingsBundleAdHocConfigurationDidChangeNotificationName, 
+                       _CRKScreenshotServiceBundleIdentifier, _CRKScreenshotServiceXPCInterface, 
+                       _CRKSettingsAppDidLaunchNotificationName, _CRKSettingsBundleAdHocConfigurationDidChangeNotificationName, 
                        _CRKSettingsUIVisibilityDidChangeNotificationName, _CRKSettingsUIVisibilityUserInfoKey, 
                        _CRKShareTargetsDidChangeNotificationName, _CRKShareTargetsUserInfoKey, 
                        _CRKSharedURLDisplayNameUserInfoKey, _CRKSharedURLPreviewImageDataUserInfoKey, 
                        _CRKSharedURLResourcesKey, _CRKSharedURLSourceBundleIdentifierUserInfoKey, 
                        _CRKSharedURLUserInfoKey, _CRKSpringBoardBundleIdentifier, 
-                       _CRKStudentDaemonXPCInterface, _CRKStudentDidAssertEnrollmentStateNotificationName, 
-                       _CRKStudentDidShareURLNotificationName, _CRKStudentEnrollmentStateUserInfoKey, 
+                       _CRKStudentDaemonXPCInterface, _CRKStudentDidShareURLNotificationName, 
                        _CRKStudentEnrollmentStatusDidChangeNotificationName, _CRKStudentMigratorRequestStudentdLaunchNotificationName, 
-                       _CRKStudentPermissionsDidChangeNotificationName, _CRKSystemPreferencesBundleIdentifier, 
-                       _CRKTaskClientInstructorClassroomAppVersionUserInfoKey, _CRKTaskClientInstructorIdentifierUserInfoKey, 
-                       _CRKTaskClientInstructorOSVersionUserInfoKey, _CRKTaskClientInstructorPlatformUserInfoKey, 
-                       _CRKTaskClientSessionIdentifierUserInfoKey, _CRKTaskClientSessionTokenUserInfoKey, 
+                       _CRKStudentPermissionsDidChangeNotificationName, _CRKStudentdProcessIdentifierKey, 
+                       _CRKSystemPreferencesBundleIdentifier, _CRKTaskClientInstructorClassroomAppVersionUserInfoKey, 
+                       _CRKTaskClientInstructorDisallowsClassroomAirDropOverLocalNetworkKey, 
+                       _CRKTaskClientInstructorIdentifierUserInfoKey, _CRKTaskClientInstructorOSVersionUserInfoKey, 
+                       _CRKTaskClientInstructorPlatformUserInfoKey, _CRKTaskClientSessionIdentifierUserInfoKey, 
+                       _CRKTaskClientSessionTokenUserInfoKey, _CRKTaskClientUntrustedKey, 
                        _CRKTaskServerBaseStudentIdentifierUserInfoKey, _CRKTestingIdentityCertificateExpire, 
                        _CRKTestingIdentityCertificateKey, _CRKTestingIdentityCertificateStage, 
                        _CRTLog, _CRTLogError, _ClassroomKitVersionNumber, _ClassroomKitVersionString, 
@@ -99,7 +108,7 @@ exports:
                        _kCRKAdHocConfigurationAutoAssistEnabledKey, _kCRKAdHocConfigurationAutoAssistModifiableKey, 
                        _kCRKAdHocConfigurationCloudSyncingEnabledKey, _kCRKAdHocConfigurationCloudSyncingModifiableKey, 
                        _kCRKAdHocConfigurationDefaultStudentInformationKey, _kCRKAdHocConfigurationEnabledKey, 
-                       _kCRKAdHocConfigurationRequestPermissionToLeaveClassesEnabledKey, 
+                       _kCRKAdHocConfigurationRemoteLearningMaxIdleLengthKey, _kCRKAdHocConfigurationRequestPermissionToLeaveClassesEnabledKey, 
                        _kCRKAdHocConfigurationRollingDeviceIdentitySetKey, _kCRKAdHocConfigurationStagedStudentIdentityPersistentIDKey, 
                        _kCRKAdHocConfigurationStudentDisplayNameKey, _kCRKAdHocConfigurationStudentFamilyNameKey, 
                        _kCRKAdHocConfigurationStudentGivenNameKey, _kCRKAdHocConfigurationStudentIdentifierKey, 
@@ -108,10 +117,9 @@ exports:
                        _kCRKAdHocConfigurationStudentPhoneticFamilyNameKey, _kCRKAdHocConfigurationStudentPhoneticGivenNameKey, 
                        _kCRKAdHocConfigurationStudentSourceCustom, _kCRKAdHocConfigurationStudentSourceKey, 
                        _kCRKAdHocConfigurationStudentSourceMeCard, _kCRKAdHocConfigurationUseMeCardIfAvailableKey, 
-                       _kCRKAsHocConfigurationUserRoleKey, _kCRKBundleImageNameSeparator, 
-                       _kCRKCloudPrivateIdentityIdentifierKey, _kCRKCloudPrivateIdentityRecordName, 
-                       _kCRKEDUDepartmentGroupBeaconIDsKey, _kCRKEDUDepartmentNameKey, 
-                       _kCRKEDUDepartmentsKey, _kCRKEDUDeviceGroupIdentifierKey, 
+                       _kCRKAsHocConfigurationUserRoleKey, _kCRKCloudPrivateIdentityIdentifierKey, 
+                       _kCRKCloudPrivateIdentityRecordName, _kCRKEDUDepartmentGroupBeaconIDsKey, 
+                       _kCRKEDUDepartmentNameKey, _kCRKEDUDepartmentsKey, _kCRKEDUDeviceGroupIdentifierKey, 
                        _kCRKEDUDeviceGroupMemberSerialNumbersKey, _kCRKEDUDeviceGroupNameKey, 
                        _kCRKEDUDeviceGroupsKey, _kCRKEDUGroupBeaconIDKey, _kCRKEDUGroupConfigurationSourceKey, 
                        _kCRKEDUGroupDescriptionKey, _kCRKEDUGroupDeviceGroupIdentifiersKey, 
@@ -137,14 +145,16 @@ exports:
     objc-classes:    [ CATEvent, CRKASMAtomicRosterConstraint, CRKASMAtomicRosterProvider, 
                        CRKASMCertificateCommonName, CRKASMCertificateIngestor, CRKASMCertificateParserResult, 
                        CRKASMCertificateUserIdentifierExtractor, CRKASMCertificateVendor, 
-                       CRKASMCollidingCourseFilter, CRKASMConcreteCourse, CRKASMConcreteLocation, 
-                       CRKASMConcreteNameComponents, CRKASMConcreteOrganization, 
-                       CRKASMConcreteRoster, CRKASMConcreteRosterProvider, CRKASMConcreteTrustedUser, 
-                       CRKASMConcreteUser, CRKASMConcreteUserDirectory, CRKASMConcreteUserDirectoryIterator, 
-                       CRKASMConcreteUserFetcher, CRKASMCourseCreateProperties, CRKASMCourseSizeLimitingRosterProvider, 
+                       CRKASMClassSessionInvitation, CRKASMCollidingCourseFilter, 
+                       CRKASMConcreteCourse, CRKASMConcreteLocation, CRKASMConcreteNameComponents, 
+                       CRKASMConcreteOrganization, CRKASMConcreteRoster, CRKASMConcreteRosterProvider, 
+                       CRKASMConcreteTrustedUser, CRKASMConcreteUser, CRKASMConcreteUserDirectory, 
+                       CRKASMConcreteUserDirectoryIterator, CRKASMConcreteUserFetcher, 
+                       CRKASMCourseCreateProperties, CRKASMCourseSizeLimitingRosterProvider, 
                        CRKASMCourseUpdateProperties, CRKASMCredentialHousekeeper, 
                        CRKASMCredentialManifest, CRKASMCredentialManifestEntry, CRKASMCredentialStore, 
                        CRKASMCredentialStoreFactory, CRKASMIdentityPicker, CRKASMIdentityVendor, 
+                       CRKASMNetworkCheckingRosterProvider, CRKASMPreemptiveIDSMessagingRosterProvider, 
                        CRKASMRosterBackedAppleIDProvider, CRKASMRosterProviderConfiguration, 
                        CRKASMRosterProviderDecoratorBase, CRKASMRosterProviderFactory, 
                        CRKASMRosterUpdater, CRKASMTimeoutRosterProvider, CRKASMWorldBuildOperation, 
@@ -154,61 +164,71 @@ exports:
                        CRKAlwaysFailingTransportProvider, CRKAnnotatedCredential, 
                        CRKAnnotatedCredentialManifest, CRKAnnotatedCredentialStore, 
                        CRKApplication, CRKApplicationDescriptor, CRKApplicationInfo, 
-                       CRKArrayDifferenceEngine, CRKAssignUserRequest, CRKBLBookItem, 
-                       CRKBlockOperation, CRKBook, CRKBookmark, CRKBooksServiceProxy, 
-                       CRKBoundedGrowthFunction, CRKBrowseForCourseInvitationsRequest, 
-                       CRKBrowseForNearbyDevicesRequest, CRKBrowseForShareTargetsRequest, 
+                       CRKApplicationInfoServiceProxy, CRKArrayDifferenceEngine, 
+                       CRKAssignUserRequest, CRKBLBookItem, CRKBlockOperation, CRKBook, 
+                       CRKBookmark, CRKBooksServiceProxy, CRKBoundedGrowthFunction, 
+                       CRKBrowseForCourseInvitationsRequest, CRKBrowseForNearbyDevicesRequest, 
+                       CRKBrowseForShareTargetsRequest, CRKCatalystIDSPrimitives, 
+                       CRKCatalystNetworkPowerAssertion, CRKCatalystNetworkPowerPrimitives, 
                        CRKCertificateExchangeBroadcastHandler, CRKCertificatesRequestResult, 
                        CRKChapter, CRKChunkedFile, CRKClassKitAccountStateProvider, 
                        CRKClassKitChangeNotifier, CRKClassKitClassPropertyApplicator, 
                        CRKClassKitClassPropertyApplicatorResult, CRKClassKitColorAndMascotUtility, 
-                       CRKClassKitIconID, CRKClassNameSubstitutionRequestToOperationClassMapper, 
-                       CRKClassSession, CRKClassSessionBeaconBrowser, CRKClassSessionBrowser, 
-                       CRKClassroomConfiguration, CRKClassroomLockScreenMonitor_macOS, 
-                       CRKClearASMCredentialsRequest, CRKCloudTuple, CRKConcreteAirPlayPrimitives, 
-                       CRKConcreteCertificate, CRKConcreteClassKitFacade, CRKConcreteClassKitRosterRequirements, 
-                       CRKConcreteDarwinNotificationObservation, CRKConcreteDarwinNotificationPrimitives, 
-                       CRKConcreteIDSAccount, CRKConcreteIDSAccountActiveListener, 
-                       CRKConcreteIDSAccountAdditionListener, CRKConcreteIDSAddressTranslator, 
-                       CRKConcreteIDSLocalPrimitives, CRKConcreteIDSMessageReceiveListener, 
-                       CRKConcreteIDSMessageSendListener, CRKConcreteIdentity, CRKConcreteKeychain, 
-                       CRKConcreteMCXPrimitives, CRKConcreteOutputDevice, CRKConcreteOutputDeviceBrowsingSession, 
-                       CRKConcretePrivateKey, CRKConcreteStudentConnection, CRKConcreteStudentConnectionPrimitives, 
-                       CRKConcreteStudentNotificationObservation, CRKConcreteTrust, 
-                       CRKConnectWithoutBeaconAssertionRequest, CRKConnectedStudentDaemonProxyFactory, 
-                       CRKCourse, CRKCourseEnrollmentController, CRKCourseIconProvider, 
-                       CRKCourseInvitation, CRKCreateASMClassOperation, CRKCurrentPlatformIPAddressProvider, 
+                       CRKClassKitIconID, CRKClassKitPersonIDObservation, CRKClassNameSubstitutionRequestToOperationClassMapper, 
+                       CRKClassSession, CRKClassSessionBeacon, CRKClassSessionBeaconBrowser, 
+                       CRKClassSessionBrowser, CRKClassroomConfiguration, CRKClassroomInstallation, 
+                       CRKClassroomLockScreenMonitorProvider, CRKClassroomLockScreenMonitor_macOS, 
+                       CRKClearASMCredentialsRequest, CRKCloudTuple, CRKComparator, 
+                       CRKConcreteAirPlayPrimitives, CRKConcreteCertificate, CRKConcreteClassKitFacade, 
+                       CRKConcreteClassKitRosterRequirements, CRKConcreteDarwinNotificationPublisher, 
+                       CRKConcreteDarwinNotificationSubscription, CRKConcreteFeatureFlags, 
+                       CRKConcreteIDSAccount, CRKConcreteIDSAddressTranslator, CRKConcreteIDSLocalPrimitives, 
+                       CRKConcreteIDSMessageReceiveListener, CRKConcreteIDSMessageSendListener, 
+                       CRKConcreteIdentity, CRKConcreteKeychain, CRKConcreteMCXPrimitives_macOS, 
+                       CRKConcreteNotificationCenterPublisher, CRKConcreteNotificationCenterSubscription, 
+                       CRKConcreteOutputDevice, CRKConcreteOutputDeviceBrowsingSession, 
+                       CRKConcretePrivateKey, CRKConcreteProcessPrimitives, CRKConcreteSandboxPrimitives_macOS, 
+                       CRKConcreteStudentConnection, CRKConcreteStudentConnectionPrimitives, 
+                       CRKConcreteStudentNotificationObservation, CRKConcreteTimerPrimitives, 
+                       CRKConcreteTrust, CRKConnectWithoutBeaconAssertionRequest, 
+                       CRKConnectedStudentDaemonProxyFactory, CRKCoreGraphicsUtilities, 
+                       CRKCourse, CRKCourseEnrollmentController, CRKCourseInvitation, 
+                       CRKCreateASMClassOperation, CRKCurrentPlatformIPAddressProvider, 
                        CRKCurrentPlatformInstructordTransportProvider, CRKCurrentPlatformProfileConfigurationSource, 
-                       CRKCurrentPlatformStudentdTransportProvider, CRKDarwinNotificationPrimitivesProvider, 
+                       CRKCurrentPlatformStudentdTransportProvider, CRKDeadmanScreenshotServiceProxy, 
                        CRKDefaultSettingsUIVisibilityProvider, CRKDefaultsBasedInterfaceSwitchingIPAddressProvider, 
-                       CRKDevice, CRKDeviceDisplay, CRKDevicePropertyNotificationSubscriptionRequest, 
+                       CRKDevice, CRKDeviceDisplay, CRKDeviceGestalt, CRKDevicePropertyNotificationSubscriptionRequest, 
                        CRKDictionaryRowTableEntries, CRKDirectoryBackedConfigurationSource, 
-                       CRKDmdBackedInstructordTransportProvider, CRKDownloadResourcesOperation, 
-                       CRKDownloadResourcesRequest, CRKDownloadResourcesResultObject, 
-                       CRKDumpASMCredentialsRequest, CRKDumpASMCredentialsResultObject, 
-                       CRKDumpIDSInfoRequest, CRKDumpIDSInfoResultObject, CRKEDUPayload, 
-                       CRKEDUPayloadCredentialValidator, CRKEmptyRequest, CRKErrorBox, 
-                       CRKEventLog, CRKExecutionTimer, CRKExpiredCourseAlertText, 
-                       CRKExpiredCoursesInteraction, CRKExponentialGrowthFunction, 
+                       CRKDisconnectIDSConnectionRequest, CRKDispatchSourceSubscription, 
+                       CRKDispatchTimer, CRKDmdBackedInstructordTransportProvider, 
+                       CRKDownloadResourcesOperation, CRKDownloadResourcesRequest, 
+                       CRKDownloadResourcesResultObject, CRKDumpASMCredentialsRequest, 
+                       CRKDumpASMCredentialsResultObject, CRKDumpIDSInfoRequest, 
+                       CRKDumpIDSInfoResultObject, CRKDynamicDataObserverClassKitFacade, 
+                       CRKEDUPayload, CRKEDUPayloadCredentialValidator, CRKEmptyRequest, 
+                       CRKEmptySubscription, CRKErrorBox, CRKEventLog, CRKExecutionTimer, 
+                       CRKExpiredCourseAlertText, CRKExpiredCoursesInteraction, CRKExponentialGrowthFunction, 
                        CRKFTSEntry, CRKFTSEnumeration, CRKFailIfMacAndUnenrolledStudentdTransportProvider, 
                        CRKFailIfMacWithoutClassroomTransportProvider, CRKFailIfSimulatorTransportProvider, 
                        CRKFeatureDataStoreDefaults_macOS, CRKFeatureDataStoreHeuristics_macOS, 
-                       CRKFeatureDataStore_macOS, CRKFeaturePermissionResultObject, 
-                       CRKFeatures, CRKFetchASMCertificatesOperation, CRKFetchActiveControlGroupIdentifierRequest, 
-                       CRKFetchActiveControlGroupIdentifierResultObject, CRKFetchActiveInstructorsRequest, 
-                       CRKFetchActiveInstructorsResultObject, CRKFetchActiveStudentCourseIdentifiersRequest, 
-                       CRKFetchActiveStudentCourseIdentifiersResultObject, CRKFetchAdHocConfigurationRequest, 
-                       CRKFetchAdHocConfigurationResultObject, CRKFetchApplicationsRequest, 
-                       CRKFetchApplicationsResultObject, CRKFetchBooksFromBooksServiceOperation, 
-                       CRKFetchBooksOperation, CRKFetchBooksRequest, CRKFetchBooksResultObject, 
-                       CRKFetchChaptersFromBooksServiceOperation, CRKFetchChaptersOperation, 
-                       CRKFetchChaptersRequest, CRKFetchChaptersResultObject, CRKFetchClassroomConfigurationOperation, 
-                       CRKFetchClassroomConfigurationRequest, CRKFetchClassroomConfigurationResultObject, 
-                       CRKFetchConfigurationTypeRequest, CRKFetchConfigurationTypeResultObject, 
-                       CRKFetchControlGroupIdentifiersRequest, CRKFetchControlGroupIdentifiersResultObject, 
-                       CRKFetchCourseInvitationsRequest, CRKFetchCourseInvitationsResultObject, 
-                       CRKFetchCoursePermissionsRequest, CRKFetchCoursePermissionsResultObject, 
-                       CRKFetchCoursesRequest, CRKFetchCoursesResultObject, CRKFetchDevicePropertiesRequest, 
+                       CRKFeatureDataStoreProvider, CRKFeatureDataStore_macOS, CRKFeatureFlagsFactory, 
+                       CRKFeaturePermissionResultObject, CRKFeatures, CRKFetchASMCertificatesOperation, 
+                       CRKFetchActiveControlGroupIdentifierRequest, CRKFetchActiveControlGroupIdentifierResultObject, 
+                       CRKFetchActiveInstructorsRequest, CRKFetchActiveInstructorsResultObject, 
+                       CRKFetchActiveStudentCourseIdentifiersRequest, CRKFetchActiveStudentCourseIdentifiersResultObject, 
+                       CRKFetchAdHocConfigurationRequest, CRKFetchAdHocConfigurationResultObject, 
+                       CRKFetchApplicationsRequest, CRKFetchApplicationsResultObject, 
+                       CRKFetchBooksFromBooksServiceOperation, CRKFetchBooksOperation, 
+                       CRKFetchBooksRequest, CRKFetchBooksResultObject, CRKFetchChaptersFromBooksServiceOperation, 
+                       CRKFetchChaptersOperation, CRKFetchChaptersRequest, CRKFetchChaptersResultObject, 
+                       CRKFetchClassroomConfigurationOperation, CRKFetchClassroomConfigurationRequest, 
+                       CRKFetchClassroomConfigurationResultObject, CRKFetchConfigurationTypeRequest, 
+                       CRKFetchConfigurationTypeResultObject, CRKFetchControlGroupIdentifiersRequest, 
+                       CRKFetchControlGroupIdentifiersResultObject, CRKFetchCourseInvitationsRequest, 
+                       CRKFetchCourseInvitationsResultObject, CRKFetchCoursePermissionsRequest, 
+                       CRKFetchCoursePermissionsResultObject, CRKFetchCoursesRequest, 
+                       CRKFetchCoursesResultObject, CRKFetchDeviceGestaltRequest, 
+                       CRKFetchDeviceGestaltResultObject, CRKFetchDevicePropertiesRequest, 
                        CRKFetchDevicePropertiesResultObject, CRKFetchDevicesRequest, 
                        CRKFetchDevicesResultObject, CRKFetchIdentitiesRequest, CRKFetchIdentitiesTaskResultObject, 
                        CRKFetchInstructorEndpointRequest, CRKFetchInstructorEndpointResultObject, 
@@ -220,8 +240,7 @@ exports:
                        CRKFetchObservingInstructorsByCourseOperation, CRKFetchResourceRequest, 
                        CRKFetchResourceResultObject, CRKFetchRestrictionsRequest, 
                        CRKFetchRestrictionsResultObject, CRKFetchSafariBookmarksRequest, 
-                       CRKFetchSafariBookmarksResultObject, CRKFetchScreenObserversRequest, 
-                       CRKFetchScreenObserversResultObject, CRKFetchScreenshotRequest, 
+                       CRKFetchSafariBookmarksResultObject, CRKFetchScreenshotRequest, 
                        CRKFetchScreenshotResultObject, CRKFetchSettingsUIVisibilityRequest, 
                        CRKFetchSettingsUIVisibilityResultObject, CRKFetchStagedAdHocIdentityCertificateRequest, 
                        CRKFetchStagedAdHocIdentityCertificateResultObject, CRKFetchStudentDaemonStateRequest, 
@@ -232,24 +251,25 @@ exports:
                        CRKGenerateIdentityRequest, CRKGenerateIdentityResultObject, 
                        CRKHeaderTable, CRKHideAppsRequest, CRKHostResourcesConfiguration, 
                        CRKHostResourcesOperation, CRKIDSMessageCannon, CRKIDSMessageFormatter, 
-                       CRKIDSMessageMetadata, CRKIDSMessageNotificationInfo, CRKIDSMessagePayload, 
-                       CRKIDSSendMessageOperation, CRKIDSWaitForAccountReadyOperation, 
+                       CRKIDSMessageMetadata, CRKIDSMessageNotificationInfo, CRKIDSMessageOptions, 
+                       CRKIDSMessagePayload, CRKIDSSendMessageOperation, CRKIDSWaitForAccountReadyOperation, 
                        CRKIdentityConfiguration, CRKIdentityRefFactory, CRKIdentityServiceFetchCertificatesRequest, 
                        CRKIdentityServiceFetchCertificatesResultObject, CRKIdentityServiceMockingRequest, 
                        CRKIdentitySharingRequestCertificateRequest, CRKIdentitySharingSendAdvertisingIdentifierAndCertificateRequest, 
                        CRKIdentitySharingSendCertificateRequest, CRKIfaddrs, CRKIfaddrsEnumerator, 
-                       CRKImage, CRKInMemoryCertificate, CRKInMemoryIdentity, CRKInMemoryKeychain, 
+                       CRKInMemoryCertificate, CRKInMemoryIdentity, CRKInMemoryKeychain, 
                        CRKInMemoryPrivateKey, CRKIndexPair, CRKInstructor, CRKInstructorExtensionContext, 
                        CRKInstructorExtensionOptimizerShim, CRKInstructorExtensionProxy, 
                        CRKInstructorHostContext, CRKInterfaceNameToIPAddressMap, 
-                       CRKInterfaceOrientationMonitor, CRKInternetDateProvider, CRKInvalidateTransportOperation, 
-                       CRKInvitationSession, CRKInviteToCourseRequest, CRKJSONConverter, 
-                       CRKJoinControlGroupRequest, CRKKeyValuePair, CRKKeyValueTable, 
-                       CRKKeychainPasswordFacade, CRKKeychainProvider, CRKLeaveControlGroupRequest, 
-                       CRKLeaveControlGroupsRequest, CRKListTableEntries, CRKListenForIDSMessagesRequest, 
+                       CRKInterfaceOrientationMonitor, CRKInternetDateProvider, CRKInternetDateServiceProxy, 
+                       CRKInvalidateTransportOperation, CRKInvitationSession, CRKInviteToCourseRequest, 
+                       CRKJSONConverter, CRKJoinControlGroupRequest, CRKKeyValuePair, 
+                       CRKKeyValueTable, CRKKeychainPasswordFacade, CRKKeychainProvider, 
+                       CRKLeaveControlGroupRequest, CRKLeaveControlGroupsRequest, 
+                       CRKListTableEntries, CRKListenForIDSMessagesRequest, CRKListenerBackedCatalystIDSSubscription, 
                        CRKLocalBackedIDSPrimitives, CRKLocalDeviceIPAddresses, CRKLockRequest, 
                        CRKLogEvent, CRKLogOutUserRequest, CRKMCXPrimitivesProvider, 
-                       CRKMDMIdentityProvider, CRKMockSettingsUIVisibilityProvider, 
+                       CRKMDMIdentityProvider, CRKMobileGestalt, CRKMockSettingsUIVisibilityProvider, 
                        CRKMonitorExpiredCoursesInteraction, CRKNetworkPowerAssertion, 
                        CRKNonCatalystStudentDaemonProxy, CRKNotificationObservation, 
                        CRKNotifyWhenNetworkChangesIPAddressProvider, CRKNotifyingConfigurationSource, 
@@ -259,21 +279,24 @@ exports:
                        CRKParseBookMetadataOperation, CRKParseHTMLTableOfContentsOperation, 
                        CRKParseNCXTableOfContentsOperation, CRKParseOPFFilePathOperation, 
                        CRKParseOPFPackageContentsOperation, CRKParsePDFMetadataOperation, 
-                       CRKPauseMediaRequest, CRKPersonaAdoptingClassKitFacade, CRKPlatformInternetDateProvider, 
-                       CRKPointerSet, CRKPrimitiveBackedCertificateConduit, CRKPrimitiveBackedIDSMessageBroadcaster, 
-                       CRKPrivateIdentity, CRKProtocolUnioner, CRKRankPath, CRKRefreshASMCoursesRequest, 
+                       CRKPauseMediaRequest, CRKPersonaAdoptingClassKitFacade, CRKPlatformClassroomLockScreenMonitor, 
+                       CRKPlatformFeatureDataStore, CRKPlatformInternetDateProvider, 
+                       CRKPointerSet, CRKPostUserNotificationRequest, CRKPrimitiveBackedCertificateConduit, 
+                       CRKPrimitiveBackedIDSMessageBroadcaster, CRKPrivateIdentity, 
+                       CRKProcessPrimitivesProvider, CRKProtocolUnioner, CRKRefreshASMCoursesRequest, 
+                       CRKRemoteConnectionRequest, CRKRemoteConnectionResultObject, 
                        CRKRemoteDeviceRequest, CRKRemoteEndpoint, CRKRemoveASMClassOperation, 
                        CRKRepeatedCharacterTableEntry, CRKRequestCertificatesIDSMessage, 
                        CRKRequestCertificatesResponseIDSMessage, CRKRequestPerformerBackedIDSPrimitives, 
                        CRKResource, CRKResourcesServiceTransportProvider, CRKRestrictions, 
                        CRKRestrictionsObserver, CRKRightPaddingTableEntry, CRKSCBackedIPAddressProvider, 
-                       CRKSCNetworkInterface, CRKSandbox, CRKScreenObservationMonitor, 
-                       CRKSecureCodedUserDefaultsObject, CRKSendIDSMessageRequest, 
-                       CRKSequentialOperation, CRKSession, CRKSetActiveControlGroupRequest, 
-                       CRKSetAdHocConfigurationRequest, CRKSetAirPlayRouteRequest, 
-                       CRKSetClassroomBadgeCountRequest, CRKSetCourseMascotAndColorRequest, 
-                       CRKSetCoursePermissionRequest, CRKSetCoursePropertiesRequest, 
-                       CRKSetMuteStateRequest, CRKSetRequestingUnenrollmentFromControlGroupRequest, 
+                       CRKSCNetworkInterface, CRKSandboxPrimitivesProvider, CRKScreenObservationMonitor, 
+                       CRKScreenshotServiceProxy, CRKSecureCodedUserDefaultsObject, 
+                       CRKSendIDSMessageRequest, CRKSequentialOperation, CRKSession, 
+                       CRKSetActiveControlGroupRequest, CRKSetAdHocConfigurationRequest, 
+                       CRKSetAirPlayRouteRequest, CRKSetClassroomBadgeCountRequest, 
+                       CRKSetCourseMascotAndColorRequest, CRKSetCoursePermissionRequest, 
+                       CRKSetCoursePropertiesRequest, CRKSetMuteStateRequest, CRKSetRequestingUnenrollmentFromControlGroupRequest, 
                        CRKSetUserImageRequest, CRKSetUserImageResultObject, CRKSetUserPropertiesRequest, 
                        CRKSetVolumeRequest, CRKSettingsUIVisibilityIndicatorFile, 
                        CRKSettingsUIVisibilitySubscriptionRequest, CRKSettingsUIVisibleRemoteValue, 
@@ -288,8 +311,9 @@ exports:
                        CRKTableEntriesWithAddedColumn, CRKTableEntriesWithAddedRow, 
                        CRKTableEntriesWithColumnSpacer, CRKTableEntriesWithRowSpacer, 
                        CRKTableKeyValuePair, CRKTaskClientBackedRequestPerformer, 
-                       CRKTimeoutHarnessOperation, CRKToolArea, CRKToolCommand, CRKToolCommandUserInfo, 
-                       CRKTransportInvalidator, CRKTransportPreflightOperation, CRKTransportPreflightResultObject, 
+                       CRKTimeoutHarnessOperation, CRKTimerPrimitivesProvider, CRKToolArea, 
+                       CRKToolCommand, CRKToolCommandUserInfo, CRKTransportInvalidator, 
+                       CRKTransportPreflightOperation, CRKTransportPreflightResultObject, 
                        CRKTrustEvaluationPolicies, CRKUnlockRequest, CRKUnzipOperation, 
                        CRKUpdateASMClassOperation, CRKUpdatePickableAirPlayRoutesRequest, 
                        CRKUsageStatistics, CRKUser, CRKUserDefaultsObject, CRKUserPreferredOrderSCNetworkInterfaceProvider, 
@@ -304,33 +328,35 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4B273AA5-37AE-3F49-8E70-83A258D56E66
+    value:           1F839039-C8F0-3505-94DF-2846BB70B0F3
   - target:          x86_64-maccatalyst
-    value:           4B273AA5-37AE-3F49-8E70-83A258D56E66
+    value:           1F839039-C8F0-3505-94DF-2846BB70B0F3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C8978418-7F79-3FCA-826C-A1B9BA85039E
+    value:           8A7462B5-EA66-3D6D-A292-5B9F494A719C
   - target:          arm64e-maccatalyst
-    value:           C8978418-7F79-3FCA-826C-A1B9BA85039E
+    value:           8A7462B5-EA66-3D6D-A292-5B9F494A719C
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
-current-version: 7
+current-version: 7.3
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CATAssertIsNotQueue, _CATAssertIsQueue, _CATErrorDomain, 
                        _CATErrorWithCodeAndUserInfo, _CATErrorWithDomainCodeAndUserInfo, 
                        _CATFormattedStringForKey, _CATGetCatalystQueue, _CATLocalizedKey, 
                        _CATSetCatalystQueue, _CATUnlocalizedKey ]
     objc-classes:    [ CATAddress, CATArbitrator, CATBatchRemoteTaskOperation, CATBlockOperationObserver, 
-                       CATCollectionController, CATEndPoint, CATMessage, CATMutableTaskProgress, 
-                       CATNetworkReachability, CATNotificationMessage, CATOperation, 
-                       CATOperationQueue, CATProperty, CATRemoteConnection, CATRemoteConnectionSocketOptions, 
-                       CATRemoteConnectionTrustDecision, CATRemoteTaskOperation, 
-                       CATRemoteTransport, CATSerialOperationQueue, CATSessionMessage, 
-                       CATSessionMessageDidInvalidate, CATSessionMessageInvalidate, 
+                       CATCollectionController, CATEndPoint, CATIDSMessageOptions, 
+                       CATIDSServiceConnection, CATIDSServiceConnectionMetadata, 
+                       CATIDSServiceConnectionTerminal, CATIDSServiceTransport, CATMessage, 
+                       CATMutableTaskProgress, CATNetworkReachability, CATNotificationMessage, 
+                       CATOperation, CATOperationQueue, CATProperty, CATRemoteConnection, 
+                       CATRemoteConnectionSocketOptions, CATRemoteConnectionTrustDecision, 
+                       CATRemoteTaskOperation, CATRemoteTransport, CATSerialOperationQueue, 
+                       CATSessionMessage, CATSessionMessageDidInvalidate, CATSessionMessageInvalidate, 
                        CATSessionMessageResume, CATSessionMessageResumed, CATSocket, 
                        CATState, CATStateMachine, CATStateMachineEvent, CATTaskBlockServer, 
                        CATTaskClient, CATTaskMessage, CATTaskMessageCancel, CATTaskMessageError, 
@@ -344,25 +370,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C317996F-5486-310E-AB57-41DC0B412AF0
+    value:           D91840AC-BBEC-3078-B60E-2812556CA112
   - target:          x86_64-maccatalyst
-    value:           C317996F-5486-310E-AB57-41DC0B412AF0
+    value:           D91840AC-BBEC-3078-B60E-2812556CA112
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25BD320D-A621-3B1F-BFFD-A247685AF994
+    value:           77842A68-3C63-33B0-941E-453077C93043
   - target:          arm64e-maccatalyst
-    value:           25BD320D-A621-3B1F-BFFD-A247685AF994
+    value:           77842A68-3C63-33B0-941E-453077C93043
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 40.18
+current-version: 43
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DMFAllConfigurationOrganizationTypes, _DMFAppLog, _DMFBundleIdentifierErrorKey, 
                        _DMFCEMReasonCodeBad, _DMFCEMReasonCodeConflict, _DMFCEMReasonCodeCouldNotDecrypt, 

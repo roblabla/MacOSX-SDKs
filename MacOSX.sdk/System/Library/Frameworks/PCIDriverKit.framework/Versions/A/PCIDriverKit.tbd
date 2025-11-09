@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EFF8A18D-974A-3B08-A2E1-A36CBBC481CD
+    value:           07B55CD6-7871-3AF8-A604-AAEF0D6B4475
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FFAD3B99-92DC-38E6-8B48-F4867A60DCFD
+    value:           AE127318-2ECB-30FB-8845-3387AB419824
 install-name:    '/System/Library/Frameworks/PCIDriverKit.framework/Versions/A/PCIDriverKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _IOPCIDevice_Class, __ZN11IOPCIDevice11MemoryRead8EhyPh, __ZN11IOPCIDevice12MemoryRead16EhyPt, 
                        __ZN11IOPCIDevice12MemoryRead32EhyPj, __ZN11IOPCIDevice12MemoryRead64EhyPy, 
                        __ZN11IOPCIDevice12MemoryWrite8Ehyh, __ZN11IOPCIDevice13MemoryWrite16Ehyt, 

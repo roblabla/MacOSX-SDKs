@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           619CAD11-AF70-3EA4-8FC6-DACB025A288E
+    value:           F41A5B7D-11D1-36EE-9BAF-83F9F453D6EB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           89C316FE-139B-330B-9081-1DDBEF7E9378
+    value:           B99D0D79-F707-3EC9-90CE-24C7DE750175
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibrary.framework/Versions/A/PhotoLibrary'
-current-version: 321.0.102
+current-version: 340.0.220
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ PhotoIngestTestApp, PhotosUI ]

@@ -26,6 +26,8 @@ Tags:
   NSErrorDomain: CXErrorDomainRequestTransaction
 - Name: CXErrorCodeCallDirectoryManagerError
   NSErrorDomain: CXErrorDomainCallDirectoryManager
+- Name: CXErrorCodeNotificationServiceExtensionError
+  NSErrorDomain: CXErrorDomainNotificationServiceExtension
 - Name: CXCallDirectoryEnabledStatus
   SwiftName: CXCallDirectoryManager.EnabledStatus
 - Name: CXPlayDTMFCallActionType

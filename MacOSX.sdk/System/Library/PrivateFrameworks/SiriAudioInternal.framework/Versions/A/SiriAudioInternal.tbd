@@ -3,20 +3,20 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           66B5A0A6-2DBF-36AC-ADA9-12071CA02E4A
+    value:           8802FE05-3972-3117-B16B-2579204890EF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1494F7CD-5B23-3A79-BECE-6D9AF8706C36
+    value:           910CC33C-0858-3EDA-93BF-26E0D5D9C26A
 install-name:    '/System/Library/PrivateFrameworks/SiriAudioInternal.framework/Versions/A/SiriAudioInternal'
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AudioFlowDelegatePlugin, AudioFlowDelegatePluginTests, AudioInternalIntentExtension, 
-                       IntentsServices, SiriAudioDESPlugin, SiriAudioEndToEndTests, 
-                       SiriAudioHeavyweightTests, SiriAudioInternal, SiriAudioInternalTests, 
-                       SiriAudioSupport, SiriAudioSupportIntegrationTests, SiriAudioSupportTests, 
-                       SiriMediaFlowDelegatePlugin, siriaudio_helper ]
+                       IntentsServices, SiriAudioDESPlugin, SiriAudioHeavyweightTests, 
+                       SiriAudioInternal, SiriAudioInternalTests, SiriAudioSupport, 
+                       SiriAudioSupportIntegrationTests, SiriAudioSupportTests, SiriMediaFlowDelegatePlugin, 
+                       siriaudio_helper ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s17SiriAudioInternal21INLocalSearchProviderV05localE0AC0aB7Support22PlaybackLocalSearching_p_tcfC', 
@@ -41,9 +41,9 @@ exports:
                        '_$s17SiriAudioInternal23INAddMediaIntentHandlerCN', '_$s17SiriAudioInternal23INAddMediaIntentHandlerCfD', 
                        '_$s17SiriAudioInternal23PodcastLibraryProvidingMp', '_$s17SiriAudioInternal24INPlayMediaIntentHandlerC07resolveE5Items3for4withySo0deF0C_ySaySo0deE20ItemResolutionResultCGctF', 
                        '_$s17SiriAudioInternal24INPlayMediaIntentHandlerC07resolveE5Items3for4withySo0deF0C_ySaySo0deE20ItemResolutionResultCGctFTq', 
-                       '_$s17SiriAudioInternal24INPlayMediaIntentHandlerC15playbackService11localSearch14deviceProvider10nowPlayingAC0aB7Support08PlaybackI0C_AA07INLocalK9Providing_pAH06DeviceS0_pAH03NowoS0_ptcfC', 
-                       '_$s17SiriAudioInternal24INPlayMediaIntentHandlerC15playbackService11localSearch14deviceProvider10nowPlayingAC0aB7Support08PlaybackI0C_AA07INLocalK9Providing_pAH06DeviceS0_pAH03NowoS0_ptcfCTq', 
-                       '_$s17SiriAudioInternal24INPlayMediaIntentHandlerC15playbackService11localSearch14deviceProvider10nowPlayingAC0aB7Support08PlaybackI0C_AA07INLocalK9Providing_pAH06DeviceS0_pAH03NowoS0_ptcfc', 
+                       '_$s17SiriAudioInternal24INPlayMediaIntentHandlerC15playbackService11localSearch14deviceProvider10nowPlaying011featureFlagM0AC0aB7Support08PlaybackI0C_AA07INLocalK9Providing_pAI06DeviceU0_pAI03NowoU0_pAI07FeatureqU0_ptcfC', 
+                       '_$s17SiriAudioInternal24INPlayMediaIntentHandlerC15playbackService11localSearch14deviceProvider10nowPlaying011featureFlagM0AC0aB7Support08PlaybackI0C_AA07INLocalK9Providing_pAI06DeviceU0_pAI03NowoU0_pAI07FeatureqU0_ptcfCTq', 
+                       '_$s17SiriAudioInternal24INPlayMediaIntentHandlerC15playbackService11localSearch14deviceProvider10nowPlaying011featureFlagM0AC0aB7Support08PlaybackI0C_AA07INLocalK9Providing_pAI06DeviceU0_pAI03NowoU0_pAI07FeatureqU0_ptcfc', 
                        '_$s17SiriAudioInternal24INPlayMediaIntentHandlerC18removeContinuation3for0aB7Support11AtomicValueCyAF12PlaybackCodeOGSSSg_tFZ', 
                        '_$s17SiriAudioInternal24INPlayMediaIntentHandlerC6handle6intent10completionySo0deF0C_ySo0deF8ResponseCctF', 
                        '_$s17SiriAudioInternal24INPlayMediaIntentHandlerC6handle6intent10completionySo0deF0C_ySo0deF8ResponseCctFTq', 

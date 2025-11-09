@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           36D0DCA7-CAAE-33C1-90F6-98876CB8BCF3
+    value:           2068B3BC-FE88-3129-8828-9A2BBD40BF67
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4F02AAF6-773F-33B3-A881-8FE458C996B2
+    value:           EA0DDBF6-CD61-35EA-A314-0F5EACC3E84E
 install-name:    '/System/Library/PrivateFrameworks/ViewBridge.framework/Versions/A/ViewBridge'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

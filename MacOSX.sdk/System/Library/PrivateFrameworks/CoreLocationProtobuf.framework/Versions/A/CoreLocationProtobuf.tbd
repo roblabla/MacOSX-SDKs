@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1ED8D2D6-2CAD-3C7B-868C-CE0D1A8A88B0
+    value:           36935EF3-6534-33F7-876B-7845B1437187
   - target:          x86_64-maccatalyst
-    value:           1ED8D2D6-2CAD-3C7B-868C-CE0D1A8A88B0
+    value:           36935EF3-6534-33F7-876B-7845B1437187
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5ED06B40-3152-39DB-953B-1ED9DBD2FDF2
+    value:           53CD9CA2-12A9-321C-8D76-B205B3D28E09
   - target:          arm64e-maccatalyst
-    value:           5ED06B40-3152-39DB-953B-1ED9DBD2FDF2
+    value:           53CD9CA2-12A9-321C-8D76-B205B3D28E09
 install-name:    '/System/Library/PrivateFrameworks/CoreLocationProtobuf.framework/Versions/A/CoreLocationProtobuf'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -80,6 +80,7 @@ exports:
                        CLPAppLocation._loiType, CLPAppLocation._routineMode, CLPAppLocation._serverHash, 
                        CLPBaroCalibrationIndication._has, CLPBaroCalibrationIndication._isCalibratedBarometricAlt, 
                        CLPBaroCalibrationIndication._isMapMatched, CLPBaroCalibrationIndication._isOutdoorContext, 
+                       CLPBaroCalibrationIndication._mapMatchRoadType, CLPBaroCalibrationIndication._outdoorConfidence, 
                        CLPBundleId._fullName, CLPBundleId._has, CLPBundleId._shortKey, 
                        CLPBundleId._timestamp, CLPCalibratedPressureCollectionRequest._activity, 
                        CLPCalibratedPressureCollectionRequest._altitudeHAEM, CLPCalibratedPressureCollectionRequest._altitudeHAEUncM, 
@@ -189,25 +190,28 @@ exports:
                        CLPLteCellTowerLocation._appBundleId, CLPLteCellTowerLocation._bandInfo, 
                        CLPLteCellTowerLocation._bandwidth, CLPLteCellTowerLocation._cellLatitude, 
                        CLPLteCellTowerLocation._cellLongitude, CLPLteCellTowerLocation._ci, 
-                       CLPLteCellTowerLocation._deploymentType, CLPLteCellTowerLocation._ecn0, 
-                       CLPLteCellTowerLocation._has, CLPLteCellTowerLocation._isLimitedService, 
-                       CLPLteCellTowerLocation._location, CLPLteCellTowerLocation._mcc, 
-                       CLPLteCellTowerLocation._mnc, CLPLteCellTowerLocation._neighborGroup, 
-                       CLPLteCellTowerLocation._neighbors, CLPLteCellTowerLocation._operatorName, 
-                       CLPLteCellTowerLocation._pid, CLPLteCellTowerLocation._rscp, 
-                       CLPLteCellTowerLocation._rssi, CLPLteCellTowerLocation._serverHash, 
-                       CLPLteCellTowerLocation._serviceProviderName, CLPLteCellTowerLocation._tac, 
-                       CLPLteCellTowerLocation._uarfcn, CLPMeta._has, CLPMeta._probeId, 
-                       CLPMeta._productId, CLPMeta._softwareVersion, CLPMeta._submissionId, 
-                       CLPMotionActivity._confidence, CLPMotionActivity._has, CLPMotionActivity._type, 
-                       CLPNRCellNeighbor._ecn0, CLPNRCellNeighbor._has, CLPNRCellNeighbor._nrarfcn, 
-                       CLPNRCellNeighbor._pid, CLPNRCellNeighbor._rscp, CLPNRCellNeighbor._rssi, 
-                       CLPNRCellNeighbor._saOrNsaNeighbor, CLPNRCellNeighbor._scs, 
-                       CLPNRCellTowerLocation._appBundleId, CLPNRCellTowerLocation._bandInfo, 
-                       CLPNRCellTowerLocation._bandwidth, CLPNRCellTowerLocation._cellLatitude, 
-                       CLPNRCellTowerLocation._cellLongitude, CLPNRCellTowerLocation._ci, 
+                       CLPLteCellTowerLocation._deploymentType, CLPLteCellTowerLocation._downlinkBandwidth, 
+                       CLPLteCellTowerLocation._ecn0, CLPLteCellTowerLocation._has, 
+                       CLPLteCellTowerLocation._isLimitedService, CLPLteCellTowerLocation._isStalled, 
+                       CLPLteCellTowerLocation._latency, CLPLteCellTowerLocation._location, 
+                       CLPLteCellTowerLocation._mcc, CLPLteCellTowerLocation._mnc, 
+                       CLPLteCellTowerLocation._neighborGroup, CLPLteCellTowerLocation._neighbors, 
+                       CLPLteCellTowerLocation._operatorName, CLPLteCellTowerLocation._pid, 
+                       CLPLteCellTowerLocation._rscp, CLPLteCellTowerLocation._rssi, 
+                       CLPLteCellTowerLocation._serverHash, CLPLteCellTowerLocation._serviceProviderName, 
+                       CLPLteCellTowerLocation._tac, CLPLteCellTowerLocation._uarfcn, 
+                       CLPMeta._has, CLPMeta._probeId, CLPMeta._productId, CLPMeta._softwareVersion, 
+                       CLPMeta._submissionId, CLPMotionActivity._confidence, CLPMotionActivity._has, 
+                       CLPMotionActivity._type, CLPNRCellNeighbor._ecn0, CLPNRCellNeighbor._has, 
+                       CLPNRCellNeighbor._nrarfcn, CLPNRCellNeighbor._pid, CLPNRCellNeighbor._rscp, 
+                       CLPNRCellNeighbor._rssi, CLPNRCellNeighbor._saOrNsaNeighbor, 
+                       CLPNRCellNeighbor._scs, CLPNRCellTowerLocation._appBundleId, 
+                       CLPNRCellTowerLocation._bandInfo, CLPNRCellTowerLocation._bandwidth, 
+                       CLPNRCellTowerLocation._cellLatitude, CLPNRCellTowerLocation._cellLongitude, 
+                       CLPNRCellTowerLocation._ci, CLPNRCellTowerLocation._downlinkBandwidth, 
                        CLPNRCellTowerLocation._ecn0, CLPNRCellTowerLocation._gscn, 
                        CLPNRCellTowerLocation._has, CLPNRCellTowerLocation._isLimitedService, 
+                       CLPNRCellTowerLocation._isStalled, CLPNRCellTowerLocation._latency, 
                        CLPNRCellTowerLocation._location, CLPNRCellTowerLocation._mcc, 
                        CLPNRCellTowerLocation._mnc, CLPNRCellTowerLocation._neighborGroup, 
                        CLPNRCellTowerLocation._neighbors, CLPNRCellTowerLocation._nrarfcn, 

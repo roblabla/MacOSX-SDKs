@@ -4,31 +4,32 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3415DE2B-61D1-39EC-806E-EBE697367D15
+    value:           973B90E6-3F14-3B04-B7FC-0B7A84092930
   - target:          x86_64-maccatalyst
-    value:           3415DE2B-61D1-39EC-806E-EBE697367D15
+    value:           973B90E6-3F14-3B04-B7FC-0B7A84092930
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FCD3A25D-AA46-38C1-B8B9-4418D545F057
+    value:           772A4F93-9470-3D57-8446-7E9D15A49DAB
   - target:          arm64e-maccatalyst
-    value:           FCD3A25D-AA46-38C1-B8B9-4418D545F057
+    value:           772A4F93-9470-3D57-8446-7E9D15A49DAB
 install-name:    '/System/Library/PrivateFrameworks/PhotoImaging.framework/Versions/A/PhotoImaging'
-current-version: 321.0.102
+current-version: 340.0.220
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTI10VRFSession, __ZTI8VRFTrack, __ZTIN6VRF_V17SessionE, 
-                       __ZTIN6VRF_V27SessionE, __ZTINSt3__120__shared_ptr_pointerIP8VRFTrackNS_14default_deleteIS1_EENS_9allocatorIS1_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN6VRF_V111SessionImplENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN6VRF_V211SessionImplENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
+                       __ZTIN6VRF_V27SessionE, __ZTINSt3__120__shared_ptr_pointerIP8VRFTrackNS_10shared_ptrIS1_E27__shared_ptr_default_deleteIS1_S1_EENS_9allocatorIS1_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN6VRF_V111SessionImplENS_10shared_ptrI10VRFSessionE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN6VRF_V211SessionImplENS_10shared_ptrI10VRFSessionE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTS10VRFSession, __ZTS8VRFTrack, __ZTSN6VRF_V17SessionE, 
-                       __ZTSN6VRF_V27SessionE, __ZTSNSt3__114default_deleteI8VRFTrackEE, 
-                       __ZTSNSt3__114default_deleteIN6VRF_V111SessionImplEEE, __ZTSNSt3__114default_deleteIN6VRF_V211SessionImplEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIP8VRFTrackNS_14default_deleteIS1_EENS_9allocatorIS1_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN6VRF_V111SessionImplENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN6VRF_V211SessionImplENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE ]
+                       __ZTSN6VRF_V27SessionE, __ZTSNSt3__110shared_ptrI10VRFSessionE27__shared_ptr_default_deleteIS1_N6VRF_V111SessionImplEEE, 
+                       __ZTSNSt3__110shared_ptrI10VRFSessionE27__shared_ptr_default_deleteIS1_N6VRF_V211SessionImplEEE, 
+                       __ZTSNSt3__110shared_ptrI8VRFTrackE27__shared_ptr_default_deleteIS1_S1_EE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIP8VRFTrackNS_10shared_ptrIS1_E27__shared_ptr_default_deleteIS1_S1_EENS_9allocatorIS1_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPN6VRF_V111SessionImplENS_10shared_ptrI10VRFSessionE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPN6VRF_V211SessionImplENS_10shared_ptrI10VRFSessionE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _GUInvertMatrix, _GUMatrixVector, _PIAdjustment_AutoEnhance_Identifier, 

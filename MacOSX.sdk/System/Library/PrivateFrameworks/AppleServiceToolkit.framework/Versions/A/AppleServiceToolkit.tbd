@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5BF9B1F9-EBF3-361F-AF10-5963E70FF2E1
+    value:           E103CEAA-801B-3625-883F-B61A686F8A54
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EF29C9EB-8D9A-3C10-8F33-C6E2B448792E
+    value:           4813977D-EB99-3501-9C89-5A0ECAD52E38
 install-name:    '/System/Library/PrivateFrameworks/AppleServiceToolkit.framework/Versions/A/AppleServiceToolkit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -29,15 +29,18 @@ exports:
                        _kASTHTTPHeaderSignature, _kASTHTTPHeaderToken, _kASTHTTPHeaderTotalFiles, 
                        _kASTHTTPHeaderUserAgent, _kASTIdentityAliasDictionaryChipIDKey, 
                        _kASTIdentityAliasDictionaryECIDKey, _kASTIdentityAliasDictionaryIsServicePartKey, 
-                       _kASTIdentityAliasDictionarySerialNumberKey, _kASTIdentityAliasDictionaryTypeKey ]
+                       _kASTIdentityAliasDictionarySerialNumberKey, _kASTIdentityAliasDictionaryTypeKey, 
+                       _kGenevaHTTPHeaderEncryption, _kGenevaHTTPHeaderToken ]
     objc-classes:    [ ASTAction, ASTAnalytics, ASTAuthInfoResult, ASTAutomatedSession, 
-                       ASTConnectionAsset, ASTConnectionAuthInfo, ASTConnectionClientStatus, 
-                       ASTConnectionEnroll, ASTConnectionProfile, ASTConnectionSession, 
-                       ASTConnectionTestResult, ASTConnectionTestResultBinary, ASTConnectionUtilities, 
-                       ASTContext, ASTControlCommand, ASTEncodingUtilities, ASTEnvironment, 
-                       ASTErrorStatus, ASTFileManagement, ASTIdentity, ASTIdentityAlias, 
-                       ASTLocalization, ASTMaterializedConnection, ASTMaterializedConnectionManager, 
-                       ASTNetworkObject, ASTNetworking, ASTProfileResult, ASTRequest, 
-                       ASTResponse, ASTSealableFile, ASTSealablePayload, ASTSendPropertiesErrorStatus, 
-                       ASTSession, ASTTestAttributes, ASTTestAutomation, ASTTestResult ]
+                       ASTConfigurableUploadClient, ASTConnectionAsset, ASTConnectionAuthInfo, 
+                       ASTConnectionClientStatus, ASTConnectionEnroll, ASTConnectionProfile, 
+                       ASTConnectionSession, ASTConnectionTestResult, ASTConnectionTestResultBinary, 
+                       ASTConnectionUtilities, ASTContext, ASTControlCommand, ASTEncodingUtilities, 
+                       ASTEnvironment, ASTErrorStatus, ASTFileManagement, ASTIdentity, 
+                       ASTIdentityAlias, ASTLocalization, ASTMaterializedConnection, 
+                       ASTMaterializedConnectionManager, ASTNetworkObject, ASTNetworking, 
+                       ASTProfileResult, ASTRequest, ASTResponse, ASTSealableFile, 
+                       ASTSealablePayload, ASTSendPropertiesErrorStatus, ASTSession, 
+                       ASTTestAttributes, ASTTestAutomation, ASTTestResult, ASTUploadClientFactory, 
+                       ASTUploadItem, RepairToolRequestItem, RepairToolURLFactory ]
 ...

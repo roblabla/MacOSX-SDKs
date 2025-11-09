@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ED2B379F-111B-32A8-B67C-ECCCBDCD62DD
+    value:           30ECC22D-72E3-367D-BCE9-B95F507A6FA5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2AA65EF9-43FC-36BD-8636-E889E1F93182
+    value:           B90B9484-CF2E-3279-9693-069B638D2B80
 install-name:    '/System/Library/Frameworks/HIDDriverKit.framework/Versions/A/HIDDriverKit_development'
 exports:
   - targets:         [ x86_64-macos ]
@@ -15,7 +15,7 @@ exports:
                        __ZN30IOHIDInterfaceElementContainer14withDescriptorEPvjP14IOHIDInterface, 
                        __ZN30IOHIDInterfaceElementContainer4initEPvjP14IOHIDInterface, 
                        __ZThn48_N21IOHIDElementContainer4initEPvj, __ZThn64_N30IOHIDInterfaceElementContainer4initEPvjP14IOHIDInterface ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _HIDDriverKitVersionNumber, _HIDDriverKitVersionString, _IOHIDDevice_Class, 
                        _IOHIDDigitizerCollection_Class, _IOHIDElementContainer_Class, 
                        _IOHIDElementPrivate_Class, _IOHIDElement_Class, _IOHIDEventService_Class, 
@@ -171,7 +171,8 @@ exports:
                        __ZN21IOUserHIDEventService11getElementsEv, __ZN21IOUserHIDEventService11handleStartEP9IOService, 
                        __ZN21IOUserHIDEventService12handleReportEyPhj15IOHIDReportTypej, 
                        __ZN21IOUserHIDEventService13dispatchEventEP10IOHIDEvent, 
-                       __ZN21IOUserHIDEventService16createReportPoolEv, __ZN21IOUserHIDEventService20ReportAvailable_ImplEyjj15IOHIDReportTypeP18IOMemoryDescriptorP8OSAction, 
+                       __ZN21IOUserHIDEventService16createReportPoolEv, __ZN21IOUserHIDEventService18SetProperties_ImplEP12OSDictionary, 
+                       __ZN21IOUserHIDEventService20ReportAvailable_ImplEyjj15IOHIDReportTypeP18IOMemoryDescriptorP8OSAction, 
                        __ZN21IOUserHIDEventService27CreateActionReportAvailableEmPP8OSAction, 
                        __ZN21IOUserHIDEventService27dispatchDigitizerTouchEventEyP23IOHIDDigitizerTouchDataj, 
                        __ZN21IOUserHIDEventService28dispatchDigitizerStylusEventEyP24IOHIDDigitizerStylusData, 
@@ -179,7 +180,8 @@ exports:
                        __ZN21IOUserHIDEventService8DispatchE5IORPC, __ZN21IOUserHIDEventService9Stop_ImplEP9IOService, 
                        __ZN21IOUserHIDEventService9_DispatchEPS_5IORPC, __ZN22IOUserUSBHostHIDDevice10Start_ImplEP9IOService, 
                        __ZN22IOUserUSBHostHIDDevice11handleStartEP9IOService, __ZN22IOUserUSBHostHIDDevice11setPropertyEP8OSObjectS1_, 
-                       __ZN22IOUserUSBHostHIDDevice11setProtocolEt, __ZN22IOUserUSBHostHIDDevice13setIdlePolicyE17USBIdlePolicyTypet, 
+                       __ZN22IOUserUSBHostHIDDevice11setProtocolEt, __ZN22IOUserUSBHostHIDDevice12returnActionEP8OSAction, 
+                       __ZN22IOUserUSBHostHIDDevice13setIdlePolicyE17USBIdlePolicyTypet, 
                        __ZN22IOUserUSBHostHIDDevice15initInputReportEv, __ZN22IOUserUSBHostHIDDevice16CompleteZLP_ImplEP8OSActionijy, 
                        __ZN22IOUserUSBHostHIDDevice17copyStringAtIndexEht, __ZN22IOUserUSBHostHIDDevice18TimerOccurred_ImplEP8OSActiony, 
                        __ZN22IOUserUSBHostHIDDevice19newReportDescriptorEv, __ZN22IOUserUSBHostHIDDevice20getHIDDescriptorInfoEhPPK26IOUSBHostHIDDescriptorInfoPh, 
@@ -196,7 +198,8 @@ exports:
                        __ZN22IOUserUSBHostHIDDevice4freeEv, __ZN22IOUserUSBHostHIDDevice4initEv, 
                        __ZN22IOUserUSBHostHIDDevice5resetEv, __ZN22IOUserUSBHostHIDDevice7setIdleEt, 
                        __ZN22IOUserUSBHostHIDDevice8DispatchE5IORPC, __ZN22IOUserUSBHostHIDDevice9Stop_ImplEP9IOService, 
-                       __ZN22IOUserUSBHostHIDDevice9_DispatchEPS_5IORPC, __ZN22IOUserUSBHostHIDDevice9getReportEP18IOMemoryDescriptor15IOHIDReportTypejjP8OSAction, 
+                       __ZN22IOUserUSBHostHIDDevice9_DispatchEPS_5IORPC, __ZN22IOUserUSBHostHIDDevice9getActionE13HIDActionType, 
+                       __ZN22IOUserUSBHostHIDDevice9getReportEP18IOMemoryDescriptor15IOHIDReportTypejjP8OSAction, 
                        __ZN22IOUserUSBHostHIDDevice9getReportEP18IOMemoryDescriptor15IOHIDReportTypejjPj, 
                        __ZN22IOUserUSBHostHIDDevice9initPipesEv, __ZN22IOUserUSBHostHIDDevice9setReportEP18IOMemoryDescriptor15IOHIDReportTypejjP8OSAction, 
                        __ZN23IOHIDInterfaceMetaClass3NewEP8OSObject, __ZN23IOHIDInterfaceMetaClass8DispatchE5IORPC, 

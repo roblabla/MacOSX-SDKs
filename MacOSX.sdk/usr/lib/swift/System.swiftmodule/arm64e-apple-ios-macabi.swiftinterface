@@ -1,10 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target arm64e-apple-ios14.3-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -module-name System
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -module-name System
 import Swift
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public typealias CModeT = Swift.UInt16
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct FilePermissions : Swift.OptionSet, Swift.Hashable, Swift.Codable {
   @_alwaysEmitIntoClient public let rawValue: System.CModeT
   @_alwaysEmitIntoClient public init(rawValue: System.CModeT) { self.rawValue = rawValue }
@@ -81,11 +81,11 @@ public typealias CModeT = Swift.UInt16
   @_alwaysEmitIntoClient public static var saveText: System.FilePermissions {
     get { FilePermissions(0o1000) }
   }
-  public typealias RawValue = System.CModeT
-  public typealias Element = System.FilePermissions
   public typealias ArrayLiteralElement = System.FilePermissions
+  public typealias Element = System.FilePermissions
+  public typealias RawValue = System.CModeT
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension FilePermissions : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   @inline(never) public var description: Swift.String {
     get
@@ -94,7 +94,7 @@ extension FilePermissions : Swift.CustomStringConvertible, Swift.CustomDebugStri
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension FileDescriptor {
   @_alwaysEmitIntoClient public static func open(_ path: System.FilePath, _ mode: System.FileDescriptor.AccessMode, options: System.FileDescriptor.OpenOptions = FileDescriptor.OpenOptions(), permissions: System.FilePermissions? = nil, retryOnInterrupt: Swift.Bool = true) throws -> System.FileDescriptor {
     try path.withCString {
@@ -161,37 +161,37 @@ extension FileDescriptor {
       retryOnInterrupt: retryOnInterrupt)
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public struct FilePath {
   public init()
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension FilePath {
   public var length: Swift.Int {
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension FilePath {
   public init(cString: Swift.UnsafePointer<Swift.CChar>)
   public func withCString<Result>(_ body: (Swift.UnsafePointer<Swift.Int8>) throws -> Result) rethrows -> Result
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension FilePath : Swift.ExpressibleByStringLiteral {
   public init(stringLiteral: Swift.String)
   public init(_ string: Swift.String)
-  public typealias StringLiteralType = Swift.String
   public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+  public typealias StringLiteralType = Swift.String
   public typealias UnicodeScalarLiteralType = Swift.String
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension String {
   public init(decoding path: System.FilePath)
   @available(*, deprecated, renamed: "String.init(decoding:)")
   public init(_ path: System.FilePath)
   public init?(validatingUTF8 path: System.FilePath)
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension FilePath : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   @inline(never) public var description: Swift.String {
     get
@@ -200,17 +200,17 @@ extension FilePath : Swift.CustomStringConvertible, Swift.CustomDebugStringConve
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension FilePath : Swift.Hashable, Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: System.FilePath, b: System.FilePath) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
-  public func encode(to encoder: Swift.Encoder) throws
-  public static func == (a: System.FilePath, b: System.FilePath) -> Swift.Bool
+  public init(from decoder: Swift.Decoder) throws
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct Errno : Swift.RawRepresentable, Swift.Error, Swift.Hashable, Swift.Codable {
   @_alwaysEmitIntoClient public let rawValue: Swift.CInt
   @_alwaysEmitIntoClient public init(rawValue: Swift.CInt) { self.rawValue = rawValue }
@@ -924,7 +924,7 @@ extension FilePath : Swift.Hashable, Swift.Codable {
   }
   public typealias RawValue = Swift.CInt
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension Errno {
   @_alwaysEmitIntoClient public static var wouldBlock: System.Errno {
     get { Errno(_EWOULDBLOCK) }
@@ -983,7 +983,7 @@ extension Errno {
     get { lastErrnoValue }
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension Errno {
   public var _code: Swift.Int {
     get
@@ -992,7 +992,7 @@ extension Errno {
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension Errno : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   @inline(never) public var description: Swift.String {
     get
@@ -1001,20 +1001,20 @@ extension Errno : Swift.CustomStringConvertible, Swift.CustomDebugStringConverti
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension Errno {
   @_alwaysEmitIntoClient public static func ~= (lhs: System.Errno, rhs: Swift.Error) -> Swift.Bool {
     guard let value = rhs as? Errno else { return false }
     return lhs == value
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct FileDescriptor : Swift.RawRepresentable, Swift.Hashable, Swift.Codable {
   @_alwaysEmitIntoClient public let rawValue: Swift.CInt
   @_alwaysEmitIntoClient public init(rawValue: Swift.CInt) { self.rawValue = rawValue }
   public typealias RawValue = Swift.CInt
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension FileDescriptor {
   @frozen public struct AccessMode : Swift.RawRepresentable, Swift.Hashable, Swift.Codable {
     @_alwaysEmitIntoClient public var rawValue: Swift.CInt
@@ -1123,9 +1123,9 @@ extension FileDescriptor {
     @_alwaysEmitIntoClient public static var O_CLOEXEC: System.FileDescriptor.OpenOptions {
       get { closeOnExec }
     }
-    public typealias RawValue = Swift.CInt
-    public typealias Element = System.FileDescriptor.OpenOptions
     public typealias ArrayLiteralElement = System.FileDescriptor.OpenOptions
+    public typealias Element = System.FileDescriptor.OpenOptions
+    public typealias RawValue = Swift.CInt
   }
   @frozen public struct SeekOrigin : Swift.RawRepresentable, Swift.Hashable, Swift.Codable {
     @_alwaysEmitIntoClient public var rawValue: Swift.CInt
@@ -1168,7 +1168,7 @@ extension FileDescriptor {
     public typealias RawValue = Swift.CInt
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension FileDescriptor.AccessMode : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   @inline(never) public var description: Swift.String {
     get
@@ -1177,7 +1177,7 @@ extension FileDescriptor.AccessMode : Swift.CustomStringConvertible, Swift.Custo
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension FileDescriptor.SeekOrigin : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   @inline(never) public var description: Swift.String {
     get
@@ -1186,7 +1186,7 @@ extension FileDescriptor.SeekOrigin : Swift.CustomStringConvertible, Swift.Custo
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension FileDescriptor.OpenOptions : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   @inline(never) public var description: Swift.String {
     get
@@ -1195,7 +1195,7 @@ extension FileDescriptor.OpenOptions : Swift.CustomStringConvertible, Swift.Cust
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension FileDescriptor {
   public func closeAfter<R>(_ body: () throws -> R) throws -> R
   @discardableResult

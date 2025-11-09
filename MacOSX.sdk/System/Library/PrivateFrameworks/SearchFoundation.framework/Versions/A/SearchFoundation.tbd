@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           101ABA1D-C1AD-3286-87CD-D3E8115359D5
+    value:           54B7FB2E-210A-3DF8-A231-AF18F1A36799
   - target:          x86_64-maccatalyst
-    value:           101ABA1D-C1AD-3286-87CD-D3E8115359D5
+    value:           54B7FB2E-210A-3DF8-A231-AF18F1A36799
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           122BB305-B49C-3E44-84C2-B811C72A69F0
+    value:           DC9A40F8-77E9-3037-B126-E64ADA216396
   - target:          arm64e-maccatalyst
-    value:           122BB305-B49C-3E44-84C2-B811C72A69F0
+    value:           DC9A40F8-77E9-3037-B126-E64ADA216396
 install-name:    '/System/Library/PrivateFrameworks/SearchFoundation.framework/Versions/A/SearchFoundation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

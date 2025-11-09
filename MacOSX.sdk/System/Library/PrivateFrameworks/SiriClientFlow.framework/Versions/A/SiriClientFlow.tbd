@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BA33678E-7925-3FB9-B5E4-99E89DC89C50
+    value:           5B7A8884-881D-337D-85A6-0D9E49382211
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E1CBAD2F-596C-36EB-A790-DEBD08C3EE11
+    value:           1B636E3B-0234-3A58-847C-A80ACAF5848F
 install-name:    '/System/Library/PrivateFrameworks/SiriClientFlow.framework/Versions/A/SiriClientFlow'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

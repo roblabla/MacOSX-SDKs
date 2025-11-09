@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           73267208-FF25-3F62-A78E-E1016AA2C81E
+    value:           1794EDC2-D838-31A5-A85B-16348853D385
   - target:          x86_64-maccatalyst
-    value:           73267208-FF25-3F62-A78E-E1016AA2C81E
+    value:           1794EDC2-D838-31A5-A85B-16348853D385
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7406B367-3797-3DEA-BC52-FE31A2275EA0
+    value:           E4163345-5094-3E5F-B857-56CF07035C7B
   - target:          arm64e-maccatalyst
-    value:           7406B367-3797-3DEA-BC52-FE31A2275EA0
+    value:           E4163345-5094-3E5F-B857-56CF07035C7B
 install-name:    '/System/Library/PrivateFrameworks/MediaExperience.framework/Versions/A/MediaExperience'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -135,6 +135,7 @@ exports:
                        _kFigEndpointDescriptorKey_OtherDevicesConnected_RouteUID, 
                        _kFigEndpointDescriptorKey_OtherDevicesConnected_UniqueID, 
                        _kFigEndpointDescriptorKey_PersistentGroupUUID, _kFigEndpointDescriptorKey_PortNumber, 
+                       _kFigEndpointDescriptorKey_PreferredExternalRouteDetails_InEarDetectEnabled, 
                        _kFigEndpointDescriptorKey_PreferredExternalRouteDetails_InEarDetectSupported, 
                        _kFigEndpointDescriptorKey_PreferredExternalRouteDetails_IsActive, 
                        _kFigEndpointDescriptorKey_RouteCurrentlyPicked, _kFigEndpointDescriptorKey_RouteHasAirPlayCloudConnectivity, 
@@ -254,10 +255,10 @@ exports:
                        _kFigRoutingContextNotification_RouteChangeEnded, _kFigRoutingContextNotification_RouteChangeStarted, 
                        _kFigRoutingContextNotification_RouteConfigUpdated, _kFigRoutingContextNotification_ServerConnectionDied, 
                        _kFigRoutingContextNotification_SystemPickerVideoRouteChanged, 
-                       _kFigRoutingContextProperty_AssociatedAudioDevice, _kFigRoutingContextProperty_ContextType, 
-                       _kFigRoutingContextProperty_ContextUUID, _kFigRoutingContextProperty_CurrentGroupID, 
-                       _kFigRoutingContextProperty_DefaultGroupID, _kFigRoutingContextProperty_IsWHASilentPrimary, 
-                       _kFigRoutingContextProperty_RemoteControlChannelAvailable, 
+                       _kFigRoutingContextProperty_AllowsRealTimeAudioPlayback, _kFigRoutingContextProperty_AssociatedAudioDevice, 
+                       _kFigRoutingContextProperty_ContextType, _kFigRoutingContextProperty_ContextUUID, 
+                       _kFigRoutingContextProperty_CurrentGroupID, _kFigRoutingContextProperty_DefaultGroupID, 
+                       _kFigRoutingContextProperty_IsWHASilentPrimary, _kFigRoutingContextProperty_RemoteControlChannelAvailable, 
                        _kFigRoutingContextProperty_SupportsBluetoothMultiDeviceRouting, 
                        _kFigRoutingContextProperty_SupportsWHAMultiDeviceRouting, 
                        _kFigRoutingContextRemoveRouteOptionKey_ContinuePlaybackWhenLastRouteIsRemoved, 
@@ -401,6 +402,7 @@ exports:
                        _kMXSystemControllerProperty_ThermalControlInfo, _kMXSystemControllerProperty_UplinkMute, 
                        _kMXSystemControllerProperty_VibeIntensity, _kMXSystemController_PlayingSessionsDescriptionKey_AudioSessionID, 
                        _kMXSystemController_PlayingSessionsDescriptionKey_ClientPID, 
+                       _kMXSystemController_PlayingSessionsDescriptionKey_IsNowPlayingEligible, 
                        _kMXSystemController_PlayingSessionsDescriptionKey_MXSessionIDs, 
                        _kMXTestGlobalNotificationKey_MXTestResultDidChange_Result, 
                        _kMXTestGlobalNotification_MXTestResultDidChange, _kMXTestXPCMsgParam_TestCase, 

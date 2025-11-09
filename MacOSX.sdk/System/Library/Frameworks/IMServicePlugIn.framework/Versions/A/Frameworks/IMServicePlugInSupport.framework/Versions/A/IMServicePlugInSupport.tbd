@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BA118F04-053E-355B-8A72-FC6FA9E8CEAE
+    value:           B71C0CF1-0F22-3595-93EF-2AF61240FCE0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F9EBEE54-9B51-3899-81CB-1B8491F51EA3
+    value:           F75C93C4-1035-3886-8206-27A4438E3693
 install-name:    '/System/Library/Frameworks/IMServicePlugIn.framework/Versions/A/Frameworks/IMServicePlugInSupport.framework/Versions/A/IMServicePlugInSupport'
 current-version: 1000
 exports:

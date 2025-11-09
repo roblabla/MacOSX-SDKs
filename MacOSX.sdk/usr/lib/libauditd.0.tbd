@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5812F001-DE15-3BC3-B414-4BB08D2EC538
+    value:           E519397D-C694-3AE1-AC00-F94D1502F6DB
   - target:          x86_64-maccatalyst
-    value:           5812F001-DE15-3BC3-B414-4BB08D2EC538
+    value:           E519397D-C694-3AE1-AC00-F94D1502F6DB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F372971C-38AA-3A13-8905-1AA5C784CB8F
+    value:           D48BB7DE-677F-3BCF-86AB-DE000E6D2DD4
   - target:          arm64e-maccatalyst
-    value:           F372971C-38AA-3A13-8905-1AA5C784CB8F
+    value:           D48BB7DE-677F-3BCF-86AB-DE000E6D2DD4
 install-name:    '/usr/lib/libauditd.0.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _audit_quick_start, _audit_quick_start_internal, _audit_quick_stop, 
                        _auditd_close_dirs, _auditd_expire_trails, _auditd_gen_record, 

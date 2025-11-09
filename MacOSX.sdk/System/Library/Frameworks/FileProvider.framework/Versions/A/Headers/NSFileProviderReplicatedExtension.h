@@ -48,6 +48,16 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderCreateItemOptions) {
      will call -[NSFileProviderExtension importDidFinishWithCompletionHandler:].
      */
     NSFileProviderCreateItemMayAlreadyExist = 1 << 0,
+
+    /**
+     The deletion from the disk of an item conflicted.
+
+     If the provider declares that an item has been deleted but the deletion of the
+     item by the system on disk conflicts with local edits of the item, the system will
+     attempt to create the edited item by calling createItemBasedOnTemplate with this
+     option specified.
+     */
+    NSFileProviderCreateItemDeletionConflicted FILEPROVIDER_API_AVAILABILITY_V3_1 = 1 << 1,
 } FILEPROVIDER_API_AVAILABILITY_V3;
 
 /**
@@ -57,7 +67,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderDeleteItemOptions) {
     /**
      The deletion of the item is recursive.
      */
-    NSFileProviderDeleteItemRecursive = 1 << 0
+    NSFileProviderDeleteItemRecursive = 1 << 0,
 } FILEPROVIDER_API_AVAILABILITY_V3;
 
 typedef NS_OPTIONS(NSUInteger, NSFileProviderModifyItemOptions) {
@@ -98,22 +108,14 @@ FILEPROVIDER_API_AVAILABILITY_V3
 /**
  Create an enumerator for an item.
 
- When the user opens the browse tab of the UIDocumentsBrowserViewController and
- selects a file provider, this is called with
- NSFileProviderRootContainerItemIdentifier, and -[NSFileProviderEnumerator
- enumerateItemsForObserver:startingAtPage:] is immediately called to list the
- first items available under at the root level of the file provider.
-
- As the user navigates down into directories, new enumerators are created with
- this method, passing in the itemIdentifier of those directories.  Past
- enumerators are then invalidated.
-
- This method is also called with
- NSFileProviderWorkingSetContainerItemIdentifier, which is enumerated with
- -[NSFileProviderEnumerator enumerateChangesForObserver:fromSyncAnchor:].  That
- enumeration is special in that it isn't driven by the
- UIDocumentsBrowserViewController.  It happens in the background to sync the
- working set down to the device.
+ This method is called when the user lists the content of folder it never accessed
+ before. This can happen either when using Finder or when listing the content of
+ the directory from a Terminal (for instance using the `ls` command line tool). The
+ system will use the enumerator to list the children of the directory by calling
+ -[NSFileProviderEnumerator enumerateItemsForObserver:startingAtPage:] until nil
+ is passed to -[NSFileProviderEnumerationObserver finishEnumeratingUpToPage:].
+ Once this has been called, the directory and its children should be included in the
+ working set.
 
  This is also used to subscribe to live updates for a single document.  In that
  case, -[NSFileProviderEnumerator enumerateChangesToObserver:fromSyncAnchor:]
@@ -121,6 +123,33 @@ FILEPROVIDER_API_AVAILABILITY_V3
  the very item that the enumeration was started on.
 
  If returning nil, you must set the error out parameter.
+
+ Working set enumerator:
+ -----------------------
+ The working set enumerator is a special enumerator (NSFileProviderWorkingSetContainerItemIdentifier)
+ the system uses to detect changes that should be synced to the disk and/or searchable
+ in Spotlight. Because that enumerator is by definition used for change detection, the
+ working set enumerator must implement
+ -[NSFileProviderEnumerator enumerateChangesForObserver:fromSyncAnchor:] and
+ -[NSFileProviderEnumerator currentSyncAnchorWithCompletionHandler:].
+
+ The system guarantees that it has a single consumer for the working set. This means there
+ will never be two concurrent enumerations of the working set and will always do forward
+ progress: the system will only ask for changes from the last requested sync anchor or
+ the last returned sync anchor and the extension should be prepared for it.
+
+ The expiration of the sync anchor of the working set will cause a very expensive scan
+ of all the items known by the system.
+
+ The system ingests the changes from the working set and applies the changes to the
+ disk replicate and the spotlight index. Before ingesting the update for an item,
+ the system will check if the enumeration of the item races against a call to
+ createItemBasedOnTemplate, modifyItem, ... that may affect the item. If a potential race
+ is detected, the system will call itemForItemIdentifier in order to resolve the race.
+
+ If the provider exposes the key NSExtensionFileProviderAppliesChangesAtomically with value
+ YES in its Info.plist, it is considered to apply the changes atomically, in which case the
+ system does not need to check for potential races.
 
  Error cases:
  ------------
@@ -152,6 +181,20 @@ FILEPROVIDER_API_AVAILABILITY_V3
 
 /**
  FileProvider extension for which the system replicates the content on disk.
+
+ The extension exposes a hierarchy of NSFileProviderItem instances that the system
+ will replicate on disk as a file hierarchy. The file hierarchy reflects the filename,
+ parent, content, and metadata described by the NSFileProviderItem. In case two items
+ are at the same disk location (same parent and filename), the system may choose to
+ "bounce" an item.
+
+ The system lazily replicates the item hierarchy: items are created "dataless" on disk
+ and the content (for files) or list of children (for folders) is fetched on first
+ access by calling fetchContentsForItemWithIdentifier, or enumeratorForContainerItemIdentifier.
+
+ The provider can notify the system of changes on the items by publishing those on the
+ enumerator for the working set. The system notifies the extension of changes made by the
+ user on disk by calling createItemBasedOnTemplate, modifyItem, or deleteItemWithIdentifier.
  */
 FILEPROVIDER_API_AVAILABILITY_V3
 @protocol NSFileProviderReplicatedExtension <NSObject, NSFileProviderEnumerating>
@@ -191,6 +234,12 @@ FILEPROVIDER_API_AVAILABILITY_V3
 
  Any other error will be considered to be transient and will cause the
  lookup to be retried.
+
+ Cancellations:
+ ------------
+ If the NSProgress returned by this method is cancelled, the extension should
+ call the completion handler with (nil, NSUserCancelledError) in the NSProgress
+ cancellation handler.
  */
 - (NSProgress *)itemForIdentifier:(NSFileProviderItemIdentifier)identifier
                           request:(NSFileProviderRequest *)request
@@ -209,9 +258,32 @@ FILEPROVIDER_API_AVAILABILITY_V3
  The system takes ownership of the item and will move it out of the sandbox of
  the provider.
 
+ If the provider wishes to force materialization of a given item, the provider should use the NSFileCoordinator
+ API to coordinate a read on the user visible URL of the item, retrieved using
+ -[NSFileProviderManager getUserVisibleURLForItemIdentifier:completionHandler:]
+
  The requestedVersion parameter specifies which version should be returned. A nil value
  means that the latest known version should be returned. Except for the error case, the
  version of the returned item is assumed to be identical to what was requested.
+
+ requestedVersion is currently always set to nil.
+
+ Concurrent Downloads:
+ ----------
+ The system will call fetchContents concurrently if there are multiple outstanding file download requests.
+ The provider can control the concurrency by setting the key NSExtensionFileProviderDownloadPipelineDepth
+ in the Info.plist of the extension to the number of concurrent downloads that the system should create
+ per domain. This number must be between 1 and 128, inclusive.
+
+ File ownership:
+ ---------------
+ The system clones and unlinks the received fileContents. The extension should not mutate the corresponding
+ file after calling the completion handler. If the extension wishes to keep a copy of the content, it must
+ provide a clone of the that content as the URL passed to the completion handler.
+
+ In case the extension or the system crashes between the moment the completion handler is called and the
+ moment the system unlinks the file, the file may unexpectedly still be on disk the next time an instance
+ of the extension is created. The extension is then responsible for deleting that file.
 
  Error cases:
  ------------
@@ -231,6 +303,16 @@ FILEPROVIDER_API_AVAILABILITY_V3
 
  Any other error will be considered to be transient and will cause the
  download to be retried.
+
+ Cancellations:
+ ------------
+ If the NSProgress returned by this method is cancelled, the extension should
+ call the completion handler with (nil, nil, NSUserCancelledError) in the NSProgress
+ cancellation handler.
+
+ The returned NSProgress is used to show progress to the user. If the user cancels the
+ fetch, the extension should stop fetching the item, as it is no longer required.
+
  */
 - (NSProgress *)fetchContentsForItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
                                            version:(nullable NSFileProviderItemVersion *)requestedVersion
@@ -246,9 +328,12 @@ FILEPROVIDER_API_AVAILABILITY_V3
  of fields to conside in that object is defined by the fields parameter. Fields
  not listed should be considered as not being defined.
 
- If the item is a document, the contents should be fetched from the provided
- URL. Otherwise url will be nil. If the item is a symbolic link, the target
- path is provided by the symlinkTargetPath of the itemTemplate.
+ The url is used to transfer the content of the file from the system to the
+ extension. It can be nil if the item has no content. This will be the case if
+ the item is a folder or if the item is being reimported (flag
+ NSFileProviderCreateItemMayAlreadyExist set) and the file is dataless on disk.
+ If the item is a symbolic link, the target path is provided by the symlinkTargetPath
+ of the itemTemplate.
 
  The system is setting the itemIdentifier of the itemTemplate to a unique value that
  is guaranteed to stay the same for a given item in case the creation is replayed
@@ -275,6 +360,16 @@ FILEPROVIDER_API_AVAILABILITY_V3
  in the completion handler. The content from the provider will then be fetched
  and propagated to disk.
 
+ In case the deletion of an item from the working set could not be applied to the
+ disk by the system because it conflicted with a local edit of the file, the system
+ will attempt to create the edited item. In that case the creation call will receive
+ the NSFileProviderCreateItemDeletionConflicted option and the itemIdentifier in the
+ template will be set to the itemIdentifier of the item deleted from the working set.
+ The itemVersion will also be set to the last itemVersion of the item that was made
+ available on disk before the item was edited locally. If such a conflict happens
+ on a dataless item on disk, the item will be immediately deleted from the disk instead
+ of issuing a new creation.
+
  In case the NSFileProviderCreateItemMayAlreadyExist option
  is passed, the content may be nil if the item is found by the system without any
  associated content. In that case, you should return a nil item if you are not
@@ -288,10 +383,10 @@ FILEPROVIDER_API_AVAILABILITY_V3
 
  If the imported item is refused by the extension, it should return nil for the
  createdItem without any error. In that case, the source item will be deleted
- from disk. If the extension does not wish to synchronise the item, while still
+ from disk. In case the item represents a directory, the content will be deleted
+ recursively. If the extension does not wish to synchronise the item, while still
  keeping it on disk, it should still import it locally, but not sync it to its
- server, and return a valid createItem object. The non-imported item should be
- marked as being excluded from sync and should not declare the evictable capability.
+ server, and return a valid createItem object.
 
  The progress returned by createItemBasedOnTemplate is expected to include the
  upload progress of the item and will be presented in the user interface until
@@ -300,6 +395,34 @@ FILEPROVIDER_API_AVAILABILITY_V3
  Creation is gated by the NSFileProviderItemCapabilitiesAllowsAddingSubItems
  capability on the parent folder on a UI level, but direct file system changes
  (e.g. from Terminal) can still result in changes that must be handled.
+
+ Structural consistency:
+ -----------------------
+ The system guarantees that the creation is called after the creation of the
+ parent completed.
+
+ File ownership:
+ ---------------
+ The file at `url` is owned by the system and is unlinked after the completion
+ handler is called. If the extension wishes to keep access to the content of
+ file after calling the completion handler, it should clone the file in its
+ container.
+
+ Atomicity:
+ ----------
+ By default, the system assumes all the changes are applied non-atomically, which
+ means that the change or an intermediary state from the change can be observed
+ (for instance while enumerating the working set) while the call is in progress
+ (before the completion handler is called). The provider can indicate to the system
+ that it applies changes atomically (that is, the change cannot be observed before
+ the completion handler is called) by setting the key NSExtensionFileProviderAppliesChangesAtomically
+ in the Info.plist of the extension to YES.
+
+ The atomicity declaration only describes the visibility of the changes, not
+ the ability of the provider to apply all the fields at once: a provider that applies
+ changes atomically might still apply a subset of the changedFields communicated
+ by the system and defer the remaining fields by setting the stillPendingFields
+ parameter in the completion handler.
 
  Error cases:
  ------------
@@ -323,6 +446,12 @@ FILEPROVIDER_API_AVAILABILITY_V3
 
  Any other error will be considered to be transient and will cause the
  creation to be retried.
+
+ Cancellations:
+ ------------
+ If the NSProgress returned by this method is cancelled, the extension should
+ call the completion handler with (nil, [], NO, NSUserCancelledError) in the NSProgress
+ cancellation handler.
  */
 - (NSProgress *)createItemBasedOnTemplate:(NSFileProviderItem)itemTemplate
                                    fields:(NSFileProviderItemFields)fields
@@ -364,6 +493,13 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  is merged and sub-items will be modified with the
  NSFileProviderModifyItemMayAlreadyExist flag set.
 
+ If the extension wishes the modify item to cause the deletion of the item on disk,
+ it can call the completion handler with nil in place of the resulting item. If the
+ item is directory, the item will be kept on disk until all its children has been deleted
+ from the working set. The system will only apply the deletion on the disk if this
+ does not conflict with local edits. Otherwise, the system will attempt to re-create
+ the item with the NSFileProviderCreateItemDeletionConflicted option set.
+
  The progress returned by modifyItem is expected to include the upload progress if any,
  even if the provider chose to call the completion handler before the upload finishes.
  For example, the provider might decide to call the completion handler as soon as the
@@ -373,8 +509,12 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  but direct file system changes (e.g. from Terminal) can still result in changes that
  must be handled.
 
- Cycle handling:
- ---------------
+ Structural consistency and Cycle handling:
+ ------------------------------------------
+ In case the parentItemIdentifier is modified, the system guarantees that the new
+ parent has been created and the creation completed before the call to modifyItem
+ is issued.
+
  The system guarantees that modifyItem called after local changes from the user will
  never create a cycle: that is all items will always be a descendent of either the
  root item or the trash item.
@@ -386,6 +526,29 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  detected, the provider must fix the conflict by breaking the cycle, and return the
  state of the item after resolving that conflict. If the resolution affects other
  items as well, updates for those other items must be published on the working set.
+
+ File ownership:
+ ---------------
+ The file at `url` is owned by the system and is unlinked after the completion
+ handler is called. If the extension wishes to keep access to the content of
+ file after calling the completion handler, it should clone the file in its
+ container.
+
+ Atomicity:
+ ----------
+ By default, the system assumes all the changes are applied non-atomically, which
+ means that the change or an intermediary state from the change can be observed
+ (for instance while enumerating the working set) while the call is in progress
+ (before the completion handler is called). The provider can indicate to the system
+ that it applies changes atomically (that is, the change cannot be observed before
+ the completion handler is called) by setting the key NSExtensionFileProviderAppliesChangesAtomically
+ in the Info.plist of the extension to YES.
+
+ The atomicity declaration only describes the visibility of the changes, not
+ the ability of the provider to apply all the fields at once: a provider that applies
+ changes atomically might still apply a subset of the changedFields communicated
+ by the system and defer the remaining fields by setting the stillPendingFields
+ parameter in the completion handler.
 
  Error cases:
  ------------
@@ -414,6 +577,12 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
 
  Any other error will be considered to be transient and will cause the
  modification to be retried.
+
+ Cancellations:
+ ------------
+ If the NSProgress returned by this method is cancelled, the extension should
+ call the completion handler with (nil, [], NO, NSUserCancelledError) in the NSProgress
+ cancellation handler.
  */
 - (NSProgress *)modifyItem:(NSFileProviderItem)item
                baseVersion:(NSFileProviderItemVersion *)version
@@ -448,6 +617,16 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  of the item on a UI level, but direct file system changes (e.g. from Terminal)
  can still result in changes that must be handled.
 
+ Atomicity:
+ ----------
+ By default, the system assumes all the changes are applied non-atomically, which
+ means that the change or an intermediary state from the change can be observed
+ (for instance while enumerating the working set) while the call is in progress
+ (before the completion handler is called). The provider can indicate to the system
+ that it applies changes atomically (that is, the change cannot be observed before
+ the completion handler is called) by setting the key NSExtensionFileProviderAppliesChangesAtomically
+ in the Info.plist of the extension to YES.
+
  Error cases:
  ------------
  The extension may fail the deletion in different scenarios, for instance because
@@ -477,6 +656,12 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
 
  Any other error will be considered to be transient and will cause the
  deletion to be retried.
+
+ Cancellations:
+ ------------
+ If the NSProgress returned by this method is cancelled, the extension should
+ call the completion handler with (NSUserCancelledError) in the NSProgress
+ cancellation handler.
  */
 - (NSProgress *)deleteItemWithIdentifier:(NSFileProviderItemIdentifier)identifier
                              baseVersion:(NSFileProviderItemVersion *)version
@@ -560,6 +745,45 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  */
 - (void)materializedItemsDidChangeWithCompletionHandler:(void (^)(void))completionHandler;
 
+/**
+ Called by the system when the set of pending items is refreshed.
+
+ The pending enumerator lists all the items for which a change has been observed either
+ on the disk or in the working set more than one second ago and that change hasn't been
+ applied on the other side yet. An item can appear in the pending set for various reasons:
+ - the system is under load and cannot process all the events in a timely fashion
+ - a long running operation is scheduled or running for the item to be in sync (for instance,
+    the download or the upload of a new content)
+ - an error occurred, in which case the error will be set on the item as `downloadError` if
+    it occurred when applying a change to the disk, or `uploadError` in the other way around.
+
+ The pending set will only include items that comply to the following rules:
+ - They have been queued for changes for more time than the refresh interval;
+ - The items are already known by the provider.
+
+ These constraints imply that initial transfer of a file from the disk to the provider will not
+ be listed in the pending set, even though the transfer could take several minutes to complete
+
+ The pending set is refreshed regurlary but only if there are meaningful changes:
+ new pending items, items that were pending but are not anymore (deletions from the set),
+ or domain version changed and set is not empty
+
+ To enumerate the set of pending items,
+ - Call -enumeratorForPendingItems on the instance of
+   NSFileProviderManager corresponding to your domain;
+ - Implement the NSFileProviderEnumerationObserver and
+   NSFileProviderChangeObserver on an object;
+ - Pass that object to the enumerator;
+ - It will get called upon change to the set.
+
+ This method is regularly called when changes happen to the pending set.
+ implementeers are advised that this call will not happen as soon as an item is pending.
+ Thus, implementeers should not use the pending set to detect when a change happens.
+ The pending set will only contain items that were pending for a least one second before the
+ last refresh date.
+ */
+- (void)pendingItemsDidChangeWithCompletionHandler:(void (^)(void))completionHandler FILEPROVIDER_API_AVAILABILITY_V3_1;
+
 @end
 
 #pragma mark - Additional protocols
@@ -599,6 +823,12 @@ FILEPROVIDER_API_AVAILABILITY_V3
  The service sources must be tied to the item identified by @c itemIdentifier.
  Client applications can retrieve the list of supported services by calling
  @c -[NSFileManager getFileProviderServicesForItemAtURL:] for a specific item URL.
+
+ Cancellations:
+ ------------
+ If the NSProgress returned by this method is cancelled, the extension should
+ call the completion handler with (nil, NSUserCancelledError) in the NSProgress
+ cancellation handler.
 */
 - (NSProgress *)supportedServiceSourcesForItemIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
                                        completionHandler:(void (^)(NSArray <id <NSFileProviderServiceSource>> * _Nullable, NSError * _Nullable))completionHandler
@@ -633,6 +863,12 @@ FILEPROVIDER_API_AVAILABILITY_V3
 
  The system will cache the thumbnail for the item, and the cache will be
  invalidated when itemVersion.contentVersion changes.
+
+ Cancellations:
+ ------------
+ If the NSProgress returned by this method is cancelled, the extension should
+ call the completion handler with (NSUserCancelledError) in the NSProgress
+ cancellation handler.
  */
 - (NSProgress *)fetchThumbnailsForItemIdentifiers:(NSArray<NSFileProviderItemIdentifier> *)itemIdentifiers
                                     requestedSize:(CGSize)size
@@ -652,11 +888,56 @@ FILEPROVIDER_API_AVAILABILITY_V3
  Custom actions are defined in the File Provider Extension's Info.plist, under the
  `NSExtensionFileProviderActions` key. The format of this key is identical to actions
  defined in a FileProviderUI extension.
+
+ Cancellations:
+ ------------
+ If the NSProgress returned by this method is cancelled, the extension should
+ call the completion handler with (NSUserCancelledError) in the NSProgress
+ cancellation handler.
  */
 - (NSProgress *)performActionWithIdentifier:(NSFileProviderExtensionActionIdentifier)actionIdentifier
                      onItemsWithIdentifiers:(NSArray <NSFileProviderItemIdentifier> *)itemIdentifiers
                           completionHandler:(void (^)(NSError * _Nullable error))completionHandler
     NS_SWIFT_NAME(performAction(identifier:onItemsWithIdentifiers:completionHandler:));
+
+@end
+
+FILEPROVIDER_API_AVAILABILITY_V3_1
+@protocol NSFileProviderDomainState <NSObject>
+
+/**
+ Version of the domain.
+
+ The domain version is an opaque value assigned by the provider. It is read by the system in the
+ completion handler for createItemBasedOnTemplate, modifyItem, deleteItem and itemForIdentifier, as
+ well as in the finish calls when enumerating the working set. The read is guaranteed to happen
+ on the same dispatch queue the completion handler was called on.
+
+ When the system discovers a change on disk, it associates that change to the currently known
+ domain version. When that change get communicated to the extension, that version is included in
+ the NSFileProviderRequest object passed by the system to the extension. As a consequence, the
+ provider can use the domain version to identify the state of the system when a change was made on disk.
+
+ The provider is responsible for defining when the domain version changes. When that value is
+ updated, the provider must notify the system by signaling the working set.
+
+ The system ignore any domain version that is smaller than the previously known version.
+ */
+@property (nonatomic, readonly) NSFileProviderDomainVersion *domainVersion;
+
+/**
+ Global state of the domain.
+
+ Use this dictionary to add state information to the domain. It is accessible to
+ user interaction predicates via the `domainUserInfo` context key.
+
+ This dictionary must only contain key and value classes in the following list:
+ NSString, NSNumber, NSDate, and NSPersonNameComponents.
+
+ The system expects the domainVersion to be updated when the value of the userInfo property
+ changes.
+ */
+@property (nonatomic, strong, readonly, nonnull) NSDictionary *userInfo;
 
 @end
 

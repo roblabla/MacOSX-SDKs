@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D31BD4A9-2E13-31A3-81FD-7E159A7DE99A
+    value:           655638D7-418D-367B-AC86-974C000C364F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F13A1B1E-4EB5-35AD-82D4-9C18638DB5F8
+    value:           1D6346F7-A751-3277-8033-6BE83BDF4AB3
 install-name:    '/System/Library/PrivateFrameworks/NetworkMenusCommon.framework/NetworkMenusCommon'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -50,10 +50,11 @@ exports:
                        AppleNetworkMenuExtraView.mSizeStartTime, AppleNetworkMenuExtraView.mSizeTimer, 
                        AppleNetworkMenuExtraView.mSleepStartTime, AppleNetworkMenuExtraView.mSleepTimeAdditionalSeconds, 
                        AppleNetworkMenuExtraView.mStateReferenceTime, AppleNetworkMenuExtraView.mStateTimer, 
-                       AppleNetworkMenuExtraView.mTextImages, AppleNetworkMenuHeaderView.mClickFlashTimer, 
-                       AppleNetworkMenuHeaderView.mConnectedTimer, AppleNetworkMenuHeaderView.mConnectionStartTime, 
-                       AppleNetworkMenuHeaderView.mHasClicked, AppleNetworkMenuHeaderView.mIsHighlighted, 
-                       AppleNetworkMenuHeaderView.mShouldShowTimer, AppleNetworkMenuHeaderView.mSleepStartTime, 
-                       AppleNetworkMenuHeaderView.mSleepTimeAdditionalSeconds, AppleNetworkMenuHeaderView.o_timeField, 
-                       AppleNetworkMenuHeaderView.o_titleField, AppleNetworkMenuHeaderViewController.o_view ]
+                       AppleNetworkMenuExtraView.mTextImages, AppleNetworkMenuExtraView.mTextImagesAppearance, 
+                       AppleNetworkMenuHeaderView.mClickFlashTimer, AppleNetworkMenuHeaderView.mConnectedTimer, 
+                       AppleNetworkMenuHeaderView.mConnectionStartTime, AppleNetworkMenuHeaderView.mHasClicked, 
+                       AppleNetworkMenuHeaderView.mIsHighlighted, AppleNetworkMenuHeaderView.mShouldShowTimer, 
+                       AppleNetworkMenuHeaderView.mSleepStartTime, AppleNetworkMenuHeaderView.mSleepTimeAdditionalSeconds, 
+                       AppleNetworkMenuHeaderView.o_timeField, AppleNetworkMenuHeaderView.o_titleField, 
+                       AppleNetworkMenuHeaderViewController.o_view ]
 ...

@@ -49,7 +49,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	task_access_MSG_COUNT
-#define	task_access_MSG_COUNT	2
+#define	task_access_MSG_COUNT	3
 #endif	/* task_access_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -89,6 +89,21 @@ kern_return_t find_code_signature
 (
 	mach_port_t task_access_port,
 	int32_t new_pid
+);
+
+/* Routine check_task_access_with_flavor */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t check_task_access_with_flavor
+(
+	mach_port_t task_access_port,
+	int32_t calling_pid,
+	uint32_t calling_gid,
+	int32_t target_pid,
+	mach_task_flavor_t flavor
 );
 
 __END_DECLS
@@ -134,6 +149,21 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int32_t calling_pid;
+		uint32_t calling_gid;
+		int32_t target_pid;
+		mach_task_flavor_t flavor;
+	} __Request__check_task_access_with_flavor_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Request__task_access_subsystem__defined */
 
 /* union of all requests */
@@ -143,6 +173,7 @@ __END_DECLS
 union __RequestUnion__task_access_subsystem {
 	__Request__check_task_access_t Request_check_task_access;
 	__Request__find_code_signature_t Request_find_code_signature;
+	__Request__check_task_access_with_flavor_t Request_check_task_access_with_flavor;
 };
 #endif /* !__RequestUnion__task_access_subsystem__defined */
 /* typedefs for all replies */
@@ -173,6 +204,18 @@ union __RequestUnion__task_access_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__check_task_access_with_flavor_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Reply__task_access_subsystem__defined */
 
 /* union of all replies */
@@ -182,13 +225,15 @@ union __RequestUnion__task_access_subsystem {
 union __ReplyUnion__task_access_subsystem {
 	__Reply__check_task_access_t Reply_check_task_access;
 	__Reply__find_code_signature_t Reply_find_code_signature;
+	__Reply__check_task_access_with_flavor_t Reply_check_task_access_with_flavor;
 };
 #endif /* !__RequestUnion__task_access_subsystem__defined */
 
 #ifndef subsystem_to_name_map_task_access
 #define subsystem_to_name_map_task_access \
     { "check_task_access", 27000 },\
-    { "find_code_signature", 27001 }
+    { "find_code_signature", 27001 },\
+    { "check_task_access_with_flavor", 27002 }
 #endif
 
 #ifdef __AfterMigUserHeader

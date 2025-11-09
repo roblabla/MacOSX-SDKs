@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C046562A-AE40-39F1-A1E3-47C967741226
+    value:           8D4563C2-C9C8-33BE-A9AD-50867D3D5C3C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5C2A5CCB-57C2-3495-88F7-550632F1633E
+    value:           22156625-85EA-3DCE-BACA-49D435880275
 install-name:    '/System/Library/PrivateFrameworks/PhotosUICore.framework/Versions/A/PhotosUICore'
-current-version: 321.0.102
+current-version: 340.0.220
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CALayerContentsGravityFromPXGContentsGravity, _CGImagePropertyOrientationFromPXImageOrientation, 
@@ -17,8 +17,8 @@ exports:
                        _NSStringFromPXEdgeInsets, _NSStringFromPXGSpriteIndexRange, 
                        _PFMediaVariationFromPXAssetVariation, _PGFeedbackCollectionServerParsingScriptPath, 
                        _PGFeedbackCollectionServerURL, _PHVariationSuggestionTypeFromAssetVariationType, 
-                       _PLSAggregateDictionaryKeyForShareOrigin, _PXActionPerformerTitleUseCaseDescription, 
-                       _PXActivityErrorDomain, _PXActivityFileSizeLimitBytes, _PXAffineTransformConvertFromCoordinateSpaceToCoordinateSpace, 
+                       _PXActionPerformerTitleUseCaseDescription, _PXActivityErrorDomain, 
+                       _PXActivityFileSizeLimitBytes, _PXAffineTransformConvertFromCoordinateSpaceToCoordinateSpace, 
                        _PXAffineTransformDecomposeTranslationScaleRotation, _PXAffineTransformMakeFromRects, 
                        _PXAffineTransformMakeHorizontalFlip, _PXAffineTransformMakeScaleFromPoint, 
                        _PXAffineTransformMakeWithTranslationScaleRotation, _PXAffineTransformMakeWithTranslationScaleRotationTransform, 
@@ -114,7 +114,8 @@ exports:
                        _PXCMMActionTypeSaveToLibrary, _PXCMMActionTypeSendBack, _PXCMMActionTypeShowPhotosPicker, 
                        _PXCMMContextMenuForGadget, _PXCMMCreateDebugCMMContext, _PXCMMErrorDomain, 
                        _PXCMMResetSuggestions, _PXCMMStringForExpiryDate, _PXCMMTitleAndSubtitleForAssetCollection, 
-                       _PXCMMTypeForURL, _PXCPLActionTypeManageAirplaneMode, _PXCPLActionTypeManageCellularDataDisabled, 
+                       _PXCMMTypeForURL, _PXCPLActionTypeLearnMoreClientVersionTooOld, 
+                       _PXCPLActionTypeManageAirplaneMode, _PXCPLActionTypeManageCellularDataDisabled, 
                        _PXCPLActionTypeManageCloudStorage, _PXCPLActionTypeManageExitMode, 
                        _PXCPLActionTypeManageLowPowerMode, _PXCPLActionTypePause, 
                        _PXCPLActionTypeResume, _PXCPLActionTypeViewItemsFailingToUpload, 
@@ -300,7 +301,9 @@ exports:
                        _PXLayoutMetricIPad12_9PortraitWidth, _PXLayoutMetricIPad9_7LandscapeWidth, 
                        _PXLayoutMetricIPad9_7PortraitWidth, _PXLayoutMetricIPhone10LandscapeWidth, 
                        _PXLayoutMetricIPhone10PortraitWidth, _PXLayoutMetricIPhone11_4LandscapeWidth, 
-                       _PXLayoutMetricIPhone11_4PortraitWidth, _PXLayoutMetricIPhone4LandscapeWidth, 
+                       _PXLayoutMetricIPhone11_4PortraitWidth, _PXLayoutMetricIPhone13_2Landscape_844, 
+                       _PXLayoutMetricIPhone13_2Portrait_390, _PXLayoutMetricIPhone13_4Landscape_926, 
+                       _PXLayoutMetricIPhone13_4Portrait_428, _PXLayoutMetricIPhone4LandscapeWidth, 
                        _PXLayoutMetricIPhone4PortraitWidth, _PXLayoutMetricIPhone5LandscapeWidth, 
                        _PXLayoutMetricIPhone5PortraitWidth, _PXLayoutMetricIPhone6LandscapeWidth, 
                        _PXLayoutMetricIPhone6PortraitWidth, _PXLayoutMetricIPhone6plusLandscapeWidth, 
@@ -667,6 +670,7 @@ exports:
                        PXCMMSuggestionsGadgetProvider, PXCMMViewModel, PXCNComposeRecipient, 
                        PXCNRecipientSearchDataSource, PXCNRecipientSearchDataSourceManager, 
                        PXCNRecipientSearchResult, PXCPLActionManager, PXCPLActionPerformer, 
+                       PXCPLLearnMoreClientVersionTooOldInformationActionPerformer, 
                        PXCPLManageAirplaneModeActionPerformer, PXCPLManageCellularDataDisabledActionPerformer, 
                        PXCPLManageCloudExitModeActionPerformer, PXCPLManageCloudStorageUpgradeActionPerformer, 
                        PXCPLManageLowPowerModeActionPerformer, PXCPLPauseActionPerformer, 

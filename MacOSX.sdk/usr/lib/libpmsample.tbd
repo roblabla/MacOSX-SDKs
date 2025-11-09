@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0A910AFA-D277-3AE7-B518-CBB58363FD83
+    value:           20FE500D-0643-34F6-B48A-6E02BC57C6D7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC9460E1-EE0A-3385-9C2D-C8FA72BE88B6
+    value:           1BFAF7F0-3A95-337C-95F6-D3249F956165
 install-name:    '/usr/lib/libpmsample.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _pm_sample_pid, _pm_sample_task, _pm_sample_task_and_pid, 
                        _pm_samples_copy, _pm_samples_delta, _pm_samples_destroy, 
                        _pm_samples_get, _pm_samples_init, _pm_samples_num_tasks, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E7F24E70-96EA-3190-A10E-E0E22F01B1E1
+    value:           C378956A-BED7-3E5E-94FA-67D92345D510
   - target:          x86_64-maccatalyst
-    value:           E7F24E70-96EA-3190-A10E-E0E22F01B1E1
+    value:           C378956A-BED7-3E5E-94FA-67D92345D510
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0F311058-BE25-34A8-B8A5-9842646438CA
+    value:           8D170C10-DFAF-3503-B0FD-8B3537052D52
   - target:          arm64e-maccatalyst
-    value:           0F311058-BE25-34A8-B8A5-9842646438CA
+    value:           8D170C10-DFAF-3503-B0FD-8B3537052D52
 install-name:    '/System/Library/PrivateFrameworks/KnowledgeMonitor.framework/Versions/A/KnowledgeMonitor'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

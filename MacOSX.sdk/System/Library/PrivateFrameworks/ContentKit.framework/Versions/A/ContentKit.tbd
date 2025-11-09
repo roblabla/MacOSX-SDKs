@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1AE8ADA1-0D72-371C-9180-1A37AF74ADF0
+    value:           3804CF51-DDA9-3DA1-8775-5C433ABAC1DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6F8AAF20-D064-3190-985E-55247064DF08
+    value:           B4A7E80C-936E-312E-B532-9FACBDB87FFC
 install-name:    '/System/Library/PrivateFrameworks/ContentKit.framework/Versions/A/ContentKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -104,9 +104,9 @@ exports:
                        _WFLogCategoryGallery, _WFLogCategoryGeneral, _WFLogCategoryHome, 
                        _WFLogCategoryHomescreen, _WFLogCategoryIntentExecution, _WFLogCategoryInterchange, 
                        _WFLogCategoryPeaceMigration, _WFLogCategoryRemoteExecution, 
-                       _WFLogCategorySleep, _WFLogCategorySpotlightSync, _WFLogCategoryTriggers, 
-                       _WFLogCategoryWFContact, _WFLogCategoryWatchSync, _WFLogCategoryWidget, 
-                       _WFLogCategoryWorkflowExecution, _WFLogCategoryWorkflowMigration, 
+                       _WFLogCategorySleep, _WFLogCategorySpotlightSync, _WFLogCategoryTips, 
+                       _WFLogCategoryTriggers, _WFLogCategoryWFContact, _WFLogCategoryWatchSync, 
+                       _WFLogCategoryWidget, _WFLogCategoryWorkflowExecution, _WFLogCategoryWorkflowMigration, 
                        _WFLogCategoryXPCRunner, _WFLogSubsystem, _WFMakeContentAttributionForRemindersAccount, 
                        _WFMakeContentAttributionSetForRemindersAccount, _WFMeasurementUnitTypeAcceleration, 
                        _WFMeasurementUnitTypeAngle, _WFMeasurementUnitTypeArea, _WFMeasurementUnitTypeConcentrationMass, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A2D875B9-8BA8-33AD-BE92-ADAB915A8D5B
+    value:           A1451528-AD1D-3E86-93A9-1340535FAF46
   - target:          x86_64-maccatalyst
-    value:           A2D875B9-8BA8-33AD-BE92-ADAB915A8D5B
+    value:           A1451528-AD1D-3E86-93A9-1340535FAF46
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1F4E0C2D-9A82-3E3F-B546-1F23A3B180B5
+    value:           D5850DD3-72A6-3BF7-8A37-4CEA4DF61CC9
   - target:          arm64e-maccatalyst
-    value:           1F4E0C2D-9A82-3E3F-B546-1F23A3B180B5
+    value:           D5850DD3-72A6-3BF7-8A37-4CEA4DF61CC9
 install-name:    '/usr/lib/system/libsystem_coreservices.dylib'
 current-version: 127
 parent-umbrella:
@@ -22,7 +22,7 @@ parent-umbrella:
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NSGetNextSearchPathEnumeration, _NSStartSearchPathEnumeration, 
                        _NSStartSearchPathEnumerationPrivate, ___user_local_dirname, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C65B2F54-67EA-3E4D-B84A-BBA94998BD6B
+    value:           05871A6B-81B4-3D86-B9C6-BA444171C4C6
   - target:          x86_64-maccatalyst
-    value:           C65B2F54-67EA-3E4D-B84A-BBA94998BD6B
+    value:           05871A6B-81B4-3D86-B9C6-BA444171C4C6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           06B8BA21-FA96-377F-89ED-56B6FBB54193
+    value:           8D3B548E-48CD-3003-9B30-615C919A2B1C
   - target:          arm64e-maccatalyst
-    value:           06B8BA21-FA96-377F-89ED-56B6FBB54193
+    value:           8D3B548E-48CD-3003-9B30-615C919A2B1C
 install-name:    '/System/Library/PrivateFrameworks/NetAuth.framework/Versions/A/NetAuth'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

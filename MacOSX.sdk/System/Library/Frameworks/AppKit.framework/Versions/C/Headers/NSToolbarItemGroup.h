@@ -5,6 +5,7 @@
 	All rights reserved.
 */
 
+#import <TargetConditionals.h>
 #import <AppKit/NSToolbarItem.h>
 #import <Foundation/Foundation.h>
 

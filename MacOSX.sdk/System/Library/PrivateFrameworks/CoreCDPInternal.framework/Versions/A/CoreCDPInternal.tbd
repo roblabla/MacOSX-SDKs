@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6581AC5D-5487-3A9C-9436-6A9B7FAF78BF
+    value:           44F630B4-833A-3784-8C9C-AD4690685222
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B2A5D007-20B2-3DD5-A733-6DEC8AA84CF0
+    value:           D54C7CCF-B42C-3DA9-BA33-FF821D8B48CC
 install-name:    '/System/Library/PrivateFrameworks/CoreCDPInternal.framework/Versions/A/CoreCDPInternal'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -24,10 +24,12 @@ exports:
                        _kCDPCADidRemoveLocalSecret, _kCDPCADuration, _kCDPCAErrorCode, 
                        _kCDPCAErrorDomain, _kCDPCAEscrowPreRecordResult, _kCDPCAEventBackupRecovery, 
                        _kCDPCAEventEscrowPreRecord, _kCDPCAEventLocalSecret, _kCDPCALocalSecretResult, 
-                       _kCDPCAPreRecordIdentifier, _kCDPCAWasSuccess, _kOfflineLocalSecretChangeActionContinue, 
+                       _kCDPCAPreRecordIdentifier, _kCDPCAWasSuccess, _kConfirmExistingSecretActionContinue, 
+                       _kConfirmExistingSecretIdentifier, _kOfflineLocalSecretChangeActionContinue, 
                        _kOfflineLocalSecretChangeItemIdentifier, _kRegenerateRecoveryKeyIdentifier, 
                        _kRepairCDPStateActionContinue, _kRepairCDPStateActionRecoveryKey, 
-                       _kRepairCDPStateItemIdentifier, _kSetupBiometricsFaceIDIdentifier, 
+                       _kRepairCDPStateItemIdentifier, _kSecureTermsActionContinue, 
+                       _kSecureTermsIdentifier, _kSetupBiometricsFaceIDIdentifier, 
                        _kSetupBiometricsFlowSkipIdentifier, _kSetupBiometricsIdentifier, 
                        _kSetupBiometricsTouchIDIdentifier, _kSetupBiometricsURL ]
     objc-classes:    [ CDPAuthenticationHelper, CDPCABackupRecoveryReporter, CDPCAEscrowReporter, 
@@ -46,9 +48,10 @@ exports:
                        CDPDRemoteDeviceSecretValidator, CDPDRemoteSecretValidationResult, 
                        CDPDSecureBackupConfiguration, CDPDSecureBackupContext, CDPDSecureBackupController, 
                        CDPDSecureBackupProxyImpl, CDPDSecureChannelContext, CDPDSecureChannelController, 
-                       CDPDStateMachine, CDPDXPCEventObserver, CDPDXPCListener, CDPPiggybackingChannel, 
-                       CDPPiggybackingPayloadProvider, CDPStateHandlerResult, CDPTTSUChannel, 
-                       CDPTTSUPayloadProvider ]
+                       CDPDStateMachine, CDPDTermsInfoBackupController, CDPDXPCEventObserver, 
+                       CDPDXPCListener, CDPDataPrivacyAppleAccountProxy, CDPInternalDataPrivacyController, 
+                       CDPPiggybackingChannel, CDPPiggybackingPayloadProvider, CDPStateHandlerResult, 
+                       CDPTTSUChannel, CDPTTSUPayloadProvider ]
     objc-ivars:      [ CDPDBackupErrorProviderImpl._context, CDPDBackupErrorProviderImpl._prevailingSecret, 
                        CDPDBackupErrorProviderImpl._uiProvider ]
 ...

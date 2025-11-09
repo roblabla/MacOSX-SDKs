@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           677759D0-47A9-3B83-96EB-9D75E360D031
+    value:           CC2E3AE4-5A63-3ECD-8836-DAB8CE1F04EB
   - target:          x86_64-maccatalyst
-    value:           677759D0-47A9-3B83-96EB-9D75E360D031
+    value:           CC2E3AE4-5A63-3ECD-8836-DAB8CE1F04EB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           36D38546-091B-3CF3-9183-7927544AC661
+    value:           84FB104B-B834-35F2-A24C-A0C2C43466B9
   - target:          arm64e-maccatalyst
-    value:           36D38546-091B-3CF3-9183-7927544AC661
+    value:           84FB104B-B834-35F2-A24C-A0C2C43466B9
 install-name:    '/System/Library/PrivateFrameworks/MapsSuggestions.framework/Versions/A/MapsSuggestions'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -537,7 +537,7 @@ exports:
                        MapsSuggestionsObservers, MapsSuggestionsOutsideOfMapItemFenceRunCondition, 
                        MapsSuggestionsParkedCarDeduper, MapsSuggestionsParkedCarImprover, 
                        MapsSuggestionsParkedCarTitleFormatter, MapsSuggestionsPinnedPlaceImprover, 
-                       MapsSuggestionsPortrait, MapsSuggestionsPortraitImprover, 
+                       MapsSuggestionsPortrait, MapsSuggestionsPortraitData, MapsSuggestionsPortraitImprover, 
                        MapsSuggestionsPortraitRelevanceScoreProvider, MapsSuggestionsPredictor, 
                        MapsSuggestionsPreferredTransportTypeTrigger, MapsSuggestionsQueue, 
                        MapsSuggestionsRatingRequestImprover, MapsSuggestionsRatingRequestSource, 
@@ -546,23 +546,24 @@ exports:
                        MapsSuggestionsRealNetworkRequester, MapsSuggestionsRealPortraitConnector, 
                        MapsSuggestionsRealRoutineConnector, MapsSuggestionsRealVirtualGarageConnector, 
                        MapsSuggestionsRecentHistoryDeduper, MapsSuggestionsRecentHistoryImprover, 
-                       MapsSuggestionsRelevanceScorer, MapsSuggestionsRemoteSource, 
-                       MapsSuggestionsReservationDeduper, MapsSuggestionsReservationImprover, 
-                       MapsSuggestionsResumeRouteAndRestaurantDeduper, MapsSuggestionsResumeRouteDeduper, 
-                       MapsSuggestionsResumeRouteImprover, MapsSuggestionsResumeRouteTitleFormatter, 
-                       MapsSuggestionsRideBookingAppConnectionDeduper, MapsSuggestionsRoutine, 
-                       MapsSuggestionsRoutineRelevanceScoreProvider, MapsSuggestionsRoutineShortcutSuggestor, 
-                       MapsSuggestionsRoutineSource, MapsSuggestionsSameRidesharingRideDeduper, 
-                       MapsSuggestionsSelfBuildingResourceDepot, MapsSuggestionsServerSideFilter, 
-                       MapsSuggestionsSharedEventStore, MapsSuggestionsShortcut, 
-                       MapsSuggestionsShortcutAtMapItemDeduper, MapsSuggestionsShortcutDeduper, 
-                       MapsSuggestionsShortcutFilter, MapsSuggestionsShortcutManager, 
-                       MapsSuggestionsShortcutSource, MapsSuggestionsShortcutTitleFormatter, 
-                       MapsSuggestionsSignalPack, MapsSuggestionsSignalPackCache, 
-                       MapsSuggestionsSignalPackEvaluator, MapsSuggestionsSimpleStrategy, 
-                       MapsSuggestionsSinkRankImprover, MapsSuggestionsSiriEnabledRunCondition, 
-                       MapsSuggestionsSuppressor, MapsSuggestionsTicketedEventImprover, 
-                       MapsSuggestionsTimer, MapsSuggestionsTooEarlyFilter, MapsSuggestionsTooFewVisitsFilter, 
+                       MapsSuggestionsRelevanceScore, MapsSuggestionsRelevanceScorer, 
+                       MapsSuggestionsRemoteSource, MapsSuggestionsReservationDeduper, 
+                       MapsSuggestionsReservationImprover, MapsSuggestionsResumeRouteAndRestaurantDeduper, 
+                       MapsSuggestionsResumeRouteDeduper, MapsSuggestionsResumeRouteImprover, 
+                       MapsSuggestionsResumeRouteTitleFormatter, MapsSuggestionsRideBookingAppConnectionDeduper, 
+                       MapsSuggestionsRoutine, MapsSuggestionsRoutineRelevanceScoreProvider, 
+                       MapsSuggestionsRoutineShortcutSuggestor, MapsSuggestionsRoutineSource, 
+                       MapsSuggestionsSameRidesharingRideDeduper, MapsSuggestionsSelfBuildingResourceDepot, 
+                       MapsSuggestionsServerSideFilter, MapsSuggestionsSharedEventStore, 
+                       MapsSuggestionsShortcut, MapsSuggestionsShortcutAtMapItemDeduper, 
+                       MapsSuggestionsShortcutDeduper, MapsSuggestionsShortcutFilter, 
+                       MapsSuggestionsShortcutManager, MapsSuggestionsShortcutSource, 
+                       MapsSuggestionsShortcutTitleFormatter, MapsSuggestionsSignalPack, 
+                       MapsSuggestionsSignalPackCache, MapsSuggestionsSignalPackEvaluator, 
+                       MapsSuggestionsSimpleStrategy, MapsSuggestionsSinkRankImprover, 
+                       MapsSuggestionsSiriEnabledRunCondition, MapsSuggestionsSuppressor, 
+                       MapsSuggestionsTicketedEventImprover, MapsSuggestionsTimer, 
+                       MapsSuggestionsTooEarlyFilter, MapsSuggestionsTooFewVisitsFilter, 
                        MapsSuggestionsTracker, MapsSuggestionsTrafficAndETAResult, 
                        MapsSuggestionsTravelFlightImprover, MapsSuggestionsTriggeringToggle, 
                        MapsSuggestionsUniqueIdentifierDeduper, MapsSuggestionsUnknownFilter, 

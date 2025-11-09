@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F4C3D15D-BEFE-37A9-A55F-2BFB16842FBE
+    value:           308F9664-E1D3-37A3-A9F9-CD280F9669C5
   - target:          x86_64-maccatalyst
-    value:           F4C3D15D-BEFE-37A9-A55F-2BFB16842FBE
+    value:           308F9664-E1D3-37A3-A9F9-CD280F9669C5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD2E32BC-9EAA-302C-8E63-5B5E6921D4F5
+    value:           2549E8A8-6318-38B9-BC2C-EF6438A4941C
   - target:          arm64e-maccatalyst
-    value:           FD2E32BC-9EAA-302C-8E63-5B5E6921D4F5
+    value:           2549E8A8-6318-38B9-BC2C-EF6438A4941C
 install-name:    '/System/Library/Frameworks/CoreLocation.framework/Versions/A/CoreLocation'
-current-version: 2420.12.12
+current-version: 2420.16.22
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CLAppResetChangedNotification, _CLAppStatusChangedNotification, 
                        _CLApplyArchivedAuthorizationDecisions, _CLAuthorizationStatusChangedNotification, 
@@ -45,8 +45,9 @@ exports:
                        _CLClientUpdateARSessionState, _CLClientUpdateVIOEstimation, 
                        _CLClientUpdateVLLocalizationResult, _CLCopyAppsUsingLocation, 
                        _CLCopyGnssBandsInUse, _CLCopyNearbyAssetSettings, _CLCopyNearbyAssetSettingsOfAccessoryFile, 
-                       _CLCopyTechnologiesInUse, _CLDaemonStartedNotification, _CLDeleteCurrentEmergencyLocationAsset, 
-                       _CLGenerateRoadSegmentId, _CLGetAccessoryTypeBitSet, _CLGetArchivedAuthorizationDecisions, 
+                       _CLCopyTechnologiesInUse, _CLCopyZaxisStats, _CLDaemonStartedNotification, 
+                       _CLDeleteCurrentEmergencyLocationAsset, _CLGenerateRoadSegmentId, 
+                       _CLGetAccessoryTypeBitSet, _CLGetArchivedAuthorizationDecisions, 
                        _CLGetClientTransientAuthorizationInfo, _CLGetControlPlaneStatusReport, 
                        _CLGetEmergencyLocationSettingsVersionInfo, _CLGetLocationDefault, 
                        _CLGetStatusBarIconState, _CLGnssBandsChangedNotification, 
@@ -85,6 +86,6 @@ exports:
                        _CLLocationFusionInfo, _CLLocationGroundAltitude, _CLPlaceInference, 
                        _CLPolygonalRegion, _CLRangingPeer, _CLRangingPeerDistance, 
                        _CLVIOEstimation, _CLVLLocalizationResult, _CLVertex ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CLAuthStatusChangedNotification, _CLDaemonShutdownNotification ]
 ...

@@ -144,7 +144,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIFocusUpdateContext : NSObject
 /// NOTE: This property will be deprecated in a future release. Use nextFocusedItem instead.
 @property (nonatomic, weak, readonly, nullable) UIView *nextFocusedView;
 
-/// The focus heading in which the update is occuring.
+/// The focus heading in which the update is occurring.
 @property (nonatomic, assign, readonly) UIFocusHeading focusHeading;
 
 @end

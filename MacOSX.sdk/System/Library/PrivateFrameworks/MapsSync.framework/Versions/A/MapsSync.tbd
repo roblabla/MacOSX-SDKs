@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2F1F491A-691F-37E0-A2DE-19880E85DAFD
+    value:           716FBA5F-4145-3541-8266-3F26536BF0EE
   - target:          x86_64-maccatalyst
-    value:           2F1F491A-691F-37E0-A2DE-19880E85DAFD
+    value:           716FBA5F-4145-3541-8266-3F26536BF0EE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CD4D2FBF-6786-30E2-BC55-09FEED2392DA
+    value:           A0B76A55-630E-355E-AADF-7E323F842CEB
   - target:          arm64e-maccatalyst
-    value:           CD4D2FBF-6786-30E2-BC55-09FEED2392DA
+    value:           A0B76A55-630E-355E-AADF-7E323F842CEB
 install-name:    '/System/Library/PrivateFrameworks/MapsSync.framework/Versions/A/MapsSync'
 swift-abi-version: 7
 exports:
@@ -1239,6 +1239,7 @@ exports:
                        '_$s8MapsSync0aB36DataSessionStoreLoadMaxRetryIntervalSdvg', 
                        '_$s8MapsSync0aB36DataSessionStoreLoadMinRetryIntervalSdvg', 
                        '_$s8MapsSync0aB5BatchC6commit5items10completionySayAA0aB8BaseItemCG_ySo7NSErrorCSgctFZ', 
+                       '_$s8MapsSync0aB5BatchC6delete5items10completionySayAA0aB8BaseItemCG_ySo7NSErrorCSgctFZ', 
                        '_$s8MapsSync0aB5BatchCACycfC', '_$s8MapsSync0aB5BatchCACycfc', 
                        '_$s8MapsSync0aB5BatchCMa', '_$s8MapsSync0aB5BatchCMn', '_$s8MapsSync0aB5BatchCMo', 
                        '_$s8MapsSync0aB5BatchCN', '_$s8MapsSync0aB5BatchCfD', '_$s8MapsSync0aB5ErrorC6domain4code8userInfoACSS_SiSDySSypGSgtcfC', 
@@ -1366,7 +1367,8 @@ exports:
                        '_$sSo9OS_os_logC8MapsSyncE5erroryySSFZ', '_$sSo9OS_os_logC8MapsSyncEAcBvgZ', 
                        _MapsSyncGeoMapItemStorageDescription, _MapsSyncGetExceptionRaisedInBlock, 
                        _MapsSyncListenForNotification, _MapsSyncPostNotification, 
-                       _MapsSyncVersionNumber, _MapsSyncVersionString, _throwObjCException ]
+                       _MapsSyncSimulatedCrash, _MapsSyncVersionNumber, _MapsSyncVersionString, 
+                       _throwObjCException ]
     objc-classes:    [ _TtC8MapsSync13MapsSyncBatch, _TtC8MapsSync13MapsSyncError, 
                        _TtC8MapsSync15MapsSyncVehicle, _TtC8MapsSync16MapsSyncBaseItem, 
                        _TtC8MapsSync17MapsSyncBaseQuery, _TtC8MapsSync17MapsSyncDataQuery, 

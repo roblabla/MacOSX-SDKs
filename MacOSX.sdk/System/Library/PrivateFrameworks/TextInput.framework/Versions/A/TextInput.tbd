@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8CC76A5F-A092-36EC-9D3A-CB8C36EC32F0
+    value:           568ABC9A-1150-344D-A82A-34D127FBEC80
   - target:          x86_64-maccatalyst
-    value:           8CC76A5F-A092-36EC-9D3A-CB8C36EC32F0
+    value:           568ABC9A-1150-344D-A82A-34D127FBEC80
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DB8DA877-48E2-3E90-B146-BEF683AE6D16
+    value:           D60C844E-26B1-380F-A37C-1BF5CF559538
   - target:          arm64e-maccatalyst
-    value:           DB8DA877-48E2-3E90-B146-BEF683AE6D16
+    value:           D60C844E-26B1-380F-A37C-1BF5CF559538
 install-name:    '/System/Library/PrivateFrameworks/TextInput.framework/Versions/A/TextInput'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -34,12 +34,13 @@ exports:
                        _TICharIsJapaneseScript, _TICharIsLeftAssociative, _TICharIsNewlineOrReturn, 
                        _TICharIsNumber, _TICharIsNumberDelimiter, _TICharIsNumberModifier, 
                        _TICharIsPunctuation, _TICharIsSpace, _TICharIsSpaceOrReturn, 
-                       _TIDeltaUnigramsFilePathForInputModeAndFileExtension, _TIDictationLangaugesEnabledPreference, 
-                       _TIDictationLangaugesLastUsedPreference, _TIDictationLanguagesEnabledPreference, 
-                       _TIDictationLanguagesLastUsedPreference, _TIDidShowContinuousPathIntroductionPreference, 
-                       _TIDidShowGestureKeyboardIntroductionPreference, _TIEmailRecentInputIdentifier, 
-                       _TIEnabledInputModesAllowOneToManyShortcuts, _TIFuzzyPinyinPairsPreference, 
-                       _TIFuzzyPinyinPreference, _TIGetAddKeyboardUsesPickerForInputMode, 
+                       _TIConversionOnSearchFieldPreference, _TIDeltaUnigramsFilePathForInputModeAndFileExtension, 
+                       _TIDictationLangaugesEnabledPreference, _TIDictationLangaugesLastUsedPreference, 
+                       _TIDictationLanguagesEnabledPreference, _TIDictationLanguagesLastUsedPreference, 
+                       _TIDidShowContinuousPathIntroductionPreference, _TIDidShowGestureKeyboardIntroductionPreference, 
+                       _TIDispatchAsync, _TIDispatchCount, _TIDispatchSync, _TIDispatchWaitForAllBlocks, 
+                       _TIEmailRecentInputIdentifier, _TIEnabledInputModesAllowOneToManyShortcuts, 
+                       _TIFuzzyPinyinPairsPreference, _TIFuzzyPinyinPreference, _TIGetAddKeyboardUsesPickerForInputMode, 
                        _TIGetAllInputModeProperties, _TIGetDefaultDictationLanguagesForKeyboardLanguage, 
                        _TIGetDefaultHWLayoutForKeyboardAndInputMode, _TIGetDefaultInputModesForLanguage, 
                        _TIGetHardwareKeyboardSupport, _TIGetHardwareLayoutGroups, 
@@ -261,7 +262,8 @@ exports:
                        _UIKeyboardSuggestedDefaultLanguageInputModesBundleKey, _UIKeyboardSuggestedDefaultLanguageInputModesForFudgeBundleKey, 
                        _UIKeyboardSuggestedDefaultLanguageInputModesForPadBundleKey, 
                        _UIKeyboardSuggestedLanguageInputModesBundleKey, _UIKeyboardSupportedInputModesBundleKey, 
-                       _UISuggestedDictationLanguagesBundleKey, __activeInputStringCountKey, 
+                       _UISuggestedDictationLanguagesBundleKey, __TIQueueBackground, 
+                       __TIQueueLow, __TIQueueUserInitiated, __activeInputStringCountKey, 
                        __assistantInternalQueue, _acute_accent_form, _adhocEventConfig, 
                        _autoCorrrectionTypeAsString, _candidateSourceAsString, _caron_form, 
                        _character_is_composable_accent, _character_is_tamil_script, 

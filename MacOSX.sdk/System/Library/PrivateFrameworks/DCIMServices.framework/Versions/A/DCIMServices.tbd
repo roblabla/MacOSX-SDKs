@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D0949F00-A3A9-3CD1-AF86-F1586B74AC29
+    value:           724CE30C-FF78-34D6-996F-0CA0CECEFA4D
   - target:          x86_64-maccatalyst
-    value:           D0949F00-A3A9-3CD1-AF86-F1586B74AC29
+    value:           724CE30C-FF78-34D6-996F-0CA0CECEFA4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0ADFB0E1-AC47-3598-90DD-EA10BC3A60DB
+    value:           7A76A3A3-91E7-3B4C-B568-DDD455E81B9F
   - target:          arm64e-maccatalyst
-    value:           0ADFB0E1-AC47-3598-90DD-EA10BC3A60DB
+    value:           7A76A3A3-91E7-3B4C-B568-DDD455E81B9F
 install-name:    '/System/Library/PrivateFrameworks/DCIMServices.framework/Versions/A/DCIMServices'
-current-version: 321.0.102
+current-version: 340.0.220
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -80,17 +80,17 @@ exports:
                        _kPLCameraPhotoUnfilteredPreviewSurfaceKey, _kPLCameraPhotoUnfilteredPreviewSurfaceSizeKey, 
                        _kPLDCIMWriterError, _kPLEXIFDateStringDefaultFormat, _kPLEXIFDateStringSubsecDefaultFormat, 
                        _kPLImageWriterAddAssetToCameraRoll, _kPLImageWriterAssetSubtype, 
-                       _kPLImageWriterAssetType, _kPLImageWriterAssetURL, _kPLImageWriterAssetWriterID, 
-                       _kPLImageWriterAvalancheAllAssetUUIDs, _kPLImageWriterAvalancheBestAssetUUIDs, 
-                       _kPLImageWriterAvalancheStackAssetUUID, _kPLImageWriterAvalancheUUIDs, 
-                       _kPLImageWriterCameraAdjustmentData, _kPLImageWriterCameraAvalanchePickType, 
-                       _kPLImageWriterCameraAvalancheUUID, _kPLImageWriterCameraAvalancheVisibility, 
-                       _kPLImageWriterCameraVideoDurationKey, _kPLImageWriterCameraWasRearFacingKey, 
-                       _kPLImageWriterCaptureFolderInfoPath, _kPLImageWriterCaptureTimeMetadataFilePath, 
-                       _kPLImageWriterCopiedFromAssetUUID, _kPLImageWriterCreateAssetPathFromType, 
-                       _kPLImageWriterCreatePreviewWellThumbnail, _kPLImageWriterCreatedAssetUUID, 
-                       _kPLImageWriterCreationDateKey, _kPLImageWriterCustomRenderedValue, 
-                       _kPLImageWriterDate, _kPLImageWriterDeferredPhotoIdentifier, 
+                       _kPLImageWriterAssetType, _kPLImageWriterAssetURL, _kPLImageWriterAssetWriterDisplayName, 
+                       _kPLImageWriterAssetWriterID, _kPLImageWriterAvalancheAllAssetUUIDs, 
+                       _kPLImageWriterAvalancheBestAssetUUIDs, _kPLImageWriterAvalancheStackAssetUUID, 
+                       _kPLImageWriterAvalancheUUIDs, _kPLImageWriterCameraAdjustmentData, 
+                       _kPLImageWriterCameraAvalanchePickType, _kPLImageWriterCameraAvalancheUUID, 
+                       _kPLImageWriterCameraAvalancheVisibility, _kPLImageWriterCameraVideoDurationKey, 
+                       _kPLImageWriterCameraWasRearFacingKey, _kPLImageWriterCaptureFolderInfoPath, 
+                       _kPLImageWriterCaptureTimeMetadataFilePath, _kPLImageWriterCopiedFromAssetUUID, 
+                       _kPLImageWriterCreateAssetPathFromType, _kPLImageWriterCreatePreviewWellThumbnail, 
+                       _kPLImageWriterCreatedAssetUUID, _kPLImageWriterCreationDateKey, 
+                       _kPLImageWriterCustomRenderedValue, _kPLImageWriterDate, _kPLImageWriterDeferredPhotoIdentifier, 
                        _kPLImageWriterDeferredPhotoSpatialOverCaptureIdentifier, 
                        _kPLImageWriterDestinationAlbumUUID, _kPLImageWriterDestinationAssetUUID, 
                        _kPLImageWriterDeviceOrientationKey, _kPLImageWriterDiagnostic, 

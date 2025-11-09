@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0D454358-D856-3E82-8A8B-4EDE4C16C4E7
+    value:           0C4D8136-71D3-3866-B721-B5303AC5E346
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           440507AF-E185-3B47-826F-A6D52FCDF09B
+    value:           1B5C9545-1CC0-3EA9-B768-943DB1D6E257
 install-name:    '/usr/lib/PN548_HAL.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -36,17 +36,18 @@ exports:
                        _NFHardwareInterfaceSetBaudRate, _NFHardwareInterfaceSetCRCEnabled, 
                        _NFHardwareInterfaceSetDeviceWake, _NFHardwareInterfaceSetDownloadRequest, 
                        _NFHardwareInterfaceSetIcefallDownloadRequest, _NFHardwareInterfaceSetLogFunction, 
-                       _NFHardwareInterfaceSetPMUStandbyEnabled, _NFHardwareInterfaceSetPMUStandbyPowerEnabled, 
-                       _NFHardwareInterfaceSetPower, _NFHardwareInterfaceSetVBAT, 
-                       _NFHardwareInterfaceWasItNACK, _NFHardwareInterfaceWrite, 
-                       _NFHardwareLoad, _NFHardwareSerialClose, _NFHardwareSerialDebugDump, 
-                       _NFHardwareSerialDebugDump_wCB, _NFHardwareSerialDebugLastMessage, 
-                       _NFHardwareSerialDebugLog, _NFHardwareSerialDebugMaxEntriesPrinted, 
-                       _NFHardwareSerialDump, _NFHardwareSerialFlush, _NFHardwareSerialGetCTS, 
-                       _NFHardwareSerialGetDefaultInterfaceType, _NFHardwareSerialIsSupported, 
-                       _NFHardwareSerialOpen, _NFHardwareSerialPower, _NFHardwareSerialRead, 
-                       _NFHardwareSerialReadAbort, _NFHardwareSerialReset, _NFHardwareSerialSetBaudRate, 
-                       _NFHardwareSerialSetCRCEnabled, _NFHardwareSerialSetLogFunction, 
+                       _NFHardwareInterfaceSetOnDemandClientMode, _NFHardwareInterfaceSetPMUStandbyEnabled, 
+                       _NFHardwareInterfaceSetPMUStandbyPowerEnabled, _NFHardwareInterfaceSetPower, 
+                       _NFHardwareInterfaceSetVBAT, _NFHardwareInterfaceWasItNACK, 
+                       _NFHardwareInterfaceWrite, _NFHardwareLoad, _NFHardwareSerialClose, 
+                       _NFHardwareSerialDebugDump, _NFHardwareSerialDebugDump_wCB, 
+                       _NFHardwareSerialDebugLastMessage, _NFHardwareSerialDebugLog, 
+                       _NFHardwareSerialDebugMaxEntriesPrinted, _NFHardwareSerialDump, 
+                       _NFHardwareSerialFlush, _NFHardwareSerialGetCTS, _NFHardwareSerialGetDefaultInterfaceType, 
+                       _NFHardwareSerialIsSupported, _NFHardwareSerialOpen, _NFHardwareSerialPower, 
+                       _NFHardwareSerialRead, _NFHardwareSerialReadAbort, _NFHardwareSerialReset, 
+                       _NFHardwareSerialSetBaudRate, _NFHardwareSerialSetCRCEnabled, 
+                       _NFHardwareSerialSetLogFunction, _NFHardwareSerialSetOnDemandClientMode, 
                        _NFHardwareSerialSetPrimary, _NFHardwareSerialWrite, _NFHardwareSetLogFunc, 
                        _NFHardwareUnload, _NFSharedDumpTransport, _NFSharedLogLock, 
                        _NFSharedLogOpen2, _NFSharedLogSetSynchronousLogging, _NFSharedLogTransport, 

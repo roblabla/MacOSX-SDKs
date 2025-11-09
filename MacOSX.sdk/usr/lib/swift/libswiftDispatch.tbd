@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B6AAD8BA-45E1-347F-B2B1-419F3D5BEACF
+    value:           69B479F4-CBBE-316E-9899-DFEBE6E78337
   - target:          x86_64-maccatalyst
-    value:           B6AAD8BA-45E1-347F-B2B1-419F3D5BEACF
+    value:           69B479F4-CBBE-316E-9899-DFEBE6E78337
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A17A7C07-44D4-35B3-B124-A3F817193E89
+    value:           C0140490-42FA-39A3-BD2B-D8EFF9F9E109
   - target:          arm64e-maccatalyst
-    value:           A17A7C07-44D4-35B3-B124-A3F817193E89
+    value:           C0140490-42FA-39A3-BD2B-D8EFF9F9E109
 install-name:    '/usr/lib/swift/libswiftDispatch.dylib'
-current-version: 4.40.2
+current-version: 4.100.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftDispatch.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftDispatch.dylib', 
@@ -129,6 +129,10 @@ exports:
                        '_$s8Dispatch0A8WorkItemC4wait7timeoutAA0A13TimeoutResultOAA0A4TimeV_tFTj', 
                        '_$s8Dispatch0A8WorkItemC4wait7timeoutAA0A13TimeoutResultOAA0A4TimeV_tFTq', 
                        '_$s8Dispatch0A8WorkItemC4waityyFTj', '_$s8Dispatch0A8WorkItemC4waityyFTq', 
+                       '_$s8Dispatch0A8WorkItemC5flags5blockAcA0abC5FlagsV_yyXBtcfC', 
+                       '_$s8Dispatch0A8WorkItemC5flags5blockAcA0abC5FlagsV_yyXBtcfCTj', 
+                       '_$s8Dispatch0A8WorkItemC5flags5blockAcA0abC5FlagsV_yyXBtcfCTq', 
+                       '_$s8Dispatch0A8WorkItemC5flags5blockAcA0abC5FlagsV_yyXBtcfc', 
                        '_$s8Dispatch0A8WorkItemC6cancelyyFTj', '_$s8Dispatch0A8WorkItemC6cancelyyFTq', 
                        '_$s8Dispatch0A8WorkItemC6notify3qos5flags5queue7executeyAA0A3QoSV_AA0abC5FlagsVSo012OS_dispatch_G0CyyXBtFTj', 
                        '_$s8Dispatch0A8WorkItemC6notify3qos5flags5queue7executeyAA0A3QoSV_AA0abC5FlagsVSo012OS_dispatch_G0CyyXBtFTq', 

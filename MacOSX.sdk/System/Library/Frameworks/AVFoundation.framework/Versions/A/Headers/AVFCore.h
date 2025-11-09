@@ -61,6 +61,7 @@
 #import <AVFoundation/AVPlayerLayer.h>
 #import <AVFoundation/AVPlayerLooper.h>
 #import <AVFoundation/AVPlayerMediaSelectionCriteria.h>
+#import <AVFoundation/AVPlayerInterstitialEventController.h>
 #import <AVFoundation/AVQueuedSampleBufferRendering.h>
 #import <AVFoundation/AVRouteDetector.h>
 #import <AVFoundation/AVSampleBufferAudioRenderer.h>

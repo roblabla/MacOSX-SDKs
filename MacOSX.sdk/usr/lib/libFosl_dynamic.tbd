@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           98F6E5F9-58F1-318D-B064-E265673D6152
+    value:           334E02ED-9703-3728-8320-534A54517D5D
   - target:          x86_64-maccatalyst
-    value:           98F6E5F9-58F1-318D-B064-E265673D6152
+    value:           334E02ED-9703-3728-8320-534A54517D5D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1F31AFCD-8FF6-38C5-B305-894D93E43E0B
+    value:           B5FFFB85-4F58-35D0-9CB0-D47059BA431D
   - target:          arm64e-maccatalyst
-    value:           1F31AFCD-8FF6-38C5-B305-894D93E43E0B
+    value:           B5FFFB85-4F58-35D0-9CB0-D47059BA431D
 install-name:    '/usr/lib/libFosl_dynamic.dylib'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _fosl_filter_addChild, _fosl_filter_addLibraryFunction, _fosl_filter_assignRoot, 
                        _fosl_filter_createConstant, _fosl_filter_createCoordinateTransform, 

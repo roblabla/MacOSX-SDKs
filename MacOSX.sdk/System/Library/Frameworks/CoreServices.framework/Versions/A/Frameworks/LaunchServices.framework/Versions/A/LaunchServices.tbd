@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CAEEC254-68AE-39B5-8452-EC3E1EE8577B
+    value:           CBFF2714-646C-3DDB-906D-672E420683E6
   - target:          x86_64-maccatalyst
-    value:           CAEEC254-68AE-39B5-8452-EC3E1EE8577B
+    value:           CBFF2714-646C-3DDB-906D-672E420683E6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D9D92910-FF1A-3868-ABB6-C0E1A256A95B
+    value:           126E5536-55D7-31B0-919A-275EF3EA81A1
   - target:          arm64e-maccatalyst
-    value:           D9D92910-FF1A-3868-ABB6-C0E1A256A95B
+    value:           126E5536-55D7-31B0-919A-275EF3EA81A1
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices'
-current-version: 1122.11
+current-version: 1122.33
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -318,12 +318,12 @@ exports:
                        __kLSOpenOptionActivateKey, __kLSOpenOptionAddToRecentsKey, 
                        __kLSOpenOptionAllowConflictResolutionUIKey, __kLSOpenOptionAllowErrorUIKey, 
                        __kLSOpenOptionAllowLoginUIKey, __kLSOpenOptionAlwaysOpenPasteboardContentsKey, 
-                       __kLSOpenOptionArchitectureKey, __kLSOpenOptionArgumentsKey, 
-                       __kLSOpenOptionBackgroundLaunchInformationKey, __kLSOpenOptionBackgroundLaunchKey, 
-                       __kLSOpenOptionBackgroundLaunchReasonKey, __kLSOpenOptionCaptureDiagnosticsKey, 
-                       __kLSOpenOptionEnableURLOverridesKey, __kLSOpenOptionEnvironmentVariablesKey, 
-                       __kLSOpenOptionForegroundLaunchKey, __kLSOpenOptionHideKey, 
-                       __kLSOpenOptionHideOthersKey, __kLSOpenOptionInitialAppleEventKey, 
+                       __kLSOpenOptionArchitectureKey, __kLSOpenOptionArchitectureSubtypeKey, 
+                       __kLSOpenOptionArgumentsKey, __kLSOpenOptionBackgroundLaunchInformationKey, 
+                       __kLSOpenOptionBackgroundLaunchKey, __kLSOpenOptionBackgroundLaunchReasonKey, 
+                       __kLSOpenOptionCaptureDiagnosticsKey, __kLSOpenOptionEnableURLOverridesKey, 
+                       __kLSOpenOptionEnvironmentVariablesKey, __kLSOpenOptionForegroundLaunchKey, 
+                       __kLSOpenOptionHideKey, __kLSOpenOptionHideOthersKey, __kLSOpenOptionInitialAppleEventKey, 
                        __kLSOpenOptionLaunchSessionIDDKey, __kLSOpenOptionLaunchStdErrPathKey, 
                        __kLSOpenOptionLaunchStdInPathKey, __kLSOpenOptionLaunchStdOutPathKey, 
                        __kLSOpenOptionLaunchUIDKey, __kLSOpenOptionLaunchedByPersistenceKey, 

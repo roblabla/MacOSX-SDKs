@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A63CC12F-8051-3196-9508-0C1D6F97C9B5
+    value:           88501A84-9510-3A47-B3C5-D5050A7C154D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A4952464-B7EF-3C4B-A8A3-CA520C79FC0D
+    value:           9DACDE0B-D01E-384F-957C-F6A272066F84
 install-name:    '/System/Library/PrivateFrameworks/MobileSoftwareUpdate.framework/Versions/A/MobileSoftwareUpdate'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -40,11 +40,12 @@ exports:
                        _kMSUOptionsKeyEnableEmbeddedOSInstall, _kMSUOptionsKeyEnableManagedRequest, 
                        _kMSUOptionsKeyEnableOSPersonalization, _kMSUOptionsKeyEventStats, 
                        _kMSUOptionsKeyFirstPreflightPhase, _kMSUOptionsKeyGenericUpdaterInfoOverrides, 
-                       _kMSUOptionsKeyIcefallSEUpdaterInfoOverride, _kMSUOptionsKeyLocalAuthenticationContextKey, 
-                       _kMSUOptionsKeyLocalAuthenticationUserIDKey, _kMSUOptionsKeyMediumSecurityDowngrade, 
-                       _kMSUOptionsKeyPatchdCRCFailOnce, _kMSUOptionsKeyPatchdFailAt, 
-                       _kMSUOptionsKeyPatchdFailureType, _kMSUOptionsKeyPersonalizationServerURL, 
-                       _kMSUOptionsKeyPersonalizationVariant, _kMSUOptionsKeyPersonalizedManifestRootsPath, 
+                       _kMSUOptionsKeyIcefallSEUpdaterInfoOverride, _kMSUOptionsKeyIsMinorOSUpdate, 
+                       _kMSUOptionsKeyLocalAuthenticationContextKey, _kMSUOptionsKeyLocalAuthenticationUserIDKey, 
+                       _kMSUOptionsKeyMediumSecurityDowngrade, _kMSUOptionsKeyPatchdCRCFailOnce, 
+                       _kMSUOptionsKeyPatchdFailAt, _kMSUOptionsKeyPatchdFailureType, 
+                       _kMSUOptionsKeyPersonalizationServerURL, _kMSUOptionsKeyPersonalizationVariant, 
+                       _kMSUOptionsKeyPersonalizedManifestRootsPath, _kMSUOptionsKeyPreflightDoUserSanityChecking, 
                        _kMSUOptionsKeyPreflightExtraSpaceBoot, _kMSUOptionsKeyPreflightExtraSpaceTarget, 
                        _kMSUOptionsKeyPreflightExtraSpaceUpdate, _kMSUOptionsKeyPreflightInfoPlist, 
                        _kMSUOptionsKeyPreparePath, _kMSUOptionsKeyPrepareSnapshot, 

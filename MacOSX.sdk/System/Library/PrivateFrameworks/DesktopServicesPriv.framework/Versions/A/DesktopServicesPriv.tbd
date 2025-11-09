@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           732C8A0C-E7F8-372D-AE5B-84497067135E
+    value:           A3CAC396-18DC-3B13-9505-54BE001014CE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9FB6D481-1E7B-3A98-AB83-B6F7BF988AF9
+    value:           480FEB8D-03F0-3F28-AA00-3C997CEF7FAC
 install-name:    '/System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv'
 current-version: 0
 exports:
@@ -42,20 +42,19 @@ exports:
                        _GetVolumeNode, _InitializeCatalog, _NewNodeIterator, _NewVolumeIterator, 
                        _NodeAddNewTagsToSidebar, _NodeAddServerToSidebar, _NodeAliasSetTarget, 
                        _NodeAsFSRef, _NodeAssertFired, _NodeCancelOperation, _NodeCancelQuery, 
-                       _NodeCancelRequest, _NodeContextClose, _NodeContextFlush, 
-                       _NodeContextOpen, _NodeCopyAMPDevice, _NodeCopyAMPDeviceCollection, 
-                       _NodeCopyAliasHandle, _NodeCopyAsPathName, _NodeCopyAsURL, 
-                       _NodeCopyAttributesWithSelector, _NodeCopyBRContainer, _NodeCopyBRLibrariesContainer, 
-                       _NodeCopyBookmarkData, _NodeCopyChildFromName, _NodeCopyClippingData, 
-                       _NodeCopyDecorationLabels, _NodeCopyDefaultSearch, _NodeCopyEnumeratorError, 
-                       _NodeCopyFPItem, _NodeCopyFPProviderDomain, _NodeCopyFromAlias, 
-                       _NodeCopyFromBookmarkData, _NodeCopyFromPathName, _NodeCopyFromURL, 
-                       _NodeCopyICloudFPProviderDomain, _NodeCopyLocationData, _NodeCopyMDAttribute, 
-                       _NodeCopyMDAttributeForHit, _NodeCopyMDAttributes, _NodeCopyMDAttributesAsArray, 
-                       _NodeCopyMDItemRef, _NodeCopyMDQueryRef, _NodeCopyMergeRecord, 
-                       _NodeCopyNodeFromVirtualURLString, _NodeCopyNodeRef, _NodeCopyOriginalPath, 
-                       _NodeCopyParentNode, _NodeCopyPathName, _NodeCopyPermissionInfo, 
-                       _NodeCopyPhysicalParentNode, _NodeCopyPropertiesAsCFStrings, 
+                       _NodeContextClose, _NodeContextFlush, _NodeContextOpen, _NodeCopyAMPDevice, 
+                       _NodeCopyAMPDeviceCollection, _NodeCopyAliasHandle, _NodeCopyAsPathName, 
+                       _NodeCopyAsURL, _NodeCopyAttributesWithSelector, _NodeCopyBRContainer, 
+                       _NodeCopyBRLibrariesContainer, _NodeCopyBookmarkData, _NodeCopyChildFromName, 
+                       _NodeCopyClippingData, _NodeCopyDecorationLabels, _NodeCopyDefaultSearch, 
+                       _NodeCopyEnumeratorError, _NodeCopyFPItem, _NodeCopyFPProviderDomain, 
+                       _NodeCopyFromAlias, _NodeCopyFromBookmarkData, _NodeCopyFromPathName, 
+                       _NodeCopyFromURL, _NodeCopyICloudFPProviderDomain, _NodeCopyLocationData, 
+                       _NodeCopyMDAttribute, _NodeCopyMDAttributeForHit, _NodeCopyMDAttributes, 
+                       _NodeCopyMDAttributesAsArray, _NodeCopyMDItemRef, _NodeCopyMDQueryRef, 
+                       _NodeCopyMergeRecord, _NodeCopyNodeFromVirtualURLString, _NodeCopyNodeRef, 
+                       _NodeCopyOriginalPath, _NodeCopyParentNode, _NodeCopyPathName, 
+                       _NodeCopyPermissionInfo, _NodeCopyPhysicalParentNode, _NodeCopyPropertiesAsCFStrings, 
                        _NodeCopyPropertiesAsInt32s, _NodeCopyPropertyAsCFArray, _NodeCopyPropertyAsCFData, 
                        _NodeCopyPropertyAsCFDate, _NodeCopyPropertyAsCFDictionary, 
                        _NodeCopyPropertyAsCFNumber, _NodeCopyPropertyAsCFSecurity, 

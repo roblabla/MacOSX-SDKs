@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2F7F7303-DB23-359E-85CD-8B2F93223E2A
+    value:           ED7D7EB4-B248-33A9-9E6A-58F45EAB7602
   - target:          x86_64-maccatalyst
-    value:           2F7F7303-DB23-359E-85CD-8B2F93223E2A
+    value:           ED7D7EB4-B248-33A9-9E6A-58F45EAB7602
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BF1D536B-540F-374E-BA7B-EB2429F334CD
+    value:           758F8B92-8581-3370-9F97-1E3AB045122F
   - target:          arm64e-maccatalyst
-    value:           BF1D536B-540F-374E-BA7B-EB2429F334CD
+    value:           758F8B92-8581-3370-9F97-1E3AB045122F
 install-name:    '/usr/lib/system/libcache.dylib'
 current-version: 83
 parent-umbrella:
@@ -22,7 +22,7 @@ parent-umbrella:
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _cache_create, _cache_destroy, _cache_get, _cache_get_and_retain, 
                        _cache_get_cost_hint, _cache_get_count_hint, _cache_get_info, 

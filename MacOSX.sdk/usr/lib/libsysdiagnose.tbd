@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           09AD2195-F03B-3170-9ECA-2A87A1585331
+    value:           E20762BA-579E-3EB0-B673-EBCE16C16C18
   - target:          x86_64-maccatalyst
-    value:           09AD2195-F03B-3170-9ECA-2A87A1585331
+    value:           E20762BA-579E-3EB0-B673-EBCE16C16C18
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3A89BFD4-863A-3322-804E-D1C36E325232
+    value:           218EB7C4-AA0D-32CB-9D69-168F2E060B28
   - target:          arm64e-maccatalyst
-    value:           3A89BFD4-863A-3322-804E-D1C36E325232
+    value:           218EB7C4-AA0D-32CB-9D69-168F2E060B28
 install-name:    '/usr/lib/libsysdiagnose.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _metricCompression, _metricGetLogCopying, _metricGetLogGeneration, 
                        _metricGetOSLogArchive, _metricGetTimeSensitive, _metricLogCopying, 

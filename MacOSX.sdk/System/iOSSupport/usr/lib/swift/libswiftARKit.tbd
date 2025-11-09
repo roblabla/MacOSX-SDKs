@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           7540B45D-C34C-3962-9409-9B33FA48B22D
+    value:           17BC5F91-CFBC-3719-AE9B-E061881752D3
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           800F40D8-513F-3CC2-88E7-C2A13FA76CBC
+    value:           95B73998-46D5-3D70-B467-2AFFB5342D17
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftARKit.dylib'
-current-version: 321.13.4
+current-version: 321.14.1
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

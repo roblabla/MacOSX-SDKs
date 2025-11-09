@@ -47,6 +47,17 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 + (instancetype)dataWithImmutableBytesNoCopy:(const void *)bytes
                                       length:(NSUInteger)length;
 
+/*! @absract          Creates a data object that holds a given number of bytes from a given buffer. with a custom deallocator block.
+    @param     bytes   A buffer containing data for the new object.
+    @param     length  The number of bytes to hold from \p bytes. This value must not exceed the length of \p bytes.
+    @param     deallocator A block to invoke when the resulting object is deallocated.
+    @return    A new  \p MLCTensorData object.
+ */
++ (instancetype)dataWithBytesNoCopy:(void *)bytes
+                             length:(NSUInteger)length
+                        deallocator:(void (^)(void *bytes, NSUInteger length))deallocator
+    MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5));
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -95,6 +95,20 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 - (BOOL)compileWithOptions:(MLCGraphCompilationOptions)options
                     device:(MLCDevice *)device;
 
+/*! @abstract   Compile the training graph for a device.
+    @discussion Specifying the list of constant tensors when we compile the graph allows MLCompute to perform additional optimizations at compile time.
+    @param      options                      The compiler options to use when compiling the training graph
+    @param      device                        The MLCDevice object
+    @param      inputTensors           The list of input tensors that are constants
+    @param      inputTensorsData  The tensor data to be used with these constant input tensors
+    @return     A boolean indicating success or failure
+ */
+- (BOOL)compileWithOptions:(MLCGraphCompilationOptions)options
+                    device:(MLCDevice *)device
+      inputTensors:(NSDictionary<NSString *, MLCTensor *> * _Nullable)inputTensors
+  inputTensorsData:(NSDictionary<NSString *, MLCTensorData *> * _Nullable)inputTensorsData
+    MLCOMPUTE_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5));
+
 /*! @abstract   Compile the optimizer to be used with a training graph.
     @discussion Typically the optimizer to be used with a training graph is specifed when the training graph is created using
                 graphWithGraphObjects:lossLayer:optimizer.  The optimizer will be compiled in when compileWithOptions:device

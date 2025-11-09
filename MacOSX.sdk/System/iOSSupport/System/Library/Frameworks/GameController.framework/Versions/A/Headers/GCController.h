@@ -122,6 +122,17 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
  */
 @property (class, atomic, strong, readonly, nullable) GCController *current API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
+/**
+ Whether the current application should monitor and respond to game controller events when it is not the frontmost application.
+ 
+ @example If shouldMonitorBackgroundEvents is NO, and the application is not the frontmost application, any inputs from a game controller will
+ not be forwarded to the application. Once the application becomes the frontmost application, game controller events will be forwarded.
+ 
+ @note Starting with macOS Big Sur 11.3, shouldMonitorBackgroundEvents will be NO by default. For applications built prior to macOS Big Sur 11.3,
+ (or running on devices with an earlier version of macOS), shouldMonitorBackgroundEvents will be YES by default. On iOS and tvOS, this property is ignored.
+ */
+@property (class, nonatomic, readwrite) BOOL shouldMonitorBackgroundEvents API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5));
+
 
 /**
  A controller may be form fitting or otherwise closely attached to the device. This closeness to other inputs on the device

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B2D3ECDB-854F-33BC-A69B-14FBC846BD57
+    value:           32526D91-1079-342E-98BF-572D0D3770DD
   - target:          x86_64-maccatalyst
-    value:           B2D3ECDB-854F-33BC-A69B-14FBC846BD57
+    value:           32526D91-1079-342E-98BF-572D0D3770DD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           91085B7E-F666-323C-8C04-FC20CA0AE9FB
+    value:           CF187C99-3B5D-3C43-9594-72BCFB8004E8
   - target:          arm64e-maccatalyst
-    value:           91085B7E-F666-323C-8C04-FC20CA0AE9FB
+    value:           CF187C99-3B5D-3C43-9594-72BCFB8004E8
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeCore.framework/Versions/A/ScreenTimeCore'
-current-version: 495
+current-version: 497.4.6
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target arm64e-apple-ios13.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDarwin -swift-version 5 -O -enforce-exclusivity=unchecked -disable-objc-attr-requires-foundation-module -module-name Darwin
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target arm64e-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDarwin -swift-version 5 -O -enforce-exclusivity=unchecked -disable-objc-attr-requires-foundation-module -module-name Darwin
 @_exported import Darwin
 import Swift
 import SwiftOverlayShims
@@ -173,11 +173,12 @@ public var SIG_ERR: Darwin.sig_t {
 public var SIG_HOLD: Darwin.sig_t {
   get
 }
-public var SEM_FAILED: Swift.UnsafeMutablePointer<Darwin.sem_t>? {
+public typealias Semaphore = Swift.UnsafeMutablePointer<Darwin.sem_t>
+public var SEM_FAILED: Darwin.Semaphore? {
   get
 }
-public func sem_open(_ name: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32) -> Swift.UnsafeMutablePointer<Darwin.sem_t>?
-public func sem_open(_ name: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32, _ mode: Darwin.mode_t, _ value: Swift.CUnsignedInt) -> Swift.UnsafeMutablePointer<Darwin.sem_t>?
+public func sem_open(_ name: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32) -> Darwin.Semaphore?
+public func sem_open(_ name: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32, _ mode: Darwin.mode_t, _ value: Swift.CUnsignedInt) -> Darwin.Semaphore?
 public var environ: Swift.UnsafeMutablePointer<Swift.UnsafeMutablePointer<Swift.CChar>?> {
   get
 }
@@ -479,8 +480,8 @@ public var TIOCPTYUNLK: Swift.UInt {
   public static var ELAST: Darwin.POSIXErrorCode {
     get
   }
-  public typealias RawValue = Swift.Int32
   public init?(rawValue: Swift.Int32)
+  public typealias RawValue = Swift.Int32
   public var rawValue: Swift.Int32 {
     get
   }
@@ -538,8 +539,8 @@ public var TIOCPTYUNLK: Swift.UInt {
   case operationTimedOut = 49
   case codesignError = 50
   case policyStatic = 51
-  public typealias RawValue = Swift.Int32
   public init?(rawValue: Swift.Int32)
+  public typealias RawValue = Swift.Int32
   public var rawValue: Swift.Int32 {
     get
   }

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           74197228-8351-3F24-927A-E3B5EE243703
+    value:           615ECCC7-0130-3838-81BC-0110396D5663
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           95A29729-E14B-3A43-ACED-4D1F05FC7ECB
+    value:           6551495B-38BF-31F7-B30F-CEBA9B29DD53
 install-name:    '/System/Library/PrivateFrameworks/PowerlogCore.framework/Versions/A/PowerlogCore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

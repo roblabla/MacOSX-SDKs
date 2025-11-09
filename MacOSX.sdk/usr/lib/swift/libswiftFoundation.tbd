@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           417CD1C7-A56A-3844-AAD9-6BFC3C348C13
+    value:           7B5E14AB-5B90-346E-91AD-8ED2718E3D18
   - target:          x86_64-maccatalyst
-    value:           417CD1C7-A56A-3844-AAD9-6BFC3C348C13
+    value:           7B5E14AB-5B90-346E-91AD-8ED2718E3D18
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5899950B-E94F-32A8-9B59-11AFE25ED7FA
+    value:           604CF2CD-0592-388F-A3AF-30E74F041E56
   - target:          arm64e-maccatalyst
-    value:           5899950B-E94F-32A8-9B59-11AFE25ED7FA
+    value:           604CF2CD-0592-388F-A3AF-30E74F041E56
 install-name:    '/usr/lib/swift/libswiftFoundation.dylib'
-current-version: 20
+current-version: 25.102
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftFoundation.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftFoundation.dylib', 
@@ -94,6 +94,8 @@ exports:
                        '_$s10Foundation10CocoaErrorV16coderReadCorruptAC4CodeVvgZ', 
                        '_$s10Foundation10CocoaErrorV16fileReadTooLargeAC4CodeVvgZ', 
                        '_$s10Foundation10CocoaErrorV16fileWriteUnknownAC4CodeVvgZ', 
+                       '_$s10Foundation10CocoaErrorV16underlyingErrorsSays0C0_pGvg', 
+                       '_$s10Foundation10CocoaErrorV16underlyingErrorsSays0C0_pGvpMV', 
                        '_$s10Foundation10CocoaErrorV17coderInvalidValueAC4CodeVvgZ', 
                        '_$s10Foundation10CocoaErrorV18coderValueNotFoundAC4CodeVvgZ', 
                        '_$s10Foundation10CocoaErrorV18featureUnsupportedAC4CodeVvgZ', 
@@ -410,7 +412,9 @@ exports:
                        '_$s10Foundation10URLRequestV19allHTTPHeaderFieldsSDyS2SGSgvg', 
                        '_$s10Foundation10URLRequestV19allHTTPHeaderFieldsSDyS2SGSgvpMV', 
                        '_$s10Foundation10URLRequestV19allHTTPHeaderFieldsSDyS2SGSgvs', 
-                       '_$s10Foundation10URLRequestV20allowsCellularAccessSbvM', 
+                       '_$s10Foundation10URLRequestV19assumesHTTP3CapableSbvM', '_$s10Foundation10URLRequestV19assumesHTTP3CapableSbvg', 
+                       '_$s10Foundation10URLRequestV19assumesHTTP3CapableSbvpMV', 
+                       '_$s10Foundation10URLRequestV19assumesHTTP3CapableSbvs', '_$s10Foundation10URLRequestV20allowsCellularAccessSbvM', 
                        '_$s10Foundation10URLRequestV20allowsCellularAccessSbvg', 
                        '_$s10Foundation10URLRequestV20allowsCellularAccessSbvpMV', 
                        '_$s10Foundation10URLRequestV20allowsCellularAccessSbvs', 
@@ -1341,6 +1345,10 @@ exports:
                        '_$s10Foundation17URLResourceValuesV31volumeSupportsAccessPermissionsSbSgvpMV', 
                        '_$s10Foundation17URLResourceValuesV31volumeSupportsExclusiveRenamingSbSgvg', 
                        '_$s10Foundation17URLResourceValuesV31volumeSupportsExclusiveRenamingSbSgvpMV', 
+                       '_$s10Foundation17URLResourceValuesV32ubiquitousItemIsExcludedFromSyncSbSgvM', 
+                       '_$s10Foundation17URLResourceValuesV32ubiquitousItemIsExcludedFromSyncSbSgvg', 
+                       '_$s10Foundation17URLResourceValuesV32ubiquitousItemIsExcludedFromSyncSbSgvpMV', 
+                       '_$s10Foundation17URLResourceValuesV32ubiquitousItemIsExcludedFromSyncSbSgvs', 
                        '_$s10Foundation17URLResourceValuesV32volumeLocalizedFormatDescriptionSSSgvg', 
                        '_$s10Foundation17URLResourceValuesV32volumeLocalizedFormatDescriptionSSSgvpMV', 
                        '_$s10Foundation17URLResourceValuesV32volumeSupportsCasePreservedNamesSbSgvg', 

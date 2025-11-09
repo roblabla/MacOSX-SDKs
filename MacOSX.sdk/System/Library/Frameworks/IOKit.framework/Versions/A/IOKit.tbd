@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           36727129-E065-3A54-862A-B193DE0DEA8E
+    value:           5230AABC-41A1-3D49-8B25-169A29DD6998
   - target:          x86_64-maccatalyst
-    value:           36727129-E065-3A54-862A-B193DE0DEA8E
+    value:           5230AABC-41A1-3D49-8B25-169A29DD6998
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           853E91E3-0386-335B-979D-9B990E917E30
+    value:           547513E8-9DE3-3807-87F3-2F79FF1C9F7F
   - target:          arm64e-maccatalyst
-    value:           853E91E3-0386-335B-979D-9B990E917E30
+    value:           547513E8-9DE3-3807-87F3-2F79FF1C9F7F
 install-name:    '/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit'
 current-version: 275
 exports:
@@ -142,8 +142,9 @@ exports:
                        _IODPDeviceGetMaxLaneCount, _IODPDeviceGetMaxLinkRate, _IODPDeviceGetRevisionMajor, 
                        _IODPDeviceGetRevisionMinor, _IODPDeviceGetSupportsDownspread, 
                        _IODPDeviceGetSupportsEnhancedMode, _IODPDeviceGetSymbolErrorCount, 
-                       _IODPDeviceGetTypeID, _IODPDeviceReadDPCD, _IODPDeviceWriteDPCD, 
-                       _IODPServiceCreate, _IODPServiceCreateWithLocation, _IODPServiceCreateWithService, 
+                       _IODPDeviceGetTypeID, _IODPDeviceReadDPCD, _IODPDeviceSetUpdateMode, 
+                       _IODPDeviceSetUpdated, _IODPDeviceWriteDPCD, _IODPServiceCreate, 
+                       _IODPServiceCreateWithLocation, _IODPServiceCreateWithService, 
                        _IODPServiceGetAVService, _IODPServiceGetDevice, _IODPServiceGetSinkCount, 
                        _IODPServiceGetSymbolErrorCount, _IODPServiceGetTypeID, _IODPServiceRetrainLink, 
                        _IODataQueueAllocateNotificationPort, _IODataQueueDataAvailable, 
@@ -592,23 +593,23 @@ exports:
                        __IOHIDEventSystemClientUnregisterServiceRecordsChangedBlock, 
                        __IOHIDEventSystemClientUnregisterServiceRecordsChangedCallback, 
                        __IOHIDEventSystemConnectionAddNotification, __IOHIDEventSystemConnectionAddServices, 
-                       __IOHIDEventSystemConnectionContainsService, __IOHIDEventSystemConnectionCopyDispatchQueue, 
-                       __IOHIDEventSystemConnectionCopyEventCounts, __IOHIDEventSystemConnectionCopyEventLog, 
-                       __IOHIDEventSystemConnectionCopyNotification, __IOHIDEventSystemConnectionCopyQueue, 
-                       __IOHIDEventSystemConnectionCopyRecord, __IOHIDEventSystemConnectionCopyServices, 
-                       __IOHIDEventSystemConnectionCreate, __IOHIDEventSystemConnectionCreatePrivate, 
-                       __IOHIDEventSystemConnectionCreateVirtualService, __IOHIDEventSystemConnectionDispatchEvent, 
-                       __IOHIDEventSystemConnectionDispatchEventForVirtualService, 
+                       __IOHIDEventSystemConnectionContainsService, __IOHIDEventSystemConnectionCopyEventCounts, 
+                       __IOHIDEventSystemConnectionCopyEventLog, __IOHIDEventSystemConnectionCopyNotification, 
+                       __IOHIDEventSystemConnectionCopyQueue, __IOHIDEventSystemConnectionCopyRecord, 
+                       __IOHIDEventSystemConnectionCopyServices, __IOHIDEventSystemConnectionCreate, 
+                       __IOHIDEventSystemConnectionCreatePrivate, __IOHIDEventSystemConnectionCreateVirtualService, 
+                       __IOHIDEventSystemConnectionDispatchEvent, __IOHIDEventSystemConnectionDispatchEventForVirtualService, 
                        __IOHIDEventSystemConnectionEventFilterCompare, __IOHIDEventSystemConnectionFilterEvent, 
-                       __IOHIDEventSystemConnectionGetEventFilterPriority, __IOHIDEventSystemConnectionGetPID, 
-                       __IOHIDEventSystemConnectionGetPort, __IOHIDEventSystemConnectionGetProperty, 
-                       __IOHIDEventSystemConnectionGetReplyPort, __IOHIDEventSystemConnectionGetSystem, 
-                       __IOHIDEventSystemConnectionInvalidate, __IOHIDEventSystemConnectionIsResponsive, 
-                       __IOHIDEventSystemConnectionIsValid, __IOHIDEventSystemConnectionLogEvent, 
-                       __IOHIDEventSystemConnectionPropertyChanged, __IOHIDEventSystemConnectionQueueStart, 
-                       __IOHIDEventSystemConnectionQueueStop, __IOHIDEventSystemConnectionRecordClientChanged, 
-                       __IOHIDEventSystemConnectionRecordServiceChanged, __IOHIDEventSystemConnectionRegisterDemuxCallback, 
-                       __IOHIDEventSystemConnectionRegisterEventFilter, __IOHIDEventSystemConnectionRegisterPropertyChangedNotification, 
+                       __IOHIDEventSystemConnectionGetDispatchQueue, __IOHIDEventSystemConnectionGetEventFilterPriority, 
+                       __IOHIDEventSystemConnectionGetPID, __IOHIDEventSystemConnectionGetPort, 
+                       __IOHIDEventSystemConnectionGetProperty, __IOHIDEventSystemConnectionGetReplyPort, 
+                       __IOHIDEventSystemConnectionGetSystem, __IOHIDEventSystemConnectionInvalidate, 
+                       __IOHIDEventSystemConnectionIsResponsive, __IOHIDEventSystemConnectionIsValid, 
+                       __IOHIDEventSystemConnectionLogEvent, __IOHIDEventSystemConnectionPropertyChanged, 
+                       __IOHIDEventSystemConnectionQueueStart, __IOHIDEventSystemConnectionQueueStop, 
+                       __IOHIDEventSystemConnectionRecordClientChanged, __IOHIDEventSystemConnectionRecordServiceChanged, 
+                       __IOHIDEventSystemConnectionRegisterDemuxCallback, __IOHIDEventSystemConnectionRegisterEventFilter, 
+                       __IOHIDEventSystemConnectionRegisterPropertyChangedNotification, 
                        __IOHIDEventSystemConnectionRegisterRecordClientChanged, __IOHIDEventSystemConnectionRegisterRecordServiceChanged, 
                        __IOHIDEventSystemConnectionRegisterTerminationCallback, __IOHIDEventSystemConnectionReleasePrivate, 
                        __IOHIDEventSystemConnectionRemoveAllServices, __IOHIDEventSystemConnectionRemoveNotification, 
@@ -836,10 +837,11 @@ exports:
                        _kOSKextDiagnosticExecutableBadKey, _kOSKextDiagnosticExecutableMissingKey, 
                        _kOSKextDiagnosticFileAccessKey, _kOSKextDiagnosticFileNotFoundKey, 
                        _kOSKextDiagnosticIdentifierOrVersionTooLongKey, _kOSKextDiagnosticIneligibleInSafeBoot, 
-                       _kOSKextDiagnosticInfoKeyIneligibleForDriverKit, _kOSKextDiagnosticKernelComponentNotInterfaceKey, 
-                       _kOSKextDiagnosticKextIneligibleForDriverKit, _kOSKextDiagnosticMissingDesignatedKernelClass, 
-                       _kOSKextDiagnosticMissingPropertyKey, _kOSKextDiagnosticNoExplicitKernelDependencyKey, 
-                       _kOSKextDiagnosticNoFileKey, _kOSKextDiagnosticNonAppleKextDeclaresPrivateKPIDependencyKey, 
+                       _kOSKextDiagnosticInfoKeyIneligibleForDriverKit, _kOSKextDiagnosticInvalidSymlinkKey, 
+                       _kOSKextDiagnosticKernelComponentNotInterfaceKey, _kOSKextDiagnosticKextIneligibleForDriverKit, 
+                       _kOSKextDiagnosticMissingDesignatedKernelClass, _kOSKextDiagnosticMissingPropertyKey, 
+                       _kOSKextDiagnosticNoExplicitKernelDependencyKey, _kOSKextDiagnosticNoFileKey, 
+                       _kOSKextDiagnosticNonAppleKextDeclaresPrivateKPIDependencyKey, 
                        _kOSKextDiagnosticNonuniqueIOResourcesMatchKey, _kOSKextDiagnosticNotABundleKey, 
                        _kOSKextDiagnosticNotSignedKey, _kOSKextDiagnosticOSBundleRequiredValueIneligibleForDriverKit, 
                        _kOSKextDiagnosticOwnerPermissionKey, _kOSKextDiagnosticPersonalityHasDifferentBundleIdentifierKey, 
@@ -856,23 +858,24 @@ exports:
                        _kOSKextDiagnosticsValidationKey, _kOSKextDiagnosticsWarningsKey, 
                        _kOSKextLoadNotification, _kOSKextUnloadNotification, _kcgen_adjustKextSegmentLocations, 
                        _kernelmanagement_load_kext_identifier, _kernelmanagement_load_kext_url, 
-                       _kernelmanagement_path_for_bundle_id, _kextmanager_create_property_value_array, 
-                       _kextmanager_load_kext, _kextmanager_lock_kextload, _kextmanager_lock_reboot, 
-                       _kextmanager_lock_volume, _kextmanager_path_for_bundle_id, 
-                       _kextmanager_stop_ext, _kextmanager_unlock_kextload, _kextmanager_unlock_volume, 
-                       _kextmanager_update_ext, _kextmanager_validate_ext, _macho_find_dysymtab, 
-                       _macho_find_section_numbered, _macho_find_source_version, 
+                       _kernelmanagement_path_for_bundle_id, _kernelmanagement_unload_kext_identifier, 
+                       _kextmanager_create_property_value_array, _kextmanager_load_kext, 
+                       _kextmanager_lock_kextload, _kextmanager_lock_reboot, _kextmanager_lock_volume, 
+                       _kextmanager_path_for_bundle_id, _kextmanager_stop_ext, _kextmanager_unlock_kextload, 
+                       _kextmanager_unlock_volume, _kextmanager_update_ext, _kextmanager_validate_ext, 
+                       _macho_find_dysymtab, _macho_find_section_numbered, _macho_find_source_version, 
                        _macho_find_symbol, _macho_find_symtab, _macho_find_uuid, 
                        _macho_get_section_by_name, _macho_get_section_by_name_64, 
                        _macho_get_segment_by_name, _macho_get_segment_by_name_64, 
                        _macho_remove_linkedit, _macho_scan_load_commands, _macho_swap, 
-                       _macho_trim_linkedit, _macho_unswap, _offloadAssertions, _previouslySerialized, 
-                       _printPList_new, _processAssertionTimeout, _processCheckAssertionsMsg, 
-                       _processRemoteMsg, _processUserActivityMsg, _recordObjectInIDRefDictionary, 
-                       _releaseAsyncAssertion, _roundPageCrossSafe, _roundPageCrossSafeFixedWidth, 
-                       _sendAsyncAssertionMsg, _sendAsyncReleaseMsg, _sendUserActivityMsg, 
-                       _setAsyncAssertionProperties, _setCrossLinkPageSize, _setDispatchQueue, 
-                       _setPreferencesForSrc, _shimmingEnabled, _showPList_new, _smcSupportsSilentRunning ]
+                       _macho_trim_linkedit, _macho_unswap, _offloadAssertions, _pathsForURLs, 
+                       _previouslySerialized, _printPList_new, _processAssertionTimeout, 
+                       _processCheckAssertionsMsg, _processRemoteMsg, _processUserActivityMsg, 
+                       _recordObjectInIDRefDictionary, _releaseAsyncAssertion, _roundPageCrossSafe, 
+                       _roundPageCrossSafeFixedWidth, _sendAsyncAssertionMsg, _sendAsyncReleaseMsg, 
+                       _sendUserActivityMsg, _setAsyncAssertionProperties, _setCrossLinkPageSize, 
+                       _setDispatchQueue, _setPreferencesForSrc, _shimmingEnabled, 
+                       _showPList_new, _smcSupportsSilentRunning ]
     objc-classes:    [ HIDConnection, HIDDevice, HIDElement, HIDEvent, HIDEventService, 
                        HIDServiceClient, HIDSession ]
     objc-ivars:      [ HIDConnection._connection, HIDDevice._device, HIDElement._element, 

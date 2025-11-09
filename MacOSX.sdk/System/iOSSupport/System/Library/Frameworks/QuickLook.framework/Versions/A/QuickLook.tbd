@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           C5B5ECEB-2A55-3A2C-8F7D-51EC119547B8
+    value:           5FB00287-3A5F-3559-9997-DA9D7F983DEF
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           33236A21-7F01-333E-A03A-4F00E8885253
+    value:           7236396F-87DA-3E35-AEBC-82D06E01305E
 install-name:    '/System/iOSSupport/System/Library/Frameworks/QuickLook.framework/Versions/A/QuickLook'
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/QuickLookIosmac.framework/Versions/A/QuickLookIosmac' ]
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     objc-classes:    [ QLPreviewController, QLPreviewMockScene ]
 --- !tapi-tbd
 tbd-version:     4
@@ -21,17 +21,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           343E9EA4-C24E-39FD-9488-64ED1241AB02
+    value:           2A381CB0-5FFA-3DB0-A05F-7FFD606578C1
   - target:          x86_64-maccatalyst
-    value:           343E9EA4-C24E-39FD-9488-64ED1241AB02
+    value:           2A381CB0-5FFA-3DB0-A05F-7FFD606578C1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B16DC3F6-D53C-389D-9AAF-A5DFC041086B
+    value:           18B1730A-6F93-3282-9BD0-EE7BFD0DE2BB
   - target:          arm64e-maccatalyst
-    value:           B16DC3F6-D53C-389D-9AAF-A5DFC041086B
+    value:           18B1730A-6F93-3282-9BD0-EE7BFD0DE2BB
 install-name:    '/System/Library/PrivateFrameworks/QuickLookIosmac.framework/Versions/A/QuickLookIosmac'
 current-version: 0
 exports:

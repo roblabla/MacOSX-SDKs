@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0CABE74D-2EFF-39A6-BA6F-0167058F3029
+    value:           8BA7F68F-AFB6-384F-885B-02578764C8F2
   - target:          x86_64-maccatalyst
-    value:           0CABE74D-2EFF-39A6-BA6F-0167058F3029
+    value:           8BA7F68F-AFB6-384F-885B-02578764C8F2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A5C14D6C-B0D9-3A22-B725-A3EC8B7345F1
+    value:           05C78D24-2994-35BA-976F-7EB3AB83A306
   - target:          arm64e-maccatalyst
-    value:           A5C14D6C-B0D9-3A22-B725-A3EC8B7345F1
+    value:           05C78D24-2994-35BA-976F-7EB3AB83A306
 install-name:    '/System/Library/PrivateFrameworks/ToneLibrary.framework/Versions/A/ToneLibrary'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -46,15 +46,15 @@ exports:
                        _TLServiceAgentIdentifier, _TLServiceAgentPreferencesDomain, 
                        _TLServiceCommunicationErrorDomain, _TLServicePersistenceErrorDomain, 
                        _TLServiceValidationErrorDomain, _TLToneIdentifierNone, __TLAlertOverridePolicyDidChangeNotification, 
-                       __TLAlertTopicIncomingCallDeemphasized, __TLAlertTypeGetHumanReadableDescription, 
-                       __TLAlertTypeValidateConsistencyOfEnumeration, __TLToneManagerContentsChangedNotification, 
-                       _kSystemSoundID_InvalidTone, _kSystemSoundID_NoneTone, _kToneAlbumKey, 
-                       _kToneArtistKey, _kToneArtworkFileKey, _kToneDurationKey, 
-                       _kToneFileExtensionKey, _kToneGenreKey, _kToneGloballyUniqueIdentifierKey, 
-                       _kToneMediaKindAlertTone, _kToneMediaKindKey, _kToneMediaKindRingtone, 
-                       _kTonePrivateKey, _kToneProtectedContentKey, _kTonePurchasedKey, 
-                       _kToneStoreFrontIdentifierKey, _kToneStoreItemIdentifierKey, 
-                       _kToneSyncIdentifierKey, _kToneTitleKey ]
+                       __TLAlertTopicClassroomDeemphasized, __TLAlertTopicIncomingCallDeemphasized, 
+                       __TLAlertTypeGetHumanReadableDescription, __TLAlertTypeValidateConsistencyOfEnumeration, 
+                       __TLToneManagerContentsChangedNotification, _kSystemSoundID_InvalidTone, 
+                       _kSystemSoundID_NoneTone, _kToneAlbumKey, _kToneArtistKey, 
+                       _kToneArtworkFileKey, _kToneDurationKey, _kToneFileExtensionKey, 
+                       _kToneGenreKey, _kToneGloballyUniqueIdentifierKey, _kToneMediaKindAlertTone, 
+                       _kToneMediaKindKey, _kToneMediaKindRingtone, _kTonePrivateKey, 
+                       _kToneProtectedContentKey, _kTonePurchasedKey, _kToneStoreFrontIdentifierKey, 
+                       _kToneStoreItemIdentifierKey, _kToneSyncIdentifierKey, _kToneTitleKey ]
     objc-classes:    [ TLAccessQueue, TLAlert, TLAlertActivationAssertion, TLAlertConfiguration, 
                        TLAlertContext, TLAlertController, TLAlertPlaybackCompletionContext, 
                        TLAlertPlaybackPolicy, TLAlertQueuePlayerController, TLAlertStoppingOptions, 

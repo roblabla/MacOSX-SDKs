@@ -25,3 +25,4 @@
 #import <FileProvider/NSFileProviderItemDecoration.h>
 #import <FileProvider/NSFileProviderRequest.h>
 #import <FileProvider/NSFileProviderReplicatedExtension.h>
+#import <FileProvider/NSFileProviderTesting.h>

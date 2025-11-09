@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2D8F970F-7347-3A62-A383-F6F41E12DB98
+    value:           730C8FF5-B0CA-3E49-85E9-3BF421216296
   - target:          x86_64-maccatalyst
-    value:           2D8F970F-7347-3A62-A383-F6F41E12DB98
+    value:           730C8FF5-B0CA-3E49-85E9-3BF421216296
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FB204DC9-996F-3955-AD9D-58D1E1E757DC
+    value:           EEBA3BA0-C4BF-3FCD-B27E-0F711866913E
   - target:          arm64e-maccatalyst
-    value:           FB204DC9-996F-3955-AD9D-58D1E1E757DC
+    value:           EEBA3BA0-C4BF-3FCD-B27E-0F711866913E
 install-name:    '/System/Library/PrivateFrameworks/PacketFilter.framework/Versions/A/PacketFilter'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

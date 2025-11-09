@@ -2,7 +2,7 @@
 //  GameKit.h
 //  Game Center
 //
-//  Copyright 2010-2020 Apple Inc. All rights reserved.
+//  Copyright 2010-2021 Apple Inc. All rights reserved.
 //
 
 #import <TargetConditionals.h>
@@ -33,6 +33,7 @@
 #import <GameKit/GKCloudPlayer.h>
 #import <GameKit/GKError.h>
 #import <GameKit/GKEventListener.h>
+#import <GameKit/GKFriendRequestComposeViewController.h>
 #import <GameKit/GKGameCenterViewController.h>
 #import <GameKit/GKGameSession.h>
 #import <GameKit/GKGameSessionError.h>

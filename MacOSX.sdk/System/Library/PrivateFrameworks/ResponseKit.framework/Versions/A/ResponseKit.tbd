@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3584F1B2-E5C6-398C-A0C8-11F0BD740DFF
+    value:           35B709D3-9F3D-3EB3-944E-74AE676F7F58
   - target:          x86_64-maccatalyst
-    value:           3584F1B2-E5C6-398C-A0C8-11F0BD740DFF
+    value:           35B709D3-9F3D-3EB3-944E-74AE676F7F58
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9AFA6921-6190-3383-9937-2B71D6406BBE
+    value:           FEDC269B-2383-33E1-AC0B-B04FC773882B
   - target:          arm64e-maccatalyst
-    value:           9AFA6921-6190-3383-9937-2B71D6406BBE
+    value:           FEDC269B-2383-33E1-AC0B-B04FC773882B
 install-name:    '/System/Library/PrivateFrameworks/ResponseKit.framework/Versions/A/ResponseKit'
-current-version: 164.1
+current-version: 165.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

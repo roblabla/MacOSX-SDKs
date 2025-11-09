@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FEA644F1-6D58-3E38-9057-33DBCC85D91A
+    value:           D8815DE6-4DE0-3E2B-AEA6-1790AF62967B
   - target:          x86_64-maccatalyst
-    value:           FEA644F1-6D58-3E38-9057-33DBCC85D91A
+    value:           D8815DE6-4DE0-3E2B-AEA6-1790AF62967B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D1135845-7708-362D-8CB1-F4CD5A5EA0A6
+    value:           19176434-A1E6-36E8-A86E-5255F5253AEC
   - target:          arm64e-maccatalyst
-    value:           D1135845-7708-362D-8CB1-F4CD5A5EA0A6
+    value:           19176434-A1E6-36E8-A86E-5255F5253AEC
 install-name:    '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -50,9 +50,12 @@ exports:
                        _AVCaptureDeviceTypeBuiltInTimeOfFlightCamera, _AVCaptureDeviceTypeBuiltInTripleCamera, 
                        _AVCaptureDeviceTypeBuiltInTrueDepthCamera, _AVCaptureDeviceTypeBuiltInUltraWideCamera, 
                        _AVCaptureDeviceTypeBuiltInWideAngleCamera, _AVCaptureDeviceTypeExternalUnknown, 
-                       _AVCaptureDeviceWasConnectedNotification, _AVCaptureDeviceWasDisconnectedNotification, 
-                       _AVCaptureExposureDurationCurrent, _AVCaptureExposureTargetBiasCurrent, 
-                       _AVCaptureISOCurrent, _AVCaptureInputPortFormatDescriptionDidChangeNotification, 
+                       _AVCaptureDeviceUserDefaultsKey_CenterStageControlMode, _AVCaptureDeviceUserDefaultsKey_CenterStageEnabled, 
+                       _AVCaptureDeviceUserDefaultsKey_CinematicFramingControlMode, 
+                       _AVCaptureDeviceUserDefaultsKey_CinematicFramingEnabled, _AVCaptureDeviceWasConnectedNotification, 
+                       _AVCaptureDeviceWasDisconnectedNotification, _AVCaptureExposureDurationCurrent, 
+                       _AVCaptureExposureTargetBiasCurrent, _AVCaptureISOCurrent, 
+                       _AVCaptureInputPortFormatDescriptionDidChangeNotification, 
                        _AVCaptureLensPositionCurrent, _AVCaptureMaxAvailableTorchLevel, 
                        _AVCaptureMovieFileOutputRecordingCompletedNotification, _AVCaptureOutputNotificationInfoVideoPreviewFrameSurface, 
                        _AVCaptureOutputNotificationInfoVideoPreviewFrameSurfaceSize, 

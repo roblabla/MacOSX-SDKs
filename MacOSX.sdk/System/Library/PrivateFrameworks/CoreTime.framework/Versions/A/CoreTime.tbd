@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1BE28F6E-940C-31C8-B460-2761FC6B4A3F
+    value:           712A3D7B-2668-3F26-8EED-261EEC7F5113
   - target:          x86_64-maccatalyst
-    value:           1BE28F6E-940C-31C8-B460-2761FC6B4A3F
+    value:           712A3D7B-2668-3F26-8EED-261EEC7F5113
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3134C985-4B4E-3D9E-B383-E6ED61F0DE0C
+    value:           F02C1256-2E36-3637-BD9D-8283C0D7C3F1
   - target:          arm64e-maccatalyst
-    value:           3134C985-4B4E-3D9E-B383-E6ED61F0DE0C
+    value:           F02C1256-2E36-3637-BD9D-8283C0D7C3F1
 install-name:    '/System/Library/PrivateFrameworks/CoreTime.framework/Versions/A/CoreTime'
-current-version: 284
+current-version: 284.0.3
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CF4E97B8-C458-368F-AC54-75DAFB551E4B
+    value:           604AC084-3BB9-3C85-8500-12AD0AADC603
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A92B3F93-5F47-304D-9C69-687F0145918F
+    value:           145E3E6A-26FF-3749-A25A-D7F8FAC7D042
 install-name:    '/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices'
-current-version: 610.3.7
+current-version: 611.1.21
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ASAuthorizationAppleIDProviderCredentialRevokedNotification, 
@@ -18,8 +18,7 @@ exports:
                        _ASAuthorizationOperationRefresh, _ASAuthorizationProviderAuthorizationOperationConfigurationRemoved, 
                        _ASAuthorizationScopeEmail, _ASAuthorizationScopeFullName, 
                        _ASCredentialIdentityStoreErrorDomain, _ASExtensionErrorDomain, 
-                       _ASExtensionLocalizedFailureReasonErrorKey, _ASWebAuthenticationSessionErrorDomain, 
-                       _ASWebAuthenticationSessionWebBrowserSupportCapabilitiesKey, 
+                       _ASWebAuthenticationSessionErrorDomain, _ASWebAuthenticationSessionWebBrowserSupportCapabilitiesKey, 
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilityIsSupportedKey, 
                        _ASWebAuthenticationSessionWebBrowserSupportCapabilitySupportsEphemeralBrowserSessionKey, 
                        __authenticationSessionRequestServerErrorDomain ]
@@ -32,11 +31,9 @@ exports:
                        ASCredentialIdentityStore, ASCredentialIdentityStoreState, 
                        ASCredentialProviderExtensionContext, ASCredentialProviderViewController, 
                        ASCredentialServiceIdentifier, ASPasswordCredential, ASPasswordCredentialIdentity, 
-                       ASWebAuthenticationSession, ASWebAuthenticationSessionController, 
-                       ASWebAuthenticationSessionLaunchAgentProxy, ASWebAuthenticationSessionRequest, 
+                       ASWebAuthenticationSession, ASWebAuthenticationSessionRequest, 
                        ASWebAuthenticationSessionRequestClient, ASWebAuthenticationSessionWebBrowserSessionManager, 
                        _ASCredentialListViewController, _ASCredentialProviderExtensionConfigurationViewController, 
-                       _ASCredentialProviderExtensionHostContext, _ASExtensionViewController, 
-                       _ASIncomingCallObserver, _ASPasswordCredentialAuthenticationViewController, 
-                       _ASWebAuthenticationSessionRequestServer ]
+                       _ASDevice, _ASExtensionViewController, _ASIncomingCallObserver, 
+                       _ASPasswordCredentialAuthenticationViewController, _ASWebAuthenticationSessionRequestServer ]
 ...

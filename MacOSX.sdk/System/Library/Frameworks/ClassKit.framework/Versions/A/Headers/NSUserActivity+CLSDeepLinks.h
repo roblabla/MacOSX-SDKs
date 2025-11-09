@@ -2,10 +2,10 @@
 //  NSUserActivity+CLSDeepLinks.h
 //  ClassKit
 //
-//  Copyright © 2018 - 2019 Apple Inc. All rights reserved.
+//  Copyright © 2018-2020 Apple Inc. All rights reserved.
 //
 
-#import <ClassKit/CLSDefines.h>
+#import <Foundation/Foundation.h>
 #import <Foundation/NSUserActivity.h>
 
 NS_ASSUME_NONNULL_BEGIN

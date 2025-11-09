@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BF1DDBF3-E8E4-332D-A1A2-4D6724D99732
+    value:           7DF62A59-A035-359D-AA8A-E7001A757899
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5D928FC6-4627-3667-9D82-DEF2653B12E5
+    value:           02384AEF-DA8C-390F-9DF4-78A954322DA6
 install-name:    '/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit'
-current-version: 60.45.4
+current-version: 60.48.15
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -781,6 +781,7 @@ exports:
                        '_$s10RealityKit15__SceneResourceCMn', '_$s10RealityKit15__SceneResourceCMo', 
                        '_$s10RealityKit15__SceneResourceCMu', '_$s10RealityKit15__SceneResourceCN', 
                        '_$s10RealityKit15__SceneResourceCfD', '_$s10RealityKit15__SceneResourceCfd', 
+                       '_$s10RealityKit15__VideoResourceC10__fromCoreyACXDAA10__AssetRefVFZ', 
                        '_$s10RealityKit15__VideoResourceC4load5named2inACSS_So8NSBundleCSgtKFZ', 
                        '_$s10RealityKit15__VideoResourceCAA0D0AAMc', '_$s10RealityKit15__VideoResourceCAA0D0AAWP', 
                        '_$s10RealityKit15__VideoResourceCMa', '_$s10RealityKit15__VideoResourceCMm', 

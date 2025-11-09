@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           41FCC3F4-747C-3F15-BD68-4E09A638A39A
+    value:           6C174006-8DA6-33AE-AC27-490650E3A962
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C7F4833C-FED7-379F-B6C1-E854D83132DD
+    value:           EE991DE9-78D5-39A8-80AE-BF363D688D0A
 install-name:    '/System/Library/PrivateFrameworks/FWAVC.framework/Versions/A/FWAVC'
 current-version: 46
 exports:

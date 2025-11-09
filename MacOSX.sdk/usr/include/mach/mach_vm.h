@@ -49,7 +49,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_vm_MSG_COUNT
-#define	mach_vm_MSG_COUNT	21
+#define	mach_vm_MSG_COUNT	22
 #endif	/* mach_vm_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -383,6 +383,27 @@ kern_return_t mach_vm_page_range_query
 	mach_vm_size_t size,
 	mach_vm_address_t dispositions,
 	mach_vm_size_t *dispositions_count
+);
+
+/* Routine mach_vm_remap_new */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_vm_remap_new
+(
+	vm_map_t target_task,
+	mach_vm_address_t *target_address,
+	mach_vm_size_t size,
+	mach_vm_offset_t mask,
+	int flags,
+	vm_map_read_t src_task,
+	mach_vm_address_t src_address,
+	boolean_t copy,
+	vm_prot_t *cur_protection,
+	vm_prot_t *max_protection,
+	vm_inherit_t inheritance
 );
 
 __END_DECLS
@@ -719,6 +740,30 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t src_task;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_vm_address_t target_address;
+		mach_vm_size_t size;
+		mach_vm_offset_t mask;
+		int flags;
+		mach_vm_address_t src_address;
+		boolean_t copy;
+		vm_prot_t cur_protection;
+		vm_prot_t max_protection;
+		vm_inherit_t inheritance;
+	} __Request__mach_vm_remap_new_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Request__mach_vm_subsystem__defined */
 
 /* union of all requests */
@@ -747,6 +792,7 @@ union __RequestUnion__mach_vm_subsystem {
 	__Request__mach_vm_purgable_control_t Request_mach_vm_purgable_control;
 	__Request__mach_vm_page_info_t Request_mach_vm_page_info;
 	__Request__mach_vm_page_range_query_t Request_mach_vm_page_range_query;
+	__Request__mach_vm_remap_new_t Request_mach_vm_remap_new;
 };
 #endif /* !__RequestUnion__mach_vm_subsystem__defined */
 /* typedefs for all replies */
@@ -1039,6 +1085,21 @@ union __RequestUnion__mach_vm_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_vm_address_t target_address;
+		vm_prot_t cur_protection;
+		vm_prot_t max_protection;
+	} __Reply__mach_vm_remap_new_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Reply__mach_vm_subsystem__defined */
 
 /* union of all replies */
@@ -1067,6 +1128,7 @@ union __ReplyUnion__mach_vm_subsystem {
 	__Reply__mach_vm_purgable_control_t Reply_mach_vm_purgable_control;
 	__Reply__mach_vm_page_info_t Reply_mach_vm_page_info;
 	__Reply__mach_vm_page_range_query_t Reply_mach_vm_page_range_query;
+	__Reply__mach_vm_remap_new_t Reply_mach_vm_remap_new;
 };
 #endif /* !__RequestUnion__mach_vm_subsystem__defined */
 
@@ -1092,7 +1154,8 @@ union __ReplyUnion__mach_vm_subsystem {
     { "_mach_make_memory_entry", 4817 },\
     { "mach_vm_purgable_control", 4818 },\
     { "mach_vm_page_info", 4819 },\
-    { "mach_vm_page_range_query", 4820 }
+    { "mach_vm_page_range_query", 4820 },\
+    { "mach_vm_remap_new", 4821 }
 #endif
 
 #ifdef __AfterMigUserHeader

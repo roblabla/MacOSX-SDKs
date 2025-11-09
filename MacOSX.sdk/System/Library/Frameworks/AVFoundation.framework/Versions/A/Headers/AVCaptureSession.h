@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     The notification object is the AVCaptureSession instance that encountered a runtime error. The userInfo dictionary contains an NSError for the key AVCaptureSessionErrorKey.
  */
-AVF_EXPORT NSString *const AVCaptureSessionRuntimeErrorNotification API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionRuntimeErrorNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureSessionErrorKey
@@ -33,7 +33,7 @@ AVF_EXPORT NSString *const AVCaptureSessionRuntimeErrorNotification API_AVAILABL
  @discussion
     AVCaptureSessionErrorKey may be found in the userInfo dictionary provided with an AVCaptureSessionRuntimeErrorNotification. The NSError associated with the notification gives greater detail on the nature of the error, and in some cases recovery suggestions.
  */
-AVF_EXPORT NSString *const AVCaptureSessionErrorKey API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionErrorKey API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureSessionDidStartRunningNotification
@@ -43,7 +43,7 @@ AVF_EXPORT NSString *const AVCaptureSessionErrorKey API_AVAILABLE(macos(10.7), i
  @discussion
     Clients may observe the AVCaptureSessionDidStartRunningNotification to know when an instance of AVCaptureSession starts running.
  */
-AVF_EXPORT NSString *const AVCaptureSessionDidStartRunningNotification API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionDidStartRunningNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureSessionDidStopRunningNotification
@@ -53,7 +53,7 @@ AVF_EXPORT NSString *const AVCaptureSessionDidStartRunningNotification API_AVAIL
  @discussion
     Clients may observe the AVCaptureSessionDidStopRunningNotification to know when an instance of AVCaptureSession stops running. An AVCaptureSession instance may stop running automatically due to external system conditions, such as the device going to sleep, or being locked by a user.
  */
-AVF_EXPORT NSString *const AVCaptureSessionDidStopRunningNotification API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionDidStopRunningNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureSessionWasInterruptedNotification
@@ -65,7 +65,7 @@ AVF_EXPORT NSString *const AVCaptureSessionDidStopRunningNotification API_AVAILA
  
     Beginning in iOS 9.0, the AVCaptureSessionWasInterruptedNotification userInfo dictionary contains an AVCaptureSessionInterruptionReasonKey indicating the reason for the interruption.
  */
-AVF_EXPORT NSString *const AVCaptureSessionWasInterruptedNotification API_AVAILABLE(macos(10.14), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionWasInterruptedNotification API_AVAILABLE(macos(10.14), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
 /*!
@@ -89,8 +89,8 @@ typedef NS_ENUM(NSInteger, AVCaptureSessionInterruptionReason) {
     AVCaptureSessionInterruptionReasonAudioDeviceInUseByAnotherClient                   = 2,
     AVCaptureSessionInterruptionReasonVideoDeviceInUseByAnotherClient                   = 3,
     AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableWithMultipleForegroundApps = 4,
-    AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableDueToSystemPressure API_AVAILABLE(ios(11.1)) = 5,
-} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+    AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableDueToSystemPressure API_AVAILABLE(ios(11.1), macCatalyst(14.0)) = 5,
+} API_AVAILABLE(ios(9.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 
 /*!
@@ -101,7 +101,7 @@ typedef NS_ENUM(NSInteger, AVCaptureSessionInterruptionReason) {
  @discussion
     AVCaptureSessionInterruptionReasonKey may be found in the userInfo dictionary provided with an AVCaptureSessionWasInterruptedNotification. The NSNumber associated with the notification tells you why the interruption occurred.
  */
-AVF_EXPORT NSString *const AVCaptureSessionInterruptionReasonKey API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionInterruptionReasonKey API_AVAILABLE(ios(9.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureSessionInterruptionSystemPressureStateKey
@@ -111,7 +111,7 @@ AVF_EXPORT NSString *const AVCaptureSessionInterruptionReasonKey API_AVAILABLE(i
  @discussion
     This key is only present when the AVCaptureSessionInterruptionReasonKey equals AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableDueToSystemPressure.
  */
-AVF_EXPORT NSString *const AVCaptureSessionInterruptionSystemPressureStateKey API_AVAILABLE(ios(11.1)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionInterruptionSystemPressureStateKey API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureSessionInterruptionEndedNotification
@@ -121,7 +121,7 @@ AVF_EXPORT NSString *const AVCaptureSessionInterruptionSystemPressureStateKey AP
  @discussion
     Clients may observe the AVCaptureSessionInterruptionEndedNotification to know when an instance of AVCaptureSession ceases to be interrupted, for example, when a phone call ends, and hardware resources needed to run the session are again available. When appropriate, the AVCaptureSession instance that was previously stopped in response to an interruption will automatically restart once the interruption ends.
  */
-AVF_EXPORT NSString *const AVCaptureSessionInterruptionEndedNotification API_AVAILABLE(macos(10.14), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureSessionInterruptionEndedNotification API_AVAILABLE(macos(10.14), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @enum AVCaptureVideoOrientation
@@ -142,7 +142,7 @@ typedef NS_ENUM(NSInteger, AVCaptureVideoOrientation) {
     AVCaptureVideoOrientationPortraitUpsideDown = 2,
     AVCaptureVideoOrientationLandscapeRight     = 3,
     AVCaptureVideoOrientationLandscapeLeft      = 4,
-} API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 #pragma mark - AVCaptureSession
 
@@ -159,7 +159,7 @@ typedef NS_ENUM(NSInteger, AVCaptureVideoOrientation) {
  @discussion
     To perform a real-time capture, a client may instantiate AVCaptureSession and add appropriate AVCaptureInputs, such as AVCaptureDeviceInput, and outputs, such as AVCaptureMovieFileOutput. [AVCaptureSession startRunning] starts the flow of data from the inputs to the outputs, and [AVCaptureSession stopRunning] stops the flow. A client may set the sessionPreset property to customize the quality level or bitrate of the output.
  */
-API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureSession : NSObject
 {
 @private
@@ -304,7 +304,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     -addInputWithNoConnections: may be called while the session is running. The -addInput: method is the preferred method for adding an input to an AVCaptureSession. -addInputWithNoConnections: may be called if you need fine-grained control over which inputs are connected to which outputs.
  */
-- (void)addInputWithNoConnections:(AVCaptureInput *)input API_AVAILABLE(ios(8.0));
+- (void)addInputWithNoConnections:(AVCaptureInput *)input API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method addOutputWithNoConnections:
@@ -317,7 +317,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     -addOutputWithNoConnections: may be called while the session is running. The -addOutput: method is the preferred method for adding an output to an AVCaptureSession. -addOutputWithNoConnections: may be called if you need fine-grained control over which inputs are connected to which outputs.
  */
-- (void)addOutputWithNoConnections:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0));
+- (void)addOutputWithNoConnections:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property connections
@@ -327,7 +327,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     The value of this property is an NSArray of AVCaptureConnections currently added to the receiver. Connections are formed implicitly by the receiver when a client calls -addInput: or -addOutput:. Connections are formed explicitly when a client calls -addConnection:.
  */
-@property(nonatomic, readonly) NSArray<AVCaptureConnection *> *connections API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, readonly) NSArray<AVCaptureConnection *> *connections API_AVAILABLE(macos(10.15), ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @method canAddConnection:
@@ -340,7 +340,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     An AVCaptureConnection instance can only be added to a session using -addConnection: if canAddConnection: returns YES. When using -addInput: or -addOutput:, connections are formed automatically between all compatible inputs and outputs. Manually adding connections is only necessary when adding an input or output with no connections.
  */
-- (BOOL)canAddConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0));
+- (BOOL)canAddConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method addConnection:
@@ -353,7 +353,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     An AVCaptureConnection instance can only be added to a session using -addConnection: if canAddConnection: returns YES. When using -addInput: or -addOutput:, connections are formed automatically between all compatible inputs and outputs. Manually adding connections is only necessary when adding an input or output with no connections. -addConnection: may be called while the session is running.
  */
-- (void)addConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0));
+- (void)addConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method removeConnection:
@@ -366,7 +366,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     -removeConnection: may be called while the session is running.
  */
-- (void)removeConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0));
+- (void)removeConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method beginConfiguration
@@ -406,7 +406,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     The value of this property is a BOOL indicating whether the receiver is currently being interrupted, such as by a phone call or alarm. Clients can key value observe the value of this property to be notified when the session ceases to be interrupted and again has access to needed hardware resources.
  */
-@property(nonatomic, readonly, getter=isInterrupted) BOOL interrupted API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isInterrupted) BOOL interrupted API_AVAILABLE(ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property usesApplicationAudioSession
@@ -416,7 +416,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     The value of this property is a BOOL indicating whether the receiver is currently using the application's AVAudioSession (see AVAudioSession.h). Prior to iOS 7, AVCaptureSession uses its own audio session, which can lead to unwanted interruptions when interacting with the application's audio session. In applications linked on or after iOS 7, AVCaptureSession shares the application's audio session, allowing for simultaneous play back and recording without unwanted interruptions. Clients desiring the pre-iOS 7 behavior may opt out by setting usesApplicationAudioSession to NO. The default value is YES.
  */
-@property(nonatomic) BOOL usesApplicationAudioSession API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
+@property(nonatomic) BOOL usesApplicationAudioSession API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property automaticallyConfiguresApplicationAudioSession
@@ -426,7 +426,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     The value of this property is a BOOL indicating whether the receiver should configure the application's audio session when needed for optimal recording. When set to YES, the receiver ensures the application's audio session is set to the PlayAndRecord category, and picks an appropriate microphone and polar pattern to match the video camera being used. When set to NO, and -usesApplicationAudioSession is set to YES, the receiver will use the application's audio session, but will not change any of its properties. If the session is not set up correctly for input, audio recording may fail. The default value is YES.
  */
-@property(nonatomic) BOOL automaticallyConfiguresApplicationAudioSession API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
+@property(nonatomic) BOOL automaticallyConfiguresApplicationAudioSession API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property automaticallyConfiguresCaptureDeviceForWideColor
@@ -436,7 +436,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     The default value is YES. By default, the receiver automatically adjusts its source video AVCaptureDevice's activeFormat and activeColorSpace properties based on the supportedColorSpaces of the device's formats and the current AVCaptureSession topology. Wide color spaces are preferred over sRGB if an AVCapturePhotoOutput is present in the session. If you wish to set AVCaptureDevice's activeColorSpace manually, and prevent the AVCaptureSession from undoing your work, you must set automaticallyConfiguresCaptureDeviceForWideColor to NO. If the receiver's sessionPreset is set to AVCaptureSessionPresetInputPriority, the session will not alter the capture device's activeFormat, but might still alter its activeColorSpace.
  */
-@property(nonatomic) BOOL automaticallyConfiguresCaptureDeviceForWideColor API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos);
+@property(nonatomic) BOOL automaticallyConfiguresCaptureDeviceForWideColor API_AVAILABLE(ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @method startRunning
@@ -475,7 +475,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  
     This property is key-value observable.
  */
-@property(nonatomic, readonly, nullable) __attribute__((NSObject)) CMClockRef masterClock API_AVAILABLE(macos(10.9), ios(7.0));
+@property(nonatomic, readonly, nullable) __attribute__((NSObject)) CMClockRef masterClock API_AVAILABLE(macos(10.9), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -493,7 +493,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  
     AVCaptureMultiCamSession supports dynamic enabling and disabling of individual camera inputs without interrupting preview. In order to stop an individual camera input, set the enabled property on all of its connections or connected ports to NO. When the last active connection or port is disabled, the source camera stops streaming to save power and bandwidth. Other inputs streaming data through the session are unaffected.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos)
 @interface AVCaptureMultiCamSession : AVCaptureSession
 
 /*!
@@ -554,7 +554,7 @@ typedef NS_ENUM(NSInteger, AVVideoFieldMode) {
     AVVideoFieldModeTopOnly     = 1,
     AVVideoFieldModeBottomOnly  = 2,
     AVVideoFieldModeDeinterlace = 3,
-} API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
+} API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 
 #pragma mark - AVCaptureConnection
@@ -576,7 +576,7 @@ typedef NS_ENUM(NSInteger, AVVideoFieldMode) {
  
     Connections involving video expose video specific properties, such as videoMirrored and videoOrientation.
  */
-API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureConnection : NSObject
 {
 @private
@@ -600,7 +600,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using -addInput: or -addOutput:, connections are formed between all compatible inputs and outputs automatically. You do not need to manually create and add connections to the session unless you use the primitive -addInputWithNoConnections: or -addOutputWithNoConnections: methods.
  */
-+ (instancetype)connectionWithInputPorts:(NSArray<AVCaptureInputPort *> *)ports output:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0));
++ (instancetype)connectionWithInputPorts:(NSArray<AVCaptureInputPort *> *)ports output:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method connectionWithInputPort:videoPreviewLayer:
@@ -617,7 +617,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using AVCaptureVideoPreviewLayer's -initWithSession: or -setSession:, a connection is formed between the first compatible input port and the video preview layer automatically. You do not need to manually create and add connections to the session unless you use AVCaptureVideoPreviewLayer's primitive -initWithSessionWithNoConnection: or -setSessionWithNoConnection: methods.
  */
-+ (instancetype)connectionWithInputPort:(AVCaptureInputPort *)port videoPreviewLayer:(AVCaptureVideoPreviewLayer *)layer API_AVAILABLE(ios(8.0));
++ (instancetype)connectionWithInputPort:(AVCaptureInputPort *)port videoPreviewLayer:(AVCaptureVideoPreviewLayer *)layer API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method initWithInputPorts:output:
@@ -634,7 +634,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using -addInput: or -addOutput:, connections are formed between all compatible inputs and outputs automatically. You do not need to manually create and add connections to the session unless you use the primitive -addInputWithNoConnections: or -addOutputWithNoConnections: methods.
  */
-- (instancetype)initWithInputPorts:(NSArray<AVCaptureInputPort *> *)ports output:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0));
+- (instancetype)initWithInputPorts:(NSArray<AVCaptureInputPort *> *)ports output:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method initWithInputPort:videoPreviewLayer:
@@ -652,7 +652,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using AVCaptureVideoPreviewLayer's -initWithSession: or -setSession:, a connection is formed between the first compatible input port and the video preview layer automatically. You do not need to manually create and add connections to the session unless you use AVCaptureVideoPreviewLayer's primitive -initWithSessionWithNoConnection: or -setSessionWithNoConnection: methods.
  */
-- (instancetype)initWithInputPort:(AVCaptureInputPort *)port videoPreviewLayer:(AVCaptureVideoPreviewLayer *)layer API_AVAILABLE(ios(8.0));
+- (instancetype)initWithInputPort:(AVCaptureInputPort *)port videoPreviewLayer:(AVCaptureVideoPreviewLayer *)layer API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property inputPorts
@@ -682,7 +682,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     An AVCaptureConnection may involve one AVCaptureInputPort producing data to an AVCaptureVideoPreviewLayer object. This property is read-only. An AVCaptureConnection's videoPreviewLayer remains static for the life of the object. Note that a connection can either be to an output or a video preview layer, but never to both.
  */
-@property(nonatomic, readonly, nullable) AVCaptureVideoPreviewLayer *videoPreviewLayer API_AVAILABLE(ios(6.0));
+@property(nonatomic, readonly, nullable) AVCaptureVideoPreviewLayer *videoPreviewLayer API_AVAILABLE(ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property enabled
@@ -745,7 +745,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     For some session configurations, video data flowing through the connection will be mirrored by default. When the value of this property is YES, the value of @"videoMirrored" may change depending on the configuration of the session, for example after switching to a different AVCaptureDeviceInput. The default value is YES.
  */
-@property(nonatomic) BOOL automaticallyAdjustsVideoMirroring API_AVAILABLE(ios(6.0));
+@property(nonatomic) BOOL automaticallyAdjustsVideoMirroring API_AVAILABLE(ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property supportsVideoOrientation
@@ -775,7 +775,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. In such connections, the videoFieldMode property may only be set if -isVideoFieldModeSupported returns YES.
  */
-@property(nonatomic, readonly, getter=isVideoFieldModeSupported) BOOL supportsVideoFieldMode API_UNAVAILABLE(ios, watchos, tvos);
+@property(nonatomic, readonly, getter=isVideoFieldModeSupported) BOOL supportsVideoFieldMode API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 /*!
  @property videoFieldMode
@@ -785,7 +785,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. If -isVideoFieldModeSupported returns YES, videoFieldMode may be set to affect interlaced video content flowing through the connection.
  */
-@property(nonatomic) AVVideoFieldMode videoFieldMode API_UNAVAILABLE(ios, watchos, tvos);
+@property(nonatomic) AVVideoFieldMode videoFieldMode API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 /*!
  @property supportsVideoMinFrameDuration
@@ -797,7 +797,7 @@ AV_INIT_UNAVAILABLE
  
     This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On Mac OS X, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
  */
-@property(nonatomic, readonly, getter=isVideoMinFrameDurationSupported) BOOL supportsVideoMinFrameDuration API_DEPRECATED("Use AVCaptureDevice's activeFormat.videoSupportedFrameRateRanges instead.", ios(5.0, 7.0));
+@property(nonatomic, readonly, getter=isVideoMinFrameDurationSupported) BOOL supportsVideoMinFrameDuration API_DEPRECATED("Use AVCaptureDevice's activeFormat.videoSupportedFrameRateRanges instead.", ios(5.0, 7.0), macCatalyst(14.0, 14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property videoMinFrameDuration
@@ -809,7 +809,7 @@ AV_INIT_UNAVAILABLE
  
     This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On Mac OS X, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
  */
-@property(nonatomic) CMTime videoMinFrameDuration API_DEPRECATED("Use AVCaptureDevice's activeVideoMinFrameDuration instead.", ios(5.0, 7.0));
+@property(nonatomic) CMTime videoMinFrameDuration API_DEPRECATED("Use AVCaptureDevice's activeVideoMinFrameDuration instead.", ios(5.0, 7.0), macCatalyst(14.0, 14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property supportsVideoMaxFrameDuration
@@ -821,7 +821,7 @@ AV_INIT_UNAVAILABLE
  
     This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On Mac OS X, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
  */
-@property(nonatomic, readonly, getter=isVideoMaxFrameDurationSupported) BOOL supportsVideoMaxFrameDuration API_AVAILABLE(macos(10.9)) API_DEPRECATED("Use AVCaptureDevice's activeFormat.videoSupportedFrameRateRanges instead.", ios(5.0, 7.0));
+@property(nonatomic, readonly, getter=isVideoMaxFrameDurationSupported) BOOL supportsVideoMaxFrameDuration API_AVAILABLE(macos(10.9)) API_DEPRECATED("Use AVCaptureDevice's activeFormat.videoSupportedFrameRateRanges instead.", ios(5.0, 7.0), macCatalyst(14.0, 14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property videoMaxFrameDuration
@@ -833,7 +833,7 @@ AV_INIT_UNAVAILABLE
  
     This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On Mac OS X, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
  */
-@property(nonatomic) CMTime videoMaxFrameDuration API_AVAILABLE(macos(10.9)) API_DEPRECATED("Use AVCaptureDevice's activeVideoMaxFrameDuration instead.", ios(5.0, 7.0));
+@property(nonatomic) CMTime videoMaxFrameDuration API_AVAILABLE(macos(10.9)) API_DEPRECATED("Use AVCaptureDevice's activeVideoMaxFrameDuration instead.", ios(5.0, 7.0), macCatalyst(14.0, 14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property videoMaxScaleAndCropFactor
@@ -843,7 +843,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. In such connections, the videoMaxScaleAndCropFactor property specifies the maximum CGFloat value that may be used when setting the videoScaleAndCropFactor property.
  */
-@property(nonatomic, readonly) CGFloat videoMaxScaleAndCropFactor API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) CGFloat videoMaxScaleAndCropFactor API_AVAILABLE(ios(5.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property videoScaleAndCropFactor
@@ -855,7 +855,7 @@ AV_INIT_UNAVAILABLE
  
  @see -[AVCaptureDevice videoZoomFactor]
  */
-@property(nonatomic) CGFloat videoScaleAndCropFactor API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos);
+@property(nonatomic) CGFloat videoScaleAndCropFactor API_AVAILABLE(ios(5.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property preferredVideoStabilizationMode
@@ -865,7 +865,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. On devices where the video stabilization feature is supported, only a subset of available source formats may be available for stabilization. By setting the preferredVideoStabilizationMode property to a value other than AVCaptureVideoStabilizationModeOff, video flowing through the receiver is stabilized when the mode is available. Enabling video stabilization introduces additional latency into the video capture pipeline and may consume more system memory depending on the stabilization mode and format. If the preferred stabilization mode isn't available, the activeVideoStabilizationMode will be set to AVCaptureVideoStabilizationModeOff. Clients may key-value observe the activeVideoStabilizationMode property to know which stabilization mode is in use or when it is off. The default value is AVCaptureVideoStabilizationModeOff. When setting this property to AVCaptureVideoStabilizationModeAuto, an appropriate stabilization mode will be chosen based on the format and frame rate. For apps linked before iOS 6.0, the default value is AVCaptureVideoStabilizationModeStandard for a video connection attached to an AVCaptureMovieFileOutput instance. For apps linked on or after iOS 6.0, the default value is always AVCaptureVideoStabilizationModeOff. Setting a video stabilization mode using this property may change the value of enablesVideoStabilizationWhenAvailable.
  */
-@property(nonatomic) AVCaptureVideoStabilizationMode preferredVideoStabilizationMode API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic) AVCaptureVideoStabilizationMode preferredVideoStabilizationMode API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property activeVideoStabilizationMode
@@ -875,7 +875,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. On devices where the video stabilization feature is supported, only a subset of available source formats may be stabilized. The activeVideoStabilizationMode property returns a value other than AVCaptureVideoStabilizationModeOff if video stabilization is currently in use. This property never returns AVCaptureVideoStabilizationModeAuto. This property is key-value observable.
  */
-@property(nonatomic, readonly) AVCaptureVideoStabilizationMode activeVideoStabilizationMode API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) AVCaptureVideoStabilizationMode activeVideoStabilizationMode API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property supportsVideoStabilization
@@ -885,7 +885,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. In such connections, the -enablesVideoStabilizationWhenAvailable property may only be set if -supportsVideoStabilization returns YES. This property returns YES if the connection's input device has one or more formats that support video stabilization and the connection's output supports video stabilization. See [AVCaptureDeviceFormat isVideoStabilizationModeSupported:] to check which video stabilization modes are supported by the active device format.
  */
-@property(nonatomic, readonly, getter=isVideoStabilizationSupported) BOOL supportsVideoStabilization API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isVideoStabilizationSupported) BOOL supportsVideoStabilization API_AVAILABLE(ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property videoStabilizationEnabled
@@ -895,7 +895,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. On devices where the video stabilization feature is supported, only a subset of available source formats and resolutions may be available for stabilization. The videoStabilizationEnabled property returns YES if video stabilization is currently in use. This property is key-value observable. This property is deprecated. Use activeVideoStabilizationMode instead.
  */
-@property(nonatomic, readonly, getter=isVideoStabilizationEnabled) BOOL videoStabilizationEnabled API_DEPRECATED("Use activeVideoStabilizationMode instead.", ios(6.0, 8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isVideoStabilizationEnabled) BOOL videoStabilizationEnabled API_DEPRECATED("Use activeVideoStabilizationMode instead.", ios(6.0, 8.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @property enablesVideoStabilizationWhenAvailable
@@ -905,7 +905,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. On devices where the video stabilization feature is supported, only a subset of available source formats and resolutions may be available for stabilization. By setting the enablesVideoStabilizationWhenAvailable property to YES, video flowing through the receiver is stabilized when available. Enabling video stabilization may introduce additional latency into the video capture pipeline. Clients may key-value observe the videoStabilizationEnabled property to know when stabilization is in use or not. The default value is NO. For apps linked before iOS 6.0, the default value is YES for a video connection attached to an AVCaptureMovieFileOutput instance. For apps linked on or after iOS 6.0, the default value is always NO. This property is deprecated. Use preferredVideoStabilizationMode instead.
  */
-@property(nonatomic) BOOL enablesVideoStabilizationWhenAvailable API_DEPRECATED("Use preferredVideoStabilizationMode instead.", ios(6.0, 8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic) BOOL enablesVideoStabilizationWhenAvailable API_DEPRECATED("Use preferredVideoStabilizationMode instead.", ios(6.0, 8.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @property cameraIntrinsicMatrixDeliverySupported
@@ -915,7 +915,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. For such connections, the cameraIntrinsicMatrixDeliveryEnabled property may only be set to YES if -isCameraIntrinsicMatrixDeliverySupported returns YES. This property returns YES if both the connection's input device format and the connection's output support camera intrinsic matrix delivery. Only the AVCaptureVideoDataOutput's connection supports this property. Note that if video stabilization is enabled (preferredVideoStabilizationMode is set to something other than AVCaptureVideoStabilizationModeOff), camera intrinsic matrix delivery is not supported. Starting in iOS 14.3, camera intrinsics are delivered with video buffers on which geometric distortion correction is applied.
  */
-@property(nonatomic, readonly, getter=isCameraIntrinsicMatrixDeliverySupported) BOOL cameraIntrinsicMatrixDeliverySupported API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isCameraIntrinsicMatrixDeliverySupported) BOOL cameraIntrinsicMatrixDeliverySupported API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property cameraIntrinsicMatrixDeliveryEnabled
@@ -925,7 +925,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. Refer to property cameraIntrinsicMatrixDeliverySupported before setting this property. When this property is set to YES, the receiver's output will add the kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix sample buffer attachment to all vended sample buffers. This property must be set before the session starts running.
  */
-@property(nonatomic, getter=isCameraIntrinsicMatrixDeliveryEnabled) BOOL cameraIntrinsicMatrixDeliveryEnabled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, getter=isCameraIntrinsicMatrixDeliveryEnabled) BOOL cameraIntrinsicMatrixDeliveryEnabled API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 @end
 
@@ -942,7 +942,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     An AVCaptureConnection from an input producing audio to an output receiving audio exposes an array of AVCaptureAudioChannel objects, one for each channel of audio available. Iterating through these audio channel objects, a client may poll for audio levels. Instances of AVCaptureAudioChannel cannot be created directly.
  */
-API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureAudioChannel : NSObject
 {
 @private
@@ -979,7 +979,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The volume property indicates the current volume or gain of the receiver as a floating point value between 0.0 -> 1.0. If you desire to boost the gain in software, you may specify a a value greater than 1.0.
  */
-@property(nonatomic) float volume API_UNAVAILABLE(ios, watchos, tvos);
+@property(nonatomic) float volume API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 /*!
  @property enabled
@@ -989,7 +989,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     By default, all AVCaptureAudioChannel objects exposed by a connection are enabled. You may set enabled to NO to stop the flow of data for a particular AVCaptureAudioChannel.
  */
-@property(nonatomic, getter=isEnabled) BOOL enabled API_UNAVAILABLE(ios, watchos, tvos);
+@property(nonatomic, getter=isEnabled) BOOL enabled API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 @end
 

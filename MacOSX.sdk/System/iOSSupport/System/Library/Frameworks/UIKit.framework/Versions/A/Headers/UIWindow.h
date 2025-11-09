@@ -62,7 +62,7 @@ UIKIT_EXTERN NSNotificationName const UIWindowDidBecomeKeyNotification;     // n
 UIKIT_EXTERN NSNotificationName const UIWindowDidResignKeyNotification;     // nil
 
 // Each notification includes a nil object and a userInfo dictionary containing the
-// begining and ending keyboard frame in screen coordinates. Use the various UIView and
+// beginning and ending keyboard frame in screen coordinates. Use the various UIView and
 // UIWindow convertRect facilities to get the frame in the desired coordinate system.
 // Animation key/value pairs are only available for the "will" family of notification.
 UIKIT_EXTERN NSNotificationName const UIKeyboardWillShowNotification API_UNAVAILABLE(tvos);

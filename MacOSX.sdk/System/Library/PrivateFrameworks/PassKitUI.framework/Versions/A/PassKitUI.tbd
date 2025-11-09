@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6D4C8F76-A1BC-3D2A-939D-C51B38600EA7
+    value:           4AB83C5B-29D4-3D3F-AE67-41731AD5FBD6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           93678900-5132-372E-BD86-D896382EB885
+    value:           52E6E487-F023-3023-A954-1C5F1D390983
 install-name:    '/System/Library/PrivateFrameworks/PassKitUI.framework/Versions/A/PassKitUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

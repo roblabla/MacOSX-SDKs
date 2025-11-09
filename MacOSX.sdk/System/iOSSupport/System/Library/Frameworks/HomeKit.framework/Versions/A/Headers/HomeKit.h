@@ -30,7 +30,6 @@
 #import <HomeKit/HMCharacteristicEvent.h>
 #import <HomeKit/HMLocationEvent.h>
 #import <HomeKit/HMCalendarEvent.h>
-#import <HomeKit/HMCalendarEvent.h>
 
 #import <HomeKit/HMEventTrigger.h>
 #import <HomeKit/HMError.h>
@@ -61,4 +60,3 @@
 
 #import <HomeKit/HMCameraSettingsControl.h>
 #import <HomeKit/HMCameraAudioControl.h>
-

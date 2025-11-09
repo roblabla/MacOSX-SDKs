@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           85DC468B-4497-3378-85AF-D17547A3A95C
+    value:           AF9492CB-1517-3462-A301-3900963CFED6
   - target:          x86_64-maccatalyst
-    value:           85DC468B-4497-3378-85AF-D17547A3A95C
+    value:           AF9492CB-1517-3462-A301-3900963CFED6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A83D5628-D07D-3A7A-8A3D-4DB7BD56A6B3
+    value:           D87D42C9-9E08-3AE1-87DF-34AD26B6DC00
   - target:          arm64e-maccatalyst
-    value:           A83D5628-D07D-3A7A-8A3D-4DB7BD56A6B3
+    value:           D87D42C9-9E08-3AE1-87DF-34AD26B6DC00
 install-name:    '/usr/lib/libnetworkextension.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ne_filter_allocate_globals, _ne_filter_copy_connection, _ne_filter_crypto_generate_client_key, 
                        _ne_filter_crypto_init_client, _ne_filter_crypto_init_master, 

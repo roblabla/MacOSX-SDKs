@@ -339,6 +339,73 @@ enum {
 	VMX_REASON_TPAUSE					= 68
 };
 
+enum {
+	HV_MSR_IA32_TSC                         = 0x00000010,
+
+	HV_MSR_IA32_SPEC_CTRL                   = 0x00000048,
+	HV_MSR_IA32_PRED_CMD                    = 0x00000049,
+
+	HV_MSR_IA32_PMC0                        = 0x000000c1,
+	HV_MSR_IA32_PMC7                        = HV_MSR_IA32_PMC0 + 7,
+
+	HV_MSR_IA32_ARCH_CAPABILITIES           = 0x0000010a,
+	HV_MSR_IA32_FLUSH_CMD                   = 0x0000010b,
+
+	HV_MSR_IA32_SYSENTER_CS                 = 0x00000174,
+	HV_MSR_IA32_SYSENTER_ESP                = 0x00000175,
+	HV_MSR_IA32_SYSENTER_EIP                = 0x00000176,
+
+	HV_MSR_IA32_PERFEVNTSEL0                = 0x00000186,
+	HV_MSR_IA32_PERFEVNTSEL7                = HV_MSR_IA32_PERFEVNTSEL0 + 7,
+
+	HV_MSR_LBR_SELECT                       = 0x000001c8,
+	HV_MSR_LASTBRANCH_TOS                   = 0x000001c9,
+
+	HV_MSR_LASTINT_FROM_IP                  = 0x000001dd,
+	HV_MSR_LASTINT_TO_IP                    = 0x000001de,
+
+	HV_MSR_IA32_DEBUGCTL                    = 0x000001d9,
+
+	HV_MSR_IA32_FIXED_CTR0                  = 0x00000309,
+	HV_MSR_IA32_FIXED_CTR1                  = 0x0000030a,
+	HV_MSR_IA32_FIXED_CTR2                  = 0x0000030b,
+	HV_MSR_IA32_FIXED_CTR3                  = 0x0000030c,	// Table 18-2
+
+	HV_MSR_PERF_METRICS                     = 0x00000329,
+
+	HV_MSR_IA32_FIXED_CTR_CTRL              = 0x0000038d,
+
+	HV_MSR_IA32_PERF_GLOBAL_STATUS          = 0x0000038e,
+	HV_MSR_IA32_PERF_GLOBAL_CTRL            = 0x0000038f,
+	HV_MSR_IA32_PERF_GLOBAL_STATUS_RESET    = 0x00000390,
+	HV_MSR_IA32_PERF_GLOBAL_STATUS_SET      = 0x00000391,
+	HV_MSR_IA32_PERF_GLOBAL_INUSE           = 0x00000392,
+
+	HV_MSR_IA32_A_PMC0                      = 0x000004c1,
+	HV_MSR_IA32_A_PMC7                      = HV_MSR_IA32_A_PMC0 + 7,
+
+	HV_MSR_LASTBRANCH_0_FROM_IP             = 0x00000680,
+	HV_MSR_LASTBRANCH_31_FROM_IP            = HV_MSR_LASTBRANCH_0_FROM_IP + 31,
+
+	HV_MSR_LASTBRANCH_0_TO_IP               = 0x000006c0,
+	HV_MSR_LASTBRANCH_31_TO_IP              = HV_MSR_LASTBRANCH_0_TO_IP + 31,
+
+	HV_MSR_IA32_XSS                         = 0x00000da0,
+
+	HV_MSR_LASTBRANCH_INFO_0                = 0x00000dc0,
+	HV_MSR_LASTBRANCH_INFO_31               = HV_MSR_LASTBRANCH_INFO_0 + 31,
+
+	HV_MSR_IA32_EFER                        = 0xc0000080,
+	HV_MSR_IA32_STAR                        = 0xc0000081,
+	HV_MSR_IA32_LSTAR                       = 0xc0000082,
+	HV_MSR_IA32_CSTAR                       = 0xc0000083,
+	HV_MSR_IA32_FMASK                       = 0xc0000084,
+	HV_MSR_IA32_FS_BASE                     = 0xc0000100,
+	HV_MSR_IA32_GS_BASE                     = 0xc0000101,
+	HV_MSR_IA32_KERNEL_GS_BASE              = 0xc0000102,
+	HV_MSR_IA32_TSC_AUX                     = 0xc0000103,
+};
+
 // See: "Format of the IDT-Vectoring Information Field"
 
 enum {

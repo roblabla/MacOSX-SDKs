@@ -51,10 +51,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) @interface UIDocument
 - (instancetype)initWithURL:(NSURL *)url inMode:(UIDocumentPickerMode)mode NS_DESIGNATED_INITIALIZER API_DEPRECATED_WITH_REPLACEMENT("use initForExportingURLs:asCopy: or initForExportingURLs: instead", ios(8.0, 14.0)) API_UNAVAILABLE(tvos);
 
 // Initializes the picker for exporting local files to an external location. The valid modes are Export and Move. The new locations will be returned using `didPickDocumentAtURLs:`.
-- (instancetype)initWithURLs:(NSArray <NSURL *> *)urls inMode:(UIDocumentPickerMode)mode NS_DESIGNATED_INITIALIZER API_DEPRECATED_WITH_REPLACEMENT("use initForExportinitForExportingURLsingURLs:asCopy: or initForExportingURLs: instead", ios(11.0, 14.0)) API_UNAVAILABLE(tvos);
+- (instancetype)initWithURLs:(NSArray <NSURL *> *)urls inMode:(UIDocumentPickerMode)mode NS_DESIGNATED_INITIALIZER API_DEPRECATED_WITH_REPLACEMENT("use initForExportingURLs:asCopy: or initForExportingURLs: instead", ios(11.0, 14.0)) API_UNAVAILABLE(tvos);
    
 /// Initializes the picker for exporting local documents to an external location. The new locations will be returned using `didPickDocumentAtURLs:`.
-/// @param asCopy if true, a copy will be exported to the destination, otherwise the original document will be moved to the destination. For performance reasons and to avoid copies, we recommand you set `asCopy` to false.
+/// @param asCopy if true, a copy will be exported to the destination, otherwise the original document will be moved to the destination. For performance reasons and to avoid copies, we recommend you set `asCopy` to false.
 - (instancetype)initForExportingURLs:(NSArray <NSURL *> *)urls asCopy:(BOOL)asCopy NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /// Initializes the picker for exporting local documents to an external location. The new locations will be returned using `didPickDocumentAtURLs:`. The original document will be moved to the destination.

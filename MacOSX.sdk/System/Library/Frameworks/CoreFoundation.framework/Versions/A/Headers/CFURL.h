@@ -1167,6 +1167,10 @@ CF_EXPORT
 const CFStringRef kCFURLUbiquitousItemUploadingErrorKey API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
     /* returns the error when uploading the item to iCloud failed. See the NSUbiquitousFile section in FoundationErrors.h. (Read-only, value type CFError) */
 
+CF_EXPORT
+const CFStringRef kCFURLUbiquitousItemIsExcludedFromSyncKey API_AVAILABLE(macos(11.3), ios(14.5), watchos(7.4), tvos(14.5));
+    /* the item is excluded from sync, which means it is locally on disk but won't be available on the server. An excluded item is no longer ubiquitous. */
+
 /* The values returned for kCFURLUbiquitousItemDownloadingStatusKey
  */
 CF_EXPORT

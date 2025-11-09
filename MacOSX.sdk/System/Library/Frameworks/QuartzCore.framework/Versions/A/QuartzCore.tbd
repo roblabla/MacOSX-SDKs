@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D59138DC-10CD-3DF8-9F04-CCDB6102C370
+    value:           AA035436-1854-3B86-8F14-C0D75C080314
   - target:          x86_64-maccatalyst
-    value:           D59138DC-10CD-3DF8-9F04-CCDB6102C370
+    value:           AA035436-1854-3B86-8F14-C0D75C080314
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0FB3C46F-6DDF-3FDD-BF81-BF62A7553659
+    value:           8364D6C6-A9A2-3D53-99FA-AC6A9435FDDA
   - target:          arm64e-maccatalyst
-    value:           0FB3C46F-6DDF-3FDD-BF81-BF62A7553659
+    value:           8364D6C6-A9A2-3D53-99FA-AC6A9435FDDA
 install-name:    '/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore'
 current-version: 1.11
 compatibility-version: 1.2
@@ -25,7 +25,7 @@ reexported-libraries:
                        '/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo', 
                        '/usr/lib/libobjc.A.dylib' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CAAtomGetString, _CABackingStoreBeginUpdate, _CABackingStoreCollect, 
                        _CABackingStoreCollectBlocking, _CABackingStoreCopyCGImage, 
@@ -201,28 +201,29 @@ exports:
                        _CARenderCGLSetScissorOffset, _CARenderCGNew, _CARenderCGPurge, 
                        _CARenderCGRender, _CARenderCGSetFeatureFlags, _CARenderClientGetArchivedLayerTree, 
                        _CARenderCollect, _CARenderContextById, _CARenderContextCanZombify, 
-                       _CARenderContextCopyBoundsRegion, _CARenderContextCopyOpaqueRegion, 
-                       _CARenderContextCopyPayload, _CARenderContextDestroy, _CARenderContextGetBeginTime, 
-                       _CARenderContextGetChangedSeed, _CARenderContextGetColorspace, 
-                       _CARenderContextGetCommitSeed, _CARenderContextGetDisplayInfo, 
-                       _CARenderContextGetEventMask, _CARenderContextGetGPURegistryID, 
-                       _CARenderContextGetGeometrySeed, _CARenderContextGetId, _CARenderContextGetInputTime, 
-                       _CARenderContextGetOptions, _CARenderContextGetPayloadSeed, 
-                       _CARenderContextGetProcessId, _CARenderContextGetServerPort, 
-                       _CARenderContextGetTransactionSeed, _CARenderContextHitTest, 
-                       _CARenderContextHitTest_, _CARenderContextInvalidateRect, 
+                       _CARenderContextCopyBoundsRegion, _CARenderContextCopyClientAnnotation, 
+                       _CARenderContextCopyOpaqueRegion, _CARenderContextCopyPayload, 
+                       _CARenderContextCopyProcessPath, _CARenderContextDestroy, 
+                       _CARenderContextGetBeginTime, _CARenderContextGetChangedSeed, 
+                       _CARenderContextGetColorspace, _CARenderContextGetCommitSeed, 
+                       _CARenderContextGetDisplayInfo, _CARenderContextGetEventMask, 
+                       _CARenderContextGetGPURegistryID, _CARenderContextGetGeometrySeed, 
+                       _CARenderContextGetId, _CARenderContextGetInputTime, _CARenderContextGetOptions, 
+                       _CARenderContextGetPayloadSeed, _CARenderContextGetProcessId, 
+                       _CARenderContextGetServerPort, _CARenderContextGetTransactionSeed, 
+                       _CARenderContextHitTest, _CARenderContextHitTest_, _CARenderContextInvalidateRect, 
                        _CARenderContextLock, _CARenderContextNeedsDeferUpdate, _CARenderContextNew, 
-                       _CARenderContextSetCanZombify, _CARenderContextSetChameleonColor, 
-                       _CARenderContextSetDisplayInfo, _CARenderContextSetGPURegistryID, 
-                       _CARenderContextSetVisible, _CARenderContextUnlock, _CARenderGetGlobalFeatureFlags, 
-                       _CARenderImageBitsPerComponent, _CARenderImageBitsPerPixel, 
-                       _CARenderImageCGBitmapInfo, _CARenderImageCopyCGImage, _CARenderImageFormatName, 
-                       _CARenderImageGetHeight, _CARenderImageGetWidth, _CARenderImageHasAlpha, 
-                       _CARenderImageIsNative, _CARenderImageNew, _CARenderImageNewMipmapped, 
-                       _CARenderImageNewWithCGImage, _CARenderImageRowbytes, _CARenderLayerGetContextId, 
-                       _CARenderMTLCompileShader, _CARenderMTLGetState, _CARenderMTLLoadPipeline, 
-                       _CARenderMTLSetDestinationTextures, _CARenderMTLSetState, 
-                       _CARenderNotificationAddObserver, _CARenderNotificationPostNotification, 
+                       _CARenderContextSetBeginTimeThreshold, _CARenderContextSetCanZombify, 
+                       _CARenderContextSetChameleonColor, _CARenderContextSetDisplayInfo, 
+                       _CARenderContextSetGPURegistryID, _CARenderContextSetVisible, 
+                       _CARenderContextUnlock, _CARenderGetGlobalFeatureFlags, _CARenderImageBitsPerComponent, 
+                       _CARenderImageBitsPerPixel, _CARenderImageCGBitmapInfo, _CARenderImageCopyCGImage, 
+                       _CARenderImageFormatName, _CARenderImageGetHeight, _CARenderImageGetWidth, 
+                       _CARenderImageHasAlpha, _CARenderImageIsNative, _CARenderImageNew, 
+                       _CARenderImageNewMipmapped, _CARenderImageNewWithCGImage, 
+                       _CARenderImageRowbytes, _CARenderLayerGetContextId, _CARenderMTLCompileShader, 
+                       _CARenderMTLGetState, _CARenderMTLLoadPipeline, _CARenderMTLSetDestinationTextures, 
+                       _CARenderMTLSetState, _CARenderNotificationAddObserver, _CARenderNotificationPostNotification, 
                        _CARenderNotificationRemoveEveryObserver, _CARenderNotificationRemoveObserver, 
                        _CARenderOGLCollect, _CARenderOGLDestroy, _CARenderOGLFinish, 
                        _CARenderOGLFlush, _CARenderOGLGetColorSpace, _CARenderOGLGetFeatureFlags, 
@@ -245,15 +246,15 @@ exports:
                        _CARenderServerCaptureLayerWithTransform, _CARenderServerCaptureLayerWithTransformAndTimeOffset, 
                        _CARenderServerClearDebugOptions, _CARenderServerCopyODStatistics, 
                        _CARenderServerCopyUpdateHistograms, _CARenderServerCreateSnapshots, 
-                       _CARenderServerGetClientPort, _CARenderServerGetClientProcessId, 
-                       _CARenderServerGetDebugFlags, _CARenderServerGetDebugOption, 
-                       _CARenderServerGetDebugValue, _CARenderServerGetDebugValueFloat, 
-                       _CARenderServerGetDirtyFrameCount, _CARenderServerGetDirtyFrameCountByIndex, 
-                       _CARenderServerGetDisplayLogicalBounds, _CARenderServerGetFrameCounter, 
-                       _CARenderServerGetFrameCounterByIndex, _CARenderServerGetInfo, 
-                       _CARenderServerGetMaxRenderableIOSurfaceSize, _CARenderServerGetNeededAlignment, 
-                       _CARenderServerGetPerformanceInfo, _CARenderServerGetPort, 
-                       _CARenderServerGetServerPort, _CARenderServerGetStatistics, 
+                       _CARenderServerDebugBrightness, _CARenderServerGetClientPort, 
+                       _CARenderServerGetClientProcessId, _CARenderServerGetDebugFlags, 
+                       _CARenderServerGetDebugOption, _CARenderServerGetDebugValue, 
+                       _CARenderServerGetDebugValueFloat, _CARenderServerGetDirtyFrameCount, 
+                       _CARenderServerGetDirtyFrameCountByIndex, _CARenderServerGetDisplayLogicalBounds, 
+                       _CARenderServerGetFrameCounter, _CARenderServerGetFrameCounterByIndex, 
+                       _CARenderServerGetInfo, _CARenderServerGetMaxRenderableIOSurfaceSize, 
+                       _CARenderServerGetNeededAlignment, _CARenderServerGetPerformanceInfo, 
+                       _CARenderServerGetPort, _CARenderServerGetServerPort, _CARenderServerGetStatistics, 
                        _CARenderServerIsRunning, _CARenderServerPostPowerLog, _CARenderServerPurgeServer, 
                        _CARenderServerRegister, _CARenderServerRenderDisplay, _CARenderServerRenderDisplayClientList, 
                        _CARenderServerRenderDisplayClientListWithTransform, _CARenderServerRenderDisplayClientListWithTransformList, 
@@ -336,23 +337,25 @@ exports:
                        _kCAAttributeMin, _kCAAttributeOptional, _kCAAttributeSliderMax, 
                        _kCAAttributeSliderMin, _kCAAttributeSubtype, _kCAAttributeType, 
                        _kCAAttributeUnitSpace, _kCABackdropNamespaceGlobal, _kCABackdropNamespaceHostingNamespacedContext, 
-                       _kCABackdropNamespaceOwningContext, _kCACFAnimationCubic, 
-                       _kCACFAnimationCubicPaced, _kCACFAnimationDiscrete, _kCACFAnimationGroup, 
-                       _kCACFAnimationLinear, _kCACFAnimationPaced, _kCACFAnimationRotateAuto, 
-                       _kCACFAnimationRotateAutoReverse, _kCACFBasicAnimation, _kCACFContentsFormatGray8, 
-                       _kCACFContentsFormatRGBA8, _kCACFContentsFormatRGBAh, _kCACFContentsScalingRepeat, 
-                       _kCACFContentsScalingStretch, _kCACFContextBitsPerComponentHint, 
-                       _kCACFContextDefinesDisplayBounds, _kCACFContextDisplayFilter, 
-                       _kCACFContextDisplayId, _kCACFContextDisplayName, _kCACFContextIgnoresHitTest, 
-                       _kCACFContextPortName, _kCACFContextPortNumber, _kCACFFillModeBackwards, 
-                       _kCACFFillModeBoth, _kCACFFillModeForwards, _kCACFFillModeRemoved, 
-                       _kCACFFilterLanczos, _kCACFFilterLinear, _kCACFFilterNearest, 
-                       _kCACFFilterTrilinear, _kCACFGravityBottom, _kCACFGravityBottomLeft, 
-                       _kCACFGravityBottomRight, _kCACFGravityCenter, _kCACFGravityLeft, 
-                       _kCACFGravityResize, _kCACFGravityResizeAspect, _kCACFGravityResizeAspectFill, 
-                       _kCACFGravityRight, _kCACFGravityTop, _kCACFGravityTopLeft, 
-                       _kCACFGravityTopRight, _kCACFKeyframeAnimation, _kCACFLayer, 
-                       _kCACFLayerHost, _kCACFPluginLayer, _kCACFSpringAnimation, 
+                       _kCABackdropNamespaceOwningContext, _kCABrightnessNotificationAttached, 
+                       _kCABrightnessNotificationDetached, _kCABrightnessNotificationRequestEDR, 
+                       _kCABrightnessRequestEDRHeadroom, _kCABrightnessRequestRampDuration, 
+                       _kCACFAnimationCubic, _kCACFAnimationCubicPaced, _kCACFAnimationDiscrete, 
+                       _kCACFAnimationGroup, _kCACFAnimationLinear, _kCACFAnimationPaced, 
+                       _kCACFAnimationRotateAuto, _kCACFAnimationRotateAutoReverse, 
+                       _kCACFBasicAnimation, _kCACFContentsFormatGray8, _kCACFContentsFormatRGBA8, 
+                       _kCACFContentsFormatRGBAh, _kCACFContentsScalingRepeat, _kCACFContentsScalingStretch, 
+                       _kCACFContextBitsPerComponentHint, _kCACFContextDefinesDisplayBounds, 
+                       _kCACFContextDisplayFilter, _kCACFContextDisplayId, _kCACFContextDisplayName, 
+                       _kCACFContextIgnoresHitTest, _kCACFContextPortName, _kCACFContextPortNumber, 
+                       _kCACFFillModeBackwards, _kCACFFillModeBoth, _kCACFFillModeForwards, 
+                       _kCACFFillModeRemoved, _kCACFFilterLanczos, _kCACFFilterLinear, 
+                       _kCACFFilterNearest, _kCACFFilterTrilinear, _kCACFGravityBottom, 
+                       _kCACFGravityBottomLeft, _kCACFGravityBottomRight, _kCACFGravityCenter, 
+                       _kCACFGravityLeft, _kCACFGravityResize, _kCACFGravityResizeAspect, 
+                       _kCACFGravityResizeAspectFill, _kCACFGravityRight, _kCACFGravityTop, 
+                       _kCACFGravityTopLeft, _kCACFGravityTopRight, _kCACFKeyframeAnimation, 
+                       _kCACFLayer, _kCACFLayerHost, _kCACFPluginLayer, _kCACFSpringAnimation, 
                        _kCACFTimingFunctionDefault, _kCACFTimingFunctionEaseIn, _kCACFTimingFunctionEaseInEaseOut, 
                        _kCACFTimingFunctionEaseOut, _kCACFTimingFunctionLinear, _kCACFTransformLayer, 
                        _kCACFTransition, _kCACFTransitionFade, _kCACFTransitionFromBottom, 
@@ -561,6 +564,6 @@ exports:
                        CAStateAddElement._keyPath, CAStateAddElement._object, CAStateElement._source, 
                        CAStateElement._target, CAStateRemoveElement._keyPath, CAStateRemoveElement._object, 
                        CAValueFunction._impl, CAValueFunction._string ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CARenderContextGetRemoteInputMachTime ]
 ...

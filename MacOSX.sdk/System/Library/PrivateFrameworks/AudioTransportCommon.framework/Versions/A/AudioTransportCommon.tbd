@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           68C80C55-91FA-3526-B3AA-E38461E59132
+    value:           047789A4-135D-3BBC-8AF4-B16D1CD2E9E3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           24429478-AEB4-3789-AF6C-6095E48C81A8
+    value:           36B78DD2-7555-315A-8D1E-C12759C906FF
 install-name:    '/System/Library/PrivateFrameworks/AudioTransportCommon.framework/Versions/A/AudioTransportCommon'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

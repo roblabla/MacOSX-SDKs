@@ -110,7 +110,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIScrollView : UIView <NSCoding,
  Scrolling with no scroll bars is a bit complex. on touch down, we don't know if the user will want to scroll or track a subview like a control.
  on touch down, we start a timer and also look at any movement. if the time elapses without sufficient change in position, we start sending events to
  the hit view in the content subview. if the user then drags far enough, we switch back to dragging and cancel any tracking in the subview.
- the methods below are called by the scroll view and give subclasses override points to add in custom behaviour.
+ the methods below are called by the scroll view and give subclasses override points to add in custom behavior.
  you can remove the delay in delivery of touchesBegan:withEvent: to subviews by setting delaysContentTouches to NO.
  */
 

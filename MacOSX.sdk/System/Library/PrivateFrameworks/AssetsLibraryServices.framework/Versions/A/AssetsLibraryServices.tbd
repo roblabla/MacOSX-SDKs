@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5B2B8B91-8AC5-3921-B05F-410817CF3AC5
+    value:           ACDD0D06-6B5C-3233-BE71-3358CA8B5EA4
   - target:          x86_64-maccatalyst
-    value:           5B2B8B91-8AC5-3921-B05F-410817CF3AC5
+    value:           ACDD0D06-6B5C-3233-BE71-3358CA8B5EA4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           63A92095-A056-34D7-B3F0-73BD37EAFE74
+    value:           0B29D9B4-D030-327E-9CCC-4C5F660630C6
   - target:          arm64e-maccatalyst
-    value:           63A92095-A056-34D7-B3F0-73BD37EAFE74
+    value:           0B29D9B4-D030-327E-9CCC-4C5F660630C6
 install-name:    '/System/Library/PrivateFrameworks/AssetsLibraryServices.framework/Versions/A/AssetsLibraryServices'
-current-version: 321.0.102
+current-version: 340.0.220
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -42,10 +42,10 @@ exports:
                        _PLAssetsdEntitlementDemo, _PLAssetsdEntitlementDiagnostics, 
                        _PLAssetsdEntitlementLibraryInternal, _PLAssetsdEntitlementLibraryManagement, 
                        _PLAssetsdEntitlementMigration, _PLAssetsdEntitlementNotification, 
-                       _PLAssetsdEntitlementResourceInternal, _PLAssetsdEntitlementSync, 
-                       _PLAssetsdMachServiceName, _PLBundleIDForMStreamd, _PLBundleIdentifier, 
-                       _PLBytesPerRowForWidth, _PLCGRectIsNormalized, _PLCGSizeScaledToFitSize, 
-                       _PLCPLPLIST_CLOUD_VERSION_KEY, _PLCPLPLIST_LOCAL_VERSION_KEY, 
+                       _PLAssetsdEntitlementResourceInternal, _PLAssetsdEntitlementSandboxExtensions, 
+                       _PLAssetsdEntitlementSync, _PLAssetsdMachServiceName, _PLBundleIDForMStreamd, 
+                       _PLBundleIdentifier, _PLBytesPerRowForWidth, _PLCGRectIsNormalized, 
+                       _PLCGSizeScaledToFitSize, _PLCPLPLIST_CLOUD_VERSION_KEY, _PLCPLPLIST_LOCAL_VERSION_KEY, 
                        _PLCPLPLIST_LOCAL_VERSION_TOKEN_KEY, _PLCPLPLIST_MIGRATED_LOCAL_VERSION_KEY, 
                        _PLCPLPLIST_MIGRATION_MARKER_KEY, _PLCPLPLIST_STORE_UUID_KEY, 
                        _PLCanMoveFromSourceStateToTargetState, _PLClientBundleIdentifierFromXPCConnection, 
@@ -139,6 +139,10 @@ exports:
                        _PLCoreAnalyticsLibrarySummaryMediumOriginalPercent, _PLCoreAnalyticsLibrarySummaryMediumPercent, 
                        _PLCoreAnalyticsLibrarySummaryOriginalLibrarySize, _PLCoreAnalyticsLibrarySummaryOriginalPercent, 
                        _PLCoreAnalyticsLibrarySummaryOtherImagesCount, _PLCoreAnalyticsLibrarySummaryOtherMediaCount, 
+                       _PLCoreAnalyticsLibrarySummaryPersistentHistoryDaysSinceEarliestTransaction, 
+                       _PLCoreAnalyticsLibrarySummaryPersistentHistoryPercentOfPayload, 
+                       _PLCoreAnalyticsLibrarySummaryPersistentHistoryPercentOfTotal, 
+                       _PLCoreAnalyticsLibrarySummaryPersistentHistoryTransactionCount, 
                        _PLCoreAnalyticsLibrarySummaryPhotoCount, _PLCoreAnalyticsLibrarySummaryPortraitCount, 
                        _PLCoreAnalyticsLibrarySummaryRawCount, _PLCoreAnalyticsLibrarySummaryReferenceMediaSize, 
                        _PLCoreAnalyticsLibrarySummarySOCAssetCount, _PLCoreAnalyticsLibrarySummarySOCReframedAssetCount, 
@@ -154,7 +158,6 @@ exports:
                        _PLCoreAnalyticsMomentStatisticsEventNumOfMoments, _PLCoreAnalyticsMomentStatisticsEventNumOfSingleAssetMoments, 
                        _PLCoreAnalyticsMomentYearsEvent, _PLCoreAnalyticsMomentYearsEventEnd, 
                        _PLCoreAnalyticsMomentYearsEventNumberOfYearsWithAssets, _PLCoreAnalyticsMomentYearsEventStart, 
-                       _PLCoreAnalyticsPersistentHistorySummaryEvent, _PLCoreAnalyticsPersistentHistorySummaryEventPersistentHistoryPercent, 
                        _PLCoreAnalyticsPhotoKitAuthorizationEvent, _PLCoreAnalyticsPhotoKitAuthorizationEventAuthorizationStatusAllowed, 
                        _PLCoreAnalyticsPhotoKitAuthorizationEventAuthorizationStatusDenied, 
                        _PLCoreAnalyticsPhotoKitAuthorizationEventAuthorizationStatusLimited, 
@@ -192,7 +195,8 @@ exports:
                        _PLFileSystemPersistenceDescriptionKey, _PLFileSystemPersistenceExtraDurationDataKey, 
                        _PLFileSystemPersistenceFavoriteKey, _PLFileSystemPersistenceGroupingStateKey, 
                        _PLFileSystemPersistenceGroupingUUIDKey, _PLFileSystemPersistenceHiddenKey, 
-                       _PLFileSystemPersistenceImportedByKey, _PLFileSystemPersistenceInProgressCameraAdjustmentsDataKey, 
+                       _PLFileSystemPersistenceImportedByDisplayNameKey, _PLFileSystemPersistenceImportedByKey, 
+                       _PLFileSystemPersistenceInProgressCameraAdjustmentsDataKey, 
                        _PLFileSystemPersistenceInProgressDestinationPathKey, _PLFileSystemPersistenceInProgressFilteredPreviewImagePathKey, 
                        _PLFileSystemPersistenceInProgressPublishableKey, _PLFileSystemPersistenceInProgressSemanticDevelopmentKey, 
                        _PLFileSystemPersistenceMediaGroupUUIDKey, _PLFileSystemPersistenceNamespace, 

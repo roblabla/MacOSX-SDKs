@@ -17,7 +17,7 @@ module RbConfig
   # DESTDIR on make install.
   DESTDIR = '' unless defined? DESTDIR
   arch_flag = ENV['ARCHFLAGS'] || ((e = ENV['RC_ARCHS']) && e.split.uniq.map {|a| "-arch #{a}"}.join(' '))
-  universal = " x86_64=x86_64 arm64e=arm64e"
+  universal = " arm64e=arm64e x86_64=x86_64"
   # The hash configurations stored.
   CONFIG = {}
   CONFIG["DESTDIR"] = DESTDIR
@@ -46,7 +46,7 @@ module RbConfig
   CONFIG["RUBY_SEARCH_PATH"] = ""
   CONFIG["UNIVERSAL_INTS"] = "'long long' long int short"
   CONFIG["UNIVERSAL_ARCHNAMES"] = universal
-  CONFIG["configure_args"] = " '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--prefix=/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr' '--sysconfdir=/Library/Ruby/Site' '--with-sitedir=/Library/Ruby/Site' '--enable-shared' '--with-arch=x86_64,arm64e' '--with-openssl-dir=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.Internal.sdk/usr/local/libressl' '--without-ext=tk' '--disable-silent-rules' 'ac_cv_func_getcontext=no' 'ac_cv_func_setcontext=no' 'ac_cv_func_utimensat=no' 'ac_cv_c_compiler_gnu=no' 'ac_cv_header_net_if_h=yes' 'av_cv_header_ifaddrs_h=yes' 'rb_cv_pri_prefix_long_long=ll' 'rb_cv_stack_grow_dir_arm64e=-1' 'ac_cv_sizeof_struct_stat_st_size=SIZEOF_OFF_T' 'ac_cv_sizeof_struct_stat_st_blocks=SIZEOF_INT64_T' 'ac_cv_sizeof_struct_stat_st_ino=SIZEOF_UINT64_T' 'CC=/Applications/Xcode.app/Contents/Developer/Toolchains/OSX11.1.xctoolchain/usr/bin/cc' 'CFLAGS=-arch x86_64 -arch arm64e -g -Os -pipe -DHAVE_GCC_ATOMIC_BUILTINS -DUSE_FFI_CLOSURE_ALLOC' 'LDFLAGS=-arch x86_64 -arch arm64e            ' 'CXX=/Applications/Xcode.app/Contents/Developer/Toolchains/OSX11.1.xctoolchain/usr/bin/c++' 'CXXFLAGS=-arch x86_64 -arch arm64e -g -Os -pipe '"
+  CONFIG["configure_args"] = " '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--prefix=/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr' '--sysconfdir=/Library/Ruby/Site' '--with-sitedir=/Library/Ruby/Site' '--enable-shared' '--with-arch=arm64e,x86_64' '--with-openssl-dir=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.Internal.sdk/usr/local/libressl' '--without-ext=tk' '--disable-silent-rules' 'ac_cv_func_getcontext=no' 'ac_cv_func_setcontext=no' 'ac_cv_func_utimensat=no' 'ac_cv_c_compiler_gnu=no' 'ac_cv_header_net_if_h=yes' 'av_cv_header_ifaddrs_h=yes' 'rb_cv_pri_prefix_long_long=ll' 'rb_cv_stack_grow_dir_arm64e=-1' 'ac_cv_sizeof_struct_stat_st_size=SIZEOF_OFF_T' 'ac_cv_sizeof_struct_stat_st_blocks=SIZEOF_INT64_T' 'ac_cv_sizeof_struct_stat_st_ino=SIZEOF_UINT64_T' 'CC=/Applications/Xcode.app/Contents/Developer/Toolchains/OSX11.3.xctoolchain/usr/bin/cc' 'CFLAGS=-arch arm64e -arch x86_64 -g -Os -pipe -DHAVE_GCC_ATOMIC_BUILTINS -DUSE_FFI_CLOSURE_ALLOC' 'LDFLAGS=-arch arm64e -arch x86_64            ' 'CXX=/Applications/Xcode.app/Contents/Developer/Toolchains/OSX11.3.xctoolchain/usr/bin/c++' 'CXXFLAGS=-arch arm64e -arch x86_64 -g -Os -pipe '"
   CONFIG["CONFIGURE"] = "configure"
   CONFIG["vendorarchdir"] = "$(vendorlibdir)/$(sitearch)"
   CONFIG["vendorlibdir"] = "$(vendordir)/$(ruby_version)"
@@ -133,7 +133,7 @@ module RbConfig
   CONFIG["CCDLFLAGS"] = ""
   CONFIG["STATIC"] = ""
   CONFIG["ARCH_FLAG"] = arch_flag || ""
-  CONFIG["DLDFLAGS"] = "-arch x86_64 -arch arm64e             -undefined dynamic_lookup -multiply_defined suppress"
+  CONFIG["DLDFLAGS"] = "$(ARCH_FLAG)             -undefined dynamic_lookup -multiply_defined suppress"
   CONFIG["ALLOCA"] = ""
   CONFIG["MATHN"] = "yes"
   CONFIG["dsymutil"] = "dsymutil"
@@ -167,7 +167,7 @@ module RbConfig
   CONFIG["AR"] = "libtool -static"
   CONFIG["RANLIB"] = ":"
   CONFIG["try_header"] = "try_compile"
-  CONFIG["CC_VERSION_MESSAGE"] = "Apple clang version 12.0.0 (clang-1200.0.30.4) [+internal-os, ptrauth-isa=sign+strip]\nTarget: x86_64-apple-darwin19.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/OSX11.1.xctoolchain/usr/bin"
+  CONFIG["CC_VERSION_MESSAGE"] = "Apple clang version 12.0.5 (clang-1205.0.19.59.6) [+internal-os, ptrauth-isa=deployment-target-based]\nTarget: x86_64-apple-darwin20.1.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/OSX11.3.xctoolchain/usr/bin"
   CONFIG["CC_VERSION"] = "$(CC) --version"
   CONFIG["CSRCFLAG"] = ""
   CONFIG["COUTFLAG"] = "-o "
@@ -183,7 +183,7 @@ module RbConfig
   CONFIG["CXX"] = "xcrun clang++"
   CONFIG["OBJEXT"] = "o"
   CONFIG["CPPFLAGS"] = "-D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags)"
-  CONFIG["LDFLAGS"] = "-L. -L/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.Internal.sdk/usr/local/lib"
+  CONFIG["LDFLAGS"] = "-L. -L/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.Internal.sdk/usr/local/lib"
   CONFIG["CFLAGS"] = " -g -Os -pipe -DHAVE_GCC_ATOMIC_BUILTINS -DUSE_FFI_CLOSURE_ALLOC"
   CONFIG["CC"] = "xcrun clang"
   CONFIG["target_os"] = "darwin20"

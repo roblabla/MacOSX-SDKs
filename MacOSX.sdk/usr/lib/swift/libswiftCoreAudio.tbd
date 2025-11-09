@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           35FB6B92-E592-3B98-A8D4-AF292881FB01
+    value:           C50B24C1-4717-31A9-962A-B1CC319AAEAE
   - target:          x86_64-maccatalyst
-    value:           35FB6B92-E592-3B98-A8D4-AF292881FB01
+    value:           C50B24C1-4717-31A9-962A-B1CC319AAEAE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B630860E-E6BE-3A34-805C-341D191D083C
+    value:           052D881B-5021-3CAD-9FEA-80563FD864C9
   - target:          arm64e-maccatalyst
-    value:           B630860E-E6BE-3A34-805C-341D191D083C
+    value:           052D881B-5021-3CAD-9FEA-80563FD864C9
 install-name:    '/usr/lib/swift/libswiftCoreAudio.dylib'
 current-version: 1.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCoreAudio.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCoreAudio.dylib', 

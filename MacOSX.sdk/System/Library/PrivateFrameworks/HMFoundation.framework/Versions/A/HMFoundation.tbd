@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6F5E419F-5E4D-39A3-80AC-3B3E61098204
+    value:           87DB2702-259A-373B-86AF-FC9DC34C2FDD
   - target:          x86_64-maccatalyst
-    value:           6F5E419F-5E4D-39A3-80AC-3B3E61098204
+    value:           87DB2702-259A-373B-86AF-FC9DC34C2FDD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           181A9CB1-E63E-31B7-9159-31926BE3113A
+    value:           80446060-A600-33CC-8E4A-1D4282F78B51
   - target:          arm64e-maccatalyst
-    value:           181A9CB1-E63E-31B7-9159-31926BE3113A
+    value:           80446060-A600-33CC-8E4A-1D4282F78B51
 install-name:    '/System/Library/PrivateFrameworks/HMFoundation.framework/Versions/A/HMFoundation'
-current-version: 607.3.3
+current-version: 613.13
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -39,8 +39,9 @@ exports:
                        _HMFPowerManagerBatteryStateDidChangeNotification, _HMFPreferenceUpdatedNotification, 
                        _HMFProcessMemoryStateToString, _HMFProcessMemoryStateUpdateKey, 
                        _HMFProductClassFromString, _HMFProductClassToString, _HMFProductInfoArcherBOSVersion, 
-                       _HMFProductInfoArcherHWOSVersion, _HMFProductInfoArcherOSVersion, 
-                       _HMFProductInfoAzulBOSVersion, _HMFProductInfoAzulHWOSVersion, 
+                       _HMFProductInfoArcherEOSVersion, _HMFProductInfoArcherHWOSVersion, 
+                       _HMFProductInfoArcherOSVersion, _HMFProductInfoAzulBOSVersion, 
+                       _HMFProductInfoAzulEOSVersion, _HMFProductInfoAzulHWOSVersion, 
                        _HMFProductInfoAzulOSVersion, _HMFProductInfoBlowfishOSVersion, 
                        _HMFProductInfoBondiOSVersion, _HMFProductInfoBugleOSVersion, 
                        _HMFProductInfoButlerOSVersion, _HMFProductInfoCatamaranOSVersion, 
@@ -54,11 +55,12 @@ exports:
                        _HMFProductInfoFortuneOSVersion, _HMFProductInfoFrancisOSVersion, 
                        _HMFProductInfoGloryBOSVersion, _HMFProductInfoGloryCOSVersion, 
                        _HMFProductInfoGloryGOSVersion, _HMFProductInfoGloryOSVersion, 
-                       _HMFProductInfoGoldenGateOSVersion, _HMFProductInfoGoldenOSVersion, 
-                       _HMFProductInfoGraceBOSVersion, _HMFProductInfoGraceFOSVersion, 
-                       _HMFProductInfoGraceOSVersion, _HMFProductInfoHopeBOSVersion, 
-                       _HMFProductInfoHopeCOSVersion, _HMFProductInfoHopeGOSVersion, 
-                       _HMFProductInfoHopeOSVersion, _HMFProductInfoHunterBOSVersion, 
+                       _HMFProductInfoGoldenGateEOSVersion, _HMFProductInfoGoldenGateOSVersion, 
+                       _HMFProductInfoGoldenOSVersion, _HMFProductInfoGraceBOSVersion, 
+                       _HMFProductInfoGraceFOSVersion, _HMFProductInfoGraceOSVersion, 
+                       _HMFProductInfoHopeBOSVersion, _HMFProductInfoHopeCOSVersion, 
+                       _HMFProductInfoHopeGOSVersion, _HMFProductInfoHopeOSVersion, 
+                       _HMFProductInfoHunterBOSVersion, _HMFProductInfoHunterEOSVersion, 
                        _HMFProductInfoHunterOSVersion, _HMFProductInfoJazzBOSVersion, 
                        _HMFProductInfoJazzFOSVersion, _HMFProductInfoJazzOSVersion, 
                        _HMFProductInfoLibertyBOSVersion, _HMFProductInfoLibertyCOSVersion, 
@@ -115,7 +117,8 @@ exports:
                        HMFMessageInternal, HMFMessagePolicy, HMFMessageTransport, 
                        HMFMutableHTTPRequest, HMFMutableHTTPResponse, HMFMutableMessage, 
                        HMFMutableNetService, HMFNetAddress, HMFNetManager, HMFNetMonitor, 
-                       HMFNetService, HMFNetServiceBrowser, HMFOSTransaction, HMFObject, 
+                       HMFNetService, HMFNetServiceBrowser, HMFNotificationCenter, 
+                       HMFOSTransaction, HMFObject, HMFObjectCacheNSString, HMFObjectCacheNSUUID, 
                        HMFObjectObserver, HMFOperation, HMFOperationBudget, HMFPairingIdentity, 
                        HMFPairingKey, HMFPowerAssertion, HMFPowerLogger, HMFPowerManager, 
                        HMFPreference, HMFPreferences, HMFPrivateObjectFormatter, 

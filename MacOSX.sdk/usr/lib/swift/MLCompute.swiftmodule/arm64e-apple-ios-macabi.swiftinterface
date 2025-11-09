@@ -1,9 +1,9 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target arm64e-apple-ios14.3-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMLCompute -swift-version 5 -enforce-exclusivity=checked -O -module-name MLCompute
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target arm64e-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMLCompute -swift-version 5 -enforce-exclusivity=checked -O -module-name MLCompute
 @_exported import MLCompute
 import Swift
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, *)
 extension MLCEmbeddingDescriptor {
   @inlinable public var embeddingCount: Swift.Int {
     get {
@@ -45,7 +45,7 @@ extension MLCEmbeddingDescriptor {
             scalesGradientByFrequency: scalesGradientByFrequency)
     }
 }
-@available(OSX 11.0, iOS 14, tvOS 14, *)
+@available(macOS 11.0, iOS 14, tvOS 14, *)
 extension MLCPaddingLayer {
   @inlinable convenience public init(reflectionPadding: [Swift.Int]) {
         self.init(__reflectionPadding: reflectionPadding as [NSNumber])
@@ -60,7 +60,7 @@ extension MLCPaddingLayer {
         self.init(__constantPadding: constantPadding as [NSNumber], constantValue: constantValue)
     }
 }
-@available(OSX 11.0, iOS 14, tvOS 14, *)
+@available(macOS 11.0, iOS 14, tvOS 14, *)
 extension MLCLayerNormalizationLayer {
   @inlinable public var normalizedShape: [Swift.Int] {
     get {
@@ -74,8 +74,16 @@ extension MLCLayerNormalizationLayer {
             gamma: gamma,
             varianceEpsilon: varianceEpsilon)
     }
+  @available(macOS 11.3, iOS 14.5, tvOS 14.5, *)
+  @inlinable convenience public init?(normalizedShape: [Swift.Int], beta: MLCompute.MLCTensor?, gamma: MLCompute.MLCTensor?, varianceEpsilon: Swift.Float) {
+        self.init(
+            __normalizedShape: normalizedShape as [NSNumber],
+            beta: beta,
+            gamma: gamma,
+            varianceEpsilon: varianceEpsilon)
+    }
 }
-@available(OSX 11.0, iOS 14, tvOS 14, *)
+@available(macOS 11.0, iOS 14, tvOS 14, *)
 extension MLCSplitLayer {
   @inlinable public var splitSectionLengths: [Swift.Int]? {
     get {
@@ -88,7 +96,7 @@ extension MLCSplitLayer {
             dimension: dimension)
     }
 }
-@available(OSX 11.0, iOS 14, tvOS 14, *)
+@available(macOS 11.0, iOS 14, tvOS 14, *)
 extension MLCUpsampleLayer {
   @inlinable public var shape: [Swift.Int] {
     get {
@@ -105,7 +113,7 @@ extension MLCUpsampleLayer {
             alignsCorners: alignsCorners)
     }
 }
-@available(OSX 11.0, iOS 14, tvOS 14, *)
+@available(macOS 11.0, iOS 14, tvOS 14, *)
 extension MLCSliceLayer {
   @inlinable public var start: [Swift.Int] {
     get {
@@ -129,7 +137,7 @@ extension MLCSliceLayer {
             stride: stride as [NSNumber]?)
     }
 }
-@available(OSX 11.0, iOS 14, tvOS 14, *)
+@available(macOS 11.0, iOS 14, tvOS 14, *)
 extension MLCConvolutionDescriptor {
   @inlinable public var kernelSizes: (height: Swift.Int, width: Swift.Int) {
     get {
@@ -170,7 +178,18 @@ extension MLCConvolutionDescriptor {
             paddingSizes: paddingPolicy.objcSizes)
     }
 }
-@available(OSX 11.0, iOS 14, tvOS 14, *)
+@available(macOS 11.3, iOS 14.5, tvOS 14.5, *)
+extension MLCReductionLayer {
+  @inlinable public var dimensions: [Swift.Int] {
+    get {
+        __dimensions.map { Int(exactly: $0)! }
+    }
+  }
+  @inlinable convenience public init?(reductionType: MLCompute.MLCReductionType, dimensions: [Swift.Int]) {
+        self.init(__reductionType: reductionType, dimensions: dimensions as [NSNumber])
+    }
+}
+@available(macOS 11.0, iOS 14, tvOS 14, *)
 extension MLCTransposeLayer {
   @inlinable public var dimensions: [Swift.Int] {
     get {
@@ -181,7 +200,7 @@ extension MLCTransposeLayer {
         self.init(__dimensions: dimensions as [NSNumber])
     }
 }
-@available(OSX 11.0, iOS 14, tvOS 14, *)
+@available(macOS 11.0, iOS 14, tvOS 14, *)
 public enum MLCPaddingPolicy {
   case same
   case valid
@@ -209,7 +228,7 @@ public enum MLCPaddingPolicy {
         switch self {
         case .same, .valid:
             return objcDescription
-        case let .sized(x, y):
+        case let .sized(y, x):
             return objcDescription + " (y: \(y), x: \(x))"
         @unknown default:
             fatalError("Internal error: Unhandled case in Swift overlay")
@@ -217,7 +236,7 @@ public enum MLCPaddingPolicy {
     }
   }
 }
-@available(OSX 11.0, iOS 14.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, *)
 extension MLCTensor {
   @inlinable convenience public init(shape: [Swift.Int]) {
         self.init(__shape: shape as [NSNumber])
@@ -253,7 +272,7 @@ extension MLCTensor {
         )
     }
 }
-@available(OSX 11.0, iOS 14, tvOS 14, *)
+@available(macOS 11.0, iOS 14, tvOS 14, *)
 extension MLCGraph {
   @inlinable public func split(source: MLCompute.MLCTensor, splitSectionLengths: [Swift.Int], dimension: Swift.Int) -> [MLCompute.MLCTensor]? {
         __split(
@@ -268,13 +287,21 @@ extension MLCGraph {
         __transpose(withDimensions: dimensions as [NSNumber], source: source)
     }
 }
-@available(OSX 11.0, iOS 14, tvOS 14, *)
+@available(macOS 11, iOS 14, tvOS 14, *)
 extension MLCReshapeLayer {
   @inlinable convenience public init?(shape: [Swift.Int]) {
         self.init(__shape: shape as [NSNumber])
     }
 }
-@available(OSX 11.0, iOS 14, tvOS 14, *)
+@available(macOS 11.3, iOS 14.5, tvOS 14.5, *)
+extension MLCReshapeLayer {
+  @inlinable public var shape: [Swift.Int] {
+    get {
+        __shape.map { Int(exactly: $0)! }
+    }
+  }
+}
+@available(macOS 11.0, iOS 14, tvOS 14, *)
 extension MLCTensorDescriptor {
   @inlinable public var shape: [Swift.Int] {
     get {
@@ -307,7 +334,7 @@ extension MLCTensorDescriptor {
             dataType: dataType)
     }
 }
-@available(OSX 11.0, iOS 14, tvOS 14, *)
+@available(macOS 11.0, iOS 14, tvOS 14, *)
 public enum MLCPoolingType {
   case max
   case average(countIncludesPadding: Swift.Bool = false)
@@ -339,7 +366,7 @@ public enum MLCPoolingType {
     }
   }
 }
-@available(OSX 11.0, iOS 14, tvOS 14, *)
+@available(macOS 11.0, iOS 14, tvOS 14, *)
 extension MLCPoolingDescriptor {
   @inlinable public var poolingType: MLCompute.MLCPoolingType {
     get {

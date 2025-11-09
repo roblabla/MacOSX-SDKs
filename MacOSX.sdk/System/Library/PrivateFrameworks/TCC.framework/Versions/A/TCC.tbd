@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1C80FEC6-C1B3-3CA7-9701-868FD7A281E4
+    value:           10E022E6-5939-32DF-80E7-11BEA294F987
   - target:          x86_64-maccatalyst
-    value:           1C80FEC6-C1B3-3CA7-9701-868FD7A281E4
+    value:           10E022E6-5939-32DF-80E7-11BEA294F987
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C31F3308-DDE5-39C2-B375-B562067259D7
+    value:           0D3C3BBB-BE2C-3651-BDA5-B5E62A06DF41
   - target:          arm64e-maccatalyst
-    value:           C31F3308-DDE5-39C2-B375-B562067259D7
+    value:           0D3C3BBB-BE2C-3651-BDA5-B5E62A06DF41
 install-name:    '/System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -60,22 +60,23 @@ exports:
                        _kTCCServiceBluetoothAlways, _kTCCServiceCalendar, _kTCCServiceCamera, 
                        _kTCCServiceContactsFull, _kTCCServiceContactsLimited, _kTCCServiceDeveloperTool, 
                        _kTCCServiceFacebook, _kTCCServiceFileProviderDomain, _kTCCServiceFileProviderPresence, 
-                       _kTCCServiceLinkedIn, _kTCCServiceListenEvent, _kTCCServiceLiverpool, 
-                       _kTCCServiceLocation, _kTCCServiceMediaLibrary, _kTCCServiceMicrophone, 
-                       _kTCCServiceMotion, _kTCCServicePhotos, _kTCCServicePhotosAdd, 
-                       _kTCCServicePostEvent, _kTCCServicePrototype3Rights, _kTCCServicePrototype4Rights, 
-                       _kTCCServiceReminders, _kTCCServiceScreenCapture, _kTCCServiceShareKit, 
-                       _kTCCServiceSinaWeibo, _kTCCServiceSiri, _kTCCServiceSpeechRecognition, 
-                       _kTCCServiceSystemPolicyAllFiles, _kTCCServiceSystemPolicyDesktopFolder, 
-                       _kTCCServiceSystemPolicyDeveloperFiles, _kTCCServiceSystemPolicyDocumentsFolder, 
-                       _kTCCServiceSystemPolicyDownloadsFolder, _kTCCServiceSystemPolicyNetworkVolumes, 
-                       _kTCCServiceSystemPolicyRemovableVolumes, _kTCCServiceSystemPolicySysAdminFiles, 
-                       _kTCCServiceTencentWeibo, _kTCCServiceTwitter, _kTCCServiceUbiquity, 
-                       _kTCCServiceUserTracking, _kTCCServiceWebKitIntelligentTrackingPrevention, 
-                       _kTCCServiceWillow, _kTCCSetNoKill, _tcc_attributed_entity_create, 
-                       _tcc_attributed_entity_get_path, _tcc_attributed_entity_get_type, 
-                       _tcc_authorization_check_audit_token, _tcc_authorization_preflight, 
-                       _tcc_authorization_record_create, _tcc_authorization_record_get_allow_standard_user_to_set_system_service, 
+                       _kTCCServiceGameCenterFriends, _kTCCServiceLinkedIn, _kTCCServiceListenEvent, 
+                       _kTCCServiceLiverpool, _kTCCServiceLocation, _kTCCServiceMediaLibrary, 
+                       _kTCCServiceMicrophone, _kTCCServiceMotion, _kTCCServicePhotos, 
+                       _kTCCServicePhotosAdd, _kTCCServicePostEvent, _kTCCServicePrototype3Rights, 
+                       _kTCCServicePrototype4Rights, _kTCCServiceReminders, _kTCCServiceScreenCapture, 
+                       _kTCCServiceShareKit, _kTCCServiceSinaWeibo, _kTCCServiceSiri, 
+                       _kTCCServiceSpeechRecognition, _kTCCServiceSystemPolicyAllFiles, 
+                       _kTCCServiceSystemPolicyDesktopFolder, _kTCCServiceSystemPolicyDeveloperFiles, 
+                       _kTCCServiceSystemPolicyDocumentsFolder, _kTCCServiceSystemPolicyDownloadsFolder, 
+                       _kTCCServiceSystemPolicyNetworkVolumes, _kTCCServiceSystemPolicyRemovableVolumes, 
+                       _kTCCServiceSystemPolicySysAdminFiles, _kTCCServiceTencentWeibo, 
+                       _kTCCServiceTwitter, _kTCCServiceUbiquity, _kTCCServiceUserTracking, 
+                       _kTCCServiceWebKitIntelligentTrackingPrevention, _kTCCServiceWillow, 
+                       _kTCCSetNoKill, _tcc_attributed_entity_create, _tcc_attributed_entity_get_path, 
+                       _tcc_attributed_entity_get_type, _tcc_authorization_check_audit_token, 
+                       _tcc_authorization_preflight, _tcc_authorization_record_create, 
+                       _tcc_authorization_record_get_allow_standard_user_to_set_system_service, 
                        _tcc_authorization_record_get_authorization_reason, _tcc_authorization_record_get_authorization_right, 
                        _tcc_authorization_record_get_authorization_value, _tcc_authorization_record_get_expired_at_date, 
                        _tcc_authorization_record_get_indirect_object_attributed_entity, 

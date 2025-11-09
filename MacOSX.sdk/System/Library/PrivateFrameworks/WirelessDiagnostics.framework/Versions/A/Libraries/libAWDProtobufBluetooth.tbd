@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A00DAB50-0E97-344C-B723-AEB15F994243
+    value:           9EC24B65-677C-3A87-80BA-22DC59F06FC4
   - target:          x86_64-maccatalyst
-    value:           A00DAB50-0E97-344C-B723-AEB15F994243
+    value:           9EC24B65-677C-3A87-80BA-22DC59F06FC4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FC908B9A-859B-32D6-8F31-B04A28FC6A3C
+    value:           A5CF8C66-C3A2-39FE-9F7C-5171E162AD88
   - target:          arm64e-maccatalyst
-    value:           FC908B9A-859B-32D6-8F31-B04A28FC6A3C
+    value:           A5CF8C66-C3A2-39FE-9F7C-5171E162AD88
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufBluetooth.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -1561,6 +1561,8 @@ exports:
                        __ZN3awd7metrics29BluetoothAACPDoubleTapSettingD0Ev, __ZN3awd7metrics29BluetoothAACPDoubleTapSettingD1Ev, 
                        __ZN3awd7metrics29BluetoothAACPDoubleTapSettingD2Ev, __ZN3awd7metrics29BluetoothLeConnectionPhyStats10SharedCtorEv, 
                        __ZN3awd7metrics29BluetoothLeConnectionPhyStats10SharedDtorEv, 
+                       __ZN3awd7metrics29BluetoothLeConnectionPhyStats15kPidFieldNumberE, 
+                       __ZN3awd7metrics29BluetoothLeConnectionPhyStats15kVidFieldNumberE, 
                        __ZN3awd7metrics29BluetoothLeConnectionPhyStats16default_instanceEv, 
                        __ZN3awd7metrics29BluetoothLeConnectionPhyStats17default_instance_E, 
                        __ZN3awd7metrics29BluetoothLeConnectionPhyStats21CheckTypeAndMergeFromERKN20wireless_diagnostics6google8protobuf11MessageLiteE, 

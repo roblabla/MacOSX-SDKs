@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           53FF51DF-E1B6-3320-9290-E54DD1B3ACB7
+    value:           73AF0B10-EA9F-3718-9729-E80F9E4F5EBF
   - target:          x86_64-maccatalyst
-    value:           53FF51DF-E1B6-3320-9290-E54DD1B3ACB7
+    value:           73AF0B10-EA9F-3718-9729-E80F9E4F5EBF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7FFA8E1F-9457-32C3-8DDB-8BEA613F4D81
+    value:           47F990DB-4CB4-3200-806F-969B9C9D802A
   - target:          arm64e-maccatalyst
-    value:           7FFA8E1F-9457-32C3-8DDB-8BEA613F4D81
+    value:           47F990DB-4CB4-3200-806F-969B9C9D802A
 install-name:    '/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -160,9 +160,10 @@ exports:
                        _kVTCompressionPropertyKey_AmbientViewingEnvironment, _kVTCompressionPropertyKey_AspectRatio16x9, 
                        _kVTCompressionPropertyKey_AuxiliaryTypeInfo, _kVTCompressionPropertyKey_AverageBitRate, 
                        _kVTCompressionPropertyKey_AverageDataRate, _kVTCompressionPropertyKey_AverageNonDroppableFrameRate, 
-                       _kVTCompressionPropertyKey_BaseLayerFrameRate, _kVTCompressionPropertyKey_CanvasPixelBufferAttributes, 
-                       _kVTCompressionPropertyKey_ChromaLocationBottomField, _kVTCompressionPropertyKey_ChromaLocationTopField, 
-                       _kVTCompressionPropertyKey_CleanAperture, _kVTCompressionPropertyKey_ClientPID, 
+                       _kVTCompressionPropertyKey_BaseLayerFrameRate, _kVTCompressionPropertyKey_BaseLayerFrameRateFraction, 
+                       _kVTCompressionPropertyKey_CanvasPixelBufferAttributes, _kVTCompressionPropertyKey_ChromaLocationBottomField, 
+                       _kVTCompressionPropertyKey_ChromaLocationTopField, _kVTCompressionPropertyKey_CleanAperture, 
+                       _kVTCompressionPropertyKey_ClientPID, _kVTCompressionPropertyKey_CloudEncoderDeviceID, 
                        _kVTCompressionPropertyKey_ColorPrimaries, _kVTCompressionPropertyKey_ConnectionID, 
                        _kVTCompressionPropertyKey_ContentLightLevelInfo, _kVTCompressionPropertyKey_ConvergenceDurationForAverageDataRate, 
                        _kVTCompressionPropertyKey_DataRateLimits, _kVTCompressionPropertyKey_Depth, 
@@ -203,7 +204,8 @@ exports:
                        _kVTCompressionPropertyKey_RequiredHEVCPictureParameterSetID, 
                        _kVTCompressionPropertyKey_RequiredHEVCSequenceParameterSetID, 
                        _kVTCompressionPropertyKey_RequiredHEVCVideoParameterSetAlphaLayerID, 
-                       _kVTCompressionPropertyKey_SourceFrameCount, _kVTCompressionPropertyKey_SublayerEncoderSpecification, 
+                       _kVTCompressionPropertyKey_RotationAngle, _kVTCompressionPropertyKey_SourceFrameCount, 
+                       _kVTCompressionPropertyKey_SourceImageBufferAttributes, _kVTCompressionPropertyKey_SublayerEncoderSpecification, 
                        _kVTCompressionPropertyKey_TargetQualityForAlpha, _kVTCompressionPropertyKey_ThrottleForBackground, 
                        _kVTCompressionPropertyKey_TileEncoderRequirements, _kVTCompressionPropertyKey_TotalByteBudget, 
                        _kVTCompressionPropertyKey_TransferFunction, _kVTCompressionPropertyKey_UnequalErrorProtection, 
@@ -216,8 +218,8 @@ exports:
                        _kVTCompressionProperty_SoftMinQuantizationParameter, _kVTDecoderCapability_IsHDRAllowedOnDevice, 
                        _kVTDecompressionPropertyKey_ActiveVideoResolution, _kVTDecompressionPropertyKey_CalculateYUVChecksum, 
                        _kVTDecompressionPropertyKey_CanvasPixelBufferAttributes, 
-                       _kVTDecompressionPropertyKey_ClientPID, _kVTDecompressionPropertyKey_ColorPrimaries, 
-                       _kVTDecompressionPropertyKey_ContentHasInterframeDependencies, 
+                       _kVTDecompressionPropertyKey_ClientPID, _kVTDecompressionPropertyKey_CloudDecoderDeviceID, 
+                       _kVTDecompressionPropertyKey_ColorPrimaries, _kVTDecompressionPropertyKey_ContentHasInterframeDependencies, 
                        _kVTDecompressionPropertyKey_DecompressionSessionOptions, 
                        _kVTDecompressionPropertyKey_DeinterlaceMode, _kVTDecompressionPropertyKey_EnableIOFenceDecode, 
                        _kVTDecompressionPropertyKey_EnableVideoResolutionAdaptationOutputScaling, 
@@ -315,7 +317,6 @@ exports:
                        _kVTPixelTransferMostRecentConversionValue_HardwareAndSoftware, 
                        _kVTPixelTransferMostRecentConversionValue_Metal, _kVTPixelTransferMostRecentConversionValue_Software, 
                        _kVTPixelTransferPropertyKey_AllowLowQualityScaling, _kVTPixelTransferPropertyKey_ClientPID, 
-                       _kVTPixelTransferPropertyKey_Convert10BitHDRToSDRFor8BitDestinationWithUnspecifiedColorProperties, 
                        _kVTPixelTransferPropertyKey_DestinationCleanAperture, _kVTPixelTransferPropertyKey_DestinationColorPrimaries, 
                        _kVTPixelTransferPropertyKey_DestinationCropRectangle, _kVTPixelTransferPropertyKey_DestinationICCProfile, 
                        _kVTPixelTransferPropertyKey_DestinationPixelAspectRatio, 
@@ -367,12 +368,14 @@ exports:
                        _kVTPropertySupportedValueListKey, _kVTPropertySupportedValueMaximumKey, 
                        _kVTPropertySupportedValueMinimumKey, _kVTPropertyTypeKey, 
                        _kVTPropertyType_Boolean, _kVTPropertyType_Enumeration, _kVTPropertyType_Number, 
-                       _kVTSampleAttachmentKey_EncodedFrameAvgQP, _kVTSampleAttachmentKey_EncoderRetryCount, 
-                       _kVTSampleAttachmentKey_FECGroupID, _kVTSampleAttachmentKey_FECLastFrameInGroup, 
-                       _kVTSampleAttachmentKey_FECLevelOfProtection, _kVTSampleAttachmentKey_PadByteCount, 
-                       _kVTSampleAttachmentKey_QualityMetrics, _kVTSampleAttachmentKey_ReferenceWasRefreshed, 
-                       _kVTSampleAttachmentKey_RequireAcknowledgementToken, _kVTSampleAttachmentQualityMetricsKey_AverageQp, 
-                       _kVTSampleAttachmentQualityMetricsKey_EncodingFrameRate, _kVTSampleAttachmentQualityMetricsKey_RecommendedFrameRate, 
+                       _kVTRotationAngle_0, _kVTRotationAngle_180, _kVTRotationAngle_270, 
+                       _kVTRotationAngle_90, _kVTSampleAttachmentKey_EncodedFrameAvgQP, 
+                       _kVTSampleAttachmentKey_EncoderRetryCount, _kVTSampleAttachmentKey_FECGroupID, 
+                       _kVTSampleAttachmentKey_FECLastFrameInGroup, _kVTSampleAttachmentKey_FECLevelOfProtection, 
+                       _kVTSampleAttachmentKey_PadByteCount, _kVTSampleAttachmentKey_QualityMetrics, 
+                       _kVTSampleAttachmentKey_ReferenceWasRefreshed, _kVTSampleAttachmentKey_RequireAcknowledgementToken, 
+                       _kVTSampleAttachmentQualityMetricsKey_AverageQp, _kVTSampleAttachmentQualityMetricsKey_EncodingFrameRate, 
+                       _kVTSampleAttachmentQualityMetricsKey_RecommendedFrameRate, 
                        _kVTScalingMode_CropSourceToCleanAperture, _kVTScalingMode_Letterbox, 
                        _kVTScalingMode_Normal, _kVTScalingMode_Trim, _kVTTemporalFilterClass_Deinterlace, 
                        _kVTTemporalFilterClass_Enhancement, _kVTTemporalFilterClass_FrameRateConversion, 
@@ -425,6 +428,7 @@ exports:
                        _kVTVideoEncoderList_RevealHardwareAcceleratedEncoders, _kVTVideoEncoderList_RevealHiddenEncoders, 
                        _kVTVideoEncoderList_SupportedSelectionProperties, _kVTVideoEncoderList_SupportsFrameReordering, 
                        _kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder, 
+                       _kVTVideoEncoderSpecification_EnableLowLatencyRateControl, 
                        _kVTVideoEncoderSpecification_EncoderID, _kVTVideoEncoderSpecification_InhibitCompressedBufferUse, 
                        _kVTVideoEncoderSpecification_PreferredEncoderGPURegistryID, 
                        _kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder, 

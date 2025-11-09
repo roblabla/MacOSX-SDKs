@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           38FDDE00-873E-3557-890B-2544F20750E3
+    value:           AEC69D72-093B-3A1E-936D-B03C1B147F42
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D2D6AF58-DEC4-392E-9CC8-52F466325D1F
+    value:           510890CF-F0A7-3FDC-8BF1-1945C1811F86
 install-name:    '/System/Library/PrivateFrameworks/SiriPlaybackControlIntents.framework/Versions/A/SiriPlaybackControlIntents'
 swift-abi-version: 7
 allowable-clients:
@@ -108,6 +108,22 @@ exports:
                        '_$s26SiriPlaybackControlIntents21SkipTimeIntentHandlerCMu', 
                        '_$s26SiriPlaybackControlIntents21SkipTimeIntentHandlerCN', 
                        '_$s26SiriPlaybackControlIntents21SkipTimeIntentHandlerCfD', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerC13resolveSource3for4withySo0efG0C_ySo27DeviceGroupResolutionResultCctFTj', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerC13resolveSource3for4withySo0efG0C_ySo27DeviceGroupResolutionResultCctFTq', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerC18resolveDestination3for4withySo0efG0C_ySo27DeviceGroupResolutionResultCctFTj', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerC18resolveDestination3for4withySo0efG0C_ySo27DeviceGroupResolutionResultCctFTq', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerC6handle6intent10completionySo0efG0C_ySo0efG8ResponseCctFTj', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerC6handle6intent10completionySo0efG0C_ySo0efG8ResponseCctFTq', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerC7confirm6intent10completionySo0efG0C_ySo0efG8ResponseCctFTj', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerC7confirm6intent10completionySo0efG0C_ySo0efG8ResponseCctFTq', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerCACycfC', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerCACycfc', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerCMa', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerCMn', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerCMo', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerCMu', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerCN', 
+                       '_$s26SiriPlaybackControlIntents23AddSpeakerIntentHandlerCfD', 
                        '_$s26SiriPlaybackControlIntents23PauseMediaIntentHandlerC14resolveDevices3for4withySo0efG0C_ySaySo22DeviceResolutionResultCGctFTj', 
                        '_$s26SiriPlaybackControlIntents23PauseMediaIntentHandlerC14resolveDevices3for4withySo0efG0C_ySaySo22DeviceResolutionResultCGctFTq', 
                        '_$s26SiriPlaybackControlIntents23PauseMediaIntentHandlerC6handle6intent10completionySo0efG0C_ySo0efG8ResponseCctFTj', 
@@ -336,9 +352,10 @@ exports:
                        '_$sSo19NowPlayingMediaTypeVs23CustomStringConvertible26SiriPlaybackControlIntentsMc', 
                        '_$sSo6DeviceC26SiriPlaybackControlIntentsE11descriptionSSvg', 
                        _SiriPlaybackControlIntentsVersionNumber, _SiriPlaybackControlIntentsVersionString ]
-    objc-classes:    [ Device, DeviceContext, DeviceContextResolutionResult, DeviceProximityResolutionResult, 
-                       DeviceQuery, DeviceQueryResolutionResult, DeviceResolutionResult, 
-                       DirectionResolutionResult, GetVolumeLevelDeviceResolutionResult, 
+    objc-classes:    [ AddSpeakerIntent, AddSpeakerIntentResponse, Device, DeviceContext, 
+                       DeviceContextResolutionResult, DeviceGroup, DeviceGroupResolutionResult, 
+                       DeviceProximityResolutionResult, DeviceQuery, DeviceQueryResolutionResult, 
+                       DeviceResolutionResult, DirectionResolutionResult, GetVolumeLevelDeviceResolutionResult, 
                        GetVolumeLevelIntent, GetVolumeLevelIntentResponse, LanguageOption, 
                        LanguageOptionResolutionResult, NLMediaTypeResolutionResult, 
                        NowPlayingMediaTypeResolutionResult, NowPlayingStateResolutionResult, 
@@ -359,7 +376,8 @@ exports:
                        VolumeSettingQualifierResolutionResult, VolumeSettingStateResolutionResult, 
                        VolumeSettingUnitResolutionResult, WhatDidTheySayDeviceResolutionResult, 
                        WhatDidTheySayIntent, WhatDidTheySayIntentResponse, _TtC26SiriPlaybackControlIntents21SeekTimeIntentHandler, 
-                       _TtC26SiriPlaybackControlIntents21SkipTimeIntentHandler, _TtC26SiriPlaybackControlIntents23PauseMediaIntentHandler, 
+                       _TtC26SiriPlaybackControlIntents21SkipTimeIntentHandler, _TtC26SiriPlaybackControlIntents23AddSpeakerIntentHandler, 
+                       _TtC26SiriPlaybackControlIntents23PauseMediaIntentHandler, 
                        _TtC26SiriPlaybackControlIntents24ResumeMediaIntentHandler, 
                        _TtC26SiriPlaybackControlIntents24SkipContentIntentHandler, 
                        _TtC26SiriPlaybackControlIntents27GetVolumeLevelIntentHandler, 

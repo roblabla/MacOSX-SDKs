@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A2142956-9EB5-335B-AD84-E022897F4D5A
+    value:           01366A42-5979-3A62-8152-3A14B5512827
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           460E96DF-1AF6-3EB7-8A4A-F3972157C483
+    value:           D8C0F74F-87ED-34E2-8856-47EECA41445E
 install-name:    '/System/Library/PrivateFrameworks/CoreRecognition.framework/Versions/A/CoreRecognition'
 current-version: 157
 exports:

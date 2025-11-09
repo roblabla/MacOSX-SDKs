@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ADAEA7F6-0EFF-3D1D-9B40-F5A92098489B
+    value:           CE3572BB-8D82-3632-8E6C-8A3D46132F3D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7FD4297C-B95E-330A-9B9A-AE9633176758
+    value:           CCE0B5A3-5319-320B-BF94-DB6100B0E7EC
 install-name:    '/System/Library/PrivateFrameworks/PackageKit.framework/Versions/A/PackageKit'
 current-version: 434
 exports:
@@ -118,12 +118,13 @@ exports:
                        __parallelThreadCount, _apple_root_ca, _gReceiptsCache, _kPKIOMatchingDictionaryKey, 
                        _kPKPatchCurrentSHA1Hash, _kPKPatchExpectedSHA1Hash, _kPKPatchFormat, 
                        _kPKPatchRequiredSHA1Hash, _kPKStreamingProductActualChunkHashKey, 
-                       _kPKStreamingProductErrorDomain, _kPKStreamingProductExpectedChunkHashKey ]
+                       _kPKStreamingProductErrorDomain, _kPKStreamingProductExpectedChunkHashKey, 
+                       _kPackageInfoMaximumSupportedFormatVersion ]
     objc-classes:    [ PKAddExtendedAttributesInstallOperation, PKAddRestrictedRootFlagInstallOperation, 
                        PKArchive, PKArchiveDistributionContainer, PKArchiveProduct, 
                        PKArchiveSignature, PKArchiveSigner, PKBOM, PKBOMDirectoryEnumerator, 
-                       PKBundleComponent, PKBundleComponentVersion, PKBundleStorage, 
-                       PKCFBundleStorage, PKCheckError, PKCleanEFWCacheInstallOperation, 
+                       PKBundleCodeSigning, PKBundleComponent, PKBundleComponentVersion, 
+                       PKBundleStorage, PKCFBundleStorage, PKCheckError, PKCleanEFWCacheInstallOperation, 
                        PKComponent, PKCoreShove, PKDYLDCacheInstallOperation, PKDataSizeFormatter, 
                        PKDataSizeValueTransformer, PKDeferredInstallManager, PKDistribution, 
                        PKDistributionChoice, PKDistributionContainer, PKDistributionPackageReference, 

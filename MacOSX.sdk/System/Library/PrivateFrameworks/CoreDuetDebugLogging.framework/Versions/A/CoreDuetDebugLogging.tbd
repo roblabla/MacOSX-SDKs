@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           65E1262F-01D6-3C96-BFAF-3BE6BB0996A8
+    value:           18160999-BDFF-3216-96DD-AE7812966AD7
   - target:          x86_64-maccatalyst
-    value:           65E1262F-01D6-3C96-BFAF-3BE6BB0996A8
+    value:           18160999-BDFF-3216-96DD-AE7812966AD7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BDC629F1-017F-3C3B-855A-9E619AB0E619
+    value:           59E9E716-8600-38FD-AD56-CD751FCA0B59
   - target:          arm64e-maccatalyst
-    value:           BDC629F1-017F-3C3B-855A-9E619AB0E619
+    value:           59E9E716-8600-38FD-AD56-CD751FCA0B59
 install-name:    '/System/Library/PrivateFrameworks/CoreDuetDebugLogging.framework/Versions/A/CoreDuetDebugLogging'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

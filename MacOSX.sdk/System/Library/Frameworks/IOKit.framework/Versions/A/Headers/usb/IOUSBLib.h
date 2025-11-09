@@ -253,7 +253,7 @@ __BEGIN_DECLS
                                                                   0xC8, 0x09, 0xB8, 0xD8, 0x08, 0x84, 0x11, 0xD7, \
                                                                   0xBB, 0x96, 0x00, 0x03, 0x93, 0x3E, 0x3E, 0x3E)
 
-// FE2FD52F-3B5A-473B-978B-AD99001EB3ED
+// FE2FD52F-3B5A-473B-977B-AD99001EB3ED
 /*!
    @defined kIOUSBDeviceInterfaceID245
    @discussion This UUID constant is used to obtain a device interface corresponding to

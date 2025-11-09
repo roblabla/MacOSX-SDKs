@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FBF81CF8-10A8-38CD-BD22-05D6187002E1
+    value:           F2DE2DEE-AE91-322F-8FBE-6F8697F256A3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E848CA59-F34A-3E15-AEEE-75EBCD9A5150
+    value:           FF33DCBB-ECAB-37E0-86F3-079FB9B5FE60
 install-name:    '/System/Library/PrivateFrameworks/NotificationCenterUI.framework/Versions/A/NotificationCenterUI'
-current-version: 1108.20.11
+current-version: 1108.40.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -60,6 +60,7 @@ exports:
                        '_$s16EyeCandyGraphics23MaterialLayerControllerV7ControlO5color10appearanceSo10CGColorRefa_So8NSStringC6filtertAC10AppearanceO_tF', 
                        '_$s16EyeCandyGraphics23MaterialLayerControllerV7ControlO9hashValueSivg', 
                        '_$s16EyeCandyGraphics23MaterialLayerControllerV7ControlO9hashValueSivpMV', 
+                       '_$s16EyeCandyGraphics23MaterialLayerControllerV7ControlO9textColor10appearanceSo10CGColorRefa_So8NSStringCSg6filtertAC10AppearanceO_tF', 
                        '_$s16EyeCandyGraphics23MaterialLayerControllerV7ControlOMa', 
                        '_$s16EyeCandyGraphics23MaterialLayerControllerV7ControlOMn', 
                        '_$s16EyeCandyGraphics23MaterialLayerControllerV7ControlON', 

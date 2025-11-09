@@ -113,6 +113,13 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 */
 - (void)stopRequestingMediaData;
 
+/*!
+    @property	hasSufficientMediaDataForReliablePlaybackStart
+    @abstract	Indicates whether the enqueued media data meets the renderer's preroll level.
+    @discussion	Clients should fetch the value of this property to learn if the renderer has had enough media data enqueued to start playback reliably. Starting playback when this property is NO may prevent smooth playback following an immediate start.
+ */
+@property (nonatomic, readonly) BOOL hasSufficientMediaDataForReliablePlaybackStart API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4));
+
 @end
 
 NS_ASSUME_NONNULL_END

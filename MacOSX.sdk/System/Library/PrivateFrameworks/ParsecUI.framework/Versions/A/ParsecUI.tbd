@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A2F126C4-324F-398E-AA85-FA6C16978B60
+    value:           CE19439B-7AD5-3041-B875-C3C1CEF6CCB2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DFB5EBCA-9646-395F-9082-32F1BCC512D8
+    value:           DC73A5AB-8DC5-3623-809C-51A0AFD669C6
 install-name:    '/System/Library/PrivateFrameworks/ParsecUI.framework/Versions/A/ParsecUI'
 current-version: 0
 exports:

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A6F10C7E-E88C-31AD-989D-BB5B7F9615F0
+    value:           CBFB36EB-C0AE-3721-AED6-EE86BED6BE58
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6E5646F9-2C66-3A69-8AA9-75E7009D4EFF
+    value:           370855EB-9441-38E3-AA02-A6F27F5D13B1
 install-name:    '/System/Library/PrivateFrameworks/WeatherKit.framework/Versions/A/WeatherKit'
 current-version: 684
 exports:

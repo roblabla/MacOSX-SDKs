@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           66B77C34-032E-380F-A0AB-2DC6C399E044
+    value:           292859B6-C40D-3E45-AC4E-FC290BFAE1F9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           99415A84-78A9-3FC6-835D-9E68313A1F61
+    value:           438BD4F8-8AA7-3DED-9AF1-C92065733A47
 install-name:    '/System/Library/PrivateFrameworks/IMSharedUI.framework/Versions/A/IMSharedUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

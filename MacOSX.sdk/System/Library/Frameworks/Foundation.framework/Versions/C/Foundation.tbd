@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           44A7115B-7FF0-3300-B61B-0FA71B63C715
+    value:           5B112EDB-35C1-31A7-BFDA-E185D1B49D93
   - target:          x86_64-maccatalyst
-    value:           44A7115B-7FF0-3300-B61B-0FA71B63C715
+    value:           5B112EDB-35C1-31A7-BFDA-E185D1B49D93
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5CEA7350-F274-39AE-9F27-D9813F2C3A76
+    value:           899ED889-CC93-35B4-9B3D-F68CD81BA919
   - target:          arm64e-maccatalyst
-    value:           5CEA7350-F274-39AE-9F27-D9813F2C3A76
+    value:           899ED889-CC93-35B4-9B3D-F68CD81BA919
 install-name:    '/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation'
-current-version: 1770.255
+current-version: 1775.118.101
 compatibility-version: 300
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -550,9 +550,17 @@ exports:
                        '$ld$hide$os10.9$_NSMetadataItemWhereFromsKey', '$ld$hide$os10.9$_NSMetadataItemWhiteBalanceKey', 
                        '$ld$hide$os10.9$_NSMetadataQueryIndexedLocalComputerScope', 
                        '$ld$hide$os10.9$_NSMetadataQueryIndexedNetworkScope' ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _NSAffineTransformStructIdentity, _NSAllHashTableObjects, 
+    symbols:         [ '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$1$10.9$999$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$2$7.0$999$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$3$9.0$999$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$4$2.0$999$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$6$13.0$999$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$7$7.0$999$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$8$9.0$999$_NSDetailedErrorsKey$', 
+                       '$ld$previous$/System/Library/Frameworks/CoreData.framework/CoreData$$9$2.0$999$_NSDetailedErrorsKey$', 
+                       _NSAffineTransformStructIdentity, _NSAllHashTableObjects, 
                        _NSAllMapTableKeys, _NSAllMapTableValues, _NSAllocateMemoryPages, 
                        _NSAllocateObject, _NSAllocateObjectArray, _NSAllocateScannedUncollectable, 
                        _NSAppleEventManagerWillProcessFirstEventNotification, _NSAppleEventTimeOutDefault, 
@@ -587,7 +595,7 @@ exports:
                        _NSDecimalNumberUnderflowException, _NSDecimalPower, _NSDecimalRound, 
                        _NSDecimalString, _NSDecimalSubtract, _NSDecrementExtraRefCountWasZero, 
                        _NSDefaultMallocZone, _NSDescriptionErrorKey, _NSDestinationFilePathErrorKey, 
-                       _NSDestinationInvalidException, _NSDidBecomeSingleThreadedNotification, 
+                       _NSDestinationInvalidException, _NSDetailedErrorsKey, _NSDidBecomeSingleThreadedNotification, 
                        _NSDistinctUnionOfArraysKeyValueOperator, _NSDistinctUnionOfObjectsKeyValueOperator, 
                        _NSDistinctUnionOfSetsKeyValueOperator, _NSDivideRect, _NSEdgeInsetsEqual, 
                        _NSEdgeInsetsZero, _NSEndHashTableEnumeration, _NSEndMapTableEnumeration, 
@@ -784,14 +792,14 @@ exports:
                        _NSMetadataUbiquitousSharedItemReadWritePermissions, _NSMetadataUbiquitousSharedItemRoleKey, 
                        _NSMetadataUbiquitousSharedItemRoleOwner, _NSMetadataUbiquitousSharedItemRoleParticipant, 
                        _NSMinimumKeyValueOperator, _NSMinimumValidValueErrorKey, 
-                       _NSMouseInRect, _NSNeXTRootDirectory, _NSNegateBooleanTransformerName, 
-                       _NSNetServicesErrorCode, _NSNetServicesErrorDomain, _NSNextHashEnumeratorItem, 
-                       _NSNextMapEnumeratorPair, _NSNonOwnedPointerHashCallBacks, 
-                       _NSNonOwnedPointerMapKeyCallBacks, _NSNonOwnedPointerMapValueCallBacks, 
-                       _NSNonOwnedPointerOrNullMapKeyCallBacks, _NSNonRetainedObjectHashCallBacks, 
-                       _NSNonRetainedObjectMapKeyCallBacks, _NSNonRetainedObjectMapValueCallBacks, 
-                       _NSNotFoundRange, _NSOSStatusErrorDomain, _NSObjectHashCallBacks, 
-                       _NSObjectInaccessibleException, _NSObjectMapKeyCallBacks, 
+                       _NSMouseInRect, _NSMultipleUnderlyingErrorsKey, _NSNeXTRootDirectory, 
+                       _NSNegateBooleanTransformerName, _NSNetServicesErrorCode, 
+                       _NSNetServicesErrorDomain, _NSNextHashEnumeratorItem, _NSNextMapEnumeratorPair, 
+                       _NSNonOwnedPointerHashCallBacks, _NSNonOwnedPointerMapKeyCallBacks, 
+                       _NSNonOwnedPointerMapValueCallBacks, _NSNonOwnedPointerOrNullMapKeyCallBacks, 
+                       _NSNonRetainedObjectHashCallBacks, _NSNonRetainedObjectMapKeyCallBacks, 
+                       _NSNonRetainedObjectMapValueCallBacks, _NSNotFoundRange, _NSOSStatusErrorDomain, 
+                       _NSObjectHashCallBacks, _NSObjectInaccessibleException, _NSObjectMapKeyCallBacks, 
                        _NSObjectMapValueCallBacks, _NSObjectNotAvailableException, 
                        _NSOffsetRect, _NSOldStyleException, _NSOpenStepDirectoryForUser, 
                        _NSOpenStepRootDirectory, _NSOperationNotSupportedForKeyException, 
@@ -1143,7 +1151,7 @@ exports:
                        NSXMLNode._objectValue, NSXMLNode._parent, _NSCloudSharingDescriptor._invitationsSentViaThirdPartyService, 
                        _NSCloudSharingDescriptor._numberOfInvitations, _NSCloudSharingDescriptor._operation, 
                        _NSCloudSharingDescriptor._publicShare, _NSCloudSharingDescriptor._sharedContentType ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _NSAMPMDesignation, _NSAllocateCollectable, _NSCurrencySymbol, 
                        _NSDateFormatString, _NSDateTimeOrdering, _NSDecimalDigits, 
                        _NSDecimalSeparator, _NSEarlierTimeDesignations, _NSHourNameDesignations, 

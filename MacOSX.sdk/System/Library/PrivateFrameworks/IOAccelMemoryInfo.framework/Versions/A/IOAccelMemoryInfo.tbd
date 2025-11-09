@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           90735179-1E6C-3D1F-8CCF-08AC441B19A2
+    value:           B9C96BA1-CB6E-3F2B-BDF2-83731B625B1F
   - target:          x86_64-maccatalyst
-    value:           90735179-1E6C-3D1F-8CCF-08AC441B19A2
+    value:           B9C96BA1-CB6E-3F2B-BDF2-83731B625B1F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A4FC45D9-E4F0-3D07-9AAF-5B3093E52163
+    value:           F1D65FDC-0CAC-3AB4-A2C6-57D73E0781AB
   - target:          arm64e-maccatalyst
-    value:           A4FC45D9-E4F0-3D07-9AAF-5B3093E52163
+    value:           F1D65FDC-0CAC-3AB4-A2C6-57D73E0781AB
 install-name:    '/System/Library/PrivateFrameworks/IOAccelMemoryInfo.framework/Versions/A/IOAccelMemoryInfo'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

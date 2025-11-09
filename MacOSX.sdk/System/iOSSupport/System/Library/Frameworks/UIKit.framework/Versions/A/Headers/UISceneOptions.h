@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
-@class UIScene, UIOpenURLContext, UNNotificationResponse, UIApplicationShortcutItem, CKShareMetadata;
+@class UIScene, UIOpenURLContext, UNNotificationResponse, UIApplicationShortcutItem, CKShareMetadata, UIEventAttribution;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -61,6 +61,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UISceneOpenURLOptions : NSObjec
 
 // Copy the file before use if this value is NO
 @property (nonatomic, readonly) BOOL openInPlace;
+
+// An event attribution associated with the URL to open.
+@property (nullable, nonatomic, readonly) UIEventAttribution *eventAttribution API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos, tvos);
 @end
 
 #pragma mark - UISceneOpenExternalURLOptions
@@ -68,6 +71,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UISceneOpenURLOptions : NSObjec
 UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UISceneOpenExternalURLOptions : NSObject
 // URLs must be universal links and have an app configured to open them.
 @property (nonatomic, readwrite) BOOL universalLinksOnly;
+// An event attribution associated with the external URL to open.
+@property (nullable, nonatomic, copy) UIEventAttribution *eventAttribution API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos, tvos);
 @end
 
 #pragma mark - UISceneActivationRequestOptions
@@ -77,15 +82,15 @@ typedef NS_ENUM(NSInteger, UISceneCollectionJoinBehavior) {
     UISceneCollectionJoinBehaviorAutomatic, // The scene follows system preferences for joining collections.
     UISceneCollectionJoinBehaviorPreferred, // If requestingScene is set, add the new scene to its collection and activate it. Otherwise attempt to join a compatible collection.
     UISceneCollectionJoinBehaviorDisallowed, // Create a new collection for the scene, ignoring system preferences.
-    UISceneCollectionJoinBehaviorPreferredWithoutActivating, // If requestingScene is set, add the new scene without deactivating the requestingScene. Otherwise behaves the same as preferrred. For example, in Catalyst this could be used to open a link in a new tab in the background.
-}  API_AVAILABLE(macCatalyst(10.14)) API_UNAVAILABLE(ios, watchos, tvos);
+    UISceneCollectionJoinBehaviorPreferredWithoutActivating, // If requestingScene is set, add the new scene without deactivating the requestingScene. Otherwise behaves the same as preferred. For example, in Catalyst this could be used to open a link in a new tab in the background.
+}  API_AVAILABLE(macCatalyst(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UISceneActivationRequestOptions : NSObject
 // Informs the system the interface instance the user interacted with to create the new interface for the purposes of system navigation.
 @property (nullable, nonatomic, readwrite, strong) UIScene *requestingScene;
 
 // A scene collection is a group of scenes that display together. In Catalyst, this is used to add windows to an NSWindowTabGroup.
-@property (nonatomic, readwrite) UISceneCollectionJoinBehavior collectionJoinBehavior  API_AVAILABLE(macCatalyst(10.14)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (nonatomic, readwrite) UISceneCollectionJoinBehavior collectionJoinBehavior  API_AVAILABLE(macCatalyst(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 @end
 
 #pragma mark - UISceneDestructionRequestOptions

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           58ECEEF3-5F0D-31D3-9217-8341AFF7B910
+    value:           4F48A94D-C143-3C3A-B9FF-8EB59835D208
 install-name:    '/System/Library/Frameworks/JavaNativeFoundation.framework/Versions/A/JavaNativeFoundation'
 current-version: 80
 exports:

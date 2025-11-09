@@ -1,33 +1,33 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target arm64e-apple-ios14.3-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUniformTypeIdentifiers -swift-version 5 -enforce-exclusivity=checked -O -module-name UniformTypeIdentifiers
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target arm64e-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUniformTypeIdentifiers -swift-version 5 -enforce-exclusivity=checked -O -module-name UniformTypeIdentifiers
 import Foundation
 import Swift
 @_exported import UniformTypeIdentifiers
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension URLResourceValues {
   public var contentType: UniformTypeIdentifiers.UTType? {
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension URL {
   public func appendingPathComponent(_ partialName: Swift.String, conformingTo contentType: UniformTypeIdentifiers.UTType) -> Foundation.URL
   public mutating func appendPathComponent(_ partialName: Swift.String, conformingTo contentType: UniformTypeIdentifiers.UTType)
   public func appendingPathExtension(for contentType: UniformTypeIdentifiers.UTType) -> Foundation.URL
   public mutating func appendPathExtension(for contentType: UniformTypeIdentifiers.UTType)
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension String {
   @available(*, unavailable, message: "Use appendingPathExtension(for:) on URL instead.")
   public func appendingPathExtension(for contentType: UniformTypeIdentifiers.UTType) -> Swift.Never
   @available(*, unavailable, message: "Use appendingPathComponent(_:conformingTo:) on URL instead.")
   public func appendingPathComponent(_ partialName: Swift.String, conformingTo contentType: UniformTypeIdentifiers.UTType) -> Swift.Never
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public struct UTType {
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UTType {
   public init?(_ identifier: Swift.String)
   public init?(filenameExtension: Swift.String, conformingTo supertype: UniformTypeIdentifiers.UTType = .data)
@@ -60,7 +60,7 @@ extension UTType {
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UTType {
   public func conforms(to type: UniformTypeIdentifiers.UTType) -> Swift.Bool
   public func isSupertype(of type: UniformTypeIdentifiers.UTType) -> Swift.Bool
@@ -69,7 +69,7 @@ extension UTType {
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UTType {
   public init?(tag: Swift.String, tagClass: UniformTypeIdentifiers.UTTagClass, conformingTo supertype: UniformTypeIdentifiers.UTType?)
   public static func types(tag: Swift.String, tagClass: UniformTypeIdentifiers.UTTagClass, conformingTo supertype: UniformTypeIdentifiers.UTType?) -> [UniformTypeIdentifiers.UTType]
@@ -77,12 +77,12 @@ extension UTType {
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UTType {
   public init(exportedAs identifier: Swift.String, conformingTo parentType: UniformTypeIdentifiers.UTType? = nil)
   public init(importedAs identifier: Swift.String, conformingTo parentType: UniformTypeIdentifiers.UTType? = nil)
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UTType : Swift.Equatable, Swift.Hashable {
   public static func == (lhs: UniformTypeIdentifiers.UTType, rhs: UniformTypeIdentifiers.UTType) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
@@ -90,7 +90,7 @@ extension UTType : Swift.Equatable, Swift.Hashable {
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UTType : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -99,7 +99,7 @@ extension UTType : Swift.CustomStringConvertible, Swift.CustomDebugStringConvert
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UTType : Foundation.ReferenceConvertible {
   public typealias ReferenceType = UniformTypeIdentifiers.UTTypeReference
   public func _bridgeToObjectiveC() -> UniformTypeIdentifiers.UTTypeReference
@@ -108,12 +108,12 @@ extension UTType : Foundation.ReferenceConvertible {
   public static func _unconditionallyBridgeFromObjectiveC(_ source: UniformTypeIdentifiers.UTTypeReference?) -> UniformTypeIdentifiers.UTType
   public typealias _ObjectiveCType = UniformTypeIdentifiers.UTTypeReference
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UTType : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UTType {
   public static let item: UniformTypeIdentifiers.UTType
   public static let content: UniformTypeIdentifiers.UTType
@@ -246,23 +246,23 @@ extension UTType {
   public static let epub: UniformTypeIdentifiers.UTType
   public static let log: UniformTypeIdentifiers.UTType
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public struct UTTagClass : Swift.RawRepresentable {
   public let rawValue: Swift.String
   public init(rawValue: Swift.String)
   public typealias RawValue = Swift.String
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UTTagClass {
   public static let filenameExtension: UniformTypeIdentifiers.UTTagClass
   public static let mimeType: UniformTypeIdentifiers.UTTagClass
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UTTagClass : Swift.Equatable, Swift.Hashable {
   public static func == (lhs: UniformTypeIdentifiers.UTTagClass, rhs: UniformTypeIdentifiers.UTTagClass) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UTTagClass : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
@@ -271,7 +271,7 @@ extension UTTagClass : Swift.CustomStringConvertible, Swift.CustomDebugStringCon
     get
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension UTTagClass : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws

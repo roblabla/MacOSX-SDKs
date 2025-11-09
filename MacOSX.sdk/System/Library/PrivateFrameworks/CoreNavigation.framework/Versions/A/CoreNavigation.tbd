@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C703A1AF-8D15-34FC-AEB1-FB1A9B5329DF
+    value:           D9E033BB-2AB3-34E4-90C3-C6CC3A4E4623
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FAB09355-2FF5-37E1-85E2-FC9D738ADF54
+    value:           4A5DDFBF-20AA-3C4C-A16E-4BA852F1B9E2
 install-name:    '/System/Library/PrivateFrameworks/CoreNavigation.framework/Versions/A/CoreNavigation'
 current-version: 0
 compatibility-version: 0
@@ -441,7 +441,7 @@ exports:
                        __ZTINSt3__120__match_char_collateIcNS_12regex_traitsIcEEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceIKN11cnframework12GenericEventENS_9allocatorIS3_EEEE, 
                        __ZTINSt3__120__shared_ptr_emplaceIN5raven24KlobucharModelParametersENS_9allocatorIS2_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPNS_13__empty_stateIcEENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPNS_13__empty_stateIcEENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTINSt3__121__empty_non_own_stateIcEE, __ZTINSt3__123__match_any_but_newlineIcEE, 
                        __ZTINSt3__126__end_marked_subexpressionIcEE, __ZTINSt3__128__begin_marked_subexpressionIcEE, 
                        __ZTINSt3__16__loopIcEE, __ZTINSt3__16__nodeIcEE, __ZTS14CNSerializable, 
@@ -854,13 +854,13 @@ exports:
                        __ZTSN8cnmatrix8CNMatrixILj9ELj1EiEE, __ZTSN8cnmatrix8CNMatrixILj9ELj9EdEE, 
                        __ZTSNSt3__110__back_refIcEE, __ZTSNSt3__110__function6__baseIFvPN11cnframework16ActiveObjectBaseERKNS2_12GenericEventEEEE, 
                        __ZTSNSt3__110__l_anchorIcEE, __ZTSNSt3__110__r_anchorIcEE, 
+                       __ZTSNSt3__110shared_ptrINS_13__empty_stateIcEEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__111__alternateIcEE, __ZTSNSt3__111__end_stateIcEE, 
                        __ZTSNSt3__111__lookaheadIcNS_12regex_traitsIcEEEE, __ZTSNSt3__111__match_anyIcEE, 
                        __ZTSNSt3__112__match_charIcEE, __ZTSNSt3__113__empty_stateIcEE, 
                        __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__114default_deleteINS_13__empty_stateIcEEEE, 
-                       __ZTSNSt3__115__has_one_stateIcEE, __ZTSNSt3__115__word_boundaryIcNS_12regex_traitsIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__115__has_one_stateIcEE, 
+                       __ZTSNSt3__115__word_boundaryIcNS_12regex_traitsIcEEEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__116__back_ref_icaseIcNS_12regex_traitsIcEEEE, __ZTSNSt3__116__owns_one_stateIcEE, 
                        __ZTSNSt3__117__owns_two_statesIcEE, __ZTSNSt3__117__repeat_one_loopIcEE, 
                        __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118__back_ref_collateIcNS_12regex_traitsIcEEEE, 
@@ -872,7 +872,7 @@ exports:
                        __ZTSNSt3__120__match_char_collateIcNS_12regex_traitsIcEEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIKN11cnframework12GenericEventENS_9allocatorIS3_EEEE, 
                        __ZTSNSt3__120__shared_ptr_emplaceIN5raven24KlobucharModelParametersENS_9allocatorIS2_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPNS_13__empty_stateIcEENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPNS_13__empty_stateIcEENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTSNSt3__121__empty_non_own_stateIcEE, __ZTSNSt3__123__match_any_but_newlineIcEE, 
                        __ZTSNSt3__126__end_marked_subexpressionIcEE, __ZTSNSt3__128__begin_marked_subexpressionIcEE, 
                        __ZTSNSt3__16__loopIcEE, __ZTSNSt3__16__nodeIcEE ]
@@ -6483,11 +6483,11 @@ exports:
                        __ZN5raven27GnssMeasurementPreprocessor23UpdateCurrentDayAndWeekERKNS_22GnssTimeConversionInfoE, 
                        __ZN5raven27GnssMeasurementPreprocessor26UpdateCurrentFrameworkTimeERK6CNTime, 
                        __ZN5raven27GnssMeasurementPreprocessor27GetKlobucharParametersEventERNS_24KlobucharParametersEventE, 
-                       __ZN5raven27GnssMeasurementPreprocessor29UpdateReceiverBandCorrectionsERKNSt3__16vectorINS_26GnssReceiverBandCorrectionENS1_9allocatorIS3_EEEE, 
                        __ZN5raven27GnssMeasurementPreprocessor31GetPreprocessedGnssMeasurementsERNS_33GnssPreprocessedMeasurementsEventE, 
-                       __ZN5raven27GnssMeasurementPreprocessor31UpdateFilteredRxBandCorrectionsEv, 
                        __ZN5raven27GnssMeasurementPreprocessor50UpdateMeasurementPropagationTimeUsingDwellEndTimesERKNS_24GnssMeasurementDataEventE, 
                        __ZN5raven27GnssMeasurementPreprocessor5ResetEv, __ZN5raven27GnssMeasurementPreprocessor9ConfigureERKNS_37GnssMeasurementPreprocessorConfigArgsE, 
+                       __ZN5raven27MinnesotaRfModelCompensator21FeedVendorCorrectionsERKNSt3__13mapINS_8GnssBandENS_26GnssReceiverBandCorrectionENS1_4lessIS3_EENS1_9allocatorINS1_4pairIKS3_S4_EEEEEERK6CNTimeRKNS_18RavenActivityStateERKNS_22RavenSignalEnvironmentE, 
+                       __ZN5raven27MinnesotaRfModelCompensator29OverwriteWithInternalEstimateERNS_26GnssReceiverBandCorrectionE, 
                        __ZN5raven28AccessoryVehicleSpeedChecker11HandleEventERKNS_26AccessoryVehicleSpeedEventERS1_, 
                        __ZN5raven28AccessoryVehicleSpeedChecker24ScreenWithEstimatorSpeedERKNS_26AccessoryVehicleSpeedEventENS_18RavenEstimatorTypeEd, 
                        __ZN5raven28AccessoryVehicleSpeedChecker5ResetEv, __ZN5raven28AccessoryVehicleSpeedChecker9ConfigureERKNS_38AccessoryVehicleSpeedCheckerConfigArgsERKNS_27IntegrityEstimatorDataStoreE, 
@@ -6496,6 +6496,7 @@ exports:
                        __ZN5raven29RavenPositionContextEstimator10InitializeERKNS_37RavenPositionContextEstimatorInitArgsE, 
                        __ZN5raven29RavenPositionContextEstimator11HandleEventERKNS_13TimeMarkEventE, 
                        __ZN5raven29RavenPositionContextEstimator11HandleEventERKNS_18ActivityStateEventE, 
+                       __ZN5raven29RavenPositionContextEstimator11HandleEventERKNS_18RavenSolutionEventE, 
                        __ZN5raven29RavenPositionContextEstimator11HandleEventERKNS_21GnssAvailabilityEventE, 
                        __ZN5raven29RavenPositionContextEstimator11HandleEventERKNS_22SignalEnvironmentEventE, 
                        __ZN5raven29RavenPositionContextEstimator11HandleEventERKNS_33GnssPreprocessedMeasurementsEventE, 
@@ -6574,12 +6575,18 @@ exports:
                        __ZN5raven33ConvertProtobufToBodyMetricsEventERKN14CoreNavigation3CLP8LogEntry11PrivateData11NatalimetryERNS_16BodyMetricsEventE, 
                        __ZN5raven33ConvertProtobufToMovingStateEventERKN14CoreNavigation3CLP8LogEntry11PrivateData11MotionStateERNS_16MovingStateEventE, 
                        __ZN5raven33ConvertProtobufToVIOEstimateEventERKN14CoreNavigation3CLP8LogEntry6Vision13VIOEstimationERNS_16VIOEstimateEventE, 
+                       __ZN5raven33GnssReceiverBandCorrectionsFilter33TickFilterAndOverwriteCorrectionsERNSt3__13mapINS_8GnssBandENS_26GnssReceiverBandCorrectionENS1_4lessIS3_EENS1_9allocatorINS1_4pairIKS3_S4_EEEEEERK6CNTimeRKNS_18RavenActivityStateERKNS_22RavenSignalEnvironmentE, 
                        __ZN5raven33RavenDeltaVIOEstimateActiveObject11HandleEventERKNS_16VIOEstimateEventE, 
                        __ZN5raven33RavenDeltaVIOEstimateActiveObject11HandleEventERKNS_20ARSessionStatusEventE, 
                        __ZN5raven33RavenDeltaVIOEstimateActiveObject22DeriveDeltaVIOEstimateEv, 
                        __ZN5raven33RavenDeltaVIOEstimateActiveObject5ResetEv, __ZN5raven33RavenDeltaVIOEstimateActiveObject9ConfigureERKNS_35RavenDeltaVIOActiveObjectConfigArgsE, 
                        __ZN5raven34ConvertProtobufToGnssMeasDataEventERKN14CoreNavigation3CLP8LogEntry11PrivateData33MeasurementReportCallbackContentsERNS_24GnssMeasurementDataEventE, 
                        __ZN5raven34ConvertProtobufToMagnetometerEventERKN14CoreNavigation3CLP8LogEntry11PrivateData9MagSampleERNS_17MagnetometerEventE, 
+                       __ZN5raven34GnssReceiverBandCorrectionsManager23InjectVendorCorrectionsERKNSt3__16vectorINS_26GnssReceiverBandCorrectionENS1_9allocatorIS3_EEEERK6CNTimeRKNS_22GnssTimeConversionInfoERKNS_18RavenActivityStateERKNS_22RavenSignalEnvironmentE, 
+                       __ZN5raven34GnssReceiverBandCorrectionsManager30RemoveConstellationClockOffsetERNSt3__13mapINS_8GnssBandENS_26GnssReceiverBandCorrectionENS1_4lessIS3_EENS1_9allocatorINS1_4pairIKS3_S4_EEEEEERKNS_22GnssTimeConversionInfoE, 
+                       __ZN5raven34GnssReceiverBandCorrectionsManager9ConfigureEPKNS_15RavenParametersE, 
+                       __ZN5raven34GnssReceiverBandCorrectionsManagerC1EPKNS_15RavenParametersE, 
+                       __ZN5raven34GnssReceiverBandCorrectionsManagerC2EPKNS_15RavenParametersE, 
                        __ZN5raven34RavenPressurePrefilterActiveObject11HandleEventERKNS_14BarometerEventE, 
                        __ZN5raven34RavenPressurePrefilterActiveObject5ResetEv, __ZN5raven34RavenPressurePrefilterActiveObject9ConfigureERKNS_44RavenPressurePrefilterActiveObjectConfigArgsE, 
                        __ZN5raven34RavenSignalEnvironmentActiveObject11HandleEventERKNS_13TimeMarkEventE, 
@@ -6624,6 +6631,7 @@ exports:
                        __ZN5raven40ConvertRavenFitnessSessionEnumToProtobufERKNS_19RavenFitnessSession23RavenFitnessSessionEnumE, 
                        __ZN5raven41RavenPositionContextEstimatorActiveObject11HandleEventERKNS_13TimeMarkEventE, 
                        __ZN5raven41RavenPositionContextEstimatorActiveObject11HandleEventERKNS_18ActivityStateEventE, 
+                       __ZN5raven41RavenPositionContextEstimatorActiveObject11HandleEventERKNS_18RavenSolutionEventE, 
                        __ZN5raven41RavenPositionContextEstimatorActiveObject11HandleEventERKNS_21GnssAvailabilityEventE, 
                        __ZN5raven41RavenPositionContextEstimatorActiveObject11HandleEventERKNS_22SignalEnvironmentEventE, 
                        __ZN5raven41RavenPositionContextEstimatorActiveObject11HandleEventERKNS_33GnssPreprocessedMeasurementsEventE, 

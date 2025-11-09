@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F7DE2856-7FC5-343B-A118-416C253ED686
+    value:           6C5DFAD5-68F1-36FF-8303-4E2D55F803CA
   - target:          x86_64-maccatalyst
-    value:           F7DE2856-7FC5-343B-A118-416C253ED686
+    value:           6C5DFAD5-68F1-36FF-8303-4E2D55F803CA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           24D6931D-0496-36BD-B645-C86CFEEAD0D5
+    value:           0D6D41F7-32D3-394E-9039-1FC1324F60DC
   - target:          arm64e-maccatalyst
-    value:           24D6931D-0496-36BD-B645-C86CFEEAD0D5
+    value:           0D6D41F7-32D3-394E-9039-1FC1324F60DC
 install-name:    '/System/Library/Frameworks/NetworkExtension.framework/Versions/A/NetworkExtension'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/Network.framework/Versions/A/Network' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CFARRAY_TYPE, _CFBOOLEAN_TYPE, _CFDATA_TYPE, _CFDICTIONARY_TYPE, 
                        _CFNUMBER_TYPE, _CFSTRING_TYPE, _NEAddAddressToDictionary, 
@@ -55,38 +55,39 @@ exports:
                        _NEFlowTLVAdd, _NEFlowTLVMsgCreate, _NEFlowWrite, _NEFlowWriteClose, 
                        _NEGIDForAuditToken, _NEGetAddressFamilyFromString, _NEGetBundleIdentifierFromAppID, 
                        _NEGetConsoleUserUID, _NEGetEntitlement, _NEGetIntFromArray, 
-                       _NEGetIntFromDictionary, _NEGetInterfaceType, _NEGetNullUUID, 
-                       _NEGetPortFromAddress, _NEGetPrefixForAddressRange, _NEGetPrefixForAddressRangeStrings, 
-                       _NEGetPrefixForIPv4NetmaskString, _NEGetPrefixForIPv6NetmaskString, 
-                       _NEGetRootUUID, _NEGetValueFromIntArray, _NEGetValueFromIntKeyedDictionary, 
-                       _NEGetValueWithType, _NEHotspotConfigurationErrorDomain, _NEIKEv2AttributeTypeCreateString, 
-                       _NEIKEv2AuthenticationMethodCreateString, _NEIKEv2CreateChildSAModeString, 
-                       _NEIKEv2CreateError, _NEIKEv2CreateErrorAuthentication, _NEIKEv2CreateErrorCrypto, 
-                       _NEIKEv2CreateErrorFailedToSend, _NEIKEv2CreateErrorInternal, 
-                       _NEIKEv2CreateErrorPeerInvalidSyntax, _NEIKEv2CreateSessionStateString, 
-                       _NEIKEv2DigitalSignatureAlgorithmCreateString, _NEIKEv2EncryptionTypeCreateString, 
-                       _NEIKEv2EncryptionWireTypeCreateString, _NEIKEv2ErrorCreateString, 
-                       _NEIKEv2ErrorDomain, _NEIKEv2HashTypeCreateString, _NEIKEv2ProtocolErrorDomain, 
-                       _NEIPSecDBAddLarvalSA, _NEIPSecDBAddPolicy, _NEIPSecDBAddSA, 
-                       _NEIPSecDBCopyPolicy, _NEIPSecDBCopyPolicyIDs, _NEIPSecDBCopySA, 
-                       _NEIPSecDBCopySAIDs, _NEIPSecDBCreateSession, _NEIPSecDBCreateSessionWithSocket, 
-                       _NEIPSecDBDeletePolicy, _NEIPSecDBDeleteSA, _NEIPSecDBFlushAll, 
-                       _NEIPSecDBFlushPolicies, _NEIPSecDBFlushSAs, _NEIPSecDBGetSPIForSA, 
-                       _NEIPSecDBInvalidateSession, _NEIPSecDBMigrateSA, _NEIPSecDBScheduleWithRunLoop, 
-                       _NEIPSecDBSetDispatchQueue, _NEIPSecDBStartBlackHoleDetection, 
-                       _NEIPSecDBStartIdleTimeout, _NEIPSecDBUnScheduleWithRunLoop, 
-                       _NEIPSecDBUpdateSA, _NEIPSecIKEConnectionIsMobile, _NEIPSecIKECreateSession, 
-                       _NEIPSecIKECreateSessionWithInterface, _NEIPSecIKECreateSessionWithInterfaceAndSocketHandlers, 
-                       _NEIPSecIKECreateUserspaceSession, _NEIPSecIKEForceChildSARekey, 
-                       _NEIPSecIKEForceIKESARekey, _NEIPSecIKEGetLocalAddress, _NEIPSecIKEGetRemoteAddress, 
-                       _NEIPSecIKEInvalidateSession, _NEIPSecIKENotificationTypeCopyString, 
-                       _NEIPSecIKESendDeadPeerDetectionPacket, _NEIPSecIKESendPrivateNotifyStatus, 
-                       _NEIPSecIKESetDispatchQueue, _NEIPSecIKEStartChildSA, _NEIPSecIKEStartConnection, 
-                       _NEIPSecIKEStartMOBIKE, _NEIPSecIKEStartMOBIKEReuseSocket, 
-                       _NEIPSecIKEStopChildSA, _NEIPSecIKEStopConnection, _NEIPSecIKEUpdateIKESettings, 
-                       _NEIPSecNotifyCodeCopyString, _NEIPSecNotifyReasonCopyString, 
-                       _NEInChecksum, _NEInitCFTypes, _NEIsInterfaceCellular, _NEIsInterfaceWIFI, 
-                       _NEIsValidCFType, _NEKeychainCopyPersistentRef, _NEKeychainCopyValue, 
+                       _NEGetIntFromDictionary, _NEGetInterfaceForAddress, _NEGetInterfaceType, 
+                       _NEGetNullUUID, _NEGetPortFromAddress, _NEGetPrefixForAddressRange, 
+                       _NEGetPrefixForAddressRangeStrings, _NEGetPrefixForIPv4NetmaskString, 
+                       _NEGetPrefixForIPv6NetmaskString, _NEGetRootUUID, _NEGetValueFromIntArray, 
+                       _NEGetValueFromIntKeyedDictionary, _NEGetValueWithType, _NEHotspotConfigurationErrorDomain, 
+                       _NEIKEv2AttributeTypeCreateString, _NEIKEv2AuthenticationMethodCreateString, 
+                       _NEIKEv2CreateChildSAModeString, _NEIKEv2CreateError, _NEIKEv2CreateErrorAuthentication, 
+                       _NEIKEv2CreateErrorCrypto, _NEIKEv2CreateErrorFailedToSend, 
+                       _NEIKEv2CreateErrorInternal, _NEIKEv2CreateErrorPeerInvalidSyntax, 
+                       _NEIKEv2CreateSessionStateString, _NEIKEv2DigitalSignatureAlgorithmCreateString, 
+                       _NEIKEv2EncryptionTypeCreateString, _NEIKEv2EncryptionWireTypeCreateString, 
+                       _NEIKEv2ErrorCreateString, _NEIKEv2ErrorDomain, _NEIKEv2HashTypeCreateString, 
+                       _NEIKEv2ProtocolErrorDomain, _NEIPSecDBAddLarvalSA, _NEIPSecDBAddPolicy, 
+                       _NEIPSecDBAddSA, _NEIPSecDBCopyPolicy, _NEIPSecDBCopyPolicyIDs, 
+                       _NEIPSecDBCopySA, _NEIPSecDBCopySAIDs, _NEIPSecDBCreateSession, 
+                       _NEIPSecDBCreateSessionWithSocket, _NEIPSecDBDeletePolicy, 
+                       _NEIPSecDBDeleteSA, _NEIPSecDBFlushAll, _NEIPSecDBFlushPolicies, 
+                       _NEIPSecDBFlushSAs, _NEIPSecDBGetSPIForSA, _NEIPSecDBInvalidateSession, 
+                       _NEIPSecDBMigrateSA, _NEIPSecDBScheduleWithRunLoop, _NEIPSecDBSetDispatchQueue, 
+                       _NEIPSecDBStartBlackHoleDetection, _NEIPSecDBStartIdleTimeout, 
+                       _NEIPSecDBUnScheduleWithRunLoop, _NEIPSecDBUpdateSA, _NEIPSecIKEConnectionIsMobile, 
+                       _NEIPSecIKECreateSession, _NEIPSecIKECreateSessionWithInterface, 
+                       _NEIPSecIKECreateSessionWithInterfaceAndSocketHandlers, _NEIPSecIKECreateUserspaceSession, 
+                       _NEIPSecIKEForceChildSARekey, _NEIPSecIKEForceIKESARekey, 
+                       _NEIPSecIKEGetLocalAddress, _NEIPSecIKEGetRemoteAddress, _NEIPSecIKEInvalidateSession, 
+                       _NEIPSecIKENotificationTypeCopyString, _NEIPSecIKESendDeadPeerDetectionPacket, 
+                       _NEIPSecIKESendPrivateNotifyStatus, _NEIPSecIKESetDispatchQueue, 
+                       _NEIPSecIKEStartChildSA, _NEIPSecIKEStartConnection, _NEIPSecIKEStartMOBIKE, 
+                       _NEIPSecIKEStartMOBIKEReuseSocket, _NEIPSecIKEStopChildSA, 
+                       _NEIPSecIKEStopConnection, _NEIPSecIKEUpdateIKESettings, _NEIPSecNotifyCodeCopyString, 
+                       _NEIPSecNotifyReasonCopyString, _NEInChecksum, _NEInitCFTypes, 
+                       _NEIsInterfaceCellular, _NEIsInterfaceWIFI, _NEIsValidCFType, 
+                       _NEIsWildcardAddress, _NEKeychainCopyPersistentRef, _NEKeychainCopyValue, 
                        _NEKeychainRemoveValue, _NEKeychainRemoveWithPersistentID, 
                        _NEKeychainSetPKCS12Container, _NEKeychainSetValue, _NEMapIntegerToString, 
                        _NEMapStringToInteger, _NEPIDByName, _NEPolicyAdd, _NEPolicyApply, 
@@ -118,9 +119,10 @@ exports:
                        _NEVirtualInterfaceCopyStatistics, _NEVirtualInterfaceCopyVPNServerAddress, 
                        _NEVirtualInterfaceCreate, _NEVirtualInterfaceCreateChannel, 
                        _NEVirtualInterfaceCreateFromSocket, _NEVirtualInterfaceCreateNexus, 
-                       _NEVirtualInterfaceCreateNexusExtended, _NEVirtualInterfaceDisableChannel, 
-                       _NEVirtualInterfaceDupSocket, _NEVirtualInterfaceEnableChannelAndGetNexusInstance, 
-                       _NEVirtualInterfaceEnableFlowswitch, _NEVirtualInterfaceGetDNSSupplementalMatchDomainsNoSearch, 
+                       _NEVirtualInterfaceCreateNexusExtended, _NEVirtualInterfaceDidPublish, 
+                       _NEVirtualInterfaceDisableChannel, _NEVirtualInterfaceDupSocket, 
+                       _NEVirtualInterfaceEnableChannelAndGetNexusInstance, _NEVirtualInterfaceEnableFlowswitch, 
+                       _NEVirtualInterfaceGetDNSSupplementalMatchDomainsNoSearch, 
                        _NEVirtualInterfaceGetIndex, _NEVirtualInterfaceGetMaxPendingPackets, 
                        _NEVirtualInterfaceGetReadAutomatically, _NEVirtualInterfaceGetType, 
                        _NEVirtualInterfaceInvalidate, _NEVirtualInterfaceIsPrimary, 
@@ -298,7 +300,7 @@ exports:
                        NEPathController, NEPathControllerNetworkAgent, NEPathEvent, 
                        NEPathEventObserver, NEPathRule, NEPolicy, NEPolicyCondition, 
                        NEPolicyResult, NEPolicyRouteRule, NEPolicySession, NEPolicySessionFileHandle, 
-                       NEProcessInfo, NEProfileIngestion, NEProfileIngestionPayloadInfo, 
+                       NEProcessIdentity, NEProcessInfo, NEProfileIngestion, NEProfileIngestionPayloadInfo, 
                        NEProfilePayloadBase, NEProfilePayloadContentFilter, NEProvider, 
                        NEProviderServer, NEProxyConfigurationNetworkAgent, NEProxyServer, 
                        NEProxySettings, NETransparentProxyManager, NETransparentProxyNetworkSettings, 
@@ -309,7 +311,7 @@ exports:
                        NEVPNManager, NEVPNNetworkAgent, NEVPNProtocol, NEVPNProtocolIKEv2, 
                        NEVPNProtocolIPSec, NEVPNProtocolL2TP, NEVPNProtocolPPP, NEVPNProtocolPPTP, 
                        NEVPNProtocolPlugin, NWTLSParameters ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CertTypeFormat, _NEGetRefFromConfigProfileUUID, _NEImportKeychainPayload, 
                        _NEKeychainSystemRemoveWithPersistentID, _NEVerifyDesignatedRequirement, 
                        _kNEProfilePayloadVPNAppMappingDomain ]

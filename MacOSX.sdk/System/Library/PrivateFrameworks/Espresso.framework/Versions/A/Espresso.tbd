@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C2903F04-5EE0-3FCA-A7D8-6ABFDD38A27B
+    value:           43537944-447C-3DBF-A0A4-9A6C8B7F4776
   - target:          x86_64-maccatalyst
-    value:           C2903F04-5EE0-3FCA-A7D8-6ABFDD38A27B
+    value:           43537944-447C-3DBF-A0A4-9A6C8B7F4776
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           576FEF2E-F3EE-3A32-AF78-D6AF11DDDD9E
+    value:           4F0F44DE-8844-339F-9EA3-46E8560CFFCE
   - target:          arm64e-maccatalyst
-    value:           576FEF2E-F3EE-3A32-AF78-D6AF11DDDD9E
+    value:           4F0F44DE-8844-339F-9EA3-46E8560CFFCE
 install-name:    '/System/Library/PrivateFrameworks/Espresso.framework/Versions/A/Espresso'
 current-version: 0
 exports:
@@ -398,6 +398,12 @@ exports:
                        __ZTIN8Espresso6SerDes8layer_ioINS_41generic_hierarchical_inner_product_kernelEEE, 
                        __ZTIN8Espresso6SerDes8layer_ioINS_41generic_inner_product_weights_grad_kernelEEE, 
                        __ZTIN8Espresso9factory_tINS_6SerDes13layer_io_baseEEE, __ZTIN8Espresso9factory_tINS_6SerDes21generic_serdes_objectEEE, 
+                       __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERN8Espresso14unpack_optionsERKS7_EEE, 
+                       __ZTINSt3__110__function6__baseIFhmPKhEEE, __ZTINSt3__110__function6__baseIFiPKhmEEE, 
+                       __ZTINSt3__110__function6__baseIFvPN8Espresso3netEmEEE, __ZTINSt3__110__function6__baseIFvRKN8Espresso17execution_error_tEEEE, 
+                       __ZTINSt3__110__function6__baseIFvRKNS_10shared_ptrIN8Espresso14abstract_batchEEERKNS3_5layerEEEE, 
+                       __ZTINSt3__110__function6__baseIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
+                       __ZTINSt3__110__function6__baseIFvRNS_4pairINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10shared_ptrIN8Espresso23abstract_blob_containerEEEEEEEE, 
                        __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
                        __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
@@ -785,12 +791,19 @@ exports:
                        __ZTSN8Espresso6SerDes8layer_ioINS_41generic_hierarchical_inner_product_kernelEEE, 
                        __ZTSN8Espresso6SerDes8layer_ioINS_41generic_inner_product_weights_grad_kernelEEE, 
                        __ZTSN8Espresso9factory_tINS_6SerDes13layer_io_baseEEE, __ZTSN8Espresso9factory_tINS_6SerDes21generic_serdes_objectEEE, 
-                       __ZTSNSt3__110shared_ptrIN8Espresso11base_kernelEEE, __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERN8Espresso14unpack_optionsERKS7_EEE, 
+                       __ZTSNSt3__110__function6__baseIFhmPKhEEE, __ZTSNSt3__110__function6__baseIFiPKhmEEE, 
+                       __ZTSNSt3__110__function6__baseIFvPN8Espresso3netEmEEE, __ZTSNSt3__110__function6__baseIFvRKN8Espresso17execution_error_tEEEE, 
+                       __ZTSNSt3__110__function6__baseIFvRKNS_10shared_ptrIN8Espresso14abstract_batchEEERKNS3_5layerEEEE, 
+                       __ZTSNSt3__110__function6__baseIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
+                       __ZTSNSt3__110__function6__baseIFvRNS_4pairINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10shared_ptrIN8Espresso23abstract_blob_containerEEEEEEEE, 
+                       __ZTSNSt3__110shared_ptrIN8Espresso11base_kernelEEE, __ZTSNSt3__110shared_ptrIfE27__shared_ptr_default_deleteIffEE, 
+                       __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
                        __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__114default_deleteIA_DhEE, 
                        __ZTSNSt3__114default_deleteIA_dEE, __ZTSNSt3__114default_deleteIA_fEE, 
                        __ZTSNSt3__114default_deleteIA_hEE, __ZTSNSt3__114default_deleteIA_iEE, 
-                       __ZTSNSt3__114default_deleteIfEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
@@ -2484,4 +2497,9 @@ exports:
                        EspressoProfilingLayerRuntime, EspressoProfilingLayerSupportInfo, 
                        EspressoProfilingNetworkInfo, TwoNetsStyleTransfer ]
     objc-ivars:      [ EspressoNetwork._net ]
+    weak-symbols:    [ __ZZN8Espresso20normal_inverse_cdf_4EfE1a, __ZZN8Espresso20normal_inverse_cdf_4EfE1b, 
+                       __ZZN8Espresso20normal_inverse_cdf_4EfE1c, __ZZN8Espresso20normal_inverse_cdf_4EfE1d, 
+                       __ZZN8Espresso20normal_inverse_cdf_4EfE1e, __ZZN8Espresso20normal_inverse_cdf_4EfE1f, 
+                       __ZZN8Espresso20normal_inverse_cdf_4EfE6const1, __ZZN8Espresso20normal_inverse_cdf_4EfE6const2, 
+                       __ZZN8Espresso20normal_inverse_cdf_4EfE6split1, __ZZN8Espresso20normal_inverse_cdf_4EfE6split2 ]
 ...

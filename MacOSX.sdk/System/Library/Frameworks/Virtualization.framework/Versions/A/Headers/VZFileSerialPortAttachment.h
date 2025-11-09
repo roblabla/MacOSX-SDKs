@@ -27,7 +27,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @param url The URL of the file for the attachment on the local file system.
  @param shouldAppend True if the file should be opened in append mode, false otherwise.
         When a file is opened in append mode, writing to that file will append to the end of it.
- @param error If not nil, used to report errors if intialization fails.
+ @param error If not nil, used to report errors if initialization fails.
  @return A VZFileSerialPortAttachment on success. Nil otherwise and the error parameter is populated if set.
  */
 - (nullable instancetype)initWithURL:(NSURL *)url append:(BOOL)shouldAppend error:(NSError * _Nullable *)error NS_DESIGNATED_INITIALIZER;

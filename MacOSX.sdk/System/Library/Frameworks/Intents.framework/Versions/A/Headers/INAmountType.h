@@ -2,7 +2,7 @@
 //  INAmountType.h
 //  Intents
 //
-//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
 //
 
 #ifndef INAmountType_h

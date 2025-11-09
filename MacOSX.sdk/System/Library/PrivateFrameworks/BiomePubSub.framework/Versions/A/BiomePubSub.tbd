@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           631764C8-72A5-315B-88EA-5D9942BB0700
+    value:           8259E2E0-0DFE-3936-92A3-16531CD9D172
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2FDA2CD3-64DE-3C23-B721-2A009B1B53DA
+    value:           54D9A51C-B38F-3F43-99E3-68804FE7923E
 install-name:    '/System/Library/PrivateFrameworks/BiomePubSub.framework/Versions/A/BiomePubSub'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -30,7 +30,8 @@ exports:
     objc-ivars:      [ _BPSAbstractCombineLatest._downstreamLock, _BPSAbstractCombineLatest._lock, 
                        _BPSAbstractOrderedMerge._downstreamLock, _BPSAbstractOrderedMerge._lock, 
                        _BPSAbstractZip._downstreamLock, _BPSAbstractZip._lock, _BPSFlatMapOuter._downstreamLock, 
-                       _BPSFlatMapOuter._lock, _BPSFlatMapOuter._outerLock, _BPSInnerConduit._lock, 
-                       _BPSInnerFutureConduit._downstreamLock, _BPSInnerFutureConduit._lock, 
-                       _BPSMerged._downstreamLock, _BPSMerged._lock, _BPSSequenceInner._lock ]
+                       _BPSFlatMapOuter._lock, _BPSFlatMapOuter._outerLock, _BPSInnerConduit._downstreamLock, 
+                       _BPSInnerConduit._lock, _BPSInnerFutureConduit._downstreamLock, 
+                       _BPSInnerFutureConduit._lock, _BPSMerged._downstreamLock, 
+                       _BPSMerged._lock, _BPSSequenceInner._lock ]
 ...

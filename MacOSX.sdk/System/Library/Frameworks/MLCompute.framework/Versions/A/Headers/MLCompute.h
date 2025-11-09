@@ -14,6 +14,7 @@
 #import <MLCompute/MLCTensor.h>
 #import <MLCompute/MLCTensorData.h>
 #import <MLCompute/MLCTensorParameter.h>
+#import <MLCompute/MLCTensorOptimizerDeviceData.h>
 #import <MLCompute/MLCGraph.h>
 #import <MLCompute/MLCTrainingGraph.h>
 #import <MLCompute/MLCInferenceGraph.h>
@@ -34,6 +35,7 @@
 // Layers
 #import <MLCompute/MLCLayer.h>
 #import <MLCompute/MLCArithmeticLayer.h>
+#import <MLCompute/MLCComparisonLayer.h>
 #import <MLCompute/MLCConvolutionLayer.h>
 #import <MLCompute/MLCFullyConnectedLayer.h>
 #import <MLCompute/MLCDropoutLayer.h>
@@ -59,6 +61,9 @@
 #import <MLCompute/MLCMatMulLayer.h>
 #import <MLCompute/MLCSliceLayer.h>
 #import <MLCompute/MLCEmbeddingLayer.h>
+#import <MLCompute/MLCSelectionLayer.h>
+#import <MLCompute/MLCGatherLayer.h>
+#import <MLCompute/MLCScatterLayer.h>
 
 // Optimizers
 #import <MLCompute/MLCOptimizer.h>

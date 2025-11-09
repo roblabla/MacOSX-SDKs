@@ -45,8 +45,8 @@ CORETELEPHONY_EXTERN NSString * const CTRadioAccessTechnologyCDMAEVDORevA  API_A
 CORETELEPHONY_EXTERN NSString * const CTRadioAccessTechnologyCDMAEVDORevB  API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
 CORETELEPHONY_EXTERN NSString * const CTRadioAccessTechnologyeHRPD         API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
 CORETELEPHONY_EXTERN NSString * const CTRadioAccessTechnologyLTE           API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
-CORETELEPHONY_EXTERN NSString * const CTRadioAccessTechnologyNRNSA         API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos);
-CORETELEPHONY_EXTERN NSString * const CTRadioAccessTechnologyNR            API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos);
+CORETELEPHONY_EXTERN NSString * const CTRadioAccessTechnologyNRNSA         API_AVAILABLE(ios(14.1)) API_UNAVAILABLE(macos);
+CORETELEPHONY_EXTERN NSString * const CTRadioAccessTechnologyNR            API_AVAILABLE(ios(14.1)) API_UNAVAILABLE(macos);
 
 @class CTCarrier;
 

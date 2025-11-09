@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D4FE81A2-E0B9-387F-9E9B-69FA35EA5ADD
+    value:           D672DD14-B06C-3AC1-A905-858A0777951D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A69E3E4D-8490-3AC1-9BF1-6C599EEB05B4
+    value:           4B39DCAB-E66F-3F67-BEEF-72FB5D2CAF0A
 install-name:    '/System/Library/PrivateFrameworks/SiriUI.framework/Versions/A/SiriUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -66,6 +66,6 @@ exports:
                        SiriUISpeechSynthesisVoiceManager, SiriUISuggestionsView, 
                        SiriUITextView, SiriUIThumbnailView, SiriUITintedImageView, 
                        SiriUITitledSectionHeaderView, SiriUITranscriptItem, SiriUITwoButtonFooterView, 
-                       SiriUIURLSession, SiriUIWorkspaceOverride, VTUIStringsHelper, 
-                       VTUIStyle, VTUITrainingViewController ]
+                       SiriUIURLSession, SiriUIVoicePickerTableView, SiriUIVoicePreviewManager, 
+                       SiriUIWorkspaceOverride, VTUIStringsHelper, VTUIStyle, VTUITrainingViewController ]
 ...

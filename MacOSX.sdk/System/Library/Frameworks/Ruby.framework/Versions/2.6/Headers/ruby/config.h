@@ -405,12 +405,12 @@
 #define RUBY_JMP_BUF sigjmp_buf
 #define USE_MJIT 1
 #define HAVE_PTHREAD_H 1
-#if defined __x86_64__ &&! defined RUBY_PLATFORM_CPU
-#define RUBY_PLATFORM_CPU "x86_64"
-#endif /* defined __x86_64__ &&! defined RUBY_PLATFORM_CPU */
 #if defined __arm64e__ &&! defined RUBY_PLATFORM_CPU
 #define RUBY_PLATFORM_CPU "arm64e"
 #endif /* defined __arm64e__ &&! defined RUBY_PLATFORM_CPU */
+#if defined __x86_64__ &&! defined RUBY_PLATFORM_CPU
+#define RUBY_PLATFORM_CPU "x86_64"
+#endif /* defined __x86_64__ &&! defined RUBY_PLATFORM_CPU */
 #define RUBY_PLATFORM_OS "darwin20"
 #define RUBY_ARCH "universal-"RUBY_PLATFORM_OS
 #define RUBY_PLATFORM "universal."RUBY_PLATFORM_CPU"-"RUBY_PLATFORM_OS

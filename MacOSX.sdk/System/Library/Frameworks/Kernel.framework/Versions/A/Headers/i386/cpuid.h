@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2019 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2020 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -274,9 +274,7 @@
 #define CPUID_MODEL_ICELAKE_ULX         0x7E
 #define CPUID_MODEL_ICELAKE_DT          0x7D
 #define CPUID_MODEL_ICELAKE_H           0x9F
-#if !defined(RC_HIDE_XNU_COMETLAKE)
 #define CPUID_MODEL_COMETLAKE_DT        0xA5
-#endif /* not RC_HIDE_XNU_COMETLAKE */
 
 #define CPUID_VMM_FAMILY_NONE           0x0
 #define CPUID_VMM_FAMILY_UNKNOWN        0x1
@@ -286,6 +284,30 @@
 #define CPUID_VMM_FAMILY_HVF            0x5
 #define CPUID_VMM_FAMILY_KVM            0x6
 
+
+#if DEBUG || DEVELOPMENT
+
+/*
+ * Apple Paravirtualization CPUID leaves
+ * The base leaf can be placed at any unused 0x100 aligned boundary
+ * in the hypervisor class leaves [0x4000_0000-0x4001_0000].
+ */
+
+#define APPLEPV_INTERFACE_LEAF_INDEX    1
+#define APPLEPV_FEATURES_LEAF_INDEX     2
+#define APPLEPV_LEAF_INDEX_MAX          APPLEPV_FEATURES_LEAF_INDEX
+
+#define APPLEPV_SIGNATURE               "apple-pv-xnu"
+#define APPLEPV_INTERFACE               "AH#1"
+
+/*
+ *  Apple Hypercall Feature Vector:
+ *  Values in ECX:EDX returned by the base leaf
+ */
+
+#define CPUID_LEAF_FEATURE_COREDUMP         _Bit(0)
+
+#endif /* DEBUG || DEVELOPMENT */
 
 
 #ifndef ASSEMBLER
@@ -493,6 +515,11 @@ extern uint32_t         cpuid_cpufamily(void);
 extern i386_cpu_info_t  *cpuid_info(void);
 extern void             cpuid_set_info(void);
 extern boolean_t        cpuid_vmm_present(void);
+extern uint32_t         cpuid_vmm_family(void);
+
+#if DEBUG || DEVELOPMENT
+extern uint64_t         cpuid_vmm_get_applepv_features(void);
+#endif /* DEBUG || DEVELOPMENT */
 
 
 #ifdef __cplusplus

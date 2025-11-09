@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5592338C-4988-3212-847C-989AFA00331B
+    value:           4895B741-0267-3936-8F90-598EFF6DDD57
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F27FCABD-994F-3095-88BF-CB9C5B6E41C0
+    value:           577C202E-3512-3A98-B839-D97F3CA4BC5F
 install-name:    '/System/Library/PrivateFrameworks/DrawingKit.framework/Versions/A/DrawingKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

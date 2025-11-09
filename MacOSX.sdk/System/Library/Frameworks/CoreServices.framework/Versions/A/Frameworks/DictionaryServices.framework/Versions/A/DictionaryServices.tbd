@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           83CDCE83-6B48-35F1-BACF-83240D940777
+    value:           FFC38615-B3CC-395B-8658-4B159A9A0AC2
   - target:          x86_64-maccatalyst
-    value:           83CDCE83-6B48-35F1-BACF-83240D940777
+    value:           FFC38615-B3CC-395B-8658-4B159A9A0AC2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0B2A9791-DAE5-3D19-B10E-834F807455DE
+    value:           C25BFE81-0A70-3CA9-BBB0-2F0C50F42C86
   - target:          arm64e-maccatalyst
-    value:           0B2A9791-DAE5-3D19-B10E-834F807455DE
+    value:           C25BFE81-0A70-3CA9-BBB0-2F0C50F42C86
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices'
 current-version: 341
 parent-umbrella:
@@ -22,7 +22,7 @@ parent-umbrella:
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DCSActivateDictionaryPanel, _DCSCopyActiveDictionaries, _DCSCopyAvailableDictionaries, 
                        _DCSCopyDefinitionMarkup, _DCSCopyDefinitionRecords, _DCSCopyDefinitions, 

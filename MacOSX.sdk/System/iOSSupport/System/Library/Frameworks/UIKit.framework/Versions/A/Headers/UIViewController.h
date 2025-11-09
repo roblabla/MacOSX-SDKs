@@ -159,9 +159,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIViewController : UIResponder <
 - (void)viewWillDisappear:(BOOL)animated; // Called when the view is dismissed, covered or otherwise hidden. Default does nothing
 - (void)viewDidDisappear:(BOOL)animated;  // Called after the view was dismissed, covered or otherwise hidden. Default does nothing
 
-// Called just before the view controller's view's layoutSubviews method is invoked. Subclasses can implement as necessary. The default is a nop.
+// Called just before the view controller's view's layoutSubviews method is invoked. Subclasses can implement as necessary. The default is a no-op.
 - (void)viewWillLayoutSubviews API_AVAILABLE(ios(5.0));
-// Called just after the view controller's view's layoutSubviews method is invoked. Subclasses can implement as necessary. The default is a nop.
+// Called just after the view controller's view's layoutSubviews method is invoked. Subclasses can implement as necessary. The default is a no-op.
 - (void)viewDidLayoutSubviews API_AVAILABLE(ios(5.0));
 
 @property(nullable, nonatomic,copy) NSString *title;  // Localized title for use by a parent controller.
@@ -436,7 +436,7 @@ UIKIT_EXTERN NSExceptionName const UIViewControllerHierarchyInconsistencyExcepti
   controller subclass will make this call after a transition to the new child has completed or, in the
   case of no transition, immediately after the call to addChildViewController:. Similarly,
   removeFromParentViewController does not call [self willMoveToParentViewController:nil] before removing the
-  child. This is also the responsibilty of the container subclass. Container subclasses will typically define
+  child. This is also the responsibility of the container subclass. Container subclasses will typically define
   a method that transitions to a new child by first calling addChildViewController:, then executing a
   transition which will add the new child's view into the view hierarchy of its parent, and finally will call
   didMoveToParentViewController:. Similarly, subclasses will typically define a method that removes a child in
@@ -458,7 +458,7 @@ UIKIT_EXTERN NSExceptionName const UIViewControllerHierarchyInconsistencyExcepti
 @interface UIViewController (UIConstraintBasedLayoutCoreMethods)
 /* Base implementation sends -updateConstraints to the view.
     When a view has a view controller, this message is sent to the view controller during 
-     the autolayout updateConstraints pass in lieu of sending updateConstraints directly
+     the Auto Layout updateConstraints pass in lieu of sending updateConstraints directly
      to the view.
     You may override this method in a UIViewController subclass for updating custom 
      constraints instead of subclassing your view and overriding -[UIView updateConstraints].

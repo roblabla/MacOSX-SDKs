@@ -51,6 +51,14 @@ AVF_EXPORT NSString *const AVAssetDownloadTaskMediaSelectionKey API_AVAILABLE(ma
 AVF_EXPORT NSString *const AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
+@constant		AVAssetDownloadTaskPrefersLosslessAudioKey
+@abstract		Download the specified media selections in lossless audio representation.
+				The value for this key should be an NSNumber representing a BOOL.
+@discussion		By default AVAssetDownloadTask will prefer lossy audio representation.
+ */
+AVF_EXPORT NSString *const AVAssetDownloadTaskPrefersLosslessAudioKey API_AVAILABLE(macos(11.3), ios(14.5)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
 @constant		AVAssetDownloadTaskPrefersHDRKey
 @abstract		Download the specified media selections with or without HDR content.
 				The value for this key should be an NSNumber representing a BOOL.

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AAC7DB37-C8B5-37EC-B468-47576F05EEA4
+    value:           CE3B84FC-052B-39BD-B4B8-872237E0C94A
   - target:          x86_64-maccatalyst
-    value:           AAC7DB37-C8B5-37EC-B468-47576F05EEA4
+    value:           CE3B84FC-052B-39BD-B4B8-872237E0C94A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           56915945-2DAF-3178-A3B2-13EF06090F77
+    value:           8CA47E81-DAEC-35F8-A314-804B882106A8
   - target:          arm64e-maccatalyst
-    value:           56915945-2DAF-3178-A3B2-13EF06090F77
+    value:           8CA47E81-DAEC-35F8-A314-804B882106A8
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libLLVM.dylib'
-current-version: 31001.160
+current-version: 31001.184.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -1715,6 +1715,7 @@ exports:
                        __ZN4llvm14isSafeToExpandEPKNS_4SCEVERNS_15ScalarEvolutionE, 
                        __ZN4llvm14lowertypetests13BitSetBuilder5buildEv, __ZN4llvm14lowertypetests16ByteArrayBuilder8allocateERKNSt3__13setIyNS2_4lessIyEENS2_9allocatorIyEEEEyRyRh, 
                        __ZN4llvm14lowertypetests19GlobalLayoutBuilder11addFragmentERKNSt3__13setIyNS2_4lessIyEENS2_9allocatorIyEEEE, 
+                       __ZN4llvm14makeNamedTimerENS_9StringRefES0_PNS_10TimerGroupE, 
                        __ZN4llvm14printLowerCaseENS_9StringRefERNS_11raw_ostreamE, 
                        __ZN4llvm14raw_fd_ostream10resetColorEv, __ZN4llvm14raw_fd_ostream10write_implEPKcm, 
                        __ZN4llvm14raw_fd_ostream11changeColorENS_11raw_ostream6ColorsEbb, 
@@ -3045,7 +3046,7 @@ exports:
                        __ZN4llvm19haveNoCommonBitsSetEPKNS_5ValueES2_RKNS_10DataLayoutEPNS_15AssumptionCacheEPKNS_11InstructionEPKNS_13DominatorTreeE, 
                        __ZN4llvm19isBitcodeWriterPassEPNS_4PassE, __ZN4llvm19isConsecutiveAccessEPNS_5ValueES1_RKNS_10DataLayoutERNS_15ScalarEvolutionEb, 
                        __ZN4llvm19isLegalUTF8SequenceEPKhS1_, __ZN4llvm19lowerObjectSizeCallEPNS_13IntrinsicInstERKNS_10DataLayoutEPKNS_17TargetLibraryInfoEb, 
-                       __ZN4llvm19parseAssemblyStringENS_9StringRefERNS_12SMDiagnosticERNS_11LLVMContextEPNS_11SlotMappingEbS0_, 
+                       __ZN4llvm19makeNamedTimerGroupENS_9StringRefES0_, __ZN4llvm19parseAssemblyStringENS_9StringRefERNS_12SMDiagnosticERNS_11LLVMContextEPNS_11SlotMappingEbS0_, 
                        __ZN4llvm19raw_svector_ostream10write_implEPKcm, __ZN4llvm19raw_svector_ostream11pwrite_implEPKcmy, 
                        __ZN4llvm19sampleprof_categoryEv, __ZN4llvm19setCurrentDebugTypeEPKc, 
                        __ZN4llvm19skipDebugIntrinsicsENS_14ilist_iteratorINS_12ilist_detail12node_optionsINS_11InstructionELb0ELb0EvEELb0ELb0EEE, 
@@ -5686,7 +5687,8 @@ exports:
                        __ZN4llvm9Intrinsic7getNameENS0_2IDENS_8ArrayRefIPNS_4TypeEEE, 
                        __ZN4llvm9Intrinsic7getTypeERNS_11LLVMContextENS0_2IDENS_8ArrayRefIPNS_4TypeEEE, 
                        __ZN4llvm9IsHalfItrENS_9Intrinsic2IDE, __ZN4llvm9IsItrProjENS_7ItrKindE, 
-                       __ZN4llvm9KnownBits16computeForAddSubEbbRKS0_S0_, __ZN4llvm9LCSSAPass3runERNS_8FunctionERNS_15AnalysisManagerIS1_JEEE, 
+                       __ZN4llvm9KnownBits13computeForMulERKS0_S2_, __ZN4llvm9KnownBits16computeForAddSubEbbRKS0_S0_, 
+                       __ZN4llvm9LCSSAPass3runERNS_8FunctionERNS_15AnalysisManagerIS1_JEEE, 
                        __ZN4llvm9MCAsmInfoC1Ev, __ZN4llvm9MCAsmInfoC2Ev, __ZN4llvm9MCAsmInfoD0Ev, 
                        __ZN4llvm9MCAsmInfoD1Ev, __ZN4llvm9MCAsmInfoD2Ev, __ZN4llvm9MCContext11GetInstanceEj, 
                        __ZN4llvm9MCContext11reportErrorENS_5SMLocERKNS_5TwineE, __ZN4llvm9MCContext12NextInstanceEj, 

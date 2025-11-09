@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           51600BFF-7BDA-3446-9BAA-5800C815A91E
+    value:           1F25F67D-C14C-305F-ABEC-6E7DB7F3832D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1E1069B0-BCD0-307F-A38B-E3582919BF5E
+    value:           6A2E6BD6-0751-3F0D-A68E-7D1186FC4DC1
 install-name:    '/System/Library/Frameworks/Tcl.framework/Versions/8.5/Tcl'
 current-version: 8.5.9
 compatibility-version: 8.5

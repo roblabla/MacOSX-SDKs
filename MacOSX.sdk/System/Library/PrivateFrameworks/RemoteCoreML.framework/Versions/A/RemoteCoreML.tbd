@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           427FA1E9-3B15-3768-9E35-9F908AA072DA
+    value:           EAA0E1EF-2815-3369-8246-8D7F0AFD7B74
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1299E57B-156D-3940-8C30-6D1B79C719B1
+    value:           17C20000-75DD-3653-B88D-EFDF9099F8D3
 install-name:    '/System/Library/PrivateFrameworks/RemoteCoreML.framework/Versions/A/RemoteCoreML'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

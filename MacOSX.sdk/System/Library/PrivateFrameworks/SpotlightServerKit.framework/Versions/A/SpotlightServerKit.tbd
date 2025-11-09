@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3034294F-35FD-3EF7-AA5C-82C9B062E474
+    value:           FD32A22A-C4A9-34CB-94F2-AA5840F96E11
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0086C172-AF57-3195-A9D0-4BA16E125971
+    value:           71A78D32-4DF8-397C-829B-2E4830CA9F65
 install-name:    '/System/Library/PrivateFrameworks/SpotlightServerKit.framework/Versions/A/SpotlightServerKit'
-current-version: 2150.6
+current-version: 2150.16
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _BWA_Create, _BWA_DataAllocate, _BWA_DataDeallocate, _CFDataCreateWithContentsOfURL, 

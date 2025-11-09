@@ -31,6 +31,7 @@ AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotification 
 AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos); // NSError
 
 AVF_EXPORT NSNotificationName const AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos); // see requiresFlushToResumeDecoding property
+AVF_EXPORT NSNotificationName const AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4)); // see outputObscuredDueToInsufficientExternalProtection property
 
 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 @interface AVSampleBufferDisplayLayer : CALayer
@@ -220,6 +221,29 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
  */
 @property (nonatomic) BOOL preventsDisplaySleepDuringVideoPlayback API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
+@end
+
+@interface AVSampleBufferDisplayLayer (ProtectedContent)
+
+/*!
+ @property      outputObscuredDueToInsufficientExternalProtection
+ @abstract      Whether or not decoded output is being obscured due to insufficient external protection.
+ 
+ @discussion
+	 The value of this property indicates whether the layer is purposefully obscuring its visual output
+	 because the requirement for an external protection mechanism is not met by the current device
+	 configuration. The change of this property can be observed through AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification
+	 
+	 It is highly recommended that clients whose content requires external
+	 protection observe this property and set the playback rate to zero and display an appropriate user
+	 interface when the value changes to YES.
+	 
+	 Note that the value of this property is dependent on the external protection requirements of the
+	 media being displayed by the layer. These requirements are inherent to the content itself and cannot
+	 be externally specified. If the content does not require external protection, the value of this
+	 property will be NO.
+ */
+@property (nonatomic, readonly) BOOL outputObscuredDueToInsufficientExternalProtection API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4));
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,7 +10,7 @@
 
 /*! UIMotionEffect is an abstract superclass which declaratively represents a rendering
     effect that depends on the motion of the device. Given some device pose, subclassers
-    provide relative values which are to be applied to the keypaths of the target's view.
+    provide relative values which are to be applied to the key paths of the target's view.
  
     Subclasses must implement conformance for NSCopying and NSCoding. */
 NS_ASSUME_NONNULL_BEGIN

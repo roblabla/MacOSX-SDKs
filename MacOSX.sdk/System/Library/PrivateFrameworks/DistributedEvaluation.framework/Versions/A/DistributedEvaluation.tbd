@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8594CEE5-2488-362B-ADFE-217983C926B1
+    value:           E45F4A89-5A13-336C-AED7-DF130A89FD83
   - target:          x86_64-maccatalyst
-    value:           8594CEE5-2488-362B-ADFE-217983C926B1
+    value:           E45F4A89-5A13-336C-AED7-DF130A89FD83
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           770EE2F0-CE5D-3B65-B278-E76E674F3039
+    value:           9407FAFB-914D-3EF5-A8D5-C2269DE1E99E
   - target:          arm64e-maccatalyst
-    value:           770EE2F0-CE5D-3B65-B278-E76E674F3039
+    value:           9407FAFB-914D-3EF5-A8D5-C2269DE1E99E
 install-name:    '/System/Library/PrivateFrameworks/DistributedEvaluation.framework/Versions/A/DistributedEvaluation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -39,11 +39,11 @@ exports:
                        _DESSubmissionLogSetHandler, _DESTemporaryDownloadDirectoryURL, 
                        _DESWriteSubmissionLog, _DESWriteSubmissionLogData, _DistributedEvaluationVersionNumber, 
                        _DistributedEvaluationVersionString, _FSCopyFormatNameForFSType, 
-                       _GetDiskImageEncryptionStatus, _GetFSEncryptionStatus, __DESIsHorseman, 
-                       __FSCopyLocalizedNameForVolumeFormatAtNode, __FSCopyLocalizedNameForVolumeFormatAtURL, 
-                       __FSCopyNameForVolumeFormatAtNode, __FSCopyNameForVolumeFormatAtURL, 
-                       __FSGetMediaEncryptionStatus, __FSGetMediaEncryptionStatusAtPath, 
-                       _getfstype, _is_apfs, _is_hfs, _is_msdos, _kDESDistributedEvaluationErrorDomain, 
+                       _GetDiskImageEncryptionStatus, _GetFSEncryptionStatus, __FSCopyLocalizedNameForVolumeFormatAtNode, 
+                       __FSCopyLocalizedNameForVolumeFormatAtURL, __FSCopyNameForVolumeFormatAtNode, 
+                       __FSCopyNameForVolumeFormatAtURL, __FSGetMediaEncryptionStatus, 
+                       __FSGetMediaEncryptionStatusAtPath, _getfstype, _is_apfs, 
+                       _is_hfs, _is_msdos, _kDESDistributedEvaluationErrorDomain, 
                        _readdisk ]
     objc-classes:    [ DESBfloat16Transport, DESBinary32Transport, DESBinary64Transport, 
                        DESBundleRegistry, DESDataTransport, DESDeviceIdentifierStore, 

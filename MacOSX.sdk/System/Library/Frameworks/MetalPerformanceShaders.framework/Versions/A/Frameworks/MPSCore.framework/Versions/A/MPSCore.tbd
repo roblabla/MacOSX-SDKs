@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E2377275-53D7-31A0-AEAF-0A0273B99B92
+    value:           55937FF4-F2FA-3671-84DE-88950DD81A88
   - target:          x86_64-maccatalyst
-    value:           E2377275-53D7-31A0-AEAF-0A0273B99B92
+    value:           55937FF4-F2FA-3671-84DE-88950DD81A88
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CF0159EB-938F-3F20-AF71-D8DFB502D71A
+    value:           E605D274-E6D7-3DF1-9367-D3BD3A76776B
   - target:          arm64e-maccatalyst
-    value:           CF0159EB-938F-3F20-AF71-D8DFB502D71A
+    value:           E605D274-E6D7-3DF1-9367-D3BD3A76776B
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSCore.framework/Versions/A/MPSCore'
-current-version: 124.2.1
+current-version: 124.4.12
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -45,7 +45,7 @@ exports:
                        __Z25MPSGetEffectiveClipRegion7MTLSize9MTLRegion, __ZN10BaseTensor14GetNumElementsEv, 
                        __ZN10BaseTensor16GetAccessPatternEP7NSArrayIP10MPSNDArrayES4_, 
                        __ZN10MPSLibrary13ReleaseMPSKeyEP11MPSKey_data, __ZN10MPSLibrary15GetComputeStateEjRK23MPSFunctionConstantList30MPSThreadGroupSizeMultipleType24MPSDriverCompilerOptions, 
-                       __ZN10MPSLibrary19CreateUberShaderKeyEP8NSStringRK23MPSFunctionConstantListyPFvPU21objcproto10MTLLibrary11objc_objectPK13MPSKernelInfoS4_U13block_pointerFvPU22objcproto11MTLFunction11objc_objectP7NSErrorEEy30MPSThreadGroupSizeMultipleType24MPSDriverCompilerOptionsP18MPSKernelDAGObject, 
+                       __ZN10MPSLibrary19CreateUberShaderKeyEP8NSStringRK23MPSFunctionConstantListyPFPU22objcproto11MTLFunction11objc_objectPU21objcproto10MTLLibrary11objc_objectPK13MPSKernelInfoS4_Ey30MPSThreadGroupSizeMultipleType24MPSDriverCompilerOptionsP18MPSKernelDAGObject, 
                        __ZN10MPSLibrary19ReleaseComputeStateEPU34objcproto23MTLComputePipelineState11objc_object, 
                        __ZN10MPSLibrary20GetComputeStateAsyncEjRK23MPSFunctionConstantList30MPSThreadGroupSizeMultipleType, 
                        __ZN10MPSLibrary20PrefetchComputeStateEjRK23MPSFunctionConstantList30MPSThreadGroupSizeMultipleType, 
@@ -64,6 +64,7 @@ exports:
                        __ZN12MPSAutoCacheC2EPU27objcproto16MTLCommandBuffer11objc_objectPU21objcproto10MTLTexture11objc_object, 
                        __ZN12MPSAutoCacheD1Ev, __ZN12MPSAutoCacheD2Ev, __ZN12MPSKernelDAG10absoluteOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG10additionOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG10bandPartOpEP10BaseTensoriiRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG10constantOpEdRKNSt3__16vectorIlNS0_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG10divisionOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG10exponentOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
@@ -71,13 +72,18 @@ exports:
                        __ZN12MPSKernelDAG10lessThanOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG10negativeOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG11broadcastOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG11flipCoordOpEP10BaseTensoriRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG11logarithmOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG11shiftDataOpEP10BaseTensoriiRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG11unaryCoreOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG12binaryCoreOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG12flipCoord4OpEP10BaseTensorDv4_iRKNSt3__16vectorIlNS3_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG12isInfiniteOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG12isNotEqualOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG12reciprocalOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG12shiftData4OpEP10BaseTensorDv4_iRKNSt3__16vectorIlNS3_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG12squareRootOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG12strideGradOpEP10BaseTensorDv4_iRKNSt3__16vectorIlNS3_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG13greaterThanOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG13intAdditionOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG13nullaryCoreOpERKNSt3__16vectorIlNS0_9allocatorIlEEEE11MPSDataTypePKc, 
@@ -90,8 +96,10 @@ exports:
                        __ZN12MPSKernelDAG16exponentBase10OpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG16logarithmBase2OpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG16multiplicationOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG16spaceToDepth2dOpEP10BaseTensoriiiibbRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG17lessThanEqualToOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG17logarithmBase10OpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG18getCoordOfTensorOpEP10BaseTensormRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG19reverseSquareRootOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG20greaterThanEqualToOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG4orOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
@@ -100,6 +108,7 @@ exports:
                        __ZN12MPSKernelDAG5erfOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG5norOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG5notOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG5padOpEP10BaseTensorDv4_i16MPSImageEdgeModeRKNSt3__16vectorIlNS4_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG5sinOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG5tanOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG5xorOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
@@ -124,9 +133,11 @@ exports:
                        __ZN12MPSKernelDAG7isNaNOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG7powerOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG7roundOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG7sliceOpEP10BaseTensorDv4_iRKNSt3__16vectorIlNS3_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG8moduloOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG8selectOpEP10BaseTensorS1_S1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG8squareOpEP10BaseTensorRKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
+                       __ZN12MPSKernelDAG8strideOpEP10BaseTensorDv4_ibRKNSt3__16vectorIlNS3_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG9isEqualOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG9maximumOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
                        __ZN12MPSKernelDAG9minimumOpEP10BaseTensorS1_RKNSt3__16vectorIlNS2_9allocatorIlEEEE11MPSDataTypePKc, 
@@ -151,8 +162,8 @@ exports:
                        __ZN9MPSDevice22GetMPSLibrary_DoNotUseEPK14MPSLibraryInfo, 
                        __ZN9MPSDevice8GetQueueEv, __ZN9MPSDeviceC2EPU19objcproto9MTLDevice11objc_object, 
                        __ZN9MPSDeviceD0Ev, __ZN9MPSDeviceD1Ev, __ZN9MPSDeviceD2Ev, 
-                       __ZNK10BaseTensor16GetDimensionSizeEj, __ZNK13MPSAutoBuffer5PrintEv, 
-                       __ZTV12MPSKernelDAG, _kMPSEmptyLibraryInfo ]
+                       __ZNK10BaseTensor16GetDimensionSizeEj, __ZNK12MPSKernelDAG21GetCoreOpInputAtIndexEj, 
+                       __ZNK13MPSAutoBuffer5PrintEv, __ZTV12MPSKernelDAG, _kMPSEmptyLibraryInfo ]
     objc-classes:    [ MPSCommandBuffer, MPSComputeEncoder, MPSExternalPluginBase, 
                        MPSImage, MPSImageDescriptor, MPSKernel, MPSKernelDAGObject, 
                        MPSKeyedUnarchiver, MPSMatrix, MPSMatrixDescriptor, MPSNDArray, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           10CA0E34-19B1-365C-888C-94543A25F10F
+    value:           173960F4-35A4-315A-91BF-2BD70C92B7EA
   - target:          x86_64-maccatalyst
-    value:           10CA0E34-19B1-365C-888C-94543A25F10F
+    value:           173960F4-35A4-315A-91BF-2BD70C92B7EA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B8853BE6-FCCC-3AAF-BD0B-97D3EBC75FE3
+    value:           D764D0A9-8A0B-3ED7-B1B2-2B5666BB9299
   - target:          arm64e-maccatalyst
-    value:           B8853BE6-FCCC-3AAF-BD0B-97D3EBC75FE3
+    value:           D764D0A9-8A0B-3ED7-B1B2-2B5666BB9299
 install-name:    '/System/Library/PrivateFrameworks/CoreAVCHD.framework/Versions/A/CoreAVCHD'
 current-version: 6100
 compatibility-version: 5600

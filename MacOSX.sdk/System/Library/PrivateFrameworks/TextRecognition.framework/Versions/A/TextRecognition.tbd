@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C66ECD76-87A1-3D63-A1F3-30154B7F853C
+    value:           410703AF-5F8D-3F08-B7F3-87C2FD0A3CDD
   - target:          x86_64-maccatalyst
-    value:           C66ECD76-87A1-3D63-A1F3-30154B7F853C
+    value:           410703AF-5F8D-3F08-B7F3-87C2FD0A3CDD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3FB7DD61-67BF-3573-9CEF-8B534F7F0F98
+    value:           53B5B241-6787-3192-A121-3CF4FCA3F0FB
   - target:          arm64e-maccatalyst
-    value:           3FB7DD61-67BF-3573-9CEF-8B534F7F0F98
+    value:           53B5B241-6787-3192-A121-3CF4FCA3F0FB
 install-name:    '/System/Library/PrivateFrameworks/TextRecognition.framework/Versions/A/TextRecognition'
 current-version: 157
 exports:
@@ -229,12 +229,13 @@ exports:
                        _checkCodePrefix, _checkPartialCodePrefix, _closestNameInContacts, 
                        _compressData, _computeReferenceDateFromString, _correctHistogram, 
                        _createCachedContact, _denormalizedPointForSize, _deviceHasAppleNeuralEngine, 
-                       _enrichedNumbersListHK, _extractBestDateString, _extractCardCode, 
-                       _extractCardCodeHK, _extractCardNumberResults, _extractCardholderNameResults, 
-                       _extractExpirationDateResults, _extractValidDateStrings, _find_homography, 
-                       _generateIntegralImage, _houghTransformGlobalAngle, _isNonNameString, 
-                       _isValidCodeLocation, _isValidNameLocationForCode, _isValidNameString, 
-                       _kInfinity, _kNoEdgeIndex, _kNoNodeID, _kRootNode, _keepAllLayersWithinHorizontalBounds, 
+                       _deviceModel, _enrichedNumbersListHK, _extractBestDateString, 
+                       _extractCardCode, _extractCardCodeHK, _extractCardNumberResults, 
+                       _extractCardholderNameResults, _extractExpirationDateResults, 
+                       _extractValidDateStrings, _find_homography, _generateIntegralImage, 
+                       _houghTransformGlobalAngle, _isNonNameString, _isValidCodeLocation, 
+                       _isValidNameLocationForCode, _isValidNameString, _kInfinity, 
+                       _kNoEdgeIndex, _kNoNodeID, _kRootNode, _keepAllLayersWithinHorizontalBounds, 
                        _lmConfig, _matchAgainstContact, _maxPoint1D, _nms1D, _nms1DNonFilter, 
                        _normalizeProbabilityForLength, _normalizedPointForSize, _otsuThreshold, 
                        _rotatePolygon, _rotatedPointAroundPoint, _secondsBetweenTimestamps, 

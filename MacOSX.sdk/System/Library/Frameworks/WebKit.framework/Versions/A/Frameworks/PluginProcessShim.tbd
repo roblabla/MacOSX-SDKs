@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9E8AC5F7-1441-3C6D-A458-4B66F1017369
+    value:           078B9FF0-5BA0-3234-9553-536B0F20CD34
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           23278B11-D982-355A-9446-F5AA8D16A1A9
+    value:           21576F93-97A0-3663-935F-8A54F56390DF
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/PluginProcessShim.dylib'
-current-version: 610.3.7
+current-version: 611.1.21
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _WebKitPluginProcessShimInitialize ]

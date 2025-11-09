@@ -2,7 +2,7 @@
 ///  @header AppleEXR.h
 ///  @library  /usr/lib/libAppleEXR.dylib
 ///  @dependency -stdlib=libc++ -lobjc
-///  @copyright Copyright © 2019 Ian Ollmann. All rights reserved.
+///  @copyright Copyright © 2019-2020 Apple Inc. All rights reserved.
 ///  @discussion Apple OpenEXR decoder / encoder
 ///
 ///     Created by Ian Ollmann on 8/19/19.

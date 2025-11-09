@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EA2239A4-E453-38B3-BFB5-2CBA9A688C76
+    value:           31395D05-FA6C-3B17-8090-AA04E366BA09
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           43862C87-2D02-3659-830C-A0589AA34753
+    value:           F11DF92A-4610-3D35-AC0D-63CB28B26F04
 install-name:    '/System/Library/PrivateFrameworks/SearchUI.framework/Versions/A/SearchUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

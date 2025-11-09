@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2238FCB2-27CB-30E5-905A-C5F70DCAA3AC
+    value:           FB8D5676-71DB-37AC-B8BF-27919D39718D
   - target:          x86_64-maccatalyst
-    value:           2238FCB2-27CB-30E5-905A-C5F70DCAA3AC
+    value:           FB8D5676-71DB-37AC-B8BF-27919D39718D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7576F71C-C33E-399D-999A-AD395FE49625
+    value:           E337E0E4-01AE-3EA2-9E57-D6FFDD5681DF
   - target:          arm64e-maccatalyst
-    value:           7576F71C-C33E-399D-999A-AD395FE49625
+    value:           E337E0E4-01AE-3EA2-9E57-D6FFDD5681DF
 install-name:    '/System/Library/PrivateFrameworks/ScreenReaderCore.framework/Versions/A/ScreenReaderCore'
 current-version: 390
 exports:
@@ -229,36 +229,37 @@ exports:
                        _kSCRCUserDefaultsShouldMessageTrace, _kSCRCUserDefaultsShouldOutputCustomActionRotorHelpTag, 
                        _kSCRCUserDefaultsShouldOutputVOInstructions, _kSCRCUserDefaultsSingleLetterQuickNavEnabled, 
                        _kSCRCUserDefaultsSkipRedundantLabelsEnabled, _kSCRCUserDefaultsSpeakAllStaticTextElementsInSheets, 
-                       _kSCRCUserDefaultsSpeechCustomizedLanguageIDs, _kSCRCUserDefaultsSpeechSelectedVoiceLanguageID, 
-                       _kSCRCUserDefaultsStartupOptions, _kSCRCUserDefaultsStaticTextValueUpdate, 
-                       _kSCRCUserDefaultsSystemBrailleVerbosity, _kSCRCUserDefaultsSystemDialogReminderInterval, 
-                       _kSCRCUserDefaultsSystemDialogReminderType, _kSCRCUserDefaultsSystemVerbosity, 
-                       _kSCRCUserDefaultsTableRowCountChange, _kSCRCUserDefaultsTextCursorFeedbackOption, 
-                       _kSCRCUserDefaultsTextSearchHistory, _kSCRCUserDefaultsTextUnderMouseEnabled, 
-                       _kSCRCUserDefaultsTextUnderMouseHoverDelayInterval, _kSCRCUserDefaultsTransactionElementDictionary, 
-                       _kSCRCUserDefaultsTransactionGestureCommanderEnabled, _kSCRCUserDefaultsTransactionName, 
-                       _kSCRCUserDefaultsTransactionNotification, _kSCRCUserDefaultsTransactionPronunciation, 
-                       _kSCRCUserDefaultsTypingEchoFeedbackOption, _kSCRCUserDefaultsUnitOfMeasure, 
-                       _kSCRCUserDefaultsUnplannedShutdownCount, _kSCRCUserDefaultsUseImageCaption, 
-                       _kSCRCUserDefaultsVODisabledByManagedPreferences, _kSCRCUserDefaultsVerticalWrappingAllowed, 
-                       _kSCRCUserDefaultsVisualsCaptionWindowFrame, _kSCRCUserDefaultsVoiceOverCursorEnabled, 
-                       _kSCRCUserDefaultsVoiceOverCursorMagnificationFactor, _kSCRCUserDefaultsWebCaretBrowsing, 
-                       _kSCRCUserDefaultsWebChooserMenuArticles, _kSCRCUserDefaultsWebChooserMenuButtons, 
-                       _kSCRCUserDefaultsWebChooserMenuCheckbox, _kSCRCUserDefaultsWebChooserMenuFormControls, 
-                       _kSCRCUserDefaultsWebChooserMenuFrames, _kSCRCUserDefaultsWebChooserMenuHeadings, 
-                       _kSCRCUserDefaultsWebChooserMenuImages, _kSCRCUserDefaultsWebChooserMenuLandmarks, 
-                       _kSCRCUserDefaultsWebChooserMenuLines, _kSCRCUserDefaultsWebChooserMenuLinks, 
-                       _kSCRCUserDefaultsWebChooserMenuLists, _kSCRCUserDefaultsWebChooserMenuLiveRegions, 
-                       _kSCRCUserDefaultsWebChooserMenuNonVisitedLinks, _kSCRCUserDefaultsWebChooserMenuRadioGroup, 
-                       _kSCRCUserDefaultsWebChooserMenuStaticText, _kSCRCUserDefaultsWebChooserMenuTables, 
-                       _kSCRCUserDefaultsWebChooserMenuTextFields, _kSCRCUserDefaultsWebChooserMenuVisitedLinks, 
-                       _kSCRCUserDefaultsWebChooserMenuWebGroups, _kSCRCUserDefaultsWebChooserMenuWebspots, 
-                       _kSCRCUserDefaultsWebNavigationMethod, _kSCRCUserDefaultsWebObserveLiveRegions, 
-                       _kSCRCUserDefaultsWebPreventKeyboardDOMEventDispatch, _kSCRCUserDefaultsWebRotorItemEnabled, 
-                       _kSCRCUserDefaultsWebRotorItemKey, _kSCRCUserDefaultsWebRotorOrdering, 
-                       _kSCRCUserDefaultsWebTablesRequireInteraction, _kSCRCUserDefaultsWebpageLoadingBehavior, 
-                       _kSCRKeysToUseForVOModifier, _kUAInternalSettingsSuiteName, 
-                       _kUAVoiceOverActionSoundEnabledKey ]
+                       _kSCRCUserDefaultsSpeakVoiceOverCursorMagnificationChanges, 
+                       _kSCRCUserDefaultsSpeakZoomMagnificationChanges, _kSCRCUserDefaultsSpeechCustomizedLanguageIDs, 
+                       _kSCRCUserDefaultsSpeechSelectedVoiceLanguageID, _kSCRCUserDefaultsStartupOptions, 
+                       _kSCRCUserDefaultsStaticTextValueUpdate, _kSCRCUserDefaultsSystemBrailleVerbosity, 
+                       _kSCRCUserDefaultsSystemDialogReminderInterval, _kSCRCUserDefaultsSystemDialogReminderType, 
+                       _kSCRCUserDefaultsSystemVerbosity, _kSCRCUserDefaultsTableRowCountChange, 
+                       _kSCRCUserDefaultsTextCursorFeedbackOption, _kSCRCUserDefaultsTextSearchHistory, 
+                       _kSCRCUserDefaultsTextUnderMouseEnabled, _kSCRCUserDefaultsTextUnderMouseHoverDelayInterval, 
+                       _kSCRCUserDefaultsTransactionElementDictionary, _kSCRCUserDefaultsTransactionGestureCommanderEnabled, 
+                       _kSCRCUserDefaultsTransactionName, _kSCRCUserDefaultsTransactionNotification, 
+                       _kSCRCUserDefaultsTransactionPronunciation, _kSCRCUserDefaultsTypingEchoFeedbackOption, 
+                       _kSCRCUserDefaultsUnitOfMeasure, _kSCRCUserDefaultsUnplannedShutdownCount, 
+                       _kSCRCUserDefaultsUseImageCaption, _kSCRCUserDefaultsVODisabledByManagedPreferences, 
+                       _kSCRCUserDefaultsVerticalWrappingAllowed, _kSCRCUserDefaultsVisualsCaptionWindowFrame, 
+                       _kSCRCUserDefaultsVoiceOverCursorEnabled, _kSCRCUserDefaultsVoiceOverCursorMagnificationFactor, 
+                       _kSCRCUserDefaultsWebCaretBrowsing, _kSCRCUserDefaultsWebChooserMenuArticles, 
+                       _kSCRCUserDefaultsWebChooserMenuButtons, _kSCRCUserDefaultsWebChooserMenuCheckbox, 
+                       _kSCRCUserDefaultsWebChooserMenuFormControls, _kSCRCUserDefaultsWebChooserMenuFrames, 
+                       _kSCRCUserDefaultsWebChooserMenuHeadings, _kSCRCUserDefaultsWebChooserMenuImages, 
+                       _kSCRCUserDefaultsWebChooserMenuLandmarks, _kSCRCUserDefaultsWebChooserMenuLines, 
+                       _kSCRCUserDefaultsWebChooserMenuLinks, _kSCRCUserDefaultsWebChooserMenuLists, 
+                       _kSCRCUserDefaultsWebChooserMenuLiveRegions, _kSCRCUserDefaultsWebChooserMenuNonVisitedLinks, 
+                       _kSCRCUserDefaultsWebChooserMenuRadioGroup, _kSCRCUserDefaultsWebChooserMenuStaticText, 
+                       _kSCRCUserDefaultsWebChooserMenuTables, _kSCRCUserDefaultsWebChooserMenuTextFields, 
+                       _kSCRCUserDefaultsWebChooserMenuVisitedLinks, _kSCRCUserDefaultsWebChooserMenuWebGroups, 
+                       _kSCRCUserDefaultsWebChooserMenuWebspots, _kSCRCUserDefaultsWebNavigationMethod, 
+                       _kSCRCUserDefaultsWebObserveLiveRegions, _kSCRCUserDefaultsWebPreventKeyboardDOMEventDispatch, 
+                       _kSCRCUserDefaultsWebRotorItemEnabled, _kSCRCUserDefaultsWebRotorItemKey, 
+                       _kSCRCUserDefaultsWebRotorOrdering, _kSCRCUserDefaultsWebTablesRequireInteraction, 
+                       _kSCRCUserDefaultsWebpageLoadingBehavior, _kSCRKeysToUseForVOModifier, 
+                       _kUAInternalSettingsSuiteName, _kUAVoiceOverActionSoundEnabledKey ]
     objc-classes:    [ SCRCArgumentHolder, SCRCArgumentParser, SCRCArgumentSubcommand, 
                        SCRCColorUtilities, SCRCComposedCharacter, SCRCConfiguration, 
                        SCRCGestureEvent, SCRCGestureFactory, SCRCGestureFinger, SCRCGestureStylus, 

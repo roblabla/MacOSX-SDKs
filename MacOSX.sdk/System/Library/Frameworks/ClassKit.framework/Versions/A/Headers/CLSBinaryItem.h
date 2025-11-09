@@ -2,11 +2,11 @@
 //  CLSBinaryItem.h
 //  ClassKit
 //
-//  Copyright © 2018 - 2019 Apple Inc. All rights reserved.
+//  Copyright © 2018-2020 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <ClassKit/CLSActivityItem.h>
-#import <ClassKit/CLSDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

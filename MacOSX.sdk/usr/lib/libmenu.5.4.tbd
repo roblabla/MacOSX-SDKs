@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           37758524-B050-3BF0-A93E-D1280617447F
+    value:           3467A600-EE1A-382A-B533-5ED95DB32DCA
   - target:          x86_64-maccatalyst
-    value:           37758524-B050-3BF0-A93E-D1280617447F
+    value:           3467A600-EE1A-382A-B533-5ED95DB32DCA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3AC90966-0ED1-3871-A8F4-40DE61CA2CC8
+    value:           8F84EAB8-3D89-3637-95B1-642C2862A7ED
   - target:          arm64e-maccatalyst
-    value:           3AC90966-0ED1-3871-A8F4-40DE61CA2CC8
+    value:           8F84EAB8-3D89-3637-95B1-642C2862A7ED
 install-name:    '/usr/lib/libmenu.5.4.dylib'
 current-version: 5.4
 compatibility-version: 5.4

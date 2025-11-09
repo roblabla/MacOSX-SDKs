@@ -25,6 +25,8 @@
 
 #import <WebKit/WKFoundation.h>
 
+#import <WebKit/WKMediaPlaybackState.h>
+
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #else
@@ -36,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class WKBackForwardList;
 @class WKBackForwardListItem;
 @class WKContentWorld;
+@class WKDownload;
 @class WKFindConfiguration;
 @class WKFindResult;
 @class WKFrameInfo;
@@ -321,6 +324,35 @@ WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
 */
 - (void)callAsyncJavaScript:(NSString *)functionBody arguments:(nullable NSDictionary<NSString *, id> *)arguments inFrame:(nullable WKFrameInfo *)frame inContentWorld:(WKContentWorld *)contentWorld completionHandler:(void (^ _Nullable)(_Nullable id, NSError * _Nullable error))completionHandler NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(11.0), ios(14.0));
 
+/*! @abstract Closes all out-of-window media presentations in a WKWebView.
+ @discussion Includes picture-in-picture and fullscreen.
+ */
+- (void)closeAllMediaPresentations API_AVAILABLE(macos(11.3), ios(14.5));
+
+/*! @abstract Pauses media playback in WKWebView.
+ @discussion Pauses media playback. Media in the page can be restarted by calling play() on a media element or resume() on an AudioContext.
+ */
+- (void)pauseAllMediaPlayback:(void (^_Nullable)(void))completionHandler API_AVAILABLE(macos(11.3), ios(14.5));
+
+/*! @abstract Suspends media playback in WKWebView.
+ @discussion Pauses media playback and blocks all attempts by the page to resume until resumeAllMediaPlayback is called. This should always be called in pairs with resumeAllMediaPlayback.
+ */
+- (void)suspendAllMediaPlayback:(void (^_Nullable)(void))completionHandler API_AVAILABLE(macos(11.3), ios(14.5));
+
+/*! @abstract Resumes media playback in WKWebView.
+ @discussion This should always be called in pairs with suspendAllMediaPlayback.
+ */
+- (void)resumeAllMediaPlayback:(void (^ _Nullable)(void))completionHandler API_AVAILABLE(macos(11.3), ios(14.5));
+
+/*! @abstract Get the current media playback state of a WKWebView.
+ @param completionHandler A block to invoke with the return value of the function call.
+ @discussion If media playback exists, WKMediaPlaybackState will be one of three
+ values: WKMediaPlaybackPaused, WKMediaPlaybackSuspended, or WKMediaPlaybackPlaying.
+ If no media playback exists in the current WKWebView, WKMediaPlaybackState will equal
+ WKNoMediaPlayback.
+ */
+- (void)requestMediaPlaybackState:(void (^)(WKMediaPlaybackState))completionHandler API_AVAILABLE(macos(11.3), ios(14.5));
+
 /*! @abstract Get a snapshot for the visible viewport of WKWebView.
  @param snapshotConfiguration An object that specifies how the snapshot is configured.
  @param completionHandler A block to invoke when the snapshot is ready.
@@ -419,6 +451,20 @@ The uniform type identifier kUTTypeWebArchive can be used get the related pasteb
  */
 + (BOOL)handlesURLScheme:(NSString *)urlScheme API_AVAILABLE(macos(10.13), ios(11.0));
 
+/* @abstract Begins a download in the context of the currently displayed webpage as if the WKNavigationDelegate turned a navigation into a download instead
+ @param request The request specifying the URL to download.
+ @param completionHandler A block called when the download has started.
+ @discussion The download needs its delegate to be set in the completionHandler to receive updates about its progress.
+ */
+- (void)startDownloadUsingRequest:(NSURLRequest *)request completionHandler:(void(^)(WKDownload *))completionHandler API_AVAILABLE(macos(11.3), ios(14.5));
+
+/* @abstract Resumes a download that failed or was canceled.
+ @param resumeData Data from a WKDownloadDelegate's didFailWithError or a WKDownload's cancel completionHandler.
+ @param completionHandler A block called when the download has resumed.
+ @discussion The download needs its delegate to be set in the completionHandler to receive updates about its progress.
+ */
+- (void)resumeDownloadFromResumeData:(NSData *)resumeData completionHandler:(void(^)(WKDownload *))completionHandler API_AVAILABLE(macos(11.3), ios(14.5));
+
 /* @abstract The media type for the WKWebView
  @discussion The value of mediaType will override the normal value of the CSS media property.
  Setting the value to nil will restore the normal value.
@@ -469,7 +515,7 @@ The uniform type identifier kUTTypeWebArchive can be used get the related pasteb
 
 @end
 
-API_AVAILABLE(macos(11.0))
+API_AVAILABLE(macos(10.15.4))
 @interface WKWebView (WKNSTextFinderClient) <NSTextFinderClient>
 @end
 

@@ -136,6 +136,10 @@ typedef enum {
   , ES_EVENT_TYPE_NOTIFY_REMOTE_THREAD_CREATE
   , ES_EVENT_TYPE_AUTH_REMOUNT
   , ES_EVENT_TYPE_NOTIFY_REMOUNT
+	// The following events are available beginning in macOS 11.3
+  , ES_EVENT_TYPE_AUTH_GET_TASK_READ
+  , ES_EVENT_TYPE_NOTIFY_GET_TASK_READ
+  , ES_EVENT_TYPE_NOTIFY_GET_TASK_INSPECT
     // ES_EVENT_TYPE_LAST is not a valid event type but a convenience
     // value for operating on the range of defined event types.
     // This value may change between releases and was available

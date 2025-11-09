@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5A25F24F-FF38-3A0E-A6FB-DB46F17BEFA4
+    value:           2BC2E6C0-6AAA-3CB7-8581-C49FBF920770
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           50B61670-29B0-3127-B26C-3F4B85F0941A
+    value:           C5109B8C-CE13-3A6C-B761-34A645E372CB
 install-name:    '/System/Library/PrivateFrameworks/DiskSpaceDiagnostics.framework/Versions/A/DiskSpaceDiagnostics'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

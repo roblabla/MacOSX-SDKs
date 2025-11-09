@@ -14,6 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIPrintFormatter;
 
+API_AVAILABLE(ios(14.5)) typedef NS_ENUM(NSInteger, UIPrintRenderingQuality) {
+    /* Renders the printing at the best possible quality, regardless of speed.
+     */
+    UIPrintRenderingQualityBest,
+
+    /* Sacrifices the least possible amount of rendering quality for speed to maintain a responsive user interface. This option should be used only after establishing that best quality rendering does indeed make the user interface unresponsive.
+     */
+    UIPrintRenderingQualityResponsive
+};
+
 UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) @interface UIPrintPageRenderer : NSObject
 
 @property(nonatomic) CGFloat   headerHeight;   // top of contentRect from printableRect
@@ -27,6 +37,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) @interface UIPrintPag
 @property(nullable,atomic,copy) NSArray<UIPrintFormatter *> *printFormatters;
 - (nullable NSArray<UIPrintFormatter *> *)printFormattersForPageAtIndex:(NSInteger)pageIndex;
 - (void)addPrintFormatter:(UIPrintFormatter *)formatter startingAtPageAtIndex:(NSInteger)pageIndex;
+
+/* If the print sheet is unresponsive or sluggish due to the time is takes you to fully render a page,
+   you can override this method and read from requestedPrintRenderQuality to determine if the print operation prefers speed over fidelity.
+   Please see the comments for UIPrintRenderingQuality. Most applications render each page fast enough and do not need to override this method.
+   Return value is the quality you current actually used for the rendering.
+   Returns UIPrintRenderingQualityBest by default.
+ */
+- (UIPrintRenderingQuality)currentRenderingQualityForRequestedRenderingQuality:(UIPrintRenderingQuality)requestedRenderingQuality NS_SWIFT_NAME(currentRenderingQuality(forRequested:)) API_AVAILABLE(ios(14.5));
 
 - (void)prepareForDrawingPages:(NSRange)range;     // override point. default does nothing. called before requesting a set of pages to draw
 

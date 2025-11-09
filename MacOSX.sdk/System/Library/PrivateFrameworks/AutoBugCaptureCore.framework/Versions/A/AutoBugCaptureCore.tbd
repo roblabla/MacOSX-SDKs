@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7DCBB5AD-5154-3FDC-A026-7020A96B6DF8
+    value:           AAA06ED2-06FE-32A4-A5BB-2043E76F989E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0B98DA6C-7AED-3187-B431-DC6B39C37A44
+    value:           0BA2C03B-9178-3645-94C8-3D37E5EAA6EB
 install-name:    '/System/Library/PrivateFrameworks/AutoBugCaptureCore.framework/Versions/A/AutoBugCaptureCore'
 current-version: 0
 exports:
@@ -148,7 +148,8 @@ exports:
                        DiagnosticCase, DiagnosticCaseManager, DiagnosticCaseStorage, 
                        DiagnosticCaseStorageAnalytics, DiagnosticCaseSummary, DiagnosticCaseSummaryAnalytics, 
                        DiagnosticCaseUsage, DiagnosticLiaison, DiagnosticReportGenerator, 
-                       DiagnosticStatisticsManager, DiagnosticStorageManager, IDSCrossDeviceTransport, 
-                       NetDiagnosticsShim, ObjectAnalytics, SystemProperties, UploadSession ]
+                       DiagnosticStatisticsManager, DiagnosticStorageManager, DiagnosticsController, 
+                       IDSCrossDeviceTransport, NetDiagnosticsShim, ObjectAnalytics, 
+                       SystemProperties, UploadSession ]
     objc-ivars:      [ ABCPersistentStoreController._workspace ]
 ...

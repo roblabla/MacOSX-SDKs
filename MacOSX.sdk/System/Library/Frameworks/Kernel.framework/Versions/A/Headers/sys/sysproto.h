@@ -2256,6 +2256,15 @@ struct fs_snapshot_args {
 	char data_l_[PADL_(user_addr_t)]; user_addr_t data; char data_r_[PADR_(user_addr_t)];
 	char flags_l_[PADL_(uint32_t)]; uint32_t flags; char flags_r_[PADR_(uint32_t)];
 };
+#if CONFIG_UEXC
+struct register_uexc_handler_args {
+	char start_l_[PADL_(user_addr_t)]; user_addr_t start; char start_r_[PADR_(user_addr_t)];
+	char size_l_[PADL_(user_size_t)]; user_size_t size; char size_r_[PADR_(user_size_t)];
+	char handler_l_[PADL_(user_addr_t)]; user_addr_t handler; char handler_r_[PADR_(user_addr_t)];
+	char refcon_l_[PADL_(user_addr_t)]; user_addr_t refcon; char refcon_r_[PADR_(user_addr_t)];
+};
+#else
+#endif
 struct terminate_with_payload_args {
 	char pid_l_[PADL_(int)]; int pid; char pid_r_[PADR_(int)];
 	char reason_namespace_l_[PADL_(uint32_t)]; uint32_t reason_namespace; char reason_namespace_r_[PADR_(uint32_t)];
@@ -2949,6 +2958,10 @@ int ulock_wait(struct proc *, struct ulock_wait_args *, int *);
 int ulock_wake(struct proc *, struct ulock_wake_args *, int *);
 int fclonefileat(struct proc *, struct fclonefileat_args *, int *);
 int fs_snapshot(struct proc *, struct fs_snapshot_args *, int *);
+#if CONFIG_UEXC
+int register_uexc_handler(struct proc *, struct register_uexc_handler_args *, int *);
+#else
+#endif
 int terminate_with_payload(struct proc *, struct terminate_with_payload_args *, int *);
 int abort_with_payload(struct proc *, struct abort_with_payload_args *, void *);
 #if NECP

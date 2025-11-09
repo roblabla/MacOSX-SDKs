@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0C2850B1-669C-3BAF-8F2B-10386605B44B
+    value:           7A6A1235-02BE-3772-B30C-61E38D04DD61
   - target:          x86_64-maccatalyst
-    value:           0C2850B1-669C-3BAF-8F2B-10386605B44B
+    value:           7A6A1235-02BE-3772-B30C-61E38D04DD61
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8D3A5472-2985-37E3-8091-1A42742E16D0
+    value:           8B3C7312-6125-3317-A0A7-3A2731BDAFB8
   - target:          arm64e-maccatalyst
-    value:           8D3A5472-2985-37E3-8091-1A42742E16D0
+    value:           8B3C7312-6125-3317-A0A7-3A2731BDAFB8
 install-name:    '/System/Library/PrivateFrameworks/PrintKit.framework/Versions/A/PrintKit'
-current-version: 253
+current-version: 253.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -56,12 +56,15 @@ exports:
                        _PKThumbnailPositionTop, _PKUserPassKey, _PrintKitVersionNumber, 
                        _PrintKitVersionString, __liteDrawImageToSheet, __lite_page_transform, 
                        __pk_mdns_queryTxtSynchronous, __pk_mdns_reconfirm, __pk_mdns_resolveSynchronous, 
-                       __urfSetLineSize, __urfSetStats, _copyMatchingCerts, _deleteCertificate, 
-                       _genericSize, _octetAsString, _pk_cupsDoProxyRequest, _pk_number_of_jobs, 
-                       _pk_proxyClose, _pk_proxyConnectHTTP, _storeCertificate, _transferair, 
-                       _trayFromString, _traysFromAttrs, _urfDelete, _urfErrorString, 
-                       _urfGetLineSize, _urfNew, _urfReadLine, _urfReadPage, _urfReadStart, 
-                       _urfWriteLine, _urfWritePage, _urfWriteStart ]
+                       __srv_cupsDoProxyRequest, __srv_mdns_queryTxtSynchronous, 
+                       __srv_mdns_reconfirm, __srv_mdns_resolveSynchronous, __srv_proxyClose, 
+                       __srv_proxyConnectHTTP, __urfSetLineSize, __urfSetStats, _copyMatchingCerts, 
+                       _deleteCertificate, _genericSize, _octetAsString, _pk_cupsDoProxyRequest, 
+                       _pk_number_of_jobs, _pk_proxyClose, _pk_proxyConnectHTTP, 
+                       _storeCertificate, _transferair, _trayFromString, _traysFromAttrs, 
+                       _urfDelete, _urfErrorString, _urfGetLineSize, _urfNew, _urfReadLine, 
+                       _urfReadPage, _urfReadStart, _urfWriteLine, _urfWritePage, 
+                       _urfWriteStart ]
     objc-classes:    [ PKDefaults, PKJob, PKMediaName, PKPaper, PKPaperList, PKPrintSettings, 
                        PKPrinter, PKPrinterBrowser, PKTray, PK_HTTPProxy, _PK_OneShotXPC ]
     objc-ivars:      [ PK_HTTPProxy._httpQueue, PK_HTTPProxy._msTimeout ]

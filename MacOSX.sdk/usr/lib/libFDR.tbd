@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           00F7A635-5857-3DD2-8D0B-A4DCD51B05EC
+    value:           50410717-EE18-3183-A97E-98F79BA585D5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           54BC582E-B75D-3E42-8816-EEAF96417E3F
+    value:           F618F05B-763C-3BE9-A768-1CC2E580A682
 install-name:    '/usr/lib/libFDR.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -54,19 +54,19 @@ exports:
                        _AMFDRSealingMapCopyLocalDataForClass, _AMFDRSealingMapCopyManifestProperties, 
                        _AMFDRSealingMapCopyManifestPropertiesForDevice, _AMFDRSealingMapCopyMultiInstanceForClass, 
                        _AMFDRSealingMapCopyMultiInstanceWithIdentifiers, _AMFDRSealingMapCopyPropertyTagsWithAttribute, 
-                       _AMFDRSealingMapCopyRequiredIdentifiers, _AMFDRSealingMapCreateAndPopulateSealedData, 
-                       _AMFDRSealingMapCreateRecoveryPermissions, _AMFDRSealingMapCreateRecoveryPermissionsWithOption, 
-                       _AMFDRSealingMapEntryHasAttribute, _AMFDRSealingMapGetEntriesForDevice, 
-                       _AMFDRSealingMapGetEntry, _AMFDRSealingMapGetFDRDataVersionForDevice, 
-                       _AMFDRSealingMapGetFDRManifestVersionForDevice, _AMFDRSealingMapGetLocalStoreMaxSize, 
-                       _AMFDRSealingMapPopulateSealingManifest, _AMFDRSealingMapPropertyHasAttribute, 
-                       _AMFDRSealingMapRecoverCurrentDevice, _AMFDRSealingMapRecoverCurrentDeviceWithMemoryStore, 
-                       _AMFDRSealingMapSetMGCopyAnswer, _AMFDRSealingMapVerifyAndCommitSealedData, 
-                       _AMFDRSealingMapVerifySealing, _AMFDRSealingMapVerifySealingManifestProperties, 
-                       _AMFDRSealingMapVerifySealingManifestPropertyMatching, _AMFDRServicePreflightRecoveryCopyData, 
-                       _AMFDRSetAssemblyIdentifierToVerify, _AMFDRSetCopyMGOverrideCallback, 
-                       _AMFDRSetMemoryStore, _AMFDRSetOption, _AMFDRSetRecoveryVerifier, 
-                       _AMFDRSetSealingMap, _AMFDRSetSsoCreateServiceTicketCallback, 
+                       _AMFDRSealingMapCopyPropertyWithTag, _AMFDRSealingMapCopyRequiredIdentifiers, 
+                       _AMFDRSealingMapCreateAndPopulateSealedData, _AMFDRSealingMapCreateRecoveryPermissions, 
+                       _AMFDRSealingMapCreateRecoveryPermissionsWithOption, _AMFDRSealingMapEntryHasAttribute, 
+                       _AMFDRSealingMapGetEntriesForDevice, _AMFDRSealingMapGetEntry, 
+                       _AMFDRSealingMapGetFDRDataVersionForDevice, _AMFDRSealingMapGetFDRManifestVersionForDevice, 
+                       _AMFDRSealingMapGetLocalStoreMaxSize, _AMFDRSealingMapPopulateSealingManifest, 
+                       _AMFDRSealingMapPropertyHasAttribute, _AMFDRSealingMapRecoverCurrentDevice, 
+                       _AMFDRSealingMapRecoverCurrentDeviceWithMemoryStore, _AMFDRSealingMapSetMGCopyAnswer, 
+                       _AMFDRSealingMapVerifyAndCommitSealedData, _AMFDRSealingMapVerifySealing, 
+                       _AMFDRSealingMapVerifySealingManifestProperties, _AMFDRSealingMapVerifySealingManifestPropertyMatching, 
+                       _AMFDRServicePreflightRecoveryCopyData, _AMFDRSetAssemblyIdentifierToVerify, 
+                       _AMFDRSetCopyMGOverrideCallback, _AMFDRSetMemoryStore, _AMFDRSetOption, 
+                       _AMFDRSetRecoveryVerifier, _AMFDRSetSealingMap, _AMFDRSetSsoCreateServiceTicketCallback, 
                        _kAMFDRSealingMapAssemblyIdentifierList, _kAMFDRSealingMapAttributeChallengeClaim, 
                        _kAMFDRSealingMapAttributeDeviceOnlySigning, _kAMFDRSealingMapAttributeEarlyAccess, 
                        _kAMFDRSealingMapAttributeEarlyAccessConsistencyRequired, 
@@ -76,9 +76,11 @@ exports:
                        _kAMFDRSealingMapAttributeRequiredToSeal, _kAMFDRSealingMapAttributeServerOnlySigning, 
                        _kAMFDRSealingMapAttributeStoreCombined, _kAMFDRSealingMapAttributeVersion2, 
                        _kAMFDRSealingMapAttributes, _kAMFDRSealingMapDataInstanceIdentifier, 
-                       _kAMFDRSealingMapDataInstanceIdentifierList, _kAMFDRSealingMapMaxSize, 
+                       _kAMFDRSealingMapDataInstanceIdentifierList, _kAMFDRSealingMapIdentifierZhuGePrefix, 
+                       _kAMFDRSealingMapManifestProperties, _kAMFDRSealingMapMaxSize, 
                        _kAMFDRSealingMapMultiDataInstanceIdentifierList, _kAMFDRSealingMapPropertyAttributeMatching, 
                        _kAMFDRSealingMapPropertyAttributeRequired, _kAMFDRSealingMapPropertyAttributeStoreAsData, 
                        _kAMFDRSealingMapPropertyAttributeStoreAsInteger, _kAMFDRSealingMapPropertyAttributeSysCfg, 
-                       _kAMFDRSealingMapTag ]
+                       _kAMFDRSealingMapPropertyAttributes, _kAMFDRSealingMapPropertyIdentifier, 
+                       _kAMFDRSealingMapStoreMaxSize, _kAMFDRSealingMapTag ]
 ...

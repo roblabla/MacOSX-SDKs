@@ -63,6 +63,13 @@ typedef NS_ENUM(NSInteger, UISplitViewControllerSplitBehavior) {
     UISplitViewControllerSplitBehaviorDisplace,
 } API_AVAILABLE(ios(14.0));
 
+// Control the displayModeButtonItem visibility for column-style UISplitViewController
+typedef NS_ENUM(NSInteger, UISplitViewControllerDisplayModeButtonVisibility) {
+    UISplitViewControllerDisplayModeButtonVisibilityAutomatic,
+    UISplitViewControllerDisplayModeButtonVisibilityNever,
+    UISplitViewControllerDisplayModeButtonVisibilityAlways
+} API_AVAILABLE(ios(14.5));
+
 // This constant can be used with any sizing-related `UISplitViewController` properties to get the default system behavior.
 UIKIT_EXTERN CGFloat const UISplitViewControllerAutomaticDimension API_AVAILABLE(ios(8.0));
 
@@ -124,7 +131,16 @@ If an animation is started due to -show/hideColumn:, the transitionCoordinator f
 @property (nonatomic, readonly) UISplitViewControllerDisplayMode displayMode API_AVAILABLE(ios(8.0));
 
 // A system bar button item whose action will change the displayMode property depending on the result of targetDisplayModeForActionInSplitViewController:. When inserted into the navigation bar of the secondary view controller it will change its appearance to match its target display mode. When the target displayMode is PrimaryHidden, this will appear as a fullscreen button, for AllVisible or PrimaryOverlay it will appear as a Back button, and when it won't cause any action it will become hidden.
+// Not supported for column-style UISplitViewController
 @property (nonatomic, readonly) UIBarButtonItem *displayModeButtonItem API_AVAILABLE(ios(8.0));
+
+/* For column-style UISplitViewController only.
+    UISplitViewControllerDisplayModeButtonVisibilityAutomatic is the default behavior where setting presentsWithGesture to NO hides the displayModeButton.
+    Set to UISplitViewControllerDisplayModeButtonVisibilityNever to prevent the displayModeButton from showing.
+    Set to UISplitViewControllerDisplayModeButtonVisibilityAlways to allow the displayModeButton to show when presentsWithGesture is NO. Note that in displayModes that would not be expected to show the button when presentsWithGesture is YES (e.g., UISplitViewControllerDisplayModeTwoOverSecondary), a value of Always will not force the button to show.
+ */
+@property(nonatomic) UISplitViewControllerDisplayModeButtonVisibility displayModeButtonVisibility API_AVAILABLE(ios(14.5)); // default: automatic
+
 
 // An animatable property that can be used to adjust the relative width of the primary view controller in the split view controller. This preferred width will be limited by the maximum and minimum properties (and potentially other system heuristics).
 @property(nonatomic, assign) CGFloat preferredPrimaryColumnWidthFraction API_AVAILABLE(ios(8.0)); // default: UISplitViewControllerAutomaticDimension

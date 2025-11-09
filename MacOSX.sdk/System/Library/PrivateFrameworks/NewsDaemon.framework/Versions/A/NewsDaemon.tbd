@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E21EC9A3-3DD7-380A-A10D-42B78A16B20A
+    value:           D405DACC-3DC7-39B2-8FE8-05BC34E6FA33
   - target:          x86_64-maccatalyst
-    value:           E21EC9A3-3DD7-380A-A10D-42B78A16B20A
+    value:           D405DACC-3DC7-39B2-8FE8-05BC34E6FA33
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D833AFB2-87D9-3ABD-B040-059AFAF9A84B
+    value:           BE5B41EA-466E-3950-BA58-DB2851D9E81F
   - target:          arm64e-maccatalyst
-    value:           D833AFB2-87D9-3ABD-B040-059AFAF9A84B
+    value:           BE5B41EA-466E-3950-BA58-DB2851D9E81F
 install-name:    '/System/Library/PrivateFrameworks/NewsDaemon.framework/Versions/A/NewsDaemon'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  UIKit applies appropriate traits to all standard controls, however the
  following traits may be used in conjunction with custom controls.
  
- When setting accessiblity traits, combine custom traits with 
+ When setting accessibility traits, combine custom traits with 
  [super accessibilityTraits]. An incorrect combination of custom traits
  will cause accessibility clients to incorrectly interpret the element.
  Use common sense when combining traits.

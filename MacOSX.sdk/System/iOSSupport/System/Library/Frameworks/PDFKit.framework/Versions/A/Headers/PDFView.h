@@ -79,7 +79,11 @@ PDFKIT_EXTERN NSNotificationName const PDFViewVisiblePagesChangedNotification PD
 
 PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 @interface PDFView : PDFKitPlatformView
+#if defined(PDFKIT_PLATFORM_OSX)
+    < NSAnimationDelegate, NSMenuDelegate >
+#elif defined(PDFKIT_PLATFORM_IOS)
     < UIGestureRecognizerDelegate >
+#endif
 {
 @private
     PDFViewPrivate *_private;
@@ -174,6 +178,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // Specifies if shadows should be drawn around page borders in a PDFView. Defaults to YES.
 @property (nonatomic, setter=enablePageShadows:) BOOL pageShadowsEnabled PDFKIT_AVAILABLE(10_14, 12_0);
 
+#if defined(PDFKIT_PLATFORM_IOS)
 
 // Changes the underlying scroll view to use a UIPageViewController as a way to layout and navigate
 // pages. Note that you can change the orientation via -[PDFView setDisplayDirection:], and that
@@ -182,6 +187,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 - (void)usePageViewController:(BOOL)enable withViewOptions:(nullable NSDictionary*)viewOptions PDFKIT_AVAILABLE(NA, 11_0);
 @property (nonatomic, readonly) BOOL isUsingPageViewController PDFKIT_AVAILABLE(NA, 11_0);
 
+#endif
 
 // -------- delegate
 
@@ -223,6 +229,12 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 - (PDFAreaOfInterest)areaOfInterestForMouse:(PDFKitPlatformEvent *)event;
 - (PDFAreaOfInterest)areaOfInterestForPoint:(PDFPoint)cursorLocation;
 
+#if defined(PDFKIT_PLATFORM_OSX)
+
+// Sets the appropriate cursor for a given area of interest. This method is useful for subclasses.
+- (void)setCursorForAreaOfInterest:(PDFAreaOfInterest)area;
+
+#endif
 
 // Performs the action specified by action.
 - (void)performAction:(PDFAction *)action PDFKIT_AVAILABLE(10_5, 11_0);
@@ -276,6 +288,22 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // Copy the selection (if any) to the pasteboard.
 - (IBAction)copy:(nullable id)sender;
 
+#if defined(PDFKIT_PLATFORM_OSX)
+
+// -------- printing
+
+// Print the PDF document. If autoRotate is YES, will ignore the orientation attribute in printInfo and rather choose 
+// the orientation on a page by page basis that best fits the page to the paper size.
+- (void)printWithInfo:(NSPrintInfo *)printInfo autoRotate:(BOOL)doRotate;
+
+// Like the above method but allows an additional parameter to describe page scaling (see PDFDocument.h for types).
+// If pageScaling is equal to kPDFPrintPageScaleToFit each page is scaled up or down in order to best fit the paper
+// size. Specifying kPDFPrintPageScaleDownToFit for pageScaling will only scale large pages down to fit the paper, 
+// smaller pages will not be scaled up. Passing pageScaling equal to kPDFPrintPageScaleNone is the equivalent of
+// calling -[printWithInfo: autoRotate] above.
+- (void)printWithInfo:(NSPrintInfo *)printInfo autoRotate:(BOOL)doRotate pageScaling:(PDFPrintScalingMode)scale PDFKIT_AVAILABLE(10_5, 11_0);
+
+#endif
 
 // -------- conversion
 
@@ -311,6 +339,13 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // containing the specified page at the current scale factor and with the current display attributes.
 - (PDFSize)rowSizeForPage:(PDFPage *)page;
 
+#if defined(PDFKIT_PLATFORM_OSX)
+
+// Indicate whether dragging a file into PDFView is allowed. If NO (default), dragging events are not supported.
+// If YES, a user can drag and drop a PDF file into the view and have it loaded & set as the visible document (the old document is released).
+@property (nonatomic) BOOL acceptsDraggedFiles PDFKIT_AVAILABLE(10_13, NA);
+
+#endif
 
 // Returns an array of PDFPage objects representing the currently visible pages. May return empty array if no document is assigned.
 @property (nonatomic, readonly) NSArray<PDFPage *> *visiblePages PDFKIT_AVAILABLE(10_5, 11_0);
@@ -329,11 +364,28 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // default implementation calls [[NSWorkspace sharedWorkspace] openURL: url].
 - (void)PDFViewWillClickOnLink:(PDFView *)sender withURL:(NSURL *)url PDFKIT_AVAILABLE(10_5, 11_0);
 
+#if defined( PDFKIT_PLATFORM_OSX )
+
+// Delegate method allowing a delegate to override changes to the scale factor. The default implementation pins scaling
+// between 0.1 and 10.0.
+- (CGFloat)PDFViewWillChangeScaleFactor:(PDFView *)sender toScale:(CGFloat)scaler PDFKIT_AVAILABLE(10_5, NA);
+
+// A delegate providing this method can override the job title when PDFView is printed. The default implementation 
+// uses the string, if any, associated with the "Title" key from the view's PDFDocument attribute dictionary. Failing 
+// that, it uses the last path component if the PDFDocument is URL-based.
+- (NSString *)PDFViewPrintJobTitle:(PDFView *)sender PDFKIT_AVAILABLE(10_5, NA);
+
+// Certain PDFAction's may request that the PDF viewer application Print the current document. Delegates responding to
+// the below method will be called when the user clicks on an annotation with such an action.
+- (void)PDFViewPerformPrint:(PDFView *)sender PDFKIT_AVAILABLE(10_5, NA);
+
+#elif defined( PDFKIT_PLATFORM_IOS )
 
 // A delegate that should return the main view controller the PDFView resides in. This is to add additional
 // support to one's view such as 'Lookup' from the text selection menu, along with support of entering text for notes.
 - (PDFKitPlatformViewController*) PDFViewParentViewController PDFKIT_AVAILABLE(10_15, 13_0);
 
+#endif
 
 // Certain PDFAction's may request that the PDF viewer application perform a Find. Delegates responding to the below
 // method will be called when the user clicks on an annotation with such an action.
@@ -353,5 +405,53 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 
 @end
 
+#if defined( PDFKIT_PLATFORM_OSX )
+
+// Deprecated macOS PDFView methods
+@interface PDFView (PDFViewDeprecated)
+
+// -------- password
+
+// Convenience method. Calls -[[self document] unlockWithPassword:] with the password from sender.
+- (IBAction)takePasswordFrom:(id)sender PDFKIT_DEPRECATED(10_4, 10_12, NA, NA);
+
+// -------- rendering
+
+// This method is deprecated in favor of the of the context aware -[PDFView drawPage:toContext:]. If you subclass
+// PDFView, rendering code will first call -[PDFView drawPage:toContext:]. If your subclass does not override the
+// context-aware function, this original -[PDFView drawPage:] method will be called.
+// For subclasses. This method is called for each visible page requiring rendering.  By subclassing you can draw on top
+// of the PDF page or draw the page entirely yourself. Default implementation erases page to white and calls:
+// [page drawWithBox: [self displayBox]], then draws the selection if any.
+- (void)drawPage:(PDFPage *)page PDFKIT_DEPRECATED(10_4, 10_12, NA, NA);
+
+// This method is deprecated in favor of the of the context aware -[PDFView drawPagePost:toContext:]. If you subclass
+// PDFView, rendering code will first call -[PDFView drawPagePost:toContext:]. If your subclass does not override the
+// context-aware function, this original -[PDFView drawPagePost:] method will be called.
+// Also a handy method for sub-classing.  Called for post-page rendering. In this method however no scaling/rotating is
+// applied to the current context to map to page-space.  The context is in "view-space" coordinates.  The default
+// implementation of this method draws the text highlighting (if any) for page.
+- (void)drawPagePost:(PDFPage *)page PDFKIT_DEPRECATED(10_5, 10_12, NA, NA);
+
+// State of anti-aliasing when drawing. Default is YES.
+@property (nonatomic) BOOL shouldAntiAlias PDFKIT_DEPRECATED(10_4, 10_12, NA, NA);
+
+// Greeking threshold to apply to text displayed. Default is 0.0.
+@property (nonatomic) CGFloat greekingThreshold PDFKIT_DEPRECATED(10_4, 10_12, NA, NA);
+
+// The background color is the color of the space behind the PDF pages (and between them if page breaks is enabled).
+// Default is a 50% gray.
+- (IBAction)takeBackgroundColorFrom:(id)sender PDFKIT_DEPRECATED(10_4, 10_12, NA, NA);
+
+// -------- misc
+
+// Indicate whether dragging is allowed. If NO (default), dragging events are not supported. If YES, a user can drag
+// a PDF file to the view and a new document is associated with the view (the old document is released).
+// Method renamed to "acceptsDraggedFiles", has same behavior.
+@property (nonatomic) BOOL allowsDragging PDFKIT_DEPRECATED(10_4, 10_13, NA, NA);
+
+@end
+
+#endif
 
 NS_ASSUME_NONNULL_END

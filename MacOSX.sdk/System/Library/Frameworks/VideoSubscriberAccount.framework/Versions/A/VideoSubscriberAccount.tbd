@@ -4,26 +4,30 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           29D7A021-CA86-321C-828F-BAF913F21738
+    value:           F09BB501-9858-3FB2-910F-1D33DF9B43B5
   - target:          x86_64-maccatalyst
-    value:           29D7A021-CA86-321C-828F-BAF913F21738
+    value:           F09BB501-9858-3FB2-910F-1D33DF9B43B5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CFCB485F-F9C2-363B-A745-87E7449F8732
+    value:           7C46F9BE-DFFB-3ED5-8EB4-0C3C92C0D412
   - target:          arm64e-maccatalyst
-    value:           CFCB485F-F9C2-363B-A745-87E7449F8732
+    value:           7C46F9BE-DFFB-3ED5-8EB4-0C3C92C0D412
 install-name:    '/System/Library/Frameworks/VideoSubscriberAccount.framework/Versions/A/VideoSubscriberAccount'
-current-version: 364.20.8
+current-version: 364.40.15
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _VSAccountProviderAuthenticationSchemeAPI, _VSAccountProviderAuthenticationSchemeSAML, 
-                       _VSAccountStoreDidChangeNotification, _VSActiveSubscriptionsDidChangeNotification, 
-                       _VSAllKnownTemplateElements, _VSBuddyBundleID, _VSBundleURLForProcessIdentifier, 
-                       _VSCheckAccessOptionPrompt, _VSCheckEntitlementForTask, _VSDataCompressionValueTransformerName, 
+    symbols:         [ _VSAMSBagKeyAppsMediaAPIHost, _VSAMSBagKeyCountryCode, _VSAMSBagKeyIdentityProviders, 
+                       _VSAMSBagKeyMaxFeaturedProviders, _VSAMSBagKeySoleProviderFeatureEnabled, 
+                       _VSAMSBagKeyVerificationStateReset, _VSAMSHTTPMethodNameGET, 
+                       _VSAMSHTTPMethodNamePOST, _VSAccountProviderAuthenticationSchemeAPI, 
+                       _VSAccountProviderAuthenticationSchemeSAML, _VSAccountStoreDidChangeNotification, 
+                       _VSActiveSubscriptionsDidChangeNotification, _VSAllKnownTemplateElements, 
+                       _VSBuddyBundleID, _VSBundleURLForProcessIdentifier, _VSCheckAccessOptionPrompt, 
+                       _VSCheckEntitlementForTask, _VSDataCompressionValueTransformerName, 
                        _VSDefaultLogObject, _VSDeveloperServiceDidChangeNotification, 
                        _VSDeveloperServiceInterface, _VSDeveloperServiceProvidersDidChangeNotification, 
                        _VSDeveloperServiceSettingsDidChangeNotification, _VSDidRegisterSubscriptionNotification, 
@@ -86,7 +90,8 @@ exports:
                        _VSValueTransformerBindingOption, _VSValueTypeCopyWithZone, 
                        _VSValueTypeDescription, _VSValueTypeEncodeWithCoder, _VSValueTypeHash, 
                        _VSValueTypeInit, _VSValueTypeInitWithCoder, _VSValueTypeIsEqual ]
-    objc-classes:    [ VSAccount, VSAccountApplicationProvider, VSAccountChannels, 
+    objc-classes:    [ VSAMSBagLoadOperation, VSAMSRequest, VSAMSRequestOperation, 
+                       VSAccount, VSAccountApplicationProvider, VSAccountChannels, 
                        VSAccountChannelsCenter, VSAccountChannelsSaveOperation, VSAccountManager, 
                        VSAccountManagerResult, VSAccountMetadata, VSAccountMetadataRequest, 
                        VSAccountProviderResponse, VSAccountSaveOperation, VSAccountSerializationCenter, 
@@ -101,14 +106,16 @@ exports:
                        VSFileWriteOperation, VSIdentityProvider, VSIdentityProviderAvailabilityInfoCenter, 
                        VSIdentityProviderFetchAllAppsOperation, VSIdentityProviderFetchAppsOperation, 
                        VSIdentityProviderInfoCenter, VSIdentityProviderInfoQueryResult, 
-                       VSKeyPathBasedTreeNode, VSMetricsCenter, VSOpaqueAuthenticationToken, 
-                       VSOptional, VSPersistentStorage, VSPreferences, VSPrivacyConsentVoucher, 
+                       VSIdentityProviderStorefrontMetadata, VSKeyPathBasedTreeNode, 
+                       VSMetricsCenter, VSOpaqueAuthenticationToken, VSOptional, 
+                       VSPersistentStorage, VSPreferences, VSPrivacyConsentVoucher, 
                        VSPrivacyFacade, VSRemoteNotifier, VSRestrictionsCenter, VSReverseValueTransformer, 
                        VSSAMLAuthenticationToken, VSSecurityTask, VSSemaphore, VSSetTopBoxProfile, 
                        VSStateMachine, VSStateTransition, VSStoreRequest, VSStoreRequestOperation, 
-                       VSStoreURLBag, VSStoreURLBagLoadOperation, VSSubscription, 
-                       VSSubscriptionRegistrationCenter, VSSubscriptionSource, VSTestSetupPreparationOperation, 
-                       VSTimeoutOperation, VSTreeNode, VSValueType, VSValueTypeProperty, 
-                       VSVerificationDataOperation, VSVerificationStateResetOperation, 
-                       VSViewServiceResponse, VSViewServiceXPCInterface, VSWeakForwardingTarget ]
+                       VSStoreURLBag, VSStoreURLBagLoadOperation, VSStorefrontCodeLoadOperation, 
+                       VSSubscription, VSSubscriptionRegistrationCenter, VSSubscriptionSource, 
+                       VSTestSetupPreparationOperation, VSTimeoutOperation, VSTreeNode, 
+                       VSValueType, VSValueTypeProperty, VSVerificationDataOperation, 
+                       VSVerificationStateResetOperation, VSViewServiceResponse, 
+                       VSViewServiceXPCInterface, VSWeakForwardingTarget ]
 ...

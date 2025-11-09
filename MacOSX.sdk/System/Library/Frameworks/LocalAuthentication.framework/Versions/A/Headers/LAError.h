@@ -8,6 +8,10 @@
 #import <Foundation/Foundation.h>
 #import <LocalAuthentication/LAPublicDefines.h>
 
+/// LocalAuthentication error domain.
+extern NSString *const __nonnull LAErrorDomain
+API_AVAILABLE(macos(10.11), ios(8.3), watchos(3.0), tvos(10.0));
+
 typedef NS_ENUM(NSInteger, LAError)
 {
     /// Authentication was not successful because user failed to provide valid credentials.
@@ -61,8 +65,12 @@ typedef NS_ENUM(NSInteger, LAError)
     
     /// Authentication could not start because there was no paired watch device nearby.
     LAErrorWatchNotAvailable API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos) = kLAErrorWatchNotAvailable,
+    
+    /// Authentication could not start because this device supports biometry only via removable accessories and no accessory has been paired.
+    LAErrorBiometryNotPaired API_AVAILABLE(macos(11.2)) API_UNAVAILABLE(ios, watchos, tvos) = kLAErrorBiometryNotPaired,
+
+    /// Authentication could not start because this device supports biometry only via removable accessories and the paired accessory is not connected.
+    LAErrorBiometryDisconnected API_AVAILABLE(macos(11.2)) API_UNAVAILABLE(ios, watchos, tvos) = kLAErrorBiometryDisconnected,
+
 } API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0), tvos(10.0));
 
-/// LocalAuthentication error domain.
-extern NSString *const __nonnull LAErrorDomain
-API_AVAILABLE(macos(10.11), ios(8.3), watchos(3.0), tvos(10.0));

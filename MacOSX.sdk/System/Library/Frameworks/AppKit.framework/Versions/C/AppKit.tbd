@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FDD49C47-209F-3135-B663-D6A36FF49B80
+    value:           D87B9A84-1036-3B42-918D-EF2634ACB8D2
   - target:          x86_64-maccatalyst
-    value:           FDD49C47-209F-3135-B663-D6A36FF49B80
+    value:           D87B9A84-1036-3B42-918D-EF2634ACB8D2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9D1F3C60-1EE4-3EC8-A980-CD549E4C3925
+    value:           C19F85CA-AEE1-3440-B082-8EF3DC4E7873
   - target:          arm64e-maccatalyst
-    value:           9D1F3C60-1EE4-3EC8-A980-CD549E4C3925
+    value:           C19F85CA-AEE1-3440-B082-8EF3DC4E7873
 install-name:    '/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit'
-current-version: 2022.20.117
+current-version: 2022.44.149
 compatibility-version: 45
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -33,7 +33,7 @@ exports:
                        '$ld$add$os10.6$_OBJC_METACLASS_$_NSLayoutConstraint', '$ld$add$os10.6$__NSDictionaryOfVariableBindings', 
                        '$ld$add$os10.7$_OBJC_CLASS_$_NSLayoutConstraint', '$ld$add$os10.7$_OBJC_METACLASS_$_NSLayoutConstraint', 
                        '$ld$add$os10.7$__NSDictionaryOfVariableBindings' ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _GDBDumpCursorStack, _IBAppleScriptFramework, _IBCarbonFramework, 
                        _IBCocoaFramework, _IBSwingFramework, _NSAbortModalException, 
@@ -341,8 +341,8 @@ exports:
                        _NSColorGetUserHighlightColor, _NSColorListDidChangeNotification, 
                        _NSColorListIOException, _NSColorListNotEditableException, 
                        _NSColorLocalizedNameForUserAccentKey, _NSColorLocalizedNameForUserHighlightKey, 
-                       _NSColorPanelColorDidChangeNotification, _NSColorPboardType, 
-                       _NSColorSetUserAccentColor, _NSColorSetUserHighlightColor, 
+                       _NSColorModifyHighlightForChangedUserAccentKey, _NSColorPanelColorDidChangeNotification, 
+                       _NSColorPboardType, _NSColorSetUserAccentColor, _NSColorSetUserHighlightColor, 
                        _NSColorSpaceFromDepth, _NSComboBoxSelectionDidChangeNotification, 
                        _NSComboBoxSelectionIsChangingNotification, _NSComboBoxWillDismissNotification, 
                        _NSComboBoxWillPopUpNotification, _NSCompositeRect, _NSConditionallySetsEditableBindingOption, 
@@ -819,30 +819,31 @@ exports:
                        _NSTouchDeviceRemovedNotification, _NSTransparentBinding, 
                        _NSTypedFilenamesPboardType, _NSTypedStreamVersionException, 
                        _NSURLPboardType, _NSUnregisterServicesProvider, _NSUpdateDynamicServices, 
-                       _NSUseSplitCursor, _NSUseWritingDirectionKeyBindings, _NSVCardPboardType, 
-                       _NSValidatesImmediatelyBindingOption, _NSValueBinding, _NSValuePathBinding, 
-                       _NSValueTransformerBindingOption, _NSValueTransformerNameBindingOption, 
-                       _NSValueURLBinding, _NSViewAnimationEffectKey, _NSViewAnimationEndFrameKey, 
-                       _NSViewAnimationFadeInEffect, _NSViewAnimationFadeOutEffect, 
-                       _NSViewAnimationStartFrameKey, _NSViewAnimationTargetKey, 
-                       _NSViewBoundsDidChangeNotification, _NSViewDetectedAmbiguousLayoutNotification, 
-                       _NSViewDidChangeBackingScaleNotification, _NSViewDidUpdateTrackingAreasNotification, 
-                       _NSViewFocusDidChangeNotification, _NSViewFrameDidChangeNotification, 
-                       _NSViewGetEffectiveVibrantBlendingStyle, _NSViewGlobalFrameDidChangeNotification, 
-                       _NSViewNoInstrinsicMetric, _NSViewNoIntrinsicMetric, _NSVisibleBinding, 
-                       _NSVoiceAge, _NSVoiceDemoText, _NSVoiceGender, _NSVoiceGenderFemale, 
-                       _NSVoiceGenderMale, _NSVoiceGenderNeuter, _NSVoiceIdentifier, 
-                       _NSVoiceIndividuallySpokenCharacters, _NSVoiceLanguage, _NSVoiceLocaleIdentifier, 
-                       _NSVoiceName, _NSVoiceSupportedCharacters, _NSWarningValueBinding, 
-                       _NSWhite, _NSWidthBinding, _NSWindowDidBecomeKeyNotification, 
-                       _NSWindowDidBecomeMainNotification, _NSWindowDidChangeBackingPropertiesNotification, 
-                       _NSWindowDidChangeOcclusionStateNotification, _NSWindowDidChangeScreenNotification, 
-                       _NSWindowDidChangeScreenProfileNotification, _NSWindowDidDeminiaturizeNotification, 
-                       _NSWindowDidEndLiveResizeNotification, _NSWindowDidEndSheetNotification, 
-                       _NSWindowDidEnterFullScreenNotification, _NSWindowDidEnterVersionBrowserNotification, 
-                       _NSWindowDidExitFullScreenNotification, _NSWindowDidExitVersionBrowserNotification, 
-                       _NSWindowDidExposeNotification, _NSWindowDidMiniaturizeNotification, 
-                       _NSWindowDidMoveNotification, _NSWindowDidOrderOffScreenAndFinishAnimatingNotification, 
+                       _NSUseSplitCursor, _NSUseWritingDirectionKeyBindings, _NSUserHighlightColorForUserAccentKey, 
+                       _NSVCardPboardType, _NSValidatesImmediatelyBindingOption, 
+                       _NSValueBinding, _NSValuePathBinding, _NSValueTransformerBindingOption, 
+                       _NSValueTransformerNameBindingOption, _NSValueURLBinding, 
+                       _NSViewAnimationEffectKey, _NSViewAnimationEndFrameKey, _NSViewAnimationFadeInEffect, 
+                       _NSViewAnimationFadeOutEffect, _NSViewAnimationStartFrameKey, 
+                       _NSViewAnimationTargetKey, _NSViewBoundsDidChangeNotification, 
+                       _NSViewDetectedAmbiguousLayoutNotification, _NSViewDidChangeBackingScaleNotification, 
+                       _NSViewDidUpdateTrackingAreasNotification, _NSViewFocusDidChangeNotification, 
+                       _NSViewFrameDidChangeNotification, _NSViewGetEffectiveVibrantBlendingStyle, 
+                       _NSViewGlobalFrameDidChangeNotification, _NSViewNoInstrinsicMetric, 
+                       _NSViewNoIntrinsicMetric, _NSVisibleBinding, _NSVoiceAge, 
+                       _NSVoiceDemoText, _NSVoiceGender, _NSVoiceGenderFemale, _NSVoiceGenderMale, 
+                       _NSVoiceGenderNeuter, _NSVoiceIdentifier, _NSVoiceIndividuallySpokenCharacters, 
+                       _NSVoiceLanguage, _NSVoiceLocaleIdentifier, _NSVoiceName, 
+                       _NSVoiceSupportedCharacters, _NSWarningValueBinding, _NSWhite, 
+                       _NSWidthBinding, _NSWindowDidBecomeKeyNotification, _NSWindowDidBecomeMainNotification, 
+                       _NSWindowDidChangeBackingPropertiesNotification, _NSWindowDidChangeOcclusionStateNotification, 
+                       _NSWindowDidChangeScreenNotification, _NSWindowDidChangeScreenProfileNotification, 
+                       _NSWindowDidDeminiaturizeNotification, _NSWindowDidEndLiveResizeNotification, 
+                       _NSWindowDidEndSheetNotification, _NSWindowDidEnterFullScreenNotification, 
+                       _NSWindowDidEnterVersionBrowserNotification, _NSWindowDidExitFullScreenNotification, 
+                       _NSWindowDidExitVersionBrowserNotification, _NSWindowDidExposeNotification, 
+                       _NSWindowDidMiniaturizeNotification, _NSWindowDidMoveNotification, 
+                       _NSWindowDidOrderOffScreenAndFinishAnimatingNotification, 
                        _NSWindowDidOrderOffScreenNotification, _NSWindowDidOrderOnScreenAndFinishAnimatingNotification, 
                        _NSWindowDidOrderOnScreenNotification, _NSWindowDidResignKeyNotification, 
                        _NSWindowDidResignMainNotification, _NSWindowDidResizeNotification, 
@@ -1257,7 +1258,7 @@ exports:
                        _NSServiceFilter.entry, _NSServiceFilter.flags, _NSServiceFilter.linkSchemes, 
                        _NSServiceFilter.textScript, _NSServiceFilter.wordLimit, _NSToolbarItemViewerLabelCellPopUpCell._realTitle, 
                        _NSToolbarSeparator._inPalette ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _NSAttributedStringFromMacSimpleTextData, _NSSourceTextScalingDocumentOption, 
                        _NSTargetTextScalingDocumentOption, _NSTextDidBeginEditingNotification, 
                        _NSTextDidChangeNotification, _NSTextDidEndEditingNotification, 
@@ -1277,19 +1278,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           71C63CE5-094D-34AF-B538-8DCAB3B66DE9
+    value:           C815FD3F-C0F0-31F6-B60D-C544D807384F
   - target:          x86_64-maccatalyst
-    value:           71C63CE5-094D-34AF-B538-8DCAB3B66DE9
+    value:           C815FD3F-C0F0-31F6-B60D-C544D807384F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           085965EE-A855-340D-8022-805BB9F45A87
+    value:           9512D44F-5489-3864-BDED-AA6869227461
   - target:          arm64e-maccatalyst
-    value:           085965EE-A855-340D-8022-805BB9F45A87
+    value:           9512D44F-5489-3864-BDED-AA6869227461
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 726.11
+current-version: 728.6
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2ACAB07E-2182-3742-AED0-C7550F0FEDFF
+    value:           399EAE22-7F4C-39FD-AFB2-C20ED790F0C6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E545EF7D-EB94-3ADC-AFED-9E63F376CF64
+    value:           AEB30074-0807-358C-8276-6067F17E6876
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityVisuals.framework/Versions/A/AccessibilityVisuals'
 current-version: 2
 exports:

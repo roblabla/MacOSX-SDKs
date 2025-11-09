@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           098FD431-D302-3DD5-9AD1-453615A73E68
+    value:           58BB87A3-54AC-31DA-A465-DDAAEA19861A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7D03969A-C2B0-30C9-AAAD-F530C2777D77
+    value:           6441C4C4-2AB1-3878-9350-D674A24C0798
 install-name:    '/System/Library/PrivateFrameworks/AudioResourceArbitration.framework/Versions/A/AudioResourceArbitration'
 exports:
   - targets:         [ x86_64-macos ]
@@ -18,7 +18,9 @@ exports:
                        __ZTIN4aura20FakeDeviceManagementE, __ZTIN4aura3BoxE, __ZTIN4aura4PortE, 
                        __ZTIN4aura5ClockE, __ZTIN4aura6DeviceE, __ZTIN4aura6DriverE, 
                        __ZTIN4aura6ObjectE, __ZTIN4aura6StreamE, __ZTIN4aura7ControlE, 
-                       __ZTIN4aura8IOStreamE, __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTIN4aura8IOStreamE, __ZTINSt3__110__function6__baseIFvNS_6vectorIyNS_9allocatorIyEEEEEEE, 
+                       __ZTINSt3__110__function6__baseIFvjEEE, __ZTINSt3__110__function6__baseIFvvEEE, 
+                       __ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, 
                        __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__117bad_function_callE, __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
@@ -38,7 +40,9 @@ exports:
                        __ZTSN4aura18ResourceArbitratorE, __ZTSN4aura20FakeDeviceManagementE, 
                        __ZTSN4aura3BoxE, __ZTSN4aura4PortE, __ZTSN4aura5ClockE, __ZTSN4aura6DeviceE, 
                        __ZTSN4aura6DriverE, __ZTSN4aura6ObjectE, __ZTSN4aura6StreamE, 
-                       __ZTSN4aura7ControlE, __ZTSN4aura8IOStreamE, __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSN4aura7ControlE, __ZTSN4aura8IOStreamE, __ZTSNSt3__110__function6__baseIFvNS_6vectorIyNS_9allocatorIyEEEEEEE, 
+                       __ZTSNSt3__110__function6__baseIFvjEEE, __ZTSNSt3__110__function6__baseIFvvEEE, 
+                       __ZTSNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, 
                        __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__117bad_function_callE, __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 

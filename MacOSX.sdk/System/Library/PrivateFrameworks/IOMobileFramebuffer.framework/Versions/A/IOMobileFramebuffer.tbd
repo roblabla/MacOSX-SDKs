@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7665CECB-5FAF-3935-BE74-6356E18DDF0F
+    value:           86325AA4-4D75-36AC-800B-3E5574A65F02
   - target:          x86_64-maccatalyst
-    value:           7665CECB-5FAF-3935-BE74-6356E18DDF0F
+    value:           86325AA4-4D75-36AC-800B-3E5574A65F02
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7F6BECC6-FBA0-3912-B1B3-2AF537F192D4
+    value:           DA6BE348-C26C-3798-BE67-E897B1C4B218
   - target:          arm64e-maccatalyst
-    value:           7F6BECC6-FBA0-3912-B1B3-2AF537F192D4
+    value:           DA6BE348-C26C-3798-BE67-E897B1C4B218
 install-name:    '/System/Library/PrivateFrameworks/IOMobileFramebuffer.framework/Versions/A/IOMobileFramebuffer'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -22,10 +22,7 @@ exports:
     symbols:         [ _IOMobileFrameBufferEnableDebugTracing, _IOMobileFrameBufferEnableVBLTraces, 
                        _IOMobileFrameBufferGetDebugTraces, _IOMobileFrameBufferGetMirroringCapability, 
                        _IOMobileFrameBufferPrintDebugTraces, _IOMobileFrameBufferSetLogLevel, 
-                       _IOMobileFrameBufferprintDisplayRegs, _IOMobileFramebufferALSSEnableWindows, 
-                       _IOMobileFramebufferALSSGetRGBCoeffs, _IOMobileFramebufferALSSGetWindows, 
-                       _IOMobileFramebufferALSSGetWindowsSums, _IOMobileFramebufferALSSSetRGBCoeffs, 
-                       _IOMobileFramebufferALSSSetWindows, _IOMobileFramebufferChangeFrameInfo, 
+                       _IOMobileFrameBufferprintDisplayRegs, _IOMobileFramebufferChangeFrameInfo, 
                        _IOMobileFramebufferCopyLayerDisplayedSurface, _IOMobileFramebufferCopyProperty, 
                        _IOMobileFramebufferCreateDisplayList, _IOMobileFramebufferCreateStatistics, 
                        _IOMobileFramebufferDisableCRCNotifications, _IOMobileFramebufferDisableHotPlugDetectNotifications, 
@@ -73,8 +70,9 @@ exports:
                        _IOMobileFramebufferSupportedFrameInfo, _IOMobileFramebufferSurfaceIsReplaceable, 
                        _IOMobileFramebufferSwapActiveRegion, _IOMobileFramebufferSwapBegin, 
                        _IOMobileFramebufferSwapCancel, _IOMobileFramebufferSwapCancelAll, 
-                       _IOMobileFramebufferSwapDirtyRegion, _IOMobileFramebufferSwapEnd, 
-                       _IOMobileFramebufferSwapSetBackgroundColor, _IOMobileFramebufferSwapSetBrightness, 
+                       _IOMobileFramebufferSwapDebugInfo, _IOMobileFramebufferSwapDirtyRegion, 
+                       _IOMobileFramebufferSwapEnd, _IOMobileFramebufferSwapSetBackgroundColor, 
+                       _IOMobileFramebufferSwapSetBrightness, _IOMobileFramebufferSwapSetBrightnessLimit, 
                        _IOMobileFramebufferSwapSetColorMatrix, _IOMobileFramebufferSwapSetGammaTable, 
                        _IOMobileFramebufferSwapSetICCCurve, _IOMobileFramebufferSwapSetICCMatrix, 
                        _IOMobileFramebufferSwapSetLayer, _IOMobileFramebufferSwapSetParams, 

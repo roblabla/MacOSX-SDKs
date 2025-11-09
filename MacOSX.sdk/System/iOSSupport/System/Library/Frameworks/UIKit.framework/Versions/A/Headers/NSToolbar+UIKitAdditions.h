@@ -58,8 +58,8 @@ API_AVAILABLE(macCatalyst(13.0))
 
 /*
  The visible state of the title of the titlebar.
- If the value is UITitlebarVisiblityHidden and there is no toolbar, the result will hide any window chrome at the top of the window.
- Defaults to UITitlebarVisiblityVisible.
+ If the value is UITitlebarTitleVisibilityHidden and there is no toolbar, the result will hide any window chrome at the top of the window.
+ Defaults to UITitlebarTitleVisiblityVisible.
  */
 @property UITitlebarTitleVisibility titleVisibility;
 

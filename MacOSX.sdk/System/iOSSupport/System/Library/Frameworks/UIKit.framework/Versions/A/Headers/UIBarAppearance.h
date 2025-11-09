@@ -20,7 +20,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) @interface UIBarAppearance : N
 /// Constructs a new bar appearance, configured with default values and targeting the device idiom.
 - (instancetype)init;
 
-/// Constructs a new bar appearance, targetting the passed-in idiom as a hint. Not all platforms support all available idioms. See the idiom property to determine the resolved idiom.
+/// Constructs a new bar appearance, targeting the passed-in idiom as a hint. Not all platforms support all available idioms. See the idiom property to determine the resolved idiom.
 - (instancetype)initWithIdiom:(UIUserInterfaceIdiom)idiom NS_DESIGNATED_INITIALIZER;
 
 /// The idiom that this appearance object targets.

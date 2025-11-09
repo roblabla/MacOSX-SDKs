@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1A30C6D7-DB84-3296-B010-A77CFE5A078D
+    value:           7362FD43-7C26-3295-8EE5-6E761487EE18
   - target:          x86_64-maccatalyst
-    value:           1A30C6D7-DB84-3296-B010-A77CFE5A078D
+    value:           7362FD43-7C26-3295-8EE5-6E761487EE18
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A2EBF67-8562-33E5-9CE6-B19AED164618
+    value:           58304B32-5B5F-3307-9DA6-124953D0B909
   - target:          arm64e-maccatalyst
-    value:           7A2EBF67-8562-33E5-9CE6-B19AED164618
+    value:           58304B32-5B5F-3307-9DA6-124953D0B909
 install-name:    '/usr/lib/libAccessibility.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AXBeginListeningToUserDefaultsChanges, _AXCPCopySharedResourcesPreferencesDomainForDomain, 
                        _AXCPSharedResourcesDirectory, _AXDisallowsUIBasedAccessibilityFeatures, 
@@ -158,11 +158,12 @@ exports:
                        __AXSVoiceOverTouchSetBrailleLanguageRotorItems, __AXSVoiceOverTouchSetBrailleMasterStatusCellIndex, 
                        __AXSVoiceOverTouchSetBrailleTableIdentifier, __AXSVoiceOverTouchSetBrailleVirtualStatusAlignment, 
                        __AXSVoiceOverTouchSetEnabled, __AXSVoiceOverTouchSetEnabledAndAutoConfirmUsage, 
-                       __AXSVoiceOverTouchSetEnabledThroughAccessory, __AXSVoiceOverTouchSetLanguageRotorItems, 
-                       __AXSVoiceOverTouchSetScreenCurtainEnabled, __AXSVoiceOverTouchSetShouldRouteToSpeakerWithProximity, 
-                       __AXSVoiceOverTouchSetSpeakTimeOnWake, __AXSVoiceOverTouchSetSpeakingRate, 
-                       __AXSVoiceOverTouchSetTypingMode, __AXSVoiceOverTouchSetUIEnabled, 
-                       __AXSVoiceOverTouchSetUsageConfirmed, __AXSVoiceOverTouchSetUserHasReadNoHomeButtonGestureDescription, 
+                       __AXSVoiceOverTouchSetEnabledAppTemporaryOverride, __AXSVoiceOverTouchSetEnabledThroughAccessory, 
+                       __AXSVoiceOverTouchSetLanguageRotorItems, __AXSVoiceOverTouchSetScreenCurtainEnabled, 
+                       __AXSVoiceOverTouchSetShouldRouteToSpeakerWithProximity, __AXSVoiceOverTouchSetSpeakTimeOnWake, 
+                       __AXSVoiceOverTouchSetSpeakingRate, __AXSVoiceOverTouchSetTypingMode, 
+                       __AXSVoiceOverTouchSetUIEnabled, __AXSVoiceOverTouchSetUsageConfirmed, 
+                       __AXSVoiceOverTouchSetUserHasReadNoHomeButtonGestureDescription, 
                        __AXSVoiceOverTouchSetVolume, __AXSVoiceOverTouchShouldRouteToSpeakerWithProximity, 
                        __AXSVoiceOverTouchSpeakTimeOnWake, __AXSVoiceOverTouchSpeakingRate, 
                        __AXSVoiceOverTouchTypingMode, __AXSVoiceOverTouchUIEnabled, 

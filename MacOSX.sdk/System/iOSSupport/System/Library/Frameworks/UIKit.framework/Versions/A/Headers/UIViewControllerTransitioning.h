@@ -39,7 +39,7 @@ UIKIT_EXTERN UITransitionContextViewKey const UITransitionContextToViewKey NS_SW
 // The system queries the view controller's transitioningDelegate or the
 // navigation controller's delegate to determine if an animator or interaction
 // controller should be used in a transition. The transitioningDelegate is a new
-// propery on UIViewController and conforms to the
+// property on UIViewController and conforms to the
 // UIViewControllerTransitioningDelegate protocol defined below. The navigation
 // controller likewise has been augmented with a couple of new delegate methods.
 //
@@ -137,7 +137,7 @@ UIKIT_EXTERN UITransitionContextViewKey const UITransitionContextToViewKey NS_SW
 // container controllers that have companion animations that might need to
 // synchronize with the main animation.
 - (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext;
-// This method can only  be a nop if the transition is interactive and not a percentDriven interactive transition.
+// This method can only be a no-op if the transition is interactive and not a percentDriven interactive transition.
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext;
 
 @optional

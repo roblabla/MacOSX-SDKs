@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AB7E6A20-65EF-3A68-B420-17746340D383
+    value:           FCEA57BA-307B-37B7-BBA8-B7B591562727
   - target:          x86_64-maccatalyst
-    value:           AB7E6A20-65EF-3A68-B420-17746340D383
+    value:           FCEA57BA-307B-37B7-BBA8-B7B591562727
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           57219498-36D9-3CF2-8270-09C5F9FF3A9D
+    value:           D91D6D1A-E33F-3141-8F5C-A1F2D58BC710
   - target:          arm64e-maccatalyst
-    value:           57219498-36D9-3CF2-8270-09C5F9FF3A9D
+    value:           D91D6D1A-E33F-3141-8F5C-A1F2D58BC710
 install-name:    '/System/Library/PrivateFrameworks/RemoteConfiguration.framework/Versions/A/RemoteConfiguration'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -66,15 +66,16 @@ exports:
                        _RCNextHighestRelativePriority, _RCPerformBlockOnMainThread, 
                        _RCPerformIfNonNil, _RCProtocolCast, _RCQoSClassFromQoS, _RCQoSFromQoSClass, 
                        _RCQueuePriorityFromRelativePriority, _RCRandom, _RCRandomBetween, 
-                       _RCRepeat, _RCRequesBooksConfigurationKey, _RCRequestAppConfigurationKey, 
-                       _RCRequestStocksConfigurationKey, _RCRequestWeatherConfigurationKey, 
-                       _RCRequestWidgetConfigurationKey, _RCResponseAppConfigurationWrapperKey, 
-                       _RCResponseErrorWrapperKey, _RCResponseStocksConfigurationWrapperKey, 
-                       _RCResponseUserInfoKey, _RCResponseWidgetConfigurationWrapperKey, 
-                       _RCReverseSquare, _RCRound, _RCSecondsToMilliseconds, _RCSharedLog, 
-                       _RCSineMap, _RCSpecificCast, _RCStringFromQualityOfService, 
-                       _RCStringFromQueuePriority, _RCTestBlockForClass, _RCTestBlockForProtocol, 
-                       _RCURLFetchDownloadTimeout, _RCURLFetchRequestTimeout, _RCURLSessionTaskPriorityHigh, 
+                       _RCRepeat, _RCRequestAppConfigurationKey, _RCRequestBooksConfigurationKey, 
+                       _RCRequestFeedTypeKey, _RCRequestFeedTypePremiumKey, _RCRequestStocksConfigurationKey, 
+                       _RCRequestWeatherConfigurationKey, _RCRequestWidgetConfigurationKey, 
+                       _RCResponseAppConfigurationWrapperKey, _RCResponseErrorWrapperKey, 
+                       _RCResponseStocksConfigurationWrapperKey, _RCResponseUserInfoKey, 
+                       _RCResponseWidgetConfigurationWrapperKey, _RCReverseSquare, 
+                       _RCRound, _RCSecondsToMilliseconds, _RCSharedLog, _RCSineMap, 
+                       _RCSpecificCast, _RCStringFromQualityOfService, _RCStringFromQueuePriority, 
+                       _RCTestBlockForClass, _RCTestBlockForProtocol, _RCURLFetchDownloadTimeout, 
+                       _RCURLFetchRequestTimeout, _RCURLSessionTaskPriorityHigh, 
                        _RCURLSessionTaskPriorityLow, _RCURLSessionTaskPriorityNormal, 
                        _RCURLSessionTaskPriorityVeryHigh, _RCUserInfoSegmentSetIDsKey, 
                        _RCUserInfoTreatmentIDsKey, _RCUserSegmentationBackgroundRefreshRateKey, 
@@ -84,11 +85,12 @@ exports:
                        _RCUserSegmentationConfigurationDefaultModMax, _RCUserSegmentationConfigurationDefaultModThreshold, 
                        _RCUserSegmentationConfigurationEndpointURLKey, _RCUserSegmentationConfigurationForegroundRefreshRateKey, 
                        _RCUserSegmentationConfigurationKey, _RCUserSegmentationConfigurationModMaxKey, 
-                       _RCUserSegmentationConfigurationModThresholdKey, _RCUserSegmentationEnvironmentForEnvironmentString, 
-                       _RCUserSegmentationModMaxKey, _RCUserSegmentationModThresholdKey, 
-                       _RCUserSegmentationRefreshRateKey, _RCUserSegmentationWidgetConfigurationKey, 
-                       _RCUserSegmentationWidgetForegroundRefreshRateKey, _RCUserSegmentationWidgetRefreshRateKey, 
-                       _RCWaitUntilBlockIsInvoked, _RemoteConfigurationVersionNumber, 
+                       _RCUserSegmentationConfigurationModThresholdKey, _RCUserSegmentationConfigurationWidgetEndpointURLKey, 
+                       _RCUserSegmentationEnvironmentForEnvironmentString, _RCUserSegmentationModMaxKey, 
+                       _RCUserSegmentationModThresholdKey, _RCUserSegmentationRefreshRateKey, 
+                       _RCUserSegmentationWidgetConfigurationKey, _RCUserSegmentationWidgetForegroundRefreshRateKey, 
+                       _RCUserSegmentationWidgetRefreshRateKey, _RCWaitUntilBlockIsInvoked, 
+                       _RCWidgetConfigurationEndpointURLKey, _RemoteConfigurationVersionNumber, 
                        _RemoteConfigurationVersionString ]
     objc-classes:    [ RCAsyncBlockOperation, RCAsyncOnceOperation, RCAsyncSerialQueue, 
                        RCBoostableOperationThrottler, RCCancelHandler, RCChangeTag, 

@@ -130,7 +130,7 @@ typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
 /**
  Update the detail text in this list item, reloading this item in the table if needed.
  */
-- (void)setDetailText:(NSString *)detailText API_AVAILABLE(ios(14.0));
+- (void)setDetailText:(nullable NSString *)detailText API_AVAILABLE(ios(14.0));
 
 /**
  Update the image in this list item, reloading this item in the table if needed.
@@ -142,7 +142,7 @@ typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
 
  UIImageAsset is used to combine multiple UIImages with different trait collections into a single UIImage.
  */
-- (void)setImage:(UIImage *)image API_AVAILABLE(ios(14.0));
+- (void)setImage:(nullable UIImage *)image API_AVAILABLE(ios(14.0));
 
 /**
  Update the accessory image in this list item, reloading this item in the table if needed.
@@ -154,7 +154,7 @@ typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
 
  UIImageAsset is used to combine multiple UIImages with different trait collections into a single UIImage.
  */
-- (void)setAccessoryImage:(UIImage *)accessoryImage API_AVAILABLE(ios(14.0));
+- (void)setAccessoryImage:(nullable UIImage *)accessoryImage API_AVAILABLE(ios(14.0));
 
 /**
  Assign a new text label to this list item, automatically reloading this item in its list template.

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D8986A88-2061-3157-A1BE-452E20ED34F6
+    value:           283A37A3-605B-3411-8615-6F2565C28A11
   - target:          x86_64-maccatalyst
-    value:           D8986A88-2061-3157-A1BE-452E20ED34F6
+    value:           283A37A3-605B-3411-8615-6F2565C28A11
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           55ACE18E-8A21-3407-95B3-D53A3C38F0BF
+    value:           397C3075-FA9B-3AAC-ADAD-2269B9D04804
   - target:          arm64e-maccatalyst
-    value:           55ACE18E-8A21-3407-95B3-D53A3C38F0BF
+    value:           397C3075-FA9B-3AAC-ADAD-2269B9D04804
 install-name:    '/System/Library/PrivateFrameworks/MobileAsset.framework/Versions/A/MobileAsset'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -39,11 +39,13 @@ exports:
                        _ASStateOperationEstimatedTimeRemaining, _ASStateOperationProgress, 
                        _ASStatePausedOperation, _ASStateStallError, _ASStateStallReason, 
                        _MACleanV1Repository, _MAGetPallasAudience, _MAIsCancelDownloadResultFailure, 
-                       _MAIsDownloadResultFailure, _MAIsQueryResultFailure, _MALogClientWithNSLogOSLog, 
+                       _MAIsDownloadResultFailure, _MAIsQueryResultFailure, _MAIsWellFormedAssetId, 
+                       _MAIsWellFormedAssetType, _MAIsWellFormedPurpose, _MALogClientWithNSLogOSLog, 
                        _MAMigrateAssets, _MAPurgeAll, _MAPurgeAllExceptGivenIds, 
-                       _MAPurgeCatalogs, _MASendRepairState, _MASetPallasAudience, 
-                       _MASetPallasUrl, _MASetServerUrlOverride, _MASoftwareLookupCancelDownload, 
-                       _MASoftwareLookupQuery, _MASoftwareLookupQueryVersionsOnly, 
+                       _MAPurgeAllWithPurpose, _MAPurgeAllWithPurposeExceptGivenIds, 
+                       _MAPurgeCatalogs, _MAPurgeCatalogsWithPurpose, _MASendRepairState, 
+                       _MASetPallasAudience, _MASetPallasUrl, _MASetServerUrlOverride, 
+                       _MASoftwareLookupCancelDownload, _MASoftwareLookupQuery, _MASoftwareLookupQueryVersionsOnly, 
                        _MASoftwareLookupStartDownload, _MAStringForMAAssetState, 
                        _MAStringForMACancelDownloadResult, _MAStringForMADownloadResult, 
                        _MAStringForMAOperationResult, _MAStringForMAPurgeResult, 
@@ -56,9 +58,10 @@ exports:
                        __MAclientSendRepairStateSync, __MAclientSendServerUrlOverride, 
                        __MAensureExtension, __MAsendCancelDownload, __MAsendCancelDownloadMetaData, 
                        __MAsendConfigDownload, __MAsendDownloadAsset, __MAsendDownloadMetaData, 
-                       __MAsendDumpClientAccess, __MAsendGarbageCollect, __MAsendGetPallasAudience, 
-                       __MAsendPurgeAsset, __MAsendQueryMetaData, __MAsendSetPallasAudience, 
-                       __MAsendSetPallasUrl, __MAsendUpdateClientAccessGetPathSync, 
+                       __MAsendDumpClientAccess, __MAsendDumpClientAccessWithPurpose, 
+                       __MAsendGarbageCollect, __MAsendGetPallasAudience, __MAsendPurgeAsset, 
+                       __MAsendQueryMetaData, __MAsendSetPallasAudience, __MAsendSetPallasUrl, 
+                       __MAsendUpdateClientAccessGetPathSync, __MAsendUpdateClientAccessGetPathWithPurposeSync, 
                        __MobileAssetFault, __MobileAssetGarbageCollectionBehaviorForAttributes, 
                        __MobileAssetLog, ___DiscardDownloadQueueToken, ___ForceMigration, 
                        ___RetryQueuedDownloads, ___StartBackgroundedDownloads, ___TriggerAssetMigration, 

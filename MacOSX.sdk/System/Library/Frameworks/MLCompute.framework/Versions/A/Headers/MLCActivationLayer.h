@@ -185,6 +185,19 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING( macos(11.0), ios(14.0), tvos(14.0))
     @return     A new activation layer
  */
 @property (nonatomic, class, readonly) MLCActivationLayer *geluLayer;
+/*! @abstract   Create a hardswish activation layer
+    @return     A new activation layer
+ */
+@property (nonatomic, class, readonly) MLCActivationLayer *hardSwishLayer;
+
+/*! @abstract   Create a clamp activation layer
+    @param      minValue    The minimum range used by clamp
+    @param      maxValue    The maximum range used by clamp
+    @return     A new activation layer
+ */
++ (instancetype)clampLayerWithMinValue:(float)minValue
+                              maxValue:(float)maxValue
+    NS_SWIFT_NAME(clamp(min:max:));
 
 
 @end

@@ -73,6 +73,7 @@
 
 #include <sys/types.h>
 #include <sys/queue.h>
+#include <TargetConditionals.h>
 
 #if IPSEC
 #include <netinet6/ipsec.h> /* for IPSEC */
@@ -200,7 +201,7 @@ struct  xinpcb {
 	u_quad_t        xi_alignment_hack;
 };
 
-#if XNU_TARGET_OS_OSX || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR)
+#if XNU_TARGET_OS_OSX || KERNEL || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR)
 struct inpcb64_list_entry {
 	u_int64_t   le_next;
 	u_int64_t   le_prev;
@@ -242,7 +243,7 @@ struct  xinpcb64 {
 	struct  xsocket64 xi_socket;
 	u_quad_t        xi_alignment_hack;
 };
-#endif /* XNU_TARGET_OS_OSX || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR) */
+#endif /* XNU_TARGET_OS_OSX || KERNEL || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR) */
 
 
 struct  xinpgen {

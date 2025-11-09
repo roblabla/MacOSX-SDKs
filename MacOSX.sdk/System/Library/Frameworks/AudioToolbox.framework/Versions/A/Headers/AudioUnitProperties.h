@@ -775,6 +775,14 @@ CF_ENUM(AudioUnitScope) {
 						when the render context changes. Audio Unit hosts must not attempt to
 						interact with the AudioUnit through this block; it is for the exclusive use
 						of the OS.
+
+	@constant		kAudioUnitProperty_LoadedOutOfProcess
+						Scope:			Global
+						Value Type:		UInt32
+						Access:			read-only
+						
+						Indicates whether an audio unit is loaded out-of-process, which might happen
+						at the request of the host or when loading in-process is not possible.
 */
 CF_ENUM(AudioUnitPropertyID)
 {
@@ -823,6 +831,7 @@ CF_ENUM(AudioUnitPropertyID)
 	kAudioUnitProperty_RenderContextObserver
 		__SWIFT_UNAVAILABLE_MSG("Swift is not supported for use with audio realtime threads")
 													= 60,
+	kAudioUnitProperty_LoadedOutOfProcess			= 62,
 #if !TARGET_OS_IPHONE
 	kAudioUnitProperty_FastDispatch					= 5,
 	kAudioUnitProperty_SetExternalBuffer			= 15,

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F8E4656A-6FC4-36BD-8711-8100760CDB8C
+    value:           3BA1A026-8403-3CDE-8266-28D88B28E0E1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1D03B0FF-067B-3B76-A42F-CBA9751460D4
+    value:           A18B907A-7D77-37ED-8659-D479C6506AE4
 install-name:    '/System/Library/PrivateFrameworks/SpotlightServices.framework/Versions/A/SpotlightServices'
-current-version: 2150.6
+current-version: 2150.16
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _MDItemAppStoreHasMetadataPlist, _PRSDirectivesManagerDescriptorsForModelInputScore, 

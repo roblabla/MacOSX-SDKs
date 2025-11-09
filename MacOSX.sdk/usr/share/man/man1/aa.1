@@ -43,6 +43,9 @@ Path to archive under \fIdir\fR. \fIsubdir\fR will be included in the archived p
 .BR \-D\ \fIdir_and_subdir\fR
 Set both \fIdir\fR to `dirname \fIdir_and_subdir\fR` and \fIsubdir\fR to `basename \fIdir_and_subdir\fR`.
 .TP
+.BR \-x
+Do not cross volume boundaries when archiving.
+.TP
 .BR \-a\ \fIalgorithm\fR
 Compression algorithm used when creating archives. One of \fIlzfse\fR, \fIlzma\fR, \fIlz4\fR, \fIzlib\fR, \fIraw\fR. Default is \fIlzfse\fR.
 .TP
@@ -75,10 +78,10 @@ Alias for the following options:
 \fB\-a\fR \fIlzfse\fR \fB\-b\fR \fI1m\fR
 .TP
 .BR \-include-path\ \fIpath\fR
-Include entry paths exactly matching \fIpath\fR. This option can be given multiple times.
+Include entry paths having \fIpath\fR as a prefix. This option can be given multiple times.
 .TP
 .BR \-exclude-path\ \fIpath\fR
-Exclude entry paths excatly matching \fIpath\fR. This option can be given multiple times.
+Exclude entry paths having \fIpath\fR as a prefix. This option can be given multiple times.
 .TP
 .BR \-include-path-list\ \fIpath_list_file\fR
 File containing a list of paths to include, one entry per line. This option can be given multiple times.

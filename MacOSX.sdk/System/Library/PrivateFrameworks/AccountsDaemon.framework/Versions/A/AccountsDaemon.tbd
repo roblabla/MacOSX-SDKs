@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           53D3AA04-8B4D-3DB5-B743-C9D0F27A9F74
+    value:           3F65939A-9BBC-3E94-8890-FD80F1E2830A
   - target:          x86_64-maccatalyst
-    value:           53D3AA04-8B4D-3DB5-B743-C9D0F27A9F74
+    value:           3F65939A-9BBC-3E94-8890-FD80F1E2830A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4C39DB49-9C56-3365-AE4E-189C754235B2
+    value:           5E30F661-4295-3B60-99DE-67F854590736
   - target:          arm64e-maccatalyst
-    value:           4C39DB49-9C56-3365-AE4E-189C754235B2
+    value:           5E30F661-4295-3B60-99DE-67F854590736
 install-name:    '/System/Library/PrivateFrameworks/AccountsDaemon.framework/Versions/A/AccountsDaemon'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A745687A-9F52-3F44-AC7A-AF6E410FD592
+    value:           EBC62FEC-83A2-394C-B565-613AD38D7AA9
   - target:          x86_64-maccatalyst
-    value:           A745687A-9F52-3F44-AC7A-AF6E410FD592
+    value:           EBC62FEC-83A2-394C-B565-613AD38D7AA9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A3B17E6B-4491-3B69-9A2A-78675EB2ED73
+    value:           B485EFF1-D33B-32A9-BDB8-5E4040135DA6
   - target:          arm64e-maccatalyst
-    value:           A3B17E6B-4491-3B69-9A2A-78675EB2ED73
+    value:           B485EFF1-D33B-32A9-BDB8-5E4040135DA6
 install-name:    '/System/Library/PrivateFrameworks/PhotosFormats.framework/Versions/A/PhotosFormats'
-current-version: 321.0.102
+current-version: 340.0.220
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIN5boost12interprocess14lock_exceptionE, __ZTIN5boost12interprocess22interprocess_exceptionE, 

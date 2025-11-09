@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           070919DC-978E-3DB3-80FD-FB0C1BAAE80A
+    value:           9450168E-31AB-3451-8D4A-04C1CCE03AB8
   - target:          x86_64-maccatalyst
-    value:           070919DC-978E-3DB3-80FD-FB0C1BAAE80A
+    value:           9450168E-31AB-3451-8D4A-04C1CCE03AB8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F4CC2ABF-FAAD-3F34-9CB9-A012C9C1E387
+    value:           758022B6-EE65-3CE4-B996-882C7ADC3B50
   - target:          arm64e-maccatalyst
-    value:           F4CC2ABF-FAAD-3F34-9CB9-A012C9C1E387
+    value:           758022B6-EE65-3CE4-B996-882C7ADC3B50
 install-name:    '/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment'
-current-version: 53
+current-version: 58
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
-    symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_mP13__va_list_tag, 
-                       __ZN27IOPresentmentFailTracerImpl6tracevEPKcS1_mP13__va_list_tag ]
+    symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_S1_mP13__va_list_tag, 
+                       __ZN27IOPresentmentFailTracerImpl6tracevEPKcS1_S1_mP13__va_list_tag ]
     weak-symbols:    [ __ZTI23IOPresentmentFailTracer, __ZTI35IOPresentmentTransactionDisplayPipe, 
                        __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
@@ -54,11 +54,12 @@ exports:
                        _IOPresentmentSetPipeRotation, _IOPresentmentSetPipeScaler, 
                        _IOPresentmentSetPlaneBlendType, _IOPresentmentSetPlaneGammaTable, 
                        _IOPresentmentSetPlaneLinearizationTable, _IOPresentmentSetPlaneScaler, 
-                       _IOPresentmentSetPlaneState, _IOPresentmentTerminate, _IOPresentmentTransactionBindResource, 
-                       _IOPresentmentTransactionGet, _IOPresentmentTransactionRelease, 
-                       _IOPresentmentTransactionSet, _IOPresentmentUpdateSubmitTimestamp, 
-                       _IOPresentmentVersionNumber, _IOPresentmentVersionString, 
-                       _IOPresentmentWaitActive, _IOPresentmentWaitComplete, __Z18iopNodeDescriptionR21iopNodeDescriptionCtxRK24sioPresentmentObjectNodeb, 
+                       _IOPresentmentSetPlaneState, _IOPresentmentSetSDP, _IOPresentmentTerminate, 
+                       _IOPresentmentTransactionBindResource, _IOPresentmentTransactionGet, 
+                       _IOPresentmentTransactionRelease, _IOPresentmentTransactionSet, 
+                       _IOPresentmentUpdateSubmitTimestamp, _IOPresentmentVersionNumber, 
+                       _IOPresentmentVersionString, _IOPresentmentWaitActive, _IOPresentmentWaitComplete, 
+                       __Z18iopNodeDescriptionR21iopNodeDescriptionCtxRK24sioPresentmentObjectNodeb, 
                        __Z20iopDeviceDescriptionyRK29sioPresentmentDeviceObjectSet, 
                        __Z20iopNodeIDDescriptionR21iopNodeDescriptionCtxyy, __Z21iopDeviceDescriptionsPK23sioPresentmentDeviceMap, 
                        __Z22IOPresentmentGetTypeIDv, __Z23iopDeviceMapDescriptionPK23sioPresentmentDeviceMapRKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
@@ -66,11 +67,12 @@ exports:
                        __Z32ioPresentmentResourceAllocateRefv, __Z33IOPresentmentGPUWranglerGetTypeIDv, 
                        __Z33iopFetchDeviceMapForCrashReporterv, __Z37IOPresentmentCursorAnimationGetTypeIDv, 
                        __Z4joinRKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEES6_, 
-                       __ZN13IOPresentment16IOPresentmentEndEP26__IOPresentmentTransactionyb, 
+                       __Z9boot_argsv, __ZN13IOPresentment16IOPresentmentEndEP26__IOPresentmentTransactionyb, 
                        __ZN13IOPresentment18IOPresentmentBeginEP23__IOPresentmentResourceh, 
                        __ZN13IOPresentment18_IOPresentmentInitEP15__IOPresentment, 
                        __ZN13IOPresentment18_IOPresentmentTermEv, __ZN13IOPresentment19IOPresentmentCancelEP26__IOPresentmentTransaction, 
-                       __ZN13IOPresentment19IOPresentmentGetMapEv, __ZN13IOPresentment19__cscFromDictionaryEPK14__CFDictionaryPP19sCSCEntryDictionaryPy, 
+                       __ZN13IOPresentment19IOPresentmentGetMapEv, __ZN13IOPresentment19IOPresentmentSetSDPEP23sIOPresentmentSDPPacket, 
+                       __ZN13IOPresentment19__cscFromDictionaryEPK14__CFDictionaryPP19sCSCEntryDictionaryPy, 
                        __ZN13IOPresentment20IOPresentmentDestroyEP15__IOPresentment, 
                        __ZN13IOPresentment21IOPresentmentIsActiveEP26__IOPresentmentTransaction, 
                        __ZN13IOPresentment21__IOPresentmentSetRefEP15__IOPresentment, 
@@ -153,6 +155,7 @@ exports:
                        __ZN24IOPresentmentDisplayPipe18IOPresentmentBeginEP23__IOPresentmentResourceh, 
                        __ZN24IOPresentmentDisplayPipe18_IOPresentmentInitEP15__IOPresentment, 
                        __ZN24IOPresentmentDisplayPipe18_IOPresentmentTermEv, __ZN24IOPresentmentDisplayPipe18__TransactionStateEP24IOPresentmentTransactionP28sIOPresentmentCompletionDatadj, 
+                       __ZN24IOPresentmentDisplayPipe19IOPresentmentSetSDPEP23sIOPresentmentSDPPacket, 
                        __ZN24IOPresentmentDisplayPipe19__DisplayPipeCreateEjy, __ZN24IOPresentmentDisplayPipe20__DisplayPipeReleaseEv, 
                        __ZN24IOPresentmentDisplayPipe21DisplayPipeDoCallbackEPFvPvPK10__CFStringPmjES0_P26__IOPresentmentTransactionmmmm, 
                        __ZN24IOPresentmentDisplayPipe21IOPresentmentIsActiveEP26__IOPresentmentTransaction, 
@@ -161,6 +164,7 @@ exports:
                        __ZN24IOPresentmentDisplayPipe23IOPresentmentIsCompleteEP26__IOPresentmentTransactionP28sIOPresentmentCompletionData, 
                        __ZN24IOPresentmentDisplayPipe23IOPresentmentWaitActiveEP26__IOPresentmentTransactiony, 
                        __ZN24IOPresentmentDisplayPipe23__TransactionStateQueryEP24IOPresentmentTransaction, 
+                       __ZN24IOPresentmentDisplayPipe25DisplayPipeSetVRRCallbackEPFvPvPK10__CFStringPmjES0_, 
                        __ZN24IOPresentmentDisplayPipe25IOPresentmentWaitCompleteEP26__IOPresentmentTransactionP28sIOPresentmentCompletionDatay, 
                        __ZN24IOPresentmentDisplayPipe26IOPresentmentSetPlaneStateEP26__IOPresentmentTransactionj24eIOPresentmentPlaneState, 
                        __ZN24IOPresentmentDisplayPipe27IOPresentmentCreateResourceEPK14__CFDictionaryjP18sIOPresentmentRect, 
@@ -406,36 +410,37 @@ exports:
                        _kIOPresentmentEventSuspendResume, _kIOPresentmentEventTiming, 
                        _kIOPresentmentEventTransactionCompleted, _kIOPresentmentEventTransactionExpired, 
                        _kIOPresentmentEventTransactionPerformed, _kIOPresentmentEventTransactionReleased, 
-                       _kIOPresentmentEventWillChangeMode, _kIOPresentmentEventWillPowerOff, 
-                       _kIOPresentmentEventWillPowerOn, _kIOPresentmentEventWillRestart, 
-                       _kIOPresentmentEventWillShutdown, _kIOPresentmentEventWillSleep, 
-                       _kIOPresentmentEventWillWake, _kIOPresentmentFilterType, _kIOPresentmentFixedFormat, 
-                       _kIOPresentmentFlags, _kIOPresentmentGammaArray, _kIOPresentmentHPhases, 
-                       _kIOPresentmentHTableSize, _kIOPresentmentHTaps, _kIOPresentmentHeight, 
-                       _kIOPresentmentHorizontalActive, _kIOPresentmentHorizontalBlanking, 
-                       _kIOPresentmentHorizontalSyncConfig, _kIOPresentmentHorizontalSyncOffset, 
-                       _kIOPresentmentHorizontalSyncPulseWidth, _kIOPresentmentInlineBufferDictionary, 
-                       _kIOPresentmentKeySetCaptureControl, _kIOPresentmentLinearizationArray, 
-                       _kIOPresentmentLinkCurrentMaximumBPC, _kIOPresentmentLooksLikeHeight, 
-                       _kIOPresentmentLooksLikeWidth, _kIOPresentmentMaxHeight, _kIOPresentmentMaxPixelClock, 
-                       _kIOPresentmentMaxRefreshTime, _kIOPresentmentMaxWidth, _kIOPresentmentMaximumSize, 
-                       _kIOPresentmentMaximumValue, _kIOPresentmentMinPixelClock, 
-                       _kIOPresentmentMinRefreshTime, _kIOPresentmentMinimumValue, 
-                       _kIOPresentmentNonAtomicApplicationPeriod, _kIOPresentmentOptionKeyDiscardTransactionsPastDue, 
-                       _kIOPresentmentOptionKeyGetVendorID, _kIOPresentmentPipelineDictionaryVersion, 
-                       _kIOPresentmentPipelineScalerDictionary, _kIOPresentmentPixelClock, 
-                       _kIOPresentmentPixelFormats, _kIOPresentmentPlaneArray, _kIOPresentmentPlaneScalerDictionary, 
-                       _kIOPresentmentQueueDepth, _kIOPresentmentQueueDictionary, 
-                       _kIOPresentmentRefreshTime, _kIOPresentmentRotationDictionary, 
-                       _kIOPresentmentSegmentDictionary, _kIOPresentmentSourceDownScalingArray, 
-                       _kIOPresentmentSourceSubRegion, _kIOPresentmentSourceUpScalingArray, 
-                       _kIOPresentmentTransactionKeySetFlushOptions, _kIOPresentmentTransactionOptionKeySetPlaneFlushOptions, 
-                       _kIOPresentmentType, _kIOPresentmentVPhases, _kIOPresentmentVTableSize, 
-                       _kIOPresentmentVTaps, _kIOPresentmentVerticalActive, _kIOPresentmentVerticalBlanking, 
+                       _kIOPresentmentEventUpdateVRRTimeStamps, _kIOPresentmentEventWillChangeMode, 
+                       _kIOPresentmentEventWillPowerOff, _kIOPresentmentEventWillPowerOn, 
+                       _kIOPresentmentEventWillRestart, _kIOPresentmentEventWillShutdown, 
+                       _kIOPresentmentEventWillSleep, _kIOPresentmentEventWillWake, 
+                       _kIOPresentmentFilterType, _kIOPresentmentFixedFormat, _kIOPresentmentFlags, 
+                       _kIOPresentmentGammaArray, _kIOPresentmentHPhases, _kIOPresentmentHTableSize, 
+                       _kIOPresentmentHTaps, _kIOPresentmentHeight, _kIOPresentmentHorizontalActive, 
+                       _kIOPresentmentHorizontalBlanking, _kIOPresentmentHorizontalSyncConfig, 
+                       _kIOPresentmentHorizontalSyncOffset, _kIOPresentmentHorizontalSyncPulseWidth, 
+                       _kIOPresentmentInlineBufferDictionary, _kIOPresentmentKeySetCaptureControl, 
+                       _kIOPresentmentLinearizationArray, _kIOPresentmentLinkCurrentMaximumBPC, 
+                       _kIOPresentmentLooksLikeHeight, _kIOPresentmentLooksLikeWidth, 
+                       _kIOPresentmentMaxHeight, _kIOPresentmentMaxPixelClock, _kIOPresentmentMaxRefreshTime, 
+                       _kIOPresentmentMaxWidth, _kIOPresentmentMaximumSize, _kIOPresentmentMaximumValue, 
+                       _kIOPresentmentMinPixelClock, _kIOPresentmentMinRefreshTime, 
+                       _kIOPresentmentMinimumValue, _kIOPresentmentNonAtomicApplicationPeriod, 
+                       _kIOPresentmentOptionKeyDiscardTransactionsPastDue, _kIOPresentmentOptionKeyGetVendorID, 
+                       _kIOPresentmentPipelineDictionaryVersion, _kIOPresentmentPipelineScalerDictionary, 
+                       _kIOPresentmentPixelClock, _kIOPresentmentPixelFormats, _kIOPresentmentPlaneArray, 
+                       _kIOPresentmentPlaneScalerDictionary, _kIOPresentmentQueueDepth, 
+                       _kIOPresentmentQueueDictionary, _kIOPresentmentRefreshTime, 
+                       _kIOPresentmentRotationDictionary, _kIOPresentmentSegmentDictionary, 
+                       _kIOPresentmentSourceDownScalingArray, _kIOPresentmentSourceSubRegion, 
+                       _kIOPresentmentSourceUpScalingArray, _kIOPresentmentTransactionKeySetFlushOptions, 
+                       _kIOPresentmentTransactionOptionKeySetPlaneFlushOptions, _kIOPresentmentType, 
+                       _kIOPresentmentVPhases, _kIOPresentmentVTableSize, _kIOPresentmentVTaps, 
+                       _kIOPresentmentVerticalActive, _kIOPresentmentVerticalBlanking, 
                        _kIOPresentmentVerticalBlankingExtension, _kIOPresentmentVerticalSyncConfig, 
                        _kIOPresentmentVerticalSyncOffset, _kIOPresentmentVerticalSyncPulseWidth, 
                        _kIOPresentmentWidth, _kIOPresentmentWorstDictionary ]
   - targets:         [ arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
-    symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_mPc, 
-                       __ZN27IOPresentmentFailTracerImpl6tracevEPKcS1_mPc ]
+    symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_S1_mPc, 
+                       __ZN27IOPresentmentFailTracerImpl6tracevEPKcS1_S1_mPc ]
 ...

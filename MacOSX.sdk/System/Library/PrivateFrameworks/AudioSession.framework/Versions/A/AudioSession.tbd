@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C0B1C9EB-A594-31E3-ADDF-118583840E6F
+    value:           6EC6A5C5-0FAC-39EB-8429-71D9BA1E637F
   - target:          x86_64-maccatalyst
-    value:           C0B1C9EB-A594-31E3-ADDF-118583840E6F
+    value:           6EC6A5C5-0FAC-39EB-8429-71D9BA1E637F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BDC23BAB-CFE3-32DB-B8AF-C240056C6DF3
+    value:           FFCA385E-24F9-3907-967B-4A7F6EE2473A
   - target:          arm64e-maccatalyst
-    value:           BDC23BAB-CFE3-32DB-B8AF-C240056C6DF3
+    value:           FFCA385E-24F9-3907-967B-4A7F6EE2473A
 install-name:    '/System/Library/PrivateFrameworks/AudioSession.framework/Versions/A/AudioSession'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -43,16 +43,17 @@ exports:
                        _AVAudioSessionCategoryVoiceCommand, _AVAudioSessionCategoryVoiceMail, 
                        _AVAudioSessionCategoryVoiceOver, _AVAudioSessionCategoryWaterEjection, 
                        _AVAudioSessionErrorDomain, _AVAudioSessionInterruptionNotification, 
-                       _AVAudioSessionInterruptionOptionKey, _AVAudioSessionInterruptionTypeKey, 
-                       _AVAudioSessionInterruptionWasSuspendedKey, _AVAudioSessionInterruptorNameKey, 
-                       _AVAudioSessionLocationLower, _AVAudioSessionLocationUpper, 
-                       _AVAudioSessionMediaServicesWereLostNotification, _AVAudioSessionMediaServicesWereResetNotification, 
-                       _AVAudioSessionModeDefault, _AVAudioSessionModeEmergencyAlert, 
-                       _AVAudioSessionModeGameChat, _AVAudioSessionModeHapticsConstantVolume, 
-                       _AVAudioSessionModeHearingAccessibility, _AVAudioSessionModeLivePhoto, 
-                       _AVAudioSessionModeLocatePhone, _AVAudioSessionModeLowLatency, 
-                       _AVAudioSessionModeMeasurement, _AVAudioSessionModeMoviePlayback, 
-                       _AVAudioSessionModeRaw, _AVAudioSessionModeSOS, _AVAudioSessionModeSpatialRecording, 
+                       _AVAudioSessionInterruptionOptionKey, _AVAudioSessionInterruptionReasonKey, 
+                       _AVAudioSessionInterruptionTypeKey, _AVAudioSessionInterruptionWasSuspendedKey, 
+                       _AVAudioSessionInterruptorNameKey, _AVAudioSessionLocationLower, 
+                       _AVAudioSessionLocationUpper, _AVAudioSessionMediaServicesWereLostNotification, 
+                       _AVAudioSessionMediaServicesWereResetNotification, _AVAudioSessionModeDefault, 
+                       _AVAudioSessionModeEmergencyAlert, _AVAudioSessionModeGameChat, 
+                       _AVAudioSessionModeHapticsConstantVolume, _AVAudioSessionModeHearingAccessibility, 
+                       _AVAudioSessionModeLivePhoto, _AVAudioSessionModeLocatePhone, 
+                       _AVAudioSessionModeLowLatency, _AVAudioSessionModeMeasurement, 
+                       _AVAudioSessionModeMoviePlayback, _AVAudioSessionModeRaw, 
+                       _AVAudioSessionModeSOS, _AVAudioSessionModeSpatialRecording, 
                        _AVAudioSessionModeSpeechRecognition, _AVAudioSessionModeSpokenAudio, 
                        _AVAudioSessionModeVideoChat, _AVAudioSessionModeVideoChatForMedia, 
                        _AVAudioSessionModeVideoRecording, _AVAudioSessionModeVoiceChat, 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FD60BE9C-E024-3958-89A9-8E6159531F01
+    value:           9F8CFF2E-E654-3318-886E-B7B195A06607
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CC92B4F0-8464-31AF-9C65-8425AE5B701C
+    value:           0379185F-A4FC-3ED7-ADA9-B769E7E07968
 install-name:    '/System/Library/Frameworks/AddressBook.framework/Versions/A/AddressBook'
-current-version: 2452.2
+current-version: 2452.7
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/AddressBookCore.framework/Versions/A/AddressBookCore', 
@@ -704,19 +704,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C44366A9-14CF-3CE3-954B-1019119EEF04
+    value:           ABDF2C81-A3BF-33C5-AC32-72A8B637FD09
   - target:          x86_64-maccatalyst
-    value:           C44366A9-14CF-3CE3-954B-1019119EEF04
+    value:           ABDF2C81-A3BF-33C5-AC32-72A8B637FD09
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           238D3D7E-0C1B-3DDF-8FD5-CDE992B05622
+    value:           BDE48C86-C02A-3609-A1BC-DFEF250F1A26
   - target:          arm64e-maccatalyst
-    value:           238D3D7E-0C1B-3DDF-8FD5-CDE992B05622
+    value:           BDE48C86-C02A-3609-A1BC-DFEF250F1A26
 install-name:    '/System/Library/PrivateFrameworks/AddressBookCore.framework/Versions/A/AddressBookCore'
-current-version: 2452.2
+current-version: 2452.7
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1448,17 +1448,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F9AB732A-0F66-3260-AF85-572979E478EF
+    value:           52AAFF97-A9DD-3A6B-804D-937EA4A8AB87
   - target:          x86_64-maccatalyst
-    value:           F9AB732A-0F66-3260-AF85-572979E478EF
+    value:           52AAFF97-A9DD-3A6B-804D-937EA4A8AB87
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2DC7B8D8-2FDD-36B0-ADEB-B7CB48657956
+    value:           98FB0AED-4AF5-3F7C-8E5D-FB12416C3DE7
   - target:          arm64e-maccatalyst
-    value:           2DC7B8D8-2FDD-36B0-ADEB-B7CB48657956
+    value:           98FB0AED-4AF5-3F7C-8E5D-FB12416C3DE7
 install-name:    '/System/Library/PrivateFrameworks/ContactsPersistence.framework/Versions/A/ContactsPersistence'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

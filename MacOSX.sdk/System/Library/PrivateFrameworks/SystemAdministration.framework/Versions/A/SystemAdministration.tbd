@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E28F11F0-2155-331E-9CFE-BF858E06ACED
+    value:           F5681A66-34F0-3ADD-9E98-5FD765CD8177
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8279C918-F744-3C19-93D6-DE2DB7C1B1E5
+    value:           681BE0F5-E116-3AEA-A6BA-E3B93AD02218
 install-name:    '/System/Library/PrivateFrameworks/SystemAdministration.framework/Versions/A/SystemAdministration'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

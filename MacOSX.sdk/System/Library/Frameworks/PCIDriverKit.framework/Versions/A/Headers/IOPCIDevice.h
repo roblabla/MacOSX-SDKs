@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.60.3) generated from IOPCIDevice.iig */
+/* iig(DriverKit-107.100.6) generated from IOPCIDevice.iig */
 
 /* IOPCIDevice.iig:1-35 */
 /*
@@ -36,7 +36,7 @@
 #include <DriverKit/IOService.h>  /* .iig include */
 #include <DriverKit/IOMemoryDescriptor.h>  /* .iig include */
 
-/* source class IOPCIDevice IOPCIDevice.iig:36-285 */
+/* source class IOPCIDevice IOPCIDevice.iig:36-297 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -58,6 +58,18 @@ public:
 
     virtual void
     free() override;
+
+    virtual kern_return_t
+    ClientCrashed(IOService * client, uint64_t options) override;
+
+    /*!
+     * @brief       Send a dictionary of properties to an IOService.
+     * @discussion  Can set only properties defined in IOPCIFamilyDefinitions.h
+     * @param       properties Dictionary of properties.
+     * @return      kIOReturnSuccess if at least one key/value pair is successful. See IOReturn.h for error codes.
+     */
+    virtual kern_return_t
+    SetProperties(OSDictionary * properties) override;
 
 #pragma mark Session Management
     /*!
@@ -296,7 +308,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOPCIDevice IOPCIDevice.iig:36-285 */
+/* generated class IOPCIDevice IOPCIDevice.iig:36-297 */
 
 #define IOPCIDevice__ManageSession_ID            0xd395e45429887c65ULL
 #define IOPCIDevice__CopyDeviceMemoryWithIndex_ID            0x8fbfd4a80b3ed3f1ULL
@@ -323,6 +335,13 @@ public:
         uint64_t * readData, \
         IOService * forClient, \
         IOOptionBits options
+
+#define IOPCIDevice_ClientCrashed_Args \
+        IOService * client, \
+        uint64_t options
+
+#define IOPCIDevice_SetProperties_Args \
+        OSDictionary * properties
 
 #define IOPCIDevice_FindPCICapability_Args \
         uint32_t capabilityID, \
@@ -553,6 +572,12 @@ protected:\
     _MemoryAccess_Impl(IOPCIDevice__MemoryAccess_Args);\
 \
     kern_return_t\
+    ClientCrashed_Impl(IOService_ClientCrashed_Args);\
+\
+    kern_return_t\
+    SetProperties_Impl(IOService_SetProperties_Args);\
+\
+    kern_return_t\
     FindPCICapability_Impl(IOPCIDevice_FindPCICapability_Args);\
 \
     kern_return_t\
@@ -634,9 +659,9 @@ public:
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOPCIDevice.iig:287-288 */
+/* IOPCIDevice.iig:299-300 */
 
 #pragma mark Private Class Extension
-/* IOPCIDevice.iig:311- */
+/* IOPCIDevice.iig:323- */
 
 #endif /* ! _IOKIT_UIOPCIDEVICE_H */

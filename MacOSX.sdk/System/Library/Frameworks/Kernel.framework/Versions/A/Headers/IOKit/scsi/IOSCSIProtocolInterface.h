@@ -574,6 +574,8 @@ protected:
 	struct IOSCSIProtocolInterfaceExpansionData
 	{
 		IOWorkLoop *	fWorkLoop;
+        UInt64          fPowerStateChangeStartTime;
+        UInt64          fLastCommandTime;
 	};
 	IOSCSIProtocolInterfaceExpansionData * fIOSCSIProtocolInterfaceReserved;
 	
@@ -813,7 +815,25 @@ protected:
 	@result A valid IOReturn code indicating success or the type of failure.
 	*/
 	virtual IOReturn	HandleSetUserClientExclusivityState ( IOService * userClient, bool state );
-	
+
+    /*!
+    @function ResetPowerStateChangeTimer
+    @abstract Resets the power state change timer counter.
+    @discussion The ResetPowerStateChangeTimer() method is called every time a new power state transition begins.
+    */
+    void    ResetPowerStateChangeTimer ( void );
+
+    /*!
+    @function CheckForSufficientTimeForPMCommand
+    @abstract Checks if there's time remaining before sending a command.
+    @discussion The CheckForSufficientTimeForPMCommand() method is called whenever a command with a timeout
+    is about to be sent. It checks if the time remaining in what was requested to the PM subsystem, whether it can accommodate
+    the command's maximum round trip time i.e., the timeout specified.
+    @param timeoutDuration The timeout specified for the command.
+    @result <code>true</code> if the command's timeout can be accommodated before the PM request times out.
+    */
+    bool    CheckForSufficientTimeForPMCommand ( UInt32 timeoutDuration );
+
 public:
 	
 	// ------- SCSI Architecture Model Task Management Functions ------
@@ -903,9 +923,9 @@ private:
 
 #if !TARGET_OS_IPHONE
 	// Space reserved for future expansion.
-	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface,  7 );
-	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface,  8 );
-	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface,  9 );
+    OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface, 7 );
+    OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface, 8 );
+	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface, 9 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface, 10 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface, 11 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface, 12 );

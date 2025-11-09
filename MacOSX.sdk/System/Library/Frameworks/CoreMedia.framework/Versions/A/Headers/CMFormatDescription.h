@@ -571,6 +571,7 @@ enum
 	@constant	kCMVideoCodecType_HEVCWithAlpha	HEVC format with alpha support defined in Annex-F.
 				  IMPORTANT NOTE: this constant is used to select the appropriate encoder, but is NOT used on the encoded content,
 				  which is backwards compatible and hence uses 'hvc1' as its codec type.
+	@constant	kCMVideoCodecType_DolbyVisionHEVC	Dolby Vision HEVC fprmat
 	@constant	kCMVideoCodecType_MPEG4Video	ISO/IEC Moving Picture Experts Group (MPEG) MPEG-4 Part 2 video format
 	@constant	kCMVideoCodecType_MPEG2Video	MPEG-2 video format
 	@constant	kCMVideoCodecType_MPEG1Video	MPEG-1 video format
@@ -612,6 +613,7 @@ enum
 	kCMVideoCodecType_H264             = 'avc1',
 	kCMVideoCodecType_HEVC             = 'hvc1',
 	kCMVideoCodecType_HEVCWithAlpha    = 'muxa',
+	kCMVideoCodecType_DolbyVisionHEVC  = 'dvh1',
 	kCMVideoCodecType_MPEG4Video       = 'mp4v',
 	kCMVideoCodecType_MPEG2Video       = 'mp2v',
 	kCMVideoCodecType_MPEG1Video       = 'mp1v',

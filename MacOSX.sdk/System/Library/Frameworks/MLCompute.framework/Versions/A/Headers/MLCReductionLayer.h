@@ -32,13 +32,30 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
  */
 @property (readonly, nonatomic) NSUInteger dimension;
 
-/*! @abstract Create a reduction layer .
+/*! @property   dimensions
+    @abstract   The dimensions over which to perform the reduction operation
+ */
+@property (readonly, nonatomic) NSArray<NSNumber *> *dimensions
+    MLCOMPUTE_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5))
+    NS_REFINED_FOR_SWIFT;
+
+/*! @abstract Create a reduction layer.
     @param    reductionType        The reduction type.
     @param    dimension          The reduction dimension.
     @return   A new reduction layer.
  */
 + (instancetype _Nullable)layerWithReductionType:(MLCReductionType)reductionType
                                        dimension:(NSUInteger)dimension;
+
+/*! @abstract Create a reduction layer.
+    @param    reductionType        The reduction type.
+    @param    dimensions               The list of dimensions to reduce over
+    @return   A new reduction layer.
+ */
++ (instancetype _Nullable)layerWithReductionType:(MLCReductionType)reductionType
+                                      dimensions:(NSArray<NSNumber *> *)dimensions
+    MLCOMPUTE_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5))
+    NS_REFINED_FOR_SWIFT;
 
 @end
 

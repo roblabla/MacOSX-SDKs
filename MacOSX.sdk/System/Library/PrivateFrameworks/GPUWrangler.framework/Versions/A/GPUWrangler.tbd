@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F4B3905F-C024-33C1-82C8-F1744AF8516E
+    value:           25F69C6F-6B3D-3672-9F0D-0F7680BD5CB7
   - target:          x86_64-maccatalyst
-    value:           F4B3905F-C024-33C1-82C8-F1744AF8516E
+    value:           25F69C6F-6B3D-3672-9F0D-0F7680BD5CB7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD5B24DE-DFDE-3FCE-AED6-6C49C0FD12A9
+    value:           4ADB5600-CCE0-3757-AE06-6B0380F0E963
   - target:          arm64e-maccatalyst
-    value:           FD5B24DE-DFDE-3FCE-AED6-6C49C0FD12A9
+    value:           4ADB5600-CCE0-3757-AE06-6B0380F0E963
 install-name:    '/System/Library/PrivateFrameworks/GPUWrangler.framework/Versions/A/GPUWrangler'
 current-version: 0
 exports:
@@ -24,10 +24,10 @@ exports:
                        _GPUWranglerGPUByID, _GPUWranglerGPUCopyProperty, _GPUWranglerGPUCopyPropertyStr, 
                        _GPUWranglerGPUCopyRegistryService, _GPUWranglerGPUEject, 
                        _GPUWranglerGPUEjectCancel, _GPUWranglerGPUEjectFinalize, 
-                       _GPUWranglerGPUEjectFinalized, _GPUWranglerGPUGetAttribute, 
-                       _GPUWranglerGPUGetFramebufferAccelIndex, _GPUWranglerGPUGetFramebufferCount, 
-                       _GPUWranglerGPUGetFramebufferRegistryEntryID, _GPUWranglerGPUGetID, 
-                       _GPUWranglerGPUGetPCIDeviceID, _GPUWranglerGPUGetPCIVendorID, 
+                       _GPUWranglerGPUEjectFinalized, _GPUWranglerGPUGetAsicSubSystemID, 
+                       _GPUWranglerGPUGetAttribute, _GPUWranglerGPUGetFramebufferAccelIndex, 
+                       _GPUWranglerGPUGetFramebufferCount, _GPUWranglerGPUGetFramebufferRegistryEntryID, 
+                       _GPUWranglerGPUGetID, _GPUWranglerGPUGetPCIDeviceID, _GPUWranglerGPUGetPCIVendorID, 
                        _GPUWranglerGPUGetPropertyBool, _GPUWranglerGPUGetPropertyU64, 
                        _GPUWranglerGPUGetRegistryEntryID, _GPUWranglerGPUGetTypeID, 
                        _GPUWranglerGPUGetUserPtr, _GPUWranglerGPUIsDiscrete, _GPUWranglerGPUIsEjectFinalized, 

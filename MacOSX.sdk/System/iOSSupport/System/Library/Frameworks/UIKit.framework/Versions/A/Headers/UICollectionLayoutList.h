@@ -10,7 +10,7 @@
 #import <UIKit/UICollectionViewCompositionalLayout.h>
 #import <UIKit/UIKitDefines.h>
 
-@class UIColor, UISwipeActionsConfiguration;
+@class UIColor, UISwipeActionsConfiguration, UIListSeparatorConfiguration;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,18 +23,35 @@ typedef NS_ENUM(NSInteger, UICollectionLayoutListAppearance) {
 } API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
 typedef NS_ENUM(NSInteger, UICollectionLayoutListHeaderMode) {
-    UICollectionLayoutListHeaderModeNone, /// No headers are shown
-    UICollectionLayoutListHeaderModeSupplementary, /// Uses supplementary views of kind UICollectionElementKindSectionHeader to show headers
-    UICollectionLayoutListHeaderModeFirstItemInSection, /// Styles the first item in a section as a header. This is especially useful when using hierarchical data sources to be able to expand and collapse the header.
+    /// No headers are shown
+    UICollectionLayoutListHeaderModeNone,
+    
+    /// Uses supplementary views of kind UICollectionElementKindSectionHeader to show headers
+    UICollectionLayoutListHeaderModeSupplementary,
+    
+    /// Styles the first item in a section as a header. This is especially useful when using hierarchical data sources to be able to expand and collapse the header.
+    UICollectionLayoutListHeaderModeFirstItemInSection,
 } API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
 typedef NS_ENUM(NSInteger, UICollectionLayoutListFooterMode) {
-    UICollectionLayoutListFooterModeNone, /// No footers are shown
-    UICollectionLayoutListFooterModeSupplementary, /// Uses supplementary views of kind UICollectionElementKindSectionFooter to show footers
+    /// No footers are shown
+    UICollectionLayoutListFooterModeNone,
+    
+    /// Uses supplementary views of kind UICollectionElementKindSectionFooter to show footers
+    UICollectionLayoutListFooterModeSupplementary,
 } API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
 
 typedef UISwipeActionsConfiguration *_Nullable (^UICollectionLayoutListSwipeActionsConfigurationProvider)(NSIndexPath *indexPath) API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(tvos);
+
+/// A block that is executed by list sections to provide granular control over separator appearance.
+///
+/// @param itemIndexPath The index path of the item for which separators are being configured.
+/// @param sectionSeparatorConfiguration The list section's separator configuration for this cell. This configuration contains
+/// the values for separator visibility and insets according to the current state of the item.
+///
+/// @return The configuration to use for separators at \c itemIndexPath.
+typedef UIListSeparatorConfiguration *_Nonnull (^UICollectionLayoutListItemSeparatorHandler)(NSIndexPath *_Nonnull indexPath, UIListSeparatorConfiguration *_Nonnull sectionSeparatorConfiguration) API_AVAILABLE(ios(14.5), watchos(7.4)) API_UNAVAILABLE(tvos);
 
 
 /// A list configuration can be used to layout a section inside a UICollectionViewCompositionalLayout as a list.
@@ -52,8 +69,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
 /// The overall appearance of the section.
 @property (nonatomic, readonly) UICollectionLayoutListAppearance appearance;
 
-/// Whether this section shows separators or not.
+/// Whether this section shows separators or not. For additional control, see separatorConfiguration.
+/// Note that when this property is NO, the separatorConfiguration is ineffective.
 @property (nonatomic) BOOL showsSeparators API_UNAVAILABLE(tvos);
+
+/// The preferred configuration for separators. Used as a baseline for a section in a list using this \c UICollectionLayoutListConfiguration
+@property (nonatomic, copy) UIListSeparatorConfiguration *separatorConfiguration API_AVAILABLE(ios(14.5), watchos(7.4)) API_UNAVAILABLE(tvos);
+
+/// This handler is executed when the list section is configuring separator appearance for an item. The index path for the item being configured and
+/// a resolved separator configuration are passed in to this block. The configuration returned from this block will be treated as the final
+/// separator configuration for this item.
+@property (nonatomic, copy, nullable) UICollectionLayoutListItemSeparatorHandler itemSeparatorHandler API_AVAILABLE(ios(14.5), watchos(7.4)) API_UNAVAILABLE(tvos);
 
 /// The background color of the section.
 /// Defaults to nil, indicating the system background color for the specified appearance is used.
@@ -73,9 +99,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
 
 // headers & footers:
 
-/// Definies whether the section has a header. Defaults to UICollectionLayoutListHeaderModeNone.
+/// Defines whether the section has a header. Defaults to UICollectionLayoutListHeaderModeNone.
 @property (nonatomic) UICollectionLayoutListHeaderMode headerMode;
-/// Definies whether the section has a footer. Defaults to UICollectionLayoutListFooterModeNone.
+/// Defines whether the section has a footer. Defaults to UICollectionLayoutListFooterModeNone.
 @property (nonatomic) UICollectionLayoutListFooterMode footerMode;
 
 @end

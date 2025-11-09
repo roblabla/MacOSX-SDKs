@@ -137,7 +137,7 @@ typedef NS_ENUM(NSInteger, UITextAlternativeStyle) {
 - (NSComparisonResult)comparePosition:(UITextPosition *)position toPosition:(UITextPosition *)other;
 - (NSInteger)offsetFromPosition:(UITextPosition *)from toPosition:(UITextPosition *)toPosition;
 
-/* A system-provied input delegate is assigned when the system is interested in input changes. */
+/* A system-provided input delegate is assigned when the system is interested in input changes. */
 @property (nullable, nonatomic, weak) id <UITextInputDelegate> inputDelegate;
 
 /* A tokenizer must be provided to inform the text input system about text units of varying granularity. */
@@ -174,7 +174,7 @@ typedef NS_ENUM(NSInteger, UITextAlternativeStyle) {
 - (NSInteger)characterOffsetOfPosition:(UITextPosition *)position withinRange:(UITextRange *)range;
 
 /* An affiliated view that provides a coordinate system for all geometric values in this protocol.
- * If unimplmeented, the first view in the responder chain will be selected. */
+ * If unimplemented, the first view in the responder chain will be selected. */
 @property (nonatomic, readonly) __kindof UIView *textInputView;
 
 /* Selection affinity determines whether, for example, the insertion point appears after the last

@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ACD6845A-17CB-3C39-A306-9FA16325BDEC
+    value:           276FFCE6-A73F-37DD-BF8D-9C2713209AC5
 install-name:    '/System/Library/PrivateFrameworks/IOCEC.framework/Versions/A/IOCEC'
 exports:
   - targets:         [ arm64e-macos, arm64-macos ]

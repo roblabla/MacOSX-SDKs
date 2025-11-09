@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F551A2BF-3991-39C4-8849-3B42A5E05117
+    value:           09ECD2B5-C260-3118-90DC-20FC2C8FE1F2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           49D0BE08-EC9D-3695-86CD-06189924CB2D
+    value:           051B6518-FBC6-3737-8878-733E5AB1A561
 install-name:    '/System/Library/PrivateFrameworks/PhotosGraph.framework/Versions/A/PhotosGraph'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

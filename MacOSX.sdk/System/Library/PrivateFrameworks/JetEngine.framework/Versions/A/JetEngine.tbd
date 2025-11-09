@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           84667072-0669-3BF9-BFB6-C87A982A28C0
+    value:           C696D2F9-136A-3D89-AB94-1C31AE8170FE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FE276C5E-BEF8-3D41-A491-11ACAC88FA45
+    value:           85D18B04-0ECA-35E5-B6AA-330ADDC989A7
 install-name:    '/System/Library/PrivateFrameworks/JetEngine.framework/Versions/A/JetEngine'
 swift-abi-version: 7
 allowable-clients:
@@ -21,8 +21,8 @@ allowable-clients:
                        Games, JetMusic, JetPreflight, JetPreflightTests, JetUI, JetUITests, 
                        MacAppStore, MacAppStoreTests, MacBuddy Plugin, Music, MusicTests, 
                        Podcasts, PodcastsStoreUI, PodcastsStoreUITests, PodcastsTests, 
-                       StoreDynamicUIPlugin, StoreDynamicUIPluginTests, TV, TVTests, 
-                       VideosUI, amsengagementd, appstorecomponentsd ]
+                       StoreDynamicUIPlugin, StoreDynamicUIPluginTests, TV, TVSystemMenuService, 
+                       TVTests, VideosUI, amsengagementd, appstorecomponentsd ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s10Foundation3URLV9JetEngineE15withCacheBusterACvg', '_$s10Foundation3URLV9JetEngineE15withCacheBusterACvpMV', 
@@ -307,7 +307,9 @@ exports:
                        '_$s9JetEngine11AnyStatefulMp', '_$s9JetEngine11EmptyActionV13actionMetricsAA0dF0VvM', 
                        '_$s9JetEngine11EmptyActionV13actionMetricsAA0dF0Vvg', '_$s9JetEngine11EmptyActionV13actionMetricsAA0dF0VvpMV', 
                        '_$s9JetEngine11EmptyActionV13actionMetricsAA0dF0Vvs', '_$s9JetEngine11EmptyActionV13actionMetricsAcA0dF0V_tcfC', 
+                       '_$s9JetEngine11EmptyActionV13deserializing5usingAcA10JSONObjectV_AA11JSONContextVtKcfC', 
                        '_$s9JetEngine11EmptyActionVAA0D5ModelAAMc', '_$s9JetEngine11EmptyActionVAA0D5ModelAAWP', 
+                       '_$s9JetEngine11EmptyActionVAA17ExpressibleByJSONAAMc', '_$s9JetEngine11EmptyActionVAA17ExpressibleByJSONAAWP', 
                        '_$s9JetEngine11EmptyActionVMa', '_$s9JetEngine11EmptyActionVMn', 
                        '_$s9JetEngine11EmptyActionVN', '_$s9JetEngine11JSONContextV11addingValue_11forPropertyACx_AC0G0Vy_xGtlF', 
                        '_$s9JetEngine11JSONContextV11removingAllACyF', '_$s9JetEngine11JSONContextV13removingValue11forPropertyA2C0G0Vy_xG_tlF', 
@@ -1554,6 +1556,9 @@ exports:
                        '_$s9JetEngine20MetricsFieldsContextV11removeValue11forPropertyyAC0I0Vy_xG_tlF', 
                        '_$s9JetEngine20MetricsFieldsContextV11removingAllACyF', '_$s9JetEngine20MetricsFieldsContextV13containsValue11forPropertySbAC0I0Vy_xG_tlF', 
                        '_$s9JetEngine20MetricsFieldsContextV13removingValue11forPropertyA2C0I0Vy_xG_tlF', 
+                       '_$s9JetEngine20MetricsFieldsContextV21metricsIdentifierKeysAC8PropertyVy_SaySo010AMSMetricsG3KeyCGGvgZ', 
+                       '_$s9JetEngine20MetricsFieldsContextV23metricsIdentifierDomainAC8PropertyVy_SSGvgZ', 
+                       '_$s9JetEngine20MetricsFieldsContextV30metricsIdentifierResetIntervalAC8PropertyVy_SdGvgZ', 
                        '_$s9JetEngine20MetricsFieldsContextV8PropertyV2eeoiySbAEy_xG_AGtFZ', 
                        '_$s9JetEngine20MetricsFieldsContextV8PropertyV3keySSvM', 
                        '_$s9JetEngine20MetricsFieldsContextV8PropertyV3keySSvg', 
@@ -1920,6 +1925,7 @@ exports:
                        '_$s9JetEngine28LanguagesMetricFieldProviderVAA013MetricsFieldsF0AAWP', 
                        '_$s9JetEngine28LanguagesMetricFieldProviderVACycfC', '_$s9JetEngine28LanguagesMetricFieldProviderVMa', 
                        '_$s9JetEngine28LanguagesMetricFieldProviderVMn', '_$s9JetEngine28LanguagesMetricFieldProviderVN', 
+                       '_$s9JetEngine28MetricsFieldExclusionRequestV03amsC2IDACvgZ', 
                        '_$s9JetEngine28MetricsFieldExclusionRequestV10systemInfoACvgZ', 
                        '_$s9JetEngine28MetricsFieldExclusionRequestV13deserializing5usingAcA10JSONObjectV_AA11JSONContextVtKcfC', 
                        '_$s9JetEngine28MetricsFieldExclusionRequestV3appACvgZ', '_$s9JetEngine28MetricsFieldExclusionRequestV8rawValueACSS_tcfC', 
@@ -1976,7 +1982,16 @@ exports:
                        '_$s9JetEngine31SystemInfoMetricsFieldsProviderVMn', '_$s9JetEngine31SystemInfoMetricsFieldsProviderVN', 
                        '_$s9JetEngine33ConditionallyExpressibleByJSValueMp', '_$s9JetEngine33ConditionallyExpressibleByJSValuePyxSo0F0CKcfCTj', 
                        '_$s9JetEngine33ConditionallyExpressibleByJSValuePyxSo0F0CKcfCTq', 
-                       '_$s9JetEngine33ConditionallyExpressibleByJSValueTL', '_$s9JetEngine3BagV03amsC0So14AMSBagProtocol_pvg', 
+                       '_$s9JetEngine33ConditionallyExpressibleByJSValueTL', '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderV010addMetricsE04into5usingyAA0hE7Builder_pz_AA0hE7ContextVtKF', 
+                       '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderV11metricsKeysSaySo0cD3KeyCGvgZ', 
+                       '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderV20metricsResetIntervalSdvgZ', 
+                       '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderV8accounts10clientInfo13resetInterval4keysAcA8UnstableO8AccountsC_So010AMSProcessI0CSdSaySo0cD3KeyCGtcfC', 
+                       '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderV8categoryAA07MetricseF8CategoryOvg', 
+                       '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderV8categoryAA07MetricseF8CategoryOvpMV', 
+                       '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderVAA07MetricseF0AAMc', 
+                       '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderVAA07MetricseF0AAWP', 
+                       '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderVMa', '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderVMn', 
+                       '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderVN', '_$s9JetEngine3BagV03amsC0So14AMSBagProtocol_pvg', 
                        '_$s9JetEngine3BagV03amsC0So14AMSBagProtocol_pvpMV', '_$s9JetEngine3BagV05fetchC010forProfile21wantsAutomaticUpdatesAA7PromiseCyACGAC0F0V_SbtFZ', 
                        '_$s9JetEngine3BagV05fetchC010forProfile2as21wantsAutomaticUpdatesAA7PromiseCyACGAC0F0V_So14AMSProcessInfoCSgSbtFZ', 
                        '_$s9JetEngine3BagV05fetchC010forProfile2asAA7PromiseCyACGAC0F0V_So14AMSProcessInfoCSgtFZ', 

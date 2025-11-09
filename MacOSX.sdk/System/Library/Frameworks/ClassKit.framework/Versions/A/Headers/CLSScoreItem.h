@@ -2,9 +2,10 @@
 //  CLSScoreItem.h
 //  ClassKit
 //
-//  Copyright © 2018 - 2020 Apple Inc. All rights reserved.
+//  Copyright © 2018-2020 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <ClassKit/CLSActivityItem.h>
 
 NS_ASSUME_NONNULL_BEGIN

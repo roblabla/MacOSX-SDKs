@@ -1,12 +1,13 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target x86_64-apple-ios14.3-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftos -swift-version 5 -enforce-exclusivity=checked -O -module-name os
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target x86_64-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftos -swift-version 5 -enforce-exclusivity=checked -O -module-name os
 import ObjectiveC
 import Swift
 @_exported import os.log
 @_exported import os
 @_exported import os.signpost
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@_exported import os.workgroup
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct OSLogFloatFormatting {
   @usableFromInline
   internal var explicitPositiveSign: Swift.Bool
@@ -23,12 +24,12 @@ import Swift
     @usableFromInline
     internal static func == (a: os.OSLogFloatFormatting.Notation, b: os.OSLogFloatFormatting.Notation) -> Swift.Bool
     @usableFromInline
+    internal func hash(into hasher: inout Swift.Hasher)
+    @usableFromInline
     internal var hashValue: Swift.Int {
       @usableFromInline
       get
     }
-    @usableFromInline
-    internal func hash(into hasher: inout Swift.Hasher)
   }
   @usableFromInline
   internal var notation: os.OSLogFloatFormatting.Notation
@@ -108,7 +109,7 @@ import Swift
     )
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogFloatFormatting {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) internal static func _formatStringLengthModifier<I>(_ type: I.Type) -> Swift.String? where I : Swift.FloatingPoint {
     switch type {
@@ -176,7 +177,7 @@ extension OSLogFloatFormatting {
     return specification
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogInterpolation {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ argumentObject: @autoclosure @escaping () -> ObjectiveC.NSObject, privacy: os.OSLogPrivacy = .auto) {
     guard argumentCount < maxOSLogArgumentCount else { return }
@@ -218,15 +219,15 @@ extension OSLogInterpolation {
     return specifier
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogArguments {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) internal mutating func append(_ value: @escaping () -> ObjectiveC.NSObject) {
-    argumentClosures.append({ (position, objectStorage, _) in
-      serialize(value(), at: &position, using: &objectStorage)
+    argumentClosures.append({ (position, objectArguments, _) in
+      serialize(value(), at: &position, storingObjectsIn: &objectArguments)
     })
   }
 }
-@_alwaysEmitIntoClient @inline(__always) internal func serialize(_ object: ObjectiveC.NSObject, at bufferPosition: inout os.ByteBufferPointer, using objectStorage: inout os.ObjectStorage<ObjectiveC.NSObject>) {
+@_alwaysEmitIntoClient @inline(__always) internal func serialize(_ object: ObjectiveC.NSObject, at bufferPosition: inout os.ByteBufferPointer, storingObjectsIn objectArguments: inout os.ObjectStorage<ObjectiveC.NSObject>) {
   let byteCount = pointerSizeInBytes();
   let dest =
     UnsafeMutableRawBufferPointer(start: bufferPosition, count: byteCount)
@@ -234,14 +235,14 @@ extension OSLogArguments {
   let objectAddress = Unmanaged.passUnretained(object).toOpaque()
   // Copy the address into the destination buffer. Note that the input NSObject
   // is kept alive until the os_log ABI call completes by storing in the
-  // objectStorage.
+  // objectArguments.
   withUnsafeBytes(of: objectAddress) { dest.copyMemory(from: $0) }
   bufferPosition += byteCount
   // This object could be newly created by the auto-closure. Therefore, make
   // sure it is alive until the log call completes.
-  initializeAndAdvance(&objectStorage, to: object)
+  initializeAndAdvance(&objectArguments, to: object)
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public enum OSLogPointerFormat {
   case ipv6Address
   case timeval
@@ -250,12 +251,12 @@ public enum OSLogPointerFormat {
   case sockaddr
   case none
   public static func == (a: os.OSLogPointerFormat, b: os.OSLogPointerFormat) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogInterpolation {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ pointer: @autoclosure @escaping () -> Swift.UnsafeRawBufferPointer, format: os.OSLogPointerFormat = .none, privacy: os.OSLogPrivacy = .auto) {
     appendInterpolation(
@@ -333,7 +334,7 @@ extension OSLogInterpolation {
     return specifier
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogArguments {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) internal mutating func append(_ value: @escaping () -> Swift.UnsafeRawPointer) {
     argumentClosures.append({ (position, _, _) in
@@ -351,11 +352,11 @@ extension OSLogArguments {
   withUnsafeBytes(of: pointer) { dest.copyMemory(from: $0) }
   bufferPosition += byteCount
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public func os_signpost(_ type: os.OSSignpostType, dso: Swift.UnsafeRawPointer = #dsohandle, log: os.OSLog, name: Swift.StaticString, signpostID: os.OSSignpostID = .exclusive)
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public func os_signpost(_ type: os.OSSignpostType, dso: Swift.UnsafeRawPointer = #dsohandle, log: os.OSLog, name: Swift.StaticString, signpostID: os.OSSignpostID = .exclusive, _ format: Swift.StaticString, _ arguments: Swift.CVarArg...)
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public enum AnimationFormatString {
   @inlinable @_optimize(none) @_semantics("constant_evaluable") internal static func constructOSLogInterpolation(_ formatString: Swift.String) -> os.OSLogInterpolation {
     var s = OSLogInterpolation(literalCapacity: 1, interpolationCount: 0)
@@ -379,24 +380,24 @@ public enum AnimationFormatString {
       let formatString = message.interpolation.formatString
       formatStringPointer = _getGlobalStringTablePointer(formatString)
     }
-    public typealias StringLiteralType = Swift.String
     public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+    public typealias StringLiteralType = Swift.String
     public typealias UnicodeScalarLiteralType = Swift.String
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public enum OSSignpostAnimationBegin {
   case animationBegin
   public static func == (a: os.OSSignpostAnimationBegin, b: os.OSSignpostAnimationBegin) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @usableFromInline
 internal func animationBeginSignpostHelper(dso: Swift.UnsafeRawPointer, log: os.OSLog, name: Swift.StaticString, signpostID: os.OSSignpostID, formatStringPointer: Swift.UnsafePointer<Swift.CChar>, arguments: [Swift.CVarArg])
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @_transparent public func os_signpost(_ animationBegin: os.OSSignpostAnimationBegin, dso: Swift.UnsafeRawPointer = #dsohandle, log: os.OSLog, name: Swift.StaticString, signpostID: os.OSSignpostID = .exclusive, _ format: os.AnimationFormatString.OSLogMessage, _ arguments: Swift.CVarArg...) {
   // This function should be transparent which means that the body will always be
   // inlined in the caller. This is necessary as `_swift_os_log_return_address` is used
@@ -409,7 +410,7 @@ internal func animationBeginSignpostHelper(dso: Swift.UnsafeRawPointer, log: os.
     formatStringPointer: format.formatStringPointer,
     arguments: arguments)
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @_transparent public func os_signpost(_ animationBegin: os.OSSignpostAnimationBegin, dso: Swift.UnsafeRawPointer = #dsohandle, log: os.OSLog, name: Swift.StaticString, signpostID: os.OSSignpostID = .exclusive) {
   // This function must be transparent for two reasons. Firstly,
   // `_swift_os_log_return_address` is used by the following helper function.
@@ -425,13 +426,13 @@ internal func animationBeginSignpostHelper(dso: Swift.UnsafeRawPointer, log: os.
     formatStringPointer: formatStringPointer,
     arguments: [])
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension OSSignpostType {
   public static let event: os.OSSignpostType
   public static let begin: os.OSSignpostType
   public static let end: os.OSSignpostType
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public struct OSSignpostID {
   public let rawValue: os.os_signpost_id_t
   public static let exclusive: os.OSSignpostID
@@ -441,12 +442,12 @@ public struct OSSignpostID {
   public init(log: os.OSLog, object: Swift.AnyObject)
   public init(_ value: Swift.UInt64)
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension OSSignpostID : Swift.Comparable {
   public static func < (a: os.OSSignpostID, b: os.OSSignpostID) -> Swift.Bool
   public static func == (a: os.OSSignpostID, b: os.OSSignpostID) -> Swift.Bool
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension OSLog {
   public struct Category {
     public let rawValue: Swift.String
@@ -457,12 +458,12 @@ extension OSLog {
     get
   }
 }
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension OSLog.Category {
   public static let dynamicTracing: os.OSLog.Category
   public static let dynamicStackTracing: os.OSLog.Category
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogInterpolation {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> Swift.Int, format: os.OSLogIntegerFormatting = .decimal, align: os.OSLogStringAlignment = .none, privacy: os.OSLogPrivacy = .auto) {
     appendInteger(number, format: format, align: align, privacy: privacy)
@@ -576,7 +577,7 @@ extension OSLogInterpolation {
     // Note that we don't have to update the preamble here.
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogArguments {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) internal mutating func append<T>(_ value: @escaping () -> T) where T : Swift.FixedWidthInteger {
     argumentClosures.append({ (position, _, _) in
@@ -594,28 +595,28 @@ extension OSLogArguments {
   withUnsafeBytes(of: value) { dest.copyMemory(from: $0) }
   bufferPosition += byteCount
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public func os_log(_ type: os.OSLogType, dso: Swift.UnsafeRawPointer = #dsohandle, log: os.OSLog = .default, _ message: Swift.StaticString, _ args: Swift.CVarArg...)
-@available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
+@available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
 public func os_log(_ message: Swift.StaticString, dso: Swift.UnsafeRawPointer? = #dsohandle, log: os.OSLog = .default, type: os.OSLogType = .default, _ args: Swift.CVarArg...)
 extension OSLogType {
-  @available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
+  @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
   public static let `default`: os.OSLogType
-  @available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
+  @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
   public static let info: os.OSLogType
-  @available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
+  @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
   public static let debug: os.OSLogType
-  @available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
+  @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
   public static let error: os.OSLogType
-  @available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
+  @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
   public static let fault: os.OSLogType
 }
 extension OSLog {
-  @available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
+  @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
   public static let disabled: os.OSLog
-  @available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
+  @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
   public static let `default`: os.OSLog
-  @available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
+  @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
   convenience public init(subsystem: Swift.String, category: Swift.String)
 }
 @available(*, unavailable, renamed: "OSLogType.default")
@@ -638,7 +639,7 @@ public var OS_LOG_TYPE_ERROR: os.OSLogType {
 public var OS_LOG_TYPE_FAULT: os.OSLogType {
   get
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogInterpolation {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> Swift.Float, format: os.OSLogFloatFormatting = .fixed, align: os.OSLogStringAlignment = .none, privacy: os.OSLogPrivacy = .auto) {
     appendInterpolation(
@@ -692,7 +693,7 @@ extension OSLogInterpolation {
     preamble = getUpdatedPreamble(privacy: privacy, isScalar: true)
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogArguments {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) internal mutating func append(_ value: @escaping () -> Swift.Double) {
     argumentClosures.append({ (position, _, _) in
@@ -710,7 +711,7 @@ extension OSLogArguments {
   withUnsafeBytes(of: value) { dest.copyMemory(from: $0) }
   bufferPosition += byteCount
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct OSLogIntegerFormatting {
   @usableFromInline
   internal var radix: Swift.Int
@@ -784,7 +785,7 @@ extension OSLogArguments {
     get { .octal() }
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogIntegerFormatting {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) internal var _prefix: Swift.String {
     get {
@@ -798,7 +799,7 @@ extension OSLogIntegerFormatting {
   }
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogIntegerFormatting {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) internal static func formatSpecifierLengthModifier<I>(_ type: I.Type) -> Swift.String? where I : Swift.FixedWidthInteger {
     // IEEE Std 1003.1-2017, length modifiers:
@@ -936,7 +937,7 @@ extension OSLogIntegerFormatting {
     return specification
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct OSLogPrivacy {
   @usableFromInline
   internal enum PrivacyOption {
@@ -947,21 +948,21 @@ extension OSLogIntegerFormatting {
     @usableFromInline
     internal static func == (a: os.OSLogPrivacy.PrivacyOption, b: os.OSLogPrivacy.PrivacyOption) -> Swift.Bool
     @usableFromInline
+    internal func hash(into hasher: inout Swift.Hasher)
+    @usableFromInline
     internal var hashValue: Swift.Int {
       @usableFromInline
       get
     }
-    @usableFromInline
-    internal func hash(into hasher: inout Swift.Hasher)
   }
   public enum Mask {
     case hash
     case none
     public static func == (a: os.OSLogPrivacy.Mask, b: os.OSLogPrivacy.Mask) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   @usableFromInline
   internal var privacy: os.OSLogPrivacy.PrivacyOption
@@ -1087,14 +1088,58 @@ extension OSLogIntegerFormatting {
   }
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+extension WorkGroup {
+  @available(macOS 11.0, *)
+  public func copyPort() -> Darwin.mach_port_t
+  @available(macOS 11.0, *)
+  convenience public init?(port: Darwin.mach_port_t, name: Swift.String? = nil)
+  @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  public func copy(name: Swift.String? = nil) -> os_workgroup.WorkGroup?
+  public struct JoinToken {
+  }
+  @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  public func join() -> os_workgroup.WorkGroup.JoinToken
+  @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  public func leave(token: os_workgroup.WorkGroup.JoinToken)
+  @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  public func cancel()
+  @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  public var isCancelled: Swift.Bool {
+    @_effects(readonly) get
+  }
+  @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  public var maxParallelThreads: Swift.Int {
+    @_effects(readonly) get
+  }
+  @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  public func setWorkingArena(arena: Swift.UnsafeMutableRawPointer?, max_workers: Swift.UInt32, destruct: @convention(c) (Swift.UnsafeMutableRawPointer?) -> Swift.Void)
+  public typealias Index = Swift.UInt32
+  @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  public var workingArena: (Swift.UnsafeMutableRawPointer?, os_workgroup.WorkGroup.Index) {
+    @_effects(readonly) get
+  }
+}
+extension WorkGroup : os_workgroup.Repeatable {
+  @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  public func start(at timestamp: Swift.UInt64, deadline: Swift.UInt64)
+  @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  public func updateDeadline(deadline: Swift.UInt64)
+  @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  public func finish()
+}
+extension WorkGroupParallel {
+  @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  convenience public init?(name: Swift.String? = nil)
+}
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @_semantics("constant_evaluable") @inlinable public var maxOSLogArgumentCount: Swift.UInt8 {
   get { return 48 }
 }
 @_transparent @_alwaysEmitIntoClient internal var logBitsPerByte: Swift.Int {
   @_transparent get { return 3 }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct OSLogInterpolation : Swift.StringInterpolationProtocol {
   @usableFromInline
   internal var formatString: Swift.String
@@ -1124,12 +1169,12 @@ extension OSLogIntegerFormatting {
     @usableFromInline
     internal static func == (a: os.OSLogInterpolation.ArgumentType, b: os.OSLogInterpolation.ArgumentType) -> Swift.Bool
     @usableFromInline
+    internal func hash(into hasher: inout Swift.Hasher)
+    @usableFromInline
     internal var hashValue: Swift.Int {
       @usableFromInline
       get
     }
-    @usableFromInline
-    internal func hash(into hasher: inout Swift.Hasher)
   }
   @usableFromInline
   internal var preamble: Swift.UInt8
@@ -1177,6 +1222,7 @@ extension OSLogIntegerFormatting {
   public typealias StringLiteralType = Swift.String
 }
 extension String {
+  @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
   @inlinable internal var percentEscapedString: Swift.String {
     @_semantics("string.escapePercent.get") @_effects(readonly) @_optimize(none) get {
       return self
@@ -1185,7 +1231,7 @@ extension String {
     }
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct OSLogMessage : Swift.ExpressibleByStringInterpolation, Swift.ExpressibleByStringLiteral {
   public let interpolation: os.OSLogInterpolation
   @inlinable @_optimize(none) @_semantics("oslog.message.init_interpolation") @_semantics("constant_evaluable") public init(stringInterpolation: os.OSLogInterpolation) {
@@ -1202,10 +1248,10 @@ extension String {
     return interpolation.totalBytesForSerializingArguments + 2
   }
   }
-  public typealias StringLiteralType = Swift.String
   public typealias ExtendedGraphemeClusterLiteralType = Swift.String
-  public typealias UnicodeScalarLiteralType = Swift.String
   public typealias StringInterpolation = os.OSLogInterpolation
+  public typealias StringLiteralType = Swift.String
+  public typealias UnicodeScalarLiteralType = Swift.String
 }
 @usableFromInline
 internal typealias ByteBufferPointer = Swift.UnsafeMutablePointer<Swift.UInt8>
@@ -1213,7 +1259,7 @@ internal typealias ByteBufferPointer = Swift.UnsafeMutablePointer<Swift.UInt8>
 internal typealias ObjectStorage<T> = Swift.UnsafeMutablePointer<T>?
 @usableFromInline
 internal typealias ArgumentClosures = [(inout os.ByteBufferPointer, inout os.ObjectStorage<ObjectiveC.NSObject>, inout os.ObjectStorage<Any>) -> ()]
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @usableFromInline
 @frozen internal struct OSLogArguments {
   @usableFromInline
@@ -1251,7 +1297,7 @@ internal typealias ArgumentClosures = [(inout os.ByteBufferPointer, inout os.Obj
     storage.deallocate()
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public struct Logger {
   @usableFromInline
   internal let logObject: os.OSLog
@@ -1292,21 +1338,21 @@ public struct Logger {
     osLogInternal(message, log: logObject, type: .fault)
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @_disfavoredOverload @_transparent @_optimize(none) @_semantics("oslog.requires_constant_arguments") @_alwaysEmitIntoClient public func os_log(_ message: os.OSLogMessage) {
   // TODO: remove this overload once <rdar://problem/63106168> is fixed. This should be
   // subsumed by the os_log(_ level:log:_ message:) function. Note that this is not
   // ABI.
   osLogInternal(message, log: .default, type: .default)
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @_disfavoredOverload @_transparent @_optimize(none) @_semantics("oslog.log_with_level") public func os_log(_ logLevel: os.OSLogType = .default, log logObject: os.OSLog = .default, _ message: os.OSLogMessage) {
   // Note that this is not marked as requiring constant arguments as `logLevel` and
   // `logObject` need not be constants. Compiler would still diagnose if message is not
   // a string interpolation literal.
   osLogInternal(message, log: logObject, type: logLevel)
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @_transparent @_alwaysEmitIntoClient @_optimize(none) internal func osLogInternal(_ message: os.OSLogMessage, log logObject: os.OSLog, type logLevel: os.OSLogType) {
   // Compute static constants first so that they can be folded by
   // OSLogOptimization pass.
@@ -1328,16 +1374,18 @@ public struct Logger {
   let bufferMemory = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
   // Buffer for storing NSObjects and strings to keep them alive until the
   // _os_log_impl call completes.
-  let objectStorage = createStorage(capacity: objectCount, type: NSObject.self)
-  let stringStorage = createStorage(capacity: stringCount, type: Any.self)
+  let objectArguments = createStorage(capacity: objectCount, type: NSObject.self)
+  let stringArgumentOwners = createStorage(capacity: stringCount, type: Any.self)
 
   var currentBufferPosition = bufferMemory
-  var objectStoragePosition = objectStorage
-  var stringStoragePosition = stringStorage
+  var objectArgumentsPosition = objectArguments
+  var stringArgumentOwnersPosition = stringArgumentOwners
   serialize(preamble, at: &currentBufferPosition)
   serialize(argumentCount, at: &currentBufferPosition)
   argumentClosures.forEach {
-    $0(&currentBufferPosition, &objectStoragePosition, &stringStoragePosition)
+    $0(&currentBufferPosition,
+       &objectArgumentsPosition,
+       &stringArgumentOwnersPosition)
   }
 
   ___os_log_impl(UnsafeMutableRawPointer(mutating: #dsohandle),
@@ -1350,11 +1398,11 @@ public struct Logger {
   // The following operation extends the lifetime of the objects stored in
   // the objectStorage till this point. This is necessary because __os_log_impl
   // is passed internal pointers to the objects/strings.
-  destroyStorage(objectStorage, count: objectCount)
-  destroyStorage(stringStorage, count: stringCount)
+  destroyStorage(objectArguments, count: objectCount)
+  destroyStorage(stringArgumentOwners, count: stringCount)
   bufferMemory.deallocate()
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @_transparent @_optimize(none) public func _checkFormatStringAndBuffer(_ message: os.OSLogMessage, with assertion: (Swift.String, Swift.UnsafeBufferPointer<Swift.UInt8>) -> Swift.Void) {
   // Compute static constants first so that they can be folded by
   // OSLogOptimization pass.
@@ -1368,27 +1416,29 @@ public struct Logger {
 
   // Code that will execute at runtime.
   let bufferMemory = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
-  let objectStorage = createStorage(capacity: objectCount, type: NSObject.self)
-  let stringStorage = createStorage(capacity: stringCount, type: Any.self)
+  let objectArguments = createStorage(capacity: objectCount, type: NSObject.self)
+  let stringArgumentOwners = createStorage(capacity: stringCount, type: Any.self)
 
   var currentBufferPosition = bufferMemory
-  var objectStoragePosition = objectStorage
-  var stringStoragePosition = stringStorage
+  var objectArgumentsPosition = objectArguments
+  var stringArgumentOwnersPosition = stringArgumentOwners
   serialize(preamble, at: &currentBufferPosition)
   serialize(argumentCount, at: &currentBufferPosition)
   argumentClosures.forEach {
-    $0(&currentBufferPosition, &objectStoragePosition, &stringStoragePosition)
+    $0(&currentBufferPosition,
+       &objectArgumentsPosition,
+       &stringArgumentOwnersPosition)
   }
-
+  
   assertion(
     formatString,
     UnsafeBufferPointer(start: UnsafePointer(bufferMemory), count: bufferSize))
-
-  destroyStorage(objectStorage, count: objectCount)
-  destroyStorage(stringStorage, count: stringCount)
+  
+  destroyStorage(objectArguments, count: objectCount)
+  destroyStorage(stringArgumentOwners, count: stringCount)
   bufferMemory.deallocate()
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @usableFromInline
 internal enum OSLogCollectionBound {
   case start
@@ -1396,14 +1446,14 @@ internal enum OSLogCollectionBound {
   @usableFromInline
   internal static func == (a: os.OSLogCollectionBound, b: os.OSLogCollectionBound) -> Swift.Bool
   @usableFromInline
+  internal func hash(into hasher: inout Swift.Hasher)
+  @usableFromInline
   internal var hashValue: Swift.Int {
     @usableFromInline
     get
   }
-  @usableFromInline
-  internal func hash(into hasher: inout Swift.Hasher)
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct OSLogStringAlignment {
   @usableFromInline
   internal var minimumColumnWidth: (() -> Swift.Int)?
@@ -1424,7 +1474,7 @@ internal enum OSLogCollectionBound {
     OSLogStringAlignment(minimumColumnWidth: columns, anchor: .start)
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogInterpolation {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ argumentString: @autoclosure @escaping () -> Swift.String, align: os.OSLogStringAlignment = .none, privacy: os.OSLogPrivacy = .auto) {
     guard argumentCount < maxOSLogArgumentCount else { return }
@@ -1482,23 +1532,25 @@ extension OSLogInterpolation {
     return specifier
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogArguments {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) internal mutating func append(_ value: @escaping () -> Swift.String) {
-    argumentClosures.append({ (position, _, stringStorage) in
-      serialize(value(), at: &position, using: &stringStorage)
+    argumentClosures.append({ (position, _, stringArgumentOwners) in
+      serializeImpl(
+        value(),
+        at: &position,
+        storingStringOwnersIn: &stringArgumentOwners)
     })
   }
 }
 @_transparent @_alwaysEmitIntoClient internal func pointerSizeInBytes() -> Swift.Int {
   return Int.bitWidth &>> logBitsPerByte
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-@inlinable @inline(__always) internal func serialize(_ stringValue: Swift.String, at bufferPosition: inout os.ByteBufferPointer, using stringStorage: inout os.ObjectStorage<Any>) {
+@_alwaysEmitIntoClient @inline(__always) internal func serializeImpl(_ stringValue: Swift.String, at bufferPosition: inout Swift.UnsafeMutablePointer<Swift.UInt8>, storingStringOwnersIn stringArgumentOwners: inout os.ObjectStorage<Any>) {
   let stringPointer =
-    getNullTerminatedUTF8Pointer(
+    getNullTerminatedUTF8PointerImpl(
       stringValue,
-      using: &stringStorage)
+      storingStringOwnersIn: &stringArgumentOwners)
 
   let byteCount = pointerSizeInBytes()
   let dest =
@@ -1506,20 +1558,40 @@ extension OSLogArguments {
   withUnsafeBytes(of: stringPointer) { dest.copyMemory(from: $0) }
   bufferPosition += byteCount
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@_alwaysEmitIntoClient @inline(never) internal func getNullTerminatedUTF8PointerImpl(_ stringValue: Swift.String, storingStringOwnersIn stringArgumentOwners: inout os.ObjectStorage<Any>) -> Swift.UnsafeRawPointer {
+  let (optStorage, bytePointer, _, _, _):
+    (AnyObject?, UnsafeRawPointer, Int, Bool, Bool) =
+     stringValue._deconstructUTF8(scratch: nil)
+  if let storage = optStorage {
+    initializeAndAdvance(&stringArgumentOwners, to: storage)
+  } else {
+    initializeAndAdvance(&stringArgumentOwners, to: stringValue._guts)
+  }
+  return bytePointer
+}
 @usableFromInline
+@available(iOS, unavailable, introduced: 14)
+@available(macOS, unavailable, introduced: 11.0)
+@available(watchOS, unavailable, introduced: 7)
+@available(tvOS, unavailable, introduced: 14)
+internal func serialize(_ stringValue: Swift.String, at bufferPosition: inout Swift.UnsafeMutablePointer<Swift.UInt8>, using stringStorage: inout os.ObjectStorage<Any>)
+@usableFromInline
+@available(iOS, unavailable, introduced: 14)
+@available(macOS, unavailable, introduced: 11.0)
+@available(watchOS, unavailable, introduced: 7)
+@available(tvOS, unavailable, introduced: 14)
 internal func getNullTerminatedUTF8Pointer(_ stringValue: Swift.String, using stringStorage: inout os.ObjectStorage<Any>) -> Swift.UnsafeRawPointer
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public enum OSLogBoolFormat {
   case truth
   case answer
   public static func == (a: os.OSLogBoolFormat, b: os.OSLogBoolFormat) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public enum OSLogInt32ExtendedFormat {
   case ipv4Address
   case secondsSince1970
@@ -1531,12 +1603,12 @@ public enum OSLogInt32ExtendedFormat {
   case truth
   case answer
   public static func == (a: os.OSLogInt32ExtendedFormat, b: os.OSLogInt32ExtendedFormat) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogInterpolation {
   @_semantics("constant_evaluable") @inlinable @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> Swift.Int32, format: os.OSLogInt32ExtendedFormat, privacy: os.OSLogPrivacy = .auto) {
     guard argumentCount < maxOSLogArgumentCount else { return }
@@ -1599,7 +1671,7 @@ extension OSLogInterpolation {
     return specifier
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension OSLogInterpolation {
   @_optimize(none) @_transparent @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation<T>(_ value: @autoclosure @escaping () -> T, align: os.OSLogStringAlignment = .none, privacy: os.OSLogPrivacy = .auto) where T : Swift.CustomStringConvertible {
     // TODO: Dead code elimination does not remove the call to the default value
@@ -1609,44 +1681,44 @@ extension OSLogInterpolation {
   }
   @_semantics("constant_evaluable") @inlinable @_optimize(none) @_semantics("oslog.requires_constant_arguments") public mutating func appendInterpolation(_ value: @autoclosure @escaping () -> Any.Type, align: os.OSLogStringAlignment = .none, privacy: os.OSLogPrivacy = .auto) {
     appendInterpolation(
-      String(describing: value()),
+      _typeName(value(), qualified: false),
       align: align,
       privacy: privacy)
   }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogFloatFormatting.Notation : Swift.Equatable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogFloatFormatting.Notation : Swift.Hashable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogPointerFormat : Swift.Equatable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogPointerFormat : Swift.Hashable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSSignpostAnimationBegin : Swift.Equatable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSSignpostAnimationBegin : Swift.Hashable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogPrivacy.PrivacyOption : Swift.Equatable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogPrivacy.PrivacyOption : Swift.Hashable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogPrivacy.Mask : Swift.Equatable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogPrivacy.Mask : Swift.Hashable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogInterpolation.ArgumentType : Swift.Equatable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogInterpolation.ArgumentType : Swift.Hashable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogCollectionBound : Swift.Equatable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogCollectionBound : Swift.Hashable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogBoolFormat : Swift.Equatable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogBoolFormat : Swift.Hashable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogInt32ExtendedFormat : Swift.Equatable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension os.OSLogInt32ExtendedFormat : Swift.Hashable {}

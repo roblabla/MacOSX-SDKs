@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DD235B7A-BEF0-3918-901E-11FF3D70EEBD
+    value:           2A5A8A25-0786-3C7C-8E42-FB053070A235
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           93D6FCE3-311E-37BE-A150-FF62176F968E
+    value:           B8536A28-584B-38F5-B30E-7ADC81E9A23D
 install-name:    '/System/Library/PrivateFrameworks/SystemMigration.framework/Versions/A/SystemMigration'
 current-version: 866
 exports:
@@ -17,26 +17,27 @@ exports:
                        _SMCONF_MIG_SECTION_APPLICATIONS, _SMCONF_MIG_SECTION_GENERAL, 
                        _SMCONF_MIG_SECTION_INSTALLONLY, _SMCONF_MIG_SECTION_MIGRATIONONLY, 
                        _SMCONF_MIG_SECTION_NETSERVICES, _SMCONF_MIG_SECTION_NETWORK, 
-                       _SMCONF_MIG_SECTION_TIME, _SMCleanupPreviousSystemAuthorizationRight, 
-                       _SMCopyEngineFileCopierErrorDomain, _SMCopyEngineNodeCopierErrorDomain, 
-                       _SMCopyEngineWindowsPathCopierErrorDomain, _SMEngineProgressPhaseNameFiles, 
-                       _SMEngineProgressPhaseNameHomeDirectory, _SMEngineProgressUpdateCompletedItemsKey, 
-                       _SMEngineProgressUpdateCompletedSizeKey, _SMEngineProgressUpdateCurrentPhaseKey, 
-                       _SMEngineProgressUpdateItemRateKey, _SMEngineProgressUpdateLastUpdateTimeKey, 
-                       _SMEngineProgressUpdateOverallCompletedItemsKey, _SMEngineProgressUpdateOverallCompletedSizeKey, 
-                       _SMEngineProgressUpdateOverallProgressKey, _SMEngineProgressUpdateOverallTotalItemsKey, 
-                       _SMEngineProgressUpdateOverallTotalSizeKey, _SMEngineProgressUpdateSizeRateKey, 
-                       _SMEngineProgressUpdateSmoothedItemRateKey, _SMEngineProgressUpdateSmoothedSizeRateKey, 
-                       _SMEngineProgressUpdateStartTimeKey, _SMEngineProgressUpdateTotalItemsKey, 
-                       _SMEngineProgressUpdateTotalSizeKey, _SMIAUserAppleSetupAdminPath, 
-                       _SMIAUserAppleSetupAdminPlistKeyFullName, _SMIAUserAppleSetupAdminPlistKeyShortName, 
-                       _SMIncompatibleAppFolderDataFilename, _SMIncompatibleApplicationNameKey, 
-                       _SMIncompatibleBlurbKey, _SMIncompatibleCustomSectionKey, 
-                       _SMIncompatibleDeletedSoftwareKey, _SMIncompatibleDontAddEntryKey, 
-                       _SMIncompatibleReadMeGroupKey, _SMIncompatibleSoftwareDirectoryName, 
-                       _SMManagedPreferencesCustomBehaviorContextKey, _SMManagedPreferencesCustomBehaviorContextWindowsValue, 
-                       _SMManagedPreferencesCustomBehaviorKey, _SMManagedPreferencesCustomBehaviorPathsKey, 
-                       _SMManagedPreferencesCustomBehaviorSourcePathKey, _SMManagedPreferencesCustomBehaviorSourcePathUserHomeKey, 
+                       _SMCONF_MIG_SECTION_TIME, _SMCannotUseMachineToMigrateErrorDomain, 
+                       _SMCleanupPreviousSystemAuthorizationRight, _SMCopyEngineFileCopierErrorDomain, 
+                       _SMCopyEngineNodeCopierErrorDomain, _SMCopyEngineWindowsPathCopierErrorDomain, 
+                       _SMEngineProgressPhaseNameFiles, _SMEngineProgressPhaseNameHomeDirectory, 
+                       _SMEngineProgressUpdateCompletedItemsKey, _SMEngineProgressUpdateCompletedSizeKey, 
+                       _SMEngineProgressUpdateCurrentPhaseKey, _SMEngineProgressUpdateItemRateKey, 
+                       _SMEngineProgressUpdateLastUpdateTimeKey, _SMEngineProgressUpdateOverallCompletedItemsKey, 
+                       _SMEngineProgressUpdateOverallCompletedSizeKey, _SMEngineProgressUpdateOverallProgressKey, 
+                       _SMEngineProgressUpdateOverallTotalItemsKey, _SMEngineProgressUpdateOverallTotalSizeKey, 
+                       _SMEngineProgressUpdateSizeRateKey, _SMEngineProgressUpdateSmoothedItemRateKey, 
+                       _SMEngineProgressUpdateSmoothedSizeRateKey, _SMEngineProgressUpdateStartTimeKey, 
+                       _SMEngineProgressUpdateTotalItemsKey, _SMEngineProgressUpdateTotalSizeKey, 
+                       _SMIAUserAppleSetupAdminPath, _SMIAUserAppleSetupAdminPlistKeyFullName, 
+                       _SMIAUserAppleSetupAdminPlistKeyShortName, _SMIncompatibleAppFolderDataFilename, 
+                       _SMIncompatibleApplicationNameKey, _SMIncompatibleBlurbKey, 
+                       _SMIncompatibleCustomSectionKey, _SMIncompatibleDeletedSoftwareKey, 
+                       _SMIncompatibleDontAddEntryKey, _SMIncompatibleReadMeGroupKey, 
+                       _SMIncompatibleSoftwareDirectoryName, _SMManagedPreferencesCustomBehaviorContextKey, 
+                       _SMManagedPreferencesCustomBehaviorContextWindowsValue, _SMManagedPreferencesCustomBehaviorKey, 
+                       _SMManagedPreferencesCustomBehaviorPathsKey, _SMManagedPreferencesCustomBehaviorSourcePathKey, 
+                       _SMManagedPreferencesCustomBehaviorSourcePathUserHomeKey, 
                        _SMManagedPreferencesCustomBehaviorTargetPathKey, _SMManagedPreferencesCustomBehaviorTargetPathUserHomeKey, 
                        _SMManagedPreferencesDomain, _SMManagerNewNonSystemAppeared, 
                        _SMManagerNewSystemAppeared, _SMManagerSystemDisAppeared, 
@@ -46,15 +47,14 @@ exports:
                        _SMODDBAccessErrorDomain, _SMPathsCacheLocation, _SMPreviousSystemLocation, 
                        _SMQuarantineBasePath, _SMREQUEST_REPLACE_KEY, _SMREQUEST_REPLACE_NONCONFLICTINGNAME_KEY, 
                        _SMSandboxToolsErrorDomain, _SMSandboxToolsGenericErrorDescription, 
-                       _SMSourceCutoffVersion, _SMSourceErrorDomain, _SMSourceServerCutoffVersion, 
-                       _SMSystemArchiverErrorDomain, _SMSystemArchiverPreviousContentPath, 
-                       _SMSystemArchiverPreviousSystemPath, _SMSystemArchiverRecoveredItemsPath, 
-                       _SMUserConflictResolverErrorDomain, _SMWindowsPathContentAccessDateKey, 
-                       _SMWindowsPathContentModificationDateKey, _SMWindowsPathCreationDateKey, 
-                       _SMWindowsPathFullPathKey, _SMWindowsPathIsDirectoryKey, _SMWindowsPathSizeKey, 
-                       _SMWirelessSoftAPAttemptTimeout, _SM_REST_OF_DATA, _SystemMigrationVersionNumber, 
-                       _SystemMigrationVersionString, _XMMigratedBookmarksDir, _XMSharedDiskDirectoryName, 
-                       _XMUserAppSupportDir ]
+                       _SMSourceCutoffVersion, _SMSourceServerCutoffVersion, _SMSystemArchiverErrorDomain, 
+                       _SMSystemArchiverPreviousContentPath, _SMSystemArchiverPreviousSystemPath, 
+                       _SMSystemArchiverRecoveredItemsPath, _SMUserConflictResolverErrorDomain, 
+                       _SMWindowsPathContentAccessDateKey, _SMWindowsPathContentModificationDateKey, 
+                       _SMWindowsPathCreationDateKey, _SMWindowsPathFullPathKey, 
+                       _SMWindowsPathIsDirectoryKey, _SMWindowsPathSizeKey, _SMWirelessSoftAPAttemptTimeout, 
+                       _SM_REST_OF_DATA, _SystemMigrationVersionNumber, _SystemMigrationVersionString, 
+                       _XMMigratedBookmarksDir, _XMSharedDiskDirectoryName, _XMUserAppSupportDir ]
     objc-classes:    [ DSMigrator, MigrationHelper_Client, MigrationToAnotherMacController, 
                        SMArchiver, SMAttemptPeerToPeerStep, SMCollectIncompatibleApps, 
                        SMCommitDeferredSandboxElement, SMConfMigrator, SMConfMigratorPlugin, 
@@ -99,8 +99,8 @@ exports:
                        SMSelectSourceDetailTableDelegate, SMSelectSourceViewController, 
                        SMSelectSourceViewItem, SMSelectSourceViewItemContainingView, 
                        SMShortNameFormatter, SMSizeFormatter, SMSizeTransformer, 
-                       SMSoftwareUpdateManager, SMSourceSelectionController, SMSummaryViewController, 
-                       SMSystem, SMSystemArchiver, SMSystemScanner, SMSystemScanner_Client, 
+                       SMSourceSelectionController, SMSummaryViewController, SMSystem, 
+                       SMSystemArchiver, SMSystemScanner, SMSystemScanner_Client, 
                        SMSystem_Client, SMSystem_Client_ArchiveAndInstallBased, SMSystem_Client_Ineligible, 
                        SMSystem_Client_Network, SMSystem_Client_RemoteDiskShare, 
                        SMSystem_Client_RemoteTMDiskShare, SMSystem_Client_SKDiskBased, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           227A96E1-AC04-3F29-9249-334D9F4291BF
+    value:           CD83AA6A-C38C-3669-8016-C8AED2588352
   - target:          x86_64-maccatalyst
-    value:           227A96E1-AC04-3F29-9249-334D9F4291BF
+    value:           CD83AA6A-C38C-3669-8016-C8AED2588352
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0F437CA6-52FA-3C34-9FE5-298B26B5D413
+    value:           544F66EE-A40B-3AFA-917F-2CDD01BEB4B2
   - target:          arm64e-maccatalyst
-    value:           0F437CA6-52FA-3C34-9FE5-298B26B5D413
+    value:           544F66EE-A40B-3AFA-917F-2CDD01BEB4B2
 install-name:    '/System/Library/PrivateFrameworks/MFAAuthentication.framework/Versions/A/MFAAuthentication'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -34,14 +34,15 @@ exports:
                        _MFAACreateSecurityCertificateReferenceFromBytes, _MFAACreateSerialNumberDataFromString, 
                        _MFAACreateSerialNumberStringFromData, _MFAACreateSignatureContext, 
                        _MFAADeallocAuthCertCaps, _MFAADeallocCertificateCache, _MFAADeallocSignatureContext, 
-                       _MFAAErrorDomain, _MFAAFinalizeDataSignature, _MFAAIsAppleAccessory, 
-                       _MFAAIsAppleBatteryModule, _MFAAIsAppleHWModule, _MFAAIsAppleMFiAccessory, 
-                       _MFAAIsAppleTouchControllerModule, _MFAAIsDesenseBuild, _MFAAIsDeveloperBuild, 
-                       _MFAAIsDevelopmentHW, _MFAAIsInternalBuild, _MFAAPairingManagerErrorDomain, 
-                       _MFAAPrintCertSerialNumber, _MFAAPrintCertSerialNumberBytes, 
-                       _MFAARemoveCertDataEntryFromCache, _MFAATokenManagerErrorDomain, 
-                       _MFAAUpdateDataSignature, _MFAAUserDefaultsDomain, _MFAAUserDefaultsKey_BypassCertificateExpirationCheck, 
-                       _MFAAUserDefaultsKey_BypassFairPlaySAPSignatureVerification, 
+                       _MFAADeviceIdentityCopyCertificate, _MFAADeviceIdentityRefreshCertificate, 
+                       _MFAADeviceIdentityRequestCertificate, _MFAAErrorDomain, _MFAAFinalizeDataSignature, 
+                       _MFAAIsAppleAccessory, _MFAAIsAppleBatteryModule, _MFAAIsAppleHWModule, 
+                       _MFAAIsAppleMFiAccessory, _MFAAIsAppleTouchControllerModule, 
+                       _MFAAIsDesenseBuild, _MFAAIsDeveloperBuild, _MFAAIsDevelopmentHW, 
+                       _MFAAIsInternalBuild, _MFAAPairingManagerErrorDomain, _MFAAPrintCertSerialNumber, 
+                       _MFAAPrintCertSerialNumberBytes, _MFAARemoveCertDataEntryFromCache, 
+                       _MFAATokenManagerErrorDomain, _MFAAUpdateDataSignature, _MFAAUserDefaultsDomain, 
+                       _MFAAUserDefaultsKey_BypassCertificateExpirationCheck, _MFAAUserDefaultsKey_BypassFairPlaySAPSignatureVerification, 
                        _MFAAUserDefaultsKey_CertStatusCache, _MFAAUserDefaultsKey_CertStatusCacheVersion, 
                        _MFAAUserDefaultsKey_CertStatusCache_Status, _MFAAUserDefaultsKey_CertStatusCache_Timestamp, 
                        _MFAAUserDefaultsKey_CustomServer, _MFAAUserDefaultsKey_DisableFairPlaySAP, 
@@ -60,7 +61,8 @@ exports:
                        _MFAAVerifyCertificateSerialNumberBySerialNumber, _MFAAVerifyNonceSignature, 
                        _MFAAVerifyPublicCertificate, _MFAAuthenticationVersionNumber, 
                        _MFAAuthenticationVersionString, __SecKeyVerifySignedSHA1_Transform, 
-                       _ascii_to_hex, _createCertificateRefWithBytes, _createCertificateRefWithData, 
+                       __findIndex, __storeIndex, __storeUseTime, _ascii_to_hex, 
+                       _createCertificateRefWithBytes, _createCertificateRefWithData, 
                        _errorDescription, _getMemoryUse, _getNumRevokedAuth3Wafers, 
                        _getNumRevokedAuthICBatches, _getRevokedAuth3Wafers, _getRevokedAuthICBatches, 
                        _kAppleRootCA1, _kAppleRootCA1Len, _kAppleRootCA2, _kAppleRootCA2Len, 
@@ -84,8 +86,9 @@ exports:
                        _mfaa_certificateManager_SWAuthCertType, _mfaa_certificateManager_copyAnchorCertificates, 
                        _mfaa_certificateManager_validateCertificate, _mfaa_verify_veridian_signature, 
                        _obfuscatedPointer, _printBytes, _removeNewline, _systemInfo_copyDeviceClass, 
-                       _systemInfo_getCurrentUnixTime, _systemInfo_getCurrentUnixTimeMS, 
-                       _systemInfo_isDeveloperBuild, _systemInfo_isHomePod, _systemInfo_isInternalBuild, 
-                       _systemInfo_systemSupportsPearl, _systemInfo_systemSupportsWAPI ]
+                       _systemInfo_copyProductType, _systemInfo_copyRegionCode, _systemInfo_getCurrentUnixTime, 
+                       _systemInfo_getCurrentUnixTimeMS, _systemInfo_isDeveloperBuild, 
+                       _systemInfo_isHomePod, _systemInfo_isInternalBuild, _systemInfo_systemSupportsPearl, 
+                       _systemInfo_systemSupportsWAPI ]
     objc-classes:    [ MFAACertificateManager, MFAAPairingManager, MFAATokenManager ]
 ...

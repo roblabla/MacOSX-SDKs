@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           10CF42D6-862B-34F3-B46F-0AAD5686ECA3
+    value:           B7E68973-4268-3CDE-AFB8-7A4655D68EE7
   - target:          x86_64-maccatalyst
-    value:           10CF42D6-862B-34F3-B46F-0AAD5686ECA3
+    value:           B7E68973-4268-3CDE-AFB8-7A4655D68EE7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           78E3FF7C-E47F-38FC-AD29-F14B6090532B
+    value:           51BF3269-5234-33EE-958F-F48B2BA86978
   - target:          arm64e-maccatalyst
-    value:           78E3FF7C-E47F-38FC-AD29-F14B6090532B
+    value:           51BF3269-5234-33EE-958F-F48B2BA86978
 install-name:    '/System/Library/PrivateFrameworks/MapsSupport.framework/Versions/A/MapsSupport'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -31,6 +31,7 @@ exports:
                        _GEOConfigMSPSenderMinimalStrategyETANearArrivalInterval, 
                        _GEOConfigMSPSenderMinimalStrategyETAUpdateIntervalThrottle, 
                        _GEOConfigMSPSenderMinimalStrategyETAUpdateNearArrivalIntervalThrottle, 
+                       _GEOConfigMSPShareETASupportedReceivingTransportTypes, _GEOConfigMSPShareETASupportedSendingTransportTypes, 
                        _GEOConfigMSPShareETAUserEnabled, _GEOConfigMSPShareETAUserEnabledLegacy, 
                        _GEOConfigMSPSharedETASenderIdentifier, _GEOConfigMSPSharedTripServerEnabled, 
                        _GEOConfigMSPUpNextMaximumAllowableHorizontalAccuracyInMeters, 
@@ -67,8 +68,9 @@ exports:
                        _MSPRidesharingTripReadFrom, _MSPRouteBookmarkReadFrom, _MSPSerializedRepresentationForFavoritesArray, 
                        _MSPSerializedRepresentationForHistoryEntriesArray, _MSPSharedTripEnabled, 
                        _MSPSharedTripErrorContactsUserInfoKey, _MSPSharedTripErrorDomain, 
-                       _MSPSharedTripNetworkEnabled, _MSPSharedTripReceivingAvailable, 
-                       _MSPSharedTripServerStartDarwinNotification, _MSPSharedTripSharingAvailable, 
+                       _MSPSharedTripNetworkEnabled, _MSPSharedTripReceiverDetailViewSupportedForTransportType, 
+                       _MSPSharedTripReceivingAvailable, _MSPSharedTripServerStartDarwinNotification, 
+                       _MSPSharedTripSharingAvailable, _MSPSharedTripSharingSupportedForTransportType, 
                        _MSPSharedTripUserEnabled, _MSPSyncErrorDomain, _MSPTransitLineBookmarkReadFrom, 
                        _MSPTransitStorageArtworkReadFrom, _MSPTransitStorageAttributionReadFrom, 
                        _MSPTransitStorageIconReadFrom, _MSPTransitStorageIncidentEntityReadFrom, 

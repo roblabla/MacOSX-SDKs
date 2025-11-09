@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7CCFC59A-8746-3E52-AF1D-1B67798E940C
+    value:           1E5E625B-1B19-37E6-BAD2-05301D7BB0FC
   - target:          x86_64-maccatalyst
-    value:           7CCFC59A-8746-3E52-AF1D-1B67798E940C
+    value:           1E5E625B-1B19-37E6-BAD2-05301D7BB0FC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4790C8CE-AD87-3F74-9721-4A3F931E6B5D
+    value:           2FF93761-9498-33C7-BEE6-2B19ACBD63A2
   - target:          arm64e-maccatalyst
-    value:           4790C8CE-AD87-3F74-9721-4A3F931E6B5D
+    value:           2FF93761-9498-33C7-BEE6-2B19ACBD63A2
 install-name:    '/System/Library/PrivateFrameworks/CoreEmoji.framework/Versions/A/CoreEmoji'
-current-version: 128
+current-version: 128.4
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

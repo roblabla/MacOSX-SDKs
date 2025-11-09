@@ -160,14 +160,14 @@ thread_set_state(
  *	for its task is also zero.
  */
 routine	thread_suspend(
-		target_act	: thread_act_t);
+		target_act	: thread_read_t);
 
 /*
  *	Decrement the suspend count for the target thread,
  *	if that count is not already zero.
  */
 routine	thread_resume(
-		target_act	: thread_act_t);
+		target_act	: thread_read_t);
 
 /*
  *	Cause any user or meta- instructions currently being
@@ -380,5 +380,14 @@ routine thread_convert_thread_state(
 		in_state	: thread_state_t;
 	out	out_state	: thread_state_t, CountInOut);
 
+	skip;
+
+routine thread_get_exception_ports_info(
+		port : mach_port_t;
+		exception_mask	: exception_mask_t;
+	out	masks		: exception_mask_array_t;
+	out	old_handlers_info	: exception_handler_info_array_t, SameCount;
+	out	old_behaviors	: exception_behavior_array_t, SameCount;
+	out	old_flavors	: exception_flavor_array_t, SameCount);
 
 /* vim: set ft=c : */

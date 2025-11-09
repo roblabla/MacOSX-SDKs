@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           01186019-B4DD-3B09-B6FA-720B426CC3FD
+    value:           0F0F87B8-5B81-35D3-9466-94653A45D0B8
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           DE04FE2E-BA21-3E70-8D3A-76A18D84CC9D
+    value:           E1F64B12-7BDA-3434-A112-A71EBD94A9D9
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 1109.3
+current-version: 1109.6
 exports:
   - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _ABAddressBookBundle, _ABAddressBookGetDefaultRotationContentSettings, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9463DA05-EF69-34B7-AF8D-E5C265A6E59A
+    value:           721BED77-AE5A-388E-8273-8187EAE0B549
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           28254DE0-657F-371B-89E9-1C87C805BC12
+    value:           BBBEAB87-3FA6-30DE-BF5A-B7CFD58CF7C5
 install-name:    '/usr/lib/log/liblog_mdnsresponder.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

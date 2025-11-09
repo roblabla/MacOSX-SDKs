@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           12890AA5-14D5-3DEA-9FBB-FBB7E3F34BDF
+    value:           450A2F79-8923-374A-821B-589490A30AD8
   - target:          x86_64-maccatalyst
-    value:           12890AA5-14D5-3DEA-9FBB-FBB7E3F34BDF
+    value:           450A2F79-8923-374A-821B-589490A30AD8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           546A45E4-BC3D-30E7-8544-5829FD8CD1DA
+    value:           80AF8F5C-4EAD-30EE-B2C5-F0012A3E8AD9
   - target:          arm64e-maccatalyst
-    value:           546A45E4-BC3D-30E7-8544-5829FD8CD1DA
+    value:           80AF8F5C-4EAD-30EE-B2C5-F0012A3E8AD9
 install-name:    '/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation'
 current-version: 2
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    libraries:       [ '/System/Library/Frameworks/AVFoundation.framework/Versions/A/Frameworks/AVFAudio.framework/Versions/A/AVFAudio', 
+    libraries:       [ '/System/Library/Frameworks/AVFAudio.framework/Versions/A/AVFAudio', 
                        '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture', 
                        '/System/Library/PrivateFrameworks/AVFCore.framework/Versions/A/AVFCore' ]
 exports:
@@ -33,142 +33,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4F121DC8-938F-3E2E-ABCF-49CD95F5FD5C
+    value:           D8815DE6-4DE0-3E2B-AEA6-1790AF62967B
   - target:          x86_64-maccatalyst
-    value:           4F121DC8-938F-3E2E-ABCF-49CD95F5FD5C
+    value:           D8815DE6-4DE0-3E2B-AEA6-1790AF62967B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B2C16204-D89D-3CE4-8C5C-CD09BA02FD00
+    value:           19176434-A1E6-36E8-A86E-5255F5253AEC
   - target:          arm64e-maccatalyst
-    value:           B2C16204-D89D-3CE4-8C5C-CD09BA02FD00
-install-name:    '/System/Library/Frameworks/AVFoundation.framework/Versions/A/Frameworks/AVFAudio.framework/Versions/A/AVFAudio'
-exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
-                       arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _AVAudioBitRateStrategy_Constant, _AVAudioBitRateStrategy_LongTermAverage, 
-                       _AVAudioBitRateStrategy_Variable, _AVAudioBitRateStrategy_VariableConstrained, 
-                       _AVAudioEngineConfigurationChangeNotification, _AVAudioFileTypeKey, 
-                       _AVAudioRemoteInputBufferGainKey, _AVAudioRemoteInputBufferSpeexFrameQualitiesKey, 
-                       _AVAudioRemoteInputStartTimeKey, _AVAudioSessionActivationAccessibilityPreferenceKey, 
-                       _AVAudioSessionActivationCallDirectionKey, _AVAudioSessionActivationDeviceUIDKey, 
-                       _AVAudioSessionActivationTriggerKey, _AVAudioSessionCategoryAlarm, 
-                       _AVAudioSessionCategoryAmbient, _AVAudioSessionCategoryAudioProcessing, 
-                       _AVAudioSessionCategoryEmergencyAlert, _AVAudioSessionCategoryEmergencyAlert_CanBeMuted, 
-                       _AVAudioSessionCategoryFindMyDevice, _AVAudioSessionCategoryFindMyPhone, 
-                       _AVAudioSessionCategoryMultiRoute, _AVAudioSessionCategoryPhoneCall, 
-                       _AVAudioSessionCategoryPlayAndRecord, _AVAudioSessionCategoryPlayback, 
-                       _AVAudioSessionCategoryPlaybackNoSpeaker, _AVAudioSessionCategoryRecord, 
-                       _AVAudioSessionCategoryRingtone, _AVAudioSessionCategoryRingtonePreview, 
-                       _AVAudioSessionCategorySoloAmbient, _AVAudioSessionCategorySystemSoundsAndHaptics, 
-                       _AVAudioSessionCategoryTTYCall, _AVAudioSessionCategoryVoiceCommand, 
-                       _AVAudioSessionCategoryVoiceMail, _AVAudioSessionCategoryVoiceOver, 
-                       _AVAudioSessionCategoryWaterEjection, _AVAudioSessionInterruptionNotification, 
-                       _AVAudioSessionInterruptionOptionKey, _AVAudioSessionInterruptionTypeKey, 
-                       _AVAudioSessionInterruptionWasSuspendedKey, _AVAudioSessionInterruptorNameKey, 
-                       _AVAudioSessionLocationLower, _AVAudioSessionLocationUpper, 
-                       _AVAudioSessionMediaServicesWereLostNotification, _AVAudioSessionMediaServicesWereResetNotification, 
-                       _AVAudioSessionModeDefault, _AVAudioSessionModeEmergencyAlert, 
-                       _AVAudioSessionModeGameChat, _AVAudioSessionModeHapticsConstantVolume, 
-                       _AVAudioSessionModeHearingAccessibility, _AVAudioSessionModeLivePhoto, 
-                       _AVAudioSessionModeLocatePhone, _AVAudioSessionModeLowLatency, 
-                       _AVAudioSessionModeMeasurement, _AVAudioSessionModeMoviePlayback, 
-                       _AVAudioSessionModeRaw, _AVAudioSessionModeSOS, _AVAudioSessionModeSpatialRecording, 
-                       _AVAudioSessionModeSpeechRecognition, _AVAudioSessionModeSpokenAudio, 
-                       _AVAudioSessionModeVideoChat, _AVAudioSessionModeVideoChatForMedia, 
-                       _AVAudioSessionModeVideoRecording, _AVAudioSessionModeVoiceChat, 
-                       _AVAudioSessionModeVoiceMessages, _AVAudioSessionModeVoicePrompt, 
-                       _AVAudioSessionOrientationBack, _AVAudioSessionOrientationBottom, 
-                       _AVAudioSessionOrientationFront, _AVAudioSessionOrientationLeft, 
-                       _AVAudioSessionOrientationRight, _AVAudioSessionOrientationTop, 
-                       _AVAudioSessionPickableRouteChangeNotification, _AVAudioSessionPolarPatternCardioid, 
-                       _AVAudioSessionPolarPatternOmnidirectional, _AVAudioSessionPolarPatternStereo, 
-                       _AVAudioSessionPolarPatternSubcardioid, _AVAudioSessionPortAVB, 
-                       _AVAudioSessionPortAirPlay, _AVAudioSessionPortBluetoothA2DP, 
-                       _AVAudioSessionPortBluetoothHFP, _AVAudioSessionPortBluetoothLE, 
-                       _AVAudioSessionPortBuiltInMic, _AVAudioSessionPortBuiltInReceiver, 
-                       _AVAudioSessionPortBuiltInSpeaker, _AVAudioSessionPortCarAudio, 
-                       _AVAudioSessionPortDisplayPort, _AVAudioSessionPortFireWire, 
-                       _AVAudioSessionPortHDMI, _AVAudioSessionPortHeadphones, _AVAudioSessionPortHeadsetMic, 
-                       _AVAudioSessionPortLineIn, _AVAudioSessionPortLineOut, _AVAudioSessionPortPCI, 
-                       _AVAudioSessionPortSPDIF, _AVAudioSessionPortThunderbolt, 
-                       _AVAudioSessionPortUSBAudio, _AVAudioSessionPortVirtual, _AVAudioSessionRouteChangeNotification, 
-                       _AVAudioSessionRouteChangePreviousRouteKey, _AVAudioSessionRouteChangeReasonKey, 
-                       _AVAudioSessionRoutingContextChangeNotification, _AVAudioSessionSilenceSecondaryAudioHintNotification, 
-                       _AVAudioSessionSilenceSecondaryAudioHintTypeKey, _AVAudioUnitComponentManagerRegistrationsChangedNotification, 
-                       _AVAudioUnitComponentTagsDidChangeNotification, _AVAudioUnitManufacturerNameApple, 
-                       _AVAudioUnitTypeEffect, _AVAudioUnitTypeFormatConverter, _AVAudioUnitTypeGenerator, 
-                       _AVAudioUnitTypeMIDIProcessor, _AVAudioUnitTypeMixer, _AVAudioUnitTypeMusicDevice, 
-                       _AVAudioUnitTypeMusicEffect, _AVAudioUnitTypeOfflineEffect, 
-                       _AVAudioUnitTypeOutput, _AVAudioUnitTypePanner, _AVChannelLayoutKey, 
-                       _AVEncoderAudioQualityForVBRKey, _AVEncoderAudioQualityKey, 
-                       _AVEncoderBitDepthHintKey, _AVEncoderBitRateKey, _AVEncoderBitRatePerChannelKey, 
-                       _AVEncoderBitRateStrategyKey, _AVFormatIDKey, _AVLinearPCMBitDepthKey, 
-                       _AVLinearPCMIsBigEndianKey, _AVLinearPCMIsFloatKey, _AVLinearPCMIsNonInterleaved, 
-                       _AVNumberOfChannelsKey, _AVSampleRateConverterAlgorithmKey, 
-                       _AVSampleRateConverterAlgorithm_Mastering, _AVSampleRateConverterAlgorithm_MinimumPhase, 
-                       _AVSampleRateConverterAlgorithm_Normal, _AVSampleRateConverterAudioQualityKey, 
-                       _AVSampleRateKey, _AVSpeechSynthesisIPANotationAttribute, 
-                       _AVSpeechSynthesisVoiceIdentifierAlex, _AVSpeechUtteranceDefaultSpeechRate, 
-                       _AVSpeechUtteranceMaximumSpeechRate, _AVSpeechUtteranceMinimumSpeechRate, 
-                       _AVVCStreamHandle_BuiltInStream, _AVVCStreamHandle_ExternalInputHALStream, 
-                       _AVVCStreamHandle_Invalid, _AVVoiceActivationDeviceIDKey, 
-                       _AVVoiceActivationModeKey, _AVVoiceControllerATVRemoteInputRoute, 
-                       _AVVoiceControllerAlertBehavior, _AVVoiceControllerBluetoothDoAPRoute, 
-                       _AVVoiceControllerMetricAudioSessionSetActiveTime, _AVVoiceControllerMetricAudioSessionSetInactiveTime, 
-                       _AVVoiceControllerMetricDataBeginHostTime, _AVVoiceControllerMetricDataDurationMilliSeconds, 
-                       _AVVoiceControllerMetricDataEndHostTime, _AVVoiceControllerNoRecordRoute, 
-                       _AVVoiceControllerRemoteInputJarvisRoute, _AVVoiceControllerStartTimeKey ]
-    objc-classes:    [ AVAudioBuffer, AVAudioChannelLayout, AVAudioCompressedBuffer, 
-                       AVAudioConnectionPoint, AVAudioConverter, AVAudioEngine, AVAudioEnvironmentDistanceAttenuationParameters, 
-                       AVAudioEnvironmentNode, AVAudioEnvironmentReverbParameters, 
-                       AVAudioFile, AVAudioFormat, AVAudioIONode, AVAudioInputNode, 
-                       AVAudioMixerNode, AVAudioMixingDestination, AVAudioNode, AVAudioOutputNode, 
-                       AVAudioPCMBuffer, AVAudioPlayer, AVAudioPlayerNode, AVAudioRecorder, 
-                       AVAudioRoutingArbiter, AVAudioSequencer, AVAudioSession, AVAudioSessionChannelDescription, 
-                       AVAudioSessionDataSourceDescription, AVAudioSessionPortDescription, 
-                       AVAudioSessionRouteDescription, AVAudioSinkNode, AVAudioSourceNode, 
-                       AVAudioTime, AVAudioUnit, AVAudioUnitComponent, AVAudioUnitComponentManager, 
-                       AVAudioUnitDSPGraph, AVAudioUnitDelay, AVAudioUnitDistortion, 
-                       AVAudioUnitEQ, AVAudioUnitEQFilterParameters, AVAudioUnitEffect, 
-                       AVAudioUnitGenerator, AVAudioUnitMIDIInstrument, AVAudioUnitReverb, 
-                       AVAudioUnitSampler, AVAudioUnitTimeEffect, AVAudioUnitTimePitch, 
-                       AVAudioUnitVarispeed, AVMIDIPlayer, AVMusicTrack, AVSpeechSynthesisMarker, 
-                       AVSpeechSynthesisProviderAudioUnit, AVSpeechSynthesisProviderRequest, 
-                       AVSpeechSynthesisProviderVoice, AVSpeechSynthesisVoice, AVSpeechSynthesizer, 
-                       AVSpeechUtterance, AVVCAlertInformation, AVVCAudioBuffer, 
-                       AVVCConfigureAlertBehaviorSettings, AVVCContextSettings, AVVCPrepareRecordSettings, 
-                       AVVCRecordDeviceInfo, AVVCStartRecordSettings, AVVoiceController, 
-                       AVVoiceTriggerClient ]
-    objc-ivars:      [ AVAudioBuffer._impl, AVAudioNode._impl, AVAudioSequencer._impl, 
-                       AVAudioUnitComponent._impl, AVAudioUnitComponentManager._impl, 
-                       AVMIDIPlayer._impl, AVMusicTrack._impl ]
---- !tapi-tbd
-tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
-uuids:
-  - target:          x86_64-macos
-    value:           FEA644F1-6D58-3E38-9057-33DBCC85D91A
-  - target:          x86_64-maccatalyst
-    value:           FEA644F1-6D58-3E38-9057-33DBCC85D91A
-  - target:          arm64-macos
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           D1135845-7708-362D-8CB1-F4CD5A5EA0A6
-  - target:          arm64e-maccatalyst
-    value:           D1135845-7708-362D-8CB1-F4CD5A5EA0A6
+    value:           19176434-A1E6-36E8-A86E-5255F5253AEC
 install-name:    '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AVFoundation ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AVAppleMakerNote_ARKitPhoto, _AVAppleMakerNote_AssetIdentifier, 
                        _AVAppleMakerNote_BurstUUID, _AVAppleMakerNote_ImageCaptureRequestIdentifier, 
@@ -197,9 +79,12 @@ exports:
                        _AVCaptureDeviceTypeBuiltInTimeOfFlightCamera, _AVCaptureDeviceTypeBuiltInTripleCamera, 
                        _AVCaptureDeviceTypeBuiltInTrueDepthCamera, _AVCaptureDeviceTypeBuiltInUltraWideCamera, 
                        _AVCaptureDeviceTypeBuiltInWideAngleCamera, _AVCaptureDeviceTypeExternalUnknown, 
-                       _AVCaptureDeviceWasConnectedNotification, _AVCaptureDeviceWasDisconnectedNotification, 
-                       _AVCaptureExposureDurationCurrent, _AVCaptureExposureTargetBiasCurrent, 
-                       _AVCaptureISOCurrent, _AVCaptureInputPortFormatDescriptionDidChangeNotification, 
+                       _AVCaptureDeviceUserDefaultsKey_CenterStageControlMode, _AVCaptureDeviceUserDefaultsKey_CenterStageEnabled, 
+                       _AVCaptureDeviceUserDefaultsKey_CinematicFramingControlMode, 
+                       _AVCaptureDeviceUserDefaultsKey_CinematicFramingEnabled, _AVCaptureDeviceWasConnectedNotification, 
+                       _AVCaptureDeviceWasDisconnectedNotification, _AVCaptureExposureDurationCurrent, 
+                       _AVCaptureExposureTargetBiasCurrent, _AVCaptureISOCurrent, 
+                       _AVCaptureInputPortFormatDescriptionDidChangeNotification, 
                        _AVCaptureLensPositionCurrent, _AVCaptureMaxAvailableTorchLevel, 
                        _AVCaptureMovieFileOutputRecordingCompletedNotification, _AVCaptureOutputNotificationInfoVideoPreviewFrameSurface, 
                        _AVCaptureOutputNotificationInfoVideoPreviewFrameSurfaceSize, 
@@ -298,18 +183,10 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
-  - target:          x86_64-macos
-    value:           533A5655-2ABC-3B8E-8D0D-C96C9E91C82D
-  - target:          x86_64-maccatalyst
-    value:           533A5655-2ABC-3B8E-8D0D-C96C9E91C82D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
-  - target:          arm64e-macos
-    value:           5B59692C-C325-39CD-8E78-14820DC7C37A
-  - target:          arm64e-maccatalyst
-    value:           5B59692C-C325-39CD-8E78-14820DC7C37A
 install-name:    '/System/Library/PrivateFrameworks/AVFCore.framework/Versions/A/AVFCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -354,23 +231,24 @@ exports:
                        _AVAssetDownloadSessioniTunesStoreContentPurchasedMediaKindKey, 
                        _AVAssetDownloadSessioniTunesStoreContentTypeKey, _AVAssetDownloadSessioniTunesStoreContentUserAgentKey, 
                        _AVAssetDownloadTaskAllowHighDynamicRangeKey, _AVAssetDownloadTaskClientIsCatalyst, 
-                       _AVAssetDownloadTaskClientIsIOSAppOnMac, _AVAssetDownloadTaskDestinationURLKey, 
+                       _AVAssetDownloadTaskDestinationURLKey, _AVAssetDownloadTaskMaximumAudioSampleRateKey, 
                        _AVAssetDownloadTaskMediaSelectionKey, _AVAssetDownloadTaskMediaSelectionPrefersMultichannelForMostPreferredLanguageOnlyKey, 
                        _AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey, 
+                       _AVAssetDownloadTaskMediaSelectionPrefersMultichannelOnlyKey, 
                        _AVAssetDownloadTaskMediaSelectionsForMultichannelKey, _AVAssetDownloadTaskMinimumRequiredMediaBitrateForHEVCKey, 
                        _AVAssetDownloadTaskMinimumRequiredMediaBitrateKey, _AVAssetDownloadTaskMinimumRequiredPresentationSizeKey, 
-                       _AVAssetDownloadTaskPrefersHDRKey, _AVAssetDownloadTaskPrefersMostCompatibleRenditionKey, 
-                       _AVAssetDownloadTaskShouldStoreEligibleContentKeysKey, _AVAssetDownloadedAssetEvictionPriorityDefault, 
-                       _AVAssetDownloadedAssetEvictionPriorityImportant, _AVAssetDurationDidChangeNotification, 
-                       _AVAssetExportPreset1280x720, _AVAssetExportPreset1920x1080, 
-                       _AVAssetExportPreset3840x2160, _AVAssetExportPreset640x480, 
-                       _AVAssetExportPreset960x540, _AVAssetExportPresetAppPreview, 
-                       _AVAssetExportPresetAppleM4A, _AVAssetExportPresetAuxSmall, 
-                       _AVAssetExportPresetHEVC1920x1080, _AVAssetExportPresetHEVC1920x1080WithAlpha, 
-                       _AVAssetExportPresetHEVC3840x2160, _AVAssetExportPresetHEVC3840x2160WithAlpha, 
-                       _AVAssetExportPresetHEVCHighestQuality, _AVAssetExportPresetHEVCHighestQualityWithAlpha, 
-                       _AVAssetExportPresetHighestQuality, _AVAssetExportPresetICPL, 
-                       _AVAssetExportPresetICPLAux, _AVAssetExportPresetICPLAuxHD, 
+                       _AVAssetDownloadTaskPrefersHDRKey, _AVAssetDownloadTaskPrefersLosslessAudioKey, 
+                       _AVAssetDownloadTaskPrefersMostCompatibleRenditionKey, _AVAssetDownloadTaskShouldStoreEligibleContentKeysKey, 
+                       _AVAssetDownloadedAssetEvictionPriorityDefault, _AVAssetDownloadedAssetEvictionPriorityImportant, 
+                       _AVAssetDurationDidChangeNotification, _AVAssetExportPreset1280x720, 
+                       _AVAssetExportPreset1920x1080, _AVAssetExportPreset3840x2160, 
+                       _AVAssetExportPreset640x480, _AVAssetExportPreset960x540, 
+                       _AVAssetExportPresetAppPreview, _AVAssetExportPresetAppleM4A, 
+                       _AVAssetExportPresetAuxSmall, _AVAssetExportPresetHEVC1920x1080, 
+                       _AVAssetExportPresetHEVC1920x1080WithAlpha, _AVAssetExportPresetHEVC3840x2160, 
+                       _AVAssetExportPresetHEVC3840x2160WithAlpha, _AVAssetExportPresetHEVCHighestQuality, 
+                       _AVAssetExportPresetHEVCHighestQualityWithAlpha, _AVAssetExportPresetHighestQuality, 
+                       _AVAssetExportPresetICPL, _AVAssetExportPresetICPLAux, _AVAssetExportPresetICPLAuxHD, 
                        _AVAssetExportPresetICPLHD, _AVAssetExportPresetICPLHEVC1280x1280WithHDR, 
                        _AVAssetExportPresetICPLHEVC1920x1080, _AVAssetExportPresetICPLHEVC1920x1920WithHDR, 
                        _AVAssetExportPresetLowQuality, _AVAssetExportPresetMediumQuality, 
@@ -441,15 +319,16 @@ exports:
                        _AVLocalizedStringFromTableWithLocale, _AVMakeBlockSchedulerThatExecutesBlocksSynchronously, 
                        _AVMakeBlockSchedulerThatSerializesBlocksPrefersSynchronousExecutionAndAllowsReentrantExecution, 
                        _AVMakeRectWithAspectRatioInsideRect, _AVMediaCharacteristicAudible, 
-                       _AVMediaCharacteristicContainsAlphaChannel, _AVMediaCharacteristicContainsHDRVideo, 
-                       _AVMediaCharacteristicContainsOnlyForcedSubtitles, _AVMediaCharacteristicDescribesMusicAndSoundForAccessibility, 
+                       _AVMediaCharacteristicBinauralForHeadphones, _AVMediaCharacteristicContainsAlphaChannel, 
+                       _AVMediaCharacteristicContainsHDRVideo, _AVMediaCharacteristicContainsOnlyForcedSubtitles, 
+                       _AVMediaCharacteristicDescribesMusicAndSoundForAccessibility, 
                        _AVMediaCharacteristicDescribesVideoForAccessibility, _AVMediaCharacteristicDubbedTranslation, 
                        _AVMediaCharacteristicEasyToRead, _AVMediaCharacteristicFrameBased, 
-                       _AVMediaCharacteristicHasLanguageDisplayNameAsName, _AVMediaCharacteristicIsAuxiliaryContent, 
-                       _AVMediaCharacteristicIsMainProgramContent, _AVMediaCharacteristicIsOriginalContent, 
-                       _AVMediaCharacteristicIsVideoMap, _AVMediaCharacteristicIsVideoMapDepth, 
-                       _AVMediaCharacteristicLanguageTranslation, _AVMediaCharacteristicLegible, 
-                       _AVMediaCharacteristicTranscribesSpokenDialogForAccessibility, 
+                       _AVMediaCharacteristicHasLanguageDisplayNameAsName, _AVMediaCharacteristicIsAudioDownmix, 
+                       _AVMediaCharacteristicIsAuxiliaryContent, _AVMediaCharacteristicIsMainProgramContent, 
+                       _AVMediaCharacteristicIsOriginalContent, _AVMediaCharacteristicIsVideoMap, 
+                       _AVMediaCharacteristicIsVideoMapDepth, _AVMediaCharacteristicLanguageTranslation, 
+                       _AVMediaCharacteristicLegible, _AVMediaCharacteristicTranscribesSpokenDialogForAccessibility, 
                        _AVMediaCharacteristicUsesWideGamutColorSpace, _AVMediaCharacteristicVisual, 
                        _AVMediaCharacteristicVoiceOverTranslation, _AVMediaFileSegmenterOutputFragmentedMP4Key, 
                        _AVMediaSubtypesForAC3, _AVMediaSubtypesForEnhancedAC3, _AVMediaTypeAudio, 
@@ -880,6 +759,8 @@ exports:
                        _AVPlayerCurrentItemDidChangeEnqueueingReason, _AVPlayerCurrentItemDidChangeNotification, 
                        _AVPlayerCurrentItemDidChangeReasonKey, _AVPlayerCurrentItemDidChangeRemovalReason, 
                        _AVPlayerCurrentItemDidChangeUnknownReason, _AVPlayerEligibleForHDRPlaybackDidChangeNotification, 
+                       _AVPlayerInterstitialEventObserverCurrentEventDidChangeNotification, 
+                       _AVPlayerInterstitialEventObserverEventsDidChangeNotification, 
                        _AVPlayerItemAudibleDRMInfoGroupID, _AVPlayerItemBecameCurrentNotification, 
                        _AVPlayerItemDidPlayToEndTimeNotification, _AVPlayerItemFailedToPlayToEndTimeErrorKey, 
                        _AVPlayerItemFailedToPlayToEndTimeNotification, _AVPlayerItemGaplessInfoDurationInFramesKey, 
@@ -894,11 +775,12 @@ exports:
                        _AVPlayerItemPlayabilityMetricsRawMeasuredBytesPerSecondKey, 
                        _AVPlayerItemPlayabilityMetricsRemoteIPAddress, _AVPlayerItemPlaybackStalledNotification, 
                        _AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification, 
-                       _AVPlayerItemStoppedBeingCurrentNotification, _AVPlayerItemSuppressesVideoLayersDidChangeNotification, 
-                       _AVPlayerItemTimeJumpedNotification, _AVPlayerItemVariantChangedNotification, 
-                       _AVPlayerItemVideoEnhancementModeAdaptive, _AVPlayerItemVideoEnhancementModeDigitalZoom, 
-                       _AVPlayerItemVideoEnhancementModeLivePhoto, _AVPlayerItemVideoEnhancementModeNone, 
-                       _AVPlayerLayerVisibilityDidChangeNotification, _AVPlayerMultichannelAudioStrategyMatchMultichannelTrackPreferenceToAudioDevice, 
+                       _AVPlayerItemSpatialAudioRenderingDidChangeNotification, _AVPlayerItemStoppedBeingCurrentNotification, 
+                       _AVPlayerItemSuppressesVideoLayersDidChangeNotification, _AVPlayerItemTimeJumpedNotification, 
+                       _AVPlayerItemVariantChangedNotification, _AVPlayerItemVideoEnhancementModeAdaptive, 
+                       _AVPlayerItemVideoEnhancementModeDigitalZoom, _AVPlayerItemVideoEnhancementModeLivePhoto, 
+                       _AVPlayerItemVideoEnhancementModeNone, _AVPlayerLayerVisibilityDidChangeNotification, 
+                       _AVPlayerMultichannelAudioStrategyMatchMultichannelTrackPreferenceToAudioDevice, 
                        _AVPlayerMultichannelAudioStrategyPreferAC3ViaExclusivePassthrough, 
                        _AVPlayerMultichannelAudioStrategyPreferStereo, _AVPlayerRateDidChangeAppBackgroundedReason, 
                        _AVPlayerRateDidChangeAudioSessionInterruptedReason, _AVPlayerRateDidChangeNotification, 
@@ -907,17 +789,19 @@ exports:
                        _AVPlayerRateDidChangeReasonKey, _AVPlayerRateDidChangeRouteChangedReason, 
                        _AVPlayerRateDidChangeSetRateCalledReason, _AVPlayerRateDidChangeSetRateFailedReason, 
                        _AVPlayerRateDidChangeStatusChangedReason, _AVPlayerRolePIP, 
-                       _AVPlayerRoleScanning, _AVPlayerWaitingToMinimizeStallsReason, 
-                       _AVPlayerWaitingWhileEvaluatingBufferingRateReason, _AVPlayerWaitingWithNoItemToPlayReason, 
-                       _AVPropertyListForProxyCreationOption_ReduceMetadataForPhotoLibrary, 
+                       _AVPlayerRoleScanning, _AVPlayerWaitingDuringInterstitialEventReason, 
+                       _AVPlayerWaitingToMinimizeStallsReason, _AVPlayerWaitingWhileEvaluatingBufferingRateReason, 
+                       _AVPlayerWaitingWithNoItemToPlayReason, _AVPropertyListForProxyCreationOption_ReduceMetadataForPhotoLibrary, 
                        _AVProtectedContentProviderFairPlay, _AVRampsIncludesRampThatOverlapsTimeRange, 
                        _AVRequestConcreteImplementation, _AVRequireConcreteObject, 
                        _AVRouteDetectorMultipleRoutesDetectedDidChangeNotification, 
                        _AVRoutingSessionManagerAllLikelyDestinationsDidChangeNotification, 
                        _AVRoutingSessionManagerCurrentSessionDidChangeNotification, 
                        _AVRoutingSessionManagerLikelyExternalDestinationsDidChangeNotification, 
-                       _AVSampleBufferAudioRendererFlushTimeKey, _AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification, 
+                       _AVSampleBufferAttachContentKey, _AVSampleBufferAudioRendererFlushTimeKey, 
+                       _AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification, 
                        _AVSampleBufferDisplayLayerFailedToDecodeNotification, _AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey, 
+                       _AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtectionDidChangeNotification, 
                        _AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification, 
                        _AVSampleBufferRenderSynchronizerRateDidChangeNotification, 
                        _AVSerializeOnQueueAsyncIfNecessary, _AVSerializedAtomDataFromFormatDescription, 
@@ -1044,9 +928,10 @@ exports:
                        AVCaptionRegion, AVCaptionRenderer, AVCaptionRendererScene, 
                        AVCaptionRuby, AVChapterMetadataItem, AVComposition, AVCompositionTrack, 
                        AVCompositionTrackFormatDescriptionReplacement, AVCompositionTrackSegment, 
-                       AVContentKeyReportGroup, AVContentKeyRequest, AVContentKeyResponse, 
-                       AVContentKeySession, AVDataDelegateAsset, AVDateRangeMetadataGroup, 
-                       AVDispatchOnce, AVEventWaiter, AVExecutionEnvironment, AVExternalPlaybackMonitor, 
+                       AVContentKey, AVContentKeyReportGroup, AVContentKeyRequest, 
+                       AVContentKeyResponse, AVContentKeySession, AVContentKeySpecifier, 
+                       AVDataDelegateAsset, AVDateRangeMetadataGroup, AVDispatchOnce, 
+                       AVEventWaiter, AVExecutionEnvironment, AVExternalPlaybackMonitor, 
                        AVFigAssetInspectorLoader, AVFigEndpointFigRoutingContextOutputDeviceTranslator, 
                        AVFigEndpointOutputDeviceImpl, AVFigEndpointUIAgentOutputContextManagerImpl, 
                        AVFigRouteDescriptorFigRoutingContextOutputDeviceTranslator, 
@@ -1075,12 +960,13 @@ exports:
                        AVOutputDeviceDiscoverySessionAvailableOutputDevices, AVOutputDeviceGroup, 
                        AVOutputDeviceGroupMembershipChangeResult, AVOutputSettings, 
                        AVOutputSettingsAssistant, AVPairedDevice, AVPeriodicTimebaseObserver, 
-                       AVPersistableContentKeyRequest, AVPlayer, AVPlayerItem, AVPlayerItemAccessLog, 
-                       AVPlayerItemAccessLogEvent, AVPlayerItemErrorLog, AVPlayerItemErrorLogEvent, 
-                       AVPlayerItemLegibleOutput, AVPlayerItemMediaDataCollector, 
-                       AVPlayerItemMetadataCollector, AVPlayerItemMetadataOutput, 
-                       AVPlayerItemOutput, AVPlayerItemTrack, AVPlayerItemVideoOutput, 
-                       AVPlayerLayer, AVPlayerLooper, AVPlayerMediaSelectionCriteria, 
+                       AVPersistableContentKeyRequest, AVPlayer, AVPlayerInterstitialEvent, 
+                       AVPlayerInterstitialEventController, AVPlayerInterstitialEventObserver, 
+                       AVPlayerItem, AVPlayerItemAccessLog, AVPlayerItemAccessLogEvent, 
+                       AVPlayerItemErrorLog, AVPlayerItemErrorLogEvent, AVPlayerItemLegibleOutput, 
+                       AVPlayerItemMediaDataCollector, AVPlayerItemMetadataCollector, 
+                       AVPlayerItemMetadataOutput, AVPlayerItemOutput, AVPlayerItemTrack, 
+                       AVPlayerItemVideoOutput, AVPlayerLayer, AVPlayerLooper, AVPlayerMediaSelectionCriteria, 
                        AVQueuePlayer, AVRouteDetector, AVRoutingSession, AVRoutingSessionDestination, 
                        AVRoutingSessionManager, AVRunLoopCondition, AVSampleBufferAudioRenderer, 
                        AVSampleBufferDisplayLayer, AVSampleBufferRenderSynchronizer, 

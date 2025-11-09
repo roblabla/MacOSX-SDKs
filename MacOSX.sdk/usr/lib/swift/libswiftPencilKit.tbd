@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0284AE46-F0DF-35C2-A17F-7D262957820D
+    value:           53E59FCF-0EF9-3293-B4C4-D5CC7A7853D3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6AC4CFBE-50BF-3073-AABF-5023E5896DEF
+    value:           FA3011B8-590F-3609-A481-D3478E20FDF2
 install-name:    '/usr/lib/swift/libswiftPencilKit.dylib'
-current-version: 5
+current-version: 5.1
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]

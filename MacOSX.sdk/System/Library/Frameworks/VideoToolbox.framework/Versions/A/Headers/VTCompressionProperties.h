@@ -460,6 +460,16 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_SourceFrameCount API_AVAIL
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedFrameRate API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber, Optional
 
 /*!
+	@constant	kVTCompressionPropertyKey_BaseLayerFrameRateFraction
+	@abstract
+		This property indicates the desired frame rate fraction of the base layer.
+	@discussion
+		This property indicates the fraction of total frames submitted that should be encoded in the base layer.
+		For example, a value of 0.5 means that half of the frames are in the base layer, and half are in the enhancement layer.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerFrameRateFraction API_AVAILABLE(macosx(11.3), ios(14.5), tvos(14.5)); // Read/write, CFNumber<Float>, Optional
+
+/*!
 	@constant	kVTCompressionPropertyKey_ExpectedDuration
 	@abstract
 		Indicates the expected total duration for the compression session, if known.
@@ -803,6 +813,23 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EncoderID API_AVAILABLE(ma
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PreserveDynamicHDRMetadata // CFBoolean, Write, Optional
 							API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0));
 
+/*!
+	@constant	kVTVideoEncoderSpecification_EnableLowLatencyRateControl
+	@abstract
+		Requires that an encoder which supports low-latency operation be selected, and enables low-latency mode.
+	@discussion
+		Low latency RateControl enforces the following behaviors: 
+		- Infinite GOP (all P frames following the beginning IDR).
+		- No frame reordering (B frame) or looking ahead.
+		- Only High profiles. Levels are left for the encoder to automatically set. 
+		- Temporal Layer structure.
+
+		Also see:
+			kVTCompressionPropertyKey_AverageBitRate
+			kVTCompressionPropertyKey_BaseLayerFrameRateFraction
+			kVTEncodeFrameOptionKey_ForceKeyFrame
+*/
+VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EnableLowLatencyRateControl API_AVAILABLE(macosx(11.3), ios(14.5), tvos(14.5)); // Read/write, CFBoolean, Optional
 
 	
 CM_ASSUME_NONNULL_END

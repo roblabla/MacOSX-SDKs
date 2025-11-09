@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1A1CA142-187F-3F11-A8A2-0CD1D4F72841
+    value:           B9DCB3F3-E986-3470-A5F6-3D60F82BACC3
   - target:          x86_64-maccatalyst
-    value:           1A1CA142-187F-3F11-A8A2-0CD1D4F72841
+    value:           B9DCB3F3-E986-3470-A5F6-3D60F82BACC3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9CA0AE0B-B049-3DA2-915B-8E687F722F93
+    value:           F8796F6A-F8B1-3BF1-B7EA-CA93A48B2DDA
   - target:          arm64e-maccatalyst
-    value:           9CA0AE0B-B049-3DA2-915B-8E687F722F93
+    value:           F8796F6A-F8B1-3BF1-B7EA-CA93A48B2DDA
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Support/SharedUtils.framework/Versions/A/SharedUtils'
-current-version: 827.60.15
+current-version: 827.100.23
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -65,11 +65,12 @@ exports:
                        _LibCall_ACMGetEnvironmentVariable_Block, _LibCall_ACMGlobalContextCredentialGetProperty, 
                        _LibCall_ACMGlobalContextCredentialGetProperty_Block, _LibCall_ACMKernDoubleClickNotify, 
                        _LibCall_ACMKernelControl, _LibCall_ACMKernelControl_Block, 
-                       _LibCall_ACMPing, _LibCall_ACMRequirementDelete, _LibCall_ACMRequirementGetPriority, 
-                       _LibCall_ACMRequirementGetPropertyData, _LibCall_ACMRequirementGetState, 
-                       _LibCall_ACMRequirementGetType, _LibCall_ACMSetEnvironmentVariable, 
-                       _LibCall_ACMTRMLoadState, _LibCall_ACMTRMLoadState_Block, 
-                       _LibCall_ACMTRMSaveState, _LibCall_BuildCommand, _LibSer_ContextCredentialGetProperty_Deserialize, 
+                       _LibCall_ACMPing, _LibCall_ACMPublishTrustedAccessories, _LibCall_ACMRequirementDelete, 
+                       _LibCall_ACMRequirementGetPriority, _LibCall_ACMRequirementGetPropertyData, 
+                       _LibCall_ACMRequirementGetState, _LibCall_ACMRequirementGetType, 
+                       _LibCall_ACMSetEnvironmentVariable, _LibCall_ACMTRMLoadState, 
+                       _LibCall_ACMTRMLoadState_Block, _LibCall_ACMTRMSaveState, 
+                       _LibCall_BuildCommand, _LibSer_ContextCredentialGetProperty_Deserialize, 
                        _LibSer_ContextCredentialGetProperty_GetSize, _LibSer_ContextCredentialGetProperty_Serialize, 
                        _LibSer_DeleteContext_Deserialize, _LibSer_DeleteContext_GetSize, 
                        _LibSer_DeleteContext_Serialize, _LibSer_GetAclAuthMethod_Deserialize, 
@@ -87,12 +88,12 @@ exports:
                        _SerializeRequirement, _SerializeVerifyAclConstraint, _SerializeVerifyPolicy, 
                        _Util_GetBitCount, _Util_hexDumpToStrHelper, _Util_isNonNullEqualMemory, 
                        _Util_isNullOrZeroMemory, _gAllocatedBytes, _gLastAllocatedBytes, 
-                       _kServiceTypeSecureStorage ]
-    objc-classes:    [ BaseService, BaseServiceManager, DefaultServiceSession, LAACMHelper, 
-                       LAADMUser, LAAssertionsProxy, LACachedExternalizedContext, 
-                       LADFR, LAErrorHelper, LAInternalProtocols, LAParamChecker, 
-                       LAPasscodeHelper, LASecureData, LAUtils, NSXPCInvocation, 
-                       WeakBox ]
-    objc-ivars:      [ BaseService._clients, BaseService._listener, BaseService._terminating, 
-                       BaseServiceManager._sessions ]
+                       _kLAServiceTypeSecureStorage ]
+    objc-classes:    [ LAACMHelper, LAADMUser, LAAssertionsProxy, LABaseService, 
+                       LABaseServiceManager, LACachedExternalizedContext, LADFR, 
+                       LADefaultServiceSession, LAErrorHelper, LAInternalProtocols, 
+                       LAManagedACMParameter, LAParamChecker, LAPasscodeHelper, LASecureData, 
+                       LAUtils, LAWeakBox ]
+    objc-ivars:      [ LABaseService._clients, LABaseService._listener, LABaseService._terminating, 
+                       LABaseServiceManager._sessions ]
 ...

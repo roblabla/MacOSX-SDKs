@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1C0BA763-7247-36E8-9AD4-60A91D8F30C2
+    value:           EA1A7BFE-AE34-3E3F-9109-2BEA56C33C8E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           664D5778-1693-3439-81B7-593E0F78A75D
+    value:           7840B005-EC84-31EE-AD8C-EF8431486868
 install-name:    '/System/Library/PrivateFrameworks/WiFiPolicy.framework/Versions/A/WiFiPolicy'
 exports:
   - targets:         [ x86_64-macos ]

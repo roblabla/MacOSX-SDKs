@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           31D5DF8F-DA26-303D-AC53-CD31EF866E7C
+    value:           8A374A77-F603-3502-8C62-1F77047A21E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F5D07338-0DD7-3B9F-8D54-EBF103E88EBB
+    value:           4F196AB0-999F-3D76-A830-B4358752A9F5
 install-name:    '/System/Library/PrivateFrameworks/SharingXPCServices.framework/Versions/A/SharingXPCServices'
-current-version: 1575
+current-version: 1618.1
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _SharingXPCServicesVersionNumber, _SharingXPCServicesVersionString ]

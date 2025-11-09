@@ -3,24 +3,24 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           28AE1649-22ED-3C4D-A232-29D37F821C39
+    value:           D503EC4A-6B6A-39C4-8218-9F4B6147A5BF
   - target:          x86_64-maccatalyst
-    value:           28AE1649-22ED-3C4D-A232-29D37F821C39
+    value:           D503EC4A-6B6A-39C4-8218-9F4B6147A5BF
   - target:          arm64-macos
-    value:           C3C1B373-AB10-3216-95BA-998C43146888
+    value:           751B1228-240A-3FCF-BC13-9BF29C65C8FC
   - target:          arm64-maccatalyst
-    value:           C3C1B373-AB10-3216-95BA-998C43146888
+    value:           751B1228-240A-3FCF-BC13-9BF29C65C8FC
   - target:          arm64e-macos
-    value:           29AD4E0E-F6A4-313F-AFA3-825CA94917BD
+    value:           EDA2EE02-A2E8-32D6-8456-491AE6711D41
   - target:          arm64e-maccatalyst
-    value:           29AD4E0E-F6A4-313F-AFA3-825CA94917BD
+    value:           EDA2EE02-A2E8-32D6-8456-491AE6711D41
 install-name:    '/usr/lib/system/libmacho.dylib'
-current-version: 973.4
+current-version: 980
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
     umbrella:        System
 exports:
-  - targets:         [ arm64-macos, x86_64-macos, arm64e-macos, x86_64-maccatalyst ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos, x86_64-maccatalyst ]
     symbols:         [ _NXCombineCpuSubtypes, _NXFindBestFatArch, _NXFindBestFatArch_64, 
                        _NXFreeArchInfo, _NXGetAllArchInfos, _NXGetArchInfoFromCpuType, 
                        _NXGetArchInfoFromName, _NXGetLocalArchInfo, _get_edata, _get_end, 

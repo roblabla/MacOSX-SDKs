@@ -28,7 +28,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
  @abstract      Indicates whether a sample has an undetermined duration.
  @discussion    Computed based on the endDate of a sample.
  */
-@property (readonly) BOOL hasUndeterminedDuration API_AVAILABLE(ios(14.0), watchos(7.0));
+@property (readonly) BOOL hasUndeterminedDuration API_AVAILABLE(ios(14.3), watchos(7.2));
 
 
 @end

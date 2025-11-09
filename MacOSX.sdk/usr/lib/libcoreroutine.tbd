@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A35E45AC-8FFF-380D-8911-86183B6916D6
+    value:           A2CD14A7-DC73-3F5B-8552-8ACEDA230C95
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           24CD1B5D-47AB-3D18-BB1B-6B72BB616FA2
+    value:           85CE51BD-06B1-3038-9109-FBB0A6539227
 install-name:    '/usr/lib/libcoreroutine.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

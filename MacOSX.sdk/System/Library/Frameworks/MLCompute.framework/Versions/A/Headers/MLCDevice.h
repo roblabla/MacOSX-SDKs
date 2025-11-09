@@ -57,7 +57,8 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
     @return     A new device object
  */
 + (instancetype _Nullable)deviceWithType:(MLCDeviceType)type
-           selectsMultipleComputeDevices:(BOOL)selectsMultipleComputeDevices;
+           selectsMultipleComputeDevices:(BOOL)selectsMultipleComputeDevices
+    MLCOMPUTE_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5));
 
 /*! @abstract   Create a MLCDevice object
     @discussion This method can be used by developers to select specific GPUs

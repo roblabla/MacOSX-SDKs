@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           C137EEC7-7F23-3D67-9A32-F917AC867E82
+    value:           BDB7F75E-07FE-3FC2-A802-B8A2FC3CC272
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           23B487BC-C0B8-3CFD-82BA-3259C99ABABD
+    value:           21EA6B0B-F286-3D23-A586-73BF62B5D3D5
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices'
-current-version: 610.3.7
+current-version: 611.1.21
 exports:
   - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _ASAuthorizationAppleIDProviderCredentialRevokedNotification, 
@@ -36,7 +36,7 @@ exports:
                        ASCredentialIdentityStore, ASCredentialIdentityStoreState, 
                        ASCredentialProviderExtensionContext, ASCredentialProviderViewController, 
                        ASCredentialServiceIdentifier, ASPasswordCredential, ASPasswordCredentialIdentity, 
-                       ASWebAuthenticationSession, ASWebAuthenticationSessionLaunchAgentProxy, 
-                       ASWebAuthenticationSessionRequest, ASWebAuthenticationSessionRequestClient, 
-                       _ASIncomingCallObserver, _ASWebAuthenticationSessionRequestServer ]
+                       ASWebAuthenticationSession, ASWebAuthenticationSessionRequest, 
+                       ASWebAuthenticationSessionRequestClient, _ASDevice, _ASIncomingCallObserver, 
+                       _ASWebAuthenticationSessionRequestServer ]
 ...

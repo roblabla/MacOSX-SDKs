@@ -1063,11 +1063,11 @@ UT_EXPORT UTType *const UTTypeBZ2 NS_REFINED_FOR_SWIFT;
 UT_EXPORT UTType *const UTTypeZIP NS_REFINED_FOR_SWIFT;
 
 /**
-	\brief An Apple Archive.
+    \brief An Apple Archive.
 
-	UTI: com.apple.archive
+    UTI: com.apple.archive
 
-	conforms to: public.data, public.archive
+    conforms to: public.data, public.archive
 */
 UT_EXPORT UTType *const UTTypeAppleArchive NS_REFINED_FOR_SWIFT;
 

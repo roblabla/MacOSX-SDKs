@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           97DAD512-C60F-3200-B585-FE8991416A33
+    value:           C3FD4247-B9B2-3698-8ADE-8637CFECA889
   - target:          x86_64-maccatalyst
-    value:           97DAD512-C60F-3200-B585-FE8991416A33
+    value:           C3FD4247-B9B2-3698-8ADE-8637CFECA889
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           76D5A097-ECD3-3000-8D1D-5DF1333FB3CA
+    value:           77D0F31A-1A63-38A7-8A90-CCE018060B58
   - target:          arm64e-maccatalyst
-    value:           76D5A097-ECD3-3000-8D1D-5DF1333FB3CA
+    value:           77D0F31A-1A63-38A7-8A90-CCE018060B58
 install-name:    '/usr/lib/libamsupport.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -164,42 +164,45 @@ exports:
                        _kImg4DecodeSecureBootEc256Sha256, _kImg4DecodeSecureBootEc384Sha384, 
                        _kImg4DecodeSecureBootEc521Sha512, _kImg4DecodeSecureBootRsa1kSha1, 
                        _kImg4DecodeSecureBootRsa3kSha384, _kImg4DecodeSecureBootRsa4kSha384, 
-                       _kImg4DecodeSecureBootRsa4kSha384X86, _kImg4TagStr_AMNM, _kImg4TagStr_BLDS, 
-                       _kImg4TagStr_BNCH, _kImg4TagStr_BNCN, _kImg4TagStr_BORD, _kImg4TagStr_CEPO, 
-                       _kImg4TagStr_CHIP, _kImg4TagStr_CHMH, _kImg4TagStr_CPRO, _kImg4TagStr_CSEC, 
-                       _kImg4TagStr_DGST, _kImg4TagStr_DPRO, _kImg4TagStr_DSEC, _kImg4TagStr_ECID, 
-                       _kImg4TagStr_EKEY, _kImg4TagStr_EPRO, _kImg4TagStr_ESEC, _kImg4TagStr_IM4M, 
-                       _kImg4TagStr_IM4P, _kImg4TagStr_IM4R, _kImg4TagStr_IMG4, _kImg4TagStr_LNCH, 
-                       _kImg4TagStr_MANB, _kImg4TagStr_MANP, _kImg4TagStr_OBJP, _kImg4TagStr_RNCH, 
-                       _kImg4TagStr_RSCH, _kImg4TagStr_SDOM, _kImg4TagStr_SECM, _kImg4TagStr_SNON, 
-                       _kImg4TagStr_agfi, _kImg4TagStr_anrd, _kImg4TagStr_aofi, _kImg4TagStr_apmv, 
-                       _kImg4TagStr_atkh, _kImg4TagStr_augs, _kImg4TagStr_auxi, _kImg4TagStr_auxk, 
-                       _kImg4TagStr_auxp, _kImg4TagStr_auxr, _kImg4TagStr_bat0, _kImg4TagStr_bat1, 
-                       _kImg4TagStr_batf, _kImg4TagStr_bsys, _kImg4TagStr_chg0, _kImg4TagStr_chg1, 
-                       _kImg4TagStr_cmsv, _kImg4TagStr_coih, _kImg4TagStr_csys, _kImg4TagStr_diag, 
-                       _kImg4TagStr_dtre, _kImg4TagStr_dtrs, _kImg4TagStr_efib, _kImg4TagStr_eg0n, 
-                       _kImg4TagStr_eg0t, _kImg4TagStr_eg1n, _kImg4TagStr_eg1t, _kImg4TagStr_eg3n, 
-                       _kImg4TagStr_eg3t, _kImg4TagStr_esca, _kImg4TagStr_euou, _kImg4TagStr_ftap, 
+                       _kImg4DecodeSecureBootRsa4kSha384DDI, _kImg4DecodeSecureBootRsa4kSha384X86, 
+                       _kImg4TagStr_AMNM, _kImg4TagStr_BLDS, _kImg4TagStr_BNCH, _kImg4TagStr_BNCN, 
+                       _kImg4TagStr_BORD, _kImg4TagStr_CEPO, _kImg4TagStr_CHIP, _kImg4TagStr_CHMH, 
+                       _kImg4TagStr_CPRO, _kImg4TagStr_CSEC, _kImg4TagStr_DGST, _kImg4TagStr_DPRO, 
+                       _kImg4TagStr_DSEC, _kImg4TagStr_ECID, _kImg4TagStr_EKEY, _kImg4TagStr_EPRO, 
+                       _kImg4TagStr_ESEC, _kImg4TagStr_IM4M, _kImg4TagStr_IM4P, _kImg4TagStr_IM4R, 
+                       _kImg4TagStr_IMG4, _kImg4TagStr_LNCH, _kImg4TagStr_MANB, _kImg4TagStr_MANP, 
+                       _kImg4TagStr_OBJP, _kImg4TagStr_RNCH, _kImg4TagStr_RSCH, _kImg4TagStr_SDOM, 
+                       _kImg4TagStr_SECM, _kImg4TagStr_SNON, _kImg4TagStr_agfi, _kImg4TagStr_anrd, 
+                       _kImg4TagStr_aofi, _kImg4TagStr_apmv, _kImg4TagStr_atkh, _kImg4TagStr_augs, 
+                       _kImg4TagStr_auxi, _kImg4TagStr_auxk, _kImg4TagStr_auxp, _kImg4TagStr_auxr, 
+                       _kImg4TagStr_bat0, _kImg4TagStr_bat1, _kImg4TagStr_batf, _kImg4TagStr_bsys, 
+                       _kImg4TagStr_chg0, _kImg4TagStr_chg1, _kImg4TagStr_ckih, _kImg4TagStr_cmsv, 
+                       _kImg4TagStr_coih, _kImg4TagStr_csys, _kImg4TagStr_diag, _kImg4TagStr_dtre, 
+                       _kImg4TagStr_dtrs, _kImg4TagStr_efib, _kImg4TagStr_eg0n, _kImg4TagStr_eg0t, 
+                       _kImg4TagStr_eg1n, _kImg4TagStr_eg1t, _kImg4TagStr_eg3n, _kImg4TagStr_eg3t, 
+                       _kImg4TagStr_esca, _kImg4TagStr_euou, _kImg4TagStr_fpgt, _kImg4TagStr_ftap, 
                        _kImg4TagStr_ftot, _kImg4TagStr_ftsp, _kImg4TagStr_fuos, _kImg4TagStr_glyc, 
                        _kImg4TagStr_glyp, _kImg4TagStr_hclo, _kImg4TagStr_hrlp, _kImg4TagStr_ibec, 
                        _kImg4TagStr_ibot, _kImg4TagStr_ibss, _kImg4TagStr_illb, _kImg4TagStr_isys, 
                        _kImg4TagStr_iuob, _kImg4TagStr_iuos, _kImg4TagStr_iuou, _kImg4TagStr_kdlv, 
                        _kImg4TagStr_krnl, _kImg4TagStr_kuid, _kImg4TagStr_lobo, _kImg4TagStr_logo, 
-                       _kImg4TagStr_lpnh, _kImg4TagStr_lpol, _kImg4TagStr_ltrs, _kImg4TagStr_manx, 
-                       _kImg4TagStr_mmsv, _kImg4TagStr_mpro, _kImg4TagStr_msec, _kImg4TagStr_msys, 
-                       _kImg4TagStr_nrde, _kImg4TagStr_nsih, _kImg4TagStr_nsrv, _kImg4TagStr_osev, 
-                       _kImg4TagStr_pfle, _kImg4TagStr_pflp, _kImg4TagStr_pndp, _kImg4TagStr_prot, 
-                       _kImg4TagStr_recm, _kImg4TagStr_rfta, _kImg4TagStr_rfts, _kImg4TagStr_ronh, 
-                       _kImg4TagStr_rpnh, _kImg4TagStr_sip0, _kImg4TagStr_sip1, _kImg4TagStr_sip2, 
-                       _kImg4TagStr_sip3, _kImg4TagStr_slvn, _kImg4TagStr_smb0, _kImg4TagStr_smb1, 
-                       _kImg4TagStr_smb2, _kImg4TagStr_smb3, _kImg4TagStr_smb4, _kImg4TagStr_snon, 
-                       _kImg4TagStr_snuf, _kImg4TagStr_srvn, _kImg4TagStr_tbmr, _kImg4TagStr_tbms, 
-                       _kImg4TagStr_trst, _kImg4TagStr_uidm, _kImg4TagStr_vkdl, _kImg4TagStr_vuid, 
-                       _kImg4TagStr_xugs, _oidAdCAIssuer, _oidAdOCSP, _oidAnsip384r1, 
-                       _oidAnsip521r1, _oidAnyExtendedKeyUsage, _oidAnyPolicy, _oidAppleApplicationSigning, 
-                       _oidAppleExtendedKeyUsageAppleID, _oidAppleExtendedKeyUsageShoebox, 
-                       _oidAppleImg4ManifestCertSpec, _oidAppleInstallerPackagingSigningExternal, 
-                       _oidAppleIntmMarkerAppleID, _oidAppleIntmMarkerAppleID2, _oidAppleProvisioningProfile, 
+                       _kImg4TagStr_love, _kImg4TagStr_lpnh, _kImg4TagStr_lpol, _kImg4TagStr_ltrs, 
+                       _kImg4TagStr_manx, _kImg4TagStr_mmsv, _kImg4TagStr_mpro, _kImg4TagStr_msec, 
+                       _kImg4TagStr_msys, _kImg4TagStr_nrde, _kImg4TagStr_nsih, _kImg4TagStr_nsrv, 
+                       _kImg4TagStr_osev, _kImg4TagStr_pfle, _kImg4TagStr_pflp, _kImg4TagStr_pndp, 
+                       _kImg4TagStr_prot, _kImg4TagStr_recm, _kImg4TagStr_rfta, _kImg4TagStr_rfts, 
+                       _kImg4TagStr_rolp, _kImg4TagStr_ronh, _kImg4TagStr_rpnh, _kImg4TagStr_rso0, 
+                       _kImg4TagStr_rso1, _kImg4TagStr_rso2, _kImg4TagStr_rso3, _kImg4TagStr_sip0, 
+                       _kImg4TagStr_sip1, _kImg4TagStr_sip2, _kImg4TagStr_sip3, _kImg4TagStr_slvn, 
+                       _kImg4TagStr_smb0, _kImg4TagStr_smb1, _kImg4TagStr_smb2, _kImg4TagStr_smb3, 
+                       _kImg4TagStr_smb4, _kImg4TagStr_snon, _kImg4TagStr_snuf, _kImg4TagStr_srvn, 
+                       _kImg4TagStr_tbmr, _kImg4TagStr_tbms, _kImg4TagStr_trst, _kImg4TagStr_uidm, 
+                       _kImg4TagStr_vkdl, _kImg4TagStr_vuid, _kImg4TagStr_xugs, _oidAdCAIssuer, 
+                       _oidAdOCSP, _oidAnsip384r1, _oidAnsip521r1, _oidAnyExtendedKeyUsage, 
+                       _oidAnyPolicy, _oidAppleApplicationSigning, _oidAppleExtendedKeyUsageAppleID, 
+                       _oidAppleExtendedKeyUsageShoebox, _oidAppleImg4ManifestCertSpec, 
+                       _oidAppleInstallerPackagingSigningExternal, _oidAppleIntmMarkerAppleID, 
+                       _oidAppleIntmMarkerAppleID2, _oidAppleProvisioningProfile, 
                        _oidApplePushServiceClient, _oidAppleSecureBootCertSpec, _oidAppleSecureBootTicketCertSpec, 
                        _oidAuthorityInfoAccess, _oidAuthorityKeyIdentifier, _oidBasicConstraints, 
                        _oidCertificatePolicies, _oidCommonName, _oidContentType, 

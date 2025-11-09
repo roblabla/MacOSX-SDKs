@@ -18,37 +18,37 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     The AVCaptureSystemPressureLevel string constants describe varying levels of system pressure that affect capture hardware availability and/or quality.
  */
-typedef NSString *AVCaptureSystemPressureLevel NS_STRING_ENUM API_AVAILABLE(ios(11.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+typedef NSString *AVCaptureSystemPressureLevel NS_TYPED_ENUM API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSystemPressureLevelNominal
     System pressure level is normal (not pressured).
  */
-AVF_EXPORT AVCaptureSystemPressureLevel const AVCaptureSystemPressureLevelNominal API_AVAILABLE(ios(11.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+AVF_EXPORT AVCaptureSystemPressureLevel const AVCaptureSystemPressureLevelNominal API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSystemPressureLevelFair
     System pressure is slightly elevated.
  */
-AVF_EXPORT AVCaptureSystemPressureLevel const AVCaptureSystemPressureLevelFair API_AVAILABLE(ios(11.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+AVF_EXPORT AVCaptureSystemPressureLevel const AVCaptureSystemPressureLevelFair API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSystemPressureLevelSerious
     System pressure is highly elevated. Capture performance may be impacted. Frame rate throttling is advised.
  */
-AVF_EXPORT AVCaptureSystemPressureLevel const AVCaptureSystemPressureLevelSerious API_AVAILABLE(ios(11.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+AVF_EXPORT AVCaptureSystemPressureLevel const AVCaptureSystemPressureLevelSerious API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSystemPressureLevelCritical
     System pressure is critically elevated. Capture quality and performance are significantly impacted. Frame rate throttling is highly advised.
  */
-AVF_EXPORT AVCaptureSystemPressureLevel const AVCaptureSystemPressureLevelCritical API_AVAILABLE(ios(11.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+AVF_EXPORT AVCaptureSystemPressureLevel const AVCaptureSystemPressureLevelCritical API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSystemPressureLevelShutdown
     System pressure is beyond critical. Capture must immediately stop.
  */
-AVF_EXPORT AVCaptureSystemPressureLevel const AVCaptureSystemPressureLevelShutdown API_AVAILABLE(ios(11.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+AVF_EXPORT AVCaptureSystemPressureLevel const AVCaptureSystemPressureLevelShutdown API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @enum AVCaptureSystemPressureFactors
@@ -69,7 +69,7 @@ typedef NS_OPTIONS(NSUInteger, AVCaptureSystemPressureFactors) {
     AVCaptureSystemPressureFactorSystemTemperature      = (1UL << 0),
     AVCaptureSystemPressureFactorPeakPower              = (1UL << 1),
     AVCaptureSystemPressureFactorDepthModuleTemperature = (1UL << 2),
-} API_AVAILABLE(ios(11.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+} API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 @class AVCaptureSystemPressureStateInternal;
 
@@ -81,7 +81,7 @@ typedef NS_OPTIONS(NSUInteger, AVCaptureSystemPressureFactors) {
  @discussion
     Beginning in iOS 11.1, AVCaptureDevice can report its current system pressure state. System pressure refers to a state in which capture quality is degraded or capture hardware availability is limited due to factors such as overall system temperature, insufficient battery charge for current peak power requirements, or camera module temperature.
  */
-API_AVAILABLE(ios(11.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos)
 @interface AVCaptureSystemPressureState : NSObject
 {
 @private

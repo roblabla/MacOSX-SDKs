@@ -4,39 +4,41 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F7B963F1-8807-301E-90CE-F7AA8004CB62
+    value:           614903BA-03B2-3990-B13D-10A43E011109
   - target:          x86_64-maccatalyst
-    value:           F7B963F1-8807-301E-90CE-F7AA8004CB62
+    value:           614903BA-03B2-3990-B13D-10A43E011109
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0F08C6BC-4A6E-38A6-9FFE-3D6C704F876D
+    value:           2F9859F9-4BE8-33E8-A222-7615AFB66E0F
   - target:          arm64e-maccatalyst
-    value:           0F08C6BC-4A6E-38A6-9FFE-3D6C704F876D
+    value:           2F9859F9-4BE8-33E8-A222-7615AFB66E0F
 install-name:    '@rpath/PodcastsKit.framework/Versions/A/PodcastsKit'
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ AirPodcasts, AppStoreKit, AppStoreKitTests, AppStoreTests, 
-                       AudioInternalIntentExtension, CorePodcasts, IMDebug, IMUIUtil, 
-                       IntentsExtension, MacPodcastsKit, MacPodcastsStorageExtension, 
-                       MacQuicklookExtension, NanoPodcastsBulletinContents, NanoPodcastsNotificationCenter, 
+    clients:         [ AirPodcasts, AirTrafficDevice, AppStoreKit, AppStoreKitTests, 
+                       AppStoreTests, AudioInternalIntentExtension, CorePodcasts, 
+                       IMDebug, IMUIUtil, IntentsExtension, MTSyncBundle, MacPodcastsKit, 
+                       MacPodcastsStorageExtension, MacQuicklookExtension, MusicLibrary, 
+                       NanoMusicSync, NanoPodcastsBulletinContents, NanoPodcastsNotificationCenter, 
                        NowPlayingUI, PodcastContentService, PodcastContentServiceInspector, 
                        PodcastServices, PodcastServicesCore, PodcastServicesTests_uikitformac, 
                        PodcastServicesTests_mac, Podcasts, PodcastsAnnouncementsNotificationExtension, 
-                       PodcastsAuthAgent, PodcastsBridgeSettings, PodcastsClassKitExtension, 
-                       PodcastsDatabaseCore, PodcastsFoundation, PodcastsFoundationTests, 
-                       PodcastsKit, PodcastsKitTests, PodcastsNanoPreferencesSyncClient, 
+                       PodcastsAuthAgent, PodcastsBridgeSettings, PodcastsCacheDelete, 
+                       PodcastsClassKitExtension, PodcastsDatabaseCore, PodcastsFoundation, 
+                       PodcastsFoundationTests, PodcastsKit, PodcastsKitTests, PodcastsNanoPreferencesSyncClient, 
                        PodcastsNanoPreferencesSyncServer, PodcastsNotificationExtension, 
                        PodcastsPlatformSupport, PodcastsPodcastsTodayExtension, PodcastsStoreUI, 
                        PodcastsStoreUITests, PodcastsTVTopShelfExtension, PodcastsTests, 
                        PodcastsTestsMock, PodcastsTodayExtension, PodcastsUI, PodcastsUITests, 
-                       PodcastsUIUtil, PodcastsWidget, SPI, SiriAudioDESPlugin, SiriAudioHeavyweightTests, 
-                       SiriAudioInternal, SiriAudioInternalTests, SiriAudioSupport, 
-                       SiriAudioSupportIntegrationTests, SiriAudioSupportTests, com.apple.podcasts.DiagnosticExtension, 
+                       PodcastsUIUtil, PodcastsUsageBundle, PodcastsWidget, SPI, 
+                       SiriAudioDESPlugin, SiriAudioHeavyweightTests, SiriAudioInternal, 
+                       SiriAudioInternalTests, SiriAudioSupport, SiriAudioSupportIntegrationTests, 
+                       SiriAudioSupportTests, com.apple.podcasts.DiagnosticExtension, 
                        com.apple.podcasts.PodcastsProductPageExtension, com.apple.podcasts.SpotlightIndexExtension, 
                        com.apple.podcasts.appremoval, iTunesPodcastLibrary, podcastsTool, 
                        siriaudio_helper ]
@@ -54,6 +56,8 @@ exports:
                        '_$s11PodcastsKit11SiriContextC13playbackOrderAA08PlaybackF0OvpMV', 
                        '_$s11PodcastsKit11SiriContextC15hashedRouteUIDsSaySSGSgvg', 
                        '_$s11PodcastsKit11SiriContextC15hashedRouteUIDsSaySSGSgvpMV', 
+                       '_$s11PodcastsKit11SiriContextC16decodedRouteUIDsSaySSGSgvg', 
+                       '_$s11PodcastsKit11SiriContextC16decodedRouteUIDsSaySSGSgvpMV', 
                        '_$s11PodcastsKit11SiriContextC21requesterSharedUserIdSSSgvg', 
                        '_$s11PodcastsKit11SiriContextC21requesterSharedUserIdSSSgvpMV', 
                        '_$s11PodcastsKit11SiriContextC37sharedUserIdFromPlayableITunesAccountSSSgvg', 
@@ -66,6 +70,10 @@ exports:
                        '_$s11PodcastsKit11SiriContextC9assetInfo21requesterSharedUserId06sharediJ25FromPlayableITunesAccount15hashedRouteUIDs09referenceJ0ACSSSg_A2ISaySSGSgAItcfCTj', 
                        '_$s11PodcastsKit11SiriContextC9assetInfo21requesterSharedUserId06sharediJ25FromPlayableITunesAccount15hashedRouteUIDs09referenceJ0ACSSSg_A2ISaySSGSgAItcfCTq', 
                        '_$s11PodcastsKit11SiriContextC9assetInfo21requesterSharedUserId06sharediJ25FromPlayableITunesAccount15hashedRouteUIDs09referenceJ0ACSSSg_A2ISaySSGSgAItcfc', 
+                       '_$s11PodcastsKit11SiriContextC9assetInfo21requesterSharedUserId06sharediJ25FromPlayableITunesAccount16decodedRouteUIDs09referenceJ013playbackOrderACSSSg_A2JSaySSGSgAjA08PlaybackU0OtcfC', 
+                       '_$s11PodcastsKit11SiriContextC9assetInfo21requesterSharedUserId06sharediJ25FromPlayableITunesAccount16decodedRouteUIDs09referenceJ013playbackOrderACSSSg_A2JSaySSGSgAjA08PlaybackU0OtcfCTj', 
+                       '_$s11PodcastsKit11SiriContextC9assetInfo21requesterSharedUserId06sharediJ25FromPlayableITunesAccount16decodedRouteUIDs09referenceJ013playbackOrderACSSSg_A2JSaySSGSgAjA08PlaybackU0OtcfCTq', 
+                       '_$s11PodcastsKit11SiriContextC9assetInfo21requesterSharedUserId06sharediJ25FromPlayableITunesAccount16decodedRouteUIDs09referenceJ013playbackOrderACSSSg_A2JSaySSGSgAjA08PlaybackU0Otcfc', 
                        '_$s11PodcastsKit11SiriContextC9assetInfo21requesterSharedUserId06sharediJ25FromPlayableITunesAccountACSSSg_A2GtcfC', 
                        '_$s11PodcastsKit11SiriContextC9assetInfo21requesterSharedUserId06sharediJ25FromPlayableITunesAccountACSSSg_A2GtcfCTj', 
                        '_$s11PodcastsKit11SiriContextC9assetInfo21requesterSharedUserId06sharediJ25FromPlayableITunesAccountACSSSg_A2GtcfCTq', 
@@ -162,7 +170,9 @@ exports:
                        '_$s11PodcastsKit8ProviderCfD', _PodcastsKitVersionNumber, 
                        _PodcastsKitVersionString, _kMTCollectionViewInterItemSpacing, 
                        _kMTCollectionViewInterLineSpacing, _kMTCollectionViewVerticalSectionInset, 
-                       _kMTPreferredArtworkSize, _kMTSharingArtworkSize, _kSetPlaybackQueueEnqueuerKeyDSID, 
+                       _kMTIntentsArtworkSize, _kMTPreferredArtworkSize, _kMTPreferredLogoArtworkSize, 
+                       _kMTPreferredShowUberArtworkHeight, _kMTPreferredShowUberArtworkWidth, 
+                       _kMTSharingArtworkSize, _kSetPlaybackQueueEnqueuerKeyDSID, 
                        _kSetPlaybackQueueRequesterSharedUserIdKey, _kSetPlaybackQueueSharedUserIdKey ]
     objc-classes:    [ MTAccountController, MTExtensionPlaybackController, MTMediaTask, 
                        MTPlaybackIdentifierUtil, MTSingleton, MTSingletonHolder, 

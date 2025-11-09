@@ -30,6 +30,7 @@ extern PKPaymentNetwork const PKPaymentNetworkJCB API_AVAILABLE(macos(11.0), ios
 extern PKPaymentNetwork const PKPaymentNetworkMada API_AVAILABLE(macos(11.0), ios(12.1.1), watchos(5.1.2));
 extern PKPaymentNetwork const PKPaymentNetworkMaestro API_AVAILABLE(macos(11.0), ios(12.0), watchos(5.0));
 extern PKPaymentNetwork const PKPaymentNetworkMasterCard API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0));
+extern PKPaymentNetwork const PKPaymentNetworkMir API_AVAILABLE(macos(11.5), ios(14.5), watchos(7.5));
 extern PKPaymentNetwork const PKPaymentNetworkPrivateLabel API_AVAILABLE(macos(11.0), ios(9.0), watchos(3.0));
 extern PKPaymentNetwork const PKPaymentNetworkQuicPay API_AVAILABLE(macos(11.0), ios(10.3), watchos(3.2));
 extern PKPaymentNetwork const PKPaymentNetworkSuica API_AVAILABLE(macos(11.0), ios(10.1), watchos(3.1));
@@ -84,5 +85,11 @@ typedef NS_ENUM(NSInteger, PKPaymentButtonType) {
     PKPaymentButtonTypeContribute  API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0)),
     PKPaymentButtonTypeTip  API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0))
 } API_AVAILABLE(macos(11.0), ios(8.3), watchos(3.0));
+
+typedef NS_OPTIONS(NSUInteger, PKRadioTechnology) {
+    PKRadioTechnologyNone        = 0,
+    PKRadioTechnologyNFC         = 1 << 0,
+    PKRadioTechnologyBluetooth   = 1 << 1,
+} API_AVAILABLE(ios(14.5), watchos(7.3));
 
 #endif // PKCONSTANTS_H

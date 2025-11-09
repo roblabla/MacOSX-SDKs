@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A7A3AEEE-1D86-381B-854E-AD629F4A0138
+    value:           A1E63C1B-E06B-3DE1-9C96-77E1A412D6DA
   - target:          x86_64-maccatalyst
-    value:           A7A3AEEE-1D86-381B-854E-AD629F4A0138
+    value:           A1E63C1B-E06B-3DE1-9C96-77E1A412D6DA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E7A900F6-1E97-3ADB-96EE-A995712E1B85
+    value:           66D7385A-F955-3939-BC93-040D74F8E709
   - target:          arm64e-maccatalyst
-    value:           E7A900F6-1E97-3ADB-96EE-A995712E1B85
+    value:           66D7385A-F955-3939-BC93-040D74F8E709
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices'
-current-version: 1122.11
+current-version: 1122.33
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -53,19 +53,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           947E614C-885F-31E4-89F3-EF7E93989536
+    value:           5377134F-CCA8-3610-8888-8598115A8E8F
   - target:          x86_64-maccatalyst
-    value:           947E614C-885F-31E4-89F3-EF7E93989536
+    value:           5377134F-CCA8-3610-8888-8598115A8E8F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D6278F79-0393-3F91-B77A-6670B00570BE
+    value:           3737110E-66A8-3E93-AF93-FCD46EAC0AC8
   - target:          arm64e-maccatalyst
-    value:           D6278F79-0393-3F91-B77A-6670B00570BE
+    value:           3737110E-66A8-3E93-AF93-FCD46EAC0AC8
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE'
-current-version: 918
+current-version: 918.4
 compatibility-version: 0
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -152,13 +152,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9C615967-6D8E-307F-B028-6278A4FA7C8C
+    value:           C43BE82A-9E75-39C3-807F-2E87B97B7A78
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4A7CBA4E-46D7-3C12-9E87-20C15E4FACE6
+    value:           D052CD4F-456B-3F0F-B17E-C3893CB5B602
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore'
-current-version: 1307
+current-version: 1307.2
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        CoreServices
@@ -806,17 +806,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           83CDCE83-6B48-35F1-BACF-83240D940777
+    value:           FFC38615-B3CC-395B-8658-4B159A9A0AC2
   - target:          x86_64-maccatalyst
-    value:           83CDCE83-6B48-35F1-BACF-83240D940777
+    value:           FFC38615-B3CC-395B-8658-4B159A9A0AC2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0B2A9791-DAE5-3D19-B10E-834F807455DE
+    value:           C25BFE81-0A70-3CA9-BBB0-2F0C50F42C86
   - target:          arm64e-maccatalyst
-    value:           0B2A9791-DAE5-3D19-B10E-834F807455DE
+    value:           C25BFE81-0A70-3CA9-BBB0-2F0C50F42C86
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices'
 current-version: 341
 parent-umbrella:
@@ -824,7 +824,7 @@ parent-umbrella:
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DCSActivateDictionaryPanel, _DCSCopyActiveDictionaries, _DCSCopyAvailableDictionaries, 
                        _DCSCopyDefinitionMarkup, _DCSCopyDefinitionRecords, _DCSCopyDefinitions, 
@@ -889,19 +889,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FB18B8D7-C7F5-3CAB-B538-3F4B4E85D1F1
+    value:           43164A51-72ED-30E1-8F28-40B3598BCF5C
   - target:          x86_64-maccatalyst
-    value:           FB18B8D7-C7F5-3CAB-B538-3F4B4E85D1F1
+    value:           43164A51-72ED-30E1-8F28-40B3598BCF5C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           09DE727C-4BA5-33B7-9811-5F0CA5C86F31
+    value:           E8B4A343-E15A-3A4D-BFA4-F2318FF8EBA1
   - target:          arm64e-maccatalyst
-    value:           09DE727C-4BA5-33B7-9811-5F0CA5C86F31
+    value:           E8B4A343-E15A-3A4D-BFA4-F2318FF8EBA1
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents'
-current-version: 1290.40.2
+current-version: 1290.101.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -925,19 +925,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CAEEC254-68AE-39B5-8452-EC3E1EE8577B
+    value:           CBFF2714-646C-3DDB-906D-672E420683E6
   - target:          x86_64-maccatalyst
-    value:           CAEEC254-68AE-39B5-8452-EC3E1EE8577B
+    value:           CBFF2714-646C-3DDB-906D-672E420683E6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D9D92910-FF1A-3868-ABB6-C0E1A256A95B
+    value:           126E5536-55D7-31B0-919A-275EF3EA81A1
   - target:          arm64e-maccatalyst
-    value:           D9D92910-FF1A-3868-ABB6-C0E1A256A95B
+    value:           126E5536-55D7-31B0-919A-275EF3EA81A1
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices'
-current-version: 1122.11
+current-version: 1122.33
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1239,12 +1239,12 @@ exports:
                        __kLSOpenOptionActivateKey, __kLSOpenOptionAddToRecentsKey, 
                        __kLSOpenOptionAllowConflictResolutionUIKey, __kLSOpenOptionAllowErrorUIKey, 
                        __kLSOpenOptionAllowLoginUIKey, __kLSOpenOptionAlwaysOpenPasteboardContentsKey, 
-                       __kLSOpenOptionArchitectureKey, __kLSOpenOptionArgumentsKey, 
-                       __kLSOpenOptionBackgroundLaunchInformationKey, __kLSOpenOptionBackgroundLaunchKey, 
-                       __kLSOpenOptionBackgroundLaunchReasonKey, __kLSOpenOptionCaptureDiagnosticsKey, 
-                       __kLSOpenOptionEnableURLOverridesKey, __kLSOpenOptionEnvironmentVariablesKey, 
-                       __kLSOpenOptionForegroundLaunchKey, __kLSOpenOptionHideKey, 
-                       __kLSOpenOptionHideOthersKey, __kLSOpenOptionInitialAppleEventKey, 
+                       __kLSOpenOptionArchitectureKey, __kLSOpenOptionArchitectureSubtypeKey, 
+                       __kLSOpenOptionArgumentsKey, __kLSOpenOptionBackgroundLaunchInformationKey, 
+                       __kLSOpenOptionBackgroundLaunchKey, __kLSOpenOptionBackgroundLaunchReasonKey, 
+                       __kLSOpenOptionCaptureDiagnosticsKey, __kLSOpenOptionEnableURLOverridesKey, 
+                       __kLSOpenOptionEnvironmentVariablesKey, __kLSOpenOptionForegroundLaunchKey, 
+                       __kLSOpenOptionHideKey, __kLSOpenOptionHideOthersKey, __kLSOpenOptionInitialAppleEventKey, 
                        __kLSOpenOptionLaunchSessionIDDKey, __kLSOpenOptionLaunchStdErrPathKey, 
                        __kLSOpenOptionLaunchStdInPathKey, __kLSOpenOptionLaunchStdOutPathKey, 
                        __kLSOpenOptionLaunchUIDKey, __kLSOpenOptionLaunchedByPersistenceKey, 
@@ -1380,19 +1380,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4CE16D2B-CE04-360A-86D2-2F0F8449E502
+    value:           FCCD84AD-EDFA-310E-B607-FFC464419716
   - target:          x86_64-maccatalyst
-    value:           4CE16D2B-CE04-360A-86D2-2F0F8449E502
+    value:           FCCD84AD-EDFA-310E-B607-FFC464419716
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6F845F28-4399-36D6-95CE-23DBB548165A
+    value:           D6E78FFE-7627-3A3B-A87B-69F17EB99A1D
   - target:          arm64e-maccatalyst
-    value:           6F845F28-4399-36D6-95CE-23DBB548165A
+    value:           D6E78FFE-7627-3A3B-A87B-69F17EB99A1D
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata'
-current-version: 2150.6
+current-version: 2150.16
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1857,19 +1857,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           870F34BE-C0ED-318B-858D-5F1E4757D552
+    value:           4B4148C5-9CFB-3AA1-89B0-0EB988C0BCD2
   - target:          x86_64-maccatalyst
-    value:           870F34BE-C0ED-318B-858D-5F1E4757D552
+    value:           4B4148C5-9CFB-3AA1-89B0-0EB988C0BCD2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EFFA0C4E-A0C1-3970-BE40-A0A46A35C180
+    value:           99622793-6045-36D0-B959-EB6FD06202C0
   - target:          arm64e-maccatalyst
-    value:           EFFA0C4E-A0C1-3970-BE40-A0A46A35C180
+    value:           99622793-6045-36D0-B959-EB6FD06202C0
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices'
-current-version: 1122.11
+current-version: 1122.33
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -2011,17 +2011,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7BDD2800-BDDC-3DE0-A4A8-B1E855130E3B
+    value:           F54991CF-B1D9-338F-97D7-25E0675E24CA
   - target:          x86_64-maccatalyst
-    value:           7BDD2800-BDDC-3DE0-A4A8-B1E855130E3B
+    value:           F54991CF-B1D9-338F-97D7-25E0675E24CA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A1F87D4-B5D2-3F0D-B732-FA696B45B882
+    value:           0242259D-4D21-310C-B81B-550FDA314126
   - target:          arm64e-maccatalyst
-    value:           7A1F87D4-B5D2-3F0D-B732-FA696B45B882
+    value:           0242259D-4D21-310C-B81B-550FDA314126
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit'
 current-version: 417.1
 parent-umbrella:
@@ -2151,17 +2151,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           93D2192D-7A27-3FD4-B3AB-A4DCBF8419B7
+    value:           D8521DF0-1AA2-3157-AE32-7C88AB78C803
   - target:          x86_64-maccatalyst
-    value:           93D2192D-7A27-3FD4-B3AB-A4DCBF8419B7
+    value:           D8521DF0-1AA2-3157-AE32-7C88AB78C803
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           44F30AE5-8DC1-3726-8D6E-8811972BDB60
+    value:           2A184E5F-21E6-3CDF-A08E-DE721305B1DD
   - target:          arm64e-maccatalyst
-    value:           44F30AE5-8DC1-3726-8D6E-8811972BDB60
+    value:           2A184E5F-21E6-3CDF-A08E-DE721305B1DD
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList'
 current-version: 144
 parent-umbrella:
@@ -2173,13 +2173,13 @@ allowable-clients:
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Foundation ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SFLListChangeNotification, _SFLListLaunchNotification, _SFLServiceName, 
                        _kSFLDefaultsDomain ]
     objc-classes:    [ SFLBookmark, SFLDefaults, SFLItem, SFLManager, SFLResolveResult, 
                        _SFLItem, _SFLList ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _LSSharedFileListAddObserver, _LSSharedFileListAddObserverOnQueue, 
                        _LSSharedFileListCopyProperty, _LSSharedFileListCopySnapshot, 
                        _LSSharedFileListCreate, _LSSharedFileListGetSeedValue, _LSSharedFileListGetTypeID, 

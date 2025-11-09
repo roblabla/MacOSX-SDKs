@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5084CF0A-5B8D-3F64-B36D-9CA7E55E6751
+    value:           20F2C336-936D-3EC9-896F-0745BC8911C4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           97E6DD08-A68A-361C-99A7-76E2ED7E192A
+    value:           487D6351-02E1-3F01-94E4-C625064F1F36
 install-name:    '/System/Library/PrivateFrameworks/FamilyCircleUI.framework/Versions/A/FamilyCircleUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -18,5 +18,5 @@ exports:
     objc-classes:    [ FACircularImageView, FACreateChildController, FAInviteLinkMetadata, 
                        FAInviteLinkMetadataProvider, FAMugshotMarqueeView, FAProfilePictureStore, 
                        FASharedServicesResponse, FASharingController, FASharingTransportItem, 
-                       FASharingTransportItemView, FASharingViewController, FASignedOutFamilyInvitationPrompt ]
+                       FASharingTransportItemView, FASharingViewController ]
 ...

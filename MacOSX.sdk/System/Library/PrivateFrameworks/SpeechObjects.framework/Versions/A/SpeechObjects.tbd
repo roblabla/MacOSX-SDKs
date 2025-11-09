@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DC1B8139-E8E1-39FF-A764-32B771C57150
+    value:           7032A4A0-0A15-31ED-9FEB-638FFAA74A5C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           29C081E7-387E-39E1-AA56-4F124F1F9A54
+    value:           A9D0026D-2038-3054-B296-6CBB0C71FD8D
 install-name:    '/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/SpeechObjects'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -103,7 +103,7 @@ exports:
                        SOUtteranceResultsFile._rxGrammar, SOUtteranceResultsFile._streamDescription, 
                        SOUtteranceResultsFile._utteranceResults, SOVoiceObject._downloadPercentComplete, 
                        SOVoiceObject._downloadStatus, SOVoiceObject._visibility, 
-                       SOVoiceObject._voiceAttributes, SOVoicePopUpButton._allowSystemVoiceChoice, 
+                       SOVoiceObject._voice, SOVoiceObject._voiceAttributes, SOVoicePopUpButton._allowSystemVoiceChoice, 
                        SOVoicePopUpButton._downloadDisplayManager, SOVoicePopUpButton._downloadStatusProgressIndicator, 
                        SOVoicePopUpButton._downloadStatusTextField, SOVoicePopUpButton._downloadStatusUpdateTimer, 
                        SOVoicePopUpButton._fixedRateVoiceIdentifiers, SOVoicePopUpButton._previouslyChosenVoiceIdentifier, 

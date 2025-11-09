@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9BC4F9DA-B6B8-353B-B78C-B463C7DAB46D
+    value:           712903C9-D820-3DC0-969C-A39B552ABB2C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3AA44727-A0FD-310F-8B15-7CD5B18E4F8D
+    value:           3A515EF7-7899-3D16-8433-D143C6162335
 install-name:    '/System/Library/PrivateFrameworks/SpotlightDaemon.framework/Versions/A/SpotlightDaemon'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

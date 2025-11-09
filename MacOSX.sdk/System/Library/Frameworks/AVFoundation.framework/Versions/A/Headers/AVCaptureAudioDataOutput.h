@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     Instances of AVCaptureAudioDataOutput produce audio sample buffers suitable for processing using other media APIs. Applications can access the sample buffers with the captureOutput:didOutputSampleBuffer:fromConnection: delegate method.
  */
-API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureAudioDataOutput : AVCaptureOutput
 {
 @private
@@ -84,7 +84,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     The value of this property is an NSDictionary containing values for audio settings keys defined in AVAudioSettings.h. When audioSettings is set to nil, the AVCaptureAudioDataOutput vends samples in their device native format.
  */
-@property(nonatomic, copy, null_resettable) NSDictionary<NSString *, id> *audioSettings API_UNAVAILABLE(ios, watchos, tvos);
+@property(nonatomic, copy, null_resettable) NSDictionary<NSString *, id> *audioSettings API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 /*!
  @method recommendedAudioSettingsForAssetWriterWithOutputFileType:
@@ -105,7 +105,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  
     Note that the dictionary of settings is dependent on the current configuration of the receiver's AVCaptureSession and its inputs. The settings dictionary may change if the session's configuration changes. As such, you should configure your session first, then query the recommended audio settings.
  */
-- (nullable NSDictionary *)recommendedAudioSettingsForAssetWriterWithOutputFileType:(AVFileType)outputFileType API_AVAILABLE(macos(10.15), ios(7.0));
+- (nullable NSDictionary *)recommendedAudioSettingsForAssetWriterWithOutputFileType:(AVFileType)outputFileType API_AVAILABLE(macos(10.15), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -115,7 +115,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @abstract
     Defines an interface for delegates of AVCaptureAudioDataOutput to receive captured audio sample buffers.
  */
-API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @protocol AVCaptureAudioDataOutputSampleBufferDelegate <NSObject>
 
 @optional

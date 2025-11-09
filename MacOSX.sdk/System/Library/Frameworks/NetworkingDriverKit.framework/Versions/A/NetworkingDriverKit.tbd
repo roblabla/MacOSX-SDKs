@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9E4E89CD-AFD8-373E-AF85-5D8E22F4EA6F
+    value:           9BEC9F74-D6F1-3CBA-86BB-40DB65D741AB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B9C734A8-394F-33A8-91C5-932203FA98E7
+    value:           003BE543-3DE0-33D3-B883-8E7F924E1A61
 install-name:    '/System/Library/Frameworks/NetworkingDriverKit.framework/Versions/A/NetworkingDriverKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _IOUserNetworkEthernet_Class, _IOUserNetworkPacketBufferPool_Class, 
                        _IOUserNetworkPacketQueue_Class, _IOUserNetworkPacket_Class, 
                        _IOUserNetworkRxCompletionQueue_Class, _IOUserNetworkRxSubmissionQueue_Class, 

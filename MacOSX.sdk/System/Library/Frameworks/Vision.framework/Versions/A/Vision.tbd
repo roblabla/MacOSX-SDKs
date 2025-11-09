@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           18691D25-6A04-3A02-A495-0306D00BEED6
+    value:           A35D0DD2-8F19-368A-88CF-E264C79EA736
   - target:          x86_64-maccatalyst
-    value:           18691D25-6A04-3A02-A495-0306D00BEED6
+    value:           A35D0DD2-8F19-368A-88CF-E264C79EA736
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           67C63C7A-5F95-3FF3-A246-BA6873D0754C
+    value:           B9419EF8-6648-3291-8C65-C3122811FDF1
   - target:          arm64e-maccatalyst
-    value:           67C63C7A-5F95-3FF3-A246-BA6873D0754C
+    value:           B9419EF8-6648-3291-8C65-C3122811FDF1
 install-name:    '/System/Library/Frameworks/Vision.framework/Versions/A/Vision'
-current-version: 4.1.2
+current-version: 4.2.6
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CCRectLowLevel, _VN0af6454e97767772ce64a19ddaf61f0c, _VN1HsiXmKrxTsH8TYOuN5s7G3uHSP75iYS, 
                        _VN1I7oR8JHxER2i7d6nQxNtHhGXxkJuH7c, _VN1PwKd46IDZj2ErCN9d1fTn3FuN3h4d9p, 
@@ -156,15 +156,17 @@ exports:
                        _VNNormalizedImageRectForNormalizedRegionOfInterestRect, _VNNormalizedPointForImagePoint, 
                        _VNNormalizedRectForImageRect, _VNNormalizedRectIsIdentityRect, 
                        _VNPdH78Lr962vQvRIq2JApX2QJZtbR3fvi, _VNPersonsModelErrorDomain, 
-                       _VNPotentialLandmarkIdentifier, _VNRecognizedPointGroupKeyAll, 
-                       _VNRequestHandlerCleanupOption_AllPipelines, _VNRequestHandlerCleanupOption_FacePipeline, 
-                       _VNRequestHandlerCleanupOption_ImageBuffers, _VNRequestHandlerCleanupOption_JunkPipeline, 
-                       _VNRequestHandlerCleanupOption_ScenePipeline, _VNRequestHandlerCleanupOption_SmartCamPipeline, 
-                       _VNRequestWarningBlinkDetectionFailure, _VNRequestWarningImageMinimumLongDimension, 
-                       _VNRequestWarningImageMinimumShortDimension, _VNRequestWarningImageTooSmall, 
-                       _VNRequestWarningImageTooSmallForFaceObservations, _VNSY8t4EoTztuqIL02g8uVA0, 
-                       _VNScenePrintsFromPixelBuffers, _VNScenePrintsFromPixelBuffersUsesCPUOnly, 
-                       _VNScenePrintsFromURL, _VNScenePrintsFromURLUsesCPUOnly, _VNSceneprintSupportedRevisions, 
+                       _VNPotentialLandmarkIdentifier, _VNRecognizeDocumentElementIdentifierAppCode, 
+                       _VNRecognizeDocumentElementIdentifierQRCode, _VNRecognizeDocumentElementIdentifierText, 
+                       _VNRecognizedPointGroupKeyAll, _VNRequestHandlerCleanupOption_AllPipelines, 
+                       _VNRequestHandlerCleanupOption_FacePipeline, _VNRequestHandlerCleanupOption_ImageBuffers, 
+                       _VNRequestHandlerCleanupOption_JunkPipeline, _VNRequestHandlerCleanupOption_ScenePipeline, 
+                       _VNRequestHandlerCleanupOption_SmartCamPipeline, _VNRequestWarningBlinkDetectionFailure, 
+                       _VNRequestWarningImageMinimumLongDimension, _VNRequestWarningImageMinimumShortDimension, 
+                       _VNRequestWarningImageTooSmall, _VNRequestWarningImageTooSmallForFaceObservations, 
+                       _VNSY8t4EoTztuqIL02g8uVA0, _VNScenePrintsFromPixelBuffers, 
+                       _VNScenePrintsFromPixelBuffersUsesCPUOnly, _VNScenePrintsFromURL, 
+                       _VNScenePrintsFromURLUsesCPUOnly, _VNSceneprintSupportedRevisions, 
                        _VNSequenceRequestHandlerOption_LoggingCallback, _VNTextRecognitionOptionASCIICharacterSet, 
                        _VNTextRecognitionOptionDanishCharacterSet, _VNTextRecognitionOptionDutchCharacterSet, 
                        _VNTextRecognitionOptionEnglishCharacterSet, _VNTextRecognitionOptionFrenchCharacterSet, 
@@ -222,7 +224,8 @@ exports:
                        VNNOPRequest, VNObservation, VNPersonsModel, VNPersonsModelConfiguration, 
                        VNPersonsModelInformation, VNPersonsModelPrediction, VNPersonsModelReadOptions, 
                        VNPersonsModelWriteOptions, VNPhotosRequestHandler, VNPixelBufferObservation, 
-                       VNPoint, VNProcessingDevice, VNRecognizeAnimalsRequest, VNRecognizeFoodAndDrinkRequest, 
+                       VNPoint, VNProcessingDevice, VNRecognizeAnimalsRequest, VNRecognizeDocumentElementsRequest, 
+                       VNRecognizeDocumentElementsRequestElementConfiguration, VNRecognizeFoodAndDrinkRequest, 
                        VNRecognizeObjectsRequest, VNRecognizeTextRequest, VNRecognizedObjectObservation, 
                        VNRecognizedPoint, VNRecognizedPointsObservation, VNRecognizedText, 
                        VNRecognizedTextObservation, VNRectangleObservation, VNRequest, 

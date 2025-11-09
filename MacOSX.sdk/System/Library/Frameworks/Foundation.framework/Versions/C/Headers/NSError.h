@@ -23,6 +23,9 @@ typedef NSString *NSErrorUserInfoKey;
 // Key in userInfo. A recommended standard way to embed NSErrors from underlying calls. The value of this key should be an NSError.
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSUnderlyingErrorKey;
 
+// Key in userInfo. A recommended standard way to embed a list of several NSErrors from underlying calls. The value of this key should be an NSArray of NSError. This value is independent from the value of `NSUnderlyingErrorKey` - neither, one, or both may be set.
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSMultipleUnderlyingErrorsKey API_AVAILABLE(macos(11.3), ios(14.5), watchos(7.4), tvos(14.5));
+
 // Keys in userInfo, for subsystems wishing to provide their error messages up-front. Note that NSError will also consult the userInfoValueProvider for the domain when these values are not present in the userInfo dictionary.
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedDescriptionKey;             // NSString, a complete sentence (or more) describing ideally both what failed and why it failed.
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedFailureReasonErrorKey;      // NSString, a complete sentence (or more) describing why the operation failed.
@@ -90,6 +93,9 @@ FOUNDATION_EXPORT NSErrorUserInfoKey const NSFilePathErrorKey;         // NSStri
 */
 @property (nullable, readonly, copy) NSString *helpAnchor;
 
+/* Return a list of underlying errors, if any. It includes the values of both NSUnderlyingErrorKey and NSMultipleUnderlyingErrorsKey. If there are no underlying errors, returns an empty array.
+*/
+@property (readonly, copy) NSArray<NSError *> *underlyingErrors API_AVAILABLE(macos(11.3), ios(14.5), watchos(7.4), tvos(14.5));
 
 /* Specify a block which will be called from the implementations of localizedDescription, localizedFailureReason, localizedRecoverySuggestion, localizedRecoveryOptions, recoveryAttempter, helpAnchor, and debugDescription when the underlying value for these is not present in the userInfo dictionary of NSError instances with the specified domain.  The provider will be called with the userInfo key corresponding to the queried property: For instance, NSLocalizedDescriptionKey for localizedDescription.  The provider should return nil for any keys it is not able to provide and, very importantly, any keys it does not recognize (since we may extend the list of keys in future releases).
 

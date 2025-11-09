@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6E2CD005-175A-3E20-A455-284C65AADD9D
+    value:           564AF34F-959B-33ED-82F6-9EA11B020EEE
   - target:          x86_64-maccatalyst
-    value:           6E2CD005-175A-3E20-A455-284C65AADD9D
+    value:           564AF34F-959B-33ED-82F6-9EA11B020EEE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3DFD0863-9B13-3207-AB9F-920FC0B6866F
+    value:           B8DA7301-99C1-32EF-8E91-FD68068ACC43
   - target:          arm64e-maccatalyst
-    value:           3DFD0863-9B13-3207-AB9F-920FC0B6866F
+    value:           B8DA7301-99C1-32EF-8E91-FD68068ACC43
 install-name:    '/System/Library/PrivateFrameworks/InertiaCam.framework/Versions/A/InertiaCam'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

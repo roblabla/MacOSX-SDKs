@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           16AA3D67-89A5-3082-8C91-CAD9C794DDF7
+    value:           828D6963-A3D0-37BD-A281-23E43CDCF80E
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           C611AB57-B8E4-3EA1-B99D-534E632C1F4F
+    value:           50CAD69D-197D-3732-A86F-3785A688FFE4
 install-name:    '/System/iOSSupport/System/Library/Frameworks/GameKit.framework/Versions/A/GameKit'
-current-version: 775.14.4
+current-version: 785.20
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/ModelIO.framework/Versions/A/ModelIO', 
@@ -28,17 +28,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0C720D11-06A8-340D-B0E4-5AC76A53BBDE
+    value:           45AB58EF-F47D-3901-AD19-2B6A02CF112B
   - target:          x86_64-maccatalyst
-    value:           0C720D11-06A8-340D-B0E4-5AC76A53BBDE
+    value:           45AB58EF-F47D-3901-AD19-2B6A02CF112B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E502318D-4545-3FCE-9F29-DA9D174118DF
+    value:           5275F2CB-D69A-3ACD-90DE-E680A2E69FBF
   - target:          arm64e-maccatalyst
-    value:           E502318D-4545-3FCE-9F29-DA9D174118DF
+    value:           5275F2CB-D69A-3ACD-90DE-E680A2E69FBF
 install-name:    '/System/Library/PrivateFrameworks/GameCenterFoundation.framework/Versions/A/GameCenterFoundation'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -53,18 +53,20 @@ exports:
                        _GKAnonymousPlayerID, _GKAppDataKey, _GKAppLaunchTime, _GKAppStoreBinaryIdentifier, 
                        _GKAppStoreGameUISample, _GKAppStoreIdentifier, _GKAppStoreKitIdentifier, 
                        _GKAppStoreProductPageExtensionIdentifier, _GKAppStoreSuscribePageExtensionIdentifier, 
-                       _GKAppStoreWidget, _GKAppleIDKey, _GKApplicationLinkedOnOrAfter, 
+                       _GKAppStoreWidgetIdentifier, _GKAppleIDKey, _GKApplicationLinkedOnOrAfter, 
                        _GKApplicationWithIdentifierIsInstalled, _GKApplicationsChangeNotificationName, 
                        _GKArcadeIdentifier, _GKArcadeTopShelfExtensionIdentifier, 
-                       _GKAtomicCompareAndSwap32, _GKAtomicCompareAndSwap32Barrier, 
+                       _GKArcadeWidgetIdentifier, _GKAtomicCompareAndSwap32, _GKAtomicCompareAndSwap32Barrier, 
                        _GKAtomicCompareAndSwapPtrBarrier, _GKAtomicDecrement32, _GKAtomicDecrement32Barrier, 
                        _GKAtomicIncrement32, _GKAtomicIncrement32Barrier, _GKAuthenticateAlertKey, 
                        _GKAuthenticateAlertMessageKey, _GKAuthenticateAlertTitleKey, 
                        _GKAuthenticateExtensionIdentifier, _GKAuthenticateResponseTime, 
                        _GKAuthorizeAccountURLKey, _GKAutomatchedTogether, _GKAutomatchedTogetherKey, 
                        _GKAvatarSubdirectoryNameForPlayerID, _GKAvatarTypeKey, _GKBagKey, 
-                       _GKBagKeyGetAchievement, _GKBagKeyGetFindFriendsMetadata, 
-                       _GKBagKeyGetFriendIDs, _GKBagKeyGetGamesPlayed, _GKBagKeyGetLeaderboard, 
+                       _GKBagKeyGetAchievement, _GKBagKeyGetAllowFriendListAccessForAllGames, 
+                       _GKBagKeyGetFindFriendsMetadata, _GKBagKeyGetFriendIDs, _GKBagKeyGetGamesPlayed, 
+                       _GKBagKeyGetLeaderboard, _GKBagKeyGetPerGameFriendPlayerIDs, 
+                       _GKBagKeyGetPerGameSettings, _GKBagKeySetPerGameSettings, 
                        _GKBlacklistedContactIdKey, _GKBundleIDKey, _GKBundleShortVersionKey, 
                        _GKBundleVersionKey, _GKCDXKey, _GKCacheInvialidationKey, 
                        _GKCacheInvialidationStoreBagKey, _GKCacheRoot, _GKCancelledGameInviteNotification, 
@@ -139,54 +141,65 @@ exports:
                        _GKGameLayerDashboardTimeSpentOnArcadeScreen, _GKGameLayerDashboardTimeSpentOnChallengesScreen, 
                        _GKGameLayerDashboardTimeSpentOnLeaderboardsScreen, _GKGameLayerDashboardTimeSpentOnMainScreen, 
                        _GKGameLayerDashboardTimeSpentOnPlayerProfileScreen, _GKGameMetadataKey, 
-                       _GKGamePlayerIDKey, _GKGameSessionErrorDomain, _GKGetApplicationDidEnterBackgroundNotificationName, 
-                       _GKGetApplicationStateForBundleID, _GKGetApplicationWillEnterForegroundNotificationName, 
-                       _GKGetApplicationWillTerminateNotificationName, _GKGetGamesPlayedDescriptorsWithinSecondsKey, 
-                       _GKGetGamesPlayedMetadataWithinSecondsKey, _GKGetLocalizedStringFromTableInBundle, 
-                       _GKGetProtocolVersionString, _GKGetSystemLocalizedStringFromTableInBundle, 
-                       _GKHTTPShouldUsePipelining, _GKHideFriendRecommendationSendContactsButtonKey, 
-                       _GKICETimeoutKey, _GKIDSLookupPushResponsePlayerID, _GKIDSLookupPushSenderCloudID, 
+                       _GKGamePlayerIDKey, _GKGameScopedIDPrefix, _GKGameSessionErrorDomain, 
+                       _GKGetApplicationDidEnterBackgroundNotificationName, _GKGetApplicationStateForBundleID, 
+                       _GKGetApplicationWillEnterForegroundNotificationName, _GKGetApplicationWillTerminateNotificationName, 
+                       _GKGetGamesPlayedDescriptorsWithinSecondsKey, _GKGetGamesPlayedMetadataWithinSecondsKey, 
+                       _GKGetLocalizedStringFromTableInBundle, _GKGetProtocolVersionString, 
+                       _GKGetSystemLocalizedStringFromTableInBundle, _GKGlobalFriendListAccessAllowed, 
+                       _GKGlobalFriendListAccessDenied, _GKGlobalFriendListAccessKey, 
+                       _GKGlobalFriendListAccessUndetermined, _GKHTTPShouldUsePipelining, 
+                       _GKHideFriendRecommendationSendContactsButtonKey, _GKICETimeoutKey, 
+                       _GKIDSLookupPushResponsePlayerID, _GKIDSLookupPushSenderCloudID, 
                        _GKIForgotURLKey, _GKImageCachePathForSubdirectoryAndFilename, 
                        _GKImageCachePathForURL, _GKImageCacheRoot, _GKImageURLKeyForSize, 
-                       _GKImageURLKeyForSizeAndScale, _GKImportFriendsKey, _GKInitiatedGameInviteToThisFriend, 
-                       _GKInitiatedGameInviteToThisFriendKey, _GKInternalTurnBasedGameEventNotification, 
-                       _GKInternetAccountsIdentifier, _GKInvitableKey, _GKInviteAccepted, 
-                       _GKInviteAdamIDKey, _GKInviteCompatibleShortVersionsKey, _GKInviteCompatibleVersionsKey, 
-                       _GKInviteFlowComposeCancel, _GKInviteFlowConnectingCancel, 
-                       _GKInviteFlowContactsPlayer, _GKInviteFlowDetailAdd, _GKInviteFlowDetailCancel, 
-                       _GKInviteFlowDetailSelection, _GKInviteFlowFriendPlayer, _GKInviteFlowInitialCancel, 
-                       _GKInviteFlowInviteFriends, _GKInviteFlowMessageBasedInvites, 
-                       _GKInviteFlowNearByPlayer, _GKInviteFlowPlayNow, _GKInviteFlowPushedBasedInvites, 
-                       _GKInviteFlowRTGameFailed, _GKInviteFlowRTInviteeConnectionTime, 
-                       _GKInviteFlowRTNoOfInvitees, _GKInviteFlowSendMessage, _GKInviteFlowStart, 
-                       _GKInviteFlowTypesInContacts, _GKInviteGameIDKey, _GKInviteGameVersionKey, 
-                       _GKInviteIDKey, _GKInviteIsReinvite, _GKInviteMessageKey, 
-                       _GKInviteOriginatorPlayerKey, _GKInvitePeerBlobKey, _GKInvitePeerNATIPKey, 
-                       _GKInvitePeerNATTypeKey, _GKInviteProtocolName, _GKInviteeUILaunchTime, 
-                       _GKIsFriendKey, _GKLastNameKey, _GKLastPlayedBundleIDKey, 
-                       _GKLastPlayedBundleVersionKey, _GKLastPlayedGameIDKey, _GKLastPlayedTimeKey, 
-                       _GKLastProtocolVersionUsedKey, _GKLastSeenTimestamp, _GKLaunchApplicationWithIdentifier, 
+                       _GKImageURLKeyForSizeAndScale, _GKImportFriendsKey, _GKInfoPlistKeyFriendsAPIUsageDescription, 
+                       _GKInitiatedGameInviteToThisFriend, _GKInitiatedGameInviteToThisFriendKey, 
+                       _GKInternalTurnBasedGameEventNotification, _GKInternetAccountsIdentifier, 
+                       _GKInvitableKey, _GKInviteAccepted, _GKInviteAdamIDKey, _GKInviteCompatibleShortVersionsKey, 
+                       _GKInviteCompatibleVersionsKey, _GKInviteFlowComposeCancel, 
+                       _GKInviteFlowConnectingCancel, _GKInviteFlowContactsPlayer, 
+                       _GKInviteFlowDetailAdd, _GKInviteFlowDetailCancel, _GKInviteFlowDetailSelection, 
+                       _GKInviteFlowFriendPlayer, _GKInviteFlowInitialCancel, _GKInviteFlowInviteFriends, 
+                       _GKInviteFlowMessageBasedInvites, _GKInviteFlowNearByPlayer, 
+                       _GKInviteFlowPlayNow, _GKInviteFlowPushedBasedInvites, _GKInviteFlowRTGameFailed, 
+                       _GKInviteFlowRTInviteeConnectionTime, _GKInviteFlowRTNoOfInvitees, 
+                       _GKInviteFlowSendMessage, _GKInviteFlowStart, _GKInviteFlowTypesInContacts, 
+                       _GKInviteGameIDKey, _GKInviteGameVersionKey, _GKInviteIDKey, 
+                       _GKInviteIsReinvite, _GKInviteMessageKey, _GKInviteOriginatorPlayerKey, 
+                       _GKInvitePeerBlobKey, _GKInvitePeerNATIPKey, _GKInvitePeerNATTypeKey, 
+                       _GKInviteProtocolName, _GKInviteeUILaunchTime, _GKIsFriendKey, 
+                       _GKLastNameKey, _GKLastPlayedBundleIDKey, _GKLastPlayedBundleVersionKey, 
+                       _GKLastPlayedGameIDKey, _GKLastPlayedTimeKey, _GKLastProtocolVersionUsedKey, 
+                       _GKLastSeenTimestamp, _GKLaunchApplicationWithIdentifier, 
                        _GKLaunchApplicationWithIdentifierAndURL, _GKLeaderboardTimeScopeKey, 
                        _GKLoggerFor, _GKLoginAppInit, _GKLoginSignIn, _GKLoginSignOut, 
                        _GKMatchClientDataKey, _GKMatchPushTokenKey, _GKMatchmakerExtensionIdentifier, 
                        _GKMatchmakerMatchRID, _GKMatchmakerProtocolName, _GKMaxGameStateSizeTurnBased, 
                        _GKMaxPlayersHosted, _GKMaxPlayersP2P, _GKMaxPlayersTurnBased, 
                        _GKMaxRecentPlayersCount, _GKMaxRecentPlayersTime, _GKMessageInviteInitiate, 
-                       _GKMessageInviteProcessingTime, _GKMultiplayerCancelTimeDelayInSeconds, 
-                       _GKNATTimeoutKey, _GKNATTypeKey, _GKNearbyEnabledKey, _GKNearbyInviteInitiate, 
-                       _GKNumberOfAchievementPointsKey, _GKNumberOfAchievementsKey, 
-                       _GKNumberOfFriendsInCommonKey, _GKNumberOfFriendsKey, _GKNumberOfGamesInCommonKey, 
-                       _GKNumberOfGamesPlayedKey, _GKOSLogInit, _GKParticipantIndexKey, 
-                       _GKParticipantStatusAllTrace, _GKParticipantStatusFailureTrace, 
-                       _GKParticipantStatusKey, _GKPhotoPendingKey, _GKPhotoURLsKey, 
-                       _GKPhotosChangedKey, _GKPickerSearchBarClicked, _GKPineboardIdentifier, 
-                       _GKPlayerAuthenticationDidChangeNotificationName, _GKPlayerDescriptorKey, 
-                       _GKPlayerDidAuthenticateNewPlayerIDKey, _GKPlayerDidAuthenticateNotificationKeyPlayersSignedIn, 
-                       _GKPlayerDidAuthenticateNotificationKeyPlayersSignedOut, _GKPlayerDidAuthenticateOldPlayerIDKey, 
-                       _GKPlayerDidChangeNotificationName, _GKPlayerIDHashAddKey, 
-                       _GKPlayerIDHashModKey, _GKPlayerIDKey, _GKPlayerIDNoLongerAvailable, 
-                       _GKPlayerProfileAchievementsByGameClicked, _GKPlayerProfileAddFriendsClicked, 
-                       _GKPlayerProfileFriendsListClicked, _GKPlayerProfileNearbyPlayersButtonToggled, 
+                       _GKMessageInviteProcessingTime, _GKMultiplayerAllowedTypeReceivedNotification, 
+                       _GKMultiplayerCancelTimeDelayInSeconds, _GKNATTimeoutKey, 
+                       _GKNATTypeKey, _GKNearbyDataReceivedNotification, _GKNearbyEnabledKey, 
+                       _GKNearbyInviteInitiate, _GKNearbyPlayerFoundNotification, 
+                       _GKNearbyPlayerLostNotification, _GKNumberOfAchievementPointsKey, 
+                       _GKNumberOfAchievementsKey, _GKNumberOfFriendsInCommonKey, 
+                       _GKNumberOfFriendsKey, _GKNumberOfGamesInCommonKey, _GKNumberOfGamesPlayedKey, 
+                       _GKOSLogInit, _GKParticipantIndexKey, _GKParticipantStatusAllTrace, 
+                       _GKParticipantStatusFailureTrace, _GKParticipantStatusKey, 
+                       _GKPhotoPendingKey, _GKPhotoURLsKey, _GKPhotosChangedKey, 
+                       _GKPickerSearchBarClicked, _GKPineboardIdentifier, _GKPlayerAuthenticationDidChangeNotificationName, 
+                       _GKPlayerDescriptorKey, _GKPlayerDidAuthenticateNewPlayerIDKey, 
+                       _GKPlayerDidAuthenticateNotificationKeyPlayersSignedIn, _GKPlayerDidAuthenticateNotificationKeyPlayersSignedOut, 
+                       _GKPlayerDidAuthenticateOldPlayerIDKey, _GKPlayerDidChangeNotificationName, 
+                       _GKPlayerIDHashAddKey, _GKPlayerIDHashModKey, _GKPlayerIDKey, 
+                       _GKPlayerIDNoLongerAvailable, _GKPlayerProfileAchievementsByGameClicked, 
+                       _GKPlayerProfileAddFriendsClicked, _GKPlayerProfileFriendListAccessClicked, 
+                       _GKPlayerProfileFriendsAPICheckAuthorizationStatusCalled, 
+                       _GKPlayerProfileFriendsAPIDeveloperAccessRestricted, _GKPlayerProfileFriendsAPIGlobalAccessToggled, 
+                       _GKPlayerProfileFriendsAPIIndividualAccessToggled, _GKPlayerProfileFriendsAPILoadFriendsListCalled, 
+                       _GKPlayerProfileFriendsAPILoadFriendsListCount, _GKPlayerProfileFriendsListClicked, 
+                       _GKPlayerProfileNearbyPlayersButtonToggled, _GKPlayerProfilePrivacyAndSettingsClicked, 
                        _GKPlayerProfilePrivacyClicked, _GKPlayerProfileRecentlyPlayedWithClicked, 
                        _GKPlayerProfileSettingsClicked, _GKPlayerProfileSignInButtonClicked, 
                        _GKPlayerProfileSignOutButtonClicked, _GKPlayerStatusKey, 
@@ -195,17 +208,22 @@ exports:
                        _GKPrivacySettingsFriendsKey, _GKPrivacySettingsGamesPlayedKey, 
                        _GKPrivacySettingsKey, _GKProgramaticInviteTime, _GKPurpleBuddyIdentifier, 
                        _GKPushCommandKey, _GKPushDataKey, _GKPushEnvironmentKey, 
-                       _GKPushInviteInitiate, _GKPushProtocolKey, _GKPushTokenKey, 
-                       _GKQueryParamsBagKey, _GKRTAllConnectionAttempt, _GKRTAllMatchSuccess, 
-                       _GKRTAllMatchTotal, _GKRTAutoMatchSuccess, _GKRTAutoMatchTotal, 
-                       _GKRTConnectionSuccessP2P, _GKRTConnectionSuccessRelay, _GKRTIndirectMatchSuccess, 
-                       _GKRTIndirectMatchTotal, _GKRTMessageBasedMatchSuccess, _GKRTMessageBasedMatchTotal, 
+                       _GKPushFriendsAuthorizationStatus, _GKPushFriendsAuthorizationStatusAuthorized, 
+                       _GKPushFriendsAuthorizationStatusDenied, _GKPushFriendsAuthorizationStatusNotDetermined, 
+                       _GKPushFriendsAuthorizationStatusRemoved, _GKPushInviteInitiate, 
+                       _GKPushProtocolKey, _GKPushTokenKey, _GKQueryParamsBagKey, 
+                       _GKRTAllConnectionAttempt, _GKRTAllMatchSuccess, _GKRTAllMatchTotal, 
+                       _GKRTAutoMatchSuccess, _GKRTAutoMatchTotal, _GKRTConnectionSuccessP2P, 
+                       _GKRTConnectionSuccessRelay, _GKRTIndirectMatchSuccess, _GKRTIndirectMatchTotal, 
+                       _GKRTMessageBasedMatchSuccess, _GKRTMessageBasedMatchTotal, 
                        _GKRTNearbyMatchSuccess, _GKRTNearbyMatchTotal, _GKRTPushBasedMatchSuccess, 
                        _GKRTPushBasedMatchTotal, _GKRefreshSeedKey, _GKRejectFriendRequestIDs, 
                        _GKRelayNotification, _GKRemoteUIAuthorizeAccountURLKey, _GKRemoteUIChangePasswordURLKey, 
                        _GKRemoteUIEditAccountURLKey, _GKRemoteUILinkAccountsURLKey, 
-                       _GKRemoteUIReportProblemURLKey, _GKReportProblemURLKey, _GKReporterAccessPointButtonTapped, 
-                       _GKReporterAccessPointDisabled, _GKReporterAccessPointEnabled, 
+                       _GKRemoteUIReportProblemURLKey, _GKReportProblemURLKey, _GKReporterAccessPointAchievementHighlightTapped, 
+                       _GKReporterAccessPointButtonTapped, _GKReporterAccessPointDisabled, 
+                       _GKReporterAccessPointEnabled, _GKReporterAccessPointForYouHighlightTapped, 
+                       _GKReporterAccessPointHighlightTapped, _GKReporterAccessPointLeaderboardHighlightTapped, 
                        _GKReporterChallengeAbort, _GKReporterChallengeIssue, _GKReporterDomainArcadeDashboard, 
                        _GKReporterDomainArcadeForYouTapped, _GKReporterDomainArcadeNewArcadeGamesTapped, 
                        _GKReporterDomainArcadeOpenInTheAppStoreTapped, _GKReporterDomainArcadeSeeAllFriendsPlayingTapped, 
@@ -217,13 +235,16 @@ exports:
                        _GKReporterDomainInviteNearbyResponse, _GKReporterDomainInviteParticipantStatusUpdate, 
                        _GKReporterDomainInviteReceivedTime, _GKReporterDomainLogin, 
                        _GKReporterDomainManualFriending, _GKReporterDomainMatch, 
-                       _GKReporterDomainOnboardingEvent, _GKReporterDomainPlayerAuthentication, 
-                       _GKReporterDomainPlayerProfileDashboard, _GKReporterDomainPushCount, 
-                       _GKReporterDomainRTMultiplayerConnectionResult, _GKReporterDomainRTMultiplayerConnectionType, 
-                       _GKReporterDomainRelay, _GKReporterDomainSettings, _GKReporterDomainTournamentAction, 
+                       _GKReporterDomainMultiplayerContactSelected, _GKReporterDomainMultiplayerFriendSelected, 
+                       _GKReporterDomainMultiplayerNearbySelected, _GKReporterDomainMultiplayerPlayerSelectionDashboard, 
+                       _GKReporterDomainMultiplayerRecentlyPlayedWithSelected, _GKReporterDomainOnboardingEvent, 
+                       _GKReporterDomainPlayerAuthentication, _GKReporterDomainPlayerProfileDashboard, 
+                       _GKReporterDomainPushCount, _GKReporterDomainRTMultiplayerConnectionResult, 
+                       _GKReporterDomainRTMultiplayerConnectionType, _GKReporterDomainRelay, 
+                       _GKReporterDomainSettings, _GKReporterDomainTournamentAction, 
                        _GKReporterDomainTournamentView, _GKReporterDomainTurnBased, 
-                       _GKReporterGameDetailShowStorePage, _GKReporterHighlightedAccessPointDisplayed, 
-                       _GKReporterHighlightedAccessPointTapped, _GKReporterInviteAcceptApp, 
+                       _GKReporterGameDetailShowStorePage, _GKReporterGameMetadata, 
+                       _GKReporterHighlightedAccessPointDisplayed, _GKReporterInviteAcceptApp, 
                        _GKReporterInviteAcceptNearby, _GKReporterInviteAcceptUser, 
                        _GKReporterInviteCancel, _GKReporterInviteCancelNearby, _GKReporterInviteDeclineCantConnect, 
                        _GKReporterInviteDeclineDoNotDisturb, _GKReporterInviteDeclineIncompatible, 
@@ -274,41 +295,43 @@ exports:
                        _GKReporterTurnBasedShowMatch, _GKRequestStatusKey, _GKSAPExcludedResponse, 
                        _GKSAPIncludedResponse, _GKSAPSetup, _GKSAPSetupCertURL, _GKSAPVersion, 
                        _GKSandboxedKey, _GKScoresThrottleThreshold, _GKServerErrorDomain, 
-                       _GKServerHostedKey, _GKServerStatusCode, _GKSessionErrorDomain, 
-                       _GKSessionPushCloudContainer, _GKSessionPushData, _GKSessionPushLocalizableMessage, 
-                       _GKSessionPushOriginatingDeviceType, _GKSessionPushSenderID, 
-                       _GKSessionPushSenderName, _GKSessionPushSessionIdentifier, 
+                       _GKServerHostedKey, _GKServerPlatformStringMacOS, _GKServerPlatformStringTVOS, 
+                       _GKServerPlatformStringWatchOS, _GKServerPlatformStringiOS, 
+                       _GKServerStatusCode, _GKSessionErrorDomain, _GKSessionPushCloudContainer, 
+                       _GKSessionPushData, _GKSessionPushLocalizableMessage, _GKSessionPushOriginatingDeviceType, 
+                       _GKSessionPushSenderID, _GKSessionPushSenderName, _GKSessionPushSessionIdentifier, 
                        _GKSessionPushShareURL, _GKSessionPushUserMessage, _GKSessionRateLimiting, 
                        _GKSetActiveLogBits, _GKSetupAccountURLKey, _GKSpringboardIdentifier, 
                        _GKStashStackTrace, _GKStashedStackTrace, _GKSupportDataRoot, 
                        _GKSupportLogRoot, _GKTVAppStoreIdentifier, _GKTVAppStoreTopShelfExtensionIdentifier, 
-                       _GKTVSettingsIdentifier, _GKTeamPlayerIDKey, _GKTotalInviteReceivedTime, 
-                       _GKTournamentAuto, _GKTournamentAutoDetail, _GKTournamentAutoList, 
-                       _GKTournamentCreation, _GKTournamentCustom, _GKTournamentCustomDetail, 
-                       _GKTournamentCustomList, _GKTournamentErrorDomain, _GKTournamentExtensionIdentifier, 
-                       _GKTournamentHistoryList, _GKTournamentPlay, _GKTournamentRegister, 
-                       _GKTournamentResign, _GKTournamentStandings, _GKTournamentSubmitScore, 
-                       _GKTurnBasedGameDataCacheRoot, _GKTurnBasedMatchmakerExtensionIdentifier, 
-                       _GKTurnTimeoutDefault, _GKTurnTimeoutNone, _GKUISetRemote, 
-                       _GKURLComponentFriendRequest, _GKURLComponentFriends, _GKURLComponentGame, 
-                       _GKURLComponentGameCenterScheme, _GKURLComponentGames, _GKURLComponentHTTPSScheme, 
-                       _GKURLComponentHTTPScheme, _GKURLComponentHostProduction, 
-                       _GKURLComponentHostSandbox, _GKURLComponentHostTD1External, 
-                       _GKURLComponentHostTD1Internal, _GKURLComponentHostTD2External, 
-                       _GKURLComponentHostTD2Internal, _GKURLComponentHostTD3External, 
-                       _GKURLComponentHostTD3Internal, _GKURLComponentHostTD4External, 
-                       _GKURLComponentHostTD4Internal, _GKURLComponentITMSGCSScheme, 
-                       _GKURLComponentITMSGCScheme, _GKURLComponentMe, _GKURLComponentPlayer, 
-                       _GKURLComponentRecommendations, _GKURLComponentRequests, _GKURLComponentStore, 
-                       _GKUnavailablePlayerID, _GKUnderageKey, _GKUniqueTestCachePath, 
-                       _GKUnknownPlayerID, _GKVerifiedKey, _GKVoiceChatServiceErrorDomain, 
-                       _NSRangeInRange, __GKIsRemoteUI, __gkBeautifyVariableName, 
-                       __gkMarkFileAsPurgeable, __gkTabStringForTabLevel, __gkUnicodifyDescription, 
-                       _compatiblePlatforms, _constructCompatiblePlatforms, _dispatch_async_join, 
-                       _existingGamePlatforms, _gkEnsureDirectory, _gk_dispatch_as_group, 
-                       _gk_dispatch_async_do, _gk_dispatch_debounce, _gk_dispatch_debounce_do, 
-                       _gk_dispatch_group_do, _os_log_GKLogAccount, _os_log_GKLogAccountError, 
-                       _os_log_GKLogCache, _os_log_GKLogDaemon, _os_log_GKLogDeveloper, 
+                       _GKTVSettingsIdentifier, _GKTeamPlayerIDKey, _GKTeamScopedIDPrefix, 
+                       _GKTotalInviteReceivedTime, _GKTournamentAuto, _GKTournamentAutoDetail, 
+                       _GKTournamentAutoList, _GKTournamentCreation, _GKTournamentCustom, 
+                       _GKTournamentCustomDetail, _GKTournamentCustomList, _GKTournamentErrorDomain, 
+                       _GKTournamentExtensionIdentifier, _GKTournamentHistoryList, 
+                       _GKTournamentPlay, _GKTournamentRegister, _GKTournamentResign, 
+                       _GKTournamentStandings, _GKTournamentSubmitScore, _GKTurnBasedGameDataCacheRoot, 
+                       _GKTurnBasedMatchmakerExtensionIdentifier, _GKTurnTimeoutDefault, 
+                       _GKTurnTimeoutNone, _GKUISetRemote, _GKURLComponentFriendRequest, 
+                       _GKURLComponentFriends, _GKURLComponentGame, _GKURLComponentGameCenterScheme, 
+                       _GKURLComponentGames, _GKURLComponentHTTPSScheme, _GKURLComponentHTTPScheme, 
+                       _GKURLComponentHostProduction, _GKURLComponentHostSandbox, 
+                       _GKURLComponentHostTD1External, _GKURLComponentHostTD1Internal, 
+                       _GKURLComponentHostTD2External, _GKURLComponentHostTD2Internal, 
+                       _GKURLComponentHostTD3External, _GKURLComponentHostTD3Internal, 
+                       _GKURLComponentHostTD4External, _GKURLComponentHostTD4Internal, 
+                       _GKURLComponentITMSGCSScheme, _GKURLComponentITMSGCScheme, 
+                       _GKURLComponentMe, _GKURLComponentPlayer, _GKURLComponentRecommendations, 
+                       _GKURLComponentRequests, _GKURLComponentStore, _GKUnavailablePlayerID, 
+                       _GKUnderageKey, _GKUniqueTestCachePath, _GKUnknownPlayerID, 
+                       _GKVerifiedKey, _GKVoiceChatServiceErrorDomain, _NSRangeInRange, 
+                       __GKIsRemoteUI, __gkBeautifyVariableName, __gkMarkFileAsPurgeable, 
+                       __gkTabStringForTabLevel, __gkUnicodifyDescription, _compatiblePlatforms, 
+                       _constructCompatiblePlatforms, _dispatch_async_join, _existingGamePlatforms, 
+                       _gkEnsureDirectory, _gk_dispatch_as_group, _gk_dispatch_async_do, 
+                       _gk_dispatch_debounce, _gk_dispatch_debounce_do, _gk_dispatch_group_do, 
+                       _os_log_GKLogAccount, _os_log_GKLogAccountError, _os_log_GKLogCache, 
+                       _os_log_GKLogCollectionView, _os_log_GKLogDaemon, _os_log_GKLogDeveloper, 
                        _os_log_GKLogDispatch, _os_log_GKLogError, _os_log_GKLogGeneral, 
                        _os_log_GKLogHTTP, _os_log_GKLogHosted, _os_log_GKLogMatch, 
                        _os_log_GKLogPerf, _os_log_GKLogTrace ]
@@ -329,17 +352,18 @@ exports:
                        GKDispatchGroup, GKEventEmitter, GKFamiliarPlayerInternal, 
                        GKFriendPlayerInternal, GKFriendRecommendationInternal, GKFriendRequestInternal, 
                        GKFriendServiceInterface, GKFriendServicePrivateInterface, 
-                       GKGame, GKGameDescriptor, GKGameInternal, GKGameMatch, GKGameRecommendationInternal, 
-                       GKGameRecord, GKGameRecordInternal, GKGameServiceInterface, 
-                       GKGameServicePrivateInterface, GKGameSession, GKGameSessionServiceInterface, 
-                       GKGameSessionServicePrivateInterface, GKGameStatServiceInterface, 
-                       GKGameStatServicePrivateInterface, GKGameSummaryInternal, 
-                       GKHostReachability, GKInternalRepresentation, GKInvite, GKInviteInternal, 
-                       GKJoinGroup, GKJoinGroupNotifier, GKLeaderboard, GKLeaderboardEntry, 
-                       GKLeaderboardEntryInternal, GKLeaderboardInternal, GKLeaderboardScore, 
-                       GKLeaderboardScorePlayersRequest, GKLeaderboardScoreRangeRequest, 
-                       GKLeaderboardScoreRequest, GKLeaderboardSet, GKLeaderboardSetInternal, 
-                       GKLeaderboardSummary, GKLeaderboardSummaryInternal, GKLinkedAccountsServiceInterface, 
+                       GKGame, GKGameDescriptor, GKGameHighlightInternal, GKGameInternal, 
+                       GKGameMatch, GKGameRecommendationInternal, GKGameRecord, GKGameRecordInternal, 
+                       GKGameServiceInterface, GKGameServicePrivateInterface, GKGameSession, 
+                       GKGameSessionServiceInterface, GKGameSessionServicePrivateInterface, 
+                       GKGameSettingsInternal, GKGameStatServiceInterface, GKGameStatServicePrivateInterface, 
+                       GKGameSummaryInternal, GKHostReachability, GKInternalRepresentation, 
+                       GKInvite, GKInviteInternal, GKJoinGroup, GKJoinGroupNotifier, 
+                       GKLeaderboard, GKLeaderboardEntry, GKLeaderboardEntryInternal, 
+                       GKLeaderboardInternal, GKLeaderboardScore, GKLeaderboardScorePlayersRequest, 
+                       GKLeaderboardScoreRangeRequest, GKLeaderboardScoreRequest, 
+                       GKLeaderboardSet, GKLeaderboardSetInternal, GKLeaderboardSummary, 
+                       GKLeaderboardSummaryInternal, GKLinkedAccountsServiceInterface, 
                        GKLinkedAccountsServicePrivateInterface, GKLocalPlayer, GKLocalPlayerInternal, 
                        GKMatch, GKMatchRequest, GKMatchRequestInternal, GKMatchResponse, 
                        GKMatchmaker, GKMultiplayerServiceInterface, GKMultiplayerServicePrivateInterface, 
@@ -377,7 +401,8 @@ exports:
                        GKPlayerCredential._authenticationToken, GKPlayerCredential._environment, 
                        GKPlayerCredential._playerInternal, GKPlayerCredential._rawPassword, 
                        GKPlayerCredential._scope, GKPlayerCredential._scopeModificationDate, 
-                       GKPlayerInternal._flags, GKReachability.localWiFiRef, GKReachability.reachabilityRef, 
+                       GKPlayerInternal._flags, GKPlayerInternal._globalFriendListAccess, 
+                       GKReachability.localWiFiRef, GKReachability.reachabilityRef, 
                        GKRecoveryAttempter._attemptRecovery ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _GKURLComponentAcceptFriendRequest, _GKURLComponentChangePassword, 
@@ -389,17 +414,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2FCAAE87-3E0A-38F1-B1E0-27C699ADF9D0
+    value:           9E05A0AD-6B35-3D10-94DA-DEDAF74FDD02
   - target:          x86_64-maccatalyst
-    value:           2FCAAE87-3E0A-38F1-B1E0-27C699ADF9D0
+    value:           9E05A0AD-6B35-3D10-94DA-DEDAF74FDD02
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B0B43E92-919C-3ED8-9284-50DF8B2ABD01
+    value:           C5F47441-DC38-3925-A7F5-593F382222D3
   - target:          arm64e-maccatalyst
-    value:           B0B43E92-919C-3ED8-9284-50DF8B2ABD01
+    value:           C5F47441-DC38-3925-A7F5-593F382222D3
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUICore.framework/Versions/A/GameCenterUICore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -450,11 +475,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           60C1AE52-61EE-3A54-82A8-F5C596E7A5D1
+    value:           761D4154-08CC-36F4-88CF-B251954CEC15
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           1DC4FDC5-0C23-34DF-9574-9BEE99FE4982
+    value:           57B66EFE-CCBB-3349-A905-067C345B504A
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/GameCenterUI.framework/Versions/A/GameCenterUI'
 swift-abi-version: 7
 exports:
@@ -478,11 +503,12 @@ exports:
                        _GKExtensionMessageCommandKey, _GKExtensionMessageDashboardAssetNames, 
                        _GKExtensionMessageLeaderboardNames, _GKExtensionMessageLeaderboardSetNames, 
                        _GKExtensionMessageParamKey, _GKExtensionMessagePlayerID, 
-                       _GKExtensionMessagePlayerInternal, _GKGameCenterExtensionPointName, 
-                       _GKLoadStateContentLoaded, _GKLoadStateError, _GKLoadStateInitial, 
-                       _GKLoadStateLoadingContent, _GKLoadStateNoContent, _GKLoadStateRefreshingContent, 
-                       _GKMatchmakerExtensionBundleIdentifier, _GKServiceInterfaceController, 
-                       _GKTournamentExtensionBundleIdentifier, _GKTurnBasedMatchmakerExtensionBundleIdentifier ]
+                       _GKExtensionMessagePlayerInternal, _GKExtensionVisualEffectGroupName, 
+                       _GKGameCenterExtensionPointName, _GKLoadStateContentLoaded, 
+                       _GKLoadStateError, _GKLoadStateInitial, _GKLoadStateLoadingContent, 
+                       _GKLoadStateNoContent, _GKLoadStateRefreshingContent, _GKMatchmakerExtensionBundleIdentifier, 
+                       _GKServiceInterfaceController, _GKTournamentExtensionBundleIdentifier, 
+                       _GKTurnBasedMatchmakerExtensionBundleIdentifier ]
     objc-classes:    [ GKAccessPoint, GKAchievementViewController, GKAcquireFocusWorkaroundView, 
                        GKAvatarContainerView, GKButton, GKButtonStyle, GKConstraintUpdateController, 
                        GKContiguousContainerView, GKDashboardFocusContainerView, 
@@ -533,22 +559,34 @@ exports:
                        '_$s12GameCenterUI5GKLogV8dispatchyySS_S2SSitFZ', '_$s12GameCenterUI5GKLogV9backtrace5frame____ySi_S3SSitFZ', 
                        '_$s12GameCenterUI5GKLogV9developeryySS_S2SSitFZ', '_$s12GameCenterUI5GKLogVMa', 
                        '_$s12GameCenterUI5GKLogVMn', '_$s12GameCenterUI5GKLogVN', 
-                       '_$s12GameCenterUI9HighlightV2idSSvg', '_$s12GameCenterUI9HighlightV2idSSvpMV', 
-                       '_$s12GameCenterUI9HighlightV5GlyphO10asyncImageyAESo7UIImageCSg_yySayAHGXEctcAEmFWC', 
+                       '_$s12GameCenterUI9HighlightV12appIconWidthSdvgZ', '_$s12GameCenterUI9HighlightV2idSSvg', 
+                       '_$s12GameCenterUI9HighlightV2idSSvpMV', '_$s12GameCenterUI9HighlightV5GlyphO10asyncImageyAESo7UIImageCSg_yySayAHGXEctcAEmFWC', 
                        '_$s12GameCenterUI9HighlightV5GlyphO4noneyA2EmFWC', '_$s12GameCenterUI9HighlightV5GlyphO4viewyAESo6UIViewCcAEmFWC', 
                        '_$s12GameCenterUI9HighlightV5GlyphO5imageyAESo7UIImageCcAEmFWC', 
                        '_$s12GameCenterUI9HighlightV5GlyphO6stringyAESScAEmFWC', 
+                       '_$s12GameCenterUI9HighlightV5GlyphO7appIconyAESo7UIImageCSg_AC0G5StyleOtcAEmFWC', 
                        '_$s12GameCenterUI9HighlightV5GlyphO7attrStryAESo18NSAttributedStringCcAEmFWC', 
                        '_$s12GameCenterUI9HighlightV5GlyphOMa', '_$s12GameCenterUI9HighlightV5GlyphOMn', 
                        '_$s12GameCenterUI9HighlightV5GlyphON', '_$s12GameCenterUI9HighlightV5glyphAC5GlyphOvM', 
                        '_$s12GameCenterUI9HighlightV5glyphAC5GlyphOvg', '_$s12GameCenterUI9HighlightV5glyphAC5GlyphOvpMV', 
                        '_$s12GameCenterUI9HighlightV5glyphAC5GlyphOvs', '_$s12GameCenterUI9HighlightV5titleSSvM', 
                        '_$s12GameCenterUI9HighlightV5titleSSvg', '_$s12GameCenterUI9HighlightV5titleSSvpMV', 
-                       '_$s12GameCenterUI9HighlightV5titleSSvs', '_$s12GameCenterUI9HighlightV7captionSSvM', 
+                       '_$s12GameCenterUI9HighlightV5titleSSvs', '_$s12GameCenterUI9HighlightV6adamIDSo8NSNumberCSgvM', 
+                       '_$s12GameCenterUI9HighlightV6adamIDSo8NSNumberCSgvg', '_$s12GameCenterUI9HighlightV6adamIDSo8NSNumberCSgvpMV', 
+                       '_$s12GameCenterUI9HighlightV6adamIDSo8NSNumberCSgvs', '_$s12GameCenterUI9HighlightV7captionSSvM', 
                        '_$s12GameCenterUI9HighlightV7captionSSvg', '_$s12GameCenterUI9HighlightV7captionSSvpMV', 
-                       '_$s12GameCenterUI9HighlightV7captionSSvs', '_$s12GameCenterUI9HighlightV8subtitleSSvM', 
+                       '_$s12GameCenterUI9HighlightV7captionSSvs', '_$s12GameCenterUI9HighlightV7vibrantSbvM', 
+                       '_$s12GameCenterUI9HighlightV7vibrantSbvg', '_$s12GameCenterUI9HighlightV7vibrantSbvpMV', 
+                       '_$s12GameCenterUI9HighlightV7vibrantSbvs', '_$s12GameCenterUI9HighlightV8subtitleSSvM', 
                        '_$s12GameCenterUI9HighlightV8subtitleSSvg', '_$s12GameCenterUI9HighlightV8subtitleSSvpMV', 
-                       '_$s12GameCenterUI9HighlightV8subtitleSSvs', '_$s12GameCenterUI9HighlightVMa', 
+                       '_$s12GameCenterUI9HighlightV8subtitleSSvs', '_$s12GameCenterUI9HighlightV9IconStyleO2eeoiySbAE_AEtFZ', 
+                       '_$s12GameCenterUI9HighlightV9IconStyleO3iOSyA2EmFWC', '_$s12GameCenterUI9HighlightV9IconStyleO4hash4intoys6HasherVz_tF', 
+                       '_$s12GameCenterUI9HighlightV9IconStyleO4tvOSyA2EmFWC', '_$s12GameCenterUI9HighlightV9IconStyleO5macOSyA2EmFWC', 
+                       '_$s12GameCenterUI9HighlightV9IconStyleO7watchOSyA2EmFWC', 
+                       '_$s12GameCenterUI9HighlightV9IconStyleO9hashValueSivg', '_$s12GameCenterUI9HighlightV9IconStyleO9hashValueSivpMV', 
+                       '_$s12GameCenterUI9HighlightV9IconStyleOMa', '_$s12GameCenterUI9HighlightV9IconStyleOMn', 
+                       '_$s12GameCenterUI9HighlightV9IconStyleON', '_$s12GameCenterUI9HighlightV9IconStyleOSHAAMc', 
+                       '_$s12GameCenterUI9HighlightV9IconStyleOSQAAMc', '_$s12GameCenterUI9HighlightVMa', 
                        '_$s12GameCenterUI9HighlightVMn', '_$s12GameCenterUI9HighlightVN', 
                        '_$s12GameCenterUI9HighlightVs12IdentifiableAAMc', '_$s7SwiftUI17EnvironmentValuesV010GameCenterB0E13visualEffectsAD08GKVisualH0VvM', 
                        '_$s7SwiftUI17EnvironmentValuesV010GameCenterB0E13visualEffectsAD08GKVisualH0Vvg', 
@@ -599,5 +637,8 @@ exports:
                        '_$sSo21GKAchievementInternalC12GameCenterUI15LoadsHighlightsACMc', 
                        '_$sSo21GKAchievementInternalC12GameCenterUI15LoadsHighlightsACWP', 
                        '_$sSo21GKAchievementInternalC12GameCenterUIE14loadHighlights7handleryySayAC9HighlightVGc_tFZ', 
-                       '_$sSo21GKAchievementInternalC12GameCenterUIE20highlightPlaceholderAC9HighlightVvgZ' ]
+                       '_$sSo21GKAchievementInternalC12GameCenterUIE20highlightPlaceholderAC9HighlightVvgZ', 
+                       '_$sSo6GKGameC12GameCenterUI15LoadsHighlightsACMc', '_$sSo6GKGameC12GameCenterUI15LoadsHighlightsACWP', 
+                       '_$sSo6GKGameC12GameCenterUIE14loadHighlights7handleryySayAC9HighlightVGc_tFZ', 
+                       '_$sSo6GKGameC12GameCenterUIE20highlightPlaceholderAC9HighlightVvgZ' ]
 ...

@@ -4,7 +4,7 @@
  Copyright (c) 2019, Apple Inc.
  All rights reserved.
  */
-
+#import <TargetConditionals.h>
 #import <AppKit/NSToolbarItem.h>
 #import <AppKit/NSSharingService.h>
 

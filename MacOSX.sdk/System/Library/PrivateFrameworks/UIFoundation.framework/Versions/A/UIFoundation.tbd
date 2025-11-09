@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           71C63CE5-094D-34AF-B538-8DCAB3B66DE9
+    value:           C815FD3F-C0F0-31F6-B60D-C544D807384F
   - target:          x86_64-maccatalyst
-    value:           71C63CE5-094D-34AF-B538-8DCAB3B66DE9
+    value:           C815FD3F-C0F0-31F6-B60D-C544D807384F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           085965EE-A855-340D-8022-805BB9F45A87
+    value:           9512D44F-5489-3864-BDED-AA6869227461
   - target:          arm64e-maccatalyst
-    value:           085965EE-A855-340D-8022-805BB9F45A87
+    value:           9512D44F-5489-3864-BDED-AA6869227461
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 726.11
+current-version: 728.6
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

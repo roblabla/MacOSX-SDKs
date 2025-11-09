@@ -17,13 +17,20 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /*! @class      MLCReshapeLayer
-    @abstract   A reshape layer
+    @abstract   A reshape layer.
  */
 MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MLCReshapeLayer : MLCLayer
 
-/*! @abstract   Create a reshape layer
- *  @param      shape NSArray<NSNumber *> representing the shape of result tensor 
+/*! @property   shape
+    @abstract   The target shape.
+ */
+@property (readonly, nonatomic, copy) NSArray<NSNumber *> *shape
+    MLCOMPUTE_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5))
+    NS_REFINED_FOR_SWIFT;
+
+/*! @abstract   Creates a reshape layer with the shape you specify.
+ *  @param      shape An array that contains the sizes of each dimension.
  *  @return     A new reshape layer.
  */
 + (instancetype _Nullable)layerWithShape:(NSArray<NSNumber *> *)shape NS_REFINED_FOR_SWIFT;

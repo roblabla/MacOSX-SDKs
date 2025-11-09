@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2F98D661-0F74-3817-A4E7-C1F6DE3047C5
+    value:           620A5ADF-1B00-3E2A-8822-E4689F01DA6A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A8B351AA-2E5B-32C2-A99E-70CE1FB03F1D
+    value:           88C67A37-4AE7-32E8-A947-8A461A5A1A42
 install-name:    '/System/Library/PrivateFrameworks/SpeechRecognitionCommandServices.framework/Versions/A/SpeechRecognitionCommandServices'
 exports:
   - targets:         [ x86_64-macos ]
@@ -48,8 +48,8 @@ exports:
                        _kSRCSCommandTargetTypeiPhone, _kSRCSCommandTargetTypewatchOS, 
                        _yychar, _yyerror, _yylex, _yylval, _yynerrs, _yyparse ]
     objc-classes:    [ CMDPGrammar, CMDPGrammarData, CMDPResult, SRCSCommandRecognitionSystem, 
-                       SRCSCommandRecognizer, SRCSCommandStringsTable, SRCSLexiconManager, 
-                       SRCSPhraseMatchResult, SRCSSpokenCommand, SRCSSpokenCommandUtilities, 
-                       SRCSTextEditing ]
+                       SRCSCommandRecognizer, SRCSCommandSegmentInfo, SRCSCommandStringsTable, 
+                       SRCSLexiconManager, SRCSPhraseMatchResult, SRCSSpokenCommand, 
+                       SRCSSpokenCommandUtilities, SRCSTextEditing ]
     objc-ivars:      [ SRCSSpokenCommandUtilities._commandAttributes, SRCSSpokenCommandUtilities._commandStringsTablesByLocaleIdentifier ]
 ...

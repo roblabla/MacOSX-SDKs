@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B3C23778-5FA2-3393-9B85-902190956AB9
+    value:           907226BA-ADA4-3222-82C4-CACC2905DD0B
   - target:          x86_64-maccatalyst
-    value:           B3C23778-5FA2-3393-9B85-902190956AB9
+    value:           907226BA-ADA4-3222-82C4-CACC2905DD0B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A00D39C1-393A-310D-9077-1510C8FA2BD7
+    value:           5E70C7B0-912A-3721-BC56-2A41EB5454E3
   - target:          arm64e-maccatalyst
-    value:           A00D39C1-393A-310D-9077-1510C8FA2BD7
+    value:           5E70C7B0-912A-3721-BC56-2A41EB5454E3
 install-name:    '/System/Library/PrivateFrameworks/Translation.framework/Versions/A/Translation'
-current-version: 128.2
+current-version: 128.9
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

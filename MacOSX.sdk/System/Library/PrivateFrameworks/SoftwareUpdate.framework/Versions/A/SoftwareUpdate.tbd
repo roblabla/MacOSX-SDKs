@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0DBF8B1D-44BF-3139-8CDD-9E853A6B6083
+    value:           8D1B3DB4-00A9-3B6B-9EC2-CF4ACE579A95
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A58B7139-B9EF-3460-BD2C-746B5971CC4D
+    value:           B7969545-706F-35D0-A572-AC29A9DED980
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdate.framework/Versions/A/SoftwareUpdate'
 current-version: 747
 exports:
@@ -69,10 +69,12 @@ exports:
                        _SUPredicateInstallPredicateKey, _SUPredicateInstallPrimaryTitleKey, 
                        _SUPredicateInstallRequireSLAKey, _SUPrefDomain, _SUPrefsBaseSystemSUDmgOverridePath, 
                        _SUPrefsBridgeOSVersionOverride, _SUPrefsCustomPersonalizationSigningServerURLString, 
-                       _SUPrefsDeferredInstallEnabledKey, _SUPrefsDeferredNonOSInstallEnabledKey, 
-                       _SUPrefsDisableSoftwareUpdateBadging, _SUPrefsDisableSoftwareUpdateNotifications, 
-                       _SUPrefsEnableBridgeOSUpdates, _SUPrefsEnablePersonalization, 
-                       _SUPrefsIgnoreMinimumBridgeVersionCheck, _SUPrefsManagedDeferredInstallDelayKey, 
+                       _SUPrefsDeferredInstallEnabledKey, _SUPrefsDeferredMajorOSInstallEnabledKey, 
+                       _SUPrefsDeferredNonOSInstallEnabledKey, _SUPrefsDisableSoftwareUpdateBadging, 
+                       _SUPrefsDisableSoftwareUpdateNotifications, _SUPrefsEnableBridgeOSUpdates, 
+                       _SUPrefsEnablePersonalization, _SUPrefsIgnoreMinimumBridgeVersionCheck, 
+                       _SUPrefsManagedDeferredInstallDelayKey, _SUPrefsManagedMajorOSDeferredInstallDelayKey, 
+                       _SUPrefsManagedMinorOSDeferredInstallDelayKey, _SUPrefsManagedNonOSDeferredInstallDelayKey, 
                        _SUPrefsSkipAPFSSnapshot, _SUPrefsVerboseDownloaderLoggingKey, 
                        _SUProductErrorDomain, _SUProductManagerAdoptedManualKey, 
                        _SUSDSeedProgramManager, _SUSDSeedProgramMigrator, _SUScanCatalogURLKey, 

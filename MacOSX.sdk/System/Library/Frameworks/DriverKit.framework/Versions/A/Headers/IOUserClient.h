@@ -1,6 +1,6 @@
-/* iig(DriverKit-107.60.3) generated from IOUserClient.iig */
+/* iig(DriverKit-107.100.6) generated from IOUserClient.iig */
 
-/* IOUserClient.iig:1-153 */
+/* IOUserClient.iig:1-154 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -88,8 +88,9 @@ enum {
  * @field       scalarOutput Array of scalars to return to the caller.
  * @field       scalarOutputCount Count of scalars to return to the caller in scalarOutput.
  * @field       structureOutput An OSData to be returned to the caller as structure output.
- *				A reference will be consumed by the caller. It is an error to set this field if
- *              structureOutputDescriptor was passed in
+ *              This field should be set by the driver to an OSData object it created with
+ *              the data to be returned, and the OSData instance will be released by the OS.
+ *              It is an error for the driver to set this field if structureOutputDescriptor was passed in
  * @field       structureOutputDescriptor A IOMemoryDescriptor specified by the caller for structure output.
  * @field       structureOutputMaximumSize Maximum size of structure output specified by caller
  *              or kIOUserClientVariableStructureSize.
@@ -151,7 +152,7 @@ struct IOUserClientMethodDispatch {
 	uint32_t			       checkStructureOutputSize;
 };
 
-/* source class IOUserClient IOUserClient.iig:154-286 */
+/* source class IOUserClient IOUserClient.iig:155-287 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -291,7 +292,7 @@ private:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOUserClient IOUserClient.iig:154-286 */
+/* generated class IOUserClient IOUserClient.iig:155-287 */
 
 #define IOUserClient_AsyncCompletion_ID            0xdbc5b2e5d2b446f4ULL
 #define IOUserClient_CopyClientMemoryForType_ID            0x8399bdb3d0b4f474ULL
@@ -591,6 +592,6 @@ public:
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOUserClient.iig:288- */
+/* IOUserClient.iig:289- */
 
 #endif /* ! _IOKIT_UIOUSERCLIENT_H */

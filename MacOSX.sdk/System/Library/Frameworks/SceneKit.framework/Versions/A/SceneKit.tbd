@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           42097FE7-AA47-374E-82E3-9726154F7A3B
+    value:           E335FC91-75F8-3ACA-8869-2C12F1DF6D1A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1E4C2148-4787-3DE7-BC6F-4C9F9628D024
+    value:           5E77071D-096E-3D25-9190-82AA21089075
 install-name:    '/System/Library/Frameworks/SceneKit.framework/Versions/A/SceneKit'
-current-version: 557.1
+current-version: 557.53
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _C3DGetFileDecryptionCallbacks, _C3DIOCreateCStringFromCFString, 
                        _C3DIOCreateOptionsForRealtimeViewer, _C3DImageGetAttribute, 
                        _C3DImageGetURL, _C3DImageSetAttribute, _C3DSetFileDecryptionCallbacks, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4BC8A306-5FA3-3C75-90C4-A07225ABB591
+    value:           2CF95C11-5AFE-3FE6-AC00-10E953BA086B
   - target:          x86_64-maccatalyst
-    value:           4BC8A306-5FA3-3C75-90C4-A07225ABB591
+    value:           2CF95C11-5AFE-3FE6-AC00-10E953BA086B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           68997B30-92D1-3EA0-A589-621AA74CA46B
+    value:           F15934FE-C5E8-3C07-91C8-929D40A22982
   - target:          arm64e-maccatalyst
-    value:           68997B30-92D1-3EA0-A589-621AA74CA46B
+    value:           F15934FE-C5E8-3C07-91C8-929D40A22982
 install-name:    '/System/Library/PrivateFrameworks/FMNetworking.framework/Versions/A/FMNetworking'
 swift-abi-version: 7
 allowable-clients:
@@ -70,10 +70,12 @@ exports:
                        '_$s12FMNetworking13HeaderKeyNameOMa', '_$s12FMNetworking13HeaderKeyNameOMn', 
                        '_$s12FMNetworking13HeaderKeyNameON', '_$s12FMNetworking14FMNAccountTypeO11pairingLockyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO11searchPartyyA2CmFWC', 
+                       '_$s12FMNetworking14FMNAccountTypeO15secureLocationsyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO20fmipPlaceholderForSPyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO3fmfyA2CmFWC', '_$s12FMNetworking14FMNAccountTypeO4fmipyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO4noneyA2CmFWC', '_$s12FMNetworking14FMNAccountTypeO5setupyA2CmFWC', 
-                       '_$s12FMNetworking14FMNAccountTypeO6fmfAppyA2CmFWC', '_$s12FMNetworking14FMNAccountTypeO8rawValueACSgSS_tcfC', 
+                       '_$s12FMNetworking14FMNAccountTypeO6fmfAppyA2CmFWC', '_$s12FMNetworking14FMNAccountTypeO8fmipSiriyA2CmFWC', 
+                       '_$s12FMNetworking14FMNAccountTypeO8rawValueACSgSS_tcfC', 
                        '_$s12FMNetworking14FMNAccountTypeO8rawValueSSvg', '_$s12FMNetworking14FMNAccountTypeO8rawValueSSvpMV', 
                        '_$s12FMNetworking14FMNAccountTypeO9accessoryyACSSSg_tcACmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeOMa', '_$s12FMNetworking14FMNAccountTypeOMn', 
@@ -153,6 +155,8 @@ exports:
                        '_$s12FMNetworking17FMNRedirectedHostVSeAAMc', '_$s12FMNetworking20FMNAPSTokenProvidingMp', 
                        '_$s12FMNetworking20FMNAPSTokenProvidingP10topicToken8SPShared6FutureCySSGyFTj', 
                        '_$s12FMNetworking20FMNAPSTokenProvidingP10topicToken8SPShared6FutureCySSGyFTq', 
+                       '_$s12FMNetworking20FMNAPSTokenProvidingP10topicTokenyyys6ResultOySSs5Error_pGcFTj', 
+                       '_$s12FMNetworking20FMNAPSTokenProvidingP10topicTokenyyys6ResultOySSs5Error_pGcFTq', 
                        '_$s12FMNetworking20FMNAPSTokenProvidingTL', '_$s12FMNetworking20FMNHTTPArchiveReaderVMa', 
                        '_$s12FMNetworking20FMNHTTPArchiveReaderVMn', '_$s12FMNetworking20FMNHTTPArchiveReaderVN', 
                        '_$s12FMNetworking20FMNHTTPArchiveWriterC13saveResponses04mockE07fileURLySayAA24FMNMockClientURLResponseVG_10Foundation0H0VtFTj', 
@@ -253,7 +257,15 @@ exports:
                        '_$s12FMNetworking23FMNResponseSerializablePSETb', '_$s12FMNetworking23FMNResponseSerializablePSeTb', 
                        '_$s12FMNetworking23FMNResponseSerializableTL', '_$s12FMNetworking24FMNMockClientURLResponseV4data8response5errorAC10Foundation4DataVSg_So17NSHTTPURLResponseCSgs5Error_pSgtcfC', 
                        '_$s12FMNetworking24FMNMockClientURLResponseVMa', '_$s12FMNetworking24FMNMockClientURLResponseVMn', 
-                       '_$s12FMNetworking24FMNMockClientURLResponseVN', '_$s12FMNetworking25FMNAuthenticationOverrideO3fmfyA2CmFWC', 
+                       '_$s12FMNetworking24FMNMockClientURLResponseVN', '_$s12FMNetworking25FMNAPSTokenProvidingErrorO10tokenIsNilyA2CmFWC', 
+                       '_$s12FMNetworking25FMNAPSTokenProvidingErrorO2eeoiySbAC_ACtFZ', 
+                       '_$s12FMNetworking25FMNAPSTokenProvidingErrorO4hash4intoys6HasherVz_tF', 
+                       '_$s12FMNetworking25FMNAPSTokenProvidingErrorO9hashValueSivg', 
+                       '_$s12FMNetworking25FMNAPSTokenProvidingErrorO9hashValueSivpMV', 
+                       '_$s12FMNetworking25FMNAPSTokenProvidingErrorOMa', '_$s12FMNetworking25FMNAPSTokenProvidingErrorOMn', 
+                       '_$s12FMNetworking25FMNAPSTokenProvidingErrorON', '_$s12FMNetworking25FMNAPSTokenProvidingErrorOSHAAMc', 
+                       '_$s12FMNetworking25FMNAPSTokenProvidingErrorOSQAAMc', '_$s12FMNetworking25FMNAPSTokenProvidingErrorOs0D0AAMc', 
+                       '_$s12FMNetworking25FMNAuthenticationOverrideO3fmfyA2CmFWC', 
                        '_$s12FMNetworking25FMNAuthenticationOverrideO4fmipyA2CmFWC', 
                        '_$s12FMNetworking25FMNAuthenticationOverrideO8rawValueACSgSS_tcfC', 
                        '_$s12FMNetworking25FMNAuthenticationOverrideO8rawValueSSvg', 
@@ -292,6 +304,12 @@ exports:
                        '_$s12FMNetworking25FMNPushNotificatonHandlerC10connection_21didReceivePublicTokenySo13APSConnectionCSg_10Foundation4DataVSgtF', 
                        '_$s12FMNetworking25FMNPushNotificatonHandlerC10connection_25didReceiveMessageForTopic8userInfoySo13APSConnectionCSg_SSSgSDys11AnyHashableVypGSgtF', 
                        '_$s12FMNetworking25FMNPushNotificatonHandlerC10topicToken8SPShared6FutureCySSGyF', 
+                       '_$s12FMNetworking25FMNPushNotificatonHandlerC10topicTokenyyys6ResultOySSs5Error_pGcF', 
+                       '_$s12FMNetworking25FMNPushNotificatonHandlerC5topic17namedDelegatePortACSS_SStcfC', 
+                       '_$s12FMNetworking25FMNPushNotificatonHandlerC5topic17namedDelegatePortACSS_SStcfCTj', 
+                       '_$s12FMNetworking25FMNPushNotificatonHandlerC5topic17namedDelegatePortACSS_SStcfCTq', 
+                       '_$s12FMNetworking25FMNPushNotificatonHandlerC5topic17namedDelegatePortACSS_SStcfc', 
+                       '_$s12FMNetworking25FMNPushNotificatonHandlerC5topicACSS_tcfC', 
                        '_$s12FMNetworking25FMNPushNotificatonHandlerCAA20FMNAPSTokenProvidingAAMc', 
                        '_$s12FMNetworking25FMNPushNotificatonHandlerCAA20FMNAPSTokenProvidingAAWP', 
                        '_$s12FMNetworking25FMNPushNotificatonHandlerCACycfC', '_$s12FMNetworking25FMNPushNotificatonHandlerCACycfc', 

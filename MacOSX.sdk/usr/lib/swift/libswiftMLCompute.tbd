@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           11CD9A25-A014-3054-951C-E748942A0B3B
+    value:           EF6449FC-DB00-3EEB-ACC9-781A774851BC
   - target:          x86_64-maccatalyst
-    value:           11CD9A25-A014-3054-951C-E748942A0B3B
+    value:           EF6449FC-DB00-3EEB-ACC9-781A774851BC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           20595D22-349D-3BC2-8BD5-F7A9EE68E6B9
+    value:           9F4C6172-90DD-39CB-96F1-5635DDA22BD3
   - target:          arm64e-maccatalyst
-    value:           20595D22-349D-3BC2-8BD5-F7A9EE68E6B9
+    value:           9F4C6172-90DD-39CB-96F1-5635DDA22BD3
 install-name:    '/usr/lib/swift/libswiftMLCompute.dylib'
-current-version: 16.60.1
+current-version: 16.100.11
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -51,11 +51,16 @@ exports:
                        '_$sSo15MLCPaddingLayerC9MLComputeE17reflectionPaddingABSaySiG_tcfc', 
                        '_$sSo15MLCReshapeLayerC9MLComputeE5shapeABSgSaySiG_tcfC', 
                        '_$sSo15MLCReshapeLayerC9MLComputeE5shapeABSgSaySiG_tcfc', 
+                       '_$sSo15MLCReshapeLayerC9MLComputeE5shapeSaySiGvg', '_$sSo15MLCReshapeLayerC9MLComputeE5shapeSaySiGvpMV', 
                        '_$sSo16MLCUpsampleLayerC9MLComputeE5shape10sampleMode13alignsCornersABSgSaySiG_So09MLCSampleF0VSbtcfC', 
                        '_$sSo16MLCUpsampleLayerC9MLComputeE5shape10sampleMode13alignsCornersABSgSaySiG_So09MLCSampleF0VSbtcfc', 
                        '_$sSo16MLCUpsampleLayerC9MLComputeE5shapeABSgSaySiG_tcfC', 
                        '_$sSo16MLCUpsampleLayerC9MLComputeE5shapeABSgSaySiG_tcfc', 
                        '_$sSo16MLCUpsampleLayerC9MLComputeE5shapeSaySiGvg', '_$sSo16MLCUpsampleLayerC9MLComputeE5shapeSaySiGvpMV', 
+                       '_$sSo17MLCReductionLayerC9MLComputeE10dimensionsSaySiGvg', 
+                       '_$sSo17MLCReductionLayerC9MLComputeE10dimensionsSaySiGvpMV', 
+                       '_$sSo17MLCReductionLayerC9MLComputeE13reductionType10dimensionsABSgSo0aE0V_SaySiGtcfC', 
+                       '_$sSo17MLCReductionLayerC9MLComputeE13reductionType10dimensionsABSgSo0aE0V_SaySiGtcfc', 
                        '_$sSo17MLCTransposeLayerC9MLComputeE10dimensionsABSgSaySiG_tcfC', 
                        '_$sSo17MLCTransposeLayerC9MLComputeE10dimensionsABSgSaySiG_tcfc', 
                        '_$sSo17MLCTransposeLayerC9MLComputeE10dimensionsSaySiGvg', 
@@ -107,6 +112,8 @@ exports:
                        '_$sSo24MLCConvolutionDescriptorC9MLComputeE7stridesSi1y_Si1xtvpMV', 
                        '_$sSo26MLCLayerNormalizationLayerC9MLComputeE15normalizedShape4beta5gamma15varianceEpsilonABSgSaySiG_So9MLCTensorCAKSftcfC', 
                        '_$sSo26MLCLayerNormalizationLayerC9MLComputeE15normalizedShape4beta5gamma15varianceEpsilonABSgSaySiG_So9MLCTensorCAKSftcfc', 
+                       '_$sSo26MLCLayerNormalizationLayerC9MLComputeE15normalizedShape4beta5gamma15varianceEpsilonABSgSaySiG_So9MLCTensorCSgALSftcfC', 
+                       '_$sSo26MLCLayerNormalizationLayerC9MLComputeE15normalizedShape4beta5gamma15varianceEpsilonABSgSaySiG_So9MLCTensorCSgALSftcfc', 
                        '_$sSo26MLCLayerNormalizationLayerC9MLComputeE15normalizedShapeSaySiGvg', 
                        '_$sSo26MLCLayerNormalizationLayerC9MLComputeE15normalizedShapeSaySiGvpMV', 
                        '_$sSo8MLCGraphC9MLComputeE5split6source0C14SectionLengths9dimensionSaySo9MLCTensorCGSgAI_SaySiGSitF', 

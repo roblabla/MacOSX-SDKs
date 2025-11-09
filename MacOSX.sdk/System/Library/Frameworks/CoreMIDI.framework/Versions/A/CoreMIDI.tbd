@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           41D7A5AA-980F-3594-9341-F7B905FB763D
+    value:           5B8F80E2-9011-3CC7-81DD-389D766E16B0
   - target:          x86_64-maccatalyst
-    value:           41D7A5AA-980F-3594-9341-F7B905FB763D
+    value:           5B8F80E2-9011-3CC7-81DD-389D766E16B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AF088B1D-97C1-3A5B-9685-D42FD2F40DB5
+    value:           DEEEEB55-F395-30BF-BF4D-8595B290AC5A
   - target:          arm64e-maccatalyst
-    value:           AF088B1D-97C1-3A5B-9685-D42FD2F40DB5
+    value:           DEEEEB55-F395-30BF-BF4D-8595B290AC5A
 install-name:    '/System/Library/Frameworks/CoreMIDI.framework/Versions/A/CoreMIDI'
 current-version: 69
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MIDIClientCreate, _MIDIClientCreateWithBlock, _MIDIClientDispose, 
                        _MIDIConfigCheckVirginState, _MIDIConfigDelete, _MIDIConfigDuplicate, 

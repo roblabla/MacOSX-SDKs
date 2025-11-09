@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FF2A0296-459E-3262-881F-35ACFD66659C
+    value:           1787E7B5-6CB3-3657-92F7-486515331754
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E27AB251-9542-3ECD-AAEC-7186C1D38D2B
+    value:           03C68733-8CA2-3338-AB1F-C380AA6380B1
 install-name:    '/System/Library/PrivateFrameworks/AFKUser.framework/Versions/A/AFKUser'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

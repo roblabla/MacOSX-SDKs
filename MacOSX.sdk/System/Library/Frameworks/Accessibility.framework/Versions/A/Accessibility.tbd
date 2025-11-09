@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7EF1380A-966F-3290-8249-048FBE07A28F
+    value:           F663F980-4059-38A1-B409-478ED28D5EE2
   - target:          x86_64-maccatalyst
-    value:           7EF1380A-966F-3290-8249-048FBE07A28F
+    value:           F663F980-4059-38A1-B409-478ED28D5EE2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BABFE229-B2A1-3035-AC48-F8B5A5A15AD9
+    value:           F32D45BB-7D5A-3A85-95A6-99E8253E41CB
   - target:          arm64e-maccatalyst
-    value:           BABFE229-B2A1-3035-AC48-F8B5A5A15AD9
+    value:           F32D45BB-7D5A-3A85-95A6-99E8253E41CB
 install-name:    '/System/Library/Frameworks/Accessibility.framework/Versions/A/Accessibility'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AXNameFromColor ]
     objc-classes:    [ AXCustomContent ]

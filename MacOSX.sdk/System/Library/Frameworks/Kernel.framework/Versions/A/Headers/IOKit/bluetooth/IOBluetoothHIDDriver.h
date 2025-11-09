@@ -138,6 +138,8 @@ class IOBluetoothHIDDriver : public IOHIDDevice
 		bool					mHIDSuspendSent;
 		
 		IOReturn				mExitHIDSuspendResult;
+		
+		bool					mPowerStateChangeInProgress;
     };
     ExpansionData	*_expansionData;
 	

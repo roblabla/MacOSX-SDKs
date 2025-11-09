@@ -281,9 +281,6 @@ cluster_type_t ml_get_boot_cluster(void);
  * @field coresight_regs    IO-mapped virtual address of CoreSight debug register block.
  * @field coresight_pa      Physical address of CoreSight register block.
  * @field coresight_len     Length of CoreSight register block.
- * @field self_ipi_irq      AIC IRQ vector for self IPI (cpuX->cpuX).  0 if unsupported.
- * @field other_ipi_irq     AIC IRQ vector for other IPI (cpuX->cpuY).  0 if unsupported.
- * @field pmi_irq           AIC IRQ vector for performance management IRQ.  0 if unsupported.
  * @field die_cluster_id    Cluster ID within the local die (EDT: die-cluster-id)
  * @field cluster_core_id   Core ID within the local cluster (EDT: cluster-core-id)
  */
@@ -307,9 +304,6 @@ typedef struct ml_topology_cpu {
 	vm_offset_t                     coresight_regs;
 	uint64_t                        coresight_pa;
 	uint64_t                        coresight_len;
-	int                             self_ipi_irq;
-	int                             other_ipi_irq;
-	int                             pmi_irq;
 	unsigned int                    die_cluster_id;
 	unsigned int                    cluster_core_id;
 } ml_topology_cpu_t;
@@ -618,6 +612,7 @@ unsigned int ml_wait_max_cpus(
 unsigned int ml_get_machine_mem(void);
 
 
+extern void     ml_cpu_init_completed(void);
 extern void     ml_cpu_up(void);
 extern void     ml_cpu_down(void);
 extern void     ml_arm_sleep(void);

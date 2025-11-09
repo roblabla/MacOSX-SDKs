@@ -161,7 +161,11 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 
 // Optional (-[popup] may return nil). Not used with links or widgets, a popup annotation associated with this
 // annotation. The bounds and open state of the popup indicate the placement and open state of the popup window.
+#if defined( PDFKIT_PLATFORM_OSX )
+@property (nonatomic, strong, nullable) PDFAnnotationPopup *popup PDFKIT_AVAILABLE(10_5, 11_0);
+#else
 @property (nonatomic, strong, nullable) PDFAnnotation *popup PDFKIT_AVAILABLE(10_5, 11_0);
+#endif
 
 // Optional border or border style that describes how to draw the annotation border (if any). For the "geometry"
 // annotations (Circle, Ink, Line, Square), the border indicates the line width and whether to draw with a dash pattern
@@ -223,6 +227,87 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 
 @end
 
+#if defined( PDFKIT_PLATFORM_OSX )
+
+@interface PDFAnnotation (PDFAnnotationDeprecated)
+
+// -------- initializer
+
+// Create a custom annotation using a given annotation dictionary, self-assigning it to the (optional) page.
+// Use -[initWithBounds:type:properties] instead.
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary forPage:(nullable PDFPage *)page PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);
+
+// You should only call this method for the subclasses, otherwise you will get a type of nil Ñ which is not a legal annotation.
+// Use -[initWithBounds:type:properties] instead.
+- (instancetype)initWithBounds:(PDFRect)bounds PDFKIT_DEPRECATED(10_4, 10_12, NA, NA);
+
+// -------- accessors
+
+// String used for tooltips. The base class returns [self contents], sub-classes may override as appropriate.
+@property (nonatomic, readonly, nullable) NSString *toolTip PDFKIT_DEPRECATED(10_5, 10_12, NA, NA);
+
+// Optional action performed when a user releases the mouse within an annotation. PDF readers ignore actions except
+// for those associated with Link or button Widget annotations. This has been replaced by -[PDFAnnotation action] and
+// -[PDFAnnotation setAction:] methods, which do the same behavior for both mouse-up driven actions and tap-gestures.
+@property (nonatomic, strong, nullable) PDFAction *mouseUpAction PDFKIT_DEPRECATED(10_5, 10_13, NA, NA);
+
+// All appearance streams for the target annotation are removed. Without an appearance stream, annotations are drawn
+// strictly according to their parameters (color, border, font, etc.). When a PDF is saved, PDFKit will always
+// write out an appearance stream(s) for each annotation. If the PDF is reloaded, you will need to remove the
+// appearance streams in order to continue to edit the annotations parameters.
+- (void)removeAllAppearanceStreams PDFKIT_DEPRECATED(10_5, 10_12, NA, NA);
+
+// -------- drawing
+
+// This method is deprecated in favor of the of the context aware -[PDFAnnotation drawWithBox:inContext:]. If you subclass
+// PDFAnnotation, rendering code will first call -[PDFAnnotation drawWithBox:inContext:]. If your subclass does not override
+// the context-aware function, this original -[PDFAnnotation drawWithBox:] method will be called.
+// Draw method. Draws in page-space relative to origin of "box" passed in.
+- (void)drawWithBox:(PDFDisplayBox)box PDFKIT_DEPRECATED(10_4, 10_12, NA, NA);
+
+@end
+
+// These keys are deprecated in favor of the annotation keys as defined by type PDFAnnotationKey at the top of this header file.
+// Common keys used for all annotations.
+
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_AppearanceDictionary PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);              // "/AP": Dictionary
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_AppearanceState PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                   // "/AS": Name
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Border PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                            // "/Border": Array of Integers; or a PDFBorder object
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Color PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                             // "/C": Array of Floats; or a PDFKitPlatformColor object
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Contents PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                          // "/Contents": String
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Flags PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                             // "/F": Integer
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Date PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                              // "/M": Date or String
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Name PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                              // "/NM": String
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Page PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                              // "/P": Dictionary; or a PDFPage object.
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Rect PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                              // "/Rect": CGRect
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Subtype PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                           // "/Subtype": Name (See Table 8.20: Annotation types)
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Action PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                            // "/A": Dictionary; or a PDFAction object
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_AdditionalActions PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                 // "/AA": Dictionary; or a PDFAction object
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_BorderStyle PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                       // "/BS": Dictionary
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_DefaultAppearance PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                 // "/DA": String
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Destination PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                       // "/Dest": Array, Name, or String
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_HighlightingMode PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                  // "/H": Name
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Inklist PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                           // "/Inklist": Array of Arrays (each array representing a stroked path)
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_InteriorColor PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                     // "/IC": Array of Floats; or a PDFKitPlatformColor object
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_LinePoints PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                        // "/L": Array of Floats
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_LineEndingStyles PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                  // "/LE": Array of Strings
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_IconName PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                          // "/Name": Name
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Open PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                              // "/Open": Boolean
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Parent PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                            // "/Parent": Dictionary; or a PDFAnnotation object
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Popup PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                             // "/Popup": Dictionary; or a PDFAnnotation object of type "Popup"
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_Quadding PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                          // "/Q": Integer
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_QuadPoints PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                        // "/QuadPoints": Array of Floats
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_TextLabel PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                         // "/T": String
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_WidgetDefaultValue PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                // "/DV": (various)
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_WidgetFieldFlags PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                  // "/Ff": Integer
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_WidgetFieldType PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                   // "/FT": Name
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_WidgetAppearanceDictionary PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);        // "/MK": Dictionary; or PDFAppearanceCharacteristics object
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_WidgetMaxLen PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                      // "/MaxLen": Integer
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_WidgetOptions PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                     // "/Opt": Array (each element is either a string, or an array of two strings)
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_WidgetTextLabelUI PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                 // "/TU": String
+PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_WidgetValue PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                       // "/V": (various)
+
+#endif
 
 
 NS_ASSUME_NONNULL_END

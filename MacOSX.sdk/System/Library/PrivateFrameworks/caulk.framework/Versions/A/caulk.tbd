@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           952BA9D4-BAD3-3319-8C17-F7BB2655F80C
+    value:           8F72B5EE-6E11-3019-8ADC-96D4BFC6BB1F
   - target:          x86_64-maccatalyst
-    value:           952BA9D4-BAD3-3319-8C17-F7BB2655F80C
+    value:           8F72B5EE-6E11-3019-8ADC-96D4BFC6BB1F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3C740EA2-D7BA-31FA-9540-63E5E5F3A0F7
+    value:           2A9F1591-10AC-3FEE-851F-2BB6E3686744
   - target:          arm64e-maccatalyst
-    value:           3C740EA2-D7BA-31FA-9540-63E5E5F3A0F7
+    value:           2A9F1591-10AC-3FEE-851F-2BB6E3686744
 install-name:    '/System/Library/PrivateFrameworks/caulk.framework/Versions/A/caulk'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

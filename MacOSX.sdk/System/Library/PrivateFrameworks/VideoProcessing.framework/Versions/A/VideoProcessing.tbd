@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6E81F186-A6E9-3582-B62C-B866C0CB6D02
+    value:           5C08644F-75A7-314A-A0E8-BF31E076234B
   - target:          x86_64-maccatalyst
-    value:           6E81F186-A6E9-3582-B62C-B866C0CB6D02
+    value:           5C08644F-75A7-314A-A0E8-BF31E076234B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CFD22C02-0520-36C4-957E-8C448A5B2E21
+    value:           E748C945-EC66-3759-9901-C09A8EA08AAA
   - target:          arm64e-maccatalyst
-    value:           CFD22C02-0520-36C4-957E-8C448A5B2E21
+    value:           E748C945-EC66-3759-9901-C09A8EA08AAA
 install-name:    '/System/Library/PrivateFrameworks/VideoProcessing.framework/Versions/A/VideoProcessing'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

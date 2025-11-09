@@ -490,7 +490,6 @@ struct  xtcpcb {
 	u_quad_t        xt_alignment_hack;
 };
 
-#if XNU_TARGET_OS_OSX || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR)
 
 struct  xtcpcb64 {
 	u_int32_t               xt_len;
@@ -571,7 +570,6 @@ struct  xtcpcb64 {
 	u_quad_t                xt_alignment_hack;
 };
 
-#endif /* XNU_TARGET_OS_OSX || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR) */
 
 
 #pragma pack()

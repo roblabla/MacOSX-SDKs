@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           798FD186-13CD-3B6D-ADF1-924988B6BDBE
+    value:           2A3CBB83-F1A0-3AE8-B00E-33020A74121A
   - target:          x86_64-maccatalyst
-    value:           798FD186-13CD-3B6D-ADF1-924988B6BDBE
+    value:           2A3CBB83-F1A0-3AE8-B00E-33020A74121A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           64336ABD-4617-3EF3-BFF9-A02657912EDC
+    value:           F1BC32CA-0B5C-3D79-A60E-E7F6CC9117C3
   - target:          arm64e-maccatalyst
-    value:           64336ABD-4617-3EF3-BFF9-A02657912EDC
+    value:           F1BC32CA-0B5C-3D79-A60E-E7F6CC9117C3
 install-name:    '/System/Library/PrivateFrameworks/Email.framework/Versions/A/Email'
-current-version: 3654.40
+current-version: 3654.80
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

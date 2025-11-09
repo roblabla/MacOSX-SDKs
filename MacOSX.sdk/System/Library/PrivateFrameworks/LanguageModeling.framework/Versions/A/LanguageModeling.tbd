@@ -4,27 +4,32 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BCB1F8A7-54B9-36D1-B742-70DF7657BF0B
+    value:           81DEF845-C1A0-3BD0-9820-D1C308AFBE09
   - target:          x86_64-maccatalyst
-    value:           BCB1F8A7-54B9-36D1-B742-70DF7657BF0B
+    value:           81DEF845-C1A0-3BD0-9820-D1C308AFBE09
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4D0D7198-4EB8-3D57-93E7-6F1F7EF4437C
+    value:           0F0144FC-D3D6-39C3-9585-D0D21390969C
   - target:          arm64e-maccatalyst
-    value:           4D0D7198-4EB8-3D57-93E7-6F1F7EF4437C
+    value:           0F0144FC-D3D6-39C3-9585-D0D21390969C
 install-name:    '/System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling'
-current-version: 247.1
+current-version: 247.3
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                       __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+    weak-symbols:    [ __ZTINSt3__110__function6__baseIFbjEEE, __ZTINSt3__110__function6__baseIFfjjEEE, 
+                       __ZTINSt3__110__function6__baseIFjRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
+                       __ZTINSt3__110__function6__baseIFvjdRbEEE, __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, 
+                       __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, 
+                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__119basic_istringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__15dequeIiNS_9allocatorIiEEEE, __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, 
+                       __ZTINSt3__15dequeIiNS_9allocatorIiEEEE, __ZTSNSt3__110__function6__baseIFbjEEE, 
+                       __ZTSNSt3__110__function6__baseIFfjjEEE, __ZTSNSt3__110__function6__baseIFjRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
+                       __ZTSNSt3__110__function6__baseIFvjdRbEEE, __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, 
                        __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ofstreamIcNS_11char_traitsIcEEEE, 
                        __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 

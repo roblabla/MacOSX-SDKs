@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FD27BE40-17A0-3561-90E3-FFB96048C2AD
+    value:           A5368516-8B01-3292-AE83-35E3E18859F6
   - target:          x86_64-maccatalyst
-    value:           FD27BE40-17A0-3561-90E3-FFB96048C2AD
+    value:           A5368516-8B01-3292-AE83-35E3E18859F6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           81F0EDAE-8D4D-3AE1-9A05-0A51ED59E00E
+    value:           67EAFDE5-F187-3E60-A664-E552D08AE09C
   - target:          arm64e-maccatalyst
-    value:           81F0EDAE-8D4D-3AE1-9A05-0A51ED59E00E
+    value:           67EAFDE5-F187-3E60-A664-E552D08AE09C
 install-name:    '/usr/lib/libTelephonyUtilDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZN3ctu16LogMessageBuffer17vCreateWithFormatEPKcP13__va_list_tag, 
                        __ZN3ctu16LogMessageBuffer19vCreateWithNSFormatEP8NSStringP13__va_list_tag, 
                        __ZN3ctu16LogMessageBuffer7vprintfEPKcP13__va_list_tag ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _TelephonyCapabilitiesAccessoryDetectionForSupported, _TelephonyCapabilitiesAccessoryDetectionSupported, 
                        _TelephonyCapabilitiesAccessoryTypeDetectionForASupported, 
@@ -598,12 +598,12 @@ exports:
                        __ZN3ctu6binaryEt, __ZN3ctu6binaryEx, __ZN3ctu6binaryEy, __ZN3ctu6hex_spEPKvm, 
                        __ZN3ctu6hex_spERKNSt3__16vectorIhNS0_9allocatorIhEEEE, __ZN3ctu6to_rleEPKvm, 
                        __ZN3ctu6to_rleERNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
-                       __ZN3ctu7Gestalt6createEv, __ZN3ctu7GestaltD0Ev, __ZN3ctu7GestaltD1Ev, 
-                       __ZN3ctu7GestaltD2Ev, __ZN3ctu7binary0Ea, __ZN3ctu7binary0Ec, 
-                       __ZN3ctu7binary0Eh, __ZN3ctu7binary0Ei, __ZN3ctu7binary0Ej, 
-                       __ZN3ctu7binary0El, __ZN3ctu7binary0Em, __ZN3ctu7binary0Es, 
-                       __ZN3ctu7binary0Et, __ZN3ctu7binary0Ex, __ZN3ctu7binary0Ey, 
-                       __ZN3ctu7combineENS_8LogLevelES0_, __ZN3ctu7dirnameENS_4llvm9StringRefE, 
+                       __ZN3ctu7Gestalt21create_default_globalEv, __ZN3ctu7GestaltD0Ev, 
+                       __ZN3ctu7GestaltD1Ev, __ZN3ctu7GestaltD2Ev, __ZN3ctu7binary0Ea, 
+                       __ZN3ctu7binary0Ec, __ZN3ctu7binary0Eh, __ZN3ctu7binary0Ei, 
+                       __ZN3ctu7binary0Ej, __ZN3ctu7binary0El, __ZN3ctu7binary0Em, 
+                       __ZN3ctu7binary0Es, __ZN3ctu7binary0Et, __ZN3ctu7binary0Ex, 
+                       __ZN3ctu7binary0Ey, __ZN3ctu7combineENS_8LogLevelES0_, __ZN3ctu7dirnameENS_4llvm9StringRefE, 
                        __ZN3ctu7replaceERNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEENS_4llvm9StringRefES9_, 
                        __ZN3ctu8PathView4skipENS_4llvm13TempStringRefE, __ZN3ctu8PathView7advanceEl, 
                        __ZN3ctu8PathViewC1ENS_4llvm9StringRefE, __ZN3ctu8PathViewC1Ev, 
@@ -811,6 +811,8 @@ exports:
                        __ZNK3ctu4rest27WatchableRestResourceHelper3mapENSt3__18functionIFvRKNS_22RestResourceConnectionEEEE, 
                        __ZNK3ctu4rest9data_view4dataEv, __ZNK3ctu4rest9data_view4sizeEv, 
                        __ZNK3ctu4rest9data_viewcvbEv, __ZNK3ctu6Logger7getNameEv, 
+                       __ZNK3ctu7Gestalt17getSysctlAsStringEPKc, __ZNK3ctu7Gestalt5isMacEv, 
+                       __ZNK3ctu7Gestalt6isIPadEv, __ZNK3ctu7Gestalt7isWatchEv, __ZNK3ctu7Gestalt8isIPhoneEv, 
                        __ZNK3ctu8PathView4headEv, __ZNK3ctu8PathView4tailEv, __ZNK3ctu8PathView7currentEv, 
                        __ZNK3ctu8PathView7hasHeadEv, __ZNK3ctu8PathView7hasTailEv, 
                        __ZNK3ctu8PathViewcvbEv, __ZNK3ctu9LogServer10debugFlushEv, 

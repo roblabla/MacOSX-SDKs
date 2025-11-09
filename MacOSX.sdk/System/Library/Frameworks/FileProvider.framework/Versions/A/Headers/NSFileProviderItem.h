@@ -132,8 +132,31 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
     /** Indicates that the item can be deleted */
     NSFileProviderItemCapabilitiesAllowsDeleting    = 1 << 5,
 
-    /** Indicates that the item can be evicted. */
+    /**
+     Indicates that the item can be evicted.
+
+     If this capability is set on an item, the item will become evictable when the item is fully uploaded
+     (-[NSFileProviderItem isUploaded] not implemented or set to YES), is not actively used and contains no
+     local changes. The eviction can happen either because the user selected the "Remove Download" option
+     in Finder, because the provider decided to evict the item using `-[NSFileProviderManager evictItemWithIdentifier:completionHandler:]`,
+     or because the system ran into a low-disk space scenario.
+
+     If this capability is not present, the item will never be evicted.
+     If the provider wishes to only suppress the user's ability to evict the item in the UI (but retain the ability
+     of the OS or the provider's program to evict items), the provider can set the following key to false in
+     their Info.plist, in the NSExtension section: NSExtensionFileProviderAllowsUserControlledEviction
+     */
     NSFileProviderItemCapabilitiesAllowsEvicting FILEPROVIDER_API_AVAILABILITY_V3 = 1 << 6,
+
+    /**
+     Indicates that the item can be excluded from sync.
+
+     The user can choose to exclude the item in the UI (Finder), in which case the system will stop
+     monitoring changes for the item and its children and will remove the item from the provider.
+
+     This capability can be used to allow an item to be excluded from sync.
+     */
+    NSFileProviderItemCapabilitiesAllowsExcludingFromSync FILEPROVIDER_API_AVAILABILITY_V3_1 = 1 << 7,
 
     /**
      Indicates that items can be imported to the folder. If set on a file,
@@ -154,9 +177,6 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
         | NSFileProviderItemCapabilitiesAllowsRenaming
         | NSFileProviderItemCapabilitiesAllowsTrashing
         | NSFileProviderItemCapabilitiesAllowsDeleting
-#if TARGET_OS_OSX
-        | NSFileProviderItemCapabilitiesAllowsEvicting
-#endif
 };
 
 FILEPROVIDER_API_AVAILABILITY_V3
@@ -171,6 +191,10 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
     NSFileProviderFileSystemUserWritable        = 1 << 2,
 
     /// Item should not be presented in the file viewers.
+    ///
+    /// This includes both the UF_HIDDEN BSD flag and the Invisible bit from the
+    /// FinderInfo. When syncing down, the system only sets the UF_HIDDEN
+    /// flag.
     NSFileProviderFileSystemHidden              = 1 << 3,
 
     /// The extension of the item should not be presented in the file viewers.
@@ -241,6 +265,8 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
  File System level flags.
 
  This includes POSIX permissions and presentation options for the item.
+
+ Prior to macOS 11.3, fileSystemFlags are not honored for directories.
  */
 @property (nonatomic, readonly) NSFileProviderFileSystemFlags fileSystemFlags FILEPROVIDER_API_AVAILABILITY_V3;
 
@@ -439,10 +465,13 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
                  'MoveIn'    : importing item(s) into a folder/root of the provider
                  'Trash'      : trashing item(s)
                  'Delete'     : deleting item(s)
-            - `sourceItem` : current item that the predicate is evaluating (only present for Move/Export)
+                 'ExcludeFromSync' : deleting items(s) because the user chose to exclude those from sync
+                 'Rename'  : renaming item(s) (available in macOS 11.3 and later)
+            - `sourceItem` : current item that the predicate is evaluating
             - `sourceItemsCount` :
                 - In userInteraction, represents the count of sourceItems of an action operation
                 - In subUserInteraction: represents the count of items that matched the previous predicate
+            - `domainUserInfo`: The latest dictionary returned from -[NSFileProviderDomainState userInfo]
     - `Alert` *dictionary*
         - `LocalizedTitle` *string*, title of the alert
         - `LocalizedSubTitle` *string*, sub title of the alert

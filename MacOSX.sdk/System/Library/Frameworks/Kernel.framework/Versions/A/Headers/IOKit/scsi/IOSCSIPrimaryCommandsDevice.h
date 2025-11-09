@@ -150,7 +150,7 @@ protected:
     #define	fNumCommandsExecuting       fIOSCSIPrimaryCommandsDeviceReserved->fNumCommandsExecuting
     #define fMaxPollRetries             fIOSCSIPrimaryCommandsDeviceReserved->fMaxPollRetries
     #define fPollDebounceRetriesLeft    fIOSCSIPrimaryCommandsDeviceReserved->fPollDebounceRetriesLeft
-    
+
 	UInt8							fDefaultInquiryCount;
 	OSDictionary *					fDeviceCharacteristicsDictionary;
 	UInt32							fNumCommandsOutstanding;
@@ -701,16 +701,14 @@ public:
     OSMetaClassDeclareReservedUsed ( IOSCSIPrimaryCommandsDevice,  2 );
     
     virtual void        ReleasePowerStateClamp ( void );
-    
-    
+
 private:
-	
-	
+
 #if !TARGET_OS_IPHONE
-	// Space reserved for future expansion.
-	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  3 );
-	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  4 );
-	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  5 );
+    // Space reserved for future expansion.
+    OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  3 );
+    OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  4 );
+    OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  5 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  6 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  7 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  8 );

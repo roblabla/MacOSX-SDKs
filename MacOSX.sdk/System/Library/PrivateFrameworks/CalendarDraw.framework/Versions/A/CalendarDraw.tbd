@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           71BA54F4-EB9D-379F-A77E-2F65F1DEC465
+    value:           2CB4B45D-41EC-3262-87B3-7D97F24E8207
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A8115E6A-C1C7-36F8-A616-89BE04A9BAEA
+    value:           433D94D1-55A7-3D08-84FD-FB8EF499D86A
 install-name:    '/System/Library/PrivateFrameworks/CalendarDraw.framework/Versions/A/CalendarDraw'
-current-version: 2389
+current-version: 2389.4.2
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CalCGColorConvertToRGBCopy, _CalCGColorCreateBlendedWithFraction, 

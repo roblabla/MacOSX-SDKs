@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B0B2A8DD-A6F1-3EF7-9351-1BA604353A11
+    value:           F65330BD-9D48-3DE5-9E6B-1232B5BDB656
   - target:          x86_64-maccatalyst
-    value:           B0B2A8DD-A6F1-3EF7-9351-1BA604353A11
+    value:           F65330BD-9D48-3DE5-9E6B-1232B5BDB656
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AE3C151D-2022-3A70-9DE4-FA773BF55FDB
+    value:           B4073019-1155-3FCA-B7DE-6197296984EA
   - target:          arm64e-maccatalyst
-    value:           AE3C151D-2022-3A70-9DE4-FA773BF55FDB
+    value:           B4073019-1155-3FCA-B7DE-6197296984EA
 install-name:    '/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CTCopyDescriptionDictionary, _CTFontCollectionCopyAttributes, 
                        _CTFontCollectionCopyExclusionDescriptors, _CTFontCollectionCopyFontAttribute, 
@@ -59,13 +59,13 @@ exports:
                        _CTFontCreateWithQuickdrawInstance, _CTFontDescriptorCanCreateWithTextStyle, 
                        _CTFontDescriptorCopyAttribute, _CTFontDescriptorCopyAttributes, 
                        _CTFontDescriptorCopyDownloadableFontAttributesForRequests, 
-                       _CTFontDescriptorCopyLocalizedAttribute, _CTFontDescriptorCopyNameForSystemFontOfWeight, 
-                       _CTFontDescriptorCreateCopyWithAttributes, _CTFontDescriptorCreateCopyWithFamily, 
-                       _CTFontDescriptorCreateCopyWithFeature, _CTFontDescriptorCreateCopyWithSymbolicTraits, 
-                       _CTFontDescriptorCreateCopyWithVariation, _CTFontDescriptorCreateForCSSFamily, 
-                       _CTFontDescriptorCreateForUIType, _CTFontDescriptorCreateLastResort, 
-                       _CTFontDescriptorCreateMatchingFontDescriptor, _CTFontDescriptorCreateMatchingFontDescriptors, 
-                       _CTFontDescriptorCreateMatchingFontDescriptorsWithOptions, 
+                       _CTFontDescriptorCopyLocalizedAttribute, _CTFontDescriptorCopyName, 
+                       _CTFontDescriptorCopyNameForSystemFontOfWeight, _CTFontDescriptorCreateCopyWithAttributes, 
+                       _CTFontDescriptorCreateCopyWithFamily, _CTFontDescriptorCreateCopyWithFeature, 
+                       _CTFontDescriptorCreateCopyWithSymbolicTraits, _CTFontDescriptorCreateCopyWithVariation, 
+                       _CTFontDescriptorCreateForCSSFamily, _CTFontDescriptorCreateForUIType, 
+                       _CTFontDescriptorCreateLastResort, _CTFontDescriptorCreateMatchingFontDescriptor, 
+                       _CTFontDescriptorCreateMatchingFontDescriptors, _CTFontDescriptorCreateMatchingFontDescriptorsWithOptions, 
                        _CTFontDescriptorCreateWithAttributes, _CTFontDescriptorCreateWithAttributesAndOptions, 
                        _CTFontDescriptorCreateWithNameAndSize, _CTFontDescriptorCreateWithTextStyle, 
                        _CTFontDescriptorCreateWithTextStyleAndAttributes, _CTFontDescriptorDownloadMatchingFontDescriptors, 
@@ -271,17 +271,17 @@ exports:
                        _kCTFontRegistrationUserInfoAttribute, _kCTFontSampleTextNameKey, 
                        _kCTFontSearchDomainAttribute, _kCTFontSizeAttribute, _kCTFontSizeCategoryAttribute, 
                        _kCTFontSlantTrait, _kCTFontStyleNameAttribute, _kCTFontStyleNameKey, 
-                       _kCTFontSubFamilyNameKey, _kCTFontSymbolicTrait, _kCTFontSyntheticNameKey, 
-                       _kCTFontSystemAlternate, _kCTFontSystemAlternateBlack, _kCTFontSystemAlternateBlackItalic, 
-                       _kCTFontSystemAlternateBold, _kCTFontSystemAlternateBoldItalic, 
-                       _kCTFontSystemAlternateDemi, _kCTFontSystemAlternateDemiItalic, 
-                       _kCTFontSystemAlternateHeavy, _kCTFontSystemAlternateHeavyItalic, 
-                       _kCTFontSystemAlternateItalic, _kCTFontSystemAlternateLight, 
-                       _kCTFontSystemAlternateLightItalic, _kCTFontSystemAlternateMedium, 
-                       _kCTFontSystemAlternateMediumItalic, _kCTFontSystemAlternateThin, 
-                       _kCTFontSystemAlternateThinItalic, _kCTFontSystemAlternateUltraLight, 
-                       _kCTFontSystemAlternateUltraLightItalic, _kCTFontSystemCondensed, 
-                       _kCTFontSystemCondensedBlack, _kCTFontSystemCondensedBold, 
+                       _kCTFontSubFamilyNameKey, _kCTFontSymbolicTrait, _kCTFontSyntheticFamilyNameKey, 
+                       _kCTFontSyntheticNameKey, _kCTFontSystemAlternate, _kCTFontSystemAlternateBlack, 
+                       _kCTFontSystemAlternateBlackItalic, _kCTFontSystemAlternateBold, 
+                       _kCTFontSystemAlternateBoldItalic, _kCTFontSystemAlternateDemi, 
+                       _kCTFontSystemAlternateDemiItalic, _kCTFontSystemAlternateHeavy, 
+                       _kCTFontSystemAlternateHeavyItalic, _kCTFontSystemAlternateItalic, 
+                       _kCTFontSystemAlternateLight, _kCTFontSystemAlternateLightItalic, 
+                       _kCTFontSystemAlternateMedium, _kCTFontSystemAlternateMediumItalic, 
+                       _kCTFontSystemAlternateThin, _kCTFontSystemAlternateThinItalic, 
+                       _kCTFontSystemAlternateUltraLight, _kCTFontSystemAlternateUltraLightItalic, 
+                       _kCTFontSystemCondensed, _kCTFontSystemCondensedBlack, _kCTFontSystemCondensedBold, 
                        _kCTFontSystemCondensedDemi, _kCTFontSystemCondensedHeavy, 
                        _kCTFontSystemCondensedLight, _kCTFontSystemCondensedMedium, 
                        _kCTFontSystemCondensedThin, _kCTFontSystemCondensedUltraLight, 
@@ -363,7 +363,7 @@ exports:
                        CTGlyphStorageInterface._glyphCount, CTGlyphStorageInterface._glyphs, 
                        CTGlyphStorageInterface._origins, CTGlyphStorageInterface._props, 
                        CTGlyphStorageInterface._stringIndexes ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.5$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.6$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.7$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 

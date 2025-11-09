@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           003A027D-9CE3-3794-A319-88495844662D
+    value:           CFB56DA8-7462-3E8F-9CFB-20926C6A2BB5
   - target:          x86_64-maccatalyst
-    value:           003A027D-9CE3-3794-A319-88495844662D
+    value:           CFB56DA8-7462-3E8F-9CFB-20926C6A2BB5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D87D7BAA-9E73-3A84-8247-3456B703C302
+    value:           E060D0AA-33F9-376E-8947-2FE8F31AB4CA
   - target:          arm64e-maccatalyst
-    value:           D87D7BAA-9E73-3A84-8247-3456B703C302
+    value:           E060D0AA-33F9-376E-8947-2FE8F31AB4CA
 install-name:    '/usr/lib/system/libxpc.dylib'
-current-version: 2038.40.38
+current-version: 2038.100.48
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -41,10 +41,11 @@ exports:
                        _XPC_ACTIVITY_MOTION_STATE_AUTOMOTIVE, _XPC_ACTIVITY_MOTION_STATE_AUTOMOTIVE_MOVING, 
                        _XPC_ACTIVITY_MOTION_STATE_AUTOMOTIVE_STATIONARY, _XPC_ACTIVITY_MOTION_STATE_CYCLING, 
                        _XPC_ACTIVITY_MOTION_STATE_RUNNING, _XPC_ACTIVITY_MOTION_STATE_STATIONARY, 
-                       _XPC_ACTIVITY_MOTION_STATE_WALKING, _XPC_ACTIVITY_NETWORK_TRANSFER_BIDIRECTIONAL, 
-                       _XPC_ACTIVITY_NETWORK_TRANSFER_DIRECTION, _XPC_ACTIVITY_NETWORK_TRANSFER_DIRECTION_DOWNLOAD, 
-                       _XPC_ACTIVITY_NETWORK_TRANSFER_DIRECTION_UPLOAD, _XPC_ACTIVITY_NETWORK_TRANSFER_ENDPOINT, 
-                       _XPC_ACTIVITY_NETWORK_TRANSFER_PARAMETERS, _XPC_ACTIVITY_NETWORK_TRANSFER_SIZE, 
+                       _XPC_ACTIVITY_MOTION_STATE_WALKING, _XPC_ACTIVITY_NETWORK_DOWNLOAD_SIZE, 
+                       _XPC_ACTIVITY_NETWORK_TRANSFER_BIDIRECTIONAL, _XPC_ACTIVITY_NETWORK_TRANSFER_DIRECTION, 
+                       _XPC_ACTIVITY_NETWORK_TRANSFER_DIRECTION_DOWNLOAD, _XPC_ACTIVITY_NETWORK_TRANSFER_DIRECTION_UPLOAD, 
+                       _XPC_ACTIVITY_NETWORK_TRANSFER_ENDPOINT, _XPC_ACTIVITY_NETWORK_TRANSFER_PARAMETERS, 
+                       _XPC_ACTIVITY_NETWORK_TRANSFER_SIZE, _XPC_ACTIVITY_NETWORK_UPLOAD_SIZE, 
                        _XPC_ACTIVITY_POST_INSTALL, _XPC_ACTIVITY_POWER_NAP, _XPC_ACTIVITY_PRIORITY, 
                        _XPC_ACTIVITY_PRIORITY_MAINTENANCE, _XPC_ACTIVITY_PRIORITY_UTILITY, 
                        _XPC_ACTIVITY_RANDOM_INITIAL_DELAY, _XPC_ACTIVITY_REPEATING, 
@@ -131,17 +132,17 @@ exports:
                        _launch_msg, _launch_path_for_user_service_4coresim, _launch_perfcheck_property_endpoint_active, 
                        _launch_perfcheck_property_endpoint_event, _launch_perfcheck_property_endpoint_name, 
                        _launch_perfcheck_property_endpoint_needs_activation, _launch_perfcheck_property_endpoints, 
-                       _launch_remove_external_service, _launch_service_instance_create, 
-                       _launch_service_instance_remove, _launch_service_stats_disable_4ppse, 
-                       _launch_service_stats_enable_4ppse, _launch_service_stats_is_enabled_4ppse, 
-                       _launch_set_service_enabled, _launch_set_system_service_enabled, 
-                       _launch_socket_service_check_in, _launch_version_for_user_service_4coresim, 
-                       _launch_wait, _launchd_close, _launchd_fdopen, _launchd_getfd, 
-                       _launchd_msg_recv, _launchd_msg_send, _load_launchd_jobs_at_loginwindow_prompt, 
-                       _mpm_uncork_fork, _mpm_wait, _os_system_version_get_current_version, 
-                       _os_system_version_get_ios_support_version, _os_system_version_sim_get_current_host_version, 
-                       _os_transaction_copy_description, _os_transaction_create, 
-                       _os_transaction_get_timestamp, _os_transaction_needs_more_time, 
+                       _launch_remove_external_service, _launch_service_instance_copy_uuids, 
+                       _launch_service_instance_create, _launch_service_instance_remove, 
+                       _launch_service_stats_disable_4ppse, _launch_service_stats_enable_4ppse, 
+                       _launch_service_stats_is_enabled_4ppse, _launch_set_service_enabled, 
+                       _launch_set_system_service_enabled, _launch_socket_service_check_in, 
+                       _launch_version_for_user_service_4coresim, _launch_wait, _launchd_close, 
+                       _launchd_fdopen, _launchd_getfd, _launchd_msg_recv, _launchd_msg_send, 
+                       _load_launchd_jobs_at_loginwindow_prompt, _mpm_uncork_fork, 
+                       _mpm_wait, _os_system_version_get_current_version, _os_system_version_get_ios_support_version, 
+                       _os_system_version_sim_get_current_host_version, _os_transaction_copy_description, 
+                       _os_transaction_create, _os_transaction_get_timestamp, _os_transaction_needs_more_time, 
                        _place_hold_on_real_loginwindow, _reboot2, _reboot3, _vproc_release, 
                        _vproc_retain, _vproc_standby_begin, _vproc_standby_end, _vproc_swap_complex, 
                        _vproc_swap_integer, _vproc_swap_string, _vproc_transaction_begin, 

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0A79595A-95CD-3264-92C0-BDA18DC5F28B
+    value:           139E17C3-21B7-3180-8868-E3D3FCABA2F4
   - target:          x86_64-maccatalyst
-    value:           0A79595A-95CD-3264-92C0-BDA18DC5F28B
+    value:           139E17C3-21B7-3180-8868-E3D3FCABA2F4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C170A0B9-E590-3115-BEC3-AA2FBC85B89D
+    value:           81FC2E2B-9C34-32ED-815F-BFA99968BD50
   - target:          arm64e-maccatalyst
-    value:           C170A0B9-E590-3115-BEC3-AA2FBC85B89D
+    value:           81FC2E2B-9C34-32ED-815F-BFA99968BD50
 install-name:    '/usr/lib/swift/libswiftIntents.dylib'
 current-version: 8
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.11$@rpath/libswiftIntents.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.13$@rpath/libswiftIntents.dylib', 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           09FA5034-E818-3EB6-A0FC-8CE8D9F84388
+    value:           73FE9C85-17F8-3011-9004-C4E15A758C17
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3DB3AE1B-6184-32AD-8C6C-1535B15930F1
+    value:           12A58AE0-69C8-31A6-9482-E6AE7E1218B7
 install-name:    '/System/Library/PrivateFrameworks/XQuery.framework/Versions/A/XQuery'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

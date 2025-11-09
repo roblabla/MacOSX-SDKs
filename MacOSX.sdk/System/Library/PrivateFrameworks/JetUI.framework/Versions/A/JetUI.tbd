@@ -3,24 +3,25 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EFE87A90-D2F5-3103-ACAC-147564B6EB8C
+    value:           EE41A1AC-194C-35F5-A1EB-C8B5C812C862
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           44FBB706-FD3E-3F1B-A542-69123F233480
+    value:           6B413135-DC80-3E49-861B-F026F23F7EF5
 install-name:    '/System/Library/PrivateFrameworks/JetUI.framework/Versions/A/JetUI'
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ AMPDesktopUI, App Store, AppStoreComponents, AppStoreComponentsDaemonTests, 
-                       AppStoreComponentsTests, AppStoreKit, AppStoreKitMac, AppStoreKitMacTests, 
-                       AppleMediaServicesUIDynamic, AppleTV, CoreDynamicUIPlugin, 
-                       GameCenterAccountsUIPlugin, GameCenterUI, GameCenterUICore, 
-                       GameCenterViewService, GameKit, Games, JetMusic, JetPreflight, 
-                       JetPreflightTests, MacAppStore, MacAppStoreTests, MacBuddy Plugin, 
-                       Music, MusicTests, Podcasts, PodcastsStoreUI, PodcastsStoreUITests, 
-                       PodcastsTests, PodcastsUI, StoreDynamicUIPlugin, StoreDynamicUIPluginTests, 
-                       TV, TVTests, VideosUI ]
+    clients:         [ AMPDesktopUI, AMSEngagementViewService, App Store, AppStoreComponents, 
+                       AppStoreComponentsDaemonTests, AppStoreComponentsTests, AppStoreKit, 
+                       AppStoreKitMac, AppStoreKitMacTests, AppleMediaServicesUIDynamic, 
+                       AppleTV, CoreDynamicUIPlugin, GameCenterAccountsUIPlugin, 
+                       GameCenterUI, GameCenterUICore, GameCenterViewService, GameKit, 
+                       Games, JetMusic, JetPreflight, JetPreflightTests, MacAppStore, 
+                       MacAppStoreTests, MacBuddy Plugin, Music, MusicTests, Podcasts, 
+                       PodcastsStoreUI, PodcastsStoreUITests, PodcastsTests, PodcastsUI, 
+                       StoreDynamicUIPlugin, StoreDynamicUIPluginTests, TV, TVSystemMenuService, 
+                       TVTests, VideosUI ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s10Foundation12CharacterSetV5JetUIE19excessiveLineHeightACvgZ', 

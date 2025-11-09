@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B6ECD3BD-E0CD-3F33-8741-CDBE0CD778DA
+    value:           FE833F83-E749-3263-B494-1454BE0EC758
   - target:          x86_64-maccatalyst
-    value:           B6ECD3BD-E0CD-3F33-8741-CDBE0CD778DA
+    value:           FE833F83-E749-3263-B494-1454BE0EC758
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B80B8F90-FAF7-396F-A319-F518CB5B3D12
+    value:           4C0F12AE-D2A2-3C0F-85E8-7F285680B929
   - target:          arm64e-maccatalyst
-    value:           B80B8F90-FAF7-396F-A319-F518CB5B3D12
+    value:           4C0F12AE-D2A2-3C0F-85E8-7F285680B929
 install-name:    '/System/Library/PrivateFrameworks/SPShared.framework/Versions/A/SPShared'
 swift-abi-version: 7
 allowable-clients:
@@ -67,11 +67,21 @@ exports:
                        '_$s10Foundation6LocaleV8SPSharedE18acceptLanguageCodeSSvg', 
                        '_$s10Foundation6LocaleV8SPSharedE18acceptLanguageCodeSSvpMV', 
                        '_$s10Foundation8TimeZoneV8SPSharedE3gmtACvgZ', '_$s10Subscriber8SPShared12SubscribablePTl', 
-                       '_$s8SPShared10MACAddressV11descriptionSSvg', '_$s8SPShared10MACAddressV11descriptionSSvpMV', 
-                       '_$s8SPShared10MACAddressV13stringLiteralACSS_tcfC', '_$s8SPShared10MACAddressV2eeoiySbAC_ACtFZ', 
-                       '_$s8SPShared10MACAddressV4data10Foundation4DataVvg', '_$s8SPShared10MACAddressV4data10Foundation4DataVvpMV', 
-                       '_$s8SPShared10MACAddressV4dataACSg10Foundation4DataV_tcfC', 
-                       '_$s8SPShared10MACAddressV4hash4intoys6HasherVz_tF', '_$s8SPShared10MACAddressV6stringACSgSS_tcfC', 
+                       '_$s14IdentifierType8SPShared9QueueablePTl', '_$s6Output8SPShared25AnyCurrentValuePublishingPTl', 
+                       '_$s7Combine19CurrentValueSubjectC8SPSharedE010eraseToAnybC9PublisherAD0hbcI0Cyxq_GyF', 
+                       '_$s7Failure8SPShared25AnyCurrentValuePublishingPTl', '_$s8SPShared10MACAddressV11AddressTypeO2eeoiySbAE_AEtFZ', 
+                       '_$s8SPShared10MACAddressV11AddressTypeO4hash4intoys6HasherVz_tF', 
+                       '_$s8SPShared10MACAddressV11AddressTypeO6publicyA2EmFWC', 
+                       '_$s8SPShared10MACAddressV11AddressTypeO6randomyA2EmFWC', 
+                       '_$s8SPShared10MACAddressV11AddressTypeO9hashValueSivg', '_$s8SPShared10MACAddressV11AddressTypeO9hashValueSivpMV', 
+                       '_$s8SPShared10MACAddressV11AddressTypeOMa', '_$s8SPShared10MACAddressV11AddressTypeOMn', 
+                       '_$s8SPShared10MACAddressV11AddressTypeON', '_$s8SPShared10MACAddressV11AddressTypeOSHAAMc', 
+                       '_$s8SPShared10MACAddressV11AddressTypeOSQAAMc', '_$s8SPShared10MACAddressV11descriptionSSvg', 
+                       '_$s8SPShared10MACAddressV11descriptionSSvpMV', '_$s8SPShared10MACAddressV13stringLiteralACSS_tcfC', 
+                       '_$s8SPShared10MACAddressV2eeoiySbAC_ACtFZ', '_$s8SPShared10MACAddressV4data10Foundation4DataVvg', 
+                       '_$s8SPShared10MACAddressV4data10Foundation4DataVvpMV', '_$s8SPShared10MACAddressV4data4typeACSg10Foundation4DataV_AC11AddressTypeOtcfC', 
+                       '_$s8SPShared10MACAddressV4hash4intoys6HasherVz_tF', '_$s8SPShared10MACAddressV4typeAC11AddressTypeOvg', 
+                       '_$s8SPShared10MACAddressV4typeAC11AddressTypeOvpMV', '_$s8SPShared10MACAddressV6string4typeACSgSS_AC11AddressTypeOtcfC', 
                        '_$s8SPShared10MACAddressV9hashValueSivg', '_$s8SPShared10MACAddressV9hashValueSivpMV', 
                        '_$s8SPShared10MACAddressV9hexStringSSvg', '_$s8SPShared10MACAddressV9hexStringSSvpMV', 
                        '_$s8SPShared10MACAddressVMa', '_$s8SPShared10MACAddressVMn', 
@@ -333,6 +343,7 @@ exports:
                        '_$s8SPShared19BinaryEncodingErrorOMa', '_$s8SPShared19BinaryEncodingErrorOMn', 
                        '_$s8SPShared19BinaryEncodingErrorON', '_$s8SPShared19BinaryEncodingErrorOSHAAMc', 
                        '_$s8SPShared19BinaryEncodingErrorOSQAAMc', '_$s8SPShared19BinaryEncodingErrorOs0D0AAMc', 
+                       '_$s8SPShared19LocalizationUtilityC19localizedB389String3keyS2S_tFZ', 
                        '_$s8SPShared19LocalizationUtilityC22localizedHawkeyeString3keyS2S_tFZ', 
                        '_$s8SPShared19LocalizationUtilityCMa', '_$s8SPShared19LocalizationUtilityCMm', 
                        '_$s8SPShared19LocalizationUtilityCMn', '_$s8SPShared19LocalizationUtilityCMo', 
@@ -374,8 +385,15 @@ exports:
                        '_$s8SPShared21XPCServiceDescriptionV4name7options14exportedObject0F9Interface12shouldAccept19interruptionHandler012invalidationL0AcA15MachServiceNameV_So22NSXPCConnectionOptionsVSo8NSObjectCSo14NSXPCInterfaceCSbSo0Q0CcSgyATcSgAVtcfC', 
                        '_$s8SPShared21XPCServiceDescriptionV4name7options21remoteObjectInterface19interruptionHandler012invalidationJ0AcA15MachServiceNameV_So22NSXPCConnectionOptionsVSo14NSXPCInterfaceCySo0O0CcSgAQtcfC', 
                        '_$s8SPShared21XPCServiceDescriptionVMa', '_$s8SPShared21XPCServiceDescriptionVMn', 
-                       '_$s8SPShared21XPCServiceDescriptionVN', '_$s8SPShared24BinaryDecodingContainingMp', 
-                       '_$s8SPShared24BinaryDecodingContainingP12decodeString8encodingS2S10FoundationE8EncodingV_tKFTj', 
+                       '_$s8SPShared21XPCServiceDescriptionVN', '_$s8SPShared24AnyCurrentValuePublisherC5valuexvgTj', 
+                       '_$s8SPShared24AnyCurrentValuePublisherC5valuexvgTq', '_$s8SPShared24AnyCurrentValuePublisherC5valuexvpMV', 
+                       '_$s8SPShared24AnyCurrentValuePublisherC9publisher7Combine0bE0Vyxq_Gvg', 
+                       '_$s8SPShared24AnyCurrentValuePublisherC9publisher7Combine0bE0Vyxq_GvpMV', 
+                       '_$s8SPShared24AnyCurrentValuePublisherCMa', '_$s8SPShared24AnyCurrentValuePublisherCMn', 
+                       '_$s8SPShared24AnyCurrentValuePublisherCMo', '_$s8SPShared24AnyCurrentValuePublisherCMu', 
+                       '_$s8SPShared24AnyCurrentValuePublisherCfD', '_$s8SPShared24AnyCurrentValuePublisherCfd', 
+                       '_$s8SPShared24AnyCurrentValuePublisherCyxq_GAA0bcD10PublishingAAMc', 
+                       '_$s8SPShared24BinaryDecodingContainingMp', '_$s8SPShared24BinaryDecodingContainingP12decodeString8encodingS2S10FoundationE8EncodingV_tKFTj', 
                        '_$s8SPShared24BinaryDecodingContainingP12decodeString8encodingS2S10FoundationE8EncodingV_tKFTq', 
                        '_$s8SPShared24BinaryDecodingContainingP6decode6length10Foundation4DataVSi_tKFTj', 
                        '_$s8SPShared24BinaryDecodingContainingP6decode6length10Foundation4DataVSi_tKFTq', 
@@ -404,8 +422,14 @@ exports:
                        '_$s8SPShared24DarwinNotificationHelperCMn', '_$s8SPShared24DarwinNotificationHelperCMo', 
                        '_$s8SPShared24DarwinNotificationHelperCMu', '_$s8SPShared24DarwinNotificationHelperCN', 
                        '_$s8SPShared24DarwinNotificationHelperCfD', '_$s8SPShared24DarwinNotificationHelperCfd', 
-                       '_$s8SPShared25DarwinNotificationManagerC5setUpyyFTj', '_$s8SPShared25DarwinNotificationManagerC5setUpyyFTq', 
-                       '_$s8SPShared25DarwinNotificationManagerC6sharedACvgZ', '_$s8SPShared25DarwinNotificationManagerC9publisher7Combine12AnyPublisherVySSs5NeverOGvg', 
+                       '_$s8SPShared25AnyCurrentValuePublishingMp', '_$s8SPShared25AnyCurrentValuePublishingP5value6OutputQzvgTj', 
+                       '_$s8SPShared25AnyCurrentValuePublishingP5value6OutputQzvgTq', 
+                       '_$s8SPShared25AnyCurrentValuePublishingP7FailureAC_s5ErrorTn', 
+                       '_$s8SPShared25AnyCurrentValuePublishingP9publisher7Combine0B9PublisherVy6OutputQz7FailureQzGvgTj', 
+                       '_$s8SPShared25AnyCurrentValuePublishingP9publisher7Combine0B9PublisherVy6OutputQz7FailureQzGvgTq', 
+                       '_$s8SPShared25AnyCurrentValuePublishingTL', '_$s8SPShared25DarwinNotificationManagerC5setUpyyFTj', 
+                       '_$s8SPShared25DarwinNotificationManagerC5setUpyyFTq', '_$s8SPShared25DarwinNotificationManagerC6sharedACvgZ', 
+                       '_$s8SPShared25DarwinNotificationManagerC9publisher7Combine12AnyPublisherVySSs5NeverOGvg', 
                        '_$s8SPShared25DarwinNotificationManagerC9publisher7Combine12AnyPublisherVySSs5NeverOGvpMV', 
                        '_$s8SPShared25DarwinNotificationManagerCMa', '_$s8SPShared25DarwinNotificationManagerCMm', 
                        '_$s8SPShared25DarwinNotificationManagerCMn', '_$s8SPShared25DarwinNotificationManagerCMo', 
@@ -469,7 +493,39 @@ exports:
                        '_$s8SPShared9EndianessO9hashValueSivg', '_$s8SPShared9EndianessO9hashValueSivpMV', 
                        '_$s8SPShared9EndianessOMa', '_$s8SPShared9EndianessOMn', 
                        '_$s8SPShared9EndianessON', '_$s8SPShared9EndianessOSHAAMc', 
-                       '_$s8SPShared9EndianessOSQAAMc', '_$s8SPShared9SchedulerO010mainThreadB0AA0B8Protocol_pvMZ', 
+                       '_$s8SPShared9EndianessOSQAAMc', '_$s8SPShared9QueuePoolC11descriptionSSvg', 
+                       '_$s8SPShared9QueuePoolC11descriptionSSvpMV', '_$s8SPShared9QueuePoolC13insertBarrier5block10completionyyyc_yycSgtFTj', 
+                       '_$s8SPShared9QueuePoolC13insertBarrier5block10completionyyyc_yycSgtFTq', 
+                       '_$s8SPShared9QueuePoolC4name7workers010completionB0ACSS_SiSo17OS_dispatch_queueCtcfC', 
+                       '_$s8SPShared9QueuePoolC4name7workers010completionB0ACSS_SiSo17OS_dispatch_queueCtcfCTj', 
+                       '_$s8SPShared9QueuePoolC4name7workers010completionB0ACSS_SiSo17OS_dispatch_queueCtcfCTq', 
+                       '_$s8SPShared9QueuePoolC4name7workers010completionB0ACSS_SiSo17OS_dispatch_queueCtcfc', 
+                       '_$s8SPShared9QueuePoolC6insert_10completionyx_yycSgtAA9QueueableRzlFTj', 
+                       '_$s8SPShared9QueuePoolC6insert_10completionyx_yycSgtAA9QueueableRzlFTq', 
+                       '_$s8SPShared9QueuePoolC7WrapperC10identifier5blockAEy_xGx_yyctcfC', 
+                       '_$s8SPShared9QueuePoolC7WrapperC10identifier6blocksAEy_xGx_SayyycGtcfC', 
+                       '_$s8SPShared9QueuePoolC7WrapperC10identifier6blocksAEy_xGx_SayyycGtcfCTj', 
+                       '_$s8SPShared9QueuePoolC7WrapperC10identifier6blocksAEy_xGx_SayyycGtcfCTq', 
+                       '_$s8SPShared9QueuePoolC7WrapperC10identifier6blocksAEy_xGx_SayyycGtcfc', 
+                       '_$s8SPShared9QueuePoolC7WrapperC6blocksSayyycGvMTj', '_$s8SPShared9QueuePoolC7WrapperC6blocksSayyycGvMTq', 
+                       '_$s8SPShared9QueuePoolC7WrapperC6blocksSayyycGvgTj', '_$s8SPShared9QueuePoolC7WrapperC6blocksSayyycGvgTq', 
+                       '_$s8SPShared9QueuePoolC7WrapperC6blocksSayyycGvpMV', '_$s8SPShared9QueuePoolC7WrapperC6blocksSayyycGvsTj', 
+                       '_$s8SPShared9QueuePoolC7WrapperC6blocksSayyycGvsTq', '_$s8SPShared9QueuePoolC7WrapperC9identiferxvMTj', 
+                       '_$s8SPShared9QueuePoolC7WrapperC9identiferxvMTq', '_$s8SPShared9QueuePoolC7WrapperC9identiferxvgTj', 
+                       '_$s8SPShared9QueuePoolC7WrapperC9identiferxvgTq', '_$s8SPShared9QueuePoolC7WrapperC9identiferxvpMV', 
+                       '_$s8SPShared9QueuePoolC7WrapperC9identiferxvsTj', '_$s8SPShared9QueuePoolC7WrapperC9identiferxvsTq', 
+                       '_$s8SPShared9QueuePoolC7WrapperCMa', '_$s8SPShared9QueuePoolC7WrapperCMn', 
+                       '_$s8SPShared9QueuePoolC7WrapperCMo', '_$s8SPShared9QueuePoolC7WrapperCMu', 
+                       '_$s8SPShared9QueuePoolC7WrapperCfD', '_$s8SPShared9QueuePoolC7WrapperCfd', 
+                       '_$s8SPShared9QueuePoolC7WrapperCy_xGAA9QueueableAAMc', '_$s8SPShared9QueuePoolCMa', 
+                       '_$s8SPShared9QueuePoolCMm', '_$s8SPShared9QueuePoolCMn', 
+                       '_$s8SPShared9QueuePoolCMo', '_$s8SPShared9QueuePoolCMu', 
+                       '_$s8SPShared9QueuePoolCN', '_$s8SPShared9QueuePoolCfD', '_$s8SPShared9QueuePoolCfd', 
+                       '_$s8SPShared9QueuePoolCs23CustomStringConvertibleAAMc', '_$s8SPShared9QueueableMp', 
+                       '_$s8SPShared9QueueableP14IdentifierTypeAC_SHTn', '_$s8SPShared9QueueableP6blocksSayyycGvgTj', 
+                       '_$s8SPShared9QueueableP6blocksSayyycGvgTq', '_$s8SPShared9QueueableP9identifer14IdentifierTypeQzvgTj', 
+                       '_$s8SPShared9QueueableP9identifer14IdentifierTypeQzvgTq', 
+                       '_$s8SPShared9QueueableTL', '_$s8SPShared9SchedulerO010mainThreadB0AA0B8Protocol_pvMZ', 
                        '_$s8SPShared9SchedulerO010mainThreadB0AA0B8Protocol_pvgZ', 
                        '_$s8SPShared9SchedulerO010mainThreadB0AA0B8Protocol_pvsZ', 
                        '_$s8SPShared9SchedulerO011globalAsyncB0AA0B8Protocol_pvMZ', 

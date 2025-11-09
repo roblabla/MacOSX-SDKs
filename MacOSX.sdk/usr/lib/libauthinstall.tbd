@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           08C2A192-7978-3A39-B070-BADFE32A33B3
+    value:           30E0D64F-F12E-35F5-BE50-974ABC487F46
   - target:          x86_64-maccatalyst
-    value:           08C2A192-7978-3A39-B070-BADFE32A33B3
+    value:           30E0D64F-F12E-35F5-BE50-974ABC487F46
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           951FB8D5-6440-30AA-BA8E-D5A01E5927E5
+    value:           47D93953-5B20-38F0-90E3-5916CBAC9350
   - target:          arm64e-maccatalyst
-    value:           951FB8D5-6440-30AA-BA8E-D5A01E5927E5
+    value:           47D93953-5B20-38F0-90E3-5916CBAC9350
 install-name:    '/usr/lib/libauthinstall.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -166,16 +166,17 @@ exports:
                        _kAMAuthInstallApImg4Tag, _kAMAuthInstallApImg4TagManifest, 
                        _kAMAuthInstallApImg4TagManifestBody, _kAMAuthInstallApImg4TagManifestProperties, 
                        _kAMAuthInstallApImg4TagRestoreInfo, _kAMAuthInstallApParameterAPTagOverrides, 
-                       _kAMAuthInstallApParameterAllowMixAndMatch, _kAMAuthInstallApParameterApNonce, 
-                       _kAMAuthInstallApParameterBoardID, _kAMAuthInstallApParameterChipID, 
-                       _kAMAuthInstallApParameterDemotionPolicy, _kAMAuthInstallApParameterECID, 
-                       _kAMAuthInstallApParameterEffectiveProductionMode, _kAMAuthInstallApParameterEffectiveSecurityMode, 
-                       _kAMAuthInstallApParameterHardwareModel, _kAMAuthInstallApParameterImg4DigestSHA1, 
-                       _kAMAuthInstallApParameterImg4DigestSHA256, _kAMAuthInstallApParameterImg4DigestSHA384, 
-                       _kAMAuthInstallApParameterImg4DigestType, _kAMAuthInstallApParameterInRomDFU, 
-                       _kAMAuthInstallApParameterIsX86, _kAMAuthInstallApParameterProductionMode, 
-                       _kAMAuthInstallApParameterSecurityDomain, _kAMAuthInstallApParameterSecurityMode, 
-                       _kAMAuthInstallApParameterSepNonce, _kAMAuthInstallApParameterSoftwareNonceForUpdateFreshness, 
+                       _kAMAuthInstallApParameterAllowMixAndMatch, _kAMAuthInstallApParameterApInternalUseOnlySW, 
+                       _kAMAuthInstallApParameterApNonce, _kAMAuthInstallApParameterBoardID, 
+                       _kAMAuthInstallApParameterChipID, _kAMAuthInstallApParameterDemotionPolicy, 
+                       _kAMAuthInstallApParameterECID, _kAMAuthInstallApParameterEffectiveProductionMode, 
+                       _kAMAuthInstallApParameterEffectiveSecurityMode, _kAMAuthInstallApParameterHardwareModel, 
+                       _kAMAuthInstallApParameterImg4DigestSHA1, _kAMAuthInstallApParameterImg4DigestSHA256, 
+                       _kAMAuthInstallApParameterImg4DigestSHA384, _kAMAuthInstallApParameterImg4DigestType, 
+                       _kAMAuthInstallApParameterInRomDFU, _kAMAuthInstallApParameterIsX86, 
+                       _kAMAuthInstallApParameterProductionMode, _kAMAuthInstallApParameterSecurityDomain, 
+                       _kAMAuthInstallApParameterSecurityMode, _kAMAuthInstallApParameterSepNonce, 
+                       _kAMAuthInstallApParameterSoftwareNonceForUpdateFreshness, 
                        _kAMAuthInstallApParameterSupportsImg4, _kAMAuthInstallApParameterTagPrefix, 
                        _kAMAuthInstallApParameterUseGlobalSigning, _kAMAuthInstallBasebandActivationKeyHash, 
                        _kAMAuthInstallBasebandCalibrationKeyHash, _kAMAuthInstallBasebandFDRSecurityKeyHash, 

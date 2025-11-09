@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           E88D7936-63F0-3B3D-8194-F639ACB3DEA1
+    value:           FBFB15A4-DD4C-3D12-A7E9-1048E54E4537
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           EEEB68B4-7B07-3A6B-8DFB-7C2246113DA8
+    value:           E5E4104A-2112-369F-A812-1C2F051C04F4
 install-name:    '/System/iOSSupport/System/Library/Frameworks/GameplayKit.framework/Versions/A/GameplayKit'
 current-version: 95
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _GKClosestPointsBetweenLineSegments, _GKDoesCircleIntersectLine, 
                        _GKDoesCircleIntersectLineSegment, _GKDoesCircleIntersectPolygon, 
                        _GKGetCircleToLineIntersectionPoints, _GKGetCircleToLineSegmentIntersectionPoints, 

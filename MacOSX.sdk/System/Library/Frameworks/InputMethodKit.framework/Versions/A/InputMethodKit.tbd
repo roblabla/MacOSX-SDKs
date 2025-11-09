@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           074566E1-C43B-3CE8-99EF-DCA84A5CC483
+    value:           C282F78C-73E1-39FE-9C81-B43852CBA73B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2653C701-6F88-3A8B-8186-E77C78975623
+    value:           3537B858-A311-38D9-A7CE-BA50C07FDF29
 install-name:    '/System/Library/Frameworks/InputMethodKit.framework/Versions/A/InputMethodKit'
 current-version: 457
 exports:

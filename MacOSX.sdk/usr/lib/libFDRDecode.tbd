@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           424318C2-9083-3303-923C-E7D8E263CD58
+    value:           C8C6391F-4679-36B3-94ED-C5638C2DB580
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           55C103EF-8966-39F5-8569-1FD1993C9BAB
+    value:           A061AAE1-4583-360F-9F57-F0DF09246AC3
 install-name:    '/usr/lib/libFDRDecode.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A07A5793-010A-399B-8597-8C71B223AC34
+    value:           6D1BF820-9916-3273-A937-B46FBAE055B4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8FD76436-7171-3788-BFF8-7542FA311574
+    value:           37983750-30AE-3834-9496-E8766098B26C
 install-name:    '/System/Library/PrivateFrameworks/MailCore.framework/Versions/A/MailCore'
-current-version: 3654.40
+current-version: 3654.80
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ CoreSuggestionsTests, DebugBundle, EmailAuthenticationPlugin, 

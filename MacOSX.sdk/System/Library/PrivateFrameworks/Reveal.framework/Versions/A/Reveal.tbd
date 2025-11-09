@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F354B030-5A83-38D4-8D02-71A0E8B8554D
+    value:           FDDBCB21-E899-3A49-BD8F-2B2E21C87693
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F06B53FF-9590-394B-B4DF-245BF050510F
+    value:           31E376A7-A46F-34AE-9BA5-0F819F71DD2D
 install-name:    '/System/Library/PrivateFrameworks/Reveal.framework/Versions/A/Reveal'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EB6016EC-E86F-3F26-8A0A-28E4AF15EBD5
+    value:           77196D19-26B8-3BF5-A2C2-ABB90EDE3AA4
   - target:          x86_64-maccatalyst
-    value:           EB6016EC-E86F-3F26-8A0A-28E4AF15EBD5
+    value:           77196D19-26B8-3BF5-A2C2-ABB90EDE3AA4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E2093335-CC36-3BF5-82B7-C9E6AA9CFA99
+    value:           DABC058F-1510-3A0C-8355-88E5426EB707
   - target:          arm64e-maccatalyst
-    value:           E2093335-CC36-3BF5-82B7-C9E6AA9CFA99
+    value:           DABC058F-1510-3A0C-8355-88E5426EB707
 install-name:    '/System/Library/PrivateFrameworks/AppleAccount.framework/Versions/A/AppleAccount'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

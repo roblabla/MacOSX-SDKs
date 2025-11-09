@@ -17,6 +17,7 @@ FOUNDATION_EXPORT NSErrorUserInfoKey const NSFileProviderErrorCollidingItemKey A
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSFileProviderErrorItemKey API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(macCatalyst) API_UNAVAILABLE(watchos, tvos);
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSFileProviderErrorNonExistentItemIdentifierKey FILEPROVIDER_API_AVAILABILITY_V2_V3;
 
+
 typedef NS_ERROR_ENUM(NSFileProviderErrorDomain, NSFileProviderErrorCode) {
     /** The user credentials cannot be verified */
     NSFileProviderErrorNotAuthenticated  = -1000,
@@ -84,14 +85,41 @@ typedef NS_ERROR_ENUM(NSFileProviderErrorDomain, NSFileProviderErrorCode) {
      If the failure is caused by a specific item, the NSFileProviderErrorItemKey will be set to the corresponding item identifier
      and the NSUnderlyingErrorKey will be set to the error encountered by that item.
      */
-    NSFileProviderErrorCannotSynchronize FILEPROVIDER_API_AVAILABILITY_V3 = -2005
+    NSFileProviderErrorCannotSynchronize FILEPROVIDER_API_AVAILABILITY_V3 = -2005,
+
+    /**
+    Returned by NSFileProviderManager if directory eviction failed because the target contains non-evictable items.
+
+    -[NSError underlyingErrors] is set to an array of the underlying errors. Each one has NSURLErrorKey set
+    to identify the particular file or directory affected by this error. The number of reported failing items is capped to an
+    implementation-defined number.
+
+    + domain: NSFileProviderErrorDomain errorCode: NSFileProviderErrorUnsyncedEdits error: if the item had unsynced content.
+    + domain: NSFileProviderErrorDomain errorCode: NSFileProviderErrorNonEvictable error: if the item has been marked as non-purgeable by the provider.
+    + domain: NSPOSIXErrorDomain errorCode: EBUSY - if the item had open file descriptors on it.
+    + domain: NSPOSIXErrorDomain errorCode: EMLINK : if the item had several hardlinks.
+    */
+    NSFileProviderErrorNonEvictableChildren API_AVAILABLE(macos(11.3)) = -2006,
+
+    /**
+     Returned by NSFileProviderManager if item eviction is failing because the item has edits that have not been synced yet
+
+     The NSURLErrorKey will be set to with the item URL that has unsynced content.
+    */
+    NSFileProviderErrorUnsyncedEdits API_AVAILABLE(macos(11.3)) = -2007,
+
+    /**
+     Returned by NSFileProviderManager if item eviction is failing because the item has not been assigned the evictable capability.
+
+     The NSURLErrorKey will be set to with the corresponding item URL.
+    */
+    NSFileProviderErrorNonEvictable API_AVAILABLE(macos(11.3)) = -2008,
 } FILEPROVIDER_API_AVAILABILITY_V2_V3;
 
 @interface NSError (NSFileProviderError)
 + (instancetype)fileProviderErrorForCollisionWithItem:(NSFileProviderItem)existingItem FILEPROVIDER_API_AVAILABILITY_V2_V3;
 + (instancetype)fileProviderErrorForNonExistentItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier FILEPROVIDER_API_AVAILABILITY_V2_V3;
 + (instancetype)fileProviderErrorForRejectedDeletionOfItem:(NSFileProviderItem)updatedVersion NS_SWIFT_NAME(fileProviderErrorForRejectedDeletion(of:)) FILEPROVIDER_API_AVAILABILITY_V3;
-
 @end
 
 NS_ASSUME_NONNULL_END

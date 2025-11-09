@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CDFB8363-3A90-33F3-957A-FBC114E66F8D
+    value:           85B29C5B-5659-3EA5-AB93-B31555236C7E
   - target:          x86_64-maccatalyst
-    value:           CDFB8363-3A90-33F3-957A-FBC114E66F8D
+    value:           85B29C5B-5659-3EA5-AB93-B31555236C7E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9E5935B3-A5BF-3ACD-BAB5-A07596E0D255
+    value:           458F0D20-C9B7-3372-A2EB-1FAEA000FE72
   - target:          arm64e-maccatalyst
-    value:           9E5935B3-A5BF-3ACD-BAB5-A07596E0D255
+    value:           458F0D20-C9B7-3372-A2EB-1FAEA000FE72
 install-name:    '/usr/lib/swift/libswiftDarwin.dylib'
 current-version: 0
 swift-abi-version: 7

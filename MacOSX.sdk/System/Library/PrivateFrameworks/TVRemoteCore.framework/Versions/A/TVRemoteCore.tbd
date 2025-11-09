@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           145A77C2-58B9-3250-807F-5132C478518D
+    value:           A9ED8DDF-EAA0-38F0-90A9-6465CA73DA4B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5B4AA588-A4C3-3208-B6D5-449365CB6CBC
+    value:           DF79F4F0-F553-3964-BF9E-E613D76BB06F
 install-name:    '/System/Library/PrivateFrameworks/TVRemoteCore.framework/Versions/A/TVRemoteCore'
-current-version: 135.10.4
+current-version: 135.40.15
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _NSStringFromRMSMessageType, _NSStringFromRMSResponseCode, 
@@ -40,7 +40,7 @@ exports:
                        _TVRMSVolumeDidUpdateMessageReadFrom, _TVRMSWifiAvailabilityDidChangeMessageReadFrom, 
                        _TVRemoteCoreVersionNumber, _TVRemoteCoreVersionString, __TVRCButtonLongPressBeginActionKey, 
                        __TVRCButtonLongPressEndActionKey, __TVRCGeneralLog, __TVRCHomeKitLog, 
-                       __TVRCMRTelevisionWrapperAssociatedObject, __TVRCMediaRemoteConnectionLog, 
+                       __TVRCMDMLog, __TVRCMRTelevisionWrapperAssociatedObject, __TVRCMediaRemoteConnectionLog, 
                        __TVRCMediaRemoteKeyboardLog, __TVRCRMSLog, __TVRCRapportLog, 
                        __TVRCRemoteTextInputLog, __TVRCSendVirtualTouchEvent, _kTVRAppleTVModelString, 
                        _kTVRCReconnectionWindow ]

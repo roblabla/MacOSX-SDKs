@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target arm64e-apple-macos11.1 -enable-objc-interop -swift-version 5 -enforce-exclusivity=checked -O -enable-library-evolution -module-name RealityKit
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target arm64e-apple-macos11.3 -enable-objc-interop -swift-version 5 -enforce-exclusivity=checked -O -enable-library-evolution -module-name RealityKit
 import AVFoundation
 import AppKit
 import AudioToolbox
@@ -29,7 +29,7 @@ extension Entity {
     set
   }
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct DirectionalLightComponent : RealityKit.Component, Swift.Equatable {
   public typealias Color = AppKit.NSColor
   public struct Shadow : RealityKit.Component, Swift.Equatable {
@@ -44,7 +44,7 @@ public struct DirectionalLightComponent : RealityKit.Component, Swift.Equatable 
     }
     public static func == (a: RealityKit.DirectionalLightComponent.Shadow, b: RealityKit.DirectionalLightComponent.Shadow) -> Swift.Bool
   }
-  public var color: AppKit.NSColor
+  public var color: RealityKit.DirectionalLightComponent.Color
   public var intensity: Swift.Float
   public var isRealWorldProxy: Swift.Bool
   public init(color: RealityKit.DirectionalLightComponent.Color = .white, intensity: Swift.Float = 2145.7078, isRealWorldProxy: Swift.Bool = false)
@@ -76,10 +76,10 @@ public enum __RKSimulationSceneCoordinatorState {
   case stopped
   case running
   public static func == (a: RealityKit.__RKSimulationSceneCoordinatorState, b: RealityKit.__RKSimulationSceneCoordinatorState) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public class __RKSimulationSceneCoordinator {
   @available(*, deprecated, message: "Please use the per-interaction-service scene coordinator.")
@@ -92,7 +92,7 @@ public class __RKSimulationSceneCoordinator {
 }
 public struct __AmbientLightComponent : RealityKit.Component, Swift.Equatable {
   public typealias Color = AppKit.NSColor
-  public var color: AppKit.NSColor
+  public var color: RealityKit.__AmbientLightComponent.Color
   public var intensity: Swift.Float
   public init()
   public init(color: RealityKit.__AmbientLightComponent.Color = .white, intensity: Swift.Float = 683.0)
@@ -112,8 +112,8 @@ public class __RKEntityLookAtCameraAction : RealityKit.__RKEntityAction {
   override public func perform(with context: RealityKit.__RKEntityActionContext) -> Swift.Bool
   override public func reversed() -> RealityKit.__RKEntityAction?
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
 @_hasMissingDesignatedInitializers public class __RealityFileURLResolver {
   @available(*, deprecated, message: "Don't use this variable")
@@ -170,7 +170,7 @@ extension simd_quatf {
 }
 public func __RERetain(_ ptr: Swift.OpaquePointer?)
 public func __RERelease(_ ptr: Swift.OpaquePointer?)
-@available(OSX 10.15.4, iOS 13.4, macCatalyst 14.0, *)
+@available(macOS 10.15.4, iOS 13.4, macCatalyst 14.0, *)
 public protocol __ARReferenceProviding {
 }
 public protocol __RKSpecificationHasTarget {
@@ -206,8 +206,8 @@ public enum __RKEntityTriggerSpecification : Swift.Codable, Swift.Equatable {
     case custom
     case customWithArguments
     case group
-    public typealias RawValue = Swift.String
     public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
     }
@@ -263,8 +263,8 @@ public enum __RKEntityActionSpecification : Swift.Codable, Swift.Equatable {
     case toggleVisibility
     case transform
     case wait
-    public typealias RawValue = Swift.String
     public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
     }
@@ -282,8 +282,8 @@ public enum __RKEntityActionSpecification : Swift.Codable, Swift.Equatable {
 public enum __RKEntityGroupActionOrder : Swift.String, Swift.Codable, Swift.Equatable {
   case concurrent
   case sequenced
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -295,18 +295,18 @@ public struct __RKEntityActionGroupArguments : Swift.Codable, Swift.Equatable {
   public var loopCount: Swift.Int?
   public var exclusiveBlocks: Swift.Bool?
   public init(order: RealityKit.__RKEntityGroupActionOrder, actions: [RealityKit.__RKEntityActionSpecification], exclusive: Swift.Bool = false, loopCount: Swift.Int = 1)
-  @available(OSX 11.0, iOS 14.0, *)
+  @available(macOS 11.0, iOS 14.0, *)
   public init(order: RealityKit.__RKEntityGroupActionOrder, actions: [RealityKit.__RKEntityActionSpecification], exclusive: Swift.Bool = false, loopCount: Swift.Int = 1, exclusiveBlocks: Swift.Bool = false)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityActionGroupArguments, b: RealityKit.__RKEntityActionGroupArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKWaitActionArguments : Swift.Codable, Swift.Equatable {
   public var duration: Swift.Float
   public init(duration: Swift.Float)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKWaitActionArguments, b: RealityKit.__RKWaitActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityCustomActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
@@ -317,9 +317,9 @@ public struct __RKEntityCustomActionArguments : Swift.Codable, Swift.Equatable, 
     set
   }
   public init(target: Foundation.UUID?, actionIdentifier: Swift.String, customArguments: [Swift.String : Swift.String]? = [:])
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityCustomActionArguments, b: RealityKit.__RKEntityCustomActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKChangeSceneActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID {
@@ -329,33 +329,33 @@ public struct __RKChangeSceneActionArguments : Swift.Codable, Swift.Equatable, R
   public var sceneRoot: Foundation.UUID
   public var targetSceneIdentifier: Foundation.UUID
   public init(sceneRoot: Foundation.UUID, targetSceneIdentifier: Foundation.UUID)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKChangeSceneActionArguments, b: RealityKit.__RKChangeSceneActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKFadeSceneActionArguments : Swift.Codable, Swift.Equatable {
   public var targetOpacity: Swift.Float
   public var duration: Swift.Float?
   public init(targetOpacity: Swift.Float, duration: Swift.Float = 0.0)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKFadeSceneActionArguments, b: RealityKit.__RKFadeSceneActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityFadeActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
   public var targetOpacity: Swift.Float
   public var duration: Swift.Float?
   public init(target: Foundation.UUID, targetOpacity: Swift.Float, duration: Swift.Float = 1.0)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityFadeActionArguments, b: RealityKit.__RKEntityFadeActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityToggleAnimateActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
   public init(target: Foundation.UUID)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityToggleAnimateActionArguments, b: RealityKit.__RKEntityToggleAnimateActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityStartAnimateActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
@@ -370,25 +370,25 @@ public struct __RKEntityStartAnimateActionArguments : Swift.Codable, Swift.Equat
   public let audioGain: Swift.Double?
   public var targetAnimation: Foundation.UUID?
   public init(target: Foundation.UUID, loopCount: Swift.Int = 1, multiplePerformBehavior: RealityKit.__RKEntityActionMultiplePerformBehavior = .ignore, clipStart: Swift.Double = 0.0, clipDuration: Swift.Double = 0.0, clipReversed: Swift.Bool = false, animationSpeed: Swift.Float = 1.0, clipReverses: Swift.Bool = false)
-  @available(OSX 10.15.4, iOS 13.4, *)
+  @available(macOS 10.15.4, iOS 13.4, *)
   public init(target: Foundation.UUID, loopCount: Swift.Int = 1, multiplePerformBehavior: RealityKit.__RKEntityActionMultiplePerformBehavior = .ignore, clipStart: Swift.Double = 0.0, clipDuration: Swift.Double = 0.0, clipReversed: Swift.Bool = false, animationSpeed: Swift.Float = 1.0, clipReverses: Swift.Bool = false, muteAudio: Swift.Bool = false, audioGain: Swift.Double = 1.0, targetAnimation: Foundation.UUID? = nil)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityStartAnimateActionArguments, b: RealityKit.__RKEntityStartAnimateActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityStopAnimateActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
   public init(target: Foundation.UUID)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityStopAnimateActionArguments, b: RealityKit.__RKEntityStopAnimateActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityToggleVisibilityActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
   public init(target: Foundation.UUID)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityToggleVisibilityActionArguments, b: RealityKit.__RKEntityToggleVisibilityActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityShowActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
@@ -404,9 +404,9 @@ public struct __RKEntityShowActionArguments : Swift.Codable, Swift.Equatable, Re
   public var animationStyle: RealityKit.__RKEntityActionAnimationStyle?
   public var buildInAnimationType: RealityKit.__RKEntityShowActionBuildInAnimationType?
   public init(target: Foundation.UUID, duration: Swift.Float = 1.0, distance: Swift.Float = 10.0, ease: RealityKit.__RKEntityMoveEase = .none, easeType: RealityKit.__RKEntityMoveEaseType = .easeIn, fadeIn: Swift.Bool = false, finalOpacity: Swift.Float = 1.0, respectPhysics: Swift.Bool = false, physicsLinearCoefficient: Swift.Float = 0.0, physicsAngularCoefficient: Swift.Float = 0.0, animationStyle: RealityKit.__RKEntityActionAnimationStyle = .basic, buildInAnimationType: RealityKit.__RKEntityShowActionBuildInAnimationType = .none)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityShowActionArguments, b: RealityKit.__RKEntityShowActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityHideActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
@@ -422,9 +422,9 @@ public struct __RKEntityHideActionArguments : Swift.Codable, Swift.Equatable, Re
   public var animationStyle: RealityKit.__RKEntityActionAnimationStyle?
   public var buildOutAnimationType: RealityKit.__RKEntityHideActionBuildOutAnimationType?
   public init(target: Foundation.UUID, duration: Swift.Float = 1.0, distance: Swift.Float = 10.0, ease: RealityKit.__RKEntityMoveEase = .none, easeType: RealityKit.__RKEntityMoveEaseType = .easeIn, fadeOut: Swift.Bool = false, finalOpacity: Swift.Float = 1.0, respectPhysics: Swift.Bool = false, physicsLinearCoefficient: Swift.Float = 0.0, physicsAngularCoefficient: Swift.Float = 0.0, animationStyle: RealityKit.__RKEntityActionAnimationStyle = .basic, buildOutAnimationType: RealityKit.__RKEntityHideActionBuildOutAnimationType = .none)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityHideActionArguments, b: RealityKit.__RKEntityHideActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityEmphasisActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
@@ -433,9 +433,9 @@ public struct __RKEntityEmphasisActionArguments : Swift.Codable, Swift.Equatable
   public var animationStyle: RealityKit.__RKEntityActionAnimationStyle?
   public var emphasisAnimationType: RealityKit.__RKEntityEmphasisAnimationType?
   public init(target: Foundation.UUID, duration: Swift.Float = 1.0, iterations: Swift.Float = 1.0, animationStyle: RealityKit.__RKEntityActionAnimationStyle = .basic, emphasisAnimationType: RealityKit.__RKEntityEmphasisAnimationType = .pop)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityEmphasisActionArguments, b: RealityKit.__RKEntityEmphasisActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityAudioActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
@@ -446,9 +446,9 @@ public struct __RKEntityAudioActionArguments : Swift.Codable, Swift.Equatable, R
   public var spatialMode: RealityKit.__RKAudioSpatialModeSelection?
   public let multiplePerformBehavior: RealityKit.__RKEntityActionMultiplePerformBehavior?
   public init(target: Foundation.UUID, path: Swift.String, type: RealityKit.__RKEntityAudioActionType, spatialMode: RealityKit.__RKAudioSpatialModeSelection, volume: Swift.Double = 0.5, loops: Swift.Bool = false, multiplePerformBehavior: RealityKit.__RKEntityActionMultiplePerformBehavior = .ignore)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityAudioActionArguments, b: RealityKit.__RKEntityAudioActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityTransformActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
@@ -466,18 +466,18 @@ public struct __RKEntityTransformActionArguments : Swift.Codable, Swift.Equatabl
   public var physicsLinearCoefficient: Swift.Float?
   public var physicsAngularCoefficient: Swift.Float?
   public init(target: Foundation.UUID, location: Swift.SIMD3<Swift.Float>?, orientation: simd.simd_quatf?, scale: Swift.Float?, duration: Swift.Float = 1.0, moveType: RealityKit.__RKEntityMoveSelection = .local, ease: RealityKit.__RKEntityMoveEase = .none, easeType: RealityKit.__RKEntityMoveEaseType = .easeIn, respectPhysics: Swift.Bool = false, physicsLinearCoefficient: Swift.Float = 0.0, physicsAngularCoefficient: Swift.Float = 0.0)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityTransformActionArguments, b: RealityKit.__RKEntityTransformActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityForceActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
   public var force: Swift.SIMD3<Swift.Float>?
   public var velocity: Swift.SIMD3<Swift.Float>?
   public init(target: Foundation.UUID, force: Swift.SIMD3<Swift.Float>? = nil, velocity: Swift.SIMD3<Swift.Float>? = nil)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityForceActionArguments, b: RealityKit.__RKEntityForceActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntitySwapEntityActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
@@ -485,9 +485,9 @@ public struct __RKEntitySwapEntityActionArguments : Swift.Codable, Swift.Equatab
   public var buildOutAction: RealityKit.__RKEntityHideActionArguments
   public var buildInAction: RealityKit.__RKEntityShowActionArguments
   public init(target: Foundation.UUID, newTarget: Foundation.UUID, buildOutAction: RealityKit.__RKEntityHideActionArguments, buildInAction: RealityKit.__RKEntityShowActionArguments)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntitySwapEntityActionArguments, b: RealityKit.__RKEntitySwapEntityActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntitySpinActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
@@ -496,9 +496,9 @@ public struct __RKEntitySpinActionArguments : Swift.Codable, Swift.Equatable, Re
   public var direction: RealityKit.__RKEntitySpinDirectionType?
   public var axis: Swift.SIMD3<Swift.Float>?
   public init(target: Foundation.UUID, duration: Swift.Float = 1.0, iterations: Swift.Float = 1, direction: RealityKit.__RKEntitySpinDirectionType = .clockwise, axis: Swift.SIMD3<Swift.Float> = SIMD3<Float>(0,1,0))
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntitySpinActionArguments, b: RealityKit.__RKEntitySpinActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityOrbitEntityActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
@@ -512,9 +512,9 @@ public struct __RKEntityOrbitEntityActionArguments : Swift.Codable, Swift.Equata
   public var physicsLinearCoefficient: Swift.Float?
   public var physicsAngularCoefficient: Swift.Float?
   public init(target: Foundation.UUID, pivotTarget: Foundation.UUID, duration: Swift.Float = 1.0, rotations: Swift.Float = 1.0, orbitalAxis: Swift.SIMD3<Swift.Float> = SIMD3<Float>(0, 1, 0), orientToPath: Swift.Bool = false, spinDirection: RealityKit.__RKEntitySpinDirectionType = .clockwise, respectPhysics: Swift.Bool = false, physicsLinearCoefficient: Swift.Float = 0.0, physicsAngularCoefficient: Swift.Float = 0.0)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityOrbitEntityActionArguments, b: RealityKit.__RKEntityOrbitEntityActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityLookAtCameraActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
@@ -525,18 +525,18 @@ public struct __RKEntityLookAtCameraActionArguments : Swift.Codable, Swift.Equat
   public var upVector: Swift.SIMD3<Swift.Float>?
   public var loops: Swift.Bool?
   public init(target: Foundation.UUID, duration: Swift.Float = 1.0, animationDuration: Swift.Float = 0.0, direction: Swift.SIMD3<Swift.Float> = SIMD3<Float>(0, 1, 0), rotation: Swift.Float = 0.0, upVector: Swift.SIMD3<Swift.Float> = SIMD3<Float>(0, 1, 0), loops: Swift.Bool = false)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntityLookAtCameraActionArguments, b: RealityKit.__RKEntityLookAtCameraActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntitySetOpacityActionArguments : Swift.Codable, Swift.Equatable, RealityKit.__RKSpecificationHasTarget {
   public var target: Foundation.UUID
   public var duration: Swift.Float
   public var opacity: Swift.Float
   public init(target: Foundation.UUID, duration: Swift.Float = 1.0, opacity: Swift.Float = 1.0)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public static func == (a: RealityKit.__RKEntitySetOpacityActionArguments, b: RealityKit.__RKEntitySetOpacityActionArguments) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct __RKEntityInteractionSpecification : Swift.Codable, Swift.Equatable, Swift.CustomStringConvertible {
   public var trigger: RealityKit.__RKEntityTriggerSpecification
@@ -550,10 +550,10 @@ public struct __RKEntityInteractionSpecification : Swift.Codable, Swift.Equatabl
     get
   }
   public static func == (a: RealityKit.__RKEntityInteractionSpecification, b: RealityKit.__RKEntityInteractionSpecification) -> Swift.Bool
-  public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol HasModel : RealityKit.HasTransform {
 }
 extension HasModel {
@@ -561,7 +561,7 @@ extension HasModel {
     get
     set
   }
-  @available(OSX 11.0, iOS 14.0, *)
+  @available(macOS 11.0, iOS 14.0, *)
   public var modelDebugOptions: RealityKit.ModelDebugOptionsComponent? {
     get
     set
@@ -575,13 +575,13 @@ extension HasModel {
 public enum __RKEntityFlipDirectionType : Swift.String, Swift.Codable, Swift.CaseIterable {
   case forward
   case backward
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public typealias AllCases = [RealityKit.__RKEntityFlipDirectionType]
+  public typealias RawValue = Swift.String
+  public static var allCases: [RealityKit.__RKEntityFlipDirectionType] {
     get
   }
-  public typealias AllCases = [RealityKit.__RKEntityFlipDirectionType]
-  public static var allCases: [RealityKit.__RKEntityFlipDirectionType] {
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -594,13 +594,13 @@ public enum __RKEntityEmphasisAnimationType : Swift.String, Swift.Codable, Swift
   case jiggle
   case pulse
   case spin
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public typealias AllCases = [RealityKit.__RKEntityEmphasisAnimationType]
+  public typealias RawValue = Swift.String
+  public static var allCases: [RealityKit.__RKEntityEmphasisAnimationType] {
     get
   }
-  public typealias AllCases = [RealityKit.__RKEntityEmphasisAnimationType]
-  public static var allCases: [RealityKit.__RKEntityEmphasisAnimationType] {
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -609,8 +609,8 @@ public class __RKEntityEmphasisAction : RealityKit.__RKEntityAction {
   override public func perform(with context: RealityKit.__RKEntityActionContext) -> Swift.Bool
   override public func reversed() -> RealityKit.__RKEntityAction?
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
 public struct __RKSceneUUIDComponent {
   @_hasMissingDesignatedInitializers public class Registration {
@@ -625,12 +625,12 @@ extension Scene {
     set
   }
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol SynchronizationPeerID {
 }
 extension MCPeerID : RealityKit.SynchronizationPeerID {
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol SynchronizationService : AnyObject {
   typealias Identifier = Swift.UInt64
   func entity(for identifier: Self.Identifier) -> RealityKit.Entity?
@@ -640,7 +640,7 @@ public protocol SynchronizationService : AnyObject {
   func __fromCore(peerID: RealityKit.__PeerIDRef) -> RealityKit.SynchronizationPeerID?
   func __toCore(peerID: RealityKit.SynchronizationPeerID) -> RealityKit.__PeerIDRef
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public class MultipeerConnectivityService : RealityKit.SynchronizationService {
   final public let session: MultipeerConnectivity.MCSession
   public init(session: MultipeerConnectivity.MCSession) throws
@@ -651,16 +651,16 @@ public class MultipeerConnectivityService : RealityKit.SynchronizationService {
   public func __toCore(peerID: RealityKit.SynchronizationPeerID) -> RealityKit.__PeerIDRef
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15.4, iOS 13.4, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15.4, iOS 13.4, *)
 final public class NetworkCompatibilityToken : Swift.Codable {
   public enum Compatibility {
     case compatible
     case sessionProtocolVersionMismatch
     public static func == (a: RealityKit.NetworkCompatibilityToken.Compatibility, b: RealityKit.NetworkCompatibilityToken.Compatibility) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public static let local: RealityKit.NetworkCompatibilityToken
   @objc deinit
@@ -668,7 +668,7 @@ final public class NetworkCompatibilityToken : Swift.Codable {
   final public func encode(to encoder: Swift.Encoder) throws
   final public func compatibilityWith(_ otherToken: RealityKit.NetworkCompatibilityToken) -> RealityKit.NetworkCompatibilityToken.Compatibility
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class TextureResource : RealityKit.Resource {
   public var __coreAsset: RealityKit.__AssetRef {
     get
@@ -686,10 +686,10 @@ public class __RKEntityActionGroup : RealityKit.__RKEntityAction {
     case concurrent
     case sequenced
     public static func == (a: RealityKit.__RKEntityActionGroup.Ordering, b: RealityKit.__RKEntityActionGroup.Ordering) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public static let infiniteLoopCount: Swift.Int
   public static let noLoopCount: Swift.Int
@@ -713,10 +713,10 @@ public class __RKEntityActionGroup : RealityKit.__RKEntityAction {
     get
   }
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct PhysicsBodyComponent : RealityKit.Component, Swift.Equatable {
   public var mode: RealityKit.PhysicsBodyMode
   public var massProperties: RealityKit.PhysicsMassProperties
@@ -771,8 +771,8 @@ extension Entity {
   }
 }
 @_inheritsConvenienceInitializers public class __RKEntityDragTrigger : RealityKit.__RKEntityTrigger {
-  @objc deinit
   override public init()
+  @objc deinit
 }
 extension __REAnchoringType {
 }
@@ -836,7 +836,7 @@ extension Entity {
   public func prepareAudio(_ resource: RealityKit.AudioResource) -> RealityKit.AudioPlaybackController
   public func stopAllAudio()
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class AudioPlaybackController {
   public typealias Decibel = Swift.Double
   weak public var entity: RealityKit.Entity? {
@@ -885,10 +885,10 @@ public struct __REAssetIdentifier : Swift.ExpressibleByStringLiteral, Swift.Coda
   public typealias StringLiteralType = Swift.String
   public init(stringLiteral value: Swift.String)
   public init(_ value: Swift.String)
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
   public typealias ExtendedGraphemeClusterLiteralType = RealityKit.__REAssetIdentifier.StringLiteralType
   public typealias UnicodeScalarLiteralType = RealityKit.__REAssetIdentifier.StringLiteralType
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 @_hasMissingDesignatedInitializers public class __REAsset : Swift.CustomDebugStringConvertible {
   public static func __fromHandle(_ assetRef: RealityKit.__AssetRef) -> RealityKit.__REAsset
@@ -954,7 +954,7 @@ extension __REAssetBundle {
   public typealias CompletionHandler = @convention(block) (Swift.Bool) -> Swift.Void
   final public func setCompletionHandler(_ handler: @escaping RealityKit.__AssetLoadRequest.CompletionHandler)
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol HasSynchronization : RealityKit.Entity {
 }
 extension HasSynchronization {
@@ -968,25 +968,25 @@ extension HasSynchronization {
   public func requestOwnership(timeout: Foundation.TimeInterval = 15, _ callback: @escaping (RealityKit.SynchronizationComponent.OwnershipTransferCompletionResult) -> Swift.Void)
   public func withUnsynchronized(_ changes: () -> Swift.Void)
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct SynchronizationComponent : RealityKit.Component, Swift.Equatable {
   public enum OwnershipTransferMode {
     case autoAccept
     case manual
     public static func == (a: RealityKit.SynchronizationComponent.OwnershipTransferMode, b: RealityKit.SynchronizationComponent.OwnershipTransferMode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public enum OwnershipTransferCompletionResult {
     case granted
     case timedOut
     public static func == (a: RealityKit.SynchronizationComponent.OwnershipTransferCompletionResult, b: RealityKit.SynchronizationComponent.OwnershipTransferCompletionResult) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public var identifier: Swift.UInt64 {
     get
@@ -1046,13 +1046,13 @@ public enum __REAnchoringType : Swift.Codable, Swift.Equatable {
     case image
     case face
     case object
-    public typealias RawValue = Swift.String
     public init?(rawValue: Swift.String)
-    public var rawValue: Swift.String {
+    public typealias AllCases = [RealityKit.__REAnchoringType.Name]
+    public typealias RawValue = Swift.String
+    public static var allCases: [RealityKit.__REAnchoringType.Name] {
       get
     }
-    public typealias AllCases = [RealityKit.__REAnchoringType.Name]
-    public static var allCases: [RealityKit.__REAnchoringType.Name] {
+    public var rawValue: Swift.String {
       get
     }
   }
@@ -1067,9 +1067,9 @@ public enum __REAnchoringType : Swift.Codable, Swift.Equatable {
     public static let horizontal: RealityKit.__REAnchoringType.Alignment
     public static let vertical: RealityKit.__REAnchoringType.Alignment
     public static let any: RealityKit.__REAnchoringType.Alignment
-    public typealias RawValue = Swift.Int
-    public typealias Element = RealityKit.__REAnchoringType.Alignment
     public typealias ArrayLiteralElement = RealityKit.__REAnchoringType.Alignment
+    public typealias Element = RealityKit.__REAnchoringType.Alignment
+    public typealias RawValue = Swift.Int
   }
   public struct Classification : Swift.OptionSet, Swift.Codable {
     public init(rawValue: Swift.Int)
@@ -1080,9 +1080,9 @@ public enum __REAnchoringType : Swift.Codable, Swift.Equatable {
     public static let table: RealityKit.__REAnchoringType.Classification
     public static let seat: RealityKit.__REAnchoringType.Classification
     public static let any: RealityKit.__REAnchoringType.Classification
-    public typealias RawValue = Swift.Int
-    public typealias Element = RealityKit.__REAnchoringType.Classification
     public typealias ArrayLiteralElement = RealityKit.__REAnchoringType.Classification
+    public typealias Element = RealityKit.__REAnchoringType.Classification
+    public typealias RawValue = Swift.Int
   }
   public static func == (a: RealityKit.__REAnchoringType, b: RealityKit.__REAnchoringType) -> Swift.Bool
 }
@@ -1099,13 +1099,13 @@ public protocol __SceneService {
 public enum __RKEntityMoveSelection : Swift.String, Swift.Codable, Swift.CaseIterable {
   case local
   case absolute
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public typealias AllCases = [RealityKit.__RKEntityMoveSelection]
+  public typealias RawValue = Swift.String
+  public static var allCases: [RealityKit.__RKEntityMoveSelection] {
     get
   }
-  public typealias AllCases = [RealityKit.__RKEntityMoveSelection]
-  public static var allCases: [RealityKit.__RKEntityMoveSelection] {
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -1120,13 +1120,13 @@ public enum __RKEntityMoveEase : Swift.String, Swift.Codable, Swift.CaseIterable
   case log
   case power
   case sine
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public typealias AllCases = [RealityKit.__RKEntityMoveEase]
+  public typealias RawValue = Swift.String
+  public static var allCases: [RealityKit.__RKEntityMoveEase] {
     get
   }
-  public typealias AllCases = [RealityKit.__RKEntityMoveEase]
-  public static var allCases: [RealityKit.__RKEntityMoveEase] {
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -1134,13 +1134,13 @@ public enum __RKEntityMoveEaseType : Swift.String, Swift.Codable, Swift.CaseIter
   case easeIn
   case easeOut
   case easeInEaseOut
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public typealias AllCases = [RealityKit.__RKEntityMoveEaseType]
+  public typealias RawValue = Swift.String
+  public static var allCases: [RealityKit.__RKEntityMoveEaseType] {
     get
   }
-  public typealias AllCases = [RealityKit.__RKEntityMoveEaseType]
-  public static var allCases: [RealityKit.__RKEntityMoveEaseType] {
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -1150,8 +1150,8 @@ public class __RKEntityTransformAction : RealityKit.__RKEntityAction {
   override public func reversed() -> RealityKit.__RKEntityAction?
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
   override public func prefersInitialOrdering() -> Swift.Bool
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class __RKVisibilityHideMoveOutAnimation : RealityKit.__RKVisibilityBaseAnimation {
   @objc deinit
@@ -1166,7 +1166,7 @@ extension Entity {
   }
   @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol Material {
   typealias Color = AppKit.NSColor
   var __resource: RealityKit.__MaterialResource { get }
@@ -1179,7 +1179,7 @@ public protocol Material {
   public static func __load(named name: Swift.String, in bundle: Foundation.Bundle? = nil) throws -> RealityKit.Material
   @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct SimpleMaterial : RealityKit.Material {
   public let __resource: RealityKit.__MaterialResource
   public var __parameterBlock: RealityKit.__RKMaterialParameterBlock
@@ -1210,14 +1210,14 @@ public struct SimpleMaterial : RealityKit.Material {
   public init(color: RealityKit.SimpleMaterial.Color, roughness: RealityKit.MaterialScalarParameter = 0.0, isMetallic: Swift.Bool)
   public init()
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct OcclusionMaterial : RealityKit.Material {
   public let __resource: RealityKit.__MaterialResource
   public var __parameterBlock: RealityKit.__RKMaterialParameterBlock
   public let receivesDynamicLighting: Swift.Bool
   public init(receivesDynamicLighting: Swift.Bool = false)
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct UnlitMaterial : RealityKit.Material {
   public let __resource: RealityKit.__MaterialResource
   public var __parameterBlock: RealityKit.__RKMaterialParameterBlock
@@ -1236,7 +1236,7 @@ public struct UnlitMaterial : RealityKit.Material {
   public init(color: AppKit.NSColor)
   public init()
 }
-@available(OSX 11.0, iOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, *)
 public struct VideoMaterial : RealityKit.Material {
   public var __resource: RealityKit.__MaterialResource
   public var __parameterBlock: RealityKit.__RKMaterialParameterBlock
@@ -1251,7 +1251,7 @@ public struct VideoMaterial : RealityKit.Material {
   }
   public static func __makeVideoMaterial(videoResource: RealityKit.__VideoResource) -> RealityKit.VideoMaterial
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public enum MaterialScalarParameter : Swift.ExpressibleByFloatLiteral, Swift.ExpressibleByIntegerLiteral, Swift.Hashable {
   case float(Swift.Float)
   case texture(RealityKit.TextureResource)
@@ -1265,7 +1265,7 @@ public enum MaterialScalarParameter : Swift.ExpressibleByFloatLiteral, Swift.Exp
     get
   }
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public enum MaterialColorParameter : Swift._ExpressibleByColorLiteral, Swift.Hashable {
   case color(AppKit.NSColor)
   case texture(RealityKit.TextureResource)
@@ -1306,13 +1306,13 @@ public enum __RKEntityActionMultiplePerformBehavior : Swift.String, Swift.Codabl
   case allow
   case ignore
   case stopsAction
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public typealias AllCases = [RealityKit.__RKEntityActionMultiplePerformBehavior]
+  public typealias RawValue = Swift.String
+  public static var allCases: [RealityKit.__RKEntityActionMultiplePerformBehavior] {
     get
   }
-  public typealias AllCases = [RealityKit.__RKEntityActionMultiplePerformBehavior]
-  public static var allCases: [RealityKit.__RKEntityActionMultiplePerformBehavior] {
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -1385,7 +1385,7 @@ extension RETransform {
         }
   }
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct SpotLightComponent : RealityKit.Component, Swift.Equatable {
   public typealias Color = AppKit.NSColor
   public struct Shadow : RealityKit.Component, Swift.Equatable {
@@ -1397,7 +1397,7 @@ public struct SpotLightComponent : RealityKit.Component, Swift.Equatable {
     }
     public static func == (a: RealityKit.SpotLightComponent.Shadow, b: RealityKit.SpotLightComponent.Shadow) -> Swift.Bool
   }
-  public var color: AppKit.NSColor
+  public var color: RealityKit.SpotLightComponent.Color
   public var intensity: Swift.Float
   public var innerAngleInDegrees: Swift.Float
   public var outerAngleInDegrees: Swift.Float
@@ -1436,15 +1436,15 @@ public struct __RKCustomTriggerNotification {
 public class __RKCustomTrigger : RealityKit.__RKEntityTrigger {
   public init(identifier: Swift.String, customArguments: [Swift.String : Swift.String]? = [:])
   override public func matches(with trigger: RealityKit.__RKEntityTrigger) -> Swift.Bool
-  @objc deinit
   override public init()
+  @objc deinit
 }
 public class __RKEntityCustomTrigger : RealityKit.__RKEntityTrigger {
   public var targetEntity: RealityKit.Entity?
   public init(targetEntity: RealityKit.Entity?, identifier: Swift.String, customArguments: [Swift.String : Swift.String]? = [:])
   override public func matches(with trigger: RealityKit.__RKEntityTrigger) -> Swift.Bool
-  @objc deinit
   override public init()
+  @objc deinit
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class __RKVisibilityHideLaunchAnimation : RealityKit.__RKVisibilityBaseAnimation {
   @objc deinit
@@ -1477,7 +1477,7 @@ public class __RKEntityCustomTrigger : RealityKit.__RKEntityTrigger {
   public static func __registerREKitComponents() throws
   public static func __unregisterREKitComponents()
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct AnimationTimingFunction : Swift.Hashable {
   @available(*, deprecated, message: "Will be hidden in RealityKit 2019.")
   public enum __Mode {
@@ -1485,10 +1485,10 @@ public struct AnimationTimingFunction : Swift.Hashable {
     case easeOut
     case easeInOut
     public static func == (a: RealityKit.AnimationTimingFunction.__Mode, b: RealityKit.AnimationTimingFunction.__Mode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   @available(*, deprecated, message: "Will be hidden in RealityKit 2019.")
   public static func __smooth(_ mode: RealityKit.AnimationTimingFunction.__Mode = .easeInOut) -> RealityKit.AnimationTimingFunction
@@ -1526,13 +1526,13 @@ public struct AnimationTimingFunction : Swift.Hashable {
     get
   }
   public static func cubicBezier(controlPoint1: Swift.SIMD2<Swift.Float>, controlPoint2: Swift.SIMD2<Swift.Float>) -> RealityKit.AnimationTimingFunction
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: RealityKit.AnimationTimingFunction, b: RealityKit.AnimationTimingFunction) -> Swift.Bool
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
-  public static func == (a: RealityKit.AnimationTimingFunction, b: RealityKit.AnimationTimingFunction) -> Swift.Bool
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol Resource {
 }
 extension Resource {
@@ -1544,23 +1544,23 @@ public class __RKEntityTriggerGroup : RealityKit.__RKEntityTrigger {
   }
   public init(triggers: [RealityKit.__RKEntityTrigger])
   override public func matches(with trigger: RealityKit.__RKEntityTrigger) -> Swift.Bool
-  @objc deinit
   override public init()
+  @objc deinit
 }
 public class __RKEntitySwapEntityAction : RealityKit.__RKEntityAction {
   public init(targetEntity: RealityKit.Entity?, newEntity: RealityKit.Entity?, buildOutAction: RealityKit.__RKEntityHideAction, buildInAction: RealityKit.__RKEntityShowAction)
   override public func perform(with context: RealityKit.__RKEntityActionContext) -> Swift.Bool
   override public func reversed() -> RealityKit.__RKEntityAction?
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
 extension Entity {
   public var availableAnimations: [RealityKit.AnimationResource] {
     get
   }
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class AnchorEntity : RealityKit.Entity, RealityKit.HasAnchoring {
   required public init()
   public init(_ target: RealityKit.AnchoringComponent.Target)
@@ -1568,33 +1568,33 @@ public class AnchorEntity : RealityKit.Entity, RealityKit.HasAnchoring {
   convenience public init(world transform: simd.float4x4)
   @objc deinit
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class PerspectiveCamera : RealityKit.Entity, RealityKit.HasPerspectiveCamera {
   required public init()
   @objc deinit
 }
-@_inheritsConvenienceInitializers @available(OSX 10.15, iOS 13.0, *)
+@_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, *)
 public class SpotLight : RealityKit.Entity, RealityKit.HasSpotLight {
-  @objc deinit
   required public init()
   @usableFromInline
   override internal init(_coreEntity: RealityKit.__EntityRef)
+  @objc deinit
 }
-@_inheritsConvenienceInitializers @available(OSX 10.15, iOS 13.0, *)
+@_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, *)
 public class DirectionalLight : RealityKit.Entity, RealityKit.HasDirectionalLight {
-  @objc deinit
   required public init()
   @usableFromInline
   override internal init(_coreEntity: RealityKit.__EntityRef)
+  @objc deinit
 }
-@_inheritsConvenienceInitializers @available(OSX 10.15, iOS 13.0, *)
+@_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, *)
 public class PointLight : RealityKit.Entity, RealityKit.HasPointLight {
-  @objc deinit
   required public init()
   @usableFromInline
   override internal init(_coreEntity: RealityKit.__EntityRef)
+  @objc deinit
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class ModelEntity : RealityKit.Entity, RealityKit.HasModel, RealityKit.HasPhysics {
   required public init()
   public init(mesh: RealityKit.MeshResource, materials: [RealityKit.Material] = [])
@@ -1602,19 +1602,19 @@ public class ModelEntity : RealityKit.Entity, RealityKit.HasModel, RealityKit.Ha
   public init(mesh: RealityKit.MeshResource, materials: [RealityKit.Material] = [], collisionShapes: [RealityKit.ShapeResource], mass: Swift.Float)
   @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public class TriggerVolume : RealityKit.Entity, RealityKit.HasCollision {
   required public init()
   convenience public init(shape: RealityKit.ShapeResource, filter: RealityKit.CollisionFilter = .sensor)
   public init(shapes: [RealityKit.ShapeResource], filter: RealityKit.CollisionFilter = .sensor)
-  @objc deinit
   @usableFromInline
   override internal init(_coreEntity: RealityKit.__EntityRef)
+  @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct PointLightComponent : RealityKit.Component, Swift.Equatable {
   public typealias Color = AppKit.NSColor
-  public var color: AppKit.NSColor
+  public var color: RealityKit.PointLightComponent.Color
   public var intensity: Swift.Float
   public var attenuationRadius: Swift.Float
   public init(color: RealityKit.PointLightComponent.Color = .white, intensity: Swift.Float = 26963.76, attenuationRadius: Swift.Float = 10.0)
@@ -1632,8 +1632,8 @@ public class __RKChangeSceneAction : RealityKit.__RKEntityAction {
   override public func perform(with context: RealityKit.__RKEntityActionContext) -> Swift.Bool
   override public func reversed() -> RealityKit.__RKEntityAction?
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
 public struct __REECSManagerRef {
   public func __as<T>(_ type: T.Type) -> T
@@ -1713,7 +1713,7 @@ public protocol __RenderService {
   var device: Metal.MTLDevice { get }
   var __coreRenderManager: Swift.OpaquePointer { get }
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol HasTransform : RealityKit.Entity {
 }
 extension HasTransform {
@@ -1768,8 +1768,8 @@ public class __RKEntityTapTrigger : RealityKit.__RKEntityTrigger {
   public var targetEntity: RealityKit.Entity?
   public init(targetEntity: RealityKit.Entity?, reversible: Swift.Bool? = false)
   override public func matches(with trigger: RealityKit.__RKEntityTrigger) -> Swift.Bool
-  @objc deinit
   override public init()
+  @objc deinit
 }
 public class __RKEntityOrbitEntityAction : RealityKit.__RKEntityAction {
   public init(targetEntity: RealityKit.Entity?, pivotEntity: RealityKit.Entity?, duration: Swift.Float = 1.0, rotations: Swift.Float = 1.0, orbitalAxis: Swift.SIMD3<Swift.Float> = SIMD3<Float>(0, 1, 0), orientToPath: Swift.Bool = false, spinDirection: RealityKit.__RKEntitySpinDirectionType = .clockwise, respectPhysics: Swift.Bool = false, physicsAngularCoefficient: Swift.Float = 0, physicsLinearCoefficient: Swift.Float = 0)
@@ -1778,10 +1778,10 @@ public class __RKEntityOrbitEntityAction : RealityKit.__RKEntityAction {
   override public func animationPostCleanup()
   override public func reversed() -> RealityKit.__RKEntityAction?
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 extension Entity {
   public func __setLoadContext(_ loadContext: RealityKit.__SceneResourceLoadResultLoadContext?)
   public func __fetchLoadContext() -> RealityKit.__SceneResourceLoadResultLoadContext?
@@ -1790,16 +1790,16 @@ extension Entity {
 }
 public struct __SceneResourceLoadResultLoadContext {
 }
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 public struct __SceneResourceLoadResult {
 }
 @_hasMissingDesignatedInitializers final public class __SceneResourceCache {
   @_hasMissingDesignatedInitializers final public class Entry {
     @objc deinit
   }
-  @available(OSX 10.15.4, iOS 13.4, *)
+  @available(macOS 10.15.4, iOS 13.4, *)
   public static func __init() -> RealityKit.__SceneResourceCache
-  @available(OSX 10.15.4, iOS 13.4, *)
+  @available(macOS 10.15.4, iOS 13.4, *)
   final public func __registerImportedScenes(url: Foundation.URL, importedScenes: [RealityKit.__SceneImportOperation.__ImportedScene]) throws -> RealityKit.__SceneResourceLoadResult
   @objc deinit
 }
@@ -1839,7 +1839,7 @@ extension __Downsampling {
 extension __Downsampling {
   public static func getMipmapByteSizes(_ descriptor: Metal.MTLTextureDescriptor, device: Metal.MTLDevice) -> [RealityKit.__Downsampling.ByteSize]
 }
-@_hasMissingDesignatedInitializers @available(OSX 11.0, iOS 14.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 11.0, iOS 14.0, *)
 public class VideoPlaybackController {
   public var audioInputMode: RealityKit.AudioResource.InputMode {
     get
@@ -1852,8 +1852,8 @@ public class __RKEntityProximityTrigger : RealityKit.__RKEntityTrigger {
     case none
     case sequence
     case reverse
-    public typealias RawValue = Swift.Int
     public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
@@ -1875,23 +1875,23 @@ public class __RKEntityProximityTrigger : RealityKit.__RKEntityTrigger {
   }
   public init(targetEntity: RealityKit.Entity?, distance: Swift.Float, type: RealityKit.__RKEntityProximityTrigger.ExitType)
   override public func matches(with trigger: RealityKit.__RKEntityTrigger) -> Swift.Bool
-  @objc deinit
   override public init()
+  @objc deinit
 }
 public protocol __ARViewDelegatePrivate : AnyObject {
   func viewWillProcessTapInteraction(_ view: RealityKit.ARView)
   func view(_ view: RealityKit.ARView, performedTapInteraction: Swift.Bool, for entity: RealityKit.Entity?)
-  @available(OSX 11.0, iOS 14.0, *)
+  @available(macOS 11.0, iOS 14.0, *)
   func view(_ view: RealityKit.ARView, performedProximityInteractionsForEntities: [RealityKit.Entity])
   func update(_ view: RealityKit.ARView, deltaTime: Swift.Float)
 }
-@available(OSX 11.0, iOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, *)
 extension __ARViewDelegatePrivate {
   public func view(_ view: RealityKit.ARView, performedProximityInteractionsForEntities: [RealityKit.Entity])
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public typealias ARViewBase = AppKit.NSView
-@objc @_inheritsConvenienceInitializers @available(OSX 10.15, iOS 13.0, *)
+@objc @_inheritsConvenienceInitializers @available(macOS 10.15, iOS 13.0, *)
 open class ARView : RealityKit.ARViewBase {
   public var __services: RealityKit.__ServiceLocator {
     get
@@ -1946,8 +1946,8 @@ open class ARView : RealityKit.ARViewBase {
     public static let showPhysics: RealityKit.ARView.DebugOptions
     public static let showStatistics: RealityKit.ARView.DebugOptions
     public init(rawValue: Swift.Int)
-    public typealias Element = RealityKit.ARView.DebugOptions
     public typealias ArrayLiteralElement = RealityKit.ARView.DebugOptions
+    public typealias Element = RealityKit.ARView.DebugOptions
     public typealias RawValue = Swift.Int
   }
   public var __statisticsOptions: RealityKit.ARView.__StatisticsOptions {
@@ -1974,8 +1974,8 @@ open class ARView : RealityKit.ARViewBase {
     public static let thermalStatistics: RealityKit.ARView.__StatisticsOptions
     public static let sceneUnderstandingStatistics: RealityKit.ARView.__StatisticsOptions
     public init(rawValue: Swift.UInt32)
-    public typealias Element = RealityKit.ARView.__StatisticsOptions
     public typealias ArrayLiteralElement = RealityKit.ARView.__StatisticsOptions
+    public typealias Element = RealityKit.ARView.__StatisticsOptions
     public typealias RawValue = Swift.UInt32
   }
   public func __setProfilerUpdateInterval(newInterval: Swift.Float)
@@ -1985,13 +1985,13 @@ open class ARView : RealityKit.ARViewBase {
   public func __startAudioEngine()
   public func __stopAudioEngine()
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol Component {
   static var __size: Swift.Int { get }
   static func __load(from buffer: Swift.UnsafeRawPointer, offset: Swift.Int) -> RealityKit.Component
-  @available(OSX 11.0, iOS 14.0, *)
+  @available(macOS 11.0, iOS 14.0, *)
   static func __store(attribute: RealityKit.Component, to buffer: Swift.UnsafeMutableRawPointer, offset: Swift.Int, deinitialize: Swift.Bool)
-  @available(OSX, deprecated: 11.0, message: "Use __store(attribute:to:offset:deinitialize:) instead.")
+  @available(macOS, deprecated: 11.0, message: "Use __store(attribute:to:offset:deinitialize:) instead.")
   @available(iOS, deprecated: 14.0, message: "Use __store(attribute:to:offset:deinitialize:) instead.")
   static func __store(attribute: RealityKit.Component, to buffer: Swift.UnsafeMutableRawPointer, offset: Swift.Int)
   static func __free(to buffer: Swift.UnsafeMutableRawPointer, offset: Swift.Int)
@@ -2006,7 +2006,7 @@ extension Component {
   }
   public static func __load(from buffer: Swift.UnsafeRawPointer, offset: Swift.Int) -> RealityKit.Component
   public static func __store(attribute: RealityKit.Component, to buffer: Swift.UnsafeMutableRawPointer, offset: Swift.Int, deinitialize: Swift.Bool)
-  @available(OSX, deprecated: 11.0, message: "Use __store(attribute:to:offset:deinitialize:) instead.")
+  @available(macOS, deprecated: 11.0, message: "Use __store(attribute:to:offset:deinitialize:) instead.")
   @available(iOS, deprecated: 14.0, message: "Use __store(attribute:to:offset:deinitialize:) instead.")
   public static func __store(attribute: RealityKit.Component, to buffer: Swift.UnsafeMutableRawPointer, offset: Swift.Int)
   public static func __free(to buffer: Swift.UnsafeMutableRawPointer, offset: Swift.Int)
@@ -2057,10 +2057,10 @@ extension ARView {
         case largeHall
         case cathedral
         public static func == (a: RealityKit.ARView.Environment.Reverb.Preset, b: RealityKit.ARView.Environment.Reverb.Preset) -> Swift.Bool
+        public func hash(into hasher: inout Swift.Hasher)
         public var hashValue: Swift.Int {
           get
         }
-        public func hash(into hasher: inout Swift.Hasher)
       }
       case noReverb
       case preset(RealityKit.ARView.Environment.Reverb.Preset)
@@ -2078,16 +2078,16 @@ extension ARView {
   @objc deinit
 }
 @_inheritsConvenienceInitializers public class __RKLightTrigger : RealityKit.__RKEntityTrigger {
-  @objc deinit
   override public init()
+  @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol Event {
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol EventSource {
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public enum SceneEvents {
   public struct Update : RealityKit.Event {
     public let scene: RealityKit.Scene
@@ -2098,7 +2098,7 @@ public enum SceneEvents {
     public let anchor: RealityKit.HasAnchoring
   }
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public enum AnimationEvents {
   public struct PlaybackCompleted : RealityKit.Event {
     public let playbackController: RealityKit.AnimationPlaybackController
@@ -2110,13 +2110,13 @@ public enum AnimationEvents {
     public let playbackController: RealityKit.AnimationPlaybackController
   }
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public enum AudioEvents {
   public struct PlaybackCompleted : RealityKit.Event {
     public var playbackController: RealityKit.AudioPlaybackController
   }
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public enum CollisionEvents {
   public struct Began : RealityKit.Event {
     public let entityA: RealityKit.Entity
@@ -2135,7 +2135,7 @@ public enum CollisionEvents {
     public let entityB: RealityKit.Entity
   }
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public enum SynchronizationEvents {
   public struct OwnershipRequest : RealityKit.Event {
     public let entity: RealityKit.Entity
@@ -2169,14 +2169,14 @@ public struct __REAssetBundle {
   }
   public struct Header : Swift.Codable {
     public struct VersionInfo : Swift.Codable {
-      public init(from decoder: Swift.Decoder) throws
       public func encode(to encoder: Swift.Encoder) throws
+      public init(from decoder: Swift.Decoder) throws
     }
     public var versionInfo: RealityKit.__REAssetBundle.Header.VersionInfo
     public var minVersion: Swift.Int
     public var identifier: Foundation.UUID?
-    public init(from decoder: Swift.Decoder) throws
     public func encode(to encoder: Swift.Encoder) throws
+    public init(from decoder: Swift.Decoder) throws
   }
   public var sceneAssets: [RealityKit.__REAsset] {
     get
@@ -2218,13 +2218,13 @@ public struct __REAssetBundle {
   }
   public struct AssetMap : Swift.Codable {
     public struct SceneDescriptor : Swift.Codable, Swift.Equatable {
-      public init(from decoder: Swift.Decoder) throws
-      public func encode(to encoder: Swift.Encoder) throws
       public static func == (a: RealityKit.__REAssetBundle.AssetMap.SceneDescriptor, b: RealityKit.__REAssetBundle.AssetMap.SceneDescriptor) -> Swift.Bool
+      public func encode(to encoder: Swift.Encoder) throws
+      public init(from decoder: Swift.Decoder) throws
     }
     public var scenes: [RealityKit.__REAssetBundle.AssetMap.SceneDescriptor]
-    public init(from decoder: Swift.Decoder) throws
     public func encode(to encoder: Swift.Encoder) throws
+    public init(from decoder: Swift.Decoder) throws
   }
   public var __temporaryUnarchivingURL: Foundation.URL?
   public static func __init(sceneAssets: [RealityKit.__REAsset], assetService: RealityKit.__REAssetService) throws -> RealityKit.__REAssetBundle
@@ -2273,13 +2273,13 @@ public struct __Archiving {
     case couldNotUnarchive
     case couldNotArchive
     public static func == (a: RealityKit.__Archiving.ArchivingError, b: RealityKit.__Archiving.ArchivingError) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct ModelComponent : RealityKit.Component {
   public var mesh: RealityKit.MeshResource
   public var materials: [RealityKit.Material]
@@ -2339,7 +2339,7 @@ extension Entity.ChildCollection.IndexingIterator : Swift.IteratorProtocol, Swif
   public typealias SubSequence = Swift.AnySequence<RealityKit.Entity.ChildCollection.IndexingIterator<Elements>.Element>
   public mutating func next() -> Elements.Element?
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol HasDirectionalLight : RealityKit.HasTransform {
 }
 extension HasDirectionalLight {
@@ -2353,8 +2353,8 @@ extension HasDirectionalLight {
   }
 }
 @_inheritsConvenienceInitializers public class __RKEntityLookAtTrigger : RealityKit.__RKEntityTrigger {
-  @objc deinit
   override public init()
+  @objc deinit
 }
 extension Scene {
   public struct AnchorCollection : Swift.Collection {
@@ -2391,7 +2391,7 @@ extension Scene.AnchorCollection : Swift.CustomStringConvertible {
     get
   }
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class EnvironmentResource : RealityKit.Resource {
   public static let __compiledExtension: Swift.String
   @objc deinit
@@ -2407,7 +2407,7 @@ extension Entity {
 extension HasModel {
   public func __generateCollisionShape()
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class Scene {
   public var __coreScene: RealityKit.__SceneRef {
     get
@@ -2421,7 +2421,7 @@ public class Scene {
   }
   public func __initAudioChannelCaptureUnit() -> AudioToolbox.AUAudioUnit
   public func __startAudioChannelCapture(auAudioUnit: AudioToolbox.AUAudioUnit, maxRecordingDurationInSeconds: Swift.Int)
-  public func __stopAudioChannelCapture(auAudioUnit: AudioToolbox.AUAudioUnit) -> AVFoundation.AVAudioPCMBuffer
+  public func __stopAudioChannelCapture(auAudioUnit: AudioToolbox.AUAudioUnit) -> AVFAudio.AVAudioPCMBuffer
   @discardableResult
   public func __addPostProcessingAudioEffect(_ auDesc: AudioToolbox.AudioComponentDescription) -> AudioToolbox.AUAudioUnit?
   public var __defaultCamera: RealityKit.Entity! {
@@ -2475,7 +2475,7 @@ extension ARView {
   public func project(_ point: Swift.SIMD3<Swift.Float>) -> CoreGraphics.CGPoint?
   public func unproject(_ point: CoreGraphics.CGPoint, viewport: CoreGraphics.CGRect) -> Swift.SIMD3<Swift.Float>?
   public func unproject(_ point: CoreGraphics.CGPoint, ontoPlane planeTransform: simd.float4x4) -> Swift.SIMD3<Swift.Float>?
-  @available(OSX 11.0, iOS 14.0, *)
+  @available(macOS 11.0, iOS 14.0, *)
   public func unproject(_ point: CoreGraphics.CGPoint, ontoPlane planeTransform: simd.float4x4, relativeToCamera: Swift.Bool) -> Swift.SIMD3<Swift.Float>?
   public func ray(through screenPoint: CoreGraphics.CGPoint) -> (origin: Swift.SIMD3<Swift.Float>, direction: Swift.SIMD3<Swift.Float>)?
   public func hitTest(_ point: CoreGraphics.CGPoint, query: RealityKit.CollisionCastQueryType = .all, mask: RealityKit.CollisionGroup = .all) -> [RealityKit.CollisionCastHit]
@@ -2487,30 +2487,30 @@ extension ARView {
   override public func stop() -> Swift.Bool
   override public func reversed() -> RealityKit.__RKEntityAction?
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
 public class __RKEntityStartAnimateAction : RealityKit.__RKEntityAnimateAction {
   public init(targetEntity: RealityKit.Entity?, loopCount: Swift.Int = 1, multiplePerformBehavior: RealityKit.__RKEntityActionMultiplePerformBehavior = .ignore, clipStart: Swift.Double = 0.0, clipDuration: Swift.Double = 0.0, clipReversed: Swift.Bool = false, animationSpeed: Swift.Float = 1.0, clipReverses: Swift.Bool = false, muteAudio: Swift.Bool = false, audioGain: Swift.Double = 1.0, targetAnimationEntity: RealityKit.Entity? = nil)
   override public func perform(with context: RealityKit.__RKEntityActionContext) -> Swift.Bool
   override public func reversed() -> RealityKit.__RKEntityAction?
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
 @_inheritsConvenienceInitializers public class __RKEntityStopAnimateAction : RealityKit.__RKEntityAnimateAction {
   override public func perform(with context: RealityKit.__RKEntityActionContext) -> Swift.Bool
   override public func reversed() -> RealityKit.__RKEntityAction?
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
 @_inheritsConvenienceInitializers public class __RKEntityToggleAnimateAction : RealityKit.__RKEntityAnimateAction {
   override public func perform(with context: RealityKit.__RKEntityActionContext) -> Swift.Bool
   override public func reversed() -> RealityKit.__RKEntityAction?
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
 @usableFromInline
 internal typealias REMatrix2x2F = simd.simd_float2x2
@@ -2626,12 +2626,12 @@ extension Scene {
 @_inheritsConvenienceInitializers public class __RCEntity : RealityKit.Entity, RealityKit.HasAnchoring {
   public func invokeCustomTrigger(named name: Swift.String, overrides: [Swift.String : RealityKit.Entity]? = nil)
   public func registerCustomAction(named name: Swift.String, action: @escaping (RealityKit.Entity?) -> Swift.Void)
-  @objc deinit
   required public init()
   @usableFromInline
   override internal init(_coreEntity: RealityKit.__EntityRef)
+  @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct PhysicsMotionComponent : RealityKit.Component, Swift.Equatable {
   public var linearVelocity: Swift.SIMD3<Swift.Float>
   public var angularVelocity: Swift.SIMD3<Swift.Float>
@@ -2645,24 +2645,24 @@ public struct PhysicsMotionComponent : RealityKit.Component, Swift.Equatable {
   public static func == (a: RealityKit.PhysicsMotionComponent, b: RealityKit.PhysicsMotionComponent) -> Swift.Bool
 }
 @_inheritsConvenienceInitializers public class __RKTimerTrigger : RealityKit.__RKEntityTrigger {
-  @objc deinit
   override public init()
+  @objc deinit
 }
 public class __RKEntityFadeAction : RealityKit.__RKEntityAction {
   public init(targetEntity: RealityKit.Entity?, targetOpacity: Swift.Float, duration: Swift.Float)
   override public func perform(with context: RealityKit.__RKEntityActionContext) -> Swift.Bool
   override public func reversed() -> RealityKit.__RKEntityAction?
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
 public class __RKFadeSceneAction : RealityKit.__RKEntityAction {
   public init(targetOpacity: Swift.Float, duration: Swift.Float)
   override public func perform(with context: RealityKit.__RKEntityActionContext) -> Swift.Bool
   override public func reversed() -> RealityKit.__RKEntityAction?
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
 extension HasPhysicsBody {
   public func addForce(_ force: Swift.SIMD3<Swift.Float>, relativeTo referenceEntity: RealityKit.Entity?)
@@ -2673,7 +2673,7 @@ extension HasPhysicsBody {
   public func applyAngularImpulse(_ impulse: Swift.SIMD3<Swift.Float>, relativeTo referenceEntity: RealityKit.Entity?)
   public func applyImpulse(_ impulse: Swift.SIMD3<Swift.Float>, at position: Swift.SIMD3<Swift.Float>, relativeTo referenceEntity: RealityKit.Entity?)
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol HasCollision : RealityKit.HasTransform {
 }
 extension HasCollision {
@@ -2682,7 +2682,7 @@ extension HasCollision {
     set
   }
 }
-@available(OSX 10.15, iOS 13.0, macCatalyst 14.0, *)
+@available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
 public protocol HasAnchoring : RealityKit.Entity {
 }
 extension HasAnchoring {
@@ -2704,8 +2704,8 @@ public enum __RKEntityAudioActionType : Swift.String, Swift.Codable {
   case play
   case pause
   case stop
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -2714,13 +2714,13 @@ public enum __RKAudioSpatialModeSelection : Swift.String, Swift.Codable, Swift.C
   case pointSource
   case ambientBed
   case stereoBypass
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public typealias AllCases = [RealityKit.__RKAudioSpatialModeSelection]
+  public typealias RawValue = Swift.String
+  public static var allCases: [RealityKit.__RKAudioSpatialModeSelection] {
     get
   }
-  public typealias AllCases = [RealityKit.__RKAudioSpatialModeSelection]
-  public static var allCases: [RealityKit.__RKAudioSpatialModeSelection] {
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -2755,7 +2755,7 @@ extension __REAssetBundle {
   public func __add(resource: RealityKit.Resource) -> RealityKit.__REAssetIdentifier
   public func __renderGraphEmitter(identifier: RealityKit.__REAssetIdentifier) -> RealityKit.__RERenderGraphEmitter?
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class AnimationPlaybackController : Swift.Hashable {
   public var __identifier: RealityKit.__AnimationPlaybackTokenRef {
     get
@@ -2808,7 +2808,7 @@ public class __RKEntityLookupTable {
   public func removeAllEntities()
   @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 open class Entity : RealityKit.HasHierarchy, RealityKit.HasSynchronization, RealityKit.HasTransform {
   public var __coreEntity: RealityKit.__EntityRef {
     get
@@ -2882,13 +2882,13 @@ public class __RKWaitAction : RealityKit.__RKEntityAction {
   override public func perform(with context: RealityKit.__RKEntityActionContext) -> Swift.Bool
   override public func reversed() -> RealityKit.__RKEntityAction?
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
 extension MeshResource {
   public typealias Font = AppKit.NSFont
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15.4, iOS 13.4, macCatalyst 14.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15.4, iOS 13.4, macCatalyst 14.0, *)
 public class __ARReferenceProvider : RealityKit.__ARReferenceProviding {
   @available(*, deprecated, message: "use the \"instance(for assetService: __REAssetService)\" instead")
   public static var shared: RealityKit.__ARReferenceProvider {
@@ -2901,7 +2901,7 @@ public class __ARReferenceProvider : RealityKit.__ARReferenceProviding {
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class __RKVisibilityShowPopAnimation : RealityKit.__RKVisibilityBaseAnimation {
   @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol HasPerspectiveCamera : RealityKit.HasTransform {
 }
 extension HasPerspectiveCamera {
@@ -2921,33 +2921,33 @@ public class __RKEntityCustomAction : RealityKit.__RKEntityAction {
   public init(targetEntity: RealityKit.Entity?, actionIdentifier: Swift.String, handler: ((RealityKit.Entity?) -> Swift.Void)? = nil, customArguments: [Swift.String : Swift.String]? = [:], customArgumentsBlock: ((RealityKit.Entity?, [Swift.String : Swift.String]?) -> Swift.Void)? = nil)
   override public func perform(with context: RealityKit.__RKEntityActionContext) -> Swift.Bool
   @objc override public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   override public init(targetEntity: RealityKit.Entity? = super)
+  @objc deinit
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class __RKEmphasisFloatAnimation : RealityKit.__RKEmphasisBaseAnimation {
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class PhysicsMaterialResource : RealityKit.Resource {
   public static var `default`: RealityKit.PhysicsMaterialResource
-  @available(OSX 10.15.4, iOS 13.4, *)
+  @available(macOS 10.15.4, iOS 13.4, *)
   public var __staticFriction: Swift.Float {
     get
   }
-  @available(OSX 10.15.4, iOS 13.4, *)
+  @available(macOS 10.15.4, iOS 13.4, *)
   public var __dynamicFriction: Swift.Float {
     get
   }
-  @available(OSX 10.15.4, iOS 13.4, *)
+  @available(macOS 10.15.4, iOS 13.4, *)
   public var __restitution: Swift.Float {
     get
   }
   @objc deinit
   public static func generate(friction: Swift.Float = 0.8, restitution: Swift.Float = 0.8) -> RealityKit.PhysicsMaterialResource
-  @available(OSX 10.15.4, iOS 13.4, *)
+  @available(macOS 10.15.4, iOS 13.4, *)
   public static func generate(staticFriction: Swift.Float, dynamicFriction: Swift.Float, restitution: Swift.Float) -> RealityKit.PhysicsMaterialResource
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol HasSpotLight : RealityKit.HasTransform {
 }
 extension HasSpotLight {
@@ -2966,7 +2966,7 @@ extension HasSpotLight {
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class __RKEmphasisJiggleAnimation : RealityKit.__RKEmphasisBaseAnimation {
   @objc deinit
 }
-@available(OSX 11.0, iOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, *)
 extension Entity {
   public var isAccessibilityElement: Swift.Bool {
     get
@@ -2981,7 +2981,7 @@ extension Entity {
     set
   }
 }
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 extension Entity {
   public var __isAccessibilityRoot: Swift.Bool {
     get
@@ -3031,7 +3031,7 @@ extension Entity {
   public static func __loadAllAsync(contentsOf url: Foundation.URL, downsamplingStrategy: RealityKit.__DownsamplingStrategy?) -> RealityKit.LoadRequest<[RealityKit.Entity]>
   public static func __remapIdentifiersAndInteractions(root: RealityKit.Entity)
 }
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 extension __SceneResourceLoadResult {
   public func __makeEntity() throws -> RealityKit.Entity
   public func __makeAnchorEntity() throws -> RealityKit.Entity
@@ -3040,7 +3040,7 @@ extension __SceneImportOperation {
   final public func makeEntity() throws -> RealityKit.Entity
   final public func makeModelEntity() throws -> RealityKit.ModelEntity
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 @_fixed_layout public struct BoundingBox : Swift.Hashable {
   public static let empty: RealityKit.BoundingBox
   public var min: Swift.SIMD3<Swift.Float> = .positiveInfinity
@@ -3091,7 +3091,7 @@ extension BoundingBox {
   public static func fromCoreUnretained(_ asset: RealityKit.__AssetRef) -> RealityKit.__SceneResource
   final public func makeScene(named name: Swift.String) -> RealityKit.Scene?
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class ShapeResource : RealityKit.Resource, Swift.Hashable {
   @objc deinit
   public static func == (lhs: RealityKit.ShapeResource, rhs: RealityKit.ShapeResource) -> Swift.Bool
@@ -3166,18 +3166,18 @@ extension __RKEntityTrigger {
 extension __RKEntityAction {
   public static func action(for specification: RealityKit.__RKEntityActionSpecification, entityLookupTable: RealityKit.__RKEntityLookupTable) -> RealityKit.__RKEntityAction
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public enum CollisionCastQueryType : Swift.Hashable {
   case nearest
   case all
   case any
   public static func == (a: RealityKit.CollisionCastQueryType, b: RealityKit.CollisionCastQueryType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct CollisionGroup : Swift.OptionSet {
   public let rawValue: Swift.UInt32
   public static let `default`: RealityKit.CollisionGroup
@@ -3185,11 +3185,11 @@ public struct CollisionGroup : Swift.OptionSet {
   public static let sceneUnderstanding: RealityKit.CollisionGroup
   public static let all: RealityKit.CollisionGroup
   public init(rawValue: Swift.UInt32)
-  public typealias Element = RealityKit.CollisionGroup
   public typealias ArrayLiteralElement = RealityKit.CollisionGroup
+  public typealias Element = RealityKit.CollisionGroup
   public typealias RawValue = Swift.UInt32
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct CollisionFilter : Swift.Equatable {
   public static let `default`: RealityKit.CollisionFilter
   public static let sensor: RealityKit.CollisionFilter
@@ -3198,7 +3198,7 @@ public struct CollisionFilter : Swift.Equatable {
   public init(group: RealityKit.CollisionGroup, mask: RealityKit.CollisionGroup)
   public static func == (a: RealityKit.CollisionFilter, b: RealityKit.CollisionFilter) -> Swift.Bool
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct CollisionCastHit : Swift.Equatable {
   public var entity: RealityKit.Entity {
     get
@@ -3219,19 +3219,19 @@ extension Scene {
   public func raycast(from startPosition: Swift.SIMD3<Swift.Float>, to endPosition: Swift.SIMD3<Swift.Float>, query: RealityKit.CollisionCastQueryType = .all, mask: RealityKit.CollisionGroup = .all, relativeTo referenceEntity: RealityKit.Entity? = nil) -> [RealityKit.CollisionCastHit]
   public func convexCast(convexShape: RealityKit.ShapeResource, fromPosition: Swift.SIMD3<Swift.Float>, fromOrientation: simd.simd_quatf, toPosition: Swift.SIMD3<Swift.Float>, toOrientation: simd.simd_quatf, query: RealityKit.CollisionCastQueryType = .all, mask: RealityKit.CollisionGroup = .all, relativeTo referenceEntity: RealityKit.Entity? = nil) -> [RealityKit.CollisionCastHit]
 }
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 extension __RKEntityInteractionSpecification : RealityKit.__USDEncodablePublic {
   public func encode(to encoder: RealityKit.__USDEncoder, at pathName: RealityKit.__USKObjectPathWrapper) throws -> RealityKit.__USKNodeWrapper
   @available(*, deprecated)
   public func encode(to encoder: RealityKit.__USDEncoder, at pathName: RealityKit.__USKObjectPathWrapper, sceneSpecifier: RealityKit.__USKNodeSpecifierTypeWrapper) throws -> RealityKit.__USKNodeWrapper
 }
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 extension __RKEntityTriggerSpecification : RealityKit.__USDEncodablePublic {
   public func encode(to encoder: RealityKit.__USDEncoder, at pathName: RealityKit.__USKObjectPathWrapper) throws -> RealityKit.__USKNodeWrapper
   @available(*, deprecated)
   public func encode(to encoder: RealityKit.__USDEncoder, at pathName: RealityKit.__USKObjectPathWrapper, sceneSpecifier: RealityKit.__USKNodeSpecifierTypeWrapper) throws -> RealityKit.__USKNodeWrapper
 }
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 extension __RKEntityActionSpecification : RealityKit.__USDEncodablePublic {
   public func encode(to encoder: RealityKit.__USDEncoder, at pathName: RealityKit.__USKObjectPathWrapper) throws -> RealityKit.__USKNodeWrapper
   @available(*, deprecated)
@@ -3240,13 +3240,13 @@ extension __RKEntityActionSpecification : RealityKit.__USDEncodablePublic {
 public enum __RKEntitySpinDirectionType : Swift.String, Swift.Codable, Swift.CaseIterable {
   case clockwise
   case counterclockwise
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public typealias AllCases = [RealityKit.__RKEntitySpinDirectionType]
+  public typealias RawValue = Swift.String
+  public static var allCases: [RealityKit.__RKEntitySpinDirectionType] {
     get
   }
-  public typealias AllCases = [RealityKit.__RKEntitySpinDirectionType]
-  public static var allCases: [RealityKit.__RKEntitySpinDirectionType] {
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -3258,7 +3258,7 @@ public class __RKEntitySpinAction : RealityKit.__RKEntityAction {
   override public init(targetEntity: RealityKit.Entity? = super)
   @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct PerspectiveCameraComponent : RealityKit.Component, Swift.Equatable {
   public var near: Swift.Float
   public var far: Swift.Float
@@ -3284,7 +3284,7 @@ extension ARView {
     set
   }
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol HasPointLight : RealityKit.HasTransform {
 }
 extension HasPointLight {
@@ -3298,7 +3298,7 @@ extension __REAssetBundle {
   public static func __init(realityScenes: [RealityKit.Scene], assetService: RealityKit.__REAssetService) -> RealityKit.__REAssetBundle
   public static func loadSceneDescriptors(url: Foundation.URL) throws -> [RealityKit.__REAssetBundle.AssetMap.SceneDescriptor]
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class LoadRequest<Output> : Combine.Publisher {
   public typealias Failure = Swift.Error
   public var result: Swift.Result<Output, Swift.Error>? {
@@ -3327,25 +3327,25 @@ public struct __RKMaterialParameterBlock {
   }
   public enum TransparentPass : Swift.String, Swift.CaseIterable {
     case Transparent, TransparentAR, TransparentDynamicLighting, TransparentARDynamicLighting
-    public typealias RawValue = Swift.String
     public init?(rawValue: Swift.String)
-    public var rawValue: Swift.String {
+    public typealias AllCases = [RealityKit.__RKMaterialParameterBlock.TransparentPass]
+    public typealias RawValue = Swift.String
+    public static var allCases: [RealityKit.__RKMaterialParameterBlock.TransparentPass] {
       get
     }
-    public typealias AllCases = [RealityKit.__RKMaterialParameterBlock.TransparentPass]
-    public static var allCases: [RealityKit.__RKMaterialParameterBlock.TransparentPass] {
+    public var rawValue: Swift.String {
       get
     }
   }
   public enum OpaquePass : Swift.String, Swift.CaseIterable {
     case Opaque, OpaqueAR, OpaqueDynamicLighting, OpaqueARDynamicLighting, Shadow
-    public typealias RawValue = Swift.String
     public init?(rawValue: Swift.String)
-    public var rawValue: Swift.String {
+    public typealias AllCases = [RealityKit.__RKMaterialParameterBlock.OpaquePass]
+    public typealias RawValue = Swift.String
+    public static var allCases: [RealityKit.__RKMaterialParameterBlock.OpaquePass] {
       get
     }
-    public typealias AllCases = [RealityKit.__RKMaterialParameterBlock.OpaquePass]
-    public static var allCases: [RealityKit.__RKMaterialParameterBlock.OpaquePass] {
+    public var rawValue: Swift.String {
       get
     }
   }
@@ -3364,7 +3364,7 @@ public struct __RKMaterialParameterBlock {
   public static func __fromCore(_ coreComponent: RealityKit.__ComponentRef, index: Darwin.size_t) -> RealityKit.__RKMaterialParameterBlock
   public func __toCore(_ coreComponent: RealityKit.__ComponentRef, index: Darwin.size_t)
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 extension Entity {
   public enum __PackageTranslationError : Swift.Error {
     case noScenes(message: Swift.String)
@@ -3375,18 +3375,18 @@ extension Entity {
   public static func __packageToRealityFile(packageURL: Foundation.URL, completion: @escaping (Swift.Result<Foundation.URL, Swift.Error>) -> Swift.Void)
 }
 @_hasMissingDesignatedInitializers final public class __SceneImportOperation {
-  @available(OSX 10.15.4, iOS 13.4, *)
+  @available(macOS 10.15.4, iOS 13.4, *)
   public struct __ImportedScene {
     public let sceneIdentifier: Foundation.UUID
     public let sceneName: Swift.String
     public let sceneAsset: RealityKit.__REAsset
     public let sceneActive: Swift.Bool
   }
-  @available(OSX 10.15.4, iOS 13.4, *)
+  @available(macOS 10.15.4, iOS 13.4, *)
   final public var __url: Foundation.URL? {
     get
   }
-  @available(OSX 10.15.4, iOS 13.4, *)
+  @available(macOS 10.15.4, iOS 13.4, *)
   final public var __importedScenes: [RealityKit.__SceneImportOperation.__ImportedScene] {
     get
   }
@@ -3418,27 +3418,27 @@ extension Entity {
   final public func setRetainSubdivisionSurfaceInfo(_ importSubdivisionSurfaces: Swift.Bool) -> Self
   final public func run() throws
   final public func publishToEngine() throws
-  @available(OSX, deprecated: 10.15.4)
+  @available(macOS, deprecated: 10.15.4)
   @available(iOS, deprecated: 13.4)
   final public func getSceneResource() -> RealityKit.__SceneResource?
 }
 @available(iOS, introduced: 13.4, deprecated: 13.4, message: "Use the alternative that includes `actionAssets`")
-@available(OSX, introduced: 10.15.4, deprecated: 10.15.4, message: "Use the alternative that includes `actionAssets`")
+@available(macOS, introduced: 10.15.4, deprecated: 10.15.4, message: "Use the alternative that includes `actionAssets`")
 public func __SceneImportOperation_addCustomUSDDataToScene(uskNode: RealityKit.__USKNodeWrapper, uskScene: RealityKit.__USKSceneWrapper, scene: RealityKit.Scene, sceneIdentifier: Foundation.UUID, usdNodeToEntityMapping: [Swift.String : Swift.String], scenePathToUUIDMapping: [Swift.String : Foundation.UUID], fileName: Swift.String, error: Swift.UnsafeMutablePointer<Swift.Unmanaged<CoreFoundation.CFError>?>?) -> Swift.Bool
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 public func __SceneImportOperation_addCustomUSDDataToScene(uskNode: RealityKit.__USKNodeWrapper, uskScene: RealityKit.__USKSceneWrapper, scene: RealityKit.Scene, sceneIdentifier: Foundation.UUID, usdNodeToEntityMapping: [Swift.String : Swift.String], scenePathToUUIDMapping: [Swift.String : Foundation.UUID], actionAssets: [Swift.String : Swift.String], fileName: Swift.String) -> Swift.Error?
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public enum PhysicsBodyMode : Swift.Hashable {
   case `static`
   case kinematic
   case dynamic
   public static func == (a: RealityKit.PhysicsBodyMode, b: RealityKit.PhysicsBodyMode) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct PhysicsMassProperties : Swift.Equatable {
   public static let `default`: RealityKit.PhysicsMassProperties
   public var mass: Swift.Float
@@ -3495,9 +3495,9 @@ internal enum RotationOrder : Swift.UInt8 {
   case yxz
   case zyx
   @usableFromInline
-  internal typealias RawValue = Swift.UInt8
-  @usableFromInline
   internal init?(rawValue: Swift.UInt8)
+  @usableFromInline
+  internal typealias RawValue = Swift.UInt8
   @usableFromInline
   internal var rawValue: Swift.UInt8 {
     @usableFromInline
@@ -3514,7 +3514,7 @@ extension simd_quatf {
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class __RKVisibilityHideScaleUpAnimation : RealityKit.__RKVisibilityBaseAnimation {
   @objc deinit
 }
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 public struct __USDExportContext {
   public typealias AssetResolverCallback = (Foundation.URL) throws -> Foundation.URL?
   @_hasMissingDesignatedInitializers public class InstanceMapper {
@@ -3527,38 +3527,38 @@ public struct __USDExportContext {
   public init?(with scene: RealityKit.__USKSceneWrapper)
   public init?(with scene: RealityKit.__USKSceneWrapper, resolver: RealityKit.__USDExportContext.AssetResolverCallback?)
 }
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 public struct __USKSceneWrapper {
   public let erasedValue: Any
   public init<T>(_ value: T)
 }
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 public struct __USKNodeWrapper {
   public let erasedValue: Any
   public init<T>(_ value: T)
 }
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 public struct __USKObjectPathWrapper {
   public let erasedValue: Any
   public init<T>(_ value: T)
 }
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 public struct __USKNodeSpecifierTypeWrapper {
   public let erasedValue: Any
   public init<T>(_ value: T)
 }
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 public protocol __USDEncodablePublic {
   func encode(to encoder: RealityKit.__USDEncoder, at parentPath: RealityKit.__USKObjectPathWrapper) throws -> RealityKit.__USKNodeWrapper
   @available(*, deprecated)
   func encode(to encoder: RealityKit.__USDEncoder, at parentPath: RealityKit.__USKObjectPathWrapper, sceneSpecifier: RealityKit.__USKNodeSpecifierTypeWrapper) throws -> RealityKit.__USKNodeWrapper
 }
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 public struct __USDEncoder {
   public var exportContext: RealityKit.__USDExportContext
   public init(exportContext: RealityKit.__USDExportContext)
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class AnimationResource : RealityKit.Resource {
   public var __coreAsset: RealityKit.__AssetRef {
     get
@@ -3577,7 +3577,7 @@ extension Scene {
   override public func matches(with trigger: RealityKit.__RKEntityTrigger) -> Swift.Bool
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class MeshResource : RealityKit.Resource {
   public var expectedMaterialCount: Swift.Int {
     get
@@ -3633,16 +3633,16 @@ public class MeshResource : RealityKit.Resource {
     set
   }
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public struct CollisionComponent : RealityKit.Component, Swift.Equatable {
   public enum Mode {
     case `default`
     case trigger
     public static func == (a: RealityKit.CollisionComponent.Mode, b: RealityKit.CollisionComponent.Mode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public var shapes: [RealityKit.ShapeResource]
   public var mode: RealityKit.CollisionComponent.Mode
@@ -3655,7 +3655,7 @@ public struct CollisionComponent : RealityKit.Component, Swift.Equatable {
   }
   public static func == (a: RealityKit.CollisionComponent, b: RealityKit.CollisionComponent) -> Swift.Bool
 }
-@available(OSX 10.15, iOS 13.0, macCatalyst 14.0, *)
+@available(macOS 10.15, iOS 13.0, macCatalyst 14.0, *)
 public struct AnchoringComponent : RealityKit.Component, Swift.Equatable {
   public enum Target : Swift.Hashable {
     case camera
@@ -3675,13 +3675,13 @@ public struct AnchoringComponent : RealityKit.Component, Swift.Equatable {
   }
   public static func == (a: RealityKit.AnchoringComponent, b: RealityKit.AnchoringComponent) -> Swift.Bool
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol HasPhysicsBody : RealityKit.HasCollision {
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol HasPhysicsMotion : RealityKit.Entity {
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol HasPhysics : RealityKit.HasPhysicsBody, RealityKit.HasPhysicsMotion {
 }
 extension HasPhysicsBody {
@@ -3731,7 +3731,7 @@ extension HasPhysicsBody {
   }
   @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 @_fixed_layout public struct Transform : RealityKit.Component, Swift.Hashable {
   public static let identity: RealityKit.Transform
   public var scale: Swift.SIMD3<Swift.Float> = .one
@@ -3770,10 +3770,10 @@ extension HasPhysicsBody {
         hasher.combine(rotation.vector)
         hasher.combine(translation)
     }
+  public static func == (a: RealityKit.Transform, b: RealityKit.Transform) -> Swift.Bool
   public var hashValue: Swift.Int {
     get
   }
-  public static func == (a: RealityKit.Transform, b: RealityKit.Transform) -> Swift.Bool
 }
 extension Transform {
   public static func __fromCore(_ coreSRT: RealityKit.__SRTRef) -> RealityKit.Transform
@@ -3784,10 +3784,11 @@ extension Transform {
   }
 }
 @_hasMissingDesignatedInitializers public class __VideoResource : RealityKit.Resource {
+  public static func __fromCore(_ coreAsset: RealityKit.__AssetRef) -> Self
   @objc deinit
   public static func load(named name: Swift.String, in bundle: Foundation.Bundle? = nil) throws -> RealityKit.__VideoResource
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class AudioResource : RealityKit.Resource {
   @objc deinit
   public enum InputMode {
@@ -3795,17 +3796,17 @@ public class AudioResource : RealityKit.Resource {
     case spatial
     case ambient
     public static func == (a: RealityKit.AudioResource.InputMode, b: RealityKit.AudioResource.InputMode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public var inputMode: RealityKit.AudioResource.InputMode {
     get
     set
   }
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, *)
 public class AudioFileResource : RealityKit.AudioResource {
   public enum LoadingStrategy {
     case stream
@@ -3834,12 +3835,12 @@ extension AudioFileResource {
   public static func loadAsync(contentsOf url: Foundation.URL, withName resourceName: Swift.String? = nil, inputMode: RealityKit.AudioResource.InputMode = .spatial, loadingStrategy: RealityKit.AudioFileResource.LoadingStrategy = .preload, shouldLoop: Swift.Bool = false) -> RealityKit.LoadRequest<RealityKit.AudioFileResource>
 }
 extension AudioFileResource.LoadingStrategy : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
-@available(OSX 11.0, iOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, *)
 public struct ModelDebugOptionsComponent : RealityKit.Component {
   public var visualizationMode: RealityKit.ModelDebugOptionsComponent.VisualizationMode {
     get
@@ -3868,8 +3869,8 @@ public struct ModelDebugOptionsComponent : RealityKit.Component {
     case clearcoatRoughness
     case lightingDiffuse
     case lightingSpecular
-    public typealias RawValue = Swift.String
     public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
     }
@@ -3879,13 +3880,13 @@ public enum __RKEntityActionAnimationStyle : Swift.String, Swift.Codable, Swift.
   case basic
   case playful
   case wild
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public typealias AllCases = [RealityKit.__RKEntityActionAnimationStyle]
+  public typealias RawValue = Swift.String
+  public static var allCases: [RealityKit.__RKEntityActionAnimationStyle] {
     get
   }
-  public typealias AllCases = [RealityKit.__RKEntityActionAnimationStyle]
-  public static var allCases: [RealityKit.__RKEntityActionAnimationStyle] {
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -3900,13 +3901,13 @@ public enum __RKEntityShowActionBuildInAnimationType : Swift.String, Swift.Codab
   case pop
   case scale
   case scaleBig
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public typealias AllCases = [RealityKit.__RKEntityShowActionBuildInAnimationType]
+  public typealias RawValue = Swift.String
+  public static var allCases: [RealityKit.__RKEntityShowActionBuildInAnimationType] {
     get
   }
-  public typealias AllCases = [RealityKit.__RKEntityShowActionBuildInAnimationType]
-  public static var allCases: [RealityKit.__RKEntityShowActionBuildInAnimationType] {
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -3921,13 +3922,13 @@ public enum __RKEntityHideActionBuildOutAnimationType : Swift.String, Swift.Coda
   case pop
   case scale
   case scaleUp
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public typealias AllCases = [RealityKit.__RKEntityHideActionBuildOutAnimationType]
+  public typealias RawValue = Swift.String
+  public static var allCases: [RealityKit.__RKEntityHideActionBuildOutAnimationType] {
     get
   }
-  public typealias AllCases = [RealityKit.__RKEntityHideActionBuildOutAnimationType]
-  public static var allCases: [RealityKit.__RKEntityHideActionBuildOutAnimationType] {
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -3978,7 +3979,7 @@ public class __RKEntityHideAction : RealityKit.__RKEntityVisibilityAction {
   override public init()
   @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 public protocol HasHierarchy : RealityKit.Entity {
 }
 extension HasHierarchy {
@@ -4015,7 +4016,7 @@ public class __RKEntityInteraction : Swift.CustomStringConvertible {
   public var enabled: Swift.Bool
   public var accessibilityDescription: Swift.String?
   public init(trigger: RealityKit.__RKEntityTrigger, action: RealityKit.__RKEntityAction)
-  @available(OSX 10.15.4, iOS 13.4, *)
+  @available(macOS 10.15.4, iOS 13.4, *)
   convenience public init(trigger: RealityKit.__RKEntityTrigger, action: RealityKit.__RKEntityAction, accessibilityDescription: Swift.String? = nil)
   public func fire(context: RealityKit.__RKEntityActionContext)
   public var description: Swift.String {
@@ -4066,27 +4067,27 @@ extension RealityKit.__RKEntityActionSpecification.Name : Swift.RawRepresentable
 extension RealityKit.__RKEntityFlipDirectionType : Swift.Equatable {}
 extension RealityKit.__RKEntityFlipDirectionType : Swift.Hashable {}
 extension RealityKit.__RKEntityFlipDirectionType : Swift.RawRepresentable {}
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 extension RealityKit.NetworkCompatibilityToken.Compatibility : Swift.Equatable {}
-@available(OSX 10.15.4, iOS 13.4, *)
+@available(macOS 10.15.4, iOS 13.4, *)
 extension RealityKit.NetworkCompatibilityToken.Compatibility : Swift.Hashable {}
 extension RealityKit.__RKEntityActionGroup.Ordering : Swift.Equatable {}
 extension RealityKit.__RKEntityActionGroup.Ordering : Swift.Hashable {}
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 extension RealityKit.SynchronizationComponent.OwnershipTransferMode : Swift.Equatable {}
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 extension RealityKit.SynchronizationComponent.OwnershipTransferMode : Swift.Hashable {}
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 extension RealityKit.SynchronizationComponent.OwnershipTransferCompletionResult : Swift.Equatable {}
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 extension RealityKit.SynchronizationComponent.OwnershipTransferCompletionResult : Swift.Hashable {}
 extension RealityKit.__REAnchoringType.Name : Swift.Equatable {}
 extension RealityKit.__REAnchoringType.Name : Swift.Hashable {}
 extension RealityKit.__REAnchoringType.Name : Swift.RawRepresentable {}
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 @available(*, deprecated, message: "Will be hidden in RealityKit 2019.")
 extension RealityKit.AnimationTimingFunction.__Mode : Swift.Equatable {}
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 @available(*, deprecated, message: "Will be hidden in RealityKit 2019.")
 extension RealityKit.AnimationTimingFunction.__Mode : Swift.Hashable {}
 extension RealityKit.__RKEntityProximityTrigger.ExitType : Swift.Equatable {}
@@ -4108,17 +4109,17 @@ extension RealityKit.__RKMaterialParameterBlock.OpaquePass : Swift.RawRepresenta
 extension RealityKit.RotationOrder : Swift.Equatable {}
 extension RealityKit.RotationOrder : Swift.Hashable {}
 extension RealityKit.RotationOrder : Swift.RawRepresentable {}
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 extension RealityKit.CollisionComponent.Mode : Swift.Equatable {}
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 extension RealityKit.CollisionComponent.Mode : Swift.Hashable {}
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 extension RealityKit.AudioResource.InputMode : Swift.Equatable {}
-@available(OSX 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, *)
 extension RealityKit.AudioResource.InputMode : Swift.Hashable {}
-@available(OSX 11.0, iOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, *)
 extension RealityKit.ModelDebugOptionsComponent.VisualizationMode : Swift.Equatable {}
-@available(OSX 11.0, iOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, *)
 extension RealityKit.ModelDebugOptionsComponent.VisualizationMode : Swift.Hashable {}
-@available(OSX 11.0, iOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, *)
 extension RealityKit.ModelDebugOptionsComponent.VisualizationMode : Swift.RawRepresentable {}

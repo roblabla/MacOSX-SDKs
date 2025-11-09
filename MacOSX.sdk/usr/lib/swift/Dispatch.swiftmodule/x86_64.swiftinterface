@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target x86_64-apple-macos11.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -module-name Dispatch
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target x86_64-apple-macos11.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -module-name Dispatch
 import Combine
 @_exported import Dispatch
 import Swift
@@ -82,85 +82,85 @@ extension DispatchQueue {
     public let rawValue: Swift.UInt64
     public init(rawValue: Swift.UInt64)
     public static let concurrent: Dispatch.DispatchQueue.Attributes
-    @available(OSX 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+    @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public static let initiallyInactive: Dispatch.DispatchQueue.Attributes
-    public typealias Element = Dispatch.DispatchQueue.Attributes
     public typealias ArrayLiteralElement = Dispatch.DispatchQueue.Attributes
+    public typealias Element = Dispatch.DispatchQueue.Attributes
     public typealias RawValue = Swift.UInt64
   }
   public enum GlobalQueuePriority {
-    @available(OSX, deprecated: 10.10, message: "Use qos attributes instead")
+    @available(macOS, deprecated: 10.10, message: "Use qos attributes instead")
     @available(iOS, deprecated: 8.0, message: "Use qos attributes instead")
     @available(tvOS, deprecated, message: "Use qos attributes instead")
     @available(watchOS, deprecated, message: "Use qos attributes instead")
     case high
-    @available(OSX, deprecated: 10.10, message: "Use qos attributes instead")
+    @available(macOS, deprecated: 10.10, message: "Use qos attributes instead")
     @available(iOS, deprecated: 8.0, message: "Use qos attributes instead")
     @available(tvOS, deprecated, message: "Use qos attributes instead")
     @available(watchOS, deprecated, message: "Use qos attributes instead")
     case `default`
-    @available(OSX, deprecated: 10.10, message: "Use qos attributes instead")
+    @available(macOS, deprecated: 10.10, message: "Use qos attributes instead")
     @available(iOS, deprecated: 8.0, message: "Use qos attributes instead")
     @available(tvOS, deprecated, message: "Use qos attributes instead")
     @available(watchOS, deprecated, message: "Use qos attributes instead")
     case low
-    @available(OSX, deprecated: 10.10, message: "Use qos attributes instead")
+    @available(macOS, deprecated: 10.10, message: "Use qos attributes instead")
     @available(iOS, deprecated: 8.0, message: "Use qos attributes instead")
     @available(tvOS, deprecated, message: "Use qos attributes instead")
     @available(watchOS, deprecated, message: "Use qos attributes instead")
     case background
     public static func == (a: Dispatch.DispatchQueue.GlobalQueuePriority, b: Dispatch.DispatchQueue.GlobalQueuePriority) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public enum AutoreleaseFrequency {
     case inherit
-    @available(OSX 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+    @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     case workItem
-    @available(OSX 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+    @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     case never
     public static func == (a: Dispatch.DispatchQueue.AutoreleaseFrequency, b: Dispatch.DispatchQueue.AutoreleaseFrequency) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public class func concurrentPerform(iterations: Swift.Int, execute work: (Swift.Int) -> Swift.Void)
   public class var main: Dispatch.DispatchQueue {
     get
   }
-  @available(OSX, deprecated: 10.10)
+  @available(macOS, deprecated: 10.10)
   @available(iOS, deprecated: 8.0)
   @available(tvOS, deprecated)
   @available(watchOS, deprecated)
   public class func global(priority: Dispatch.DispatchQueue.GlobalQueuePriority) -> Dispatch.DispatchQueue
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public class func global(qos: Dispatch.DispatchQoS.QoSClass = .default) -> Dispatch.DispatchQueue
   public class func getSpecific<T>(key: Dispatch.DispatchSpecificKey<T>) -> T?
   convenience public init(label: Swift.String, qos: Dispatch.DispatchQoS = .unspecified, attributes: Dispatch.DispatchQueue.Attributes = [], autoreleaseFrequency: Dispatch.DispatchQueue.AutoreleaseFrequency = .inherit, target: Dispatch.DispatchQueue? = nil)
   public var label: Swift.String {
     get
   }
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public func sync(execute workItem: Dispatch.DispatchWorkItem)
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public func async(execute workItem: Dispatch.DispatchWorkItem)
-  @available(OSX 10.14, iOS 12.0, *)
+  @available(macOS 10.14, iOS 12.0, *)
   public func asyncAndWait(execute workItem: Dispatch.DispatchWorkItem)
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public func async(group: Dispatch.DispatchGroup, execute workItem: Dispatch.DispatchWorkItem)
   public func async(group: Dispatch.DispatchGroup? = nil, qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], execute work: @escaping @convention(block) () -> Swift.Void)
   public func sync<T>(execute work: () throws -> T) rethrows -> T
   public func sync<T>(flags: Dispatch.DispatchWorkItemFlags, execute work: () throws -> T) rethrows -> T
   public func asyncAfter(deadline: Dispatch.DispatchTime, qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], execute work: @escaping @convention(block) () -> Swift.Void)
   public func asyncAfter(wallDeadline: Dispatch.DispatchWallTime, qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], execute work: @escaping @convention(block) () -> Swift.Void)
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public func asyncAfter(deadline: Dispatch.DispatchTime, execute: Dispatch.DispatchWorkItem)
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public func asyncAfter(wallDeadline: Dispatch.DispatchWallTime, execute: Dispatch.DispatchWorkItem)
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public var qos: Dispatch.DispatchQoS {
     get
   }
@@ -170,15 +170,15 @@ extension DispatchQueue {
 extension DispatchSourceProtocol {
   public typealias DispatchSourceHandler = @convention(block) () -> Swift.Void
   public func setEventHandler(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], handler: Self.DispatchSourceHandler?)
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public func setEventHandler(handler: Dispatch.DispatchWorkItem)
   public func setCancelHandler(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], handler: Self.DispatchSourceHandler?)
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public func setCancelHandler(handler: Dispatch.DispatchWorkItem)
   public func setRegistrationHandler(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], handler: Self.DispatchSourceHandler?)
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public func setRegistrationHandler(handler: Dispatch.DispatchWorkItem)
-  @available(OSX 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+  @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
   public func activate()
   public func cancel()
   public func resume()
@@ -201,8 +201,8 @@ extension DispatchSource {
     public let rawValue: Swift.UInt
     public init(rawValue: Swift.UInt)
     public static let dead: Dispatch.DispatchSource.MachSendEvent
-    public typealias Element = Dispatch.DispatchSource.MachSendEvent
     public typealias ArrayLiteralElement = Dispatch.DispatchSource.MachSendEvent
+    public typealias Element = Dispatch.DispatchSource.MachSendEvent
     public typealias RawValue = Swift.UInt
   }
   public struct MemoryPressureEvent : Swift.OptionSet, Swift.RawRepresentable {
@@ -212,8 +212,8 @@ extension DispatchSource {
     public static let warning: Dispatch.DispatchSource.MemoryPressureEvent
     public static let critical: Dispatch.DispatchSource.MemoryPressureEvent
     public static let all: Dispatch.DispatchSource.MemoryPressureEvent
-    public typealias Element = Dispatch.DispatchSource.MemoryPressureEvent
     public typealias ArrayLiteralElement = Dispatch.DispatchSource.MemoryPressureEvent
+    public typealias Element = Dispatch.DispatchSource.MemoryPressureEvent
     public typealias RawValue = Swift.UInt
   }
   public struct ProcessEvent : Swift.OptionSet, Swift.RawRepresentable {
@@ -224,16 +224,16 @@ extension DispatchSource {
     public static let exec: Dispatch.DispatchSource.ProcessEvent
     public static let signal: Dispatch.DispatchSource.ProcessEvent
     public static let all: Dispatch.DispatchSource.ProcessEvent
-    public typealias Element = Dispatch.DispatchSource.ProcessEvent
     public typealias ArrayLiteralElement = Dispatch.DispatchSource.ProcessEvent
+    public typealias Element = Dispatch.DispatchSource.ProcessEvent
     public typealias RawValue = Swift.UInt
   }
   public struct TimerFlags : Swift.OptionSet, Swift.RawRepresentable {
     public let rawValue: Swift.UInt
     public init(rawValue: Swift.UInt)
     public static let strict: Dispatch.DispatchSource.TimerFlags
-    public typealias Element = Dispatch.DispatchSource.TimerFlags
     public typealias ArrayLiteralElement = Dispatch.DispatchSource.TimerFlags
+    public typealias Element = Dispatch.DispatchSource.TimerFlags
     public typealias RawValue = Swift.UInt
   }
   public struct FileSystemEvent : Swift.OptionSet, Swift.RawRepresentable {
@@ -248,8 +248,8 @@ extension DispatchSource {
     public static let revoke: Dispatch.DispatchSource.FileSystemEvent
     public static let funlock: Dispatch.DispatchSource.FileSystemEvent
     public static let all: Dispatch.DispatchSource.FileSystemEvent
-    public typealias Element = Dispatch.DispatchSource.FileSystemEvent
     public typealias ArrayLiteralElement = Dispatch.DispatchSource.FileSystemEvent
+    public typealias Element = Dispatch.DispatchSource.FileSystemEvent
     public typealias RawValue = Swift.UInt
   }
   public class func makeMachSendSource(port: Darwin.mach_port_t, eventMask: Dispatch.DispatchSource.MachSendEvent, queue: Dispatch.DispatchQueue? = nil) -> Dispatch.DispatchSourceMachSend
@@ -381,12 +381,12 @@ public func + (time: Dispatch.DispatchWallTime, interval: Dispatch.DispatchTimeI
 public func - (time: Dispatch.DispatchWallTime, interval: Dispatch.DispatchTimeInterval) -> Dispatch.DispatchWallTime
 public func + (time: Dispatch.DispatchWallTime, seconds: Swift.Double) -> Dispatch.DispatchWallTime
 public func - (time: Dispatch.DispatchWallTime, seconds: Swift.Double) -> Dispatch.DispatchWallTime
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension DispatchTime {
   public func distance(to other: Dispatch.DispatchTime) -> Dispatch.DispatchTimeInterval
   public func advanced(by n: Dispatch.DispatchTimeInterval) -> Dispatch.DispatchTime
 }
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension DispatchQueue : Combine.Scheduler {
   public struct SchedulerTimeType : Swift.Strideable, Swift.Codable, Swift.Hashable {
     public var dispatchTime: Dispatch.DispatchTime
@@ -423,13 +423,13 @@ extension DispatchQueue : Combine.Scheduler {
       public static func milliseconds(_ ms: Swift.Int) -> Dispatch.DispatchQueue.SchedulerTimeType.Stride
       public static func microseconds(_ us: Swift.Int) -> Dispatch.DispatchQueue.SchedulerTimeType.Stride
       public static func nanoseconds(_ ns: Swift.Int) -> Dispatch.DispatchQueue.SchedulerTimeType.Stride
-      public init(from decoder: Swift.Decoder) throws
+      public func hash(into hasher: inout Swift.Hasher)
+      public static func == (a: Dispatch.DispatchQueue.SchedulerTimeType.Stride, b: Dispatch.DispatchQueue.SchedulerTimeType.Stride) -> Swift.Bool
+      public func encode(to encoder: Swift.Encoder) throws
       public var hashValue: Swift.Int {
         get
       }
-      public func hash(into hasher: inout Swift.Hasher)
-      public func encode(to encoder: Swift.Encoder) throws
-      public static func == (a: Dispatch.DispatchQueue.SchedulerTimeType.Stride, b: Dispatch.DispatchQueue.SchedulerTimeType.Stride) -> Swift.Bool
+      public init(from decoder: Swift.Decoder) throws
     }
     public var hashValue: Swift.Int {
       get
@@ -455,23 +455,25 @@ public struct DispatchWorkItemFlags : Swift.OptionSet, Swift.RawRepresentable {
   public let rawValue: Swift.UInt
   public init(rawValue: Swift.UInt)
   public static let barrier: Dispatch.DispatchWorkItemFlags
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public static let detached: Dispatch.DispatchWorkItemFlags
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public static let assignCurrentContext: Dispatch.DispatchWorkItemFlags
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public static let noQoS: Dispatch.DispatchWorkItemFlags
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public static let inheritQoS: Dispatch.DispatchWorkItemFlags
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public static let enforceQoS: Dispatch.DispatchWorkItemFlags
-  public typealias Element = Dispatch.DispatchWorkItemFlags
   public typealias ArrayLiteralElement = Dispatch.DispatchWorkItemFlags
+  public typealias Element = Dispatch.DispatchWorkItemFlags
   public typealias RawValue = Swift.UInt
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.10, iOS 8.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.10, iOS 8.0, *)
 @_objcRuntimeName(_TtC8Dispatch17_DispatchWorkItem) public class DispatchWorkItem {
   public init(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], block: @escaping @convention(block) () -> Swift.Void)
+  @available(macOS 11.3, iOS 14.5, watchOS 7.4, tvOS 14.5, *)
+  public init(flags: Dispatch.DispatchWorkItemFlags = [], block: @escaping @convention(block) () -> Swift.Void)
   public func perform()
   public func wait()
   public func wait(timeout: Dispatch.DispatchTime) -> Dispatch.DispatchTimeoutResult
@@ -488,8 +490,8 @@ extension DispatchIO {
   public enum StreamType : Swift.UInt {
     case stream
     case random
-    public typealias RawValue = Swift.UInt
     public init?(rawValue: Swift.UInt)
+    public typealias RawValue = Swift.UInt
     public var rawValue: Swift.UInt {
       get
     }
@@ -498,8 +500,8 @@ extension DispatchIO {
     public let rawValue: Swift.UInt
     public init(rawValue: Swift.UInt)
     public static let stop: Dispatch.DispatchIO.CloseFlags
-    public typealias Element = Dispatch.DispatchIO.CloseFlags
     public typealias ArrayLiteralElement = Dispatch.DispatchIO.CloseFlags
+    public typealias Element = Dispatch.DispatchIO.CloseFlags
     public typealias RawValue = Swift.UInt
   }
   public struct IntervalFlags : Swift.OptionSet, Swift.RawRepresentable {
@@ -507,8 +509,8 @@ extension DispatchIO {
     public init(rawValue: Swift.UInt)
     public init(nilLiteral: ())
     public static let strictInterval: Dispatch.DispatchIO.IntervalFlags
-    public typealias Element = Dispatch.DispatchIO.IntervalFlags
     public typealias ArrayLiteralElement = Dispatch.DispatchIO.IntervalFlags
+    public typealias Element = Dispatch.DispatchIO.IntervalFlags
     public typealias RawValue = Swift.UInt
   }
   public class func read(fromFileDescriptor: Swift.Int32, maxLength: Swift.Int, runningHandlerOn queue: Dispatch.DispatchQueue, handler: @escaping (Dispatch.DispatchData, Swift.Int32) -> Swift.Void)
@@ -524,15 +526,15 @@ extension DispatchIO {
   public func setInterval(interval: Dispatch.DispatchTimeInterval, flags: Dispatch.DispatchIO.IntervalFlags = [])
   public func close(flags: Dispatch.DispatchIO.CloseFlags = [])
 }
-@available(OSX 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public enum DispatchPredicate {
   case onQueue(Dispatch.DispatchQueue)
   case onQueueAsBarrier(Dispatch.DispatchQueue)
   case notOnQueue(Dispatch.DispatchQueue)
 }
-@available(OSX 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public func _dispatchPreconditionTest(_ condition: Dispatch.DispatchPredicate) -> Swift.Bool
-@available(OSX 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @_transparent public func dispatchPrecondition(condition: @autoclosure () -> Dispatch.DispatchPredicate) {
 	// precondition is able to determine release-vs-debug asserts where the overlay
 	// cannot, so formulating this into a call that we can call with precondition()
@@ -541,40 +543,40 @@ public func _dispatchPreconditionTest(_ condition: Dispatch.DispatchPredicate) -
 public struct DispatchQoS : Swift.Equatable {
   public let qosClass: Dispatch.DispatchQoS.QoSClass
   public let relativePriority: Swift.Int
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public static let background: Dispatch.DispatchQoS
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public static let utility: Dispatch.DispatchQoS
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public static let `default`: Dispatch.DispatchQoS
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public static let userInitiated: Dispatch.DispatchQoS
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public static let userInteractive: Dispatch.DispatchQoS
   public static let unspecified: Dispatch.DispatchQoS
   public enum QoSClass {
-    @available(OSX 10.10, iOS 8.0, *)
+    @available(macOS 10.10, iOS 8.0, *)
     case background
-    @available(OSX 10.10, iOS 8.0, *)
+    @available(macOS 10.10, iOS 8.0, *)
     case utility
-    @available(OSX 10.10, iOS 8.0, *)
+    @available(macOS 10.10, iOS 8.0, *)
     case `default`
-    @available(OSX 10.10, iOS 8.0, *)
+    @available(macOS 10.10, iOS 8.0, *)
     case userInitiated
-    @available(OSX 10.10, iOS 8.0, *)
+    @available(macOS 10.10, iOS 8.0, *)
     case userInteractive
     case unspecified
-    @available(OSX 10.10, iOS 8.0, *)
+    @available(macOS 10.10, iOS 8.0, *)
     public init?(rawValue: Darwin.qos_class_t)
-    @available(OSX 10.10, iOS 8.0, *)
+    @available(macOS 10.10, iOS 8.0, *)
     public var rawValue: Darwin.qos_class_t {
       get
     }
     public static func == (a: Dispatch.DispatchQoS.QoSClass, b: Dispatch.DispatchQoS.QoSClass) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public init(qosClass: Dispatch.DispatchQoS.QoSClass, relativePriority: Swift.Int)
   public static func == (a: Dispatch.DispatchQoS, b: Dispatch.DispatchQoS) -> Swift.Bool
@@ -583,14 +585,14 @@ public struct DispatchQoS : Swift.Equatable {
   case success
   case timedOut
   public static func == (a: Dispatch.DispatchTimeoutResult, b: Dispatch.DispatchTimeoutResult) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 extension DispatchGroup {
   public func notify(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], queue: Dispatch.DispatchQueue, execute work: @escaping @convention(block) () -> Swift.Void)
-  @available(OSX 10.10, iOS 8.0, *)
+  @available(macOS 10.10, iOS 8.0, *)
   public func notify(queue: Dispatch.DispatchQueue, work: Dispatch.DispatchWorkItem)
   public func wait()
   public func wait(timeout: Dispatch.DispatchTime) -> Dispatch.DispatchTimeoutResult

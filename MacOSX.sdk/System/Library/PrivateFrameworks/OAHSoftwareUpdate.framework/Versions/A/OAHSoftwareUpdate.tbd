@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F7E399A4-4976-32F1-B6C8-6F9DB3EECDDA
+    value:           C59CA1B1-9B92-33B1-B3F8-655D97CC5B96
 install-name:    '/System/Library/PrivateFrameworks/OAHSoftwareUpdate.framework/Versions/A/OAHSoftwareUpdate'
 exports:
   - targets:         [ arm64e-macos, arm64-macos ]

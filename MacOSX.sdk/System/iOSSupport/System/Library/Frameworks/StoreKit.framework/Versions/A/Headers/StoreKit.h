@@ -5,6 +5,7 @@
 //  Copyright 2009 Apple, Inc. All rights reserved.
 //
 
+#import <StoreKit/SKAdImpression.h>
 #import <StoreKit/SKAdNetwork.h>
 #import <StoreKit/SKArcadeService.h>
 #import <StoreKit/SKCloudServiceController.h>

@@ -3,34 +3,35 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CCE76D80-DB3B-3577-813D-AD99B45A2A1A
+    value:           373323F8-7778-3F11-85A3-6DF29A743913
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D862B89C-850C-3A67-8429-570DAB32E422
+    value:           D716FED3-7D62-3840-BE3C-164EACFA5E87
 install-name:    '/System/Library/Frameworks/DriverKit.framework/Versions/A/DriverKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _DriverExecutableMain, _IOBufferMemoryDescriptor_Class, _IODMACommand_Class, 
                        _IODataQueueDispatchSource_Class, _IODelay, _IODispatchQueue_Class, 
-                       _IODispatchSource_Class, _IODriverKitTest, _IOFree, _IOInterruptDispatchSource_Class, 
-                       _IOLockAlloc, _IOLockAssert, _IOLockFree, _IOLockLock, _IOLockTryLock, 
-                       _IOLockUnlock, _IOLog, _IOLogBuffer, _IOLogv, _IOMalloc, _IOMallocZero, 
-                       _IOMemoryDescriptor_Class, _IOMemoryMap_Class, _IOParseBootArgNumber, 
-                       _IOParseBootArgString, _IORPCMessageFromMach, _IORWLockAlloc, 
-                       _IORWLockFree, _IORWLockRead, _IORWLockUnlock, _IORWLockWrite, 
-                       _IORecursiveLockAlloc, _IORecursiveLockFree, _IORecursiveLockHaveLock, 
-                       _IORecursiveLockLock, _IORecursiveLockTryLock, _IORecursiveLockUnlock, 
-                       _IOServiceNotificationDispatchSource_Class, _IOService_Class, 
-                       _IOSleep, _IOTimerDispatchSource_Class, _IOUserClient_Class, 
-                       _IOUserServerMain, _IOUserServer_Class, _IOVMPageSize, _OSAction_Class, 
-                       _OSAction_IOUserClient_KernelCompletion_Class, _OSAction__IOBlockStorageDevice_KernelCompletion_Class, 
-                       _OSArrayAppendValue, _OSArrayApply, _OSArrayCreate, _OSArrayGetCount, 
-                       _OSArrayGetStringValue, _OSArrayGetUInt64Value, _OSArrayGetValue, 
-                       _OSArrayReplaceValue, _OSArraySetStringValue, _OSArraySetUInt64Value, 
-                       _OSArraySetValue, _OSArray_Class, _OSBoolean_Class, _OSCollectionTypeID, 
-                       _OSCollectionTypeName, _OSCollection_Class, _OSCollectionsInitialize, 
-                       _OSContainer_Class, _OSCreateObjectFromSerialization, _OSCreateSerializationFromBytes, 
+                       _IODispatchSource_Class, _IODriverKitTest, _IOFree, _IOGetExecutableSDKVersion, 
+                       _IOInterruptDispatchSource_Class, _IOLockAlloc, _IOLockAssert, 
+                       _IOLockFree, _IOLockLock, _IOLockTryLock, _IOLockUnlock, _IOLog, 
+                       _IOLogBuffer, _IOLogv, _IOMalloc, _IOMallocZero, _IOMemoryDescriptor_Class, 
+                       _IOMemoryMap_Class, _IOParseBootArgNumber, _IOParseBootArgString, 
+                       _IORPCMessageFromMach, _IORWLockAlloc, _IORWLockFree, _IORWLockRead, 
+                       _IORWLockUnlock, _IORWLockWrite, _IORecursiveLockAlloc, _IORecursiveLockFree, 
+                       _IORecursiveLockHaveLock, _IORecursiveLockLock, _IORecursiveLockTryLock, 
+                       _IORecursiveLockUnlock, _IOServiceNotificationDispatchSource_Class, 
+                       _IOService_Class, _IOSleep, _IOTimerDispatchSource_Class, 
+                       _IOUserClient_Class, _IOUserServerMain, _IOUserServer_Class, 
+                       _IOVMPageSize, _OSAction_Class, _OSAction_IOUserClient_KernelCompletion_Class, 
+                       _OSAction__IOBlockStorageDevice_KernelCompletion_Class, _OSArrayAppendValue, 
+                       _OSArrayApply, _OSArrayCreate, _OSArrayGetCount, _OSArrayGetStringValue, 
+                       _OSArrayGetUInt64Value, _OSArrayGetValue, _OSArrayReplaceValue, 
+                       _OSArraySetStringValue, _OSArraySetUInt64Value, _OSArraySetValue, 
+                       _OSArray_Class, _OSBoolean_Class, _OSCollectionTypeID, _OSCollectionTypeName, 
+                       _OSCollection_Class, _OSCollectionsInitialize, _OSContainer_Class, 
+                       _OSCreateObjectFromSerialization, _OSCreateSerializationFromBytes, 
                        _OSCreateSerializationFromObject, _OSDataAppendBytes, _OSDataCreate, 
                        _OSDataGetBytes, _OSDataGetBytesPtr, _OSDataGetLength, _OSData_Class, 
                        _OSDictionaryApply, _OSDictionaryCreate, _OSDictionaryGetCount, 
@@ -279,6 +280,7 @@ exports:
                        __ZN9IOService10Start_ImplEPS_, __ZN9IOService10Stop_asyncEPS_PFiP15OSMetaClassBase5IORPCE, 
                        __ZN9IOService11Create_ImplEPS_PKcPS0_, __ZN9IOService11Stop_InvokeE5IORPCP15OSMetaClassBasePFiS2_PS_E, 
                        __ZN9IOService12Start_InvokeE5IORPCP15OSMetaClassBasePFiS2_PS_E, 
+                       __ZN9IOService13ClientCrashedEPS_yPFiP15OSMetaClassBase5IORPCE, 
                        __ZN9IOService13Create_InvokeE5IORPCP15OSMetaClassBasePFiS2_PS_PKcPS3_E, 
                        __ZN9IOService13NewUserClientEjPP12IOUserClientPFiP15OSMetaClassBase5IORPCE, 
                        __ZN9IOService13SetPowerStateEjPFiP15OSMetaClassBase5IORPCE, 
@@ -292,7 +294,8 @@ exports:
                        __ZN9IOService17Stop_async_InvokeE5IORPCP15OSMetaClassBasePFvS2_PS_E, 
                        __ZN9IOService18GetRegistryEntryIDEPyPFiP15OSMetaClassBase5IORPCE, 
                        __ZN9IOService18RequireMaxBusStallEyPFiP15OSMetaClassBase5IORPCE, 
-                       __ZN9IOService18SetPowerState_ImplEj, __ZN9IOService20NewUserClient_InvokeE5IORPCP15OSMetaClassBasePFiS2_jPP12IOUserClientE, 
+                       __ZN9IOService18SetPowerState_ImplEj, __ZN9IOService20ClientCrashed_InvokeE5IORPCP15OSMetaClassBasePFiS2_PS_yE, 
+                       __ZN9IOService20NewUserClient_InvokeE5IORPCP15OSMetaClassBasePFiS2_jPP12IOUserClientE, 
                        __ZN9IOService20SetPowerState_InvokeE5IORPCP15OSMetaClassBasePFiS2_jE, 
                        __ZN9IOService20SetProperties_InvokeE5IORPCP15OSMetaClassBasePFiS2_P12OSDictionaryE, 
                        __ZN9IOService21CopyProperties_InvokeE5IORPCP15OSMetaClassBasePFiS2_PP12OSDictionaryE, 

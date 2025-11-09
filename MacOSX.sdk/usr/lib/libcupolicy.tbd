@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2F96A575-F5C8-3F82-BFB1-81A8201EFA2A
+    value:           340C1C38-DB43-36DC-8269-BCCD6C4CAAD4
   - target:          x86_64-maccatalyst
-    value:           2F96A575-F5C8-3F82-BFB1-81A8201EFA2A
+    value:           340C1C38-DB43-36DC-8269-BCCD6C4CAAD4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C3FFB2E7-E450-30CE-BEB3-A3C8B8725677
+    value:           2C16D135-C655-3707-8F4B-7D49376B4A80
   - target:          arm64e-maccatalyst
-    value:           C3FFB2E7-E450-30CE-BEB3-A3C8B8725677
+    value:           2C16D135-C655-3707-8F4B-7D49376B4A80
 install-name:    '/usr/lib/libcupolicy.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

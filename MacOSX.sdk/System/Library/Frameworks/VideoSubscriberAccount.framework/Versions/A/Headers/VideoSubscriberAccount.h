@@ -7,6 +7,7 @@
 
 #import <VideoSubscriberAccount/VideoSubscriberAccountDefines.h>
 #import <VideoSubscriberAccount/VideoSubscriberAccountErrors.h>
+#import <VideoSubscriberAccount/VSAccountApplicationProvider.h>
 #import <VideoSubscriberAccount/VSAccountManager.h>
 #import <VideoSubscriberAccount/VSAccountManagerResult.h>
 #import <VideoSubscriberAccount/VSAccountMetadata.h>

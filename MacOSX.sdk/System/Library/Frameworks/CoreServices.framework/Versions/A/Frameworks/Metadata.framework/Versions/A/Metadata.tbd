@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4CE16D2B-CE04-360A-86D2-2F0F8449E502
+    value:           FCCD84AD-EDFA-310E-B607-FFC464419716
   - target:          x86_64-maccatalyst
-    value:           4CE16D2B-CE04-360A-86D2-2F0F8449E502
+    value:           FCCD84AD-EDFA-310E-B607-FFC464419716
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6F845F28-4399-36D6-95CE-23DBB548165A
+    value:           D6E78FFE-7627-3A3B-A87B-69F17EB99A1D
   - target:          arm64e-maccatalyst
-    value:           6F845F28-4399-36D6-95CE-23DBB548165A
+    value:           D6E78FFE-7627-3A3B-A87B-69F17EB99A1D
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata'
-current-version: 2150.6
+current-version: 2150.16
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

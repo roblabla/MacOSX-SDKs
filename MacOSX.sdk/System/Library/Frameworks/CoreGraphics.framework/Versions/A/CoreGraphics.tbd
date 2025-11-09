@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FADE6748-BAEA-39B4-8196-EC064D5ED92E
+    value:           9C34B19E-DD79-3FD4-8AE7-4D6972C3CCAE
   - target:          x86_64-maccatalyst
-    value:           FADE6748-BAEA-39B4-8196-EC064D5ED92E
+    value:           9C34B19E-DD79-3FD4-8AE7-4D6972C3CCAE
   - target:          x86_64h-macos
-    value:           1429656D-D10D-3849-8B57-16AF17E32677
+    value:           C0A3FF01-4138-345C-9244-077AE7733BCD
   - target:          x86_64h-maccatalyst
-    value:           1429656D-D10D-3849-8B57-16AF17E32677
+    value:           C0A3FF01-4138-345C-9244-077AE7733BCD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B52B41D4-9DD7-3B92-81A3-9D63B7591B5D
+    value:           72BEBAFD-D5BC-32D1-A602-3D56FD32CA8E
   - target:          arm64e-maccatalyst
-    value:           B52B41D4-9DD7-3B92-81A3-9D63B7591B5D
+    value:           72BEBAFD-D5BC-32D1-A602-3D56FD32CA8E
 install-name:    '/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics'
-current-version: 1463.2.1
+current-version: 1463.4.2
 compatibility-version: 64
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.4$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.5$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
@@ -599,10 +599,10 @@ exports:
                        _CGPDFContextBeginTag, _CGPDFContextClose, _CGPDFContextCreate, 
                        _CGPDFContextCreateWithFilename, _CGPDFContextCreateWithURL, 
                        _CGPDFContextEndDrawingHiddenText, _CGPDFContextEndPage, _CGPDFContextEndTag, 
-                       _CGPDFContextSetDestinationForRect, _CGPDFContextSetImageTag, 
-                       _CGPDFContextSetOutline, _CGPDFContextSetOutputIntent, _CGPDFContextSetRedactionPath, 
-                       _CGPDFContextSetShouldDeflate, _CGPDFContextSetURLForRect, 
-                       _CGPDFDictionaryApplyBlock, _CGPDFDictionaryApplyFunction, 
+                       _CGPDFContextIsValidPassword, _CGPDFContextSetDestinationForRect, 
+                       _CGPDFContextSetImageTag, _CGPDFContextSetOutline, _CGPDFContextSetOutputIntent, 
+                       _CGPDFContextSetRedactionPath, _CGPDFContextSetShouldDeflate, 
+                       _CGPDFContextSetURLForRect, _CGPDFDictionaryApplyBlock, _CGPDFDictionaryApplyFunction, 
                        _CGPDFDictionaryApplyFunctionRaw, _CGPDFDictionaryGetArray, 
                        _CGPDFDictionaryGetBoolean, _CGPDFDictionaryGetBooleans, _CGPDFDictionaryGetCount, 
                        _CGPDFDictionaryGetDictionary, _CGPDFDictionaryGetInteger, 
@@ -663,10 +663,10 @@ exports:
                        _CGPDFGetNameVectorForBaseEncoding, _CGPDFGetUnicharGuessForCID, 
                        _CGPDFGetUnicharGuessForGlyphName, _CGPDFGetUnicharVectorForBaseEncoding, 
                        _CGPDFGetUnicharsForGlyphName, _CGPDFLayoutCreate, _CGPDFNameCreate, 
-                       _CGPDFNameGetString, _CGPDFNameTypeID, _CGPDFObjectGetType, 
-                       _CGPDFObjectGetValue, _CGPDFObjectPrint, _CGPDFOperatorTableCreate, 
-                       _CGPDFOperatorTableRelease, _CGPDFOperatorTableRetain, _CGPDFOperatorTableSetCallback, 
-                       _CGPDFPageAddAnnotation, _CGPDFPageContainsWideGamutContent, 
+                       _CGPDFNameGetString, _CGPDFNameTreeGetValue, _CGPDFNameTypeID, 
+                       _CGPDFObjectGetType, _CGPDFObjectGetValue, _CGPDFObjectPrint, 
+                       _CGPDFOperatorTableCreate, _CGPDFOperatorTableRelease, _CGPDFOperatorTableRetain, 
+                       _CGPDFOperatorTableSetCallback, _CGPDFPageAddAnnotation, _CGPDFPageContainsWideGamutContent, 
                        _CGPDFPageCopyPageLabel, _CGPDFPageCopyTextString, _CGPDFPageCopyTextStringWithGlyphs, 
                        _CGPDFPageCopyThumbnail, _CGPDFPageCreate, _CGPDFPageCreateThumbnail, 
                        _CGPDFPageCreateWithImage, _CGPDFPageEnumerateAnnotations, 
@@ -1348,6 +1348,6 @@ exports:
                        _shape_qdrgn_alloc, _shape_qdrgn_free, _shape_union, _shape_xor ]
     objc-classes:    [ CGVirtualDisplay, CGVirtualDisplayDescriptor, CGVirtualDisplayMode, 
                        CGVirtualDisplaySettings ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, arm64-macos ]
     symbols:         [ _CGSSetDisplayAcceleratorBoost, _CGVirtualDisplaySettingsRefreshDeadlineNone ]
 ...

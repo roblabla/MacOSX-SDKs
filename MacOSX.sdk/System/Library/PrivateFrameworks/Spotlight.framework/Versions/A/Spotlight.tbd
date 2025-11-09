@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           536A1B1C-C370-3DB4-88ED-C8A52D9F6C78
+    value:           C80EC440-6D96-369D-A684-ADBB689FAB4C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0BAE1FDB-FA07-38A9-9549-F98CC5CDA6A6
+    value:           FC938DCA-7958-32A9-9016-C57EF9CD0EE0
 install-name:    '/System/Library/PrivateFrameworks/Spotlight.framework/Versions/A/Spotlight'
-current-version: 2150.6
+current-version: 2150.16
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _SPAppDelegatePreferencesChanged, _SPBodyColor, _SPBodyFont, 

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2E872705-0841-3695-AF79-4160D2A436AB
+    value:           2544BA7A-BBEE-3A87-A270-263F5ECA0034
   - target:          x86_64-maccatalyst
-    value:           2E872705-0841-3695-AF79-4160D2A436AB
+    value:           2544BA7A-BBEE-3A87-A270-263F5ECA0034
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           228A8531-187C-3222-A570-2AC0F24A1ECE
+    value:           40157A85-333E-37B2-8E31-896D7CD30C4E
   - target:          arm64e-maccatalyst
-    value:           228A8531-187C-3222-A570-2AC0F24A1ECE
+    value:           40157A85-333E-37B2-8E31-896D7CD30C4E
 install-name:    '/System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos'
 current-version: 6
 compatibility-version: 5
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _FSp_krb_get_svc_in_tkt, _FSp_profile_init, _FSp_profile_init_path, 
                        _FSp_put_svc_key, _FSp_read_service_key, _GSS_C_NT_ANONYMOUS, 

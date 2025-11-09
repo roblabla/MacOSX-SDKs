@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6B3E8FA3-1C52-3187-920A-146C6E108054
+    value:           5673058B-F13B-3D33-BE44-FBCC4E026433
   - target:          x86_64-maccatalyst
-    value:           6B3E8FA3-1C52-3187-920A-146C6E108054
+    value:           5673058B-F13B-3D33-BE44-FBCC4E026433
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           56532E5E-750B-3FBD-B436-BE0C838698A6
+    value:           31EABDD8-3A84-3210-8328-CFF5171E03BF
   - target:          arm64e-maccatalyst
-    value:           56532E5E-750B-3FBD-B436-BE0C838698A6
+    value:           31EABDD8-3A84-3210-8328-CFF5171E03BF
 install-name:    '/System/Library/PrivateFrameworks/AXRuntime.framework/Versions/A/AXRuntime'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -30,17 +30,18 @@ exports:
                        _AXAuditShouldRunTestOption, _AXAuditSpinRunLoopOption, _AXBroadcastNotificationToAllClients, 
                        _AXConvertIncomingValue, _AXConvertOutgoingValue, _AXConvertPidToAXElement, 
                        _AXConvertPointFromHostedCoordinates, _AXConvertPointToHostedCoordinates, 
-                       _AXConvertRectFromHostedCoordinates, _AXCreateAXAttributedStringFromCFAttributedString, 
-                       _AXDictationControllerNotificationControllerKey, _AXDictationControllerStartedListeningNotification, 
-                       _AXDictationControllerStoppedListeningNotification, _AXDisableAccessibilityOnTermination, 
-                       _AXDistanceBetweenCenters, _AXDoesRequestingClientDeserveAutomation, 
-                       _AXElementGroupTestingItemsKey, _AXElementGroupTestingTraitsKey, 
-                       _AXElementTestingFrameKey, _AXElementTestingLabelKey, _AXElementTestingTraitsKey, 
-                       _AXElementTestingValueKey, _AXExpandedStatusAttributeForValue, 
-                       _AXFetchEventAllEvents, _AXGetCFAttributedStringFromAXAttributedString, 
-                       _AXGetCurrentSerializationStyle, _AXInteractionLocationDescriptorAttributedNameKey, 
-                       _AXInteractionLocationDescriptorContextIDKey, _AXInteractionLocationDescriptorContextSpacePointKey, 
-                       _AXInteractionLocationDescriptorDefaultName, _AXInteractionLocationDescriptorFixedScreenSpacePointKey, 
+                       _AXConvertRectFromHostedCoordinates, _AXConvertRectToHostedCoordinates, 
+                       _AXCreateAXAttributedStringFromCFAttributedString, _AXDictationControllerNotificationControllerKey, 
+                       _AXDictationControllerStartedListeningNotification, _AXDictationControllerStoppedListeningNotification, 
+                       _AXDisableAccessibilityOnTermination, _AXDistanceBetweenCenters, 
+                       _AXDoesRequestingClientDeserveAutomation, _AXElementGroupTestingItemsKey, 
+                       _AXElementGroupTestingTraitsKey, _AXElementTestingFrameKey, 
+                       _AXElementTestingLabelKey, _AXElementTestingTraitsKey, _AXElementTestingValueKey, 
+                       _AXExpandedStatusAttributeForValue, _AXFetchEventAllEvents, 
+                       _AXGetCFAttributedStringFromAXAttributedString, _AXGetCurrentSerializationStyle, 
+                       _AXInteractionLocationDescriptorAttributedNameKey, _AXInteractionLocationDescriptorContextIDKey, 
+                       _AXInteractionLocationDescriptorContextSpacePointKey, _AXInteractionLocationDescriptorDefaultName, 
+                       _AXInteractionLocationDescriptorFixedScreenSpacePointKey, 
                        _AXInteractionLocationDescriptorPointValueKey, _AXInteractionLocationDescriptorViewPointerNumberKey, 
                        _AXIntersectionOverUnion, _AXIsAXAttributedString, _AXIsContainedBy, 
                        _AXLabelForElements, _AXObserverAddNotification, _AXObserverCreate, 
@@ -98,34 +99,34 @@ exports:
                        _UIAccessibilityTokenHighlightedText, _UIAccessibilityTokenHint, 
                        _UIAccessibilityTokenIgnoreLeadingCommas, _UIAccessibilityTokenIgnoreSubstitution, 
                        _UIAccessibilityTokenIndentationLevel, _UIAccessibilityTokenIsImageResourceName, 
-                       _UIAccessibilityTokenItalic, _UIAccessibilityTokenLanguage, 
-                       _UIAccessibilityTokenLineSpacing, _UIAccessibilityTokenLink, 
-                       _UIAccessibilityTokenListItemIdentifier, _UIAccessibilityTokenListItemLabel, 
-                       _UIAccessibilityTokenLiteralText, _UIAccessibilityTokenLiteralTextRanges, 
-                       _UIAccessibilityTokenLiveRegionAnnouncement, _UIAccessibilityTokenLowPitch, 
-                       _UIAccessibilityTokenMathEquation, _UIAccessibilityTokenMathTreePosition, 
-                       _UIAccessibilityTokenMisspelled, _UIAccessibilityTokenNotificationInLockScreen, 
-                       _UIAccessibilityTokenNumber, _UIAccessibilityTokenOverrideLanguage, 
-                       _UIAccessibilityTokenParagraphAlignment, _UIAccessibilityTokenPassthroughOnlyPasteboardOp, 
-                       _UIAccessibilityTokenPassthroughOnlyReordering, _UIAccessibilityTokenPhoneContext, 
-                       _UIAccessibilityTokenPhoneNumber, _UIAccessibilityTokenPhoneticText, 
-                       _UIAccessibilityTokenPlaceholder, _UIAccessibilityTokenPlaySoundSimultaneously, 
-                       _UIAccessibilityTokenPoliteAnnouncement, _UIAccessibilityTokenProactiveSuggestionSlot, 
-                       _UIAccessibilityTokenReplaceWithWiFiSSID, _UIAccessibilityTokenRequiresEditingStyleResolution, 
-                       _UIAccessibilityTokenScreenDimmed, _UIAccessibilityTokenSecure, 
-                       _UIAccessibilityTokenShareSheetTextSlot, _UIAccessibilityTokenShareSheetTransportSlot, 
-                       _UIAccessibilityTokenSpeakAsCharacter, _UIAccessibilityTokenSpeakDigits, 
-                       _UIAccessibilityTokenSpeakLiteralPunctuation, _UIAccessibilityTokenSpeakNoPunctuation, 
-                       _UIAccessibilityTokenSpeakPunctuationCounts, _UIAccessibilityTokenStrikethrough, 
-                       _UIAccessibilityTokenStyleName, _UIAccessibilityTokenSuppressBrailleOutput, 
-                       _UIAccessibilityTokenSystemAnnouncement, _UIAccessibilityTokenSystemNotificationAlert, 
-                       _UIAccessibilityTokenTelephonyCarrierString, _UIAccessibilityTokenTextDeletion, 
-                       _UIAccessibilityTokenTextInsertion, _UIAccessibilityTokenTextOperationRelated, 
-                       _UIAccessibilityTokenTextSubstitution, _UIAccessibilityTokenUnderline, 
-                       _UIAccessibilityTokenVeryPoliteAnnouncement, _UnserializeCFType, 
-                       __AXAddAssociatedPid, __AXAddNotificationObserver, __AXAddToElementCache, 
-                       __AXBroadcastEventProcessNotification, __AXCallingFromSameApp, 
-                       __AXClearElementCache, __AXCopyValueForTransformationsOnValue, 
+                       _UIAccessibilityTokenIsSystemSymbolName, _UIAccessibilityTokenItalic, 
+                       _UIAccessibilityTokenLanguage, _UIAccessibilityTokenLineSpacing, 
+                       _UIAccessibilityTokenLink, _UIAccessibilityTokenListItemIdentifier, 
+                       _UIAccessibilityTokenListItemLabel, _UIAccessibilityTokenLiteralText, 
+                       _UIAccessibilityTokenLiteralTextRanges, _UIAccessibilityTokenLiveRegionAnnouncement, 
+                       _UIAccessibilityTokenLowPitch, _UIAccessibilityTokenMathEquation, 
+                       _UIAccessibilityTokenMathTreePosition, _UIAccessibilityTokenMisspelled, 
+                       _UIAccessibilityTokenNotificationInLockScreen, _UIAccessibilityTokenNumber, 
+                       _UIAccessibilityTokenOverrideLanguage, _UIAccessibilityTokenParagraphAlignment, 
+                       _UIAccessibilityTokenPassthroughOnlyPasteboardOp, _UIAccessibilityTokenPassthroughOnlyReordering, 
+                       _UIAccessibilityTokenPhoneContext, _UIAccessibilityTokenPhoneNumber, 
+                       _UIAccessibilityTokenPhoneticText, _UIAccessibilityTokenPlaceholder, 
+                       _UIAccessibilityTokenPlaySoundSimultaneously, _UIAccessibilityTokenPoliteAnnouncement, 
+                       _UIAccessibilityTokenProactiveSuggestionSlot, _UIAccessibilityTokenReplaceWithWiFiSSID, 
+                       _UIAccessibilityTokenRequiresEditingStyleResolution, _UIAccessibilityTokenScreenDimmed, 
+                       _UIAccessibilityTokenSecure, _UIAccessibilityTokenShareSheetTextSlot, 
+                       _UIAccessibilityTokenShareSheetTransportSlot, _UIAccessibilityTokenSpeakAsCharacter, 
+                       _UIAccessibilityTokenSpeakDigits, _UIAccessibilityTokenSpeakLiteralPunctuation, 
+                       _UIAccessibilityTokenSpeakNoPunctuation, _UIAccessibilityTokenSpeakPunctuationCounts, 
+                       _UIAccessibilityTokenStrikethrough, _UIAccessibilityTokenStyleName, 
+                       _UIAccessibilityTokenSuppressBrailleOutput, _UIAccessibilityTokenSystemAnnouncement, 
+                       _UIAccessibilityTokenSystemNotificationAlert, _UIAccessibilityTokenTelephonyCarrierString, 
+                       _UIAccessibilityTokenTextDeletion, _UIAccessibilityTokenTextInsertion, 
+                       _UIAccessibilityTokenTextOperationRelated, _UIAccessibilityTokenTextSubstitution, 
+                       _UIAccessibilityTokenUnderline, _UIAccessibilityTokenVeryPoliteAnnouncement, 
+                       _UnserializeCFType, __AXAddAssociatedPid, __AXAddNotificationObserver, 
+                       __AXAddToElementCache, __AXBroadcastEventProcessNotification, 
+                       __AXCallingFromSameApp, __AXClearElementCache, __AXCopyValueForTransformationsOnValue, 
                        __AXCreateAXUIElementWithElement, __AXElementForAXUIElementUniqueId, 
                        __AXGetPortFromCache, __AXIgnoreNextNotification, __AXInitializeElementCache, 
                        __AXInitializeObserverAccess, __AXIsInElementCache, __AXIsPidAssociated, 

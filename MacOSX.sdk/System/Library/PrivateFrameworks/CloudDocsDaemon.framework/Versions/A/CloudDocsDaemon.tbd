@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D8F64C55-D39C-3805-9E3F-D42D53D3B348
+    value:           02B525F8-674A-38E6-A82E-EFEA7E56DFAE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0D047C4E-9028-3D7C-A3E6-8EA4C437C37E
+    value:           388D8D14-22C0-3757-9984-3DB599C15A83
 install-name:    '/System/Library/PrivateFrameworks/CloudDocsDaemon.framework/Versions/A/CloudDocsDaemon'
-current-version: 726
+current-version: 738
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -69,22 +69,25 @@ exports:
                        BRCPathToItemLookup, BRCPrivateServerZone, BRCRelativePath, 
                        BRCServerItem, BRCServerZone, BRCSharedServerZone, BRCStageRegistry, 
                        BRCStatInfo, BRCSyncThrottle, BRCTermDumper, BRCURLToItemLookup, 
-                       BRCUserDefaults, BRCVersion, BRFieldCKInfo, BRFieldFinderTags, 
-                       BRFieldPkgHeader, BRFieldPkgItem, BRFieldPkgLocalItem, BRFieldUserIdentity, 
-                       BRFieldXattr, BRFieldXattrBlob ]
+                       BRCUserDefaults, BRCVersion, BRCZoneRootItem, BRFieldCKInfo, 
+                       BRFieldFinderTags, BRFieldPkgHeader, BRFieldPkgItem, BRFieldPkgLocalItem, 
+                       BRFieldUserIdentity, BRFieldXattr, BRFieldXattrBlob ]
     objc-ivars:      [ AppTelemetryInvestigation._errorCode, AppTelemetryInvestigation._errorDescription, 
                        AppTelemetryInvestigation._errorDomain, AppTelemetryInvestigation._has, 
-                       AppTelemetryInvestigation._sharedZone, AppTelemetryInvestigation._zoneName, 
-                       AppTelemetryTelemetryMessage._events, AppTelemetryTelemetryMessage._has, 
-                       AppTelemetryTelemetryMessage._token, AppTelemetryTimeSeriesEvent._has, 
-                       AppTelemetryTimeSeriesEvent._identifier, AppTelemetryTimeSeriesEvent._investigation, 
-                       AppTelemetryTimeSeriesEvent._magnitude, AppTelemetryTimeSeriesEvent._magnitudeBool, 
-                       AppTelemetryTimeSeriesEvent._magnitudeDouble, AppTelemetryTimeSeriesEvent._magnitudeFloat, 
-                       AppTelemetryTimeSeriesEvent._magnitudeInt, AppTelemetryTimeSeriesEvent._timestamp, 
-                       BRCAccountSession._clientTruthWorkloop, BRCAccountSession._cloudDocsFD, 
-                       BRCAccountSession._databaseID, BRCAccountSession._dbCorruptionQueue, 
-                       BRCAccountSession._dbProfilingHook, BRCAccountSession._dbURL, 
-                       BRCAccountSession._dbWatcher, BRCAccountSession._dbWatcherQueue, 
+                       AppTelemetryInvestigation._hasForegroundClients, AppTelemetryInvestigation._isPCSChained, 
+                       AppTelemetryInvestigation._itemID, AppTelemetryInvestigation._lastStep, 
+                       AppTelemetryInvestigation._nonDiscretionary, AppTelemetryInvestigation._operationType, 
+                       AppTelemetryInvestigation._reason, AppTelemetryInvestigation._sharedZone, 
+                       AppTelemetryInvestigation._zoneName, AppTelemetryTelemetryMessage._events, 
+                       AppTelemetryTelemetryMessage._has, AppTelemetryTelemetryMessage._token, 
+                       AppTelemetryTimeSeriesEvent._has, AppTelemetryTimeSeriesEvent._identifier, 
+                       AppTelemetryTimeSeriesEvent._investigation, AppTelemetryTimeSeriesEvent._magnitude, 
+                       AppTelemetryTimeSeriesEvent._magnitudeBool, AppTelemetryTimeSeriesEvent._magnitudeDouble, 
+                       AppTelemetryTimeSeriesEvent._magnitudeFloat, AppTelemetryTimeSeriesEvent._magnitudeInt, 
+                       AppTelemetryTimeSeriesEvent._timestamp, BRCAccountSession._clientTruthWorkloop, 
+                       BRCAccountSession._cloudDocsFD, BRCAccountSession._databaseID, 
+                       BRCAccountSession._dbCorruptionQueue, BRCAccountSession._dbProfilingHook, 
+                       BRCAccountSession._dbURL, BRCAccountSession._dbWatcher, BRCAccountSession._dbWatcherQueue, 
                        BRCAccountSession._defaultScheduler, BRCAccountSession._miscOperations, 
                        BRCAccountSession._readOnlyWorkloop, BRCAccountSession._serverTruthWorkloop, 
                        BRCAccountSession._syncContexts, BRCDocumentItem._currentVersion, 

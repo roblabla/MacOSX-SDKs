@@ -59,7 +59,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 + (instancetype)new NS_UNAVAILABLE;
 
 // Setting this property will invalidate the layout immediately to affect any changes
-//    Note: any changes made to properites directly will have no effect.
+//    Note: any changes made to properties directly will have no effect.
 @property(nonatomic,copy) UICollectionViewCompositionalLayoutConfiguration *configuration;
 @end
 
@@ -161,7 +161,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 //                      +--------+
 //
 //  Specifies additional space required surrounding and item when laying out.
-//  Flexible spacing can be used to apportion remaining space after items are layed out to
+//  Flexible spacing can be used to apportion remaining space after items are laid out to
 //    evenly align items among available layout space.
 
 @property(nonatomic,copy,nullable) NSCollectionLayoutEdgeSpacing *edgeSpacing;

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FEA70EDD-0F3E-3610-81B0-4A3544F9CBFF
+    value:           75ADF82E-1FF5-361C-B7C4-5A066FAB0964
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           52C40380-7E16-3D74-9E62-C5A950F46068
+    value:           D52629D9-108B-3E94-99E9-80225F1A6D8D
 install-name:    '/usr/lib/libbootpolicy.dylib'
-current-version: 76.60.11
+current-version: 76.100.27
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _bootpolicy_consume_kcos_auth_token, _bootpolicy_create_kcos_auth_token, 
@@ -35,9 +35,10 @@ exports:
                        _bootpolicy_get_security_mode_ex, _bootpolicy_get_sip_flags, 
                        _bootpolicy_get_sip_flags_ex, _bootpolicy_has_local_policy_support, 
                        _bootpolicy_mdm_is_managed, _bootpolicy_mdm_is_managed_ex, 
-                       _bootpolicy_mdm_update_dep_mode, _bootpolicy_mdm_update_kexts_mode, 
-                       _bootpolicy_mdm_update_user_enrolled_mode, _bootpolicy_os_type_to_string, 
-                       _bootpolicy_prepare_for_hibernation, _bootpolicy_primary_system_recovery_os_volume_uuid_value, 
+                       _bootpolicy_mdm_reduce_security_mode, _bootpolicy_mdm_update_dep_mode, 
+                       _bootpolicy_mdm_update_kexts_mode, _bootpolicy_mdm_update_user_enrolled_mode, 
+                       _bootpolicy_os_type_to_string, _bootpolicy_prepare_for_hibernation, 
+                       _bootpolicy_primary_system_recovery_os_volume_uuid_value, 
                        _bootpolicy_remove_all_local_policies, _bootpolicy_root_volume_uuid_value, 
                        _bootpolicy_set_debug_flags, _bootpolicy_set_log_function, 
                        _bootpolicy_sidp_measure_all, _bootpolicy_store_oic, _bootpolicy_store_recoveryos_policy, 

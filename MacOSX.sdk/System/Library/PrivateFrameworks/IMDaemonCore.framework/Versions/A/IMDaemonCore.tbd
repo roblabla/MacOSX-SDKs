@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6D7B2DCE-FC6F-346A-BBCC-E4B9641CD71A
+    value:           AF927AEC-0F47-3E18-B69B-D81E470D6A9A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E0EF3422-41C1-3FAB-BBA3-E86ADC3DD6C3
+    value:           F1455ED6-E599-390D-BA93-C80026E0FD3D
 install-name:    '/System/Library/PrivateFrameworks/IMDaemonCore.framework/Versions/A/IMDaemonCore'
 current-version: 800
 exports:

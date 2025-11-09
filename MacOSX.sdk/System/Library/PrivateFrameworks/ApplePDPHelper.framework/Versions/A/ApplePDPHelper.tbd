@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DA014783-2797-32AA-8107-750680E55A72
+    value:           A9F8E8D3-A61D-3EDD-ACDC-271A4547F417
 install-name:    '/System/Library/PrivateFrameworks/ApplePDPHelper.framework/Versions/A/ApplePDPHelper'
 exports:
   - targets:         [ arm64e-macos, arm64-macos ]

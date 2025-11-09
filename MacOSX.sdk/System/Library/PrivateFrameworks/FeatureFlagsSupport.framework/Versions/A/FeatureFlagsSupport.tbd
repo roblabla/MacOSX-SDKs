@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EA0978DF-D1EE-3672-B6F9-F3C77D02F559
+    value:           0101B702-456F-3060-80AE-68D78302C3B4
   - target:          x86_64-maccatalyst
-    value:           EA0978DF-D1EE-3672-B6F9-F3C77D02F559
+    value:           0101B702-456F-3060-80AE-68D78302C3B4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5F1831CB-AB3D-3272-94C8-452E9C3590FD
+    value:           0FC286BF-CC44-39D1-9597-F4CC6573C6DF
   - target:          arm64e-maccatalyst
-    value:           5F1831CB-AB3D-3272-94C8-452E9C3590FD
+    value:           0FC286BF-CC44-39D1-9597-F4CC6573C6DF
 install-name:    '/System/Library/PrivateFrameworks/FeatureFlagsSupport.framework/Versions/A/FeatureFlagsSupport'
 current-version: 28.60.1
 exports:

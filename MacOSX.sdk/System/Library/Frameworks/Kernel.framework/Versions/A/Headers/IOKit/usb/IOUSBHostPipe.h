@@ -144,6 +144,7 @@ class __IOUSBHOSTFAMILY_DEPRECATED IOUSBHostPipe : public IOUSBHostIOSource
     friend class IOUSBHostInterface;
     friend class IOUSBHostDevice;
     friend class AppleUSBHostController;
+    friend class AppleUSB20HostController;
     friend class AppleUSBIORequest;
 
 #if TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTPIPE

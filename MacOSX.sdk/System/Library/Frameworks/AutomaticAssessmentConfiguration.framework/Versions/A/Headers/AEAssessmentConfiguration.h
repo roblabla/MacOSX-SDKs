@@ -10,7 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-AE_VISIBLE
 API_AVAILABLE(ios(13.4), macos(10.15.4), macCatalyst(14.0))
 @interface AEAssessmentConfiguration: NSObject <NSCopying>
 

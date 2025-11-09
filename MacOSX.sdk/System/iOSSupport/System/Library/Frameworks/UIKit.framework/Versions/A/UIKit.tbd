@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           A4398727-CEB9-319E-B961-C6FC5277CFB9
+    value:           0F00AD04-F4E0-3193-B589-C48933E37D74
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           264E4036-636C-39A6-BCF0-CBE74C04A8E0
+    value:           FA9237A0-0113-3F44-9142-5798D43E9BFE
 install-name:    '/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit'
-current-version: 4003.1.255
+current-version: 4218.1.255
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/ShareSheet.framework/Versions/A/ShareSheet', 
@@ -20,15 +20,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           26CB6C7B-D014-3B85-9982-BD1DD0CEE744
+    value:           65C320C4-5139-3E64-8B04-231D5C82A611
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           810E2DAE-6D7F-3904-BF37-6E8147419335
+    value:           75EE3A46-E9D0-3BB4-BA21-4B90850EA10A
 install-name:    '/System/Library/PrivateFrameworks/ShareSheet.framework/Versions/A/ShareSheet'
-current-version: 1575
+current-version: 1618.1
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _UIActivityTypeAddToReadingList, _UIActivityTypeAirDrop, _UIActivityTypeAssignToContact, 
                        _UIActivityTypeCloudSharing, _UIActivityTypeCopyToPasteboard, 
                        _UIActivityTypeCreatePDF, _UIActivityTypeCreateReminder, _UIActivityTypeMail, 
@@ -60,19 +60,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           71C63CE5-094D-34AF-B538-8DCAB3B66DE9
+    value:           C815FD3F-C0F0-31F6-B60D-C544D807384F
   - target:          x86_64-maccatalyst
-    value:           71C63CE5-094D-34AF-B538-8DCAB3B66DE9
+    value:           C815FD3F-C0F0-31F6-B60D-C544D807384F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           085965EE-A855-340D-8022-805BB9F45A87
+    value:           9512D44F-5489-3864-BDED-AA6869227461
   - target:          arm64e-maccatalyst
-    value:           085965EE-A855-340D-8022-805BB9F45A87
+    value:           9512D44F-5489-3864-BDED-AA6869227461
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 726.11
+current-version: 728.6
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -550,15 +550,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           B0DC6A6B-889F-34C1-83AE-C831DF111B9A
+    value:           076BD04E-E0A3-36EA-974B-335CF139A4A9
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           86864A18-C444-3149-888A-BB25D1A41109
+    value:           08E25FFE-D336-3FBF-897C-E28AD7EB972F
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/DocumentManager.framework/Versions/A/DocumentManager'
-current-version: 200.3.1
+current-version: 200.5.2
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _DOCAdaptSizeToRect, _DOCAlertItemIsNotReadable, _DOCAlertUserTheNetworkIsNotReachable, 
                        _DOCAlertUserTrashedFileCanNotBeOpened, _DOCCenterSizeInRect, 
                        _DOCConvertToUINSDocumentBrowserImportMode, _DOCDefaultSaveLocationDidChangeNotification, 
@@ -637,13 +637,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           CEA2D307-EEC0-341B-B4AB-09F54D3B748D
+    value:           51EC3BF6-368F-310C-BBB1-C653682D99DD
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           C9F566CA-F579-3050-8CF1-D487FBC8EC1E
+    value:           61200C0E-EFBB-3F5C-B803-5EB019F0835A
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/UIKitCore.framework/Versions/A/UIKitCore'
-current-version: 4003.1.255
+current-version: 4218.1.255
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation' ]
@@ -773,17 +773,18 @@ exports:
                        _UIApplicationLaunchOptionsBackgroundContentFetchingSequenceNumberKey, 
                        _UIApplicationLaunchOptionsBluetoothCentralsKey, _UIApplicationLaunchOptionsBluetoothPeripheralsKey, 
                        _UIApplicationLaunchOptionsBrowserReuseTabKey, _UIApplicationLaunchOptionsCloudKitShareMetadataKey, 
-                       _UIApplicationLaunchOptionsDeletedFamilyContentKey, _UIApplicationLaunchOptionsLocalNotificationKey, 
-                       _UIApplicationLaunchOptionsLocationKey, _UIApplicationLaunchOptionsNewsstandDownloadsKey, 
-                       _UIApplicationLaunchOptionsNotificationActionIdentifierKey, 
+                       _UIApplicationLaunchOptionsDeletedFamilyContentKey, _UIApplicationLaunchOptionsEventAttributionKey, 
+                       _UIApplicationLaunchOptionsLocalNotificationKey, _UIApplicationLaunchOptionsLocationKey, 
+                       _UIApplicationLaunchOptionsNewsstandDownloadsKey, _UIApplicationLaunchOptionsNotificationActionIdentifierKey, 
                        _UIApplicationLaunchOptionsRemoteNotificationKey, _UIApplicationLaunchOptionsRemoteNotificationTokenKey, 
                        _UIApplicationLaunchOptionsSearchResultDomainKey, _UIApplicationLaunchOptionsSearchResultIdentifierKey, 
                        _UIApplicationLaunchOptionsShortcutItemKey, _UIApplicationLaunchOptionsSiriTaskKey, 
                        _UIApplicationLaunchOptionsSourceApplicationKey, _UIApplicationLaunchOptionsURLKey, 
                        _UIApplicationLaunchOptionsURLSessionKey, _UIApplicationLaunchOptionsUserActivityDictionaryKey, 
                        _UIApplicationLaunchOptionsUserActivityTypeKey, _UIApplicationMain, 
-                       _UIApplicationOpenSettingsURLString, _UIApplicationOpenURLOptionUniversalLinksOnly, 
-                       _UIApplicationOpenURLOptionsAnnotationKey, _UIApplicationOpenURLOptionsOpenInPlaceKey, 
+                       _UIApplicationOpenExternalURLOptionsEventAttributionKey, _UIApplicationOpenSettingsURLString, 
+                       _UIApplicationOpenURLOptionUniversalLinksOnly, _UIApplicationOpenURLOptionsAnnotationKey, 
+                       _UIApplicationOpenURLOptionsEventAttributionKey, _UIApplicationOpenURLOptionsOpenInPlaceKey, 
                        _UIApplicationOpenURLOptionsSourceApplicationKey, _UIApplicationPreferredUserInterfaceStyleKey, 
                        _UIApplicationPreferredUserInterfaceStyleStringAutomatic, 
                        _UIApplicationPreferredUserInterfaceStyleStringDark, _UIApplicationPreferredUserInterfaceStyleStringLight, 
@@ -933,8 +934,9 @@ exports:
                        _UIKBAnalyticsCandidateUIEventTypeGesture, _UIKBAnalyticsChangeSelection, 
                        _UIKBAnalyticsCursorLocationX, _UIKBAnalyticsCursorLocationY, 
                        _UIKBAnalyticsDomain, _UIKBAnalyticsEmojiInputTypeKeyboard, 
-                       _UIKBAnalyticsEmojiInputTypePopover, _UIKBAnalyticsEmojiInputTypePredictionBar, 
-                       _UIKBAnalyticsEmojiInputTypeSearch, _UIKBAnalyticsEmojiPopoverAppendsEmojiFieldName, 
+                       _UIKBAnalyticsEmojiInputTypePopover, _UIKBAnalyticsEmojiInputTypePopoverSearch, 
+                       _UIKBAnalyticsEmojiInputTypePredictionBar, _UIKBAnalyticsEmojiInputTypeSearch, 
+                       _UIKBAnalyticsEmojiInputTypeSearchFavorites, _UIKBAnalyticsEmojiPopoverAppendsEmojiFieldName, 
                        _UIKBAnalyticsEmojiPopoverSummonedEventName, _UIKBAnalyticsEmojiPopoverTriggerFieldName, 
                        _UIKBAnalyticsEmojiPopoverTriggerTypeGlobeKey, _UIKBAnalyticsEmojiPopoverTriggerTypeKeyboardShortcut, 
                        _UIKBAnalyticsEmojiPopoverTriggerTypeOther, _UIKBAnalyticsEmojiPopoverTriggerTypeUCB, 
@@ -951,18 +953,19 @@ exports:
                        _UIKBAnalyticsForcePress, _UIKBAnalyticsGestureCount, _UIKBAnalyticsGestureIsOnCanvas, 
                        _UIKBAnalyticsGestureIsOnKeyboard, _UIKBAnalyticsGestureStateKey, 
                        _UIKBAnalyticsHUDAlreadyShown, _UIKBAnalyticsHideCalloutBar, 
-                       _UIKBAnalyticsHideHUD, _UIKBAnalyticsKeyCommandString, _UIKBAnalyticsMakeSelection, 
-                       _UIKBAnalyticsMoveCursor, _UIKBAnalyticsOneFingerTap, _UIKBAnalyticsOperationForControlType, 
-                       _UIKBAnalyticsOperationUsingModifierKey, _UIKBAnalyticsSelectedUneditableText, 
-                       _UIKBAnalyticsSelectionTypeForGestureState, _UIKBAnalyticsSelectionTypeForGranularity, 
-                       _UIKBAnalyticsShowCalloutBar, _UIKBAnalyticsShowHUD, _UIKBAnalyticsSpaceBarPan, 
-                       _UIKBAnalyticsTapToDismiss, _UIKBAnalyticsTextEditingOperationCopy, 
-                       _UIKBAnalyticsTextEditingOperationCut, _UIKBAnalyticsTextEditingOperationPaste, 
-                       _UIKBAnalyticsTextEditingOperationRedo, _UIKBAnalyticsTextEditingOperationUndo, 
-                       _UIKBAnalyticsTextEditingOperationUndoCancel, _UIKBAnalyticsTextEditingTriggerTypeCalloutBar, 
-                       _UIKBAnalyticsTextEditingTriggerTypeHWKeyboard, _UIKBAnalyticsTextEditingTriggerTypeSWKeyboard, 
-                       _UIKBAnalyticsTextEditingTriggerTypeShake, _UIKBAnalyticsTextEditingTriggerTypeUCB, 
-                       _UIKBAnalyticsTextEditingTriggerTypeUndoHUDControl, _UIKBAnalyticsTextEditingTriggerTypeUndoHUDGestureDoubleTap, 
+                       _UIKBAnalyticsHideHUD, _UIKBAnalyticsKeyCommandString, _UIKBAnalyticsKeyboardShortcutAnalyticEventName, 
+                       _UIKBAnalyticsMakeSelection, _UIKBAnalyticsMoveCursor, _UIKBAnalyticsOneFingerTap, 
+                       _UIKBAnalyticsOperationForControlType, _UIKBAnalyticsOperationUsingModifierKey, 
+                       _UIKBAnalyticsSelectedUneditableText, _UIKBAnalyticsSelectionTypeForGestureState, 
+                       _UIKBAnalyticsSelectionTypeForGranularity, _UIKBAnalyticsShowCalloutBar, 
+                       _UIKBAnalyticsShowHUD, _UIKBAnalyticsSpaceBarPan, _UIKBAnalyticsTapToDismiss, 
+                       _UIKBAnalyticsTextEditingOperationCopy, _UIKBAnalyticsTextEditingOperationCut, 
+                       _UIKBAnalyticsTextEditingOperationPaste, _UIKBAnalyticsTextEditingOperationRedo, 
+                       _UIKBAnalyticsTextEditingOperationUndo, _UIKBAnalyticsTextEditingOperationUndoCancel, 
+                       _UIKBAnalyticsTextEditingTriggerTypeCalloutBar, _UIKBAnalyticsTextEditingTriggerTypeHWKeyboard, 
+                       _UIKBAnalyticsTextEditingTriggerTypeSWKeyboard, _UIKBAnalyticsTextEditingTriggerTypeShake, 
+                       _UIKBAnalyticsTextEditingTriggerTypeUCB, _UIKBAnalyticsTextEditingTriggerTypeUndoHUDControl, 
+                       _UIKBAnalyticsTextEditingTriggerTypeUndoHUDGestureDoubleTap, 
                        _UIKBAnalyticsTextEditingTriggerTypeUndoHUDGestureDoubleTapShortHand, 
                        _UIKBAnalyticsTextEditingTriggerTypeUndoHUDGesturePan, _UIKBAnalyticsTextSelectionEventName, 
                        _UIKBAnalyticsThreeFingerLongPress, _UIKBAnalyticsThreeFingerPan, 
@@ -1118,20 +1121,20 @@ exports:
                        _UIKBKeyDisplayTypeDividerStr, _UIKBKeyDisplayTypeDragStr, 
                        _UIKBKeyDisplayTypeDualStringStr, _UIKBKeyDisplayTypeDynamicStringStr, 
                        _UIKBKeyDisplayTypeEmojiCategoryControlStr, _UIKBKeyDisplayTypeEmojiInputViewStr, 
-                       _UIKBKeyDisplayTypeEmojiStr, _UIKBKeyDisplayTypeHandwritingStr, 
-                       _UIKBKeyDisplayTypeInternationalStr, _UIKBKeyDisplayTypeItalicStr, 
-                       _UIKBKeyDisplayTypeKeyplaneSwitchCollapsedStr, _UIKBKeyDisplayTypeKeyplaneSwitchStr, 
-                       _UIKBKeyDisplayTypeLeftArrowStr, _UIKBKeyDisplayTypeLeftDarkAndNoRightDividerStr, 
-                       _UIKBKeyDisplayTypeLetterLineStr, _UIKBKeyDisplayTypeLightBottomAndRightStr, 
-                       _UIKBKeyDisplayTypeLightBottomStr, _UIKBKeyDisplayTypeMessagesWriteboardStr, 
-                       _UIKBKeyDisplayTypeMoreStr, _UIKBKeyDisplayTypeMultitapCompleteKeyStr, 
-                       _UIKBKeyDisplayTypeMultitapReverseKeyStr, _UIKBKeyDisplayTypeNoRightDividerStr, 
-                       _UIKBKeyDisplayTypeNumberPadStr, _UIKBKeyDisplayTypePasteStr, 
-                       _UIKBKeyDisplayTypePredictionActiveStr, _UIKBKeyDisplayTypeReturnStr, 
-                       _UIKBKeyDisplayTypeReverseVerticalDarkStr, _UIKBKeyDisplayTypeRightArrowStr, 
-                       _UIKBKeyDisplayTypeShiftStr, _UIKBKeyDisplayTypeSmallKanaStr, 
-                       _UIKBKeyDisplayTypeSpaceStr, _UIKBKeyDisplayTypeStringStr, 
-                       _UIKBKeyDisplayTypeTabStr, _UIKBKeyDisplayTypeTenKeyKeyplaneSwitchOffStr, 
+                       _UIKBKeyDisplayTypeEmojiSearchControlStr, _UIKBKeyDisplayTypeEmojiStr, 
+                       _UIKBKeyDisplayTypeHandwritingStr, _UIKBKeyDisplayTypeInternationalStr, 
+                       _UIKBKeyDisplayTypeItalicStr, _UIKBKeyDisplayTypeKeyplaneSwitchCollapsedStr, 
+                       _UIKBKeyDisplayTypeKeyplaneSwitchStr, _UIKBKeyDisplayTypeLeftArrowStr, 
+                       _UIKBKeyDisplayTypeLeftDarkAndNoRightDividerStr, _UIKBKeyDisplayTypeLetterLineStr, 
+                       _UIKBKeyDisplayTypeLightBottomAndRightStr, _UIKBKeyDisplayTypeLightBottomStr, 
+                       _UIKBKeyDisplayTypeMessagesWriteboardStr, _UIKBKeyDisplayTypeMoreStr, 
+                       _UIKBKeyDisplayTypeMultitapCompleteKeyStr, _UIKBKeyDisplayTypeMultitapReverseKeyStr, 
+                       _UIKBKeyDisplayTypeNoRightDividerStr, _UIKBKeyDisplayTypeNumberPadStr, 
+                       _UIKBKeyDisplayTypePasteStr, _UIKBKeyDisplayTypePredictionActiveStr, 
+                       _UIKBKeyDisplayTypeReturnStr, _UIKBKeyDisplayTypeReverseVerticalDarkStr, 
+                       _UIKBKeyDisplayTypeRightArrowStr, _UIKBKeyDisplayTypeShiftStr, 
+                       _UIKBKeyDisplayTypeSmallKanaStr, _UIKBKeyDisplayTypeSpaceStr, 
+                       _UIKBKeyDisplayTypeStringStr, _UIKBKeyDisplayTypeTabStr, _UIKBKeyDisplayTypeTenKeyKeyplaneSwitchOffStr, 
                        _UIKBKeyDisplayTypeTenKeyKeyplaneSwitchOnStr, _UIKBKeyDisplayTypeTenKeyRomanKeyStr, 
                        _UIKBKeyDisplayTypeTopLevelDomainStr, _UIKBKeyDisplayTypeTopLevelDomainVariantStr, 
                        _UIKBKeyDisplayTypeTwoVerticalDarkStr, _UIKBKeyDisplayTypeTwoVerticalLightStr, 
@@ -1145,25 +1148,25 @@ exports:
                        _UIKBKeyInteractionTypeDictationDisplayStr, _UIKBKeyInteractionTypeDictationStr, 
                        _UIKBKeyInteractionTypeDismissStr, _UIKBKeyInteractionTypeDragStr, 
                        _UIKBKeyInteractionTypeEmojiCategoryControlStr, _UIKBKeyInteractionTypeEmojiInputViewStr, 
-                       _UIKBKeyInteractionTypeHandwritingStr, _UIKBKeyInteractionTypeInternationalStr, 
-                       _UIKBKeyInteractionTypeItalicStr, _UIKBKeyInteractionTypeKeyplaneSwitchStr, 
-                       _UIKBKeyInteractionTypeLeftArrowStr, _UIKBKeyInteractionTypeMessagesWriteboardStr, 
-                       _UIKBKeyInteractionTypeMoreStr, _UIKBKeyInteractionTypeMultitapCompleteStr, 
-                       _UIKBKeyInteractionTypeMultitapForwardStr, _UIKBKeyInteractionTypeMultitapReverseStr, 
-                       _UIKBKeyInteractionTypeNoneStr, _UIKBKeyInteractionTypePasteStr, 
-                       _UIKBKeyInteractionTypeRecentInputStr, _UIKBKeyInteractionTypeRedoStr, 
-                       _UIKBKeyInteractionTypeReturnStr, _UIKBKeyInteractionTypeRevealHiddenCandidatesStr, 
-                       _UIKBKeyInteractionTypeRightArrowStr, _UIKBKeyInteractionTypeSelectNextCandidateStr, 
-                       _UIKBKeyInteractionTypeSelectPreviousCandidateStr, _UIKBKeyInteractionTypeShiftStr, 
-                       _UIKBKeyInteractionTypeSpaceStr, _UIKBKeyInteractionTypeStringFlickStr, 
-                       _UIKBKeyInteractionTypeStringPopupStr, _UIKBKeyInteractionTypeStringStr, 
-                       _UIKBKeyInteractionTypeTabStr, _UIKBKeyInteractionTypeUnderlineStr, 
-                       _UIKBKeyInteractionTypeUndoStr, _UIKBKeyVariantsTypeAccentsStr, 
-                       _UIKBKeyVariantsTypeBIUStr, _UIKBKeyVariantsTypeCurrencyStr, 
-                       _UIKBKeyVariantsTypeEmailStr, _UIKBKeyVariantsTypeExtendedSkinToneEmojiStr, 
-                       _UIKBKeyVariantsTypeImmediateAccentsStr, _UIKBKeyVariantsTypeInputModesStr, 
-                       _UIKBKeyVariantsTypeKeyplaneAccentsStr, _UIKBKeyVariantsTypeKeyplaneSwitcherStr, 
-                       _UIKBKeyVariantsTypePrepopulatedExtendedSkinToneEmojiStr, 
+                       _UIKBKeyInteractionTypeEmojiSearchControlStr, _UIKBKeyInteractionTypeHandwritingStr, 
+                       _UIKBKeyInteractionTypeInternationalStr, _UIKBKeyInteractionTypeItalicStr, 
+                       _UIKBKeyInteractionTypeKeyplaneSwitchStr, _UIKBKeyInteractionTypeLeftArrowStr, 
+                       _UIKBKeyInteractionTypeMessagesWriteboardStr, _UIKBKeyInteractionTypeMoreStr, 
+                       _UIKBKeyInteractionTypeMultitapCompleteStr, _UIKBKeyInteractionTypeMultitapForwardStr, 
+                       _UIKBKeyInteractionTypeMultitapReverseStr, _UIKBKeyInteractionTypeNoneStr, 
+                       _UIKBKeyInteractionTypePasteStr, _UIKBKeyInteractionTypeRecentInputStr, 
+                       _UIKBKeyInteractionTypeRedoStr, _UIKBKeyInteractionTypeReturnStr, 
+                       _UIKBKeyInteractionTypeRevealHiddenCandidatesStr, _UIKBKeyInteractionTypeRightArrowStr, 
+                       _UIKBKeyInteractionTypeSelectNextCandidateStr, _UIKBKeyInteractionTypeSelectPreviousCandidateStr, 
+                       _UIKBKeyInteractionTypeShiftStr, _UIKBKeyInteractionTypeSpaceStr, 
+                       _UIKBKeyInteractionTypeStringFlickStr, _UIKBKeyInteractionTypeStringPopupStr, 
+                       _UIKBKeyInteractionTypeStringStr, _UIKBKeyInteractionTypeTabStr, 
+                       _UIKBKeyInteractionTypeUnderlineStr, _UIKBKeyInteractionTypeUndoStr, 
+                       _UIKBKeyVariantsTypeAccentsStr, _UIKBKeyVariantsTypeBIUStr, 
+                       _UIKBKeyVariantsTypeCurrencyStr, _UIKBKeyVariantsTypeEmailStr, 
+                       _UIKBKeyVariantsTypeExtendedSkinToneEmojiStr, _UIKBKeyVariantsTypeImmediateAccentsStr, 
+                       _UIKBKeyVariantsTypeInputModesStr, _UIKBKeyVariantsTypeKeyplaneAccentsStr, 
+                       _UIKBKeyVariantsTypeKeyplaneSwitcherStr, _UIKBKeyVariantsTypePrepopulatedExtendedSkinToneEmojiStr, 
                        _UIKBKeyVariantsTypePrepopulatedSkinToneEmojiStr, _UIKBKeyVariantsTypeSkinToneEmojiStr, 
                        _UIKBKeyVariantsTypeURLStr, _UIKBKeyboardAutomaticDimension, 
                        _UIKBKeyboardDrawsOpaque, _UIKBKeyboardIsEmailKeyboard, _UIKBKeyboardIsLandscape, 
@@ -1201,10 +1204,14 @@ exports:
                        _UIKBShiftSmallGlyph, _UIKBShowPasswordKeyboardInVideo, _UIKBStateHasCandidateSelected, 
                        _UIKBStateHasCandidates, _UIKBStateHasInput, _UIKBStateHasNextPage, 
                        _UIKBStatePrecedesZhuyin, _UIKBStateShowingExtendedList, _UIKBSwipeDeleteWordEnabled, 
-                       _UIKBTextMargin, _UIKBThemeBlueStr, _UIKBThemeDarkGrayStr, 
-                       _UIKBThemeDarkSteelStr, _UIKBThemeDarkWoodStr, _UIKBThemeDefaultStr, 
-                       _UIKBThemeLightGrayStr, _UIKBThemeLightSteelStr, _UIKBThemeMidGrayStr, 
-                       _UIKBThemeMidSteelStr, _UIKBTreePropertyAbstract, _UIKBTreePropertyActiveGeometriesList, 
+                       _UIKBTVAnalyticsDeleteKeyFieldNameMethod, _UIKBTVAnalyticsDeleteKeySelectedEventName, 
+                       _UIKBTVAnalyticsEditingEndedEventName, _UIKBTVAnalyticsEditingEndedFieldNameDuration, 
+                       _UIKBTVAnalyticsGlobeKeySelectedEventName, _UIKBTVAnalyticsKeyplaneSwitchedEventName, 
+                       _UIKBTVAnalyticsKeyplaneSwitchedFieldNameMethod, _UIKBTextMargin, 
+                       _UIKBThemeBlueStr, _UIKBThemeDarkGrayStr, _UIKBThemeDarkSteelStr, 
+                       _UIKBThemeDarkWoodStr, _UIKBThemeDefaultStr, _UIKBThemeLightGrayStr, 
+                       _UIKBThemeLightSteelStr, _UIKBThemeMidGrayStr, _UIKBThemeMidSteelStr, 
+                       _UIKBTreePropertyAbstract, _UIKBTreePropertyActiveGeometriesList, 
                        _UIKBTreePropertyCachedGestureLayout, _UIKBTreePropertyClipCorners, 
                        _UIKBTreePropertyDisplayRowHint, _UIKBTreePropertyDisplayString, 
                        _UIKBTreePropertyDisplayType, _UIKBTreePropertyDisplayTypeHint, 
@@ -1275,17 +1282,18 @@ exports:
                        _UIKeyboardGetDefaultInputModesForLanguage, _UIKeyboardGetDefaultSoftwareKeyboardForInputMode, 
                        _UIKeyboardGetDeleteKeyImage, _UIKeyboardGetDeleteOnKeyImage, 
                        _UIKeyboardGetDomainForCurrentLocale, _UIKeyboardGetGlobeKeyImage, 
-                       _UIKeyboardGetInputModeKBStarLayout, _UIKeyboardGetInputModesSupportingHardwareKeyboard, 
-                       _UIKeyboardGetJapaneseAIUStringForActiveInputMode, _UIKeyboardGetKBStarKeyboard, 
-                       _UIKeyboardGetKBStarKeyboardLayout, _UIKeyboardGetKBStarKeyboardName, 
-                       _UIKeyboardGetKBStarKeyboardWithName, _UIKeyboardGetKeyboardKeyImage, 
-                       _UIKeyboardGetLightCandidateActiveTextColor, _UIKeyboardGetLightCandidateHighlightColor, 
-                       _UIKeyboardGetLightCandidateHighlightedTextColor, _UIKeyboardGetLightCandidateSeparatorColor, 
-                       _UIKeyboardGetNumberFormatterForPreferredLocale, _UIKeyboardGetNumbersStringForActiveInputMode, 
-                       _UIKeyboardGetNumbersStringForPreferredLocale, _UIKeyboardGetNumbersSymbolsStringForActiveInputMode, 
-                       _UIKeyboardGetPreferredASCIICapableInputModeForInputMode, 
+                       _UIKeyboardGetHardwareLayoutFromInputMode, _UIKeyboardGetInputModeKBStarLayout, 
+                       _UIKeyboardGetInputModesSupportingHardwareKeyboard, _UIKeyboardGetJapaneseAIUStringForActiveInputMode, 
+                       _UIKeyboardGetKBStarKeyboard, _UIKeyboardGetKBStarKeyboardLayout, 
+                       _UIKeyboardGetKBStarKeyboardName, _UIKeyboardGetKBStarKeyboardWithName, 
+                       _UIKeyboardGetKeyboardKeyImage, _UIKeyboardGetLightCandidateActiveTextColor, 
+                       _UIKeyboardGetLightCandidateHighlightColor, _UIKeyboardGetLightCandidateHighlightedTextColor, 
+                       _UIKeyboardGetLightCandidateSeparatorColor, _UIKeyboardGetNumberFormatterForPreferredLocale, 
+                       _UIKeyboardGetNumbersStringForActiveInputMode, _UIKeyboardGetNumbersStringForPreferredLocale, 
+                       _UIKeyboardGetNumbersSymbolsStringForActiveInputMode, _UIKeyboardGetPreferredASCIICapableInputModeForInputMode, 
                        _UIKeyboardGetPreferredNonASCIICapableInputModeForInputMode, 
-                       _UIKeyboardGetSingleCenteredCellForWidth, _UIKeyboardGetSoftwareLayoutForHardwareKeyboardAndInputMode, 
+                       _UIKeyboardGetSafeDeviceIdiom, _UIKeyboardGetSingleCenteredCellForWidth, 
+                       _UIKeyboardGetSoftwareLayoutForHardwareKeyboardAndInputMode, 
                        _UIKeyboardGetSoftwareLayoutForInputMode, _UIKeyboardGetSuggestedDefaultInputModesForLanguage, 
                        _UIKeyboardGetSuggestedInputModesForLanguage, _UIKeyboardGetSupportedHardwareKeyboardsForInputMode, 
                        _UIKeyboardGetSupportedInputModes, _UIKeyboardGetSupportedLanguages, 
@@ -1332,10 +1340,10 @@ exports:
                        _UIKeyboardPerformanceHandleInputResponseNotification, _UIKeyboardPerformanceHandleInputStartNotification, 
                        _UIKeyboardPerformanceSearchCandidatesEndNotification, _UIKeyboardPerformanceSearchCandidatesStartNotification, 
                        _UIKeyboardPerformanceSearchFoundProactiveResults, _UIKeyboardPredictionEnabledForCurrentInputMode, 
-                       _UIKeyboardPredictionEnabledForInputModes, _UIKeyboardPrepareForRotationToOrientation, 
-                       _UIKeyboardPrivateDidChangeFrameNotification, _UIKeyboardPrivateDidHideNotification, 
-                       _UIKeyboardPrivateDidRequestDismissalNotification, _UIKeyboardPrivateDidShowNotification, 
-                       _UIKeyboardPrivateInteractiveDismissalDidBeginNotification, 
+                       _UIKeyboardPredictionEnabledForInputModes, _UIKeyboardPreferencesDidUpdateNotification, 
+                       _UIKeyboardPrepareForRotationToOrientation, _UIKeyboardPrivateDidChangeFrameNotification, 
+                       _UIKeyboardPrivateDidHideNotification, _UIKeyboardPrivateDidRequestDismissalNotification, 
+                       _UIKeyboardPrivateDidShowNotification, _UIKeyboardPrivateInteractiveDismissalDidBeginNotification, 
                        _UIKeyboardPrivateWillChangeFrameNotification, _UIKeyboardPrivateWillHideNotification, 
                        _UIKeyboardPrivateWillShowNotification, _UIKeyboardRenderDidFinishNotification, 
                        _UIKeyboardRequiresFontFallbacksForInputMode, _UIKeyboardRequiresInternationalKey, 
@@ -1354,30 +1362,31 @@ exports:
                        _UIKeyboardStringConfirm, _UIKeyboardStringConfirmCandidate, 
                        _UIKeyboardStringContinue, _UIKeyboardStringDefaultLocaleNumericID, 
                        _UIKeyboardStringDone, _UIKeyboardStringEmergencyCall, _UIKeyboardStringFullwidthSpace, 
-                       _UIKeyboardStringGo, _UIKeyboardStringHalfwidthSpace, _UIKeyboardStringJapaneseAIU, 
-                       _UIKeyboardStringJoin, _UIKeyboardStringLanguageIndicator, 
+                       _UIKeyboardStringGo, _UIKeyboardStringHalfwidthSpace, _UIKeyboardStringIconLabel, 
+                       _UIKeyboardStringJapaneseAIU, _UIKeyboardStringJoin, _UIKeyboardStringLanguageIndicator, 
                        _UIKeyboardStringMaxAlternateCurrencySignCount, _UIKeyboardStringNext, 
                        _UIKeyboardStringNextPage, _UIKeyboardStringNothing, _UIKeyboardStringNumbers, 
                        _UIKeyboardStringNumbersSymbols, _UIKeyboardStringPause, _UIKeyboardStringPrimaryCurrencySign, 
                        _UIKeyboardStringPrimaryTagSymbol, _UIKeyboardStringRedo, 
                        _UIKeyboardStringReturn, _UIKeyboardStringRoute, _UIKeyboardStringSearch, 
-                       _UIKeyboardStringSelectFirstCandidate, _UIKeyboardStringSelectNextCandidate, 
-                       _UIKeyboardStringSend, _UIKeyboardStringSpace, _UIKeyboardStringTopLevelDomain, 
-                       _UIKeyboardStringUndo, _UIKeyboardStringWait, _UIKeyboardStringZhuyinFirstTone, 
-                       _UIKeyboardSupportsSplit, _UIKeyboardSuppressionDidChangeNotification, 
-                       _UIKeyboardTopLevelDomainVariants, _UIKeyboardTypeAllowsRightToLeft, 
-                       _UIKeyboardTypeIsNumberPad, _UIKeyboardTypeSupportsDictationSpelling, 
-                       _UIKeyboardTypeSupportsSmartTyping, _UIKeyboardUIPreferStringOverImageForInputMode, 
-                       _UIKeyboardVariantDirection, _UIKeyboardVariantKeycaps, _UIKeyboardVariantStrings, 
-                       _UIKeyboardVariants, _UIKeyboardWillChangeFrameNotification, 
-                       _UIKeyboardWillHideNotification, _UIKeyboardWillShowNotification, 
-                       _UILargeContentViewerInteractionEnabledStatusDidChangeNotification, 
+                       _UIKeyboardStringSecondaryIconLabel, _UIKeyboardStringSelectFirstCandidate, 
+                       _UIKeyboardStringSelectNextCandidate, _UIKeyboardStringSend, 
+                       _UIKeyboardStringSpace, _UIKeyboardStringTopLevelDomain, _UIKeyboardStringUndo, 
+                       _UIKeyboardStringWait, _UIKeyboardStringZhuyinFirstTone, _UIKeyboardSupportsSplit, 
+                       _UIKeyboardSuppressionDidChangeNotification, _UIKeyboardTopLevelDomainVariants, 
+                       _UIKeyboardTypeAllowsRightToLeft, _UIKeyboardTypeIsNumberPad, 
+                       _UIKeyboardTypeSupportsDictationSpelling, _UIKeyboardTypeSupportsSmartTyping, 
+                       _UIKeyboardUIPreferStringOverImageForInputMode, _UIKeyboardVariantDirection, 
+                       _UIKeyboardVariantKeycaps, _UIKeyboardVariantStrings, _UIKeyboardVariants, 
+                       _UIKeyboardWillChangeFrameNotification, _UIKeyboardWillHideNotification, 
+                       _UIKeyboardWillShowNotification, _UILargeContentViewerInteractionEnabledStatusDidChangeNotification, 
                        _UILastStoredDefaultTextAttributesName, _UILayoutFittingCompressedSize, 
                        _UILayoutFittingExpandedSize, _UIListContentImageStandardDimension, 
-                       _UILocalNotificationDefaultSoundName, _UILocalNotificationFromData, 
-                       _UILocalNotificationInfiniteRepeatCount, _UILocalNotificationToUNNotificationRequest, 
-                       _UILowPassFilteredCGFloat, _UILowPassFilteredCGPoint, _UIMediaFilesDirectory, 
-                       _UIMenuAbout, _UIMenuAlignment, _UIMenuApplication, _UIMenuBringAllToFront, 
+                       _UIListSeparatorAutomaticInsets, _UILocalNotificationDefaultSoundName, 
+                       _UILocalNotificationFromData, _UILocalNotificationInfiniteRepeatCount, 
+                       _UILocalNotificationToUNNotificationRequest, _UILowPassFilteredCGFloat, 
+                       _UILowPassFilteredCGPoint, _UIMediaFilesDirectory, _UIMenuAbout, 
+                       _UIMenuAlignment, _UIMenuApplication, _UIMenuBringAllToFront, 
                        _UIMenuClose, _UIMenuControllerDidHideMenuNotification, _UIMenuControllerDidShowMenuNotification, 
                        _UIMenuControllerMenuFrameDidChangeNotification, _UIMenuControllerWillHideMenuNotification, 
                        _UIMenuControllerWillShowMenuNotification, _UIMenuControls, 
@@ -1481,10 +1490,10 @@ exports:
                        _UIStatusBarStyleOverrideTetheringString, _UIStatusBarStyleOverrideVideoOutString, 
                        _UIStatusBarStyleOverridesAllString, _UIStatusBarStyleTransparentBlackString, 
                        _UIStatusBarTimeItemViewDidMoveNotification, _UIStatusBarWindowLevel, 
-                       _UIStoryboardPlaceholderObjectIdentifier, _UISupportedInterfaceOrientationsKey, 
-                       _UISwipeConfigNone, _UISwipeInfoNone, _UISwipeInfoNoneAnimated, 
-                       _UISystemRootDirectory, _UITableCellDefaultFontSize, _UITableDefaultRowHeight, 
-                       _UITableViewAlertForCellForRowAtIndexPathAccessDuringUpdate, 
+                       _UIStoryboardPlaceholderObjectIdentifier, _UIStringFromScrollPhase, 
+                       _UISupportedInterfaceOrientationsKey, _UISwipeConfigNone, 
+                       _UISwipeInfoNone, _UISwipeInfoNoneAnimated, _UISystemRootDirectory, 
+                       _UITableCellDefaultFontSize, _UITableDefaultRowHeight, _UITableViewAlertForCellForRowAtIndexPathAccessDuringUpdate, 
                        _UITableViewAlertForForcedLayout, _UITableViewAlertForLayoutOutsideViewHierarchy, 
                        _UITableViewAlertForVisibleCellsAccessDuringUpdate, _UITableViewAutomaticDimension, 
                        _UITableViewCellDefaultFontSize, _UITableViewDefaultRowHeight, 
@@ -1676,8 +1685,8 @@ exports:
                        __UICellAccessoryReservedLayoutWidthDisclosure, __UICellAccessoryReservedLayoutWidthStandard, 
                        __UIClassicControllerScaleFactorForZoomedIn, __UIClassicControllerStatusBarInsetsForPadOnRoundedPad, 
                        __UIClickPresentationBackgroundColor, __UIClickPresentationBackgroundEffects, 
-                       __UICollectionLayoutAttributePreferredSizingCustomizations, 
-                       __UICollectionListLayoutUnavailable, __UICollectionViewLayoutElementKindHorizontalInsertionIndicator, 
+                       __UICollectionLayoutAttributePreferredSizingData, __UICollectionListLayoutUnavailable, 
+                       __UICollectionViewLayoutElementKindHorizontalInsertionIndicator, 
                        __UICollectionViewLayoutElementKindVerticalInsertionIndicator, 
                        __UICollectionViewListLayoutElementKindBottomSeparator, __UICollectionViewListLayoutElementKindGlobalFooter, 
                        __UICollectionViewListLayoutElementKindGlobalHeader, __UICollectionViewListLayoutElementKindSectionFooter, 
@@ -1705,6 +1714,8 @@ exports:
                        __UIDynamicAnimationUnitSizeScale, __UIDynamicAnimationUnitSizeTranslation, 
                        __UIDynamicUserInterfaceStyleEnabled, __UIEffectiveSourceDataOwnerForReportedDataOwner, 
                        __UIExternalScreenSceneConnectionHandler, __UIFirstTypeIdentifierEligibleForMassStorage, 
+                       __UIFocusBehaviorDidChangeNotification, __UIFocusBehaviorForTraitCollection, 
+                       __UIFocusBehaviorPotentiallySupportsFocusSystemForTraitCollection, 
                        __UIFocusEngineGestureDidBeginNotification, __UIFocusFastScrollingIndexBarPlaceholderTitle, 
                        __UIFocusSystemEnabledStateDidChangeNotification, __UIFontWeightForImageSymbolWeight, 
                        __UIFromValueForAnimation, __UIGestureRecognizerStateString, 
@@ -1892,14 +1903,12 @@ exports:
                        __UIStatusBarRegionAxisCenteringLayoutValueAutomatic, __UIStatusBarRegionIdentifierBattery, 
                        __UIStatusBarStyleFromLegibilityStyle, __UIStoryboardIdentifierKey, 
                        __UIStringFromWhitePointAdaptivityStyle, __UISubclassOverridesSelector, 
-                       __UISupportsFocusDebugOnIOS, __UISupportsFocusOnIOS, __UISupportsInitialFocusDeferral, 
-                       __UISupportsSyncFocusAndResponder, __UISwipeOccurrenceStateDisallowsUserInteraction, 
-                       __UISwipeOccurrenceStateIsEndState, __UISystemApplicationDidUnlockNotification, 
-                       __UISystemApplicationWillLockNotification, __UISystemGestureLocationForScrollEventInView, 
-                       __UISystemGestureLocationForTouchInView, __UISystemGestureLocationInView, 
-                       __UISystemGesturePreviousLocationForTouchInView, __UISystemGestureTranslationInView, 
-                       __UISystemGestureVelocityInView, __UITableConstantsForTraitCollection, 
-                       __UITableViewCellLayoutIntrinsicSizeForCellStackingLabels, 
+                       __UISwipeOccurrenceStateDisallowsUserInteraction, __UISwipeOccurrenceStateIsEndState, 
+                       __UISystemApplicationDidUnlockNotification, __UISystemApplicationWillLockNotification, 
+                       __UISystemGestureLocationForScrollEventInView, __UISystemGestureLocationForTouchInView, 
+                       __UISystemGestureLocationInView, __UISystemGesturePreviousLocationForTouchInView, 
+                       __UISystemGestureTranslationInView, __UISystemGestureVelocityInView, 
+                       __UITableConstantsForTraitCollection, __UITableViewCellLayoutIntrinsicSizeForCellStackingLabels, 
                        __UITableViewCellUsesLayoutMarginBasedContentPadding, __UITableViewDefaultSectionCornerRadiusForTraitCollection, 
                        __UITemporaryFileURL, __UITemporaryFileWithUniqueName, __UITextContainerViewSizeDidChangeNotification, 
                        __UITextInputSourceIsKeyboard, __UITimeFormatIs24HourMode, 
@@ -2043,29 +2052,30 @@ exports:
                        UIDraggingSystemSceneMetadata, UIDraggingSystemSession, UIDraggingSystemSessionInfo, 
                        UIDraggingSystemTouchRoutingPolicy, UIDropInteraction, UIDropProposal, 
                        UIDynamicAnimator, UIDynamicBehavior, UIDynamicItemBehavior, 
-                       UIDynamicItemGroup, UIEvent, UIExternalScenePairingObserver, 
-                       UIFeedbackGenerator, UIFetchContentInBackgroundAction, UIFetchContentInBackgroundActionResponse, 
-                       UIFieldBehavior, UIFieldEditor, UIFocusAnimationCoordinator, 
-                       UIFocusContainerGuide, UIFocusDebugger, UIFocusGuide, UIFocusMovementAction, 
-                       UIFocusMovementHint, UIFocusRingManager, UIFocusSystem, UIFocusUpdateContext, 
-                       UIFontMetrics, UIFontPickerController, UIFontPickerViewController, 
-                       UIFontPickerViewControllerConfiguration, UIForceStageInteractionProgress, 
-                       UIFrameAnimation, UIGestureRecognizer, UIGradient, UIGraphicsImageRenderer, 
-                       UIGraphicsImageRendererContext, UIGraphicsImageRendererFormat, 
-                       UIGraphicsPDFRenderer, UIGraphicsPDFRendererContext, UIGraphicsPDFRendererFormat, 
-                       UIGraphicsRenderer, UIGraphicsRendererContext, UIGraphicsRendererFormat, 
-                       UIGravityBehavior, UIHBClickGestureRecognizer, UIHBDownGestureRecognizer, 
-                       UIHBLongClickGestureRecognizer, UIHandleBackgroundURLSessionAction, 
-                       UIHandleCloudKitShareAction, UIHandleLocalNotificationAction, 
-                       UIHandleRemoteNotificationAction, UIHandleStatusBarTapAction, 
-                       UIHoverEvent, UIHoverGestureRecognizer, UIImage, UIImageAsset, 
-                       UIImageConfiguration, UIImageNibPlaceholder, UIImagePickerController, 
-                       UIImageSymbolConfiguration, UIImageView, UIImpactFeedbackGenerator, 
-                       UIIndexBarAccessoryView, UIIndexBarEntry, UIIndexBarView, 
-                       UIIndirectScribbleInteraction, UIInputContextHistory, UIInputResponderController, 
-                       UIInputView, UIInputViewController, UIIntentForwardingAction, 
-                       UIIntentForwardingActionResponse, UIInteractionProgress, UIInterfaceAction, 
-                       UIInterfaceActionGroup, UIInterfaceActionGroupView, UIInterfaceActionGroupViewController, 
+                       UIDynamicItemGroup, UIEvent, UIEventAttribution, UIEventAttributionView, 
+                       UIExternalScenePairingObserver, UIFeedbackGenerator, UIFetchContentInBackgroundAction, 
+                       UIFetchContentInBackgroundActionResponse, UIFieldBehavior, 
+                       UIFieldEditor, UIFocusAnimationCoordinator, UIFocusContainerGuide, 
+                       UIFocusDebugger, UIFocusGuide, UIFocusMovementAction, UIFocusMovementHint, 
+                       UIFocusRingManager, UIFocusSystem, UIFocusUpdateContext, UIFontMetrics, 
+                       UIFontPickerController, UIFontPickerViewController, UIFontPickerViewControllerConfiguration, 
+                       UIForceStageInteractionProgress, UIFrameAnimation, UIGestureRecognizer, 
+                       UIGradient, UIGraphicsImageRenderer, UIGraphicsImageRendererContext, 
+                       UIGraphicsImageRendererFormat, UIGraphicsPDFRenderer, UIGraphicsPDFRendererContext, 
+                       UIGraphicsPDFRendererFormat, UIGraphicsRenderer, UIGraphicsRendererContext, 
+                       UIGraphicsRendererFormat, UIGravityBehavior, UIHBClickGestureRecognizer, 
+                       UIHBDownGestureRecognizer, UIHBLongClickGestureRecognizer, 
+                       UIHandleBackgroundURLSessionAction, UIHandleCloudKitShareAction, 
+                       UIHandleLocalNotificationAction, UIHandleRemoteNotificationAction, 
+                       UIHandleStatusBarTapAction, UIHoverEvent, UIHoverGestureRecognizer, 
+                       UIImage, UIImageAsset, UIImageConfiguration, UIImageNibPlaceholder, 
+                       UIImagePickerController, UIImageSymbolConfiguration, UIImageView, 
+                       UIImpactFeedbackGenerator, UIIndexBarAccessoryView, UIIndexBarEntry, 
+                       UIIndexBarView, UIIndirectScribbleInteraction, UIInputContextHistory, 
+                       UIInputResponderController, UIInputView, UIInputViewController, 
+                       UIIntentForwardingAction, UIIntentForwardingActionResponse, 
+                       UIInteractionProgress, UIInterfaceAction, UIInterfaceActionGroup, 
+                       UIInterfaceActionGroupView, UIInterfaceActionGroupViewController, 
                        UIInterfaceActionHighlightAttributes, UIInterfaceActionSeparatorAttributes, 
                        UIInterpolatedFloat, UIInterpolatingMotionEffect, UIItemProvider, 
                        UIKBBackdropView, UIKBCacheToken, UIKBGeometry, UIKBMergeAction, 
@@ -2078,8 +2088,8 @@ exports:
                        UIKeyboardPreferencesController, UIKeyboardSuggestedInputMode, 
                        UILabel, UILargeContentViewerInteraction, UILayoutGuide, UILayoutManagerBasedDraggableGeometry, 
                        UILexicon, UILexiconEntry, UIListContentConfiguration, UIListContentImageProperties, 
-                       UIListContentTextProperties, UIListContentView, UILocalNotification, 
-                       UILocalizedIndexedCollation, UILongPressGestureRecognizer, 
+                       UIListContentTextProperties, UIListContentView, UIListSeparatorConfiguration, 
+                       UILocalNotification, UILocalizedIndexedCollation, UILongPressGestureRecognizer, 
                        UILookupEvent, UIManagedDocument, UIMarkupTextPrintFormatter, 
                        UIMenu, UIMenuController, UIMenuElement, UIMenuItem, UIMenuSystem, 
                        UIMoreListController, UIMoreNavigationController, UIMorphingLabel, 
@@ -2108,8 +2118,10 @@ exports:
                        UIPreviewItemController, UIPreviewMenuItem, UIPreviewParameters, 
                        UIPreviewPresentationController, UIPreviewTarget, UIPrintFormatter, 
                        UIPrintInfo, UIPrintInteractionController, UIPrintPageRenderer, 
-                       UIPrintPaper, UIPrinter, UIPrinterPickerController, UIProgressHUD, 
-                       UIProgressIndicator, UIProgressView, UIPushBehavior, UIReferenceLibraryViewController, 
+                       UIPrintPaper, UIPrintServiceExtension, UIPrintServiceExtensionContext, 
+                       UIPrintServiceExtensionContextHost, UIPrinter, UIPrinterDestination, 
+                       UIPrinterPickerController, UIProgressHUD, UIProgressIndicator, 
+                       UIProgressView, UIPushBehavior, UIReferenceLibraryViewController, 
                        UIRefreshControl, UIRegion, UIRemoveControl, UIResetFocusAction, 
                        UIResponder, UIRivenFactory, UIRootSceneWindow, UIRootWindowScenePresentationBinder, 
                        UIRotationGestureRecognizer, UIRuntimeOutletCollectionConnection, 
@@ -2207,9 +2219,9 @@ exports:
                        _UIClickPresentationInteraction, _UICollectionLayoutAnchor, 
                        _UICollectionLayoutBoundarySupplementaryItem, _UICollectionLayoutDecorationItem, 
                        _UICollectionLayoutDimension, _UICollectionLayoutEdgeSpacing, 
-                       _UICollectionLayoutGroup, _UICollectionLayoutItem, _UICollectionLayoutSection, 
-                       _UICollectionLayoutSize, _UICollectionLayoutSpacing, _UICollectionLayoutSupplementaryItem, 
-                       _UICollectionPreferredSizingCustomizations, _UICollectionViewAnimator, 
+                       _UICollectionLayoutGroup, _UICollectionLayoutItem, _UICollectionLayoutListSectionData, 
+                       _UICollectionLayoutSection, _UICollectionLayoutSize, _UICollectionLayoutSpacing, 
+                       _UICollectionLayoutSupplementaryItem, _UICollectionViewAnimator, 
                        _UICollectionViewCellRegistration, _UICollectionViewCompositionLayout, 
                        _UICollectionViewCompositionLayoutInvalidationContext, _UICollectionViewCompositionalLayout, 
                        _UICollectionViewCompositionalLayoutMutableConfiguration, 
@@ -2247,7 +2259,8 @@ exports:
                        _UIDynamicSlider, _UIDynamicValueAnimation, _UIEdgeFeedbackGenerator, 
                        _UIEdgeFeedbackGeneratorConfiguration, _UIEditableTextSelectionForceGesture, 
                        _UIEditableTextSelectionTwoFingerPanGesture, _UIEditableTextSelectionTwoFingerTapGesture, 
-                       _UIExpandingGlyphsView, _UIFBSSceneSubstrate, _UIFallbackPresentationViewController, 
+                       _UIEventAttribution, _UIEventAttributionView, _UIExpandingGlyphsView, 
+                       _UIFBSSceneSubstrate, _UIFallbackPresentationViewController, 
                        _UIFeedback, _UIFeedbackAudioFilePattern, _UIFeedbackBehavior, 
                        _UIFeedbackButtonBehavior, _UIFeedbackButtonBehaviorConfiguration, 
                        _UIFeedbackDragBehavior, _UIFeedbackDragBehaviorConfiguration, 
@@ -2312,7 +2325,7 @@ exports:
                        _UISettings, _UIShareParticipantDetails, _UISheetAnimationController, 
                        _UISheetDetent, _UISheetDropInteraction, _UISheetInteraction, 
                        _UISheetPresentationController, _UISimplex, _UISiriTranscriptTextView, 
-                       _UIStackedImageConfiguration, _UIStackedImageContainerLayer, 
+                       _UISlotView, _UIStackedImageConfiguration, _UIStackedImageContainerLayer, 
                        _UIStackedImageContainerView, _UIStatesFeedbackGenerator, 
                        _UIStatesFeedbackGeneratorConfiguration, _UIStatesFeedbackGeneratorPreviewConfiguration, 
                        _UIStatesFeedbackGeneratorSwipeActionConfiguration, _UIStaticBatteryView, 
@@ -2644,11 +2657,10 @@ exports:
                        UIWebDocumentView._updatesScrollView, UIWebDocumentView._updatingSize, 
                        UIWebDocumentView._usingMinimalTilesDuringLoading, UIWebDocumentView._viewportHandler, 
                        UIWebDocumentView._webCoreNeedsDraw, UIWebDocumentView._webCoreNeedsSetNeedsDisplay, 
-                       UIWebDocumentView._webSelectionAssistant, UIWebDocumentView._webView, 
-                       UIWebDocumentView._widgetEditingView, UIWebDocumentView.m_parentTextView, 
-                       UIWebDocumentView.m_selectionGranularity, UIWebElementAction._actionHandler, 
-                       UIWebElementAction._dismissalHandler, UIWebElementAction._title, 
-                       UIWebElementAction._type, UIWebElementActionInfo._interactionLocation, 
+                       UIWebDocumentView._webView, UIWebDocumentView._widgetEditingView, 
+                       UIWebDocumentView.m_parentTextView, UIWebDocumentView.m_selectionGranularity, 
+                       UIWebElementAction._actionHandler, UIWebElementAction._dismissalHandler, 
+                       UIWebElementAction._title, UIWebElementAction._type, UIWebElementActionInfo._interactionLocation, 
                        UIWebPDFView._backingLayerImageViews, UIWebRotatingAlertController._wasDeferringCallbacks, 
                        UIWebRotatingAlertController._webBrowserView, UIWebTiledView._allowsPaintingAndScriptsWhilePanning, 
                        UIWebTiledView._didFirstTileLayout, UIWebTiledView._editingTilingModeEnabled, 

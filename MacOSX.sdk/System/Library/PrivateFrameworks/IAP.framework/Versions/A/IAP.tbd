@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1E9EE234-B8B4-3F93-8FA5-CF0ED980EFE5
+    value:           A1EB2BC5-C376-3146-A477-E05AB62EB155
   - target:          x86_64-maccatalyst
-    value:           1E9EE234-B8B4-3F93-8FA5-CF0ED980EFE5
+    value:           A1EB2BC5-C376-3146-A477-E05AB62EB155
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1FB8F710-B9C4-34B1-A73C-8EEA3AE6C5C6
+    value:           F16A891F-49AB-318F-9176-7D03407CB3BE
   - target:          arm64e-maccatalyst
-    value:           1FB8F710-B9C4-34B1-A73C-8EEA3AE6C5C6
+    value:           F16A891F-49AB-318F-9176-7D03407CB3BE
 install-name:    '/System/Library/PrivateFrameworks/IAP.framework/Versions/A/IAP'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

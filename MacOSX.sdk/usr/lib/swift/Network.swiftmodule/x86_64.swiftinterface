@@ -1,13 +1,13 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target x86_64-apple-macos11.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftNetwork -swift-version 5 -enforce-exclusivity=checked -O -module-name Network
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target x86_64-apple-macos11.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftNetwork -swift-version 5 -enforce-exclusivity=checked -O -module-name Network
 import Darwin
 import Dispatch
 import Foundation
 @_exported import Network
 import Security
 import Swift
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network14_NWProtocolUDP) public class NWProtocolUDP : Network.NWProtocol {
   public static let definition: Network.NWProtocolDefinition
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_objcRuntimeName(_TtCC7Network14_NWProtocolUDP7Options) public class Options : Network.NWProtocolOptions {
@@ -24,7 +24,7 @@ import Swift
   }
   @objc deinit
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network14_NWProtocolTCP) public class NWProtocolTCP : Network.NWProtocol {
   public static let definition: Network.NWProtocolDefinition
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_objcRuntimeName(_TtCC7Network14_NWProtocolTCP7Options) public class Options : Network.NWProtocolOptions {
@@ -102,7 +102,7 @@ import Swift
   }
   @objc deinit
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network13_NWProtocolIP) public class NWProtocolIP : Network.NWProtocol {
   public static let definition: Network.NWProtocolDefinition
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_objcRuntimeName(_TtCC7Network13_NWProtocolIP7Options) public class Options : Network.NWProtocolOptions {
@@ -111,10 +111,10 @@ import Swift
       case v4
       case v6
       public static func == (a: Network.NWProtocolIP.Options.Version, b: Network.NWProtocolIP.Options.Version) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
-      public func hash(into hasher: inout Swift.Hasher)
     }
     public var version: Network.NWProtocolIP.Options.Version {
       get
@@ -136,23 +136,23 @@ import Swift
       get
       set
     }
-    @available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+    @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
     public enum AddressPreference {
       case `default`
       case temporary
       case stable
       public static func == (a: Network.NWProtocolIP.Options.AddressPreference, b: Network.NWProtocolIP.Options.AddressPreference) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
-      public func hash(into hasher: inout Swift.Hasher)
     }
-    @available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+    @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
     public var localAddressPreference: Network.NWProtocolIP.Options.AddressPreference {
       get
       set
     }
-    @available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+    @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
     public var disableMulticastLoopback: Swift.Bool {
       get
       set
@@ -165,10 +165,10 @@ import Swift
     case ect1
     case ce
     public static func == (a: Network.NWProtocolIP.ECN, b: Network.NWProtocolIP.ECN) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_objcRuntimeName(_TtCC7Network13_NWProtocolIP8Metadata) public class Metadata : Network.NWProtocolMetadata {
     public var ecn: Network.NWProtocolIP.ECN {
@@ -187,7 +187,7 @@ import Swift
   }
   @objc deinit
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network14_NWProtocolTLS) public class NWProtocolTLS : Network.NWProtocol {
   public static let definition: Network.NWProtocolDefinition
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_objcRuntimeName(_TtCC7Network14_NWProtocolTLS7Options) public class Options : Network.NWProtocolOptions {
@@ -205,16 +205,16 @@ import Swift
   }
   @objc deinit
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public class NWProtocolWebSocket : Network.NWProtocol {
   public static let definition: Network.NWProtocolDefinition
   public enum Version {
     case version13
     public static func == (a: Network.NWProtocolWebSocket.Version, b: Network.NWProtocolWebSocket.Version) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public enum Opcode : Swift.UInt8 {
     case cont
@@ -223,8 +223,8 @@ public class NWProtocolWebSocket : Network.NWProtocol {
     case close
     case ping
     case pong
-    public typealias RawValue = Swift.UInt8
     public init?(rawValue: Swift.UInt8)
+    public typealias RawValue = Swift.UInt8
     public var rawValue: Swift.UInt8 {
       get
     }
@@ -243,8 +243,8 @@ public class NWProtocolWebSocket : Network.NWProtocol {
       case mandatoryExtension
       case internalServerError
       case tlsHandshake
-      public typealias RawValue = Swift.UInt16
       public init?(rawValue: Swift.UInt16)
+      public typealias RawValue = Swift.UInt16
       public var rawValue: Swift.UInt16 {
         get
       }
@@ -295,10 +295,10 @@ public class NWProtocolWebSocket : Network.NWProtocol {
       case accept
       case reject
       public static func == (a: Network.NWProtocolWebSocket.Response.Status, b: Network.NWProtocolWebSocket.Response.Status) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
       public var hashValue: Swift.Int {
         get
       }
-      public func hash(into hasher: inout Swift.Hasher)
     }
     public let status: Network.NWProtocolWebSocket.Response.Status
     public let subprotocol: Swift.String?
@@ -307,7 +307,7 @@ public class NWProtocolWebSocket : Network.NWProtocol {
   }
   @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public struct NWTXTRecord {
   public enum Entry : Swift.Hashable, Swift.CustomDebugStringConvertible {
     case none
@@ -316,11 +316,11 @@ public struct NWTXTRecord {
     public var debugDescription: Swift.String {
       get
     }
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: Network.NWTXTRecord.Entry, b: Network.NWTXTRecord.Entry) -> Swift.Bool
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
-    public static func == (a: Network.NWTXTRecord.Entry, b: Network.NWTXTRecord.Entry) -> Swift.Bool
   }
   public init(_ dictionary: [Swift.String : Swift.String] = [:])
   @discardableResult
@@ -336,11 +336,11 @@ public struct NWTXTRecord {
     get
   }
 }
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension NWTXTRecord : Swift.Equatable {
   public static func == (lhs: Network.NWTXTRecord, rhs: Network.NWTXTRecord) -> Swift.Bool
 }
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension NWTXTRecord : Swift.Collection {
   public typealias Element = (key: Swift.String, value: Network.NWTXTRecord.Entry)
   public subscript(position: Network.NWTXTRecord.Index) -> Network.NWTXTRecord.Element {
@@ -357,17 +357,17 @@ extension NWTXTRecord : Swift.Collection {
     get
   }
   public func index(after i: Network.NWTXTRecord.Index) -> Network.NWTXTRecord.Index
+  public typealias Indices = Swift.DefaultIndices<Network.NWTXTRecord>
   public typealias Iterator = Swift.IndexingIterator<Network.NWTXTRecord>
   public typealias SubSequence = Swift.Slice<Network.NWTXTRecord>
-  public typealias Indices = Swift.DefaultIndices<Network.NWTXTRecord>
 }
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension NWTXTRecord : Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get
   }
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public class NWProtocolFramer : Network.NWProtocol {
   @_hasMissingDesignatedInitializers public class Definition : Network.NWProtocolDefinition {
     public init(implementation: Network.NWProtocolFramerImplementation.Type)
@@ -433,14 +433,14 @@ public class NWProtocolFramer : Network.NWProtocol {
     case ready
     case willMarkReady
     public static func == (a: Network.NWProtocolFramer.StartResult, b: Network.NWProtocolFramer.StartResult) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public protocol NWProtocolFramerImplementation : AnyObject {
   static var label: Swift.String { get }
   init(framer: Network.NWProtocolFramer.Instance)
@@ -451,7 +451,7 @@ public protocol NWProtocolFramerImplementation : AnyObject {
   func stop(framer: Network.NWProtocolFramer.Instance) -> Swift.Bool
   func cleanup(framer: Network.NWProtocolFramer.Instance)
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public enum NWError : Swift.Error, Swift.CustomDebugStringConvertible, Swift.Equatable {
   case posix(Darwin.POSIXErrorCode)
   case dns(dnssd.DNSServiceErrorType)
@@ -461,7 +461,7 @@ public enum NWError : Swift.Error, Swift.CustomDebugStringConvertible, Swift.Equ
   }
   public static func == (a: Network.NWError, b: Network.NWError) -> Swift.Bool
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network13_NWConnection) final public class NWConnection : Swift.CustomDebugStringConvertible {
   final public var debugDescription: Swift.String {
     get
@@ -482,7 +482,7 @@ public enum NWError : Swift.Error, Swift.CustomDebugStringConvertible, Swift.Equ
     get
     set
   }
-  @available(OSX 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
   final public var maximumDatagramSize: Swift.Int {
     get
   }
@@ -530,20 +530,20 @@ public enum NWError : Swift.Error, Swift.CustomDebugStringConvertible, Swift.Equ
     @objc deinit
   }
   final public func receive(minimumIncompleteLength: Swift.Int, maximumLength: Swift.Int, completion: @escaping (Foundation.Data?, Network.NWConnection.ContentContext?, Swift.Bool, Network.NWError?) -> Swift.Void)
-  @available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+  @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
   final public func receiveDiscontiguous(minimumIncompleteLength: Swift.Int, maximumLength: Swift.Int, completion: @escaping (Dispatch.DispatchData?, Network.NWConnection.ContentContext?, Swift.Bool, Network.NWError?) -> Swift.Void)
   final public func receiveMessage(completion: @escaping (Foundation.Data?, Network.NWConnection.ContentContext?, Swift.Bool, Network.NWError?) -> Swift.Void)
-  @available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+  @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
   final public func receiveMessageDiscontiguous(completion: @escaping (Dispatch.DispatchData?, Network.NWConnection.ContentContext?, Swift.Bool, Network.NWError?) -> Swift.Void)
   public enum SendCompletion {
     case contentProcessed((Network.NWError?) -> Swift.Void)
     case idempotent
   }
   final public func send(content: Foundation.Data?, contentContext: Network.NWConnection.ContentContext = .defaultMessage, isComplete: Swift.Bool = true, completion: Network.NWConnection.SendCompletion)
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   @usableFromInline
   final internal func send(discontiguousContent: Dispatch.DispatchData, contentContext: Network.NWConnection.ContentContext = .defaultMessage, isComplete: Swift.Bool = true, completion: Network.NWConnection.SendCompletion)
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   @inlinable final public func send<Content>(content: Content?, contentContext: Network.NWConnection.ContentContext = .defaultMessage, isComplete: Swift.Bool = true, completion: Network.NWConnection.SendCompletion) where Content : Foundation.DataProtocol {
 		if let dispatchData = content as? DispatchData {
 			send(discontiguousContent: dispatchData, contentContext: contentContext, isComplete: isComplete, completion: completion)
@@ -557,7 +557,7 @@ public enum NWError : Swift.Error, Swift.CustomDebugStringConvertible, Swift.Equ
 	}
   final public func batch(_ block: () -> Swift.Void)
   final public func metadata(definition: Network.NWProtocolDefinition) -> Network.NWProtocolMetadata?
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public struct EstablishmentReport : Swift.CustomDebugStringConvertible {
     public var debugDescription: Swift.String {
       get
@@ -574,17 +574,17 @@ public enum NWError : Swift.Error, Swift.CustomDebugStringConvertible, Swift.Equ
         case cache
         case expiredCache
         public static func == (a: Network.NWConnection.EstablishmentReport.Resolution.Source, b: Network.NWConnection.EstablishmentReport.Resolution.Source) -> Swift.Bool
+        public func hash(into hasher: inout Swift.Hasher)
         public var hashValue: Swift.Int {
           get
         }
-        public func hash(into hasher: inout Swift.Hasher)
       }
       public let source: Network.NWConnection.EstablishmentReport.Resolution.Source
       public let duration: Foundation.TimeInterval
       public let endpointCount: Swift.Int
       public let successfulEndpoint: Network.NWEndpoint
       public let preferredEndpoint: Network.NWEndpoint
-      @available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+      @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
       public enum DNSProtocol {
         case unknown
         case udp
@@ -592,12 +592,12 @@ public enum NWError : Swift.Error, Swift.CustomDebugStringConvertible, Swift.Equ
         case tls
         case https
         public static func == (a: Network.NWConnection.EstablishmentReport.Resolution.DNSProtocol, b: Network.NWConnection.EstablishmentReport.Resolution.DNSProtocol) -> Swift.Bool
+        public func hash(into hasher: inout Swift.Hasher)
         public var hashValue: Swift.Int {
           get
         }
-        public func hash(into hasher: inout Swift.Hasher)
       }
-      @available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+      @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
       public var dnsProtocol: Network.NWConnection.EstablishmentReport.Resolution.DNSProtocol {
         get
       }
@@ -610,9 +610,9 @@ public enum NWError : Swift.Error, Swift.CustomDebugStringConvertible, Swift.Equ
     }
     public let handshakes: [Network.NWConnection.EstablishmentReport.Handshake]
   }
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   final public func requestEstablishmentReport(queue: Dispatch.DispatchQueue, completion: @escaping (Network.NWConnection.EstablishmentReport?) -> Swift.Void)
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public struct DataTransferReport : Swift.CustomDebugStringConvertible {
     public var debugDescription: Swift.String {
       get
@@ -636,16 +636,16 @@ public enum NWError : Swift.Error, Swift.CustomDebugStringConvertible, Swift.Equ
     public let aggregatePathReport: Network.NWConnection.DataTransferReport.PathReport
     public let pathReports: [Network.NWConnection.DataTransferReport.PathReport]
   }
-  @_hasMissingDesignatedInitializers @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @_hasMissingDesignatedInitializers @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public class PendingDataTransferReport {
     public func collect(queue: Dispatch.DispatchQueue, completion: @escaping (Network.NWConnection.DataTransferReport) -> Swift.Void)
     @objc deinit
   }
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   final public func startDataTransferReport() -> Network.NWConnection.PendingDataTransferReport
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network21_NWProtocolDefinition) public class NWProtocolDefinition : Swift.Equatable, Swift.CustomDebugStringConvertible {
   public static func == (lhs: Network.NWProtocolDefinition, rhs: Network.NWProtocolDefinition) -> Swift.Bool
   final public let name: Swift.String
@@ -654,19 +654,19 @@ public enum NWError : Swift.Error, Swift.CustomDebugStringConvertible, Swift.Equ
   }
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network18_NWProtocolOptions) public class NWProtocolOptions {
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network19_NWProtocolMetadata) public class NWProtocolMetadata {
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network11_NWProtocol) public class NWProtocol {
   @objc deinit
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public protocol IPAddress {
   var rawValue: Foundation.Data { get }
   init?(_ rawValue: Foundation.Data, _ interface: Network.NWInterface?)
@@ -676,7 +676,7 @@ public protocol IPAddress {
   var isLinkLocal: Swift.Bool { get }
   var isMulticast: Swift.Bool { get }
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public struct IPv4Address : Network.IPAddress, Swift.Hashable, Swift.CustomDebugStringConvertible {
   public static let any: Network.IPv4Address
   public static let broadcast: Network.IPv4Address
@@ -709,7 +709,7 @@ public struct IPv4Address : Network.IPAddress, Swift.Hashable, Swift.CustomDebug
     get
   }
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public struct IPv6Address : Network.IPAddress, Swift.Hashable, Swift.CustomDebugStringConvertible {
   public static let any: Network.IPv6Address
   public static let broadcast: Network.IPv6Address
@@ -723,8 +723,8 @@ public struct IPv6Address : Network.IPAddress, Swift.Hashable, Swift.CustomDebug
     case siteLocal
     case organizationLocal
     case global
-    public typealias RawValue = Swift.UInt8
     public init?(rawValue: Swift.UInt8)
+    public typealias RawValue = Swift.UInt8
     public var rawValue: Swift.UInt8 {
       get
     }
@@ -771,12 +771,12 @@ public struct IPv6Address : Network.IPAddress, Swift.Hashable, Swift.CustomDebug
     get
   }
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public enum NWEndpoint : Swift.Hashable, Swift.CustomDebugStringConvertible {
   case hostPort(host: Network.NWEndpoint.Host, port: Network.NWEndpoint.Port)
   case service(name: Swift.String, type: Swift.String, domain: Swift.String, interface: Network.NWInterface?)
   case unix(path: Swift.String)
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   case url(_: Foundation.URL)
   public enum Host : Swift.Hashable, Swift.CustomDebugStringConvertible, Swift.ExpressibleByStringLiteral {
     public typealias StringLiteralType = Swift.String
@@ -792,12 +792,12 @@ public enum NWEndpoint : Swift.Hashable, Swift.CustomDebugStringConvertible {
     public var debugDescription: Swift.String {
       get
     }
-    public var hashValue: Swift.Int {
-      get
-    }
     public static func == (a: Network.NWEndpoint.Host, b: Network.NWEndpoint.Host) -> Swift.Bool
     public typealias ExtendedGraphemeClusterLiteralType = Network.NWEndpoint.Host.StringLiteralType
     public typealias UnicodeScalarLiteralType = Network.NWEndpoint.Host.StringLiteralType
+    public var hashValue: Swift.Int {
+      get
+    }
   }
   public struct Port : Swift.Hashable, Swift.CustomDebugStringConvertible, Swift.ExpressibleByIntegerLiteral, Swift.RawRepresentable {
     public typealias IntegerLiteralType = Swift.UInt16
@@ -828,12 +828,12 @@ public enum NWEndpoint : Swift.Hashable, Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get
   }
+  public static func == (a: Network.NWEndpoint, b: Network.NWEndpoint) -> Swift.Bool
   public var hashValue: Swift.Int {
     get
   }
-  public static func == (a: Network.NWEndpoint, b: Network.NWEndpoint) -> Swift.Bool
 }
-@available(OSX 10.15, *)
+@available(macOS 10.15, *)
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -887,7 +887,7 @@ final public class NWEthernetChannel : Swift.CustomDebugStringConvertible {
   }
   @objc deinit
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public struct NWInterface : Swift.Hashable, Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get
@@ -901,10 +901,10 @@ public struct NWInterface : Swift.Hashable, Swift.CustomDebugStringConvertible {
     case wiredEthernet
     case loopback
     public static func == (a: Network.NWInterface.InterfaceType, b: Network.NWInterface.InterfaceType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public let type: Network.NWInterface.InterfaceType
   public let name: Swift.String
@@ -913,7 +913,7 @@ public struct NWInterface : Swift.Hashable, Swift.CustomDebugStringConvertible {
     get
   }
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 public struct NWPath : Swift.Equatable, Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get
@@ -923,38 +923,38 @@ public struct NWPath : Swift.Equatable, Swift.CustomDebugStringConvertible {
     case unsatisfied
     case requiresConnection
     public static func == (a: Network.NWPath.Status, b: Network.NWPath.Status) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public let status: Network.NWPath.Status
-  @available(OSX 11.0, iOS 14.2, watchOS 7.1, tvOS 14.2, *)
+  @available(macOS 11.0, iOS 14.2, watchOS 7.1, tvOS 14.2, *)
   public enum UnsatisfiedReason {
     case notAvailable
     case cellularDenied
     case wifiDenied
     case localNetworkDenied
     public static func == (a: Network.NWPath.UnsatisfiedReason, b: Network.NWPath.UnsatisfiedReason) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
-  @available(OSX 11.0, iOS 14.2, watchOS 7.1, tvOS 14.2, *)
+  @available(macOS 11.0, iOS 14.2, watchOS 7.1, tvOS 14.2, *)
   public var unsatisfiedReason: Network.NWPath.UnsatisfiedReason {
     get
   }
   public let availableInterfaces: [Network.NWInterface]
   public let isExpensive: Swift.Bool
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public var isConstrained: Swift.Bool {
     get
   }
   public let supportsIPv4: Swift.Bool
   public let supportsIPv6: Swift.Bool
   public let supportsDNS: Swift.Bool
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public var gateways: [Network.NWEndpoint] {
     get
   }
@@ -963,7 +963,7 @@ public struct NWPath : Swift.Equatable, Swift.CustomDebugStringConvertible {
   public func usesInterfaceType(_ type: Network.NWInterface.InterfaceType) -> Swift.Bool
   public static func == (lhs: Network.NWPath, rhs: Network.NWPath) -> Swift.Bool
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network14_NWPathMonitor) final public class NWPathMonitor {
   final public var currentPath: Network.NWPath
   final public var pathUpdateHandler: ((Network.NWPath) -> Swift.Void)? {
@@ -977,11 +977,11 @@ public struct NWPath : Swift.Equatable, Swift.CustomDebugStringConvertible {
   }
   public init()
   public init(requiredInterfaceType: Network.NWInterface.InterfaceType)
-  @available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+  @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
   public init(prohibitedInterfaceTypes: [Network.NWInterface.InterfaceType])
   @objc deinit
 }
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 final public class NWBrowser : Swift.CustomDebugStringConvertible {
   final public var debugDescription: Swift.String {
     get
@@ -1018,8 +1018,8 @@ final public class NWBrowser : Swift.CustomDebugStringConvertible {
         public static let interfaceAdded: Network.NWBrowser.Result.Change.Flags
         public static let interfaceRemoved: Network.NWBrowser.Result.Change.Flags
         public static let metadataChanged: Network.NWBrowser.Result.Change.Flags
-        public typealias Element = Network.NWBrowser.Result.Change.Flags
         public typealias ArrayLiteralElement = Network.NWBrowser.Result.Change.Flags
+        public typealias Element = Network.NWBrowser.Result.Change.Flags
         public typealias RawValue = Swift.UInt8
       }
       public init(between old: Network.NWBrowser.Result?, _ new: Network.NWBrowser.Result?)
@@ -1036,7 +1036,7 @@ final public class NWBrowser : Swift.CustomDebugStringConvertible {
     case ready
     case failed(Network.NWError)
     case cancelled
-    @available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+    @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
     case waiting(Network.NWError)
     public static func == (a: Network.NWBrowser.State, b: Network.NWBrowser.State) -> Swift.Bool
   }
@@ -1064,11 +1064,11 @@ final public class NWBrowser : Swift.CustomDebugStringConvertible {
   final public func cancel()
   @objc deinit
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public protocol NWGroupDescriptor : AnyObject {
   var members: [Network.NWEndpoint] { get }
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public class NWMulticastGroup : Network.NWGroupDescriptor {
   public var members: [Network.NWEndpoint] {
     get
@@ -1078,7 +1078,7 @@ public class NWMulticastGroup : Network.NWGroupDescriptor {
   public init(for groupAddresses: [Network.NWEndpoint], from: Network.NWEndpoint? = nil, disableUnicast: Swift.Bool = false) throws
   @objc deinit
 }
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
   final public var debugDescription: Swift.String {
     get
@@ -1111,8 +1111,8 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
     }
     public func reply(content: Foundation.Data?, message: Network.NWConnectionGroup.Message = .default)
     public func extractConnection() -> Network.NWConnection?
-    @objc deinit
     override public init(identifier: Swift.String, expiration: Swift.UInt64 = super, priority: Swift.Double = super, isFinal: Swift.Bool = super, antecedent: Network.NWConnection.ContentContext? = super, metadata: [Network.NWProtocolMetadata]? = super)
+    @objc deinit
   }
   final public func setReceiveHandler(maximumMessageSize: Swift.Int = Int.max, rejectOversizedMessages: Swift.Bool = true, handler: ((Network.NWConnectionGroup.Message, Foundation.Data?, Swift.Bool) -> Swift.Void)?)
   final public func send(content: Foundation.Data?, to: Network.NWEndpoint? = nil, message: Network.NWConnectionGroup.Message = .default, completion: @escaping (Network.NWError?) -> Swift.Void)
@@ -1126,7 +1126,7 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
   final public func cancel()
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network11_NWListener) final public class NWListener : Swift.CustomDebugStringConvertible {
   final public var debugDescription: Swift.String {
     get
@@ -1139,19 +1139,19 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
     public let name: Swift.String?
     public let type: Swift.String
     public let domain: Swift.String?
-    @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public var txtRecordObject: Network.NWTXTRecord? {
       get
       set
     }
     public let txtRecord: Foundation.Data?
-    @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public var noAutoRename: Swift.Bool {
       get
       set
     }
     public init(name: Swift.String? = nil, type: Swift.String, domain: Swift.String? = nil, txtRecord: Foundation.Data? = nil)
-    @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public init(name: Swift.String? = nil, type: Swift.String, domain: Swift.String? = nil, txtRecord: Network.NWTXTRecord)
   }
   public enum State : Swift.Equatable {
@@ -1178,9 +1178,9 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
     get
     set
   }
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public static let InfiniteConnectionLimit: Swift.Int
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   final public var newConnectionLimit: Swift.Int {
     get
     set
@@ -1204,14 +1204,14 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
   final public func cancel()
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@_hasMissingDesignatedInitializers @available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 @_objcRuntimeName(_TtC7Network13_NWParameters) final public class NWParameters : Swift.CustomDebugStringConvertible {
   final public var debugDescription: Swift.String {
     get
   }
   convenience public init(tls: Network.NWProtocolTLS.Options?, tcp: Network.NWProtocolTCP.Options = NWProtocolTCP.Options())
   convenience public init(dtls: Network.NWProtocolTLS.Options?, udp: Network.NWProtocolUDP.Options = NWProtocolUDP.Options())
-  @available(OSX 10.15, *)
+  @available(macOS 10.15, *)
   @available(iOS, unavailable)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
@@ -1249,7 +1249,7 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
     get
     set
   }
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   final public var prohibitConstrainedPaths: Swift.Bool {
     get
     set
@@ -1282,10 +1282,10 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
     case responsiveData
     case signaling
     public static func == (a: Network.NWParameters.ServiceClass, b: Network.NWParameters.ServiceClass) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   final public var serviceClass: Network.NWParameters.ServiceClass {
     get
@@ -1297,10 +1297,10 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
     case interactive
     case aggregate
     public static func == (a: Network.NWParameters.MultipathServiceType, b: Network.NWParameters.MultipathServiceType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   final public var multipathServiceType: Network.NWParameters.MultipathServiceType {
     get
@@ -1315,10 +1315,10 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
     case allow
     case prohibit
     public static func == (a: Network.NWParameters.ExpiredDNSBehavior, b: Network.NWParameters.ExpiredDNSBehavior) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   final public var expiredDNSBehavior: Network.NWParameters.ExpiredDNSBehavior {
     get
@@ -1342,7 +1342,7 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
   final public var defaultProtocolStack: Network.NWParameters.ProtocolStack {
     get
   }
-  @_hasMissingDesignatedInitializers @available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+  @_hasMissingDesignatedInitializers @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
   public class PrivacyContext : Swift.CustomDebugStringConvertible {
     public var debugDescription: Swift.String {
       get
@@ -1361,82 +1361,82 @@ final public class NWConnectionGroup : Swift.CustomDebugStringConvertible {
     public func requireEncryptedNameResolution(_ requireEncryption: Swift.Bool, fallbackResolver: Network.NWParameters.PrivacyContext.ResolverConfiguration?)
     @objc deinit
   }
-  @available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+  @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
   final public func setPrivacyContext(_ privacyContext: Network.NWParameters.PrivacyContext)
   final public func copy() -> Network.NWParameters
   @objc deinit
 }
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWProtocolIP.Options.Version : Swift.Equatable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWProtocolIP.Options.Version : Swift.Hashable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension Network.NWProtocolIP.Options.AddressPreference : Swift.Equatable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension Network.NWProtocolIP.Options.AddressPreference : Swift.Hashable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWProtocolIP.ECN : Swift.Equatable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWProtocolIP.ECN : Swift.Hashable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWProtocolWebSocket.Version : Swift.Equatable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWProtocolWebSocket.Version : Swift.Hashable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWProtocolWebSocket.Opcode : Swift.Equatable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWProtocolWebSocket.Opcode : Swift.Hashable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWProtocolWebSocket.Opcode : Swift.RawRepresentable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWProtocolWebSocket.CloseCode.Defined : Swift.Equatable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWProtocolWebSocket.CloseCode.Defined : Swift.Hashable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWProtocolWebSocket.CloseCode.Defined : Swift.RawRepresentable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWProtocolWebSocket.Response.Status : Swift.Equatable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWProtocolWebSocket.Response.Status : Swift.Hashable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWProtocolFramer.StartResult : Swift.Equatable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWProtocolFramer.StartResult : Swift.Hashable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWConnection.EstablishmentReport.Resolution.Source : Swift.Equatable {}
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension Network.NWConnection.EstablishmentReport.Resolution.Source : Swift.Hashable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension Network.NWConnection.EstablishmentReport.Resolution.DNSProtocol : Swift.Equatable {}
-@available(OSX 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension Network.NWConnection.EstablishmentReport.Resolution.DNSProtocol : Swift.Hashable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.IPv6Address.Scope : Swift.Equatable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.IPv6Address.Scope : Swift.Hashable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.IPv6Address.Scope : Swift.RawRepresentable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWInterface.InterfaceType : Swift.Equatable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWInterface.InterfaceType : Swift.Hashable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWPath.Status : Swift.Equatable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWPath.Status : Swift.Hashable {}
-@available(OSX 11.0, iOS 14.2, watchOS 7.1, tvOS 14.2, *)
+@available(macOS 11.0, iOS 14.2, watchOS 7.1, tvOS 14.2, *)
 extension Network.NWPath.UnsatisfiedReason : Swift.Equatable {}
-@available(OSX 11.0, iOS 14.2, watchOS 7.1, tvOS 14.2, *)
+@available(macOS 11.0, iOS 14.2, watchOS 7.1, tvOS 14.2, *)
 extension Network.NWPath.UnsatisfiedReason : Swift.Hashable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWParameters.ServiceClass : Swift.Equatable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWParameters.ServiceClass : Swift.Hashable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWParameters.MultipathServiceType : Swift.Equatable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWParameters.MultipathServiceType : Swift.Hashable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWParameters.ExpiredDNSBehavior : Swift.Equatable {}
-@available(OSX 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
+@available(macOS 10.14, iOS 12.0, watchOS 5.0, tvOS 12.0, *)
 extension Network.NWParameters.ExpiredDNSBehavior : Swift.Hashable {}

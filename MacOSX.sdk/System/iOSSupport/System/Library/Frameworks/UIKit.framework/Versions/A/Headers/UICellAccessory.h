@@ -195,7 +195,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0))
 @property (nonatomic) BOOL maintainsFixedSize;
 
 /// Allows customizing the relative position of the accessory amongst any other accessories displayed on the same edge.
-/// The default is to insert the acccessory at a position closest to the inside of the cell.
+/// The default is to insert the accessory at a position closest to the inside of the cell.
 @property (nonatomic, copy, null_resettable) UICellAccessoryPosition position;
 
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;

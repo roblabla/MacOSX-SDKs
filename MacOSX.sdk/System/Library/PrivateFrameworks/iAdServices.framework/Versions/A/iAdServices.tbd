@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           256F1A93-F0D2-35BB-A311-D7A2358CE22E
+    value:           D679ECF2-6B23-30CA-8E0C-61A630893BE9
   - target:          x86_64-maccatalyst
-    value:           256F1A93-F0D2-35BB-A311-D7A2358CE22E
+    value:           D679ECF2-6B23-30CA-8E0C-61A630893BE9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84271F6F-508A-3DFC-933C-1753CBE5CA95
+    value:           891A44B5-7F70-38A8-A425-A12B9A5325FF
   - target:          arm64e-maccatalyst
-    value:           84271F6F-508A-3DFC-933C-1753CBE5CA95
+    value:           891A44B5-7F70-38A8-A425-A12B9A5325FF
 install-name:    '/System/Library/PrivateFrameworks/iAdServices.framework/Versions/A/iAdServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

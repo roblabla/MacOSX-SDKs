@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           254E057B-DBCA-3EC8-8EA7-F9E38DA213BF
+    value:           0F24C56E-16AD-32ED-B3F2-9B6423B2FD60
   - target:          x86_64-maccatalyst
-    value:           254E057B-DBCA-3EC8-8EA7-F9E38DA213BF
+    value:           0F24C56E-16AD-32ED-B3F2-9B6423B2FD60
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DBDA9843-4F18-3E7A-A978-5C899105901B
+    value:           1AB6F5C1-DBAB-37BB-ABF3-B91206EA6F6E
   - target:          arm64e-maccatalyst
-    value:           DBDA9843-4F18-3E7A-A978-5C899105901B
+    value:           1AB6F5C1-DBAB-37BB-ABF3-B91206EA6F6E
 install-name:    '/System/Library/PrivateFrameworks/Futhark.framework/Versions/A/Futhark'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9B4AC596-C008-3D55-AC18-5F89E7306E06
+    value:           CF996AD1-D25E-3D58-A75E-6651F15CC95B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9C1E7BE7-9B0E-3FFA-8DC0-D0DF5BE6E316
+    value:           2351EF13-51CA-3194-8006-9EB02B675383
 install-name:    '/System/Library/PrivateFrameworks/HelpData.framework/Versions/A/HelpData'
-current-version: 200
+current-version: 201
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DDMAppleConnectEnvironmentAssetKey, _DDMAppleConnectEnvironmentContentKey, 

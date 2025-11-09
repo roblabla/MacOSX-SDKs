@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           93518490-429F-3E31-8344-15D479C2F4CE
+    value:           65D66FF8-F361-31FD-9970-1798B9D43DBB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5D42A3EB-F109-386B-BA75-5F72E264A3B9
+    value:           071FD2DE-D87C-3F71-B719-4D54A9B6C0BD
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox'
-current-version: 1060.4
+current-version: 1061.9
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon

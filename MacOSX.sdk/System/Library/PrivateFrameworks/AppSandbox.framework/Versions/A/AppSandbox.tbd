@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5760AAA3-6869-3D6C-BB76-C3012D459C4C
+    value:           1BD35E7C-F386-3FC1-9087-F3AA449514A6
   - target:          x86_64-maccatalyst
-    value:           5760AAA3-6869-3D6C-BB76-C3012D459C4C
+    value:           1BD35E7C-F386-3FC1-9087-F3AA449514A6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           196EA222-6FB3-31D4-A6A1-1527E8F3E3D6
+    value:           FE495B15-E72D-3CE9-A548-E91A0375441C
   - target:          arm64e-maccatalyst
-    value:           196EA222-6FB3-31D4-A6A1-1527E8F3E3D6
+    value:           FE495B15-E72D-3CE9-A548-E91A0375441C
 install-name:    '/System/Library/PrivateFrameworks/AppSandbox.framework/Versions/A/AppSandbox'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

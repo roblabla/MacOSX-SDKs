@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2737F926-6EEC-3C74-8C07-6D3D3CE92512
+    value:           76C05FCA-A949-31CF-B1FC-F6DB28616E44
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5B68B67A-48D1-3FE7-9992-55B459AFD416
+    value:           D260ADE4-6CA3-313B-B395-386547E91B9C
 install-name:    '/System/Library/Frameworks/SpriteKit.framework/Versions/A/SpriteKit'
-current-version: 43
+current-version: 45
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _SKComponentRGBABlack, _SKComponentRGBABlue, _SKComponentRGBAClear, 
                        _SKComponentRGBAGreen, _SKComponentRGBARed, _SKComponentRGBAWhite, 
                        _SKGLPrintError, _SKGLPrintFramebufferStatus, _SKGLPrintState, 

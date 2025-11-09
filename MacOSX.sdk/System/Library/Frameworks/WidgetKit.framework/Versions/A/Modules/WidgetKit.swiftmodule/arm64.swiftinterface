@@ -1,8 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target arm64e-apple-macos11.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name WidgetKit
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target arm64e-apple-macos11.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name WidgetKit
 import Combine
-import CoreVideo
 import Foundation
 import Intents
 import Swift
@@ -10,7 +9,7 @@ import SwiftUI
 @_exported import WidgetKit
 import os.log
 import os
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct WidgetInfo {
@@ -18,21 +17,21 @@ public struct WidgetInfo {
   public let family: WidgetKit.WidgetFamily
   public let kind: Swift.String
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension WidgetInfo : Swift.Identifiable, Swift.Hashable, Swift.Equatable {
   public var id: WidgetKit.WidgetInfo {
     get
   }
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: WidgetKit.WidgetInfo, b: WidgetKit.WidgetInfo) -> Swift.Bool
   public typealias ID = WidgetKit.WidgetInfo
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
-  public static func == (a: WidgetKit.WidgetInfo, b: WidgetKit.WidgetInfo) -> Swift.Bool
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension WidgetInfo : Swift.CustomDebugStringConvertible {
@@ -40,7 +39,7 @@ extension WidgetInfo : Swift.CustomDebugStringConvertible {
     get
   }
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct StaticConfiguration<Content> : SwiftUI.WidgetConfiguration where Content : SwiftUI.View {
@@ -49,13 +48,13 @@ public struct StaticConfiguration<Content> : SwiftUI.WidgetConfiguration where C
   }
   public typealias Body = @_opaqueReturnTypeOf("$s9WidgetKit19StaticConfigurationV4bodyQrvp", 0) 🦸<Content>
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension StaticConfiguration {
   public init<Provider>(kind: Swift.String, provider: Provider, content: @escaping (Provider.Entry) -> Content) where Provider : WidgetKit.TimelineProvider
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct WidgetPreviewContext : SwiftUI.PreviewContext {
@@ -64,7 +63,7 @@ public struct WidgetPreviewContext : SwiftUI.PreviewContext {
   }
   public init(family: WidgetKit.WidgetFamily)
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct TimelineProviderContext {
@@ -81,29 +80,29 @@ public struct TimelineProviderContext {
   public let isPreview: Swift.Bool
   public let displaySize: CoreGraphics.CGSize
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct TimelineEntryRelevance : Swift.Codable, Swift.Hashable {
   public var score: Swift.Float
   public var duration: Foundation.TimeInterval
   public init(score: Swift.Float, duration: Foundation.TimeInterval = 0.0)
-  public init(from decoder: Swift.Decoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: WidgetKit.TimelineEntryRelevance, b: WidgetKit.TimelineEntryRelevance) -> Swift.Bool
   public func encode(to encoder: Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
-  public static func == (a: WidgetKit.TimelineEntryRelevance, b: WidgetKit.TimelineEntryRelevance) -> Swift.Bool
+  public init(from decoder: Swift.Decoder) throws
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol TimelineEntry {
   var date: Foundation.Date { get }
   var relevance: WidgetKit.TimelineEntryRelevance? { get }
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension TimelineEntry {
@@ -111,7 +110,7 @@ extension TimelineEntry {
     get
   }
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct TimelineReloadPolicy : Swift.Equatable {
@@ -120,7 +119,7 @@ public struct TimelineReloadPolicy : Swift.Equatable {
   public static func after(_ date: Foundation.Date) -> WidgetKit.TimelineReloadPolicy
   public static func == (a: WidgetKit.TimelineReloadPolicy, b: WidgetKit.TimelineReloadPolicy) -> Swift.Bool
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct Timeline<EntryType> where EntryType : WidgetKit.TimelineEntry {
@@ -128,7 +127,7 @@ public struct Timeline<EntryType> where EntryType : WidgetKit.TimelineEntry {
   public let policy: WidgetKit.TimelineReloadPolicy
   public init(entries: [EntryType], policy: WidgetKit.TimelineReloadPolicy)
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol TimelineProvider {
@@ -138,7 +137,7 @@ public protocol TimelineProvider {
   func getSnapshot(in context: Self.Context, completion: @escaping (Self.Entry) -> Swift.Void)
   func getTimeline(in context: Self.Context, completion: @escaping (WidgetKit.Timeline<Self.Entry>) -> Swift.Void)
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol IntentTimelineProvider {
@@ -149,7 +148,7 @@ public protocol IntentTimelineProvider {
   func getSnapshot(for configuration: Self.Intent, in context: Self.Context, completion: @escaping (Self.Entry) -> Swift.Void)
   func getTimeline(for configuration: Self.Intent, in context: Self.Context, completion: @escaping (WidgetKit.Timeline<Self.Entry>) -> Swift.Void)
 }
-@_hasMissingDesignatedInitializers @available(iOS 14.0, OSX 11, *)
+@_hasMissingDesignatedInitializers @available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public class WidgetCenter {
@@ -163,7 +162,7 @@ public class WidgetCenter {
   public func reloadAllTimelines()
   @objc deinit
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
@@ -171,18 +170,18 @@ extension View {
   
 }
 extension Widget {
-  @available(iOS 14.0, OSX 11, *)
+  @available(iOS 14.0, macOS 11, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public static func main()
 }
 extension WidgetBundle {
-  @available(iOS 14.0, OSX 11, *)
+  @available(iOS 14.0, macOS 11, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public static func main()
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension EnvironmentValues {
@@ -190,7 +189,7 @@ extension EnvironmentValues {
     get
   }
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public enum WidgetFamily : Swift.Int, Swift.RawRepresentable, Swift.CustomDebugStringConvertible, Swift.CustomStringConvertible {
@@ -203,18 +202,16 @@ public enum WidgetFamily : Swift.Int, Swift.RawRepresentable, Swift.CustomDebugS
   public var description: Swift.String {
     get
   }
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct _ClockHandRotationEffect : SwiftUI.ViewModifier, SwiftUI._ArchivableViewModifier {
-  @available(*, deprecated, message: "Only remains to not break bincompat")
-  public static func resynchronize()
   public enum Period {
     case hourHand
     case minuteHand
@@ -228,13 +225,13 @@ public struct _ClockHandRotationEffect : SwiftUI.ViewModifier, SwiftUI._Archivab
   public typealias Body = @_opaqueReturnTypeOf("$s9WidgetKit24_ClockHandRotationEffectV4body7contentQr7SwiftUI21_ViewModifier_ContentVyACG_tF", 0) 🦸
 }
 extension View {
-  @available(iOS 14.0, OSX 11, *)
+  @available(iOS 14.0, macOS 11, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   public func _clockHandRotationEffect(_ period: WidgetKit._ClockHandRotationEffect.Period, in timeZone: Foundation.TimeZone, anchor: SwiftUI.UnitPoint = .center) -> some SwiftUI.View
   
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension WidgetConfiguration {
@@ -257,7 +254,7 @@ extension WidgetConfiguration {
   public func onBackgroundURLSessionEvents(matching matchingBlock: ((Swift.String) -> Swift.Bool)? = nil, _ urlSessionEvent: @escaping ((Swift.String, @escaping () -> Swift.Void) -> Swift.Void)) -> some SwiftUI.WidgetConfiguration
   
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct IntentConfiguration<Intent, Content> : SwiftUI.WidgetConfiguration where Intent : Intents.INIntent, Content : SwiftUI.View {
@@ -266,17 +263,17 @@ public struct IntentConfiguration<Intent, Content> : SwiftUI.WidgetConfiguration
   }
   public typealias Body = @_opaqueReturnTypeOf("$s9WidgetKit19IntentConfigurationV4bodyQrvp", 0) 🦸<Intent, Content>
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension IntentConfiguration {
   public init<Provider>(kind: Swift.String, intent: Intent.Type, provider: Provider, content: @escaping (Provider.Entry) -> Content) where Intent == Provider.Intent, Provider : WidgetKit.IntentTimelineProvider
 }
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension WidgetKit.WidgetFamily : Swift.Equatable {}
-@available(iOS 14.0, OSX 11, *)
+@available(iOS 14.0, macOS 11, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension WidgetKit.WidgetFamily : Swift.Hashable {}

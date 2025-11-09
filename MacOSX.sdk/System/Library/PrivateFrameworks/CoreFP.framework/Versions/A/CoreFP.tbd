@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C7F1C7A1-9EB8-36FC-A2D6-A3A2AF1E0DA5
+    value:           5E70B176-FAA1-3C0A-A7BF-7A6D73ACFA5C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6AE44439-E8CC-30E5-892D-42C914DB3FC7
+    value:           1964B095-E1EF-3E28-8A68-D8C20B063C1F
 flags:           [ not_app_extension_safe ]
 install-name:    '/System/Library/PrivateFrameworks/CoreFP.framework/CoreFP'
-current-version: 2.18.12
+current-version: 2.19.8
 compatibility-version: 2.2.19
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

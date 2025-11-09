@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A491E24B-6F6B-383D-996E-45D45CDE3F3C
+    value:           2AC376DF-8851-39AE-A6BC-19484F1D8BA4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           618C8BC8-F984-37CF-A7BD-589F58CCB2D3
+    value:           5E5A1EA1-0353-3A9D-A09A-724E7A6CD759
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdateMacController.framework/Versions/A/SoftwareUpdateMacController'
 current-version: 0
 compatibility-version: 0

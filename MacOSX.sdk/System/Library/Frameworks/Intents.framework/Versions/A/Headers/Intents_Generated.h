@@ -2,7 +2,7 @@
 //  Intents_Generated.h
 //  Intents
 //
-//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INAccountType.h>
@@ -30,6 +30,7 @@
 #import <Intents/INCallCapabilityResolutionResult.h>
 #import <Intents/INCallDestinationType.h>
 #import <Intents/INCallDestinationTypeResolutionResult.h>
+#import <Intents/INCallGroup.h>
 #import <Intents/INCallRecord.h>
 #import <Intents/INCallRecordFilter.h>
 #import <Intents/INCallRecordResolutionResult.h>

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8795DDB3-0028-30E9-BEFC-6B8DFFA59CEB
+    value:           C71A802D-0A01-3C81-BB68-771CCDB3FB9C
   - target:          x86_64-maccatalyst
-    value:           8795DDB3-0028-30E9-BEFC-6B8DFFA59CEB
+    value:           C71A802D-0A01-3C81-BB68-771CCDB3FB9C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           670DA6DE-15DF-3434-9B3D-89DF079916D5
+    value:           1EDC0C19-937F-3256-AA8A-09743F36F519
   - target:          arm64e-maccatalyst
-    value:           670DA6DE-15DF-3434-9B3D-89DF079916D5
+    value:           1EDC0C19-937F-3256-AA8A-09743F36F519
 install-name:    '/System/Library/PrivateFrameworks/CalendarPersistence.framework/Versions/A/CalendarPersistence'
-current-version: 1071.3.2
+current-version: 1071.4.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -310,14 +310,21 @@ exports:
                        _kCalMDItemCompletionDate, _kCalMDItemFullDay, _kCalMDItemRecurrenceID, 
                        _kCalMDItemUID, _kCalUserAlarmNotificationActionIdentifierConference, 
                        _kCalUserAlarmNotificationActionIdentifierDirections, _kCalUserAlarmNotificationActionIdentifierMailOrganizer, 
-                       _kCalUserAlarmNotificationActionIdentifierSnooze, _kICSSTR_alternate_time_proposal_param, 
-                       _organizerFor, _popFromArray, _popNFromArray, _principalPathKey, 
-                       _recurrenceFor, _setIsMainApp, _setViewsTimeZone, _shortCDIdentifier, 
-                       _shortenCDIdentifier, _stringForCommitStatus, _stringForRefreshType, 
-                       _tempAttachmentName, _utcTimeZone, _vcal_property_compare, 
-                       _vcal_property_list, _vcal_property_list_num, _vcal_token_compare, 
-                       _vcal_tokens_list, _vcal_tokens_list_num, _viewsTimeZone, 
-                       _whitespaceAndNewlineCharacterSet ]
+                       _kCalUserAlarmNotificationActionIdentifierSnooze, _kCalUserAlarmNotificationActionIdentifierSnooze15Minutes, 
+                       _kCalUserAlarmNotificationActionIdentifierSnooze1Hour, _kCalUserAlarmNotificationActionIdentifierSnooze30Minutes, 
+                       _kCalUserAlarmNotificationActionIdentifierSnooze5Minutes, 
+                       _kCalUserAlarmNotificationActionIdentifierSnoozeUntil15MinutesBefore, 
+                       _kCalUserAlarmNotificationActionIdentifierSnoozeUntil30MinutesBefore, 
+                       _kCalUserAlarmNotificationActionIdentifierSnoozeUntil5MinutesBefore, 
+                       _kCalUserAlarmNotificationActionIdentifierSnoozeUntilEnd, 
+                       _kCalUserAlarmNotificationActionIdentifierSnoozeUntilStart, 
+                       _kICSSTR_alternate_time_proposal_param, _organizerFor, _popFromArray, 
+                       _popNFromArray, _principalPathKey, _recurrenceFor, _setIsMainApp, 
+                       _setViewsTimeZone, _shortCDIdentifier, _shortenCDIdentifier, 
+                       _stringForCommitStatus, _stringForRefreshType, _tempAttachmentName, 
+                       _utcTimeZone, _vcal_property_compare, _vcal_property_list, 
+                       _vcal_property_list_num, _vcal_token_compare, _vcal_tokens_list, 
+                       _vcal_tokens_list_num, _viewsTimeZone, _whitespaceAndNewlineCharacterSet ]
     objc-classes:    [ AlarmIdChangeTracker, AttendeeIdChangeTracker, CALAbstractEntity, 
                        CALAddress, CALApplePropertiesFilter, CALAttachment, CALBridgevCal, 
                        CALBusyTimeOccurrence, CALCancelFilter, CALChainedFilter, 
@@ -435,28 +442,28 @@ exports:
                        CalPositiveAndNegativeCache, CalPreviousController, CalPropFindSynchronousTask, 
                        CalPublisherManager, CalRemoteCalendarSource, CalRemoteToLocalMap, 
                        CalServerToLocalMigration, CalSession, CalSessionPool, CalSessionStateCache, 
-                       CalSingleSynchronousTask, CalSpotlight, CalSubscriptionCalendarSource, 
+                       CalSingleSynchronousTask, CalSnoozeAction, CalSpotlight, CalSubscriptionCalendarSource, 
                        CalSubscriptionOperation, CalSubscriptionSession, CalSuggestedEventMonitor, 
                        CalSyncClearifier, CalTaskManager, CalTruthFileCreateDirectory, 
                        CalTruthFileDataWrite, CalTruthFileICSWrite, CalTruthFileOperation, 
                        CalTruthFileRemove, CalTruthFileStore, CalUnrecognizedICSHelper, 
                        CalUserAlarmNotification, CalUserNotificationCenter, CalUserNotificationCenterCache, 
                        CalUserNotificationCenterHelper, CalUserNotificationCenterListener, 
-                       CalValidationError, CalVirtualSource, CalWidgetUpdateMonitor, 
-                       CalendarIdChangeTracker, CalendarItemMigratePlan, CalendarModelProtocol_Shared, 
-                       CalendarStore, CaliMIPCancelOperation, CaliMIPOperation, CaliMIPPersistDetailsOperation, 
-                       CaliMIPReplyOperation, CaliMIPRequestOperation, CaliMIPSession, 
-                       CaliTIPHandler, CaliTIPMessage, CoreAlarm, CoreAlarmOccurrence, 
-                       CoreAlarmOccurrenceTrigger, CoreAlarmTrigger, CoreAlarmsFilters, 
-                       CoreAttendeeStateFilter, CoreCalendar, CoreCalendarSource, 
-                       CoreCalendarsManager, CoreDisplayAlarm, CoreDisplayAlarmOccurrence, 
-                       CoreEvent, CoreEventOccurrence, CoreMailAlarm, CoreMailAlarmOccurrence, 
-                       CoreProcAlarm, CoreProcAlarmOccurrence, CoreRecurrenceRule, 
-                       CoreSoundAlarm, CoreSoundAlarmOccurrence, CoreStructuredLocation, 
-                       EKProtocolParticipant_Shared, EntityIdChangeTracker, EventIdChangeTracker, 
-                       EventOccurrenceModelProtocol_Shared, IssueCounter, LocalCalendarDetails, 
-                       OccurrenceModelProtocol_Shared, OurOwnMutableNSDate, PublicationIdChangeTracker, 
-                       RBNode, TaskIdChangeTracker ]
+                       CalUserNotificationLogs, CalValidationError, CalVirtualSource, 
+                       CalWidgetUpdateMonitor, CalendarIdChangeTracker, CalendarItemMigratePlan, 
+                       CalendarModelProtocol_Shared, CalendarStore, CaliMIPCancelOperation, 
+                       CaliMIPOperation, CaliMIPPersistDetailsOperation, CaliMIPReplyOperation, 
+                       CaliMIPRequestOperation, CaliMIPSession, CaliTIPHandler, CaliTIPMessage, 
+                       CoreAlarm, CoreAlarmOccurrence, CoreAlarmOccurrenceTrigger, 
+                       CoreAlarmTrigger, CoreAlarmsFilters, CoreAttendeeStateFilter, 
+                       CoreCalendar, CoreCalendarSource, CoreCalendarsManager, CoreDisplayAlarm, 
+                       CoreDisplayAlarmOccurrence, CoreEvent, CoreEventOccurrence, 
+                       CoreMailAlarm, CoreMailAlarmOccurrence, CoreProcAlarm, CoreProcAlarmOccurrence, 
+                       CoreRecurrenceRule, CoreSoundAlarm, CoreSoundAlarmOccurrence, 
+                       CoreStructuredLocation, EKProtocolParticipant_Shared, EntityIdChangeTracker, 
+                       EventIdChangeTracker, EventOccurrenceModelProtocol_Shared, 
+                       IssueCounter, LocalCalendarDetails, OccurrenceModelProtocol_Shared, 
+                       OurOwnMutableNSDate, PublicationIdChangeTracker, RBNode, TaskIdChangeTracker ]
     objc-ivars:      [ CALAbstractEntity._changelist, CALAbstractEntity._commitcount, 
                        CALAbstractEntity._originRepository, CALAbstractEntity._privateID, 
                        CALAbstractEntity._properties, CALAbstractEntity._status, 

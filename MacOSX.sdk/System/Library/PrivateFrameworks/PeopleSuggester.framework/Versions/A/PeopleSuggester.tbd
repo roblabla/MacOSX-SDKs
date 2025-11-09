@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6A59E114-1CF5-373C-846B-65310DD4DBA9
+    value:           3D17A03B-6C68-3F2E-851D-2F6A32E52954
   - target:          x86_64-maccatalyst
-    value:           6A59E114-1CF5-373C-846B-65310DD4DBA9
+    value:           3D17A03B-6C68-3F2E-851D-2F6A32E52954
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           357AE9AD-F8B5-34AD-866E-8A390C15DB70
+    value:           FC048A05-533F-3187-85A6-78E844854AA9
   - target:          arm64e-maccatalyst
-    value:           357AE9AD-F8B5-34AD-866E-8A390C15DB70
+    value:           FC048A05-533F-3187-85A6-78E844854AA9
 install-name:    '/System/Library/PrivateFrameworks/PeopleSuggester.framework/Versions/A/PeopleSuggester'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -47,18 +47,19 @@ exports:
                        _PSConstants, _PSContactEmbeddingDataCollectionUtilities, 
                        _PSContactEmbeddingUtilities, _PSContactFillerDataCollectionStatistics, 
                        _PSContactFillerDataCollectionUtilities, _PSContactFillerNormalizationConstants, 
-                       _PSContactFillerRecipient, _PSContactResolver, _PSContactSuggester, 
-                       _PSContactSuggestion, _PSContactSuggestionHandleAndApp, _PSEnsembleModel, 
-                       _PSFamilyMLModel, _PSFamilyMLPredictionTask, _PSFamilyUtilities, 
-                       _PSFeaturizedBehaviorRule, _PSFeedback, _PSFeedbackAction, 
-                       _PSFeedbackUtils, _PSHandleRanker, _PSHeuristics, _PSIMCoreUtils, 
-                       _PSInteractionAndContactMonitor, _PSInteractionStoreUtils, 
-                       _PSKNNModel, _PSKNNeighbor, _PSLogging, _PSMailUtils, _PSMapsFeedback, 
-                       _PSMapsFeedbackAction, _PSMapsPredictionContext, _PSMapsSuggester, 
-                       _PSMessagesPinningFeedback, _PSMessagesPinningSuggester, _PSMessagesPinningSuggestion, 
-                       _PSMessagesPinningUtilities, _PSMessagesZkwFeedback, _PSPersonalizationEvaluation, 
-                       _PSPhotoSuggestions, _PSPhotoUtils, _PSPredictionContext, 
-                       _PSProximityBooster, _PSRecipient, _PSRuleMiningModel, _PSRuleOverlapFeedback, 
+                       _PSContactFillerRecipient, _PSContactPrior, _PSContactResolver, 
+                       _PSContactSuggester, _PSContactSuggestion, _PSContactSuggestionHandleAndApp, 
+                       _PSEnsembleModel, _PSFamilyMLModel, _PSFamilyMLPredictionTask, 
+                       _PSFamilyUtilities, _PSFeatureStatistics, _PSFeaturizedBehaviorRule, 
+                       _PSFeedback, _PSFeedbackAction, _PSFeedbackUtils, _PSHandleRanker, 
+                       _PSHeuristics, _PSIMCoreUtils, _PSInteractionAndContactMonitor, 
+                       _PSInteractionStoreUtils, _PSKNNModel, _PSKNNeighbor, _PSLogging, 
+                       _PSMailUtils, _PSMapsFeedback, _PSMapsFeedbackAction, _PSMapsPredictionContext, 
+                       _PSMapsSuggester, _PSMessagesPinningFeedback, _PSMessagesPinningSuggester, 
+                       _PSMessagesPinningSuggestion, _PSMessagesPinningUtilities, 
+                       _PSMessagesZkwFeedback, _PSPersonalizationEvaluation, _PSPhotoSuggestions, 
+                       _PSPhotoUtils, _PSPredictionContext, _PSProximityBooster, 
+                       _PSRecipient, _PSRuleMiningModel, _PSRuleOverlapFeedback, 
                        _PSRuleRankingMLModel, _PSShareSheetSuggestLessFeedback, _PSSiriHandleRanker, 
                        _PSSiriHandleRankerPredictionContext, _PSSiriNLLogger, _PSSiriNLRankerUtilities, 
                        _PSSuggester, _PSSuggesterConfiguration, _PSSuggestion, _PSSuggestionProxy, 

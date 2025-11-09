@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CECEC60F-3A7E-3AC4-90AD-84F52841C8C1
+    value:           EDB9414E-4B77-3A4E-A8B6-E3B5176B5272
   - target:          x86_64-maccatalyst
-    value:           CECEC60F-3A7E-3AC4-90AD-84F52841C8C1
+    value:           EDB9414E-4B77-3A4E-A8B6-E3B5176B5272
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BD79536E-42D8-333E-8FBD-C6B6885E9147
+    value:           F9AED845-BB54-3194-8554-7727CC105DEC
   - target:          arm64e-maccatalyst
-    value:           BD79536E-42D8-333E-8FBD-C6B6885E9147
+    value:           F9AED845-BB54-3194-8554-7727CC105DEC
 install-name:    '/System/Library/PrivateFrameworks/SDAPI.framework/Versions/A/SDAPI'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

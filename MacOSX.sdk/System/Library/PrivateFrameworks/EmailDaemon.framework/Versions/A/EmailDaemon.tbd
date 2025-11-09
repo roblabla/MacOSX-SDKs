@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0814E32F-AC73-3710-85FB-B93DFCDC6B4A
+    value:           A329B0F9-BA60-3176-86A1-43C525627779
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C1A9AEB4-CDD7-3AA3-9DB0-03EA1FC654EB
+    value:           DF69D328-5254-316A-A3D9-EC9AAFEF788D
 install-name:    '/System/Library/PrivateFrameworks/EmailDaemon.framework/Versions/A/EmailDaemon'
-current-version: 3654.40
+current-version: 3654.80
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _EDClientStateForegroundStateDidChangeKeyIsForeground, _EDClientStateForegroundStateDidChangeNotification, 

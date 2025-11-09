@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           4F63CF08-5AC6-3FCA-B29D-C4FC54C366E4
+    value:           6EEBEBEE-44E4-3E6E-A788-B920E10F608D
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           54A73F23-49D6-36D3-84D9-3D6493A18C77
+    value:           AE745702-DED2-350E-81B3-79A9E327AE45
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftUIKit.dylib'
-current-version: 19
+current-version: 4202
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
@@ -745,6 +745,64 @@ exports:
                        '_$s5UIKit28NSDiffableDataSourceSnapshotV8moveItem_06beforeG0yq__q_tF', 
                        '_$s5UIKit28NSDiffableDataSourceSnapshotVACyxq_GycfC', '_$s5UIKit28NSDiffableDataSourceSnapshotVMa', 
                        '_$s5UIKit28NSDiffableDataSourceSnapshotVMn', '_$s5UIKit28NSDiffableDataSourceSnapshotVyxq_Gs21_ObjectiveCBridgeableAAMc', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV03topC10VisibilityAC0F0OvM', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV03topC10VisibilityAC0F0Ovg', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV03topC10VisibilityAC0F0OvpMV', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV03topC10VisibilityAC0F0Ovs', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV03topC6InsetsSo017NSDirectionalEdgeF0VvM', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV03topC6InsetsSo017NSDirectionalEdgeF0Vvg', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV03topC6InsetsSo017NSDirectionalEdgeF0VvpMV', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV03topC6InsetsSo017NSDirectionalEdgeF0Vvs', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV06bottomC10VisibilityAC0F0OvM', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV06bottomC10VisibilityAC0F0Ovg', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV06bottomC10VisibilityAC0F0OvpMV', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV06bottomC10VisibilityAC0F0Ovs', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV06bottomC6InsetsSo017NSDirectionalEdgeF0VvM', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV06bottomC6InsetsSo017NSDirectionalEdgeF0Vvg', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV06bottomC6InsetsSo017NSDirectionalEdgeF0VvpMV', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV06bottomC6InsetsSo017NSDirectionalEdgeF0Vvs', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV10VisibilityO2eeoiySbAE_AEtFZ', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV10VisibilityO4hash4intoys6HasherVz_tF', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV10VisibilityO6hiddenyA2EmFWC', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV10VisibilityO7visibleyA2EmFWC', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV10VisibilityO9automaticyA2EmFWC', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV10VisibilityO9hashValueSivg', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV10VisibilityO9hashValueSivpMV', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV10VisibilityOMa', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV10VisibilityOMn', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV10VisibilityON', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV10VisibilityOSHAAMc', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV10VisibilityOSQAAMc', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV11descriptionSSvg', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV11descriptionSSvpMV', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV12customMirrors0F0Vvg', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV12customMirrors0F0VvpMV', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV14listAppearanceAcA022UICollectionLayoutListD0V0F0O_tcfC', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV15automaticInsetsSo017NSDirectionalEdgeF0VvgZ', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV16debugDescriptionSSvg', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV16debugDescriptionSSvpMV', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV19_bridgeToObjectiveCSoABCyF', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV22multipleSelectionColorSo7UIColorCvM', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV22multipleSelectionColorSo7UIColorCvg', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV22multipleSelectionColorSo7UIColorCvpMV', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV22multipleSelectionColorSo7UIColorCvs', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV26_forceBridgeFromObjectiveC_6resultySoABC_ACSgztFZ', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV2eeoiySbAC_ACtFZ', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV34_conditionallyBridgeFromObjectiveC_6resultSbSoABC_ACSgztFZ', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV36_unconditionallyBridgeFromObjectiveCyACSoABCSgFZ', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV4hash4intoys6HasherVz_tF', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV5colorSo7UIColorCvM', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV5colorSo7UIColorCvg', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV5colorSo7UIColorCvpMV', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV5colorSo7UIColorCvs', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV9hashValueSivg', 
+                       '_$s5UIKit28UIListSeparatorConfigurationV9hashValueSivpMV', 
+                       '_$s5UIKit28UIListSeparatorConfigurationVMa', '_$s5UIKit28UIListSeparatorConfigurationVMn', 
+                       '_$s5UIKit28UIListSeparatorConfigurationVN', '_$s5UIKit28UIListSeparatorConfigurationVSHAAMc', 
+                       '_$s5UIKit28UIListSeparatorConfigurationVSQAAMc', '_$s5UIKit28UIListSeparatorConfigurationVs17CustomReflectableAAMc', 
+                       '_$s5UIKit28UIListSeparatorConfigurationVs21_ObjectiveCBridgeableAAMc', 
+                       '_$s5UIKit28UIListSeparatorConfigurationVs23CustomStringConvertibleAAMc', 
+                       '_$s5UIKit28UIListSeparatorConfigurationVs28CustomDebugStringConvertibleAAMc', 
                        '_$s5UIKit29UIDeviceOrientationIsPortraitySbSo0bC0VF', '_$s5UIKit29UIIndirectScribbleInteractionC17isHandlingWritingSbvgTj', 
                        '_$s5UIKit29UIIndirectScribbleInteractionC17isHandlingWritingSbvgTq', 
                        '_$s5UIKit29UIIndirectScribbleInteractionC17isHandlingWritingSbvpMV', 
@@ -960,6 +1018,10 @@ exports:
                        '_$s5UIKit35UICollectionLayoutListConfigurationV020trailingSwipeActionsE8ProviderSo07UISwipehE0CSg10Foundation9IndexPathVcSgvg', 
                        '_$s5UIKit35UICollectionLayoutListConfigurationV020trailingSwipeActionsE8ProviderSo07UISwipehE0CSg10Foundation9IndexPathVcSgvpMV', 
                        '_$s5UIKit35UICollectionLayoutListConfigurationV020trailingSwipeActionsE8ProviderSo07UISwipehE0CSg10Foundation9IndexPathVcSgvs', 
+                       '_$s5UIKit35UICollectionLayoutListConfigurationV09separatorE0AA015UIListSeparatorE0VvM', 
+                       '_$s5UIKit35UICollectionLayoutListConfigurationV09separatorE0AA015UIListSeparatorE0Vvg', 
+                       '_$s5UIKit35UICollectionLayoutListConfigurationV09separatorE0AA015UIListSeparatorE0VvpMV', 
+                       '_$s5UIKit35UICollectionLayoutListConfigurationV09separatorE0AA015UIListSeparatorE0Vvs', 
                        '_$s5UIKit35UICollectionLayoutListConfigurationV10AppearanceO12insetGroupedyA2EmFWC', 
                        '_$s5UIKit35UICollectionLayoutListConfigurationV10AppearanceO12sidebarPlainyA2EmFWC', 
                        '_$s5UIKit35UICollectionLayoutListConfigurationV10AppearanceO2eeoiySbAE_AEtFZ', 
@@ -1016,6 +1078,10 @@ exports:
                        '_$s5UIKit35UICollectionLayoutListConfigurationV15showsSeparatorsSbvg', 
                        '_$s5UIKit35UICollectionLayoutListConfigurationV15showsSeparatorsSbvpMV', 
                        '_$s5UIKit35UICollectionLayoutListConfigurationV15showsSeparatorsSbvs', 
+                       '_$s5UIKit35UICollectionLayoutListConfigurationV20itemSeparatorHandlerAA06UIListgE0V10Foundation9IndexPathV_AFtcSgvM', 
+                       '_$s5UIKit35UICollectionLayoutListConfigurationV20itemSeparatorHandlerAA06UIListgE0V10Foundation9IndexPathV_AFtcSgvg', 
+                       '_$s5UIKit35UICollectionLayoutListConfigurationV20itemSeparatorHandlerAA06UIListgE0V10Foundation9IndexPathV_AFtcSgvpMV', 
+                       '_$s5UIKit35UICollectionLayoutListConfigurationV20itemSeparatorHandlerAA06UIListgE0V10Foundation9IndexPathV_AFtcSgvs', 
                        '_$s5UIKit35UICollectionLayoutListConfigurationVMa', '_$s5UIKit35UICollectionLayoutListConfigurationVMn', 
                        '_$s5UIKit35UICollectionLayoutListConfigurationVN', '_$s5UIKit37UIIndirectScribbleInteractionDelegateMp', 
                        '_$s5UIKit37UIIndirectScribbleInteractionDelegateP08indirectcD0_15frameForElementSo6CGRectVSo13UIInteraction_p_0I10IdentifierQztFTj', 

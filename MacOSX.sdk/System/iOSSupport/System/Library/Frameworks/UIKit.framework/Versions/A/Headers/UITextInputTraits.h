@@ -118,7 +118,7 @@ typedef NS_ENUM(NSInteger, UIKeyboardType) {
 // match to the requested type.
 //
 typedef NS_ENUM(NSInteger, UIKeyboardAppearance) {
-    UIKeyboardAppearanceDefault,          // Default apperance for the current input method.
+    UIKeyboardAppearanceDefault,          // Default appearance for the current input method.
     UIKeyboardAppearanceDark API_AVAILABLE(ios(7.0)),
     UIKeyboardAppearanceLight API_AVAILABLE(ios(7.0)),
     UIKeyboardAppearanceAlert = UIKeyboardAppearanceDark,  // Deprecated

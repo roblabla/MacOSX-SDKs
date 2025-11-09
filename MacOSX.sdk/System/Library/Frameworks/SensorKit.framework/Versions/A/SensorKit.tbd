@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B2C3D6C4-D0E6-3277-93C8-00A4466FCC70
+    value:           8EA9E8F5-32E3-32DF-ACB7-A5EED51B9713
   - target:          x86_64-maccatalyst
-    value:           B2C3D6C4-D0E6-3277-93C8-00A4466FCC70
+    value:           8EA9E8F5-32E3-32DF-ACB7-A5EED51B9713
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3E863909-6C2E-3087-AECA-331B21FB5EB9
+    value:           9150208E-7A01-3DFC-B650-2564A6E353B6
   - target:          arm64e-maccatalyst
-    value:           3E863909-6C2E-3087-AECA-331B21FB5EB9
+    value:           9150208E-7A01-3DFC-B650-2564A6E353B6
 install-name:    '/System/Library/Frameworks/SensorKit.framework/Versions/A/SensorKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SRAbsoluteTimeFromCFAbsoluteTime, _SRAbsoluteTimeFromContinuousTime, 
                        _SRAbsoluteTimeGetCurrent, _SRAbsoluteTimeGetOffsets, _SRAbsoluteTimeInitWithRemoteRTCOffset, 
@@ -43,7 +43,8 @@ exports:
                        _SRDeviceUsageCategoryUtilities, _SRDeviceUsageCategoryWeather, 
                        _SRErrorDomain, _SRGetAuthorizationStatusForBundleIdentifier, 
                        _SRIsDataCollectionEnabled, _SRIsRequiredOnboardingCompleted, 
-                       _SRKeyboardMetaInformationHeightKey, _SRKeyboardMetaInformationIdentifierKey, 
+                       _SRKeyboardMetaAppNameKey, _SRKeyboardMetaInformationHeightKey, 
+                       _SRKeyboardMetaInformationIdentifierKey, _SRKeyboardMetaInformationInputModesKey, 
                        _SRKeyboardMetaInformationOrientationKey, _SRKeyboardMetaInformationVersionKey, 
                        _SRKeyboardMetaInformationWidthKey, _SRKeyboardMetricPositionalDeleteToDeleteKey, 
                        _SRKeyboardMetricPositionalLongWordDownErrorDistanceKey, _SRKeyboardMetricPositionalLongWordTouchDownDownKey, 
@@ -75,22 +76,32 @@ exports:
                        _SRKeyboardMetricProbabilitySpaceTouchDownUpKey, _SRKeyboardMetricProbabilitySpaceUpErrorDistanceKey, 
                        _SRKeyboardMetricProbabilityTouchDownDownKey, _SRKeyboardMetricProbabilityTouchDownUpKey, 
                        _SRKeyboardMetricProbabilityTouchUpDownKey, _SRKeyboardMetricProbabilityUpErrorDistanceKey, 
-                       _SRKeyboardMetricScalarTotalAlteredWordsKey, _SRKeyboardMetricScalarTotalAutoCorrectionsKey, 
-                       _SRKeyboardMetricScalarTotalDeletesKey, _SRKeyboardMetricScalarTotalDragsKey, 
-                       _SRKeyboardMetricScalarTotalEmojiKey, _SRKeyboardMetricScalarTotalHitTestCorrectionsKey, 
-                       _SRKeyboardMetricScalarTotalInsertKeyCorrectionsKey, _SRKeyboardMetricScalarTotalNearKeyCorrectionsKey, 
-                       _SRKeyboardMetricScalarTotalPathLengthKey, _SRKeyboardMetricScalarTotalPathTimeKey, 
-                       _SRKeyboardMetricScalarTotalPathsKey, _SRKeyboardMetricScalarTotalRetroCorrectionsKey, 
-                       _SRKeyboardMetricScalarTotalSessionDurationKey, _SRKeyboardMetricScalarTotalSkipTouchCorrectionsKey, 
+                       _SRKeyboardMetricScalarEmojiBucketAngerKey, _SRKeyboardMetricScalarEmojiBucketAnxietyKey, 
+                       _SRKeyboardMetricScalarEmojiBucketConfusedKey, _SRKeyboardMetricScalarEmojiBucketFeelKey, 
+                       _SRKeyboardMetricScalarEmojiBucketLowEnergyKey, _SRKeyboardMetricScalarEmojiBucketPositiveKey, 
+                       _SRKeyboardMetricScalarEmojiBucketSadKey, _SRKeyboardMetricScalarEpisodeCountKey, 
+                       _SRKeyboardMetricScalarMidPathPauseKey, _SRKeyboardMetricScalarPathTypingSpeed, 
+                       _SRKeyboardMetricScalarTapTypingSpeedKey, _SRKeyboardMetricScalarTotalAlteredWordsKey, 
+                       _SRKeyboardMetricScalarTotalAutoCorrectionsKey, _SRKeyboardMetricScalarTotalDeletesKey, 
+                       _SRKeyboardMetricScalarTotalDragsKey, _SRKeyboardMetricScalarTotalEmojiKey, 
+                       _SRKeyboardMetricScalarTotalHitTestCorrectionsKey, _SRKeyboardMetricScalarTotalInsertKeyCorrectionsKey, 
+                       _SRKeyboardMetricScalarTotalNearKeyCorrectionsKey, _SRKeyboardMetricScalarTotalPathLengthKey, 
+                       _SRKeyboardMetricScalarTotalPathTimeKey, _SRKeyboardMetricScalarTotalPathsKey, 
+                       _SRKeyboardMetricScalarTotalRetroCorrectionsKey, _SRKeyboardMetricScalarTotalSessionDurationKey, 
+                       _SRKeyboardMetricScalarTotalSessionTypingDurationKey, _SRKeyboardMetricScalarTotalSkipTouchCorrectionsKey, 
                        _SRKeyboardMetricScalarTotalSpaceCorrectionsKey, _SRKeyboardMetricScalarTotalSubstitutionCorrectionsKey, 
                        _SRKeyboardMetricScalarTotalTapsKey, _SRKeyboardMetricScalarTotalTranspositionCorrectionsKey, 
-                       _SRKeyboardMetricScalarTotalWordsKey, _SRNotificationPreqUpdated, 
+                       _SRKeyboardMetricScalarTotalWordsKey, _SRKeyboardMetricScalarTypingPausesKey, 
+                       _SRKeyboardMetricScalarTypingSpeedKey, _SRKeyboardMetricScalarlWordBucketAbsolutistKey, 
+                       _SRKeyboardMetricScalarlWordBucketAngerKey, _SRKeyboardMetricScalarlWordBucketAnxietyKey, 
+                       _SRKeyboardMetricScalarlWordBucketDeathKey, _SRKeyboardMetricScalarlWordBucketDownKey, 
+                       _SRKeyboardMetricScalarlWordBucketFeelKey, _SRNotificationPreqUpdated, 
                        _SRNotificationResetDatastore, _SRNotificationSignificantTimeChange, 
                        _SRRemoveBundleFromPendingAuthorizations, _SRRequestAuthorizationForServices, 
                        _SRRequestAuthorizationForServicesWithBundle, _SRRequestAuthorizationWithBundleForServices, 
                        _SRRequestFirstRunOnBoarding, _SRRequiredAppIdentifier, _SRResetAllAuthorizations, 
                        _SRResetAuthorizationsForBundleWithCompletionHandler, _SRSensorAccelerometer, 
-                       _SRSensorAmbientLightSensor, _SRSensorDeletionRecordsSuffix, 
+                       _SRSensorAmbientLightSensor, _SRSensorBeddit, _SRSensorDeletionRecordsSuffix, 
                        _SRSensorDeviceUsageReport, _SRSensorECG, _SRSensorElevation, 
                        _SRSensorElevationPressure, _SRSensorFacialMetrics, _SRSensorFallStatistics, 
                        _SRSensorGyroscope, _SRSensorHeartRate, _SRSensorIdentifierAccelerometer, 
@@ -107,10 +118,12 @@ exports:
                        _SRSensorOdometerSuitability, _SRSensorOnWristDetailedState, 
                        _SRSensorOnWristState, _SRSensorPPG, _SRSensorPedometerData, 
                        _SRSensorPhoneUsageReport, _SRSensorRotationRate, _SRSensorSiriAudio, 
+                       _SRSensorSiriSoundDetection, _SRSensorSiriSpeechEmotion, _SRSensorSiriSpeechMetrics, 
                        _SRSensorSpeechMetrics, _SRSensorStrideCalibration, _SRSensorTelephonyAudio, 
-                       _SRSensorVisits, _SRSetDataCollectionEnabled, _SRSetRequiredOnboardingCompleted, 
-                       _SRShowAppsAndStudiesUsingSensorKit, _SRShowResearchData, 
-                       _SRShowStudyAuthorization, _SRStudyBundleIdPrefix ]
+                       _SRSensorTelephonySoundDetection, _SRSensorTelephonySpeechEmotion, 
+                       _SRSensorTelephonySpeechMetrics, _SRSensorVisits, _SRSetDataCollectionEnabled, 
+                       _SRSetRequiredOnboardingCompleted, _SRShowAppsAndStudiesUsingSensorKit, 
+                       _SRShowResearchData, _SRShowStudyAuthorization, _SRStudyBundleIdPrefix ]
     objc-classes:    [ SRAmbientLightSample, SRApplicationUsage, SRAuthExtensionContext, 
                        SRAuthHostExtensionContext, SRDebugInfoClient, SRDeletionRecord, 
                        SRDevice, SRDeviceUsageReport, SRError, SRFetchRequest, SRFetchResult, 

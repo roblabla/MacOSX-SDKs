@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target arm64e-apple-macos11.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftsimd -swift-version 5 -enforce-exclusivity=checked -O -module-name simd
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target arm64e-apple-macos11.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftsimd -swift-version 5 -enforce-exclusivity=checked -O -module-name simd
 import Darwin
 import Swift
 @_exported import simd
@@ -897,7 +897,7 @@ extension simd_float2x2 {
     return simd_transpose(self)
   }
   }
-  @available(OSX 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
+  @available(macOS 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
   @_transparent public var inverse: simd.simd_float2x2 {
     @_transparent get {
     return simd_inverse(self)
@@ -953,7 +953,7 @@ extension simd_float2x2 {
 }
 @available(swift, deprecated: 4, renamed: "simd_float2x2(diagonal:)")
 public func matrix_from_diagonal(_ d: Swift.SIMD2<Swift.Float>) -> simd.simd_float2x2
-@available(OSX 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
 @available(swift, deprecated: 4, message: "Use the .inverse property instead.")
 public func matrix_invert(_ x: simd.simd_float2x2) -> simd.simd_float2x2
 @available(swift, deprecated: 4, message: "Use the .determinant property instead.")
@@ -1283,7 +1283,7 @@ extension simd_float3x3 {
     return simd_transpose(self)
   }
   }
-  @available(OSX 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
+  @available(macOS 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
   @_transparent public var inverse: simd.simd_float3x3 {
     @_transparent get {
     return simd_inverse(self)
@@ -1339,7 +1339,7 @@ extension simd_float3x3 {
 }
 @available(swift, deprecated: 4, renamed: "simd_float3x3(diagonal:)")
 public func matrix_from_diagonal(_ d: Swift.SIMD3<Swift.Float>) -> simd.simd_float3x3
-@available(OSX 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
 @available(swift, deprecated: 4, message: "Use the .inverse property instead.")
 public func matrix_invert(_ x: simd.simd_float3x3) -> simd.simd_float3x3
 @available(swift, deprecated: 4, message: "Use the .determinant property instead.")
@@ -1669,7 +1669,7 @@ extension simd_float4x4 {
     return simd_transpose(self)
   }
   }
-  @available(OSX 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
+  @available(macOS 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
   @_transparent public var inverse: simd.simd_float4x4 {
     @_transparent get {
     return simd_inverse(self)
@@ -1725,7 +1725,7 @@ extension simd_float4x4 {
 }
 @available(swift, deprecated: 4, renamed: "simd_float4x4(diagonal:)")
 public func matrix_from_diagonal(_ d: Swift.SIMD4<Swift.Float>) -> simd.simd_float4x4
-@available(OSX 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
 @available(swift, deprecated: 4, message: "Use the .inverse property instead.")
 public func matrix_invert(_ x: simd.simd_float4x4) -> simd.simd_float4x4
 @available(swift, deprecated: 4, message: "Use the .determinant property instead.")
@@ -1779,7 +1779,7 @@ extension simd_double2x2 {
     return simd_transpose(self)
   }
   }
-  @available(OSX 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
+  @available(macOS 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
   @_transparent public var inverse: simd.simd_double2x2 {
     @_transparent get {
     return simd_inverse(self)
@@ -1835,7 +1835,7 @@ extension simd_double2x2 {
 }
 @available(swift, deprecated: 4, renamed: "simd_double2x2(diagonal:)")
 public func matrix_from_diagonal(_ d: Swift.SIMD2<Swift.Double>) -> simd.simd_double2x2
-@available(OSX 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
 @available(swift, deprecated: 4, message: "Use the .inverse property instead.")
 public func matrix_invert(_ x: simd.simd_double2x2) -> simd.simd_double2x2
 @available(swift, deprecated: 4, message: "Use the .determinant property instead.")
@@ -2165,7 +2165,7 @@ extension simd_double3x3 {
     return simd_transpose(self)
   }
   }
-  @available(OSX 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
+  @available(macOS 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
   @_transparent public var inverse: simd.simd_double3x3 {
     @_transparent get {
     return simd_inverse(self)
@@ -2221,7 +2221,7 @@ extension simd_double3x3 {
 }
 @available(swift, deprecated: 4, renamed: "simd_double3x3(diagonal:)")
 public func matrix_from_diagonal(_ d: Swift.SIMD3<Swift.Double>) -> simd.simd_double3x3
-@available(OSX 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
 @available(swift, deprecated: 4, message: "Use the .inverse property instead.")
 public func matrix_invert(_ x: simd.simd_double3x3) -> simd.simd_double3x3
 @available(swift, deprecated: 4, message: "Use the .determinant property instead.")
@@ -2551,7 +2551,7 @@ extension simd_double4x4 {
     return simd_transpose(self)
   }
   }
-  @available(OSX 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
+  @available(macOS 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
   @_transparent public var inverse: simd.simd_double4x4 {
     @_transparent get {
     return simd_inverse(self)
@@ -2607,7 +2607,7 @@ extension simd_double4x4 {
 }
 @available(swift, deprecated: 4, renamed: "simd_double4x4(diagonal:)")
 public func matrix_from_diagonal(_ d: Swift.SIMD4<Swift.Double>) -> simd.simd_double4x4
-@available(OSX 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
+@available(macOS 10.10, iOS 8.0, tvOS 10.0, watchOS 3.0, *)
 @available(swift, deprecated: 4, message: "Use the .inverse property instead.")
 public func matrix_invert(_ x: simd.simd_double4x4) -> simd.simd_double4x4
 @available(swift, deprecated: 4, message: "Use the .determinant property instead.")

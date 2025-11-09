@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     When rendering effects to images produced by cameras, or performing computer vision tasks such as correcting images for geometric distortions, it is necessary to characterize the camera's calibration information, such as its pixel focal length, principal point, lens distortion characteristics, etc. AVCameraCalibrationData provides this information.
  */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.13), ios(11.0), macCatalyst(14.0), tvos(11.0)) API_UNAVAILABLE(watchos)
 @interface AVCameraCalibrationData : NSObject
 {
 @private

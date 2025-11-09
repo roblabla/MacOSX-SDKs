@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DA2DDD4B-A2FB-3C5C-A6F1-10BA2C8A4759
+    value:           1AEC391A-4335-393B-B4E5-DAD94EAC9399
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0B68DE3D-7D44-3E8F-9264-C0B4B90DC888
+    value:           F9887FF0-6AC7-3D76-9E08-CCF68A086E10
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomPresentationLite.framework/Versions/A/SymptomPresentationLite'
-current-version: 1431.60.1
+current-version: 1431.100.22
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _kPerformanceFlowAvgUsecsEstabTime, _kPerformanceFlowConnAttempts, 

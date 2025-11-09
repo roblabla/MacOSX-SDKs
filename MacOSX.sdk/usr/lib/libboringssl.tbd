@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BD80C2FF-C8DE-3905-AB6F-311FE9F888F3
+    value:           33A64057-5CC8-3158-A3CF-D5762EE3E401
   - target:          x86_64-maccatalyst
-    value:           BD80C2FF-C8DE-3905-AB6F-311FE9F888F3
+    value:           33A64057-5CC8-3158-A3CF-D5762EE3E401
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F3E90A3E-CBD0-3B10-ADFB-03125325121F
+    value:           10A2DB2E-63E3-32ED-8929-D527B4EC0727
   - target:          arm64e-maccatalyst
-    value:           F3E90A3E-CBD0-3B10-ADFB-03125325121F
+    value:           10A2DB2E-63E3-32ED-8929-D527B4EC0727
 install-name:    '/usr/lib/libboringssl.dylib'
 current-version: 0
 compatibility-version: 0

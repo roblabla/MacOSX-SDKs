@@ -4,23 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BE5588D5-BD17-39D0-9750-A3B29F3DCA76
+    value:           B742640C-BC4A-3AE6-985C-A45435025A87
   - target:          x86_64-maccatalyst
-    value:           BE5588D5-BD17-39D0-9750-A3B29F3DCA76
+    value:           B742640C-BC4A-3AE6-985C-A45435025A87
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0ED1BF1C-8F02-367D-B803-2D9750540CE0
+    value:           F434D90E-8A4C-3849-B498-F3607A620C25
   - target:          arm64e-maccatalyst
-    value:           0ED1BF1C-8F02-367D-B803-2D9750540CE0
+    value:           F434D90E-8A4C-3849-B498-F3607A620C25
 install-name:    '/System/Library/PrivateFrameworks/SignpostNotification.framework/Versions/A/SignpostNotification'
-current-version: 53
+current-version: 60
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _EnableSignpostNotificationGeneration, _SignpostGetNewNotificationConnection, 
-                       _SignpostNotificationSendNotificationSubscriptionRequestOnConnection, 
-                       _SignpostNotificationVersionNumber, _SignpostNotificationVersionString ]
+                       _SignpostNotificationSendNotificationSubscriptionRequestOnConnection ]
 ...

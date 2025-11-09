@@ -66,8 +66,8 @@ enum
     IOUSBHostCICapabilitiesMessageControlPortCount                     = IOUSBBitRange(16, 19),
     IOUSBHostCICapabilitiesMessageControlPortCountPhase                = IOUSBBitRangePhase(16, 19),
     
-    IOUSBHostCICapabilitiesMessageData0CommandTimeoutThreshold         = IOUSBBitRange(0, 2),
-    IOUSBHostCICapabilitiesMessageData0CommandTimeoutThresholdPhase    = IOUSBBitRangePhase(0, 2),
+    IOUSBHostCICapabilitiesMessageData0CommandTimeoutThreshold         = IOUSBBitRange(0, 1),
+    IOUSBHostCICapabilitiesMessageData0CommandTimeoutThresholdPhase    = IOUSBBitRangePhase(0, 1),
     IOUSBHostCICapabilitiesMessageData0ConnectionLatency               = IOUSBBitRange(4, 7),
     IOUSBHostCICapabilitiesMessageData0ConnectionLatencyPhase          = IOUSBBitRangePhase(4, 7)
 };

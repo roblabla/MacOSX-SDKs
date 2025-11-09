@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AE3A940A-7A9C-3F99-B175-3511528D8DFE
+    value:           B027735F-B398-381C-84A7-606D7BBE4997
   - target:          x86_64-maccatalyst
-    value:           AE3A940A-7A9C-3F99-B175-3511528D8DFE
+    value:           B027735F-B398-381C-84A7-606D7BBE4997
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           28BA0783-4F54-33EB-8DC0-DC23CD3BC576
+    value:           E692D64D-0E8A-3270-B2C5-C71777E0DB33
 install-name:    '/usr/lib/libc++.1.dylib'
-current-version: 904.4
+current-version: 905.6
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     symbols:         [ __ZTINSt3__110__time_getE, __ZTINSt3__110__time_putE, __ZTINSt3__110ctype_baseE, 

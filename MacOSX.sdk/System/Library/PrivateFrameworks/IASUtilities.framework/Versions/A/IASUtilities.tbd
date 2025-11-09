@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           141DA23C-3FC0-3DAC-8C49-0703A52188BF
+    value:           9BC3410A-105A-3756-B04B-C91B639E8C38
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           47ACECAF-0DD4-3FA6-BCCD-2D71164C91CA
+    value:           14D7A601-8176-3085-A212-C158C671809E
 install-name:    '/System/Library/PrivateFrameworks/IASUtilities.framework/Versions/A/IASUtilities'
 current-version: 119
 exports:
@@ -53,25 +53,33 @@ exports:
                        _start_log_listen_thread, _teardown_instlog_shmem, _uncompressedDataProvided, 
                        _uncompressedDataRequested ]
     objc-classes:    [ IASAuthenticationAgentController, IASAuthenticationManager, 
-                       IASBZIP2InputStream, IASBZIP2OutputStream, IASBlessUtilities, 
-                       IASBootTimeInstallClient, IASBootTimeInstallManager, IASBootTimeInstallableItem, 
-                       IASBottomMagicPocketView, IASChunklist, IASCommonViewBasedTableDelegate, 
-                       IASCountryCodePopUpView, IASCountryCodesArray, IASDMGUtilities, 
-                       IASDeviceIconManager, IASDeviceStringManager, IASDiskImageInstallMedia, 
-                       IASFakeLinkButton, IASFilesystemUtils, IASFirstResponderDisablingTextView, 
-                       IASInputStream, IASInstallMedia, IASKeyableWindow, IASLZMAInputStream, 
-                       IASLZMAOutputStream, IASLeftMagicPocketView, IASLocalSecretPrompt, 
-                       IASLogDataSource, IASLogWindowController, IASMagicPocketClipView, 
-                       IASMagicPocketScrollView, IASMagicPocketView, IASMessageTracing, 
-                       IASMutableChunklist, IASNightInstallSupport, IASOutputStream, 
-                       IASParallelCompressionInputStream, IASParallelCompressionOutputStream, 
-                       IASPickerViewController, IASRightMagicPocketView, IASServerSupport, 
-                       IASSizeLimitedInputStream, IASStandaloneTextView, IASStreamError, 
-                       IASStreamFIFOQueue, IASSystemInformation, IASSystemSize, IASThreadSafeEvent, 
-                       IASTimeRemainingFormatter, IASTopMagicPocketView, IASZLIBInputStream, 
-                       IASZLIBOutputStream, ILCBaseConnection, ILCConnection, InstlogRemoteLogging, 
-                       UAULaunch ]
-    objc-ivars:      [ IASLogDataSource._buf, IASLogDataSource._currentLogFilter, 
+                       IASBZIP2InputStream, IASBZIP2OutputStream, IASBezierCurve, 
+                       IASBlessUtilities, IASBootTimeInstallClient, IASBootTimeInstallManager, 
+                       IASBootTimeInstallableItem, IASBottomMagicPocketView, IASChunklist, 
+                       IASCommonViewBasedTableDelegate, IASCountryCodePopUpView, 
+                       IASCountryCodesArray, IASCursiveTextPath, IASCursiveTextView, 
+                       IASCursiveTextWindow, IASDMGUtilities, IASDeviceIconManager, 
+                       IASDeviceStringManager, IASDiskImageInstallMedia, IASFakeLinkButton, 
+                       IASFilesystemUtils, IASFirstResponderDisablingTextView, IASInputStream, 
+                       IASInstallMedia, IASKeyableWindow, IASLZMAInputStream, IASLZMAOutputStream, 
+                       IASLeftMagicPocketView, IASLocalSecretPrompt, IASLogDataSource, 
+                       IASLogWindowController, IASMagicPocketClipView, IASMagicPocketScrollView, 
+                       IASMagicPocketView, IASMessageTracing, IASMutableChunklist, 
+                       IASNightInstallSupport, IASOutputStream, IASParallelCompressionInputStream, 
+                       IASParallelCompressionOutputStream, IASPathPoint, IASPickerViewController, 
+                       IASRightMagicPocketView, IASServerSupport, IASSizeLimitedInputStream, 
+                       IASStandaloneTextView, IASStreamError, IASStreamFIFOQueue, 
+                       IASSystemInformation, IASSystemSize, IASThreadSafeEvent, IASTimeRemainingFormatter, 
+                       IASTopMagicPocketView, IASZLIBInputStream, IASZLIBOutputStream, 
+                       ILCBaseConnection, ILCConnection, InstlogRemoteLogging, UAULaunch ]
+    objc-ivars:      [ IASCursiveTextPath._boundingBoxOfPath, IASCursiveTextPath._duration, 
+                       IASCursiveTextPath._finalWeight, IASCursiveTextPath._initialWeight, 
+                       IASCursiveTextPath._length, IASCursiveTextPath._pathDefinition, 
+                       IASCursiveTextPath._rampTime, IASCursiveTextPath._resolution, 
+                       IASCursiveTextView.dismissButtonImageView, IASCursiveTextView.dismissButtonLabel, 
+                       IASCursiveTextView.eventMonitor, IASCursiveTextView.textLayer, 
+                       IASCursiveTextView.textPath, IASCursiveTextView.textTransform, 
+                       IASLogDataSource._buf, IASLogDataSource._currentLogFilter, 
                        IASLogDataSource._last_seen_offset, IASLogDataSource._lineIndex, 
                        IASLogDataSource._lineNumbers, IASLogDataSource._lnCol, IASLogDataSource._logView, 
                        IASLogDataSource._longestStrlen, IASLogDataSource._msgCol, 

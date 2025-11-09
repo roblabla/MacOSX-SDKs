@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           12E5EEDC-D10A-3B2D-B090-E78FEC777292
+    value:           C9F52695-C347-3395-8924-D5067B0EDED3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25DB9BF2-C453-300C-9B79-DD81FC3A46F4
+    value:           F0E43DE4-EA94-3E3A-A518-E9FAB8E6F708
 install-name:    '/System/Library/PrivateFrameworks/RecoveryOS.framework/Versions/A/RecoveryOS'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

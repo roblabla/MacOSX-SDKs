@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BFE8B30F-5A8B-349E-8ABA-CEF40D997A2C
+    value:           B8753765-0426-32EB-9AD2-0249C8E36919
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CA7492AD-BDFB-3D21-B907-960B9320DD58
+    value:           99248CA8-4C17-31F3-9B7E-C8BBD9FB06BB
 install-name:    '/usr/lib/libnfrestore.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -161,7 +161,11 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 
 // Optional (-[popup] may return nil). Not used with links or widgets, a popup annotation associated with this
 // annotation. The bounds and open state of the popup indicate the placement and open state of the popup window.
+#if defined( PDFKIT_PLATFORM_OSX )
 @property (nonatomic, strong, nullable) PDFAnnotationPopup *popup PDFKIT_AVAILABLE(10_5, 11_0);
+#else
+@property (nonatomic, strong, nullable) PDFAnnotation *popup PDFKIT_AVAILABLE(10_5, 11_0);
+#endif
 
 // Optional border or border style that describes how to draw the annotation border (if any). For the "geometry"
 // annotations (Circle, Ink, Line, Square), the border indicates the line width and whether to draw with a dash pattern
@@ -223,6 +227,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 
 @end
 
+#if defined( PDFKIT_PLATFORM_OSX )
 
 @interface PDFAnnotation (PDFAnnotationDeprecated)
 
@@ -302,6 +307,7 @@ PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_WidgetOptions PDFKIT_DEPRECATED
 PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_WidgetTextLabelUI PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                 // "/TU": String
 PDFKIT_EXTERN PDFAnnotationKey kPDFAnnotationKey_WidgetValue PDFKIT_DEPRECATED(10_12, 10_13, NA, NA);                       // "/V": (various)
 
+#endif
 
 
 NS_ASSUME_NONNULL_END

@@ -791,6 +791,12 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyPNGCompressionFilter IMAGEIO_AV
 #define IMAGEIO_PNG_FILTER_PAETH   0x80
 #define IMAGEIO_PNG_ALL_FILTERS (IMAGEIO_PNG_FILTER_NONE | IMAGEIO_PNG_FILTER_SUB | IMAGEIO_PNG_FILTER_UP | IMAGEIO_PNG_FILTER_AVG | IMAGEIO_PNG_FILTER_PAETH)
 
+/*
+ * For PNG files:
+ * When writing indexed color PNGs, the data for the transparity chunk 'tRNS' can be passed in with this key.
+ * The value (CFDataRef) should contain one byte transparency info for each entry in the indexed color map.
+ */
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyPNGTransparency     IMAGEIO_AVAILABLE_STARTING(10.13, 11.0);
 
 
 /* For use with CGImageSourceCopyAuxiliaryDataInfoAtIndex and CGImageDestinationAddAuxiliaryDataInfo:

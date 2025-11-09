@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           35AD02CD-7223-3923-BC84-2F894DBBDE97
+    value:           3E4BEBA1-7311-3B84-945A-F8A88802C0D9
   - target:          x86_64-maccatalyst
-    value:           35AD02CD-7223-3923-BC84-2F894DBBDE97
+    value:           3E4BEBA1-7311-3B84-945A-F8A88802C0D9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           04DEDA34-4D29-3133-91D4-7DB7332068CE
+    value:           0DD6B9FD-238D-373F-A0E5-D37EF00AC3DB
   - target:          arm64e-maccatalyst
-    value:           04DEDA34-4D29-3133-91D4-7DB7332068CE
+    value:           0DD6B9FD-238D-373F-A0E5-D37EF00AC3DB
 install-name:    '/usr/lib/swift/libswiftos.dylib'
-current-version: 1000.40.3
+current-version: 1000.100.5
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftos.dylib', '$ld$install_name$os10.11$@rpath/libswiftos.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftos.dylib', '$ld$install_name$os10.13$@rpath/libswiftos.dylib', 
@@ -291,8 +291,23 @@ exports:
                        '_$sSS2osE20percentEscapedStringSSvg', '_$sSS2osE20percentEscapedStringSSvpMV', 
                        '_$sSo13os_log_type_ta0A0E4infoABvgZ', '_$sSo13os_log_type_ta0A0E5debugABvgZ', 
                        '_$sSo13os_log_type_ta0A0E5errorABvgZ', '_$sSo13os_log_type_ta0A0E5faultABvgZ', 
-                       '_$sSo13os_log_type_ta0A0E7defaultABvgZ', '_$sSo18os_signpost_type_ta0A0E3endABvgZ', 
-                       '_$sSo18os_signpost_type_ta0A0E5beginABvgZ', '_$sSo18os_signpost_type_ta0A0E5eventABvgZ', 
+                       '_$sSo13os_log_type_ta0A0E7defaultABvgZ', '_$sSo15OS_os_workgroupC0B0E11isCancelledSbvg', 
+                       '_$sSo15OS_os_workgroupC0B0E11isCancelledSbvpMV', '_$sSo15OS_os_workgroupC0B0E12workingArenaSvSg_s6UInt32Vtvg', 
+                       '_$sSo15OS_os_workgroupC0B0E12workingArenaSvSg_s6UInt32VtvpMV', 
+                       '_$sSo15OS_os_workgroupC0B0E14updateDeadline8deadlineys6UInt64V_tF', 
+                       '_$sSo15OS_os_workgroupC0B0E15setWorkingArena5arena11max_workers8destructySvSg_s6UInt32VyAHXCtF', 
+                       '_$sSo15OS_os_workgroupC0B0E18maxParallelThreadsSivg', '_$sSo15OS_os_workgroupC0B0E18maxParallelThreadsSivpMV', 
+                       '_$sSo15OS_os_workgroupC0B0E4copy4nameABSgSSSg_tF', '_$sSo15OS_os_workgroupC0B0E4joinAbCE9JoinTokenVyF', 
+                       '_$sSo15OS_os_workgroupC0B0E4port4nameABSgs6UInt32V_SSSgtcfC', 
+                       '_$sSo15OS_os_workgroupC0B0E4port4nameABSgs6UInt32V_SSSgtcfc', 
+                       '_$sSo15OS_os_workgroupC0B0E5leave5tokenyAbCE9JoinTokenV_tF', 
+                       '_$sSo15OS_os_workgroupC0B0E5start2at8deadlineys6UInt64V_AHtF', 
+                       '_$sSo15OS_os_workgroupC0B0E6cancelyyF', '_$sSo15OS_os_workgroupC0B0E6finishyyF', 
+                       '_$sSo15OS_os_workgroupC0B0E8copyPorts6UInt32VyF', '_$sSo15OS_os_workgroupC0B0E9JoinTokenVMa', 
+                       '_$sSo15OS_os_workgroupC0B0E9JoinTokenVMn', '_$sSo15OS_os_workgroupC0B0E9JoinTokenVN', 
+                       '_$sSo18os_signpost_type_ta0A0E3endABvgZ', '_$sSo18os_signpost_type_ta0A0E5beginABvgZ', 
+                       '_$sSo18os_signpost_type_ta0A0E5eventABvgZ', '_$sSo24OS_os_workgroup_parallelC0B0E4nameABSgSSSg_tcfC', 
+                       '_$sSo24OS_os_workgroup_parallelC0B0E4nameABSgSSSg_tcfc', 
                        '_$sSo9OS_os_logC0B0E16signpostsEnabledSbvg', '_$sSo9OS_os_logC0B0E16signpostsEnabledSbvpMV', 
                        '_$sSo9OS_os_logC0B0E7defaultABvgZ', '_$sSo9OS_os_logC0B0E8CategoryV14dynamicTracingAEvgZ', 
                        '_$sSo9OS_os_logC0B0E8CategoryV16pointsOfInterestAEvgZ', '_$sSo9OS_os_logC0B0E8CategoryV19dynamicStackTracingAEvgZ', 

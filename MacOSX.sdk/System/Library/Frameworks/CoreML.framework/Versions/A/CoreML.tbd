@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5D76FA8E-9335-3ED8-B301-E0313128307E
+    value:           DD392ABD-C9E6-3706-AA73-74408B2C69F0
   - target:          x86_64-maccatalyst
-    value:           5D76FA8E-9335-3ED8-B301-E0313128307E
+    value:           DD392ABD-C9E6-3706-AA73-74408B2C69F0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CCA7DE06-6446-3245-9049-3382210163E3
+    value:           C693EF24-4A7D-34BF-93F6-BB2AC73F05A9
   - target:          arm64e-maccatalyst
-    value:           CCA7DE06-6446-3245-9049-3382210163E3
+    value:           C693EF24-4A7D-34BF-93F6-BB2AC73F05A9
 install-name:    '/System/Library/Frameworks/CoreML.framework/Versions/A/CoreML'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MLAutomaticOutputBackingModeDisabled, _MLAutomaticOutputBackingModeEnabled, 
                        _MLAutomaticOutputBackingModeForced, _MLDetectionPrintCustomModelName, 
@@ -31,13 +31,13 @@ exports:
                        _kMLLayerComputeUnitHintFallbackFromGPU, _kMLLayerComputeUnitHintFallbackFromNE, 
                        _kMLModelKeyInfoIV, _kMLModelKeyInfoKey, _kMLModelKeyInfoKeyIdentifier, 
                        _kMLModelKeyInfoSINF, _kMLModelKeyInfoUsesCodeSigningIdentityForEncryption, 
-                       _kMLModelKeyInfoVersion, _libsvm_version, _svm_check_parameter, 
-                       _svm_check_probability_model, _svm_cross_validation, _svm_destroy_param, 
-                       _svm_free_and_destroy_model, _svm_free_model_content, _svm_get_labels, 
-                       _svm_get_nr_class, _svm_get_nr_sv, _svm_get_sv_indices, _svm_get_svm_type, 
-                       _svm_get_svr_probability, _svm_load_model, _svm_predict, _svm_predict_probability, 
-                       _svm_predict_values, _svm_save_model, _svm_set_print_string_function, 
-                       _svm_train ]
+                       _kMLModelKeyInfoVersion, _kPersistentKeyStorageName, _libsvm_version, 
+                       _svm_check_parameter, _svm_check_probability_model, _svm_cross_validation, 
+                       _svm_destroy_param, _svm_free_and_destroy_model, _svm_free_model_content, 
+                       _svm_get_labels, _svm_get_nr_class, _svm_get_nr_sv, _svm_get_sv_indices, 
+                       _svm_get_svm_type, _svm_get_svr_probability, _svm_load_model, 
+                       _svm_predict, _svm_predict_probability, _svm_predict_values, 
+                       _svm_save_model, _svm_set_print_string_function, _svm_train ]
     objc-classes:    [ CoreMLModelSecurityServiceToClient, CoreMLVersion, MLAppleGazetteer, 
                        MLAppleGazetteerParameters, MLAppleImageFeatureExtractor, 
                        MLAppleImageFeatureExtractorObjectPrintParameters, MLAppleImageFeatureExtractorParameters, 

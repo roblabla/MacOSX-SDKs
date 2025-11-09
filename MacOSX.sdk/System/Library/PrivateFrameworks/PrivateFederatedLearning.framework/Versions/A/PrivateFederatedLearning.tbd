@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3E5D987F-9889-35F6-A24A-641655277ACC
+    value:           31E507E5-0F00-3670-9588-1243C536FF72
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2F0B2B62-885E-3AE3-9688-12145046E7CB
+    value:           3AC06A44-A484-3AF3-90D9-AB32C65D4A04
 install-name:    '/System/Library/PrivateFrameworks/PrivateFederatedLearning.framework/Versions/A/PrivateFederatedLearning'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -102,9 +102,9 @@ exports:
                        _kPFLPrivatizeIdentifierPhotos, _kPFLPrivatizeIdentifierPhotosLarge, 
                        _kPFLPrivatizeIdentifierPhotosSmall, _kPFLPrivatizeIdentifierProactivePhoneEn, 
                        _kPFLPrivatizeIdentifierProactiveResponses, _kPFLPrivatizeIdentifierQuickTypeLM, 
-                       _kPFLPrivatizeIdentifierSiriInference, _kPFLPrivatizeIdentifierSiriSpeechNNLM, 
-                       _kPFLPrivatizeIdentifierVocalClassifier, _kPFLPrivatizeIdentifierVocalGBDTClassifier, 
-                       _kPFLPrivatizeTaskIdentifierQuickTypeCNNTextClassification, 
+                       _kPFLPrivatizeIdentifierSearchAds, _kPFLPrivatizeIdentifierSiriInference, 
+                       _kPFLPrivatizeIdentifierSiriSpeechNNLM, _kPFLPrivatizeIdentifierVocalClassifier, 
+                       _kPFLPrivatizeIdentifierVocalGBDTClassifier, _kPFLPrivatizeTaskIdentifierQuickTypeCNNTextClassification, 
                        _kPFLPrivatizeTaskIdentifierQuickTypeLM, _temp ]
     objc-classes:    [ CKRecordValueConverter, CommonRoot, DeviceUpdateRoot, GPBAutocreatedArray, 
                        GPBAutocreatedDictionary, GPBBoolArray, GPBBoolBoolDictionary, 

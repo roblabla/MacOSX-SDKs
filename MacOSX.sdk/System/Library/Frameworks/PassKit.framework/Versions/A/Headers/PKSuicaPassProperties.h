@@ -29,7 +29,8 @@ API_AVAILABLE(ios(10.1), watchos(3.1))
 @property (nonatomic, assign, getter=isLowBalanceGateNotificationEnabled, readonly) BOOL lowBalanceGateNotificationEnabled API_AVAILABLE(ios(11.3), watchos(4.3));
 
 @property (nonatomic, assign, readonly, getter=isGreenCarTicketUsed) BOOL greenCarTicketUsed;
-@property (nonatomic, assign, readonly, getter=isBlacklisted) BOOL blacklisted;
+
+@property (nonatomic, assign, readonly, getter=isBlacklisted) BOOL blacklisted API_DEPRECATED_WITH_REPLACEMENT("isBlocked", ios(10.1, 14.5), watchos(3.1, 7.0));
 
 @end
 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6AA76BBC-B0F2-3F37-A6EE-19014DCD06D9
+    value:           4BAE7472-2131-3398-9BAE-DC78E7FAA973
   - target:          x86_64-maccatalyst
-    value:           6AA76BBC-B0F2-3F37-A6EE-19014DCD06D9
+    value:           4BAE7472-2131-3398-9BAE-DC78E7FAA973
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           525D1AB3-CF31-3314-9A19-599D5078FAEF
+    value:           90994271-BF3F-3095-AC90-46FACD04F324
   - target:          arm64e-maccatalyst
-    value:           525D1AB3-CF31-3314-9A19-599D5078FAEF
+    value:           90994271-BF3F-3095-AC90-46FACD04F324
 install-name:    '/System/Library/PrivateFrameworks/DebugSymbols.framework/Versions/A/DebugSymbols'
 current-version: 195.1
 exports:

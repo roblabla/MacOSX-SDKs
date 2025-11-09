@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CE7BFA66-5DB1-3E1A-871B-344C4F5B9038
+    value:           3F9E531A-FDD2-3821-B64C-AD1FDF2EE640
   - target:          x86_64-maccatalyst
-    value:           CE7BFA66-5DB1-3E1A-871B-344C4F5B9038
+    value:           3F9E531A-FDD2-3821-B64C-AD1FDF2EE640
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D40D3127-8BFB-36CD-B26F-8C744F6E480B
+    value:           5CEB1D74-767F-3D37-B3A6-1D9DB74B0EEB
   - target:          arm64e-maccatalyst
-    value:           D40D3127-8BFB-36CD-B26F-8C744F6E480B
+    value:           5CEB1D74-767F-3D37-B3A6-1D9DB74B0EEB
 install-name:    '/System/Library/Frameworks/CoreMotion.framework/Versions/A/CoreMotion'
-current-version: 2420.12.12
+current-version: 2420.16.22
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -26,7 +26,7 @@ exports:
                        _CLClientGetDistanceCoordinates, _CLClientGetDistanceHighPrecision, 
                        _CLCopyAppsUsingLocation, _CLCopyGnssBandsInUse, _CLCopyNearbyAssetSettings, 
                        _CLCopyNearbyAssetSettingsOfAccessoryFile, _CLCopyTechnologiesInUse, 
-                       _CLDaemonShutdownNotification, _CLDaemonStartedNotification, 
+                       _CLCopyZaxisStats, _CLDaemonShutdownNotification, _CLDaemonStartedNotification, 
                        _CLDeleteCurrentEmergencyLocationAsset, _CLGetAccessoryTypeBitSet, 
                        _CLGetArchivedAuthorizationDecisions, _CLGetClientTransientAuthorizationInfo, 
                        _CLGetControlPlaneStatusReport, _CLGetEmergencyLocationSettingsVersionInfo, 
@@ -81,12 +81,13 @@ exports:
                        _CMFilteredElevationKeySample, _CMFitnessMachineDataRecord, 
                        _CMHealthAssessmentFromDateKey, _CMHealthAssessmentToDateKey, 
                        _CMIndoorOutdoorStateKey, _CMKappaCmdKey, _CMKappaConfigAccel, 
-                       _CMKappaConfigDeviceMotion, _CMKappaConfigFastAccel, _CMKappaConfigPressure, 
-                       _CMKappaConfigTimeout, _CMKappaDataObject, _CMKappaGetStateKey, 
-                       _CMKappaStateKey, _CMMetMinutesArray, _CMMotionActivityData, 
-                       _CMMotionActivityDataArray, _CMMotionActivityStartTime, _CMMotionActivityStopTime, 
-                       _CMMotionAlarmKey, _CMMotionStateSim, _CMMotionStateSimResult, 
-                       _CMMotionStateSimState, _CMMovementDisorderLastProcessedKey, 
+                       _CMKappaConfigAudio, _CMKappaConfigDeviceMotion, _CMKappaConfigFastAccel, 
+                       _CMKappaConfigPressure, _CMKappaConfigTimeout, _CMKappaDataObject, 
+                       _CMKappaGetStateKey, _CMKappaStateKey, _CMKappaStatsNameOfCurrentFile, 
+                       _CMKappaStatsSetConfig, _CMKappaStatsSizeOfCurrentFile, _CMMetMinutesArray, 
+                       _CMMotionActivityData, _CMMotionActivityDataArray, _CMMotionActivityStartTime, 
+                       _CMMotionActivityStopTime, _CMMotionAlarmKey, _CMMotionStateSim, 
+                       _CMMotionStateSimResult, _CMMotionStateSimState, _CMMovementDisorderLastProcessedKey, 
                        _CMMovementDisorderMonitorKinesiasExpirationKey, _CMNatalimeterSetUserAgeYr, 
                        _CMNatalimeterSetUserBetaBlockerUse, _CMNatalimeterSetUserBiologicalSex, 
                        _CMNatalimeterSetUserCondition, _CMNatalimeterSetUserHeightMeter, 

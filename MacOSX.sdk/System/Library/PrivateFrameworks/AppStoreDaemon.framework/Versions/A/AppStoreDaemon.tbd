@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A971B282-4B45-35CF-BAB8-4CB8077BA70C
+    value:           E509DA29-05D2-30BB-A294-ED052FB95829
   - target:          x86_64-maccatalyst
-    value:           A971B282-4B45-35CF-BAB8-4CB8077BA70C
+    value:           E509DA29-05D2-30BB-A294-ED052FB95829
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           17020722-A434-3038-B715-DB7268DFEFB4
+    value:           4B7E3392-26F9-363E-9BDA-35CBFF3F9AB5
   - target:          arm64e-maccatalyst
-    value:           17020722-A434-3038-B715-DB7268DFEFB4
+    value:           4B7E3392-26F9-363E-9BDA-35CBFF3F9AB5
 install-name:    '/System/Library/PrivateFrameworks/AppStoreDaemon.framework/Versions/A/AppStoreDaemon'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -32,16 +32,15 @@ exports:
                        _ASDErrorIsNilReturn, _ASDErrorWithDescription, _ASDErrorWithSafeUserInfo, 
                        _ASDErrorWithUnderlyingError, _ASDErrorWithUnderlyingErrorAndDescription, 
                        _ASDErrorWithUnderlyingErrorAndInfo, _ASDErrorWithUserInfoAndFormat, 
-                       _ASDInGameAnalyticsErrorDomain, _ASDIsDaemon, _ASDLogCategoryDaemon, 
-                       _ASDLogCategoryDaemonOversize, _ASDLogCategoryFramework, _ASDLogSubsystemDefault, 
-                       _ASDLookupPropertyBundleIdentifier, _ASDLookupPropertyBuyParams, 
-                       _ASDLookupPropertyContentRating, _ASDLookupPropertyDisplayVersion, 
-                       _ASDLookupPropertyExternalVersionIdentifier, _ASDLookupPropertyFileSize, 
-                       _ASDLookupPropertyItemIdentifier, _ASDLookupPropertyReleaseDate, 
-                       _ASDManagedLookupBundleDisplayName, _ASDManagedLookupBundleID, 
-                       _ASDManagedLookupExternalVersionID, _ASDManagedLookupFreeBuyParams, 
-                       _ASDManagedLookupIs32BitOnly, _ASDManagedLookupIsActiveAccountAppOwner, 
-                       _ASDManagedLookupIsAppFree, _ASDManagedLookupItemID, _ASDManagedLookupUncompressedSize, 
+                       _ASDIsDaemon, _ASDLogHandleForCategory, _ASDLookupPropertyBundleIdentifier, 
+                       _ASDLookupPropertyBuyParams, _ASDLookupPropertyContentRating, 
+                       _ASDLookupPropertyDisplayVersion, _ASDLookupPropertyExternalVersionIdentifier, 
+                       _ASDLookupPropertyFileSize, _ASDLookupPropertyItemIdentifier, 
+                       _ASDLookupPropertyReleaseDate, _ASDManagedLookupBundleDisplayName, 
+                       _ASDManagedLookupBundleID, _ASDManagedLookupExternalVersionID, 
+                       _ASDManagedLookupFreeBuyParams, _ASDManagedLookupIs32BitOnly, 
+                       _ASDManagedLookupIsActiveAccountAppOwner, _ASDManagedLookupIsAppFree, 
+                       _ASDManagedLookupItemID, _ASDManagedLookupUncompressedSize, 
                        _ASDManagedLookupVendorName, _ASDPurchaseBuyParameterVendorID, 
                        _ASDPurchaseHistoryDidChangeNotification, _ASDServerErrorDomain, 
                        _ASDServiceAgentMachPort, _ASDServiceBrokerAvailableNotification, 
@@ -74,13 +73,13 @@ exports:
                        _ASDStoreKitKeyOriginalTransactionIdentifier, _ASDStoreKitKeyPartnerIdentifier, 
                        _ASDStoreKitKeyPartnerTransactionIdentifier, _ASDStoreKitKeyPeriodCount, 
                        _ASDStoreKitKeyPrice, _ASDStoreKitKeyProducts, _ASDStoreKitKeyPromotionHidden, 
-                       _ASDStoreKitKeyPromotionOrder, _ASDStoreKitKeyPurchaseDate, 
-                       _ASDStoreKitKeyQuantity, _ASDStoreKitKeyQueueIdentifier, _ASDStoreKitKeyReceipt, 
-                       _ASDStoreKitKeyReceiptDirectoryPath, _ASDStoreKitKeyRequestData, 
-                       _ASDStoreKitKeyRequireAuthentication, _ASDStoreKitKeySandboxToken, 
-                       _ASDStoreKitKeyServerEnvironment, _ASDStoreKitKeySimulateAskToBuy, 
-                       _ASDStoreKitKeyState, _ASDStoreKitKeySubGroupId, _ASDStoreKitKeySubPeriod, 
-                       _ASDStoreKitKeyTitle, _ASDStoreKitKeyTransactionIdentifier, 
+                       _ASDStoreKitKeyPromotionOrder, _ASDStoreKitKeyPromotionVisibility, 
+                       _ASDStoreKitKeyPurchaseDate, _ASDStoreKitKeyQuantity, _ASDStoreKitKeyQueueIdentifier, 
+                       _ASDStoreKitKeyReceipt, _ASDStoreKitKeyReceiptDirectoryPath, 
+                       _ASDStoreKitKeyRequestData, _ASDStoreKitKeyRequireAuthentication, 
+                       _ASDStoreKitKeySandboxToken, _ASDStoreKitKeyServerEnvironment, 
+                       _ASDStoreKitKeySimulateAskToBuy, _ASDStoreKitKeyState, _ASDStoreKitKeySubGroupId, 
+                       _ASDStoreKitKeySubPeriod, _ASDStoreKitKeyTitle, _ASDStoreKitKeyTransactionIdentifier, 
                        _ASDStoreKitKeyTransactions, _ASDStoreKitKeyType, _ASDStoreKitKeyUniqueIdentifier, 
                        _ASDStoreKitKeyVendorIdentifier, _ASDStoreKitNewStorefront, 
                        _ASDStoreKitNewStorefrontCountryCode, _ASDStoreKitOldStorefront, 
@@ -88,13 +87,14 @@ exports:
                        _ASDSubscriptionEntitlementsActivityDidChangeNotification, 
                        _ASDSubscriptionEntitlementsAppStoreDidChangeNotification, 
                        _ASDSubscriptionEntitlementsDidChangeNotification, _ASDSubscriptionEntitlementsMusicDidChangeNotification, 
-                       _ASDSubscriptionEntitlementsNewsDidChangeNotification, _ASDSubscriptionEntitlementsTVDidChangeNotification, 
-                       _ASDSubscriptionEntitlementsiCloudDidChangeNotification, _ASDTestFlightFeedbackErrorDomain, 
-                       _ASDUpdateItemMetricsAvailableDate, _ASDUpdateItemMetricsDiscoveryDate, 
-                       _ASDUpdateItemMetricsDownloadCompeleteDate, _ASDUpdateItemMetricsDownloadStartDate, 
-                       _ASDUpdateItemMetricsInstallComplete, _ASDUpdateItemMetricsInstallStart, 
-                       _ASDUpdateItemMetricsPurchaseCompleteDate, _ASDUpdateItemMetricsPurchaseStartDate, 
-                       _ASDUpdateServiceDidChangeNotification, _kASDPurchaseHistoryQuerySortOptionDate ]
+                       _ASDSubscriptionEntitlementsNewsDidChangeNotification, _ASDSubscriptionEntitlementsPodcastDidChangeNotification, 
+                       _ASDSubscriptionEntitlementsTVDidChangeNotification, _ASDSubscriptionEntitlementsiCloudDidChangeNotification, 
+                       _ASDTestFlightFeedbackErrorDomain, _ASDUpdateItemMetricsAvailableDate, 
+                       _ASDUpdateItemMetricsDiscoveryDate, _ASDUpdateItemMetricsDownloadCompeleteDate, 
+                       _ASDUpdateItemMetricsDownloadStartDate, _ASDUpdateItemMetricsInstallComplete, 
+                       _ASDUpdateItemMetricsInstallStart, _ASDUpdateItemMetricsPurchaseCompleteDate, 
+                       _ASDUpdateItemMetricsPurchaseStartDate, _ASDUpdateServiceDidChangeNotification, 
+                       _CreateLogContext, _kASDPurchaseHistoryQuerySortOptionDate ]
     objc-classes:    [ ASDAccountLookupRequest, ASDAccountLookupRequestOptions, ASDAccountLookupResponse, 
                        ASDAggregateClusterMappingData, ASDApp, ASDAppClusterMapping, 
                        ASDAppEvent, ASDAppLibrary, ASDAppQuery, ASDAppReviewAppMetadata, 
@@ -110,18 +110,17 @@ exports:
                        ASDExternalManifestRequestOptions, ASDExternalManifestResponse, 
                        ASDGatherLogsRequest, ASDGatherLogsRequestOptions, ASDIAPHistory, 
                        ASDIAPInfo, ASDIAPInfoRequest, ASDIAPInfoRequestOptions, ASDIAPInfoResponse, 
-                       ASDIAPInfoUpdateRequest, ASDInGameAnalytics, ASDInstallApps, 
-                       ASDInstallManifestRequest, ASDInstallManifestRequestOptions, 
-                       ASDInstallManifestRequestResponse, ASDJob, ASDJobActivity, 
-                       ASDJobAsset, ASDJobManager, ASDJobManagerOptions, ASDJobManifest, 
-                       ASDJobOptions, ASDJobResult, ASDJobSchedulerJobMetadata, ASDJobSchedulerRequest, 
-                       ASDJobSchedulerRequestOptions, ASDJobSchedulerResponse, ASDLaunchableAppsRequest, 
-                       ASDLaunchableAppsRequestOptions, ASDLaunchableAppsResponse, 
-                       ASDLogConfig, ASDLogFileOptions, ASDMacDaemonManaged, ASDManagedAppService, 
-                       ASDManagedApplicationRequest, ASDManagedApplicationRequestOptions, 
+                       ASDIAPInfoUpdateRequest, ASDInstallApps, ASDInstallManifestRequest, 
+                       ASDInstallManifestRequestOptions, ASDInstallManifestRequestResponse, 
+                       ASDJob, ASDJobActivity, ASDJobAsset, ASDJobManager, ASDJobManagerOptions, 
+                       ASDJobManifest, ASDJobOptions, ASDJobResult, ASDJobSchedulerJobMetadata, 
+                       ASDJobSchedulerRequest, ASDJobSchedulerRequestOptions, ASDJobSchedulerResponse, 
+                       ASDLaunchableAppsRequest, ASDLaunchableAppsRequestOptions, 
+                       ASDLaunchableAppsResponse, ASDLogFileOptions, ASDMacDaemonManaged, 
+                       ASDManagedAppService, ASDManagedApplicationRequest, ASDManagedApplicationRequestOptions, 
                        ASDManagedRequestStatus, ASDManifestRequest, ASDMigrationRequest, 
-                       ASDMigrationRequestOptions, ASDMutableIAPInfo, ASDMutableLogConfig, 
-                       ASDNotification, ASDNotificationCenter, ASDOcelotStore, ASDPersistentRequest, 
+                       ASDMigrationRequestOptions, ASDMutableIAPInfo, ASDNotification, 
+                       ASDNotificationCenter, ASDOcelotStore, ASDPersistentRequest, 
                        ASDPersonalizationStore, ASDPostBulletinRequest, ASDPostBulletinRequestOptions, 
                        ASDProgress, ASDPurchase, ASDPurchaseHistory, ASDPurchaseHistoryApp, 
                        ASDPurchaseHistoryQuery, ASDPurchaseHistoryQuerySortOption, 

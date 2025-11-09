@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           32ECCB06-56D8-3704-935B-7D5363B2988E
+    value:           1084A655-1A23-309D-8C74-B8B0135ABAC7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           94AFB779-A06B-3AE4-8609-E9FDEF6DCF4E
+    value:           54398A7B-9A0D-3BC5-9673-73388906309A
 install-name:    '/System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

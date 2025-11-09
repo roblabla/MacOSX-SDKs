@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CDD22CA9-33B9-33DF-A2DF-547CB92F5197
+    value:           3F49037F-F547-3A02-8DCD-04AC6EF4B477
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8AED3773-44A2-346C-B4AF-ECD76D3517D2
+    value:           8A87D7B4-6F8F-3386-81F6-973C6EC0FA1C
 install-name:    '/usr/lib/libodmodule.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

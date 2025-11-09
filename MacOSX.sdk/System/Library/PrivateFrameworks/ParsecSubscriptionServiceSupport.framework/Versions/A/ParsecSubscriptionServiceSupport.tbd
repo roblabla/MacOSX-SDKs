@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EC0C2D75-19DA-37F1-9DE8-A681350FE690
+    value:           92CCBFD2-D557-3B29-8AD2-DB657720B483
   - target:          x86_64-maccatalyst
-    value:           EC0C2D75-19DA-37F1-9DE8-A681350FE690
+    value:           92CCBFD2-D557-3B29-8AD2-DB657720B483
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8A416839-22D4-3B13-A434-776EC882178F
+    value:           CB2D7A28-18E9-306D-ADCE-72C63F0223BF
   - target:          arm64e-maccatalyst
-    value:           8A416839-22D4-3B13-A434-776EC882178F
+    value:           CB2D7A28-18E9-306D-ADCE-72C63F0223BF
 install-name:    '/System/Library/PrivateFrameworks/ParsecSubscriptionServiceSupport.framework/Versions/A/ParsecSubscriptionServiceSupport'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C317996F-5486-310E-AB57-41DC0B412AF0
+    value:           D91840AC-BBEC-3078-B60E-2812556CA112
   - target:          x86_64-maccatalyst
-    value:           C317996F-5486-310E-AB57-41DC0B412AF0
+    value:           D91840AC-BBEC-3078-B60E-2812556CA112
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25BD320D-A621-3B1F-BFFD-A247685AF994
+    value:           77842A68-3C63-33B0-941E-453077C93043
   - target:          arm64e-maccatalyst
-    value:           25BD320D-A621-3B1F-BFFD-A247685AF994
+    value:           77842A68-3C63-33B0-941E-453077C93043
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 40.18
+current-version: 43
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -222,33 +222,35 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4B273AA5-37AE-3F49-8E70-83A258D56E66
+    value:           1F839039-C8F0-3505-94DF-2846BB70B0F3
   - target:          x86_64-maccatalyst
-    value:           4B273AA5-37AE-3F49-8E70-83A258D56E66
+    value:           1F839039-C8F0-3505-94DF-2846BB70B0F3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C8978418-7F79-3FCA-826C-A1B9BA85039E
+    value:           8A7462B5-EA66-3D6D-A292-5B9F494A719C
   - target:          arm64e-maccatalyst
-    value:           C8978418-7F79-3FCA-826C-A1B9BA85039E
+    value:           8A7462B5-EA66-3D6D-A292-5B9F494A719C
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
-current-version: 7
+current-version: 7.3
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CATAssertIsNotQueue, _CATAssertIsQueue, _CATErrorDomain, 
                        _CATErrorWithCodeAndUserInfo, _CATErrorWithDomainCodeAndUserInfo, 
                        _CATFormattedStringForKey, _CATGetCatalystQueue, _CATLocalizedKey, 
                        _CATSetCatalystQueue, _CATUnlocalizedKey ]
     objc-classes:    [ CATAddress, CATArbitrator, CATBatchRemoteTaskOperation, CATBlockOperationObserver, 
-                       CATCollectionController, CATEndPoint, CATMessage, CATMutableTaskProgress, 
-                       CATNetworkReachability, CATNotificationMessage, CATOperation, 
-                       CATOperationQueue, CATProperty, CATRemoteConnection, CATRemoteConnectionSocketOptions, 
-                       CATRemoteConnectionTrustDecision, CATRemoteTaskOperation, 
-                       CATRemoteTransport, CATSerialOperationQueue, CATSessionMessage, 
-                       CATSessionMessageDidInvalidate, CATSessionMessageInvalidate, 
+                       CATCollectionController, CATEndPoint, CATIDSMessageOptions, 
+                       CATIDSServiceConnection, CATIDSServiceConnectionMetadata, 
+                       CATIDSServiceConnectionTerminal, CATIDSServiceTransport, CATMessage, 
+                       CATMutableTaskProgress, CATNetworkReachability, CATNotificationMessage, 
+                       CATOperation, CATOperationQueue, CATProperty, CATRemoteConnection, 
+                       CATRemoteConnectionSocketOptions, CATRemoteConnectionTrustDecision, 
+                       CATRemoteTaskOperation, CATRemoteTransport, CATSerialOperationQueue, 
+                       CATSessionMessage, CATSessionMessageDidInvalidate, CATSessionMessageInvalidate, 
                        CATSessionMessageResume, CATSessionMessageResumed, CATSocket, 
                        CATState, CATStateMachine, CATStateMachineEvent, CATTaskBlockServer, 
                        CATTaskClient, CATTaskMessage, CATTaskMessageCancel, CATTaskMessageError, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FF79BFE9-9875-34B1-8E50-E7A1590609A1
+    value:           6FFC6E6A-9464-3D7A-BBDE-7A491CB63519
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           81A02D72-BAE1-3213-A64B-4996263BE4A9
+    value:           8B755B72-9622-3040-90B6-36A9B1456396
 install-name:    '/System/Library/PrivateFrameworks/BatteryUIKit.framework/Versions/A/BatteryUIKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

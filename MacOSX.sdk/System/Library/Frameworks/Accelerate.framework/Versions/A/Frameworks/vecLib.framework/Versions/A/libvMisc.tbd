@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           31EC654D-61A8-3E20-8C52-A2CF2EC40283
+    value:           4F41DAFB-68BF-35FE-8944-960AF8671CC0
   - target:          x86_64-maccatalyst
-    value:           31EC654D-61A8-3E20-8C52-A2CF2EC40283
+    value:           4F41DAFB-68BF-35FE-8944-960AF8671CC0
   - target:          x86_64h-macos
-    value:           219319E1-BDBD-34D1-97B7-E46256785D3C
+    value:           D6E786AE-7BEB-3096-88F1-00F08C69BA4B
   - target:          x86_64h-maccatalyst
-    value:           219319E1-BDBD-34D1-97B7-E46256785D3C
+    value:           D6E786AE-7BEB-3096-88F1-00F08C69BA4B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           48EB6D40-7B0D-3CB0-9F4D-1481ABB81222
+    value:           7A93ED19-3E37-30B0-92C9-75BF78B9BBD5
   - target:          arm64e-maccatalyst
-    value:           48EB6D40-7B0D-3CB0-9F4D-1481ABB81222
+    value:           7A93ED19-3E37-30B0-92C9-75BF78B9BBD5
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib'
-current-version: 760.40.6
+current-version: 760.100.3
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _VVACOS, _VVACOSF, _VVACOSF_, _VVACOSH, _VVACOSHF, _VVACOSHF_, 
                        _VVACOSH_, _VVACOS_, _VVASIN, _VVASINF, _VVASINF_, _VVASINH, 
@@ -92,7 +92,7 @@ exports:
                        _vvsqrt_, _vvsqrtf, _vvsqrtf_, _vvtan, _vvtan_, _vvtanf, _vvtanf_, 
                        _vvtanh, _vvtanh_, _vvtanhf, _vvtanhf_, _vvtanpi, _vvtanpi_, 
                        _vvtanpif, _vvtanpif_ ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, arm64-macos ]
     symbols:         [ ___cblas_isamax, ___cblas_sasum, ___cblas_saxpy, ___cblas_sgemm, 
                        ___cblas_sgemv, ___cblas_srot, ___cblas_sscal, ___cblas_sswap, 
                        _dMultMatMat_16x16, _dMultMatMat_32x32, _dMultMatMat_4x4, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A0DAE6AE-9DDA-37B4-A087-545A242CF982
+    value:           56BD9FF2-197B-3B70-9FDF-86DE68F6F2B1
   - target:          x86_64-maccatalyst
-    value:           A0DAE6AE-9DDA-37B4-A087-545A242CF982
+    value:           56BD9FF2-197B-3B70-9FDF-86DE68F6F2B1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FD325DB-4A8C-32E2-B1B6-FAB9C8DD2DCC
+    value:           7FA503C1-F211-31CB-8772-8A2DB7BDC02D
   - target:          arm64e-maccatalyst
-    value:           5FD325DB-4A8C-32E2-B1B6-FAB9C8DD2DCC
+    value:           7FA503C1-F211-31CB-8772-8A2DB7BDC02D
 install-name:    '/System/Library/PrivateFrameworks/CoreSVG.framework/Versions/A/CoreSVG'
 current-version: 149
 exports:

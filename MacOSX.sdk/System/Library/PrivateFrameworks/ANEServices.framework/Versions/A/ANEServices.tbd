@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F86B479B-3FA0-366C-84A6-D35253ABBF5E
+    value:           095A88EA-C73B-36AB-BF73-667EF03DACAE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F9997965-AE50-351D-9FBF-345382233A34
+    value:           420CD452-6B62-3817-9713-F00213AE027C
 install-name:    '/System/Library/PrivateFrameworks/ANEServices.framework/Versions/A/ANEServices'
 exports:
   - targets:         [ x86_64-macos ]
@@ -21,7 +21,7 @@ exports:
                        _H11ANEProgramCreate, _H11ANEProgramCreateNewInstance, _H11ANEProgramDestroy, 
                        _H11ANEProgramPrepare, _H11ANEProgramProcessRequest, _H11ANEProgramProcessRequest2, 
                        _H11ANEProgramProcessRequestDirect, _H11ANEProgramStop, _H11InitializePlatformServices, 
-                       __Z17ANECDumpAnalyticsPvm, __Z21ANECGenerateAnalyticsPK15ANEStatsRawDataPK19ANEStatsPerfCounterPvS5_m, 
+                       __Z17ANECDumpAnalyticsPvm, __Z21ANECGenerateAnalyticsPK21ANEStatsRawDataStructPK25ANEStatsPerfCounterStructPvS5_m, 
                        __ZN13H11ANEMetrics10StartTimerEv, __ZN13H11ANEMetrics12ClearSamplesEv, 
                        __ZN13H11ANEMetrics17GetMetricsSummaryEP21_H11ANEMetricsSummary, 
                        __ZN13H11ANEMetrics19PrintMetricsSummaryEv, __ZN13H11ANEMetrics9AddSampleEyy, 

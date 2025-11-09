@@ -19,7 +19,7 @@ API_AVAILABLE(ios(9.0)) typedef NS_ENUM(NSInteger, UIPressPhase) {
     UIPressPhaseBegan,         // whenever a button press begins.
     UIPressPhaseChanged,       // whenever a button moves.
     UIPressPhaseStationary,    // whenever a buttons was pressed and is still being held down.
-    UIPressPhaseEnded,         // whenever a button is releasd.
+    UIPressPhaseEnded,         // whenever a button is released.
     UIPressPhaseCancelled,     // whenever a button press doesn't end but we need to stop tracking.
 };
 

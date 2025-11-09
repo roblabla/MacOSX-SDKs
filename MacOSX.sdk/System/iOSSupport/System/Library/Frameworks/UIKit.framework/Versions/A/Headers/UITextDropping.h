@@ -89,7 +89,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
 /* Provide a custom preview for dropping text into the text control.
  *
  * Only one preview is used, regardless of the number of items being dropped.
- * Becase we're animating into one range of text, there is no need for individual
+ * Because we're animating into one range of text, there is no need for individual
  * previews.
  *
  * The defaultPreview is the preview that the control would normally use

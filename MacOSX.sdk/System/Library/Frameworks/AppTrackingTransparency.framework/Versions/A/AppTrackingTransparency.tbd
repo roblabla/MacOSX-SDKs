@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2DAA6696-22D3-3686-A85E-A2F0B4BDF024
+    value:           FD377597-63E4-3B0D-BA5B-EFE26D3BC6E1
   - target:          x86_64-maccatalyst
-    value:           2DAA6696-22D3-3686-A85E-A2F0B4BDF024
+    value:           FD377597-63E4-3B0D-BA5B-EFE26D3BC6E1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BA9D55C0-8F61-3C04-A58D-180134DE14B1
+    value:           3B9920C1-C67A-3526-8343-887B2E0D4CB8
   - target:          arm64e-maccatalyst
-    value:           BA9D55C0-8F61-3C04-A58D-180134DE14B1
+    value:           3B9920C1-C67A-3526-8343-887B2E0D4CB8
 install-name:    '/System/Library/Frameworks/AppTrackingTransparency.framework/Versions/A/AppTrackingTransparency'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AppTrackingTransparencyVersionNumber, _AppTrackingTransparencyVersionString ]
-    objc-classes:    [ ATTrackingManager ]
+    objc-classes:    [ ATFollowUpManager, ATTrackingEnforcementManager, ATTrackingManager ]
 ...

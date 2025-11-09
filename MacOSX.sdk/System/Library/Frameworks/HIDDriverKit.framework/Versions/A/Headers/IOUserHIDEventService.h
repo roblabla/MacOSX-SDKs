@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.60.3) generated from IOUserHIDEventService.iig */
+/* iig(DriverKit-107.100.6) generated from IOUserHIDEventService.iig */
 
 /* IOUserHIDEventService.iig:1-38 */
 /*
@@ -39,7 +39,7 @@
 
 class OSArray;
 
-/* source class IOUserHIDEventService IOUserHIDEventService.iig:39-244 */
+/* source class IOUserHIDEventService IOUserHIDEventService.iig:39-280 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -150,6 +150,27 @@ public:
                                             uint64_t timeStamp,
                                             IOHIDDigitizerTouchData *touchData,
                                             uint32_t touchDataCount) override LOCALONLY;
+
+    /*!
+     * @function SetProperties
+     *
+     * @abstract
+     * Handler for properties set by the user service or DriverKit Driver
+     *
+     * @discussion
+     * Passing kIOHIDEventDriverHandlesReport means that IOUserHIDEventService passes
+     * all reports to the subclassing driver without doing any processing through
+     * handleReport. Normally, IOHIDInterface::processReport() is called before handleReport.
+     * It should be set in handleStart to ensure that all HID reports are delievered to
+     * if needed.
+     *
+     * @param properties
+     * Dictionary of properties that are trying to be set.
+     *
+     * @return
+     * returns kIOReturnSuccess on success.
+     */
+    virtual kern_return_t SetProperties(OSDictionary * properties) override;
     
 protected:
     
@@ -170,7 +191,15 @@ protected:
      * @function handleReport
      *
      * @abstract
-     * Callback invoked when an input report is received from the device.
+     * Method invoked to generate IOHIDEvents after data has been
+     * recieved from a new HID report.
+     *
+     * @discussion
+     * By default this function is called after IOHIDInterface::processReport when a report arrives
+     * from the IOHIDInterface so the IOHIDElements are updated before handleReport is called.
+     * If kIOHIDEventDriverHandlesReport is set to true using SetProperties, then handleReport is
+     * called before any other processing. And it is up to the implementation on handleReport
+     * to update the IOHIDElements.
      *
      * @param timestamp
      * The timestamp of the report.
@@ -198,7 +227,7 @@ protected:
      *
      * @abstract
      * Returns an array of IOHIDElement objects. The element values will be
-     * updates on calls to the handleReport() function.
+     * updates on calls to IOHIDInterface::processReport function.
      *
      * @return
      * Returns an array of IOHIDElement objects.
@@ -223,7 +252,14 @@ private:
      * @function ReportAvailable
      *
      * @abstract
-     * Callback invoked when an input report is received from the device.
+     * Callback invoked when an input report is received from the device. 
+     *
+     * @discussion 
+     * Calls into IOHIDInterface::processReport which should update the appropriate
+     * IOHIDElements and then handleReport to generate IOHIDEvents as needed.
+     * If kIOHIDEventDriverHandlesReport is set using SetProperties then only handleReport
+     * is called when a report is received and it is expected to handle updating the elements 
+     * and generating the needed IOHIDEvents.
      *
      * @param timestamp
      * The timestamp of the report.
@@ -255,7 +291,7 @@ private:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOUserHIDEventService IOUserHIDEventService.iig:39-244 */
+/* generated class IOUserHIDEventService IOUserHIDEventService.iig:39-280 */
 
 #define IOUserHIDEventService_ReportAvailable_ID            0x64b213ea6ab88649ULL
 
@@ -264,6 +300,9 @@ private:
 
 #define IOUserHIDEventService_Stop_Args \
         IOService * provider
+
+#define IOUserHIDEventService_SetProperties_Args \
+        OSDictionary * properties
 
 #define IOUserHIDEventService_ReportAvailable_Args \
         uint64_t timestamp, \
@@ -299,6 +338,9 @@ protected:\
 \
     kern_return_t\
     Stop_Impl(IOService_Stop_Args);\
+\
+    kern_return_t\
+    SetProperties_Impl(IOService_SetProperties_Args);\
 \
     void\
     ReportAvailable_Impl(IOUserHIDEventService_ReportAvailable_Args);\
@@ -524,6 +566,6 @@ public:
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOUserHIDEventService.iig:246- */
+/* IOUserHIDEventService.iig:282- */
 
 #endif /* ! _HIDDRIVERKIT_IOUSERHIDEVENTSERVICE_H */

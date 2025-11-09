@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AC6665D6-76C3-3792-AB69-4EF566DD411B
+    value:           2B0099AF-1406-3914-9FF9-393ABA6DCD53
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ADFA81D2-B7EA-32DC-8EE3-6B9175BC1A25
+    value:           151F2D68-2C68-31E1-A32F-50CB018FAC02
 install-name:    '/System/Library/Frameworks/QuickLook.framework/Versions/A/QuickLook'
 current-version: 0
 exports:

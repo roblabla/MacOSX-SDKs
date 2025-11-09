@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           042A77FB-1D89-3F74-809C-3E70EBBD3378
+    value:           EB44D0B7-53BE-36FE-B446-9129A2396405
   - target:          x86_64-maccatalyst
-    value:           042A77FB-1D89-3F74-809C-3E70EBBD3378
+    value:           EB44D0B7-53BE-36FE-B446-9129A2396405
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C6DCDD3D-4E93-3A89-87AA-5595BDB61F46
+    value:           8E843DA2-3C5C-37D5-93BA-BC70CCEC171C
   - target:          arm64e-maccatalyst
-    value:           C6DCDD3D-4E93-3A89-87AA-5595BDB61F46
+    value:           8E843DA2-3C5C-37D5-93BA-BC70CCEC171C
 install-name:    '/System/Library/PrivateFrameworks/ProactiveEventTracker.framework/Versions/A/ProactiveEventTracker'
-current-version: 294.4
+current-version: 294.6
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CD7FC25C-0775-390E-9757-4466C528769B
+    value:           316F85D0-517D-373F-8A79-BAAB68D35AA0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           13AF8485-F28B-3622-B40F-A13BD26CC72B
+    value:           CFCEBA3A-DBE2-3903-B31F-4ADF5D18F872
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/LoginUIKit'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -22,13 +22,13 @@ exports:
                        _LUI2MessageTextWidth, _LUI2PasswordFieldHeight, _LUI2PasswordFieldWidth, 
                        _LUI2ScrollViewWidth, _LUI2ScrollViewWidthPadding, _LUI2SpacerWidthLeft, 
                        _LUI2SpacerWidthRight, _LUI2StackViewSpacing, _LUI2StatusViewContentHeight, 
-                       _LUI2StatusViewTrailingEdgeBuffer, _LUIAttributeTypeAvatarRepresentation, 
-                       _LUIBackgroundPressed, _LUIButtonBack, _LUIButtonCancel, _LUIButtonCancelKey, 
-                       _LUIButtonExit, _LUIButtonGo, _LUIButtonGuestUser, _LUIButtonHint, 
-                       _LUIButtonNetworkStatus, _LUIButtonNext, _LUIButtonPrevious, 
-                       _LUIButtonRestart, _LUIButtonRestartToSafari, _LUIButtonShiftLeft, 
-                       _LUIButtonShiftRight, _LUIButtonShutDown, _LUIButtonSleep, 
-                       _LUIButtonSwitchUser, _LUICopyDefaultDesktopPictureForEFILogin, 
+                       _LUI2StatusViewTrailingEdgeBuffer, _LUI2UserPictureDiameter, 
+                       _LUIAttributeTypeAvatarRepresentation, _LUIBackgroundPressed, 
+                       _LUIButtonBack, _LUIButtonCancel, _LUIButtonCancelKey, _LUIButtonExit, 
+                       _LUIButtonGo, _LUIButtonGuestUser, _LUIButtonHint, _LUIButtonNetworkStatus, 
+                       _LUIButtonNext, _LUIButtonPrevious, _LUIButtonRestart, _LUIButtonRestartToSafari, 
+                       _LUIButtonShiftLeft, _LUIButtonShiftRight, _LUIButtonShutDown, 
+                       _LUIButtonSleep, _LUIButtonSwitchUser, _LUICopyDefaultDesktopPictureForEFILogin, 
                        _LUICopyDefaultDesktopPictureForScreenLock, _LUICopyDesktopPicture, 
                        _LUICopyDesktopPictureForLoginWindowEFI, _LUICopyDesktopPictureForLoginWindowUI, 
                        _LUICopyDesktopPictureForScreenLock, _LUICopyDockDesktopPictureForDisplay, 
@@ -40,12 +40,13 @@ exports:
                        _LUIPasswordPolicyDetailsCreatePopover, _LUIPasswordPolicyDetailsUpdatePopover, 
                        _LUIPasswordPolicyEvaluateStatus, _LUIPasswordPolicyForNewLocalUser, 
                        _LUIPasswordPolicyForUserWithPassword, _LUIPasswordPopoverSummaryCreatePopover, 
-                       _LUIPinEntered, _LUISpinnerDictionary, _LUITimePressed, _LUIToggleInfo, 
-                       _LUITransitionDictionaryForDisplay, _LUIUserIconPressed, _LikenessForODRecord, 
-                       _LikenessForUID, _PRLikenessClass, _RemoteProviderInterface, 
-                       _SetPRLikenessInUserRecord, __CanDebug, _gMinScreenOrigin, 
-                       _kContinuityServiceProvider, _kExtraProgressSpace, _kLUIFlagAuthenticationService, 
-                       _kLUIFlagBattery, _kLUIFlagDesktopPicture, _kLUIFlagInputMethod, 
+                       _LUIPinEntered, _LUISpinnerDictionary, _LUIStipViewHighlightTopBuffer, 
+                       _LUITimePressed, _LUIToggleInfo, _LUITransitionDictionaryForDisplay, 
+                       _LUIUserIconPressed, _LikenessForODRecord, _LikenessForUID, 
+                       _PRLikenessClass, _RemoteProviderInterface, _SetPRLikenessInUserRecord, 
+                       __CanDebug, _gMinScreenOrigin, _kContinuityServiceProvider, 
+                       _kExtraProgressSpace, _kLUIFlagAuthenticationService, _kLUIFlagBattery, 
+                       _kLUIFlagDesktopPicture, _kLUIFlagGeneric, _kLUIFlagInputMethod, 
                        _kLUIFlagPasswordPolicy, _kLUIFlagUsers, _kLUIFlagWindows, 
                        _kLocalAuthenticationServiceProvider, _kSmartCardServiceProvider ]
     objc-classes:    [ LUI2Appearance, LUI2AuthHintViewController, LUI2AuthorizationPluginViewController, 
@@ -140,11 +141,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8AE86484-F756-3BDE-973A-A70C0345697B
+    value:           F7405A52-C8D4-3EAF-9322-9B9434775AD7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3AE223DC-ACE7-3E72-8865-A4107EAAF0BA
+    value:           748BBF2C-9EF6-3E51-BB50-387CBE807DAD
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

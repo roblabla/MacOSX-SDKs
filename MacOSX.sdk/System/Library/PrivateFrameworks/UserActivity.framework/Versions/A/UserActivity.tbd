@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           075FD354-28FD-3A13-881C-955FA9106D5C
+    value:           3D4BBAA6-516C-31A2-A2D0-1AB91AAD7E85
   - target:          x86_64-maccatalyst
-    value:           075FD354-28FD-3A13-881C-955FA9106D5C
+    value:           3D4BBAA6-516C-31A2-A2D0-1AB91AAD7E85
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           33EC085E-4106-3662-9FBE-6D3687ABFF34
+    value:           513548D0-41DB-32CB-9B4A-2AFB1A28FF23
   - target:          arm64e-maccatalyst
-    value:           33EC085E-4106-3662-9FBE-6D3687ABFF34
+    value:           513548D0-41DB-32CB-9B4A-2AFB1A28FF23
 install-name:    '/System/Library/PrivateFrameworks/UserActivity.framework/Versions/A/UserActivity'
-current-version: 435
+current-version: 438
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

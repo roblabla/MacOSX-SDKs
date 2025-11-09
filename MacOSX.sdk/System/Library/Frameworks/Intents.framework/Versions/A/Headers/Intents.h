@@ -162,3 +162,4 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/INSetTaskAttributeIntent_Deprecated.h>
 #import <Intents/INAddTasksIntent_Deprecated.h>
 #import <Intents/INMediaSearch_Deprecated.h>
+#import <Intents/INCallRecord_Deprecated.h>

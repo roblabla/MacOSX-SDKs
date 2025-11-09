@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0D97EE35-7AA1-370E-B43E-5F71C644C805
+    value:           75E702F4-9C09-3DFE-88F2-F2C0D3FB85DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9C80CD75-2BA3-323B-A484-02B5B1BCA32C
+    value:           15FEDBC0-7A5F-3C74-8FAA-9119D68F0A74
 install-name:    '/System/Library/PrivateFrameworks/TrialServer.framework/Versions/A/TrialServer'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -40,7 +40,9 @@ exports:
                        _TRIDNotificationTokenKey, _TRIDServerRun, _TRIDimensionName_ClientAppBundleId, 
                        _TRIDimensionName_ClientAppShortVersionString, _TRIDimensionName_ClientDeploymentEnvironment, 
                        _TRIDimensionName_ClientDeploymentId, _TRIDimensionName_ClientExperimentId, 
-                       _TRIDimensionName_ClientTeamId, _TRIDimensionName_ClientTreatmentId, 
+                       _TRIDimensionName_ClientRolloutId, _TRIDimensionName_ClientTeamId, 
+                       _TRIDimensionName_ClientTreatmentId, _TRIDimensionName_PrevLanguageCode, 
+                       _TRIDimensionName_PrevOSBuild, _TRIDimensionName_PrevRegionCode, 
                        _TRIDimensionName_TaskName, _TRILogCategory_Archiving, _TRILogCategory_Backtrace, 
                        _TRILogCategory_Daemon, _TRILogCategory_InternalTool, _TRILogCategory_Server, 
                        _TRILogCategory_XCTest, _TRIMetricName_ClientTreatmentInfo, 
@@ -56,12 +58,12 @@ exports:
                        _TRITaskQueueScheduledTaskDefaultGracePeriod, _TrialServerVersionNumber, 
                        _TrialServerVersionString, _kTRISubjectIdMinLength, _kTRIUserDefaultsTaskQueueDeferralSequenceKey ]
     objc-classes:    [ TRIActivateTreatmentBaseTask, TRIActivateTreatmentPersistedTask, 
-                       TRIActivateTreatmentTask, TRIAllocationStatusEntitlementSet, 
-                       TRIAnyPersistedTask, TRIAssetStore, TRIBaseTask, TRICKNativeArtifactProvider, 
-                       TRIClientExperimentArtifact, TRIClientExperimentStorage, TRIClientTreatmentArtifact, 
-                       TRIClientTreatmentStorage, TRIConfigurationPersistedTask, 
-                       TRIConfigurationTask, TRIContentTracker, TRIContentTrackingId, 
-                       TRIDServer, TRIDatabase, TRIDeactivateTreatmentPersistedTask, 
+                       TRIActivateTreatmentTask, TRIActivationEventDatabase, TRIActivationEventRecord, 
+                       TRIAllocationStatusEntitlementSet, TRIAnyPersistedTask, TRIAssetStore, 
+                       TRIBaseTask, TRICKNativeArtifactProvider, TRIClientExperimentArtifact, 
+                       TRIClientExperimentStorage, TRIClientTreatmentArtifact, TRIClientTreatmentStorage, 
+                       TRIConfigurationPersistedTask, TRIConfigurationTask, TRIContentTracker, 
+                       TRIContentTrackingId, TRIDServer, TRIDatabase, TRIDeactivateTreatmentPersistedTask, 
                        TRIDeactivateTreatmentTask, TRIDynamicNamespaceRecord, TRIExperimentBaseTask, 
                        TRIExperimentBaseTaskGuardedData, TRIExperimentDatabase, TRIExperimentFetchDateManager, 
                        TRIExperimentHistoryDatabase, TRIExperimentTreatment, TRIFetchExperimentNotificationsPersistedTask, 
@@ -94,9 +96,9 @@ exports:
                        TRIXPCInternalServiceWrapper, TRIXPCNamespaceManagementRequestHandler, 
                        TRIXPCNamespaceManagementServiceListener, TRIXPCNamespaceManagementServiceWrapper, 
                        TRIXPCServices ]
-    objc-ivars:      [ TRIExperimentBaseTaskGuardedData.dimensions, TRIExperimentBaseTaskGuardedData.metrics, 
-                       TRITaskQueueGuardedData.currentCapabilities, TRITaskQueueGuardedData.nextScheduledTaskStartTime, 
-                       TRITaskQueueGuardedData.queuedTasks, TRITaskQueueGuardedData.stopRequested, 
-                       TRITaskQueueGuardedData.taskQueueCompletionBlock, TRITaskQueueGuardedData.taskStore, 
-                       TRITaskQueueGuardedData.xpcDescriptorToState ]
+    objc-ivars:      [ TRIExperimentBaseTaskGuardedData.dimensions, TRIExperimentBaseTaskGuardedData.logAsRollout, 
+                       TRIExperimentBaseTaskGuardedData.metrics, TRITaskQueueGuardedData.currentCapabilities, 
+                       TRITaskQueueGuardedData.nextScheduledTaskStartTime, TRITaskQueueGuardedData.queuedTasks, 
+                       TRITaskQueueGuardedData.stopRequested, TRITaskQueueGuardedData.taskQueueCompletionBlock, 
+                       TRITaskQueueGuardedData.taskStore, TRITaskQueueGuardedData.xpcDescriptorToState ]
 ...

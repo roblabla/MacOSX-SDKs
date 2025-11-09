@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C238B6B5-8B75-377F-9DDF-B2ED08C772CF
+    value:           6A9179C1-77EC-34B5-97FF-AC02252CF65B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E107F857-2A18-3429-9DF0-435437BB548A
+    value:           E18827CF-7AE4-3C31-AE80-1190159CE173
 install-name:    '/System/Library/PrivateFrameworks/AudioServerDriver.framework/Versions/A/AudioServerDriver'
 exports:
   - targets:         [ x86_64-macos ]
@@ -91,9 +91,17 @@ exports:
                        __ZN18ASDDSPStreamHelper26allocateStreamingResourcesEj, __ZN18ASDDSPStreamHelper27setGraphAudioValidationModeE36ASDDSPStreamGraphAudioValidationMode, 
                        __ZN18ASDDSPStreamHelper28deallocateStreamingResourcesEv, 
                        __ZN18ASDDSPStreamHelper8writeMixEjPK28AudioServerPlugInIOCycleInfoPvS3_j, 
-                       __ZN18ASDDSPStreamHelper9readInputEjPK28AudioServerPlugInIOCycleInfoPvS3_j, 
-                       __ZN18ASDDSPStreamHelperC1ERK24CAStreamBasicDescriptionRKNSt3__16vectorIS0_NS3_9allocatorIS0_EEEERKNS4_INS_38ASDUnderlyingStreamDoIOOperationBlocksENS5_ISA_EEEERN5caulk10concurrent25guarded_lookup_hash_tableIyP17ASDDSPGraphHelperLNSG_33guarded_lookup_hash_table_optionsE2EEEb, 
-                       __ZN18ASDDSPStreamHelperC2ERK24CAStreamBasicDescriptionRKNSt3__16vectorIS0_NS3_9allocatorIS0_EEEERKNS4_INS_38ASDUnderlyingStreamDoIOOperationBlocksENS5_ISA_EEEERN5caulk10concurrent25guarded_lookup_hash_tableIyP17ASDDSPGraphHelperLNSG_33guarded_lookup_hash_table_optionsE2EEEb, 
+                       __ZN18ASDDSPStreamHelper9DSPStream7setupIOERN8DSPGraph11GraphIODataEj14AudioTimeStamp, 
+                       __ZN18ASDDSPStreamHelper9DSPStream8writeMixEjPK28AudioServerPlugInIOCycleInfoj, 
+                       __ZN18ASDDSPStreamHelper9DSPStream9readInputEjPK28AudioServerPlugInIOCycleInfoj, 
+                       __ZN18ASDDSPStreamHelper9DSPStreamC1E18ASDStreamDirection24CAStreamBasicDescriptionU13block_pointerFijPK28AudioServerPlugInIOCycleInfoPvS6_jES8_, 
+                       __ZN18ASDDSPStreamHelper9DSPStreamC1EOS0_, __ZN18ASDDSPStreamHelper9DSPStreamC1ERKS0_, 
+                       __ZN18ASDDSPStreamHelper9DSPStreamC2E18ASDStreamDirection24CAStreamBasicDescriptionU13block_pointerFijPK28AudioServerPlugInIOCycleInfoPvS6_jES8_, 
+                       __ZN18ASDDSPStreamHelper9DSPStreamC2EOS0_, __ZN18ASDDSPStreamHelper9DSPStreamC2ERKS0_, 
+                       __ZN18ASDDSPStreamHelper9DSPStreamaSEOS0_, __ZN18ASDDSPStreamHelper9DSPStreamaSERKS0_, 
+                       __ZN18ASDDSPStreamHelper9addStreamERKNS_9DSPStreamE, __ZN18ASDDSPStreamHelper9readInputEjPK28AudioServerPlugInIOCycleInfoPvS3_j, 
+                       __ZN18ASDDSPStreamHelperC1ERK24CAStreamBasicDescriptionRKNSt3__16vectorINS_9DSPStreamENS3_9allocatorIS5_EEEERN5caulk10concurrent25guarded_lookup_hash_tableIyP17ASDDSPGraphHelperLNSC_33guarded_lookup_hash_table_optionsE2EEE18ASDStreamDirection, 
+                       __ZN18ASDDSPStreamHelperC2ERK24CAStreamBasicDescriptionRKNSt3__16vectorINS_9DSPStreamENS3_9allocatorIS5_EEEERN5caulk10concurrent25guarded_lookup_hash_tableIyP17ASDDSPGraphHelperLNSC_33guarded_lookup_hash_table_optionsE2EEE18ASDStreamDirection, 
                        __ZN18ASDSRCStreamHelper26allocateStreamingResourcesEj, __ZN18ASDSRCStreamHelper28deallocateStreamingResourcesEv, 
                        __ZN18ASDSRCStreamHelper8writeMixEjPK28AudioServerPlugInIOCycleInfoPvS3_j, 
                        __ZN18ASDSRCStreamHelper9readInputEjPK28AudioServerPlugInIOCycleInfoPvS3_j, 
@@ -156,9 +164,9 @@ exports:
                        __ZN8DSPGraph8GraphBoxD0Ev, __ZN8DSPGraph8GraphBoxD1Ev, __ZN8DSPGraph8GraphBoxD2Ev, 
                        __ZNK10RamstadSRC14latencySamplesEv, __ZNK10RamstadSRC14latencySecondsEv, 
                        __ZNK10RamstadSRC28inputSamplesForOutputSamplesEi, __ZNK10RamstadSRC28outputSamplesForInputSamplesEiRi, 
-                       __ZNK18ASDDSPStreamHelper23underlyingStreamFormatsEv, __ZNK18ASDDSPStreamHelper9dspFormatEv, 
-                       __ZNK18ASDSRCStreamHelper23underlyingStreamFormatsEv, __ZNK18ASDSRCStreamHelper9srcFormatEv, 
-                       __ZNK24CAStreamBasicDescription25GetRegularizedFormatFlagsEb, 
+                       __ZNK18ASDDSPStreamHelper18dspInStreamFormatsEv, __ZNK18ASDDSPStreamHelper19dspOutStreamFormatsEv, 
+                       __ZNK18ASDDSPStreamHelper9dspFormatEv, __ZNK18ASDSRCStreamHelper23underlyingStreamFormatsEv, 
+                       __ZNK18ASDSRCStreamHelper9srcFormatEv, __ZNK24CAStreamBasicDescription25GetRegularizedFormatFlagsEb, 
                        __ZNK24CAStreamBasicDescription7IsEqualERK27AudioStreamBasicDescription, 
                        __ZNK24CAStreamBasicDescription7IsEqualERK27AudioStreamBasicDescriptionb, 
                        __ZNK24CAStreamBasicDescription8AsStringEPcmb, __ZNK5CALog5Scope15ScopeLogEnabledEiy, 
@@ -176,7 +184,7 @@ exports:
                        ASDPluginDSPDatabase, ASDProperty, ASDPropertyAddress, ASDPropertyStripInfo, 
                        ASDRingBuffer, ASDRingBufferInputStream, ASDRingBufferOutputStream, 
                        ASDRingBufferStreamPair, ASDSRCAudioDevice, ASDSRCStream, 
-                       ASDSelectorControl, ASDSelectorValue, ASDStereoPanControl, 
+                       ASDSelectorControl, ASDSelectorValue, ASDSliderControl, ASDStereoPanControl, 
                        ASDStream, ASDStreamDSPConfiguration, ASDStreamFormat ]
   - targets:         [ arm64e-macos, arm64-macos ]
     symbols:         [ __ZN5CALog6log_vaEiPKNS_5ScopeEPKciS4_S4_PK10__CFStringPc, 

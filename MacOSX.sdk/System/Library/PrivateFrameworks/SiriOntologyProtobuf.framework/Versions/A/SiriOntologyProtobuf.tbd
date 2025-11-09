@@ -3,24 +3,26 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           204ABCE2-D103-33CA-A932-E830334FF245
+    value:           C2006456-A302-3181-ABDB-8F90B5ADFB55
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0D39B7BA-0EBF-3815-8058-A441B192EB34
+    value:           46BCFF9B-E71B-3C37-B9BF-D06FF12A9A76
 install-name:    '/System/Library/PrivateFrameworks/SiriOntologyProtobuf.framework/Versions/A/SiriOntologyProtobuf'
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AlarmFlowPlugin, AlarmFlowPluginTests, AppControlPlugin, AppControlPluginTests, 
                        AudioFlowDelegatePlugin, AudioFlowDelegatePluginTests, CannedDialogFlowDelegatePlugin, 
+                       CarCommandsFlowDelegatePlugin, CarCommandsFlowDelegatePluginTests, 
                        ContactsFlowDelegatePlugin, ContactsFlowDelegatePlugin-Tests, 
-                       ContinuousDialogManagerService, ContinuousDialogManagerTests, 
+                       ContactsIntentExtension, ContinuousDialogManagerService, ContinuousDialogManagerTests, 
                        ControlsFlowDelegatePlugin, ControlsFlowDelegatePluginTests, 
                        ConversationStore, CoreKnowledge, CoreKnowledgeTests, CoreKnowledgeTests_OBJC, 
-                       DailyBriefingFlowPlugin, DailyBriefingFlowPlugin-Tests, FindMyFlowPlugin, 
-                       FindMyFlowPluginTests, FlowFrameKitTests, GeoFlowDelegatePlugin, 
-                       HealthFlowDelegatePlugin, HealthFlowDelegatePlugin-Test, HomeAutomationFlowDelegatePlugin, 
+                       DailyBriefingFlowPlugin, DailyBriefingFlowPlugin-Tests, EdutainmentFlowPlugin, 
+                       EdutainmentFlowPluginTests, FindMyFlowPlugin, FindMyFlowPluginTests, 
+                       FlowFrameKitTests, GeoFlowDelegatePlugin, HealthFlowDelegatePlugin, 
+                       HealthFlowDelegatePlugin-Test, HomeAutomationFlowDelegatePlugin, 
                        HomeAutomationFlowDelegatePluginTests, HomeAutomationInternal, 
                        KnowledgeGraphFlowDelegatePlugin, KnowledgeGraphFlowDelegatePluginTests, 
                        MediaDialogTests, MediaFlowDelegatePlugin, MessagesFlowDelegatePlugin, 
@@ -35,7 +37,7 @@ allowable-clients:
                        SiriContactsIntents, SiriContactsIntentsTests, SiriDecision, 
                        SiriDecisionTests, SiriDialogEngine, SiriDialogEngineTests, 
                        SiriExecution, SiriExecutionTests, SiriFindMy, SiriFindMyTests, 
-                       SiriFlow, SiriFlowTests, SiriGlobalRanker, SiriGlobalRankerTests, 
+                       SiriFlow, SiriFlowTests, SiriGeoTests, SiriGlobalRanker, SiriGlobalRankerTests, 
                        SiriKitDomainsCommon, SiriKitDomainsCommon-Tests, SiriKitExecutor, 
                        SiriKitExecutorBundle-Tests, SiriKitFlow, SiriKitFlowTests, 
                        SiriKitRuntime, SiriKitRuntimeTests, SiriLinkExtensionSupport, 
@@ -48,9 +50,10 @@ allowable-clients:
                        SiriTranslation, SiriVideoIntents, SiriVideoIntentsTests, 
                        TimerFlowDelegatePlugin, TimerFlowDelegatePlugin-Tests, TranslationApp, 
                        TranslationExtension, TranslationFlowDelegatePlugin, TranslationTests, 
-                       UaaPFeaturization, VideoDialogTests, VideoFlowDelegatePlugin, 
-                       VoiceCommandsFlowDelegatePlugin, VoiceCommandsFlowDelegatePlugin-Tests, 
-                       assistant_cdmd ]
+                       UaaP Demo, UaaPDemoTests, UaaPFeaturization, UaaPFeaturizationTests, 
+                       VideoDialogTests, VideoFlowDelegatePlugin, VoiceCommandsFlowDelegatePlugin, 
+                       VoiceCommandsFlowDelegatePlugin-Tests, WellnessFlowPlugin, 
+                       WellnessFlowPlugin-Test, assistant_cdmd ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s11WrappedType20SiriOntologyProtobuf0E7WrapperPTl', '_$s20SiriOntologyProtobuf01_C10MessageMapVACyxq_GycfC', 
@@ -2958,6 +2961,15 @@ exports:
                        '_$s20SiriOntologyProtobuf0C7Fixed64VACycfC', '_$s20SiriOntologyProtobuf0C7Fixed64VMa', 
                        '_$s20SiriOntologyProtobuf0C7Fixed64VMn', '_$s20SiriOntologyProtobuf0C7Fixed64VN', 
                        '_$s20SiriOntologyProtobuf0C7WrapperMp', '_$s20SiriOntologyProtobuf0C7WrapperP11WrappedTypeAC_AA05FieldF0Tn', 
+                       '_$s20SiriOntologyProtobuf0C7WrapperP5value11WrappedType_04BaseG0QZvMTj', 
+                       '_$s20SiriOntologyProtobuf0C7WrapperP5value11WrappedType_04BaseG0QZvMTq', 
+                       '_$s20SiriOntologyProtobuf0C7WrapperP5value11WrappedType_04BaseG0QZvgTj', 
+                       '_$s20SiriOntologyProtobuf0C7WrapperP5value11WrappedType_04BaseG0QZvgTq', 
+                       '_$s20SiriOntologyProtobuf0C7WrapperP5value11WrappedType_04BaseG0QZvsTj', 
+                       '_$s20SiriOntologyProtobuf0C7WrapperP5value11WrappedType_04BaseG0QZvsTq', 
+                       '_$s20SiriOntologyProtobuf0C7WrapperPxycfCTj', '_$s20SiriOntologyProtobuf0C7WrapperPxycfCTq', 
+                       '_$s20SiriOntologyProtobuf0C7WrapperPyx11WrappedType_04BaseF0QZcfCTj', 
+                       '_$s20SiriOntologyProtobuf0C7WrapperPyx11WrappedType_04BaseF0QZcfCTq', 
                        '_$s20SiriOntologyProtobuf0C7WrapperTL', '_$s20SiriOntologyProtobuf0C8SFixed32V11visitPacked5value11fieldNumber4withySays5Int32VG_SixztKAA7VisitorRzlFZ', 
                        '_$s20SiriOntologyProtobuf0C8SFixed32V13visitRepeated5value11fieldNumber4withySays5Int32VG_SixztKAA7VisitorRzlFZ', 
                        '_$s20SiriOntologyProtobuf0C8SFixed32V13visitSingular5value11fieldNumber4withys5Int32V_SixztKAA7VisitorRzlFZ', 
@@ -3671,7 +3683,13 @@ exports:
                        '_$s20SiriOntologyProtobuf18SimpleExtensionMapVs28CustomDebugStringConvertibleAAMc', 
                        '_$s20SiriOntologyProtobuf18SimpleExtensionMapVyA2Cd_tcfC', 
                        '_$s20SiriOntologyProtobuf18SimpleExtensionMapVyAA010AnyMessageE0_pSgAA0H0_pXp_Sitcig', 
-                       '_$s20SiriOntologyProtobuf18_CustomJSONCodableMp', '_$s20SiriOntologyProtobuf18_CustomJSONCodablePAAE19decodedFromJSONNullxSgyFZ', 
+                       '_$s20SiriOntologyProtobuf18_CustomJSONCodableMp', '_$s20SiriOntologyProtobuf18_CustomJSONCodableP10decodeJSON4fromyAA11JSONDecoderVz_tKFTj', 
+                       '_$s20SiriOntologyProtobuf18_CustomJSONCodableP10decodeJSON4fromyAA11JSONDecoderVz_tKFTq', 
+                       '_$s20SiriOntologyProtobuf18_CustomJSONCodableP17encodedJSONString7optionsSSAA19JSONEncodingOptionsV_tKFTj', 
+                       '_$s20SiriOntologyProtobuf18_CustomJSONCodableP17encodedJSONString7optionsSSAA19JSONEncodingOptionsV_tKFTq', 
+                       '_$s20SiriOntologyProtobuf18_CustomJSONCodableP19decodedFromJSONNullxSgyKFZTj', 
+                       '_$s20SiriOntologyProtobuf18_CustomJSONCodableP19decodedFromJSONNullxSgyKFZTq', 
+                       '_$s20SiriOntologyProtobuf18_CustomJSONCodablePAAE19decodedFromJSONNullxSgyFZ', 
                        '_$s20SiriOntologyProtobuf18_CustomJSONCodableTL', '_$s20SiriOntologyProtobuf19AnyMessageExtensionMp', 
                        '_$s20SiriOntologyProtobuf19AnyMessageExtensionP11fieldNumberSivgTj', 
                        '_$s20SiriOntologyProtobuf19AnyMessageExtensionP11fieldNumberSivgTq', 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BF49B28B-23F5-3AE5-9A2F-BB5D96FF452D
+    value:           923EF5B0-7D4D-3D45-8920-3B5839C0A294
   - target:          x86_64-maccatalyst
-    value:           BF49B28B-23F5-3AE5-9A2F-BB5D96FF452D
+    value:           923EF5B0-7D4D-3D45-8920-3B5839C0A294
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E324E5E3-F24E-3CD5-91C3-2AF2015D6CD6
+    value:           9E84D2C3-9F98-361F-BFA6-BB4C20FB3BA4
   - target:          arm64e-maccatalyst
-    value:           E324E5E3-F24E-3CD5-91C3-2AF2015D6CD6
+    value:           9E84D2C3-9F98-361F-BFA6-BB4C20FB3BA4
 install-name:    '/System/Library/PrivateFrameworks/DataDetectorsNaturalLanguage.framework/Versions/A/DataDetectorsNaturalLanguage'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

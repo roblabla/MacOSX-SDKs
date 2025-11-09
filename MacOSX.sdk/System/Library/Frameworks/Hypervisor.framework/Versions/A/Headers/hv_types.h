@@ -11,6 +11,9 @@
 #ifdef __x86_64__
 
 #include <Hypervisor/hv_base.h>
+#include <Kernel/kern/hv_io_notifier.h>
+
+#include <mach/message.h>
 
 OS_ASSUME_NONNULL_BEGIN
 
@@ -60,6 +63,7 @@ typedef uint64_t hv_vm_options_t;
 enum {
 	HV_VCPU_DEFAULT = (0ull),
 	HV_VCPU_ACCEL_RDPMC = (1ull << 0),
+	HV_VCPU_TSC_RELATIVE = (1ull << 1),
 };
 
 typedef uint64_t hv_vcpu_options_t;
@@ -88,6 +92,39 @@ enum {
 };
 
 typedef uint32_t hv_msr_flags_t;
+
+/*!
+ * @enum       hv_ion_flags_t
+ * @abstract   Options for hv_vcpu_add_io_notifier()
+ * @constant   HV_ION_ANY_VALUE    Match on any value
+ * @constant   HV_ION_ANY_SIZE     Match on any size
+ * @constant   HV_ION_EXIT_FULL    Return if notification queue is full
+ */
+enum {
+	HV_ION_NONE			= kHV_ION_NONE,
+	HV_ION_ANY_VALUE	= kHV_ION_ANY_VALUE,
+	HV_ION_ANY_SIZE		= kHV_ION_ANY_SIZE,
+	HV_ION_EXIT_FULL	= kHV_ION_EXIT_FULL,
+};
+
+typedef uint32_t hv_ion_flags_t;
+
+/*!
+ * @enum       hv_ion_message_t
+ * @abstract   Mach message sent when an IO notifier fires
+ * @field      header  Mach message header
+ * @field      addr    Address of the IO write
+ * @field      size    Size of the value written
+ * @field      value   Value written
+ * @field      trailer Mach message trailer
+ */
+typedef struct {
+	mach_msg_header_t header;
+	uint64_t addr;
+	uint64_t size;
+	uint64_t value;
+	mach_msg_trailer_t trailer;
+} hv_ion_message_t;
 
 /*!
  * @typedef    hv_vcpu_id_t

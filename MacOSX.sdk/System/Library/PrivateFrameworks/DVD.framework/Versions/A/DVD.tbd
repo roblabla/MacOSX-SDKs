@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0BA34D50-A5D9-3429-8BF9-137679784577
+    value:           E04B0B24-B1F5-32B5-A262-7AF0A5B6031C
 install-name:    '/System/Library/PrivateFrameworks/DVD.framework/Versions/A/DVD'
 exports:
   - targets:         [ x86_64-macos ]

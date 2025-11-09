@@ -92,6 +92,10 @@ or Activity Monitor.app. However, it can provide insight into dirty memory that 
 The
 .Fl -vmObjectDirty
 mode was the default in versions prior to macOS 10.15.
+.It Fl -unmapped
+search all processes for memory owned by the target processes but not mapped into their address spaces (see the discussion in
+.Sx MEMORY ACCOUNTING
+for more details)
 .It Fl -sample Ar interval
 Start
 .Nm
@@ -192,7 +196,13 @@ while more accurate, is expensive and cannot be done in real-time for systems th
 .Pp
 Apple platforms instead keep track of the 'physical footprint' by using a per-process ledger in the kernel that is kept up-to-date by the pmap and other subsystems. This ledger is cheap to query, suitably accurate, and provides additional features such as tracking peak memory and the ability to charge one process for memory that is no longer mapped into it or that may have been allocated by another process. In cases where
 .Nm footprint
-is unable to analyze a portion of 'physical footprint' that is not mapped into a process, this memory will be listed as 'Owned physical footprint (unmapped)'.
+is unable to analyze a portion of 'physical footprint' that is not mapped into a process, this memory will be listed as 'Owned physical footprint (unmapped)'. If this memory is mapped into another userspace process then the
+.Fl -unmapped
+argument can be used to search all processes for a mapping of the same VM object, which if found will provide a better description and what process(s) have mapped the memory. This also happens by default when targeting all processes via
+.Fl -all .
+Any memory still listed as "(unmapped)" after using
+.Fl -unmapped
+is likely not mapped into any userspace process and instead only referenced by the kernel or drivers.
 .br
 The exact definition of this 'physical footprint' ledger is complicated and subject to change, but suffice it to say that the default mode of
 .Nm footprint

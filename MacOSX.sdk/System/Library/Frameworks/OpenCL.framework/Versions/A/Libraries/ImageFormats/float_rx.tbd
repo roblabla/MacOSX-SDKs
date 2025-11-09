@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8002C79F-F39F-3D1C-9FAC-7BCB45FC58D8
+    value:           A1643473-F938-3C71-A66C-32498D1EC4F5
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/float_rx.dylib'
 exports:
   - targets:         [ x86_64-macos ]

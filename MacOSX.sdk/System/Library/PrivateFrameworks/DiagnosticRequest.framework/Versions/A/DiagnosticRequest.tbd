@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           700AA9DE-8274-3742-83BF-A5DC90797330
+    value:           DA0F21B7-003A-325A-A0ED-C26DCD66DB6A
   - target:          x86_64-maccatalyst
-    value:           700AA9DE-8274-3742-83BF-A5DC90797330
+    value:           DA0F21B7-003A-325A-A0ED-C26DCD66DB6A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4CECDAC7-CB09-3688-8581-2487148855F1
+    value:           0E4A460E-7273-35EF-B61E-947AC803F7EF
   - target:          arm64e-maccatalyst
-    value:           4CECDAC7-CB09-3688-8581-2487148855F1
+    value:           0E4A460E-7273-35EF-B61E-947AC803F7EF
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticRequest.framework/Versions/A/DiagnosticRequest'
 current-version: 0
 exports:

@@ -1,11 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target x86_64-apple-ios14.3-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreData -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreData
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target x86_64-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreData -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreData
 import Combine
 @_exported import CoreData
 import Foundation
 import Swift
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension NSManagedObject : Combine.ObservableObject {
   public var objectWillChange: Combine.ObservableObjectPublisher {
     get
@@ -825,8 +825,8 @@ extension NSManagedObjectContext {
     case deletedObjectIDs
     case refreshedObjectIDs
     case invalidatedObjectIDs
-    public typealias RawValue = Swift.String
     public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
     }

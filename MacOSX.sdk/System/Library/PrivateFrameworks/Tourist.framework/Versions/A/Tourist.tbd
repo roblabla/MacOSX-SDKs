@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C618FE77-7070-3AD1-884C-955D5C809603
+    value:           89E41282-236F-3119-9CC9-2D79ED9A3EE3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           02D83DE7-DB0C-301F-901F-FCD347ED81FE
+    value:           3F76DF06-75F8-3DD5-B9F4-2CB48AE74764
 install-name:    '/System/Library/PrivateFrameworks/Tourist.framework/Versions/A/Tourist'
-current-version: 1.0.69
+current-version: 1.0.71
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _TouristDefinitionABTestCasesKey, _TouristDefinitionAllowQAPaths, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F68F3141-A9E5-394B-AC99-AFC51D070C76
+    value:           8F2D6B7A-0F19-3305-B345-B9A2F92ECA12
   - target:          x86_64-maccatalyst
-    value:           F68F3141-A9E5-394B-AC99-AFC51D070C76
+    value:           8F2D6B7A-0F19-3305-B345-B9A2F92ECA12
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           269DF481-7A43-3DDD-B47D-5CCA85908323
+    value:           23A77BD6-14F9-34B7-91EB-8F77540CC55A
   - target:          arm64e-maccatalyst
-    value:           269DF481-7A43-3DDD-B47D-5CCA85908323
+    value:           23A77BD6-14F9-34B7-91EB-8F77540CC55A
 install-name:    '/System/Library/PrivateFrameworks/AppSSOKerberos.framework/Versions/A/AppSSOKerberos'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

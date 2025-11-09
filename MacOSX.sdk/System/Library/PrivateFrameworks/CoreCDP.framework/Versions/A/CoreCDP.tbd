@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E2B5735B-3BC8-30EA-86CC-9C0AFF4FD5E7
+    value:           5A319FCB-E353-3466-AE62-A1D9D1A3539C
   - target:          x86_64-maccatalyst
-    value:           E2B5735B-3BC8-30EA-86CC-9C0AFF4FD5E7
+    value:           5A319FCB-E353-3466-AE62-A1D9D1A3539C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B0D1823D-A2BC-35DD-B6F5-42A3827C430D
+    value:           4A7BFAAE-30C6-3EF3-B050-1BB380F47EC4
   - target:          arm64e-maccatalyst
-    value:           B0D1823D-A2BC-35DD-B6F5-42A3827C430D
+    value:           4A7BFAAE-30C6-3EF3-B050-1BB380F47EC4
 install-name:    '/System/Library/PrivateFrameworks/CoreCDP.framework/Versions/A/CoreCDP'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -24,20 +24,22 @@ exports:
                        _CDPIDMSPasswordResetKey, _CDPIDMSRecordMIDKey, _CDPLocalizedString, 
                        _CDPManateeAvailabilityNotification, _CDPManateeAvailabilityStateKey, 
                        _CDPStateErrorDomain, _CDPUIProviderExportedInterface, _CDPUnqualifiedDeviceClassToLocKey, 
-                       _CDP_FOLLOWUP_OFFLINE_PASSCODE, _CDP_FOLLOWUP_RECOVERY_KEY_REGEN, 
+                       _CDP_FOLLOWUP_CONFIRM_EXISTING_SECRET, _CDP_FOLLOWUP_OFFLINE_PASSCODE, 
+                       _CDP_FOLLOWUP_RECOVERY_KEY_REGEN, _CDP_FOLLOWUP_SECURE_TERMS, 
                        _CDP_FOLLOWUP_SETUP_BIOMETIRCS, _CDP_FOLLOWUP_STATE_REPAIR, 
                        _CoreCDPVersionNumber, _CoreCDPVersionString, __CDPLogSystem, 
                        __CDPSignpostCreate, __CDPSignpostGetNanoseconds, __CDPSignpostLogSystem, 
                        __CDPStateError, __CDPStateErrorWithUnderlying, __CDPSuffixForDeviceClass, 
                        __CDPSuffixForSecretType, __CDPSuffixForUnqualifiedDeviceClass ]
     objc-classes:    [ CDPAccount, CDPAuthProviderProxy, CDPCircleProxyImpl, CDPContext, 
-                       CDPController, CDPDaemonConnection, CDPDevice, CDPFollowUpContext, 
-                       CDPFollowUpController, CDPKeychainSync, CDPLocalDevice, CDPLocalDeviceSecretHandler, 
-                       CDPLocalDeviceSecretProxyImpl, CDPLocalSecret, CDPLocalizedStringBuilder, 
-                       CDPManateeStateController, CDPPCSUtilities, CDPProtectedCloudStorageProxyImpl, 
-                       CDPRecoveryController, CDPRecoveryKeyValidatorProxyImpl, CDPRemoteDeviceSecretValidator, 
-                       CDPStateController, CDPStateUIProviderProxy, CDPToolFakeUIProvider, 
-                       CDPUtilities ]
+                       CDPController, CDPDaemonConnection, CDPDataPrivacyController, 
+                       CDPDevice, CDPFollowUpContext, CDPFollowUpController, CDPKeychainSync, 
+                       CDPLocalDevice, CDPLocalDeviceSecretHandler, CDPLocalDeviceSecretProxyImpl, 
+                       CDPLocalSecret, CDPLocalizedStringBuilder, CDPManateeStateController, 
+                       CDPPCSUtilities, CDPProtectedCloudStorageProxyImpl, CDPRecoveryController, 
+                       CDPRecoveryKeyValidatorProxyImpl, CDPRemoteDeviceSecretValidator, 
+                       CDPStateController, CDPStateUIProviderProxy, CDPTermsInfoBackupController, 
+                       CDPToolFakeUIProvider, CDPUpdateDataPrivacyContext, CDPUtilities ]
     objc-ivars:      [ CDPDevice._deviceColor, CDPDevice._enclosureColor, CDPDevice._hasNumericSecret, 
                        CDPDevice._hasRandomSecret, CDPDevice._isCurrentDevice, CDPDevice._isUsingMultipleiCSC, 
                        CDPDevice._localizedName, CDPDevice._machineID, CDPDevice._model, 

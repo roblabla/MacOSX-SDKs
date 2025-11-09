@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           03E107FF-4D2F-3DFB-91FC-0E9E610F8D9B
+    value:           31D65F1A-938D-32A8-8F59-98A26BFA3573
   - target:          x86_64-maccatalyst
-    value:           03E107FF-4D2F-3DFB-91FC-0E9E610F8D9B
+    value:           31D65F1A-938D-32A8-8F59-98A26BFA3573
   - target:          x86_64h-macos
-    value:           F7221D16-689C-3480-8F1D-717483D61E7A
+    value:           E86FF883-85AB-3AC5-8703-47B20B91FF71
   - target:          x86_64h-maccatalyst
-    value:           F7221D16-689C-3480-8F1D-717483D61E7A
+    value:           E86FF883-85AB-3AC5-8703-47B20B91FF71
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           428AD4B0-CBE5-3958-9902-B74033927C57
+    value:           3024ADE8-D3B0-37CF-85FB-34AC38E2930F
   - target:          arm64e-maccatalyst
-    value:           428AD4B0-CBE5-3958-9902-B74033927C57
+    value:           3024ADE8-D3B0-37CF-85FB-34AC38E2930F
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO'
 exports:
   - targets:         [ x86_64-macos, x86_64h-macos, x86_64-maccatalyst, x86_64h-maccatalyst ]
     symbols:         [ _CGImageCreateByMatchingToDisplay ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CGAnimateImageAtURLWithBlock, _CGAnimateImageDataWithBlock, 
                        _CGCopyBasicPropertiesOfImageAtPath, _CGImageCopyFileWithGPSInformation, 
@@ -69,23 +69,23 @@ exports:
                        _CGImageMetadataValueSetSuggestedNamespacePrefix, _CGImagePluginGetMatchToProfileOption, 
                        _CGImagePluginGetMetadata, _CGImagePluginGetOptions, _CGImagePluginGetProperties, 
                        _CGImagePluginGetSession, _CGImagePluginInitJPEGAtOffset, 
-                       _CGImagePluginInitThumbJPEGAtOffset, _CGImagePluginReadRawIPTCProps, 
-                       _CGImagePluginReadRawXMPProps, _CGImagePluginReadRawXMPSidecarProps, 
-                       _CGImagePluginSetClipPath, _CGImagePluginSetImage, _CGImagePluginSetImageBlockProc, 
-                       _CGImagePluginSetJpegProvider, _CGImageReadSessionCreateFILE, 
-                       _CGImageReadSessionGetBytePointer, _CGImageReadSessionGetBytesAtOffset, 
-                       _CGImageReadSessionGetFilePath, _CGImageReadSessionGetSize, 
-                       _CGImageReadSessionGetTypeID, _CGImageReadSessionIsFinal, 
-                       _CGImageReadSessionReleaseBytePointer, _CGImageReadSessionReleaseCachedImageBlockData, 
-                       _CGImageSourceAddProperty, _CGImageSourceCopyAuxiliaryDataInfoAtIndex, 
-                       _CGImageSourceCopyMetadataAtIndex, _CGImageSourceCopyMetadataPropertiesAtIndex, 
-                       _CGImageSourceCopyProperties, _CGImageSourceCopyPropertiesAtIndex, 
-                       _CGImageSourceCopyTypeExtensions, _CGImageSourceCopyTypeIdentifiers, 
-                       _CGImageSourceCreateIOSurfaceAtIndex, _CGImageSourceCreateImageAtIndex, 
-                       _CGImageSourceCreateIncremental, _CGImageSourceCreateThumbnailAtIndex, 
-                       _CGImageSourceCreateWithData, _CGImageSourceCreateWithDataProvider, 
-                       _CGImageSourceCreateWithFile, _CGImageSourceCreateWithURL, 
-                       _CGImageSourceGetCount, _CGImageSourceGetImageCacheAtIndex, 
+                       _CGImagePluginInitThumbJPEGAtOffset, _CGImagePluginInitThumbJPEGAtOffsetWithOptions, 
+                       _CGImagePluginReadRawIPTCProps, _CGImagePluginReadRawXMPProps, 
+                       _CGImagePluginReadRawXMPSidecarProps, _CGImagePluginSetClipPath, 
+                       _CGImagePluginSetImage, _CGImagePluginSetImageBlockProc, _CGImagePluginSetJpegProvider, 
+                       _CGImageReadSessionCreateFILE, _CGImageReadSessionGetBytePointer, 
+                       _CGImageReadSessionGetBytesAtOffset, _CGImageReadSessionGetFilePath, 
+                       _CGImageReadSessionGetSize, _CGImageReadSessionGetTypeID, 
+                       _CGImageReadSessionIsFinal, _CGImageReadSessionReleaseBytePointer, 
+                       _CGImageReadSessionReleaseCachedImageBlockData, _CGImageSourceAddProperty, 
+                       _CGImageSourceCopyAuxiliaryDataInfoAtIndex, _CGImageSourceCopyMetadataAtIndex, 
+                       _CGImageSourceCopyMetadataPropertiesAtIndex, _CGImageSourceCopyProperties, 
+                       _CGImageSourceCopyPropertiesAtIndex, _CGImageSourceCopyTypeExtensions, 
+                       _CGImageSourceCopyTypeIdentifiers, _CGImageSourceCreateIOSurfaceAtIndex, 
+                       _CGImageSourceCreateImageAtIndex, _CGImageSourceCreateIncremental, 
+                       _CGImageSourceCreateThumbnailAtIndex, _CGImageSourceCreateWithData, 
+                       _CGImageSourceCreateWithDataProvider, _CGImageSourceCreateWithFile, 
+                       _CGImageSourceCreateWithURL, _CGImageSourceGetCount, _CGImageSourceGetImageCacheAtIndex, 
                        _CGImageSourceGetPrimaryImageIndex, _CGImageSourceGetStatus, 
                        _CGImageSourceGetStatusAtIndex, _CGImageSourceGetType, _CGImageSourceGetTypeID, 
                        _CGImageSourceGetTypeWithData, _CGImageSourceGetTypeWithDataProvider, 
@@ -478,10 +478,11 @@ exports:
                        _kCGImageSourceCreateThumbnailFromImageProxy, _kCGImageSourceCreateThumbnailWithTransform, 
                        _kCGImageSourceDisableParallelDecode, _kCGImageSourceDoNotCacheImageBlocks, 
                        _kCGImageSourceDrawAnnotations, _kCGImageSourceEnableMosquitoNoiseFiltering, 
-                       _kCGImageSourceForCoreImage, _kCGImageSourceIgnoreJPEGAuxImages, 
-                       _kCGImageSourceJPEGInterchangeFormat, _kCGImageSourceJPEGInterchangeFormatLength, 
-                       _kCGImageSourceMemoryMapAsShared, _kCGImageSourceMethodCurrentVersion, 
-                       _kCGImageSourceNeutralX, _kCGImageSourceNeutralY, _kCGImageSourceNoiseTransitionEnabled, 
+                       _kCGImageSourceEnableRestrictedDecoding, _kCGImageSourceForCoreImage, 
+                       _kCGImageSourceIgnoreJPEGAuxImages, _kCGImageSourceJPEGInterchangeFormat, 
+                       _kCGImageSourceJPEGInterchangeFormatLength, _kCGImageSourceMemoryMapAsShared, 
+                       _kCGImageSourceMethodCurrentVersion, _kCGImageSourceNeutralX, 
+                       _kCGImageSourceNeutralY, _kCGImageSourceNoiseTransitionEnabled, 
                        _kCGImageSourcePreferHEIFCollection, _kCGImageSourcePreferredThreadCount, 
                        _kCGImageSourceRasterizationDPI, _kCGImageSourceRawReconstructionDefaults, 
                        _kCGImageSourceRawReconstructionMethodVersions, _kCGImageSourceRawReconstructionOptions, 
@@ -517,7 +518,7 @@ exports:
                        _kImageIOInfoHeader_skipLabFixup, _kImageIOInfoHeader_supportsMultipleResolutions, 
                        _kImageIOInfoHeader_usesImageAndMask, _kIsAdobeRGB, _kIsNotICC, 
                        _kIsSRGB, _kIsUnknownICC ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.4$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.5$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.6$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 

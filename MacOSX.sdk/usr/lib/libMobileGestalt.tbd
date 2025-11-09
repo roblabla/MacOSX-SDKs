@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F721B185-0E6A-396B-A50F-0F55810D9A67
+    value:           1B957D3E-C0F7-36AF-98E4-8897F8633BEA
   - target:          x86_64-maccatalyst
-    value:           F721B185-0E6A-396B-A50F-0F55810D9A67
+    value:           1B957D3E-C0F7-36AF-98E4-8897F8633BEA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D8DD322B-F5E3-3398-B549-51AF91E7935D
+    value:           B9F374A6-6048-325E-A442-13226E0D77A9
   - target:          arm64e-maccatalyst
-    value:           D8DD322B-F5E3-3398-B549-51AF91E7935D
+    value:           B9F374A6-6048-325E-A442-13226E0D77A9
 install-name:    '/usr/lib/libMobileGestalt.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

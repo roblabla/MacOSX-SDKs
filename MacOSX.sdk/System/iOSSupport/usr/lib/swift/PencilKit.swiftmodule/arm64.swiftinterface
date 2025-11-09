@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target arm64e-apple-ios14.3-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPencilKit -swift-version 5 -enforce-exclusivity=checked -O -module-name PencilKit
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target arm64e-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPencilKit -swift-version 5 -enforce-exclusivity=checked -O -module-name PencilKit
 @_exported import PencilKit
 import Swift
 @available(iOS 13.0, *)
@@ -10,7 +10,7 @@ extension PKCanvasView {
     set
   }
 }
-@available(iOS 14.0, OSX 11.0, *)
+@available(iOS 14.0, macOS 11.0, *)
 public struct PKStrokePath : Swift.RandomAccessCollection {
   public init()
   public init<T>(controlPoints: T, creationDate: Foundation.Date) where T : Swift.Sequence, T.Element == PencilKit.PKStrokePoint
@@ -39,11 +39,11 @@ public struct PKStrokePath : Swift.RandomAccessCollection {
   public subscript(index: PencilKit.PKStrokePath.Index) -> PencilKit.PKStrokePoint {
     get
   }
-  public typealias SubSequence = Swift.Slice<PencilKit.PKStrokePath>
   public typealias Indices = Swift.Range<PencilKit.PKStrokePath.Index>
   public typealias Iterator = Swift.IndexingIterator<PencilKit.PKStrokePath>
+  public typealias SubSequence = Swift.Slice<PencilKit.PKStrokePath>
 }
-@available(iOS 14.0, OSX 11.0, *)
+@available(iOS 14.0, macOS 11.0, *)
 extension PKStrokePath : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = PencilKit.PKStrokePathReference
   public func _bridgeToObjectiveC() -> PencilKit.PKStrokePath._ObjectiveCType
@@ -51,17 +51,17 @@ extension PKStrokePath : Swift._ObjectiveCBridgeable {
   public static func _conditionallyBridgeFromObjectiveC(_ source: PencilKit.PKStrokePath._ObjectiveCType, result: inout PencilKit.PKStrokePath?) -> Swift.Bool
   public static func _unconditionallyBridgeFromObjectiveC(_ source: PencilKit.PKStrokePath._ObjectiveCType?) -> PencilKit.PKStrokePath
 }
-@available(iOS 13.0, OSX 11.0, *)
+@available(iOS 13.0, macOS 11.0, *)
 public struct PKEraserTool : PencilKit.PKTool, Swift.Equatable {
   public init(_ eraserType: PencilKit.PKEraserTool.EraserType)
   public enum EraserType {
     case vector
     case bitmap
     public static func == (a: PencilKit.PKEraserTool.EraserType, b: PencilKit.PKEraserTool.EraserType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public var eraserType: PencilKit.PKEraserTool.EraserType {
     get
@@ -69,7 +69,7 @@ public struct PKEraserTool : PencilKit.PKTool, Swift.Equatable {
   }
   public static func == (a: PencilKit.PKEraserTool, b: PencilKit.PKEraserTool) -> Swift.Bool
 }
-@available(iOS 13.0, OSX 11.0, *)
+@available(iOS 13.0, macOS 11.0, *)
 extension PKEraserTool : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = PencilKit.PKEraserToolReference
   public func _bridgeToObjectiveC() -> PencilKit.PKEraserTool._ObjectiveCType
@@ -77,7 +77,7 @@ extension PKEraserTool : Swift._ObjectiveCBridgeable {
   public static func _conditionallyBridgeFromObjectiveC(_ source: PencilKit.PKEraserTool._ObjectiveCType, result: inout PencilKit.PKEraserTool?) -> Swift.Bool
   public static func _unconditionallyBridgeFromObjectiveC(_ source: PencilKit.PKEraserTool._ObjectiveCType?) -> PencilKit.PKEraserTool
 }
-@available(iOS 14.0, OSX 11.0, *)
+@available(iOS 14.0, macOS 11.0, *)
 public struct PKStroke {
   public init(ink: PencilKit.PKInk, path: PencilKit.PKStrokePath, transform: CoreGraphics.CGAffineTransform = .identity, mask: UIKit.UIBezierPath? = nil)
   public var ink: PencilKit.PKInk {
@@ -103,7 +103,7 @@ public struct PKStroke {
     get
   }
 }
-@available(iOS 14.0, OSX 11.0, *)
+@available(iOS 14.0, macOS 11.0, *)
 extension PKStroke : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = PencilKit.PKStrokeReference
   public func _bridgeToObjectiveC() -> PencilKit.PKStroke._ObjectiveCType
@@ -111,10 +111,10 @@ extension PKStroke : Swift._ObjectiveCBridgeable {
   public static func _conditionallyBridgeFromObjectiveC(_ source: PencilKit.PKStroke._ObjectiveCType, result: inout PencilKit.PKStroke?) -> Swift.Bool
   public static func _unconditionallyBridgeFromObjectiveC(_ source: PencilKit.PKStroke._ObjectiveCType?) -> PencilKit.PKStroke
 }
-@available(iOS 13.0, OSX 11.0, *)
+@available(iOS 13.0, macOS 11.0, *)
 public protocol PKTool {
 }
-@available(iOS 14.0, OSX 11.0, *)
+@available(iOS 14.0, macOS 11.0, *)
 public struct PKStrokePoint {
   public init(location: CoreGraphics.CGPoint, timeOffset: Foundation.TimeInterval, size: CoreGraphics.CGSize, opacity: CoreGraphics.CGFloat, force: CoreGraphics.CGFloat, azimuth: CoreGraphics.CGFloat, altitude: CoreGraphics.CGFloat)
   public var location: CoreGraphics.CGPoint {
@@ -139,7 +139,7 @@ public struct PKStrokePoint {
     get
   }
 }
-@available(iOS 14.0, OSX 11.0, *)
+@available(iOS 14.0, macOS 11.0, *)
 extension PKStrokePoint : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = PencilKit.PKStrokePointReference
   public func _bridgeToObjectiveC() -> PencilKit.PKStrokePoint._ObjectiveCType
@@ -147,7 +147,7 @@ extension PKStrokePoint : Swift._ObjectiveCBridgeable {
   public static func _conditionallyBridgeFromObjectiveC(_ source: PencilKit.PKStrokePoint._ObjectiveCType, result: inout PencilKit.PKStrokePoint?) -> Swift.Bool
   public static func _unconditionallyBridgeFromObjectiveC(_ source: PencilKit.PKStrokePoint._ObjectiveCType?) -> PencilKit.PKStrokePoint
 }
-@available(iOS 13.0, OSX 11.0, *)
+@available(iOS 13.0, macOS 11.0, *)
 public struct PKInkingTool : PencilKit.PKTool, Swift.Equatable {
   public init(_ inkType: PencilKit.PKInkingTool.InkType, color: UIKit.UIColor = UIColor.black, width: CoreGraphics.CGFloat? = nil)
   public enum InkType : Swift.String {
@@ -160,8 +160,8 @@ public struct PKInkingTool : PencilKit.PKTool, Swift.Equatable {
     public var validWidthRange: Swift.ClosedRange<CoreGraphics.CGFloat> {
       get
     }
-    public typealias RawValue = Swift.String
     public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
     }
@@ -181,14 +181,14 @@ public struct PKInkingTool : PencilKit.PKTool, Swift.Equatable {
   }
   public static func == (a: PencilKit.PKInkingTool, b: PencilKit.PKInkingTool) -> Swift.Bool
 }
-@available(iOS 14.0, OSX 11.0, *)
+@available(iOS 14.0, macOS 11.0, *)
 extension PKInkingTool {
   public init(ink: PencilKit.PKInk, width: CoreGraphics.CGFloat)
   public var ink: PencilKit.PKInk {
     get
   }
 }
-@available(iOS 13.0, OSX 11.0, *)
+@available(iOS 13.0, macOS 11.0, *)
 extension PKInkingTool : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = PencilKit.PKInkingToolReference
   public func _bridgeToObjectiveC() -> PencilKit.PKInkingTool._ObjectiveCType
@@ -196,7 +196,7 @@ extension PKInkingTool : Swift._ObjectiveCBridgeable {
   public static func _conditionallyBridgeFromObjectiveC(_ source: PencilKit.PKInkingTool._ObjectiveCType, result: inout PencilKit.PKInkingTool?) -> Swift.Bool
   public static func _unconditionallyBridgeFromObjectiveC(_ source: PencilKit.PKInkingTool._ObjectiveCType?) -> PencilKit.PKInkingTool
 }
-@available(iOS 13.0, OSX 10.15, *)
+@available(iOS 13.0, macOS 10.15, *)
 public struct PKDrawing {
   public init()
   public init(data: Foundation.Data) throws
@@ -210,7 +210,7 @@ public struct PKDrawing {
   public mutating func append(_ toAppend: PencilKit.PKDrawing)
   public func appending(_ toAppend: PencilKit.PKDrawing) -> PencilKit.PKDrawing
 }
-@available(iOS 14.0, OSX 11.0, *)
+@available(iOS 14.0, macOS 11.0, *)
 extension PKDrawing {
   public init<S>(strokes: S) where S : Swift.Sequence, S.Element == PencilKit.PKStroke
   public var strokes: [PencilKit.PKStroke] {
@@ -218,16 +218,16 @@ extension PKDrawing {
     set
   }
 }
-@available(iOS 13.0, OSX 10.15, *)
+@available(iOS 13.0, macOS 10.15, *)
 extension PKDrawing : Swift.Equatable {
   public static func == (a: PencilKit.PKDrawing, b: PencilKit.PKDrawing) -> Swift.Bool
 }
-@available(iOS 13.0, OSX 10.15, *)
+@available(iOS 13.0, macOS 10.15, *)
 extension PKDrawing : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-@available(iOS 13.0, OSX 10.15, *)
+@available(iOS 13.0, macOS 10.15, *)
 extension PKDrawing : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = PencilKit.PKDrawingReference
   public func _bridgeToObjectiveC() -> PencilKit.PKDrawing._ObjectiveCType
@@ -235,12 +235,12 @@ extension PKDrawing : Swift._ObjectiveCBridgeable {
   public static func _conditionallyBridgeFromObjectiveC(_ source: PencilKit.PKDrawing._ObjectiveCType, result: inout PencilKit.PKDrawing?) -> Swift.Bool
   public static func _unconditionallyBridgeFromObjectiveC(_ source: PencilKit.PKDrawing._ObjectiveCType?) -> PencilKit.PKDrawing
 }
-@available(iOS 13.0, OSX 11.0, *)
+@available(iOS 13.0, macOS 11.0, *)
 public struct PKLassoTool : PencilKit.PKTool, Swift.Equatable {
   public init()
   public static func == (a: PencilKit.PKLassoTool, b: PencilKit.PKLassoTool) -> Swift.Bool
 }
-@available(iOS 13.0, OSX 11.0, *)
+@available(iOS 13.0, macOS 11.0, *)
 extension PKLassoTool : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = PencilKit.PKLassoToolReference
   public func _bridgeToObjectiveC() -> PencilKit.PKLassoTool._ObjectiveCType
@@ -255,13 +255,13 @@ extension PKToolPicker {
     set
   }
 }
-@available(iOS 14.0, OSX 11.0, *)
+@available(iOS 14.0, macOS 11.0, *)
 extension PKStrokePath.InterpolatedSlice : Swift.Sequence, Swift.IteratorProtocol {
   public mutating func next() -> PencilKit.PKStrokePoint?
   public typealias Element = PencilKit.PKStrokePoint
   public typealias Iterator = PencilKit.PKStrokePath.InterpolatedSlice
 }
-@available(iOS 14.0, OSX 11.0, *)
+@available(iOS 14.0, macOS 11.0, *)
 public struct PKInk {
   public typealias InkType = PencilKit.PKInkingTool.InkType
   public init(_ inkType: PencilKit.PKInk.InkType, color: UIKit.UIColor = UIColor.black)
@@ -274,7 +274,7 @@ public struct PKInk {
     set
   }
 }
-@available(iOS 14.0, OSX 11.0, *)
+@available(iOS 14.0, macOS 11.0, *)
 extension PKInk : Swift._ObjectiveCBridgeable {
   public typealias _ObjectiveCType = PencilKit.PKInkReference
   public func _bridgeToObjectiveC() -> PencilKit.PKInk._ObjectiveCType
@@ -282,13 +282,13 @@ extension PKInk : Swift._ObjectiveCBridgeable {
   public static func _conditionallyBridgeFromObjectiveC(_ source: PencilKit.PKInk._ObjectiveCType, result: inout PencilKit.PKInk?) -> Swift.Bool
   public static func _unconditionallyBridgeFromObjectiveC(_ source: PencilKit.PKInk._ObjectiveCType?) -> PencilKit.PKInk
 }
-@available(iOS 13.0, OSX 11.0, *)
+@available(iOS 13.0, macOS 11.0, *)
 extension PencilKit.PKEraserTool.EraserType : Swift.Equatable {}
-@available(iOS 13.0, OSX 11.0, *)
+@available(iOS 13.0, macOS 11.0, *)
 extension PencilKit.PKEraserTool.EraserType : Swift.Hashable {}
-@available(iOS 13.0, OSX 11.0, *)
+@available(iOS 13.0, macOS 11.0, *)
 extension PencilKit.PKInkingTool.InkType : Swift.Equatable {}
-@available(iOS 13.0, OSX 11.0, *)
+@available(iOS 13.0, macOS 11.0, *)
 extension PencilKit.PKInkingTool.InkType : Swift.Hashable {}
-@available(iOS 13.0, OSX 11.0, *)
+@available(iOS 13.0, macOS 11.0, *)
 extension PencilKit.PKInkingTool.InkType : Swift.RawRepresentable {}

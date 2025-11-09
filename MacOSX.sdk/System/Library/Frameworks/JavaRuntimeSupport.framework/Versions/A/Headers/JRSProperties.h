@@ -13,10 +13,6 @@ JRS_EXPORT char *JRSCopyOSName(void) JRS_DEPRECATED_2020_7;
 JRS_EXPORT char *JRSCopyOSVersion(void) API_DEPRECATED_WITH_REPLACEMENT("[[NSProcessInfo processInfo] operatingSystemVersion]", macos(10.10, 11.0));
 JRS_EXPORT char *JRSCopyOSJavaSupportVersion(void) JRS_DEPRECATED_2020;
 
-#elif defined(__arm64__)
-
-JRS_EXPORT char *JRSCopyOSVersion(void) API_UNAVAILABLE(macos);
-
 #endif /* __x86_64__ */
 
 JRS_END_DECLS

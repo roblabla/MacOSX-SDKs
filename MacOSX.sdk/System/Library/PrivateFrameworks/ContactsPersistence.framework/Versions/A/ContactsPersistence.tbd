@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F9AB732A-0F66-3260-AF85-572979E478EF
+    value:           52AAFF97-A9DD-3A6B-804D-937EA4A8AB87
   - target:          x86_64-maccatalyst
-    value:           F9AB732A-0F66-3260-AF85-572979E478EF
+    value:           52AAFF97-A9DD-3A6B-804D-937EA4A8AB87
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2DC7B8D8-2FDD-36B0-ADEB-B7CB48657956
+    value:           98FB0AED-4AF5-3F7C-8E5D-FB12416C3DE7
   - target:          arm64e-maccatalyst
-    value:           2DC7B8D8-2FDD-36B0-ADEB-B7CB48657956
+    value:           98FB0AED-4AF5-3F7C-8E5D-FB12416C3DE7
 install-name:    '/System/Library/PrivateFrameworks/ContactsPersistence.framework/Versions/A/ContactsPersistence'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

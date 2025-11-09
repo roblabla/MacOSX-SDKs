@@ -1,13 +1,13 @@
 //
-//  MPSImageEDLinesPrivate.h
+//  MPSImageEDLines.h
 //  MPSImage
 //
 //  Created by Christopher Bayley on 11/22/19.
 //  Copyright © 2019 Apple. All rights reserved.
 //
 
-#ifndef MPSImageEDLinesPrivate_h
-#define MPSImageEDLinesPrivate_h
+#ifndef MPSImageEDLines_h
+#define MPSImageEDLines_h
 
 /*!
  *  @class      MPSImageEDLines
@@ -164,4 +164,4 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.15.4), ios(13.4), macCatalyst(13.4), tvos
 
 @end  /* MPSImageEDLines */
 
-#endif /* MPSImageEDLinesPrivate_h */
+#endif /* MPSImageEDLines_h */

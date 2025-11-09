@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0DBA59AE-FD6A-3945-84A3-CF280DEA9660
+    value:           DEB52689-FB66-31A2-8491-070F59046003
   - target:          x86_64-maccatalyst
-    value:           0DBA59AE-FD6A-3945-84A3-CF280DEA9660
+    value:           DEB52689-FB66-31A2-8491-070F59046003
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           62C24C00-C683-3665-B2E8-03A9AC38C074
+    value:           C35D3AA8-951A-3CEC-BDE1-48A35469D291
   - target:          arm64e-maccatalyst
-    value:           62C24C00-C683-3665-B2E8-03A9AC38C074
+    value:           C35D3AA8-951A-3CEC-BDE1-48A35469D291
 install-name:    '/System/Library/PrivateFrameworks/Navigation.framework/Versions/A/Navigation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -73,15 +73,18 @@ exports:
                        _NavigationConfig_DebugNavigationAutomationNotifications, 
                        _NavigationConfig_DebugNavigationIncludeRealtimeUpdates, _NavigationConfig_DebugNavigationServerStrings, 
                        _NavigationConfig_DoomDirectionsRequestPriority, _NavigationConfig_ETAResponseFakeTrafficIncidentAlert, 
+                       _NavigationConfig_ETAResponseFakeTrafficIncidentSimulateVotingButtons, 
+                       _NavigationConfig_ETAResponseFakeTrafficIncidentVotingButtonDisplay, 
                        _NavigationConfig_ETAUpdateInterval, _NavigationConfig_EVChargingMonitorMaximumTime, 
                        _NavigationConfig_EVChargingMonitorMinimumTime, _NavigationConfig_EVChargingMonitorSpeedThreshold, 
                        _NavigationConfig_IgnoreCourseAccuracy, _NavigationConfig_InitialETARequestDelay, 
                        _NavigationConfig_JunctionViewImagesPreloadingThreshold, _NavigationConfig_LPRAverageSpeedForETAGuess, 
-                       _NavigationConfig_LPRBoundingRegionRadius, _NavigationConfig_LPRMaskPlateFailureCode_DEBUG, 
-                       _NavigationConfig_LPRMaskingRulesDateOverride, _NavigationConfig_LPRProvideBadVersion_DEBUG, 
-                       _NavigationConfig_LeechingThrottleTimeout, _NavigationConfig_LocationOverdueTimeoutForNotTunnel, 
-                       _NavigationConfig_LocationOverdueTimeoutForTunnel, _NavigationConfig_LocationOverdueTimeoutForUnknown, 
-                       _NavigationConfig_MapLocalizeLabels, _NavigationConfig_MinLocationAccuracyForPreArrivalReroute, 
+                       _NavigationConfig_LPRBoundingRegionRadius, _NavigationConfig_LPRDebugKeysResetAfter_DEBUG, 
+                       _NavigationConfig_LPRMaskPlateFailureCode_DEBUG, _NavigationConfig_LPRMaskingRulesDateOverride, 
+                       _NavigationConfig_LPRProvideBadVersion_DEBUG, _NavigationConfig_LeechingThrottleTimeout, 
+                       _NavigationConfig_LocationOverdueTimeoutForNotTunnel, _NavigationConfig_LocationOverdueTimeoutForTunnel, 
+                       _NavigationConfig_LocationOverdueTimeoutForUnknown, _NavigationConfig_MapLocalizeLabels, 
+                       _NavigationConfig_MinLocationAccuracyForPreArrivalReroute, 
                        _NavigationConfig_MinimumDistanceBetweenReroutes, _NavigationConfig_MinimumTimeBetweenReroutes, 
                        _NavigationConfig_NavDoomCacheCurrentTripTag, _NavigationConfig_NavdDisconnectRetryCount, 
                        _NavigationConfig_NavdDisconnectRetryWindow, _NavigationConfig_NavdMonitoringDistanceThreshold, 
@@ -108,8 +111,9 @@ exports:
                        _NavigationConfig_TracePlaybackShouldLoadReroutesFromTrace, 
                        _NavigationConfig_TracePlaybackShouldSendAnalytics, _NavigationConfig_TraceRecordingCopyToCrashReporter, 
                        _NavigationConfig_TraceRecordingEnabled, _NavigationConfig_TrafficIncidentAlertDisplayDurationSeconds, 
-                       _NavigationConfig_UseCLDrivingMapMatchedLocations, _NavigationConfig_UseCLPedestrianMapMatchedLocations, 
-                       _NavigationConfig_UseNewDisplayETACalculation, _NavigationConfig_WaypointArrival_DistanceFromWaypointPolygonToAllowDeparture, 
+                       _NavigationConfig_UGCRequestDiscoverabilityPrompt, _NavigationConfig_UseCLDrivingMapMatchedLocations, 
+                       _NavigationConfig_UseCLPedestrianMapMatchedLocations, _NavigationConfig_UseNewDisplayETACalculation, 
+                       _NavigationConfig_WaypointArrival_DistanceFromWaypointPolygonToAllowDeparture, 
                        _NavigationConfig_WaypointArrival_DistanceToCenterToAllowDeparture, 
                        _NavigationConfig_WaypointArrival_TimeAtWaypointToAllowDeparture, 
                        __MNDisplayETAAndRemainingMinutesNew, __MNDisplayETAAndRemainingMinutesOld, 
@@ -117,13 +121,12 @@ exports:
                        _navDisplayNameForMapItem ]
     objc-classes:    [ MNActiveRouteInfo, MNAnnouncementConflict, MNAnnouncementPlan, 
                        MNAnnouncementPlanEvent, MNAudioFrameworkSymbols, MNAudioOutputSetting, 
-                       MNAudioOutputSettingsManager, MNButtonActionTitle, MNCommuteDestination, 
-                       MNCommuteDestinationETAScore, MNCommuteDestinationGeodesicDistanceScore, 
-                       MNCommuteDestinationLocationHistoryScore, MNCommuteDestinationMapsSuggestionsScore, 
-                       MNCommuteDestinationOffRouteScore, MNCommuteDestinationScore, 
-                       MNCommuteDestinationStartEndTimeScore, MNCommuteDestinationSuggestion, 
-                       MNCommuteSession, MNCompanionNavigationAdapter, MNComparison, 
-                       MNCoreMotionContextProvider, MNCyclingTurnByTurnLocationTracker, 
+                       MNAudioOutputSettingsManager, MNCommuteDestination, MNCommuteDestinationETAScore, 
+                       MNCommuteDestinationGeodesicDistanceScore, MNCommuteDestinationLocationHistoryScore, 
+                       MNCommuteDestinationMapsSuggestionsScore, MNCommuteDestinationOffRouteScore, 
+                       MNCommuteDestinationScore, MNCommuteDestinationStartEndTimeScore, 
+                       MNCommuteDestinationSuggestion, MNCommuteSession, MNCompanionNavigationAdapter, 
+                       MNComparison, MNCoreMotionContextProvider, MNCyclingTurnByTurnLocationTracker, 
                        MNDirectionsRequestDetails, MNDirectionsRequestManager, MNDisplayETAInfo, 
                        MNDrivingTurnByTurnLocationTracker, MNETADisplayFormatter, 
                        MNFilePaths, MNGuidanceEventFeedback, MNGuidanceEventManager, 
@@ -175,6 +178,5 @@ exports:
                        MNSettings._beepBeforeInstruction, MNSettings._distanceUnits, 
                        MNSettings._maxAlternateRoutesCount, MNSettings._muteSpeechOverride, 
                        MNSettings._pauseSpokenAudio, MNSettings._shouldUseGuidanceEventManager, 
-                       MNSettings._speechEnabled, MNSettings._voiceLanguage, MNSettings._voiceVolume, 
-                       MNVoiceController._activeNavigationSession ]
+                       MNSettings._speechEnabled, MNSettings._voiceVolume, MNVoiceController._activeNavigationSession ]
 ...

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7E7856B2-09D8-38A9-A479-DAC798D44E25
+    value:           947D52D2-2ED0-3CA6-99B5-A0AF0D8A2E61
   - target:          x86_64-maccatalyst
-    value:           7E7856B2-09D8-38A9-A479-DAC798D44E25
+    value:           947D52D2-2ED0-3CA6-99B5-A0AF0D8A2E61
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BE7A17C0-62C4-376A-933E-F037B6AFCA25
+    value:           ECD74826-BA1B-3E0D-8892-D66FBE8B5386
   - target:          arm64e-maccatalyst
-    value:           BE7A17C0-62C4-376A-933E-F037B6AFCA25
+    value:           ECD74826-BA1B-3E0D-8892-D66FBE8B5386
 install-name:    '/System/Library/Frameworks/IOBluetooth.framework/Versions/A/IOBluetooth'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -283,11 +283,11 @@ exports:
                        _sendRawHCIRequest, _servicePublished, _shouldSubmitToSampling, 
                        _systemContinuityCapable, _unpackEIRorAdvertisementData, _unpackEIRorAdvertisementDataForCBClient, 
                        _waitForMatchingService ]
-    objc-classes:    [ AppleBluetoothHIDDevice, AppleBluetoothHIDDeviceGen2, AtherosHostController, 
-                       BNEPControl, BTClient, BluetoothDeviceManager, BluetoothFileReference, 
-                       BluetoothHIDDevice, BluetoothHIDDeviceController, BluetoothUIServer, 
-                       BroadcomHostController, CSRBlueICEHostController, CSRHostController, 
-                       ConnectionCompleteCallbackDispatcher, FrameworksAnalyticsPackager, 
+    objc-classes:    [ AppleBluetoothHIDDevice, AppleBluetoothHIDDeviceGen2, AppleBluetoothHIDTouchIDDevice, 
+                       AtherosHostController, BNEPControl, BTClient, BluetoothDeviceManager, 
+                       BluetoothFileReference, BluetoothHIDDevice, BluetoothHIDDeviceController, 
+                       BluetoothUIServer, BroadcomHostController, CSRBlueICEHostController, 
+                       CSRHostController, ConnectionCompleteCallbackDispatcher, FrameworksAnalyticsPackager, 
                        HardcopyCableReplacement, IOBluetoothAudioManager, IOBluetoothAutomaticDeviceSetup, 
                        IOBluetoothCloudServerClient, IOBluetoothConcreteUserNotification, 
                        IOBluetoothDaemonNSXPCClient, IOBluetoothDevice, IOBluetoothDeviceExpansion, 
@@ -416,19 +416,21 @@ exports:
                        IOBluetoothDeviceExpansion.openConnectionTarget, IOBluetoothDeviceExpansion.primaryBud, 
                        IOBluetoothDeviceExpansion.primaryInEar, IOBluetoothDeviceExpansion.psm, 
                        IOBluetoothDeviceExpansion.remoteNameRequestTarget, IOBluetoothDeviceExpansion.rightClickHoldMode, 
-                       IOBluetoothDeviceExpansion.rightDoubleTap, IOBluetoothDeviceExpansion.secondaryInEar, 
+                       IOBluetoothDeviceExpansion.rightDoubleTap, IOBluetoothDeviceExpansion.scoConnectionInterval, 
+                       IOBluetoothDeviceExpansion.secondaryInEar, IOBluetoothDeviceExpansion.serialNumber, 
                        IOBluetoothDeviceExpansion.serviceMask, IOBluetoothDeviceExpansion.singleClickMode, 
                        IOBluetoothDeviceExpansion.streamingState, IOBluetoothDeviceExpansion.switchControlEnabled, 
-                       IOBluetoothDeviceExpansion.xpcConnection, IOBluetoothDeviceInfoGatherer.expansionData, 
-                       IOBluetoothDeviceInfoGatherer.mATCommandState, IOBluetoothDeviceInfoGatherer.mATCommandTimer, 
-                       IOBluetoothDeviceInfoGatherer.mChannelID, IOBluetoothDeviceInfoGatherer.mDevice, 
-                       IOBluetoothDeviceInfoGatherer.mGetATCommandInfo, IOBluetoothDeviceInfoGatherer.mGetSDPInfo, 
-                       IOBluetoothDeviceInfoGatherer.mInfoGathered, IOBluetoothDeviceInfoGatherer.mLastCommandPtr, 
-                       IOBluetoothDeviceInfoGatherer.mPhoneGMI, IOBluetoothDeviceInfoGatherer.mPhoneGMM, 
-                       IOBluetoothDeviceInfoGatherer.mPhoneIMSI, IOBluetoothDeviceInfoGatherer.mPhoneManufacturer, 
-                       IOBluetoothDeviceInfoGatherer.mPhoneModelNumber, IOBluetoothDeviceInfoGatherer.mPhoneRevisionID, 
-                       IOBluetoothDeviceInfoGatherer.mProgressSelector, IOBluetoothDeviceInfoGatherer.mProgressSelectorTarget, 
-                       IOBluetoothDeviceInfoGatherer.mRFCOMMChannel, IOBluetoothDeviceInquiryCSupportObject._completeCallback, 
+                       IOBluetoothDeviceExpansion.trustedUID, IOBluetoothDeviceExpansion.xpcConnection, 
+                       IOBluetoothDeviceInfoGatherer.expansionData, IOBluetoothDeviceInfoGatherer.mATCommandState, 
+                       IOBluetoothDeviceInfoGatherer.mATCommandTimer, IOBluetoothDeviceInfoGatherer.mChannelID, 
+                       IOBluetoothDeviceInfoGatherer.mDevice, IOBluetoothDeviceInfoGatherer.mGetATCommandInfo, 
+                       IOBluetoothDeviceInfoGatherer.mGetSDPInfo, IOBluetoothDeviceInfoGatherer.mInfoGathered, 
+                       IOBluetoothDeviceInfoGatherer.mLastCommandPtr, IOBluetoothDeviceInfoGatherer.mPhoneGMI, 
+                       IOBluetoothDeviceInfoGatherer.mPhoneGMM, IOBluetoothDeviceInfoGatherer.mPhoneIMSI, 
+                       IOBluetoothDeviceInfoGatherer.mPhoneManufacturer, IOBluetoothDeviceInfoGatherer.mPhoneModelNumber, 
+                       IOBluetoothDeviceInfoGatherer.mPhoneRevisionID, IOBluetoothDeviceInfoGatherer.mProgressSelector, 
+                       IOBluetoothDeviceInfoGatherer.mProgressSelectorTarget, IOBluetoothDeviceInfoGatherer.mRFCOMMChannel, 
+                       IOBluetoothDeviceInquiryCSupportObject._completeCallback, 
                        IOBluetoothDeviceInquiryCSupportObject._deviceFoundCallback, 
                        IOBluetoothDeviceInquiryCSupportObject._deviceNameUpdatedCallback, 
                        IOBluetoothDeviceInquiryCSupportObject._refCon, IOBluetoothDeviceInquiryCSupportObject._startedCallback, 

@@ -4,23 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E2C377F2-B0F0-3240-A5CE-498EDF018A44
+    value:           47EB1571-4A7B-38F3-BE8F-EE2427BA3750
   - target:          x86_64-maccatalyst
-    value:           E2C377F2-B0F0-3240-A5CE-498EDF018A44
+    value:           47EB1571-4A7B-38F3-BE8F-EE2427BA3750
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           893A329B-A63F-3E71-B835-3BB6757A6C07
+    value:           BEB3FACF-CF1C-34B4-A608-9355BD7034B7
   - target:          arm64e-maccatalyst
-    value:           893A329B-A63F-3E71-B835-3BB6757A6C07
+    value:           BEB3FACF-CF1C-34B4-A608-9355BD7034B7
 install-name:    '/System/Library/PrivateFrameworks/CryptoKitPrivate.framework/Versions/A/CryptoKitPrivate'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ '_$s10Foundation4DataV16CryptoKitPrivateE11secretShareAcD15CKSecretSharingO06SecretG0V_tKcfC', 
+    symbols:         [ '_$s10Foundation4DataV16CryptoKitPrivateE11secretShareAcD15CKSecretSharingO012HybridSecretG0V_tKcfC', 
+                       '_$s10Foundation4DataV16CryptoKitPrivateE11secretShareAcD15CKSecretSharingO06SecretG0V_tKcfC', 
                        '_$s16CryptoKitPrivate0aB5ErrorO014underlyingCoreaD0yACs5Int32V_tcACmFWC', 
                        '_$s16CryptoKitPrivate0aB5ErrorO16incorrectKeySizeyA2CmFWC', 
                        '_$s16CryptoKitPrivate0aB5ErrorO21authenticationFailureyA2CmFWC', 
@@ -51,6 +52,7 @@ exports:
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO014underlyingCoreaG0yA2GmFWC', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO018underlyingProtobufG0yA2GmFWC', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO018underlyingSecurityG0yA2GmFWC', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO02noF39ProvidedToInitializerForShareGenerationyA2GmFWC', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO07genericfeG0yA2GmFWC', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO07issueInF14ReconstructionyA2GmFWC', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO13invalidSharesyA2GmFWC', 
@@ -62,6 +64,7 @@ exports:
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO24fewerSharesThanThresholdyA2GmFWC', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO29unsupportedShareVersionNumberyA2GmFWC', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO2eeoiySbAG_AGtFZ', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO32errorInDeserializationParametersyA2GmFWC', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO32notEnoughSharesForReconstructionyA2GmFWC', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO35shareADandProvidedADareInconsistentyA2GmFWC', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorV0feG4TypeO4hash4intoys6HasherVz_tF', 
@@ -80,18 +83,42 @@ exports:
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorVN', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO06SecretE5ErrorVs0G0AAMc', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO11SecretShareV11shareNumber9threshold06shamirfG02IV10Ciphertext3Tag14associatedDataAEs6UInt32V_ANSg10Foundation0P0VA4RSgtcfC', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO11SecretShareV2eeoiySbAE_AEtFZ', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO11SecretShareV7versionSivg', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO11SecretShareV7versionSivpMV', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO11SecretShareVMa', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO11SecretShareVMn', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO11SecretShareVN', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO11SecretShareVSQAAMc', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO11SecretShareVyAE10Foundation4DataVKcfC', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO13recoverSecret6params6shares14associatedData9threshold10Foundation0K0VAC15ShareParametersV_SayAC0gN0VGAKSgSitKFZ', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO14generateSharesySayAC11SecretShareVGAC0I10ParametersV_10Foundation4DataVALSgS2itKFZ', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO15HybridGeneratorV13generateShare10shareIndexAC0f6SecretI0VSi_tKF', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO15HybridGeneratorV14generateSharesySayAC0F11SecretShareVGSiKF', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO15HybridGeneratorV14serializedData10Foundation0I0VyKF', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO15HybridGeneratorV9threshold6secret14associatedData17includeADInShares0l11ThresholdInN011ciphersuite37insecureToChangeIncludeMessageEntropyAESi_10Foundation0K0VAOSgS2bAC0F23ShareParameterSelectionOSbtKcfC', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO15HybridGeneratorVMa', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO15HybridGeneratorVMn', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO15HybridGeneratorVN', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO15HybridGeneratorVyAE10Foundation4DataVKcfC', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO15ShareParametersV17includeADInShares0h11ThresholdInF011cipherSuiteAESb_SbAC20SSParameterSelectionOtKcfC', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO15ShareParametersVMa', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO15ShareParametersVMn', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO15ShareParametersVN', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO17HybridSecretShareV11shareNumber9threshold06shamirgH05nonce10Ciphertext3Tag17authenticatedDataAEs6UInt32V_ANSg10Foundation0Q0VA4RSgtcfC', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO17HybridSecretShareV2eeoiySbAE_AEtFZ', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO17HybridSecretShareV7versionSivg', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO17HybridSecretShareV7versionSivpMV', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO17HybridSecretShareVMa', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO17HybridSecretShareVMn', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO17HybridSecretShareVN', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO17HybridSecretShareVSQAAMc', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO17HybridSecretShareVyAE10Foundation4DataVKcfC', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO19HybridReconstructorV13recoverSecret6shares10Foundation4DataVSayAC0fI5ShareVG_tKF', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO19HybridReconstructorV9threshold14associatedData17includeADInShares0k11ThresholdInM011cipherSuite37insecureToChangeIncludeMessageEntropyAESi_10Foundation0J0VSgS2bAC0F23ShareParameterSelectionOSbtKcfC', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO19HybridReconstructorVMa', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO19HybridReconstructorVMn', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO19HybridReconstructorVN', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO20SSParameterSelectionO11suiteParamsVMa', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO20SSParameterSelectionO11suiteParamsVMn', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO20SSParameterSelectionO11suiteParamsVN', 
@@ -105,6 +132,19 @@ exports:
                        '_$s16CryptoKitPrivate15CKSecretSharingO20SSParameterSelectionON', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO20SSParameterSelectionOSHAAMc', 
                        '_$s16CryptoKitPrivate15CKSecretSharingO20SSParameterSelectionOSQAAMc', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO29HybridShareParameterSelectionO11suiteParamsVMa', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO29HybridShareParameterSelectionO11suiteParamsVMn', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO29HybridShareParameterSelectionO11suiteParamsVN', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO29HybridShareParameterSelectionO14AESGCM_256_128yA2EmFWC', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO29HybridShareParameterSelectionO2eeoiySbAE_AEtFZ', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO29HybridShareParameterSelectionO4hash4intoys6HasherVz_tF', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO29HybridShareParameterSelectionO9hashValueSivg', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO29HybridShareParameterSelectionO9hashValueSivpMV', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO29HybridShareParameterSelectionOMa', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO29HybridShareParameterSelectionOMn', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO29HybridShareParameterSelectionON', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO29HybridShareParameterSelectionOSHAAMc', 
+                       '_$s16CryptoKitPrivate15CKSecretSharingO29HybridShareParameterSelectionOSQAAMc', 
                        '_$s16CryptoKitPrivate15CKSecretSharingOMa', '_$s16CryptoKitPrivate15CKSecretSharingOMn', 
                        '_$s16CryptoKitPrivate15CKSecretSharingON', '_$s16CryptoKitPrivate16SymmetricKeySizeV7bits128ACvgZ', 
                        '_$s16CryptoKitPrivate16SymmetricKeySizeV7bits192ACvgZ', '_$s16CryptoKitPrivate16SymmetricKeySizeV7bits256ACvgZ', 

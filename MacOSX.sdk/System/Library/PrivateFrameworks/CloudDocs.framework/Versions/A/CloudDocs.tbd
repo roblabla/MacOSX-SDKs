@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C6CB66A3-64B6-31C5-BA53-8F564D4D5719
+    value:           98D9D086-E233-335E-BC0C-B481A86A56B6
   - target:          x86_64-maccatalyst
-    value:           C6CB66A3-64B6-31C5-BA53-8F564D4D5719
+    value:           98D9D086-E233-335E-BC0C-B481A86A56B6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B6BBE58C-C368-3D9A-998C-485CEAB00428
+    value:           453EA196-9413-3111-9088-F60DEDE079F8
   - target:          arm64e-maccatalyst
-    value:           B6BBE58C-C368-3D9A-998C-485CEAB00428
+    value:           453EA196-9413-3111-9088-F60DEDE079F8
 install-name:    '/System/Library/PrivateFrameworks/CloudDocs.framework/Versions/A/CloudDocs'
-current-version: 726
+current-version: 738
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -116,26 +116,27 @@ exports:
                        _BRSharingCreateShareForItemAtURL, _BRStartDownloadForItems, 
                        _BRStartDownloadForItemsWithOptions, _BRSubSystemContainerIDPrefix, 
                        _BRSyncStatusLastSyncDateKey, _BRSyncedDocumentIDForDocumentAtURL, 
-                       _BRSyncedLocationInfoInvalidated, _BRThumbnailChangedAtURL, 
-                       _BRTrashExternalDocumentReference, _BRURLTagNamesKey, _BRURLUbiquitousDocumentRecordIDKey, 
-                       _BRURLUbiquitousIsTopLevelSharedItemKey, _BRURLUbiquitousItemIdentifierKey, 
-                       _BRURLUbiquitousItemIsConflictedKey, _BRURLUbiquitousItemLastEditorDeviceNameKey, 
-                       _BRURLUbiquitousItemLastEditorNameKey, _BRUbiquitousCloudKitContainerIdentifier, 
-                       _BRUbiquitousContainerDocumentsFolderName, _BRUbiquitousContainerMetadataContainerID, 
-                       _BRUbiquitousContainerSupportedFolderAny, _BRUbiquitousContainerSupportedFolderNone, 
-                       _BRUbiquitousContainerSupportedFolderOne, _BRUbiquitousContainersRootFolderName, 
-                       _BRUbiquitousDefaultContainerID, _BRUbiquitousDefaultMangledContainerID, 
-                       _BRUbiquitousDesktopContainerID, _BRUbiquitousDesktopFolderName, 
-                       _BRUbiquitousDocumentsContainerID, _BRUbiquitousDocumentsFolderName, 
-                       _BRUbiquitousSharedContainerID, _BRUbiquitousSharedMangledContainerID, 
-                       _BRUbiquitousTrashFolderName, _BRUbiquityContainerIdentifiersEntitlement, 
-                       _BRUnrestrictedContainerAccessEntitlement, _BRUnsetMigrationStatusForDSIDInPref, 
-                       _BRUserDefaultsLogLevelKey, _BRUserDefaultsOptimizeStorageKey, 
-                       _BRVersion, _BRZoneHealthContainerID, _BRiCloudDesktopCanBeEnabledForDesktopFolder, 
-                       _BRiCloudDesktopCanBeEnabledForDocumentsFolder, _BRiCloudDesktopRootXattr, 
-                       _BRiWorkSharingGetBadgingSharingState, _BRiWorkSharingGetFullSharingInfo, 
-                       _BRiWorkSharingGetNeedsMigrateAtURL, _BRiWorkSharingSetSharingState, 
-                       _BRiWorkSyncContainer, _LBApplicationInfoHasLocalChanges, 
+                       _BRSyncedLocationInfoInvalidated, _BRTelemetryReportAddPeopleDisplayed, 
+                       _BRTelemetryReportSettingUpiCloudDriveDisplay, _BRTelemetryReportShareInvitation, 
+                       _BRThumbnailChangedAtURL, _BRTrashExternalDocumentReference, 
+                       _BRURLTagNamesKey, _BRURLUbiquitousDocumentRecordIDKey, _BRURLUbiquitousIsTopLevelSharedItemKey, 
+                       _BRURLUbiquitousItemIdentifierKey, _BRURLUbiquitousItemIsConflictedKey, 
+                       _BRURLUbiquitousItemLastEditorDeviceNameKey, _BRURLUbiquitousItemLastEditorNameKey, 
+                       _BRUbiquitousCloudKitContainerIdentifier, _BRUbiquitousContainerDocumentsFolderName, 
+                       _BRUbiquitousContainerMetadataContainerID, _BRUbiquitousContainerSupportedFolderAny, 
+                       _BRUbiquitousContainerSupportedFolderNone, _BRUbiquitousContainerSupportedFolderOne, 
+                       _BRUbiquitousContainersRootFolderName, _BRUbiquitousDefaultContainerID, 
+                       _BRUbiquitousDefaultMangledContainerID, _BRUbiquitousDesktopContainerID, 
+                       _BRUbiquitousDesktopFolderName, _BRUbiquitousDocumentsContainerID, 
+                       _BRUbiquitousDocumentsFolderName, _BRUbiquitousSharedContainerID, 
+                       _BRUbiquitousSharedMangledContainerID, _BRUbiquitousTrashFolderName, 
+                       _BRUbiquityContainerIdentifiersEntitlement, _BRUnrestrictedContainerAccessEntitlement, 
+                       _BRUnsetMigrationStatusForDSIDInPref, _BRUserDefaultsLogLevelKey, 
+                       _BRUserDefaultsOptimizeStorageKey, _BRVersion, _BRZoneHealthContainerID, 
+                       _BRiCloudDesktopCanBeEnabledForDesktopFolder, _BRiCloudDesktopCanBeEnabledForDocumentsFolder, 
+                       _BRiCloudDesktopRootXattr, _BRiWorkSharingGetBadgingSharingState, 
+                       _BRiWorkSharingGetFullSharingInfo, _BRiWorkSharingGetNeedsMigrateAtURL, 
+                       _BRiWorkSharingSetSharingState, _BRiWorkSyncContainer, _LBApplicationInfoHasLocalChanges, 
                        _LBApplicationInfoHasUbiquitousItems, _LBCalculateSpaceReclaimableByEviction, 
                        _LBClientIsFinished, _LBCopyUbiquityAccountToken, _LBCopyUbiquityContainerIdentifiersForCurrentProcess, 
                        _LBCurrentProcessHasUbiquityContainer, _LBDeleteItemAtURL, 
@@ -150,8 +151,8 @@ exports:
                        _LBRevisionRestoreForURL, _LBSetSyncEnabledForItem, _LBStartDownloadForItems, 
                        _LBStartSyncForItem, _OSVersion, __BRCopyResourcePropertyForKey, 
                        __BRFaultCopyLogicalNameOfFaultAtURL, __BRFaultCopyLogicalURLOfFaultAtURL, 
-                       __BRFaultCopyPropertiesOfFaultAtURL, __BRLocalizedString, 
-                       __BRLocalizedStringWithFormat, __BRNSMetadataUbiquitousSharedItemLastEditorNameComponentsKey, 
+                       __BRFaultCopyPropertiesOfFaultAtURL, __BRFolderShareType, 
+                       __BRLocalizedString, __BRLocalizedStringWithFormat, __BRNSMetadataUbiquitousSharedItemLastEditorNameComponentsKey, 
                        __BRNSMetadataUbiquitousSharedItemLastEditorNameKey, __BRPathIsUbiquityFault, 
                        __BRPromiseURLCombine, __BRSetResourcePropertyForKey, __brc_assert_failure, 
                        __brc_create_simulate_crash_message, __brc_log_is_internal_install, 
@@ -186,8 +187,8 @@ exports:
                        BRFileProvidingOperation, BRInodeObjectID, BRListNonLocalVersionsOperation, 
                        BRMangledID, BRNonLocalVersion, BRNotificationQueue, BROperation, 
                        BRProgressUpdate, BRQueryItem, BRReachabilityMonitor, BRRemoteUserDefaults, 
-                       BRServerInfoRecordInfo, BRServerMetrics, BRShareCleanSubitems, 
-                       BRShareCopyAccessTokenOperation, BRShareCopyDocumentURLForRecordID, 
+                       BRServerInfoRecordInfo, BRServerMetrics, BRShareAcceptOperation, 
+                       BRShareCleanSubitems, BRShareCopyAccessTokenOperation, BRShareCopyDocumentURLForRecordID, 
                        BRShareCopyOperation, BRShareCopyShareURLOperation, BRShareCopyiWorkShareURLOperation, 
                        BRShareDestroyOperation, BRShareLookupParticipantsOperation, 
                        BRSharePrepFolderForSharing, BRShareProcessSubitems, BRShareSaveOperation, 

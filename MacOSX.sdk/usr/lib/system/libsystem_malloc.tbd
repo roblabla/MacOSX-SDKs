@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2EF43B96-90FB-3C50-B73E-035238504E33
+    value:           029B5632-62B4-39F6-981C-BCA99C1FBF1D
   - target:          x86_64-maccatalyst
-    value:           2EF43B96-90FB-3C50-B73E-035238504E33
+    value:           029B5632-62B4-39F6-981C-BCA99C1FBF1D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E47334AF-7E46-3FAE-B71C-9D9B4F1DF1DE
+    value:           0E5B3E8E-D999-3EBC-94E6-C66EA9BCDB46
   - target:          arm64e-maccatalyst
-    value:           E47334AF-7E46-3FAE-B71C-9D9B4F1DF1DE
+    value:           0E5B3E8E-D999-3EBC-94E6-C66EA9BCDB46
 install-name:    '/usr/lib/system/libsystem_malloc.dylib'
-current-version: 317.40.8
+current-version: 317.100.9
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ ___mach_stack_logging_copy_uniquing_table, ___mach_stack_logging_enumerate_records, 
                        ___mach_stack_logging_frames_for_uniqued_stack, ___mach_stack_logging_get_frames, 
@@ -33,7 +33,7 @@ exports:
                        ___mach_stack_logging_uniquing_table_read_stack, ___mach_stack_logging_uniquing_table_release, 
                        ___mach_stack_logging_uniquing_table_retain, ___mach_stack_logging_uniquing_table_serialize, 
                        ___mach_stack_logging_uniquing_table_sizeof, ___malloc_init, 
-                       ___stack_logging_early_finished, __malloc_fork_child, __malloc_fork_parent, 
+                       ___malloc_late_init, __malloc_fork_child, __malloc_fork_parent, 
                        __malloc_fork_prepare, __malloc_no_asl_log, __os_cpu_number_override, 
                        _aligned_alloc, _calloc, _free, _mag_set_thread_index, _malloc, 
                        _malloc_check_counter, _malloc_check_each, _malloc_check_start, 

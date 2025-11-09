@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           87417B16-9964-3722-AD6B-324AB988C7E2
+    value:           490251CA-8B4D-3CB2-9C9C-6D930B70E677
   - target:          x86_64-maccatalyst
-    value:           87417B16-9964-3722-AD6B-324AB988C7E2
+    value:           490251CA-8B4D-3CB2-9C9C-6D930B70E677
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D08E276E-CF7A-3CC9-9BBF-255C6CD7FA60
+    value:           612F21C9-DDD5-30DE-B38C-BEBD6BFAC097
   - target:          arm64e-maccatalyst
-    value:           D08E276E-CF7A-3CC9-9BBF-255C6CD7FA60
+    value:           612F21C9-DDD5-30DE-B38C-BEBD6BFAC097
 install-name:    '/System/Library/PrivateFrameworks/DeviceToDeviceManager.framework/Versions/A/DeviceToDeviceManager'
 current-version: 38
 exports:

@@ -43,7 +43,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
  @param interactionBehavior The interaction behavior object controlling the springloaded interaction activation. If nil, the default behavior will be used.
  @param interactionEffect The interaction effect object styling the interaction's view. If nil, the default effect will be used.
  @param handler The handler to be performed when springloading is activated.
- @return An initialied springloaded interaction object or `nil` if the springloaded interaction could not be initialized.
+ @return An initialized springloaded interaction object or `nil` if the springloaded interaction could not be initialized.
  */
 - (instancetype)initWithInteractionBehavior:(nullable id<UISpringLoadedInteractionBehavior>)interactionBehavior interactionEffect:(nullable id<UISpringLoadedInteractionEffect>)interactionEffect activationHandler:(void(^)(UISpringLoadedInteraction *interaction, id<UISpringLoadedInteractionContext> context))handler NS_DESIGNATED_INITIALIZER;
 
@@ -52,7 +52,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos)
  A springloaded interaction with the default interaction behavior and effect.
  
  @param handler The handler to be performed when springloading is activated.
- @return An initialied springloaded interaction object or `nil` if the springloaded interaction could not be initialized.
+ @return An initialized springloaded interaction object or `nil` if the springloaded interaction could not be initialized.
  */
 - (instancetype)initWithActivationHandler:(void(^)(UISpringLoadedInteraction *interaction, id<UISpringLoadedInteractionContext> context))handler;
 

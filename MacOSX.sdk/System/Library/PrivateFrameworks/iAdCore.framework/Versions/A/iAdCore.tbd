@@ -4,24 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           91AB8A68-231E-3C83-9AB7-C48867DE736D
+    value:           0700B178-AAA1-3143-95B8-957B52F3A18E
   - target:          x86_64-maccatalyst
-    value:           91AB8A68-231E-3C83-9AB7-C48867DE736D
+    value:           0700B178-AAA1-3143-95B8-957B52F3A18E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           55C91E47-E217-33ED-BA9E-0952FD2A1839
+    value:           A7C2B67A-70C6-3E2C-AF85-A240DA38680B
   - target:          arm64e-maccatalyst
-    value:           55C91E47-E217-33ED-BA9E-0952FD2A1839
+    value:           A7C2B67A-70C6-3E2C-AF85-A240DA38680B
 install-name:    '/System/Library/PrivateFrameworks/iAdCore.framework/Versions/A/iAdCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+    weak-symbols:    [ __ZTINSt3__110__function6__baseIFvPKvS3_EEE, __ZTINSt3__110__function6__baseIFvvEEE, 
+                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTIPSt13runtime_error, __ZTIU13block_pointerFvvE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTIPSt13runtime_error, __ZTIU13block_pointerFvvE, __ZTSNSt3__110__function6__baseIFvPKvS3_EEE, 
+                       __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSPSt13runtime_error, __ZTSU13block_pointerFvvE ]

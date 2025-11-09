@@ -304,6 +304,10 @@ Classes:
   Properties:
   - Name: 'outputObscuredDueToInsufficientExternalProtection'
     SwiftName: isOutputObscuredDueToInsufficientExternalProtection
+- Name: AVSampleBufferDisplayLayer
+  Properties:
+  - Name: 'outputObscuredDueToInsufficientExternalProtection'
+    SwiftName: isOutputObscuredDueToInsufficientExternalProtection
 - Name: AVPlayerItem
   Methods:
   - Selector: 'selectMediaOption:inMediaSelectionGroup:'
@@ -626,6 +630,8 @@ Tags:
   SwiftName: AVCaptureDevice.AutoFocusRangeRestriction
 - Name: AVCaptureAutoFocusSystem
   SwiftName: AVCaptureDeviceFormat.AutoFocusSystem
+- Name: AVCaptureCenterStageControlMode
+  SwiftName: AVCaptureDevice.CenterStageControlMode
 - Name: AVCaptureDevicePosition
   SwiftName: AVCaptureDevice.Position
 - Name: AVCaptureDeviceTransportControlsPlaybackMode
@@ -1057,6 +1063,8 @@ Globals:
   SwiftName: evaluatingBufferingRate
 - Name: AVPlayerWaitingWithNoItemToPlayReason
   SwiftName: noItemToPlay
+- Name: AVPlayerWaitingDuringInterstitialEventReason
+  SwiftName: InterstitialEvent
 
 # AVVideoCodecType
 - Name: AVVideoCodecTypeHEVC
@@ -1089,6 +1097,12 @@ Globals:
   SwiftName: AVPlayerItem.recommendedTimeOffsetFromLiveDidChangeNotification
 - Name: AVPlayerItemMediaSelectionDidChangeNotification
   SwiftName: AVPlayerItem.mediaSelectionDidChangeNotification
+  
+# AVPlayerInterstitialEventController
+- Name: AVPlayerInterstitialEventObserverEventsDidChangeNotification
+  SwiftName: AVPlayerInterstitialEventObserver.eventsDidChangeNotification
+- Name: AVPlayerInterstitialEventObserverCurrentEventDidChangeNotification
+  SwiftName: AVPlayerInterstitialEventObserver.currentEventDidChangeNotification
 
 SwiftVersions:
 - Version: 3

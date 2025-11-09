@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AE6F71AB-0D51-3C02-941F-0ECDF5D739D0
+    value:           2C818909-C514-3148-8753-ECE21F094F9E
   - target:          x86_64-maccatalyst
-    value:           AE6F71AB-0D51-3C02-941F-0ECDF5D739D0
+    value:           2C818909-C514-3148-8753-ECE21F094F9E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5D72BB33-DD2C-3D2C-981B-FDFCAEDF8880
+    value:           20F5D484-6A75-358C-9F64-03DE52520BDE
   - target:          arm64e-maccatalyst
-    value:           5D72BB33-DD2C-3D2C-981B-FDFCAEDF8880
+    value:           20F5D484-6A75-358C-9F64-03DE52520BDE
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomAnalytics.framework/Versions/A/SymptomAnalytics'
-current-version: 1431.60.1
+current-version: 1431.100.22
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

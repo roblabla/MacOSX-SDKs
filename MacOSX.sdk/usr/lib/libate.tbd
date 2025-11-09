@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DBFC699C-43CD-3559-8D42-9B39BDF7B4BA
+    value:           A00A3DE7-7D7C-3AC2-A8B9-87E66105A9FA
   - target:          x86_64-maccatalyst
-    value:           DBFC699C-43CD-3559-8D42-9B39BDF7B4BA
+    value:           A00A3DE7-7D7C-3AC2-A8B9-87E66105A9FA
   - target:          x86_64h-macos
-    value:           51D50D08-F614-3929-AFB1-BF4ED9BE4751
+    value:           E9B61D7A-CCD5-3610-B5B1-5A3B20502811
   - target:          x86_64h-maccatalyst
-    value:           51D50D08-F614-3929-AFB1-BF4ED9BE4751
+    value:           E9B61D7A-CCD5-3610-B5B1-5A3B20502811
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           942482F9-681B-3238-9849-D9C02457D978
+    value:           F9EDBA31-7947-33F6-8D53-2583E3757986
   - target:          arm64e-maccatalyst
-    value:           942482F9-681B-3238-9849-D9C02457D978
+    value:           F9EDBA31-7947-33F6-8D53-2583E3757986
 install-name:    '/usr/lib/libate.dylib'
-current-version: 3.0.4
+current-version: 3.0.6
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _at_block_format_convert_to_MTLPixelFormat, _at_block_format_to_MTLPixelFormat, 
                        _at_block_get_features, _at_encoder_compress_texels, _at_encoder_create, 

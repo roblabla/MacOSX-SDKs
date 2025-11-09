@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           559B0828-7637-319F-9856-3F336376FAA0
+    value:           1CAF6214-CEBA-3775-BA10-0428EA215974
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           38EC94FC-33E1-3E06-A61E-B49E5349247F
+    value:           04E5033F-D228-3CE1-A395-B2891C41D707
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuickLookUI.framework/Versions/A/QuickLookUI'
 current-version: 0
 reexported-libraries:

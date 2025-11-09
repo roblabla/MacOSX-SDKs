@@ -33,6 +33,101 @@ MPS_SWIFT_NAME( reshape(_:shape:name:) );
                          length:(NSInteger) length
                            name:(NSString * _Nullable) name;
 
+/*!
+ *  @abstract   Create strided slice op and return the result tensor
+ *  @discussion Slices a tensor starting from `starts`, stopping short before `ends` stepping
+ *              `strides` paces between each value. Semantics based on
+ *              https://www.tensorflow.org/api_docs/python/tf/strided_slice.
+ *
+ *  @param      tensor      Tensor to be sliced
+ *  @param      starts      Array of numbers specifying starting point per dimension
+ *  @param      ends          Array of numbers specifying ending point per dimension
+ *  @param      strides   Array of numbers specifying strides per dimension
+ *  @param      name           The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+
+-(MPSGraphTensor *) sliceTensor:(MPSGraphTensor *) tensor
+                         starts:(NSArray<NSNumber *> *) starts
+                           ends:(NSArray<NSNumber *> *) ends
+                        strides:(NSArray<NSNumber *> *) strides
+                           name:(NSString * _Nullable) name;
+
+/*!
+ *  @abstract   Create strided slice op and return the result tensor
+ *  @discussion Slices a tensor starting from `starts`, stopping short before `ends` stepping
+ *              `strides` paces between each value. Semantics based on
+ *              https://www.tensorflow.org/api_docs/python/tf/strided_slice.
+ *
+ *  @param      tensor              Tensor to be sliced
+ *  @param      starts              Array of numbers specifying starting point per dimension
+ *  @param      ends                  Array of numbers specifying ending point per dimension
+ *  @param      strides           Array of numbers specifying strides per dimension
+ *  @param      startMask       Bitmask indicating dimensions whose `starts` values should be ignored.
+ *  @param      endMask           Bitmask indicating dimensions whose `ends` values should be ignored.
+ *  @param      squeezeMask   Bitmask indicating dimensions that should be squeezed out from the result.
+ *  @param      name                  The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+
+-(MPSGraphTensor *) sliceTensor:(MPSGraphTensor *) tensor
+                         starts:(NSArray<NSNumber *> *) starts
+                           ends:(NSArray<NSNumber *> *) ends
+                        strides:(NSArray<NSNumber *> *) strides
+                      startMask:(uint32_t) startMask
+                        endMask:(uint32_t) endMask
+                    squeezeMask:(uint32_t) squeezeMask
+                           name:(NSString * _Nullable) name;
+
+/*!
+ *  @abstract   Create strided slice gradient op and return the result tensor
+ *
+ *  @param      inputGradientTensor      Input gradient
+ *  @param      fwdInShapeTensor    Shape of the forward pass input = shape of gradient output
+ *  @param      starts      Array of numbers specifying starting point per dimension
+ *  @param      ends          Array of numbers specifying ending point per dimension
+ *  @param      strides   Array of numbers specifying strides per dimension
+ *  @param      name           The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+
+-(MPSGraphTensor *) sliceGradientTensor:(MPSGraphTensor *) inputGradientTensor
+                       fwdInShapeTensor:(MPSGraphTensor *) fwdInShapeTensor
+                                 starts:(NSArray<NSNumber *> *) starts
+                                   ends:(NSArray<NSNumber *> *) ends
+                                strides:(NSArray<NSNumber *> *) strides
+                                   name:(NSString * _Nullable) name;
+
+/*!
+ *  @abstract   Create strided slice gradient op and return the result tensor
+ *
+ *  @param      inputGradientTensor      Input gradient
+ *  @param      fwdInShapeTensor    Shape of the forward pass input = shape of gradient output
+ *  @param      starts              Array of numbers specifying starting point per dimension
+ *  @param      ends                  Array of numbers specifying ending point per dimension
+ *  @param      strides           Array of numbers specifying strides per dimension
+ *  @param      startMask       Bitmask indicating dimensions whose `starts` values should be ignored.
+ *  @param      endMask           Bitmask indicating dimensions whose `ends` values should be ignored.
+ *  @param      squeezeMask   Bitmask indicating dimensions that should be squeezed out from the result.
+ *  @param      name                  The name for the operation
+ *
+ *  @return     A valid MPSGraphTensor object
+ */
+
+-(MPSGraphTensor *) sliceGradientTensor:(MPSGraphTensor *) inputGradientTensor
+                       fwdInShapeTensor:(MPSGraphTensor *) fwdInShapeTensor
+                                 starts:(NSArray<NSNumber *> *) starts
+                                   ends:(NSArray<NSNumber *> *) ends
+                                strides:(NSArray<NSNumber *> *) strides
+                              startMask:(uint32_t) startMask
+                                endMask:(uint32_t) endMask
+                            squeezeMask:(uint32_t) squeezeMask
+                                   name:(NSString * _Nullable) name;
+
+
 -(MPSGraphTensor *) concatTensor:(MPSGraphTensor *) tensor
                       withTensor:(MPSGraphTensor *) tensor2
                        dimension:(NSUInteger) dimensionIndex

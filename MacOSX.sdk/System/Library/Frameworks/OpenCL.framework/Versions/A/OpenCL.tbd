@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8A3D06D5-4E82-355C-AE1B-E2C91DB58233
+    value:           4EE9CF1A-E2F1-376B-B387-36DAEBE290E6
   - target:          x86_64-maccatalyst
-    value:           8A3D06D5-4E82-355C-AE1B-E2C91DB58233
+    value:           4EE9CF1A-E2F1-376B-B387-36DAEBE290E6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           248E1DE7-6AAC-3130-A8BC-72745BB9583C
+    value:           10ADF946-E27D-328C-B4A4-26A61C25B26B
   - target:          arm64e-maccatalyst
-    value:           248E1DE7-6AAC-3130-A8BC-72745BB9583C
+    value:           10ADF946-E27D-328C-B4A4-26A61C25B26B
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/OpenCL'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _clBuildProgram, _clCompileProgram, _clCreateBuffer, _clCreateCommandQueue, 
                        _clCreateCommandQueueWithPropertiesAPPLE, _clCreateContext, 

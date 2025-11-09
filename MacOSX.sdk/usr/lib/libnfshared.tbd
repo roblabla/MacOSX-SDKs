@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A6D9ECCB-14F5-32CC-BFAE-147361B7295D
+    value:           FA20CF9F-CF0A-355A-A4EF-0AB4A4EAF95B
   - target:          x86_64-maccatalyst
-    value:           A6D9ECCB-14F5-32CC-BFAE-147361B7295D
+    value:           FA20CF9F-CF0A-355A-A4EF-0AB4A4EAF95B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           50ADBB54-D55B-3564-B584-D410677B8986
+    value:           3D2395C1-5F7E-3784-9832-3A8673494906
   - target:          arm64e-maccatalyst
-    value:           50ADBB54-D55B-3564-B584-D410677B8986
+    value:           3D2395C1-5F7E-3784-9832-3A8673494906
 install-name:    '/usr/lib/libnfshared.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -136,6 +136,7 @@ exports:
                        AWDNFCCardIngestionReaderStateChangeEvent._timestamp, AWDNFCCardIngestionReaderStateChangeEvent._type, 
                        AWDNFCCardIngestionReaderStateChangeEvent._uuidReference, 
                        AWDNFCCardIngestionSessionStateChangeEvent._cardValidationStatus, 
+                       AWDNFCCardIngestionSessionStateChangeEvent._currentBatteryLevel, 
                        AWDNFCCardIngestionSessionStateChangeEvent._has, AWDNFCCardIngestionSessionStateChangeEvent._sPID, 
                        AWDNFCCardIngestionSessionStateChangeEvent._sessionStatus, 
                        AWDNFCCardIngestionSessionStateChangeEvent._spStatusCode, 
@@ -192,11 +193,11 @@ exports:
                        AWDNFCGeneralStatistic._totalFailureWithTransactionEndEventErrors, 
                        AWDNFCGeneralStatistic._totalFelicaEMoneyTransaction, AWDNFCGeneralStatistic._totalFelicaTransitTransaction, 
                        AWDNFCGeneralStatistic._totalGenericAExpressTransaction, AWDNFCGeneralStatistic._totalLPEMCounter, 
-                       AWDNFCGeneralStatistic._totalPTDatabaseCorruption, AWDNFCGeneralStatistic._totalPTKeyDeletionFailed, 
-                       AWDNFCGeneralStatistic._totalPTKeys, AWDNFCGeneralStatistic._totalPeerPaymentRequest, 
-                       AWDNFCGeneralStatistic._totalPeerPaymentRequestFailure, AWDNFCGeneralStatistic._totalPlasticCardModeEnable, 
-                       AWDNFCGeneralStatistic._totalRestrictModeEntered, AWDNFCGeneralStatistic._totalSuccessfulCardIngestion, 
-                       AWDNFCGeneralStatistic._totalSuccessfulCardIngestionWithSessionToken, 
+                       AWDNFCGeneralStatistic._totalMWExceptions, AWDNFCGeneralStatistic._totalPTDatabaseCorruption, 
+                       AWDNFCGeneralStatistic._totalPTKeyDeletionFailed, AWDNFCGeneralStatistic._totalPTKeys, 
+                       AWDNFCGeneralStatistic._totalPeerPaymentRequest, AWDNFCGeneralStatistic._totalPeerPaymentRequestFailure, 
+                       AWDNFCGeneralStatistic._totalPlasticCardModeEnable, AWDNFCGeneralStatistic._totalRestrictModeEntered, 
+                       AWDNFCGeneralStatistic._totalSuccessfulCardIngestion, AWDNFCGeneralStatistic._totalSuccessfulCardIngestionWithSessionToken, 
                        AWDNFCGeneralStatistic._totalSuccessfulVAS, AWDNFCGeneralStatistic._totalTransactionEndEvent, 
                        AWDNFCGeneralStatistic._totalTransientDeactiveTimeout, AWDNFCGeneralStatistic._totalVASActivation, 
                        AWDNFCGeneralStatistic._totalVASSignup, AWDNFCGeneralStatistic._totalVASTransactionException, 
@@ -245,10 +246,10 @@ exports:
                        AWDNFCHCIEndOfTransactionV2Event._hasExpiryDate, AWDNFCHCIEndOfTransactionV2Event._informative, 
                        AWDNFCHCIEndOfTransactionV2Event._isBlacklisted, AWDNFCHCIEndOfTransactionV2Event._issuerCityCode, 
                        AWDNFCHCIEndOfTransactionV2Event._localValidation, AWDNFCHCIEndOfTransactionV2Event._maxRSSIValue, 
-                       AWDNFCHCIEndOfTransactionV2Event._minRSSIValue, AWDNFCHCIEndOfTransactionV2Event._sfiRead, 
-                       AWDNFCHCIEndOfTransactionV2Event._sfiUpdated, AWDNFCHCIEndOfTransactionV2Event._spid, 
-                       AWDNFCHCIEndOfTransactionV2Event._stationID, AWDNFCHCIEndOfTransactionV2Event._terminalIdentifier, 
-                       AWDNFCHCIEndOfTransactionV2Event._timeDeltaFromReference, 
+                       AWDNFCHCIEndOfTransactionV2Event._minRSSIValue, AWDNFCHCIEndOfTransactionV2Event._multiTagState, 
+                       AWDNFCHCIEndOfTransactionV2Event._sfiRead, AWDNFCHCIEndOfTransactionV2Event._sfiUpdated, 
+                       AWDNFCHCIEndOfTransactionV2Event._spid, AWDNFCHCIEndOfTransactionV2Event._stationID, 
+                       AWDNFCHCIEndOfTransactionV2Event._terminalIdentifier, AWDNFCHCIEndOfTransactionV2Event._timeDeltaFromReference, 
                        AWDNFCHCIEndOfTransactionV2Event._timestamp, AWDNFCHCIEndOfTransactionV2Event._totalRSSISamples, 
                        AWDNFCHCIEndOfTransactionV2Event._transactionCategory, AWDNFCHCIEndOfTransactionV2Event._transactionExtension, 
                        AWDNFCHCIEndOfTransactionV2Event._transactionId, AWDNFCHCIEndOfTransactionV2Event._transactionInProgress, 
@@ -290,37 +291,42 @@ exports:
                        AWDNFCPeerPaymentRequest._errorStep, AWDNFCPeerPaymentRequest._has, 
                        AWDNFCPeerPaymentRequest._timestamp, AWDNFCPeerPaymentRequest._type, 
                        AWDNFCReaderModeExceptionEvent._errorCode, AWDNFCReaderModeExceptionEvent._has, 
+                       AWDNFCReaderModeExceptionEvent._rfFrameInterface, AWDNFCReaderModeExceptionEvent._tagType, 
                        AWDNFCReaderModeExceptionEvent._timestamp, AWDNFCReaderModeExceptionEvent._type, 
+                       AWDNFCReaderModeIngestionSessionEnded._currentBatteryLevel, 
                        AWDNFCReaderModeIngestionSessionEnded._duration, AWDNFCReaderModeIngestionSessionEnded._has, 
                        AWDNFCReaderModeIngestionSessionEnded._timeDeltaFromReference, 
                        AWDNFCReaderModeIngestionSessionEnded._timestamp, AWDNFCReaderModeIngestionSessionEnded._uuidReference, 
+                       AWDNFCReaderModeIngestionSessionStarted._currentBatteryLevel, 
                        AWDNFCReaderModeIngestionSessionStarted._has, AWDNFCReaderModeIngestionSessionStarted._timeDeltaFromReference, 
                        AWDNFCReaderModeIngestionSessionStarted._timestamp, AWDNFCReaderModeIngestionSessionStarted._uuidReference, 
+                       AWDNFCReaderSessionBurnoutTimerInvoked._currentBatteryLevel, 
                        AWDNFCReaderSessionBurnoutTimerInvoked._duration, AWDNFCReaderSessionBurnoutTimerInvoked._has, 
                        AWDNFCReaderSessionBurnoutTimerInvoked._tagType, AWDNFCReaderSessionBurnoutTimerInvoked._timeDeltaFromReference, 
                        AWDNFCReaderSessionBurnoutTimerInvoked._timestamp, AWDNFCReaderSessionBurnoutTimerInvoked._type, 
-                       AWDNFCReaderSessionBurnoutTimerInvoked._uuidReference, AWDNFCReaderSessionEnded._duration, 
-                       AWDNFCReaderSessionEnded._exitReason, AWDNFCReaderSessionEnded._has, 
-                       AWDNFCReaderSessionEnded._tagsRead, AWDNFCReaderSessionEnded._timeDeltaFromReference, 
-                       AWDNFCReaderSessionEnded._timestamp, AWDNFCReaderSessionEnded._type, 
-                       AWDNFCReaderSessionEnded._uuidReference, AWDNFCReaderSessionPollingStarted._has, 
-                       AWDNFCReaderSessionPollingStarted._pollingConfig, AWDNFCReaderSessionPollingStarted._timeDeltaFromReference, 
+                       AWDNFCReaderSessionBurnoutTimerInvoked._uuidReference, AWDNFCReaderSessionEnded._currentBatteryLevel, 
+                       AWDNFCReaderSessionEnded._duration, AWDNFCReaderSessionEnded._exitReason, 
+                       AWDNFCReaderSessionEnded._has, AWDNFCReaderSessionEnded._tagsRead, 
+                       AWDNFCReaderSessionEnded._timeDeltaFromReference, AWDNFCReaderSessionEnded._timestamp, 
+                       AWDNFCReaderSessionEnded._type, AWDNFCReaderSessionEnded._uuidReference, 
+                       AWDNFCReaderSessionPollingStarted._has, AWDNFCReaderSessionPollingStarted._pollingConfig, 
+                       AWDNFCReaderSessionPollingStarted._timeDeltaFromReference, 
                        AWDNFCReaderSessionPollingStarted._timestamp, AWDNFCReaderSessionPollingStarted._type, 
-                       AWDNFCReaderSessionPollingStarted._uuidReference, AWDNFCReaderSessionStarted._has, 
-                       AWDNFCReaderSessionStarted._timeDeltaFromReference, AWDNFCReaderSessionStarted._timestamp, 
-                       AWDNFCReaderSessionStarted._type, AWDNFCReaderSessionStarted._uuidReference, 
-                       AWDNFCReaderSessionTagFound._has, AWDNFCReaderSessionTagFound._tagType, 
-                       AWDNFCReaderSessionTagFound._timeDeltaFromReference, AWDNFCReaderSessionTagFound._timestamp, 
-                       AWDNFCReaderSessionTagFound._type, AWDNFCReaderSessionTagFound._uuidReference, 
-                       AWDNFCReaderSessionTagRead._duration, AWDNFCReaderSessionTagRead._has, 
-                       AWDNFCReaderSessionTagRead._payloadSize, AWDNFCReaderSessionTagRead._rawCommandCount, 
-                       AWDNFCReaderSessionTagRead._resultCode, AWDNFCReaderSessionTagRead._tagType, 
-                       AWDNFCReaderSessionTagRead._timeDeltaFromReference, AWDNFCReaderSessionTagRead._timestamp, 
-                       AWDNFCReaderSessionTagRead._type, AWDNFCReaderSessionTagRead._uuidReference, 
-                       AWDNFCSEAIDSelectEvent._aid, AWDNFCSEAIDSelectEvent._has, 
-                       AWDNFCSEAIDSelectEvent._timeDeltaFromReference, AWDNFCSEAIDSelectEvent._timestamp, 
-                       AWDNFCSEAIDSelectEvent._uuidReference, AWDNFCSECRSAuthInit._has, 
-                       AWDNFCSECRSAuthInit._status, AWDNFCSECRSAuthInit._timeDeltaFromReference, 
+                       AWDNFCReaderSessionPollingStarted._uuidReference, AWDNFCReaderSessionStarted._currentBatteryLevel, 
+                       AWDNFCReaderSessionStarted._has, AWDNFCReaderSessionStarted._timeDeltaFromReference, 
+                       AWDNFCReaderSessionStarted._timestamp, AWDNFCReaderSessionStarted._type, 
+                       AWDNFCReaderSessionStarted._uuidReference, AWDNFCReaderSessionTagFound._has, 
+                       AWDNFCReaderSessionTagFound._tagType, AWDNFCReaderSessionTagFound._timeDeltaFromReference, 
+                       AWDNFCReaderSessionTagFound._timestamp, AWDNFCReaderSessionTagFound._type, 
+                       AWDNFCReaderSessionTagFound._uuidReference, AWDNFCReaderSessionTagRead._duration, 
+                       AWDNFCReaderSessionTagRead._has, AWDNFCReaderSessionTagRead._payloadSize, 
+                       AWDNFCReaderSessionTagRead._rawCommandCount, AWDNFCReaderSessionTagRead._resultCode, 
+                       AWDNFCReaderSessionTagRead._tagType, AWDNFCReaderSessionTagRead._timeDeltaFromReference, 
+                       AWDNFCReaderSessionTagRead._timestamp, AWDNFCReaderSessionTagRead._type, 
+                       AWDNFCReaderSessionTagRead._uuidReference, AWDNFCSEAIDSelectEvent._aid, 
+                       AWDNFCSEAIDSelectEvent._has, AWDNFCSEAIDSelectEvent._timeDeltaFromReference, 
+                       AWDNFCSEAIDSelectEvent._timestamp, AWDNFCSEAIDSelectEvent._uuidReference, 
+                       AWDNFCSECRSAuthInit._has, AWDNFCSECRSAuthInit._status, AWDNFCSECRSAuthInit._timeDeltaFromReference, 
                        AWDNFCSECRSAuthInit._timestamp, AWDNFCSECRSAuthInit._uuidReference, 
                        AWDNFCSECRSAuthorize._activated, AWDNFCSECRSAuthorize._aid, 
                        AWDNFCSECRSAuthorize._has, AWDNFCSECRSAuthorize._method, AWDNFCSECRSAuthorize._status, 

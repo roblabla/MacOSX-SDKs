@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           63CAB1AB-C485-382A-9088-F6E3937BB8E9
+    value:           F70746DB-0DAB-3F36-8613-26270312469C
   - target:          x86_64-maccatalyst
-    value:           63CAB1AB-C485-382A-9088-F6E3937BB8E9
+    value:           F70746DB-0DAB-3F36-8613-26270312469C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FC2A8690-F2D4-3EA3-869C-E685C2BCE873
+    value:           4E10E28B-E61A-32DC-9681-518D61D4C97E
   - target:          arm64e-maccatalyst
-    value:           FC2A8690-F2D4-3EA3-869C-E685C2BCE873
+    value:           4E10E28B-E61A-32DC-9681-518D61D4C97E
 install-name:    '/System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices'
-current-version: 479.3
+current-version: 479.4
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -84,19 +84,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           650C91C9-D6A1-3FF7-964B-DE1065F2243C
+    value:           61411CF3-1684-3C4E-B726-A317BCCC61A3
   - target:          x86_64-maccatalyst
-    value:           650C91C9-D6A1-3FF7-964B-DE1065F2243C
+    value:           61411CF3-1684-3C4E-B726-A317BCCC61A3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D62CCE4A-04DE-3DC9-92A1-B6196B3891E8
+    value:           226372DB-50FA-3C40-A84C-142AE8805EAD
   - target:          arm64e-maccatalyst
-    value:           D62CCE4A-04DE-3DC9-92A1-B6196B3891E8
+    value:           226372DB-50FA-3C40-A84C-142AE8805EAD
 install-name:    '/System/Library/PrivateFrameworks/IconFoundation.framework/Versions/A/IconFoundation'
-current-version: 479.3
+current-version: 479.4
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

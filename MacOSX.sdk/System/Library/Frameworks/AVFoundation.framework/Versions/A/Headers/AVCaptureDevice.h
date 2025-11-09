@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     The notification object is an AVCaptureDevice instance representing the device that became available.
  */
-AVF_EXPORT NSString *const AVCaptureDeviceWasConnectedNotification API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureDeviceWasConnectedNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureDeviceWasDisconnectedNotification
@@ -35,7 +35,7 @@ AVF_EXPORT NSString *const AVCaptureDeviceWasConnectedNotification API_AVAILABLE
  @discussion
     The notification object is an AVCaptureDevice instance representing the device that became unavailable.
  */
-AVF_EXPORT NSString *const AVCaptureDeviceWasDisconnectedNotification API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureDeviceWasDisconnectedNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureDeviceSubjectAreaDidChangeNotification
@@ -45,7 +45,7 @@ AVF_EXPORT NSString *const AVCaptureDeviceWasDisconnectedNotification API_AVAILA
  @discussion
     Clients may observe the AVCaptureDeviceSubjectAreaDidChangeNotification to know when an instance of AVCaptureDevice has detected a substantial change to the video subject area. This notification is only sent if you first set subjectAreaChangeMonitoringEnabled to YES.
   */
-AVF_EXPORT NSString *const AVCaptureDeviceSubjectAreaDidChangeNotification API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT NSString *const AVCaptureDeviceSubjectAreaDidChangeNotification API_AVAILABLE(ios(5.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 
 #pragma mark - AVCaptureDevice
@@ -65,7 +65,7 @@ AVF_EXPORT NSString *const AVCaptureDeviceSubjectAreaDidChangeNotification API_A
  
     Instances of AVCaptureDevice can be used to provide media data to an AVCaptureSession by creating an AVCaptureDeviceInput with the device and adding that to the capture session.
  */
-API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDevice : NSObject
 {
 @private
@@ -85,7 +85,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This method returns an array of AVCaptureDevice instances for input devices currently connected and available for capture. The returned array contains all devices that are available at the time the method is called. Applications should observe AVCaptureDeviceWasConnectedNotification and AVCaptureDeviceWasDisconnectedNotification to be notified when the list of available devices has changed.
  */
-+ (NSArray<AVCaptureDevice *> *)devices API_DEPRECATED("Use AVCaptureDeviceDiscoverySession instead.", ios(4.0, 10.0), macos(10.7, 10.15));
++ (NSArray<AVCaptureDevice *> *)devices API_DEPRECATED("Use AVCaptureDeviceDiscoverySession instead.", ios(4.0, 10.0), macos(10.7, 10.15)) API_UNAVAILABLE(tvos);
 
 /*!
  @method devicesWithMediaType:
@@ -100,7 +100,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This method returns an array of AVCaptureDevice instances for input devices currently connected and available for capture that provide media of the given type. Media type constants are defined in AVMediaFormat.h. The returned array contains all devices that are available at the time the method is called. Applications should observe AVCaptureDeviceWasConnectedNotification and AVCaptureDeviceWasDisconnectedNotification to be notified when the list of available devices has changed.
  */
-+ (NSArray<AVCaptureDevice *> *)devicesWithMediaType:(AVMediaType)mediaType API_DEPRECATED("Use AVCaptureDeviceDiscoverySession instead.", ios(4.0, 10.0), macos(10.7, 10.15));
++ (NSArray<AVCaptureDevice *> *)devicesWithMediaType:(AVMediaType)mediaType API_DEPRECATED("Use AVCaptureDeviceDiscoverySession instead.", ios(4.0, 10.0), macos(10.7, 10.15)) API_UNAVAILABLE(tvos);
 
 /*!
  @method defaultDeviceWithMediaType:
@@ -170,7 +170,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property can be used to identify capture devices from a particular manufacturer. All Apple devices return "Apple Inc.". Devices from third party manufacturers may return an empty string.
  */
-@property(nonatomic, readonly) NSString *manufacturer API_AVAILABLE(macos(10.9), ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, readonly) NSString *manufacturer API_AVAILABLE(macos(10.9), ios(14.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property transportType
@@ -180,7 +180,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property can be used to discover the transport type of a capture device. Transport types are defined in <IOKit/audio/IOAudioTypes.h> as kIOAudioDeviceTransportType*.
  */
-@property(nonatomic, readonly) int32_t transportType API_UNAVAILABLE(ios, watchos, tvos);
+@property(nonatomic, readonly) int32_t transportType API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 /*!
  @method hasMediaType:
@@ -265,7 +265,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The value of this property is a BOOL indicating whether the device represented by the receiver is currently suspended. Some devices disallow data capture due to a feature on the device. For example, isSuspended returns YES for the external iSight when its privacy iris is closed, or for the internal iSight on a notebook when the notebook's display is closed. Clients can key value observe the value of this property to be notified when the device becomes suspended or unsuspended.
  */
-@property(nonatomic, readonly, getter=isSuspended) BOOL suspended API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, readonly, getter=isSuspended) BOOL suspended API_AVAILABLE(ios(14.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property linkedDevices
@@ -275,7 +275,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The value of this property is an array of AVCaptureDevice objects that are a part of the same physical device as the receiver. For example, for the external iSight camera, linkedDevices returns an array containing an AVCaptureDevice for the external iSight microphone.
  */
-@property(nonatomic, readonly) NSArray<AVCaptureDevice *> *linkedDevices API_UNAVAILABLE(ios, watchos, tvos);
+@property(nonatomic, readonly) NSArray<AVCaptureDevice *> *linkedDevices API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 /*!
  @property formats
@@ -285,7 +285,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property can be used to enumerate the formats natively supported by the receiver. The capture device's activeFormat property may be set to one of the formats in this array. Clients can observe automatic changes to the receiver's formats by key value observing this property.
  */
-@property(nonatomic, readonly) NSArray<AVCaptureDeviceFormat *> *formats API_AVAILABLE(ios(7.0));
+@property(nonatomic, readonly) NSArray<AVCaptureDeviceFormat *> *formats API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property activeFormat
@@ -316,7 +316,7 @@ AV_INIT_UNAVAILABLE
  
     Note that when configuring a session to use an active format intended for high resolution still photography and applying one or more of the following operations to an AVCaptureVideoDataOutput, the system may not meet the target framerate: zoom, orientation changes, format conversion.
  */
-@property(nonatomic, retain) AVCaptureDeviceFormat *activeFormat API_AVAILABLE(ios(7.0));
+@property(nonatomic, retain) AVCaptureDeviceFormat *activeFormat API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property activeVideoMinFrameDuration
@@ -339,7 +339,7 @@ AV_INIT_UNAVAILABLE
  
     When exposureMode is AVCaptureExposureModeCustom, setting the activeVideoMinFrameDuration affects max frame rate, but not exposureDuration. You may use setExposureModeCustomWithDuration:ISO:completionHandler: to set a shorter exposureDuration than your activeVideoMinFrameDuration, if desired.
  */
-@property(nonatomic) CMTime activeVideoMinFrameDuration API_AVAILABLE(ios(7.0));
+@property(nonatomic) CMTime activeVideoMinFrameDuration API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property activeVideoMaxFrameDuration
@@ -362,7 +362,7 @@ AV_INIT_UNAVAILABLE
  
     When exposureMode is AVCaptureExposureModeCustom, frame rate and exposure duration are interrelated. If you call setExposureModeCustomWithDuration:ISO:completionHandler: with an exposureDuration longer than the current activeVideoMaxFrameDuration, the activeVideoMaxFrameDuration will be lengthened to accommodate the longer exposure time. Setting a shorter exposure duration does not automatically change the activeVideoMinFrameDuration or activeVideoMaxFrameDuration. To explicitly increase the frame rate in custom exposure mode, you must set the activeVideoMaxFrameDuration to a shorter value. If your new max frame duration is shorter than the current exposureDuration, the exposureDuration will shorten as well to accommodate the new frame rate.
  */
-@property(nonatomic) CMTime activeVideoMaxFrameDuration API_AVAILABLE(macos(10.9), ios(7.0));
+@property(nonatomic) CMTime activeVideoMaxFrameDuration API_AVAILABLE(macos(10.9), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property inputSources
@@ -372,7 +372,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Some devices can capture data from one of multiple data sources (different input jacks on the same audio device, for example). For devices with multiple possible data sources, inputSources can be used to enumerate the possible choices. Clients can observe automatic changes to the receiver's inputSources by key value observing this property.
  */
-@property(nonatomic, readonly) NSArray<AVCaptureDeviceInputSource *> *inputSources API_UNAVAILABLE(ios, watchos, tvos);
+@property(nonatomic, readonly) NSArray<AVCaptureDeviceInputSource *> *inputSources API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 /*!
  @property activeInputSource
@@ -382,7 +382,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property can be used to get or set the currently active device input source. -setActiveInputSource: throws an NSInvalidArgumentException if set to a value not present in the inputSources array. -setActiveInputSource: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's activeInputSource by key value observing this property.
  */
-@property(nonatomic, retain, nullable) AVCaptureDeviceInputSource *activeInputSource API_UNAVAILABLE(ios, watchos, tvos);
+@property(nonatomic, retain, nullable) AVCaptureDeviceInputSource *activeInputSource API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 @end
 
@@ -403,7 +403,7 @@ typedef NS_ENUM(NSInteger, AVCaptureDevicePosition) {
     AVCaptureDevicePositionUnspecified = 0,
     AVCaptureDevicePositionBack        = 1,
     AVCaptureDevicePositionFront       = 2,
-} API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
 @interface AVCaptureDevice (AVCaptureDevicePosition)
@@ -427,37 +427,37 @@ typedef NS_ENUM(NSInteger, AVCaptureDevicePosition) {
  @discussion
     The AVCaptureDeviceType string constants are intended to be used in combination with the AVCaptureDeviceDiscoverySession class to obtain a list of devices matching certain search criteria.
  */
-typedef NSString *AVCaptureDeviceType NS_STRING_ENUM API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+typedef NSString *AVCaptureDeviceType NS_TYPED_ENUM API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureDeviceTypeExternalUnknown
  	An unknown device type.
  */
-AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeExternalUnknown API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeExternalUnknown API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 /*!
  @constant AVCaptureDeviceTypeBuiltInMicrophone
     A built-in microphone.
  */
-AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInMicrophone API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInMicrophone API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureDeviceTypeBuiltInWideAngleCamera
     A built-in wide angle camera device. These devices are suitable for general purpose use.
  */
-AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInWideAngleCamera API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInWideAngleCamera API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureDeviceTypeBuiltInTelephotoCamera
     A built-in camera device with a longer focal length than a wide angle camera. Note that devices of this type may only be discovered using an AVCaptureDeviceDiscoverySession.
  */
-AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInTelephotoCamera API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInTelephotoCamera API_AVAILABLE(ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureDeviceTypeBuiltInUltraWideCamera
     A built-in camera device with a shorter focal length than a wide angle camera. Note that devices of this type may only be discovered using an AVCaptureDeviceDiscoverySession.
  */
-AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInUltraWideCamera API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInUltraWideCamera API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureDeviceTypeBuiltInDualCamera
@@ -476,7 +476,7 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInUltraWideCamera A
  
     Even when locked, exposure duration, ISO, aperture, white balance gains, or lens position may change when the device switches from one camera to the other. The overall exposure, white balance, and focus position however should be consistent.
  */
-AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDualCamera API_AVAILABLE(ios(10.2)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDualCamera API_AVAILABLE(ios(10.2), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureDeviceTypeBuiltInDualWideCamera
@@ -494,7 +494,7 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDualCamera API_AV
 
     Even when locked, exposure duration, ISO, aperture, white balance gains, or lens position may change when the device switches from one camera to the other. The overall exposure, white balance, and focus position however should be consistent.
  */
-AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDualWideCamera API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDualWideCamera API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureDeviceTypeBuiltInTripleCamera
@@ -511,19 +511,19 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDualWideCamera AP
 
     Even when locked, exposure duration, ISO, aperture, white balance gains, or lens position may change when the device switches from one camera to the other. The overall exposure, white balance, and focus position however should be consistent.
  */
-AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInTripleCamera API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInTripleCamera API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureDeviceTypeBuiltInTrueDepthCamera
     A device that consists of two cameras, one YUV and one Infrared. The infrared camera provides high quality depth information that is synchronized and perspective corrected to frames produced by the YUV camera. While the resolution of the depth data and YUV frames may differ, their field of view and aspect ratio always match. Note that devices of this type may only be discovered using an AVCaptureDeviceDiscoverySession or -[AVCaptureDevice defaultDeviceWithDeviceType:mediaType:position:].
  */
-AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInTrueDepthCamera API_AVAILABLE(ios(11.1)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInTrueDepthCamera API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureDeviceTypeBuiltInDuoCamera
     A deprecated synonym for AVCaptureDeviceTypeBuiltInDualCamera. Please use AVCaptureDeviceTypeBuiltInDualCamera instead.
  */
-AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDuoCamera API_DEPRECATED("Use AVCaptureDeviceTypeBuiltInDualCamera instead.", ios(10.0, 10.2)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDuoCamera API_DEPRECATED("Use AVCaptureDeviceTypeBuiltInDualCamera instead.", ios(10.0, 10.2)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
 @interface AVCaptureDevice (AVCaptureDeviceType)
@@ -536,7 +536,7 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDuoCamera API_DEP
  @discussion
     A capture device's type never changes.
  */
-@property(nonatomic, readonly) AVCaptureDeviceType deviceType API_AVAILABLE(macos(10.15), ios(10.0));
+@property(nonatomic, readonly) AVCaptureDeviceType deviceType API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method defaultDeviceWithDeviceType:mediaType:position:
@@ -555,7 +555,7 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDuoCamera API_DEP
  @discussion
     This method returns the default device of the given combination of device type, media type, and position currently available on the system.
  */
-+ (nullable AVCaptureDevice *)defaultDeviceWithDeviceType:(AVCaptureDeviceType)deviceType mediaType:(nullable AVMediaType)mediaType position:(AVCaptureDevicePosition)position API_AVAILABLE(macos(10.15), ios(10.0));
++ (nullable AVCaptureDevice *)defaultDeviceWithDeviceType:(AVCaptureDeviceType)deviceType mediaType:(nullable AVMediaType)mediaType position:(AVCaptureDevicePosition)position API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -570,7 +570,7 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDuoCamera API_DEP
  @discussion
     This property indicates whether the capture device is currently subject to an elevated system pressure condition. When system pressure reaches AVCaptureSystemPressureLevelShutdown, the capture device cannot continue to provide input, so the AVCaptureSession becomes interrupted until the pressured state abates. System pressure can be effectively mitigated by lowering the device's activeVideoMinFrameDuration in response to changes in the systemPressureState. Clients are encouraged to implement frame rate throttling to bring system pressure down if their capture use case can tolerate a reduced frame rate.
  */
-@property(nonatomic, readonly) AVCaptureSystemPressureState *systemPressureState API_AVAILABLE(ios(11.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, readonly) AVCaptureSystemPressureState *systemPressureState API_AVAILABLE(ios(11.1), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -587,7 +587,7 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDuoCamera API_DEP
         The Dual Camera, which supports seamlessly switching between a wide and telephoto camera while zooming and generating depth data from the disparities between the different points of view of the physical cameras.
         The TrueDepth Camera, which generates depth data from disparities between a YUV camera and an Infrared camera pointed in the same direction.
  */
-@property(nonatomic, readonly, getter=isVirtualDevice) BOOL virtualDevice API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, readonly, getter=isVirtualDevice) BOOL virtualDevice API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property constituentDevices
@@ -597,7 +597,7 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDuoCamera API_DEP
  @discussion
     When called on a device for which virtualDevice == NO, an empty array is returned.
  */
-@property(nonatomic, readonly) NSArray<AVCaptureDevice *> *constituentDevices API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, readonly) NSArray<AVCaptureDevice *> *constituentDevices API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property virtualDeviceSwitchOverVideoZoomFactors
@@ -607,7 +607,7 @@ AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeBuiltInDuoCamera API_DEP
  @discussion
     This array contains zoom factors at which one of the constituent device's field of view matches the next constituent device's full field of view. The number of switch over video zoom factors is always one less than the count of the constituentDevices property, and the factors progress in the same order as the devices listed in that property. On non-virtual devices this property returns an empty array.
  */
-@property(nonatomic, readonly) NSArray<NSNumber *> *virtualDeviceSwitchOverVideoZoomFactors API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic, readonly) NSArray<NSNumber *> *virtualDeviceSwitchOverVideoZoomFactors API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -628,7 +628,7 @@ typedef NS_ENUM(NSInteger, AVCaptureFlashMode) {
     AVCaptureFlashModeOff  = 0,
     AVCaptureFlashModeOn   = 1,
     AVCaptureFlashModeAuto = 2,
-} API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
 @interface AVCaptureDevice (AVCaptureDeviceFlash)
@@ -651,7 +651,7 @@ typedef NS_ENUM(NSInteger, AVCaptureFlashMode) {
  @discussion
     The value of this property is a BOOL indicating whether the receiver's flash is currently available. The flash may become unavailable if, for example, the device overheats and needs to cool off. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isFlashAvailable) BOOL flashAvailable API_AVAILABLE(macos(10.15), ios(5.0));
+@property(nonatomic, readonly, getter=isFlashAvailable) BOOL flashAvailable API_AVAILABLE(macos(10.15), ios(5.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property flashActive
@@ -661,7 +661,7 @@ typedef NS_ENUM(NSInteger, AVCaptureFlashMode) {
  @discussion
     The value of this property is a BOOL indicating whether the receiver's flash is currently active. When the flash is active, it will flash if a still image is captured. When a still image is captured with the flash active, exposure and white balance settings are overridden for the still. This is true even when using AVCaptureExposureModeCustom and/or AVCaptureWhiteBalanceModeLocked. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isFlashActive) BOOL flashActive API_DEPRECATED("Use AVCapturePhotoOutput's -isFlashScene instead.", ios(5.0, 10.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isFlashActive) BOOL flashActive API_DEPRECATED("Use AVCapturePhotoOutput's -isFlashScene instead.", ios(5.0, 10.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @method isFlashModeSupported:
@@ -676,7 +676,7 @@ typedef NS_ENUM(NSInteger, AVCaptureFlashMode) {
  @discussion
     The receiver's flashMode property can only be set to a certain mode if this method returns YES for that mode.
  */
-- (BOOL)isFlashModeSupported:(AVCaptureFlashMode)flashMode API_DEPRECATED("Use AVCapturePhotoOutput's -supportedFlashModes instead.", ios(4.0, 10.0));
+- (BOOL)isFlashModeSupported:(AVCaptureFlashMode)flashMode API_DEPRECATED("Use AVCapturePhotoOutput's -supportedFlashModes instead.", ios(4.0, 10.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property flashMode
@@ -688,7 +688,7 @@ typedef NS_ENUM(NSInteger, AVCaptureFlashMode) {
  
     When using AVCapturePhotoOutput, AVCaptureDevice's flashMode property is ignored. You specify flashMode on a per photo basis by setting the AVCapturePhotoSettings.flashMode property.
  */
-@property(nonatomic) AVCaptureFlashMode flashMode API_DEPRECATED("Use AVCapturePhotoSettings.flashMode instead.", ios(4.0, 10.0));
+@property(nonatomic) AVCaptureFlashMode flashMode API_DEPRECATED("Use AVCapturePhotoSettings.flashMode instead.", ios(4.0, 10.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -709,14 +709,14 @@ typedef NS_ENUM(NSInteger, AVCaptureTorchMode) {
     AVCaptureTorchModeOff  = 0,
     AVCaptureTorchModeOn   = 1,
     AVCaptureTorchModeAuto = 2,
-} API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
 /*!
  @constant AVCaptureMaxAvailableTorchLevel
     A special value that may be passed to -setTorchModeWithLevel:error: to set the torch to the maximum level currently available. Under thermal duress, the maximum available torch level may be less than 1.0.
  */
-AVF_EXPORT const float AVCaptureMaxAvailableTorchLevel API_AVAILABLE(macos(10.15), ios(6.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT const float AVCaptureMaxAvailableTorchLevel API_AVAILABLE(macos(10.15), ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
 @interface AVCaptureDevice (AVCaptureDeviceTorch)
@@ -739,7 +739,7 @@ AVF_EXPORT const float AVCaptureMaxAvailableTorchLevel API_AVAILABLE(macos(10.15
  @discussion
     The value of this property is a BOOL indicating whether the receiver's torch is currently available. The torch may become unavailable if, for example, the device overheats and needs to cool off. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isTorchAvailable) BOOL torchAvailable API_AVAILABLE(macos(10.15), ios(5.0));
+@property(nonatomic, readonly, getter=isTorchAvailable) BOOL torchAvailable API_AVAILABLE(macos(10.15), ios(5.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property torchActive
@@ -749,7 +749,7 @@ AVF_EXPORT const float AVCaptureMaxAvailableTorchLevel API_AVAILABLE(macos(10.15
  @discussion
     The value of this property is a BOOL indicating whether the receiver's torch is currently active. If the current torchMode is AVCaptureTorchModeAuto and isTorchActive is YES, the torch will illuminate once a recording starts (see AVCaptureOutput.h -startRecordingToOutputFileURL:recordingDelegate:). This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isTorchActive) BOOL torchActive API_AVAILABLE(macos(10.15), ios(6.0));
+@property(nonatomic, readonly, getter=isTorchActive) BOOL torchActive API_AVAILABLE(macos(10.15), ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property torchLevel
@@ -759,7 +759,7 @@ AVF_EXPORT const float AVCaptureMaxAvailableTorchLevel API_AVAILABLE(macos(10.15
  @discussion
     The value of this property is a float indicating the receiver's torch level from 0.0 (off) -> 1.0 (full). This property is key-value observable.
  */
-@property(nonatomic, readonly) float torchLevel API_AVAILABLE(macos(10.15), ios(5.0));
+@property(nonatomic, readonly) float torchLevel API_AVAILABLE(macos(10.15), ios(5.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method isTorchModeSupported:
@@ -794,7 +794,7 @@ AVF_EXPORT const float AVCaptureMaxAvailableTorchLevel API_AVAILABLE(macos(10.15
  @discussion
     This method sets the torch mode to AVCaptureTorchModeOn at a specified level. torchLevel must be a value between 0 and 1, or the special value AVCaptureMaxAvailableTorchLevel. The specified value may not be available if the iOS device is too hot. This method throws an NSInvalidArgumentException if set to an unsupported level. If the specified level is valid, but unavailable, the method returns NO with AVErrorTorchLevelUnavailable. -setTorchModeOnWithLevel:error: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's torchMode by key value observing the torchMode property.
  */
-- (BOOL)setTorchModeOnWithLevel:(float)torchLevel error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.15), ios(6.0));
+- (BOOL)setTorchModeOnWithLevel:(float)torchLevel error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.15), ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -815,7 +815,7 @@ typedef NS_ENUM(NSInteger, AVCaptureFocusMode) {
     AVCaptureFocusModeLocked              = 0,
     AVCaptureFocusModeAutoFocus           = 1,
     AVCaptureFocusModeContinuousAutoFocus = 2,
-} API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
 /*!
@@ -834,7 +834,7 @@ typedef NS_ENUM(NSInteger, AVCaptureAutoFocusRangeRestriction) {
     AVCaptureAutoFocusRangeRestrictionNone = 0,
     AVCaptureAutoFocusRangeRestrictionNear = 1,
     AVCaptureAutoFocusRangeRestrictionFar  = 2,
-} API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 
 @interface AVCaptureDevice (AVCaptureDeviceFocus)
@@ -862,7 +862,7 @@ typedef NS_ENUM(NSInteger, AVCaptureAutoFocusRangeRestriction) {
  @discussion
     If lockingFocusWithCustomLensPositionSupported returns NO, setFocusModeLockedWithLensPosition: may only be called with AVCaptureLensPositionCurrent. Passing any other lens position will result in an exception.
  */
-@property(nonatomic, readonly, getter=isLockingFocusWithCustomLensPositionSupported) BOOL lockingFocusWithCustomLensPositionSupported API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isLockingFocusWithCustomLensPositionSupported) BOOL lockingFocusWithCustomLensPositionSupported API_AVAILABLE(ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property focusMode
@@ -914,7 +914,7 @@ typedef NS_ENUM(NSInteger, AVCaptureAutoFocusRangeRestriction) {
  @discussion
     The receiver's autoFocusRangeRestriction property can only be set if this property returns YES.
  */
-@property(nonatomic, readonly, getter=isAutoFocusRangeRestrictionSupported) BOOL autoFocusRangeRestrictionSupported API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isAutoFocusRangeRestrictionSupported) BOOL autoFocusRangeRestrictionSupported API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property autoFocusRangeRestriction
@@ -924,7 +924,7 @@ typedef NS_ENUM(NSInteger, AVCaptureAutoFocusRangeRestriction) {
  @discussion
     The value of this property is an AVCaptureAutoFocusRangeRestriction indicating how the autofocus system should limit its focus scan. The default value is AVCaptureAutoFocusRangeRestrictionNone. -setAutoFocusRangeRestriction: throws an NSInvalidArgumentException if isAutoFocusRangeRestrictionSupported returns NO. -setAutoFocusRangeRestriction: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. This property only has an effect when the focusMode property is set to AVCaptureFocusModeAutoFocus or AVCaptureFocusModeContinuousAutoFocus. Note that setting autoFocusRangeRestriction alone does not initiate a focus operation. After setting autoFocusRangeRestriction, call -setFocusMode: to apply the new restriction.
  */
-@property(nonatomic) AVCaptureAutoFocusRangeRestriction autoFocusRangeRestriction API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
+@property(nonatomic) AVCaptureAutoFocusRangeRestriction autoFocusRangeRestriction API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property smoothAutoFocusSupported
@@ -934,7 +934,7 @@ typedef NS_ENUM(NSInteger, AVCaptureAutoFocusRangeRestriction) {
  @discussion
     The receiver's smoothAutoFocusEnabled property can only be set if this property returns YES.
  */
-@property(nonatomic, readonly, getter=isSmoothAutoFocusSupported) BOOL smoothAutoFocusSupported API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isSmoothAutoFocusSupported) BOOL smoothAutoFocusSupported API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property smoothAutoFocusEnabled
@@ -944,7 +944,7 @@ typedef NS_ENUM(NSInteger, AVCaptureAutoFocusRangeRestriction) {
  @discussion
     On a receiver where -isSmoothAutoFocusSupported returns YES and smoothAutoFocusEnabled is set to YES, a smooth autofocus will be engaged when the focus mode is set to AVCaptureFocusModeAutoFocus or AVCaptureFocusModeContinuousAutoFocus. Enabling smooth autofocus is appropriate for movie recording. Smooth autofocus is slower and less visually invasive. Disabling smooth autofocus is more appropriate for video processing where a fast autofocus is necessary. The default value is NO. Setting this property throws an NSInvalidArgumentException if -isSmoothAutoFocusSupported returns NO. The receiver must be locked for configuration using lockForConfiguration: before clients can set this method, otherwise an NSGenericException is thrown. Note that setting smoothAutoFocusEnabled alone does not initiate a focus operation. After setting smoothAutoFocusEnabled, call -setFocusMode: to apply the new smooth autofocus mode.
  */
-@property(nonatomic, getter=isSmoothAutoFocusEnabled) BOOL smoothAutoFocusEnabled API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, getter=isSmoothAutoFocusEnabled) BOOL smoothAutoFocusEnabled API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property lensPosition
@@ -954,13 +954,13 @@ typedef NS_ENUM(NSInteger, AVCaptureAutoFocusRangeRestriction) {
  @discussion
     The range of possible positions is 0.0 to 1.0, with 0.0 being the shortest distance at which the lens can focus and 1.0 the furthest. Note that 1.0 does not represent focus at infinity. The default value is 1.0. Note that a given lens position value does not correspond to an exact physical distance, nor does it represent a consistent focus distance from device to device. This property is key-value observable. It can be read at any time, regardless of focus mode, but can only be set via setFocusModeLockedWithLensPosition:completionHandler:.
  */
-@property(nonatomic, readonly) float lensPosition API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) float lensPosition API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @constant AVCaptureLensPositionCurrent
     A special value that may be passed as the lensPosition parameter of setFocusModeLockedWithLensPosition:completionHandler: to indicate that the caller does not wish to specify a value for the lensPosition property, and that it should instead be set to its current value. Note that the device may be adjusting lensPosition at the time of the call, in which case the value at which lensPosition is locked may differ from the value obtained by querying the lensPosition property.
  */
-AVF_EXPORT const float AVCaptureLensPositionCurrent API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+AVF_EXPORT const float AVCaptureLensPositionCurrent API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @method setFocusModeLockedWithLensPosition:completionHandler:
@@ -975,7 +975,7 @@ AVF_EXPORT const float AVCaptureLensPositionCurrent API_AVAILABLE(ios(8.0)) API_
  @discussion
     This is the only way of setting lensPosition. This method throws an NSRangeException if lensPosition is set to an unsupported level. This method throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:.
  */
-- (void)setFocusModeLockedWithLensPosition:(float)lensPosition completionHandler:(nullable void (^)(CMTime syncTime))handler API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+- (void)setFocusModeLockedWithLensPosition:(float)lensPosition completionHandler:(nullable void (^)(CMTime syncTime))handler API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 @end
 
@@ -998,8 +998,8 @@ typedef NS_ENUM(NSInteger, AVCaptureExposureMode) {
     AVCaptureExposureModeLocked                            = 0,
     AVCaptureExposureModeAutoExpose                        = 1,
     AVCaptureExposureModeContinuousAutoExposure            = 2,
-    AVCaptureExposureModeCustom API_AVAILABLE(macos(10.15), ios(8.0)) = 3,
-} API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+    AVCaptureExposureModeCustom API_AVAILABLE(macos(10.15), ios(8.0), macCatalyst(14.0)) = 3,
+} API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
 @interface AVCaptureDevice (AVCaptureDeviceExposure)
@@ -1059,7 +1059,7 @@ typedef NS_ENUM(NSInteger, AVCaptureExposureMode) {
  
     On some devices, the auto exposure algorithm picks a different max exposure duration for a given format depending whether you used the -[AVCaptureSession setSessionPreset:] API or the -[AVCaptureDevice setActiveFormat:] API to set the format. To ensure uniform default handling of max exposure duration, you can set your AVCaptureDeviceInput's unifiedAutoExposureDefaultsEnabled property to YES.
  */
-@property(nonatomic) CMTime activeMaxExposureDuration API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic) CMTime activeMaxExposureDuration API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property adjustingExposure
@@ -1079,7 +1079,7 @@ typedef NS_ENUM(NSInteger, AVCaptureExposureMode) {
  @discussion
     The value of this property is a float indicating the size (f number) of the lens diaphragm. This property does not change.
  */
-@property(nonatomic, readonly) float lensAperture API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) float lensAperture API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property exposureDuration
@@ -1089,7 +1089,7 @@ typedef NS_ENUM(NSInteger, AVCaptureExposureMode) {
  @discussion
     Only exposure duration values between activeFormat.minExposureDuration and activeFormat.maxExposureDuration are supported. This property is key-value observable. It can be read at any time, regardless of exposure mode, but can only be set via setExposureModeCustomWithDuration:ISO:completionHandler:.
  */
-@property(nonatomic, readonly) CMTime exposureDuration API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) CMTime exposureDuration API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property ISO
@@ -1099,19 +1099,19 @@ typedef NS_ENUM(NSInteger, AVCaptureExposureMode) {
  @discussion
     This property controls the sensor's sensitivity to light by means of a gain value applied to the signal. Only ISO values between activeFormat.minISO and activeFormat.maxISO are supported. Higher values will result in noisier images. This property is key-value observable. It can be read at any time, regardless of exposure mode, but can only be set via setExposureModeCustomWithDuration:ISO:completionHandler:.
  */
-@property(nonatomic, readonly) float ISO API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) float ISO API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @constant AVCaptureExposureDurationCurrent
     A special value that may be passed as the duration parameter of setExposureModeCustomWithDuration:ISO:completionHandler: to indicate that the caller does not wish to specify a value for the exposureDuration property, and that it should instead be set to its current value. Note that the device may be adjusting exposureDuration at the time of the call, in which case the value to which exposureDuration is set may differ from the value obtained by querying the exposureDuration property.
  */
-AVF_EXPORT const CMTime AVCaptureExposureDurationCurrent API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT const CMTime AVCaptureExposureDurationCurrent API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @constant AVCaptureISOCurrent
     A special value that may be passed as the ISO parameter of setExposureModeCustomWithDuration:ISO:completionHandler: to indicate that the caller does not wish to specify a value for the ISO property, and that it should instead be set to its current value. Note that the device may be adjusting ISO at the time of the call, in which case the value to which ISO is set may differ from the value obtained by querying the ISO property.
  */
-AVF_EXPORT const float AVCaptureISOCurrent API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT const float AVCaptureISOCurrent API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @method setExposureModeCustomWithDuration:ISO:completionHandler:
@@ -1128,7 +1128,7 @@ AVF_EXPORT const float AVCaptureISOCurrent API_AVAILABLE(ios(8.0)) API_UNAVAILAB
  @discussion
     This is the only way of setting exposureDuration and ISO. This method throws an NSRangeException if either exposureDuration or ISO is set to an unsupported level. This method throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. When using AVCapturePhotoOutput to capture photos, note that the photoQualityPrioritization property of AVCapturePhotoSettings defaults to AVCapturePhotoQualityPrioritizationBalanced, which allows photo capture to temporarily override the capture device's ISO and exposureDuration values if the scene is dark enough to warrant some form of multi-image fusion to improve quality. To ensure that the receiver's ISO and exposureDuration values are honored while in AVCaptureExposureModeCustom or AVCaptureExposureModeLocked, you must set your AVCapturePhotoSettings.photoQualityPrioritization property to AVCapturePhotoQualityPrioritizationSpeed. The same rule applies if you use the deprecated AVCapturePhotoSettings.autoStillImageStabilizationEnabled property or AVCaptureStillImageOutput.automaticallyEnablesStillImageStabilizationWhenAvailable property. You must set them to NO to preserve your custom or locked exposure settings.
  */
-- (void)setExposureModeCustomWithDuration:(CMTime)duration ISO:(float)ISO completionHandler:(nullable void (^)(CMTime syncTime))handler API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+- (void)setExposureModeCustomWithDuration:(CMTime)duration ISO:(float)ISO completionHandler:(nullable void (^)(CMTime syncTime))handler API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property exposureTargetOffset
@@ -1138,7 +1138,7 @@ AVF_EXPORT const float AVCaptureISOCurrent API_AVAILABLE(ios(8.0)) API_UNAVAILAB
  @discussion
     The value of this read-only property indicates the difference between the metered exposure level of the current scene and the target exposure value. This property is key-value observable.
  */
-@property(nonatomic, readonly) float exposureTargetOffset API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) float exposureTargetOffset API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property exposureTargetBias
@@ -1148,7 +1148,7 @@ AVF_EXPORT const float AVCaptureISOCurrent API_AVAILABLE(ios(8.0)) API_UNAVAILAB
  @discussion
     When exposureMode is AVCaptureExposureModeContinuousAutoExposure or AVCaptureExposureModeLocked, the bias will affect both metering (exposureTargetOffset), and the actual exposure level (exposureDuration and ISO). When the exposure mode is AVCaptureExposureModeCustom, it will only affect metering. This property is key-value observable. It can be read at any time, but can only be set via setExposureTargetBias:completionHandler:.
  */
-@property(nonatomic, readonly) float exposureTargetBias API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) float exposureTargetBias API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property minExposureTargetBias
@@ -1158,7 +1158,7 @@ AVF_EXPORT const float AVCaptureISOCurrent API_AVAILABLE(ios(8.0)) API_UNAVAILAB
  @discussion
     This read-only property indicates the minimum supported exposure bias.
  */
-@property(nonatomic, readonly) float minExposureTargetBias API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) float minExposureTargetBias API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property maxExposureTargetBias
@@ -1168,13 +1168,13 @@ AVF_EXPORT const float AVCaptureISOCurrent API_AVAILABLE(ios(8.0)) API_UNAVAILAB
  @discussion
     This read-only property indicates the maximum supported exposure bias.
  */
-@property(nonatomic, readonly) float maxExposureTargetBias API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) float maxExposureTargetBias API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @constant AVCaptureExposureTargetBiasCurrent
     A special value that may be passed as the bias parameter of setExposureTargetBias:completionHandler: to indicate that the caller does not wish to specify a value for the exposureTargetBias property, and that it should instead be set to its current value.
  */
-AVF_EXPORT const float AVCaptureExposureTargetBiasCurrent API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT const float AVCaptureExposureTargetBiasCurrent API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @method setExposureTargetBias:completionHandler:
@@ -1189,7 +1189,7 @@ AVF_EXPORT const float AVCaptureExposureTargetBiasCurrent API_AVAILABLE(ios(8.0)
  @discussion
     This is the only way of setting exposureTargetBias. This method throws an NSRangeException if exposureTargetBias is set to an unsupported level. This method throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:.
  */
-- (void)setExposureTargetBias:(float)bias completionHandler:(nullable void (^)(CMTime syncTime))handler API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+- (void)setExposureTargetBias:(float)bias completionHandler:(nullable void (^)(CMTime syncTime))handler API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 @end
 
@@ -1217,7 +1217,7 @@ AVF_EXPORT const float AVCaptureExposureTargetBiasCurrent API_AVAILABLE(ios(8.0)
  
     Clients can observe automatic changes to the receiver's globalToneMappingEnabled by key value observing this property.
  */
-@property(nonatomic, getter=isGlobalToneMappingEnabled) BOOL globalToneMappingEnabled API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, getter=isGlobalToneMappingEnabled) BOOL globalToneMappingEnabled API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -1238,7 +1238,7 @@ typedef NS_ENUM(NSInteger, AVCaptureWhiteBalanceMode) {
     AVCaptureWhiteBalanceModeLocked                     = 0,
     AVCaptureWhiteBalanceModeAutoWhiteBalance           = 1,
     AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance = 2,
-} API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
 /*!
@@ -1250,7 +1250,7 @@ typedef struct {
     float redGain;
     float greenGain;
     float blueGain;
-} AVCaptureWhiteBalanceGains API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} AVCaptureWhiteBalanceGains API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 
 /*!
@@ -1261,7 +1261,7 @@ typedef struct {
 typedef struct {
     float x;
     float y;
-} AVCaptureWhiteBalanceChromaticityValues API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} AVCaptureWhiteBalanceChromaticityValues API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 
 /*!
@@ -1272,7 +1272,7 @@ typedef struct {
 typedef struct {
     float temperature;
     float tint;
-} AVCaptureWhiteBalanceTemperatureAndTintValues API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} AVCaptureWhiteBalanceTemperatureAndTintValues API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 
 @interface AVCaptureDevice (AVCaptureDeviceWhiteBalance)
@@ -1300,7 +1300,7 @@ typedef struct {
  @discussion
     If lockingWhiteBalanceWithCustomDeviceGainsSupported returns NO, setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains: may only be called with AVCaptureWhiteBalanceGainsCurrent. Passing any other white balance gains will result in an exception.
  */
-@property(nonatomic, readonly, getter=isLockingWhiteBalanceWithCustomDeviceGainsSupported) BOOL lockingWhiteBalanceWithCustomDeviceGainsSupported API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isLockingWhiteBalanceWithCustomDeviceGainsSupported) BOOL lockingWhiteBalanceWithCustomDeviceGainsSupported API_AVAILABLE(ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property whiteBalanceMode
@@ -1330,7 +1330,7 @@ typedef struct {
  @discussion
     This property specifies the current red, green, and blue gain values used for white balance. The values can be used to adjust color casts for a given scene. For each channel, only values between 1.0 and -maxWhiteBalanceGain are supported. This property is key-value observable. It can be read at any time, regardless of white balance mode, but can only be set via setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:completionHandler:.
  */
-@property(nonatomic, readonly) AVCaptureWhiteBalanceGains deviceWhiteBalanceGains API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) AVCaptureWhiteBalanceGains deviceWhiteBalanceGains API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property grayWorldDeviceWhiteBalanceGains
@@ -1340,7 +1340,7 @@ typedef struct {
  @discussion
     This property specifies the current red, green, and blue gain values derived from the current scene to deliver a neutral (or "Gray World") white point for white balance. Gray World values assume a neutral subject (e.g. a gray card) has been placed in the middle of the subject area and fills the center 50% of the frame. Clients can read these values and apply them to the device using setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:completionHandler:. For each channel, only values between 1.0 and -maxWhiteBalanceGain are supported. This property is key-value observable. It can be read at any time, regardless of white balance mode.
  */
-@property(nonatomic, readonly) AVCaptureWhiteBalanceGains grayWorldDeviceWhiteBalanceGains API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) AVCaptureWhiteBalanceGains grayWorldDeviceWhiteBalanceGains API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property maxWhiteBalanceGain
@@ -1350,13 +1350,13 @@ typedef struct {
  @discussion
     This property does not change for the life of the receiver.
  */
-@property(nonatomic, readonly) float maxWhiteBalanceGain API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) float maxWhiteBalanceGain API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @constant AVCaptureWhiteBalanceGainsCurrent
     A special value that may be passed as a parameter of setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:completionHandler: to indicate that the caller does not wish to specify a value for deviceWhiteBalanceGains, and that gains should instead be locked at their value at the moment that white balance is locked.
  */
-AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 /*!
  @method setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:completionHandler:
@@ -1371,7 +1371,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  @discussion
     For each channel in the whiteBalanceGains struct, only values between 1.0 and -maxWhiteBalanceGain are supported. Gain values are normalized to the minimum channel value to avoid brightness changes (e.g. R:2 G:2 B:4 will be normalized to R:1 G:1 B:2). This method throws an NSRangeException if any of the whiteBalanceGains are set to an unsupported level. This method throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:.
  */
-- (void)setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:(AVCaptureWhiteBalanceGains)whiteBalanceGains completionHandler:(nullable void (^)(CMTime syncTime))handler API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+- (void)setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:(AVCaptureWhiteBalanceGains)whiteBalanceGains completionHandler:(nullable void (^)(CMTime syncTime))handler API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @method chromaticityValuesForDeviceWhiteBalanceGains:
@@ -1386,7 +1386,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  @discussion
     This method may be called on the receiver to convert device-specific white balance RGB gain values to device-independent chromaticity (little x, little y) values. For each channel in the whiteBalanceGains struct, only values between 1.0 and -maxWhiteBalanceGain are supported. This method throws an NSRangeException if any of the whiteBalanceGains are set to unsupported values.
  */
-- (AVCaptureWhiteBalanceChromaticityValues)chromaticityValuesForDeviceWhiteBalanceGains:(AVCaptureWhiteBalanceGains)whiteBalanceGains API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+- (AVCaptureWhiteBalanceChromaticityValues)chromaticityValuesForDeviceWhiteBalanceGains:(AVCaptureWhiteBalanceGains)whiteBalanceGains API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @method deviceWhiteBalanceGainsForChromaticityValues:
@@ -1401,7 +1401,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  @discussion
     This method may be called on the receiver to convert device-independent chromaticity values to device-specific RGB white balance gain values. This method throws an NSRangeException if any of the chromaticityValues are set outside the range [0,1]. Note that some x,y combinations yield out-of-range device RGB values that will cause an exception to be thrown if passed directly to -setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:completionHandler:. Be sure to check that red, green, and blue gain values are within the range of [1.0 - maxWhiteBalanceGain].
  */
-- (AVCaptureWhiteBalanceGains)deviceWhiteBalanceGainsForChromaticityValues:(AVCaptureWhiteBalanceChromaticityValues)chromaticityValues API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+- (AVCaptureWhiteBalanceGains)deviceWhiteBalanceGainsForChromaticityValues:(AVCaptureWhiteBalanceChromaticityValues)chromaticityValues API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @method temperatureAndTintValuesForDeviceWhiteBalanceGains:
@@ -1416,7 +1416,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  @discussion
     This method may be called on the receiver to convert device-specific white balance RGB gain values to device-independent temperature (in kelvin) and tint values. For each channel in the whiteBalanceGains struct, only values between 1.0 and -maxWhiteBalanceGain are supported. This method throws an NSRangeException if any of the whiteBalanceGains are set to unsupported values.
  */
-- (AVCaptureWhiteBalanceTemperatureAndTintValues)temperatureAndTintValuesForDeviceWhiteBalanceGains:(AVCaptureWhiteBalanceGains)whiteBalanceGains API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+- (AVCaptureWhiteBalanceTemperatureAndTintValues)temperatureAndTintValuesForDeviceWhiteBalanceGains:(AVCaptureWhiteBalanceGains)whiteBalanceGains API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @method deviceWhiteBalanceGainsForTemperatureAndTintValues:
@@ -1431,7 +1431,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  @discussion
     This method may be called on the receiver to convert device-independent temperature and tint values to device-specific RGB white balance gain values. You may pass any temperature and tint values and corresponding white balance gains will be produced. Note though that some temperature and tint combinations yield out-of-range device RGB values that will cause an exception to be thrown if passed directly to -setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:completionHandler:. Be sure to check that red, green, and blue gain values are within the range of [1.0 - maxWhiteBalanceGain].
  */
-- (AVCaptureWhiteBalanceGains)deviceWhiteBalanceGainsForTemperatureAndTintValues:(AVCaptureWhiteBalanceTemperatureAndTintValues)tempAndTintValues API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+- (AVCaptureWhiteBalanceGains)deviceWhiteBalanceGainsForTemperatureAndTintValues:(AVCaptureWhiteBalanceTemperatureAndTintValues)tempAndTintValues API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 @end
 
@@ -1446,7 +1446,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  @discussion
     The value of this property is a BOOL indicating whether the receiver should monitor the video subject area for changes, such as lighting changes, substantial movement, etc. If subject area change monitoring is enabled, the receiver sends an AVCaptureDeviceSubjectAreaDidChangeNotification whenever it detects a change to the subject area, at which time an interested client may wish to re-focus, adjust exposure, white balance, etc. The receiver must be locked for configuration using lockForConfiguration: before clients can set the value of this property.
  */
-@property(nonatomic, getter=isSubjectAreaChangeMonitoringEnabled) BOOL subjectAreaChangeMonitoringEnabled API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, getter=isSubjectAreaChangeMonitoringEnabled) BOOL subjectAreaChangeMonitoringEnabled API_AVAILABLE(ios(5.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 @end
 
@@ -1461,7 +1461,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  @discussion
     The receiver's automaticallyEnablesLowLightBoostWhenAvailable property can only be set if this property returns YES.
  */
-@property(nonatomic, readonly, getter=isLowLightBoostSupported) BOOL lowLightBoostSupported API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isLowLightBoostSupported) BOOL lowLightBoostSupported API_AVAILABLE(ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property lowLightBoostEnabled
@@ -1471,7 +1471,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  @discussion
     The value of this property is a BOOL indicating whether the receiver is currently enhancing images to improve quality due to low light conditions. When -isLowLightBoostEnabled returns YES, the receiver has switched into a special mode in which more light can be perceived in images. This property is key-value observable.
  */
-@property(nonatomic, readonly, getter=isLowLightBoostEnabled) BOOL lowLightBoostEnabled API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isLowLightBoostEnabled) BOOL lowLightBoostEnabled API_AVAILABLE(ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property automaticallyEnablesLowLightBoostWhenAvailable
@@ -1481,7 +1481,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  @discussion
     On a receiver where -isLowLightBoostSupported returns YES, a special low light boost mode may be engaged to improve image quality. When the automaticallyEnablesLowLightBoostWhenAvailable property is set to YES, the receiver switches at its discretion to a special boost mode under low light, and back to normal operation when the scene becomes sufficiently lit. An AVCaptureDevice that supports this feature may only engage boost mode for certain source formats or resolutions. Clients may observe changes to the lowLightBoostEnabled property to know when the mode has engaged. The switch between normal operation and low light boost mode may drop one or more video frames. The default value is NO. Setting this property throws an NSInvalidArgumentException if -isLowLightBoostSupported returns NO. The receiver must be locked for configuration using lockForConfiguration: before clients can set this method, otherwise an NSGenericException is thrown.
  */
-@property(nonatomic) BOOL automaticallyEnablesLowLightBoostWhenAvailable API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos);
+@property(nonatomic) BOOL automaticallyEnablesLowLightBoostWhenAvailable API_AVAILABLE(ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 @end
 
@@ -1500,7 +1500,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  
  @seealso -[AVCaptureDeviceFormat videoMaxZoomFactor] and -[AVCaptureDeviceFormat videoZoomFactorUpscaleThreshold]
  */
-@property(nonatomic) CGFloat videoZoomFactor API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
+@property(nonatomic) CGFloat videoZoomFactor API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @method rampToVideoZoomFactor:withRate:
@@ -1516,7 +1516,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  
     -rampToVideoZoomFactor:withRate: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:.
  */
-- (void)rampToVideoZoomFactor:(CGFloat)factor withRate:(float)rate API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
+- (void)rampToVideoZoomFactor:(CGFloat)factor withRate:(float)rate API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property rampingVideoZoom
@@ -1526,7 +1526,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  @discussion
     Clients can observe this value to determine when a ramp begins or completes.
  */
-@property(nonatomic, readonly, getter=isRampingVideoZoom) BOOL rampingVideoZoom API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isRampingVideoZoom) BOOL rampingVideoZoom API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @method cancelVideoZoomRamp
@@ -1538,7 +1538,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  
     -cancelVideoZoomRamp: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:.
  */
-- (void)cancelVideoZoomRamp API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
+- (void)cancelVideoZoomRamp API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property dualCameraSwitchOverVideoZoomFactor
@@ -1548,7 +1548,7 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  @discussion
     This is the zoom factor at which the wide angle camera's field of view matches telephoto camera's full field of view. On non-DualCamera devices this will return 1.0. As of iOS 13.0, this API has been deprecated in favor of virtualDeviceSwitchOverVideoZoomFactors.
  */
-@property(atomic, readonly) CGFloat dualCameraSwitchOverVideoZoomFactor API_DEPRECATED_WITH_REPLACEMENT("virtualDeviceSwitchOverVideoZoomFactors", ios(11.0, 13.0)) API_UNAVAILABLE(macos);
+@property(atomic, readonly) CGFloat dualCameraSwitchOverVideoZoomFactor API_DEPRECATED_WITH_REPLACEMENT("virtualDeviceSwitchOverVideoZoomFactors", ios(11.0, 13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -1572,7 +1572,7 @@ typedef NS_ENUM(NSInteger, AVAuthorizationStatus) {
     AVAuthorizationStatusRestricted    = 1,
     AVAuthorizationStatusDenied        = 2,
     AVAuthorizationStatusAuthorized    = 3,
-} API_AVAILABLE(macos(10.14), ios(7.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} API_AVAILABLE(macos(10.14), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
 @interface AVCaptureDevice (AVCaptureDeviceAuthorization)
@@ -1590,7 +1590,7 @@ typedef NS_ENUM(NSInteger, AVAuthorizationStatus) {
  @discussion
     This method returns the AVAuthorizationStatus of the client for accessing the underlying hardware supporting the media type. Media type constants are defined in AVMediaFormat.h. If any media type other than AVMediaTypeVideo or AVMediaTypeAudio is supplied, an NSInvalidArgumentException will be thrown. If the status is AVAuthorizationStatusNotDetermined, you may use the +requestAccessForMediaType:completionHandler: method to request access by prompting the user.
  */
-+ (AVAuthorizationStatus)authorizationStatusForMediaType:(AVMediaType)mediaType API_AVAILABLE(macos(10.14), ios(7.0));
++ (AVAuthorizationStatus)authorizationStatusForMediaType:(AVMediaType)mediaType API_AVAILABLE(macos(10.14), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method requestAccessForMediaType:completionHandler:
@@ -1613,7 +1613,7 @@ typedef NS_ENUM(NSInteger, AVAuthorizationStatus) {
 
     The completion handler is called on an arbitrary dispatch queue. Is it the client's responsibility to ensure that any UIKit-related updates are called on the main queue or main thread as a result.
  */
-+ (void)requestAccessForMediaType:(AVMediaType)mediaType completionHandler:(void (^)(BOOL granted))handler API_AVAILABLE(macos(10.14), ios(7.0));
++ (void)requestAccessForMediaType:(AVMediaType)mediaType completionHandler:(void (^)(BOOL granted))handler API_AVAILABLE(macos(10.14), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -1623,7 +1623,7 @@ typedef NS_ENUM(NSInteger, AVAuthorizationStatus) {
  @abstract
     A constant that is used to specify the transport controls' speed.
  */
-typedef float AVCaptureDeviceTransportControlsSpeed API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
+typedef float AVCaptureDeviceTransportControlsSpeed API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 
 /*!
@@ -1639,7 +1639,7 @@ typedef float AVCaptureDeviceTransportControlsSpeed API_AVAILABLE(macos(10.7)) A
 typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
     AVCaptureDeviceTransportControlsNotPlayingMode = 0,
     AVCaptureDeviceTransportControlsPlayingMode    = 1,
-} API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
+} API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 
 @interface AVCaptureDevice (AVCaptureDeviceTransportControls)
@@ -1652,7 +1652,7 @@ typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
  @discussion
     For devices with transport controls, such as AVC tape-based camcorders or pro capture devices with RS422 deck control, the value of this property is YES. If transport controls are not supported, none of the associated transport control methods and properties are available on the receiver.
  */
-@property(nonatomic, readonly) BOOL transportControlsSupported API_UNAVAILABLE(ios, watchos, tvos);
+@property(nonatomic, readonly) BOOL transportControlsSupported API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 /*!
  @property transportControlsPlaybackMode
@@ -1662,7 +1662,7 @@ typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
  @discussion
     For devices that support transport control, this property may be queried to discover the current playback mode.
  */
-@property(nonatomic, readonly) AVCaptureDeviceTransportControlsPlaybackMode transportControlsPlaybackMode API_UNAVAILABLE(ios, watchos, tvos);
+@property(nonatomic, readonly) AVCaptureDeviceTransportControlsPlaybackMode transportControlsPlaybackMode API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 /*!
  @property transportControlsSpeed
@@ -1677,7 +1677,7 @@ typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
     2.0 -> forward at 2x normal speed.
     etc.
  */
-@property(nonatomic, readonly) AVCaptureDeviceTransportControlsSpeed transportControlsSpeed API_UNAVAILABLE(ios, watchos, tvos);
+@property(nonatomic, readonly) AVCaptureDeviceTransportControlsSpeed transportControlsSpeed API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 /*!
  @method setTransportControlsPlaybackMode:speed:
@@ -1692,7 +1692,7 @@ typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
  @discussion
     A method for setting the receiver's transport controls playback mode and speed. The receiver must be locked for configuration using lockForConfiguration: before clients can set this method, otherwise an NSGenericException is thrown.
  */
-- (void)setTransportControlsPlaybackMode:(AVCaptureDeviceTransportControlsPlaybackMode)mode speed:(AVCaptureDeviceTransportControlsSpeed)speed API_UNAVAILABLE(ios, watchos, tvos);
+- (void)setTransportControlsPlaybackMode:(AVCaptureDeviceTransportControlsPlaybackMode)mode speed:(AVCaptureDeviceTransportControlsSpeed)speed API_UNAVAILABLE(ios, macCatalyst, watchos, tvos);
 
 @end
 
@@ -1707,7 +1707,7 @@ typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
  @discussion
     The value of this property is a BOOL indicating whether the receiver is free to turn high dynamic range streaming on or off. This property defaults to YES. By default, AVCaptureDevice always turns off videoHDREnabled when a client uses the -setActiveFormat: API to set a new format. When the client uses AVCaptureSession's setSessionPreset: API instead, AVCaptureDevice turns videoHDR on automatically if it's a good fit for the preset. -setAutomaticallyAdjustsVideoHDREnabled: throws an NSGenericException if called without first obtaining exclusive access to the receiver using -lockForConfiguration:. Clients can key-value observe videoHDREnabled to know when the receiver has automatically changed the value.
  */
-@property(nonatomic) BOOL automaticallyAdjustsVideoHDREnabled API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic) BOOL automaticallyAdjustsVideoHDREnabled API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property videoHDREnabled
@@ -1719,7 +1719,7 @@ typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
  
     Note that setting this property may cause a lengthy reconfiguration of the receiver, similar to setting a new active format or AVCaptureSession sessionPreset. If you are setting either the active format or the AVCaptureSession's sessionPreset AND this property, you should bracket these operations with [session beginConfiguration] and [session commitConfiguration] to minimize reconfiguration time.
  */
-@property(nonatomic, getter=isVideoHDREnabled) BOOL videoHDREnabled API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, getter=isVideoHDREnabled) BOOL videoHDREnabled API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 @end
 
@@ -1738,8 +1738,8 @@ typedef NS_ENUM(NSInteger, AVCaptureDeviceTransportControlsPlaybackMode) {
 typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
     AVCaptureColorSpace_sRGB       = 0,
     AVCaptureColorSpace_P3_D65     = 1,
-    AVCaptureColorSpace_HLG_BT2020 API_AVAILABLE(ios(14.1)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos) = 2,
-} API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+    AVCaptureColorSpace_HLG_BT2020 API_AVAILABLE(ios(14.1), macCatalyst(14.1)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos) = 2,
+} API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
 @interface AVCaptureDevice (AVCaptureDeviceColorSpaceSupport)
@@ -1752,7 +1752,7 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
  @discussion
     By default, an AVCaptureDevice attached to an AVCaptureSession is automatically configured for wide color by the AVCaptureSession (see AVCaptureSession automaticallyConfiguresCaptureDeviceForWideColor). You may also set the activeColorSpace manually. To prevent the AVCaptureSession from undoing your work, remember to set AVCaptureSession's automaticallyConfiguresCaptureDeviceForWideColor property to NO. Changing the receiver's activeColorSpace while the session is running requires a disruptive reconfiguration of the capture render pipeline. Movie captures in progress will be ended immediately; unfulfilled photo requests will be aborted; video preview will temporarily freeze. -setActiveColorSpace: throws an NSGenericException if called without first obtaining exclusive access to the receiver using -lockForConfiguration:.
  */
-@property(nonatomic) AVCaptureColorSpace activeColorSpace API_AVAILABLE(macos(10.15), ios(10.0));
+@property(nonatomic) AVCaptureColorSpace activeColorSpace API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -1771,7 +1771,7 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
  
     Delivery of depth data to a AVCaptureDepthDataOutput may increase the system load, resulting in a reduced video frame rate for thermal sustainability.
  */
-@property(nonatomic, retain, nullable) AVCaptureDeviceFormat *activeDepthDataFormat API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, retain, nullable) AVCaptureDeviceFormat *activeDepthDataFormat API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property activeDepthDataMinFrameDuration
@@ -1788,7 +1788,7 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
     -setActiveDepthDataMinFrameDuration: throws an NSRangeException if set to a value that is outside of the active depth data format's supported frame rate range.
     -setActiveDepthDataMinFrameDuration: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:.
  */
-@property(nonatomic) CMTime activeDepthDataMinFrameDuration API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos);
+@property(nonatomic) CMTime activeDepthDataMinFrameDuration API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property minAvailableVideoZoomFactor
@@ -1798,7 +1798,7 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
  @discussion
     On non-virtual devices the minAvailableVideoZoomFactor is always 1.0. On a virtual device the minAvailableVideoZoomFactor can change when the device is delivering depth data to one or more outputs (see -[AVCaptureDeviceFormat videoMinZoomFactorForDepthDataDelivery]). If the device's videoZoomFactor property is assigned a value smaller than 1.0, an NSRangeException is thrown. Setting the videoZoomFactor to a value greater than or equal to 1.0, but lower than minAvailableVideoZoomFactor results in the value being clamped to the minAvailableVideoZoomFactor. Clients can key value observe the value of this property.
  */
-@property(nonatomic, readonly) CGFloat minAvailableVideoZoomFactor API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) CGFloat minAvailableVideoZoomFactor API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property maxAvailableVideoZoomFactor
@@ -1808,7 +1808,7 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
  @discussion
     On non-virtual devices the maxAvailableVideoZoomFactor is always equal to the activeFormat.videoMaxZoomFactor. On a virtual device the maxAvailableVideoZoomFactor can change when the device is delivering depth data to one or more outputs (see -[AVCaptureDeviceFormat videoMaxZoomFactorForDepthDataDelivery]). If the device's videoZoomFactor property is assigned a value greater than activeFormat.videoMaxZoomFactor, an NSRangeException is thrown. Setting the videoZoomFactor to a value less than or equal to activeFormat.videoMaxZoomFactor, but greater than maxAvailableVideoZoomFactor results in the value being clamped to the maxAvailableVideoZoomFactor. Clients can key value observe the value of this property.
  */
-@property(nonatomic, readonly) CGFloat maxAvailableVideoZoomFactor API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) CGFloat maxAvailableVideoZoomFactor API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 @end
 
@@ -1823,7 +1823,7 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
  @discussion
     Some AVCaptureDevices benefit from geometric distortion correction (GDC), such as devices with a very wide field of view. GDC lessens the fisheye effect at the outer edge of the frame at the cost of losing a small amount of vertical and horizontal field of view. When GDC is enabled on the AVCaptureDevice (see geometricDistortionEnabled), the corrected image is upscaled to the original image size when needed.  With respect to the AVCaptureDevice.videoZoomFactor API, the full viewable field of view is always represented with a videoZoomFactor of 1.0. Thus, when GDC is enabled, the AVCaptureDevice.activeFormat's field of view at videoZoomFactor = 1.0 will be different than when GDC is disabled. The smaller field of view is reported through the activeFormat's geometricDistortionCorrectedVideoFieldOfView property. Beware though that RAW photo captures never have GDC applied, regardless of the value of AVCaptureDevice.geometricDistortionCorrectionEnabled.
  */
-@property(nonatomic, readonly, getter=isGeometricDistortionCorrectionSupported) BOOL geometricDistortionCorrectionSupported API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, readonly, getter=isGeometricDistortionCorrectionSupported) BOOL geometricDistortionCorrectionSupported API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property geometricDistortionCorrectionEnabled
@@ -1833,7 +1833,7 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
  @discussion
     Where supported, the default value is YES. The receiver must be locked for configuration using lockForConfiguration: before clients can set this method, otherwise an NSGenericException is thrown.
  */
-@property(nonatomic, getter=isGeometricDistortionCorrectionEnabled) BOOL geometricDistortionCorrectionEnabled API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, getter=isGeometricDistortionCorrectionEnabled) BOOL geometricDistortionCorrectionEnabled API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -1859,7 +1859,66 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
 
     Note that if you enable video stabilization (see AVCaptureConnection.preferredVideoStabilizationMode), the pixels in stabilized video frames no longer match the relative extrinsicMatrix from one device to another due to warping. The extrinsicMatrix and camera intrinsics should only be used when video stabilization is disabled.
  */
-+ (nullable NSData *)extrinsicMatrixFromDevice:(AVCaptureDevice *)fromDevice toDevice:(AVCaptureDevice *)toDevice API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
++ (nullable NSData *)extrinsicMatrixFromDevice:(AVCaptureDevice *)fromDevice toDevice:(AVCaptureDevice *)toDevice API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+@end
+
+
+@interface AVCaptureDevice (AVCaptureDeviceCenterStage)
+
+/*!
+ @enum AVCaptureCenterStageControlMode
+ @abstract
+    Constants indicating the current Center Stage control mode.
+ 
+ @constant AVCaptureCenterStageControlModeUser
+    Indicates that the application is unaware of the Center Stage feature. Its enablement is entirely under user control in Settings.
+ @constant AVCaptureCenterStageControlModeApp
+    Indicates that the application controls the Center Stage feature, disallowing input from the user in Settings.
+ @constant AVCaptureCenterStageControlModeCooperative
+    Indicates that both the user and application cooperatively share control of the Center Stage feature.
+ */
+typedef NS_ENUM(NSInteger, AVCaptureCenterStageControlMode) {
+    AVCaptureCenterStageControlModeUser          = 0,
+    AVCaptureCenterStageControlModeApp	         = 1,
+    AVCaptureCenterStageControlModeCooperative   = 2,
+} API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property centerStageControlMode
+ @abstract
+    A class property indicating the current mode of Center Stage control (user, app, or cooperative).
+ 
+ @discussion
+    This class property determines how the Center Stage feature is controlled. When set to the default value of AVCaptureCenterStageControlModeUser, centerStageEnabled may not be set programmatically and throws an NSInvalidArgumentException. In User mode, the feature may only be set by the user in Settings. If you wish to take Center Stage control away from the user and exclusively enable / disable it programmatically, set this property to AVCaptureCenterStageControlModeApp. When under exclusive app control, Center Stage user control is disallowed (for instance, the toggle is grayed out in Settings). If you wish to take control of Center Stage, but also cooperate with the user by listening for and appropriately reacting to their changes to the centerStageEnabled property, set this property to AVCaptureCenterStageControlModeCooperative. Note that in this mode, the onus is on you, the app developer, to honor user intent and conform your AVCaptureSession configuration to make Center Stage active (see the AVCaptureDevice instance property centerStageActive). In cooperative mode, the centerStageEnabled property may change at any time (such as when the user enables / disables the feature in Settings).
+ */
+@property(class) AVCaptureCenterStageControlMode centerStageControlMode API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property centerStageEnabled
+ @abstract
+    A class property indicating whether the Center Stage feature is currently enabled or disabled (such as in Settings or programmatically via your app).
+ 
+ @discussion
+    This property may only be set if centerStageControlMode is AVCaptureCenterStageControlModeApp or AVCaptureCenterStageControlModeCooperative, and otherwise throws an NSInvalidArgumentException. When centerStageControlMode is AVCaptureCenterStageControlModeUser or AVCaptureCenterStageControlModeCooperative, this property may change according to user desire (such as enabling / disabling the feature in Settings), so you should key-value observe it.
+ */
+@property(class, getter=isCenterStageEnabled) BOOL centerStageEnabled API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property centerStageActive
+ @abstract
+    Indicates whether Center Stage is currently active on a particular AVCaptureDevice.
+ 
+ @discussion
+    This readonly property returns YES when Center Stage is currently active on the receiver. When active, the camera automatically adjusts to keep people optimally framed within the field of view. The field of view may pan, tighten or widen as needed. Certain restrictions come into play when Center Stage is active:
+        - The device's minAvailableVideoZoomFactor and maxAvailableVideoZoomFactor become restricted (see AVCaptureDeviceFormat's videoMinZoomFactorForCenterStage and videoMaxZoomFactorForCenterStage).
+        - The device's activeVideoMinFrameDuration and activeVideoMaxFrameDuration are limited (see AVCaptureDeviceFormat's videoMinFrameDurationForCenterStage and videoMaxFrameDurationForCenterStage).
+    Center Stage may be enabled via user control or application control, depending on the current +AVCaptureDevice.centerStageControlMode. When +AVCaptureDevice.centerStageEnabled is YES, a particular AVCaptureDevice instance may return YES for this property, depending whether it supports the feature in its current configuration. Some device features are mutually exclusive to Center Stage:
+        - If depth data delivery is enabled on any output, such as AVCaptureDepthDataOutput, or -AVCapturePhotoOutput.depthDataDeliveryEnabled, Center Stage is deactivated.
+        - If geometricDistortionCorrectionSupported is YES, geometricDistortionCorrectionEnabled must also be YES, or Center Stage is deactivated.
+    This property is key-value observable.
+ */
+@property(nonatomic, readonly, getter=isCenterStageActive) BOOL centerStageActive API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -1874,7 +1933,7 @@ typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
  @discussion
     This class allows clients to discover devices by providing certain search criteria. The objective of this class is to help find devices by device type and optionally by media type or position and allow you to key-value observe changes to the returned devices list.
  */
-API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDeviceDiscoverySession : NSObject
 
 AV_INIT_UNAVAILABLE
@@ -1916,7 +1975,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     When using an AVCaptureMultiCamSession, multiple cameras may be used as device inputs to the session, so long as they are included in one of the supportedMultiCamDeviceSets. Starting in Mac Catalyst 14.0, clients can key value observe the value of this property to be notified when the device sets change.
  */
-@property(nonatomic, readonly) NSArray<NSSet<AVCaptureDevice *> *> *supportedMultiCamDeviceSets API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, readonly) NSArray<NSSet<AVCaptureDevice *> *> *supportedMultiCamDeviceSets API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -1933,7 +1992,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     An AVCaptureDevice exposes an array of formats, and its current activeFormat may be queried. The payload for the formats property is an array of AVCaptureDeviceFormat objects and the activeFormat property payload is an AVCaptureDeviceFormat. AVCaptureDeviceFormat wraps a CMFormatDescription and expresses a range of valid video frame rates as an NSArray of AVFrameRateRange objects. AVFrameRateRange expresses min and max frame rate as a rate in frames per second and duration (CMTime). An AVFrameRateRange object is immutable. Its values do not change for the life of the object.
  */
-API_AVAILABLE(macos(10.7), ios(7.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVFrameRateRange : NSObject
 {
 @private
@@ -2005,9 +2064,9 @@ typedef NS_ENUM(NSInteger, AVCaptureVideoStabilizationMode) {
     AVCaptureVideoStabilizationModeOff       = 0,
     AVCaptureVideoStabilizationModeStandard  = 1,
     AVCaptureVideoStabilizationModeCinematic = 2,
-    AVCaptureVideoStabilizationModeCinematicExtended API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos) = 3,
+    AVCaptureVideoStabilizationModeCinematicExtended API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) = 3,
     AVCaptureVideoStabilizationModeAuto      = -1,
-} API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
 
 
 /*!
@@ -2026,7 +2085,7 @@ typedef NS_ENUM(NSInteger, AVCaptureAutoFocusSystem) {
     AVCaptureAutoFocusSystemNone              = 0,
     AVCaptureAutoFocusSystemContrastDetection = 1,
     AVCaptureAutoFocusSystemPhaseDetection    = 2,
-} API_AVAILABLE(macos(10.15), ios(8.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} API_AVAILABLE(macos(10.15), ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 
 #pragma mark - AVCaptureDeviceFormat
@@ -2042,7 +2101,7 @@ typedef NS_ENUM(NSInteger, AVCaptureAutoFocusSystem) {
  @discussion
     An AVCaptureDevice exposes an array of formats, and its current activeFormat may be queried. The payload for the formats property is an array of AVCaptureDeviceFormat objects and the activeFormat property payload is an AVCaptureDeviceFormat. AVCaptureDeviceFormat is a thin wrapper around a CMFormatDescription, and can carry associated device format information that doesn't go in a CMFormatDescription, such as min and max frame rate. An AVCaptureDeviceFormat object is immutable. Its values do not change for the life of the object.
  */
-API_AVAILABLE(macos(10.7), ios(7.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface AVCaptureDeviceFormat : NSObject
 {
 @private
@@ -2112,7 +2171,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     isVideoStabilizationModeSupported: returns a boolean value indicating whether the format can be stabilized using the given mode with -[AVCaptureConnection setPreferredVideoStabilizationMode:].
  */
-- (BOOL)isVideoStabilizationModeSupported:(AVCaptureVideoStabilizationMode)videoStabilizationMode API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+- (BOOL)isVideoStabilizationModeSupported:(AVCaptureVideoStabilizationMode)videoStabilizationMode API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property videoStabilizationSupported
@@ -2122,7 +2181,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     videoStabilizationSupported is a BOOL indicating whether the format can be stabilized using AVCaptureConnection -setEnablesVideoStabilizationWhenAvailable. This property is deprecated. Use isVideoStabilizationModeSupported: instead.
  */
-@property(nonatomic, readonly, getter=isVideoStabilizationSupported) BOOL videoStabilizationSupported API_DEPRECATED("Use isVideoStabilizationModeSupported: instead.", ios(7.0, 8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isVideoStabilizationSupported) BOOL videoStabilizationSupported API_DEPRECATED("Use isVideoStabilizationModeSupported: instead.", ios(7.0, 8.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
 
 /*!
  @property videoMaxZoomFactor
@@ -2152,7 +2211,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This read-only property indicates the minimum supported exposure duration.
  */
-@property(nonatomic, readonly) CMTime minExposureDuration API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) CMTime minExposureDuration API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property maxExposureDuration
@@ -2162,7 +2221,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This read-only property indicates the maximum supported exposure duration.
  */
-@property(nonatomic, readonly) CMTime maxExposureDuration API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) CMTime maxExposureDuration API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property minISO
@@ -2172,7 +2231,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This read-only property indicates the minimum supported exposure ISO value.
  */
-@property(nonatomic, readonly) float minISO API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) float minISO API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property maxISO
@@ -2182,7 +2241,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This read-only property indicates the maximum supported exposure ISO value.
  */
-@property(nonatomic, readonly) float maxISO API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) float maxISO API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property globalToneMappingSupported
@@ -2192,7 +2251,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     globalToneMappingSupported is a BOOL indicating whether the format supports global tone mapping. See AVCaptureDevice's globalToneMappingEnabled property.
  */
-@property(nonatomic, readonly, getter=isGlobalToneMappingSupported) BOOL globalToneMappingSupported API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, readonly, getter=isGlobalToneMappingSupported) BOOL globalToneMappingSupported API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property videoHDRSupported
@@ -2202,7 +2261,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     videoHDRSupported is a BOOL indicating whether the format supports high dynamic range streaming, also known as Extended Dynamic Range (EDR). When enabled, the device streams at twice the published frame rate, capturing an under-exposed frame and correctly exposed frame for each frame time at the published rate. Portions of the under-exposed frame are combined with the correctly exposed frame to recover detail in darker areas of the scene. EDR is a separate and distinct feature from 10-bit HDR video (first seen in 2020 iPhones). 10-bit formats have greater dynamic range by virtue of their expanded bit depth and HLG BT2020 color space, and when captured in movies, contain Dolby Vision metadata. They are, in effect, "always on" HDR formats and thus their videoHDRSupported property is always NO, since HDR cannot be enabled or disabled. To enable videoHDR (EDR), set the AVCaptureDevice.videoHDREnabled property.
  */
-@property(nonatomic, readonly, getter=isVideoHDRSupported) BOOL videoHDRSupported API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isVideoHDRSupported) BOOL videoHDRSupported API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property highResolutionStillImageDimensions
@@ -2216,7 +2275,7 @@ AV_INIT_UNAVAILABLE
        - Depth data accompanying still images is not supported by AVCaptureStillImageOutput. You must use AVCapturePhotoOutput.
        - By opting in for depth data ( -[AVCapturePhotoSettings setDepthDataDeliveryEnabled:YES] ), you implicitly opt in for high resolution depth data if it's available. You may query the -[AVCaptureDevice activeDepthDataFormat]'s highResolutionStillImageDimensions to discover the depth data resolution that will be delivered with captured photos.
  */
-@property(nonatomic, readonly) CMVideoDimensions highResolutionStillImageDimensions API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) CMVideoDimensions highResolutionStillImageDimensions API_AVAILABLE(ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property highestPhotoQualitySupported
@@ -2226,7 +2285,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Of the many formats supported by an AVCaptureDevice, only a few of them are designated as "photo" formats which can produce the highest possible quality, such as still image stabilization and Live Photos. If you intend to connect an AVCaptureDeviceInput to an AVCapturePhotoOutput and receive the best possible images, you should ensure that you are either using the AVCaptureSessionPresetPhoto as your preset, or if using the parallel AVCaptureDevice activeFormat API, select as your activeFormat one for which this property is YES.
  */
-@property(nonatomic, readonly, getter=isHighestPhotoQualitySupported) BOOL highestPhotoQualitySupported API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, readonly, getter=isHighestPhotoQualitySupported) BOOL highestPhotoQualitySupported API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 /*!
  @property autoFocusSystem
@@ -2236,7 +2295,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This read-only property indicates the autofocus system.
  */
-@property(nonatomic, readonly) AVCaptureAutoFocusSystem autoFocusSystem API_AVAILABLE(macos(10.15), ios(8.0));
+@property(nonatomic, readonly) AVCaptureAutoFocusSystem autoFocusSystem API_AVAILABLE(macos(10.15), ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property supportedColorSpaces
@@ -2246,7 +2305,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This read-only property indicates the receiver's supported color spaces as an array of AVCaptureColorSpace constants sorted from narrow to wide color.
  */
-@property(nonatomic, readonly) NSArray<NSNumber *> *supportedColorSpaces API_AVAILABLE(macos(10.15), ios(10.0));
+@property(nonatomic, readonly) NSArray<NSNumber *> *supportedColorSpaces API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property videoMinZoomFactorForDepthDataDelivery
@@ -2256,7 +2315,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Virtual devices support a limited zoom range when delivering depth data to any output. If this device format has no -supportedDepthDataFormats, this property returns 1.0.
  */
-@property(nonatomic, readonly) CGFloat videoMinZoomFactorForDepthDataDelivery API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) CGFloat videoMinZoomFactorForDepthDataDelivery API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property videoMaxZoomFactorForDepthDataDelivery
@@ -2266,7 +2325,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Virtual devices support a limited zoom range when delivering depth data to any output. If this device format has no -supportedDepthDataFormats, this property returns videoMaxZoomFactor.
  */
-@property(nonatomic, readonly) CGFloat videoMaxZoomFactorForDepthDataDelivery API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) CGFloat videoMaxZoomFactorForDepthDataDelivery API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property supportedDepthDataFormats
@@ -2276,7 +2335,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     If no depth data formats are supported by the receiver, an empty array is returned. On virtual devices, the supportedDepthDataFormats list items always match the aspect ratio of their paired video format. When the receiver is set as the device's activeFormat, you may set the device's activeDepthDataFormat to one of these supported depth data formats.
  */
-@property(nonatomic, readonly) NSArray<AVCaptureDeviceFormat *> *supportedDepthDataFormats API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) NSArray<AVCaptureDeviceFormat *> *supportedDepthDataFormats API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @property unsupportedCaptureOutputClasses
@@ -2286,7 +2345,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     As a rule, AVCaptureDeviceFormats of a given mediaType are available for use with all AVCaptureOutputs that accept that media type, but there are exceptions. For instance, on apps linked against iOS versions earlier than 12.0, the photo resolution video formats may not be used as sources for AVCaptureMovieFileOutput due to bandwidth limitations. On DualCamera devices, AVCaptureDepthDataOutput is not supported when outputting full resolution (i.e. 12 MP) video due to bandwidth limitations. In order to stream depth data plus video data from a photo format, ensure that your AVCaptureVideoDataOutput's deliversPreviewSizedOutputBuffers property is set to YES. Likewise, to stream depth data while capturing video to a movie file using AVCaptureMovieFileOutput, call -[AVCaptureSession setSessionPreset:AVCaptureSessionPresetPhoto]. When using the photo preset, video is captured at preview resolution rather than the full sensor resolution.
  */
-@property(nonatomic, readonly) NSArray<Class> *unsupportedCaptureOutputClasses API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly) NSArray<Class> *unsupportedCaptureOutputClasses API_AVAILABLE(ios(11.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos);
 
 @end
 
@@ -2301,7 +2360,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     Some depth formats are capable of producing an auxiliary matting image (similar to an auxiliary depth image) tuned for high quality portrait effects rendering (see AVPortraitEffectsMatte.h). If this property's value is YES, you may request portrait effects matte delivery in your photos using the AVCapturePhotoOutput, provided this format is selected as the activeDepthDataFormat.
  */
-@property(nonatomic, readonly, getter=isPortraitEffectsMatteStillImageDeliverySupported) BOOL portraitEffectsMatteStillImageDeliverySupported API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, readonly, getter=isPortraitEffectsMatteStillImageDeliverySupported) BOOL portraitEffectsMatteStillImageDeliverySupported API_AVAILABLE(ios(12.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -2316,7 +2375,7 @@ AV_INIT_UNAVAILABLE
  @discussion
    When using an AVCaptureSession (single camera capture), any of the formats in the device's -formats array may be set as the -activeFormat. However, when used with an AVCaptureMultiCamSession, the device's -activeFormat may only be set to one of the formats for which multiCamSupported answers YES. This limited subset of capture formats are known to run sustainably in a multi camera capture scenario.
  */
-@property(nonatomic, readonly, getter=isMultiCamSupported) BOOL multiCamSupported API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, readonly, getter=isMultiCamSupported) BOOL multiCamSupported API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -2331,7 +2390,52 @@ AV_INIT_UNAVAILABLE
  @discussion
     If the receiver's AVCaptureDevice does not support GDC, geometricDistortionCorrectedVideoFieldOfView matches the videoFieldOfView property.
  */
-@property(nonatomic, readonly) float geometricDistortionCorrectedVideoFieldOfView API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+@property(nonatomic, readonly) float geometricDistortionCorrectedVideoFieldOfView API_AVAILABLE(ios(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+@end
+
+
+@interface AVCaptureDeviceFormat (AVCaptureDeviceFormatCenterStage)
+
+/*!
+ @property centerStageSupported
+ @abstract
+    Indicates whether the format supports the Center Stage feature.
+ 
+ @discussion
+    This property returns YES if the format supports "Center Stage", which automatically adjusts the camera to keep people optimally framed within the field of view. See +AVCaptureDevice.centerStageEnabled for a detailed discussion.
+ */
+@property(nonatomic, readonly, getter=isCenterStageSupported) BOOL centerStageSupported API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property videoMinZoomFactorForCenterStage
+ @abstract
+    Indicates the minimum zoom factor available for the AVCaptureDevice's videoZoomFactor property when centerStageActive is YES.
+ 
+ @discussion
+    Devices support a limited zoom range when Center Stage is active. If this device format does not support Center Stage, this property returns 1.0.
+ */
+@property(nonatomic, readonly) CGFloat videoMinZoomFactorForCenterStage API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property videoMaxZoomFactorForCenterStage
+ @abstract
+    Indicates the maximum zoom factor available for the AVCaptureDevice's videoZoomFactor property when centerStageActive is YES.
+ 
+ @discussion
+    Devices support a limited zoom range when Center Stage is active. If this device format does not support Center Stage, this property returns videoMaxZoomFactor.
+ */
+@property(nonatomic, readonly) CGFloat videoMaxZoomFactorForCenterStage API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property videoFrameRateRangeForCenterStage
+ @abstract
+    Indicates the minimum / maximum frame rates available when centerStageActive is YES.
+ 
+ @discussion
+    Devices may support a limited frame rate range when Center Stage is active. If this device format does not support Center Stage, this property returns nil.
+ */
+@property(nonatomic, readonly, nullable) AVFrameRateRange *videoFrameRateRangeForCenterStage API_AVAILABLE(ios(14.5), macCatalyst(14.5)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -2348,7 +2452,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     An AVCaptureDevice may optionally present an array of inputSources, representing distinct mutually exclusive inputs to the device, for example, an audio AVCaptureDevice might have ADAT optical and analog input sources. A video AVCaptureDevice might have an HDMI input source, or a component input source.
  */
-API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos)
+API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, macCatalyst, watchos, tvos)
 @interface AVCaptureDeviceInputSource : NSObject
 {
 @private

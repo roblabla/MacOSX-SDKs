@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EB1F70D4-70D9-3E86-B380-BB420D5B9068
+    value:           A8D3C9D8-E607-3DE2-A5A6-40F5ACC73334
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           69D9A72C-96BD-3D9E-9D8B-3C82263B6452
+    value:           9F66578C-A2EC-3FEB-9587-84593A054808
 install-name:    '/System/Library/PrivateFrameworks/CDDataAccess.framework/Frameworks/DACalDAV.framework/Versions/A/DACalDAV'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

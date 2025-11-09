@@ -27,7 +27,7 @@ extern NSErrorDomain const NFCErrorDomain;
  * @constant    NFCReaderErrorRadioDisabled                                     NFC Radio is disabled.
  * @constant    NFCReaderTransceiveErrorTagConnectionLost                       Connection to the tag is lost.
  * @constant    NFCReaderTransceiveErrorRetryExceeded                           Maximum data transmission retry has reached.
- * @constant    NFCReaderTransceiveErrorTagResponseError                        Tag response is invalid.  Additional error information may be contain in the underlying user info dictionary.
+ * @constant    NFCReaderTransceiveErrorTagResponseError                        Tag response is invalid or tag does not provide a response.  Additional error information may be contain in the underlying user info dictionary.
  * @constant    NFCReaderTransceiveErrorSessionInvalidated                      Session has been previously invalidated.
  * @constant    NFCReaderTransceiveErrorPacketTooLong                           Packet length has exceeded the limit.
  * @constant    NFCReaderTransceiveErrorTagNotConnected                         Tag is not in the connected state.

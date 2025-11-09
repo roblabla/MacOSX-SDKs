@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F876FD71-F077-3CF7-B94D-9E05A17E03D7
+    value:           FA304330-6361-34DE-B6D6-70BE28E14517
   - target:          x86_64-maccatalyst
-    value:           F876FD71-F077-3CF7-B94D-9E05A17E03D7
+    value:           FA304330-6361-34DE-B6D6-70BE28E14517
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1015A6D8-5D99-3CB3-AC48-55F053134704
+    value:           287B0C55-896A-38F3-A02C-9B9FCF507F56
   - target:          arm64e-maccatalyst
-    value:           1015A6D8-5D99-3CB3-AC48-55F053134704
+    value:           287B0C55-896A-38F3-A02C-9B9FCF507F56
 install-name:    '/System/Library/PrivateFrameworks/CoreNLP.framework/Versions/A/CoreNLP'
-current-version: 245
+current-version: 245.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

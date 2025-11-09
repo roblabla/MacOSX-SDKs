@@ -34,6 +34,7 @@ typedef NS_ENUM(NSInteger,SKErrorCode) {
     SKErrorOverlayTimeout API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED,
     SKErrorIneligibleForOffer API_AVAILABLE(ios(14.0), macos(11.0), watchos(7.0)),                              // User is not eligible for the subscription offer
     SKErrorUnsupportedPlatform API_AVAILABLE(ios(14.0), macos(11.0), watchos(7.0)) __TVOS_PROHIBITED,
+    SKErrorOverlayPresentedInBackgroundScene API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED  // Client tried to present an SKOverlay in UIWindowScene not in the foreground
 } API_AVAILABLE(ios(3.0), macos(10.7), watchos(6.2));
 
 NS_ASSUME_NONNULL_END

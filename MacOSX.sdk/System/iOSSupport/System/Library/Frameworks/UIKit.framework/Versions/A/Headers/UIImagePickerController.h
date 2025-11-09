@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, UIImagePickerControllerSourceType) {
 typedef NS_ENUM(NSInteger, UIImagePickerControllerQualityType) {
     UIImagePickerControllerQualityTypeHigh = 0,       // highest quality
     UIImagePickerControllerQualityTypeMedium = 1,     // medium quality, suitable for transmission via Wi-Fi 
-    UIImagePickerControllerQualityTypeLow = 2,         // lowest quality, suitable for tranmission via cellular network
+    UIImagePickerControllerQualityTypeLow = 2,         // lowest quality, suitable for transmission via cellular network
     UIImagePickerControllerQualityType640x480 API_AVAILABLE(ios(4.0)) = 3,    // VGA quality
     UIImagePickerControllerQualityTypeIFrame1280x720 API_AVAILABLE(ios(5.0)) = 4,
     UIImagePickerControllerQualityTypeIFrame960x540 API_AVAILABLE(ios(5.0)) = 5,
@@ -95,7 +95,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) @interface UIImagePic
 @property(nonatomic)           CGAffineTransform                     cameraViewTransform API_AVAILABLE(ios(3.1));   // set the transform of the preview view.
 
 - (void)takePicture API_AVAILABLE(ios(3.1));                                                   
-// programatically initiates still image capture. ignored if image capture is in-flight.
+// programmatically initiates still image capture. ignored if image capture is in-flight.
 // clients can initiate additional captures after receiving -imagePickerController:didFinishPickingMediaWithInfo: delegate callback
 
 - (BOOL)startVideoCapture API_AVAILABLE(ios(4.0));

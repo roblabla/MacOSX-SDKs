@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A100000D-F881-3C3C-ABC5-3EAC7A272579
+    value:           CC7DFC41-3C2A-3D11-93B1-0E5109E94C5F
   - target:          x86_64-maccatalyst
-    value:           A100000D-F881-3C3C-ABC5-3EAC7A272579
+    value:           CC7DFC41-3C2A-3D11-93B1-0E5109E94C5F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DDEA1AAD-5FC1-3C0C-BD5A-ABE12F310473
+    value:           0F4594D2-2ADF-3A65-BCDF-433B4CFF487F
   - target:          arm64e-maccatalyst
-    value:           DDEA1AAD-5FC1-3C0C-BD5A-ABE12F310473
+    value:           0F4594D2-2ADF-3A65-BCDF-433B4CFF487F
 install-name:    '/System/Library/PrivateFrameworks/CoreSymbolication.framework/Versions/A/CoreSymbolication'
-current-version: 64541.4
+current-version: 64544.69.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -26,16 +26,18 @@ exports:
                        _CSArchitectureIsArm64, _CSArchitectureIsBigEndian, _CSArchitectureIsI386, 
                        _CSArchitectureIsLittleEndian, _CSArchitectureIsX86_64, _CSArchitectureMatchesArchitecture, 
                        _CSCopyDescription, _CSCopyDescriptionWithIndent, _CSCppAddMmapArchivesFromSymbolicatorToDirectory, 
-                       _CSCppAddMmapArchivesToDirectory, _CSCppConvertLegacyPreVersion5ArchiveToModern, 
-                       _CSCppConvertLegacyPreVersion5ArchiveToModernCopy, _CSCppConvertModernArchiveToLegacyPreVersion5, 
-                       _CSCppConvertModernArchiveToLegacyPreVersion5Copy, _CSCppConvertSymbolOwnerArchiveToLegacyPreVersion5Copy, 
+                       _CSCppAddMmapArchivesToDirectory, _CSCppConvertLegacyPreVersion5ArchiveToModernCopy, 
+                       _CSCppConvertLegacyPreVersion6ArchiveToModernCopy, _CSCppConvertModernArchiveToLegacyPreVersion6Copy, 
                        _CSCppConvertSymbolOwnerLegacyPreVersion5ArchiveToModernCopy, 
-                       _CSCppExtractMMapArchiveFromSymbolOwner, _CSCppPopulateCachesWithMmapArchives, 
-                       _CSCppPopulateCachesWithMmapArchivesAndGroupKey, _CSDemangleSymbolName, 
-                       _CSEqual, _CSExceptionSafeThreadRunBlock, _CSGetForceSafeMachVMReads, 
-                       _CSGetRetainCount, _CSIsNull, _CSMMapArchiveCacheCopyMMapArchive, 
-                       _CSMMapArchiveCacheReleaseMMapArchive, _CSMMapArchiveCacheSetShouldStoreToDaemon, 
-                       _CSRangeContainsRange, _CSRangeIntersectsRange, _CSRegionCopyDescriptionWithIndent, 
+                       _CSCppConvertSymbolOwnerLegacyPreVersion6ArchiveToModernCopy, 
+                       _CSCppConvertSymbolOwnerModernArchiveToLegacyPreVersion6Copy, 
+                       _CSCppExtractMMapArchiveFromSymbolOwner, _CSCppExtractTRawSymbolOwnerDataFromSymbolOwner, 
+                       _CSCppPopulateCachesWithMmapArchives, _CSCppPopulateCachesWithMmapArchivesAndGroupKey, 
+                       _CSDemangleSymbolName, _CSEqual, _CSExceptionSafeThreadRunBlock, 
+                       _CSGetForceSafeMachVMReads, _CSGetRetainCount, _CSIsNull, 
+                       _CSMMapArchiveCacheCopyMMapArchive, _CSMMapArchiveCacheReleaseMMapArchive, 
+                       _CSMMapArchiveCacheSetShouldStoreToDaemon, _CSRangeContainsRange, 
+                       _CSRangeIntersectsRange, _CSRegionCopyDescriptionWithIndent, 
                        _CSRegionForeachSourceInfo, _CSRegionForeachSymbol, _CSRegionGetName, 
                        _CSRegionGetRange, _CSRegionGetSymbolOwner, _CSRegionGetSymbolicator, 
                        _CSRelease, _CSRetain, _CSSectionGetSegment, _CSSegmentForeachSection, 
@@ -94,7 +96,8 @@ exports:
                        _CSSymbolOwnerIsObject, _CSSymbolOwnerIsObsolete, _CSSymbolOwnerIsPIE, 
                        _CSSymbolOwnerIsProtected, _CSSymbolOwnerIsRestricted, _CSSymbolOwnerIsSlid, 
                        _CSSymbolOwnerIsStaticLibraryArchiveEntry, _CSSymbolOwnerMakeMutableInContext, 
-                       _CSSymbolOwnerNeedsResymbolication, _CSSymbolOwnerRemoveInContext, 
+                       _CSSymbolOwnerMakeMutableInContextWithSOD, _CSSymbolOwnerNeedsResymbolication, 
+                       _CSSymbolOwnerRemoveInContext, _CSSymbolOwnerReplaceInContextWithSOD, 
                        _CSSymbolOwnerSegmentsMatch, _CSSymbolOwnerSetLoadTimestamp, 
                        _CSSymbolOwnerSetPath, _CSSymbolOwnerSetPathForSymbolication, 
                        _CSSymbolOwnerSetRelocationCount, _CSSymbolOwnerSetTransientUserData, 
@@ -156,7 +159,7 @@ exports:
                        _CSSymbolicatorSubscribeToTaskMainNotification, _CSSymbolicatorTranslateFromNativeAddress, 
                        _CSTotalBytesMapped, _CSUUIDCFUUIDBytesToPath, _CSUUIDCFUUIDBytesToString, 
                        _CSUUIDStringToCFUUIDBytes, _clear_mapped_memory, _create_mapped_memory_cache_for_task, 
-                       _create_sampling_context_for_task, _create_sampling_context_for_task_and_pid, 
+                       _create_mapped_memory_cache_for_task_with_label, _create_sampling_context_for_task, 
                        _create_sampling_context_for_task_pid_symbolicator, _demangle, 
                        _destroy_mapped_memory_cache, _destroy_sampling_context, _dispatch_queue_name_for_serial_number, 
                        _enumerate_mapped_memory_cache, _find_node, _get_remote_thread_dispatch_queue, 
@@ -164,8 +167,11 @@ exports:
                        _kCSTypeDictionaryValueCallBacks, _kCSTypeDictionaryWeakKeyCallBacks, 
                        _kCSTypeDictionaryWeakValueCallBacks, _kCSTypeSetCallBacks, 
                        _kCSTypeSetWeakCallBacks, _map_new_node, _mapped_memory_read, 
-                       _mapped_memory_read_pointer, _next_node, _release_mapped_memory_cache, 
-                       _retain_mapped_memory_cache, _sample_remote_thread, _sample_remote_thread_with_dispatch_queue, 
-                       _sampling_context_clear_cache, _task_is_64bit, _task_is_translated, 
-                       _thread_name_for_thread_port ]
+                       _mapped_memory_read_pointer, _next_node, _retain_mapped_memory_cache, 
+                       _sample_remote_thread, _sample_remote_thread_with_dispatch_queue, 
+                       _sampling_context_clear_cache, _set_mapped_memory_cache_region_info_block, 
+                       _task_get_mapped_memory_cache, _task_get_mapped_memory_cache_with_label, 
+                       _task_is_64bit, _task_is_translated, _task_lookup_mapped_memory_cache, 
+                       _task_release_mapped_memory_cache, _thread_name_for_thread_port, 
+                       _unmap_node ]
 ...

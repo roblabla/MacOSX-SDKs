@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EB455401-3956-3BA4-AD01-0CC8D253773D
+    value:           6A30EE30-BDC4-3F0E-B0F5-9CA487C01A48
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B4F45F0-5D5A-357C-BF31-39D1F0DB4209
+    value:           9A462F0D-3F8B-3CD2-A87D-74AD2DA8C1E8
 install-name:    '/System/Library/PrivateFrameworks/SiriAppResolution.framework/Versions/A/SiriAppResolution'
 swift-abi-version: 7
 exports:
@@ -97,8 +97,9 @@ exports:
                        '_$s17SiriAppResolution0B13PolicyHandlerCMa', '_$s17SiriAppResolution0B13PolicyHandlerCMm', 
                        '_$s17SiriAppResolution0B13PolicyHandlerCMn', '_$s17SiriAppResolution0B13PolicyHandlerCN', 
                        '_$s17SiriAppResolution0B13PolicyHandlerCfD', '_$s17SiriAppResolution0B13PolicyHandlerCfd', 
-                       '_$s17SiriAppResolution0B14PolicyHandlingMp', '_$s17SiriAppResolution0B14PolicyHandlingTL', 
-                       '_$s17SiriAppResolution0B16SelectionFailureO02noB8SelectedyA2CmFWC', 
+                       '_$s17SiriAppResolution0B14PolicyHandlingMp', '_$s17SiriAppResolution0B14PolicyHandlingP21isAllowedByScreenTime16bundleIdentifierSbSS_tFTj', 
+                       '_$s17SiriAppResolution0B14PolicyHandlingP21isAllowedByScreenTime16bundleIdentifierSbSS_tFTq', 
+                       '_$s17SiriAppResolution0B14PolicyHandlingTL', '_$s17SiriAppResolution0B16SelectionFailureO02noB8SelectedyA2CmFWC', 
                        '_$s17SiriAppResolution0B16SelectionFailureO2eeoiySbAC_ACtFZ', 
                        '_$s17SiriAppResolution0B16SelectionFailureO4hash4intoys6HasherVz_tF', 
                        '_$s17SiriAppResolution0B16SelectionFailureO9hashValueSivg', 

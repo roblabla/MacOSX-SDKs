@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DCE52627-5601-3E37-9665-074D950F9F3F
+    value:           24E0D817-7371-3B3D-B7D6-EC80A80AAB73
 install-name:    '/System/Library/PrivateFrameworks/AppleGVACore.framework/Versions/A/AppleGVACore'
 current-version: 10.0.20
 exports:

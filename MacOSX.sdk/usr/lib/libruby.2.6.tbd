@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F6C68282-CA7F-31E7-815F-F5D98BE63DC9
+    value:           821EC369-AE99-3162-967F-5A8EAC3A9A19
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6ADB16FD-8182-3678-A06C-5D5898A8697B
+    value:           E188E89C-81FD-3ABB-9055-04DE7CC93470
 install-name:    '/usr/lib/libruby.2.6.dylib'
 current-version: 2.6.3
 compatibility-version: 2.6
@@ -723,11 +723,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A5C147EC-C431-3E46-85F2-C634D7470127
+    value:           2C9842C1-65C0-3D67-9F00-4E396EF671BD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           37A2CC4C-21F0-3C1B-BA2D-823CBA564251
+    value:           18F95AC2-63CD-3787-BE1D-9C5E21241FD1
 install-name:    '/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/libruby.2.6.dylib'
 current-version: 2.6.3
 compatibility-version: 2.6

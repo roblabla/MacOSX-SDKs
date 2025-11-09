@@ -150,11 +150,15 @@ In order to leverage this feature, mandatory smartcard enforcement must be estab
 .Bd -literal -offset indent
 sudo defaults write /Library/Preferences/com.apple.security.smartcard enforceSmartCard -bool true
 .Ed
+.br
+Remember to update the FVUnlock settings using the "diskutil apfs updatePreboot" command.
 .sp
 In addition, the system must be configured to allow users who are not paired with SmartCard to login with password:
 .Bd -literal -offset indent
 sudo defaults write /Library/Preferences/com.apple.security.smartcard allowUnmappedUsers -int 1
 .Ed
+.br
+Remember to update the FVUnlock settings using the "diskutil apfs updatePreboot" command.
 .sp
 .El                      \" Ends the list
 .br

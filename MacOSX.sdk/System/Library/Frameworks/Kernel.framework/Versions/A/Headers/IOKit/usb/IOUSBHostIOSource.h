@@ -239,8 +239,14 @@ public:
      */
     virtual IOReturn abort(IOOptionBits options = kAbortAsynchronous, IOReturn withError = kIOReturnAborted, IOService* forClient = NULL);
     
+    /*!
+     * @brief       Retrieve a pointer to the IOUSBHostDevice that encapsulates this endpoint or stream
+     * @return      IOUSBHostDevice pointer
+     */
+    OSMetaClassDeclareReservedUsed(IOUSBHostIOSource, 10);
+    virtual IOUSBHostDevice* getDevice() const;
+    
     // Public pad slots for future expansion
-    OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 10);
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 11);
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 12);
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 13);

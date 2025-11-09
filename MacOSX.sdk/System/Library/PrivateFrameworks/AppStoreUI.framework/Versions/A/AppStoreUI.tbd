@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           412D280A-E95A-3EFD-931F-A82B7F872384
+    value:           0B897EA7-435A-3BFA-B914-E3B9255538FD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           08BB0E31-A2A2-34D0-87B0-0D110C62DCDE
+    value:           D7DF9A64-7F97-394F-8F44-16E26406DF80
 install-name:    '/System/Library/PrivateFrameworks/AppStoreUI.framework/Versions/A/AppStoreUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

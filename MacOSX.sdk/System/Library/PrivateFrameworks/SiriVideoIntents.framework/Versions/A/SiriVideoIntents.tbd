@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3D85B26E-45C0-36B0-A073-45215762764A
+    value:           E3FC841E-2E89-32A6-9770-71F0FA0C5E36
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           16506F10-9BF8-347A-AC9A-3D250528E0E9
+    value:           A28DF2BB-F31E-3FE4-AA21-A12FF2214D97
 install-name:    '/System/Library/PrivateFrameworks/SiriVideoIntents.framework/Versions/A/SiriVideoIntents'
 swift-abi-version: 7
 allowable-clients:

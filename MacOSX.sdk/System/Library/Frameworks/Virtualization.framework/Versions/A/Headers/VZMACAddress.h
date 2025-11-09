@@ -32,8 +32,8 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 /*!
  @abstract Initialize the VZMACAddress from a string representation of a MAC address.
  @param string
-    The string should be formatted respresenting the 6 bytes in hexadecimal separated by a colon character.
-        e.g. "01:23:45:ab:cd::ef"
+    The string should be formatted representing the 6 bytes in hexadecimal separated by a colon character.
+        e.g. "01:23:45:ab:cd:ef"
 
     The alphabetical characters can appear lowercase or uppercase.
  @return A VZMACAddress or nil if the string is not formatted correctly.
@@ -57,7 +57,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
     The 6 bytes are represented in hexadecimal form, separated by a colon character.
     Alphabetical characters are lowercase.
 
-    The address is compatible with the paramater of -[VZMACAddress initWithString:].
+    The address is compatible with the parameter of -[VZMACAddress initWithString:].
  */
 @property (readonly, copy) NSString *string;
 

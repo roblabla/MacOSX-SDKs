@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4FEEAE9B-A35D-3E6E-B938-DCC04BDB4A4C
+    value:           59C2EDFB-E1E9-3D3B-83CD-6C472A7597DF
   - target:          x86_64-maccatalyst
-    value:           4FEEAE9B-A35D-3E6E-B938-DCC04BDB4A4C
+    value:           59C2EDFB-E1E9-3D3B-83CD-6C472A7597DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BC34FDD4-2845-3F05-A952-6A44257EA889
+    value:           97A14475-C582-3730-A0A3-0A4392AE53EF
   - target:          arm64e-maccatalyst
-    value:           BC34FDD4-2845-3F05-A952-6A44257EA889
+    value:           97A14475-C582-3730-A0A3-0A4392AE53EF
 install-name:    '/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib'
-current-version: 633.0.2
+current-version: 636.9
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -130,6 +130,8 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV15xmlPropertyListACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV16_appCategoryNewsACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV16_deviceModelCode14enclosureColorACSgSS_AA010UTHardwareI0OSgtcfC', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV16_enclosureColorsSayAA15UTHardwareColorOGvg', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV16_enclosureColorsSayAA15UTHardwareColorOGvpMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV16_namedPipeOrFIFOACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV16compositeContentACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV16debugDescriptionSSvg', 
@@ -187,6 +189,7 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV22_appCategoryBoardGamesACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV22_appCategoryMusicGamesACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV22_appCategoryNavigationACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV22_appleEncryptedArchiveACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV22assemblyLanguageSourceACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV22utf16ExternalPlainTextACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV23_appCategoryActionGamesACvgZ', 
@@ -200,6 +203,8 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV23_appCategoryTriviaGamesACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV24_appCategoryFoodAndDrinkACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV24_appCategoryProductivityACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV24_preferredEnclosureColorAA010UTHardwareG0OSgvg', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV24_preferredEnclosureColorAA010UTHardwareG0OSgvpMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV24appleProtectedMPEG4AudioACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV24appleProtectedMPEG4VideoACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV24objectiveCPlusPlusSourceACvgZ', 

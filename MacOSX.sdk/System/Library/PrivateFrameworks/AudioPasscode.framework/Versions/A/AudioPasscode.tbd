@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D0DDEB27-0A0B-3C10-A1CB-B43B00F66D5D
+    value:           3B08BDF0-2921-36FB-BEE7-A9B9E0DA033A
   - target:          x86_64-maccatalyst
-    value:           D0DDEB27-0A0B-3C10-A1CB-B43B00F66D5D
+    value:           3B08BDF0-2921-36FB-BEE7-A9B9E0DA033A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           262D274A-F29D-3492-B049-ED98E7852CC1
+    value:           893E7039-D4CD-36C1-B668-8E29761D103D
   - target:          arm64e-maccatalyst
-    value:           262D274A-F29D-3492-B049-ED98E7852CC1
+    value:           893E7039-D4CD-36C1-B668-8E29761D103D
 install-name:    '/System/Library/PrivateFrameworks/AudioPasscode.framework/Versions/A/AudioPasscode'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

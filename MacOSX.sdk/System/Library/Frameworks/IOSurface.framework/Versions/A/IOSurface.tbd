@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A3B10665-5909-30EE-BE34-F3284D6D5975
+    value:           1A0AD030-00A3-330D-A821-16C0BBA88A82
   - target:          x86_64-maccatalyst
-    value:           A3B10665-5909-30EE-BE34-F3284D6D5975
+    value:           1A0AD030-00A3-330D-A821-16C0BBA88A82
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9FF9A9E1-CEE6-3B60-B906-9F841A8C458F
+    value:           D0329678-B1D1-3B68-8B1E-CBFA0125CC5A
   - target:          arm64e-maccatalyst
-    value:           9FF9A9E1-CEE6-3B60-B906-9F841A8C458F
+    value:           D0329678-B1D1-3B68-8B1E-CBFA0125CC5A
 install-name:    '/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _IOSurfaceAlignProperty, _IOSurfaceAllowsPixelSizeCasting, 
                        _IOSurfaceBindAccel, _IOSurfaceBindAccelOnPlane, _IOSurfaceCopyAllValues, 
@@ -59,8 +59,9 @@ exports:
                        _IOSurfaceLockPlane, _IOSurfaceLog, _IOSurfaceLookup, _IOSurfaceLookupFromMachPort, 
                        _IOSurfaceLookupFromXPCObject, _IOSurfaceNeedsBindAccel, _IOSurfaceNeedsBindAccelOnPlane, 
                        _IOSurfaceNotifierCreate, _IOSurfaceNotifierGetMachPort, _IOSurfaceNotifierGetRunLoopSource, 
-                       _IOSurfaceNotifierGetTypeID, _IOSurfaceNotifierSetDispatchQueue, 
-                       _IOSurfacePrefetchPages, _IOSurfacePropertyAllocSizeKey, _IOSurfacePropertyKeyAllocSize, 
+                       _IOSurfaceNotifierGetTypeID, _IOSurfaceNotifierInvalidate, 
+                       _IOSurfaceNotifierSetDispatchQueue, _IOSurfacePrefetchPages, 
+                       _IOSurfacePropertyAllocSizeKey, _IOSurfacePropertyKeyAllocSize, 
                        _IOSurfacePropertyKeyBytesPerElement, _IOSurfacePropertyKeyBytesPerRow, 
                        _IOSurfacePropertyKeyCacheMode, _IOSurfacePropertyKeyElementHeight, 
                        _IOSurfacePropertyKeyElementWidth, _IOSurfacePropertyKeyHeight, 
@@ -152,6 +153,6 @@ exports:
                        IOSurfaceSharedEvent, IOSurfaceSharedEventListener ]
     objc-ivars:      [ IOSurfaceSharedEvent._eventPort, IOSurfaceSharedEvent._globalTraceObjectID, 
                        IOSurfaceSharedEventListener._dispatchQueue, IOSurfaceSharedEventListener._notificationPort ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _IOSurfaceCopyGPUPolicies ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ _IOSurfaceCopyGPUPolicies, _IOSurfaceSetImageOriginAndExtents ]
 ...

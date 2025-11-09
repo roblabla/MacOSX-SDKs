@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8676CDCB-15CC-3723-9411-8B8AFA3B370A
+    value:           9CE5FB86-C856-3D07-931E-3300B18CE6B3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F64FFFE7-AB74-3C03-BAFB-BCBF4DBCDBCD
+    value:           AB6B356F-C9EE-3845-910D-44A580E597C2
 install-name:    '/System/Library/Frameworks/DiscRecording.framework/Versions/A/DiscRecording'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/usr/lib/libobjc.A.dylib' ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _DRAbstractFile, _DRAccessDate, _DRAllFilesystems, _DRApplicationIdentifier, 
                        _DRAttributeModificationDate, _DRAudioFourChannelKey, _DRAudioPreEmphasisKey, 
                        _DRAudioTrackCreate, _DRAudioTrackCreateWithURL, _DRBackupDate, 

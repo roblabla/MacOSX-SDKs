@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C76347D7-9017-3EBC-8E6C-E07297AC0B66
+    value:           4767EA53-54E7-31CC-9EC1-165D6A9E8411
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D6D16D91-2073-3399-A224-D60B99CEABE3
+    value:           43E63AE1-07B2-3431-863A-E2757030895B
 install-name:    '/System/Library/PrivateFrameworks/HIDDisplay.framework/Versions/A/HIDDisplay'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

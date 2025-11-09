@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E1C321AE-6E6F-32D5-8A0C-9084B117572B
+    value:           038B586F-0241-39D4-83DD-EB36A6F57894
   - target:          x86_64-maccatalyst
-    value:           E1C321AE-6E6F-32D5-8A0C-9084B117572B
+    value:           038B586F-0241-39D4-83DD-EB36A6F57894
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0EDCC44C-4514-3361-AA31-3EB7E5C9DCA3
+    value:           33DA568C-C9D4-3593-9CE9-96D36A0679B4
   - target:          arm64e-maccatalyst
-    value:           0EDCC44C-4514-3361-AA31-3EB7E5C9DCA3
+    value:           33DA568C-C9D4-3593-9CE9-96D36A0679B4
 install-name:    '/System/Library/Frameworks/CoreHaptics.framework/Versions/A/CoreHaptics'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CHHapticDynamicParameterIDAudioAttackTimeControl, _CHHapticDynamicParameterIDAudioBrightnessControl, 
                        _CHHapticDynamicParameterIDAudioDecayTimeControl, _CHHapticDynamicParameterIDAudioPanControl, 

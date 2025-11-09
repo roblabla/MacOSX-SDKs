@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C21CA883-5AFC-3FEC-8B9E-288077A03BEB
+    value:           491125E6-B25B-36D2-B2E2-0FF840CA10B1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CD008432-8AE8-39D1-BCC4-78AB1030E33E
+    value:           AFE10A42-A19E-38A8-BE8C-628F7BEEDF2E
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCommCenterAWDMetrics.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -3030,13 +3030,17 @@ exports:
                        __ZN3awd7metrics29CommCenterAudioDistortionInfo15kMncFieldNumberE, 
                        __ZN3awd7metrics29CommCenterAudioDistortionInfo16default_instanceEv, 
                        __ZN3awd7metrics29CommCenterAudioDistortionInfo17default_instance_E, 
+                       __ZN3awd7metrics29CommCenterAudioDistortionInfo19kRatTypeFieldNumberE, 
                        __ZN3awd7metrics29CommCenterAudioDistortionInfo20kCallTypeFieldNumberE, 
                        __ZN3awd7metrics29CommCenterAudioDistortionInfo20kSimHplmnFieldNumberE, 
                        __ZN3awd7metrics29CommCenterAudioDistortionInfo21CheckTypeAndMergeFromERKN20wireless_diagnostics6google8protobuf11MessageLiteE, 
                        __ZN3awd7metrics29CommCenterAudioDistortionInfo21InitAsDefaultInstanceEv, 
                        __ZN3awd7metrics29CommCenterAudioDistortionInfo21kTimestampFieldNumberE, 
+                       __ZN3awd7metrics29CommCenterAudioDistortionInfo23kVocoderTypeFieldNumberE, 
                        __ZN3awd7metrics29CommCenterAudioDistortionInfo26kDistortionTypeFieldNumberE, 
+                       __ZN3awd7metrics29CommCenterAudioDistortionInfo26kVocoderBitRateFieldNumberE, 
                        __ZN3awd7metrics29CommCenterAudioDistortionInfo27MergePartialFromCodedStreamEPN20wireless_diagnostics6google8protobuf2io16CodedInputStreamE, 
+                       __ZN3awd7metrics29CommCenterAudioDistortionInfo28kVocoderBandwidthFieldNumberE, 
                        __ZN3awd7metrics29CommCenterAudioDistortionInfo30kDistortionDurationFieldNumberE, 
                        __ZN3awd7metrics29CommCenterAudioDistortionInfo4SwapEPS1_, 
                        __ZN3awd7metrics29CommCenterAudioDistortionInfo5ClearEv, __ZN3awd7metrics29CommCenterAudioDistortionInfo8CopyFromERKS1_, 
@@ -4425,6 +4429,7 @@ exports:
                        __ZN3awd7metrics39CommCenterBundleOverlayFileWriteFailureD0Ev, 
                        __ZN3awd7metrics39CommCenterBundleOverlayFileWriteFailureD1Ev, 
                        __ZN3awd7metrics39CommCenterBundleOverlayFileWriteFailureD2Ev, 
+                       __ZN3awd7metrics39CommCenterCellularPlanFlowPhase_IsValidEi, 
                        __ZN3awd7metrics39CommCenterDataUsageWhileOnCall_AppUsage10SharedCtorEv, 
                        __ZN3awd7metrics39CommCenterDataUsageWhileOnCall_AppUsage10SharedDtorEv, 
                        __ZN3awd7metrics39CommCenterDataUsageWhileOnCall_AppUsage16default_instanceEv, 
@@ -4699,9 +4704,9 @@ exports:
                        __ZN3awd7metrics42CommCenterRemoteCellularPlanProfilesStatus21CheckTypeAndMergeFromERKN20wireless_diagnostics6google8protobuf11MessageLiteE, 
                        __ZN3awd7metrics42CommCenterRemoteCellularPlanProfilesStatus21InitAsDefaultInstanceEv, 
                        __ZN3awd7metrics42CommCenterRemoteCellularPlanProfilesStatus21kTimestampFieldNumberE, 
-                       __ZN3awd7metrics42CommCenterRemoteCellularPlanProfilesStatus23kCarrierNameFieldNumberE, 
                        __ZN3awd7metrics42CommCenterRemoteCellularPlanProfilesStatus23kProfileInfoFieldNumberE, 
                        __ZN3awd7metrics42CommCenterRemoteCellularPlanProfilesStatus27MergePartialFromCodedStreamEPN20wireless_diagnostics6google8protobuf2io16CodedInputStreamE, 
+                       __ZN3awd7metrics42CommCenterRemoteCellularPlanProfilesStatus37kVoicePreferredCarrierNameFieldNumberE, 
                        __ZN3awd7metrics42CommCenterRemoteCellularPlanProfilesStatus4SwapEPS1_, 
                        __ZN3awd7metrics42CommCenterRemoteCellularPlanProfilesStatus5ClearEv, 
                        __ZN3awd7metrics42CommCenterRemoteCellularPlanProfilesStatus8CopyFromERKS1_, 
@@ -5217,11 +5222,16 @@ exports:
                        __ZN3awd7metrics49static_descriptor_initializer_IMSMetrics_2eproto_E, 
                        __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails10SharedCtorEv, 
                        __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails10SharedDtorEv, 
+                       __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails15kMccFieldNumberE, 
+                       __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails15kMncFieldNumberE, 
                        __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails15kSidFieldNumberE, 
                        __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails16default_instanceEv, 
+                       __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails16kGid1FieldNumberE, 
+                       __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails16kGid2FieldNumberE, 
                        __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails17default_instance_E, 
                        __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails21CheckTypeAndMergeFromERKN20wireless_diagnostics6google8protobuf11MessageLiteE, 
                        __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails21InitAsDefaultInstanceEv, 
+                       __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails21kFlowPhaseFieldNumberE, 
                        __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails21kTimestampFieldNumberE, 
                        __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails22kClientTypeFieldNumberE, 
                        __ZN3awd7metrics50CommCenterCellularPlanProvisioningOperationDetails23kInstallTypeFieldNumberE, 
@@ -5494,8 +5504,11 @@ exports:
                        __ZN3awd7metrics64CommCenterRemoteCellularPlanProfilesStatus_RemotePlanProfileInfo10SharedDtorEv, 
                        __ZN3awd7metrics64CommCenterRemoteCellularPlanProfilesStatus_RemotePlanProfileInfo16default_instanceEv, 
                        __ZN3awd7metrics64CommCenterRemoteCellularPlanProfilesStatus_RemotePlanProfileInfo17default_instance_E, 
+                       __ZN3awd7metrics64CommCenterRemoteCellularPlanProfilesStatus_RemotePlanProfileInfo20kPlanTypeFieldNumberE, 
                        __ZN3awd7metrics64CommCenterRemoteCellularPlanProfilesStatus_RemotePlanProfileInfo21CheckTypeAndMergeFromERKN20wireless_diagnostics6google8protobuf11MessageLiteE, 
                        __ZN3awd7metrics64CommCenterRemoteCellularPlanProfilesStatus_RemotePlanProfileInfo21InitAsDefaultInstanceEv, 
+                       __ZN3awd7metrics64CommCenterRemoteCellularPlanProfilesStatus_RemotePlanProfileInfo23kCarrierNameFieldNumberE, 
+                       __ZN3awd7metrics64CommCenterRemoteCellularPlanProfilesStatus_RemotePlanProfileInfo26kIsCrossCarrierFieldNumberE, 
                        __ZN3awd7metrics64CommCenterRemoteCellularPlanProfilesStatus_RemotePlanProfileInfo27MergePartialFromCodedStreamEPN20wireless_diagnostics6google8protobuf2io16CodedInputStreamE, 
                        __ZN3awd7metrics64CommCenterRemoteCellularPlanProfilesStatus_RemotePlanProfileInfo30kSubscriptionStatusFieldNumberE, 
                        __ZN3awd7metrics64CommCenterRemoteCellularPlanProfilesStatus_RemotePlanProfileInfo4SwapEPS1_, 

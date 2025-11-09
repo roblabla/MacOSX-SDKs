@@ -102,10 +102,7 @@
 
 // GKVoiceChatService provides voice chat capabilities depending on your networking situation.
 NS_CLASS_DEPRECATED_IOS(3_0, 7_0, "Use GKVoiceChat instead") 
-@interface GKVoiceChatService : NSObject {
-    @private
-    id _voiceChatService;
-}
+@interface GKVoiceChatService : NSObject
 
 + (GKVoiceChatService *)defaultVoiceChatService;
 

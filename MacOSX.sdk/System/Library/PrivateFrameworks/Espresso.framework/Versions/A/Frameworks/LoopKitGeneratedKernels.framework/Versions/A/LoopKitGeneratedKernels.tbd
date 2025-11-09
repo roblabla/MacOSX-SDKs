@@ -3,12 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E3B3D3EE-BB8D-30A4-B026-CEC7DE4EC83E
+    value:           5BDBE54D-88F9-3094-A7E4-61908CEE300D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           56FB9D31-3B19-3DA5-B532-2127C866964E
-install-name:    '@rpath/LoopKitGeneratedKernels.framework/Versions/A/LoopKitGeneratedKernels'
+    value:           9E1A3B08-B07A-3669-8A11-A8A2A45F924F
+install-name:    '/System/Library/PrivateFrameworks/Espresso.framework/Versions/A/Frameworks/LoopKitGeneratedKernels.framework/Versions/A/LoopKitGeneratedKernels'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _LoopKitGeneratedKernelsVersionNumber, _LoopKitGeneratedKernelsVersionString, 

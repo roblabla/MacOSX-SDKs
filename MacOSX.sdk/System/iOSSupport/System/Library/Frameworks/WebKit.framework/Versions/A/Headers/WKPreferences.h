@@ -60,6 +60,10 @@ WK_EXTERN API_AVAILABLE(macos(10.10), ios(8.0))
 @property (nonatomic) BOOL tabFocusesLinks API_AVAILABLE(macos(10.12.3));
 #endif
 
+/*! @abstract A Boolean value indicating whether text interaction is disabled.
+*/
+@property (nonatomic) BOOL textInteractionEnabled API_AVAILABLE(macos(11.3), ios(14.5));
+
 @end
 
 @interface WKPreferences (WKDeprecated)

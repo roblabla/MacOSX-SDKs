@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AFB49AFF-1BCC-3D83-AD5A-CFE79DC57F58
+    value:           A65E7458-867A-3810-B429-33CF5ABAB4E5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           74B14E51-3FE4-315C-8451-DE0352A3FCA6
+    value:           B756C1BD-BAC1-34CE-927B-1BEE5E655B41
 install-name:    '/System/Library/PrivateFrameworks/MessagesBlastDoorSupport.framework/Versions/A/MessagesBlastDoorSupport'
 swift-abi-version: 7
 allowable-clients:
@@ -18,6 +18,10 @@ exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview17forAttachmentWith17maxPixelDimension5scale13resultHandlery10Foundation3URLV_S2fySo8NSObjectCSg_s5Error_pSgtctF', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview17forAttachmentWith17maxPixelDimension5scale13resultHandlery10Foundation3URLV_S2fySo8NSObjectCSg_s5Error_pSgtctFTq', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview19forAudioMessageWith13resultHandlery10Foundation3URLV_ySo8NSObjectCSg_s5Error_pSgtctF', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview19forAudioMessageWith13resultHandlery10Foundation3URLV_ySo8NSObjectCSg_s5Error_pSgtctFTq', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview19forAudioMessageWith16powerLevelsCount13resultHandlery10Foundation3URLV_SuySo8NSObjectCSg_s5Error_pSgtctF', 
+                       '_$s24MessagesBlastDoorSupport0abC9InterfaceC15generatePreview19forAudioMessageWith16powerLevelsCount13resultHandlery10Foundation3URLV_SuySo8NSObjectCSg_s5Error_pSgtctFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC20generateMoviePreview17forAttachmentWith17maxPixelDimension18minThumbnailPxSize5scale13resultHandlery10Foundation3URLV_SfSo6CGSizeVSfySo8NSObjectCSg_s5Error_pSgtctF', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC20generateMoviePreview17forAttachmentWith17maxPixelDimension18minThumbnailPxSize5scale13resultHandlery10Foundation3URLV_SfSo6CGSizeVSfySo8NSObjectCSg_s5Error_pSgtctFTq', 
                        '_$s24MessagesBlastDoorSupport0abC9InterfaceC2bd0bC0AECvpfi', 

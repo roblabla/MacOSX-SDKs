@@ -6,7 +6,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <AvailabilityMacros.h>
+#import <Availability.h>
 
 @class IOBluetoothDevice;
 API_UNAVAILABLE_BEGIN(ios)

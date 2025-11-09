@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7434BCC6-23EA-381B-802A-D3E9E1DB9B1D
+    value:           0C1C2AB8-E126-3F11-8A8B-36B4773B911D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FF6A5236-FCE6-3CBA-BD6F-F5AEF29858EB
+    value:           FF2E9FB7-A92B-3D2F-9889-10B81D04A859
 install-name:    '/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 2452.2
+current-version: 2452.7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ABCNContactSortByFirstName, _ABCNContactSortByLastName, _ABCNContactSortingSubstringAttributeName, 
@@ -32,7 +32,8 @@ exports:
                        _CNFamilyMemberEditControlsViewControllerLargeWidth, _CNFamilyMemberEditControlsViewControllerRegularHeight, 
                        _CNFamilyMemberEditControlsViewControllerRegularWidth, _CNFamilyMemberEditControlsViewControllerSmallHeight, 
                        _CNFamilyMemberEditControlsViewControllerSmallMWidth, _CNLikenessCollectionCircleDiameter, 
-                       _CNLikenessCollectionItemDiameter, _CNLikenessEditorFamilyNameKey, 
+                       _CNLikenessCollectionItemDiameter, _CNLikenessCollectionLabelWidth, 
+                       _CNLikenessCollectionViewWidth, _CNLikenessEditorFamilyNameKey, 
                        _CNLikenessEditorFullNameKey, _CNLikenessEditorGivenNameKey, 
                        _CNLikenessEditorImageCropRectKey, _CNLikenessEditorImageDataKey, 
                        _CNLikenessSourceContainerIdentifierUnassigned, _CNLikenessSourceContainerNameUnassigned, 
@@ -50,12 +51,12 @@ exports:
                        _CNWhitelistedContactViewCellMargin, _isLikenessFromPersonaStore, 
                        _kHDAspectRatio, _kLikenessCollectionCircleDiameter, _kLikenessCollectionCircleDiameterLegacy, 
                        _kLikenessCollectionCircleInset, _kLikenessCollectionItemDiameter, 
-                       _kLikenessCollectionItemDiameterLegacy, _kZoomSliderHeight, 
-                       _kZoomSliderZoomUnit, _sCNUIConvertABPersonToCNContact, _sharedSessionQueue, 
-                       _touchBarButtonHeight, _touchBarButtonWidthLarge, _touchBarButtonWidthMedium, 
-                       _touchBarButtonWidthSmall, _touchBarIdentifierAddField, _touchBarIdentifierCollectionView, 
-                       _touchBarIdentifierCollectionViewRemoveButton, _touchBarIdentifierContactViewEditButton, 
-                       _touchBarIdentifierContactViewShareButton ]
+                       _kLikenessCollectionItemDiameterLegacy, _kLikenessCollectionLabelInset, 
+                       _kZoomSliderHeight, _kZoomSliderZoomUnit, _sCNUIConvertABPersonToCNContact, 
+                       _sharedSessionQueue, _touchBarButtonHeight, _touchBarButtonWidthLarge, 
+                       _touchBarButtonWidthMedium, _touchBarButtonWidthSmall, _touchBarIdentifierAddField, 
+                       _touchBarIdentifierCollectionView, _touchBarIdentifierCollectionViewRemoveButton, 
+                       _touchBarIdentifierContactViewEditButton, _touchBarIdentifierContactViewShareButton ]
     objc-classes:    [ ABCNContactNameFormatter, ABCNContactShortNameFormatter, ABPersonListSearchControllerUsageStatisticsHelper, 
                        CNAddFieldTouchBar, CNAntialiasedImageView, CNAvatarCache, 
                        CNAvatarCacheDelegateObservable, CNAvatarCacheEntry, CNAvatarEditOverlayView, 

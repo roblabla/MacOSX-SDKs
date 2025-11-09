@@ -78,6 +78,14 @@ IK_CLASS_AVAILABLE(10.5)
 - (void)addSaveOptionsToView: (NSView *)view;
 #endif
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_11_3
+/*!
+ @property rememberLastSetting
+ @abstract If set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
+ */
+@property (assign,nonatomic) BOOL rememberLastSetting;
+#endif
+
 @end
     
 #endif

@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8524EE4C-628F-315A-9531-44DD83CE275E
+    value:           BEDC3BFB-D680-3E56-9A3A-2FAB181C52A9
   - target:          x86_64-maccatalyst
-    value:           8524EE4C-628F-315A-9531-44DD83CE275E
+    value:           BEDC3BFB-D680-3E56-9A3A-2FAB181C52A9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9DDF8F69-ED1D-3CF5-8BE5-45D2D2D32DF1
+    value:           B0F993E3-BA90-3981-88C3-4B06755DDAD2
   - target:          arm64e-maccatalyst
-    value:           9DDF8F69-ED1D-3CF5-8BE5-45D2D2D32DF1
+    value:           B0F993E3-BA90-3981-88C3-4B06755DDAD2
 install-name:    '/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration'
-current-version: 1109.60.2
+current-version: 1109.101.1
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CNCopyCurrentNetworkInfo, _CNCopySupportedInterfaces, _CNMarkPortalOffline, 
                        _CNMarkPortalOnline, _CNSetSupportedSSIDs, _DHCPClientPreferencesCopyApplicationOptions, 
@@ -387,7 +387,10 @@ exports:
                        _kSCPropNetProxiesScoped, _kSCPropNetProxiesServiceSpecific, 
                        _kSCPropNetProxiesServices, _kSCPropNetProxiesSupplemental, 
                        _kSCPropNetProxiesSupplementalMatchDomain, _kSCPropNetProxiesSupplementalMatchDomains, 
-                       _kSCPropNetProxiesSupplementalMatchOrders, _kSCPropNetQoSMarkingAppleAudioVideoCalls, 
+                       _kSCPropNetProxiesSupplementalMatchOrders, _kSCPropNetProxiesTransportConverterEnable, 
+                       _kSCPropNetProxiesTransportConverterFallBackAllowed, _kSCPropNetProxiesTransportConverterMultipathServiceType, 
+                       _kSCPropNetProxiesTransportConverterPort, _kSCPropNetProxiesTransportConverterProxy, 
+                       _kSCPropNetProxiesTransportConverterTFOMode, _kSCPropNetQoSMarkingAppleAudioVideoCalls, 
                        _kSCPropNetQoSMarkingEnabled, _kSCPropNetQoSMarkingWhitelistedAppIdentifiers, 
                        _kSCPropNetSMBNetBIOSName, _kSCPropNetSMBNetBIOSNodeType, 
                        _kSCPropNetSMBNetBIOSScope, _kSCPropNetSMBWINSAddresses, _kSCPropNetSMBWorkgroup, 
@@ -474,7 +477,7 @@ exports:
                        _kVPNFlowPropertyType, _snhelper_flow_divert_uuid_policy_add, 
                        _snhelper_flow_divert_uuid_policy_clear, _snhelper_flow_divert_uuid_policy_remove, 
                        _snhelper_get_uuid_for_app ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _VPNConfigurationSetAuthorization, __SC_dos_encoding_and_codepage, 
                        _kSCEntNetAppleTalk, _kSCEntNetNetInfo, _kSCPropNetAppleTalkConfigMethod, 
                        _kSCPropNetAppleTalkDefaultZone, _kSCPropNetAppleTalkNetworkID, 

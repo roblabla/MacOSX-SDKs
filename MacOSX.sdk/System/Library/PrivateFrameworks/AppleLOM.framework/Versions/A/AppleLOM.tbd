@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           60665281-E5A0-376E-A9DF-1B6C840BB484
+    value:           291C10B1-2708-31CF-B0EC-97D29353B5FB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4A9C22D9-A418-3103-AF11-4B43540F9557
+    value:           0C76272D-7348-3C41-A670-C27483D24E0F
 install-name:    '/System/Library/PrivateFrameworks/AppleLOM.framework/Versions/A/AppleLOM'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -16,7 +16,7 @@ exports:
                        _LOMLogAnalytics, _LOMLogAnalyticsForName, _LOMNVEnableNetworkInterface, 
                        _LOMNVGetIPV6Addresses, _LOMNVGetIPV6Interfaces, _LOMNVGetSecondaryIPV6Addresses, 
                        _LOMNVIsSupportedStatus, _LOMNVReceiveData, _LOMNVSendData, 
-                       _LOMNVSetupNetworkPolicy, _LOMSMCreateTransitionsFromStatesToDestination, 
+                       _LOMNVSendMagicPacketForIPV6, _LOMNVSetupNetworkPolicy, _LOMSMCreateTransitionsFromStatesToDestination, 
                        _LOMSecCopyControllerCertsAndKeyFromPresistantRef, _LOMSecCopyKeychainItemFromPersistantRef, 
                        _LOMSecCreateCertificateFromData, _LOMSecCreateCertificatesDataFromPersistantRef, 
                        _LOMSecCreateDataFromCertificate, _LOMSecCreateDataFromPrivateKey, 

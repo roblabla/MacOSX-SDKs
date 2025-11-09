@@ -53,7 +53,7 @@ UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationReq
 // user info
 @property(nullable, nonatomic,copy) NSDictionary *userInfo;   // throws if contains non-property list types
 
-// category identifer of the local notification, as set on a UIUserNotificationCategory and passed to +[UIUserNotificationSettings settingsForTypes:categories:]
+// category identifier of the local notification, as set on a UIUserNotificationCategory and passed to +[UIUserNotificationSettings settingsForTypes:categories:]
 @property (nullable, nonatomic, copy) NSString *category API_AVAILABLE(ios(8.0));
 
 @end

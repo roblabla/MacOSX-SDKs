@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7386FBFB-D5BE-3A29-A1C4-8550D12C7254
+    value:           A117E76D-3CDA-3C77-B10A-76936CC8E6D0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0093C466-31E2-386C-AEDA-DFDD9EF327C8
+    value:           D79F6738-F850-3E5E-9971-A862689961DF
 install-name:    '/System/Library/PrivateFrameworks/MessagesKit.framework/Versions/A/MessagesKit'
 current-version: 800
 exports:

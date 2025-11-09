@@ -10,6 +10,8 @@
 
 #ifdef __x86_64__
 
+#include <mach/mach_port.h>
+
 #include <Hypervisor/hv_base.h>
 #include <Hypervisor/hv_error.h>
 #include <Hypervisor/hv_types.h>
@@ -151,6 +153,36 @@ extern hv_return_t hv_vm_protect_space(hv_vm_space_t asid, hv_gpaddr_t gpa,
 extern hv_return_t hv_vm_sync_tsc(uint64_t tsc) __HV_10_10;
 
 /*!
+ * @function   hv_vm_add_pio_notifier
+ * @abstract   Generate a notification when a matching guest port IO is issued.
+ * @param      addr      Port IO address to match
+ * @param      size      Size to match (1, 2, 4)
+ * @param      value     Value to match
+ * @param      mach_port Mach port with send right
+ * @param      flags     Controlling options
+ * @result     0 on success or error code
+ * @discussion An installed notifier will suppress guest exits triggered by the
+ *             matching IO and instead send a message (hv_ion_message_t) to the
+ *             specified mach port. Only one notifier per port address is permitted.
+ */
+extern hv_return_t hv_vm_add_pio_notifier(uint16_t addr, size_t size,
+	uint32_t value, mach_port_t mach_port, hv_ion_flags_t flags) __HV_11_0;
+
+/*!
+ * @function   hv_vm_remove_pio_notifier
+ * @abstract   Remove a previously added notifier.
+ * @param      addr      Previously specified port IO address
+ * @param      size      Previously specified size
+ * @param      value     Previously specified value
+ * @param      mach_port Previously specified mach port
+ * @param      flags     Previously specified options
+ * @result     0 on success or error code
+ * @discussion Arguments much match those previously used to add the notifier.
+ */
+extern hv_return_t hv_vm_remove_pio_notifier(uint16_t addr, size_t size,
+	uint32_t value, mach_port_t mach_port, hv_ion_flags_t flags) __HV_11_0;
+
+/*!
  * @function   hv_vcpu_create
  * @abstract   Creates a vCPU instance for the current thread
  * @param      vcpu   Pointer to the vCPU ID (written on success)
@@ -271,7 +303,8 @@ extern hv_return_t hv_vcpu_enable_native_msr(hv_vcpuid_t vcpu, uint32_t msr,
  *
  *             Must be called by the owning thread
  */
-extern hv_return_t hv_vcpu_enable_managed_msr(hv_vcpuid_t vcpu, uint32_t msr, bool enable) __HV_11_0;
+extern hv_return_t hv_vcpu_enable_managed_msr(hv_vcpuid_t vcpu, uint32_t msr,
+	bool enable) __HV_11_0;
 
 /*!
  * @function   hv_vcpu_set_msr_access
@@ -285,7 +318,8 @@ extern hv_return_t hv_vcpu_enable_managed_msr(hv_vcpuid_t vcpu, uint32_t msr, bo
  *
  *             Must be called by the owning thread
  */
-extern hv_return_t hv_vcpu_set_msr_access(hv_vcpuid_t vcpu, uint32_t msr, hv_msr_flags_t flags) __HV_11_0;
+extern hv_return_t hv_vcpu_set_msr_access(hv_vcpuid_t vcpu, uint32_t msr,
+	hv_msr_flags_t flags) __HV_11_0;
 
 /*!
  * @function   hv_vcpu_read_msr
@@ -401,6 +435,28 @@ extern hv_return_t hv_vcpu_interrupt(hv_vcpuid_t* vcpus,
  */
 extern hv_return_t hv_vcpu_get_exec_time(hv_vcpuid_t vcpu,
 	uint64_t *time) __HV_10_10;
+
+/*!
+ * @function	hv_tsc_clock
+ * @abstract	Returns the value of an abstract clock.
+ * @description	The abstract clock ticks at the same rate as the host TSC,
+ * 				offset by an implementation-dependent constant. The clock
+ * 				value is monotonically increasing.
+ */
+extern uint64_t hv_tsc_clock(void) __HV_11_0;
+
+/*!
+ * @function	hv_vcpu_set_tsc_relative
+ * @abstract	Sets the offset of the guest TSC relative to the hv_tsc_clock()
+ * @param		vcpu  	vCPU ID
+ * @param		offset	Relative offset value to apply to VMCS TSC-offset field
+ * @result		0 on success or error code
+ * @discussion	The routine arranges to set the TSC-offset field in the VMCS such
+ * 				that the TSC value in the guest will be the value
+ * 				of hv_tsc_clock() plus the given offset.
+ */
+extern hv_return_t hv_vcpu_set_tsc_relative(hv_vcpuid_t vcpu,
+	int64_t offset) __HV_11_0;
 
 __END_DECLS
 

@@ -89,6 +89,15 @@ Return the manager responsible for the default domain.
  in the user visible location. All changes coming from the provider should go through
  updates in the working set that will be applied to the user visible items by the
  system.
+
+ The location may differ from the logical parentURL/filename.
+ If an item on disk cannot be assigned the requested name (e.g. because the local
+ file system has different case collision rules from the provider), one of the items can be assigned
+ a different local name. In that case, the "com.apple.fileprovider.before-bounce#P" extended
+ attribute will contain the filename before collision resolution.
+ This attribute is only set if the item has been assigned a different local name following
+ a collision. Such local names are not synced up to the provider; the purpose of the attribute is
+ to enable consistency checkers to detect this case.
  */
 - (void)getUserVisibleURLForItemIdentifier:(NSFileProviderItemIdentifier)itemIdentifier completionHandler:(void (^)(NSURL * __nullable userVisibleFile, NSError * __nullable error))completionHandler FILEPROVIDER_API_AVAILABILITY_V3 NS_SWIFT_NAME(getUserVisibleURL(for:completionHandler:));
 
@@ -209,12 +218,53 @@ Return the manager responsible for the default domain.
 - (void)signalErrorResolved:(NSError *)error completionHandler:(void(^)(NSError *_Nullable error))completionHandler
     FILEPROVIDER_API_AVAILABILITY_V3;
 
+/**
+ Returns the global progress for the specified kind of operations
+
+ This progress tracks all the ongoing kind of operations (from disk to the provider).
+ Uploading operations are the operations from disk to the provider.
+ Downloading operations are the operations from the provider to the disk.
+
+ The global progress exposes the two following data:
+ - Number of items with an ongoing matching kind operation along with the grand total;
+ - Number of bytes already transfered along with the total amount of bytes to transfer.
+
+ The grand total will only be reset to 0 when there are no operations left. If new operations of the matching kind arrive while
+ the global progress is already ongoing, they will just be summed to the existing global progress.
+
+ By default, when no matching kind operations are active, the progress has its values set to 1 and its state set to finished.
+
+ The progress will be updated on the main queue. It is to be retained by the caller and to be observed through KVO.
+
+ The two only supported values for kind are:
+ - NSProgressFileOperationKindUploading
+ - NSProgressFileOperationKindDownloading
+
+ The returned progress will have its fileOperationKind property set.
+ */
+- (NSProgress *)globalProgressForKind:(NSProgressFileOperationKind)kind NS_SWIFT_NAME(globalProgress(for:)) FILEPROVIDER_API_AVAILABILITY_V3_1;
+
 @end
+
+/** Posted when the materialized set has changed.
+
+ Interested clients can then use the materialized set enumerator returned by -enumeratorForMaterializedItems to enumerate changes on the materialized set.
+
+ Note, this notification starts to be posted only after `+[NSFileProviderManager getDomainsWithCompletionHandler:]` is called.
+ */
+
+FOUNDATION_EXPORT NSNotificationName const NSFileProviderMaterializedSetDidChange
+FILEPROVIDER_API_AVAILABILITY_V3_1;
 
 @interface NSFileProviderManager (MaterializedSet)
 
 /**
- Returns an enumerator for the set of materialized containers.
+ Returns an enumerator for the set of materialized items.
+
+ When calling -[NSFileProviderEnumerator enumerateItemsForObserver:startingAtPage:] on the returned
+ enumerator, pass the result of [NSData new] as the starting page. The sorting page constants
+ (NSFileProviderInitialPageSortedByName and NSFileProviderInitialPageSortedByDate) will not influence
+ the order of the items enumerated from the materialized set.
 
  This enumerator is unlike other enumerators because the roles of the system
  and the app/extension are reversed:
@@ -224,6 +274,43 @@ Return the manager responsible for the default domain.
    'materializedItemsDidChangeWithCompletionHandler'.
  */
 - (id<NSFileProviderEnumerator>)enumeratorForMaterializedItems FILEPROVIDER_API_AVAILABILITY_V3;
+
+@end
+
+/** Posted when the pending set has changed.
+
+ Interested clients can then use the pending set enumerator returned by -enumeratorForPendingItems to enumerate changes on the pending set.
+
+ Note, this notification starts to be posted only after `+[NSFileProviderManager getDomainsWithCompletionHandler:]` is called.
+ */
+FOUNDATION_EXPORT NSNotificationName const NSFileProviderPendingSetDidChange
+FILEPROVIDER_API_AVAILABILITY_V3_1;
+
+FILEPROVIDER_API_AVAILABILITY_V3_1
+@protocol NSFileProviderPendingSetEnumerator <NSFileProviderEnumerator>
+
+/**
+ The version of the domain when the pending set was last refreshed by the system.
+ */
+@property (nonatomic, readonly, nullable) NSFileProviderDomainVersion *domainVersion;
+
+/**
+ The amount of time in seconds at which the pending set is refreshed on modifications.
+ */
+@property (nonatomic, readonly) NSTimeInterval refreshInterval;
+
+@end
+
+@interface NSFileProviderManager (PendingSet)
+
+/**
+ Returns an enumerator for the set of pending items.
+
+ This enumerator behaves like the materialized set enumerator.
+ On later modifications in the set, the system will call
+ 'pendingItemsDidChangeWithCompletionHandler'.
+ */
+- (id<NSFileProviderPendingSetEnumerator>)enumeratorForPendingItems FILEPROVIDER_API_AVAILABILITY_V3_1;
 
 @end
 
@@ -297,15 +384,26 @@ Return the manager responsible for the default domain.
 @interface NSFileProviderManager (Eviction)
 
 /**
- Request that the system removes an item from its cache.
+ Request that the system remove an item from its cache.
 
- This removes the contents of a file, or the metadata and contents of all the
- files in a directory.
+ When called on a file, the file will be made dataless.
 
- Note that directory eviction is not available yet. Attempt to evict a directory will
- fail with NSCocoaErrorDomain.NSFeatureUnsupportedError.
+ When called on a directory, first each of the directory's children will be evicted (child files are made
+ dataless, child directories are recursively evicted). Then the directory itself will be made dataless.
+ If a non-evictable child is encountered, eviction will stop immediately and the completionHandler will be called with
+ the NSFileProviderErrorNonEvictableChildren error. The error will include information on why and which
+ children could not be evicted in -[NSError underlyingErrors].
 
- The completion handler is called when the item has been evicted from disk.
+ The materialization state of the remaining items may be either materialized or evicted, depending on the traversal order.
+
+ The completion handler is called after the items have been evicted from disk or immediately when an error occurs.
+
+ Eviction might fail with the following errors :
+   - NSFileProviderErrorDomain.NSFileProviderErrorUnsyncedEdits if the item had non-uploaded changes.
+   - NSFileProviderErrorDomain.NSFileProviderErrorNonEvictable if the item has been marked as non-purgeable by the provider.
+   - NSPOSIXErrorDomain.EBUSY : if the item has open file descriptors on it.
+   - NSPOSIXErrorDomain.EMLINK : if the item has several hardlinks.
+   - other NSPOSIXErrorDomain error codes if the system was unable to access or manipulate the corresponding file.
  */
 - (void)evictItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
               completionHandler:(void (^)(NSError * _Nullable error))completionHandler
@@ -324,10 +422,15 @@ Return the manager responsible for the default domain.
  If any error is met during that process, an error will be raised, in which case the caller should not
  assume all the changes have been received.
 
- This call will only wait for changes affecting items that were descendents (recursively) of the requested
- item, but will not consider the item itself. As a consequence, that call can be used from within a call
+ This call will only wait for changes affecting items that were already descendents of the requested item
+ in the provider, or items that have been newly created on disk. It will not wait for items that are already
+ known from the provider and are being moved in the directory. As a consequence, that call can be used from within a call
  to -[NSFileProviderReplicatedExtension modifyItem:baseVersion:changedFields:contents:options:completionHandler:].
  Also note that the call will return immediately on items that are not directories.
+
+ In case a change cannot be applied to the provider, the call will fail with NSFileProviderErrorCannotSynchronize
+ including the NSFileProviderErrorItemKey with the identifier of the item that could not be synced if that item
+ is known by the provider.
  */
 - (void)waitForChangesOnItemsBelowItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
                                    completionHandler:(void (^)(NSError * _Nullable error))completionHandler

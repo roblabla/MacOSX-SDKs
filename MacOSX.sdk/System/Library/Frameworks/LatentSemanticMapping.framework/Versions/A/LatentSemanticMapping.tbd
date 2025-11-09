@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FF2F40BB-765C-3E1F-9F1B-700B20D536C9
+    value:           54A3FCFF-9379-38A6-89DA-C26962960A52
   - target:          x86_64-maccatalyst
-    value:           FF2F40BB-765C-3E1F-9F1B-700B20D536C9
+    value:           54A3FCFF-9379-38A6-89DA-C26962960A52
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6E37BFAC-990A-3855-B3A7-51CA2E4D3ACD
+    value:           2EED2FE1-EA8A-3FF4-B48C-3D1A2381610A
   - target:          arm64e-maccatalyst
-    value:           6E37BFAC-990A-3855-B3A7-51CA2E4D3ACD
+    value:           2EED2FE1-EA8A-3FF4-B48C-3D1A2381610A
 install-name:    '/System/Library/Frameworks/LatentSemanticMapping.framework/Versions/A/LatentSemanticMapping'
-current-version: 5
+current-version: 6
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _LSMMapAddCategory, _LSMMapAddText, _LSMMapAddTextWithWeight, 
                        _LSMMapApplyClusters, _LSMMapCompile, _LSMMapCompileWithBlock, 
@@ -33,6 +33,6 @@ exports:
                        _LSMResultGetCategory, _LSMResultGetCount, _LSMResultGetScore, 
                        _LSMResultGetTypeID, _LSMTextAddToken, _LSMTextAddWord, _LSMTextAddWords, 
                        _LSMTextCreate, _LSMTextGetTypeID ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _LSMTextCreateFromSRLanguageObject, _LSMTextCreateFromSRRecognitionResult ]
 ...

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CA32A39C-E49A-375A-893F-81B9E49A7F1B
+    value:           87301095-32CB-3354-8168-10FA66113616
   - target:          x86_64-maccatalyst
-    value:           CA32A39C-E49A-375A-893F-81B9E49A7F1B
+    value:           87301095-32CB-3354-8168-10FA66113616
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9C474C5C-B8D5-32C9-8128-1B89D666B063
+    value:           A4C435BD-9BFE-3CFA-969E-D5A9865950B6
   - target:          arm64e-maccatalyst
-    value:           9C474C5C-B8D5-32C9-8128-1B89D666B063
+    value:           A4C435BD-9BFE-3CFA-969E-D5A9865950B6
 install-name:    '/System/Library/PrivateFrameworks/SecureChannel.framework/Versions/A/SecureChannel'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

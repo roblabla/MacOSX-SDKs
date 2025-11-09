@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3A435648-CC5F-387E-AB37-391AAEABE314
+    value:           0EC3E4C1-5879-3DB6-8E62-3D734C6C1424
   - target:          x86_64-maccatalyst
-    value:           3A435648-CC5F-387E-AB37-391AAEABE314
+    value:           0EC3E4C1-5879-3DB6-8E62-3D734C6C1424
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D4C1DA84-5F74-3CB6-97A9-46C6E91BA974
+    value:           EDC7995E-B88B-3615-9D2A-BD99E98CB3F7
   - target:          arm64e-maccatalyst
-    value:           D4C1DA84-5F74-3CB6-97A9-46C6E91BA974
+    value:           EDC7995E-B88B-3615-9D2A-BD99E98CB3F7
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS'
 current-version: 236
 parent-umbrella:
@@ -22,7 +22,7 @@ parent-umbrella:
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        ApplicationServices
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AGAddAttribute, _AGBeginIteration, _AGComputeByteCapacity, 
                        _AGComputeByteCapacityV, _AGComputeChecksum, _AGComputeIncrementalCapacity, 

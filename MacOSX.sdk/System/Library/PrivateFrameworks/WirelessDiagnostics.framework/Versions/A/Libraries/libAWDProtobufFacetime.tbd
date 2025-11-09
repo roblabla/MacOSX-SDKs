@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2FD8C977-D40B-312C-B88B-E584D1B5AE11
+    value:           1A22E133-CD82-3BE2-87CC-FC7BA2FECA06
   - target:          x86_64-maccatalyst
-    value:           2FD8C977-D40B-312C-B88B-E584D1B5AE11
+    value:           1A22E133-CD82-3BE2-87CC-FC7BA2FECA06
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D2B18970-C2E5-3F29-B95C-3B62EF4EE8D2
+    value:           21F6DC9A-2A1B-3480-8197-33376FE33D51
   - target:          arm64e-maccatalyst
-    value:           D2B18970-C2E5-3F29-B95C-3B62EF4EE8D2
+    value:           21F6DC9A-2A1B-3480-8197-33376FE33D51
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufFacetime.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

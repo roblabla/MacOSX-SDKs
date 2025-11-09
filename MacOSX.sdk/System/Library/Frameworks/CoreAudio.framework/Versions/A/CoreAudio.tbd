@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DF623EC9-FC55-3B3C-94FF-6A5C50A981B3
+    value:           68667A4E-B4BC-3DF4-9D34-1E3ECECF7E0F
   - target:          x86_64-maccatalyst
-    value:           DF623EC9-FC55-3B3C-94FF-6A5C50A981B3
+    value:           68667A4E-B4BC-3DF4-9D34-1E3ECECF7E0F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0E6AD3C8-3E90-3CB7-BE25-DDD37AFD1917
+    value:           F4C3AC19-ACBA-3305-83F0-32F04A9D1913
   - target:          arm64e-maccatalyst
-    value:           0E6AD3C8-3E90-3CB7-BE25-DDD37AFD1917
+    value:           F4C3AC19-ACBA-3305-83F0-32F04A9D1913
 install-name:    '/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 

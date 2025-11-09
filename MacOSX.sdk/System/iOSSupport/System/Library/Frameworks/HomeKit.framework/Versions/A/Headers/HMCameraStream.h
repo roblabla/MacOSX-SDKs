@@ -21,7 +21,7 @@ HM_EXTERN API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) 
 /*!
  * @brief Represents the audio setting for the current stream.
  */
-@property (assign, nonatomic, readonly) HMCameraAudioStreamSetting audioStreamSetting API_UNAVAILABLE(tvos);
+@property (assign, nonatomic, readonly) HMCameraAudioStreamSetting audioStreamSetting API_AVAILABLE(tvos(14.5));
 
 /*!
  * @brief Sets the audio stream setting.
@@ -34,13 +34,13 @@ HM_EXTERN API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) 
 /*!
  * @brief Updates the settings of the audio stream.
  *
- * @param audioStreamSetting New audio stream setting.
+ * @param audioStreamSetting New audio stream setting. Bidirectional audio is not allowed on TVOS.
  *
  * @param completion Block that is invoked once the request is processed.
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)updateAudioStreamSetting:(HMCameraAudioStreamSetting)audioStreamSetting completionHandler:(void (^)(NSError * __nullable error))completion API_UNAVAILABLE(tvos);
+- (void)updateAudioStreamSetting:(HMCameraAudioStreamSetting)audioStreamSetting completionHandler:(void (^)(NSError * __nullable error))completion API_AVAILABLE(tvos(14.5));
 
 @end
 

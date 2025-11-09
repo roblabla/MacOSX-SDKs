@@ -97,7 +97,7 @@ public:
   }
 
 #ifndef NDEBUG
-  void dump() const LLVM_ATTRIBUTE_USED;
+  void dump() const SWIFT_USED;
 #endif
 
 #endif // ndef __swift__

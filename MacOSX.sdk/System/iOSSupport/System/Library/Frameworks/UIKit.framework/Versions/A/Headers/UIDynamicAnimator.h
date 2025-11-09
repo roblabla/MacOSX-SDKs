@@ -52,7 +52,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIDynamicAnimator: NSObject
 @interface UIDynamicAnimator (UICollectionViewAdditions)
 
 // When you initialize a dynamic animator with this method, you should only associate collection view layout attributes with your behaviors.
-// The animator will employ thecollection view layout’s content size coordinate system.
+// The animator will employ the collection view layout’s content size coordinate system.
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout;
 
 // The three convenience methods returning layout attributes (if associated to behaviors in the animator) if the animator was configured with collection view layout

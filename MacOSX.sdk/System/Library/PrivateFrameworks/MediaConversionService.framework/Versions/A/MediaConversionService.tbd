@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3CFF44FA-C0BC-3831-BCC7-1F8A5814DD7B
+    value:           8E33297E-B851-34B3-B76F-7111962CE7A1
   - target:          x86_64-maccatalyst
-    value:           3CFF44FA-C0BC-3831-BCC7-1F8A5814DD7B
+    value:           8E33297E-B851-34B3-B76F-7111962CE7A1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC6E13AB-0FF1-3C85-A2E1-55655F1E4F1D
+    value:           9DB966EB-F8E6-3D22-94B6-123CB760800E
   - target:          arm64e-maccatalyst
-    value:           AC6E13AB-0FF1-3C85-A2E1-55655F1E4F1D
+    value:           9DB966EB-F8E6-3D22-94B6-123CB760800E
 install-name:    '/System/Library/PrivateFrameworks/MediaConversionService.framework/Versions/A/MediaConversionService'
-current-version: 321.0.102
+current-version: 340.0.220
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -66,6 +66,7 @@ exports:
                        _PAMediaConversionServiceOptionUnitTestSupportExtraEnvironmentVariablesKey, 
                        _PAMediaConversionServiceOptionUnitTestSupportServiceShouldExitAfterRequestKey, 
                        _PAMediaConversionServiceOptionUnitTestSupportServiceShouldExitDuringRequestKey, 
+                       _PAMediaConversionServiceOptionUnitTestSupportServiceShouldSimulateConversionHangKey, 
                        _PAMediaConversionServiceOptionUseEmbeddedImageAsSourceKey, 
                        _PAMediaConversionServiceOptionVideoAdjustmentsPropertyListKey, 
                        _PAMediaConversionServiceOptionWantsProgressKey, _PAMediaConversionServiceOptionWantsResultAsDataKey, 

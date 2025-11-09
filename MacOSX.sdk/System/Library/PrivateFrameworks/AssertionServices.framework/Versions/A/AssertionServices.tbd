@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9F8620BD-A58D-3A42-9B9E-DEC21517EF1A
+    value:           5E01DE2E-60AE-342E-9DD2-A4B01B295183
   - target:          x86_64-maccatalyst
-    value:           9F8620BD-A58D-3A42-9B9E-DEC21517EF1A
+    value:           5E01DE2E-60AE-342E-9DD2-A4B01B295183
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1CD9B6A5-00E1-3A26-A389-E1D93B077876
+    value:           3283DE5A-4CCC-3067-9E37-E7A7B0FAE145
   - target:          arm64e-maccatalyst
-    value:           1CD9B6A5-00E1-3A26-A389-E1D93B077876
+    value:           3283DE5A-4CCC-3067-9E37-E7A7B0FAE145
 install-name:    '/System/Library/PrivateFrameworks/AssertionServices.framework/Versions/A/AssertionServices'
-current-version: 505.60.2
+current-version: 505.100.7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

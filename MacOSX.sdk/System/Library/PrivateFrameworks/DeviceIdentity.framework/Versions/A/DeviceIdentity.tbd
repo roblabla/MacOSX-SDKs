@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C9033ACD-87AC-36E6-B26B-1E4D1AC63CF3
+    value:           F7EFAA33-CEA2-36DA-B2A3-85F8DDA88E61
   - target:          x86_64-maccatalyst
-    value:           C9033ACD-87AC-36E6-B26B-1E4D1AC63CF3
+    value:           F7EFAA33-CEA2-36DA-B2A3-85F8DDA88E61
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4621312C-6D31-3E4F-BA45-C4F04E06ADDF
+    value:           D7876986-BD98-3F27-A4BE-977CA93191D5
   - target:          arm64e-maccatalyst
-    value:           4621312C-6D31-3E4F-BA45-C4F04E06ADDF
+    value:           D7876986-BD98-3F27-A4BE-977CA93191D5
 install-name:    '/System/Library/PrivateFrameworks/DeviceIdentity.framework/Versions/A/DeviceIdentity'
 current-version: 0
 compatibility-version: 0
@@ -26,15 +26,21 @@ exports:
                        _MobileActivationFunctionNameErrorKey, _MobileActivationSourceFileLineErrorKey, 
                        _createMobileActivationError, _kMAOptionsAllowInvalidNetworkCertificates, 
                        _kMAOptionsBAAAccessControls, _kMAOptionsBAAAppIDKey, _kMAOptionsBAACACert, 
+                       _kMAOptionsBAACertType, _kMAOptionsBAACertTypeBAA, _kMAOptionsBAACertTypeMFi, 
                        _kMAOptionsBAAClientAttestationData, _kMAOptionsBAAClientAttestationPublicKey, 
                        _kMAOptionsBAADeleteDuplicateKeychainItems, _kMAOptionsBAAIgnoreExistingKeychainItems, 
                        _kMAOptionsBAAKeychainAccessGroup, _kMAOptionsBAAKeychainLabel, 
-                       _kMAOptionsBAALocalAuthenticationContext, _kMAOptionsBAANetworkTimeoutInterval, 
+                       _kMAOptionsBAALocalAuthenticationContext, _kMAOptionsBAAMFiData, 
+                       _kMAOptionsBAAMFiPPUID, _kMAOptionsBAAMFiProperties, _kMAOptionsBAAMFiPropertiesAttestationKeyByte, 
+                       _kMAOptionsBAAMFiPropertiesAttestationKeyMask, _kMAOptionsBAAMFiPropertiesDomainByte, 
+                       _kMAOptionsBAAMFiPropertiesDomainMask, _kMAOptionsBAAMFiPropertiesProvisioningHostByte, 
+                       _kMAOptionsBAAMFiPropertiesProvisioningHostMask, _kMAOptionsBAANetworkTimeoutInterval, 
                        _kMAOptionsBAANonce, _kMAOptionsBAAOIDAccessControls, _kMAOptionsBAAOIDDeviceIdentifiers, 
                        _kMAOptionsBAAOIDDeviceIntent, _kMAOptionsBAAOIDDeviceOSInformation, 
                        _kMAOptionsBAAOIDHardwareProperties, _kMAOptionsBAAOIDIMG4Manifest, 
-                       _kMAOptionsBAAOIDKeyUsageProperties, _kMAOptionsBAAOIDNonce, 
-                       _kMAOptionsBAAOIDSToInclude, _kMAOptionsBAAOIDUCRTDeviceIdentifiers, 
+                       _kMAOptionsBAAOIDKeyUsageProperties, _kMAOptionsBAAOIDMFiAccessoryData, 
+                       _kMAOptionsBAAOIDMFiAccessoryProperties, _kMAOptionsBAAOIDMFiProductPlanUID, 
+                       _kMAOptionsBAAOIDNonce, _kMAOptionsBAAOIDSToInclude, _kMAOptionsBAAOIDUCRTDeviceIdentifiers, 
                        _kMAOptionsBAAReturnReferenceDate, _kMAOptionsBAASCRTAttestation, 
                        _kMAOptionsBAAUseAuthenticationUI, _kMAOptionsBAAValidity, 
                        _kMAOptionsBasebandWaitCount, _kMAOptionsResuseExistingKey, 

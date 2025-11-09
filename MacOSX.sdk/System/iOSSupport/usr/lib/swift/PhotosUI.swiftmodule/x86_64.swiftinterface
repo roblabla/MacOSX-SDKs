@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target x86_64-apple-ios14.3-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotosUI -swift-version 5 -enforce-exclusivity=checked -O -module-name PhotosUI
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target x86_64-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotosUI -swift-version 5 -enforce-exclusivity=checked -O -module-name PhotosUI
 import Photos
 @_exported import PhotosUI
 import Swift
@@ -11,10 +11,10 @@ public struct PHPickerFilter : Swift.Equatable, Swift.Hashable {
   public static let livePhotos: PhotosUI.PHPickerFilter
   public static func any(of subfilters: [PhotosUI.PHPickerFilter]) -> PhotosUI.PHPickerFilter
   public static func == (a: PhotosUI.PHPickerFilter, b: PhotosUI.PHPickerFilter) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 @available(iOS 14, *)
 public struct PHPickerConfiguration : Swift.Equatable, Swift.Hashable {
@@ -23,10 +23,10 @@ public struct PHPickerConfiguration : Swift.Equatable, Swift.Hashable {
     case current
     case compatible
     public static func == (a: PhotosUI.PHPickerConfiguration.AssetRepresentationMode, b: PhotosUI.PHPickerConfiguration.AssetRepresentationMode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public var preferredAssetRepresentationMode: PhotosUI.PHPickerConfiguration.AssetRepresentationMode
   public var selectionLimit: Swift.Int
@@ -34,20 +34,20 @@ public struct PHPickerConfiguration : Swift.Equatable, Swift.Hashable {
   public init(photoLibrary: Photos.PHPhotoLibrary)
   public init()
   public static func == (a: PhotosUI.PHPickerConfiguration, b: PhotosUI.PHPickerConfiguration) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 @available(iOS 14, *)
 public struct PHPickerResult : Swift.Equatable, Swift.Hashable {
   public let itemProvider: Foundation.NSItemProvider
   public let assetIdentifier: Swift.String?
   public static func == (a: PhotosUI.PHPickerResult, b: PhotosUI.PHPickerResult) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 @available(iOS 14, *)
 public protocol PHPickerViewControllerDelegate : AnyObject {

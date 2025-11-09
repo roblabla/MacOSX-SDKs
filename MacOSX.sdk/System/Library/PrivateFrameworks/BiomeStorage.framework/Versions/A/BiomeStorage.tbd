@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9A7B1A3B-D91B-3495-A499-70DC70B532CF
+    value:           B58D33CD-779B-30DD-B136-504C3EA7EEF9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8E31B8F1-F1C5-312F-BBEA-362200B246B9
+    value:           869EECA9-C332-336D-987D-51F76AB1B598
 install-name:    '/System/Library/PrivateFrameworks/BiomeStorage.framework/Versions/A/BiomeStorage'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

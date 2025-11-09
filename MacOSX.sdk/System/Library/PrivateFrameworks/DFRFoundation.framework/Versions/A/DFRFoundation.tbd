@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FB85651D-6221-38AF-BD6D-29BFF5830D36
+    value:           B37981D4-5230-38EC-8DBF-65E6FFBBEF5D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6F86CE64-F282-3F37-BCE4-9E5A38449A9D
+    value:           8F2E0708-88BC-32B6-9B4C-2F6237F2F626
 install-name:    '/System/Library/PrivateFrameworks/DFRFoundation.framework/Versions/A/DFRFoundation'
 current-version: 265
 exports:

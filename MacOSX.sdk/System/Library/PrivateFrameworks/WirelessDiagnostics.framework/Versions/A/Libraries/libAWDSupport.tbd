@@ -4,25 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9BD1DC56-F379-3A34-83C1-86C76CCC331C
+    value:           93393A29-5945-3298-8758-D114839837E3
   - target:          x86_64-maccatalyst
-    value:           9BD1DC56-F379-3A34-83C1-86C76CCC331C
+    value:           93393A29-5945-3298-8758-D114839837E3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1DF3DD86-FF4A-3634-9753-08D6F8053E50
+    value:           2A84F4AF-0D54-3D33-9A37-1605E9BD2251
   - target:          arm64e-maccatalyst
-    value:           1DF3DD86-FF4A-3634-9753-08D6F8053E50
+    value:           2A84F4AF-0D54-3D33-9A37-1605E9BD2251
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDSupport.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTI17AwdMetadataLoader, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTS17AwdMetadataLoader, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

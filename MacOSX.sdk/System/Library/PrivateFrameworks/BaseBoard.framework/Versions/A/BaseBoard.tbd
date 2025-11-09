@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           38C24B3A-8226-3FD5-8C28-B11D02747B56
+    value:           E88C7B2A-5372-3E8C-B719-AAC35B0F4E91
   - target:          x86_64-maccatalyst
-    value:           38C24B3A-8226-3FD5-8C28-B11D02747B56
+    value:           E88C7B2A-5372-3E8C-B719-AAC35B0F4E91
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A3F1C5D-442D-35AB-8B63-D13EC7638F1A
+    value:           CED69483-4C8F-3EB6-839D-A0144159E3CF
   - target:          arm64e-maccatalyst
-    value:           7A3F1C5D-442D-35AB-8B63-D13EC7638F1A
+    value:           CED69483-4C8F-3EB6-839D-A0144159E3CF
 install-name:    '/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard'
 current-version: 0
 exports:

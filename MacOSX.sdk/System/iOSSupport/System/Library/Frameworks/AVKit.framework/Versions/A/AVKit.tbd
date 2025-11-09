@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           A3BBDB43-707D-3093-8CC1-37F7C4EBC0FD
+    value:           32144221-2D1B-3B4D-96C6-FF6960DA511E
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           6C7FE0EE-5BD8-3737-973A-84362AAD1A95
+    value:           3AF0183A-BAD5-35C1-A283-5A5204F855DB
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AVKit.framework/Versions/A/AVKit'
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _AVKitErrorDomain, _AVKitMetadataIdentifierBrandIdentifier, 
                        _AVKitMetadataIdentifierExternalContentIdentifier, _AVKitMetadataIdentifierExternalUserProfileIdentifier, 
                        _AVKitMetadataIdentifierPlaybackProgress, _AVKitMetadataIdentifierServiceIdentifier, 

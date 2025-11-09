@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           42503D84-5D78-3F8F-83CA-73CC5E78160D
+    value:           53670238-2325-31CF-891B-D69FFF1BE0E8
   - target:          x86_64-maccatalyst
-    value:           42503D84-5D78-3F8F-83CA-73CC5E78160D
+    value:           53670238-2325-31CF-891B-D69FFF1BE0E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           61732A22-CB8B-3856-AB34-3FD519666CEE
+    value:           935B5048-6C00-3AE0-86A7-76472758D15B
   - target:          arm64e-maccatalyst
-    value:           61732A22-CB8B-3856-AB34-3FD519666CEE
+    value:           935B5048-6C00-3AE0-86A7-76472758D15B
 install-name:    '/System/Library/PrivateFrameworks/CoreDuetDaemonProtocol.framework/Versions/A/CoreDuetDaemonProtocol'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E556E934-7CF3-3764-851F-64BADD19B18B
+    value:           D356C544-49BE-37D3-B58C-CB7D11FD1FE1
   - target:          x86_64-maccatalyst
-    value:           E556E934-7CF3-3764-851F-64BADD19B18B
+    value:           D356C544-49BE-37D3-B58C-CB7D11FD1FE1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9FDC0F92-8F12-3021-ABC0-5760EA13EADD
+    value:           7ADDFBCE-662D-3868-9087-C327331746FA
   - target:          arm64e-maccatalyst
-    value:           9FDC0F92-8F12-3021-ABC0-5760EA13EADD
+    value:           7ADDFBCE-662D-3868-9087-C327331746FA
 install-name:    '/System/Library/PrivateFrameworks/InternalSwiftProtobuf.framework/Versions/A/InternalSwiftProtobuf'
 swift-abi-version: 7
 exports:

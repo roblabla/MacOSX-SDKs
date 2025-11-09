@@ -34,6 +34,8 @@
 #define kLAErrorBiometryNotAvailable                        kLAErrorTouchIDNotAvailable
 #define kLAErrorBiometryNotEnrolled                         kLAErrorTouchIDNotEnrolled
 #define kLAErrorBiometryLockout                             kLAErrorTouchIDLockout
+#define kLAErrorBiometryNotPaired                         -12
+#define kLAErrorBiometryDisconnected                      -13
 
 
 // Error domain

@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           60559226-6E4B-3601-B6CA-E3B85B5EB27B
+    value:           A666D9B0-8979-3C9C-83D6-1C0B535B8B0F
   - target:          x86_64-maccatalyst
-    value:           60559226-6E4B-3601-B6CA-E3B85B5EB27B
+    value:           A666D9B0-8979-3C9C-83D6-1C0B535B8B0F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8E6B9AAB-79F7-3ADA-B7CF-DD0FA0DBBCE8
+    value:           3E5529B2-78EF-3084-B350-6971CFF34493
   - target:          arm64e-maccatalyst
-    value:           8E6B9AAB-79F7-3ADA-B7CF-DD0FA0DBBCE8
+    value:           3E5529B2-78EF-3084-B350-6971CFF34493
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparse.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ vecLib ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ __SparseAMD, __SparseAMDWorkspaceSize, __SparseCGIterate_Double, 
                        __SparseCGIterate_Float, __SparseCGSolve_Double, __SparseCGSolve_Float, 

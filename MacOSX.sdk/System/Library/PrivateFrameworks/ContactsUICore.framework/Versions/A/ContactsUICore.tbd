@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9F16C86D-0EFE-3BA1-833A-C3AD153BCE87
+    value:           F85B50D1-18EF-3E0D-8B4C-738C6A25651A
   - target:          x86_64-maccatalyst
-    value:           9F16C86D-0EFE-3BA1-833A-C3AD153BCE87
+    value:           F85B50D1-18EF-3E0D-8B4C-738C6A25651A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F94C3E03-53C9-35B3-838F-A533049AAA25
+    value:           44736190-938A-30EF-8C5D-1287F9756EF8
   - target:          arm64e-maccatalyst
-    value:           F94C3E03-53C9-35B3-838F-A533049AAA25
+    value:           44736190-938A-30EF-8C5D-1287F9756EF8
 install-name:    '/System/Library/PrivateFrameworks/ContactsUICore.framework/Versions/A/ContactsUICore'
-current-version: 3419
+current-version: 3419.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

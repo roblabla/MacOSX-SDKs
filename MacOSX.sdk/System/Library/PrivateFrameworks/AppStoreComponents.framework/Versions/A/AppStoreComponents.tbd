@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EF636701-661B-397B-941A-531479A54C07
+    value:           8426A8E7-6304-3992-893D-3FF37FF7895B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6FDB35F0-3EED-3499-BF33-4EF639E03FA7
+    value:           F0D2B2D4-8AFA-303B-BFFA-C760A538BF07
 install-name:    '/System/Library/PrivateFrameworks/AppStoreComponents.framework/Versions/A/AppStoreComponents'
 swift-abi-version: 7
 exports:
@@ -30,6 +30,7 @@ exports:
                        '_$s18AppStoreComponents14ASCLayoutProxyC24smallLockupEstimatedSize7fitting14compatibleWithSo6CGSizeVAH_5JetUI0N15TraitCollectionCtFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC25mediumLockupEstimatedSize7fitting14compatibleWithSo6CGSizeVAH_5JetUI0N15TraitCollectionCtFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC28traitCollectionForMainScreen5JetUI0k5TraitG0CvgZ', 
+                       '_$s18AppStoreComponents14ASCLayoutProxyC35smallOfferButtonLockupEstimatedSize7fitting14compatibleWithSo6CGSizeVAH_5JetUI0P15TraitCollectionCtFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyCACycfC', '_$s18AppStoreComponents14ASCLayoutProxyCACycfc', 
                        '_$s18AppStoreComponents14ASCLayoutProxyCMa', '_$s18AppStoreComponents14ASCLayoutProxyCMn', 
                        '_$s18AppStoreComponents14ASCLayoutProxyCMo', '_$s18AppStoreComponents14ASCLayoutProxyCMu', 
@@ -58,8 +59,9 @@ exports:
                        _ASCLockupKindAppBundle, _ASCLockupKindInAppPurchase, _ASCLockupViewSizeDefault, 
                        _ASCLockupViewSizeGetEstimatedSize, _ASCLockupViewSizeGetEstimatedSizeForTraits, 
                        _ASCLockupViewSizeGetIconSize, _ASCLockupViewSizeLarge, _ASCLockupViewSizeLargeAppShowcase, 
-                       _ASCLockupViewSizeMedium, _ASCLockupViewSizeSmall, _ASCMetricsActivityKeyHostApp, 
-                       _ASCMetricsActivityKeyRedirectURL, _ASCMetricsActivityKeyReferrerApp, 
+                       _ASCLockupViewSizeMedium, _ASCLockupViewSizeSmall, _ASCLockupViewSizeSmallOfferButton, 
+                       _ASCMetricsActivityKeyHostApp, _ASCMetricsActivityKeyRedirectURL, 
+                       _ASCMetricsActivityKeyRedirectURLParameters, _ASCMetricsActivityKeyReferrerApp, 
                        _ASCMetricsActivityKeyReferrerURL, _ASCMetricsInvocationPointAppear, 
                        _ASCMetricsInvocationPointClick, _ASCMetricsInvocationPointDisappear, 
                        _ASCOfferFlagsGetDescription, _ASCOfferTitleVariantConfirmation, 
@@ -72,8 +74,8 @@ exports:
                        _ASCOpenAppErrorDomain, _ASCSignpostTagCreate, _ASCSignpostTagCreateForProcess, 
                        _ASCSignpostTagFromID, _ASCSignpostTagFromIDInProcess, _ASCSignpostTagMaxValue, 
                        _ASCSignpostTagNull, _ASCSignpostTagUnique, _AppStoreComponentsVersionNumber, 
-                       _AppStoreComponentsVersionString, __ASCLockupKeyIcon, __ASCLockupKeySubtitle, 
-                       __ASCLockupKeyTitle ]
+                       _AppStoreComponentsVersionString, __ASCLockupKeyAdamID, __ASCLockupKeyIcon, 
+                       __ASCLockupKeySubtitle, __ASCLockupKeyTitle ]
     objc-classes:    [ ASCAdamID, ASCArtwork, ASCBlockDynamicColor, ASCCollectionRequest, 
                        ASCContentSkeleton, ASCLocalOffer, ASCLockup, ASCLockupFeatureAd, 
                        ASCLockupFeatureSignpostTags, ASCLockupProductDetails, ASCLockupRequest, 

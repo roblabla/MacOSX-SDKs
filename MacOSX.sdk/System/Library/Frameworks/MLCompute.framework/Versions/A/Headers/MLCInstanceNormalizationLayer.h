@@ -29,6 +29,18 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
  */
 @property (readonly, nonatomic) NSUInteger featureChannelCount;
 
+/*! @property   mean
+    @abstract   The running mean tensor
+ */
+@property (readonly, nonatomic, nullable, retain) MLCTensor *mean
+    MLCOMPUTE_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5));
+
+/*! @property   variance
+    @abstract   The running variance tensor
+ */
+@property (readonly, nonatomic, nullable, retain) MLCTensor *variance
+    MLCOMPUTE_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5));
+
 /*! @property   beta
     @abstract   The beta tensor
  */
@@ -85,6 +97,25 @@ MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                                  gamma:(MLCTensor * _Nullable)gamma
                                        varianceEpsilon:(float)varianceEpsilon
                                               momentum:(float)momentum;
+
+/*! @abstract   Create an instance normalization layer
+    @param featureChannelCount The number of feature channels
+    @param mean The running mean tensor
+    @param variance The running variance tensor
+    @param beta The beta tensor
+    @param gamma The gamma tensor
+    @param varianceEpsilon The  epslion value
+    @param momentum The  momentum value for the running mean and variance computation
+    @return A new instance normalization layer.
+ */
++ (instancetype _Nullable)layerWithFeatureChannelCount:(NSUInteger)featureChannelCount
+                                                  mean:(MLCTensor *)mean
+                                              variance:(MLCTensor *)variance
+                                                  beta:(MLCTensor * _Nullable)beta
+                                                 gamma:(MLCTensor * _Nullable)gamma
+                                       varianceEpsilon:(float)varianceEpsilon
+                                              momentum:(float)momentum
+    MLCOMPUTE_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5));
 
 @end
 

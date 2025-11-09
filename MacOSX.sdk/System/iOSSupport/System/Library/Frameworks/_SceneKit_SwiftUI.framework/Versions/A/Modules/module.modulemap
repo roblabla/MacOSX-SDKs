@@ -4,8 +4,3 @@ framework module _SceneKit_SwiftUI {
   export *
   module * { export * }
 }
-
-module _SceneKit_SwiftUI.Swift {
-    header "_SceneKit_SwiftUI-Swift.h"
-    requires objc
-}

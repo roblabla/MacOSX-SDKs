@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5370F4A2-1C27-395C-80E4-A36E5BF414E9
+    value:           D1FACF52-1E12-33F4-B318-BD32B5DABF1F
   - target:          x86_64-maccatalyst
-    value:           5370F4A2-1C27-395C-80E4-A36E5BF414E9
+    value:           D1FACF52-1E12-33F4-B318-BD32B5DABF1F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           39A05061-8514-3EE4-A192-8CD083733131
+    value:           60686301-37AC-3E93-990D-0E9476A7B7CB
   - target:          arm64e-maccatalyst
-    value:           39A05061-8514-3EE4-A192-8CD083733131
+    value:           60686301-37AC-3E93-990D-0E9476A7B7CB
 install-name:    '/System/Library/PrivateFrameworks/C2.framework/Versions/A/C2'
-current-version: 569
+current-version: 573
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

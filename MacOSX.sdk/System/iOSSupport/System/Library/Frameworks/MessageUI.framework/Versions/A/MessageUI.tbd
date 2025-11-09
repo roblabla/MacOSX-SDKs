@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           03020275-889E-3FAE-AEB2-CCD71135DFCC
+    value:           10C06EE3-1D9C-3A8C-AB67-EB4C3983FBA2
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           81AC0413-CB03-350A-AC70-28BE0B797566
+    value:           FB41FA8A-5CBB-3114-A4D4-D1019347BF77
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MessageUI.framework/Versions/A/MessageUI'
-current-version: 3654.40
+current-version: 3654.80
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _MFAutomaticHorizontalDirectionalEdgeInsets, _MFAutomaticHorizontalEdgeInsets, 
                        _MFCenteredRectInRectWithViewScale, _MFComposeRecipientDragType, 
                        _MFComposeRecipientStringMatchAddress, _MFComposeRecipientStringMatchFirstName, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           767E827F-CCD0-3DE8-A754-1D63DF1A0C16
+    value:           1E4DA70D-3537-386D-9BBB-E537DD02EA8D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0E52D40B-7888-362B-9CE0-8912966E7BFB
+    value:           835DD4AC-9373-3DE5-A661-6E2DE48AC3F3
 install-name:    '/System/Library/PrivateFrameworks/KnowledgeGraphKit.framework/Versions/A/KnowledgeGraphKit'
 swift-abi-version: 7
 allowable-clients:
@@ -18,43 +18,45 @@ exports:
     weak-symbols:    [ __ZTIN5degas15EdgeFilter_NoneE, __ZTIN5degas15NodeFilter_NoneE, 
                        __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN5degas14EdgeFilter_AndENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN5degas14NodeFilter_AndENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN5degas15EdgeFilter_NoneENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN5degas15NodeFilter_NoneENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN5degas17EdgeFilter_LabelsENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN5degas17NodeFilter_LabelsENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN5degas20EdgeFilter_AttributeENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN5degas20NodeFilter_AttributeENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN5degas21CountedPathCollectionENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN5degas23UncountedPathCollectionENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN5degas6BitmapENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTINSt3__120__shared_ptr_pointerIPN5degas9StatementENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN5degas14EdgeFilter_AndENS_10shared_ptrINS1_10EdgeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN5degas14NodeFilter_AndENS_10shared_ptrINS1_10NodeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN5degas15EdgeFilter_NoneENS_10shared_ptrINS1_10EdgeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN5degas15NodeFilter_NoneENS_10shared_ptrINS1_10NodeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN5degas17EdgeFilter_LabelsENS_10shared_ptrINS1_10EdgeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN5degas17NodeFilter_LabelsENS_10shared_ptrINS1_10NodeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN5degas20EdgeFilter_AttributeENS_10shared_ptrINS1_10EdgeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN5degas20NodeFilter_AttributeENS_10shared_ptrINS1_10NodeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN5degas21CountedPathCollectionENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN5degas23UncountedPathCollectionENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN5degas6BitmapENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTINSt3__120__shared_ptr_pointerIPN5degas9StatementENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
                        __ZTSN5degas15EdgeFilter_NoneE, __ZTSN5degas15NodeFilter_NoneE, 
-                       __ZTSNSt3__114default_deleteIN5degas14EdgeFilter_AndEEE, __ZTSNSt3__114default_deleteIN5degas14NodeFilter_AndEEE, 
-                       __ZTSNSt3__114default_deleteIN5degas15EdgeFilter_NoneEEE, 
-                       __ZTSNSt3__114default_deleteIN5degas15NodeFilter_NoneEEE, 
-                       __ZTSNSt3__114default_deleteIN5degas17EdgeFilter_LabelsEEE, 
-                       __ZTSNSt3__114default_deleteIN5degas17NodeFilter_LabelsEEE, 
-                       __ZTSNSt3__114default_deleteIN5degas20EdgeFilter_AttributeEEE, 
-                       __ZTSNSt3__114default_deleteIN5degas20NodeFilter_AttributeEEE, 
-                       __ZTSNSt3__114default_deleteIN5degas21CountedPathCollectionEEE, 
-                       __ZTSNSt3__114default_deleteIN5degas23UncountedPathCollectionEEE, 
-                       __ZTSNSt3__114default_deleteIN5degas6BitmapEEE, __ZTSNSt3__114default_deleteIN5degas9StatementEEE, 
+                       __ZTSNSt3__110shared_ptrIN5degas10EdgeFilterEE27__shared_ptr_default_deleteIS2_NS1_14EdgeFilter_AndEEE, 
+                       __ZTSNSt3__110shared_ptrIN5degas10EdgeFilterEE27__shared_ptr_default_deleteIS2_NS1_15EdgeFilter_NoneEEE, 
+                       __ZTSNSt3__110shared_ptrIN5degas10EdgeFilterEE27__shared_ptr_default_deleteIS2_NS1_17EdgeFilter_LabelsEEE, 
+                       __ZTSNSt3__110shared_ptrIN5degas10EdgeFilterEE27__shared_ptr_default_deleteIS2_NS1_20EdgeFilter_AttributeEEE, 
+                       __ZTSNSt3__110shared_ptrIN5degas10NodeFilterEE27__shared_ptr_default_deleteIS2_NS1_14NodeFilter_AndEEE, 
+                       __ZTSNSt3__110shared_ptrIN5degas10NodeFilterEE27__shared_ptr_default_deleteIS2_NS1_15NodeFilter_NoneEEE, 
+                       __ZTSNSt3__110shared_ptrIN5degas10NodeFilterEE27__shared_ptr_default_deleteIS2_NS1_17NodeFilter_LabelsEEE, 
+                       __ZTSNSt3__110shared_ptrIN5degas10NodeFilterEE27__shared_ptr_default_deleteIS2_NS1_20NodeFilter_AttributeEEE, 
+                       __ZTSNSt3__110shared_ptrIN5degas21CountedPathCollectionEE27__shared_ptr_default_deleteIS2_S2_EE, 
+                       __ZTSNSt3__110shared_ptrIN5degas23UncountedPathCollectionEE27__shared_ptr_default_deleteIS2_S2_EE, 
+                       __ZTSNSt3__110shared_ptrIN5degas6BitmapEE27__shared_ptr_default_deleteIS2_S2_EE, 
+                       __ZTSNSt3__110shared_ptrIN5degas9StatementEE27__shared_ptr_default_deleteIS2_S2_EE, 
                        __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas14EdgeFilter_AndENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas14NodeFilter_AndENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas15EdgeFilter_NoneENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas15NodeFilter_NoneENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas17EdgeFilter_LabelsENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas17NodeFilter_LabelsENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas20EdgeFilter_AttributeENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas20NodeFilter_AttributeENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas21CountedPathCollectionENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas23UncountedPathCollectionENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas6BitmapENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE, 
-                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas9StatementENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE ]
+                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas14EdgeFilter_AndENS_10shared_ptrINS1_10EdgeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas14NodeFilter_AndENS_10shared_ptrINS1_10NodeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas15EdgeFilter_NoneENS_10shared_ptrINS1_10EdgeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas15NodeFilter_NoneENS_10shared_ptrINS1_10NodeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas17EdgeFilter_LabelsENS_10shared_ptrINS1_10EdgeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas17NodeFilter_LabelsENS_10shared_ptrINS1_10NodeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas20EdgeFilter_AttributeENS_10shared_ptrINS1_10EdgeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas20NodeFilter_AttributeENS_10shared_ptrINS1_10NodeFilterEE27__shared_ptr_default_deleteIS5_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas21CountedPathCollectionENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas23UncountedPathCollectionENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas6BitmapENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE, 
+                       __ZTSNSt3__120__shared_ptr_pointerIPN5degas9StatementENS_10shared_ptrIS2_E27__shared_ptr_default_deleteIS2_S2_EENS_9allocatorIS2_EEEE ]
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s10Accelerate0A6BufferP17KnowledgeGraphKitSF7ElementRpzrlE18approximatelyEqual2to21maxAbsoluteDifference0j8RelativeL0Sbqd___A2FtAaBRd__AEQyd__AFRSlF', 
                        '_$s10Accelerate0A6BufferP17KnowledgeGraphKitSF7ElementRpzrlE18approximatelyEqual2toSbqd___tAaBRd__AEQyd__AFRSlF', 

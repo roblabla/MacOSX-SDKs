@@ -76,11 +76,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UICollectionViewFocusUpdateConte
 - (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath*)destinationIndexPath API_AVAILABLE(ios(9.0));
 
 /// Returns a list of index titles to display in the index view (e.g. ["A", "B", "C" ... "Z", "#"])
-- (nullable NSArray<NSString *> *)indexTitlesForCollectionView:(UICollectionView *)collectionView API_AVAILABLE(tvos(10.2));
+- (nullable NSArray<NSString *> *)indexTitlesForCollectionView:(UICollectionView *)collectionView API_AVAILABLE(ios(14.0), tvos(10.2));
 
 /// Returns the index path that corresponds to the given title / index. (e.g. "B",1)
 /// Return an index path with a single index to indicate an entire section, instead of a specific item.
-- (NSIndexPath *)collectionView:(UICollectionView *)collectionView indexPathForIndexTitle:(NSString *)title atIndex:(NSInteger)index API_AVAILABLE(tvos(10.2));
+- (NSIndexPath *)collectionView:(UICollectionView *)collectionView indexPathForIndexTitle:(NSString *)title atIndex:(NSInteger)index API_AVAILABLE(ios(14.0), tvos(10.2));
 
 @end
 

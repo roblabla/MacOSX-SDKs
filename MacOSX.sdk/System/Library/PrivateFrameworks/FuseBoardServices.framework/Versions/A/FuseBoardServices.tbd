@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1C56DB6C-4E2C-34E7-B25C-3C64916C0998
+    value:           D7A0D985-C64C-3474-8C7B-EB299AD25274
   - target:          x86_64-maccatalyst
-    value:           1C56DB6C-4E2C-34E7-B25C-3C64916C0998
+    value:           D7A0D985-C64C-3474-8C7B-EB299AD25274
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C43E77D8-8496-3C72-AFF5-2CD579BD0353
+    value:           9CF9F5DC-C0ED-3821-A2B0-A1CCAB885B24
   - target:          arm64e-maccatalyst
-    value:           C43E77D8-8496-3C72-AFF5-2CD579BD0353
+    value:           9CF9F5DC-C0ED-3821-A2B0-A1CCAB885B24
 install-name:    '/System/Library/PrivateFrameworks/FuseBoardServices.framework/Versions/A/FuseBoardServices'
-current-version: 235
+current-version: 239
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -26,9 +26,9 @@ exports:
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _FBFuseBoardLoggingSubsystem, _FUApplicationSceneDidConnectNotification, 
                        _FUApplicationSceneWillDisconnectNotification, _FULogCommon, 
-                       _FULogSkyBridge, _FULogUSS, _FURunningInWindowServer, _FUSBBeginTrackingProcess, 
-                       _FUSBEndTrackingProcess, _FUSBGetProcess, _FUSBGetWindow, 
-                       _FUSBInitialize, _FUSBProcessAddWindow, _FUSBProcessGetWindow, 
+                       _FULogScreenSize, _FULogSkyBridge, _FULogUSS, _FURunningInWindowServer, 
+                       _FUSBBeginTrackingProcess, _FUSBEndTrackingProcess, _FUSBGetProcess, 
+                       _FUSBGetWindow, _FUSBInitialize, _FUSBProcessAddWindow, _FUSBProcessGetWindow, 
                        _FUSBProcessRemoveWindow, _FUSBProcessSetFocused, _FUSBProcessSetFrontmost, 
                        _FUSBWindowContentStateIsValid, _FUSBWindowGetOwner, _FUSBWindowSetContentState, 
                        _FUSBWindowSetOwner, _FUSBWorkQueue, _FuseBoardServicesVersionNumber, 
@@ -40,21 +40,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           38C24B3A-8226-3FD5-8C28-B11D02747B56
+    value:           E88C7B2A-5372-3E8C-B719-AAC35B0F4E91
   - target:          x86_64-maccatalyst
-    value:           38C24B3A-8226-3FD5-8C28-B11D02747B56
+    value:           E88C7B2A-5372-3E8C-B719-AAC35B0F4E91
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A3F1C5D-442D-35AB-8B63-D13EC7638F1A
+    value:           CED69483-4C8F-3EB6-839D-A0144159E3CF
   - target:          arm64e-maccatalyst
-    value:           7A3F1C5D-442D-35AB-8B63-D13EC7638F1A
+    value:           CED69483-4C8F-3EB6-839D-A0144159E3CF
 install-name:    '/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _BSAbsoluteTimeFromMachTime, _BSActionClearResponseListenerWithToken, 
                        _BSActionCreateResponseListenerWithHandler, _BSActionErrorDomain, 
@@ -211,21 +211,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           87D88A0A-A43D-301B-9393-D06E971BAEDF
+    value:           32687D46-0F7D-300B-ACE9-FED2196736A1
   - target:          x86_64-maccatalyst
-    value:           87D88A0A-A43D-301B-9393-D06E971BAEDF
+    value:           32687D46-0F7D-300B-ACE9-FED2196736A1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7C4352EB-FF9D-3E3D-BC0F-EC1A4C7FEDB6
+    value:           37A3B6D2-2173-35A9-8FC1-84A2230FCA9B
   - target:          arm64e-maccatalyst
-    value:           7C4352EB-FF9D-3E3D-BC0F-EC1A4C7FEDB6
+    value:           37A3B6D2-2173-35A9-8FC1-84A2230FCA9B
 install-name:    '/System/Library/PrivateFrameworks/BoardServices.framework/Versions/A/BoardServices'
 current-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     objc-classes:    [ BSMutableServiceInterface, BSServiceConnection, BSServiceConnectionEndpoint, 
                        BSServiceConnectionEndpointInjector, BSServiceConnectionEndpointMonitor, 
@@ -238,17 +238,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9EAEF19A-4167-3914-A9A8-25C36E586550
+    value:           4A5D4CFC-1519-3365-941B-9B163FA0AAE3
   - target:          x86_64-maccatalyst
-    value:           9EAEF19A-4167-3914-A9A8-25C36E586550
+    value:           4A5D4CFC-1519-3365-941B-9B163FA0AAE3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6278D5AA-C6CD-3261-A394-F299CB82588B
+    value:           3A40F9DA-2F47-3859-974B-11E0B349C69C
   - target:          arm64e-maccatalyst
-    value:           6278D5AA-C6CD-3261-A394-F299CB82588B
+    value:           3A40F9DA-2F47-3859-974B-11E0B349C69C
 install-name:    '/System/Library/PrivateFrameworks/FrontBoardServices.framework/Versions/A/FrontBoardServices'
 current-version: 0
 reexported-libraries:
@@ -297,29 +297,30 @@ exports:
                        _FBSLogApplicationLibrary, _FBSLogApplicationLibraryObserver, 
                        _FBSLogApplicationPlaceholder, _FBSOpenApplicationErrorCodeToString, 
                        _FBSOpenApplicationErrorCreate, _FBSOpenApplicationErrorDomain, 
-                       _FBSOpenApplicationOptionKeyActions, _FBSOpenApplicationOptionKeyActivateAsClassic, 
-                       _FBSOpenApplicationOptionKeyActivateForEvent, _FBSOpenApplicationOptionKeyActivateSuspended, 
-                       _FBSOpenApplicationOptionKeyAppLink, _FBSOpenApplicationOptionKeyAppLink4LS, 
-                       _FBSOpenApplicationOptionKeyBrowserAppLinkState, _FBSOpenApplicationOptionKeyBrowserAppLinkState4LS, 
-                       _FBSOpenApplicationOptionKeyDebuggingOptions, _FBSOpenApplicationOptionKeyDocumentOpen4LS, 
-                       _FBSOpenApplicationOptionKeyIsSensitiveURL, _FBSOpenApplicationOptionKeyLSCacheGUID, 
-                       _FBSOpenApplicationOptionKeyLSSequenceNumber, _FBSOpenApplicationOptionKeyLaunchImageName, 
-                       _FBSOpenApplicationOptionKeyLaunchIntent, _FBSOpenApplicationOptionKeyLaunchOrigin, 
-                       _FBSOpenApplicationOptionKeyPayloadAnnotation, _FBSOpenApplicationOptionKeyPayloadIsValid, 
-                       _FBSOpenApplicationOptionKeyPayloadIsValid4LS, _FBSOpenApplicationOptionKeyPayloadOptions, 
-                       _FBSOpenApplicationOptionKeyPayloadURL, _FBSOpenApplicationOptionKeyPromptUnlockDevice, 
-                       _FBSOpenApplicationOptionKeyServiceAvailabilityTimeout, _FBSOpenApplicationOptionKeyUnlockDevice, 
-                       _FBSOpenApplicationOptionKeyUserActivity4LS, _FBSOpenApplicationServiceErrorCodeToString, 
-                       _FBSOpenApplicationServiceErrorDomain, _FBSOpenApplicationWithNewScene, 
-                       _FBSOrientationObserverInterestAll, _FBSOrientationObserverMessageKeyDuration, 
-                       _FBSOrientationObserverMessageKeyOrientationInterest, _FBSOrientationObserverMessageKeyRotationDirection, 
-                       _FBSOrientationObserverMessageKeySequenceNumber, _FBSOrientationObserverMessageKeyUIOrientation, 
-                       _FBSOrientationObserverServiceIdentifier, _FBSProcessExceptionCodeDescription, 
-                       _FBSProcessGraphicsPolicyDescription, _FBSProcessJetsamPolicyDescription, 
-                       _FBSProcessPrettyDescription, _FBSProcessResourceAllowanceExtend, 
-                       _FBSProcessResourceAllowanceGetType, _FBSProcessResourceAllowanceGetValue, 
-                       _FBSProcessResourceAllowanceIsValid, _FBSProcessResourceAllowanceMake, 
-                       _FBSProcessResourceAllowanceMakeWithRealTimeInterval, _FBSProcessResourceAllowanceMakeWithScheduledTimeInterval, 
+                       _FBSOpenApplicationOptionClickAttribution, _FBSOpenApplicationOptionKeyActions, 
+                       _FBSOpenApplicationOptionKeyActivateAsClassic, _FBSOpenApplicationOptionKeyActivateForEvent, 
+                       _FBSOpenApplicationOptionKeyActivateSuspended, _FBSOpenApplicationOptionKeyAppLink, 
+                       _FBSOpenApplicationOptionKeyAppLink4LS, _FBSOpenApplicationOptionKeyBrowserAppLinkState, 
+                       _FBSOpenApplicationOptionKeyBrowserAppLinkState4LS, _FBSOpenApplicationOptionKeyDebuggingOptions, 
+                       _FBSOpenApplicationOptionKeyDocumentOpen4LS, _FBSOpenApplicationOptionKeyIsSensitiveURL, 
+                       _FBSOpenApplicationOptionKeyLSCacheGUID, _FBSOpenApplicationOptionKeyLSSequenceNumber, 
+                       _FBSOpenApplicationOptionKeyLaunchImageName, _FBSOpenApplicationOptionKeyLaunchIntent, 
+                       _FBSOpenApplicationOptionKeyLaunchOrigin, _FBSOpenApplicationOptionKeyPayloadAnnotation, 
+                       _FBSOpenApplicationOptionKeyPayloadIsValid, _FBSOpenApplicationOptionKeyPayloadIsValid4LS, 
+                       _FBSOpenApplicationOptionKeyPayloadOptions, _FBSOpenApplicationOptionKeyPayloadURL, 
+                       _FBSOpenApplicationOptionKeyPromptUnlockDevice, _FBSOpenApplicationOptionKeyServiceAvailabilityTimeout, 
+                       _FBSOpenApplicationOptionKeyUnlockDevice, _FBSOpenApplicationOptionKeyUserActivity4LS, 
+                       _FBSOpenApplicationServiceErrorCodeToString, _FBSOpenApplicationServiceErrorDomain, 
+                       _FBSOpenApplicationWithNewScene, _FBSOrientationObserverInterestAll, 
+                       _FBSOrientationObserverMessageKeyDuration, _FBSOrientationObserverMessageKeyOrientationInterest, 
+                       _FBSOrientationObserverMessageKeyRotationDirection, _FBSOrientationObserverMessageKeySequenceNumber, 
+                       _FBSOrientationObserverMessageKeyUIOrientation, _FBSOrientationObserverServiceIdentifier, 
+                       _FBSProcessExceptionCodeDescription, _FBSProcessGraphicsPolicyDescription, 
+                       _FBSProcessJetsamPolicyDescription, _FBSProcessPrettyDescription, 
+                       _FBSProcessResourceAllowanceExtend, _FBSProcessResourceAllowanceGetType, 
+                       _FBSProcessResourceAllowanceGetValue, _FBSProcessResourceAllowanceIsValid, 
+                       _FBSProcessResourceAllowanceMake, _FBSProcessResourceAllowanceMakeWithRealTimeInterval, 
+                       _FBSProcessResourceAllowanceMakeWithScheduledTimeInterval, 
                        _FBSProcessResourceAllowanceMakeWithScheduledTimeIntervalAndRefreshInterval, 
                        _FBSProcessResourceAllowanceMakeWithTimeInterval, _FBSProcessResourceAllowanceMakeWithValue, 
                        _FBSProcessResourceAllowanceScale, _FBSProcessResourceAllowanceValue, 

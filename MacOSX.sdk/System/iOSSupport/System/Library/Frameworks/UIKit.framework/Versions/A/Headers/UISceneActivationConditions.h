@@ -20,7 +20,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UISceneActivationConditions : N
  
  These predicates are used to match against targetContentIdentifier NSStrings wherever they occur, for example in UNNotificationContent, as well as against NSString text of URL links the user may tap if the application handles URLs.
  
- Predicates used here must not be block or selector based, must not use the 'MATCHES' operator, and may not access any keypaths other than 'self' off of the NSString they're evaluated against.
+ Predicates used here must not be block or selector based, must not use the 'MATCHES' operator, and may not access any key paths other than 'self' off of the NSString they're evaluated against.
  */
 @property(nonatomic, copy) NSPredicate *canActivateForTargetContentIdentifierPredicate; // default is [NSPredicate predicateWithValue:YES]
 @property(nonatomic, copy) NSPredicate *prefersToActivateForTargetContentIdentifierPredicate; // default is [NSPredicate predicateWithValue:NO];

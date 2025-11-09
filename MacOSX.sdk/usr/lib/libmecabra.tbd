@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           39F5AD50-3AF2-3CFB-BD21-2DC45AA92A91
+    value:           87ACCBB5-FD09-3044-B6FF-1A94A7129DDF
   - target:          x86_64-maccatalyst
-    value:           39F5AD50-3AF2-3CFB-BD21-2DC45AA92A91
+    value:           87ACCBB5-FD09-3044-B6FF-1A94A7129DDF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3CDA7E90-E5E4-3C5B-AA24-FF880AF18D0E
+    value:           975A39A3-CA27-3805-8DB8-9CA0F6C1AEE1
   - target:          arm64e-maccatalyst
-    value:           3CDA7E90-E5E4-3C5B-AA24-FF880AF18D0E
+    value:           975A39A3-CA27-3805-8DB8-9CA0F6C1AEE1
 install-name:    '/usr/lib/libmecabra.dylib'
-current-version: 927
+current-version: 929.9
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _BurstTrieCompile, _EmojiDictionaryCompile, _IndexedSearchDictionaryBuild, 
                        _MecabraAcceptCandidate, _MecabraAcceptInlineCandidates, _MecabraAdaptToTokenizedText, 

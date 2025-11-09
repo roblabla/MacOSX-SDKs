@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           577C5E83-DEC7-32B1-8C46-D0AA8DCE06A3
+    value:           4C471F93-7BE5-3C21-A79D-34F17A5CF591
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D88E3952-57AD-32A5-A2DB-66BCAC305BDF
+    value:           73B8FBD6-03E9-3C97-ABB0-68D4C59804A8
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Libraries/libUAPreferences.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

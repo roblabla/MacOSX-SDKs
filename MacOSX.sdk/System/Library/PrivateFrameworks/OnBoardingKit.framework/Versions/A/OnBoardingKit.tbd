@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           328FF813-C496-3089-B63D-534571F99EC1
+    value:           01EE3AAE-AA6B-3E77-80A8-DDB5F117A20E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           386F86C8-D672-336A-BF17-C96B63ECCD9D
+    value:           FCD1724A-1BF1-3AE1-9051-C0795824E70B
 install-name:    '/System/Library/PrivateFrameworks/OnBoardingKit.framework/Versions/A/OnBoardingKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -54,5 +54,5 @@ exports:
                        OBPrivacyFlow, OBPrivacyLinkController, OBPrivacyLinkController_macOS, 
                        OBPrivacyPresenter, OBPrivacySplashController, OBSplashBullet, 
                        OBSplashContent, OBTemplateContainerViewController, OBTemplatePartBulletList, 
-                       OBTemplatePartLinkButton, OBTemplateView ]
+                       OBTemplatePartLinkButton, OBTemplateUIUtilities, OBTemplateView ]
 ...

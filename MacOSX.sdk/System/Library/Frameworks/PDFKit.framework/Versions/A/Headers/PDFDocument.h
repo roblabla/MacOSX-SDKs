@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class PDFDestination, PDFOutline, PDFPage, PDFSelection, PDFDocumentPrivate;
 @protocol PDFDocumentDelegate;
 
+#if defined(PDFKIT_PLATFORM_OSX)
 
 // Printing page-scaling modes (see PDFView).
 PDFKIT_ENUM_AVAILABLE(10_4, 11_0)
@@ -34,6 +35,7 @@ typedef NS_ENUM(NSInteger, PDFPrintScalingMode)
     kPDFPrintPageScaleDownToFit = 2
 };
 
+#endif
 
 // Document permissions status. For encrypted PDF's, supplying the owner password will enable owner permission status.
 PDFKIT_ENUM_AVAILABLE(10_4, 11_0)
@@ -240,12 +242,14 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // Method to cancel a search.  Can be called from a user method being serviced by a find notification.
 - (void)cancelFindString;
 
+#if defined(PDFKIT_PLATFORM_OSX)
 
 // -------- printing
 
 // Returns a print operation suitable for printing the PDF document. Specify scaling mode and autorotate behaviors desired.
 - (nullable NSPrintOperation *)printOperationForPrintInfo:(nullable NSPrintInfo *)printInfo scalingMode:(PDFPrintScalingMode)scaleMode autoRotate:(BOOL)doRotate PDFKIT_AVAILABLE(10_7, NA);
 
+#endif
 
 // -------- selections
 
@@ -287,6 +291,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // Return nil for annotation types you do not subclass.
 - (Class)classForAnnotationType:(NSString*)annotationType PDFKIT_AVAILABLE(10_13, 11_0);
 
+#if defined(PDFKIT_PLATFORM_OSX)
 
 // If implemented by the delegate, will be called when a PDFAnnotation is instantiated by a page. PDFPage by default 
 // will instantiate object of class. This allows you to instead return your own PDFAnnotationXxxx subclass.
@@ -294,6 +299,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // -[classForAnnotationType:] instead.
 - (Class)classForAnnotationClass:(Class)annotationClass PDFKIT_DEPRECATED(10_6, 10_12, NA, NA);
 
+#endif
 
 @end
 

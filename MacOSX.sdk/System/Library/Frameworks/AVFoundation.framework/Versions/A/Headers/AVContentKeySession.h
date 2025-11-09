@@ -7,6 +7,7 @@
 
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
+#import <CoreMedia/CMSampleBuffer.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVPersistableContentKeyRequest;
 @protocol AVContentKeyRecipient;
 @protocol AVContentKeySessionDelegate;
+@class AVContentKeySpecifier;
+@class AVContentKey;
 
 /*!
  @group         AVContentKeySystem string constants
@@ -478,6 +481,19 @@ API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2), watchos(7.0))
 @property (readonly) BOOL canProvidePersistableContentKey;
 
 /*
+ @property      contentKeySpecifier
+ @abstract      Specifies the requested content key.
+*/
+@property (readonly) AVContentKeySpecifier *contentKeySpecifier API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4));
+
+/*
+ @property      contentKey
+ @abstract      Represents an AVContentKey that results from an invocation of -processContentKeyResponse:.
+ @discussion    Before the receiver achieves the status AVContentKeyRequestReceivedResponse, the value of this property will be nil. Once that status has been achieved, the value of this property becomes a non-nil AVContentKey that can be provided to content key recipients that apply content keys manually to objects that require them, such as CMSampleBuffers, or to initiate renewal. A non-nil value does not indicate that the content key is valid; authorization failures may yet be possible.
+*/
+@property (readonly, nullable) AVContentKey *contentKey API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4));
+
+/*
  @constant      AVContentKeyRequestRequiresValidationDataInSecureTokenKey
  @abstract      Request secure token to have extended validation data. The value for the key should be previously created offline key using -[AVContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:].
  */
@@ -636,6 +652,14 @@ AVF_EXPORT NSString *const AVContentKeyRequestProtocolVersionsKey API_AVAILABLE(
 API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2), watchos(7.0))
 @protocol AVContentKeyRecipient
 
+@optional
+/*!
+ @method        contentKeySession:didProvideContentKey:
+ @abstract      Informs the receiver that an AVContentKey has been obtained as the result of an invocation of -[AVContentKeyRequest processContentKeyResponse:].
+ @discussion    The recipient may employ the AVContentKey for use with objects that support manual attachment of keys, such as CMSampleBuffer via an invocation of AVSampleBufferAttachContentKey.
+*/
+- (void)contentKeySession:(AVContentKeySession *)contentKeySession didProvideContentKey:(AVContentKey *)contentKey API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4));
+
 @required
 
 /*!
@@ -646,6 +670,80 @@ API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2), watchos(7.0))
 @property (nonatomic, readonly) BOOL mayRequireContentKeysForMediaDataProcessing;
 
 @end
+
+API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4))
+@interface AVContentKeySpecifier : NSObject
+
+/*!
+ @method        contentKeySpecifierForKeySystem:identifier:options:
+ @abstract      Creates a new instance of AVContentKeySpecifier.
+ @param         keySystem
+                A valid key system for content keys.
+ @param         contentKeyIdentifier
+                Container and protocol-specific key identifier.
+ @param         options
+                Additional information necessary to obtain the key, can be empty if none needed.
+ @result        A new AVContentKeySpecifier
+ @discussion    This method returns an AVContentKeySpecifier instance that represents a content key in a specific content key system.
+ */
++ (instancetype)contentKeySpecifierForKeySystem:(AVContentKeySystem)keySystem identifier:(id)contentKeyIdentifier options:(NSDictionary<NSString *, id> *)options;
+
+/*!
+ @method        initForKeySystem:identifier:options:
+ @abstract      Initialize an instance of AVContentKeySpecifier.
+ @param         keySystem
+                A valid key system for content keys.
+ @param         contentKeyIdentifier
+                Container and protocol-specific key identifier.
+ @param         options
+                Additional information necessary to obtain the key, can be empty if none needed.
+ @result        An instance of AVContentKeySpecifier
+ @discussion    This method returns an AVContentKeySpecifier instance that represents a content key in a specific content key system.
+ */
+- (instancetype)initForKeySystem:(AVContentKeySystem)keySystem identifier:(id)contentKeyIdentifier options:(NSDictionary<NSString *, id> *)options;
+
+/*!
+ @property      keySystem
+ @abstract      A valid key system for content keys.
+*/
+@property (readonly) AVContentKeySystem keySystem;
+
+/*!
+ @property      identifier
+ @abstract      Container and protocol-specific key identifier.
+*/
+@property (readonly) id identifier;
+
+/*
+ @property      options
+ @abstract      Additional information necessary to obtain the key, can be empty if none needed.
+ */
+@property (readonly) NSDictionary<NSString *, id> *options;
+
+@end
+
+API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4))
+@interface AVContentKey : NSObject
+
+/*
+ @property      contentKeySpecifier
+ @abstract      Specifies the content key.
+ */
+@property  (readonly) AVContentKeySpecifier *contentKeySpecifier;
+@end
+
+/*!
+ @function      AVSampleBufferAttachContentKey
+ @abstract      Attaches an AVContentKey to a CMSampleBuffer for the purpose of content decryption.
+ @param         sbuf
+                The sample buffer to which the content key is to be attached.
+ @param         contentKey
+                The content key to be attached.
+ @param         errorOut
+                If the result is NO and errorOut is non-NULL, the location referenced by errorOut receives an instance of NSError that describes the reason for failure to attach the content key.
+ @discussion    The client is expected to attach AVContentKeys to CMSampleBuffers that have been created by the client for enqueueing with AVSampleBufferDisplayLayer or AVSampleBufferAudioRenderer, for which the AVContentKeySpecifier matches indications of suitability that are available to the client according to the content key system that's in use.
+*/
+AVF_EXPORT BOOL AVSampleBufferAttachContentKey(CMSampleBufferRef sbuf, AVContentKey *contentKey, NSError * _Nullable * _Nullable outError) API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4));
 
 NS_ASSUME_NONNULL_END
 

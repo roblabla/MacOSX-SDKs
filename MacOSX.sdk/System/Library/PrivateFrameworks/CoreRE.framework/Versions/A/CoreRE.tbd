@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0CACE142-326D-31C1-8DBA-9D5EAA4A5E48
+    value:           BB8BCA67-E40A-314E-96C9-6802817A1892
   - target:          x86_64-maccatalyst
-    value:           0CACE142-326D-31C1-8DBA-9D5EAA4A5E48
+    value:           BB8BCA67-E40A-314E-96C9-6802817A1892
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CEF7B09F-D337-31D6-AD62-18EE35C2ED00
+    value:           AC1A7996-131C-31C9-A94D-A4C4A4792286
   - target:          arm64e-maccatalyst
-    value:           CEF7B09F-D337-31D6-AD62-18EE35C2ED00
+    value:           AC1A7996-131C-31C9-A94D-A4C4A4792286
 install-name:    '/System/Library/PrivateFrameworks/CoreRE.framework/Versions/A/CoreRE'
-current-version: 60.45.4
+current-version: 60.48.15
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIU13block_pointerFvbE, __ZTSU13block_pointerFvbE ]
@@ -1412,8 +1412,9 @@ exports:
                        __REStartupPrivate, __RETestingAssetManagerGetCompiledAssetExtension, 
                        __RETestingAssetManagerLoadCompiledAsset, __RETestingAssetManagerSaveCompiledAsset, 
                        __RETestingAudioAssetGetAudioFile, __RETestingAudioAssetGetPCMBuffer, 
-                       __RETestingTextureAssetGetUnderlyingTexture, __REUnarchivePackageWithProfiling, 
-                       __Z37REConvertMatrices4x4ToIntrinsicEulersP13simd_float3x315RERotationOrderPDv3_fm, 
+                       __RETestingEntityAddUnsupportedTestAsset, __RETestingRegisterUnsupportedTestAsset, 
+                       __RETestingTextureAssetGetUnderlyingTexture, __RETestingUnregisterUnsupportedTestAsset, 
+                       __REUnarchivePackageWithProfiling, __Z37REConvertMatrices4x4ToIntrinsicEulersP13simd_float3x315RERotationOrderPDv3_fm, 
                        __Z37REConvertMatrices4x4ToIntrinsicEulersP13simd_float4x415RERotationOrderPDv3_fm, 
                        _kInvalidAnimationToken, _kInvalidAudioStream, _kREPipelineErrorDomain, 
                        _kREResourceSharingErrorDomain ]

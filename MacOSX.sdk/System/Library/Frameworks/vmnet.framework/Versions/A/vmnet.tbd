@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           40258CCF-3AD0-3E84-A7F6-7F7418790E3F
+    value:           72A73096-5BF7-320B-8C2B-5F32F2961F8E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4F36103A-CA6B-3DC6-820B-DDFDD7C18F5B
+    value:           C8E114AF-C4C0-31C0-98E4-D599D30780EC
 install-name:    '/System/Library/Frameworks/vmnet.framework/Versions/A/vmnet'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

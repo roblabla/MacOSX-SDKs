@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5F020D32-8663-3CB8-A50C-F939D4D4C31F
+    value:           53DA07F7-0FE4-3FF2-9D31-6A27905E1588
   - target:          x86_64-maccatalyst
-    value:           5F020D32-8663-3CB8-A50C-F939D4D4C31F
+    value:           53DA07F7-0FE4-3FF2-9D31-6A27905E1588
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8A8A2DC0-921E-3325-ACBA-365D1BC4680F
+    value:           5E92B2D7-201A-3C06-8BC3-839E06E68FAF
   - target:          arm64e-maccatalyst
-    value:           8A8A2DC0-921E-3325-ACBA-365D1BC4680F
+    value:           5E92B2D7-201A-3C06-8BC3-839E06E68FAF
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCVMSPluginSupport.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

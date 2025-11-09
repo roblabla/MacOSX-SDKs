@@ -2,7 +2,7 @@
 //  GKError.h
 //  Game Center
 //
-//  Copyright 2010-2020 Apple Inc. All rights reserved.
+//  Copyright 2010-2021 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -45,4 +45,8 @@ typedef NS_ENUM(NSInteger, GKErrorCode) {
     GKErrorNotAuthorized                        = 32,
     GKErrorConnectionTimeout                    = 33,
     GKErrorAPIObsolete                          = 34,
+    
+    GKErrorFriendListDescriptionMissing         = 100,
+    GKErrorFriendListRestricted                 = 101,
+    GKErrorFriendListDenied                     = 102,
 };

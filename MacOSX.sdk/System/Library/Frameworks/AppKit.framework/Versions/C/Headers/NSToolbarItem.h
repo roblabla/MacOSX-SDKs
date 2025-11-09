@@ -5,6 +5,8 @@
 	All rights reserved.
 */
 
+#import <TargetConditionals.h>
+
 #if !TARGET_OS_IPHONE
 #import <AppKit/NSText.h>
 #import <AppKit/NSMenu.h>

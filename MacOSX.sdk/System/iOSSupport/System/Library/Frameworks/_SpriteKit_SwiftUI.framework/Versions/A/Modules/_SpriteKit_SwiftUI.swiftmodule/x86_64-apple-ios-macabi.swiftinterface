@@ -1,10 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
 // swift-module-flags: -target x86_64-apple-ios14.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name _SpriteKit_SwiftUI
 @_exported import SpriteKit
 import Swift
 import SwiftUI
-@available(iOS 14.0, OSX 11.0, tvOS 14.0, watchOS 7.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct SpriteView : SwiftUI.View {
   @available(watchOS, unavailable)
   public struct Options : Swift.OptionSet {
@@ -13,8 +13,8 @@ public struct SpriteView : SwiftUI.View {
     public static let allowsTransparency: _SpriteKit_SwiftUI.SpriteView.Options
     public static let ignoresSiblingOrder: _SpriteKit_SwiftUI.SpriteView.Options
     public static let shouldCullNonVisibleNodes: _SpriteKit_SwiftUI.SpriteView.Options
-    public typealias Element = _SpriteKit_SwiftUI.SpriteView.Options
     public typealias ArrayLiteralElement = _SpriteKit_SwiftUI.SpriteView.Options
+    public typealias Element = _SpriteKit_SwiftUI.SpriteView.Options
     public typealias RawValue = Swift.Int
   }
   public init(scene: SpriteKit.SKScene, transition: SpriteKit.SKTransition? = nil, isPaused: Swift.Bool = false, preferredFramesPerSecond: Swift.Int = 60)

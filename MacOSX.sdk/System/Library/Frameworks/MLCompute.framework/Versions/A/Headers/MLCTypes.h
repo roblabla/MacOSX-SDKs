@@ -257,6 +257,18 @@ typedef NS_ENUM(int32_t, MLCArithmeticOperation) {
     /*! An operation that calculates the elementwise base 2 logarithm of its input.
      */
     MLCArithmeticOperationLog2     = 25,
+    /*! An operation that calculates the elementwise product of its two inputs.  Returns 0 if y in x * y is zero, even if x is NaN or INF
+     */
+    MLCArithmeticOperationMultiplyNoNaN     MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5)) = 26,
+    /*! An operations that calculates the elementwise division of its two inputs.  Returns 0 if the denominator is 0.
+     */
+    MLCArithmeticOperationDivideNoNaN       MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5)) = 27,
+    /*! An operation that calculates the elementwise min of two inputs.
+     */
+    MLCArithmeticOperationMin               MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5)) = 28,
+    /*! An operations that calculates the elementwise max of two inputs.
+     */
+    MLCArithmeticOperationMax               MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5)) = 29,
 
     // Must be last
     MLCArithmeticOperationCount    NS_SWIFT_UNAVAILABLE(""),
@@ -440,6 +452,22 @@ typedef NS_ENUM(int32_t, MLCActivationType) {
      *  \endcode
      */
     MLCActivationTypeGELU                 NS_SWIFT_NAME(gelu)           = 18,
+    /*! The hardswish activation type.
+     *  @discussion This activation type implements the following function:
+     *  \code
+     *  f(x) = 0, if x <= -3
+     *  f(x) = x, if x >= +3
+     *  f(x) = x * (x + 3)/6, otherwise
+     *  \endcode
+     */
+    MLCActivationTypeHardSwish            NS_SWIFT_NAME(hardSwish) MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5))     = 19,
+    /*! The clamp activation type.
+     *  @discussion This activation type implements the following function:
+     *  \code
+     *  f(x) = min(max(x, a), b)
+     *  \endcode
+     */
+    MLCActivationTypeClamp                MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5))     = 20,
 
     // Must be last
     MLCActivationTypeCount                NS_SWIFT_UNAVAILABLE(""),
@@ -546,6 +574,16 @@ typedef NS_ENUM(int32_t, MLCReductionType) {
     /*! The argmin reduction.
      */
     MLCReductionTypeArgMin               = 6,
+    /*! The L1norm reduction.
+     */
+    MLCReductionTypeL1Norm    MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5)) = 7,
+    /*! Any(X) = X_0 || X_1 || ... X_n
+     */
+    MLCReductionTypeAny       MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5)) = 8,
+    /*! Alf(X) = X_0 && X_1 && ... X_n
+     */
+    MLCReductionTypeAll       MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5)) = 9,
+    
     MLCReductionTypeCount                NS_SWIFT_UNAVAILABLE(""),
 };
 
@@ -609,6 +647,30 @@ typedef NS_ENUM(uint64_t, MLCLSTMResultMode) {
     MLCLSTMResultModeOutputAndStates = 1,
 };
 
+/*!
+ *  @enum       MLCComparisonOperation
+ *  @abstract   A comparison operation.
+ */
+MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5))
+typedef NS_ENUM(int32_t, MLCComparisonOperation) {
+    MLCComparisonOperationEqual          = 0,
+    MLCComparisonOperationNotEqual       = 1,
+    MLCComparisonOperationLess           = 2,
+    MLCComparisonOperationGreater        = 3,
+    MLCComparisonOperationLessOrEqual    = 4,
+    MLCComparisonOperationGreaterOrEqual = 5,
+    MLCComparisonOperationLogicalAND     = 6,
+    MLCComparisonOperationLogicalOR      = 7,
+    MLCComparisonOperationLogicalNOT     = 8,
+    MLCComparisonOperationLogicalNAND    = 9,
+    MLCComparisonOperationLogicalNOR     = 10,
+    MLCComparisonOperationLogicalXOR     = 11,
+
+    // Must be last
+    MLCComparisonOperationCount          NS_SWIFT_UNAVAILABLE(""),
+};
+
+
 NS_ASSUME_NONNULL_BEGIN
 /*! @abstract Returns a textual description of the activation type, suitable for debugging.
  */
@@ -644,6 +706,11 @@ NSString *MLCSampleModeDebugDescription(MLCSampleMode mode) NS_SWIFT_NAME(getter
  */
 NSString *MLCLSTMResultModeDebugDescription(MLCLSTMResultMode mode)
     NS_SWIFT_NAME(getter:MLCLSTMResultMode.debugDescription(self:));
+/*! @abstract Returns a textual description of the compare operation, suitable for debugging.
+ */
+NSString *MLCComparisonOperationDebugDescription(MLCComparisonOperation operation)
+    NS_SWIFT_NAME(getter:MLCComparisonOperation.debugDescription(self:)) MLCOMPUTE_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5));
+
 NS_ASSUME_NONNULL_END
 
 #ifdef __cplusplus

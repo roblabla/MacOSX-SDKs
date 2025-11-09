@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F5FE8150-3856-3238-9905-895A5D7CFCC8
+    value:           914E28CF-7B20-3A5C-BD96-4283E7632DBD
   - target:          x86_64-maccatalyst
-    value:           F5FE8150-3856-3238-9905-895A5D7CFCC8
+    value:           914E28CF-7B20-3A5C-BD96-4283E7632DBD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C9540CA1-9F05-3D30-894D-A2687BACB81E
+    value:           AD221DC1-3F7A-3411-8727-EC8648B5C2F5
   - target:          arm64e-maccatalyst
-    value:           C9540CA1-9F05-3D30-894D-A2687BACB81E
+    value:           AD221DC1-3F7A-3411-8727-EC8648B5C2F5
 install-name:    '/System/Library/PrivateFrameworks/ContactsDonation.framework/Versions/A/ContactsDonation'
 current-version: 0
 exports:

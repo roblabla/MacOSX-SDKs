@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1A384A23-C969-3E81-94E6-822A0F8B8FF5
+    value:           2B355C51-6AE2-31E1-8E14-97B0D897DD0D
   - target:          x86_64-maccatalyst
-    value:           1A384A23-C969-3E81-94E6-822A0F8B8FF5
+    value:           2B355C51-6AE2-31E1-8E14-97B0D897DD0D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           817BA740-158D-376A-8EC6-6F2633AFD524
+    value:           C80C42D4-B605-39D2-B318-1CC51ABBAB9F
   - target:          arm64e-maccatalyst
-    value:           817BA740-158D-376A-8EC6-6F2633AFD524
+    value:           C80C42D4-B605-39D2-B318-1CC51ABBAB9F
 install-name:    '/usr/lib/swift/libswiftModelIO.dylib'
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftModelIO.dylib', '$ld$install_name$os10.11$@rpath/libswiftModelIO.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftModelIO.dylib', '$ld$install_name$os10.13$@rpath/libswiftModelIO.dylib', 

@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           243C983D-0AEF-3A09-9489-CF1FC75925CC
+    value:           AED48981-43B1-345A-BF8D-662B269D7138
   - target:          x86_64-maccatalyst
-    value:           243C983D-0AEF-3A09-9489-CF1FC75925CC
+    value:           AED48981-43B1-345A-BF8D-662B269D7138
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           010546C0-030F-3E97-8CDF-4AA5665917FA
+    value:           9007C1CA-1F5A-399C-B470-1548E652D393
   - target:          arm64e-maccatalyst
-    value:           010546C0-030F-3E97-8CDF-4AA5665917FA
+    value:           9007C1CA-1F5A-399C-B470-1548E652D393
 install-name:    '/usr/lib/libsandbox.1.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SANDBOX_BUILD_ID, ___crashreporter_info__, _sandbox_apply, 
                        _sandbox_apply_container, _sandbox_compile_entitlements, _sandbox_compile_file, 

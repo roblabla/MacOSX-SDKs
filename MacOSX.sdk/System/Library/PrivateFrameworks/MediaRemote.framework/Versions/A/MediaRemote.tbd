@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5AB6D5AE-07B8-3721-AC50-997EE3F8598E
+    value:           E807E8C2-F3B8-39DF-97EC-D4B299C3527F
   - target:          x86_64-maccatalyst
-    value:           5AB6D5AE-07B8-3721-AC50-997EE3F8598E
+    value:           E807E8C2-F3B8-39DF-97EC-D4B299C3527F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3F9B9840-ADCD-35D1-8482-AB8DCD90EA38
+    value:           47DDD209-88D7-324B-AAE3-0D8E90F3F148
   - target:          arm64e-maccatalyst
-    value:           3F9B9840-ADCD-35D1-8482-AB8DCD90EA38
+    value:           47DDD209-88D7-324B-AAE3-0D8E90F3F148
 install-name:    '/System/Library/PrivateFrameworks/MediaRemote.framework/Versions/A/MediaRemote'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -54,17 +54,18 @@ exports:
                        _MRAVEndpointUpdateActiveSystemEndpointWithReason, _MRAVOutputContextAddOutputDevice, 
                        _MRAVOutputContextAddOutputDeviceWithInitiator, _MRAVOutputContextAddOutputDevices, 
                        _MRAVOutputContextAddOutputDevicesWithInitiator, _MRAVOutputContextCopyLocalDevice, 
-                       _MRAVOutputContextCopyOutputDevices, _MRAVOutputContextCopyUniqueIdentifier, 
-                       _MRAVOutputContextCreateRoutingContext, _MRAVOutputContextCreateiTunesAudioContext, 
-                       _MRAVOutputContextDidAddOutputDeviceNotification, _MRAVOutputContextDidAddPersonalDeviceNotification, 
-                       _MRAVOutputContextDidRemoveOutputDeviceNotification, _MRAVOutputContextDidRemovePersonalDeviceNotification, 
-                       _MRAVOutputContextGetSharedAudioPresentationContext, _MRAVOutputContextGetSharedSystemAudioContext, 
-                       _MRAVOutputContextGetSharedSystemScreenContext, _MRAVOutputContextGetType, 
-                       _MRAVOutputContextGetUniqueIdentifier, _MRAVOutputContextModificationTypeDescription, 
-                       _MRAVOutputContextOutputDeviceDidChangeNotification, _MRAVOutputContextOutputDeviceUserInfoKey, 
-                       _MRAVOutputContextOutputDevicesDidChangeNotification, _MRAVOutputContextRemoveAllDevices, 
-                       _MRAVOutputContextRemoveOutputDevice, _MRAVOutputContextRemoveOutputDeviceWithInitiator, 
-                       _MRAVOutputContextRemoveOutputDevices, _MRAVOutputContextRemoveOutputDevicesWithInitiator, 
+                       _MRAVOutputContextCopyOutputDevices, _MRAVOutputContextCopyPredictedOutputDevice, 
+                       _MRAVOutputContextCopyUniqueIdentifier, _MRAVOutputContextCreateRoutingContext, 
+                       _MRAVOutputContextCreateiTunesAudioContext, _MRAVOutputContextDidAddOutputDeviceNotification, 
+                       _MRAVOutputContextDidAddPersonalDeviceNotification, _MRAVOutputContextDidRemoveOutputDeviceNotification, 
+                       _MRAVOutputContextDidRemovePersonalDeviceNotification, _MRAVOutputContextGetSharedAudioPresentationContext, 
+                       _MRAVOutputContextGetSharedSystemAudioContext, _MRAVOutputContextGetSharedSystemScreenContext, 
+                       _MRAVOutputContextGetType, _MRAVOutputContextGetUniqueIdentifier, 
+                       _MRAVOutputContextModificationTypeDescription, _MRAVOutputContextOutputDeviceDidChangeNotification, 
+                       _MRAVOutputContextOutputDeviceUserInfoKey, _MRAVOutputContextOutputDevicesDidChangeNotification, 
+                       _MRAVOutputContextRemoveAllDevices, _MRAVOutputContextRemoveOutputDevice, 
+                       _MRAVOutputContextRemoveOutputDeviceWithInitiator, _MRAVOutputContextRemoveOutputDevices, 
+                       _MRAVOutputContextRemoveOutputDevicesWithInitiator, _MRAVOutputContextResetPredictedOutputDevice, 
                        _MRAVOutputContextSetOutputDevice, _MRAVOutputContextSetOutputDeviceWithInitiator, 
                        _MRAVOutputContextSetOutputDeviceWithPassword, _MRAVOutputContextSetOutputDevices, 
                        _MRAVOutputContextSetOutputDevicesWithInitiator, _MRAVOutputContextSupportsMultipleBluetoothOutputDevices, 
@@ -166,7 +167,7 @@ exports:
                        _MRClientVisibilityFromProtobuf, _MRColorCopyDescription, 
                        _MRColorFromXPCMessage, _MRColorIsEqual, _MRColorIsNull, _MRColorNull, 
                        _MRCommandInfoCommandKey, _MRCommandInfoEnabledKey, _MRCommandInfoOptionsKey, 
-                       _MRConnectionStateFromProtobuf, _MRContentItemArtworkSatisfiesRequest, 
+                       _MRComputeBaseRouteUID, _MRConnectionStateFromProtobuf, _MRContentItemArtworkSatisfiesRequest, 
                        _MRContentItemCalculatedPlaybackPositionIsEqual, _MRContentItemCopy, 
                        _MRContentItemCopyAlbumYear, _MRContentItemCopyAppMetrics, 
                        _MRContentItemCopyAuxiliaryNowPlayingInfo, _MRContentItemCopyCollectionInfo, 
@@ -651,9 +652,9 @@ exports:
                        _MRMediaRemoteServiceSetDefaultSupportedCommands, _MRMediaRemoteServiceSetGameControllerRemoteInputMode, 
                        _MRMediaRemoteServiceSetHardwareRemoteBehavior, _MRMediaRemoteServiceSetInvalidationHandler, 
                        _MRMediaRemoteServiceSetKeepAlive, _MRMediaRemoteServiceSetMediaPlaybackVolume, 
-                       _MRMediaRemoteServiceSetNearbyDevice, _MRMediaRemoteServiceSetNowPlayingAppOverride, 
-                       _MRMediaRemoteServiceSetNowPlayingClient, _MRMediaRemoteServiceSetNowPlayingPlaybackQueue, 
-                       _MRMediaRemoteServiceSetNowPlayingPlaybackQueueCapabilities, 
+                       _MRMediaRemoteServiceSetNearbyDevice, _MRMediaRemoteServiceSetNearbyDevicesToRemoteControl, 
+                       _MRMediaRemoteServiceSetNowPlayingAppOverride, _MRMediaRemoteServiceSetNowPlayingClient, 
+                       _MRMediaRemoteServiceSetNowPlayingPlaybackQueue, _MRMediaRemoteServiceSetNowPlayingPlaybackQueueCapabilities, 
                        _MRMediaRemoteServiceSetNowPlayingPlayer, _MRMediaRemoteServiceSetOriginClientProperties, 
                        _MRMediaRemoteServiceSetOverriddenNowPlayingApplication, _MRMediaRemoteServiceSetPickedRoute, 
                        _MRMediaRemoteServiceSetPickedRouteVolumeControlCapabilities, 
@@ -1100,11 +1101,12 @@ exports:
                        _kMRAVEndpointVolumeControlCapabilitiesUserInfoKey, _kMRAVEndpointVolumeDidChangeNotification, 
                        _kMRAVEndpointVolumeUserInfoKey, _kMRAVOutputContextDevicesDidChangeNotification, 
                        _kMRAVOutputContextIdentifierUserInfoKey, _kMRAVOutputContextOutputDeviceIdentifierUserInfoKey, 
-                       _kMRActiveDeviceInfoDidChangeNotification, _kMRActiveNowPlayingPlayerPathDataUserInfoKey, 
-                       _kMRActiveNowPlayingPlayerPathUserInfoKey, _kMRApplicationActivityHasBegunNotification, 
-                       _kMRApplicationActivityHasEndedNotification, _kMRApplicationActivityStatusDidChangeNotification, 
-                       _kMRApplicationActivityUserInfoDataKey, _kMRApplicationActivityUserInfoKey, 
-                       _kMRApplicationDidReportPlaybackErrorDistributedNotificationName, 
+                       _kMRAVOutputContextPredictedOutputDeviceDidChangeNotification, 
+                       _kMRAVOutputContextPredictedOutputDeviceUserInfoKey, _kMRActiveDeviceInfoDidChangeNotification, 
+                       _kMRActiveNowPlayingPlayerPathDataUserInfoKey, _kMRActiveNowPlayingPlayerPathUserInfoKey, 
+                       _kMRApplicationActivityHasBegunNotification, _kMRApplicationActivityHasEndedNotification, 
+                       _kMRApplicationActivityStatusDidChangeNotification, _kMRApplicationActivityUserInfoDataKey, 
+                       _kMRApplicationActivityUserInfoKey, _kMRApplicationDidReportPlaybackErrorDistributedNotificationName, 
                        _kMRChangeActiveSystemEndpointChangeTypeKey, _kMRChangeActiveSystemEndpointClientKey, 
                        _kMRChangeActiveSystemEndpointIsLocalKey, _kMRChangeActiveSystemEndpointReasonKey, 
                        _kMRChangeActiveSystemEndpointTimeSinceLastChangeKey, _kMRChangeActiveSystemEndpointTypeKey, 
@@ -1402,7 +1404,7 @@ exports:
                        MRNotification, MRNotificationClient, MRNotificationMessage, 
                        MRNotificationServiceClient, MRNowPlayingArtwork, MRNowPlayingArtworkImage, 
                        MRNowPlayingClient, MRNowPlayingClientRequests, MRNowPlayingController, 
-                       MRNowPlayingOriginClient, MRNowPlayingOriginClientManager, 
+                       MRNowPlayingControllerHelper, MRNowPlayingOriginClient, MRNowPlayingOriginClientManager, 
                        MRNowPlayingOriginClientRequests, MRNowPlayingPlayerClient, 
                        MRNowPlayingPlayerClientCallbacks, MRNowPlayingPlayerClientRequests, 
                        MRNowPlayingPlayerPathInvalidationHandler, MRNowPlayingPlayerResponse, 
@@ -1419,7 +1421,7 @@ exports:
                        MRPresentRouteAuthorizationStatusMessage, MRPromptForRouteAuthorizationMessage, 
                        MRPromptForRouteAuthorizationResponseMessage, MRProtobufSerialization, 
                        MRProtocolClientConnection, MRProtocolMessage, MRProtocolMessageLogger, 
-                       MRProtocolMessageQueue, MRRegisterForGameControllerEventsMessage, 
+                       MRProtocolMessageQueue, MRQHONowPlayingController, MRRegisterForGameControllerEventsMessage, 
                        MRRegisterGameControllerMessage, MRRegisterGameControllerResponseMessage, 
                        MRRegisterHIDDeviceMessage, MRRegisterHIDDeviceResultMessage, 
                        MRRegisterVoiceInputDeviceMessage, MRRegisterVoiceInputDeviceResponseMessage, 

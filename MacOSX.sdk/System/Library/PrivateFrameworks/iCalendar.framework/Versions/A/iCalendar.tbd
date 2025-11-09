@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CD2A2C8B-77B6-33BE-BFAC-675D49630024
+    value:           D33CE56D-2214-321D-9DF2-613913338053
   - target:          x86_64-maccatalyst
-    value:           CD2A2C8B-77B6-33BE-BFAC-675D49630024
+    value:           D33CE56D-2214-321D-9DF2-613913338053
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0D018B19-E257-3D69-8664-D62812AC454A
+    value:           D4F7043A-AC47-3131-AB84-31F244997854
   - target:          arm64e-maccatalyst
-    value:           0D018B19-E257-3D69-8664-D62812AC454A
+    value:           D4F7043A-AC47-3131-AB84-31F244997854
 install-name:    '/System/Library/PrivateFrameworks/iCalendar.framework/Versions/A/iCalendar'
 current-version: 833
 exports:

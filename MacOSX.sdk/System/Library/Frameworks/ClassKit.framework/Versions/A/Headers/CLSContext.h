@@ -2,13 +2,14 @@
 //  CLSContext.h
 //  ClassKit
 //
-//  Copyright © 2016 - 2020 Apple Inc. All rights reserved.
+//  Copyright © 2016-2020 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <CoreGraphics/CGImage.h>
 #import <ClassKit/CLSDefines.h>
 #import <ClassKit/CLSObject.h>
 #import <ClassKit/CLSProgressReportingCapability.h>
-#import <CoreGraphics/CGImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -230,6 +231,24 @@ API_AVAILABLE(ios(11.3), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos
  */
 - (void)descendantMatchingIdentifierPath:(NSArray<NSString *> *)identifierPath
                               completion:(void(^)(CLSContext * _Nullable context, NSError * _Nullable error))completion;
+
+/*!
+ @abstract      Child contexts that can be navigated to from this context.
+ @discussion    Returns all the child contexts added via @code -[CLSContext addNavigationChildContext:] @endcode
+*/
+@property (nonatomic, copy, readonly) NSArray<CLSContext *> *navigationChildContexts API_AVAILABLE(ios(14.5), macos(11.3), macCatalyst(14.5)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ @abstract      Adds a child context to specify the user can navigate to the child from this context.
+ @discussion    Used only for presentation purpose. Unlike @code -[CLSContext addChildContext:] @endcode, this method does not affect the identifierPath.
+*/
+- (void)addNavigationChildContext:(CLSContext *)child API_AVAILABLE(ios(14.5), macos(11.3), macCatalyst(14.5)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ @abstract      Removes the navigation path to the child context from this context.
+ @discussion    Used only for presentation purpose. Unlike @code -[CLSContext removeFromParent:] @endcode, this method does not affect the identiferPath.
+*/
+- (void)removeNavigationChildContext:(CLSContext *)child API_AVAILABLE(ios(14.5), macos(11.3), macCatalyst(14.5)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

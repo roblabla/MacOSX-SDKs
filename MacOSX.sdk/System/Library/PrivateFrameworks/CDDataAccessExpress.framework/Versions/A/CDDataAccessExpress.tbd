@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           15FCEFBB-7B6F-3AFE-BC7D-C704F6268250
+    value:           8DBEAC2E-C374-3B61-A365-C04E2174813E
   - target:          x86_64-maccatalyst
-    value:           15FCEFBB-7B6F-3AFE-BC7D-C704F6268250
+    value:           8DBEAC2E-C374-3B61-A365-C04E2174813E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           942A88AE-BF1D-367A-8260-9295A3779211
+    value:           366B588A-DFEE-39E3-820F-4DC5689760B0
   - target:          arm64e-maccatalyst
-    value:           942A88AE-BF1D-367A-8260-9295A3779211
+    value:           366B588A-DFEE-39E3-820F-4DC5689760B0
 install-name:    '/System/Library/PrivateFrameworks/CDDataAccessExpress.framework/Versions/A/CDDataAccessExpress'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

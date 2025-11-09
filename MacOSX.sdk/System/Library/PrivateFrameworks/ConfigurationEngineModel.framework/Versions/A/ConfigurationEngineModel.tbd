@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DDF00411-B28C-35EB-9120-5338D2CE85D2
+    value:           F55DC8FA-66E6-38A3-A6E7-36706FE65F40
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           42BB7DE8-2F85-33C2-B911-B9AE8D91D745
+    value:           F979FED9-8566-32A9-AAB6-1961E512342A
 install-name:    '/System/Library/PrivateFrameworks/ConfigurationEngineModel.framework/Versions/A/ConfigurationEngineModel'
-current-version: 40.18
+current-version: 43
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CEMAccountLDAPDeclaration_LDAPSearchSettingsItem_LDAPSearchSettingScope_ldapSearchSettingScopeBase, 

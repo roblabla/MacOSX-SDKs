@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E03088E2-E862-3988-A14F-5A806DB4DF8F
+    value:           DF7B603A-B9EF-3593-90B3-7B3A86A2A5FC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A5B3C654-0DD8-3A37-95BD-94A179641FA1
+    value:           6D4947E2-083F-3408-9A0A-8FEAB3E95E7D
 install-name:    '/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI'
 swift-abi-version: 7
 exports:
@@ -129,6 +129,10 @@ exports:
                        '_$s7SwiftUI10AppStorageV13_makeProperty2in9container11fieldOffset6inputsyAA08_DynamicF6BufferVz_AA11_GraphValueVyqd__GSiAA01_N6InputsVztlFZ', 
                        '_$s7SwiftUI10AppStorageV14projectedValueAA7BindingVyxGvg', 
                        '_$s7SwiftUI10AppStorageV14projectedValueAA7BindingVyxGvpMV', 
+                       '_$s7SwiftUI10AppStorageV16objectWillChange7Combine25ObservableObjectPublisherCSgvM', 
+                       '_$s7SwiftUI10AppStorageV16objectWillChange7Combine25ObservableObjectPublisherCSgvg', 
+                       '_$s7SwiftUI10AppStorageV16objectWillChange7Combine25ObservableObjectPublisherCSgvpMV', 
+                       '_$s7SwiftUI10AppStorageV16objectWillChange7Combine25ObservableObjectPublisherCSgvs', 
                        '_$s7SwiftUI10AppStorageV8locationAA19UserDefaultLocationCyxGvM', 
                        '_$s7SwiftUI10AppStorageV8locationAA19UserDefaultLocationCyxGvg', 
                        '_$s7SwiftUI10AppStorageV8locationAA19UserDefaultLocationCyxGvpMV', 
@@ -140,6 +144,7 @@ exports:
                        '_$s7SwiftUI10AppStorageVAAs23ExpressibleByNilLiteralRzlE_5storeACySdSgGSS_So14NSUserDefaultsCSgtcAFRszrlufC', 
                        '_$s7SwiftUI10AppStorageVAAs23ExpressibleByNilLiteralRzlE_5storeACySiSgGSS_So14NSUserDefaultsCSgtcAFRszrlufC', 
                        '_$s7SwiftUI10AppStorageVMa', '_$s7SwiftUI10AppStorageVMn', 
+                       '_$s7SwiftUI10AppStorageVyxG7Combine25_ObservableObjectPropertyAAMc', 
                        '_$s7SwiftUI10AppStorageVyxGAA15DynamicPropertyAAMc', '_$s7SwiftUI10AppStorageVyxGAA15DynamicPropertyAAWP', 
                        '_$s7SwiftUI10DatePickerV4bodyQrvg', '_$s7SwiftUI10DatePickerV4bodyQrvpMV', 
                        '_$s7SwiftUI10DatePickerV4bodyQrvpQOMQ', '_$s7SwiftUI10DatePickerV9selection19displayedComponents5labelACyxGAA7BindingVy10Foundation0C0VG_AA0cdG0VxyXEtcfC', 
@@ -3224,11 +3229,14 @@ exports:
                        '_$s7SwiftUI19NSViewRepresentableP21_overrideLayoutTraits_3foryAA01_fG0Vz_0C4TypeQztFTq', 
                        '_$s7SwiftUI19NSViewRepresentableP21_overrideSizeThatFits_2in6nsViewySo6CGSizeVz_AA09_ProposedF0V0C4TypeQztFTj', 
                        '_$s7SwiftUI19NSViewRepresentableP21_overrideSizeThatFits_2in6nsViewySo6CGSizeVz_AA09_ProposedF0V0C4TypeQztFTq', 
+                       '_$s7SwiftUI19NSViewRepresentableP24_modifyBridgedViewInputsyyAA01_gH0VzFZTj', 
+                       '_$s7SwiftUI19NSViewRepresentableP24_modifyBridgedViewInputsyyAA01_gH0VzFZTq', 
                        '_$s7SwiftUI19NSViewRepresentablePAA4ViewTb', '_$s7SwiftUI19NSViewRepresentablePAAE09dismantleC0_11coordinatory0C4TypeQz_11CoordinatorQztFZ', 
                        '_$s7SwiftUI19NSViewRepresentablePAAE13_makeViewList4view6inputsAA01_fG7OutputsVAA11_GraphValueVyxG_AA01_fG6InputsVtFZ', 
                        '_$s7SwiftUI19NSViewRepresentablePAAE19_identifiedViewTree2inAA011_IdentifiedfG0O0C4TypeQz_tF', 
                        '_$s7SwiftUI19NSViewRepresentablePAAE21_overrideLayoutTraits_3foryAA01_fG0Vz_0C4TypeQztF', 
                        '_$s7SwiftUI19NSViewRepresentablePAAE21_overrideSizeThatFits_2in6nsViewySo6CGSizeVz_AA09_ProposedF0V0C4TypeQztF', 
+                       '_$s7SwiftUI19NSViewRepresentablePAAE24_modifyBridgedViewInputsyyAA01_gH0VzFZ', 
                        '_$s7SwiftUI19NSViewRepresentablePAAE4bodys5NeverOvg', '_$s7SwiftUI19NSViewRepresentablePAAE4bodys5NeverOvpMV', 
                        '_$s7SwiftUI19NSViewRepresentablePAAE9_makeView4view6inputsAA01_F7OutputsVAA11_GraphValueVyxG_AA01_F6InputsVtFZ', 
                        '_$s7SwiftUI19NSViewRepresentablePAAyt11CoordinatorRtzrlE04makeE0yyF', 
@@ -3879,6 +3887,11 @@ exports:
                        '_$s7SwiftUI22TextFormattingCommandsVAA0E0AAMc', '_$s7SwiftUI22TextFormattingCommandsVAA0E0AAWP', 
                        '_$s7SwiftUI22TextFormattingCommandsVACycfC', '_$s7SwiftUI22TextFormattingCommandsVMa', 
                        '_$s7SwiftUI22TextFormattingCommandsVMn', '_$s7SwiftUI22TextFormattingCommandsVN', 
+                       '_$s7SwiftUI22TitleAndIconLabelStyleV8makeBody13configurationQrAA0fG13ConfigurationV_tF', 
+                       '_$s7SwiftUI22TitleAndIconLabelStyleV8makeBody13configurationQrAA0fG13ConfigurationV_tFQOMQ', 
+                       '_$s7SwiftUI22TitleAndIconLabelStyleVAA0fG0AAMc', '_$s7SwiftUI22TitleAndIconLabelStyleVAA0fG0AAWP', 
+                       '_$s7SwiftUI22TitleAndIconLabelStyleVACycfC', '_$s7SwiftUI22TitleAndIconLabelStyleVMa', 
+                       '_$s7SwiftUI22TitleAndIconLabelStyleVMn', '_$s7SwiftUI22TitleAndIconLabelStyleVN', 
                        '_$s7SwiftUI22UserInterfaceSizeClassO2eeoiySbAC_ACtFZ', '_$s7SwiftUI22UserInterfaceSizeClassO4hash4intoys6HasherVz_tF', 
                        '_$s7SwiftUI22UserInterfaceSizeClassO7compactyA2CmFWC', '_$s7SwiftUI22UserInterfaceSizeClassO7regularyA2CmFWC', 
                        '_$s7SwiftUI22UserInterfaceSizeClassO9hashValueSivg', '_$s7SwiftUI22UserInterfaceSizeClassO9hashValueSivpMV', 
@@ -4529,7 +4542,11 @@ exports:
                        '_$s7SwiftUI26NSViewRepresentableContextV11transactionAA11TransactionVvg', 
                        '_$s7SwiftUI26NSViewRepresentableContextV11transactionAA11TransactionVvpMV', 
                        '_$s7SwiftUI26NSViewRepresentableContextVMa', '_$s7SwiftUI26NSViewRepresentableContextVMn', 
-                       '_$s7SwiftUI26PreviewDisplayNameTraitKeyV12defaultValueSSSgvgZ', 
+                       '_$s7SwiftUI26PreviewColorSchemeTraitKeyV12defaultValueAA0dE0OSgvgZ', 
+                       '_$s7SwiftUI26PreviewColorSchemeTraitKeyVAA05_ViewfG0AAMc', 
+                       '_$s7SwiftUI26PreviewColorSchemeTraitKeyVAA05_ViewfG0AAWP', 
+                       '_$s7SwiftUI26PreviewColorSchemeTraitKeyVMa', '_$s7SwiftUI26PreviewColorSchemeTraitKeyVMn', 
+                       '_$s7SwiftUI26PreviewColorSchemeTraitKeyVN', '_$s7SwiftUI26PreviewDisplayNameTraitKeyV12defaultValueSSSgvgZ', 
                        '_$s7SwiftUI26PreviewDisplayNameTraitKeyVAA05_ViewfG0AAMc', 
                        '_$s7SwiftUI26PreviewDisplayNameTraitKeyVAA05_ViewfG0AAWP', 
                        '_$s7SwiftUI26PreviewDisplayNameTraitKeyVMa', '_$s7SwiftUI26PreviewDisplayNameTraitKeyVMn', 
@@ -4594,6 +4611,7 @@ exports:
                        '_$s7SwiftUI26_DigitalCrownConfigurationV8minValue03maxG06strideACSd_S2dSgtcfC', 
                        '_$s7SwiftUI26_DigitalCrownConfigurationVMa', '_$s7SwiftUI26_DigitalCrownConfigurationVMn', 
                        '_$s7SwiftUI26_DigitalCrownConfigurationVN', '_$s7SwiftUI26_PreferenceWritingModifierV10_makeScene8modifier6inputs4bodyAA01_G7OutputsVAA11_GraphValueVyACyxGG_AA01_G6InputsVAiA01_L0V_AOtctFZ', 
+                       '_$s7SwiftUI26_PreferenceWritingModifierV13_makeViewList8modifier6inputs4bodyAA01_gH7OutputsVAA11_GraphValueVyACyxGG_AA01_gH6InputsVAiA01_M0V_AOtctFZ', 
                        '_$s7SwiftUI26_PreferenceWritingModifierV24_makeWidgetConfiguration8modifier6inputs4bodyAA01_G7OutputsVAA11_GraphValueVyACyxGG_AA01_G6InputsVAiA01_M0V_AOtctFZ', 
                        '_$s7SwiftUI26_PreferenceWritingModifierV3key5valueACyxGxm_5ValueQztcfC', 
                        '_$s7SwiftUI26_PreferenceWritingModifierV5value5ValueQzvM', 
@@ -4605,7 +4623,6 @@ exports:
                        '_$s7SwiftUI26_PreferenceWritingModifierVMa', '_$s7SwiftUI26_PreferenceWritingModifierVMn', 
                        '_$s7SwiftUI26_PreferenceWritingModifierVyxGAA019WidgetConfigurationE0AAMc', 
                        '_$s7SwiftUI26_PreferenceWritingModifierVyxGAA019WidgetConfigurationE0AAWP', 
-                       '_$s7SwiftUI26_PreferenceWritingModifierVyxGAA04ViewE0A2aEP05_makeF4List8modifier6inputs4bodyAA01_fH7OutputsVAA11_GraphValueVyxG_AA01_fH6InputsVAlA01_M0V_AQtctFZTW', 
                        '_$s7SwiftUI26_PreferenceWritingModifierVyxGAA04ViewE0AAMc', 
                        '_$s7SwiftUI26_PreferenceWritingModifierVyxGAA04ViewE0AAWP', 
                        '_$s7SwiftUI26_PreferenceWritingModifierVyxGAA06_SceneE0AAMc', 
@@ -6442,7 +6459,8 @@ exports:
                        '_$s7SwiftUI8_HSpacerVAA4ViewA2aDP14_viewListCount6inputsSiSgAA01_dfG6InputsV_tFZTW', 
                        '_$s7SwiftUI8_HSpacerVAA4ViewA2aDP4body4BodyQzvgTW', '_$s7SwiftUI8_HSpacerVAA4ViewAAMc', 
                        '_$s7SwiftUI8_HSpacerVAA4ViewAAWP', '_$s7SwiftUI8_HSpacerVMa', 
-                       '_$s7SwiftUI8_HSpacerVMn', '_$s7SwiftUI8_HSpacerVN', '_$s7SwiftUI8_PreviewV11contentTypeSSvg', 
+                       '_$s7SwiftUI8_HSpacerVMn', '_$s7SwiftUI8_HSpacerVN', '_$s7SwiftUI8_PreviewV11colorSchemeAA05ColorE0OSgvg', 
+                       '_$s7SwiftUI8_PreviewV11colorSchemeAA05ColorE0OSgvpMV', '_$s7SwiftUI8_PreviewV11contentTypeSSvg', 
                        '_$s7SwiftUI8_PreviewV11contentTypeSSvpMV', '_$s7SwiftUI8_PreviewV11displayNameSSSgvg', 
                        '_$s7SwiftUI8_PreviewV11displayNameSSSgvpMV', '_$s7SwiftUI8_PreviewV2idSivg', 
                        '_$s7SwiftUI8_PreviewV2idSivpMV', '_$s7SwiftUI8_PreviewV6deviceAA0C6DeviceVSgvg', 
@@ -6636,7 +6654,7 @@ exports:
                        '_$s7SwiftUI9_ViewTestPAAE08tearDownD0yyF', '_$s7SwiftUI9_ViewTestPAAE11resetEventsyyF', 
                        '_$s7SwiftUI9_ViewTestPAAE11turnRunloop5timesySi_tF', '_$s7SwiftUI9_ViewTestPAAE14setEnvironmentyyAA0F6ValuesVF', 
                        '_$s7SwiftUI9_ViewTestPAAE17sendTouchSequenceyySaySo7CGPointV8location_AFSg14globalLocation10Foundation4DateV9timestamptGF', 
-                       '_$s7SwiftUI9_ViewTestPAAE17viewForIdentifieryqd__Sgs11AnyHashableV_qd__mtAA0C0Rd__lF', 
+                       '_$s7SwiftUI9_ViewTestPAAE17viewForIdentifieryqd__Sgqd_0__qd__mtAA0C0Rd__SHRd_0_r0_lF', 
                        '_$s7SwiftUI9_ViewTestPAAE18stateForIdentifier_4type2inAA7BindingVyqd_0_GSgqd___qd_0_mqd_1_mtSHRd__AA0C0Rd_1_r1_lF', 
                        '_$s7SwiftUI9_ViewTestPAAE20measureTouchSequence4host_SaySdGAA14_BenchmarkHost_p_SaySo7CGPointV8location_AISg14globalLocation10Foundation4DateV9timestamptGtF', 
                        '_$s7SwiftUI9_ViewTestPAAE4loopyyF', '_$s7SwiftUI9_ViewTestPAAE6render7secondsySd_tF', 
@@ -6732,7 +6750,8 @@ exports:
                        '_$sxSg7SwiftUI4ViewA2bCRzlAbCP4body4BodyQzvgTW', '_$sxSg7SwiftUI4ViewA2bCRzlMc', 
                        '_$sxSg7SwiftUI7GestureA2bCRzlAbCP4body4BodyQzvgTW', '_$sxSg7SwiftUI7GestureA2bCRzlMc', 
                        _DesignatorRequiresWhitespace, _DropLeftRedundantDesignator, 
-                       _LocaleIs24HourMode, _LocaleIsCJK, _LocalizedString, _RemovesPunctuationFromWeekdayDay, 
+                       _LocaleIs24HourMode, _LocaleIsCJK, _LocalizedString, _NSUserAccentColorGetHardwareAccentColorName_SwiftUI, 
+                       _NSUserAccentHasHardwareColor_SwiftUI, _RemovesPunctuationFromWeekdayDay, 
                        _SUIFormatTimeIntervalSeconds, _SwiftUIVersionNumber, _SwiftUIVersionString, 
                        _SwiftUI_NSTableViewCurrentRowSizeStyle, __AppKitAddSubview, 
                        __CAFilterMake, __CAFilterType, __CGPathCopyDescription, __CGPathParseString, 
@@ -6751,7 +6770,7 @@ exports:
                        _swiftUI_late_fall_2019_os_versions, _swiftUI_late_spring_2020_os_versions, 
                        _swiftUI_summer_2020_os_versions, _swiftUI_v1_3_1_os_versions, 
                        _swiftUI_v1_4_os_versions, _swiftUI_v1_os_versions, _swiftUI_v2_1_os_versions, 
-                       _swiftUI_v2_os_versions ]
+                       _swiftUI_v2_3_os_versions, _swiftUI_v2_os_versions ]
     objc-classes:    [ BaseDateProvider, DateProvider, RelativeDateProvider, TimeIntervalProvider, 
                        TimeProvider, _NoAnimationDelegate, _SUITimeFormatData, _TSHostingViewInvocationTarget ]
     thread-local-symbols: [ __perThreadGeometryProxyData, __perThreadTransactionData, 

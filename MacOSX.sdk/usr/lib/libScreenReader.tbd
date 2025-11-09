@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2D8A3595-53EC-3373-8549-974F1FE2B0A7
+    value:           C75CCB97-EC50-3086-890B-0C3DCA4ACA0F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           212B812E-E671-3FBD-A069-80D167BE0BA3
+    value:           7D15B50F-3B11-3663-9490-0C1D4975EC27
 install-name:    '/usr/lib/libScreenReader.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

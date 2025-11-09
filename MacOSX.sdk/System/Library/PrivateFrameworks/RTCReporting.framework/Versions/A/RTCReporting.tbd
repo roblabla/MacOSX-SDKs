@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BFCE3680-2A03-3FC2-8959-091188900EF0
+    value:           C3791F30-C18C-3DD2-9F62-D4723EFC4416
   - target:          x86_64-maccatalyst
-    value:           BFCE3680-2A03-3FC2-8959-091188900EF0
+    value:           C3791F30-C18C-3DD2-9F62-D4723EFC4416
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           894F89BE-7D02-33B5-8568-6A737ED16946
+    value:           3216A1C1-CBB2-3018-8AC6-09F7C5A40D4B
   - target:          arm64e-maccatalyst
-    value:           894F89BE-7D02-33B5-8568-6A737ED16946
+    value:           3216A1C1-CBB2-3018-8AC6-09F7C5A40D4B
 install-name:    '/System/Library/PrivateFrameworks/RTCReporting.framework/Versions/A/RTCReporting'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -40,8 +40,9 @@ exports:
                        _kRTCReportingSessionInfoClientType, _kRTCReportingSessionInfoClientVersion, 
                        _kRTCReportingSessionInfoContainsRealtimeEvents, _kRTCReportingSessionInfoEnableFlag, 
                        _kRTCReportingSessionInfoEphemeralSessionID, _kRTCReportingSessionInfoHierarchyToken, 
-                       _kRTCReportingSessionInfoRequireUserInfo, _kRTCReportingSessionInfoSessionID, 
-                       _kRTCReportingUserInfoClientName, _kRTCReportingUserInfoServiceName ]
+                       _kRTCReportingSessionInfoRequireUserInfo, _kRTCReportingSessionInfoSamplingUUIID, 
+                       _kRTCReportingSessionInfoSessionID, _kRTCReportingUserInfoClientName, 
+                       _kRTCReportingUserInfoServiceName ]
     objc-classes:    [ RTCReporting, RTCReportingAggregationObject, RTCReportingDeallocNotifier, 
                        RTCSecureHierarchyToken, UpdateAndReportServices ]
     objc-ivars:      [ RTCReportingAggregationObject._aggregationBlock, RTCReportingDeallocNotifier._delegate, 

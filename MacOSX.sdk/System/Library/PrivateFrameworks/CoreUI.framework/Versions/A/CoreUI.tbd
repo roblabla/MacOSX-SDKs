@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0DA8F4E0-9473-374E-8B48-F0A40AEC63CE
+    value:           EA97A98F-C829-3A70-9698-68AFBE6773D9
   - target:          x86_64-maccatalyst
-    value:           0DA8F4E0-9473-374E-8B48-F0A40AEC63CE
+    value:           EA97A98F-C829-3A70-9698-68AFBE6773D9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B6F13C9-A49E-3B86-A23A-FE783177B980
+    value:           6B474339-4569-3BCF-AC67-AF5A1EEE5360
   - target:          arm64e-maccatalyst
-    value:           6B6F13C9-A49E-3B86-A23A-FE783177B980
+    value:           6B474339-4569-3BCF-AC67-AF5A1EEE5360
 install-name:    '/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI'
-current-version: 689.4
+current-version: 691.3
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -414,33 +414,34 @@ exports:
                        _kCUIUserInterfaceLayoutDirectionLeftToRight, _kCUIUserInterfaceLayoutDirectionRightToLeft, 
                        _kCUIValueKey, _kCUIVariantAlertMaterial, _kCUIVariantAlertSheetMaterial, 
                        _kCUIVariantBlack, _kCUIVariantContentBackgroundMaterial, 
-                       _kCUIVariantDesktopStackMaterial, _kCUIVariantDividerSplitterDimple, 
-                       _kCUIVariantDividerSplitterDimpleInset, _kCUIVariantDividerSplitterRod, 
-                       _kCUIVariantDividerSplitterRodMail, _kCUIVariantFullScreenUIMaterial, 
-                       _kCUIVariantGradientFindBar, _kCUIVariantGradientFinderInfo, 
-                       _kCUIVariantGradientFinderSideBar, _kCUIVariantGradientFreeform, 
-                       _kCUIVariantGradientListBackgroundEven, _kCUIVariantGradientListBackgroundOdd, 
-                       _kCUIVariantGradientScopeBackgroundBar, _kCUIVariantGradientScopeBackgroundEven, 
-                       _kCUIVariantGradientScopeBackgroundOdd, _kCUIVariantGradientSideBar, 
-                       _kCUIVariantGradientSideBarSelection, _kCUIVariantGradientSideBarSelectionMultiple, 
-                       _kCUIVariantGrowBoxEmpty, _kCUIVariantHUDControlsBackgroundMaterial, 
-                       _kCUIVariantHUDWindowMaterial, _kCUIVariantHeaderList, _kCUIVariantHeaderMaterial, 
-                       _kCUIVariantHeaderWindow, _kCUIVariantInlineSidebarMaterial, 
-                       _kCUIVariantInlineTitlebarMaterial, _kCUIVariantInverted, 
-                       _kCUIVariantKey, _kCUIVariantLightMaterial, _kCUIVariantLoginWindowControlMaterial, 
-                       _kCUIVariantMacDarkMaterial, _kCUIVariantMacLightMaterial, 
-                       _kCUIVariantMacMediumDarkMaterial, _kCUIVariantMacMediumLightMaterial, 
-                       _kCUIVariantMacUltradarkMaterial, _kCUIVariantMacUltralightMaterial, 
-                       _kCUIVariantMenuBarDarkGlossy, _kCUIVariantMenuBarDarkMatte, 
-                       _kCUIVariantMenuBarMaterial, _kCUIVariantMenuBarMenuMaterial, 
-                       _kCUIVariantMenuBarOpaque, _kCUIVariantMenuBarSelectionMaterial, 
-                       _kCUIVariantMenuDock, _kCUIVariantMenuHelpResults, _kCUIVariantMenuHierarchical, 
+                       _kCUIVariantContextMenuSelectionMaterial, _kCUIVariantDesktopStackMaterial, 
+                       _kCUIVariantDividerSplitterDimple, _kCUIVariantDividerSplitterDimpleInset, 
+                       _kCUIVariantDividerSplitterRod, _kCUIVariantDividerSplitterRodMail, 
+                       _kCUIVariantFullScreenUIMaterial, _kCUIVariantGradientFindBar, 
+                       _kCUIVariantGradientFinderInfo, _kCUIVariantGradientFinderSideBar, 
+                       _kCUIVariantGradientFreeform, _kCUIVariantGradientListBackgroundEven, 
+                       _kCUIVariantGradientListBackgroundOdd, _kCUIVariantGradientScopeBackgroundBar, 
+                       _kCUIVariantGradientScopeBackgroundEven, _kCUIVariantGradientScopeBackgroundOdd, 
+                       _kCUIVariantGradientSideBar, _kCUIVariantGradientSideBarSelection, 
+                       _kCUIVariantGradientSideBarSelectionMultiple, _kCUIVariantGrowBoxEmpty, 
+                       _kCUIVariantHUDControlsBackgroundMaterial, _kCUIVariantHUDWindowMaterial, 
+                       _kCUIVariantHeaderList, _kCUIVariantHeaderMaterial, _kCUIVariantHeaderWindow, 
+                       _kCUIVariantInlineSidebarMaterial, _kCUIVariantInlineTitlebarMaterial, 
+                       _kCUIVariantInverted, _kCUIVariantKey, _kCUIVariantLightMaterial, 
+                       _kCUIVariantLoginWindowControlMaterial, _kCUIVariantMacDarkMaterial, 
+                       _kCUIVariantMacLightMaterial, _kCUIVariantMacMediumDarkMaterial, 
+                       _kCUIVariantMacMediumLightMaterial, _kCUIVariantMacUltradarkMaterial, 
+                       _kCUIVariantMacUltralightMaterial, _kCUIVariantMenuBarDarkGlossy, 
+                       _kCUIVariantMenuBarDarkMatte, _kCUIVariantMenuBarMaterial, 
+                       _kCUIVariantMenuBarMenuMaterial, _kCUIVariantMenuBarOpaque, 
+                       _kCUIVariantMenuBarSelectionMaterial, _kCUIVariantMenuDock, 
+                       _kCUIVariantMenuHelpResults, _kCUIVariantMenuHierarchical, 
                        _kCUIVariantMenuItemHelpResults, _kCUIVariantMenuItemSearch, 
                        _kCUIVariantMenuItemSearchResults, _kCUIVariantMenuMaterial, 
                        _kCUIVariantMenuPopup, _kCUIVariantMenuPulldown, _kCUIVariantMenuSearchResults, 
-                       _kCUIVariantMenuTitleApple, _kCUIVariantMenuTitleHelp, _kCUIVariantMetal, 
-                       _kCUIVariantNotificationCenterBackgroundMaterial, _kCUIVariantOpaque, 
-                       _kCUIVariantOverlayBackingMaterial, _kCUIVariantPopoverLabelMaterial, 
+                       _kCUIVariantMenuSelectionMaterial, _kCUIVariantMenuTitleApple, 
+                       _kCUIVariantMenuTitleHelp, _kCUIVariantMetal, _kCUIVariantNotificationCenterBackgroundMaterial, 
+                       _kCUIVariantOpaque, _kCUIVariantOverlayBackingMaterial, _kCUIVariantPopoverLabelMaterial, 
                        _kCUIVariantPopoverMaterial, _kCUIVariantScrollBarArrowsDoubleBoth, 
                        _kCUIVariantScrollBarArrowsDoubleMax, _kCUIVariantScrollBarArrowsDoubleMin, 
                        _kCUIVariantScrollBarArrowsNone, _kCUIVariantScrollBarArrowsSingle, 

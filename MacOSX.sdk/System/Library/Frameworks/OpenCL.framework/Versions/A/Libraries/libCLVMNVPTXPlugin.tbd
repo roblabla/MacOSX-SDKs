@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           83946F60-DAA9-346E-9A5F-33970F3CDE9F
-install-name:    '/AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Binaries/GPUDriversNvidia/install/TempContent/Root/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/libCLVMNVPTXPlugin.dylib'
+    value:           18B2E1A0-D945-3DD2-B190-3B283F24A8CB
+install-name:    '/System/Volumes/Data/SWE/macOS/BuildRoots/2288acc43c/Library/Caches/com.apple.xbs/Binaries/GPUDriversNvidia/install/TempContent/Root/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/libCLVMNVPTXPlugin.dylib'
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __Z14PTXLinkModulesPN4llvm6ModuleES1_jPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 

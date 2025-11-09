@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9F44458E-5318-38E2-A28A-1A40E87C27D4
+    value:           D2DB9ECC-B07B-3162-8E64-A7BC4ECF201D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EDC4C15F-555A-39B2-8895-3672285E4CC1
+    value:           AAFBBEB2-3B99-35FE-9290-1890A3B47A5B
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsUI.framework/Versions/A/CoreSuggestionsUI'
 current-version: 1115.255
 exports:

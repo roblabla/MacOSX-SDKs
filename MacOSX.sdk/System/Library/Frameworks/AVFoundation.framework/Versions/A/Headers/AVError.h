@@ -95,7 +95,7 @@ typedef NS_ERROR_ENUM(AVFoundationErrorDomain, AVError) {
     AVErrorAirPlayReceiverRequiresInternet API_AVAILABLE(macos(10.10), ios(8.3), tvos(9.0), watchos(1.3)) = -11857,
     AVErrorVideoCompositorFailed API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0)) = -11858,
 	AVErrorRecordingAlreadyInProgress API_AVAILABLE(ios(9.0), tvos(9.0), watchos(2.0)) API_UNAVAILABLE(macos) = -11859, // on iOS, AVCaptureMovieFileOutput only supports one recording at a time
-	AVErrorCreateContentKeyRequestFailed API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos, watchos) = -11860,
+	AVErrorCreateContentKeyRequestFailed API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(watchos) = -11860,
 	AVErrorUnsupportedOutputSettings API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) = -11861,
 	AVErrorOperationNotAllowed API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) = -11862,
 	AVErrorContentIsUnavailable API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0)) = -11863,

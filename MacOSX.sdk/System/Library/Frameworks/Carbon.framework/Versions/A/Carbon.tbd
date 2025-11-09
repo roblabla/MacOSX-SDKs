@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5683716A-5610-3B97-B473-B4652067E7A6
+    value:           6E0D7D9A-2C50-3FBD-A4CF-1D1285F086F1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9455FEDB-56A3-38DD-8473-41826E74C4CC
+    value:           CC7CC371-96B9-31AA-AE5E-089F698E4752
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon'
 current-version: 164
 compatibility-version: 2
@@ -31,11 +31,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           101582BA-E64F-391A-BD23-50DCC3CF8939
+    value:           34455FFB-0A75-366C-BBFB-046D2CAD9EE1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           41AE151F-CBC4-3838-9DDC-B364997377F8
+    value:           98A8C49B-6AF7-319D-A53E-D6CC226CB390
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CommonPanels.framework/Versions/A/CommonPanels'
 current-version: 101
 parent-umbrella:
@@ -75,13 +75,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           93518490-429F-3E31-8344-15D479C2F4CE
+    value:           65D66FF8-F361-31FD-9970-1798B9D43DBB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5D42A3EB-F109-386B-BA75-5F72E264A3B9
+    value:           071FD2DE-D87C-3F71-B719-4D54A9B6C0BD
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox'
-current-version: 1060.4
+current-version: 1061.9
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
@@ -549,11 +549,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           599F7E42-DEF1-3B70-83AB-C3BDF727CF93
+    value:           5DED5EBF-2525-3F7E-87F7-4EC4B0A3185A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           571D77F4-7411-36A8-8C3D-DBF00A4A4ACE
+    value:           F5883B9E-C078-33F2-AD4D-D4E7C18E32D0
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Help.framework/Versions/A/Help'
 current-version: 71
 parent-umbrella:
@@ -563,7 +563,7 @@ allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ PrintingUI ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _AHGotoApplicationHelp, _AHGotoMainTOC, _AHGotoPage, _AHLookupAnchor, 
                        _AHRegisterHelpBook, _AHRegisterHelpBookWithURL, _AHSearch, 
                        _AppendEncodingHint, _CFStringToCString, _CopyBookDetails, 
@@ -576,11 +576,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FE9D13DD-D733-3B2A-B4A6-D3C8313005F5
+    value:           07AB6E67-1DD8-3642-823A-E91AECDBBA3A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           636A654E-0A0B-33CD-9A63-555A5DF631DF
+    value:           2F53D2C0-A0C5-365F-A305-7B205D7E18C6
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/ImageCapture'
 current-version: 5
 parent-umbrella:
@@ -696,18 +696,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E10C40B6-2656-36D1-882C-2091CE02883A
+    value:           36446EAF-E2F5-38BD-849A-D489DC7700A8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CB34A459-A64B-37EA-8695-113E64A52382
+    value:           CAE4D559-BEF7-37AE-B08C-0FBB6BFA9473
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Ink.framework/Versions/A/Ink'
 current-version: 227
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        Carbon
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _InkAddStrokeToCurrentPhrase, _InkIsPhraseInProgress, _InkSetApplicationRecognitionMode, 
                        _InkSetApplicationWritingMode, _InkSetDrawingMode, _InkSetPhraseTerminationMode, 
                        _InkStrokeGetPointCount, _InkStrokeGetPoints, _InkStrokeGetTypeID, 
@@ -720,11 +720,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D0B98DF9-7A61-3810-AE81-2F870DCC2AC0
+    value:           B4718F88-6569-3653-81F9-F0256EE89C48
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           89C64D77-FF84-320E-BE5F-78F279C36C73
+    value:           2B7482FA-20D1-3886-8E0B-EA52289B235E
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -778,11 +778,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8411879F-7E3E-3882-BD06-68E797A3B9D6
+    value:           BED0F662-C9C3-3F4A-8FB3-97BB0ADE2DC8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C137A101-A4E4-35E2-B9D5-5807C879F854
+    value:           7ED9728B-ECA0-38A7-8FC6-EAF1BF60DD7D
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Print'
 current-version: 272
 parent-umbrella:
@@ -793,11 +793,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DD7770F7-661C-363B-A1F4-8B69EB0FFB6A
+    value:           66DBED22-5951-3EC2-90CD-0610104B4816
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E71813F6-18F3-35AB-A6C8-12AFACCBDE0A
+    value:           ECF8EA8B-38B5-3BD3-8D78-922324F48AE0
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SecurityHI.framework/Versions/A/SecurityHI'
 current-version: 55008
 parent-umbrella:
@@ -807,7 +807,7 @@ allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AppleShareClient ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _DisposeURLNotifyUPP, _DisposeURLSystemEventUPP, _InvokeURLNotifyUPP, 
                        _InvokeURLSystemEventUPP, _KCAddAppleSharePassword, _KCAddGenericPassword, 
                        _KCAddInternetPassword, _KCAddInternetPasswordWithPath, _KCAddItem, 
@@ -822,11 +822,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9C14FA0A-D905-375B-8C32-E311ED59B6AD
+    value:           43B82E77-CB0C-3A20-A9D8-6F6F6C0D5A2E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9DC7A28A-4E40-35EE-83DC-FCE5261B3630
+    value:           21264AC1-A680-3264-B89A-64C50F1C8AE4
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

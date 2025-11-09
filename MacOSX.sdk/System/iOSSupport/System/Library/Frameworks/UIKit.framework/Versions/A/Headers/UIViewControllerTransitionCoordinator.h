@@ -24,7 +24,7 @@ typedef NSString * UITransitionContextViewKey NS_TYPED_ENUM;
 // the custom transition to add or remove subviews to the container view.)
 @property(nonatomic, readonly, getter=isAnimated) BOOL animated;
 
-// A modal presentation style whose transition is being customized or UIModaPresentationNone if this is not a modal presentation
+// A modal presentation style whose transition is being customized or UIModalPresentationNone if this is not a modal presentation
 // or dismissal.
 @property(nonatomic, readonly) UIModalPresentationStyle presentationStyle;
 
@@ -82,7 +82,7 @@ typedef NSString * UITransitionContextViewKey NS_TYPED_ENUM;
 // Any animations specified will be run in the same animation context as the
 // transition. If the animations are occurring in a view that is a not
 // descendent of the containerView, then an ancestor view in which all of the
-// animations are occuring should be specified.  The completionBlock is invoked
+// animations are occurring should be specified.  The completionBlock is invoked
 // after the transition completes. (Note that this may not be after all the
 // animations specified by to call complete if the duration is not inherited.)
 // It is perfectly legitimate to only specify a completion block. This method

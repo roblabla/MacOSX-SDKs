@@ -3,17 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3F1D4D29-E0A3-3E81-8797-241735D8DEE7
+    value:           7382B5BE-D130-3D31-9E70-BF2DBF181A40
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4D0C99DB-6F05-32F9-9E7C-6EA7F71BB1EE
+    value:           1D732529-3B58-3105-B0F2-3D4CD36DAC00
 install-name:    '/System/Library/PrivateFrameworks/DynamicDesktop.framework/Versions/A/DynamicDesktop'
-current-version: 2092.20.4
+current-version: 2092.40.12
 swift-abi-version: 7
-allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ DesktopPictures, DesktopScreenEffectsPref, Dock, livedesktop ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s14DynamicDesktop010AppearanceB0V09canSelectC0Sbvg', '_$s14DynamicDesktop010AppearanceB0V09canSelectC0SbvpMV', 
@@ -169,6 +166,7 @@ exports:
                        '_$s14DynamicDesktop0B11PictureKindON', '_$s14DynamicDesktop0B11PictureKindOSHAAMc', 
                        '_$s14DynamicDesktop0B11PictureKindOSQAAMc', '_$s14DynamicDesktop0B11PictureKindOSYAAMc', 
                        '_$s14DynamicDesktop0B11PictureKindOs12CaseIterableAAMc', 
+                       '_$s14DynamicDesktop0B17PictureSystemPathSSSgyF', '_$s14DynamicDesktop0B18PictureDefaultPathSSyF', 
                        '_$s14DynamicDesktop0B7PictureMp', '_$s14DynamicDesktop0B7PicturePAAE9thumbnail3url5width7optionsSo10CGImageRefaSg10Foundation3URLV_SiAA12QueryOptionsVtF', 
                        '_$s14DynamicDesktop0B7PictureTL', '_$s14DynamicDesktop10AppearanceO21__derived_enum_equalsySbAC_ACtFZ', 
                        '_$s14DynamicDesktop10AppearanceO4hash4intoys6HasherVz_tF', 
@@ -231,6 +229,7 @@ exports:
                        '_$sSo16CGImageSourceRefa16EyeCandyGraphicsE4typeSSSgvpMV', 
                        '_$sSo16CGImageSourceRefa16EyeCandyGraphicsE5countSivg', '_$sSo16CGImageSourceRefa16EyeCandyGraphicsE5countSivpMV', 
                        '_$sSo16CGImageSourceRefa16EyeCandyGraphicsE5image2at7optionsSo0aC0aSgSi_SDySo08CFStringC0aypGSgtF', 
-                       '_$sSo16CGImageSourceRefa16EyeCandyGraphicsE8metaData2at7optionsAC09ImageMetaH0VSgSi_SDySo08CFStringC0aypGSgtF' ]
+                       '_$sSo16CGImageSourceRefa16EyeCandyGraphicsE8metaData2at7optionsAC09ImageMetaH0VSgSi_SDySo08CFStringC0aypGSgtF', 
+                       _DesktopPictureDefaultPath, _DesktopPictureSystemPath ]
     objc-classes:    [ DDDynamicDesktop ]
 ...

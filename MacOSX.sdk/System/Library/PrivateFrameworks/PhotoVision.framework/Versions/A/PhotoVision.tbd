@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C5999E9A-BC7A-3528-9344-1165A10979D4
+    value:           ACD6D879-16A4-3E6A-97E5-F2F37597AF62
   - target:          x86_64-maccatalyst
-    value:           C5999E9A-BC7A-3528-9344-1165A10979D4
+    value:           ACD6D879-16A4-3E6A-97E5-F2F37597AF62
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           32913A0B-B360-3525-A963-6BDA27EAF54E
+    value:           908CE044-D8F9-3C1A-9D48-E678015681B9
   - target:          arm64e-maccatalyst
-    value:           32913A0B-B360-3525-A963-6BDA27EAF54E
+    value:           908CE044-D8F9-3C1A-9D48-E678015681B9
 install-name:    '/System/Library/PrivateFrameworks/PhotoVision.framework/Versions/A/PhotoVision'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

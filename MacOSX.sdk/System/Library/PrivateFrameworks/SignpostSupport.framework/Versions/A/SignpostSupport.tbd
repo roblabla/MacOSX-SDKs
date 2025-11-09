@@ -4,28 +4,29 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E41823FB-9B33-33CB-9F1B-89EF8A60C13D
+    value:           298A551A-054E-3E21-BED6-8797296559C3
   - target:          x86_64-maccatalyst
-    value:           E41823FB-9B33-33CB-9F1B-89EF8A60C13D
+    value:           298A551A-054E-3E21-BED6-8797296559C3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           580A5C1A-E796-33B2-A88F-E1148836A172
+    value:           42FBB1F6-C3A7-3D02-B092-92B425822E07
   - target:          arm64e-maccatalyst
-    value:           580A5C1A-E796-33B2-A88F-E1148836A172
+    value:           42FBB1F6-C3A7-3D02-B092-92B425822E07
 install-name:    '/System/Library/PrivateFrameworks/SignpostSupport.framework/Versions/A/SignpostSupport'
-current-version: 53
+current-version: 60
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _IsPerfLoggingInterval, _PassesPerfLoggingWhitelist, _SSCAEventTypeForSignpost, 
                        _SSCAIntervalTypeForSignpostInterval, _SSCAIsCAMetadataSubsystemCategory, 
-                       _SSCAIsCAWindowServerInMemorySubsystemCategory, _SignpostPlatformForDevice, 
-                       _SignpostPlatformForString, _SignpostReporterCrossPlatformAppleAccountWhitelist, 
+                       _SignpostPlatformForDevice, _SignpostPlatformForString, _SignpostReporterCrossPlatformAppleAccountWhitelist, 
                        _SignpostReporterCrossPlatformAppleIDAuthenticationWhitelist, 
                        _SignpostReporterCrossPlatformAuthKitWhitelist, _SignpostReporterCrossPlatformSiriAudioStringPasslist, 
+                       _SignpostReporterCrossPlatformSiriHomeAutomationStringPasslist, 
+                       _SignpostReporterCrossPlatformSiriPersonalUpdateStringPasslist, 
                        _SignpostReporterCrossPlatformSiriPlaybackControlsStringPasslist, 
                        _SignpostReporterCrossPlatformSiriVideoUTSOperationRequestStringPasslist, 
                        _SignpostReporterShouldUseWhitelist, _SignpostReporterWhitelistedStringSet, 
@@ -37,8 +38,7 @@ exports:
                        _SignpostSupportSlidingWindowAveragesForIntervalsInNs, _SignpostSupportSortedSubArrayFromIntervals, 
                        _SignpostSupportStdDevMachContinuousTimeForIntervals, _SignpostSupportStdDevNsForIntervals, 
                        _SignpostSupportTotalDurationMachContinuousTimeForIntervals, 
-                       _SignpostSupportTotalDurationNsForIntervals, _SignpostSupportVersionNumber, 
-                       _SignpostSupportVersionString, _SignpostSystemTimebaseRatio, 
+                       _SignpostSupportTotalDurationNsForIntervals, _SignpostSystemTimebaseRatio, 
                        _StringForSignpostPlatform, _StringPassesSignpostReporterStringWhitelist, 
                        __SignpostSerializeableObjectFromSerializedObjectDictionary, 
                        __SignpostSupportSerializationDataFromObjectArray, __signpost_debug_log, 

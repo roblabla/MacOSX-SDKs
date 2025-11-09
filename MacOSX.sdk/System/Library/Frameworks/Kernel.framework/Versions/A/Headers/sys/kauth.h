@@ -724,7 +724,6 @@ void kprintf(const char *fmt, ...);
 /*
  * Initialisation.
  */
-extern lck_grp_t *kauth_lck_grp;
 
 
 #endif /* __APPLE_API_EVOLVING */

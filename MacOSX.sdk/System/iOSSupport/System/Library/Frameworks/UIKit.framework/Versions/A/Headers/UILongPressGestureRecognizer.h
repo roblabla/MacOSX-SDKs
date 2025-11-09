@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// Begins:  when numberOfTouchesRequired have tapped numberOfTapsRequired times and been held for minumPressDuration
+// Begins:  when numberOfTouchesRequired have tapped numberOfTapsRequired times and been held for minimumPressDuration
 // Changes: when a finger moves
 // Ends:    when a finger is lifted
 

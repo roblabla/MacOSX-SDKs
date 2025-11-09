@@ -8,8 +8,6 @@
 
 #import <TargetConditionals.h>
 
-
-#if (TARGET_OS_IPHONE || defined(__MAC_10_7))
 #import <AVFoundation/AVCaptureDataOutputSynchronizer.h>
 #import <AVFoundation/AVCaptureDevice.h>
 #import <AVFoundation/AVCaptureInput.h>
@@ -17,7 +15,6 @@
 #import <AVFoundation/AVCaptureSession.h>
 #import <AVFoundation/AVCaptureSystemPressure.h>
 #import <AVFoundation/AVCaptureVideoPreviewLayer.h>
-#endif
 
 #import <AVFoundation/AVMetadataObject.h>
 

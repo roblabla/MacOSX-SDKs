@@ -134,7 +134,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITabBar : UIView
 @protocol UITabBarDelegate<NSObject>
 @optional
 
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item; // called when a new view is selected by the user (but not programatically)
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item; // called when a new view is selected by the user (but not programmatically)
 
 /* called when user shows or dismisses customize sheet. you can use the 'willEnd' to set up what appears underneath. 
  changed is YES if there was some change to which items are visible or which order they appear. If selectedItem is no longer visible, 

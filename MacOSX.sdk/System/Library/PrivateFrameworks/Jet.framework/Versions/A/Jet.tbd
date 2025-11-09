@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           96EDD052-7F83-3D53-A322-E7573DAFFE47
+    value:           264D0552-7953-32FD-9CF4-D302CEAA05CF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8BED578A-7E3E-35D6-85AB-A9452D2F778D
+    value:           1D0AB220-A947-35FC-9D25-8243C8B13034
 install-name:    '/System/Library/PrivateFrameworks/Jet.framework/Versions/A/Jet'
-current-version: 8.21
+current-version: 8.22
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__117bad_function_callE ]

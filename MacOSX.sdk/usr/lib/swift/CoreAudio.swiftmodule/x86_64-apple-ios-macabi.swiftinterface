@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target x86_64-apple-ios14.3-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreAudio -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreAudio
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target x86_64-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreAudio -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreAudio
 @_exported import CoreAudio
 import Swift
 extension UnsafeBufferPointer {
@@ -42,17 +42,17 @@ extension UnsafeMutableAudioBufferListPointer : Swift.MutableCollection, Swift.R
     _read
     nonmutating _modify
   }
-  public typealias SubSequence = Swift.Slice<CoreAudio.UnsafeMutableAudioBufferListPointer>
   public typealias Iterator = Swift.IndexingIterator<CoreAudio.UnsafeMutableAudioBufferListPointer>
+  public typealias SubSequence = Swift.Slice<CoreAudio.UnsafeMutableAudioBufferListPointer>
 }
 extension AudioChannelLayout {
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public static func sizeInBytes(maximumDescriptions: Swift.Int) -> Swift.Int
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public static func allocate(maximumDescriptions: Swift.Int) -> CoreAudioTypes.AudioChannelLayout.UnsafeMutablePointer
 }
 extension AudioChannelLayout {
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public struct UnsafeMutablePointer {
     public init(_ p: Swift.UnsafeMutablePointer<CoreAudioTypes.AudioChannelLayout>)
     public init?(_ p: Swift.UnsafeMutablePointer<CoreAudioTypes.AudioChannelLayout>?)
@@ -66,32 +66,32 @@ extension AudioChannelLayout {
     public var unsafeMutablePointer: Swift.UnsafeMutablePointer<CoreAudioTypes.AudioChannelLayout>
   }
 }
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension AudioChannelLayout.UnsafeMutablePointer : Swift.MutableCollection, Swift.RandomAccessCollection {
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public typealias Element = CoreAudioTypes.AudioChannelDescription
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public typealias Index = Swift.Int
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public typealias Indices = Swift.Range<Swift.Int>
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public var startIndex: Swift.Int {
     get
   }
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public var endIndex: Swift.Int {
     get
   }
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   @_borrowed public subscript(index: CoreAudioTypes.AudioChannelLayout.UnsafeMutablePointer.Index) -> CoreAudioTypes.AudioChannelLayout.UnsafeMutablePointer.Element {
     _read
     nonmutating _modify
   }
-  public typealias SubSequence = Swift.Slice<CoreAudioTypes.AudioChannelLayout.UnsafeMutablePointer>
   public typealias Iterator = Swift.IndexingIterator<CoreAudioTypes.AudioChannelLayout.UnsafeMutablePointer>
+  public typealias SubSequence = Swift.Slice<CoreAudioTypes.AudioChannelLayout.UnsafeMutablePointer>
 }
 extension AudioChannelLayout {
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public struct UnsafePointer {
     public init(_ p: Swift.UnsafePointer<CoreAudioTypes.AudioChannelLayout>)
     public init?(_ p: Swift.UnsafePointer<CoreAudioTypes.AudioChannelLayout>?)
@@ -101,30 +101,30 @@ extension AudioChannelLayout {
     public var unsafePointer: Swift.UnsafePointer<CoreAudioTypes.AudioChannelLayout>
   }
 }
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension AudioChannelLayout.UnsafePointer : Swift.Collection, Swift.RandomAccessCollection {
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public typealias Element = CoreAudioTypes.AudioChannelDescription
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public typealias Index = Swift.Int
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public typealias Indices = Swift.Range<Swift.Int>
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public var startIndex: Swift.Int {
     get
   }
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public var endIndex: Swift.Int {
     get
   }
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   @_borrowed public subscript(index: CoreAudioTypes.AudioChannelLayout.UnsafePointer.Index) -> CoreAudioTypes.AudioChannelLayout.UnsafePointer.Element {
     _read
   }
   public typealias Iterator = Swift.IndexingIterator<CoreAudioTypes.AudioChannelLayout.UnsafePointer>
   public typealias SubSequence = Swift.Slice<CoreAudioTypes.AudioChannelLayout.UnsafePointer>
 }
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public struct ManagedAudioChannelLayout {
   public init(audioChannelLayoutPointer: CoreAudioTypes.AudioChannelLayout.UnsafePointer, deallocator: @escaping (CoreAudioTypes.AudioChannelLayout.UnsafePointer) -> Swift.Void)
   public init(tag: CoreAudioTypes.AudioChannelLayoutTag)
@@ -168,21 +168,21 @@ public struct ManagedAudioChannelLayout {
       _read
       _modify
     }
-    public typealias SubSequence = Swift.Slice<CoreAudio.ManagedAudioChannelLayout.ChannelDescriptions>
     public typealias Iterator = Swift.IndexingIterator<CoreAudio.ManagedAudioChannelLayout.ChannelDescriptions>
+    public typealias SubSequence = Swift.Slice<CoreAudio.ManagedAudioChannelLayout.ChannelDescriptions>
   }
 }
 extension AudioChannelDescription {
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public static func == (lhs: CoreAudioTypes.AudioChannelDescription, rhs: CoreAudioTypes.AudioChannelDescription) -> Swift.Bool
 }
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension ManagedAudioChannelLayout.ChannelDescriptions : Swift.Equatable {
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public static func == (lhs: CoreAudio.ManagedAudioChannelLayout.ChannelDescriptions, rhs: CoreAudio.ManagedAudioChannelLayout.ChannelDescriptions) -> Swift.Bool
 }
-@available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension ManagedAudioChannelLayout : Swift.Equatable {
-  @available(OSX 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
   public static func == (lhs: CoreAudio.ManagedAudioChannelLayout, rhs: CoreAudio.ManagedAudioChannelLayout) -> Swift.Bool
 }

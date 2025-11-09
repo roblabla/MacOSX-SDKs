@@ -67,7 +67,8 @@ typedef NS_ENUM(NSInteger, ADClientError) {
     ADClientErrorUnsupportedPlatform = 7
 } NS_ENUM_AVAILABLE(10_14, 7_1);
 
-NS_CLASS_AVAILABLE(10_14, 7_1) @interface ADClient : NSObject
+NS_DEPRECATED(10_14, 11_3, 7_1, 14_5, "This has been replaced by functionality in AdServices.framework's AAAttribution class.")
+@interface ADClient : NSObject
 
 /*!
  * @method sharedClient
@@ -78,7 +79,7 @@ NS_CLASS_AVAILABLE(10_14, 7_1) @interface ADClient : NSObject
  * @discussion
  * ADClient is a singleton object.
  */
-+ (ADClient *)sharedClient NS_AVAILABLE(10_14, 7_1);
++ (ADClient *)sharedClient NS_DEPRECATED(10_14, 11_3, 7_1, 14_5, "This has been replaced by functionality in AdServices.framework's AAAttribution class.");
 
 /*!
  * @method determineAppInstallationAttributionWithCompletionHandler:
@@ -98,7 +99,7 @@ NS_CLASS_AVAILABLE(10_14, 7_1) @interface ADClient : NSObject
  * response to seeing an iAd for the app.
  */
 
-- (void)determineAppInstallationAttributionWithCompletionHandler:(void (^)(BOOL appInstallationWasAttributedToiAd))completionHandler NS_DEPRECATED(10_14, 10_14, 7_1, 9_0, "Use requestAttributionDetailsWithBlock instead.");
+- (void)determineAppInstallationAttributionWithCompletionHandler:(void (^)(BOOL appInstallationWasAttributedToiAd))completionHandler NS_DEPRECATED(10_14, 10_14, 7_1, 9_0, "This has been replaced by functionality in AdServices.framework's AAAttribution class.");
 
 /*!
  * @method lookupAdConversionDetails:
@@ -113,7 +114,7 @@ NS_CLASS_AVAILABLE(10_14, 7_1) @interface ADClient : NSObject
  * Provides a way for an app to determine when an iAd was shown to the user
  * which resulted in the user's purchase of the app.
  */
-- (void)lookupAdConversionDetails:(void (^)(NSDate * _Nullable appPurchaseDate, NSDate * _Nullable iAdImpressionDate))completionHandler NS_DEPRECATED(10_14, 10_14, 8_0, 9_0, "Use requestAttributionDetailsWithBlock instead.");
+- (void)lookupAdConversionDetails:(void (^)(NSDate * _Nullable appPurchaseDate, NSDate * _Nullable iAdImpressionDate))completionHandler NS_DEPRECATED(10_14, 10_14, 8_0, 9_0, "This has been replaced by functionality in AdServices.framework's AAAttribution class.");
 
 /*!
  * @method requestAttributionDetailsWithBlock:
@@ -130,7 +131,7 @@ NS_CLASS_AVAILABLE(10_14, 7_1) @interface ADClient : NSObject
  * Provides a way for an app to determine when an iAd was shown to the user
  * which resulted in the user's purchase of the app.
  */
-- (void)requestAttributionDetailsWithBlock:(void (^)(NSDictionary<NSString *, NSObject *> * _Nullable attributionDetails, NSError * _Nullable error))completionHandler NS_AVAILABLE(10_14, 9_0);
+- (void)requestAttributionDetailsWithBlock:(void (^)(NSDictionary<NSString *, NSObject *> * _Nullable attributionDetails, NSError * _Nullable error))completionHandler NS_DEPRECATED(10_14, 11_3, 9_0, 14_5, "This has been replaced by functionality in AdServices.framework's AAAttribution class.");
 
 /*!
  * @method addClientToSegments:replaceExisting:

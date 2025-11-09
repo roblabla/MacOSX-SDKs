@@ -4,7 +4,7 @@
 */
  
 #import <Cocoa/Cocoa.h>
-#import <AvailabilityMacros.h>
+#import <Availability.h>
 #import <IOBluetooth/objc/IOBluetoothDevice.h>
 #import <IOBluetooth/objc/IOBluetoothSDPServiceRecord.h>
 #import <IOBluetoothUI/IOBluetoothUIUserLib.h>

@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7AADB19E-8EA2-3C9B-8699-F206DB47C6BE
+    value:           00F47B8F-A02B-37BF-B57F-129CF787F38B
   - target:          x86_64-maccatalyst
-    value:           7AADB19E-8EA2-3C9B-8699-F206DB47C6BE
+    value:           00F47B8F-A02B-37BF-B57F-129CF787F38B
   - target:          x86_64h-macos
-    value:           EAC298C4-CE3E-3551-A832-42ED9A13EF74
+    value:           895AFD1C-0307-32B3-81CB-BA33DA368DE1
   - target:          x86_64h-maccatalyst
-    value:           EAC298C4-CE3E-3551-A832-42ED9A13EF74
+    value:           895AFD1C-0307-32B3-81CB-BA33DA368DE1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           396F9604-7574-3C1B-ACA7-C7EB24FE3544
+    value:           BF802A59-20F4-3AAD-80A2-8F17D95EC542
   - target:          arm64e-maccatalyst
-    value:           396F9604-7574-3C1B-ACA7-C7EB24FE3544
+    value:           BF802A59-20F4-3AAD-80A2-8F17D95EC542
 install-name:    '/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation'
-current-version: 1770.255
+current-version: 1775.118.101
 compatibility-version: 150
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
@@ -33,7 +33,7 @@ exports:
                        '$ld$add$os10.6$_OBJC_IVAR_$_NSObject.isa', '$ld$add$os10.6$_OBJC_METACLASS_$_NSObject', 
                        '$ld$add$os10.7$_OBJC_CLASS_$_NSObject', '$ld$add$os10.7$_OBJC_IVAR_$_NSObject.isa', 
                        '$ld$add$os10.7$_OBJC_METACLASS_$_NSObject' ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CFAbsoluteTimeAddGregorianUnits, _CFAbsoluteTimeGetCurrent, 
                        _CFAbsoluteTimeGetDayOfWeek, _CFAbsoluteTimeGetDayOfYear, 
@@ -525,11 +525,12 @@ exports:
                        _NSURLUbiquitousItemDownloadingStatusCurrent, _NSURLUbiquitousItemDownloadingStatusDownloaded, 
                        _NSURLUbiquitousItemDownloadingStatusKey, _NSURLUbiquitousItemDownloadingStatusNotDownloaded, 
                        _NSURLUbiquitousItemHasUnresolvedConflictsKey, _NSURLUbiquitousItemIsDownloadedKey, 
-                       _NSURLUbiquitousItemIsDownloadingKey, _NSURLUbiquitousItemIsSharedKey, 
-                       _NSURLUbiquitousItemIsUploadedKey, _NSURLUbiquitousItemIsUploadingKey, 
-                       _NSURLUbiquitousItemPercentDownloadedKey, _NSURLUbiquitousItemPercentUploadedKey, 
-                       _NSURLUbiquitousItemUploadingErrorKey, _NSURLUbiquitousSharedItemCurrentUserPermissionsKey, 
-                       _NSURLUbiquitousSharedItemCurrentUserRoleKey, _NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey, 
+                       _NSURLUbiquitousItemIsDownloadingKey, _NSURLUbiquitousItemIsExcludedFromSyncKey, 
+                       _NSURLUbiquitousItemIsSharedKey, _NSURLUbiquitousItemIsUploadedKey, 
+                       _NSURLUbiquitousItemIsUploadingKey, _NSURLUbiquitousItemPercentDownloadedKey, 
+                       _NSURLUbiquitousItemPercentUploadedKey, _NSURLUbiquitousItemUploadingErrorKey, 
+                       _NSURLUbiquitousSharedItemCurrentUserPermissionsKey, _NSURLUbiquitousSharedItemCurrentUserRoleKey, 
+                       _NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey, 
                        _NSURLUbiquitousSharedItemOwnerNameComponentsKey, _NSURLUbiquitousSharedItemOwnerNameKey, 
                        _NSURLUbiquitousSharedItemPermissionsKey, _NSURLUbiquitousSharedItemPermissionsReadOnly, 
                        _NSURLUbiquitousSharedItemPermissionsReadWrite, _NSURLUbiquitousSharedItemReadOnlyPermissions, 
@@ -680,19 +681,18 @@ exports:
                        __CFPreferencesWriteManagedDomain, __CFPreferencesWriteManagedDomainForUser, 
                        __CFPreferencesWriteUserPreferencesWithCorrectOwner, __CFPrefsCopyAppDictionary, 
                        __CFPrefsCopyAppDictionaryWithContainer, __CFPrefsCopyDescriptionOfAllSearchLists, 
-                       __CFPrefsCopyUserForContainer, __CFPrefsDirectMode, __CFPrefsDirectModeEnabledForDomain, 
+                       __CFPrefsCopyDirectModeConnection, __CFPrefsCopyUserForContainer, 
+                       __CFPrefsDirectMode, __CFPrefsDirectModeEnabledForDomain, 
                        __CFPrefsDumpDescriptionOfAllSearchLists, __CFPrefsEnableWritingToExternalAppCloudPreferences, 
                        __CFPrefsExtractQuadrupleFromPathIfPossible, __CFPrefsGenerateDirectoryURLForTriplet_testing, 
                        __CFPrefsImpersonateApplicationWithIdentifierAndAuditToken, 
                        __CFPrefsImpersonateApplicationWithIdentifierAndContainerDataPath, 
-                       __CFPrefsImpersonateApplicationWithIdentifierAndPID, __CFPrefsInterruptConnectionOnceEachMessage, 
-                       __CFPrefsRegisterUserDefaultsInstance, __CFPrefsRegisterUserDefaultsInstanceWithCloudConfigurationURL, 
-                       __CFPrefsSetDirectModeEnabled, __CFPrefsSetEphemeralMultiUserEnabled, 
-                       __CFPrefsSetReadOnly, __CFPrefsSetSynchronizeIsSynchronous, 
-                       __CFPrefsSynchronizeForProcessTermination, __CFPrefsTestingCloudConfigurationOverrideURL, 
-                       __CFPrefsTestingFlushClientSideCacheEveryRead, __CFPrefsTestingFlushClientSideCacheEveryWrite, 
-                       __CFPrefsTestingInterruptObservationConnections, __CFPrefsTestingRandomlySynchronous, 
-                       __CFPrefsTestingSimulateOutOfDiskSpace, __CFPrefsTestingSimulateSlowFilesystem, 
+                       __CFPrefsImpersonateApplicationWithIdentifierAndPID, __CFPrefsRegisterUserDefaultsInstance, 
+                       __CFPrefsRegisterUserDefaultsInstanceWithCloudConfigurationURL, 
+                       __CFPrefsSetDirectModeConnection, __CFPrefsSetDirectModeEnabled, 
+                       __CFPrefsSetEphemeralMultiUserEnabled, __CFPrefsSetReadOnly, 
+                       __CFPrefsSetSynchronizeIsSynchronous, __CFPrefsSynchronizeForProcessTermination, 
+                       __CFPrefsTestingCloudConfigurationOverrideURL, __CFPrefsTestingFlags, 
                        __CFPrefsUnregisterUserDefaultsInstance, __CFPrintForDebugger, 
                        __CFProcessPath, __CFPropertListCreateFromFrozen, __CFPropertyListCopyShared, 
                        __CFPropertyListCopyTopLevelKeys, __CFPropertyListCreateFiltered, 
@@ -1149,11 +1149,12 @@ exports:
                        _kCFURLUbiquitousItemDownloadingStatusCurrent, _kCFURLUbiquitousItemDownloadingStatusDownloaded, 
                        _kCFURLUbiquitousItemDownloadingStatusKey, _kCFURLUbiquitousItemDownloadingStatusNotDownloaded, 
                        _kCFURLUbiquitousItemHasUnresolvedConflictsKey, _kCFURLUbiquitousItemIsDownloadedKey, 
-                       _kCFURLUbiquitousItemIsDownloadingKey, _kCFURLUbiquitousItemIsSharedKey, 
-                       _kCFURLUbiquitousItemIsUploadedKey, _kCFURLUbiquitousItemIsUploadingKey, 
-                       _kCFURLUbiquitousItemPercentDownloadedKey, _kCFURLUbiquitousItemPercentUploadedKey, 
-                       _kCFURLUbiquitousItemUploadingErrorKey, _kCFURLUbiquitousSharedItemCurrentUserPermissionsKey, 
-                       _kCFURLUbiquitousSharedItemCurrentUserRoleKey, _kCFURLUbiquitousSharedItemMostRecentEditorNameComponentsKey, 
+                       _kCFURLUbiquitousItemIsDownloadingKey, _kCFURLUbiquitousItemIsExcludedFromSyncKey, 
+                       _kCFURLUbiquitousItemIsSharedKey, _kCFURLUbiquitousItemIsUploadedKey, 
+                       _kCFURLUbiquitousItemIsUploadingKey, _kCFURLUbiquitousItemPercentDownloadedKey, 
+                       _kCFURLUbiquitousItemPercentUploadedKey, _kCFURLUbiquitousItemUploadingErrorKey, 
+                       _kCFURLUbiquitousSharedItemCurrentUserPermissionsKey, _kCFURLUbiquitousSharedItemCurrentUserRoleKey, 
+                       _kCFURLUbiquitousSharedItemMostRecentEditorNameComponentsKey, 
                        _kCFURLUbiquitousSharedItemOwnerNameComponentsKey, _kCFURLUbiquitousSharedItemOwnerNameKey, 
                        _kCFURLUbiquitousSharedItemPermissionsKey, _kCFURLUbiquitousSharedItemPermissionsReadOnly, 
                        _kCFURLUbiquitousSharedItemPermissionsReadWrite, _kCFURLUbiquitousSharedItemReadOnlyPermissions, 
@@ -1220,7 +1221,7 @@ exports:
                        _NSAutoCalendar.changedFirstWeekday, _NSAutoCalendar.changedGregorianStartDate, 
                        _NSAutoCalendar.changedLocale, _NSAutoCalendar.changedMinimumDaysinFirstWeek, 
                        _NSAutoCalendar.changedTimeZone, _NSAutoCalendar.combinedNoteCount ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, arm64-macos ]
     symbols:         [ _CFMachPortBoostGetTypeID, _CFXMLCreateStringByEscapingEntities, 
                        _CFXMLCreateStringByUnescapingEntities, _CFXMLNodeCreate, 
                        _CFXMLNodeCreateCopy, _CFXMLNodeGetInfoPtr, _CFXMLNodeGetString, 
@@ -1254,6 +1255,6 @@ exports:
                        _kCFServiceControllerUserDataKey, _kCFXMLTreeErrorDescription, 
                        _kCFXMLTreeErrorLineNumber, _kCFXMLTreeErrorLocation, _kCFXMLTreeErrorStatusCode ]
     objc-ivars:      [ NSMessageBuilder._addr, NSMessageBuilder._target ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ ___CFObjCIsCollectable ]
 ...

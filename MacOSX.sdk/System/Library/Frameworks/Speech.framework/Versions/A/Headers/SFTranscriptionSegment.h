@@ -26,7 +26,7 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 // Other possible interpretations of this segment
 @property (nonatomic, readonly) NSArray<NSString *> *alternativeSubstrings;
 
-@property (nonatomic, nullable, readonly) SFVoiceAnalytics *voiceAnalytics API_AVAILABLE(ios(13.0), macos(10.15));
+@property (nonatomic, nullable, readonly) SFVoiceAnalytics *voiceAnalytics API_AVAILABLE(ios(13.0), macos(10.15)) __deprecated_msg("voiceAnalytics is moved to SFSpeechRecognitionMetadata");
 
 @end
 

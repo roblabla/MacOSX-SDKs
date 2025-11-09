@@ -15,8 +15,6 @@ VZ_EXPORT NSErrorDomain const VZErrorDomain API_AVAILABLE(macos(11.0));
     Error type returned by the Virtualization framework.
     The NSError domain is VZErrorDomain, the code is one of the VZErrorCode constants.
 
-    When the error contains a debug description, it is set on the NSDebugDescriptionErrorKey of the userInfo dictionary.
-
     The virtualization framework can also reports errors from other domains when the error originates from a lower level component.
 
  @constant VZErrorInternal							Internal error such as the virtual machine unexpectely stopping.

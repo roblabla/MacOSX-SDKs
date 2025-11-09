@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           F9F54F31-DD19-3178-B646-9216323D4F1B
+    value:           94439317-0781-321D-89BF-4999F82157D8
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           03DC423A-E66D-3CB6-92CD-28AB047AB024
+    value:           583F47CE-A742-3346-9713-90BC3F984FD5
 install-name:    '/System/Library/PrivateFrameworks/MaterialKit.framework/Versions/A/MaterialKit'
 allowable-clients:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -15,11 +15,11 @@ allowable-clients:
                        BatteryCenterUITest, BatteryWidget, CarPlay, ChargingViewService, 
                        ChronoUIServices, ControlCenterUI, ControlCenterUIKit, CoverSheet, 
                        HomeUI, LoginUI, MaterialKitTester, MaterialKitTests, MediaControls, 
-                       MediaRemoteUI, MusicUIService, NotificationCenter, Pegasus, 
-                       PencilKit, PlatterKit, PreBoard, RecentsAppPopover, ScreenTimeSettingsUI, 
-                       ScreenTimeUI, SearchUI, Setup, Sharing, SharingViewService, 
-                       Siri, SiriUI, SleepLockScreen, SpotlightUIInternal, SpringBoard, 
-                       SpringBoard-Tests, SpringBoardCore, SpringBoardFoundation, 
+                       MediaRemoteUI, MusicUIService, NotificationCenter, PassKitUI, 
+                       Pegasus, PencilKit, PlatterKit, PreBoard, RecentsAppPopover, 
+                       ScreenTimeSettingsUI, ScreenTimeUI, SearchUI, Setup, Sharing, 
+                       SharingViewService, Siri, SiriUI, SleepLockScreen, SpotlightUIInternal, 
+                       SpringBoard, SpringBoard-Tests, SpringBoardCore, SpringBoardFoundation, 
                        SpringBoardHome, SpringBoardUI, TVRemoteUI, TVSystemUI, UserNotificationsUIKit, 
                        UserNotificationsUIKitTests, WidgetConfigurationExtension, 
                        Widgets, WorkflowUI, WorkflowUIServices ]

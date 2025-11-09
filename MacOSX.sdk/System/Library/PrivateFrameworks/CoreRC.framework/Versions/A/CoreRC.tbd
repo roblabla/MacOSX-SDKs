@@ -1,15 +1,17 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
+  - target:          x86_64-macos
+    value:           29845C1F-C7E6-32ED-BF1C-9519965420C7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F4706D27-018A-321A-B529-B8759CAB0ADC
+    value:           8D718485-35C0-382B-B1CB-D8D05A830F87
 install-name:    '/System/Library/PrivateFrameworks/CoreRC.framework/Versions/A/CoreRC'
-current-version: 163
+current-version: 163.100.5
 exports:
-  - targets:         [ arm64e-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CECAbortReasonString, _CECAddressPreferredForDevice, _CECAddressString, 
                        _CECAllDeviceTypesMaskForCoreCECDeviceTypesMask, _CECDeckControlModeForCoreCECDeckControlMode, 
                        _CECDeckControlModeString, _CECDeckInfoForCoreCECDeckInfo, 

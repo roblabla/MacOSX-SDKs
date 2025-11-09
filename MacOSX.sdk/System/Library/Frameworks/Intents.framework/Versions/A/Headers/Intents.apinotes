@@ -732,6 +732,29 @@ SwiftVersions:
     - Selector: 'resolveEntitiesForQueryHome:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveEntities(forQueryHome:with:)'
+  - Name: INReportIncidentIntentHandling
+    Methods:
+    - Selector: 'confirmReportIncident:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(reportIncident:completion:)'
+    - Selector: 'handleReportIncident:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(reportIncident:completion:)'
+    - Selector: 'resolveAdditionalDetailsForReportIncident:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveAdditionalDetails(forReportIncident:with:)'
+    - Selector: 'resolveIncidentTypeForReportIncident:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveIncidentType(forReportIncident:with:)'
+    - Selector: 'resolveIsClearForReportIncident:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveIsClear(forReportIncident:with:)'
+    - Selector: 'resolveStartTimeForReportIncident:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveStartTime(forReportIncident:with:)'
+    - Selector: 'resolveUserLocationForReportIncident:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveUserLocation(forReportIncident:with:)'
   - Name: INRequestPaymentIntentHandling
     Methods:
     - Selector: 'confirmRequestPayment:completion:'

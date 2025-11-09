@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           94F571D9-72EF-300E-98C4-27EC14F99F57
+    value:           389598ED-902F-3DAB-9523-E0795BE3A6B7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0619EE08-9344-33A0-B797-BE1F9C7D27E8
+    value:           20A20A99-73E2-3A35-99A0-E46494449DDD
 install-name:    '/System/Library/PrivateFrameworks/PreferencePanesSupport.framework/Versions/A/PreferencePanesSupport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -21,9 +21,9 @@ exports:
                        _setSwipeScrollDirection, _swipeScrollDirection ]
     objc-classes:    [ AccountsPrefFormatter, BTPointingDevicePairController, IOServiceObserver, 
                        IndicatorImageView, IndicatorSecureTextField, IndicatorTextField, 
-                       InputDeviceController, InputDeviceNibController, MTMouseGesturesBackEnd, 
-                       MTTGestureBackEnd, MultitouchDeviceObserver, NSTickLabelsView, 
-                       NSUpActionSlider, PPFTableRowView, PPFlexibleSpaceSpecifier, 
+                       InputDeviceController, InputDeviceNibController, InputDeviceUtil, 
+                       MTMouseGesturesBackEnd, MTTGestureBackEnd, MultitouchDeviceObserver, 
+                       NSTickLabelsView, NSUpActionSlider, PPFTableRowView, PPFlexibleSpaceSpecifier, 
                        PPGesture, PPGestureChoicesPopupCell, PPGestureMovieView, 
                        PPGestureRow, PPGestureView, PPGestureViewController, PPProgressSpecifier, 
                        PPSGestureRow, PPSGestureRowView, PPSecPrivacyExtension, PPSecPrivacyExtensionContext, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CA4614E4-626A-3C54-BDB0-3D864CBFDF69
+    value:           11A725E1-13DE-388D-B2E7-CD467C8567FD
   - target:          x86_64-maccatalyst
-    value:           CA4614E4-626A-3C54-BDB0-3D864CBFDF69
+    value:           11A725E1-13DE-388D-B2E7-CD467C8567FD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A6203E76-B75B-3B5F-9B75-0B70F6BE2F2D
+    value:           CE7913BB-8A77-3E46-9E95-F752861DB4FE
   - target:          arm64e-maccatalyst
-    value:           A6203E76-B75B-3B5F-9B75-0B70F6BE2F2D
+    value:           CE7913BB-8A77-3E46-9E95-F752861DB4FE
 install-name:    '/System/Library/PrivateFrameworks/NetworkServiceProxy.framework/Versions/A/NetworkServiceProxy'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

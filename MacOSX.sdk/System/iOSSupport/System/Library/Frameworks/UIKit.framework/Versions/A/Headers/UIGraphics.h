@@ -29,7 +29,7 @@ UIKIT_EXTERN void UIRectClip(CGRect rect);
 // UIImage context
 
 // The following methods will only return a 8-bit per channel context in the DeviceRGB color space.
-// Any new bitmap drawing code is encouraged to use UIGraphicsImageRenderer in leiu of this API.
+// Any new bitmap drawing code is encouraged to use UIGraphicsImageRenderer in lieu of this API.
 UIKIT_EXTERN void     UIGraphicsBeginImageContext(CGSize size);
 UIKIT_EXTERN void     UIGraphicsBeginImageContextWithOptions(CGSize size, BOOL opaque, CGFloat scale) API_AVAILABLE(ios(4.0));
 UIKIT_EXTERN UIImage* __nullable UIGraphicsGetImageFromCurrentImageContext(void);

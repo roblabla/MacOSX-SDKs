@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, UIPageControlInteractionState) {
-    /// The default interaction state, where no interaction has occured.
+    /// The default interaction state, where no interaction has occurred.
     UIPageControlInteractionStateNone        = 0,
     /// The interaction state for which the page was changed via a single, discrete interaction.
     UIPageControlInteractionStateDiscrete    = 1,

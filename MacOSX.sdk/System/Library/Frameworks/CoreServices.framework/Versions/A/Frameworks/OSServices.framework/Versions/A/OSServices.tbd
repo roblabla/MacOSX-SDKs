@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           870F34BE-C0ED-318B-858D-5F1E4757D552
+    value:           4B4148C5-9CFB-3AA1-89B0-0EB988C0BCD2
   - target:          x86_64-maccatalyst
-    value:           870F34BE-C0ED-318B-858D-5F1E4757D552
+    value:           4B4148C5-9CFB-3AA1-89B0-0EB988C0BCD2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EFFA0C4E-A0C1-3970-BE40-A0A46A35C180
+    value:           99622793-6045-36D0-B959-EB6FD06202C0
   - target:          arm64e-maccatalyst
-    value:           EFFA0C4E-A0C1-3970-BE40-A0A46A35C180
+    value:           99622793-6045-36D0-B959-EB6FD06202C0
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices'
-current-version: 1122.11
+current-version: 1122.33
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

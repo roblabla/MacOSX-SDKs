@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           46E63F55-D2DB-3FDC-A9B2-AC1EF2BB3A70
+    value:           26A89BB8-632F-3BA9-A44A-27AFF5A18B83
   - target:          x86_64-maccatalyst
-    value:           46E63F55-D2DB-3FDC-A9B2-AC1EF2BB3A70
+    value:           26A89BB8-632F-3BA9-A44A-27AFF5A18B83
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           94B5B29A-C1A9-3DF3-ABC9-E9F8437884F8
+    value:           CBA39224-23AE-3CE1-9DFF-27F2480BDE35
   - target:          arm64e-maccatalyst
-    value:           94B5B29A-C1A9-3DF3-ABC9-E9F8437884F8
+    value:           CBA39224-23AE-3CE1-9DFF-27F2480BDE35
 install-name:    '/System/Library/PrivateFrameworks/AppSSO.framework/Versions/A/AppSSO'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

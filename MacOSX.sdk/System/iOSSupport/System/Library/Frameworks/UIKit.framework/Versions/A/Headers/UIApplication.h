@@ -284,7 +284,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIApplication : UIResponder
 
 @protocol UIStateRestoring;
 @interface UIApplication (UIStateRestoration)
-// These methods are used to inform the system that state restoration is occuring asynchronously after the application
+// These methods are used to inform the system that state restoration is occurring asynchronously after the application
 // has processed its restoration archive on launch. In the even of a crash, the system will be able to detect that it may
 // have been caused by a bad restoration archive and arrange to ignore it on a subsequent application launch.
 - (void)extendStateRestoration  API_AVAILABLE(ios(6.0));
@@ -508,6 +508,7 @@ UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsNewss
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsBluetoothCentralsKey     NS_SWIFT_NAME(bluetoothCentrals) API_AVAILABLE(ios(7.0)); // userInfo contains an NSArray of CBCentralManager restore identifiers
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsBluetoothPeripheralsKey  NS_SWIFT_NAME(bluetoothPeripherals) API_AVAILABLE(ios(7.0)); // userInfo contains an NSArray of CBPeripheralManager restore identifiers
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsShortcutItemKey          NS_SWIFT_NAME(shortcutItem) API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos); // userInfo contains the UIApplicationShortcutItem used to launch the app.
+UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsEventAttributionKey      NS_SWIFT_NAME(eventAttribution) API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos, tvos); // userInfo contains a UIEventAttribution to go along with a URL open on launch
 
 // Key in options dict passed to application:[will | did]FinishLaunchingWithOptions and info for UIApplicationDidFinishLaunchingNotification
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsUserActivityDictionaryKey    NS_SWIFT_NAME(userActivityDictionary) API_AVAILABLE(ios(8.0)); // Sub-Dictionary present in launch options when user activity is present
@@ -520,6 +521,7 @@ UIKIT_EXTERN NSString *const UIApplicationOpenSettingsURLString API_AVAILABLE(io
 UIKIT_EXTERN UIApplicationOpenURLOptionsKey const UIApplicationOpenURLOptionsSourceApplicationKey NS_SWIFT_NAME(sourceApplication) API_AVAILABLE(ios(9.0));   // value is an NSString containing the bundle ID of the originating application; non-nil if the originating application and this application share the same team identifier
 UIKIT_EXTERN UIApplicationOpenURLOptionsKey const UIApplicationOpenURLOptionsAnnotationKey NS_SWIFT_NAME(annotation) API_AVAILABLE(ios(9.0));   // value is a property-list typed object corresponding to what the originating application passed in UIDocumentInteractionController's annotation property
 UIKIT_EXTERN UIApplicationOpenURLOptionsKey const UIApplicationOpenURLOptionsOpenInPlaceKey NS_SWIFT_NAME(openInPlace) API_AVAILABLE(ios(9.0));   // value is a bool NSNumber. Copy the file before use if this value is NO, or is not present.
+UIKIT_EXTERN UIApplicationOpenURLOptionsKey const UIApplicationOpenURLOptionsEventAttributionKey NS_SWIFT_NAME(eventAttribution) API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos, tvos); // value is a UIEventAttribution to go along with the URL to open
 
 // This notification is posted after the user takes a screenshot (for example by pressing both the home and lock screen buttons)
 UIKIT_EXTERN NSNotificationName const UIApplicationUserDidTakeScreenshotNotification API_AVAILABLE(ios(7.0));
@@ -532,6 +534,9 @@ UIKIT_EXTERN UIApplicationExtensionPointIdentifier const UIApplicationKeyboardEx
 // Option for openURL:options:CompletionHandler: only open URL if it is a valid universal link with an application configured to open it
 // If there is no application configured, or the user disabled using it to open the link, completion handler called with NO
 UIKIT_EXTERN UIApplicationOpenExternalURLOptionsKey const UIApplicationOpenURLOptionUniversalLinksOnly API_AVAILABLE(ios(10.0));
+
+// Option for openURL:options:CompletionHandler: to provide an event attribution to go along with the openURL call.
+UIKIT_EXTERN UIApplicationOpenExternalURLOptionsKey const UIApplicationOpenExternalURLOptionsEventAttributionKey NS_SWIFT_NAME(eventAttribution) API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos, tvos); // value is a UIEventAttribution
 
 NS_ASSUME_NONNULL_END
 

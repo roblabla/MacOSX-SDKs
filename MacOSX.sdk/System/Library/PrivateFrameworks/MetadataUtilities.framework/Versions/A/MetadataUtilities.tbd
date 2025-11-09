@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2D4DAC79-B8D3-3E03-916A-9AA50BEC2958
+    value:           AF41D884-70D2-393B-8DB7-C023C4105D0A
   - target:          x86_64-maccatalyst
-    value:           2D4DAC79-B8D3-3E03-916A-9AA50BEC2958
+    value:           AF41D884-70D2-393B-8DB7-C023C4105D0A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6492B11C-ADF5-36E5-B951-8D8214264EFC
+    value:           31701956-355F-3BA9-BEF1-35EBE7953A02
   - target:          arm64e-maccatalyst
-    value:           6492B11C-ADF5-36E5-B951-8D8214264EFC
+    value:           31701956-355F-3BA9-BEF1-35EBE7953A02
 install-name:    '/System/Library/PrivateFrameworks/MetadataUtilities.framework/Versions/A/MetadataUtilities'
-current-version: 2150.6
+current-version: 2150.16
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -57,23 +57,24 @@ exports:
                        __MDPlistBytesGetByteVector, __MDPlistBytesGetByteVectorCount, 
                        __MDPlistBytesGetMappedByteVector, __MDPlistBytesGetTypeID, 
                        __MDPlistBytesSetShouldDeallocate, __MDPlistBytesSetShouldUseMalloc, 
-                       __MDPlistContainerAddBooleanValue, __MDPlistContainerAddCString, 
-                       __MDPlistContainerAddDataValue, __MDPlistContainerAddDateValue, 
-                       __MDPlistContainerAddDoubleValue, __MDPlistContainerAddFloatValue, 
-                       __MDPlistContainerAddInt32Value, __MDPlistContainerAddInt64Value, 
-                       __MDPlistContainerAddNullValue, __MDPlistContainerAddObject, 
-                       __MDPlistContainerAddPlistObject, __MDPlistContainerAddUUIDValue, 
-                       __MDPlistContainerBeginArray, __MDPlistContainerBeginContainer, 
-                       __MDPlistContainerBeginDictionary, __MDPlistContainerCopyDispatchData, 
-                       __MDPlistContainerCopyObject, __MDPlistContainerCopyObjectAtKeyArray, 
-                       __MDPlistContainerCopyObjectAtKeyPath, __MDPlistContainerCopyObjectsAtKeyPath, 
-                       __MDPlistContainerCopyObjectsAtPlistObject, __MDPlistContainerCopyRootObject, 
-                       __MDPlistContainerCreateCopy, __MDPlistContainerCreateMutable, 
-                       __MDPlistContainerCreateMutableWithStaticBuffer, __MDPlistContainerCreateWithBytes, 
-                       __MDPlistContainerCreateWithBytesAndDeallocator, __MDPlistContainerCreateWithCopiedBytes, 
-                       __MDPlistContainerCreateWithObject, __MDPlistContainerEndArray, 
-                       __MDPlistContainerEndContainer, __MDPlistContainerEndDictionary, 
-                       __MDPlistContainerGetBytes, __MDPlistContainerGetLength, __MDPlistContainerGetPlistObjectAtKeyArray, 
+                       __MDPlistBytesValidate, __MDPlistContainerAddBooleanValue, 
+                       __MDPlistContainerAddCString, __MDPlistContainerAddDataValue, 
+                       __MDPlistContainerAddDateValue, __MDPlistContainerAddDoubleValue, 
+                       __MDPlistContainerAddFloatValue, __MDPlistContainerAddInt32Value, 
+                       __MDPlistContainerAddInt64Value, __MDPlistContainerAddNullValue, 
+                       __MDPlistContainerAddObject, __MDPlistContainerAddPlistObject, 
+                       __MDPlistContainerAddUUIDValue, __MDPlistContainerBeginArray, 
+                       __MDPlistContainerBeginContainer, __MDPlistContainerBeginDictionary, 
+                       __MDPlistContainerCopyDispatchData, __MDPlistContainerCopyObject, 
+                       __MDPlistContainerCopyObjectAtKeyArray, __MDPlistContainerCopyObjectAtKeyPath, 
+                       __MDPlistContainerCopyObjectsAtKeyPath, __MDPlistContainerCopyObjectsAtPlistObject, 
+                       __MDPlistContainerCopyRootObject, __MDPlistContainerCreateCopy, 
+                       __MDPlistContainerCreateMutable, __MDPlistContainerCreateMutableWithStaticBuffer, 
+                       __MDPlistContainerCreateWithBytes, __MDPlistContainerCreateWithBytesAndDeallocator, 
+                       __MDPlistContainerCreateWithCopiedBytes, __MDPlistContainerCreateWithObject, 
+                       __MDPlistContainerEndArray, __MDPlistContainerEndContainer, 
+                       __MDPlistContainerEndDictionary, __MDPlistContainerGetBytes, 
+                       __MDPlistContainerGetLength, __MDPlistContainerGetPlistObjectAtKeyArray, 
                        __MDPlistContainerGetPlistObjectAtKeyPath, __MDPlistContainerGetTypeID, 
                        __MDPlistContainerHasObjectAtKeyPath, __MDPlistContainerWillUseMalloc, 
                        __MDPlistDataGetBytePtr, __MDPlistDateGetValue, __MDPlistDictionaryGetCount, 

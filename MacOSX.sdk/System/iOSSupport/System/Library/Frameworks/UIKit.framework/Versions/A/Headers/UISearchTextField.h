@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @note
 /// Because the system drives selection and keyboard behaviors through the UITextInput protocol, and UISearchTextField supports selecting tokens, UISearchTextField assigns UITextPositions to tokens as well as text. If the current selection includes any tokens, their positions are part of the range returned by `UISearchTextField.selectedTextRange`. Use the `textualRange` property to obtain the range of the text field that excludes any tokens.
 ///
-/// Tokens can be programatically selected by including their position in a range assigned to the `selectedTextRange` property. UISearchTextField does not support placing an insertion point before a token; attempting to do so will select the token instead.
+/// Tokens can be programmatically selected by including their position in a range assigned to the `selectedTextRange` property. UISearchTextField does not support placing an insertion point before a token; attempting to do so will select the token instead.
 UIKIT_CLASS_AVAILABLE_IOS_ONLY(13.0)
 @interface UISearchTextField : UITextField
 

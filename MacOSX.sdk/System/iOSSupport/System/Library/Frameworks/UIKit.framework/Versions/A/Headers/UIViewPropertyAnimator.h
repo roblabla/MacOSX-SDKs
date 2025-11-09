@@ -25,7 +25,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) @interface UIViewPropertyAnimator : NSObje
 /// Defaults to YES. Raises if set on an active animator.
 @property(nonatomic, getter=isUserInteractionEnabled) BOOL userInteractionEnabled;
 
-/// Defaults to NO. Set if you need to manage the the hittesting of animating view hierarchies
+/// Defaults to NO. Set if you need to manage the the hit-testing of animating view hierarchies
 @property(nonatomic, getter=isManualHitTestingEnabled) BOOL manualHitTestingEnabled;
 
 /// Defaults to YES. Raises if set on an active animator.

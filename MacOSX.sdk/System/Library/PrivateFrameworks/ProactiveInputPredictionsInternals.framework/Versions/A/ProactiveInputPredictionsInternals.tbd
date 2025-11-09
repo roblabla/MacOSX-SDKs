@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           52431E91-69C8-3316-A20F-F6C2A2650BE6
+    value:           42E10E38-B359-3EEF-9C87-B1CA2F16CE08
   - target:          x86_64-maccatalyst
-    value:           52431E91-69C8-3316-A20F-F6C2A2650BE6
+    value:           42E10E38-B359-3EEF-9C87-B1CA2F16CE08
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6EC252F4-563D-38EF-8A05-FAB8470224EF
+    value:           E685EA86-CC48-3EE5-AAFA-CE7CA4A60608
   - target:          arm64e-maccatalyst
-    value:           6EC252F4-563D-38EF-8A05-FAB8470224EF
+    value:           E685EA86-CC48-3EE5-AAFA-CE7CA4A60608
 install-name:    '/System/Library/PrivateFrameworks/ProactiveInputPredictionsInternals.framework/Versions/A/ProactiveInputPredictionsInternals'
 current-version: 1115.255
 exports:

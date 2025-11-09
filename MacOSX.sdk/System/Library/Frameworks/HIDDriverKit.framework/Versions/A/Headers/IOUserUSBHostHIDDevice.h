@@ -1,6 +1,6 @@
-/* iig(DriverKit-107.60.3) generated from IOUserUSBHostHIDDevice.iig */
+/* iig(DriverKit-107.100.6) generated from IOUserUSBHostHIDDevice.iig */
 
-/* IOUserUSBHostHIDDevice.iig:1-41 */
+/* IOUserUSBHostHIDDevice.iig:1-46 */
 /*
  * Copyright (c) 1998-2006 Apple Computer, Inc. All rights reserved.
  *
@@ -42,7 +42,12 @@ typedef enum {
     USBIdlePolicyTypePipe,
 } USBIdlePolicyType;
 
-/* source class IOUserUSBHostHIDDevice IOUserUSBHostHIDDevice.iig:42-340 */
+typedef enum {
+    kIOHIDActionTypeOutputReport,
+    kIOHIDActionTypeOutputRequest
+} HIDActionType;
+
+/* source class IOUserUSBHostHIDDevice IOUserUSBHostHIDDevice.iig:47-349 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -336,6 +341,10 @@ protected:
 private:
     
     kern_return_t initPipes () LOCALONLY;
+
+    OSAction * getAction (HIDActionType type) LOCALONLY;
+
+    void returnAction (OSAction * action) LOCALONLY;
     
     kern_return_t getHIDDescriptorInfo (uint8_t type, const IOUSBHostHIDDescriptorInfo ** info, uint8_t * index) LOCALONLY;
     
@@ -351,7 +360,7 @@ private:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOUserUSBHostHIDDevice IOUserUSBHostHIDDevice.iig:42-340 */
+/* generated class IOUserUSBHostHIDDevice IOUserUSBHostHIDDevice.iig:47-349 */
 
 #define IOUserUSBHostHIDDevice_CompleteInputReport_ID            0x40e1addf867de565ULL
 #define IOUserUSBHostHIDDevice_CompleteOutputReport_ID            0x49e4339f54eece76ULL
@@ -425,6 +434,14 @@ public:\
     kern_return_t\
     initPipes(\
 );\
+\
+    OSAction *\
+    getAction(\
+        HIDActionType type);\
+\
+    void\
+    returnAction(\
+        OSAction * action);\
 \
     kern_return_t\
     getHIDDescriptorInfo(\
@@ -1065,6 +1082,6 @@ public:
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOUserUSBHostHIDDevice.iig:342- */
+/* IOUserUSBHostHIDDevice.iig:351- */
 
 #endif	// _HIDDRIVERKIT_IOUSERUSBHOSTHIDDEVICE_H

@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           99421243-019F-3A2F-A671-092026FA2F74
+    value:           928FC136-F5E1-3865-8384-AB5B7A626C7C
   - target:          x86_64-maccatalyst
-    value:           99421243-019F-3A2F-A671-092026FA2F74
+    value:           928FC136-F5E1-3865-8384-AB5B7A626C7C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           718942B7-C0EF-3B33-861B-5BA79D5A1A92
+    value:           F5398BAC-647B-3EAE-8517-78D14CC3EE61
   - target:          arm64e-maccatalyst
-    value:           718942B7-C0EF-3B33-861B-5BA79D5A1A92
+    value:           F5398BAC-647B-3EAE-8517-78D14CC3EE61
 install-name:    '/System/Library/Frameworks/Accounts.framework/Versions/A/Accounts'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ACAccountCredentialsDidChangeNotification, _ACAccountDataclassAvailability, 
                        _ACAccountDataclassBackToMyMac, _ACAccountDataclassBackToMyMacDeprecated, 
@@ -28,9 +28,9 @@ exports:
                        _ACAccountDataclassCloudPhotos, _ACAccountDataclassContacts, 
                        _ACAccountDataclassContactsSearch, _ACAccountDataclassContent, 
                        _ACAccountDataclassCoreRoutine, _ACAccountDataclassDeviceLocator, 
-                       _ACAccountDataclassHealth, _ACAccountDataclassHome, _ACAccountDataclassKeyValue, 
-                       _ACAccountDataclassKeychainSync, _ACAccountDataclassMail, 
-                       _ACAccountDataclassMediaStream, _ACAccountDataclassMessages, 
+                       _ACAccountDataclassFitnessPlus, _ACAccountDataclassHealth, 
+                       _ACAccountDataclassHome, _ACAccountDataclassKeyValue, _ACAccountDataclassKeychainSync, 
+                       _ACAccountDataclassMail, _ACAccountDataclassMediaStream, _ACAccountDataclassMessages, 
                        _ACAccountDataclassNetworkVPN, _ACAccountDataclassNews, _ACAccountDataclassNotes, 
                        _ACAccountDataclassNotifications, _ACAccountDataclassPhotos, 
                        _ACAccountDataclassProtectedCloudStorage, _ACAccountDataclassReminders, 

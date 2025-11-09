@@ -25,7 +25,7 @@ API_UNAVAILABLE(tvos)
 // dismissal of the view.
 - (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController API_DEPRECATED_WITH_REPLACEMENT("presentationControllerShouldDismiss:", ios(8.0, 13.0));;
 
-// Called on the delegate when the user has taken action to dismiss the popover. This is not called when the popover is dimissed programatically.
+// Called on the delegate when the user has taken action to dismiss the popover. This is not called when the popover is dismissed programatically.
 - (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController API_DEPRECATED_WITH_REPLACEMENT("presentationControllerDidDismiss:", ios(8.0, 13.0));
 
 // -popoverPresentationController:willRepositionPopoverToRect:inView: is called on your delegate when the

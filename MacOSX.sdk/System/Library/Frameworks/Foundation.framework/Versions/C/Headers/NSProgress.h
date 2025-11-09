@@ -274,6 +274,7 @@ FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindD
 FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindDecompressingAfterDownloading API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindReceiving API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindCopying API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindUploading API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 /* A user info dictionary key. The value must be an NSURL identifying the item on which progress is being made. This is required for any NSProgress that is published using -publish to be reported to subscribers registered with +addSubscriberForFileURL:withPublishingHandler:.
 */

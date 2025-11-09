@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F4A3C9C3-67EE-315B-86AC-947DDF6D16EB
+    value:           2B0ED037-FB1E-3D45-98D4-F69277AFDDF5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           459E5CDD-B72F-321E-BEC2-EA9800A84FAE
+    value:           51D2B674-E5EB-3468-A801-0717AB8C67DC
 install-name:    '/System/Library/PrivateFrameworks/WiFiCloudSyncEngine.framework/Versions/A/WiFiCloudSyncEngine'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -20,7 +20,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UISceneConfiguration : NSObject
 // If no matching name is found, or no descriptions of the provided sessionType exist in your Info.plist,
 // then an instance with a nil sceneSubclass, delegateClass, and storyboard is returned.
 // The name parameter passed in is used to lookup a predefined configuration from your app's Info.plist.
-// the returned UISceneConfiguration instance is not guarenteed to share the value of the parameter.
+// the returned UISceneConfiguration instance is not guaranteed to share the value of the parameter.
 + (instancetype)configurationWithName:(nullable NSString *)name sessionRole:(UISceneSessionRole)sessionRole;
 - (instancetype)initWithName:(nullable NSString *)name sessionRole:(UISceneSessionRole)sessionRole NS_DESIGNATED_INITIALIZER;
 

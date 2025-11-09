@@ -58,7 +58,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIScreen : NSObject <UITraitEnvi
 @property(nonatomic,readonly,getter=isCaptured) BOOL captured API_AVAILABLE(ios(11.0)); // True if this screen is being captured (e.g. recorded, AirPlayed, mirrored, etc.)
 
 @property(nonatomic) CGFloat brightness API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos);        // 0 .. 1.0, where 1.0 is maximum brightness. Only supported by main screen.
-@property(nonatomic) BOOL wantsSoftwareDimming API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos); // Default is NO. If YES, brightness levels lower than that of which the hardware is capable are emulated in software, if neccessary. Having enabled may entail performance cost.
+@property(nonatomic) BOOL wantsSoftwareDimming API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos); // Default is NO. If YES, brightness levels lower than that of which the hardware is capable are emulated in software, if necessary. Having enabled may entail performance cost.
 
 @property (readonly) id <UICoordinateSpace> coordinateSpace API_AVAILABLE(ios(8.0));
 @property (readonly) id <UICoordinateSpace> fixedCoordinateSpace API_AVAILABLE(ios(8.0));

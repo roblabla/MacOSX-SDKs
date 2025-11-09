@@ -85,7 +85,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UITableViewFocusUpdateContext : 
 @end
 
 //_______________________________________________________________________________________________________________
-// this represents the display and behaviour of the cells.
+// this represents the display and behavior of the cells.
 
 @protocol UITableViewDelegate<NSObject, UIScrollViewDelegate>
 
@@ -106,7 +106,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UITableViewFocusUpdateContext : 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section;
 
-// Use the estimatedHeight methods to quickly calcuate guessed values which will allow for fast load times of the table.
+// Use the estimatedHeight methods to quickly calculate guessed values which will allow for fast load times of the table.
 // If these methods are implemented, the above -tableView:heightForXXX calls will be deferred until views are ready to be displayed, so more expensive logic can be placed there.
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(7.0));
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section API_AVAILABLE(ios(7.0));

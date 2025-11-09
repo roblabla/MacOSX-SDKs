@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           54387457-A60B-3390-AD6D-3B380792CD79
+    value:           B863AF9A-44A2-3FBF-BFB1-77AD47302FED
   - target:          x86_64-maccatalyst
-    value:           54387457-A60B-3390-AD6D-3B380792CD79
+    value:           B863AF9A-44A2-3FBF-BFB1-77AD47302FED
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           75205B54-301C-32A2-9F78-5CA68144EDD4
+    value:           CEF97DFC-9A98-3F31-800C-DFB7CE15CB5B
   - target:          arm64e-maccatalyst
-    value:           75205B54-301C-32A2-9F78-5CA68144EDD4
+    value:           CEF97DFC-9A98-3F31-800C-DFB7CE15CB5B
 install-name:    '/usr/lib/libmis.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MISAppApprovalState, _MISBlacklistOverriddenByUser, _MISBlacklistSetOverride, 
                        _MISCopyErrorStringForErrorCode, _MISCopyErrorStringForErrorCodeUnlocalized, 

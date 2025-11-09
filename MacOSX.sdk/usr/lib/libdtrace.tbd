@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A6783B6D-F46F-3F2B-A7B6-743EE78D6303
+    value:           4E989CDC-1D41-3F79-A122-0877EF4B86F3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B8B183FA-C3B6-3CDB-AE6E-67D27C2080B4
+    value:           10CCC0BE-E18C-3E1A-BE6C-2C59B360DAB4
 install-name:    '/usr/lib/libdtrace.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ __dtrace_disallow_dsym, __dtrace_version, _ctf_type_name, 
                        _demangleSymbolCString, _dtrace_addr2str, _dtrace_aggregate_clear, 
                        _dtrace_aggregate_print, _dtrace_aggregate_snap, _dtrace_aggregate_walk, 

@@ -76,6 +76,46 @@ AVF_EXPORT NSNotificationName const AVSampleBufferRenderSynchronizerRateDidChang
 */
 - (void)setRate:(float)rate time:(CMTime)time;
 
+/*!
+	@method			setRate:time:atHostTime:
+	@abstract		Simultaneously sets the playback rate and the relationship between the current time and host time.
+	@param			rate
+		A new timebase rate to set.  Must be greater than or equal to 0.0
+	@param			time
+		A new timebase time to set.  Must be greater than or equal to kCMTimeZero, or kCMTimeInvalid
+	@param			hostTime
+		A new hostTime to set.  Must be greater than or equal to kCMTimeZero, or kCMTimeInvalid
+	@discussion
+		You can use this function to synchronize playback with an external activity.
+ 
+		The timebase is adjusted so that its time will be (or was) time when host time is (or was) hostTime.
+		In other words: if hostTime is in the past, the timebase's time will be interpolated as though the timebase has been running at the requested rate since that time.  If hostTime is in the future, the timebase will immediately start running at the requested rate from an earlier time so that it will reach the requested time at the requested hostTime.
+		It is a responsibility of the client to ensure that proper time and hostTime is set.  This method will not attempt to validate improper time, hostTime values.
+		In addition, it is also the caller’s responsibility to enqueue samples in the connected renderers that match the timeline defined here.
+		Note that any buffers that are in the past of the defined timeline will still be processed by the renderers.
+
+		The recommended approach is to use the output presentation time of the first buffer enqueued in the renderers as time and and an associated hostTime in the future.
+		Example use:
+		CMTime startTime = …;
+		__block CMTime nextBufferTime = startTime;
+		[renderer requestMediaDataWhenReadyOnQueue:queue usingBlock:^{
+			…
+			CMSampleBufferRef sampleBuffer = [self generateSampleBufferFor: nextBufferTime];
+			[renderer enqueueSampleBuffer:sampleBuffer];
+			...
+		}];
+		CMTime inOneSecond = CMTimeAdd(CMClockGetTime(CMClockGetHostTimeClock()), CMTimeMake(1, 1));
+		[synchronizer setRate:rate time:startTime atHostTime:inOneSecond];
+*/
+- (void)setRate:(float)rate time:(CMTime)time atHostTime:(CMTime)hostTime API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4));
+
+/*!
+    @property	delaysRateChangeUntilHasSufficientMediaData
+    @abstract	Indicates whether the playback should be started immediately on rate change request.
+    @discussion	If set to YES, playback will be delayed if the value of hasSufficientMediaDataForReliablePlaybackStart of any added renderer is NO. If set to NO, playback will attempt to start immediately regardless of the value of hasSufficientMediaDataForReliablePlaybackStart of added renderers. Default is YES.
+ */
+@property (nonatomic) BOOL delaysRateChangeUntilHasSufficientMediaData API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4));
+
 @end
 
 @interface AVSampleBufferRenderSynchronizer (AVSampleBufferRenderSynchronizerRendererManagement)

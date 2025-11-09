@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C18D2E57-A964-380F-A74B-AEFDB3B3ADEC
+    value:           97EEC578-04C8-3632-AE33-071D2048326F
   - target:          x86_64-maccatalyst
-    value:           C18D2E57-A964-380F-A74B-AEFDB3B3ADEC
+    value:           97EEC578-04C8-3632-AE33-071D2048326F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           138EC2D6-6250-3E1C-AC0E-B78B4E5D9802
+    value:           CD2E6EAA-041A-3AAC-89C8-440209C34790
   - target:          arm64e-maccatalyst
-    value:           138EC2D6-6250-3E1C-AC0E-B78B4E5D9802
+    value:           CD2E6EAA-041A-3AAC-89C8-440209C34790
 install-name:    '/System/Library/PrivateFrameworks/CoreWiFi.framework/Versions/A/CoreWiFi'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

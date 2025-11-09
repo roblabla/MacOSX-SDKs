@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FC90CD4E-614F-3673-9E13-81B0DF025909
+    value:           B58795E7-66FF-3B08-8009-8071AF0E4B9F
   - target:          x86_64-maccatalyst
-    value:           FC90CD4E-614F-3673-9E13-81B0DF025909
+    value:           B58795E7-66FF-3B08-8009-8071AF0E4B9F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A85F9CF6-4BE2-3BD8-AF8C-30D555C3AEBD
+    value:           B858DA17-06FD-385E-B5EA-580311EAFD0F
   - target:          arm64e-maccatalyst
-    value:           A85F9CF6-4BE2-3BD8-AF8C-30D555C3AEBD
+    value:           B858DA17-06FD-385E-B5EA-580311EAFD0F
 install-name:    '/usr/lib/swift/libswiftCloudKit.dylib'
-current-version: 962
+current-version: 982
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCloudKit.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCloudKit.dylib', 

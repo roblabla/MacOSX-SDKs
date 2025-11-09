@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9038B76F-84D4-3E13-A735-B831585A02CD
+    value:           1112E220-2503-3629-A8D9-E67076284994
   - target:          x86_64-maccatalyst
-    value:           9038B76F-84D4-3E13-A735-B831585A02CD
+    value:           1112E220-2503-3629-A8D9-E67076284994
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DA83F64F-36B8-3526-B27C-1CC36CAD113D
+    value:           01A5A644-F32B-3EAF-84AA-0FC97C76DB2A
   - target:          arm64e-maccatalyst
-    value:           DA83F64F-36B8-3526-B27C-1CC36CAD113D
+    value:           01A5A644-F32B-3EAF-84AA-0FC97C76DB2A
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Versions/A/AVConference'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -136,10 +136,12 @@ exports:
                        _VCFecHeaderV1EnableThreshold, _VCHeifHevcLivePhotosEnableThreshold, 
                        _VCHevcWifiTiersEnableThreshold, _VCHighFecEnableThreshold, 
                        _VCLinkProbingCapabilityVersion, _VCLinkProbingConnectionLockdownPeriod, 
-                       _VCLinkProbingEnvelopeAttackFactor, _VCLinkProbingEnvelopeDecayFactor, 
-                       _VCLinkProbingExponentialMovingMeanFactor, _VCLinkProbingFeatureThreshold, 
-                       _VCLinkProbingInterval, _VCLinkProbingPLRBuckets, _VCLinkProbingQueryResultsInterval, 
-                       _VCLinkProbingTimeout, _VCLowFpsVideoEnableThreshold, _VCLowNetworkModeEnableThreshold, 
+                       _VCLinkProbingDuplicationWaitTimeout, _VCLinkProbingEnvelopeAttackFactor, 
+                       _VCLinkProbingEnvelopeDecayFactor, _VCLinkProbingExponentialMovingMeanFactor, 
+                       _VCLinkProbingFeatureThreshold, _VCLinkProbingIdenticalQueryResultMax, 
+                       _VCLinkProbingInterval, _VCLinkProbingLockdownPeriod, _VCLinkProbingPLRBuckets, 
+                       _VCLinkProbingQueryResultsInterval, _VCLinkProbingTimeout, 
+                       _VCLowFpsVideoEnableThreshold, _VCLowNetworkModeEnableThreshold, 
                        _VCMaxBitrate2GDownlink, _VCMaxBitrate2GUplink, _VCMaxBitrate3GDownlink, 
                        _VCMaxBitrate3GUplink, _VCMaxBitrateLTEDownlink, _VCMaxBitrateLTEUplink, 
                        _VCMaxBitrateNonExpensiveDownlink, _VCMaxBitrateNonExpensiveUplink, 

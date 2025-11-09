@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           93D2192D-7A27-3FD4-B3AB-A4DCBF8419B7
+    value:           D8521DF0-1AA2-3157-AE32-7C88AB78C803
   - target:          x86_64-maccatalyst
-    value:           93D2192D-7A27-3FD4-B3AB-A4DCBF8419B7
+    value:           D8521DF0-1AA2-3157-AE32-7C88AB78C803
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           44F30AE5-8DC1-3726-8D6E-8811972BDB60
+    value:           2A184E5F-21E6-3CDF-A08E-DE721305B1DD
   - target:          arm64e-maccatalyst
-    value:           44F30AE5-8DC1-3726-8D6E-8811972BDB60
+    value:           2A184E5F-21E6-3CDF-A08E-DE721305B1DD
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList'
 current-version: 144
 parent-umbrella:
@@ -26,13 +26,13 @@ allowable-clients:
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Foundation ]
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SFLListChangeNotification, _SFLListLaunchNotification, _SFLServiceName, 
                        _kSFLDefaultsDomain ]
     objc-classes:    [ SFLBookmark, SFLDefaults, SFLItem, SFLManager, SFLResolveResult, 
                        _SFLItem, _SFLList ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _LSSharedFileListAddObserver, _LSSharedFileListAddObserverOnQueue, 
                        _LSSharedFileListCopyProperty, _LSSharedFileListCopySnapshot, 
                        _LSSharedFileListCreate, _LSSharedFileListGetSeedValue, _LSSharedFileListGetTypeID, 

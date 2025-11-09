@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           17B6E55D-2C71-316F-BC77-8C2B25E6C215
+    value:           DCC1FD80-585D-3C03-930D-6B513E55F955
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           537F2E88-1D99-3E2D-A2EC-1EA2C9DC1540
+    value:           F420FD57-2201-356F-A998-AEC7AF5EBBAE
 install-name:    '/System/Library/PrivateFrameworks/DFRBrightness.framework/Versions/A/DFRBrightness'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

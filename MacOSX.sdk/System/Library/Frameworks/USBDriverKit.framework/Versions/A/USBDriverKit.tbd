@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F66EC318-C01C-306D-BBE6-A1946EFB03C2
+    value:           0E399D29-3B05-3C0E-B19D-83487C2BA459
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           40BA8A90-6469-365D-8CF2-5112D4F046C1
+    value:           237331BA-3D64-342A-8721-360474F2431E
 install-name:    '/System/Library/Frameworks/USBDriverKit.framework/Versions/A/USBDriverKit'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _IOUSBGetBillboardDescriptor, _IOUSBGetConfigurationMaxPowerMilliAmps, 
                        _IOUSBGetContainerIDDescriptor, _IOUSBGetEndpointAddress, 
                        _IOUSBGetEndpointBurstSize, _IOUSBGetEndpointDirection, _IOUSBGetEndpointIntervalEncodedMicroframes, 

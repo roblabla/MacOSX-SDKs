@@ -3,24 +3,22 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B43E844D-C730-3CC7-816A-3DB6215EA4E4
+    value:           EFC08175-B89A-36D3-A42B-64BAD92B20DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D3CCC8A1-5BD4-3F5B-9C87-841CE4A0BE00
+    value:           7853D4FE-C3FF-3C1B-AA4A-136CBE0582BD
 install-name:    '/usr/lib/swift/libswiftSceneKit.dylib'
 current-version: 1.1
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftSceneKit.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftSceneKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftSceneKit.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftSceneKit.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftSceneKit.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftSceneKit.dylib' ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
-    symbols:         [ '_$sSo10SCNVector3V8SceneKitE19_bridgeToObjectiveCSo7NSValueCyF', 
+                       '$ld$install_name$os10.9$@rpath/libswiftSceneKit.dylib', '_$sSo10SCNVector3V8SceneKitE19_bridgeToObjectiveCSo7NSValueCyF', 
                        '_$sSo10SCNVector3V8SceneKitE26_forceBridgeFromObjectiveC_6resultySo7NSValueC_ABSgztFZ', 
                        '_$sSo10SCNVector3V8SceneKitE34_conditionallyBridgeFromObjectiveC_6resultSbSo7NSValueC_ABSgztFZ', 
                        '_$sSo10SCNVector3V8SceneKitE36_unconditionallyBridgeFromObjectiveCyABSo7NSValueCSgFZ', 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7C56489D-F0A5-3492-8428-F16FA7C9FB0C
+    value:           8CBB4309-89E9-3A3E-B528-AFFA7FC72841
   - target:          x86_64-maccatalyst
-    value:           7C56489D-F0A5-3492-8428-F16FA7C9FB0C
+    value:           8CBB4309-89E9-3A3E-B528-AFFA7FC72841
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FA9DAA9-6C1C-370D-A1CC-1B2D96D3BD6C
+    value:           7CD95579-F58E-3C5D-A8B9-7F63A6435332
   - target:          arm64e-maccatalyst
-    value:           5FA9DAA9-6C1C-370D-A1CC-1B2D96D3BD6C
+    value:           7CD95579-F58E-3C5D-A8B9-7F63A6435332
 install-name:    '/System/Library/PrivateFrameworks/PhoneNumbers.framework/Versions/A/PhoneNumbers'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -30,17 +30,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0DF4C527-E7D3-30E0-9402-4C43B29729CB
+    value:           43716B80-9EF9-336A-B736-19E9425A7BFA
   - target:          x86_64-maccatalyst
-    value:           0DF4C527-E7D3-30E0-9402-4C43B29729CB
+    value:           43716B80-9EF9-336A-B736-19E9425A7BFA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1D5F5EF2-789C-36F5-A115-BB140EEBBF59
+    value:           F135DEDA-8E3D-32EB-92BC-E685F29F3236
   - target:          arm64e-maccatalyst
-    value:           1D5F5EF2-789C-36F5-A115-BB140EEBBF59
+    value:           F135DEDA-8E3D-32EB-92BC-E685F29F3236
 install-name:    '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

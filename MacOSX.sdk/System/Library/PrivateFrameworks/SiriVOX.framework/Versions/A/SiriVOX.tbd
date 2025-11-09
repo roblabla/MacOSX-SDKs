@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7B69A979-34FB-37F6-BB76-05395EE6827F
+    value:           A8AD0DE7-EB17-3B99-B0E3-5AC254E5AE25
   - target:          x86_64-maccatalyst
-    value:           7B69A979-34FB-37F6-BB76-05395EE6827F
+    value:           A8AD0DE7-EB17-3B99-B0E3-5AC254E5AE25
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           08DD246B-AA27-3AAE-A258-65F11DCF5741
+    value:           76203E1E-9D5E-3E86-ABD4-3D9F9685B220
   - target:          arm64e-maccatalyst
-    value:           08DD246B-AA27-3AAE-A258-65F11DCF5741
+    value:           76203E1E-9D5E-3E86-ABD4-3D9F9685B220
 install-name:    '/System/Library/PrivateFrameworks/SiriVOX.framework/Versions/A/SiriVOX'
 current-version: 0
 compatibility-version: 0
@@ -23,19 +23,17 @@ exports:
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SVXActivationContextKey, _SVXActivationSourceGetFromName, 
                        _SVXActivationSourceGetIsValid, _SVXActivationSourceGetIsValidAndSpecified, 
-                       _SVXActivationSourceGetName, _SVXAudioPowerTypeGetFromName, 
-                       _SVXAudioPowerTypeGetIsValid, _SVXAudioPowerTypeGetIsValidAndSpecified, 
-                       _SVXAudioPowerTypeGetName, _SVXAudioPowerUpdateFrequencyGetFromName, 
-                       _SVXAudioPowerUpdateFrequencyGetIsValid, _SVXAudioPowerUpdateFrequencyGetIsValidAndSpecified, 
-                       _SVXAudioPowerUpdateFrequencyGetName, _SVXBooleanGetFromName, 
-                       _SVXBooleanGetIsValid, _SVXBooleanGetIsValidAndSpecified, 
-                       _SVXBooleanGetName, _SVXBundleGetAssistantServicesFramework, 
-                       _SVXBundleGetIntentsFramework, _SVXBundleGetLocalizedString, 
-                       _SVXBundleGetSiriCoreFramework, _SVXBundleGetSiriVOXFramework, 
-                       _SVXButtonEventKey, _SVXButtonEventTypeGetFromName, _SVXButtonEventTypeGetIsValid, 
-                       _SVXButtonEventTypeGetIsValidAndSpecified, _SVXButtonEventTypeGetName, 
-                       _SVXClientInfoGetCurrent, _SVXClientInfoIsCurrent, _SVXClientInfoKey, 
-                       _SVXDeactivationContextKey, _SVXDeactivationSourceGetFromName, 
+                       _SVXActivationSourceGetName, _SVXAlarmAndTimerFiringContextCreateSpeechSynthesisRequest, 
+                       _SVXAlarmAndTimerFiringContextGetIsSpeakable, _SVXAlarmAndTimerFiringContextKey, 
+                       _SVXAudioPowerTypeGetFromName, _SVXAudioPowerTypeGetIsValid, 
+                       _SVXAudioPowerTypeGetIsValidAndSpecified, _SVXAudioPowerTypeGetName, 
+                       _SVXAudioPowerUpdateFrequencyGetFromName, _SVXAudioPowerUpdateFrequencyGetIsValid, 
+                       _SVXAudioPowerUpdateFrequencyGetIsValidAndSpecified, _SVXAudioPowerUpdateFrequencyGetName, 
+                       _SVXBooleanGetFromName, _SVXBooleanGetIsValid, _SVXBooleanGetIsValidAndSpecified, 
+                       _SVXBooleanGetName, _SVXButtonEventKey, _SVXButtonEventTypeGetFromName, 
+                       _SVXButtonEventTypeGetIsValid, _SVXButtonEventTypeGetIsValidAndSpecified, 
+                       _SVXButtonEventTypeGetName, _SVXClientInfoGetCurrent, _SVXClientInfoIsCurrent, 
+                       _SVXClientInfoKey, _SVXDeactivationContextKey, _SVXDeactivationSourceGetFromName, 
                        _SVXDeactivationSourceGetIsValid, _SVXDeactivationSourceGetIsValidAndSpecified, 
                        _SVXDeactivationSourceGetName, _SVXDeactivationSourceKey, 
                        _SVXDeviceSetupContextKey, _SVXDeviceSetupCreateOptionsArray, 
@@ -103,12 +101,13 @@ exports:
                        _SVXTaskOriginGetName, _SiriVOXErrorCodeGetFromName, _SiriVOXErrorCodeGetIsValid, 
                        _SiriVOXErrorCodeGetIsValidAndSpecified, _SiriVOXErrorCodeGetName, 
                        _SiriVOXErrorDomain ]
-    objc-classes:    [ SVXActivationContext, SVXAnnouncer, SVXButtonEvent, SVXClientInfo, 
-                       SVXClientServiceConnection, SVXClientServiceManager, SVXDaemon, 
-                       SVXDeactivationContext, SVXDeviceSetupContext, SVXDeviceSetupFlow, 
-                       SVXDeviceSetupFlowDisplayKeyFrame, SVXDeviceSetupFlowScene, 
-                       SVXDeviceSetupFlowSceneBuilder, SVXDeviceSetupFlowSiriCapabilitiesHint, 
-                       SVXDeviceSetupOptions, SVXPlatformDependency, SVXQueuePerformer, 
+    objc-classes:    [ SVXActivationContext, SVXAlarmAndTimerFiringContext, SVXAnnouncer, 
+                       SVXButtonEvent, SVXClientInfo, SVXClientServiceConnection, 
+                       SVXClientServiceManager, SVXDaemon, SVXDeactivationContext, 
+                       SVXDeviceSetupContext, SVXDeviceSetupFlow, SVXDeviceSetupFlowDisplayKeyFrame, 
+                       SVXDeviceSetupFlowScene, SVXDeviceSetupFlowSceneBuilder, SVXDeviceSetupFlowSiriCapabilitiesHint, 
+                       SVXDeviceSetupOptions, SVXMyriadDeviceManager, SVXMyriadEndpointDevice, 
+                       SVXMyriadHostDevice, SVXPlatformDependency, SVXQueuePerformer, 
                        SVXServiceCommandResult, SVXSpeechSynthesisConfiguration, 
                        SVXSpeechSynthesisRequest, SVXSpeechSynthesisResult, SVXSpeechSynthesisUtteranceInfo, 
                        SVXSpeechSynthesisWordTiming, SVXStoreDemo, SVXSystemEvent, 

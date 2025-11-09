@@ -4,22 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A0E0E052-AA68-3CDD-912F-30ABFEDABF96
+    value:           4B922B77-F03E-3942-B944-E8A34A062E7B
   - target:          x86_64-maccatalyst
-    value:           A0E0E052-AA68-3CDD-912F-30ABFEDABF96
+    value:           4B922B77-F03E-3942-B944-E8A34A062E7B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C6FA89E8-EF53-391D-81DE-4791D90FDD10
+    value:           2872026B-57E2-3D9F-9BFC-E193088F17FC
   - target:          arm64e-maccatalyst
-    value:           C6FA89E8-EF53-391D-81DE-4791D90FDD10
+    value:           2872026B-57E2-3D9F-9BFC-E193088F17FC
 install-name:    '/System/Library/PrivateFrameworks/CoreAccessories.framework/Versions/A/CoreAccessories'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _ACCConnectionInfoFilterAllowConnectionType, _ACCConnectionInfoFilterAllowEndpointProtocol, 
+    symbols:         [ _ACCConnectionInfoConfigStreamCategories, _ACCConnectionInfoConfigStreamCategoryProperties, 
+                       _ACCConnectionInfoFilterAllowConnectionType, _ACCConnectionInfoFilterAllowEndpointProtocol, 
                        _ACCConnectionInfoFilterAllowEndpointTransport, _ACCPlatformApplicationNotificationStateChanged, 
                        _ACCPlatformApplicationStateDisplayIDKey, _ACCPlatformApplicationStateKey, 
                        _ACCPlatformApplicationStateProcessIDKey, _ACCPlatformIAPDBridge_PrimaryPortNumber, 
@@ -64,18 +65,21 @@ exports:
                        _ACCUserDefaultsIapdKey_PretendBatteryLevel, _ACCUserDefaultsIapdNotification, 
                        _ACCUserDefaultsKey_ACCAuthProtocolAllowMutualAuth, _ACCUserDefaultsKey_ACCAuthProtocolMaxMessageSize, 
                        _ACCUserDefaultsKey_ACCAuthProtocolPretendAuth, _ACCUserDefaultsKey_ACCAuthProtocolRoleSupport, 
-                       _ACCUserDefaultsKey_AllowACCAuthProtocolOnAllTransport, _ACCUserDefaultsKey_BypassTrustDialog, 
+                       _ACCUserDefaultsKey_AllowACCAuthProtocolOnAllTransport, _ACCUserDefaultsKey_AllowNFCColorOverride, 
+                       _ACCUserDefaultsKey_BypassTrustDialog, _ACCUserDefaultsKey_DeviceIdentityPreArmDateOverride, 
                        _ACCUserDefaultsKey_DisableACCAuthProtocolOnInductive, _ACCUserDefaultsKey_DisableWirelessCTA, 
                        _ACCUserDefaultsKey_EnableACCAuthProtocolOnNFC, _ACCUserDefaultsKey_EnableTrustDialog, 
                        _ACCUserDefaultsKey_ForceAuthFail, _ACCUserDefaultsKey_KnownAccessories, 
-                       _ACCUserDefaultsKey_NFCAnalyticsDate, _ACCUserDefaultsKey_ShowHiddenAccessories, 
+                       _ACCUserDefaultsKey_NFCAnalyticsDate, _ACCUserDefaultsKey_NFCColorOverride, 
+                       _ACCUserDefaultsKey_NFCSecondaryColorOverride, _ACCUserDefaultsKey_ShowHiddenAccessories, 
                        _ACCUserDefaultsNotification, _CoreAccessoriesInitForHID, 
                        _CoreAccessoriesVersionNumber, _CoreAccessoriesVersionString, 
                        _NSObjectIfNotNull, _acc_policies_allowACCAuthProtocolOnAllTransport, 
-                       _acc_policies_allowACCAuthProtocolOnTransport, _acc_policies_endpointRequiresChargingCurrentLimit, 
+                       _acc_policies_allowACCAuthProtocolOnTransport, _acc_policies_deviceDidPreArmDeviceIdentity, 
+                       _acc_policies_deviceNeedsPreArmDeviceIdentity, _acc_policies_endpointRequiresChargingCurrentLimit, 
                        _acc_policies_endpointRequiresUserAuthorization, _acc_policies_isTransportSupervised, 
-                       _acc_policies_shouldFailAuthOnOOBPairingFailure, _acc_policies_shouldHideAccessoryWithModelNumber, 
-                       _acc_policies_shouldOverrideNameOnAccessoryWithModelNumber, 
+                       _acc_policies_productTypeNeedsPreArmDeviceIdentity, _acc_policies_shouldFailAuthOnOOBPairingFailure, 
+                       _acc_policies_shouldHideAccessoryWithModelNumber, _acc_policies_shouldOverrideNameOnAccessoryWithModelNumber, 
                        _acc_policies_shouldResetLightningBusWhenTransportIsNoLongerRestricted, 
                        _acc_strings_bundle, _acc_strings_bundleCF, _acc_strings_copyPlaceholder_Unknown, 
                        _acc_strings_placeholder_Unknown, _acc_transportClient_copyAccessoryInfoForConnectionWithUUID, 
@@ -220,10 +224,12 @@ exports:
                        _kCFACCUserDefaultsKey_ACCAuthProtocolAllowMutualAuth, _kCFACCUserDefaultsKey_ACCAuthProtocolMaxMessageSize, 
                        _kCFACCUserDefaultsKey_ACCAuthProtocolPretendAuth, _kCFACCUserDefaultsKey_ACCAuthProtocolRoleSupport, 
                        _kCFACCUserDefaultsKey_AllowACCAuthProtocolOnAllTransport, 
-                       _kCFACCUserDefaultsKey_AuthenticationOverride, _kCFACCUserDefaultsKey_DisableACCAuthProtocolOnInductive, 
+                       _kCFACCUserDefaultsKey_AllowNFCColorOverride, _kCFACCUserDefaultsKey_AuthenticationOverride, 
+                       _kCFACCUserDefaultsKey_DeviceIdentityPreArmDateOverride, _kCFACCUserDefaultsKey_DisableACCAuthProtocolOnInductive, 
                        _kCFACCUserDefaultsKey_DisableWirelessCTA, _kCFACCUserDefaultsKey_EnableACCAuthProtocolOnNFC, 
                        _kCFACCUserDefaultsKey_EnableTrustDialog, _kCFACCUserDefaultsKey_ForceAuthFail, 
                        _kCFACCUserDefaultsKey_MaxOutboundiAP2PacketSize, _kCFACCUserDefaultsKey_NFCAnalyticsDate, 
+                       _kCFACCUserDefaultsKey_NFCColorOverride, _kCFACCUserDefaultsKey_NFCSecondaryColorOverride, 
                        _kCFACCVehicleInfoActiveConnectorKey, _kCFACCVehicleInfoAlerts, 
                        _kCFACCVehicleInfoBarometricPressure, _kCFACCVehicleInfoChargeLevelElectricKey, 
                        _kCFACCVehicleInfoChargingParameterKey, _kCFACCVehicleInfoConsumptionParameterKey, 
@@ -254,7 +260,12 @@ exports:
                        _kCFWiFiSharing_WiFiNetworkInformationStatus, _kCFWiFiSharing_WiFiNetworkInformationWifiBSSID, 
                        _kCFWiFiSharing_WiFiNetworkInformationWifiPassphrase, _kCFWiFiSharing_WiFiNetworkInformationWifiSSID, 
                        _readJSONFile, _removeBidirectionalUnicodeCharacters, _signVeridianChallenge, 
-                       _trimBidirectionalUnicodeCharacters, _writeJSONFile ]
+                       _systemInfo_copyDeviceClass, _systemInfo_copyProductType, 
+                       _systemInfo_copyRegionCode, _systemInfo_getCurrentUnixTime, 
+                       _systemInfo_getCurrentUnixTimeMS, _systemInfo_isDeveloperBuild, 
+                       _systemInfo_isHomePod, _systemInfo_isInternalBuild, _systemInfo_systemSupportsPearl, 
+                       _systemInfo_systemSupportsWAPI, _trimBidirectionalUnicodeCharacters, 
+                       _writeJSONFile ]
     objc-classes:    [ ACCAppLinksIconInfo, ACCCarPlay, ACCConnectionInfo, ACCExternalAccessoryProvider, 
                        ACCHWComponentAuth, ACCTransportClient, ACCTransportClientBridge, 
                        ACCTransportPlugin, ACCUserDefaults, _ACCExternalAccessoryInfo ]

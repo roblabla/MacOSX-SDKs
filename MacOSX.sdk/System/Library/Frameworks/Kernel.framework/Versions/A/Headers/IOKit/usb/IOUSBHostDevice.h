@@ -338,7 +338,6 @@ public:
     virtual bool attach(IOService* provider);
     virtual bool start(IOService* provider);
     virtual bool terminate(IOOptionBits options = 0);
-    virtual bool willTerminate(IOService* provider, IOOptionBits options);
     virtual void stop(IOService* provider);
     virtual void free(void);
 
@@ -844,6 +843,7 @@ protected:
 
     struct tExpansionData
     {
+        IOTimerEventSource* _lifecycleTimer;
         OSDictionary*       _lpmLatencyCache;
         tUSBDeviceLPMStatus _lpmU1Status;
         tUSBDeviceLPMStatus _lpmU2Status;

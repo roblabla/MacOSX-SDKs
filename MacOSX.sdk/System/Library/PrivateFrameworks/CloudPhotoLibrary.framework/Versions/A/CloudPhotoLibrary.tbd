@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8769658F-BB12-3DA0-BE5B-AEF843C61FCB
+    value:           31520376-06C5-3EA2-8160-BDB746FF6F27
   - target:          x86_64-maccatalyst
-    value:           8769658F-BB12-3DA0-BE5B-AEF843C61FCB
+    value:           31520376-06C5-3EA2-8160-BDB746FF6F27
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           258C0E78-FC91-3EE4-A59B-9F2833184572
+    value:           A49AE6B1-A4EC-3B4D-B342-8C5734B85479
   - target:          arm64e-maccatalyst
-    value:           258C0E78-FC91-3EE4-A59B-9F2833184572
+    value:           A49AE6B1-A4EC-3B4D-B342-8C5734B85479
 install-name:    '/System/Library/PrivateFrameworks/CloudPhotoLibrary.framework/Versions/A/CloudPhotoLibrary'
-current-version: 321.0.102
+current-version: 340.0.220
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -37,17 +37,17 @@ exports:
                        _CPLEngineScopeStatusKeyScopeType, _CPLEngineScopeStatusKeyStorages, 
                        _CPLEngineScopeStatusKeySyncAnchor, _CPLEngineScopeStatusKeyTodoItems, 
                        _CPLEngineScopeStatusKeyTransientSyncAnchor, _CPLEngineScopeStatusKeyTransportScope, 
-                       _CPLEngineScopeStatusKeyUploadGroup, _CPLErrorDomain, _CPLErrorRecordIdentifiersWithMissingResourcesKey, 
-                       _CPLErrorRejectedRecordIdentifiersAndReasonsKey, _CPLErrorRejectedRecordIdentifiersKey, 
-                       _CPLErrorRequestUUIDs, _CPLErrorResetReason, _CPLErrorRetryAfterDateKey, 
-                       _CPLErrorScopeIdentifiers, _CPLErrorWipeReasonKey, _CPLFaceAnalysisReadFrom, 
-                       _CPLFaceInstanceReadFrom, _CPLFeatureNameMomentShare, _CPLForceAutoActivateCMMs, 
-                       _CPLGetDynamicVersionForDownloadResource, _CPLIsInTestReadonlyMode, 
-                       _CPLLibraryManagerCameraCaptureFormatSetting, _CPLLibraryManagerOptimizedLibrarySetting, 
-                       _CPLLibraryManagerStreamingHintEndTime, _CPLLibraryManagerStreamingHintStartTime, 
-                       _CPLLibraryMustBeWipedNotificationName, _CPLMainScopeIdentifier, 
-                       _CPLMarkDownloadedResourceWithDynamicVersion, _CPLMemoryAssetFlagReadFrom, 
-                       _CPLMemoryAssetListReadFrom, _CPLMemoryAssetReadFrom, _CPLMiscInformationAppendCPLReport, 
+                       _CPLEngineScopeStatusKeyUploadGroup, _CPLErrorDomain, _CPLErrorRejectedRecordIdentifiersAndReasonsKey, 
+                       _CPLErrorRejectedRecordIdentifiersKey, _CPLErrorRequestUUIDs, 
+                       _CPLErrorResetReason, _CPLErrorRetryAfterDateKey, _CPLErrorScopeIdentifiers, 
+                       _CPLErrorWipeReasonKey, _CPLFaceAnalysisReadFrom, _CPLFaceInstanceReadFrom, 
+                       _CPLFeatureNameMomentShare, _CPLForceAutoActivateCMMs, _CPLGetDynamicVersionForDownloadResource, 
+                       _CPLIsInTestReadonlyMode, _CPLLibraryManagerCameraCaptureFormatSetting, 
+                       _CPLLibraryManagerOptimizedLibrarySetting, _CPLLibraryManagerStreamingHintEndTime, 
+                       _CPLLibraryManagerStreamingHintStartTime, _CPLLibraryMustBeWipedNotificationName, 
+                       _CPLMainScopeIdentifier, _CPLMarkDownloadedResourceWithDynamicVersion, 
+                       _CPLMemoryAssetFlagReadFrom, _CPLMemoryAssetListReadFrom, 
+                       _CPLMemoryAssetReadFrom, _CPLMiscInformationAppendCPLReport, 
                        _CPLMomentSharePreviewDataReadFrom, _CPLRampingRequestReadFrom, 
                        _CPLRampingRequestResourceReadFrom, _CPLRampingResponseReadFrom, 
                        _CPLRampingResponseResourceReadFrom, _CPLRecordFullChange, 

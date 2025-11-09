@@ -4,10 +4,10 @@
 */
  
 #import <Cocoa/Cocoa.h>
-#import <AvailabilityMacros.h>
 #import <IOBluetooth/objc/IOBluetoothDevice.h>
 #import <IOBluetooth/objc/IOBluetoothSDPServiceRecord.h>
 #import <IOBluetoothUI/IOBluetoothUIUserLib.h>
+#import <Availability.h>
 
 API_UNAVAILABLE_BEGIN(ios)
 //--------------------------------------------------------------------------------------------------------------------------

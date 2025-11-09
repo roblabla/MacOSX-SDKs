@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           865FA425-831D-3E49-BD1B-14188D2A98AA
+    value:           7603021E-45F7-31A8-9449-A356A81712DD
   - target:          x86_64-maccatalyst
-    value:           865FA425-831D-3E49-BD1B-14188D2A98AA
+    value:           7603021E-45F7-31A8-9449-A356A81712DD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1B539AD1-EB4E-3E4E-9936-A8FF9F3D65B9
+    value:           7A4A5F6F-1847-3AEF-BD8D-AD6674B8F95E
   - target:          arm64e-maccatalyst
-    value:           1B539AD1-EB4E-3E4E-9936-A8FF9F3D65B9
+    value:           7A4A5F6F-1847-3AEF-BD8D-AD6674B8F95E
 install-name:    '/usr/lib/libcmph.dylib'
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _cmph_config_destroy, _cmph_config_new, _cmph_config_set_algo, 
                        _cmph_config_set_b, _cmph_config_set_graphsize, _cmph_config_set_hashfuncs, 

@@ -3,12 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           60A90E3F-F6BC-32F6-B881-B31C9E93C0A3
+    value:           3722DD09-E0FA-3CC3-ACBB-E0A5A598E8B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2F25CD1F-10DE-3F21-A850-D4F57EF73FEE
+    value:           C62E192E-BFEE-35E2-AB1A-78A9EA34955C
 install-name:    '/System/Library/PrivateFrameworks/Memories.framework/Versions/A/Memories'
+current-version: 9015.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DEC22E75-F178-329D-B7FE-9B68B5C06E64
+    value:           F3BEF811-2ED6-34B3-95EC-A0607F4A4747
   - target:          x86_64-maccatalyst
-    value:           DEC22E75-F178-329D-B7FE-9B68B5C06E64
+    value:           F3BEF811-2ED6-34B3-95EC-A0607F4A4747
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           27A7DF9C-5D1C-322A-8CC5-1C810475E949
+    value:           E6B009AD-4EE4-3749-86CB-B3F7A0F728AB
   - target:          arm64e-maccatalyst
-    value:           27A7DF9C-5D1C-322A-8CC5-1C810475E949
+    value:           E6B009AD-4EE4-3749-86CB-B3F7A0F728AB
 install-name:    '/System/Library/Frameworks/Combine.framework/Versions/A/Combine'
-current-version: 252.100
+current-version: 252.157
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
@@ -1264,7 +1264,14 @@ exports:
                        '_$s7Combine25ObservableObjectPublisherCMn', '_$s7Combine25ObservableObjectPublisherCMo', 
                        '_$s7Combine25ObservableObjectPublisherCMu', '_$s7Combine25ObservableObjectPublisherCN', 
                        '_$s7Combine25ObservableObjectPublisherCfD', '_$s7Combine25ObservableObjectPublisherCfd', 
-                       '_$s7Combine32SchedulerTimeIntervalConvertibleMp', '_$s7Combine32SchedulerTimeIntervalConvertibleP11nanosecondsyxSiFZTj', 
+                       '_$s7Combine25_ObservableObjectPropertyMp', '_$s7Combine25_ObservableObjectPropertyP16objectWillChangeAA0bC9PublisherCSgvMTj', 
+                       '_$s7Combine25_ObservableObjectPropertyP16objectWillChangeAA0bC9PublisherCSgvMTq', 
+                       '_$s7Combine25_ObservableObjectPropertyP16objectWillChangeAA0bC9PublisherCSgvgTj', 
+                       '_$s7Combine25_ObservableObjectPropertyP16objectWillChangeAA0bC9PublisherCSgvgTq', 
+                       '_$s7Combine25_ObservableObjectPropertyP16objectWillChangeAA0bC9PublisherCSgvsTj', 
+                       '_$s7Combine25_ObservableObjectPropertyP16objectWillChangeAA0bC9PublisherCSgvsTq', 
+                       '_$s7Combine25_ObservableObjectPropertyTL', '_$s7Combine32SchedulerTimeIntervalConvertibleMp', 
+                       '_$s7Combine32SchedulerTimeIntervalConvertibleP11nanosecondsyxSiFZTj', 
                        '_$s7Combine32SchedulerTimeIntervalConvertibleP11nanosecondsyxSiFZTq', 
                        '_$s7Combine32SchedulerTimeIntervalConvertibleP12microsecondsyxSiFZTj', 
                        '_$s7Combine32SchedulerTimeIntervalConvertibleP12microsecondsyxSiFZTq', 
@@ -1361,14 +1368,20 @@ exports:
                        '_$s7Combine9PublishedV14projectedValueAC9PublisherVyx_GvM', 
                        '_$s7Combine9PublishedV14projectedValueAC9PublisherVyx_Gvg', 
                        '_$s7Combine9PublishedV14projectedValueAC9PublisherVyx_Gvs', 
+                       '_$s7Combine9PublishedV16objectWillChangeAA25ObservableObjectPublisherCSgvM', 
+                       '_$s7Combine9PublishedV16objectWillChangeAA25ObservableObjectPublisherCSgvg', 
+                       '_$s7Combine9PublishedV16objectWillChangeAA25ObservableObjectPublisherCSgvpMV', 
+                       '_$s7Combine9PublishedV16objectWillChangeAA25ObservableObjectPublisherCSgvs', 
                        '_$s7Combine9PublishedV18_enclosingInstance7wrapped7storagexqd___s24ReferenceWritableKeyPathCyqd__xGAHyqd__ACyxGGtcRld__CluiMZ', 
                        '_$s7Combine9PublishedV18_enclosingInstance7wrapped7storagexqd___s24ReferenceWritableKeyPathCyqd__xGAHyqd__ACyxGGtcRld__CluigZ', 
                        '_$s7Combine9PublishedV18_enclosingInstance7wrapped7storagexqd___s24ReferenceWritableKeyPathCyqd__xGAHyqd__ACyxGGtcRld__CluisZ', 
                        '_$s7Combine9PublishedV9PublisherV7receive10subscriberyqd___t5InputQyd__RszAA10SubscriberRd__s5NeverO7FailureRtd__lF', 
                        '_$s7Combine9PublishedV9PublisherVMa', '_$s7Combine9PublishedV9PublisherVMn', 
                        '_$s7Combine9PublishedV9PublisherVyx_GAadAMc', '_$s7Combine9PublishedV9PublisherVyx_GAadAWP', 
-                       '_$s7Combine9PublishedVMa', '_$s7Combine9PublishedVMn', '_$s7Combine9PublisherMp', 
-                       '_$s7Combine9PublisherP7FailureAC_s5ErrorTn', '_$s7Combine9PublisherP7receive10subscriberyqd___tAA10SubscriberRd__7FailureQyd__AGRtz5InputQyd__6OutputRtzlFTj', 
+                       '_$s7Combine9PublishedVMa', '_$s7Combine9PublishedVMn', '_$s7Combine9PublishedVyxGAA25_ObservableObjectPropertyAAMc', 
+                       '_$s7Combine9PublishedVyxGAA25_ObservableObjectPropertyAAWP', 
+                       '_$s7Combine9PublisherMp', '_$s7Combine9PublisherP7FailureAC_s5ErrorTn', 
+                       '_$s7Combine9PublisherP7receive10subscriberyqd___tAA10SubscriberRd__7FailureQyd__AGRtz5InputQyd__6OutputRtzlFTj', 
                        '_$s7Combine9PublisherP7receive10subscriberyqd___tAA10SubscriberRd__7FailureQyd__AGRtz5InputQyd__6OutputRtzlFTq', 
                        '_$s7Combine9PublisherPA2aB6OutputRpzs5NeverOAD_7FailureRTzrlE14switchToLatestAA10PublishersO06SwitchgH0Vy_AL03SetE4TypeVy_AeHQzGAL3MapVy_xARGGyF', 
                        '_$s7Combine9PublisherPAA6Output_7FailureQZAERtzAabDRpzrlE14switchToLatestAA10PublishersO06SwitchfG0Vy_AHxGyF', 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           23FE8A54-D60C-34E5-8F27-184875D73C5E
+    value:           48934A37-5DA1-33C5-B3A6-AC6D65B72EC3
   - target:          x86_64-maccatalyst
-    value:           23FE8A54-D60C-34E5-8F27-184875D73C5E
+    value:           48934A37-5DA1-33C5-B3A6-AC6D65B72EC3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           41B628D4-A5AA-310F-8773-90F899365F42
+    value:           31E06D4F-4E94-3C49-B3B0-BC2A9CC39EA0
   - target:          arm64e-maccatalyst
-    value:           41B628D4-A5AA-310F-8773-90F899365F42
+    value:           31E06D4F-4E94-3C49-B3B0-BC2A9CC39EA0
 install-name:    '/System/Library/PrivateFrameworks/CoreRoutine.framework/Versions/A/CoreRoutine'
-current-version: 745
+current-version: 749.0.4
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

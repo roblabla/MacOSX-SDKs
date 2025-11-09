@@ -4,24 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           99FE0234-454F-36FF-9DE9-36B94D8753F9
+    value:           0E626B84-5E95-3779-92B2-6355270821B0
   - target:          x86_64-maccatalyst
-    value:           99FE0234-454F-36FF-9DE9-36B94D8753F9
+    value:           0E626B84-5E95-3779-92B2-6355270821B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4CDE85B1-CEAF-3EF9-ADB2-8A3D3FD5AAB4
+    value:           2D22EF24-1755-332C-85D1-8C2745521D91
   - target:          arm64e-maccatalyst
-    value:           4CDE85B1-CEAF-3EF9-ADB2-8A3D3FD5AAB4
+    value:           2D22EF24-1755-332C-85D1-8C2745521D91
 install-name:    '/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTINSt3__117bad_function_callE, __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
+    weak-symbols:    [ __ZTINSt3__110__function6__baseIFvNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
+                       __ZTINSt3__110__function6__baseIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKN10applesauce3xpc6objectEEEE, 
+                       __ZTINSt3__110__function6__baseIFvjPKcPvEEE, __ZTINSt3__117bad_function_callE, 
+                       __ZTSNSt3__110__function6__baseIFvNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEEE, 
+                       __ZTSNSt3__110__function6__baseIFvRKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKN10applesauce3xpc6objectEEEE, 
+                       __ZTSNSt3__110__function6__baseIFvjPKcPvEEE, __ZTSNSt3__117bad_function_callE ]
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AnalyticsIsEventUsed, _AnalyticsSendEvent, _AnalyticsSendEventLazy, 

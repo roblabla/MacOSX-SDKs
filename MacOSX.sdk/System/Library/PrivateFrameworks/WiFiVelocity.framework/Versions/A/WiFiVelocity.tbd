@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3C020BAE-79CF-3E45-91EC-2035C41123C3
+    value:           99CE45A3-8732-3308-89A3-CCA1E11E0E15
   - target:          x86_64-maccatalyst
-    value:           3C020BAE-79CF-3E45-91EC-2035C41123C3
+    value:           99CE45A3-8732-3308-89A3-CCA1E11E0E15
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           19C582C3-3947-30F2-9F00-E5CAEB700E8F
+    value:           800F4E33-7735-3AC5-B73E-0B3824B61819
   - target:          arm64e-maccatalyst
-    value:           19C582C3-3947-30F2-9F00-E5CAEB700E8F
+    value:           800F4E33-7735-3AC5-B73E-0B3824B61819
 install-name:    '/System/Library/PrivateFrameworks/WiFiVelocity.framework/Versions/A/WiFiVelocity'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

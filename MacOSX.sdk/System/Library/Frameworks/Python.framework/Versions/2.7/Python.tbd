@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2DECB4BA-BB98-31C7-B7C2-E3E4A4548EF9
+    value:           D006CA33-1875-337A-9E9F-4BE9740FC183
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           38CB00AD-40CA-37A6-9FFC-2156F89EBA89
+    value:           E7C93B49-7AB1-329C-A174-ED67913E4471
 install-name:    '/System/Library/Frameworks/Python.framework/Versions/2.7/Python'
 current-version: 2.7.16
 compatibility-version: 2.7

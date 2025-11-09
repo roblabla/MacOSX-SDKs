@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           72E94E7E-076A-3364-AFFB-EECEB6B212E0
+    value:           72F7F92A-9E55-30B8-A2B3-3016F85E47BD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DB4474D7-51A6-3215-B56E-9BA293D8F16B
+    value:           6BC13D98-0317-3AB7-8F12-9AA6F7CC4385
 install-name:    '/System/Library/Frameworks/Automator.framework/Versions/A/Automator'
 current-version: 0
 exports:

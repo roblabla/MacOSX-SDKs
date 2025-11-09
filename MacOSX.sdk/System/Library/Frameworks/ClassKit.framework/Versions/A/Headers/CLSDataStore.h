@@ -2,9 +2,10 @@
 //  CLSDataStore.h
 //  ClassKit
 //
-//  Copyright © 2018 - 2019 Apple Inc. All rights reserved.
+//  Copyright © 2018-2020 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <ClassKit/CLSDefines.h>
 #import <ClassKit/CLSContext.h>
 #import <ClassKit/CLSActivity.h>
@@ -113,6 +114,14 @@ API_AVAILABLE(ios(11.3), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos
  */
 - (void)removeContext:(CLSContext *)context;
 
+/*!
+@abstract Implement to fetch the current CLSActivity instance for your document to add progress to.
+@discussion Gets the currently CLSActivity for the file. If no current activity exists, one will be created for you.
+@param  url File url for the document.
+
+*/
+- (void)fetchActivityForURL:(NSURL *)url
+                 completion:(void(^)(CLSActivity * _Nullable activity, NSError * _Nullable error))completion API_AVAILABLE(ios(14.5), macos(11.3), macCatalyst(14.5)) API_UNAVAILABLE(watchos, tvos);
 @end
 
 NS_ASSUME_NONNULL_END

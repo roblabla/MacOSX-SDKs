@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           A8D19ED3-DEFF-324A-A95E-1EE2098005D3
+    value:           E51C9496-85FB-3E6B-82C3-3B7187D783BE
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           6CC56224-E75E-37B2-B059-939817D7769F
+    value:           2FE1F4FF-BBE3-34F5-8A4B-19EA7F6A2E59
 install-name:    '/System/iOSSupport/System/Library/Frameworks/Social.framework/Versions/A/Social'
 current-version: 87
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _SLAttachmentPayloadIsAssetLibraryURL, _SLAttachmentPayloadIsVideoFileURL, 
                        _SLCreateThumbnailImageForImageData, _SLDownSampledImageData, 
                        _SLErrorDomain, _SLFacebookEnvironmentDidChangeNotification, 

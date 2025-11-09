@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           93EDA4FC-18F1-3F00-9748-04041080E1C7
+    value:           B8A44A09-7785-3098-B282-D8EB12DFA024
   - target:          x86_64-maccatalyst
-    value:           93EDA4FC-18F1-3F00-9748-04041080E1C7
+    value:           B8A44A09-7785-3098-B282-D8EB12DFA024
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           42E4CC78-EED8-3DCD-9C44-1DD72C338511
+    value:           E4799BA0-4428-3F66-92B3-36017315164D
   - target:          arm64e-maccatalyst
-    value:           42E4CC78-EED8-3DCD-9C44-1DD72C338511
+    value:           E4799BA0-4428-3F66-92B3-36017315164D
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libGPUCompiler.dylib'
-current-version: 31001.160
+current-version: 31001.184.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

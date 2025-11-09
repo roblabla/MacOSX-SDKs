@@ -39,6 +39,11 @@ typedef enum {
     USBIdlePolicyTypePipe,
 } USBIdlePolicyType;
 
+typedef enum {
+    kIOHIDActionTypeOutputReport,
+    kIOHIDActionTypeOutputRequest
+} HIDActionType;
+
 class IOUserUSBHostHIDDevice : public IOUserHIDDevice
 {
     
@@ -328,6 +333,10 @@ protected:
 private:
     
     kern_return_t initPipes () LOCALONLY;
+
+    OSAction * getAction (HIDActionType type) LOCALONLY;
+
+    void returnAction (OSAction * action) LOCALONLY;
     
     kern_return_t getHIDDescriptorInfo (uint8_t type, const IOUSBHostHIDDescriptorInfo ** info, uint8_t * index) LOCALONLY;
     

@@ -216,6 +216,10 @@ vmnet_allocate_mac_address_key API_AVAILABLE(macos(10.15));
  * @constant vmnet_mtu_key
  * The maximum transmission unit (uint64) for the interface. Supplied in the
  * interface_param dictionary.
+ *
+ * In shared and host modes, the MTU can be specified in the interface_desc
+ * dictionary. In bridged mode, specifying the MTU in the interface_desc
+ * dictionary results in an error.
  */
 extern const char *
 vmnet_mtu_key API_AVAILABLE(macos(10.10));

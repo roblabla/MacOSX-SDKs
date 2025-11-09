@@ -3,15 +3,23 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C06C5218-A162-3D42-896A-B059B3192D17
+    value:           070358E8-6343-309E-9665-3DD49576689F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C739026E-05C4-3AD2-B232-D5CDD165BD5E
+    value:           7A94B9C2-713C-3E0C-BA13-4633DDF5369F
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdateCoreSupport.framework/Versions/A/SoftwareUpdateCoreSupport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _kSUCoreActionKey, _kSUCoreContextInvalidKeybag, _kSUCoreContextUpdateCancelled, 
+    symbols:         [ _kSUCoreActionKey, _kSUCoreConfigKeyAllowLiveAssetServerFallback, 
+                       _kSUCoreConfigKeyAlternateAssetAudienceUUID, _kSUCoreConfigKeyConfigurationScanInterval, 
+                       _kSUCoreConfigKeyDisableRosettaUpdates, _kSUCoreConfigKeyDisableSFRSoftwareUpdates, 
+                       _kSUCoreConfigKeyDisableSlowRollUpdates, _kSUCoreConfigKeyPersistAcrossUpdates, 
+                       _kSUCoreConfigKeySoftwareUpdateScanInterval, _kSUCoreConfigKeyTestIndication, 
+                       _kSUCoreConfigProjectMobileAsset, _kSUCoreConfigProjectSUTestTool, 
+                       _kSUCoreConfigProjectSoftwareUpdateController, _kSUCoreConfigProjectSoftwareUpdateCore, 
+                       _kSUCoreConfigProjectSoftwareUpdateMacController, _kSUCoreConfigProjectSoftwareUpdateServices, 
+                       _kSUCoreContextInvalidKeybag, _kSUCoreContextUpdateCancelled, 
                        _kSUCoreControllerApplyingUpdate, _kSUCoreControllerAssetURL, 
                        _kSUCoreControllerControllerStatusKey, _kSUCoreControllerControllerVersionKey, 
                        _kSUCoreControllerDownloadNotReady, _kSUCoreControllerEventOTAAbandoned, 
@@ -56,9 +64,9 @@ exports:
                        _kSUCoreSplunkServerBaseURL, _kSUCoreSplunkServerDefaultURL, 
                        _kSUCoreVersion, _kSUProgressPhaseDownloading, _kSUProgressPhaseLoadingBrain, 
                        _kSUProgressPhaseNone, _kSUProgressPhasePreparing, _kSUSimulateEventErrorRecoverableKey ]
-    objc-classes:    [ SUCore, SUCoreDevice, SUCoreDiag, SUCoreDiagPoint, SUCoreDiagStats, 
-                       SUCoreErrorAttributes, SUCoreErrorInformation, SUCoreErrorLayerGroup, 
-                       SUCoreEvent, SUCoreEventReporter, SUCoreEventReporterActive, 
+    objc-classes:    [ SUCore, SUCoreCodeCoverage, SUCoreConfig, SUCoreDevice, SUCoreDiag, 
+                       SUCoreDiagPoint, SUCoreDiagStats, SUCoreErrorAttributes, SUCoreErrorInformation, 
+                       SUCoreErrorLayerGroup, SUCoreEvent, SUCoreEventReporter, SUCoreEventReporterActive, 
                        SUCoreFSM, SUCoreFSMAttachedAction, SUCoreLog, SUCoreMAIdentifier, 
                        SUCorePersistedState, SUCoreProgress, SUCoreRestoreVersion, 
                        SUCoreSimulate, SUCoreSimulateEvent, SUCoreStartup ]

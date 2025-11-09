@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3067761B-C45B-368C-8066-901D6E4583AB
+    value:           4F88824F-1CB4-396F-A5CE-E4851BFE4526
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CAC62627-938D-3C59-B566-568BA59A27BE
+    value:           8068DBF1-B7C2-30B0-A1DF-FE4C309B255C
 install-name:    '/System/Library/PrivateFrameworks/BookCoverUtility.framework/Versions/A/BookCoverUtility'
-current-version: 1471
+current-version: 1489
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

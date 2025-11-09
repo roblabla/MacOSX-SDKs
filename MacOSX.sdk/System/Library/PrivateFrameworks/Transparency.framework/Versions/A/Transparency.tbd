@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E4F8C940-2D2F-3714-8AA1-AA1A3B5A65A2
+    value:           468D8D85-6123-3750-B0B8-149730E76FFF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C538152C-26BC-3D53-8DFF-A9EB4EE7AE55
+    value:           809B73E7-9BE3-34DC-BD4A-55AF81C92085
 install-name:    '/System/Library/PrivateFrameworks/Transparency.framework/Versions/A/Transparency'
 current-version: 0
 compatibility-version: 0
@@ -55,15 +55,18 @@ exports:
                        _Signature_SignatureAlgorithm_IsValidValue, _Status_EnumDescriptor, 
                        _Status_IsValidValue, _VRFPublicKey_Type_RawValue, _VRFType_EnumDescriptor, 
                        _VRFType_IsValidValue, _VRFWitness_Type_RawValue, _kApplicationEnumMap, 
-                       _kApplicationIdentifierMap, _kConfigStorageFileName, _kKTApplicationIdentifierIDS, 
-                       _kKTApplicationIdentifierTLT, _kKTConsistencyProofRequestURI, 
+                       _kApplicationIdentifierMap, _kConfigStorageFileName, _kKTApplicationIdentifierCloudKit, 
+                       _kKTApplicationIdentifierIDS, _kKTApplicationIdentifierIDSFaceTime, 
+                       _kKTApplicationIdentifierIDSMultiplex, _kKTApplicationIdentifierTLT, 
+                       _kKTAuthenticationLifetime, _kKTBAACertTTLInMinutes, _kKTConsistencyProofRequestURI, 
                        _kKTLogDefaultServerConfigURL, _kKTLogQAServerConfigURL, _kKTMaximumCompletedRequestLifetime, 
                        _kKTMaximumMergeDelayMs, _kKTMaximumPendingRequestLifetime, 
                        _kKTMaximumResetFailureWindowMs, _kKTMaximumSTHLifetime, _kKTMaximumSTHProofDelay, 
                        _kKTPublicKeysRequestURI, _kKTPublicKeysResponseRefresh, _kKTQueryRequestURI, 
                        _kTransparencyAnalyticsEventError, _kTransparencyAnalyticsFailedEntry, 
                        _kTransparencyAnalyticsFailedLogLeaf, _kTransparencyAnalyticsVersion, 
-                       _kTransparencyAnalyticsVersionKey, _kTransparencyDataStoreFileName, 
+                       _kTransparencyAnalyticsVersionKey, _kTransparencyBAACertKeychainAccessGroup, 
+                       _kTransparencyBAACertKeychainLabelKey, _kTransparencyDataStoreFileName, 
                        _kTransparencyDefaultNetworkTimeout, _kTransparencyDefaultQueryCacheTimeout, 
                        _kTransparencyErrorAccount, _kTransparencyErrorAlloc, _kTransparencyErrorDatabase, 
                        _kTransparencyErrorDecode, _kTransparencyErrorFile, _kTransparencyErrorInterface, 
@@ -95,16 +98,17 @@ exports:
                        QueryRequest, QueryRequest_Device, QueryResponse, QueryResponse_DeviceWitness, 
                        RevisionLogInclusionProofRequest, RevisionLogInclusionProofResponse, 
                        Signature, SignedLogHead, SignedMapHead, SignedMutationTimestamp, 
-                       SingleDataRecord, TopLeveTreeNode, TopLevelTreeConfigNode, 
+                       SingleDataRecord, TopLevelTreeConfigNode, TopLevelTreeNode, 
                        TransparencyAccount, TransparencyAnalytics, TransparencyApplication, 
-                       TransparencyCertificateHelper, TransparencyConsistencyProofVerifier, 
-                       TransparencyECVRFVerifier, TransparencyError, TransparencyFileSupport, 
-                       TransparencyLogClient, TransparencyLogEntryVerifier, TransparencyLogSession, 
-                       TransparencyLogSessionDelegate, TransparencyManagedDataStore, 
-                       TransparencyManagedDataStoreController, TransparencyMapEntryVerifier, 
-                       TransparencyNetworkRequest, TransparencyRPCRequestBuilder, 
-                       TransparencyResponse, TransparencyRoot, TransparencySFAnalytics, 
-                       TransparencySettings, TransparencySignatureVerifier, TransparencyTranscript, 
-                       TransparencyTrustedKeyStore, TransparencyVRFVerifier, TransparencyXPCConnection, 
-                       TransparencyXPCInterface, VRFPublicKey, VRFWitness ]
+                       TransparencyAuthentication, TransparencyCertificateHelper, 
+                       TransparencyConsistencyProofVerifier, TransparencyECVRFVerifier, 
+                       TransparencyError, TransparencyFileSupport, TransparencyLogClient, 
+                       TransparencyLogEntryVerifier, TransparencyLogSession, TransparencyLogSessionDelegate, 
+                       TransparencyManagedDataStore, TransparencyManagedDataStoreController, 
+                       TransparencyMapEntryVerifier, TransparencyNetworkRequest, 
+                       TransparencyRPCRequestBuilder, TransparencyResponse, TransparencyRoot, 
+                       TransparencySFAnalytics, TransparencySettings, TransparencySignatureVerifier, 
+                       TransparencyTranscript, TransparencyTrustedKeyStore, TransparencyVRFVerifier, 
+                       TransparencyXPCConnection, TransparencyXPCInterface, VRFPublicKey, 
+                       VRFWitness ]
 ...

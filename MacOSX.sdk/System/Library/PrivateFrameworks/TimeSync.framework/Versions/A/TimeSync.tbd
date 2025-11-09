@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F69B52BF-E140-3699-B1B0-75E1F3CCE8E2
+    value:           BB4AE9D1-74D6-3253-A1FA-734DCEEEBCBC
   - target:          x86_64-maccatalyst
-    value:           F69B52BF-E140-3699-B1B0-75E1F3CCE8E2
+    value:           BB4AE9D1-74D6-3253-A1FA-734DCEEEBCBC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8F797358-21D7-3044-8649-AA998E6C5DC6
+    value:           9B5755C5-22CB-3D79-878A-F825814A0627
   - target:          arm64e-maccatalyst
-    value:           8F797358-21D7-3044-8649-AA998E6C5DC6
+    value:           9B5755C5-22CB-3D79-878A-F825814A0627
 install-name:    '/System/Library/PrivateFrameworks/TimeSync.framework/Versions/A/TimeSync'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -32,30 +32,34 @@ exports:
                        _TSClockPriority2Key, _TSDelayReceiptTimeoutCounterKey, _TSErrorDomain, 
                        _TSExternalPowerConnectedKey, _TSFilteredAdaptiveKey, _TSFilteredFilterShiftKey, 
                        _TSFilteredNominalDomainIntervalKey, _TSFilteredNominalMachIntervalKey, 
-                       _TSGrandmasterIDKey, _TSGrandmasterIdentityKey, _TSHasEthernetHardwareTimestampingKey, 
+                       _TSFilteredNominalTimeSyncIntervalKey, _TSGrandmasterIDKey, 
+                       _TSGrandmasterIdentityKey, _TSHasEthernetHardwareTimestampingKey, 
                        _TSHasWiFiHardwareTimestampingKey, _TSHasWiredEthernetLinkActiveKey, 
                        _TSInvalidTime, _TSLinkPropagationDelayKey, _TSLocalAnnounceLogMeanIntervalKey, 
-                       _TSLocalFrequencyStabilityKey, _TSLocalFrequencyToleranceKey, 
-                       _TSLocalLinkTypeKey, _TSLocalPDelayLogMeanIntervalKey, _TSLocalSyncLogMeanIntervalKey, 
-                       _TSLocalTimestampingModeKey, _TSMaximumPropagationDelayKey, 
-                       _TSMessageIntervalDisable, _TSMessageIntervalIgnore, _TSMessageIntervalReset, 
-                       _TSMinimumPropagationDelayKey, _TSMultipleRemotesKey, _TSNullClockIdentifier, 
-                       _TSNullgPTPClockIdentity, _TSOffsetScaledLogVarianceKey, _TSPDelayPPMDenominator, 
-                       _TSPDelayPPMLimit, _TSPDelayPPMNumerator, _TSPathKey, _TSPortNumberKey, 
-                       _TSPortRoleKey, _TSPortsKey, _TSPropagationDelayLimitKey, 
-                       _TSRawDelayExceededCounterKey, _TSRawDelayMeasurementCounterKey, 
-                       _TSReceivedAnnounceCounterKey, _TSReceivedClockAccuracyKey, 
-                       _TSReceivedClockClassKey, _TSReceivedClockPriority1Key, _TSReceivedClockPriority2Key, 
-                       _TSReceivedDelayRequestCounterKey, _TSReceivedDelayResponseCounterKey, 
-                       _TSReceivedFollowUpCounterKey, _TSReceivedGrandmasterIdentityKey, 
-                       _TSReceivedOffsetScaledLogVarianceKey, _TSReceivedPDelayRequestCounterKey, 
-                       _TSReceivedPDelayResponseCounterKey, _TSReceivedPDelayResponseFollowUpCounterKey, 
-                       _TSReceivedPacketDiscardCounterKey, _TSReceivedSignalCounterKey, 
-                       _TSReceivedStepsRemovedKey, _TSReceivedSyncCounterKey, _TSReceivedTimeSourceKey, 
-                       _TSRemoteAnnounceLogMeanIntervalKey, _TSRemoteClockIdentityKey, 
-                       _TSRemoteFrequencyStabilityKey, _TSRemoteFrequencyToleranceKey, 
-                       _TSRemoteLinkTypeKey, _TSRemotePDelayLogMeanIntervalKey, _TSRemotePortNumberKey, 
-                       _TSRemoteSyncLogMeanIntervalKey, _TSRemoteTimestampingModeKey, 
+                       _TSLocalFrequencyStabilityLowerKey, _TSLocalFrequencyStabilityUpperKey, 
+                       _TSLocalFrequencyToleranceLowerKey, _TSLocalFrequencyToleranceUpperKey, 
+                       _TSLocalLinkTypeKey, _TSLocalOscillatorTypeKey, _TSLocalPDelayLogMeanIntervalKey, 
+                       _TSLocalSyncLogMeanIntervalKey, _TSLocalTimestampingModeKey, 
+                       _TSMaximumPropagationDelayKey, _TSMessageIntervalDisable, 
+                       _TSMessageIntervalIgnore, _TSMessageIntervalReset, _TSMinimumPropagationDelayKey, 
+                       _TSMultipleRemotesKey, _TSNullClockIdentifier, _TSNullgPTPClockIdentity, 
+                       _TSOffsetScaledLogVarianceKey, _TSPDelayPPMDenominator, _TSPDelayPPMLimit, 
+                       _TSPDelayPPMNumerator, _TSPathKey, _TSPortNumberKey, _TSPortRoleKey, 
+                       _TSPortsKey, _TSPropagationDelayLimitKey, _TSRawDelayExceededCounterKey, 
+                       _TSRawDelayMeasurementCounterKey, _TSReceivedAnnounceCounterKey, 
+                       _TSReceivedClockAccuracyKey, _TSReceivedClockClassKey, _TSReceivedClockPriority1Key, 
+                       _TSReceivedClockPriority2Key, _TSReceivedDelayRequestCounterKey, 
+                       _TSReceivedDelayResponseCounterKey, _TSReceivedFollowUpCounterKey, 
+                       _TSReceivedGrandmasterIdentityKey, _TSReceivedOffsetScaledLogVarianceKey, 
+                       _TSReceivedPDelayRequestCounterKey, _TSReceivedPDelayResponseCounterKey, 
+                       _TSReceivedPDelayResponseFollowUpCounterKey, _TSReceivedPacketDiscardCounterKey, 
+                       _TSReceivedSignalCounterKey, _TSReceivedStepsRemovedKey, _TSReceivedSyncCounterKey, 
+                       _TSReceivedTimeSourceKey, _TSRemoteAnnounceLogMeanIntervalKey, 
+                       _TSRemoteClockIdentityKey, _TSRemoteFrequencyStabilityLowerKey, 
+                       _TSRemoteFrequencyStabilityUpperKey, _TSRemoteFrequencyToleranceLowerKey, 
+                       _TSRemoteFrequencyToleranceUpperKey, _TSRemoteLinkTypeKey, 
+                       _TSRemoteOscillatorTypeKey, _TSRemotePDelayLogMeanIntervalKey, 
+                       _TSRemotePortNumberKey, _TSRemoteSyncLogMeanIntervalKey, _TSRemoteTimestampingModeKey, 
                        _TSStepsRemovedKey, _TSSupersededDelayCounterKey, _TSSupersededSyncCounterKey, 
                        _TSSyncFilterShift, _TSSyncPPMDenominator, _TSSyncPPMLimit, 
                        _TSSyncPPMNumerator, _TSSyncReceiptTimeoutCounterKey, _TSSystemDomainIdentifierKey, 
@@ -92,8 +96,10 @@ exports:
                        _TimeSyncPortRestorePortReceiveMatching, _TimeSyncPortSetMACLookupTimeoutCallback, 
                        _TimeSyncPortSetRemoteSyncMessageIntervals, _TimeSyncRemovegPTPServices, 
                        _TimeSyncSystemDomainClockIdentifier, _TimeSyncgPTPManagerNotifyWhenAvailable, 
-                       __TSKernelClockConvertFromDomainToMachAbsoluteTime, __TSKernelClockConvertFromMachAbsoluteToDomainTime, 
-                       __TSgPTPClockConvertFromDomainToMachAbsoluteTime, __TSgPTPClockConvertFromMachAbsoluteToDomainTime, 
+                       __TSKernelClockConvertFromDomainToMachAbsoluteTime, __TSKernelClockConvertFromDomainToTimeSyncTime, 
+                       __TSKernelClockConvertFromMachAbsoluteToDomainTime, __TSKernelClockConvertFromTimeSyncToDomainTime, 
+                       __TSgPTPClockConvertFromDomainToMachAbsoluteTime, __TSgPTPClockConvertFromDomainToTimeSyncTime, 
+                       __TSgPTPClockConvertFromMachAbsoluteToDomainTime, __TSgPTPClockConvertFromTimeSyncToDomainTime, 
                        __Z12IOTS_add_128yy, __Z14IOTS_uint64mulyy, __ZNK9IOTS_U128dvERKS_, 
                        __ZNK9IOTS_U128mlERKS_, __ZmlRK9IOTS_U128y, __ZmlyRK9IOTS_U128 ]
     objc-classes:    [ TSADEVValue, TSAllanDeviationAnalysis, TSAudioTimeErrorCalculator, 
@@ -104,15 +110,15 @@ exports:
                        TSBonjourNode, TSClock, TSClockInterface, TSClockManager, 
                        TSClockPulser, TSFrequencyAnalysis, TSGPSTime, TSIntervalFilter, 
                        TSIntervalTimeLineFilter, TSKernelClock, TSMADEVValue, TSMTIEMask, 
-                       TSMTIEMaskElement, TSMTIEMaskError, TSMTIEValue, TSMachAbsoluteNanoseconds, 
-                       TSMaximumTimeIntervalErrorAnalysis, TSModifiedAllanDeviationAnalysis, 
-                       TSPortInterface, TSRMSTIEValue, TSRootMeanSquaredTimeIntervalErrorAnalysis, 
-                       TSTAIUTCValue, TSTDEVValue, TSTime, TSTimeConverter, TSTimeDeviationAnalysis, 
+                       TSMTIEMaskElement, TSMTIEMaskError, TSMTIEValue, TSMaximumTimeIntervalErrorAnalysis, 
+                       TSModifiedAllanDeviationAnalysis, TSPortInterface, TSRMSTIEValue, 
+                       TSRootMeanSquaredTimeIntervalErrorAnalysis, TSTAIUTCValue, 
+                       TSTDEVValue, TSTime, TSTimeConverter, TSTimeDeviationAnalysis, 
                        TSTimeErrorAnalysis, TSTimeErrorSequence, TSTimeErrorValue, 
-                       TSTimeLineFilter, TSUserFilteredClock, TSgPTPClock, TSgPTPEthernetPort, 
-                       TSgPTPFDEtEPort, TSgPTPFDPtPPort, TSgPTPMachPort, TSgPTPManager, 
-                       TSgPTPNetworkPort, TSgPTPPort, TSgPTPPortStatistics, TSgPTPTime, 
-                       TSgPTPUnicastLinkLayerEtEPort, TSgPTPUnicastLinkLayerPtPPort, 
+                       TSTimeLineFilter, TSTimeSyncClock, TSUserFilteredClock, TSgPTPClock, 
+                       TSgPTPEthernetPort, TSgPTPFDEtEPort, TSgPTPFDPtPPort, TSgPTPLocalClockPort, 
+                       TSgPTPManager, TSgPTPNetworkPort, TSgPTPPort, TSgPTPPortStatistics, 
+                       TSgPTPTime, TSgPTPUnicastLinkLayerEtEPort, TSgPTPUnicastLinkLayerPtPPort, 
                        TSgPTPUnicastUDPv4EtEPort, TSgPTPUnicastUDPv4PtPPort, TSgPTPUnicastUDPv6EtEPort, 
                        TSgPTPUnicastUDPv6PtPPort ]
     objc-ivars:      [ TSAudioTimeErrorCorrelator._maxCorrelationLength, TSAudioTimeErrorCorrelator._samplingRate, 

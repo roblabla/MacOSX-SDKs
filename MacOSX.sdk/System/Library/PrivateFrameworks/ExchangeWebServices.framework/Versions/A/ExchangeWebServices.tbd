@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           792860BD-C521-3567-BB5F-C06F13868A68
+    value:           8DED7C4A-D38F-3C1C-8EDA-279A8B7598DD
   - target:          x86_64-maccatalyst
-    value:           792860BD-C521-3567-BB5F-C06F13868A68
+    value:           8DED7C4A-D38F-3C1C-8EDA-279A8B7598DD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           69E6AC7E-AFC7-3205-BB3B-E83C0E9D75ED
+    value:           4F7629CE-1855-3F16-BFB0-2B923577C7A4
   - target:          arm64e-maccatalyst
-    value:           69E6AC7E-AFC7-3205-BB3B-E83C0E9D75ED
+    value:           4F7629CE-1855-3F16-BFB0-2B923577C7A4
 install-name:    '/System/Library/PrivateFrameworks/ExchangeWebServices.framework/Versions/A/ExchangeWebServices'
 current-version: 281
 exports:
@@ -71,10 +71,12 @@ exports:
                        _SOAPErrorFaultStringKey, _SOAPErrorHTTPStatusKey, _SOAPErrorSOAPHeaderKey, 
                        _SOAPFaultKey, _SOAPNamespaceURI, _SOAPWebServicesErrorDomain, 
                        _autodiscoverKillSwitchURL, _kAutodiscoverProtocolActiveSync, 
-                       _kAutodiscoverProtocolEWS, _kCacheMaxTimeInterval, _kExchangeJWKSCacheDate, 
+                       _kAutodiscoverProtocolEWS, _kCacheMaxTimeInterval, _kExchangeBasicAccountMigrationLastAttemptDate, 
+                       _kExchangeBasicAccountMigrationStatus, _kExchangeJWKSCacheDate, 
                        _kExchangeJWKSData, _kExchangeJWKSURI, _kExchangeOAuthSupportedKey, 
-                       _kExchangeOAuthVersion, _kExchangeTokenIssuer, _kExchangeTokenRequestURI, 
-                       _kExchangeWebSignInURI, _kExchangeWebSignInV2URI, _sMapping ]
+                       _kExchangeOAuthVersion, _kExchangeRenewCredentialsShouldTriggerMigrationKey, 
+                       _kExchangeTokenIssuer, _kExchangeTokenRequestURI, _kExchangeWebSignInURI, 
+                       _kExchangeWebSignInV2URI, _sMapping ]
     objc-classes:    [ CodeChallenge, EWSAbsoluteMonthlyRecurrencePatternType, EWSAbsoluteYearlyRecurrencePatternType, 
                        EWSAcceptItemType, EWSActiveDirectoryLookup, EWSAddDelegateResponseMessageType, 
                        EWSAddDelegateType, EWSAffectedTaskOccurrencesTypeDefinition, 
@@ -245,8 +247,9 @@ exports:
                        EWSWeeklyRecurrencePatternType, EWSWeeklyRegeneratingPatternType, 
                        EWSWellKnownResponseObjectType, EWSWorkingHours, EWSWorkingPeriod, 
                        EWSYearlyRegeneratingPatternType, ExchangeAutodiscovererV2, 
-                       ExchangeOAuthClient, ExchangeOAuthRequest, ExchangeOAuthTokenRefreshResponse, 
-                       ExchangeOAuthTokenRequest, ExchangeOAuthTokenResponse, ExchangeOpenIDMetadataRequest, 
+                       ExchangeEmptyBearerRequest, ExchangeEmptyBearerResponse, ExchangeOAuthClient, 
+                       ExchangeOAuthRequest, ExchangeOAuthTokenRefreshResponse, ExchangeOAuthTokenRequest, 
+                       ExchangeOAuthTokenResponse, ExchangeOpenIDMetadataRequest, 
                        ExchangeOpenIDMetadataResponse, JWTValidator, SOAPBaseDocument, 
                        SOAPBody, SOAPCode, SOAPDocument, SOAPEnvelope, SOAPFault, 
                        SOAPFaultDetail, SOAPHeader, SOAPParser, SOAPReason, SOAPText, 

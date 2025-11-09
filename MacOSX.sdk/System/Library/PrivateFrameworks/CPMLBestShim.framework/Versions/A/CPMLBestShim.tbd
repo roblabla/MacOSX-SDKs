@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4FF031C3-DF58-3148-82C9-321791AEC670
+    value:           42593658-C354-37D1-9251-B643CC18BA08
   - target:          x86_64-maccatalyst
-    value:           4FF031C3-DF58-3148-82C9-321791AEC670
+    value:           42593658-C354-37D1-9251-B643CC18BA08
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B90D6EA3-B8A7-3497-A3F5-3714E046CF8F
+    value:           E25B64E0-A053-3BE2-9CCB-7FC8F6379FC0
   - target:          arm64e-maccatalyst
-    value:           B90D6EA3-B8A7-3497-A3F5-3714E046CF8F
+    value:           E25B64E0-A053-3BE2-9CCB-7FC8F6379FC0
 install-name:    '/System/Library/PrivateFrameworks/CPMLBestShim.framework/Versions/A/CPMLBestShim'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

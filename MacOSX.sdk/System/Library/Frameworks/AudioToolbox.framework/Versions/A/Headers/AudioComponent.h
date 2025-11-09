@@ -240,7 +240,8 @@ typedef CF_OPTIONS(UInt32, AudioComponentFlags) {
 */
 typedef CF_OPTIONS(UInt32, AudioComponentInstantiationOptions) {
     kAudioComponentInstantiation_LoadOutOfProcess   CF_ENUM_AVAILABLE(10_11,  9_0) = 1,
-    kAudioComponentInstantiation_LoadInProcess      CF_ENUM_AVAILABLE(10_11,  NA)  = 2
+    kAudioComponentInstantiation_LoadInProcess      CF_ENUM_AVAILABLE(10_11,  NA)  = 2,
+    kAudioComponentInstantiation_LoadedRemotely     API_UNAVAILABLE(macos)    = 1u << 31,
 };
 
 
@@ -675,6 +676,17 @@ AudioComponentValidate( AudioComponent					inComponent,
 */
 #define kAudioComponentValidationParameter_ForceValidation		 "ForceValidation"
 
+/*!
+	 @define	 kAudioComponentValidationParameter_LoadOutOfProcess
+	 @discussion
+		This is a bool that can be used when validating Audio Units and it specifies that the
+		Audio Unit should be loaded out-of-process during validation.
+		Under normal circumstances, the validation result should not be influenced by how
+		the Audio Unit is loaded (in- or out-of-process). This option allows a host
+		that plans on loading the Audio Unit out-of-process to make sure that it passes the
+		validation checks in this mode of operation.
+*/
+#define kAudioComponentValidationParameter_LoadOutOfProcess		 "LoadOutOfProcess"
 
 #ifdef __cplusplus
 }

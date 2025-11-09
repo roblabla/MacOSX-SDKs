@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B863928E-B668-3C31-B9AF-EED716F15208
+    value:           BBB30EBF-781B-3A3B-9088-6D1672FEA115
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/sint32_rgba.dylib'
 exports:
   - targets:         [ x86_64-macos ]

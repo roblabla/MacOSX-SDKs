@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           196E7599-80A2-33DB-9C42-94C2D63D0F26
+    value:           5DD1E07A-4CC3-33D1-8C1E-01E34F0B03F7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D5128232-6E13-301D-B83F-015FFB3B4437
+    value:           469D52FE-C156-3917-A25E-01464F631BD3
 install-name:    '/System/Library/PrivateFrameworks/IMCore.framework/Versions/A/IMCore'
 current-version: 800
 reexported-libraries:
@@ -73,9 +73,9 @@ exports:
                        _IMChatMultiWayStateChangedNotification, _IMChatMultiWayStateChangedRefreshConversationListNotification, 
                        _IMChatMuteDidChangeNotification, _IMChatOldValueKey, _IMChatOverallChatStatusDidChangeNotification, 
                        _IMChatParticipantStateDidChangeNotification, _IMChatParticipantsDidChangeNotification, 
-                       _IMChatPreviousAccountsDictionaryKey, _IMChatPropertiesChangedNotification, 
-                       _IMChatPropertyWatermarkDate, _IMChatPropertyWatermarkMessageID, 
-                       _IMChatPurgedAttachmentsDownloadBatchCompleteNotification, 
+                       _IMChatPreviousAccountsDictionaryKey, _IMChatPreviouslyBlackholedChatHasBeenLoaded, 
+                       _IMChatPropertiesChangedNotification, _IMChatPropertyWatermarkDate, 
+                       _IMChatPropertyWatermarkMessageID, _IMChatPurgedAttachmentsDownloadBatchCompleteNotification, 
                        _IMChatPurgedAttachmentsDownloadCompleteNotification, _IMChatQueryIDKey, 
                        _IMChatReceivedDowngradeNotification, _IMChatRecipientDidChangeNotification, 
                        _IMChatRecipientReceivedDowngradeNotification, _IMChatRegistryBlackholedChatsExistNotification, 
@@ -84,20 +84,22 @@ exports:
                        _IMChatRegistryDidLoadIsPartialReloadKey, _IMChatRegistryDidLoadIsRefreshKey, 
                        _IMChatRegistryDidLoadNotification, _IMChatRegistryDidRegisterChatNotification, 
                        _IMChatRegistryDidRemergeChatsNotification, _IMChatRegistryDidUnregisterChatNotification, 
-                       _IMChatRegistryFailedCountChangedNotification, _IMChatRegistryGuidListKey, 
-                       _IMChatRegistryIsIncomingKey, _IMChatRegistryLastFailedMessageDateChangedNotification, 
-                       _IMChatRegistryLastMessageLoadedNotification, _IMChatRegistryMergedPairsListKey, 
-                       _IMChatRegistryMessageSendTimeKey, _IMChatRegistryMessageSentMessageKey, 
-                       _IMChatRegistryMessageSentNotification, _IMChatRegistryUnreadCountChangedNotification, 
-                       _IMChatRegistryWillLoadNotification, _IMChatRegistryWillRemergeChatsNotification, 
-                       _IMChatRegistryWillUnregisterChatNotification, _IMChatSendingServiceChangedNotification, 
-                       _IMChatUnreadCountChangedNotification, _IMChatUnreadKey, _IMChatValueKey, 
-                       _IMChatWatermarkDidUpdateNotification, _IMChatWillSendRichLinkMessages, 
-                       _IMChatWillSendRichLinkMessagesNotification, _IMCloudKitAttemptedToDisableiCloudBackupsNotification, 
-                       _IMCloudKitBackupDisableBackupAttemptErrorKey, _IMCloudKitBackupDisableBackupAttemptResultKey, 
-                       _IMCloudKitFetchedRampStateNotification, _IMCloudKitFetchedSyncDebuggingInfoNotification, 
-                       _IMCloudKitFetchedSyncStatsNotification, _IMCloudKitHooksAdditionalStorageCheckReturned, 
-                       _IMCloudKitHooksMOCEnabledStateReturned, _IMCloudKitHooksResultAdditionalStorageRequiredUserInfoKey, 
+                       _IMChatRegistryFailedCountChangedNotification, _IMChatRegistryGroupIDChangedNotification, 
+                       _IMChatRegistryGuidListKey, _IMChatRegistryIsIncomingKey, 
+                       _IMChatRegistryLastFailedMessageDateChangedNotification, _IMChatRegistryLastMessageLoadedNotification, 
+                       _IMChatRegistryMergedPairsListKey, _IMChatRegistryMessageSendTimeKey, 
+                       _IMChatRegistryMessageSentMessageKey, _IMChatRegistryMessageSentNotification, 
+                       _IMChatRegistryPreviousGroupIDKey, _IMChatRegistryUnreadCountChangedNotification, 
+                       _IMChatRegistryUpdatedGroupIDKey, _IMChatRegistryWillLoadNotification, 
+                       _IMChatRegistryWillRemergeChatsNotification, _IMChatRegistryWillUnregisterChatNotification, 
+                       _IMChatSendingServiceChangedNotification, _IMChatUnreadCountChangedNotification, 
+                       _IMChatUnreadKey, _IMChatValueKey, _IMChatWatermarkDidUpdateNotification, 
+                       _IMChatWillSendRichLinkMessages, _IMChatWillSendRichLinkMessagesNotification, 
+                       _IMCloudKitAttemptedToDisableiCloudBackupsNotification, _IMCloudKitBackupDisableBackupAttemptErrorKey, 
+                       _IMCloudKitBackupDisableBackupAttemptResultKey, _IMCloudKitFetchedRampStateNotification, 
+                       _IMCloudKitFetchedSyncDebuggingInfoNotification, _IMCloudKitFetchedSyncStatsNotification, 
+                       _IMCloudKitHooksAdditionalStorageCheckReturned, _IMCloudKitHooksMOCEnabledStateReturned, 
+                       _IMCloudKitHooksResultAdditionalStorageRequiredUserInfoKey, 
                        _IMCloudKitHooksResultErrorInfoKey, _IMCloudKitHooksResultMOCEnabledStateUserInfoKey, 
                        _IMCloudKitHooksResultNewStateUserInfoKey, _IMCloudKitHooksResultSuccessUserInfoKey, 
                        _IMCloudKitHooksResultiCloudAccountIdUserInfoKey, _IMCloudKitHooksSetEnabledReturned, 
@@ -147,12 +149,16 @@ exports:
                        _IMPeopleRemovedNotification, _IMPersonAllowedCapabilitiesKey, 
                        _IMPersonKey, _IMPersonNicknameKey, _IMPersonProfileKey, _IMPersonStatusComparator, 
                        _IMPersonStatusIsOnline, _IMPersonStatusReverseComparator, 
-                       _IMPersonalNicknameDidChangeNotification, _IMPinConfigurationPinnedConversationsKey, 
-                       _IMPinConfigurationRevisionKey, _IMPinConfigurationTimestampKey, 
-                       _IMPinConfigurationVersionKey, _IMPinnedConversationsControllerPinningUpdateReasonContextMenu, 
+                       _IMPersonalNicknameDidChangeNotification, _IMPinConfigurationChatMetadataIdentityHashKey, 
+                       _IMPinConfigurationChatMetadataKey, _IMPinConfigurationChatMetadataOriginalGroupIDKey, 
+                       _IMPinConfigurationPinnedConversationsKey, _IMPinConfigurationRevisionKey, 
+                       _IMPinConfigurationTimestampKey, _IMPinConfigurationVersionKey, 
+                       _IMPinnedConversationsControllerPinningUpdateReasonContextMenu, 
                        _IMPinnedConversationsControllerPinningUpdateReasonConversationDelete, 
                        _IMPinnedConversationsControllerPinningUpdateReasonDragAndDrop, 
                        _IMPinnedConversationsControllerPinningUpdateReasonFetchFromLocalStore, 
+                       _IMPinnedConversationsControllerPinningUpdateReasonGroupIDChange, 
+                       _IMPinnedConversationsControllerPinningUpdateReasonMigration, 
                        _IMPinnedConversationsControllerPinningUpdateReasonNewPinningIdentifierToConversationMapping, 
                        _IMPinnedConversationsControllerPinningUpdateReasonOnboarding, 
                        _IMPinnedConversationsControllerPinningUpdateReasonOneTimeSynchronousFetch, 
@@ -232,8 +238,8 @@ exports:
                        _kIMTranscriptPluginBreadcrumbTextReceiverIdentifier, _kIMTranscriptPluginBreadcrumbTextSenderIdentifier, 
                        _kLastBlackholeReceiptPromptDate, _kMessageHandshakeState, 
                        _kNewValueKey, _kOldValueKey, _kRestoredFromBlackhole, _kSMSCategory, 
-                       _kSMSHandshakeState, _kSMSSpamExtensionName, _kWasAutoDetectedForSpam, 
-                       _kWasDetectedAsSMSSpam, _kWasDetectedAsiMessageSpam ]
+                       _kSMSSpamExtensionName, _kWasAutoDetectedForSpam, _kWasDetectedAsSMSSpam, 
+                       _kWasDetectedAsiMessageSpam ]
     objc-classes:    [ IMAccount, IMAccountController, IMAddressBook, IMAggregateAcknowledgmentChatItem, 
                        IMAggregateMessagePartChatItem, IMAnimatedEmojiMessagePartChatItem, 
                        IMAssociatedMessageChatItem, IMAssociatedStickerChatItem, 
@@ -310,21 +316,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           344EDACC-775D-3B0A-9A73-00605606D4AB
+    value:           6FDABC8D-590C-3680-A401-6E6124D47A21
   - target:          x86_64-maccatalyst
-    value:           344EDACC-775D-3B0A-9A73-00605606D4AB
+    value:           6FDABC8D-590C-3680-A401-6E6124D47A21
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8CDA3C39-F449-33AC-88AB-49EA2228DB30
+    value:           ED61A1F2-F54A-3A3C-8D7B-AD15CE58330D
   - target:          arm64e-maccatalyst
-    value:           8CDA3C39-F449-33AC-88AB-49EA2228DB30
+    value:           ED61A1F2-F54A-3A3C-8D7B-AD15CE58330D
 install-name:    '/System/Library/PrivateFrameworks/IMFoundation.framework/Versions/A/IMFoundation'
 current-version: 800
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CopyKeychainSearchList, _ExtractURLQueries, _FZAVErrorDomain, 
                        _FZRelayParameter_ConnectionID, _FZRelayParameter_PeerBlob, 
@@ -686,6 +692,6 @@ exports:
                        IMManualUpdater._needsUpdate, IMManualUpdater._target, IMRemoteObject._internal, 
                        IMRemoteObjectBroadcaster._queue, IMScheduledUpdater._holdingUpdatesKeys, 
                        IMUserNotification._reserved ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _IMSocketAddressForString ]
 ...

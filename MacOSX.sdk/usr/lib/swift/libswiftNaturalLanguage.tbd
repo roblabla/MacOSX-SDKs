@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B0367AC9-8F85-3D0D-871A-44BA02050833
+    value:           CDDB9679-EB2A-3E38-B615-2D57A4C4B93F
   - target:          x86_64-maccatalyst
-    value:           B0367AC9-8F85-3D0D-871A-44BA02050833
+    value:           CDDB9679-EB2A-3E38-B615-2D57A4C4B93F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4B5D0FA1-35DD-3D6D-BD47-0EA5B518978B
+    value:           B641925E-140D-3C6F-8684-6D3F493C540A
   - target:          arm64e-maccatalyst
-    value:           4B5D0FA1-35DD-3D6D-BD47-0EA5B518978B
+    value:           B641925E-140D-3C6F-8684-6D3F493C540A
 install-name:    '/usr/lib/swift/libswiftNaturalLanguage.dylib'
 current-version: 2
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftNaturalLanguage.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftNaturalLanguage.dylib', 

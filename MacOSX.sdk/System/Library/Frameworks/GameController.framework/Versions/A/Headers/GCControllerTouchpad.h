@@ -5,10 +5,10 @@
 //  Copyright © 2019 Apple Inc. All rights reserved.
 //
 
-#import <GameController/GameController.h>
+#import <GameController/GCControllerElement.h>
 
 @class GCControllerDirectionPad;
-#import <Foundation/Foundation.h>
+@class GCControllerButtonInput;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F70E6166-8E41-3204-9E7A-6CDAC6973501
+    value:           1AF91DCA-0563-3B3A-B1CC-77889A4F1E88
   - target:          x86_64-maccatalyst
-    value:           F70E6166-8E41-3204-9E7A-6CDAC6973501
+    value:           1AF91DCA-0563-3B3A-B1CC-77889A4F1E88
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B9969637-B994-3921-8FD1-AE4BEE6B5042
+    value:           803799F8-89F9-3C6C-B292-60E0B5A82728
   - target:          arm64e-maccatalyst
-    value:           B9969637-B994-3921-8FD1-AE4BEE6B5042
+    value:           803799F8-89F9-3C6C-B292-60E0B5A82728
 install-name:    '/System/Library/PrivateFrameworks/MobileContainerManager.framework/Versions/A/MobileContainerManager'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

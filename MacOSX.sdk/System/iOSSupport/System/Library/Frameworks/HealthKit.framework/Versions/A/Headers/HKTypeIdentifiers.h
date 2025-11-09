@@ -47,6 +47,7 @@ HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierWalkingStepLeng
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierSixMinuteWalkTestDistance API_AVAILABLE(ios(14.0), watchos(7.0));          // Length,                      Discrete
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierStairAscentSpeed API_AVAILABLE(ios(14.0), watchos(7.0));                   // m/s,                         Discrete
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierStairDescentSpeed API_AVAILABLE(ios(14.0), watchos(7.0));                  // m/s),                        Discrete
+HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierAppleMoveTime API_AVAILABLE(ios(14.5), watchos(7.4));                      // Time,                        Cumulative
 
 // Vitals
 HK_EXTERN HKQuantityTypeIdentifier const HKQuantityTypeIdentifierHeartRate API_AVAILABLE(ios(8.0), watchos(2.0));                           // Scalar(Count)/Time,          Discrete

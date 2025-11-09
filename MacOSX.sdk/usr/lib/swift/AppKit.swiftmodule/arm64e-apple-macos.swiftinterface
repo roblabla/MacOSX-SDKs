@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target arm64e-apple-macos11.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppKit -swift-version 5 -enforce-exclusivity=checked -O -module-name AppKit
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target arm64e-apple-macos11.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppKit -swift-version 5 -enforce-exclusivity=checked -O -module-name AppKit
 @_exported import AppKit
 import Foundation
 import OpenGL
@@ -17,13 +17,13 @@ extension NSView : Swift.__DefaultCustomPlaygroundQuickLookable {
     get
   }
 }
-@available(OSX 10.12.2, *)
+@available(macOS 10.12.2, *)
 extension NSTouchBar : Swift.__DefaultCustomPlaygroundQuickLookable {
   public var _defaultCustomPlaygroundQuickLook: Swift.PlaygroundQuickLook {
     get
   }
 }
-@available(OSX 10.12.2, *)
+@available(macOS 10.12.2, *)
 extension NSTouchBarItem : Swift.__DefaultCustomPlaygroundQuickLookable {
   public var _defaultCustomPlaygroundQuickLook: Swift.PlaygroundQuickLook {
     get
@@ -75,7 +75,7 @@ extension NSStackView.VisibilityPriority : AppKit._AppKitKitNumericRawRepresenta
 extension NSToolbarItem.VisibilityPriority : AppKit._AppKitKitNumericRawRepresentable {
 }
 @available(swift 4)
-@available(OSX 10.12.2, *)
+@available(macOS 10.12.2, *)
 extension NSTouchBarItem.Priority : AppKit._AppKitKitNumericRawRepresentable {
 }
 @available(swift 4)
@@ -84,7 +84,7 @@ extension NSWindow.Level : AppKit._AppKitKitNumericRawRepresentable {
 @available(swift 4)
 extension NSFont.Weight : AppKit._AppKitKitNumericRawRepresentable {
 }
-@available(OSX 10.15.1, *)
+@available(macOS 10.15.1, *)
 public struct NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
   public init()
   public var numberOfItems: Swift.Int {
@@ -120,7 +120,7 @@ public struct NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifier
   public mutating func moveSection(_ identifier: SectionIdentifierType, afterSection toIdentifier: SectionIdentifierType)
   public mutating func reloadSections(_ identifiers: [SectionIdentifierType])
 }
-@available(OSX 10.15.1, *)
+@available(macOS 10.15.1, *)
 extension NSDiffableDataSourceSnapshot : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> AppKit.NSDiffableDataSourceSnapshotReference
   public static func _forceBridgeFromObjectiveC(_ input: AppKit.NSDiffableDataSourceSnapshotReference, result: inout AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>?)
@@ -128,7 +128,7 @@ extension NSDiffableDataSourceSnapshot : Swift._ObjectiveCBridgeable {
   @_effects(readonly) public static func _unconditionallyBridgeFromObjectiveC(_ snapshot: AppKit.NSDiffableDataSourceSnapshotReference?) -> AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>
   public typealias _ObjectiveCType = AppKit.NSDiffableDataSourceSnapshotReference
 }
-@available(OSX 10.15.1, *)
+@available(macOS 10.15.1, *)
 open class NSCollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType> : ObjectiveC.NSObject, AppKit.NSCollectionViewDataSource where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
   public typealias ItemProvider = (AppKit.NSCollectionView, Foundation.IndexPath, ItemIdentifierType) -> AppKit.NSCollectionViewItem?
   public typealias SupplementaryViewProvider = (AppKit.NSCollectionView, Swift.String, Foundation.IndexPath) -> (AppKit.NSView & AppKit.NSCollectionViewElement)?
@@ -146,10 +146,10 @@ open class NSCollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentif
   @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, itemForRepresentedObjectAt indexPath: Foundation.IndexPath) -> AppKit.NSCollectionViewItem
   @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, viewForSupplementaryElementOfKind kind: AppKit.NSCollectionView.SupplementaryElementKind, at indexPath: Foundation.IndexPath) -> AppKit.NSView
   public func description() -> Swift.String
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
-@available(OSX 11.0, *)
+@available(macOS 11.0, *)
 open class NSTableViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType> : ObjectiveC.NSObject, AppKit.NSTableViewDataSource where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
   public typealias CellProvider = (AppKit.NSTableView, AppKit.NSTableColumn, Swift.Int, ItemIdentifierType) -> AppKit.NSView
   public typealias SectionHeaderViewProvider = (AppKit.NSTableView, Swift.Int, SectionIdentifierType) -> AppKit.NSView
@@ -165,18 +165,18 @@ open class NSTableViewDiffableDataSource<SectionIdentifierType, ItemIdentifierTy
   public func sectionIdentifier(forRow row: Swift.Int) -> SectionIdentifierType?
   public func row(forSectionIdentifier identifier: SectionIdentifierType) -> Swift.Int?
   @objc public func numberOfRows(in tableView: AppKit.NSTableView) -> Swift.Int
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
-@available(OSX 10.10, *)
+@available(macOS 10.10, *)
 extension NSStoryboard {
-  @available(OSX 10.15, *)
+  @available(macOS 10.15, *)
   public func instantiateInitialController<Controller>(creator: ((Foundation.NSCoder) -> Controller?)? = nil) -> Controller? where Controller : AppKit.NSViewController
-  @available(OSX 10.15, *)
+  @available(macOS 10.15, *)
   public func instantiateInitialController<Controller>(creator: ((Foundation.NSCoder) -> Controller?)? = nil) -> Controller? where Controller : AppKit.NSWindowController
-  @available(OSX 10.15, *)
+  @available(macOS 10.15, *)
   public func instantiateController<Controller>(identifier: AppKit.NSStoryboard.SceneIdentifier, creator: ((Foundation.NSCoder) -> Controller?)? = nil) -> Controller where Controller : AppKit.NSViewController
-  @available(OSX 10.15, *)
+  @available(macOS 10.15, *)
   public func instantiateController<Controller>(identifier: AppKit.NSStoryboard.SceneIdentifier, creator: ((Foundation.NSCoder) -> Controller?)? = nil) -> Controller where Controller : AppKit.NSWindowController
 }
 extension CocoaError.Code {
@@ -207,7 +207,7 @@ extension CocoaError.Code {
   public static var sharingServiceNotConfigured: Foundation.CocoaError.Code {
     get
   }
-  @available(OSX 10.13, *)
+  @available(macOS 10.13, *)
   public static var fontAssetDownloadError: Foundation.CocoaError.Code {
     get
   }
@@ -278,7 +278,7 @@ extension CocoaError {
   public static var sharingServiceNotConfigured: Foundation.CocoaError.Code {
     get
   }
-  @available(OSX 10.13, *)
+  @available(macOS 10.13, *)
   public static var fontAssetDownloadError: Foundation.CocoaError.Code {
     get
   }
@@ -331,7 +331,7 @@ extension CocoaError {
   public var isTextReadWriteError: Swift.Bool {
     get
   }
-  @available(OSX 10.13, *)
+  @available(macOS 10.13, *)
   public var isFontError: Swift.Bool {
     get
   }
@@ -559,7 +559,7 @@ extension IndexPath {
   }
 }
 extension URLResourceValues {
-  @available(OSX 10.10, *)
+  @available(macOS 10.10, *)
   public var thumbnail: AppKit.NSImage? {
     get
   }
@@ -572,7 +572,7 @@ extension URLResourceValues {
   public var customIcon: AppKit.NSImage? {
     get
   }
-  @available(OSX 10.10, *)
+  @available(macOS 10.10, *)
   public var thumbnailDictionary: [Foundation.URLThumbnailDictionaryItem : AppKit.NSImage]? {
     get
   }

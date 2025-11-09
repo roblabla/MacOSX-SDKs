@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2F9DD3AE-CC39-3E3C-A78E-EBD6895DCFF8
+    value:           1EBC8815-D2B1-31A4-931F-893ED5F7D065
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           77FC82A7-0275-3026-980C-1A9361750985
+    value:           2CBC0C11-A890-32CA-A7CD-813CE8348817
 install-name:    '/System/Library/PrivateFrameworks/OSUpdate.framework/Versions/A/OSUpdate'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -54,11 +54,12 @@ exports:
                        _LibCall_ACMGetEnvironmentVariable_Block, _LibCall_ACMGlobalContextCredentialGetProperty, 
                        _LibCall_ACMGlobalContextCredentialGetProperty_Block, _LibCall_ACMKernDoubleClickNotify, 
                        _LibCall_ACMKernelControl, _LibCall_ACMKernelControl_Block, 
-                       _LibCall_ACMPing, _LibCall_ACMRequirementDelete, _LibCall_ACMRequirementGetPriority, 
-                       _LibCall_ACMRequirementGetPropertyData, _LibCall_ACMRequirementGetState, 
-                       _LibCall_ACMRequirementGetType, _LibCall_ACMSetEnvironmentVariable, 
-                       _LibCall_ACMTRMLoadState, _LibCall_ACMTRMLoadState_Block, 
-                       _LibCall_ACMTRMSaveState, _LibCall_BuildCommand, _LibSer_ContextCredentialGetProperty_Deserialize, 
+                       _LibCall_ACMPing, _LibCall_ACMPublishTrustedAccessories, _LibCall_ACMRequirementDelete, 
+                       _LibCall_ACMRequirementGetPriority, _LibCall_ACMRequirementGetPropertyData, 
+                       _LibCall_ACMRequirementGetState, _LibCall_ACMRequirementGetType, 
+                       _LibCall_ACMSetEnvironmentVariable, _LibCall_ACMTRMLoadState, 
+                       _LibCall_ACMTRMLoadState_Block, _LibCall_ACMTRMSaveState, 
+                       _LibCall_BuildCommand, _LibSer_ContextCredentialGetProperty_Deserialize, 
                        _LibSer_ContextCredentialGetProperty_GetSize, _LibSer_ContextCredentialGetProperty_Serialize, 
                        _LibSer_DeleteContext_Deserialize, _LibSer_DeleteContext_GetSize, 
                        _LibSer_DeleteContext_Serialize, _LibSer_GetAclAuthMethod_Deserialize, 
@@ -107,14 +108,15 @@ exports:
                        _SUOSUInstallOptionsDownloadAndNotifyKey, _SUOSUInstallOptionsDownloadOnlyKey, 
                        _SUOSUInstallOptionsForceRestartKey, _SUOSUInstallOptionsForegroundKey, 
                        _SUOSUInstallOptionsMDMInitiatedKey, _SUOSUInstallOptionsScheduleUpdateForLaterKey, 
-                       _SUOSUInstallOptionsSkipRestartCountdownNotificationKey, _SUOSUInstallScanningForUpdate, 
-                       _SUOSUInsufficientPowerIdentifier, _SUOSULaterModeKey, _SUOSUMDMBundleId, 
-                       _SUOSUMDMError, _SUOSUMDMMajorOSVersion, _SUOSUMDMPostInstalledIdentifier, 
-                       _SUOSUMDMProductKeys, _SUOSUMDMProgress, _SUOSUMDMRequestedIdentifier, 
-                       _SUOSUMDMState, _SUOSUMajorOSAction, _SUOSUMajorOSOtherAction, 
-                       _SUOSUMajorOSUpdateAutoDownloadedType, _SUOSUMajorOSUpdateAvailableForDownloadType, 
-                       _SUOSUMajorOSUpdateIdentifier, _SUOSUMajorOSUpdatePendingType, 
-                       _SUOSUMajorOSVariantCustomer, _SUOSUMajorOSVariantInternal, 
+                       _SUOSUInstallOptionsSkipRestartCountdownNotificationKey, _SUOSUInstallOptionsUserIDKey, 
+                       _SUOSUInstallScanningForUpdate, _SUOSUInsufficientPowerIdentifier, 
+                       _SUOSULaterModeKey, _SUOSUMDMBundleId, _SUOSUMDMError, _SUOSUMDMMajorOSVersion, 
+                       _SUOSUMDMPostInstalledIdentifier, _SUOSUMDMProductKeys, _SUOSUMDMProgress, 
+                       _SUOSUMDMRequestedIdentifier, _SUOSUMDMState, _SUOSUMajorOSAction, 
+                       _SUOSUMajorOSOtherAction, _SUOSUMajorOSUpdateAutoDownloadedType, 
+                       _SUOSUMajorOSUpdateAvailableForDownloadType, _SUOSUMajorOSUpdateIdentifier, 
+                       _SUOSUMajorOSUpdatePendingType, _SUOSUMajorOSVariantCustomer, 
+                       _SUOSUMajorOSVariantInternal, _SUOSUMigrationInlineSUKey, 
                        _SUOSUNotNowAction, _SUOSUNotificationManagerServiceInterface, 
                        _SUOSUNotificationRestartCountdownIdentifier, _SUOSUNotificationUserInfoMajorOSTagsKey, 
                        _SUOSUNotificationUserInfoMajorOSURLKey, _SUOSUNotificationUserInfoSourceKey, 
@@ -135,19 +137,20 @@ exports:
                        _SUOSUUpdatesAvailableCriticalIdentifier, _SUOSUUpdatesAvailableCriticalNowIdentifier, 
                        _SUOSUUpdatesAvailableOfferLaterIdentifier, _SUOSUUpdatesInstalledCriticalIdentifier, 
                        _SUOSUUserActionDetailsKeyLicenseAgreementText, _SUOSUUserActionDetailsKeyMajorProduct, 
-                       _SUOSUUserActionDetailsKeyMustCloseBundleIdentifiers, _SUOSUUserActionDetailsKeyTitle, 
-                       _SUOSUUserActionDetailsKeyWarningText, _SUServerConfigurationNVRAMVariableIASUCatalogKey, 
-                       _SUServerConfigurationNVRAMVariablesKey, _SUServerConfigurationUserDefaultDomainKey, 
-                       _SUServerConfigurationUserDefaultKeyKey, _SUServerConfigurationUserDefaultUserKey, 
-                       _SUServerConfigurationUserDefaultValueKey, _SUServerUserDefaultsKey, 
-                       _SUTags, _SerializeAddCredential, _SerializeCredential, _SerializeCredentialList, 
-                       _SerializeGetContextProperty, _SerializeProcessAcl, _SerializeRemoveCredential, 
-                       _SerializeReplacePassphraseCredential, _SerializeRequirement, 
-                       _SerializeVerifyAclConstraint, _SerializeVerifyPolicy, _Util_GetBitCount, 
-                       _Util_hexDumpToStrHelper, _Util_isNonNullEqualMemory, _Util_isNullOrZeroMemory, 
-                       _VerifyPluggedInAndSufficientPower, __reachability_callback, 
-                       __scheduledWakePowerNotificationCallback, _gAllocatedBytes, 
-                       _gLastAllocatedBytes, _kRescanTimePeriod, _kSUOSUCodeRedNotificationsMaxCountToPostUltimatum ]
+                       _SUOSUUserActionDetailsKeyMoreInfoLink, _SUOSUUserActionDetailsKeyMustCloseBundleIdentifiers, 
+                       _SUOSUUserActionDetailsKeyTitle, _SUOSUUserActionDetailsKeyWarningText, 
+                       _SUServerConfigurationNVRAMVariableIASUCatalogKey, _SUServerConfigurationNVRAMVariablesKey, 
+                       _SUServerConfigurationUserDefaultDomainKey, _SUServerConfigurationUserDefaultKeyKey, 
+                       _SUServerConfigurationUserDefaultUserKey, _SUServerConfigurationUserDefaultValueKey, 
+                       _SUServerUserDefaultsKey, _SUTags, _SerializeAddCredential, 
+                       _SerializeCredential, _SerializeCredentialList, _SerializeGetContextProperty, 
+                       _SerializeProcessAcl, _SerializeRemoveCredential, _SerializeReplacePassphraseCredential, 
+                       _SerializeRequirement, _SerializeVerifyAclConstraint, _SerializeVerifyPolicy, 
+                       _Util_GetBitCount, _Util_hexDumpToStrHelper, _Util_isNonNullEqualMemory, 
+                       _Util_isNullOrZeroMemory, _VerifyPluggedInAndSufficientPower, 
+                       __reachability_callback, __scheduledWakePowerNotificationCallback, 
+                       _gAllocatedBytes, _gLastAllocatedBytes, _kRescanTimePeriod, 
+                       _kSUOSUCodeRedNotificationsMaxCountToPostUltimatum ]
     objc-classes:    [ SUOSUAlarmObserver, SUOSUAppStoreAuditInfo, SUOSUAuthenticationManager, 
                        SUOSUAuthorizationController, SUOSUCatalogConfiguration, SUOSUCatalogManager, 
                        SUOSUCatalogRequester, SUOSUCatalogServer, SUOSUClient, SUOSUError, 

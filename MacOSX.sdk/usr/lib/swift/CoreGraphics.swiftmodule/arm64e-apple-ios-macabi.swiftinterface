@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
-// swift-module-flags: -target arm64e-apple-ios14.3-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreGraphics -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreGraphics
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.24.14 clang-1205.0.19.54)
+// swift-module-flags: -target arm64e-apple-ios14.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreGraphics -swift-version 5 -enforce-exclusivity=checked -O -module-name CoreGraphics
 @_exported import CoreGraphics
 import Darwin
 import Swift
@@ -33,8 +33,8 @@ extension CGFloat : Swift.SignedNumeric {
     return CGFloat(native.magnitude)
   }
   }
-  public typealias Magnitude = CoreGraphics.CGFloat
   public typealias IntegerLiteralType = Swift.Int
+  public typealias Magnitude = CoreGraphics.CGFloat
 }
 extension CGFloat : Swift.BinaryFloatingPoint {
   public typealias RawSignificand = Swift.UInt
@@ -248,8 +248,8 @@ extension CGFloat : Swift.BinaryFloatingPoint {
   @_transparent public init(integerLiteral value: Swift.Int) {
     native = NativeType(value)
   }
-  public typealias RawExponent = Swift.UInt
   public typealias FloatLiteralType = CoreGraphics.CGFloat.NativeType
+  public typealias RawExponent = Swift.UInt
 }
 extension CGFloat {
   @available(*, unavailable, renamed: "leastNormalMagnitude")
@@ -591,7 +591,7 @@ extension CGAffineTransform : Swift.Equatable {
   public static func == (lhs: CoreGraphics.CGAffineTransform, rhs: CoreGraphics.CGAffineTransform) -> Swift.Bool
 }
 extension CGColor {
-  @available(OSX 10.3, iOS 2.0, *)
+  @available(macOS 10.3, iOS 2.0, *)
   public var components: [CoreGraphics.CGFloat]? {
     get
   }
@@ -807,8 +807,8 @@ extension CGContext {
 public enum CGPathFillRule : Swift.Int {
   case winding
   case evenOdd
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }

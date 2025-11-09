@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           60DE4CD6-B5AF-3E0E-8AF1-39ECFC1B8C98
+    value:           347078F9-34AC-3AD5-AA02-B7E5E1D11FB6
   - target:          x86_64-maccatalyst
-    value:           60DE4CD6-B5AF-3E0E-8AF1-39ECFC1B8C98
+    value:           347078F9-34AC-3AD5-AA02-B7E5E1D11FB6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BE1B59DE-CE44-3CAE-897A-735E500ABB73
+    value:           93368EFC-BBD5-340B-9810-6C714FDF90E7
   - target:          arm64e-maccatalyst
-    value:           BE1B59DE-CE44-3CAE-897A-735E500ABB73
+    value:           93368EFC-BBD5-340B-9810-6C714FDF90E7
 install-name:    '/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork'
-current-version: 1209.1
+current-version: 1237
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ '$ld$hide$os10.9$_NSHTTPCookieComment', '$ld$hide$os10.9$_NSHTTPCookieCommentURL', 
@@ -65,7 +65,7 @@ exports:
                        '$ld$hide$os10.9$_OBJC_METACLASS_$_NSURLSessionDataTask', 
                        '$ld$hide$os10.9$_OBJC_METACLASS_$_NSURLSessionDownloadTask', 
                        '$ld$hide$os10.9$_OBJC_METACLASS_$_NSURLSessionTask', '$ld$hide$os10.9$_OBJC_METACLASS_$_NSURLSessionUploadTask' ]
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CFCachedURLResponseCopyReceiverDataArray, _CFCachedURLResponseCreateWithData, 
                        _CFCachedURLResponseGetReceiverData, _CFCachedURLResponseGetStoragePolicy, 
@@ -457,6 +457,6 @@ exports:
                        _NSHTTPConnectionInfo, _NSURLSessionConnectionBeginProperties, 
                        _NSURLSessionConnectionEstablishProperties, __NSCFURLSessionTaskInfo, 
                        __NSCFURLSessionXPC, __NSURLSessionStatistics ]
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CFNetServiceGetProtocolSpecificInformation, _CFNetServiceSetProtocolSpecificInformation ]
 ...

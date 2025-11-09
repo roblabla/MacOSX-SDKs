@@ -24,7 +24,7 @@
 .Nm
 provides methods of controlling and interacting with Time Machine, as well as examining and manipulating Time Machine backups. Common abilities include restoring data from backups, editing exclusions, and comparing backups.
 .Pp
-Several, but not all, verbs require root privileges.
+Several, but not all, verbs require root and Full Disk Access privileges. Full Disk Access privileges can be granted to the Terminal application used to run tmutil from the Privacy tab in the Security & Privacy preference pane.
 .\" ========================== END DESCRIPTION SECTION =========================
 .\" ============================================================================
 .\"
@@ -112,7 +112,7 @@ Each verb is listed with its description and individual arguments.
 .It Sy setdestination Op Fl ap
 .Ar arg
 .br
-Configure a local HFS+ or APFS volume, AFP share, or SMB share as a backup destination. Requires root privileges.
+Configure a local HFS+ or APFS volume, AFP share, or SMB share as a backup destination. Requires root and Full Disk Access privileges.
 .Pp
 When the
 .Fl Sy a
@@ -168,7 +168,7 @@ option is provided, output will be printed in XML property list format.
 .It Sy removedestination
 .Ar identifier
 .br
-Remove the destination with the specified unique identifier from the Time Machine configuration. Requires root privileges.
+Remove the destination with the specified unique identifier from the Time Machine configuration. Requires root and Full Disk Access privileges.
 .Pp
 To obtain the unique identifier for a destination, see
 .Sy destinationinfo.
@@ -194,7 +194,7 @@ The
 .Fl Sy p
 option configures fixed-path exclusions. The
 .Fl Sy v
-option configures volume exclusions. Both require root privileges. The
+option configures volume exclusions. Both require root and Full Disk Access privileges. The
 .Fl Sy v
 option is the only supported way to exclude or unexclude a volume; behavior is undefined if a sticky or fixed-path exclusion is specified.
 .\" - - - - - - - - - - - - - - REMOVEEXCLUSION - - - - - - - - - - - - - - - -
@@ -228,11 +228,11 @@ thermopylae:~ thoth$ tmutil isexcluded /Users/admin/Desktop/bar.txt
 .\" - - - - - - - - - - - - - - - - ENABLE  - - - - - - - - - - - - - - - - - -
 .It Sy enable
 .br
-Turn on automatic backups. Requires root privileges.
+Turn on automatic backups. Requires root and Full Disk Access privileges.
 .\" - - - - - - - - - - - - - - - - DISABLE - - - - - - - - - - - - - - - - - -
 .It Sy disable
 .br
-Turn off automatic backups. Requires root privileges.
+Turn off automatic backups. Requires root and Full Disk Access privileges.
 .\" - - - - - - - - - - - - - - - STARTBACKUP - - - - - - - - - - - - - - - - -
 .It Sy startbackup
 .Op Fl a | -auto
@@ -378,26 +378,18 @@ verb,
 .Nm
 behaves largely like Finder. Custom Time Machine metadata (extended security and other) will be removed from the restored data, and other metadata will be preserved.
 .Pp
-Root privileges are not strictly required to perform restores, but
-.Nm
-does no permissions preflighting to determine your ability to restore
-.Ar src
-or its descendants. Therefore, depending on what you're restoring, you may need root privileges to perform the restore, and you should know this ahead of time. This is the same behavior you would encounter with other copy tools such as
-.Sy cp
-or
-.Sy ditto Ns
-\&. When restoring with
+Root and Full Disk Access privileges may be required to perform restores. When restoring with
 .Sy tmutil
 as root, ownership of the restored items will match the state of the items in the backup.
 .\" - - - - - - - - - - - - - - - - DELETE  - - - - - - - - - - - - - - - - - -
-.It Sy delete Op Fl d Ar backup_mount_point Fl t Ar timestamp ...
-.Op Ar path ...
+.It Sy delete Op Fl d Ar backup_mount_point Fl t Ar timestamp
+.Op Fl p Ar path
 .br
-Delete one or more backups, machine directories, or backup stores. This verb can delete items from backups that were not made by, or are not claimed by, the current machine. Requires root privileges.
+Deletes the backups with the specified timestamp from the backup volume mounted at the specified mountpoint. The -t option followed by a timestamp can be used multiple times to specify multiple backups to delete. For HFS backup disks, a specific path to delete can also be specified using the -p option. This verb can delete items from backups that were not made by, or are not claimed by, the current machine. Requires root and Full Disk Access privileges.
 .\" - - - - - - - - - - - - - - - - DELETEINPROGRESS  - - - - - - - - - - - - - - - - - -
 .It Sy deleteinprogress Ar machine_directory
 .br
-Delete all in-progress backups for a machine directory. On APFS backup destinations, this reverts the destination volume to the last backup.
+Delete all in-progress backups for a machine directory. Requires root and Full Disk Access privileges.  On APFS backup destinations, this reverts the destination volume to the last backup.
 .\" - - - - - - - - - - - - - - LATESTBACKUP  - - - - - - - - - - - - - - - - - 
 .It Sy latestbackup
 .br
@@ -411,7 +403,7 @@ option specifies a backup volume to list backups from. When
 .Fl Sy m
 is provided,
 . Sy listbackups
-will attempt to mount backups and list their mounted paths. This option requires root privileges.
+will attempt to mount backups and list their mounted paths. This option requires root and Full Disk Access privileges.
 .\" - - - - - - - - - - - - - MACHINEDIRECTORY  - - - - - - - - - - - - - - - - 
 .It Sy machinedirectory
 .br
@@ -420,7 +412,7 @@ Print the path to the current machine directory for this computer.
 .It Sy calculatedrift
 .Ar machine_directory
 .br
-Analyze the backups in an HFS machine directory and determine the amount of change between each. Averages are printed after all backups have been analyzed. This may require root privileges, depending on the contents of the machine directory.
+Analyze the backups in an HFS machine directory and determine the amount of change between each. Averages are printed after all backups have been analyzed. This may require root and Full Disk Access privileges, depending on the contents of the machine directory.
 .\" - - - - - - - - - - - - - -  UNIQUESIZE - - - - - - - - - - - - - - - - - - 
 .It Sy uniquesize
 .Ar path ...
@@ -432,7 +424,7 @@ represents things that only exist in the specified path; things that are present
 .It Sy inheritbackup
 .Ar {machine_directory | sparsebundle}
 .br
-Claim a machine directory or sparsebundle for use by the current machine. Requires root privileges.
+Claim a machine directory or sparsebundle for use by the current machine. Requires root and Full Disk Access privileges.
 .Pp
 Machine directories and sparsebundles are owned by one computer at a time, and are tracked by unique identifiers rather than computer name, host name, or ethernet address. The
 .Sy inheritbackup
@@ -451,7 +443,7 @@ will attempt to detect possible identity collisions before making changes.
 .It Sy associatedisk
 .Ar mount_point snapshot_volume
 .br
-Bind a volume store directory to the specified local disk, thereby reconfiguring the backup history. Requires root privileges.
+Bind a volume store directory to the specified local disk, thereby reconfiguring the backup history. Requires root and Full Disk Access privileges.
 .Pp
 In Mac OS X, HFS+ and APFS volumes have a persistent UUID that is assigned when the file system is created. Time Machine uses this identifier to make an association between a source volume and a volume store. Erasing the source volume creates a new file system on the disk, and the previous UUID is not retained. The new UUID causes the source volume -> volume store association to be broken. If one were just erasing the volume and starting over, it would likely be of no real consequence, and the new UUID would not be a concern; when erasing a volume in order to clone another volume to it, recreating the association may be desired.
 .Pp

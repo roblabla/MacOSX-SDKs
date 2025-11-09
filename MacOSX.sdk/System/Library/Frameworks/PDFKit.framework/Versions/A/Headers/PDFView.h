@@ -79,7 +79,11 @@ PDFKIT_EXTERN NSNotificationName const PDFViewVisiblePagesChangedNotification PD
 
 PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 @interface PDFView : PDFKitPlatformView
+#if defined(PDFKIT_PLATFORM_OSX)
     < NSAnimationDelegate, NSMenuDelegate >
+#elif defined(PDFKIT_PLATFORM_IOS)
+    < UIGestureRecognizerDelegate >
+#endif
 {
 @private
     PDFViewPrivate *_private;
@@ -174,6 +178,16 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // Specifies if shadows should be drawn around page borders in a PDFView. Defaults to YES.
 @property (nonatomic, setter=enablePageShadows:) BOOL pageShadowsEnabled PDFKIT_AVAILABLE(10_14, 12_0);
 
+#if defined(PDFKIT_PLATFORM_IOS)
+
+// Changes the underlying scroll view to use a UIPageViewController as a way to layout and navigate
+// pages. Note that you can change the orientation via -[PDFView setDisplayDirection:], and that
+// the property -[PDFView displayMode] is ignored: layout is always assumed single page continuous.
+// The viewOptions argument is given to the UIPageViewController initializer, as a way to pass in page spacing, etc.
+- (void)usePageViewController:(BOOL)enable withViewOptions:(nullable NSDictionary*)viewOptions PDFKIT_AVAILABLE(NA, 11_0);
+@property (nonatomic, readonly) BOOL isUsingPageViewController PDFKIT_AVAILABLE(NA, 11_0);
+
+#endif
 
 // -------- delegate
 
@@ -215,10 +229,12 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 - (PDFAreaOfInterest)areaOfInterestForMouse:(PDFKitPlatformEvent *)event;
 - (PDFAreaOfInterest)areaOfInterestForPoint:(PDFPoint)cursorLocation;
 
+#if defined(PDFKIT_PLATFORM_OSX)
 
 // Sets the appropriate cursor for a given area of interest. This method is useful for subclasses.
 - (void)setCursorForAreaOfInterest:(PDFAreaOfInterest)area;
 
+#endif
 
 // Performs the action specified by action.
 - (void)performAction:(PDFAction *)action PDFKIT_AVAILABLE(10_5, 11_0);
@@ -272,6 +288,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // Copy the selection (if any) to the pasteboard.
 - (IBAction)copy:(nullable id)sender;
 
+#if defined(PDFKIT_PLATFORM_OSX)
 
 // -------- printing
 
@@ -286,6 +303,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // calling -[printWithInfo: autoRotate] above.
 - (void)printWithInfo:(NSPrintInfo *)printInfo autoRotate:(BOOL)doRotate pageScaling:(PDFPrintScalingMode)scale PDFKIT_AVAILABLE(10_5, 11_0);
 
+#endif
 
 // -------- conversion
 
@@ -321,11 +339,13 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // containing the specified page at the current scale factor and with the current display attributes.
 - (PDFSize)rowSizeForPage:(PDFPage *)page;
 
+#if defined(PDFKIT_PLATFORM_OSX)
 
 // Indicate whether dragging a file into PDFView is allowed. If NO (default), dragging events are not supported.
 // If YES, a user can drag and drop a PDF file into the view and have it loaded & set as the visible document (the old document is released).
 @property (nonatomic) BOOL acceptsDraggedFiles PDFKIT_AVAILABLE(10_13, NA);
 
+#endif
 
 // Returns an array of PDFPage objects representing the currently visible pages. May return empty array if no document is assigned.
 @property (nonatomic, readonly) NSArray<PDFPage *> *visiblePages PDFKIT_AVAILABLE(10_5, 11_0);
@@ -344,6 +364,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // default implementation calls [[NSWorkspace sharedWorkspace] openURL: url].
 - (void)PDFViewWillClickOnLink:(PDFView *)sender withURL:(NSURL *)url PDFKIT_AVAILABLE(10_5, 11_0);
 
+#if defined( PDFKIT_PLATFORM_OSX )
 
 // Delegate method allowing a delegate to override changes to the scale factor. The default implementation pins scaling
 // between 0.1 and 10.0.
@@ -358,6 +379,13 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // the below method will be called when the user clicks on an annotation with such an action.
 - (void)PDFViewPerformPrint:(PDFView *)sender PDFKIT_AVAILABLE(10_5, NA);
 
+#elif defined( PDFKIT_PLATFORM_IOS )
+
+// A delegate that should return the main view controller the PDFView resides in. This is to add additional
+// support to one's view such as 'Lookup' from the text selection menu, along with support of entering text for notes.
+- (PDFKitPlatformViewController*) PDFViewParentViewController PDFKIT_AVAILABLE(10_15, 13_0);
+
+#endif
 
 // Certain PDFAction's may request that the PDF viewer application perform a Find. Delegates responding to the below
 // method will be called when the user clicks on an annotation with such an action.
@@ -377,6 +405,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 
 @end
 
+#if defined( PDFKIT_PLATFORM_OSX )
 
 // Deprecated macOS PDFView methods
 @interface PDFView (PDFViewDeprecated)
@@ -423,5 +452,6 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 
 @end
 
+#endif
 
 NS_ASSUME_NONNULL_END

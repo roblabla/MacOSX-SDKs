@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A8A94895-CE8D-35B2-8E1C-CC19A8140E98
+    value:           B340EE4B-0F53-3AEB-8E33-0FB7D5E01BE9
   - target:          x86_64-maccatalyst
-    value:           A8A94895-CE8D-35B2-8E1C-CC19A8140E98
+    value:           B340EE4B-0F53-3AEB-8E33-0FB7D5E01BE9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5C1BB46B-AAC8-3F27-B33E-FACE0E225E23
+    value:           F4BF43BA-119A-3728-8A9E-A092422B93C0
   - target:          arm64e-maccatalyst
-    value:           5C1BB46B-AAC8-3F27-B33E-FACE0E225E23
+    value:           F4BF43BA-119A-3728-8A9E-A092422B93C0
 install-name:    '/usr/lib/swift/libswiftAppKit.dylib'
-current-version: 103.10
+current-version: 104
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftAppKit.dylib', '$ld$install_name$os10.11$@rpath/libswiftAppKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftAppKit.dylib', '$ld$install_name$os10.13$@rpath/libswiftAppKit.dylib', 

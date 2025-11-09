@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C57E5066-EC50-3E8D-8883-E9D0DB9D5A85
+    value:           540EAE62-0F10-3BBC-9916-705B8FC5A6D6
 install-name:    '/System/Library/PrivateFrameworks/IOSurfaceAccelerator.framework/Versions/A/IOSurfaceAccelerator'
 exports:
   - targets:         [ arm64e-macos, arm64-macos ]

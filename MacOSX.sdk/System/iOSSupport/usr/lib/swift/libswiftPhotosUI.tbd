@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           3EA09151-02B4-329F-BB18-A451E219E850
+    value:           56B077FE-EA05-320F-B81C-2B0D07FBD8B4
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           24DDEE5E-1FD2-3ED7-88F0-2F1DABDF4C20
+    value:           6430F74F-1B02-3134-A1FA-6C4E68BBCC3A
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftPhotosUI.dylib'
-current-version: 321.0.102
+current-version: 340.0.220
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]

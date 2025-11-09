@@ -7,6 +7,7 @@
 #import <Foundation/Foundation.h>
 
 #import <Speech/SFVoiceAnalytics.h>
+#import <Speech/SFSpeechRecognitionMetadata.h>
 #import <Speech/SFSpeechRecognitionResult.h>
 #import <Speech/SFSpeechRecognitionRequest.h>
 #import <Speech/SFSpeechRecognitionTask.h>

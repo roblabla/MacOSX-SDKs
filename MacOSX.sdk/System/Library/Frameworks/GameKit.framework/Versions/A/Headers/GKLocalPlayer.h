@@ -2,7 +2,7 @@
 //  GKLocalPlayer.h
 //  Game Center
 //
-//  Copyright 2010-2020 Apple Inc. All rights reserved.
+//  Copyright 2010-2021 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -136,11 +136,118 @@ NS_ASSUME_NONNULL_END
 
 @interface GKLocalPlayer (Obsoleted)
 /** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)loadFriendsWithCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable friendIDs, NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "This is never invoked and its implementation does nothing, use loadRecentPlayersWithCompletionHandler: instead") ;
+- (void)loadFriendsWithCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable friendIDs, NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "This is never invoked and its implementation does nothing, use loadRecentPlayersWithCompletionHandler: instead")  NS_SWIFT_NAME(loadFriendsObsoleted(completionHandler:));;
 
 /** This property is obsolete. ***/
 @property(nonatomic, readonly, nullable, retain) NSArray<NSString *> *friends NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, " This property is obsolete, Use loadFriendPlayersWithCompletionHandler: instead") ; // Array of player identifiers of friends for the local player. Not valid until loadFriendsWithCompletionHandler: has completed.
 @end
+
+NS_ASSUME_NONNULL_BEGIN
+typedef NS_ENUM(NSInteger, GKFriendsAuthorizationStatus) {
+    // User has not yet made a choice with regards to this application.
+    // A call to loadFriendsListWithHandler: in this state will result
+    // into a prompt that might pause your application.
+    GKFriendsAuthorizationStatusNotDetermined = 0,
+
+    // This application is not authorized to use friend list data.  Due
+    // to active restrictions on friend list data, the user cannot change
+    // this status, and may not have personally denied authorization.
+    // If you have previously collected data for this player's friend list,
+    // You should delete the data collected on your end.
+    GKFriendsAuthorizationStatusRestricted,
+
+    // User has explicitly denied this application access to friend list data,
+    // or global friend list access are disabled in Settings.
+    GKFriendsAuthorizationStatusDenied,
+
+    // User has authorized this application to access friend list data.
+    // A call to loadFriends: will return the player's
+    // friend list via a completion block
+    GKFriendsAuthorizationStatusAuthorized,
+}API_AVAILABLE(ios(14.5), macos(11.3), tvos(14.5), watchos(7.3));
+
+@interface GKLocalPlayer (FriendsList)
+
+/*
+ *  loadFriendsAuthorizationStatus:
+ *
+ *  Discussion:
+ *      Calling this will asynchronously load the current friend list authorization status
+ *      of calling application.
+ *      There may be an server call involve so there could be some slight delay
+ *      in getting the authorization status via handler block.
+ *      Calls handler when finished. Error will be nil on success.
+ *
+ *      Possible reasons for error:
+ *          - Communication error with server.
+ *          - NSGKFriendListUsageDescription missing from your Info.plist
+ *          - User is not online
+ *          - Unauthenticated player
+ */
+- (void)loadFriendsAuthorizationStatus:(void(^)(GKFriendsAuthorizationStatus authorizationStatus, NSError * __nullable error))completionHandler API_AVAILABLE(ios(14.5), macos(11.3), tvos(14.5), watchos(7.3));
+
+/*
+ *  loadFriends:
+ *
+ *  Discussion:
+ *      Calling this method will asynchronously load the player Game Center's
+ *      friend list scoped to the calling application.
+ *      Calls handler when finished.
+ *
+ *      When -loadFriendsAuthorizationStatus == GKFriendsAuthorizationStatusNotDetermined or
+ *      GKFriendsAuthorizationStatusRemoved, calling this method will trigger a
+ *      prompt to request friend list authorization from the user.
+ *
+ *      When -loadFriendsAuthorizationStatus == GKFriendsAuthorizationStatusAuthorized,
+ *      This method will return an array of GKPlayers which have agreed to share their
+ *      friend list with the calling application based on the same bundleID.
+ *
+ *      The NSGKFriendListUsageDescription key must be specified in your
+ *      Info.plist; otherwise, GKErrorFriendListUsageDescriptionMissing will be returned,
+ *      as your app will be assumed not to support friend list.
+ 
+ *      Possible reasons for error:
+ *          - Communication error with server.
+ *          - AuthorizationStatus != GKFriendsAuthorizationStatusAuthorized
+ *          - NSGKFriendListUsageDescription missing from your Info.plist
+ *          - User is not online
+ *          - Unauthenticated player
+ */
+- (void)loadFriends:(void(^)(NSArray<GKPlayer *> * __nullable friends, NSError * __nullable error))completionHandler API_AVAILABLE(ios(14.5), macos(11.3), tvos(14.5), watchos(7.3));
+
+/*
+ *  loadFriendsWithIdentifiers:completionHandler:
+ *
+ *  Discussion:
+ *      Calling this method will asynchronously return a list of GKPlayers to the provided
+ *      scoped identifiers (gamePlayerID or teamPlayerID) that you can use to interact with
+ *      GameKit framework.
+ *      Calls handler when finished.
+ *
+ *      When -loadFriendsAuthorizationStatus == GKFriendsAuthorizationStatusNotDetermined or
+ *      GKFriendsAuthorizationStatusRemoved, calling this method will trigger a
+ *      prompt to request friend list authorization from the user.
+ *
+ *      This method accepts gamePlayerID or teamPlayerID, and if the identifier
+ *      is valid, we will return a GKPlayer object correspond to that identifier.
+ *
+ *      No GKPlayer object will be returned for invalid identifiers. If all supplied
+ *      identifiers are invalid, and empty array will be returned.
+ *
+ *      If a player's friend revoke the friend list authorization for your application,
+ *      we will no longer return the GKPlayer object and you should delete the data
+ *      you've collected for the player with gamePlayerID or teamPlayerID on your end.
+ *
+ *      Possible reasons for error:
+ *          - Communication error with server.
+ *          - AuthorizationStatus != GKFriendsAuthorizationStatusAuthorized
+ *          - NSGKFriendListUsageDescription missing from your Info.plist
+ *          - Unauthenticated player
+ *          - User is not online
+ */
+- (void)loadFriendsWithIdentifiers:(NSArray<NSString *> *)identifiers completionHandler:(void(^)(NSArray<GKPlayer *> * __nullable friends, NSError * __nullable error))completionHandler API_AVAILABLE(ios(14.5), macos(11.3), tvos(14.5), watchos(7.3)) NS_SWIFT_NAME(loadFriends(identifiedBy:completionHandler:));
+@end
+NS_ASSUME_NONNULL_END
 
 
 #import <GameKit/GKLocalPlayer.h>

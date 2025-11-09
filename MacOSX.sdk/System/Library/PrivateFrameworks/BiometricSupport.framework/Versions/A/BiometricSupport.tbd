@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E11D201B-EF58-3CEA-819D-5B3DAFEEEB8C
+    value:           42C6FC09-3FA2-37FA-B1D1-1DE3823ADC58
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9AD84462-6BFB-3306-9826-A1827DC7066F
+    value:           9C3390D4-6DF7-3C07-BDDE-37733068325C
 install-name:    '/System/Library/PrivateFrameworks/BiometricSupport.framework/Versions/A/BiometricSupport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -19,15 +19,16 @@ exports:
                        _dictionaryGetData, _dictionaryGetDouble, _dictionaryGetInteger, 
                        _getBootArgs, _getSensorPatchVersion, _isEphemeralMultiUser, 
                        _isFaceIDPlatform, _isInternalBuild, _isTouchIDPlatform, _kBiometricAbcDomain, 
-                       _kBiometricAbcProcess, _kBiometricKitIdentityAttributeKey, 
-                       _kBiometricKitIdentityCreationTimeKey, _kBiometricKitIdentityEntityKey, 
-                       _kBiometricKitIdentityMatchCountKey, _kBiometricKitIdentityNameKey, 
-                       _kBiometricKitIdentityTypeKey, _kBiometricKitIdentityUUIDKey, 
-                       _kBiometricKitIdentityUpdateCountKey, _kBiometricKitIdentityUserIDKey, 
-                       _localizeAbsolute, _nanosecondsToAbsolute, _rotateBitmap90Data16, 
-                       _rotateBitmap90Data8, _roundMostSignificant ]
+                       _kBiometricAbcProcess, _kBiometricKitIdentityAccessoryKey, 
+                       _kBiometricKitIdentityAttributeKey, _kBiometricKitIdentityCreationTimeKey, 
+                       _kBiometricKitIdentityEntityKey, _kBiometricKitIdentityMatchCountKey, 
+                       _kBiometricKitIdentityNameKey, _kBiometricKitIdentityTypeKey, 
+                       _kBiometricKitIdentityUUIDKey, _kBiometricKitIdentityUpdateCountKey, 
+                       _kBiometricKitIdentityUserIDKey, _localizeAbsolute, _nanosecondsToAbsolute, 
+                       _rotateBitmap90Data16, _rotateBitmap90Data8, _roundMostSignificant ]
     objc-classes:    [ ActivityTracker, BKCatacomb, BKLocalization, BiometricAutoBugCapture, 
-                       BiometricEnrollOperation, BiometricKitIdentity, BiometricKitXPCExportedClientObject, 
+                       BiometricEnrollOperation, BiometricKitAccessory, BiometricKitAccessoryGroup, 
+                       BiometricKitIdentity, BiometricKitXPCExportedClientObject, 
                        BiometricKitXPCExportedObject, BiometricKitXPCServer, BiometricMatchOperation, 
                        BiometricOperation, BiometricPreferences, BiometricPresenceDetectOperation, 
                        BiometricSupportTools, BiometricSupportUserNotification, CatacombComponent, 

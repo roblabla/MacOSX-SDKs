@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8ABB654B-4EBE-3F88-AC20-F6302D917CA5
+    value:           46A7DA94-4AA5-32F3-9A13-F387071249CE
   - target:          x86_64-maccatalyst
-    value:           8ABB654B-4EBE-3F88-AC20-F6302D917CA5
+    value:           46A7DA94-4AA5-32F3-9A13-F387071249CE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CF3FC117-B08D-300E-99D1-B0E0DC09EA21
+    value:           272E7F05-AB45-3CB1-B76B-3911D712383D
   - target:          arm64e-maccatalyst
-    value:           CF3FC117-B08D-300E-99D1-B0E0DC09EA21
+    value:           272E7F05-AB45-3CB1-B76B-3911D712383D
 install-name:    '/System/Library/PrivateFrameworks/CPAnalytics.framework/Versions/A/CPAnalytics'
-current-version: 321.0.102
+current-version: 340.0.220
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ CPAnalyticsTestSupport, MediaMiningKit, PhotoAnalysis, PhotoVision, 
-                       Photos, PhotosGraph, PhotosTests, PhotosUI, PhotosUICore, 
+    clients:         [ AssetExplorer, CPAnalyticsTestSupport, MediaMiningKit, PhotoAnalysis, 
+                       PhotoVision, Photos, PhotosGraph, PhotosTests, PhotosUI, PhotosUICore, 
                        graphctl ]
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

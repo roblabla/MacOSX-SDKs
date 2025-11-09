@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           58728B31-8073-342F-BB18-1949F0414F13
+    value:           ABC301B1-1782-3BDD-ADEA-5FAA3D792968
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A2FC6063-FD78-3FCB-835D-AB5F667A2A60
+    value:           06CB4272-7068-32E0-AF24-2C20BB3A8E8D
 install-name:    '/System/Library/PrivateFrameworks/SiriFoundation.framework/Versions/A/SiriFoundation'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -35,7 +35,9 @@ exports:
                        _SiriUIHotkeyPressEndedNotification, _SiriUIHotkeyPressPendingNotification, 
                        _SiriUIIdleAndQuietNotification, _SiriUIInvocationRequestCompleted, 
                        _SiriUIMicStartedListeningNotification, _SiriUIMicStoppedListeningNotification, 
-                       _SiriUIPreferencesChanged, _SiriUIPrewarmNotification, _SiriUIStateDictationAboutToListenNotification, 
+                       _SiriUIMicrophoneKeyPressBeganNotification, _SiriUIMicrophoneKeyPressEndedNotification, 
+                       _SiriUIMicrophoneKeyPressPendingNotification, _SiriUIPreferencesChanged, 
+                       _SiriUIPrewarmNotification, _SiriUIStateDictationAboutToListenNotification, 
                        _SiriUIStateDictationListeningNotification, _SiriUIStateSiriAboutToListenNotification, 
                        _SiriUIStateSiriListeningNotification, _SiriUIStateSiriSuccessNotification, 
                        _SiriUIStateSiriThinkingNotification, _SiriUIStateTrainingAboutToListenNotification, 
@@ -44,7 +46,8 @@ exports:
                        _SiriUITouchBarPressBeganNotification, _SiriUITouchBarPressEndedNotification, 
                        _SiriUIVoiceTriggerActivateNotification, _SiriUserDidSwitchOnVoiceTriggerNotification, 
                        _SiriVoiceTriggerNoLongerSuppressedNotification, __SRFAssertionFailed ]
-    objc-classes:    [ SRFBugReporter, SRFClamshellStateNotifier, SRFInvocationSuppressor, 
+    objc-classes:    [ SRFAnalyticsOverride, SRFBugReporter, SRFClamshellStateNotifier, 
+                       SRFEnablementFlowConfigurationProvider, SRFInvocationSuppressor, 
                        SRFLauncher, SRFLockStateNotifier, SRFLoggingDefaults, SRFPreferences, 
                        SRFProcessInfo, SRFSignpostLog, SRFStateNotifier, SRFUserDefaultsController, 
                        SRFUtilities, SRFVoiceTriggerDevices ]

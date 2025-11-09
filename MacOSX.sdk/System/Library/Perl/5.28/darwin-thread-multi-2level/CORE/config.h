@@ -4138,7 +4138,7 @@
  *	is either n or 32*ceil(n/32), especially many little-endians do
  *	the latter.  This is only useful if you have select(), naturally.
  */
-#define SELECT_MIN_BITS	64	/**/
+#define SELECT_MIN_BITS	32	/**/
 
 /* ST_INO_SIZE:
  *	This variable contains the size of struct stat's st_ino in bytes.

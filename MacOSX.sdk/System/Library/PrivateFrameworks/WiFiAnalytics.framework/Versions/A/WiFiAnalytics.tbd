@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8C0F558F-8F16-3302-89F4-6068664E2C5B
+    value:           75DB658C-AD3A-39D4-82BE-9A1A4823F512
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9695EEFF-4B5E-3943-B2A7-1CF26395F11F
+    value:           FD4A12B0-33E4-3A83-9237-B838A26608DE
 install-name:    '/System/Library/PrivateFrameworks/WiFiAnalytics.framework/Versions/A/WiFiAnalytics'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AnalyticsStoreConfigurationName, _AnalyticsStoreServerServiceNameCache, 
                        _FrameworkVersionNumber, _FrameworkVersionString, _WAInitLogging, 
-                       _WALogCategoryDefault, _WAXPCQueryableMessageDelegateInterface, 
+                       _WALogCategoryDefault, _WALogDiagnosticProfileLogHandle, _WAXPCQueryableMessageDelegateInterface, 
                        _WAXPCRequestDelegateInterface, _WiFiAnalyticsAWDLinkQualityMeasurementsReadFrom, 
                        _WiFiAnalyticsAWDSlowWiFiNotificationReadFrom, _WiFiAnalyticsAWDWADiagnosisActionAssociationDifferencesReadFrom, 
                        _WiFiAnalyticsAWDWAQuickDpsStatsReadFrom, _WiFiAnalyticsAWDWiFiDPSAWDLSnapshotReadFrom, 
@@ -31,6 +31,7 @@ exports:
                        _WiFiAnalyticsAWDWiFiNWActivityReadFrom, _WiFiAnalyticsAWDWiFiNWActivityScanActivityReadFrom, 
                        _WiFiAnalyticsAWDWiFiNWActivityStateBinReadFrom, _WiFiAnalyticsAWDWiFiNWActivityTrafficReadFrom, 
                        _WiFiAnalyticsAWDWiFiNWActivityTxCompletionsReadFrom, _WiFiAnalyticsAWDWiFiSlowWiFiReportReadFrom, 
+                       _WiFiAnalyticsAWDWiFiTDMReadFrom, _WiFiAnalyticsAWDWiFiTDMSliceReadFrom, 
                        _WiFiAnalyticsVersionNumber, _WiFiAnalyticsVersionString, 
                        _kBSSIDOctetCount, _kOUIOctetCount, _kStrictBSSIDFormat, _kStrictOUIFormat, 
                        _kWAMessageKey11axAsrDuration, _kWAMessageKeyAKMSuites, _kWAMessageKeyAMPDUParams, 
@@ -139,7 +140,8 @@ exports:
                        WiFiAnalyticsAWDWiFiNWActivityPerACTxCompletions, WiFiAnalyticsAWDWiFiNWActivityPowerPStats, 
                        WiFiAnalyticsAWDWiFiNWActivityRateAndAggregation, WiFiAnalyticsAWDWiFiNWActivityScanActivity, 
                        WiFiAnalyticsAWDWiFiNWActivityStateBin, WiFiAnalyticsAWDWiFiNWActivityTraffic, 
-                       WiFiAnalyticsAWDWiFiNWActivityTxCompletions, WiFiAnalyticsAWDWiFiSlowWiFiReport ]
+                       WiFiAnalyticsAWDWiFiNWActivityTxCompletions, WiFiAnalyticsAWDWiFiSlowWiFiReport, 
+                       WiFiAnalyticsAWDWiFiTDM, WiFiAnalyticsAWDWiFiTDMSlice ]
     objc-ivars:      [ WiFiAnalyticsAWDLinkQualityMeasurements._aPTxDataStall, WiFiAnalyticsAWDLinkQualityMeasurements._accessPointOUI, 
                        WiFiAnalyticsAWDLinkQualityMeasurements._availWLANDurMS, WiFiAnalyticsAWDLinkQualityMeasurements._availWLANRxDurMS, 
                        WiFiAnalyticsAWDLinkQualityMeasurements._availWLANTxDurMS, 
@@ -327,7 +329,16 @@ exports:
                        WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._ctlmid0, 
                        WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._ctlmid1, 
                        WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._has, WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._ppm0, 
-                       WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._ppm1, WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._temp0, 
+                       WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._ppm1, WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._rc1Duration, 
+                       WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._rc1Request, 
+                       WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._rc1wlanCrit, 
+                       WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._rc1wlanCritDuration, 
+                       WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._rc2Duration, 
+                       WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._rc2Grant, 
+                       WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._rc2LongGrant, 
+                       WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._rc2Request, 
+                       WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._rc2cts2a, 
+                       WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._sdbtdm, WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._temp0, 
                        WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._temp1, WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._tvpmindex0, 
                        WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._tvpmindex1, 
                        WiFiAnalyticsAWDWiFiNWActivityImpedingFunctions._txDutyCyclePct1s, 
@@ -346,13 +357,19 @@ exports:
                        WiFiAnalyticsAWDWiFiNWActivityInterfaceStats._npeers, WiFiAnalyticsAWDWiFiNWActivityInterfaceStats._packets, 
                        WiFiAnalyticsAWDWiFiNWActivityInterfaceStats._peers, WiFiAnalyticsAWDWiFiNWActivityInterfaceStats._role, 
                        WiFiAnalyticsAWDWiFiNWActivityPeerStats._acCompletions, WiFiAnalyticsAWDWiFiNWActivityPeerStats._bytes, 
-                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._ccas, WiFiAnalyticsAWDWiFiNWActivityPeerStats._completions, 
-                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._has, WiFiAnalyticsAWDWiFiNWActivityPeerStats._hashID, 
-                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._packets, WiFiAnalyticsAWDWiFiNWActivityPeerStats._role, 
-                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._rssis, WiFiAnalyticsAWDWiFiNWActivityPeerStats._snrs, 
-                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._txLatencyBEs, WiFiAnalyticsAWDWiFiNWActivityPeerStats._txLatencyBKs, 
-                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._txLatencyVIs, WiFiAnalyticsAWDWiFiNWActivityPeerStats._txLatencyVOs, 
-                       WiFiAnalyticsAWDWiFiNWActivityPerACTxCompletions._ac, WiFiAnalyticsAWDWiFiNWActivityPerACTxCompletions._dpsNotifications, 
+                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._ccaValue, WiFiAnalyticsAWDWiFiNWActivityPeerStats._ccas, 
+                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._completions, WiFiAnalyticsAWDWiFiNWActivityPeerStats._has, 
+                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._hashID, WiFiAnalyticsAWDWiFiNWActivityPeerStats._ibssCCA, 
+                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._interferenceCCA, 
+                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._nfValue, WiFiAnalyticsAWDWiFiNWActivityPeerStats._obssCCA, 
+                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._ofdmDesense, WiFiAnalyticsAWDWiFiNWActivityPeerStats._packets, 
+                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._qbssCCA, WiFiAnalyticsAWDWiFiNWActivityPeerStats._qbssSTACount, 
+                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._role, WiFiAnalyticsAWDWiFiNWActivityPeerStats._rssiValue, 
+                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._rssis, WiFiAnalyticsAWDWiFiNWActivityPeerStats._snrValue, 
+                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._snrs, WiFiAnalyticsAWDWiFiNWActivityPeerStats._txLatencyBEs, 
+                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._txLatencyBKs, WiFiAnalyticsAWDWiFiNWActivityPeerStats._txLatencyVIs, 
+                       WiFiAnalyticsAWDWiFiNWActivityPeerStats._txLatencyVOs, WiFiAnalyticsAWDWiFiNWActivityPerACTxCompletions._ac, 
+                       WiFiAnalyticsAWDWiFiNWActivityPerACTxCompletions._dpsNotifications, 
                        WiFiAnalyticsAWDWiFiNWActivityPerACTxCompletions._durSinceLastEnqueue, 
                        WiFiAnalyticsAWDWiFiNWActivityPerACTxCompletions._durSinceLastEnqueueAtLastCheck, 
                        WiFiAnalyticsAWDWiFiNWActivityPerACTxCompletions._durSinceLastFailedComp, 
@@ -393,5 +410,12 @@ exports:
                        WiFiAnalyticsAWDWiFiNWActivityTxCompletions._noresources, 
                        WiFiAnalyticsAWDWiFiNWActivityTxCompletions._success, WiFiAnalyticsAWDWiFiNWActivityTxCompletions._txfailure, 
                        WiFiAnalyticsAWDWiFiSlowWiFiReport._has, WiFiAnalyticsAWDWiFiSlowWiFiReport._linkQualSamples, 
-                       WiFiAnalyticsAWDWiFiSlowWiFiReport._slowNotice, WiFiAnalyticsAWDWiFiSlowWiFiReport._timestamp ]
+                       WiFiAnalyticsAWDWiFiSlowWiFiReport._slowNotice, WiFiAnalyticsAWDWiFiSlowWiFiReport._timestamp, 
+                       WiFiAnalyticsAWDWiFiTDM._sliceStats, WiFiAnalyticsAWDWiFiTDMSlice._ackTxPowerBackoffCount, 
+                       WiFiAnalyticsAWDWiFiTDMSlice._has, WiFiAnalyticsAWDWiFiTDMSlice._txDeferDuration, 
+                       WiFiAnalyticsAWDWiFiTDMSlice._txDeferredCount, WiFiAnalyticsAWDWiFiTDMSlice._txMuteCount, 
+                       WiFiAnalyticsAWDWiFiTDMSlice._txPathEnableReqCount, WiFiAnalyticsAWDWiFiTDMSlice._txPathMuteCount, 
+                       WiFiAnalyticsAWDWiFiTDMSlice._txPriDuration, WiFiAnalyticsAWDWiFiTDMSlice._txPriorityCount, 
+                       WiFiAnalyticsAWDWiFiTDMSlice._txaDuration, WiFiAnalyticsAWDWiFiTDMSlice._txaONCount, 
+                       WiFiAnalyticsAWDWiFiTDMSlice._txaPORCount, WiFiAnalyticsAWDWiFiTDMSlice._txaTimeoutCount ]
 ...

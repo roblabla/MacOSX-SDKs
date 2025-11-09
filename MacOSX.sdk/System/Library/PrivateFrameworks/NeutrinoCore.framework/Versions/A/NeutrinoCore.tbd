@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           21A6A7DA-D5F8-3FC1-BFCC-AE9B0DA05266
+    value:           2E563DD1-B3C4-3C1B-AA45-9904209D5108
   - target:          x86_64-maccatalyst
-    value:           21A6A7DA-D5F8-3FC1-BFCC-AE9B0DA05266
+    value:           2E563DD1-B3C4-3C1B-AA45-9904209D5108
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4513C9E2-9F04-35A7-A661-7695B8878E3A
+    value:           3E397434-1E50-39F4-ABB8-E5D86685AC09
   - target:          arm64e-maccatalyst
-    value:           4513C9E2-9F04-35A7-A661-7695B8878E3A
+    value:           3E397434-1E50-39F4-ABB8-E5D86685AC09
 install-name:    '/System/Library/PrivateFrameworks/NeutrinoCore.framework/Versions/A/NeutrinoCore'
-current-version: 321.0.102
+current-version: 340.0.220
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIN2NU10RectFinderE, __ZTIN2NU14PathRectFinderE, __ZTIN2NU16AnchorRectFinderE, 
@@ -103,7 +103,8 @@ exports:
                        _NUScaleToFillSizeInSize, _NUScaleToFitSizeInSize, _NUScaleToString, 
                        _NUScaleToValue, _NUScaleUnknown, _NUScaleZero, _NUStandardLuminanceColorMatrix, 
                        _NUStraightenAffineTransformWithDegrees, _NUStraightenAffineTransformWithRadians, 
-                       _NUStringForTypeCode, _NUTypeCodeFromString, _NUWidth, _NeutrinoCoreVersionNumber, 
+                       _NUStringForTypeCode, _NUStringFromTime, _NUStringFromTimeRange, 
+                       _NUTypeCodeFromString, _NUWidth, _NeutrinoCoreVersionNumber, 
                        _NeutrinoCoreVersionString, _TIFFOrientationFromNUOrientation, 
                        __NUAssertContinueHandler, __NUAssertFailHandler, __NUAssertLogger, 
                        __NUGLLogger, __NUJSLogger, __NULogInit, __NULogOnceToken, 
@@ -179,6 +180,7 @@ exports:
                        NUAutoCalculator, NUAuxiliaryImageAVDepthData, NUAuxiliaryImageAVPortraitEffectsMatte, 
                        NUAuxiliaryImageAVSemanticSegmentationMatte, NUAuxiliaryImageFactory, 
                        NUAuxiliaryImageRawBuffer, NUAuxiliaryImageRenderJob, NUAuxiliaryImageRenderRequest, 
+                       NUAuxiliaryPropertiesRenderJob, NUAuxiliaryPropertiesRequest, 
                        NUBoolSetting, NUBrushMaskGenerator, NUBrushRasterizer, NUBrushStroke, 
                        NUBufferAdapter, NUBufferImageAccumulationNode, NUBufferImageAdapter, 
                        NUBufferRenderClient, NUBufferRenderJob, NUBufferRenderRequest, 
@@ -273,8 +275,9 @@ exports:
                        NUVideoRotationExportRequest, NUVideoSourceNode, NUVideoUtilities, 
                        NUWrappedBufferStorage, NUZoomFactorScalePolicy, _NSPredicateBlockRule, 
                        _NSPredicateRule, _NUAbstractBufferStorage, _NUAbstractStorage, 
-                       _NUAuxiliaryImageRenderResult, _NUBlockRule, _NUBrushStrokeCIImageProvider, 
-                       _NUBufferImage, _NUBufferRenderResult, _NUClassifyPipelineImageCorrectionResult, 
+                       _NUAuxiliaryImageRenderResult, _NUAuxiliaryPropertiesResult, 
+                       _NUBlockRule, _NUBrushStrokeCIImageProvider, _NUBufferImage, 
+                       _NUBufferRenderResult, _NUClassifyPipelineImageCorrectionResult, 
                        _NUColorSamplerResult, _NUContiguousImageLayout, _NUExportResult, 
                        _NUFaceDetectionResult, _NUFixedTileSizeImageLayout, _NUGLIOSurfaceTexture, 
                        _NUGeometryResult, _NUHistogramRenderResult, _NUImage, _NUImageCIProvider, 

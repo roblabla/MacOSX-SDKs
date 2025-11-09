@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9B563C80-7916-3E87-9E7C-6D2EA5CC293A
+    value:           C92C1508-34AC-3871-9A7A-5B6132FF0105
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1C93B8AF-137D-3602-B587-D5E0C6C028EE
+    value:           33CF7D9E-0EE4-32E0-8D3A-32A90569CE7D
 install-name:    '/System/Library/Frameworks/DVDPlayback.framework/Versions/A/DVDPlayback'
 current-version: 5960
 compatibility-version: 5000

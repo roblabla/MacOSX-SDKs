@@ -6,7 +6,9 @@
 #pragma once
 
 #import <IOBluetooth/IOBluetoothUserLib.h>
+#import <Availability.h>
 
+API_UNAVAILABLE_BEGIN(ios)
 #ifdef	__cplusplus
 	extern "C" {
 #endif
@@ -54,3 +56,4 @@ IOBluetoothDeviceSelectorControllerRef	IOBluetoothGetDeviceSelectorController(vo
 #ifdef	__cplusplus
 	}
 #endif
+API_UNAVAILABLE_END

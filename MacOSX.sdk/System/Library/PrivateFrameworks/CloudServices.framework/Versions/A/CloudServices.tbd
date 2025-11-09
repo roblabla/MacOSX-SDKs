@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           15DA4332-C612-3D01-B8B8-EE1BEAA1CD38
+    value:           CDB2C842-A573-3015-9563-1729D0F63501
   - target:          x86_64-maccatalyst
-    value:           15DA4332-C612-3D01-B8B8-EE1BEAA1CD38
+    value:           CDB2C842-A573-3015-9563-1729D0F63501
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C4086160-F856-3DFB-A6E0-BCFD9CF7A014
+    value:           A4DEA81B-3D5F-375D-809B-AB7F4A584A29
   - target:          arm64e-maccatalyst
-    value:           C4086160-F856-3DFB-A6E0-BCFD9CF7A014
+    value:           A4DEA81B-3D5F-375D-809B-AB7F4A584A29
 install-name:    '/System/Library/PrivateFrameworks/CloudServices.framework/Versions/A/CloudServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -59,9 +59,9 @@ exports:
                        _kSecureBackupContainsiCDPDataKey, _kSecureBackupContainsiCloudIdentityKey, 
                        _kSecureBackupCoolOffEndKey, _kSecureBackupCountryCodeKey, 
                        _kSecureBackupCountryDialCodeKey, _kSecureBackupCountrySMSCodesKey, 
-                       _kSecureBackupEMCSIDMSDictKey, _kSecureBackupEMCSManagedCredentialKey, 
-                       _kSecureBackupEMCSOldManagedCredentialKey, _kSecureBackupErrorDomain, 
-                       _kSecureBackupEscrowDateKey, _kSecureBackupEscrowDigestKey, 
+                       _kSecureBackupDeleteDoubleOnly, _kSecureBackupEMCSIDMSDictKey, 
+                       _kSecureBackupEMCSManagedCredentialKey, _kSecureBackupEMCSOldManagedCredentialKey, 
+                       _kSecureBackupErrorDomain, _kSecureBackupEscrowDateKey, _kSecureBackupEscrowDigestKey, 
                        _kSecureBackupEscrowTimestampKey, _kSecureBackupEscrowTrustStatusKey, 
                        _kSecureBackupEscrowedSPKIKey, _kSecureBackupExcludeiCDPRecords, 
                        _kSecureBackupFMiPDataKey, _kSecureBackupFMiPRecoveryKey, 

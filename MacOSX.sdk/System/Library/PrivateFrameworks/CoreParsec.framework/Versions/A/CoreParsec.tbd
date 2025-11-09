@@ -4,30 +4,36 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5297973C-1CDA-3BE1-B9B0-6F9B69A66470
+    value:           7ED423D3-B3C3-3094-9E43-00D4E8308DD2
   - target:          x86_64-maccatalyst
-    value:           5297973C-1CDA-3BE1-B9B0-6F9B69A66470
+    value:           7ED423D3-B3C3-3094-9E43-00D4E8308DD2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           33861C23-6976-38B1-A67A-9261CB5B9348
+    value:           0BA9A854-B6C4-33FB-8E6F-24CC901F567B
   - target:          arm64e-maccatalyst
-    value:           33861C23-6976-38B1-A67A-9261CB5B9348
+    value:           0BA9A854-B6C4-33FB-8E6F-24CC901F567B
 install-name:    '/System/Library/PrivateFrameworks/CoreParsec.framework/Versions/A/CoreParsec'
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _CoreParsecVersionNumber, _CoreParsecVersionString, _PARNewsAppBundleIdentifier, 
-                       _PARSTSAppBundleIdentifier, _ParsecNWActivityDomain, __CPActionItemForFeedbackReadFrom, 
-                       __CPCBAEngagementFeedbackReadFrom, __CPCacheHitFeedbackReadFrom, 
-                       __CPCardForFeedbackReadFrom, __CPCardSectionEngagementFeedbackReadFrom, 
-                       __CPCardSectionFeedbackReadFrom, __CPCardSectionForFeedbackReadFrom, 
-                       __CPCardViewAppearFeedbackReadFrom, __CPCardViewDisappearFeedbackReadFrom, 
-                       __CPClearInputFeedbackReadFrom, __CPClientSessionReadFrom, 
-                       __CPClientTimingFeedbackReadFrom, __CPConnectionInvalidatedFeedbackReadFrom, 
-                       __CPCustomFeedbackReadFrom, __CPDeviceContextReadFrom, __CPDidGoToSearchFeedbackReadFrom, 
+    symbols:         [ '_$s10CoreParsec14fakeEntityDataySo6NSDataCSgSo7NSArrayCSgF', 
+                       '_$sSo11PARResponseC10CoreParsecE5reply7factory10responseV2ABSo8PARReplyC_So16PARResultFactory_p10PegasusAPI06Apple_c8_Search_g1_N8ResponseVtcfC', 
+                       '_$sSo11PARResponseC10CoreParsecE5reply7factory6dataV2ABSgSo8PARReplyC_So16PARResultFactory_p10Foundation4DataVtcfC', 
+                       '_$sSo11PARResponseC10CoreParsecE5reply7factory6dataV2ABSgSo8PARReplyC_So16PARResultFactory_p10Foundation4DataVtcfc', 
+                       _CoreParsecVersionNumber, _CoreParsecVersionString, _CoreParsec_fakeEntityData, 
+                       _PARNewsAppBundleIdentifier, _PARSTSAppBundleIdentifier, _ParsecNWActivityDomain, 
+                       __CPActionItemForFeedbackReadFrom, __CPCBAEngagementFeedbackReadFrom, 
+                       __CPCacheHitFeedbackReadFrom, __CPCardForFeedbackReadFrom, 
+                       __CPCardSectionEngagementFeedbackReadFrom, __CPCardSectionFeedbackReadFrom, 
+                       __CPCardSectionForFeedbackReadFrom, __CPCardViewAppearFeedbackReadFrom, 
+                       __CPCardViewDisappearFeedbackReadFrom, __CPClearInputFeedbackReadFrom, 
+                       __CPClientSessionReadFrom, __CPClientTimingFeedbackReadFrom, 
+                       __CPConnectionInvalidatedFeedbackReadFrom, __CPCustomFeedbackReadFrom, 
+                       __CPDeviceContextReadFrom, __CPDidGoToSearchFeedbackReadFrom, 
                        __CPDidGoToSiteFeedbackReadFrom, __CPEndLocalSearchFeedbackReadFrom, 
                        __CPEndNetworkSearchFeedbackReadFrom, __CPEndSearchFeedbackReadFrom, 
                        __CPEngagementShareRatioReadFrom, __CPEngagementTriggerRatioReadFrom, 
@@ -52,19 +58,19 @@ exports:
                        __CPTuscanyConnectionInfoReadFrom, __CPUsageEnvelopeReadFrom, 
                        __CPUsageSinceLookbackReadFrom, __CPUserReportFeedbackReadFrom, 
                        __CPValueReadFrom, __CPVisibleResultsFeedbackReadFrom, __CPVisibleSectionHeaderFeedbackReadFrom, 
-                       __CPVisibleSuggestionsFeedbackReadFrom, _kPAPMapsSuggestionsClient, 
-                       _kPARAutofillCorrections, _kPARAutofillTLDWhitelist, _kPARCoreSuggestionsClient, 
-                       _kPARCorrectionDict, _kPARCrowdsourcingBlacklist, _kPARCrowdsourcingWhitelist, 
-                       _kPARDuetExpertClient, _kPARDuetExpertDir, _kPAREngagedCompletionDir, 
-                       _kPARErrorDomain, _kPARInstalledAppWhitelist, _kPARKnownDictionariesList, 
-                       _kPARLookupClient, _kPARLookupHintsMonthly, _kPARLookupHintsWeekly, 
-                       _kPARMessagesClient, _kPARNewsClient, _kPARNotifyBagChange, 
-                       _kPARNotifyDisabled, _kPARNotifyEnabled, _kPARParsecdNameVersion, 
-                       _kPARPhiDESDir, _kPARProactiveEventTrackerDir, _kPARQIFeatures, 
-                       _kPARSafariAutoFillDir, _kPARSafariAutoPlayDir, _kPARSafariClient, 
-                       _kPARSiriClient, _kPARSpotlightClient, _kPARSpotlightModelResources, 
-                       _kPARSpotlightModelResourcesExperimental, _kPARSpotlightModels, 
-                       _kPARSpotlightResultFeaturesDir, _kPARSpotlightShadowResources, 
+                       __CPVisibleSuggestionsFeedbackReadFrom, _filterSiriSuggestions, 
+                       _kPAPMapsSuggestionsClient, _kPARAutofillCorrections, _kPARAutofillTLDWhitelist, 
+                       _kPARCoreSuggestionsClient, _kPARCorrectionDict, _kPARCrowdsourcingBlacklist, 
+                       _kPARCrowdsourcingWhitelist, _kPARDuetExpertClient, _kPARDuetExpertDir, 
+                       _kPAREngagedCompletionDir, _kPARErrorDomain, _kPARFeedbackSessionFileCreationEvent, 
+                       _kPARInstalledAppWhitelist, _kPARKnownDictionariesList, _kPARLookupClient, 
+                       _kPARLookupHintsMonthly, _kPARLookupHintsWeekly, _kPARMessagesClient, 
+                       _kPARNewsClient, _kPARNotifyBagChange, _kPARNotifyDisabled, 
+                       _kPARNotifyEnabled, _kPARParsecdNameVersion, _kPARPhiDESDir, 
+                       _kPARProactiveEventTrackerDir, _kPARQIFeatures, _kPARSafariAutoFillDir, 
+                       _kPARSafariAutoPlayDir, _kPARSafariClient, _kPARSiriClient, 
+                       _kPARSpotlightClient, _kPARSpotlightModelResources, _kPARSpotlightModelResourcesExperimental, 
+                       _kPARSpotlightModels, _kPARSpotlightResultFeaturesDir, _kPARSpotlightShadowResources, 
                        _kPARTrysteroClient, _kPARTrysteroDir, _kPARUserReportDir, 
                        _kPARWebsiteCategoryLabels ]
     objc-classes:    [ PARAsyncCard, PARAsyncMoreResults, PARBag, PARCardRequest, 

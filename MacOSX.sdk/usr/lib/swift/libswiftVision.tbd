@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7EDB6253-1140-3A9C-924C-46EE5EE70F81
+    value:           09E43ECD-5CE8-3DCB-99CA-0822F80D6C74
   - target:          x86_64-maccatalyst
-    value:           7EDB6253-1140-3A9C-924C-46EE5EE70F81
+    value:           09E43ECD-5CE8-3DCB-99CA-0822F80D6C74
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4A0C4B35-E891-3059-83D8-0D3B90D15C55
+    value:           91050CF6-08C6-32CB-80F9-0C8AD2CA6FCF
   - target:          arm64e-maccatalyst
-    value:           4A0C4B35-E891-3059-83D8-0D3B90D15C55
+    value:           91050CF6-08C6-32CB-80F9-0C8AD2CA6FCF
 install-name:    '/usr/lib/swift/libswiftVision.dylib'
 current-version: 1.3
 swift-abi-version: 7
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftVision.dylib', '$ld$install_name$os10.11$@rpath/libswiftVision.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftVision.dylib', '$ld$install_name$os10.13$@rpath/libswiftVision.dylib', 

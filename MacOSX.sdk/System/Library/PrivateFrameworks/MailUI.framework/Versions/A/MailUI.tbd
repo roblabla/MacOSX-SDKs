@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D5F2C69A-8D96-3D42-B7F9-4854B353D141
+    value:           680009DC-64E5-3EAD-A427-CCB5CAA70B35
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C9375E1A-30FF-3B97-8511-80BA258F01DE
+    value:           340F1D3C-5F61-3D14-BB2C-27844BA7C377
 install-name:    '/System/Library/PrivateFrameworks/MailUI.framework/Versions/A/MailUI'
-current-version: 3654.40
+current-version: 3654.80
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ Mail, MailNotificationContentExtension, MailQuickLookExtension, 

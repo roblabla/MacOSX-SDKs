@@ -51,11 +51,13 @@
 #import <UIKit/UICollectionViewLayout.h>
 #import <UIKit/UICollectionViewTransitionLayout.h>
 #import <UIKit/UICollectionViewCompositionalLayout.h>
+#import <UIKit/UICollectionViewUpdateItem.h>
 #import <UIKit/UICellAccessory.h>
 #import <UIKit/UICollectionViewListCell.h>
 #import <UIKit/UIDiffableDataSource.h>
 #import <UIKit/UICollectionViewItemRegistration.h>
 #import <UIKit/UICollectionLayoutList.h>
+#import <UIKit/UIListSeparatorConfiguration.h>
 #import <UIKit/NSDiffableDataSourceSectionSnapshot.h>
 #import <UIKit/UIConfigurationState.h>
 #import <UIKit/UIViewConfigurationState.h>
@@ -141,6 +143,7 @@
 #import <UIKit/UIPrintInteractionController.h>
 #import <UIKit/UIPrintPageRenderer.h>
 #import <UIKit/UIPrintPaper.h>
+#import <UIKit/UIPrintServiceExtension.h>
 #import <UIKit/UIProgressView.h>
 #import <UIKit/UIReferenceLibraryViewController.h>
 #import <UIKit/UIRefreshControl.h>
@@ -299,4 +302,6 @@
 #import <UIKit/UIPointerRegion.h>
 #import <UIKit/UIColorWell.h>
 #import <UIKit/UIColorPickerViewController.h>
+#import <UIKit/UIEventAttribution.h>
+#import <UIKit/UIEventAttributionView.h>
 #endif

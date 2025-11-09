@@ -22,7 +22,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 - (instancetype)init NS_UNAVAILABLE;
 
 /*!
- @abstract Intialize the VZFileHandleSerialPortAttachment from file handles.
+ @abstract Initialize the VZFileHandleSerialPortAttachment from file handles.
  @param fileHandleForReading File handle for reading from the file.
  @param fileHandleForWriting File handle for writing to the file.
  @discussion

@@ -331,7 +331,7 @@ typedef NS_ENUM(NSInteger, UIAccessibilityScrollDirection) {
  UIAccessibilityReadingContent
  
  Implemented on an element that represents content meant to be read, like a book or periodical. 
- Use in conjuction with UIAccessibilityTraitCausesPageTurn to provide a continuous reading experience with VoiceOver.
+ Use in conjunction with UIAccessibilityTraitCausesPageTurn to provide a continuous reading experience with VoiceOver.
  */
 @protocol UIAccessibilityReadingContent
 @required
@@ -455,7 +455,7 @@ UIKIT_EXTERN NSNotificationName const UIAccessibilityReduceTransparencyStatusDid
 UIKIT_EXTERN BOOL UIAccessibilityIsReduceMotionEnabled(void) API_AVAILABLE(ios(8.0));
 UIKIT_EXTERN NSNotificationName const UIAccessibilityReduceMotionStatusDidChangeNotification API_AVAILABLE(ios(8.0));
 
-// Returns whether the system preference for redcue motion: prefer cross-fade transitions is enabled
+// Returns whether the system preference for reduce motion: prefer cross-fade transitions is enabled
 UIKIT_EXTERN BOOL UIAccessibilityPrefersCrossFadeTransitions(void) API_AVAILABLE(ios(14.0), tvos(14.0));
 UIKIT_EXTERN NSNotificationName const UIAccessibilityPrefersCrossFadeTransitionsStatusDidChangeNotification API_AVAILABLE(ios(14.0), tvos(14.0));
 

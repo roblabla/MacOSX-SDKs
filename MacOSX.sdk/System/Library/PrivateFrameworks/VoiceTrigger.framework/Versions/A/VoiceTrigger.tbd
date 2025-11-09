@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           88A6BC90-2B36-36ED-92B0-C2E430F10DC5
+    value:           09D991D4-E1CC-3E84-8497-7FD8F2ED3114
   - target:          x86_64-maccatalyst
-    value:           88A6BC90-2B36-36ED-92B0-C2E430F10DC5
+    value:           09D991D4-E1CC-3E84-8497-7FD8F2ED3114
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B7A1207E-C10A-324D-87C8-8C6D16D68AF5
+    value:           6D3EC3C4-107E-3999-94D1-D92A3A752C8C
   - target:          arm64e-maccatalyst
-    value:           B7A1207E-C10A-324D-87C8-8C6D16D68AF5
+    value:           6D3EC3C4-107E-3999-94D1-D92A3A752C8C
 install-name:    '/System/Library/PrivateFrameworks/VoiceTrigger.framework/Versions/A/VoiceTrigger'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -38,6 +38,7 @@ exports:
                        __ZTI22NFastFixedDistributionIaithE, __ZTI22NFastFixedDistributionIaittE, 
                        __ZTI22NFastFixedDistributionIsijhE, __ZTI22NFastFixedDistributionIsithE, 
                        __ZTI22NSigned8BitMatrixLayer, __ZTI23NFixedDummyDistribution, 
+                       __ZTI24NSigned8BitQuantizeLayer, __ZTI27NSigned8BitInput1DConvLayer, 
                        __ZTI4NMapI7NString14NConfigSectionE, __ZTI4NMapI7NStringS0_E, 
                        __ZTI4NMapI7NStringjE, __ZTI5NHashIN4NMapI7NString14NConfigSectionE8HashItemEE, 
                        __ZTI5NHashIN4NMapI7NStringS1_E8HashItemEE, __ZTI5NHashIN4NMapI7NStringjE8HashItemEE, 
@@ -79,6 +80,7 @@ exports:
                        __ZTS22NFastFixedDistributionIaithE, __ZTS22NFastFixedDistributionIaittE, 
                        __ZTS22NFastFixedDistributionIsijhE, __ZTS22NFastFixedDistributionIsithE, 
                        __ZTS22NSigned8BitMatrixLayer, __ZTS23NFixedDummyDistribution, 
+                       __ZTS24NSigned8BitQuantizeLayer, __ZTS27NSigned8BitInput1DConvLayer, 
                        __ZTS4NMapI7NString14NConfigSectionE, __ZTS4NMapI7NStringS0_E, 
                        __ZTS4NMapI7NStringjE, __ZTS5NHashIN4NMapI7NString14NConfigSectionE8HashItemEE, 
                        __ZTS5NHashIN4NMapI7NStringS1_E8HashItemEE, __ZTS5NHashIN4NMapI7NStringjE8HashItemEE, 
@@ -383,6 +385,7 @@ exports:
                        __ZNK19NFastFixedGaussiansIsihE5scoreERKjRK6NArrayIsE, __ZNK19NWavChunk2HTKFrames10isTypeInt4Ev, 
                        __ZNK19NWavChunk2HTKFrames12getFrameRateEv, __ZNK19NWavChunk2HTKFrames8parmCodeEv, 
                        __ZNK19NWavChunk2HTKFrames9frameSizeEv, __ZNK19NWavChunk2HTKFrames9numStaticEv, 
+                       __ZNK20N16ByteAlignedString10deallocateEPc, __ZNK20N16ByteAlignedString8allocateERKj, 
                        __ZNK20NDeepnetDistribution10resetStateEPv, __ZNK20NDeepnetDistribution13numComponentsEv, 
                        __ZNK20NDeepnetDistribution14allocateStatePEv, __ZNK20NDeepnetDistribution14componentScoreERKjRK6NArrayIfE, 
                        __ZNK20NDeepnetDistribution15deallocateStateEPv, __ZNK20NDeepnetDistribution15scoreCacheTypesEv, 
@@ -418,15 +421,16 @@ exports:
                        __ZNK6NTimer7runningEv, __ZNK6NZFile3eofEv, __ZNK6NZFile4goodEv, 
                        __ZNK6NZFile6isOpenEv, __ZNK7NConfig10hasSectionERK7NString, 
                        __ZNK7NConfig7sectionERK7NString, __ZNK7NString10checkFloatEv, 
-                       __ZNK7NString10hexdecodedEv, __ZNK7NString10startswithEPKc, 
-                       __ZNK7NString10startswithERKS_, __ZNK7NString13containsafterERKS_RKj, 
-                       __ZNK7NString13prefixDirnameEv, __ZNK7NString4headERKj, __ZNK7NString4tailERKj, 
-                       __ZNK7NString5sliceERKjS1_, __ZNK7NString5splitER11NLinkedListIS_ERKS_RKj, 
-                       __ZNK7NString5splitER6NArrayIS_ERKS_RKj, __ZNK7NString5splitER6NArrayIS_EcRKj, 
-                       __ZNK7NString5splitERKS_RKj, __ZNK7NString5stripERKS_, __ZNK7NString5tointERKj, 
-                       __ZNK7NString6lengthEv, __ZNK7NString6toboolEv, __ZNK7NString6touintERKj, 
-                       __ZNK7NString7cuttailERKj, __ZNK7NString7dirnameEv, __ZNK7NString7pointerEv, 
-                       __ZNK7NString7tofloatEv, __ZNK7NString8basenameERKS_, __ZNK7NString8basenameEv, 
+                       __ZNK7NString10deallocateEPc, __ZNK7NString10hexdecodedEv, 
+                       __ZNK7NString10startswithEPKc, __ZNK7NString10startswithERKS_, 
+                       __ZNK7NString13containsafterERKS_RKj, __ZNK7NString13prefixDirnameEv, 
+                       __ZNK7NString4headERKj, __ZNK7NString4tailERKj, __ZNK7NString5sliceERKjS1_, 
+                       __ZNK7NString5splitER11NLinkedListIS_ERKS_RKj, __ZNK7NString5splitER6NArrayIS_ERKS_RKj, 
+                       __ZNK7NString5splitER6NArrayIS_EcRKj, __ZNK7NString5splitERKS_RKj, 
+                       __ZNK7NString5stripERKS_, __ZNK7NString5tointERKj, __ZNK7NString6lengthEv, 
+                       __ZNK7NString6toboolEv, __ZNK7NString6touintERKj, __ZNK7NString7cuttailERKj, 
+                       __ZNK7NString7dirnameEv, __ZNK7NString7pointerEv, __ZNK7NString7tofloatEv, 
+                       __ZNK7NString8allocateERKj, __ZNK7NString8basenameERKS_, __ZNK7NString8basenameEv, 
                        __ZNK7NString8checkIntERKj, __ZNK7NString8containsEPKc, __ZNK7NString8containsERKS_, 
                        __ZNK7NString8containsERKc, __ZNK7NString8creplaceERKS_S1_, 
                        __ZNK7NString8endswithEPKc, __ZNK7NString8endswithERKS_, __ZNK7NString8hexcodedEv, 
@@ -449,25 +453,26 @@ exports:
                        __ZTI11NOffsetFile, __ZTI11NSATSpeaker, __ZTI11TSSATScorer, 
                        __ZTI12NSATImpostor, __ZTI13TSHMMDetector, __ZTI14NDEHMMDetector, 
                        __ZTI14NPhoneHMMArray, __ZTI17NFixedPointScales, __ZTI18NFloatDistribution, 
-                       __ZTI19NDistributionLoader, __ZTI19TSSupervectorScorer, __ZTI20NDeepnetDistribution, 
-                       __ZTI22NGaussianMixtureModels, __ZTI25NGaussianFixedPointScales, 
-                       __ZTI5NFile, __ZTI6NTimer, __ZTI6NZFile, __ZTI7NString, __ZTI8NFidFile, 
-                       __ZTI8NZipFile, __ZTI9NPipeFile, __ZTS11NAutoString, __ZTS11NOffsetFile, 
-                       __ZTS11NSATSpeaker, __ZTS11TSSATScorer, __ZTS12NSATImpostor, 
-                       __ZTS13TSHMMDetector, __ZTS14NDEHMMDetector, __ZTS14NPhoneHMMArray, 
-                       __ZTS17NFixedPointScales, __ZTS18NFloatDistribution, __ZTS19NDistributionLoader, 
-                       __ZTS19TSSupervectorScorer, __ZTS20NDeepnetDistribution, __ZTS22NGaussianMixtureModels, 
-                       __ZTS25NGaussianFixedPointScales, __ZTS5NFile, __ZTS6NTimer, 
-                       __ZTS6NZFile, __ZTS7NString, __ZTS8NFidFile, __ZTS8NZipFile, 
-                       __ZTS9NPipeFile, __ZTV11NAutoString, __ZTV11NOffsetFile, __ZTV11NSATSpeaker, 
-                       __ZTV11TSSATScorer, __ZTV12NSATImpostor, __ZTV13TSHMMDetector, 
-                       __ZTV14NDEHMMDetector, __ZTV14NPhoneHMMArray, __ZTV17NFixedPointScales, 
-                       __ZTV18NFloatDistribution, __ZTV19NDistributionLoader, __ZTV19TSSupervectorScorer, 
-                       __ZTV20NDeepnetDistribution, __ZTV22NGaussianMixtureModels, 
-                       __ZTV25NGaussianFixedPointScales, __ZTV5NFile, __ZTV6NTimer, 
-                       __ZTV6NZFile, __ZTV7NString, __ZTV8NFidFile, __ZTV8NZipFile, 
-                       __ZTV9NPipeFile, __ZlsR7NStringRKS_, __ZlsR7NStringRKd, __ZlsR7NStringRKf, 
-                       __ZlsR7NStringRKi, __ZlsR7NStringRKj, __ZlsRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEERK7NString, 
+                       __ZTI19NDistributionLoader, __ZTI19TSSupervectorScorer, __ZTI20N16ByteAlignedString, 
+                       __ZTI20NDeepnetDistribution, __ZTI22NGaussianMixtureModels, 
+                       __ZTI25NGaussianFixedPointScales, __ZTI5NFile, __ZTI6NTimer, 
+                       __ZTI6NZFile, __ZTI7NString, __ZTI8NFidFile, __ZTI8NZipFile, 
+                       __ZTI9NPipeFile, __ZTS11NAutoString, __ZTS11NOffsetFile, __ZTS11NSATSpeaker, 
+                       __ZTS11TSSATScorer, __ZTS12NSATImpostor, __ZTS13TSHMMDetector, 
+                       __ZTS14NDEHMMDetector, __ZTS14NPhoneHMMArray, __ZTS17NFixedPointScales, 
+                       __ZTS18NFloatDistribution, __ZTS19NDistributionLoader, __ZTS19TSSupervectorScorer, 
+                       __ZTS20N16ByteAlignedString, __ZTS20NDeepnetDistribution, 
+                       __ZTS22NGaussianMixtureModels, __ZTS25NGaussianFixedPointScales, 
+                       __ZTS5NFile, __ZTS6NTimer, __ZTS6NZFile, __ZTS7NString, __ZTS8NFidFile, 
+                       __ZTS8NZipFile, __ZTS9NPipeFile, __ZTV11NAutoString, __ZTV11NOffsetFile, 
+                       __ZTV11NSATSpeaker, __ZTV11TSSATScorer, __ZTV12NSATImpostor, 
+                       __ZTV13TSHMMDetector, __ZTV14NDEHMMDetector, __ZTV14NPhoneHMMArray, 
+                       __ZTV17NFixedPointScales, __ZTV18NFloatDistribution, __ZTV19NDistributionLoader, 
+                       __ZTV19TSSupervectorScorer, __ZTV20N16ByteAlignedString, __ZTV20NDeepnetDistribution, 
+                       __ZTV22NGaussianMixtureModels, __ZTV25NGaussianFixedPointScales, 
+                       __ZTV5NFile, __ZTV6NTimer, __ZTV6NZFile, __ZTV7NString, __ZTV8NFidFile, 
+                       __ZTV8NZipFile, __ZTV9NPipeFile, __ZlsR7NStringRKS_, __ZlsR7NStringRKd, 
+                       __ZlsR7NStringRKf, __ZlsR7NStringRKi, __ZlsR7NStringRKj, __ZlsRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEERK7NString, 
                        __baseDir, _gVTRTModelData, _kCurrVTMetaVersion, _kNDEConfigDataMaxSizeBytes, 
                        _kNDEStateBufferSizeBytes, _kVTAudioRecordContextKey, _kVTAudioRecordDeviceInfoKey, 
                        _kVTContainsPayload, _kVTExplicitTrainingType, _kVTFarField, 

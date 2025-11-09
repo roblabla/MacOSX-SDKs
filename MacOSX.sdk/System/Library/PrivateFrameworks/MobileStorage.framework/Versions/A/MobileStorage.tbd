@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4DB00168-AE81-35D1-A966-DF0334C4C54A
+    value:           D7339131-C7F8-330E-A711-9520A97A3FB8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DFEAA774-E6B1-371E-BC92-6160494FDA65
+    value:           50D5B8CB-EE99-3849-8F9E-2E67F1CA1590
 install-name:    '/System/Library/PrivateFrameworks/MobileStorage.framework/Versions/A/MobileStorage'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -33,12 +33,12 @@ exports:
                        _kMSMImageInfoPlistKey, _kMSMImageTrustCacheKey, _kMSMPerformLosslessQuery, 
                        _kMSMPersonalizationImageURL, _kMSMPersonalizationMountedBundleURL, 
                        _kMSMPersonalizationSigningServerURL, _kMSMPersonalizationUseCredentials, 
-                       _kMSMSignatureKey, _kMassStorageMountedNotification, _kMassStorageUnmountedNotification, 
-                       _kMobileStorageDeviceNodeKey, _kMobileStorageDeviceTypeDiskImage, 
-                       _kMobileStorageDeviceTypeKey, _kMobileStorageDeviceTypeMassStorage, 
-                       _kMobileStorageDeviceTypePTPCamera, _kMobileStorageFilesystemTypeKey, 
-                       _kMobileStorageIsMountedKey, _kMobileStorageIsReadOnlyKey, 
-                       _kMobileStorageMountPathKey, _kMobileStorageSignatureKey, 
-                       _kMobileStorageSupportsContentProtection, _kPTPCameraAttachedNotification, 
-                       _kStorageMounterName ]
+                       _kMSMPersonalizationUseCryptexFlow, _kMSMSignatureKey, _kMassStorageMountedNotification, 
+                       _kMassStorageUnmountedNotification, _kMobileStorageDeviceNodeKey, 
+                       _kMobileStorageDeviceTypeDiskImage, _kMobileStorageDeviceTypeKey, 
+                       _kMobileStorageDeviceTypeMassStorage, _kMobileStorageDeviceTypePTPCamera, 
+                       _kMobileStorageFilesystemTypeKey, _kMobileStorageIsMountedKey, 
+                       _kMobileStorageIsReadOnlyKey, _kMobileStorageMountPathKey, 
+                       _kMobileStorageSignatureKey, _kMobileStorageSupportsContentProtection, 
+                       _kPTPCameraAttachedNotification, _kStorageMounterName ]
 ...

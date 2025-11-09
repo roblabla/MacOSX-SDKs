@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1527EE94-7882-3266-8F48-B39C7AE71085
+    value:           FEFAFD4C-5DA0-3535-8C86-8836298ADB8D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           07039B8F-D0EF-3BDC-96B2-C5586973392D
+    value:           F7EA7A6A-25F6-3609-8827-60742642633F
 install-name:    '/System/Library/PrivateFrameworks/ExtensionKit.framework/Versions/A/ExtensionKit'
 current-version: 19.4
 exports:

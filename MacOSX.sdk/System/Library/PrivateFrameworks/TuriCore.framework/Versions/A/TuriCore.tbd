@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9CC14AFA-F74C-3264-961C-EA0B8DA2197C
+    value:           D4DED478-85DC-3A06-A47F-A3E34D05850A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DE462616-5B83-327E-8F2D-CFE164CADDA5
+    value:           E7FE89C4-5DEA-335A-8EDA-64E6E8DBDD05
 install-name:    '/System/Library/PrivateFrameworks/TuriCore.framework/Versions/A/TuriCore'
 current-version: 0
 compatibility-version: 0

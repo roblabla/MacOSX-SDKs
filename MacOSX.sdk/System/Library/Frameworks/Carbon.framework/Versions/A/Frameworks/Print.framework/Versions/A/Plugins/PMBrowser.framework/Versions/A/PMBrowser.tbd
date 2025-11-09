@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F0958AF8-C502-3240-9260-312FF03456B9
+    value:           9D8F19C4-60A3-3A93-8B8C-5E9BA6439EE2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F70DEB75-EC2A-33B4-9C46-D949352492CB
+    value:           639BB99D-55FE-33C9-802D-66F091005CDF
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Plugins/PMBrowser.framework/Versions/A/PMBrowser'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CheckPrinterList, _ComputerLocation, _FilterDNSSDSuffix, 
                        _GetUSBDeviceCapabilities, _IOUSBDevInterface, _MatchNameAndQueueID, 
                        _PMCommandAbbrvKey, _PMCommandAbbrvString, _PMCommandKey, 

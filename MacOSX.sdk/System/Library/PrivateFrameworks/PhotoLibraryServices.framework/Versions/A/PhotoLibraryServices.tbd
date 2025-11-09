@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           22D8A9FA-842F-3CAD-9CC3-CC52650CA283
+    value:           6E999BBB-48CD-3C38-86F9-2479652CF43E
   - target:          x86_64-maccatalyst
-    value:           22D8A9FA-842F-3CAD-9CC3-CC52650CA283
+    value:           6E999BBB-48CD-3C38-86F9-2479652CF43E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B884B9C1-9518-3F19-B5EB-C163975C49CB
+    value:           DF03463F-BB11-3D64-B43E-5FB1781D4362
   - target:          arm64e-maccatalyst
-    value:           B884B9C1-9518-3F19-B5EB-C163975C49CB
+    value:           DF03463F-BB11-3D64-B43E-5FB1781D4362
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibraryServices.framework/Versions/A/PhotoLibraryServices'
-current-version: 321.0.102
+current-version: 340.0.220
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -107,17 +107,19 @@ exports:
                        _PLDataStoreClassForID, _PLDataStoreForClassIDAndLibraryID, 
                        _PLDataStoreHasClassID, _PLDatatbaseContextNameCPLLibrary, 
                        _PLDatatbaseContextNameMomentLibrary, _PLDateIsApproximatelyEqual, 
-                       _PLDateRangeFormatterChangedNotification, _PLDateRangeFormatterMonthDelimiter, 
-                       _PLDeactivateCloudLibrary, _PLDebugDescriptionForAggregateProcessedLocationType, 
-                       _PLDeferredLogInitializeServer, _PLDeferredLogRead, _PLDeferredLoggingInitializeClient, 
-                       _PLDelayedSearchIndexUpdateInsertDetectedFaceKey, _PLDelayedSearchIndexUpdateInsertPersonKey, 
-                       _PLDescriptionForBackgroundJobServiceState, _PLDescriptionForLocationOfInterestType, 
-                       _PLDescriptionForMemoryMood, _PLDescriptionForPhotosHighlightCategory, 
-                       _PLDescriptionForPhotosHighlightCurationType, _PLDescriptionForPhotosHighlightEnrichmentState, 
-                       _PLDescriptionForPhotosHighlightKind, _PLDescriptionForPhotosHighlightType, 
-                       _PLDescriptionForPhotosHighlightVisibilityState, _PLDescriptionForUpdateProperties, 
-                       _PLDescriptionForWorkerPriority, _PLDeviceRestoreMigrationPostProcessingTokenBuild, 
-                       _PLDeviceRestoreMigrationPostProcessingTokenDate, _PLDeviceRestoreMigrationPostProcessingTokenInProgressCounter, 
+                       _PLDateIsGreaterThanOrEqual, _PLDateRangeFormatterChangedNotification, 
+                       _PLDateRangeFormatterMonthDelimiter, _PLDateToISO8160StringWithLocalTimeZone, 
+                       _PLDateToISO8601StringWithTimeZone, _PLDeactivateCloudLibrary, 
+                       _PLDebugDescriptionForAggregateProcessedLocationType, _PLDeferredLogInitializeServer, 
+                       _PLDeferredLogRead, _PLDeferredLoggingInitializeClient, _PLDelayedSearchIndexUpdateInsertDetectedFaceKey, 
+                       _PLDelayedSearchIndexUpdateInsertPersonKey, _PLDescriptionForBackgroundJobServiceState, 
+                       _PLDescriptionForLocationOfInterestType, _PLDescriptionForMemoryMood, 
+                       _PLDescriptionForPhotosHighlightCategory, _PLDescriptionForPhotosHighlightCurationType, 
+                       _PLDescriptionForPhotosHighlightEnrichmentState, _PLDescriptionForPhotosHighlightKind, 
+                       _PLDescriptionForPhotosHighlightType, _PLDescriptionForPhotosHighlightVisibilityState, 
+                       _PLDescriptionForUpdateProperties, _PLDescriptionForWorkerPriority, 
+                       _PLDeviceRestoreMigrationPostProcessingTokenBuild, _PLDeviceRestoreMigrationPostProcessingTokenDate, 
+                       _PLDeviceRestoreMigrationPostProcessingTokenInProgressCounter, 
                        _PLDeviceRestoreMigrationPostProcessingTokenInProgressHistory, 
                        _PLDeviceRestoreMigrationPostProcessingTokenModelVersion, 
                        _PLDeviceRestoreMigrationPostProcessingTokenPID, _PLDeviceRestoreMigrationPostProcessingTokenProcess, 
@@ -213,7 +215,7 @@ exports:
                        _PLOrientationTransformImageRect, _PLOrientationTransformImageSize, 
                        _PLParseHashtags, _PLPasteboardAssetObjectIDURIType, _PLPathManagerFromLibraryID, 
                        _PLPersistedAlbumExtension, _PLPersonNameSourceDescription, 
-                       _PLPhotoAnalysisDiagnosticsGraphExportPurposeKGDBSnapshot, 
+                       _PLPersonVerifiedTypeDescription, _PLPhotoAnalysisDiagnosticsGraphExportPurposeKGDBSnapshot, 
                        _PLPhotoAnalysisEnrichmentOptionsTodayKey, _PLPhotoAnalysisFaceProcessingClusteringClustersKey, 
                        _PLPhotoAnalysisFaceProcessingClusteringGPUUtilizationKey, 
                        _PLPhotoAnalysisFaceProcessingClusteringThresholdKey, _PLPhotoAnalysisFaceProcessingLibraryClustersMinusVisionClustersKey, 
@@ -419,25 +421,12 @@ exports:
                        _PLSAggregateDictionaryKeyForEditPhotoWithPortraitName, _PLSAggregateDictionaryKeyForOneUpPlayedIrisWithPlayCount, 
                        _PLSAggregateDictionaryKeyForPhotoCaptureChoseFilterName, 
                        _PLSAggregateDictionaryKeyForPhotoCapturePreviewedFilterName, 
-                       _PLSAggregateDictionaryKeyForPhotoCaptureWithFilterName, _PLSAggregateDictionaryKeyForPhotoShareKeyWithBatchSize, 
-                       _PLSAggregateDictionaryKeyForPhotosOneUpBrowseDuration, _PLSAggregateDictionaryKeyForPhotosOneUpViewedHDRPhotoDuration, 
+                       _PLSAggregateDictionaryKeyForPhotoCaptureWithFilterName, _PLSAggregateDictionaryKeyForPhotosOneUpBrowseDuration, 
+                       _PLSAggregateDictionaryKeyForPhotosOneUpViewedHDRPhotoDuration, 
                        _PLSAggregateDictionaryKeyForPhotosOneUpViewedPhotoDuration, 
                        _PLSAggregateDictionaryKeyForPhotosTabContentMode, _PLSAggregateDictionaryKeyForStreamedVideoPlaybackTimeToStart, 
                        _PLSAggregateDictionaryKeyForStreamedVideoStallCount, _PLSAggregateDictionaryKeyForVideoEditFinalTrimDuration, 
                        _PLSAggregateDictionaryKeyForVideoEditOriginalTrimDuration, 
-                       _PLSAggregateDictionaryKeyNumberOfCMMReceivedShareImports, 
-                       _PLSAggregateDictionaryKeyNumberOfCMMReceivedSharesOpened, 
-                       _PLSAggregateDictionaryKeyNumberOfCMMReceivedSharesSeen, _PLSAggregateDictionaryKeyNumberOfCMMShareBacksOpened, 
-                       _PLSAggregateDictionaryKeyNumberOfCMMShareBacksPresentable, 
-                       _PLSAggregateDictionaryKeyNumberOfCMMShareBacksPresented, 
-                       _PLSAggregateDictionaryKeyNumberOfCMMSharesCreatedFromDetailViewMenuActions, 
-                       _PLSAggregateDictionaryKeyNumberOfCMMSharesCreatedFromForYouSendBackSuggestions, 
-                       _PLSAggregateDictionaryKeyNumberOfCMMSharesCreatedFromForYouSuggestions, 
-                       _PLSAggregateDictionaryKeyNumberOfCMMSharesCreatedFromMessagesSuggestions, 
-                       _PLSAggregateDictionaryKeyNumberOfCMMSharesCreatedFromShareSheetCopyLinkActivities, 
-                       _PLSAggregateDictionaryKeyNumberOfCMMSharesCreatedFromShareSheetMessagesActivities, 
-                       _PLSAggregateDictionaryKeyNumberOfCMMSuggestionComposeFlowsOpened, 
-                       _PLSAggregateDictionaryKeyNumberOfCMMSuggestionsOpened, _PLSAggregateDictionaryKeyNumberOfCMMSuggestionsSeen, 
                        _PLSAggregateDictionaryKeyNumberOfRecipients, _PLSAggregateDictionaryKeyShareOfAcceptedCMMRecipientSuggestions, 
                        _PLSAggregateDictionaryKeyShareOfManuallyAddedCMMRecipients, 
                        _PLSAggregateDictionaryLibraryTabSpendTimeKey, _PLSAggregateDictionaryLivePhotoEffectsAnalysisFailedKey, 
@@ -507,16 +496,8 @@ exports:
                        _PLSAggregateDictionaryPeopleNamingPersonChosenKey, _PLSAggregateDictionaryPeopleNamingSkippedKey, 
                        _PLSAggregateDictionaryPeopleNamingStringChosenKey, _PLSAggregateDictionaryPeopleRemoveFromPeopleHomeKey, 
                        _PLSAggregateDictionaryPeopleViewSpendTimeKey, _PLSAggregateDictionaryPhotoFullscreenLikeKey, 
-                       _PLSAggregateDictionaryPhotoQuickLikeKey, _PLSAggregateDictionaryPhotoShareFromFullscreenKey, 
-                       _PLSAggregateDictionaryPhotoShareFromGridKey, _PLSAggregateDictionaryPhotoShareFromLockscreenFullscreenKey, 
-                       _PLSAggregateDictionaryPhotoShareFromLockscreenGridKey, _PLSAggregateDictionaryPhotoShareFromPickerKey, 
-                       _PLSAggregateDictionaryPhotoShareFullMomentKey, _PLSAggregateDictionaryPhotoShareMomentSelectionKey, 
-                       _PLSAggregateDictionaryPhotoShareQuantityDistributionAirDropKey, 
-                       _PLSAggregateDictionaryPhotoShareQuantityDistributionAnyActionKey, 
-                       _PLSAggregateDictionaryPhotoShareQuantityDistributionAnyShareKey, 
-                       _PLSAggregateDictionaryPhotoShareQuantityDistributionMessagesKey, 
-                       _PLSAggregateDictionaryPhotoStreamListKey, _PLSAggregateDictionaryPhotosAlbumCreateKey, 
-                       _PLSAggregateDictionaryPhotosAlbumDeleteKey, _PLSAggregateDictionaryPhotosBrowserDeletePhotoKey, 
+                       _PLSAggregateDictionaryPhotoQuickLikeKey, _PLSAggregateDictionaryPhotoStreamListKey, 
+                       _PLSAggregateDictionaryPhotosAlbumCreateKey, _PLSAggregateDictionaryPhotosAlbumDeleteKey, 
                        _PLSAggregateDictionaryPhotosCollectionsLevelKey, _PLSAggregateDictionaryPhotosEditAspectLockKey, 
                        _PLSAggregateDictionaryPhotosEditAutoEnhanceKey, _PLSAggregateDictionaryPhotosEditAutocropAdjustedKey, 
                        _PLSAggregateDictionaryPhotosEditAutocropPerspectiveAdjustedKey, 
